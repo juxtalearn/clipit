@@ -1,0 +1,30 @@
+/*
+ * ClipIt specific CSS
+ */
+
+.transparent{
+    opacity: 0.7;
+}
+
+.elgg-heading-logo{
+    float:left;
+    margin: 10px 0 0 40px;
+    cursor: pointer;
+}
+
+.elgg-heading-logo:hover{
+    
+}
+
+.input-jxl-login{
+    width: 70%;
+}
+
+.row-jxl-login{
+    margin-right: auto;
+}
+
+.btn-jxl-login{
+    float: left;
+    margin: 4px 0;
+}

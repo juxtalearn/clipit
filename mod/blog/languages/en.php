@@ -5,24 +5,24 @@
  */
 
 $english = array(
-	'blog' => 'Blogs',
-	'blog:blogs' => 'Blogs',
+	'blog' => 'Videos',
+	'blog:blogs' => 'Videos',
 	'blog:revisions' => 'Revisions',
 	'blog:archives' => 'Archives',
-	'blog:blog' => 'Blog',
-	'item:object:blog' => 'Blogs',
+	'blog:blog' => 'Videos',
+	'item:object:blog' => 'Videos',
 
-	'blog:title:user_blogs' => '%s\'s blogs',
-	'blog:title:all_blogs' => 'All site blogs',
-	'blog:title:friends' => 'Friends\' blogs',
+	'blog:title:user_blogs' => '%s\'s videos',
+	'blog:title:all_blogs' => 'All site videos',
+	'blog:title:friends' => 'Friends\' videos',
 
-	'blog:group' => 'Group blog',
-	'blog:enableblog' => 'Enable group blog',
-	'blog:write' => 'Write a blog post',
+	'blog:group' => 'Group videos',
+	'blog:enableblog' => 'Enable group videos',
+	'blog:write' => 'Post a video',
 
 	// Editing
-	'blog:add' => 'Add blog post',
-	'blog:edit' => 'Edit blog post',
+	'blog:add' => 'Add video',
+	'blog:edit' => 'Edit video',
 	'blog:excerpt' => 'Excerpt',
 	'blog:body' => 'Body',
 	'blog:save_status' => 'Last saved: ',
@@ -32,31 +32,31 @@ $english = array(
 	'blog:status' => 'Status',
 	'blog:status:draft' => 'Draft',
 	'blog:status:published' => 'Published',
-	'blog:status:unsaved_draft' => 'Unsaved Draft',
+	'blog:status:unsaved_draft' => 'Unsaved Video',
 
 	'blog:revision' => 'Revision',
 	'blog:auto_saved_revision' => 'Auto Saved Revision',
 
 	// messages
-	'blog:message:saved' => 'Blog post saved.',
-	'blog:error:cannot_save' => 'Cannot save blog post.',
-	'blog:error:cannot_write_to_container' => 'Insufficient access to save blog to group.',
+	'blog:message:saved' => 'Video saved.',
+	'blog:error:cannot_save' => 'Cannot save video.',
+	'blog:error:cannot_write_to_container' => 'Insufficient access to save video to group.',
 	'blog:messages:warning:draft' => 'There is an unsaved draft of this post!',
 	'blog:edit_revision_notice' => '(Old version)',
-	'blog:message:deleted_post' => 'Blog post deleted.',
-	'blog:error:cannot_delete_post' => 'Cannot delete blog post.',
-	'blog:none' => 'No blog posts',
-	'blog:error:missing:title' => 'Please enter a blog title!',
-	'blog:error:missing:description' => 'Please enter the body of your blog!',
-	'blog:error:cannot_edit_post' => 'This post may not exist or you may not have permissions to edit it.',
+	'blog:message:deleted_post' => 'Video deleted.',
+	'blog:error:cannot_delete_post' => 'Cannot delete video.',
+	'blog:none' => 'No videos',
+	'blog:error:missing:title' => 'Please enter a video title!',
+	'blog:error:missing:description' => 'Please enter the description of your video!',
+	'blog:error:cannot_edit_post' => 'This video may not exist or you may not have permissions to edit it.',
 	'blog:error:revision_not_found' => 'Cannot find this revision.',
 
 	// river
-	'river:create:object:blog' => '%s published a blog post %s',
-	'river:comment:object:blog' => '%s commented on the blog %s',
+	'river:create:object:blog' => '%s published a video %s',
+	'river:comment:object:blog' => '%s commented on the video %s',
 
 	// notifications
-	'blog:newpost' => 'A new blog post',
+	'blog:newpost' => 'A new video',
 	'blog:notification' =>
 '
 %s made a new blog post.
@@ -69,10 +69,10 @@ View and comment on the new blog post:
 ',
 
 	// widget
-	'blog:widget:description' => 'Display your latest blog posts',
-	'blog:moreblogs' => 'More blog posts',
-	'blog:numbertodisplay' => 'Number of blog posts to display',
-	'blog:noblogs' => 'No blog posts'
+	'blog:widget:description' => 'Display your latest videos',
+	'blog:moreblogs' => 'More videos',
+	'blog:numbertodisplay' => 'Number of videos to display',
+	'blog:noblogs' => 'No videos'
 );
 
 add_translation('en', $english);
