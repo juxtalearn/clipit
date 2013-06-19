@@ -1,7 +1,0 @@
-= Contributors =
-
-- Leonardo Alcantara
-- Spanish language file
-
-
-
