@@ -1,0 +1,11 @@
+= Credits =
+
+- DhrupDeScoop -  http://embrache.com/
+- kind advice
+
+- Ismayil Khayredinov - http://hypejunction.com/
+- showed a method to add real-time updates to the river in his hype plugins
+
+
+
+

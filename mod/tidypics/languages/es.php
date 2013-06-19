@@ -1,0 +1,175 @@
+<?php
+/**TRADUCIDO POR ALIX SILVA, CARLOS SILVA Y LA COMUNIDAD ELGG**/
+
+$spanish = array(
+		// hack for core bug
+			'untitled' => "sin titulo",
+
+		// Menu items and titles
+			'image' => "Imagen",
+			'images' => "Imagenes",
+			'caption' => "Título",
+			'photos' => "Fotos",
+			'images:upload' => "Cargar Imagenes",
+			'images:multiupload' => "Herramienta MultiCarga de Flash",
+			'images:multiupload:todo' => "Selecciona uno a más archivos para cargar..",
+			'album' => "Álbum de Fotos",
+			'albums' => "Álbumes de Fotos",
+			'album:slideshow' => "Ver presentación de fotos",
+			'album:yours' => "Tu álbum de fotos",
+			'album:yours:friends' => "Álbum de fotos de tus amigos",
+			'album:user' => "Álbum de fotos de %s",
+			'album:friends' => "Álbum de fotos de los amigos de %s",
+			'album:all' => "Todos los álbumes de fotos",
+			'album:group' => "Grupo de álbumes",
+			'item:object:image' => "Fotos",
+			'item:object:album' => "Álbumes",
+			'tidypics:enablephotos' => 'Habilitar Álbumes de foto del Grupo',
+			'tidypics:editprops' => 'Editar Propiedades de Imagen',
+			'tidypics:mostcommented' => 'imagenes más comentadas',
+			'tidypics:mostcommentedthismonth' => 'Más comentadas este mes',
+			'tidypics:mostcommentedtoday' => 'Más comentadas del día de hoy',
+			'tidypics:mostviewed' => 'Imagenes más vistas',
+			'tidypics:mostvieweddashboard' => 'tablero más visto',
+			'tidypics:mostviewedthisyear' => 'Más vistas este año',
+			'tidypics:mostviewedthismonth' => 'Más vistas este mes',
+			'tidypics:mostviewedlastmonth' => 'Más vistas el último mes',
+			'tidypics:mostviewedtoday' => 'Más vistas durante el día de hoy',
+			'tidypics:recentlyviewed' => 'Imagenes vistas recientemente',
+			'tidypics:mostrecent' => 'Imagenes vistas más recientemente',
+			'tidypics:yourmostviewed' => 'Tu imagen más vista',
+			'tidypics:yourmostrecent' => 'Tu imagen más reciente',
+			'tidypics:friendmostviewed' => "La imagen más vista de %s",
+			'tidypics:friendmostrecent' => "La imagen más reciente de %s",
+			'tidypics:highestrated' => "Imagenes mejor catalogadas",
+			'tidypics:viewsbyowner' => "Vistas: %s por  %s (no te incluye a ti)",
+			'tidypics:viewsbyothers' => "Vistas: %s (%s por ti)",
+			'tidypics:administration' => 'Administración de Tidypics',
+			'tidypics:stats' => 'Estatus',
+
+		//settings
+			'tidypics:settings' => 'Configuración',
+			'tidypics:admin:instructions' => 'Este es el corazón de las preferencias de Tidypics. Cambialas y luego guardalas.',
+			'tidypics:settings:image_lib' => "Libreria de Imagenes: ",
+			'tidypics:settings:download_link' => "Mostrar vinculo de descarga",
+			'tidypics:settings:tagging' => "Habilitar etiquetas en las fotos",
+			'tidypics:settings:photo_ratings' => "Habilitar ratings de fotos(requiere instalar el e plugin de Miguel Montes o compatible)",
+			'tidypics:settings:exif' => "Mostrar data de EXIF",
+			'tidypics:settings:view_count' => "Ver contador",
+			'tidypics:settings:grp_perm_override' => "Permitir acceso completo a los miembros de este grupo al album de fotos",
+			'tidypics:settings:maxfilesize' => "Tamaño máximo de la imagen en megabytes (MB):",
+			'tidypics:settings:quota' => "Usuario/Grupo Cuota (MB) - 0 MB de cuota",
+			'tidypics:settings:watermark' => "Introduce el texto que aparecerá en la marca de agua - ImageMagick Cmdline debe ser seleccionado para la libreria de imagenes",
+			'tidypics:settings:im_path' => "Ingresa la ruta de tu ImageMagick commands (incluye el slash)",
+			'tidypics:settings:img_river_view' => "¿Cuántas entradas deseas para cada grupo de imágenes cargadas?",
+			'tidypics:settings:album_river_view' => "Muestra la portada del álbum o el set de fotos para el álbum nuevo",
+			'tidypics:settings:largesize' => "Tamaño inicial de la imagen",
+			'tidypics:settings:smallsize' => "Tamaño de imagen de vista del álbum",
+			'tidypics:settings:thumbsize' => "Tamaño de imagen miniatura",
+
+		//actions
+			'album:create' => "Crear nuevo álbum",
+			'album:add' => "Añadir Álbum de fotos",
+			'album:addpix' => "ñadir fotos al Álbum",
+			'album:edit' => "Editar álbum",
+			'album:delete' => "Borrar álbum",
+			'image:edit' => "Editar imagen",
+			'image:delete' => "Borrar imagen",
+			'image:download' => "Descargar imagen",
+
+		//forms
+			'album:title' => "Titulo",
+			'album:desc' => "Descripción",
+			'album:tags' => "Etiquetas",
+			'album:cover' => "¿Desea hacer de esta imagen la portada del álbum?",
+			'tidypics:quota' => "Cuota usada:",
+
+		//views
+			'image:total' => "Imagenes en el álbum:",
+			'image:by' => "Imagenes añadidas por",
+			'album:by' => "Álbum creador por",
+			'album:created:on' => "Creado",
+			'image:none' => "Ninguna imagen ha sido añadida aún.",
+			'image:back' => "Anterior",
+			'image:next' => "Siguiente",
+
+		// tagging
+			'tidypics:taginstruct' => 'Seleccciona el  área que deseas etiquetar',
+			'tidypics:deltag_title' => 'Seleccionas las etiquetas a borrar',
+			'tidypics:finish_tagging' => 'Detener etiquetado',
+			'tidypics:tagthisphoto' => 'Etiquetar esta foto',
+			'tidypics:deletetag' => 'Borrar etiqueta de la foto',
+			'tidypics:actiontag' => 'Etiqueta',
+			'tidypics:actiondelete' => 'Borrar',
+			'tidypics:actioncancel' => 'Cancelar',
+			'tidypics:inthisphoto' => 'En esta foto',
+			'tidypics:usertag' => "Fotos etiquetadas con %s",
+			'tidypics:phototagging:success' => 'La etiqueta de la foto fue añadida exitosamente',
+			'tidypics:phototagging:error' => 'Ocurrió un error inesperado durante el etiquetado',
+			'tidypics:deletetag:success' => 'Las etiquetas seleccionadas fueron borradas exitosamente',
+
+
+		//rss
+			'tidypics:posted' => 'publicar una foto:',
+
+		//widgets
+			'tidypics:widget:albums' => "Álbumes de fotos",
+			'tidypics:widget:album_descr' => "Mosrar tu último álbum de fotos",
+			'tidypics:widget:num_albums' => "Número de álbumes a mostrar",
+			'tidypics:widget:latest' => "Latest Photos",
+			'tidypics:widget:latest_descr' => "Display your latest photos",
+			'tidypics:widget:num_latest' => "Number of images to display",
+			'album:more' => "Ver todos los álbumes",
+
+		//  river
+			'image:river:created' => "%s añadio la foto %s al álbum %s",
+			'image:river:item' => "una foto",
+			'image:river:annotate' => "un comentario en la foto",
+			'image:river:tagged' => "fue etiquetada en la foto",
+			'album:river:created' => "%s creo un nuevo álbum de fotos",
+			'album:river:group' => "en el grupo",
+			'album:river:item' => "un álbum",
+			'album:river:annotate' => "un comentario en el álbum de fotos",
+
+		// notifications
+			'tidypics:newalbum' => 'Nuevo álbum de fotos',
+
+
+		//  Status messages
+			'tidypics:upl_success' => "Tu imagen fue cargada exitosamente.",
+			'image:saved' => "Tu imagen fue guardada exitosamente.",
+			'images:saved' => "Todas tus imagenes fueron guardadas exitosamente.",
+			'image:deleted' => "Tu imagen fue borrada exitosamente.",
+			'image:delete:confirm' => "¿Estás seguro de que deseas borrar esta imagen?",
+			'images:edited' => "Tu imagen fue editada exitosamente.",
+			'album:edited' => "Tu álbum fue cargado exitosamente.",
+			'album:saved' => "Tu álbum fue guardado exitosamente.",
+			'album:deleted' => "Tu álbum fue borrado exitosamente.",
+			'album:delete:confirm' => "¿Estás seguro de que deseas borrar esta imagen?",
+			'album:created' => "Tu nuevo álbum ha sido creado.",
+			'tidypics:settings:save:ok' => 'Las preferencias del plugin de Tidypics han sido exitosamente guardadas',
+			'tidypics:upgrade:success' => 'La actualización de Tidypics ha sido un exito',
+
+		//Error messages
+			'tidypics:partialuploadfailure' => "Ocurrieron errores mientas se cargaban algunas de las imagenes (%s de %s imagenes).",
+			'tidypics:completeuploadfailure' => "Carga de imagenes fallidas.",
+			'tidypics:exceedpostlimit' => "Las imagenes son muy grandes - trate de cargar imagenes más pequeñas.",
+			'tidypics:noimages' => "Ninguna imagen fue seleccionada.",
+			'tidypics:image_mem' => "La image is muy grande - demasiados bytes",
+			'tidypics:image_pixels' => "La image tiene demasiados pixeles",
+			'tidypics:unk_error' => "Error de carga desconocido",
+			'tidypics:save_error' => "Error desconocido guardando la imagen en el servidor",
+			'tidypics:not_image' => "Este no es un tipo de imagen soportada por el sistema",
+			'image:deletefailed' => "Tu imagen no pudo ser borrada en este momento.",
+			'image:downloadfailed' => "Lo sentimos; esta imagen no está disponible en este momento.",
+			'tidypics:nosettings' => "El Administrador de este sitio no ha configurado las preferencias de los álbumes de fotos.",
+			'tidypics:exceed_quota' => "Has excedido la cuota asignada por el administrador",
+			'images:notedited' => "No todas las imagenes fueron actualizas exitosamente",
+			'album:none' => "No ha sido creado ningún álbum aún.",
+			'album:uploadfailed' => "Lo sentimos; no pudimos guardar tu álbum.",
+			'album:deletefailed' => "Tu álbum no pudo ser borrado en este momento.",
+			'album:blank' => "Por favor, dale a este Álbum un titulo y una descripción.",
+			'tidypics:upgrade:failed' => "La actualización de Tidypics ha fallado",
+);
+
+add_translation("es", $spanish);

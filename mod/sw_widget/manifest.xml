@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin_manifest xmlns="http://www.elgg.org/plugin_manifest/1.8">
+	<name>SW Admin Only Widgets for Elgg 1.8</name>
+	<author>SW Social Web</author>
+	<version>caoper</version>
+	<category>bundled</category>
+	<category>widgets</category>
+	<category>widgets</category>
+	
+	<description>
+	
+	Small plugin to hide the 'add widgets' panel on profile to non-admins
+	Useful if you want to set static profiles on your elgg network
+	
+	</description>
+	
+	<website>
+	http://www.swsocialweb.com/shop
+	</website>
+	
+	<license>
+	GPL
+	</license>
+	
+	<requires>
+		<type>elgg_release</type>
+		<version>1.8</version>
+	</requires>
+<requires>
+                <name>profile</name>
+		<type>plugin</type>
+
+	</requires>
+	
+</plugin_manifest>

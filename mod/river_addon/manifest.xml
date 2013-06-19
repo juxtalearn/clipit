@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin_manifest xmlns="http://www.elgg.org/plugin_manifest/1.8">
+	<name>River Addon</name>
+	<id>river_addon</id>
+	<author>Per Jensen - Elggzone</author>
+	<version>2013.03.17</version>
+	<category>River addon</category>
+	<description>Adds additional views to the activity page</description>
+	<website>http://www.perjensen-online.dk</website>
+	<repository>https://github.com/Elggzone/River-Addon</repository>
+	<copyright>(C) Per Jensen - perjensen-online.dk 2013</copyright>
+	<license>GNU Public License version 2</license>
+	<requires>
+		<type>elgg_release</type>
+		<version>1.8</version>
+	</requires>
+	<admin_interface>simple</admin_interface>
+</plugin_manifest>
