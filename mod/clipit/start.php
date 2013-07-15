@@ -46,20 +46,12 @@ function clipit_init() {
         elgg_register_js("jquery-migrate", $CONFIG->url . "mod/clipit/vendors/jquery/jquery-migrate-1.1.1.js", "head", 1);
         elgg_register_js("jquery-ui", $CONFIG->url . "mod/clipit/vendors/jquery-ui-1.10.2.custom/js/jquery-ui-1.10.2.custom.min.js", "head", 2);
         elgg_register_js("twitter-bootstrap", $CONFIG->url . "mod/clipit/vendors/bootstrap/js/bootstrap.min.js");
-<<<<<<< HEAD
         elgg_register_js("forceAddFile", $CONFIG->url . "mod/clipit/js/force_add_file.js");
         elgg_load_css("ui-lightness");
         elgg_load_css("twitter-bootstrap");
         elgg_load_js("jquery-migrate");
         elgg_load_js("twitter-bootstrap");
         elgg_load_js("forceAddFile");
-=======
-        elgg_register_js("clipit", $CONFIG->url . "mod/clipit/views/default/js/blog/force_add_file.js");
-        elgg_load_css("ui-lightness");
-        elgg_load_css("twitter-bootstrap");
-        elgg_load_js("jquery-migrate");
-        elgg_load_js("twitter-bootstrap");
->>>>>>> branch 'ClipIt_v1.0' of https://github.com/juxtalearn/clipit.git
         elgg_load_css("righteous");
         elgg_load_css("ubuntu");
         elgg_load_css("bubblegum");
@@ -72,4 +64,79 @@ function clipit_init() {
     }
     // Deshabilitar la opción de no mostrar el editor de texto TinyMCE
     elgg_unregister_plugin_hook_handler('register', 'menu:longtext', 'tinymce_longtext_menu');
+    
+    elgg_unregister_plugin_hook_handler('entity:icon:url', 'object', 'file_icon_url_override');
+    
+    elgg_register_plugin_hook_handler('entity:icon:url', 'object', 'clipit_file_icon_url_override');
+    
+    /**
+ * Override the default entity icon for files
+ *
+ * Plugins can override or extend the icons using the plugin hook: 'file:icon:url', 'override'
+ *
+ * @return string Relative URL
+ */
+function file_icon_url_override($hook, $type, $returnvalue, $params) {
+	$file = $params['entity'];
+	$size = $params['size'];
+	if (elgg_instanceof($file, 'object', 'file')) {
+
+		// thumbnails get first priority
+		if ($file->thumbnail) {
+			$ts = (int)$file->icontime;
+			return "mod/file/thumbnail.php?file_guid=$file->guid&size=$size&icontime=$ts";
+		}
+
+		$mapping = array(
+			'application/excel' => 'excel',
+			'application/msword' => 'word',
+			'application/ogg' => 'music',
+			'application/pdf' => 'pdf',
+			'application/powerpoint' => 'ppt',
+			'application/vnd.ms-excel' => 'excel',
+			'application/vnd.ms-powerpoint' => 'ppt',
+			'application/vnd.oasis.opendocument.text' => 'openoffice',
+			'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 'word',
+			'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' => 'excel',
+			'application/vnd.openxmlformats-officedocument.presentationml.presentation' => 'ppt',
+			'application/x-gzip' => 'archive',
+			'application/x-rar-compressed' => 'archive',
+			'application/x-stuffit' => 'archive',
+			'application/zip' => 'archive',
+
+			'text/directory' => 'vcard',
+			'text/v-card' => 'vcard',
+
+			'application' => 'application',
+			'audio' => 'music',
+			'text' => 'text',
+			'video' => 'video',
+		);
+
+		$mime = $file->mimetype;
+		if ($mime) {
+			$base_type = substr($mime, 0, strpos($mime, '/'));
+		} else {
+			$mime = 'none';
+			$base_type = 'none';
+		}
+
+		if (isset($mapping[$mime])) {
+			$type = $mapping[$mime];
+		} elseif (isset($mapping[$base_type])) {
+			$type = $mapping[$base_type];
+		} else {
+			$type = 'general';
+		}
+
+		if ($size == 'large') {
+			$ext = '_lrg';
+		} else {
+			$ext = '';
+		}
+		
+		$url = "mod/clipit/graphics/icons/{$type}{$ext}.gif";
+		$url = elgg_trigger_plugin_hook('file:icon:url', 'override', $params, $url);
+		return $url;
+	}
 }
