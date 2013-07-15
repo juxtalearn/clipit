@@ -20,6 +20,9 @@ echo <<<HTML
 		<h3 class="elgg-heading-walledgarden">
 			$welcome
 		</h3>
+        <div class="elgg-login-logo">
+            <img src="./mod/clipit/graphics/clipit.png" />
+        </div>
 		$menu
 	</div>
 </div>
