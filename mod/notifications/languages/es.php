@@ -1,6 +1,6 @@
 <?php
 /**
- * Formal spanish version by LeonardoA
+ * 
 */
 
 $spanish = array(

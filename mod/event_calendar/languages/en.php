@@ -1,14 +1,13 @@
 <?php
-
-	$english = array(
-	
+$english = array(
 	'item:object:event_calendar' => "Event calendar",
 	'tag_names:event_tags' => "Tags",
 	'event_calendar:optional' => "Optional.",
 	'event_calendar:required' => "Required.",
 	'event_calendar:new_event' => "New event",
 	'event_calendar:no_such_event_edit_error' => "Error: There is no such event or you do not have permission to edit it.",
-	'event_calendar:add_event_title' => "Add event",
+	'event_calendar:add' => "Add",
+        'event_calendar:add_event_title' => "Add event",
 	'event_calendar:manage_event_title' => "Edit event",
 	'event_calendar:manage_event_description' => "Enter the details of your event below. "
 		."The title, venue, and start date are required. "
@@ -62,6 +61,8 @@
 	'event_calendar:view_link' => "View this event",
 	'event_calendar:edit_link' => "Edit this event",
 	'event_calendar:delete_link' => "Delete this event",
+        'event_calendar:delete_confirm_title' => 'Confirmar eliminación de este evento',
+        'event_calendar:delete_confirm_description' => 'Are you sure you want to delete this event ("%s"). This action is irreversible.',
 	'event_calendar:delete_response' => "This event has been deleted.",
 	'event_calendar:error_delete' => "This event does not exist or you do not have the right to delete it.",
 	'event_calendar:delete_cancel_response' => "Event delete cancelled.",
@@ -212,7 +213,6 @@ You can manage calendar requests for this event here:
 	'event_calendar:no_group' => "There is no such group.",
 	'event_calendar:generic_error_title' => "Error",
 	'event_calendar:error_event_edit' => "Error: there is no such event or you do not have permission to edit it.",
-	'event_calendar:add' => "Add",
 		
 	'feed:ical' => "iCal feed for this page",
 	'event_calendar:ical_popup_message' => "You can use the following URL to get an iCalendar feed of the public events from this listing page: ",
@@ -353,9 +353,6 @@ You can visit the event page here:
 	//these get inserted into the river links to take the user to the entity
     'event_calendar:river:create' => "a new event titled",
     'event_calendar:river:the_event' => "an event titled",
-
-	);
-					
-	add_translation("en",$english);
-
+);					
+add_translation("en",$english);
 ?>

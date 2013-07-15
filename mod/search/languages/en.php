@@ -1,4 +1,7 @@
 <?php
+/**
+ * 
+ */
 
 $english = array(
 	'search:enter_term' => 'Enter a search term:',

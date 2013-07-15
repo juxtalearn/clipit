@@ -1286,6 +1286,17 @@ class ElggInstaller {
 			register_error($msg);
 			return FALSE;
 		}
+        
+        try {
+			run_sql_script("{$CONFIG->path}engine/schema/clipit_config.sql");
+		} catch (Exception $e) {
+			$msg = $e->getMessage();
+			if (strpos($msg, 'clipit_config.sql failed')) {
+				$msg = elgg_echo('install:error:clipit_config');
+			}
+			register_error($msg);
+			return FALSE;
+		}
 
 		return TRUE;
 	}

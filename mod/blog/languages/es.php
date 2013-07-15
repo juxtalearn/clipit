@@ -1,8 +1,9 @@
 <?php
-
 /**
-  * Traducciones Blog
-  */
+ * Traducciones Blog
+ *
+ */
+
 $blog = array(
 	'blog' => 'Vídeos',
 	'blog:blogs' => 'Vídeos',
@@ -17,12 +18,12 @@ $blog = array(
 
 	'blog:group' => 'Vídeos de grupos',
 	'blog:enableblog' => 'Habilitar vídeos para Grupos',
-	'blog:write' => 'Escribir un vídeo',
+	'blog:write' => 'Publicar un vídeo',
 
 	// Editing
 	'blog:add' => 'Publicar un vídeo',
 	'blog:edit' => 'Editar vídeo',
-	'blog:excerpt' => 'Extracto',
+	'blog:excerpt' => 'Resumen',
 	'blog:body' => 'Texto',
 	'blog:save_status' => 'Último guardado: ',
 	'blog:never' => 'Nunca',

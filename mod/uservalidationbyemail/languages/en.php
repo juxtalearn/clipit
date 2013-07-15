@@ -1,6 +1,7 @@
 <?php
 /**
  * Email user validation plugin language pack.
+ * 
  *
  * @package Elgg.Core.Plugin
  * @subpackage ElggUserValidationByEmail

@@ -13,6 +13,7 @@ $spanish = array(
 	'embed_extender:custom_provider' 	=> "Permitir proovedores personalizados",
 	'embedvideo:novideo' 				=> 'No hay video especificado',
 	'embedvideo:unrecognized' 			=> 'Sitio del video no reconocido',
-	'embedvideo:parseerror' 			=> 'No podemos obtener %s desde la url especificada'
+	'embedvideo:parseerror' 			=> 'No podemos obtener %s desde la url especificada',
+        'embed_extender:custom:views'		=> '<b>Avanzado</b>: Muestra el vídeo en vistas personalizadas. Introduzca una vista por linea.'
 );
 add_translation("es",$spanish);

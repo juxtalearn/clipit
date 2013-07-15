@@ -15,7 +15,7 @@
 		// entity names
 		'item:object:custom_profile_field' => 'Custom Profile Field',
 		'item:object:custom_profile_field_category' => 'Custom Profile Field Category',
-		'item:object:custom_profile_type' => 'Custom Profile Type',
+		'item:object:custom_profile_type' => 'Tipo de perfil personalizado',
 		'item:object:custom_group_field' => 'Custom Group Field',
 	
 		'profile:custom_profile_type' => 'Custom Profile Type',

@@ -2,6 +2,7 @@
 /**
 * Elgg send a message action page
 * 
+* 
 * @package ElggMessages
 */
 

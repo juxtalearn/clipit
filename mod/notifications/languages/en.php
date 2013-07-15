@@ -1,4 +1,7 @@
 <?php
+/**
+ * Formal spanish version by LeonardoA
+*/
 
 $english = array(
 

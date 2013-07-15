@@ -1,6 +1,7 @@
 <?php
 /**
  * Elgg log browser plugin language pack
+ * 
  *
  * @package ElggLogBrowser
  */
