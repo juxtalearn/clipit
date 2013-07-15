@@ -68,7 +68,8 @@ function clipit_init() {
     elgg_unregister_plugin_hook_handler('entity:icon:url', 'object', 'file_icon_url_override');
     
     elgg_register_plugin_hook_handler('entity:icon:url', 'object', 'clipit_file_icon_url_override');
-    
+}
+
     /**
  * Override the default entity icon for files
  *
@@ -76,67 +77,67 @@ function clipit_init() {
  *
  * @return string Relative URL
  */
-function file_icon_url_override($hook, $type, $returnvalue, $params) {
-	$file = $params['entity'];
-	$size = $params['size'];
-	if (elgg_instanceof($file, 'object', 'file')) {
+function clipit_file_icon_url_override($hook, $type, $returnvalue, $params) {
+    $file = $params['entity'];
+    $size = $params['size'];
+    if (elgg_instanceof($file, 'object', 'file')) {
 
-		// thumbnails get first priority
-		if ($file->thumbnail) {
-			$ts = (int)$file->icontime;
-			return "mod/file/thumbnail.php?file_guid=$file->guid&size=$size&icontime=$ts";
-		}
+        // thumbnails get first priority
+        if ($file->thumbnail) {
+            $ts = (int)$file->icontime;
+            return "mod/file/thumbnail.php?file_guid=$file->guid&size=$size&icontime=$ts";
+        }
 
-		$mapping = array(
-			'application/excel' => 'excel',
-			'application/msword' => 'word',
-			'application/ogg' => 'music',
-			'application/pdf' => 'pdf',
-			'application/powerpoint' => 'ppt',
-			'application/vnd.ms-excel' => 'excel',
-			'application/vnd.ms-powerpoint' => 'ppt',
-			'application/vnd.oasis.opendocument.text' => 'openoffice',
-			'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 'word',
-			'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' => 'excel',
-			'application/vnd.openxmlformats-officedocument.presentationml.presentation' => 'ppt',
-			'application/x-gzip' => 'archive',
-			'application/x-rar-compressed' => 'archive',
-			'application/x-stuffit' => 'archive',
-			'application/zip' => 'archive',
+        $mapping = array(
+            'application/excel' => 'excel',
+            'application/msword' => 'word',
+            'application/ogg' => 'music',
+            'application/pdf' => 'pdf',
+            'application/powerpoint' => 'ppt',
+            'application/vnd.ms-excel' => 'excel',
+            'application/vnd.ms-powerpoint' => 'ppt',
+            'application/vnd.oasis.opendocument.text' => 'openoffice',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 'word',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' => 'excel',
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation' => 'ppt',
+            'application/x-gzip' => 'archive',
+            'application/x-rar-compressed' => 'archive',
+            'application/x-stuffit' => 'archive',
+            'application/zip' => 'archive',
 
-			'text/directory' => 'vcard',
-			'text/v-card' => 'vcard',
+            'text/directory' => 'vcard',
+            'text/v-card' => 'vcard',
 
-			'application' => 'application',
-			'audio' => 'music',
-			'text' => 'text',
-			'video' => 'video',
-		);
+            'application' => 'application',
+            'audio' => 'music',
+            'text' => 'text',
+            'video' => 'video',
+        );
 
-		$mime = $file->mimetype;
-		if ($mime) {
-			$base_type = substr($mime, 0, strpos($mime, '/'));
-		} else {
-			$mime = 'none';
-			$base_type = 'none';
-		}
+        $mime = $file->mimetype;
+        if ($mime) {
+            $base_type = substr($mime, 0, strpos($mime, '/'));
+        } else {
+            $mime = 'none';
+            $base_type = 'none';
+        }
 
-		if (isset($mapping[$mime])) {
-			$type = $mapping[$mime];
-		} elseif (isset($mapping[$base_type])) {
-			$type = $mapping[$base_type];
-		} else {
-			$type = 'general';
-		}
+        if (isset($mapping[$mime])) {
+            $type = $mapping[$mime];
+        } elseif (isset($mapping[$base_type])) {
+            $type = $mapping[$base_type];
+        } else {
+            $type = 'general';
+        }
 
-		if ($size == 'large') {
-			$ext = '_lrg';
-		} else {
-			$ext = '';
-		}
-		
-		$url = "mod/clipit/graphics/icons/{$type}{$ext}.gif";
-		$url = elgg_trigger_plugin_hook('file:icon:url', 'override', $params, $url);
-		return $url;
-	}
+        if ($size == 'large') {
+            $ext = '_lrg';
+        } else {
+            $ext = '';
+        }
+
+        $url = "mod/clipit/graphics/icons/{$type}{$ext}.gif";
+        $url = elgg_trigger_plugin_hook('file:icon:url', 'override', $params, $url);
+        return $url;
+    }
 }
