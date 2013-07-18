@@ -13,88 +13,92 @@
         <version>1.8</version>
     </requires>
     <requires>
-        <type>plugin</type>
+        <type>priority</type>
         <name>blog</name>
+        <priority>after</priority>
     </requires>
     <requires>
-        <type>plugin</type>
+        <type>priority</type>
         <name>dashboard</name>
+        <priority>after</priority>
     </requires>
     <requires>
-        <type>plugin</type>
+        <type>priority</type>
         <name>elggx_fivestar</name>
+        <priority>after</priority>
     </requires>
     <requires>
-        <type>plugin</type>
+        <type>priority</type>
         <name>embed</name>
+        <priority>after</priority>
     </requires>
     <requires>
-        <type>plugin</type>
+        <type>priority</type>
         <name>embed_extender</name>
         <priority>after</priority>
     </requires>
     <requires>
-        <type>plugin</type>
+        <type>priority</type>
         <name>event_calendar</name>
         <priority>after</priority>
     </requires>
     <requires>
-        <type>plugin</type>
+        <type>priority</type>
         <name>file</name>
         <priority>after</priority>
     </requires>
     <requires>
-        <type>plugin</type>
+        <type>priority</type>
         <name>friend_request</name>
         <priority>after</priority>
     </requires>
     <requires>
-        <type>plugin</type>
+        <type>priority</type>
         <name>groups</name>
         <priority>after</priority>
     </requires>
     <requires>
-        <type>plugin</type>
+        <type>priority</type>
         <name>members</name>
         <priority>after</priority>
     </requires>
     <requires>
-        <type>plugin</type>
+        <type>priority</type>
         <name>messages</name>
         <priority>after</priority>
     </requires>
     <requires>
-        <type>plugin</type>
+        <type>priority</type>
         <name>notifications</name>
         <priority>after</priority>
     </requires>
     <requires>
-        <type>plugin</type>
+        <type>priority</type>
         <name>profile</name>
         <priority>after</priority>
     </requires>
     <requires>
-        <type>plugin</type>
+        <type>priority</type>
         <name>profile_manager</name>
         <priority>after</priority>
     </requires>
     <requires>
-        <type>plugin</type>
+        <type>priority</type>
         <name>search</name>
         <priority>after</priority>
     </requires>
     <requires>
-        <type>plugin</type>
+        <type>priority</type>
         <name>tinymce</name>
         <priority>after</priority>
     </requires>
     <requires>
-        <type>plugin</type>
+        <type>priority</type>
         <name>uservalidationbyemail</name>
         <priority>after</priority>
     </requires>
     <requires>
-        <type>plugin</type>
+        <type>priority</type>
         <name>veeplay</name>
         <priority>after</priority>
     </requires>
