@@ -31,59 +31,78 @@
     <requires>
         <type>plugin</type>
         <name>embed_extender</name>
+        <priority>after</priority>
     </requires>
     <requires>
         <type>plugin</type>
         <name>event_calendar</name>
+        <priority>after</priority>
     </requires>
     <requires>
         <type>plugin</type>
         <name>file</name>
+        <priority>after</priority>
     </requires>
     <requires>
         <type>plugin</type>
         <name>friend_request</name>
+        <priority>after</priority>
     </requires>
     <requires>
         <type>plugin</type>
         <name>groups</name>
+        <priority>after</priority>
     </requires>
     <requires>
         <type>plugin</type>
         <name>members</name>
+        <priority>after</priority>
     </requires>
     <requires>
         <type>plugin</type>
         <name>messages</name>
+        <priority>after</priority>
     </requires>
     <requires>
         <type>plugin</type>
         <name>notifications</name>
+        <priority>after</priority>
     </requires>
     <requires>
         <type>plugin</type>
         <name>profile</name>
+        <priority>after</priority>
     </requires>
     <requires>
         <type>plugin</type>
         <name>profile_manager</name>
+        <priority>after</priority>
     </requires>
     <requires>
         <type>plugin</type>
         <name>search</name>
+        <priority>after</priority>
     </requires>
     <requires>
         <type>plugin</type>
         <name>tinymce</name>
+        <priority>after</priority>
     </requires>
     <requires>
         <type>plugin</type>
         <name>uservalidationbyemail</name>
+        <priority>after</priority>
     </requires>
     <requires>
         <type>plugin</type>
         <name>veeplay</name>
+        <priority>after</priority>
     </requires>
+    <requires>
+		<type>priority</type>
+		<plugin>profile</plugin>
+		<priority>after</priority>
+	</requires>
 
     <activate_on_install>true</activate_on_install>
 </plugin_manifest>
