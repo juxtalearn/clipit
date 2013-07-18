@@ -14,7 +14,76 @@
     </requires>
     <requires>
         <type>plugin</type>
-        <name>Blog</name>
+        <name>blog</name>
     </requires>
+    <requires>
+        <type>plugin</type>
+        <name>dashboard</name>
+    </requires>
+    <requires>
+        <type>plugin</type>
+        <name>elggx_fivestar</name>
+    </requires>
+    <requires>
+        <type>plugin</type>
+        <name>embed</name>
+    </requires>
+    <requires>
+        <type>plugin</type>
+        <name>embed_extender</name>
+    </requires>
+    <requires>
+        <type>plugin</type>
+        <name>event_calendar</name>
+    </requires>
+    <requires>
+        <type>plugin</type>
+        <name>file</name>
+    </requires>
+    <requires>
+        <type>plugin</type>
+        <name>friend_request</name>
+    </requires>
+    <requires>
+        <type>plugin</type>
+        <name>groups</name>
+    </requires>
+    <requires>
+        <type>plugin</type>
+        <name>members</name>
+    </requires>
+    <requires>
+        <type>plugin</type>
+        <name>messages</name>
+    </requires>
+    <requires>
+        <type>plugin</type>
+        <name>notifications</name>
+    </requires>
+    <requires>
+        <type>plugin</type>
+        <name>profile</name>
+    </requires>
+    <requires>
+        <type>plugin</type>
+        <name>profile_manager</name>
+    </requires>
+    <requires>
+        <type>plugin</type>
+        <name>search</name>
+    </requires>
+    <requires>
+        <type>plugin</type>
+        <name>tinymce</name>
+    </requires>
+    <requires>
+        <type>plugin</type>
+        <name>uservalidationbyemail</name>
+    </requires>
+    <requires>
+        <type>plugin</type>
+        <name>veeplay</name>
+    </requires>
+
     <activate_on_install>true</activate_on_install>
 </plugin_manifest>
