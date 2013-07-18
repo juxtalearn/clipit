@@ -65,7 +65,7 @@ function clipit_init() {
     // Deshabilitar la opción de no mostrar el editor de texto TinyMCE
     elgg_unregister_plugin_hook_handler('register', 'menu:longtext', 'tinymce_longtext_menu');
     
-    elgg_unregister_plugin_hook_handler('entity:icon:url', 'object', 'file_icon_url_override');
+   elgg_unregister_plugin_hook_handler('entity:icon:url', 'object', 'file_icon_url_override');
     
     elgg_register_plugin_hook_handler('entity:icon:url', 'object', 'clipit_file_icon_url_override');
 }

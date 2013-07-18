@@ -1220,6 +1220,12 @@ Por favor no responda a este correo",
   
 	'js:security:token_refresh_failed' => 'No se pudo contactar a %s. Puede experimentar problemas al guardar contenidos en el sitio',
 	'js:security:token_refreshed' => '¡La conexión a %s ha sido restaurada!',
+
+/**
+ * Force add file js
+ */ 
+    'forceAddFile:title' => 'Debe rellenar el título.',
+    'forceAddFile:filerequired' => 'Debe insertar al menos 1 archivo',   
  
  /**
  * Languages according to ISO 639-1

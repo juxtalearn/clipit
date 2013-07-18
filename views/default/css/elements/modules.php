@@ -105,6 +105,7 @@
 .elgg-widget-add-control {
 	text-align: right;
 	margin: 5px 5px 15px;
+    display:none;
 }
 .elgg-widgets-add-panel {
 	padding: 10px;

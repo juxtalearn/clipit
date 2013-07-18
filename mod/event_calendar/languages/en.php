@@ -1,6 +1,6 @@
 <?php
 $english = array(
-	'item:object:event_calendar' => "Event calendar",
+	'item:object:event_calendar' => "Events",
 	'tag_names:event_tags' => "Tags",
 	'event_calendar:optional' => "Optional.",
 	'event_calendar:required' => "Required.",
@@ -43,7 +43,7 @@ $english = array(
 	'event_calendar:manage_event_error' => "Error: There was an error in saving your event. "
 			."Please make sure that you have provided the required fields.",
 	'event_calendar:error_nosuchevent' => "Error: there is no such event.",
-	'event_calendar:show_events_title' => "Event calendar",
+	'event_calendar:show_events_title' => "Events",
 	'event_calendar:day_label' => "Day",
 	'event_calendar:week_label' => "Week",
 	'event_calendar:month_label' => "Month",
@@ -51,7 +51,7 @@ $english = array(
 	'event_calendar:new' => "Add event",
 	'event_calendar:submit' => "Save and Continue",
 	'event_calendar:cancel' => "Cancel",
-	'event_calendar:widget_title' => "Event calendar",
+	'event_calendar:widget_title' => "Events",
 	'event_calendar:widget:description' => "Displays your events.",
 	'event_calendar:num_display' => "Number of events to display",
 	'event_calendar:groupprofile' => "Upcoming events",

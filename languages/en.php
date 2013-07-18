@@ -1216,6 +1216,12 @@ You cannot reply to this email.",
 	'js:security:token_refreshed' => 'Connection to %s restored!',
 
 /**
+ * Force add file js
+ */ 
+    'forceAddFile:title' => 'The title field is required.',
+    'forceAddFile:filerequired' => 'You must at least add one file.',
+    
+/**
  * Languages according to ISO 639-1
  */
 	"aa" => "Afar",

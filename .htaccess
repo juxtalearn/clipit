@@ -1,11 +1,14 @@
 # Elgg htaccess directives
+# Copyright Curverider Ltd 2008-2009
+# License http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
+# Link http://elgg.org/
 
 <Files "htaccess_dist">
 	order allow,deny
 	deny from all
 </Files>
 
-# Don't allow listing directories
+# Don't listing directory
 Options -Indexes
 
 # Follow symbolic links
@@ -14,28 +17,13 @@ Options +FollowSymLinks
 # Default handler
 DirectoryIndex index.php
 
-
-############################
-# BROWSER CACHING
-
-# The expires module controls the Expires and Cache-Control headers. Elgg sets
-# these for dynamically generated files so this is just for static files.
+# Turn on expiry
 <IfModule mod_expires.c>
 	ExpiresActive On
-	ExpiresDefault "access plus 1 year"
+	ExpiresDefault "access plus 10 years"
 </IfModule>
 
-# Conditional requests are controlled through Last-Modified and ETag headers.
-# Elgg sets these on dynamically generated cacheable files so this is just for
-# static files. Note: Apache sends Last-Modified by default on static files so
-# I don't think we need to be sending ETag for these files.
-<FilesMatch "\.(jpg|jpeg|gif|png|mp3|flv|mov|avi|3pg|html|htm|swf|js|css|ico)$">
-	FileETag MTime Size
-</FilesMatch>
-
-
-############################
-# PHP SETTINGS
+# php 5, apache 1 and 2
 <IfModule mod_php5.c>
 	# limit the maximum memory consumed by the php script to 64 MB
 	php_value memory_limit 64M
@@ -48,10 +36,6 @@ DirectoryIndex index.php
 	# on development servers, set to 1 to display errors. Set to 0 on production servers.
 	php_value display_errors 0
 </IfModule>
-
-
-############################
-# COMPRESSION
 
 # Turn on mod_gzip if available
 <IfModule mod_gzip.c>
@@ -91,9 +75,13 @@ DirectoryIndex index.php
 
 </IfModule>
 
+# Configure ETags
+<FilesMatch "\.(jpg|jpeg|gif|png|mp3|flv|mov|avi|3pg|html|htm|swf|js|ico)$">
+	FileETag MTime Size
+</FilesMatch>
 
-############################
-# REWRITE RULES
+#  Add Proper MIME-Type for Favicon to allow expires to work
+AddType image/vnd.microsoft.icon .ico
 
 <IfModule mod_rewrite.c>
 
@@ -103,7 +91,7 @@ RewriteEngine on
 # containing the path from your site root to elgg's root. e.g. If your site is
 # http://example.com/ and Elgg is in http://example.com/sites/elgg/, you might need
 #
-#RewriteBase /sites/elgg/
+RewriteBase /~jxl/sandbox/clipit01
 #
 # here, only without the # in front.
 #
@@ -112,44 +100,36 @@ RewriteEngine on
 #
 #RewriteBase /
 
-
-# If your users receive the message "Sorry, logging in from a different domain is not permitted"
-# you must make sure your login form is served from the same hostname as your site pages.
-# See http://docs.elgg.org/wiki/Login_token_mismatch_error for more info.
-#
-# If you must add RewriteRules to change hostname, add them directly below (above all the others)
-
-
 # In for backwards compatibility
-RewriteRule ^pg\/([A-Za-z0-9\_\-]+)$ engine/handlers/page_handler.php?handler=$1&%{QUERY_STRING} [L]
-RewriteRule ^pg\/([A-Za-z0-9\_\-]+)\/(.*)$ engine/handlers/page_handler.php?handler=$1&page=$2&%{QUERY_STRING} [L]
-RewriteRule ^tag\/(.+)\/?$ engine/handlers/page_handler.php?handler=search&page=$1 [L]
+RewriteRule ^pg\/([A-Za-z0-9\_\-]+)$ engine/handlers/page_handler.php?handler=$1&%{QUERY_STRING}
+RewriteRule ^pg\/([A-Za-z0-9\_\-]+)\/(.*)$ engine/handlers/page_handler.php?handler=$1&page=$2&%{QUERY_STRING}
+RewriteRule ^tag\/(.+)\/?$ engine/handlers/page_handler.php?handler=search&page=$1
 
 
-RewriteRule ^action\/([A-Za-z0-9\_\-\/]+)$ engine/handlers/action_handler.php?action=$1&%{QUERY_STRING} [L]
+RewriteRule ^action\/([A-Za-z0-9\_\-\/]+)$ engine/handlers/action_handler.php?action=$1&%{QUERY_STRING}
 
-RewriteRule ^cache\/(.*)$ engine/handlers/cache_handler.php?request=$1&%{QUERY_STRING} [L]
+RewriteRule ^cache\/(.*)$ engine/handlers/cache_handler.php?request=$1&%{QUERY_STRING}
 
-RewriteRule ^services\/api\/([A-Za-z0-9\_\-]+)\/(.*)$ engine/handlers/service_handler.php?handler=$1&request=$2&%{QUERY_STRING} [L]
+RewriteRule ^services\/api\/([A-Za-z0-9\_\-]+)\/(.*)$ engine/handlers/service_handler.php?handler=$1&request=$2&%{QUERY_STRING}
 
-RewriteRule ^export\/([A-Za-z]+)\/([0-9]+)\/?$ engine/handlers/export_handler.php?view=$1&guid=$2 [L]
-RewriteRule ^export\/([A-Za-z]+)\/([0-9]+)\/([A-Za-z]+)\/([A-Za-z0-9\_]+)\/$ engine/handlers/export_handler.php?view=$1&guid=$2&type=$3&idname=$4 [L]
+RewriteRule ^export\/([A-Za-z]+)\/([0-9]+)\/?$ engine/handlers/export_handler.php?view=$1&guid=$2
+RewriteRule ^export\/([A-Za-z]+)\/([0-9]+)\/([A-Za-z]+)\/([A-Za-z0-9\_]+)\/$ engine/handlers/export_handler.php?view=$1&guid=$2&type=$3&idname=$4
 
-RewriteRule xml-rpc.php engine/handlers/xml-rpc_handler.php [L]
-RewriteRule mt/mt-xmlrpc.cgi engine/handlers/xml-rpc_handler.php [L]
+RewriteRule xml-rpc.php engine/handlers/xml-rpc_handler.php
+RewriteRule mt/mt-xmlrpc.cgi engine/handlers/xml-rpc_handler.php
 
 
 # rule for rewrite module test during install - can be removed after installation
-RewriteRule ^rewrite.php$ install.php [L]
+RewriteRule ^rewrite.php$ install.php
 
 # Everything else that isn't a file gets routed through the page handler
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^([A-Za-z0-9\_\-]+)$ engine/handlers/page_handler.php?handler=$1 [QSA,L]
+RewriteRule ^([A-Za-z0-9\_\-]+)$ engine/handlers/page_handler.php?handler=$1 [QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^([A-Za-z0-9\_\-]+)\/(.*)$ engine/handlers/page_handler.php?handler=$1&page=$2 [QSA,L]
+RewriteRule ^([A-Za-z0-9\_\-]+)\/(.*)$ engine/handlers/page_handler.php?handler=$1&page=$2 [QSA]
 
 
 </IfModule>

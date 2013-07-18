@@ -207,3 +207,115 @@
 [15-Jul-2013 03:38:05] PHP WARNING: 2013-07-15 03:38:05 (PDT): "json_encode() [<a href='function.json-encode'>function.json-encode</a>]: Invalid UTF-8 sequence in argument" in file /home/jxl/public_html/sandbox/clipit01/views/default/js/languages.php (line 33)
 [15-Jul-2013 03:38:05] PHP WARNING: 2013-07-15 03:38:05 (PDT): "json_encode() [<a href='function.json-encode'>function.json-encode</a>]: Invalid UTF-8 sequence in argument" in file /home/jxl/public_html/sandbox/clipit01/views/default/js/languages.php (line 33)
 [15-Jul-2013 03:38:05] PHP WARNING: 2013-07-15 03:38:05 (PDT): "json_encode() [<a href='function.json-encode'>function.json-encode</a>]: Invalid UTF-8 sequence in argument" in file /home/jxl/public_html/sandbox/clipit01/views/default/js/languages.php (line 33)
+[15-Jul-2013 06:50:31] Exception #1373896231: exception 'DatabaseException' with message 'Table 'jxl_clipit01.clipit01_objects_entity' doesn't exist
+
+ QUERY: SELECT DISTINCT e.*, plugin_oe.*, r.id FROM clipit01_entities e  JOIN clipit01_private_settings ps on ps.entity_guid = e.guid  JOIN clipit01_objects_entity plugin_oe on plugin_oe.guid = e.guid  JOIN clipit01_entity_relationships r on r.guid_one = e.guid  WHERE  ps.name = 'elgg:internal:priority' AND  (r.relationship = 'active_plugin' AND r.guid_two = '1') AND  ((e.type = 'object' AND e.subtype IN (2))) AND  (e.site_guid IN (1)) AND ( (1 = 1)  and e.enabled='yes') ORDER BY CAST(ps.value as unsigned), e.guid' in /home/jxl/public_html/sandbox/clipit01/engine/lib/database.php:274
+Stack trace:
+#0 /home/jxl/public_html/sandbox/clipit01/engine/lib/database.php(416): execute_query()
+#1 /home/jxl/public_html/sandbox/clipit01/engine/lib/database.php(362): elgg_query_runner('SELECT DISTINCT...', Resource id #53)
+#2 /home/jxl/public_html/sandbox/clipit01/engine/lib/entities.php(1059): get_data()
+#3 /home/jxl/public_html/sandbox/clipit01/engine/lib/entities.php(1004): _elgg_fetch_entities_from_sql('SELECT DISTINCT...', '', false)
+#4 /home/jxl/public_html/sandbox/clipit01/engine/lib/metadata.php(453): elgg_get_entities()
+#5 /home/jxl/public_html/sandbox/clipit01/engine/lib/relationships.php(307): elgg_get_entities_from_metadata()
+#6 /home/jxl/public_html/sandbox/clipit01/engine/lib/plugins.php(414): elgg_get_entities_from_relationship('SELECT DISTINCT...')
+#7 /home/jxl/public_html/sandbox/clipit01/engine/lib/plugins.php(341): elgg_get_plugins('SELECT DISTINCT...')
+#8 /home/jxl/public_html/sandbox/clipit01/engine/start.php(102): elgg_load_plugins()
+#9 /home/jxl/public_html/sandbox/clipit01/engine/handlers/page_handler.php(41): require_once('/home/jxl/publi...')
+#10 {main}
+[15-Jul-2013 06:50:31] Exception #1373896231: exception 'DatabaseException' with message 'Table 'jxl_clipit01.clipit01_objects_entity' doesn't exist
+
+ QUERY: SELECT DISTINCT e.*, plugin_oe.*, r.id FROM clipit01_entities e  JOIN clipit01_private_settings ps on ps.entity_guid = e.guid  JOIN clipit01_objects_entity plugin_oe on plugin_oe.guid = e.guid  JOIN clipit01_entity_relationships r on r.guid_one = e.guid  WHERE  ps.name = 'elgg:internal:priority' AND  (r.relationship = 'active_plugin' AND r.guid_two = '1') AND  ((e.type = 'object' AND e.subtype IN (2))) AND  (e.site_guid IN (1)) AND ( (1 = 1)  and e.enabled='yes') ORDER BY CAST(ps.value as unsigned), e.guid' in /home/jxl/public_html/sandbox/clipit01/engine/lib/database.php:274
+Stack trace:
+#0 /home/jxl/public_html/sandbox/clipit01/engine/lib/database.php(416): execute_query()
+#1 /home/jxl/public_html/sandbox/clipit01/engine/lib/database.php(362): elgg_query_runner('SELECT DISTINCT...', Resource id #53)
+#2 /home/jxl/public_html/sandbox/clipit01/engine/lib/entities.php(1059): get_data()
+#3 /home/jxl/public_html/sandbox/clipit01/engine/lib/entities.php(1004): _elgg_fetch_entities_from_sql('SELECT DISTINCT...', '', false)
+#4 /home/jxl/public_html/sandbox/clipit01/engine/lib/metadata.php(453): elgg_get_entities()
+#5 /home/jxl/public_html/sandbox/clipit01/engine/lib/relationships.php(307): elgg_get_entities_from_metadata()
+#6 /home/jxl/public_html/sandbox/clipit01/engine/lib/plugins.php(414): elgg_get_entities_from_relationship('SELECT DISTINCT...')
+#7 /home/jxl/public_html/sandbox/clipit01/engine/lib/plugins.php(341): elgg_get_plugins('SELECT DISTINCT...')
+#8 /home/jxl/public_html/sandbox/clipit01/engine/start.php(102): elgg_load_plugins()
+#9 /home/jxl/public_html/sandbox/clipit01/engine/handlers/page_handler.php(41): require_once('/home/jxl/publi...')
+#10 {main}
+[15-Jul-2013 06:50:32] Exception #1373896232: exception 'IncompleteEntityException' with message 'Secondary loader failed to return row for 28' in /home/jxl/public_html/sandbox/clipit01/engine/classes/ElggAttributeLoader.php:206
+Stack trace:
+#0 /home/jxl/public_html/sandbox/clipit01/engine/classes/ElggObject.php(103): ElggAttributeLoader->getRequiredAttributes(Object(stdClass))
+#1 /home/jxl/public_html/sandbox/clipit01/engine/classes/ElggObject.php(65): ElggObject->load(Object(stdClass))
+#2 /home/jxl/public_html/sandbox/clipit01/engine/classes/ElggPlugin.php(51): ElggObject->__construct(Object(stdClass))
+#3 /home/jxl/public_html/sandbox/clipit01/engine/lib/entities.php(661): ElggPlugin->__construct(Object(stdClass))
+#4 /home/jxl/public_html/sandbox/clipit01/engine/lib/database.php(424): entity_row_to_elggstar(Object(stdClass))
+#5 /home/jxl/public_html/sandbox/clipit01/engine/lib/database.php(379): elgg_query_runner('SELECT e.* from...', 'entity_row_to_e...', true)
+#6 /home/jxl/public_html/sandbox/clipit01/engine/lib/users.php(604): get_data_row()
+#7 /home/jxl/public_html/sandbox/clipit01/engine/lib/sessions.php(415): get_user_by_code('SELECT e.* from...', 'entity_row_to_e...')
+#8 /home/jxl/public_html/sandbox/clipit01/engine/lib/elgglib.php(2166): _elgg_session_boot()
+#9 /home/jxl/public_html/sandbox/clipit01/engine/lib/elgglib.php(784): _elgg_engine_boot('b7f4529246e0b1f...')
+#10 /home/jxl/public_html/sandbox/clipit01/engine/start.php(99): elgg_trigger_event()
+#11 /home/jxl/public_html/sandbox/clipit01/engine/handlers/page_handler.php(41): require_once('/home/jxl/publi...')
+#12 {main}
+[15-Jul-2013 06:50:40] Exception #1373896240: exception 'DatabaseException' with message 'Table 'jxl_clipit01.clipit01_sites_entity' doesn't exist
+
+ QUERY: SELECT * from clipit01_sites_entity where guid=1' in /home/jxl/public_html/sandbox/clipit01/engine/lib/database.php:274
+Stack trace:
+#0 /home/jxl/public_html/sandbox/clipit01/engine/lib/database.php(416): execute_query()
+#1 /home/jxl/public_html/sandbox/clipit01/engine/lib/database.php(379): elgg_query_runner('SELECT * from c...', Resource id #53)
+#2 /home/jxl/public_html/sandbox/clipit01/engine/lib/sites.php(48): get_data_row()
+#3 /home/jxl/public_html/sandbox/clipit01/engine/classes/ElggAttributeLoader.php(196): get_site_entity_as_row('SELECT * from c...', '', true)
+#4 /home/jxl/public_html/sandbox/clipit01/engine/classes/ElggSite.php(120): ElggAttributeLoader->getRequiredAttributes('SELECT * from c...')
+#5 /home/jxl/public_html/sandbox/clipit01/engine/classes/ElggSite.php(76): ElggSite->load('1')
+#6 /home/jxl/public_html/sandbox/clipit01/engine/lib/entities.php(685): ElggSite->__construct('get_site_entity...', '1')
+#7 /home/jxl/public_html/sandbox/clipit01/engine/lib/entities.php(754): entity_row_to_elggstar()
+#8 /home/jxl/public_html/sandbox/clipit01/engine/lib/configuration.php(556): get_entity(Object(stdClass))
+#9 /home/jxl/public_html/sandbox/clipit01/engine/lib/elgglib.php(2164): _elgg_load_site_config()
+#10 /home/jxl/public_html/sandbox/clipit01/engine/lib/elgglib.php(784): _elgg_engine_boot(Object(stdClass))
+#11 /home/jxl/public_html/sandbox/clipit01/engine/start.php(99): elgg_trigger_event(Object(stdClass))
+#12 /home/jxl/public_html/sandbox/clipit01/engine/handlers/page_handler.php(41): require_once('/home/jxl/publi...')
+#13 {main}
+[15-Jul-2013 06:52:18] PHP WARNING: 2013-07-15 06:52:18 (PDT): "json_encode() [<a href='function.json-encode'>function.json-encode</a>]: Invalid UTF-8 sequence in argument" in file /home/jxl/public_html/sandbox/clipit01/views/default/js/languages.php (line 33)
+[15-Jul-2013 06:52:18] PHP WARNING: 2013-07-15 06:52:18 (PDT): "json_encode() [<a href='function.json-encode'>function.json-encode</a>]: Invalid UTF-8 sequence in argument" in file /home/jxl/public_html/sandbox/clipit01/views/default/js/languages.php (line 33)
+[15-Jul-2013 06:52:18] PHP WARNING: 2013-07-15 06:52:18 (PDT): "json_encode() [<a href='function.json-encode'>function.json-encode</a>]: Invalid UTF-8 sequence in argument" in file /home/jxl/public_html/sandbox/clipit01/views/default/js/languages.php (line 33)
+[15-Jul-2013 06:52:25] PHP WARNING: 2013-07-15 06:52:25 (PDT): "json_encode() [<a href='function.json-encode'>function.json-encode</a>]: Invalid UTF-8 sequence in argument" in file /home/jxl/public_html/sandbox/clipit01/views/default/js/languages.php (line 33)
+[15-Jul-2013 06:52:25] PHP WARNING: 2013-07-15 06:52:25 (PDT): "json_encode() [<a href='function.json-encode'>function.json-encode</a>]: Invalid UTF-8 sequence in argument" in file /home/jxl/public_html/sandbox/clipit01/views/default/js/languages.php (line 33)
+[15-Jul-2013 06:52:25] PHP WARNING: 2013-07-15 06:52:25 (PDT): "json_encode() [<a href='function.json-encode'>function.json-encode</a>]: Invalid UTF-8 sequence in argument" in file /home/jxl/public_html/sandbox/clipit01/views/default/js/languages.php (line 33)
+[15-Jul-2013 06:52:29] PHP WARNING: 2013-07-15 06:52:29 (PDT): "json_encode() [<a href='function.json-encode'>function.json-encode</a>]: Invalid UTF-8 sequence in argument" in file /home/jxl/public_html/sandbox/clipit01/views/default/js/languages.php (line 33)
+[15-Jul-2013 06:52:29] PHP WARNING: 2013-07-15 06:52:29 (PDT): "json_encode() [<a href='function.json-encode'>function.json-encode</a>]: Invalid UTF-8 sequence in argument" in file /home/jxl/public_html/sandbox/clipit01/views/default/js/languages.php (line 33)
+[15-Jul-2013 06:52:29] PHP WARNING: 2013-07-15 06:52:29 (PDT): "json_encode() [<a href='function.json-encode'>function.json-encode</a>]: Invalid UTF-8 sequence in argument" in file /home/jxl/public_html/sandbox/clipit01/views/default/js/languages.php (line 33)
+[15-Jul-2013 06:52:42] PHP WARNING: 2013-07-15 06:52:42 (PDT): "json_encode() [<a href='function.json-encode'>function.json-encode</a>]: Invalid UTF-8 sequence in argument" in file /home/jxl/public_html/sandbox/clipit01/views/default/js/languages.php (line 33)
+[15-Jul-2013 06:52:42] PHP WARNING: 2013-07-15 06:52:42 (PDT): "json_encode() [<a href='function.json-encode'>function.json-encode</a>]: Invalid UTF-8 sequence in argument" in file /home/jxl/public_html/sandbox/clipit01/views/default/js/languages.php (line 33)
+[15-Jul-2013 06:52:42] PHP WARNING: 2013-07-15 06:52:42 (PDT): "json_encode() [<a href='function.json-encode'>function.json-encode</a>]: Invalid UTF-8 sequence in argument" in file /home/jxl/public_html/sandbox/clipit01/views/default/js/languages.php (line 33)
+[15-Jul-2013 06:54:07] PHP WARNING: 2013-07-15 06:54:07 (PDT): "json_encode() [<a href='function.json-encode'>function.json-encode</a>]: Invalid UTF-8 sequence in argument" in file /home/jxl/public_html/sandbox/clipit01/views/default/js/languages.php (line 33)
+[15-Jul-2013 06:54:07] PHP WARNING: 2013-07-15 06:54:07 (PDT): "json_encode() [<a href='function.json-encode'>function.json-encode</a>]: Invalid UTF-8 sequence in argument" in file /home/jxl/public_html/sandbox/clipit01/views/default/js/languages.php (line 33)
+[15-Jul-2013 06:54:07] PHP WARNING: 2013-07-15 06:54:07 (PDT): "json_encode() [<a href='function.json-encode'>function.json-encode</a>]: Invalid UTF-8 sequence in argument" in file /home/jxl/public_html/sandbox/clipit01/views/default/js/languages.php (line 33)
+[15-Jul-2013 06:58:38] PHP WARNING: 2013-07-15 06:58:38 (PDT): "json_encode() [<a href='function.json-encode'>function.json-encode</a>]: Invalid UTF-8 sequence in argument" in file /home/jxl/public_html/sandbox/clipit01/views/default/js/languages.php (line 33)
+[15-Jul-2013 06:58:38] PHP WARNING: 2013-07-15 06:58:38 (PDT): "json_encode() [<a href='function.json-encode'>function.json-encode</a>]: Invalid UTF-8 sequence in argument" in file /home/jxl/public_html/sandbox/clipit01/views/default/js/languages.php (line 33)
+[15-Jul-2013 06:58:38] PHP WARNING: 2013-07-15 06:58:38 (PDT): "json_encode() [<a href='function.json-encode'>function.json-encode</a>]: Invalid UTF-8 sequence in argument" in file /home/jxl/public_html/sandbox/clipit01/views/default/js/languages.php (line 33)
+[15-Jul-2013 07:05:48] PHP WARNING: 2013-07-15 07:05:48 (PDT): "Missing argument 1 for action_gatekeeper(), called in /home/jxl/public_html/sandbox/clipit01/mod/elggx_fivestar/actions/settings.php on line 11 and defined" in file /home/jxl/public_html/sandbox/clipit01/engine/lib/actions.php (line 307)
+[15-Jul-2013 08:58:33] PHP Parse error:  syntax error, unexpected $end in /home/jxl/public_html/sandbox/clipit01/mod/clipit/start.php on line 143
+[15-Jul-2013 08:58:37] PHP Parse error:  syntax error, unexpected $end in /home/jxl/public_html/sandbox/clipit01/mod/clipit/start.php on line 143
+[15-Jul-2013 08:58:42] PHP Parse error:  syntax error, unexpected $end in /home/jxl/public_html/sandbox/clipit01/mod/clipit/start.php on line 143
+[15-Jul-2013 08:58:43] PHP Parse error:  syntax error, unexpected $end in /home/jxl/public_html/sandbox/clipit01/mod/clipit/start.php on line 143
+[15-Jul-2013 08:59:36] PHP Parse error:  syntax error, unexpected $end in /home/jxl/public_html/sandbox/clipit01/mod/clipit/start.php on line 143
+[15-Jul-2013 08:59:36] PHP Parse error:  syntax error, unexpected $end in /home/jxl/public_html/sandbox/clipit01/mod/clipit/start.php on line 143
+[15-Jul-2013 08:59:38] PHP Parse error:  syntax error, unexpected $end in /home/jxl/public_html/sandbox/clipit01/mod/clipit/start.php on line 143
+[15-Jul-2013 08:59:39] PHP Parse error:  syntax error, unexpected $end in /home/jxl/public_html/sandbox/clipit01/mod/clipit/start.php on line 143
+[15-Jul-2013 08:59:39] PHP Parse error:  syntax error, unexpected $end in /home/jxl/public_html/sandbox/clipit01/mod/clipit/start.php on line 143
+[15-Jul-2013 09:00:01] PHP Parse error:  syntax error, unexpected $end in /home/jxl/public_html/sandbox/clipit01/mod/clipit/start.php on line 143
+[15-Jul-2013 09:00:01] PHP Parse error:  syntax error, unexpected $end in /home/jxl/public_html/sandbox/clipit01/mod/clipit/start.php on line 143
+[15-Jul-2013 09:00:02] PHP Parse error:  syntax error, unexpected $end in /home/jxl/public_html/sandbox/clipit01/mod/clipit/start.php on line 143
+[15-Jul-2013 09:00:21] PHP Parse error:  syntax error, unexpected $end in /home/jxl/public_html/sandbox/clipit01/mod/clipit/start.php on line 143
+[15-Jul-2013 09:00:27] PHP Parse error:  syntax error, unexpected $end in /home/jxl/public_html/sandbox/clipit01/mod/clipit/start.php on line 143
+[15-Jul-2013 09:00:28] PHP Parse error:  syntax error, unexpected $end in /home/jxl/public_html/sandbox/clipit01/mod/clipit/start.php on line 143
+[15-Jul-2013 09:02:41] PHP Parse error:  syntax error, unexpected $end in /home/jxl/public_html/sandbox/clipit01/mod/clipit/start.php on line 144
+[15-Jul-2013 09:02:42] PHP Parse error:  syntax error, unexpected $end in /home/jxl/public_html/sandbox/clipit01/mod/clipit/start.php on line 144
+[15-Jul-2013 09:02:43] PHP Parse error:  syntax error, unexpected $end in /home/jxl/public_html/sandbox/clipit01/mod/clipit/start.php on line 144
+[15-Jul-2013 09:03:20] PHP Parse error:  syntax error, unexpected $end in /home/jxl/public_html/sandbox/clipit01/mod/clipit/start.php on line 143
+[15-Jul-2013 09:03:21] PHP Parse error:  syntax error, unexpected $end in /home/jxl/public_html/sandbox/clipit01/mod/clipit/start.php on line 143
+[15-Jul-2013 09:03:23] PHP Parse error:  syntax error, unexpected $end in /home/jxl/public_html/sandbox/clipit01/mod/clipit/start.php on line 143
+[15-Jul-2013 09:03:23] PHP Parse error:  syntax error, unexpected $end in /home/jxl/public_html/sandbox/clipit01/mod/clipit/start.php on line 143
+[15-Jul-2013 09:03:24] PHP Parse error:  syntax error, unexpected $end in /home/jxl/public_html/sandbox/clipit01/mod/clipit/start.php on line 143
+[15-Jul-2013 09:03:25] PHP Parse error:  syntax error, unexpected $end in /home/jxl/public_html/sandbox/clipit01/mod/clipit/start.php on line 143
+[15-Jul-2013 09:03:25] PHP Parse error:  syntax error, unexpected $end in /home/jxl/public_html/sandbox/clipit01/mod/clipit/start.php on line 143
+[15-Jul-2013 09:05:56] PHP Parse error:  syntax error, unexpected $end in /home/jxl/public_html/sandbox/clipit01/mod/clipit/start.php on line 143
+[15-Jul-2013 09:05:58] PHP Parse error:  syntax error, unexpected $end in /home/jxl/public_html/sandbox/clipit01/mod/clipit/start.php on line 143
+[15-Jul-2013 09:05:59] PHP Parse error:  syntax error, unexpected $end in /home/jxl/public_html/sandbox/clipit01/mod/clipit/start.php on line 143
+[15-Jul-2013 09:06:00] PHP Parse error:  syntax error, unexpected $end in /home/jxl/public_html/sandbox/clipit01/mod/clipit/start.php on line 143
+[15-Jul-2013 09:06:00] PHP Parse error:  syntax error, unexpected $end in /home/jxl/public_html/sandbox/clipit01/mod/clipit/start.php on line 143

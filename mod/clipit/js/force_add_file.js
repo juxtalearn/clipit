@@ -19,12 +19,12 @@ $(function(){
     $("form.elgg-form-blog-save").submit(function(){
         var errors = [];
         if($videoTitle.val().length == 0){
-            errors.push("Debe rellenar el título");
+            errors.push(elgg.echo('forceAddFile:title'));
         } else {
             checkTitle = true;
         }
         if(!checkAddFile_1 || !checkAddFile_2){
-            errors.push("Debe insertar al menos 1 archivo");
+            errors.push(elgg.echo('forceAddFile:filerequired'));
         }
         if(checkAddFile_1 && checkAddFile_2 && checkTitle){
             return true;
