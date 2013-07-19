@@ -15,7 +15,7 @@
     <label class="row-jxl-login" for="inputPassword"><?php echo elgg_echo('password'); ?></label>
     <input class="row-jxl-login input-jxl-login" type="password" name="password" id="inputPassword" placeholder="<?php echo elgg_echo('password'); ?>" required>
     <div class="row-jxl-login">
-        <label class="checkbox">
+        <label>
             <input type="checkbox" name="persistent" value="true" checked="true">
             <?php echo elgg_echo('user:persistent'); ?>
         </label>
