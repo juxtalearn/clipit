@@ -3,7 +3,7 @@
 class Field
 {
 	 
-	var $FieldType=array('ACTUAL'=>'ACTUAL','FORMAL'=>'FORMAL','SEMIFORMAL'=>'SEMIFORMAL','WILDCARD'=>'WILDCARD');
+	var $FieldType=array('ACTUAL'=>'ACTUAL','FORMAL'=>'FORMAL','SEMIFORMAL'=>'SEMIFORMAL','WILDCARD'=>'WILDCARD','INVERSE'=>'INVERSE');
 	private  $value;
 	private  $type;
 	private  $fieldType;
@@ -19,8 +19,14 @@ class Field
 			$fieldValue=str_replace("\n","&#10;",$fieldValue);
 			$fieldValue=str_replace("\r","&#13;",$fieldValue);
 			$fieldValue=str_replace("\t","&#9;;",$fieldValue);
-			$newFieldValue=utf8_decode($fieldValue);
 
+
+            if ( mb_detect_encoding($fieldValue) != "UTF-8") {
+                //$newFieldValue=utf8_decode($fieldValue);
+                $newFieldValue=utf8_encode($fieldValue);
+            }  else {
+                $newFieldValue = $fieldValue;
+            }
 			$this->value=$newFieldValue;
 			$this->type=$type;
 			$this->fieldType = $this->FieldType['ACTUAL'];
@@ -31,18 +37,25 @@ class Field
 	{
 		$fieldTypeStr=$nodeField->getAttribute('fieldtype');
 		$this->fieldType=strtoupper($fieldTypeStr);
+
 		if($this->fieldType!=$this->FieldType['WILDCARD'])
 		{
 			$className=$nodeField->getAttribute('type');
+
 			if(strnatcmp($className,"xml")!=0)
 			{
+
 				$this->type=$className;
 				$ubStr=$nodeField->getAttribute('upper-bound');
 				$lbStr=$nodeField->getAttribute('lower-bound');
 				if ($this->fieldType!=$this->FieldType['FORMAL']|| $ubStr!=null || $lbStr!=null)
 				{
-					$this->value=$nodeField->nodeValue;
-				}
+                    if ( strnatcmp($this->type,"boolean") == 0 ) {
+                        $this->value = ( $nodeField->nodeValue === 'true' ) ;
+                    }   else {
+                        $this->value=$nodeField->nodeValue;
+                    }
+                }
 				else
 				{
 					if($ubStr!=null)
@@ -79,6 +92,7 @@ class Field
 				if ($this->fieldType == $this->FieldType['FORMAL']) {
 					 
 					$this->value = $nodeField->nodeValue;
+
 				}
 			}
 		}
@@ -97,6 +111,20 @@ class Field
 	{
 		$this->setFieldType('WILDCARD');
 		$this->type = null;
+	}
+
+	public function createSemiformalField($value)
+	{
+		$this->setFieldType('SEMIFORMAL');
+		$this->type = "string";
+		$this->value = $value;
+	}
+
+	public function createInverseField($value)
+	{
+		$this->setFieldType('INVERSE');
+		$this->type = "string";
+		$this->value = $value;
 	}
 
 	public function setFieldType($fieldType) {
@@ -144,6 +172,16 @@ class Field
 					$cdata=$dom->createCDATASection(sqlite_udf_encode_binary($this->value));
 					$field->appendChild($cdata);
 				}
+                elseif($this->type=="boolean") {
+                    $field = $dom->createElement("field");
+                    if ( $this->value) {
+                        $cdata=$dom->createCDATASection("true");
+
+                    }    else {
+                        $cdata=$dom->createCDATASection("false");
+                    }
+                    $field->appendChild($cdata);
+                }
 				else
 				{
 					$field = $dom->createElement("field");
@@ -175,7 +213,6 @@ class Field
 
 				if ($this->type=="Document") {
 					$field->setAttribute("type", "xml");
-
 				}
 				else
 				{

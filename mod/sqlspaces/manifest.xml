@@ -11,7 +11,7 @@
 		<type>elgg_release</type>
 		<version>1.8</version>
 	</requires>
-	<activate_on_install>false</activate_on_install>
+	<activate_on_install>true</activate_on_install>
 	<field key="author" value="Oliver Daems" />
 	<field key="version" value="0.1" />
 	<field key="description" value="Adds SQLSpaces logging to supplement the standard elgg logging." />

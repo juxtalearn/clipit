@@ -2,7 +2,6 @@
 
 $dir=dirname(dirname(__FILE__));
 require_once("$dir/commons/command/ConnectCommand.php");
-require_once('ClientConnector.php');
 require_once("$dir/commons/command/TSResponse.php");
 require_once("$dir/commons/Version.php");
 require_once("$dir/commons/command/GetVersionsCommand.php");
@@ -212,7 +211,7 @@ class TupleSpace
 
 		$resp = $this->connector->sendReceive(new QueryCommand($t, true, false, false, 0, $spaceIds));
 
-		if ($resp->getType()==$resp->responseType[ANSWER] && (count($resp->getTuples()) != 0)) {
+		if ($resp->getType()==$resp->responseType['ANSWER'] && (count($resp->getTuples()) != 0)) {
 			return $resp->getTuples();
 		} else {
 			return null;
@@ -254,7 +253,7 @@ class TupleSpace
 		$spaceIds=$this->getSpaceIds($readThisSpaces);
 
 		$resp = $this->connector->sendReceive(new QueryCommand($tuple, true, true, false, 0, $spaceIds));
-		if (strcmp($resp->getType(),$resp->responseType[ANSWER])==0 && ($resp->getTupleCount() != 0)) {
+		if (strcmp($resp->getType(),$resp->responseType['ANSWER'])==0 && ($resp->getTupleCount() != 0)) {
 			return $resp->getTuples();
 		}
 		else

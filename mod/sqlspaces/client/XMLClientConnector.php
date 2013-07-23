@@ -8,6 +8,7 @@ function getProperty($propertie)
 }
 
 require_once("Net/Socket.php");
+require_once("ClientConnector.php");
 
 class XMLClientConnector
 {
@@ -26,7 +27,7 @@ class XMLClientConnector
 		// Verbindung zum Zeit-Server aufbauen
 		$result=$this->socket->connect($host, $port);
 		// Ist ein Fehler beim Verbindungsaufbau aufgetreten?
-		if (true===PEAR::isError($result))
+		if (true===$this->socket->isError($result))
 		{
 			die ($result->getMessage());
 		}
@@ -37,7 +38,6 @@ class XMLClientConnector
 	{
 		$stringIn = $c->toXML();
 		$stringIn = substr($stringIn, 39);
-			
 		$this->socket->write($stringIn);
 			
 		$resp =$this->read();
@@ -54,7 +54,7 @@ class XMLClientConnector
 		$result = $this->socket->readLine();
 
 		// Fehler aufgetreten?
-		if (true===PEAR::isError($result))
+		if (true===$this->socket->isError($result))
 		{
 			die ($result->getMessage());
 		}
@@ -62,9 +62,13 @@ class XMLClientConnector
 		if($result!=null)
 		{
 			$doc = new DOMDocument();
+            if ( mb_detect_encoding($result) != "UTF-8") {
+                $response=utf8_encode($result);
+            }  else {
+                $response = $result;
+            }
 
-			$response=utf8_encode($result);
-			$doc->loadXML($response);
+            $doc->loadXML($response);
 			$doc->preserveWhiteSpace=false;
 				
 			$responses=$doc->getElementsByTagName('response');
