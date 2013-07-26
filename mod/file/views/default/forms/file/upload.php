@@ -10,6 +10,13 @@ $title = elgg_extract('title', $vars, '');
 $desc = elgg_extract('description', $vars, '');
 $tags = elgg_extract('tags', $vars, '');
 $access_id = elgg_extract('access_id', $vars, ACCESS_DEFAULT);
+
+$group_guid     = elgg_get_page_owner_guid();
+$group          = get_entity($group_guid);
+$group_real_id  = $group->group_acl;
+$access_id = $group_real_id ? $group_real_id : $access_id;
+
+
 $container_guid = elgg_extract('container_guid', $vars);
 if (!$container_guid) {
 	$container_guid = elgg_get_logged_in_user_guid();
@@ -50,7 +57,7 @@ if ($categories) {
 
 ?>
 <div>
-	<label><?php echo elgg_echo('access'); ?></label><br />
+	<label><?php echo elgg_echo('access'); ?></label>
 	<?php echo elgg_view('input/access', array('name' => 'access_id', 'value' => $access_id)); ?>
 </div>
 <div class="elgg-foot">

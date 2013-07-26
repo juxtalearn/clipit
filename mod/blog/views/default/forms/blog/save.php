@@ -97,11 +97,16 @@ $tags_input = elgg_view('input/tags', array(
 	'value' => $vars['tags']
 ));
 
+$group_guid     = elgg_get_page_owner_guid();
+$group          = get_entity($group_guid);
+$group_real_id  = $group->group_acl;
+$selectedAccess = $group_real_id ? $group_real_id : $vars['access_id'];
+
 $access_label = elgg_echo('access');
 $access_input = elgg_view('input/access', array(
 	'name' => 'access_id',
 	'id' => 'blog_access_id',
-	'value' => $vars['access_id']
+	'value' => $selectedAccess
 ));
 
 $categories_input = elgg_view('input/categories', $vars);
@@ -109,7 +114,6 @@ $categories_input = elgg_view('input/categories', $vars);
 // hidden inputs
 $container_guid_input = elgg_view('input/hidden', array('name' => 'container_guid', 'value' => elgg_get_page_owner_guid()));
 $guid_input = elgg_view('input/hidden', array('name' => 'guid', 'value' => $vars['guid']));
-
 
 echo <<<___HTML
 

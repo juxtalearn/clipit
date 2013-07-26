@@ -70,7 +70,7 @@ function clipit_init() {
     elgg_register_plugin_hook_handler('entity:icon:url', 'object', 'clipit_file_icon_url_override');
 }
 
-    /**
+ /**
  * Override the default entity icon for files
  *
  * Plugins can override or extend the icons using the plugin hook: 'file:icon:url', 'override'
