@@ -112,10 +112,10 @@
 											  "`content` longtext NOT NULL, ".
 											  "PRIMARY KEY (`log_id`) ".
 											") ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;");
-						system_message("INSERT INTO `sqlslogging` ".
-											"(object_id, transaction_id, object_class, object_type, object_subtype, event, time, ip_address, performed_by, access_id, enabled, owner_guid, content) ".
-									 "VALUES (".$object_id.", '".$transaction_id."', '".$object_class."', '".$object_type."', '".$object_subtype."', '".$event."', '".$time."', '".$ip_address."', '".$performed_by."', ".$access_id.", '".$enabled."', ".$owner_guid.", 'emtpy');");
-
+// 						system_message("INSERT INTO `sqlslogging` ".
+//											"(object_id, transaction_id, object_class, object_type, object_subtype, event, time, ip_address, performed_by, access_id, enabled, owner_guid, content) ".
+//									 "VALUES (".$object_id.", '".$transaction_id."', '".$object_class."', '".$object_type."', '".$object_subtype."', '".$event."', '".$time."', '".$ip_address."', '".$performed_by."', ".$access_id.", '".$enabled."', ".$owner_guid.", 'emtpy');");
+                        
 						mysqli_query($con,"INSERT INTO `sqlslogging` ".
 											"(object_id, transaction_id, object_class, object_type, object_subtype, event, time, ip_address, performed_by, access_id, enabled, owner_guid, content) ".
 									 "VALUES (".$object_id.", '".$transaction_id."', '".$object_class."', '".$object_type."', '".$object_subtype."', '".$event."', '".$time."', '".$ip_address."', '".$performed_by."', ".$access_id.", '".$enabled."', ".$owner_guid.", 'emtpy');");
