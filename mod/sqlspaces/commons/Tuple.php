@@ -129,27 +129,6 @@ class Tuple
 		array_push($this->fieldsArray,$field);
 	}
 	
-	public function addWildcardField()
-	{
-		$field=new Field();
-		$field->setFieldType('WILDCARD');
-		array_push($this->fieldsArray,$field);
-	}
-	
-	public function addSemiformalField($value)
-	{
-		$field=new Field($value, "string");
-		$field->setFieldType('SEMIFORMAL');
-		array_push($this->fieldsArray,$field);
-	}
-	
-	public function addInverseField($value)
-	{
-		$field=new Field($value, "string");
-		$field->setFieldType('INVERSE');
-		array_push($this->fieldsArray,$field);
-	}
-	
 	public function getFields()
 	{
 		return $this->fieldsArray;
