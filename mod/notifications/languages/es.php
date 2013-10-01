@@ -11,7 +11,7 @@ $spanish = array(
 	'notifications:subscriptions:personal:title' => 'Notificaciones personales',
 
 	'notifications:subscriptions:friends:title' => 'Amigos',
-	'notifications:subscriptions:friends:description' => 'A continuación están sus colecciones de amigos. Seleccionar una colecció habilitará las notificaciones de los amigos en esa colección.',
+	'notifications:subscriptions:friends:description' => 'A continuación están sus colecciones de amigos. Al seleccionar una colección se habilitarán las notificaciones de los amigos en esa colección.',
 	'notifications:subscriptions:collections:edit' => 'Para editar sus notificaciones de acceso compartido, haga click aquí.',
 
 	'notifications:subscriptions:changesettings' => 'Notificaciones',
