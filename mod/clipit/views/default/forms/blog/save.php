@@ -5,6 +5,7 @@
  * @package Blog
  */
 
+
 $blog = get_entity($vars['guid']);
 $vars['entity'] = $blog;
 
