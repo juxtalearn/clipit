@@ -5,6 +5,7 @@
  * @package Elgg
  * @subpackage Core
  */
+
 ?>
 
 <?php echo elgg_view('login/extend', $vars); ?>
