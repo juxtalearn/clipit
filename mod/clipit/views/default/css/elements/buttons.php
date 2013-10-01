@@ -42,6 +42,12 @@
     float:right;
 }
 
+/* Register Page SUbmit Button */
+
+form.elgg-form-register button[type=submit]{
+     float:left !important;
+}
+
 .elgg-button-submit:hover {
 	text-decoration: none;
 }

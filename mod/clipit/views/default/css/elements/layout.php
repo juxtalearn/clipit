@@ -75,6 +75,13 @@
 .elgg-layout {
 	min-height: 0px;
 }
+
+.elgg-layout-one-column {
+    background: rgba(255,255,255,0.9);
+    padding: 10px 0;
+    box-shadow: 2px 3px 8px 2px rgba(150,150,150,0.8);
+}
+
 .elgg-layout-one-sidebar {
     padding: 10px 0;
 	background: rgba(255,255,255,0.9);

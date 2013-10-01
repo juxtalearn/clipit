@@ -46,12 +46,12 @@ function clipit_init() {
         elgg_register_js("jquery-migrate", $CONFIG->url . "mod/clipit/vendors/jquery/jquery-migrate-1.1.1.js", "head", 1);
         elgg_register_js("jquery-ui", $CONFIG->url . "mod/clipit/vendors/jquery-ui-1.10.2.custom/js/jquery-ui-1.10.2.custom.min.js", "head", 2);
         elgg_register_js("twitter-bootstrap", $CONFIG->url . "mod/clipit/vendors/bootstrap/js/bootstrap.min.js");
-        //elgg_register_js("forceAddFile", $CONFIG->url . "mod/clipit/js/force_add_file.js");
+        elgg_register_js("forceAddFile", $CONFIG->url . "mod/clipit/js/force_add_file.js");
         elgg_load_css("ui-lightness");
         elgg_load_css("twitter-bootstrap");
         elgg_load_js("jquery-migrate");
         elgg_load_js("twitter-bootstrap");
-        //elgg_load_js("forceAddFile");
+        elgg_load_js("forceAddFile");
         elgg_load_css("righteous");
         elgg_load_css("ubuntu");
         elgg_load_css("bubblegum");
@@ -65,12 +65,12 @@ function clipit_init() {
     // Deshabilitar la opción de no mostrar el editor de texto TinyMCE
     elgg_unregister_plugin_hook_handler('register', 'menu:longtext', 'tinymce_longtext_menu');
     
-    elgg_unregister_plugin_hook_handler('entity:icon:url', 'object', 'file_icon_url_override');
+   elgg_unregister_plugin_hook_handler('entity:icon:url', 'object', 'file_icon_url_override');
     
     elgg_register_plugin_hook_handler('entity:icon:url', 'object', 'clipit_file_icon_url_override');
 }
 
- /**
+    /**
  * Override the default entity icon for files
  *
  * Plugins can override or extend the icons using the plugin hook: 'file:icon:url', 'override'
