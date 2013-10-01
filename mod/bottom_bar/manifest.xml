@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin_manifest>
+<field key="author" value="Jay Eames, Sitback, modificado por mariano tomasini" />
+<field key="version" value="1.9final" />
+<field key="website" value="http://www.notwall.com, http://sitback.dyndns.org" />
+<field key="description" value="Add a bottom bar similar to Facebook" />
+<field key="copyright" value="(c) Jay Eames, 2009 (c) notwall, inc 2013" />
+<field key="licence" value="GNU Public License version 2" />
+<field key="elgg_version" value="1.8.11" />
+</plugin_manifest>

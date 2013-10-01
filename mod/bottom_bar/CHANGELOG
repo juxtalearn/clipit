@@ -1,0 +1,124 @@
+Elgg - Bottom Bar - Facebook style footer bar
+Author: Jay Eames
+License: GNU Public License version
+Website: http://sitback.dyndns.org
+Contact: lxuk@hotmail.com
+
+-= version 0.10 alpha =-
+released 10th May 2010
+
+-- Changes --
+* Added function to disable sounds at global level
+
+-- Bug Fixes --
+* None
+
+-- Known Issues --
+* Still a bug with the cookie size .. work in progress
+
+
+-= version 0.9 alpha =-
+released 29th April 2010
+
+-- Changes --
+* None
+
+-- Bug Fixes --
+* Fixed cookie size bug in IE
+* Fixed bug where system would fail if sqlite was not installed
+
+
+-= version 0.8 alpha =-
+released 8th November 2009
+
+-- Changes --
+* None
+
+-- Bug Fixes --
+* Fixed error that prevented MySQL table being created
+
+
+-= version 0.7 alpha =-
+released 4th November 2009
+
+-- Changes --
+* Added ability to use MySQL natively as well as ELGG Objects
+
+-- Bug Fixes --
+* Various minor tidyups
+
+
+-= version 0.6 alpha =-
+released 12th October 2009
+
+-- Changes --
+* Added ability to use MySQL via ELGG objects for chat instead of SQLite
+* Automatically select MySQL/ELGG method if php5_sqlite not installed
+
+-- Bug Fixes --
+* None from previous functions
+
+
+-= version 0.5 alpha =-
+released 3rd October 2009
+
+-- Changes --
+* None - quick release for bug fix
+
+-- Bug Fixes --
+* Fixed issue with left menu not showing correctly
+
+
+-= version 0.4 alpha =-
+released 3rd October 2009
+
+-- Changes --
+* Added admin ability to swap the left hand menu for "the wire" posting page, or disable all together
+* Added a Flash MP3/Icecast player to allow site admins to add a site "podcast" or radio station
+
+-- Bug fixes --
+* Fixed menu div not showing above the page
+* Fixed (hopefully) the tinyMCE editor appearing in the chat windows - bit of a hack at the moment
+
+
+-= version 0.3.alpha =-
+released 1st October 2009
+
+-- Changes --
+* Changed behaviour of link parsing in chat messages so that internal site links open in the same window
+* Added menu on clicking of logo bottom left (with Admin disable option)
+
+-- Bug fixes --
+* Cleared div cookie on logout to try and prevent problem content re-appearing
+* Fixed language bug in "friends online" listing
+* Fixed bug where some friends would not show up online
+
+
+-= version 0.2.alpha =-
+released 28th September 2009
+
+-- Changes --
+* Added refresh rate, idle & offline threshold, chat on/off, force logout and logo admin options
+* Added chat on/off and sounds on/off user settings
+* Added mini pics to the friends online list, user selectable on/off
+* Added basic text parsing for smilies, url (to hyperlinks) and emotes (/me and /me 's)
+* Added basic chat system
+* Added language support
+* Added last message(s) recall
+* Added cookie support for last messages & chat window status
+
+-- Bug fixes --
+* Fixed CSS bug where bar was not 100% width
+* Fixed issue where logged out users were given the login page in the notification and friends divs
+
+
+-= version 0.1.alpha =-
+released 20th September 2009
+
+-- Changes --
+* First release of plugin to test compatibility
+* River notifications with auto update
+* Friends online list
+
+-- Bug fixes --
+* N/A

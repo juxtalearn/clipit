@@ -1,0 +1,56 @@
+Elgg - Bottom Bar - Facebook style footer bar
+Author: Jay Eames
+License: GNU Public License version
+Website: http://sitback.dyndns.org
+
+
+== IMPORTANT NOTE ==
+
+Please note that this plugin is still very much alpha software. 
+It is probably full of bugs at the moment, and in such should 
+not considered suitable for a production site at present. 
+
+USE AT YOUR OWN RISK!
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+
+-- DEPENDENCIES --
+
+If you want to use SQLite as your chat backend, you need to 
+have php5_sqllite installed on your system - refer to your
+distributions documentation for how to do this
+
+
+-- INSTALLATION --
+
+1. Copy the bottom_bar folder and contents to the "mod" directory 
+of your ELGG installation
+
+2. IMPORTANT: Make sure that you set the "bottom_bar/data" folder 
+to be writable by the web server user
+   e.g. 
+	chown www-data:www-data bottom_bar/data
+	chmod 755 bottom_bar/data
+
+3. Go to the tools administration page on ELGG and enable the 
+bottom_bar plugin.
+
+4. Once enabled, update the settings for the plugin as you see fit.
+
+5. Enjoy! :)
+
+
+-- INTERNET RADIO / PODCAST --
+
+To get this feature to work, you need to either host an MP3 on your
+server, or know the address of an icecast (not shoutcast) server.
+
+e.g. - http://scfire-ntc-aa07.stream.aol.com:80/stream/1003
+
+Hint - If you are looking for streams to test with, try Digitally 
+Imported - http://www.di.fm - their streams are known to work with 
+this player
