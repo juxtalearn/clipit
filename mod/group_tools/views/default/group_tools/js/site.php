@@ -12,7 +12,7 @@ elgg.group_tools.mail_form_submit = function(){
 		error_msg += elgg.echo("group_tools:mail:form:js:members") + '\n';
 		error_count++;
 	}
-
+	
 	if($(this).find('input[name="description"]').val() == ""){
 		error_msg += elgg.echo("group_tools:mail:form:js:description") + '\n';
 		error_count++;
@@ -23,7 +23,7 @@ elgg.group_tools.mail_form_submit = function(){
 	} else {
 		result = true;
 	}
-
+	
 	return result;
 }
 
@@ -70,9 +70,6 @@ elgg.group_tools.cleanup_highlight = function(section){
 		case "featured":
 			$('div.elgg-sidebar').append('<div id="group_tools_featured_example" class="group-tools-highlight">' + elgg.echo('groups:featured') + '</div>');
 			break;
-		case "my_status":
-			$('div.elgg-sidebar').append('<div id="group_tools_my_status_example" class="group-tools-highlight">' + elgg.echo('groups:my_status') + '</div>');
-			break;
 	}
 }
 
@@ -93,23 +90,7 @@ elgg.group_tools.cleanup_unhighlight = function(section){
 		case "featured":
 			$('#group_tools_featured_example').remove();
 			break;
-		case "my_status":
-			$('#group_tools_my_status_example').remove();
-			break;
 	}
-}
-
-elgg.group_tools.order_groups = function(){
-	var ordered_ids = new Array();
-	$('.group-tools-list-ordered > li').each(function(){
-		group_id = $(this).attr("id").replace("elgg-group-", "");
-		ordered_ids.push(group_id);
-	});
-	elgg.action("group_tools/order_groups", {
-		data: {
-			guids: ordered_ids
-		}
-	});
 }
 
 elgg.group_tools.init = function(){
@@ -119,31 +100,7 @@ elgg.group_tools.init = function(){
 	// group mail members
 	$('#group_tools_mail_member_selection input[type=checkbox]').live("change", elgg.group_tools.mail_update_recipients);
 	$('#group_tools_mail_form').submit(elgg.group_tools.mail_form_submit);
-
-	$('.group-tools-list-ordered').sortable({
-		update: elgg.group_tools.order_groups
-	});
-
-	// discussion start widget
-	if ($('#group-tools-start-discussion-widget-form').length) {
-		$('#group-tools-start-discussion-widget-form').submit(function() {
-			var selected_group = $('#group-tools-discussion-quick-start-group').val();
-			if (selected_group !== "0") {
-				$('#group-tools-discussion-quick-start-access_id option').removeAttr("selected");
-				$('#group-tools-discussion-quick-start-access_id option').each(function(index, elem) {
-					if ($(elem).html() == selected_group) {
-						$(elem).attr("selected", "selected");
-					}
-				});
-			} else {
-				elgg.register_error(elgg.echo("group_tools:forms:discussion:quick_start:group:required"));
-				return false;
-			}
-		});
-	}
 }
-
-
 
 //register init hook
 elgg.register_hook_handler("init", "system", elgg.group_tools.init);
