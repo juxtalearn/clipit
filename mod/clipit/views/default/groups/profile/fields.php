@@ -2,6 +2,7 @@
 /**
  * Group profile fields
  */
+
 $group = $vars['entity'];
 $profile_fields = elgg_get_config('group');
 
