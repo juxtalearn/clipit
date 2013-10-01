@@ -9,7 +9,7 @@ $spanish = array(
 'friend_request:friend:add:pending' => "Solicitud de Amistad Pendiente",
 
 'friend_request:newfriend:subject' => "¡%s quiere ser tu amigo!",
-'friend_request:newfriend:body' => "¡%s quiere ser tu amigo! Pero está esperando la aprobación de la solicitud ... así que inicia sesión ahora para que puedas aprobar la petición
+'friend_request:newfriend:body' => "¡%s quiere ser tu amigo! Pero está esperando la aprobación de la solicitud ... así que inicia sesión ahora para que puedas aceptar la petición
 
 Puedes ver tus solicitudes de amistad pendientes en:
 %s
@@ -21,11 +21,11 @@ Asegúrate de haber iniciado sesión en el sitio web antes de hacer clic en el s
 // Actions
 // Add request
 'friend_request:add:failure' => "Lo sentimos, debido a un error del sistema no se pudo completar tu solicitud. Por favor, inténtelo de nuevo.",
-'friend_request:add:successful' => "Haz solicitado ser amigo de %s. Deben aprobar tu solicitud antes de que se muestre en tu lista de amigos.",
+'friend_request:add:successful' => "Haz solicitado ser amigo de %s. Deben aceptar tu solicitud antes de que se muestre en tu lista de amigos.",
 'friend_request:add:exists' => "Ya has solicitado ser amigo de %s.",
 
 // Approve request
-'friend_request:approve' => "Aprobar",
+'friend_request:approve' => "Aceptar",
 'friend_request:approve:successful' => "%s es ahora un Amigo",
 'friend_request:approve:fail' => "Error al crear relación de Amistad con %s",
 
