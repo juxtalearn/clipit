@@ -7,6 +7,7 @@
 	 * @uses $vars['invitations'] Array of ElggUsers who where invited
 	 */
 	
+
 	// show membership requests
 	$title = elgg_echo("group_tools:groups:membershipreq:requests");
 	
