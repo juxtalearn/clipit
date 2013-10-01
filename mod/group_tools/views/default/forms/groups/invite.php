@@ -140,7 +140,7 @@
 ?>
 <script type="text/javascript">
 	function group_tools_group_invite_switch_tab(tab){
-		$('#invite_to_group li').removeClass('elgg-state-selected');
+		$('#invite_to_group li').removeClass('elgg-state-selected active');
 
 		$('#invite_to_group li.elgg-menu-item-' + tab).addClass('elgg-state-selected');
 
