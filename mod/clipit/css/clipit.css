@@ -33,6 +33,6 @@
     float: none;
     margin: 4px 0;
 }
-.file-comments{
+.file-comments form.elgg-form-comments-add{
     display:none;
 }
