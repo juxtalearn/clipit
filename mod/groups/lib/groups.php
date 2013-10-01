@@ -526,7 +526,7 @@ function groups_register_profile_buttons($group) {
 function groups_prepare_form_vars($group = null) {
 	$values = array(
 		'name' => '',
-		'membership' => ACCESS_PUBLIC,
+		'membership' => ACCESS_PRIVATE,
 		'vis' => ACCESS_PUBLIC,
 		'guid' => null,
 		'entity' => null
