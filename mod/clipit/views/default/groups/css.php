@@ -4,7 +4,6 @@
  * 
  * @package groups
  */
-
 ?>
 .groups-profile > .elgg-image {
 	margin-right: 10px;
