@@ -16,6 +16,7 @@ $group_guid = elgg_get_page_owner_guid();
 $group = get_entity($group_guid);
 $group_real_id = $group->group_acl;
 $access_id = $group_real_id ? $group_real_id : $access_id;
+
 ?>
 <div>
 	<label><?php echo elgg_echo('title'); ?></label><br />
