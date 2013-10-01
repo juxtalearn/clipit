@@ -29,7 +29,6 @@ if ($guid) {
 	$file_label = elgg_echo("file:file");
 	$submit_label = elgg_echo('upload');
 }
-
 ?>
 <div>
 	<label><?php echo $file_label; ?></label><br />
