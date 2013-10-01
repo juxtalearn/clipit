@@ -8,7 +8,6 @@
  * @uses $vars['img_class']  Optional CSS class added to img
  * @uses $vars['link_class'] Optional CSS class added to link
  */
-
 $entity = $vars['entity'];
 
 $sizes = array('small', 'medium', 'large', 'tiny', 'master', 'topbar');
