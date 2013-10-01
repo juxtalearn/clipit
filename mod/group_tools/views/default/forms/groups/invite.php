@@ -30,9 +30,9 @@
 				"text" => elgg_echo("friends"),
 				"href" => "#",
 				"rel" => "friends",
-				"priority" => 200,
+				"priority" => 300,
 				"onclick" => "group_tools_group_invite_switch_tab(\"friends\");",
-				"selected" => true
+				
 			)
 		);
 		
@@ -47,8 +47,9 @@
 				"text" => elgg_echo("group_tools:group:invite:users"),
 				"href" => "#",
 				"rel" => "users",
-				"priority" => 300,
-				"onclick" => "group_tools_group_invite_switch_tab(\"users\");"
+				"priority" => 200,
+				"onclick" => "group_tools_group_invite_switch_tab(\"users\");",
+                "selected" => true
 			);
 			
 			$form_data .= "<div id='group_tools_group_invite_users'>";
