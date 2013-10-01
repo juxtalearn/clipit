@@ -5,6 +5,7 @@
  * @package Elgg.Core
  * @subpackage UI
  */
+
 ?>
 /* **************************
 	BUTTONS
