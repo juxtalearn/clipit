@@ -1,3 +1,4 @@
+SetEnv TZ Europe/Madrid
 # Elgg htaccess directives
 # Copyright Curverider Ltd 2008-2009
 # License http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
@@ -91,7 +92,7 @@ RewriteEngine on
 # containing the path from your site root to elgg's root. e.g. If your site is
 # http://example.com/ and Elgg is in http://example.com/sites/elgg/, you might need
 #
-# RewriteBase /var/www/clipit
+RewriteBase /sandbox/clipit02
 #
 # here, only without the # in front.
 #
