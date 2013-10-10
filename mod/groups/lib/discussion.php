@@ -189,6 +189,7 @@ function discussion_handle_view_page($guid) {
 	$params = array(
 		'content' => $content,
 		'title' => $topic->title,
+        'header' => '',
 		'filter' => '',
 	);
 	$body = elgg_view_layout('content', $params);
