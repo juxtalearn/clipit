@@ -22,6 +22,7 @@ Enhancements:
     - groups: default visibility set to "group access" <discussion, blog, file>
               membership set to "access private"
               show group info in member request
+              double title in discussion resolved
     - group_tools [plugin]: lang "es" added
                             hide friends tab
                             selected tab fixed
