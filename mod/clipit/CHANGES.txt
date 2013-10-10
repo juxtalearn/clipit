@@ -1,0 +1,33 @@
+=======================
+ClipIt v1.1 - Elgg CMS 2013-10-01
+=======================
+New plugins: 
+    - bottom_bar: add a bottom bar chat similar to Facebook
+      Release: v0.10 Alpha 2010-05-10
+      http://community.elgg.org/plugins/385039/0.10%20alpha/elgg-bottom-bar
+    - Piwik: Open Source Analytics for Elgg
+      Release: v0.4 2012-11-23
+      http://community.elgg.org/plugins/385092/0.4/piwik-open-source-analytics
+    - Group Tools: a plugin combines different group additions.
+      Release: v0.4 2012-07-31
+      http://community.elgg.org/plugins/736791/2.3/group-tools
+
+Bug fixes:
+    - .htaccess: changed timezone to "Europe/Madrid"
+    - groups: show description in group profile
+    - tynmce: horizontal resize disabled
+Enhancements:
+    - messages: hide reply button and show reply form by default
+    - icon: download file - click icon
+    - groups: default visibility set to "group access" <discussion, blog, file>
+              membership set to "access private"
+              show group info in member request
+    - group_tools [plugin]: lang "es" added
+                            hide friends tab
+                            selected tab fixed
+    - notifications: lang "es" edited
+Css: 
+    - edited "elgg-layout-one-colum" class
+    - edited register page submit button
+    - edited "groups-profile-fields .even"
+    - show div comments in file page
