@@ -56,12 +56,12 @@ function clipit_init() {
         elgg_register_js("jquery-migrate", $CONFIG->url . "mod/clipit/vendors/jquery/jquery-migrate-1.1.1.js", "head", 1);
         elgg_register_js("jquery-ui", $CONFIG->url . "mod/clipit/vendors/jquery-ui-1.10.2.custom/js/jquery-ui-1.10.2.custom.min.js", "head", 2);
         elgg_register_js("twitter-bootstrap", $CONFIG->url . "mod/clipit/vendors/bootstrap/js/bootstrap.min.js");
-        elgg_register_js("forceAddFile", $CONFIG->url . "mod/clipit/js/force_add_file.js");
+        //elgg_register_js("forceAddFile", $CONFIG->url . "mod/clipit/js/force_add_file.js");
         elgg_load_css("ui-lightness");
         elgg_load_css("twitter-bootstrap");
         elgg_load_js("jquery-migrate");
         elgg_load_js("twitter-bootstrap");
-        elgg_load_js("forceAddFile");
+        //elgg_load_js("forceAddFile");
         elgg_load_css("righteous");
         elgg_load_css("ubuntu");
         elgg_load_css("bubblegum");
