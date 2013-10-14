@@ -1114,7 +1114,7 @@ function plugins_test($hook, $type, $value, $params) {
 function plugin_init() {
 	run_function_once("plugin_run_once");
 
-	elgg_register_plugin_hook_handler('unit_test', 'system', 'plugins_test');
+	//elgg_register_plugin_hook_handler('unit_test', 'system', 'plugins_test');
 
 	elgg_register_action("plugins/settings/save", '', 'admin');
 	elgg_register_action("plugins/usersettings/save");

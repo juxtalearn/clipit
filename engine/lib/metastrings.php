@@ -878,7 +878,7 @@ function elgg_entities_get_metastrings_options($type, $options) {
 }
 
 // unit testing
-elgg_register_plugin_hook_handler('unit_test', 'system', 'metastrings_test');
+//elgg_register_plugin_hook_handler('unit_test', 'system', 'metastrings_test');
 
 /**
  * Metadata unit test

@@ -444,7 +444,7 @@ function output_unit_test($hook, $type, $value, $params) {
  * @access private
  */
 function output_init() {
-	elgg_register_plugin_hook_handler('unit_test', 'system', 'output_unit_test');
+	//elgg_register_plugin_hook_handler('unit_test', 'system', 'output_unit_test');
 }
 
 elgg_register_event_handler('init', 'system', 'output_init');

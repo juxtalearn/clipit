@@ -954,7 +954,7 @@ elgg_register_plugin_hook_handler("export", "all", "export_metadata_plugin_hook"
 elgg_register_event_handler('update', 'all', 'metadata_update');
 
 // unit testing
-elgg_register_plugin_hook_handler('unit_test', 'system', 'metadata_test');
+//elgg_register_plugin_hook_handler('unit_test', 'system', 'metadata_test');
 
 /**
  * Metadata unit test
