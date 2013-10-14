@@ -42,20 +42,18 @@ function clipit_core_init() {
 
 function register_libs(){
     elgg_register_library('clipit:user', elgg_get_plugins_path().'clipit_core/lib/user.php');
-    elgg_register_library('clipit:tests', elgg_get_plugins_path().'clipit_core/tests/test.php');
 }
 
 function expose_functions(){
     elgg_load_library('clipit:user');
     
     expose_function("clipit.getUsers", 
-                "getUsers", 
-                 NULL,
-                 "<description>",
-                 'GET',
-                 true,
-                 false
-                );
+        "getUsers", 
+         NULL,
+         "<description>",
+         'GET',
+         true,
+         false);
 }
 
 function clipit_core_tests($hook, $type, $value, $params) {

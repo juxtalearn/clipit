@@ -73,24 +73,13 @@ class ClipitCore_UserTest extends ElggCoreUnitTest {
                 "api_key"=>$this->api_key),
             array()
         );
-        
         $this->dump($user_list);
-        
         $user_list = simplexml_load_string($user_list);
-        
-        $user_list->
-        
         $this->dump($user_list->result);
 
-        
         $test_user_list = getUsers();
-        
         $this->dump($test_user_list);
         
-        $this->assertEqual((array)$user_list->result, $test_user_list);
-
-       
-        $this->dump("fin_tests");
-        $this->assertTrue(TRUE);
+        $this->assertEqual($user_list->result, $test_user_list);
     }
 }
