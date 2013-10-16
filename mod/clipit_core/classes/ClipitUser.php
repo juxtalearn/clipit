@@ -108,7 +108,7 @@ class ClipitUser {
         }
         $elgg_user = get_user($clipit_user->id);
         $elgg_user->set("avatar", "<TO-DO>");
-        $elgg_user->set("description", "<TO-DO>");
+        $elgg_user->set("description", $clipit_user->description);
         $elgg_user->set("email", $clipit_user->email);
         $elgg_user->set("name", $clipit_user->name);
         $elgg_user->set("guid", $clipit_user->id);
