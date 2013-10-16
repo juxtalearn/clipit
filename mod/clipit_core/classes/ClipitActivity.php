@@ -34,6 +34,9 @@
 
 class ClipitActivity {
         static function exposeFunctions() {
+        	
+
+        	
         }
 }
 
