@@ -39,10 +39,41 @@ function clipit_core_init() {
 }
 
 function exposeRestApi() {
+    ClipitActivity::exposeFunctions();
+    ClipitComment::exposeFunctions();
+    ClipitFile::exposeFunctions();
+    ClipitGroup::exposeFunctions();
+    ClipitPalette::exposeFunctions();
+    ClipitQuiz::exposeFunctions();
+    ClipitQuizQuestion::exposeFunctions();
+    ClipitQuizResult::exposeFunctions();
+    ClipitSite::exposeFunctions();
+    ClipitSTA::exposeFunctions();
+    ClipitStoryboard::exposeFunctions();
+    ClipitStumblingBlock::exposeFunctions();
+    ClipitTag::exposeFunctions();
+    ClipitTaxonomy::exposeFunctions();
+    ClipitThresholdConcept::exposeFunctions();
     ClipitUser::exposeFunctions();
+    
 }
 
 function clipit_core_tests($hook, $type, $value, $params) {
+    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitActivity_tests.php";
+    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitComment_tests.php";
+    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitFile_tests.php";
+    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitGroup_tests.php";
+    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitPalette_tests.php";
+    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitQuizQuestion_tests.php";
+    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitQuizResult_tests.php";
+    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitQuiz_tests.php";
+    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitSTA_tests.php";
+    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitSite_tests.php";
+    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitStoryboard_tests.php";
+    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitStumblingBlock_tests.php";
+    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitTag_tests.php";
+    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitTaxonomy_tests.php";
+    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitThresholdConcept_tests.php";
     $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitUser_tests.php";
     return $value;
 }
