@@ -598,7 +598,7 @@ function elgg_annotations_init() {
 	elgg_register_annotation_url_handler('generic_comment', 'elgg_comment_url_handler');
 
 	elgg_register_plugin_hook_handler("export", "all", "export_annotation_plugin_hook", 2);
-	elgg_register_plugin_hook_handler('unit_test', 'system', 'annotations_test');
+	//elgg_register_plugin_hook_handler('unit_test', 'system', 'annotations_test');
 }
 
-//elgg_register_event_handler('init', 'system', 'elgg_annotations_init');
+elgg_register_event_handler('init', 'system', 'elgg_annotations_init');
