@@ -1,26 +1,25 @@
- <?php
-
+<?php
 
 /**
  * [Short description/title for module]
- * 
+ *
  * [Long description for module]
- * 
+ *
  * PHP version:      >= 5.2
- * 
+ *
  * Creation date:    [YYYY-MM-DD]
  * Last update:      $Date$
- * 
+ *
  * @category         [name]
  * @package          [name]
  * @subpackage       [name]
  * @author           Pablo Llinás Arnaiz <pebs74@gmail.com>
  * @version          $Version$
  * @link             [URL description]
- * 
+ *
  * @license          GNU Affero General Public License v3
  * http://www.gnu.org/licenses/agpl-3.0.txt
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
  * published by the Free Software Foundation, version 3. *
@@ -32,8 +31,9 @@
  * along with this program. If not, see
  * http://www.gnu.org/licenses/agpl-3.0.txt.
  */
- 
-class ClipitUser {
+
+class ClipitUser
+{
 
     // Class properties
     public $avatar = ClipitFile;
@@ -46,19 +46,22 @@ class ClipitUser {
     public $type = string;
     public $creation_date = DateTime;
 
-    static function getProperty($id, $prop) {
+    static function getProperty($id, $prop)
+    {
         $user = ClipitUser::getUsersById(array($id));
         return $user[0]->$prop;
     }
 
-    static function setProperty($id, $prop, $value) {
+    static function setProperty($id, $prop, $value)
+    {
         $user = ClipitUser::getUsersById(array($id));
         $user[0]->$prop = $value;
         $elgg_user = ClipitUser::clipit2Elgg($user[0]);
         return $elgg_user->save();
     }
 
-    static function exposeFunctions() {
+    static function exposeFunctions()
+    {
         expose_function("clipit.user.getProperty", "ClipitUser::getProperty", array(
             "id" => array(
                 "type" => "integer",
@@ -96,7 +99,8 @@ class ClipitUser {
                 "required" => true)), "<description>", 'GET', true, false);
     }
 
-    static function elgg2Clipit($elgg_user) {
+    static function elgg2Clipit($elgg_user)
+    {
         if (!$elgg_user || !is_a($elgg_user, "ElggUser")) {
             return null;
         }
@@ -113,7 +117,8 @@ class ClipitUser {
         return $clipit_user;
     }
 
-    static function clipit2Elgg(ClipitUser $clipit_user) {
+    static function clipit2Elgg(ClipitUser $clipit_user)
+    {
         if (!$clipit_user) {
             return null;
         }
@@ -130,7 +135,8 @@ class ClipitUser {
         return $elgg_user;
     }
 
-    static function getAllUsers() {
+    static function getAllUsers()
+    {
         $user_list = elgg_get_entities(array('types' => 'user'));
         for ($i = 0; $i < count($user_list); $i++) {
             $user_array[$i] = ClipitUser::elgg2Clipit($user_list[$i]);
@@ -138,7 +144,8 @@ class ClipitUser {
         return $user_array;
     }
 
-    static function getUsersById($id_array) {
+    static function getUsersById($id_array)
+    {
         for ($i = 0; $i < count($id_array); $i++) {
             $users[$i] = ClipitUser::elgg2Clipit(get_user($id_array[$i]));
         }
@@ -148,7 +155,8 @@ class ClipitUser {
         return $users;
     }
 
-    static function getUsersByLogin($login_array) {
+    static function getUsersByLogin($login_array)
+    {
         for ($i = 0; $i < count($login_array); $i++) {
             $users[$i] = ClipitUser::elgg2Clipit(get_user_by_username($login_array[$i]));
         }
@@ -158,7 +166,8 @@ class ClipitUser {
         return $users;
     }
 
-    static function getUsersByEmail($email_array) {
+    static function getUsersByEmail($email_array)
+    {
         $users = array();
         for ($i = 0; $i < count($email_array); $i++) {
             $elgg_users = get_user_by_email($email_array[$i]);
