@@ -48,24 +48,34 @@ class ClipitTaxonomySB{
     }
 
     static function exposeFunctions(){
-        expose_function("clipit.taxonomy.sb.getProperty", "ClipitTaxonomySB::getProperty", array(
-            "id" => array(
-                "type" => "integer",
-                "required" => true),
-            "prop" => array(
-                "type" => "string",
-                "required" => true)), "TO-DO:description", 'GET', true, false);
+        expose_function("clipit.taxonomy.sb.getProperty", "ClipitTaxonomySB::getProperty",
+            array(
+                "id" => array(
+                    "type" => "integer",
+                    "required" => true),
+                "prop" => array(
+                    "type" => "string",
+                    "required" => true)),
+            "TO-DO:description",
+            'GET',
+            true,
+            false);
 
-        expose_function("clipit.taxonomy.sb.setPropertysetProperty", "ClipitTaxonomySB::setProperty", array(
-            "id" => array(
-                "type" => "integer",
-                "required" => true),
-            "prop" => array(
-                "type" => "string",
-                "required" => true),
-            "value" => array(
-                "type" => "string",
-                "required" => true)), "TO-DO:description", 'GET', true, false);
+        expose_function("clipit.taxonomy.sb.setPropertysetProperty", "ClipitTaxonomySB::setProperty",
+            array(
+                "id" => array(
+                    "type" => "integer",
+                    "required" => true),
+                "prop" => array(
+                    "type" => "string",
+                    "required" => true),
+                "value" => array(
+                    "type" => "string",
+                    "required" => true)),
+            "TO-DO:description",
+            'GET',
+            true,
+            false);
     }
 
 }

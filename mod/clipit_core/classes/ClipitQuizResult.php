@@ -51,24 +51,34 @@ class ClipitQuizResult{
     }
 
     static function exposeFunctions(){
-        expose_function("clipit.quiz.result.getProperty", "ClipitQuizResult::getProperty", array(
-            "id" => array(
-                "type" => "integer",
-                "required" => true),
-            "prop" => array(
-                "type" => "string",
-                "required" => true)), "TO-DO:description", 'GET', true, false);
+        expose_function("clipit.quiz.result.getProperty", "ClipitQuizResult::getProperty",
+            array(
+                "id" => array(
+                    "type" => "integer",
+                    "required" => true),
+                "prop" => array(
+                    "type" => "string",
+                    "required" => true)),
+            "TO-DO:description",
+            'GET',
+            true,
+            false);
 
-        expose_function("clipit.quiz.result.setPropertysetProperty", "ClipitQuizResult::setProperty", array(
-            "id" => array(
-                "type" => "integer",
-                "required" => true),
-            "prop" => array(
-                "type" => "string",
-                "required" => true),
-            "value" => array(
-                "type" => "string",
-                "required" => true)), "TO-DO:description", 'GET', true, false);
+        expose_function("clipit.quiz.result.setPropertysetProperty", "ClipitQuizResult::setProperty",
+            array(
+                "id" => array(
+                    "type" => "integer",
+                    "required" => true),
+                "prop" => array(
+                    "type" => "string",
+                    "required" => true),
+                "value" => array(
+                    "type" => "string",
+                    "required" => true)),
+            "TO-DO:description",
+            'GET',
+            true,
+            false);
     }
 
 }

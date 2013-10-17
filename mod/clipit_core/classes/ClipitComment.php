@@ -44,32 +44,42 @@ class ClipitComment{
     public $creation_date = DateTime;
 
     static function getProperty($id, $prop){
-        return "TO-DO";
+        return "TO-DO"; // @todo
     }
 
     static function setProperty($id, $prop, $value){
-        return "TO-DO";
+        return "TO-DO"; // @todo
     }
 
     static function exposeFunctions(){
-        expose_function("clipit.comment.getProperty", "ClipitComment::getProperty", array(
-            "id" => array(
-                "type" => "integer",
-                "required" => true),
-            "prop" => array(
-                "type" => "string",
-                "required" => true)), "TO-DO:description", 'GET', true, false);
+        expose_function("clipit.comment.getProperty", "ClipitComment::getProperty",
+            array(
+                "id" => array(
+                    "type" => "integer",
+                    "required" => true),
+                "prop" => array(
+                    "type" => "string",
+                    "required" => true)),
+            "TO-DO:description",
+            'GET',
+            true,
+            false);
 
-        expose_function("clipit.comment.setProperty", "ClipitComment::setProperty", array(
-            "id" => array(
-                "type" => "integer",
-                "required" => true),
-            "prop" => array(
-                "type" => "string",
-                "required" => true),
-            "value" => array(
-                "type" => "string",
-                "required" => true)), "TO-DO:description", 'GET', true, false);
+        expose_function("clipit.comment.setProperty", "ClipitComment::setProperty",
+            array(
+                "id" => array(
+                    "type" => "integer",
+                    "required" => true),
+                "prop" => array(
+                    "type" => "string",
+                    "required" => true),
+                "value" => array(
+                    "type" => "string",
+                    "required" => true)),
+            "TO-DO:description",
+            'GET',
+            true,
+            false);
     }
 
 }
