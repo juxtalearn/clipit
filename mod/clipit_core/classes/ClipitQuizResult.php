@@ -33,6 +33,42 @@
  */
 
 class ClipitQuizResult {
-        static function exposeFunctions() {
-        }
+    // Class properties
+    public $correct = boolean;
+    public $creation_date = DateTime;
+    public $id = int;
+    public $result_array = array();
+    public $quiz = ClipitQuiz;
+    public $quiz_question = ClipitQuizQuestion;
+    public $user = ClipitUser;
+
+    static function getProperty($id, $prop) {
+        return "TO-DO";
+    }
+
+    static function setProperty($id, $prop, $value) {
+        return "TO-DO";
+    }
+
+    static function exposeFunctions() {
+        expose_function("clipit.quiz.result.getProperty", "ClipitQuizResult::getProperty", array(
+            "id" => array(
+                "type" => "integer",
+                "required" => true),
+            "prop" => array(
+                "type" => "string",
+                "required" => true)), "TO-DO:description", 'GET', true, false);
+
+        expose_function("clipit.quiz.result.setPropertysetProperty", "ClipitQuizResult::setProperty", array(
+            "id" => array(
+                "type" => "integer",
+                "required" => true),
+            "prop" => array(
+                "type" => "string",
+                "required" => true),
+            "value" => array(
+                "type" => "string",
+                "required" => true)), "TO-DO:description", 'GET', true, false);
+    }
+
 }

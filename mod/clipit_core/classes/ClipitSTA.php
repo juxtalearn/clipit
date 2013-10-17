@@ -33,6 +33,41 @@
  */
 
 class ClipitSTA {
-        static function exposeFunctions() {
-        }
+    // Class properties
+    public $description = string;
+    public $file_array = array(ClipitFile);
+    public $id = int;
+    public $name = string;
+    public $taxonomy_tag_array = array(ClipitTaxonomyTag);
+    public $taxonomy = ClipitTaxonomy;
+
+    static function getProperty($id, $prop) {
+        return "TO-DO";
+    }
+
+    static function setProperty($id, $prop, $value) {
+        return "TO-DO";
+    }
+
+    static function exposeFunctions() {
+        expose_function("clipit.sta.getProperty", "ClipitSTA::getProperty", array(
+            "id" => array(
+                "type" => "integer",
+                "required" => true),
+            "prop" => array(
+                "type" => "string",
+                "required" => true)), "TO-DO:description", 'GET', true, false);
+
+        expose_function("clipit.sta.setPropertysetProperty", "ClipitSTA::setProperty", array(
+            "id" => array(
+                "type" => "integer",
+                "required" => true),
+            "prop" => array(
+                "type" => "string",
+                "required" => true),
+            "value" => array(
+                "type" => "string",
+                "required" => true)), "TO-DO:description", 'GET', true, false);
+    }
+
 }
