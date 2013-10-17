@@ -33,7 +33,7 @@
  */
 
 class ClipitUser{
-
+    
     // Class properties
     public $avatar;
     public $description;
@@ -46,15 +46,16 @@ class ClipitUser{
     public $creation_date;
 
     function __construct($id = null){
-        $this->avatar = null; //@todo insert ClipitFile instance
+        $this->avatar = ""; //@todo insert ClipitFile instance
         $this->description = "";
         $this->role = "basic";
-        $this->creation_date = new DateTime();
+        $date = new DateTime();
+        $this->creation_date = (int) $date->getTimestamp();
         if($id){
             $this->load($id);
         } else{
             $elgg_user = new ElggUser();
-            $this->id = $elgg_user->get("guid");
+            $this->id = $elgg_user->guid;
             $this->save();
         }
     }
@@ -64,56 +65,59 @@ class ClipitUser{
         if(!$elgg_user || !is_a($elgg_user, "ElggUser")){
             return null;
         }
-        $this->avatar = $elgg_user->get("avatar");;
-        $this->description = $elgg_user->get("description");
-        $this->email = $elgg_user->get("email");
-        $this->name = $elgg_user->get("name");
-        $this->id = $elgg_user->get("guid");
-        $this->login = $elgg_user->get("username");
-        $this->password = $elgg_user->get("password");
-        $this->role = $elgg_user->get("role");
-        $this->creation_date->setTimestamp($elgg_user->get("creation_date"));
+        $this->avatar = $elgg_user->avatar;
+        $this->description = $elgg_user->description;
+        $this->email = $elgg_user->email;
+        $this->name = $elgg_user->name;
+        $this->id = $elgg_user->guid;
+        $this->login = $elgg_user->username;
+        $this->password = $elgg_user->password;
+        $this->role = $elgg_user->role;
+        $this->creation_date = (int) $elgg_user->creation_date;
         return true;
     }
 
     function save(){
         $elgg_user = new ElggUser($this->id);
-        $elgg_user->set("avatar", $this->avatar);
-        $elgg_user->set("description", $this->description);
-        $elgg_user->set("email", $this->email);
-        $elgg_user->set("name", $this->name);
-        $elgg_user->set("username", $this->login);
-        $elgg_user->set("password", $this->password);
-        $elgg_user->set("role", $this->role);
-        $elgg_user->set("creation_date", $this->creation_date->getTimestamp());
+        if(!$elgg_user){
+            return false;
+        }
+        $elgg_user->avatar = $this->avatar;
+        $elgg_user->description = $this->description;
+        $elgg_user->email = $this->email;
+        $elgg_user->name = $this->name;
+        $elgg_user->username = $this->login;
+        $elgg_user->password = $this->password;
+        $elgg_user->role = $this->role;
+        $elgg_user->creation_date = $this->creation_date;
         return $elgg_user->save();
     }
 
     static function exposeFunctions(){
-        expose_function("clipit.user.getProperty",
-            "ClipitUser::getProperty",
+        expose_function("clipit.user.getProperties",
+            "ClipitUser::getProperties",
             array(
                 "id" => array(
                     "type" => "integer",
                     "required" => true),
-                "prop" => array(
-                    "type" => "string",
+                "prop_array" => array(
+                    "type" => "array",
                     "required" => true)),
             "<description>",
             'GET',
             true,
             false);
-        expose_function("clipit.user.setProperty",
-            "ClipitUser::setProperty",
+        expose_function("clipit.user.setProperties",
+            "ClipitUser::setProperties",
             array(
                 "id" => array(
                     "type" => "integer",
                     "required" => true),
-                "prop" => array(
-                    "type" => "string",
+                "prop_array" => array(
+                    "type" => "array",
                     "required" => true),
-                "value" => array(
-                    "type" => "string",
+                "value_array" => array(
+                    "type" => "array",
                     "required" => true)),
             "<description>",
             'GET',
@@ -158,20 +162,29 @@ class ClipitUser{
             false);
     }
 
-    static function getProperty($id, $prop){
+    static function getProperties($id, $prop_array){
         $user = new ClipitUser($id);
         if(!$user){
             return null;
         }
-        return $user->$prop;
+        $value_array = array();
+        for($i=0; $i<count($prop_array); $i++){
+            $value_array[$i] = $user->$prop_array[$i];
+        }
+        return array_combine($prop_array, $value_array);
     }
 
-    static function setProperty($id, $prop, $value){
+    static function setProperties($id, $prop_array, $value_array){
+        if(count($prop_array)!=count($value_array)){
+            return null;
+        }
         $user = new ClipitUser($id);
         if(!$user){
             return null;
         }
-        $user->$prop = $value;
+        for($i=0; $i<count($prop_array); $i++){
+            $user->$prop_array[$i] = $value_array[$i];
+        }
         return $user->save();
     }
 
@@ -188,9 +201,9 @@ class ClipitUser{
 
     static function getUsersById($id_array){
         for($i = 0; $i < count($id_array); $i++){
-            $users[$i] = ClipitUser::elgg2Clipit(get_user($id_array[$i]));
+            $users[$i] = new ClipitUser((int) $id_array[$i]);
         }
-        if(!isset($users)){
+        if(!$users){
             return null;
         }
         return $users;
@@ -198,9 +211,10 @@ class ClipitUser{
 
     static function getUsersByLogin($login_array){
         for($i = 0; $i < count($login_array); $i++){
-            $users[$i] = ClipitUser::elgg2Clipit(get_user_by_username($login_array[$i]));
+            $elgg_user = get_user_by_username($login_array[$i]);
+            $users[$i] = new ClipitUser($elgg_user->guid);
         }
-        if(!isset($users)){
+        if(!$users){
             return null;
         }
         return $users;
