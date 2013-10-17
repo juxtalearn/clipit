@@ -72,6 +72,5 @@ class ClipitActivity {
                 "type" => "string",
                 "required" => true)), "TO-DO:description", 'GET', true, false);
     }
-
 }
 
