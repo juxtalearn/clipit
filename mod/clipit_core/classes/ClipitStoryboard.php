@@ -31,8 +31,42 @@
  * along with this program. If not, see
  * http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-
 class ClipitStoryboard {
-        static function exposeFunctions() {
-        }
+
+    // Class properties
+    public $content = binary;
+    public $creation_date = DateTime;
+    public $id = int;
+    public $name = string;
+    public $palette_items = array();
+
+    static function getProperty($id, $prop) {
+        return "TO-DO";
+    }
+
+    static function setProperty($id, $prop, $value) {
+        return "TO-DO";
+    }
+
+    static function exposeFunctions() {
+        expose_function("clipit.storyboard.getProperty", "ClipitStoryboard::getProperty", array(
+            "id" => array(
+                "type" => "integer",
+                "required" => true),
+            "prop" => array(
+                "type" => "string",
+                "required" => true)), "TO-DO:description", 'GET', true, false);
+
+        expose_function("clipit.storyboard.setPropertysetProperty", "ClipitStoryboard::setProperty", array(
+            "id" => array(
+                "type" => "integer",
+                "required" => true),
+            "prop" => array(
+                "type" => "string",
+                "required" => true),
+            "value" => array(
+                "type" => "string",
+                "required" => true)), "TO-DO:description", 'GET', true, false);
+    }
+
 }

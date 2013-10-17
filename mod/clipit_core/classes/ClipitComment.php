@@ -31,8 +31,46 @@
  * along with this program. If not, see
  * http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-
 class ClipitComment {
-        static function exposeFunctions() {
-        }
+
+    // Class properties
+    public $id = int;
+    public $owner = ClipitUser;
+    public $pedagogical_rating = int;
+    public $performance_rating = int;
+    public $taxonomy_tag_array = array(ClipitTaxonomyTag);
+    public $text_body = string;
+    public $video = ClipitVideo;
+    public $creation_date = DateTime;
+
+    static function getProperty($id, $prop) {
+        return "TO-DO";
+    }
+
+    static function setProperty($id, $prop, $value) {
+        return "TO-DO";
+    }
+
+    static function exposeFunctions() {
+        expose_function("clipit.comment.getProperty", "ClipitComment::getProperty", array(
+            "id" => array(
+                "type" => "integer",
+                "required" => true),
+            "prop" => array(
+                "type" => "string",
+                "required" => true)), "TO-DO:description", 'GET', true, false);
+
+        expose_function("clipit.comment.setProperty", "ClipitComment::setProperty", array(
+            "id" => array(
+                "type" => "integer",
+                "required" => true),
+            "prop" => array(
+                "type" => "string",
+                "required" => true),
+            "value" => array(
+                "type" => "string",
+                "required" => true)), "TO-DO:description", 'GET', true, false);
+    }
+
 }
+

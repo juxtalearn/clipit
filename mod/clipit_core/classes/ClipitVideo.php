@@ -31,18 +31,16 @@
  * along with this program. If not, see
  * http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-class ClipitActivity {
+class ClipitVideo {
 
     // Class properties
-    public $description;
-    public $id;
-    public $name;
-    public $palette_array;
-    public $quiz_array;
-    public $sta_array;
-    public $storyboard_array;
-    public $video_array;
-    public $creation_date;
+    public $comment_array = array(ClipitComment);
+    public $content = ClipitFile;
+    public $creation_date = DateTime;
+    public $description = string;
+    public $id = int;
+    public $name = string;
+    public $taxonomy_tag_list = array(ClipitTaxonomyTag);
 
     static function getProperty($id, $prop) {
         return "TO-DO";
@@ -53,7 +51,7 @@ class ClipitActivity {
     }
 
     static function exposeFunctions() {
-        expose_function("clipit.activity.getProperty", "ClipitActivity::getProperty", array(
+        expose_function("clipit.video.getProperty", "ClipitVideo::getProperty", array(
             "id" => array(
                 "type" => "integer",
                 "required" => true),
@@ -61,7 +59,7 @@ class ClipitActivity {
                 "type" => "string",
                 "required" => true)), "TO-DO:description", 'GET', true, false);
 
-        expose_function("clipit.activity.setProperty", "ClipitActivity::setProperty", array(
+        expose_function("clipit.video.setPropertysetProperty", "ClipitVideo::setProperty", array(
             "id" => array(
                 "type" => "integer",
                 "required" => true),
@@ -74,4 +72,3 @@ class ClipitActivity {
     }
 
 }
-

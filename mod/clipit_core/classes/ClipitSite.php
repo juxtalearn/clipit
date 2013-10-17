@@ -33,6 +33,44 @@
  */
 
 class ClipitSite {
-        static function exposeFunctions() {
-        }
+    // Class properties
+    public $description = string;
+    public $id = int;
+    public $name = string;
+    public $quiz_array = array(ClipitQuiz);
+    public $sta_array = array(ClipitSTA);
+    public $storyboard_array = array(ClipitStoryboard);
+    public $taxonomy_array = array(ClipitTaxonomy);
+    public $user_array = array(ClipitUser);
+    public $video_array = array(ClipitVideo);
+
+    static function getProperty($id, $prop) {
+        return "TO-DO";
+    }
+
+    static function setProperty($id, $prop, $value) {
+        return "TO-DO";
+    }
+
+    static function exposeFunctions() {
+        expose_function("clipit.site.getProperty", "ClipitSite::getProperty", array(
+            "id" => array(
+                "type" => "integer",
+                "required" => true),
+            "prop" => array(
+                "type" => "string",
+                "required" => true)), "TO-DO:description", 'GET', true, false);
+
+        expose_function("clipit.site.setPropertysetProperty", "ClipitSite::setProperty", array(
+            "id" => array(
+                "type" => "integer",
+                "required" => true),
+            "prop" => array(
+                "type" => "string",
+                "required" => true),
+            "value" => array(
+                "type" => "string",
+                "required" => true)), "TO-DO:description", 'GET', true, false);
+    }
+
 }
