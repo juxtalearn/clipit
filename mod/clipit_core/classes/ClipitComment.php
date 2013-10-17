@@ -31,8 +31,7 @@
  * along with this program. If not, see
  * http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-class ClipitComment
-{
+class ClipitComment{
 
     // Class properties
     public $id = int;
@@ -44,18 +43,15 @@ class ClipitComment
     public $video = ClipitVideo;
     public $creation_date = DateTime;
 
-    static function getProperty($id, $prop)
-    {
+    static function getProperty($id, $prop){
         return "TO-DO";
     }
 
-    static function setProperty($id, $prop, $value)
-    {
+    static function setProperty($id, $prop, $value){
         return "TO-DO";
     }
 
-    static function exposeFunctions()
-    {
+    static function exposeFunctions(){
         expose_function("clipit.comment.getProperty", "ClipitComment::getProperty", array(
             "id" => array(
                 "type" => "integer",

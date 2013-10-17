@@ -31,8 +31,7 @@
  * along with this program. If not, see
  * http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-class ClipitFile
-{
+class ClipitFile{
 
     // Class properties
     public $content = ElggFile;
@@ -42,18 +41,15 @@ class ClipitFile
     public $type = string;
     public $creation_date = DateTime;
 
-    static function getProperty($id, $prop)
-    {
+    static function getProperty($id, $prop){
         return "TO-DO";
     }
 
-    static function setProperty($id, $prop, $value)
-    {
+    static function setProperty($id, $prop, $value){
         return "TO-DO";
     }
 
-    static function exposeFunctions()
-    {
+    static function exposeFunctions(){
         expose_function("clipit.file.getProperty", "ClipitFile::getProperty", array(
             "id" => array(
                 "type" => "integer",

@@ -32,8 +32,7 @@
  * http://www.gnu.org/licenses/agpl-3.0.txt.
  */
 
-class ClipitUser
-{
+class ClipitUser{
 
     // Class properties
     public $avatar = ClipitFile;
@@ -46,62 +45,95 @@ class ClipitUser
     public $type = string;
     public $creation_date = DateTime;
 
-    static function getProperty($id, $prop)
-    {
+    static function getProperty($id, $prop){
         $user = ClipitUser::getUsersById(array($id));
-        return $user[0]->$prop;
+        if(isset($user)){
+            return $user[0]->$prop;
+        }
+        return false;
     }
 
-    static function setProperty($id, $prop, $value)
-    {
+    static function setProperty($id, $prop, $value){
         $user = ClipitUser::getUsersById(array($id));
         $user[0]->$prop = $value;
         $elgg_user = ClipitUser::clipit2Elgg($user[0]);
-        return $elgg_user->save();
+        if(!$elgg_user->save()){
+            return false;
+        }
+        return true;
     }
 
-    static function exposeFunctions()
-    {
-        expose_function("clipit.user.getProperty", "ClipitUser::getProperty", array(
-            "id" => array(
-                "type" => "integer",
-                "required" => true),
-            "prop" => array(
-                "type" => "string",
-                "required" => true)), "<description>", 'GET', true, false);
-
-        expose_function("clipit.user.setProperty", "ClipitUser::setProperty", array(
-            "id" => array(
-                "type" => "integer",
-                "required" => true),
-            "prop" => array(
-                "type" => "string",
-                "required" => true),
-            "value" => array(
-                "type" => "string",
-                "required" => true)), "<description>", 'GET', true, false);
-
-        expose_function("clipit.user.getAllUsers", "ClipitUser::getAllUsers", NULL, "<description>", 'GET', true, false);
-
-        expose_function("clipit.user.getUsersById", "ClipitUser::getUsersById", array(
-            "id_array" => array(
-                "type" => "array",
-                "required" => true)), "<description>", 'GET', true, false);
-
-        expose_function("clipit.user.getUsersByLogin", "ClipitUser::getUsersByLogin", array(
-            "login_array" => array(
-                "type" => "array",
-                "required" => true)), "<description>", 'GET', true, false);
-
-        expose_function("clipit.user.getUsersByEmail", "ClipitUser::getUsersByEmail", array(
-            "email_array" => array(
-                "type" => "array",
-                "required" => true)), "<description>", 'GET', true, false);
+    static function exposeFunctions(){
+        expose_function("clipit.user.getProperty",
+            "ClipitUser::getProperty",
+            array(
+                "id" => array(
+                    "type" => "integer",
+                    "required" => true),
+                "prop" => array(
+                    "type" => "string",
+                    "required" => true)),
+            "<description>",
+            'GET',
+            true,
+            false);
+        expose_function("clipit.user.setProperty",
+            "ClipitUser::setProperty",
+            array(
+                "id" => array(
+                    "type" => "integer",
+                    "required" => true),
+                "prop" => array(
+                    "type" => "string",
+                    "required" => true),
+                "value" => array(
+                    "type" => "string",
+                    "required" => true)),
+            "<description>",
+            'GET',
+            true,
+            false);
+        expose_function("clipit.user.getAllUsers",
+            "ClipitUser::getAllUsers",
+            NULL,
+            "<description>",
+            'GET',
+            true,
+            false);
+        expose_function("clipit.user.getUsersById",
+            "ClipitUser::getUsersById",
+            array(
+                "id_array" => array(
+                    "type" => "array",
+                    "required" => true)),
+            "<description>",
+            'GET',
+            true,
+            false);
+        expose_function("clipit.user.getUsersByLogin",
+            "ClipitUser::getUsersByLogin",
+            array(
+                "login_array" => array(
+                    "type" => "array",
+                    "required" => true)),
+            "<description>",
+            'GET',
+            true,
+            false);
+        expose_function("clipit.user.getUsersByEmail",
+            "ClipitUser::getUsersByEmail",
+            array(
+                "email_array" => array(
+                    "type" => "array",
+                    "required" => true)),
+            "<description>",
+            'GET',
+            true,
+            false);
     }
 
-    static function elgg2Clipit($elgg_user)
-    {
-        if (!$elgg_user || !is_a($elgg_user, "ElggUser")) {
+    static function elgg2Clipit(ElggUser $elgg_user){
+        if(!$elgg_user || !is_a($elgg_user, "ElggUser")){
             return null;
         }
         $clipit_user = new ClipitUser();
@@ -117,9 +149,8 @@ class ClipitUser
         return $clipit_user;
     }
 
-    static function clipit2Elgg(ClipitUser $clipit_user)
-    {
-        if (!$clipit_user) {
+    static function clipit2Elgg(ClipitUser $clipit_user){
+        if(!$clipit_user){
             return null;
         }
         $elgg_user = get_user($clipit_user->id);
@@ -135,48 +166,49 @@ class ClipitUser
         return $elgg_user;
     }
 
-    static function getAllUsers()
-    {
+    static function getAllUsers(){
         $user_list = elgg_get_entities(array('types' => 'user'));
-        for ($i = 0; $i < count($user_list); $i++) {
+        for($i = 0; $i < count($user_list); $i++){
             $user_array[$i] = ClipitUser::elgg2Clipit($user_list[$i]);
+        }
+        if(!isset($user_array)){
+            return null;
         }
         return $user_array;
     }
 
-    static function getUsersById($id_array)
-    {
-        for ($i = 0; $i < count($id_array); $i++) {
+    static function getUsersById($id_array){
+        for($i = 0; $i < count($id_array); $i++){
             $users[$i] = ClipitUser::elgg2Clipit(get_user($id_array[$i]));
         }
-        if (!$users) {
+        if(!isset($users)){
             return null;
         }
         return $users;
     }
 
-    static function getUsersByLogin($login_array)
-    {
-        for ($i = 0; $i < count($login_array); $i++) {
+    static function getUsersByLogin($login_array){
+        for($i = 0; $i < count($login_array); $i++){
             $users[$i] = ClipitUser::elgg2Clipit(get_user_by_username($login_array[$i]));
         }
-        if (!$users) {
+        if(!isset($users)){
             return null;
         }
         return $users;
     }
 
-    static function getUsersByEmail($email_array)
-    {
+    static function getUsersByEmail($email_array){
         $users = array();
-        for ($i = 0; $i < count($email_array); $i++) {
+        for($i = 0; $i < count($email_array); $i++){
             $elgg_users = get_user_by_email($email_array[$i]);
-            for ($j = 0; $j < count($elgg_users); $j++) {
+            for($j = 0; $j < count($elgg_users); $j++){
                 $temp_array[$j] = ClipitUser::elgg2Clipit($elgg_users[$j]);
             }
-            $users = array_merge($users, $temp_array);
+            if(isset($temp_array)){
+                $users = array_merge($users, $temp_array);
+            }
         }
-        if (!$users) {
+        if(!isset($users)){
             return null;
         }
         return $users;

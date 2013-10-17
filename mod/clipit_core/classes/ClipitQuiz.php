@@ -31,8 +31,7 @@
  * along with this program. If not, see
  * http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-class ClipitQuiz
-{
+class ClipitQuiz{
 
     // Class properties
     public $description = string;
@@ -46,18 +45,15 @@ class ClipitQuiz
     public $type = string;
     public $video = ClipitVideo;
 
-    static function getProperty($id, $prop)
-    {
+    static function getProperty($id, $prop){
         return "TO-DO";
     }
 
-    static function setProperty($id, $prop, $value)
-    {
+    static function setProperty($id, $prop, $value){
         return "TO-DO";
     }
 
-    static function exposeFunctions()
-    {
+    static function exposeFunctions(){
         expose_function("clipit.quiz.getProperty", "ClipitQuiz::getProperty", array(
             "id" => array(
                 "type" => "integer",

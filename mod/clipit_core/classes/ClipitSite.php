@@ -32,8 +32,7 @@
  * http://www.gnu.org/licenses/agpl-3.0.txt.
  */
 
-class ClipitSite
-{
+class ClipitSite{
     // Class properties
     public $description = string;
     public $id = int;
@@ -45,18 +44,15 @@ class ClipitSite
     public $user_array = array(ClipitUser);
     public $video_array = array(ClipitVideo);
 
-    static function getProperty($id, $prop)
-    {
+    static function getProperty($id, $prop){
         return "TO-DO";
     }
 
-    static function setProperty($id, $prop, $value)
-    {
+    static function setProperty($id, $prop, $value){
         return "TO-DO";
     }
 
-    static function exposeFunctions()
-    {
+    static function exposeFunctions(){
         expose_function("clipit.site.getProperty", "ClipitSite::getProperty", array(
             "id" => array(
                 "type" => "integer",
