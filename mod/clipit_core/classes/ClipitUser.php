@@ -35,32 +35,58 @@
 class ClipitUser{
 
     // Class properties
-    public $avatar = ClipitFile;
-    public $description = string;
-    public $email = string;
-    public $name = string;
-    public $id = int;
-    public $login = string;
-    public $password = string;
-    public $type = string;
-    public $creation_date = DateTime;
+    public $avatar;
+    public $description;
+    public $email;
+    public $name;
+    public $id;
+    public $login;
+    public $password;
+    public $role;
+    public $creation_date;
 
-    static function getProperty($id, $prop){
-        $user = ClipitUser::getUsersById(array($id));
-        if(isset($user)){
-            return $user[0]->$prop;
+    function __construct($id = null){
+        $this->avatar = null; //@todo insert ClipitFile instance
+        $this->description = "";
+        $this->role = "basic";
+        $this->creation_date = new DateTime();
+        if($id){
+            $this->load($id);
+        } else{
+            $elgg_user = new ElggUser();
+            $this->id = $elgg_user->get("guid");
+            $this->save();
         }
-        return false;
     }
 
-    static function setProperty($id, $prop, $value){
-        $user = ClipitUser::getUsersById(array($id));
-        $user[0]->$prop = $value;
-        $elgg_user = ClipitUser::clipit2Elgg($user[0]);
-        if(!$elgg_user->save()){
-            return false;
+    function load($id){
+        $elgg_user = new ElggUser($id);
+        if(!$elgg_user || !is_a($elgg_user, "ElggUser")){
+            return null;
         }
+        $this->avatar = $elgg_user->get("avatar");;
+        $this->description = $elgg_user->get("description");
+        $this->email = $elgg_user->get("email");
+        $this->name = $elgg_user->get("name");
+        $this->id = $elgg_user->get("guid");
+        $this->login = $elgg_user->get("username");
+        $this->password = $elgg_user->get("password");
+        $this->role = $elgg_user->get("role");
+        $this->creation_date->setTimestamp($elgg_user->get("creation_date"));
         return true;
+    }
+
+    function save(){
+        $elgg_user = new ElggUser($this->id);
+        $elgg_user->set("avatar", $this->avatar);
+        $elgg_user->set("description", $this->description);
+        $elgg_user->set("email", $this->email);
+        $elgg_user->set("name", $this->name);
+        $elgg_user->set("username", $this->login);
+        $elgg_user->set("password", $this->password);
+        $elgg_user->set("role", $this->role);
+        $elgg_user->set("creation_date", $this->creation_date->getTimestamp());
+        return $elgg_user->save();
     }
 
     static function exposeFunctions(){
@@ -132,44 +158,27 @@ class ClipitUser{
             false);
     }
 
-    static function elgg2Clipit(ElggUser $elgg_user){
-        if(!$elgg_user || !is_a($elgg_user, "ElggUser")){
+    static function getProperty($id, $prop){
+        $user = new ClipitUser($id);
+        if(!$user){
             return null;
         }
-        $clipit_user = new ClipitUser();
-        $clipit_user->avatar = "<TO-DO>";
-        $clipit_user->description = $elgg_user->get("description");
-        $clipit_user->email = $elgg_user->get("email");
-        $clipit_user->name = $elgg_user->get("name");
-        $clipit_user->id = $elgg_user->get("guid");
-        $clipit_user->login = $elgg_user->get("username");
-        $clipit_user->password = $elgg_user->get("password");
-        $clipit_user->type = $elgg_user->get("type");
-        $clipit_user->creation_date = $elgg_user->get("creation_date");
-        return $clipit_user;
+        return $user->$prop;
     }
 
-    static function clipit2Elgg(ClipitUser $clipit_user){
-        if(!$clipit_user){
+    static function setProperty($id, $prop, $value){
+        $user = new ClipitUser($id);
+        if(!$user){
             return null;
         }
-        $elgg_user = get_user($clipit_user->id);
-        $elgg_user->set("avatar", $clipit_user->avatar);
-        $elgg_user->set("description", $clipit_user->description);
-        $elgg_user->set("email", $clipit_user->email);
-        $elgg_user->set("name", $clipit_user->name);
-        $elgg_user->set("guid", $clipit_user->id);
-        $elgg_user->set("username", $clipit_user->login);
-        $elgg_user->set("password", $clipit_user->password);
-        $elgg_user->set("type", $clipit_user->type);
-        $elgg_user->set("creation_date", $clipit_user->creation_date);
-        return $elgg_user;
+        $user->$prop = $value;
+        return $user->save();
     }
 
     static function getAllUsers(){
         $user_list = elgg_get_entities(array('types' => 'user'));
         for($i = 0; $i < count($user_list); $i++){
-            $user_array[$i] = ClipitUser::elgg2Clipit($user_list[$i]);
+            $user_array[$i] = new ClipitUser($user_list[$i]->get("guid"));;
         }
         if(!isset($user_array)){
             return null;
