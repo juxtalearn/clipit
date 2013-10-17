@@ -33,6 +33,8 @@
  */
 class ClipitActivity {
 
+
+
     // Class properties
     public $description;
     public $id;
