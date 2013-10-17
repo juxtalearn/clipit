@@ -48,6 +48,11 @@ class ClipitUser{
     function __construct($id = null){
         $this->avatar = ""; //@todo insert ClipitFile instance
         $this->description = "";
+        $this->email = "";
+        $this->name = "";
+        $this->id = -1;
+        $this->login = "";
+        $this->password = "";
         $this->role = "basic";
         $date = new DateTime();
         $this->creation_date = (int) $date->getTimestamp();
@@ -55,7 +60,7 @@ class ClipitUser{
             $this->load($id);
         } else{
             $elgg_user = new ElggUser();
-            $this->id = $elgg_user->guid;
+            $this->id = $elgg_user->get("guid");
             $this->save();
         }
     }
@@ -65,16 +70,16 @@ class ClipitUser{
         if(!$elgg_user || !is_a($elgg_user, "ElggUser")){
             return null;
         }
-        $this->avatar = $elgg_user->avatar;
-        $this->description = $elgg_user->description;
-        $this->email = $elgg_user->email;
-        $this->name = $elgg_user->name;
-        $this->id = $elgg_user->guid;
-        $this->login = $elgg_user->username;
-        $this->password = $elgg_user->password;
-        $this->role = $elgg_user->role;
-        $this->creation_date = (int) $elgg_user->creation_date;
-        return true;
+        $this->avatar = (string) $elgg_user->get("avatar");
+        $this->description = (string) $elgg_user->get("description");
+        $this->email = (string) $elgg_user->get("email");
+        $this->name = (string) $elgg_user->get("name");
+        $this->id = (int) $elgg_user->get("guid");
+        $this->login = (string) $elgg_user->get("username");
+        $this->password = (string) $elgg_user->get("password");
+        $this->role = (string) $elgg_user->get("role");
+        $this->creation_date = (int) $elgg_user->get("creation_date");
+        return $this;
     }
 
     function save(){
@@ -82,14 +87,14 @@ class ClipitUser{
         if(!$elgg_user){
             return false;
         }
-        $elgg_user->avatar = $this->avatar;
-        $elgg_user->description = $this->description;
-        $elgg_user->email = $this->email;
-        $elgg_user->name = $this->name;
-        $elgg_user->username = $this->login;
-        $elgg_user->password = $this->password;
-        $elgg_user->role = $this->role;
-        $elgg_user->creation_date = $this->creation_date;
+        $elgg_user->set("avatar", $this->avatar);
+        $elgg_user->set("description", $this->description);
+        $elgg_user->set("email", $this->email);
+        $elgg_user->set("name", $this->name);
+        $elgg_user->set("username",$this->login);
+        $elgg_user->set("password", $this->password);
+        $elgg_user->set("role", $this->role);
+        $elgg_user->set("creation_date", $this->creation_date);
         return $elgg_user->save();
     }
 
@@ -190,10 +195,10 @@ class ClipitUser{
 
     static function getAllUsers(){
         $user_list = elgg_get_entities(array('types' => 'user'));
-        for($i = 0; $i < count($user_list); $i++){
+        for($i = 0; $i<count($user_list); $i++){
             $user_array[$i] = new ClipitUser($user_list[$i]->get("guid"));;
         }
-        if(!isset($user_array)){
+        if(!$user_array){
             return null;
         }
         return $user_array;
@@ -212,7 +217,7 @@ class ClipitUser{
     static function getUsersByLogin($login_array){
         for($i = 0; $i < count($login_array); $i++){
             $elgg_user = get_user_by_username($login_array[$i]);
-            $users[$i] = new ClipitUser($elgg_user->guid);
+            $users[$i] = new ClipitUser($elgg_user->get("guid"));
         }
         if(!$users){
             return null;
@@ -225,13 +230,14 @@ class ClipitUser{
         for($i = 0; $i < count($email_array); $i++){
             $elgg_users = get_user_by_email($email_array[$i]);
             for($j = 0; $j < count($elgg_users); $j++){
-                $temp_array[$j] = ClipitUser::elgg2Clipit($elgg_users[$j]);
+                $temp_array[$j] = new ClipitUser($elgg_users[$j]->get("guid"));
             }
             if(isset($temp_array)){
                 $users = array_merge($users, $temp_array);
+                unset($temp_array);
             }
         }
-        if(!isset($users)){
+        if(!$users){
             return null;
         }
         return $users;
