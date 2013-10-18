@@ -35,38 +35,30 @@
 class ClipitUser{
 
     // Class properties
-    public $id;
-    public $login;
-    public $password;
-    public $password_hash;
-    public $description;
-    public $email;
-    public $name;
-    public $role;
-    public $time_created;
+    public $id = -1;
+    public $login = "";
+    public $password = "";
+    public $password_hash = "";
+    public $description = "";
+    public $email = "";
+    public $name = "";
+    public $role = "";
+    public $time_created = -1;
 
     function __construct($id = null){
-        $this->description = "";
-        $this->email = "";
-        $this->name = "";
-        $this->id = -1;
-        $this->login = "";
-        $this->password = "";
-        $this->password_hash = "";
-        $this->role = "basic";
-        $this->time_created = -1;
-        if(!$id){
+        $this->load($id);
+    }
+
+    function save(){
+        if($this->id == -1){
             $elgg_user = new ElggUser();
             $id = $elgg_user->save();
             $this->id = $id;
             $this->login = "user_".$id;
             $this->save();
+        } else{
+            $elgg_user = new ElggUser($this->id);
         }
-        $this->load($id);
-    }
-
-    function save(){
-        $elgg_user = new ElggUser($this->id);
         if(!$elgg_user){
             return false;
         }
@@ -95,5 +87,9 @@ class ClipitUser{
         $this->role = $elgg_user->get("role");
         $this->time_created = $elgg_user->get("time_created");
         return $this;
+    }
+
+    function delete(){
+
     }
 }

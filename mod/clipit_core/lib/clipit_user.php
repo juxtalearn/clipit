@@ -8,8 +8,11 @@
  */
 
 function clipit_user_expose_functions(){
-    expose_function("clipit.user.new_user",
-        "clipit_user_new_user",
+    expose_function("clipit.user.get_class_properties",
+        "clipit_user_get_class_properties",
+        null, "description", 'GET', true, false);
+    expose_function("clipit.user.create_user",
+        "clipit_user_create_user",
         array(
             "login" => array(
                 "type" => "string",
@@ -30,10 +33,14 @@ function clipit_user_expose_functions(){
                 "type" => "string",
                 "required" => false)
         ),
-        "<description>", //@todo
-        'GET',
-        true,
-        false);
+        "description goes here", 'GET', true, false);
+    expose_function("clipit.user.delete_user",
+        "clipit_user_delete_user",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true)),
+        "description goes here", 'GET', true, false);
     expose_function("clipit.user.get_properties",
         "clipit_user_get_properties",
         array(
@@ -43,10 +50,7 @@ function clipit_user_expose_functions(){
             "prop_array" => array(
                 "type" => "array",
                 "required" => true)),
-        "<description>", //@todo
-        'GET',
-        true,
-        false);
+        "description goes here", 'GET', true, false);
     expose_function("clipit.user.set_properties",
         "clipit_user_set_roperties",
         array(
@@ -59,50 +63,39 @@ function clipit_user_expose_functions(){
             "value_array" => array(
                 "type" => "array",
                 "required" => true)),
-        "<description>", //@todo
-        'GET',
-        true,
-        false);
+        "description goes here", 'GET', true, false);
     expose_function("clipit.user.get_all_users",
         "clipit_user_get_all_users",
         NULL,
-        "<description>", //@todo
-        'GET',
-        true,
-        false);
+        "description goes here", 'GET', true, false);
     expose_function("clipit.user.get_users_by_id",
         "clipit_user_get_users_by_id",
         array(
             "id_array" => array(
                 "type" => "array",
                 "required" => true)),
-        "<description>", //@todo
-        'GET',
-        true,
-        false);
+        "description goes here", 'GET', true, false);
     expose_function("clipit.user.get_users_by_login",
         "clipit_user_get_users_by_login",
         array(
             "login_array" => array(
                 "type" => "array",
                 "required" => true)),
-        "<description>", //@todo
-        'GET',
-        true,
-        false);
+        "description goes here", 'GET', true, false);
     expose_function("clipit.user.get_users_by_email",
         "clipit_user_get_users_by_email",
         array(
             "email_array" => array(
                 "type" => "array",
                 "required" => true)),
-        "<description>", //@todo
-        'GET',
-        true,
-        false);
+        "description goes here", 'GET', true, false);
 }
 
-function clipit_user_new_user($login, $password = null, $name = null, $email = null, $role= null, $description= null){
+function clipit_user_get_class_properties(){
+    return get_class_vars("ClipitUser");
+}
+
+function clipit_user_create_user($login, $password = null, $name = null, $email = null, $role = null, $description = null){
     if(get_user_by_username($login)){
         throw(new InvalidParameterException("The user login already exists"));
     }
@@ -127,6 +120,13 @@ function clipit_user_new_user($login, $password = null, $name = null, $email = n
         $user->description = $description;
     }
     return $user->save();
+}
+
+function clipit_user_delete_user($id){
+    if(!$elgg_user = get_user($id)){
+        return null;
+    }
+    return $elgg_user->delete();
 }
 
 function clipit_user_get_properties($id, $prop_array){
