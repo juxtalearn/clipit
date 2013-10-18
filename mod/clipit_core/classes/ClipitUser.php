@@ -43,19 +43,18 @@ class ClipitUser{
     public $login;
     public $password;
     public $role;
-    public $creation_date;
+    public $time_created;
 
     function __construct($id = null){
         $this->avatar = ""; //@todo insert ClipitFile instance
         $this->description = "";
         $this->email = "";
         $this->name = "";
-        $this->id = $id;
+        $this->id = -1;
         $this->login = "";
         $this->password = "";
         $this->role = "basic";
-        $date = new DateTime();
-        $this->creation_date = (int) $date->getTimestamp();
+        $this->time_created = -1;
         if(!$id){
             $elgg_user = new ElggUser();
             $id = $elgg_user->save();
@@ -79,7 +78,7 @@ class ClipitUser{
         $this->login = $elgg_user->get("username");
         $this->password = $elgg_user->get("password");
         $this->role = $elgg_user->get("role");
-        $this->creation_date = $elgg_user->get("creation_date");
+        $this->time_created = $elgg_user->get("time_created");
         return $this;
     }
 
@@ -95,7 +94,6 @@ class ClipitUser{
         $elgg_user->set("username",$this->login);
         $elgg_user->set("password", $this->password);
         $elgg_user->set("role", $this->role);
-        $elgg_user->set("creation_date", $this->creation_date);
         return $elgg_user->save();
     }
 
@@ -195,7 +193,8 @@ class ClipitUser{
     }
 
     static function getAllUsers(){
-        $elgg_user_array = elgg_get_entities(array('types'=>'user'));
+
+        $elgg_user_array = elgg_get_entities(array('type'=>'user'));
         $user_array = array();
         for($i = 0; $i < count($elgg_user_array); $i++){
             $user_array[$i] = new ClipitUser((int) $elgg_user_array[$i]->get("guid"));
