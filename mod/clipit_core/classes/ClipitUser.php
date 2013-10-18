@@ -35,24 +35,24 @@
 class ClipitUser{
 
     // Class properties
-    public $avatar;
-    public $description;
-    public $email;
-    public $name;
     public $id;
     public $login;
     public $password;
+    public $password_hash;
+    public $description;
+    public $email;
+    public $name;
     public $role;
     public $time_created;
 
     function __construct($id = null){
-        $this->avatar = ""; //@todo insert ClipitFile instance
         $this->description = "";
         $this->email = "";
         $this->name = "";
         $this->id = -1;
         $this->login = "";
         $this->password = "";
+        $this->password_hash = "";
         $this->role = "basic";
         $this->time_created = -1;
         if(!$id){
@@ -70,12 +70,12 @@ class ClipitUser{
         if(!$elgg_user){
             return false;
         }
-        $elgg_user->set("avatar", $this->avatar);
         $elgg_user->set("description", $this->description);
         $elgg_user->set("email", $this->email);
         $elgg_user->set("name", $this->name);
         $elgg_user->set("username", $this->login);
         $elgg_user->set("password", $this->password);
+        $elgg_user->set("salt", $this->password_hash);
         $elgg_user->set("role", $this->role);
         return $elgg_user->save();
     }
@@ -85,19 +85,45 @@ class ClipitUser{
         if(!$elgg_user || !is_a($elgg_user, "ElggUser")){
             return null;
         }
-        $this->avatar = $elgg_user->get("avatar");
         $this->description = $elgg_user->get("description");
         $this->email = $elgg_user->get("email");
         $this->name = $elgg_user->get("name");
         $this->id = $elgg_user->get('guid');
         $this->login = $elgg_user->get("username");
         $this->password = $elgg_user->get("password");
+        $this->password_hash = $elgg_user->salt;
         $this->role = $elgg_user->get("role");
         $this->time_created = $elgg_user->get("time_created");
         return $this;
     }
 
     static function exposeFunctions(){
+        expose_function("clipit.user.newUser",
+            "ClipitUser::newUser",
+            array(
+                "login" => array(
+                    "type" => "string",
+                    "required" => true),
+                "password" => array(
+                    "type" => "string",
+                    "required" => false),
+                "name" => array(
+                    "type" => "string",
+                    "required" => false),
+                "email" => array(
+                    "type" => "string",
+                    "required" => false),
+                "role" => array(
+                    "type" => "string",
+                    "required" => false),
+                "description" => array(
+                    "type" => "string",
+                    "required" => false)
+                ),
+            "<description>", //@todo
+            'GET',
+            true,
+            false);
         expose_function("clipit.user.getProperties",
             "ClipitUser::getProperties",
             array(
@@ -107,7 +133,7 @@ class ClipitUser{
                 "prop_array" => array(
                     "type" => "array",
                     "required" => true)),
-            "<description>",
+            "<description>", //@todo
             'GET',
             true,
             false);
@@ -123,14 +149,14 @@ class ClipitUser{
                 "value_array" => array(
                     "type" => "array",
                     "required" => true)),
-            "<description>",
+            "<description>", //@todo
             'GET',
             true,
             false);
         expose_function("clipit.user.getAllUsers",
             "ClipitUser::getAllUsers",
             NULL,
-            "<description>",
+            "<description>", //@todo
             'GET',
             true,
             false);
@@ -140,7 +166,7 @@ class ClipitUser{
                 "id_array" => array(
                     "type" => "array",
                     "required" => true)),
-            "<description>",
+            "<description>", //@todo
             'GET',
             true,
             false);
@@ -150,7 +176,7 @@ class ClipitUser{
                 "login_array" => array(
                     "type" => "array",
                     "required" => true)),
-            "<description>",
+            "<description>", //@todo
             'GET',
             true,
             false);
@@ -160,10 +186,37 @@ class ClipitUser{
                 "email_array" => array(
                     "type" => "array",
                     "required" => true)),
-            "<description>",
+            "<description>", //@todo
             'GET',
             true,
             false);
+    }
+
+    static function newUser($login, $password = null, $name = null, $email = null, $role= null, $description= null){
+        if(get_user_by_username($login)){
+            throw(new InvalidParameterException("The user login already exists"));
+        }
+        if(!$user = new ClipitUser()){
+            return null;
+        }
+        $user->login = $login;
+        if($password){
+            $user->password_hash = generate_random_cleartext_password();
+            $user->password = md5($password.$user->password_hash);
+        }
+        if($name){
+            $user->name = $name;
+        }
+        if($email){
+            $user->email = $email;
+        }
+        if($role){
+            $user->role = $role;
+        }
+        if($description){
+            $user->description = $description;
+        }
+        return $user->save();
     }
 
     static function getProperties($id, $prop_array){
@@ -196,7 +249,7 @@ class ClipitUser{
         $elgg_user_array = elgg_get_entities(array('type' => 'user'));
         $user_array = array();
         for($i = 0; $i < count($elgg_user_array); $i++){
-            $user_array[$i] = new ClipitUser($elgg_user_array[$i]->get("guid"));
+            $user_array[$i] = new ClipitUser($elgg_user_array[$i]->guid);
         }
         if(!$user_array){
             return null;
@@ -205,13 +258,14 @@ class ClipitUser{
     }
 
     static function getUsersById($id_array){
+        $user_array = array();
         for($i = 0; $i < count($id_array); $i++){
             $elgg_user = get_user($id_array[$i]);
             if(!$elgg_user){
                 $user_array[$i] = null;
                 continue;
             }
-            $user_array[$i] = new ClipitUser($elgg_user->get("guid"));
+            $user_array[$i] = new ClipitUser($elgg_user->guid);
         }
         if(!$user_array){
             return null;
@@ -220,6 +274,7 @@ class ClipitUser{
     }
 
     static function getUsersByLogin($login_array){
+        $user_array = array();
         for($i = 0; $i < count($login_array); $i++){
             $elgg_user = get_user_by_username($login_array[$i]);
             if(!$elgg_user){
@@ -242,8 +297,9 @@ class ClipitUser{
                 $user_array[$i] = null;
                 continue;
             }
+            $temp_array = array();
             for($j = 0; $j < count($elgg_user_array); $j++){
-                $temp_array[$j] = new ClipitUser($elgg_user_array[$j]->get("guid"));
+                $temp_array[$j] = new ClipitUser($elgg_user_array[$j]->getguid);
             }
             if(!$temp_array){
                 $user_array[$i] = null;
