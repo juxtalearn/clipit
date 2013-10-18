@@ -193,11 +193,10 @@ class ClipitUser{
     }
 
     static function getAllUsers(){
-
         $elgg_user_array = elgg_get_entities(array('type'=>'user'));
         $user_array = array();
         for($i = 0; $i < count($elgg_user_array); $i++){
-            $user_array[$i] = new ClipitUser((int) $elgg_user_array[$i]->get("guid"));
+            $user_array[$i] = new ClipitUser($elgg_user_array[$i]->get("guid"));
         }
         if(!$user_array){
             return null;
@@ -205,9 +204,14 @@ class ClipitUser{
         return $user_array;
     }
 
-    static function getUsersById($id_array){
+    static function getUsersById($id_array){      
         for($i = 0; $i < count($id_array); $i++){
-            $user_array[$i] = new ClipitUser((int) $id_array[$i]);
+            $elgg_user = get_user($id_array[$i]);
+            if(!$elgg_user){
+                $user_array[$i] = null;
+                continue;
+            }
+            $user_array[$i] = new ClipitUser($elgg_user->get("guid"));
         }
         if(!$user_array){
             return null;
@@ -218,30 +222,39 @@ class ClipitUser{
     static function getUsersByLogin($login_array){
         for($i = 0; $i < count($login_array); $i++){
             $elgg_user = get_user_by_username($login_array[$i]);
-            $users[$i] = new ClipitUser($elgg_user->get("guid"));
+            if(!$elgg_user){
+                $user_array[$i] = null;
+                continue;
+            }
+            $user_array[$i] = new ClipitUser($elgg_user->get("guid"));
         }
-        if(!$users){
+        if(!$user_array){
             return null;
         }
-        return $users;
+        return $user_array;
     }
 
     static function getUsersByEmail($email_array){
-        $users = array();
+        $user_array = array();
         for($i = 0; $i < count($email_array); $i++){
-            $elgg_users = get_user_by_email($email_array[$i]);
-            for($j = 0; $j < count($elgg_users); $j++){
-                $temp_array[$j] = new ClipitUser($elgg_users[$j]->get("guid"));
+            $elgg_user_array = get_user_by_email($email_array[$i]);
+            if(!$elgg_user_array){
+                $user_array[$i] = null;
+                continue;
             }
-            if(isset($temp_array)){
-                $users = array_merge($users, $temp_array);
-                unset($temp_array);
+            for($j = 0; $j < count($elgg_user_array); $j++){
+                $temp_array[$j] = new ClipitUser($elgg_user_array[$j]->get("guid"));
             }
+            if(!$temp_array){
+                $user_array[$i] = null;
+                continue;
+            }
+            $user_array = array_merge($user_array, $temp_array);
         }
-        if(!$users){
+        if(!$user_array){
             return null;
         }
-        return $users;
+        return $user_array;
     }
 
 }
