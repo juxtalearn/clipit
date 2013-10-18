@@ -33,7 +33,7 @@
  */
 
 class ClipitUser{
-    
+
     // Class properties
     public $avatar;
     public $description;
@@ -65,6 +65,21 @@ class ClipitUser{
         $this->load($id);
     }
 
+    function save(){
+        $elgg_user = new ElggUser($this->id);
+        if(!$elgg_user){
+            return false;
+        }
+        $elgg_user->set("avatar", $this->avatar);
+        $elgg_user->set("description", $this->description);
+        $elgg_user->set("email", $this->email);
+        $elgg_user->set("name", $this->name);
+        $elgg_user->set("username", $this->login);
+        $elgg_user->set("password", $this->password);
+        $elgg_user->set("role", $this->role);
+        return $elgg_user->save();
+    }
+
     function load($id){
         $elgg_user = new ElggUser($id);
         if(!$elgg_user || !is_a($elgg_user, "ElggUser")){
@@ -80,21 +95,6 @@ class ClipitUser{
         $this->role = $elgg_user->get("role");
         $this->time_created = $elgg_user->get("time_created");
         return $this;
-    }
-
-    function save(){
-        $elgg_user = new ElggUser($this->id);
-        if(!$elgg_user){
-            return false;
-        }
-        $elgg_user->set("avatar", $this->avatar);
-        $elgg_user->set("description", $this->description);
-        $elgg_user->set("email", $this->email);
-        $elgg_user->set("name", $this->name);
-        $elgg_user->set("username",$this->login);
-        $elgg_user->set("password", $this->password);
-        $elgg_user->set("role", $this->role);
-        return $elgg_user->save();
     }
 
     static function exposeFunctions(){
@@ -172,28 +172,28 @@ class ClipitUser{
             return null;
         }
         $value_array = array();
-        for($i=0; $i<count($prop_array); $i++){
+        for($i = 0; $i < count($prop_array); $i++){
             $value_array[$i] = $user->$prop_array[$i];
         }
         return array_combine($prop_array, $value_array);
     }
 
     static function setProperties($id, $prop_array, $value_array){
-        if(count($prop_array)!=count($value_array)){
+        if(count($prop_array) != count($value_array)){
             return null;
         }
         $user = new ClipitUser($id);
         if(!$user){
             return null;
         }
-        for($i=0; $i<count($prop_array); $i++){
+        for($i = 0; $i < count($prop_array); $i++){
             $user->$prop_array[$i] = $value_array[$i];
         }
         return $user->save();
     }
 
     static function getAllUsers(){
-        $elgg_user_array = elgg_get_entities(array('type'=>'user'));
+        $elgg_user_array = elgg_get_entities(array('type' => 'user'));
         $user_array = array();
         for($i = 0; $i < count($elgg_user_array); $i++){
             $user_array[$i] = new ClipitUser($elgg_user_array[$i]->get("guid"));
@@ -204,7 +204,7 @@ class ClipitUser{
         return $user_array;
     }
 
-    static function getUsersById($id_array){      
+    static function getUsersById($id_array){
         for($i = 0; $i < count($id_array); $i++){
             $elgg_user = get_user($id_array[$i]);
             if(!$elgg_user){
@@ -235,7 +235,7 @@ class ClipitUser{
     }
 
     static function getUsersByEmail($email_array){
-        $user_array = array();
+        $user_array = array(); // so that the first merge doesn't fail
         for($i = 0; $i < count($email_array); $i++){
             $elgg_user_array = get_user_by_email($email_array[$i]);
             if(!$elgg_user_array){
