@@ -2,24 +2,24 @@
 
 /**
  * [Short description/title for module]
- * 
+ *
  * [Long description for module]
- * 
+ *
  * PHP version:      >= 5.2
- * 
+ *
  * Creation date:    [YYYY-MM-DD]
  * Last update:      $Date$
- * 
+ *
  * @category         [name]
  * @package          [name]
  * @subpackage       [name]
  * @author           Pablo Llinás Arnaiz <pebs74@gmail.com>
  * @version          $Version$
  * @link             [URL description]
- * 
+ *
  * @license          GNU Affero General Public License v3
  * http://www.gnu.org/licenses/agpl-3.0.txt
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
  * published by the Free Software Foundation, version 3. *
@@ -33,47 +33,46 @@
  */
 elgg_register_event_handler('init', 'system', 'clipit_core_init');
 
-function clipit_core_init() {
+function clipit_core_init(){
+    loadLibs();
     exposeRestApi();
     elgg_register_plugin_hook_handler('unit_test', 'system', 'clipit_core_tests');
 }
 
-function exposeRestApi() {
-    ClipitActivity::exposeFunctions();
-    ClipitComment::exposeFunctions();
-    ClipitFile::exposeFunctions();
-    ClipitGroup::exposeFunctions();
-    ClipitPalette::exposeFunctions();
-    ClipitQuiz::exposeFunctions();
-    ClipitQuizQuestion::exposeFunctions();
-    ClipitQuizResult::exposeFunctions();
-    ClipitSite::exposeFunctions();
-    ClipitSTA::exposeFunctions();
-    ClipitStoryboard::exposeFunctions();
-    ClipitTaxonomy::exposeFunctions();
-    ClipitTaxonomySB::exposeFunctions();
-    ClipitTaxonomyTag::exposeFunctions();
-    ClipitTaxonomyTC::exposeFunctions();
-    ClipitUser::exposeFunctions();
-    
+function loadLibs(){
+    // load the library files from clipit_core/lib/
+    $lib_files = array(
+        "clipit_activity.php", "clipit_comment.php", "clipit_file.php", "clipit_group.php", "clipit_palette.php",
+        "clipit_quiz.php", "clipit_quiz_question.php", "clipit_quiz_result.php", "clipit_site.php", "clipit_sta.php",
+        "clipit_storyboard.php", "clipit_taxonomy.php", "clipit_taxonomy_sb.php", "clipit_taxonomy_tag.php",
+        "clipit_taxonomy_tc.php", "clipit_user.php", "clipit_video.php"
+    );
+
+    foreach($lib_files as $file){
+        $file = elgg_get_plugins_path()."clipit_core/lib/".$file;
+        elgg_log("Loading $file...");
+        if(!include_once($file)){
+            $msg = "Could not load $file";
+            throw new InstallationException($msg);
+        }
+    }
 }
 
-function clipit_core_tests($hook, $type, $value, $params) {
-    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitActivity_tests.php";
-    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitComment_tests.php";
-    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitFile_tests.php";
-    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitGroup_tests.php";
-    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitPalette_tests.php";
-    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitQuizQuestion_tests.php";
-    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitQuizResult_tests.php";
-    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitQuiz_tests.php";
-    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitSTA_tests.php";
-    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitSite_tests.php";
-    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitStoryboard_tests.php";
-    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitTaxonomy_tests.php";
-    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitTaxonomySB_tests.php";
-    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitTaxonomyTag_tests.php";
-    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitTaxonomyTC_tests.php";
-    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitUser_tests.php";
+function exposeRestApi(){
+    clipit_user_expose_functions();
+}
+
+function clipit_core_tests($hook, $type, $value, $params){
+    $test_files = array(
+        "ClipitActivity_tests.php", "ClipitComment_tests.php", "ClipitFile_tests.php", "ClipitGroup_tests.php",
+        "ClipitPalette_tests.php", "ClipitQuizQuestion_tests.php", "ClipitQuizResult_tests.php",
+        "ClipitQuiz_tests.php", "ClipitSTA_tests.php", "ClipitSite_tests.php", "ClipitStoryboard_tests.php",
+        "ClipitTaxonomy_tests.php", "ClipitTaxonomySB_tests.php", "ClipitTaxonomyTag_tests.php",
+        "ClipitTaxonomyTC_tests.php", "ClipitUser_tests.php"
+    );
+    foreach($test_files as $file){
+        $file = elgg_get_plugins_path()."clipit_core/tests/".$file;
+        $value[] = $file;
+    }
     return $value;
 }
