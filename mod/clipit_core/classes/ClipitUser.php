@@ -57,7 +57,6 @@ class ClipitUser{
             $elgg_user = new ElggUser();
             $id = $elgg_user->save();
             $this->id = $id;
-            $this->login = "user_".$id;
             $this->save();
         } else{
             $elgg_user = new ElggUser($this->id);
@@ -72,13 +71,19 @@ class ClipitUser{
         $elgg_user->set("password", $this->password);
         $elgg_user->set("salt", $this->password_hash);
         $elgg_user->set("role", $this->role);
+        // To prevent from users being private
+        $elgg_user->set("access_id", '2');
         return $elgg_user->save();
     }
 
-    function load($id = null){
-        $elgg_user = new ElggUser($id);
-        if(!$elgg_user || !is_a($elgg_user, "ElggUser")){
-            return null;
+    function load($id = -1){
+        if($id == -1){
+            $elgg_user = new ElggUser();
+        }else{
+            $elgg_user = new ElggUser($id);
+        }
+        if(!$elgg_user){
+            return false;
         }
         $this->description = $elgg_user->get("description");
         $this->email = $elgg_user->get("email");
@@ -93,6 +98,10 @@ class ClipitUser{
     }
 
     function delete(){
-
+        $elgg_user = get_user($this->id);
+        if(!$elgg_user){
+            return false;
+        }
+        return $elgg_user->delete();
     }
 }

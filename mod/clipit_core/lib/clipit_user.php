@@ -20,13 +20,13 @@ function clipit_user_expose_functions(){
                 "required" => true),
             "password" => array(
                 "type" => "string",
-                "required" => false),
+                "required" => true),
             "name" => array(
                 "type" => "string",
-                "required" => false),
+                "required" => true),
             "email" => array(
                 "type" => "string",
-                "required" => false),
+                "required" => true),
             "role" => array(
                 "type" => "string",
                 "required" => false),
@@ -103,7 +103,7 @@ function clipit_user_list_properties(){
     return get_class_vars("ClipitUser");
 }
 
-function clipit_user_create_user($login, $password = null, $name = null, $email = null, $role = null, $description = null){
+function clipit_user_create_user($login, $password, $name, $email, $role = null, $description = null){
     if(empty($login)){
         throw(new InvalidParameterException("The user login cannot be empty"));
     }
@@ -111,39 +111,33 @@ function clipit_user_create_user($login, $password = null, $name = null, $email 
         throw(new InvalidParameterException("The user login already exists"));
     }
     if(!$user = new ClipitUser()){
-        return null;
+        return false;
     }
     $user->login = $login;
-    if($password){
-        $user->password_hash = generate_random_cleartext_password();
-        $user->password = md5($password.$user->password_hash);
-    }
-    if($name){
-        $user->name = $name;
-    }
-    if($email){
-        $user->email = $email;
-    }
-    if($role){
+    $user->password_hash = generate_random_cleartext_password();
+    $user->password = md5($password.$user->password_hash);
+    $user->name = $name;
+    $user->email = $email;
+    if(is_not_null($role)){
         $user->role = $role;
     }
-    if($description){
+    if(is_not_null($description)){
         $user->description = $description;
     }
     return $user->save();
 }
 
 function clipit_user_delete_user($id){
-    if(!$elgg_user = get_user($id)){
-        return null;
+    if(!$user = new ClipitUser($id)){
+        return false;
     }
-    return $elgg_user->delete();
+    return $user->delete();
 }
 
 function clipit_user_get_properties($id, $prop_array){
     $user = new ClipitUser($id);
     if(!$user){
-        return null;
+        return false;
     }
     $value_array = array();
     for($i = 0; $i < count($prop_array); $i++){
