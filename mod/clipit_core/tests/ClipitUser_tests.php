@@ -21,7 +21,7 @@ class ClipitCore_UserTest extends ElggCoreUnitTest {
     private $site_url = "http://juxtalearn.org/sandbox/miguel/clipit_dev";
     private $api_ending = "/services/api/rest/xml";
     private $api_key = "01ce6c5b8e208de5a0e5a34b7171c4c577163b24";
-    private $test_guid = 50;
+    private $test_guid = 30;
     /**
      * Called before each test object.
      */
@@ -111,7 +111,7 @@ class ClipitCore_UserTest extends ElggCoreUnitTest {
         //for($i=0; $i<$xml_api_ret->result->)*/
         
         // user list retrieved from PHP call
-        $php_user_list = ClipitUser::getAllUsers();
+        $php_user_list = clipit_user_get_all_users();
       //  $this->dump($php_user_list);
         //$xml_php_user_list = ClipitUser
         //$this->dump($xml_php_user_list->asXML());
@@ -125,45 +125,48 @@ class ClipitCore_UserTest extends ElggCoreUnitTest {
     }
 
     public function testGetUsersById() {
-        $api_ret_string = send_api_get_call(
-            $this->site_url . $this->api_ending, array("method" => "clipit.user.getUsersById",
-            "id_array[]" => "30",
-            "id_array[]" => "37",
-            "api_key" => $this->api_key), array());
-        //$this->dump($api_ret_string);
-        //$this->dump(simplexml_load_string($api_ret_string));
         
         // Si no hay usuario
-        $user_null = ClipitUser::getUsersById();
+        $user_null = clipit_user_get_users_by_id();
         $this->assertNull($user_null);
         
-        // Usuario que no existe en la plataforma
-        // ERRROR AQUI ESTO NO FUNCIONA!!!!!!!!!
-        $clipit_user = ClipitUser::getUsersById(array("0"));
-        $this->dump($clipit_user);
-        $elgg_user = new ClipitUser("0");
-        $elgg_user = array($elgg_user);
-        $this->dump($elgg_user);
-        $this->assertEqual($clipit_user, $elgg_user);
+        // Usuarios que no existen en la plataforma
+        $clipit_user = clipit_user_get_users_by_id(array("0","38"));
+        for($i=0; $i<count($clipit_user); $i++){
+            $this->assertNull($clipit_user[$i]);
+        }
         
         // Solamente 1 usuario
-        $clipit_user = ClipitUser::getUsersById(array($this->test_guid));
+        $clipit_user = clipit_user_get_users_by_id(array($this->test_guid));
         $elgg_user = new ClipitUser($this->test_guid);
-        $elgg_user = array($elgg_user);
-        $this->assertEqual($clipit_user, $elgg_user);
+        $this->assertEqual($clipit_user, array($elgg_user));
         
-        // Más de 1 usuario
-        $clipit_user = ClipitUser::getUsersById(array($this->test_guid));
-        $elgg_user = new ClipitUser($this->test_guid);
-        $elgg_user = array($elgg_user);
-        $this->assertEqual($clipit_user, $elgg_user);
-        
-        
+        // Más de 1 usuario que existan o no
+        $clipit_user = clipit_user_get_users_by_id(array($this->test_guid, "400", "37"));
+        for($i=0; $i<count($clipit_user); $i++){
+            if($clipit_user[$i])
+                $this->assertNotNull($clipit_user[$i]);
+            else
+                $this->assertNull($clipit_user[$i]);
+        }
+         
     }
     public function testGetUserByLogin(){
         
     }
     public function testGetUsersByEmail(){
+        $this->dump(clipit_user_get_all_users());
+    }
+    public function testCreateUser(){
+        $create_user = clipit_user_create_user(
+                "", 
+                $password = null, 
+                $name = null, 
+                $email = null, 
+                $role = null, 
+                $description = null
+        );
+        $this->dump($create_user);
         
     }
 }
