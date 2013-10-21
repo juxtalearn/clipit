@@ -11,7 +11,7 @@ function clipit_user_expose_functions(){
     // clipit.user.list_properties
     expose_function("clipit.user.list_properties",
         "clipit_user_list_properties",
-        null, "description", 'GET', true, false);
+        null, "description", 'GET', false, true);
     expose_function("clipit.user.create_user",
         "clipit_user_create_user",
         array(
@@ -34,14 +34,14 @@ function clipit_user_expose_functions(){
                 "type" => "string",
                 "required" => false)
         ),
-        "description goes here", 'GET', true, false);
+        "description goes here", 'GET', false, true);
     expose_function("clipit.user.delete_user",
         "clipit_user_delete_user",
         array(
             "id" => array(
                 "type" => "int",
                 "required" => true)),
-        "description goes here", 'GET', true, false);
+        "description goes here", 'GET', false, true);
     expose_function("clipit.user.get_properties",
         "clipit_user_get_properties",
         array(
@@ -51,7 +51,7 @@ function clipit_user_expose_functions(){
             "prop_array" => array(
                 "type" => "array",
                 "required" => true)),
-        "description goes here", 'GET', true, false);
+        "description goes here", 'GET', false, true);
     expose_function("clipit.user.set_properties",
         "clipit_user_set_roperties",
         array(
@@ -64,39 +64,39 @@ function clipit_user_expose_functions(){
             "value_array" => array(
                 "type" => "array",
                 "required" => true)),
-        "description goes here", 'GET', true, false);
+        "description goes here", 'GET', false, true);
     expose_function("clipit.user.get_all_users",
         "clipit_user_get_all_users",
         NULL,
-        "description goes here", 'GET', true, false);
+        "description goes here", 'GET', false, true);
     expose_function("clipit.user.get_users_by_id",
         "clipit_user_get_users_by_id",
         array(
             "id_array" => array(
                 "type" => "array",
                 "required" => true)),
-        "description goes here", 'GET', true, false);
+        "description goes here", 'GET', false, true);
     expose_function("clipit.user.get_users_by_login",
         "clipit_user_get_users_by_login",
         array(
             "login_array" => array(
                 "type" => "array",
                 "required" => true)),
-        "description goes here", 'GET', true, false);
+        "description goes here", 'GET', false, true);
     expose_function("clipit.user.get_users_by_email",
         "clipit_user_get_users_by_email",
         array(
             "email_array" => array(
                 "type" => "array",
                 "required" => true)),
-        "description goes here", 'GET', true, false);
+        "description goes here", 'GET', false, true);
     expose_function("clipit.user.get_users_by_role",
         "clipit_user_get_users_by_role",
         array(
             "role_array" => array(
                 "type" => "array",
                 "required" => true)),
-        "description goes here", 'GET', true, false);
+        "description goes here", 'GET', false, true);
 }
 
 function clipit_user_list_properties(){
@@ -124,7 +124,12 @@ function clipit_user_create_user($login, $password, $name, $email, $role = null,
     if(is_not_null($description)){
         $user->description = $description;
     }
-    return $user->save();
+    if($user->save()){
+        return "User with id = $user->id was created";
+    }
+    else{
+        throw(new CallException("There was a problem creating the new user"));
+    }
 }
 
 function clipit_user_delete_user($id){
@@ -160,7 +165,8 @@ function clipit_user_set_properties($id, $prop_array, $value_array){
     return $user->save();
 }
 
-function clipit_user_get_all_users($limit = 0){
+function clipit_user_get_all_users($limit = false){
+    $elgg_user_array =
     $elgg_user_array = elgg_get_entities(array('type' => 'user', 'limit' => $limit));
     $user_array = array();
     for($i = 0; $i < count($elgg_user_array); $i++){
@@ -227,10 +233,11 @@ function clipit_user_get_users_by_email($email_array){
 function clipit_user_get_users_by_role($role_array){
     $user_array = array();
     for($i = 0; $i < count($role_array); $i++){
-        $elgg_user_array = elgg_get_entities(
+        $elgg_user_array = elgg_get_entities_from_metadata(
             array(
                 'type' => 'user',
-                'role' => $role_array[$i]
+                'metadata_names' => array('role'),
+                'metadata_values' => array($role_array[$i])
             ));
         if(!$elgg_user_array){
             $user_array[$i] = null;
