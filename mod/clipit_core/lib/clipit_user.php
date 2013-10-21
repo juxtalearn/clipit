@@ -167,7 +167,7 @@ function clipit_user_set_properties($id, $prop_array, $value_array){
 }
 
 function clipit_user_get_all_users($limit = 0){
-    $elgg_user_array = elgg_get_entities(array('type' => 'user'), $limit);
+    $elgg_user_array = elgg_get_entities(array('type' => 'user', 'limit' => $limit));
     $user_array = array();
     for($i = 0; $i < count($elgg_user_array); $i++){
         $user_array[$i] = new ClipitUser($elgg_user_array[$i]->guid);
