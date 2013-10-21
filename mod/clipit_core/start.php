@@ -63,15 +63,13 @@ function exposeRestApi(){
 }
 
 function clipit_core_tests($hook, $type, $value, $params){
-//    $test_files = array(
-//        "ClipitActivity_tests.php", "ClipitComment_tests.php", "ClipitFile_tests.php", "ClipitGroup_tests.php",
-//        "ClipitPalette_tests.php", "ClipitQuizQuestion_tests.php", "ClipitQuizResult_tests.php",
-//        "ClipitQuiz_tests.php", "ClipitSTA_tests.php", "ClipitSite_tests.php", "ClipitStoryboard_tests.php",
-//        "ClipitTaxonomy_tests.php", "ClipitTaxonomySB_tests.php", "ClipitTaxonomyTag_tests.php",
-//        "ClipitTaxonomyTC_tests.php", "ClipitUser_tests.php"
-//    );
-    $test_files = array("ClipitUser_tests.php");
-
+    $test_files = array(
+        "ClipitActivity_tests.php", "ClipitComment_tests.php", "ClipitFile_tests.php", "ClipitGroup_tests.php",
+        "ClipitPalette_tests.php", "ClipitQuizQuestion_tests.php", "ClipitQuizResult_tests.php",
+        "ClipitQuiz_tests.php", "ClipitSTA_tests.php", "ClipitSite_tests.php", "ClipitStoryboard_tests.php",
+        "ClipitTaxonomy_tests.php", "ClipitTaxonomySB_tests.php", "ClipitTaxonomyTag_tests.php",
+        "ClipitTaxonomyTC_tests.php", "ClipitUser_tests.php"
+    );
     foreach($test_files as $file){
         $file = elgg_get_plugins_path()."clipit_core/tests/".$file;
         $value[] = $file;
