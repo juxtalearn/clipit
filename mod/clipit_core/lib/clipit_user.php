@@ -235,8 +235,9 @@ function clipit_user_get_users_by_role($role_array){
     for($i = 0; $i < count($role_array); $i++){
         $elgg_user_array = elgg_get_entities_from_metadata(
             array(
-                'metadata_name' => 'role',
-                'metadata_vale' => $role_array($i)
+                'type' => 'user',
+                'metadata_names' => array('role'),
+                'metadata_values' => array($role_array[$i])
             ));
         if(!$elgg_user_array){
             $user_array[$i] = null;
