@@ -42,7 +42,7 @@ class ClipitUser{
     public $description = "";
     public $email = "";
     public $name = "";
-    public $role = "";
+    public $role = "user";
     public $time_created = -1;
 
     function __construct($id = -1){
