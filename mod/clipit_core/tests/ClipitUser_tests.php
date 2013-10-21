@@ -155,7 +155,10 @@ class ClipitCore_UserTest extends ElggCoreUnitTest {
         
     }
     public function testGetUsersByEmail(){
-        $this->dump(clipit_user_get_all_users());
+        $this->dump(clipit_user_get_all_users("1"));
+    }
+    public function testGetUsersByRole(){
+        $this->dump(clipit_user_get_all_users("1"));
     }
     public function testCreateUser(){
         $create_user = clipit_user_create_user(
