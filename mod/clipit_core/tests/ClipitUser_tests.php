@@ -161,7 +161,7 @@ class ClipitCore_UserTest extends ElggCoreUnitTest {
         $this->dump(clipit_user_get_all_users("1"));
     }
     public function testCreateUser(){
-        $create_user = clipit_user_create_user(
+        /*$create_user = clipit_user_create_user(
                 "", 
                 $password = null, 
                 $name = null, 
@@ -169,7 +169,7 @@ class ClipitCore_UserTest extends ElggCoreUnitTest {
                 $role = null, 
                 $description = null
         );
-        $this->dump($create_user);
+        $this->dump($create_user);*/
         
     }
 }
