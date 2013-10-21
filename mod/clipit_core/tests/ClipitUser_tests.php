@@ -21,20 +21,25 @@ class ClipitCore_UserTest extends ElggCoreUnitTest {
     private $site_url = "http://juxtalearn.org/sandbox/miguel/clipit_dev";
     private $api_ending = "/services/api/rest/xml";
     private $api_key = "01ce6c5b8e208de5a0e5a34b7171c4c577163b24";
+    private $auth_token;
     private $test_guid = 30;
+    
     /**
      * Called before each test object.
      */
     public function __construct() {
         parent::__construct();
-        
+        $postCall = send_api_post_call(
+            $this->site_url . $this->api_ending, array("method" => "auth.gettoken",
+            "username" => "miguel", "password" => "miguel1!"), array());
+        $this->auth_token = simplexml_load_string($postCall)->result;
     }
 
     /**
      * Called before each test method.
      */
     public function setUp() {
-        $this->object = new ClipitUser();
+        
     }
 
     /**
@@ -105,7 +110,7 @@ class ClipitCore_UserTest extends ElggCoreUnitTest {
         // user list retrieved from API call
         $api_ret_string = send_api_get_call(
             $this->site_url . $this->api_ending, array("method" => "clipit.user.getAllUsers",
-            "api_key" => $this->api_key), array());
+            "auth_token" => $this->auth_token), array());
       // $this->dump($api_ret_string);
         /*$xml_api_ret = simplexml_load_string($api_ret);
         //for($i=0; $i<$xml_api_ret->result->)*/
@@ -155,23 +160,47 @@ class ClipitCore_UserTest extends ElggCoreUnitTest {
         
     }
     public function testGetUsersByEmail(){
-        $this->dump(clipit_user_get_all_users("1"));
+        // Si no hay email
+        $by_email = clipit_user_get_users_by_email();
+        $this->dump($by_email);
+        // si existe o no correos en la BD
+        $by_email = clipit_user_get_users_by_email(array("exampleFail@example.es", "magutierrezmoreno@gmail.com"));
+        for($i=0; $i<count($by_email); $i++){
+            if($by_email[$i])
+                $this->assertNotNull($by_email[$i]);
+            else
+                $this->assertNull($by_email[$i]);
+        }
     }
     public function testGetUsersByRole(){
-        $this->dump(clipit_user_get_all_users("1"));
+        $clipit_role = clipit_user_get_users_by_role(array("student"));
+        $this->dump($clipit_role);
+        $elgg_role = elgg_get_entities_from_metadata(
+                array(
+                    'metadata_name' => 'role',
+                    'type' => 'user',
+                    'metadata_value' => 'student',
+                    'limit' => 0
+                ));
+        $this->dump($elgg_role);
     }
     
     public function testCreateUser(){
         // Se espera una excepcion de tipo InvalidParameterException
         $this->expectException('InvalidParameterException');
-        $create_user = clipit_user_create_user(
-                "", 
-                $password = null, 
-                $name = null, 
-                $email = null, 
-                $role = null, 
-                $description = null
+        clipit_user_create_user(
+            "", 
+            $password = null, 
+            $name = null, 
+            $email = null, 
+            $role = null, 
+            $description = null
         );
         
     }
+}
+class ElggUserTest extends ElggUser {
+	public function expose_attributes() {
+		return $this->attributes;
+	}
 }
