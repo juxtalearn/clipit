@@ -8,8 +8,10 @@
  */
 
 function clipit_user_expose_functions(){
-    expose_function("clipit.user.get_class_properties",
-        "clipit_user_get_class_properties",
+
+    // clipit.user.list_properties
+    expose_function("clipit.user.list_properties",
+        "clipit_user_list_properties",
         null, "description", 'GET', true, false);
     expose_function("clipit.user.create_user",
         "clipit_user_create_user",
@@ -89,14 +91,23 @@ function clipit_user_expose_functions(){
                 "type" => "array",
                 "required" => true)),
         "description goes here", 'GET', true, false);
+    expose_function("clipit.user.get_users_by_role",
+        "clipit_user_get_users_by_role",
+        array(
+            "role_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "description goes here", 'GET', true, false);
 }
 
-function clipit_user_get_class_properties(){
+function clipit_user_list_properties(){
     return get_class_vars("ClipitUser");
 }
 
 function clipit_user_create_user($login, $password = null, $name = null, $email = null, $role = null, $description = null){
-    
+    if(empty($login)){
+        throw(new InvalidParameterException("The user login cannot be empty"));
+    }
     if(get_user_by_username($login)){
         throw(new InvalidParameterException("The user login already exists"));
     }
@@ -156,8 +167,8 @@ function clipit_user_set_properties($id, $prop_array, $value_array){
     return $user->save();
 }
 
-function clipit_user_get_all_users(){
-    $elgg_user_array = elgg_get_entities(array('type' => 'user', 'limit'=>0));
+function clipit_user_get_all_users($limit = 0){
+    $elgg_user_array = elgg_get_entities(array('type' => 'user'), $limit);
     $user_array = array();
     for($i = 0; $i < count($elgg_user_array); $i++){
         $user_array[$i] = new ClipitUser($elgg_user_array[$i]->guid);
@@ -192,7 +203,7 @@ function clipit_user_get_users_by_login($login_array){
             $user_array[$i] = null;
             continue;
         }
-        $user_array[$i] = new ClipitUser($elgg_user->get("guid"));
+        $user_array[$i] = new ClipitUser($elgg_user->guid);
     }
     if(!$user_array){
         return null;
@@ -210,11 +221,31 @@ function clipit_user_get_users_by_email($email_array){
         }
         $temp_array = array();
         for($j = 0; $j < count($elgg_user_array); $j++){
-            $temp_array[$j] = new ClipitUser($elgg_user_array[$j]->getguid);
+            $temp_array[$j] = new ClipitUser($elgg_user_array[$j]->guid);
         }
-        if(!$temp_array){
+        $user_array = array_merge($user_array, $temp_array);
+    }
+    if(!$user_array){
+        return null;
+    }
+    return $user_array;
+}
+
+function clipit_user_get_users_by_role($role_array){
+    $user_array = array();
+    for($i = 0; $i < count($role_array); $i++){
+        $elgg_user_array = elgg_get_entities(
+            array(
+                'type' => 'user',
+                'role' => $role_array[$i]
+            ));
+        if(!$elgg_user_array){
             $user_array[$i] = null;
             continue;
+        }
+        $temp_array = array();
+        for($j=0; $j<count($elgg_user_array); $j++){
+            $temp_array[$j] = new ClipitUser($elgg_user_array[$j]->guid);
         }
         $user_array = array_merge($user_array, $temp_array);
     }
