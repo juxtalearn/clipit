@@ -59,21 +59,21 @@ function exposeRestApi() {
 }
 
 function clipit_core_tests($hook, $type, $value, $params) {
-    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitActivity_tests.php";
-    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitComment_tests.php";
-    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitFile_tests.php";
-    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitGroup_tests.php";
-    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitPalette_tests.php";
-    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitQuizQuestion_tests.php";
-    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitQuizResult_tests.php";
-    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitQuiz_tests.php";
-    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitSTA_tests.php";
-    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitSite_tests.php";
-    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitStoryboard_tests.php";
-    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitTaxonomy_tests.php";
-    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitTaxonomySB_tests.php";
-    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitTaxonomyTag_tests.php";
-    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitTaxonomyTC_tests.php";
+//    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitActivity_tests.php";
+//    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitComment_tests.php";
+//    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitFile_tests.php";
+//    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitGroup_tests.php";
+//    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitPalette_tests.php";
+//    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitQuizQuestion_tests.php";
+//    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitQuizResult_tests.php";
+//    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitQuiz_tests.php";
+//    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitSTA_tests.php";
+//    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitSite_tests.php";
+//    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitStoryboard_tests.php";
+//    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitTaxonomy_tests.php";
+//    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitTaxonomySB_tests.php";
+//    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitTaxonomyTag_tests.php";
+//    $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitTaxonomyTC_tests.php";
     $value[] = elgg_get_plugins_path()."clipit_core/tests/ClipitUser_tests.php";
     return $value;
 }
