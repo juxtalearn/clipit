@@ -45,12 +45,15 @@ class ClipitUser{
     public $role = "";
     public $time_created = -1;
 
-    function __construct($id = null){
+    function __construct($id = -1){
+        if($id == -1){
+            $this->load();
+        }
         $this->load($id);
     }
 
     function save(){
-        if($this->id == -1){
+        if(!$this->id){
             $elgg_user = new ElggUser();
             $id = $elgg_user->save();
             $this->id = $id;
@@ -72,7 +75,7 @@ class ClipitUser{
         return $elgg_user->save();
     }
 
-    function load($id){
+    function load($id = null){
         $elgg_user = new ElggUser($id);
         if(!$elgg_user || !is_a($elgg_user, "ElggUser")){
             return null;
