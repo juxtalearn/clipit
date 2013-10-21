@@ -165,7 +165,8 @@ function clipit_user_set_properties($id, $prop_array, $value_array){
     return $user->save();
 }
 
-function clipit_user_get_all_users($limit = 0){
+function clipit_user_get_all_users($limit = false){
+    $elgg_user_array =
     $elgg_user_array = elgg_get_entities(array('type' => 'user', 'limit' => $limit));
     $user_array = array();
     for($i = 0; $i < count($elgg_user_array); $i++){
@@ -232,10 +233,10 @@ function clipit_user_get_users_by_email($email_array){
 function clipit_user_get_users_by_role($role_array){
     $user_array = array();
     for($i = 0; $i < count($role_array); $i++){
-        $elgg_user_array = elgg_get_entities(
+        $elgg_user_array = elgg_get_entities_from_metadata(
             array(
-                'type' => 'user',
-                'role' => $role_array[$i]
+                'metadata_name' => 'role',
+                'metadata_vale' => $role_array($i)
             ));
         if(!$elgg_user_array){
             $user_array[$i] = null;
