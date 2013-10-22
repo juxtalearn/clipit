@@ -31,7 +31,7 @@
  * along with this program. If not, see
  * http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-class ClipitCore_QuizTest extends ElggCoreUnitTest {
+class ClipitTaxonomyTCTest extends ElggCoreUnitTest {
     
 }
 

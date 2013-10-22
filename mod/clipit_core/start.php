@@ -65,11 +65,11 @@ function exposeRestApi(){
 
 function clipit_core_tests($hook, $type, $value, $params){
     $test_files = array(
-        "ClipitActivity_tests.php", "ClipitComment_tests.php", "ClipitFile_tests.php", "ClipitGroup_tests.php",
-        "ClipitPalette_tests.php", "ClipitQuizQuestion_tests.php", "ClipitQuizResult_tests.php",
-        "ClipitQuiz_tests.php", "ClipitSTA_tests.php", "ClipitSite_tests.php", "ClipitStoryboard_tests.php",
-        "ClipitTaxonomy_tests.php", "ClipitTaxonomySB_tests.php", "ClipitTaxonomyTag_tests.php",
-        "ClipitTaxonomyTC_tests.php", "ClipitUser_tests.php"
+        "ClipitActivityTest.php", "ClipitCommentTest.php", "ClipitFileTest.php", "ClipitGroupTest.php",
+        "ClipitPaletteTest.php", "ClipitQuizQuestionTest.php", "ClipitQuizResultTest.php",
+        "ClipitQuizTest.php", "ClipitSTATest.php", "ClipitSiteTest.php", "ClipitStoryboardTest.php",
+        "ClipitTaxonomyTest.php", "ClipitTaxonomySBTest.php", "ClipitTaxonomyTagTest.php",
+        "ClipitTaxonomyTCTest.php", "ClipitUserTest.php"
     );
     foreach($test_files as $file){
         $file = elgg_get_plugins_path()."clipit_core/tests/".$file;

@@ -16,7 +16,7 @@
  * @package Elgg
  * @subpackage Test
  */
-class ClipitCore_UserTest extends ElggCoreUnitTest {
+class ClipitUserTest extends ElggCoreUnitTest {
     private $test_guid = 30;
     private $site_url = "http://xxx";
     private $api_ending = "/services/api/rest/xml";

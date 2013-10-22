@@ -13,7 +13,7 @@
  *
  * @category        Class
  * @package         clipit
- * @subpackage      core
+ * @subpackage      user
  * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, JuxtaLearn Project
  * @version         $Version$
  * @link            http://juxtalearn.org
@@ -31,13 +31,6 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see
  * http://www.gnu.org/licenses/agpl-3.0.txt.
- */
-
-/**
- * Description for class
- *
- * @package     clipit
- * @subpackage  user
  */
 class ClipitUser{
     /**
@@ -77,6 +70,14 @@ class ClipitUser{
      */
     public $time_created = -1;
 
+    /**
+     * ClipitUser constructor function
+     *
+     * @param   int $id if = -1 then create new instance; else load instance with
+     * id = $id.
+     *
+     * @access  public
+     */
     function __construct($id = null){
         if($id){
             $this->load($id);
