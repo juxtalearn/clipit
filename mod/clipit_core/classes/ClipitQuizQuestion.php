@@ -34,50 +34,67 @@
 
 class ClipitQuizQuestion{
     // Class properties
-    public $id = int;
-    public $option_array = array(string => boolean);
-    public $question = string;
-    public $quiz = ClipitQuiz;
-    public $taxonomy_tag_array = array(ClipitTaxonomyTag);
-    public $type = string;
+    public $id = -1;
+    public $option_array = array();
+    public $question = "";
+    public $quiz = null;
+    public $taxonomy_tag_array = array();
+    public $type = "";
 
-    static function getProperty($id, $prop){
-        return "TO-DO";
+    function __construct($id = null){
+        if($id){
+            $this->load($id);
+        }
+    }
+    function load($id = null){
+        $elgg_object = null;
+        if($id){
+            $elgg_object = new ElggObject($id);
+        }
+        if(!$elgg_object){
+            return false;
+        }
+        $this->description          = $elgg_object->description;
+        $this->id                   = $elgg_object->id;
+        $this->name                 = $elgg_object->name;
+        $this->public               = $elgg_object->public;
+        $this->question_array       = $elgg_object->question_array;
+        $this->result_array         = $elgg_object->result_array;
+        $this->taxonomy             = $elgg_object->taxonomy;
+        $this->taxonomy_tag_array   = $elgg_object->taxonomy_tag_array;
+        $this->type                 = $elgg_object->type;
+        $this->video                = $elgg_object->video;
+        return $this;
     }
 
-    static function setProperty($id, $prop, $value){
-        return "TO-DO";
+    function save(){
+        if($this->id == -1){
+            $elgg_object = new ElggObject();
+            $id = $elgg_object->save();
+            $this->id = $id;
+        } else{
+            $elgg_object = new ElggObject($this->id);
+        }
+        if(!$elgg_object){
+            return false;
+        }
+        $elgg_object->description          = $this->description;
+        $elgg_object->name                 = $this->name;
+        $elgg_object->public               = $this->public;
+        $elgg_object->question_array       = $this->question_array;
+        $elgg_object->result_array         = $this->result_array;
+        $elgg_object->taxonomy             = $this->taxonomy;
+        $elgg_object->taxonomy_tag_array   = $this->taxonomy_tag_array;
+        $elgg_object->type                 = $this->type;
+        $elgg_object->video                = $this->video;
+        return $elgg_object->save();
     }
 
-    static function exposeFunctions(){
-        expose_function("clipit.quiz.question.getProperty", "ClipitQuizQuestion::getProperty",
-            array(
-                "id" => array(
-                    "type" => "integer",
-                    "required" => true),
-                "prop" => array(
-                    "type" => "string",
-                    "required" => true)),
-            "TO-DO:description",
-            'GET',
-            true,
-            false);
-
-        expose_function("clipit.quiz.question.setPropertysetProperty", "ClipitQuizQuestion::setProperty",
-            array(
-                "id" => array(
-                    "type" => "integer",
-                    "required" => true),
-                "prop" => array(
-                    "type" => "string",
-                    "required" => true),
-                "value" => array(
-                    "type" => "string",
-                    "required" => true)),
-            "TO-DO:description",
-            'GET',
-            true,
-            false);
+    function delete(){
+        if(!$elgg_object = get_Entity($this->id)){
+            return false;
+        }
+        return $elgg_object->delete();
     }
 
 }
