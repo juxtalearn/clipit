@@ -152,11 +152,11 @@ function clipit_user_get_properties($id, $prop_array){
 
 function clipit_user_set_properties($id, $prop_array, $value_array){
     if(count($prop_array) != count($value_array)){
-        return null;
+        return false;
     }
     $user = new ClipitUser($id);
     if(!$user){
-        return null;
+        return false;
     }
     for($i = 0; $i < count($prop_array); $i++){
         $user->$prop_array[$i] = $value_array[$i];
@@ -165,14 +165,10 @@ function clipit_user_set_properties($id, $prop_array, $value_array){
 }
 
 function clipit_user_get_all_users($limit = false){
-    $elgg_user_array =
     $elgg_user_array = elgg_get_entities(array('type' => 'user', 'limit' => $limit));
     $user_array = array();
     for($i = 0; $i < count($elgg_user_array); $i++){
         $user_array[$i] = new ClipitUser($elgg_user_array[$i]->guid);
-    }
-    if(!$user_array){
-        return null;
     }
     return $user_array;
 }
@@ -187,9 +183,6 @@ function clipit_user_get_users_by_id($id_array){
         }
         $user_array[$i] = new ClipitUser($elgg_user->guid);
     }
-    if(!$user_array){
-        return null;
-    }
     return $user_array;
 }
 
@@ -202,9 +195,6 @@ function clipit_user_get_users_by_login($login_array){
             continue;
         }
         $user_array[$i] = new ClipitUser($elgg_user->guid);
-    }
-    if(!$user_array){
-        return null;
     }
     return $user_array;
 }
@@ -222,9 +212,6 @@ function clipit_user_get_users_by_email($email_array){
             $temp_array[$j] = new ClipitUser($elgg_user_array[$j]->guid);
         }
         $user_array = array_merge($user_array, $temp_array);
-    }
-    if(!$user_array){
-        return null;
     }
     return $user_array;
 }
@@ -247,9 +234,6 @@ function clipit_user_get_users_by_role($role_array){
             $temp_array[$j] = new ClipitUser($elgg_user_array[$j]->guid);
         }
         $user_array = array_merge($user_array, $temp_array);
-    }
-    if(!$user_array){
-        return null;
     }
     return $user_array;
 }

@@ -35,68 +35,39 @@ function clipit_quiz_expose_functions(){
         "description goes here", 'GET', false, true);
 }
 
-/*function clipit_quiz_list_properties(){
+function clipit_quiz_list_properties(){
     return get_class_vars("ClipitQuiz");
 }
 
-function clipit_user_create_user($login, $password, $name, $email, $role = null, $description = null){
-    if(empty($login)){
-        throw(new InvalidParameterException("The user login cannot be empty"));
-    }
-    if(get_user_by_username($login)){
-        throw(new InvalidParameterException("The user login already exists"));
-    }
-    if(!$user = new ClipitUser()){
+function clipit_quiz_delete_quiz($id){
+    if(!$quiz = new ClipitQuiz($id)){
         return false;
     }
-    $user->login = $login;
-    $user->password_hash = generate_random_cleartext_password();
-    $user->password = md5($password.$user->password_hash);
-    $user->name = $name;
-    $user->email = $email;
-    if(is_not_null($role)){
-        $user->role = $role;
-    }
-    if(is_not_null($description)){
-        $user->description = $description;
-    }
-    if($user->save()){
-        return "User with id = $user->id was created";
-    }
-    else{
-        throw(new CallException("There was a problem creating the new user"));
-    }
+    return $quiz->delete();
 }
 
-function clipit_user_delete_user($id){
-    if(!$user = new ClipitUser($id)){
-        return false;
-    }
-    return $user->delete();
-}
-
-function clipit_user_get_properties($id, $prop_array){
-    $user = new ClipitUser($id);
-    if(!$user){
+function clipit_quiz_get_properties($id, $prop_array){
+    $quiz = new ClipitQuiz($id);
+    if(!$quiz){
         return false;
     }
     $value_array = array();
     for($i = 0; $i < count($prop_array); $i++){
-        $value_array[$i] = $user->$prop_array[$i];
+        $value_array[$i] = $quiz->$prop_array[$i];
     }
     return array_combine($prop_array, $value_array);
 }
 
-function clipit_user_set_properties($id, $prop_array, $value_array){
+function clipit_quiz_set_properties($id, $prop_array, $value_array){
     if(count($prop_array) != count($value_array)){
         return null;
     }
-    $user = new ClipitUser($id);
-    if(!$user){
+    $quiz = new ClipitQuiz($id);
+    if(!$quiz){
         return null;
     }
     for($i = 0; $i < count($prop_array); $i++){
-        $user->$prop_array[$i] = $value_array[$i];
+        $quiz->$prop_array[$i] = $value_array[$i];
     }
-    return $user->save();
-}*/
+    return $quiz->save();
+}
