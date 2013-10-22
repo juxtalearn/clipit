@@ -167,8 +167,10 @@ function clipit_user_set_properties($id, $prop_array, $value_array){
 function clipit_user_get_all_users($limit = false){
     $elgg_user_array = elgg_get_entities(array('type' => 'user', 'limit' => $limit));
     $user_array = array();
-    for($i = 0; $i < count($elgg_user_array); $i++){
-        $user_array[$i] = new ClipitUser($elgg_user_array[$i]->guid);
+    $i = 0;
+    foreach($elgg_user_array as $elgg_user){
+        $user_array[$i] = new ClipitUser($elgg_user->guid);
+        $i++;
     }
     return $user_array;
 }
@@ -208,8 +210,10 @@ function clipit_user_get_users_by_email($email_array){
             continue;
         }
         $temp_array = array();
-        for($j = 0; $j < count($elgg_user_array); $j++){
-            $temp_array[$j] = new ClipitUser($elgg_user_array[$j]->guid);
+        $j = 0;
+        foreach($elgg_user_array as $elgg_user){
+            $temp_array[$j] = new ClipitUser($elgg_user->guid);
+            $j++;
         }
         $user_array = array_merge($user_array, $temp_array);
     }
@@ -230,8 +234,10 @@ function clipit_user_get_users_by_role($role_array){
             continue;
         }
         $temp_array = array();
-        for($j=0; $j<count($elgg_user_array); $j++){
-            $temp_array[$j] = new ClipitUser($elgg_user_array[$j]->guid);
+        $j = 0;
+        foreach($elgg_user_array as $elgg_user){
+            $temp_array[$j] = new ClipitUser($elgg_user->guid);
+            $j++;
         }
         $user_array = array_merge($user_array, $temp_array);
     }
