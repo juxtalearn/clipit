@@ -51,6 +51,26 @@ class ClipitUser{
         }
     }
 
+    function load($id = null){
+        $elgg_user = null;
+        if($id){
+            $elgg_user = new ElggUser($id);
+        }
+        if(!$elgg_user){
+            return false;
+        }
+        $this->description      = $elgg_user->description;
+        $this->email            = $elgg_user->email;
+        $this->name             = $elgg_user->name;
+        $this->id               = $elgg_user->guid;
+        $this->login            = $elgg_user->username;
+        $this->password         = $elgg_user->password;
+        $this->password_hash    = $elgg_user->salt;
+        $this->role             = $elgg_user->role;
+        $this->time_created     = $elgg_user->time_created;
+        return $this;
+    }
+
     function save(){
         if($this->id == -1){
             $elgg_user = new ElggUser();
@@ -62,36 +82,14 @@ class ClipitUser{
         if(!$elgg_user){
             return false;
         }
-        $elgg_user->set("description", $this->description);
-        $elgg_user->set("email", $this->email);
-        $elgg_user->set("name", $this->name);
-        $elgg_user->set("username", $this->login);
-        $elgg_user->set("password", $this->password);
-        $elgg_user->set("salt", $this->password_hash);
-        $elgg_user->set("role", $this->role);
-        // To prevent from users being private
-        $elgg_user->set("access_id", '2');
+        $elgg_user->description     = $this->description;
+        $elgg_user->email           = $this->email;
+        $elgg_user->name            = $this->name;
+        $elgg_user->username        = $this->login;
+        $elgg_user->password        = $this->password;
+        $elgg_user->salt            = $this->password_hash;
+        $elgg_user->role            = $this->role;
         return $elgg_user->save();
-    }
-
-    function load($id = null){
-        $elgg_user = null;
-        if($id){
-            $elgg_user = new ElggUser($id);
-        }
-        if(!$elgg_user){
-            return false;
-        }
-        $this->description = $elgg_user->get("description");
-        $this->email = $elgg_user->get("email");
-        $this->name = $elgg_user->get("name");
-        $this->id = $elgg_user->get('guid');
-        $this->login = $elgg_user->get("username");
-        $this->password = $elgg_user->get("password");
-        $this->password_hash = $elgg_user->salt;
-        $this->role = $elgg_user->get("role");
-        $this->time_created = $elgg_user->get("time_created");
-        return $this;
     }
 
     function delete(){

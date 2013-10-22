@@ -8,10 +8,32 @@
  */
 
 function clipit_user_expose_functions(){
-    // clipit.user.list_properties
     expose_function("clipit.user.list_properties",
         "clipit_user_list_properties",
         null, "description", 'GET', false, true);
+    expose_function("clipit.user.get_properties",
+        "clipit_user_get_properties",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "prop_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "description goes here", 'GET', false, true);
+    expose_function("clipit.user.set_properties",
+        "clipit_user_set_properties",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "prop_array" => array(
+                "type" => "array",
+                "required" => true),
+            "value_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "description goes here", 'GET', false, true);
     expose_function("clipit.user.create_user",
         "clipit_user_create_user",
         array(
@@ -40,29 +62,6 @@ function clipit_user_expose_functions(){
         array(
             "id" => array(
                 "type" => "int",
-                "required" => true)),
-        "description goes here", 'GET', false, true);
-    expose_function("clipit.user.get_properties",
-        "clipit_user_get_properties",
-        array(
-            "id" => array(
-                "type" => "int",
-                "required" => true),
-            "prop_array" => array(
-                "type" => "array",
-                "required" => true)),
-        "description goes here", 'GET', false, true);
-    expose_function("clipit.user.set_properties",
-        "clipit_user_set_roperties",
-        array(
-            "id" => array(
-                "type" => "int",
-                "required" => true),
-            "prop_array" => array(
-                "type" => "array",
-                "required" => true),
-            "value_array" => array(
-                "type" => "array",
                 "required" => true)),
         "description goes here", 'GET', false, true);
     expose_function("clipit.user.get_all_users",
@@ -211,7 +210,7 @@ function clipit_user_get_users_by_login($login_array){
 }
 
 function clipit_user_get_users_by_email($email_array){
-    $user_array = array(); // so that the first merge doesn't fail
+    $user_array = array();
     for($i = 0; $i < count($email_array); $i++){
         $elgg_user_array = get_user_by_email($email_array[$i]);
         if(!$elgg_user_array){

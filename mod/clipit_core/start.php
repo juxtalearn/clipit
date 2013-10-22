@@ -60,6 +60,7 @@ function loadLibs(){
 
 function exposeRestApi(){
     clipit_user_expose_functions();
+    clipit_quiz_expose_functions();
 }
 
 function clipit_core_tests($hook, $type, $value, $params){
