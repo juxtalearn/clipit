@@ -17,7 +17,7 @@
  * @subpackage Test
  */
 class ClipitCore_UserTest extends ElggCoreUnitTest {
-
+    private $test_guid = 30;
     
     /**
      * Called before each test object.
@@ -62,10 +62,10 @@ class ClipitCore_UserTest extends ElggCoreUnitTest {
         $attributes['role']     = "user";
         $attributes['time_created'] = -1;
 		ksort($attributes);
-        
+
         $clipit_attributes = clipit_user_list_properties();
         ksort($clipit_attributes);
-        
+
 		$this->assertIdentical($clipit_attributes, $attributes);
 
     }
@@ -80,6 +80,7 @@ class ClipitCore_UserTest extends ElggCoreUnitTest {
     }
     public function testGetAllUsers() {
         $clipit_all_users = clipit_user_get_all_users();
+
         for($i=0; $i<count($clipit_all_users); $i++){
             // Es un objeto de tipo ClipitUser
             $this->assertIsA ($clipit_all_users[$i], "ClipitUser");
@@ -115,6 +116,7 @@ class ClipitCore_UserTest extends ElggCoreUnitTest {
          
     }
     public function testGetUserByLogin(){
+        // 2 usuarios existen y uno no, intercalados
         $username_array=array("antonio", "user_not_found", "miguel");
         $by_login = clipit_user_get_users_by_login($username_array);
         for($i=0; $i<count($by_login); $i++){
