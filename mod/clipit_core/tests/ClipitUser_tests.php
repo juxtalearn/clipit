@@ -18,7 +18,7 @@
  */
 class ClipitCore_UserTest extends ElggCoreUnitTest {
     private $test_guid = 30;
-    private $site_url = "http://xxx";
+    private $site_url = "http://juxtalearn.org/sandbox/miguel/clipit_dev";
     private $api_ending = "/services/api/rest/xml";
     private $auth_token;
     
