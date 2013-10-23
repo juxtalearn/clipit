@@ -198,9 +198,9 @@ To visit the group please click on the following link:
 		'group_tools:groups:membershipreq:invitations:revoke:confirm' => "Are you sure you wish to revoke this invitation",
 	
 		// group invitations
-		'group_tools:group:invitations:request' => "Outstanding membership requests",
+		'group_tools:group:invitations:request' => "Solicitudes de ingreso pendientes",
 		'group_tools:group:invitations:request:revoke:confirm' => "Are you sure you wish to revoke your membership request?",
-		'group_tools:group:invitations:request:non_found' => "There are no outstanding membership requests at this time",
+		'group_tools:group:invitations:request:non_found' => "No hay solicitudes de ingreso pendientes en este momento",
 	
 		// group listing
 		'group_tools:groups:sorting:alphabetical' => "Alfabético",
