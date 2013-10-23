@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ClipIt Core User class package
+ * ClipItUser Class package
  *
  * This package defines the ClipIt User class which is instantiated to represent
  * each of the users which interact with the ClipIt Core.
