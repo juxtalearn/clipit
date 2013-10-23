@@ -1,24 +1,25 @@
 <?php
 
 /**
- * [Short description/title for module]
+ * ClipItUser Class package
  *
- * [Long description for module]
+ * This package defines the ClipIt User class which is instantiated to represent
+ * each of the users which interact with the ClipIt Core.
  *
- * PHP version:      >= 5.2
+ * PHP version:     >= 5.2
  *
- * Creation date:    [YYYY-MM-DD]
- * Last update:      $Date$
+ * Creation date:   2013-10-10
+ * Last update:     $Date$
  *
- * @category         [name]
- * @package          [name]
- * @subpackage       [name]
- * @author           Pablo Llinás Arnaiz <pebs74@gmail.com>
- * @version          $Version$
- * @link             [URL description]
+ * @category        Class
+ * @package         clipit
+ * @subpackage      user
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, JuxtaLearn Project
+ * @version         $Version$
+ * @link            http://juxtalearn.org
  *
- * @license          GNU Affero General Public License v3
- * http://www.gnu.org/licenses/agpl-3.0.txt
+ * @license         GNU Affero General Public License v3
+ *                  (http://www.gnu.org/licenses/agpl-3.0.txt)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -31,20 +32,52 @@
  * along with this program. If not, see
  * http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-
 class ClipitUser{
-
-    // Class properties
+    /**
+     * @var int ClipitUser instance unique ID (-1 = unsaved)
+     */
     public $id = -1;
+    /**
+     * @var string Login name used to authenticate
+     */
     public $login = "";
+    /**
+     * @var string Login password (md5 of password + password_hash)
+     */
     public $password = "";
+    /**
+     * @var string Random string to encode password (do not edit)
+     */
     public $password_hash = "";
+    /**
+     * @var string Free text for user description (optional)
+     */
     public $description = "";
+    /**
+     * @var string User email
+     */
     public $email = "";
+    /**
+     * @var string Full user name
+     */
     public $name = "";
+    /**
+     * @var string User role: student, teacher, admin
+     */
     public $role = "user";
+    /**
+     * @var int Timestamp when the user was first saved
+     */
     public $time_created = -1;
 
+    /**
+     * ClipitUser constructor function
+     *
+     * @param   int $id if = -1 then create new instance; else load instance with
+     * id = $id.
+     *
+     * @access  public
+     */
     function __construct($id = null){
         if($id){
             $this->load($id);
