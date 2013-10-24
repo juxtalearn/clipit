@@ -477,19 +477,7 @@ function groups_annotation_menu_setup($hook, $type, $return, $params) {
 	}
 
 	if ($annotation->canEdit()) {
-		$url = elgg_http_add_url_query_elements('action/discussion/reply/delete', array(
-			'annotation_id' => $annotation->id,
-		));
-
-		$options = array(
-			'name' => 'delete',
-			'href' => $url,
-			'text' => "<span class=\"elgg-icon elgg-icon-delete\"></span>",
-            'title' => elgg_echo('delete'),
-			'confirm' => elgg_echo('deleteconfirm'),
-			'encode_text' => false
-		);
-		$return[] = ElggMenuItem::factory($options);
+		
 
 		$url = elgg_http_add_url_query_elements('discussion', array(
 			'annotation_id' => $annotation->id,
@@ -502,6 +490,20 @@ function groups_annotation_menu_setup($hook, $type, $return, $params) {
             'title' => elgg_echo('edit'),
 			'encode_text' => false,
 			'rel' => 'toggle',
+		);
+		$return[] = ElggMenuItem::factory($options);
+        
+        $url = elgg_http_add_url_query_elements('action/discussion/reply/delete', array(
+			'annotation_id' => $annotation->id,
+		));
+
+		$options = array(
+			'name' => 'delete',
+			'href' => $url,
+			'text' => "<span class=\"elgg-icon elgg-icon-delete\"></span>",
+            'title' => elgg_echo('delete'),
+			'confirm' => elgg_echo('deleteconfirm'),
+			'encode_text' => false
 		);
 		$return[] = ElggMenuItem::factory($options);
 	}
