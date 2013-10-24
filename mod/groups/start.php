@@ -485,6 +485,7 @@ function groups_annotation_menu_setup($hook, $type, $return, $params) {
 			'name' => 'delete',
 			'href' => $url,
 			'text' => "<span class=\"elgg-icon elgg-icon-delete\"></span>",
+            'title' => elgg_echo('delete'),
 			'confirm' => elgg_echo('deleteconfirm'),
 			'encode_text' => false
 		);
@@ -498,6 +499,7 @@ function groups_annotation_menu_setup($hook, $type, $return, $params) {
 			'name' => 'edit',
 			'href' => "#edit-annotation-$annotation->id",
 			'text' => "<span class=\"clipit-icon clipit-icon-edit $class\"></span>",
+            'title' => elgg_echo('edit'),
 			'encode_text' => false,
 			'rel' => 'toggle',
 		);
