@@ -1,5 +1,5 @@
 <?php
-
+namespace clipit\taxonomy\tag;
 /**
  * [Short description/title for module]
  * 
