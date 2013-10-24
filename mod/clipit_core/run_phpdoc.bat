@@ -1,1 +1,1 @@
-phpdoc -d .\ -t .\documentation\
+phpdoc
