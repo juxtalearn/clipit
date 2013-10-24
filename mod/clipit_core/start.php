@@ -1,10 +1,11 @@
 <?php namespace clipit;
+
 /**
  * JuxtaLearn ClipIt Web Space
  * PHP version:     >= 5.2
  * Creation date:   2013-10-10
  * Last update:     $Date$
- * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, JuxtaLearn Project
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>
  * @version         $Version$
  * @link            http://juxtalearn.org
  * @license         GNU Affero General Public License v3
@@ -20,6 +21,8 @@
  * along with this program. If not, see
  * http://www.gnu.org/licenses/agpl-3.0.txt.
  */
+
+use InstallationException;
 
 /**
  * Register the init method
