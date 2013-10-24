@@ -1,24 +1,14 @@
-<?php
-
+<?php namespace clipit;
 /**
- * [Short description/title for module]
- *
- * [Long description for module]
- *
- * PHP version:      >= 5.2
- *
- * Creation date:    [YYYY-MM-DD]
- * Last update:      $Date$
- *
- * @category         Elgg Plugin start
- * @package          clipit
- * @author           Pablo Llinás Arnaiz <pebs74@gmail.com>
- * @version          $Version$
- * @link             [URL description]
- *
- * @license          GNU Affero General Public License v3
- * http://www.gnu.org/licenses/agpl-3.0.txt
- *
+ * JuxtaLearn ClipIt Web Space
+ * PHP version:     >= 5.2
+ * Creation date:   2013-10-10
+ * Last update:     $Date$
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, JuxtaLearn Project
+ * @version         $Version$
+ * @link            http://juxtalearn.org
+ * @license         GNU Affero General Public License v3
+ *                  (http://www.gnu.org/licenses/agpl-3.0.txt)
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
  * published by the Free Software Foundation, version 3. *
@@ -30,14 +20,25 @@
  * along with this program. If not, see
  * http://www.gnu.org/licenses/agpl-3.0.txt.
  */
+
+/**
+ * Register the init method
+ */
 elgg_register_event_handler('init', 'system', 'clipit_core_init');
 
+/**
+ * Initialization method which loads libraries, exposes REST API, and registers test classes.
+ */
 function clipit_core_init(){
     loadLibs();
     exposeRestApi();
     elgg_register_plugin_hook_handler('unit_test', 'system', 'clipit_core_tests');
 }
 
+/**
+ * Loads package libraries.
+ * @throws InstallationException
+ */
 function loadLibs(){
     // load the library files from clipit_core/lib/
     $lib_files = array(
@@ -57,11 +58,24 @@ function loadLibs(){
     }
 }
 
+/**
+ * Exposes the REST API functions.
+ */
 function exposeRestApi(){
     clipit_user_expose_functions();
     clipit_quiz_expose_functions();
 }
 
+/**
+ * Method which runs and collects results for PHP Unit tests.
+ *
+ * @param $hook
+ * @param $type
+ * @param $value
+ * @param $params
+ *
+ * @return array
+ */
 function clipit_core_tests($hook, $type, $value, $params){
     $test_files = array(
         "ClipitActivityTest.php", "ClipitCommentTest.php", "ClipitFileTest.php", "ClipitGroupTest.php",

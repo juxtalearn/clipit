@@ -3,11 +3,14 @@
   <parser>
 	<default-package-name>clipit</default-package-name>
     <target>documentation/temp/</target>
+	<extensions>
+      <extension>php</extension>
+    </extensions>
   </parser>
   <transformer>
     <target>documentation/</target>
   </transformer>
   <files>
     <directory>.</directory>
-  </files>  
+  </files>
 </phpdoc>
