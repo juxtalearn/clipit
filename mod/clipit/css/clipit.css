@@ -36,3 +36,20 @@
 .file-comments form.elgg-form-comments-add{
     display:none;
 }
+/****************************************
+    ClipIt ICONS
+*************************************** */
+.clipit-icon{
+    background: transparent url('../graphics/clipit_icons_sprite.gif') no-repeat left;
+    width: 16px;
+    height: 16px;
+    margin: 0 2px;
+    position: relative;
+    display: inline-block;
+}
+.clipit-icon-edit{
+     background-position: 0 -19px;
+}
+.clipit-icon-edit:hover{
+     background-position: 0 -3px;
+}
