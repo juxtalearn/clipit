@@ -12,7 +12,6 @@
  * 
  * @category         [name]
  * @package          [name]
- * @subpackage       [name]
  * @author           Pablo Llinás Arnaiz <pebs74@gmail.com>
  * @version          $Version$
  * @link             [URL description]

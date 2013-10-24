@@ -5,9 +5,6 @@
  * PHP version:     >= 5.2
  * Creation date:   2013-10-10
  * Last update:     $Date$
- * @category        Library
- * @package         clipit
- * @subpackage      user
  * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, JuxtaLearn Project
  * @version         $Version$
  * @link            http://juxtalearn.org
@@ -24,7 +21,7 @@
  * along with this program. If not, see
  * http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-
+namespace clipit\user;
 /**
  * Expose library functions to REST API.
  * @return bool 'true' if success, 'false' if error.
@@ -273,6 +270,7 @@ function clipit_user_set_properties($id, $prop_array, $value_array){
  *
  * @param int $limit Number of results to show, default: 0 (no limit) (optional)
  *
+ * @uses ClipitUser
  * @return array Returns an array of ClipitUser objects
  */
 function clipit_user_get_all_users($limit = 0){

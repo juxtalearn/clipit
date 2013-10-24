@@ -1,5 +1,5 @@
 <?php
-
+namespace clipit\user;
 /**
  * ClipItUser Class package
  *
@@ -11,12 +11,11 @@
  * Creation date:   2013-10-10
  * Last update:     $Date$
  *
- * @category        Class
- * @package         clipit
- * @subpackage      user
  * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, JuxtaLearn Project
  * @version         $Version$
  * @link            http://juxtalearn.org
+ *
+ * @uses            function clipit_user_get_all_users
  *
  * @license         GNU Affero General Public License v3
  *                  (http://www.gnu.org/licenses/agpl-3.0.txt)

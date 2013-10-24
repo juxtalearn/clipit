@@ -14,7 +14,6 @@
  * }
  *
  * @package Elgg
- * @subpackage Test
  */
 class ClipitUserTest extends ElggCoreUnitTest {
     private $test_guid = 30;

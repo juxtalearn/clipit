@@ -10,9 +10,8 @@
  * Creation date:    [YYYY-MM-DD]
  * Last update:      $Date$
  *
- * @category         [name]
- * @package          [name]
- * @subpackage       [name]
+ * @category         Elgg Plugin start
+ * @package          clipit
  * @author           Pablo Llinás Arnaiz <pebs74@gmail.com>
  * @version          $Version$
  * @link             [URL description]

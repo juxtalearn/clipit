@@ -1,5 +1,5 @@
 <?php
-
+namespace clipit\file;
 /**
  * [Short description/title for module]
  *
@@ -10,9 +10,6 @@
  * Creation date:    [YYYY-MM-DD]
  * Last update:      $Date$
  *
- * @category         [name]
- * @package          [name]
- * @subpackage       [name]
  * @author           Pablo Llinás Arnaiz <pebs74@gmail.com>
  * @version          $Version$
  * @link             [URL description]
