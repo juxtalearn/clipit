@@ -42,7 +42,7 @@ class ClipitUserTest extends ElggCoreUnitTest {
      */
     var $api_ending = "/services/api/rest/xml";
     /**
-     * @var SimpleXMLElement[]
+     * @var SimpleXMLElement[] Oauth token
      */
     var $auth_token;
 
@@ -55,7 +55,7 @@ class ClipitUserTest extends ElggCoreUnitTest {
         $this->test_guid = elgg_get_logged_in_user_guid();
         $postCall = send_api_post_call(
             $this->site_url . $this->api_ending, array("method" => "auth.gettoken",
-            "username" => "miguel", "password" => "miguel1!"), array());
+            "username" => "<USER>", "password" => "<PASSWORD>"), array());
         $this->auth_token = simplexml_load_string($postCall)->result;
     }
 
