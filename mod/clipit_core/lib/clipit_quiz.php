@@ -1,4 +1,4 @@
-<?php
+<?php namespace clipit\quiz;
 /**
  * JuxtaLearn ClipIt Web Space
  * PHP version:     >= 5.2
@@ -20,12 +20,18 @@
  * along with this program. If not, see
  * http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-function clipit_quiz_expose_functions(){
-    expose_function("clipit.quiz.list_properties",
-        "clipit_quiz_list_properties",
+
+/**
+ * Expose libraty functions to REST API.
+ */
+function expose_functions(){
+    expose_function(
+        "clipit.quiz.list_properties",
+        __NAMESPACE__."\\list_properties",
         null, "description", 'GET', false, true);
-    expose_function("clipit.quiz.get_properties",
-        "clipit_quiz_get_properties",
+    expose_function(
+        "clipit.quiz.get_properties",
+        __NAMESPACE__."\\clipit_quiz_get_properties",
         array(
             "id" => array(
                 "type" => "int",
@@ -34,8 +40,9 @@ function clipit_quiz_expose_functions(){
                 "type" => "array",
                 "required" => true)),
         "description goes here", 'GET', false, true);
-    expose_function("clipit.quiz.set_properties",
-        "clipit_quiz_set_roperties",
+    expose_function(
+        "clipit.quiz.set_properties",
+        __NAMESPACE__."\\clipit_quiz_set_roperties",
         array(
             "id" => array(
                 "type" => "int",
@@ -49,18 +56,18 @@ function clipit_quiz_expose_functions(){
         "description goes here", 'GET', false, true);
 }
 
-function clipit_quiz_list_properties(){
-    return get_class_vars("ClipitQuiz");
+function list_properties(){
+    return get_class_vars(__NAMESPACE__."\\ClipitQuiz");
 }
 
-function clipit_quiz_delete_quiz($id){
+function delete_quiz($id){
     if(!$quiz = new ClipitQuiz($id)){
         return false;
     }
     return $quiz->delete();
 }
 
-function clipit_quiz_get_properties($id, $prop_array){
+function get_properties($id, $prop_array){
     $quiz = new ClipitQuiz($id);
     if(!$quiz){
         return false;
@@ -72,7 +79,7 @@ function clipit_quiz_get_properties($id, $prop_array){
     return array_combine($prop_array, $value_array);
 }
 
-function clipit_quiz_set_properties($id, $prop_array, $value_array){
+function set_properties($id, $prop_array, $value_array){
     if(count($prop_array) != count($value_array)){
         return null;
     }

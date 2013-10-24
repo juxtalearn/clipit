@@ -1,4 +1,4 @@
-<?php
+<?php  namespace clipit\taxonomy\tag;
 /**
  * JuxtaLearn ClipIt Web Space
  * PHP version:     >= 5.2

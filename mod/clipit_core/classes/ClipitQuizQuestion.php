@@ -21,6 +21,9 @@
  * http://www.gnu.org/licenses/agpl-3.0.txt.
  */
 
+// Alias so classes outside of this namespace can be used without path.
+use \ElggObject as ElggObject;
+
 /**
  * Class ClipitQuizQuestion
  * @package clipit\quiz\question
