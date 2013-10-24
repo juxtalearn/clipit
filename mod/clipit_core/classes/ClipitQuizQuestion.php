@@ -1,25 +1,14 @@
-<?php
-
+<?php namespace clipit\quiz\question;
 /**
- * [Short description/title for module]
- *
- * [Long description for module]
- *
- * PHP version:      >= 5.2
- *
- * Creation date:    [YYYY-MM-DD]
- * Last update:      $Date$
- *
- * @category         [name]
- * @package          [name]
- * @subpackage       [name]
- * @author           Pablo Llinás Arnaiz <pebs74@gmail.com>
- * @version          $Version$
- * @link             [URL description]
- *
- * @license          GNU Affero General Public License v3
- * http://www.gnu.org/licenses/agpl-3.0.txt
- *
+ * JuxtaLearn ClipIt Web Space
+ * PHP version:     >= 5.2
+ * Creation date:   2013-10-10
+ * Last update:     $Date$
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, JuxtaLearn Project
+ * @version         $Version$
+ * @link            http://juxtalearn.org
+ * @license         GNU Affero General Public License v3
+ *                  (http://www.gnu.org/licenses/agpl-3.0.txt)
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
  * published by the Free Software Foundation, version 3. *
@@ -32,6 +21,10 @@
  * http://www.gnu.org/licenses/agpl-3.0.txt.
  */
 
+/**
+ * Class ClipitQuizQuestion
+ * @package clipit\quiz\question
+ */
 class ClipitQuizQuestion{
     // Class properties
     public $id = -1;
@@ -46,6 +39,7 @@ class ClipitQuizQuestion{
             $this->load($id);
         }
     }
+
     function load($id = null){
         $elgg_object = null;
         if($id){
@@ -54,16 +48,16 @@ class ClipitQuizQuestion{
         if(!$elgg_object){
             return false;
         }
-        $this->description          = $elgg_object->description;
-        $this->id                   = $elgg_object->id;
-        $this->name                 = $elgg_object->name;
-        $this->public               = $elgg_object->public;
-        $this->question_array       = $elgg_object->question_array;
-        $this->result_array         = $elgg_object->result_array;
-        $this->taxonomy             = $elgg_object->taxonomy;
-        $this->taxonomy_tag_array   = $elgg_object->taxonomy_tag_array;
-        $this->type                 = $elgg_object->type;
-        $this->video                = $elgg_object->video;
+        $this->description = $elgg_object->description;
+        $this->id = $elgg_object->id;
+        $this->name = $elgg_object->name;
+        $this->public = $elgg_object->public;
+        $this->question_array = $elgg_object->question_array;
+        $this->result_array = $elgg_object->result_array;
+        $this->taxonomy = $elgg_object->taxonomy;
+        $this->taxonomy_tag_array = $elgg_object->taxonomy_tag_array;
+        $this->type = $elgg_object->type;
+        $this->video = $elgg_object->video;
         return $this;
     }
 
@@ -78,15 +72,15 @@ class ClipitQuizQuestion{
         if(!$elgg_object){
             return false;
         }
-        $elgg_object->description          = $this->description;
-        $elgg_object->name                 = $this->name;
-        $elgg_object->public               = $this->public;
-        $elgg_object->question_array       = $this->question_array;
-        $elgg_object->result_array         = $this->result_array;
-        $elgg_object->taxonomy             = $this->taxonomy;
-        $elgg_object->taxonomy_tag_array   = $this->taxonomy_tag_array;
-        $elgg_object->type                 = $this->type;
-        $elgg_object->video                = $this->video;
+        $elgg_object->description = $this->description;
+        $elgg_object->name = $this->name;
+        $elgg_object->public = $this->public;
+        $elgg_object->question_array = $this->question_array;
+        $elgg_object->result_array = $this->result_array;
+        $elgg_object->taxonomy = $this->taxonomy;
+        $elgg_object->taxonomy_tag_array = $this->taxonomy_tag_array;
+        $elgg_object->type = $this->type;
+        $elgg_object->video = $this->video;
         return $elgg_object->save();
     }
 

@@ -1,25 +1,14 @@
-<?php
-
+<?php namespace clipit\sta;
 /**
- * [Short description/title for module]
- *
- * [Long description for module]
- *
- * PHP version:      >= 5.2
- *
- * Creation date:    [YYYY-MM-DD]
- * Last update:      $Date$
- *
- * @category         [name]
- * @package          [name]
- * @subpackage       [name]
- * @author           Pablo Llinás Arnaiz <pebs74@gmail.com>
- * @version          $Version$
- * @link             [URL description]
- *
- * @license          GNU Affero General Public License v3
- * http://www.gnu.org/licenses/agpl-3.0.txt
- *
+ * JuxtaLearn ClipIt Web Space
+ * PHP version:     >= 5.2
+ * Creation date:   2013-10-10
+ * Last update:     $Date$
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, JuxtaLearn Project
+ * @version         $Version$
+ * @link            http://juxtalearn.org
+ * @license         GNU Affero General Public License v3
+ *                  (http://www.gnu.org/licenses/agpl-3.0.txt)
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
  * published by the Free Software Foundation, version 3. *
@@ -32,6 +21,10 @@
  * http://www.gnu.org/licenses/agpl-3.0.txt.
  */
 
+/**
+ * Class ClipitSTA
+ * @package clipit\sta
+ */
 class ClipitSTA{
     // Class properties
     public $description = string;

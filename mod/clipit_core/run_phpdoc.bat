@@ -1,1 +1,3 @@
-phpdoc -d .\ -t .\documentation\
+@echo off
+rmdir /s /q documentation
+phpdoc
