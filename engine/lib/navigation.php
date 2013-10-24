@@ -408,7 +408,7 @@ function elgg_entity_menu_setup($hook, $type, $return, $params) {
 		// edit link
 		$options = array(
 			'name' => 'edit',
-			'text' => elgg_echo('edit'),
+			'text' => "<span class=\"clipit-icon clipit-icon-edit $class\"></span>",
 			'title' => elgg_echo('edit:this'),
 			'href' => "$handler/edit/{$entity->getGUID()}",
 			'priority' => 200,
