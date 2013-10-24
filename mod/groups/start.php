@@ -497,7 +497,7 @@ function groups_annotation_menu_setup($hook, $type, $return, $params) {
 		$options = array(
 			'name' => 'edit',
 			'href' => "#edit-annotation-$annotation->id",
-			'text' => elgg_echo('edit'),
+			'text' => "<span class=\"clipit-icon clipit-icon-edit $class\"></span>",
 			'encode_text' => false,
 			'rel' => 'toggle',
 		);
