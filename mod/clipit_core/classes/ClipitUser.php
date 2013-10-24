@@ -73,10 +73,7 @@ class ClipitUser{
     /**
      * ClipitUser constructor function
      *
-     * @param   int $id if = -1 then create new instance; else load instance with
-     * id = $id.
-     *
-     * @access  public
+     * @param int|null $id If $id is 'null' then create new instance, else load instance with id = $id.
      */
     function __construct($id = null){
         if($id){
@@ -84,6 +81,13 @@ class ClipitUser{
         }
     }
 
+    /**
+     * Loads user from the system.
+     *
+     * @param int|null $id
+     *
+     * @return $this|bool Returns the ClipitUser instance with id = $id. Returns false in case of error.
+     */
     function load($id = null){
         $elgg_user = null;
         if($id){
@@ -104,6 +108,11 @@ class ClipitUser{
         return $this;
     }
 
+    /**
+     * Saves user to the system.
+     *
+     * @return bool|int Returns new user id
+     */
     function save(){
         if($this->id == -1){
             $elgg_user = new ElggUser();
@@ -125,6 +134,11 @@ class ClipitUser{
         return $elgg_user->save();
     }
 
+    /**
+     * Deletes a user from the system.
+     *
+     * @return bool 'true' if success, 'false' if error.
+     */
     function delete(){
         $elgg_user = get_user($this->id);
         if(!$elgg_user){
