@@ -1,31 +1,34 @@
 <?php namespace clipit\user;
-/**
- * JuxtaLearn ClipIt Web Space
- * PHP version:     >= 5.2
- * Creation date:   2013-10-10
- * Last update:     $Date$
- * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, JuxtaLearn Project
- * @version         $Version$
- * @link            http://juxtalearn.org
- * @license         GNU Affero General Public License v3
- *                  (http://www.gnu.org/licenses/agpl-3.0.txt)
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, version 3.
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Affero General Public License for more details.
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see
- * http://www.gnu.org/licenses/agpl-3.0.txt.
- */
+
+    /**
+     * JuxtaLearn ClipIt Web Space
+     * PHP version:     >= 5.2
+     * Creation date:   2013-10-10
+     * Last update:     $Date$
+     *
+     * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, JuxtaLearn Project
+     * @version         $Version$
+     * @link            http://juxtalearn.org
+     * @license         GNU Affero General Public License v3
+     *                  (http://www.gnu.org/licenses/agpl-3.0.txt)
+     *                  This program is free software: you can redistribute it and/or modify
+     *                  it under the terms of the GNU Affero General Public License as
+     *                  published by the Free Software Foundation, version 3.
+     *                  This program is distributed in the hope that it will be useful,
+     *                  but WITHOUT ANY WARRANTY; without even the implied warranty of
+     *                  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+     *                  GNU Affero General Public License for more details.
+     *                  You should have received a copy of the GNU Affero General Public License
+     *                  along with this program. If not, see
+     *                  http://www.gnu.org/licenses/agpl-3.0.txt.
+     */
 
 // Alias so classes outside of this namespace can be used without path.
 use \ElggUser as ElggUser;
 
 /**
  * Class ClipitUser
+ *
  * @package clipit\user
  */
 class ClipitUser{
@@ -42,9 +45,9 @@ class ClipitUser{
      */
     public $password = "";
     /**
-     * @var string Random string to encode password (do not edit)
+     * @var string Random string to encode password
      */
-    public $password_hash = "";
+    private $password_hash = "";
     /**
      * @var string Free text for user description (optional)
      */
@@ -81,7 +84,6 @@ class ClipitUser{
      * Loads user from the system.
      *
      * @param int|null $id
-     *
      * @return $this|bool Returns the ClipitUser instance with id = $id. Returns false in case of error.
      */
     function load($id = null){
@@ -106,13 +108,13 @@ class ClipitUser{
 
     /**
      * Saves user to the system.
+     *
      * @return bool|int Returns new user id
      */
     function save(){
         if($this->id == -1){
             $elgg_user = new ElggUser();
-            $id = $elgg_user->save();
-            $this->id = $id;
+            $this->id = $elgg_user->save();
         } else{
             $elgg_user = new ElggUser($this->id);
         }
@@ -131,6 +133,7 @@ class ClipitUser{
 
     /**
      * Deletes a user from the system.
+     *
      * @return bool 'true' if success, 'false' if error.
      */
     function delete(){
@@ -139,5 +142,20 @@ class ClipitUser{
             return false;
         }
         return $elgg_user->delete();
+    }
+
+    /**
+     * Creates an encoded user password using a random hash for encoding.
+     *
+     * @param string $password The new user password in clear text.
+     * @return bool 'true' if success, 'false' if error.
+     */
+    function setPassword($password){
+        if(!$password){
+            return false;
+        }
+        $this->password_hash = generate_random_cleartext_password();
+        $this->password = md5($password.$this->password_hash);
+        return true;
     }
 }

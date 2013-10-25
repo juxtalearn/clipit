@@ -4,6 +4,7 @@
  * PHP version:     >= 5.2
  * Creation date:   2013-10-10
  * Last update:     $Date$
+ *
  * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>
  * @version         $Version$
  * @link            http://juxtalearn.org
@@ -38,10 +39,11 @@ function clipit_core_init(){
 
 /**
  * Loads clipit classes.
+ *
  * @throws InstallationException
  */
 function loadObjects(){
-    $obj_files = elgg_get_file_list(elgg_get_plugins_path()."clipit_core/objects/",array(), array(), array(".php"));
+    $obj_files = elgg_get_file_list(elgg_get_plugins_path()."clipit_core/objects/", array(), array(), array(".php"));
     foreach($obj_files as $obj){
         elgg_log("Loading $obj...");
         if(!include_once($obj)){
@@ -53,6 +55,7 @@ function loadObjects(){
 
 /**
  * Loads clipit libraries.
+ *
  * @throws InstallationException
  */
 function loadLibraries(){
@@ -81,11 +84,10 @@ function exposeRestApi(){
  * @param $type
  * @param $value
  * @param $params
- *
  * @return array
  */
 function clipit_core_tests($hook, $type, $value, $params){
-    $test_files = elgg_get_file_list(elgg_get_plugins_path()."clipit_core/tests/",array(), array(), array(".php"));
+    $test_files = elgg_get_file_list(elgg_get_plugins_path()."clipit_core/tests/", array(), array(), array(".php"));
     foreach($test_files as $file){
         $value[] = $file;
     }
