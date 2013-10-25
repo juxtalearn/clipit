@@ -27,10 +27,10 @@
 elgg_register_event_handler('init', 'system', 'clipit_core_init');
 
 /**
- * Initialization method which loads libraries, exposes REST API, and registers test classes.
+ * Initialization method which loads objects, libraries, exposes the REST API, and registers test classes.
  */
 function clipit_core_init(){
-    loadClasses();
+    loadObjs();
     loadLibs();
     exposeRestApi();
     elgg_register_plugin_hook_handler('unit_test', 'system', 'clipit_core_tests');
@@ -40,12 +40,12 @@ function clipit_core_init(){
  * Loads clipit classes.
  * @throws InstallationException
  */
-function loadClasses(){
-    $class_files = elgg_get_file_list(elgg_get_plugins_path()."clipit_core/classes/",array(), array(), array(".php"));
-    foreach($class_files as $class){
-        elgg_log("Loading $class...");
-        if(!include_once($class)){
-            $msg = "Could not load $class";
+function loadObjs(){
+    $obj_files = elgg_get_file_list(elgg_get_plugins_path()."clipit_core/objects/",array(), array(), array(".php"));
+    foreach($obj_files as $obj){
+        elgg_log("Loading $obj...");
+        if(!include_once($obj)){
+            $msg = "Could not load $obj";
             throw new InstallationException($msg);
         }
     }
@@ -67,7 +67,7 @@ function loadLibs(){
 }
 
 /**
- * Exposes the REST API functions.
+ * Exposes the REST API
  */
 function exposeRestApi(){
     \clipit\user\expose_functions();
