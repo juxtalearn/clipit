@@ -1,6 +1,6 @@
 <?php namespace clipit\file;
     /**
-     * JuxtaLearn ClipIt Web Space
+     * ClipIt - JuxtaLearn Web Space
      * PHP version:     >= 5.2
      * Creation date:   2013-10-10
      * Last update:     $Date$
