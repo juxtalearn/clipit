@@ -28,7 +28,7 @@ namespace clipit\user;
  * Class ClipitUserTest
  * @package clipit\user
  */
-class ClipitUserTest extends ElggCoreUnitTest {
+class ClipitUserTest extends \ElggCoreUnitTest {
     /**
      * @var int Sample GUID exists
      */
