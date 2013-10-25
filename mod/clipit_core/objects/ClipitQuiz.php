@@ -42,7 +42,7 @@ class ClipitQuiz{
     public $result_array = array();
     public $taxonomy = null;
     public $taxonomy_tag_array = array();
-    public $type = "";
+    public $target = "";
     public $video = null;
 
     function __construct($id = null){
@@ -67,7 +67,7 @@ class ClipitQuiz{
         $this->result_array = $elgg_object->result_array;
         $this->taxonomy = $elgg_object->taxonomy;
         $this->taxonomy_tag_array = $elgg_object->taxonomy_tag_array;
-        $this->type = $elgg_object->type;
+        $this->target = $elgg_object->target;
         $this->video = $elgg_object->video;
         return $this;
     }
@@ -75,6 +75,7 @@ class ClipitQuiz{
     function save(){
         if($this->id == -1){
             $elgg_object = new ElggObject();
+            $elgg_object->subtype = "quiz";
             $this->id = $elgg_object->save();
         } else{
             $elgg_object = new ElggObject($this->id);
@@ -89,7 +90,7 @@ class ClipitQuiz{
         $elgg_object->result_array = $this->result_array;
         $elgg_object->taxonomy = $this->taxonomy;
         $elgg_object->taxonomy_tag_array = $this->taxonomy_tag_array;
-        $elgg_object->type = $this->type;
+        $elgg_object->target = $this->target;
         $elgg_object->video = $this->video;
         return $elgg_object->save();
     }

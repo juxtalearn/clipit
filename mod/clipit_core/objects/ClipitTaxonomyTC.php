@@ -45,33 +45,33 @@ class ClipitTaxonomyTC{
 
     static function exposeFunctions(){
         expose_function("clipit.taxonomy.tc.getProperty", "ClipitTaxonomyTC::getProperty",
-            array(
-                "id" => array(
-                    "type" => "integer",
-                    "required" => true),
-                "prop" => array(
-                    "type" => "string",
-                    "required" => true)),
-            "TO-DO:description",
-            'GET',
-            true,
-            false);
+                        array(
+                             "id" => array(
+                                 "type" => "integer",
+                                 "required" => true),
+                             "prop" => array(
+                                 "type" => "string",
+                                 "required" => true)),
+                        "TO-DO:description",
+                        'GET',
+                        true,
+                        false);
 
         expose_function("clipit.taxonomy.tc.setPropertysetProperty", "ClipitTaxonomyTC::setProperty",
-            array(
-                "id" => array(
-                    "type" => "integer",
-                    "required" => true),
-                "prop" => array(
-                    "type" => "string",
-                    "required" => true),
-                "value" => array(
-                    "type" => "string",
-                    "required" => true)),
-            "TO-DO:description",
-            'GET',
-            true,
-            false);
+                        array(
+                             "id" => array(
+                                 "type" => "integer",
+                                 "required" => true),
+                             "prop" => array(
+                                 "type" => "string",
+                                 "required" => true),
+                             "value" => array(
+                                 "type" => "string",
+                                 "required" => true)),
+                        "TO-DO:description",
+                        'GET',
+                        true,
+                        false);
     }
 
 }

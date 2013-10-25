@@ -12,11 +12,11 @@
      *                  (http://www.gnu.org/licenses/agpl-3.0.txt)
      *                  This program is free software: you can redistribute it and/or modify
      *                  it under the terms of the GNU Affero General Public License as
-     *                  published by the Free Software Foundation, version 3. *
+     *                  published by the Free Software Foundation, version 3.
      *                  This program is distributed in the hope that it will be useful,
      *                  but WITHOUT ANY WARRANTY; without even the implied warranty of
      *                  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-     *                  GNU Affero General Public License for more details. *
+     *                  GNU Affero General Public License for more details.
      *                  You should have received a copy of the GNU Affero General Public License
      *                  along with this program. If not, see
      *                  http://www.gnu.org/licenses/agpl-3.0.txt.
@@ -134,4 +134,30 @@ function delete_quiz($id){
         return false;
     }
     return $quiz->delete();
+}
+
+function get_all_quizzes($limit = 0){
+    $elgg_object_array = elgg_get_entities(array('type' => 'object',
+                                                 'subtype' => 'quiz',
+                                                 'limit' => $limit));
+    $quiz_array = array();
+    $i = 0;
+    foreach($elgg_object_array as $elgg_object){
+        $quiz_array[$i] = new ClipitQuiz($elgg_object->guid);
+        $i++;
+    }
+    return $quiz_array;
+}
+
+function get_quizzes_by_id($id_array){
+    $quiz_array = array();
+    for($i = 0; $i < count($id_array); $i++){
+        $elgg_object = get_entity($id_array[$i]);
+        if(!$elgg_object){
+            $quiz_array[$i] = null;
+            continue;
+        }
+        $quiz_array[$i] = new ClipitQuiz($elgg_object->guid);
+    }
+    return $quiz_array;
 }

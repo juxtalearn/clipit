@@ -47,33 +47,33 @@ class ClipitFile{
 
     static function exposeFunctions(){
         expose_function("clipit.file.getProperty", "ClipitFile::getProperty",
-            array(
-                "id" => array(
-                    "type" => "integer",
-                    "required" => true),
-                "prop" => array(
-                    "type" => "string",
-                    "required" => true)),
-            "TO-DO:description",
-            'GET',
-            true,
-            false);
+                        array(
+                             "id" => array(
+                                 "type" => "integer",
+                                 "required" => true),
+                             "prop" => array(
+                                 "type" => "string",
+                                 "required" => true)),
+                        "TO-DO:description",
+                        'GET',
+                        true,
+                        false);
 
         expose_function("clipit.file.setProperty", "ClipitFile::setProperty",
-            array(
-                "id" => array(
-                    "type" => "integer",
-                    "required" => true),
-                "prop" => array(
-                    "type" => "string",
-                    "required" => true),
-                "value" => array(
-                    "type" => "string",
-                    "required" => true)),
-            "TO-DO:description",
-            'GET',
-            true,
-            false);
+                        array(
+                             "id" => array(
+                                 "type" => "integer",
+                                 "required" => true),
+                             "prop" => array(
+                                 "type" => "string",
+                                 "required" => true),
+                             "value" => array(
+                                 "type" => "string",
+                                 "required" => true)),
+                        "TO-DO:description",
+                        'GET',
+                        true,
+                        false);
     }
 
 }

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <phpdoc>
-  <parser>
-	<default-package-name>clipit</default-package-name>
-    <target>documentation/temp/</target>
-	<extensions>
-      <extension>php</extension>
-    </extensions>
-  </parser>
-  <transformer>
-    <target>documentation/</target>
-  </transformer>
-  <files>
-    <directory>.</directory>
-  </files>
+    <parser>
+        <default-package-name>clipit</default-package-name>
+        <target>documentation/temp/</target>
+        <extensions>
+            <extension>php</extension>
+        </extensions>
+    </parser>
+    <transformer>
+        <target>documentation/</target>
+    </transformer>
+    <files>
+        <directory>.</directory>
+    </files>
 </phpdoc>
