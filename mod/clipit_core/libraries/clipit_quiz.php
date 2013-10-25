@@ -43,7 +43,7 @@ function expose_functions(){
         "description goes here", 'GET', false, true);
     expose_function(
         "clipit.quiz.set_properties",
-        __NAMESPACE__."\\set_roperties",
+        __NAMESPACE__."\\set_properties",
         array(
              "id" => array(
                  "type" => "int",
@@ -55,6 +55,58 @@ function expose_functions(){
                  "type" => "array",
                  "required" => true)),
         "description goes here", 'GET', false, true);
+    expose_function(
+        "clipit.quiz.create_quiz",
+        __NAMESPACE__."\\create_quiz",
+        array(
+             "name" => array(
+                 "type" => "string",
+                 "required" => true),
+             "target" => array(
+                 "type" => "string",
+                 "required" => true),
+             "description" => array(
+                 "type" => "string",
+                 "required" => false),
+             "public" => array(
+                 "type" => "bool",
+                 "required" => false),
+             "question_array" => array(
+                 "type" => "array",
+                 "required" => false),
+             "result_array" => array(
+                 "type" => "array",
+                 "required" => false),
+             "taxonomy" => array(
+                 "type" => "int",
+                 "required" => false),
+             "taxonomy_tag_array" => array(
+                 "type" => "array",
+                 "required" => false),
+             "video" => array(
+                 "type" => "int",
+                 "required" => false)),
+        "description goes here", 'GET', false, true);
+    expose_function(
+        "clipit.quiz.delete_quiz",
+        __NAMESPACE__."\\delete_quiz",
+        array(
+             "id" => array(
+                 "type" => "int",
+                 "required" => true)),
+        "description", 'GET', false, true);
+    expose_function(
+        "clipit.quiz.get_all_quizzes",
+        __NAMESPACE__."\\get_all_quizzes",
+        null, "description", 'GET', false, true);
+    expose_function(
+        "clipit.quiz.get_quizzes_by_id",
+        __NAMESPACE__."\\get_quizzes_by_id",
+        array(
+             "id_array" => array(
+                 "type" => "array",
+                 "required" => true)),
+        "description", 'GET', false, true);
 }
 
 function list_properties(){
@@ -75,7 +127,7 @@ function get_properties($id, $prop_array){
 
 function set_properties($id, $prop_array, $value_array){
     if(count($prop_array) != count($value_array)){
-        return null;
+        throw(new \InvalidParameterException("ERROR: The length of prop_array and value_array must match."));
     }
     $quiz = new ClipitQuiz($id);
     if(!$quiz){
@@ -88,9 +140,9 @@ function set_properties($id, $prop_array, $value_array){
 }
 
 function create_quiz($name,
-                     $type,
+                     $target,
                      $description = null,
-                     $public = false,
+                     $public = null,
                      $question_array = null,
                      $result_array = null,
                      $taxonomy = null,
@@ -98,12 +150,12 @@ function create_quiz($name,
                      $video = null){
     $quiz = new ClipitQuiz();
     $quiz->name = $name;
-    $quiz->type = $type;
+    $quiz->target = $target;
     if($description){
         $quiz->description = $description;
     }
     if($public){
-        $quiz->public = $public;
+        $quiz->public = (bool) $public;
     }
     if($question_array){
         foreach($question_array as $question){

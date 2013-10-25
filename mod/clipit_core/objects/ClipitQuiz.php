@@ -62,7 +62,7 @@ class ClipitQuiz{
         $this->id = $elgg_object->guid;
         $this->description = $elgg_object->description;
         $this->name = $elgg_object->name;
-        $this->public = $elgg_object->public;
+        $this->public = (bool) $elgg_object->public;
         $this->question_array = $elgg_object->question_array;
         $this->result_array = $elgg_object->result_array;
         $this->taxonomy = $elgg_object->taxonomy;
@@ -85,7 +85,7 @@ class ClipitQuiz{
         }
         $elgg_object->description = $this->description;
         $elgg_object->name = $this->name;
-        $elgg_object->public = $this->public;
+        $elgg_object->public = (bool) $this->public;
         $elgg_object->question_array = $this->question_array;
         $elgg_object->result_array = $this->result_array;
         $elgg_object->taxonomy = $this->taxonomy;
