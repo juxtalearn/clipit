@@ -37,7 +37,7 @@ use \ElggUser as ElggUser;
  */
 class ClipitUser{
     /**
-     * @var int Unique ID of saved ClipitUser (-1 = unsaved)
+     * @var int Unique Id of saved ClipitUser (-1 = unsaved)
      */
     public $id = -1;
     /**
@@ -76,7 +76,7 @@ class ClipitUser{
     /**
      * ClipitUser constructor
      *
-     * @param int|null $id If $id is null then create new instance, else load instance with id = $id.
+     * @param int|null $id If $id is null, create new instance; else load instance with id = $id.
      */
     function __construct($id = null){
         if($id){
@@ -85,9 +85,9 @@ class ClipitUser{
     }
 
     /**
-     * Loads a ClipitUser from the system.
+     * Loads a ClipitUser instance from the system.
      *
-     * @param int $id ID of the ClipitUser to load from the system.
+     * @param int $id Id of the ClipitUser to load from the system.
      * @return $this|bool Returns ClipitUser instance, or false if error.
      */
     function load($id){

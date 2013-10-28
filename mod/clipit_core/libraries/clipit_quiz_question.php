@@ -68,9 +68,6 @@ function expose_functions(){
              "type" => array(
                  "type" => "string",
                  "required" => true),
-             "quiz" => array(
-                 "type" => "int",
-                 "required" => false),
              "taxonomy_tag_array" => array(
                  "type" => "array",
                  "required" => false),
@@ -132,16 +129,12 @@ function set_properties($id, $prop_array, $value_array){
 function create_quiz_question($question,
                               $option_array,
                               $type,
-                              $quiz = null,
                               $taxonomy_tag_array = null,
                               $video = null){
     $quiz_question = new ClipitQuizQuestion();
     $quiz_question->question = $question;
     $quiz_question->option_array = $option_array;
     $quiz_question->type = $type;
-    if($quiz){
-        $quiz_question->quiz = $quiz;
-    }
     if($taxonomy_tag_array){
         $quiz_question->taxonomy_tag_array = $taxonomy_tag_array;
     }

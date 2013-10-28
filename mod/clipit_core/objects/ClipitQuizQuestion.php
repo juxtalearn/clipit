@@ -32,22 +32,47 @@ use \ElggObject as ElggObject;
  * @package clipit\quiz\question
  */
 class ClipitQuizQuestion{
-    // Class properties
+    /**
+     * @var int Unique id of this ClipitQuizQuestion instance (-1 = unsaved)
+     */
     public $id = -1;
+    /**
+     * @var string Main text question which will be shown to users taking the quiz
+     */
     public $question = "";
+    /**
+     * @var array Array of options to chose from as an answer to the question
+     */
     public $option_array = array();
+    /**
+     * @var string Type of question: single choice, multiple choice, select 2...
+     */
     public $type = ""; // select only 1, multiple choice...
-    public $quiz = -1;
+    /**
+     * @var array Array of Taxonomy Tags relevant to this question
+     */
     public $taxonomy_tag_array = array();
+    /**
+     * @var int ID of ClipitVideo refered to by this question (optional)
+     */
     public $video = -1;
 
-
+    /**
+     * @param null|int $id If $id is null, create new instance, else load instance with id = $id.
+     *
+     */
     function __construct($id = null){
         if($id){
             $this->load($id);
         }
     }
 
+    /**
+     * Loads a ClipitQuizQuestion instance from the system.
+     *
+     * @param $id Id of the ClipitQuiz to load from the system.
+     * @return $this|bool Returns ClipitQuiz instance, or false if error.
+     */
     function load($id){
         $elgg_object = new ElggObject($id);
         if(!$elgg_object){
@@ -56,13 +81,17 @@ class ClipitQuizQuestion{
         $this->id = $elgg_object->guid;
         $this->option_array = $elgg_object->option_array;
         $this->question = $elgg_object->question;
-        $this->quiz = $elgg_object->quiz;
         $this->taxonomy_tag_array = $elgg_object->taxonomy_tag_array;
         $this->type = $elgg_object->type;
         $this->video = $elgg_object->video;
         return $this;
     }
 
+    /**
+     * Saves this instance to the system.
+     *
+     * @return bool|int Returns the Id of the saved instance, or false if error.
+     */
     function save(){
         if($this->id == -1){
             $elgg_object = new ElggObject();
@@ -76,13 +105,17 @@ class ClipitQuizQuestion{
         }
         $elgg_object->option_array = $this->option_array;
         $elgg_object->question = $this->question;
-        $elgg_object->quiz = $this->quiz;
         $elgg_object->taxonomy_tag_array = $this->taxonomy_tag_array;
         $elgg_object->type = $this->type;
         $elgg_object->video = $this->video;
         return $elgg_object->save();
     }
 
+    /**
+     * Deletes a Quiz Question from the system.
+     *
+     * @return bool True if success, false if error.
+     */
     function delete(){
         if(!$elgg_object = get_Entity($this->id)){
             return false;

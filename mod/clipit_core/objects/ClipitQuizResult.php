@@ -32,20 +32,48 @@ use \ElggObject as ElggObject;
  * @package clipit\quiz\result
  */
 class ClipitQuizResult{
-    // Class properties
+    /**
+     * @var int Unique Id of saved ClipitQuizResult (-1 = unsaved)
+     */
     public $id = -1;
+    /**
+     * @var int Id of ClipitQuizQuestion this ClipitQuizResult is related to
+     */
     public $quiz_question = -1;
+    /**
+     * @var array Array of results to the Quiz Question linked by $quiz_question
+     */
     public $result_array = array();
+    /**
+     * @var int Id of User who posted this Quiz Result
+     */
     public $user = -1;
+    /**
+     * @var bool Determines if this Result is correct (true) or incorrect (false)
+     */
     public $correct = false;
+    /**
+     * @var int Timestamp when the user submitted this Quiz Result
+     */
     public $time_created = -1;
 
+    /**
+     * ClipitQuizResult constructor
+     *
+     * @param int|null $id If $id is null, create new instance; else load instance with id = $id.
+     */
     function __construct($id = null){
         if($id){
             $this->load($id);
         }
     }
 
+    /**
+     * Loads a ClipitQuizResult instance from the system.
+     *
+     * @param $id
+     * @return $this|bool
+     */
     function load($id){
         $elgg_object = new ElggObject($id);
         if(!$elgg_object){
@@ -60,6 +88,11 @@ class ClipitQuizResult{
         return $this;
     }
 
+    /**
+     * Saves this instance to the system.
+     *
+     * @return bool|int Returns the Id of the saved instance, or false if error.
+     */
     function save(){
         if($this->id == -1){
             $elgg_object = new ElggObject();
@@ -78,6 +111,11 @@ class ClipitQuizResult{
         return $elgg_object->save();
     }
 
+    /**
+     * Deletes a Quiz Result from the system
+     *
+     * @return bool True if success, false if error.
+     */
     function delete(){
         if(!$elgg_object = get_Entity($this->id)){
             return false;

@@ -33,7 +33,7 @@ use \ElggObject as ElggObject;
  */
 class ClipitQuiz{
     /**
-     * @var int Unique ID of saved ClipitQuiz (-1 = unsaved)
+     * @var int Unique Id of saved ClipitQuiz (-1 = unsaved)
      */
     public $id = -1;
     /**
