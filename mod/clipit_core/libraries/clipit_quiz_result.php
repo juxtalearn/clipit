@@ -55,17 +55,35 @@ function expose_functions(){
                  "type" => "array",
                  "required" => true)),
         "description goes here", 'GET', false, true);
+    expose_function(
+        "clipit.quiz.create_quiz_result",
+        __NAMESPACE__."\\create_quiz_result",
+        array(
+             "quiz_question" => array(
+                 "type" => "int",
+                 "required" => true),
+             "result_array" => array(
+                 "type" => "array",
+                 "required" => true),
+             "user" => array(
+                 "type" => "int",
+                 "required" => true),
+             "correct" => array(
+                 "type" => "bool",
+                 "required" => false)),
+        "description", 'GET', false, true);
+    expose_function(
+        "clipit.quiz.delete_quiz_result",
+        __NAMESPACE__."\\delete_quiz_result",
+        array(
+             "id" => array(
+                 "type" => "int",
+                 "required" => true)),
+        "description", 'GET', false, true);
 }
 
 function list_properties(){
     return get_class_vars(__NAMESPACE__."\\ClipitQuizResult");
-}
-
-function delete_quiz_result($id){
-    if(!$quiz_result = new ClipitQuizResult($id)){
-        return false;
-    }
-    return $quiz_result->delete();
 }
 
 function get_properties($id, $prop_array){
@@ -82,7 +100,7 @@ function get_properties($id, $prop_array){
 
 function set_properties($id, $prop_array, $value_array){
     if(count($prop_array) != count($value_array)){
-        return null;
+        throw(new \InvalidParameterException("ERROR: The length of prop_array and value_array must match."));
     }
     $quiz_result = new ClipitQuizResult($id);
     if(!$quiz_result){
@@ -92,4 +110,25 @@ function set_properties($id, $prop_array, $value_array){
         $quiz_result->$prop_array[$i] = $value_array[$i];
     }
     return $quiz_result->save();
+}
+
+function create_quiz_result($quiz_question,
+                            $result_array,
+                            $user,
+                            $correct = null){
+    $quiz_result = new ClipitQuizResult();
+    $quiz_result->quiz_question = $quiz_question;
+    $quiz_result->result_array = $result_array;
+    $quiz_result->user = $user;
+    if($correct){
+        $quiz_result->$correct;
+    }
+    return $quiz_result->save();
+}
+
+function delete_quiz_result($id){
+    if(!$quiz_result = new ClipitQuizResult($id)){
+        return false;
+    }
+    return $quiz_result->delete();
 }

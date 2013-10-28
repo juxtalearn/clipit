@@ -11,6 +11,8 @@
         <target>documentation/</target>
     </transformer>
     <files>
-        <directory>.</directory>
+        <directory>library</directory>
+		<directory>objects</directory>
+		<directory>tests</directory>
     </files>
 </phpdoc>

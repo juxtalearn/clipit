@@ -23,7 +23,11 @@
      *                  http://www.gnu.org/licenses/agpl-3.0.txt.
      */
 
-// Alias so classes outside of this namespace can be used without path.
+/**
+ * Alias so classes outside of this namespace can be used without path.
+ *
+ * @uses \ElggUser
+ */
 use \ElggUser as ElggUser;
 
 /**
@@ -33,7 +37,7 @@ use \ElggUser as ElggUser;
  */
 class ClipitUser{
     /**
-     * @var int ClipitUser instance unique ID (-1 = unsaved)
+     * @var int Unique ID of saved ClipitUser (-1 = unsaved)
      */
     public $id = -1;
     /**
@@ -70,9 +74,9 @@ class ClipitUser{
     public $time_created = -1;
 
     /**
-     * ClipitUser constructor function
+     * ClipitUser constructor
      *
-     * @param int|null $id If $id is 'null' then create new instance, else load instance with id = $id.
+     * @param int|null $id If $id is null then create new instance, else load instance with id = $id.
      */
     function __construct($id = null){
         if($id){
@@ -81,16 +85,13 @@ class ClipitUser{
     }
 
     /**
-     * Loads user from the system.
+     * Loads a ClipitUser from the system.
      *
-     * @param int|null $id
-     * @return $this|bool Returns the ClipitUser instance with id = $id. Returns false in case of error.
+     * @param int $id ID of the ClipitUser to load from the system.
+     * @return $this|bool Returns ClipitUser instance, or false if error.
      */
-    function load($id = null){
-        $elgg_user = null;
-        if($id){
-            $elgg_user = new ElggUser($id);
-        }
+    function load($id){
+        $elgg_user = new ElggUser($id);
         if(!$elgg_user){
             return false;
         }
@@ -107,9 +108,9 @@ class ClipitUser{
     }
 
     /**
-     * Saves user to the system.
+     * Saves this instance to the system.
      *
-     * @return bool|int Returns new user id
+     * @return bool|int Returns id of saved instance, or false if error.
      */
     function save(){
         if($this->id == -1){
@@ -134,7 +135,7 @@ class ClipitUser{
     /**
      * Deletes a user from the system.
      *
-     * @return bool 'true' if success, 'false' if error.
+     * @return bool True if success, false if error.
      */
     function delete(){
         $elgg_user = get_user($this->id);

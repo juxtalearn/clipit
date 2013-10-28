@@ -55,17 +55,52 @@ function expose_functions(){
                  "type" => "array",
                  "required" => true)),
         "description goes here", 'GET', false, true);
+    expose_function(
+        "clipit.quiz.create_quiz_question",
+        __NAMESPACE__."\\create_quiz_question",
+        array(
+             "question" => array(
+                 "type" => "string",
+                 "required" => true),
+             "option_array" => array(
+                 "type" => "array",
+                 "required" => true),
+             "type" => array(
+                 "type" => "string",
+                 "required" => true),
+             "quiz" => array(
+                 "type" => "int",
+                 "required" => false),
+             "taxonomy_tag_array" => array(
+                 "type" => "array",
+                 "required" => false),
+             "video" => array(
+                 "type" => "int",
+                 "required" => false)),
+        "description", 'GET', false, true);
+    expose_function(
+        "clipit.quiz.delete_quiz_question",
+        __NAMESPACE__."\\delete_quiz_question",
+        array(
+             "id" => array(
+                 "type" => "int",
+                 "required" => true)),
+        "description", 'GET', false, true);
+    expose_function(
+        "clipit.quiz.add_taxonomy_tags",
+        __NAMESPACE__."\\add_taxonomy_tags",
+        array(
+             "id" => array(
+                 "type" => "int",
+                 "required" => true),
+             "taxonomy_tag_array" => array(
+                 "type" => "array",
+                 "required" => true)),
+        "description", 'GET', false, true);
 }
 
 function list_properties(){
     return get_class_vars(__NAMESPACE__."\\ClipitQuizQuestion");
-}
-
-function delete_quiz_question($id){
-    if(!$quiz_question = new ClipitQuizQuestion($id)){
-        return false;
-    }
-    return $quiz_question->delete();
 }
 
 function get_properties($id, $prop_array){
@@ -82,7 +117,7 @@ function get_properties($id, $prop_array){
 
 function set_properties($id, $prop_array, $value_array){
     if(count($prop_array) != count($value_array)){
-        return null;
+        throw(new \InvalidParameterException("ERROR: The length of prop_array and value_array must match."));
     }
     $quiz_question = new ClipitQuizQuestion($id);
     if(!$quiz_question){
@@ -92,4 +127,41 @@ function set_properties($id, $prop_array, $value_array){
         $quiz_question->$prop_array[$i] = $value_array[$i];
     }
     return $quiz_question->save();
+}
+
+function create_quiz_question($question,
+                              $option_array,
+                              $type,
+                              $quiz = null,
+                              $taxonomy_tag_array = null,
+                              $video = null){
+    $quiz_question = new ClipitQuizQuestion();
+    $quiz_question->question = $question;
+    $quiz_question->option_array = $option_array;
+    $quiz_question->type = $type;
+    if($quiz){
+        $quiz_question->quiz = $quiz;
+    }
+    if($taxonomy_tag_array){
+        $quiz_question->taxonomy_tag_array = $taxonomy_tag_array;
+    }
+    if($video){
+        $quiz_question->video = $video;
+    }
+    return $quiz_question->save();
+}
+
+function delete_quiz_question($id){
+    if(!$quiz_question = new ClipitQuizQuestion($id)){
+        return false;
+    }
+    return $quiz_question->delete();
+}
+
+function add_taxonomy_tags($id, $taxonomy_tag_array){
+    if(!$quiz_question = new ClipitQuizQuestion($id)){
+        return false;
+    }
+    array_merge($quiz_question->taxonomy_tag_array, $taxonomy_tag_array);
+    return true;
 }

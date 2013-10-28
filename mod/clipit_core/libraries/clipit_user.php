@@ -167,13 +167,17 @@ function get_properties($id, $prop_array){
  */
 function set_properties($id, $prop_array, $value_array){
     if(count($prop_array) != count($value_array)){
-        return false;
+        throw(new \InvalidParameterException("ERROR: The length of prop_array and value_array must match."));
     }
     $user = new ClipitUser($id);
     if(!$user){
         return false;
     }
     for($i = 0; $i < count($prop_array); $i++){
+        if($prop_array[$i] == "password"){
+            $user->setPassword($value_array[$i]);
+            continue;
+        }
         $user->$prop_array[$i] = $value_array[$i];
     }
     if(!$user->save()){

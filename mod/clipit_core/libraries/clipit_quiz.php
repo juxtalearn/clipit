@@ -79,12 +79,6 @@ function expose_functions(){
                  "required" => false),
              "taxonomy" => array(
                  "type" => "int",
-                 "required" => false),
-             "taxonomy_tag_array" => array(
-                 "type" => "array",
-                 "required" => false),
-             "video" => array(
-                 "type" => "int",
                  "required" => false)),
         "description goes here", 'GET', false, true);
     expose_function(
@@ -104,6 +98,28 @@ function expose_functions(){
         __NAMESPACE__."\\get_quizzes_by_id",
         array(
              "id_array" => array(
+                 "type" => "array",
+                 "required" => true)),
+        "description", 'GET', false, true);
+    expose_function(
+        "clipit.quiz.add_question",
+        __NAMESPACE__."\\add_questions",
+        array(
+             "id" => array(
+                 "type" => "int",
+                 "required" => true),
+             "question_array" => array(
+                 "type" => "array",
+                 "required" => true)),
+        "description", 'GET', false, true);
+    expose_function(
+        "clipit.quiz.add_results",
+        __NAMESPACE__."\\add_results",
+        array(
+             "id" => array(
+                 "type" => "int",
+                 "required" => true),
+             "result_array" => array(
                  "type" => "array",
                  "required" => true)),
         "description", 'GET', false, true);
@@ -145,9 +161,7 @@ function create_quiz($name,
                      $public = null,
                      $question_array = null,
                      $result_array = null,
-                     $taxonomy = null,
-                     $taxonomy_tag_array = null,
-                     $video = null){
+                     $taxonomy = null){
     $quiz = new ClipitQuiz();
     $quiz->name = $name;
     $quiz->target = $target;
@@ -155,28 +169,16 @@ function create_quiz($name,
         $quiz->description = $description;
     }
     if($public){
-        $quiz->public = (bool) $public;
+        $quiz->public = (bool)$public;
     }
     if($question_array){
-        foreach($question_array as $question){
-            $quiz->addQuestion($question);
-        }
+        $quiz->question_array = $question_array;
     }
     if($result_array){
-        foreach($result_array as $result){
-            $quiz->addResult($result);
-        }
+        $quiz->result_array = $result_array;
     }
     if($taxonomy){
         $quiz->taxonomy = $taxonomy;
-    }
-    if($taxonomy_tag_array){
-        foreach($taxonomy_tag_array as $taxonomy_tag){
-            $quiz->addTaxonomyTag($taxonomy_tag);
-        }
-    }
-    if($video){
-        $quiz->video = $video;
     }
     return $quiz->save();
 }
@@ -212,4 +214,20 @@ function get_quizzes_by_id($id_array){
         $quiz_array[$i] = new ClipitQuiz($elgg_object->guid);
     }
     return $quiz_array;
+}
+
+function add_questions($id, $question_array){
+    if(!$quiz = new ClipitQuiz($id)){
+        return false;
+    }
+    array_merge($quiz->question_array, $question_array);
+    return true;
+}
+
+function add_results($id, $result_array){
+    if(!$quiz = new ClipitQuiz($id)){
+        return false;
+    }
+    array_merge($quiz->result_array, $result_array);
+    return true;
 }

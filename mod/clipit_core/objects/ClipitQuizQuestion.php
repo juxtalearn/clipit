@@ -34,11 +34,13 @@ use \ElggObject as ElggObject;
 class ClipitQuizQuestion{
     // Class properties
     public $id = -1;
-    public $option_array = array();
     public $question = "";
+    public $option_array = array();
+    public $type = ""; // select only 1, multiple choice...
     public $quiz = -1;
     public $taxonomy_tag_array = array();
-    public $type = "";
+    public $video = -1;
+
 
     function __construct($id = null){
         if($id){
@@ -46,11 +48,8 @@ class ClipitQuizQuestion{
         }
     }
 
-    function load($id = null){
-        $elgg_object = null;
-        if($id){
-            $elgg_object = new ElggObject($id);
-        }
+    function load($id){
+        $elgg_object = new ElggObject($id);
         if(!$elgg_object){
             return false;
         }
@@ -60,12 +59,14 @@ class ClipitQuizQuestion{
         $this->quiz = $elgg_object->quiz;
         $this->taxonomy_tag_array = $elgg_object->taxonomy_tag_array;
         $this->type = $elgg_object->type;
+        $this->video = $elgg_object->video;
         return $this;
     }
 
     function save(){
         if($this->id == -1){
             $elgg_object = new ElggObject();
+            $elgg_object->subtype = "quiz_question";
             $this->id = $elgg_object->save();
         } else{
             $elgg_object = new ElggObject($this->id);
@@ -78,6 +79,7 @@ class ClipitQuizQuestion{
         $elgg_object->quiz = $this->quiz;
         $elgg_object->taxonomy_tag_array = $this->taxonomy_tag_array;
         $elgg_object->type = $this->type;
+        $elgg_object->video = $this->video;
         return $elgg_object->save();
     }
 

@@ -34,11 +34,10 @@ use \ElggObject as ElggObject;
 class ClipitQuizResult{
     // Class properties
     public $id = -1;
-    public $result_array = array();
-    public $correct = false;
-    public $quiz = -1;
     public $quiz_question = -1;
+    public $result_array = array();
     public $user = -1;
+    public $correct = false;
     public $time_created = -1;
 
     function __construct($id = null){
@@ -47,18 +46,14 @@ class ClipitQuizResult{
         }
     }
 
-    function load($id = null){
-        $elgg_object = null;
-        if($id){
-            $elgg_object = new ElggObject($id);
-        }
+    function load($id){
+        $elgg_object = new ElggObject($id);
         if(!$elgg_object){
             return false;
         }
         $this->id = $elgg_object->guid;
         $this->result_array = $elgg_object->result_array;
         $this->correct = $elgg_object->correct;
-        $this->quiz = $elgg_object->quiz;
         $this->quiz_question = $elgg_object->quiz_question;
         $this->user = $elgg_object->user;
         $this->time_created = $elgg_object->time_created;
@@ -68,6 +63,7 @@ class ClipitQuizResult{
     function save(){
         if($this->id == -1){
             $elgg_object = new ElggObject();
+            $elgg_object->subtype = "quiz_result";
             $this->id = $elgg_object->save();
         } else{
             $elgg_object = new ElggObject($this->id);
@@ -77,7 +73,6 @@ class ClipitQuizResult{
         }
         $elgg_object->result_array = $this->result_array;
         $elgg_object->correct = $this->correct;
-        $elgg_object->quiz = $this->quiz;
         $elgg_object->quiz_question = $this->quiz_question;
         $elgg_object->user = $this->user;
         return $elgg_object->save();
