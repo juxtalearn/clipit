@@ -39,13 +39,13 @@ if (!$content) {
 }
 
 $new_link = elgg_view('output/url', array(
-	'href' => "file/group/$group->guid/all",
+    'href' => "file/add/$group->guid",
 	'text' => elgg_echo('file:add'),
 	'is_trusted' => true,
 ));
 if($count_items > $limit){
     $new_link .= elgg_view('output/url', array(
-        'href' => "file/add/$group->guid",
+        'href' => "file/group/$group->guid/all",
         'text' => elgg_echo('link:view:all'),
         'is_trusted' => true,
         'style'=>'float:right;'
