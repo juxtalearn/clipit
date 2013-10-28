@@ -39,7 +39,7 @@ if (!$content) {
 }
 
 $new_link = elgg_view('output/url', array(
-	'href' => "file/add/$group->guid",
+	'href' => "file/group/$group->guid/all",
 	'text' => elgg_echo('file:add'),
 	'is_trusted' => true,
 ));
