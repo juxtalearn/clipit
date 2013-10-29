@@ -23,8 +23,11 @@
      *                  http://www.gnu.org/licenses/agpl-3.0.txt.
      */
 
-// Alias so classes outside of this namespace can be used without path.
-use \ElggObject as ElggObject;
+/**
+ * Alias so classes outside of this namespace can be used without path.
+ * @use \ElggObject
+ */
+use \ElggObject;
 
 /**
  * Class ClipitQuizQuestion
@@ -32,6 +35,10 @@ use \ElggObject as ElggObject;
  * @package clipit\quiz\question
  */
 class ClipitQuizQuestion{
+    /**
+     * @const string Subtype of the ClipitQuizQuestion class for ElggObject
+     */
+    const SUBTYPE = "quiz_question";
     /**
      * @var int Unique id of this ClipitQuizQuestion instance (-1 = unsaved)
      */
@@ -58,8 +65,7 @@ class ClipitQuizQuestion{
     public $video = -1;
 
     /**
-     * @param null|int $id If $id is null, create new instance, else load instance with id = $id.
-     *
+     * @param int $id If $id is null, create new instance, else load instance with id = $id.
      */
     function __construct($id = null){
         if($id){
@@ -70,7 +76,7 @@ class ClipitQuizQuestion{
     /**
      * Loads a ClipitQuizQuestion instance from the system.
      *
-     * @param $id Id of the ClipitQuiz to load from the system.
+     * @param int $id Id of the ClipitQuiz to load from the system.
      * @return $this|bool Returns ClipitQuiz instance, or false if error.
      */
     function load($id){
@@ -95,7 +101,7 @@ class ClipitQuizQuestion{
     function save(){
         if($this->id == -1){
             $elgg_object = new ElggObject();
-            $elgg_object->subtype = "quiz_question";
+            $elgg_object->subtype = $this::SUBTYPE;
             $this->id = $elgg_object->save();
         } else{
             $elgg_object = new ElggObject($this->id);

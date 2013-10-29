@@ -25,10 +25,9 @@
 
 /**
  * Alias so classes outside of this namespace can be used without path.
- *
- * @uses \ElggUser
+ * @use \ElggUser
  */
-use \ElggUser as ElggUser;
+use \ElggUser;
 
 /**
  * Class ClipitUser

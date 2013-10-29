@@ -56,8 +56,8 @@ function expose_functions(){
                  "required" => true)),
         "description goes here", 'GET', false, true);
     expose_function(
-        "clipit.quiz.create_quiz",
-        __NAMESPACE__."\\create_quiz",
+        "clipit.quiz.create",
+        __NAMESPACE__."\\create",
         array(
              "name" => array(
                  "type" => "string",
@@ -82,27 +82,27 @@ function expose_functions(){
                  "required" => false)),
         "description goes here", 'GET', false, true);
     expose_function(
-        "clipit.quiz.delete_quiz",
-        __NAMESPACE__."\\delete_quiz",
+        "clipit.quiz.delete",
+        __NAMESPACE__."\\delete",
         array(
              "id" => array(
                  "type" => "int",
                  "required" => true)),
         "description", 'GET', false, true);
     expose_function(
-        "clipit.quiz.get_all_quizzes",
-        __NAMESPACE__."\\get_all_quizzes",
+        "clipit.quiz.get_all",
+        __NAMESPACE__."\\get_all",
         null, "description", 'GET', false, true);
     expose_function(
-        "clipit.quiz.get_quizzes_by_id",
-        __NAMESPACE__."\\get_quizzes_by_id",
+        "clipit.quiz.get_by_id",
+        __NAMESPACE__."\\get_by_id",
         array(
              "id_array" => array(
                  "type" => "array",
                  "required" => true)),
         "description", 'GET', false, true);
     expose_function(
-        "clipit.quiz.add_question",
+        "clipit.quiz.add_questions",
         __NAMESPACE__."\\add_questions",
         array(
              "id" => array(
@@ -139,8 +139,8 @@ function list_properties(){
  *
  * @param int $id Id from Quiz
  * @param array $prop_array Array of property names to get values from
- * @return array|bool Returns array of property => value, or false if error.
- * If a property does not exist, the return will show null as that propertie's value.
+ * @return array|bool Returns array of [property => value] pairs, or false if error.
+ * If a property does not exist, the returned array will show null as that propertie's value.
  */
 function get_properties($id, $prop_array){
     $quiz = new ClipitQuiz($id);
@@ -170,7 +170,7 @@ function set_properties($id, $prop_array, $value_array){
     }
     $quiz = new ClipitQuiz($id);
     if(!$quiz){
-        return null;
+        return false;
     }
     for($i = 0; $i < count($prop_array); $i++){
         $quiz->$prop_array[$i] = $value_array[$i];
@@ -193,13 +193,13 @@ function set_properties($id, $prop_array, $value_array){
  * @param int $taxonomy Id of the Taxonomy referenced by this Quiz
  * @return bool|int Returns the new Quiz Id, or false if error
  */
-function create_quiz($name,
-                     $target,
-                     $description = null,
-                     $public = null,
-                     $question_array = null,
-                     $result_array = null,
-                     $taxonomy = null){
+function create($name,
+                $target,
+                $description = null,
+                $public = null,
+                $question_array = null,
+                $result_array = null,
+                $taxonomy = null){
     $quiz = new ClipitQuiz();
     $quiz->name = $name;
     $quiz->target = $target;
@@ -224,20 +224,25 @@ function create_quiz($name,
 /**
  * Delete a Quiz from the system.
  *
- * @param int $id If drom the Quiz to delete
- * @return bool True if success, false if error.
+ * @param int $id If from the Quiz to delete
+ * @return bool True if success, false if error
  */
-function delete_quiz($id){
+function delete($id){
     if(!$quiz = new ClipitQuiz($id)){
         return false;
     }
     return $quiz->delete();
 }
 
-
-function get_all_quizzes($limit = 0){
+/**
+ * Get all quizzes from the system.
+ *
+ * @param int $limit Number of results to show, default= 0 [no limit] (default)
+ * @return array Returns an array of ClipitQuiz objects
+ */
+function get_all($limit = 0){
     $elgg_object_array = elgg_get_entities(array('type' => 'object',
-                                                 'subtype' => 'quiz',
+                                                 'subtype' => ClipitQuiz::SUBTYPE,
                                                  'limit' => $limit));
     $quiz_array = array();
     $i = 0;
@@ -248,7 +253,13 @@ function get_all_quizzes($limit = 0){
     return $quiz_array;
 }
 
-function get_quizzes_by_id($id_array){
+/**
+ * Get Quizzes with Id contained in a given list.
+ *
+ * @param array $id_array Array of Quiz Ids
+ * @return array Returns an array of ClipitQuiz objects
+ */
+function get_by_id($id_array){
     $quiz_array = array();
     for($i = 0; $i < count($id_array); $i++){
         $elgg_object = get_entity($id_array[$i]);
@@ -261,6 +272,13 @@ function get_quizzes_by_id($id_array){
     return $quiz_array;
 }
 
+/**
+ * Adds Quiz Questions to a Quiz.
+ *
+ * @param int $id Id from Quiz to add Questions to
+ * @param array $question_array Array of Questions to add
+ * @return bool Returns true if success, false if error
+ */
 function add_questions($id, $question_array){
     if(!$quiz = new ClipitQuiz($id)){
         return false;
@@ -269,6 +287,13 @@ function add_questions($id, $question_array){
     return true;
 }
 
+/**
+ * Adds Quiz Results to a Quiz.
+ *
+ * @param int $id Id from Quiz to add Results to
+ * @param array $result_array Array of Results to add
+ * @return bool Returns true if success, false if error
+ */
 function add_results($id, $result_array){
     if(!$quiz = new ClipitQuiz($id)){
         return false;

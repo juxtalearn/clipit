@@ -23,8 +23,11 @@
      *                  http://www.gnu.org/licenses/agpl-3.0.txt.
      */
 
-// Alias so classes outside of this namespace can be used without path.
-use \ElggObject as ElggObject;
+/**
+ * Alias so classes outside of this namespace can be used without path.
+ * @use \ElggObject
+ */
+use \ElggObject;
 
 /**
  * Class ClipitQuizResult
@@ -32,6 +35,10 @@ use \ElggObject as ElggObject;
  * @package clipit\quiz\result
  */
 class ClipitQuizResult{
+    /**
+     * @const string Subtype of the ClipitQuizResult class for ElggObject
+     */
+    const SUBTYPE = "quiz_result";
     /**
      * @var int Unique Id of saved ClipitQuizResult (-1 = unsaved)
      */
@@ -71,8 +78,8 @@ class ClipitQuizResult{
     /**
      * Loads a ClipitQuizResult instance from the system.
      *
-     * @param $id
-     * @return $this|bool
+     * @param int $id Id of Quiz Result to load
+     * @return $this|bool Returns Quiz Question instance, or false if error
      */
     function load($id){
         $elgg_object = new ElggObject($id);
@@ -96,7 +103,7 @@ class ClipitQuizResult{
     function save(){
         if($this->id == -1){
             $elgg_object = new ElggObject();
-            $elgg_object->subtype = "quiz_result";
+            $elgg_object->subtype = $this::SUBTYPE;
             $this->id = $elgg_object->save();
         } else{
             $elgg_object = new ElggObject($this->id);

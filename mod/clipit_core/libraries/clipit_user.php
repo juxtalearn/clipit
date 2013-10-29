@@ -56,8 +56,8 @@ function expose_functions(){
                  "required" => true)),
         "description goes here", 'GET', false, true);
     expose_function(
-        "clipit.user.create_user",
-        __NAMESPACE__."\\create_user",
+        "clipit.user.create",
+        __NAMESPACE__."\\create",
         array(
              "login" => array(
                  "type" => "string",
@@ -80,45 +80,45 @@ function expose_functions(){
         ),
         "description goes here", 'GET', false, true);
     expose_function(
-        "clipit.user.delete_user",
-        __NAMESPACE__."\\delete_user",
+        "clipit.user.delete",
+        __NAMESPACE__."\\delete",
         array(
              "id" => array(
                  "type" => "int",
                  "required" => true)),
         "description goes here", 'GET', false, true);
     expose_function(
-        "clipit.user.get_all_users",
-        __NAMESPACE__."\\get_all_users",
+        "clipit.user.get_all",
+        __NAMESPACE__."\\get_all",
         NULL,
         "description goes here", 'GET', false, true);
     expose_function(
-        "clipit.user.get_users_by_id",
-        __NAMESPACE__."\\get_users_by_id",
+        "clipit.user.get_by_id",
+        __NAMESPACE__."\\get_by_id",
         array(
              "id_array" => array(
                  "type" => "array",
                  "required" => true)),
         "description goes here", 'GET', false, true);
     expose_function(
-        "clipit.user.get_users_by_login",
-        __NAMESPACE__."\\get_users_by_login",
+        "clipit.user.get_by_login",
+        __NAMESPACE__."\\get_by_login",
         array(
              "login_array" => array(
                  "type" => "array",
                  "required" => true)),
         "description goes here", 'GET', false, true);
     expose_function(
-        "clipit.user.get_users_by_email",
-        __NAMESPACE__."\\get_users_by_email",
+        "clipit.user.get_by_email",
+        __NAMESPACE__."\\get_by_email",
         array(
              "email_array" => array(
                  "type" => "array",
                  "required" => true)),
         "description goes here", 'GET', false, true);
     expose_function(
-        "clipit.user.get_users_by_role",
-        __NAMESPACE__."\\get_users_by_role",
+        "clipit.user.get_by_role",
+        __NAMESPACE__."\\get_by_role",
         array(
              "role_array" => array(
                  "type" => "array",
@@ -140,8 +140,8 @@ function list_properties(){
  *
  * @param int $id Id from User
  * @param array $prop_array Array of property names to get values from
- * @return array|bool Returns array of 'property' => 'value', or 'false' if error.
- * If a property does not exist, the return will show null as that propertie's value.
+ * @return array|bool Returns array of [property => value] pairs, or false if error.
+ * If a property does not exist, the returned array will show null as that propertie's value.
  */
 function get_properties($id, $prop_array){
     $user = new ClipitUser($id);
@@ -198,12 +198,12 @@ function set_properties($id, $prop_array, $value_array){
  * @return bool|int Returns the new User Id, or 'false' if error
  * @throws \InvalidParameterException
  */
-function create_user($login,
-                     $password,
-                     $name,
-                     $email,
-                     $role = null,
-                     $description = null){
+function create($login,
+                $password,
+                $name,
+                $email,
+                $role = null,
+                $description = null){
     if(get_user_by_username($login)){
         throw(new \InvalidParameterException("The user login already exists"));
     }
@@ -227,7 +227,7 @@ function create_user($login,
  * @param int $id Id from User to delete
  * @return bool True if success, false if error.
  */
-function delete_user($id){
+function delete($id){
     if(!$user = new ClipitUser($id)){
         return false;
     }
@@ -235,12 +235,12 @@ function delete_user($id){
 }
 
 /**
- * Get all users from the system.
+ * Get all Users from the system.
  *
- * @param int $limit Number of results to show, default: 0 (no limit) (optional)
+ * @param int $limit Number of results to show, default= 0 [no limit] (optional)
  * @return array Returns an array of ClipitUser objects
  */
-function get_all_users($limit = 0){
+function get_all($limit = 0){
     $elgg_user_array = elgg_get_entities(array('type' => 'user',
                                                'limit' => $limit));
     $user_array = array();
@@ -253,12 +253,12 @@ function get_all_users($limit = 0){
 }
 
 /**
- * Get users with id contained in a given list of ids.
+ * Get Users with id contained in a given list.
  *
- * @param array $id_array Array of user ids
+ * @param array $id_array Array of User Ids
  * @return array Returns an array of ClipitUser objects
  */
-function get_users_by_id($id_array){
+function get_by_id($id_array){
     $user_array = array();
     for($i = 0; $i < count($id_array); $i++){
         $elgg_user = get_user($id_array[$i]);
@@ -277,7 +277,7 @@ function get_users_by_id($id_array){
  * @param array $login_array Array of user logins
  * @return array Returns an array of ClipitUser objects
  */
-function get_users_by_login($login_array){
+function get_by_login($login_array){
     $user_array = array();
     for($i = 0; $i < count($login_array); $i++){
         $elgg_user = get_user_by_username($login_array[$i]);
@@ -296,7 +296,7 @@ function get_users_by_login($login_array){
  * @param array $email_array Array of user emails
  * @return array Returns an array of ClipitUser objects
  */
-function get_users_by_email($email_array){
+function get_by_email($email_array){
     $user_array = array();
     for($i = 0; $i < count($email_array); $i++){
         $elgg_user_array = get_user_by_email($email_array[$i]);
@@ -321,7 +321,7 @@ function get_users_by_email($email_array){
  * @param array $role_array Array of user roles
  * @return array Returns an array of ClipitUser objects
  */
-function get_users_by_role($role_array){
+function get_by_role($role_array){
     $user_array = array();
     for($i = 0; $i < count($role_array); $i++){
         $elgg_user_array = elgg_get_entities_from_metadata(
