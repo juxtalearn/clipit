@@ -100,7 +100,8 @@ function get_properties($id, $prop_array){
 
 function set_properties($id, $prop_array, $value_array){
     if(count($prop_array) != count($value_array)){
-        throw(new \InvalidParameterException("ERROR: The length of prop_array and value_array must match."));
+        throw(new \InvalidParameterException(
+            "ERROR: The length of prop_array and value_array must match."));
     }
     $quiz_result = new ClipitQuizResult($id);
     if(!$quiz_result){
@@ -109,7 +110,10 @@ function set_properties($id, $prop_array, $value_array){
     for($i = 0; $i < count($prop_array); $i++){
         $quiz_result->$prop_array[$i] = $value_array[$i];
     }
-    return $quiz_result->save();
+    if(!$quiz_result->save()){
+        return false;
+    }
+    return true;
 }
 
 function create_quiz_result($quiz_question,

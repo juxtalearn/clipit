@@ -24,8 +24,6 @@
 
 /**
  * Expose library functions to REST API.
- *
- * @return bool 'true' if success, 'false' if error.
  */
 function expose_functions(){
     expose_function(
@@ -129,21 +127,21 @@ function expose_functions(){
 }
 
 /**
- * List the properties contained in this class.
+ * Lists the properties contained in this class.
  *
- * @return array Array of properties with type and default value.
+ * @return array Array of properties with type and default value
  */
 function list_properties(){
     return get_class_vars(__NAMESPACE__."\\ClipitUser");
 }
 
 /**
- * Get the values for the specified properties of a user.
+ * Get the values for the specified properties of a User.
  *
- * @param int $id Id from user
+ * @param int $id Id from User
  * @param array $prop_array Array of property names to get values from
- * @return array|bool   Returns array of 'property' => 'value', or 'false' if error. If a property does not exist
- * then the return array will contain 'null' in that property's position.
+ * @return array|bool Returns array of 'property' => 'value', or 'false' if error.
+ * If a property does not exist, the return will show null as that propertie's value.
  */
 function get_properties($id, $prop_array){
     $user = new ClipitUser($id);
@@ -158,16 +156,18 @@ function get_properties($id, $prop_array){
 }
 
 /**
- * Set values to specified properties of a user.
+ * Set values to specified properties of a User.
  *
- * @param int $id Id from user
+ * @param int $id Id from User
  * @param array $prop_array Array of properties to set values into
  * @param array $value_array Array of associated values to set into properties
- * @return bool Returns 'true' if success, 'false' if error.
+ * @return bool Returns true if success, false if error
+ * @throws \InvalidParameterException If count(prop_array) != count(value_array)
  */
 function set_properties($id, $prop_array, $value_array){
     if(count($prop_array) != count($value_array)){
-        throw(new \InvalidParameterException("ERROR: The length of prop_array and value_array must match."));
+        throw(new \InvalidParameterException(
+            "ERROR: The length of prop_array and value_array must match."));
     }
     $user = new ClipitUser($id);
     if(!$user){
@@ -187,16 +187,16 @@ function set_properties($id, $prop_array, $value_array){
 }
 
 /**
- * Create a new ClipIt user instance, and save it into the system.
+ * Create a new ClipItUser instance, and save it into the system.
  *
- * @param   string $login User login
- * @param   string $password User password (min length = 6)
- * @param   string $name User full name
- * @param   string $email User email
- * @param   string $role User role (optional)
- * @param   string $description User description (optional)
- * @return  bool|int Returns new user id, or 'false' if error.
- * @throws  \InvalidParameterException
+ * @param string $login User login
+ * @param string $password User password (min length = 6)
+ * @param string $name User full name
+ * @param string $email User email
+ * @param string $role User role (optional)
+ * @param string $description User description (optional)
+ * @return bool|int Returns the new User Id, or 'false' if error
+ * @throws \InvalidParameterException
  */
 function create_user($login,
                      $password,
@@ -222,10 +222,10 @@ function create_user($login,
 }
 
 /**
- * Delete a user from the system.
+ * Delete a User from the system.
  *
- * @param int $id Id from user to delete.
- * @return bool 'true' if success, 'false' if error.
+ * @param int $id Id from User to delete
+ * @return bool True if success, false if error.
  */
 function delete_user($id){
     if(!$user = new ClipitUser($id)){

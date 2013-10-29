@@ -125,10 +125,23 @@ function expose_functions(){
         "description", 'GET', false, true);
 }
 
+/**
+ * Lists the properties contained in this class.
+ *
+ * @return array Array of properties whith type and default value
+ */
 function list_properties(){
     return get_class_vars(__NAMESPACE__."\\ClipitQuiz");
 }
 
+/**
+ * Get the values for the specified properties of a Quiz.
+ *
+ * @param int $id Id from Quiz
+ * @param array $prop_array Array of property names to get values from
+ * @return array|bool Returns array of property => value, or false if error.
+ * If a property does not exist, the return will show null as that propertie's value.
+ */
 function get_properties($id, $prop_array){
     $quiz = new ClipitQuiz($id);
     if(!$quiz){
@@ -141,9 +154,19 @@ function get_properties($id, $prop_array){
     return array_combine($prop_array, $value_array);
 }
 
+/**
+ * Set values to specified properties of a Quiz.
+ *
+ * @param int $id Id from Quiz
+ * @param array $prop_array Array of properties to set values into
+ * @param array $value_array Array of associated values to set into properties
+ * @return bool Returns true if success, false if error
+ * @throws \InvalidParameterException If count(prop_array) != count(value_array)
+ */
 function set_properties($id, $prop_array, $value_array){
     if(count($prop_array) != count($value_array)){
-        throw(new \InvalidParameterException("ERROR: The length of prop_array and value_array must match."));
+        throw(new \InvalidParameterException(
+            "ERROR: The length of prop_array and value_array must match."));
     }
     $quiz = new ClipitQuiz($id);
     if(!$quiz){
@@ -152,9 +175,24 @@ function set_properties($id, $prop_array, $value_array){
     for($i = 0; $i < count($prop_array); $i++){
         $quiz->$prop_array[$i] = $value_array[$i];
     }
-    return $quiz->save();
+    if(!$quiz->save()){
+        return false;
+    }
+    return true;
 }
 
+/**
+ * Create a new ClipitQuiz instance, and save it into the system.
+ *
+ * @param string $name Name of the Quiz
+ * @param string $target Target interface to present Quiz (web space, large display, etc.)
+ * @param string $description Quiz full description (optional)
+ * @param bool $public Whether the Quiz can be reused by other teachers (true= yes, false= no)
+ * @param array $question_array Array of ClipitQuizQuestions contained in this Quiz
+ * @param array $result_array Array of ClipitQuizResults submitted to answer the Quiz Questions
+ * @param int $taxonomy Id of the Taxonomy referenced by this Quiz
+ * @return bool|int Returns the new Quiz Id, or false if error
+ */
 function create_quiz($name,
                      $target,
                      $description = null,
@@ -183,12 +221,19 @@ function create_quiz($name,
     return $quiz->save();
 }
 
+/**
+ * Delete a Quiz from the system.
+ *
+ * @param int $id If drom the Quiz to delete
+ * @return bool True if success, false if error.
+ */
 function delete_quiz($id){
     if(!$quiz = new ClipitQuiz($id)){
         return false;
     }
     return $quiz->delete();
 }
+
 
 function get_all_quizzes($limit = 0){
     $elgg_object_array = elgg_get_entities(array('type' => 'object',
