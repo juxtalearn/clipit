@@ -41,7 +41,7 @@
 	function log_to_sqlspace($object, $event) {
 		global $CONFIG;
 		global $con;
-		session_start();		
+		//session_start();
 		static $log_cache;
 		static $cache_size = 0;
 
