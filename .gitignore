@@ -1,5 +1,6 @@
-/nbproject/
+/nbproject
 /engine/settings.php
 /clipit_dev.sublime-project
 /clipit_dev.sublime-workspace
-/.idea/
+/.idea
+/mod/clipit_core/documentation/temp

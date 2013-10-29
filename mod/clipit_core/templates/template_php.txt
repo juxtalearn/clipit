@@ -1,4 +1,8 @@
-<?php namespace <package>\<subpackage>\<sub_subpackage>;
+<?php
+/**
+ * @package <package_name>
+ */
+namespace <package>\<subpackage>\<sub_subpackage>;
 
     /**
      * ClipIt - JuxtaLearn Web Space
@@ -36,6 +40,13 @@ $globalVar  = "";
  */
  $var = "";
 
+ /**
+  * Description for non-class function
+  *
+  * @param type $name description
+  * @return type description
+  */
+
 /**
  * Class <class_name>
  * @package <package\subpackage...>
@@ -62,6 +73,8 @@ class sampleClass{
         return <@return>;
     }
 }
-?>
+
+
+
 
 

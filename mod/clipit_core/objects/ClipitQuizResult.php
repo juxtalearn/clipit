@@ -1,4 +1,8 @@
-<?php namespace clipit\quiz\result;
+<?php
+/**
+ * @package clipit\quiz\result
+ */
+namespace clipit\quiz\result;
 
     /**
      * ClipIt - JuxtaLearn Web Space

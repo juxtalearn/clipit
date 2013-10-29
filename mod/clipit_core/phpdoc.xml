@@ -11,8 +11,10 @@
         <target>documentation/</target>
     </transformer>
     <files>
-        <directory>library</directory>
-		<directory>objects</directory>
-		<directory>tests</directory>
+		<directory>.</directory>
+        <ignore>tests/</ignore>
     </files>
+    <transformations>
+        <template>zend</template>
+    </transformations>
 </phpdoc>

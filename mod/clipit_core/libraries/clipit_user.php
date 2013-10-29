@@ -1,4 +1,9 @@
-<?php namespace clipit\user;
+<?php
+/**
+ * @package clipit\user
+ */
+namespace clipit\user;
+
     /**
      * ClipIt - JuxtaLearn Web Space
      * PHP version:     >= 5.2

@@ -1,4 +1,8 @@
-<?php namespace clipit\quiz;
+<?php
+/**
+ * @package clipit\quiz
+ */
+namespace clipit\quiz;
 
     /**
      * ClipIt - JuxtaLearn Web Space
