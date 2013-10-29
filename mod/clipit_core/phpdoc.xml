@@ -11,7 +11,7 @@
         <target>documentation/</target>
     </transformer>
     <files>
-		<directory>.</directory>
+        <directory>.</directory>
         <ignore>tests/</ignore>
     </files>
     <transformations>
