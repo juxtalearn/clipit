@@ -81,8 +81,7 @@ function expose_functions(){
                  "required" => false),
              "description" => array(
                  "type" => "string",
-                 "required" => false)
-        ),
+                 "required" => false)),
         "description goes here", 'GET', false, true);
     expose_function(
         "clipit.user.delete",
@@ -207,8 +206,8 @@ function create($login,
                 $password,
                 $name,
                 $email,
-                $role = null,
-                $description = null){
+                $role = ClipitUser::DEFAULT_ROLE,
+                $description = ""){
     if(get_user_by_username($login)){
         throw(new \InvalidParameterException("The user login already exists"));
     }
@@ -217,12 +216,8 @@ function create($login,
     $user->setPassword($password);
     $user->name = $name;
     $user->email = $email;
-    if($role){
-        $user->role = $role;
-    }
-    if($description){
-        $user->description = $description;
-    }
+    $user->role = $role;
+    $user->description = $description;
     return $user->save();
 }
 
@@ -246,9 +241,12 @@ function delete($id){
  * @return array Returns an array of ClipitUser objects
  */
 function get_all($limit = 0){
+    $user_array = array();
     $elgg_user_array = elgg_get_entities(array('type' => 'user',
                                                'limit' => $limit));
-    $user_array = array();
+    if(!$elgg_user_array){
+        return $user_array;
+    }
     $i = 0;
     foreach($elgg_user_array as $elgg_user){
         $user_array[$i] = new ClipitUser($elgg_user->guid);

@@ -246,10 +246,13 @@ function delete($id){
  * @return array Returns an array of ClipitQuiz objects
  */
 function get_all($limit = 0){
+    $quiz_array = array();
     $elgg_object_array = elgg_get_entities(array('type' => 'object',
                                                  'subtype' => ClipitQuiz::SUBTYPE,
                                                  'limit' => $limit));
-    $quiz_array = array();
+    if(!$elgg_object_array){
+        return $quiz_array;
+    }
     $i = 0;
     foreach($elgg_object_array as $elgg_object){
         $quiz_array[$i] = new ClipitQuiz($elgg_object->guid);

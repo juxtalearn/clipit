@@ -208,10 +208,13 @@ function delete($id){
  * @return array Returns an array of ClipitQuizQuestion objects
  */
 function get_all($limit = 0){
+    $quiz_result_array = array();
     $elgg_object_array = elgg_get_entities(array('type' => 'object',
                                                  'subtype' => ClipitQuizResult::SUBTYPE,
                                                  'limit' => $limit));
-    $quiz_result_array = array();
+    if(!$elgg_object_array){
+        return $quiz_result_array;
+    }
     $i = 0;
     foreach($elgg_object_array as $elgg_object){
         $quiz_result_array[$i] = new ClipitQuizResult($elgg_object->guid);

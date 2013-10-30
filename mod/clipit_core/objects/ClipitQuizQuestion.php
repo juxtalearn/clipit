@@ -42,7 +42,7 @@ class ClipitQuizQuestion{
     /**
      * @const string Subtype of the ClipitQuizQuestion class for ElggObject
      */
-    const SUBTYPE = "quiz_question";
+    const SUBTYPE = "clipit_quiz_question";
     /**
      * @var int Unique id of this ClipitQuizQuestion instance (-1 = unsaved)
      */

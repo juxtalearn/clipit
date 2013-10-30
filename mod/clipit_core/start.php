@@ -75,6 +75,8 @@ function loadLibraries(){
 function exposeRestApi(){
     \clipit\user\expose_functions();
     \clipit\quiz\expose_functions();
+    \clipit\quiz\question\expose_functions();
+    \clipit\quiz\result\expose_functions();
 }
 
 /**

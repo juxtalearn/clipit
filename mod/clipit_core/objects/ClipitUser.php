@@ -40,6 +40,10 @@ use \ElggUser;
  */
 class ClipitUser{
     /**
+     * @const string Default ClipitUser Role if not specified
+     */
+    const DEFAULT_ROLE = "user";
+    /**
      * @var int Unique Id of saved ClipitUser (-1 = unsaved)
      */
     public $id = -1;
@@ -68,9 +72,9 @@ class ClipitUser{
      */
     public $name = "";
     /**
-     * @var string User role: student, teacher, admin
+     * @var string User role (default: "user")
      */
-    public $role = "user";
+    public $role = ClipitUser::DEFAULT_ROLE;
     /**
      * @var int Timestamp when the user was first saved
      */
@@ -118,12 +122,10 @@ class ClipitUser{
     function save(){
         if($this->id == -1){
             $elgg_user = new ElggUser();
-            $this->id = $elgg_user->save();
         } else{
-            $elgg_user = new ElggUser($this->id);
-        }
-        if(!$elgg_user){
-            return false;
+            if(!$elgg_user = new ElggUser($this->id)){
+                return false;
+            }
         }
         $elgg_user->description = $this->description;
         $elgg_user->email = $this->email;
@@ -132,7 +134,8 @@ class ClipitUser{
         $elgg_user->password = $this->password;
         $elgg_user->salt = $this->password_hash;
         $elgg_user->role = $this->role;
-        return $elgg_user->save();
+        return true;
+        //return $this->id = $elgg_user->save();
     }
 
     /**

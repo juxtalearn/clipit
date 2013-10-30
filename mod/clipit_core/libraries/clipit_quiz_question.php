@@ -242,10 +242,13 @@ function add_taxonomy_tags($id, $taxonomy_tag_array){
  * @return array Returns an array of ClipitQuizQuestion objects
  */
 function get_all($limit = 0){
+    $quiz_question_array = array();
     $elgg_object_array = elgg_get_entities(array('type' => 'object',
                                                  'subtype' => ClipitQuizQuestion::SUBTYPE,
                                                  'limit' => $limit));
-    $quiz_question_array = array();
+    if(!$elgg_object_array){
+        return $quiz_question_array;
+    }
     $i = 0;
     foreach($elgg_object_array as $elgg_object){
         $quiz_question_array[$i] = new ClipitQuizQuestion($elgg_object->guid);
