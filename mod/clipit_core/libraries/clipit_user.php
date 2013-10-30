@@ -94,8 +94,7 @@ function expose_functions(){
     expose_function(
         "clipit.user.get_all",
         __NAMESPACE__."\\get_all",
-        NULL,
-        "description goes here", 'GET', false, true);
+        null, "description goes here", 'GET', false, true);
     expose_function(
         "clipit.user.get_by_id",
         __NAMESPACE__."\\get_by_id",

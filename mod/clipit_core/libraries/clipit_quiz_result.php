@@ -177,14 +177,12 @@ function set_properties($id, $prop_array, $value_array){
 function create($quiz_question,
                 $result_array,
                 $user,
-                $correct = null){
+                $correct = false){
     $quiz_result = new ClipitQuizResult();
     $quiz_result->quiz_question = $quiz_question;
     $quiz_result->result_array = $result_array;
     $quiz_result->user = $user;
-    if($correct){
-        $quiz_result->$correct;
-    }
+    $quiz_result->$correct;
     return $quiz_result->save();
 }
 

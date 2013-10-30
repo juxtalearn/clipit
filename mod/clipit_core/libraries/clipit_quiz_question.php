@@ -192,18 +192,14 @@ function set_properties($id, $prop_array, $value_array){
 function create($question,
                 $option_array,
                 $type,
-                $taxonomy_tag_array = null,
-                $video = null){
+                $taxonomy_tag_array = array(),
+                $video = -1){
     $quiz_question = new ClipitQuizQuestion();
     $quiz_question->question = $question;
     $quiz_question->option_array = $option_array;
     $quiz_question->type = $type;
-    if($taxonomy_tag_array){
-        $quiz_question->taxonomy_tag_array = $taxonomy_tag_array;
-    }
-    if($video){
-        $quiz_question->video = $video;
-    }
+    $quiz_question->taxonomy_tag_array = $taxonomy_tag_array;
+    $quiz_question->video = $video;
     return $quiz_question->save();
 }
 

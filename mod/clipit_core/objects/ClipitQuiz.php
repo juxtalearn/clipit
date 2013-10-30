@@ -64,17 +64,17 @@ class ClipitQuiz{
      */
     public $public = false;
     /**
-     * @var array Array of ClipitQuizQuestion ids (int) included in this Quiz
+     * @var array Array of ClipitQuizQuestion ids (int) included in this Quiz (optional)
      */
     public $question_array = array();
     /**
-     * @var array Array of ClipitQuizResult ids (int) included in this Quiz
+     * @var array Array of ClipitQuizResult ids (int) included in this Quiz (optional)
      */
     public $result_array = array();
     /**
-     * @var null Taxonomy used as topic for this Quiz
+     * @var int Id of Taxonomy used as topic for this Quiz (optional)
      */
-    public $taxonomy = null;
+    public $taxonomy = -1;
 
     /**
      * ClipitQuiz constructor

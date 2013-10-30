@@ -193,36 +193,26 @@ function set_properties($id, $prop_array, $value_array){
  * @param string $target Target interface to present Quiz (web space, large display, etc.)
  * @param string $description Quiz full description (optional)
  * @param bool $public Whether the Quiz can be reused by other teachers (true= yes, false= no)
- * @param array $question_array Array of ClipitQuizQuestions contained in this Quiz
- * @param array $result_array Array of ClipitQuizResults submitted to answer the Quiz Questions
- * @param int $taxonomy Id of the Taxonomy referenced by this Quiz
+ * @param array $question_array Array of ClipitQuizQuestions contained in this Quiz (optional)
+ * @param array $result_array Array of ClipitQuizResults submitted for this Quiz (optional)
+ * @param int $taxonomy Id of the Taxonomy referenced by this Quiz (optional)
  * @return bool|int Returns the new Quiz Id, or false if error
  */
 function create($name,
                 $target,
-                $description = null,
-                $public = null,
-                $question_array = null,
-                $result_array = null,
-                $taxonomy = null){
+                $description = "",
+                $public = false,
+                $question_array = array(),
+                $result_array = array(),
+                $taxonomy = -1){
     $quiz = new ClipitQuiz();
     $quiz->name = $name;
     $quiz->target = $target;
-    if($description){
-        $quiz->description = $description;
-    }
-    if($public){
-        $quiz->public = (bool)$public;
-    }
-    if($question_array){
-        $quiz->question_array = $question_array;
-    }
-    if($result_array){
-        $quiz->result_array = $result_array;
-    }
-    if($taxonomy){
-        $quiz->taxonomy = $taxonomy;
-    }
+    $quiz->description = $description;
+    $quiz->public = $public;
+    $quiz->question_array = $question_array;
+    $quiz->result_array = $result_array;
+    $quiz->taxonomy = $taxonomy;
     return $quiz->save();
 }
 
