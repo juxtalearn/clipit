@@ -40,6 +40,10 @@ use \ElggUser;
  */
 class ClipitUser{
     /**
+     * @const string Elgg entity type for this class
+     */
+    const TYPE = "user";
+    /**
      * @const string Default ClipitUser Role if not specified
      */
     const DEFAULT_ROLE = "user";
@@ -98,9 +102,9 @@ class ClipitUser{
      * @return $this|bool Returns ClipitUser instance, or false if error.
      */
     function load($id){
-        $elgg_user = new ElggUser($id);
-        if(!$elgg_user){
-            return false;
+        $elgg_user = get_entity($id);
+        if(!$elgg_user || $elgg_user->type != ClipitUser::TYPE){
+            return null;
         }
         $this->description = $elgg_user->description;
         $this->email = $elgg_user->email;
@@ -111,7 +115,7 @@ class ClipitUser{
         $this->password_hash = $elgg_user->salt;
         $this->role = $elgg_user->role;
         $this->time_created = $elgg_user->time_created;
-        return $this;
+        return true;
     }
 
     /**
@@ -135,7 +139,6 @@ class ClipitUser{
         $elgg_user->salt = $this->password_hash;
         $elgg_user->role = $this->role;
         return true;
-        //return $this->id = $elgg_user->save();
     }
 
     /**

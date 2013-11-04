@@ -227,7 +227,14 @@ function add_taxonomy_tags($id, $taxonomy_tag_array){
     if(!$quiz_question = new ClipitQuizQuestion($id)){
         return false;
     }
-    array_merge($quiz_question->taxonomy_tag_array, $taxonomy_tag_array);
+    if(!$quiz_question->taxonomy_tag_array){
+        $quiz_question->taxonomy_tag_array = $taxonomy_tag_array;
+    } else{
+        array_merge($quiz_question->taxonomy_tag_array, $taxonomy_tag_array);
+    }
+    if(!$quiz->save()){
+        return false;
+    }
     return true;
 }
 
@@ -239,7 +246,7 @@ function add_taxonomy_tags($id, $taxonomy_tag_array){
  */
 function get_all($limit = 0){
     $quiz_question_array = array();
-    $elgg_object_array = elgg_get_entities(array('type' => 'object',
+    $elgg_object_array = elgg_get_entities(array('type' => ClipitQuizQuestion::TYPE,
                                                  'subtype' => ClipitQuizQuestion::SUBTYPE,
                                                  'limit' => $limit));
     if(!$elgg_object_array){
@@ -275,3 +282,4 @@ function get_from_quiz($quiz_id){
     }
     return $quiz_question_array;
 }
+

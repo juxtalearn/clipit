@@ -40,7 +40,11 @@ use \ElggObject;
  */
 class ClipitQuizQuestion{
     /**
-     * @const string Subtype of the ClipitQuizQuestion class for ElggObject
+     * @const string Elgg entity type for this class
+     */
+    const TYPE = "object";
+    /**
+     * @const string Elgg entity subtype for this class
      */
     const SUBTYPE = "clipit_quiz_question";
     /**
@@ -86,7 +90,7 @@ class ClipitQuizQuestion{
     function load($id){
         $elgg_object = new ElggObject($id);
         if(!$elgg_object){
-            return false;
+            return null;
         }
         $this->id = $elgg_object->guid;
         $this->option_array = $elgg_object->option_array;

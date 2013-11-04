@@ -40,7 +40,11 @@ use \ElggObject;
  */
 class ClipitQuiz{
     /**
-     * @const string Subtype of the ClipitQuiz class for ElggObject
+     * @const string Elgg entity type for this class
+     */
+    const TYPE = "object";
+    /**
+     * @const string Elgg entity subtype for this class
      */
     const SUBTYPE = "clipit_quiz";
     /**
@@ -67,10 +71,6 @@ class ClipitQuiz{
      * @var array Array of ClipitQuizQuestion ids (int) included in this Quiz (optional)
      */
     public $question_array = array();
-    /**
-     * @var array Array of ClipitQuizResult ids (int) included in this Quiz (optional)
-     */
-    public $result_array = array();
     /**
      * @var int Id of Taxonomy used as topic for this Quiz (optional)
      */
@@ -99,14 +99,13 @@ class ClipitQuiz{
             $elgg_object = new ElggObject($id);
         }
         if(!$elgg_object){
-            return false;
+            return null;
         }
         $this->id = $elgg_object->guid;
         $this->description = $elgg_object->description;
         $this->name = $elgg_object->name;
         $this->public = (bool)$elgg_object->public;
         $this->question_array = $elgg_object->question_array;
-        $this->result_array = $elgg_object->result_array;
         $this->taxonomy = $elgg_object->taxonomy;
         $this->target = $elgg_object->target;
         return $this;
@@ -132,7 +131,6 @@ class ClipitQuiz{
         $elgg_object->name = $this->name;
         $elgg_object->public = (bool)$this->public;
         $elgg_object->question_array = $this->question_array;
-        $elgg_object->result_array = $this->result_array;
         $elgg_object->taxonomy = $this->taxonomy;
         $elgg_object->target = $this->target;
         return $elgg_object->save();
@@ -148,5 +146,20 @@ class ClipitQuiz{
             return false;
         }
         return $elgg_object->delete();
+    }
+
+    /**
+     * Set Quiz privacy into "public" property (true = public, false = private)
+     *
+     * @param string $public Flag specifying if the quiz is public or not, in string format
+     */
+    public function setPrivacy($public){
+        if($public =="true"){
+            $this->public = true;
+        } elseif($public == "false"){
+            $this->public = false;
+        } else{
+            $this->public = (bool) $public;
+        }
     }
 }

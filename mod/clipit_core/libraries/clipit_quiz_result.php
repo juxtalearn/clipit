@@ -100,12 +100,15 @@ function expose_functions(){
                  "required" => false)),
         "description", 'GET', false, true);
     expose_function(
-        "clipit.quiz.result.get_from_quiz",
-        __NAMESPACE__."\\get_from_quiz",
+        "clipit.quiz.result.get_from_question",
+        __NAMESPACE__."\\get_from_question",
         array(
-             "quiz_id" => array(
+             "question_id" => array(
                  "type" => "int",
-                 "required" => true)),
+                 "required" => true),
+            "limit" => array(
+                "type" => "int",
+                "required" => false)),
         "description", 'GET', false, true);
 }
 
@@ -202,12 +205,12 @@ function delete($id){
 /**
  * Get all Quiz Results from the system.
  *
- * @param int $limit Number of results to show, default= 0 [no limit] (default)
+ * @param int $limit Number of results to show, default= 0 [no limit] (optional)
  * @return array Returns an array of ClipitQuizQuestion objects
  */
 function get_all($limit = 0){
     $quiz_result_array = array();
-    $elgg_object_array = elgg_get_entities(array('type' => 'object',
+    $elgg_object_array = elgg_get_entities(array('type' => ClipitQuizResult::TYPE,
                                                  'subtype' => ClipitQuizResult::SUBTYPE,
                                                  'limit' => $limit));
     if(!$elgg_object_array){
@@ -222,19 +225,24 @@ function get_all($limit = 0){
 }
 
 /**
- * Get all Quiz Results from a specified Quiz.
+ * Get all Quiz Results from a specified Quiz Question.
  *
- * @param int $quiz_id Id of quiz to get Results form
+ * @param int $question_id Id of Quiz Question to get Results form
+ * @param int $limit Number of results to show, default = 0 [no limit] (optional)
  * @return array|bool Array of Quiz Results, or false if error
  */
-function get_from_quiz($quiz_id){
-    if(!$quiz = new ClipitQuiz($quiz_id)){
-        return false;
-    }
+function get_from_question($question_id, $limit = 0){
     $quiz_result_array = array();
+    $elgg_object_array = elgg_get_entities(array('type' => ClipitQuizResult::TYPE,
+                                                 'subtype' => ClipitQuizResult::SUBTYPE,
+                                                 'quiz_question' => $question_id,
+                                                 'limit' => $limit));
+    if(!$elgg_object_array){
+        return $quiz_result_array;
+    }
     $i = 0;
-    foreach($quiz->result_array as $quiz_result_id){
-        if(!$quiz_result = new ClipitQuizResult($quiz_result_id)){
+    foreach($elgg_object_array as $elgg_object){
+        if(!$quiz_result = new ClipitQuizResult($elgg_object->guid)){
             $quiz_result_array[$i] = null;
         } else{
             $quiz_result_array[$i] = $quiz_result;

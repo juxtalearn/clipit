@@ -79,9 +79,6 @@ function expose_functions(){
              "question_array" => array(
                  "type" => "array",
                  "required" => false),
-             "result_array" => array(
-                 "type" => "array",
-                 "required" => false),
              "taxonomy" => array(
                  "type" => "int",
                  "required" => false)),
@@ -114,17 +111,6 @@ function expose_functions(){
                  "type" => "int",
                  "required" => true),
              "question_array" => array(
-                 "type" => "array",
-                 "required" => true)),
-        "description", 'GET', false, true);
-    expose_function(
-        "clipit.quiz.add_results",
-        __NAMESPACE__."\\add_results",
-        array(
-             "id" => array(
-                 "type" => "int",
-                 "required" => true),
-             "result_array" => array(
                  "type" => "array",
                  "required" => true)),
         "description", 'GET', false, true);
@@ -178,7 +164,11 @@ function set_properties($id, $prop_array, $value_array){
         return false;
     }
     for($i = 0; $i < count($prop_array); $i++){
-        $quiz->$prop_array[$i] = $value_array[$i];
+        if($prop_array[$i] == "public"){
+            $quiz->setPrivacy($value_array[$i]);
+        } else{
+            $quiz->$prop_array[$i] = $value_array[$i];
+        }
     }
     if(!$quiz->save()){
         return false;
@@ -209,7 +199,7 @@ function create($name,
     $quiz->name = $name;
     $quiz->target = $target;
     $quiz->description = $description;
-    $quiz->public = $public;
+    $quiz->setPrivacy($public);
     $quiz->question_array = $question_array;
     $quiz->result_array = $result_array;
     $quiz->taxonomy = $taxonomy;
@@ -230,6 +220,29 @@ function delete($id){
 }
 
 /**
+ * Adds Quiz Questions to a Quiz.
+ *
+ * @param int $id Id from Quiz to add Questions to
+ * @param array $question_array Array of Questions to add
+ * @return bool Returns true if success, false if error
+ */
+function add_questions($id, $question_array){
+    if(!$quiz = new ClipitQuiz($id)){
+        return false;
+    }
+    if(!$quiz->question_array){
+        $quiz->question_array = $question_array;
+    } else{
+        array_merge($quiz->question_array, $question_array);
+    }
+    if(!$quiz->save()){
+        return false;
+    }
+    return true;
+}
+
+
+/**
  * Get all quizzes from the system.
  *
  * @param int $limit Number of results to show, default= 0 [no limit] (default)
@@ -237,7 +250,7 @@ function delete($id){
  */
 function get_all($limit = 0){
     $quiz_array = array();
-    $elgg_object_array = elgg_get_entities(array('type' => 'object',
+    $elgg_object_array = elgg_get_entities(array('type' => ClipitQuiz::TYPE,
                                                  'subtype' => ClipitQuiz::SUBTYPE,
                                                  'limit' => $limit));
     if(!$elgg_object_array){
@@ -259,43 +272,25 @@ function get_all($limit = 0){
  */
 function get_by_id($id_array){
     $quiz_array = array();
-    for($i = 0; $i < count($id_array); $i++){
-        $elgg_object = get_entity($id_array[$i]);
-        if(!$elgg_object){
+    $i = 0;
+    foreach($id_array as $id){
+        if(elgg_entity_exists($id)){
+            $quiz_array[$i] = new ClipitQuiz((int) $id);
+        } else{
             $quiz_array[$i] = null;
-            continue;
         }
-        $quiz_array[$i] = new ClipitQuiz($elgg_object->guid);
+        $i++;
     }
     return $quiz_array;
 }
 
-/**
- * Adds Quiz Questions to a Quiz.
- *
- * @param int $id Id from Quiz to add Questions to
- * @param array $question_array Array of Questions to add
- * @return bool Returns true if success, false if error
- */
-function add_questions($id, $question_array){
-    if(!$quiz = new ClipitQuiz($id)){
+function get_quiz_questions($id){
+    if(!$quiz = new Clipitquiz($id)){
         return false;
     }
-    array_merge($quiz->question_array, $question_array);
-    return true;
-}
-
-/**
- * Adds Quiz Results to a Quiz.
- *
- * @param int $id Id from Quiz to add Results to
- * @param array $result_array Array of Results to add
- * @return bool Returns true if success, false if error
- */
-function add_results($id, $result_array){
-    if(!$quiz = new ClipitQuiz($id)){
-        return false;
+    $quiz_question_array = array();
+    foreach($quiz->question_array as $question_id){
+        array_push($quiz_question_array, new question\ClipitQuizQuestion($question_id));
     }
-    array_merge($quiz->result_array, $result_array);
-    return true;
+    return $quiz_question_array;
 }

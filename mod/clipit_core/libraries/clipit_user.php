@@ -179,9 +179,9 @@ function set_properties($id, $prop_array, $value_array){
     for($i = 0; $i < count($prop_array); $i++){
         if($prop_array[$i] == "password"){
             $user->setPassword($value_array[$i]);
-            continue;
+        } else{
+            $user->$prop_array[$i] = $value_array[$i];
         }
-        $user->$prop_array[$i] = $value_array[$i];
     }
     if(!$user->save()){
         return false;
@@ -241,7 +241,7 @@ function delete($id){
  */
 function get_all($limit = 0){
     $user_array = array();
-    $elgg_user_array = elgg_get_entities(array('type' => 'user',
+    $elgg_user_array = elgg_get_entities(array('type' => ClipitUser::TYPE,
                                                'limit' => $limit));
     if(!$elgg_user_array){
         return $user_array;
@@ -262,13 +262,14 @@ function get_all($limit = 0){
  */
 function get_by_id($id_array){
     $user_array = array();
-    for($i = 0; $i < count($id_array); $i++){
-        $elgg_user = get_user($id_array[$i]);
-        if(!$elgg_user){
+    $i =0;
+    foreach($id_array as $id){
+        if(elgg_entity_exists($id)){
+            $user_array[$i] = new ClipitUser((int) $id);
+        } else{
             $user_array[$i] = null;
-            continue;
         }
-        $user_array[$i] = new ClipitUser($elgg_user->guid);
+        $i++;
     }
     return $user_array;
 }
