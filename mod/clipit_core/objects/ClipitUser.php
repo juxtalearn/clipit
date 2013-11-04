@@ -125,10 +125,8 @@ class ClipitUser{
     function save(){
         if($this->id == -1){
             $elgg_user = new ElggUser();
-        } else{
-            if(!$elgg_user = new ElggUser($this->id)){
-                return false;
-            }
+        } elseif(!$elgg_user = new ElggUser($this->id)){
+            return false;
         }
         $elgg_user->description = $this->description;
         $elgg_user->email = $this->email;
@@ -137,10 +135,7 @@ class ClipitUser{
         $elgg_user->password = $this->password;
         $elgg_user->salt = $this->password_hash;
         $elgg_user->role = $this->role;
-        if(!$this->id = $elgg_user->save()){
-            return false;
-        }
-        return true;
+        return $this->id = $elgg_user->save();
     }
 
     /**

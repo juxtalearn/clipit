@@ -125,10 +125,7 @@ class ClipitQuizResult{
         $elgg_object->correct = (bool) $this->correct;
         $elgg_object->quiz_question = (int) $this->quiz_question;
         $elgg_object->user = (int) $this->user;
-        if(!$this->id = $elgg_object->save()){
-            return false;
-        }
-        return true;
+        return $this->id = $elgg_object->save();
     }
 
     /**

@@ -124,10 +124,7 @@ class ClipitQuizQuestion{
         $elgg_object->taxonomy_tag_array = (array) $this->taxonomy_tag_array;
         $elgg_object->option_type = (string) $this->option_type;
         $elgg_object->video = (int) $this->video;
-        if(!$this->id = $elgg_object->save()){
-            return false;
-        }
-        return true;
+        return $this->id = $elgg_object->save();
     }
 
     /**

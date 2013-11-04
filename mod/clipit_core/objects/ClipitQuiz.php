@@ -132,10 +132,7 @@ class ClipitQuiz{
         $elgg_object->question_array = (array) $this->question_array;
         $elgg_object->taxonomy = (int) $this->taxonomy;
         $elgg_object->target = (string) $this->target;
-        if(!$this->id = $elgg_object->save()){
-            return false;
-        }
-        return true;
+        return $this->id = $elgg_object->save();
     }
 
     /**
