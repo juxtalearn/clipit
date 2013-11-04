@@ -90,16 +90,19 @@ class ClipitQuizResult{
      * @return $this|bool Returns Quiz Question instance, or false if error
      */
     function load($id){
-        $elgg_object = new ElggObject($id);
-        if(!$elgg_object){
+        if(!$elgg_object = new ElggObject((int) $id)){
             return null;
         }
-        $this->id = $elgg_object->guid;
-        $this->result_array = $elgg_object->result_array;
-        $this->correct = $elgg_object->correct;
-        $this->quiz_question = $elgg_object->quiz_question;
-        $this->user = $elgg_object->user;
-        $this->time_created = $elgg_object->time_created;
+        if($elgg_object->type != ClipitQuizResult::TYPE
+           || get_subtype_from_id($elgg_object->subtype) != ClipitQuizResult::SUBTYPE){
+            return null;
+        }
+        $this->id = (int) $elgg_object->guid;
+        $this->result_array = (array) $elgg_object->result_array;
+        $this->correct = (bool) $elgg_object->correct;
+        $this->quiz_question = (int) $elgg_object->quiz_question;
+        $this->user = (int) $elgg_object->user;
+        $this->time_created = (int) $elgg_object->time_created;
         return $this;
     }
 
@@ -111,19 +114,21 @@ class ClipitQuizResult{
     function save(){
         if($this->id == -1){
             $elgg_object = new ElggObject();
-            $elgg_object->subtype = $this::SUBTYPE;
-            $this->id = $elgg_object->save();
+            $elgg_object->subtype = (string) ClipitQuizResult::SUBTYPE;
         } else{
-            $elgg_object = new ElggObject($this->id);
+            $elgg_object = new ElggObject((int) $this->id);
         }
         if(!$elgg_object){
             return false;
         }
-        $elgg_object->result_array = $this->result_array;
-        $elgg_object->correct = $this->correct;
-        $elgg_object->quiz_question = $this->quiz_question;
-        $elgg_object->user = $this->user;
-        return $elgg_object->save();
+        $elgg_object->result_array = (array) $this->result_array;
+        $elgg_object->correct = (bool) $this->correct;
+        $elgg_object->quiz_question = (int) $this->quiz_question;
+        $elgg_object->user = (int) $this->user;
+        if(!$this->id = $elgg_object->save()){
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -132,10 +137,25 @@ class ClipitQuizResult{
      * @return bool True if success, false if error.
      */
     function delete(){
-        if(!$elgg_object = get_Entity($this->id)){
+        if(!$elgg_object = get_Entity((int) $this->id)){
             return false;
         }
         return $elgg_object->delete();
+    }
+
+    /**
+     * Set Quiz Result Correct flag into "correct" property (true = yes, false = no)
+     *
+     * @param string $value Flag specifying if the Quiz Result is correct or not
+     */
+    function setCorrect($value){
+        if($value =="true"){
+            $this->correct = true;
+        } elseif($value == "false"){
+            $this->correct = false;
+        } else{
+            $this->correct = (bool) $value;
+        }
     }
 
 }

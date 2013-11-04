@@ -64,6 +64,7 @@
 <li class="method public "><a href="#method_delete" title="delete() :: Deletes a Quiz Result from the system"><span class="description">Deletes a Quiz Result from the system</span><pre>delete()</pre></a></li>
 <li class="method public "><a href="#method_load" title="load() :: Loads a ClipitQuizResult instance from the system."><span class="description">Loads a ClipitQuizResult instance from the system.</span><pre>load()</pre></a></li>
 <li class="method public "><a href="#method_save" title="save() :: Saves this instance to the system."><span class="description">Saves this instance to the system.</span><pre>save()</pre></a></li>
+<li class="method public "><a href="#method_setCorrect" title='setCorrect() :: Set Quiz Result Correct flag into "correct" property (true = yes, false = no)'><span class="description">Set Quiz Result Correct flag into "correct" property (true = yes, false = no)</span><pre>setCorrect()</pre></a></li>
 </ul>
 </li>
 <li class="nav-header">
@@ -79,7 +80,10 @@
 </li>
 <li class="nav-header">
 <i class="icon-custom icon-constant"></i> Constants
-                    <ul><li class="constant  "><a href="#constant_SUBTYPE" title="SUBTYPE() :: "><span class="description">SUBTYPE</span><pre>SUBTYPE</pre></a></li></ul>
+                    <ul>
+<li class="constant  "><a href="#constant_SUBTYPE" title="SUBTYPE() :: "><span class="description">SUBTYPE</span><pre>SUBTYPE</pre></a></li>
+<li class="constant  "><a href="#constant_TYPE" title="TYPE() :: "><span class="description">TYPE</span><pre>TYPE</pre></a></li>
+</ul>
 </li>
 </ul>
 </div>
@@ -163,6 +167,18 @@
 <code>bool</code><code>int</code>Returns the Id of the saved instance, or false if error.</div>
 </div></div>
 </div>
+<a id="method_setCorrect"></a><div class="element clickable method public method_setCorrect" data-toggle="collapse" data-target=".method_setCorrect .collapse">
+<h2>Set Quiz Result Correct flag into "correct" property (true = yes, false = no)</h2>
+<pre>setCorrect(string $value) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>string</code><p>Flag specifying if the Quiz Result is correct or not</p></div>
+</div></div>
+</div>
 <h3>
 <i class="icon-custom icon-property"></i> Properties</h3>
 <a id="property_correct"> </a><div class="element clickable property public property_correct" data-toggle="collapse" data-target=".property_correct .collapse">
@@ -211,7 +227,19 @@
 <div class="long_description"></div>
 <table class="table table-bordered"><tr>
 <th>const</th>
-<td>string Subtype of the ClipitQuizResult class for ElggObject</td>
+<td>string Elgg entity subtype for this class</td>
+</tr></table>
+</div></div>
+</div>
+<a id="constant_TYPE"> </a><div class="element clickable constant  constant_TYPE" data-toggle="collapse" data-target=".constant_TYPE .collapse">
+<h2>TYPE</h2>
+<pre>TYPE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>const</th>
+<td>string Elgg entity type for this class</td>
 </tr></table>
 </div></div>
 </div>
@@ -223,7 +251,7 @@
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.1.0
 </a> and<br>
-            generated on 2013-10-29T15:35:46+01:00.<br></footer></div>
+            generated on 2013-11-04T15:05:18+01:00.<br></footer></div>
 </div>
 </body>
 </html>

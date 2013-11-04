@@ -83,7 +83,7 @@ class ClipitQuiz{
      */
     function __construct($id = null){
         if($id){
-            $this->load($id);
+            $this->load((int) $id);
         }
     }
 
@@ -93,21 +93,21 @@ class ClipitQuiz{
      * @param int $id IF of the ClipitQuiz to load from the system.
      * @return $this|bool Returns ClipitQuiz instance, or false if error.
      */
-    function load($id = null){
-        $elgg_object = null;
-        if($id){
-            $elgg_object = new ElggObject($id);
-        }
-        if(!$elgg_object){
+    function load($id){
+        if(!($elgg_object = new ElggObject((int) $id))){
             return null;
         }
-        $this->id = $elgg_object->guid;
-        $this->description = $elgg_object->description;
-        $this->name = $elgg_object->name;
+        if($elgg_object->type != ClipitQuiz::TYPE
+           || get_subtype_from_id($elgg_object->subtype) != ClipitQuiz::SUBTYPE){
+            return null;
+        }
+        $this->id = (int) $elgg_object->guid;
+        $this->description = (string) $elgg_object->description;
+        $this->name = (string) $elgg_object->name;
         $this->public = (bool)$elgg_object->public;
-        $this->question_array = $elgg_object->question_array;
-        $this->taxonomy = $elgg_object->taxonomy;
-        $this->target = $elgg_object->target;
+        $this->question_array = (array) $elgg_object->question_array;
+        $this->taxonomy = (int) $elgg_object->taxonomy;
+        $this->target = (string) $elgg_object->target;
         return $this;
     }
 
@@ -119,21 +119,23 @@ class ClipitQuiz{
     function save(){
         if($this->id == -1){
             $elgg_object = new ElggObject();
-            $elgg_object->subtype = $this::SUBTYPE;
-            $this->id = $elgg_object->save();
+            $elgg_object->subtype = (string) ClipitQuiz::SUBTYPE;
         } else{
-            $elgg_object = new ElggObject($this->id);
+            $elgg_object = new ElggObject((int) $this->id);
         }
         if(!$elgg_object){
             return false;
         }
-        $elgg_object->description = $this->description;
-        $elgg_object->name = $this->name;
-        $elgg_object->public = (bool)$this->public;
-        $elgg_object->question_array = $this->question_array;
-        $elgg_object->taxonomy = $this->taxonomy;
-        $elgg_object->target = $this->target;
-        return $elgg_object->save();
+        $elgg_object->description = (string) $this->description;
+        $elgg_object->name = (string) $this->name;
+        $elgg_object->public = (bool) $this->public;
+        $elgg_object->question_array = (array) $this->question_array;
+        $elgg_object->taxonomy = (int) $this->taxonomy;
+        $elgg_object->target = (string) $this->target;
+        if(!$this->id = $elgg_object->save()){
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -142,7 +144,7 @@ class ClipitQuiz{
      * @return bool True if success, false if error.
      */
     function delete(){
-        if(!$elgg_object = get_Entity($this->id)){
+        if(!$elgg_object = get_Entity((int) $this->id)){
             return false;
         }
         return $elgg_object->delete();
@@ -151,15 +153,15 @@ class ClipitQuiz{
     /**
      * Set Quiz privacy into "public" property (true = public, false = private)
      *
-     * @param string $public Flag specifying if the quiz is public or not, in string format
+     * @param string $value Flag specifying if the quiz is public or not
      */
-    public function setPrivacy($public){
-        if($public =="true"){
+    public function setPrivacy($value){
+        if($value =="true"){
             $this->public = true;
-        } elseif($public == "false"){
+        } elseif($value == "false"){
             $this->public = false;
         } else{
-            $this->public = (bool) $public;
+            $this->public = (bool) $value;
         }
     }
 }

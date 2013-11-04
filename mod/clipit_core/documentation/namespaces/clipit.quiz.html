@@ -102,24 +102,6 @@
 <code>bool</code>Returns true if success, false if error</div>
 </div></div>
 </div>
-<a id="function_add_results"></a><div class="element clickable function  function_add_results" data-toggle="collapse" data-target=".function_add_results .collapse">
-<h2>Adds Quiz Results to a Quiz.</h2>
-<pre>add_results(int $id, array $result_array) : bool</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$id</h4>
-<code>int</code><p>Id from Quiz to add Results to</p></div>
-<div class="subelement argument">
-<h4>$result_array</h4>
-<code>array</code><p>Array of Results to add</p></div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>bool</code>Returns true if success, false if error</div>
-</div></div>
-</div>
 <a id="function_create"></a><div class="element clickable function  function_create" data-toggle="collapse" data-target=".function_create .collapse">
 <h2>Create a new ClipitQuiz instance, and save it into the system.</h2>
 <pre>create(string $name, string $target, string $description, bool $public, array $question_array, array $result_array, int $taxonomy) : bool | int</pre>
@@ -144,13 +126,16 @@
 </div>
 <div class="subelement argument">
 <h4>$question_array</h4>
-<code>array</code><p>Array of ClipitQuizQuestions contained in this Quiz</p></div>
+<code>array</code><p>Array of ClipitQuizQuestions contained in this Quiz (optional)</p>
+</div>
 <div class="subelement argument">
 <h4>$result_array</h4>
-<code>array</code><p>Array of ClipitQuizResults submitted to answer the Quiz Questions</p></div>
+<code>array</code><p>Array of ClipitQuizResults submitted for this Quiz (optional)</p>
+</div>
 <div class="subelement argument">
 <h4>$taxonomy</h4>
-<code>int</code><p>Id of the Taxonomy referenced by this Quiz</p></div>
+<code>int</code><p>Id of the Taxonomy referenced by this Quiz (optional)</p>
+</div>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>bool</code><code>int</code>Returns the new Quiz Id, or false if error</div>
@@ -225,6 +210,21 @@
 <div class="subelement response">
 <code>array</code><code>bool</code>Returns array of [property => value] pairs, or false if error.
 If a property does not exist, the returned array will show null as that propertie's value.</div>
+</div></div>
+</div>
+<a id="function_get_questions"></a><div class="element clickable function  function_get_questions" data-toggle="collapse" data-target=".function_get_questions .collapse">
+<h2>Get an array of Quiz Questions included in a Quiz</h2>
+<pre>get_questions(int $id) : array | bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$id</h4>
+<code>int</code><p>The Id of the Quiz to get questions from</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code><code>bool</code>Returns an array of ClipitQuizQuestion objects, or false if error</div>
 </div></div>
 </div>
 <a id="function_list_properties"></a><div class="element clickable function  function_list_properties" data-toggle="collapse" data-target=".function_list_properties .collapse">
@@ -308,7 +308,7 @@ If a property does not exist, the returned array will show null as that properti
 </div>
 <a id="function_create"></a><div class="element clickable function  function_create" data-toggle="collapse" data-target=".function_create .collapse">
 <h2>Create a new ClipitQuizQuestion instance, and save it into the system.</h2>
-<pre>create(string $question, array $option_array, string $type, array $taxonomy_tag_array, int $video) : bool | int</pre>
+<pre>create(string $question, array $option_array, string $option_type, array $taxonomy_tag_array, int $video) : bool | int</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -318,10 +318,10 @@ If a property does not exist, the returned array will show null as that properti
 <code>string</code><p>Question in text form to be presented to the user taking the quiz</p></div>
 <div class="subelement argument">
 <h4>$option_array</h4>
-<code>array</code><p>Array of options presented to the user to choose from</p></div>
+<code>array</code><p>Array of Options presented to the user to choose from</p></div>
 <div class="subelement argument">
-<h4>$type</h4>
-<code>string</code><p>Type of answer to be given (select 1 only, select 2, select any...)</p>
+<h4>$option_type</h4>
+<code>string</code><p>Type of Options (select 1 only, select 2, select any...)</p>
 </div>
 <div class="subelement argument">
 <h4>$taxonomy_tag_array</h4>
@@ -373,19 +373,19 @@ If a property does not exist, the returned array will show null as that properti
 <code>array</code>Returns an array of ClipitQuizQuestion objects</div>
 </div></div>
 </div>
-<a id="function_get_from_quiz"></a><div class="element clickable function  function_get_from_quiz" data-toggle="collapse" data-target=".function_get_from_quiz .collapse">
-<h2>Get all Quiz Questions from a specified Quiz.</h2>
-<pre>get_from_quiz(int $quiz_id) : array | bool</pre>
+<a id="function_get_by_id"></a><div class="element clickable function  function_get_by_id" data-toggle="collapse" data-target=".function_get_by_id .collapse">
+<h2>Get all Quizz Questions with Id contained in a given list.</h2>
+<pre>get_by_id(array $id_array) : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
 <h3>Parameters</h3>
 <div class="subelement argument">
-<h4>$quiz_id</h4>
-<code>int</code><p>Id of quiz to get Questions form</p></div>
+<h4>$id_array</h4>
+<code>array</code><p>Array of Quiz Question Ids</p></div>
 <h3>Returns</h3>
 <div class="subelement response">
-<code>array</code><code>bool</code>Array of Quiz Questions, or false if error</div>
+<code>array</code>Returns an array of ClipitQuizQuestion objects</div>
 </div></div>
 </div>
 <a id="function_get_properties"></a><div class="element clickable function  function_get_properties" data-toggle="collapse" data-target=".function_get_properties .collapse">
@@ -405,6 +405,25 @@ If a property does not exist, the returned array will show null as that properti
 <div class="subelement response">
 <code>array</code><code>bool</code>Returns array of [property => value] pairs, or false if error.
 If a property does not exist, the returned array will show null as that propertie's value.</div>
+</div></div>
+</div>
+<a id="function_get_results"></a><div class="element clickable function  function_get_results" data-toggle="collapse" data-target=".function_get_results .collapse">
+<h2>Get all Quiz Results from a specified Quiz Question.</h2>
+<pre>get_results(int $id, int $limit) : array | bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$id</h4>
+<code>int</code><p>Id of Quiz Question to get Results form</p></div>
+<div class="subelement argument">
+<h4>$limit</h4>
+<code>int</code><p>Number of results to show, default = 0 [no limit] (optional)</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code><code>bool</code>Array of Quiz Results, or false if error</div>
 </div></div>
 </div>
 <a id="function_list_properties"></a><div class="element clickable function  function_list_properties" data-toggle="collapse" data-target=".function_list_properties .collapse">
@@ -524,23 +543,42 @@ If a property does not exist, the returned array will show null as that properti
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$limit</h4>
-<code>int</code><p>Number of results to show, default= 0 [no limit] (default)</p>
+<code>int</code><p>Number of results to show, default= 0 [no limit] (optional)</p>
 </div>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>array</code>Returns an array of ClipitQuizQuestion objects</div>
 </div></div>
 </div>
-<a id="function_get_from_quiz"></a><div class="element clickable function  function_get_from_quiz" data-toggle="collapse" data-target=".function_get_from_quiz .collapse">
-<h2>Get all Quiz Results from a specified Quiz.</h2>
-<pre>get_from_quiz(int $quiz_id) : array | bool</pre>
+<a id="function_get_by_id"></a><div class="element clickable function  function_get_by_id" data-toggle="collapse" data-target=".function_get_by_id .collapse">
+<h2>Get all Quizz Results with Id contained in a given list.</h2>
+<pre>get_by_id(array $id_array) : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
 <h3>Parameters</h3>
 <div class="subelement argument">
-<h4>$quiz_id</h4>
-<code>int</code><p>Id of quiz to get Results form</p></div>
+<h4>$id_array</h4>
+<code>array</code><p>Array of Quiz Result Ids</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Returns an array of ClipitQuizResult objects</div>
+</div></div>
+</div>
+<a id="function_get_from_question"></a><div class="element clickable function  function_get_from_question" data-toggle="collapse" data-target=".function_get_from_question .collapse">
+<h2>Get all Quiz Results from a specified Quiz Question.</h2>
+<pre>get_from_question(int $quiz_question_id, int $limit) : array | bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$quiz_question_id</h4>
+<code>int</code><p>Id of Quiz Question to get Results form</p></div>
+<div class="subelement argument">
+<h4>$limit</h4>
+<code>int</code><p>Number of results to show, default = 0 [no limit] (optional)</p>
+</div>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>array</code><code>bool</code>Array of Quiz Results, or false if error</div>
@@ -619,7 +657,7 @@ If a property does not exist, the returned array will show null as that properti
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.1.0
 </a> and<br>
-            generated on 2013-10-29T15:35:46+01:00.<br></footer></div>
+            generated on 2013-11-04T15:05:18+01:00.<br></footer></div>
 </div>
 </body>
 </html>

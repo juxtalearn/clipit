@@ -28,12 +28,6 @@ namespace clipit\quiz\result;
      */
 
 /**
- * Alias so classes outside of this namespace can be used without path.
- * @use \clipit\quiz\ClipitQuiz
- */
-use \clipit\quiz\ClipitQuiz;
-
-/**
  * Expose libraty functions to REST API.
  */
 function expose_functions(){
@@ -103,12 +97,20 @@ function expose_functions(){
         "clipit.quiz.result.get_from_question",
         __NAMESPACE__."\\get_from_question",
         array(
-             "question_id" => array(
+             "quiz_question_id" => array(
                  "type" => "int",
                  "required" => true),
-            "limit" => array(
-                "type" => "int",
-                "required" => false)),
+             "limit" => array(
+                 "type" => "int",
+                 "required" => false)),
+        "description", 'GET', false, true);
+    expose_function(
+        "clipit.quiz.result.get_by_id",
+        __NAMESPACE__."\\get_by_id",
+        array(
+             "id_array" => array(
+                 "type" => "array",
+                 "required" => true)),
         "description", 'GET', false, true);
 }
 
@@ -185,7 +187,7 @@ function create($quiz_question,
     $quiz_result->quiz_question = $quiz_question;
     $quiz_result->result_array = $result_array;
     $quiz_result->user = $user;
-    $quiz_result->$correct;
+    $quiz_result->setCorrect($correct);
     return $quiz_result->save();
 }
 
@@ -216,10 +218,8 @@ function get_all($limit = 0){
     if(!$elgg_object_array){
         return $quiz_result_array;
     }
-    $i = 0;
     foreach($elgg_object_array as $elgg_object){
-        $quiz_result_array[$i] = new ClipitQuizResult($elgg_object->guid);
-        $i++;
+        array_push($quiz_result_array, new ClipitQuizResult($elgg_object->guid));
     }
     return $quiz_result_array;
 }
@@ -227,27 +227,43 @@ function get_all($limit = 0){
 /**
  * Get all Quiz Results from a specified Quiz Question.
  *
- * @param int $question_id Id of Quiz Question to get Results form
+ * @param int $quiz_question_id Id of Quiz Question to get Results form
  * @param int $limit Number of results to show, default = 0 [no limit] (optional)
  * @return array|bool Array of Quiz Results, or false if error
  */
-function get_from_question($question_id, $limit = 0){
+function get_from_question($quiz_question_id, $limit = 0){
     $quiz_result_array = array();
-    $elgg_object_array = elgg_get_entities(array('type' => ClipitQuizResult::TYPE,
-                                                 'subtype' => ClipitQuizResult::SUBTYPE,
-                                                 'quiz_question' => $question_id,
-                                                 'limit' => $limit));
+    $elgg_object_array = elgg_get_entities(array("type" => ClipitQuizResult::TYPE,
+                                                 "subtype" => ClipitQuizResult::SUBTYPE,
+                                                 "limit" => $limit));
     if(!$elgg_object_array){
         return $quiz_result_array;
     }
-    $i = 0;
     foreach($elgg_object_array as $elgg_object){
-        if(!$quiz_result = new ClipitQuizResult($elgg_object->guid)){
-            $quiz_result_array[$i] = null;
+        if((int) $elgg_object->quiz_question == (int) $quiz_question_id){
+            array_push($quiz_result_array, new ClipitQuizResult($elgg_object->guid));
+        }
+    }
+    return $quiz_result_array;
+}
+
+/**
+ * Get all Quizz Results with Id contained in a given list.
+ *
+ * @param array $id_array Array of Quiz Result Ids
+ * @return array Returns an array of ClipitQuizResult objects
+ */
+function get_by_id($id_array){
+    $quiz_result_array = array();
+    $i = 0;
+    foreach($id_array as $id){
+        if(elgg_entity_exists((int) $id)){
+            $quiz_result_array[$i] = new ClipitQuizResult((int) $id);
         } else{
-            $quiz_result_array[$i] = $quiz_result;
+            $quiz_result_array[$i] = null;
         }
         $i++;
     }
     return $quiz_result_array;
 }
+

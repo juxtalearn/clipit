@@ -64,6 +64,7 @@
 <li class="method public "><a href="#method_delete" title="delete() :: Deletes a quiz from the system."><span class="description">Deletes a quiz from the system.</span><pre>delete()</pre></a></li>
 <li class="method public "><a href="#method_load" title="load() :: Loads a ClipitQuiz from the system."><span class="description">Loads a ClipitQuiz from the system.</span><pre>load()</pre></a></li>
 <li class="method public "><a href="#method_save" title="save() :: Saves this instance to the system."><span class="description">Saves this instance to the system.</span><pre>save()</pre></a></li>
+<li class="method public "><a href="#method_setPrivacy" title='setPrivacy() :: Set Quiz privacy into "public" property (true = public, false = private)'><span class="description">Set Quiz privacy into "public" property (true = public, false = private)</span><pre>setPrivacy()</pre></a></li>
 </ul>
 </li>
 <li class="nav-header">
@@ -73,15 +74,17 @@
 <li class="property public "><a href="#property_id" title="$id() :: "><span class="description">Unique Id of saved ClipitQuiz (-1 = unsaved)</span><pre>$id</pre></a></li>
 <li class="property public "><a href="#property_name" title="$name() :: "><span class="description">Quiz name</span><pre>$name</pre></a></li>
 <li class="property public "><a href="#property_public" title="$public() :: "><span class="description">Specifies whether the Quiz can be reused by other teachers (optional, default = false)</span><pre>$public</pre></a></li>
-<li class="property public "><a href="#property_question_array" title="$question_array() :: "><span class="description">Array of ClipitQuizQuestion ids (int) included in this Quiz</span><pre>$question_array</pre></a></li>
-<li class="property public "><a href="#property_result_array" title="$result_array() :: "><span class="description">Array of ClipitQuizResult ids (int) included in this Quiz</span><pre>$result_array</pre></a></li>
+<li class="property public "><a href="#property_question_array" title="$question_array() :: "><span class="description">Array of ClipitQuizQuestion ids (int) included in this Quiz (optional)</span><pre>$question_array</pre></a></li>
 <li class="property public "><a href="#property_target" title="$target() :: "><span class="description">Target interface for Quiz display (e.g.: "web space", "large display"...)</span><pre>$target</pre></a></li>
-<li class="property public "><a href="#property_taxonomy" title="$taxonomy() :: "><span class="description">Taxonomy used as topic for this Quiz</span><pre>$taxonomy</pre></a></li>
+<li class="property public "><a href="#property_taxonomy" title="$taxonomy() :: "><span class="description">Id of Taxonomy used as topic for this Quiz (optional)</span><pre>$taxonomy</pre></a></li>
 </ul>
 </li>
 <li class="nav-header">
 <i class="icon-custom icon-constant"></i> Constants
-                    <ul><li class="constant  "><a href="#constant_SUBTYPE" title="SUBTYPE() :: "><span class="description">SUBTYPE</span><pre>SUBTYPE</pre></a></li></ul>
+                    <ul>
+<li class="constant  "><a href="#constant_SUBTYPE" title="SUBTYPE() :: "><span class="description">SUBTYPE</span><pre>SUBTYPE</pre></a></li>
+<li class="constant  "><a href="#constant_TYPE" title="TYPE() :: "><span class="description">TYPE</span><pre>TYPE</pre></a></li>
+</ul>
 </li>
 </ul>
 </div>
@@ -162,6 +165,18 @@
 <code>bool</code><code>int</code>Returns id of saved instance, or false if error.</div>
 </div></div>
 </div>
+<a id="method_setPrivacy"></a><div class="element clickable method public method_setPrivacy" data-toggle="collapse" data-target=".method_setPrivacy .collapse">
+<h2>Set Quiz privacy into "public" property (true = public, false = private)</h2>
+<pre>setPrivacy(string $value) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>string</code><p>Flag specifying if the quiz is public or not</p></div>
+</div></div>
+</div>
 <h3>
 <i class="icon-custom icon-property"></i> Properties</h3>
 <a id="property_description"> </a><div class="element clickable property public property_description" data-toggle="collapse" data-target=".property_description .collapse">
@@ -189,14 +204,8 @@
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="property_question_array"> </a><div class="element clickable property public property_question_array" data-toggle="collapse" data-target=".property_question_array .collapse">
-<h2>Array of ClipitQuizQuestion ids (int) included in this Quiz</h2>
+<h2>Array of ClipitQuizQuestion ids (int) included in this Quiz (optional)</h2>
 <pre>$question_array : array</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
-<a id="property_result_array"> </a><div class="element clickable property public property_result_array" data-toggle="collapse" data-target=".property_result_array .collapse">
-<h2>Array of ClipitQuizResult ids (int) included in this Quiz</h2>
-<pre>$result_array : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
@@ -207,8 +216,8 @@
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="property_taxonomy"> </a><div class="element clickable property public property_taxonomy" data-toggle="collapse" data-target=".property_taxonomy .collapse">
-<h2>Taxonomy used as topic for this Quiz</h2>
-<pre>$taxonomy : null</pre>
+<h2>Id of Taxonomy used as topic for this Quiz (optional)</h2>
+<pre>$taxonomy : int</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
@@ -222,7 +231,19 @@
 <div class="long_description"></div>
 <table class="table table-bordered"><tr>
 <th>const</th>
-<td>string Subtype of the ClipitQuiz class for ElggObject</td>
+<td>string Elgg entity subtype for this class</td>
+</tr></table>
+</div></div>
+</div>
+<a id="constant_TYPE"> </a><div class="element clickable constant  constant_TYPE" data-toggle="collapse" data-target=".constant_TYPE .collapse">
+<h2>TYPE</h2>
+<pre>TYPE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>const</th>
+<td>string Elgg entity type for this class</td>
 </tr></table>
 </div></div>
 </div>
@@ -234,7 +255,7 @@
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.1.0
 </a> and<br>
-            generated on 2013-10-29T15:35:46+01:00.<br></footer></div>
+            generated on 2013-11-04T15:05:18+01:00.<br></footer></div>
 </div>
 </body>
 </html>

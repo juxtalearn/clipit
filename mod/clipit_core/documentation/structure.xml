@@ -51,7 +51,7 @@
     </parse_markers>
     <source>eJyNk9FO2zAUhu8n7R3ORS82VBJYN00CxsgYhUxdidJ0qNJunOSkMXNsy3ZaurfZs+zFdhJKijQFsHLhxL+/3//xyclnXWqQrEKrWYaQCa65+6mZQOfw+PUroOHv7d1PYA/OSRA62Idv9Z1jE2RGwg2mMGu2d6roKoIVGsuVPGo/nX6CD967HcUgc7QIOXPYKN4dHI72Dw/o6TQTZh3U+kEBMPhK08HDeqc7Y7UrlYFuRCwVCiaCy79/LARGMv4bTjSm9uP7s2XFuPAyVZ0OH0eIjLrFzO2g29N30MGP+w+DnYQMfsGjUTqnj3z/tqGKhuops3wsz1Ba7OSX0zkERYFGwSVKNExAVKekgslWuRp1u/8bb7Zu6/XaW8q6sfK3DtZnSy32R96B5+7c235GUnIL2qilYRXQtDCIYFXh1sxQzTeqhoxJMJhz6wxPa4fAHTCZ+1TvSuW82PTTSVnLHA24EsGhqSyoon15Pjmz/VzdSG2JOaSbFjdujj3bHhvGilzb5ho+tCCMvJcXYZc1By5bg1JpSlAy12RacyEgRagtFrUY9oMJATdhcnU9TyCYLuAmiONgmiyOCUENS6u4wnsDXmnByY8CGCbdhgrVz/1+EZ9fESj4Ek7CZAF0FeMwmV7MZjC+jiGAKIiT8Hw+CWKI5nF0PbvwYIZNAuynPn8nRXvnVOEcHf1D9omaLqhzLEUUOZRshdRBGfIVBWSQKb15cR/0OzCh5LItJJF2F+hBWIBUbggWn9j90n+ni+j/A8huanI=</source>
   </file>
-  <file path="libraries\clipit_quiz.php" generated-path="libraries.clipit_quiz.html" hash="5b6fa6f92093499bf1cf7e986a27a07e" package="clipit\quiz">
+  <file path="libraries\clipit_quiz.php" generated-path="libraries.clipit_quiz.html" hash="a989b6a33f8fd912329c81380e5ebeae" package="clipit\quiz">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
@@ -65,30 +65,30 @@
         <long-description></long-description>
       </docblock>
     </function>
-    <function namespace="clipit\quiz" line="138" package="clipit\quiz">
+    <function namespace="clipit\quiz" line="132" package="clipit\quiz">
       <name>list_properties</name>
       <full_name>\clipit\quiz\list_properties()</full_name>
-      <docblock line="138">
+      <docblock line="132">
         <description>Lists the properties contained in this class.</description>
         <long-description></long-description>
-        <tag name="return" line="138" description="Array of properties whith type and default value" type="array">
+        <tag name="return" line="132" description="Array of properties whith type and default value" type="array">
           <type>array</type>
         </tag>
       </docblock>
     </function>
-    <function namespace="clipit\quiz" line="150" package="clipit\quiz">
+    <function namespace="clipit\quiz" line="144" package="clipit\quiz">
       <name>get_properties</name>
       <full_name>\clipit\quiz\get_properties()</full_name>
-      <docblock line="150">
+      <docblock line="144">
         <description>Get the values for the specified properties of a Quiz.</description>
         <long-description></long-description>
-        <tag name="param" line="150" description="&lt;p&gt;Id from Quiz&lt;/p&gt;" type="int" variable="$id">
+        <tag name="param" line="144" description="&lt;p&gt;Id from Quiz&lt;/p&gt;" type="int" variable="$id">
           <type>int</type>
         </tag>
-        <tag name="param" line="150" description="&lt;p&gt;Array of property names to get values from&lt;/p&gt;" type="array" variable="$prop_array">
+        <tag name="param" line="144" description="&lt;p&gt;Array of property names to get values from&lt;/p&gt;" type="array" variable="$prop_array">
           <type>array</type>
         </tag>
-        <tag name="return" line="150" description="Returns array of [property =&gt; value] pairs, or false if error.&#13;&#10;If a property does not exist, the returned array will show null as that propertie's value." type="array|bool">
+        <tag name="return" line="144" description="Returns array of [property =&gt; value] pairs, or false if error.&#13;&#10;If a property does not exist, the returned array will show null as that propertie's value." type="array|bool">
           <type>array</type>
           <type>bool</type>
         </tag>
@@ -104,25 +104,25 @@
         <type>array</type>
       </argument>
     </function>
-    <function namespace="clipit\quiz" line="171" package="clipit\quiz">
+    <function namespace="clipit\quiz" line="165" package="clipit\quiz">
       <name>set_properties</name>
       <full_name>\clipit\quiz\set_properties()</full_name>
-      <docblock line="171">
+      <docblock line="165">
         <description>Set values to specified properties of a Quiz.</description>
         <long-description></long-description>
-        <tag name="param" line="171" description="&lt;p&gt;Id from Quiz&lt;/p&gt;" type="int" variable="$id">
+        <tag name="param" line="165" description="&lt;p&gt;Id from Quiz&lt;/p&gt;" type="int" variable="$id">
           <type>int</type>
         </tag>
-        <tag name="param" line="171" description="&lt;p&gt;Array of properties to set values into&lt;/p&gt;" type="array" variable="$prop_array">
+        <tag name="param" line="165" description="&lt;p&gt;Array of properties to set values into&lt;/p&gt;" type="array" variable="$prop_array">
           <type>array</type>
         </tag>
-        <tag name="param" line="171" description="&lt;p&gt;Array of associated values to set into properties&lt;/p&gt;" type="array" variable="$value_array">
+        <tag name="param" line="165" description="&lt;p&gt;Array of associated values to set into properties&lt;/p&gt;" type="array" variable="$value_array">
           <type>array</type>
         </tag>
-        <tag name="return" line="171" description="Returns true if success, false if error" type="bool">
+        <tag name="return" line="165" description="Returns true if success, false if error" type="bool">
           <type>bool</type>
         </tag>
-        <tag name="throws" line="171" description="If count(prop_array) != count(value_array)" type="\InvalidParameterException">
+        <tag name="throws" line="165" description="If count(prop_array) != count(value_array)" type="\InvalidParameterException">
           <type link="InvalidParameterException.html">\InvalidParameterException</type>
         </tag>
       </docblock>
@@ -142,34 +142,34 @@
         <type>array</type>
       </argument>
     </function>
-    <function namespace="clipit\quiz" line="201" package="clipit\quiz">
+    <function namespace="clipit\quiz" line="199" package="clipit\quiz">
       <name>create</name>
       <full_name>\clipit\quiz\create()</full_name>
-      <docblock line="201">
+      <docblock line="199">
         <description>Create a new ClipitQuiz instance, and save it into the system.</description>
         <long-description></long-description>
-        <tag name="param" line="201" description="&lt;p&gt;Name of the Quiz&lt;/p&gt;" type="string" variable="$name">
+        <tag name="param" line="199" description="&lt;p&gt;Name of the Quiz&lt;/p&gt;" type="string" variable="$name">
           <type>string</type>
         </tag>
-        <tag name="param" line="201" description="&lt;p&gt;Target interface to present Quiz (web space, large display, etc.)&lt;/p&gt;&#10;" type="string" variable="$target">
+        <tag name="param" line="199" description="&lt;p&gt;Target interface to present Quiz (web space, large display, etc.)&lt;/p&gt;&#10;" type="string" variable="$target">
           <type>string</type>
         </tag>
-        <tag name="param" line="201" description="&lt;p&gt;Quiz full description (optional)&lt;/p&gt;&#10;" type="string" variable="$description">
+        <tag name="param" line="199" description="&lt;p&gt;Quiz full description (optional)&lt;/p&gt;&#10;" type="string" variable="$description">
           <type>string</type>
         </tag>
-        <tag name="param" line="201" description="&lt;p&gt;Whether the Quiz can be reused by other teachers (true= yes, false= no)&lt;/p&gt;&#10;" type="bool" variable="$public">
+        <tag name="param" line="199" description="&lt;p&gt;Whether the Quiz can be reused by other teachers (true= yes, false= no)&lt;/p&gt;&#10;" type="bool" variable="$public">
           <type>bool</type>
         </tag>
-        <tag name="param" line="201" description="&lt;p&gt;Array of ClipitQuizQuestions contained in this Quiz&lt;/p&gt;" type="array" variable="$question_array">
+        <tag name="param" line="199" description="&lt;p&gt;Array of ClipitQuizQuestions contained in this Quiz (optional)&lt;/p&gt;&#10;" type="array" variable="$question_array">
           <type>array</type>
         </tag>
-        <tag name="param" line="201" description="&lt;p&gt;Array of ClipitQuizResults submitted to answer the Quiz Questions&lt;/p&gt;" type="array" variable="$result_array">
+        <tag name="param" line="199" description="&lt;p&gt;Array of ClipitQuizResults submitted for this Quiz (optional)&lt;/p&gt;&#10;" type="array" variable="$result_array">
           <type>array</type>
         </tag>
-        <tag name="param" line="201" description="&lt;p&gt;Id of the Taxonomy referenced by this Quiz&lt;/p&gt;" type="int" variable="$taxonomy">
+        <tag name="param" line="199" description="&lt;p&gt;Id of the Taxonomy referenced by this Quiz (optional)&lt;/p&gt;&#10;" type="int" variable="$taxonomy">
           <type>int</type>
         </tag>
-        <tag name="return" line="201" description="Returns the new Quiz Id, or false if error" type="bool|int">
+        <tag name="return" line="199" description="Returns the new Quiz Id, or false if error" type="bool|int">
           <type>bool</type>
           <type>int</type>
         </tag>
@@ -186,40 +186,40 @@
       </argument>
       <argument line="0">
         <name>$description</name>
-        <default>null</default>
+        <default>""</default>
         <type>string</type>
       </argument>
       <argument line="0">
         <name>$public</name>
-        <default>null</default>
+        <default>false</default>
         <type>bool</type>
       </argument>
       <argument line="0">
         <name>$question_array</name>
-        <default>null</default>
+        <default>array()</default>
         <type>array</type>
       </argument>
       <argument line="0">
         <name>$result_array</name>
-        <default>null</default>
+        <default>array()</default>
         <type>array</type>
       </argument>
       <argument line="0">
         <name>$taxonomy</name>
-        <default>null</default>
+        <default>-1</default>
         <type>int</type>
       </argument>
     </function>
-    <function namespace="clipit\quiz" line="235" package="clipit\quiz">
+    <function namespace="clipit\quiz" line="223" package="clipit\quiz">
       <name>delete</name>
       <full_name>\clipit\quiz\delete()</full_name>
-      <docblock line="235">
+      <docblock line="223">
         <description>Delete a Quiz from the system.</description>
         <long-description></long-description>
-        <tag name="param" line="235" description="&lt;p&gt;If from the Quiz to delete&lt;/p&gt;" type="int" variable="$id">
+        <tag name="param" line="223" description="&lt;p&gt;If from the Quiz to delete&lt;/p&gt;" type="int" variable="$id">
           <type>int</type>
         </tag>
-        <tag name="return" line="235" description="True if success, false if error" type="bool">
+        <tag name="return" line="223" description="True if success, false if error" type="bool">
           <type>bool</type>
         </tag>
       </docblock>
@@ -229,16 +229,43 @@
         <type>int</type>
       </argument>
     </function>
-    <function namespace="clipit\quiz" line="248" package="clipit\quiz">
-      <name>get_all</name>
-      <full_name>\clipit\quiz\get_all()</full_name>
-      <docblock line="248">
-        <description>Get all quizzes from the system.</description>
+    <function namespace="clipit\quiz" line="237" package="clipit\quiz">
+      <name>add_questions</name>
+      <full_name>\clipit\quiz\add_questions()</full_name>
+      <docblock line="237">
+        <description>Adds Quiz Questions to a Quiz.</description>
         <long-description></long-description>
-        <tag name="param" line="248" description="&lt;p&gt;Number of results to show, default= 0 [no limit] (default)&lt;/p&gt;&#10;" type="int" variable="$limit">
+        <tag name="param" line="237" description="&lt;p&gt;Id from Quiz to add Questions to&lt;/p&gt;" type="int" variable="$id">
           <type>int</type>
         </tag>
-        <tag name="return" line="248" description="Returns an array of ClipitQuiz objects" type="array">
+        <tag name="param" line="237" description="&lt;p&gt;Array of Questions to add&lt;/p&gt;" type="array" variable="$question_array">
+          <type>array</type>
+        </tag>
+        <tag name="return" line="237" description="Returns true if success, false if error" type="bool">
+          <type>bool</type>
+        </tag>
+      </docblock>
+      <argument line="0">
+        <name>$id</name>
+        <default></default>
+        <type>int</type>
+      </argument>
+      <argument line="0">
+        <name>$question_array</name>
+        <default></default>
+        <type>array</type>
+      </argument>
+    </function>
+    <function namespace="clipit\quiz" line="259" package="clipit\quiz">
+      <name>get_all</name>
+      <full_name>\clipit\quiz\get_all()</full_name>
+      <docblock line="259">
+        <description>Get all quizzes from the system.</description>
+        <long-description></long-description>
+        <tag name="param" line="259" description="&lt;p&gt;Number of results to show, default= 0 [no limit] (default)&lt;/p&gt;&#10;" type="int" variable="$limit">
+          <type>int</type>
+        </tag>
+        <tag name="return" line="259" description="Returns an array of ClipitQuiz objects" type="array">
           <type>array</type>
         </tag>
       </docblock>
@@ -248,16 +275,16 @@
         <type>int</type>
       </argument>
     </function>
-    <function namespace="clipit\quiz" line="267" package="clipit\quiz">
+    <function namespace="clipit\quiz" line="281" package="clipit\quiz">
       <name>get_by_id</name>
       <full_name>\clipit\quiz\get_by_id()</full_name>
-      <docblock line="267">
+      <docblock line="281">
         <description>Get Quizzes with Id contained in a given list.</description>
         <long-description></long-description>
-        <tag name="param" line="267" description="&lt;p&gt;Array of Quiz Ids&lt;/p&gt;" type="array" variable="$id_array">
+        <tag name="param" line="281" description="&lt;p&gt;Array of Quiz Ids&lt;/p&gt;" type="array" variable="$id_array">
           <type>array</type>
         </tag>
-        <tag name="return" line="267" description="Returns an array of ClipitQuiz objects" type="array">
+        <tag name="return" line="281" description="Returns an array of ClipitQuiz objects" type="array">
           <type>array</type>
         </tag>
       </docblock>
@@ -267,19 +294,17 @@
         <type>array</type>
       </argument>
     </function>
-    <function namespace="clipit\quiz" line="287" package="clipit\quiz">
-      <name>add_questions</name>
-      <full_name>\clipit\quiz\add_questions()</full_name>
-      <docblock line="287">
-        <description>Adds Quiz Questions to a Quiz.</description>
+    <function namespace="clipit\quiz" line="301" package="clipit\quiz">
+      <name>get_questions</name>
+      <full_name>\clipit\quiz\get_questions()</full_name>
+      <docblock line="301">
+        <description>Get an array of Quiz Questions included in a Quiz</description>
         <long-description></long-description>
-        <tag name="param" line="287" description="&lt;p&gt;Id from Quiz to add Questions to&lt;/p&gt;" type="int" variable="$id">
+        <tag name="param" line="301" description="&lt;p&gt;The Id of the Quiz to get questions from&lt;/p&gt;" type="int" variable="$id">
           <type>int</type>
         </tag>
-        <tag name="param" line="287" description="&lt;p&gt;Array of Questions to add&lt;/p&gt;" type="array" variable="$question_array">
+        <tag name="return" line="301" description="Returns an array of ClipitQuizQuestion objects, or false if error" type="array|bool">
           <type>array</type>
-        </tag>
-        <tag name="return" line="287" description="Returns true if success, false if error" type="bool">
           <type>bool</type>
         </tag>
       </docblock>
@@ -287,83 +312,51 @@
         <name>$id</name>
         <default></default>
         <type>int</type>
-      </argument>
-      <argument line="0">
-        <name>$question_array</name>
-        <default></default>
-        <type>array</type>
-      </argument>
-    </function>
-    <function namespace="clipit\quiz" line="302" package="clipit\quiz">
-      <name>add_results</name>
-      <full_name>\clipit\quiz\add_results()</full_name>
-      <docblock line="302">
-        <description>Adds Quiz Results to a Quiz.</description>
-        <long-description></long-description>
-        <tag name="param" line="302" description="&lt;p&gt;Id from Quiz to add Results to&lt;/p&gt;" type="int" variable="$id">
-          <type>int</type>
-        </tag>
-        <tag name="param" line="302" description="&lt;p&gt;Array of Results to add&lt;/p&gt;" type="array" variable="$result_array">
-          <type>array</type>
-        </tag>
-        <tag name="return" line="302" description="Returns true if success, false if error" type="bool">
-          <type>bool</type>
-        </tag>
-      </docblock>
-      <argument line="0">
-        <name>$id</name>
-        <default></default>
-        <type>int</type>
-      </argument>
-      <argument line="0">
-        <name>$result_array</name>
-        <default></default>
-        <type>array</type>
       </argument>
     </function>
     <parse_markers>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
     </parse_markers>
-    <source>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</source>
+    <source>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</source>
   </file>
-  <file path="libraries\clipit_quiz_question.php" generated-path="libraries.clipit_quiz_question.html" hash="2c16c3aaaf1b4959ed693d5a2f2b51ef" package="clipit\quiz\question">
+  <file path="libraries\clipit_quiz_question.php" generated-path="libraries.clipit_quiz_question.html" hash="0a13c46c979aa9d2f5f2c1baa33f598a" package="clipit\quiz\question">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
       <tag name="package" line="0" description="clipit\quiz\question"/>
     </docblock>
-    <function namespace="clipit\quiz\question" line="39" package="clipit\quiz\question">
+    <function namespace="clipit\quiz\question" line="33" package="clipit\quiz\question">
       <name>expose_functions</name>
       <full_name>\clipit\quiz\question\expose_functions()</full_name>
-      <docblock line="39">
+      <docblock line="33">
         <description>Expose libraty functions to REST API.</description>
         <long-description></long-description>
       </docblock>
     </function>
-    <function namespace="clipit\quiz\question" line="131" package="clipit\quiz\question">
+    <function namespace="clipit\quiz\question" line="136" package="clipit\quiz\question">
       <name>list_properties</name>
       <full_name>\clipit\quiz\question\list_properties()</full_name>
-      <docblock line="131">
+      <docblock line="136">
         <description>Lists the properties contained in this class.</description>
         <long-description></long-description>
-        <tag name="return" line="131" description="Array of properties with type and default value" type="array">
+        <tag name="return" line="136" description="Array of properties with type and default value" type="array">
           <type>array</type>
         </tag>
       </docblock>
     </function>
-    <function namespace="clipit\quiz\question" line="143" package="clipit\quiz\question">
+    <function namespace="clipit\quiz\question" line="148" package="clipit\quiz\question">
       <name>get_properties</name>
       <full_name>\clipit\quiz\question\get_properties()</full_name>
-      <docblock line="143">
+      <docblock line="148">
         <description>Get the values for the specified properties of a QuizQuestion.</description>
         <long-description></long-description>
-        <tag name="param" line="143" description="&lt;p&gt;Id from QuizQuestion&lt;/p&gt;" type="int" variable="$id">
+        <tag name="param" line="148" description="&lt;p&gt;Id from QuizQuestion&lt;/p&gt;" type="int" variable="$id">
           <type>int</type>
         </tag>
-        <tag name="param" line="143" description="&lt;p&gt;Array of property names to get values from&lt;/p&gt;" type="array" variable="$prop_array">
+        <tag name="param" line="148" description="&lt;p&gt;Array of property names to get values from&lt;/p&gt;" type="array" variable="$prop_array">
           <type>array</type>
         </tag>
-        <tag name="return" line="143" description="Returns array of [property =&gt; value] pairs, or false if error.&#13;&#10;If a property does not exist, the returned array will show null as that propertie's value." type="array|bool">
+        <tag name="return" line="148" description="Returns array of [property =&gt; value] pairs, or false if error.&#13;&#10;If a property does not exist, the returned array will show null as that propertie's value." type="array|bool">
           <type>array</type>
           <type>bool</type>
         </tag>
@@ -379,25 +372,25 @@
         <type>array</type>
       </argument>
     </function>
-    <function namespace="clipit\quiz\question" line="164" package="clipit\quiz\question">
+    <function namespace="clipit\quiz\question" line="169" package="clipit\quiz\question">
       <name>set_properties</name>
       <full_name>\clipit\quiz\question\set_properties()</full_name>
-      <docblock line="164">
+      <docblock line="169">
         <description>Set values to specified properties of a QuizQuestion.</description>
         <long-description></long-description>
-        <tag name="param" line="164" description="&lt;p&gt;Id from QuizQuestion&lt;/p&gt;" type="int" variable="$id">
+        <tag name="param" line="169" description="&lt;p&gt;Id from QuizQuestion&lt;/p&gt;" type="int" variable="$id">
           <type>int</type>
         </tag>
-        <tag name="param" line="164" description="&lt;p&gt;Array of properties to set values into&lt;/p&gt;" type="array" variable="$prop_array">
+        <tag name="param" line="169" description="&lt;p&gt;Array of properties to set values into&lt;/p&gt;" type="array" variable="$prop_array">
           <type>array</type>
         </tag>
-        <tag name="param" line="164" description="&lt;p&gt;Array of associated values to set into properties&lt;/p&gt;" type="array" variable="$value_array">
+        <tag name="param" line="169" description="&lt;p&gt;Array of associated values to set into properties&lt;/p&gt;" type="array" variable="$value_array">
           <type>array</type>
         </tag>
-        <tag name="return" line="164" description="Returns true if success, false if error" type="bool">
+        <tag name="return" line="169" description="Returns true if success, false if error" type="bool">
           <type>bool</type>
         </tag>
-        <tag name="throws" line="164" description="If count(prop_array) != count(value_array)" type="\InvalidParameterException">
+        <tag name="throws" line="169" description="If count(prop_array) != count(value_array)" type="\InvalidParameterException">
           <type link="InvalidParameterException.html">\InvalidParameterException</type>
         </tag>
       </docblock>
@@ -417,28 +410,28 @@
         <type>array</type>
       </argument>
     </function>
-    <function namespace="clipit\quiz\question" line="192" package="clipit\quiz\question">
+    <function namespace="clipit\quiz\question" line="197" package="clipit\quiz\question">
       <name>create</name>
       <full_name>\clipit\quiz\question\create()</full_name>
-      <docblock line="192">
+      <docblock line="197">
         <description>Create a new ClipitQuizQuestion instance, and save it into the system.</description>
         <long-description></long-description>
-        <tag name="param" line="192" description="&lt;p&gt;Question in text form to be presented to the user taking the quiz&lt;/p&gt;" type="string" variable="$question">
+        <tag name="param" line="197" description="&lt;p&gt;Question in text form to be presented to the user taking the quiz&lt;/p&gt;" type="string" variable="$question">
           <type>string</type>
         </tag>
-        <tag name="param" line="192" description="&lt;p&gt;Array of options presented to the user to choose from&lt;/p&gt;" type="array" variable="$option_array">
+        <tag name="param" line="197" description="&lt;p&gt;Array of Options presented to the user to choose from&lt;/p&gt;" type="array" variable="$option_array">
           <type>array</type>
         </tag>
-        <tag name="param" line="192" description="&lt;p&gt;Type of answer to be given (select 1 only, select 2, select any...)&lt;/p&gt;&#10;" type="string" variable="$type">
+        <tag name="param" line="197" description="&lt;p&gt;Type of Options (select 1 only, select 2, select any...)&lt;/p&gt;&#10;" type="string" variable="$option_type">
           <type>string</type>
         </tag>
-        <tag name="param" line="192" description="&lt;p&gt;Array of tags linking the question to the taxonomy (optional)&lt;/p&gt;&#10;" type="array" variable="$taxonomy_tag_array">
+        <tag name="param" line="197" description="&lt;p&gt;Array of tags linking the question to the taxonomy (optional)&lt;/p&gt;&#10;" type="array" variable="$taxonomy_tag_array">
           <type>array</type>
         </tag>
-        <tag name="param" line="192" description="&lt;p&gt;Id of video to which the question relates to (optional)&lt;/p&gt;&#10;" type="int" variable="$video">
+        <tag name="param" line="197" description="&lt;p&gt;Id of video to which the question relates to (optional)&lt;/p&gt;&#10;" type="int" variable="$video">
           <type>int</type>
         </tag>
-        <tag name="return" line="192" description="Returns the new Quiz Question Id, or false if error" type="bool|int">
+        <tag name="return" line="197" description="Returns the new Quiz Question Id, or false if error" type="bool|int">
           <type>bool</type>
           <type>int</type>
         </tag>
@@ -454,31 +447,31 @@
         <type>array</type>
       </argument>
       <argument line="0">
-        <name>$type</name>
+        <name>$option_type</name>
         <default></default>
         <type>string</type>
       </argument>
       <argument line="0">
         <name>$taxonomy_tag_array</name>
-        <default>null</default>
+        <default>array()</default>
         <type>array</type>
       </argument>
       <argument line="0">
         <name>$video</name>
-        <default>null</default>
+        <default>-1</default>
         <type>int</type>
       </argument>
     </function>
-    <function namespace="clipit\quiz\question" line="216" package="clipit\quiz\question">
+    <function namespace="clipit\quiz\question" line="217" package="clipit\quiz\question">
       <name>delete</name>
       <full_name>\clipit\quiz\question\delete()</full_name>
-      <docblock line="216">
+      <docblock line="217">
         <description>Delete a Quiz Question from the system.</description>
         <long-description></long-description>
-        <tag name="param" line="216" description="&lt;p&gt;Id from the Quiz Question to delete&lt;/p&gt;" type="int" variable="$id">
+        <tag name="param" line="217" description="&lt;p&gt;Id from the Quiz Question to delete&lt;/p&gt;" type="int" variable="$id">
           <type>int</type>
         </tag>
-        <tag name="return" line="216" description="True if success, false if error" type="bool">
+        <tag name="return" line="217" description="True if success, false if error" type="bool">
           <type>bool</type>
         </tag>
       </docblock>
@@ -488,19 +481,19 @@
         <type>int</type>
       </argument>
     </function>
-    <function namespace="clipit\quiz\question" line="230" package="clipit\quiz\question">
+    <function namespace="clipit\quiz\question" line="231" package="clipit\quiz\question">
       <name>add_taxonomy_tags</name>
       <full_name>\clipit\quiz\question\add_taxonomy_tags()</full_name>
-      <docblock line="230">
+      <docblock line="231">
         <description>Add a list of Tags from the Taxonomy to a Quiz Question.</description>
         <long-description></long-description>
-        <tag name="param" line="230" description="&lt;p&gt;Id of the Quiz Question&lt;/p&gt;" type="int" variable="$id">
+        <tag name="param" line="231" description="&lt;p&gt;Id of the Quiz Question&lt;/p&gt;" type="int" variable="$id">
           <type>int</type>
         </tag>
-        <tag name="param" line="230" description="&lt;p&gt;Array of Taxonomy Tags to add to the Quiz Question&lt;/p&gt;" type="array" variable="$taxonomy_tag_array">
+        <tag name="param" line="231" description="&lt;p&gt;Array of Taxonomy Tags to add to the Quiz Question&lt;/p&gt;" type="array" variable="$taxonomy_tag_array">
           <type>array</type>
         </tag>
-        <tag name="return" line="230" description="True if success, false if error" type="bool">
+        <tag name="return" line="231" description="True if success, false if error" type="bool">
           <type>bool</type>
         </tag>
       </docblock>
@@ -515,16 +508,16 @@
         <type>array</type>
       </argument>
     </function>
-    <function namespace="clipit\quiz\question" line="244" package="clipit\quiz\question">
+    <function namespace="clipit\quiz\question" line="252" package="clipit\quiz\question">
       <name>get_all</name>
       <full_name>\clipit\quiz\question\get_all()</full_name>
-      <docblock line="244">
+      <docblock line="252">
         <description>Get all Quiz Questions from the system.</description>
         <long-description></long-description>
-        <tag name="param" line="244" description="&lt;p&gt;Number of results to show, default= 0 [no limit] (default)&lt;/p&gt;&#10;" type="int" variable="$limit">
+        <tag name="param" line="252" description="&lt;p&gt;Number of results to show, default= 0 [no limit] (default)&lt;/p&gt;&#10;" type="int" variable="$limit">
           <type>int</type>
         </tag>
-        <tag name="return" line="244" description="Returns an array of ClipitQuizQuestion objects" type="array">
+        <tag name="return" line="252" description="Returns an array of ClipitQuizQuestion objects" type="array">
           <type>array</type>
         </tag>
       </docblock>
@@ -534,69 +527,96 @@
         <type>int</type>
       </argument>
     </function>
-    <function namespace="clipit\quiz\question" line="263" package="clipit\quiz\question">
-      <name>get_from_quiz</name>
-      <full_name>\clipit\quiz\question\get_from_quiz()</full_name>
-      <docblock line="263">
-        <description>Get all Quiz Questions from a specified Quiz.</description>
+    <function namespace="clipit\quiz\question" line="275" package="clipit\quiz\question">
+      <name>get_results</name>
+      <full_name>\clipit\quiz\question\get_results()</full_name>
+      <docblock line="275">
+        <description>Get all Quiz Results from a specified Quiz Question.</description>
         <long-description></long-description>
-        <tag name="param" line="263" description="&lt;p&gt;Id of quiz to get Questions form&lt;/p&gt;" type="int" variable="$quiz_id">
+        <tag name="param" line="275" description="&lt;p&gt;Id of Quiz Question to get Results form&lt;/p&gt;" type="int" variable="$id">
           <type>int</type>
         </tag>
-        <tag name="return" line="263" description="Array of Quiz Questions, or false if error" type="array|bool">
+        <tag name="param" line="275" description="&lt;p&gt;Number of results to show, default = 0 [no limit] (optional)&lt;/p&gt;&#10;" type="int" variable="$limit">
+          <type>int</type>
+        </tag>
+        <tag name="return" line="275" description="Array of Quiz Results, or false if error" type="array|bool">
           <type>array</type>
           <type>bool</type>
         </tag>
       </docblock>
       <argument line="0">
-        <name>$quiz_id</name>
+        <name>$id</name>
         <default></default>
         <type>int</type>
+      </argument>
+      <argument line="0">
+        <name>$limit</name>
+        <default>0</default>
+        <type>int</type>
+      </argument>
+    </function>
+    <function namespace="clipit\quiz\question" line="285" package="clipit\quiz\question">
+      <name>get_by_id</name>
+      <full_name>\clipit\quiz\question\get_by_id()</full_name>
+      <docblock line="285">
+        <description>Get all Quizz Questions with Id contained in a given list.</description>
+        <long-description></long-description>
+        <tag name="param" line="285" description="&lt;p&gt;Array of Quiz Question Ids&lt;/p&gt;" type="array" variable="$id_array">
+          <type>array</type>
+        </tag>
+        <tag name="return" line="285" description="Returns an array of ClipitQuizQuestion objects" type="array">
+          <type>array</type>
+        </tag>
+      </docblock>
+      <argument line="0">
+        <name>$id_array</name>
+        <default></default>
+        <type>array</type>
       </argument>
     </function>
     <parse_markers>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
     </parse_markers>
-    <source>eJzdWntv20YS/z9AvsNEMGApkeU87nCAHfuiukqiwnVUSb7AiANhRa4kNhTJcpeWlTYf5j7LfbGb2eVj+ZIUN3XvSgSGtJz9zXt2ZpWX/wwWwcMHh48fP3wAj+FVwKxPbM7Bcp3Akde/RM5n/MOFdHyPKA4fPvDYkgukqyY6fvgA6fDRkPQ8hjMk7Es4gB+iW8nOOQs9eM+nMCKYlGrwdgA3PBSIcqSWTk/g753nGUrIGbEAm0lOFM+fPntx8Owp/ktpzpmQEAUJBcDe9/hxL3mf0r1ikVz4IaTPgE1dH85dx/vPvwV0Q485n+FlwKfiH397NV8yx+1Y/vK0baowCP2fuSUz0Fj6FHTvX3phLyNBBp/AeBZSBkeHhz8TqkuoHT+cm+QW9wRPyd9cXEJ3NuOhD2+4x0PmwiCaIhWcx5Q3L9LdpacZc1utVp25FxGrw5iDOGTzwD140XnakbeyVY8xXjgCgtCfh2wJ+HEWcg7Cn8kVC9Hmaz8Ci3kQctsRMnSmkeTgSGCefYj2Xvq2M1vXoyNl5Nk8BLngIHm4FODP1JftmjNRjxsQqVhwG6ZrBfeaxB7FYsNrH7mq4GonIQgvOrsbIdPVBsdTDBZ+gBosmCSdVo7rwpRDJPgsctv1wAgB7/vjt+8ux9C9uIL33eGwezG+OkYIDFh8y2+4ZuAsA9dBfqhAyDy5RkPV4/7YG569RaDud/3z/vgK0BWv++OL3mgEr98NoQuD7nDcP7s87w5hcDkcvBv1OjDipAGvR93uk5nyOVrY5hJzSGyw6RVGjkAVXRsW7IZjBFncuUEFGVh+sN45Duo5MNf35sqQiJQ5sAP9GXi+bIPgG3bvmjupiodUCpPK2nUdJjBPsGgygVsAfSkcm2u1UBijrGL66FixU68HTC46ukTjOlybpfdMff4JP8YVegPFsSlT7zbwkdR1piHD+JlFnkUpIED6MOyNMAIH/U6MmbwErjZNUuJm61etcOFFMzYDPg0tS4dk6SQHRQfzUU7QBQEPpcNFo51tmEwuuj/2RoPuWW8y6TSurzfQepHrtqFhc2GFTkDIjTbsv+mN99swY67gbZBhxFvHd5NyzncWsp6UMnRtsNL8HLsBJ6fVLxWBXAdckTQcT5p4GUnIUVystYpM6Vkka5BIE8VkZ3aaekeGJkfTDTD3McwXPOTf1CFid4fUk/6lHVJieMPciP+FQsCiRpBvdH2ZpNrlCebOdqFz3pvf2RW+ssu9ej/FuQf1JLv1PX+5nkg2/4OUVPFTEeN4lvrfOH01q7rg/qYhbXOXbwnpMsl9VrF7sQKz7YkZQpvL+0bqP7XC30Ma3J9TqK1hrru19SnQVDvAdZaO/P9NU9JzFvrLCS1vtUglZd055Hye/I9k7hdzRjjHzluowSvrpHAe83Ca85JhF6cXNdWoWUEPKSGXUehpVaCr/uKgY0DoKQz1oZsBnA5nLHIlqE6lOHEUmv904Ih5kKUV+8kNC0Wz5Ils+PkpOexLWr7hUumo+As1tdJXEXDLmdGQbUiOejAw4Qy1A6YuBDwJe44NfRsoBHLEJp22zl7WD5YstdZjIQ1kqGYqHoKWzfzb1PddGKoVEWMj0ocUCgNCAXzEadIJRZsuAZTrwZkBD0M/1BNmnxRMd9nUwuF0jLmCfmgru2i2NJorLup2A0f3lRrGgAl975HabF9oxqVZMj8xNdFmbdMciaP3VHYkSQgn4PEVlN1K+5PEdmbNR/ltCZgROUr5eMOXmJXRKyMjnYoJKIYF8sDlp8foX3iJeRB5smlKTC+ePDF5mYgf9pyPuD0v2MGpAUAUeYlMF08sfznFvDNZtnMcSpE9ysIGg+hPD2gnliOTCrH9CgzTDykIJrlvOYxu2QydEItADBa55MilBdU4CncRWRYXol1IAL1RLkJ/JeC67yEXxx6QXNh6hb1bi+u5BlNE+95wPTw6iRdNfxRDXmwO+YI3f02juRxqGb/cFjP2lCJNypZ6XQoHTaM3HL4bHsEY09zl3hyrdOy92BlUrk3nLCMhYcmkteg0Wq1CNt1f4t4tNzcnIqVqIXvzTMvCHpwKdsObrd2Ejt9QUBbzVv3YgYdjjckw4oVknoXHNjmEmNI9s8oDdXKtheTLUiLr8Y70jmEMPJD8VpIdl5RVUzrwueAeJVsMGgm6mGefCIK+/xJfORZS15xxs9zVq6IO1Qdr4dNtZHa45UVWvcKY/lAh8MRK70I55w5diTcFzkeWhGfge+6a7nLV1+fpJ+atO51Oq0LgcrueiU1zBdCPNpnSscVi8ZPN0NQaMrdVKp1qOKXqiYD6M25eLRxrkYcMuYtOV1WtiGYUs98IMy1ouJ9ChIIj82bfrjjdi6VI35E002Co6Cdzvqx6T16pXC+b9ERf1VYQa5Po91975id1o5iGxs5UwRrSXLye5HWu2aKC8USrnxWuCq03VZtKG1VglGqONtgm6MSimrKy6FTXrWIZ+l5dOsT9QRZfqgvYUGeKDQOR5hEwxPWFRvmsHm8/o80w1jDqDMmOy0dfc/R8VbEu2i1mX7Jc16Zfrmh2oawfUxlJTTFOagZaoWDaTaaMfwHL0X9lOUs5K4GIvZ0W4grc3+GW0u1M3OvU58gf4zbdOC95OFelbksGVgt4vPW4pgGS4eyTs6HYLU/UnQhcRMspHmnoIzwgcRbWvS0OVe1kOsbeBj54Pij6j9CMl/MHhPZ3OgV62SBY0UT4U/r/C6JqLENlmrFkyDetytydzyd6W1qy1BrtwWPdUV2tHpv2qTru09i5r3fsV91YbHv2RTRNgco6HB2NLr8bXw16d8JWCipkrWur+jipmQfjfjNtQDmzFs0KE+FAbK7WF+5c61kX+QbSwek8ylpnLdKTJzuUrfRg2TmImTE70vvqUI6vseJiRd+SqwsDDjvMutuLtE7lRdihmcndtzUTQUqlpWTXjHTHC4K7BwbtzBoTIzbykJnUOcl3KYolIBNpW7hh82UE0hdMa8F3355/ZQL9juD8L7OMQmI=</source>
+    <source>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</source>
   </file>
-  <file path="libraries\clipit_quiz_result.php" generated-path="libraries.clipit_quiz_result.html" hash="cf35cdae12d65f64867928fd978fbc29" package="clipit\quiz\result">
+  <file path="libraries\clipit_quiz_result.php" generated-path="libraries.clipit_quiz_result.html" hash="7b3108882a188114132d70865b8460a4" package="clipit\quiz\result">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
       <tag name="package" line="0" description="clipit\quiz\result"/>
     </docblock>
-    <function namespace="clipit\quiz\result" line="39" package="clipit\quiz\result">
+    <function namespace="clipit\quiz\result" line="33" package="clipit\quiz\result">
       <name>expose_functions</name>
       <full_name>\clipit\quiz\result\expose_functions()</full_name>
-      <docblock line="39">
+      <docblock line="33">
         <description>Expose libraty functions to REST API.</description>
         <long-description></long-description>
       </docblock>
     </function>
-    <function namespace="clipit\quiz\result" line="117" package="clipit\quiz\result">
+    <function namespace="clipit\quiz\result" line="122" package="clipit\quiz\result">
       <name>list_properties</name>
       <full_name>\clipit\quiz\result\list_properties()</full_name>
-      <docblock line="117">
+      <docblock line="122">
         <description>Lists the properties contained in this class.</description>
         <long-description></long-description>
-        <tag name="return" line="117" description="Array of properties with type and default value" type="array">
+        <tag name="return" line="122" description="Array of properties with type and default value" type="array">
           <type>array</type>
         </tag>
       </docblock>
     </function>
-    <function namespace="clipit\quiz\result" line="129" package="clipit\quiz\result">
+    <function namespace="clipit\quiz\result" line="134" package="clipit\quiz\result">
       <name>get_properties</name>
       <full_name>\clipit\quiz\result\get_properties()</full_name>
-      <docblock line="129">
+      <docblock line="134">
         <description>Get the values for the specified properties of a QuizResult.</description>
         <long-description></long-description>
-        <tag name="param" line="129" description="&lt;p&gt;Id from QuizResult&lt;/p&gt;" type="int" variable="$id">
+        <tag name="param" line="134" description="&lt;p&gt;Id from QuizResult&lt;/p&gt;" type="int" variable="$id">
           <type>int</type>
         </tag>
-        <tag name="param" line="129" description="&lt;p&gt;Array of property names to get values from&lt;/p&gt;" type="array" variable="$prop_array">
+        <tag name="param" line="134" description="&lt;p&gt;Array of property names to get values from&lt;/p&gt;" type="array" variable="$prop_array">
           <type>array</type>
         </tag>
-        <tag name="return" line="129" description="Returns array of [property =&gt; value] pairs, or false if error.&#13;&#10;If a property does not exist, the returned array will show null as that propertie's value." type="array|bool">
+        <tag name="return" line="134" description="Returns array of [property =&gt; value] pairs, or false if error.&#13;&#10;If a property does not exist, the returned array will show null as that propertie's value." type="array|bool">
           <type>array</type>
           <type>bool</type>
         </tag>
@@ -612,25 +632,25 @@
         <type>array</type>
       </argument>
     </function>
-    <function namespace="clipit\quiz\result" line="150" package="clipit\quiz\result">
+    <function namespace="clipit\quiz\result" line="155" package="clipit\quiz\result">
       <name>set_properties</name>
       <full_name>\clipit\quiz\result\set_properties()</full_name>
-      <docblock line="150">
+      <docblock line="155">
         <description>Set values to specified properties of a QuizResult.</description>
         <long-description></long-description>
-        <tag name="param" line="150" description="&lt;p&gt;Id from QuizResult&lt;/p&gt;" type="int" variable="$id">
+        <tag name="param" line="155" description="&lt;p&gt;Id from QuizResult&lt;/p&gt;" type="int" variable="$id">
           <type>int</type>
         </tag>
-        <tag name="param" line="150" description="&lt;p&gt;Array of properties to set values into&lt;/p&gt;" type="array" variable="$prop_array">
+        <tag name="param" line="155" description="&lt;p&gt;Array of properties to set values into&lt;/p&gt;" type="array" variable="$prop_array">
           <type>array</type>
         </tag>
-        <tag name="param" line="150" description="&lt;p&gt;Array of associated values to set into properties&lt;/p&gt;" type="array" variable="$value_array">
+        <tag name="param" line="155" description="&lt;p&gt;Array of associated values to set into properties&lt;/p&gt;" type="array" variable="$value_array">
           <type>array</type>
         </tag>
-        <tag name="return" line="150" description="Returns true if success, false if error" type="bool">
+        <tag name="return" line="155" description="Returns true if success, false if error" type="bool">
           <type>bool</type>
         </tag>
-        <tag name="throws" line="150" description="If count(prop_array) != count(value_array)" type="\InvalidParameterException">
+        <tag name="throws" line="155" description="If count(prop_array) != count(value_array)" type="\InvalidParameterException">
           <type link="InvalidParameterException.html">\InvalidParameterException</type>
         </tag>
       </docblock>
@@ -650,25 +670,25 @@
         <type>array</type>
       </argument>
     </function>
-    <function namespace="clipit\quiz\result" line="177" package="clipit\quiz\result">
+    <function namespace="clipit\quiz\result" line="182" package="clipit\quiz\result">
       <name>create</name>
       <full_name>\clipit\quiz\result\create()</full_name>
-      <docblock line="177">
+      <docblock line="182">
         <description>Create a new ClipitQuizResult instance, and save it into the system.</description>
         <long-description></long-description>
-        <tag name="param" line="177" description="&lt;p&gt;Id of the Quiz Question this Result refers to&lt;/p&gt;" type="int" variable="$quiz_question">
+        <tag name="param" line="182" description="&lt;p&gt;Id of the Quiz Question this Result refers to&lt;/p&gt;" type="int" variable="$quiz_question">
           <type>int</type>
         </tag>
-        <tag name="param" line="177" description="&lt;p&gt;Array with the Result elements posted by a user&lt;/p&gt;" type="array" variable="$result_array">
+        <tag name="param" line="182" description="&lt;p&gt;Array with the Result elements posted by a user&lt;/p&gt;" type="array" variable="$result_array">
           <type>array</type>
         </tag>
-        <tag name="param" line="177" description="&lt;p&gt;Id of the user who posted the result&lt;/p&gt;" type="int" variable="$user">
+        <tag name="param" line="182" description="&lt;p&gt;Id of the user who posted the result&lt;/p&gt;" type="int" variable="$user">
           <type>int</type>
         </tag>
-        <tag name="param" line="177" description="&lt;p&gt;If true: the result is correct, if false: the result is incorrect (optional)&lt;/p&gt;&#10;" type="bool" variable="$correct">
+        <tag name="param" line="182" description="&lt;p&gt;If true: the result is correct, if false: the result is incorrect (optional)&lt;/p&gt;&#10;" type="bool" variable="$correct">
           <type>bool</type>
         </tag>
-        <tag name="return" line="177" description="Returns Returns the new Quiz Result Id, or false if error" type="bool|int">
+        <tag name="return" line="182" description="Returns Returns the new Quiz Result Id, or false if error" type="bool|int">
           <type>bool</type>
           <type>int</type>
         </tag>
@@ -690,20 +710,20 @@
       </argument>
       <argument line="0">
         <name>$correct</name>
-        <default>null</default>
+        <default>false</default>
         <type>bool</type>
       </argument>
     </function>
-    <function namespace="clipit\quiz\result" line="197" package="clipit\quiz\result">
+    <function namespace="clipit\quiz\result" line="200" package="clipit\quiz\result">
       <name>delete</name>
       <full_name>\clipit\quiz\result\delete()</full_name>
-      <docblock line="197">
+      <docblock line="200">
         <description>Delete a Quiz Result from the system.</description>
         <long-description></long-description>
-        <tag name="param" line="197" description="&lt;p&gt;Id from the Quiz Result to delete&lt;/p&gt;" type="int" variable="$id">
+        <tag name="param" line="200" description="&lt;p&gt;Id from the Quiz Result to delete&lt;/p&gt;" type="int" variable="$id">
           <type>int</type>
         </tag>
-        <tag name="return" line="197" description="True if success, false if error" type="bool">
+        <tag name="return" line="200" description="True if success, false if error" type="bool">
           <type>bool</type>
         </tag>
       </docblock>
@@ -713,16 +733,16 @@
         <type>int</type>
       </argument>
     </function>
-    <function namespace="clipit\quiz\result" line="210" package="clipit\quiz\result">
+    <function namespace="clipit\quiz\result" line="213" package="clipit\quiz\result">
       <name>get_all</name>
       <full_name>\clipit\quiz\result\get_all()</full_name>
-      <docblock line="210">
+      <docblock line="213">
         <description>Get all Quiz Results from the system.</description>
         <long-description></long-description>
-        <tag name="param" line="210" description="&lt;p&gt;Number of results to show, default= 0 [no limit] (default)&lt;/p&gt;&#10;" type="int" variable="$limit">
+        <tag name="param" line="213" description="&lt;p&gt;Number of results to show, default= 0 [no limit] (optional)&lt;/p&gt;&#10;" type="int" variable="$limit">
           <type>int</type>
         </tag>
-        <tag name="return" line="210" description="Returns an array of ClipitQuizQuestion objects" type="array">
+        <tag name="return" line="213" description="Returns an array of ClipitQuizQuestion objects" type="array">
           <type>array</type>
         </tag>
       </docblock>
@@ -732,30 +752,57 @@
         <type>int</type>
       </argument>
     </function>
-    <function namespace="clipit\quiz\result" line="229" package="clipit\quiz\result">
-      <name>get_from_quiz</name>
-      <full_name>\clipit\quiz\result\get_from_quiz()</full_name>
-      <docblock line="229">
-        <description>Get all Quiz Results from a specified Quiz.</description>
+    <function namespace="clipit\quiz\result" line="234" package="clipit\quiz\result">
+      <name>get_from_question</name>
+      <full_name>\clipit\quiz\result\get_from_question()</full_name>
+      <docblock line="234">
+        <description>Get all Quiz Results from a specified Quiz Question.</description>
         <long-description></long-description>
-        <tag name="param" line="229" description="&lt;p&gt;Id of quiz to get Results form&lt;/p&gt;" type="int" variable="$quiz_id">
+        <tag name="param" line="234" description="&lt;p&gt;Id of Quiz Question to get Results form&lt;/p&gt;" type="int" variable="$quiz_question_id">
           <type>int</type>
         </tag>
-        <tag name="return" line="229" description="Array of Quiz Results, or false if error" type="array|bool">
+        <tag name="param" line="234" description="&lt;p&gt;Number of results to show, default = 0 [no limit] (optional)&lt;/p&gt;&#10;" type="int" variable="$limit">
+          <type>int</type>
+        </tag>
+        <tag name="return" line="234" description="Array of Quiz Results, or false if error" type="array|bool">
           <type>array</type>
           <type>bool</type>
         </tag>
       </docblock>
       <argument line="0">
-        <name>$quiz_id</name>
+        <name>$quiz_question_id</name>
         <default></default>
         <type>int</type>
+      </argument>
+      <argument line="0">
+        <name>$limit</name>
+        <default>0</default>
+        <type>int</type>
+      </argument>
+    </function>
+    <function namespace="clipit\quiz\result" line="256" package="clipit\quiz\result">
+      <name>get_by_id</name>
+      <full_name>\clipit\quiz\result\get_by_id()</full_name>
+      <docblock line="256">
+        <description>Get all Quizz Results with Id contained in a given list.</description>
+        <long-description></long-description>
+        <tag name="param" line="256" description="&lt;p&gt;Array of Quiz Result Ids&lt;/p&gt;" type="array" variable="$id_array">
+          <type>array</type>
+        </tag>
+        <tag name="return" line="256" description="Returns an array of ClipitQuizResult objects" type="array">
+          <type>array</type>
+        </tag>
+      </docblock>
+      <argument line="0">
+        <name>$id_array</name>
+        <default></default>
+        <type>array</type>
       </argument>
     </function>
     <parse_markers>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
     </parse_markers>
-    <source>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</source>
+    <source>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</source>
   </file>
   <file path="libraries\clipit_site.php" generated-path="libraries.clipit_site.html" hash="70e686709b59b364cab392ae778e4d75" package="Default">
     <docblock line="0">
@@ -827,7 +874,7 @@
     </parse_markers>
     <source>eJyNk9FumzAUhu8n7R3ORS62KoW22TSp7bqyrmmYsgQRsipSbwwcgjuwLdskzd5mz7IX24GkpNJEW4sLg3++3//x8fkXlSsQrESjWIKQFFxxe2fZgxSy3NzZ5OztG6DhHhxsJ3AAVyTyLRzC9+rBsjEyLeAWY5jViFYVjAJYoTZcitPm08Vn+Oic7CkamaVFSJnFWnFydDw4PD6ip9WMmbFQqUcFQO8bTXuP663uklU2lxraEbC4kDAuuPj7x4CnBeO/4VxhbD59uFyWjBdOIsuL/tMIgZb3mNg9dLf7Ftr7uf3Q20vI4Bc8Gbm16tR172tqUVMdqZdP5QkKg638ZjIHL8tQS7hBgZoVEFQxqWC8U64G7d//jXc7t/V67SxFVVu5OwfjsqUqDgfOkWMf7PtuRpRzA0rLpWYl0DTTiGBkZtdMU803soKECdCYcmM1jyuLwC0wkbpU71KmPNt000lZiRQ12BzBoi4NyKx5eTk5M91cVUtNjinEmwY3rLc9220bhpJcm+bqP7YgDJzXF2GfNQUuGoNcKkqQM1tnWvOigBihMphVRb8bTAi49aPRdB6BN1nArReG3iRanBGCGpZWcYVbA16qgpMfBdBM2A0Vqpv74zq8GhHI++qP/WgBdBRDP5pcz2YwnIbgQeCFkX81H3shBPMwmM6uHZhhnQC7qS+fSdacOVU4RUt3yDxT0wV1jqGIRQo5WyF1UIJ8RQEZJFJtXt0H3Q6skGLZFJJI+wN0wM9ASNsHg8/8/dq700Z0/wHcomw1</source>
   </file>
-  <file path="libraries\clipit_user.php" generated-path="libraries.clipit_user.html" hash="f9516596d046bdbb71edc2ce49500702" package="clipit\user">
+  <file path="libraries\clipit_user.php" generated-path="libraries.clipit_user.html" hash="9248bad7b2f1c7360de542e6d4911550" package="clipit\user">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
@@ -841,30 +888,30 @@
         <long-description></long-description>
       </docblock>
     </function>
-    <function namespace="clipit\user" line="139" package="clipit\user">
+    <function namespace="clipit\user" line="137" package="clipit\user">
       <name>list_properties</name>
       <full_name>\clipit\user\list_properties()</full_name>
-      <docblock line="139">
+      <docblock line="137">
         <description>Lists the properties contained in this class.</description>
         <long-description></long-description>
-        <tag name="return" line="139" description="Array of properties with type and default value" type="array">
+        <tag name="return" line="137" description="Array of properties with type and default value" type="array">
           <type>array</type>
         </tag>
       </docblock>
     </function>
-    <function namespace="clipit\user" line="151" package="clipit\user">
+    <function namespace="clipit\user" line="149" package="clipit\user">
       <name>get_properties</name>
       <full_name>\clipit\user\get_properties()</full_name>
-      <docblock line="151">
+      <docblock line="149">
         <description>Get the values for the specified properties of a User.</description>
         <long-description></long-description>
-        <tag name="param" line="151" description="&lt;p&gt;Id from User&lt;/p&gt;" type="int" variable="$id">
+        <tag name="param" line="149" description="&lt;p&gt;Id from User&lt;/p&gt;" type="int" variable="$id">
           <type>int</type>
         </tag>
-        <tag name="param" line="151" description="&lt;p&gt;Array of property names to get values from&lt;/p&gt;" type="array" variable="$prop_array">
+        <tag name="param" line="149" description="&lt;p&gt;Array of property names to get values from&lt;/p&gt;" type="array" variable="$prop_array">
           <type>array</type>
         </tag>
-        <tag name="return" line="151" description="Returns array of [property =&gt; value] pairs, or false if error.&#13;&#10;If a property does not exist, the returned array will show null as that propertie's value." type="array|bool">
+        <tag name="return" line="149" description="Returns array of [property =&gt; value] pairs, or false if error.&#13;&#10;If a property does not exist, the returned array will show null as that propertie's value." type="array|bool">
           <type>array</type>
           <type>bool</type>
         </tag>
@@ -880,25 +927,25 @@
         <type>array</type>
       </argument>
     </function>
-    <function namespace="clipit\user" line="172" package="clipit\user">
+    <function namespace="clipit\user" line="170" package="clipit\user">
       <name>set_properties</name>
       <full_name>\clipit\user\set_properties()</full_name>
-      <docblock line="172">
+      <docblock line="170">
         <description>Set values to specified properties of a User.</description>
         <long-description></long-description>
-        <tag name="param" line="172" description="&lt;p&gt;Id from User&lt;/p&gt;" type="int" variable="$id">
+        <tag name="param" line="170" description="&lt;p&gt;Id from User&lt;/p&gt;" type="int" variable="$id">
           <type>int</type>
         </tag>
-        <tag name="param" line="172" description="&lt;p&gt;Array of properties to set values into&lt;/p&gt;" type="array" variable="$prop_array">
+        <tag name="param" line="170" description="&lt;p&gt;Array of properties to set values into&lt;/p&gt;" type="array" variable="$prop_array">
           <type>array</type>
         </tag>
-        <tag name="param" line="172" description="&lt;p&gt;Array of associated values to set into properties&lt;/p&gt;" type="array" variable="$value_array">
+        <tag name="param" line="170" description="&lt;p&gt;Array of associated values to set into properties&lt;/p&gt;" type="array" variable="$value_array">
           <type>array</type>
         </tag>
-        <tag name="return" line="172" description="Returns true if success, false if error" type="bool">
+        <tag name="return" line="170" description="Returns true if success, false if error" type="bool">
           <type>bool</type>
         </tag>
-        <tag name="throws" line="172" description="If count(prop_array) != count(value_array)" type="\InvalidParameterException">
+        <tag name="throws" line="170" description="If count(prop_array) != count(value_array)" type="\InvalidParameterException">
           <type link="InvalidParameterException.html">\InvalidParameterException</type>
         </tag>
       </docblock>
@@ -918,35 +965,35 @@
         <type>array</type>
       </argument>
     </function>
-    <function namespace="clipit\user" line="206" package="clipit\user">
+    <function namespace="clipit\user" line="204" package="clipit\user">
       <name>create</name>
       <full_name>\clipit\user\create()</full_name>
-      <docblock line="206">
+      <docblock line="204">
         <description>Create a new ClipItUser instance, and save it into the system.</description>
         <long-description></long-description>
-        <tag name="param" line="206" description="&lt;p&gt;User login&lt;/p&gt;" type="string" variable="$login">
+        <tag name="param" line="204" description="&lt;p&gt;User login&lt;/p&gt;" type="string" variable="$login">
           <type>string</type>
         </tag>
-        <tag name="param" line="206" description="&lt;p&gt;User password (min length = 6)&lt;/p&gt;&#10;" type="string" variable="$password">
+        <tag name="param" line="204" description="&lt;p&gt;User password (min length = 6)&lt;/p&gt;&#10;" type="string" variable="$password">
           <type>string</type>
         </tag>
-        <tag name="param" line="206" description="&lt;p&gt;User full name&lt;/p&gt;" type="string" variable="$name">
+        <tag name="param" line="204" description="&lt;p&gt;User full name&lt;/p&gt;" type="string" variable="$name">
           <type>string</type>
         </tag>
-        <tag name="param" line="206" description="&lt;p&gt;User email&lt;/p&gt;" type="string" variable="$email">
+        <tag name="param" line="204" description="&lt;p&gt;User email&lt;/p&gt;" type="string" variable="$email">
           <type>string</type>
         </tag>
-        <tag name="param" line="206" description="&lt;p&gt;User role (optional)&lt;/p&gt;&#10;" type="string" variable="$role">
+        <tag name="param" line="204" description="&lt;p&gt;User role (optional)&lt;/p&gt;&#10;" type="string" variable="$role">
           <type>string</type>
         </tag>
-        <tag name="param" line="206" description="&lt;p&gt;User description (optional)&lt;/p&gt;&#10;" type="string" variable="$description">
+        <tag name="param" line="204" description="&lt;p&gt;User description (optional)&lt;/p&gt;&#10;" type="string" variable="$description">
           <type>string</type>
         </tag>
-        <tag name="return" line="206" description="Returns the new User Id, or 'false' if error" type="bool|int">
+        <tag name="return" line="204" description="Returns the new User Id, or 'false' if error" type="bool|int">
           <type>bool</type>
           <type>int</type>
         </tag>
-        <tag name="throws" line="206" description="" type="\InvalidParameterException">
+        <tag name="throws" line="204" description="" type="\InvalidParameterException">
           <type link="InvalidParameterException.html">\InvalidParameterException</type>
         </tag>
       </docblock>
@@ -972,25 +1019,25 @@
       </argument>
       <argument line="0">
         <name>$role</name>
-        <default>null</default>
+        <default>\clipit\user\ClipitUser::DEFAULT_ROLE</default>
         <type>string</type>
       </argument>
       <argument line="0">
         <name>$description</name>
-        <default>null</default>
+        <default>""</default>
         <type>string</type>
       </argument>
     </function>
-    <function namespace="clipit\user" line="235" package="clipit\user">
+    <function namespace="clipit\user" line="229" package="clipit\user">
       <name>delete</name>
       <full_name>\clipit\user\delete()</full_name>
-      <docblock line="235">
+      <docblock line="229">
         <description>Delete a User from the system.</description>
         <long-description></long-description>
-        <tag name="param" line="235" description="&lt;p&gt;Id from User to delete&lt;/p&gt;" type="int" variable="$id">
+        <tag name="param" line="229" description="&lt;p&gt;Id from User to delete&lt;/p&gt;" type="int" variable="$id">
           <type>int</type>
         </tag>
-        <tag name="return" line="235" description="True if success, false if error." type="bool">
+        <tag name="return" line="229" description="True if success, false if error." type="bool">
           <type>bool</type>
         </tag>
       </docblock>
@@ -1000,16 +1047,16 @@
         <type>int</type>
       </argument>
     </function>
-    <function namespace="clipit\user" line="248" package="clipit\user">
+    <function namespace="clipit\user" line="242" package="clipit\user">
       <name>get_all</name>
       <full_name>\clipit\user\get_all()</full_name>
-      <docblock line="248">
+      <docblock line="242">
         <description>Get all Users from the system.</description>
         <long-description></long-description>
-        <tag name="param" line="248" description="&lt;p&gt;Number of results to show, default= 0 [no limit] (optional)&lt;/p&gt;&#10;" type="int" variable="$limit">
+        <tag name="param" line="242" description="&lt;p&gt;Number of results to show, default= 0 [no limit] (optional)&lt;/p&gt;&#10;" type="int" variable="$limit">
           <type>int</type>
         </tag>
-        <tag name="return" line="248" description="Returns an array of ClipitUser objects" type="array">
+        <tag name="return" line="242" description="Returns an array of ClipitUser objects" type="array">
           <type>array</type>
         </tag>
       </docblock>
@@ -1019,16 +1066,16 @@
         <type>int</type>
       </argument>
     </function>
-    <function namespace="clipit\user" line="266" package="clipit\user">
+    <function namespace="clipit\user" line="263" package="clipit\user">
       <name>get_by_id</name>
       <full_name>\clipit\user\get_by_id()</full_name>
-      <docblock line="266">
+      <docblock line="263">
         <description>Get Users with id contained in a given list.</description>
         <long-description></long-description>
-        <tag name="param" line="266" description="&lt;p&gt;Array of User Ids&lt;/p&gt;" type="array" variable="$id_array">
+        <tag name="param" line="263" description="&lt;p&gt;Array of User Ids&lt;/p&gt;" type="array" variable="$id_array">
           <type>array</type>
         </tag>
-        <tag name="return" line="266" description="Returns an array of ClipitUser objects" type="array">
+        <tag name="return" line="263" description="Returns an array of ClipitUser objects" type="array">
           <type>array</type>
         </tag>
       </docblock>
@@ -1038,16 +1085,16 @@
         <type>array</type>
       </argument>
     </function>
-    <function namespace="clipit\user" line="285" package="clipit\user">
+    <function namespace="clipit\user" line="283" package="clipit\user">
       <name>get_by_login</name>
       <full_name>\clipit\user\get_by_login()</full_name>
-      <docblock line="285">
+      <docblock line="283">
         <description>Get users with login contained in a given list of logins.</description>
         <long-description></long-description>
-        <tag name="param" line="285" description="&lt;p&gt;Array of user logins&lt;/p&gt;" type="array" variable="$login_array">
+        <tag name="param" line="283" description="&lt;p&gt;Array of user logins&lt;/p&gt;" type="array" variable="$login_array">
           <type>array</type>
         </tag>
-        <tag name="return" line="285" description="Returns an array of ClipitUser objects" type="array">
+        <tag name="return" line="283" description="Returns an array of ClipitUser objects" type="array">
           <type>array</type>
         </tag>
       </docblock>
@@ -1057,16 +1104,16 @@
         <type>array</type>
       </argument>
     </function>
-    <function namespace="clipit\user" line="304" package="clipit\user">
+    <function namespace="clipit\user" line="302" package="clipit\user">
       <name>get_by_email</name>
       <full_name>\clipit\user\get_by_email()</full_name>
-      <docblock line="304">
+      <docblock line="302">
         <description>Get users with email contained in a given list of emails.</description>
         <long-description></long-description>
-        <tag name="param" line="304" description="&lt;p&gt;Array of user emails&lt;/p&gt;" type="array" variable="$email_array">
+        <tag name="param" line="302" description="&lt;p&gt;Array of user emails&lt;/p&gt;" type="array" variable="$email_array">
           <type>array</type>
         </tag>
-        <tag name="return" line="304" description="Returns an array of ClipitUser objects" type="array">
+        <tag name="return" line="302" description="Returns an array of ClipitUser objects" type="array">
           <type>array</type>
         </tag>
       </docblock>
@@ -1076,16 +1123,16 @@
         <type>array</type>
       </argument>
     </function>
-    <function namespace="clipit\user" line="329" package="clipit\user">
+    <function namespace="clipit\user" line="327" package="clipit\user">
       <name>get_by_role</name>
       <full_name>\clipit\user\get_by_role()</full_name>
-      <docblock line="329">
+      <docblock line="327">
         <description>Get users with role contained in a given list of roles.</description>
         <long-description></long-description>
-        <tag name="param" line="329" description="&lt;p&gt;Array of user roles&lt;/p&gt;" type="array" variable="$role_array">
+        <tag name="param" line="327" description="&lt;p&gt;Array of user roles&lt;/p&gt;" type="array" variable="$role_array">
           <type>array</type>
         </tag>
-        <tag name="return" line="329" description="Returns an array of ClipitUser objects" type="array">
+        <tag name="return" line="327" description="Returns an array of ClipitUser objects" type="array">
           <type>array</type>
         </tag>
       </docblock>
@@ -1098,7 +1145,7 @@
     <parse_markers>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
     </parse_markers>
-    <source>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</source>
+    <source>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</source>
   </file>
   <file path="libraries\clipit_video.php" generated-path="libraries.clipit_video.html" hash="8082ec146c44f31c92d4bf1a7ccd39df" package="Default">
     <docblock line="0">
@@ -1810,7 +1857,7 @@
     </parse_markers>
     <source>eJztVe1u4kYU/R8p73CFkJZExGQ3rSqRTRo3GxIqGixwGkWqVA32tZldMzOdGUPoqg/TZ+mL9Y7tACEFovTvjhDYc8+c+3Xm8vFHNVYg2ASNYhFClHHF7W+KZWgtnu7vAa3W4WH5AIdwSYCuhSP4OX+0rIdMC7jHEQzd8QUquAlgitpwKdrF1vkZfO99WLJoZJaMEDOLDvHh+P3J0ftj+iwwPWYs5OoJAVD/RI/1J/sCd8FyO5YaFitgo0xCL+Pin78N+Fow/id8VDgyP3x3kU4Yz7xITs6bqykEWn7GyC5Jq+gXpPVfy436EkIOvsDKGlur2q3WZ8eaOVZP6nQVHqEwuIBf396BnySoJVyjQM0yCPIRoaBXIacni9MvVqPyNpvNvFTkzlWr8mBaLFXZ0Yl37NlHe7CZIxxzA0rLVLMJ0GOiEcHIxM6YpprPZQ4RE6Ax5sZqPsotArfARNyiek9kzJP5ZnZC5iJGDXaMYFFPDMikeNmdOTObeZWDmjHGMJoXdB0X9rAKGzqSvBbiaj5JEE681xdhmWsMXBQOxlJRBmNmXU4znmUwQsgNJnnW3ExMFHDfDW/6dyH4tw9w7w8G/m34cEoUJFiy4hRLB3yiMk7+KAHNhJ1ToTbz/nI1uLwhIv+nbq8bPgC1otMNb6+GQ+j0B+BD4A/C7uVdzx9AcDcI+sMrD4boMsDNrLt7khQ9pwrHaOkOmS01fSDlGEoxi2HMpkgKipBPKUEGkVTzV+tgsweWSZEWhSSmZQM96CYgpG2CwS2nX3t3Fim29vf298ox6EYgM6YYhNwG5aB0+4XtgsbgF5auD1JnI47o5cmvjtn5aLUqYkpFobYcqzugypLUWWT5lJM4zioGv9o4fY7jMSG4sOvbFukGnoGT2LxxsGZ1/wBkdNIX6ZrNskcp5GTpOKw21nFz9YyjtBpLlzGCJBdRMfFTtEGZ4bxBsTah7hI++FqVmpZGm9NIroX9o0/9WuXkr0185j/56GfKshzfzouPShrsVK+mscpU2n5/wjZqZbe9qtveSo61JtSeNbzdfmZdkr6QeNGozfZi1Xhcg7Pz14GLA65LxZEaaQRT1NtiWB7T+EfO6Z+gOGo1VXbXsZrrw5uDK1X01ti2BVf2vx2jiTRXrn/bvLy7vgrfbbE7d1vMCcsMHiwug1u7xLMiaLNVR+abjnYH9/90tDO2Ysh8E3klcvdSDFT6+hfqTRQ/</source>
   </file>
-  <file path="objects\ClipitQuiz.php" generated-path="objects.ClipitQuiz.html" hash="568c99e0216f7aa7d3794da04c19f64c" package="clipit\quiz">
+  <file path="objects\ClipitQuiz.php" generated-path="objects.ClipitQuiz.html" hash="6d8714b72272d4955be4dfdc26e4b5cb" package="clipit\quiz">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
@@ -1826,100 +1873,99 @@
         <tag name="package" line="41" description="clipit\quiz"/>
       </docblock>
       <constant namespace="clipit\quiz" line="45" package="clipit\quiz">
-        <name>SUBTYPE</name>
-        <full_name>\clipit\quiz\ClipitQuiz::SUBTYPE</full_name>
-        <value>"quiz"</value>
+        <name>TYPE</name>
+        <full_name>\clipit\quiz\ClipitQuiz::TYPE</full_name>
+        <value>"object"</value>
         <docblock line="45">
           <description></description>
           <long-description></long-description>
-          <tag name="const" line="45" description="string Subtype of the ClipitQuiz class for ElggObject"/>
+          <tag name="const" line="45" description="string Elgg entity type for this class"/>
         </docblock>
       </constant>
-      <property static="false" visibility="public" line="49" namespace="clipit\quiz" package="clipit\quiz">
-        <name>$id</name>
-        <default>-1</default>
+      <constant namespace="clipit\quiz" line="49" package="clipit\quiz">
+        <name>SUBTYPE</name>
+        <full_name>\clipit\quiz\ClipitQuiz::SUBTYPE</full_name>
+        <value>"clipit_quiz"</value>
         <docblock line="49">
           <description></description>
           <long-description></long-description>
-          <tag name="var" line="49" description="&lt;p&gt;Unique Id of saved ClipitQuiz (-1 = unsaved)&lt;/p&gt;&#10;" type="int" variable="">
+          <tag name="const" line="49" description="string Elgg entity subtype for this class"/>
+        </docblock>
+      </constant>
+      <property static="false" visibility="public" line="53" namespace="clipit\quiz" package="clipit\quiz">
+        <name>$id</name>
+        <default>-1</default>
+        <docblock line="53">
+          <description></description>
+          <long-description></long-description>
+          <tag name="var" line="53" description="&lt;p&gt;Unique Id of saved ClipitQuiz (-1 = unsaved)&lt;/p&gt;&#10;" type="int" variable="">
             <type>int</type>
           </tag>
         </docblock>
       </property>
-      <property static="false" visibility="public" line="53" namespace="clipit\quiz" package="clipit\quiz">
-        <name>$name</name>
-        <default>""</default>
-        <docblock line="53">
-          <description></description>
-          <long-description></long-description>
-          <tag name="var" line="53" description="&lt;p&gt;Quiz name&lt;/p&gt;" type="string" variable="">
-            <type>string</type>
-          </tag>
-        </docblock>
-      </property>
       <property static="false" visibility="public" line="57" namespace="clipit\quiz" package="clipit\quiz">
-        <name>$target</name>
+        <name>$name</name>
         <default>""</default>
         <docblock line="57">
           <description></description>
           <long-description></long-description>
-          <tag name="var" line="57" description="&lt;p&gt;Target interface for Quiz display (e.g.: &quot;web space&quot;, &quot;large display&quot;...)&lt;/p&gt;&#10;" type="string" variable="">
+          <tag name="var" line="57" description="&lt;p&gt;Quiz name&lt;/p&gt;" type="string" variable="">
             <type>string</type>
           </tag>
         </docblock>
       </property>
       <property static="false" visibility="public" line="61" namespace="clipit\quiz" package="clipit\quiz">
-        <name>$description</name>
+        <name>$target</name>
         <default>""</default>
         <docblock line="61">
           <description></description>
           <long-description></long-description>
-          <tag name="var" line="61" description="&lt;p&gt;Quiz description free text (optional)&lt;/p&gt;&#10;" type="string" variable="">
+          <tag name="var" line="61" description="&lt;p&gt;Target interface for Quiz display (e.g.: &quot;web space&quot;, &quot;large display&quot;...)&lt;/p&gt;&#10;" type="string" variable="">
             <type>string</type>
           </tag>
         </docblock>
       </property>
       <property static="false" visibility="public" line="65" namespace="clipit\quiz" package="clipit\quiz">
-        <name>$public</name>
-        <default>false</default>
+        <name>$description</name>
+        <default>""</default>
         <docblock line="65">
           <description></description>
           <long-description></long-description>
-          <tag name="var" line="65" description="&lt;p&gt;Specifies whether the Quiz can be reused by other teachers (optional, default = false)&lt;/p&gt;&#10;" type="bool" variable="">
-            <type>bool</type>
+          <tag name="var" line="65" description="&lt;p&gt;Quiz description free text (optional)&lt;/p&gt;&#10;" type="string" variable="">
+            <type>string</type>
           </tag>
         </docblock>
       </property>
       <property static="false" visibility="public" line="69" namespace="clipit\quiz" package="clipit\quiz">
-        <name>$question_array</name>
-        <default>array()</default>
+        <name>$public</name>
+        <default>false</default>
         <docblock line="69">
           <description></description>
           <long-description></long-description>
-          <tag name="var" line="69" description="&lt;p&gt;Array of ClipitQuizQuestion ids (int) included in this Quiz&lt;/p&gt;&#10;" type="array" variable="">
-            <type>array</type>
+          <tag name="var" line="69" description="&lt;p&gt;Specifies whether the Quiz can be reused by other teachers (optional, default = false)&lt;/p&gt;&#10;" type="bool" variable="">
+            <type>bool</type>
           </tag>
         </docblock>
       </property>
       <property static="false" visibility="public" line="73" namespace="clipit\quiz" package="clipit\quiz">
-        <name>$result_array</name>
+        <name>$question_array</name>
         <default>array()</default>
         <docblock line="73">
           <description></description>
           <long-description></long-description>
-          <tag name="var" line="73" description="&lt;p&gt;Array of ClipitQuizResult ids (int) included in this Quiz&lt;/p&gt;&#10;" type="array" variable="">
+          <tag name="var" line="73" description="&lt;p&gt;Array of ClipitQuizQuestion ids (int) included in this Quiz (optional)&lt;/p&gt;&#10;" type="array" variable="">
             <type>array</type>
           </tag>
         </docblock>
       </property>
       <property static="false" visibility="public" line="77" namespace="clipit\quiz" package="clipit\quiz">
         <name>$taxonomy</name>
-        <default>null</default>
+        <default>-1</default>
         <docblock line="77">
           <description></description>
           <long-description></long-description>
-          <tag name="var" line="77" description="&lt;p&gt;Taxonomy used as topic for this Quiz&lt;/p&gt;" type="null" variable="">
-            <type>null</type>
+          <tag name="var" line="77" description="&lt;p&gt;Id of Taxonomy used as topic for this Quiz (optional)&lt;/p&gt;&#10;" type="int" variable="">
+            <type>int</type>
           </tag>
         </docblock>
       </property>
@@ -1957,17 +2003,17 @@
         </docblock>
         <argument line="0">
           <name>$id</name>
-          <default>null</default>
+          <default></default>
           <type>int</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="clipit\quiz" line="120" package="clipit\quiz">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="clipit\quiz" line="119" package="clipit\quiz">
         <name>save</name>
         <full_name>\clipit\quiz\ClipitQuiz::save()</full_name>
-        <docblock line="120">
+        <docblock line="119">
           <description>Saves this instance to the system.</description>
           <long-description></long-description>
-          <tag name="return" line="120" description="Returns id of saved instance, or false if error." type="bool|int">
+          <tag name="return" line="119" description="Returns id of saved instance, or false if error." type="bool|int">
             <type>bool</type>
             <type>int</type>
           </tag>
@@ -1984,13 +2030,29 @@
           </tag>
         </docblock>
       </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="clipit\quiz" line="158" package="clipit\quiz">
+        <name>setPrivacy</name>
+        <full_name>\clipit\quiz\ClipitQuiz::setPrivacy()</full_name>
+        <docblock line="158">
+          <description>Set Quiz privacy into "public" property (true = public, false = private)</description>
+          <long-description></long-description>
+          <tag name="param" line="158" description="&lt;p&gt;Flag specifying if the quiz is public or not&lt;/p&gt;" type="string" variable="$value">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0">
+          <name>$value</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
     </class>
     <parse_markers>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
     </parse_markers>
-    <source>eJy1VutO20gU/o/EO5yi/AgocUrZ1UpQWFIKJSsW0iRshVQJTezjZFrHY2bGhHTbh9ln2RfbM2M7dpw4hEproTqdc7983/jt79E42t5q7e1tb8EenEbM/cpGCG7AI64/P8T8mxG0trdCNkFF4gXZ0fYWielJHJhnD85I3tHQhD/iJ82ukMkQPuEQ+sZ6rtW97MIjSsVFeGiPTo7hV+dN7kUi0yQEj2k0Gm9e7x8091/T31zniikNcZRpANTe089aJp/rnbJYj4WE+dNlw0DAVcDDf/9R0JYh49/gbYRD9dsvp6MJ44HjislJo1hCV4ov6OrcaZr93Gntr+SglqtQgK9QeMZaR4et1hfjNTBeHSFHRXUXQ4Vz9Q/Xt9D2fZQCPmCIkgXQjYekBVep5uPB3HrpqafRptOpMwpjE6qVRlAtNoqC5oHz2tFPerfax2DMFURSjCSbAP30JSIo4espk9TzmYjBZSFI9LjSkg9jjcA1sNBrUb8nwuP+rNo7acahhxL0GEGjnCgQvv3P85UzVe03MqpqjB4MZ9bdhUm7n6YNF4Ki2uVqZCsIB87mTchr9YCHNsBYRFTBmGlT05QHAQwRYoV+HDSqHZML+NQZXN7cDqB9fQef2r1e+3pwd0QuaGFJio+YBOCTKOAUjwqQLNQzalS13z/Pe2eX5Kj9rnPVGdwBjeKiM7g+7/fh4qYHbei2e4PO2e1Vuwfd2173pn/uQB9NBVjt9fmZ+Hbm1GEPNWFIrenpHW2OohIDD8bsEWmDXOSPVCADV0SzjfegOgILRDiyjSRP+QAd6PgQCt0AhWusN8XOvMSWocKMR9sBZ4pwQlzJFJkAzVJxD5OyKJkCmxJ8kl3x5lOPmB47CSHTOXw+D0ajm2HKPiZS6fSoGPvMhLQkzPXHlL+fI3e3ZPP3MqufuiIktjWbT23tx0M9izAbU26ZVGw3YSHrrEfmnXjq374b3HXP4Rh2TCY7RytiPjJJCNNwG/KHGKHjmYCKmT0phKw398lLHFrBbilYlKxLjXuk09yvipLWZf2Z4VR4MSKTcWW2qZ8BkyPUJneUvhmzaYh1TuQRBWwGdXRGziHsTOlmtJuw04CdwJhlKjuO41RVoxP/G2SSBEXlSh7Z+9RSuMYnDXVhT1hQFaVoti7UUIiArnd0uc9p2adjpKVIWD3ZiWTHJdotJ04WiRyZS2+VJ9KgTH0WB6YynwUKqzJL36lWVV6GK2d0vZt/aXHylfkYo7JVcY+i05R2aVRuEHsZoxNEU+ysiv6Qmt8nAY6TQPXdF+fRQ2WK/bkspDXeNIcwpktpwJ5EKCazhG6IorSIyJVZzuei6cz02Lqq/PLLaMBgXMauFnL5cyxi9iYN9XeblcEmkbJ5GWo0R7QfIbjmExAhxCnpKs1CFxuANG8IBPPmZwnHW3yTC6eUvx+Hrh31/f08p3rCBibSbkp15uG+ERRPzFMznWmemJBWfJSLfyQ/f6zqxRXpK7rNCj3xpZhYUKiZ0jhx1jQm6cnFCn7VIqm+yhmcStQxfa/avL9baPbsSZHgCw2l2VsQUfmAUgpZ2cGsBStaV0Mi+3th2T7fkGcaW7KhMedXRkWrU2+virZlv2n9RWYoeUhHmqxMwVPzZBRz72hJcZEHFy0KsmXD9LpYtDCHy6pzRqubke0umiTCZaMlIlo0WxQvm5cYZNG4KFw2LdDBolkmWGWS3lllA3NcUC/u79EahPXpulcJb82pgNCxFmCpb9Pi7wZmGTJ44cviZ6BhLOtlLsm3zHx5vGz9i7tf1m6eqPTz6zjp0uFh+jFVNqrc8yTfIjossb4MoZn3/w+nVUjLCq+E3xLgcosy/FYALUdhEZuVRssoXIXOSvMyCpexWWlaROEiLteYZCgsonIF/Kr3ZSUa32OAGs2N97DZXVeAIgxkbEGmYtdFpRqbws6zQcvAe1XaW6rv/jzUXM8KO/vybVzZmCyDvDU//gPY5naG</source>
+    <source>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</source>
   </file>
-  <file path="objects\ClipitQuizQuestion.php" generated-path="objects.ClipitQuizQuestion.html" hash="bad76749d6e8c20e1872f83ae1e8e25d" package="clipit\quiz\question">
+  <file path="objects\ClipitQuizQuestion.php" generated-path="objects.ClipitQuizQuestion.html" hash="eea821759795822cc81d75d8a4937693" package="clipit\quiz\question">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
@@ -2006,88 +2068,98 @@
         <tag name="package" line="41" description="clipit\quiz\question"/>
       </docblock>
       <constant namespace="clipit\quiz\question" line="45" package="clipit\quiz\question">
-        <name>SUBTYPE</name>
-        <full_name>\clipit\quiz\question\ClipitQuizQuestion::SUBTYPE</full_name>
-        <value>"quiz_question"</value>
+        <name>TYPE</name>
+        <full_name>\clipit\quiz\question\ClipitQuizQuestion::TYPE</full_name>
+        <value>"object"</value>
         <docblock line="45">
           <description></description>
           <long-description></long-description>
-          <tag name="const" line="45" description="string Subtype of the ClipitQuizQuestion class for ElggObject"/>
+          <tag name="const" line="45" description="string Elgg entity type for this class"/>
         </docblock>
       </constant>
-      <property static="false" visibility="public" line="49" namespace="clipit\quiz\question" package="clipit\quiz\question">
-        <name>$id</name>
-        <default>-1</default>
+      <constant namespace="clipit\quiz\question" line="49" package="clipit\quiz\question">
+        <name>SUBTYPE</name>
+        <full_name>\clipit\quiz\question\ClipitQuizQuestion::SUBTYPE</full_name>
+        <value>"clipit_quiz_question"</value>
         <docblock line="49">
           <description></description>
           <long-description></long-description>
-          <tag name="var" line="49" description="&lt;p&gt;Unique id of this ClipitQuizQuestion instance (-1 = unsaved)&lt;/p&gt;&#10;" type="int" variable="">
-            <type>int</type>
-          </tag>
+          <tag name="const" line="49" description="string Elgg entity subtype for this class"/>
         </docblock>
-      </property>
+      </constant>
       <property static="false" visibility="public" line="53" namespace="clipit\quiz\question" package="clipit\quiz\question">
-        <name>$question</name>
-        <default>""</default>
+        <name>$id</name>
+        <default>-1</default>
         <docblock line="53">
           <description></description>
           <long-description></long-description>
-          <tag name="var" line="53" description="&lt;p&gt;Main text question which will be shown to users taking the quiz&lt;/p&gt;" type="string" variable="">
-            <type>string</type>
+          <tag name="var" line="53" description="&lt;p&gt;Unique id of this ClipitQuizQuestion instance (-1 = unsaved)&lt;/p&gt;&#10;" type="int" variable="">
+            <type>int</type>
           </tag>
         </docblock>
       </property>
       <property static="false" visibility="public" line="57" namespace="clipit\quiz\question" package="clipit\quiz\question">
-        <name>$option_array</name>
-        <default>array()</default>
+        <name>$question</name>
+        <default>""</default>
         <docblock line="57">
           <description></description>
           <long-description></long-description>
-          <tag name="var" line="57" description="&lt;p&gt;Array of options to chose from as an answer to the question&lt;/p&gt;" type="array" variable="">
-            <type>array</type>
-          </tag>
-        </docblock>
-      </property>
-      <property static="false" visibility="public" line="61" namespace="clipit\quiz\question" package="clipit\quiz\question">
-        <name>$type</name>
-        <default>""</default>
-        <docblock line="61">
-          <description></description>
-          <long-description></long-description>
-          <tag name="var" line="61" description="&lt;p&gt;Type of question: single choice, multiple choice, select 2...&lt;/p&gt;" type="string" variable="">
+          <tag name="var" line="57" description="&lt;p&gt;Main text question which will be shown to users taking the quiz&lt;/p&gt;" type="string" variable="">
             <type>string</type>
           </tag>
         </docblock>
       </property>
-      <property static="false" visibility="public" line="65" namespace="clipit\quiz\question" package="clipit\quiz\question">
-        <name>$taxonomy_tag_array</name>
+      <property static="false" visibility="public" line="61" namespace="clipit\quiz\question" package="clipit\quiz\question">
+        <name>$option_array</name>
         <default>array()</default>
-        <docblock line="65">
+        <docblock line="61">
           <description></description>
           <long-description></long-description>
-          <tag name="var" line="65" description="&lt;p&gt;Array of Taxonomy Tags relevant to this question&lt;/p&gt;" type="array" variable="">
+          <tag name="var" line="61" description="&lt;p&gt;Array of options to chose from as an answer to the question&lt;/p&gt;" type="array" variable="">
             <type>array</type>
           </tag>
         </docblock>
       </property>
+      <property static="false" visibility="public" line="65" namespace="clipit\quiz\question" package="clipit\quiz\question">
+        <name>$option_type</name>
+        <default>""</default>
+        <docblock line="65">
+          <description></description>
+          <long-description></long-description>
+          <tag name="var" line="65" description="&lt;p&gt;Type of Question: single choice, multiple choice, select 2...&lt;/p&gt;" type="string" variable="">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </property>
       <property static="false" visibility="public" line="69" namespace="clipit\quiz\question" package="clipit\quiz\question">
-        <name>$video</name>
-        <default>-1</default>
+        <name>$taxonomy_tag_array</name>
+        <default>array()</default>
         <docblock line="69">
           <description></description>
           <long-description></long-description>
-          <tag name="var" line="69" description="&lt;p&gt;ID of ClipitVideo refered to by this question (optional)&lt;/p&gt;&#10;" type="int" variable="">
+          <tag name="var" line="69" description="&lt;p&gt;Array of Taxonomy Tags relevant to this question&lt;/p&gt;" type="array" variable="">
+            <type>array</type>
+          </tag>
+        </docblock>
+      </property>
+      <property static="false" visibility="public" line="73" namespace="clipit\quiz\question" package="clipit\quiz\question">
+        <name>$video</name>
+        <default>-1</default>
+        <docblock line="73">
+          <description></description>
+          <long-description></long-description>
+          <tag name="var" line="73" description="&lt;p&gt;ID of ClipitVideo refered to by this question (optional)&lt;/p&gt;&#10;" type="int" variable="">
             <type>int</type>
           </tag>
         </docblock>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="clipit\quiz\question" line="74" package="clipit\quiz\question">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="clipit\quiz\question" line="78" package="clipit\quiz\question">
         <name>__construct</name>
         <full_name>\clipit\quiz\question\ClipitQuizQuestion::__construct()</full_name>
-        <docblock line="74">
+        <docblock line="78">
           <description></description>
           <long-description></long-description>
-          <tag name="param" line="74" description="&lt;p&gt;If $id is null, create new instance, else load instance with id = $id.&lt;/p&gt;&#10;" type="int" variable="$id">
+          <tag name="param" line="78" description="&lt;p&gt;If $id is null, create new instance, else load instance with id = $id.&lt;/p&gt;&#10;" type="int" variable="$id">
             <type>int</type>
           </tag>
         </docblock>
@@ -2097,16 +2169,16 @@
           <type>int</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="clipit\quiz\question" line="86" package="clipit\quiz\question">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="clipit\quiz\question" line="90" package="clipit\quiz\question">
         <name>load</name>
         <full_name>\clipit\quiz\question\ClipitQuizQuestion::load()</full_name>
-        <docblock line="86">
+        <docblock line="90">
           <description>Loads a ClipitQuizQuestion instance from the system.</description>
           <long-description></long-description>
-          <tag name="param" line="86" description="&lt;p&gt;Id of the ClipitQuiz to load from the system.&lt;/p&gt;" type="int" variable="$id">
+          <tag name="param" line="90" description="&lt;p&gt;Id of the ClipitQuiz to load from the system.&lt;/p&gt;" type="int" variable="$id">
             <type>int</type>
           </tag>
-          <tag name="return" line="86" description="Returns ClipitQuiz instance, or false if error." type="$this|bool">
+          <tag name="return" line="90" description="Returns ClipitQuiz instance, or false if error." type="$this|bool">
             <type>\clipit\quiz\question\ClipitQuizQuestion</type>
             <type>bool</type>
           </tag>
@@ -2118,25 +2190,25 @@
           <type>int</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="clipit\quiz\question" line="105" package="clipit\quiz\question">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="clipit\quiz\question" line="112" package="clipit\quiz\question">
         <name>save</name>
         <full_name>\clipit\quiz\question\ClipitQuizQuestion::save()</full_name>
-        <docblock line="105">
+        <docblock line="112">
           <description>Saves this instance to the system.</description>
           <long-description></long-description>
-          <tag name="return" line="105" description="Returns the Id of the saved instance, or false if error." type="bool|int">
+          <tag name="return" line="112" description="Returns the Id of the saved instance, or false if error." type="bool|int">
             <type>bool</type>
             <type>int</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="clipit\quiz\question" line="129" package="clipit\quiz\question">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="clipit\quiz\question" line="138" package="clipit\quiz\question">
         <name>delete</name>
         <full_name>\clipit\quiz\question\ClipitQuizQuestion::delete()</full_name>
-        <docblock line="129">
+        <docblock line="138">
           <description>Deletes a Quiz Question from the system.</description>
           <long-description></long-description>
-          <tag name="return" line="129" description="True if success, false if error." type="bool">
+          <tag name="return" line="138" description="True if success, false if error." type="bool">
             <type>bool</type>
           </tag>
         </docblock>
@@ -2144,11 +2216,11 @@
     </class>
     <parse_markers>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
-      <error line="74" code="PPC:ERR-50008">No summary for method __construct()</error>
+      <error line="78" code="PPC:ERR-50008">No summary for method __construct()</error>
     </parse_markers>
-    <source>eJylV+1O20gU/Y/EO9xW+QEocUrZ1UqksKQU2qxSSJNQhFQpmthje1rH450ZJ6RbHmafZV9s74w/YvxB6K6FILXvPfdjzjlO3/we+dHuTvfgYHcHDuAsIvY34lGwAxYx9eXPmH3HX1QqxkMd0d3dCcmCSoyrD+rt7mAcXgmkvg7gHAMHCjrwR3yvyJASEcItncNEw+RRow8jWFIhEeXY3Do9gV+t1xsUQYkuAQ5RVEe8fnV41Dl8hT95zJBIBXGURQC03uHHVvY8jzsjsfK5gPwakXnAYRiw8J+/JfRFSNh3eBPRufztlzNvQVhg2Xxx2i6OMBL8K7XVBjTtPgdtfU5utDYhWOAbFC5fqei42/2qUQONanHhFcNtGkqah7+/uoG+61LB4T0NqSABjOI5RsEwjVwe5dmVay+ttlqtLC+MdaluWkF2iRcFnSPrlaXu1X4zxtRnEiLBPUEWgB9dQSlI7qoVEbjzNY/BJiEI6jCpBJvHigJTQEKni/tecIe562Z0jIxDhwpQPgVFxUICd80/tk9OZDNupEOlTx2Yrw3cpW57krYNlxyrGnK1MwrCkfX8JWxmdYCFpoDPI5zAJ0rPtGJBAHMKsaRuHLSbgRECbgfTD9c3U+hf3cFtfzzuX03vegiBhMWndEmTAmwRBQzr4QCChGqNi2rG/XgxPv+AQP23g+Fgegd4FJeD6dXFZAKX12Pow6g/ng7Ob4b9MYxuxqPryYUFE6onoM2o28/ENWeOG3aoQg3JJ3Z6h8yROGLggE+WFBlkU7bEAQnYPFo/mwfNFUjAQ88sEpE2B2jBwIWQqzZI+kT2c7WTj9jVVpg5az9gRKJO0DSJxBTAs5TMoclY2EzBVlE+CVec/NQjonwrsWi8D18uAs+7nqfuoyuV7vaKtc91SWPCTH1Cs/5UMPRn277dAPJX1e7PbB6iDWtJ4L4n8VytI5qdXxUhWYmhyqOxsiXqvwni5Obt9G50ASfwUrc4y1p82atpYkkEalHBTcgwDpiTr7qmBYbwJMTl73UOET4OJVLQ2S91ESVEayHWCXQOm6qmg38k2grovYKsT1j5zPZzN0C2rzCC66MWEhT5ptP0kvR0DbVzLFxC49zaEtb4FtO/cWoe6QypS9k+17IUfIF+ia6MP3Kl/ZanhfNDryueAM0S+JOkzN7+lj1M09PPsI9B4u2A6l5QQG1YxIFiUeGGpAFSAF5bltXQiGGU2QB0u1k8D4M1HFbwcpRta5qSex7yxRo/eBL9J6BLNNZkNUibLbtRafZMEe+5G9L8HLzTtRNOfkZH4FgZ7Q3Fj4XN26pQG/aSIyBBEzeXBiKlZ03ZiJh3FhbWNEbn03+0/8RB0AZbf8eiENJVLok20AApE3DibGRiTNTIANPLh+TGoW2anc2MbkVsq71ENLrKfmoZ+mKuflC8o6+Wnrlzqkuax73N44fk40PdbEOMR04/qW/DfM10uZaKLvLWGxfkVI1LH4xZRxMYnAmqYvyGaAb5Mec8gLG5UzSfwobR+lyit8xcoEJw0bjSfCeFlbUo2uaMG9/UO8bD2xhpeYG48RfFhPLu085NO9W9F04nOf0CUufUi5nTqwSWTONxSvFhNbVgdo/TCv/dKKXUyvBxcjWkBiYxmFIi3qyGZop7HGvuFoKLjOg9QeIJvnhkIvqctKk5N1I2xdY8+6GJm3FNJ20IbF5p/4l0OnOvLNsNC7TZVCT8JCeLhCxHd05l+o3hJNnW8XH63i8nNfIw6bfIXuNhP9Vijl7jPukK/q+OGoWQTd4sj1oxbNLq5LFFApvkp+VREUQhsSSPqh42sU3yaD7HWrW8w5e0otr0jaPmfr/d5guagamIjQpkbNtUyvZzdeGY6mVlvCgRy6NqdhEqptYFUv08XWo3lHVQ3NHDv92QGVY=</source>
+    <source>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</source>
   </file>
-  <file path="objects\ClipitQuizResult.php" generated-path="objects.ClipitQuizResult.html" hash="0b8d321718f4fe48a6015b4d8405afc8" package="clipit\quiz\result">
+  <file path="objects\ClipitQuizResult.php" generated-path="objects.ClipitQuizResult.html" hash="e0b9f2db7dce62d75a5825de0f1e8e95" package="clipit\quiz\result">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
@@ -2164,88 +2236,98 @@
         <tag name="package" line="41" description="clipit\quiz\result"/>
       </docblock>
       <constant namespace="clipit\quiz\result" line="45" package="clipit\quiz\result">
-        <name>SUBTYPE</name>
-        <full_name>\clipit\quiz\result\ClipitQuizResult::SUBTYPE</full_name>
-        <value>"quiz_result"</value>
+        <name>TYPE</name>
+        <full_name>\clipit\quiz\result\ClipitQuizResult::TYPE</full_name>
+        <value>"object"</value>
         <docblock line="45">
           <description></description>
           <long-description></long-description>
-          <tag name="const" line="45" description="string Subtype of the ClipitQuizResult class for ElggObject"/>
+          <tag name="const" line="45" description="string Elgg entity type for this class"/>
         </docblock>
       </constant>
-      <property static="false" visibility="public" line="49" namespace="clipit\quiz\result" package="clipit\quiz\result">
-        <name>$id</name>
-        <default>-1</default>
+      <constant namespace="clipit\quiz\result" line="49" package="clipit\quiz\result">
+        <name>SUBTYPE</name>
+        <full_name>\clipit\quiz\result\ClipitQuizResult::SUBTYPE</full_name>
+        <value>"clipit_quiz_result"</value>
         <docblock line="49">
           <description></description>
           <long-description></long-description>
-          <tag name="var" line="49" description="&lt;p&gt;Unique Id of saved ClipitQuizResult (-1 = unsaved)&lt;/p&gt;&#10;" type="int" variable="">
-            <type>int</type>
-          </tag>
+          <tag name="const" line="49" description="string Elgg entity subtype for this class"/>
         </docblock>
-      </property>
+      </constant>
       <property static="false" visibility="public" line="53" namespace="clipit\quiz\result" package="clipit\quiz\result">
-        <name>$quiz_question</name>
+        <name>$id</name>
         <default>-1</default>
         <docblock line="53">
           <description></description>
           <long-description></long-description>
-          <tag name="var" line="53" description="&lt;p&gt;Id of ClipitQuizQuestion this ClipitQuizResult is related to&lt;/p&gt;" type="int" variable="">
+          <tag name="var" line="53" description="&lt;p&gt;Unique Id of saved ClipitQuizResult (-1 = unsaved)&lt;/p&gt;&#10;" type="int" variable="">
             <type>int</type>
           </tag>
         </docblock>
       </property>
       <property static="false" visibility="public" line="57" namespace="clipit\quiz\result" package="clipit\quiz\result">
-        <name>$result_array</name>
-        <default>array()</default>
+        <name>$quiz_question</name>
+        <default>-1</default>
         <docblock line="57">
           <description></description>
           <long-description></long-description>
-          <tag name="var" line="57" description="&lt;p&gt;Array of results to the Quiz Question linked by $quiz_question&lt;/p&gt;&#10;" type="array" variable="">
-            <type>array</type>
+          <tag name="var" line="57" description="&lt;p&gt;Id of ClipitQuizQuestion this ClipitQuizResult is related to&lt;/p&gt;" type="int" variable="">
+            <type>int</type>
           </tag>
         </docblock>
       </property>
       <property static="false" visibility="public" line="61" namespace="clipit\quiz\result" package="clipit\quiz\result">
-        <name>$user</name>
-        <default>-1</default>
+        <name>$result_array</name>
+        <default>array()</default>
         <docblock line="61">
           <description></description>
           <long-description></long-description>
-          <tag name="var" line="61" description="&lt;p&gt;Id of User who posted this Quiz Result&lt;/p&gt;" type="int" variable="">
-            <type>int</type>
+          <tag name="var" line="61" description="&lt;p&gt;Array of results to the Quiz Question linked by $quiz_question&lt;/p&gt;&#10;" type="array" variable="">
+            <type>array</type>
           </tag>
         </docblock>
       </property>
       <property static="false" visibility="public" line="65" namespace="clipit\quiz\result" package="clipit\quiz\result">
-        <name>$correct</name>
-        <default>false</default>
+        <name>$user</name>
+        <default>-1</default>
         <docblock line="65">
           <description></description>
           <long-description></long-description>
-          <tag name="var" line="65" description="&lt;p&gt;Determines if this Result is correct (true) or incorrect (false)&lt;/p&gt;&#10;" type="bool" variable="">
-            <type>bool</type>
-          </tag>
-        </docblock>
-      </property>
-      <property static="false" visibility="public" line="69" namespace="clipit\quiz\result" package="clipit\quiz\result">
-        <name>$time_created</name>
-        <default>-1</default>
-        <docblock line="69">
-          <description></description>
-          <long-description></long-description>
-          <tag name="var" line="69" description="&lt;p&gt;Timestamp when the user submitted this Quiz Result&lt;/p&gt;" type="int" variable="">
+          <tag name="var" line="65" description="&lt;p&gt;Id of User who posted this Quiz Result&lt;/p&gt;" type="int" variable="">
             <type>int</type>
           </tag>
         </docblock>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="clipit\quiz\result" line="76" package="clipit\quiz\result">
+      <property static="false" visibility="public" line="69" namespace="clipit\quiz\result" package="clipit\quiz\result">
+        <name>$correct</name>
+        <default>false</default>
+        <docblock line="69">
+          <description></description>
+          <long-description></long-description>
+          <tag name="var" line="69" description="&lt;p&gt;Determines if this Result is correct (true) or incorrect (false)&lt;/p&gt;&#10;" type="bool" variable="">
+            <type>bool</type>
+          </tag>
+        </docblock>
+      </property>
+      <property static="false" visibility="public" line="73" namespace="clipit\quiz\result" package="clipit\quiz\result">
+        <name>$time_created</name>
+        <default>-1</default>
+        <docblock line="73">
+          <description></description>
+          <long-description></long-description>
+          <tag name="var" line="73" description="&lt;p&gt;Timestamp when the user submitted this Quiz Result&lt;/p&gt;" type="int" variable="">
+            <type>int</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="clipit\quiz\result" line="80" package="clipit\quiz\result">
         <name>__construct</name>
         <full_name>\clipit\quiz\result\ClipitQuizResult::__construct()</full_name>
-        <docblock line="76">
+        <docblock line="80">
           <description>ClipitQuizResult constructor</description>
           <long-description></long-description>
-          <tag name="param" line="76" description="&lt;p&gt;If $id is null, create new instance; else load instance with id = $id.&lt;/p&gt;&#10;" type="int|null" variable="$id">
+          <tag name="param" line="80" description="&lt;p&gt;If $id is null, create new instance; else load instance with id = $id.&lt;/p&gt;&#10;" type="int|null" variable="$id">
             <type>int</type>
             <type>null</type>
           </tag>
@@ -2256,16 +2338,16 @@
           <type>int|null</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="clipit\quiz\result" line="88" package="clipit\quiz\result">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="clipit\quiz\result" line="92" package="clipit\quiz\result">
         <name>load</name>
         <full_name>\clipit\quiz\result\ClipitQuizResult::load()</full_name>
-        <docblock line="88">
+        <docblock line="92">
           <description>Loads a ClipitQuizResult instance from the system.</description>
           <long-description></long-description>
-          <tag name="param" line="88" description="&lt;p&gt;Id of Quiz Result to load&lt;/p&gt;" type="int" variable="$id">
+          <tag name="param" line="92" description="&lt;p&gt;Id of Quiz Result to load&lt;/p&gt;" type="int" variable="$id">
             <type>int</type>
           </tag>
-          <tag name="return" line="88" description="Returns Quiz Question instance, or false if error" type="$this|bool">
+          <tag name="return" line="92" description="Returns Quiz Question instance, or false if error" type="$this|bool">
             <type>\clipit\quiz\result\ClipitQuizResult</type>
             <type>bool</type>
           </tag>
@@ -2277,34 +2359,50 @@
           <type>int</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="clipit\quiz\result" line="107" package="clipit\quiz\result">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="clipit\quiz\result" line="114" package="clipit\quiz\result">
         <name>save</name>
         <full_name>\clipit\quiz\result\ClipitQuizResult::save()</full_name>
-        <docblock line="107">
+        <docblock line="114">
           <description>Saves this instance to the system.</description>
           <long-description></long-description>
-          <tag name="return" line="107" description="Returns the Id of the saved instance, or false if error." type="bool|int">
+          <tag name="return" line="114" description="Returns the Id of the saved instance, or false if error." type="bool|int">
             <type>bool</type>
             <type>int</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="clipit\quiz\result" line="130" package="clipit\quiz\result">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="clipit\quiz\result" line="139" package="clipit\quiz\result">
         <name>delete</name>
         <full_name>\clipit\quiz\result\ClipitQuizResult::delete()</full_name>
-        <docblock line="130">
+        <docblock line="139">
           <description>Deletes a Quiz Result from the system</description>
           <long-description></long-description>
-          <tag name="return" line="130" description="True if success, false if error." type="bool">
+          <tag name="return" line="139" description="True if success, false if error." type="bool">
             <type>bool</type>
           </tag>
         </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="clipit\quiz\result" line="151" package="clipit\quiz\result">
+        <name>setCorrect</name>
+        <full_name>\clipit\quiz\result\ClipitQuizResult::setCorrect()</full_name>
+        <docblock line="151">
+          <description>Set Quiz Result Correct flag into "correct" property (true = yes, false = no)</description>
+          <long-description></long-description>
+          <tag name="param" line="151" description="&lt;p&gt;Flag specifying if the Quiz Result is correct or not&lt;/p&gt;" type="string" variable="$value">
+            <type>string</type>
+          </tag>
+        </docblock>
+        <argument line="0">
+          <name>$value</name>
+          <default></default>
+          <type>string</type>
+        </argument>
       </method>
     </class>
     <parse_markers>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
     </parse_markers>
-    <source>eJylVutu2zYU/h8g73Ba+EcS+NI0GwbETRY3TVoPXuL6siBAAYOWKJutTCokFddd8zB7lr3YDkndLFtuihGGLZPnfr7zUW9+j+bR/l7r6Gh/D47gIiLeFzKj4IUsYvrTQ8y+fZJUxaE25639PU4WVKHUNpH2/h5K4XLmzDqCSxTramjAH/FXTXqUSA53dApDYyST6n/owyOVigl+arfOz+DX5uvciqRE4yH4RFMj8frV8Unj+BV+MpkeURriKJUAqL3Dx1p6nsldkFjPhYRs9ck0FNALGf/3HwUdyQn7Bm8iOlW//XIxWxAWNj2xOK8XU+hL8Zl6OjeaRJ8Zrf3lNmq5CDr4AoU11zo6bbU+G6uhsdoUclYU9yhXNBN/fzOGThBQKeA95VSSEPrxFKWgl0g+nmTaG+sg8bZcLpszHhtXrcSDapFZFDZOmq+a+qs+rLYxmjMFkRQzSRaAj4GkFJQI9JJIrPlKxOARDpL6TGnJprGmwDQQ7rew3gvhs2BVbR0lY+5TCXpOQVO5UCAC++fHmRNVbTcyompOfZiurLlrE/YwCRuuBXq14KqnEIST5vOLkOfqA+PWwVxEmMGcaJPTkoUhTCnEigZxWK82jCbgrjv6cDseQefmHu46g0HnZnTfRhMIWDylj9Q5YIsoZOgPE5CE6xUWqtrun1eDyw9oqPO22+uO7gFbcd0d3VwNh3B9O4AO9DuDUfdy3OsMoD8e9G+HV00YUpMBrbb6454EtudYYZ9qnCG1o6b3iByFKYY+zMkjRQR5lD1iggQ8Ea2ejYNqDyQUfGYLiZbyBjahGwAXug6K7tB+7uxkKbYMFaas2gkZUTgnSJlEoQpgLxXzqUsLgymQKo6Pw4qfdT0iet509Iz78OkqnM1upwn7GE+l3XbR96VxaUmY6Y9I1YOMzJ9J+N5WA39vEv2FJzgSsBkGrPQwnupVRNPOlfVdKSxE1tJJi2d+nb3h+O3ovn8FZ/DSBDdxwb1sbwngkUicQA1jzh5iCl3feFfE4GjD/0HjGE3G3B4fljxHDlQ15qNM43iXL+ckN/8xpspeVLaxG25xT9KQGK7QosKrTfMhtbMrADP9K7ywzDdG4Uqj0LKtuXELWTzm8nEUuO6gIghna+I8nDlPB4c/rsRYIYEv5wIioWyWpgw2kgx529zFRm1XqlMhQnhHzbXAOI4QS0Ynr6snJNIGdlbLmB4almM82wtIqGhVm1OpM7Biu5IcMZxUTRYR5phwsQ1dxdMF0z+RsEZDE8+81dAMZNtfntbHxsyEjD0t5OZ7TUTslcT1dx7jnWPgi+xmfgzH4FYdnEfgdIlymAj3aBsoJg2hIH6254jSwh/Vm6Ucgph7FlOTSRbPgRsW4+UwIQezWGAOijtm1UyRGufGpT1u58dP7vFpWzV6KK/wSticqjTsQIqFbYpaIfoWzR01cuWxmC10y8yOCStXkFTH+L5nQ/5uUTiwO6o0X2kMdYM8iyODUSpl3qly+bL8C+WpUaTDibB8aOqJjcoJslwsrO6LokK5zknsRVQXalzohOt0wVLjfBYzv70hWKKFdZXi4aZqPmXrWsn+pkKZB9fV1k43lRNCWdcxm5uipVFcVykeFlSLqGjvgOwQrxflOCEDaULPlRBNbBusfTdATfFmlBxgrbq913agrnJqjeZBeUhzHBgy2hjYnagsQrIs3ThXyZvAmavW6Wlyo5eVKpHo4i3i1zLWT4WYWd/CNUkJ/u8kVY5Cmnn1gGybh1xry4BUT0KuVjkgGyOR65QGJEV5dTu2gv4dDfGiNkxdZNYSN+/EPYzwDjdIVrHnUaXqz8W2b12X0f2iBI4Z1ZMrrpleFYDx8y3fWp40gmKBnv4DF9PyqQ==</source>
+    <source>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</source>
   </file>
   <file path="objects\ClipitSite.php" generated-path="objects.ClipitSite.html" hash="7ee3331b6388fe56af99e2619bbe850f" package="Default">
     <docblock line="0">
@@ -3178,7 +3276,7 @@
     </parse_markers>
     <source>eJztVO1O20oQ/Y/EO4yiSA0o2LTcq0qhUFJKIFcpsRJThFQJbeyxs63jdXfXCW7Vh7nPcl/sztrOBy1OIvq3q0ixPWfOfJ2dN2+TcQIxm6BKmIfgRTzh+pNmDyIWk+yT9o53d4COvb9fPMA+nBOoq+EA/kkfNOshkzHc4giGhmKBcq4cmKJUXMSt/NPpCfxtvVqySGSajOAzjQbx6vDl0cHLQ/otMD2mNKTJHAFQf0+P9bl9gTtjqR4LCYvjsFEkoBfx+L9/FbRlzPg3eJPgSL3+6yycMB5ZnpicNldLcKT4jJ5ekpbZL0jrH4sP9SWEAnyBlTPWOmnZ9mfDGhlWS8hwFe5hrHABv7y+gXYQoBRwiTFKFoGTjggFvRI5PVp4/3IaZbTZbGaFcWpC2WUEZbMwiQ6OrENLP+i9ag53zBUkUoSSTYAeA4kISgR6xiT1PBMpeCwGiT5XWvJRqhG4Bhb7NvV7InweZNXshExjHyXoMYJGOVEggvxlc+VMVfMmBqrG6MMoy+k6Ju1hmTZ0BEXNxdWcSxCOrO2bsKzVBx7nAcYioQrGTJuaZjyKYISQKgzSqFlNTBRw23Wv+jcutK/v4LY9GLSv3btjoiDBkhWnWATgkyTiFI8KkCzWGTWqmvfDxeD8ioja77q9rnsHNIpO172+GA6h0x9AG5z2wO2e3/TaA3BuBk5/eGHBEE0FWM26eSZBPnPqsI+a7pBa09M7Uo6iEiMfxmyKpCAP+ZQKZOCJJNtaB9URWCTiMG8kMS0HaEE3gFjoJihc473t3VmUaO/u7O4Ua9CsQKZUvgi5dstl6Z4bU24+o034hYVP7VNjJyrvSYLvJoaJZttlCCoqQak5lrchKZpT5z6ckDb18ePPZpOTwcg3Dn+yzZMg++O4Fbh7NbqnW6YJbzSZNR57Dd/tHc/TVZpumwdBGnv5Sg9RO0XiWYNSbULd1LH3vewlHYk6pZ1bc/sH7/u1MoMfVXzqST76m7Ioxefz4kMiFHbKV9VYZSps93Nso1bM0pq3x9KetVJnrQm1n8fZaj0CLLl/kXLe32p7fmrcr8HJ6Xbg3EFnCeYuNVIKhijX5bB0k/g15bTxc1ctqcGb3GpmHM9OrlDrc3Nbl1whg5aPypM8MWNcF+XF5YX7Yo3dhFtjDlikcHknzNlGQyvaVpvkpP7IaXNyvyenjbnlK+eP1kutm5d8vf74H/IbFN0=</source>
   </file>
-  <file path="objects\ClipitUser.php" generated-path="objects.ClipitUser.html" hash="c9baa42290df41934f8e1d308d50a243" package="clipit\user">
+  <file path="objects\ClipitUser.php" generated-path="objects.ClipitUser.html" hash="5ed496041cb538b91ecdfb21316d6f1f" package="clipit\user">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
@@ -3193,112 +3291,132 @@
         <long-description></long-description>
         <tag name="package" line="41" description="clipit\user"/>
       </docblock>
-      <property static="false" visibility="public" line="45" namespace="clipit\user" package="clipit\user">
-        <name>$id</name>
-        <default>-1</default>
+      <constant namespace="clipit\user" line="45" package="clipit\user">
+        <name>TYPE</name>
+        <full_name>\clipit\user\ClipitUser::TYPE</full_name>
+        <value>"user"</value>
         <docblock line="45">
           <description></description>
           <long-description></long-description>
-          <tag name="var" line="45" description="&lt;p&gt;Unique Id of saved ClipitUser (-1 = unsaved)&lt;/p&gt;&#10;" type="int" variable="">
+          <tag name="const" line="45" description="string Elgg entity type for this class"/>
+        </docblock>
+      </constant>
+      <constant namespace="clipit\user" line="49" package="clipit\user">
+        <name>DEFAULT_ROLE</name>
+        <full_name>\clipit\user\ClipitUser::DEFAULT_ROLE</full_name>
+        <value>"user"</value>
+        <docblock line="49">
+          <description></description>
+          <long-description></long-description>
+          <tag name="const" line="49" description="string Default ClipitUser Role if not specified"/>
+        </docblock>
+      </constant>
+      <property static="false" visibility="public" line="53" namespace="clipit\user" package="clipit\user">
+        <name>$id</name>
+        <default>-1</default>
+        <docblock line="53">
+          <description></description>
+          <long-description></long-description>
+          <tag name="var" line="53" description="&lt;p&gt;Unique Id of saved ClipitUser (-1 = unsaved)&lt;/p&gt;&#10;" type="int" variable="">
             <type>int</type>
           </tag>
         </docblock>
       </property>
-      <property static="false" visibility="public" line="49" namespace="clipit\user" package="clipit\user">
+      <property static="false" visibility="public" line="57" namespace="clipit\user" package="clipit\user">
         <name>$login</name>
-        <default>""</default>
-        <docblock line="49">
-          <description></description>
-          <long-description></long-description>
-          <tag name="var" line="49" description="&lt;p&gt;Login name used to authenticate&lt;/p&gt;" type="string" variable="">
-            <type>string</type>
-          </tag>
-        </docblock>
-      </property>
-      <property static="false" visibility="public" line="53" namespace="clipit\user" package="clipit\user">
-        <name>$password</name>
-        <default>""</default>
-        <docblock line="53">
-          <description></description>
-          <long-description></long-description>
-          <tag name="var" line="53" description="&lt;p&gt;Login password (md5 of password + password_hash)&lt;/p&gt;&#10;" type="string" variable="">
-            <type>string</type>
-          </tag>
-        </docblock>
-      </property>
-      <property static="false" visibility="private" line="57" namespace="clipit\user" package="clipit\user">
-        <name>$password_hash</name>
         <default>""</default>
         <docblock line="57">
           <description></description>
           <long-description></long-description>
-          <tag name="var" line="57" description="&lt;p&gt;Random string to encode password&lt;/p&gt;" type="string" variable="">
+          <tag name="var" line="57" description="&lt;p&gt;Login name used to authenticate&lt;/p&gt;" type="string" variable="">
             <type>string</type>
           </tag>
         </docblock>
       </property>
       <property static="false" visibility="public" line="61" namespace="clipit\user" package="clipit\user">
-        <name>$description</name>
+        <name>$password</name>
         <default>""</default>
         <docblock line="61">
           <description></description>
           <long-description></long-description>
-          <tag name="var" line="61" description="&lt;p&gt;Free text for user description (optional)&lt;/p&gt;&#10;" type="string" variable="">
+          <tag name="var" line="61" description="&lt;p&gt;Login password (md5 of password + password_hash)&lt;/p&gt;&#10;" type="string" variable="">
             <type>string</type>
           </tag>
         </docblock>
       </property>
-      <property static="false" visibility="public" line="65" namespace="clipit\user" package="clipit\user">
-        <name>$email</name>
+      <property static="false" visibility="private" line="65" namespace="clipit\user" package="clipit\user">
+        <name>$password_hash</name>
         <default>""</default>
         <docblock line="65">
           <description></description>
           <long-description></long-description>
-          <tag name="var" line="65" description="&lt;p&gt;User email&lt;/p&gt;" type="string" variable="">
+          <tag name="var" line="65" description="&lt;p&gt;Random string to encode password&lt;/p&gt;" type="string" variable="">
             <type>string</type>
           </tag>
         </docblock>
       </property>
       <property static="false" visibility="public" line="69" namespace="clipit\user" package="clipit\user">
-        <name>$name</name>
+        <name>$description</name>
         <default>""</default>
         <docblock line="69">
           <description></description>
           <long-description></long-description>
-          <tag name="var" line="69" description="&lt;p&gt;Full user name&lt;/p&gt;" type="string" variable="">
+          <tag name="var" line="69" description="&lt;p&gt;Free text for user description (optional)&lt;/p&gt;&#10;" type="string" variable="">
             <type>string</type>
           </tag>
         </docblock>
       </property>
       <property static="false" visibility="public" line="73" namespace="clipit\user" package="clipit\user">
-        <name>$role</name>
-        <default>"user"</default>
+        <name>$email</name>
+        <default>""</default>
         <docblock line="73">
           <description></description>
           <long-description></long-description>
-          <tag name="var" line="73" description="&lt;p&gt;User role: student, teacher, admin&lt;/p&gt;" type="string" variable="">
+          <tag name="var" line="73" description="&lt;p&gt;User email&lt;/p&gt;" type="string" variable="">
             <type>string</type>
           </tag>
         </docblock>
       </property>
       <property static="false" visibility="public" line="77" namespace="clipit\user" package="clipit\user">
-        <name>$time_created</name>
-        <default>-1</default>
+        <name>$name</name>
+        <default>""</default>
         <docblock line="77">
           <description></description>
           <long-description></long-description>
-          <tag name="var" line="77" description="&lt;p&gt;Timestamp when the user was first saved&lt;/p&gt;" type="int" variable="">
+          <tag name="var" line="77" description="&lt;p&gt;Full user name&lt;/p&gt;" type="string" variable="">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </property>
+      <property static="false" visibility="public" line="81" namespace="clipit\user" package="clipit\user">
+        <name>$role</name>
+        <default>\clipit\user\ClipitUser::DEFAULT_ROLE</default>
+        <docblock line="81">
+          <description></description>
+          <long-description></long-description>
+          <tag name="var" line="81" description="&lt;p&gt;User role (default: &quot;user&quot;)&lt;/p&gt;&#10;" type="string" variable="">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </property>
+      <property static="false" visibility="public" line="85" namespace="clipit\user" package="clipit\user">
+        <name>$time_created</name>
+        <default>-1</default>
+        <docblock line="85">
+          <description></description>
+          <long-description></long-description>
+          <tag name="var" line="85" description="&lt;p&gt;Timestamp when the user was first saved&lt;/p&gt;" type="int" variable="">
             <type>int</type>
           </tag>
         </docblock>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="clipit\user" line="84" package="clipit\user">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="clipit\user" line="92" package="clipit\user">
         <name>__construct</name>
         <full_name>\clipit\user\ClipitUser::__construct()</full_name>
-        <docblock line="84">
+        <docblock line="92">
           <description>ClipitUser constructor</description>
           <long-description></long-description>
-          <tag name="param" line="84" description="&lt;p&gt;If $id is null, create new instance; else load instance with id = $id.&lt;/p&gt;&#10;" type="int|null" variable="$id">
+          <tag name="param" line="92" description="&lt;p&gt;If $id is null, create new instance; else load instance with id = $id.&lt;/p&gt;&#10;" type="int|null" variable="$id">
             <type>int</type>
             <type>null</type>
           </tag>
@@ -3309,16 +3427,16 @@
           <type>int|null</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="clipit\user" line="96" package="clipit\user">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="clipit\user" line="104" package="clipit\user">
         <name>load</name>
         <full_name>\clipit\user\ClipitUser::load()</full_name>
-        <docblock line="96">
+        <docblock line="104">
           <description>Loads a ClipitUser instance from the system.</description>
           <long-description></long-description>
-          <tag name="param" line="96" description="&lt;p&gt;Id of the ClipitUser to load from the system.&lt;/p&gt;" type="int" variable="$id">
+          <tag name="param" line="104" description="&lt;p&gt;Id of the ClipitUser to load from the system.&lt;/p&gt;" type="int" variable="$id">
             <type>int</type>
           </tag>
-          <tag name="return" line="96" description="Returns ClipitUser instance, or false if error." type="$this|bool">
+          <tag name="return" line="104" description="Returns ClipitUser instance, or false if error." type="$this|bool">
             <type>\clipit\user\ClipitUser</type>
             <type>bool</type>
           </tag>
@@ -3330,39 +3448,39 @@
           <type>int</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="clipit\user" line="118" package="clipit\user">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="clipit\user" line="125" package="clipit\user">
         <name>save</name>
         <full_name>\clipit\user\ClipitUser::save()</full_name>
-        <docblock line="118">
+        <docblock line="125">
           <description>Saves this instance to the system.</description>
           <long-description></long-description>
-          <tag name="return" line="118" description="Returns id of saved instance, or false if error." type="bool|int">
+          <tag name="return" line="125" description="Returns id of saved instance, or false if error." type="bool|int">
             <type>bool</type>
             <type>int</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="clipit\user" line="143" package="clipit\user">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="clipit\user" line="151" package="clipit\user">
         <name>delete</name>
         <full_name>\clipit\user\ClipitUser::delete()</full_name>
-        <docblock line="143">
+        <docblock line="151">
           <description>Deletes a user from the system.</description>
           <long-description></long-description>
-          <tag name="return" line="143" description="True if success, false if error." type="bool">
+          <tag name="return" line="151" description="True if success, false if error." type="bool">
             <type>bool</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="clipit\user" line="157" package="clipit\user">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="clipit\user" line="165" package="clipit\user">
         <name>setPassword</name>
         <full_name>\clipit\user\ClipitUser::setPassword()</full_name>
-        <docblock line="157">
+        <docblock line="165">
           <description>Creates an encoded user password using a random hash for encoding.</description>
           <long-description></long-description>
-          <tag name="param" line="157" description="&lt;p&gt;The new user password in clear text.&lt;/p&gt;" type="string" variable="$password">
+          <tag name="param" line="165" description="&lt;p&gt;The new user password in clear text.&lt;/p&gt;" type="string" variable="$password">
             <type>string</type>
           </tag>
-          <tag name="return" line="157" description="'true' if success, 'false' if error." type="bool">
+          <tag name="return" line="165" description="'true' if success, 'false' if error." type="bool">
             <type>bool</type>
           </tag>
         </docblock>
@@ -3376,7 +3494,7 @@
     <parse_markers>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
     </parse_markers>
-    <source>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</source>
+    <source>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</source>
   </file>
   <file path="objects\ClipitVideo.php" generated-path="objects.ClipitVideo.html" hash="54614504b5ae396f0a6a4ef9a46616f6" package="Default">
     <docblock line="0">
@@ -3518,7 +3636,7 @@
     </parse_markers>
     <source>eJztVf9u2kgQ/j9S3mGEkEoiYtLmTieRJhcuDQknGhA4jSKdhBZ7bLa1d93dNYRWfZh7lnuxm107QOkBUe7frpCwd7755sd+O377ezbJQLAUdcYChCDhGTd/TXmI8nR/D2g1Dg+LBziESzJ3DBzBn/mjYV1kSsA9jmFonReo/k0fpqg0l6Lpts7P4FfvzZJFITNkhJAZtIg3x69Pjl4f02+B6TJtIM+eEADVd/RYfbIvcBcsNxOpYLH6bJxI6CZc/PO3hpYSjH+BtxmO9W+/XMQp44kXyPS8vlpCX8mPGJglaZn9grT6odioLiEU4BOsrIkxWbPR+GhZE8vqSRWvwgMUGhfw69s7aEURKgnXKFCxBPr5mFDQLZHTk4X3D6tWRpvNZl4schuqUUbQDRZnydGJd+yZR3OwmcOfcA2ZkrFiKdBjpBBBy8jMmKKez2UOAROgMOTaKD7ODQI3wETYoH6nMuTRfDM7IXMRogIzQTCoUg0yci+7K2d6M29moXqCIYznjq5t0x6WaUNbUlQnrvqTBOHEe34TlrWGwIULMJEZVTBhxtY040kCY4RcY5Qn9c3ERAH3Hf+md+dD6/YB7luDQevWfzglChIsWXGKRQCeZgmneFSAYsLMqVGbed9fDS5viKj1R6fb8R+AjqLd8W+vhkNo9wbQgn5r4Hcu77qtAfTvBv3e8MqDIdoKcDPr7jOJ3JlTh0M0dIf0lp4+kHI0lZiEMGFTJAUFyKdUIINAZvNn62BzBJZIEbtGEtPyAD3oRCCkqYPGLd7PvTuLEhv7e/t7xRi0I5Bp7QYhNx/smLS7znJBQ/ATi78fotZC/sG611fLadkbjZKSishQGY6l+rOiGVWaVikKM7LqmMMZuP9aQXVZ2A5O112EoW0CF7A2T3AdUs7gkZ2wBLTT1efpOixEHSieuWl9BvZuiHgNwkOycGHWtu03ZZOLYY9SyHQ+Miwe0XU2a2X5pd1nsS2tcNaGEg4gykXg0onR9IuWzWuURB2qtoMHX8tTo6XQ5DTdK37v6F2vUubwbROf/k8++puyJMeX8+JjJjW2y1ddW2UqbKMnbK1SSMdz0vFWKqzUobKinmbzO9uS8Ieb4rq62e5WhYcVODt/Htg5mHmGzqVCB48xqm05LN0Ufs45fVCcq1HU1V1uFXsGL06uEN9Lc9uWXHH2zZXrsS3Kq+sr/9UWuw23xRyxROPyIti1XTgrUtZbNKR/amh3cv9PQztzc8Plp8BLgdsXN0i//QtmGypF</source>
   </file>
-  <file path="start.php" generated-path="start.html" hash="0a4fe9e7db44b7e2ed7955735cc34827" package="Default">
+  <file path="start.php" generated-path="start.html" hash="8b99ea52f34782b6e7b8b0c8914592f9" package="Default">
     <docblock line="0">
       <description>JuxtaLearn ClipIt Web Space
 PHP version:     &gt;= 5.2
@@ -3568,17 +3686,17 @@ Last update:     $Date$</description>
         <long-description></long-description>
       </docblock>
     </function>
-    <function namespace="" line="89" package="Default">
+    <function namespace="" line="91" package="Default">
       <name>clipit_core_tests</name>
       <full_name>\clipit_core_tests()</full_name>
-      <docblock line="89">
+      <docblock line="91">
         <description>Method which runs and collects results for PHP Unit tests.</description>
         <long-description></long-description>
-        <tag name="param" line="89" description="" type="" variable="$hook"/>
-        <tag name="param" line="89" description="" type="" variable="$type"/>
-        <tag name="param" line="89" description="" type="" variable="$value"/>
-        <tag name="param" line="89" description="" type="" variable="$params"/>
-        <tag name="return" line="89" description="" type="array">
+        <tag name="param" line="91" description="" type="" variable="$hook"/>
+        <tag name="param" line="91" description="" type="" variable="$type"/>
+        <tag name="param" line="91" description="" type="" variable="$value"/>
+        <tag name="param" line="91" description="" type="" variable="$params"/>
+        <tag name="return" line="91" description="" type="array">
           <type>array</type>
         </tag>
       </docblock>
@@ -3603,7 +3721,7 @@ Last update:     $Date$</description>
         <type>mixed</type>
       </argument>
     </function>
-    <source>eJy1Vv9u2zYQ/j9A3uFmGKgcuHLabBjQtF28zGk8uIlhOwuCZRBo6SSxpUWNpOw4Qx5mz7IX25GS/CPNmqDBCAOi74533313POntT3ma7+509vZ2d2APfi1uDBsgUxkcC573DVziFMY5C9Hph6dDmKPSXGZvwK737+AH/7XTHStkhhQQMYNW+3r/1cHLV/v0c/oB0waKvNYCNH+hbdPqnP6IFSaVClZryKZCwkDw7J+/NXRVxvgtvM1xqn/8/iiZMS78UM7el4crVKvDzd9KQbNUk5PPsLFSY/I3nc4nm6+w+fpSJbVpiJnGlemHswvoxjEqCR8wQ8UEDIspWcGgspwfuJNfLK+Kslgs/CQrbIhO5V13WJKLlwf+vm9uTMudn6RcQ65kotgMaBsrRNAyNgumiLKlLCBkGSiMuDaKTwuDwA2wLOoQbTMZ8XjpHJGwyCJUYFIEg2qmQcbuz+O5MO1c5FaqU4xgunQnTyyYcQUGTiQFcNVu1/0AB/6DWazBRsAz5yuVOeFKmbFIF1wImCIUGuNCtJ0PsobL/uT0/GIC3bMruOyORt2zydUhWVOPkBbnWPris1xwck2wFMvMkjJ1Lj72RsendKb7c3/Qn1wBMXTSn5z1xmM4OR9BF4bd0aR/fDHojmB4MRqej3s+jNHiKlv9capixzqxEaGhZtRl/ldUJk0YRQQpmyOVK0Q+J4QMQpkvn1wJ54wJmSUuaTq05tWHfgyZNG3QWBo+tdMcxs7uzvrKjzChClXNwjOqyAyJ46gyRJEkgapsAku7CVJqOYHKe2HNX7ThhV6SdmZ3IU0NboKQaAmctnW4GaxPIs4Evy0nRRkJFikPUxCSRdSo008YGt0GwaeKKY60xZtcUiIO4ag3pp4Y9tu276EGRjqk6RIKpsmwTjIustDFuY/Ka/1FJrRszPMyomeR1rJBHXwlLTGMKEo352vpFju5KBKeBamUn9ccFRQvsOj+myir1Y6pu02yBo6Q0nArtXJOmVTJhSZKNY0w4Qjt3YSY2819ArbyrHJvEtVBzAUR+65MJEHjBAFdfeOtRGVaOsiZSb2W39iA3qnK1WlQPegCLr3WF5uGT6+YRqumjG4NsjD1NsIz7cDUwFbECpl4DcsCp0tgLXzfb9R+7OKx9x3PQlFEGMgsROe0tenHJTrTCaXYOHaXkq6No8M5bBxumzpOIcPFw7R61tUmgLtye/e1yq0a+Rm12+jHunrk9tnVW0H7lvqtAdj62d0jBbQmj1fQOXpqCa3x/1TD3gND535p7g2FCvR1SfE1vdHUdWkS1EfWA6W2+rPgtw9bbcH5uDkqVZFpN/9CKYS9fzQIdSHoad9J9iPtwg5yN1c2ui5n9p3ctPNpS2CWOW4J5kwU2xL3KD8NjhSagj4QXXd8bdK68J4L1y6DtCvX7drhqput7bPb2QX8llbeiP5QL5egf/+DoDnd4apj7KOiozQqy/Yveyh9Kg==</source>
+    <source>eJy1Vv9u2zYQ/j9A3uFmGIgcuHLabBjQtF281Gk8uIlhOwuCZRBoiZLY0qJKUnacIQ+zZ9mL7UhKtpx6TdBgQgAzd8e77777Ib35JU/z3Z3O/v7uDuzDb8WtJgNKZAYnnOV9DVd0CuOchNTqh2dDmFOpmMheg3nevYWf/FdWdyIp0aiAiGhqtK8OXh6+eHmAf1Y/IEpDkVdagOZ7PDaNzuqPSaFTIWH1DMmUCxhwlv3zt4KuzAi7gzc5naqffzxOZoRxPxSzd+5yiWp1ufm7EzSdGp18htqTap2/7nQ+mXy5ydcXMqlMQ5opujL9cH4J3TimUsAHmlFJOAyLKVrBoLScH9qbXz1eGWWxWPhJVpgQndK76pAk5y8O/QNf3+qWvT9JmYJcikSSGeAxlpSCErFeEImULUUBIclA0ogpLdm00BSYBpJFHaRtJiIWL60jFBZZRCXolIKmcqZAxPafx3MhyrrIjVSlNILp0t48NWDGJRg4FRjAVrtd9QMc+luzWIONgGXWVypyxJUSbZAuGOcwpVAoGhe8bX2gNVz1J2cXlxPonl/DVXc06p5Pro/QGnsEtXROnS82yzlD1whLkkwvMVPr4mNvdHKGd7q/9gf9yTUgQ6f9yXlvPIbTixF0YdgdTfonl4PuCIaXo+HFuOfDmBpcrtUfpyq2rCMbEdXYjMrlf41lUoiRR5CSOcVyhZTNESGBUOTLJ1fCOiNcZIlNGi+tefWhH0MmdBsUdYZP7TSLsbO7sx75EU2wQmWzsAwrMqPIcVQaUp4kgSxtAkO7DlJsOU6lt2fM99qwp5aonZlTiFuD6SBEWgKrbR3Vg/VRxAhnd25TuEiwSFmYAhckwkadfqKhVm3gbCqJZBSP9DYXmIhFOOqNsSeG/bbpe6iAoY7idgk5UWhYJRkXWWjjPETltf5CE3xMzAsX0TNIK9mgCr6SOgwjjNLN2Vq6wU7Oi4RlQSrE5zVHBcYLDLr/JspolWXqvk7WwBLiDDdSc3tKp1IsFFKqcIVxS2jvNqS5OTwkYCPPMvcmUh3EjCOxb10iCdVWEODoa28lcmmpICc69Vp+owa9U5ar08B64AAuvdZXh4aPr5hGq6IMp4aSMPVq4YmyYCpgK2K5SLyGYYHhEBgL3/cblR/zsNj7gWUhLyIaiCyk1mmr7scmOlMJptg4sUOJY2PpsA4bR5umllPI6GI7rZ5xVQdw747336rcqpGfUbtaP1bVQ7fPrt4K2vfUbw3A1M+cHimgMXm8gtbRU0tojP+nGva2LJ2HpXmwFErQN47iG3yjyRtnElRX1gulsvpSsLsnWn0pMBKqn2guqSq43m68kerH+hqWRabsbg0F52a2wflR9n1nPgAvzUvC7qxaR+fEvO+bZvdtCPQypxuCOeHFpsT+uM+OY0l1gR+ftvO+tcVteM+Ga7sg7dJ1u3K4mhRj++xRsQG/Z0xq0bfNiQP9x58IzeqOVt1ofko6nJEr279gtp6b</source>
   </file>
   <package name="Default" full_name="Default"/>
   <package name="clipit" full_name="clipit">

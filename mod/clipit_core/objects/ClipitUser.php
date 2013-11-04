@@ -102,8 +102,7 @@ class ClipitUser{
      * @return $this|bool Returns ClipitUser instance, or false if error.
      */
     function load($id){
-        $elgg_user = get_entity($id);
-        if(!$elgg_user || $elgg_user->type != ClipitUser::TYPE){
+        if(!$elgg_user = new ElggUser((int) $id)){
             return null;
         }
         $this->description = $elgg_user->description;
@@ -138,6 +137,9 @@ class ClipitUser{
         $elgg_user->password = $this->password;
         $elgg_user->salt = $this->password_hash;
         $elgg_user->role = $this->role;
+        if(!$this->id = $elgg_user->save()){
+            return false;
+        }
         return true;
     }
 

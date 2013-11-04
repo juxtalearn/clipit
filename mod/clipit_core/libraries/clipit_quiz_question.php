@@ -28,12 +28,6 @@ namespace clipit\quiz\question;
      */
 
 /**
- * Alias so classes outside of this namespace can be used without path.
- * @use \clipit\quiz\ClipitQuiz
- */
-use \clipit\quiz\ClipitQuiz;
-
-/**
  * Expose libraty functions to REST API.
  */
 function expose_functions(){
@@ -76,7 +70,7 @@ function expose_functions(){
              "option_array" => array(
                  "type" => "array",
                  "required" => true),
-             "type" => array(
+             "option_type" => array(
                  "type" => "string",
                  "required" => true),
              "taxonomy_tag_array" => array(
@@ -114,11 +108,22 @@ function expose_functions(){
                  "required" => false)),
         "description", 'GET', false, true);
     expose_function(
-        "clipit.quiz.question.get_from_quiz",
-        __NAMESPACE__."\\get_from_quiz",
+        "clipit.quiz.question.get_results",
+        __NAMESPACE__."\\get_results",
         array(
-             "quiz_id" => array(
+             "id" => array(
                  "type" => "int",
+                 "required" => true),
+             "limit" => array(
+                 "type" => "int",
+                 "required" => false)),
+        "description", 'GET', false, true);
+    expose_function(
+        "clipit.quiz.question.get_by_id",
+        __NAMESPACE__."\\get_by_id",
+        array(
+             "id_array" => array(
+                 "type" => "array",
                  "required" => true)),
         "description", 'GET', false, true);
 }
@@ -183,21 +188,21 @@ function set_properties($id, $prop_array, $value_array){
  * Create a new ClipitQuizQuestion instance, and save it into the system.
  *
  * @param string $question Question in text form to be presented to the user taking the quiz
- * @param array $option_array Array of options presented to the user to choose from
- * @param string $type Type of answer to be given (select 1 only, select 2, select any...)
+ * @param array $option_array Array of Options presented to the user to choose from
+ * @param string $option_type Type of Options (select 1 only, select 2, select any...)
  * @param array $taxonomy_tag_array Array of tags linking the question to the taxonomy (optional)
  * @param int $video Id of video to which the question relates to (optional)
  * @return bool|int Returns the new Quiz Question Id, or false if error
  */
 function create($question,
                 $option_array,
-                $type,
+                $option_type,
                 $taxonomy_tag_array = array(),
                 $video = -1){
     $quiz_question = new ClipitQuizQuestion();
     $quiz_question->question = $question;
     $quiz_question->option_array = $option_array;
-    $quiz_question->type = $type;
+    $quiz_question->option_type = $option_type;
     $quiz_question->taxonomy_tag_array = $taxonomy_tag_array;
     $quiz_question->video = $video;
     return $quiz_question->save();
@@ -230,9 +235,9 @@ function add_taxonomy_tags($id, $taxonomy_tag_array){
     if(!$quiz_question->taxonomy_tag_array){
         $quiz_question->taxonomy_tag_array = $taxonomy_tag_array;
     } else{
-        array_merge($quiz_question->taxonomy_tag_array, $taxonomy_tag_array);
+        $quiz_question->taxonomy_tag_array = array_merge($quiz_question->taxonomy_tag_array, $taxonomy_tag_array);
     }
-    if(!$quiz->save()){
+    if(!$quiz_question->save()){
         return false;
     }
     return true;
@@ -261,22 +266,30 @@ function get_all($limit = 0){
 }
 
 /**
- * Get all Quiz Questions from a specified Quiz.
+ * Get all Quiz Results from a specified Quiz Question.
  *
- * @param int $quiz_id Id of quiz to get Questions form
- * @return array|bool Array of Quiz Questions, or false if error
+ * @param int $id Id of Quiz Question to get Results form
+ * @param int $limit Number of results to show, default = 0 [no limit] (optional)
+ * @return array|bool Array of Quiz Results, or false if error
  */
-function get_from_quiz($quiz_id){
-    if(!$quiz = new ClipitQuiz($quiz_id)){
-        return false;
-    }
+function get_results($id, $limit = 0){
+    return $quiz_result_array = \clipit\quiz\result\get_from_question($id, $limit);
+}
+
+/**
+ * Get all Quizz Questions with Id contained in a given list.
+ *
+ * @param array $id_array Array of Quiz Question Ids
+ * @return array Returns an array of ClipitQuizQuestion objects
+ */
+function get_by_id($id_array){
     $quiz_question_array = array();
     $i = 0;
-    foreach($quiz->question_array as $quiz_question_id){
-        if(!$quiz_question = new ClipitQuizQuestion($quiz_question_id)){
-            $quiz_question_array[$i] = null;
+    foreach($id_array as $id){
+        if(elgg_entity_exists((int) $id)){
+            $quiz_question_array[$i] = new ClipitQuizQuestion((int) $id);
         } else{
-            $quiz_question_array[$i] = $quiz_question;
+            $quiz_question_array[$i] = null;
         }
         $i++;
     }

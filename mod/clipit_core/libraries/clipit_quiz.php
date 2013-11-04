@@ -92,6 +92,17 @@ function expose_functions(){
                  "required" => true)),
         "description", 'GET', false, true);
     expose_function(
+        "clipit.quiz.add_questions",
+        __NAMESPACE__."\\add_questions",
+        array(
+             "id" => array(
+                 "type" => "int",
+                 "required" => true),
+             "question_array" => array(
+                 "type" => "array",
+                 "required" => true)),
+        "description", 'GET', false, true);
+    expose_function(
         "clipit.quiz.get_all",
         __NAMESPACE__."\\get_all",
         null, "description", 'GET', false, true);
@@ -104,14 +115,11 @@ function expose_functions(){
                  "required" => true)),
         "description", 'GET', false, true);
     expose_function(
-        "clipit.quiz.add_questions",
-        __NAMESPACE__."\\add_questions",
+        "clipit.quiz.get_questions",
+        __NAMESPACE__."\\get_questions",
         array(
              "id" => array(
                  "type" => "int",
-                 "required" => true),
-             "question_array" => array(
-                 "type" => "array",
                  "required" => true)),
         "description", 'GET', false, true);
 }
@@ -233,7 +241,7 @@ function add_questions($id, $question_array){
     if(!$quiz->question_array){
         $quiz->question_array = $question_array;
     } else{
-        array_merge($quiz->question_array, $question_array);
+        $quiz->question_array = array_merge($quiz->question_array, $question_array);
     }
     if(!$quiz->save()){
         return false;
@@ -274,7 +282,7 @@ function get_by_id($id_array){
     $quiz_array = array();
     $i = 0;
     foreach($id_array as $id){
-        if(elgg_entity_exists($id)){
+        if(elgg_entity_exists((int) $id)){
             $quiz_array[$i] = new ClipitQuiz((int) $id);
         } else{
             $quiz_array[$i] = null;
@@ -284,13 +292,24 @@ function get_by_id($id_array){
     return $quiz_array;
 }
 
-function get_quiz_questions($id){
-    if(!$quiz = new Clipitquiz($id)){
+/**
+ * Get an array of Quiz Questions included in a Quiz
+ *
+ * @param int $id The Id of the Quiz to get questions from
+ * @return array|bool Returns an array of ClipitQuizQuestion objects, or false if error
+ */
+function get_questions($id){
+    if(!$quiz = new Clipitquiz((int) $id)){
         return false;
     }
     $quiz_question_array = array();
-    foreach($quiz->question_array as $question_id){
-        array_push($quiz_question_array, new question\ClipitQuizQuestion($question_id));
+    foreach($quiz->question_array as $quiz_question_id){
+        if(!elgg_entity_exists($quiz_question_id) ||
+           !($quiz_question = new question\ClipitQuizQuestion($quiz_question_id))){
+            array_push($quiz_question_array, null);
+            continue;
+        }
+        array_push($quiz_question_array, $quiz_question);
     }
     return $quiz_question_array;
 }

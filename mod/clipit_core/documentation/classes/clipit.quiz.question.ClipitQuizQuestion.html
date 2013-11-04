@@ -72,15 +72,18 @@
                     <ul>
 <li class="property public "><a href="#property_id" title="$id() :: "><span class="description">Unique id of this ClipitQuizQuestion instance (-1 = unsaved)</span><pre>$id</pre></a></li>
 <li class="property public "><a href="#property_option_array" title="$option_array() :: "><span class="description">Array of options to chose from as an answer to the question</span><pre>$option_array</pre></a></li>
+<li class="property public "><a href="#property_option_type" title="$option_type() :: "><span class="description">Type of Question: single choice, multiple choice, select 2...</span><pre>$option_type</pre></a></li>
 <li class="property public "><a href="#property_question" title="$question() :: "><span class="description">Main text question which will be shown to users taking the quiz</span><pre>$question</pre></a></li>
 <li class="property public "><a href="#property_taxonomy_tag_array" title="$taxonomy_tag_array() :: "><span class="description">Array of Taxonomy Tags relevant to this question</span><pre>$taxonomy_tag_array</pre></a></li>
-<li class="property public "><a href="#property_type" title="$type() :: "><span class="description">Type of question: single choice, multiple choice, select 2...</span><pre>$type</pre></a></li>
 <li class="property public "><a href="#property_video" title="$video() :: "><span class="description">ID of ClipitVideo refered to by this question (optional)</span><pre>$video</pre></a></li>
 </ul>
 </li>
 <li class="nav-header">
 <i class="icon-custom icon-constant"></i> Constants
-                    <ul><li class="constant  "><a href="#constant_SUBTYPE" title="SUBTYPE() :: "><span class="description">SUBTYPE</span><pre>SUBTYPE</pre></a></li></ul>
+                    <ul>
+<li class="constant  "><a href="#constant_SUBTYPE" title="SUBTYPE() :: "><span class="description">SUBTYPE</span><pre>SUBTYPE</pre></a></li>
+<li class="constant  "><a href="#constant_TYPE" title="TYPE() :: "><span class="description">TYPE</span><pre>TYPE</pre></a></li>
+</ul>
 </li>
 </ul>
 </div>
@@ -179,6 +182,12 @@
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
+<a id="property_option_type"> </a><div class="element clickable property public property_option_type" data-toggle="collapse" data-target=".property_option_type .collapse">
+<h2>Type of Question: single choice, multiple choice, select 2...</h2>
+<pre>$option_type : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
 <a id="property_question"> </a><div class="element clickable property public property_question" data-toggle="collapse" data-target=".property_question .collapse">
 <h2>Main text question which will be shown to users taking the quiz</h2>
 <pre>$question : string</pre>
@@ -188,12 +197,6 @@
 <a id="property_taxonomy_tag_array"> </a><div class="element clickable property public property_taxonomy_tag_array" data-toggle="collapse" data-target=".property_taxonomy_tag_array .collapse">
 <h2>Array of Taxonomy Tags relevant to this question</h2>
 <pre>$taxonomy_tag_array : array</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
-<a id="property_type"> </a><div class="element clickable property public property_type" data-toggle="collapse" data-target=".property_type .collapse">
-<h2>Type of question: single choice, multiple choice, select 2...</h2>
-<pre>$type : string</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
@@ -213,7 +216,19 @@
 <div class="long_description"></div>
 <table class="table table-bordered"><tr>
 <th>const</th>
-<td>string Subtype of the ClipitQuizQuestion class for ElggObject</td>
+<td>string Elgg entity subtype for this class</td>
+</tr></table>
+</div></div>
+</div>
+<a id="constant_TYPE"> </a><div class="element clickable constant  constant_TYPE" data-toggle="collapse" data-target=".constant_TYPE .collapse">
+<h2>TYPE</h2>
+<pre>TYPE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>const</th>
+<td>string Elgg entity type for this class</td>
 </tr></table>
 </div></div>
 </div>
@@ -225,7 +240,7 @@
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.1.0
 </a> and<br>
-            generated on 2013-10-29T15:35:46+01:00.<br></footer></div>
+            generated on 2013-11-04T15:05:18+01:00.<br></footer></div>
 </div>
 </body>
 </html>

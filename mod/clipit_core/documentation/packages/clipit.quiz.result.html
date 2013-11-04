@@ -68,7 +68,8 @@
 <li class="function  "><a href="#function_delete" title="delete() :: Delete a Quiz Result from the system."><span class="description">Delete a Quiz Result from the system.</span><pre>delete</pre></a></li>
 <li class="function  "><a href="#function_expose_functions" title="expose_functions() :: Expose libraty functions to REST API."><span class="description">Expose libraty functions to REST API.</span><pre>expose_functions</pre></a></li>
 <li class="function  "><a href="#function_get_all" title="get_all() :: Get all Quiz Results from the system."><span class="description">Get all Quiz Results from the system.</span><pre>get_all</pre></a></li>
-<li class="function  "><a href="#function_get_from_quiz" title="get_from_quiz() :: Get all Quiz Results from a specified Quiz."><span class="description">Get all Quiz Results from a specified Quiz.</span><pre>get_from_quiz</pre></a></li>
+<li class="function  "><a href="#function_get_by_id" title="get_by_id() :: Get all Quizz Results with Id contained in a given list."><span class="description">Get all Quizz Results with Id contained in a given list.</span><pre>get_by_id</pre></a></li>
+<li class="function  "><a href="#function_get_from_question" title="get_from_question() :: Get all Quiz Results from a specified Quiz Question."><span class="description">Get all Quiz Results from a specified Quiz Question.</span><pre>get_from_question</pre></a></li>
 <li class="function  "><a href="#function_get_properties" title="get_properties() :: Get the values for the specified properties of a QuizResult."><span class="description">Get the values for the specified properties of a QuizResult.</span><pre>get_properties</pre></a></li>
 <li class="function  "><a href="#function_list_properties" title="list_properties() :: Lists the properties contained in this class."><span class="description">Lists the properties contained in this class.</span><pre>list_properties</pre></a></li>
 <li class="function  "><a href="#function_set_properties" title="set_properties() :: Set values to specified properties of a QuizResult."><span class="description">Set values to specified properties of a QuizResult.</span><pre>set_properties</pre></a></li>
@@ -145,23 +146,42 @@
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$limit</h4>
-<code>int</code><p>Number of results to show, default= 0 [no limit] (default)</p>
+<code>int</code><p>Number of results to show, default= 0 [no limit] (optional)</p>
 </div>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>array</code>Returns an array of ClipitQuizQuestion objects</div>
 </div></div>
 </div>
-<a id="function_get_from_quiz"></a><div class="element clickable function  function_get_from_quiz" data-toggle="collapse" data-target=".function_get_from_quiz .collapse">
-<h2>Get all Quiz Results from a specified Quiz.</h2>
-<pre>get_from_quiz(int $quiz_id) : array | bool</pre>
+<a id="function_get_by_id"></a><div class="element clickable function  function_get_by_id" data-toggle="collapse" data-target=".function_get_by_id .collapse">
+<h2>Get all Quizz Results with Id contained in a given list.</h2>
+<pre>get_by_id(array $id_array) : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
 <h3>Parameters</h3>
 <div class="subelement argument">
-<h4>$quiz_id</h4>
-<code>int</code><p>Id of quiz to get Results form</p></div>
+<h4>$id_array</h4>
+<code>array</code><p>Array of Quiz Result Ids</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Returns an array of ClipitQuizResult objects</div>
+</div></div>
+</div>
+<a id="function_get_from_question"></a><div class="element clickable function  function_get_from_question" data-toggle="collapse" data-target=".function_get_from_question .collapse">
+<h2>Get all Quiz Results from a specified Quiz Question.</h2>
+<pre>get_from_question(int $quiz_question_id, int $limit) : array | bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$quiz_question_id</h4>
+<code>int</code><p>Id of Quiz Question to get Results form</p></div>
+<div class="subelement argument">
+<h4>$limit</h4>
+<code>int</code><p>Number of results to show, default = 0 [no limit] (optional)</p>
+</div>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>array</code><code>bool</code>Array of Quiz Results, or false if error</div>
@@ -239,7 +259,7 @@ If a property does not exist, the returned array will show null as that properti
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.1.0
 </a> and<br>
-            generated on 2013-10-29T15:35:46+01:00.<br></footer></div>
+            generated on 2013-11-04T15:05:18+01:00.<br></footer></div>
 </div>
 </body>
 </html>

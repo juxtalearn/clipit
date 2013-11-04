@@ -76,12 +76,19 @@
 <li class="property public "><a href="#property_login" title="$login() :: "><span class="description">Login name used to authenticate</span><pre>$login</pre></a></li>
 <li class="property public "><a href="#property_name" title="$name() :: "><span class="description">Full user name</span><pre>$name</pre></a></li>
 <li class="property public "><a href="#property_password" title="$password() :: "><span class="description">Login password (md5 of password + password_hash)</span><pre>$password</pre></a></li>
-<li class="property public "><a href="#property_role" title="$role() :: "><span class="description">User role: student, teacher, admin</span><pre>$role</pre></a></li>
+<li class="property public "><a href="#property_role" title="$role() :: "><span class="description">User role (default: "user")</span><pre>$role</pre></a></li>
 <li class="property public "><a href="#property_time_created" title="$time_created() :: "><span class="description">Timestamp when the user was first saved</span><pre>$time_created</pre></a></li>
 </ul>
 </li>
 <li class="nav-header private">» Private
                     <ul><li class="property private "><a href="#property_password_hash" title="$password_hash() :: "><span class="description">Random string to encode password</span><pre>$password_hash</pre></a></li></ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-constant"></i> Constants
+                    <ul>
+<li class="constant  "><a href="#constant_DEFAULT_ROLE" title="DEFAULT_ROLE() :: "><span class="description">DEFAULT_ROLE</span><pre>DEFAULT_ROLE</pre></a></li>
+<li class="constant  "><a href="#constant_TYPE" title="TYPE() :: "><span class="description">TYPE</span><pre>TYPE</pre></a></li>
+</ul>
 </li>
 </ul>
 </div>
@@ -216,7 +223,7 @@
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="property_role"> </a><div class="element clickable property public property_role" data-toggle="collapse" data-target=".property_role .collapse">
-<h2>User role: student, teacher, admin</h2>
+<h2>User role (default: "user")</h2>
 <pre>$role : string</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
@@ -233,6 +240,32 @@
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
+<h3>
+<i class="icon-custom icon-constant"></i> Constants</h3>
+<a id="constant_DEFAULT_ROLE"> </a><div class="element clickable constant  constant_DEFAULT_ROLE" data-toggle="collapse" data-target=".constant_DEFAULT_ROLE .collapse">
+<h2>DEFAULT_ROLE</h2>
+<pre>DEFAULT_ROLE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>const</th>
+<td>string Default ClipitUser Role if not specified</td>
+</tr></table>
+</div></div>
+</div>
+<a id="constant_TYPE"> </a><div class="element clickable constant  constant_TYPE" data-toggle="collapse" data-target=".constant_TYPE .collapse">
+<h2>TYPE</h2>
+<pre>TYPE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>const</th>
+<td>string Elgg entity type for this class</td>
+</tr></table>
+</div></div>
+</div>
 </div>
 </div>
 </div>
@@ -241,7 +274,7 @@
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.1.0
 </a> and<br>
-            generated on 2013-10-29T15:35:46+01:00.<br></footer></div>
+            generated on 2013-11-04T15:05:18+01:00.<br></footer></div>
 </div>
 </body>
 </html>
