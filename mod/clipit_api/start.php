@@ -43,7 +43,7 @@ function clipit_core_init(){
  * @throws InstallationException
  */
 function loadObjects(){
-    $obj_files = elgg_get_file_list(elgg_get_plugins_path()."clipit_core/objects/", array(), array(), array(".php"));
+    $obj_files = elgg_get_file_list(elgg_get_plugins_path()."clipit_api/objects/", array(), array(), array(".php"));
     foreach($obj_files as $obj){
         elgg_log("Loading $obj...");
         if(!include_once($obj)){
@@ -59,7 +59,7 @@ function loadObjects(){
  * @throws InstallationException
  */
 function loadLibraries(){
-    $lib_files = elgg_get_file_list(elgg_get_plugins_path()."clipit_core/libraries/", array(), array(), array(".php"));
+    $lib_files = elgg_get_file_list(elgg_get_plugins_path()."clipit_api/libraries/", array(), array(), array(".php"));
     foreach($lib_files as $file){
         elgg_log("Loading $file...");
         if(!include_once($file)){
@@ -89,7 +89,7 @@ function exposeRestApi(){
  * @return array
  */
 function clipit_core_tests($hook, $type, $value, $params){
-    $test_files = elgg_get_file_list(elgg_get_plugins_path()."clipit_core/tests/", array(), array(), array(".php"));
+    $test_files = elgg_get_file_list(elgg_get_plugins_path()."clipit_api/tests/", array(), array(), array(".php"));
     foreach($test_files as $file){
         $value[] = $file;
     }
