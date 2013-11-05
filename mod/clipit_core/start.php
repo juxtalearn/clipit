@@ -25,31 +25,31 @@
 /**
  * Register the init method
  */
-elgg_register_event_handler('init', 'system', 'clipit_api_init');
+elgg_register_event_handler('init', 'system', 'clipit_core_init');
 
 /**
  * Initialization method which loads objects, libraries, exposes the REST API, and registers test classes.
  */
-function clipit_api_init(){
-    loadFiles(elgg_get_plugins_path()."clipit_api/objects/");
-    loadFiles(elgg_get_plugins_path()."clipit_api/libraries/");
-    \clipit\expose_api();
-    elgg_register_plugin_hook_handler('unit_test', 'system', 'clipit_api_tests');
+function clipit_core_init(){
+    loadFiles(elgg_get_plugins_path()."clipit_core/objects/");
+    loadFiles(elgg_get_plugins_path()."clipit_core/libraries/");
 }
 
 /**
- * Method which runs and collects results for PHP Unit tests.
+ * Loads PHP files.
  *
- * @param $hook
- * @param $type
- * @param $value
- * @param $params
- * @return array
+ * @throws InstallationException
  */
-function clipit_api_tests($hook, $type, $value, $params){
-    $test_files = elgg_get_file_list(elgg_get_plugins_path()."clipit_api/tests/", array(), array(), array(".php"));
-    foreach($test_files as $file){
-        $value[] = $file;
+function loadFiles($path){
+    if(!$path){
+        return false;
     }
-    return $value;
+    $obj_files = elgg_get_file_list($path, array(), array(), array(".php"));
+    foreach($obj_files as $obj){
+        elgg_log("Loading $obj...");
+        if(!include_once($obj)){
+            $msg = "Could not load $obj";
+            throw new InstallationException($msg);
+        }
+    }
 }
