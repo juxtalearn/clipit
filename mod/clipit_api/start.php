@@ -33,8 +33,8 @@ elgg_register_event_handler('init', 'system', 'clipit_api_init');
 function clipit_api_init(){
     loadFiles(elgg_get_plugins_path()."clipit_api/objects/");
     loadFiles(elgg_get_plugins_path()."clipit_api/libraries/");
-    \clipit\expose_api();
-    elgg_register_plugin_hook_handler('unit_test', 'system', 'clipit_api_tests');
+    \clipit\expose_rest_api();
+    //elgg_register_plugin_hook_handler('unit_test', 'system', 'clipit_api_tests');
 }
 
 /**
@@ -46,10 +46,10 @@ function clipit_api_init(){
  * @param $params
  * @return array
  */
-function clipit_api_tests($hook, $type, $value, $params){
-    $test_files = elgg_get_file_list(elgg_get_plugins_path()."clipit_api/tests/", array(), array(), array(".php"));
-    foreach($test_files as $file){
-        $value[] = $file;
-    }
-    return $value;
-}
+//function clipit_api_tests($hook, $type, $value, $params){
+//    $test_files = elgg_get_file_list(elgg_get_plugins_path()."clipit_api/tests/", array(), array(), array(".php"));
+//    foreach($test_files as $file){
+//        $value[] = $file;
+//    }
+//    return $value;
+//}

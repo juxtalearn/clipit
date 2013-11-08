@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin_manifest xmlns="http://www.elgg.org/plugin_manifest/1.8">
-    <name>clipit_core</name>
+    <name>pebs_core</name>
     <author>Pablo Llinás</author>
     <version>1.0</version>
-    <description>This plugin provides the ClipIt Core functionality.</description>
-    <website>http://www.juxtalearn.org/</website>
-    <copyright>(C) JuxtaLearn Project</copyright>
+    <description>This plugin provides the Pebs Core functionality.</description>
     <license>GNU General Public License version 3</license>
     <requires>
         <type>elgg_release</type>
         <version>1.8</version>
     </requires>
-    <category>ClipIt</category>
     <category>Back-End</category>
     <category>Core</category>
 </plugin_manifest>

@@ -33,6 +33,7 @@ class ClipitActivity{
     public $description;
     public $id;
     public $name;
+    public $group_array;
     public $palette_array;
     public $quiz_array;
     public $sta_array;

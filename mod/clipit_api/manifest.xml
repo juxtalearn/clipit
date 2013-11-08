@@ -13,7 +13,12 @@
     </requires>
     <requires>
         <type>plugin</type>
-        <name>clipit_core</name>
+        <name>pebs_core</name>
+    </requires>
+    <requires>
+        <type>priority</type>
+        <priority>after</priority>
+        <plugin>pebs_core</plugin>
     </requires>
     <category>ClipIt</category>
     <category>Back-End</category>

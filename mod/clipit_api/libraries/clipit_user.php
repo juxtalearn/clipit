@@ -33,7 +33,7 @@ namespace clipit\user;
  * @return array Array of properties with type and default value
  */
 function list_properties(){
-    return get_class_vars(__NAMESPACE__."\\ClipitUser");
+    return ClipitUser::listProperties();
 }
 
 /**
@@ -49,11 +49,7 @@ function get_properties($id, $prop_array){
     if(!$user){
         return false;
     }
-    $value_array = array();
-    for($i = 0; $i < count($prop_array); $i++){
-        $value_array[$i] = $user->$prop_array[$i];
-    }
-    return array_combine($prop_array, $value_array);
+    return $user->getProperties($prop_array);
 }
 
 /**
@@ -66,25 +62,10 @@ function get_properties($id, $prop_array){
  * @throws \InvalidParameterException If count(prop_array) != count(value_array)
  */
 function set_properties($id, $prop_array, $value_array){
-    if(count($prop_array) != count($value_array)){
-        throw(new \InvalidParameterException(
-            "ERROR: The length of prop_array and value_array must match."));
-    }
-    $user = new ClipitUser($id);
-    if(!$user){
+    if(!$user = new ClipitUser($id)){
         return false;
     }
-    for($i = 0; $i < count($prop_array); $i++){
-        if($prop_array[$i] == "password"){
-            $user->setPassword($value_array[$i]);
-        } else{
-            $user->$prop_array[$i] = $value_array[$i];
-        }
-    }
-    if(!$user->save()){
-        return false;
-    }
-    return true;
+    return $user->setProperties($prop_array, $value_array);
 }
 
 /**
@@ -108,14 +89,14 @@ function create($login,
     if(get_user_by_username($login)){
         throw(new \InvalidParameterException("The user login already exists"));
     }
+    $prop_value_array["login"] = $login;
+    $prop_value_array["password"] = $password;
+    $prop_value_array["name"] = $name;
+    $prop_value_array["email"] = $email;
+    $prop_value_array["role"] = $role;
+    $prop_value_array["description"] = $description;
     $user = new ClipitUser();
-    $user->login = $login;
-    $user->setPassword($password);
-    $user->name = $name;
-    $user->email = $email;
-    $user->role = $role;
-    $user->description = $description;
-    return $user->save();
+    return $user->setProperties($prop_value_array);
 }
 
 /**
@@ -132,44 +113,23 @@ function delete($id){
 }
 
 /**
- * Get all Users from the system.
+ * Get all Users of this from the system.
  *
  * @param int $limit Number of results to show, default= 0 [no limit] (optional)
- * @return array Returns an array of ClipitUser objects
+ * @return array Returns an array of ClipitUsers
  */
 function get_all($limit = 0){
-    $user_array = array();
-    $elgg_user_array = elgg_get_entities(array('type' => ClipitUser::TYPE,
-                                               'limit' => $limit));
-    if(!$elgg_user_array){
-        return $user_array;
-    }
-    $i = 0;
-    foreach($elgg_user_array as $elgg_user){
-        $user_array[$i] = new ClipitUser($elgg_user->guid);
-        $i++;
-    }
-    return $user_array;
+    return ClipitUser::getAll($limit);
 }
 
 /**
  * Get Users with id contained in a given list.
  *
- * @param array $id_array Array of User Ids
- * @return array Returns an array of ClipitUser objects
+ * @param array $id_array Array of Object Ids
+ * @return array Returns an array of ClipitUsers
  */
 function get_by_id($id_array){
-    $user_array = array();
-    $i =0;
-    foreach($id_array as $id){
-        if(elgg_entity_exists($id)){
-            $user_array[$i] = new ClipitUser((int) $id);
-        } else{
-            $user_array[$i] = null;
-        }
-        $i++;
-    }
-    return $user_array;
+    return ClipitUser::getById($id_array);
 }
 
 /**
@@ -179,16 +139,7 @@ function get_by_id($id_array){
  * @return array Returns an array of ClipitUser objects
  */
 function get_by_login($login_array){
-    $user_array = array();
-    for($i = 0; $i < count($login_array); $i++){
-        $elgg_user = get_user_by_username($login_array[$i]);
-        if(!$elgg_user){
-            $user_array[$i] = null;
-            continue;
-        }
-        $user_array[$i] = new ClipitUser($elgg_user->guid);
-    }
-    return $user_array;
+    return ClipitUser::getByLogin($login_array);
 }
 
 /**
@@ -198,22 +149,7 @@ function get_by_login($login_array){
  * @return array Returns an array of ClipitUser objects
  */
 function get_by_email($email_array){
-    $user_array = array();
-    for($i = 0; $i < count($email_array); $i++){
-        $elgg_user_array = get_user_by_email($email_array[$i]);
-        if(!$elgg_user_array){
-            $user_array[$i] = null;
-            continue;
-        }
-        $temp_array = array();
-        $j = 0;
-        foreach($elgg_user_array as $elgg_user){
-            $temp_array[$j] = new ClipitUser($elgg_user->guid);
-            $j++;
-        }
-        $user_array = array_merge($user_array, $temp_array);
-    }
-    return $user_array;
+    return ClipitUser::getByEmail($email_array);
 }
 
 /**
@@ -223,25 +159,5 @@ function get_by_email($email_array){
  * @return array Returns an array of ClipitUser objects
  */
 function get_by_role($role_array){
-    $user_array = array();
-    for($i = 0; $i < count($role_array); $i++){
-        $elgg_user_array = elgg_get_entities_from_metadata(
-            array(
-                 'type' => 'user',
-                 'metadata_names' => array('role'),
-                 'metadata_values' => array($role_array[$i])
-            ));
-        if(!$elgg_user_array){
-            $user_array[$i] = null;
-            continue;
-        }
-        $temp_array = array();
-        $j = 0;
-        foreach($elgg_user_array as $elgg_user){
-            $temp_array[$j] = new ClipitUser($elgg_user->guid);
-            $j++;
-        }
-        $user_array = array_merge($user_array, $temp_array);
-    }
-    return $user_array;
+    return ClipitUser::getByRole($role_array);
 }

@@ -5,11 +5,25 @@
  */
 namespace clipit;
 
-function expose_api(){
+function expose_rest_api(){
     expose_quiz_functions();
     expose_quiz_question_functions();
     expose_quiz_result_functions();
     expose_user_functions();
+
+    //    expose_activity_functions();
+    //    expose_comment_functions();
+    //    expose_file_functions();
+    //    expose_group_function();
+    //    expose_palette_functions();
+    //    expose_site_functions();
+    //    expose_sta_functions();
+    //    expose_storyboard_functions();
+    //    expose_taxonomy_functions();
+    //    expose_taxonomy_sb_functions();
+    //    expose_taxonomy_tag_functions();
+    //    expose_taxonomy_tc_functions();
+    //    expose_video_functions();
 }
 
 
