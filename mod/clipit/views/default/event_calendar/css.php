@@ -263,8 +263,11 @@ li.event-calendar-filter-menu-show-only {
 	clear: both;
 	margin-left: 20px;
 	display: none;
+    float: right;
 }
-
+ul#event-calendar-edit-schedule-type{
+    float: left;
+}
 .event-calendar-edit-reminder-wrapper {
 	margin-top: 10px;
 	display: none;
