@@ -121,11 +121,11 @@ $body .= '</div>';
 
 $body .= '<div class="event-calendar-edit-form-block event-calendar-edit-form-schedule-block">';
 $body .= '<h2>'.elgg_echo('event_calendar:schedule:header').'</h2>';
+$body .= elgg_view('event_calendar/schedule_section',$vars);
 $body .= elgg_view('input/radio',array('id'=>'event-calendar-edit-schedule-type','name'=>'schedule_type','value'=>$schedule_type,'options'=>$schedule_options));
 
 $vars['prefix'] = $prefix;
 
-$body .= elgg_view('event_calendar/schedule_section',$vars);
 
 if ($event_calendar_spots_display == 'yes') {
 	$body .= '<p><label>'.elgg_echo("event_calendar:spots_label").'<br />';
