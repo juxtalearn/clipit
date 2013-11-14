@@ -1,31 +1,29 @@
 <?php
 /**
- * @package clipit\quiz\result
+ * ClipIt - JuxtaLearn Web Space
+ * PHP version:     >= 5.2
+ * Creation date:   2013-10-10
+ * Last update:     $Date$
+ *
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, JuxtaLearn Project
+ * @version         $Version$
+ * @link            http://juxtalearn.org
+ * @license         GNU Affero General Public License v3
+ *                  (http://www.gnu.org/licenses/agpl-3.0.txt)
+ *                  This program is free software: you can redistribute it and/or modify
+ *                  it under the terms of the GNU Affero General Public License as
+ *                  published by the Free Software Foundation, version 3.
+ *                  This program is distributed in the hope that it will be useful,
+ *                  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *                  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ *                  GNU Affero General Public License for more details.
+ *                  You should have received a copy of the GNU Affero General Public License
+ *                  along with this program. If not, see
+ *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
 namespace clipit\quiz\result;
 
-    /**
-     * ClipIt - JuxtaLearn Web Space
-     * PHP version:     >= 5.2
-     * Creation date:   2013-10-10
-     * Last update:     $Date$
-     *
-     * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, JuxtaLearn Project
-     * @version         $Version$
-     * @link            http://juxtalearn.org
-     * @license         GNU Affero General Public License v3
-     *                  (http://www.gnu.org/licenses/agpl-3.0.txt)
-     *                  This program is free software: you can redistribute it and/or modify
-     *                  it under the terms of the GNU Affero General Public License as
-     *                  published by the Free Software Foundation, version 3.
-     *                  This program is distributed in the hope that it will be useful,
-     *                  but WITHOUT ANY WARRANTY; without even the implied warranty of
-     *                  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-     *                  GNU Affero General Public License for more details.
-     *                  You should have received a copy of the GNU Affero General Public License
-     *                  along with this program. If not, see
-     *                  http://www.gnu.org/licenses/agpl-3.0.txt.
-     */
+
 
 /**
  * Alias so classes outside of this namespace can be used without path.
@@ -72,7 +70,7 @@ class ClipitQuizResult extends PebsItem{
      * @param int $id Id of Quiz Result to load
      * @return $this|null Returns Quiz Question instance, or null if error
      */
-    function load($id){
+    protected function _load($id){
         if(!$elgg_object = new ElggObject((int) $id)){
             return null;
         }
@@ -143,6 +141,63 @@ class ClipitQuizResult extends PebsItem{
         } else{
             $this->correct = (bool) $value;
         }
+    }
+
+    /**
+     * Create a new ClipitQuizResult instance, and save it into the system.
+     *
+     * @param string $name Name of the Quiz Result
+     * @param string $description Quiz Result full description (optional)
+     * @param int $quiz_question Id of the Quiz Question this Result refers to
+     * @param array $result_array Array with the Result elements posted by a user
+     * @param int $user Id of the user who posted the result
+     * @param bool $correct If true: the result is correct, if false: the result is incorrect (optional)
+     * @return bool|int Returns Returns the new Quiz Result Id, or false if error
+     */
+    static function create($name = "",
+                    $description = "",
+                    $quiz_question,
+                    $result_array,
+                    $user,
+                    $correct = false){
+        $prop_value_array["name"] = $name;
+        $prop_value_array["description"] = $description;
+        $prop_value_array["quiz_question"] = $quiz_question;
+        $prop_value_array["result_array"] = $result_array;
+        $prop_value_array["user"] = $user;
+        $prop_value_array["correct"] = $correct;
+        $quiz_result = new ClipitQuizResult();
+        return $quiz_result->setProperties($prop_value_array);
+    }
+
+    /**
+     * Get Quiz Results by their Quiz Question Id
+     *
+     * @param array $quiz_question_array Array of Quiz Question IDs to get Results form
+     * @return array|bool Array of Quiz Results nested by Quiz Question, or false if error
+     */
+    static function get_by_question($quiz_question_array){
+        $quiz_result_array = array();
+        foreach($quiz_question_array as $quiz_question_id){
+            $elgg_object_array = elgg_get_entities_from_metadata(
+                array(
+                     "type" => ClipitQuizResult::TYPE,
+                     "subtype" => ClipitQuizResult::SUBTYPE,
+                     "metadata_names" => array("quiz_question"),
+                     "metadata_values" => array($quiz_question_id)
+                )
+            );
+            if(!$elgg_object_array){
+                $quiz_question_array[] = null;
+            } else{
+                $temp_array = array();
+                foreach($elgg_object_array as $elgg_object){
+                    $temp_array[] =  new ClipitQuizResult($elgg_object->guid);
+                }
+                $quiz_result_array[] = $temp_array;
+            }
+        }
+        return $quiz_result_array;
     }
 
 }

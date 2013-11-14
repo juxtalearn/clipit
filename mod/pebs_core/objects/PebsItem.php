@@ -21,7 +21,6 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-
 namespace pebs;
 
 use \ElggObject;
@@ -48,14 +47,7 @@ class PebsItem{
      */
     public $description = "";
 
-    /**
-     * Lists the properties contained in this object
-     *
-     * @return array Array of properties whith type and default value
-     */
-    static function listProperties(){
-        return get_class_vars(get_called_class());
-    }
+    /* Instance Functions */
 
     /**
      * Constructor
@@ -64,7 +56,7 @@ class PebsItem{
      */
     function __construct($id = null){
         if($id){
-            $this->load((int)$id);
+            $this->_load((int)$id);
         }
     }
 
@@ -74,7 +66,7 @@ class PebsItem{
      * @param int $id Id of the instance to load from the system.
      * @return $this|bool Returns instance, or false if error.
      */
-    protected function load($id){
+    protected function _load($id){
         if(!($elgg_object = new ElggObject((int)$id))){
             return null;
         }
@@ -145,13 +137,88 @@ class PebsItem{
         return $this->save();
     }
 
+    /* Static Functions */
+
+    /**
+     * Create a new instance of this class, and assign values to its properties.
+     *
+     * @param string $name Instance name
+     * @param string $description Instance description (optional)
+     * @return int|bool Returns instance Id if correct, or false if error
+     */
+    static function create($name, $description = ""){
+        $called_class = get_called_class();
+        $prop_value_array["name"] = $name;
+        $prop_value_array["description"] = $description;
+        $item = new $called_class();
+        return $item->setProperties($prop_value_array);
+    }
+
+    /**
+     * Get specified property values for an Item
+     *
+     * @param int $id Id of instance to get properties from
+     * @param array $prop_array Array of property names to get values from
+     * @return array|bool Returns an array of property=>value pairs, or false if error
+     */
+    static function get_properties($id, $prop_array){
+        $called_class = get_called_class();
+        if(!$item = new $called_class($id)){
+            return null;
+        }
+        return $item->getProperties($prop_array);
+    }
+
+    /**
+     * Sets values to specified properties of an Item
+     *
+     * @param int $id Id of Item to set property valyes
+     * @param array $prop_value_array Array of property=>value pairs to set into the Item
+     * @return int|bool Returns Id of Item if correct, or false if error
+     */
+    static function set_properties($id, $prop_value_array){
+        $called_class = get_called_class();
+        if(!$item = new $called_class($id)){
+            return false;
+        }
+        return $item->setProperties($prop_value_array);
+    }
+
+    /**
+     * Delete Items given their Id.
+     *
+     * @param array $id_array List of Item Ids to delete
+     * @return bool Returns true if correct, or false if error
+     */
+    static function delete_by_id($id_array){
+        $called_class = get_called_class();
+        foreach($id_array as $id){
+            if(!$item = new $called_class($id)){
+                return false;
+            }
+            if(!$item->delete()){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Lists the properties contained in this object
+     *
+     * @return array Array of properties whith type and default value
+     */
+    static function list_properties(){
+        return get_class_vars(get_called_class());
+    }
+
     /**
      * Get all Objects of this TYPE/SUBTYPE from the system.
      *
      * @param int $limit Number of results to show, default= 0 [no limit] (optional)
      * @return array Returns an array of Objects
      */
-    static function getAll($limit = 0){
+    static function get_all($limit = 0){
         $called_class = get_called_class();
         $elgg_object_array = elgg_get_entities(array('type' => $called_class::TYPE,
                                                      'subtype' => $called_class::SUBTYPE,
@@ -172,7 +239,7 @@ class PebsItem{
      * @param array $id_array Array of Object Ids
      * @return array Returns an array of Objects
      */
-    static function getById($id_array){
+    static function get_by_id($id_array){
         $called_class = get_called_class();
         $object_array = array();
         foreach($id_array as $id){

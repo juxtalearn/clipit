@@ -1,31 +1,27 @@
 <?php
 /**
- * @package clipit\quiz
+ * ClipIt - JuxtaLearn Web Space
+ * PHP version:     >= 5.2
+ * Creation date:   2013-10-10
+ * Last update:     $Date$
+ *
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, JuxtaLearn Project
+ * @version         $Version$
+ * @link            http://juxtalearn.org
+ * @license         GNU Affero General Public License v3
+ *                  (http://www.gnu.org/licenses/agpl-3.0.txt)
+ *                  This program is free software: you can redistribute it and/or modify
+ *                  it under the terms of the GNU Affero General Public License as
+ *                  published by the Free Software Foundation, version 3.
+ *                  This program is distributed in the hope that it will be useful,
+ *                  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *                  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ *                  GNU Affero General Public License for more details.
+ *                  You should have received a copy of the GNU Affero General Public License
+ *                  along with this program. If not, see
+ *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
 namespace clipit\quiz;
-
-    /**
-     * ClipIt - JuxtaLearn Web Space
-     * PHP version:     >= 5.2
-     * Creation date:   2013-10-10
-     * Last update:     $Date$
-     *
-     * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, JuxtaLearn Project
-     * @version         $Version$
-     * @link            http://juxtalearn.org
-     * @license         GNU Affero General Public License v3
-     *                  (http://www.gnu.org/licenses/agpl-3.0.txt)
-     *                  This program is free software: you can redistribute it and/or modify
-     *                  it under the terms of the GNU Affero General Public License as
-     *                  published by the Free Software Foundation, version 3.
-     *                  This program is distributed in the hope that it will be useful,
-     *                  but WITHOUT ANY WARRANTY; without even the implied warranty of
-     *                  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-     *                  GNU Affero General Public License for more details.
-     *                  You should have received a copy of the GNU Affero General Public License
-     *                  along with this program. If not, see
-     *                  http://www.gnu.org/licenses/agpl-3.0.txt.
-     */
 
 /**
  * Alias so classes outside of this namespace can be used without path.
@@ -33,6 +29,8 @@ namespace clipit\quiz;
  */
 use \ElggObject;
 use pebs\PebsItem;
+use clipit\quiz\question\ClipitQuizQuestion;
+
 
 /**
  * Class ClipitQuiz
@@ -67,7 +65,7 @@ class ClipitQuiz extends PebsItem{
      * @param int $id IF of the ClipitQuiz to load from the system.
      * @return $this|bool Returns ClipitQuiz instance, or false if error.
      */
-    function load($id){
+    protected function _load($id){
         if(!($elgg_object = new ElggObject((int) $id))){
             return null;
         }
@@ -131,5 +129,104 @@ class ClipitQuiz extends PebsItem{
         } else{
             $this->public = (bool) $value;
         }
+    }
+
+    /**
+     * Create a new ClipitQuiz instance, and save it into the system.
+     *
+     * @param string $name Name of the Quiz
+     * @param string $target Target interface to present Quiz (web space, large display, etc.)
+     * @param string $description Quiz full description (optional)
+     * @param bool $public Whether the Quiz can be reused by other teachers (true= yes, false= no)
+     * @param array $question_array Array of ClipitQuizQuestions contained in this Quiz (optional)
+     * @param int $taxonomy Id of the Taxonomy referenced by this Quiz (optional)
+     * @return bool|int Returns the new Quiz Id, or false if error
+     */
+    static function create($name,
+                    $target,
+                    $description = "",
+                    $public = false,
+                    $question_array = array(),
+                    $taxonomy = -1){
+        $prop_value_array["name"] = $name;
+        $prop_value_array["target"] = $target;
+        $prop_value_array["description"] = $description;
+        $prop_value_array["public"] = $public;
+        $prop_value_array["question_array"] = $question_array;
+        $prop_value_array["taxonomy"] = $taxonomy;
+        $quiz = new ClipitQuiz();
+        return $quiz->setProperties($prop_value_array);
+    }
+
+    /**
+     * Adds Quiz Questions to a Quiz.
+     *
+     * @param int $id Id from Quiz to add Questions to
+     * @param array $question_array Array of Questions to add
+     * @return bool Returns true if success, false if error
+     */
+    static function add_questions($id, $question_array){
+        if(!$quiz = new ClipitQuiz($id)){
+            return false;
+        }
+        if(!$quiz->question_array){
+            $quiz->question_array = $question_array;
+        } else{
+            $quiz->question_array = array_merge($quiz->question_array, $question_array);
+        }
+        if(!$quiz->save()){
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Remove Quiz Questions from a Quiz.
+     *
+     * @param int $id Id from Quiz to remove Questions from
+     * @param array $question_array Array of Questions to remove
+     * @return bool Returns true if success, false if error
+     */
+    static function remove_questions($id, $question_array){
+        if(!$quiz = new ClipitQuiz($id)){
+            return false;
+        }
+        if(!$quiz->question_array){
+            return false;
+        }
+        foreach($question_array as $question){
+            $key = array_search($question, $quiz->question_array);
+            if(isset($key)){
+                unset($quiz->question_array[$key]);
+            } else{
+                return false;
+            }
+        }
+        if(!$quiz->save()){
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Get an array of Quiz Questions included in a Quiz.
+     *
+     * @param int $id The Id of the Quiz to get questions from
+     * @return array|bool Returns an array of ClipitQuizQuestion objects, or false if error
+     */
+    static function get_questions($id){
+        if(!$quiz = new ClipitQuiz($id)){
+            return false;
+        }
+        $quiz_question_array = array();
+        foreach($quiz->question_array as $quiz_question_id){
+            if(!$quiz_question = new ClipitQuizQuestion($quiz_question_id)){
+                $quiz_question_array[] = null;
+            } else{
+                $quiz_question_array[] = $quiz_question;
+            }
+        }
+        return $quiz_question_array;
+
     }
 }

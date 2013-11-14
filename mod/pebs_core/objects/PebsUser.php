@@ -1,31 +1,29 @@
 <?php
 /**
- * @package pebs
+ * Pebs Core
+ * PHP version:     >= 5.2
+ * Creation date:   2013-11-01
+ * Last update:     $Date$
+ *
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, JuxtaLearn Project
+ * @version         $Version$
+ * @link            http://
+ * @license         GNU Affero General Public License v3
+ *                  (http://www.gnu.org/licenses/agpl-3.0.txt)
+ *                  This program is free software: you can redistribute it and/or modify
+ *                  it under the terms of the GNU Affero General Public License as
+ *                  published by the Free Software Foundation, version 3.
+ *                  This program is distributed in the hope that it will be useful,
+ *                  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *                  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ *                  GNU Affero General Public License for more details.
+ *                  You should have received a copy of the GNU Affero General Public License
+ *                  along with this program. If not, see
+ *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
 namespace pebs;
 
-    /**
-     * Pebs Core
-     * PHP version:     >= 5.2
-     * Creation date:   2013-11-01
-     * Last update:     $Date$
-     *
-     * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, JuxtaLearn Project
-     * @version         $Version$
-     * @link            http://
-     * @license         GNU Affero General Public License v3
-     *                  (http://www.gnu.org/licenses/agpl-3.0.txt)
-     *                  This program is free software: you can redistribute it and/or modify
-     *                  it under the terms of the GNU Affero General Public License as
-     *                  published by the Free Software Foundation, version 3.
-     *                  This program is distributed in the hope that it will be useful,
-     *                  but WITHOUT ANY WARRANTY; without even the implied warranty of
-     *                  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-     *                  GNU Affero General Public License for more details.
-     *                  You should have received a copy of the GNU Affero General Public License
-     *                  along with this program. If not, see
-     *                  http://www.gnu.org/licenses/agpl-3.0.txt.
-     */
+
 
 /**
  * Alias so classes outside of this namespace can be used without path.
@@ -67,7 +65,7 @@ class PebsUser extends PebsItem{
      * @param int $id Id of the User to load from the system.
      * @return $this|bool Returns User instance, or false if error.
      */
-    protected function load($id){
+    protected function _load($id){
         if(!$elgg_user = new ElggUser((int)$id)){
             return null;
         }
@@ -131,12 +129,44 @@ class PebsUser extends PebsItem{
     }
 
     /**
+     * Create a new ClipItUser instance, and save it into the system.
+     *
+     * @param string $login User login
+     * @param string $password User password
+     * @param string $name User full name
+     * @param string $email User email
+     * @param string $role User role (optional)
+     * @param string $description User description (optional)
+     * @return bool|int Returns the new User Id, or 'false' if error
+     * @throws \InvalidParameterException
+     */
+    static function create($login,
+                           $password,
+                           $name,
+                           $email,
+                           $role = "",
+                           $description = ""){
+        $called_class = get_called_class();
+        if(get_user_by_username($login)){
+            throw(new \InvalidParameterException("The user login already exists"));
+        }
+        $prop_value_array["login"] = $login;
+        $prop_value_array["password"] = $password;
+        $prop_value_array["name"] = $name;
+        $prop_value_array["email"] = $email;
+        $prop_value_array["role"] = $role;
+        $prop_value_array["description"] = $description;
+        $user = new $called_class();
+        return $user->setProperties($prop_value_array);
+    }
+
+    /**
      * Get users with login contained in a given list of logins.
      *
      * @param array $login_array Array of user logins
      * @return array Returns an array of User objects
      */
-    static function getByLogin($login_array){
+    static function get_by_login($login_array){
         $called_class = get_called_class();
         $user_array = array();
         foreach($login_array as $login){
@@ -158,7 +188,7 @@ class PebsUser extends PebsItem{
      * @param array $email_array Array of user emails
      * @return array Returns an array of arrays of User objects
      */
-    static function getByEmail($email_array){
+    static function get_by_email($email_array){
         $called_class = get_called_class();
         $user_array = array();
         foreach($email_array as $email){
@@ -182,7 +212,7 @@ class PebsUser extends PebsItem{
      * @param array $role_array Array of user roles
      * @return array Returns an array of arrays of User objects
      */
-    static function getByRole($role_array){
+    static function get_by_role($role_array){
         $called_class = get_called_class();
         $user_array = array();
         foreach($role_array as $role){
