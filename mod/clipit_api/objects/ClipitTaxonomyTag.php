@@ -21,57 +21,18 @@
      *                  along with this program. If not, see
      *                  http://www.gnu.org/licenses/agpl-3.0.txt.
      */
-
+use \pebs\PebsItem;
 /**
  * Class ClipitTaxonomyTag
  *
  * @package clipit\taxonomy\tag
  */
-class ClipitTaxonomyTag{
+class ClipitTaxonomyTag extends PebsItem{
 
     // Class properties
     public $id = int;
     public $name = string;
     public $taxonomy = ClipitTaxonomy;
     public $taxonomy_sb = ClipitTaxonomySB;
-
-    static function getProperty($id, $prop){
-        return "TO-DO";
-    }
-
-    static function setProperty($id, $prop, $value){
-        return "TO-DO";
-    }
-
-    static function exposeFunctions(){
-        expose_function("clipit.taxonomy.tag.getProperty", "ClipitTaxonomyTag::getProperty",
-                        array(
-                             "id" => array(
-                                 "type" => "integer",
-                                 "required" => true),
-                             "prop" => array(
-                                 "type" => "string",
-                                 "required" => true)),
-                        "TO-DO:description",
-                        'GET',
-                        true,
-                        false);
-
-        expose_function("clipit.taxonomy.tag.setPropertysetProperty", "ClipitTaxonomyTag::setProperty",
-                        array(
-                             "id" => array(
-                                 "type" => "integer",
-                                 "required" => true),
-                             "prop" => array(
-                                 "type" => "string",
-                                 "required" => true),
-                             "value" => array(
-                                 "type" => "string",
-                                 "required" => true)),
-                        "TO-DO:description",
-                        'GET',
-                        true,
-                        false);
-    }
 
 }

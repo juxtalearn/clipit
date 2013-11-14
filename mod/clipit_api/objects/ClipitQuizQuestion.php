@@ -32,29 +32,18 @@ namespace clipit\quiz\question;
  * @use \ElggObject
  */
 use \ElggObject;
+use pebs\PebsItem;
 
 /**
  * Class ClipitQuizQuestion
  *
  * @package clipit\quiz\question
  */
-class ClipitQuizQuestion{
-    /**
-     * @const string Elgg entity type for this class
-     */
-    const TYPE = "object";
+class ClipitQuizQuestion extends PebsItem{
     /**
      * @const string Elgg entity subtype for this class
      */
     const SUBTYPE = "clipit_quiz_question";
-    /**
-     * @var int Unique id of this ClipitQuizQuestion instance (-1 = unsaved)
-     */
-    public $id = -1;
-    /**
-     * @var string Main text question which will be shown to users taking the quiz
-     */
-    public $question = "";
     /**
      * @var array Array of options to chose from as an answer to the question
      */
@@ -73,15 +62,6 @@ class ClipitQuizQuestion{
     public $video = -1;
 
     /**
-     * @param int $id If $id is null, create new instance, else load instance with id = $id.
-     */
-    function __construct($id = null){
-        if($id){
-            $this->load($id);
-        }
-    }
-
-    /**
      * Loads a ClipitQuizQuestion instance from the system.
      *
      * @param int $id Id of the ClipitQuiz to load from the system.
@@ -91,13 +71,15 @@ class ClipitQuizQuestion{
         if(!$elgg_object = new ElggObject((int) $id)){
             return null;
         }
-        if($elgg_object->type != ClipitQuizQuestion::TYPE
-           || get_subtype_from_id($elgg_object->subtype) != ClipitQuizQuestion::SUBTYPE){
+        $elgg_type = $elgg_object->type;
+        $elgg_subtype = get_subtype_from_id($elgg_object->subtype);
+        if(($elgg_type != $this::TYPE) || ($elgg_subtype != $this::SUBTYPE)){
             return null;
         }
         $this->id = (int) $elgg_object->guid;
+        $this->name = (string) $elgg_object->name;
+        $this->description = (string) $elgg_object->description;
         $this->option_array = (array) $elgg_object->option_array;
-        $this->question = (string) $elgg_object->question;
         $this->taxonomy_tag_array = (array) $elgg_object->taxonomy_tag_array;
         $this->option_type = (string) $elgg_object->option_type;
         $this->video = (int) $elgg_object->video;
@@ -112,30 +94,16 @@ class ClipitQuizQuestion{
     function save(){
         if($this->id == -1){
             $elgg_object = new ElggObject();
-            $elgg_object->subtype = (string) ClipitQuizQuestion::SUBTYPE;
-        } else{
-            $elgg_object = new ElggObject($this->id);
-        }
-        if(!$elgg_object){
+            $elgg_object->subtype = (string) $this::SUBTYPE;
+        } elseif(!$elgg_object = new ElggObject($this->id)){
             return false;
         }
+        $elgg_object->name = (string)$this->name;
+        $elgg_object->description = (string)$this->description;
         $elgg_object->option_array = (array) $this->option_array;
-        $elgg_object->question = (string) $this->question;
         $elgg_object->taxonomy_tag_array = (array) $this->taxonomy_tag_array;
         $elgg_object->option_type = (string) $this->option_type;
         $elgg_object->video = (int) $this->video;
         return $this->id = $elgg_object->save();
-    }
-
-    /**
-     * Deletes a Quiz Question from the system.
-     *
-     * @return bool True if success, false if error.
-     */
-    function delete(){
-        if(!$elgg_object = get_Entity((int) $this->id)){
-            return false;
-        }
-        return $elgg_object->delete();
     }
 }

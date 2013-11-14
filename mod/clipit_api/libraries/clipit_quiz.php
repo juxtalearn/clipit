@@ -28,12 +28,17 @@ namespace clipit\quiz;
      */
 
 /**
+ * @use clipit\quiz\question\ClipitQuizQuestion as ClipitQuizQuestion
+ */
+use clipit\quiz\question\ClipitQuizQuestion;
+
+/**
  * Lists the properties contained in this class.
  *
  * @return array Array of properties whith type and default value
  */
 function list_properties(){
-    return get_class_vars(__NAMESPACE__."\\ClipitQuiz");
+    return ClipitQuiz::listProperties();
 }
 
 /**
@@ -49,42 +54,22 @@ function get_properties($id, $prop_array){
     if(!$quiz){
         return false;
     }
-    $value_array = array();
-    for($i = 0; $i < count($prop_array); $i++){
-        $value_array[$i] = $quiz->$prop_array[$i];
-    }
-    return array_combine($prop_array, $value_array);
+    return $quiz->getProperties($prop_array);
 }
 
 /**
  * Set values to specified properties of a Quiz.
  *
  * @param int $id Id from Quiz
- * @param array $prop_array Array of properties to set values into
- * @param array $value_array Array of associated values to set into properties
+ * @param array $prop_value_array Array of properties => values to set
  * @return bool Returns true if success, false if error
- * @throws \InvalidParameterException If count(prop_array) != count(value_array)
  */
-function set_properties($id, $prop_array, $value_array){
-    if(count($prop_array) != count($value_array)){
-        throw(new \InvalidParameterException(
-            "ERROR: The length of prop_array and value_array must match."));
-    }
+function set_properties($id, $prop_value_array){
     $quiz = new ClipitQuiz($id);
     if(!$quiz){
         return false;
     }
-    for($i = 0; $i < count($prop_array); $i++){
-        if($prop_array[$i] == "public"){
-            $quiz->setPrivacy($value_array[$i]);
-        } else{
-            $quiz->$prop_array[$i] = $value_array[$i];
-        }
-    }
-    if(!$quiz->save()){
-        return false;
-    }
-    return true;
+    return $quiz->setProperties($prop_value_array);
 }
 
 /**
@@ -95,7 +80,6 @@ function set_properties($id, $prop_array, $value_array){
  * @param string $description Quiz full description (optional)
  * @param bool $public Whether the Quiz can be reused by other teachers (true= yes, false= no)
  * @param array $question_array Array of ClipitQuizQuestions contained in this Quiz (optional)
- * @param array $result_array Array of ClipitQuizResults submitted for this Quiz (optional)
  * @param int $taxonomy Id of the Taxonomy referenced by this Quiz (optional)
  * @return bool|int Returns the new Quiz Id, or false if error
  */
@@ -104,17 +88,15 @@ function create($name,
                 $description = "",
                 $public = false,
                 $question_array = array(),
-                $result_array = array(),
                 $taxonomy = -1){
+    $prop_value_array["name"] = $name;
+    $prop_value_array["target"] = $target;
+    $prop_value_array["description"] = $description;
+    $prop_value_array["public"] = $public;
+    $prop_value_array["question_array"] = $question_array;
+    $prop_value_array["taxonomy"] = $taxonomy;
     $quiz = new ClipitQuiz();
-    $quiz->name = $name;
-    $quiz->target = $target;
-    $quiz->description = $description;
-    $quiz->setPrivacy($public);
-    $quiz->question_array = $question_array;
-    $quiz->result_array = $result_array;
-    $quiz->taxonomy = $taxonomy;
-    return $quiz->save();
+    return $quiz->setProperties($prop_value_array);
 }
 
 /**
@@ -128,6 +110,26 @@ function delete($id){
         return false;
     }
     return $quiz->delete();
+}
+
+/**
+ * Get all Quizzes from the system.
+ *
+ * @param int $limit Number of results to show, default= 0 [no limit] (optional)
+ * @return array Returns an array of ClipitQuiz objects
+ */
+function get_all($limit = 0){
+    return ClipitQuiz::getAll($limit);
+}
+
+/**
+ * Get Quizzes with id contained in a given list.
+ *
+ * @param array $id_array Array of Quiz Ids
+ * @return array Returns an array of ClipitQuiz objects
+ */
+function get_by_id($id_array){
+    return ClipitQuiz::getById($id_array);
 }
 
 /**
@@ -152,67 +154,51 @@ function add_questions($id, $question_array){
     return true;
 }
 
-
 /**
- * Get all quizzes from the system.
+ * Remove Quiz Questions from a Quiz.
  *
- * @param int $limit Number of results to show, default= 0 [no limit] (default)
- * @return array Returns an array of ClipitQuiz objects
+ * @param int $id Id from Quiz to remove Questions from
+ * @param array $question_array Array of Questions to remove
+ * @return bool Returns true if success, false if error
  */
-function get_all($limit = 0){
-    $quiz_array = array();
-    $elgg_object_array = elgg_get_entities(array('type' => ClipitQuiz::TYPE,
-                                                 'subtype' => ClipitQuiz::SUBTYPE,
-                                                 'limit' => $limit));
-    if(!$elgg_object_array){
-        return $quiz_array;
+function remove_questions($id, $question_array){
+    if(!$quiz = new ClipitQuiz($id)){
+        return false;
     }
-    $i = 0;
-    foreach($elgg_object_array as $elgg_object){
-        $quiz_array[$i] = new ClipitQuiz($elgg_object->guid);
-        $i++;
+    if(!$quiz->question_array){
+        return false;
     }
-    return $quiz_array;
-}
-
-/**
- * Get Quizzes with Id contained in a given list.
- *
- * @param array $id_array Array of Quiz Ids
- * @return array Returns an array of ClipitQuiz objects
- */
-function get_by_id($id_array){
-    $quiz_array = array();
-    $i = 0;
-    foreach($id_array as $id){
-        if(elgg_entity_exists((int) $id)){
-            $quiz_array[$i] = new ClipitQuiz((int) $id);
+    foreach($question_array as $question){
+        $key = array_search($question, $quiz->question_array);
+        if(isset($key)){
+            unset($quiz->question_array[$key]);
         } else{
-            $quiz_array[$i] = null;
+            return false;
         }
-        $i++;
     }
-    return $quiz_array;
+    if(!$quiz->save()){
+        return false;
+    }
+    return true;
 }
 
 /**
- * Get an array of Quiz Questions included in a Quiz
+ * Get an array of Quiz Questions included in a Quiz.
  *
  * @param int $id The Id of the Quiz to get questions from
  * @return array|bool Returns an array of ClipitQuizQuestion objects, or false if error
  */
 function get_questions($id){
-    if(!$quiz = new Clipitquiz((int) $id)){
+    if(!$quiz = new ClipitQuiz($id)){
         return false;
     }
     $quiz_question_array = array();
     foreach($quiz->question_array as $quiz_question_id){
-        if(!elgg_entity_exists($quiz_question_id) ||
-           !($quiz_question = new question\ClipitQuizQuestion($quiz_question_id))){
-            array_push($quiz_question_array, null);
-            continue;
+        if(!$quiz_question = new ClipitQuizQuestion($quiz_question_id)){
+            $quiz_question_array[] = null;
+        } else{
+            $quiz_question_array[] = $quiz_question;
         }
-        array_push($quiz_question_array, $quiz_question);
     }
     return $quiz_question_array;
 }

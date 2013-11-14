@@ -21,60 +21,79 @@
      *                  along with this program. If not, see
      *                  http://www.gnu.org/licenses/agpl-3.0.txt.
      */
+use \pebs\PebsItem;
+use \ElggObject;
 
 /**
  * Class ClipitVideo
  *
  * @package clipit\video
  */
-class ClipitVideo{
+class ClipitVideo extends PebsItem{
+    /**
+     * @const string Elgg entity sybtype for this class
+     */
+    const SUBTYPE = "clipit_video";
+    /**
+     * @var array List of ClipitComment Ids targeting this Video
+     */
+    public $comment_array = array();
+    /**
+     * @var int Id of File which holds this Video's content
+     */
+    public $content = -1;
+    /**
+     * @var array List of Taxonomy Tags applied to this Video
+     */
+    public $taxonomy_tag_array = array();
+    /**
+     * @var int Timestamp when the Video was submitted
+     */
+    public $time_created = -1;
 
-    // Class properties
-    public $comment_array = array(ClipitComment);
-    public $content = ClipitFile;
-    public $creation_date = DateTime;
-    public $description = string;
-    public $id = int;
-    public $name = string;
-    public $taxonomy_tag_list = array(ClipitTaxonomyTag);
-
-    static function getProperty($id, $prop){
-        return "TO-DO";
+    /**
+     * Loads a ClipitVideo instance from the system.
+     *
+     * @param int $id Id of Video to load
+     * @return $this|null Returns Video instance, or null if error
+     */
+    function load($id){
+        if(!$elgg_object = new ElggObject((int)$id)){
+            return null;
+        }
+        $elgg_type = $elgg_object->type;
+        $elgg_subtype = get_subtype_from_id($elgg_object->subtype);
+        if(($elgg_type != $this::TYPE) || ($elgg_subtype != $this::SUBTYPE)){
+            return null;
+        }
+        $this->id = (int) $elgg_object->guid;
+        $this->name = (string) $elgg_object->name;
+        $this->description = $elgg_object->description;
+        $this->$comment_array = (array)$elgg_object->comment_array;
+        $this->content = (int) $elgg_object->content;
+        $this->taxonomy_tag_array = (array) $elgg_object->taconomy_tag_array;
+        $this->time_created = (int) $elgg_object->time_created;
+        return $this;
     }
 
-    static function setProperty($id, $prop, $value){
-        return "TO-DO";
-    }
-
-    static function exposeFunctions(){
-        expose_function("clipit.video.getProperty", "ClipitVideo::getProperty",
-                        array(
-                             "id" => array(
-                                 "type" => "integer",
-                                 "required" => true),
-                             "prop" => array(
-                                 "type" => "string",
-                                 "required" => true)),
-                        "TO-DO:description",
-                        'GET',
-                        true,
-                        false);
-
-        expose_function("clipit.video.setPropertysetProperty", "ClipitVideo::setProperty",
-                        array(
-                             "id" => array(
-                                 "type" => "integer",
-                                 "required" => true),
-                             "prop" => array(
-                                 "type" => "string",
-                                 "required" => true),
-                             "value" => array(
-                                 "type" => "string",
-                                 "required" => true)),
-                        "TO-DO:description",
-                        'GET',
-                        true,
-                        false);
+    /**
+     * Saves this instance to the system
+     *
+     * @return bool|int Resurns the Id of the saved instance, or false if error
+     */
+    function save(){
+        if($this->id == -1){
+            $elgg_object = new ElggObject();
+            $elgg_object->subtype = (string) $this::SUBTYPE;
+        } elseif(!$elgg_object = new ElggObject($this->id)){
+            return false;
+        }
+        $elgg_object->name = (string) $this->name;
+        $elgg_object->description = (string) $this->description;
+        $elgg_object->comment_array = (array) $this->comment_array;
+        $elgg_object->content = (int) $this->content;
+        $elgg_object->taxonomy_tag_array = (array)$this->taxonomy_tag_array;
+        return $this->id = $elgg_object->save();
     }
 
 }

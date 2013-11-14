@@ -32,25 +32,19 @@ namespace clipit\quiz\result;
  * @use \ElggObject
  */
 use \ElggObject;
+use pebs\PebsItem;
+
 
 /**
  * Class ClipitQuizResult
  *
  * @package clipit\quiz\result
  */
-class ClipitQuizResult{
-    /**
-     * @const string Elgg entity type for this class
-     */
-    const TYPE = "object";
+class ClipitQuizResult extends PebsItem{
     /**
      * @const string Elgg entity subtype for this class
      */
     const SUBTYPE = "clipit_quiz_result";
-    /**
-     * @var int Unique Id of saved ClipitQuizResult (-1 = unsaved)
-     */
-    public $id = -1;
     /**
      * @var int Id of ClipitQuizQuestion this ClipitQuizResult is related to
      */
@@ -73,31 +67,23 @@ class ClipitQuizResult{
     public $time_created = -1;
 
     /**
-     * ClipitQuizResult constructor
-     *
-     * @param int|null $id If $id is null, create new instance; else load instance with id = $id.
-     */
-    function __construct($id = null){
-        if($id){
-            $this->load($id);
-        }
-    }
-
-    /**
      * Loads a ClipitQuizResult instance from the system.
      *
      * @param int $id Id of Quiz Result to load
-     * @return $this|bool Returns Quiz Question instance, or false if error
+     * @return $this|null Returns Quiz Question instance, or null if error
      */
     function load($id){
         if(!$elgg_object = new ElggObject((int) $id)){
             return null;
         }
-        if($elgg_object->type != ClipitQuizResult::TYPE
-           || get_subtype_from_id($elgg_object->subtype) != ClipitQuizResult::SUBTYPE){
+        $elgg_type = $elgg_object->type;
+        $elgg_subtype = get_subtype_from_id($elgg_object->subtype);
+        if(($elgg_type != $this::TYPE) || ($elgg_subtype != $this::SUBTYPE)){
             return null;
         }
         $this->id = (int) $elgg_object->guid;
+        $this->name = (string) $elgg_object->name;
+        $this->description = (string) $elgg_object->description;
         $this->result_array = (array) $elgg_object->result_array;
         $this->correct = (bool) $elgg_object->correct;
         $this->quiz_question = (int) $elgg_object->quiz_question;
@@ -109,18 +95,17 @@ class ClipitQuizResult{
     /**
      * Saves this instance to the system.
      *
-     * @return bool|int Returns the Id of the saved instance, or false if error.
+     * @return bool|int Returns the Id of the saved instance, or false if error
      */
     function save(){
         if($this->id == -1){
             $elgg_object = new ElggObject();
-            $elgg_object->subtype = (string) ClipitQuizResult::SUBTYPE;
-        } else{
-            $elgg_object = new ElggObject((int) $this->id);
-        }
-        if(!$elgg_object){
+            $elgg_object->subtype = (string) $this::SUBTYPE;
+        } elseif(!$elgg_object = new ElggObject($this->id)){
             return false;
         }
+        $elgg_object->name = (string)$this->name;
+        $elgg_object->description = (string)$this->description;
         $elgg_object->result_array = (array) $this->result_array;
         $elgg_object->correct = (bool) $this->correct;
         $elgg_object->quiz_question = (int) $this->quiz_question;
@@ -129,15 +114,20 @@ class ClipitQuizResult{
     }
 
     /**
-     * Deletes a Quiz Result from the system
+     * Overrides PebsItem->setProperties to handle the (bool) $correct property correctly.
      *
-     * @return bool True if success, false if error.
+     * @param array $prop_value_array Array of prop=>value pairs to set into the instance
+     * @return bool|int Returns instance Id, or false if error
      */
-    function delete(){
-        if(!$elgg_object = get_Entity((int) $this->id)){
-            return false;
+    function setProperties($prop_value_array){
+        foreach($prop_value_array as $prop => $value){
+            if($prop == "correct"){
+                $this->setCorrect($value);
+            } else{
+                $this->$prop = $value;
+            }
         }
-        return $elgg_object->delete();
+        return $this->save();
     }
 
     /**

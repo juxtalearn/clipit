@@ -27,19 +27,35 @@ namespace pebs;
 use \ElggObject;
 
 class PebsItem{
-
     /**
-     * @const string Elgg entity TYPE for this item
+     * @const string Elgg entity TYPE for this class
      */
     const TYPE = "object";
     /**
-     * @const string Elgg entity SUBTYPE for this item
+     * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "";
-
+    /**
+     * @var int Unique Id of this instance
+     */
     public $id = -1;
+    /**
+     * @var string Name of this instance
+     */
     public $name = "";
+    /**
+     * @var string Description of this instance
+     */
     public $description = "";
+
+    /**
+     * Lists the properties contained in this object
+     *
+     * @return array Array of properties whith type and default value
+     */
+    static function listProperties(){
+        return get_class_vars(get_called_class());
+    }
 
     /**
      * Constructor
@@ -48,7 +64,7 @@ class PebsItem{
      */
     function __construct($id = null){
         if($id){
-            $this->load($id);
+            $this->load((int)$id);
         }
     }
 
@@ -58,13 +74,13 @@ class PebsItem{
      * @param int $id Id of the instance to load from the system.
      * @return $this|bool Returns instance, or false if error.
      */
-    function load($id){
+    protected function load($id){
         if(!($elgg_object = new ElggObject((int)$id))){
             return null;
         }
-        if($elgg_object->type != $this::TYPE
-           || get_subtype_from_id($elgg_object->subtype) != $this::SUBTYPE
-        ){
+        $elgg_type = $elgg_object->type;
+        $elgg_subtype = get_subtype_from_id($elgg_object->subtype);
+        if(($elgg_type != $this::TYPE) || ($elgg_subtype != $this::SUBTYPE)){
             return null;
         }
         $this->id = (int)$elgg_object->guid;
@@ -82,14 +98,11 @@ class PebsItem{
         if($this->id == -1){
             $elgg_object = new ElggObject();
             $elgg_object->subtype = (string)$this::SUBTYPE;
-        } else{
-            $elgg_object = new ElggObject((int)$this->id);
-        }
-        if(!$elgg_object){
+        } elseif(!$elgg_object = new ElggObject((int)$this->id)){
             return false;
         }
-        $elgg_object->description = (string)$this->description;
         $elgg_object->name = (string)$this->name;
+        $elgg_object->description = (string)$this->description;
         return $this->id = $elgg_object->save();
     }
 
@@ -106,14 +119,11 @@ class PebsItem{
     }
 
     /**
-     * Lists the properties contained in this object
+     * Gets the values for the properties specified in prop_array.
      *
-     * @return array Array of properties whith type and default value
+     * @param array $prop_array Array of properties to get values from
+     * @return array Array of prop=>value items
      */
-    static function listProperties(){
-        return get_class_vars(get_called_class());
-    }
-
     function getProperties($prop_array){
         $value_array = array();
         foreach($prop_array as $prop){
@@ -122,6 +132,12 @@ class PebsItem{
         return $value_array;
     }
 
+    /**
+     * Sets values into specified properties of the instance
+     *
+     * @param array $prop_value_array Array of prop=>value pairs to set into the instance
+     * @return bool|int Returns instance Id, or false if error
+     */
     function setProperties($prop_value_array){
         foreach($prop_value_array as $prop => $value){
             $this->$prop = $value;

@@ -1,8 +1,8 @@
 <?php
 /**
- * @package pebs\user
+ * @package pebs
  */
-namespace pebs\user;
+namespace pebs;
 
     /**
      * Pebs Core
@@ -32,7 +32,6 @@ namespace pebs\user;
  * @use \ElggUser
  */
 use \ElggUser;
-use pebs\PebsItem;
 
 /**
  * Class PebsUser
@@ -56,10 +55,11 @@ class PebsUser extends PebsItem{
      */
     public $login = "";
     public $password = "";
-    private $password_hash = "";
     public $email = "";
-    public $role = PebsUser::DEFAULT_ROLE;
+    public $role = self::DEFAULT_ROLE;
     public $time_created = -1;
+
+    private $password_hash = "";
 
     /**
      * Loads a User instance from the system.
@@ -67,19 +67,19 @@ class PebsUser extends PebsItem{
      * @param int $id Id of the User to load from the system.
      * @return $this|bool Returns User instance, or false if error.
      */
-    function load($id){
+    protected function load($id){
         if(!$elgg_user = new ElggUser((int)$id)){
             return null;
         }
-        $this->description = $elgg_user->description;
-        $this->email = $elgg_user->email;
-        $this->name = $elgg_user->name;
-        $this->id = $elgg_user->guid;
-        $this->login = $elgg_user->username;
-        $this->password = $elgg_user->password;
-        $this->password_hash = $elgg_user->salt;
-        $this->role = $elgg_user->role;
-        $this->time_created = $elgg_user->time_created;
+        $this->description = (string)$elgg_user->description;
+        $this->email = (string)$elgg_user->email;
+        $this->name = (string)$elgg_user->name;
+        $this->id = (int)$elgg_user->guid;
+        $this->login = (string)$elgg_user->username;
+        $this->password = (string)$elgg_user->password;
+        $this->password_hash = (string)$elgg_user->salt;
+        $this->role = (string)$elgg_user->role;
+        $this->time_created = (int)$elgg_user->time_created;
         return true;
     }
 
@@ -94,9 +94,9 @@ class PebsUser extends PebsItem{
         } elseif(!$elgg_user = new ElggUser($this->id)){
             return false;
         }
+        $elgg_user->name = $this->name;
         $elgg_user->description = $this->description;
         $elgg_user->email = $this->email;
-        $elgg_user->name = $this->name;
         $elgg_user->username = $this->login;
         $elgg_user->password = $this->password;
         $elgg_user->salt = $this->password_hash;
@@ -134,44 +134,44 @@ class PebsUser extends PebsItem{
      * Get users with login contained in a given list of logins.
      *
      * @param array $login_array Array of user logins
-     * @return array Returns an array of PebsUser objects
+     * @return array Returns an array of User objects
      */
     static function getByLogin($login_array){
-        $called_class = (object)get_called_class();
+        $called_class = get_called_class();
         $user_array = array();
-        for($i = 0; $i < count($login_array); $i++){
-            $elgg_user = get_user_by_username($login_array[$i]);
+        foreach($login_array as $login){
+            $elgg_user = get_user_by_username($login);
             if(!$elgg_user){
-                $user_array[$i] = null;
-                continue;
+                $user_array[] = null;
+            } else{
+                $user_array[] = new $called_class((int)$elgg_user->guid);
             }
-            $user_array[$i] = new $called_class($elgg_user->guid);
         }
         return $user_array;
     }
 
     /**
-     * Get users with email contained in a given list of emails.
+     * Get users with email contained in a given list of emails. Each email can be associated
+     * with multiple users. The output will be an array of Users per login, nested inside a main
+     * array.
      *
      * @param array $email_array Array of user emails
-     * @return array Returns an array of PebsUser objects
+     * @return array Returns an array of arrays of User objects
      */
     static function getByEmail($email_array){
-        $called_class = (object)get_called_class();
+        $called_class = get_called_class();
         $user_array = array();
-        for($i = 0; $i < count($email_array); $i++){
-            $elgg_user_array = get_user_by_email($email_array[$i]);
+        foreach($email_array as $email){
+            $elgg_user_array = get_user_by_email($email);
             if(!$elgg_user_array){
-                $user_array[$i] = null;
-                continue;
+                $user_array[] = null;
+            } else{
+                $temp_array = array();
+                foreach($elgg_user_array as $elgg_user){
+                    $temp_array[] = new $called_class((int)$elgg_user->guid);
+                }
+                $user_array[] = $temp_array;
             }
-            $temp_array = array();
-            $j = 0;
-            foreach($elgg_user_array as $elgg_user){
-                $temp_array[$j] = new $called_class($elgg_user->guid);
-                $j++;
-            }
-            $user_array = array_merge($user_array, $temp_array);
         }
         return $user_array;
     }
@@ -180,29 +180,29 @@ class PebsUser extends PebsItem{
      * Get users with role contained in a given list of roles.
      *
      * @param array $role_array Array of user roles
-     * @return array Returns an array of PebsUser objects
+     * @return array Returns an array of arrays of User objects
      */
     static function getByRole($role_array){
-        $called_class = (object)get_called_class();
+        $called_class = get_called_class();
         $user_array = array();
         foreach($role_array as $role){
             $elgg_user_array = elgg_get_entities_from_metadata(
                 array(
                      'type' => $called_class::TYPE,
                      'subtype' => $called_class::SUBTYPE,
-                     'metadata_names' => array('role'),
+                     'metadata_names' => array("role"),
                      'metadata_values' => array($role)
                 )
             );
             if(!$elgg_user_array){
                 $user_array[] = null;
-                continue;
+            } else{
+                $temp_array = array();
+                foreach($elgg_user_array as $elgg_user){
+                    $temp_array[] = new $called_class($elgg_user->guid);
+                }
+                $user_array[] = $temp_array;
             }
-            $temp_array = array();
-            foreach($elgg_user_array as $elgg_user){
-                $temp_array[] = new $called_class($elgg_user->guid);
-            }
-            $user_array = array_merge($user_array, $temp_array);
         }
         return $user_array;
     }

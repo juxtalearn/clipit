@@ -33,7 +33,7 @@ namespace clipit\quiz\result;
  * @return array Array of properties with type and default value
  */
 function list_properties(){
-    return get_class_vars(__NAMESPACE__."\\ClipitQuizResult");
+    return ClipitQuizResult::listProperties();
 }
 
 /**
@@ -49,59 +49,49 @@ function get_properties($id, $prop_array){
     if(!$quiz_result){
         return false;
     }
-    $value_array = array();
-    for($i = 0; $i < count($prop_array); $i++){
-        $value_array[$i] = $quiz_result->$prop_array[$i];
-    }
-    return array_combine($prop_array, $value_array);
+    return $quiz_result->getProperties($prop_array);
 }
 
 /**
  * Set values to specified properties of a QuizResult.
  *
  * @param int $id Id from QuizResult
- * @param array $prop_array Array of properties to set values into
- * @param array $value_array Array of associated values to set into properties
+ * @param array $prop_value_array Array of properties => values to set
  * @return bool Returns true if success, false if error
- * @throws \InvalidParameterException If count(prop_array) != count(value_array)
  */
-function set_properties($id, $prop_array, $value_array){
-    if(count($prop_array) != count($value_array)){
-        throw(new \InvalidParameterException(
-            "ERROR: The length of prop_array and value_array must match."));
-    }
+function set_properties($id, $prop_value_array){
     $quiz_result = new ClipitQuizResult($id);
     if(!$quiz_result){
         return false;
     }
-    for($i = 0; $i < count($prop_array); $i++){
-        $quiz_result->$prop_array[$i] = $value_array[$i];
-    }
-    if(!$quiz_result->save()){
-        return false;
-    }
-    return true;
+    return $quiz_result->setProperties($prop_value_array);
 }
 
 /**
  * Create a new ClipitQuizResult instance, and save it into the system.
  *
+ * @param string $name Name of the Quiz Result
+ * @param string $description Quiz Result full description (optional)
  * @param int $quiz_question Id of the Quiz Question this Result refers to
  * @param array $result_array Array with the Result elements posted by a user
  * @param int $user Id of the user who posted the result
  * @param bool $correct If true: the result is correct, if false: the result is incorrect (optional)
  * @return bool|int Returns Returns the new Quiz Result Id, or false if error
  */
-function create($quiz_question,
+function create($name,
+                $description = "",
+                $quiz_question,
                 $result_array,
-                $user,
+                $user,              // USAR EL CAMPO $name PARA EL $user??
                 $correct = false){
+    $prop_value_array["name"] = $name;
+    $prop_value_array["description"] = $description;
+    $prop_value_array["quiz_question"] = $quiz_question;
+    $prop_value_array["result_array"] = $result_array;
+    $prop_value_array["user"] = $user;
+    $prop_value_array["correct"] = $correct;
     $quiz_result = new ClipitQuizResult();
-    $quiz_result->quiz_question = $quiz_question;
-    $quiz_result->result_array = $result_array;
-    $quiz_result->user = $user;
-    $quiz_result->setCorrect($correct);
-    return $quiz_result->save();
+    return $quiz_result->setProperties($prop_value_array);
 }
 
 /**
@@ -124,40 +114,7 @@ function delete($id){
  * @return array Returns an array of ClipitQuizQuestion objects
  */
 function get_all($limit = 0){
-    $quiz_result_array = array();
-    $elgg_object_array = elgg_get_entities(array('type' => ClipitQuizResult::TYPE,
-                                                 'subtype' => ClipitQuizResult::SUBTYPE,
-                                                 'limit' => $limit));
-    if(!$elgg_object_array){
-        return $quiz_result_array;
-    }
-    foreach($elgg_object_array as $elgg_object){
-        array_push($quiz_result_array, new ClipitQuizResult($elgg_object->guid));
-    }
-    return $quiz_result_array;
-}
-
-/**
- * Get all Quiz Results from a specified Quiz Question.
- *
- * @param int $quiz_question_id Id of Quiz Question to get Results form
- * @param int $limit Number of results to show, default = 0 [no limit] (optional)
- * @return array|bool Array of Quiz Results, or false if error
- */
-function get_from_question($quiz_question_id, $limit = 0){
-    $quiz_result_array = array();
-    $elgg_object_array = elgg_get_entities(array("type" => ClipitQuizResult::TYPE,
-                                                 "subtype" => ClipitQuizResult::SUBTYPE,
-                                                 "limit" => $limit));
-    if(!$elgg_object_array){
-        return $quiz_result_array;
-    }
-    foreach($elgg_object_array as $elgg_object){
-        if((int) $elgg_object->quiz_question == (int) $quiz_question_id){
-            array_push($quiz_result_array, new ClipitQuizResult($elgg_object->guid));
-        }
-    }
-    return $quiz_result_array;
+    return ClipitQuizResult::getAll($limit);
 }
 
 /**
@@ -167,15 +124,31 @@ function get_from_question($quiz_question_id, $limit = 0){
  * @return array Returns an array of ClipitQuizResult objects
  */
 function get_by_id($id_array){
+    return ClipitQuizResult::getById($id_array);
+}
+
+
+/**
+ * Get all Quiz Results from a specified Quiz Question.
+ *
+ * @param int $quiz_question_id Id of Quiz Question to get Results form
+ * @return array|bool Array of Quiz Results, or false if error
+ */
+function get_from_question($quiz_question_id){
     $quiz_result_array = array();
-    $i = 0;
-    foreach($id_array as $id){
-        if(elgg_entity_exists((int) $id)){
-            $quiz_result_array[$i] = new ClipitQuizResult((int) $id);
-        } else{
-            $quiz_result_array[$i] = null;
-        }
-        $i++;
+    $elgg_object_array = elgg_get_entities_from_metadata(
+        array(
+             "type" => ClipitQuizResult::TYPE,
+             "subtype" => ClipitQuizResult::SUBTYPE,
+             "metadata_names" => array("quiz_question"),
+             "metadata_values" => array($quiz_question_id)
+             )
+    );
+    if(!$elgg_object_array){
+        return $quiz_result_array;
+    }
+    foreach($elgg_object_array as $elgg_object){
+        $quiz_result_array[] =  new ClipitQuizResult($elgg_object->guid);
     }
     return $quiz_result_array;
 }

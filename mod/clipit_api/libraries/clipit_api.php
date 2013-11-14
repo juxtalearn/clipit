@@ -10,7 +10,7 @@ function expose_rest_api(){
     expose_quiz_question_functions();
     expose_quiz_result_functions();
     expose_user_functions();
-
+    expose_video_functions();
     //    expose_activity_functions();
     //    expose_comment_functions();
     //    expose_file_functions();
@@ -23,22 +23,22 @@ function expose_rest_api(){
     //    expose_taxonomy_sb_functions();
     //    expose_taxonomy_tag_functions();
     //    expose_taxonomy_tc_functions();
-    //    expose_video_functions();
 }
 
 
 /**
- * Expose library functions to REST API.
+ * Expose ClipitUser library functions to REST API.
  */
 function expose_user_functions(){
-    $namespace = "\\clipit\\user";
+    $api_suffix = "clipit.user.";
+    $namespace = "\\clipit\\user\\";
     expose_function(
-        "clipit.user.list_properties",
-        $namespace."\\list_properties",
+        $api_suffix."list_properties",
+        $namespace."list_properties",
         null, "description", 'GET', false, true);
     expose_function(
-        "clipit.user.get_properties",
-        $namespace."\\get_properties",
+        $api_suffix."get_properties",
+        $namespace."get_properties",
         array(
              "id" => array(
                  "type" => "int",
@@ -48,22 +48,19 @@ function expose_user_functions(){
                  "required" => true)),
         "description goes here", 'GET', false, true);
     expose_function(
-        "clipit.user.set_properties",
-        $namespace."\\set_properties",
+        $api_suffix."set_properties",
+        $namespace."set_properties",
         array(
              "id" => array(
                  "type" => "int",
                  "required" => true),
-             "prop_array" => array(
-                 "type" => "array",
-                 "required" => true),
-             "value_array" => array(
+             "prop_value_array" => array(
                  "type" => "array",
                  "required" => true)),
         "description goes here", 'GET', false, true);
     expose_function(
-        "clipit.user.create",
-        $namespace."\\create",
+        $api_suffix."create",
+        $namespace."create",
         array(
              "login" => array(
                  "type" => "string",
@@ -85,44 +82,44 @@ function expose_user_functions(){
                  "required" => false)),
         "description goes here", 'GET', false, true);
     expose_function(
-        "clipit.user.delete",
-        $namespace."\\delete",
+        $api_suffix."delete",
+        $namespace."delete",
         array(
              "id" => array(
                  "type" => "int",
                  "required" => true)),
         "description goes here", 'GET', false, true);
     expose_function(
-        "clipit.user.get_all",
-        $namespace."\\get_all",
+        $api_suffix."get_all",
+        $namespace."get_all",
         null, "description goes here", 'GET', false, true);
     expose_function(
-        "clipit.user.get_by_id",
-        $namespace."\\get_by_id",
+        $api_suffix."get_by_id",
+        $namespace."get_by_id",
         array(
              "id_array" => array(
                  "type" => "array",
                  "required" => true)),
         "description goes here", 'GET', false, true);
     expose_function(
-        "clipit.user.get_by_login",
-        $namespace."\\get_by_login",
+        $api_suffix."get_by_login",
+        $namespace."get_by_login",
         array(
              "login_array" => array(
                  "type" => "array",
                  "required" => true)),
         "description goes here", 'GET', false, true);
     expose_function(
-        "clipit.user.get_by_email",
-        $namespace."\\get_by_email",
+        $api_suffix."get_by_email",
+        $namespace."get_by_email",
         array(
              "email_array" => array(
                  "type" => "array",
                  "required" => true)),
         "description goes here", 'GET', false, true);
     expose_function(
-        "clipit.user.get_by_role",
-        $namespace."\\get_by_role",
+        $api_suffix."get_by_role",
+        $namespace."get_by_role",
         array(
              "role_array" => array(
                  "type" => "array",
@@ -131,17 +128,18 @@ function expose_user_functions(){
 }
 
 /**
- * Expose libraty functions to REST API.
+ * Expose ClipitQuiz library functions to REST API.
  */
 function expose_quiz_functions(){
-    $namespace = "\\clipit\\quiz";
+    $api_suffix = "clipit.quiz.";
+    $namespace = "\\clipit\\quiz\\";
     expose_function(
-        "clipit.quiz.list_properties",
-        $namespace."\\list_properties",
+        $api_suffix."list_properties",
+        $namespace."list_properties",
         null, "description", 'GET', false, true);
     expose_function(
-        "clipit.quiz.get_properties",
-        $namespace."\\get_properties",
+        $api_suffix."get_properties",
+        $namespace."get_properties",
         array(
              "id" => array(
                  "type" => "int",
@@ -151,22 +149,19 @@ function expose_quiz_functions(){
                  "required" => true)),
         "description goes here", 'GET', false, true);
     expose_function(
-        "clipit.quiz.set_properties",
-        $namespace."\\set_properties",
+        $api_suffix."set_properties",
+        $namespace."set_properties",
         array(
              "id" => array(
                  "type" => "int",
                  "required" => true),
-             "prop_array" => array(
-                 "type" => "array",
-                 "required" => true),
-             "value_array" => array(
+             "prop_value_array" => array(
                  "type" => "array",
                  "required" => true)),
         "description goes here", 'GET', false, true);
     expose_function(
-        "clipit.quiz.create",
-        $namespace."\\create",
+        $api_suffix."create",
+        $namespace."create",
         array(
              "name" => array(
                  "type" => "string",
@@ -188,16 +183,28 @@ function expose_quiz_functions(){
                  "required" => false)),
         "description goes here", 'GET', false, true);
     expose_function(
-        "clipit.quiz.delete",
-        $namespace."\\delete",
+        $api_suffix."delete",
+        $namespace."delete",
         array(
              "id" => array(
                  "type" => "int",
                  "required" => true)),
         "description", 'GET', false, true);
     expose_function(
-        "clipit.quiz.add_questions",
-        $namespace."\\add_questions",
+        $api_suffix."get_all",
+        $namespace."get_all",
+        null, "description", 'GET', false, true);
+    expose_function(
+        $api_suffix."get_by_id",
+        $namespace."get_by_id",
+        array(
+             "id_array" => array(
+                 "type" => "array",
+                 "required" => true)),
+        "description", 'GET', false, true);
+    expose_function(
+        $api_suffix."add_questions",
+        $namespace."add_questions",
         array(
              "id" => array(
                  "type" => "int",
@@ -207,20 +214,19 @@ function expose_quiz_functions(){
                  "required" => true)),
         "description", 'GET', false, true);
     expose_function(
-        "clipit.quiz.get_all",
-        $namespace."\\get_all",
-        null, "description", 'GET', false, true);
-    expose_function(
-        "clipit.quiz.get_by_id",
-        $namespace."\\get_by_id",
+        $api_suffix."remove_questions",
+        $namespace."remove_questions",
         array(
-             "id_array" => array(
+             "id" => array(
+                 "type" => "int",
+                 "required" => true),
+             "question_array" => array(
                  "type" => "array",
                  "required" => true)),
         "description", 'GET', false, true);
     expose_function(
-        "clipit.quiz.get_questions",
-        $namespace."\\get_questions",
+        $api_suffix."get_questions",
+        $namespace."get_questions",
         array(
              "id" => array(
                  "type" => "int",
@@ -229,17 +235,18 @@ function expose_quiz_functions(){
 }
 
 /**
- * Expose libraty functions to REST API.
+ * Expose ClipitQuizQuestionlibrary functions to REST API.
  */
 function expose_quiz_question_functions(){
-    $namespace = "\\clipit\\quiz\\question";
+    $api_suffix = "clipit.quiz.question.";
+    $namespace = "\\clipit\\quiz\\question\\";
     expose_function(
-        "clipit.quiz.question.list_properties",
-        $namespace."\\list_properties",
+        $api_suffix."list_properties",
+        $namespace."list_properties",
         null, "description", 'GET', false, true);
     expose_function(
-        "clipit.quiz.question.get_properties",
-        $namespace."\\get_properties",
+        $api_suffix."get_properties",
+        $namespace."get_properties",
         array(
              "id" => array(
                  "type" => "int",
@@ -249,26 +256,26 @@ function expose_quiz_question_functions(){
                  "required" => true)),
         "description goes here", 'GET', false, true);
     expose_function(
-        "clipit.quiz.question.set_properties",
-        $namespace."\\set_properties",
+        $api_suffix."set_properties",
+        $namespace."set_properties",
         array(
              "id" => array(
                  "type" => "int",
                  "required" => true),
-             "prop_array" => array(
-                 "type" => "array",
-                 "required" => true),
-             "value_array" => array(
+             "prop_value_array" => array(
                  "type" => "array",
                  "required" => true)),
         "description goes here", 'GET', false, true);
     expose_function(
-        "clipit.quiz.question.create",
-        $namespace."\\create",
+        $api_suffix."create",
+        $namespace."create",
         array(
-             "question" => array(
+             "name" => array(
                  "type" => "string",
                  "required" => true),
+             "description" => array(
+                "type" => "string",
+                "required" => true),
              "option_array" => array(
                  "type" => "array",
                  "required" => true),
@@ -283,16 +290,40 @@ function expose_quiz_question_functions(){
                  "required" => false)),
         "description", 'GET', false, true);
     expose_function(
-        "clipit.quiz.question.delete",
-        $namespace."\\delete",
+        $api_suffix."delete",
+        $namespace."delete",
         array(
              "id" => array(
                  "type" => "int",
                  "required" => true)),
         "description", 'GET', false, true);
     expose_function(
-        "clipit.quiz.question.add_taxonomy_tags",
-        $namespace."\\add_taxonomy_tags",
+        $api_suffix."get_all",
+        $namespace."get_all",
+        array(
+             "limit" => array(
+                 "type" => "int",
+                 "required" => false)),
+        "description", 'GET', false, true);
+    expose_function(
+        $api_suffix."get_by_id",
+        $namespace."get_by_id",
+        array(
+             "id_array" => array(
+                 "type" => "array",
+                 "required" => true)),
+        "description", 'GET', false, true);
+    expose_function(
+        $api_suffix."get_results",
+        $namespace."get_results",
+        array(
+             "id" => array(
+                 "type" => "int",
+                 "required" => true)),
+        "description", 'GET', false, true);
+    expose_function(
+        $api_suffix."add_taxonomy_tags",
+        $namespace."add_taxonomy_tags",
         array(
              "id" => array(
                  "type" => "int",
@@ -302,46 +333,39 @@ function expose_quiz_question_functions(){
                  "required" => true)),
         "description", 'GET', false, true);
     expose_function(
-        "clipit.quiz.question.get_all",
-        $namespace."\\get_all",
-        array(
-             "limit" => array(
-                 "type" => "int",
-                 "required" => false)),
-        "description", 'GET', false, true);
-    expose_function(
-        "clipit.quiz.question.get_results",
-        $namespace."\\get_results",
+        $api_suffix."remove_taxonomy_tags",
+        $namespace."remove_taxonomy_tags",
         array(
              "id" => array(
                  "type" => "int",
                  "required" => true),
-             "limit" => array(
-                 "type" => "int",
-                 "required" => false)),
-        "description", 'GET', false, true);
-    expose_function(
-        "clipit.quiz.question.get_by_id",
-        $namespace."\\get_by_id",
-        array(
-             "id_array" => array(
+             "taxonomy_tag_array" => array(
                  "type" => "array",
                  "required" => true)),
         "description", 'GET', false, true);
+    expose_function(
+        $api_suffix."get_taxonomy_tags",
+        $namespace."get_taxonomy_tags",
+        array(
+             "id" => array(
+                 "type" => "int",
+                 "required" => true)),
+        "description", "GET", false, true);
 }
 
 /**
- * Expose libraty functions to REST API.
+ * Expose ClipitQuizResult library functions to REST API.
  */
 function expose_quiz_result_functions(){
-    $namespace = "\\clipit\\quiz\\result";
+    $api_suffix = "clipit.quiz.result.";
+    $namespace = "\\clipit\\quiz\\result\\";
     expose_function(
-        "clipit.quiz.result.list_properties",
-        $namespace."\\list_properties",
+        $api_suffix."list_properties",
+        $namespace."list_properties",
         null, "description", 'GET', false, true);
     expose_function(
-        "clipit.quiz.result.get_properties",
-        $namespace."\\get_properties",
+        $api_suffix."get_properties",
+        $namespace."get_properties",
         array(
              "id" => array(
                  "type" => "int",
@@ -351,22 +375,19 @@ function expose_quiz_result_functions(){
                  "required" => true)),
         "description goes here", 'GET', false, true);
     expose_function(
-        "clipit.quiz.result.set_properties",
-        $namespace."\\set_properties",
+        $api_suffix."set_properties",
+        $namespace."set_properties",
         array(
              "id" => array(
                  "type" => "int",
                  "required" => true),
-             "prop_array" => array(
-                 "type" => "array",
-                 "required" => true),
-             "value_array" => array(
+             "prop_value_array" => array(
                  "type" => "array",
                  "required" => true)),
         "description goes here", 'GET', false, true);
     expose_function(
-        "clipit.quiz.result.create",
-        $namespace."\\create",
+        $api_suffix."create",
+        $namespace."create",
         array(
              "quiz_question" => array(
                  "type" => "int",
@@ -382,38 +403,143 @@ function expose_quiz_result_functions(){
                  "required" => false)),
         "description", 'GET', false, true);
     expose_function(
-        "clipit.quiz.result.delete",
-        $namespace."\\delete",
+        $api_suffix."delete",
+        $namespace."delete",
         array(
              "id" => array(
                  "type" => "int",
                  "required" => true)),
         "description", 'GET', false, true);
     expose_function(
-        "clipit.quiz.result.get_all",
-        $namespace."\\get_all",
+        $api_suffix."get_all",
+        $namespace."get_all",
         array(
              "limit" => array(
                  "type" => "int",
                  "required" => false)),
         "description", 'GET', false, true);
     expose_function(
-        "clipit.quiz.result.get_from_question",
-        $namespace."\\get_from_question",
-        array(
-             "quiz_question_id" => array(
-                 "type" => "int",
-                 "required" => true),
-             "limit" => array(
-                 "type" => "int",
-                 "required" => false)),
-        "description", 'GET', false, true);
-    expose_function(
-        "clipit.quiz.result.get_by_id",
-        $namespace."\\get_by_id",
+        $api_suffix."get_by_id",
+        $namespace."get_by_id",
         array(
              "id_array" => array(
                  "type" => "array",
                  "required" => true)),
         "description", 'GET', false, true);
+    expose_function(
+        $api_suffix."get_from_question",
+        $namespace."get_from_question",
+        array(
+             "quiz_question_id" => array(
+                 "type" => "int",
+                 "required" => true)),
+        "description", 'GET', false, true);
+}
+
+/**
+ * Expose ClipitVideo library functions to REST API.
+ */
+function expose_video_functions(){
+    $api_suffix = "clipit.video.";
+    $namespace = "\\clipit\\video\\";
+    expose_function(
+        $api_suffix."list_properties",
+        $namespace."list_properties",
+        null, "description", 'GET', false, true);
+    expose_function(
+        $api_suffix."get_properties",
+        $namespace."get_properties",
+        array(
+             "id" => array(
+                 "type" => "int",
+                 "required" => true),
+             "prop_array" => array(
+                 "type" => "array",
+                 "required" => true)),
+        "description goes here", 'GET', false, true);
+    expose_function(
+        $api_suffix."set_properties",
+        $namespace."set_properties",
+        array(
+             "id" => array(
+                 "type" => "int",
+                 "required" => true),
+             "prop_value_array" => array(
+                 "type" => "array",
+                 "required" => true)),
+        "description goes here", 'GET', false, true);
+    expose_function(
+        $api_suffix."create",
+        $namespace."create",
+        array(
+             "name" => array(
+                 "type" => "string",
+                 "required" => true),
+             "description" => array(
+                 "type" => "string",
+                 "required" => false),
+             "comment_array" => array(
+                 "type" => "array",
+                 "required" => false),
+             "content" => array(
+                 "type" => "int",
+                 "required" => false),
+             "taxonomy_tag_array" => array(
+                 "type" => "array",
+                 "required" => false)),
+        "description", 'GET', false, true);
+    expose_function(
+        $api_suffix."delete",
+        $namespace."delete",
+        array(
+             "id" => array(
+                 "type" => "int",
+                 "required" => true)),
+        "description", 'GET', false, true);
+    expose_function(
+        $api_suffix."get_all",
+        $namespace."get_all",
+        array(
+             "limit" => array(
+                 "type" => "int",
+                 "required" => false)),
+        "description", 'GET', false, true);
+    expose_function(
+        $api_suffix."get_by_id",
+        $namespace."get_by_id",
+        array(
+             "id_array" => array(
+                 "type" => "array",
+                 "required" => true)),
+        "description", 'GET', false, true);
+    expose_function(
+        $api_suffix."add_comments",
+        $namespace."add_comments",
+        array(
+             "id" => array(
+                 "type" => "int",
+                 "required" => true),
+             "comment_array" => array(
+                 "type" => "array",
+                 "required" => true)),
+        "description", "GET", false, true);
+    expose_function(
+        $api_suffix."remove_comments",
+        $namespace."remove_comments",
+        array(
+             "id" => array(
+                 "type" => "int",
+                 "required" => true),
+             "comment_array" => array(
+                 "type" => "array",
+                 "required" => true)),
+        "description", "GET", false, true);
+    expose_function(
+        $api_suffix."get_comments",
+        $namespace."get_comments",
+        array(
+             "id" => array(
+                 "type" => "int",
+                 "required" => true)),
+        "description", "GET", false, true);
 }

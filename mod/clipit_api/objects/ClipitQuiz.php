@@ -32,37 +32,22 @@ namespace clipit\quiz;
  * @use \ElggObject
  */
 use \ElggObject;
+use pebs\PebsItem;
 
 /**
  * Class ClipitQuiz
  *
  * @package clipit\quiz
  */
-class ClipitQuiz{
-    /**
-     * @const string Elgg entity type for this class
-     */
-    const TYPE = "object";
+class ClipitQuiz extends PebsItem{
     /**
      * @const string Elgg entity subtype for this class
      */
     const SUBTYPE = "clipit_quiz";
     /**
-     * @var int Unique Id of saved ClipitQuiz (-1 = unsaved)
-     */
-    public $id = -1;
-    /**
-     * @var string Quiz name
-     */
-    public $name = "";
-    /**
      * @var string Target interface for Quiz display (e.g.: "web space", "large display"...)
      */
     public $target = "";
-    /**
-     * @var string Quiz description free text (optional)
-     */
-    public $description = "";
     /**
      * @var bool Specifies whether the Quiz can be reused by other teachers (optional, default = false)
      */
@@ -77,17 +62,6 @@ class ClipitQuiz{
     public $taxonomy = -1;
 
     /**
-     * ClipitQuiz constructor
-     *
-     * @param int|null $id If $id is null then create new instance, else load instance with id = $id.
-     */
-    function __construct($id = null){
-        if($id){
-            $this->load((int) $id);
-        }
-    }
-
-    /**
      * Loads a ClipitQuiz from the system.
      *
      * @param int $id IF of the ClipitQuiz to load from the system.
@@ -97,8 +71,9 @@ class ClipitQuiz{
         if(!($elgg_object = new ElggObject((int) $id))){
             return null;
         }
-        if($elgg_object->type != ClipitQuiz::TYPE
-           || get_subtype_from_id($elgg_object->subtype) != ClipitQuiz::SUBTYPE){
+        $elgg_type = $elgg_object->type;
+        $elgg_subtype = get_subtype_from_id($elgg_object->subtype);
+        if(($elgg_type != $this::TYPE) || ($elgg_subtype != $this::SUBTYPE)){
             return null;
         }
         $this->id = (int) $elgg_object->guid;
@@ -119,15 +94,12 @@ class ClipitQuiz{
     function save(){
         if($this->id == -1){
             $elgg_object = new ElggObject();
-            $elgg_object->subtype = (string) ClipitQuiz::SUBTYPE;
-        } else{
-            $elgg_object = new ElggObject((int) $this->id);
-        }
-        if(!$elgg_object){
+            $elgg_object->subtype = (string)$this::SUBTYPE;
+        } elseif(!$elgg_object = new ElggObject((int)$this->id)){
             return false;
         }
-        $elgg_object->description = (string) $this->description;
-        $elgg_object->name = (string) $this->name;
+        $elgg_object->name = (string)$this->name;
+        $elgg_object->description = (string)$this->description;
         $elgg_object->public = (bool) $this->public;
         $elgg_object->question_array = (array) $this->question_array;
         $elgg_object->taxonomy = (int) $this->taxonomy;
@@ -135,16 +107,15 @@ class ClipitQuiz{
         return $this->id = $elgg_object->save();
     }
 
-    /**
-     * Deletes a quiz from the system.
-     *
-     * @return bool True if success, false if error.
-     */
-    function delete(){
-        if(!$elgg_object = get_Entity((int) $this->id)){
-            return false;
+    function setProperties($prop_value_array){
+        foreach($prop_value_array as $prop => $value){
+            if($prop == "public"){
+                $this->setPrivacy($value);
+            } else{
+                $this->$prop = $value;
+            }
         }
-        return $elgg_object->delete();
+        return $this->save();
     }
 
     /**
@@ -152,8 +123,8 @@ class ClipitQuiz{
      *
      * @param string $value Flag specifying if the quiz is public or not
      */
-    public function setPrivacy($value){
-        if($value =="true"){
+    function setPrivacy($value){
+        if($value == "true"){
             $this->public = true;
         } elseif($value == "false"){
             $this->public = false;

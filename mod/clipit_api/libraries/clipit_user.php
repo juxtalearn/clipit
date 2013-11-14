@@ -56,16 +56,15 @@ function get_properties($id, $prop_array){
  * Set values to specified properties of a User.
  *
  * @param int $id Id from User
- * @param array $prop_array Array of properties to set values into
- * @param array $value_array Array of associated values to set into properties
+ * @param array $prop_value_array Array of properties => values to set
  * @return bool Returns true if success, false if error
  * @throws \InvalidParameterException If count(prop_array) != count(value_array)
  */
-function set_properties($id, $prop_array, $value_array){
+function set_properties($id, $prop_value_array){
     if(!$user = new ClipitUser($id)){
         return false;
     }
-    return $user->setProperties($prop_array, $value_array);
+    return $user->setProperties($prop_value_array);
 }
 
 /**
@@ -113,10 +112,10 @@ function delete($id){
 }
 
 /**
- * Get all Users of this from the system.
+ * Get all Users from the system.
  *
  * @param int $limit Number of results to show, default= 0 [no limit] (optional)
- * @return array Returns an array of ClipitUsers
+ * @return array Returns an array of ClipitUser objects
  */
 function get_all($limit = 0){
     return ClipitUser::getAll($limit);
@@ -125,8 +124,8 @@ function get_all($limit = 0){
 /**
  * Get Users with id contained in a given list.
  *
- * @param array $id_array Array of Object Ids
- * @return array Returns an array of ClipitUsers
+ * @param array $id_array Array of User Ids
+ * @return array Returns an array of ClipitUser objects
  */
 function get_by_id($id_array){
     return ClipitUser::getById($id_array);

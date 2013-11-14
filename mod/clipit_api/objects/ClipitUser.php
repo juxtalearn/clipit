@@ -31,7 +31,7 @@ namespace clipit\user;
  * Alias so classes outside of this namespace can be used without path.
  * @use \pebs\user\PebsUser
  */
-use \pebs\user\PebsUser;
+use \pebs\PebsUser;
 
 /**
  * Class ClipitUser
