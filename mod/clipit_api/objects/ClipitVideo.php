@@ -41,9 +41,9 @@ class ClipitVideo extends PebsItem{
      */
     public $comment_array = array();
     /**
-     * @var int Id of File which holds this Video's content
+     * @var string Link to where the video is hosted
      */
-    public $content = -1;
+    public $link = "";
     /**
      * @var array List of Taxonomy Tags applied to this Video
      */
@@ -71,8 +71,8 @@ class ClipitVideo extends PebsItem{
         $this->id = (int)$elgg_object->guid;
         $this->name = (string)$elgg_object->name;
         $this->description = $elgg_object->description;
-        $this->$comment_array = (array)$elgg_object->comment_array;
-        $this->content = (int)$elgg_object->content;
+        $this->comment_array = (array)$elgg_object->comment_array;
+        $this->link = (int)$elgg_object->link;
         $this->taxonomy_tag_array = (array)$elgg_object->taconomy_tag_array;
         $this->time_created = (int)$elgg_object->time_created;
         return $this;
@@ -93,7 +93,7 @@ class ClipitVideo extends PebsItem{
         $elgg_object->name = (string)$this->name;
         $elgg_object->description = (string)$this->description;
         $elgg_object->comment_array = (array)$this->comment_array;
-        $elgg_object->content = (int)$this->content;
+        $elgg_object->link = (int)$this->link;
         $elgg_object->taxonomy_tag_array = (array)$this->taxonomy_tag_array;
         $elgg_object->save();
         return $this->id = $elgg_object->guid;
@@ -105,19 +105,19 @@ class ClipitVideo extends PebsItem{
      * @param string $name Name of the Video
      * @param string $description Description of the Video
      * @param array $comment_array List of comments which target the Video
-     * @param int $content File Id which holds the video file content
+     * @param string $link Link to where the video is hosted
      * @param array $taxonomy_tag_array List of Taxonomy Tags related to the Video
      * @return bool|int Returns the new Video Id, or false if error
      */
     static function create($name,
                            $description = "",
                            $comment_array = array(),
-                           $content = -1,
+                           $link = "",
                            $taxonomy_tag_array = array()){
         $prop_value_array["name"] = $name;
         $prop_value_array["description"] = $description;
         $prop_value_array["comment_array"] = $comment_array;
-        $prop_value_array["content"] = $content;
+        $prop_value_array["link"] = $link;
         $prop_value_array["taxonomy_tag_array"] = $taxonomy_tag_array;
         $video = new ClipitVideo();
         return $video->setProperties($prop_value_array);

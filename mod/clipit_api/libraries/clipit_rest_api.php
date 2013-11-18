@@ -575,8 +575,8 @@ function expose_video_functions(){
              "comment_array" => array(
                  "type" => "array",
                  "required" => false),
-             "content" => array(
-                 "type" => "int",
+             "link" => array(
+                 "type" => "string",
                  "required" => false),
              "taxonomy_tag_array" => array(
                  "type" => "array",
