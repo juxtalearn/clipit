@@ -21,13 +21,13 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-namespace clipit\sta;
+namespace clipit;
 
 
 /**
  * Class ClipitSTA
  *
- * @package clipit\sta
+ * @package clipit
  */
 class ClipitSTA{
     // Class properties

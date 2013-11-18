@@ -21,13 +21,13 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-namespace clipit\taxonomy\sb;
+namespace clipit;
 
 
 /**
  * Class ClipitTaxonomySB
  *
- * @package clipit\taxonomy\sb
+ * @package clipit
  */
 class ClipitTaxonomySB{
 

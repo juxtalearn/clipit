@@ -21,13 +21,13 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-namespace clipit\group;
+namespace clipit;
 
 
 /**
  * Class ClipitGroup
  *
- * @package clipit\group
+ * @package clipit
  */
 class ClipitGroup{
 

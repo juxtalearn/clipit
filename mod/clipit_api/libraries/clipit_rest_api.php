@@ -64,11 +64,13 @@ function expose_palette_functions(){
 
 function expose_quiz_functions(){
     $api_suffix = "clipit.quiz.";
-    $class_suffix = "\\clipit\\quiz\\ClipitQuiz::";
+    $class_suffix = "\\clipit\\ClipitQuiz::";
     expose_function(
         $api_suffix."list_properties",
         $class_suffix."list_properties",
-        null, "description", 'GET', false, true);
+        null,
+        "Get class properties",
+        'GET', false, true);
     expose_function(
         $api_suffix."get_properties",
         $class_suffix."get_properties",
@@ -79,7 +81,8 @@ function expose_quiz_functions(){
              "prop_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "description goes here", 'GET', false, true);
+        "Get property=>value array",
+        'GET', false, true);
     expose_function(
         $api_suffix."set_properties",
         $class_suffix."set_properties",
@@ -90,7 +93,8 @@ function expose_quiz_functions(){
              "prop_value_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "description goes here", 'GET', false, true);
+        "Set property=>value array",
+        'POST', false, true);
     expose_function(
         $api_suffix."create",
         $class_suffix."create",
@@ -113,7 +117,8 @@ function expose_quiz_functions(){
              "taxonomy" => array(
                  "type" => "int",
                  "required" => false)),
-        "description goes here", 'GET', false, true);
+        "Create new instance and save it into the system",
+        'POST', false, true);
     expose_function(
         $api_suffix."delete_by_id",
         $class_suffix."delete_by_id",
@@ -121,11 +126,14 @@ function expose_quiz_functions(){
              "id_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "description", 'GET', false, true);
+        "Delete instances by Id",
+        'POST', false, true);
     expose_function(
         $api_suffix."get_all",
         $class_suffix."get_all",
-        null, "description", 'GET', false, true);
+        null,
+        "Get all instances",
+        'GET', false, true);
     expose_function(
         $api_suffix."get_by_id",
         $class_suffix."get_by_id",
@@ -133,7 +141,8 @@ function expose_quiz_functions(){
              "id_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "description", 'GET', false, true);
+        "Get instances by Id",
+        'GET', false, true);
     expose_function(
         $api_suffix."add_questions",
         $class_suffix."add_questions",
@@ -144,7 +153,8 @@ function expose_quiz_functions(){
              "question_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "description", 'GET', false, true);
+        "Add Quiz Questions by Id",
+        'POST', false, true);
     expose_function(
         $api_suffix."remove_questions",
         $class_suffix."remove_questions",
@@ -155,7 +165,8 @@ function expose_quiz_functions(){
              "question_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "description", 'GET', false, true);
+        "Remove Quiz Questions by Id",
+        'POST', false, true);
     expose_function(
         $api_suffix."get_questions",
         $class_suffix."get_questions",
@@ -163,16 +174,19 @@ function expose_quiz_functions(){
              "id" => array(
                  "type" => "int",
                  "required" => true)),
-        "description", 'GET', false, true);
+        "Get Quiz Questions",
+        'GET', false, true);
 }
 
 function expose_quiz_question_functions(){
     $api_suffix = "clipit.quiz.question.";
-    $class_suffix = "\\clipit\\quiz\\question\\ClipitQuizQuestion::";
+    $class_suffix = "\\clipit\\ClipitQuizQuestion::";
     expose_function(
         $api_suffix."list_properties",
         $class_suffix."list_properties",
-        null, "description", 'GET', false, true);
+        null,
+        "Get class properties",
+        'GET', false, true);
     expose_function(
         $api_suffix."get_properties",
         $class_suffix."get_properties",
@@ -183,7 +197,8 @@ function expose_quiz_question_functions(){
              "prop_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "description goes here", 'GET', false, true);
+        "Get property=>value array",
+        'GET', false, true);
     expose_function(
         $api_suffix."set_properties",
         $class_suffix."set_properties",
@@ -194,7 +209,8 @@ function expose_quiz_question_functions(){
              "prop_value_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "description goes here", 'GET', false, true);
+        "Set property=>value array",
+        'POST', false, true);
     expose_function(
         $api_suffix."create",
         $class_suffix."create",
@@ -217,7 +233,8 @@ function expose_quiz_question_functions(){
              "video" => array(
                  "type" => "int",
                  "required" => false)),
-        "description", 'GET', false, true);
+        "Create a new instance and save it into the system",
+        'POST', false, true);
     expose_function(
         $api_suffix."delete_by_id",
         $class_suffix."delete_by_id",
@@ -225,7 +242,8 @@ function expose_quiz_question_functions(){
              "id_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "description", 'GET', false, true);
+        "Delete instances by Id",
+        'POST', false, true);
     expose_function(
         $api_suffix."get_all",
         $class_suffix."get_all",
@@ -233,7 +251,7 @@ function expose_quiz_question_functions(){
              "limit" => array(
                  "type" => "int",
                  "required" => false)),
-        "description", 'GET', false, true);
+        "Get all instances", 'GET', false, true);
     expose_function(
         $api_suffix."get_by_id",
         $class_suffix."get_by_id",
@@ -241,7 +259,8 @@ function expose_quiz_question_functions(){
              "id_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "description", 'GET', false, true);
+        "Get instances by Id",
+        'GET', false, true);
     expose_function(
         $api_suffix."get_results",
         $class_suffix."get_results",
@@ -249,7 +268,8 @@ function expose_quiz_question_functions(){
              "id" => array(
                  "type" => "int",
                  "required" => true)),
-        "description", 'GET', false, true);
+        "Get Quiz Results for the specified Quiz",
+        'GET', false, true);
     expose_function(
         $api_suffix."add_taxonomy_tags",
         $class_suffix."add_taxonomy_tags",
@@ -260,7 +280,8 @@ function expose_quiz_question_functions(){
              "taxonomy_tag_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "description", 'GET', false, true);
+        "Add Taxonomy Tags by Id",
+        'POST', false, true);
     expose_function(
         $api_suffix."remove_taxonomy_tags",
         $class_suffix."remove_taxonomy_tags",
@@ -271,7 +292,8 @@ function expose_quiz_question_functions(){
              "taxonomy_tag_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "description", 'GET', false, true);
+        "Remove Taxonomy Tags by Id",
+        'POST', false, true);
     expose_function(
         $api_suffix."get_taxonomy_tags",
         $class_suffix."get_taxonomy_tags",
@@ -279,16 +301,19 @@ function expose_quiz_question_functions(){
              "id" => array(
                  "type" => "int",
                  "required" => true)),
-        "description", "GET", false, true);
+        "Get Taxonomy Tags from a Quiz",
+        'GET', false, true);
 }
 
 function expose_quiz_result_functions(){
     $api_suffix = "clipit.quiz.result.";
-    $class_suffix = "\\clipit\\quiz\\result\\ClipitQuizResult::";
+    $class_suffix = "\\clipit\\ClipitQuizResult::";
     expose_function(
         $api_suffix."list_properties",
         $class_suffix."list_properties",
-        null, "description", 'GET', false, true);
+        null,
+        "Get class properties",
+        'GET', false, true);
     expose_function(
         $api_suffix."get_properties",
         $class_suffix."get_properties",
@@ -299,7 +324,8 @@ function expose_quiz_result_functions(){
              "prop_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "description goes here", 'GET', false, true);
+        "Get property=>value array",
+        'GET', false, true);
     expose_function(
         $api_suffix."set_properties",
         $class_suffix."set_properties",
@@ -310,7 +336,8 @@ function expose_quiz_result_functions(){
              "prop_value_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "description goes here", 'GET', false, true);
+        "Set property=>value array",
+        'POST', false, true);
     expose_function(
         $api_suffix."create",
         $class_suffix."create",
@@ -333,7 +360,8 @@ function expose_quiz_result_functions(){
              "correct" => array(
                  "type" => "bool",
                  "required" => false)),
-        "description", 'GET', false, true);
+        "Create a new instance and save it into the system",
+        'POST', false, true);
     expose_function(
         $api_suffix."delete_by_id",
         $class_suffix."delete_by_id",
@@ -341,7 +369,8 @@ function expose_quiz_result_functions(){
              "id_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "description", 'GET', false, true);
+        "Delete instances by Id",
+        'POST', false, true);
     expose_function(
         $api_suffix."get_all",
         $class_suffix."get_all",
@@ -349,7 +378,8 @@ function expose_quiz_result_functions(){
              "limit" => array(
                  "type" => "int",
                  "required" => false)),
-        "description", 'GET', false, true);
+        "Get all instances",
+        'GET', false, true);
     expose_function(
         $api_suffix."get_by_id",
         $class_suffix."get_by_id",
@@ -357,7 +387,8 @@ function expose_quiz_result_functions(){
              "id_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "description", 'GET', false, true);
+        "Get instances by Id",
+        'GET', false, true);
     expose_function(
         $api_suffix."get_by_question",
         $class_suffix."get_by_question",
@@ -365,7 +396,7 @@ function expose_quiz_result_functions(){
              "quiz_question_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "description", 'GET', false, true);
+        "Get instances by Question Id", 'GET', false, true);
 }
 
 function expose_site_functions(){
@@ -391,11 +422,13 @@ function expose_taxonomy_tc_functions(){
 
 function expose_user_functions(){
     $api_suffix = "clipit.user.";
-    $class_suffix = "\\clipit\\user\\ClipitUser::";
+    $class_suffix = "\\clipit\\ClipitUser::";
     expose_function(
         $api_suffix."list_properties",
         $class_suffix."list_properties",
-        null, "description", 'GET', false, true);
+        null,
+        "Get class properties",
+        'GET', false, true);
     expose_function(
         $api_suffix."get_properties",
         $class_suffix."get_properties",
@@ -406,7 +439,8 @@ function expose_user_functions(){
              "prop_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "description goes here", 'GET', false, true);
+        "Get property=>value array",
+        'GET', false, true);
     expose_function(
         $api_suffix."set_properties",
         $class_suffix."set_properties",
@@ -417,7 +451,8 @@ function expose_user_functions(){
              "prop_value_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "description goes here", 'GET', false, true);
+        "Set property=>value array",
+        'POST', false, true);
     expose_function(
         $api_suffix."create",
         $class_suffix."create",
@@ -440,7 +475,8 @@ function expose_user_functions(){
              "description" => array(
                  "type" => "string",
                  "required" => false)),
-        "description goes here", 'GET', false, true);
+        "Create a new instance and save it into the system",
+        'POST', false, true);
     expose_function(
         $api_suffix."delete_by_id",
         $class_suffix."delete_by_id",
@@ -448,11 +484,13 @@ function expose_user_functions(){
              "id_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "description goes here", 'GET', false, true);
+        "Delete instances by Id", 'POST', false, true);
     expose_function(
         $api_suffix."get_all",
         $class_suffix."get_all",
-        null, "description goes here", 'GET', false, true);
+        null,
+        "Get all instances",
+        'GET', false, true);
     expose_function(
         $api_suffix."get_by_id",
         $class_suffix."get_by_id",
@@ -460,7 +498,8 @@ function expose_user_functions(){
              "id_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "description goes here", 'GET', false, true);
+        "Get instances by Id",
+        'GET', false, true);
     expose_function(
         $api_suffix."get_by_login",
         $class_suffix."get_by_login",
@@ -468,7 +507,8 @@ function expose_user_functions(){
              "login_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "description goes here", 'GET', false, true);
+        "Get all instances by Login",
+        'GET', false, true);
     expose_function(
         $api_suffix."get_by_email",
         $class_suffix."get_by_email",
@@ -476,7 +516,8 @@ function expose_user_functions(){
              "email_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "description goes here", 'GET', false, true);
+        "Get all instances by email. The result is a nested array, with an array of users per email.",
+        'GET', false, true);
     expose_function(
         $api_suffix."get_by_role",
         $class_suffix."get_by_role",
@@ -484,16 +525,19 @@ function expose_user_functions(){
              "role_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "description goes here", 'GET', false, true);
+        "Get all instances by role. The result is a nested array, with an array of users per role.",
+        'GET', false, true);
 }
 
 function expose_video_functions(){
     $api_suffix = "clipit.video.";
-    $class_suffix = "\\clipit\\video\\ClipitVideo::";
+    $class_suffix = "\\clipit\\ClipitVideo::";
     expose_function(
         $api_suffix."list_properties",
         $class_suffix."list_properties",
-        null, "description", 'GET', false, true);
+        null,
+        "Get class properties",
+        'GET', false, true);
     expose_function(
         $api_suffix."get_properties",
         $class_suffix."get_properties",
@@ -504,7 +548,8 @@ function expose_video_functions(){
              "prop_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "description goes here", 'GET', false, true);
+        "Get property=>value array",
+        'GET', false, true);
     expose_function(
         $api_suffix."set_properties",
         $class_suffix."set_properties",
@@ -515,7 +560,8 @@ function expose_video_functions(){
              "prop_value_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "description goes here", 'GET', false, true);
+        "Set property=>value array",
+        'POST', false, true);
     expose_function(
         $api_suffix."create",
         $class_suffix."create",
@@ -535,7 +581,8 @@ function expose_video_functions(){
              "taxonomy_tag_array" => array(
                  "type" => "array",
                  "required" => false)),
-        "description", 'GET', false, true);
+        "Create a new instance and save it into the system",
+        'POST', false, true);
     expose_function(
         $api_suffix."delete_by_id",
         $class_suffix."delete_by_id",
@@ -543,7 +590,8 @@ function expose_video_functions(){
              "id_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "description", 'GET', false, true);
+        "Delete instances by Id",
+        'POST', false, true);
     expose_function(
         $api_suffix."get_all",
         $class_suffix."get_all",
@@ -551,7 +599,8 @@ function expose_video_functions(){
              "limit" => array(
                  "type" => "int",
                  "required" => false)),
-        "description", 'GET', false, true);
+        "Get all instances",
+        'GET', false, true);
     expose_function(
         $api_suffix."get_by_id",
         $class_suffix."get_by_id",
@@ -559,7 +608,8 @@ function expose_video_functions(){
              "id_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "description", 'GET', false, true);
+        "Get instances by Id",
+        'GET', false, true);
     expose_function(
         $api_suffix."add_comments",
         $class_suffix."add_comments",
@@ -570,7 +620,8 @@ function expose_video_functions(){
              "comment_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "description", "GET", false, true);
+        "Add Comments by Id to a Video",
+        'POST', false, true);
     expose_function(
         $api_suffix."remove_comments",
         $class_suffix."remove_comments",
@@ -581,7 +632,8 @@ function expose_video_functions(){
              "comment_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "description", "GET", false, true);
+        "Remove Comments by Id from a Video",
+        'POST', false, true);
     expose_function(
         $api_suffix."get_comments",
         $class_suffix."get_comments",
@@ -589,5 +641,6 @@ function expose_video_functions(){
              "id" => array(
                  "type" => "int",
                  "required" => true)),
-        "description", "GET", false, true);
+        "Get Comments from a Video",
+        'GET', false, true);
 }

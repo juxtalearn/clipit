@@ -21,17 +21,15 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-namespace clipit\video;
+namespace clipit;
 
 use \ElggObject;
 use \pebs\PebsItem;
-use \clipit\taxonomy\tag\ClipitTaxonomyTag;
-
 
 /**
  * Class ClipitVideo
  *
- * @package clipit\video
+ * @package clipit
  */
 class ClipitVideo extends PebsItem{
     /**
@@ -97,7 +95,8 @@ class ClipitVideo extends PebsItem{
         $elgg_object->comment_array = (array)$this->comment_array;
         $elgg_object->content = (int)$this->content;
         $elgg_object->taxonomy_tag_array = (array)$this->taxonomy_tag_array;
-        return $this->id = $elgg_object->save();
+        $elgg_object->save();
+        return $this->id = $elgg_object->guid;
     }
 
     /**

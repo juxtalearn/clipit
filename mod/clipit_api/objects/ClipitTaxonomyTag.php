@@ -21,13 +21,13 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-namespace clipit\taxonomy\tag;
+namespace clipit;
 
 use \pebs\PebsItem;
 /**
  * Class ClipitTaxonomyTag
  *
- * @package clipit\taxonomy\tag
+ * @package clipit
  */
 class ClipitTaxonomyTag extends PebsItem{
 

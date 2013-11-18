@@ -21,7 +21,7 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-namespace clipit\quiz\question;
+namespace clipit;
 
 
 
@@ -31,14 +31,11 @@ namespace clipit\quiz\question;
  */
 use \ElggObject;
 use pebs\PebsItem;
-use clipit\quiz\result\ClipitQuizResult;
-use clipit\taxonomy\tag\ClipitTaxonomyTag;
-
 
 /**
  * Class ClipitQuizQuestion
  *
- * @package clipit\quiz\question
+ * @package clipit
  */
 class ClipitQuizQuestion extends PebsItem{
     /**
@@ -105,7 +102,8 @@ class ClipitQuizQuestion extends PebsItem{
         $elgg_object->taxonomy_tag_array = (array) $this->taxonomy_tag_array;
         $elgg_object->option_type = (string) $this->option_type;
         $elgg_object->video = (int) $this->video;
-        return $this->id = $elgg_object->save();
+        $elgg_object->save();
+        return $this->id = $elgg_object->guid;
     }
 
     /**
@@ -142,7 +140,8 @@ class ClipitQuizQuestion extends PebsItem{
      * @return array|bool Array of Quiz Results, or false if error
      */
     static function get_results($id){
-        return $quiz_result_array = ClipitQuizResult::get_from_question($id);
+        $quiz_result_array = ClipitQuizResult::get_by_question(array($id));
+        return array_pop($quiz_result_array);
     }
 
 

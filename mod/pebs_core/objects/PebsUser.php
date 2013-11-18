@@ -23,8 +23,6 @@
  */
 namespace pebs;
 
-
-
 /**
  * Alias so classes outside of this namespace can be used without path.
  * @use \ElggUser
@@ -99,11 +97,20 @@ class PebsUser extends PebsItem{
         $elgg_user->password = $this->password;
         $elgg_user->salt = $this->password_hash;
         $elgg_user->role = $this->role;
-        return $this->id = $elgg_user->save();
+        $elgg_user->save();
+        return $this->id = $elgg_user->guid;
     }
 
     function setProperties($prop_value_array){
         foreach($prop_value_array as $prop => $value){
+            if(array_key_exists($prop, $this->list_properties())){
+                // lanzar excepción con mensaje
+                return false;
+            }
+            if($prop == "id"){
+                // lanzar excepción con mensaje
+                return false;
+            }
             if($prop == "password"){
                 $this->setPassword($value);
             } else{

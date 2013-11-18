@@ -21,7 +21,7 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-namespace clipit\quiz;
+namespace clipit;
 
 /**
  * Alias so classes outside of this namespace can be used without path.
@@ -29,13 +29,11 @@ namespace clipit\quiz;
  */
 use \ElggObject;
 use pebs\PebsItem;
-use clipit\quiz\question\ClipitQuizQuestion;
-
 
 /**
  * Class ClipitQuiz
  *
- * @package clipit\quiz
+ * @package clipit
  */
 class ClipitQuiz extends PebsItem{
     /**
@@ -102,11 +100,20 @@ class ClipitQuiz extends PebsItem{
         $elgg_object->question_array = (array) $this->question_array;
         $elgg_object->taxonomy = (int) $this->taxonomy;
         $elgg_object->target = (string) $this->target;
-        return $this->id = $elgg_object->save();
+        $elgg_object->save();
+        return $this->id = $elgg_object->guid;
     }
 
     function setProperties($prop_value_array){
         foreach($prop_value_array as $prop => $value){
+            if(array_key_exists($prop, $this->list_properties())){
+                // lanzar excepción con mensaje
+                return false;
+            }
+            if($prop == "id"){
+                // lanzar excepción con mensaje
+                return false;
+            }
             if($prop == "public"){
                 $this->setPrivacy($value);
             } else{

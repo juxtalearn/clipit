@@ -95,7 +95,8 @@ class PebsItem{
         }
         $elgg_object->name = (string)$this->name;
         $elgg_object->description = (string)$this->description;
-        return $this->id = $elgg_object->save();
+        $elgg_object->save();
+        return $this->id = $elgg_object->guid;
     }
 
     /**
@@ -132,6 +133,14 @@ class PebsItem{
      */
     function setProperties($prop_value_array){
         foreach($prop_value_array as $prop => $value){
+            if(array_key_exists($prop, $this->list_properties())){
+                // lanzar excepción con mensaje
+                return false;
+            }
+            if($prop == "id"){
+                // lanzar excepción con mensaje
+                return false;
+            }
             $this->$prop = $value;
         }
         return $this->save();

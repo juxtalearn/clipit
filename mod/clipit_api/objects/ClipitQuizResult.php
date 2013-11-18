@@ -21,7 +21,7 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-namespace clipit\quiz\result;
+namespace clipit;
 
 
 
@@ -32,11 +32,10 @@ namespace clipit\quiz\result;
 use \ElggObject;
 use pebs\PebsItem;
 
-
 /**
  * Class ClipitQuizResult
  *
- * @package clipit\quiz\result
+ * @package clipit
  */
 class ClipitQuizResult extends PebsItem{
     /**
@@ -108,7 +107,8 @@ class ClipitQuizResult extends PebsItem{
         $elgg_object->correct = (bool) $this->correct;
         $elgg_object->quiz_question = (int) $this->quiz_question;
         $elgg_object->user = (int) $this->user;
-        return $this->id = $elgg_object->save();
+        $elgg_object->save();
+        return $this->id = $elgg_object->guid;
     }
 
     /**
@@ -119,6 +119,14 @@ class ClipitQuizResult extends PebsItem{
      */
     function setProperties($prop_value_array){
         foreach($prop_value_array as $prop => $value){
+            if(array_key_exists($prop, $this->list_properties())){
+                // lanzar excepción con mensaje
+                return false;
+            }
+            if($prop == "id"){
+                // lanzar excepción con mensaje
+                return false;
+            }
             if($prop == "correct"){
                 $this->setCorrect($value);
             } else{
@@ -171,10 +179,10 @@ class ClipitQuizResult extends PebsItem{
     }
 
     /**
-     * Get Quiz Results by their Quiz Question Id
+     * Get Quiz Results by Quiz Questions
      *
      * @param array $quiz_question_array Array of Quiz Question IDs to get Results form
-     * @return array|bool Array of Quiz Results nested by Quiz Question, or false if error
+     * @return array|bool Array of nested arrays per question with Quiz Results, or false if error
      */
     static function get_by_question($quiz_question_array){
         $quiz_result_array = array();
@@ -188,12 +196,15 @@ class ClipitQuizResult extends PebsItem{
                 )
             );
             if(!$elgg_object_array){
-                $quiz_question_array[] = null;
+                return $quiz_result_array;
+            }
+            $temp_array = array();
+            foreach($elgg_object_array as $elgg_object){
+                $temp_array[] =  new ClipitQuizResult($elgg_object->guid);
+            }
+            if(!$temp_array){
+                $quiz_result_array[] = null;
             } else{
-                $temp_array = array();
-                foreach($elgg_object_array as $elgg_object){
-                    $temp_array[] =  new ClipitQuizResult($elgg_object->guid);
-                }
                 $quiz_result_array[] = $temp_array;
             }
         }

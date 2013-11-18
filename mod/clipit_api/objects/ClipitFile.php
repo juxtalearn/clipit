@@ -21,24 +21,19 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-namespace clipit\file;
+namespace clipit;
 
+/**
+ * Alias so classes outside of this namespace can be used without path.
+ * @use \pebs\user\PebsItem
+ */
+use \pebs\PebsFile;
 
 /**
  * Class ClipitFile
  *
- * @package clipit\file
+ * @package clipit
  */
-class ClipitFile{
-
-    // Class properties
-    public $id = int;
-    public $name = string;
-    public $description = string;
-    public $content = ElggFile;
-    public $type = string;
-    public $creation_date = DateTime;
-
-
+class ClipitFile extends PebsFile{
 
 }

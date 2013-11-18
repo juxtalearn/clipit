@@ -21,9 +21,7 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-namespace clipit\user;
-
-
+namespace clipit;
 
 /**
  * Alias so classes outside of this namespace can be used without path.
@@ -34,7 +32,7 @@ use \pebs\PebsUser;
 /**
  * Class ClipitUser
  *
- * @package clipit\user
+ * @package clipit
  */
 class ClipitUser extends PebsUser{
 

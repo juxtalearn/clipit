@@ -21,13 +21,13 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-namespace clipit\site;
+namespace clipit;
 
 
 /**
  * Class ClipitSite
  *
- * @package clipit\site
+ * @package clipit
  */
 class ClipitSite{
     // Class properties
