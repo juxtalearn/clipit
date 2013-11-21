@@ -40,6 +40,10 @@ class PebsFile extends PebsItem{
      */
     const SUBTYPE = "file";
     /**
+     * @var string File data in byte string format
+     */
+    public $data = null;
+    /**
      * @var int Timestamp when the user uploaded this File
      */
     public $time_created = -1;
@@ -55,9 +59,10 @@ class PebsFile extends PebsItem{
             return null;
         }
         $this->id = (int)$elgg_file->guid;
-        $this->description = (string)$elgg_file->description;
         $this->name = (string)$elgg_file->getFilename();
-        $this->time_created = (int) $elgg_file->time_created;
+        $this->description = (string)$elgg_file->description;
+        $this->data = $elgg_file->grabFile();
+        $this->time_created = (int)$elgg_file->time_created;
         return $this;
     }
 
@@ -74,6 +79,9 @@ class PebsFile extends PebsItem{
         }
         $elgg_file->setFilename((string)$this->name);
         $elgg_file->description = (string)$this->description;
+        $elgg_file->open("write");
+        $elgg_file->write($this->data);
+        $elgg_file->close();
         $elgg_file->save();
         return $this->id = $elgg_file->guid;
     }
@@ -83,17 +91,19 @@ class PebsFile extends PebsItem{
      *
      * @param string $name Filename for the File
      * @param string $description File full description (optional)
+     * @param string $data File data in byte string format
      * @return bool|int Returns the new File Id, or false if error
      */
     static function create($name,
-                           $description = ""){
+                           $description = "",
+                           $data){
         $called_class = get_called_class();
         $prop_value_array["name"] = $name;
         $prop_value_array["description"] = $description;
+        $prop_value_array["data"] = $data;
         $file = new $called_class();
         return $file->setProperties($prop_value_array);
     }
-
 
 
 

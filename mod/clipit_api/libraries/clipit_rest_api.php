@@ -54,6 +54,80 @@ function expose_comment_functions(){
 }
 
 function expose_file_functions(){
+    $api_suffix = "clipit.file.";
+    $class_suffix = "\\clipit\\ClipitFile::";
+    expose_function(
+        $api_suffix."list_properties",
+        $class_suffix."list_properties",
+        null,
+        "Get class properties",
+        'GET', false, true);
+    expose_function(
+        $api_suffix."get_properties",
+        $class_suffix."get_properties",
+        array(
+             "id" => array(
+                 "type" => "int",
+                 "required" => true),
+             "prop_array" => array(
+                 "type" => "array",
+                 "required" => true)),
+        "Get property=>value array",
+        'GET', false, true);
+    expose_function(
+        $api_suffix."set_properties",
+        $class_suffix."set_properties",
+        array(
+             "id" => array(
+                 "type" => "int",
+                 "required" => true),
+             "prop_value_array" => array(
+                 "type" => "array",
+                 "required" => true)),
+        "Set property=>value array",
+        'POST', false, true);
+    expose_function(
+        $api_suffix."create",
+        $class_suffix."create",
+        array(
+             "name" => array(
+                 "type" => "string",
+                 "required" => true),
+             "description" => array(
+                 "type" => "string",
+                 "required" => false),
+             "data" => array(
+                 "type" => "string",
+                 "required" => true)),
+        "Create a new instance and save it into the system",
+        'POST', false, true);
+    expose_function(
+        $api_suffix."delete_by_id",
+        $class_suffix."delete_by_id",
+        array(
+             "id_array" => array(
+                 "type" => "array",
+                 "required" => true)),
+        "Delete instances by Id",
+        'POST', false, true);
+    expose_function(
+        $api_suffix."get_all",
+        $class_suffix."get_all",
+        array(
+             "limit" => array(
+                 "type" => "int",
+                 "required" => false)),
+        "Get all instances",
+        'GET', false, true);
+    expose_function(
+        $api_suffix."get_by_id",
+        $class_suffix."get_by_id",
+        array(
+             "id_array" => array(
+                 "type" => "array",
+                 "required" => true)),
+        "Get instances by Id",
+        'GET', false, true);
 }
 
 function expose_group_functions(){
@@ -572,11 +646,11 @@ function expose_video_functions(){
              "description" => array(
                  "type" => "string",
                  "required" => false),
-             "comment_array" => array(
-                 "type" => "array",
-                 "required" => false),
              "link" => array(
                  "type" => "string",
+                 "required" => false),
+             "comment_array" => array(
+                 "type" => "array",
                  "required" => false),
              "taxonomy_tag_array" => array(
                  "type" => "array",

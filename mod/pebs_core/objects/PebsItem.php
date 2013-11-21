@@ -133,7 +133,7 @@ class PebsItem{
      */
     function setProperties($prop_value_array){
         foreach($prop_value_array as $prop => $value){
-            if(array_key_exists($prop, $this->list_properties())){
+            if(!array_key_exists($prop, $this->list_properties())){
                 // lanzar excepción con mensaje
                 return false;
             }
