@@ -135,6 +135,18 @@ class PebsUser extends PebsItem{
         return true;
     }
 
+    static function login($login, $password, $persistent = false){
+        if(!elgg_authenticate($login, $password)){
+            return false;
+        }
+        $elgg_user = get_user_by_username($login);
+        login($elgg_user, $persistent);
+    }
+
+    static function logout(){
+        return logout();
+    }
+
     /**
      * Create a new ClipItUser instance, and save it into the system.
      *

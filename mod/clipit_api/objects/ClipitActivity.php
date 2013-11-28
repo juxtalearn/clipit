@@ -44,4 +44,3 @@ class ClipitActivity{
     public $creation_date;
 
 }
-

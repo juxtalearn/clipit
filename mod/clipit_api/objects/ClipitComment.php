@@ -33,13 +33,13 @@ class ClipitComment{
 
     // Class properties
     public $id = int;
-    public $owner = ClipitUser;
-    public $pedagogical_rating = int;
-    public $performance_rating = int;
-    public $taxonomy_tag_array = array(ClipitTaxonomyTag);
-    public $text_body = string;
-    public $video = ClipitVideo;
-    public $creation_date = DateTime;
+    public $author = int; // ClipitUser Id
+    public $pedagogical_rating = int; // scale 1-5
+    public $performance_rating = int; //scale 1-5
+    public $taxonomy_tag_array = array(); // array of ClipitTaxonomyTag Ids
+    public $text_body = string; // main comment text
+    public $video = int; // ClipitVideo Id
+    public $creation_date = int; // unix time
 
 
 }

@@ -37,7 +37,7 @@ class ClipitVideo extends PebsItem{
      */
     const SUBTYPE = "clipit_video";
     /**
-     * @var string Link to where the video is hosted
+     * @var string Link to where the video is hosted (Youtube, Vimeo...)
      */
     public $link = "";
     /**
