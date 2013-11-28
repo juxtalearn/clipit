@@ -135,6 +135,14 @@ class PebsUser extends PebsItem{
         return true;
     }
 
+    /**
+     * Authenticate a user and log him into the system.
+     *
+     * @param string $login User login
+     * @param string $password User password
+     * @param bool $persistent Determines whether to make the session persistent
+     * @return bool Returns true if ok, or false if error
+     */
     static function login($login, $password, $persistent = false){
         if(!elgg_authenticate($login, $password)){
             return false;
@@ -143,6 +151,11 @@ class PebsUser extends PebsItem{
         login($elgg_user, $persistent);
     }
 
+    /**
+     * Logs out a user from the system.
+     *
+     * @return bool Returns true if ok, or false if error.
+     */
     static function logout(){
         return logout();
     }
