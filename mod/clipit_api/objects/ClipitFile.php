@@ -25,7 +25,7 @@ namespace clipit;
 
 /**
  * Alias so classes outside of this namespace can be used without path.
- * @use \pebs\user\PebsItem
+ * @use \pebs\PebsFile
  */
 use \pebs\PebsFile;
 
@@ -35,5 +35,7 @@ use \pebs\PebsFile;
  * @package clipit
  */
 class ClipitFile extends PebsFile{
+
+
 
 }

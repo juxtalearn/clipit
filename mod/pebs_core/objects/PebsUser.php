@@ -35,6 +35,27 @@ use \ElggUser;
  * @package pebs\user
  */
 class PebsUser extends PebsItem{
+    //    Inherited properties:
+    //    /**
+    //    * @const string Elgg entity TYPE for this class
+    //    */
+    //    const TYPE = "object";
+    //    /**
+    //    * @const string Elgg entity SUBTYPE for this class
+    //    */
+    //    const SUBTYPE = "";
+    //    /**
+    //    * @var int Unique Id of this instance
+    //    */
+    //    public $id = -1;
+    //    /**
+    //    * @var string Name of this instance
+    //    */
+    //    public $name = "";
+    //    /**
+    //    * @var string Description of this instance
+    //    */
+    //    public $description = "";
     /**
      * @const string Elgg entity type for this class
      * @const string Default User Role if not specified
@@ -61,7 +82,7 @@ class PebsUser extends PebsItem{
      * Loads a User instance from the system.
      *
      * @param int $id Id of the User to load from the system.
-     * @return $this|bool Returns User instance, or false if error.
+     * @return PebsUser|bool Returns User instance, or false if error.
      */
     protected function _load($id){
         if(!$elgg_user = new ElggUser((int)$id)){

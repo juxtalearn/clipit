@@ -64,7 +64,7 @@ class PebsItem{
      * Loads an instance from the system.
      *
      * @param int $id Id of the instance to load from the system.
-     * @return $this|bool Returns instance, or false if error.
+     * @return PebsItem|bool Returns instance, or false if error.
      */
     protected function _load($id){
         if(!($elgg_object = new ElggObject((int)$id))){

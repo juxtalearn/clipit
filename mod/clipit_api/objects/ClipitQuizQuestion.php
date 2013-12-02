@@ -28,6 +28,7 @@ namespace clipit;
 /**
  * Alias so classes outside of this namespace can be used without path.
  * @use \ElggObject
+ * @use pebs\PebsItem
  */
 use \ElggObject;
 use pebs\PebsItem;
@@ -63,7 +64,7 @@ class ClipitQuizQuestion extends PebsItem{
      * Loads a ClipitQuizQuestion instance from the system.
      *
      * @param int $id Id of the ClipitQuiz to load from the system.
-     * @return $this|bool Returns ClipitQuiz instance, or false if error.
+     * @return ClipitQuizQuestion|bool Returns ClipitQuiz instance, or false if error.
      */
     protected function _load($id){
         if(!$elgg_object = new ElggObject((int) $id)){

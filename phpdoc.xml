@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdoc>
+    <parser>
+        <default-package-name>default</default-package-name>
+        <target>phpdoc/temp/</target>
+        <extensions>
+            <extension>php</extension>
+        </extensions>
+    </parser>
+    <transformer>
+        <target>phpdoc/</target>
+    </transformer>
+    <files>
+        <directory>.</directory>
+    </files>
+    <transformations>
+        <template>zend</template>
+    </transformations>
+</phpdoc>

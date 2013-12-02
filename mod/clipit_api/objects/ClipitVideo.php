@@ -23,6 +23,11 @@
  */
 namespace clipit;
 
+/**
+ * Alias so classes outside of this namespace can be used without path.
+ * @use \ElggObject
+ * @use \pebs\PebsItem
+ */
 use \ElggObject;
 use \pebs\PebsItem;
 
@@ -57,7 +62,7 @@ class ClipitVideo extends PebsItem{
      * Loads a ClipitVideo instance from the system.
      *
      * @param int $id Id of Video to load
-     * @return $this|null Returns Video instance, or null if error
+     * @return ClipitVideo|null Returns Video instance, or null if error
      */
     protected function _load($id){
         if(!$elgg_object = new ElggObject((int)$id)){
@@ -81,7 +86,7 @@ class ClipitVideo extends PebsItem{
     /**
      * Saves this instance to the system
      *
-     * @return bool|int Resurns the Id of the saved instance, or false if error
+     * @return bool|int Returns the Id of the saved instance, or false if error
      */
     function save(){
         if($this->id == -1){
