@@ -1,0 +1,2275 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>API Documentation » Default\UnitTester</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">API Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/clipit.html"><i class="icon-th"></i> clipit</a></li>
+<li><a href="../namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Elgg.html"><i class="icon-folder-open"></i> Elgg</a></li>
+<li><a href="../packages/Elgg.Core.html"><i class="icon-folder-open"></i> Elgg.Core</a></li>
+<li><a href="../packages/Elgg.Core.Plugin.html"><i class="icon-folder-open"></i> Elgg.Core.Plugin</a></li>
+<li><a href="../packages/ElggAPIAdmin.html"><i class="icon-folder-open"></i> ElggAPIAdmin</a></li>
+<li><a href="../packages/ElggDiagnostics.html"><i class="icon-folder-open"></i> ElggDiagnostics</a></li>
+<li><a href="../packages/ElggEmbed.html"><i class="icon-folder-open"></i> ElggEmbed</a></li>
+<li><a href="../packages/ElggFile.html"><i class="icon-folder-open"></i> ElggFile</a></li>
+<li><a href="../packages/ElggGarbageCollector.html"><i class="icon-folder-open"></i> ElggGarbageCollector</a></li>
+<li><a href="../packages/ElggGroups.html"><i class="icon-folder-open"></i> ElggGroups</a></li>
+<li><a href="../packages/ElggLogBrowser.html"><i class="icon-folder-open"></i> ElggLogBrowser</a></li>
+<li><a href="../packages/ElggLogRotate.html"><i class="icon-folder-open"></i> ElggLogRotate</a></li>
+<li><a href="../packages/ElggMessages.html"><i class="icon-folder-open"></i> ElggMessages</a></li>
+<li><a href="../packages/ElggNotifications.html"><i class="icon-folder-open"></i> ElggNotifications</a></li>
+<li><a href="../packages/ElggProfile.html"><i class="icon-folder-open"></i> ElggProfile</a></li>
+<li><a href="../packages/ElggTinyMCE.html"><i class="icon-folder-open"></i> ElggTinyMCE</a></li>
+<li><a href="../packages/ElgghtmLawed.html"><i class="icon-folder-open"></i> ElgghtmLawed</a></li>
+<li><a href="../packages/Embed%20Video%20Library.html"><i class="icon-folder-open"></i> Embed Video Library</a></li>
+<li><a href="../packages/PlaceLocalInclude.html"><i class="icon-folder-open"></i> PlaceLocalInclude</a></li>
+<li><a href="../packages/SimpleTest.html"><i class="icon-folder-open"></i> SimpleTest</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+     @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20MockObjects%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   MockObjects
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20MockObjects.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage MockObjects</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+     @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@abstract.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @abstract</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20WebTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage WebTester</a></li>
+<li><a href="../packages/%5Bname%5D.html"><i class="icon-folder-open"></i> [name]</a></li>
+<li><a href="../packages/clipit.html"><i class="icon-folder-open"></i> clipit</a></li>
+<li><a href="../packages/event_calendar.html"><i class="icon-folder-open"></i> event_calendar</a></li>
+<li><a href="../packages/pebs.html"><i class="icon-folder-open"></i> pebs</a></li>
+<li><a href="../packages/profile_manager.html"><i class="icon-folder-open"></i> profile_manager</a></li>
+<li><a href="../packages/veeplay.html"><i class="icon-folder-open"></i> veeplay</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">4473</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">250</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-map-marker"></i> Packages</li>
+<li>
+<a href="../packages/Default.UnitTester.html" title="UnitTester"><i class="icon-folder-open"></i>UnitTester</a><ul class="nav nav-list nav-packages"></ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-class"></i> Classes</li>
+<li><a href="#ElggCoreOutputAutoPTest" title="Test case for ElggAutoP functionality.">ElggCoreOutputAutoPTest</a></li>
+<li><a href="#ElggCoreUnitTest" title="Elgg Core Unit Tester">ElggCoreUnitTest</a></li>
+<li><a href="#SimpleCommandLineParser" title="Parser for command line arguments. Extracts
+   the a specific test to run and engages XML
+   reporting when necessary.">SimpleCommandLineParser</a></li>
+<li><a href="#DefaultReporter" title="The default reporter used by SimpleTest's autorun
+   feature. The actual reporters used are dependency
+   injected and can be overridden.">DefaultReporter</a></li>
+<li><a href="#DetachedTestCase" title="Runs an XML formated test in a separate process.">DetachedTestCase</a></li>
+<li><a href="#SimpleDumper" title="Displays variables as text and does diffs.">SimpleDumper</a></li>
+<li><a href="#SimpleErrorTrappingInvoker" title="Extension that traps errors into an error queue.">SimpleErrorTrappingInvoker</a></li>
+<li><a href="#SimpleErrorQueue" title="Error queue used to record trapped
+   errors.">SimpleErrorQueue</a></li>
+<li><a href="#SimpleExceptionTrappingInvoker" title="Extension that traps exceptions and turns them into
+   an error message. PHP5 only.">SimpleExceptionTrappingInvoker</a></li>
+<li><a href="#ExceptionExpectation" title="Tests exceptions either by type or the exact
+   exception. This could be improved to accept
+   a pattern expectation to test the error
+   message, but that will have to come later.">ExceptionExpectation</a></li>
+<li><a href="#EqualExpectation" title="Test for equality.">EqualExpectation</a></li>
+<li><a href="#NotEqualExpectation" title="Test for inequality.">NotEqualExpectation</a></li>
+<li><a href="#WithinMarginExpectation" title="Test for being within a range.">WithinMarginExpectation</a></li>
+<li><a href="#OutsideMarginExpectation" title="Test for being outside of a range.">OutsideMarginExpectation</a></li>
+<li><a href="#ReferenceExpectation" title="Test for reference.">ReferenceExpectation</a></li>
+<li><a href="#IdenticalExpectation" title="Test for identity.">IdenticalExpectation</a></li>
+<li><a href="#NotIdenticalExpectation" title="Test for non-identity.">NotIdenticalExpectation</a></li>
+<li><a href="#PatternExpectation" title="Test for a pattern using Perl regex rules.">PatternExpectation</a></li>
+<li><a href="#NoPatternExpectation" title="Fail if a pattern is detected within the
+   comparison.">NoPatternExpectation</a></li>
+<li><a href="#IsAExpectation" title="Tests either type or class name if it's an object.">IsAExpectation</a></li>
+<li><a href="#MethodExistsExpectation" title="Tests for existance of a method in an object">MethodExistsExpectation</a></li>
+<li><a href="#TestOfTestDoxReporter" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfTestDoxReporter</a></li>
+<li><a href="#TestDoxReporter" title="Recipient of generated test messages that can display
+   page footers and headers. Also keeps track of the
+   test nesting. This is the main base class on which
+   to build the finished test (page based) displays.">TestDoxReporter</a></li>
+<li><a href="#SimpleInvoker" title="This is called by the class runner to run a
+   single test method. Will also run the setUp()
+   and tearDown() methods.">SimpleInvoker</a></li>
+<li><a href="#SimpleInvokerDecorator" title="Do nothing decorator. Just passes the invocation
+   straight through.">SimpleInvokerDecorator</a></li>
+<li><a href="#SimpleReflection" title="Version specific reflection API.">SimpleReflection</a></li>
+<li><a href="#RemoteTestCase" title="Runs an XML formated test on a remote server.">RemoteTestCase</a></li>
+<li><a href="#HtmlReporter" title="Sample minimal test displayer. Generates only
+   failure messages and a pass count.">HtmlReporter</a></li>
+<li><a href="#TextReporter" title="Sample minimal test displayer. Generates only
+   failure messages and a pass count. For command
+   line use. I've tried to make it look like JUnit,
+   but I wanted to output the errors as they arrived
+   which meant dropping the dots.">TextReporter</a></li>
+<li><a href="#SelectiveReporter" title="Runs just a single test group, a single case or
+   even a single test within that case.">SelectiveReporter</a></li>
+<li><a href="#NoSkipsReporter" title="Suppresses skip messages.">NoSkipsReporter</a></li>
+<li><a href="#SimpleReporter" title="Recipient of generated test messages that can display
+   page footers and headers. Also keeps track of the
+   test nesting. This is the main base class on which
+   to build the finished test (page based) displays.">SimpleReporter</a></li>
+<li><a href="#SimpleReporterDecorator" title="For modifying the behaviour of the visual reporters.">SimpleReporterDecorator</a></li>
+<li><a href="#MultipleReporter" title="For sending messages to multiple reporters at
+   the same time.">MultipleReporter</a></li>
+<li><a href="#SimpleShell" title="Wrapper for exec() functionality.">SimpleShell</a></li>
+<li><a href="#ShellTestCase" title="Test case for testing of command line scripts and
+   utilities. Usually scripts that are external to the
+   PHP code, but support it in some way.">ShellTestCase</a></li>
+<li><a href="#SimpleTest" title="Registry and test context. Includes a few
+   global options that I'm slowly getting rid of.">SimpleTest</a></li>
+<li><a href="#SimpleStackTrace" title="Interrogates the stack trace to recover the
+   failure point.">SimpleStackTrace</a></li>
+<li><a href="#TestOfLiveBrowser" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfLiveBrowser</a></li>
+<li><a href="#AllTests" title="This is a composite test class for combining
+   test cases and other RunnableTest classes into
+   a group test.">AllTests</a></li>
+<li><a href="#TestOfRealm" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfRealm</a></li>
+<li><a href="#TestOfAuthenticator" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfAuthenticator</a></li>
+<li><a href="#LoadIfIncludedTestCase" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">LoadIfIncludedTestCase</a></li>
+<li><a href="#BadTestCases" title="This is a composite test class for combining
+   test cases and other RunnableTest classes into
+   a group test.">BadTestCases</a></li>
+<li><a href="#TestOfHistory" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfHistory</a></li>
+<li><a href="#TestOfParsedPageAccess" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfParsedPageAccess</a></li>
+<li><a href="#TestOfBrowserNavigation" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfBrowserNavigation</a></li>
+<li><a href="#TestOfBrowserFrames" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfBrowserFrames</a></li>
+<li><a href="#TestOfCollector" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfCollector</a></li>
+<li><a href="#TestOfPatternCollector" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfPatternCollector</a></li>
+<li><a href="#TestOfCommandLineParsing" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfCommandLineParsing</a></li>
+<li><a href="#TestOfCompatibility" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfCompatibility</a></li>
+<li><a href="#TestOfCookie" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfCookie</a></li>
+<li><a href="#TestOfCookieJar" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfCookieJar</a></li>
+<li><a href="#TestOfTextFormatting" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfTextFormatting</a></li>
+<li><a href="#TestOfEclipse" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfEclipse</a></li>
+<li><a href="#TestOfEncodedParts" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfEncodedParts</a></li>
+<li><a href="#TestOfEncoding" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfEncoding</a></li>
+<li><a href="#TestOfFormHeaders" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfFormHeaders</a></li>
+<li><a href="#TestOfErrorQueue" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfErrorQueue</a></li>
+<li><a href="#TestOfErrorTrap" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfErrorTrap</a></li>
+<li><a href="#TestOfErrors" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfErrors</a></li>
+<li><a href="#TestOfPHP52RecoverableErrors" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfPHP52RecoverableErrors</a></li>
+<li><a href="#TestOfErrorsExcludingPHP52AndAbove" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfErrorsExcludingPHP52AndAbove</a></li>
+<li><a href="#TestRunnerForLeftOverAndNotEnoughErrors" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestRunnerForLeftOverAndNotEnoughErrors</a></li>
+<li><a href="#TestOfExceptionExpectation" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfExceptionExpectation</a></li>
+<li><a href="#TestOfExceptionTrap" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfExceptionTrap</a></li>
+<li><a href="#TestOfCatchingExceptions" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfCatchingExceptions</a></li>
+<li><a href="#TestOfCallingTearDownAfterExceptions" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfCallingTearDownAfterExceptions</a></li>
+<li><a href="#TestOfExceptionThrownInSetUpDoesNotRunTestBody" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfExceptionThrownInSetUpDoesNotRunTestBody</a></li>
+<li><a href="#TestOfExpectExceptionWithSetUp" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfExpectExceptionWithSetUp</a></li>
+<li><a href="#TestOfThrowingExceptionsInTearDown" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfThrowingExceptionsInTearDown</a></li>
+<li><a href="#TestOfEquality" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfEquality</a></li>
+<li><a href="#TestOfWithin" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfWithin</a></li>
+<li><a href="#TestOfInequality" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfInequality</a></li>
+<li><a href="#TestOfIdentity" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfIdentity</a></li>
+<li><a href="#TestOfReference" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfReference</a></li>
+<li><a href="#TestOfNonIdentity" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfNonIdentity</a></li>
+<li><a href="#TestOfPatterns" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfPatterns</a></li>
+<li><a href="#TestOfMethodExistence" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfMethodExistence</a></li>
+<li><a href="#TestOfIsA" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfIsA</a></li>
+<li><a href="#TestOfNotA" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfNotA</a></li>
+<li><a href="#TestOfForm" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfForm</a></li>
+<li><a href="#TestOfFrameset" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfFrameset</a></li>
+<li><a href="#TestOfFrameNavigation" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfFrameNavigation</a></li>
+<li><a href="#TestOfFramesetPageInterface" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfFramesetPageInterface</a></li>
+<li><a href="#TestOfDirectRoute" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfDirectRoute</a></li>
+<li><a href="#TestOfProxyRoute" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfProxyRoute</a></li>
+<li><a href="#TestOfHttpRequest" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfHttpRequest</a></li>
+<li><a href="#TestOfHttpPostRequest" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfHttpPostRequest</a></li>
+<li><a href="#TestOfHttpHeaders" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfHttpHeaders</a></li>
+<li><a href="#TestOfHttpResponse" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfHttpResponse</a></li>
+<li><a href="#TestOfMockInterfaces" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfMockInterfaces</a></li>
+<li><a href="#TestOfSpl" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfSpl</a></li>
+<li><a href="#TestOfImplementations" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfImplementations</a></li>
+<li><a href="#TestOfInterfaceMocksWithConstruct" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfInterfaceMocksWithConstruct</a></li>
+<li><a href="#TestOfInterfaceMocksWithHintInSignature" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfInterfaceMocksWithHintInSignature</a></li>
+<li><a href="#TestOfSampleInterfaceWithClone" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfSampleInterfaceWithClone</a></li>
+<li><a href="#LiveHttpTestCase" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">LiveHttpTestCase</a></li>
+<li><a href="#TestOfAnythingExpectation" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfAnythingExpectation</a></li>
+<li><a href="#TestOfParametersExpectation" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfParametersExpectation</a></li>
+<li><a href="#TestOfSimpleSignatureMap" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfSimpleSignatureMap</a></li>
+<li><a href="#TestOfCallSchedule" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfCallSchedule</a></li>
+<li><a href="#TestOfMockGeneration" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfMockGeneration</a></li>
+<li><a href="#TestOfMockReturns" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfMockReturns</a></li>
+<li><a href="#TestOfMockExpectationsThatPass" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfMockExpectationsThatPass</a></li>
+<li><a href="#TestOfMockExpectations" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfMockExpectations</a></li>
+<li><a href="#TestOfMockComparisons" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfMockComparisons</a></li>
+<li><a href="#TestOfSpecialMethods" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfSpecialMethods</a></li>
+<li><a href="#TestOfMockingClassesWithStaticMethods" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfMockingClassesWithStaticMethods</a></li>
+<li><a href="#TestOfThrowingExceptionsFromMocks" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfThrowingExceptionsFromMocks</a></li>
+<li><a href="#TestOfThrowingErrorsFromMocks" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfThrowingErrorsFromMocks</a></li>
+<li><a href="#TestOfPartialMocks" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfPartialMocks</a></li>
+<li><a href="#TestOfPHP4StyleSuperClassConstruct" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfPHP4StyleSuperClassConstruct</a></li>
+<li><a href="#TestOfPHP5StaticMethodMocking" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfPHP5StaticMethodMocking</a></li>
+<li><a href="#TestOfPHP5AbstractMethodMocking" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfPHP5AbstractMethodMocking</a></li>
+<li><a href="#TestOfPageBuilder" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfPageBuilder</a></li>
+<li><a href="#TestOfPageParsing" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfPageParsing</a></li>
+<li><a href="#TestOfPageInterface" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfPageInterface</a></li>
+<li><a href="#TestOfPageHeaders" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfPageHeaders</a></li>
+<li><a href="#TestOfHtmlPage" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfHtmlPage</a></li>
+<li><a href="#TestOfFormsCreatedFromEventStream" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfFormsCreatedFromEventStream</a></li>
+<li><a href="#TestOfPageScraping" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfPageScraping</a></li>
+<li><a href="#TestOfParallelRegex" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfParallelRegex</a></li>
+<li><a href="#TestOfStateStack" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfStateStack</a></li>
+<li><a href="#TestOfLexer" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfLexer</a></li>
+<li><a href="#TestOfLexerModes" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfLexerModes</a></li>
+<li><a href="#TestOfLexerHandlers" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfLexerHandlers</a></li>
+<li><a href="#TestOfSimpleHtmlLexer" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfSimpleHtmlLexer</a></li>
+<li><a href="#TestOfHtmlSaxParser" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfHtmlSaxParser</a></li>
+<li><a href="#TestOfTextExtraction" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfTextExtraction</a></li>
+<li><a href="#TestOfReflection" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfReflection</a></li>
+<li><a href="#TestOfReflection" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfReflection</a></li>
+<li><a href="#TestOfReflectionWithTypeHints" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfReflectionWithTypeHints</a></li>
+<li><a href="#TestOfAbstractsWithAbstractMethods" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfAbstractsWithAbstractMethods</a></li>
+<li><a href="#TestOfShell" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfShell</a></li>
+<li><a href="#ShouldNeverBeRun" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">ShouldNeverBeRun</a></li>
+<li><a href="#TestOfStackTrace" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfStackTrace</a></li>
+<li><a href="#TestOfContext" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfContext</a></li>
+<li><a href="#TestOfSimpleStickyError" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfSimpleStickyError</a></li>
+<li><a href="#test1" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">test1</a></li>
+<li><a href="#TestOfTag" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfTag</a></li>
+<li><a href="#TestOfWidget" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfWidget</a></li>
+<li><a href="#TestOfTextArea" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfTextArea</a></li>
+<li><a href="#TestOfCheckbox" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfCheckbox</a></li>
+<li><a href="#TestOfSelection" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfSelection</a></li>
+<li><a href="#TestOfRadioGroup" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfRadioGroup</a></li>
+<li><a href="#TestOfTagGroup" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfTagGroup</a></li>
+<li><a href="#TestOfUploadWidget" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfUploadWidget</a></li>
+<li><a href="#TestOfLabelTag" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfLabelTag</a></li>
+<li><a href="#TestOfUnitTester" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfUnitTester</a></li>
+<li><a href="#UnitTests" title="This is a composite test class for combining
+   test cases and other RunnableTest classes into
+   a group test.">UnitTests</a></li>
+<li><a href="#TestOfUrl" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfUrl</a></li>
+<li><a href="#TestOfAbsoluteUrls" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfAbsoluteUrls</a></li>
+<li><a href="#TestOfFrameUrl" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfFrameUrl</a></li>
+<li><a href="#TestOfFetchingUrlParameters" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfFetchingUrlParameters</a></li>
+<li><a href="#TestOfAdditionalHeaders" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfAdditionalHeaders</a></li>
+<li><a href="#TestOfBrowserCookies" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfBrowserCookies</a></li>
+<li><a href="#TestOfHttpRedirects" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfHttpRedirects</a></li>
+<li><a href="#TestOfBadHosts" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfBadHosts</a></li>
+<li><a href="#TestOfAuthorisation" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfAuthorisation</a></li>
+<li><a href="#PassingUnitTestCaseOutput" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">PassingUnitTestCaseOutput</a></li>
+<li><a href="#FailingUnitTestCaseOutput" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">FailingUnitTestCaseOutput</a></li>
+<li><a href="#TestOfMockObjectsOutput" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfMockObjectsOutput</a></li>
+<li><a href="#TestOfPastBugs" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfPastBugs</a></li>
+<li><a href="#TestOfSkippingNoMatterWhat" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfSkippingNoMatterWhat</a></li>
+<li><a href="#TestOfSkippingOrElse" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfSkippingOrElse</a></li>
+<li><a href="#TestOfSkippingTwiceOver" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfSkippingTwiceOver</a></li>
+<li><a href="#TestThatShouldNotBeSkipped" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestThatShouldNotBeSkipped</a></li>
+<li><a href="#TestOfFieldExpectation" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfFieldExpectation</a></li>
+<li><a href="#TestOfHeaderExpectations" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfHeaderExpectations</a></li>
+<li><a href="#TestOfTextExpectations" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfTextExpectations</a></li>
+<li><a href="#TestOfNestingTags" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfNestingTags</a></li>
+<li><a href="#TestOfXmlStructureParsing" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfXmlStructureParsing</a></li>
+<li><a href="#TestOfXmlResultsParsing" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">TestOfXmlResultsParsing</a></li>
+<li><a href="#SimpleTestCase" title='Basic test case. This is the smallest unit of a test
+   suite. It searches for
+   all methods that start with the the string "test" and
+   runs them. Working test cases extend this class.'>SimpleTestCase</a></li>
+<li><a href="#TestSuite" title="This is a composite test class for combining
+   test cases and other RunnableTest classes into
+   a group test.">TestSuite</a></li>
+<li><a href="#BadTestSuite" title="This is a failing group test for when a test suite hasn't
+   loaded properly.">BadTestSuite</a></li>
+<li><a href="#UnitTestCase" title="Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.">UnitTestCase</a></li>
+<li><a href="#TextExpectation" title="Test for a text substring.">TextExpectation</a></li>
+<li><a href="#NoTextExpectation" title="Fail if a substring is detected within the
+   comparison text.">NoTextExpectation</a></li>
+<li><a href="#XmlReporter" title="Creates the XML needed for remote communication
+   by SimpleTest.">XmlReporter</a></li>
+<li><a href="#NestingXmlTag" title="Accumulator for incoming tag. Holds the
+   incoming test structure information for
+   later dispatch to the reporter.">NestingXmlTag</a></li>
+<li><a href="#NestingMethodTag" title="Accumulator for incoming method tag. Holds the
+   incoming test structure information for
+   later dispatch to the reporter.">NestingMethodTag</a></li>
+<li><a href="#NestingCaseTag" title="Accumulator for incoming case tag. Holds the
+   incoming test structure information for
+   later dispatch to the reporter.">NestingCaseTag</a></li>
+<li><a href="#NestingGroupTag" title="Accumulator for incoming group tag. Holds the
+   incoming test structure information for
+   later dispatch to the reporter.">NestingGroupTag</a></li>
+</ul>
+</div>
+<div class="span8 package-contents">
+<ul class="breadcrumb"><li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span><li><a href="../packages/Default.html">Default</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../packages/Default.UnitTester.html">UnitTester</a>
+</li>
+</li></ul>
+<div class="package-indent">
+<h3>
+<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
+<div id="AllTests" class="element ajax clickable class">
+<h1>AllTests<a href="../classes/AllTests.html">¶</a>
+</h1>
+<p class="short_description">This is a composite test class for combining
+   test cases and other RunnableTest classes into
+   a group test.</p>
+<div class="details collapse"></div>
+<a href="../classes/AllTests.html" class="more">« More »</a>
+</div>
+<div id="BadTestCases" class="element ajax clickable class">
+<h1>BadTestCases<a href="../classes/BadTestCases.html">¶</a>
+</h1>
+<p class="short_description">This is a composite test class for combining
+   test cases and other RunnableTest classes into
+   a group test.</p>
+<div class="details collapse"></div>
+<a href="../classes/BadTestCases.html" class="more">« More »</a>
+</div>
+<div id="BadTestSuite" class="element ajax clickable class">
+<h1>BadTestSuite<a href="../classes/BadTestSuite.html">¶</a>
+</h1>
+<p class="short_description">This is a failing group test for when a test suite hasn't
+   loaded properly.</p>
+<div class="details collapse"></div>
+<a href="../classes/BadTestSuite.html" class="more">« More »</a>
+</div>
+<div id="DefaultReporter" class="element ajax clickable class">
+<h1>DefaultReporter<a href="../classes/DefaultReporter.html">¶</a>
+</h1>
+<p class="short_description">The default reporter used by SimpleTest's autorun
+   feature. The actual reporters used are dependency
+   injected and can be overridden.</p>
+<div class="details collapse"></div>
+<a href="../classes/DefaultReporter.html" class="more">« More »</a>
+</div>
+<div id="DetachedTestCase" class="element ajax clickable class">
+<h1>DetachedTestCase<a href="../classes/DetachedTestCase.html">¶</a>
+</h1>
+<p class="short_description">Runs an XML formated test in a separate process.</p>
+<div class="details collapse"></div>
+<a href="../classes/DetachedTestCase.html" class="more">« More »</a>
+</div>
+<div id="ElggCoreOutputAutoPTest" class="element ajax clickable class">
+<h1>ElggCoreOutputAutoPTest<a href="../classes/ElggCoreOutputAutoPTest.html">¶</a>
+</h1>
+<p class="short_description">Test case for ElggAutoP functionality.</p>
+<div class="details collapse"></div>
+<a href="../classes/ElggCoreOutputAutoPTest.html" class="more">« More »</a>
+</div>
+<div id="ElggCoreUnitTest" class="element ajax clickable class">
+<h1>ElggCoreUnitTest<a href="../classes/ElggCoreUnitTest.html">¶</a>
+</h1>
+<p class="short_description">Elgg Core Unit Tester</p>
+<div class="details collapse"></div>
+<a href="../classes/ElggCoreUnitTest.html" class="more">« More »</a>
+</div>
+<div id="EqualExpectation" class="element ajax clickable class">
+<h1>EqualExpectation<a href="../classes/EqualExpectation.html">¶</a>
+</h1>
+<p class="short_description">Test for equality.</p>
+<div class="details collapse"></div>
+<a href="../classes/EqualExpectation.html" class="more">« More »</a>
+</div>
+<div id="ExceptionExpectation" class="element ajax clickable class">
+<h1>ExceptionExpectation<a href="../classes/ExceptionExpectation.html">¶</a>
+</h1>
+<p class="short_description">Tests exceptions either by type or the exact
+   exception. This could be improved to accept
+   a pattern expectation to test the error
+   message, but that will have to come later.</p>
+<div class="details collapse"></div>
+<a href="../classes/ExceptionExpectation.html" class="more">« More »</a>
+</div>
+<div id="FailingUnitTestCaseOutput" class="element ajax clickable class">
+<h1>FailingUnitTestCaseOutput<a href="../classes/FailingUnitTestCaseOutput.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/FailingUnitTestCaseOutput.html" class="more">« More »</a>
+</div>
+<div id="HtmlReporter" class="element ajax clickable class">
+<h1>HtmlReporter<a href="../classes/HtmlReporter.html">¶</a>
+</h1>
+<p class="short_description">Sample minimal test displayer. Generates only
+   failure messages and a pass count.</p>
+<div class="details collapse"></div>
+<a href="../classes/HtmlReporter.html" class="more">« More »</a>
+</div>
+<div id="IdenticalExpectation" class="element ajax clickable class">
+<h1>IdenticalExpectation<a href="../classes/IdenticalExpectation.html">¶</a>
+</h1>
+<p class="short_description">Test for identity.</p>
+<div class="details collapse"></div>
+<a href="../classes/IdenticalExpectation.html" class="more">« More »</a>
+</div>
+<div id="IsAExpectation" class="element ajax clickable class">
+<h1>IsAExpectation<a href="../classes/IsAExpectation.html">¶</a>
+</h1>
+<p class="short_description">Tests either type or class name if it's an object.</p>
+<div class="details collapse"></div>
+<a href="../classes/IsAExpectation.html" class="more">« More »</a>
+</div>
+<div id="LiveHttpTestCase" class="element ajax clickable class">
+<h1>LiveHttpTestCase<a href="../classes/LiveHttpTestCase.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/LiveHttpTestCase.html" class="more">« More »</a>
+</div>
+<div id="LoadIfIncludedTestCase" class="element ajax clickable class">
+<h1>LoadIfIncludedTestCase<a href="../classes/LoadIfIncludedTestCase.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/LoadIfIncludedTestCase.html" class="more">« More »</a>
+</div>
+<div id="MethodExistsExpectation" class="element ajax clickable class">
+<h1>MethodExistsExpectation<a href="../classes/MethodExistsExpectation.html">¶</a>
+</h1>
+<p class="short_description">Tests for existance of a method in an object</p>
+<div class="details collapse"></div>
+<a href="../classes/MethodExistsExpectation.html" class="more">« More »</a>
+</div>
+<div id="MultipleReporter" class="element ajax clickable class">
+<h1>MultipleReporter<a href="../classes/MultipleReporter.html">¶</a>
+</h1>
+<p class="short_description">For sending messages to multiple reporters at
+   the same time.</p>
+<div class="details collapse"></div>
+<a href="../classes/MultipleReporter.html" class="more">« More »</a>
+</div>
+<div id="NestingCaseTag" class="element ajax clickable class">
+<h1>NestingCaseTag<a href="../classes/NestingCaseTag.html">¶</a>
+</h1>
+<p class="short_description">Accumulator for incoming case tag. Holds the
+   incoming test structure information for
+   later dispatch to the reporter.</p>
+<div class="details collapse"></div>
+<a href="../classes/NestingCaseTag.html" class="more">« More »</a>
+</div>
+<div id="NestingGroupTag" class="element ajax clickable class">
+<h1>NestingGroupTag<a href="../classes/NestingGroupTag.html">¶</a>
+</h1>
+<p class="short_description">Accumulator for incoming group tag. Holds the
+   incoming test structure information for
+   later dispatch to the reporter.</p>
+<div class="details collapse"></div>
+<a href="../classes/NestingGroupTag.html" class="more">« More »</a>
+</div>
+<div id="NestingMethodTag" class="element ajax clickable class">
+<h1>NestingMethodTag<a href="../classes/NestingMethodTag.html">¶</a>
+</h1>
+<p class="short_description">Accumulator for incoming method tag. Holds the
+   incoming test structure information for
+   later dispatch to the reporter.</p>
+<div class="details collapse"></div>
+<a href="../classes/NestingMethodTag.html" class="more">« More »</a>
+</div>
+<div id="NestingXmlTag" class="element ajax clickable class">
+<h1>NestingXmlTag<a href="../classes/NestingXmlTag.html">¶</a>
+</h1>
+<p class="short_description">Accumulator for incoming tag. Holds the
+   incoming test structure information for
+   later dispatch to the reporter.</p>
+<div class="details collapse"></div>
+<a href="../classes/NestingXmlTag.html" class="more">« More »</a>
+</div>
+<div id="NoPatternExpectation" class="element ajax clickable class">
+<h1>NoPatternExpectation<a href="../classes/NoPatternExpectation.html">¶</a>
+</h1>
+<p class="short_description">Fail if a pattern is detected within the
+   comparison.</p>
+<div class="details collapse"></div>
+<a href="../classes/NoPatternExpectation.html" class="more">« More »</a>
+</div>
+<div id="NoSkipsReporter" class="element ajax clickable class">
+<h1>NoSkipsReporter<a href="../classes/NoSkipsReporter.html">¶</a>
+</h1>
+<p class="short_description">Suppresses skip messages.</p>
+<div class="details collapse"></div>
+<a href="../classes/NoSkipsReporter.html" class="more">« More »</a>
+</div>
+<div id="NoTextExpectation" class="element ajax clickable class">
+<h1>NoTextExpectation<a href="../classes/NoTextExpectation.html">¶</a>
+</h1>
+<p class="short_description">Fail if a substring is detected within the
+   comparison text.</p>
+<div class="details collapse"></div>
+<a href="../classes/NoTextExpectation.html" class="more">« More »</a>
+</div>
+<div id="NotEqualExpectation" class="element ajax clickable class">
+<h1>NotEqualExpectation<a href="../classes/NotEqualExpectation.html">¶</a>
+</h1>
+<p class="short_description">Test for inequality.</p>
+<div class="details collapse"></div>
+<a href="../classes/NotEqualExpectation.html" class="more">« More »</a>
+</div>
+<div id="NotIdenticalExpectation" class="element ajax clickable class">
+<h1>NotIdenticalExpectation<a href="../classes/NotIdenticalExpectation.html">¶</a>
+</h1>
+<p class="short_description">Test for non-identity.</p>
+<div class="details collapse"></div>
+<a href="../classes/NotIdenticalExpectation.html" class="more">« More »</a>
+</div>
+<div id="OutsideMarginExpectation" class="element ajax clickable class">
+<h1>OutsideMarginExpectation<a href="../classes/OutsideMarginExpectation.html">¶</a>
+</h1>
+<p class="short_description">Test for being outside of a range.</p>
+<div class="details collapse"></div>
+<a href="../classes/OutsideMarginExpectation.html" class="more">« More »</a>
+</div>
+<div id="PassingUnitTestCaseOutput" class="element ajax clickable class">
+<h1>PassingUnitTestCaseOutput<a href="../classes/PassingUnitTestCaseOutput.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/PassingUnitTestCaseOutput.html" class="more">« More »</a>
+</div>
+<div id="PatternExpectation" class="element ajax clickable class">
+<h1>PatternExpectation<a href="../classes/PatternExpectation.html">¶</a>
+</h1>
+<p class="short_description">Test for a pattern using Perl regex rules.</p>
+<div class="details collapse"></div>
+<a href="../classes/PatternExpectation.html" class="more">« More »</a>
+</div>
+<div id="ReferenceExpectation" class="element ajax clickable class">
+<h1>ReferenceExpectation<a href="../classes/ReferenceExpectation.html">¶</a>
+</h1>
+<p class="short_description">Test for reference.</p>
+<div class="details collapse"></div>
+<a href="../classes/ReferenceExpectation.html" class="more">« More »</a>
+</div>
+<div id="RemoteTestCase" class="element ajax clickable class">
+<h1>RemoteTestCase<a href="../classes/RemoteTestCase.html">¶</a>
+</h1>
+<p class="short_description">Runs an XML formated test on a remote server.</p>
+<div class="details collapse"></div>
+<a href="../classes/RemoteTestCase.html" class="more">« More »</a>
+</div>
+<div id="SelectiveReporter" class="element ajax clickable class">
+<h1>SelectiveReporter<a href="../classes/SelectiveReporter.html">¶</a>
+</h1>
+<p class="short_description">Runs just a single test group, a single case or
+   even a single test within that case.</p>
+<div class="details collapse"></div>
+<a href="../classes/SelectiveReporter.html" class="more">« More »</a>
+</div>
+<div id="ShellTestCase" class="element ajax clickable class">
+<h1>ShellTestCase<a href="../classes/ShellTestCase.html">¶</a>
+</h1>
+<p class="short_description">Test case for testing of command line scripts and
+   utilities. Usually scripts that are external to the
+   PHP code, but support it in some way.</p>
+<div class="details collapse"></div>
+<a href="../classes/ShellTestCase.html" class="more">« More »</a>
+</div>
+<div id="ShouldNeverBeRun" class="element ajax clickable class">
+<h1>ShouldNeverBeRun<a href="../classes/ShouldNeverBeRun.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/ShouldNeverBeRun.html" class="more">« More »</a>
+</div>
+<div id="SimpleCommandLineParser" class="element ajax clickable class">
+<h1>SimpleCommandLineParser<a href="../classes/SimpleCommandLineParser.html">¶</a>
+</h1>
+<p class="short_description">Parser for command line arguments. Extracts
+   the a specific test to run and engages XML
+   reporting when necessary.</p>
+<div class="details collapse"></div>
+<a href="../classes/SimpleCommandLineParser.html" class="more">« More »</a>
+</div>
+<div id="SimpleDumper" class="element ajax clickable class">
+<h1>SimpleDumper<a href="../classes/SimpleDumper.html">¶</a>
+</h1>
+<p class="short_description">Displays variables as text and does diffs.</p>
+<div class="details collapse"></div>
+<a href="../classes/SimpleDumper.html" class="more">« More »</a>
+</div>
+<div id="SimpleErrorQueue" class="element ajax clickable class">
+<h1>SimpleErrorQueue<a href="../classes/SimpleErrorQueue.html">¶</a>
+</h1>
+<p class="short_description">Error queue used to record trapped
+   errors.</p>
+<div class="details collapse"></div>
+<a href="../classes/SimpleErrorQueue.html" class="more">« More »</a>
+</div>
+<div id="SimpleErrorTrappingInvoker" class="element ajax clickable class">
+<h1>SimpleErrorTrappingInvoker<a href="../classes/SimpleErrorTrappingInvoker.html">¶</a>
+</h1>
+<p class="short_description">Extension that traps errors into an error queue.</p>
+<div class="details collapse"></div>
+<a href="../classes/SimpleErrorTrappingInvoker.html" class="more">« More »</a>
+</div>
+<div id="SimpleExceptionTrappingInvoker" class="element ajax clickable class">
+<h1>SimpleExceptionTrappingInvoker<a href="../classes/SimpleExceptionTrappingInvoker.html">¶</a>
+</h1>
+<p class="short_description">Extension that traps exceptions and turns them into
+   an error message. PHP5 only.</p>
+<div class="details collapse"></div>
+<a href="../classes/SimpleExceptionTrappingInvoker.html" class="more">« More »</a>
+</div>
+<div id="SimpleInvoker" class="element ajax clickable class">
+<h1>SimpleInvoker<a href="../classes/SimpleInvoker.html">¶</a>
+</h1>
+<p class="short_description">This is called by the class runner to run a
+   single test method. Will also run the setUp()
+   and tearDown() methods.</p>
+<div class="details collapse"></div>
+<a href="../classes/SimpleInvoker.html" class="more">« More »</a>
+</div>
+<div id="SimpleInvokerDecorator" class="element ajax clickable class">
+<h1>SimpleInvokerDecorator<a href="../classes/SimpleInvokerDecorator.html">¶</a>
+</h1>
+<p class="short_description">Do nothing decorator. Just passes the invocation
+   straight through.</p>
+<div class="details collapse"></div>
+<a href="../classes/SimpleInvokerDecorator.html" class="more">« More »</a>
+</div>
+<div id="SimpleReflection" class="element ajax clickable class">
+<h1>SimpleReflection<a href="../classes/SimpleReflection.html">¶</a>
+</h1>
+<p class="short_description">Version specific reflection API.</p>
+<div class="details collapse"></div>
+<a href="../classes/SimpleReflection.html" class="more">« More »</a>
+</div>
+<div id="SimpleReporter" class="element ajax clickable class">
+<h1>SimpleReporter<a href="../classes/SimpleReporter.html">¶</a>
+</h1>
+<p class="short_description">Recipient of generated test messages that can display
+   page footers and headers. Also keeps track of the
+   test nesting. This is the main base class on which
+   to build the finished test (page based) displays.</p>
+<div class="details collapse"></div>
+<a href="../classes/SimpleReporter.html" class="more">« More »</a>
+</div>
+<div id="SimpleReporterDecorator" class="element ajax clickable class">
+<h1>SimpleReporterDecorator<a href="../classes/SimpleReporterDecorator.html">¶</a>
+</h1>
+<p class="short_description">For modifying the behaviour of the visual reporters.</p>
+<div class="details collapse"></div>
+<a href="../classes/SimpleReporterDecorator.html" class="more">« More »</a>
+</div>
+<div id="SimpleShell" class="element ajax clickable class">
+<h1>SimpleShell<a href="../classes/SimpleShell.html">¶</a>
+</h1>
+<p class="short_description">Wrapper for exec() functionality.</p>
+<div class="details collapse"></div>
+<a href="../classes/SimpleShell.html" class="more">« More »</a>
+</div>
+<div id="SimpleStackTrace" class="element ajax clickable class">
+<h1>SimpleStackTrace<a href="../classes/SimpleStackTrace.html">¶</a>
+</h1>
+<p class="short_description">Interrogates the stack trace to recover the
+   failure point.</p>
+<div class="details collapse"></div>
+<a href="../classes/SimpleStackTrace.html" class="more">« More »</a>
+</div>
+<div id="SimpleTest" class="element ajax clickable class">
+<h1>SimpleTest<a href="../classes/SimpleTest.html">¶</a>
+</h1>
+<p class="short_description">Registry and test context. Includes a few
+   global options that I'm slowly getting rid of.</p>
+<div class="details collapse"></div>
+<a href="../classes/SimpleTest.html" class="more">« More »</a>
+</div>
+<div id="SimpleTestCase" class="element ajax clickable class">
+<h1>SimpleTestCase<a href="../classes/SimpleTestCase.html">¶</a>
+</h1>
+<p class="short_description">Basic test case. This is the smallest unit of a test
+   suite. It searches for
+   all methods that start with the the string "test" and
+   runs them. Working test cases extend this class.</p>
+<div class="details collapse"></div>
+<a href="../classes/SimpleTestCase.html" class="more">« More »</a>
+</div>
+<div id="TestDoxReporter" class="element ajax clickable class">
+<h1>TestDoxReporter<a href="../classes/TestDoxReporter.html">¶</a>
+</h1>
+<p class="short_description">Recipient of generated test messages that can display
+   page footers and headers. Also keeps track of the
+   test nesting. This is the main base class on which
+   to build the finished test (page based) displays.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestDoxReporter.html" class="more">« More »</a>
+</div>
+<div id="TestOfAbsoluteUrls" class="element ajax clickable class">
+<h1>TestOfAbsoluteUrls<a href="../classes/TestOfAbsoluteUrls.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfAbsoluteUrls.html" class="more">« More »</a>
+</div>
+<div id="TestOfAbstractsWithAbstractMethods" class="element ajax clickable class">
+<h1>TestOfAbstractsWithAbstractMethods<a href="../classes/TestOfAbstractsWithAbstractMethods.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfAbstractsWithAbstractMethods.html" class="more">« More »</a>
+</div>
+<div id="TestOfAdditionalHeaders" class="element ajax clickable class">
+<h1>TestOfAdditionalHeaders<a href="../classes/TestOfAdditionalHeaders.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfAdditionalHeaders.html" class="more">« More »</a>
+</div>
+<div id="TestOfAnythingExpectation" class="element ajax clickable class">
+<h1>TestOfAnythingExpectation<a href="../classes/TestOfAnythingExpectation.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfAnythingExpectation.html" class="more">« More »</a>
+</div>
+<div id="TestOfAuthenticator" class="element ajax clickable class">
+<h1>TestOfAuthenticator<a href="../classes/TestOfAuthenticator.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfAuthenticator.html" class="more">« More »</a>
+</div>
+<div id="TestOfAuthorisation" class="element ajax clickable class">
+<h1>TestOfAuthorisation<a href="../classes/TestOfAuthorisation.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfAuthorisation.html" class="more">« More »</a>
+</div>
+<div id="TestOfBadHosts" class="element ajax clickable class">
+<h1>TestOfBadHosts<a href="../classes/TestOfBadHosts.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfBadHosts.html" class="more">« More »</a>
+</div>
+<div id="TestOfBrowserCookies" class="element ajax clickable class">
+<h1>TestOfBrowserCookies<a href="../classes/TestOfBrowserCookies.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfBrowserCookies.html" class="more">« More »</a>
+</div>
+<div id="TestOfBrowserFrames" class="element ajax clickable class">
+<h1>TestOfBrowserFrames<a href="../classes/TestOfBrowserFrames.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfBrowserFrames.html" class="more">« More »</a>
+</div>
+<div id="TestOfBrowserNavigation" class="element ajax clickable class">
+<h1>TestOfBrowserNavigation<a href="../classes/TestOfBrowserNavigation.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfBrowserNavigation.html" class="more">« More »</a>
+</div>
+<div id="TestOfCallSchedule" class="element ajax clickable class">
+<h1>TestOfCallSchedule<a href="../classes/TestOfCallSchedule.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfCallSchedule.html" class="more">« More »</a>
+</div>
+<div id="TestOfCallingTearDownAfterExceptions" class="element ajax clickable class">
+<h1>TestOfCallingTearDownAfterExceptions<a href="../classes/TestOfCallingTearDownAfterExceptions.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfCallingTearDownAfterExceptions.html" class="more">« More »</a>
+</div>
+<div id="TestOfCatchingExceptions" class="element ajax clickable class">
+<h1>TestOfCatchingExceptions<a href="../classes/TestOfCatchingExceptions.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfCatchingExceptions.html" class="more">« More »</a>
+</div>
+<div id="TestOfCheckbox" class="element ajax clickable class">
+<h1>TestOfCheckbox<a href="../classes/TestOfCheckbox.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfCheckbox.html" class="more">« More »</a>
+</div>
+<div id="TestOfCollector" class="element ajax clickable class">
+<h1>TestOfCollector<a href="../classes/TestOfCollector.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfCollector.html" class="more">« More »</a>
+</div>
+<div id="TestOfCommandLineParsing" class="element ajax clickable class">
+<h1>TestOfCommandLineParsing<a href="../classes/TestOfCommandLineParsing.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfCommandLineParsing.html" class="more">« More »</a>
+</div>
+<div id="TestOfCompatibility" class="element ajax clickable class">
+<h1>TestOfCompatibility<a href="../classes/TestOfCompatibility.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfCompatibility.html" class="more">« More »</a>
+</div>
+<div id="TestOfContext" class="element ajax clickable class">
+<h1>TestOfContext<a href="../classes/TestOfContext.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfContext.html" class="more">« More »</a>
+</div>
+<div id="TestOfCookie" class="element ajax clickable class">
+<h1>TestOfCookie<a href="../classes/TestOfCookie.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfCookie.html" class="more">« More »</a>
+</div>
+<div id="TestOfCookieJar" class="element ajax clickable class">
+<h1>TestOfCookieJar<a href="../classes/TestOfCookieJar.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfCookieJar.html" class="more">« More »</a>
+</div>
+<div id="TestOfDirectRoute" class="element ajax clickable class">
+<h1>TestOfDirectRoute<a href="../classes/TestOfDirectRoute.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfDirectRoute.html" class="more">« More »</a>
+</div>
+<div id="TestOfEclipse" class="element ajax clickable class">
+<h1>TestOfEclipse<a href="../classes/TestOfEclipse.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfEclipse.html" class="more">« More »</a>
+</div>
+<div id="TestOfEncodedParts" class="element ajax clickable class">
+<h1>TestOfEncodedParts<a href="../classes/TestOfEncodedParts.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfEncodedParts.html" class="more">« More »</a>
+</div>
+<div id="TestOfEncoding" class="element ajax clickable class">
+<h1>TestOfEncoding<a href="../classes/TestOfEncoding.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfEncoding.html" class="more">« More »</a>
+</div>
+<div id="TestOfEquality" class="element ajax clickable class">
+<h1>TestOfEquality<a href="../classes/TestOfEquality.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfEquality.html" class="more">« More »</a>
+</div>
+<div id="TestOfErrorQueue" class="element ajax clickable class">
+<h1>TestOfErrorQueue<a href="../classes/TestOfErrorQueue.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfErrorQueue.html" class="more">« More »</a>
+</div>
+<div id="TestOfErrorTrap" class="element ajax clickable class">
+<h1>TestOfErrorTrap<a href="../classes/TestOfErrorTrap.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfErrorTrap.html" class="more">« More »</a>
+</div>
+<div id="TestOfErrors" class="element ajax clickable class">
+<h1>TestOfErrors<a href="../classes/TestOfErrors.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfErrors.html" class="more">« More »</a>
+</div>
+<div id="TestOfErrorsExcludingPHP52AndAbove" class="element ajax clickable class">
+<h1>TestOfErrorsExcludingPHP52AndAbove<a href="../classes/TestOfErrorsExcludingPHP52AndAbove.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfErrorsExcludingPHP52AndAbove.html" class="more">« More »</a>
+</div>
+<div id="TestOfExceptionExpectation" class="element ajax clickable class">
+<h1>TestOfExceptionExpectation<a href="../classes/TestOfExceptionExpectation.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfExceptionExpectation.html" class="more">« More »</a>
+</div>
+<div id="TestOfExceptionThrownInSetUpDoesNotRunTestBody" class="element ajax clickable class">
+<h1>TestOfExceptionThrownInSetUpDoesNotRunTestBody<a href="../classes/TestOfExceptionThrownInSetUpDoesNotRunTestBody.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfExceptionThrownInSetUpDoesNotRunTestBody.html" class="more">« More »</a>
+</div>
+<div id="TestOfExceptionTrap" class="element ajax clickable class">
+<h1>TestOfExceptionTrap<a href="../classes/TestOfExceptionTrap.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfExceptionTrap.html" class="more">« More »</a>
+</div>
+<div id="TestOfExpectExceptionWithSetUp" class="element ajax clickable class">
+<h1>TestOfExpectExceptionWithSetUp<a href="../classes/TestOfExpectExceptionWithSetUp.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfExpectExceptionWithSetUp.html" class="more">« More »</a>
+</div>
+<div id="TestOfFetchingUrlParameters" class="element ajax clickable class">
+<h1>TestOfFetchingUrlParameters<a href="../classes/TestOfFetchingUrlParameters.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfFetchingUrlParameters.html" class="more">« More »</a>
+</div>
+<div id="TestOfFieldExpectation" class="element ajax clickable class">
+<h1>TestOfFieldExpectation<a href="../classes/TestOfFieldExpectation.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfFieldExpectation.html" class="more">« More »</a>
+</div>
+<div id="TestOfForm" class="element ajax clickable class">
+<h1>TestOfForm<a href="../classes/TestOfForm.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfForm.html" class="more">« More »</a>
+</div>
+<div id="TestOfFormHeaders" class="element ajax clickable class">
+<h1>TestOfFormHeaders<a href="../classes/TestOfFormHeaders.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfFormHeaders.html" class="more">« More »</a>
+</div>
+<div id="TestOfFormsCreatedFromEventStream" class="element ajax clickable class">
+<h1>TestOfFormsCreatedFromEventStream<a href="../classes/TestOfFormsCreatedFromEventStream.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfFormsCreatedFromEventStream.html" class="more">« More »</a>
+</div>
+<div id="TestOfFrameNavigation" class="element ajax clickable class">
+<h1>TestOfFrameNavigation<a href="../classes/TestOfFrameNavigation.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfFrameNavigation.html" class="more">« More »</a>
+</div>
+<div id="TestOfFrameUrl" class="element ajax clickable class">
+<h1>TestOfFrameUrl<a href="../classes/TestOfFrameUrl.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfFrameUrl.html" class="more">« More »</a>
+</div>
+<div id="TestOfFrameset" class="element ajax clickable class">
+<h1>TestOfFrameset<a href="../classes/TestOfFrameset.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfFrameset.html" class="more">« More »</a>
+</div>
+<div id="TestOfFramesetPageInterface" class="element ajax clickable class">
+<h1>TestOfFramesetPageInterface<a href="../classes/TestOfFramesetPageInterface.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfFramesetPageInterface.html" class="more">« More »</a>
+</div>
+<div id="TestOfHeaderExpectations" class="element ajax clickable class">
+<h1>TestOfHeaderExpectations<a href="../classes/TestOfHeaderExpectations.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfHeaderExpectations.html" class="more">« More »</a>
+</div>
+<div id="TestOfHistory" class="element ajax clickable class">
+<h1>TestOfHistory<a href="../classes/TestOfHistory.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfHistory.html" class="more">« More »</a>
+</div>
+<div id="TestOfHtmlPage" class="element ajax clickable class">
+<h1>TestOfHtmlPage<a href="../classes/TestOfHtmlPage.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfHtmlPage.html" class="more">« More »</a>
+</div>
+<div id="TestOfHtmlSaxParser" class="element ajax clickable class">
+<h1>TestOfHtmlSaxParser<a href="../classes/TestOfHtmlSaxParser.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfHtmlSaxParser.html" class="more">« More »</a>
+</div>
+<div id="TestOfHttpHeaders" class="element ajax clickable class">
+<h1>TestOfHttpHeaders<a href="../classes/TestOfHttpHeaders.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfHttpHeaders.html" class="more">« More »</a>
+</div>
+<div id="TestOfHttpPostRequest" class="element ajax clickable class">
+<h1>TestOfHttpPostRequest<a href="../classes/TestOfHttpPostRequest.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfHttpPostRequest.html" class="more">« More »</a>
+</div>
+<div id="TestOfHttpRedirects" class="element ajax clickable class">
+<h1>TestOfHttpRedirects<a href="../classes/TestOfHttpRedirects.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfHttpRedirects.html" class="more">« More »</a>
+</div>
+<div id="TestOfHttpRequest" class="element ajax clickable class">
+<h1>TestOfHttpRequest<a href="../classes/TestOfHttpRequest.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfHttpRequest.html" class="more">« More »</a>
+</div>
+<div id="TestOfHttpResponse" class="element ajax clickable class">
+<h1>TestOfHttpResponse<a href="../classes/TestOfHttpResponse.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfHttpResponse.html" class="more">« More »</a>
+</div>
+<div id="TestOfIdentity" class="element ajax clickable class">
+<h1>TestOfIdentity<a href="../classes/TestOfIdentity.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfIdentity.html" class="more">« More »</a>
+</div>
+<div id="TestOfImplementations" class="element ajax clickable class">
+<h1>TestOfImplementations<a href="../classes/TestOfImplementations.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfImplementations.html" class="more">« More »</a>
+</div>
+<div id="TestOfInequality" class="element ajax clickable class">
+<h1>TestOfInequality<a href="../classes/TestOfInequality.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfInequality.html" class="more">« More »</a>
+</div>
+<div id="TestOfInterfaceMocksWithConstruct" class="element ajax clickable class">
+<h1>TestOfInterfaceMocksWithConstruct<a href="../classes/TestOfInterfaceMocksWithConstruct.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfInterfaceMocksWithConstruct.html" class="more">« More »</a>
+</div>
+<div id="TestOfInterfaceMocksWithHintInSignature" class="element ajax clickable class">
+<h1>TestOfInterfaceMocksWithHintInSignature<a href="../classes/TestOfInterfaceMocksWithHintInSignature.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfInterfaceMocksWithHintInSignature.html" class="more">« More »</a>
+</div>
+<div id="TestOfIsA" class="element ajax clickable class">
+<h1>TestOfIsA<a href="../classes/TestOfIsA.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfIsA.html" class="more">« More »</a>
+</div>
+<div id="TestOfLabelTag" class="element ajax clickable class">
+<h1>TestOfLabelTag<a href="../classes/TestOfLabelTag.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfLabelTag.html" class="more">« More »</a>
+</div>
+<div id="TestOfLexer" class="element ajax clickable class">
+<h1>TestOfLexer<a href="../classes/TestOfLexer.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfLexer.html" class="more">« More »</a>
+</div>
+<div id="TestOfLexerHandlers" class="element ajax clickable class">
+<h1>TestOfLexerHandlers<a href="../classes/TestOfLexerHandlers.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfLexerHandlers.html" class="more">« More »</a>
+</div>
+<div id="TestOfLexerModes" class="element ajax clickable class">
+<h1>TestOfLexerModes<a href="../classes/TestOfLexerModes.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfLexerModes.html" class="more">« More »</a>
+</div>
+<div id="TestOfLiveBrowser" class="element ajax clickable class">
+<h1>TestOfLiveBrowser<a href="../classes/TestOfLiveBrowser.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfLiveBrowser.html" class="more">« More »</a>
+</div>
+<div id="TestOfMethodExistence" class="element ajax clickable class">
+<h1>TestOfMethodExistence<a href="../classes/TestOfMethodExistence.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfMethodExistence.html" class="more">« More »</a>
+</div>
+<div id="TestOfMockComparisons" class="element ajax clickable class">
+<h1>TestOfMockComparisons<a href="../classes/TestOfMockComparisons.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfMockComparisons.html" class="more">« More »</a>
+</div>
+<div id="TestOfMockExpectations" class="element ajax clickable class">
+<h1>TestOfMockExpectations<a href="../classes/TestOfMockExpectations.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfMockExpectations.html" class="more">« More »</a>
+</div>
+<div id="TestOfMockExpectationsThatPass" class="element ajax clickable class">
+<h1>TestOfMockExpectationsThatPass<a href="../classes/TestOfMockExpectationsThatPass.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfMockExpectationsThatPass.html" class="more">« More »</a>
+</div>
+<div id="TestOfMockGeneration" class="element ajax clickable class">
+<h1>TestOfMockGeneration<a href="../classes/TestOfMockGeneration.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfMockGeneration.html" class="more">« More »</a>
+</div>
+<div id="TestOfMockInterfaces" class="element ajax clickable class">
+<h1>TestOfMockInterfaces<a href="../classes/TestOfMockInterfaces.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfMockInterfaces.html" class="more">« More »</a>
+</div>
+<div id="TestOfMockObjectsOutput" class="element ajax clickable class">
+<h1>TestOfMockObjectsOutput<a href="../classes/TestOfMockObjectsOutput.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfMockObjectsOutput.html" class="more">« More »</a>
+</div>
+<div id="TestOfMockReturns" class="element ajax clickable class">
+<h1>TestOfMockReturns<a href="../classes/TestOfMockReturns.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfMockReturns.html" class="more">« More »</a>
+</div>
+<div id="TestOfMockingClassesWithStaticMethods" class="element ajax clickable class">
+<h1>TestOfMockingClassesWithStaticMethods<a href="../classes/TestOfMockingClassesWithStaticMethods.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfMockingClassesWithStaticMethods.html" class="more">« More »</a>
+</div>
+<div id="TestOfNestingTags" class="element ajax clickable class">
+<h1>TestOfNestingTags<a href="../classes/TestOfNestingTags.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfNestingTags.html" class="more">« More »</a>
+</div>
+<div id="TestOfNonIdentity" class="element ajax clickable class">
+<h1>TestOfNonIdentity<a href="../classes/TestOfNonIdentity.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfNonIdentity.html" class="more">« More »</a>
+</div>
+<div id="TestOfNotA" class="element ajax clickable class">
+<h1>TestOfNotA<a href="../classes/TestOfNotA.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfNotA.html" class="more">« More »</a>
+</div>
+<div id="TestOfPHP4StyleSuperClassConstruct" class="element ajax clickable class">
+<h1>TestOfPHP4StyleSuperClassConstruct<a href="../classes/TestOfPHP4StyleSuperClassConstruct.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfPHP4StyleSuperClassConstruct.html" class="more">« More »</a>
+</div>
+<div id="TestOfPHP52RecoverableErrors" class="element ajax clickable class">
+<h1>TestOfPHP52RecoverableErrors<a href="../classes/TestOfPHP52RecoverableErrors.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfPHP52RecoverableErrors.html" class="more">« More »</a>
+</div>
+<div id="TestOfPHP5AbstractMethodMocking" class="element ajax clickable class">
+<h1>TestOfPHP5AbstractMethodMocking<a href="../classes/TestOfPHP5AbstractMethodMocking.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfPHP5AbstractMethodMocking.html" class="more">« More »</a>
+</div>
+<div id="TestOfPHP5StaticMethodMocking" class="element ajax clickable class">
+<h1>TestOfPHP5StaticMethodMocking<a href="../classes/TestOfPHP5StaticMethodMocking.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfPHP5StaticMethodMocking.html" class="more">« More »</a>
+</div>
+<div id="TestOfPageBuilder" class="element ajax clickable class">
+<h1>TestOfPageBuilder<a href="../classes/TestOfPageBuilder.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfPageBuilder.html" class="more">« More »</a>
+</div>
+<div id="TestOfPageHeaders" class="element ajax clickable class">
+<h1>TestOfPageHeaders<a href="../classes/TestOfPageHeaders.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfPageHeaders.html" class="more">« More »</a>
+</div>
+<div id="TestOfPageInterface" class="element ajax clickable class">
+<h1>TestOfPageInterface<a href="../classes/TestOfPageInterface.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfPageInterface.html" class="more">« More »</a>
+</div>
+<div id="TestOfPageParsing" class="element ajax clickable class">
+<h1>TestOfPageParsing<a href="../classes/TestOfPageParsing.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfPageParsing.html" class="more">« More »</a>
+</div>
+<div id="TestOfPageScraping" class="element ajax clickable class">
+<h1>TestOfPageScraping<a href="../classes/TestOfPageScraping.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfPageScraping.html" class="more">« More »</a>
+</div>
+<div id="TestOfParallelRegex" class="element ajax clickable class">
+<h1>TestOfParallelRegex<a href="../classes/TestOfParallelRegex.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfParallelRegex.html" class="more">« More »</a>
+</div>
+<div id="TestOfParametersExpectation" class="element ajax clickable class">
+<h1>TestOfParametersExpectation<a href="../classes/TestOfParametersExpectation.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfParametersExpectation.html" class="more">« More »</a>
+</div>
+<div id="TestOfParsedPageAccess" class="element ajax clickable class">
+<h1>TestOfParsedPageAccess<a href="../classes/TestOfParsedPageAccess.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfParsedPageAccess.html" class="more">« More »</a>
+</div>
+<div id="TestOfPartialMocks" class="element ajax clickable class">
+<h1>TestOfPartialMocks<a href="../classes/TestOfPartialMocks.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfPartialMocks.html" class="more">« More »</a>
+</div>
+<div id="TestOfPastBugs" class="element ajax clickable class">
+<h1>TestOfPastBugs<a href="../classes/TestOfPastBugs.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfPastBugs.html" class="more">« More »</a>
+</div>
+<div id="TestOfPatternCollector" class="element ajax clickable class">
+<h1>TestOfPatternCollector<a href="../classes/TestOfPatternCollector.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfPatternCollector.html" class="more">« More »</a>
+</div>
+<div id="TestOfPatterns" class="element ajax clickable class">
+<h1>TestOfPatterns<a href="../classes/TestOfPatterns.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfPatterns.html" class="more">« More »</a>
+</div>
+<div id="TestOfProxyRoute" class="element ajax clickable class">
+<h1>TestOfProxyRoute<a href="../classes/TestOfProxyRoute.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfProxyRoute.html" class="more">« More »</a>
+</div>
+<div id="TestOfRadioGroup" class="element ajax clickable class">
+<h1>TestOfRadioGroup<a href="../classes/TestOfRadioGroup.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfRadioGroup.html" class="more">« More »</a>
+</div>
+<div id="TestOfRealm" class="element ajax clickable class">
+<h1>TestOfRealm<a href="../classes/TestOfRealm.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfRealm.html" class="more">« More »</a>
+</div>
+<div id="TestOfReference" class="element ajax clickable class">
+<h1>TestOfReference<a href="../classes/TestOfReference.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfReference.html" class="more">« More »</a>
+</div>
+<div id="TestOfReflection" class="element ajax clickable class">
+<h1>TestOfReflection<a href="../classes/TestOfReflection.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfReflection.html" class="more">« More »</a>
+</div>
+<div id="TestOfReflection" class="element ajax clickable class">
+<h1>TestOfReflection<a href="../classes/TestOfReflection.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfReflection.html" class="more">« More »</a>
+</div>
+<div id="TestOfReflectionWithTypeHints" class="element ajax clickable class">
+<h1>TestOfReflectionWithTypeHints<a href="../classes/TestOfReflectionWithTypeHints.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfReflectionWithTypeHints.html" class="more">« More »</a>
+</div>
+<div id="TestOfSampleInterfaceWithClone" class="element ajax clickable class">
+<h1>TestOfSampleInterfaceWithClone<a href="../classes/TestOfSampleInterfaceWithClone.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfSampleInterfaceWithClone.html" class="more">« More »</a>
+</div>
+<div id="TestOfSelection" class="element ajax clickable class">
+<h1>TestOfSelection<a href="../classes/TestOfSelection.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfSelection.html" class="more">« More »</a>
+</div>
+<div id="TestOfShell" class="element ajax clickable class">
+<h1>TestOfShell<a href="../classes/TestOfShell.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfShell.html" class="more">« More »</a>
+</div>
+<div id="TestOfSimpleHtmlLexer" class="element ajax clickable class">
+<h1>TestOfSimpleHtmlLexer<a href="../classes/TestOfSimpleHtmlLexer.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfSimpleHtmlLexer.html" class="more">« More »</a>
+</div>
+<div id="TestOfSimpleSignatureMap" class="element ajax clickable class">
+<h1>TestOfSimpleSignatureMap<a href="../classes/TestOfSimpleSignatureMap.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfSimpleSignatureMap.html" class="more">« More »</a>
+</div>
+<div id="TestOfSimpleStickyError" class="element ajax clickable class">
+<h1>TestOfSimpleStickyError<a href="../classes/TestOfSimpleStickyError.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfSimpleStickyError.html" class="more">« More »</a>
+</div>
+<div id="TestOfSkippingNoMatterWhat" class="element ajax clickable class">
+<h1>TestOfSkippingNoMatterWhat<a href="../classes/TestOfSkippingNoMatterWhat.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfSkippingNoMatterWhat.html" class="more">« More »</a>
+</div>
+<div id="TestOfSkippingOrElse" class="element ajax clickable class">
+<h1>TestOfSkippingOrElse<a href="../classes/TestOfSkippingOrElse.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfSkippingOrElse.html" class="more">« More »</a>
+</div>
+<div id="TestOfSkippingTwiceOver" class="element ajax clickable class">
+<h1>TestOfSkippingTwiceOver<a href="../classes/TestOfSkippingTwiceOver.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfSkippingTwiceOver.html" class="more">« More »</a>
+</div>
+<div id="TestOfSpecialMethods" class="element ajax clickable class">
+<h1>TestOfSpecialMethods<a href="../classes/TestOfSpecialMethods.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfSpecialMethods.html" class="more">« More »</a>
+</div>
+<div id="TestOfSpl" class="element ajax clickable class">
+<h1>TestOfSpl<a href="../classes/TestOfSpl.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfSpl.html" class="more">« More »</a>
+</div>
+<div id="TestOfStackTrace" class="element ajax clickable class">
+<h1>TestOfStackTrace<a href="../classes/TestOfStackTrace.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfStackTrace.html" class="more">« More »</a>
+</div>
+<div id="TestOfStateStack" class="element ajax clickable class">
+<h1>TestOfStateStack<a href="../classes/TestOfStateStack.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfStateStack.html" class="more">« More »</a>
+</div>
+<div id="TestOfTag" class="element ajax clickable class">
+<h1>TestOfTag<a href="../classes/TestOfTag.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfTag.html" class="more">« More »</a>
+</div>
+<div id="TestOfTagGroup" class="element ajax clickable class">
+<h1>TestOfTagGroup<a href="../classes/TestOfTagGroup.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfTagGroup.html" class="more">« More »</a>
+</div>
+<div id="TestOfTestDoxReporter" class="element ajax clickable class">
+<h1>TestOfTestDoxReporter<a href="../classes/TestOfTestDoxReporter.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfTestDoxReporter.html" class="more">« More »</a>
+</div>
+<div id="TestOfTextArea" class="element ajax clickable class">
+<h1>TestOfTextArea<a href="../classes/TestOfTextArea.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfTextArea.html" class="more">« More »</a>
+</div>
+<div id="TestOfTextExpectations" class="element ajax clickable class">
+<h1>TestOfTextExpectations<a href="../classes/TestOfTextExpectations.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfTextExpectations.html" class="more">« More »</a>
+</div>
+<div id="TestOfTextExtraction" class="element ajax clickable class">
+<h1>TestOfTextExtraction<a href="../classes/TestOfTextExtraction.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfTextExtraction.html" class="more">« More »</a>
+</div>
+<div id="TestOfTextFormatting" class="element ajax clickable class">
+<h1>TestOfTextFormatting<a href="../classes/TestOfTextFormatting.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfTextFormatting.html" class="more">« More »</a>
+</div>
+<div id="TestOfThrowingErrorsFromMocks" class="element ajax clickable class">
+<h1>TestOfThrowingErrorsFromMocks<a href="../classes/TestOfThrowingErrorsFromMocks.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfThrowingErrorsFromMocks.html" class="more">« More »</a>
+</div>
+<div id="TestOfThrowingExceptionsFromMocks" class="element ajax clickable class">
+<h1>TestOfThrowingExceptionsFromMocks<a href="../classes/TestOfThrowingExceptionsFromMocks.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfThrowingExceptionsFromMocks.html" class="more">« More »</a>
+</div>
+<div id="TestOfThrowingExceptionsInTearDown" class="element ajax clickable class">
+<h1>TestOfThrowingExceptionsInTearDown<a href="../classes/TestOfThrowingExceptionsInTearDown.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfThrowingExceptionsInTearDown.html" class="more">« More »</a>
+</div>
+<div id="TestOfUnitTester" class="element ajax clickable class">
+<h1>TestOfUnitTester<a href="../classes/TestOfUnitTester.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfUnitTester.html" class="more">« More »</a>
+</div>
+<div id="TestOfUploadWidget" class="element ajax clickable class">
+<h1>TestOfUploadWidget<a href="../classes/TestOfUploadWidget.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfUploadWidget.html" class="more">« More »</a>
+</div>
+<div id="TestOfUrl" class="element ajax clickable class">
+<h1>TestOfUrl<a href="../classes/TestOfUrl.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfUrl.html" class="more">« More »</a>
+</div>
+<div id="TestOfWidget" class="element ajax clickable class">
+<h1>TestOfWidget<a href="../classes/TestOfWidget.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfWidget.html" class="more">« More »</a>
+</div>
+<div id="TestOfWithin" class="element ajax clickable class">
+<h1>TestOfWithin<a href="../classes/TestOfWithin.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfWithin.html" class="more">« More »</a>
+</div>
+<div id="TestOfXmlResultsParsing" class="element ajax clickable class">
+<h1>TestOfXmlResultsParsing<a href="../classes/TestOfXmlResultsParsing.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfXmlResultsParsing.html" class="more">« More »</a>
+</div>
+<div id="TestOfXmlStructureParsing" class="element ajax clickable class">
+<h1>TestOfXmlStructureParsing<a href="../classes/TestOfXmlStructureParsing.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestOfXmlStructureParsing.html" class="more">« More »</a>
+</div>
+<div id="TestRunnerForLeftOverAndNotEnoughErrors" class="element ajax clickable class">
+<h1>TestRunnerForLeftOverAndNotEnoughErrors<a href="../classes/TestRunnerForLeftOverAndNotEnoughErrors.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestRunnerForLeftOverAndNotEnoughErrors.html" class="more">« More »</a>
+</div>
+<div id="TestSuite" class="element ajax clickable class">
+<h1>TestSuite<a href="../classes/TestSuite.html">¶</a>
+</h1>
+<p class="short_description">This is a composite test class for combining
+   test cases and other RunnableTest classes into
+   a group test.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestSuite.html" class="more">« More »</a>
+</div>
+<div id="TestThatShouldNotBeSkipped" class="element ajax clickable class">
+<h1>TestThatShouldNotBeSkipped<a href="../classes/TestThatShouldNotBeSkipped.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/TestThatShouldNotBeSkipped.html" class="more">« More »</a>
+</div>
+<div id="TextExpectation" class="element ajax clickable class">
+<h1>TextExpectation<a href="../classes/TextExpectation.html">¶</a>
+</h1>
+<p class="short_description">Test for a text substring.</p>
+<div class="details collapse"></div>
+<a href="../classes/TextExpectation.html" class="more">« More »</a>
+</div>
+<div id="TextReporter" class="element ajax clickable class">
+<h1>TextReporter<a href="../classes/TextReporter.html">¶</a>
+</h1>
+<p class="short_description">Sample minimal test displayer. Generates only
+   failure messages and a pass count. For command
+   line use. I've tried to make it look like JUnit,
+   but I wanted to output the errors as they arrived
+   which meant dropping the dots.</p>
+<div class="details collapse"></div>
+<a href="../classes/TextReporter.html" class="more">« More »</a>
+</div>
+<div id="UnitTestCase" class="element ajax clickable class">
+<h1>UnitTestCase<a href="../classes/UnitTestCase.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/UnitTestCase.html" class="more">« More »</a>
+</div>
+<div id="UnitTests" class="element ajax clickable class">
+<h1>UnitTests<a href="../classes/UnitTests.html">¶</a>
+</h1>
+<p class="short_description">This is a composite test class for combining
+   test cases and other RunnableTest classes into
+   a group test.</p>
+<div class="details collapse"></div>
+<a href="../classes/UnitTests.html" class="more">« More »</a>
+</div>
+<div id="WithinMarginExpectation" class="element ajax clickable class">
+<h1>WithinMarginExpectation<a href="../classes/WithinMarginExpectation.html">¶</a>
+</h1>
+<p class="short_description">Test for being within a range.</p>
+<div class="details collapse"></div>
+<a href="../classes/WithinMarginExpectation.html" class="more">« More »</a>
+</div>
+<div id="XmlReporter" class="element ajax clickable class">
+<h1>XmlReporter<a href="../classes/XmlReporter.html">¶</a>
+</h1>
+<p class="short_description">Creates the XML needed for remote communication
+   by SimpleTest.</p>
+<div class="details collapse"></div>
+<a href="../classes/XmlReporter.html" class="more">« More »</a>
+</div>
+<div id="test1" class="element ajax clickable class">
+<h1>test1<a href="../classes/test1.html">¶</a>
+</h1>
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details collapse"></div>
+<a href="../classes/test1.html" class="more">« More »</a>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.1.0
+</a> and<br>
+            generated on 2013-12-03T13:05:53+01:00.<br></footer></div>
+</div>
+</body>
+</html>

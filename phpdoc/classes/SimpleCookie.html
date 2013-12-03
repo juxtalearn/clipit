@@ -1,0 +1,444 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>API Documentation » \SimpleCookie</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">API Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/clipit.html"><i class="icon-th"></i> clipit</a></li>
+<li><a href="../namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Elgg.html"><i class="icon-folder-open"></i> Elgg</a></li>
+<li><a href="../packages/Elgg.Core.html"><i class="icon-folder-open"></i> Elgg.Core</a></li>
+<li><a href="../packages/Elgg.Core.Plugin.html"><i class="icon-folder-open"></i> Elgg.Core.Plugin</a></li>
+<li><a href="../packages/ElggAPIAdmin.html"><i class="icon-folder-open"></i> ElggAPIAdmin</a></li>
+<li><a href="../packages/ElggDiagnostics.html"><i class="icon-folder-open"></i> ElggDiagnostics</a></li>
+<li><a href="../packages/ElggEmbed.html"><i class="icon-folder-open"></i> ElggEmbed</a></li>
+<li><a href="../packages/ElggFile.html"><i class="icon-folder-open"></i> ElggFile</a></li>
+<li><a href="../packages/ElggGarbageCollector.html"><i class="icon-folder-open"></i> ElggGarbageCollector</a></li>
+<li><a href="../packages/ElggGroups.html"><i class="icon-folder-open"></i> ElggGroups</a></li>
+<li><a href="../packages/ElggLogBrowser.html"><i class="icon-folder-open"></i> ElggLogBrowser</a></li>
+<li><a href="../packages/ElggLogRotate.html"><i class="icon-folder-open"></i> ElggLogRotate</a></li>
+<li><a href="../packages/ElggMessages.html"><i class="icon-folder-open"></i> ElggMessages</a></li>
+<li><a href="../packages/ElggNotifications.html"><i class="icon-folder-open"></i> ElggNotifications</a></li>
+<li><a href="../packages/ElggProfile.html"><i class="icon-folder-open"></i> ElggProfile</a></li>
+<li><a href="../packages/ElggTinyMCE.html"><i class="icon-folder-open"></i> ElggTinyMCE</a></li>
+<li><a href="../packages/ElgghtmLawed.html"><i class="icon-folder-open"></i> ElgghtmLawed</a></li>
+<li><a href="../packages/Embed%20Video%20Library.html"><i class="icon-folder-open"></i> Embed Video Library</a></li>
+<li><a href="../packages/PlaceLocalInclude.html"><i class="icon-folder-open"></i> PlaceLocalInclude</a></li>
+<li><a href="../packages/SimpleTest.html"><i class="icon-folder-open"></i> SimpleTest</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+     @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20MockObjects%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   MockObjects
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20MockObjects.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage MockObjects</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+     @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@abstract.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @abstract</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20WebTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage WebTester</a></li>
+<li><a href="../packages/%5Bname%5D.html"><i class="icon-folder-open"></i> [name]</a></li>
+<li><a href="../packages/clipit.html"><i class="icon-folder-open"></i> clipit</a></li>
+<li><a href="../packages/event_calendar.html"><i class="icon-folder-open"></i> event_calendar</a></li>
+<li><a href="../packages/pebs.html"><i class="icon-folder-open"></i> pebs</a></li>
+<li><a href="../packages/profile_manager.html"><i class="icon-folder-open"></i> profile_manager</a></li>
+<li><a href="../packages/veeplay.html"><i class="icon-folder-open"></i> veeplay</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">4473</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">250</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method_SimpleCookie" title="SimpleCookie() :: Constructor. Sets the stored values."><span class="description">Constructor. Sets the stored values.</span><pre>SimpleCookie()</pre></a></li>
+<li class="method public "><a href="#method__fixPath" title="_fixPath() :: Adds a trailing and leading slash to the path
+   if missing."><span class="description">Adds a trailing and leading slash to the path
+   if missing.</span><pre>_fixPath()</pre></a></li>
+<li class="method public "><a href="#method__truncateHost" title="_truncateHost() :: Extracts just the domain part that determines a
+   cookie's host validity."><span class="description">Extracts just the domain part that determines a
+   cookie's host validity.</span><pre>_truncateHost()</pre></a></li>
+<li class="method public "><a href="#method_agePrematurely" title="agePrematurely() :: Ages the cookie by the specified number of
+   seconds."><span class="description">Ages the cookie by the specified number of
+   seconds.</span><pre>agePrematurely()</pre></a></li>
+<li class="method public "><a href="#method_getExpiry" title="getExpiry() :: Accessor for expiry."><span class="description">Accessor for expiry.</span><pre>getExpiry()</pre></a></li>
+<li class="method public "><a href="#method_getHost" title="getHost() :: Accessor for the truncated host to which this
+   cookie applies."><span class="description">Accessor for the truncated host to which this
+   cookie applies.</span><pre>getHost()</pre></a></li>
+<li class="method public "><a href="#method_getName" title="getName() :: Accessor for name."><span class="description">Accessor for name.</span><pre>getName()</pre></a></li>
+<li class="method public "><a href="#method_getPath" title="getPath() :: Accessor for path."><span class="description">Accessor for path.</span><pre>getPath()</pre></a></li>
+<li class="method public "><a href="#method_getValue" title="getValue() :: Accessor for value. A deleted cookie will
+   have an empty string for this."><span class="description">Accessor for value. A deleted cookie will
+   have an empty string for this.</span><pre>getValue()</pre></a></li>
+<li class="method public "><a href="#method_isExpired" title="isExpired() :: Test to see if cookie is expired against
+   the cookie format time or timestamp."><span class="description">Test to see if cookie is expired against
+   the cookie format time or timestamp.</span><pre>isExpired()</pre></a></li>
+<li class="method public "><a href="#method_isSecure" title="isSecure() :: Accessor for the secure flag."><span class="description">Accessor for the secure flag.</span><pre>isSecure()</pre></a></li>
+<li class="method public "><a href="#method_isValidHost" title="isValidHost() :: Test for a cookie being valid for a host name."><span class="description">Test for a cookie being valid for a host name.</span><pre>isValidHost()</pre></a></li>
+<li class="method public "><a href="#method_isValidPath" title="isValidPath() :: Tests a path to see if the cookie applies
+   there. The test path must be longer or
+   equal to the cookie path."><span class="description">Tests a path to see if the cookie applies
+   there. The test path must be longer or
+   equal to the cookie path.</span><pre>isValidPath()</pre></a></li>
+<li class="method public "><a href="#method_setHost" title="setHost() :: Sets the host. The cookie rules determine
+   that the first two parts are taken for
+   certain TLDs and three for others. If the
+   new host does not match these rules then the
+   call will fail."><span class="description">Sets the host. The cookie rules determine
+   that the first two parts are taken for
+   certain TLDs and three for others. If the
+   new host does not match these rules then the
+   call will fail.</span><pre>setHost()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul>
+<li class="property public "><a href="#property__expiry" title="$_expiry() :: "><span class="description"></span><pre>$_expiry</pre></a></li>
+<li class="property public "><a href="#property__host" title="$_host() :: "><span class="description"></span><pre>$_host</pre></a></li>
+<li class="property public "><a href="#property__is_secure" title="$_is_secure() :: "><span class="description"></span><pre>$_is_secure</pre></a></li>
+<li class="property public "><a href="#property__name" title="$_name() :: "><span class="description"></span><pre>$_name</pre></a></li>
+<li class="property public "><a href="#property__path" title="$_path() :: "><span class="description"></span><pre>$_path</pre></a></li>
+<li class="property public "><a href="#property__value" title="$_value() :: "><span class="description"></span><pre>$_value</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\SimpleCookie"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/SimpleCookie.html">SimpleCookie</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">Cookie data holder. Cookie rules are full of pretty
+   arbitary stuff. I have used.</p>
+<div class="details">
+<div class="long_description">..
+   http://wp.netscape.com/newsref/std/cookie_spec.html
+   http://www.cookiecentral.com/faq/</div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20WebTester.html">SimpleTest
+   @subpackage WebTester</a></td>
+</tr></table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method_SimpleCookie"></a><div class="element clickable method public method_SimpleCookie" data-toggle="collapse" data-target=".method_SimpleCookie .collapse">
+<h2>Constructor. Sets the stored values.</h2>
+<pre>SimpleCookie($name, string $value, $path, $expiry, $is_secure) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $name            Cookie key.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$name</h4></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>string</code><p>Value of cookie.
+   @param string $path            Cookie path if not host wide.
+   @param string $expiry          Expiry date as string.
+   @param boolean $is_secure      Currently ignored.</p>
+</div>
+<div class="subelement argument"><h4>$path</h4></div>
+<div class="subelement argument"><h4>$expiry</h4></div>
+<div class="subelement argument"><h4>$is_secure</h4></div>
+</div></div>
+</div>
+<a id="method__fixPath"></a><div class="element clickable method public method__fixPath" data-toggle="collapse" data-target=".method__fixPath .collapse">
+<h2>Adds a trailing and leading slash to the path
+   if missing.</h2>
+<pre>_fixPath($path) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $path            Path to fix.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>private</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$path</h4></div>
+</div></div>
+</div>
+<a id="method__truncateHost"></a><div class="element clickable method public method__truncateHost" data-toggle="collapse" data-target=".method__truncateHost .collapse">
+<h2>Extracts just the domain part that determines a
+   cookie's host validity.</h2>
+<pre>_truncateHost($host) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $host    Host name to truncate.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$host</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Domain or false on a bad host.
+   @access private</div>
+</div></div>
+</div>
+<a id="method_agePrematurely"></a><div class="element clickable method public method_agePrematurely" data-toggle="collapse" data-target=".method_agePrematurely .collapse">
+<h2>Ages the cookie by the specified number of
+   seconds.</h2>
+<pre>agePrematurely($interval) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param integer $interval   In seconds.</div>
+<table class="table table-bordered"><tr>
+<th>public</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$interval</h4></div>
+</div></div>
+</div>
+<a id="method_getExpiry"></a><div class="element clickable method public method_getExpiry" data-toggle="collapse" data-target=".method_getExpiry .collapse">
+<h2>Accessor for expiry.</h2>
+<pre>getExpiry() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return string       Expiry string.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getHost"></a><div class="element clickable method public method_getHost" data-toggle="collapse" data-target=".method_getHost .collapse">
+<h2>Accessor for the truncated host to which this
+   cookie applies.</h2>
+<pre>getHost() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return string       Truncated hostname.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getName"></a><div class="element clickable method public method_getName" data-toggle="collapse" data-target=".method_getName .collapse">
+<h2>Accessor for name.</h2>
+<pre>getName() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return string       Cookie key.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getPath"></a><div class="element clickable method public method_getPath" data-toggle="collapse" data-target=".method_getPath .collapse">
+<h2>Accessor for path.</h2>
+<pre>getPath() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return string       Valid cookie path.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getValue"></a><div class="element clickable method public method_getValue" data-toggle="collapse" data-target=".method_getValue .collapse">
+<h2>Accessor for value. A deleted cookie will
+   have an empty string for this.</h2>
+<pre>getValue() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return string       Cookie value.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_isExpired"></a><div class="element clickable method public method_isExpired" data-toggle="collapse" data-target=".method_isExpired .collapse">
+<h2>Test to see if cookie is expired against
+   the cookie format time or timestamp.</h2>
+<pre>isExpired(\integer/string $now) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">Will give true for a session cookie.</div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$now</h4>
+<code><a href="integer/string.html">\integer/string</a></code><p>Time to test against. Result
+                               will be false if this time
+                               is later than the cookie expiry.
+                               Can be either a timestamp integer
+                               or a cookie format date.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_isSecure"></a><div class="element clickable method public method_isSecure" data-toggle="collapse" data-target=".method_isSecure .collapse">
+<h2>Accessor for the secure flag.</h2>
+<pre>isSecure() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return boolean       True if cookie needs SSL.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_isValidHost"></a><div class="element clickable method public method_isValidHost" data-toggle="collapse" data-target=".method_isValidHost .collapse">
+<h2>Test for a cookie being valid for a host name.</h2>
+<pre>isValidHost($host) : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $host    Host to test against.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$host</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>True if the cookie would be valid
+                          here.</div>
+</div></div>
+</div>
+<a id="method_isValidPath"></a><div class="element clickable method public method_isValidPath" data-toggle="collapse" data-target=".method_isValidPath .collapse">
+<h2>Tests a path to see if the cookie applies
+   there. The test path must be longer or
+   equal to the cookie path.</h2>
+<pre>isValidPath($path) : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $path       Path to test against.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$path</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>True if cookie valid here.
+   @access public</div>
+</div></div>
+</div>
+<a id="method_setHost"></a><div class="element clickable method public method_setHost" data-toggle="collapse" data-target=".method_setHost .collapse">
+<h2>Sets the host. The cookie rules determine
+   that the first two parts are taken for
+   certain TLDs and three for others. If the
+   new host does not match these rules then the
+   call will fail.</h2>
+<pre>setHost($host) : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $host       New hostname.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$host</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>True if hostname is valid.
+   @access public</div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property__expiry"> </a><div class="element clickable property public property__expiry" data-toggle="collapse" data-target=".property__expiry .collapse">
+<h2>$_expiry</h2>
+<pre>$_expiry </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__host"> </a><div class="element clickable property public property__host" data-toggle="collapse" data-target=".property__host .collapse">
+<h2>$_host</h2>
+<pre>$_host </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__is_secure"> </a><div class="element clickable property public property__is_secure" data-toggle="collapse" data-target=".property__is_secure .collapse">
+<h2>$_is_secure</h2>
+<pre>$_is_secure </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__name"> </a><div class="element clickable property public property__name" data-toggle="collapse" data-target=".property__name .collapse">
+<h2>$_name</h2>
+<pre>$_name </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__path"> </a><div class="element clickable property public property__path" data-toggle="collapse" data-target=".property__path .collapse">
+<h2>$_path</h2>
+<pre>$_path </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__value"> </a><div class="element clickable property public property__value" data-toggle="collapse" data-target=".property__value .collapse">
+<h2>$_value</h2>
+<pre>$_value </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.1.0
+</a> and<br>
+            generated on 2013-12-03T13:06:28+01:00.<br></footer></div>
+</div>
+</body>
+</html>

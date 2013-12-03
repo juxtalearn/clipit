@@ -1,0 +1,554 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>API Documentation » \ElggPriorityList</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">API Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/clipit.html"><i class="icon-th"></i> clipit</a></li>
+<li><a href="../namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Elgg.html"><i class="icon-folder-open"></i> Elgg</a></li>
+<li><a href="../packages/Elgg.Core.html"><i class="icon-folder-open"></i> Elgg.Core</a></li>
+<li><a href="../packages/Elgg.Core.Plugin.html"><i class="icon-folder-open"></i> Elgg.Core.Plugin</a></li>
+<li><a href="../packages/ElggAPIAdmin.html"><i class="icon-folder-open"></i> ElggAPIAdmin</a></li>
+<li><a href="../packages/ElggDiagnostics.html"><i class="icon-folder-open"></i> ElggDiagnostics</a></li>
+<li><a href="../packages/ElggEmbed.html"><i class="icon-folder-open"></i> ElggEmbed</a></li>
+<li><a href="../packages/ElggFile.html"><i class="icon-folder-open"></i> ElggFile</a></li>
+<li><a href="../packages/ElggGarbageCollector.html"><i class="icon-folder-open"></i> ElggGarbageCollector</a></li>
+<li><a href="../packages/ElggGroups.html"><i class="icon-folder-open"></i> ElggGroups</a></li>
+<li><a href="../packages/ElggLogBrowser.html"><i class="icon-folder-open"></i> ElggLogBrowser</a></li>
+<li><a href="../packages/ElggLogRotate.html"><i class="icon-folder-open"></i> ElggLogRotate</a></li>
+<li><a href="../packages/ElggMessages.html"><i class="icon-folder-open"></i> ElggMessages</a></li>
+<li><a href="../packages/ElggNotifications.html"><i class="icon-folder-open"></i> ElggNotifications</a></li>
+<li><a href="../packages/ElggProfile.html"><i class="icon-folder-open"></i> ElggProfile</a></li>
+<li><a href="../packages/ElggTinyMCE.html"><i class="icon-folder-open"></i> ElggTinyMCE</a></li>
+<li><a href="../packages/ElgghtmLawed.html"><i class="icon-folder-open"></i> ElgghtmLawed</a></li>
+<li><a href="../packages/Embed%20Video%20Library.html"><i class="icon-folder-open"></i> Embed Video Library</a></li>
+<li><a href="../packages/PlaceLocalInclude.html"><i class="icon-folder-open"></i> PlaceLocalInclude</a></li>
+<li><a href="../packages/SimpleTest.html"><i class="icon-folder-open"></i> SimpleTest</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+     @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20MockObjects%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   MockObjects
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20MockObjects.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage MockObjects</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+     @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@abstract.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @abstract</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20WebTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage WebTester</a></li>
+<li><a href="../packages/%5Bname%5D.html"><i class="icon-folder-open"></i> [name]</a></li>
+<li><a href="../packages/clipit.html"><i class="icon-folder-open"></i> clipit</a></li>
+<li><a href="../packages/event_calendar.html"><i class="icon-folder-open"></i> event_calendar</a></li>
+<li><a href="../packages/pebs.html"><i class="icon-folder-open"></i> pebs</a></li>
+<li><a href="../packages/profile_manager.html"><i class="icon-folder-open"></i> profile_manager</a></li>
+<li><a href="../packages/veeplay.html"><i class="icon-folder-open"></i> veeplay</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">4473</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">250</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___construct" title="__construct() :: Create a new priority list."><span class="description">Create a new priority list.</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#method_add" title="add() :: Adds an element to the list."><span class="description">Adds an element to the list.</span><pre>add()</pre></a></li>
+<li class="method public "><a href="#method_contains" title="contains() :: Returns if the list contains $element."><span class="description">Returns if the list contains $element.</span><pre>contains()</pre></a></li>
+<li class="method public "><a href="#method_count" title="count() :: Countable interface"><span class="description">Countable interface</span><pre>count()</pre></a></li>
+<li class="method public "><a href="#method_current" title="current() :: PHP Iterator Interface"><span class="description">PHP Iterator Interface</span><pre>current()</pre></a></li>
+<li class="method public "><a href="#method_getElement" title="getElement() :: Returns the element at $priority."><span class="description">Returns the element at $priority.</span><pre>getElement()</pre></a></li>
+<li class="method public "><a href="#method_getElements" title="getElements() :: Returns the elements"><span class="description">Returns the elements</span><pre>getElements()</pre></a></li>
+<li class="method public "><a href="#method_getNextPriority" title="getNextPriority() :: Returns the next priority available."><span class="description">Returns the next priority available.</span><pre>getNextPriority()</pre></a></li>
+<li class="method public "><a href="#method_getPriority" title="getPriority() :: Returns the priority of an element if it exists in the list."><span class="description">Returns the priority of an element if it exists in the list.</span><pre>getPriority()</pre></a></li>
+<li class="method public "><a href="#method_key" title="key() :: PHP Iterator Interface"><span class="description">PHP Iterator Interface</span><pre>key()</pre></a></li>
+<li class="method public "><a href="#method_move" title="move() :: Move an existing element to a new priority."><span class="description">Move an existing element to a new priority.</span><pre>move()</pre></a></li>
+<li class="method public "><a href="#method_next" title="next() :: PHP Iterator Interface"><span class="description">PHP Iterator Interface</span><pre>next()</pre></a></li>
+<li class="method public "><a href="#method_remove" title="remove() :: Removes an element from the list."><span class="description">Removes an element from the list.</span><pre>remove()</pre></a></li>
+<li class="method public "><a href="#method_rewind" title="rewind() :: PHP Iterator Interface"><span class="description">PHP Iterator Interface</span><pre>rewind()</pre></a></li>
+<li class="method public "><a href="#method_sort" title="sort() :: Sort the elements optionally by a callback function."><span class="description">Sort the elements optionally by a callback function.</span><pre>sort()</pre></a></li>
+<li class="method public "><a href="#method_valid" title="valid() :: PHP Iterator Interface"><span class="description">PHP Iterator Interface</span><pre>valid()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul><li class="method private "><a href="#method_sortIfUnsorted" title="sortIfUnsorted() :: Sort the elements if they haven't been sorted yet."><span class="description">Sort the elements if they haven't been sorted yet.</span><pre>sortIfUnsorted()</pre></a></li></ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul></ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul><li class="property private "><a href="#property_elements" title="$elements() :: The list of elements"><span class="description"></span><pre>$elements</pre></a></li></ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\ElggPriorityList"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/ElggPriorityList.html">ElggPriorityList</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">Iterate over elements in a specific priority.</p>
+<div class="details">
+<div class="long_description">$pl = new ElggPriorityList();
+$pl->add('Element 0');
+$pl->add('Element 10', 10);
+$pl->add('Element -10', -10);
+
+foreach ($pl as $priority => $element) {
+var_dump("$priority => $element");
+}
+
+Yields:
+-10 => Element -10
+0 => Element 0
+10 => Element 10
+
+Collisions on priority are handled by inserting the element at or as close to the
+requested priority as possible:
+
+$pl = new ElggPriorityList();
+$pl->add('Element 5', 5);
+$pl->add('Colliding element 5', 5);
+$pl->add('Another colliding element 5', 5);
+
+foreach ($pl as $priority => $element) {
+var_dump("$priority => $element");
+}
+
+Yields:
+5 => 'Element 5',
+6 => 'Colliding element 5',
+7 => 'Another colliding element 5'
+
+You can do priority lookups by element:
+
+$pl = new ElggPriorityList();
+$pl->add('Element 0');
+$pl->add('Element -5', -5);
+$pl->add('Element 10', 10);
+$pl->add('Element -10', -10);
+
+$priority = $pl->getPriority('Element -5');
+
+Or element lookups by priority.
+$element = $pl->getElement(-5);
+
+To remove elements, pass the element.
+$pl->remove('Element -10');
+
+To check if an element exists:
+$pl->contains('Element -5');
+
+To move an element:
+$pl->move('Element -5', -3);
+
+ElggPriorityList only tracks priority. No checking is done in ElggPriorityList for duplicates or
+updating. If you need to track this use objects and an external map:
+
+function elgg_register_something($id, $display_name, $location, $priority = 500) {
+// $id => $element.
+static $map = array();
+static $list;
+
+if (!$list) {
+	$list = new ElggPriorityList();
+}
+
+// update if already registered.
+if (isset($map[$id])) {
+	$element = $map[$id];
+	// move it first because we have to pass the original element.
+	if (!$list->move($element, $priority)) {
+		return false;
+	}
+	$element->display_name = $display_name;
+	$element->location = $location;
+} else {
+	$element = new stdClass();
+	$element->display_name = $display_name;
+	$element->location = $location;
+	if (!$list->add($element, $priority)) {
+		return false;
+	}
+	$map[$id] = $element;
+}
+
+return true;
+}</div>
+<table class="table table-bordered">
+<tr>
+<th>package</th>
+<td><a href="../packages/Elgg.Core.Helpers.html">Elgg.Core</a></td>
+</tr>
+<tr>
+<th>subpackage</th>
+<td>Helpers</td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>Create a new priority list.</h2>
+<pre>__construct(array $elements) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$elements</h4>
+<code>array</code><p>An optional array of priorities => element</p>
+</div>
+</div></div>
+</div>
+<a id="method_add"></a><div class="element clickable method public method_add" data-toggle="collapse" data-target=".method_add .collapse">
+<h2>Adds an element to the list.</h2>
+<pre>add(mixed $element, mixed $priority, bool $exact) : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>warning</th>
+<td>This returns the priority at which the element was added, which can be 0. Use
+         !== false to check for success.</td>
+</tr>
+<tr>
+<th>todo</th>
+<td>remove $exact or implement it. Note we use variable name strict below.</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$element</h4>
+<code>mixed</code><p>The element to add to the list.</p></div>
+<div class="subelement argument">
+<h4>$priority</h4>
+<code>mixed</code><p>Priority to add the element. In priority collisions, the original element
+                       maintains its priority and the new element is to the next available
+                       slot, taking into consideration all previously registered elements.
+                       Negative elements are accepted.</p></div>
+<div class="subelement argument">
+<h4>$exact</h4>
+<code>bool</code><p>unused</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>int</code>The priority of the added element.</div>
+</div></div>
+</div>
+<a id="method_contains"></a><div class="element clickable method public method_contains" data-toggle="collapse" data-target=".method_contains .collapse">
+<h2>Returns if the list contains $element.</h2>
+<pre>contains(mixed $element, bool $strict) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$element</h4>
+<code>mixed</code><p>The element to check.</p></div>
+<div class="subelement argument">
+<h4>$strict</h4>
+<code>bool</code><p>Use strict checking?</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_count"></a><div class="element clickable method public method_count" data-toggle="collapse" data-target=".method_count .collapse">
+<h2>Countable interface</h2>
+<pre>count() : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="%5CCountable::count()"></a></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>int</code></div>
+</div></div>
+</div>
+<a id="method_current"></a><div class="element clickable method public method_current" data-toggle="collapse" data-target=".method_current .collapse">
+<h2>PHP Iterator Interface</h2>
+<pre>current() : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="%5CIterator::current()"></a></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
+<a id="method_getElement"></a><div class="element clickable method public method_getElement" data-toggle="collapse" data-target=".method_getElement .collapse">
+<h2>Returns the element at $priority.</h2>
+<pre>getElement(int $priority) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$priority</h4>
+<code>int</code><p>The priority</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code>The element or false on fail.</div>
+</div></div>
+</div>
+<a id="method_getElements"></a><div class="element clickable method public method_getElements" data-toggle="collapse" data-target=".method_getElements .collapse">
+<h2>Returns the elements</h2>
+<pre>getElements() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_getNextPriority"></a><div class="element clickable method public method_getNextPriority" data-toggle="collapse" data-target=".method_getNextPriority .collapse">
+<h2>Returns the next priority available.</h2>
+<pre>getNextPriority(int $near) : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$near</h4>
+<code>int</code><p>Make the priority as close to $near as possible.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>int</code></div>
+</div></div>
+</div>
+<a id="method_getPriority"></a><div class="element clickable method public method_getPriority" data-toggle="collapse" data-target=".method_getPriority .collapse">
+<h2>Returns the priority of an element if it exists in the list.</h2>
+<pre>getPriority(mixed $element, bool $strict) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>warning</th>
+<td>This can return 0 if the element's priority is 0.</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$element</h4>
+<code>mixed</code><p>The element to check for.</p></div>
+<div class="subelement argument">
+<h4>$strict</h4>
+<code>bool</code><p>Use strict checking?</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code>False if the element doesn't exists, the priority if it does.</div>
+</div></div>
+</div>
+<a id="method_key"></a><div class="element clickable method public method_key" data-toggle="collapse" data-target=".method_key .collapse">
+<h2>PHP Iterator Interface</h2>
+<pre>key() : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="%5CIterator::key()"></a></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>int</code></div>
+</div></div>
+</div>
+<a id="method_move"></a><div class="element clickable method public method_move" data-toggle="collapse" data-target=".method_move .collapse">
+<h2>Move an existing element to a new priority.</h2>
+<pre>move(mixed $element, int $new_priority, bool $strict) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$element</h4>
+<code>mixed</code><p>The element to move</p></div>
+<div class="subelement argument">
+<h4>$new_priority</h4>
+<code>int</code><p>The new priority for the element</p></div>
+<div class="subelement argument">
+<h4>$strict</h4>
+<code>bool</code><p>Whether to check the type of the element match</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_next"></a><div class="element clickable method public method_next" data-toggle="collapse" data-target=".method_next .collapse">
+<h2>PHP Iterator Interface</h2>
+<pre>next() : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="%5CIterator::next()"></a></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
+<a id="method_remove"></a><div class="element clickable method public method_remove" data-toggle="collapse" data-target=".method_remove .collapse">
+<h2>Removes an element from the list.</h2>
+<pre>remove(mixed $element, bool $strict) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>warning</th>
+<td>The element must have the same attributes / values. If using $strict, it must have
+         the same types. array(10) will fail in strict against array('10') (str vs int).</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$element</h4>
+<code>mixed</code><p>The element to remove from the list</p></div>
+<div class="subelement argument">
+<h4>$strict</h4>
+<code>bool</code><p>Whether to check the type of the element match</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_rewind"></a><div class="element clickable method public method_rewind" data-toggle="collapse" data-target=".method_rewind .collapse">
+<h2>PHP Iterator Interface</h2>
+<pre>rewind() : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="%5CIterator::rewind()"></a></td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_sort"></a><div class="element clickable method public method_sort" data-toggle="collapse" data-target=".method_sort .collapse">
+<h2>Sort the elements optionally by a callback function.</h2>
+<pre>sort(callback $callback) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">If no user function is provided the elements are sorted by priority registered.
+
+The callback function should accept the array of elements as the first
+argument and should return a sorted array.
+
+This function can be called multiple times.</div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$callback</h4>
+<code>callback</code><p>The callback for sorting. Numeric sorting is the default.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_valid"></a><div class="element clickable method public method_valid" data-toggle="collapse" data-target=".method_valid .collapse">
+<h2>PHP Iterator Interface</h2>
+<pre>valid() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="%5CIterator::valid()"></a></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_sortIfUnsorted"></a><div class="element clickable method private method_sortIfUnsorted" data-toggle="collapse" data-target=".method_sortIfUnsorted .collapse">
+<h2>Sort the elements if they haven't been sorted yet.</h2>
+<pre>sortIfUnsorted() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_elements"> </a><div class="element clickable property private property_elements" data-toggle="collapse" data-target=".property_elements .collapse">
+<h2>The list of elements</h2>
+<pre>$elements : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.1.0
+</a> and<br>
+            generated on 2013-12-03T13:06:09+01:00.<br></footer></div>
+</div>
+</body>
+</html>

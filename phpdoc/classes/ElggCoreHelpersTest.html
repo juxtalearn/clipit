@@ -1,0 +1,360 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>API Documentation » \ElggCoreHelpersTest</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">API Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/clipit.html"><i class="icon-th"></i> clipit</a></li>
+<li><a href="../namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Elgg.html"><i class="icon-folder-open"></i> Elgg</a></li>
+<li><a href="../packages/Elgg.Core.html"><i class="icon-folder-open"></i> Elgg.Core</a></li>
+<li><a href="../packages/Elgg.Core.Plugin.html"><i class="icon-folder-open"></i> Elgg.Core.Plugin</a></li>
+<li><a href="../packages/ElggAPIAdmin.html"><i class="icon-folder-open"></i> ElggAPIAdmin</a></li>
+<li><a href="../packages/ElggDiagnostics.html"><i class="icon-folder-open"></i> ElggDiagnostics</a></li>
+<li><a href="../packages/ElggEmbed.html"><i class="icon-folder-open"></i> ElggEmbed</a></li>
+<li><a href="../packages/ElggFile.html"><i class="icon-folder-open"></i> ElggFile</a></li>
+<li><a href="../packages/ElggGarbageCollector.html"><i class="icon-folder-open"></i> ElggGarbageCollector</a></li>
+<li><a href="../packages/ElggGroups.html"><i class="icon-folder-open"></i> ElggGroups</a></li>
+<li><a href="../packages/ElggLogBrowser.html"><i class="icon-folder-open"></i> ElggLogBrowser</a></li>
+<li><a href="../packages/ElggLogRotate.html"><i class="icon-folder-open"></i> ElggLogRotate</a></li>
+<li><a href="../packages/ElggMessages.html"><i class="icon-folder-open"></i> ElggMessages</a></li>
+<li><a href="../packages/ElggNotifications.html"><i class="icon-folder-open"></i> ElggNotifications</a></li>
+<li><a href="../packages/ElggProfile.html"><i class="icon-folder-open"></i> ElggProfile</a></li>
+<li><a href="../packages/ElggTinyMCE.html"><i class="icon-folder-open"></i> ElggTinyMCE</a></li>
+<li><a href="../packages/ElgghtmLawed.html"><i class="icon-folder-open"></i> ElgghtmLawed</a></li>
+<li><a href="../packages/Embed%20Video%20Library.html"><i class="icon-folder-open"></i> Embed Video Library</a></li>
+<li><a href="../packages/PlaceLocalInclude.html"><i class="icon-folder-open"></i> PlaceLocalInclude</a></li>
+<li><a href="../packages/SimpleTest.html"><i class="icon-folder-open"></i> SimpleTest</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+     @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20MockObjects%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   MockObjects
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20MockObjects.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage MockObjects</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+     @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@abstract.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @abstract</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20WebTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage WebTester</a></li>
+<li><a href="../packages/%5Bname%5D.html"><i class="icon-folder-open"></i> [name]</a></li>
+<li><a href="../packages/clipit.html"><i class="icon-folder-open"></i> clipit</a></li>
+<li><a href="../packages/event_calendar.html"><i class="icon-folder-open"></i> event_calendar</a></li>
+<li><a href="../packages/pebs.html"><i class="icon-folder-open"></i> pebs</a></li>
+<li><a href="../packages/profile_manager.html"><i class="icon-folder-open"></i> profile_manager</a></li>
+<li><a href="../packages/veeplay.html"><i class="icon-folder-open"></i> veeplay</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">4473</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">250</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list"><li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___construct" title="__construct() :: Called before each test object."><span class="description">Called before each test object.</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#method___destruct" title="__destruct() :: Called after each test object."><span class="description">Called after each test object.</span><pre>__destruct()</pre></a></li>
+<li class="method public "><a href="#method_elgg_batch_callback_test" title="elgg_batch_callback_test() :: "><span class="description">elgg_batch_callback_test()
+        </span><pre>elgg_batch_callback_test()</pre></a></li>
+<li class="method public "><a href="#method_setUp" title="setUp() :: Called before each test method."><span class="description">Called before each test method.</span><pre>setUp()</pre></a></li>
+<li class="method public "><a href="#method_tearDown" title="tearDown() :: Called after each test method."><span class="description">Called after each test method.</span><pre>tearDown()</pre></a></li>
+<li class="method public "><a href="#method_testElggBatchIncOffset" title="testElggBatchIncOffset() :: "><span class="description">testElggBatchIncOffset()
+        </span><pre>testElggBatchIncOffset()</pre></a></li>
+<li class="method public "><a href="#method_testElggGetJS" title="testElggGetJS() :: Test elgg_get_loaded_js()"><span class="description">Test elgg_get_loaded_js()</span><pre>testElggGetJS()</pre></a></li>
+<li class="method public "><a href="#method_testElggInstanceOf" title="testElggInstanceOf() :: Test elgg_instanceof()"><span class="description">Test elgg_instanceof()</span><pre>testElggInstanceOf()</pre></a></li>
+<li class="method public "><a href="#method_testElggLoadJS" title="testElggLoadJS() :: Test elgg_load_js()"><span class="description">Test elgg_load_js()</span><pre>testElggLoadJS()</pre></a></li>
+<li class="method public "><a href="#method_testElggNormalizeURL" title="testElggNormalizeURL() :: Test elgg_normalize_url()"><span class="description">Test elgg_normalize_url()</span><pre>testElggNormalizeURL()</pre></a></li>
+<li class="method public "><a href="#method_testElggPriorityListAdd" title="testElggPriorityListAdd() :: "><span class="description">testElggPriorityListAdd()
+        </span><pre>testElggPriorityListAdd()</pre></a></li>
+<li class="method public "><a href="#method_testElggPriorityListAddWithPriority" title="testElggPriorityListAddWithPriority() :: "><span class="description">testElggPriorityListAddWithPriority()
+        </span><pre>testElggPriorityListAddWithPriority()</pre></a></li>
+<li class="method public "><a href="#method_testElggPriorityListConstructor" title="testElggPriorityListConstructor() :: "><span class="description">testElggPriorityListConstructor()
+        </span><pre>testElggPriorityListConstructor()</pre></a></li>
+<li class="method public "><a href="#method_testElggPriorityListCountable" title="testElggPriorityListCountable() :: "><span class="description">testElggPriorityListCountable()
+        </span><pre>testElggPriorityListCountable()</pre></a></li>
+<li class="method public "><a href="#method_testElggPriorityListGetElement" title="testElggPriorityListGetElement() :: "><span class="description">testElggPriorityListGetElement()
+        </span><pre>testElggPriorityListGetElement()</pre></a></li>
+<li class="method public "><a href="#method_testElggPriorityListGetNextPriority" title="testElggPriorityListGetNextPriority() :: "><span class="description">testElggPriorityListGetNextPriority()
+        </span><pre>testElggPriorityListGetNextPriority()</pre></a></li>
+<li class="method public "><a href="#method_testElggPriorityListGetPriority" title="testElggPriorityListGetPriority() :: "><span class="description">testElggPriorityListGetPriority()
+        </span><pre>testElggPriorityListGetPriority()</pre></a></li>
+<li class="method public "><a href="#method_testElggPriorityListIterator" title="testElggPriorityListIterator() :: "><span class="description">testElggPriorityListIterator()
+        </span><pre>testElggPriorityListIterator()</pre></a></li>
+<li class="method public "><a href="#method_testElggPriorityListMove" title="testElggPriorityListMove() :: "><span class="description">testElggPriorityListMove()
+        </span><pre>testElggPriorityListMove()</pre></a></li>
+<li class="method public "><a href="#method_testElggPriorityListPriorityCollision" title="testElggPriorityListPriorityCollision() :: "><span class="description">testElggPriorityListPriorityCollision()
+        </span><pre>testElggPriorityListPriorityCollision()</pre></a></li>
+<li class="method public "><a href="#method_testElggPriorityListRemove" title="testElggPriorityListRemove() :: "><span class="description">testElggPriorityListRemove()
+        </span><pre>testElggPriorityListRemove()</pre></a></li>
+<li class="method public "><a href="#method_testElggPriorityListUserSort" title="testElggPriorityListUserSort() :: "><span class="description">testElggPriorityListUserSort()
+        </span><pre>testElggPriorityListUserSort()</pre></a></li>
+<li class="method public "><a href="#method_testElggRegisterCSS" title="testElggRegisterCSS() :: Test elgg_register_css()"><span class="description">Test elgg_register_css()</span><pre>testElggRegisterCSS()</pre></a></li>
+<li class="method public "><a href="#method_testElggRegisterJS" title="testElggRegisterJS() :: Test elgg_register_js()"><span class="description">Test elgg_register_js()</span><pre>testElggRegisterJS()</pre></a></li>
+<li class="method public "><a href="#method_testElggUnregisterJS" title="testElggUnregisterJS() :: Test elgg_unregister_js()"><span class="description">Test elgg_unregister_js()</span><pre>testElggUnregisterJS()</pre></a></li>
+</ul>
+</li></ul>
+</div>
+<div class="span8">
+<a id="\ElggCoreHelpersTest"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/ElggCoreHelpersTest.html">ElggCoreHelpersTest</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">Elgg Test helper functions</p>
+<div class="details">
+<div class="long_description">This class is to be extended by all Elgg unit tests. As such, any method here
+will be available to the tests.</div>
+<table class="table table-bordered">
+<tr>
+<th>package</th>
+<td><a href="../packages/Elgg.Test.html">Elgg</a></td>
+</tr>
+<tr>
+<th>subpackage</th>
+<td>Test</td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>Called before each test object.</h2>
+<pre>__construct() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method___destruct"></a><div class="element clickable method public method___destruct" data-toggle="collapse" data-target=".method___destruct .collapse">
+<h2>Called after each test object.</h2>
+<pre>__destruct() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_elgg_batch_callback_test"></a><div class="element clickable method public method_elgg_batch_callback_test" data-toggle="collapse" data-target=".method_elgg_batch_callback_test .collapse">
+<h2>elgg_batch_callback_test()
+        </h2>
+<pre>elgg_batch_callback_test($options, $reset) </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$options</h4></div>
+<div class="subelement argument"><h4>$reset</h4></div>
+</div></div>
+</div>
+<a id="method_setUp"></a><div class="element clickable method public method_setUp" data-toggle="collapse" data-target=".method_setUp .collapse">
+<h2>Called before each test method.</h2>
+<pre>setUp() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_tearDown"></a><div class="element clickable method public method_tearDown" data-toggle="collapse" data-target=".method_tearDown .collapse">
+<h2>Called after each test method.</h2>
+<pre>tearDown() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggBatchIncOffset"></a><div class="element clickable method public method_testElggBatchIncOffset" data-toggle="collapse" data-target=".method_testElggBatchIncOffset .collapse">
+<h2>testElggBatchIncOffset()
+        </h2>
+<pre>testElggBatchIncOffset() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggGetJS"></a><div class="element clickable method public method_testElggGetJS" data-toggle="collapse" data-target=".method_testElggGetJS .collapse">
+<h2>Test elgg_get_loaded_js()</h2>
+<pre>testElggGetJS() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggInstanceOf"></a><div class="element clickable method public method_testElggInstanceOf" data-toggle="collapse" data-target=".method_testElggInstanceOf .collapse">
+<h2>Test elgg_instanceof()</h2>
+<pre>testElggInstanceOf() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggLoadJS"></a><div class="element clickable method public method_testElggLoadJS" data-toggle="collapse" data-target=".method_testElggLoadJS .collapse">
+<h2>Test elgg_load_js()</h2>
+<pre>testElggLoadJS() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggNormalizeURL"></a><div class="element clickable method public method_testElggNormalizeURL" data-toggle="collapse" data-target=".method_testElggNormalizeURL .collapse">
+<h2>Test elgg_normalize_url()</h2>
+<pre>testElggNormalizeURL() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggPriorityListAdd"></a><div class="element clickable method public method_testElggPriorityListAdd" data-toggle="collapse" data-target=".method_testElggPriorityListAdd .collapse">
+<h2>testElggPriorityListAdd()
+        </h2>
+<pre>testElggPriorityListAdd() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggPriorityListAddWithPriority"></a><div class="element clickable method public method_testElggPriorityListAddWithPriority" data-toggle="collapse" data-target=".method_testElggPriorityListAddWithPriority .collapse">
+<h2>testElggPriorityListAddWithPriority()
+        </h2>
+<pre>testElggPriorityListAddWithPriority() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggPriorityListConstructor"></a><div class="element clickable method public method_testElggPriorityListConstructor" data-toggle="collapse" data-target=".method_testElggPriorityListConstructor .collapse">
+<h2>testElggPriorityListConstructor()
+        </h2>
+<pre>testElggPriorityListConstructor() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggPriorityListCountable"></a><div class="element clickable method public method_testElggPriorityListCountable" data-toggle="collapse" data-target=".method_testElggPriorityListCountable .collapse">
+<h2>testElggPriorityListCountable()
+        </h2>
+<pre>testElggPriorityListCountable() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggPriorityListGetElement"></a><div class="element clickable method public method_testElggPriorityListGetElement" data-toggle="collapse" data-target=".method_testElggPriorityListGetElement .collapse">
+<h2>testElggPriorityListGetElement()
+        </h2>
+<pre>testElggPriorityListGetElement() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggPriorityListGetNextPriority"></a><div class="element clickable method public method_testElggPriorityListGetNextPriority" data-toggle="collapse" data-target=".method_testElggPriorityListGetNextPriority .collapse">
+<h2>testElggPriorityListGetNextPriority()
+        </h2>
+<pre>testElggPriorityListGetNextPriority() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggPriorityListGetPriority"></a><div class="element clickable method public method_testElggPriorityListGetPriority" data-toggle="collapse" data-target=".method_testElggPriorityListGetPriority .collapse">
+<h2>testElggPriorityListGetPriority()
+        </h2>
+<pre>testElggPriorityListGetPriority() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggPriorityListIterator"></a><div class="element clickable method public method_testElggPriorityListIterator" data-toggle="collapse" data-target=".method_testElggPriorityListIterator .collapse">
+<h2>testElggPriorityListIterator()
+        </h2>
+<pre>testElggPriorityListIterator() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggPriorityListMove"></a><div class="element clickable method public method_testElggPriorityListMove" data-toggle="collapse" data-target=".method_testElggPriorityListMove .collapse">
+<h2>testElggPriorityListMove()
+        </h2>
+<pre>testElggPriorityListMove() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggPriorityListPriorityCollision"></a><div class="element clickable method public method_testElggPriorityListPriorityCollision" data-toggle="collapse" data-target=".method_testElggPriorityListPriorityCollision .collapse">
+<h2>testElggPriorityListPriorityCollision()
+        </h2>
+<pre>testElggPriorityListPriorityCollision() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggPriorityListRemove"></a><div class="element clickable method public method_testElggPriorityListRemove" data-toggle="collapse" data-target=".method_testElggPriorityListRemove .collapse">
+<h2>testElggPriorityListRemove()
+        </h2>
+<pre>testElggPriorityListRemove() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggPriorityListUserSort"></a><div class="element clickable method public method_testElggPriorityListUserSort" data-toggle="collapse" data-target=".method_testElggPriorityListUserSort .collapse">
+<h2>testElggPriorityListUserSort()
+        </h2>
+<pre>testElggPriorityListUserSort() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggRegisterCSS"></a><div class="element clickable method public method_testElggRegisterCSS" data-toggle="collapse" data-target=".method_testElggRegisterCSS .collapse">
+<h2>Test elgg_register_css()</h2>
+<pre>testElggRegisterCSS() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggRegisterJS"></a><div class="element clickable method public method_testElggRegisterJS" data-toggle="collapse" data-target=".method_testElggRegisterJS .collapse">
+<h2>Test elgg_register_js()</h2>
+<pre>testElggRegisterJS() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggUnregisterJS"></a><div class="element clickable method public method_testElggUnregisterJS" data-toggle="collapse" data-target=".method_testElggUnregisterJS .collapse">
+<h2>Test elgg_unregister_js()</h2>
+<pre>testElggUnregisterJS() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.1.0
+</a> and<br>
+            generated on 2013-12-03T13:06:15+01:00.<br></footer></div>
+</div>
+</body>
+</html>

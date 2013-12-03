@@ -1,0 +1,449 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>API Documentation » \ElggBatch</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">API Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/clipit.html"><i class="icon-th"></i> clipit</a></li>
+<li><a href="../namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Elgg.html"><i class="icon-folder-open"></i> Elgg</a></li>
+<li><a href="../packages/Elgg.Core.html"><i class="icon-folder-open"></i> Elgg.Core</a></li>
+<li><a href="../packages/Elgg.Core.Plugin.html"><i class="icon-folder-open"></i> Elgg.Core.Plugin</a></li>
+<li><a href="../packages/ElggAPIAdmin.html"><i class="icon-folder-open"></i> ElggAPIAdmin</a></li>
+<li><a href="../packages/ElggDiagnostics.html"><i class="icon-folder-open"></i> ElggDiagnostics</a></li>
+<li><a href="../packages/ElggEmbed.html"><i class="icon-folder-open"></i> ElggEmbed</a></li>
+<li><a href="../packages/ElggFile.html"><i class="icon-folder-open"></i> ElggFile</a></li>
+<li><a href="../packages/ElggGarbageCollector.html"><i class="icon-folder-open"></i> ElggGarbageCollector</a></li>
+<li><a href="../packages/ElggGroups.html"><i class="icon-folder-open"></i> ElggGroups</a></li>
+<li><a href="../packages/ElggLogBrowser.html"><i class="icon-folder-open"></i> ElggLogBrowser</a></li>
+<li><a href="../packages/ElggLogRotate.html"><i class="icon-folder-open"></i> ElggLogRotate</a></li>
+<li><a href="../packages/ElggMessages.html"><i class="icon-folder-open"></i> ElggMessages</a></li>
+<li><a href="../packages/ElggNotifications.html"><i class="icon-folder-open"></i> ElggNotifications</a></li>
+<li><a href="../packages/ElggProfile.html"><i class="icon-folder-open"></i> ElggProfile</a></li>
+<li><a href="../packages/ElggTinyMCE.html"><i class="icon-folder-open"></i> ElggTinyMCE</a></li>
+<li><a href="../packages/ElgghtmLawed.html"><i class="icon-folder-open"></i> ElgghtmLawed</a></li>
+<li><a href="../packages/Embed%20Video%20Library.html"><i class="icon-folder-open"></i> Embed Video Library</a></li>
+<li><a href="../packages/PlaceLocalInclude.html"><i class="icon-folder-open"></i> PlaceLocalInclude</a></li>
+<li><a href="../packages/SimpleTest.html"><i class="icon-folder-open"></i> SimpleTest</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+     @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20MockObjects%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   MockObjects
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20MockObjects.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage MockObjects</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+     @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@abstract.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @abstract</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20WebTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage WebTester</a></li>
+<li><a href="../packages/%5Bname%5D.html"><i class="icon-folder-open"></i> [name]</a></li>
+<li><a href="../packages/clipit.html"><i class="icon-folder-open"></i> clipit</a></li>
+<li><a href="../packages/event_calendar.html"><i class="icon-folder-open"></i> event_calendar</a></li>
+<li><a href="../packages/pebs.html"><i class="icon-folder-open"></i> pebs</a></li>
+<li><a href="../packages/profile_manager.html"><i class="icon-folder-open"></i> profile_manager</a></li>
+<li><a href="../packages/veeplay.html"><i class="icon-folder-open"></i> veeplay</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">4473</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">250</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___construct" title="__construct() :: Batches operations on any elgg_get_*() or compatible function that supports
+an options array."><span class="description">Batches operations on any elgg_get_*() or compatible function that supports
+an options array.</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#method_current" title="current() :: PHP Iterator Interface"><span class="description">PHP Iterator Interface</span><pre>current()</pre></a></li>
+<li class="method public "><a href="#method_key" title="key() :: PHP Iterator Interface"><span class="description">PHP Iterator Interface</span><pre>key()</pre></a></li>
+<li class="method public "><a href="#method_next" title="next() :: PHP Iterator Interface"><span class="description">PHP Iterator Interface</span><pre>next()</pre></a></li>
+<li class="method public "><a href="#method_rewind" title="rewind() :: PHP Iterator Interface"><span class="description">PHP Iterator Interface</span><pre>rewind()</pre></a></li>
+<li class="method public "><a href="#method_setIncrementOffset" title="setIncrementOffset() :: Increment the offset from the original options array? Setting to
+false is required for callbacks that delete rows."><span class="description">Increment the offset from the original options array? Setting to
+false is required for callbacks that delete rows.</span><pre>setIncrementOffset()</pre></a></li>
+<li class="method public "><a href="#method_valid" title="valid() :: PHP Iterator Interface"><span class="description">PHP Iterator Interface</span><pre>valid()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul><li class="method private "><a href="#method_getNextResultsChunk" title="getNextResultsChunk() :: Fetches the next chunk of results"><span class="description">Fetches the next chunk of results</span><pre>getNextResultsChunk()</pre></a></li></ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul><li class="property public "><a href="#property_callbackResult" title="$callbackResult() :: The result of running all entities through the callback function."><span class="description"></span><pre>$callbackResult</pre></a></li></ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul>
+<li class="property private "><a href="#property_callback" title="$callback() :: A callback function to pass results through."><span class="description"></span><pre>$callback</pre></a></li>
+<li class="property private "><a href="#property_chunkIndex" title="$chunkIndex() :: The index of the current chunk"><span class="description"></span><pre>$chunkIndex</pre></a></li>
+<li class="property private "><a href="#property_chunkSize" title="$chunkSize() :: The number of results to grab at a time."><span class="description"></span><pre>$chunkSize</pre></a></li>
+<li class="property private "><a href="#property_getter" title="$getter() :: The function used to get results."><span class="description"></span><pre>$getter</pre></a></li>
+<li class="property private "><a href="#property_incrementOffset" title="$incrementOffset() :: If false, offset will not be incremented. This is used for callbacks/loops that delete."><span class="description"></span><pre>$incrementOffset</pre></a></li>
+<li class="property private "><a href="#property_limit" title="$limit() :: Stop after this many results."><span class="description"></span><pre>$limit</pre></a></li>
+<li class="property private "><a href="#property_offset" title="$offset() :: Start after this many results."><span class="description"></span><pre>$offset</pre></a></li>
+<li class="property private "><a href="#property_processedResults" title="$processedResults() :: The number of results iterated through"><span class="description"></span><pre>$processedResults</pre></a></li>
+<li class="property private "><a href="#property_resultIndex" title="$resultIndex() :: The index of the current result within the current chunk"><span class="description"></span><pre>$resultIndex</pre></a></li>
+<li class="property private "><a href="#property_results" title="$results() :: The objects to interator over."><span class="description"></span><pre>$results</pre></a></li>
+<li class="property private "><a href="#property_retrievedResults" title="$retrievedResults() :: Number of processed results."><span class="description"></span><pre>$retrievedResults</pre></a></li>
+<li class="property private "><a href="#property_validGetter" title="$validGetter() :: Is the getter a valid callback"><span class="description"></span><pre>$validGetter</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\ElggBatch"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/ElggBatch.html">ElggBatch</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">Efficiently run operations on batches of results for any function
+that supports an options array.</p>
+<div class="details">
+<div class="long_description">This is usually used with elgg_get_entities() and friends,
+elgg_get_annotations(), and elgg_get_metadata().
+
+If you pass a valid PHP callback, all results will be run through that
+callback. You can still foreach() through the result set after.  Valid
+PHP callbacks can be a string, an array, or a closure.
+{@link http://php.net/manual/en/language.pseudo-types.php}
+
+The callback function must accept 3 arguments: an entity, the getter
+used, and the options used.
+
+Results from the callback are stored in callbackResult. If the callback
+returns only booleans, callbackResults will be the combined result of
+all calls. If no entities are processed, callbackResults will be null.
+
+If the callback returns anything else, callbackresult will be an indexed
+array of whatever the callback returns.  If returning error handling
+information, you should include enough information to determine which
+result you're referring to.
+
+Don't combine returning bools and returning something else.
+
+Note that returning false will not stop the foreach.</div>
+<table class="table table-bordered">
+<tr>
+<th>warning</th>
+<td>If your callback or foreach loop deletes or disable entities
+you MUST call setIncrementOffset(false) or set that when instantiating.
+This forces the offset to stay what it was in the $options array.</td>
+</tr>
+<tr>
+<th>example</th>
+<td>// using foreach
+$batch = new ElggBatch('elgg_get_entities', array());
+$batch->setIncrementOffset(false);
+foreach ($batch as $entity) {
+	$entity->disable();
+}
+// using both a callback
+$callback = function($result, $getter, $options) {
+	var_dump("Looking at annotation id: $result->id");
+ return true;
+}
+$batch = new ElggBatch('elgg_get_annotations', array('guid' => 2), $callback);
+</code></td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/Elgg.Core.DataModel.html">Elgg.Core</a></td>
+</tr>
+<tr>
+<th>subpackage</th>
+<td>DataModel</td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="http://docs.elgg.org/DataModel/ElggBatch">http://docs.elgg.org/DataModel/ElggBatch</a></td>
+</tr>
+<tr>
+<th>since</th>
+<td>1.8</td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>Batches operations on any elgg_get_*() or compatible function that supports
+an options array.</h2>
+<pre>__construct(string $getter, array $options, mixed $callback, int $chunk_size, bool $inc_offset) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">Instead of returning all objects in memory, it goes through $chunk_size
+objects, then requests more from the server.  This avoids OOM errors.</div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$getter</h4>
+<code>string</code><p>The function used to get objects.  Usually
+                          an elgg_get_*() function, but can be any valid PHP callback.</p>
+</div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>array</code><p>The options array to pass to the getter function. If limit is
+                          not set, 10 is used as the default. In most cases that is not
+                          what you want.</p></div>
+<div class="subelement argument">
+<h4>$callback</h4>
+<code>mixed</code><p>An optional callback function that all results will be passed
+                          to upon load.  The callback needs to accept $result, $getter,
+                          $options.</p>
+</div>
+<div class="subelement argument">
+<h4>$chunk_size</h4>
+<code>int</code><p>The number of entities to pull in before requesting more.
+                          You have to balance this between running out of memory in PHP
+                          and hitting the db server too often.</p></div>
+<div class="subelement argument">
+<h4>$inc_offset</h4>
+<code>bool</code><p>Increment the offset on each fetch. This must be false for
+                          callbacks that delete rows. You can set this after the
+                          object is created with {@see ElggBatch::setIncrementOffset()}.</p>
+</div>
+</div></div>
+</div>
+<a id="method_current"></a><div class="element clickable method public method_current" data-toggle="collapse" data-target=".method_current .collapse">
+<h2>PHP Iterator Interface</h2>
+<pre>current() : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="%5CIterator::current()"></a></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
+<a id="method_key"></a><div class="element clickable method public method_key" data-toggle="collapse" data-target=".method_key .collapse">
+<h2>PHP Iterator Interface</h2>
+<pre>key() : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="%5CIterator::key()"></a></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>int</code></div>
+</div></div>
+</div>
+<a id="method_next"></a><div class="element clickable method public method_next" data-toggle="collapse" data-target=".method_next .collapse">
+<h2>PHP Iterator Interface</h2>
+<pre>next() : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="%5CIterator::next()"></a></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
+<a id="method_rewind"></a><div class="element clickable method public method_rewind" data-toggle="collapse" data-target=".method_rewind .collapse">
+<h2>PHP Iterator Interface</h2>
+<pre>rewind() : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="%5CIterator::rewind()"></a></td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_setIncrementOffset"></a><div class="element clickable method public method_setIncrementOffset" data-toggle="collapse" data-target=".method_setIncrementOffset .collapse">
+<h2>Increment the offset from the original options array? Setting to
+false is required for callbacks that delete rows.</h2>
+<pre>setIncrementOffset(bool $increment) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$increment</h4>
+<code>bool</code><p>Set to false when deleting data</p></div>
+</div></div>
+</div>
+<a id="method_valid"></a><div class="element clickable method public method_valid" data-toggle="collapse" data-target=".method_valid .collapse">
+<h2>PHP Iterator Interface</h2>
+<pre>valid() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="%5CIterator::valid()"></a></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_getNextResultsChunk"></a><div class="element clickable method private method_getNextResultsChunk" data-toggle="collapse" data-target=".method_getNextResultsChunk .collapse">
+<h2>Fetches the next chunk of results</h2>
+<pre>getNextResultsChunk() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_callbackResult"> </a><div class="element clickable property public property_callbackResult" data-toggle="collapse" data-target=".property_callbackResult .collapse">
+<h2>The result of running all entities through the callback function.</h2>
+<pre>$callbackResult : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_callback"> </a><div class="element clickable property private property_callback" data-toggle="collapse" data-target=".property_callback .collapse">
+<h2>A callback function to pass results through.</h2>
+<pre>$callback : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_chunkIndex"> </a><div class="element clickable property private property_chunkIndex" data-toggle="collapse" data-target=".property_chunkIndex .collapse">
+<h2>The index of the current chunk</h2>
+<pre>$chunkIndex : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_chunkSize"> </a><div class="element clickable property private property_chunkSize" data-toggle="collapse" data-target=".property_chunkSize .collapse">
+<h2>The number of results to grab at a time.</h2>
+<pre>$chunkSize : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_getter"> </a><div class="element clickable property private property_getter" data-toggle="collapse" data-target=".property_getter .collapse">
+<h2>The function used to get results.</h2>
+<pre>$getter : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_incrementOffset"> </a><div class="element clickable property private property_incrementOffset" data-toggle="collapse" data-target=".property_incrementOffset .collapse">
+<h2>If false, offset will not be incremented. This is used for callbacks/loops that delete.</h2>
+<pre>$incrementOffset : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_limit"> </a><div class="element clickable property private property_limit" data-toggle="collapse" data-target=".property_limit .collapse">
+<h2>Stop after this many results.</h2>
+<pre>$limit : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_offset"> </a><div class="element clickable property private property_offset" data-toggle="collapse" data-target=".property_offset .collapse">
+<h2>Start after this many results.</h2>
+<pre>$offset : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_processedResults"> </a><div class="element clickable property private property_processedResults" data-toggle="collapse" data-target=".property_processedResults .collapse">
+<h2>The number of results iterated through</h2>
+<pre>$processedResults : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_resultIndex"> </a><div class="element clickable property private property_resultIndex" data-toggle="collapse" data-target=".property_resultIndex .collapse">
+<h2>The index of the current result within the current chunk</h2>
+<pre>$resultIndex : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_results"> </a><div class="element clickable property private property_results" data-toggle="collapse" data-target=".property_results .collapse">
+<h2>The objects to interator over.</h2>
+<pre>$results : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_retrievedResults"> </a><div class="element clickable property private property_retrievedResults" data-toggle="collapse" data-target=".property_retrievedResults .collapse">
+<h2>Number of processed results.</h2>
+<pre>$retrievedResults : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_validGetter"> </a><div class="element clickable property private property_validGetter" data-toggle="collapse" data-target=".property_validGetter .collapse">
+<h2>Is the getter a valid callback</h2>
+<pre>$validGetter : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.1.0
+</a> and<br>
+            generated on 2013-12-03T13:06:06+01:00.<br></footer></div>
+</div>
+</body>
+</html>

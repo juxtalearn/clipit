@@ -1,0 +1,1618 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>API Documentation</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="css/template.css" rel="stylesheet" media="all">
+<script src="js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="js/bootstrap.js" type="text/javascript"></script><script src="js/template.js" type="text/javascript"></script><script src="js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="img/favicon.ico">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="index.html">API Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="namespaces/clipit.html"><i class="icon-th"></i> clipit</a></li>
+<li><a href="namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
+<li><a href="packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="packages/Elgg.html"><i class="icon-folder-open"></i> Elgg</a></li>
+<li><a href="packages/Elgg.Core.html"><i class="icon-folder-open"></i> Elgg.Core</a></li>
+<li><a href="packages/Elgg.Core.Plugin.html"><i class="icon-folder-open"></i> Elgg.Core.Plugin</a></li>
+<li><a href="packages/ElggAPIAdmin.html"><i class="icon-folder-open"></i> ElggAPIAdmin</a></li>
+<li><a href="packages/ElggDiagnostics.html"><i class="icon-folder-open"></i> ElggDiagnostics</a></li>
+<li><a href="packages/ElggEmbed.html"><i class="icon-folder-open"></i> ElggEmbed</a></li>
+<li><a href="packages/ElggFile.html"><i class="icon-folder-open"></i> ElggFile</a></li>
+<li><a href="packages/ElggGarbageCollector.html"><i class="icon-folder-open"></i> ElggGarbageCollector</a></li>
+<li><a href="packages/ElggGroups.html"><i class="icon-folder-open"></i> ElggGroups</a></li>
+<li><a href="packages/ElggLogBrowser.html"><i class="icon-folder-open"></i> ElggLogBrowser</a></li>
+<li><a href="packages/ElggLogRotate.html"><i class="icon-folder-open"></i> ElggLogRotate</a></li>
+<li><a href="packages/ElggMessages.html"><i class="icon-folder-open"></i> ElggMessages</a></li>
+<li><a href="packages/ElggNotifications.html"><i class="icon-folder-open"></i> ElggNotifications</a></li>
+<li><a href="packages/ElggProfile.html"><i class="icon-folder-open"></i> ElggProfile</a></li>
+<li><a href="packages/ElggTinyMCE.html"><i class="icon-folder-open"></i> ElggTinyMCE</a></li>
+<li><a href="packages/ElgghtmLawed.html"><i class="icon-folder-open"></i> ElgghtmLawed</a></li>
+<li><a href="packages/Embed%20Video%20Library.html"><i class="icon-folder-open"></i> Embed Video Library</a></li>
+<li><a href="packages/PlaceLocalInclude.html"><i class="icon-folder-open"></i> PlaceLocalInclude</a></li>
+<li><a href="packages/SimpleTest.html"><i class="icon-folder-open"></i> SimpleTest</a></li>
+<li><a href="packages/SimpleTest%0D%0A%20%20%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+     @subpackage UnitTester</a></li>
+<li><a href="packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20MockObjects%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   MockObjects
+   @deprecated</a></li>
+<li><a href="packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester</a></li>
+<li><a href="packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester
+   @deprecated</a></li>
+<li><a href="packages/SimpleTest%0D%0A%20%20%20@subpackage%20MockObjects.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage MockObjects</a></li>
+<li><a href="packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester</a></li>
+<li><a href="packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+     @deprecated</a></li>
+<li><a href="packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@abstract.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @abstract</a></li>
+<li><a href="packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @deprecated</a></li>
+<li><a href="packages/SimpleTest%0D%0A%20%20%20@subpackage%20WebTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage WebTester</a></li>
+<li><a href="packages/%5Bname%5D.html"><i class="icon-folder-open"></i> [name]</a></li>
+<li><a href="packages/clipit.html"><i class="icon-folder-open"></i> clipit</a></li>
+<li><a href="packages/event_calendar.html"><i class="icon-folder-open"></i> event_calendar</a></li>
+<li><a href="packages/pebs.html"><i class="icon-folder-open"></i> pebs</a></li>
+<li><a href="packages/profile_manager.html"><i class="icon-folder-open"></i> profile_manager</a></li>
+<li><a href="packages/veeplay.html"><i class="icon-folder-open"></i> veeplay</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">4473</span></a></li>
+<li><a href="markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">250</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4"><ul class="side-nav nav nav-list">
+<li class="nav-header">Navigation</li>
+<li><a href="#actions%5Cuser%5Cspotlight.php"><i class="icon-file"></i>actions\user\spotlight.php</a></li>
+<li><a href="#engine%5Cclasses%5CElggAccess.php"><i class="icon-file"></i>engine\classes\ElggAccess.php</a></li>
+<li><a href="#engine%5Cclasses%5CElggCache.php"><i class="icon-file"></i>engine\classes\ElggCache.php</a></li>
+<li><a href="#engine%5Cclasses%5CElggDiskFilestore.php"><i class="icon-file"></i>engine\classes\ElggDiskFilestore.php</a></li>
+<li><a href="#engine%5Cclasses%5CElggEntity.php"><i class="icon-file"></i>engine\classes\ElggEntity.php</a></li>
+<li><a href="#engine%5Cclasses%5CElggGroupItemVisibility.php"><i class="icon-file"></i>engine\classes\ElggGroupItemVisibility.php</a></li>
+<li><a href="#engine%5Cclasses%5CElggMemcache.php"><i class="icon-file"></i>engine\classes\ElggMemcache.php</a></li>
+<li><a href="#engine%5Cclasses%5CElggMenuBuilder.php"><i class="icon-file"></i>engine\classes\ElggMenuBuilder.php</a></li>
+<li><a href="#engine%5Cclasses%5CElggMenuItem.php"><i class="icon-file"></i>engine\classes\ElggMenuItem.php</a></li>
+<li><a href="#engine%5Cclasses%5CElggObject.php"><i class="icon-file"></i>engine\classes\ElggObject.php</a></li>
+<li><a href="#engine%5Cclasses%5CElggPlugin.php"><i class="icon-file"></i>engine\classes\ElggPlugin.php</a></li>
+<li><a href="#engine%5Cclasses%5CElggPluginPackage.php"><i class="icon-file"></i>engine\classes\ElggPluginPackage.php</a></li>
+<li><a href="#engine%5Cclasses%5CElggPriorityList.php"><i class="icon-file"></i>engine\classes\ElggPriorityList.php</a></li>
+<li><a href="#engine%5Cclasses%5CElggSite.php"><i class="icon-file"></i>engine\classes\ElggSite.php</a></li>
+<li><a href="#engine%5Cclasses%5CNotable.php"><i class="icon-file"></i>engine\classes\Notable.php</a></li>
+<li><a href="#engine%5Chandlers%5Cxml-rpc_handler.php"><i class="icon-file"></i>engine\handlers\xml-rpc_handler.php</a></li>
+<li><a href="#engine%5Clib%5Caccess.php"><i class="icon-file"></i>engine\lib\access.php</a></li>
+<li><a href="#engine%5Clib%5Cactions.php"><i class="icon-file"></i>engine\lib\actions.php</a></li>
+<li><a href="#engine%5Clib%5Ccache.php"><i class="icon-file"></i>engine\lib\cache.php</a></li>
+<li><a href="#engine%5Clib%5Ccalendar.php"><i class="icon-file"></i>engine\lib\calendar.php</a></li>
+<li><a href="#engine%5Clib%5Cdeprecated-1.7.php"><i class="icon-file"></i>engine\lib\deprecated-1.7.php</a></li>
+<li><a href="#engine%5Clib%5Celgglib.php"><i class="icon-file"></i>engine\lib\elgglib.php</a></li>
+<li><a href="#engine%5Clib%5Centities.php"><i class="icon-file"></i>engine\lib\entities.php</a></li>
+<li><a href="#engine%5Clib%5Cextender.php"><i class="icon-file"></i>engine\lib\extender.php</a></li>
+<li><a href="#engine%5Clib%5Cinput.php"><i class="icon-file"></i>engine\lib\input.php</a></li>
+<li><a href="#engine%5Clib%5Clanguages.php"><i class="icon-file"></i>engine\lib\languages.php</a></li>
+<li><a href="#engine%5Clib%5Cnotification.php"><i class="icon-file"></i>engine\lib\notification.php</a></li>
+<li><a href="#engine%5Clib%5Coutput.php"><i class="icon-file"></i>engine\lib\output.php</a></li>
+<li><a href="#engine%5Clib%5Cpagehandler.php"><i class="icon-file"></i>engine\lib\pagehandler.php</a></li>
+<li><a href="#engine%5Clib%5Cplugins.php"><i class="icon-file"></i>engine\lib\plugins.php</a></li>
+<li><a href="#engine%5Clib%5Crelationships.php"><i class="icon-file"></i>engine\lib\relationships.php</a></li>
+<li><a href="#engine%5Clib%5Csessions.php"><i class="icon-file"></i>engine\lib\sessions.php</a></li>
+<li><a href="#engine%5Clib%5Csystem_log.php"><i class="icon-file"></i>engine\lib\system_log.php</a></li>
+<li><a href="#engine%5Clib%5Cuser_settings.php"><i class="icon-file"></i>engine\lib\user_settings.php</a></li>
+<li><a href="#engine%5Clib%5Cviews.php"><i class="icon-file"></i>engine\lib\views.php</a></li>
+<li><a href="#engine%5Clib%5Cweb_services.php"><i class="icon-file"></i>engine\lib\web_services.php</a></li>
+<li><a href="#engine%5Csettings.example.php"><i class="icon-file"></i>engine\settings.example.php</a></li>
+<li><a href="#install%5CElggInstaller.php"><i class="icon-file"></i>install\ElggInstaller.php</a></li>
+<li><a href="#mod%5Cblog%5Cstart.php"><i class="icon-file"></i>mod\blog\start.php</a></li>
+<li><a href="#mod%5Cevent_calendar%5Cmodels%5Cmodel.php"><i class="icon-file"></i>mod\event_calendar\models\model.php</a></li>
+<li><a href="#mod%5Cevent_calendar%5Cstart.php"><i class="icon-file"></i>mod\event_calendar\start.php</a></li>
+<li><a href="#mod%5Cevent_calendar%5Cviews%5Cdefault%5Cevent_calendar%5Centities%5Cgallery_item.php"><i class="icon-file"></i>mod\event_calendar\views\default\event_calendar\entities\gallery_item.php</a></li>
+<li><a href="#mod%5Cevent_calendar%5Cviews%5Cdefault%5Cevent_calendar%5Cfull_calendar_view.php"><i class="icon-file"></i>mod\event_calendar\views\default\event_calendar\full_calendar_view.php</a></li>
+<li><a href="#mod%5Cevent_calendar%5Cviews%5Cdefault%5Cevent_calendar%5Cpersonal_toggle_js.php"><i class="icon-file"></i>mod\event_calendar\views\default\event_calendar\personal_toggle_js.php</a></li>
+<li><a href="#mod%5Cevent_calendar%5Cviews%5Cdefault%5Cforms%5Cevent_calendar%5Cmanage_subscribers.php"><i class="icon-file"></i>mod\event_calendar\views\default\forms\event_calendar\manage_subscribers.php</a></li>
+<li><a href="#mod%5Cevent_calendar%5Cviews%5Cdefault%5Cinput%5Cdatepicker_inline.php"><i class="icon-file"></i>mod\event_calendar\views\default\input\datepicker_inline.php</a></li>
+<li><a href="#mod%5Cevent_calendar%5Cviews%5Cdefault%5Cjs%5Cevent_calendar%5Cfullcalendar.php"><i class="icon-file"></i>mod\event_calendar\views\default\js\event_calendar\fullcalendar.php</a></li>
+<li><a href="#mod%5Cgroups%5Cstart.php"><i class="icon-file"></i>mod\groups\start.php</a></li>
+<li><a href="#mod%5Cgroups%5Cviews%5Cdefault%5Cgroups%5Cprofile%5Cactivity_module.php"><i class="icon-file"></i>mod\groups\views\default\groups\profile\activity_module.php</a></li>
+<li><a href="#mod%5Chtmlawed%5Cstart.php"><i class="icon-file"></i>mod\htmlawed\start.php</a></li>
+<li><a href="#mod%5Csearch%5Cpages%5Csearch%5Cindex.php"><i class="icon-file"></i>mod\search\pages\search\index.php</a></li>
+<li><a href="#mod%5Csearch%5Cviews%5Cdefault%5Csearch%5Cstartblurb.php"><i class="icon-file"></i>mod\search\views\default\search\startblurb.php</a></li>
+<li><a href="#vendors%5Csimpletest%5Cparser.php"><i class="icon-file"></i>vendors\simpletest\parser.php</a></li>
+<li><a href="#vendors%5Csimpletest%5Ctest%5Cerrors_test.php"><i class="icon-file"></i>vendors\simpletest\test\errors_test.php</a></li>
+<li><a href="#views%5Cdefault%5Cadmin%5Cappearance%5Cprofile_fields%5Clist.php"><i class="icon-file"></i>views\default\admin\appearance\profile_fields\list.php</a></li>
+<li><a href="#views%5Cdefault%5Cforms%5Cadmin%5Csite%5Cupdate_advanced.php"><i class="icon-file"></i>views\default\forms\admin\site\update_advanced.php</a></li>
+<li><a href="#views%5Cdefault%5Cforms%5Cadmin%5Csite%5Cupdate_basic.php"><i class="icon-file"></i>views\default\forms\admin\site\update_basic.php</a></li>
+<li><a href="#views%5Cdefault%5Cinput%5Cautocomplete.php"><i class="icon-file"></i>views\default\input\autocomplete.php</a></li>
+<li><a href="#views%5Cdefault%5Cjs%5Clightbox.php"><i class="icon-file"></i>views\default\js\lightbox.php</a></li>
+</ul></div>
+<div class="span8">
+<ul class="breadcrumb">
+<li>
+<a href=""><i class="icon-map-marker"></i></a><span class="divider">\</span>
+</li>
+<li>Markers</li>
+</ul>
+<div id="marker-accordion">
+<div class="package-contents">
+<a name="actions%5Cuser%5Cspotlight.php" id="actions\user\spotlight.php"></a><h3>
+<i class="icon-file"></i>actions\user\spotlight.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>0</td>
+<td>This is deprecated in 1.8</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Cclasses%5CElggAccess.php" id="engine\classes\ElggAccess.php"></a><h3>
+<i class="icon-file"></i>engine\classes\ElggAccess.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>12</td>
+<td>I don't remember why this was required beyond scope concerns.</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Cclasses%5CElggCache.php" id="engine\classes\ElggCache.php"></a><h3>
+<i class="icon-file"></i>engine\classes\ElggCache.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>155</td>
+<td>$offset is a horrible variable name because it creates confusion
+with the ArrayAccess methods</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Cclasses%5CElggDiskFilestore.php" id="engine\classes\ElggDiskFilestore.php"></a><h3>
+<i class="icon-file"></i>engine\classes\ElggDiskFilestore.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>52</td>
+<td>This really shouldn't try to create directories if not writing.</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Cclasses%5CElggEntity.php" id="engine\classes\ElggEntity.php"></a><h3>
+<i class="icon-file"></i>engine\classes\ElggEntity.php<small style="float: right;padding-right: 10px;">10</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>188</td>
+<td>What problems are these?</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>224</td>
+<td>What problems?</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>543</td>
+<td>This should actually return if it worked.</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1464</td>
+<td>Unimplemented</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1478</td>
+<td>Unimplemented</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1491</td>
+<td>Unimplemented</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1522</td>
+<td>Unimplemented</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1543</td>
+<td>Unimplemented</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1554</td>
+<td>Unimplemented</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1723</td>
+<td>How is this any different or more useful than get_entity($guid)
+or new ElggEntity($guid)?</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Cclasses%5CElggGroupItemVisibility.php" id="engine\classes\ElggGroupItemVisibility.php"></a><h3>
+<i class="icon-file"></i>engine\classes\ElggGroupItemVisibility.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>38</td>
+<td>Make this faster, considering it must run for every river item.</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Cclasses%5CElggMemcache.php" id="engine\classes\ElggMemcache.php"></a><h3>
+<i class="icon-file"></i>engine\classes\ElggMemcache.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>197</td>
+<td>write or remove.</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Cclasses%5CElggMenuBuilder.php" id="engine\classes\ElggMenuBuilder.php"></a><h3>
+<i class="icon-file"></i>engine\classes\ElggMenuBuilder.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>280</td>
+<td>change name to compareByPriority</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Cclasses%5CElggMenuItem.php" id="engine\classes\ElggMenuItem.php"></a><h3>
+<i class="icon-file"></i>engine\classes\ElggMenuItem.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>558</td>
+<td>View code in a model.  How do we feel about that?</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Cclasses%5CElggObject.php" id="engine\classes\ElggObject.php"></a><h3>
+<i class="icon-file"></i>engine\classes\ElggObject.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>147</td>
+<td>This should be moved to ElggEntity</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>147</td>
+<td>Unimplemented</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Cclasses%5CElggPlugin.php" id="engine\classes\ElggPlugin.php"></a><h3>
+<i class="icon-file"></i>engine\classes\ElggPlugin.php<small style="float: right;padding-right: 10px;">5</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>325</td>
+<td>This will only work once the plugin has a GUID.</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>351</td>
+<td>Should be a better way to do this without dropping to raw SQL.</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>351</td>
+<td>If we could namespace the plugin settings this would be cleaner.</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>553</td>
+<td>bad name? This could be confused with isValid() from ElggPackage.</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>605</td>
+<td>remove $site_guid param or implement it</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Cclasses%5CElggPluginPackage.php" id="engine\classes\ElggPluginPackage.php"></a><h3>
+<i class="icon-file"></i>engine\classes\ElggPluginPackage.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>19</td>
+<td>This should eventually be merged into ElggPlugin.
+Currently ElggPlugin objects are only used to get and save
+plugin settings and user settings, so not every plugin
+has an ElggPlugin object.  It's not implemented in ElggPlugin
+right now because of conflicts with at least the constructor,
+enable(), disable(), and private settings.
+Around 1.9 or so we should each plugin over to using
+ElggPlugin and merge ElggPluginPackage and ElggPlugin.</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>209</td>
+<td>Don't let them require and conflict the same thing</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>549</td>
+<td>Can this be merged with the plugin checker?</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Cclasses%5CElggPriorityList.php" id="engine\classes\ElggPriorityList.php"></a><h3>
+<i class="icon-file"></i>engine\classes\ElggPriorityList.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>133</td>
+<td>remove $exact or implement it. Note we use variable name strict below.</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Cclasses%5CElggSite.php" id="engine\classes\ElggSite.php"></a><h3>
+<i class="icon-file"></i>engine\classes\ElggSite.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>210</td>
+<td>remove $offset in 2.0</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Cclasses%5CNotable.php" id="engine\classes\Notable.php"></a><h3>
+<i class="icon-file"></i>engine\classes\Notable.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>10</td>
+<td>Implement or remove.</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Chandlers%5Cxml-rpc_handler.php" id="engine\handlers\xml-rpc_handler.php"></a><h3>
+<i class="icon-file"></i>engine\handlers\xml-rpc_handler.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>0</td>
+<td>Does this work?</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Clib%5Caccess.php" id="engine\lib\access.php"></a><h3>
+<i class="icon-file"></i>engine\lib\access.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>382</td>
+<td>This function would be much more useful if we could pass the guid of the
+entity to test access for. We need to be able to tell whether the entity exists
+and whether the user has access to the entity.</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>884</td>
+<td>I think this probably wants get_access_array() instead of get_write_access_array(),
+but those two functions return different types of arrays.</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1002</td>
+<td>Invesigate</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Clib%5Cactions.php" id="engine\lib\actions.php"></a><h3>
+<i class="icon-file"></i>engine\lib\actions.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>375</td>
+<td>Move to better file.</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>393</td>
+<td>Move to better file.</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Clib%5Ccache.php" id="engine\lib\cache.php"></a><h3>
+<i class="icon-file"></i>engine\lib\cache.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>20</td>
+<td>Can this be done in a cleaner way?</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>20</td>
+<td>Swap to memcache etc?</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Clib%5Ccalendar.php" id="engine\lib\calendar.php"></a><h3>
+<i class="icon-file"></i>engine\lib\calendar.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>0</td>
+<td>Implement or remove</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>59</td>
+<td>this function also accepts an array(type => subtypes) for 3rd arg. Should we document this?</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Clib%5Cdeprecated-1.7.php" id="engine\lib\deprecated-1.7.php"></a><h3>
+<i class="icon-file"></i>engine\lib\deprecated-1.7.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>1141</td>
+<td>- this should be removed - was deprecated in 1.5 or earlier</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1158</td>
+<td>remove</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Clib%5Celgglib.php" id="engine\lib\elgglib.php"></a><h3>
+<i class="icon-file"></i>engine\lib\elgglib.php<small style="float: right;padding-right: 10px;">6</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>0</td>
+<td>These functions can't be subpackaged because they cover a wide mix of
+purposes and subsystems.  Many of them should be moved to more relevant files.</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>98</td>
+<td>return boolean in 1.9 to indicate whether the library has been loaded</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1126</td>
+<td>This is complicated and confusing.  Using int constants for debug levels will
+make things easier.</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1344</td>
+<td>Combine / replace with current_page_url()</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1712</td>
+<td>This is used once in metadata.php.  Use a lambda function instead.</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1954</td>
+<td>why aren't these static methods on ElggBatch?</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Clib%5Centities.php" id="engine\lib\entities.php"></a><h3>
+<i class="icon-file"></i>engine\lib\entities.php<small style="float: right;padding-right: 10px;">6</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>59</td>
+<td>Use an ElggCache object</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1462</td>
+<td>document how to pass in array for $subtype</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1809</td>
+<td>investigate more.</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1809</td>
+<td>document</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1895</td>
+<td>Remove this.</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1968</td>
+<td>document</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Clib%5Cextender.php" id="engine\lib\extender.php"></a><h3>
+<i class="icon-file"></i>engine\lib\extender.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>21</td>
+<td>Make better!</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>92</td>
+<td>investigate more.</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Clib%5Cinput.php" id="engine\lib\input.php"></a><h3>
+<i class="icon-file"></i>engine\lib\input.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>27</td>
+<td>Is this ^ still true?</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>176</td>
+<td>should this filter the default value?</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>242</td>
+<td>split this into functions/objects, this is way too big
+/livesearch?q=<query>
+Other options include:
+    match_on	   string all or array(groups|users|friends)
+    match_owner int    0/1
+    limit       int    default is 10</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Clib%5Clanguages.php" id="engine\lib\languages.php"></a><h3>
+<i class="icon-file"></i>engine\lib\languages.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>239</td>
+<td>Better on demand loading based on language_paths array</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Clib%5Cnotification.php" id="engine\lib\notification.php"></a><h3>
+<i class="icon-file"></i>engine\lib\notification.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>388</td>
+<td>why can't this call action(...)?</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Clib%5Coutput.php" id="engine\lib\output.php"></a><h3>
+<i class="icon-file"></i>engine\lib\output.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>58</td>
+<td>Add deprecation warning in 1.9</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Clib%5Cpagehandler.php" id="engine\lib\pagehandler.php"></a><h3>
+<i class="icon-file"></i>engine\lib\pagehandler.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>129</td>
+<td>not sending status codes yet</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Clib%5Cplugins.php" id="engine\lib\plugins.php"></a><h3>
+<i class="icon-file"></i>engine\lib\plugins.php<small style="float: right;padding-right: 10px;">5</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>48</td>
+<td>This could be resolved by promoting ElggPlugin to a 5th type.</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>93</td>
+<td>Crappy name?</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>489</td>
+<td>Can this be done in a single sql command?</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>541</td>
+<td>get rid of this</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>949</td>
+<td>make $plugin_id required in future version</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Clib%5Crelationships.php" id="engine\lib\relationships.php"></a><h3>
+<i class="icon-file"></i>engine\lib\relationships.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>325</td>
+<td>add support for multiple relationships and guids.</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Clib%5Csessions.php" id="engine\lib\sessions.php"></a><h3>
+<i class="icon-file"></i>engine\lib\sessions.php<small style="float: right;padding-right: 10px;">4</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>88</td>
+<td>: Will always return full access if the user is an admin.</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>500</td>
+<td>Document</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>516</td>
+<td>implement</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>516</td>
+<td>document</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Clib%5Csystem_log.php" id="engine\lib\system_log.php"></a><h3>
+<i class="icon-file"></i>engine\lib\system_log.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>30</td>
+<td>too many args, and the first arg is too confusing</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Clib%5Cuser_settings.php" id="engine\lib\user_settings.php"></a><h3>
+<i class="icon-file"></i>engine\lib\user_settings.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>20</td>
+<td>this assumes settings are coming in on a GET/POST request</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Clib%5Cviews.php" id="engine\lib\views.php"></a><h3>
+<i class="icon-file"></i>engine\lib\views.php<small style="float: right;padding-right: 10px;">6</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>813</td>
+<td>The annotation hook might be better as a generic plugin hook to append content.</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1087</td>
+<td>Change the hook name.</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1362</td>
+<td>Move to the friends/collection.php page.</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1418</td>
+<td>Why isn't this used anywhere else but in elgg_view_tree()?
+Seems like a useful function for autodiscovery.</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1454</td>
+<td>This is used once in the deprecated get_activity_stream_data() function.</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1512</td>
+<td>This seems overly complicated.</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Clib%5Cweb_services.php" id="engine\lib\web_services.php"></a><h3>
+<i class="icon-file"></i>engine\lib\web_services.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>684</td>
+<td>Work out how to handle really large bits of data.</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="engine%5Csettings.example.php" id="engine\settings.example.php"></a><h3>
+<i class="icon-file"></i>engine\settings.example.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>0</td>
+<td>Turn this into something we handle more automatically.</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="install%5CElggInstaller.php" id="install\ElggInstaller.php"></a><h3>
+<i class="icon-file"></i>install\ElggInstaller.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>847</td>
+<td>Should this be a core function?</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="mod%5Cblog%5Cstart.php" id="mod\blog\start.php"></a><h3>
+<i class="icon-file"></i>mod\blog\start.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>0</td>
+<td>- Either drop support for "publish date" or duplicate more entity getter
+functions to work with a non-standard time_created.
+- Pingbacks
+- Notifications
+- River entry for posts saved as drafts and later published</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>98</td>
+<td>no archives for all blogs or friends</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="mod%5Cevent_calendar%5Cmodels%5Cmodel.php" id="mod\event_calendar\models\model.php"></a><h3>
+<i class="icon-file"></i>mod\event_calendar\models\model.php<small style="float: right;padding-right: 10px;">7</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>108</td>
+<td>is the timezone bit necessary?</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>643</td>
+<td>- replace with Elgg API if possible</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>841</td>
+<td>try to replace this with new Elgg 1.7 API</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1324</td>
+<td>make the date format configurable</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1945</td>
+<td>make this an optional feature, toggled off</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>2180</td>
+<td>find another solution for displaying repeated events</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>2253</td>
+<td>- remove log entries for past events</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="mod%5Cevent_calendar%5Cstart.php" id="mod\event_calendar\start.php"></a><h3>
+<i class="icon-file"></i>mod\event_calendar\start.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>51</td>
+<td>- are the left and right values still relevant for Elgg 1.8?</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="mod%5Cevent_calendar%5Cviews%5Cdefault%5Cevent_calendar%5Centities%5Cgallery_item.php" id="mod\event_calendar\views\default\event_calendar\entities\gallery_item.php"></a><h3>
+<i class="icon-file"></i>mod\event_calendar\views\default\event_calendar\entities\gallery_item.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>35</td>
+<td>look into a way to pass $authorised and $event_id in $vars</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="mod%5Cevent_calendar%5Cviews%5Cdefault%5Cevent_calendar%5Cfull_calendar_view.php" id="mod\event_calendar\views\default\event_calendar\full_calendar_view.php"></a><h3>
+<i class="icon-file"></i>mod\event_calendar\views\default\event_calendar\full_calendar_view.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>6</td>
+<td>is there an easy way to avoid embedding JS?</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>137</td>
+<td>finish this, need to highlight selected date if any</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="mod%5Cevent_calendar%5Cviews%5Cdefault%5Cevent_calendar%5Cpersonal_toggle_js.php" id="mod\event_calendar\views\default\event_calendar\personal_toggle_js.php"></a><h3>
+<i class="icon-file"></i>mod\event_calendar\views\default\event_calendar\personal_toggle_js.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>2</td>
+<td>put the rest into a JS function</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="mod%5Cevent_calendar%5Cviews%5Cdefault%5Cforms%5Cevent_calendar%5Cmanage_subscribers.php" id="mod\event_calendar\views\default\forms\event_calendar\manage_subscribers.php"></a><h3>
+<i class="icon-file"></i>mod\event_calendar\views\default\forms\event_calendar\manage_subscribers.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>8</td>
+<td>if the event container is a group need to restrict user picker to the members of the group?</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="mod%5Cevent_calendar%5Cviews%5Cdefault%5Cinput%5Cdatepicker_inline.php" id="mod\event_calendar\views\default\input\datepicker_inline.php"></a><h3>
+<i class="icon-file"></i>mod\event_calendar\views\default\input\datepicker_inline.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>30</td>
+<td>- figure out how to move this JavaScript</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="mod%5Cevent_calendar%5Cviews%5Cdefault%5Cjs%5Cevent_calendar%5Cfullcalendar.php" id="mod\event_calendar\views\default\js\event_calendar\fullcalendar.php"></a><h3>
+<i class="icon-file"></i>mod\event_calendar\views\default\js\event_calendar\fullcalendar.php<small style="float: right;padding-right: 10px;">26</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>165</td>
+<td>look into memory leak implications</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>316</td>
+<td>improve view switching (still weird transition in IE, and FF has whiteout problem)</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1195</td>
+<td>if there is no start date, return false to indicate an invalid event</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1206</td>
+<td>repeat code, same code for event classNames</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1387</td>
+<td>never return invalid dates (like from new Date(<string>)), return null instead</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1394</td>
+<td>for a know glitch/feature, read tests/issue_206_parseDate_dst.html</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1470</td>
+<td>use same function formatDate(date, [date2], format, [options])</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1747</td>
+<td>curCSS has been deprecated (jQuery 1.4.3 - 10/16/2010)</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1810</td>
+<td>arraySlice</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1811</td>
+<td>isFunction, grep ?</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>1895</td>
+<td>make a way that doesn't rely on order of classes</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>2062</td>
+<td>when calendar's date starts out on a weekend, shouldn't happen</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>2381</td>
+<td>maybe use .data</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>2823</td>
+<td>make it work in quirks mode (event corners, all-day height)</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>2824</td>
+<td>test liquid width, especially in IE6</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>2911</td>
+<td>what if slotHeight changes? (see issue 650)</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>3243</td>
+<td>maybe use data</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>3641</td>
+<td>streamline binding architecture</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>3790</td>
+<td>move this to CSS</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>4369</td>
+<td>don't fire eventMouseover/eventMouseout *while* dragging is occuring (on subject element)</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>4370</td>
+<td>same for resizing</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>4412</td>
+<td>investigate cases where this inverse technique might not work</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>4433</td>
+<td>investigate cases where this inverse technique might not work</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>4507</td>
+<td>streamline this</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>4867</td>
+<td>look into using jquery-ui mouse widget for this stuff</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>5034</td>
+<td>maybe put cellDate/cellIsAllDay info in cell</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="mod%5Cgroups%5Cstart.php" id="mod\groups\start.php"></a><h3>
+<i class="icon-file"></i>mod\groups\start.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>926</td>
+<td>namespace method with 'discussion'</td>
+</tr>
+<tr>
+<td>todo</td>
+<td>984</td>
+<td>this will be replaced in Elgg 1.9 and is a clone of object_notifications()</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="mod%5Cgroups%5Cviews%5Cdefault%5Cgroups%5Cprofile%5Cactivity_module.php" id="mod\groups\views\default\groups\profile\activity_module.php"></a><h3>
+<i class="icon-file"></i>mod\groups\views\default\groups\profile\activity_module.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>0</td>
+<td>add people joining group to activity</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="mod%5Chtmlawed%5Cstart.php" id="mod\htmlawed\start.php"></a><h3>
+<i class="icon-file"></i>mod\htmlawed\start.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>95</td>
+<td>since these styles are created for tinymce, shouldn't they be in the
+tinymce plugin?</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="mod%5Csearch%5Cpages%5Csearch%5Cindex.php" id="mod\search\pages\search\index.php"></a><h3>
+<i class="icon-file"></i>mod\search\pages\search\index.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>0</td>
+<td>much of this code should be pulled out into a library of functions</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="mod%5Csearch%5Cviews%5Cdefault%5Csearch%5Cstartblurb.php" id="mod\search\views\default\search\startblurb.php"></a><h3>
+<i class="icon-file"></i>mod\search\views\default\search\startblurb.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>0</td>
+<td>This doesn't appear to be called by anything. Look into removing.</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="vendors%5Csimpletest%5Cparser.php" id="vendors\simpletest\parser.php"></a><h3>
+<i class="icon-file"></i>vendors\simpletest\parser.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>715</td>
+<td>The \xAO is a &nbsp;. Add a test for this.</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="vendors%5Csimpletest%5Ctest%5Cerrors_test.php" id="vendors\simpletest\test\errors_test.php"></a><h3>
+<i class="icon-file"></i>vendors\simpletest\test\errors_test.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>299</td>
+<td>Add stacked error handler test</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="views%5Cdefault%5Cadmin%5Cappearance%5Cprofile_fields%5Clist.php" id="views\default\admin\appearance\profile_fields\list.php"></a><h3>
+<i class="icon-file"></i>views\default\admin\appearance\profile_fields\list.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>0</td>
+<td>Needs some review</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="views%5Cdefault%5Cforms%5Cadmin%5Csite%5Cupdate_advanced.php" id="views\default\forms\admin\site\update_advanced.php"></a><h3>
+<i class="icon-file"></i>views\default\forms\admin\site\update_advanced.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>0</td>
+<td>cleanup</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="views%5Cdefault%5Cforms%5Cadmin%5Csite%5Cupdate_basic.php" id="views\default\forms\admin\site\update_basic.php"></a><h3>
+<i class="icon-file"></i>views\default\forms\admin\site\update_basic.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>0</td>
+<td>cleanup</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="views%5Cdefault%5Cinput%5Cautocomplete.php" id="views\default\input\autocomplete.php"></a><h3>
+<i class="icon-file"></i>views\default\input\autocomplete.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>0</td>
+<td>This currently only works for ONE AUTOCOMPLETE TEXT FIELD on a page.</td>
+</tr>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="views%5Cdefault%5Cjs%5Clightbox.php" id="views\default\js\lightbox.php"></a><h3>
+<i class="icon-file"></i>views\default\js\lightbox.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>todo</td>
+<td>0</td>
+<td>add support for passing options: $('#myplugin-lightbox').elgg.ui.lightbox(options);</td>
+</tr>
+</table></div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.1.0
+</a> and<br>
+            generated on 2013-12-03T13:07:08+01:00.<br></footer></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,915 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>API Documentation » \ElggCoreEntityGetterFunctionsTest</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">API Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/clipit.html"><i class="icon-th"></i> clipit</a></li>
+<li><a href="../namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Elgg.html"><i class="icon-folder-open"></i> Elgg</a></li>
+<li><a href="../packages/Elgg.Core.html"><i class="icon-folder-open"></i> Elgg.Core</a></li>
+<li><a href="../packages/Elgg.Core.Plugin.html"><i class="icon-folder-open"></i> Elgg.Core.Plugin</a></li>
+<li><a href="../packages/ElggAPIAdmin.html"><i class="icon-folder-open"></i> ElggAPIAdmin</a></li>
+<li><a href="../packages/ElggDiagnostics.html"><i class="icon-folder-open"></i> ElggDiagnostics</a></li>
+<li><a href="../packages/ElggEmbed.html"><i class="icon-folder-open"></i> ElggEmbed</a></li>
+<li><a href="../packages/ElggFile.html"><i class="icon-folder-open"></i> ElggFile</a></li>
+<li><a href="../packages/ElggGarbageCollector.html"><i class="icon-folder-open"></i> ElggGarbageCollector</a></li>
+<li><a href="../packages/ElggGroups.html"><i class="icon-folder-open"></i> ElggGroups</a></li>
+<li><a href="../packages/ElggLogBrowser.html"><i class="icon-folder-open"></i> ElggLogBrowser</a></li>
+<li><a href="../packages/ElggLogRotate.html"><i class="icon-folder-open"></i> ElggLogRotate</a></li>
+<li><a href="../packages/ElggMessages.html"><i class="icon-folder-open"></i> ElggMessages</a></li>
+<li><a href="../packages/ElggNotifications.html"><i class="icon-folder-open"></i> ElggNotifications</a></li>
+<li><a href="../packages/ElggProfile.html"><i class="icon-folder-open"></i> ElggProfile</a></li>
+<li><a href="../packages/ElggTinyMCE.html"><i class="icon-folder-open"></i> ElggTinyMCE</a></li>
+<li><a href="../packages/ElgghtmLawed.html"><i class="icon-folder-open"></i> ElgghtmLawed</a></li>
+<li><a href="../packages/Embed%20Video%20Library.html"><i class="icon-folder-open"></i> Embed Video Library</a></li>
+<li><a href="../packages/PlaceLocalInclude.html"><i class="icon-folder-open"></i> PlaceLocalInclude</a></li>
+<li><a href="../packages/SimpleTest.html"><i class="icon-folder-open"></i> SimpleTest</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+     @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20MockObjects%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   MockObjects
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20MockObjects.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage MockObjects</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+     @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@abstract.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @abstract</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20WebTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage WebTester</a></li>
+<li><a href="../packages/%5Bname%5D.html"><i class="icon-folder-open"></i> [name]</a></li>
+<li><a href="../packages/clipit.html"><i class="icon-folder-open"></i> clipit</a></li>
+<li><a href="../packages/event_calendar.html"><i class="icon-folder-open"></i> event_calendar</a></li>
+<li><a href="../packages/pebs.html"><i class="icon-folder-open"></i> pebs</a></li>
+<li><a href="../packages/profile_manager.html"><i class="icon-folder-open"></i> profile_manager</a></li>
+<li><a href="../packages/veeplay.html"><i class="icon-folder-open"></i> veeplay</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">4473</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">250</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list"><li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___construct" title="__construct() :: Called before each test object."><span class="description">Called before each test object.</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#method___destruct" title="__destruct() :: Called after each test object."><span class="description">Called after each test object.</span><pre>__destruct()</pre></a></li>
+<li class="method public "><a href="#method_createRandomAnnotations" title="createRandomAnnotations() :: Creates random annotations on $entity"><span class="description">Creates random annotations on $entity</span><pre>createRandomAnnotations()</pre></a></li>
+<li class="method public "><a href="#method_getRandomInvalids" title="getRandomInvalids() :: Return an array of invalid strings for type or subtypes."><span class="description">Return an array of invalid strings for type or subtypes.</span><pre>getRandomInvalids()</pre></a></li>
+<li class="method public "><a href="#method_getRandomMixedSubtypes" title="getRandomMixedSubtypes() :: Get random mix of valid and invalid subtypes for types given."><span class="description">Get random mix of valid and invalid subtypes for types given.</span><pre>getRandomMixedSubtypes()</pre></a></li>
+<li class="method public "><a href="#method_getRandomMixedTypes" title="getRandomMixedTypes() :: Get a mix of valid and invalid types"><span class="description">Get a mix of valid and invalid types</span><pre>getRandomMixedTypes()</pre></a></li>
+<li class="method public "><a href="#method_getRandomValidSubtypes" title="getRandomValidSubtypes() :: Get a random valid subtype (that we just created)"><span class="description">Get a random valid subtype (that we just created)</span><pre>getRandomValidSubtypes()</pre></a></li>
+<li class="method public "><a href="#method_getRandomValidTypes" title="getRandomValidTypes() :: Get a random valid subtype"><span class="description">Get a random valid subtype</span><pre>getRandomValidTypes()</pre></a></li>
+<li class="method public "><a href="#method_setUp" title="setUp() :: Called after each test method."><span class="description">Called after each test method.</span><pre>setUp()</pre></a></li>
+<li class="method public "><a href="#method_tearDown" title="tearDown() :: Called after each test method."><span class="description">Called after each test method.</span><pre>tearDown()</pre></a></li>
+<li class="method public "><a href="#method_testEGEEmptySubtypePlurality" title="testEGEEmptySubtypePlurality() :: "><span class="description">testEGEEmptySubtypePlurality()
+        </span><pre>testEGEEmptySubtypePlurality()</pre></a></li>
+<li class="method public "><a href="#method_testElggAPIGettersTSPValidTypeMixedPluralSubtype" title="testElggAPIGettersTSPValidTypeMixedPluralSubtype() :: Valid type, both valid and invalid subtypes"><span class="description">Valid type, both valid and invalid subtypes</span><pre>testElggAPIGettersTSPValidTypeMixedPluralSubtype()</pre></a></li>
+<li class="method public "><a href="#method_testElggAPIGettersTSPValidTypeValidPluralSubtype" title="testElggAPIGettersTSPValidTypeValidPluralSubtype() :: Valid type, multiple valid subtypes"><span class="description">Valid type, multiple valid subtypes</span><pre>testElggAPIGettersTSPValidTypeValidPluralSubtype()</pre></a></li>
+<li class="method public "><a href="#method_testElggAPIGettersTSPValidTypeValidSubtype" title="testElggAPIGettersTSPValidTypeValidSubtype() :: Valid type, valid subtype pairs"><span class="description">Valid type, valid subtype pairs</span><pre>testElggAPIGettersTSPValidTypeValidSubtype()</pre></a></li>
+<li class="method public "><a href="#method_testElggAPIGettersValidAndInvalidTypes" title="testElggAPIGettersValidAndInvalidTypes() :: "><span class="description">testElggAPIGettersValidAndInvalidTypes()
+        </span><pre>testElggAPIGettersValidAndInvalidTypes()</pre></a></li>
+<li class="method public "><a href="#method_testElggAPIGettersValidAndInvalidTypesPlural" title="testElggAPIGettersValidAndInvalidTypesPlural() :: "><span class="description">testElggAPIGettersValidAndInvalidTypesPlural()
+        </span><pre>testElggAPIGettersValidAndInvalidTypesPlural()</pre></a></li>
+<li class="method public "><a href="#method_testElggAPIGettersValidSubtypeUsingPluralMixedSubtypesSingleType" title="testElggAPIGettersValidSubtypeUsingPluralMixedSubtypesSingleType() :: "><span class="description">testElggAPIGettersValidSubtypeUsingPluralMixedSubtypesSingleType()
+        </span><pre>testElggAPIGettersValidSubtypeUsingPluralMixedSubtypesSingleType()</pre></a></li>
+<li class="method public "><a href="#method_testElggAPIGettersValidSubtypeUsingPluralSubtypesPluralTypes" title="testElggAPIGettersValidSubtypeUsingPluralSubtypesPluralTypes() :: "><span class="description">testElggAPIGettersValidSubtypeUsingPluralSubtypesPluralTypes()
+        </span><pre>testElggAPIGettersValidSubtypeUsingPluralSubtypesPluralTypes()</pre></a></li>
+<li class="method public "><a href="#method_testElggAPIGettersValidSubtypeUsingPluralSubtypesSingularType" title="testElggAPIGettersValidSubtypeUsingPluralSubtypesSingularType() :: "><span class="description">testElggAPIGettersValidSubtypeUsingPluralSubtypesSingularType()
+        </span><pre>testElggAPIGettersValidSubtypeUsingPluralSubtypesSingularType()</pre></a></li>
+<li class="method public "><a href="#method_testElggAPIGettersValidSubtypeUsingSubtypeSingularType" title="testElggAPIGettersValidSubtypeUsingSubtypeSingularType() :: "><span class="description">testElggAPIGettersValidSubtypeUsingSubtypeSingularType()
+        </span><pre>testElggAPIGettersValidSubtypeUsingSubtypeSingularType()</pre></a></li>
+<li class="method public "><a href="#method_testElggAPIGettersValidSubtypeUsingSubtypesAsArraySingularType" title="testElggAPIGettersValidSubtypeUsingSubtypesAsArraySingularType() :: "><span class="description">testElggAPIGettersValidSubtypeUsingSubtypesAsArraySingularType()
+        </span><pre>testElggAPIGettersValidSubtypeUsingSubtypesAsArraySingularType()</pre></a></li>
+<li class="method public "><a href="#method_testElggAPIGettersValidSubtypeUsingSubtypesAsStringSingularType" title="testElggAPIGettersValidSubtypeUsingSubtypesAsStringSingularType() :: "><span class="description">testElggAPIGettersValidSubtypeUsingSubtypesAsStringSingularType()
+        </span><pre>testElggAPIGettersValidSubtypeUsingSubtypesAsStringSingularType()</pre></a></li>
+<li class="method public "><a href="#method_testElggAPIGettersValidTypeUsingType" title="testElggAPIGettersValidTypeUsingType() :: "><span class="description">testElggAPIGettersValidTypeUsingType()
+        </span><pre>testElggAPIGettersValidTypeUsingType()</pre></a></li>
+<li class="method public "><a href="#method_testElggAPIGettersValidTypeUsingTypesAsArray" title="testElggAPIGettersValidTypeUsingTypesAsArray() :: "><span class="description">testElggAPIGettersValidTypeUsingTypesAsArray()
+        </span><pre>testElggAPIGettersValidTypeUsingTypesAsArray()</pre></a></li>
+<li class="method public "><a href="#method_testElggAPIGettersValidTypeUsingTypesAsArrayPlural" title="testElggAPIGettersValidTypeUsingTypesAsArrayPlural() :: "><span class="description">testElggAPIGettersValidTypeUsingTypesAsArrayPlural()
+        </span><pre>testElggAPIGettersValidTypeUsingTypesAsArrayPlural()</pre></a></li>
+<li class="method public "><a href="#method_testElggAPIGettersValidTypeUsingTypesAsString" title="testElggAPIGettersValidTypeUsingTypesAsString() :: "><span class="description">testElggAPIGettersValidTypeUsingTypesAsString()
+        </span><pre>testElggAPIGettersValidTypeUsingTypesAsString()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntitiesFromAnnotation" title="testElggApiGettersEntitiesFromAnnotation() :: Annotations"><span class="description">Annotations</span><pre>testElggApiGettersEntitiesFromAnnotation()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntitiesFromLocation" title="testElggApiGettersEntitiesFromLocation() :: Location"><span class="description">Location</span><pre>testElggApiGettersEntitiesFromLocation()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntitiesFromPrivateSettings" title="testElggApiGettersEntitiesFromPrivateSettings() :: Private settings"><span class="description">Private settings</span><pre>testElggApiGettersEntitiesFromPrivateSettings()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntityMetadataNVPInvalidNValidV" title="testElggApiGettersEntityMetadataNVPInvalidNValidV() :: Name value pair with invalid name and valid value"><span class="description">Name value pair with invalid name and valid value</span><pre>testElggApiGettersEntityMetadataNVPInvalidNValidV()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntityMetadataNVPOrderByMDString" title="testElggApiGettersEntityMetadataNVPOrderByMDString() :: "><span class="description">testElggApiGettersEntityMetadataNVPOrderByMDString()
+        </span><pre>testElggApiGettersEntityMetadataNVPOrderByMDString()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntityMetadataNVPOrderByMDText" title="testElggApiGettersEntityMetadataNVPOrderByMDText() :: "><span class="description">testElggApiGettersEntityMetadataNVPOrderByMDText()
+        </span><pre>testElggApiGettersEntityMetadataNVPOrderByMDText()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntityMetadataNVPValidNInvalidV" title="testElggApiGettersEntityMetadataNVPValidNInvalidV() :: Name value pair with valid name and invalid value"><span class="description">Name value pair with valid name and invalid value</span><pre>testElggApiGettersEntityMetadataNVPValidNInvalidV()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntityMetadataNVPValidNValidVEquals" title="testElggApiGettersEntityMetadataNVPValidNValidVEquals() :: "><span class="description">testElggApiGettersEntityMetadataNVPValidNValidVEquals()
+        </span><pre>testElggApiGettersEntityMetadataNVPValidNValidVEquals()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntityMetadataNVPValidNValidVEqualsDouble" title="testElggApiGettersEntityMetadataNVPValidNValidVEqualsDouble() :: "><span class="description">testElggApiGettersEntityMetadataNVPValidNValidVEqualsDouble()
+        </span><pre>testElggApiGettersEntityMetadataNVPValidNValidVEqualsDouble()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntityMetadataNVPValidNValidVEqualsTriple" title="testElggApiGettersEntityMetadataNVPValidNValidVEqualsTriple() :: "><span class="description">testElggApiGettersEntityMetadataNVPValidNValidVEqualsTriple()
+        </span><pre>testElggApiGettersEntityMetadataNVPValidNValidVEqualsTriple()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntityMetadataNVPValidNValidVOperandIn" title="testElggApiGettersEntityMetadataNVPValidNValidVOperandIn() :: "><span class="description">testElggApiGettersEntityMetadataNVPValidNValidVOperandIn()
+        </span><pre>testElggApiGettersEntityMetadataNVPValidNValidVOperandIn()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntityMetadataNVPValidNValidVPlural" title="testElggApiGettersEntityMetadataNVPValidNValidVPlural() :: "><span class="description">testElggApiGettersEntityMetadataNVPValidNValidVPlural()
+        </span><pre>testElggApiGettersEntityMetadataNVPValidNValidVPlural()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntityMetadataNameInvalidMultiple" title="testElggApiGettersEntityMetadataNameInvalidMultiple() :: "><span class="description">testElggApiGettersEntityMetadataNameInvalidMultiple()
+        </span><pre>testElggApiGettersEntityMetadataNameInvalidMultiple()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntityMetadataNameInvalidSingle" title="testElggApiGettersEntityMetadataNameInvalidSingle() :: "><span class="description">testElggApiGettersEntityMetadataNameInvalidSingle()
+        </span><pre>testElggApiGettersEntityMetadataNameInvalidSingle()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntityMetadataNameMixedMultiple" title="testElggApiGettersEntityMetadataNameMixedMultiple() :: "><span class="description">testElggApiGettersEntityMetadataNameMixedMultiple()
+        </span><pre>testElggApiGettersEntityMetadataNameMixedMultiple()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntityMetadataNameValidMultiple" title="testElggApiGettersEntityMetadataNameValidMultiple() :: "><span class="description">testElggApiGettersEntityMetadataNameValidMultiple()
+        </span><pre>testElggApiGettersEntityMetadataNameValidMultiple()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntityMetadataNameValidSingle" title="testElggApiGettersEntityMetadataNameValidSingle() :: "><span class="description">testElggApiGettersEntityMetadataNameValidSingle()
+        </span><pre>testElggApiGettersEntityMetadataNameValidSingle()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntityMetadataValueInvalidMultiple" title="testElggApiGettersEntityMetadataValueInvalidMultiple() :: "><span class="description">testElggApiGettersEntityMetadataValueInvalidMultiple()
+        </span><pre>testElggApiGettersEntityMetadataValueInvalidMultiple()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntityMetadataValueInvalidSingle" title="testElggApiGettersEntityMetadataValueInvalidSingle() :: "><span class="description">testElggApiGettersEntityMetadataValueInvalidSingle()
+        </span><pre>testElggApiGettersEntityMetadataValueInvalidSingle()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntityMetadataValueMixedMultiple" title="testElggApiGettersEntityMetadataValueMixedMultiple() :: "><span class="description">testElggApiGettersEntityMetadataValueMixedMultiple()
+        </span><pre>testElggApiGettersEntityMetadataValueMixedMultiple()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntityMetadataValueValidMultiple" title="testElggApiGettersEntityMetadataValueValidMultiple() :: "><span class="description">testElggApiGettersEntityMetadataValueValidMultiple()
+        </span><pre>testElggApiGettersEntityMetadataValueValidMultiple()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntityMetadataValueValidSingle" title="testElggApiGettersEntityMetadataValueValidSingle() :: "><span class="description">testElggApiGettersEntityMetadataValueValidSingle()
+        </span><pre>testElggApiGettersEntityMetadataValueValidSingle()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntityNoSubtype" title="testElggApiGettersEntityNoSubtype() :: "><span class="description">testElggApiGettersEntityNoSubtype()
+        </span><pre>testElggApiGettersEntityNoSubtype()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntityNoValueSubtypeNotSet" title="testElggApiGettersEntityNoValueSubtypeNotSet() :: "><span class="description">testElggApiGettersEntityNoValueSubtypeNotSet()
+        </span><pre>testElggApiGettersEntityNoValueSubtypeNotSet()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntityNoValueSubtypeSet" title="testElggApiGettersEntityNoValueSubtypeSet() :: "><span class="description">testElggApiGettersEntityNoValueSubtypeSet()
+        </span><pre>testElggApiGettersEntityNoValueSubtypeSet()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntityRelationshipWithMetadata" title="testElggApiGettersEntityRelationshipWithMetadata() :: "><span class="description">testElggApiGettersEntityRelationshipWithMetadata()
+        </span><pre>testElggApiGettersEntityRelationshipWithMetadata()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntityRelationshipWithMetadataIncludingFakeMetadata" title="testElggApiGettersEntityRelationshipWithMetadataIncludingFakeMetadata() :: "><span class="description">testElggApiGettersEntityRelationshipWithMetadataIncludingFakeMetadata()
+        </span><pre>testElggApiGettersEntityRelationshipWithMetadataIncludingFakeMetadata()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntityRelationshipWithMetadataIncludingRealMetadata" title="testElggApiGettersEntityRelationshipWithMetadataIncludingRealMetadata() :: "><span class="description">testElggApiGettersEntityRelationshipWithMetadataIncludingRealMetadata()
+        </span><pre>testElggApiGettersEntityRelationshipWithMetadataIncludingRealMetadata()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntityRelationshipWithOutMetadata" title="testElggApiGettersEntityRelationshipWithOutMetadata() :: "><span class="description">testElggApiGettersEntityRelationshipWithOutMetadata()
+        </span><pre>testElggApiGettersEntityRelationshipWithOutMetadata()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntitySitePlural" title="testElggApiGettersEntitySitePlural() :: "><span class="description">testElggApiGettersEntitySitePlural()
+        </span><pre>testElggApiGettersEntitySitePlural()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntitySitePluralAllInvalid" title="testElggApiGettersEntitySitePluralAllInvalid() :: "><span class="description">testElggApiGettersEntitySitePluralAllInvalid()
+        </span><pre>testElggApiGettersEntitySitePluralAllInvalid()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntitySitePluralSomeInvalid" title="testElggApiGettersEntitySitePluralSomeInvalid() :: "><span class="description">testElggApiGettersEntitySitePluralSomeInvalid()
+        </span><pre>testElggApiGettersEntitySitePluralSomeInvalid()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntitySiteSingular" title="testElggApiGettersEntitySiteSingular() :: "><span class="description">testElggApiGettersEntitySiteSingular()
+        </span><pre>testElggApiGettersEntitySiteSingular()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersEntitySiteSingularAny" title="testElggApiGettersEntitySiteSingularAny() :: "><span class="description">testElggApiGettersEntitySiteSingularAny()
+        </span><pre>testElggApiGettersEntitySiteSingularAny()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersInvalidSubtypeValidType" title="testElggApiGettersInvalidSubtypeValidType() :: "><span class="description">testElggApiGettersInvalidSubtypeValidType()
+        </span><pre>testElggApiGettersInvalidSubtypeValidType()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersInvalidSubtypeValidTypes" title="testElggApiGettersInvalidSubtypeValidTypes() :: "><span class="description">testElggApiGettersInvalidSubtypeValidTypes()
+        </span><pre>testElggApiGettersInvalidSubtypeValidTypes()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersInvalidSubtypesValidType" title="testElggApiGettersInvalidSubtypesValidType() :: "><span class="description">testElggApiGettersInvalidSubtypesValidType()
+        </span><pre>testElggApiGettersInvalidSubtypesValidType()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersInvalidSubtypesValidTypes" title="testElggApiGettersInvalidSubtypesValidTypes() :: "><span class="description">testElggApiGettersInvalidSubtypesValidTypes()
+        </span><pre>testElggApiGettersInvalidSubtypesValidTypes()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersInvalidTypeUsingType" title="testElggApiGettersInvalidTypeUsingType() :: Test invalid types with singular 'type'."><span class="description">Test invalid types with singular 'type'.</span><pre>testElggApiGettersInvalidTypeUsingType()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersInvalidTypeUsingTypesAsArray" title="testElggApiGettersInvalidTypeUsingTypesAsArray() :: Test invalid types with plural 'types' and an array of a single type"><span class="description">Test invalid types with plural 'types' and an array of a single type</span><pre>testElggApiGettersInvalidTypeUsingTypesAsArray()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersInvalidTypeUsingTypesAsString" title="testElggApiGettersInvalidTypeUsingTypesAsString() :: Test invalid types with plural 'types'."><span class="description">Test invalid types with plural 'types'.</span><pre>testElggApiGettersInvalidTypeUsingTypesAsString()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersInvalidTypes" title="testElggApiGettersInvalidTypes() :: Test invalid types with plural 'types' and an array of a two types"><span class="description">Test invalid types with plural 'types' and an array of a two types</span><pre>testElggApiGettersInvalidTypes()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersTSPInvalidType" title="testElggApiGettersTSPInvalidType() :: "><span class="description">testElggApiGettersTSPInvalidType()
+        </span><pre>testElggApiGettersTSPInvalidType()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersTSPInvalidTypes" title="testElggApiGettersTSPInvalidTypes() :: "><span class="description">testElggApiGettersTSPInvalidTypes()
+        </span><pre>testElggApiGettersTSPInvalidTypes()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersTSPValidTypeInvalidSubtype" title="testElggApiGettersTSPValidTypeInvalidSubtype() :: "><span class="description">testElggApiGettersTSPValidTypeInvalidSubtype()
+        </span><pre>testElggApiGettersTSPValidTypeInvalidSubtype()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersTSPValidTypeInvalidSubtypes" title="testElggApiGettersTSPValidTypeInvalidSubtypes() :: "><span class="description">testElggApiGettersTSPValidTypeInvalidSubtypes()
+        </span><pre>testElggApiGettersTSPValidTypeInvalidSubtypes()</pre></a></li>
+<li class="method public "><a href="#method_testElggApiGettersTSPValidTypesInvalidSubtypes" title="testElggApiGettersTSPValidTypesInvalidSubtypes() :: "><span class="description">testElggApiGettersTSPValidTypesInvalidSubtypes()
+        </span><pre>testElggApiGettersTSPValidTypesInvalidSubtypes()</pre></a></li>
+<li class="method public "><a href="#method_testElggGetAnnotationsAnnotationNames" title="testElggGetAnnotationsAnnotationNames() :: "><span class="description">testElggGetAnnotationsAnnotationNames()
+        </span><pre>testElggGetAnnotationsAnnotationNames()</pre></a></li>
+<li class="method public "><a href="#method_testElggGetAnnotationsAnnotationOwnerGuids" title="testElggGetAnnotationsAnnotationOwnerGuids() :: "><span class="description">testElggGetAnnotationsAnnotationOwnerGuids()
+        </span><pre>testElggGetAnnotationsAnnotationOwnerGuids()</pre></a></li>
+<li class="method public "><a href="#method_testElggGetAnnotationsAnnotationValues" title="testElggGetAnnotationsAnnotationValues() :: "><span class="description">testElggGetAnnotationsAnnotationValues()
+        </span><pre>testElggGetAnnotationsAnnotationValues()</pre></a></li>
+<li class="method public "><a href="#method_testElggGetEntitiesBadWheres" title="testElggGetEntitiesBadWheres() :: "><span class="description">testElggGetEntitiesBadWheres()
+        </span><pre>testElggGetEntitiesBadWheres()</pre></a></li>
+<li class="method public "><a href="#method_testElggGetEntitiesByGuidPlural" title="testElggGetEntitiesByGuidPlural() :: "><span class="description">testElggGetEntitiesByGuidPlural()
+        </span><pre>testElggGetEntitiesByGuidPlural()</pre></a></li>
+<li class="method public "><a href="#method_testElggGetEntitiesByGuidSingular" title="testElggGetEntitiesByGuidSingular() :: "><span class="description">testElggGetEntitiesByGuidSingular()
+        </span><pre>testElggGetEntitiesByGuidSingular()</pre></a></li>
+<li class="method public "><a href="#method_testElggGetEntitiesFromAnnotationCalculationCount" title="testElggGetEntitiesFromAnnotationCalculationCount() :: "><span class="description">testElggGetEntitiesFromAnnotationCalculationCount()
+        </span><pre>testElggGetEntitiesFromAnnotationCalculationCount()</pre></a></li>
+<li class="method public "><a href="#method_testElggGetEntitiesFromAnnotationsCalculateX" title="testElggGetEntitiesFromAnnotationsCalculateX() :: "><span class="description">testElggGetEntitiesFromAnnotationsCalculateX()
+        </span><pre>testElggGetEntitiesFromAnnotationsCalculateX()</pre></a></li>
+<li class="method public "><a href="#method_testElggGetEntitiesFromRelationshipCount" title="testElggGetEntitiesFromRelationshipCount() :: "><span class="description">testElggGetEntitiesFromRelationshipCount()
+        </span><pre>testElggGetEntitiesFromRelationshipCount()</pre></a></li>
+<li class="method public "><a href="#method_xtestElggApiGettersEntityMetadataNVPValidNValidVEqualsStupid" title="xtestElggApiGettersEntityMetadataNVPValidNValidVEqualsStupid() :: "><span class="description">xtestElggApiGettersEntityMetadataNVPValidNValidVEqualsStupid()
+        </span><pre>xtestElggApiGettersEntityMetadataNVPValidNValidVEqualsStupid()</pre></a></li>
+</ul>
+</li></ul>
+</div>
+<div class="span8">
+<a id="\ElggCoreEntityGetterFunctionsTest"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/ElggCoreEntityGetterFunctionsTest.html">ElggCoreEntityGetterFunctionsTest</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">Elgg Test Entity Getter Functions</p>
+<div class="details">
+<div class="long_description">This class is to be extended by all Elgg unit tests. As such, any method here
+will be available to the tests.</div>
+<table class="table table-bordered">
+<tr>
+<th>package</th>
+<td><a href="../packages/Elgg.Test.html">Elgg</a></td>
+</tr>
+<tr>
+<th>subpackage</th>
+<td>Test</td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>Called before each test object.</h2>
+<pre>__construct() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method___destruct"></a><div class="element clickable method public method___destruct" data-toggle="collapse" data-target=".method___destruct .collapse">
+<h2>Called after each test object.</h2>
+<pre>__destruct() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_createRandomAnnotations"></a><div class="element clickable method public method_createRandomAnnotations" data-toggle="collapse" data-target=".method_createRandomAnnotations .collapse">
+<h2>Creates random annotations on $entity</h2>
+<pre>createRandomAnnotations(\ElggEntity $entity, int $max) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$entity</h4>
+<code><a href="../classes/ElggEntity.html">\ElggEntity</a></code>
+</div>
+<div class="subelement argument">
+<h4>$max</h4>
+<code>int</code>
+</div>
+</div></div>
+</div>
+<a id="method_getRandomInvalids"></a><div class="element clickable method public method_getRandomInvalids" data-toggle="collapse" data-target=".method_getRandomInvalids .collapse">
+<h2>Return an array of invalid strings for type or subtypes.</h2>
+<pre>getRandomInvalids(int $num) : <a href="arr.html">\arr</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$num</h4>
+<code>int</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="arr.html">\arr</a></code></div>
+</div></div>
+</div>
+<a id="method_getRandomMixedSubtypes"></a><div class="element clickable method public method_getRandomMixedSubtypes" data-toggle="collapse" data-target=".method_getRandomMixedSubtypes .collapse">
+<h2>Get random mix of valid and invalid subtypes for types given.</h2>
+<pre>getRandomMixedSubtypes(array $types, int $num) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$types</h4>
+<code>array</code>
+</div>
+<div class="subelement argument">
+<h4>$num</h4>
+<code>int</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_getRandomMixedTypes"></a><div class="element clickable method public method_getRandomMixedTypes" data-toggle="collapse" data-target=".method_getRandomMixedTypes .collapse">
+<h2>Get a mix of valid and invalid types</h2>
+<pre>getRandomMixedTypes(int $num) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$num</h4>
+<code>int</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_getRandomValidSubtypes"></a><div class="element clickable method public method_getRandomValidSubtypes" data-toggle="collapse" data-target=".method_getRandomValidSubtypes .collapse">
+<h2>Get a random valid subtype (that we just created)</h2>
+<pre>getRandomValidSubtypes(array $types, int $num) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$types</h4></div>
+<div class="subelement argument">
+<h4>$num</h4>
+<code>int</code><p>of subtypes.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_getRandomValidTypes"></a><div class="element clickable method public method_getRandomValidTypes" data-toggle="collapse" data-target=".method_getRandomValidTypes .collapse">
+<h2>Get a random valid subtype</h2>
+<pre>getRandomValidTypes(int $num) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$num</h4>
+<code>int</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_setUp"></a><div class="element clickable method public method_setUp" data-toggle="collapse" data-target=".method_setUp .collapse">
+<h2>Called after each test method.</h2>
+<pre>setUp() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_tearDown"></a><div class="element clickable method public method_tearDown" data-toggle="collapse" data-target=".method_tearDown .collapse">
+<h2>Called after each test method.</h2>
+<pre>tearDown() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testEGEEmptySubtypePlurality"></a><div class="element clickable method public method_testEGEEmptySubtypePlurality" data-toggle="collapse" data-target=".method_testEGEEmptySubtypePlurality .collapse">
+<h2>testEGEEmptySubtypePlurality()
+        </h2>
+<pre>testEGEEmptySubtypePlurality() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggAPIGettersTSPValidTypeMixedPluralSubtype"></a><div class="element clickable method public method_testElggAPIGettersTSPValidTypeMixedPluralSubtype" data-toggle="collapse" data-target=".method_testElggAPIGettersTSPValidTypeMixedPluralSubtype .collapse">
+<h2>Valid type, both valid and invalid subtypes</h2>
+<pre>testElggAPIGettersTSPValidTypeMixedPluralSubtype() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggAPIGettersTSPValidTypeValidPluralSubtype"></a><div class="element clickable method public method_testElggAPIGettersTSPValidTypeValidPluralSubtype" data-toggle="collapse" data-target=".method_testElggAPIGettersTSPValidTypeValidPluralSubtype .collapse">
+<h2>Valid type, multiple valid subtypes</h2>
+<pre>testElggAPIGettersTSPValidTypeValidPluralSubtype() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggAPIGettersTSPValidTypeValidSubtype"></a><div class="element clickable method public method_testElggAPIGettersTSPValidTypeValidSubtype" data-toggle="collapse" data-target=".method_testElggAPIGettersTSPValidTypeValidSubtype .collapse">
+<h2>Valid type, valid subtype pairs</h2>
+<pre>testElggAPIGettersTSPValidTypeValidSubtype() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggAPIGettersValidAndInvalidTypes"></a><div class="element clickable method public method_testElggAPIGettersValidAndInvalidTypes" data-toggle="collapse" data-target=".method_testElggAPIGettersValidAndInvalidTypes .collapse">
+<h2>testElggAPIGettersValidAndInvalidTypes()
+        </h2>
+<pre>testElggAPIGettersValidAndInvalidTypes() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggAPIGettersValidAndInvalidTypesPlural"></a><div class="element clickable method public method_testElggAPIGettersValidAndInvalidTypesPlural" data-toggle="collapse" data-target=".method_testElggAPIGettersValidAndInvalidTypesPlural .collapse">
+<h2>testElggAPIGettersValidAndInvalidTypesPlural()
+        </h2>
+<pre>testElggAPIGettersValidAndInvalidTypesPlural() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggAPIGettersValidSubtypeUsingPluralMixedSubtypesSingleType"></a><div class="element clickable method public method_testElggAPIGettersValidSubtypeUsingPluralMixedSubtypesSingleType" data-toggle="collapse" data-target=".method_testElggAPIGettersValidSubtypeUsingPluralMixedSubtypesSingleType .collapse">
+<h2>testElggAPIGettersValidSubtypeUsingPluralMixedSubtypesSingleType()
+        </h2>
+<pre>testElggAPIGettersValidSubtypeUsingPluralMixedSubtypesSingleType() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggAPIGettersValidSubtypeUsingPluralSubtypesPluralTypes"></a><div class="element clickable method public method_testElggAPIGettersValidSubtypeUsingPluralSubtypesPluralTypes" data-toggle="collapse" data-target=".method_testElggAPIGettersValidSubtypeUsingPluralSubtypesPluralTypes .collapse">
+<h2>testElggAPIGettersValidSubtypeUsingPluralSubtypesPluralTypes()
+        </h2>
+<pre>testElggAPIGettersValidSubtypeUsingPluralSubtypesPluralTypes() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggAPIGettersValidSubtypeUsingPluralSubtypesSingularType"></a><div class="element clickable method public method_testElggAPIGettersValidSubtypeUsingPluralSubtypesSingularType" data-toggle="collapse" data-target=".method_testElggAPIGettersValidSubtypeUsingPluralSubtypesSingularType .collapse">
+<h2>testElggAPIGettersValidSubtypeUsingPluralSubtypesSingularType()
+        </h2>
+<pre>testElggAPIGettersValidSubtypeUsingPluralSubtypesSingularType() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggAPIGettersValidSubtypeUsingSubtypeSingularType"></a><div class="element clickable method public method_testElggAPIGettersValidSubtypeUsingSubtypeSingularType" data-toggle="collapse" data-target=".method_testElggAPIGettersValidSubtypeUsingSubtypeSingularType .collapse">
+<h2>testElggAPIGettersValidSubtypeUsingSubtypeSingularType()
+        </h2>
+<pre>testElggAPIGettersValidSubtypeUsingSubtypeSingularType() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggAPIGettersValidSubtypeUsingSubtypesAsArraySingularType"></a><div class="element clickable method public method_testElggAPIGettersValidSubtypeUsingSubtypesAsArraySingularType" data-toggle="collapse" data-target=".method_testElggAPIGettersValidSubtypeUsingSubtypesAsArraySingularType .collapse">
+<h2>testElggAPIGettersValidSubtypeUsingSubtypesAsArraySingularType()
+        </h2>
+<pre>testElggAPIGettersValidSubtypeUsingSubtypesAsArraySingularType() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggAPIGettersValidSubtypeUsingSubtypesAsStringSingularType"></a><div class="element clickable method public method_testElggAPIGettersValidSubtypeUsingSubtypesAsStringSingularType" data-toggle="collapse" data-target=".method_testElggAPIGettersValidSubtypeUsingSubtypesAsStringSingularType .collapse">
+<h2>testElggAPIGettersValidSubtypeUsingSubtypesAsStringSingularType()
+        </h2>
+<pre>testElggAPIGettersValidSubtypeUsingSubtypesAsStringSingularType() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggAPIGettersValidTypeUsingType"></a><div class="element clickable method public method_testElggAPIGettersValidTypeUsingType" data-toggle="collapse" data-target=".method_testElggAPIGettersValidTypeUsingType .collapse">
+<h2>testElggAPIGettersValidTypeUsingType()
+        </h2>
+<pre>testElggAPIGettersValidTypeUsingType() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggAPIGettersValidTypeUsingTypesAsArray"></a><div class="element clickable method public method_testElggAPIGettersValidTypeUsingTypesAsArray" data-toggle="collapse" data-target=".method_testElggAPIGettersValidTypeUsingTypesAsArray .collapse">
+<h2>testElggAPIGettersValidTypeUsingTypesAsArray()
+        </h2>
+<pre>testElggAPIGettersValidTypeUsingTypesAsArray() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggAPIGettersValidTypeUsingTypesAsArrayPlural"></a><div class="element clickable method public method_testElggAPIGettersValidTypeUsingTypesAsArrayPlural" data-toggle="collapse" data-target=".method_testElggAPIGettersValidTypeUsingTypesAsArrayPlural .collapse">
+<h2>testElggAPIGettersValidTypeUsingTypesAsArrayPlural()
+        </h2>
+<pre>testElggAPIGettersValidTypeUsingTypesAsArrayPlural() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggAPIGettersValidTypeUsingTypesAsString"></a><div class="element clickable method public method_testElggAPIGettersValidTypeUsingTypesAsString" data-toggle="collapse" data-target=".method_testElggAPIGettersValidTypeUsingTypesAsString .collapse">
+<h2>testElggAPIGettersValidTypeUsingTypesAsString()
+        </h2>
+<pre>testElggAPIGettersValidTypeUsingTypesAsString() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntitiesFromAnnotation"></a><div class="element clickable method public method_testElggApiGettersEntitiesFromAnnotation" data-toggle="collapse" data-target=".method_testElggApiGettersEntitiesFromAnnotation .collapse">
+<h2>Annotations</h2>
+<pre>testElggApiGettersEntitiesFromAnnotation() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntitiesFromLocation"></a><div class="element clickable method public method_testElggApiGettersEntitiesFromLocation" data-toggle="collapse" data-target=".method_testElggApiGettersEntitiesFromLocation .collapse">
+<h2>Location</h2>
+<pre>testElggApiGettersEntitiesFromLocation() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntitiesFromPrivateSettings"></a><div class="element clickable method public method_testElggApiGettersEntitiesFromPrivateSettings" data-toggle="collapse" data-target=".method_testElggApiGettersEntitiesFromPrivateSettings .collapse">
+<h2>Private settings</h2>
+<pre>testElggApiGettersEntitiesFromPrivateSettings() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntityMetadataNVPInvalidNValidV"></a><div class="element clickable method public method_testElggApiGettersEntityMetadataNVPInvalidNValidV" data-toggle="collapse" data-target=".method_testElggApiGettersEntityMetadataNVPInvalidNValidV .collapse">
+<h2>Name value pair with invalid name and valid value</h2>
+<pre>testElggApiGettersEntityMetadataNVPInvalidNValidV() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntityMetadataNVPOrderByMDString"></a><div class="element clickable method public method_testElggApiGettersEntityMetadataNVPOrderByMDString" data-toggle="collapse" data-target=".method_testElggApiGettersEntityMetadataNVPOrderByMDString .collapse">
+<h2>testElggApiGettersEntityMetadataNVPOrderByMDString()
+        </h2>
+<pre>testElggApiGettersEntityMetadataNVPOrderByMDString() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntityMetadataNVPOrderByMDText"></a><div class="element clickable method public method_testElggApiGettersEntityMetadataNVPOrderByMDText" data-toggle="collapse" data-target=".method_testElggApiGettersEntityMetadataNVPOrderByMDText .collapse">
+<h2>testElggApiGettersEntityMetadataNVPOrderByMDText()
+        </h2>
+<pre>testElggApiGettersEntityMetadataNVPOrderByMDText() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntityMetadataNVPValidNInvalidV"></a><div class="element clickable method public method_testElggApiGettersEntityMetadataNVPValidNInvalidV" data-toggle="collapse" data-target=".method_testElggApiGettersEntityMetadataNVPValidNInvalidV .collapse">
+<h2>Name value pair with valid name and invalid value</h2>
+<pre>testElggApiGettersEntityMetadataNVPValidNInvalidV() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntityMetadataNVPValidNValidVEquals"></a><div class="element clickable method public method_testElggApiGettersEntityMetadataNVPValidNValidVEquals" data-toggle="collapse" data-target=".method_testElggApiGettersEntityMetadataNVPValidNValidVEquals .collapse">
+<h2>testElggApiGettersEntityMetadataNVPValidNValidVEquals()
+        </h2>
+<pre>testElggApiGettersEntityMetadataNVPValidNValidVEquals() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntityMetadataNVPValidNValidVEqualsDouble"></a><div class="element clickable method public method_testElggApiGettersEntityMetadataNVPValidNValidVEqualsDouble" data-toggle="collapse" data-target=".method_testElggApiGettersEntityMetadataNVPValidNValidVEqualsDouble .collapse">
+<h2>testElggApiGettersEntityMetadataNVPValidNValidVEqualsDouble()
+        </h2>
+<pre>testElggApiGettersEntityMetadataNVPValidNValidVEqualsDouble() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntityMetadataNVPValidNValidVEqualsTriple"></a><div class="element clickable method public method_testElggApiGettersEntityMetadataNVPValidNValidVEqualsTriple" data-toggle="collapse" data-target=".method_testElggApiGettersEntityMetadataNVPValidNValidVEqualsTriple .collapse">
+<h2>testElggApiGettersEntityMetadataNVPValidNValidVEqualsTriple()
+        </h2>
+<pre>testElggApiGettersEntityMetadataNVPValidNValidVEqualsTriple() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntityMetadataNVPValidNValidVOperandIn"></a><div class="element clickable method public method_testElggApiGettersEntityMetadataNVPValidNValidVOperandIn" data-toggle="collapse" data-target=".method_testElggApiGettersEntityMetadataNVPValidNValidVOperandIn .collapse">
+<h2>testElggApiGettersEntityMetadataNVPValidNValidVOperandIn()
+        </h2>
+<pre>testElggApiGettersEntityMetadataNVPValidNValidVOperandIn() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntityMetadataNVPValidNValidVPlural"></a><div class="element clickable method public method_testElggApiGettersEntityMetadataNVPValidNValidVPlural" data-toggle="collapse" data-target=".method_testElggApiGettersEntityMetadataNVPValidNValidVPlural .collapse">
+<h2>testElggApiGettersEntityMetadataNVPValidNValidVPlural()
+        </h2>
+<pre>testElggApiGettersEntityMetadataNVPValidNValidVPlural() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntityMetadataNameInvalidMultiple"></a><div class="element clickable method public method_testElggApiGettersEntityMetadataNameInvalidMultiple" data-toggle="collapse" data-target=".method_testElggApiGettersEntityMetadataNameInvalidMultiple .collapse">
+<h2>testElggApiGettersEntityMetadataNameInvalidMultiple()
+        </h2>
+<pre>testElggApiGettersEntityMetadataNameInvalidMultiple() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntityMetadataNameInvalidSingle"></a><div class="element clickable method public method_testElggApiGettersEntityMetadataNameInvalidSingle" data-toggle="collapse" data-target=".method_testElggApiGettersEntityMetadataNameInvalidSingle .collapse">
+<h2>testElggApiGettersEntityMetadataNameInvalidSingle()
+        </h2>
+<pre>testElggApiGettersEntityMetadataNameInvalidSingle() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntityMetadataNameMixedMultiple"></a><div class="element clickable method public method_testElggApiGettersEntityMetadataNameMixedMultiple" data-toggle="collapse" data-target=".method_testElggApiGettersEntityMetadataNameMixedMultiple .collapse">
+<h2>testElggApiGettersEntityMetadataNameMixedMultiple()
+        </h2>
+<pre>testElggApiGettersEntityMetadataNameMixedMultiple() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntityMetadataNameValidMultiple"></a><div class="element clickable method public method_testElggApiGettersEntityMetadataNameValidMultiple" data-toggle="collapse" data-target=".method_testElggApiGettersEntityMetadataNameValidMultiple .collapse">
+<h2>testElggApiGettersEntityMetadataNameValidMultiple()
+        </h2>
+<pre>testElggApiGettersEntityMetadataNameValidMultiple() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntityMetadataNameValidSingle"></a><div class="element clickable method public method_testElggApiGettersEntityMetadataNameValidSingle" data-toggle="collapse" data-target=".method_testElggApiGettersEntityMetadataNameValidSingle .collapse">
+<h2>testElggApiGettersEntityMetadataNameValidSingle()
+        </h2>
+<pre>testElggApiGettersEntityMetadataNameValidSingle() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntityMetadataValueInvalidMultiple"></a><div class="element clickable method public method_testElggApiGettersEntityMetadataValueInvalidMultiple" data-toggle="collapse" data-target=".method_testElggApiGettersEntityMetadataValueInvalidMultiple .collapse">
+<h2>testElggApiGettersEntityMetadataValueInvalidMultiple()
+        </h2>
+<pre>testElggApiGettersEntityMetadataValueInvalidMultiple() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntityMetadataValueInvalidSingle"></a><div class="element clickable method public method_testElggApiGettersEntityMetadataValueInvalidSingle" data-toggle="collapse" data-target=".method_testElggApiGettersEntityMetadataValueInvalidSingle .collapse">
+<h2>testElggApiGettersEntityMetadataValueInvalidSingle()
+        </h2>
+<pre>testElggApiGettersEntityMetadataValueInvalidSingle() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntityMetadataValueMixedMultiple"></a><div class="element clickable method public method_testElggApiGettersEntityMetadataValueMixedMultiple" data-toggle="collapse" data-target=".method_testElggApiGettersEntityMetadataValueMixedMultiple .collapse">
+<h2>testElggApiGettersEntityMetadataValueMixedMultiple()
+        </h2>
+<pre>testElggApiGettersEntityMetadataValueMixedMultiple() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntityMetadataValueValidMultiple"></a><div class="element clickable method public method_testElggApiGettersEntityMetadataValueValidMultiple" data-toggle="collapse" data-target=".method_testElggApiGettersEntityMetadataValueValidMultiple .collapse">
+<h2>testElggApiGettersEntityMetadataValueValidMultiple()
+        </h2>
+<pre>testElggApiGettersEntityMetadataValueValidMultiple() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntityMetadataValueValidSingle"></a><div class="element clickable method public method_testElggApiGettersEntityMetadataValueValidSingle" data-toggle="collapse" data-target=".method_testElggApiGettersEntityMetadataValueValidSingle .collapse">
+<h2>testElggApiGettersEntityMetadataValueValidSingle()
+        </h2>
+<pre>testElggApiGettersEntityMetadataValueValidSingle() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntityNoSubtype"></a><div class="element clickable method public method_testElggApiGettersEntityNoSubtype" data-toggle="collapse" data-target=".method_testElggApiGettersEntityNoSubtype .collapse">
+<h2>testElggApiGettersEntityNoSubtype()
+        </h2>
+<pre>testElggApiGettersEntityNoSubtype() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntityNoValueSubtypeNotSet"></a><div class="element clickable method public method_testElggApiGettersEntityNoValueSubtypeNotSet" data-toggle="collapse" data-target=".method_testElggApiGettersEntityNoValueSubtypeNotSet .collapse">
+<h2>testElggApiGettersEntityNoValueSubtypeNotSet()
+        </h2>
+<pre>testElggApiGettersEntityNoValueSubtypeNotSet() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntityNoValueSubtypeSet"></a><div class="element clickable method public method_testElggApiGettersEntityNoValueSubtypeSet" data-toggle="collapse" data-target=".method_testElggApiGettersEntityNoValueSubtypeSet .collapse">
+<h2>testElggApiGettersEntityNoValueSubtypeSet()
+        </h2>
+<pre>testElggApiGettersEntityNoValueSubtypeSet() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntityRelationshipWithMetadata"></a><div class="element clickable method public method_testElggApiGettersEntityRelationshipWithMetadata" data-toggle="collapse" data-target=".method_testElggApiGettersEntityRelationshipWithMetadata .collapse">
+<h2>testElggApiGettersEntityRelationshipWithMetadata()
+        </h2>
+<pre>testElggApiGettersEntityRelationshipWithMetadata() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntityRelationshipWithMetadataIncludingFakeMetadata"></a><div class="element clickable method public method_testElggApiGettersEntityRelationshipWithMetadataIncludingFakeMetadata" data-toggle="collapse" data-target=".method_testElggApiGettersEntityRelationshipWithMetadataIncludingFakeMetadata .collapse">
+<h2>testElggApiGettersEntityRelationshipWithMetadataIncludingFakeMetadata()
+        </h2>
+<pre>testElggApiGettersEntityRelationshipWithMetadataIncludingFakeMetadata() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntityRelationshipWithMetadataIncludingRealMetadata"></a><div class="element clickable method public method_testElggApiGettersEntityRelationshipWithMetadataIncludingRealMetadata" data-toggle="collapse" data-target=".method_testElggApiGettersEntityRelationshipWithMetadataIncludingRealMetadata .collapse">
+<h2>testElggApiGettersEntityRelationshipWithMetadataIncludingRealMetadata()
+        </h2>
+<pre>testElggApiGettersEntityRelationshipWithMetadataIncludingRealMetadata() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntityRelationshipWithOutMetadata"></a><div class="element clickable method public method_testElggApiGettersEntityRelationshipWithOutMetadata" data-toggle="collapse" data-target=".method_testElggApiGettersEntityRelationshipWithOutMetadata .collapse">
+<h2>testElggApiGettersEntityRelationshipWithOutMetadata()
+        </h2>
+<pre>testElggApiGettersEntityRelationshipWithOutMetadata() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntitySitePlural"></a><div class="element clickable method public method_testElggApiGettersEntitySitePlural" data-toggle="collapse" data-target=".method_testElggApiGettersEntitySitePlural .collapse">
+<h2>testElggApiGettersEntitySitePlural()
+        </h2>
+<pre>testElggApiGettersEntitySitePlural() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntitySitePluralAllInvalid"></a><div class="element clickable method public method_testElggApiGettersEntitySitePluralAllInvalid" data-toggle="collapse" data-target=".method_testElggApiGettersEntitySitePluralAllInvalid .collapse">
+<h2>testElggApiGettersEntitySitePluralAllInvalid()
+        </h2>
+<pre>testElggApiGettersEntitySitePluralAllInvalid() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntitySitePluralSomeInvalid"></a><div class="element clickable method public method_testElggApiGettersEntitySitePluralSomeInvalid" data-toggle="collapse" data-target=".method_testElggApiGettersEntitySitePluralSomeInvalid .collapse">
+<h2>testElggApiGettersEntitySitePluralSomeInvalid()
+        </h2>
+<pre>testElggApiGettersEntitySitePluralSomeInvalid() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntitySiteSingular"></a><div class="element clickable method public method_testElggApiGettersEntitySiteSingular" data-toggle="collapse" data-target=".method_testElggApiGettersEntitySiteSingular .collapse">
+<h2>testElggApiGettersEntitySiteSingular()
+        </h2>
+<pre>testElggApiGettersEntitySiteSingular() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersEntitySiteSingularAny"></a><div class="element clickable method public method_testElggApiGettersEntitySiteSingularAny" data-toggle="collapse" data-target=".method_testElggApiGettersEntitySiteSingularAny .collapse">
+<h2>testElggApiGettersEntitySiteSingularAny()
+        </h2>
+<pre>testElggApiGettersEntitySiteSingularAny() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersInvalidSubtypeValidType"></a><div class="element clickable method public method_testElggApiGettersInvalidSubtypeValidType" data-toggle="collapse" data-target=".method_testElggApiGettersInvalidSubtypeValidType .collapse">
+<h2>testElggApiGettersInvalidSubtypeValidType()
+        </h2>
+<pre>testElggApiGettersInvalidSubtypeValidType() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersInvalidSubtypeValidTypes"></a><div class="element clickable method public method_testElggApiGettersInvalidSubtypeValidTypes" data-toggle="collapse" data-target=".method_testElggApiGettersInvalidSubtypeValidTypes .collapse">
+<h2>testElggApiGettersInvalidSubtypeValidTypes()
+        </h2>
+<pre>testElggApiGettersInvalidSubtypeValidTypes() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersInvalidSubtypesValidType"></a><div class="element clickable method public method_testElggApiGettersInvalidSubtypesValidType" data-toggle="collapse" data-target=".method_testElggApiGettersInvalidSubtypesValidType .collapse">
+<h2>testElggApiGettersInvalidSubtypesValidType()
+        </h2>
+<pre>testElggApiGettersInvalidSubtypesValidType() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersInvalidSubtypesValidTypes"></a><div class="element clickable method public method_testElggApiGettersInvalidSubtypesValidTypes" data-toggle="collapse" data-target=".method_testElggApiGettersInvalidSubtypesValidTypes .collapse">
+<h2>testElggApiGettersInvalidSubtypesValidTypes()
+        </h2>
+<pre>testElggApiGettersInvalidSubtypesValidTypes() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersInvalidTypeUsingType"></a><div class="element clickable method public method_testElggApiGettersInvalidTypeUsingType" data-toggle="collapse" data-target=".method_testElggApiGettersInvalidTypeUsingType .collapse">
+<h2>Test invalid types with singular 'type'.</h2>
+<pre>testElggApiGettersInvalidTypeUsingType() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersInvalidTypeUsingTypesAsArray"></a><div class="element clickable method public method_testElggApiGettersInvalidTypeUsingTypesAsArray" data-toggle="collapse" data-target=".method_testElggApiGettersInvalidTypeUsingTypesAsArray .collapse">
+<h2>Test invalid types with plural 'types' and an array of a single type</h2>
+<pre>testElggApiGettersInvalidTypeUsingTypesAsArray() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersInvalidTypeUsingTypesAsString"></a><div class="element clickable method public method_testElggApiGettersInvalidTypeUsingTypesAsString" data-toggle="collapse" data-target=".method_testElggApiGettersInvalidTypeUsingTypesAsString .collapse">
+<h2>Test invalid types with plural 'types'.</h2>
+<pre>testElggApiGettersInvalidTypeUsingTypesAsString() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersInvalidTypes"></a><div class="element clickable method public method_testElggApiGettersInvalidTypes" data-toggle="collapse" data-target=".method_testElggApiGettersInvalidTypes .collapse">
+<h2>Test invalid types with plural 'types' and an array of a two types</h2>
+<pre>testElggApiGettersInvalidTypes() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersTSPInvalidType"></a><div class="element clickable method public method_testElggApiGettersTSPInvalidType" data-toggle="collapse" data-target=".method_testElggApiGettersTSPInvalidType .collapse">
+<h2>testElggApiGettersTSPInvalidType()
+        </h2>
+<pre>testElggApiGettersTSPInvalidType() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersTSPInvalidTypes"></a><div class="element clickable method public method_testElggApiGettersTSPInvalidTypes" data-toggle="collapse" data-target=".method_testElggApiGettersTSPInvalidTypes .collapse">
+<h2>testElggApiGettersTSPInvalidTypes()
+        </h2>
+<pre>testElggApiGettersTSPInvalidTypes() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersTSPValidTypeInvalidSubtype"></a><div class="element clickable method public method_testElggApiGettersTSPValidTypeInvalidSubtype" data-toggle="collapse" data-target=".method_testElggApiGettersTSPValidTypeInvalidSubtype .collapse">
+<h2>testElggApiGettersTSPValidTypeInvalidSubtype()
+        </h2>
+<pre>testElggApiGettersTSPValidTypeInvalidSubtype() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersTSPValidTypeInvalidSubtypes"></a><div class="element clickable method public method_testElggApiGettersTSPValidTypeInvalidSubtypes" data-toggle="collapse" data-target=".method_testElggApiGettersTSPValidTypeInvalidSubtypes .collapse">
+<h2>testElggApiGettersTSPValidTypeInvalidSubtypes()
+        </h2>
+<pre>testElggApiGettersTSPValidTypeInvalidSubtypes() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggApiGettersTSPValidTypesInvalidSubtypes"></a><div class="element clickable method public method_testElggApiGettersTSPValidTypesInvalidSubtypes" data-toggle="collapse" data-target=".method_testElggApiGettersTSPValidTypesInvalidSubtypes .collapse">
+<h2>testElggApiGettersTSPValidTypesInvalidSubtypes()
+        </h2>
+<pre>testElggApiGettersTSPValidTypesInvalidSubtypes() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggGetAnnotationsAnnotationNames"></a><div class="element clickable method public method_testElggGetAnnotationsAnnotationNames" data-toggle="collapse" data-target=".method_testElggGetAnnotationsAnnotationNames .collapse">
+<h2>testElggGetAnnotationsAnnotationNames()
+        </h2>
+<pre>testElggGetAnnotationsAnnotationNames() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggGetAnnotationsAnnotationOwnerGuids"></a><div class="element clickable method public method_testElggGetAnnotationsAnnotationOwnerGuids" data-toggle="collapse" data-target=".method_testElggGetAnnotationsAnnotationOwnerGuids .collapse">
+<h2>testElggGetAnnotationsAnnotationOwnerGuids()
+        </h2>
+<pre>testElggGetAnnotationsAnnotationOwnerGuids() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggGetAnnotationsAnnotationValues"></a><div class="element clickable method public method_testElggGetAnnotationsAnnotationValues" data-toggle="collapse" data-target=".method_testElggGetAnnotationsAnnotationValues .collapse">
+<h2>testElggGetAnnotationsAnnotationValues()
+        </h2>
+<pre>testElggGetAnnotationsAnnotationValues() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggGetEntitiesBadWheres"></a><div class="element clickable method public method_testElggGetEntitiesBadWheres" data-toggle="collapse" data-target=".method_testElggGetEntitiesBadWheres .collapse">
+<h2>testElggGetEntitiesBadWheres()
+        </h2>
+<pre>testElggGetEntitiesBadWheres() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggGetEntitiesByGuidPlural"></a><div class="element clickable method public method_testElggGetEntitiesByGuidPlural" data-toggle="collapse" data-target=".method_testElggGetEntitiesByGuidPlural .collapse">
+<h2>testElggGetEntitiesByGuidPlural()
+        </h2>
+<pre>testElggGetEntitiesByGuidPlural() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggGetEntitiesByGuidSingular"></a><div class="element clickable method public method_testElggGetEntitiesByGuidSingular" data-toggle="collapse" data-target=".method_testElggGetEntitiesByGuidSingular .collapse">
+<h2>testElggGetEntitiesByGuidSingular()
+        </h2>
+<pre>testElggGetEntitiesByGuidSingular() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggGetEntitiesFromAnnotationCalculationCount"></a><div class="element clickable method public method_testElggGetEntitiesFromAnnotationCalculationCount" data-toggle="collapse" data-target=".method_testElggGetEntitiesFromAnnotationCalculationCount .collapse">
+<h2>testElggGetEntitiesFromAnnotationCalculationCount()
+        </h2>
+<pre>testElggGetEntitiesFromAnnotationCalculationCount() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggGetEntitiesFromAnnotationsCalculateX"></a><div class="element clickable method public method_testElggGetEntitiesFromAnnotationsCalculateX" data-toggle="collapse" data-target=".method_testElggGetEntitiesFromAnnotationsCalculateX .collapse">
+<h2>testElggGetEntitiesFromAnnotationsCalculateX()
+        </h2>
+<pre>testElggGetEntitiesFromAnnotationsCalculateX() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testElggGetEntitiesFromRelationshipCount"></a><div class="element clickable method public method_testElggGetEntitiesFromRelationshipCount" data-toggle="collapse" data-target=".method_testElggGetEntitiesFromRelationshipCount .collapse">
+<h2>testElggGetEntitiesFromRelationshipCount()
+        </h2>
+<pre>testElggGetEntitiesFromRelationshipCount() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_xtestElggApiGettersEntityMetadataNVPValidNValidVEqualsStupid"></a><div class="element clickable method public method_xtestElggApiGettersEntityMetadataNVPValidNValidVEqualsStupid" data-toggle="collapse" data-target=".method_xtestElggApiGettersEntityMetadataNVPValidNValidVEqualsStupid .collapse">
+<h2>xtestElggApiGettersEntityMetadataNVPValidNValidVEqualsStupid()
+        </h2>
+<pre>xtestElggApiGettersEntityMetadataNVPValidNValidVEqualsStupid() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.1.0
+</a> and<br>
+            generated on 2013-12-03T13:06:15+01:00.<br></footer></div>
+</div>
+</body>
+</html>

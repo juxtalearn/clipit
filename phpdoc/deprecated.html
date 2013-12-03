@@ -1,0 +1,1736 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>API Documentation</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="css/template.css" rel="stylesheet" media="all">
+<script src="js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="js/bootstrap.js" type="text/javascript"></script><script src="js/template.js" type="text/javascript"></script><script src="js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="img/favicon.ico">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="index.html">API Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="namespaces/clipit.html"><i class="icon-th"></i> clipit</a></li>
+<li><a href="namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
+<li><a href="packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="packages/Elgg.html"><i class="icon-folder-open"></i> Elgg</a></li>
+<li><a href="packages/Elgg.Core.html"><i class="icon-folder-open"></i> Elgg.Core</a></li>
+<li><a href="packages/Elgg.Core.Plugin.html"><i class="icon-folder-open"></i> Elgg.Core.Plugin</a></li>
+<li><a href="packages/ElggAPIAdmin.html"><i class="icon-folder-open"></i> ElggAPIAdmin</a></li>
+<li><a href="packages/ElggDiagnostics.html"><i class="icon-folder-open"></i> ElggDiagnostics</a></li>
+<li><a href="packages/ElggEmbed.html"><i class="icon-folder-open"></i> ElggEmbed</a></li>
+<li><a href="packages/ElggFile.html"><i class="icon-folder-open"></i> ElggFile</a></li>
+<li><a href="packages/ElggGarbageCollector.html"><i class="icon-folder-open"></i> ElggGarbageCollector</a></li>
+<li><a href="packages/ElggGroups.html"><i class="icon-folder-open"></i> ElggGroups</a></li>
+<li><a href="packages/ElggLogBrowser.html"><i class="icon-folder-open"></i> ElggLogBrowser</a></li>
+<li><a href="packages/ElggLogRotate.html"><i class="icon-folder-open"></i> ElggLogRotate</a></li>
+<li><a href="packages/ElggMessages.html"><i class="icon-folder-open"></i> ElggMessages</a></li>
+<li><a href="packages/ElggNotifications.html"><i class="icon-folder-open"></i> ElggNotifications</a></li>
+<li><a href="packages/ElggProfile.html"><i class="icon-folder-open"></i> ElggProfile</a></li>
+<li><a href="packages/ElggTinyMCE.html"><i class="icon-folder-open"></i> ElggTinyMCE</a></li>
+<li><a href="packages/ElgghtmLawed.html"><i class="icon-folder-open"></i> ElgghtmLawed</a></li>
+<li><a href="packages/Embed%20Video%20Library.html"><i class="icon-folder-open"></i> Embed Video Library</a></li>
+<li><a href="packages/PlaceLocalInclude.html"><i class="icon-folder-open"></i> PlaceLocalInclude</a></li>
+<li><a href="packages/SimpleTest.html"><i class="icon-folder-open"></i> SimpleTest</a></li>
+<li><a href="packages/SimpleTest%0D%0A%20%20%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+     @subpackage UnitTester</a></li>
+<li><a href="packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20MockObjects%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   MockObjects
+   @deprecated</a></li>
+<li><a href="packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester</a></li>
+<li><a href="packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester
+   @deprecated</a></li>
+<li><a href="packages/SimpleTest%0D%0A%20%20%20@subpackage%20MockObjects.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage MockObjects</a></li>
+<li><a href="packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester</a></li>
+<li><a href="packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+     @deprecated</a></li>
+<li><a href="packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@abstract.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @abstract</a></li>
+<li><a href="packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @deprecated</a></li>
+<li><a href="packages/SimpleTest%0D%0A%20%20%20@subpackage%20WebTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage WebTester</a></li>
+<li><a href="packages/%5Bname%5D.html"><i class="icon-folder-open"></i> [name]</a></li>
+<li><a href="packages/clipit.html"><i class="icon-folder-open"></i> clipit</a></li>
+<li><a href="packages/event_calendar.html"><i class="icon-folder-open"></i> event_calendar</a></li>
+<li><a href="packages/pebs.html"><i class="icon-folder-open"></i> pebs</a></li>
+<li><a href="packages/profile_manager.html"><i class="icon-folder-open"></i> profile_manager</a></li>
+<li><a href="packages/veeplay.html"><i class="icon-folder-open"></i> veeplay</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">4473</span></a></li>
+<li><a href="markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">250</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4"><ul class="side-nav nav nav-list">
+<li class="nav-header">Navigation</li>
+<li><a href="#engine%5Cclasses%5CElggAccess.php"><i class="icon-file"></i>engine\classes\ElggAccess.php</a></li>
+<li><a href="#engine%5Cclasses%5CElggCache.php"><i class="icon-file"></i>engine\classes\ElggCache.php</a></li>
+<li><a href="#engine%5Cclasses%5CElggData.php"><i class="icon-file"></i>engine\classes\ElggData.php</a></li>
+<li><a href="#engine%5Cclasses%5CElggDiskFilestore.php"><i class="icon-file"></i>engine\classes\ElggDiskFilestore.php</a></li>
+<li><a href="#engine%5Cclasses%5CElggEntity.php"><i class="icon-file"></i>engine\classes\ElggEntity.php</a></li>
+<li><a href="#engine%5Cclasses%5CElggExtender.php"><i class="icon-file"></i>engine\classes\ElggExtender.php</a></li>
+<li><a href="#engine%5Cclasses%5CElggFileCache.php"><i class="icon-file"></i>engine\classes\ElggFileCache.php</a></li>
+<li><a href="#engine%5Cclasses%5CElggMenuItem.php"><i class="icon-file"></i>engine\classes\ElggMenuItem.php</a></li>
+<li><a href="#engine%5Cclasses%5CElggSite.php"><i class="icon-file"></i>engine\classes\ElggSite.php</a></li>
+<li><a href="#engine%5Cclasses%5CElggUser.php"><i class="icon-file"></i>engine\classes\ElggUser.php</a></li>
+<li><a href="#engine%5Cclasses%5CLoggable.php"><i class="icon-file"></i>engine\classes\Loggable.php</a></li>
+<li><a href="#engine%5Clib%5Cdeprecated-1.7.php"><i class="icon-file"></i>engine\lib\deprecated-1.7.php</a></li>
+<li><a href="#engine%5Clib%5Cdeprecated-1.8.php"><i class="icon-file"></i>engine\lib\deprecated-1.8.php</a></li>
+<li><a href="#engine%5Clib%5Coutput.php"><i class="icon-file"></i>engine\lib\output.php</a></li>
+<li><a href="#mod%5Cembed%5Cviews%5Cdefault%5Cembed%5Caddcontentjs.php"><i class="icon-file"></i>mod\embed\views\default\embed\addcontentjs.php</a></li>
+<li><a href="#mod%5Cgroups%5Ctopicposts.php"><i class="icon-file"></i>mod\groups\topicposts.php</a></li>
+<li><a href="#vendors%5Csimpletest%5Cerrors.php"><i class="icon-file"></i>vendors\simpletest\errors.php</a></li>
+<li><a href="#vendors%5Csimpletest%5Cmock_objects.php"><i class="icon-file"></i>vendors\simpletest\mock_objects.php</a></li>
+<li><a href="#vendors%5Csimpletest%5Csimpletest.php"><i class="icon-file"></i>vendors\simpletest\simpletest.php</a></li>
+<li><a href="#vendors%5Csimpletest%5Ctest_case.php"><i class="icon-file"></i>vendors\simpletest\test_case.php</a></li>
+<li><a href="#vendors%5Csimpletest%5Cunit_tester.php"><i class="icon-file"></i>vendors\simpletest\unit_tester.php</a></li>
+<li><a href="#vendors%5Csimpletest%5Cweb_tester.php"><i class="icon-file"></i>vendors\simpletest\web_tester.php</a></li>
+<li><a href="#views%5Cdefault%5Cgroup%5Csearch%5Cfinishblurb.php"><i class="icon-file"></i>views\default\group\search\finishblurb.php</a></li>
+<li><a href="#views%5Cdefault%5Cgroup%5Csearch%5Cstartblurb.php"><i class="icon-file"></i>views\default\group\search\startblurb.php</a></li>
+<li><a href="#views%5Cdefault%5Cinput%5Cdatepicker.php"><i class="icon-file"></i>views\default\input\datepicker.php</a></li>
+<li><a href="#views%5Cdefault%5Cinput%5Cpulldown.php"><i class="icon-file"></i>views\default\input\pulldown.php</a></li>
+<li><a href="#views%5Cdefault%5Cnavigation%5Cviewtype.php"><i class="icon-file"></i>views\default\navigation\viewtype.php</a></li>
+<li><a href="#views%5Cdefault%5Coutput%5Cpulldown.php"><i class="icon-file"></i>views\default\output\pulldown.php</a></li>
+<li><a href="#views%5Cdefault%5Cprofile%5Cicon.php"><i class="icon-file"></i>views\default\profile\icon.php</a></li>
+<li><a href="#views%5Cdefault%5Cuser%5Csearch%5Cfinishblurb.php"><i class="icon-file"></i>views\default\user\search\finishblurb.php</a></li>
+<li><a href="#views%5Cdefault%5Cuser%5Csearch%5Cstartblurb.php"><i class="icon-file"></i>views\default\user\search\startblurb.php</a></li>
+</ul></div>
+<div class="span8">
+<ul class="breadcrumb">
+<li>
+<a href=""><i class="icon-stop"></i></a><span class="divider">\</span>
+</li>
+<li>Deprecated elements</li>
+</ul>
+<div id="marker-accordion">
+<a name="engine%5Cclasses%5CElggAccess.php" id="engine\classes\ElggAccess.php"></a><h3>
+<i class="icon-file"></i>engine\classes\ElggAccess.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>26</td>
+<td>1.8 Use ElggAccess::getIgnoreAccess()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>51</td>
+<td>1.8 Use ElggAccess:setIgnoreAccess()</td>
+</tr>
+</table></div>
+<a name="engine%5Cclasses%5CElggCache.php" id="engine\classes\ElggCache.php"></a><h3>
+<i class="icon-file"></i>engine\classes\ElggCache.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>35</td>
+<td>1.8 Use ElggCache:setVariable()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>67</td>
+<td>1.8 Use ElggCache::getVariable()</td>
+</tr>
+</table></div>
+<a name="engine%5Cclasses%5CElggData.php" id="engine\classes\ElggData.php"></a><h3>
+<i class="icon-file"></i>engine\classes\ElggData.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>170</td>
+<td>1.8 Use getOwnerGUID() instead</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>43</td>
+<td>1.8 Use initializeAttributes()</td>
+</tr>
+</table></div>
+<a name="engine%5Cclasses%5CElggDiskFilestore.php" id="engine\classes\ElggDiskFilestore.php"></a><h3>
+<i class="icon-file"></i>engine\classes\ElggDiskFilestore.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>277</td>
+<td>1.8 Use ElggDiskFilestore::makeDirectoryRoot()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>315</td>
+<td>1.8 Files are stored by date and guid; no need for this.</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>345</td>
+<td>1.8 Use ElggDiskFilestore::makeFileMatrix()</td>
+</tr>
+</table></div>
+<a name="engine%5Cclasses%5CElggEntity.php" id="engine\classes\ElggEntity.php"></a><h3>
+<i class="icon-file"></i>engine\classes\ElggEntity.php<small style="float: right;padding-right: 10px;">8</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1075</td>
+<td>1.8 Use getOwnerGUID()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1110</td>
+<td>1.8 use setContainerGUID()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1132</td>
+<td>1.8 Use getContainerGUID()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1225</td>
+<td>Use getIconURL()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1241</td>
+<td>1.8 See getIconURL() for the plugin hook to use</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>455</td>
+<td>1.8 Use deleteMetadata()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>557</td>
+<td>1.8 Use ->deleteRelationship()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>812</td>
+<td>1.8 Use ->deleteAnnotations()</td>
+</tr>
+</table></div>
+<a name="engine%5Cclasses%5CElggExtender.php" id="engine\classes\ElggExtender.php"></a><h3>
+<i class="icon-file"></i>engine\classes\ElggExtender.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>111</td>
+<td>1.8 Use getOwnerGUID</td>
+</tr>
+</table></div>
+<a name="engine%5Cclasses%5CElggFileCache.php" id="engine\classes\ElggFileCache.php"></a><h3>
+<i class="icon-file"></i>engine\classes\ElggFileCache.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>40</td>
+<td>1.8 Use ElggFileCache::createFile()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>87</td>
+<td>1.8 Use ElggFileCache::sanitizeFilename()</td>
+</tr>
+</table></div>
+<a name="engine%5Cclasses%5CElggMenuItem.php" id="engine\classes\ElggMenuItem.php"></a><h3>
+<i class="icon-file"></i>engine\classes\ElggMenuItem.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>419</td>
+<td></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>429</td>
+<td></td>
+</tr>
+</table></div>
+<a name="engine%5Cclasses%5CElggSite.php" id="engine\classes\ElggSite.php"></a><h3>
+<i class="icon-file"></i>engine\classes\ElggSite.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>326</td>
+<td>1.8 Was never implemented</td>
+</tr>
+</table></div>
+<a name="engine%5Cclasses%5CElggUser.php" id="engine\classes\ElggUser.php"></a><h3>
+<i class="icon-file"></i>engine\classes\ElggUser.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>508</td>
+<td>1.8 Use getOwnerGUID()</td>
+</tr>
+</table></div>
+<a name="engine%5Cclasses%5CLoggable.php" id="engine\classes\Loggable.php"></a><h3>
+<i class="icon-file"></i>engine\classes\Loggable.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>64</td>
+<td>1.8 Use getOwnerGUID() instead</td>
+</tr>
+</table></div>
+<a name="engine%5Clib%5Cdeprecated-1.7.php" id="engine\lib\deprecated-1.7.php"></a><h3>
+<i class="icon-file"></i>engine\lib\deprecated-1.7.php<small style="float: right;padding-right: 10px;">28</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>101</td>
+<td>1.7 Use elgg_get_entities_from_annotations()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1027</td>
+<td>1.7</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1049</td>
+<td>1.7</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1086</td>
+<td>1.7. Use elgg_extend_view().</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1101</td>
+<td>1.7. Use elgg_get_views().</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1116</td>
+<td>1.7 Use {@link add_submenu_item()}</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>181</td>
+<td>1.7 Use elgg_list_entities_from_annotations()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>19</td>
+<td>1.7. Use elgg_get_entities_from_access_id()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>244</td>
+<td>1.7 Use elgg_get_file_list() instead</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>258</td>
+<td>1.7 final</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>271</td>
+<td>1.7</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>283</td>
+<td>1.7</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>308</td>
+<td>1.7. Use elgg_get_entities().</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>396</td>
+<td>1.7. This is a dangerous function as it defaults to deleting everything.</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>413</td>
+<td>1.7. Use elgg_list_registered_entities().</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>457</td>
+<td>1.7. Use elgg_list_entities().</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>504</td>
+<td>1.7</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>553</td>
+<td>1.7</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>586</td>
+<td>1.7</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>616</td>
+<td>1.7 use elgg_get_entities_from_metadata().</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>690</td>
+<td>1.7. Use elgg_get_entities_from_metadata().</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>70</td>
+<td>1.7</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>755</td>
+<td>1.7</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>777</td>
+<td>1.7</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>825</td>
+<td>1.7</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>869</td>
+<td>1.7 Use elgg_get_entities_from_relationship()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>931</td>
+<td>1.7</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>978</td>
+<td>1.7</td>
+</tr>
+</table></div>
+<a name="engine%5Clib%5Cdeprecated-1.8.php" id="engine\lib\deprecated-1.8.php"></a><h3>
+<i class="icon-file"></i>engine\lib\deprecated-1.8.php<small style="float: right;padding-right: 10px;">149</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1045</td>
+<td>1.8 Use elgg_get_entities_from_metadata()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>105</td>
+<td>1.8 Use {@link elgg_register_action()} instead</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1151</td>
+<td>1.8 Use elgg_get_entities_from_location()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1200</td>
+<td>1.8 Use elgg_list_entities_from_location()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1225</td>
+<td>1.8 Use elgg_get_entities_from_location()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1308</td>
+<td>1.8 Use elgg_list_entities_from_metadata</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1356</td>
+<td>1.8 Use elgg_list_entities_from_metadata() instead</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1382</td>
+<td>1.8 Use the new menu system</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>141</td>
+<td>1.8 Extend admin views manually
+Usage:
+	- To add a control to the main admin panel then extend admin/main
+ - To add a control to a new page create a page which renders a view admin/subpage
+   (where subpage is your new page -
+   nb. some pages already exist that you can extend), extend the main view to point to it,
+   and add controls to your new view.
+At the moment this is essentially a wrapper around elgg_extend_view().</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1422</td>
+<td>1.8 Use the new menu system</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1436</td>
+<td>1.8 Use the new menu system. elgg_view_menu()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1455</td>
+<td>1.8 use elgg_register_menu_item() for the menu 'site'</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1470</td>
+<td>1.8 Use the new menu system</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1483</td>
+<td>1.8 Use elgg_get_friendly_title()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1496</td>
+<td>1.8 Use elgg_view_friendly_time()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1510</td>
+<td>1.8 Don't use this.</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1548</td>
+<td>1.8 Don't use this.</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1571</td>
+<td>1.8 Use elgg_get_page_owner_guid()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1582</td>
+<td>1.8 Use elgg_get_page_owner_entity()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1595</td>
+<td>1.8 Use the 'page_owner', 'system' plugin hook</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1607</td>
+<td>1.8 Use elgg_set_page_owner_guid()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1621</td>
+<td>1.8 Use elgg_set_context()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1637</td>
+<td>1.8 Use elgg_get_context()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>164</td>
+<td>1.8 Use elgg_get_entities_from_annotation_calculation()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1652</td>
+<td>1.8 Use elgg_get_plugin_ids_in_dir() or elgg_get_plugins()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1685</td>
+<td>1.8 Use elgg_generate_plugin_entities() and elgg_set_plugin_priorities()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1719</td>
+<td>1.8 Use elgg_get_calling_plugin_id()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1735</td>
+<td>1.8 Use ElggPlugin->getManifest()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1758</td>
+<td>1.8 Use ElggPlugin->canActivate()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1783</td>
+<td>1.8 Use elgg_get_calling_plugin_entity() or elgg_get_plugin_from_id()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1800</td>
+<td>1.8 use elgg_get_plugins()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1854</td>
+<td>1.8 Use ElggPlugin->activate()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1895</td>
+<td>1.8 Use ElggPlugin->deactivate()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1925</td>
+<td>1.8 Use elgg_is_active_plugin()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1948</td>
+<td>1.8 Use elgg_get_entities_from_private_settings()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>2027</td>
+<td>1.8 Use elgg_get_entities_from_private_settings()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>2113</td>
+<td>1.8 Use elgg_list_entities_from_relationship()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>2153</td>
+<td>1.8 Use elgg_get_entities_from_relationship_count()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>2211</td>
+<td>1.8 Use elgg_list_entities_from_relationship_count()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>2265</td>
+<td>1.8 Use elgg_get_entities_from_relationship()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>2342</td>
+<td>1.8 Use elgg_get_river()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>235</td>
+<td>1.8 Use elgg_get_entities_from_annotation_calculation()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>2409</td>
+<td>1.8 Use elgg_list_river()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>2439</td>
+<td>1.8 This is outdated and uses the systemlog table instead of the river table.
+                Don't use it.</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>2603</td>
+<td>1.8 Use elgg_authenticate</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>2625</td>
+<td>1.8 Use ElggSite::getMembers()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>2647</td>
+<td>1.8 Use ElggSite::listMembers()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>2674</td>
+<td>1.8 Don't use this.</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>2693</td>
+<td>1.8 Don't use this.</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>2712</td>
+<td>1.8 Don't use this.</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>2751</td>
+<td>1.8 Use elgg_get_tags().</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>28</td>
+<td>1.8 Use PHP upgrades for sql changes.</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>2821</td>
+<td>1.8 use elgg_view_tagcloud()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>2850</td>
+<td>1.8 Use elgg_get_entities() instead</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>2877</td>
+<td>1.8 Use elgg_get_entities() instead</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>2909</td>
+<td>1.8 Use elgg_list_entities() instead</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>2935</td>
+<td>1.8 Use elgg_get_entities_from_metadata() instead</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>2950</td>
+<td>1.8 Use elgg_set_user_validation_status()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>2963</td>
+<td>1.8 Hook into the register, user plugin hook and request validation.</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>2998</td>
+<td>1.8 Extend one of the views in core/settings</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>300</td>
+<td>1.8 Use elgg_list_entities_from_annotation_calculation()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3016</td>
+<td>1.8 Use elgg_view_page()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3034</td>
+<td>1.8 use elgg_view_image_block()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3124</td>
+<td>1.8 Use elgg_get_logged_in_user_entity()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3136</td>
+<td>1.8 Use elgg_get_logged_in_user_guid()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3148</td>
+<td>1.8 Use elgg_is_logged_in();</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3159</td>
+<td>1.8 Use elgg_is_admin_logged_in()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3172</td>
+<td>1.8 Use elgg_load_plugins()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3186</td>
+<td>1.8 Use elgg_get_all_plugin_user_settings() or ElggPlugin->getAllUserSettings()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3203</td>
+<td>1.8 Use elgg_set_plugin_user_setting() or ElggPlugin->setUserSetting()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3218</td>
+<td>1.8 Use elgg_unset_plugin_user_setting or ElggPlugin->unsetUserSetting().</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3234</td>
+<td>1.8 Use elgg_get_plugin_user_setting() or ElggPlugin->getUserSetting()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3250</td>
+<td>1.8 Use elgg_set_plugin_setting() or ElggPlugin->setSetting()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3265</td>
+<td>1.8 Use elgg_get_plugin_setting() or ElggPlugin->getSetting()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3280</td>
+<td>1.8 Use elgg_unset_plugin_setting() or ElggPlugin->unsetSetting()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3295</td>
+<td>1.8 Use elgg_unset_all_plugin_settings() or ElggPlugin->unsetAllSettings()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3320</td>
+<td>1.8 Use elgg_get_annotations()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3385</td>
+<td>1.8 Use elgg_list_annotations()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3479</td>
+<td>1.8 Use elgg_get_annotations() and pass 'count' => true</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3501</td>
+<td>1.8 Use elgg_get_annotations() and pass 'annotation_calculation' => 'sum'</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3523</td>
+<td>1.8 Use elgg_get_annotations() and pass 'annotation_calculation' => 'max'</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3546</td>
+<td>1.8 Use elgg_get_annotations() and pass 'annotation_calculation' => 'min'</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>355</td>
+<td>1.8 Use the new menu system.
+This is only used for the site-wide menu.  See {@link add_menu()}.</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3570</td>
+<td>1.8 Use elgg_get_annotations() and pass 'annotation_calculation' => 'min'</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3596</td>
+<td>1.8 Use elgg_get_annotations() and pass anntoation_calculation => <calculation></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3628</td>
+<td>1.8 Use elgg_list_entities_from_annotation_calculation().</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3687</td>
+<td>1.8 Use elgg_set_view_location()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3702</td>
+<td>1.8 Use elgg_register_entity_url_handler()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3723</td>
+<td>1.8 Use elgg_get_metadata()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3769</td>
+<td>1.8 Use elgg_get_metadata()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3799</td>
+<td>1.8 Use elgg_get_metadata()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3822</td>
+<td>1.8 Use elgg_get_metadata_from_id()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3835</td>
+<td>1.8 Use elgg_delete_metadata()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3851</td>
+<td>1.8 Use elgg_delete_metadata()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3867</td>
+<td>1.8 Use elgg_delete_metadata()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3885</td>
+<td>1.8 Use elgg_delete_metadata()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3914</td>
+<td>1.8 Use elgg_get_annotation_from_id()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3927</td>
+<td>1.8 Use elgg_delete_annotations()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3944</td>
+<td>1.8 Use elgg_delete_annotations()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>396</td>
+<td>1.8 Use the new menu system.
+This is used to by {@link remove_menu()} to remove site-wide menu items.</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>3971</td>
+<td>1.8 Use elgg_delete_annotations()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>4010</td>
+<td>1.8 Use {@link elgg_register_page_handler()}</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>4025</td>
+<td>1.8 Use {@link elgg_unregister_page_handler()}</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>4038</td>
+<td>1.8 Use {@link elgg_register_annotation_url_handler()}</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>4055</td>
+<td>1.8 Use {@link elgg_register_extender_url_handler()}</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>4071</td>
+<td>1.8 Use {@link elgg_register_entity_type()}</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>4084</td>
+<td>1.8 Use {@link elgg_register_metadata_url_handler()}</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>4097</td>
+<td>1.8 Use {@link elgg_register_relationship_url_handler()}</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>4114</td>
+<td>1.8 Use {@link elgg_register_simplecache_view()}</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>4127</td>
+<td>1.8 Use {@link elgg_regenerate_simplecache()}</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>4139</td>
+<td>1.8 Use {@link elgg_enable_simplecache()}</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>4151</td>
+<td>1.8 Use {@link elgg_disable_simplecache()}</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>4160</td>
+<td>1.8</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>4168</td>
+<td>1.8</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>4192</td>
+<td>1.8 See {@link ElggPAM}</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>4244</td>
+<td>1.8 use ElggWidget::move()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>429</td>
+<td>1.8 Use the new menu system</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>4307</td>
+<td>1.8 Use elgg_get_widgets()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>4347</td>
+<td>1.8 use elgg_create_widget()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>4393</td>
+<td>1.8 Use elgg_register_widget_type</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>4409</td>
+<td>1.8 Use elgg_unregister_widget_type</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>4422</td>
+<td>1.8 Use elgg_is_widget_type</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>4433</td>
+<td>1.8 Use elgg_get_widget_types</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>4448</td>
+<td>1.8 Use elgg_save_widget_settings</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>4507</td>
+<td>1.8 Don't use.</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>4615</td>
+<td>1.8 Don't use.</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>4638</td>
+<td>1.8 Don't use.</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>4660</td>
+<td>1.8 Use elgg_view_entity()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>4689</td>
+<td>1.8 Use elgg_delete_river()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>4703</td>
+<td>1.8 Use elgg_delete_river()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>4718</td>
+<td>1.8 Use elgg_delete_river()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>472</td>
+<td>1.8 Use explicit register/trigger event functions</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>4733</td>
+<td>1.8 Use elgg_delete_river()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>4749</td>
+<td>1.8</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>494</td>
+<td>1.8 Use elgg_register_event_handler() instead</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>509</td>
+<td>1.8 Use elgg_unregister_event_handler instead</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>524</td>
+<td>1.8 Use elgg_trigger_event() instead</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>554</td>
+<td>1.8 Use elgg_register_plugin_hook_handler() instead
+eg if you want the function "export_user" to be called when the hook "export" for "user" entities
+is run, use:
+		register_plugin_hook("export", "user", "export_user");
+"all" is a valid value for both $hook and $entity_type. "none" is a valid value for $entity_type.
+The export_user function would then be defined as:
+		function export_user($hook, $entity_type, $returnvalue, $params);
+Where $returnvalue is the return value returned by the last function returned by the hook, and
+$params is an array containing a set of parameters (or nothing).</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>569</td>
+<td>1.8 Use elgg_unregister_plugin_hook_handler() instead</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>590</td>
+<td>1.8 Use elgg_trigger_plugin_hook() instead
+trigger_plugin_hook('foo', 'bar', array('param1' => 'value1'), true);</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>633</td>
+<td>1.8 A neat but pointless function</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>699</td>
+<td>1.8 A neat but pointless function</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>759</td>
+<td>1.8 Use elgg_get_guid_based_where_sql();</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>778</td>
+<td>1.8 Use elgg_get_guid_based_where_sql();</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>796</td>
+<td>1.8 Use elgg_get_guid_based_where_sql()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>819</td>
+<td>1.8 Use elgg_get_entities() instead</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>85</td>
+<td>1.8 Use elgg_list_entities_from_access_id()</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>916</td>
+<td>1.8 Use elgg_list_entities() instead</td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>943</td>
+<td>1.8 Use elgg_get_entities_from_metadata()</td>
+</tr>
+</table></div>
+<a name="engine%5Clib%5Coutput.php" id="engine\lib\output.php"></a><h3>
+<i class="icon-file"></i>engine\lib\output.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>58</td>
+<td>Use elgg_autop instead</td>
+</tr>
+</table></div>
+<a name="mod%5Cembed%5Cviews%5Cdefault%5Cembed%5Caddcontentjs.php" id="mod\embed\views\default\embed\addcontentjs.php"></a><h3>
+<i class="icon-file"></i>mod\embed\views\default\embed\addcontentjs.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>0</td>
+<td>1.8</td>
+</tr>
+</table></div>
+<a name="mod%5Cgroups%5Ctopicposts.php" id="mod\groups\topicposts.php"></a><h3>
+<i class="icon-file"></i>mod\groups\topicposts.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>0</td>
+<td>1.8</td>
+</tr>
+</table></div>
+<a name="vendors%5Csimpletest%5Cerrors.php" id="vendors\simpletest\errors.php"></a><h3>
+<i class="icon-file"></i>vendors\simpletest\errors.php<small style="float: right;padding-right: 10px;">2</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>206</td>
+<td></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>216</td>
+<td></td>
+</tr>
+</table></div>
+<a name="vendors%5Csimpletest%5Cmock_objects.php" id="vendors\simpletest\mock_objects.php"></a><h3>
+<i class="icon-file"></i>vendors\simpletest\mock_objects.php<small style="float: right;padding-right: 10px;">3</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1024</td>
+<td></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>853</td>
+<td></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>886</td>
+<td></td>
+</tr>
+</table></div>
+<a name="vendors%5Csimpletest%5Csimpletest.php" id="vendors\simpletest\simpletest.php"></a><h3>
+<i class="icon-file"></i>vendors\simpletest\simpletest.php<small style="float: right;padding-right: 10px;">11</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>139</td>
+<td></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>147</td>
+<td></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>418</td>
+<td></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>425</td>
+<td></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>432</td>
+<td></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>439</td>
+<td></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>446</td>
+<td></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>453</td>
+<td></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>460</td>
+<td></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>467</td>
+<td></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>474</td>
+<td></td>
+</tr>
+</table></div>
+<a name="vendors%5Csimpletest%5Ctest_case.php" id="vendors\simpletest\test_case.php"></a><h3>
+<i class="icon-file"></i>vendors\simpletest\test_case.php<small style="float: right;padding-right: 10px;">7</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>239</td>
+<td></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>292</td>
+<td></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>323</td>
+<td></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>360</td>
+<td></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>520</td>
+<td></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>527</td>
+<td></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>556</td>
+<td></td>
+</tr>
+</table></div>
+<a name="vendors%5Csimpletest%5Cunit_tester.php" id="vendors\simpletest\unit_tester.php"></a><h3>
+<i class="icon-file"></i>vendors\simpletest\unit_tester.php<small style="float: right;padding-right: 10px;">7</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>276</td>
+<td></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>308</td>
+<td></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>332</td>
+<td></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>339</td>
+<td></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>348</td>
+<td></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>357</td>
+<td></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>416</td>
+<td></td>
+</tr>
+</table></div>
+<a name="vendors%5Csimpletest%5Cweb_tester.php" id="vendors\simpletest\web_tester.php"></a><h3>
+<i class="icon-file"></i>vendors\simpletest\web_tester.php<small style="float: right;padding-right: 10px;">6</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1298</td>
+<td></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1324</td>
+<td></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1360</td>
+<td></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1382</td>
+<td></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1405</td>
+<td></td>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>1428</td>
+<td></td>
+</tr>
+</table></div>
+<a name="views%5Cdefault%5Cgroup%5Csearch%5Cfinishblurb.php" id="views\default\group\search\finishblurb.php"></a><h3>
+<i class="icon-file"></i>views\default\group\search\finishblurb.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>0</td>
+<td>1.7</td>
+</tr>
+</table></div>
+<a name="views%5Cdefault%5Cgroup%5Csearch%5Cstartblurb.php" id="views\default\group\search\startblurb.php"></a><h3>
+<i class="icon-file"></i>views\default\group\search\startblurb.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>0</td>
+<td>1.7</td>
+</tr>
+</table></div>
+<a name="views%5Cdefault%5Cinput%5Cdatepicker.php" id="views\default\input\datepicker.php"></a><h3>
+<i class="icon-file"></i>views\default\input\datepicker.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>0</td>
+<td>use input/date instead</td>
+</tr>
+</table></div>
+<a name="views%5Cdefault%5Cinput%5Cpulldown.php" id="views\default\input\pulldown.php"></a><h3>
+<i class="icon-file"></i>views\default\input\pulldown.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>0</td>
+<td>1.8</td>
+</tr>
+</table></div>
+<a name="views%5Cdefault%5Cnavigation%5Cviewtype.php" id="views\default\navigation\viewtype.php"></a><h3>
+<i class="icon-file"></i>views\default\navigation\viewtype.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>0</td>
+<td>1.8 See how file plugin adds a toggle in function file_register_toggle()</td>
+</tr>
+</table></div>
+<a name="views%5Cdefault%5Coutput%5Cpulldown.php" id="views\default\output\pulldown.php"></a><h3>
+<i class="icon-file"></i>views\default\output\pulldown.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>0</td>
+<td>1.8 Use output/dropdown</td>
+</tr>
+</table></div>
+<a name="views%5Cdefault%5Cprofile%5Cicon.php" id="views\default\profile\icon.php"></a><h3>
+<i class="icon-file"></i>views\default\profile\icon.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>0</td>
+<td>1.8 use elgg_view_entity_icon()</td>
+</tr>
+</table></div>
+<a name="views%5Cdefault%5Cuser%5Csearch%5Cfinishblurb.php" id="views\default\user\search\finishblurb.php"></a><h3>
+<i class="icon-file"></i>views\default\user\search\finishblurb.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>0</td>
+<td>1.7</td>
+</tr>
+</table></div>
+<a name="views%5Cdefault%5Cuser%5Csearch%5Cstartblurb.php" id="views\default\user\search\startblurb.php"></a><h3>
+<i class="icon-file"></i>views\default\user\search\startblurb.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>deprecated</td>
+<td>0</td>
+<td>1.7</td>
+</tr>
+</table></div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.1.0
+</a> and<br>
+            generated on 2013-12-03T13:07:08+01:00.<br></footer></div>
+</div>
+</body>
+</html>

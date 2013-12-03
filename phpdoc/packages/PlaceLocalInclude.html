@@ -1,0 +1,358 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>API Documentation » PlaceLocalInclude</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">API Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/clipit.html"><i class="icon-th"></i> clipit</a></li>
+<li><a href="../namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Elgg.html"><i class="icon-folder-open"></i> Elgg</a></li>
+<li><a href="../packages/Elgg.Core.html"><i class="icon-folder-open"></i> Elgg.Core</a></li>
+<li><a href="../packages/Elgg.Core.Plugin.html"><i class="icon-folder-open"></i> Elgg.Core.Plugin</a></li>
+<li><a href="../packages/ElggAPIAdmin.html"><i class="icon-folder-open"></i> ElggAPIAdmin</a></li>
+<li><a href="../packages/ElggDiagnostics.html"><i class="icon-folder-open"></i> ElggDiagnostics</a></li>
+<li><a href="../packages/ElggEmbed.html"><i class="icon-folder-open"></i> ElggEmbed</a></li>
+<li><a href="../packages/ElggFile.html"><i class="icon-folder-open"></i> ElggFile</a></li>
+<li><a href="../packages/ElggGarbageCollector.html"><i class="icon-folder-open"></i> ElggGarbageCollector</a></li>
+<li><a href="../packages/ElggGroups.html"><i class="icon-folder-open"></i> ElggGroups</a></li>
+<li><a href="../packages/ElggLogBrowser.html"><i class="icon-folder-open"></i> ElggLogBrowser</a></li>
+<li><a href="../packages/ElggLogRotate.html"><i class="icon-folder-open"></i> ElggLogRotate</a></li>
+<li><a href="../packages/ElggMessages.html"><i class="icon-folder-open"></i> ElggMessages</a></li>
+<li><a href="../packages/ElggNotifications.html"><i class="icon-folder-open"></i> ElggNotifications</a></li>
+<li><a href="../packages/ElggProfile.html"><i class="icon-folder-open"></i> ElggProfile</a></li>
+<li><a href="../packages/ElggTinyMCE.html"><i class="icon-folder-open"></i> ElggTinyMCE</a></li>
+<li><a href="../packages/ElgghtmLawed.html"><i class="icon-folder-open"></i> ElgghtmLawed</a></li>
+<li><a href="../packages/Embed%20Video%20Library.html"><i class="icon-folder-open"></i> Embed Video Library</a></li>
+<li><a href="../packages/PlaceLocalInclude.html"><i class="icon-folder-open"></i> PlaceLocalInclude</a></li>
+<li><a href="../packages/SimpleTest.html"><i class="icon-folder-open"></i> SimpleTest</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+     @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20MockObjects%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   MockObjects
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20MockObjects.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage MockObjects</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+     @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@abstract.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @abstract</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20WebTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage WebTester</a></li>
+<li><a href="../packages/%5Bname%5D.html"><i class="icon-folder-open"></i> [name]</a></li>
+<li><a href="../packages/clipit.html"><i class="icon-folder-open"></i> clipit</a></li>
+<li><a href="../packages/event_calendar.html"><i class="icon-folder-open"></i> event_calendar</a></li>
+<li><a href="../packages/pebs.html"><i class="icon-folder-open"></i> pebs</a></li>
+<li><a href="../packages/profile_manager.html"><i class="icon-folder-open"></i> profile_manager</a></li>
+<li><a href="../packages/veeplay.html"><i class="icon-folder-open"></i> veeplay</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">4473</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">250</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-map-marker"></i> Packages</li>
+<li>
+<a href="../packages/PlaceLocalInclude.html" title="PlaceLocalInclude"><i class="icon-folder-open"></i>PlaceLocalInclude</a><ul class="nav nav-list nav-packages"></ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-function"></i> Functions</li>
+<li class="function  "><a href="#function_dump_html_tree" title="dump_html_tree() :: "><span class="description">dump_html_tree()
+        </span><pre>dump_html_tree</pre></a></li>
+<li class="function  "><a href="#function_file_get_html" title="file_get_html() :: "><span class="description">file_get_html()
+        </span><pre>file_get_html</pre></a></li>
+<li class="function  "><a href="#function_str_get_html" title="str_get_html() :: "><span class="description">str_get_html()
+        </span><pre>str_get_html</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-class"></i> Classes</li>
+<li><a href="#simple_html_dom_node" title='simple html dom node
+PaperG - added ability for "find" routine to lowercase the value of the selector.'>simple_html_dom_node</a></li>
+<li><a href="#simple_html_dom" title="simple html dom parser
+Paperg - in the find routine: allow us to specify that we want case insensitive testing of the value of the selector.">simple_html_dom</a></li>
+<li class="nav-header">
+<i class="icon-custom icon-constant"></i> Constants</li>
+<li class="constant  "><a href="#constant_DEFAULT_BR_TEXT" title="DEFAULT_BR_TEXT() :: "><span class="description">DEFAULT_BR_TEXT</span><pre>DEFAULT_BR_TEXT</pre></a></li>
+<li class="constant  "><a href="#constant_DEFAULT_TARGET_CHARSET" title="DEFAULT_TARGET_CHARSET() :: "><span class="description">DEFAULT_TARGET_CHARSET</span><pre>DEFAULT_TARGET_CHARSET</pre></a></li>
+<li class="constant  "><a href="#constant_HDOM_INFO_BEGIN" title="HDOM_INFO_BEGIN() :: "><span class="description">HDOM_INFO_BEGIN</span><pre>HDOM_INFO_BEGIN</pre></a></li>
+<li class="constant  "><a href="#constant_HDOM_INFO_END" title="HDOM_INFO_END() :: "><span class="description">HDOM_INFO_END</span><pre>HDOM_INFO_END</pre></a></li>
+<li class="constant  "><a href="#constant_HDOM_INFO_ENDSPACE" title="HDOM_INFO_ENDSPACE() :: "><span class="description">HDOM_INFO_ENDSPACE</span><pre>HDOM_INFO_ENDSPACE</pre></a></li>
+<li class="constant  "><a href="#constant_HDOM_INFO_INNER" title="HDOM_INFO_INNER() :: "><span class="description">HDOM_INFO_INNER</span><pre>HDOM_INFO_INNER</pre></a></li>
+<li class="constant  "><a href="#constant_HDOM_INFO_OUTER" title="HDOM_INFO_OUTER() :: "><span class="description">HDOM_INFO_OUTER</span><pre>HDOM_INFO_OUTER</pre></a></li>
+<li class="constant  "><a href="#constant_HDOM_INFO_QUOTE" title="HDOM_INFO_QUOTE() :: "><span class="description">HDOM_INFO_QUOTE</span><pre>HDOM_INFO_QUOTE</pre></a></li>
+<li class="constant  "><a href="#constant_HDOM_INFO_SPACE" title="HDOM_INFO_SPACE() :: "><span class="description">HDOM_INFO_SPACE</span><pre>HDOM_INFO_SPACE</pre></a></li>
+<li class="constant  "><a href="#constant_HDOM_INFO_TEXT" title="HDOM_INFO_TEXT() :: "><span class="description">HDOM_INFO_TEXT</span><pre>HDOM_INFO_TEXT</pre></a></li>
+<li class="constant  "><a href="#constant_HDOM_QUOTE_DOUBLE" title="HDOM_QUOTE_DOUBLE() :: "><span class="description">HDOM_QUOTE_DOUBLE</span><pre>HDOM_QUOTE_DOUBLE</pre></a></li>
+<li class="constant  "><a href="#constant_HDOM_QUOTE_NO" title="HDOM_QUOTE_NO() :: "><span class="description">HDOM_QUOTE_NO</span><pre>HDOM_QUOTE_NO</pre></a></li>
+<li class="constant  "><a href="#constant_HDOM_QUOTE_SINGLE" title="HDOM_QUOTE_SINGLE() :: "><span class="description">HDOM_QUOTE_SINGLE</span><pre>HDOM_QUOTE_SINGLE</pre></a></li>
+<li class="constant  "><a href="#constant_HDOM_TYPE_COMMENT" title="HDOM_TYPE_COMMENT() :: "><span class="description">HDOM_TYPE_COMMENT</span><pre>HDOM_TYPE_COMMENT</pre></a></li>
+<li class="constant  "><a href="#constant_HDOM_TYPE_ELEMENT" title="HDOM_TYPE_ELEMENT() :: All of the Defines for the classes below."><span class="description">All of the Defines for the classes below.</span><pre>HDOM_TYPE_ELEMENT</pre></a></li>
+<li class="constant  "><a href="#constant_HDOM_TYPE_ENDTAG" title="HDOM_TYPE_ENDTAG() :: "><span class="description">HDOM_TYPE_ENDTAG</span><pre>HDOM_TYPE_ENDTAG</pre></a></li>
+<li class="constant  "><a href="#constant_HDOM_TYPE_ROOT" title="HDOM_TYPE_ROOT() :: "><span class="description">HDOM_TYPE_ROOT</span><pre>HDOM_TYPE_ROOT</pre></a></li>
+<li class="constant  "><a href="#constant_HDOM_TYPE_TEXT" title="HDOM_TYPE_TEXT() :: "><span class="description">HDOM_TYPE_TEXT</span><pre>HDOM_TYPE_TEXT</pre></a></li>
+<li class="constant  "><a href="#constant_HDOM_TYPE_UNKNOWN" title="HDOM_TYPE_UNKNOWN() :: "><span class="description">HDOM_TYPE_UNKNOWN</span><pre>HDOM_TYPE_UNKNOWN</pre></a></li>
+</ul>
+</div>
+<div class="span8 package-contents">
+<ul class="breadcrumb"><li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span><li class="active"><a href="../packages/PlaceLocalInclude.html">PlaceLocalInclude</a></li>
+</li></ul>
+<div class="package-indent">
+<h3>
+<i class="icon-custom icon-function"></i> Functions</h3>
+<a id="function_dump_html_tree"></a><div class="element clickable function  function_dump_html_tree" data-toggle="collapse" data-target=".function_dump_html_tree .collapse">
+<h2>dump_html_tree()
+        </h2>
+<pre>dump_html_tree($node, $show_attr, $deep) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$node</h4></div>
+<div class="subelement argument"><h4>$show_attr</h4></div>
+<div class="subelement argument"><h4>$deep</h4></div>
+</div></div>
+</div>
+<a id="function_file_get_html"></a><div class="element clickable function  function_file_get_html" data-toggle="collapse" data-target=".function_file_get_html .collapse">
+<h2>file_get_html()
+        </h2>
+<pre>file_get_html($url, $use_include_path, $context, $offset, $maxLen, $lowercase, $forceTagsClosed, $target_charset, $stripRN, $defaultBRText) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$url</h4></div>
+<div class="subelement argument"><h4>$use_include_path</h4></div>
+<div class="subelement argument"><h4>$context</h4></div>
+<div class="subelement argument"><h4>$offset</h4></div>
+<div class="subelement argument"><h4>$maxLen</h4></div>
+<div class="subelement argument"><h4>$lowercase</h4></div>
+<div class="subelement argument"><h4>$forceTagsClosed</h4></div>
+<div class="subelement argument"><h4>$target_charset</h4></div>
+<div class="subelement argument"><h4>$stripRN</h4></div>
+<div class="subelement argument"><h4>$defaultBRText</h4></div>
+</div></div>
+</div>
+<a id="function_str_get_html"></a><div class="element clickable function  function_str_get_html" data-toggle="collapse" data-target=".function_str_get_html .collapse">
+<h2>str_get_html()
+        </h2>
+<pre>str_get_html($str, $lowercase, $forceTagsClosed, $target_charset, $stripRN, $defaultBRText) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$str</h4></div>
+<div class="subelement argument"><h4>$lowercase</h4></div>
+<div class="subelement argument"><h4>$forceTagsClosed</h4></div>
+<div class="subelement argument"><h4>$target_charset</h4></div>
+<div class="subelement argument"><h4>$stripRN</h4></div>
+<div class="subelement argument"><h4>$defaultBRText</h4></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
+<div id="simple_html_dom" class="element ajax clickable class">
+<h1>simple_html_dom<a href="../classes/simple_html_dom.html">¶</a>
+</h1>
+<p class="short_description">simple html dom parser
+Paperg - in the find routine: allow us to specify that we want case insensitive testing of the value of the selector.</p>
+<div class="details collapse"></div>
+<a href="../classes/simple_html_dom.html" class="more">« More »</a>
+</div>
+<div id="simple_html_dom_node" class="element ajax clickable class">
+<h1>simple_html_dom_node<a href="../classes/simple_html_dom_node.html">¶</a>
+</h1>
+<p class="short_description">simple html dom node
+PaperG - added ability for "find" routine to lowercase the value of the selector.</p>
+<div class="details collapse"></div>
+<a href="../classes/simple_html_dom_node.html" class="more">« More »</a>
+</div>
+<h3>
+<i class="icon-custom icon-constant"></i> Constants</h3>
+<a id="constant_DEFAULT_BR_TEXT"> </a><div class="element clickable constant  constant_DEFAULT_BR_TEXT" data-toggle="collapse" data-target=".constant_DEFAULT_BR_TEXT .collapse">
+<h2>DEFAULT_BR_TEXT</h2>
+<pre>DEFAULT_BR_TEXT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_DEFAULT_TARGET_CHARSET"> </a><div class="element clickable constant  constant_DEFAULT_TARGET_CHARSET" data-toggle="collapse" data-target=".constant_DEFAULT_TARGET_CHARSET .collapse">
+<h2>DEFAULT_TARGET_CHARSET</h2>
+<pre>DEFAULT_TARGET_CHARSET </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_HDOM_INFO_BEGIN"> </a><div class="element clickable constant  constant_HDOM_INFO_BEGIN" data-toggle="collapse" data-target=".constant_HDOM_INFO_BEGIN .collapse">
+<h2>HDOM_INFO_BEGIN</h2>
+<pre>HDOM_INFO_BEGIN </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_HDOM_INFO_END"> </a><div class="element clickable constant  constant_HDOM_INFO_END" data-toggle="collapse" data-target=".constant_HDOM_INFO_END .collapse">
+<h2>HDOM_INFO_END</h2>
+<pre>HDOM_INFO_END </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_HDOM_INFO_ENDSPACE"> </a><div class="element clickable constant  constant_HDOM_INFO_ENDSPACE" data-toggle="collapse" data-target=".constant_HDOM_INFO_ENDSPACE .collapse">
+<h2>HDOM_INFO_ENDSPACE</h2>
+<pre>HDOM_INFO_ENDSPACE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_HDOM_INFO_INNER"> </a><div class="element clickable constant  constant_HDOM_INFO_INNER" data-toggle="collapse" data-target=".constant_HDOM_INFO_INNER .collapse">
+<h2>HDOM_INFO_INNER</h2>
+<pre>HDOM_INFO_INNER </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_HDOM_INFO_OUTER"> </a><div class="element clickable constant  constant_HDOM_INFO_OUTER" data-toggle="collapse" data-target=".constant_HDOM_INFO_OUTER .collapse">
+<h2>HDOM_INFO_OUTER</h2>
+<pre>HDOM_INFO_OUTER </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_HDOM_INFO_QUOTE"> </a><div class="element clickable constant  constant_HDOM_INFO_QUOTE" data-toggle="collapse" data-target=".constant_HDOM_INFO_QUOTE .collapse">
+<h2>HDOM_INFO_QUOTE</h2>
+<pre>HDOM_INFO_QUOTE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_HDOM_INFO_SPACE"> </a><div class="element clickable constant  constant_HDOM_INFO_SPACE" data-toggle="collapse" data-target=".constant_HDOM_INFO_SPACE .collapse">
+<h2>HDOM_INFO_SPACE</h2>
+<pre>HDOM_INFO_SPACE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_HDOM_INFO_TEXT"> </a><div class="element clickable constant  constant_HDOM_INFO_TEXT" data-toggle="collapse" data-target=".constant_HDOM_INFO_TEXT .collapse">
+<h2>HDOM_INFO_TEXT</h2>
+<pre>HDOM_INFO_TEXT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_HDOM_QUOTE_DOUBLE"> </a><div class="element clickable constant  constant_HDOM_QUOTE_DOUBLE" data-toggle="collapse" data-target=".constant_HDOM_QUOTE_DOUBLE .collapse">
+<h2>HDOM_QUOTE_DOUBLE</h2>
+<pre>HDOM_QUOTE_DOUBLE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_HDOM_QUOTE_NO"> </a><div class="element clickable constant  constant_HDOM_QUOTE_NO" data-toggle="collapse" data-target=".constant_HDOM_QUOTE_NO .collapse">
+<h2>HDOM_QUOTE_NO</h2>
+<pre>HDOM_QUOTE_NO </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_HDOM_QUOTE_SINGLE"> </a><div class="element clickable constant  constant_HDOM_QUOTE_SINGLE" data-toggle="collapse" data-target=".constant_HDOM_QUOTE_SINGLE .collapse">
+<h2>HDOM_QUOTE_SINGLE</h2>
+<pre>HDOM_QUOTE_SINGLE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_HDOM_TYPE_COMMENT"> </a><div class="element clickable constant  constant_HDOM_TYPE_COMMENT" data-toggle="collapse" data-target=".constant_HDOM_TYPE_COMMENT .collapse">
+<h2>HDOM_TYPE_COMMENT</h2>
+<pre>HDOM_TYPE_COMMENT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_HDOM_TYPE_ELEMENT"> </a><div class="element clickable constant  constant_HDOM_TYPE_ELEMENT" data-toggle="collapse" data-target=".constant_HDOM_TYPE_ELEMENT .collapse">
+<h2>All of the Defines for the classes below.</h2>
+<pre>HDOM_TYPE_ELEMENT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>author</th>
+<td><a href="mailto:me578022@gmail.com">S.C. Chen</a></td>
+</tr></table>
+</div></div>
+</div>
+<a id="constant_HDOM_TYPE_ENDTAG"> </a><div class="element clickable constant  constant_HDOM_TYPE_ENDTAG" data-toggle="collapse" data-target=".constant_HDOM_TYPE_ENDTAG .collapse">
+<h2>HDOM_TYPE_ENDTAG</h2>
+<pre>HDOM_TYPE_ENDTAG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_HDOM_TYPE_ROOT"> </a><div class="element clickable constant  constant_HDOM_TYPE_ROOT" data-toggle="collapse" data-target=".constant_HDOM_TYPE_ROOT .collapse">
+<h2>HDOM_TYPE_ROOT</h2>
+<pre>HDOM_TYPE_ROOT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_HDOM_TYPE_TEXT"> </a><div class="element clickable constant  constant_HDOM_TYPE_TEXT" data-toggle="collapse" data-target=".constant_HDOM_TYPE_TEXT .collapse">
+<h2>HDOM_TYPE_TEXT</h2>
+<pre>HDOM_TYPE_TEXT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_HDOM_TYPE_UNKNOWN"> </a><div class="element clickable constant  constant_HDOM_TYPE_UNKNOWN" data-toggle="collapse" data-target=".constant_HDOM_TYPE_UNKNOWN .collapse">
+<h2>HDOM_TYPE_UNKNOWN</h2>
+<pre>HDOM_TYPE_UNKNOWN </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.1.0
+</a> and<br>
+            generated on 2013-12-03T13:06:01+01:00.<br></footer></div>
+</div>
+</body>
+</html>

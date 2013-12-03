@@ -1,0 +1,686 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>API Documentation » \TupleSpace</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">API Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/clipit.html"><i class="icon-th"></i> clipit</a></li>
+<li><a href="../namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Elgg.html"><i class="icon-folder-open"></i> Elgg</a></li>
+<li><a href="../packages/Elgg.Core.html"><i class="icon-folder-open"></i> Elgg.Core</a></li>
+<li><a href="../packages/Elgg.Core.Plugin.html"><i class="icon-folder-open"></i> Elgg.Core.Plugin</a></li>
+<li><a href="../packages/ElggAPIAdmin.html"><i class="icon-folder-open"></i> ElggAPIAdmin</a></li>
+<li><a href="../packages/ElggDiagnostics.html"><i class="icon-folder-open"></i> ElggDiagnostics</a></li>
+<li><a href="../packages/ElggEmbed.html"><i class="icon-folder-open"></i> ElggEmbed</a></li>
+<li><a href="../packages/ElggFile.html"><i class="icon-folder-open"></i> ElggFile</a></li>
+<li><a href="../packages/ElggGarbageCollector.html"><i class="icon-folder-open"></i> ElggGarbageCollector</a></li>
+<li><a href="../packages/ElggGroups.html"><i class="icon-folder-open"></i> ElggGroups</a></li>
+<li><a href="../packages/ElggLogBrowser.html"><i class="icon-folder-open"></i> ElggLogBrowser</a></li>
+<li><a href="../packages/ElggLogRotate.html"><i class="icon-folder-open"></i> ElggLogRotate</a></li>
+<li><a href="../packages/ElggMessages.html"><i class="icon-folder-open"></i> ElggMessages</a></li>
+<li><a href="../packages/ElggNotifications.html"><i class="icon-folder-open"></i> ElggNotifications</a></li>
+<li><a href="../packages/ElggProfile.html"><i class="icon-folder-open"></i> ElggProfile</a></li>
+<li><a href="../packages/ElggTinyMCE.html"><i class="icon-folder-open"></i> ElggTinyMCE</a></li>
+<li><a href="../packages/ElgghtmLawed.html"><i class="icon-folder-open"></i> ElgghtmLawed</a></li>
+<li><a href="../packages/Embed%20Video%20Library.html"><i class="icon-folder-open"></i> Embed Video Library</a></li>
+<li><a href="../packages/PlaceLocalInclude.html"><i class="icon-folder-open"></i> PlaceLocalInclude</a></li>
+<li><a href="../packages/SimpleTest.html"><i class="icon-folder-open"></i> SimpleTest</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+     @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20MockObjects%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   MockObjects
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20MockObjects.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage MockObjects</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+     @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@abstract.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @abstract</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20WebTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage WebTester</a></li>
+<li><a href="../packages/%5Bname%5D.html"><i class="icon-folder-open"></i> [name]</a></li>
+<li><a href="../packages/clipit.html"><i class="icon-folder-open"></i> clipit</a></li>
+<li><a href="../packages/event_calendar.html"><i class="icon-folder-open"></i> event_calendar</a></li>
+<li><a href="../packages/pebs.html"><i class="icon-folder-open"></i> pebs</a></li>
+<li><a href="../packages/profile_manager.html"><i class="icon-folder-open"></i> profile_manager</a></li>
+<li><a href="../packages/veeplay.html"><i class="icon-folder-open"></i> veeplay</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">4473</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">250</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___construct" title="__construct() :: "><span class="description">__construct()
+        </span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#method_changeSpaceVersion" title="changeSpaceVersion() :: "><span class="description">changeSpaceVersion()
+        </span><pre>changeSpaceVersion()</pre></a></li>
+<li class="method public "><a href="#method_closeSocket" title="closeSocket() :: "><span class="description">closeSocket()
+        </span><pre>closeSocket()</pre></a></li>
+<li class="method public "><a href="#method_createNewVersion" title="createNewVersion() :: Es wird fuer einen Space des TupleSpaces eine neue Version angelegt. Die
+aktuellen Versionen werden dann aus dem SpaceManager geholt und lokal in
+spaces[] geschrieben."><span class="description">Es wird fuer einen Space des TupleSpaces eine neue Version angelegt. Die
+aktuellen Versionen werden dann aus dem SpaceManager geholt und lokal in
+spaces[] geschrieben.</span><pre>createNewVersion()</pre></a></li>
+<li class="method public "><a href="#method_createNewVersionForAllSpaces" title="createNewVersionForAllSpaces() :: "><span class="description">createNewVersionForAllSpaces()
+        </span><pre>createNewVersionForAllSpaces()</pre></a></li>
+<li class="method public "><a href="#method_getAllSpaces" title="getAllSpaces() :: "><span class="description">getAllSpaces()
+        </span><pre>getAllSpaces()</pre></a></li>
+<li class="method public "><a href="#method_getAllUserVersions" title="getAllUserVersions() :: "><span class="description">getAllUserVersions()
+        </span><pre>getAllUserVersions()</pre></a></li>
+<li class="method public "><a href="#method_getAllVersions" title="getAllVersions() :: "><span class="description">getAllVersions()
+        </span><pre>getAllVersions()</pre></a></li>
+<li class="method public "><a href="#method_getChangedTuple" title="getChangedTuple() :: "><span class="description">getChangedTuple()
+        </span><pre>getChangedTuple()</pre></a></li>
+<li class="method public "><a href="#method_getCurrentUserVersion" title="getCurrentUserVersion() :: "><span class="description">getCurrentUserVersion()
+        </span><pre>getCurrentUserVersion()</pre></a></li>
+<li class="method public "><a href="#method_getCurrentVersion" title="getCurrentVersion() :: "><span class="description">getCurrentVersion()
+        </span><pre>getCurrentVersion()</pre></a></li>
+<li class="method public "><a href="#method_getDeletedTuple" title="getDeletedTuple() :: "><span class="description">getDeletedTuple()
+        </span><pre>getDeletedTuple()</pre></a></li>
+<li class="method public "><a href="#method_getMyRights" title="getMyRights() :: "><span class="description">getMyRights()
+        </span><pre>getMyRights()</pre></a></li>
+<li class="method public "><a href="#method_getNewAndChangedTuple" title="getNewAndChangedTuple() :: "><span class="description">getNewAndChangedTuple()
+        </span><pre>getNewAndChangedTuple()</pre></a></li>
+<li class="method public "><a href="#method_getProperty" title="getProperty() :: "><span class="description">getProperty()
+        </span><pre>getProperty()</pre></a></li>
+<li class="method public "><a href="#method_getSpaces" title="getSpaces() :: Gibt alle Spaces des TupleSpaces zur�ck"><span class="description">Gibt alle Spaces des TupleSpaces zur�ck</span><pre>getSpaces()</pre></a></li>
+<li class="method public "><a href="#method_getUsers" title="getUsers() :: Gibt ein Array mit allen registrierten Benutzer zurueck"><span class="description">Gibt ein Array mit allen registrierten Benutzer zurueck</span><pre>getUsers()</pre></a></li>
+<li class="method public "><a href="#method_getVersionTS" title="getVersionTS() :: "><span class="description">getVersionTS()
+        </span><pre>getVersionTS()</pre></a></li>
+<li class="method public "><a href="#method_read" title="read() :: "><span class="description">read()
+        </span><pre>read()</pre></a></li>
+<li class="method public "><a href="#method_readAll" title="readAll() :: "><span class="description">readAll()
+        </span><pre>readAll()</pre></a></li>
+<li class="method public "><a href="#method_readTupleById" title="readTupleById() :: "><span class="description">readTupleById()
+        </span><pre>readTupleById()</pre></a></li>
+<li class="method public "><a href="#method_setLock" title="setLock() :: Setzt einen Lock (true/false) auf die Version."><span class="description">Setzt einen Lock (true/false) auf die Version.</span><pre>setLock()</pre></a></li>
+<li class="method public "><a href="#method_setSpaceVersion" title="setSpaceVersion() :: Setzt auf dem SpaceManager ist Version des Spaces. Die Version muss aber
+im Vector des Spaces vorhanden sein!"><span class="description">Setzt auf dem SpaceManager ist Version des Spaces. Die Version muss aber
+im Vector des Spaces vorhanden sein!</span><pre>setSpaceVersion()</pre></a></li>
+<li class="method public "><a href="#method_setUserRights" title="setUserRights() :: "><span class="description">setUserRights()
+        </span><pre>setUserRights()</pre></a></li>
+<li class="method public "><a href="#method_shareVersionWithUsers" title="shareVersionWithUsers() :: "><span class="description">shareVersionWithUsers()
+        </span><pre>shareVersionWithUsers()</pre></a></li>
+<li class="method public "><a href="#method_take" title="take() :: "><span class="description">take()
+        </span><pre>take()</pre></a></li>
+<li class="method public "><a href="#method_takeAll" title="takeAll() :: "><span class="description">takeAll()
+        </span><pre>takeAll()</pre></a></li>
+<li class="method public "><a href="#method_takeTupleById" title="takeTupleById() :: "><span class="description">takeTupleById()
+        </span><pre>takeTupleById()</pre></a></li>
+<li class="method public "><a href="#method_update" title="update() :: "><span class="description">update()
+        </span><pre>update()</pre></a></li>
+<li class="method public "><a href="#method_waitToRead" title="waitToRead() :: "><span class="description">waitToRead()
+        </span><pre>waitToRead()</pre></a></li>
+<li class="method public "><a href="#method_waitToTake" title="waitToTake() :: "><span class="description">waitToTake()
+        </span><pre>waitToTake()</pre></a></li>
+<li class="method public "><a href="#method_write" title="write() :: "><span class="description">write()
+        </span><pre>write()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul>
+<li class="method private "><a href="#method_getSpaceIds" title="getSpaceIds() :: "><span class="description">getSpaceIds()
+        </span><pre>getSpaceIds()</pre></a></li>
+<li class="method private "><a href="#method_getSpaceNames" title="getSpaceNames() :: "><span class="description">getSpaceNames()
+        </span><pre>getSpaceNames()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul></ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul>
+<li class="property private "><a href="#property_connector" title="$connector() :: "><span class="description"></span><pre>$connector</pre></a></li>
+<li class="property private "><a href="#property_spaces" title="$spaces() :: "><span class="description"></span><pre>$spaces</pre></a></li>
+<li class="property private "><a href="#property_username" title="$username() :: "><span class="description"></span><pre>$username</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-constant"></i> Constants
+                    <ul>
+<li class="constant  "><a href="#constant_DEFAULT_PASSWORD" title="DEFAULT_PASSWORD() :: "><span class="description">DEFAULT_PASSWORD</span><pre>DEFAULT_PASSWORD</pre></a></li>
+<li class="constant  "><a href="#constant_DEFAULT_SPACE" title="DEFAULT_SPACE() :: "><span class="description">DEFAULT_SPACE</span><pre>DEFAULT_SPACE</pre></a></li>
+<li class="constant  "><a href="#constant_DEFAULT_USER" title="DEFAULT_USER() :: "><span class="description">DEFAULT_USER</span><pre>DEFAULT_USER</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\TupleSpace"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/TupleSpace.html">TupleSpace</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description"></p>
+<div class="details">
+<div class="long_description"></div>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>__construct()
+        </h2>
+<pre>__construct($spaces, $host, $port, $username, $password) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$spaces</h4></div>
+<div class="subelement argument"><h4>$host</h4></div>
+<div class="subelement argument"><h4>$port</h4></div>
+<div class="subelement argument"><h4>$username</h4></div>
+<div class="subelement argument"><h4>$password</h4></div>
+</div></div>
+</div>
+<a id="method_changeSpaceVersion"></a><div class="element clickable method public method_changeSpaceVersion" data-toggle="collapse" data-target=".method_changeSpaceVersion .collapse">
+<h2>changeSpaceVersion()
+        </h2>
+<pre>changeSpaceVersion($space, $versionsId, $major, $minor, $branch, $name) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$space</h4></div>
+<div class="subelement argument"><h4>$versionsId</h4></div>
+<div class="subelement argument"><h4>$major</h4></div>
+<div class="subelement argument"><h4>$minor</h4></div>
+<div class="subelement argument"><h4>$branch</h4></div>
+<div class="subelement argument"><h4>$name</h4></div>
+</div></div>
+</div>
+<a id="method_closeSocket"></a><div class="element clickable method public method_closeSocket" data-toggle="collapse" data-target=".method_closeSocket .collapse">
+<h2>closeSocket()
+        </h2>
+<pre>closeSocket() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_createNewVersion"></a><div class="element clickable method public method_createNewVersion" data-toggle="collapse" data-target=".method_createNewVersion .collapse">
+<h2>Es wird fuer einen Space des TupleSpaces eine neue Version angelegt. Die
+aktuellen Versionen werden dann aus dem SpaceManager geholt und lokal in
+spaces[] geschrieben.</h2>
+<pre>createNewVersion($mySpace) : <a href="neue.html">\neue</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$mySpace</h4></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="TupleSpaceException.html">\TupleSpaceException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="neue.html">\neue</a></code>Version des TupelSpace</div>
+</div></div>
+</div>
+<a id="method_createNewVersionForAllSpaces"></a><div class="element clickable method public method_createNewVersionForAllSpaces" data-toggle="collapse" data-target=".method_createNewVersionForAllSpaces .collapse">
+<h2>createNewVersionForAllSpaces()
+        </h2>
+<pre>createNewVersionForAllSpaces() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_getAllSpaces"></a><div class="element clickable method public method_getAllSpaces" data-toggle="collapse" data-target=".method_getAllSpaces .collapse">
+<h2>getAllSpaces()
+        </h2>
+<pre>getAllSpaces() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_getAllUserVersions"></a><div class="element clickable method public method_getAllUserVersions" data-toggle="collapse" data-target=".method_getAllUserVersions .collapse">
+<h2>getAllUserVersions()
+        </h2>
+<pre>getAllUserVersions($space) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$space</h4></div>
+</div></div>
+</div>
+<a id="method_getAllVersions"></a><div class="element clickable method public method_getAllVersions" data-toggle="collapse" data-target=".method_getAllVersions .collapse">
+<h2>getAllVersions()
+        </h2>
+<pre>getAllVersions($space) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$space</h4></div>
+</div></div>
+</div>
+<a id="method_getChangedTuple"></a><div class="element clickable method public method_getChangedTuple" data-toggle="collapse" data-target=".method_getChangedTuple .collapse">
+<h2>getChangedTuple()
+        </h2>
+<pre>getChangedTuple($version1, $version2, $tupleTemplate) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$version1</h4></div>
+<div class="subelement argument"><h4>$version2</h4></div>
+<div class="subelement argument"><h4>$tupleTemplate</h4></div>
+</div></div>
+</div>
+<a id="method_getCurrentUserVersion"></a><div class="element clickable method public method_getCurrentUserVersion" data-toggle="collapse" data-target=".method_getCurrentUserVersion .collapse">
+<h2>getCurrentUserVersion()
+        </h2>
+<pre>getCurrentUserVersion($space) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$space</h4></div>
+</div></div>
+</div>
+<a id="method_getCurrentVersion"></a><div class="element clickable method public method_getCurrentVersion" data-toggle="collapse" data-target=".method_getCurrentVersion .collapse">
+<h2>getCurrentVersion()
+        </h2>
+<pre>getCurrentVersion($space) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$space</h4></div>
+</div></div>
+</div>
+<a id="method_getDeletedTuple"></a><div class="element clickable method public method_getDeletedTuple" data-toggle="collapse" data-target=".method_getDeletedTuple .collapse">
+<h2>getDeletedTuple()
+        </h2>
+<pre>getDeletedTuple($version1, $version2, $tupleTemplate) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$version1</h4></div>
+<div class="subelement argument"><h4>$version2</h4></div>
+<div class="subelement argument"><h4>$tupleTemplate</h4></div>
+</div></div>
+</div>
+<a id="method_getMyRights"></a><div class="element clickable method public method_getMyRights" data-toggle="collapse" data-target=".method_getMyRights .collapse">
+<h2>getMyRights()
+        </h2>
+<pre>getMyRights($space) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$space</h4></div>
+</div></div>
+</div>
+<a id="method_getNewAndChangedTuple"></a><div class="element clickable method public method_getNewAndChangedTuple" data-toggle="collapse" data-target=".method_getNewAndChangedTuple .collapse">
+<h2>getNewAndChangedTuple()
+        </h2>
+<pre>getNewAndChangedTuple($version1, $version2, $tupleTemplate) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$version1</h4></div>
+<div class="subelement argument"><h4>$version2</h4></div>
+<div class="subelement argument"><h4>$tupleTemplate</h4></div>
+</div></div>
+</div>
+<a id="method_getProperty"></a><div class="element clickable method public method_getProperty" data-toggle="collapse" data-target=".method_getProperty .collapse">
+<h2>getProperty()
+        </h2>
+<pre>getProperty($propertie) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$propertie</h4></div>
+</div></div>
+</div>
+<a id="method_getSpaces"></a><div class="element clickable method public method_getSpaces" data-toggle="collapse" data-target=".method_getSpaces .collapse">
+<h2>Gibt alle Spaces des TupleSpaces zur�ck</h2>
+<pre>getSpaces() : <a href="alle.html">\alle</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="TupleSpaceException.html">\TupleSpaceException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="alle.html">\alle</a></code>Spaces</div>
+</div></div>
+</div>
+<a id="method_getUsers"></a><div class="element clickable method public method_getUsers" data-toggle="collapse" data-target=".method_getUsers .collapse">
+<h2>Gibt ein Array mit allen registrierten Benutzer zurueck</h2>
+<pre>getUsers() : Array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>Array</code>mit Benutzernamen</div>
+</div></div>
+</div>
+<a id="method_getVersionTS"></a><div class="element clickable method public method_getVersionTS" data-toggle="collapse" data-target=".method_getVersionTS .collapse">
+<h2>getVersionTS()
+        </h2>
+<pre>getVersionTS($space, $all, $user) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$space</h4></div>
+<div class="subelement argument"><h4>$all</h4></div>
+<div class="subelement argument"><h4>$user</h4></div>
+</div></div>
+</div>
+<a id="method_read"></a><div class="element clickable method public method_read" data-toggle="collapse" data-target=".method_read .collapse">
+<h2>read()
+        </h2>
+<pre>read($tuple, $readThisSpaces) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$tuple</h4></div>
+<div class="subelement argument"><h4>$readThisSpaces</h4></div>
+</div></div>
+</div>
+<a id="method_readAll"></a><div class="element clickable method public method_readAll" data-toggle="collapse" data-target=".method_readAll .collapse">
+<h2>readAll()
+        </h2>
+<pre>readAll(\Tuple $t, array $readThisSpaces) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$t</h4></div>
+<div class="subelement argument"><h4>$readThisSpaces</h4></div>
+</div></div>
+</div>
+<a id="method_readTupleById"></a><div class="element clickable method public method_readTupleById" data-toggle="collapse" data-target=".method_readTupleById .collapse">
+<h2>readTupleById()
+        </h2>
+<pre>readTupleById($tupleId) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$tupleId</h4></div>
+</div></div>
+</div>
+<a id="method_setLock"></a><div class="element clickable method public method_setLock" data-toggle="collapse" data-target=".method_setLock .collapse">
+<h2>Setzt einen Lock (true/false) auf die Version.</h2>
+<pre>setLock($version, $lock) : <a href="Erfolg.html">\Erfolg</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$version</h4></div>
+<div class="subelement argument"><h4>$lock</h4></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="TupleSpaceException.html">\TupleSpaceException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="Erfolg.html">\Erfolg</a></code>des lock/unlock</div>
+</div></div>
+</div>
+<a id="method_setSpaceVersion"></a><div class="element clickable method public method_setSpaceVersion" data-toggle="collapse" data-target=".method_setSpaceVersion .collapse">
+<h2>Setzt auf dem SpaceManager ist Version des Spaces. Die Version muss aber
+im Vector des Spaces vorhanden sein!</h2>
+<pre>setSpaceVersion($mySpace, $myVersion) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$mySpace</h4></div>
+<div class="subelement argument"><h4>$myVersion</h4></div>
+</div></div>
+</div>
+<a id="method_setUserRights"></a><div class="element clickable method public method_setUserRights" data-toggle="collapse" data-target=".method_setUserRights .collapse">
+<h2>setUserRights()
+        </h2>
+<pre>setUserRights($userArray, $rightTypeArray, $space) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$userArray</h4></div>
+<div class="subelement argument"><h4>$rightTypeArray</h4></div>
+<div class="subelement argument"><h4>$space</h4></div>
+</div></div>
+</div>
+<a id="method_shareVersionWithUsers"></a><div class="element clickable method public method_shareVersionWithUsers" data-toggle="collapse" data-target=".method_shareVersionWithUsers .collapse">
+<h2>shareVersionWithUsers()
+        </h2>
+<pre>shareVersionWithUsers($users, $space) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$users</h4></div>
+<div class="subelement argument"><h4>$space</h4></div>
+</div></div>
+</div>
+<a id="method_take"></a><div class="element clickable method public method_take" data-toggle="collapse" data-target=".method_take .collapse">
+<h2>take()
+        </h2>
+<pre>take(\Tuple $t, array $readThisSpaces) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$t</h4></div>
+<div class="subelement argument"><h4>$readThisSpaces</h4></div>
+</div></div>
+</div>
+<a id="method_takeAll"></a><div class="element clickable method public method_takeAll" data-toggle="collapse" data-target=".method_takeAll .collapse">
+<h2>takeAll()
+        </h2>
+<pre>takeAll($tuple, array $readThisSpaces) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$tuple</h4></div>
+<div class="subelement argument"><h4>$readThisSpaces</h4></div>
+</div></div>
+</div>
+<a id="method_takeTupleById"></a><div class="element clickable method public method_takeTupleById" data-toggle="collapse" data-target=".method_takeTupleById .collapse">
+<h2>takeTupleById()
+        </h2>
+<pre>takeTupleById($tupleID) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$tupleID</h4></div>
+</div></div>
+</div>
+<a id="method_update"></a><div class="element clickable method public method_update" data-toggle="collapse" data-target=".method_update .collapse">
+<h2>update()
+        </h2>
+<pre>update($tupleId, $tuple) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$tupleId</h4></div>
+<div class="subelement argument"><h4>$tuple</h4></div>
+</div></div>
+</div>
+<a id="method_waitToRead"></a><div class="element clickable method public method_waitToRead" data-toggle="collapse" data-target=".method_waitToRead .collapse">
+<h2>waitToRead()
+        </h2>
+<pre>waitToRead(\Tuple $t, $timeout, array $readThisSpaces) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$t</h4></div>
+<div class="subelement argument"><h4>$timeout</h4></div>
+<div class="subelement argument"><h4>$readThisSpaces</h4></div>
+</div></div>
+</div>
+<a id="method_waitToTake"></a><div class="element clickable method public method_waitToTake" data-toggle="collapse" data-target=".method_waitToTake .collapse">
+<h2>waitToTake()
+        </h2>
+<pre>waitToTake(\Tuple $t, $timeout, array $readThisSpaces) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$t</h4></div>
+<div class="subelement argument"><h4>$timeout</h4></div>
+<div class="subelement argument"><h4>$readThisSpaces</h4></div>
+</div></div>
+</div>
+<a id="method_write"></a><div class="element clickable method public method_write" data-toggle="collapse" data-target=".method_write .collapse">
+<h2>write()
+        </h2>
+<pre>write($tuple, $spaceName) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$tuple</h4></div>
+<div class="subelement argument"><h4>$spaceName</h4></div>
+</div></div>
+</div>
+<a id="method_getSpaceIds"></a><div class="element clickable method private method_getSpaceIds" data-toggle="collapse" data-target=".method_getSpaceIds .collapse">
+<h2>getSpaceIds()
+        </h2>
+<pre>getSpaceIds($readThisSpaces) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$readThisSpaces</h4></div>
+</div></div>
+</div>
+<a id="method_getSpaceNames"></a><div class="element clickable method private method_getSpaceNames" data-toggle="collapse" data-target=".method_getSpaceNames .collapse">
+<h2>getSpaceNames()
+        </h2>
+<pre>getSpaceNames() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_connector"> </a><div class="element clickable property private property_connector" data-toggle="collapse" data-target=".property_connector .collapse">
+<h2>$connector</h2>
+<pre>$connector </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_spaces"> </a><div class="element clickable property private property_spaces" data-toggle="collapse" data-target=".property_spaces .collapse">
+<h2>$spaces</h2>
+<pre>$spaces </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_username"> </a><div class="element clickable property private property_username" data-toggle="collapse" data-target=".property_username .collapse">
+<h2>$username</h2>
+<pre>$username </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<h3>
+<i class="icon-custom icon-constant"></i> Constants</h3>
+<a id="constant_DEFAULT_PASSWORD"> </a><div class="element clickable constant  constant_DEFAULT_PASSWORD" data-toggle="collapse" data-target=".constant_DEFAULT_PASSWORD .collapse">
+<h2>DEFAULT_PASSWORD</h2>
+<pre>DEFAULT_PASSWORD </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_DEFAULT_SPACE"> </a><div class="element clickable constant  constant_DEFAULT_SPACE" data-toggle="collapse" data-target=".constant_DEFAULT_SPACE .collapse">
+<h2>DEFAULT_SPACE</h2>
+<pre>DEFAULT_SPACE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_DEFAULT_USER"> </a><div class="element clickable constant  constant_DEFAULT_USER" data-toggle="collapse" data-target=".constant_DEFAULT_USER .collapse">
+<h2>DEFAULT_USER</h2>
+<pre>DEFAULT_USER </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.1.0
+</a> and<br>
+            generated on 2013-12-03T13:06:24+01:00.<br></footer></div>
+</div>
+</body>
+</html>

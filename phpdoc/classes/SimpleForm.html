@@ -1,0 +1,547 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>API Documentation » \SimpleForm</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">API Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/clipit.html"><i class="icon-th"></i> clipit</a></li>
+<li><a href="../namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Elgg.html"><i class="icon-folder-open"></i> Elgg</a></li>
+<li><a href="../packages/Elgg.Core.html"><i class="icon-folder-open"></i> Elgg.Core</a></li>
+<li><a href="../packages/Elgg.Core.Plugin.html"><i class="icon-folder-open"></i> Elgg.Core.Plugin</a></li>
+<li><a href="../packages/ElggAPIAdmin.html"><i class="icon-folder-open"></i> ElggAPIAdmin</a></li>
+<li><a href="../packages/ElggDiagnostics.html"><i class="icon-folder-open"></i> ElggDiagnostics</a></li>
+<li><a href="../packages/ElggEmbed.html"><i class="icon-folder-open"></i> ElggEmbed</a></li>
+<li><a href="../packages/ElggFile.html"><i class="icon-folder-open"></i> ElggFile</a></li>
+<li><a href="../packages/ElggGarbageCollector.html"><i class="icon-folder-open"></i> ElggGarbageCollector</a></li>
+<li><a href="../packages/ElggGroups.html"><i class="icon-folder-open"></i> ElggGroups</a></li>
+<li><a href="../packages/ElggLogBrowser.html"><i class="icon-folder-open"></i> ElggLogBrowser</a></li>
+<li><a href="../packages/ElggLogRotate.html"><i class="icon-folder-open"></i> ElggLogRotate</a></li>
+<li><a href="../packages/ElggMessages.html"><i class="icon-folder-open"></i> ElggMessages</a></li>
+<li><a href="../packages/ElggNotifications.html"><i class="icon-folder-open"></i> ElggNotifications</a></li>
+<li><a href="../packages/ElggProfile.html"><i class="icon-folder-open"></i> ElggProfile</a></li>
+<li><a href="../packages/ElggTinyMCE.html"><i class="icon-folder-open"></i> ElggTinyMCE</a></li>
+<li><a href="../packages/ElgghtmLawed.html"><i class="icon-folder-open"></i> ElgghtmLawed</a></li>
+<li><a href="../packages/Embed%20Video%20Library.html"><i class="icon-folder-open"></i> Embed Video Library</a></li>
+<li><a href="../packages/PlaceLocalInclude.html"><i class="icon-folder-open"></i> PlaceLocalInclude</a></li>
+<li><a href="../packages/SimpleTest.html"><i class="icon-folder-open"></i> SimpleTest</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+     @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20MockObjects%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   MockObjects
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20MockObjects.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage MockObjects</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+     @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@abstract.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @abstract</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20WebTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage WebTester</a></li>
+<li><a href="../packages/%5Bname%5D.html"><i class="icon-folder-open"></i> [name]</a></li>
+<li><a href="../packages/clipit.html"><i class="icon-folder-open"></i> clipit</a></li>
+<li><a href="../packages/event_calendar.html"><i class="icon-folder-open"></i> event_calendar</a></li>
+<li><a href="../packages/pebs.html"><i class="icon-folder-open"></i> pebs</a></li>
+<li><a href="../packages/profile_manager.html"><i class="icon-folder-open"></i> profile_manager</a></li>
+<li><a href="../packages/veeplay.html"><i class="icon-folder-open"></i> veeplay</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">4473</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">250</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method_SimpleForm" title="SimpleForm() :: Starts with no held controls/widgets."><span class="description">Starts with no held controls/widgets.</span><pre>SimpleForm()</pre></a></li>
+<li class="method public "><a href="#method__addCheckbox" title="_addCheckbox() :: Adds a checkbox, making it a group on a repeated name."><span class="description">Adds a checkbox, making it a group on a repeated name.</span><pre>_addCheckbox()</pre></a></li>
+<li class="method public "><a href="#method__addRadioButton" title="_addRadioButton() :: Adds a radio button, building a group if necessary."><span class="description">Adds a radio button, building a group if necessary.</span><pre>_addRadioButton()</pre></a></li>
+<li class="method public "><a href="#method__createAction" title="_createAction() :: Combined action attribute with current location
+   to get an absolute form target."><span class="description">Combined action attribute with current location
+   to get an absolute form target.</span><pre>_createAction()</pre></a></li>
+<li class="method public "><a href="#method__encode" title="_encode() :: Creates the encoding for the current values in the
+   form."><span class="description">Creates the encoding for the current values in the
+   form.</span><pre>_encode()</pre></a></li>
+<li class="method public "><a href="#method__setEncodingClass" title="_setEncodingClass() :: Creates the request packet to be sent by the form."><span class="description">Creates the request packet to be sent by the form.</span><pre>_setEncodingClass()</pre></a></li>
+<li class="method public "><a href="#method__setWidget" title="_setWidget() :: Sets the widget into the form, grouping radio
+   buttons if any."><span class="description">Sets the widget into the form, grouping radio
+   buttons if any.</span><pre>_setWidget()</pre></a></li>
+<li class="method public "><a href="#method_addWidget" title="addWidget() :: Adds a tag contents to the form."><span class="description">Adds a tag contents to the form.</span><pre>addWidget()</pre></a></li>
+<li class="method public "><a href="#method_attachLabelBySelector" title="attachLabelBySelector() :: Used by the page object to set widgets labels to
+   external label tags."><span class="description">Used by the page object to set widgets labels to
+   external label tags.</span><pre>attachLabelBySelector()</pre></a></li>
+<li class="method public "><a href="#method_getAction" title="getAction() :: Absolute URL of the target."><span class="description">Absolute URL of the target.</span><pre>getAction()</pre></a></li>
+<li class="method public "><a href="#method_getId" title="getId() :: ID field of form for unique identification."><span class="description">ID field of form for unique identification.</span><pre>getId()</pre></a></li>
+<li class="method public "><a href="#method_getMethod" title="getMethod() :: Accessor for method of form submission."><span class="description">Accessor for method of form submission.</span><pre>getMethod()</pre></a></li>
+<li class="method public "><a href="#method_getValue" title="getValue() :: Extracts current value from form."><span class="description">Extracts current value from form.</span><pre>getValue()</pre></a></li>
+<li class="method public "><a href="#method_hasImage" title="hasImage() :: Test to see if a form has an image control."><span class="description">Test to see if a form has an image control.</span><pre>hasImage()</pre></a></li>
+<li class="method public "><a href="#method_hasSubmit" title="hasSubmit() :: Test to see if a form has a submit button."><span class="description">Test to see if a form has a submit button.</span><pre>hasSubmit()</pre></a></li>
+<li class="method public "><a href="#method_setDefaultTarget" title="setDefaultTarget() :: Sets the frame target within a frameset."><span class="description">Sets the frame target within a frameset.</span><pre>setDefaultTarget()</pre></a></li>
+<li class="method public "><a href="#method_setField" title="setField() :: Sets a widget value within the form."><span class="description">Sets a widget value within the form.</span><pre>setField()</pre></a></li>
+<li class="method public "><a href="#method_submit" title="submit() :: Simply submits the form without the submit button
+   value. Used when there is only one button or it
+   is unimportant."><span class="description">Simply submits the form without the submit button
+   value. Used when there is only one button or it
+   is unimportant.</span><pre>submit()</pre></a></li>
+<li class="method public "><a href="#method_submitButton" title="submitButton() :: Gets the submit values for a selected button."><span class="description">Gets the submit values for a selected button.</span><pre>submitButton()</pre></a></li>
+<li class="method public "><a href="#method_submitImage" title="submitImage() :: Gets the submit values for an image."><span class="description">Gets the submit values for an image.</span><pre>submitImage()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul>
+<li class="property public "><a href="#property__action" title="$_action() :: "><span class="description"></span><pre>$_action</pre></a></li>
+<li class="property public "><a href="#property__buttons" title="$_buttons() :: "><span class="description"></span><pre>$_buttons</pre></a></li>
+<li class="property public "><a href="#property__checkboxes" title="$_checkboxes() :: "><span class="description"></span><pre>$_checkboxes</pre></a></li>
+<li class="property public "><a href="#property__default_target" title="$_default_target() :: "><span class="description"></span><pre>$_default_target</pre></a></li>
+<li class="property public "><a href="#property__encoding" title="$_encoding() :: "><span class="description"></span><pre>$_encoding</pre></a></li>
+<li class="property public "><a href="#property__id" title="$_id() :: "><span class="description"></span><pre>$_id</pre></a></li>
+<li class="property public "><a href="#property__images" title="$_images() :: "><span class="description"></span><pre>$_images</pre></a></li>
+<li class="property public "><a href="#property__method" title="$_method() :: "><span class="description"></span><pre>$_method</pre></a></li>
+<li class="property public "><a href="#property__radios" title="$_radios() :: "><span class="description"></span><pre>$_radios</pre></a></li>
+<li class="property public "><a href="#property__widgets" title="$_widgets() :: "><span class="description"></span><pre>$_widgets</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\SimpleForm"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/SimpleForm.html">SimpleForm</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">Form tag class to hold widget values.</p>
+<div class="details">
+<div class="long_description">@package SimpleTest</div>
+<table class="table table-bordered"><tr>
+<th>subpackage</th>
+<td>WebTester</td>
+</tr></table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method_SimpleForm"></a><div class="element clickable method public method_SimpleForm" data-toggle="collapse" data-target=".method_SimpleForm .collapse">
+<h2>Starts with no held controls/widgets.</h2>
+<pre>SimpleForm($tag, \SimplePage $page) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param SimpleTag $tag        Form tag to read.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$tag</h4></div>
+<div class="subelement argument">
+<h4>$page</h4>
+<code><a href="../classes/SimplePage.html">\SimplePage</a></code><p>Holding page.</p></div>
+</div></div>
+</div>
+<a id="method__addCheckbox"></a><div class="element clickable method public method__addCheckbox" data-toggle="collapse" data-target=".method__addCheckbox .collapse">
+<h2>Adds a checkbox, making it a group on a repeated name.</h2>
+<pre>_addCheckbox($tag) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param SimpleCheckboxTag $tag   Incoming form control.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>private</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$tag</h4></div>
+</div></div>
+</div>
+<a id="method__addRadioButton"></a><div class="element clickable method public method__addRadioButton" data-toggle="collapse" data-target=".method__addRadioButton .collapse">
+<h2>Adds a radio button, building a group if necessary.</h2>
+<pre>_addRadioButton($tag) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param SimpleRadioButtonTag $tag   Incoming form control.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>private</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$tag</h4></div>
+</div></div>
+</div>
+<a id="method__createAction"></a><div class="element clickable method public method__createAction" data-toggle="collapse" data-target=".method__createAction .collapse">
+<h2>Combined action attribute with current location
+   to get an absolute form target.</h2>
+<pre>_createAction($action, $page) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $action    Action attribute from form tag.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$action</h4></div>
+<div class="subelement argument"><h4>$page</h4></div>
+</div></div>
+</div>
+<a id="method__encode"></a><div class="element clickable method public method__encode" data-toggle="collapse" data-target=".method__encode .collapse">
+<h2>Creates the encoding for the current values in the
+   form.</h2>
+<pre>_encode() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return SimpleFormEncoding    Request to submit.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>private</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method__setEncodingClass"></a><div class="element clickable method public method__setEncodingClass" data-toggle="collapse" data-target=".method__setEncodingClass .collapse">
+<h2>Creates the request packet to be sent by the form.</h2>
+<pre>_setEncodingClass($tag) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param SimpleTag $tag        Form tag to read.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$tag</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Packet class.
+   @access private</div>
+</div></div>
+</div>
+<a id="method__setWidget"></a><div class="element clickable method public method__setWidget" data-toggle="collapse" data-target=".method__setWidget .collapse">
+<h2>Sets the widget into the form, grouping radio
+   buttons if any.</h2>
+<pre>_setWidget($tag) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param SimpleWidget $tag   Incoming form control.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>private</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$tag</h4></div>
+</div></div>
+</div>
+<a id="method_addWidget"></a><div class="element clickable method public method_addWidget" data-toggle="collapse" data-target=".method_addWidget .collapse">
+<h2>Adds a tag contents to the form.</h2>
+<pre>addWidget($tag) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param SimpleWidget $tag        Input tag to add.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$tag</h4></div>
+</div></div>
+</div>
+<a id="method_attachLabelBySelector"></a><div class="element clickable method public method_attachLabelBySelector" data-toggle="collapse" data-target=".method_attachLabelBySelector .collapse">
+<h2>Used by the page object to set widgets labels to
+   external label tags.</h2>
+<pre>attachLabelBySelector($selector, $label) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param SimpleSelector $selector   Criteria to apply.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$selector</h4></div>
+<div class="subelement argument"><h4>$label</h4></div>
+</div></div>
+</div>
+<a id="method_getAction"></a><div class="element clickable method public method_getAction" data-toggle="collapse" data-target=".method_getAction .collapse">
+<h2>Absolute URL of the target.</h2>
+<pre>getAction() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return SimpleUrl           URL target.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getId"></a><div class="element clickable method public method_getId" data-toggle="collapse" data-target=".method_getId .collapse">
+<h2>ID field of form for unique identification.</h2>
+<pre>getId() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return string           Unique tag ID.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getMethod"></a><div class="element clickable method public method_getMethod" data-toggle="collapse" data-target=".method_getMethod .collapse">
+<h2>Accessor for method of form submission.</h2>
+<pre>getMethod() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return string           Either get or post.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getValue"></a><div class="element clickable method public method_getValue" data-toggle="collapse" data-target=".method_getValue .collapse">
+<h2>Extracts current value from form.</h2>
+<pre>getValue($selector) : <a href="string/array.html">\string/array</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param SimpleSelector $selector   Criteria to apply.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$selector</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="string/array.html">\string/array</a></code>Value(s) as string or null
+                                     if not set.
+   @access public</div>
+</div></div>
+</div>
+<a id="method_hasImage"></a><div class="element clickable method public method_hasImage" data-toggle="collapse" data-target=".method_hasImage .collapse">
+<h2>Test to see if a form has an image control.</h2>
+<pre>hasImage($selector) : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param SimpleSelector $selector   Criteria to apply.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$selector</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>True if present.
+   @access public</div>
+</div></div>
+</div>
+<a id="method_hasSubmit"></a><div class="element clickable method public method_hasSubmit" data-toggle="collapse" data-target=".method_hasSubmit .collapse">
+<h2>Test to see if a form has a submit button.</h2>
+<pre>hasSubmit($selector) : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param SimpleSelector $selector   Criteria to apply.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$selector</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>True if present.
+   @access public</div>
+</div></div>
+</div>
+<a id="method_setDefaultTarget"></a><div class="element clickable method public method_setDefaultTarget" data-toggle="collapse" data-target=".method_setDefaultTarget .collapse">
+<h2>Sets the frame target within a frameset.</h2>
+<pre>setDefaultTarget($frame) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $frame        Name of frame.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$frame</h4></div>
+</div></div>
+</div>
+<a id="method_setField"></a><div class="element clickable method public method_setField" data-toggle="collapse" data-target=".method_setField .collapse">
+<h2>Sets a widget value within the form.</h2>
+<pre>setField($selector, string $value, $position) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param SimpleSelector $selector   Criteria to apply.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$selector</h4></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>string</code><p>Value to input into the widget.
+   @return boolean                   True if value is legal, false
+                                     otherwise. If the field is not
+                                     present, nothing will be set.
+   @access public</p>
+</div>
+<div class="subelement argument"><h4>$position</h4></div>
+</div></div>
+</div>
+<a id="method_submit"></a><div class="element clickable method public method_submit" data-toggle="collapse" data-target=".method_submit .collapse">
+<h2>Simply submits the form without the submit button
+   value. Used when there is only one button or it
+   is unimportant.</h2>
+<pre>submit() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return hash           Submitted values.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_submitButton"></a><div class="element clickable method public method_submitButton" data-toggle="collapse" data-target=".method_submitButton .collapse">
+<h2>Gets the submit values for a selected button.</h2>
+<pre>submitButton($selector, \hash $additional) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param SimpleSelector $selector   Criteria to apply.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$selector</h4></div>
+<div class="subelement argument">
+<h4>$additional</h4>
+<code><a href="hash.html">\hash</a></code><p>Additional data for the form.
+   @return SimpleEncoding            Submitted values or false
+                                     if there is no such button
+                                     in the form.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_submitImage"></a><div class="element clickable method public method_submitImage" data-toggle="collapse" data-target=".method_submitImage .collapse">
+<h2>Gets the submit values for an image.</h2>
+<pre>submitImage($selector, integer $x, $y, $additional) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param SimpleSelector $selector   Criteria to apply.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$selector</h4></div>
+<div class="subelement argument">
+<h4>$x</h4>
+<code>integer</code><p>X-coordinate of click.
+   @param integer $y                 Y-coordinate of click.
+   @param hash $additional           Additional data for the form.
+   @return SimpleEncoding            Submitted values or false
+                                     if there is no such button in the
+                                     form.
+   @access public</p>
+</div>
+<div class="subelement argument"><h4>$y</h4></div>
+<div class="subelement argument"><h4>$additional</h4></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property__action"> </a><div class="element clickable property public property__action" data-toggle="collapse" data-target=".property__action .collapse">
+<h2>$_action</h2>
+<pre>$_action </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__buttons"> </a><div class="element clickable property public property__buttons" data-toggle="collapse" data-target=".property__buttons .collapse">
+<h2>$_buttons</h2>
+<pre>$_buttons </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__checkboxes"> </a><div class="element clickable property public property__checkboxes" data-toggle="collapse" data-target=".property__checkboxes .collapse">
+<h2>$_checkboxes</h2>
+<pre>$_checkboxes </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__default_target"> </a><div class="element clickable property public property__default_target" data-toggle="collapse" data-target=".property__default_target .collapse">
+<h2>$_default_target</h2>
+<pre>$_default_target </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__encoding"> </a><div class="element clickable property public property__encoding" data-toggle="collapse" data-target=".property__encoding .collapse">
+<h2>$_encoding</h2>
+<pre>$_encoding </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__id"> </a><div class="element clickable property public property__id" data-toggle="collapse" data-target=".property__id .collapse">
+<h2>$_id</h2>
+<pre>$_id </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__images"> </a><div class="element clickable property public property__images" data-toggle="collapse" data-target=".property__images .collapse">
+<h2>$_images</h2>
+<pre>$_images </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__method"> </a><div class="element clickable property public property__method" data-toggle="collapse" data-target=".property__method .collapse">
+<h2>$_method</h2>
+<pre>$_method </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__radios"> </a><div class="element clickable property public property__radios" data-toggle="collapse" data-target=".property__radios .collapse">
+<h2>$_radios</h2>
+<pre>$_radios </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__widgets"> </a><div class="element clickable property public property__widgets" data-toggle="collapse" data-target=".property__widgets .collapse">
+<h2>$_widgets</h2>
+<pre>$_widgets </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.1.0
+</a> and<br>
+            generated on 2013-12-03T13:06:33+01:00.<br></footer></div>
+</div>
+</body>
+</html>

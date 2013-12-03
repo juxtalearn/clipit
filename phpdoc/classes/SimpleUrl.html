@@ -1,0 +1,772 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>API Documentation » \SimpleUrl</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">API Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/clipit.html"><i class="icon-th"></i> clipit</a></li>
+<li><a href="../namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Elgg.html"><i class="icon-folder-open"></i> Elgg</a></li>
+<li><a href="../packages/Elgg.Core.html"><i class="icon-folder-open"></i> Elgg.Core</a></li>
+<li><a href="../packages/Elgg.Core.Plugin.html"><i class="icon-folder-open"></i> Elgg.Core.Plugin</a></li>
+<li><a href="../packages/ElggAPIAdmin.html"><i class="icon-folder-open"></i> ElggAPIAdmin</a></li>
+<li><a href="../packages/ElggDiagnostics.html"><i class="icon-folder-open"></i> ElggDiagnostics</a></li>
+<li><a href="../packages/ElggEmbed.html"><i class="icon-folder-open"></i> ElggEmbed</a></li>
+<li><a href="../packages/ElggFile.html"><i class="icon-folder-open"></i> ElggFile</a></li>
+<li><a href="../packages/ElggGarbageCollector.html"><i class="icon-folder-open"></i> ElggGarbageCollector</a></li>
+<li><a href="../packages/ElggGroups.html"><i class="icon-folder-open"></i> ElggGroups</a></li>
+<li><a href="../packages/ElggLogBrowser.html"><i class="icon-folder-open"></i> ElggLogBrowser</a></li>
+<li><a href="../packages/ElggLogRotate.html"><i class="icon-folder-open"></i> ElggLogRotate</a></li>
+<li><a href="../packages/ElggMessages.html"><i class="icon-folder-open"></i> ElggMessages</a></li>
+<li><a href="../packages/ElggNotifications.html"><i class="icon-folder-open"></i> ElggNotifications</a></li>
+<li><a href="../packages/ElggProfile.html"><i class="icon-folder-open"></i> ElggProfile</a></li>
+<li><a href="../packages/ElggTinyMCE.html"><i class="icon-folder-open"></i> ElggTinyMCE</a></li>
+<li><a href="../packages/ElgghtmLawed.html"><i class="icon-folder-open"></i> ElgghtmLawed</a></li>
+<li><a href="../packages/Embed%20Video%20Library.html"><i class="icon-folder-open"></i> Embed Video Library</a></li>
+<li><a href="../packages/PlaceLocalInclude.html"><i class="icon-folder-open"></i> PlaceLocalInclude</a></li>
+<li><a href="../packages/SimpleTest.html"><i class="icon-folder-open"></i> SimpleTest</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+     @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20MockObjects%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   MockObjects
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20MockObjects.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage MockObjects</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+     @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@abstract.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @abstract</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20WebTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage WebTester</a></li>
+<li><a href="../packages/%5Bname%5D.html"><i class="icon-folder-open"></i> [name]</a></li>
+<li><a href="../packages/clipit.html"><i class="icon-folder-open"></i> clipit</a></li>
+<li><a href="../packages/event_calendar.html"><i class="icon-folder-open"></i> event_calendar</a></li>
+<li><a href="../packages/pebs.html"><i class="icon-folder-open"></i> pebs</a></li>
+<li><a href="../packages/profile_manager.html"><i class="icon-folder-open"></i> profile_manager</a></li>
+<li><a href="../packages/veeplay.html"><i class="icon-folder-open"></i> veeplay</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">4473</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">250</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method_SimpleUrl" title="SimpleUrl() :: Constructor. Parses URL into sections."><span class="description">Constructor. Parses URL into sections.</span><pre>SimpleUrl()</pre></a></li>
+<li class="method public "><a href="#method__chompCoordinates" title="_chompCoordinates() :: Extracts the X, Y coordinate pair from an image map."><span class="description">Extracts the X, Y coordinate pair from an image map.</span><pre>_chompCoordinates()</pre></a></li>
+<li class="method public "><a href="#method__chompHost" title="_chompHost() :: Extracts the host part of an incoming URL."><span class="description">Extracts the host part of an incoming URL.</span><pre>_chompHost()</pre></a></li>
+<li class="method public "><a href="#method__chompLogin" title="_chompLogin() :: Extracts the username and password from the
+   incoming URL. The // prefix will be reattached
+   to the URL after the doublet is extracted."><span class="description">Extracts the username and password from the
+   incoming URL. The // prefix will be reattached
+   to the URL after the doublet is extracted.</span><pre>_chompLogin()</pre></a></li>
+<li class="method public "><a href="#method__chompPath" title="_chompPath() :: Extracts the path information from the incoming
+   URL. Strips this path from the URL."><span class="description">Extracts the path information from the incoming
+   URL. Strips this path from the URL.</span><pre>_chompPath()</pre></a></li>
+<li class="method public "><a href="#method__chompRequest" title="_chompRequest() :: Strips off the request data."><span class="description">Strips off the request data.</span><pre>_chompRequest()</pre></a></li>
+<li class="method public "><a href="#method__chompScheme" title="_chompScheme() :: Extracts the scheme part of an incoming URL."><span class="description">Extracts the scheme part of an incoming URL.</span><pre>_chompScheme()</pre></a></li>
+<li class="method public "><a href="#method__extractAbsolutePath" title="_extractAbsolutePath() :: Replaces unknown sections of the path with base parts
+   to return a complete absolute one."><span class="description">Replaces unknown sections of the path with base parts
+   to return a complete absolute one.</span><pre>_extractAbsolutePath()</pre></a></li>
+<li class="method public "><a href="#method__isRelativePath" title="_isRelativePath() :: Simple test to see if a path part is relative."><span class="description">Simple test to see if a path part is relative.</span><pre>_isRelativePath()</pre></a></li>
+<li class="method public "><a href="#method__parseRequest" title="_parseRequest() :: Breaks the request down into an object."><span class="description">Breaks the request down into an object.</span><pre>_parseRequest()</pre></a></li>
+<li class="method public "><a href="#method_addRequestParameter" title="addRequestParameter() :: Adds an additional parameter to the request."><span class="description">Adds an additional parameter to the request.</span><pre>addRequestParameter()</pre></a></li>
+<li class="method public "><a href="#method_addRequestParameters" title="addRequestParameters() :: Adds additional parameters to the request."><span class="description">Adds additional parameters to the request.</span><pre>addRequestParameters()</pre></a></li>
+<li class="method public "><a href="#method_asString" title="asString() :: Renders the URL back into a string."><span class="description">Renders the URL back into a string.</span><pre>asString()</pre></a></li>
+<li class="method public "><a href="#method_clearRequest" title="clearRequest() :: Clears down all parameters."><span class="description">Clears down all parameters.</span><pre>clearRequest()</pre></a></li>
+<li class="method public "><a href="#method_getAllTopLevelDomains" title="getAllTopLevelDomains() :: A pipe seperated list of all TLDs that result in two part
+   domain names."><span class="description">A pipe seperated list of all TLDs that result in two part
+   domain names.</span><pre>getAllTopLevelDomains()</pre></a></li>
+<li class="method public "><a href="#method_getBasePath" title="getBasePath() :: Gets the path to the page."><span class="description">Gets the path to the page.</span><pre>getBasePath()</pre></a></li>
+<li class="method public "><a href="#method_getEncodedRequest" title="getEncodedRequest() :: Accessor for current request parameters
+   in URL string form. Will return teh original request
+   if at all possible even if it doesn't make much
+   sense."><span class="description">Accessor for current request parameters
+   in URL string form. Will return teh original request
+   if at all possible even if it doesn't make much
+   sense.</span><pre>getEncodedRequest()</pre></a></li>
+<li class="method public "><a href="#method_getFragment" title='getFragment() :: Accessor for fragment at end of URL after the "#".'><span class="description">Accessor for fragment at end of URL after the "#".</span><pre>getFragment()</pre></a></li>
+<li class="method public "><a href="#method_getHost" title="getHost() :: Accessor for hostname and port."><span class="description">Accessor for hostname and port.</span><pre>getHost()</pre></a></li>
+<li class="method public "><a href="#method_getIdentity" title="getIdentity() :: Extracts the username and password for use in rendering
+   a URL."><span class="description">Extracts the username and password for use in rendering
+   a URL.</span><pre>getIdentity()</pre></a></li>
+<li class="method public "><a href="#method_getPage" title="getPage() :: Accessor for page if any. This may be a
+   directory name if ambiguious."><span class="description">Accessor for page if any. This may be a
+   directory name if ambiguious.</span><pre>getPage()</pre></a></li>
+<li class="method public "><a href="#method_getPassword" title="getPassword() :: Accessor for password."><span class="description">Accessor for password.</span><pre>getPassword()</pre></a></li>
+<li class="method public "><a href="#method_getPath" title="getPath() :: Accessor for path."><span class="description">Accessor for path.</span><pre>getPath()</pre></a></li>
+<li class="method public "><a href="#method_getPort" title="getPort() :: Accessor for port number."><span class="description">Accessor for port number.</span><pre>getPort()</pre></a></li>
+<li class="method public "><a href="#method_getScheme" title="getScheme() :: Accessor for protocol part."><span class="description">Accessor for protocol part.</span><pre>getScheme()</pre></a></li>
+<li class="method public "><a href="#method_getTarget" title="getTarget() :: Gets the frame target if present. Although
+   not strictly part of the URL specification it
+   acts as similarily to the browser."><span class="description">Gets the frame target if present. Although
+   not strictly part of the URL specification it
+   acts as similarily to the browser.</span><pre>getTarget()</pre></a></li>
+<li class="method public "><a href="#method_getTld" title="getTld() :: Accessor for top level domain."><span class="description">Accessor for top level domain.</span><pre>getTld()</pre></a></li>
+<li class="method public "><a href="#method_getUsername" title="getUsername() :: Accessor for user name."><span class="description">Accessor for user name.</span><pre>getUsername()</pre></a></li>
+<li class="method public "><a href="#method_getX" title="getX() :: Accessor for horizontal image coordinate."><span class="description">Accessor for horizontal image coordinate.</span><pre>getX()</pre></a></li>
+<li class="method public "><a href="#method_getY" title="getY() :: Accessor for vertical image coordinate."><span class="description">Accessor for vertical image coordinate.</span><pre>getY()</pre></a></li>
+<li class="method public "><a href="#method_makeAbsolute" title="makeAbsolute() :: Replaces unknown sections to turn a relative
+   URL into an absolute one. The base URL can
+   be either a string or a SimpleUrl object."><span class="description">Replaces unknown sections to turn a relative
+   URL into an absolute one. The base URL can
+   be either a string or a SimpleUrl object.</span><pre>makeAbsolute()</pre></a></li>
+<li class="method public "><a href="#method_normalisePath" title="normalisePath() :: Replaces . and ."><span class="description">Replaces . and .</span><pre>normalisePath()</pre></a></li>
+<li class="method public "><a href="#method_setCoordinates" title="setCoordinates() :: Sets image coordinates. Set to false to clear
+   them."><span class="description">Sets image coordinates. Set to false to clear
+   them.</span><pre>setCoordinates()</pre></a></li>
+<li class="method public "><a href="#method_setTarget" title="setTarget() :: Attaches a frame target."><span class="description">Attaches a frame target.</span><pre>setTarget()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul>
+<li class="property public "><a href="#property__fragment" title="$_fragment() :: "><span class="description"></span><pre>$_fragment</pre></a></li>
+<li class="property public "><a href="#property__host" title="$_host() :: "><span class="description"></span><pre>$_host</pre></a></li>
+<li class="property public "><a href="#property__password" title="$_password() :: "><span class="description"></span><pre>$_password</pre></a></li>
+<li class="property public "><a href="#property__path" title="$_path() :: "><span class="description"></span><pre>$_path</pre></a></li>
+<li class="property public "><a href="#property__port" title="$_port() :: "><span class="description"></span><pre>$_port</pre></a></li>
+<li class="property public "><a href="#property__raw" title="$_raw() :: "><span class="description"></span><pre>$_raw</pre></a></li>
+<li class="property public "><a href="#property__request" title="$_request() :: "><span class="description"></span><pre>$_request</pre></a></li>
+<li class="property public "><a href="#property__scheme" title="$_scheme() :: "><span class="description"></span><pre>$_scheme</pre></a></li>
+<li class="property public "><a href="#property__target" title="$_target() :: "><span class="description"></span><pre>$_target</pre></a></li>
+<li class="property public "><a href="#property__username" title="$_username() :: "><span class="description"></span><pre>$_username</pre></a></li>
+<li class="property public "><a href="#property__x" title="$_x() :: "><span class="description"></span><pre>$_x</pre></a></li>
+<li class="property public "><a href="#property__y" title="$_y() :: "><span class="description"></span><pre>$_y</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\SimpleUrl"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/SimpleUrl.html">SimpleUrl</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">URL parser to replace parse_url() PHP function which
+   got broken in PHP 4.3.0. Adds some browser specific
+   functionality such as expandomatics.</p>
+<div class="details">
+<div class="long_description">Guesses a bit trying to separate the host from
+   the path and tries to keep a raw, possibly unparsable,
+   request string as long as possible.</div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20WebTester.html">SimpleTest
+   @subpackage WebTester</a></td>
+</tr></table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method_SimpleUrl"></a><div class="element clickable method public method_SimpleUrl" data-toggle="collapse" data-target=".method_SimpleUrl .collapse">
+<h2>Constructor. Parses URL into sections.</h2>
+<pre>SimpleUrl($url) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $url        Incoming URL.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$url</h4></div>
+</div></div>
+</div>
+<a id="method__chompCoordinates"></a><div class="element clickable method public method__chompCoordinates" data-toggle="collapse" data-target=".method__chompCoordinates .collapse">
+<h2>Extracts the X, Y coordinate pair from an image map.</h2>
+<pre>_chompCoordinates($url) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $url   URL so far. The coordinates will be
+                        removed.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$url</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>X, Y as a pair of integers.
+   @access private</div>
+</div></div>
+</div>
+<a id="method__chompHost"></a><div class="element clickable method public method__chompHost" data-toggle="collapse" data-target=".method__chompHost .collapse">
+<h2>Extracts the host part of an incoming URL.</h2>
+<pre>_chompHost(string $url) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">Includes the port number part. Will extract
+   the host if it starts with // or it has
+   a top level domain or it has at least two
+   dots.</div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$url</h4>
+<code>string</code><p>URL so far. The host will be
+                         removed.
+   @return string        Host part guess or false.
+   @access private</p>
+</div>
+</div></div>
+</div>
+<a id="method__chompLogin"></a><div class="element clickable method public method__chompLogin" data-toggle="collapse" data-target=".method__chompLogin .collapse">
+<h2>Extracts the username and password from the
+   incoming URL. The // prefix will be reattached
+   to the URL after the doublet is extracted.</h2>
+<pre>_chompLogin($url) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $url    URL so far. The username and
+                         password are removed.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$url</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>Two item list of username and
+                         password. Will urldecode() them.
+   @access private</div>
+</div></div>
+</div>
+<a id="method__chompPath"></a><div class="element clickable method public method__chompPath" data-toggle="collapse" data-target=".method__chompPath .collapse">
+<h2>Extracts the path information from the incoming
+   URL. Strips this path from the URL.</h2>
+<pre>_chompPath($url) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $url     URL so far. The host will be
+                          removed.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$url</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Path part or '/'.
+   @access private</div>
+</div></div>
+</div>
+<a id="method__chompRequest"></a><div class="element clickable method public method__chompRequest" data-toggle="collapse" data-target=".method__chompRequest .collapse">
+<h2>Strips off the request data.</h2>
+<pre>_chompRequest($url) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $url  URL so far. The request will be
+                       removed.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$url</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Raw request part.
+   @access private</div>
+</div></div>
+</div>
+<a id="method__chompScheme"></a><div class="element clickable method public method__chompScheme" data-toggle="collapse" data-target=".method__chompScheme .collapse">
+<h2>Extracts the scheme part of an incoming URL.</h2>
+<pre>_chompScheme($url) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $url   URL so far. The scheme will be
+                        removed.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$url</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Scheme part or false.
+   @access private</div>
+</div></div>
+</div>
+<a id="method__extractAbsolutePath"></a><div class="element clickable method public method__extractAbsolutePath" data-toggle="collapse" data-target=".method__extractAbsolutePath .collapse">
+<h2>Replaces unknown sections of the path with base parts
+   to return a complete absolute one.</h2>
+<pre>_extractAbsolutePath($base) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string/SimpleUrl $base       Base URL.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$base</h4></div>
+</div></div>
+</div>
+<a id="method__isRelativePath"></a><div class="element clickable method public method__isRelativePath" data-toggle="collapse" data-target=".method__isRelativePath .collapse">
+<h2>Simple test to see if a path part is relative.</h2>
+<pre>_isRelativePath($path) : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $path        Path to test.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$path</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>True if starts with a "/".
+   @access private</div>
+</div></div>
+</div>
+<a id="method__parseRequest"></a><div class="element clickable method public method__parseRequest" data-toggle="collapse" data-target=".method__parseRequest .collapse">
+<h2>Breaks the request down into an object.</h2>
+<pre>_parseRequest($raw) : <a href="SimpleFormEncoding.html">\SimpleFormEncoding</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $raw           Raw request.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$raw</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="SimpleFormEncoding.html">\SimpleFormEncoding</a></code>Parsed data.
+   @access private</div>
+</div></div>
+</div>
+<a id="method_addRequestParameter"></a><div class="element clickable method public method_addRequestParameter" data-toggle="collapse" data-target=".method_addRequestParameter .collapse">
+<h2>Adds an additional parameter to the request.</h2>
+<pre>addRequestParameter($key, string $value) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $key            Name of parameter.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$key</h4></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>string</code><p>Value as string.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_addRequestParameters"></a><div class="element clickable method public method_addRequestParameters" data-toggle="collapse" data-target=".method_addRequestParameters .collapse">
+<h2>Adds additional parameters to the request.</h2>
+<pre>addRequestParameters($parameters) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param hash/SimpleFormEncoding $parameters   Additional
+                                               parameters.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$parameters</h4></div>
+</div></div>
+</div>
+<a id="method_asString"></a><div class="element clickable method public method_asString" data-toggle="collapse" data-target=".method_asString .collapse">
+<h2>Renders the URL back into a string.</h2>
+<pre>asString() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return string        URL in canonical form.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_clearRequest"></a><div class="element clickable method public method_clearRequest" data-toggle="collapse" data-target=".method_clearRequest .collapse">
+<h2>Clears down all parameters.</h2>
+<pre>clearRequest() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description">@access public</div></div></div>
+</div>
+<a id="method_getAllTopLevelDomains"></a><div class="element clickable method public method_getAllTopLevelDomains" data-toggle="collapse" data-target=".method_getAllTopLevelDomains .collapse">
+<h2>A pipe seperated list of all TLDs that result in two part
+   domain names.</h2>
+<pre>getAllTopLevelDomains() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return string        Pipe separated list.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public
+   @static</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getBasePath"></a><div class="element clickable method public method_getBasePath" data-toggle="collapse" data-target=".method_getBasePath .collapse">
+<h2>Gets the path to the page.</h2>
+<pre>getBasePath() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return string       Path less the page.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getEncodedRequest"></a><div class="element clickable method public method_getEncodedRequest" data-toggle="collapse" data-target=".method_getEncodedRequest .collapse">
+<h2>Accessor for current request parameters
+   in URL string form. Will return teh original request
+   if at all possible even if it doesn't make much
+   sense.</h2>
+<pre>getEncodedRequest() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return string   Form is string "?a=1&b=2", etc.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getFragment"></a><div class="element clickable method public method_getFragment" data-toggle="collapse" data-target=".method_getFragment .collapse">
+<h2>Accessor for fragment at end of URL after the "#".</h2>
+<pre>getFragment() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return string    Part after "#".</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getHost"></a><div class="element clickable method public method_getHost" data-toggle="collapse" data-target=".method_getHost .collapse">
+<h2>Accessor for hostname and port.</h2>
+<pre>getHost($default) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $default    Value to use if not present.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$default</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Hostname only.
+   @access public</div>
+</div></div>
+</div>
+<a id="method_getIdentity"></a><div class="element clickable method public method_getIdentity" data-toggle="collapse" data-target=".method_getIdentity .collapse">
+<h2>Extracts the username and password for use in rendering
+   a URL.</h2>
+<pre>getIdentity() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return string/boolean    Form of username:password or false.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getPage"></a><div class="element clickable method public method_getPage" data-toggle="collapse" data-target=".method_getPage .collapse">
+<h2>Accessor for page if any. This may be a
+   directory name if ambiguious.</h2>
+<pre>getPage() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return            Page name.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getPassword"></a><div class="element clickable method public method_getPassword" data-toggle="collapse" data-target=".method_getPassword .collapse">
+<h2>Accessor for password.</h2>
+<pre>getPassword() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return string    Password preceding host.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getPath"></a><div class="element clickable method public method_getPath" data-toggle="collapse" data-target=".method_getPath .collapse">
+<h2>Accessor for path.</h2>
+<pre>getPath() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return string    Full path including leading slash if implied.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getPort"></a><div class="element clickable method public method_getPort" data-toggle="collapse" data-target=".method_getPort .collapse">
+<h2>Accessor for port number.</h2>
+<pre>getPort() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return integer    TCP/IP port number.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getScheme"></a><div class="element clickable method public method_getScheme" data-toggle="collapse" data-target=".method_getScheme .collapse">
+<h2>Accessor for protocol part.</h2>
+<pre>getScheme($default) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $default    Value to use if not present.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$default</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Scheme name, e.g "http".
+   @access public</div>
+</div></div>
+</div>
+<a id="method_getTarget"></a><div class="element clickable method public method_getTarget" data-toggle="collapse" data-target=".method_getTarget .collapse">
+<h2>Gets the frame target if present. Although
+   not strictly part of the URL specification it
+   acts as similarily to the browser.</h2>
+<pre>getTarget() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return boolean/string    Frame name or false if none.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getTld"></a><div class="element clickable method public method_getTld" data-toggle="collapse" data-target=".method_getTld .collapse">
+<h2>Accessor for top level domain.</h2>
+<pre>getTld() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return string       Last part of host.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getUsername"></a><div class="element clickable method public method_getUsername" data-toggle="collapse" data-target=".method_getUsername .collapse">
+<h2>Accessor for user name.</h2>
+<pre>getUsername() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return string    Username preceding host.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getX"></a><div class="element clickable method public method_getX" data-toggle="collapse" data-target=".method_getX .collapse">
+<h2>Accessor for horizontal image coordinate.</h2>
+<pre>getX() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return integer        X value.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getY"></a><div class="element clickable method public method_getY" data-toggle="collapse" data-target=".method_getY .collapse">
+<h2>Accessor for vertical image coordinate.</h2>
+<pre>getY() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return integer        Y value.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_makeAbsolute"></a><div class="element clickable method public method_makeAbsolute" data-toggle="collapse" data-target=".method_makeAbsolute .collapse">
+<h2>Replaces unknown sections to turn a relative
+   URL into an absolute one. The base URL can
+   be either a string or a SimpleUrl object.</h2>
+<pre>makeAbsolute($base) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string/SimpleUrl $base       Base URL.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$base</h4></div>
+</div></div>
+</div>
+<a id="method_normalisePath"></a><div class="element clickable method public method_normalisePath" data-toggle="collapse" data-target=".method_normalisePath .collapse">
+<h2>Replaces . and .</h2>
+<pre>normalisePath(string $path) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">. sections of the path.</div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$path</h4>
+<code>string</code><p>Unoptimised path.
+   @return string         Path with dots removed if possible.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_setCoordinates"></a><div class="element clickable method public method_setCoordinates" data-toggle="collapse" data-target=".method_setCoordinates .collapse">
+<h2>Sets image coordinates. Set to false to clear
+   them.</h2>
+<pre>setCoordinates($x, integer $y) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param integer $x    Horizontal position.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$x</h4></div>
+<div class="subelement argument">
+<h4>$y</h4>
+<code>integer</code><p>Vertical position.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_setTarget"></a><div class="element clickable method public method_setTarget" data-toggle="collapse" data-target=".method_setTarget .collapse">
+<h2>Attaches a frame target.</h2>
+<pre>setTarget($frame) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $frame        Name of frame.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$frame</h4></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property__fragment"> </a><div class="element clickable property public property__fragment" data-toggle="collapse" data-target=".property__fragment .collapse">
+<h2>$_fragment</h2>
+<pre>$_fragment </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__host"> </a><div class="element clickable property public property__host" data-toggle="collapse" data-target=".property__host .collapse">
+<h2>$_host</h2>
+<pre>$_host </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__password"> </a><div class="element clickable property public property__password" data-toggle="collapse" data-target=".property__password .collapse">
+<h2>$_password</h2>
+<pre>$_password </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__path"> </a><div class="element clickable property public property__path" data-toggle="collapse" data-target=".property__path .collapse">
+<h2>$_path</h2>
+<pre>$_path </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__port"> </a><div class="element clickable property public property__port" data-toggle="collapse" data-target=".property__port .collapse">
+<h2>$_port</h2>
+<pre>$_port </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__raw"> </a><div class="element clickable property public property__raw" data-toggle="collapse" data-target=".property__raw .collapse">
+<h2>$_raw</h2>
+<pre>$_raw </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__request"> </a><div class="element clickable property public property__request" data-toggle="collapse" data-target=".property__request .collapse">
+<h2>$_request</h2>
+<pre>$_request </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__scheme"> </a><div class="element clickable property public property__scheme" data-toggle="collapse" data-target=".property__scheme .collapse">
+<h2>$_scheme</h2>
+<pre>$_scheme </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__target"> </a><div class="element clickable property public property__target" data-toggle="collapse" data-target=".property__target .collapse">
+<h2>$_target</h2>
+<pre>$_target </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__username"> </a><div class="element clickable property public property__username" data-toggle="collapse" data-target=".property__username .collapse">
+<h2>$_username</h2>
+<pre>$_username </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__x"> </a><div class="element clickable property public property__x" data-toggle="collapse" data-target=".property__x .collapse">
+<h2>$_x</h2>
+<pre>$_x </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__y"> </a><div class="element clickable property public property__y" data-toggle="collapse" data-target=".property__y .collapse">
+<h2>$_y</h2>
+<pre>$_y </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.1.0
+</a> and<br>
+            generated on 2013-12-03T13:07:06+01:00.<br></footer></div>
+</div>
+</body>
+</html>

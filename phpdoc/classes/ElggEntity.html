@@ -1,0 +1,1972 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>API Documentation » \ElggEntity</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">API Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/clipit.html"><i class="icon-th"></i> clipit</a></li>
+<li><a href="../namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Elgg.html"><i class="icon-folder-open"></i> Elgg</a></li>
+<li><a href="../packages/Elgg.Core.html"><i class="icon-folder-open"></i> Elgg.Core</a></li>
+<li><a href="../packages/Elgg.Core.Plugin.html"><i class="icon-folder-open"></i> Elgg.Core.Plugin</a></li>
+<li><a href="../packages/ElggAPIAdmin.html"><i class="icon-folder-open"></i> ElggAPIAdmin</a></li>
+<li><a href="../packages/ElggDiagnostics.html"><i class="icon-folder-open"></i> ElggDiagnostics</a></li>
+<li><a href="../packages/ElggEmbed.html"><i class="icon-folder-open"></i> ElggEmbed</a></li>
+<li><a href="../packages/ElggFile.html"><i class="icon-folder-open"></i> ElggFile</a></li>
+<li><a href="../packages/ElggGarbageCollector.html"><i class="icon-folder-open"></i> ElggGarbageCollector</a></li>
+<li><a href="../packages/ElggGroups.html"><i class="icon-folder-open"></i> ElggGroups</a></li>
+<li><a href="../packages/ElggLogBrowser.html"><i class="icon-folder-open"></i> ElggLogBrowser</a></li>
+<li><a href="../packages/ElggLogRotate.html"><i class="icon-folder-open"></i> ElggLogRotate</a></li>
+<li><a href="../packages/ElggMessages.html"><i class="icon-folder-open"></i> ElggMessages</a></li>
+<li><a href="../packages/ElggNotifications.html"><i class="icon-folder-open"></i> ElggNotifications</a></li>
+<li><a href="../packages/ElggProfile.html"><i class="icon-folder-open"></i> ElggProfile</a></li>
+<li><a href="../packages/ElggTinyMCE.html"><i class="icon-folder-open"></i> ElggTinyMCE</a></li>
+<li><a href="../packages/ElgghtmLawed.html"><i class="icon-folder-open"></i> ElgghtmLawed</a></li>
+<li><a href="../packages/Embed%20Video%20Library.html"><i class="icon-folder-open"></i> Embed Video Library</a></li>
+<li><a href="../packages/PlaceLocalInclude.html"><i class="icon-folder-open"></i> PlaceLocalInclude</a></li>
+<li><a href="../packages/SimpleTest.html"><i class="icon-folder-open"></i> SimpleTest</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+     @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20MockObjects%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   MockObjects
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20MockObjects.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage MockObjects</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+     @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@abstract.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @abstract</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20WebTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage WebTester</a></li>
+<li><a href="../packages/%5Bname%5D.html"><i class="icon-folder-open"></i> [name]</a></li>
+<li><a href="../packages/clipit.html"><i class="icon-folder-open"></i> clipit</a></li>
+<li><a href="../packages/event_calendar.html"><i class="icon-folder-open"></i> event_calendar</a></li>
+<li><a href="../packages/pebs.html"><i class="icon-folder-open"></i> pebs</a></li>
+<li><a href="../packages/profile_manager.html"><i class="icon-folder-open"></i> profile_manager</a></li>
+<li><a href="../packages/veeplay.html"><i class="icon-folder-open"></i> veeplay</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">4473</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">250</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___clone" title="__clone() :: Clone an entity"><span class="description">Clone an entity</span><pre>__clone()</pre></a></li>
+<li class="method public "><a href="#method___unset" title="__unset() :: Unset a property from metadata or attribute."><span class="description">Unset a property from metadata or attribute.</span><pre>__unset()</pre></a></li>
+<li class="method public "><a href="#method_addRelationship" title="addRelationship() :: Add a relationship between this an another entity."><span class="description">Add a relationship between this an another entity.</span><pre>addRelationship()</pre></a></li>
+<li class="method public "><a href="#method_annotate" title="annotate() :: Adds an annotation to an entity."><span class="description">Adds an annotation to an entity.</span><pre>annotate()</pre></a></li>
+<li class="method public "><a href="#method_canAnnotate" title="canAnnotate() :: Can a user annotate an entity?"><span class="description">Can a user annotate an entity?</span><pre>canAnnotate()</pre></a></li>
+<li class="method public "><a href="#method_canComment" title="canComment() :: Can a user comment on an entity?"><span class="description">Can a user comment on an entity?</span><pre>canComment()</pre></a></li>
+<li class="method public "><a href="#method_canEdit" title="canEdit() :: Can a user edit this entity."><span class="description">Can a user edit this entity.</span><pre>canEdit()</pre></a></li>
+<li class="method public "><a href="#method_canEditMetadata" title="canEditMetadata() :: Can a user edit metadata on this entity"><span class="description">Can a user edit metadata on this entity</span><pre>canEditMetadata()</pre></a></li>
+<li class="method public "><a href="#method_canWriteToContainer" title="canWriteToContainer() :: Can a user add an entity to this container"><span class="description">Can a user add an entity to this container</span><pre>canWriteToContainer()</pre></a></li>
+<li class="method public "><a href="#method_clearAnnotations" title="clearAnnotations() :: Remove an annotation or all annotations for this entity."><span class="description">Remove an annotation or all annotations for this entity.</span><pre>clearAnnotations()</pre></a></li>
+<li class="method public "><a href="#method_clearMetaData" title="clearMetaData() :: Remove metadata"><span class="description">Remove metadata</span><pre>clearMetaData()</pre></a></li>
+<li class="method public "><a href="#method_clearRelationships" title="clearRelationships() :: Remove all relationships to and from this entity."><span class="description">Remove all relationships to and from this entity.</span><pre>clearRelationships()</pre></a></li>
+<li class="method public "><a href="#method_countAnnotations" title="countAnnotations() :: Count annotations."><span class="description">Count annotations.</span><pre>countAnnotations()</pre></a></li>
+<li class="method public "><a href="#method_countComments" title="countComments() :: Count the number of comments attached to this entity."><span class="description">Count the number of comments attached to this entity.</span><pre>countComments()</pre></a></li>
+<li class="method public "><a href="#method_countEntitiesFromRelationship" title="countEntitiesFromRelationship() :: Gets the number of of entities from a specific relationship type"><span class="description">Gets the number of of entities from a specific relationship type</span><pre>countEntitiesFromRelationship()</pre></a></li>
+<li class="method public "><a href="#method_delete" title="delete() :: Delete this entity."><span class="description">Delete this entity.</span><pre>delete()</pre></a></li>
+<li class="method public "><a href="#method_deleteAnnotations" title="deleteAnnotations() :: Deletes all annotations on this object (annotations.entity_guid = $this-&gt;guid)."><span class="description">Deletes all annotations on this object (annotations.entity_guid = $this-&gt;guid).</span><pre>deleteAnnotations()</pre></a></li>
+<li class="method public "><a href="#method_deleteMetadata" title="deleteMetadata() :: Deletes all metadata on this object (metadata.entity_guid = $this-&gt;guid)."><span class="description">Deletes all metadata on this object (metadata.entity_guid = $this-&gt;guid).</span><pre>deleteMetadata()</pre></a></li>
+<li class="method public "><a href="#method_deleteOwnedAnnotations" title="deleteOwnedAnnotations() :: Deletes all annotations owned by this object (annotations.owner_guid = $this-&gt;guid)."><span class="description">Deletes all annotations owned by this object (annotations.owner_guid = $this-&gt;guid).</span><pre>deleteOwnedAnnotations()</pre></a></li>
+<li class="method public "><a href="#method_deleteOwnedMetadata" title="deleteOwnedMetadata() :: Deletes all metadata owned by this object (metadata.owner_guid = $this-&gt;guid)."><span class="description">Deletes all metadata owned by this object (metadata.owner_guid = $this-&gt;guid).</span><pre>deleteOwnedMetadata()</pre></a></li>
+<li class="method public "><a href="#method_deleteRelationships" title="deleteRelationships() :: Remove all relationships to and from this entity."><span class="description">Remove all relationships to and from this entity.</span><pre>deleteRelationships()</pre></a></li>
+<li class="method public "><a href="#method_disableAnnotations" title="disableAnnotations() :: Disables annotations for this entity, optionally based on name."><span class="description">Disables annotations for this entity, optionally based on name.</span><pre>disableAnnotations()</pre></a></li>
+<li class="method public "><a href="#method_disableMetadata" title="disableMetadata() :: Disables metadata for this entity, optionally based on name."><span class="description">Disables metadata for this entity, optionally based on name.</span><pre>disableMetadata()</pre></a></li>
+<li class="method public "><a href="#method_enable" title="enable() :: Enable an entity"><span class="description">Enable an entity</span><pre>enable()</pre></a></li>
+<li class="method public "><a href="#method_enableAnnotations" title="enableAnnotations() :: Enables annotations for this entity, optionally based on name."><span class="description">Enables annotations for this entity, optionally based on name.</span><pre>enableAnnotations()</pre></a></li>
+<li class="method public "><a href="#method_enableMetadata" title="enableMetadata() :: Enables metadata for this entity, optionally based on name."><span class="description">Enables metadata for this entity, optionally based on name.</span><pre>enableMetadata()</pre></a></li>
+<li class="method public "><a href="#method_export" title="export() :: Export this class into an array of ODD Elements containing all necessary fields."><span class="description">Export this class into an array of ODD Elements containing all necessary fields.</span><pre>export()</pre></a></li>
+<li class="method public "><a href="#method_get" title="get() :: Return the value of a property."><span class="description">Return the value of a property.</span><pre>get()</pre></a></li>
+<li class="method public "><a href="#method_getAccessID" title="getAccessID() :: Returns the access_id."><span class="description">Returns the access_id.</span><pre>getAccessID()</pre></a></li>
+<li class="method public "><a href="#method_getAnnotations" title="getAnnotations() :: Returns an array of annotations."><span class="description">Returns an array of annotations.</span><pre>getAnnotations()</pre></a></li>
+<li class="method public "><a href="#method_getAnnotationsAvg" title="getAnnotationsAvg() :: Get the average of an integer type annotation."><span class="description">Get the average of an integer type annotation.</span><pre>getAnnotationsAvg()</pre></a></li>
+<li class="method public "><a href="#method_getAnnotationsMax" title="getAnnotationsMax() :: Get the maximum of integer type annotations of a given name."><span class="description">Get the maximum of integer type annotations of a given name.</span><pre>getAnnotationsMax()</pre></a></li>
+<li class="method public "><a href="#method_getAnnotationsMin" title="getAnnotationsMin() :: Get the minimum of integer type annotations of given name."><span class="description">Get the minimum of integer type annotations of given name.</span><pre>getAnnotationsMin()</pre></a></li>
+<li class="method public "><a href="#method_getAnnotationsSum" title="getAnnotationsSum() :: Get the sum of integer type annotations of a given name."><span class="description">Get the sum of integer type annotations of a given name.</span><pre>getAnnotationsSum()</pre></a></li>
+<li class="method public "><a href="#method_getCalendarEndTime" title="getCalendarEndTime() :: Returns the end timestamp."><span class="description">Returns the end timestamp.</span><pre>getCalendarEndTime()</pre></a></li>
+<li class="method public "><a href="#method_getCalendarStartTime" title="getCalendarStartTime() :: Returns the start timestamp."><span class="description">Returns the start timestamp.</span><pre>getCalendarStartTime()</pre></a></li>
+<li class="method public "><a href="#method_getContainer" title="getContainer() :: Gets the container GUID for this entity."><span class="description">Gets the container GUID for this entity.</span><pre>getContainer()</pre></a></li>
+<li class="method public "><a href="#method_getContainerEntity" title="getContainerEntity() :: Get the container entity for this object."><span class="description">Get the container entity for this object.</span><pre>getContainerEntity()</pre></a></li>
+<li class="method public "><a href="#method_getContainerGUID" title="getContainerGUID() :: Gets the container GUID for this entity."><span class="description">Gets the container GUID for this entity.</span><pre>getContainerGUID()</pre></a></li>
+<li class="method public "><a href="#method_getEntitiesFromRelationship" title="getEntitiesFromRelationship() :: Gets an array of entities with a relationship to this entity."><span class="description">Gets an array of entities with a relationship to this entity.</span><pre>getEntitiesFromRelationship()</pre></a></li>
+<li class="method public "><a href="#method_getExportableValues" title="getExportableValues() :: Returns an array of fields which can be exported."><span class="description">Returns an array of fields which can be exported.</span><pre>getExportableValues()</pre></a></li>
+<li class="method public "><a href="#method_getGUID" title="getGUID() :: Returns the guid."><span class="description">Returns the guid.</span><pre>getGUID()</pre></a></li>
+<li class="method public "><a href="#method_getIcon" title="getIcon() :: Returns a URL for the entity's icon."><span class="description">Returns a URL for the entity's icon.</span><pre>getIcon()</pre></a></li>
+<li class="method public "><a href="#method_getIconURL" title="getIconURL() :: Get the URL for this entity's icon"><span class="description">Get the URL for this entity's icon</span><pre>getIconURL()</pre></a></li>
+<li class="method public "><a href="#method_getLatitude" title="getLatitude() :: Return the entity's latitude."><span class="description">Return the entity's latitude.</span><pre>getLatitude()</pre></a></li>
+<li class="method public "><a href="#method_getLocation" title="getLocation() :: Gets the 'location' metadata for the entity"><span class="description">Gets the 'location' metadata for the entity</span><pre>getLocation()</pre></a></li>
+<li class="method public "><a href="#method_getLongitude" title="getLongitude() :: Return the entity's longitude"><span class="description">Return the entity's longitude</span><pre>getLongitude()</pre></a></li>
+<li class="method public "><a href="#method_getMetaData" title="getMetaData() :: Return the value of a piece of metadata."><span class="description">Return the value of a piece of metadata.</span><pre>getMetaData()</pre></a></li>
+<li class="method public "><a href="#method_getObjectFromID" title="getObjectFromID() :: For a given ID, return the object associated with it."><span class="description">For a given ID, return the object associated with it.</span><pre>getObjectFromID()</pre></a></li>
+<li class="method public "><a href="#method_getOwner" title="getOwner() :: Return the guid of the entity's owner."><span class="description">Return the guid of the entity's owner.</span><pre>getOwner()</pre></a></li>
+<li class="method public "><a href="#method_getOwnerEntity" title="getOwnerEntity() :: Gets the ElggEntity that owns this entity."><span class="description">Gets the ElggEntity that owns this entity.</span><pre>getOwnerEntity()</pre></a></li>
+<li class="method public "><a href="#method_getOwnerGUID" title="getOwnerGUID() :: Get the guid of the entity's owner."><span class="description">Get the guid of the entity's owner.</span><pre>getOwnerGUID()</pre></a></li>
+<li class="method public "><a href="#method_getPrivateSetting" title="getPrivateSetting() :: Returns a private setting value"><span class="description">Returns a private setting value</span><pre>getPrivateSetting()</pre></a></li>
+<li class="method public "><a href="#method_getSubtype" title="getSubtype() :: Returns the entity subtype string"><span class="description">Returns the entity subtype string</span><pre>getSubtype()</pre></a></li>
+<li class="method public "><a href="#method_getSystemLogID" title="getSystemLogID() :: Return an identification for the object for storage in the system log."><span class="description">Return an identification for the object for storage in the system log.</span><pre>getSystemLogID()</pre></a></li>
+<li class="method public "><a href="#method_getTags" title="getTags() :: Returns tags for this entity."><span class="description">Returns tags for this entity.</span><pre>getTags()</pre></a></li>
+<li class="method public "><a href="#method_getTimeUpdated" title="getTimeUpdated() :: Returns the UNIX epoch time that this entity was last updated"><span class="description">Returns the UNIX epoch time that this entity was last updated</span><pre>getTimeUpdated()</pre></a></li>
+<li class="method public "><a href="#method_getType" title="getType() :: Returns the entity type"><span class="description">Returns the entity type</span><pre>getType()</pre></a></li>
+<li class="method public "><a href="#method_getURL" title="getURL() :: Returns the URL for this entity"><span class="description">Returns the URL for this entity</span><pre>getURL()</pre></a></li>
+<li class="method public "><a href="#method_getVolatileData" title="getVolatileData() :: Get a piece of volatile (non-persisted) data on this entity."><span class="description">Get a piece of volatile (non-persisted) data on this entity.</span><pre>getVolatileData()</pre></a></li>
+<li class="method public "><a href="#method_import" title="import() :: Import data from an parsed ODD xml data array."><span class="description">Import data from an parsed ODD xml data array.</span><pre>import()</pre></a></li>
+<li class="method public "><a href="#method_isEnabled" title="isEnabled() :: Is this entity enabled?"><span class="description">Is this entity enabled?</span><pre>isEnabled()</pre></a></li>
+<li class="method public "><a href="#method_isFullyLoaded" title="isFullyLoaded() :: Tests to see whether the object has been fully loaded."><span class="description">Tests to see whether the object has been fully loaded.</span><pre>isFullyLoaded()</pre></a></li>
+<li class="method public "><a href="#method_removePrivateSetting" title="removePrivateSetting() :: Removes private setting"><span class="description">Removes private setting</span><pre>removePrivateSetting()</pre></a></li>
+<li class="method public "><a href="#method_removeRelationship" title="removeRelationship() :: Remove a relationship"><span class="description">Remove a relationship</span><pre>removeRelationship()</pre></a></li>
+<li class="method public "><a href="#method_save" title="save() :: Save an entity."><span class="description">Save an entity.</span><pre>save()</pre></a></li>
+<li class="method public "><a href="#method_set" title="set() :: Sets the value of a property."><span class="description">Sets the value of a property.</span><pre>set()</pre></a></li>
+<li class="method public "><a href="#method_setCalendarTimeAndDuration" title="setCalendarTimeAndDuration() :: Set the time and duration of an object"><span class="description">Set the time and duration of an object</span><pre>setCalendarTimeAndDuration()</pre></a></li>
+<li class="method public "><a href="#method_setContainer" title="setContainer() :: Set the container for this object."><span class="description">Set the container for this object.</span><pre>setContainer()</pre></a></li>
+<li class="method public "><a href="#method_setContainerGUID" title="setContainerGUID() :: Set the container for this object."><span class="description">Set the container for this object.</span><pre>setContainerGUID()</pre></a></li>
+<li class="method public "><a href="#method_setIcon" title="setIcon() :: Set an icon override for an icon and size."><span class="description">Set an icon override for an icon and size.</span><pre>setIcon()</pre></a></li>
+<li class="method public "><a href="#method_setLatLong" title="setLatLong() :: Set latitude and longitude metadata tags for a given entity."><span class="description">Set latitude and longitude metadata tags for a given entity.</span><pre>setLatLong()</pre></a></li>
+<li class="method public "><a href="#method_setLocation" title="setLocation() :: Sets the 'location' metadata for the entity"><span class="description">Sets the 'location' metadata for the entity</span><pre>setLocation()</pre></a></li>
+<li class="method public "><a href="#method_setMetaData" title="setMetaData() :: Set a piece of metadata."><span class="description">Set a piece of metadata.</span><pre>setMetaData()</pre></a></li>
+<li class="method public "><a href="#method_setPrivateSetting" title="setPrivateSetting() :: Adds a private setting to this entity."><span class="description">Adds a private setting to this entity.</span><pre>setPrivateSetting()</pre></a></li>
+<li class="method public "><a href="#method_setURL" title="setURL() :: Overrides the URL returned by getURL()"><span class="description">Overrides the URL returned by getURL()</span><pre>setURL()</pre></a></li>
+<li class="method public "><a href="#method_setVolatileData" title="setVolatileData() :: Set a piece of volatile (non-persisted) data on this entity"><span class="description">Set a piece of volatile (non-persisted) data on this entity</span><pre>setVolatileData()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="method protected "><a href="#method_initializeAttributes" title="initializeAttributes() :: Initialize the attributes array."><span class="description">Initialize the attributes array.</span><pre>initializeAttributes()</pre></a></li>
+<li class="method protected "><a href="#method_load" title="load() :: Loads attributes from the entities table into the object."><span class="description">Loads attributes from the entities table into the object.</span><pre>load()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul><li class="method private "><a href="#method_getAnnotationCalculation" title="getAnnotationCalculation() :: Helper function to return annotation calculation results"><span class="description">Helper function to return annotation calculation results</span><pre>getAnnotationCalculation()</pre></a></li></ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul>
+<li class="property public "><a href="#property_access_id" title="$access_id() :: Specifies the visibility level of this entity"><span class="description"></span><pre>$access_id</pre></a></li>
+<li class="property public "><a href="#property_container_guid" title="$container_guid() :: The GUID of the entity containing this entity"><span class="description"></span><pre>$container_guid</pre></a></li>
+<li class="property public "><a href="#property_enabled" title="$enabled() :: "><span class="description"></span><pre>$enabled</pre></a></li>
+<li class="property public "><a href="#property_guid" title="$guid() :: The unique identifier for this entity (read only)"><span class="description"></span><pre>$guid</pre></a></li>
+<li class="property public "><a href="#property_owner_guid" title="$owner_guid() :: The GUID of the creator of this entity"><span class="description"></span><pre>$owner_guid</pre></a></li>
+<li class="property public "><a href="#property_site_guid" title="$site_guid() :: The GUID of the website this entity is associated with"><span class="description"></span><pre>$site_guid</pre></a></li>
+<li class="property public "><a href="#property_subtype" title="$subtype() :: Further clarifies the nature of the entity (read-only after save)"><span class="description"></span><pre>$subtype</pre></a></li>
+<li class="property public "><a href="#property_time_created" title="$time_created() :: A UNIX timestamp of when the entity was created (read-only, set on first save)"><span class="description"></span><pre>$time_created</pre></a></li>
+<li class="property public "><a href="#property_time_updated" title="$time_updated() :: A UNIX timestamp of when the entity was last updated (automatically updated on save)"><span class="description"></span><pre>$time_updated</pre></a></li>
+<li class="property public "><a href="#property_type" title="$type() :: object, user, group, or site (read-only after save)"><span class="description"></span><pre>$type</pre></a></li>
+</ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="property protected "><a href="#property_icon_override" title="$icon_override() :: Icon override, overrides the value of getIcon()."><span class="description"></span><pre>$icon_override</pre></a></li>
+<li class="property protected "><a href="#property_temp_annotations" title="$temp_annotations() :: Holds annotations until entity is saved.  Once the entity is saved,
+annotations are written immediately to the database."><span class="description"></span><pre>$temp_annotations</pre></a></li>
+<li class="property protected "><a href="#property_temp_metadata" title="$temp_metadata() :: Holds metadata until entity is saved.  Once the entity is saved,
+metadata are written immediately to the database."><span class="description"></span><pre>$temp_metadata</pre></a></li>
+<li class="property protected "><a href="#property_temp_private_settings" title="$temp_private_settings() :: Holds private settings until entity is saved. Once the entity is saved,
+private settings are written immediately to the database."><span class="description"></span><pre>$temp_private_settings</pre></a></li>
+<li class="property protected "><a href="#property_url_override" title="$url_override() :: If set, overrides the value of getURL()"><span class="description"></span><pre>$url_override</pre></a></li>
+<li class="property protected "><a href="#property_volatile" title="$volatile() :: Volatile data structure for this object, allows for storage of data
+in-memory that isn't sync'd back to the metadata table."><span class="description"></span><pre>$volatile</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\ElggEntity"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/ElggEntity.html">ElggEntity</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">The parent class for all Elgg Entities.</p>
+<div class="details">
+<div class="long_description">An ElggEntity is one of the basic data models in Elgg.  It is the primary
+means of storing and retrieving data from the database.  An ElggEntity
+represents one row of the entities table.
+
+The ElggEntity class handles CRUD operations for the entities table.
+ElggEntity should always be extended by another class to handle CRUD
+operations on the type-specific table.
+
+ElggEntity uses magic methods for get and set, so any property that isn't
+declared will be assumed to be metadata and written to the database
+as metadata on the object.  All children classes must declare which
+properties are columns of the type table or they will be assumed
+to be metadata.  See ElggObject::initialise_entities() for examples.
+
+Core supports 4 types of entities: ElggObject, ElggUser, ElggGroup, and
+ElggSite.</div>
+<table class="table table-bordered">
+<tr>
+<th>tip</th>
+<td>Most plugin authors will want to extend the ElggObject class
+instead of this class.</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/Elgg.Core.DataModel.Entities.html">Elgg.Core</a></td>
+</tr>
+<tr>
+<th>subpackage</th>
+<td>DataModel.Entities</td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___clone"></a><div class="element clickable method public method___clone" data-toggle="collapse" data-target=".method___clone .collapse">
+<h2>Clone an entity</h2>
+<pre>__clone() : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">Resets the guid so that the entity can be saved as a distinct entity from
+the original. Creation time will be set when this new entity is saved.
+The owner and container guids come from the original entity. The clone
+method copies metadata but does not copy annotations or private settings.</div>
+<table class="table table-bordered"><tr>
+<th>note</th>
+<td>metadata will have its owner and access id set when the entity is saved
+and it will be the same as that of the entity.</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method___unset"></a><div class="element clickable method public method___unset" data-toggle="collapse" data-target=".method___unset .collapse">
+<h2>Unset a property from metadata or attribute.</h2>
+<pre>__unset(string $name) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>warning</th>
+<td>If you use this to unset an attribute, you must save the object!</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The name of the attribute or metadata.</p></div>
+</div></div>
+</div>
+<a id="method_addRelationship"></a><div class="element clickable method public method_addRelationship" data-toggle="collapse" data-target=".method_addRelationship .collapse">
+<h2>Add a relationship between this an another entity.</h2>
+<pre>addRelationship(int $guid, string $relationship) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>tip</th>
+<td>Read the relationship like "$guid is a $relationship of this entity."</td>
+</tr>
+<tr>
+<th>see</th>
+<td><a href="%5CElggEntity::removeRelationship()"></a></td>
+</tr>
+<tr>
+<th>see</th>
+<td><a href="%5CElggEntity::clearRelationships()"></a></td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$guid</h4>
+<code>int</code><p>Entity to link to.</p></div>
+<div class="subelement argument">
+<h4>$relationship</h4>
+<code>string</code><p>The type of relationship.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_annotate"></a><div class="element clickable method public method_annotate" data-toggle="collapse" data-target=".method_annotate .collapse">
+<h2>Adds an annotation to an entity.</h2>
+<pre>annotate(string $name, mixed $value, int $access_id, int $owner_id, string $vartype) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>warning</th>
+<td>By default, annotations are private.</td>
+</tr>
+<tr>
+<th>warning</th>
+<td>Annotating an unsaved entity more than once with the same name
+         will only save the last annotation.</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>Annotation name</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>mixed</code><p>Annotation value</p></div>
+<div class="subelement argument">
+<h4>$access_id</h4>
+<code>int</code><p>Access ID</p></div>
+<div class="subelement argument">
+<h4>$owner_id</h4>
+<code>int</code><p>GUID of the annotation owner</p></div>
+<div class="subelement argument">
+<h4>$vartype</h4>
+<code>string</code><p>The type of annotation value</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_canAnnotate"></a><div class="element clickable method public method_canAnnotate" data-toggle="collapse" data-target=".method_canAnnotate .collapse">
+<h2>Can a user annotate an entity?</h2>
+<pre>canAnnotate(int $user_guid, string $annotation_name) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>tip</th>
+<td>Can be overridden by registering for the permissions_check:annotate,
+<entity type> plugin hook.</td>
+</tr>
+<tr>
+<th>tip</th>
+<td>If you want logged out users to annotate an object, do not call
+canAnnotate(). It's easier than using the plugin hook.</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$user_guid</h4>
+<code>int</code><p>User guid (default is logged in user)</p>
+</div>
+<div class="subelement argument">
+<h4>$annotation_name</h4>
+<code>string</code><p>The name of the annotation (default is unspecified)</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_canComment"></a><div class="element clickable method public method_canComment" data-toggle="collapse" data-target=".method_canComment .collapse">
+<h2>Can a user comment on an entity?</h2>
+<pre>canComment(int $user_guid) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>tip</th>
+<td>Can be overridden by registering for the permissions_check:comment,
+<entity type> plugin hook.</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$user_guid</h4>
+<code>int</code><p>User guid (default is logged in user)</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_canEdit"></a><div class="element clickable method public method_canEdit" data-toggle="collapse" data-target=".method_canEdit .collapse">
+<h2>Can a user edit this entity.</h2>
+<pre>canEdit(int $user_guid) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$user_guid</h4>
+<code>int</code><p>The user GUID, optionally (default: logged in user)</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_canEditMetadata"></a><div class="element clickable method public method_canEditMetadata" data-toggle="collapse" data-target=".method_canEditMetadata .collapse">
+<h2>Can a user edit metadata on this entity</h2>
+<pre>canEditMetadata(\ElggMetadata $metadata, int $user_guid) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$metadata</h4>
+<code><a href="../classes/ElggMetadata.html">\ElggMetadata</a></code><p>The piece of metadata to specifically check</p></div>
+<div class="subelement argument">
+<h4>$user_guid</h4>
+<code>int</code><p>The user GUID, optionally (default: logged in user)</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_canWriteToContainer"></a><div class="element clickable method public method_canWriteToContainer" data-toggle="collapse" data-target=".method_canWriteToContainer .collapse">
+<h2>Can a user add an entity to this container</h2>
+<pre>canWriteToContainer(int $user_guid, string $type, string $subtype) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$user_guid</h4>
+<code>int</code><p>The user.</p></div>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>string</code><p>The type of entity we're looking to write</p>
+</div>
+<div class="subelement argument">
+<h4>$subtype</h4>
+<code>string</code><p>The subtype of the entity we're looking to write</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_clearAnnotations"></a><div class="element clickable method public method_clearAnnotations" data-toggle="collapse" data-target=".method_clearAnnotations .collapse">
+<h2>Remove an annotation or all annotations for this entity.</h2>
+<pre>clearAnnotations(string $name) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>warning</th>
+<td>Calling this method with no or an empty argument will remove
+all annotations on the entity.</td>
+</tr>
+<tr>
+<th>deprecated</th>
+<td>1.8 Use ->deleteAnnotations()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>Annotation name</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_clearMetaData"></a><div class="element clickable method public method_clearMetaData" data-toggle="collapse" data-target=".method_clearMetaData .collapse">
+<h2>Remove metadata</h2>
+<pre>clearMetaData(string $name) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>warning</th>
+<td>Calling this with no or empty arguments will clear all metadata on the entity.</td>
+</tr>
+<tr>
+<th>deprecated</th>
+<td>1.8 Use deleteMetadata()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The name of the metadata to clear</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code>bool</div>
+</div></div>
+</div>
+<a id="method_clearRelationships"></a><div class="element clickable method public method_clearRelationships" data-toggle="collapse" data-target=".method_clearRelationships .collapse">
+<h2>Remove all relationships to and from this entity.</h2>
+<pre>clearRelationships() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>see</th>
+<td><a href="%5CElggEntity::addRelationship()"></a></td>
+</tr>
+<tr>
+<th>see</th>
+<td><a href="%5CElggEntity::removeRelationship()"></a></td>
+</tr>
+<tr>
+<th>deprecated</th>
+<td>1.8 Use ->deleteRelationship()</td>
+</tr>
+</table>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_countAnnotations"></a><div class="element clickable method public method_countAnnotations" data-toggle="collapse" data-target=".method_countAnnotations .collapse">
+<h2>Count annotations.</h2>
+<pre>countAnnotations(string $name) : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The type of annotation.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>int</code></div>
+</div></div>
+</div>
+<a id="method_countComments"></a><div class="element clickable method public method_countComments" data-toggle="collapse" data-target=".method_countComments .collapse">
+<h2>Count the number of comments attached to this entity.</h2>
+<pre>countComments() : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.8.0</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>int</code>Number of comments</div>
+</div></div>
+</div>
+<a id="method_countEntitiesFromRelationship"></a><div class="element clickable method public method_countEntitiesFromRelationship" data-toggle="collapse" data-target=".method_countEntitiesFromRelationship .collapse">
+<h2>Gets the number of of entities from a specific relationship type</h2>
+<pre>countEntitiesFromRelationship(string $relationship, bool $inverse_relationship) : int | false</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$relationship</h4>
+<code>string</code><p>Relationship type (eg "friends")</p>
+</div>
+<div class="subelement argument">
+<h4>$inverse_relationship</h4>
+<code>bool</code><p>Invert relationship</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>int</code><code>false</code>The number of entities or false on failure</div>
+</div></div>
+</div>
+<a id="method_delete"></a><div class="element clickable method public method_delete" data-toggle="collapse" data-target=".method_delete .collapse">
+<h2>Delete this entity.</h2>
+<pre>delete(bool $recursive) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$recursive</h4>
+<code>bool</code><p>Whether to delete all the entities contained by this entity</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_deleteAnnotations"></a><div class="element clickable method public method_deleteAnnotations" data-toggle="collapse" data-target=".method_deleteAnnotations .collapse">
+<h2>Deletes all annotations on this object (annotations.entity_guid = $this-&gt;guid).</h2>
+<pre>deleteAnnotations(null|string $name) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">If you pass a name, only annotations matching that name will be deleted.</div>
+<table class="table table-bordered">
+<tr>
+<th>warning</th>
+<td>Calling this with no or empty arguments will clear all annotations on the entity.</td>
+</tr>
+<tr>
+<th>since</th>
+<td>1.8</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>null</code><code>string</code><p>The annotations name to remove.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_deleteMetadata"></a><div class="element clickable method public method_deleteMetadata" data-toggle="collapse" data-target=".method_deleteMetadata .collapse">
+<h2>Deletes all metadata on this object (metadata.entity_guid = $this-&gt;guid).</h2>
+<pre>deleteMetadata(null|string $name) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">If you pass a name, only metadata matching that name will be deleted.</div>
+<table class="table table-bordered">
+<tr>
+<th>warning</th>
+<td>Calling this with no $name will clear all metadata on the entity.</td>
+</tr>
+<tr>
+<th>since</th>
+<td>1.8</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>null</code><code>string</code><p>The name of the metadata to remove.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_deleteOwnedAnnotations"></a><div class="element clickable method public method_deleteOwnedAnnotations" data-toggle="collapse" data-target=".method_deleteOwnedAnnotations .collapse">
+<h2>Deletes all annotations owned by this object (annotations.owner_guid = $this-&gt;guid).</h2>
+<pre>deleteOwnedAnnotations(null|string $name) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">If you pass a name, only annotations matching that name will be deleted.</div>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.8</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>null</code><code>string</code><p>The name of annotations to delete.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_deleteOwnedMetadata"></a><div class="element clickable method public method_deleteOwnedMetadata" data-toggle="collapse" data-target=".method_deleteOwnedMetadata .collapse">
+<h2>Deletes all metadata owned by this object (metadata.owner_guid = $this-&gt;guid).</h2>
+<pre>deleteOwnedMetadata(null|string $name) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">If you pass a name, only metadata matching that name will be deleted.</div>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.8</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>null</code><code>string</code><p>The name of metadata to delete.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_deleteRelationships"></a><div class="element clickable method public method_deleteRelationships" data-toggle="collapse" data-target=".method_deleteRelationships .collapse">
+<h2>Remove all relationships to and from this entity.</h2>
+<pre>deleteRelationships() : true</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>todo</th>
+<td>This should actually return if it worked.</td>
+</tr>
+<tr>
+<th>see</th>
+<td><a href="%5CElggEntity::addRelationship()"></a></td>
+</tr>
+<tr>
+<th>see</th>
+<td><a href="%5CElggEntity::removeRelationship()"></a></td>
+</tr>
+</table>
+<h3>Returns</h3>
+<div class="subelement response"><code>true</code></div>
+</div></div>
+</div>
+<a id="method_disableAnnotations"></a><div class="element clickable method public method_disableAnnotations" data-toggle="collapse" data-target=".method_disableAnnotations .collapse">
+<h2>Disables annotations for this entity, optionally based on name.</h2>
+<pre>disableAnnotations(string $name) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.8</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>An options name of annotations to disable.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_disableMetadata"></a><div class="element clickable method public method_disableMetadata" data-toggle="collapse" data-target=".method_disableMetadata .collapse">
+<h2>Disables metadata for this entity, optionally based on name.</h2>
+<pre>disableMetadata(string $name) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.8</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>An options name of metadata to disable.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_enable"></a><div class="element clickable method public method_enable" data-toggle="collapse" data-target=".method_enable .collapse">
+<h2>Enable an entity</h2>
+<pre>enable() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>warning</th>
+<td>Disabled entities can't be loaded unless
+{@link access_show_hidden_entities(true)} has been called.</td>
+</tr>
+<tr>
+<th>see</th>
+<td><a href="%5Cenable_entity()"></a></td>
+</tr>
+<tr>
+<th>see</th>
+<td><a href="%5Caccess_show_hiden_entities()"></a></td>
+</tr>
+</table>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_enableAnnotations"></a><div class="element clickable method public method_enableAnnotations" data-toggle="collapse" data-target=".method_enableAnnotations .collapse">
+<h2>Enables annotations for this entity, optionally based on name.</h2>
+<pre>enableAnnotations(string $name) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>warning</th>
+<td>Before calling this, you must use {@link access_show_hidden_entities()}</td>
+</tr>
+<tr>
+<th>since</th>
+<td>1.8</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>An options name of annotations to enable.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_enableMetadata"></a><div class="element clickable method public method_enableMetadata" data-toggle="collapse" data-target=".method_enableMetadata .collapse">
+<h2>Enables metadata for this entity, optionally based on name.</h2>
+<pre>enableMetadata(string $name) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>warning</th>
+<td>Before calling this, you must use {@link access_show_hidden_entities()}</td>
+</tr>
+<tr>
+<th>since</th>
+<td>1.8</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>An options name of metadata to enable.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_export"></a><div class="element clickable method public method_export" data-toggle="collapse" data-target=".method_export .collapse">
+<h2>Export this class into an array of ODD Elements containing all necessary fields.</h2>
+<pre>export() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">Override if you wish to return more information than can be found in
+$this->attributes (shouldn't happen)</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_get"></a><div class="element clickable method public method_get" data-toggle="collapse" data-target=".method_get .collapse">
+<h2>Return the value of a property.</h2>
+<pre>get(string $name) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">If $name is defined in $this->attributes that value is returned, otherwise it will
+pull from the entity's metadata.
+
+Q: Why are we not using __get overload here?
+A: Because overload operators cause problems during subclassing, so we put the code here and
+create overloads in subclasses.</div>
+<table class="table table-bordered">
+<tr>
+<th>todo</th>
+<td>What problems are these?</td>
+</tr>
+<tr>
+<th>warning</th>
+<td>Subtype is returned as an id rather than the subtype string. Use getSubtype()
+to get the subtype string.</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>Name</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code>Returns the value of a given value, or null.</div>
+</div></div>
+</div>
+<a id="method_getAccessID"></a><div class="element clickable method public method_getAccessID" data-toggle="collapse" data-target=".method_getAccessID .collapse">
+<h2>Returns the access_id.</h2>
+<pre>getAccessID() : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>int</code>The access ID</div>
+</div></div>
+</div>
+<a id="method_getAnnotations"></a><div class="element clickable method public method_getAnnotations" data-toggle="collapse" data-target=".method_getAnnotations .collapse">
+<h2>Returns an array of annotations.</h2>
+<pre>getAnnotations(string $name, int $limit, int $offset, string $order) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>Annotation name</p></div>
+<div class="subelement argument">
+<h4>$limit</h4>
+<code>int</code><p>Limit</p></div>
+<div class="subelement argument">
+<h4>$offset</h4>
+<code>int</code><p>Offset</p></div>
+<div class="subelement argument">
+<h4>$order</h4>
+<code>string</code><p>Order by time: asc or desc</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_getAnnotationsAvg"></a><div class="element clickable method public method_getAnnotationsAvg" data-toggle="collapse" data-target=".method_getAnnotationsAvg .collapse">
+<h2>Get the average of an integer type annotation.</h2>
+<pre>getAnnotationsAvg(string $name) : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>Annotation name</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>int</code></div>
+</div></div>
+</div>
+<a id="method_getAnnotationsMax"></a><div class="element clickable method public method_getAnnotationsMax" data-toggle="collapse" data-target=".method_getAnnotationsMax .collapse">
+<h2>Get the maximum of integer type annotations of a given name.</h2>
+<pre>getAnnotationsMax(string $name) : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>Annotation name</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>int</code></div>
+</div></div>
+</div>
+<a id="method_getAnnotationsMin"></a><div class="element clickable method public method_getAnnotationsMin" data-toggle="collapse" data-target=".method_getAnnotationsMin .collapse">
+<h2>Get the minimum of integer type annotations of given name.</h2>
+<pre>getAnnotationsMin(string $name) : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>Annotation name</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>int</code></div>
+</div></div>
+</div>
+<a id="method_getAnnotationsSum"></a><div class="element clickable method public method_getAnnotationsSum" data-toggle="collapse" data-target=".method_getAnnotationsSum .collapse">
+<h2>Get the sum of integer type annotations of a given name.</h2>
+<pre>getAnnotationsSum(string $name) : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>Annotation name</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>int</code></div>
+</div></div>
+</div>
+<a id="method_getCalendarEndTime"></a><div class="element clickable method public method_getCalendarEndTime" data-toggle="collapse" data-target=".method_getCalendarEndTime .collapse">
+<h2>Returns the end timestamp.</h2>
+<pre>getCalendarEndTime() : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>todo</th>
+<td>Unimplemented</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>int</code></div>
+</div></div>
+</div>
+<a id="method_getCalendarStartTime"></a><div class="element clickable method public method_getCalendarStartTime" data-toggle="collapse" data-target=".method_getCalendarStartTime .collapse">
+<h2>Returns the start timestamp.</h2>
+<pre>getCalendarStartTime() : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>todo</th>
+<td>Unimplemented</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>int</code></div>
+</div></div>
+</div>
+<a id="method_getContainer"></a><div class="element clickable method public method_getContainer" data-toggle="collapse" data-target=".method_getContainer .collapse">
+<h2>Gets the container GUID for this entity.</h2>
+<pre>getContainer() : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>deprecated</th>
+<td>1.8 Use getContainerGUID()</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>int</code></div>
+</div></div>
+</div>
+<a id="method_getContainerEntity"></a><div class="element clickable method public method_getContainerEntity" data-toggle="collapse" data-target=".method_getContainerEntity .collapse">
+<h2>Get the container entity for this object.</h2>
+<pre>getContainerEntity() : <a href="../classes/ElggEntity.html">\ElggEntity</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.8.0</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/ElggEntity.html">\ElggEntity</a></code></div>
+</div></div>
+</div>
+<a id="method_getContainerGUID"></a><div class="element clickable method public method_getContainerGUID" data-toggle="collapse" data-target=".method_getContainerGUID .collapse">
+<h2>Gets the container GUID for this entity.</h2>
+<pre>getContainerGUID() : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>int</code></div>
+</div></div>
+</div>
+<a id="method_getEntitiesFromRelationship"></a><div class="element clickable method public method_getEntitiesFromRelationship" data-toggle="collapse" data-target=".method_getEntitiesFromRelationship .collapse">
+<h2>Gets an array of entities with a relationship to this entity.</h2>
+<pre>getEntitiesFromRelationship(string $relationship, bool $inverse, int $limit, int $offset) : array | false</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$relationship</h4>
+<code>string</code><p>Relationship type (eg "friends")</p>
+</div>
+<div class="subelement argument">
+<h4>$inverse</h4>
+<code>bool</code><p>Is this an inverse relationship?</p>
+</div>
+<div class="subelement argument">
+<h4>$limit</h4>
+<code>int</code><p>Number of elements to return</p></div>
+<div class="subelement argument">
+<h4>$offset</h4>
+<code>int</code><p>Indexing offset</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code><code>false</code>An array of entities or false on failure</div>
+</div></div>
+</div>
+<a id="method_getExportableValues"></a><div class="element clickable method public method_getExportableValues" data-toggle="collapse" data-target=".method_getExportableValues .collapse">
+<h2>Returns an array of fields which can be exported.</h2>
+<pre>getExportableValues() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_getGUID"></a><div class="element clickable method public method_getGUID" data-toggle="collapse" data-target=".method_getGUID .collapse">
+<h2>Returns the guid.</h2>
+<pre>getGUID() : int | null</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>int</code><code>null</code>GUID</div>
+</div></div>
+</div>
+<a id="method_getIcon"></a><div class="element clickable method public method_getIcon" data-toggle="collapse" data-target=".method_getIcon .collapse">
+<h2>Returns a URL for the entity's icon.</h2>
+<pre>getIcon(string $size) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>deprecated</th>
+<td>Use getIconURL()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$size</h4>
+<code>string</code><p>Either 'large', 'medium', 'small' or 'tiny'</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The url or false if no url could be worked out.</div>
+</div></div>
+</div>
+<a id="method_getIconURL"></a><div class="element clickable method public method_getIconURL" data-toggle="collapse" data-target=".method_getIconURL .collapse">
+<h2>Get the URL for this entity's icon</h2>
+<pre>getIconURL(string $size) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">Plugins can register for the 'entity:icon:url', <type> plugin hook
+to customize the icon for an entity.</div>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.8.0</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$size</h4>
+<code>string</code><p>Size of the icon: tiny, small, medium, large</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The URL</div>
+</div></div>
+</div>
+<a id="method_getLatitude"></a><div class="element clickable method public method_getLatitude" data-toggle="collapse" data-target=".method_getLatitude .collapse">
+<h2>Return the entity's latitude.</h2>
+<pre>getLatitude() : float</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>todo</th>
+<td>Unimplemented</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>float</code></div>
+</div></div>
+</div>
+<a id="method_getLocation"></a><div class="element clickable method public method_getLocation" data-toggle="collapse" data-target=".method_getLocation .collapse">
+<h2>Gets the 'location' metadata for the entity</h2>
+<pre>getLocation() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The location</div>
+</div></div>
+</div>
+<a id="method_getLongitude"></a><div class="element clickable method public method_getLongitude" data-toggle="collapse" data-target=".method_getLongitude .collapse">
+<h2>Return the entity's longitude</h2>
+<pre>getLongitude() : float</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>float</code></div>
+</div></div>
+</div>
+<a id="method_getMetaData"></a><div class="element clickable method public method_getMetaData" data-toggle="collapse" data-target=".method_getMetaData .collapse">
+<h2>Return the value of a piece of metadata.</h2>
+<pre>getMetaData(string $name) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>Name</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code>The value, or NULL if not found.</div>
+</div></div>
+</div>
+<a id="method_getObjectFromID"></a><div class="element clickable method public method_getObjectFromID" data-toggle="collapse" data-target=".method_getObjectFromID .collapse">
+<h2>For a given ID, return the object associated with it.</h2>
+<pre>getObjectFromID(int $id) : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">This is used by the river functionality primarily.
+
+This is useful for checking access permissions etc on objects.</div>
+<table class="table table-bordered"><tr>
+<th>todo</th>
+<td>How is this any different or more useful than get_entity($guid)
+or new ElggEntity($guid)?</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$id</h4>
+<code>int</code><p>GUID.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>int</code>GUID</div>
+</div></div>
+</div>
+<a id="method_getOwner"></a><div class="element clickable method public method_getOwner" data-toggle="collapse" data-target=".method_getOwner .collapse">
+<h2>Return the guid of the entity's owner.</h2>
+<pre>getOwner() : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>deprecated</th>
+<td>1.8 Use getOwnerGUID()</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>int</code>The owner GUID</div>
+</div></div>
+</div>
+<a id="method_getOwnerEntity"></a><div class="element clickable method public method_getOwnerEntity" data-toggle="collapse" data-target=".method_getOwnerEntity .collapse">
+<h2>Gets the ElggEntity that owns this entity.</h2>
+<pre>getOwnerEntity() : <a href="../classes/ElggEntity.html">\ElggEntity</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/ElggEntity.html">\ElggEntity</a></code>The owning entity</div>
+</div></div>
+</div>
+<a id="method_getOwnerGUID"></a><div class="element clickable method public method_getOwnerGUID" data-toggle="collapse" data-target=".method_getOwnerGUID .collapse">
+<h2>Get the guid of the entity's owner.</h2>
+<pre>getOwnerGUID() : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>int</code>The owner GUID</div>
+</div></div>
+</div>
+<a id="method_getPrivateSetting"></a><div class="element clickable method public method_getPrivateSetting" data-toggle="collapse" data-target=".method_getPrivateSetting .collapse">
+<h2>Returns a private setting value</h2>
+<pre>getPrivateSetting(string $name) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>Name of the private setting</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
+<a id="method_getSubtype"></a><div class="element clickable method public method_getSubtype" data-toggle="collapse" data-target=".method_getSubtype .collapse">
+<h2>Returns the entity subtype string</h2>
+<pre>getSubtype() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>note</th>
+<td>This returns a string.  If you want the id, use ElggEntity::subtype.</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The entity subtype</div>
+</div></div>
+</div>
+<a id="method_getSystemLogID"></a><div class="element clickable method public method_getSystemLogID" data-toggle="collapse" data-target=".method_getSystemLogID .collapse">
+<h2>Return an identification for the object for storage in the system log.</h2>
+<pre>getSystemLogID() : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">This id must be an integer.</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>int</code></div>
+</div></div>
+</div>
+<a id="method_getTags"></a><div class="element clickable method public method_getTags" data-toggle="collapse" data-target=".method_getTags .collapse">
+<h2>Returns tags for this entity.</h2>
+<pre>getTags(array $tag_names) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>warning</th>
+<td>Tags must be registered by {@link elgg_register_tag_metadata_name()}.</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$tag_names</h4>
+<code>array</code><p>Optionally restrict by tag metadata names.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_getTimeUpdated"></a><div class="element clickable method public method_getTimeUpdated" data-toggle="collapse" data-target=".method_getTimeUpdated .collapse">
+<h2>Returns the UNIX epoch time that this entity was last updated</h2>
+<pre>getTimeUpdated() : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>int</code>UNIX epoch time</div>
+</div></div>
+</div>
+<a id="method_getType"></a><div class="element clickable method public method_getType" data-toggle="collapse" data-target=".method_getType .collapse">
+<h2>Returns the entity type</h2>
+<pre>getType() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Entity type</div>
+</div></div>
+</div>
+<a id="method_getURL"></a><div class="element clickable method public method_getURL" data-toggle="collapse" data-target=".method_getURL .collapse">
+<h2>Returns the URL for this entity</h2>
+<pre>getURL() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>see</th>
+<td><a href="%5Cregister_entity_url_handler()"></a></td>
+</tr>
+<tr>
+<th>see</th>
+<td><a href="%5CElggEntity::setURL()"></a></td>
+</tr>
+</table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The URL</div>
+</div></div>
+</div>
+<a id="method_getVolatileData"></a><div class="element clickable method public method_getVolatileData" data-toggle="collapse" data-target=".method_getVolatileData .collapse">
+<h2>Get a piece of volatile (non-persisted) data on this entity.</h2>
+<pre>getVolatileData(string $name) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The name of the volatile data</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code>The value or NULL if not found.</div>
+</div></div>
+</div>
+<a id="method_import"></a><div class="element clickable method public method_import" data-toggle="collapse" data-target=".method_import .collapse">
+<h2>Import data from an parsed ODD xml data array.</h2>
+<pre>import(\ODD $data) : true</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$data</h4>
+<code><a href="../classes/ODD.html">\ODD</a></code><p>XML data</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/InvalidParameterException.html">\InvalidParameterException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>true</code></div>
+</div></div>
+</div>
+<a id="method_isEnabled"></a><div class="element clickable method public method_isEnabled" data-toggle="collapse" data-target=".method_isEnabled .collapse">
+<h2>Is this entity enabled?</h2>
+<pre>isEnabled() : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>boolean</code></div>
+</div></div>
+</div>
+<a id="method_isFullyLoaded"></a><div class="element clickable method public method_isFullyLoaded" data-toggle="collapse" data-target=".method_isFullyLoaded .collapse">
+<h2>Tests to see whether the object has been fully loaded.</h2>
+<pre>isFullyLoaded() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_removePrivateSetting"></a><div class="element clickable method public method_removePrivateSetting" data-toggle="collapse" data-target=".method_removePrivateSetting .collapse">
+<h2>Removes private setting</h2>
+<pre>removePrivateSetting(string $name) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>Name of the private setting</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_removeRelationship"></a><div class="element clickable method public method_removeRelationship" data-toggle="collapse" data-target=".method_removeRelationship .collapse">
+<h2>Remove a relationship</h2>
+<pre>removeRelationship(int $guid, \str $relationship) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>see</th>
+<td><a href="%5CElggEntity::addRelationship()"></a></td>
+</tr>
+<tr>
+<th>see</th>
+<td><a href="%5CElggEntity::clearRelationships()"></a></td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$guid</h4>
+<code>int</code><p>GUID of the entity to make a relationship with</p></div>
+<div class="subelement argument">
+<h4>$relationship</h4>
+<code><a href="str.html">\str</a></code><p>Name of relationship</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_save"></a><div class="element clickable method public method_save" data-toggle="collapse" data-target=".method_save .collapse">
+<h2>Save an entity.</h2>
+<pre>save() : bool | int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/IOException.html">\IOException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>bool</code><code>int</code>
+</div>
+</div></div>
+</div>
+<a id="method_set"></a><div class="element clickable method public method_set" data-toggle="collapse" data-target=".method_set .collapse">
+<h2>Sets the value of a property.</h2>
+<pre>set(string $name, mixed $value) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">If $name is defined in $this->attributes that value is set, otherwise it is
+saved as metadata.</div>
+<table class="table table-bordered">
+<tr>
+<th>warning</th>
+<td>Metadata set this way will inherit the entity's owner and access ID. If you want
+to set metadata with a different owner, use create_metadata().</td>
+</tr>
+<tr>
+<th>warning</th>
+<td>It is important that your class populates $this->attributes with keys
+for all base attributes, anything not in their gets set as METADATA.
+Q: Why are we not using __set overload here?
+A: Because overload operators cause problems during subclassing, so we put the code here and
+create overloads in subclasses.</td>
+</tr>
+<tr>
+<th>todo</th>
+<td>What problems?</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>Name</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>mixed</code><p>Value</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_setCalendarTimeAndDuration"></a><div class="element clickable method public method_setCalendarTimeAndDuration" data-toggle="collapse" data-target=".method_setCalendarTimeAndDuration .collapse">
+<h2>Set the time and duration of an object</h2>
+<pre>setCalendarTimeAndDuration(int $hour, int $minute, int $second, int $day, int $month, int $year, int $duration) : true</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>todo</th>
+<td>Unimplemented</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$hour</h4>
+<code>int</code><p>If ommitted, now is assumed.</p></div>
+<div class="subelement argument">
+<h4>$minute</h4>
+<code>int</code><p>If ommitted, now is assumed.</p></div>
+<div class="subelement argument">
+<h4>$second</h4>
+<code>int</code><p>If ommitted, now is assumed.</p></div>
+<div class="subelement argument">
+<h4>$day</h4>
+<code>int</code><p>If ommitted, now is assumed.</p></div>
+<div class="subelement argument">
+<h4>$month</h4>
+<code>int</code><p>If ommitted, now is assumed.</p></div>
+<div class="subelement argument">
+<h4>$year</h4>
+<code>int</code><p>If ommitted, now is assumed.</p></div>
+<div class="subelement argument">
+<h4>$duration</h4>
+<code>int</code><p>Duration of event, remainder of the day is assumed.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>true</code></div>
+</div></div>
+</div>
+<a id="method_setContainer"></a><div class="element clickable method public method_setContainer" data-toggle="collapse" data-target=".method_setContainer .collapse">
+<h2>Set the container for this object.</h2>
+<pre>setContainer(int $container_guid) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>deprecated</th>
+<td>1.8 use setContainerGUID()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$container_guid</h4>
+<code>int</code><p>The ID of the container.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_setContainerGUID"></a><div class="element clickable method public method_setContainerGUID" data-toggle="collapse" data-target=".method_setContainerGUID .collapse">
+<h2>Set the container for this object.</h2>
+<pre>setContainerGUID(int $container_guid) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$container_guid</h4>
+<code>int</code><p>The ID of the container.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_setIcon"></a><div class="element clickable method public method_setIcon" data-toggle="collapse" data-target=".method_setIcon .collapse">
+<h2>Set an icon override for an icon and size.</h2>
+<pre>setIcon(string $url, string $size) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>warning</th>
+<td>This override exists only for the life of the object.</td>
+</tr>
+<tr>
+<th>deprecated</th>
+<td>1.8 See getIconURL() for the plugin hook to use</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$url</h4>
+<code>string</code><p>The url of the icon.</p></div>
+<div class="subelement argument">
+<h4>$size</h4>
+<code>string</code><p>The size its for.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_setLatLong"></a><div class="element clickable method public method_setLatLong" data-toggle="collapse" data-target=".method_setLatLong .collapse">
+<h2>Set latitude and longitude metadata tags for a given entity.</h2>
+<pre>setLatLong(float $lat, float $long) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>todo</th>
+<td>Unimplemented</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$lat</h4>
+<code>float</code><p>Latitude</p></div>
+<div class="subelement argument">
+<h4>$long</h4>
+<code>float</code><p>Longitude</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_setLocation"></a><div class="element clickable method public method_setLocation" data-toggle="collapse" data-target=".method_setLocation .collapse">
+<h2>Sets the 'location' metadata for the entity</h2>
+<pre>setLocation(string $location) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>todo</th>
+<td>Unimplemented</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$location</h4>
+<code>string</code><p>String representation of the location</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_setMetaData"></a><div class="element clickable method public method_setMetaData" data-toggle="collapse" data-target=".method_setMetaData .collapse">
+<h2>Set a piece of metadata.</h2>
+<pre>setMetaData(string $name, mixed $value, string $value_type, bool $multiple) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">Plugin authors should use the magic methods or create_metadata().</div>
+<table class="table table-bordered">
+<tr>
+<th>warning</th>
+<td>The metadata will inherit the parent entity's owner and access ID.
+If you want to write metadata with a different owner, use create_metadata().</td>
+</tr>
+<tr>
+<th>access</th>
+<td>private</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>Name of the metadata</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>mixed</code><p>Value of the metadata (doesn't support assoc arrays)</p>
+</div>
+<div class="subelement argument">
+<h4>$value_type</h4>
+<code>string</code><p>Types supported: integer and string. Will auto-identify if not set</p>
+</div>
+<div class="subelement argument">
+<h4>$multiple</h4>
+<code>bool</code><p>Allow multiple values for a single name (doesn't support assoc arrays)</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_setPrivateSetting"></a><div class="element clickable method public method_setPrivateSetting" data-toggle="collapse" data-target=".method_setPrivateSetting .collapse">
+<h2>Adds a private setting to this entity.</h2>
+<pre>setPrivateSetting(string $name, mixed $value) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">Private settings are similar to metadata but will not
+be searched and there are fewer helper functions for them.</div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>Name of private setting</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>mixed</code><p>Value of private setting</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_setURL"></a><div class="element clickable method public method_setURL" data-toggle="collapse" data-target=".method_setURL .collapse">
+<h2>Overrides the URL returned by getURL()</h2>
+<pre>setURL(string $url) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>warning</th>
+<td>This override exists only for the life of the object.</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$url</h4>
+<code>string</code><p>The new item URL</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The URL</div>
+</div></div>
+</div>
+<a id="method_setVolatileData"></a><div class="element clickable method public method_setVolatileData" data-toggle="collapse" data-target=".method_setVolatileData .collapse">
+<h2>Set a piece of volatile (non-persisted) data on this entity</h2>
+<pre>setVolatileData(string $name, mixed $value) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>Name</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>mixed</code><p>Value</p></div>
+</div></div>
+</div>
+<a id="method_initializeAttributes"></a><div class="element clickable method protected method_initializeAttributes" data-toggle="collapse" data-target=".method_initializeAttributes .collapse">
+<h2>Initialize the attributes array.</h2>
+<pre>initializeAttributes() : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description">This is vital to distinguish between metadata and base parameters.</div></div></div>
+</div>
+<a id="method_load"></a><div class="element clickable method protected method_load" data-toggle="collapse" data-target=".method_load .collapse">
+<h2>Loads attributes from the entities table into the object.</h2>
+<pre>load(mixed $guid) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$guid</h4>
+<code>mixed</code><p>GUID of entity or stdClass object from entities table</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_getAnnotationCalculation"></a><div class="element clickable method private method_getAnnotationCalculation" data-toggle="collapse" data-target=".method_getAnnotationCalculation .collapse">
+<h2>Helper function to return annotation calculation results</h2>
+<pre>getAnnotationCalculation(string $name, string $calculation) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The annotation name.</p></div>
+<div class="subelement argument">
+<h4>$calculation</h4>
+<code>string</code><p>A valid MySQL function to run its values through</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_access_id"> </a><div class="element clickable property public property_access_id" data-toggle="collapse" data-target=".property_access_id .collapse">
+<h2>Specifies the visibility level of this entity</h2>
+<pre>$access_id : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>magic</th>
+<td></td>
+</tr>
+<tr>
+<th>property</th>
+<td>Specifies the visibility level of this entity</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_container_guid"> </a><div class="element clickable property public property_container_guid" data-toggle="collapse" data-target=".property_container_guid .collapse">
+<h2>The GUID of the entity containing this entity</h2>
+<pre>$container_guid : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>magic</th>
+<td></td>
+</tr>
+<tr>
+<th>property</th>
+<td>The GUID of the entity containing this entity</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_enabled"> </a><div class="element clickable property public property_enabled" data-toggle="collapse" data-target=".property_enabled .collapse">
+<h2>$enabled</h2>
+<pre>$enabled : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>magic</th>
+<td></td>
+</tr>
+<tr>
+<th>property-read</th>
+<td></td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_guid"> </a><div class="element clickable property public property_guid" data-toggle="collapse" data-target=".property_guid .collapse">
+<h2>The unique identifier for this entity (read only)</h2>
+<pre>$guid : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>magic</th>
+<td></td>
+</tr>
+<tr>
+<th>property</th>
+<td>The unique identifier for this entity (read only)</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_owner_guid"> </a><div class="element clickable property public property_owner_guid" data-toggle="collapse" data-target=".property_owner_guid .collapse">
+<h2>The GUID of the creator of this entity</h2>
+<pre>$owner_guid : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>magic</th>
+<td></td>
+</tr>
+<tr>
+<th>property</th>
+<td>The GUID of the creator of this entity</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_site_guid"> </a><div class="element clickable property public property_site_guid" data-toggle="collapse" data-target=".property_site_guid .collapse">
+<h2>The GUID of the website this entity is associated with</h2>
+<pre>$site_guid : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>magic</th>
+<td></td>
+</tr>
+<tr>
+<th>property</th>
+<td>The GUID of the website this entity is associated with</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_subtype"> </a><div class="element clickable property public property_subtype" data-toggle="collapse" data-target=".property_subtype .collapse">
+<h2>Further clarifies the nature of the entity (read-only after save)</h2>
+<pre>$subtype : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>magic</th>
+<td></td>
+</tr>
+<tr>
+<th>property</th>
+<td>Further clarifies the nature of the entity (read-only after save)</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_time_created"> </a><div class="element clickable property public property_time_created" data-toggle="collapse" data-target=".property_time_created .collapse">
+<h2>A UNIX timestamp of when the entity was created (read-only, set on first save)</h2>
+<pre>$time_created : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>magic</th>
+<td></td>
+</tr>
+<tr>
+<th>property</th>
+<td>A UNIX timestamp of when the entity was created (read-only, set on first save)</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_time_updated"> </a><div class="element clickable property public property_time_updated" data-toggle="collapse" data-target=".property_time_updated .collapse">
+<h2>A UNIX timestamp of when the entity was last updated (automatically updated on save)</h2>
+<pre>$time_updated : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>magic</th>
+<td></td>
+</tr>
+<tr>
+<th>property</th>
+<td>A UNIX timestamp of when the entity was last updated (automatically updated on save)</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_type"> </a><div class="element clickable property public property_type" data-toggle="collapse" data-target=".property_type .collapse">
+<h2>object, user, group, or site (read-only after save)</h2>
+<pre>$type : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>magic</th>
+<td></td>
+</tr>
+<tr>
+<th>property</th>
+<td>object, user, group, or site (read-only after save)</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_icon_override"> </a><div class="element clickable property protected property_icon_override" data-toggle="collapse" data-target=".property_icon_override .collapse">
+<h2>Icon override, overrides the value of getIcon().</h2>
+<pre>$icon_override </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_temp_annotations"> </a><div class="element clickable property protected property_temp_annotations" data-toggle="collapse" data-target=".property_temp_annotations .collapse">
+<h2>Holds annotations until entity is saved.  Once the entity is saved,
+annotations are written immediately to the database.</h2>
+<pre>$temp_annotations </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_temp_metadata"> </a><div class="element clickable property protected property_temp_metadata" data-toggle="collapse" data-target=".property_temp_metadata .collapse">
+<h2>Holds metadata until entity is saved.  Once the entity is saved,
+metadata are written immediately to the database.</h2>
+<pre>$temp_metadata </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_temp_private_settings"> </a><div class="element clickable property protected property_temp_private_settings" data-toggle="collapse" data-target=".property_temp_private_settings .collapse">
+<h2>Holds private settings until entity is saved. Once the entity is saved,
+private settings are written immediately to the database.</h2>
+<pre>$temp_private_settings </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_url_override"> </a><div class="element clickable property protected property_url_override" data-toggle="collapse" data-target=".property_url_override .collapse">
+<h2>If set, overrides the value of getURL()</h2>
+<pre>$url_override </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_volatile"> </a><div class="element clickable property protected property_volatile" data-toggle="collapse" data-target=".property_volatile .collapse">
+<h2>Volatile data structure for this object, allows for storage of data
+in-memory that isn't sync'd back to the metadata table.</h2>
+<pre>$volatile </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.1.0
+</a> and<br>
+            generated on 2013-12-03T13:06:07+01:00.<br></footer></div>
+</div>
+</body>
+</html>

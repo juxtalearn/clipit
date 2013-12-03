@@ -1,0 +1,310 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>API Documentation » \clipit\user\ClipitUserTest</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">API Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/clipit.html"><i class="icon-th"></i> clipit</a></li>
+<li><a href="../namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Elgg.html"><i class="icon-folder-open"></i> Elgg</a></li>
+<li><a href="../packages/Elgg.Core.html"><i class="icon-folder-open"></i> Elgg.Core</a></li>
+<li><a href="../packages/Elgg.Core.Plugin.html"><i class="icon-folder-open"></i> Elgg.Core.Plugin</a></li>
+<li><a href="../packages/ElggAPIAdmin.html"><i class="icon-folder-open"></i> ElggAPIAdmin</a></li>
+<li><a href="../packages/ElggDiagnostics.html"><i class="icon-folder-open"></i> ElggDiagnostics</a></li>
+<li><a href="../packages/ElggEmbed.html"><i class="icon-folder-open"></i> ElggEmbed</a></li>
+<li><a href="../packages/ElggFile.html"><i class="icon-folder-open"></i> ElggFile</a></li>
+<li><a href="../packages/ElggGarbageCollector.html"><i class="icon-folder-open"></i> ElggGarbageCollector</a></li>
+<li><a href="../packages/ElggGroups.html"><i class="icon-folder-open"></i> ElggGroups</a></li>
+<li><a href="../packages/ElggLogBrowser.html"><i class="icon-folder-open"></i> ElggLogBrowser</a></li>
+<li><a href="../packages/ElggLogRotate.html"><i class="icon-folder-open"></i> ElggLogRotate</a></li>
+<li><a href="../packages/ElggMessages.html"><i class="icon-folder-open"></i> ElggMessages</a></li>
+<li><a href="../packages/ElggNotifications.html"><i class="icon-folder-open"></i> ElggNotifications</a></li>
+<li><a href="../packages/ElggProfile.html"><i class="icon-folder-open"></i> ElggProfile</a></li>
+<li><a href="../packages/ElggTinyMCE.html"><i class="icon-folder-open"></i> ElggTinyMCE</a></li>
+<li><a href="../packages/ElgghtmLawed.html"><i class="icon-folder-open"></i> ElgghtmLawed</a></li>
+<li><a href="../packages/Embed%20Video%20Library.html"><i class="icon-folder-open"></i> Embed Video Library</a></li>
+<li><a href="../packages/PlaceLocalInclude.html"><i class="icon-folder-open"></i> PlaceLocalInclude</a></li>
+<li><a href="../packages/SimpleTest.html"><i class="icon-folder-open"></i> SimpleTest</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+     @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20MockObjects%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   MockObjects
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20MockObjects.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage MockObjects</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+     @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@abstract.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @abstract</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20WebTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage WebTester</a></li>
+<li><a href="../packages/%5Bname%5D.html"><i class="icon-folder-open"></i> [name]</a></li>
+<li><a href="../packages/clipit.html"><i class="icon-folder-open"></i> clipit</a></li>
+<li><a href="../packages/event_calendar.html"><i class="icon-folder-open"></i> event_calendar</a></li>
+<li><a href="../packages/pebs.html"><i class="icon-folder-open"></i> pebs</a></li>
+<li><a href="../packages/profile_manager.html"><i class="icon-folder-open"></i> profile_manager</a></li>
+<li><a href="../packages/veeplay.html"><i class="icon-folder-open"></i> veeplay</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">4473</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">250</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___construct" title="__construct() :: Called before each test object."><span class="description">Called before each test object.</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#method___destruct" title="__destruct() :: Called after each test object."><span class="description">Called after each test object.</span><pre>__destruct()</pre></a></li>
+<li class="method public "><a href="#method_setUp" title="setUp() :: Called before each test method."><span class="description">Called before each test method.</span><pre>setUp()</pre></a></li>
+<li class="method public "><a href="#method_tearDown" title="tearDown() :: Called after each test method."><span class="description">Called after each test method.</span><pre>tearDown()</pre></a></li>
+<li class="method public "><a href="#method_testApiGetAllUsers" title="testApiGetAllUsers() :: "><span class="description">testApiGetAllUsers()
+        </span><pre>testApiGetAllUsers()</pre></a></li>
+<li class="method public "><a href="#method_testApiListProperties" title="testApiListProperties() :: Clipit_user API functions from lib/
+Test API functions"><span class="description">Clipit_user API functions from lib/
+Test API functions</span><pre>testApiListProperties()</pre></a></li>
+<li class="method public "><a href="#method_testCreateUser" title="testCreateUser() :: Test clipit_user_create_user()"><span class="description">Test clipit_user_create_user()</span><pre>testCreateUser()</pre></a></li>
+<li class="method public "><a href="#method_testDelete" title="testDelete() :: "><span class="description">testDelete()
+        </span><pre>testDelete()</pre></a></li>
+<li class="method public "><a href="#method_testGetAllUsers" title="testGetAllUsers() :: "><span class="description">testGetAllUsers()
+        </span><pre>testGetAllUsers()</pre></a></li>
+<li class="method public "><a href="#method_testGetUserByLogin" title="testGetUserByLogin() :: Test clipit_user_get_users_by_login()"><span class="description">Test clipit_user_get_users_by_login()</span><pre>testGetUserByLogin()</pre></a></li>
+<li class="method public "><a href="#method_testGetUsersByEmail" title="testGetUsersByEmail() :: Test clipit_user_get_users_by_email()"><span class="description">Test clipit_user_get_users_by_email()</span><pre>testGetUsersByEmail()</pre></a></li>
+<li class="method public "><a href="#method_testGetUsersById" title="testGetUsersById() :: Test clipit_user_get_users_by_id()"><span class="description">Test clipit_user_get_users_by_id()</span><pre>testGetUsersById()</pre></a></li>
+<li class="method public "><a href="#method_testGetUsersByRole" title="testGetUsersByRole() :: Test clipit_user_get_users_by_role()"><span class="description">Test clipit_user_get_users_by_role()</span><pre>testGetUsersByRole()</pre></a></li>
+<li class="method public "><a href="#method_testLoad" title="testLoad() :: Clipit_user functions from lib/"><span class="description">Clipit_user functions from lib/</span><pre>testLoad()</pre></a></li>
+<li class="method public "><a href="#method_testSave" title="testSave() :: ClipitUser Class
+Test Class methods"><span class="description">ClipitUser Class
+Test Class methods</span><pre>testSave()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul>
+<li class="property public "><a href="#property_api_ending" title="$api_ending() :: "><span class="description">Path web services URl</span><pre>$api_ending</pre></a></li>
+<li class="property public "><a href="#property_auth_token" title="$auth_token() :: "><span class="description">Oauth token</span><pre>$auth_token</pre></a></li>
+<li class="property public "><a href="#property_site_url" title="$site_url() :: "><span class="description">Base URL</span><pre>$site_url</pre></a></li>
+<li class="property public "><a href="#property_test_guid" title="$test_guid() :: "><span class="description">Sample GUID exists</span><pre>$test_guid</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\clipit\user\ClipitUserTest"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/clipit.html">clipit</a></li>
+<li>
+<span class="divider">\</span><a href="../namespaces/clipit.user.html">user</a>
+</li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/clipit.user.ClipitUserTest.html">ClipitUserTest</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">Class ClipitUserTest</p>
+<div class="details">
+<div class="long_description">This class is to be extended by all Elgg unit tests. As such, any method here
+will be available to the tests.</div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/clipit.user.html">clipit\user</a></td>
+</tr></table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>Called before each test object.</h2>
+<pre>__construct() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method___destruct"></a><div class="element clickable method public method___destruct" data-toggle="collapse" data-target=".method___destruct .collapse">
+<h2>Called after each test object.</h2>
+<pre>__destruct() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_setUp"></a><div class="element clickable method public method_setUp" data-toggle="collapse" data-target=".method_setUp .collapse">
+<h2>Called before each test method.</h2>
+<pre>setUp() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_tearDown"></a><div class="element clickable method public method_tearDown" data-toggle="collapse" data-target=".method_tearDown .collapse">
+<h2>Called after each test method.</h2>
+<pre>tearDown() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testApiGetAllUsers"></a><div class="element clickable method public method_testApiGetAllUsers" data-toggle="collapse" data-target=".method_testApiGetAllUsers .collapse">
+<h2>testApiGetAllUsers()
+        </h2>
+<pre>testApiGetAllUsers() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testApiListProperties"></a><div class="element clickable method public method_testApiListProperties" data-toggle="collapse" data-target=".method_testApiListProperties .collapse">
+<h2>Clipit_user API functions from lib/
+Test API functions</h2>
+<pre>testApiListProperties() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testCreateUser"></a><div class="element clickable method public method_testCreateUser" data-toggle="collapse" data-target=".method_testCreateUser .collapse">
+<h2>Test clipit_user_create_user()</h2>
+<pre>testCreateUser() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>expectedException</th>
+<td>InvalidParameterException</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_testDelete"></a><div class="element clickable method public method_testDelete" data-toggle="collapse" data-target=".method_testDelete .collapse">
+<h2>testDelete()
+        </h2>
+<pre>testDelete() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testGetAllUsers"></a><div class="element clickable method public method_testGetAllUsers" data-toggle="collapse" data-target=".method_testGetAllUsers .collapse">
+<h2>testGetAllUsers()
+        </h2>
+<pre>testGetAllUsers() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testGetUserByLogin"></a><div class="element clickable method public method_testGetUserByLogin" data-toggle="collapse" data-target=".method_testGetUserByLogin .collapse">
+<h2>Test clipit_user_get_users_by_login()</h2>
+<pre>testGetUserByLogin() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testGetUsersByEmail"></a><div class="element clickable method public method_testGetUsersByEmail" data-toggle="collapse" data-target=".method_testGetUsersByEmail .collapse">
+<h2>Test clipit_user_get_users_by_email()</h2>
+<pre>testGetUsersByEmail() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testGetUsersById"></a><div class="element clickable method public method_testGetUsersById" data-toggle="collapse" data-target=".method_testGetUsersById .collapse">
+<h2>Test clipit_user_get_users_by_id()</h2>
+<pre>testGetUsersById() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testGetUsersByRole"></a><div class="element clickable method public method_testGetUsersByRole" data-toggle="collapse" data-target=".method_testGetUsersByRole .collapse">
+<h2>Test clipit_user_get_users_by_role()</h2>
+<pre>testGetUsersByRole() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testLoad"></a><div class="element clickable method public method_testLoad" data-toggle="collapse" data-target=".method_testLoad .collapse">
+<h2>Clipit_user functions from lib/</h2>
+<pre>testLoad() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testSave"></a><div class="element clickable method public method_testSave" data-toggle="collapse" data-target=".method_testSave .collapse">
+<h2>ClipitUser Class
+Test Class methods</h2>
+<pre>testSave() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_api_ending"> </a><div class="element clickable property public property_api_ending" data-toggle="collapse" data-target=".property_api_ending .collapse">
+<h2>Path web services URl</h2>
+<pre>$api_ending : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_auth_token"> </a><div class="element clickable property public property_auth_token" data-toggle="collapse" data-target=".property_auth_token .collapse">
+<h2>Oauth token</h2>
+<pre>$auth_token : <a href="SimpleXMLElement%5B%5D.html">\clipit\user\SimpleXMLElement[]</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_site_url"> </a><div class="element clickable property public property_site_url" data-toggle="collapse" data-target=".property_site_url .collapse">
+<h2>Base URL</h2>
+<pre>$site_url : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_test_guid"> </a><div class="element clickable property public property_test_guid" data-toggle="collapse" data-target=".property_test_guid .collapse">
+<h2>Sample GUID exists</h2>
+<pre>$test_guid : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.1.0
+</a> and<br>
+            generated on 2013-12-03T13:06:22+01:00.<br></footer></div>
+</div>
+</body>
+</html>

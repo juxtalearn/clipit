@@ -1,0 +1,828 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>API Documentation » \ElggInstaller</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">API Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/clipit.html"><i class="icon-th"></i> clipit</a></li>
+<li><a href="../namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Elgg.html"><i class="icon-folder-open"></i> Elgg</a></li>
+<li><a href="../packages/Elgg.Core.html"><i class="icon-folder-open"></i> Elgg.Core</a></li>
+<li><a href="../packages/Elgg.Core.Plugin.html"><i class="icon-folder-open"></i> Elgg.Core.Plugin</a></li>
+<li><a href="../packages/ElggAPIAdmin.html"><i class="icon-folder-open"></i> ElggAPIAdmin</a></li>
+<li><a href="../packages/ElggDiagnostics.html"><i class="icon-folder-open"></i> ElggDiagnostics</a></li>
+<li><a href="../packages/ElggEmbed.html"><i class="icon-folder-open"></i> ElggEmbed</a></li>
+<li><a href="../packages/ElggFile.html"><i class="icon-folder-open"></i> ElggFile</a></li>
+<li><a href="../packages/ElggGarbageCollector.html"><i class="icon-folder-open"></i> ElggGarbageCollector</a></li>
+<li><a href="../packages/ElggGroups.html"><i class="icon-folder-open"></i> ElggGroups</a></li>
+<li><a href="../packages/ElggLogBrowser.html"><i class="icon-folder-open"></i> ElggLogBrowser</a></li>
+<li><a href="../packages/ElggLogRotate.html"><i class="icon-folder-open"></i> ElggLogRotate</a></li>
+<li><a href="../packages/ElggMessages.html"><i class="icon-folder-open"></i> ElggMessages</a></li>
+<li><a href="../packages/ElggNotifications.html"><i class="icon-folder-open"></i> ElggNotifications</a></li>
+<li><a href="../packages/ElggProfile.html"><i class="icon-folder-open"></i> ElggProfile</a></li>
+<li><a href="../packages/ElggTinyMCE.html"><i class="icon-folder-open"></i> ElggTinyMCE</a></li>
+<li><a href="../packages/ElgghtmLawed.html"><i class="icon-folder-open"></i> ElgghtmLawed</a></li>
+<li><a href="../packages/Embed%20Video%20Library.html"><i class="icon-folder-open"></i> Embed Video Library</a></li>
+<li><a href="../packages/PlaceLocalInclude.html"><i class="icon-folder-open"></i> PlaceLocalInclude</a></li>
+<li><a href="../packages/SimpleTest.html"><i class="icon-folder-open"></i> SimpleTest</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+     @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20MockObjects%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   MockObjects
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20MockObjects.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage MockObjects</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+     @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@abstract.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @abstract</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20WebTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage WebTester</a></li>
+<li><a href="../packages/%5Bname%5D.html"><i class="icon-folder-open"></i> [name]</a></li>
+<li><a href="../packages/clipit.html"><i class="icon-folder-open"></i> clipit</a></li>
+<li><a href="../packages/event_calendar.html"><i class="icon-folder-open"></i> event_calendar</a></li>
+<li><a href="../packages/pebs.html"><i class="icon-folder-open"></i> pebs</a></li>
+<li><a href="../packages/profile_manager.html"><i class="icon-folder-open"></i> profile_manager</a></li>
+<li><a href="../packages/veeplay.html"><i class="icon-folder-open"></i> veeplay</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">4473</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">250</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___construct" title="__construct() :: Constructor bootstraps the Elgg engine"><span class="description">Constructor bootstraps the Elgg engine</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#method_batchInstall" title="batchInstall() :: A batch install of Elgg"><span class="description">A batch install of Elgg</span><pre>batchInstall()</pre></a></li>
+<li class="method public "><a href="#method_run" title="run() :: Dispatches a request to one of the step controllers"><span class="description">Dispatches a request to one of the step controllers</span><pre>run()</pre></a></li>
+<li class="method public "><a href="#method_setAutoLogin" title="setAutoLogin() :: Set the auto login flag"><span class="description">Set the auto login flag</span><pre>setAutoLogin()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="method protected "><a href="#method_admin" title="admin() :: Admin account controller"><span class="description">Admin account controller</span><pre>admin()</pre></a></li>
+<li class="method protected "><a href="#method_bootstrapConfig" title="bootstrapConfig() :: Set up configuration variables"><span class="description">Set up configuration variables</span><pre>bootstrapConfig()</pre></a></li>
+<li class="method protected "><a href="#method_bootstrapEngine" title="bootstrapEngine() :: Load the essential libraries of the engine"><span class="description">Load the essential libraries of the engine</span><pre>bootstrapEngine()</pre></a></li>
+<li class="method protected "><a href="#method_checkDatabaseSettings" title="checkDatabaseSettings() :: Confirm the settings for the database"><span class="description">Confirm the settings for the database</span><pre>checkDatabaseSettings()</pre></a></li>
+<li class="method protected "><a href="#method_checkEngineDir" title="checkEngineDir() :: Check that the engine dir is writable"><span class="description">Check that the engine dir is writable</span><pre>checkEngineDir()</pre></a></li>
+<li class="method protected "><a href="#method_checkInstallCompletion" title="checkInstallCompletion() :: Security check to ensure the installer cannot be run after installation
+has finished. If this is detected, the viewer is sent to the front page."><span class="description">Security check to ensure the installer cannot be run after installation
+has finished. If this is detected, the viewer is sent to the front page.</span><pre>checkInstallCompletion()</pre></a></li>
+<li class="method protected "><a href="#method_checkPHP" title="checkPHP() :: Check version of PHP, extensions, and variables"><span class="description">Check version of PHP, extensions, and variables</span><pre>checkPHP()</pre></a></li>
+<li class="method protected "><a href="#method_checkPhpDirectives" title="checkPhpDirectives() :: Check PHP parameters"><span class="description">Check PHP parameters</span><pre>checkPhpDirectives()</pre></a></li>
+<li class="method protected "><a href="#method_checkPhpExtensions" title="checkPhpExtensions() :: Check the server's PHP extensions"><span class="description">Check the server's PHP extensions</span><pre>checkPhpExtensions()</pre></a></li>
+<li class="method protected "><a href="#method_checkRewriteRules" title="checkRewriteRules() :: Confirm that the rewrite rules are firing"><span class="description">Confirm that the rewrite rules are firing</span><pre>checkRewriteRules()</pre></a></li>
+<li class="method protected "><a href="#method_checkSettingsFile" title="checkSettingsFile() :: Check that the settings file exists"><span class="description">Check that the settings file exists</span><pre>checkSettingsFile()</pre></a></li>
+<li class="method protected "><a href="#method_complete" title="complete() :: Controller for last step"><span class="description">Controller for last step</span><pre>complete()</pre></a></li>
+<li class="method protected "><a href="#method_connectToDatabase" title="connectToDatabase() :: Bootstrap database connection before entire engine is available"><span class="description">Bootstrap database connection before entire engine is available</span><pre>connectToDatabase()</pre></a></li>
+<li class="method protected "><a href="#method_continueToNextStep" title="continueToNextStep() :: Forwards the browser to the next step"><span class="description">Forwards the browser to the next step</span><pre>continueToNextStep()</pre></a></li>
+<li class="method protected "><a href="#method_countNumConditions" title="countNumConditions() :: Count the number of failures in the requirements report"><span class="description">Count the number of failures in the requirements report</span><pre>countNumConditions()</pre></a></li>
+<li class="method protected "><a href="#method_createAdminAccount" title="createAdminAccount() :: Create a user account for the admin"><span class="description">Create a user account for the admin</span><pre>createAdminAccount()</pre></a></li>
+<li class="method protected "><a href="#method_createDataDirectory" title="createDataDirectory() :: Create the data directory if requested"><span class="description">Create the data directory if requested</span><pre>createDataDirectory()</pre></a></li>
+<li class="method protected "><a href="#method_createSettingsFile" title="createSettingsFile() :: Writes the settings file to the engine directory"><span class="description">Writes the settings file to the engine directory</span><pre>createSettingsFile()</pre></a></li>
+<li class="method protected "><a href="#method_database" title="database() :: Database set up controller"><span class="description">Database set up controller</span><pre>database()</pre></a></li>
+<li class="method protected "><a href="#method_enablePlugins" title="enablePlugins() :: Enable a set of default plugins"><span class="description">Enable a set of default plugins</span><pre>enablePlugins()</pre></a></li>
+<li class="method protected "><a href="#method_finishBootstraping" title="finishBootstraping() :: Load remaining engine libraries and complete bootstraping (see start.php)"><span class="description">Load remaining engine libraries and complete bootstraping (see start.php)</span><pre>finishBootstraping()</pre></a></li>
+<li class="method protected "><a href="#method_getBaseUrl" title="getBaseUrl() :: Get the best guess at the base URL"><span class="description">Get the best guess at the base URL</span><pre>getBaseUrl()</pre></a></li>
+<li class="method protected "><a href="#method_getNextStep" title="getNextStep() :: Get the next step as a string"><span class="description">Get the next step as a string</span><pre>getNextStep()</pre></a></li>
+<li class="method protected "><a href="#method_getNextStepUrl" title="getNextStepUrl() :: Get the URL of the next step"><span class="description">Get the URL of the next step</span><pre>getNextStepUrl()</pre></a></li>
+<li class="method protected "><a href="#method_getPostVariables" title="getPostVariables() :: Return an associative array of post variables
+(could be selective based on expected variables)"><span class="description">Return an associative array of post variables
+(could be selective based on expected variables)</span><pre>getPostVariables()</pre></a></li>
+<li class="method protected "><a href="#method_getSteps" title="getSteps() :: Get an array of steps"><span class="description">Get an array of steps</span><pre>getSteps()</pre></a></li>
+<li class="method protected "><a href="#method_installDatabase" title="installDatabase() :: Create the database tables"><span class="description">Create the database tables</span><pre>installDatabase()</pre></a></li>
+<li class="method protected "><a href="#method_loadSettingsFile" title="loadSettingsFile() :: Load settings.php"><span class="description">Load settings.php</span><pre>loadSettingsFile()</pre></a></li>
+<li class="method protected "><a href="#method_makeFormSticky" title="makeFormSticky() :: If form is reshown, remember previously submitted variables"><span class="description">If form is reshown, remember previously submitted variables</span><pre>makeFormSticky()</pre></a></li>
+<li class="method protected "><a href="#method_processRewriteTest" title="processRewriteTest() :: Check if the request is coming from the URL rewrite test on the
+requirements page."><span class="description">Check if the request is coming from the URL rewrite test on the
+requirements page.</span><pre>processRewriteTest()</pre></a></li>
+<li class="method protected "><a href="#method_render" title="render() :: Renders the data passed by a controller"><span class="description">Renders the data passed by a controller</span><pre>render()</pre></a></li>
+<li class="method protected "><a href="#method_requirements" title="requirements() :: Requirements controller"><span class="description">Requirements controller</span><pre>requirements()</pre></a></li>
+<li class="method protected "><a href="#method_resumeInstall" title="resumeInstall() :: Check if this is a case of a install being resumed and figure
+out where to continue from. Returns the best guess on the step."><span class="description">Check if this is a case of a install being resumed and figure
+out where to continue from. Returns the best guess on the step.</span><pre>resumeInstall()</pre></a></li>
+<li class="method protected "><a href="#method_saveSiteSettings" title="saveSiteSettings() :: Initialize the site including site entity, plugins, and configuration"><span class="description">Initialize the site including site entity, plugins, and configuration</span><pre>saveSiteSettings()</pre></a></li>
+<li class="method protected "><a href="#method_setInstallStatus" title="setInstallStatus() :: Check the different install steps for completion"><span class="description">Check the different install steps for completion</span><pre>setInstallStatus()</pre></a></li>
+<li class="method protected "><a href="#method_settings" title="settings() :: Site settings controller"><span class="description">Site settings controller</span><pre>settings()</pre></a></li>
+<li class="method protected "><a href="#method_validateAdminVars" title="validateAdminVars() :: Validate account form variables"><span class="description">Validate account form variables</span><pre>validateAdminVars()</pre></a></li>
+<li class="method protected "><a href="#method_validateDatabaseVars" title="validateDatabaseVars() :: Validate the variables for the database step"><span class="description">Validate the variables for the database step</span><pre>validateDatabaseVars()</pre></a></li>
+<li class="method protected "><a href="#method_validateSettingsVars" title="validateSettingsVars() :: Validate the site settings form variables"><span class="description">Validate the site settings form variables</span><pre>validateSettingsVars()</pre></a></li>
+<li class="method protected "><a href="#method_welcome" title="welcome() :: Welcome controller"><span class="description">Welcome controller</span><pre>welcome()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul></ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="property protected "><a href="#property_autoLogin" title="$autoLogin() :: "><span class="description"></span><pre>$autoLogin</pre></a></li>
+<li class="property protected "><a href="#property_isAction" title="$isAction() :: "><span class="description"></span><pre>$isAction</pre></a></li>
+<li class="property protected "><a href="#property_status" title="$status() :: "><span class="description"></span><pre>$status</pre></a></li>
+<li class="property protected "><a href="#property_steps" title="$steps() :: "><span class="description"></span><pre>$steps</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\ElggInstaller"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/ElggInstaller.html">ElggInstaller</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">Elgg Installer.</p>
+<div class="details">
+<div class="long_description">Controller for installing Elgg. Supports both web-based on CLI installation.
+
+This controller steps the user through the install process. The method for
+each step handles both the GET and POST requests. There is no XSS/CSRF protection
+on the POST processing since the installer is only run once by the administrator.
+
+The installation process can be resumed by hitting the first page. The installer
+will try to figure out where to pick up again.
+
+All the logic for the installation process is in this class, but it depends on
+the core libraries. To do this, we selectively load a subset of the core libraries
+for the first few steps and then load the entire engine once the database and
+site settings are configured. In addition, this controller does its own session
+handling until the database is setup.
+
+There is an aborted attempt in the code at creating the data directory for
+users as a subdirectory of Elgg's root. The idea was to protect this directory
+through a .htaccess file. The problem is that a malicious user can upload a
+.htaccess of his own that overrides the protection for his user directory. The
+best solution is server level configuration that turns off AllowOverride for the
+data directory. See ticket #3453 for discussion on this.</div>
+<table class="table table-bordered">
+<tr>
+<th>package</th>
+<td><a href="../packages/Elgg.Core.Installer.html">Elgg.Core</a></td>
+</tr>
+<tr>
+<th>subpackage</th>
+<td>Installer</td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>Constructor bootstraps the Elgg engine</h2>
+<pre>__construct() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_batchInstall"></a><div class="element clickable method public method_batchInstall" data-toggle="collapse" data-target=".method_batchInstall .collapse">
+<h2>A batch install of Elgg</h2>
+<pre>batchInstall(array $params, bool $createHtaccess) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">All required parameters must be passed in as an associative array. See
+$requiredParams for a list of them. This creates the necessary files,
+loads the database, configures the site settings, and creates the admin
+account. If it fails, an exception is thrown. It does not check any of
+the requirements as the multiple step web installer does.
+
+If the settings.php file exists, it will use that rather than the parameters
+passed to this function.</div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$params</h4>
+<code>array</code><p>Array of key value pairs</p></div>
+<div class="subelement argument">
+<h4>$createHtaccess</h4>
+<code>bool</code><p>Should .htaccess be created</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/InstallationException.html">\InstallationException</a></code></th>
+<td></td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_run"></a><div class="element clickable method public method_run" data-toggle="collapse" data-target=".method_run .collapse">
+<h2>Dispatches a request to one of the step controllers</h2>
+<pre>run(string $step) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$step</h4>
+<code>string</code><p>The installation step to run</p></div>
+</div></div>
+</div>
+<a id="method_setAutoLogin"></a><div class="element clickable method public method_setAutoLogin" data-toggle="collapse" data-target=".method_setAutoLogin .collapse">
+<h2>Set the auto login flag</h2>
+<pre>setAutoLogin(bool $flag) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$flag</h4>
+<code>bool</code><p>Auto login</p></div>
+</div></div>
+</div>
+<a id="method_admin"></a><div class="element clickable method protected method_admin" data-toggle="collapse" data-target=".method_admin .collapse">
+<h2>Admin account controller</h2>
+<pre>admin(array $submissionVars) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">Creates an admin user account</div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$submissionVars</h4>
+<code>array</code><p>Submitted vars</p></div>
+</div></div>
+</div>
+<a id="method_bootstrapConfig"></a><div class="element clickable method protected method_bootstrapConfig" data-toggle="collapse" data-target=".method_bootstrapConfig .collapse">
+<h2>Set up configuration variables</h2>
+<pre>bootstrapConfig() : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_bootstrapEngine"></a><div class="element clickable method protected method_bootstrapEngine" data-toggle="collapse" data-target=".method_bootstrapEngine .collapse">
+<h2>Load the essential libraries of the engine</h2>
+<pre>bootstrapEngine() : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_checkDatabaseSettings"></a><div class="element clickable method protected method_checkDatabaseSettings" data-toggle="collapse" data-target=".method_checkDatabaseSettings .collapse">
+<h2>Confirm the settings for the database</h2>
+<pre>checkDatabaseSettings(string $user, string $password, string $dbname, string $host) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$user</h4>
+<code>string</code><p>Username</p></div>
+<div class="subelement argument">
+<h4>$password</h4>
+<code>string</code><p>Password</p></div>
+<div class="subelement argument">
+<h4>$dbname</h4>
+<code>string</code><p>Database name</p></div>
+<div class="subelement argument">
+<h4>$host</h4>
+<code>string</code><p>Host</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_checkEngineDir"></a><div class="element clickable method protected method_checkEngineDir" data-toggle="collapse" data-target=".method_checkEngineDir .collapse">
+<h2>Check that the engine dir is writable</h2>
+<pre>checkEngineDir($report) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$report</h4></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_checkInstallCompletion"></a><div class="element clickable method protected method_checkInstallCompletion" data-toggle="collapse" data-target=".method_checkInstallCompletion .collapse">
+<h2>Security check to ensure the installer cannot be run after installation
+has finished. If this is detected, the viewer is sent to the front page.</h2>
+<pre>checkInstallCompletion(string $step) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$step</h4>
+<code>string</code><p>Installation step to check against</p></div>
+</div></div>
+</div>
+<a id="method_checkPHP"></a><div class="element clickable method protected method_checkPHP" data-toggle="collapse" data-target=".method_checkPHP .collapse">
+<h2>Check version of PHP, extensions, and variables</h2>
+<pre>checkPHP($report) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$report</h4></div>
+</div></div>
+</div>
+<a id="method_checkPhpDirectives"></a><div class="element clickable method protected method_checkPhpDirectives" data-toggle="collapse" data-target=".method_checkPhpDirectives .collapse">
+<h2>Check PHP parameters</h2>
+<pre>checkPhpDirectives($phpReport) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$phpReport</h4></div>
+</div></div>
+</div>
+<a id="method_checkPhpExtensions"></a><div class="element clickable method protected method_checkPhpExtensions" data-toggle="collapse" data-target=".method_checkPhpExtensions .collapse">
+<h2>Check the server's PHP extensions</h2>
+<pre>checkPhpExtensions($phpReport) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$phpReport</h4></div>
+</div></div>
+</div>
+<a id="method_checkRewriteRules"></a><div class="element clickable method protected method_checkRewriteRules" data-toggle="collapse" data-target=".method_checkRewriteRules .collapse">
+<h2>Confirm that the rewrite rules are firing</h2>
+<pre>checkRewriteRules($report) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$report</h4></div>
+</div></div>
+</div>
+<a id="method_checkSettingsFile"></a><div class="element clickable method protected method_checkSettingsFile" data-toggle="collapse" data-target=".method_checkSettingsFile .collapse">
+<h2>Check that the settings file exists</h2>
+<pre>checkSettingsFile($report) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$report</h4></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_complete"></a><div class="element clickable method protected method_complete" data-toggle="collapse" data-target=".method_complete .collapse">
+<h2>Controller for last step</h2>
+<pre>complete() : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_connectToDatabase"></a><div class="element clickable method protected method_connectToDatabase" data-toggle="collapse" data-target=".method_connectToDatabase .collapse">
+<h2>Bootstrap database connection before entire engine is available</h2>
+<pre>connectToDatabase() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_continueToNextStep"></a><div class="element clickable method protected method_continueToNextStep" data-toggle="collapse" data-target=".method_continueToNextStep .collapse">
+<h2>Forwards the browser to the next step</h2>
+<pre>continueToNextStep(string $currentStep) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$currentStep</h4>
+<code>string</code><p>Current installation step</p></div>
+</div></div>
+</div>
+<a id="method_countNumConditions"></a><div class="element clickable method protected method_countNumConditions" data-toggle="collapse" data-target=".method_countNumConditions .collapse">
+<h2>Count the number of failures in the requirements report</h2>
+<pre>countNumConditions(array $report, string $condition) : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$report</h4>
+<code>array</code><p>The requirements report array</p></div>
+<div class="subelement argument">
+<h4>$condition</h4>
+<code>string</code><p>'failure' or 'warning'</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>int</code></div>
+</div></div>
+</div>
+<a id="method_createAdminAccount"></a><div class="element clickable method protected method_createAdminAccount" data-toggle="collapse" data-target=".method_createAdminAccount .collapse">
+<h2>Create a user account for the admin</h2>
+<pre>createAdminAccount(array $submissionVars, bool $login) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$submissionVars</h4>
+<code>array</code><p>Submitted vars</p></div>
+<div class="subelement argument">
+<h4>$login</h4>
+<code>bool</code><p>Login in the admin user?</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_createDataDirectory"></a><div class="element clickable method protected method_createDataDirectory" data-toggle="collapse" data-target=".method_createDataDirectory .collapse">
+<h2>Create the data directory if requested</h2>
+<pre>createDataDirectory(array $submissionVars, array $formVars) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$submissionVars</h4>
+<code>array</code><p>Submitted vars</p></div>
+<div class="subelement argument">
+<h4>$formVars</h4>
+<code>array</code><p>Variables in the form</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_createSettingsFile"></a><div class="element clickable method protected method_createSettingsFile" data-toggle="collapse" data-target=".method_createSettingsFile .collapse">
+<h2>Writes the settings file to the engine directory</h2>
+<pre>createSettingsFile(array $params) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$params</h4>
+<code>array</code><p>Array of inputted params from the user</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_database"></a><div class="element clickable method protected method_database" data-toggle="collapse" data-target=".method_database .collapse">
+<h2>Database set up controller</h2>
+<pre>database(array $submissionVars) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">Creates the settings.php file and creates the database tables</div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$submissionVars</h4>
+<code>array</code><p>Submitted form variables</p></div>
+</div></div>
+</div>
+<a id="method_enablePlugins"></a><div class="element clickable method protected method_enablePlugins" data-toggle="collapse" data-target=".method_enablePlugins .collapse">
+<h2>Enable a set of default plugins</h2>
+<pre>enablePlugins() : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_finishBootstraping"></a><div class="element clickable method protected method_finishBootstraping" data-toggle="collapse" data-target=".method_finishBootstraping .collapse">
+<h2>Load remaining engine libraries and complete bootstraping (see start.php)</h2>
+<pre>finishBootstraping(string $step) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$step</h4>
+<code>string</code><p>Which step to boot strap for. Required because
+                    boot strapping is different until the DB is populated.</p></div>
+</div></div>
+</div>
+<a id="method_getBaseUrl"></a><div class="element clickable method protected method_getBaseUrl" data-toggle="collapse" data-target=".method_getBaseUrl .collapse">
+<h2>Get the best guess at the base URL</h2>
+<pre>getBaseUrl() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>note</th>
+<td>Cannot use current_page_url() because it depends on $CONFIG->wwwroot</td>
+</tr>
+<tr>
+<th>todo</th>
+<td>Should this be a core function?</td>
+</tr>
+</table>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_getNextStep"></a><div class="element clickable method protected method_getNextStep" data-toggle="collapse" data-target=".method_getNextStep .collapse">
+<h2>Get the next step as a string</h2>
+<pre>getNextStep(string $currentStep) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$currentStep</h4>
+<code>string</code><p>Current installation step</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_getNextStepUrl"></a><div class="element clickable method protected method_getNextStepUrl" data-toggle="collapse" data-target=".method_getNextStepUrl .collapse">
+<h2>Get the URL of the next step</h2>
+<pre>getNextStepUrl(string $currentStep) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$currentStep</h4>
+<code>string</code><p>Current installation step</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_getPostVariables"></a><div class="element clickable method protected method_getPostVariables" data-toggle="collapse" data-target=".method_getPostVariables .collapse">
+<h2>Return an associative array of post variables
+(could be selective based on expected variables)</h2>
+<pre>getPostVariables() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">Does not filter as person installing the site should not be attempting
+XSS attacks. If filtering is added, it should not be done for passwords.</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_getSteps"></a><div class="element clickable method protected method_getSteps" data-toggle="collapse" data-target=".method_getSteps .collapse">
+<h2>Get an array of steps</h2>
+<pre>getSteps() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_installDatabase"></a><div class="element clickable method protected method_installDatabase" data-toggle="collapse" data-target=".method_installDatabase .collapse">
+<h2>Create the database tables</h2>
+<pre>installDatabase() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_loadSettingsFile"></a><div class="element clickable method protected method_loadSettingsFile" data-toggle="collapse" data-target=".method_loadSettingsFile .collapse">
+<h2>Load settings.php</h2>
+<pre>loadSettingsFile() : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/InstallationException.html">\InstallationException</a></code></th>
+<td></td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_makeFormSticky"></a><div class="element clickable method protected method_makeFormSticky" data-toggle="collapse" data-target=".method_makeFormSticky .collapse">
+<h2>If form is reshown, remember previously submitted variables</h2>
+<pre>makeFormSticky(array $formVars, array $submissionVars) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$formVars</h4>
+<code>array</code><p>Vars int he form</p></div>
+<div class="subelement argument">
+<h4>$submissionVars</h4>
+<code>array</code><p>Submitted vars</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_processRewriteTest"></a><div class="element clickable method protected method_processRewriteTest" data-toggle="collapse" data-target=".method_processRewriteTest .collapse">
+<h2>Check if the request is coming from the URL rewrite test on the
+requirements page.</h2>
+<pre>processRewriteTest() : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_render"></a><div class="element clickable method protected method_render" data-toggle="collapse" data-target=".method_render .collapse">
+<h2>Renders the data passed by a controller</h2>
+<pre>render(string $step, array $vars) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$step</h4>
+<code>string</code><p>The current step</p></div>
+<div class="subelement argument">
+<h4>$vars</h4>
+<code>array</code><p>Array of vars to pass to the view</p></div>
+</div></div>
+</div>
+<a id="method_requirements"></a><div class="element clickable method protected method_requirements" data-toggle="collapse" data-target=".method_requirements .collapse">
+<h2>Requirements controller</h2>
+<pre>requirements(array $vars) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">Checks version of php, libraries, permissions, and rewrite rules</div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$vars</h4>
+<code>array</code><p>Vars</p></div>
+</div></div>
+</div>
+<a id="method_resumeInstall"></a><div class="element clickable method protected method_resumeInstall" data-toggle="collapse" data-target=".method_resumeInstall .collapse">
+<h2>Check if this is a case of a install being resumed and figure
+out where to continue from. Returns the best guess on the step.</h2>
+<pre>resumeInstall(string $step) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$step</h4>
+<code>string</code><p>Installation step to resume from</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_saveSiteSettings"></a><div class="element clickable method protected method_saveSiteSettings" data-toggle="collapse" data-target=".method_saveSiteSettings .collapse">
+<h2>Initialize the site including site entity, plugins, and configuration</h2>
+<pre>saveSiteSettings(array $submissionVars) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$submissionVars</h4>
+<code>array</code><p>Submitted vars</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_setInstallStatus"></a><div class="element clickable method protected method_setInstallStatus" data-toggle="collapse" data-target=".method_setInstallStatus .collapse">
+<h2>Check the different install steps for completion</h2>
+<pre>setInstallStatus() : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_settings"></a><div class="element clickable method protected method_settings" data-toggle="collapse" data-target=".method_settings .collapse">
+<h2>Site settings controller</h2>
+<pre>settings(array $submissionVars) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">Sets the site name, URL, data directory, etc.</div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$submissionVars</h4>
+<code>array</code><p>Submitted vars</p></div>
+</div></div>
+</div>
+<a id="method_validateAdminVars"></a><div class="element clickable method protected method_validateAdminVars" data-toggle="collapse" data-target=".method_validateAdminVars .collapse">
+<h2>Validate account form variables</h2>
+<pre>validateAdminVars(array $submissionVars, array $formVars) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$submissionVars</h4>
+<code>array</code><p>Submitted vars</p></div>
+<div class="subelement argument">
+<h4>$formVars</h4>
+<code>array</code><p>Form vars</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_validateDatabaseVars"></a><div class="element clickable method protected method_validateDatabaseVars" data-toggle="collapse" data-target=".method_validateDatabaseVars .collapse">
+<h2>Validate the variables for the database step</h2>
+<pre>validateDatabaseVars(array $submissionVars, array $formVars) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$submissionVars</h4>
+<code>array</code><p>Submitted vars</p></div>
+<div class="subelement argument">
+<h4>$formVars</h4>
+<code>array</code><p>Vars in the form</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_validateSettingsVars"></a><div class="element clickable method protected method_validateSettingsVars" data-toggle="collapse" data-target=".method_validateSettingsVars .collapse">
+<h2>Validate the site settings form variables</h2>
+<pre>validateSettingsVars(array $submissionVars, array $formVars) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$submissionVars</h4>
+<code>array</code><p>Submitted vars</p></div>
+<div class="subelement argument">
+<h4>$formVars</h4>
+<code>array</code><p>Vars in the form</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_welcome"></a><div class="element clickable method protected method_welcome" data-toggle="collapse" data-target=".method_welcome .collapse">
+<h2>Welcome controller</h2>
+<pre>welcome(array $vars) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$vars</h4>
+<code>array</code><p>Not used</p></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_autoLogin"> </a><div class="element clickable property protected property_autoLogin" data-toggle="collapse" data-target=".property_autoLogin .collapse">
+<h2>$autoLogin</h2>
+<pre>$autoLogin </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_isAction"> </a><div class="element clickable property protected property_isAction" data-toggle="collapse" data-target=".property_isAction .collapse">
+<h2>$isAction</h2>
+<pre>$isAction </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_status"> </a><div class="element clickable property protected property_status" data-toggle="collapse" data-target=".property_status .collapse">
+<h2>$status</h2>
+<pre>$status </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_steps"> </a><div class="element clickable property protected property_steps" data-toggle="collapse" data-target=".property_steps .collapse">
+<h2>$steps</h2>
+<pre>$steps </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.1.0
+</a> and<br>
+            generated on 2013-12-03T13:06:17+01:00.<br></footer></div>
+</div>
+</body>
+</html>

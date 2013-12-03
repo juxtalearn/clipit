@@ -1,0 +1,1533 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>API Documentation » Elgg</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">API Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/clipit.html"><i class="icon-th"></i> clipit</a></li>
+<li><a href="../namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Elgg.html"><i class="icon-folder-open"></i> Elgg</a></li>
+<li><a href="../packages/Elgg.Core.html"><i class="icon-folder-open"></i> Elgg.Core</a></li>
+<li><a href="../packages/Elgg.Core.Plugin.html"><i class="icon-folder-open"></i> Elgg.Core.Plugin</a></li>
+<li><a href="../packages/ElggAPIAdmin.html"><i class="icon-folder-open"></i> ElggAPIAdmin</a></li>
+<li><a href="../packages/ElggDiagnostics.html"><i class="icon-folder-open"></i> ElggDiagnostics</a></li>
+<li><a href="../packages/ElggEmbed.html"><i class="icon-folder-open"></i> ElggEmbed</a></li>
+<li><a href="../packages/ElggFile.html"><i class="icon-folder-open"></i> ElggFile</a></li>
+<li><a href="../packages/ElggGarbageCollector.html"><i class="icon-folder-open"></i> ElggGarbageCollector</a></li>
+<li><a href="../packages/ElggGroups.html"><i class="icon-folder-open"></i> ElggGroups</a></li>
+<li><a href="../packages/ElggLogBrowser.html"><i class="icon-folder-open"></i> ElggLogBrowser</a></li>
+<li><a href="../packages/ElggLogRotate.html"><i class="icon-folder-open"></i> ElggLogRotate</a></li>
+<li><a href="../packages/ElggMessages.html"><i class="icon-folder-open"></i> ElggMessages</a></li>
+<li><a href="../packages/ElggNotifications.html"><i class="icon-folder-open"></i> ElggNotifications</a></li>
+<li><a href="../packages/ElggProfile.html"><i class="icon-folder-open"></i> ElggProfile</a></li>
+<li><a href="../packages/ElggTinyMCE.html"><i class="icon-folder-open"></i> ElggTinyMCE</a></li>
+<li><a href="../packages/ElgghtmLawed.html"><i class="icon-folder-open"></i> ElgghtmLawed</a></li>
+<li><a href="../packages/Embed%20Video%20Library.html"><i class="icon-folder-open"></i> Embed Video Library</a></li>
+<li><a href="../packages/PlaceLocalInclude.html"><i class="icon-folder-open"></i> PlaceLocalInclude</a></li>
+<li><a href="../packages/SimpleTest.html"><i class="icon-folder-open"></i> SimpleTest</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+     @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20MockObjects%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   MockObjects
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20MockObjects.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage MockObjects</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+     @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@abstract.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @abstract</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20WebTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage WebTester</a></li>
+<li><a href="../packages/%5Bname%5D.html"><i class="icon-folder-open"></i> [name]</a></li>
+<li><a href="../packages/clipit.html"><i class="icon-folder-open"></i> clipit</a></li>
+<li><a href="../packages/event_calendar.html"><i class="icon-folder-open"></i> event_calendar</a></li>
+<li><a href="../packages/pebs.html"><i class="icon-folder-open"></i> pebs</a></li>
+<li><a href="../packages/profile_manager.html"><i class="icon-folder-open"></i> profile_manager</a></li>
+<li><a href="../packages/veeplay.html"><i class="icon-folder-open"></i> veeplay</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">4473</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">250</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-map-marker"></i> Packages</li>
+<li>
+<a href="../packages/Elgg.html" title="Elgg"><i class="icon-folder-open"></i>Elgg</a><ul class="nav nav-list nav-packages">
+<li>
+<a href="../packages/Elgg.Core.html" title="Core"><i class="icon-folder-open"></i>Core</a><ul class="nav nav-list nav-packages"></ul>
+</li>
+<li>
+<a href="../packages/Elgg.Exceptions.Stub.html" title="Exceptions.Stub"><i class="icon-folder-open"></i>Exceptions.Stub</a><ul class="nav nav-list nav-packages"></ul>
+</li>
+<li>
+<a href="../packages/Elgg.Test.html" title="Test"><i class="icon-folder-open"></i>Test</a><ul class="nav nav-list nav-packages"></ul>
+</li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-function"></i> Functions</li>
+<li class="function  "><a href="#function__elgg_html_decode" title="_elgg_html_decode() :: Apply html_entity_decode() to a string while re-entitising HTML
+special char entities to prevent them from being decoded back to their
+unsafe original forms."><span class="description">Apply html_entity_decode() to a string while re-entitising HTML
+special char entities to prevent them from being decoded back to their
+unsafe original forms.</span><pre>_elgg_html_decode</pre></a></li>
+<li class="function  "><a href="#function_annotations_test" title="annotations_test() :: Register annotation unit tests"><span class="description">Register annotation unit tests</span><pre>annotations_test</pre></a></li>
+<li class="function  "><a href="#function_autop" title="autop() :: Create paragraphs from text with line spacing"><span class="description">Create paragraphs from text with line spacing</span><pre>autop</pre></a></li>
+<li class="function  "><a href="#function_create_annotation" title="create_annotation() :: Create a new annotation."><span class="description">Create a new annotation.</span><pre>create_annotation</pre></a></li>
+<li class="function  "><a href="#function_create_object_entity" title="create_object_entity() :: Create or update the extras table for a given object."><span class="description">Create or update the extras table for a given object.</span><pre>create_object_entity</pre></a></li>
+<li class="function  "><a href="#function_cron_init" title="cron_init() :: Cron initialization"><span class="description">Cron initialization</span><pre>cron_init</pre></a></li>
+<li class="function  "><a href="#function_cron_page_handler" title="cron_page_handler() :: Cron handler"><span class="description">Cron handler</span><pre>cron_page_handler</pre></a></li>
+<li class="function  "><a href="#function_cron_public_pages" title="cron_public_pages() :: Register cron's pages as public in case we're in Walled Garden mode"><span class="description">Register cron's pages as public in case we're in Walled Garden mode</span><pre>cron_public_pages</pre></a></li>
+<li class="function  "><a href="#function_elgg_annotation_exists" title="elgg_annotation_exists() :: Check to see if a user has already created an annotation on an object"><span class="description">Check to see if a user has already created an annotation on an object</span><pre>elgg_annotation_exists</pre></a></li>
+<li class="function  "><a href="#function_elgg_annotations_init" title="elgg_annotations_init() :: Initialize the annotation library"><span class="description">Initialize the annotation library</span><pre>elgg_annotations_init</pre></a></li>
+<li class="function  "><a href="#function_elgg_autop" title="elgg_autop() :: Create paragraphs from text with line spacing"><span class="description">Create paragraphs from text with line spacing</span><pre>elgg_autop</pre></a></li>
+<li class="function  "><a href="#function_elgg_clean_vars" title="elgg_clean_vars() :: Preps an associative array for use in {@link elgg_format_attributes()}."><span class="description">Preps an associative array for use in {@link elgg_format_attributes()}.</span><pre>elgg_clean_vars</pre></a></li>
+<li class="function  "><a href="#function_elgg_comment_url_handler" title="elgg_comment_url_handler() :: Return the URL for a comment"><span class="description">Return the URL for a comment</span><pre>elgg_comment_url_handler</pre></a></li>
+<li class="function  "><a href="#function_elgg_delete_annotation_by_id" title="elgg_delete_annotation_by_id() :: Deletes an annotation using its ID."><span class="description">Deletes an annotation using its ID.</span><pre>elgg_delete_annotation_by_id</pre></a></li>
+<li class="function  "><a href="#function_elgg_delete_annotations" title="elgg_delete_annotations() :: Deletes annotations based on $options."><span class="description">Deletes annotations based on $options.</span><pre>elgg_delete_annotations</pre></a></li>
+<li class="function  "><a href="#function_elgg_disable_annotations" title="elgg_disable_annotations() :: Disables annotations based on $options."><span class="description">Disables annotations based on $options.</span><pre>elgg_disable_annotations</pre></a></li>
+<li class="function  "><a href="#function_elgg_enable_annotations" title="elgg_enable_annotations() :: Enables annotations based on $options."><span class="description">Enables annotations based on $options.</span><pre>elgg_enable_annotations</pre></a></li>
+<li class="function  "><a href="#function_elgg_format_attributes" title="elgg_format_attributes() :: Converts an associative array into a string of well-formed attributes"><span class="description">Converts an associative array into a string of well-formed attributes</span><pre>elgg_format_attributes</pre></a></li>
+<li class="function  "><a href="#function_elgg_format_url" title="elgg_format_url() :: Handles formatting of ampersands in urls"><span class="description">Handles formatting of ampersands in urls</span><pre>elgg_format_url</pre></a></li>
+<li class="function  "><a href="#function_elgg_get_annotation_from_id" title="elgg_get_annotation_from_id() :: Get a specific annotation by its id."><span class="description">Get a specific annotation by its id.</span><pre>elgg_get_annotation_from_id</pre></a></li>
+<li class="function  "><a href="#function_elgg_get_annotations" title="elgg_get_annotations() :: Returns annotations.  Accepts all elgg_get_entities() options for entity
+restraints."><span class="description">Returns annotations.  Accepts all elgg_get_entities() options for entity
+restraints.</span><pre>elgg_get_annotations</pre></a></li>
+<li class="function  "><a href="#function_elgg_get_entities_from_annotation_calculation" title="elgg_get_entities_from_annotation_calculation() :: Get entities ordered by a mathematical calculation on annotation values"><span class="description">Get entities ordered by a mathematical calculation on annotation values</span><pre>elgg_get_entities_from_annotation_calculation</pre></a></li>
+<li class="function  "><a href="#function_elgg_get_entities_from_annotations" title="elgg_get_entities_from_annotations() :: Returns entities based upon annotations.  Also accepts all options available
+to elgg_get_entities() and elgg_get_entities_from_metadata()."><span class="description">Returns entities based upon annotations.  Also accepts all options available
+to elgg_get_entities() and elgg_get_entities_from_metadata().</span><pre>elgg_get_entities_from_annotations</pre></a></li>
+<li class="function  "><a href="#function_elgg_get_excerpt" title="elgg_get_excerpt() :: Returns an excerpt."><span class="description">Returns an excerpt.</span><pre>elgg_get_excerpt</pre></a></li>
+<li class="function  "><a href="#function_elgg_get_friendly_time" title='elgg_get_friendly_time() :: Formats a UNIX timestamp in a friendly way (eg "less than a minute ago")'><span class="description">Formats a UNIX timestamp in a friendly way (eg "less than a minute ago")</span><pre>elgg_get_friendly_time</pre></a></li>
+<li class="function  "><a href="#function_elgg_get_friendly_title" title="elgg_get_friendly_title() :: When given a title, returns a version suitable for inclusion in a URL"><span class="description">When given a title, returns a version suitable for inclusion in a URL</span><pre>elgg_get_friendly_title</pre></a></li>
+<li class="function  "><a href="#function_elgg_list_annotations" title="elgg_list_annotations() :: Returns a rendered list of annotations with pagination."><span class="description">Returns a rendered list of annotations with pagination.</span><pre>elgg_list_annotations</pre></a></li>
+<li class="function  "><a href="#function_elgg_list_entities_from_annotation_calculation" title="elgg_list_entities_from_annotation_calculation() :: List entities from an annotation calculation."><span class="description">List entities from an annotation calculation.</span><pre>elgg_list_entities_from_annotation_calculation</pre></a></li>
+<li class="function  "><a href="#function_elgg_list_entities_from_annotations" title="elgg_list_entities_from_annotations() :: Returns a viewable list of entities from annotations."><span class="description">Returns a viewable list of entities from annotations.</span><pre>elgg_list_entities_from_annotations</pre></a></li>
+<li class="function  "><a href="#function_elgg_normalize_url" title="elgg_normalize_url() :: Converts shorthand urls to absolute urls."><span class="description">Converts shorthand urls to absolute urls.</span><pre>elgg_normalize_url</pre></a></li>
+<li class="function  "><a href="#function_elgg_register_annotation_url_handler" title="elgg_register_annotation_url_handler() :: Register an annotation url handler."><span class="description">Register an annotation url handler.</span><pre>elgg_register_annotation_url_handler</pre></a></li>
+<li class="function  "><a href="#function_elgg_strip_tags" title="elgg_strip_tags() :: Strip tags and offer plugins the chance."><span class="description">Strip tags and offer plugins the chance.</span><pre>elgg_strip_tags</pre></a></li>
+<li class="function  "><a href="#function_export_annotation_plugin_hook" title="export_annotation_plugin_hook() :: Export the annotations for the specified entity"><span class="description">Export the annotations for the specified entity</span><pre>export_annotation_plugin_hook</pre></a></li>
+<li class="function  "><a href="#function_get_annotation_url" title="get_annotation_url() :: Get the URL for this item of metadata, by default this links to the
+export handler in the current view."><span class="description">Get the URL for this item of metadata, by default this links to the
+export handler in the current view.</span><pre>get_annotation_url</pre></a></li>
+<li class="function  "><a href="#function_get_object_entity_as_row" title="get_object_entity_as_row() :: Return the object specific details of a object by a row."><span class="description">Return the object specific details of a object by a row.</span><pre>get_object_entity_as_row</pre></a></li>
+<li class="function  "><a href="#function_get_object_sites" title="get_object_sites() :: Get the sites this object is part of"><span class="description">Get the sites this object is part of</span><pre>get_object_sites</pre></a></li>
+<li class="function  "><a href="#function_objects_test" title="objects_test() :: Runs unit tests for ElggObject"><span class="description">Runs unit tests for ElggObject</span><pre>objects_test</pre></a></li>
+<li class="function  "><a href="#function_output_init" title="output_init() :: Initialise the Output subsystem."><span class="description">Initialise the Output subsystem.</span><pre>output_init</pre></a></li>
+<li class="function  "><a href="#function_output_unit_test" title="output_unit_test() :: Unit tests for Output"><span class="description">Unit tests for Output</span><pre>output_unit_test</pre></a></li>
+<li class="function  "><a href="#function_parse_urls" title="parse_urls() :: Takes a string and turns any URLs into formatted links"><span class="description">Takes a string and turns any URLs into formatted links</span><pre>parse_urls</pre></a></li>
+<li class="function  "><a href="#function_row_to_elggannotation" title="row_to_elggannotation() :: Convert a database row to a new ElggAnnotation"><span class="description">Convert a database row to a new ElggAnnotation</span><pre>row_to_elggannotation</pre></a></li>
+<li class="function  "><a href="#function_search_comments_hook" title="search_comments_hook() :: Get comments that match the search parameters."><span class="description">Get comments that match the search parameters.</span><pre>search_comments_hook</pre></a></li>
+<li class="function  "><a href="#function_search_custom_types_comments_hook" title="search_custom_types_comments_hook() :: Register comments as a custom search type."><span class="description">Register comments as a custom search type.</span><pre>search_custom_types_comments_hook</pre></a></li>
+<li class="function  "><a href="#function_search_custom_types_tags_hook" title="search_custom_types_tags_hook() :: Register tags as a custom search type."><span class="description">Register tags as a custom search type.</span><pre>search_custom_types_tags_hook</pre></a></li>
+<li class="function  "><a href="#function_search_groups_hook" title="search_groups_hook() :: Get groups that match the search parameters."><span class="description">Get groups that match the search parameters.</span><pre>search_groups_hook</pre></a></li>
+<li class="function  "><a href="#function_search_objects_hook" title="search_objects_hook() :: Get objects that match the search parameters."><span class="description">Get objects that match the search parameters.</span><pre>search_objects_hook</pre></a></li>
+<li class="function  "><a href="#function_search_tags_hook" title="search_tags_hook() :: Get entities with tags that match the search parameters."><span class="description">Get entities with tags that match the search parameters.</span><pre>search_tags_hook</pre></a></li>
+<li class="function  "><a href="#function_search_users_hook" title="search_users_hook() :: Get users that match the search parameters."><span class="description">Get users that match the search parameters.</span><pre>search_users_hook</pre></a></li>
+<li class="function  "><a href="#function_update_annotation" title="update_annotation() :: Update an annotation."><span class="description">Update an annotation.</span><pre>update_annotation</pre></a></li>
+<li class="function  "><a href="#function_user_picker_add_user" title="user_picker_add_user() :: "><span class="description">user_picker_add_user()
+        </span><pre>user_picker_add_user</pre></a></li>
+</ul>
+</div>
+<div class="span8 package-contents">
+<ul class="breadcrumb"><li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span><li class="active"><a href="../packages/Elgg.html">Elgg</a></li>
+</li></ul>
+<div class="package-indent">
+<h3>
+<i class="icon-custom icon-function"></i> Functions</h3>
+<a id="function__elgg_html_decode"></a><div class="element clickable function  function__elgg_html_decode" data-toggle="collapse" data-target=".function__elgg_html_decode .collapse">
+<h2>Apply html_entity_decode() to a string while re-entitising HTML
+special char entities to prevent them from being decoded back to their
+unsafe original forms.</h2>
+<pre>_elgg_html_decode(string $string) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">This relies on html_entity_decode() not translating entities when
+doing so leaves behind another entity, e.g. &amp;gt; if decoded would
+create &gt; which is another entity itself. This seems to escape the
+usual behaviour where any two paired entities creating a HTML tag are
+usually decoded, i.e. a lone &gt; is not decoded, but &lt;foo&gt; would
+be decoded to <foo> since it creates a full tag.
+
+Note: This function is poorly explained in the manual - which is really
+bad given its potential for misuse on user input already escaped elsewhere.
+Stackoverflow is littered with advice to use this function in the precise
+way that would lead to user input being capable of injecting arbitrary HTML.</div>
+<table class="table table-bordered">
+<tr>
+<th>author</th>
+<td><a href="">Pádraic Brady</a></td>
+</tr>
+<tr>
+<th>copyright</th>
+<td>Copyright (c) 2010 Pádraic Brady (http://blog.astrumfutura.com)</td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="">Released under dual-license GPL2/MIT by explicit permission of Pádraic Brady</a></td>
+</tr>
+<tr>
+<th>access</th>
+<td>private</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$string</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="function_annotations_test"></a><div class="element clickable function  function_annotations_test" data-toggle="collapse" data-target=".function_annotations_test .collapse">
+<h2>Register annotation unit tests</h2>
+<pre>annotations_test(string $hook, string $type, array $value, array $params) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>private</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$hook</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>array</code>
+</div>
+<div class="subelement argument">
+<h4>$params</h4>
+<code>array</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="function_autop"></a><div class="element clickable function  function_autop" data-toggle="collapse" data-target=".function_autop .collapse">
+<h2>Create paragraphs from text with line spacing</h2>
+<pre>autop(string $pee) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>deprecated</th>
+<td>Use elgg_autop instead</td>
+</tr>
+<tr>
+<th>todo</th>
+<td>Add deprecation warning in 1.9</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$pee</h4>
+<code>string</code><p>The string</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="function_create_annotation"></a><div class="element clickable function  function_create_annotation" data-toggle="collapse" data-target=".function_create_annotation .collapse">
+<h2>Create a new annotation.</h2>
+<pre>create_annotation(int $entity_guid, string $name, string $value, string $value_type, int $owner_guid, int $access_id) : int | bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$entity_guid</h4>
+<code>int</code><p>Entity Guid</p></div>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>Name of annotation</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>string</code><p>Value of annotation</p></div>
+<div class="subelement argument">
+<h4>$value_type</h4>
+<code>string</code><p>Type of value (default is auto detection)</p>
+</div>
+<div class="subelement argument">
+<h4>$owner_guid</h4>
+<code>int</code><p>Owner of annotation (default is logged in user)</p>
+</div>
+<div class="subelement argument">
+<h4>$access_id</h4>
+<code>int</code><p>Access level of annotation</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>int</code><code>bool</code>id on success or false on failure</div>
+</div></div>
+</div>
+<a id="function_create_object_entity"></a><div class="element clickable function  function_create_object_entity" data-toggle="collapse" data-target=".function_create_object_entity .collapse">
+<h2>Create or update the extras table for a given object.</h2>
+<pre>create_object_entity(int $guid, string $title, string $description) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">Call create_entity first.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>private</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$guid</h4>
+<code>int</code><p>The guid of the entity you're creating (as obtained by create_entity)</p>
+</div>
+<div class="subelement argument">
+<h4>$title</h4>
+<code>string</code><p>The title of the object</p></div>
+<div class="subelement argument">
+<h4>$description</h4>
+<code>string</code><p>The object's description</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="function_cron_init"></a><div class="element clickable function  function_cron_init" data-toggle="collapse" data-target=".function_cron_init .collapse">
+<h2>Cron initialization</h2>
+<pre>cron_init() : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>private</td>
+</tr></table>
+</div></div>
+</div>
+<a id="function_cron_page_handler"></a><div class="element clickable function  function_cron_page_handler" data-toggle="collapse" data-target=".function_cron_page_handler .collapse">
+<h2>Cron handler</h2>
+<pre>cron_page_handler(array $page) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>private</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$page</h4>
+<code>array</code><p>Pages</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/CronException.html">\CronException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="function_cron_public_pages"></a><div class="element clickable function  function_cron_public_pages" data-toggle="collapse" data-target=".function_cron_public_pages .collapse">
+<h2>Register cron's pages as public in case we're in Walled Garden mode</h2>
+<pre>cron_public_pages(string $hook, string $type, array $return_value, mixed $params) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>private</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$hook</h4>
+<code>string</code><p>public_pages</p></div>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>string</code><p>system</p></div>
+<div class="subelement argument">
+<h4>$return_value</h4>
+<code>array</code><p>Array of pages to allow</p></div>
+<div class="subelement argument">
+<h4>$params</h4>
+<code>mixed</code><p>Params</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="function_elgg_annotation_exists"></a><div class="element clickable function  function_elgg_annotation_exists" data-toggle="collapse" data-target=".function_elgg_annotation_exists .collapse">
+<h2>Check to see if a user has already created an annotation on an object</h2>
+<pre>elgg_annotation_exists(int $entity_guid, string $annotation_type, int $owner_guid) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.8.0</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$entity_guid</h4>
+<code>int</code><p>Entity guid</p></div>
+<div class="subelement argument">
+<h4>$annotation_type</h4>
+<code>string</code><p>Type of annotation</p></div>
+<div class="subelement argument">
+<h4>$owner_guid</h4>
+<code>int</code><p>Defaults to logged in user.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="function_elgg_annotations_init"></a><div class="element clickable function  function_elgg_annotations_init" data-toggle="collapse" data-target=".function_elgg_annotations_init .collapse">
+<h2>Initialize the annotation library</h2>
+<pre>elgg_annotations_init() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>private</td>
+</tr></table>
+</div></div>
+</div>
+<a id="function_elgg_autop"></a><div class="element clickable function  function_elgg_autop" data-toggle="collapse" data-target=".function_elgg_autop .collapse">
+<h2>Create paragraphs from text with line spacing</h2>
+<pre>elgg_autop(string $string) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$string</h4>
+<code>string</code><p>The string</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="function_elgg_clean_vars"></a><div class="element clickable function  function_elgg_clean_vars" data-toggle="collapse" data-target=".function_elgg_clean_vars .collapse">
+<h2>Preps an associative array for use in {@link elgg_format_attributes()}.</h2>
+<pre>elgg_clean_vars(array $vars) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">Removes all the junk that {@link elgg_view()} puts into $vars.
+Maintains backward compatibility with attributes like 'internalname' and 'internalid'</div>
+<table class="table table-bordered">
+<tr>
+<th>note</th>
+<td>This function is called automatically by elgg_format_attributes(). No need to
+      call it yourself before using elgg_format_attributes().</td>
+</tr>
+<tr>
+<th>access</th>
+<td>private</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$vars</h4>
+<code>array</code><p>The raw $vars array with all it's dirtiness (config, url, etc.)</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>The array, ready to be used in elgg_format_attributes().</div>
+</div></div>
+</div>
+<a id="function_elgg_comment_url_handler"></a><div class="element clickable function  function_elgg_comment_url_handler" data-toggle="collapse" data-target=".function_elgg_comment_url_handler .collapse">
+<h2>Return the URL for a comment</h2>
+<pre>elgg_comment_url_handler(\ElggAnnotation $comment) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>private</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$comment</h4>
+<code><a href="../classes/ElggAnnotation.html">\ElggAnnotation</a></code><p>The comment object</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="function_elgg_delete_annotation_by_id"></a><div class="element clickable function  function_elgg_delete_annotation_by_id" data-toggle="collapse" data-target=".function_elgg_delete_annotation_by_id .collapse">
+<h2>Deletes an annotation using its ID.</h2>
+<pre>elgg_delete_annotation_by_id(int $id) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$id</h4>
+<code>int</code><p>The annotation ID to delete.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="function_elgg_delete_annotations"></a><div class="element clickable function  function_elgg_delete_annotations" data-toggle="collapse" data-target=".function_elgg_delete_annotations .collapse">
+<h2>Deletes annotations based on $options.</h2>
+<pre>elgg_delete_annotations(array $options) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>warning</th>
+<td>Unlike elgg_get_annotations() this will not accept an empty options array!
+         This requires at least one constraint: annotation_owner_guid(s),
+         annotation_name(s), annotation_value(s), or guid(s) must be set.</td>
+</tr>
+<tr>
+<th>since</th>
+<td>1.8.0</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>array</code><p>An options array. {@See elgg_get_annotations()}</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code>Null if the metadata name is invalid. Bool on success or fail.</div>
+</div></div>
+</div>
+<a id="function_elgg_disable_annotations"></a><div class="element clickable function  function_elgg_disable_annotations" data-toggle="collapse" data-target=".function_elgg_disable_annotations .collapse">
+<h2>Disables annotations based on $options.</h2>
+<pre>elgg_disable_annotations(array $options) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>warning</th>
+<td>Unlike elgg_get_annotations() this will not accept an empty options array!</td>
+</tr>
+<tr>
+<th>since</th>
+<td>1.8.0</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>array</code><p>An options array. {@See elgg_get_annotations()}</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
+<a id="function_elgg_enable_annotations"></a><div class="element clickable function  function_elgg_enable_annotations" data-toggle="collapse" data-target=".function_elgg_enable_annotations .collapse">
+<h2>Enables annotations based on $options.</h2>
+<pre>elgg_enable_annotations(array $options) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>warning</th>
+<td>Unlike elgg_get_annotations() this will not accept an empty options array!</td>
+</tr>
+<tr>
+<th>since</th>
+<td>1.8.0</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>array</code><p>An options array. {@See elgg_get_annotations()}</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
+<a id="function_elgg_format_attributes"></a><div class="element clickable function  function_elgg_format_attributes" data-toggle="collapse" data-target=".function_elgg_format_attributes .collapse">
+<h2>Converts an associative array into a string of well-formed attributes</h2>
+<pre>elgg_format_attributes(array $attrs) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>note</th>
+<td>usually for HTML, but could be useful for XML too...</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$attrs</h4>
+<code>array</code><p>An associative array of attr => val pairs</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>HTML attributes to be inserted into a tag (e.g., <tag $attrs>)</div>
+</div></div>
+</div>
+<a id="function_elgg_format_url"></a><div class="element clickable function  function_elgg_format_url" data-toggle="collapse" data-target=".function_elgg_format_url .collapse">
+<h2>Handles formatting of ampersands in urls</h2>
+<pre>elgg_format_url(string $url) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.7.1</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$url</h4>
+<code>string</code><p>The URL</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="function_elgg_get_annotation_from_id"></a><div class="element clickable function  function_elgg_get_annotation_from_id" data-toggle="collapse" data-target=".function_elgg_get_annotation_from_id .collapse">
+<h2>Get a specific annotation by its id.</h2>
+<pre>elgg_get_annotation_from_id(int $id) : <a href="../classes/ElggAnnotation.html">\ElggAnnotation</a> | false</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">If you want multiple annotation objects, use
+{@link elgg_get_annotations()}.</div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$id</h4>
+<code>int</code><p>The id of the annotation object being retrieved.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/ElggAnnotation.html">\ElggAnnotation</a></code><code>false</code>
+</div>
+</div></div>
+</div>
+<a id="function_elgg_get_annotations"></a><div class="element clickable function  function_elgg_get_annotations" data-toggle="collapse" data-target=".function_elgg_get_annotations .collapse">
+<h2>Returns annotations.  Accepts all elgg_get_entities() options for entity
+restraints.</h2>
+<pre>elgg_get_annotations(array $options) : <a href="ElggAnnotation%5B%5D.html">\ElggAnnotation[]</a> | mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>see</th>
+<td><a href="%5Celgg_get_entities"></a></td>
+</tr>
+<tr>
+<th>since</th>
+<td>1.8.0</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>array</code><p>Array in format:
+annotation_names              => NULL|ARR Annotation names
+annotation_values             => NULL|ARR Annotation values
+annotation_ids                => NULL|ARR annotation ids
+annotation_case_sensitive     => BOOL Overall Case sensitive
+annotation_owner_guids        => NULL|ARR guids for annotation owners
+annotation_created_time_lower => INT Lower limit for created time.
+annotation_created_time_upper => INT Upper limit for created time.
+annotation_calculation        => STR Perform the MySQL function on the annotation values returned.
+                                  Do not confuse this "annotation_calculation" option with the
+                                  "calculation" option to elgg_get_entities_from_annotation_calculation().
+                                  The "annotation_calculation" option causes this function to
+                                  return the result of performing a mathematical calculation on
+                                  all annotations that match the query instead of ElggAnnotation
+                                  objects.
+                                  See the docs for elgg_get_entities_from_annotation_calculation()
+                                  for the proper use of the "calculation" option.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="ElggAnnotation%5B%5D.html">\ElggAnnotation[]</a></code><code>mixed</code>
+</div>
+</div></div>
+</div>
+<a id="function_elgg_get_entities_from_annotation_calculation"></a><div class="element clickable function  function_elgg_get_entities_from_annotation_calculation" data-toggle="collapse" data-target=".function_elgg_get_entities_from_annotation_calculation .collapse">
+<h2>Get entities ordered by a mathematical calculation on annotation values</h2>
+<pre>elgg_get_entities_from_annotation_calculation(array $options) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>array</code><p>An options array:
+    'calculation'            => The calculation to use. Must be a valid MySQL function.
+                             Defaults to sum.  Result selected as 'annotation_calculation'.
+                             Don't confuse this "calculation" option with the
+                             "annotation_calculation" option to elgg_get_annotations().
+                             This "calculation" option is applied to each entity's set of
+                             annotations and is selected as annotation_calculation for that row.
+                             See the docs for elgg_get_annotations() for proper use of the
+                             "annotation_calculation" option.
+'order_by'               => The order for the sorting. Defaults to 'annotation_calculation desc'.
+'annotation_names'       => The names of annotations on the entity.
+'annotation_values'      => The values of annotations on the entity.
+'metadata_names'         => The name of metadata on the entity.
+'metadata_values'        => The value of metadata on the entitiy.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code>If count, int. If not count, array. false on errors.</div>
+</div></div>
+</div>
+<a id="function_elgg_get_entities_from_annotations"></a><div class="element clickable function  function_elgg_get_entities_from_annotations" data-toggle="collapse" data-target=".function_elgg_get_entities_from_annotations .collapse">
+<h2>Returns entities based upon annotations.  Also accepts all options available
+to elgg_get_entities() and elgg_get_entities_from_metadata().</h2>
+<pre>elgg_get_entities_from_annotations(array $options) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">Entity creation time is selected as maxtime. To sort based upon
+this, pass 'order_by' => 'maxtime asc' || 'maxtime desc'</div>
+<table class="table table-bordered">
+<tr>
+<th>see</th>
+<td><a href="%5Celgg_get_entities"></a></td>
+</tr>
+<tr>
+<th>see</th>
+<td><a href="%5Celgg_get_entities_from_metadata"></a></td>
+</tr>
+<tr>
+<th>since</th>
+<td>1.7.0</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>array</code><p>Array in format:
+    annotation_names => NULL|ARR annotations names
+    annotation_values => NULL|ARR annotations values
+    annotation_name_value_pairs => NULL|ARR (name = 'name', value => 'value',
+    'operator' => '=', 'case_sensitive' => TRUE) entries.
+    Currently if multiple values are sent via an array (value => array('value1', 'value2')
+    the pair's operator will be forced to "IN".
+    annotation_name_value_pairs_operator => NULL|STR The operator to use for combining
+ (name = value) OPERATOR (name = value); default AND
+    annotation_case_sensitive => BOOL Overall Case sensitive
+ order_by_annotation => NULL|ARR (array('name' => 'annotation_text1', 'direction' => ASC|DESC,
+ 'as' => text|integer),
+ Also supports array('name' => 'annotation_text1')
+ annotation_owner_guids => NULL|ARR guids for annotaiton owners</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code>If count, int. If not count, array. false on errors.</div>
+</div></div>
+</div>
+<a id="function_elgg_get_excerpt"></a><div class="element clickable function  function_elgg_get_excerpt" data-toggle="collapse" data-target=".function_elgg_get_excerpt .collapse">
+<h2>Returns an excerpt.</h2>
+<pre>elgg_get_excerpt(string $text, int $num_chars) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">Will return up to n chars stopping at the nearest space.
+If no spaces are found (like in Japanese) will crop off at the
+n char mark. Adds ... if any text was chopped.</div>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.7.2</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$text</h4>
+<code>string</code><p>The full text to excerpt</p></div>
+<div class="subelement argument">
+<h4>$num_chars</h4>
+<code>int</code><p>Return a string up to $num_chars long</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="function_elgg_get_friendly_time"></a><div class="element clickable function  function_elgg_get_friendly_time" data-toggle="collapse" data-target=".function_elgg_get_friendly_time .collapse">
+<h2>Formats a UNIX timestamp in a friendly way (eg "less than a minute ago")</h2>
+<pre>elgg_get_friendly_time(int $time) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>see</th>
+<td><a href="%5Celgg_view_friendly_time()"></a></td>
+</tr>
+<tr>
+<th>since</th>
+<td>1.7.2</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$time</h4>
+<code>int</code><p>A UNIX epoch timestamp</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The friendly time string</div>
+</div></div>
+</div>
+<a id="function_elgg_get_friendly_title"></a><div class="element clickable function  function_elgg_get_friendly_title" data-toggle="collapse" data-target=".function_elgg_get_friendly_title .collapse">
+<h2>When given a title, returns a version suitable for inclusion in a URL</h2>
+<pre>elgg_get_friendly_title(string $title) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.7.2</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$title</h4>
+<code>string</code><p>The title</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The optimised title</div>
+</div></div>
+</div>
+<a id="function_elgg_list_annotations"></a><div class="element clickable function  function_elgg_list_annotations" data-toggle="collapse" data-target=".function_elgg_list_annotations .collapse">
+<h2>Returns a rendered list of annotations with pagination.</h2>
+<pre>elgg_list_annotations(array $options) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.8.0</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>array</code><p>Annotation getter and display options.
+{@see elgg_get_annotations()} and {@see elgg_list_entities()}.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The list of entities</div>
+</div></div>
+</div>
+<a id="function_elgg_list_entities_from_annotation_calculation"></a><div class="element clickable function  function_elgg_list_entities_from_annotation_calculation" data-toggle="collapse" data-target=".function_elgg_list_entities_from_annotation_calculation .collapse">
+<h2>List entities from an annotation calculation.</h2>
+<pre>elgg_list_entities_from_annotation_calculation(array $options) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="%5Celgg_get_entities_from_annotation_calculation()"></a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>array</code><p>An options array.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="function_elgg_list_entities_from_annotations"></a><div class="element clickable function  function_elgg_list_entities_from_annotations" data-toggle="collapse" data-target=".function_elgg_list_entities_from_annotations .collapse">
+<h2>Returns a viewable list of entities from annotations.</h2>
+<pre>elgg_list_entities_from_annotations(array $options) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>see</th>
+<td><a href="%5Celgg_get_entities_from_annotations()"></a></td>
+</tr>
+<tr>
+<th>see</th>
+<td><a href="%5Celgg_list_entities()"></a></td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>array</code><p>Options array</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="function_elgg_normalize_url"></a><div class="element clickable function  function_elgg_normalize_url" data-toggle="collapse" data-target=".function_elgg_normalize_url .collapse">
+<h2>Converts shorthand urls to absolute urls.</h2>
+<pre>elgg_normalize_url(string $url) : string</pre>
+<div class="labels"></div>
+<div class="row collapse">
+<div class="span4">
+<div class="long_description">If the url is already absolute or protocol-relative, no change is made.</div>
+<table class="table table-bordered"><tr>
+<th>example</th>
+<td>// 'http://my.site.com/'
+elgg_normalize_url('dashboard');          // 'http://my.site.com/dashboard'
+elgg_normalize_url('http://google.com/'); // no change
+elgg_normalize_url('//google.com/');      // no change</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$url</h4>
+<code>string</code><p>The URL to normalize</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The absolute url</div>
+</div>
+<div class="span4">
+<h3>Examples</h3>
+<pre class="prettyprint linenums"></pre>
+</div>
+</div>
+</div>
+<a id="function_elgg_register_annotation_url_handler"></a><div class="element clickable function  function_elgg_register_annotation_url_handler" data-toggle="collapse" data-target=".function_elgg_register_annotation_url_handler .collapse">
+<h2>Register an annotation url handler.</h2>
+<pre>elgg_register_annotation_url_handler(string $extender_name, string $function_name) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$extender_name</h4>
+<code>string</code><p>The name, default 'all'.</p>
+</div>
+<div class="subelement argument">
+<h4>$function_name</h4>
+<code>string</code><p>The function.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="function_elgg_strip_tags"></a><div class="element clickable function  function_elgg_strip_tags" data-toggle="collapse" data-target=".function_elgg_strip_tags .collapse">
+<h2>Strip tags and offer plugins the chance.</h2>
+<pre>elgg_strip_tags(string $string) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">Plugins register for output:strip_tags plugin hook.
+Original string included in $params['original_string']</div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$string</h4>
+<code>string</code><p>Formatted string</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>String run through strip_tags() and any plugin hooks.</div>
+</div></div>
+</div>
+<a id="function_export_annotation_plugin_hook"></a><div class="element clickable function  function_export_annotation_plugin_hook" data-toggle="collapse" data-target=".function_export_annotation_plugin_hook .collapse">
+<h2>Export the annotations for the specified entity</h2>
+<pre>export_annotation_plugin_hook(string $hook, string $type, mixed $returnvalue, mixed $params) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>elgg_plugin_hook</th>
+<td>export all</td>
+</tr>
+<tr>
+<th>access</th>
+<td>private</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$hook</h4>
+<code>string</code><p>'export'</p>
+</div>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>string</code><p>'all'</p>
+</div>
+<div class="subelement argument">
+<h4>$returnvalue</h4>
+<code>mixed</code><p>Default return value</p></div>
+<div class="subelement argument">
+<h4>$params</h4>
+<code>mixed</code><p>Parameters determining what annotations to export</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/InvalidParameterException.html">\InvalidParameterException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="function_get_annotation_url"></a><div class="element clickable function  function_get_annotation_url" data-toggle="collapse" data-target=".function_get_annotation_url .collapse">
+<h2>Get the URL for this item of metadata, by default this links to the
+export handler in the current view.</h2>
+<pre>get_annotation_url(int $id) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$id</h4>
+<code>int</code><p>Annotation id</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
+<a id="function_get_object_entity_as_row"></a><div class="element clickable function  function_get_object_entity_as_row" data-toggle="collapse" data-target=".function_get_object_entity_as_row .collapse">
+<h2>Return the object specific details of a object by a row.</h2>
+<pre>get_object_entity_as_row(int $guid) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>private</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$guid</h4>
+<code>int</code><p>The guid to retreive</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="function_get_object_sites"></a><div class="element clickable function  function_get_object_sites" data-toggle="collapse" data-target=".function_get_object_sites .collapse">
+<h2>Get the sites this object is part of</h2>
+<pre>get_object_sites(int $object_guid, int $limit, int $offset) : false | array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$object_guid</h4>
+<code>int</code><p>The object's GUID</p>
+</div>
+<div class="subelement argument">
+<h4>$limit</h4>
+<code>int</code><p>Number of results to return</p></div>
+<div class="subelement argument">
+<h4>$offset</h4>
+<code>int</code><p>Any indexing offset</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>false</code><code>array</code>On success, an array of ElggSites</div>
+</div></div>
+</div>
+<a id="function_objects_test"></a><div class="element clickable function  function_objects_test" data-toggle="collapse" data-target=".function_objects_test .collapse">
+<h2>Runs unit tests for ElggObject</h2>
+<pre>objects_test(string $hook, string $type, mixed $value, mixed $params) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>private</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$hook</h4>
+<code>string</code><p>unit_test</p></div>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>string</code><p>system</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>mixed</code><p>Array of tests</p></div>
+<div class="subelement argument">
+<h4>$params</h4>
+<code>mixed</code><p>Params</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="function_output_init"></a><div class="element clickable function  function_output_init" data-toggle="collapse" data-target=".function_output_init .collapse">
+<h2>Initialise the Output subsystem.</h2>
+<pre>output_init() : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>private</td>
+</tr></table>
+</div></div>
+</div>
+<a id="function_output_unit_test"></a><div class="element clickable function  function_output_unit_test" data-toggle="collapse" data-target=".function_output_unit_test .collapse">
+<h2>Unit tests for Output</h2>
+<pre>output_unit_test(string $hook, string $type, mixed $value, mixed $params) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>private</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$hook</h4>
+<code>string</code><p>unit_test</p></div>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>string</code><p>system</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>mixed</code><p>Array of tests</p></div>
+<div class="subelement argument">
+<h4>$params</h4>
+<code>mixed</code><p>Params</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="function_parse_urls"></a><div class="element clickable function  function_parse_urls" data-toggle="collapse" data-target=".function_parse_urls .collapse">
+<h2>Takes a string and turns any URLs into formatted links</h2>
+<pre>parse_urls(string $text) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$text</h4>
+<code>string</code><p>The input string</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>The output string with formatted links</div>
+</div></div>
+</div>
+<a id="function_row_to_elggannotation"></a><div class="element clickable function  function_row_to_elggannotation" data-toggle="collapse" data-target=".function_row_to_elggannotation .collapse">
+<h2>Convert a database row to a new ElggAnnotation</h2>
+<pre>row_to_elggannotation(\stdClass $row) : <a href="../classes/ElggAnnotation.html">\ElggAnnotation</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>private</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$row</h4>
+<code><a href="stdClass.html">\stdClass</a></code><p>Db row result object</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/ElggAnnotation.html">\ElggAnnotation</a></code></div>
+</div></div>
+</div>
+<a id="function_search_comments_hook"></a><div class="element clickable function  function_search_comments_hook" data-toggle="collapse" data-target=".function_search_comments_hook .collapse">
+<h2>Get comments that match the search parameters.</h2>
+<pre>search_comments_hook(string $hook, string $type, array $value, array $params) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$hook</h4>
+<code>string</code><p>Hook name</p></div>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>string</code><p>Hook type</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>array</code><p>Empty array</p></div>
+<div class="subelement argument">
+<h4>$params</h4>
+<code>array</code><p>Search parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="function_search_custom_types_comments_hook"></a><div class="element clickable function  function_search_custom_types_comments_hook" data-toggle="collapse" data-target=".function_search_custom_types_comments_hook .collapse">
+<h2>Register comments as a custom search type.</h2>
+<pre>search_custom_types_comments_hook(string $hook, string $type, array $value, array $params) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$hook</h4>
+<code>string</code><p>Hook name</p></div>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>string</code><p>Hook type</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>array</code><p>Array of custom search types</p></div>
+<div class="subelement argument">
+<h4>$params</h4>
+<code>array</code><p>Search parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="function_search_custom_types_tags_hook"></a><div class="element clickable function  function_search_custom_types_tags_hook" data-toggle="collapse" data-target=".function_search_custom_types_tags_hook .collapse">
+<h2>Register tags as a custom search type.</h2>
+<pre>search_custom_types_tags_hook(string $hook, string $type, array $value, array $params) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$hook</h4>
+<code>string</code><p>Hook name</p></div>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>string</code><p>Hook type</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>array</code><p>Array of custom search types</p></div>
+<div class="subelement argument">
+<h4>$params</h4>
+<code>array</code><p>Search parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="function_search_groups_hook"></a><div class="element clickable function  function_search_groups_hook" data-toggle="collapse" data-target=".function_search_groups_hook .collapse">
+<h2>Get groups that match the search parameters.</h2>
+<pre>search_groups_hook(string $hook, string $type, array $value, array $params) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$hook</h4>
+<code>string</code><p>Hook name</p></div>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>string</code><p>Hook type</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>array</code><p>Empty array</p></div>
+<div class="subelement argument">
+<h4>$params</h4>
+<code>array</code><p>Search parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="function_search_objects_hook"></a><div class="element clickable function  function_search_objects_hook" data-toggle="collapse" data-target=".function_search_objects_hook .collapse">
+<h2>Get objects that match the search parameters.</h2>
+<pre>search_objects_hook(string $hook, string $type, array $value, array $params) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$hook</h4>
+<code>string</code><p>Hook name</p></div>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>string</code><p>Hook type</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>array</code><p>Empty array</p></div>
+<div class="subelement argument">
+<h4>$params</h4>
+<code>array</code><p>Search parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="function_search_tags_hook"></a><div class="element clickable function  function_search_tags_hook" data-toggle="collapse" data-target=".function_search_tags_hook .collapse">
+<h2>Get entities with tags that match the search parameters.</h2>
+<pre>search_tags_hook(string $hook, string $type, array $value, array $params) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$hook</h4>
+<code>string</code><p>Hook name</p></div>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>string</code><p>Hook type</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>array</code><p>Empty array</p></div>
+<div class="subelement argument">
+<h4>$params</h4>
+<code>array</code><p>Search parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="function_search_users_hook"></a><div class="element clickable function  function_search_users_hook" data-toggle="collapse" data-target=".function_search_users_hook .collapse">
+<h2>Get users that match the search parameters.</h2>
+<pre>search_users_hook(string $hook, string $type, array $value, array $params) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">Searches on username, display name, and profile fields</div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$hook</h4>
+<code>string</code><p>Hook name</p></div>
+<div class="subelement argument">
+<h4>$type</h4>
+<code>string</code><p>Hook type</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>array</code><p>Empty array</p></div>
+<div class="subelement argument">
+<h4>$params</h4>
+<code>array</code><p>Search parameters</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="function_update_annotation"></a><div class="element clickable function  function_update_annotation" data-toggle="collapse" data-target=".function_update_annotation .collapse">
+<h2>Update an annotation.</h2>
+<pre>update_annotation(int $annotation_id, string $name, string $value, string $value_type, int $owner_guid, int $access_id) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$annotation_id</h4>
+<code>int</code><p>Annotation ID</p></div>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>Name of annotation</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>string</code><p>Value of annotation</p></div>
+<div class="subelement argument">
+<h4>$value_type</h4>
+<code>string</code><p>Type of value</p></div>
+<div class="subelement argument">
+<h4>$owner_guid</h4>
+<code>int</code><p>Owner of annotation</p></div>
+<div class="subelement argument">
+<h4>$access_id</h4>
+<code>int</code><p>Access level of annotation</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="function_user_picker_add_user"></a><div class="element clickable function  function_user_picker_add_user" data-toggle="collapse" data-target=".function_user_picker_add_user .collapse">
+<h2>user_picker_add_user()
+        </h2>
+<pre>user_picker_add_user($user_id) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$user_id</h4></div>
+</div></div>
+</div>
+<ul class="breadcrumb"><li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span><li><a href="../packages/Elgg.html">Elgg</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../packages/Elgg.Core.html">Core</a>
+</li>
+</li></ul>
+<div class="package-indent">
+<h3>
+<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
+<div id="ODDRelationship" class="element ajax clickable class">
+<h1>ODDRelationship<a href="../classes/ODDRelationship.html">¶</a>
+</h1>
+<p class="short_description">ODD Relationship class.</p>
+<div class="details collapse"></div>
+<a href="../classes/ODDRelationship.html" class="more">« More »</a>
+</div>
+</div>
+<ul class="breadcrumb"><li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span><li><a href="../packages/Elgg.html">Elgg</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../packages/Elgg.Exceptions.Stub.html">Exceptions.Stub</a>
+</li>
+</li></ul>
+<div class="package-indent">
+<h3>
+<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
+<div id="ConfigurationException" class="element ajax clickable class">
+<h1>ConfigurationException<a href="../classes/ConfigurationException.html">¶</a>
+</h1>
+<p class="short_description">Configuration exception</p>
+<div class="details collapse"></div>
+<a href="../classes/ConfigurationException.html" class="more">« More »</a>
+</div>
+<div id="CronException" class="element ajax clickable class">
+<h1>CronException<a href="../classes/CronException.html">¶</a>
+</h1>
+<p class="short_description">Cron exception</p>
+<div class="details collapse"></div>
+<a href="../classes/CronException.html" class="more">« More »</a>
+</div>
+</div>
+<ul class="breadcrumb"><li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span><li><a href="../packages/Elgg.html">Elgg</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../packages/Elgg.Test.html">Test</a>
+</li>
+</li></ul>
+<div class="package-indent">
+<h3>
+<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
+<div id="ElggCoreAccessCollectionsTest" class="element ajax clickable class">
+<h1>ElggCoreAccessCollectionsTest<a href="../classes/ElggCoreAccessCollectionsTest.html">¶</a>
+</h1>
+<p class="short_description">Access Collections tests</p>
+<div class="details collapse"></div>
+<a href="../classes/ElggCoreAccessCollectionsTest.html" class="more">« More »</a>
+</div>
+<div id="ElggCoreAnnotationAPITest" class="element ajax clickable class">
+<h1>ElggCoreAnnotationAPITest<a href="../classes/ElggCoreAnnotationAPITest.html">¶</a>
+</h1>
+<p class="short_description">Elgg Test annotation api</p>
+<div class="details collapse"></div>
+<a href="../classes/ElggCoreAnnotationAPITest.html" class="more">« More »</a>
+</div>
+<div id="ElggCoreEntityGetterFunctionsTest" class="element ajax clickable class">
+<h1>ElggCoreEntityGetterFunctionsTest<a href="../classes/ElggCoreEntityGetterFunctionsTest.html">¶</a>
+</h1>
+<p class="short_description">Elgg Test Entity Getter Functions</p>
+<div class="details collapse"></div>
+<a href="../classes/ElggCoreEntityGetterFunctionsTest.html" class="more">« More »</a>
+</div>
+<div id="ElggCoreEntityTest" class="element ajax clickable class">
+<h1>ElggCoreEntityTest<a href="../classes/ElggCoreEntityTest.html">¶</a>
+</h1>
+<p class="short_description">Elgg Test ElggEntities</p>
+<div class="details collapse"></div>
+<a href="../classes/ElggCoreEntityTest.html" class="more">« More »</a>
+</div>
+<div id="ElggCoreFilestoreTest" class="element ajax clickable class">
+<h1>ElggCoreFilestoreTest<a href="../classes/ElggCoreFilestoreTest.html">¶</a>
+</h1>
+<p class="short_description">Elgg Test Skeleton</p>
+<div class="details collapse"></div>
+<a href="../classes/ElggCoreFilestoreTest.html" class="more">« More »</a>
+</div>
+<div id="ElggCoreHelpersTest" class="element ajax clickable class">
+<h1>ElggCoreHelpersTest<a href="../classes/ElggCoreHelpersTest.html">¶</a>
+</h1>
+<p class="short_description">Elgg Test helper functions</p>
+<div class="details collapse"></div>
+<a href="../classes/ElggCoreHelpersTest.html" class="more">« More »</a>
+</div>
+<div id="ElggCoreMetadataAPITest" class="element ajax clickable class">
+<h1>ElggCoreMetadataAPITest<a href="../classes/ElggCoreMetadataAPITest.html">¶</a>
+</h1>
+<p class="short_description">Elgg Test metadata API</p>
+<div class="details collapse"></div>
+<a href="../classes/ElggCoreMetadataAPITest.html" class="more">« More »</a>
+</div>
+<div id="ElggCoreMetadataCacheTest" class="element ajax clickable class">
+<h1>ElggCoreMetadataCacheTest<a href="../classes/ElggCoreMetadataCacheTest.html">¶</a>
+</h1>
+<p class="short_description">Elgg Test metadata cache</p>
+<div class="details collapse"></div>
+<a href="../classes/ElggCoreMetadataCacheTest.html" class="more">« More »</a>
+</div>
+<div id="ElggCoreObjectTest" class="element ajax clickable class">
+<h1>ElggCoreObjectTest<a href="../classes/ElggCoreObjectTest.html">¶</a>
+</h1>
+<p class="short_description">Elgg Test ElggObject</p>
+<div class="details collapse"></div>
+<a href="../classes/ElggCoreObjectTest.html" class="more">« More »</a>
+</div>
+<div id="ElggCoreRegressionBugsTest" class="element ajax clickable class">
+<h1>ElggCoreRegressionBugsTest<a href="../classes/ElggCoreRegressionBugsTest.html">¶</a>
+</h1>
+<p class="short_description">Elgg Regression Tests -- Trac Bugfixes
+Any bugfixes from Trac that require testing belong here.</p>
+<div class="details collapse"></div>
+<a href="../classes/ElggCoreRegressionBugsTest.html" class="more">« More »</a>
+</div>
+<div id="ElggCoreRiverAPITest" class="element ajax clickable class">
+<h1>ElggCoreRiverAPITest<a href="../classes/ElggCoreRiverAPITest.html">¶</a>
+</h1>
+<p class="short_description">Elgg Test river api</p>
+<div class="details collapse"></div>
+<a href="../classes/ElggCoreRiverAPITest.html" class="more">« More »</a>
+</div>
+<div id="ElggCoreServicesApiTest" class="element ajax clickable class">
+<h1>ElggCoreServicesApiTest<a href="../classes/ElggCoreServicesApiTest.html">¶</a>
+</h1>
+<p class="short_description">Elgg Test Services - General API and REST</p>
+<div class="details collapse"></div>
+<a href="../classes/ElggCoreServicesApiTest.html" class="more">« More »</a>
+</div>
+<div id="ElggCoreSiteTest" class="element ajax clickable class">
+<h1>ElggCoreSiteTest<a href="../classes/ElggCoreSiteTest.html">¶</a>
+</h1>
+<p class="short_description">Elgg Test ElggSite</p>
+<div class="details collapse"></div>
+<a href="../classes/ElggCoreSiteTest.html" class="more">« More »</a>
+</div>
+<div id="ElggCoreSkeletonTest" class="element ajax clickable class">
+<h1>ElggCoreSkeletonTest<a href="../classes/ElggCoreSkeletonTest.html">¶</a>
+</h1>
+<p class="short_description">Elgg Test Skeleton</p>
+<div class="details collapse"></div>
+<a href="../classes/ElggCoreSkeletonTest.html" class="more">« More »</a>
+</div>
+<div id="ElggCoreUserTest" class="element ajax clickable class">
+<h1>ElggCoreUserTest<a href="../classes/ElggCoreUserTest.html">¶</a>
+</h1>
+<p class="short_description">Elgg Test ElggUser</p>
+<div class="details collapse"></div>
+<a href="../classes/ElggCoreUserTest.html" class="more">« More »</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.1.0
+</a> and<br>
+            generated on 2013-12-03T13:05:53+01:00.<br></footer></div>
+</div>
+</body>
+</html>

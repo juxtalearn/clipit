@@ -1,0 +1,818 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>API Documentation » \ElggPlugin</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">API Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/clipit.html"><i class="icon-th"></i> clipit</a></li>
+<li><a href="../namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Elgg.html"><i class="icon-folder-open"></i> Elgg</a></li>
+<li><a href="../packages/Elgg.Core.html"><i class="icon-folder-open"></i> Elgg.Core</a></li>
+<li><a href="../packages/Elgg.Core.Plugin.html"><i class="icon-folder-open"></i> Elgg.Core.Plugin</a></li>
+<li><a href="../packages/ElggAPIAdmin.html"><i class="icon-folder-open"></i> ElggAPIAdmin</a></li>
+<li><a href="../packages/ElggDiagnostics.html"><i class="icon-folder-open"></i> ElggDiagnostics</a></li>
+<li><a href="../packages/ElggEmbed.html"><i class="icon-folder-open"></i> ElggEmbed</a></li>
+<li><a href="../packages/ElggFile.html"><i class="icon-folder-open"></i> ElggFile</a></li>
+<li><a href="../packages/ElggGarbageCollector.html"><i class="icon-folder-open"></i> ElggGarbageCollector</a></li>
+<li><a href="../packages/ElggGroups.html"><i class="icon-folder-open"></i> ElggGroups</a></li>
+<li><a href="../packages/ElggLogBrowser.html"><i class="icon-folder-open"></i> ElggLogBrowser</a></li>
+<li><a href="../packages/ElggLogRotate.html"><i class="icon-folder-open"></i> ElggLogRotate</a></li>
+<li><a href="../packages/ElggMessages.html"><i class="icon-folder-open"></i> ElggMessages</a></li>
+<li><a href="../packages/ElggNotifications.html"><i class="icon-folder-open"></i> ElggNotifications</a></li>
+<li><a href="../packages/ElggProfile.html"><i class="icon-folder-open"></i> ElggProfile</a></li>
+<li><a href="../packages/ElggTinyMCE.html"><i class="icon-folder-open"></i> ElggTinyMCE</a></li>
+<li><a href="../packages/ElgghtmLawed.html"><i class="icon-folder-open"></i> ElgghtmLawed</a></li>
+<li><a href="../packages/Embed%20Video%20Library.html"><i class="icon-folder-open"></i> Embed Video Library</a></li>
+<li><a href="../packages/PlaceLocalInclude.html"><i class="icon-folder-open"></i> PlaceLocalInclude</a></li>
+<li><a href="../packages/SimpleTest.html"><i class="icon-folder-open"></i> SimpleTest</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+     @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20MockObjects%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   MockObjects
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20MockObjects.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage MockObjects</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+     @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@abstract.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @abstract</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20WebTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage WebTester</a></li>
+<li><a href="../packages/%5Bname%5D.html"><i class="icon-folder-open"></i> [name]</a></li>
+<li><a href="../packages/clipit.html"><i class="icon-folder-open"></i> clipit</a></li>
+<li><a href="../packages/event_calendar.html"><i class="icon-folder-open"></i> event_calendar</a></li>
+<li><a href="../packages/pebs.html"><i class="icon-folder-open"></i> pebs</a></li>
+<li><a href="../packages/profile_manager.html"><i class="icon-folder-open"></i> profile_manager</a></li>
+<li><a href="../packages/veeplay.html"><i class="icon-folder-open"></i> veeplay</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">4473</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">250</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___construct" title="__construct() :: Loads the plugin by GUID or path."><span class="description">Loads the plugin by GUID or path.</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#method_activate" title="activate() :: Actives the plugin for the current site."><span class="description">Actives the plugin for the current site.</span><pre>activate()</pre></a></li>
+<li class="method public "><a href="#method_canActivate" title="canActivate() :: Checks if this plugin can be activated on the current
+Elgg installation."><span class="description">Checks if this plugin can be activated on the current
+Elgg installation.</span><pre>canActivate()</pre></a></li>
+<li class="method public "><a href="#method_deactivate" title="deactivate() :: Deactivates the plugin."><span class="description">Deactivates the plugin.</span><pre>deactivate()</pre></a></li>
+<li class="method public "><a href="#method_get" title="get() :: Get a value from private settings."><span class="description">Get a value from private settings.</span><pre>get()</pre></a></li>
+<li class="method public "><a href="#method_getAllSettings" title="getAllSettings() :: Returns an array of all settings saved for this plugin."><span class="description">Returns an array of all settings saved for this plugin.</span><pre>getAllSettings()</pre></a></li>
+<li class="method public "><a href="#method_getAllUserSettings" title="getAllUserSettings() :: Returns an array of all user settings saved for this plugin for the user."><span class="description">Returns an array of all user settings saved for this plugin for the user.</span><pre>getAllUserSettings()</pre></a></li>
+<li class="method public "><a href="#method_getAvailableTextFiles" title="getAvailableTextFiles() :: Returns an array of available markdown files for this plugin"><span class="description">Returns an array of available markdown files for this plugin</span><pre>getAvailableTextFiles()</pre></a></li>
+<li class="method public "><a href="#method_getError" title="getError() :: Returns the last error message registered."><span class="description">Returns the last error message registered.</span><pre>getError()</pre></a></li>
+<li class="method public "><a href="#method_getFriendlyName" title="getFriendlyName() :: Returns the manifest's name if available, otherwise the ID."><span class="description">Returns the manifest's name if available, otherwise the ID.</span><pre>getFriendlyName()</pre></a></li>
+<li class="method public "><a href="#method_getID" title="getID() :: Returns the ID (dir name) of this plugin"><span class="description">Returns the ID (dir name) of this plugin</span><pre>getID()</pre></a></li>
+<li class="method public "><a href="#method_getManifest" title="getManifest() :: Returns this plugin's ElggPluginManifest object"><span class="description">Returns this plugin's ElggPluginManifest object</span><pre>getManifest()</pre></a></li>
+<li class="method public "><a href="#method_getPackage" title="getPackage() :: Returns this plugin's ElggPluginPackage object"><span class="description">Returns this plugin's ElggPluginPackage object</span><pre>getPackage()</pre></a></li>
+<li class="method public "><a href="#method_getPath" title="getPath() :: Returns the plugin's full path with trailing slash."><span class="description">Returns the plugin's full path with trailing slash.</span><pre>getPath()</pre></a></li>
+<li class="method public "><a href="#method_getPriority" title="getPriority() :: Gets the plugin's load priority."><span class="description">Gets the plugin's load priority.</span><pre>getPriority()</pre></a></li>
+<li class="method public "><a href="#method_getSetting" title="getSetting() :: Returns a plugin setting"><span class="description">Returns a plugin setting</span><pre>getSetting()</pre></a></li>
+<li class="method public "><a href="#method_getUserSetting" title="getUserSetting() :: Returns a user's setting for this plugin"><span class="description">Returns a user's setting for this plugin</span><pre>getUserSetting()</pre></a></li>
+<li class="method public "><a href="#method_isActive" title="isActive() :: Is this plugin active?"><span class="description">Is this plugin active?</span><pre>isActive()</pre></a></li>
+<li class="method public "><a href="#method_isValid" title="isValid() :: Returns if the plugin is complete, meaning has all required files
+and Elgg can read them and they make sense."><span class="description">Returns if the plugin is complete, meaning has all required files
+and Elgg can read them and they make sense.</span><pre>isValid()</pre></a></li>
+<li class="method public "><a href="#method_save" title="save() :: Save the plugin object.  Make sure required values exist."><span class="description">Save the plugin object.  Make sure required values exist.</span><pre>save()</pre></a></li>
+<li class="method public "><a href="#method_set" title="set() :: Save a value as private setting or attribute."><span class="description">Save a value as private setting or attribute.</span><pre>set()</pre></a></li>
+<li class="method public "><a href="#method_setID" title="setID() :: Sets the location of this plugin."><span class="description">Sets the location of this plugin.</span><pre>setID()</pre></a></li>
+<li class="method public "><a href="#method_setPriority" title="setPriority() :: Sets the priority of the plugin"><span class="description">Sets the priority of the plugin</span><pre>setPriority()</pre></a></li>
+<li class="method public "><a href="#method_setSetting" title="setSetting() :: Set a plugin setting for the plugin"><span class="description">Set a plugin setting for the plugin</span><pre>setSetting()</pre></a></li>
+<li class="method public "><a href="#method_setUserSetting" title="setUserSetting() :: Sets a user setting for a plugin"><span class="description">Sets a user setting for a plugin</span><pre>setUserSetting()</pre></a></li>
+<li class="method public "><a href="#method_start" title="start() :: Start the plugin."><span class="description">Start the plugin.</span><pre>start()</pre></a></li>
+<li class="method public "><a href="#method_unsetAllSettings" title="unsetAllSettings() :: Removes all settings for this plugin."><span class="description">Removes all settings for this plugin.</span><pre>unsetAllSettings()</pre></a></li>
+<li class="method public "><a href="#method_unsetAllUserSettings" title="unsetAllUserSettings() :: Removes all User Settings for this plugin"><span class="description">Removes all User Settings for this plugin</span><pre>unsetAllUserSettings()</pre></a></li>
+<li class="method public "><a href="#method_unsetAllUsersSettings" title="unsetAllUsersSettings() :: Removes this plugin's user settings for all users."><span class="description">Removes this plugin's user settings for all users.</span><pre>unsetAllUsersSettings()</pre></a></li>
+<li class="method public "><a href="#method_unsetSetting" title="unsetSetting() :: Removes a plugin setting name and value."><span class="description">Removes a plugin setting name and value.</span><pre>unsetSetting()</pre></a></li>
+<li class="method public "><a href="#method_unsetUserSetting" title="unsetUserSetting() :: Removes a user setting name and value."><span class="description">Removes a user setting name and value.</span><pre>unsetUserSetting()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="method protected "><a href="#method_canReadFile" title="canReadFile() :: Checks whether a plugin file with the given name exists"><span class="description">Checks whether a plugin file with the given name exists</span><pre>canReadFile()</pre></a></li>
+<li class="method protected "><a href="#method_includeFile" title="includeFile() :: Includes one of the plugins files"><span class="description">Includes one of the plugins files</span><pre>includeFile()</pre></a></li>
+<li class="method protected "><a href="#method_initializeAttributes" title="initializeAttributes() :: Set subtype to 'plugin'"><span class="description">Set subtype to 'plugin'</span><pre>initializeAttributes()</pre></a></li>
+<li class="method protected "><a href="#method_registerClasses" title="registerClasses() :: Registers the plugin's classes"><span class="description">Registers the plugin's classes</span><pre>registerClasses()</pre></a></li>
+<li class="method protected "><a href="#method_registerLanguages" title="registerLanguages() :: Registers the plugin's languages"><span class="description">Registers the plugin's languages</span><pre>registerLanguages()</pre></a></li>
+<li class="method protected "><a href="#method_registerViews" title="registerViews() :: Registers the plugin's views"><span class="description">Registers the plugin's views</span><pre>registerViews()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul><li class="method private "><a href="#method_setStatus" title="setStatus() :: Sets the plugin to active or inactive for $site_guid."><span class="description">Sets the plugin to active or inactive for $site_guid.</span><pre>setStatus()</pre></a></li></ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul></ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul>
+<li class="property private "><a href="#property_errorMsg" title="$errorMsg() :: "><span class="description"></span><pre>$errorMsg</pre></a></li>
+<li class="property private "><a href="#property_manifest" title="$manifest() :: "><span class="description"></span><pre>$manifest</pre></a></li>
+<li class="property private "><a href="#property_package" title="$package() :: "><span class="description"></span><pre>$package</pre></a></li>
+<li class="property private "><a href="#property_path" title="$path() :: "><span class="description"></span><pre>$path</pre></a></li>
+<li class="property private "><a href="#property_pluginID" title="$pluginID() :: "><span class="description"></span><pre>$pluginID</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\ElggPlugin"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/ElggPlugin.html">ElggPlugin</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">Stores site-side plugin settings as private data.</p>
+<div class="details">
+<div class="long_description">This class is currently a stub, allowing a plugin to
+save settings in an object's private settings for each site.</div>
+<table class="table table-bordered">
+<tr>
+<th>package</th>
+<td><a href="../packages/Elgg.Core.Plugins.Settings.html">Elgg.Core</a></td>
+</tr>
+<tr>
+<th>subpackage</th>
+<td>Plugins.Settings</td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>Loads the plugin by GUID or path.</h2>
+<pre>__construct(mixed $plugin) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>warning</th>
+<td>Unlike other ElggEntity objects, you cannot null instantiate
+         ElggPlugin. You must point it to an actual plugin GUID or location.</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$plugin</h4>
+<code>mixed</code><p>The GUID of the ElggPlugin object or the path of the plugin to load.</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/PluginException.html">\PluginException</a></code></th>
+<td></td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_activate"></a><div class="element clickable method public method_activate" data-toggle="collapse" data-target=".method_activate .collapse">
+<h2>Actives the plugin for the current site.</h2>
+<pre>activate(mixed $site_guid) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$site_guid</h4>
+<code>mixed</code><p>Optional site GUID.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_canActivate"></a><div class="element clickable method public method_canActivate" data-toggle="collapse" data-target=".method_canActivate .collapse">
+<h2>Checks if this plugin can be activated on the current
+Elgg installation.</h2>
+<pre>canActivate(mixed $site_guid) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>todo</th>
+<td>remove $site_guid param or implement it</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$site_guid</h4>
+<code>mixed</code><p>Optional site guid</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_deactivate"></a><div class="element clickable method public method_deactivate" data-toggle="collapse" data-target=".method_deactivate .collapse">
+<h2>Deactivates the plugin.</h2>
+<pre>deactivate(mixed $site_guid) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$site_guid</h4>
+<code>mixed</code><p>Optional site GUID.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_get"></a><div class="element clickable method public method_get" data-toggle="collapse" data-target=".method_get .collapse">
+<h2>Get a value from private settings.</h2>
+<pre>get(string $name) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>Name</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
+<a id="method_getAllSettings"></a><div class="element clickable method public method_getAllSettings" data-toggle="collapse" data-target=".method_getAllSettings .collapse">
+<h2>Returns an array of all settings saved for this plugin.</h2>
+<pre>getAllSettings() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>note</th>
+<td>Unlike user settings, plugin settings are not namespaced.</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>An array of key/value pairs.</div>
+</div></div>
+</div>
+<a id="method_getAllUserSettings"></a><div class="element clickable method public method_getAllUserSettings" data-toggle="collapse" data-target=".method_getAllUserSettings .collapse">
+<h2>Returns an array of all user settings saved for this plugin for the user.</h2>
+<pre>getAllUserSettings(int $user_guid) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>note</th>
+<td>Plugin settings are saved with a prefix. This removes that prefix.</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$user_guid</h4>
+<code>int</code><p>The user GUID. Defaults to logged in.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>An array of key/value pairs.</div>
+</div></div>
+</div>
+<a id="method_getAvailableTextFiles"></a><div class="element clickable method public method_getAvailableTextFiles" data-toggle="collapse" data-target=".method_getAvailableTextFiles .collapse">
+<h2>Returns an array of available markdown files for this plugin</h2>
+<pre>getAvailableTextFiles() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_getError"></a><div class="element clickable method public method_getError" data-toggle="collapse" data-target=".method_getError .collapse">
+<h2>Returns the last error message registered.</h2>
+<pre>getError() : string | null</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code><code>null</code>
+</div>
+</div></div>
+</div>
+<a id="method_getFriendlyName"></a><div class="element clickable method public method_getFriendlyName" data-toggle="collapse" data-target=".method_getFriendlyName .collapse">
+<h2>Returns the manifest's name if available, otherwise the ID.</h2>
+<pre>getFriendlyName() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.8.1</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_getID"></a><div class="element clickable method public method_getID" data-toggle="collapse" data-target=".method_getID .collapse">
+<h2>Returns the ID (dir name) of this plugin</h2>
+<pre>getID() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_getManifest"></a><div class="element clickable method public method_getManifest" data-toggle="collapse" data-target=".method_getManifest .collapse">
+<h2>Returns this plugin's ElggPluginManifest object</h2>
+<pre>getManifest() : <a href="../classes/ElggPluginManifest.html">\ElggPluginManifest</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/ElggPluginManifest.html">\ElggPluginManifest</a></code></div>
+</div></div>
+</div>
+<a id="method_getPackage"></a><div class="element clickable method public method_getPackage" data-toggle="collapse" data-target=".method_getPackage .collapse">
+<h2>Returns this plugin's ElggPluginPackage object</h2>
+<pre>getPackage() : <a href="../classes/ElggPluginPackage.html">\ElggPluginPackage</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/ElggPluginPackage.html">\ElggPluginPackage</a></code></div>
+</div></div>
+</div>
+<a id="method_getPath"></a><div class="element clickable method public method_getPath" data-toggle="collapse" data-target=".method_getPath .collapse">
+<h2>Returns the plugin's full path with trailing slash.</h2>
+<pre>getPath() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_getPriority"></a><div class="element clickable method public method_getPriority" data-toggle="collapse" data-target=".method_getPriority .collapse">
+<h2>Gets the plugin's load priority.</h2>
+<pre>getPriority() : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>int</code></div>
+</div></div>
+</div>
+<a id="method_getSetting"></a><div class="element clickable method public method_getSetting" data-toggle="collapse" data-target=".method_getSetting .collapse">
+<h2>Returns a plugin setting</h2>
+<pre>getSetting(string $name) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The setting name</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
+<a id="method_getUserSetting"></a><div class="element clickable method public method_getUserSetting" data-toggle="collapse" data-target=".method_getUserSetting .collapse">
+<h2>Returns a user's setting for this plugin</h2>
+<pre>getUserSetting(string $name, int $user_guid) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The setting name</p></div>
+<div class="subelement argument">
+<h4>$user_guid</h4>
+<code>int</code><p>The user GUID</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code>The setting string value or false</div>
+</div></div>
+</div>
+<a id="method_isActive"></a><div class="element clickable method public method_isActive" data-toggle="collapse" data-target=".method_isActive .collapse">
+<h2>Is this plugin active?</h2>
+<pre>isActive(int $site_guid) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$site_guid</h4>
+<code>int</code><p>Optional site guid.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_isValid"></a><div class="element clickable method public method_isValid" data-toggle="collapse" data-target=".method_isValid .collapse">
+<h2>Returns if the plugin is complete, meaning has all required files
+and Elgg can read them and they make sense.</h2>
+<pre>isValid() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>todo</th>
+<td>bad name? This could be confused with isValid() from ElggPackage.</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_save"></a><div class="element clickable method public method_save" data-toggle="collapse" data-target=".method_save .collapse">
+<h2>Save the plugin object.  Make sure required values exist.</h2>
+<pre>save() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td><a href="%5CElggObject::save()"></a></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_set"></a><div class="element clickable method public method_set" data-toggle="collapse" data-target=".method_set .collapse">
+<h2>Save a value as private setting or attribute.</h2>
+<pre>set(string $name, mixed $value) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">Attributes include title and description.</div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>Name</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>mixed</code><p>Value</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_setID"></a><div class="element clickable method public method_setID" data-toggle="collapse" data-target=".method_setID .collapse">
+<h2>Sets the location of this plugin.</h2>
+<pre>setID(string $id) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$id</h4>
+<code>string</code><p>The path to the plugin's dir.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_setPriority"></a><div class="element clickable method public method_setPriority" data-toggle="collapse" data-target=".method_setPriority .collapse">
+<h2>Sets the priority of the plugin</h2>
+<pre>setPriority(mixed $priority, mixed $site_guid) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$priority</h4>
+<code>mixed</code><p>The priority to set. One of +1, -1, first, last, or a number.
+                        If given a number, this will displace all plugins at that number
+                        and set their priorities +1</p>
+</div>
+<div class="subelement argument">
+<h4>$site_guid</h4>
+<code>mixed</code><p>Optional site GUID.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_setSetting"></a><div class="element clickable method public method_setSetting" data-toggle="collapse" data-target=".method_setSetting .collapse">
+<h2>Set a plugin setting for the plugin</h2>
+<pre>setSetting(string $name, string $value) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>todo</th>
+<td>This will only work once the plugin has a GUID.</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The name to set</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>string</code><p>The value to set</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_setUserSetting"></a><div class="element clickable method public method_setUserSetting" data-toggle="collapse" data-target=".method_setUserSetting .collapse">
+<h2>Sets a user setting for a plugin</h2>
+<pre>setUserSetting(string $name, string $value, int $user_guid) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The setting name</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>string</code><p>The setting value</p></div>
+<div class="subelement argument">
+<h4>$user_guid</h4>
+<code>int</code><p>The user GUID</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code>The new setting ID or false</div>
+</div></div>
+</div>
+<a id="method_start"></a><div class="element clickable method public method_start" data-toggle="collapse" data-target=".method_start .collapse">
+<h2>Start the plugin.</h2>
+<pre>start(int $flags) : true</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$flags</h4>
+<code>int</code><p>Start flags for the plugin. See the constants in lib/plugins.php for details.</p>
+</div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/PluginException.html">\PluginException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>true</code></div>
+</div></div>
+</div>
+<a id="method_unsetAllSettings"></a><div class="element clickable method public method_unsetAllSettings" data-toggle="collapse" data-target=".method_unsetAllSettings .collapse">
+<h2>Removes all settings for this plugin.</h2>
+<pre>unsetAllSettings() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>todo</th>
+<td>Should be a better way to do this without dropping to raw SQL.</td>
+</tr>
+<tr>
+<th>todo</th>
+<td>If we could namespace the plugin settings this would be cleaner.</td>
+</tr>
+</table>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_unsetAllUserSettings"></a><div class="element clickable method public method_unsetAllUserSettings" data-toggle="collapse" data-target=".method_unsetAllUserSettings .collapse">
+<h2>Removes all User Settings for this plugin</h2>
+<pre>unsetAllUserSettings(int $user_guid) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">Use {@link removeAllUsersSettings()} to remove all user
+settings for all users.  (Note the plural 'Users'.)</div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$user_guid</h4>
+<code>int</code><p>The user GUID to remove user settings.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_unsetAllUsersSettings"></a><div class="element clickable method public method_unsetAllUsersSettings" data-toggle="collapse" data-target=".method_unsetAllUsersSettings .collapse">
+<h2>Removes this plugin's user settings for all users.</h2>
+<pre>unsetAllUsersSettings() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">Use {@link removeAllUserSettings()} if you just want to remove
+settings for a single user.</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_unsetSetting"></a><div class="element clickable method public method_unsetSetting" data-toggle="collapse" data-target=".method_unsetSetting .collapse">
+<h2>Removes a plugin setting name and value.</h2>
+<pre>unsetSetting(string $name) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The setting name to remove</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_unsetUserSetting"></a><div class="element clickable method public method_unsetUserSetting" data-toggle="collapse" data-target=".method_unsetUserSetting .collapse">
+<h2>Removes a user setting name and value.</h2>
+<pre>unsetUserSetting(string $name, int $user_guid) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>The user setting name</p></div>
+<div class="subelement argument">
+<h4>$user_guid</h4>
+<code>int</code><p>The user GUID</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_canReadFile"></a><div class="element clickable method protected method_canReadFile" data-toggle="collapse" data-target=".method_canReadFile .collapse">
+<h2>Checks whether a plugin file with the given name exists</h2>
+<pre>canReadFile(string $filename) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$filename</h4>
+<code>string</code><p>The name of the file</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_includeFile"></a><div class="element clickable method protected method_includeFile" data-toggle="collapse" data-target=".method_includeFile .collapse">
+<h2>Includes one of the plugins files</h2>
+<pre>includeFile(string $filename) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$filename</h4>
+<code>string</code><p>The name of the file</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/PluginException.html">\PluginException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code>The return value of the included file (or 1 if there is none)</div>
+</div></div>
+</div>
+<a id="method_initializeAttributes"></a><div class="element clickable method protected method_initializeAttributes" data-toggle="collapse" data-target=".method_initializeAttributes .collapse">
+<h2>Set subtype to 'plugin'</h2>
+<pre>initializeAttributes() : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_registerClasses"></a><div class="element clickable method protected method_registerClasses" data-toggle="collapse" data-target=".method_registerClasses .collapse">
+<h2>Registers the plugin's classes</h2>
+<pre>registerClasses() : true</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/PluginException.html">\PluginException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>true</code></div>
+</div></div>
+</div>
+<a id="method_registerLanguages"></a><div class="element clickable method protected method_registerLanguages" data-toggle="collapse" data-target=".method_registerLanguages .collapse">
+<h2>Registers the plugin's languages</h2>
+<pre>registerLanguages() : true</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/PluginException.html">\PluginException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>true</code></div>
+</div></div>
+</div>
+<a id="method_registerViews"></a><div class="element clickable method protected method_registerViews" data-toggle="collapse" data-target=".method_registerViews .collapse">
+<h2>Registers the plugin's views</h2>
+<pre>registerViews() : true</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="../classes/PluginException.html">\PluginException</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>true</code></div>
+</div></div>
+</div>
+<a id="method_setStatus"></a><div class="element clickable method private method_setStatus" data-toggle="collapse" data-target=".method_setStatus .collapse">
+<h2>Sets the plugin to active or inactive for $site_guid.</h2>
+<pre>setStatus(bool $active, mixed $site_guid) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$active</h4>
+<code>bool</code><p>Set to active or inactive</p></div>
+<div class="subelement argument">
+<h4>$site_guid</h4>
+<code>mixed</code><p>Int for specific site, null for current site.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_errorMsg"> </a><div class="element clickable property private property_errorMsg" data-toggle="collapse" data-target=".property_errorMsg .collapse">
+<h2>$errorMsg</h2>
+<pre>$errorMsg </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_manifest"> </a><div class="element clickable property private property_manifest" data-toggle="collapse" data-target=".property_manifest .collapse">
+<h2>$manifest</h2>
+<pre>$manifest </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_package"> </a><div class="element clickable property private property_package" data-toggle="collapse" data-target=".property_package .collapse">
+<h2>$package</h2>
+<pre>$package </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_path"> </a><div class="element clickable property private property_path" data-toggle="collapse" data-target=".property_path .collapse">
+<h2>$path</h2>
+<pre>$path </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_pluginID"> </a><div class="element clickable property private property_pluginID" data-toggle="collapse" data-target=".property_pluginID .collapse">
+<h2>$pluginID</h2>
+<pre>$pluginID </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.1.0
+</a> and<br>
+            generated on 2013-12-03T13:06:08+01:00.<br></footer></div>
+</div>
+</body>
+</html>

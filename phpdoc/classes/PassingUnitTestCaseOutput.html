@@ -1,0 +1,350 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>API Documentation » \PassingUnitTestCaseOutput</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">API Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/clipit.html"><i class="icon-th"></i> clipit</a></li>
+<li><a href="../namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Elgg.html"><i class="icon-folder-open"></i> Elgg</a></li>
+<li><a href="../packages/Elgg.Core.html"><i class="icon-folder-open"></i> Elgg.Core</a></li>
+<li><a href="../packages/Elgg.Core.Plugin.html"><i class="icon-folder-open"></i> Elgg.Core.Plugin</a></li>
+<li><a href="../packages/ElggAPIAdmin.html"><i class="icon-folder-open"></i> ElggAPIAdmin</a></li>
+<li><a href="../packages/ElggDiagnostics.html"><i class="icon-folder-open"></i> ElggDiagnostics</a></li>
+<li><a href="../packages/ElggEmbed.html"><i class="icon-folder-open"></i> ElggEmbed</a></li>
+<li><a href="../packages/ElggFile.html"><i class="icon-folder-open"></i> ElggFile</a></li>
+<li><a href="../packages/ElggGarbageCollector.html"><i class="icon-folder-open"></i> ElggGarbageCollector</a></li>
+<li><a href="../packages/ElggGroups.html"><i class="icon-folder-open"></i> ElggGroups</a></li>
+<li><a href="../packages/ElggLogBrowser.html"><i class="icon-folder-open"></i> ElggLogBrowser</a></li>
+<li><a href="../packages/ElggLogRotate.html"><i class="icon-folder-open"></i> ElggLogRotate</a></li>
+<li><a href="../packages/ElggMessages.html"><i class="icon-folder-open"></i> ElggMessages</a></li>
+<li><a href="../packages/ElggNotifications.html"><i class="icon-folder-open"></i> ElggNotifications</a></li>
+<li><a href="../packages/ElggProfile.html"><i class="icon-folder-open"></i> ElggProfile</a></li>
+<li><a href="../packages/ElggTinyMCE.html"><i class="icon-folder-open"></i> ElggTinyMCE</a></li>
+<li><a href="../packages/ElgghtmLawed.html"><i class="icon-folder-open"></i> ElgghtmLawed</a></li>
+<li><a href="../packages/Embed%20Video%20Library.html"><i class="icon-folder-open"></i> Embed Video Library</a></li>
+<li><a href="../packages/PlaceLocalInclude.html"><i class="icon-folder-open"></i> PlaceLocalInclude</a></li>
+<li><a href="../packages/SimpleTest.html"><i class="icon-folder-open"></i> SimpleTest</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+     @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20MockObjects%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   MockObjects
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20MockObjects.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage MockObjects</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+     @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@abstract.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @abstract</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20WebTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage WebTester</a></li>
+<li><a href="../packages/%5Bname%5D.html"><i class="icon-folder-open"></i> [name]</a></li>
+<li><a href="../packages/clipit.html"><i class="icon-folder-open"></i> clipit</a></li>
+<li><a href="../packages/event_calendar.html"><i class="icon-folder-open"></i> event_calendar</a></li>
+<li><a href="../packages/pebs.html"><i class="icon-folder-open"></i> pebs</a></li>
+<li><a href="../packages/profile_manager.html"><i class="icon-folder-open"></i> profile_manager</a></li>
+<li><a href="../packages/veeplay.html"><i class="icon-folder-open"></i> veeplay</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">4473</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">250</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list"><li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method_testCloneOnDifferentObjects" title="testCloneOnDifferentObjects() :: "><span class="description">testCloneOnDifferentObjects()
+        </span><pre>testCloneOnDifferentObjects()</pre></a></li>
+<li class="method public "><a href="#method_testExpectation" title="testExpectation() :: "><span class="description">testExpectation()
+        </span><pre>testExpectation()</pre></a></li>
+<li class="method public "><a href="#method_testFalse" title="testFalse() :: "><span class="description">testFalse()
+        </span><pre>testFalse()</pre></a></li>
+<li class="method public "><a href="#method_testHashEquality" title="testHashEquality() :: "><span class="description">testHashEquality()
+        </span><pre>testHashEquality()</pre></a></li>
+<li class="method public "><a href="#method_testHashIdentity" title="testHashIdentity() :: "><span class="description">testHashIdentity()
+        </span><pre>testHashIdentity()</pre></a></li>
+<li class="method public "><a href="#method_testIntegerEquality" title="testIntegerEquality() :: "><span class="description">testIntegerEquality()
+        </span><pre>testIntegerEquality()</pre></a></li>
+<li class="method public "><a href="#method_testLongStrings" title="testLongStrings() :: "><span class="description">testLongStrings()
+        </span><pre>testLongStrings()</pre></a></li>
+<li class="method public "><a href="#method_testNull" title="testNull() :: "><span class="description">testNull()
+        </span><pre>testNull()</pre></a></li>
+<li class="method public "><a href="#method_testNullEquality" title="testNullEquality() :: "><span class="description">testNullEquality()
+        </span><pre>testNullEquality()</pre></a></li>
+<li class="method public "><a href="#method_testNullIdentity" title="testNullIdentity() :: "><span class="description">testNullIdentity()
+        </span><pre>testNullIdentity()</pre></a></li>
+<li class="method public "><a href="#method_testObjectEquality" title="testObjectEquality() :: "><span class="description">testObjectEquality()
+        </span><pre>testObjectEquality()</pre></a></li>
+<li class="method public "><a href="#method_testObjectIndentity" title="testObjectIndentity() :: "><span class="description">testObjectIndentity()
+        </span><pre>testObjectIndentity()</pre></a></li>
+<li class="method public "><a href="#method_testOfResults" title="testOfResults() :: "><span class="description">testOfResults()
+        </span><pre>testOfResults()</pre></a></li>
+<li class="method public "><a href="#method_testOutside" title="testOutside() :: "><span class="description">testOutside()
+        </span><pre>testOutside()</pre></a></li>
+<li class="method public "><a href="#method_testPatterns" title="testPatterns() :: "><span class="description">testPatterns()
+        </span><pre>testPatterns()</pre></a></li>
+<li class="method public "><a href="#method_testReference" title="testReference() :: "><span class="description">testReference()
+        </span><pre>testReference()</pre></a></li>
+<li class="method public "><a href="#method_testStringEquality" title="testStringEquality() :: "><span class="description">testStringEquality()
+        </span><pre>testStringEquality()</pre></a></li>
+<li class="method public "><a href="#method_testStringIdentity" title="testStringIdentity() :: "><span class="description">testStringIdentity()
+        </span><pre>testStringIdentity()</pre></a></li>
+<li class="method public "><a href="#method_testTrue" title="testTrue() :: "><span class="description">testTrue()
+        </span><pre>testTrue()</pre></a></li>
+<li class="method public "><a href="#method_testType" title="testType() :: "><span class="description">testType()
+        </span><pre>testType()</pre></a></li>
+<li class="method public "><a href="#method_testTypeEquality" title="testTypeEquality() :: "><span class="description">testTypeEquality()
+        </span><pre>testTypeEquality()</pre></a></li>
+<li class="method public "><a href="#method_testTypeIdentity" title="testTypeIdentity() :: "><span class="description">testTypeIdentity()
+        </span><pre>testTypeIdentity()</pre></a></li>
+<li class="method public "><a href="#method_testWithin" title="testWithin() :: "><span class="description">testWithin()
+        </span><pre>testWithin()</pre></a></li>
+</ul>
+</li></ul>
+</div>
+<div class="span8">
+<a id="\PassingUnitTestCaseOutput"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/PassingUnitTestCaseOutput.html">PassingUnitTestCaseOutput</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">Standard unit test class for day to day testing
+   of PHP code XP style. Adds some useful standard
+   assertions.</p>
+<div class="details">
+<div class="long_description">@package  SimpleTest</div>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method_testCloneOnDifferentObjects"></a><div class="element clickable method public method_testCloneOnDifferentObjects" data-toggle="collapse" data-target=".method_testCloneOnDifferentObjects .collapse">
+<h2>testCloneOnDifferentObjects()
+        </h2>
+<pre>testCloneOnDifferentObjects() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testExpectation"></a><div class="element clickable method public method_testExpectation" data-toggle="collapse" data-target=".method_testExpectation .collapse">
+<h2>testExpectation()
+        </h2>
+<pre>testExpectation() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testFalse"></a><div class="element clickable method public method_testFalse" data-toggle="collapse" data-target=".method_testFalse .collapse">
+<h2>testFalse()
+        </h2>
+<pre>testFalse() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testHashEquality"></a><div class="element clickable method public method_testHashEquality" data-toggle="collapse" data-target=".method_testHashEquality .collapse">
+<h2>testHashEquality()
+        </h2>
+<pre>testHashEquality() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testHashIdentity"></a><div class="element clickable method public method_testHashIdentity" data-toggle="collapse" data-target=".method_testHashIdentity .collapse">
+<h2>testHashIdentity()
+        </h2>
+<pre>testHashIdentity() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testIntegerEquality"></a><div class="element clickable method public method_testIntegerEquality" data-toggle="collapse" data-target=".method_testIntegerEquality .collapse">
+<h2>testIntegerEquality()
+        </h2>
+<pre>testIntegerEquality() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testLongStrings"></a><div class="element clickable method public method_testLongStrings" data-toggle="collapse" data-target=".method_testLongStrings .collapse">
+<h2>testLongStrings()
+        </h2>
+<pre>testLongStrings() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testNull"></a><div class="element clickable method public method_testNull" data-toggle="collapse" data-target=".method_testNull .collapse">
+<h2>testNull()
+        </h2>
+<pre>testNull() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testNullEquality"></a><div class="element clickable method public method_testNullEquality" data-toggle="collapse" data-target=".method_testNullEquality .collapse">
+<h2>testNullEquality()
+        </h2>
+<pre>testNullEquality() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testNullIdentity"></a><div class="element clickable method public method_testNullIdentity" data-toggle="collapse" data-target=".method_testNullIdentity .collapse">
+<h2>testNullIdentity()
+        </h2>
+<pre>testNullIdentity() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testObjectEquality"></a><div class="element clickable method public method_testObjectEquality" data-toggle="collapse" data-target=".method_testObjectEquality .collapse">
+<h2>testObjectEquality()
+        </h2>
+<pre>testObjectEquality() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testObjectIndentity"></a><div class="element clickable method public method_testObjectIndentity" data-toggle="collapse" data-target=".method_testObjectIndentity .collapse">
+<h2>testObjectIndentity()
+        </h2>
+<pre>testObjectIndentity() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testOfResults"></a><div class="element clickable method public method_testOfResults" data-toggle="collapse" data-target=".method_testOfResults .collapse">
+<h2>testOfResults()
+        </h2>
+<pre>testOfResults() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testOutside"></a><div class="element clickable method public method_testOutside" data-toggle="collapse" data-target=".method_testOutside .collapse">
+<h2>testOutside()
+        </h2>
+<pre>testOutside() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testPatterns"></a><div class="element clickable method public method_testPatterns" data-toggle="collapse" data-target=".method_testPatterns .collapse">
+<h2>testPatterns()
+        </h2>
+<pre>testPatterns() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testReference"></a><div class="element clickable method public method_testReference" data-toggle="collapse" data-target=".method_testReference .collapse">
+<h2>testReference()
+        </h2>
+<pre>testReference() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testStringEquality"></a><div class="element clickable method public method_testStringEquality" data-toggle="collapse" data-target=".method_testStringEquality .collapse">
+<h2>testStringEquality()
+        </h2>
+<pre>testStringEquality() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testStringIdentity"></a><div class="element clickable method public method_testStringIdentity" data-toggle="collapse" data-target=".method_testStringIdentity .collapse">
+<h2>testStringIdentity()
+        </h2>
+<pre>testStringIdentity() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testTrue"></a><div class="element clickable method public method_testTrue" data-toggle="collapse" data-target=".method_testTrue .collapse">
+<h2>testTrue()
+        </h2>
+<pre>testTrue() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testType"></a><div class="element clickable method public method_testType" data-toggle="collapse" data-target=".method_testType .collapse">
+<h2>testType()
+        </h2>
+<pre>testType() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testTypeEquality"></a><div class="element clickable method public method_testTypeEquality" data-toggle="collapse" data-target=".method_testTypeEquality .collapse">
+<h2>testTypeEquality()
+        </h2>
+<pre>testTypeEquality() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testTypeIdentity"></a><div class="element clickable method public method_testTypeIdentity" data-toggle="collapse" data-target=".method_testTypeIdentity .collapse">
+<h2>testTypeIdentity()
+        </h2>
+<pre>testTypeIdentity() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_testWithin"></a><div class="element clickable method public method_testWithin" data-toggle="collapse" data-target=".method_testWithin .collapse">
+<h2>testWithin()
+        </h2>
+<pre>testWithin() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.1.0
+</a> and<br>
+            generated on 2013-12-03T13:07:03+01:00.<br></footer></div>
+</div>
+</body>
+</html>

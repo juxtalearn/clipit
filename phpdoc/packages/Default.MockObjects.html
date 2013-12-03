@@ -1,0 +1,265 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>API Documentation » Default\MockObjects</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">API Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/clipit.html"><i class="icon-th"></i> clipit</a></li>
+<li><a href="../namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Elgg.html"><i class="icon-folder-open"></i> Elgg</a></li>
+<li><a href="../packages/Elgg.Core.html"><i class="icon-folder-open"></i> Elgg.Core</a></li>
+<li><a href="../packages/Elgg.Core.Plugin.html"><i class="icon-folder-open"></i> Elgg.Core.Plugin</a></li>
+<li><a href="../packages/ElggAPIAdmin.html"><i class="icon-folder-open"></i> ElggAPIAdmin</a></li>
+<li><a href="../packages/ElggDiagnostics.html"><i class="icon-folder-open"></i> ElggDiagnostics</a></li>
+<li><a href="../packages/ElggEmbed.html"><i class="icon-folder-open"></i> ElggEmbed</a></li>
+<li><a href="../packages/ElggFile.html"><i class="icon-folder-open"></i> ElggFile</a></li>
+<li><a href="../packages/ElggGarbageCollector.html"><i class="icon-folder-open"></i> ElggGarbageCollector</a></li>
+<li><a href="../packages/ElggGroups.html"><i class="icon-folder-open"></i> ElggGroups</a></li>
+<li><a href="../packages/ElggLogBrowser.html"><i class="icon-folder-open"></i> ElggLogBrowser</a></li>
+<li><a href="../packages/ElggLogRotate.html"><i class="icon-folder-open"></i> ElggLogRotate</a></li>
+<li><a href="../packages/ElggMessages.html"><i class="icon-folder-open"></i> ElggMessages</a></li>
+<li><a href="../packages/ElggNotifications.html"><i class="icon-folder-open"></i> ElggNotifications</a></li>
+<li><a href="../packages/ElggProfile.html"><i class="icon-folder-open"></i> ElggProfile</a></li>
+<li><a href="../packages/ElggTinyMCE.html"><i class="icon-folder-open"></i> ElggTinyMCE</a></li>
+<li><a href="../packages/ElgghtmLawed.html"><i class="icon-folder-open"></i> ElgghtmLawed</a></li>
+<li><a href="../packages/Embed%20Video%20Library.html"><i class="icon-folder-open"></i> Embed Video Library</a></li>
+<li><a href="../packages/PlaceLocalInclude.html"><i class="icon-folder-open"></i> PlaceLocalInclude</a></li>
+<li><a href="../packages/SimpleTest.html"><i class="icon-folder-open"></i> SimpleTest</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+     @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20MockObjects%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   MockObjects
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20MockObjects.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage MockObjects</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+     @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@abstract.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @abstract</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20WebTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage WebTester</a></li>
+<li><a href="../packages/%5Bname%5D.html"><i class="icon-folder-open"></i> [name]</a></li>
+<li><a href="../packages/clipit.html"><i class="icon-folder-open"></i> clipit</a></li>
+<li><a href="../packages/event_calendar.html"><i class="icon-folder-open"></i> event_calendar</a></li>
+<li><a href="../packages/pebs.html"><i class="icon-folder-open"></i> pebs</a></li>
+<li><a href="../packages/profile_manager.html"><i class="icon-folder-open"></i> profile_manager</a></li>
+<li><a href="../packages/veeplay.html"><i class="icon-folder-open"></i> veeplay</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">4473</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">250</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-map-marker"></i> Packages</li>
+<li>
+<a href="../packages/Default.MockObjects.html" title="MockObjects"><i class="icon-folder-open"></i>MockObjects</a><ul class="nav nav-list nav-packages"></ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-class"></i> Classes</li>
+<li><a href="#AnythingExpectation" title="A wildcard expectation always matches.">AnythingExpectation</a></li>
+<li><a href="#FailedExpectation" title="An expectation that never matches.">FailedExpectation</a></li>
+<li><a href="#TrueExpectation" title="An expectation that passes on boolean true.">TrueExpectation</a></li>
+<li><a href="#FalseExpectation" title="An expectation that passes on boolean false.">FalseExpectation</a></li>
+<li><a href="#ParametersExpectation" title="Parameter comparison assertion.">ParametersExpectation</a></li>
+<li><a href="#CallCountExpectation" title="Confirms that the number of calls on a method is as expected.">CallCountExpectation</a></li>
+<li><a href="#MinimumCallCountExpectation" title="Confirms that the number of calls on a method is as expected.">MinimumCallCountExpectation</a></li>
+<li><a href="#MaximumCallCountExpectation" title="Confirms that the number of calls on a method is as expected.">MaximumCallCountExpectation</a></li>
+<li><a href="#SimpleSignatureMap" title="Retrieves method actions by searching the
+   parameter lists until an expected match is found.">SimpleSignatureMap</a></li>
+<li><a href="#SimpleCallSchedule" title="Allows setting of actions against call signatures either
+   at a specific time, or always. Specific time settings
+   trump lasting ones, otherwise the most recently added
+   will mask an earlier match.">SimpleCallSchedule</a></li>
+<li><a href="#SimpleMock" title="A base class or delegate that extends an
+   empty collection of methods that can have their
+   return values set and expectations made of the
+   calls upon them. The mock will assert the
+   expectations against it's attached test case in
+   addition to the server stub behaviour or returning
+   preprogrammed responses.">SimpleMock</a></li>
+<li><a href="#Mock" title="Static methods only service class for code generation of
+   mock objects.">Mock</a></li>
+<li><a href="#MockGenerator" title="Service class for code generation of mock objects.">MockGenerator</a></li>
+</ul>
+</div>
+<div class="span8 package-contents">
+<ul class="breadcrumb"><li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span><li><a href="../packages/Default.html">Default</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../packages/Default.MockObjects.html">MockObjects</a>
+</li>
+</li></ul>
+<div class="package-indent">
+<h3>
+<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
+<div id="AnythingExpectation" class="element ajax clickable class">
+<h1>AnythingExpectation<a href="../classes/AnythingExpectation.html">¶</a>
+</h1>
+<p class="short_description">A wildcard expectation always matches.</p>
+<div class="details collapse"></div>
+<a href="../classes/AnythingExpectation.html" class="more">« More »</a>
+</div>
+<div id="CallCountExpectation" class="element ajax clickable class">
+<h1>CallCountExpectation<a href="../classes/CallCountExpectation.html">¶</a>
+</h1>
+<p class="short_description">Confirms that the number of calls on a method is as expected.</p>
+<div class="details collapse"></div>
+<a href="../classes/CallCountExpectation.html" class="more">« More »</a>
+</div>
+<div id="FailedExpectation" class="element ajax clickable class">
+<h1>FailedExpectation<a href="../classes/FailedExpectation.html">¶</a>
+</h1>
+<p class="short_description">An expectation that never matches.</p>
+<div class="details collapse"></div>
+<a href="../classes/FailedExpectation.html" class="more">« More »</a>
+</div>
+<div id="FalseExpectation" class="element ajax clickable class">
+<h1>FalseExpectation<a href="../classes/FalseExpectation.html">¶</a>
+</h1>
+<p class="short_description">An expectation that passes on boolean false.</p>
+<div class="details collapse"></div>
+<a href="../classes/FalseExpectation.html" class="more">« More »</a>
+</div>
+<div id="MaximumCallCountExpectation" class="element ajax clickable class">
+<h1>MaximumCallCountExpectation<a href="../classes/MaximumCallCountExpectation.html">¶</a>
+</h1>
+<p class="short_description">Confirms that the number of calls on a method is as expected.</p>
+<div class="details collapse"></div>
+<a href="../classes/MaximumCallCountExpectation.html" class="more">« More »</a>
+</div>
+<div id="MinimumCallCountExpectation" class="element ajax clickable class">
+<h1>MinimumCallCountExpectation<a href="../classes/MinimumCallCountExpectation.html">¶</a>
+</h1>
+<p class="short_description">Confirms that the number of calls on a method is as expected.</p>
+<div class="details collapse"></div>
+<a href="../classes/MinimumCallCountExpectation.html" class="more">« More »</a>
+</div>
+<div id="Mock" class="element ajax clickable class">
+<h1>Mock<a href="../classes/Mock.html">¶</a>
+</h1>
+<p class="short_description">Static methods only service class for code generation of
+   mock objects.</p>
+<div class="details collapse"></div>
+<a href="../classes/Mock.html" class="more">« More »</a>
+</div>
+<div id="MockGenerator" class="element ajax clickable class">
+<h1>MockGenerator<a href="../classes/MockGenerator.html">¶</a>
+</h1>
+<p class="short_description">Service class for code generation of mock objects.</p>
+<div class="details collapse"></div>
+<a href="../classes/MockGenerator.html" class="more">« More »</a>
+</div>
+<div id="ParametersExpectation" class="element ajax clickable class">
+<h1>ParametersExpectation<a href="../classes/ParametersExpectation.html">¶</a>
+</h1>
+<p class="short_description">Parameter comparison assertion.</p>
+<div class="details collapse"></div>
+<a href="../classes/ParametersExpectation.html" class="more">« More »</a>
+</div>
+<div id="SimpleCallSchedule" class="element ajax clickable class">
+<h1>SimpleCallSchedule<a href="../classes/SimpleCallSchedule.html">¶</a>
+</h1>
+<p class="short_description">Allows setting of actions against call signatures either
+   at a specific time, or always. Specific time settings
+   trump lasting ones, otherwise the most recently added
+   will mask an earlier match.</p>
+<div class="details collapse"></div>
+<a href="../classes/SimpleCallSchedule.html" class="more">« More »</a>
+</div>
+<div id="SimpleMock" class="element ajax clickable class">
+<h1>SimpleMock<a href="../classes/SimpleMock.html">¶</a>
+</h1>
+<p class="short_description">A base class or delegate that extends an
+   empty collection of methods that can have their
+   return values set and expectations made of the
+   calls upon them. The mock will assert the
+   expectations against it's attached test case in
+   addition to the server stub behaviour or returning
+   preprogrammed responses.</p>
+<div class="details collapse"></div>
+<a href="../classes/SimpleMock.html" class="more">« More »</a>
+</div>
+<div id="SimpleSignatureMap" class="element ajax clickable class">
+<h1>SimpleSignatureMap<a href="../classes/SimpleSignatureMap.html">¶</a>
+</h1>
+<p class="short_description">Retrieves method actions by searching the
+   parameter lists until an expected match is found.</p>
+<div class="details collapse"></div>
+<a href="../classes/SimpleSignatureMap.html" class="more">« More »</a>
+</div>
+<div id="TrueExpectation" class="element ajax clickable class">
+<h1>TrueExpectation<a href="../classes/TrueExpectation.html">¶</a>
+</h1>
+<p class="short_description">An expectation that passes on boolean true.</p>
+<div class="details collapse"></div>
+<a href="../classes/TrueExpectation.html" class="more">« More »</a>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.1.0
+</a> and<br>
+            generated on 2013-12-03T13:05:53+01:00.<br></footer></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>API Documentation » \SimpleHttpHeaders</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">API Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/clipit.html"><i class="icon-th"></i> clipit</a></li>
+<li><a href="../namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Elgg.html"><i class="icon-folder-open"></i> Elgg</a></li>
+<li><a href="../packages/Elgg.Core.html"><i class="icon-folder-open"></i> Elgg.Core</a></li>
+<li><a href="../packages/Elgg.Core.Plugin.html"><i class="icon-folder-open"></i> Elgg.Core.Plugin</a></li>
+<li><a href="../packages/ElggAPIAdmin.html"><i class="icon-folder-open"></i> ElggAPIAdmin</a></li>
+<li><a href="../packages/ElggDiagnostics.html"><i class="icon-folder-open"></i> ElggDiagnostics</a></li>
+<li><a href="../packages/ElggEmbed.html"><i class="icon-folder-open"></i> ElggEmbed</a></li>
+<li><a href="../packages/ElggFile.html"><i class="icon-folder-open"></i> ElggFile</a></li>
+<li><a href="../packages/ElggGarbageCollector.html"><i class="icon-folder-open"></i> ElggGarbageCollector</a></li>
+<li><a href="../packages/ElggGroups.html"><i class="icon-folder-open"></i> ElggGroups</a></li>
+<li><a href="../packages/ElggLogBrowser.html"><i class="icon-folder-open"></i> ElggLogBrowser</a></li>
+<li><a href="../packages/ElggLogRotate.html"><i class="icon-folder-open"></i> ElggLogRotate</a></li>
+<li><a href="../packages/ElggMessages.html"><i class="icon-folder-open"></i> ElggMessages</a></li>
+<li><a href="../packages/ElggNotifications.html"><i class="icon-folder-open"></i> ElggNotifications</a></li>
+<li><a href="../packages/ElggProfile.html"><i class="icon-folder-open"></i> ElggProfile</a></li>
+<li><a href="../packages/ElggTinyMCE.html"><i class="icon-folder-open"></i> ElggTinyMCE</a></li>
+<li><a href="../packages/ElgghtmLawed.html"><i class="icon-folder-open"></i> ElgghtmLawed</a></li>
+<li><a href="../packages/Embed%20Video%20Library.html"><i class="icon-folder-open"></i> Embed Video Library</a></li>
+<li><a href="../packages/PlaceLocalInclude.html"><i class="icon-folder-open"></i> PlaceLocalInclude</a></li>
+<li><a href="../packages/SimpleTest.html"><i class="icon-folder-open"></i> SimpleTest</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+     @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20MockObjects%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   MockObjects
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20MockObjects.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage MockObjects</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+     @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@abstract.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @abstract</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20WebTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage WebTester</a></li>
+<li><a href="../packages/%5Bname%5D.html"><i class="icon-folder-open"></i> [name]</a></li>
+<li><a href="../packages/clipit.html"><i class="icon-folder-open"></i> clipit</a></li>
+<li><a href="../packages/event_calendar.html"><i class="icon-folder-open"></i> event_calendar</a></li>
+<li><a href="../packages/pebs.html"><i class="icon-folder-open"></i> pebs</a></li>
+<li><a href="../packages/profile_manager.html"><i class="icon-folder-open"></i> profile_manager</a></li>
+<li><a href="../packages/veeplay.html"><i class="icon-folder-open"></i> veeplay</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">4473</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">250</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method_SimpleHttpHeaders" title="SimpleHttpHeaders() :: Parses the incoming header block."><span class="description">Parses the incoming header block.</span><pre>SimpleHttpHeaders()</pre></a></li>
+<li class="method public "><a href="#method__parseCookie" title="_parseCookie() :: Parse the Set-cookie content."><span class="description">Parse the Set-cookie content.</span><pre>_parseCookie()</pre></a></li>
+<li class="method public "><a href="#method__parseHeaderLine" title="_parseHeaderLine() :: Called on each header line to accumulate the held
+   data within the class."><span class="description">Called on each header line to accumulate the held
+   data within the class.</span><pre>_parseHeaderLine()</pre></a></li>
+<li class="method public "><a href="#method_getAuthentication" title="getAuthentication() :: Accessor for authentication type."><span class="description">Accessor for authentication type.</span><pre>getAuthentication()</pre></a></li>
+<li class="method public "><a href="#method_getHttpVersion" title="getHttpVersion() :: Accessor for parsed HTTP protocol version."><span class="description">Accessor for parsed HTTP protocol version.</span><pre>getHttpVersion()</pre></a></li>
+<li class="method public "><a href="#method_getLocation" title="getLocation() :: Returns the redirected URL or false if
+   no redirection."><span class="description">Returns the redirected URL or false if
+   no redirection.</span><pre>getLocation()</pre></a></li>
+<li class="method public "><a href="#method_getMimeType" title="getMimeType() :: Accessor for MIME type header information."><span class="description">Accessor for MIME type header information.</span><pre>getMimeType()</pre></a></li>
+<li class="method public "><a href="#method_getRaw" title="getRaw() :: Accessor for raw header block."><span class="description">Accessor for raw header block.</span><pre>getRaw()</pre></a></li>
+<li class="method public "><a href="#method_getRealm" title="getRealm() :: Accessor for security realm."><span class="description">Accessor for security realm.</span><pre>getRealm()</pre></a></li>
+<li class="method public "><a href="#method_getResponseCode" title="getResponseCode() :: Accessor for parsed HTTP error code."><span class="description">Accessor for parsed HTTP error code.</span><pre>getResponseCode()</pre></a></li>
+<li class="method public "><a href="#method_isChallenge" title="isChallenge() :: Test to see if the response is an authentication
+   challenge."><span class="description">Test to see if the response is an authentication
+   challenge.</span><pre>isChallenge()</pre></a></li>
+<li class="method public "><a href="#method_isRedirect" title="isRedirect() :: Test to see if the response is a valid redirect."><span class="description">Test to see if the response is a valid redirect.</span><pre>isRedirect()</pre></a></li>
+<li class="method public "><a href="#method_writeCookiesToJar" title="writeCookiesToJar() :: Writes new cookies to the cookie jar."><span class="description">Writes new cookies to the cookie jar.</span><pre>writeCookiesToJar()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul>
+<li class="property public "><a href="#property__authentication" title="$_authentication() :: "><span class="description"></span><pre>$_authentication</pre></a></li>
+<li class="property public "><a href="#property__cookies" title="$_cookies() :: "><span class="description"></span><pre>$_cookies</pre></a></li>
+<li class="property public "><a href="#property__http_version" title="$_http_version() :: "><span class="description"></span><pre>$_http_version</pre></a></li>
+<li class="property public "><a href="#property__location" title="$_location() :: "><span class="description"></span><pre>$_location</pre></a></li>
+<li class="property public "><a href="#property__mime_type" title="$_mime_type() :: "><span class="description"></span><pre>$_mime_type</pre></a></li>
+<li class="property public "><a href="#property__raw_headers" title="$_raw_headers() :: "><span class="description"></span><pre>$_raw_headers</pre></a></li>
+<li class="property public "><a href="#property__realm" title="$_realm() :: "><span class="description"></span><pre>$_realm</pre></a></li>
+<li class="property public "><a href="#property__response_code" title="$_response_code() :: "><span class="description"></span><pre>$_response_code</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\SimpleHttpHeaders"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/SimpleHttpHeaders.html">SimpleHttpHeaders</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">Collection of header lines in the response.</p>
+<div class="details">
+<div class="long_description">@package SimpleTest</div>
+<table class="table table-bordered"><tr>
+<th>subpackage</th>
+<td>WebTester</td>
+</tr></table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method_SimpleHttpHeaders"></a><div class="element clickable method public method_SimpleHttpHeaders" data-toggle="collapse" data-target=".method_SimpleHttpHeaders .collapse">
+<h2>Parses the incoming header block.</h2>
+<pre>SimpleHttpHeaders($headers) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $headers     Header block.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$headers</h4></div>
+</div></div>
+</div>
+<a id="method__parseCookie"></a><div class="element clickable method public method__parseCookie" data-toggle="collapse" data-target=".method__parseCookie .collapse">
+<h2>Parse the Set-cookie content.</h2>
+<pre>_parseCookie($cookie_line) : <a href="../classes/SimpleCookie.html">\SimpleCookie</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $cookie_line    Text after "Set-cookie:"</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$cookie_line</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/SimpleCookie.html">\SimpleCookie</a></code>New cookie object.
+   @access private</div>
+</div></div>
+</div>
+<a id="method__parseHeaderLine"></a><div class="element clickable method public method__parseHeaderLine" data-toggle="collapse" data-target=".method__parseHeaderLine .collapse">
+<h2>Called on each header line to accumulate the held
+   data within the class.</h2>
+<pre>_parseHeaderLine($header_line) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $header_line        One line of header.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>protected</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$header_line</h4></div>
+</div></div>
+</div>
+<a id="method_getAuthentication"></a><div class="element clickable method public method_getAuthentication" data-toggle="collapse" data-target=".method_getAuthentication .collapse">
+<h2>Accessor for authentication type.</h2>
+<pre>getAuthentication() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return string        Type.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getHttpVersion"></a><div class="element clickable method public method_getHttpVersion" data-toggle="collapse" data-target=".method_getHttpVersion .collapse">
+<h2>Accessor for parsed HTTP protocol version.</h2>
+<pre>getHttpVersion() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return integer           HTTP error code.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getLocation"></a><div class="element clickable method public method_getLocation" data-toggle="collapse" data-target=".method_getLocation .collapse">
+<h2>Returns the redirected URL or false if
+   no redirection.</h2>
+<pre>getLocation() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return string      URL or false for none.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getMimeType"></a><div class="element clickable method public method_getMimeType" data-toggle="collapse" data-target=".method_getMimeType .collapse">
+<h2>Accessor for MIME type header information.</h2>
+<pre>getMimeType() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return string           MIME type.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getRaw"></a><div class="element clickable method public method_getRaw" data-toggle="collapse" data-target=".method_getRaw .collapse">
+<h2>Accessor for raw header block.</h2>
+<pre>getRaw() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return string        All headers as raw string.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getRealm"></a><div class="element clickable method public method_getRealm" data-toggle="collapse" data-target=".method_getRealm .collapse">
+<h2>Accessor for security realm.</h2>
+<pre>getRealm() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return string        Realm.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getResponseCode"></a><div class="element clickable method public method_getResponseCode" data-toggle="collapse" data-target=".method_getResponseCode .collapse">
+<h2>Accessor for parsed HTTP error code.</h2>
+<pre>getResponseCode() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return integer           HTTP error code.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_isChallenge"></a><div class="element clickable method public method_isChallenge" data-toggle="collapse" data-target=".method_isChallenge .collapse">
+<h2>Test to see if the response is an authentication
+   challenge.</h2>
+<pre>isChallenge() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return boolean       True if challenge.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_isRedirect"></a><div class="element clickable method public method_isRedirect" data-toggle="collapse" data-target=".method_isRedirect .collapse">
+<h2>Test to see if the response is a valid redirect.</h2>
+<pre>isRedirect() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return boolean       True if valid redirect.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_writeCookiesToJar"></a><div class="element clickable method public method_writeCookiesToJar" data-toggle="collapse" data-target=".method_writeCookiesToJar .collapse">
+<h2>Writes new cookies to the cookie jar.</h2>
+<pre>writeCookiesToJar($jar, \SimpleUrl $url) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param SimpleCookieJar $jar   Jar to write to.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$jar</h4></div>
+<div class="subelement argument">
+<h4>$url</h4>
+<code><a href="../classes/SimpleUrl.html">\SimpleUrl</a></code><p>Host and path to write under.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property__authentication"> </a><div class="element clickable property public property__authentication" data-toggle="collapse" data-target=".property__authentication .collapse">
+<h2>$_authentication</h2>
+<pre>$_authentication </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__cookies"> </a><div class="element clickable property public property__cookies" data-toggle="collapse" data-target=".property__cookies .collapse">
+<h2>$_cookies</h2>
+<pre>$_cookies </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__http_version"> </a><div class="element clickable property public property__http_version" data-toggle="collapse" data-target=".property__http_version .collapse">
+<h2>$_http_version</h2>
+<pre>$_http_version </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__location"> </a><div class="element clickable property public property__location" data-toggle="collapse" data-target=".property__location .collapse">
+<h2>$_location</h2>
+<pre>$_location </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__mime_type"> </a><div class="element clickable property public property__mime_type" data-toggle="collapse" data-target=".property__mime_type .collapse">
+<h2>$_mime_type</h2>
+<pre>$_mime_type </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__raw_headers"> </a><div class="element clickable property public property__raw_headers" data-toggle="collapse" data-target=".property__raw_headers .collapse">
+<h2>$_raw_headers</h2>
+<pre>$_raw_headers </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__realm"> </a><div class="element clickable property public property__realm" data-toggle="collapse" data-target=".property__realm .collapse">
+<h2>$_realm</h2>
+<pre>$_realm </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__response_code"> </a><div class="element clickable property public property__response_code" data-toggle="collapse" data-target=".property__response_code .collapse">
+<h2>$_response_code</h2>
+<pre>$_response_code </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.1.0
+</a> and<br>
+            generated on 2013-12-03T13:06:34+01:00.<br></footer></div>
+</div>
+</body>
+</html>

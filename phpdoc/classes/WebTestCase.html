@@ -1,0 +1,1765 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>API Documentation » \WebTestCase</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">API Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/clipit.html"><i class="icon-th"></i> clipit</a></li>
+<li><a href="../namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Elgg.html"><i class="icon-folder-open"></i> Elgg</a></li>
+<li><a href="../packages/Elgg.Core.html"><i class="icon-folder-open"></i> Elgg.Core</a></li>
+<li><a href="../packages/Elgg.Core.Plugin.html"><i class="icon-folder-open"></i> Elgg.Core.Plugin</a></li>
+<li><a href="../packages/ElggAPIAdmin.html"><i class="icon-folder-open"></i> ElggAPIAdmin</a></li>
+<li><a href="../packages/ElggDiagnostics.html"><i class="icon-folder-open"></i> ElggDiagnostics</a></li>
+<li><a href="../packages/ElggEmbed.html"><i class="icon-folder-open"></i> ElggEmbed</a></li>
+<li><a href="../packages/ElggFile.html"><i class="icon-folder-open"></i> ElggFile</a></li>
+<li><a href="../packages/ElggGarbageCollector.html"><i class="icon-folder-open"></i> ElggGarbageCollector</a></li>
+<li><a href="../packages/ElggGroups.html"><i class="icon-folder-open"></i> ElggGroups</a></li>
+<li><a href="../packages/ElggLogBrowser.html"><i class="icon-folder-open"></i> ElggLogBrowser</a></li>
+<li><a href="../packages/ElggLogRotate.html"><i class="icon-folder-open"></i> ElggLogRotate</a></li>
+<li><a href="../packages/ElggMessages.html"><i class="icon-folder-open"></i> ElggMessages</a></li>
+<li><a href="../packages/ElggNotifications.html"><i class="icon-folder-open"></i> ElggNotifications</a></li>
+<li><a href="../packages/ElggProfile.html"><i class="icon-folder-open"></i> ElggProfile</a></li>
+<li><a href="../packages/ElggTinyMCE.html"><i class="icon-folder-open"></i> ElggTinyMCE</a></li>
+<li><a href="../packages/ElgghtmLawed.html"><i class="icon-folder-open"></i> ElgghtmLawed</a></li>
+<li><a href="../packages/Embed%20Video%20Library.html"><i class="icon-folder-open"></i> Embed Video Library</a></li>
+<li><a href="../packages/PlaceLocalInclude.html"><i class="icon-folder-open"></i> PlaceLocalInclude</a></li>
+<li><a href="../packages/SimpleTest.html"><i class="icon-folder-open"></i> SimpleTest</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+     @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20MockObjects%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   MockObjects
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20MockObjects.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage MockObjects</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+     @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@abstract.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @abstract</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20WebTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage WebTester</a></li>
+<li><a href="../packages/%5Bname%5D.html"><i class="icon-folder-open"></i> [name]</a></li>
+<li><a href="../packages/clipit.html"><i class="icon-folder-open"></i> clipit</a></li>
+<li><a href="../packages/event_calendar.html"><i class="icon-folder-open"></i> event_calendar</a></li>
+<li><a href="../packages/pebs.html"><i class="icon-folder-open"></i> pebs</a></li>
+<li><a href="../packages/profile_manager.html"><i class="icon-folder-open"></i> profile_manager</a></li>
+<li><a href="../packages/veeplay.html"><i class="icon-folder-open"></i> veeplay</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">4473</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">250</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method_WebTestCase" title="WebTestCase() :: Creates an empty test case. Should be subclassed
+   with test methods for a functional test case."><span class="description">Creates an empty test case. Should be subclassed
+   with test methods for a functional test case.</span><pre>WebTestCase()</pre></a></li>
+<li class="method public "><a href="#method__assertFieldValue" title="_assertFieldValue() :: Tests the field value against the expectation."><span class="description">Tests the field value against the expectation.</span><pre>_assertFieldValue()</pre></a></li>
+<li class="method public "><a href="#method__failOnError" title="_failOnError() :: Issues a fail if there is a transport error anywhere
+   in the current frameset. Only one such error is
+   reported."><span class="description">Issues a fail if there is a transport error anywhere
+   in the current frameset. Only one such error is
+   reported.</span><pre>_failOnError()</pre></a></li>
+<li class="method public "><a href="#method_addHeader" title="addHeader() :: Adds a header to every fetch."><span class="description">Adds a header to every fetch.</span><pre>addHeader()</pre></a></li>
+<li class="method public "><a href="#method_after" title="after() :: Announces the end of the test. Includes private clean up."><span class="description">Announces the end of the test. Includes private clean up.</span><pre>after()</pre></a></li>
+<li class="method public "><a href="#method_ageCookies" title="ageCookies() :: Moves cookie expiry times back into the past."><span class="description">Moves cookie expiry times back into the past.</span><pre>ageCookies()</pre></a></li>
+<li class="method public "><a href="#method_assertAuthentication" title="assertAuthentication() :: Attempt to match the authentication type within
+   the security realm we are currently matching."><span class="description">Attempt to match the authentication type within
+   the security realm we are currently matching.</span><pre>assertAuthentication()</pre></a></li>
+<li class="method public "><a href="#method_assertClickable" title="assertClickable() :: Checks for a click target."><span class="description">Checks for a click target.</span><pre>assertClickable()</pre></a></li>
+<li class="method public "><a href="#method_assertCookie" title="assertCookie() :: Checks that a cookie is set for the current page
+   and optionally checks the value."><span class="description">Checks that a cookie is set for the current page
+   and optionally checks the value.</span><pre>assertCookie()</pre></a></li>
+<li class="method public "><a href="#method_assertEqual" title="assertEqual() :: Will trigger a pass if the two parameters have
+   the same value only. Otherwise a fail. This
+   is for testing hand extracted text, etc."><span class="description">Will trigger a pass if the two parameters have
+   the same value only. Otherwise a fail. This
+   is for testing hand extracted text, etc.</span><pre>assertEqual()</pre></a></li>
+<li class="method public "><a href="#method_assertFalse" title="assertFalse() :: Will be true on false and vice versa. False
+   is the PHP definition of false, so that null,
+   empty strings, zero and an empty array all count
+   as false."><span class="description">Will be true on false and vice versa. False
+   is the PHP definition of false, so that null,
+   empty strings, zero and an empty array all count
+   as false.</span><pre>assertFalse()</pre></a></li>
+<li class="method public "><a href="#method_assertField" title="assertField() :: Confirms that the form element is currently set
+   to the expected value. A missing form will always
+   fail. If no value is given then only the existence
+   of the field is checked."><span class="description">Confirms that the form element is currently set
+   to the expected value. A missing form will always
+   fail. If no value is given then only the existence
+   of the field is checked.</span><pre>assertField()</pre></a></li>
+<li class="method public "><a href="#method_assertFieldById" title="assertFieldById() :: Confirms that the form element is currently set
+   to the expected value. A missing form will always
+   fail. If no ID is given then only the existence
+   of the field is checked."><span class="description">Confirms that the form element is currently set
+   to the expected value. A missing form will always
+   fail. If no ID is given then only the existence
+   of the field is checked.</span><pre>assertFieldById()</pre></a></li>
+<li class="method public "><a href="#method_assertFieldByName" title="assertFieldByName() :: Confirms that the form element is currently set
+   to the expected value. A missing form element will always
+   fail. If no value is given then only the existence
+   of the field is checked."><span class="description">Confirms that the form element is currently set
+   to the expected value. A missing form element will always
+   fail. If no value is given then only the existence
+   of the field is checked.</span><pre>assertFieldByName()</pre></a></li>
+<li class="method public "><a href="#method_assertHeader" title="assertHeader() :: Checks each header line for the required value. If no
+   value is given then only an existence check is made."><span class="description">Checks each header line for the required value. If no
+   value is given then only an existence check is made.</span><pre>assertHeader()</pre></a></li>
+<li class="method public "><a href="#method_assertHeaderPattern" title="assertHeaderPattern() :: "><span class="description">assertHeaderPattern()
+        </span><pre>assertHeaderPattern()</pre></a></li>
+<li class="method public "><a href="#method_assertImage" title="assertImage() :: Checks for a valid image with atht alt text or title."><span class="description">Checks for a valid image with atht alt text or title.</span><pre>assertImage()</pre></a></li>
+<li class="method public "><a href="#method_assertLink" title="assertLink() :: Tests for the presence of a link label. Match is
+   case insensitive with normalised space."><span class="description">Tests for the presence of a link label. Match is
+   case insensitive with normalised space.</span><pre>assertLink()</pre></a></li>
+<li class="method public "><a href="#method_assertLinkById" title="assertLinkById() :: Tests for the presence of a link id attribute."><span class="description">Tests for the presence of a link id attribute.</span><pre>assertLinkById()</pre></a></li>
+<li class="method public "><a href="#method_assertMime" title="assertMime() :: Checks the mime type against a list
+   of possible values."><span class="description">Checks the mime type against a list
+   of possible values.</span><pre>assertMime()</pre></a></li>
+<li class="method public "><a href="#method_assertNoAuthentication" title="assertNoAuthentication() :: Checks that no authentication is necessary to view
+   the desired page."><span class="description">Checks that no authentication is necessary to view
+   the desired page.</span><pre>assertNoAuthentication()</pre></a></li>
+<li class="method public "><a href="#method_assertNoCookie" title="assertNoCookie() :: Checks that no cookie is present or that it has
+   been successfully cleared."><span class="description">Checks that no cookie is present or that it has
+   been successfully cleared.</span><pre>assertNoCookie()</pre></a></li>
+<li class="method public "><a href="#method_assertNoHeader" title="assertNoHeader() :: Confirms that the header type has not been received."><span class="description">Confirms that the header type has not been received.</span><pre>assertNoHeader()</pre></a></li>
+<li class="method public "><a href="#method_assertNoLink" title="assertNoLink() :: Tests for the non-presence of a link label. Match is
+   case insensitive with normalised space."><span class="description">Tests for the non-presence of a link label. Match is
+   case insensitive with normalised space.</span><pre>assertNoLink()</pre></a></li>
+<li class="method public "><a href="#method_assertNoLinkById" title="assertNoLinkById() :: Tests for the non-presence of a link label. Match is
+   case insensitive with normalised space."><span class="description">Tests for the non-presence of a link label. Match is
+   case insensitive with normalised space.</span><pre>assertNoLinkById()</pre></a></li>
+<li class="method public "><a href="#method_assertNoPattern" title="assertNoPattern() :: Will trigger a pass if the perl regex pattern
+   is not present in raw content."><span class="description">Will trigger a pass if the perl regex pattern
+   is not present in raw content.</span><pre>assertNoPattern()</pre></a></li>
+<li class="method public "><a href="#method_assertNoText" title="assertNoText() :: Will trigger a pass if the text is not found in the plain
+   text form of the page."><span class="description">Will trigger a pass if the text is not found in the plain
+   text form of the page.</span><pre>assertNoText()</pre></a></li>
+<li class="method public "><a href="#method_assertNoUnwantedHeader" title="assertNoUnwantedHeader() :: "><span class="description">assertNoUnwantedHeader()
+        </span><pre>assertNoUnwantedHeader()</pre></a></li>
+<li class="method public "><a href="#method_assertNoUnwantedPattern" title="assertNoUnwantedPattern() :: "><span class="description">assertNoUnwantedPattern()
+        </span><pre>assertNoUnwantedPattern()</pre></a></li>
+<li class="method public "><a href="#method_assertNoUnwantedText" title="assertNoUnwantedText() :: "><span class="description">assertNoUnwantedText()
+        </span><pre>assertNoUnwantedText()</pre></a></li>
+<li class="method public "><a href="#method_assertNotEqual" title="assertNotEqual() :: Will trigger a pass if the two parameters have
+   a different value. Otherwise a fail. This
+   is for testing hand extracted text, etc."><span class="description">Will trigger a pass if the two parameters have
+   a different value. Otherwise a fail. This
+   is for testing hand extracted text, etc.</span><pre>assertNotEqual()</pre></a></li>
+<li class="method public "><a href="#method_assertPattern" title="assertPattern() :: Will trigger a pass if the Perl regex pattern
+   is found in the raw content."><span class="description">Will trigger a pass if the Perl regex pattern
+   is found in the raw content.</span><pre>assertPattern()</pre></a></li>
+<li class="method public "><a href="#method_assertRealm" title="assertRealm() :: Attempts to match the current security realm."><span class="description">Attempts to match the current security realm.</span><pre>assertRealm()</pre></a></li>
+<li class="method public "><a href="#method_assertResponse" title="assertResponse() :: Checks the response code against a list
+   of possible values."><span class="description">Checks the response code against a list
+   of possible values.</span><pre>assertResponse()</pre></a></li>
+<li class="method public "><a href="#method_assertSubmit" title="assertSubmit() :: Checks for a valid button label."><span class="description">Checks for a valid button label.</span><pre>assertSubmit()</pre></a></li>
+<li class="method public "><a href="#method_assertText" title="assertText() :: Will trigger a pass if the text is found in the plain
+   text form of the page."><span class="description">Will trigger a pass if the text is found in the plain
+   text form of the page.</span><pre>assertText()</pre></a></li>
+<li class="method public "><a href="#method_assertTitle" title="assertTitle() :: Tests the text between the title tags."><span class="description">Tests the text between the title tags.</span><pre>assertTitle()</pre></a></li>
+<li class="method public "><a href="#method_assertTrue" title="assertTrue() :: Called from within the test methods to register
+   passes and failures."><span class="description">Called from within the test methods to register
+   passes and failures.</span><pre>assertTrue()</pre></a></li>
+<li class="method public "><a href="#method_assertWantedPattern" title="assertWantedPattern() :: "><span class="description">assertWantedPattern()
+        </span><pre>assertWantedPattern()</pre></a></li>
+<li class="method public "><a href="#method_assertWantedText" title="assertWantedText() :: "><span class="description">assertWantedText()
+        </span><pre>assertWantedText()</pre></a></li>
+<li class="method public "><a href="#method_authenticate" title="authenticate() :: Retries a request after setting the authentication
+   for the current realm."><span class="description">Retries a request after setting the authentication
+   for the current realm.</span><pre>authenticate()</pre></a></li>
+<li class="method public "><a href="#method_back" title="back() :: Equivalent to hitting the back button on the
+   browser."><span class="description">Equivalent to hitting the back button on the
+   browser.</span><pre>back()</pre></a></li>
+<li class="method public "><a href="#method_before" title="before() :: Announces the start of the test."><span class="description">Announces the start of the test.</span><pre>before()</pre></a></li>
+<li class="method public "><a href="#method_clearFrameFocus" title="clearFrameFocus() :: Clears the frame focus. All frames will be searched
+   for content."><span class="description">Clears the frame focus. All frames will be searched
+   for content.</span><pre>clearFrameFocus()</pre></a></li>
+<li class="method public "><a href="#method_click" title="click() :: Clicks a visible text item. Will first try buttons,
+   then links and then images."><span class="description">Clicks a visible text item. Will first try buttons,
+   then links and then images.</span><pre>click()</pre></a></li>
+<li class="method public "><a href="#method_clickImage" title="clickImage() :: Clicks the submit image by some kind of label. Usually
+   the alt tag or the nearest equivalent. The owning
+   form will be submitted by this. Clicking outside of
+   the boundary of the coordinates will result in
+   a failure."><span class="description">Clicks the submit image by some kind of label. Usually
+   the alt tag or the nearest equivalent. The owning
+   form will be submitted by this. Clicking outside of
+   the boundary of the coordinates will result in
+   a failure.</span><pre>clickImage()</pre></a></li>
+<li class="method public "><a href="#method_clickImageById" title="clickImageById() :: Clicks the submit image by ID attribute. The owning
+   form will be submitted by this. Clicking outside of
+   the boundary of the coordinates will result in
+   a failure."><span class="description">Clicks the submit image by ID attribute. The owning
+   form will be submitted by this. Clicking outside of
+   the boundary of the coordinates will result in
+   a failure.</span><pre>clickImageById()</pre></a></li>
+<li class="method public "><a href="#method_clickImageByName" title="clickImageByName() :: Clicks the submit image by the name. Usually
+   the alt tag or the nearest equivalent. The owning
+   form will be submitted by this. Clicking outside of
+   the boundary of the coordinates will result in
+   a failure."><span class="description">Clicks the submit image by the name. Usually
+   the alt tag or the nearest equivalent. The owning
+   form will be submitted by this. Clicking outside of
+   the boundary of the coordinates will result in
+   a failure.</span><pre>clickImageByName()</pre></a></li>
+<li class="method public "><a href="#method_clickLink" title="clickLink() :: Follows a link by name. Will click the first link
+   found with this link text by default, or a later
+   one if an index is given. Match is case insensitive
+   with normalised space."><span class="description">Follows a link by name. Will click the first link
+   found with this link text by default, or a later
+   one if an index is given. Match is case insensitive
+   with normalised space.</span><pre>clickLink()</pre></a></li>
+<li class="method public "><a href="#method_clickLinkById" title="clickLinkById() :: Follows a link by id attribute."><span class="description">Follows a link by id attribute.</span><pre>clickLinkById()</pre></a></li>
+<li class="method public "><a href="#method_clickSubmit" title="clickSubmit() :: Clicks the submit button by label. The owning
+   form will be submitted by this."><span class="description">Clicks the submit button by label. The owning
+   form will be submitted by this.</span><pre>clickSubmit()</pre></a></li>
+<li class="method public "><a href="#method_clickSubmitById" title="clickSubmitById() :: Clicks the submit button by ID attribute. The owning
+   form will be submitted by this."><span class="description">Clicks the submit button by ID attribute. The owning
+   form will be submitted by this.</span><pre>clickSubmitById()</pre></a></li>
+<li class="method public "><a href="#method_clickSubmitByName" title="clickSubmitByName() :: Clicks the submit button by name attribute. The owning
+   form will be submitted by this."><span class="description">Clicks the submit button by name attribute. The owning
+   form will be submitted by this.</span><pre>clickSubmitByName()</pre></a></li>
+<li class="method public "><a href="#method_createBrowser" title="createBrowser() :: Creates a new default web browser object."><span class="description">Creates a new default web browser object.</span><pre>createBrowser()</pre></a></li>
+<li class="method public "><a href="#method_forward" title="forward() :: Equivalent to hitting the forward button on the
+   browser."><span class="description">Equivalent to hitting the forward button on the
+   browser.</span><pre>forward()</pre></a></li>
+<li class="method public "><a href="#method_get" title="get() :: Fetches a page into the page buffer. If
+   there is no base for the URL then the
+   current base URL is used. After the fetch
+   the base URL reflects the new location."><span class="description">Fetches a page into the page buffer. If
+   there is no base for the URL then the
+   current base URL is used. After the fetch
+   the base URL reflects the new location.</span><pre>get()</pre></a></li>
+<li class="method public "><a href="#method_getAssertionLine" title="getAssertionLine() :: Uses a stack trace to find the line of an assertion."><span class="description">Uses a stack trace to find the line of an assertion.</span><pre>getAssertionLine()</pre></a></li>
+<li class="method public "><a href="#method_getBrowser" title="getBrowser() :: Gets a current browser reference for setting
+   special expectations or for detailed
+   examination of page fetches."><span class="description">Gets a current browser reference for setting
+   special expectations or for detailed
+   examination of page fetches.</span><pre>getBrowser()</pre></a></li>
+<li class="method public "><a href="#method_getCookie" title="getCookie() :: Gets the cookie value for the current browser context."><span class="description">Gets the cookie value for the current browser context.</span><pre>getCookie()</pre></a></li>
+<li class="method public "><a href="#method_getFrameFocus" title="getFrameFocus() :: Accessor for current frame focus. Will be
+   false if no frame has focus."><span class="description">Accessor for current frame focus. Will be
+   false if no frame has focus.</span><pre>getFrameFocus()</pre></a></li>
+<li class="method public "><a href="#method_getTransportError" title="getTransportError() :: Gets the last response error."><span class="description">Gets the last response error.</span><pre>getTransportError()</pre></a></li>
+<li class="method public "><a href="#method_getUrl" title="getUrl() :: Accessor for the currently selected URL."><span class="description">Accessor for the currently selected URL.</span><pre>getUrl()</pre></a></li>
+<li class="method public "><a href="#method_head" title="head() :: Does a HTTP HEAD fetch, fetching only the page
+   headers. The current base URL is unchanged by this."><span class="description">Does a HTTP HEAD fetch, fetching only the page
+   headers. The current base URL is unchanged by this.</span><pre>head()</pre></a></li>
+<li class="method public "><a href="#method_ignoreCookies" title="ignoreCookies() :: Switches off cookie sending and recieving."><span class="description">Switches off cookie sending and recieving.</span><pre>ignoreCookies()</pre></a></li>
+<li class="method public "><a href="#method_ignoreErrors" title="ignoreErrors() :: Skips errors for the next request only. You might
+   want to confirm that a page is unreachable for
+   example."><span class="description">Skips errors for the next request only. You might
+   want to confirm that a page is unreachable for
+   example.</span><pre>ignoreErrors()</pre></a></li>
+<li class="method public "><a href="#method_ignoreFrames" title="ignoreFrames() :: Disables frames support. Frames will not be fetched
+   and the frameset page will be used instead."><span class="description">Disables frames support. Frames will not be fetched
+   and the frameset page will be used instead.</span><pre>ignoreFrames()</pre></a></li>
+<li class="method public "><a href="#method_post" title="post() :: Fetches a page by POST into the page buffer."><span class="description">Fetches a page by POST into the page buffer.</span><pre>post()</pre></a></li>
+<li class="method public "><a href="#method_restart" title="restart() :: Simulates the closing and reopening of the browser."><span class="description">Simulates the closing and reopening of the browser.</span><pre>restart()</pre></a></li>
+<li class="method public "><a href="#method_retry" title="retry() :: Equivalent to hitting the retry button on the
+   browser. Will attempt to repeat the page fetch."><span class="description">Equivalent to hitting the retry button on the
+   browser. Will attempt to repeat the page fetch.</span><pre>retry()</pre></a></li>
+<li class="method public "><a href="#method_setBrowser" title="setBrowser() :: Gets a current browser reference for setting
+   special expectations or for detailed
+   examination of page fetches."><span class="description">Gets a current browser reference for setting
+   special expectations or for detailed
+   examination of page fetches.</span><pre>setBrowser()</pre></a></li>
+<li class="method public "><a href="#method_setConnectionTimeout" title="setConnectionTimeout() :: Sets the socket timeout for opening a connection and
+   receiving at least one byte of information."><span class="description">Sets the socket timeout for opening a connection and
+   receiving at least one byte of information.</span><pre>setConnectionTimeout()</pre></a></li>
+<li class="method public "><a href="#method_setCookie" title="setCookie() :: Sets a cookie in the current browser."><span class="description">Sets a cookie in the current browser.</span><pre>setCookie()</pre></a></li>
+<li class="method public "><a href="#method_setField" title="setField() :: Sets all form fields with that label, or name if there
+   is no label attached."><span class="description">Sets all form fields with that label, or name if there
+   is no label attached.</span><pre>setField()</pre></a></li>
+<li class="method public "><a href="#method_setFieldById" title="setFieldById() :: Sets all form fields with that id."><span class="description">Sets all form fields with that id.</span><pre>setFieldById()</pre></a></li>
+<li class="method public "><a href="#method_setFieldByName" title="setFieldByName() :: Sets all form fields with that name."><span class="description">Sets all form fields with that name.</span><pre>setFieldByName()</pre></a></li>
+<li class="method public "><a href="#method_setFrameFocus" title="setFrameFocus() :: Sets the focus by name."><span class="description">Sets the focus by name.</span><pre>setFrameFocus()</pre></a></li>
+<li class="method public "><a href="#method_setFrameFocusByIndex" title="setFrameFocusByIndex() :: Sets the focus by index. The integer index starts from 1."><span class="description">Sets the focus by index. The integer index starts from 1.</span><pre>setFrameFocusByIndex()</pre></a></li>
+<li class="method public "><a href="#method_setMaximumRedirects" title="setMaximumRedirects() :: Sets the maximum number of redirects before
+   the web page is loaded regardless."><span class="description">Sets the maximum number of redirects before
+   the web page is loaded regardless.</span><pre>setMaximumRedirects()</pre></a></li>
+<li class="method public "><a href="#method_showHeaders" title="showHeaders() :: Dumps the current HTTP headers for debugging."><span class="description">Dumps the current HTTP headers for debugging.</span><pre>showHeaders()</pre></a></li>
+<li class="method public "><a href="#method_showRequest" title="showRequest() :: Dumps the current request for debugging."><span class="description">Dumps the current request for debugging.</span><pre>showRequest()</pre></a></li>
+<li class="method public "><a href="#method_showSource" title="showSource() :: Dumps the current HTML source for debugging."><span class="description">Dumps the current HTML source for debugging.</span><pre>showSource()</pre></a></li>
+<li class="method public "><a href="#method_showText" title="showText() :: Dumps the visible text only for debugging."><span class="description">Dumps the visible text only for debugging.</span><pre>showText()</pre></a></li>
+<li class="method public "><a href="#method_submitFormById" title="submitFormById() :: Submits a form by the ID."><span class="description">Submits a form by the ID.</span><pre>submitFormById()</pre></a></li>
+<li class="method public "><a href="#method_unsetBrowser" title="unsetBrowser() :: Clears the current browser reference to help the
+   PHP garbage collector."><span class="description">Clears the current browser reference to help the
+   PHP garbage collector.</span><pre>unsetBrowser()</pre></a></li>
+<li class="method public "><a href="#method_useProxy" title="useProxy() :: Sets proxy to use on all requests for when
+   testing from behind a firewall. Set URL
+   to false to disable."><span class="description">Sets proxy to use on all requests for when
+   testing from behind a firewall. Set URL
+   to false to disable.</span><pre>useProxy()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul>
+<li class="property public "><a href="#property__browser" title="$_browser() :: "><span class="description"></span><pre>$_browser</pre></a></li>
+<li class="property public "><a href="#property__ignore_errors" title="$_ignore_errors() :: "><span class="description"></span><pre>$_ignore_errors</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\WebTestCase"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/WebTestCase.html">WebTestCase</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">Test case for testing of web pages. Allows
+   fetching of pages, parsing of HTML and
+   submitting forms.</p>
+<div class="details">
+<div class="long_description">@package SimpleTest</div>
+<table class="table table-bordered"><tr>
+<th>subpackage</th>
+<td>WebTester</td>
+</tr></table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method_WebTestCase"></a><div class="element clickable method public method_WebTestCase" data-toggle="collapse" data-target=".method_WebTestCase .collapse">
+<h2>Creates an empty test case. Should be subclassed
+   with test methods for a functional test case.</h2>
+<pre>WebTestCase($label) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $label     Name of test case. Will use
+                            the class name if none specified.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$label</h4></div>
+</div></div>
+</div>
+<a id="method__assertFieldValue"></a><div class="element clickable method public method__assertFieldValue" data-toggle="collapse" data-target=".method__assertFieldValue .collapse">
+<h2>Tests the field value against the expectation.</h2>
+<pre>_assertFieldValue($identifier, mixed $value, $expected, $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $identifier      Name, ID or label.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$identifier</h4></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>mixed</code><p>Current field value.
+   @param mixed $expected         Expected value to match.
+   @param string $message         Failure message.
+   @return boolean                True if pass
+   @access protected</p>
+</div>
+<div class="subelement argument"><h4>$expected</h4></div>
+<div class="subelement argument"><h4>$message</h4></div>
+</div></div>
+</div>
+<a id="method__failOnError"></a><div class="element clickable method public method__failOnError" data-toggle="collapse" data-target=".method__failOnError .collapse">
+<h2>Issues a fail if there is a transport error anywhere
+   in the current frameset. Only one such error is
+   reported.</h2>
+<pre>_failOnError($result) : <a href="string/boolean.html">\string/boolean</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string/boolean $result   HTML or failure.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$result</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="string/boolean.html">\string/boolean</a></code>$result  Passes through result.
+   @access private</div>
+</div></div>
+</div>
+<a id="method_addHeader"></a><div class="element clickable method public method_addHeader" data-toggle="collapse" data-target=".method_addHeader .collapse">
+<h2>Adds a header to every fetch.</h2>
+<pre>addHeader($header) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $header       Header line to add to every
+                               request until cleared.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$header</h4></div>
+</div></div>
+</div>
+<a id="method_after"></a><div class="element clickable method public method_after" data-toggle="collapse" data-target=".method_after .collapse">
+<h2>Announces the end of the test. Includes private clean up.</h2>
+<pre>after($method) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $method    Test method just finished.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$method</h4></div>
+</div></div>
+</div>
+<a id="method_ageCookies"></a><div class="element clickable method public method_ageCookies" data-toggle="collapse" data-target=".method_ageCookies .collapse">
+<h2>Moves cookie expiry times back into the past.</h2>
+<pre>ageCookies(integer $interval) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">Useful for testing timeouts and expiries.</div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$interval</h4>
+<code>integer</code><p>Amount to age in seconds.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_assertAuthentication"></a><div class="element clickable method public method_assertAuthentication" data-toggle="collapse" data-target=".method_assertAuthentication .collapse">
+<h2>Attempt to match the authentication type within
+   the security realm we are currently matching.</h2>
+<pre>assertAuthentication($authentication, string $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $authentication   Usually basic.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$authentication</h4></div>
+<div class="subelement argument">
+<h4>$message</h4>
+<code>string</code><p>Message to display.
+   @return boolean                 True if pass.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_assertClickable"></a><div class="element clickable method public method_assertClickable" data-toggle="collapse" data-target=".method_assertClickable .collapse">
+<h2>Checks for a click target.</h2>
+<pre>assertClickable($label, $message) : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $label        Visible text or alt text.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$label</h4></div>
+<div class="subelement argument"><h4>$message</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>True if click target.
+   @access public</div>
+</div></div>
+</div>
+<a id="method_assertCookie"></a><div class="element clickable method public method_assertCookie" data-toggle="collapse" data-target=".method_assertCookie .collapse">
+<h2>Checks that a cookie is set for the current page
+   and optionally checks the value.</h2>
+<pre>assertCookie($name, string $expected, $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $name        Name of cookie to test.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$name</h4></div>
+<div class="subelement argument">
+<h4>$expected</h4>
+<code>string</code><p>Expected value as a string or
+                              false if any value will do.
+   @param string $message     Message to display.
+   @return boolean            True if pass.
+   @access public</p>
+</div>
+<div class="subelement argument"><h4>$message</h4></div>
+</div></div>
+</div>
+<a id="method_assertEqual"></a><div class="element clickable method public method_assertEqual" data-toggle="collapse" data-target=".method_assertEqual .collapse">
+<h2>Will trigger a pass if the two parameters have
+   the same value only. Otherwise a fail. This
+   is for testing hand extracted text, etc.</h2>
+<pre>assertEqual($first, mixed $second, $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param mixed $first          Value to compare.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$first</h4></div>
+<div class="subelement argument">
+<h4>$second</h4>
+<code>mixed</code><p>Value to compare.
+   @param string $message       Message to display.
+   @return boolean              True on pass
+   @access public</p>
+</div>
+<div class="subelement argument"><h4>$message</h4></div>
+</div></div>
+</div>
+<a id="method_assertFalse"></a><div class="element clickable method public method_assertFalse" data-toggle="collapse" data-target=".method_assertFalse .collapse">
+<h2>Will be true on false and vice versa. False
+   is the PHP definition of false, so that null,
+   empty strings, zero and an empty array all count
+   as false.</h2>
+<pre>assertFalse($result, string $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param boolean $result    Pass on false.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$result</h4></div>
+<div class="subelement argument">
+<h4>$message</h4>
+<code>string</code><p>Message to display.
+   @return boolean           True on pass
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_assertField"></a><div class="element clickable method public method_assertField" data-toggle="collapse" data-target=".method_assertField .collapse">
+<h2>Confirms that the form element is currently set
+   to the expected value. A missing form will always
+   fail. If no value is given then only the existence
+   of the field is checked.</h2>
+<pre>assertField($label, mixed $expected, $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $name       Name of field in forms.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$label</h4></div>
+<div class="subelement argument">
+<h4>$expected</h4>
+<code>mixed</code><p>Expected string/array value or
+                             false for unset fields.
+   @param string $message    Message to display. Default
+                             can be embedded with %s.
+   @return boolean           True if pass.
+   @access public</p>
+</div>
+<div class="subelement argument"><h4>$message</h4></div>
+</div></div>
+</div>
+<a id="method_assertFieldById"></a><div class="element clickable method public method_assertFieldById" data-toggle="collapse" data-target=".method_assertFieldById .collapse">
+<h2>Confirms that the form element is currently set
+   to the expected value. A missing form will always
+   fail. If no ID is given then only the existence
+   of the field is checked.</h2>
+<pre>assertFieldById($id, mixed $expected, $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string/integer $id  Name of field in forms.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$id</h4></div>
+<div class="subelement argument">
+<h4>$expected</h4>
+<code>mixed</code><p>Expected string/array value or
+                              false for unset fields.
+   @param string $message     Message to display. Default
+                              can be embedded with %s.
+   @return boolean            True if pass.
+   @access public</p>
+</div>
+<div class="subelement argument"><h4>$message</h4></div>
+</div></div>
+</div>
+<a id="method_assertFieldByName"></a><div class="element clickable method public method_assertFieldByName" data-toggle="collapse" data-target=".method_assertFieldByName .collapse">
+<h2>Confirms that the form element is currently set
+   to the expected value. A missing form element will always
+   fail. If no value is given then only the existence
+   of the field is checked.</h2>
+<pre>assertFieldByName($name, mixed $expected, $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $name       Name of field in forms.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$name</h4></div>
+<div class="subelement argument">
+<h4>$expected</h4>
+<code>mixed</code><p>Expected string/array value or
+                             false for unset fields.
+   @param string $message    Message to display. Default
+                             can be embedded with %s.
+   @return boolean           True if pass.
+   @access public</p>
+</div>
+<div class="subelement argument"><h4>$message</h4></div>
+</div></div>
+</div>
+<a id="method_assertHeader"></a><div class="element clickable method public method_assertHeader" data-toggle="collapse" data-target=".method_assertHeader .collapse">
+<h2>Checks each header line for the required value. If no
+   value is given then only an existence check is made.</h2>
+<pre>assertHeader($header, mixed $value, $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $header    Case insensitive header name.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$header</h4></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>mixed</code><p>Case sensitive trimmed string to
+                            match against. An expectation object
+                            can be used for pattern matching.
+   @return boolean          True if pass.
+   @access public</p>
+</div>
+<div class="subelement argument"><h4>$message</h4></div>
+</div></div>
+</div>
+<a id="method_assertHeaderPattern"></a><div class="element clickable method public method_assertHeaderPattern" data-toggle="collapse" data-target=".method_assertHeaderPattern .collapse">
+<h2>assertHeaderPattern()
+        </h2>
+<pre>assertHeaderPattern($header, $pattern, $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>deprecated</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$header</h4></div>
+<div class="subelement argument"><h4>$pattern</h4></div>
+<div class="subelement argument"><h4>$message</h4></div>
+</div></div>
+</div>
+<a id="method_assertImage"></a><div class="element clickable method public method_assertImage" data-toggle="collapse" data-target=".method_assertImage .collapse">
+<h2>Checks for a valid image with atht alt text or title.</h2>
+<pre>assertImage($label, $message) : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $label        Visible text.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$label</h4></div>
+<div class="subelement argument"><h4>$message</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>True if click target.
+   @access public</div>
+</div></div>
+</div>
+<a id="method_assertLink"></a><div class="element clickable method public method_assertLink" data-toggle="collapse" data-target=".method_assertLink .collapse">
+<h2>Tests for the presence of a link label. Match is
+   case insensitive with normalised space.</h2>
+<pre>assertLink($label, mixed $expected, $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $label     Text between the anchor tags.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$label</h4></div>
+<div class="subelement argument">
+<h4>$expected</h4>
+<code>mixed</code><p>Expected URL or expectation object.
+   @param string $message   Message to display. Default
+                            can be embedded with %s.
+   @return boolean          True if link present.
+   @access public</p>
+</div>
+<div class="subelement argument"><h4>$message</h4></div>
+</div></div>
+</div>
+<a id="method_assertLinkById"></a><div class="element clickable method public method_assertLinkById" data-toggle="collapse" data-target=".method_assertLinkById .collapse">
+<h2>Tests for the presence of a link id attribute.</h2>
+<pre>assertLinkById($id, mixed $expected, $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $id        Id attribute value.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$id</h4></div>
+<div class="subelement argument">
+<h4>$expected</h4>
+<code>mixed</code><p>Expected URL or expectation object.
+   @param string $message   Message to display. Default
+                            can be embedded with %s.
+   @return boolean          True if link present.
+   @access public</p>
+</div>
+<div class="subelement argument"><h4>$message</h4></div>
+</div></div>
+</div>
+<a id="method_assertMime"></a><div class="element clickable method public method_assertMime" data-toggle="collapse" data-target=".method_assertMime .collapse">
+<h2>Checks the mime type against a list
+   of possible values.</h2>
+<pre>assertMime($types, string $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param array $types      Possible mime types for a pass.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$types</h4></div>
+<div class="subelement argument">
+<h4>$message</h4>
+<code>string</code><p>Message to display.
+   @return boolean          True if pass.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_assertNoAuthentication"></a><div class="element clickable method public method_assertNoAuthentication" data-toggle="collapse" data-target=".method_assertNoAuthentication .collapse">
+<h2>Checks that no authentication is necessary to view
+   the desired page.</h2>
+<pre>assertNoAuthentication($message) : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $message     Message to display.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$message</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>True if pass.
+   @access public</div>
+</div></div>
+</div>
+<a id="method_assertNoCookie"></a><div class="element clickable method public method_assertNoCookie" data-toggle="collapse" data-target=".method_assertNoCookie .collapse">
+<h2>Checks that no cookie is present or that it has
+   been successfully cleared.</h2>
+<pre>assertNoCookie($name, string $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $name        Name of cookie to test.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$name</h4></div>
+<div class="subelement argument">
+<h4>$message</h4>
+<code>string</code><p>Message to display.
+   @return boolean            True if pass.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_assertNoHeader"></a><div class="element clickable method public method_assertNoHeader" data-toggle="collapse" data-target=".method_assertNoHeader .collapse">
+<h2>Confirms that the header type has not been received.</h2>
+<pre>assertNoHeader(string $header, $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">Only the landing page is checked. If you want to check
+   redirect pages, then you should limit redirects so
+   as to capture the page you want.</div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$header</h4>
+<code>string</code><p>Case insensitive header name.
+   @return boolean          True if pass.
+   @access public</p>
+</div>
+<div class="subelement argument"><h4>$message</h4></div>
+</div></div>
+</div>
+<a id="method_assertNoLink"></a><div class="element clickable method public method_assertNoLink" data-toggle="collapse" data-target=".method_assertNoLink .collapse">
+<h2>Tests for the non-presence of a link label. Match is
+   case insensitive with normalised space.</h2>
+<pre>assertNoLink($label, string $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string/integer $label    Text between the anchor tags
+                                   or ID attribute.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$label</h4></div>
+<div class="subelement argument">
+<h4>$message</h4>
+<code>string</code><p>Message to display. Default
+                                   can be embedded with %s.
+   @return boolean                 True if link missing.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_assertNoLinkById"></a><div class="element clickable method public method_assertNoLinkById" data-toggle="collapse" data-target=".method_assertNoLinkById .collapse">
+<h2>Tests for the non-presence of a link label. Match is
+   case insensitive with normalised space.</h2>
+<pre>assertNoLinkById($id, string $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $id        Id attribute value.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$id</h4></div>
+<div class="subelement argument">
+<h4>$message</h4>
+<code>string</code><p>Message to display. Default
+                            can be embedded with %s.
+   @return boolean          True if link missing.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_assertNoPattern"></a><div class="element clickable method public method_assertNoPattern" data-toggle="collapse" data-target=".method_assertNoPattern .collapse">
+<h2>Will trigger a pass if the perl regex pattern
+   is not present in raw content.</h2>
+<pre>assertNoPattern($pattern, string $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $pattern    Perl regex to look for including
+                             the regex delimiters.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$pattern</h4></div>
+<div class="subelement argument">
+<h4>$message</h4>
+<code>string</code><p>Message to display.
+   @return boolean           True if pass.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_assertNoText"></a><div class="element clickable method public method_assertNoText" data-toggle="collapse" data-target=".method_assertNoText .collapse">
+<h2>Will trigger a pass if the text is not found in the plain
+   text form of the page.</h2>
+<pre>assertNoText($text, string $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $text       Text to look for.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$text</h4></div>
+<div class="subelement argument">
+<h4>$message</h4>
+<code>string</code><p>Message to display.
+   @return boolean           True if pass.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_assertNoUnwantedHeader"></a><div class="element clickable method public method_assertNoUnwantedHeader" data-toggle="collapse" data-target=".method_assertNoUnwantedHeader .collapse">
+<h2>assertNoUnwantedHeader()
+        </h2>
+<pre>assertNoUnwantedHeader($header, $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>deprecated</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$header</h4></div>
+<div class="subelement argument"><h4>$message</h4></div>
+</div></div>
+</div>
+<a id="method_assertNoUnwantedPattern"></a><div class="element clickable method public method_assertNoUnwantedPattern" data-toggle="collapse" data-target=".method_assertNoUnwantedPattern .collapse">
+<h2>assertNoUnwantedPattern()
+        </h2>
+<pre>assertNoUnwantedPattern($pattern, $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>deprecated</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$pattern</h4></div>
+<div class="subelement argument"><h4>$message</h4></div>
+</div></div>
+</div>
+<a id="method_assertNoUnwantedText"></a><div class="element clickable method public method_assertNoUnwantedText" data-toggle="collapse" data-target=".method_assertNoUnwantedText .collapse">
+<h2>assertNoUnwantedText()
+        </h2>
+<pre>assertNoUnwantedText($text, $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>deprecated</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$text</h4></div>
+<div class="subelement argument"><h4>$message</h4></div>
+</div></div>
+</div>
+<a id="method_assertNotEqual"></a><div class="element clickable method public method_assertNotEqual" data-toggle="collapse" data-target=".method_assertNotEqual .collapse">
+<h2>Will trigger a pass if the two parameters have
+   a different value. Otherwise a fail. This
+   is for testing hand extracted text, etc.</h2>
+<pre>assertNotEqual($first, mixed $second, $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param mixed $first           Value to compare.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$first</h4></div>
+<div class="subelement argument">
+<h4>$second</h4>
+<code>mixed</code><p>Value to compare.
+   @param string $message        Message to display.
+   @return boolean               True on pass
+   @access public</p>
+</div>
+<div class="subelement argument"><h4>$message</h4></div>
+</div></div>
+</div>
+<a id="method_assertPattern"></a><div class="element clickable method public method_assertPattern" data-toggle="collapse" data-target=".method_assertPattern .collapse">
+<h2>Will trigger a pass if the Perl regex pattern
+   is found in the raw content.</h2>
+<pre>assertPattern($pattern, string $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $pattern    Perl regex to look for including
+                             the regex delimiters.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$pattern</h4></div>
+<div class="subelement argument">
+<h4>$message</h4>
+<code>string</code><p>Message to display.
+   @return boolean           True if pass.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_assertRealm"></a><div class="element clickable method public method_assertRealm" data-toggle="collapse" data-target=".method_assertRealm .collapse">
+<h2>Attempts to match the current security realm.</h2>
+<pre>assertRealm($realm, string $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $realm     Name of security realm.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$realm</h4></div>
+<div class="subelement argument">
+<h4>$message</h4>
+<code>string</code><p>Message to display.
+   @return boolean          True if pass.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_assertResponse"></a><div class="element clickable method public method_assertResponse" data-toggle="collapse" data-target=".method_assertResponse .collapse">
+<h2>Checks the response code against a list
+   of possible values.</h2>
+<pre>assertResponse($responses, string $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param array $responses    Possible responses for a pass.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$responses</h4></div>
+<div class="subelement argument">
+<h4>$message</h4>
+<code>string</code><p>Message to display. Default
+                              can be embedded with %s.
+   @return boolean            True if pass.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_assertSubmit"></a><div class="element clickable method public method_assertSubmit" data-toggle="collapse" data-target=".method_assertSubmit .collapse">
+<h2>Checks for a valid button label.</h2>
+<pre>assertSubmit($label, $message) : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $label        Visible text.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$label</h4></div>
+<div class="subelement argument"><h4>$message</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>True if click target.
+   @access public</div>
+</div></div>
+</div>
+<a id="method_assertText"></a><div class="element clickable method public method_assertText" data-toggle="collapse" data-target=".method_assertText .collapse">
+<h2>Will trigger a pass if the text is found in the plain
+   text form of the page.</h2>
+<pre>assertText($text, string $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $text       Text to look for.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$text</h4></div>
+<div class="subelement argument">
+<h4>$message</h4>
+<code>string</code><p>Message to display.
+   @return boolean           True if pass.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_assertTitle"></a><div class="element clickable method public method_assertTitle" data-toggle="collapse" data-target=".method_assertTitle .collapse">
+<h2>Tests the text between the title tags.</h2>
+<pre>assertTitle($title, string $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string/SimpleExpectation $title    Expected title.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$title</h4></div>
+<div class="subelement argument">
+<h4>$message</h4>
+<code>string</code><p>Message to display.
+   @return boolean                           True if pass.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_assertTrue"></a><div class="element clickable method public method_assertTrue" data-toggle="collapse" data-target=".method_assertTrue .collapse">
+<h2>Called from within the test methods to register
+   passes and failures.</h2>
+<pre>assertTrue($result, string $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param boolean $result    Pass on true.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$result</h4></div>
+<div class="subelement argument">
+<h4>$message</h4>
+<code>string</code><p>Message to display describing
+                             the test state.
+   @return boolean           True on pass
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_assertWantedPattern"></a><div class="element clickable method public method_assertWantedPattern" data-toggle="collapse" data-target=".method_assertWantedPattern .collapse">
+<h2>assertWantedPattern()
+        </h2>
+<pre>assertWantedPattern($pattern, $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>deprecated</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$pattern</h4></div>
+<div class="subelement argument"><h4>$message</h4></div>
+</div></div>
+</div>
+<a id="method_assertWantedText"></a><div class="element clickable method public method_assertWantedText" data-toggle="collapse" data-target=".method_assertWantedText .collapse">
+<h2>assertWantedText()
+        </h2>
+<pre>assertWantedText($text, $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>deprecated</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$text</h4></div>
+<div class="subelement argument"><h4>$message</h4></div>
+</div></div>
+</div>
+<a id="method_authenticate"></a><div class="element clickable method public method_authenticate" data-toggle="collapse" data-target=".method_authenticate .collapse">
+<h2>Retries a request after setting the authentication
+   for the current realm.</h2>
+<pre>authenticate($username, string $password) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $username    Username for realm.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$username</h4></div>
+<div class="subelement argument">
+<h4>$password</h4>
+<code>string</code><p>Password for realm.
+   @return boolean/string     HTML on successful fetch. Note
+                              that authentication may still have
+                              failed.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_back"></a><div class="element clickable method public method_back" data-toggle="collapse" data-target=".method_back .collapse">
+<h2>Equivalent to hitting the back button on the
+   browser.</h2>
+<pre>back() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return boolean     True if history entry and
+                       fetch succeeded.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_before"></a><div class="element clickable method public method_before" data-toggle="collapse" data-target=".method_before .collapse">
+<h2>Announces the start of the test.</h2>
+<pre>before($method) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $method    Test method just started.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$method</h4></div>
+</div></div>
+</div>
+<a id="method_clearFrameFocus"></a><div class="element clickable method public method_clearFrameFocus" data-toggle="collapse" data-target=".method_clearFrameFocus .collapse">
+<h2>Clears the frame focus. All frames will be searched
+   for content.</h2>
+<pre>clearFrameFocus() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description">@access public</div></div></div>
+</div>
+<a id="method_click"></a><div class="element clickable method public method_click" data-toggle="collapse" data-target=".method_click .collapse">
+<h2>Clicks a visible text item. Will first try buttons,
+   then links and then images.</h2>
+<pre>click($label) : <a href="string/boolean.html">\string/boolean</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $label        Visible text or alt text.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$label</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="string/boolean.html">\string/boolean</a></code>Raw page or false.
+   @access public</div>
+</div></div>
+</div>
+<a id="method_clickImage"></a><div class="element clickable method public method_clickImage" data-toggle="collapse" data-target=".method_clickImage .collapse">
+<h2>Clicks the submit image by some kind of label. Usually
+   the alt tag or the nearest equivalent. The owning
+   form will be submitted by this. Clicking outside of
+   the boundary of the coordinates will result in
+   a failure.</h2>
+<pre>clickImage($label, integer $x, $y, $additional) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $label    Alt attribute of button.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$label</h4></div>
+<div class="subelement argument">
+<h4>$x</h4>
+<code>integer</code><p>X-coordinate of imaginary click.
+   @param integer $y       Y-coordinate of imaginary click.
+   @param hash $additional Additional form values.
+   @return boolean/string  Page on success.
+   @access public</p>
+</div>
+<div class="subelement argument"><h4>$y</h4></div>
+<div class="subelement argument"><h4>$additional</h4></div>
+</div></div>
+</div>
+<a id="method_clickImageById"></a><div class="element clickable method public method_clickImageById" data-toggle="collapse" data-target=".method_clickImageById .collapse">
+<h2>Clicks the submit image by ID attribute. The owning
+   form will be submitted by this. Clicking outside of
+   the boundary of the coordinates will result in
+   a failure.</h2>
+<pre>clickImageById($id, integer $x, $y, $additional) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param integer/string $id   ID attribute of button.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$id</h4></div>
+<div class="subelement argument">
+<h4>$x</h4>
+<code>integer</code><p>X-coordinate of imaginary click.
+   @param integer $y           Y-coordinate of imaginary click.
+   @param hash $additional     Additional form values.
+   @return boolean/string      Page on success.
+   @access public</p>
+</div>
+<div class="subelement argument"><h4>$y</h4></div>
+<div class="subelement argument"><h4>$additional</h4></div>
+</div></div>
+</div>
+<a id="method_clickImageByName"></a><div class="element clickable method public method_clickImageByName" data-toggle="collapse" data-target=".method_clickImageByName .collapse">
+<h2>Clicks the submit image by the name. Usually
+   the alt tag or the nearest equivalent. The owning
+   form will be submitted by this. Clicking outside of
+   the boundary of the coordinates will result in
+   a failure.</h2>
+<pre>clickImageByName($name, integer $x, $y, $additional) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $name     Name attribute of button.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$name</h4></div>
+<div class="subelement argument">
+<h4>$x</h4>
+<code>integer</code><p>X-coordinate of imaginary click.
+   @param integer $y       Y-coordinate of imaginary click.
+   @param hash $additional Additional form values.
+   @return boolean/string  Page on success.
+   @access public</p>
+</div>
+<div class="subelement argument"><h4>$y</h4></div>
+<div class="subelement argument"><h4>$additional</h4></div>
+</div></div>
+</div>
+<a id="method_clickLink"></a><div class="element clickable method public method_clickLink" data-toggle="collapse" data-target=".method_clickLink .collapse">
+<h2>Follows a link by name. Will click the first link
+   found with this link text by default, or a later
+   one if an index is given. Match is case insensitive
+   with normalised space.</h2>
+<pre>clickLink($label, integer $index) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $label     Text between the anchor tags.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$label</h4></div>
+<div class="subelement argument">
+<h4>$index</h4>
+<code>integer</code><p>Link position counting from zero.
+   @return boolean/string   Page on success.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_clickLinkById"></a><div class="element clickable method public method_clickLinkById" data-toggle="collapse" data-target=".method_clickLinkById .collapse">
+<h2>Follows a link by id attribute.</h2>
+<pre>clickLinkById($id) : <a href="boolean/string.html">\boolean/string</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $id        ID attribute value.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$id</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="boolean/string.html">\boolean/string</a></code>Page on success.
+   @access public</div>
+</div></div>
+</div>
+<a id="method_clickSubmit"></a><div class="element clickable method public method_clickSubmit" data-toggle="collapse" data-target=".method_clickSubmit .collapse">
+<h2>Clicks the submit button by label. The owning
+   form will be submitted by this.</h2>
+<pre>clickSubmit($label, \hash $additional) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $label    Button label. An unlabeled
+                           button can be triggered by 'Submit'.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$label</h4></div>
+<div class="subelement argument">
+<h4>$additional</h4>
+<code><a href="hash.html">\hash</a></code><p>Additional form values.
+   @return boolean/string  Page on success, else false.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_clickSubmitById"></a><div class="element clickable method public method_clickSubmitById" data-toggle="collapse" data-target=".method_clickSubmitById .collapse">
+<h2>Clicks the submit button by ID attribute. The owning
+   form will be submitted by this.</h2>
+<pre>clickSubmitById($id, \hash $additional) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $id       ID attribute of button.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$id</h4></div>
+<div class="subelement argument">
+<h4>$additional</h4>
+<code><a href="hash.html">\hash</a></code><p>Additional form values.
+   @return boolean/string  Page on success.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_clickSubmitByName"></a><div class="element clickable method public method_clickSubmitByName" data-toggle="collapse" data-target=".method_clickSubmitByName .collapse">
+<h2>Clicks the submit button by name attribute. The owning
+   form will be submitted by this.</h2>
+<pre>clickSubmitByName($name, \hash $additional) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $name     Name attribute of button.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$name</h4></div>
+<div class="subelement argument">
+<h4>$additional</h4>
+<code><a href="hash.html">\hash</a></code><p>Additional form values.
+   @return boolean/string  Page on success.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_createBrowser"></a><div class="element clickable method public method_createBrowser" data-toggle="collapse" data-target=".method_createBrowser .collapse">
+<h2>Creates a new default web browser object.</h2>
+<pre>createBrowser() : <a href="TestBrowser.html">\TestBrowser</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">Will be cleared at the end of the test method.</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="TestBrowser.html">\TestBrowser</a></code>New browser.
+   @access public</div>
+</div></div>
+</div>
+<a id="method_forward"></a><div class="element clickable method public method_forward" data-toggle="collapse" data-target=".method_forward .collapse">
+<h2>Equivalent to hitting the forward button on the
+   browser.</h2>
+<pre>forward() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return boolean     True if history entry and
+                       fetch succeeded.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_get"></a><div class="element clickable method public method_get" data-toggle="collapse" data-target=".method_get .collapse">
+<h2>Fetches a page into the page buffer. If
+   there is no base for the URL then the
+   current base URL is used. After the fetch
+   the base URL reflects the new location.</h2>
+<pre>get($url, \hash $parameters) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $url          URL to fetch.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$url</h4></div>
+<div class="subelement argument">
+<h4>$parameters</h4>
+<code><a href="hash.html">\hash</a></code><p>Optional additional GET data.
+   @return boolean/string      Raw page on success.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_getAssertionLine"></a><div class="element clickable method public method_getAssertionLine" data-toggle="collapse" data-target=".method_getAssertionLine .collapse">
+<h2>Uses a stack trace to find the line of an assertion.</h2>
+<pre>getAssertionLine() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return string           Line number of first assert*
+                            method embedded in format string.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getBrowser"></a><div class="element clickable method public method_getBrowser" data-toggle="collapse" data-target=".method_getBrowser .collapse">
+<h2>Gets a current browser reference for setting
+   special expectations or for detailed
+   examination of page fetches.</h2>
+<pre>getBrowser() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return SimpleBrowser     Current test browser object.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getCookie"></a><div class="element clickable method public method_getCookie" data-toggle="collapse" data-target=".method_getCookie .collapse">
+<h2>Gets the cookie value for the current browser context.</h2>
+<pre>getCookie($name) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $name          Name of cookie.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$name</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Value of cookie or false if unset.
+   @access public</div>
+</div></div>
+</div>
+<a id="method_getFrameFocus"></a><div class="element clickable method public method_getFrameFocus" data-toggle="collapse" data-target=".method_getFrameFocus .collapse">
+<h2>Accessor for current frame focus. Will be
+   false if no frame has focus.</h2>
+<pre>getFrameFocus() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return integer/string/boolean    Label if any, otherwise
+                                     the position in the frameset
+                                     or false if none.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getTransportError"></a><div class="element clickable method public method_getTransportError" data-toggle="collapse" data-target=".method_getTransportError .collapse">
+<h2>Gets the last response error.</h2>
+<pre>getTransportError() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return string    Last low level HTTP error.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getUrl"></a><div class="element clickable method public method_getUrl" data-toggle="collapse" data-target=".method_getUrl .collapse">
+<h2>Accessor for the currently selected URL.</h2>
+<pre>getUrl() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return string        Current location or false if
+                         no page yet fetched.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_head"></a><div class="element clickable method public method_head" data-toggle="collapse" data-target=".method_head .collapse">
+<h2>Does a HTTP HEAD fetch, fetching only the page
+   headers. The current base URL is unchanged by this.</h2>
+<pre>head($url, \hash $parameters) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $url          URL to fetch.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$url</h4></div>
+<div class="subelement argument">
+<h4>$parameters</h4>
+<code><a href="hash.html">\hash</a></code><p>Optional additional GET data.
+   @return boolean             True on success.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_ignoreCookies"></a><div class="element clickable method public method_ignoreCookies" data-toggle="collapse" data-target=".method_ignoreCookies .collapse">
+<h2>Switches off cookie sending and recieving.</h2>
+<pre>ignoreCookies() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description">@access public</div></div></div>
+</div>
+<a id="method_ignoreErrors"></a><div class="element clickable method public method_ignoreErrors" data-toggle="collapse" data-target=".method_ignoreErrors .collapse">
+<h2>Skips errors for the next request only. You might
+   want to confirm that a page is unreachable for
+   example.</h2>
+<pre>ignoreErrors() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description">@access public</div></div></div>
+</div>
+<a id="method_ignoreFrames"></a><div class="element clickable method public method_ignoreFrames" data-toggle="collapse" data-target=".method_ignoreFrames .collapse">
+<h2>Disables frames support. Frames will not be fetched
+   and the frameset page will be used instead.</h2>
+<pre>ignoreFrames() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description">@access public</div></div></div>
+</div>
+<a id="method_post"></a><div class="element clickable method public method_post" data-toggle="collapse" data-target=".method_post .collapse">
+<h2>Fetches a page by POST into the page buffer.</h2>
+<pre>post(string $url, $parameters) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">If there is no base for the URL then the
+   current base URL is used. After the fetch
+   the base URL reflects the new location.</div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$url</h4>
+<code>string</code><p>URL to fetch.
+   @param hash $parameters     Optional additional GET data.
+   @return boolean/string      Raw page on success.
+   @access public</p>
+</div>
+<div class="subelement argument"><h4>$parameters</h4></div>
+</div></div>
+</div>
+<a id="method_restart"></a><div class="element clickable method public method_restart" data-toggle="collapse" data-target=".method_restart .collapse">
+<h2>Simulates the closing and reopening of the browser.</h2>
+<pre>restart(\string/integer $date) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">Temporary cookies will be discarded and timed
+   cookies will be expired if later than the
+   specified time.</div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$date</h4>
+<code><a href="string/integer.html">\string/integer</a></code><p>Time when session restarted.
+                               If ommitted then all persistent
+                               cookies are kept. Time is either
+                               Cookie format string or timestamp.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_retry"></a><div class="element clickable method public method_retry" data-toggle="collapse" data-target=".method_retry .collapse">
+<h2>Equivalent to hitting the retry button on the
+   browser. Will attempt to repeat the page fetch.</h2>
+<pre>retry() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return boolean     True if fetch succeeded.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_setBrowser"></a><div class="element clickable method public method_setBrowser" data-toggle="collapse" data-target=".method_setBrowser .collapse">
+<h2>Gets a current browser reference for setting
+   special expectations or for detailed
+   examination of page fetches.</h2>
+<pre>setBrowser($browser) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param SimpleBrowser $browser    New test browser object.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$browser</h4></div>
+</div></div>
+</div>
+<a id="method_setConnectionTimeout"></a><div class="element clickable method public method_setConnectionTimeout" data-toggle="collapse" data-target=".method_setConnectionTimeout .collapse">
+<h2>Sets the socket timeout for opening a connection and
+   receiving at least one byte of information.</h2>
+<pre>setConnectionTimeout($timeout) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param integer $timeout      Maximum time in seconds.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$timeout</h4></div>
+</div></div>
+</div>
+<a id="method_setCookie"></a><div class="element clickable method public method_setCookie" data-toggle="collapse" data-target=".method_setCookie .collapse">
+<h2>Sets a cookie in the current browser.</h2>
+<pre>setCookie($name, string $value, $host, $path, $expiry) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $name          Name of cookie.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$name</h4></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>string</code><p>Cookie value.
+   @param string $host          Host upon which the cookie is valid.
+   @param string $path          Cookie path if not host wide.
+   @param string $expiry        Expiry date.
+   @access public</p>
+</div>
+<div class="subelement argument"><h4>$host</h4></div>
+<div class="subelement argument"><h4>$path</h4></div>
+<div class="subelement argument"><h4>$expiry</h4></div>
+</div></div>
+</div>
+<a id="method_setField"></a><div class="element clickable method public method_setField" data-toggle="collapse" data-target=".method_setField .collapse">
+<h2>Sets all form fields with that label, or name if there
+   is no label attached.</h2>
+<pre>setField($label, string $value, $position) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $name    Name of field in forms.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$label</h4></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>string</code><p>New value of field.
+   @return boolean        True if field exists, otherwise false.
+   @access public</p>
+</div>
+<div class="subelement argument"><h4>$position</h4></div>
+</div></div>
+</div>
+<a id="method_setFieldById"></a><div class="element clickable method public method_setFieldById" data-toggle="collapse" data-target=".method_setFieldById .collapse">
+<h2>Sets all form fields with that id.</h2>
+<pre>setFieldById($id, string $value) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string/integer $id   Id of field in forms.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$id</h4></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>string</code><p>New value of field.
+   @return boolean             True if field exists, otherwise false.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_setFieldByName"></a><div class="element clickable method public method_setFieldByName" data-toggle="collapse" data-target=".method_setFieldByName .collapse">
+<h2>Sets all form fields with that name.</h2>
+<pre>setFieldByName($name, string $value, $position) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $name    Name of field in forms.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$name</h4></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>string</code><p>New value of field.
+   @return boolean        True if field exists, otherwise false.
+   @access public</p>
+</div>
+<div class="subelement argument"><h4>$position</h4></div>
+</div></div>
+</div>
+<a id="method_setFrameFocus"></a><div class="element clickable method public method_setFrameFocus" data-toggle="collapse" data-target=".method_setFrameFocus .collapse">
+<h2>Sets the focus by name.</h2>
+<pre>setFrameFocus($name) : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $name    Chosen frame.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$name</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>True if frame exists.
+   @access public</div>
+</div></div>
+</div>
+<a id="method_setFrameFocusByIndex"></a><div class="element clickable method public method_setFrameFocusByIndex" data-toggle="collapse" data-target=".method_setFrameFocusByIndex .collapse">
+<h2>Sets the focus by index. The integer index starts from 1.</h2>
+<pre>setFrameFocusByIndex($choice) : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param integer $choice    Chosen frame.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$choice</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>True if frame exists.
+   @access public</div>
+</div></div>
+</div>
+<a id="method_setMaximumRedirects"></a><div class="element clickable method public method_setMaximumRedirects" data-toggle="collapse" data-target=".method_setMaximumRedirects .collapse">
+<h2>Sets the maximum number of redirects before
+   the web page is loaded regardless.</h2>
+<pre>setMaximumRedirects($max) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param integer $max        Maximum hops.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$max</h4></div>
+</div></div>
+</div>
+<a id="method_showHeaders"></a><div class="element clickable method public method_showHeaders" data-toggle="collapse" data-target=".method_showHeaders .collapse">
+<h2>Dumps the current HTTP headers for debugging.</h2>
+<pre>showHeaders() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description">@access public</div></div></div>
+</div>
+<a id="method_showRequest"></a><div class="element clickable method public method_showRequest" data-toggle="collapse" data-target=".method_showRequest .collapse">
+<h2>Dumps the current request for debugging.</h2>
+<pre>showRequest() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description">@access public</div></div></div>
+</div>
+<a id="method_showSource"></a><div class="element clickable method public method_showSource" data-toggle="collapse" data-target=".method_showSource .collapse">
+<h2>Dumps the current HTML source for debugging.</h2>
+<pre>showSource() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description">@access public</div></div></div>
+</div>
+<a id="method_showText"></a><div class="element clickable method public method_showText" data-toggle="collapse" data-target=".method_showText .collapse">
+<h2>Dumps the visible text only for debugging.</h2>
+<pre>showText() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description">@access public</div></div></div>
+</div>
+<a id="method_submitFormById"></a><div class="element clickable method public method_submitFormById" data-toggle="collapse" data-target=".method_submitFormById .collapse">
+<h2>Submits a form by the ID.</h2>
+<pre>submitFormById($id) : <a href="boolean/string.html">\boolean/string</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $id       Form ID. No button information
+                           is submitted this way.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$id</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="boolean/string.html">\boolean/string</a></code>Page on success.
+   @access public</div>
+</div></div>
+</div>
+<a id="method_unsetBrowser"></a><div class="element clickable method public method_unsetBrowser" data-toggle="collapse" data-target=".method_unsetBrowser .collapse">
+<h2>Clears the current browser reference to help the
+   PHP garbage collector.</h2>
+<pre>unsetBrowser() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description">@access public</div></div></div>
+</div>
+<a id="method_useProxy"></a><div class="element clickable method public method_useProxy" data-toggle="collapse" data-target=".method_useProxy .collapse">
+<h2>Sets proxy to use on all requests for when
+   testing from behind a firewall. Set URL
+   to false to disable.</h2>
+<pre>useProxy($proxy, string $username, $password) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $proxy        Proxy URL.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$proxy</h4></div>
+<div class="subelement argument">
+<h4>$username</h4>
+<code>string</code><p>Proxy username for authentication.
+   @param string $password     Proxy password for authentication.
+   @access public</p>
+</div>
+<div class="subelement argument"><h4>$password</h4></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property__browser"> </a><div class="element clickable property public property__browser" data-toggle="collapse" data-target=".property__browser .collapse">
+<h2>$_browser</h2>
+<pre>$_browser </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__ignore_errors"> </a><div class="element clickable property public property__ignore_errors" data-toggle="collapse" data-target=".property__ignore_errors .collapse">
+<h2>$_ignore_errors</h2>
+<pre>$_ignore_errors </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.1.0
+</a> and<br>
+            generated on 2013-12-03T13:07:07+01:00.<br></footer></div>
+</div>
+</body>
+</html>

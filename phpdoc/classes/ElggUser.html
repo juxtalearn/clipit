@@ -1,0 +1,873 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>API Documentation » \ElggUser</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">API Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/clipit.html"><i class="icon-th"></i> clipit</a></li>
+<li><a href="../namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Elgg.html"><i class="icon-folder-open"></i> Elgg</a></li>
+<li><a href="../packages/Elgg.Core.html"><i class="icon-folder-open"></i> Elgg.Core</a></li>
+<li><a href="../packages/Elgg.Core.Plugin.html"><i class="icon-folder-open"></i> Elgg.Core.Plugin</a></li>
+<li><a href="../packages/ElggAPIAdmin.html"><i class="icon-folder-open"></i> ElggAPIAdmin</a></li>
+<li><a href="../packages/ElggDiagnostics.html"><i class="icon-folder-open"></i> ElggDiagnostics</a></li>
+<li><a href="../packages/ElggEmbed.html"><i class="icon-folder-open"></i> ElggEmbed</a></li>
+<li><a href="../packages/ElggFile.html"><i class="icon-folder-open"></i> ElggFile</a></li>
+<li><a href="../packages/ElggGarbageCollector.html"><i class="icon-folder-open"></i> ElggGarbageCollector</a></li>
+<li><a href="../packages/ElggGroups.html"><i class="icon-folder-open"></i> ElggGroups</a></li>
+<li><a href="../packages/ElggLogBrowser.html"><i class="icon-folder-open"></i> ElggLogBrowser</a></li>
+<li><a href="../packages/ElggLogRotate.html"><i class="icon-folder-open"></i> ElggLogRotate</a></li>
+<li><a href="../packages/ElggMessages.html"><i class="icon-folder-open"></i> ElggMessages</a></li>
+<li><a href="../packages/ElggNotifications.html"><i class="icon-folder-open"></i> ElggNotifications</a></li>
+<li><a href="../packages/ElggProfile.html"><i class="icon-folder-open"></i> ElggProfile</a></li>
+<li><a href="../packages/ElggTinyMCE.html"><i class="icon-folder-open"></i> ElggTinyMCE</a></li>
+<li><a href="../packages/ElgghtmLawed.html"><i class="icon-folder-open"></i> ElgghtmLawed</a></li>
+<li><a href="../packages/Embed%20Video%20Library.html"><i class="icon-folder-open"></i> Embed Video Library</a></li>
+<li><a href="../packages/PlaceLocalInclude.html"><i class="icon-folder-open"></i> PlaceLocalInclude</a></li>
+<li><a href="../packages/SimpleTest.html"><i class="icon-folder-open"></i> SimpleTest</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+     @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20MockObjects%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   MockObjects
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20MockObjects.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage MockObjects</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+     @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@abstract.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @abstract</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20WebTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage WebTester</a></li>
+<li><a href="../packages/%5Bname%5D.html"><i class="icon-folder-open"></i> [name]</a></li>
+<li><a href="../packages/clipit.html"><i class="icon-folder-open"></i> clipit</a></li>
+<li><a href="../packages/event_calendar.html"><i class="icon-folder-open"></i> event_calendar</a></li>
+<li><a href="../packages/pebs.html"><i class="icon-folder-open"></i> pebs</a></li>
+<li><a href="../packages/profile_manager.html"><i class="icon-folder-open"></i> profile_manager</a></li>
+<li><a href="../packages/veeplay.html"><i class="icon-folder-open"></i> veeplay</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">4473</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">250</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method___construct" title="__construct() :: Construct a new user entity, optionally from a given id value."><span class="description">Construct a new user entity, optionally from a given id value.</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#method___get" title="__get() :: Need to catch attempts to test user for admin.  Remove for 1.9"><span class="description">Need to catch attempts to test user for admin.  Remove for 1.9</span><pre>__get()</pre></a></li>
+<li class="method public "><a href="#method___set" title="__set() :: Need to catch attempts to make a user an admin.  Remove for 1.9"><span class="description">Need to catch attempts to make a user an admin.  Remove for 1.9</span><pre>__set()</pre></a></li>
+<li class="method public "><a href="#method_addFriend" title="addFriend() :: Adds a user as a friend"><span class="description">Adds a user as a friend</span><pre>addFriend()</pre></a></li>
+<li class="method public "><a href="#method_addToSite" title="addToSite() :: Add this user to a particular site"><span class="description">Add this user to a particular site</span><pre>addToSite()</pre></a></li>
+<li class="method public "><a href="#method_ban" title="ban() :: Ban this user."><span class="description">Ban this user.</span><pre>ban()</pre></a></li>
+<li class="method public "><a href="#method_canComment" title="canComment() :: Can a user comment on this user?"><span class="description">Can a user comment on this user?</span><pre>canComment()</pre></a></li>
+<li class="method public "><a href="#method_countObjects" title="countObjects() :: Counts the number of ElggObjects owned by this user"><span class="description">Counts the number of ElggObjects owned by this user</span><pre>countObjects()</pre></a></li>
+<li class="method public "><a href="#method_delete" title="delete() :: User specific override of the entity delete method."><span class="description">User specific override of the entity delete method.</span><pre>delete()</pre></a></li>
+<li class="method public "><a href="#method_getCollections" title="getCollections() :: Get the collections associated with a user."><span class="description">Get the collections associated with a user.</span><pre>getCollections()</pre></a></li>
+<li class="method public "><a href="#method_getExportableValues" title="getExportableValues() :: Return an array of fields which can be exported."><span class="description">Return an array of fields which can be exported.</span><pre>getExportableValues()</pre></a></li>
+<li class="method public "><a href="#method_getFriends" title="getFriends() :: Gets this user's friends"><span class="description">Gets this user's friends</span><pre>getFriends()</pre></a></li>
+<li class="method public "><a href="#method_getFriendsObjects" title="getFriendsObjects() :: Get an array of ElggObjects owned by this user's friends."><span class="description">Get an array of ElggObjects owned by this user's friends.</span><pre>getFriendsObjects()</pre></a></li>
+<li class="method public "><a href="#method_getFriendsOf" title="getFriendsOf() :: Gets users who have made this user a friend"><span class="description">Gets users who have made this user a friend</span><pre>getFriendsOf()</pre></a></li>
+<li class="method public "><a href="#method_getGroups" title="getGroups() :: Gets the user's groups"><span class="description">Gets the user's groups</span><pre>getGroups()</pre></a></li>
+<li class="method public "><a href="#method_getObjects" title="getObjects() :: Get an array of ElggObject owned by this user."><span class="description">Get an array of ElggObject owned by this user.</span><pre>getObjects()</pre></a></li>
+<li class="method public "><a href="#method_getOwner" title="getOwner() :: If a user's owner is blank, return its own GUID as the owner"><span class="description">If a user's owner is blank, return its own GUID as the owner</span><pre>getOwner()</pre></a></li>
+<li class="method public "><a href="#method_getOwnerGUID" title="getOwnerGUID() :: Get a user's owner GUID"><span class="description">Get a user's owner GUID</span><pre>getOwnerGUID()</pre></a></li>
+<li class="method public "><a href="#method_getSites" title="getSites() :: Get sites that this user is a member of"><span class="description">Get sites that this user is a member of</span><pre>getSites()</pre></a></li>
+<li class="method public "><a href="#method_isAdmin" title="isAdmin() :: Is this user admin?"><span class="description">Is this user admin?</span><pre>isAdmin()</pre></a></li>
+<li class="method public "><a href="#method_isBanned" title="isBanned() :: Is this user banned or not?"><span class="description">Is this user banned or not?</span><pre>isBanned()</pre></a></li>
+<li class="method public "><a href="#method_isFriend" title="isFriend() :: Determines whether or not this user is a friend of the currently logged in user"><span class="description">Determines whether or not this user is a friend of the currently logged in user</span><pre>isFriend()</pre></a></li>
+<li class="method public "><a href="#method_isFriendOf" title="isFriendOf() :: Determines whether or not this user is another user's friend"><span class="description">Determines whether or not this user is another user's friend</span><pre>isFriendOf()</pre></a></li>
+<li class="method public "><a href="#method_isFriendsWith" title="isFriendsWith() :: Determines whether this user is friends with another user"><span class="description">Determines whether this user is friends with another user</span><pre>isFriendsWith()</pre></a></li>
+<li class="method public "><a href="#method_listFriends" title="listFriends() :: Lists the user's friends"><span class="description">Lists the user's friends</span><pre>listFriends()</pre></a></li>
+<li class="method public "><a href="#method_listGroups" title="listGroups() :: Lists the user's groups"><span class="description">Lists the user's groups</span><pre>listGroups()</pre></a></li>
+<li class="method public "><a href="#method_makeAdmin" title="makeAdmin() :: Make the user an admin"><span class="description">Make the user an admin</span><pre>makeAdmin()</pre></a></li>
+<li class="method public "><a href="#method_removeAdmin" title="removeAdmin() :: Remove the admin flag for user"><span class="description">Remove the admin flag for user</span><pre>removeAdmin()</pre></a></li>
+<li class="method public "><a href="#method_removeFriend" title="removeFriend() :: Removes a user as a friend"><span class="description">Removes a user as a friend</span><pre>removeFriend()</pre></a></li>
+<li class="method public "><a href="#method_removeFromSite" title="removeFromSite() :: Remove this user from a particular site"><span class="description">Remove this user from a particular site</span><pre>removeFromSite()</pre></a></li>
+<li class="method public "><a href="#method_save" title="save() :: Saves this user to the database."><span class="description">Saves this user to the database.</span><pre>save()</pre></a></li>
+<li class="method public "><a href="#method_unban" title="unban() :: Unban this user."><span class="description">Unban this user.</span><pre>unban()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="method protected "><a href="#method_initializeAttributes" title="initializeAttributes() :: Initialise the attributes array."><span class="description">Initialise the attributes array.</span><pre>initializeAttributes()</pre></a></li>
+<li class="method protected "><a href="#method_load" title="load() :: Load the ElggUser data from the database"><span class="description">Load the ElggUser data from the database</span><pre>load()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul>
+<li class="property public "><a href="#property_admin" title="$admin() :: 'yes' if the user is an administrator of the network, 'no' otherwise"><span class="description"></span><pre>$admin</pre></a></li>
+<li class="property public "><a href="#property_banned" title="$banned() :: 'yes' if the user is banned from the network, 'no' otherwise"><span class="description"></span><pre>$banned</pre></a></li>
+<li class="property public "><a href="#property_email" title="$email() :: The email address to which Elgg will send email notifications"><span class="description"></span><pre>$email</pre></a></li>
+<li class="property public "><a href="#property_language" title="$language() :: The language preference of the user (ISO 639-1 formatted)"><span class="description"></span><pre>$language</pre></a></li>
+<li class="property public "><a href="#property_name" title="$name() :: The display name that the user will be known by in the network"><span class="description"></span><pre>$name</pre></a></li>
+<li class="property public "><a href="#property_password" title="$password() :: The hashed password of the user"><span class="description"></span><pre>$password</pre></a></li>
+<li class="property public "><a href="#property_salt" title="$salt() :: The salt used to secure the password before hashing"><span class="description"></span><pre>$salt</pre></a></li>
+<li class="property public "><a href="#property_username" title="$username() :: The short, reference name for the user in the network"><span class="description"></span><pre>$username</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\ElggUser"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/ElggUser.html">ElggUser</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">ElggUser</p>
+<div class="details">
+<div class="long_description">Representation of a "user" in the system.</div>
+<table class="table table-bordered">
+<tr>
+<th>package</th>
+<td><a href="../packages/Elgg.Core.DataModel.User.html">Elgg.Core</a></td>
+</tr>
+<tr>
+<th>subpackage</th>
+<td>DataModel.User</td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>Construct a new user entity, optionally from a given id value.</h2>
+<pre>__construct(mixed $guid) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$guid</h4>
+<code>mixed</code><p>If an int, load that GUID.
+	If an entity table db row then will load the rest of the data.</p></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="Exception.html">\Exception</a></code></th>
+<td>if there was a problem creating the user.</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method___get"></a><div class="element clickable method public method___get" data-toggle="collapse" data-target=".method___get .collapse">
+<h2>Need to catch attempts to test user for admin.  Remove for 1.9</h2>
+<pre>__get(string $name) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>Name</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method___set"></a><div class="element clickable method public method___set" data-toggle="collapse" data-target=".method___set .collapse">
+<h2>Need to catch attempts to make a user an admin.  Remove for 1.9</h2>
+<pre>__set(string $name, mixed $value) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>Name</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>mixed</code><p>Value</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_addFriend"></a><div class="element clickable method public method_addFriend" data-toggle="collapse" data-target=".method_addFriend .collapse">
+<h2>Adds a user as a friend</h2>
+<pre>addFriend(int $friend_guid) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$friend_guid</h4>
+<code>int</code><p>The GUID of the user to add</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_addToSite"></a><div class="element clickable method public method_addToSite" data-toggle="collapse" data-target=".method_addToSite .collapse">
+<h2>Add this user to a particular site</h2>
+<pre>addToSite(int $site_guid) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$site_guid</h4>
+<code>int</code><p>The guid of the site to add it to</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_ban"></a><div class="element clickable method public method_ban" data-toggle="collapse" data-target=".method_ban .collapse">
+<h2>Ban this user.</h2>
+<pre>ban(string $reason) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$reason</h4>
+<code>string</code><p>Optional reason</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_canComment"></a><div class="element clickable method public method_canComment" data-toggle="collapse" data-target=".method_canComment .collapse">
+<h2>Can a user comment on this user?</h2>
+<pre>canComment(int $user_guid) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>see</th>
+<td><a href="%5CElggEntity::canComment()"></a></td>
+</tr>
+<tr>
+<th>since</th>
+<td>1.8.0</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$user_guid</h4>
+<code>int</code><p>User guid (default is logged in user)</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_countObjects"></a><div class="element clickable method public method_countObjects" data-toggle="collapse" data-target=".method_countObjects .collapse">
+<h2>Counts the number of ElggObjects owned by this user</h2>
+<pre>countObjects(string $subtype) : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$subtype</h4>
+<code>string</code><p>The subtypes of the objects, if any</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>int</code>The number of ElggObjects</div>
+</div></div>
+</div>
+<a id="method_delete"></a><div class="element clickable method public method_delete" data-toggle="collapse" data-target=".method_delete .collapse">
+<h2>User specific override of the entity delete method.</h2>
+<pre>delete() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_getCollections"></a><div class="element clickable method public method_getCollections" data-toggle="collapse" data-target=".method_getCollections .collapse">
+<h2>Get the collections associated with a user.</h2>
+<pre>getCollections(string $subtype, int $limit, int $offset) : array | false</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$subtype</h4>
+<code>string</code><p>Optionally, the subtype of result we want to limit to</p></div>
+<div class="subelement argument">
+<h4>$limit</h4>
+<code>int</code><p>The number of results to return</p></div>
+<div class="subelement argument">
+<h4>$offset</h4>
+<code>int</code><p>Any indexing offset</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code><code>false</code>
+</div>
+</div></div>
+</div>
+<a id="method_getExportableValues"></a><div class="element clickable method public method_getExportableValues" data-toggle="collapse" data-target=".method_getExportableValues .collapse">
+<h2>Return an array of fields which can be exported.</h2>
+<pre>getExportableValues() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_getFriends"></a><div class="element clickable method public method_getFriends" data-toggle="collapse" data-target=".method_getFriends .collapse">
+<h2>Gets this user's friends</h2>
+<pre>getFriends(string $subtype, int $limit, int $offset) : array | false</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$subtype</h4>
+<code>string</code><p>Optionally, the user subtype (leave blank for all)</p>
+</div>
+<div class="subelement argument">
+<h4>$limit</h4>
+<code>int</code><p>The number of users to retrieve</p></div>
+<div class="subelement argument">
+<h4>$offset</h4>
+<code>int</code><p>Indexing offset, if any</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code><code>false</code>Array of ElggUser, or false, depending on success</div>
+</div></div>
+</div>
+<a id="method_getFriendsObjects"></a><div class="element clickable method public method_getFriendsObjects" data-toggle="collapse" data-target=".method_getFriendsObjects .collapse">
+<h2>Get an array of ElggObjects owned by this user's friends.</h2>
+<pre>getFriendsObjects(string $subtype, int $limit, int $offset) : array | false</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$subtype</h4>
+<code>string</code><p>The subtype of the objects, if any</p></div>
+<div class="subelement argument">
+<h4>$limit</h4>
+<code>int</code><p>Number of results to return</p></div>
+<div class="subelement argument">
+<h4>$offset</h4>
+<code>int</code><p>Any indexing offset</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code><code>false</code>
+</div>
+</div></div>
+</div>
+<a id="method_getFriendsOf"></a><div class="element clickable method public method_getFriendsOf" data-toggle="collapse" data-target=".method_getFriendsOf .collapse">
+<h2>Gets users who have made this user a friend</h2>
+<pre>getFriendsOf(string $subtype, int $limit, int $offset) : array | false</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$subtype</h4>
+<code>string</code><p>Optionally, the user subtype (leave blank for all)</p>
+</div>
+<div class="subelement argument">
+<h4>$limit</h4>
+<code>int</code><p>The number of users to retrieve</p></div>
+<div class="subelement argument">
+<h4>$offset</h4>
+<code>int</code><p>Indexing offset, if any</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code><code>false</code>Array of ElggUser, or false, depending on success</div>
+</div></div>
+</div>
+<a id="method_getGroups"></a><div class="element clickable method public method_getGroups" data-toggle="collapse" data-target=".method_getGroups .collapse">
+<h2>Gets the user's groups</h2>
+<pre>getGroups(string $subtype, int $limit, int $offset) : array | false</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$subtype</h4>
+<code>string</code><p>Optionally, the subtype of user to filter to (leave blank for all)</p>
+</div>
+<div class="subelement argument">
+<h4>$limit</h4>
+<code>int</code><p>The number of groups to retrieve</p></div>
+<div class="subelement argument">
+<h4>$offset</h4>
+<code>int</code><p>Indexing offset, if any</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code><code>false</code>Array of ElggGroup, or false, depending on success</div>
+</div></div>
+</div>
+<a id="method_getObjects"></a><div class="element clickable method public method_getObjects" data-toggle="collapse" data-target=".method_getObjects .collapse">
+<h2>Get an array of ElggObject owned by this user.</h2>
+<pre>getObjects(string $subtype, int $limit, int $offset) : array | false</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$subtype</h4>
+<code>string</code><p>The subtype of the objects, if any</p></div>
+<div class="subelement argument">
+<h4>$limit</h4>
+<code>int</code><p>Number of results to return</p></div>
+<div class="subelement argument">
+<h4>$offset</h4>
+<code>int</code><p>Any indexing offset</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code><code>false</code>
+</div>
+</div></div>
+</div>
+<a id="method_getOwner"></a><div class="element clickable method public method_getOwner" data-toggle="collapse" data-target=".method_getOwner .collapse">
+<h2>If a user's owner is blank, return its own GUID as the owner</h2>
+<pre>getOwner() : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>deprecated</th>
+<td>1.8 Use getOwnerGUID()</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>int</code>User GUID</div>
+</div></div>
+</div>
+<a id="method_getOwnerGUID"></a><div class="element clickable method public method_getOwnerGUID" data-toggle="collapse" data-target=".method_getOwnerGUID .collapse">
+<h2>Get a user's owner GUID</h2>
+<pre>getOwnerGUID() : int</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">Returns it's own GUID if the user is not owned.</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>int</code></div>
+</div></div>
+</div>
+<a id="method_getSites"></a><div class="element clickable method public method_getSites" data-toggle="collapse" data-target=".method_getSites .collapse">
+<h2>Get sites that this user is a member of</h2>
+<pre>getSites(string $subtype, int $limit, int $offset) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$subtype</h4>
+<code>string</code><p>Optionally, the subtype of result we want to limit to</p></div>
+<div class="subelement argument">
+<h4>$limit</h4>
+<code>int</code><p>The number of results to return</p></div>
+<div class="subelement argument">
+<h4>$offset</h4>
+<code>int</code><p>Any indexing offset</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_isAdmin"></a><div class="element clickable method public method_isAdmin" data-toggle="collapse" data-target=".method_isAdmin .collapse">
+<h2>Is this user admin?</h2>
+<pre>isAdmin() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_isBanned"></a><div class="element clickable method public method_isBanned" data-toggle="collapse" data-target=".method_isBanned .collapse">
+<h2>Is this user banned or not?</h2>
+<pre>isBanned() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_isFriend"></a><div class="element clickable method public method_isFriend" data-toggle="collapse" data-target=".method_isFriend .collapse">
+<h2>Determines whether or not this user is a friend of the currently logged in user</h2>
+<pre>isFriend() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_isFriendOf"></a><div class="element clickable method public method_isFriendOf" data-toggle="collapse" data-target=".method_isFriendOf .collapse">
+<h2>Determines whether or not this user is another user's friend</h2>
+<pre>isFriendOf(int $user_guid) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$user_guid</h4>
+<code>int</code><p>The GUID of the user to check against</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_isFriendsWith"></a><div class="element clickable method public method_isFriendsWith" data-toggle="collapse" data-target=".method_isFriendsWith .collapse">
+<h2>Determines whether this user is friends with another user</h2>
+<pre>isFriendsWith(int $user_guid) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$user_guid</h4>
+<code>int</code><p>The GUID of the user to check against</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_listFriends"></a><div class="element clickable method public method_listFriends" data-toggle="collapse" data-target=".method_listFriends .collapse">
+<h2>Lists the user's friends</h2>
+<pre>listFriends(string $subtype, int $limit, array $vars) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>since</th>
+<td>1.8.0</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$subtype</h4>
+<code>string</code><p>Optionally, the user subtype (leave blank for all)</p>
+</div>
+<div class="subelement argument">
+<h4>$limit</h4>
+<code>int</code><p>The number of users to retrieve</p></div>
+<div class="subelement argument">
+<h4>$vars</h4>
+<code>array</code><p>Display variables for the user view</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Rendered list of friends</div>
+</div></div>
+</div>
+<a id="method_listGroups"></a><div class="element clickable method public method_listGroups" data-toggle="collapse" data-target=".method_listGroups .collapse">
+<h2>Lists the user's groups</h2>
+<pre>listGroups(string $subtype, int $limit, int $offset) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$subtype</h4>
+<code>string</code><p>Optionally, the user subtype (leave blank for all)</p>
+</div>
+<div class="subelement argument">
+<h4>$limit</h4>
+<code>int</code><p>The number of users to retrieve</p></div>
+<div class="subelement argument">
+<h4>$offset</h4>
+<code>int</code><p>Indexing offset, if any</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_makeAdmin"></a><div class="element clickable method public method_makeAdmin" data-toggle="collapse" data-target=".method_makeAdmin .collapse">
+<h2>Make the user an admin</h2>
+<pre>makeAdmin() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_removeAdmin"></a><div class="element clickable method public method_removeAdmin" data-toggle="collapse" data-target=".method_removeAdmin .collapse">
+<h2>Remove the admin flag for user</h2>
+<pre>removeAdmin() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_removeFriend"></a><div class="element clickable method public method_removeFriend" data-toggle="collapse" data-target=".method_removeFriend .collapse">
+<h2>Removes a user as a friend</h2>
+<pre>removeFriend(int $friend_guid) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$friend_guid</h4>
+<code>int</code><p>The GUID of the user to remove</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_removeFromSite"></a><div class="element clickable method public method_removeFromSite" data-toggle="collapse" data-target=".method_removeFromSite .collapse">
+<h2>Remove this user from a particular site</h2>
+<pre>removeFromSite(int $site_guid) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$site_guid</h4>
+<code>int</code><p>The guid of the site to remove it from</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_save"></a><div class="element clickable method public method_save" data-toggle="collapse" data-target=".method_save .collapse">
+<h2>Saves this user to the database.</h2>
+<pre>save() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_unban"></a><div class="element clickable method public method_unban" data-toggle="collapse" data-target=".method_unban .collapse">
+<h2>Unban this user.</h2>
+<pre>unban() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_initializeAttributes"></a><div class="element clickable method protected method_initializeAttributes" data-toggle="collapse" data-target=".method_initializeAttributes .collapse">
+<h2>Initialise the attributes array.</h2>
+<pre>initializeAttributes() : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description">This is vital to distinguish between metadata and base parameters.
+
+Place your base parameters here.</div></div></div>
+</div>
+<a id="method_load"></a><div class="element clickable method protected method_load" data-toggle="collapse" data-target=".method_load .collapse">
+<h2>Load the ElggUser data from the database</h2>
+<pre>load(mixed $guid) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$guid</h4>
+<code>mixed</code><p>ElggUser GUID or stdClass database row from entity table</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_admin"> </a><div class="element clickable property public property_admin" data-toggle="collapse" data-target=".property_admin .collapse">
+<h2>'yes' if the user is an administrator of the network, 'no' otherwise</h2>
+<pre>$admin : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>magic</th>
+<td></td>
+</tr>
+<tr>
+<th>property</th>
+<td>'yes' if the user is an administrator of the network, 'no' otherwise</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_banned"> </a><div class="element clickable property public property_banned" data-toggle="collapse" data-target=".property_banned .collapse">
+<h2>'yes' if the user is banned from the network, 'no' otherwise</h2>
+<pre>$banned : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>magic</th>
+<td></td>
+</tr>
+<tr>
+<th>property</th>
+<td>'yes' if the user is banned from the network, 'no' otherwise</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_email"> </a><div class="element clickable property public property_email" data-toggle="collapse" data-target=".property_email .collapse">
+<h2>The email address to which Elgg will send email notifications</h2>
+<pre>$email : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>magic</th>
+<td></td>
+</tr>
+<tr>
+<th>property</th>
+<td>The email address to which Elgg will send email notifications</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_language"> </a><div class="element clickable property public property_language" data-toggle="collapse" data-target=".property_language .collapse">
+<h2>The language preference of the user (ISO 639-1 formatted)</h2>
+<pre>$language : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>magic</th>
+<td></td>
+</tr>
+<tr>
+<th>property</th>
+<td>The language preference of the user (ISO 639-1 formatted)</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_name"> </a><div class="element clickable property public property_name" data-toggle="collapse" data-target=".property_name .collapse">
+<h2>The display name that the user will be known by in the network</h2>
+<pre>$name : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>magic</th>
+<td></td>
+</tr>
+<tr>
+<th>property</th>
+<td>The display name that the user will be known by in the network</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_password"> </a><div class="element clickable property public property_password" data-toggle="collapse" data-target=".property_password .collapse">
+<h2>The hashed password of the user</h2>
+<pre>$password : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>magic</th>
+<td></td>
+</tr>
+<tr>
+<th>property</th>
+<td>The hashed password of the user</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_salt"> </a><div class="element clickable property public property_salt" data-toggle="collapse" data-target=".property_salt .collapse">
+<h2>The salt used to secure the password before hashing</h2>
+<pre>$salt : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>magic</th>
+<td></td>
+</tr>
+<tr>
+<th>property</th>
+<td>The salt used to secure the password before hashing</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="property_username"> </a><div class="element clickable property public property_username" data-toggle="collapse" data-target=".property_username .collapse">
+<h2>The short, reference name for the user in the network</h2>
+<pre>$username : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>magic</th>
+<td></td>
+</tr>
+<tr>
+<th>property</th>
+<td>The short, reference name for the user in the network</td>
+</tr>
+</table>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.1.0
+</a> and<br>
+            generated on 2013-12-03T13:06:10+01:00.<br></footer></div>
+</div>
+</body>
+</html>

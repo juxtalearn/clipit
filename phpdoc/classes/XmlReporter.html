@@ -1,0 +1,465 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>API Documentation » \XmlReporter</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">API Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/clipit.html"><i class="icon-th"></i> clipit</a></li>
+<li><a href="../namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Elgg.html"><i class="icon-folder-open"></i> Elgg</a></li>
+<li><a href="../packages/Elgg.Core.html"><i class="icon-folder-open"></i> Elgg.Core</a></li>
+<li><a href="../packages/Elgg.Core.Plugin.html"><i class="icon-folder-open"></i> Elgg.Core.Plugin</a></li>
+<li><a href="../packages/ElggAPIAdmin.html"><i class="icon-folder-open"></i> ElggAPIAdmin</a></li>
+<li><a href="../packages/ElggDiagnostics.html"><i class="icon-folder-open"></i> ElggDiagnostics</a></li>
+<li><a href="../packages/ElggEmbed.html"><i class="icon-folder-open"></i> ElggEmbed</a></li>
+<li><a href="../packages/ElggFile.html"><i class="icon-folder-open"></i> ElggFile</a></li>
+<li><a href="../packages/ElggGarbageCollector.html"><i class="icon-folder-open"></i> ElggGarbageCollector</a></li>
+<li><a href="../packages/ElggGroups.html"><i class="icon-folder-open"></i> ElggGroups</a></li>
+<li><a href="../packages/ElggLogBrowser.html"><i class="icon-folder-open"></i> ElggLogBrowser</a></li>
+<li><a href="../packages/ElggLogRotate.html"><i class="icon-folder-open"></i> ElggLogRotate</a></li>
+<li><a href="../packages/ElggMessages.html"><i class="icon-folder-open"></i> ElggMessages</a></li>
+<li><a href="../packages/ElggNotifications.html"><i class="icon-folder-open"></i> ElggNotifications</a></li>
+<li><a href="../packages/ElggProfile.html"><i class="icon-folder-open"></i> ElggProfile</a></li>
+<li><a href="../packages/ElggTinyMCE.html"><i class="icon-folder-open"></i> ElggTinyMCE</a></li>
+<li><a href="../packages/ElgghtmLawed.html"><i class="icon-folder-open"></i> ElgghtmLawed</a></li>
+<li><a href="../packages/Embed%20Video%20Library.html"><i class="icon-folder-open"></i> Embed Video Library</a></li>
+<li><a href="../packages/PlaceLocalInclude.html"><i class="icon-folder-open"></i> PlaceLocalInclude</a></li>
+<li><a href="../packages/SimpleTest.html"><i class="icon-folder-open"></i> SimpleTest</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+     @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20MockObjects%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   MockObjects
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20MockObjects.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage MockObjects</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+     @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@abstract.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @abstract</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20WebTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage WebTester</a></li>
+<li><a href="../packages/%5Bname%5D.html"><i class="icon-folder-open"></i> [name]</a></li>
+<li><a href="../packages/clipit.html"><i class="icon-folder-open"></i> clipit</a></li>
+<li><a href="../packages/event_calendar.html"><i class="icon-folder-open"></i> event_calendar</a></li>
+<li><a href="../packages/pebs.html"><i class="icon-folder-open"></i> pebs</a></li>
+<li><a href="../packages/profile_manager.html"><i class="icon-folder-open"></i> profile_manager</a></li>
+<li><a href="../packages/veeplay.html"><i class="icon-folder-open"></i> veeplay</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">4473</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">250</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method_XmlReporter" title="XmlReporter() :: Sets up indentation and namespace."><span class="description">Sets up indentation and namespace.</span><pre>XmlReporter()</pre></a></li>
+<li class="method public "><a href="#method__getIndent" title="_getIndent() :: Calculates the pretty printing indent level
+   from the current level of nesting."><span class="description">Calculates the pretty printing indent level
+   from the current level of nesting.</span><pre>_getIndent()</pre></a></li>
+<li class="method public "><a href="#method_paintCaseEnd" title="paintCaseEnd() :: Paints the end of a test case."><span class="description">Paints the end of a test case.</span><pre>paintCaseEnd()</pre></a></li>
+<li class="method public "><a href="#method_paintCaseStart" title="paintCaseStart() :: Paints the start of a test case."><span class="description">Paints the start of a test case.</span><pre>paintCaseStart()</pre></a></li>
+<li class="method public "><a href="#method_paintError" title="paintError() :: Paints error as XML."><span class="description">Paints error as XML.</span><pre>paintError()</pre></a></li>
+<li class="method public "><a href="#method_paintException" title="paintException() :: Paints exception as XML."><span class="description">Paints exception as XML.</span><pre>paintException()</pre></a></li>
+<li class="method public "><a href="#method_paintFail" title="paintFail() :: Paints failure as XML."><span class="description">Paints failure as XML.</span><pre>paintFail()</pre></a></li>
+<li class="method public "><a href="#method_paintFooter" title="paintFooter() :: Paints the test document footer."><span class="description">Paints the test document footer.</span><pre>paintFooter()</pre></a></li>
+<li class="method public "><a href="#method_paintFormattedMessage" title="paintFormattedMessage() :: Paints a formatted ASCII message such as a
+   variable dump."><span class="description">Paints a formatted ASCII message such as a
+   variable dump.</span><pre>paintFormattedMessage()</pre></a></li>
+<li class="method public "><a href="#method_paintGroupEnd" title="paintGroupEnd() :: Paints the end of a group test."><span class="description">Paints the end of a group test.</span><pre>paintGroupEnd()</pre></a></li>
+<li class="method public "><a href="#method_paintGroupStart" title="paintGroupStart() :: Paints the start of a group test."><span class="description">Paints the start of a group test.</span><pre>paintGroupStart()</pre></a></li>
+<li class="method public "><a href="#method_paintHeader" title="paintHeader() :: Paints the test document header."><span class="description">Paints the test document header.</span><pre>paintHeader()</pre></a></li>
+<li class="method public "><a href="#method_paintMessage" title="paintMessage() :: Paints a simple supplementary message."><span class="description">Paints a simple supplementary message.</span><pre>paintMessage()</pre></a></li>
+<li class="method public "><a href="#method_paintMethodEnd" title="paintMethodEnd() :: Paints the end of a test method."><span class="description">Paints the end of a test method.</span><pre>paintMethodEnd()</pre></a></li>
+<li class="method public "><a href="#method_paintMethodStart" title="paintMethodStart() :: Paints the start of a test method."><span class="description">Paints the start of a test method.</span><pre>paintMethodStart()</pre></a></li>
+<li class="method public "><a href="#method_paintPass" title="paintPass() :: Paints pass as XML."><span class="description">Paints pass as XML.</span><pre>paintPass()</pre></a></li>
+<li class="method public "><a href="#method_paintSignal" title="paintSignal() :: Serialises the event object."><span class="description">Serialises the event object.</span><pre>paintSignal()</pre></a></li>
+<li class="method public "><a href="#method_paintSkip" title="paintSkip() :: Paints the skipping message and tag."><span class="description">Paints the skipping message and tag.</span><pre>paintSkip()</pre></a></li>
+<li class="method public "><a href="#method_toParsedXml" title="toParsedXml() :: Converts character string to parsed XML
+   entities string."><span class="description">Converts character string to parsed XML
+   entities string.</span><pre>toParsedXml()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul>
+<li class="property public "><a href="#property__indent" title="$_indent() :: "><span class="description"></span><pre>$_indent</pre></a></li>
+<li class="property public "><a href="#property__namespace" title="$_namespace() :: "><span class="description"></span><pre>$_namespace</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\XmlReporter"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/XmlReporter.html">XmlReporter</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">Creates the XML needed for remote communication
+   by SimpleTest.</p>
+<div class="details">
+<div class="long_description">@package SimpleTest</div>
+<table class="table table-bordered"><tr>
+<th>subpackage</th>
+<td>UnitTester</td>
+</tr></table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method_XmlReporter"></a><div class="element clickable method public method_XmlReporter" data-toggle="collapse" data-target=".method_XmlReporter .collapse">
+<h2>Sets up indentation and namespace.</h2>
+<pre>XmlReporter($namespace, string $indent) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $namespace        Namespace to add to each tag.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$namespace</h4></div>
+<div class="subelement argument">
+<h4>$indent</h4>
+<code>string</code><p>Indenting to add on each nesting.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method__getIndent"></a><div class="element clickable method public method__getIndent" data-toggle="collapse" data-target=".method__getIndent .collapse">
+<h2>Calculates the pretty printing indent level
+   from the current level of nesting.</h2>
+<pre>_getIndent($offset) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param integer $offset  Extra indenting level.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$offset</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Leading space.
+   @access protected</div>
+</div></div>
+</div>
+<a id="method_paintCaseEnd"></a><div class="element clickable method public method_paintCaseEnd" data-toggle="collapse" data-target=".method_paintCaseEnd .collapse">
+<h2>Paints the end of a test case.</h2>
+<pre>paintCaseEnd($test_name) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $test_name   Name of test that is ending.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$test_name</h4></div>
+</div></div>
+</div>
+<a id="method_paintCaseStart"></a><div class="element clickable method public method_paintCaseStart" data-toggle="collapse" data-target=".method_paintCaseStart .collapse">
+<h2>Paints the start of a test case.</h2>
+<pre>paintCaseStart($test_name) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $test_name   Name of test that is starting.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$test_name</h4></div>
+</div></div>
+</div>
+<a id="method_paintError"></a><div class="element clickable method public method_paintError" data-toggle="collapse" data-target=".method_paintError .collapse">
+<h2>Paints error as XML.</h2>
+<pre>paintError($message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $message        Message to encode.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$message</h4></div>
+</div></div>
+</div>
+<a id="method_paintException"></a><div class="element clickable method public method_paintException" data-toggle="collapse" data-target=".method_paintException .collapse">
+<h2>Paints exception as XML.</h2>
+<pre>paintException($exception) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param Exception $exception    Exception to encode.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$exception</h4></div>
+</div></div>
+</div>
+<a id="method_paintFail"></a><div class="element clickable method public method_paintFail" data-toggle="collapse" data-target=".method_paintFail .collapse">
+<h2>Paints failure as XML.</h2>
+<pre>paintFail($message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $message        Message to encode.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$message</h4></div>
+</div></div>
+</div>
+<a id="method_paintFooter"></a><div class="element clickable method public method_paintFooter" data-toggle="collapse" data-target=".method_paintFooter .collapse">
+<h2>Paints the test document footer.</h2>
+<pre>paintFooter($test_name) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $test_name        The top level test.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public
+   @abstract</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$test_name</h4></div>
+</div></div>
+</div>
+<a id="method_paintFormattedMessage"></a><div class="element clickable method public method_paintFormattedMessage" data-toggle="collapse" data-target=".method_paintFormattedMessage .collapse">
+<h2>Paints a formatted ASCII message such as a
+   variable dump.</h2>
+<pre>paintFormattedMessage($message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $message        Text to display.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$message</h4></div>
+</div></div>
+</div>
+<a id="method_paintGroupEnd"></a><div class="element clickable method public method_paintGroupEnd" data-toggle="collapse" data-target=".method_paintGroupEnd .collapse">
+<h2>Paints the end of a group test.</h2>
+<pre>paintGroupEnd($test_name) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $test_name   Name of test that is ending.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$test_name</h4></div>
+</div></div>
+</div>
+<a id="method_paintGroupStart"></a><div class="element clickable method public method_paintGroupStart" data-toggle="collapse" data-target=".method_paintGroupStart .collapse">
+<h2>Paints the start of a group test.</h2>
+<pre>paintGroupStart($test_name, integer $size) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $test_name   Name of test that is starting.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$test_name</h4></div>
+<div class="subelement argument">
+<h4>$size</h4>
+<code>integer</code><p>Number of test cases starting.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_paintHeader"></a><div class="element clickable method public method_paintHeader" data-toggle="collapse" data-target=".method_paintHeader .collapse">
+<h2>Paints the test document header.</h2>
+<pre>paintHeader($test_name) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $test_name     First test top level
+                                to start.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public
+   @abstract</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$test_name</h4></div>
+</div></div>
+</div>
+<a id="method_paintMessage"></a><div class="element clickable method public method_paintMessage" data-toggle="collapse" data-target=".method_paintMessage .collapse">
+<h2>Paints a simple supplementary message.</h2>
+<pre>paintMessage($message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $message        Text to display.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$message</h4></div>
+</div></div>
+</div>
+<a id="method_paintMethodEnd"></a><div class="element clickable method public method_paintMethodEnd" data-toggle="collapse" data-target=".method_paintMethodEnd .collapse">
+<h2>Paints the end of a test method.</h2>
+<pre>paintMethodEnd($test_name) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $test_name   Name of test that is ending.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$test_name</h4></div>
+</div></div>
+</div>
+<a id="method_paintMethodStart"></a><div class="element clickable method public method_paintMethodStart" data-toggle="collapse" data-target=".method_paintMethodStart .collapse">
+<h2>Paints the start of a test method.</h2>
+<pre>paintMethodStart($test_name) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $test_name   Name of test that is starting.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$test_name</h4></div>
+</div></div>
+</div>
+<a id="method_paintPass"></a><div class="element clickable method public method_paintPass" data-toggle="collapse" data-target=".method_paintPass .collapse">
+<h2>Paints pass as XML.</h2>
+<pre>paintPass($message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $message        Message to encode.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$message</h4></div>
+</div></div>
+</div>
+<a id="method_paintSignal"></a><div class="element clickable method public method_paintSignal" data-toggle="collapse" data-target=".method_paintSignal .collapse">
+<h2>Serialises the event object.</h2>
+<pre>paintSignal($type, mixed $payload) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $type        Event type as text.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$type</h4></div>
+<div class="subelement argument">
+<h4>$payload</h4>
+<code>mixed</code><p>Message or object.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_paintSkip"></a><div class="element clickable method public method_paintSkip" data-toggle="collapse" data-target=".method_paintSkip .collapse">
+<h2>Paints the skipping message and tag.</h2>
+<pre>paintSkip($message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string $message        Text to display in skip tag.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$message</h4></div>
+</div></div>
+</div>
+<a id="method_toParsedXml"></a><div class="element clickable method public method_toParsedXml" data-toggle="collapse" data-target=".method_toParsedXml .collapse">
+<h2>Converts character string to parsed XML
+   entities string.</h2>
+<pre>toParsedXml($text) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param string text        Unparsed character data.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$text</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Parsed character data.
+   @access public</div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property__indent"> </a><div class="element clickable property public property__indent" data-toggle="collapse" data-target=".property__indent .collapse">
+<h2>$_indent</h2>
+<pre>$_indent </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__namespace"> </a><div class="element clickable property public property__namespace" data-toggle="collapse" data-target=".property__namespace .collapse">
+<h2>$_namespace</h2>
+<pre>$_namespace </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.1.0
+</a> and<br>
+            generated on 2013-12-03T13:07:07+01:00.<br></footer></div>
+</div>
+</body>
+</html>

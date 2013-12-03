@@ -1,0 +1,692 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>API Documentation » \MarkdownExtra_Parser</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">API Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/clipit.html"><i class="icon-th"></i> clipit</a></li>
+<li><a href="../namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Elgg.html"><i class="icon-folder-open"></i> Elgg</a></li>
+<li><a href="../packages/Elgg.Core.html"><i class="icon-folder-open"></i> Elgg.Core</a></li>
+<li><a href="../packages/Elgg.Core.Plugin.html"><i class="icon-folder-open"></i> Elgg.Core.Plugin</a></li>
+<li><a href="../packages/ElggAPIAdmin.html"><i class="icon-folder-open"></i> ElggAPIAdmin</a></li>
+<li><a href="../packages/ElggDiagnostics.html"><i class="icon-folder-open"></i> ElggDiagnostics</a></li>
+<li><a href="../packages/ElggEmbed.html"><i class="icon-folder-open"></i> ElggEmbed</a></li>
+<li><a href="../packages/ElggFile.html"><i class="icon-folder-open"></i> ElggFile</a></li>
+<li><a href="../packages/ElggGarbageCollector.html"><i class="icon-folder-open"></i> ElggGarbageCollector</a></li>
+<li><a href="../packages/ElggGroups.html"><i class="icon-folder-open"></i> ElggGroups</a></li>
+<li><a href="../packages/ElggLogBrowser.html"><i class="icon-folder-open"></i> ElggLogBrowser</a></li>
+<li><a href="../packages/ElggLogRotate.html"><i class="icon-folder-open"></i> ElggLogRotate</a></li>
+<li><a href="../packages/ElggMessages.html"><i class="icon-folder-open"></i> ElggMessages</a></li>
+<li><a href="../packages/ElggNotifications.html"><i class="icon-folder-open"></i> ElggNotifications</a></li>
+<li><a href="../packages/ElggProfile.html"><i class="icon-folder-open"></i> ElggProfile</a></li>
+<li><a href="../packages/ElggTinyMCE.html"><i class="icon-folder-open"></i> ElggTinyMCE</a></li>
+<li><a href="../packages/ElgghtmLawed.html"><i class="icon-folder-open"></i> ElgghtmLawed</a></li>
+<li><a href="../packages/Embed%20Video%20Library.html"><i class="icon-folder-open"></i> Embed Video Library</a></li>
+<li><a href="../packages/PlaceLocalInclude.html"><i class="icon-folder-open"></i> PlaceLocalInclude</a></li>
+<li><a href="../packages/SimpleTest.html"><i class="icon-folder-open"></i> SimpleTest</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+     @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20MockObjects%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   MockObjects
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20MockObjects.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage MockObjects</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+     @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@abstract.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @abstract</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20WebTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage WebTester</a></li>
+<li><a href="../packages/%5Bname%5D.html"><i class="icon-folder-open"></i> [name]</a></li>
+<li><a href="../packages/clipit.html"><i class="icon-folder-open"></i> clipit</a></li>
+<li><a href="../packages/event_calendar.html"><i class="icon-folder-open"></i> event_calendar</a></li>
+<li><a href="../packages/pebs.html"><i class="icon-folder-open"></i> pebs</a></li>
+<li><a href="../packages/profile_manager.html"><i class="icon-folder-open"></i> profile_manager</a></li>
+<li><a href="../packages/veeplay.html"><i class="icon-folder-open"></i> veeplay</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">4473</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">250</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method_MarkdownExtra_Parser" title="MarkdownExtra_Parser() :: "><span class="description">MarkdownExtra_Parser()
+        </span><pre>MarkdownExtra_Parser()</pre></a></li>
+<li class="method public "><a href="#method__appendFootnotes_callback" title="_appendFootnotes_callback() :: "><span class="description">_appendFootnotes_callback()
+        </span><pre>_appendFootnotes_callback()</pre></a></li>
+<li class="method public "><a href="#method__doAbbreviations_callback" title="_doAbbreviations_callback() :: "><span class="description">_doAbbreviations_callback()
+        </span><pre>_doAbbreviations_callback()</pre></a></li>
+<li class="method public "><a href="#method__doDefLists_callback" title="_doDefLists_callback() :: "><span class="description">_doDefLists_callback()
+        </span><pre>_doDefLists_callback()</pre></a></li>
+<li class="method public "><a href="#method__doFencedCodeBlocks_callback" title="_doFencedCodeBlocks_callback() :: "><span class="description">_doFencedCodeBlocks_callback()
+        </span><pre>_doFencedCodeBlocks_callback()</pre></a></li>
+<li class="method public "><a href="#method__doFencedCodeBlocks_newlines" title="_doFencedCodeBlocks_newlines() :: "><span class="description">_doFencedCodeBlocks_newlines()
+        </span><pre>_doFencedCodeBlocks_newlines()</pre></a></li>
+<li class="method public "><a href="#method__doHeaders_attr" title="_doHeaders_attr() :: "><span class="description">_doHeaders_attr()
+        </span><pre>_doHeaders_attr()</pre></a></li>
+<li class="method public "><a href="#method__doHeaders_callback_atx" title="_doHeaders_callback_atx() :: "><span class="description">_doHeaders_callback_atx()
+        </span><pre>_doHeaders_callback_atx()</pre></a></li>
+<li class="method public "><a href="#method__doHeaders_callback_setext" title="_doHeaders_callback_setext() :: "><span class="description">_doHeaders_callback_setext()
+        </span><pre>_doHeaders_callback_setext()</pre></a></li>
+<li class="method public "><a href="#method__doTable_callback" title="_doTable_callback() :: "><span class="description">_doTable_callback()
+        </span><pre>_doTable_callback()</pre></a></li>
+<li class="method public "><a href="#method__doTable_leadingPipe_callback" title="_doTable_leadingPipe_callback() :: "><span class="description">_doTable_leadingPipe_callback()
+        </span><pre>_doTable_leadingPipe_callback()</pre></a></li>
+<li class="method public "><a href="#method__hashHTMLBlocks_inHTML" title="_hashHTMLBlocks_inHTML() :: "><span class="description">_hashHTMLBlocks_inHTML()
+        </span><pre>_hashHTMLBlocks_inHTML()</pre></a></li>
+<li class="method public "><a href="#method__hashHTMLBlocks_inMarkdown" title="_hashHTMLBlocks_inMarkdown() :: "><span class="description">_hashHTMLBlocks_inMarkdown()
+        </span><pre>_hashHTMLBlocks_inMarkdown()</pre></a></li>
+<li class="method public "><a href="#method__processDefListItems_callback_dd" title="_processDefListItems_callback_dd() :: "><span class="description">_processDefListItems_callback_dd()
+        </span><pre>_processDefListItems_callback_dd()</pre></a></li>
+<li class="method public "><a href="#method__processDefListItems_callback_dt" title="_processDefListItems_callback_dt() :: "><span class="description">_processDefListItems_callback_dt()
+        </span><pre>_processDefListItems_callback_dt()</pre></a></li>
+<li class="method public "><a href="#method__stripAbbreviations_callback" title="_stripAbbreviations_callback() :: "><span class="description">_stripAbbreviations_callback()
+        </span><pre>_stripAbbreviations_callback()</pre></a></li>
+<li class="method public "><a href="#method__stripFootnotes_callback" title="_stripFootnotes_callback() :: "><span class="description">_stripFootnotes_callback()
+        </span><pre>_stripFootnotes_callback()</pre></a></li>
+<li class="method public "><a href="#method_appendFootnotes" title="appendFootnotes() :: "><span class="description">appendFootnotes()
+        </span><pre>appendFootnotes()</pre></a></li>
+<li class="method public "><a href="#method_doAbbreviations" title="doAbbreviations() :: "><span class="description">doAbbreviations()
+        </span><pre>doAbbreviations()</pre></a></li>
+<li class="method public "><a href="#method_doDefLists" title="doDefLists() :: "><span class="description">doDefLists()
+        </span><pre>doDefLists()</pre></a></li>
+<li class="method public "><a href="#method_doFencedCodeBlocks" title="doFencedCodeBlocks() :: "><span class="description">doFencedCodeBlocks()
+        </span><pre>doFencedCodeBlocks()</pre></a></li>
+<li class="method public "><a href="#method_doFootnotes" title="doFootnotes() :: "><span class="description">doFootnotes()
+        </span><pre>doFootnotes()</pre></a></li>
+<li class="method public "><a href="#method_doHeaders" title="doHeaders() :: "><span class="description">doHeaders()
+        </span><pre>doHeaders()</pre></a></li>
+<li class="method public "><a href="#method_doTables" title="doTables() :: "><span class="description">doTables()
+        </span><pre>doTables()</pre></a></li>
+<li class="method public "><a href="#method_formParagraphs" title="formParagraphs() :: "><span class="description">formParagraphs()
+        </span><pre>formParagraphs()</pre></a></li>
+<li class="method public "><a href="#method_hashClean" title="hashClean() :: "><span class="description">hashClean()
+        </span><pre>hashClean()</pre></a></li>
+<li class="method public "><a href="#method_hashHTMLBlocks" title="hashHTMLBlocks() :: "><span class="description">hashHTMLBlocks()
+        </span><pre>hashHTMLBlocks()</pre></a></li>
+<li class="method public "><a href="#method_processDefListItems" title="processDefListItems() :: "><span class="description">processDefListItems()
+        </span><pre>processDefListItems()</pre></a></li>
+<li class="method public "><a href="#method_setup" title="setup() :: "><span class="description">setup()
+        </span><pre>setup()</pre></a></li>
+<li class="method public "><a href="#method_stripAbbreviations" title="stripAbbreviations() :: "><span class="description">stripAbbreviations()
+        </span><pre>stripAbbreviations()</pre></a></li>
+<li class="method public "><a href="#method_stripFootnotes" title="stripFootnotes() :: "><span class="description">stripFootnotes()
+        </span><pre>stripFootnotes()</pre></a></li>
+<li class="method public "><a href="#method_teardown" title="teardown() :: "><span class="description">teardown()
+        </span><pre>teardown()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul>
+<li class="property public "><a href="#property_abbr_desciptions" title="$abbr_desciptions() :: "><span class="description"></span><pre>$abbr_desciptions</pre></a></li>
+<li class="property public "><a href="#property_abbr_word_re" title="$abbr_word_re() :: "><span class="description"></span><pre>$abbr_word_re</pre></a></li>
+<li class="property public "><a href="#property_auto_close_tags_re" title="$auto_close_tags_re() :: "><span class="description"></span><pre>$auto_close_tags_re</pre></a></li>
+<li class="property public "><a href="#property_block_tags_re" title="$block_tags_re() :: "><span class="description"></span><pre>$block_tags_re</pre></a></li>
+<li class="property public "><a href="#property_clean_tags_re" title="$clean_tags_re() :: "><span class="description"></span><pre>$clean_tags_re</pre></a></li>
+<li class="property public "><a href="#property_contain_span_tags_re" title="$contain_span_tags_re() :: "><span class="description"></span><pre>$contain_span_tags_re</pre></a></li>
+<li class="property public "><a href="#property_context_block_tags_re" title="$context_block_tags_re() :: "><span class="description"></span><pre>$context_block_tags_re</pre></a></li>
+<li class="property public "><a href="#property_em_relist" title="$em_relist() :: "><span class="description"></span><pre>$em_relist</pre></a></li>
+<li class="property public "><a href="#property_em_strong_relist" title="$em_strong_relist() :: "><span class="description"></span><pre>$em_strong_relist</pre></a></li>
+<li class="property public "><a href="#property_fn_backlink_class" title="$fn_backlink_class() :: "><span class="description"></span><pre>$fn_backlink_class</pre></a></li>
+<li class="property public "><a href="#property_fn_backlink_title" title="$fn_backlink_title() :: "><span class="description"></span><pre>$fn_backlink_title</pre></a></li>
+<li class="property public "><a href="#property_fn_id_prefix" title="$fn_id_prefix() :: "><span class="description"></span><pre>$fn_id_prefix</pre></a></li>
+<li class="property public "><a href="#property_fn_link_class" title="$fn_link_class() :: "><span class="description"></span><pre>$fn_link_class</pre></a></li>
+<li class="property public "><a href="#property_fn_link_title" title="$fn_link_title() :: "><span class="description"></span><pre>$fn_link_title</pre></a></li>
+<li class="property public "><a href="#property_footnote_counter" title="$footnote_counter() :: "><span class="description"></span><pre>$footnote_counter</pre></a></li>
+<li class="property public "><a href="#property_footnotes" title="$footnotes() :: "><span class="description"></span><pre>$footnotes</pre></a></li>
+<li class="property public "><a href="#property_footnotes_ordered" title="$footnotes_ordered() :: "><span class="description"></span><pre>$footnotes_ordered</pre></a></li>
+<li class="property public "><a href="#property_predef_abbr" title="$predef_abbr() :: "><span class="description"></span><pre>$predef_abbr</pre></a></li>
+<li class="property public "><a href="#property_strong_relist" title="$strong_relist() :: "><span class="description"></span><pre>$strong_relist</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\MarkdownExtra_Parser"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/MarkdownExtra_Parser.html">MarkdownExtra_Parser</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description"></p>
+<div class="details">
+<div class="long_description"></div>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method_MarkdownExtra_Parser"></a><div class="element clickable method public method_MarkdownExtra_Parser" data-toggle="collapse" data-target=".method_MarkdownExtra_Parser .collapse">
+<h2>MarkdownExtra_Parser()
+        </h2>
+<pre>MarkdownExtra_Parser() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method__appendFootnotes_callback"></a><div class="element clickable method public method__appendFootnotes_callback" data-toggle="collapse" data-target=".method__appendFootnotes_callback .collapse">
+<h2>_appendFootnotes_callback()
+        </h2>
+<pre>_appendFootnotes_callback($matches) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$matches</h4></div>
+</div></div>
+</div>
+<a id="method__doAbbreviations_callback"></a><div class="element clickable method public method__doAbbreviations_callback" data-toggle="collapse" data-target=".method__doAbbreviations_callback .collapse">
+<h2>_doAbbreviations_callback()
+        </h2>
+<pre>_doAbbreviations_callback($matches) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$matches</h4></div>
+</div></div>
+</div>
+<a id="method__doDefLists_callback"></a><div class="element clickable method public method__doDefLists_callback" data-toggle="collapse" data-target=".method__doDefLists_callback .collapse">
+<h2>_doDefLists_callback()
+        </h2>
+<pre>_doDefLists_callback($matches) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$matches</h4></div>
+</div></div>
+</div>
+<a id="method__doFencedCodeBlocks_callback"></a><div class="element clickable method public method__doFencedCodeBlocks_callback" data-toggle="collapse" data-target=".method__doFencedCodeBlocks_callback .collapse">
+<h2>_doFencedCodeBlocks_callback()
+        </h2>
+<pre>_doFencedCodeBlocks_callback($matches) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$matches</h4></div>
+</div></div>
+</div>
+<a id="method__doFencedCodeBlocks_newlines"></a><div class="element clickable method public method__doFencedCodeBlocks_newlines" data-toggle="collapse" data-target=".method__doFencedCodeBlocks_newlines .collapse">
+<h2>_doFencedCodeBlocks_newlines()
+        </h2>
+<pre>_doFencedCodeBlocks_newlines($matches) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$matches</h4></div>
+</div></div>
+</div>
+<a id="method__doHeaders_attr"></a><div class="element clickable method public method__doHeaders_attr" data-toggle="collapse" data-target=".method__doHeaders_attr .collapse">
+<h2>_doHeaders_attr()
+        </h2>
+<pre>_doHeaders_attr($attr) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$attr</h4></div>
+</div></div>
+</div>
+<a id="method__doHeaders_callback_atx"></a><div class="element clickable method public method__doHeaders_callback_atx" data-toggle="collapse" data-target=".method__doHeaders_callback_atx .collapse">
+<h2>_doHeaders_callback_atx()
+        </h2>
+<pre>_doHeaders_callback_atx($matches) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$matches</h4></div>
+</div></div>
+</div>
+<a id="method__doHeaders_callback_setext"></a><div class="element clickable method public method__doHeaders_callback_setext" data-toggle="collapse" data-target=".method__doHeaders_callback_setext .collapse">
+<h2>_doHeaders_callback_setext()
+        </h2>
+<pre>_doHeaders_callback_setext($matches) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$matches</h4></div>
+</div></div>
+</div>
+<a id="method__doTable_callback"></a><div class="element clickable method public method__doTable_callback" data-toggle="collapse" data-target=".method__doTable_callback .collapse">
+<h2>_doTable_callback()
+        </h2>
+<pre>_doTable_callback($matches) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$matches</h4></div>
+</div></div>
+</div>
+<a id="method__doTable_leadingPipe_callback"></a><div class="element clickable method public method__doTable_leadingPipe_callback" data-toggle="collapse" data-target=".method__doTable_leadingPipe_callback .collapse">
+<h2>_doTable_leadingPipe_callback()
+        </h2>
+<pre>_doTable_leadingPipe_callback($matches) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$matches</h4></div>
+</div></div>
+</div>
+<a id="method__hashHTMLBlocks_inHTML"></a><div class="element clickable method public method__hashHTMLBlocks_inHTML" data-toggle="collapse" data-target=".method__hashHTMLBlocks_inHTML .collapse">
+<h2>_hashHTMLBlocks_inHTML()
+        </h2>
+<pre>_hashHTMLBlocks_inHTML($text, $hash_method, $md_attr) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$text</h4></div>
+<div class="subelement argument"><h4>$hash_method</h4></div>
+<div class="subelement argument"><h4>$md_attr</h4></div>
+</div></div>
+</div>
+<a id="method__hashHTMLBlocks_inMarkdown"></a><div class="element clickable method public method__hashHTMLBlocks_inMarkdown" data-toggle="collapse" data-target=".method__hashHTMLBlocks_inMarkdown .collapse">
+<h2>_hashHTMLBlocks_inMarkdown()
+        </h2>
+<pre>_hashHTMLBlocks_inMarkdown($text, $indent, $enclosing_tag_re, $span) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$text</h4></div>
+<div class="subelement argument"><h4>$indent</h4></div>
+<div class="subelement argument"><h4>$enclosing_tag_re</h4></div>
+<div class="subelement argument"><h4>$span</h4></div>
+</div></div>
+</div>
+<a id="method__processDefListItems_callback_dd"></a><div class="element clickable method public method__processDefListItems_callback_dd" data-toggle="collapse" data-target=".method__processDefListItems_callback_dd .collapse">
+<h2>_processDefListItems_callback_dd()
+        </h2>
+<pre>_processDefListItems_callback_dd($matches) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$matches</h4></div>
+</div></div>
+</div>
+<a id="method__processDefListItems_callback_dt"></a><div class="element clickable method public method__processDefListItems_callback_dt" data-toggle="collapse" data-target=".method__processDefListItems_callback_dt .collapse">
+<h2>_processDefListItems_callback_dt()
+        </h2>
+<pre>_processDefListItems_callback_dt($matches) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$matches</h4></div>
+</div></div>
+</div>
+<a id="method__stripAbbreviations_callback"></a><div class="element clickable method public method__stripAbbreviations_callback" data-toggle="collapse" data-target=".method__stripAbbreviations_callback .collapse">
+<h2>_stripAbbreviations_callback()
+        </h2>
+<pre>_stripAbbreviations_callback($matches) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$matches</h4></div>
+</div></div>
+</div>
+<a id="method__stripFootnotes_callback"></a><div class="element clickable method public method__stripFootnotes_callback" data-toggle="collapse" data-target=".method__stripFootnotes_callback .collapse">
+<h2>_stripFootnotes_callback()
+        </h2>
+<pre>_stripFootnotes_callback($matches) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$matches</h4></div>
+</div></div>
+</div>
+<a id="method_appendFootnotes"></a><div class="element clickable method public method_appendFootnotes" data-toggle="collapse" data-target=".method_appendFootnotes .collapse">
+<h2>appendFootnotes()
+        </h2>
+<pre>appendFootnotes($text) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$text</h4></div>
+</div></div>
+</div>
+<a id="method_doAbbreviations"></a><div class="element clickable method public method_doAbbreviations" data-toggle="collapse" data-target=".method_doAbbreviations .collapse">
+<h2>doAbbreviations()
+        </h2>
+<pre>doAbbreviations($text) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$text</h4></div>
+</div></div>
+</div>
+<a id="method_doDefLists"></a><div class="element clickable method public method_doDefLists" data-toggle="collapse" data-target=".method_doDefLists .collapse">
+<h2>doDefLists()
+        </h2>
+<pre>doDefLists($text) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$text</h4></div>
+</div></div>
+</div>
+<a id="method_doFencedCodeBlocks"></a><div class="element clickable method public method_doFencedCodeBlocks" data-toggle="collapse" data-target=".method_doFencedCodeBlocks .collapse">
+<h2>doFencedCodeBlocks()
+        </h2>
+<pre>doFencedCodeBlocks($text) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$text</h4></div>
+</div></div>
+</div>
+<a id="method_doFootnotes"></a><div class="element clickable method public method_doFootnotes" data-toggle="collapse" data-target=".method_doFootnotes .collapse">
+<h2>doFootnotes()
+        </h2>
+<pre>doFootnotes($text) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$text</h4></div>
+</div></div>
+</div>
+<a id="method_doHeaders"></a><div class="element clickable method public method_doHeaders" data-toggle="collapse" data-target=".method_doHeaders .collapse">
+<h2>doHeaders()
+        </h2>
+<pre>doHeaders($text) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$text</h4></div>
+</div></div>
+</div>
+<a id="method_doTables"></a><div class="element clickable method public method_doTables" data-toggle="collapse" data-target=".method_doTables .collapse">
+<h2>doTables()
+        </h2>
+<pre>doTables($text) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$text</h4></div>
+</div></div>
+</div>
+<a id="method_formParagraphs"></a><div class="element clickable method public method_formParagraphs" data-toggle="collapse" data-target=".method_formParagraphs .collapse">
+<h2>formParagraphs()
+        </h2>
+<pre>formParagraphs($text) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$text</h4></div>
+</div></div>
+</div>
+<a id="method_hashClean"></a><div class="element clickable method public method_hashClean" data-toggle="collapse" data-target=".method_hashClean .collapse">
+<h2>hashClean()
+        </h2>
+<pre>hashClean($text) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$text</h4></div>
+</div></div>
+</div>
+<a id="method_hashHTMLBlocks"></a><div class="element clickable method public method_hashHTMLBlocks" data-toggle="collapse" data-target=".method_hashHTMLBlocks .collapse">
+<h2>hashHTMLBlocks()
+        </h2>
+<pre>hashHTMLBlocks($text) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$text</h4></div>
+</div></div>
+</div>
+<a id="method_processDefListItems"></a><div class="element clickable method public method_processDefListItems" data-toggle="collapse" data-target=".method_processDefListItems .collapse">
+<h2>processDefListItems()
+        </h2>
+<pre>processDefListItems($list_str) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$list_str</h4></div>
+</div></div>
+</div>
+<a id="method_setup"></a><div class="element clickable method public method_setup" data-toggle="collapse" data-target=".method_setup .collapse">
+<h2>setup()
+        </h2>
+<pre>setup() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_stripAbbreviations"></a><div class="element clickable method public method_stripAbbreviations" data-toggle="collapse" data-target=".method_stripAbbreviations .collapse">
+<h2>stripAbbreviations()
+        </h2>
+<pre>stripAbbreviations($text) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$text</h4></div>
+</div></div>
+</div>
+<a id="method_stripFootnotes"></a><div class="element clickable method public method_stripFootnotes" data-toggle="collapse" data-target=".method_stripFootnotes .collapse">
+<h2>stripFootnotes()
+        </h2>
+<pre>stripFootnotes($text) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$text</h4></div>
+</div></div>
+</div>
+<a id="method_teardown"></a><div class="element clickable method public method_teardown" data-toggle="collapse" data-target=".method_teardown .collapse">
+<h2>teardown()
+        </h2>
+<pre>teardown() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_abbr_desciptions"> </a><div class="element clickable property public property_abbr_desciptions" data-toggle="collapse" data-target=".property_abbr_desciptions .collapse">
+<h2>$abbr_desciptions</h2>
+<pre>$abbr_desciptions </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_abbr_word_re"> </a><div class="element clickable property public property_abbr_word_re" data-toggle="collapse" data-target=".property_abbr_word_re .collapse">
+<h2>$abbr_word_re</h2>
+<pre>$abbr_word_re </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_auto_close_tags_re"> </a><div class="element clickable property public property_auto_close_tags_re" data-toggle="collapse" data-target=".property_auto_close_tags_re .collapse">
+<h2>$auto_close_tags_re</h2>
+<pre>$auto_close_tags_re </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_block_tags_re"> </a><div class="element clickable property public property_block_tags_re" data-toggle="collapse" data-target=".property_block_tags_re .collapse">
+<h2>$block_tags_re</h2>
+<pre>$block_tags_re </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_clean_tags_re"> </a><div class="element clickable property public property_clean_tags_re" data-toggle="collapse" data-target=".property_clean_tags_re .collapse">
+<h2>$clean_tags_re</h2>
+<pre>$clean_tags_re </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_contain_span_tags_re"> </a><div class="element clickable property public property_contain_span_tags_re" data-toggle="collapse" data-target=".property_contain_span_tags_re .collapse">
+<h2>$contain_span_tags_re</h2>
+<pre>$contain_span_tags_re </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_context_block_tags_re"> </a><div class="element clickable property public property_context_block_tags_re" data-toggle="collapse" data-target=".property_context_block_tags_re .collapse">
+<h2>$context_block_tags_re</h2>
+<pre>$context_block_tags_re </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_em_relist"> </a><div class="element clickable property public property_em_relist" data-toggle="collapse" data-target=".property_em_relist .collapse">
+<h2>$em_relist</h2>
+<pre>$em_relist </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_em_strong_relist"> </a><div class="element clickable property public property_em_strong_relist" data-toggle="collapse" data-target=".property_em_strong_relist .collapse">
+<h2>$em_strong_relist</h2>
+<pre>$em_strong_relist </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_fn_backlink_class"> </a><div class="element clickable property public property_fn_backlink_class" data-toggle="collapse" data-target=".property_fn_backlink_class .collapse">
+<h2>$fn_backlink_class</h2>
+<pre>$fn_backlink_class </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_fn_backlink_title"> </a><div class="element clickable property public property_fn_backlink_title" data-toggle="collapse" data-target=".property_fn_backlink_title .collapse">
+<h2>$fn_backlink_title</h2>
+<pre>$fn_backlink_title </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_fn_id_prefix"> </a><div class="element clickable property public property_fn_id_prefix" data-toggle="collapse" data-target=".property_fn_id_prefix .collapse">
+<h2>$fn_id_prefix</h2>
+<pre>$fn_id_prefix </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_fn_link_class"> </a><div class="element clickable property public property_fn_link_class" data-toggle="collapse" data-target=".property_fn_link_class .collapse">
+<h2>$fn_link_class</h2>
+<pre>$fn_link_class </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_fn_link_title"> </a><div class="element clickable property public property_fn_link_title" data-toggle="collapse" data-target=".property_fn_link_title .collapse">
+<h2>$fn_link_title</h2>
+<pre>$fn_link_title </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_footnote_counter"> </a><div class="element clickable property public property_footnote_counter" data-toggle="collapse" data-target=".property_footnote_counter .collapse">
+<h2>$footnote_counter</h2>
+<pre>$footnote_counter </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_footnotes"> </a><div class="element clickable property public property_footnotes" data-toggle="collapse" data-target=".property_footnotes .collapse">
+<h2>$footnotes</h2>
+<pre>$footnotes </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_footnotes_ordered"> </a><div class="element clickable property public property_footnotes_ordered" data-toggle="collapse" data-target=".property_footnotes_ordered .collapse">
+<h2>$footnotes_ordered</h2>
+<pre>$footnotes_ordered </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_predef_abbr"> </a><div class="element clickable property public property_predef_abbr" data-toggle="collapse" data-target=".property_predef_abbr .collapse">
+<h2>$predef_abbr</h2>
+<pre>$predef_abbr </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_strong_relist"> </a><div class="element clickable property public property_strong_relist" data-toggle="collapse" data-target=".property_strong_relist .collapse">
+<h2>$strong_relist</h2>
+<pre>$strong_relist </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.1.0
+</a> and<br>
+            generated on 2013-12-03T13:06:27+01:00.<br></footer></div>
+</div>
+</body>
+</html>

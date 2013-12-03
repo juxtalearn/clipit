@@ -1,0 +1,374 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>API Documentation » \SimpleErrorQueue</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">API Documentation</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/clipit.html"><i class="icon-th"></i> clipit</a></li>
+<li><a href="../namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/Blog.html"><i class="icon-folder-open"></i> Blog</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Elgg.html"><i class="icon-folder-open"></i> Elgg</a></li>
+<li><a href="../packages/Elgg.Core.html"><i class="icon-folder-open"></i> Elgg.Core</a></li>
+<li><a href="../packages/Elgg.Core.Plugin.html"><i class="icon-folder-open"></i> Elgg.Core.Plugin</a></li>
+<li><a href="../packages/ElggAPIAdmin.html"><i class="icon-folder-open"></i> ElggAPIAdmin</a></li>
+<li><a href="../packages/ElggDiagnostics.html"><i class="icon-folder-open"></i> ElggDiagnostics</a></li>
+<li><a href="../packages/ElggEmbed.html"><i class="icon-folder-open"></i> ElggEmbed</a></li>
+<li><a href="../packages/ElggFile.html"><i class="icon-folder-open"></i> ElggFile</a></li>
+<li><a href="../packages/ElggGarbageCollector.html"><i class="icon-folder-open"></i> ElggGarbageCollector</a></li>
+<li><a href="../packages/ElggGroups.html"><i class="icon-folder-open"></i> ElggGroups</a></li>
+<li><a href="../packages/ElggLogBrowser.html"><i class="icon-folder-open"></i> ElggLogBrowser</a></li>
+<li><a href="../packages/ElggLogRotate.html"><i class="icon-folder-open"></i> ElggLogRotate</a></li>
+<li><a href="../packages/ElggMessages.html"><i class="icon-folder-open"></i> ElggMessages</a></li>
+<li><a href="../packages/ElggNotifications.html"><i class="icon-folder-open"></i> ElggNotifications</a></li>
+<li><a href="../packages/ElggProfile.html"><i class="icon-folder-open"></i> ElggProfile</a></li>
+<li><a href="../packages/ElggTinyMCE.html"><i class="icon-folder-open"></i> ElggTinyMCE</a></li>
+<li><a href="../packages/ElgghtmLawed.html"><i class="icon-folder-open"></i> ElgghtmLawed</a></li>
+<li><a href="../packages/Embed%20Video%20Library.html"><i class="icon-folder-open"></i> Embed Video Library</a></li>
+<li><a href="../packages/PlaceLocalInclude.html"><i class="icon-folder-open"></i> PlaceLocalInclude</a></li>
+<li><a href="../packages/SimpleTest.html"><i class="icon-folder-open"></i> SimpleTest</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+     @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20MockObjects%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   MockObjects
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20%20%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage   UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20MockObjects.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage MockObjects</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+     @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@abstract.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @abstract</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20UnitTester%0D%0A%20%20%20@deprecated.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage UnitTester
+   @deprecated</a></li>
+<li><a href="../packages/SimpleTest%0D%0A%20%20%20@subpackage%20WebTester.html"><i class="icon-folder-open"></i> SimpleTest
+   @subpackage WebTester</a></li>
+<li><a href="../packages/%5Bname%5D.html"><i class="icon-folder-open"></i> [name]</a></li>
+<li><a href="../packages/clipit.html"><i class="icon-folder-open"></i> clipit</a></li>
+<li><a href="../packages/event_calendar.html"><i class="icon-folder-open"></i> event_calendar</a></li>
+<li><a href="../packages/pebs.html"><i class="icon-folder-open"></i> pebs</a></li>
+<li><a href="../packages/profile_manager.html"><i class="icon-folder-open"></i> profile_manager</a></li>
+<li><a href="../packages/veeplay.html"><i class="icon-folder-open"></i> veeplay</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">4473</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">250</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method_SimpleErrorQueue" title="SimpleErrorQueue() :: Starts with an empty queue."><span class="description">Starts with an empty queue.</span><pre>SimpleErrorQueue()</pre></a></li>
+<li class="method public "><a href="#method__extractExpectation" title="_extractExpectation() :: Pulls the earliest expectation from the queue."><span class="description">Pulls the earliest expectation from the queue.</span><pre>_extractExpectation()</pre></a></li>
+<li class="method public "><a href="#method__testLatestError" title="_testLatestError() :: Tests the error against the most recent expected
+   error."><span class="description">Tests the error against the most recent expected
+   error.</span><pre>_testLatestError()</pre></a></li>
+<li class="method public "><a href="#method_add" title="add() :: Adds an error to the front of the queue."><span class="description">Adds an error to the front of the queue.</span><pre>add()</pre></a></li>
+<li class="method public "><a href="#method_assertError" title="assertError() :: "><span class="description">assertError()
+        </span><pre>assertError()</pre></a></li>
+<li class="method public "><a href="#method_assertNoErrors" title="assertNoErrors() :: "><span class="description">assertNoErrors()
+        </span><pre>assertNoErrors()</pre></a></li>
+<li class="method public "><a href="#method_clear" title="clear() :: Discards the contents of the error queue."><span class="description">Discards the contents of the error queue.</span><pre>clear()</pre></a></li>
+<li class="method public "><a href="#method_expectError" title="expectError() :: Sets up an expectation of an error. If this is
+   not fulfilled at the end of the test, a failure
+   will occour. If the error does happen, then this
+   will cancel it out and send a pass message."><span class="description">Sets up an expectation of an error. If this is
+   not fulfilled at the end of the test, a failure
+   will occour. If the error does happen, then this
+   will cancel it out and send a pass message.</span><pre>expectError()</pre></a></li>
+<li class="method public "><a href="#method_extract" title="extract() :: Pulls the earliest error from the queue."><span class="description">Pulls the earliest error from the queue.</span><pre>extract()</pre></a></li>
+<li class="method public "><a href="#method_getSeverityAsString" title="getSeverityAsString() :: Converts an error code into it's string
+   representation."><span class="description">Converts an error code into it's string
+   representation.</span><pre>getSeverityAsString()</pre></a></li>
+<li class="method public "><a href="#method_setTestCase" title="setTestCase() :: Sets the currently running test case."><span class="description">Sets the currently running test case.</span><pre>setTestCase()</pre></a></li>
+<li class="method public "><a href="#method_tally" title="tally() :: Any errors still in the queue are sent to the test
+   case. Any unfulfilled expectations trigger failures."><span class="description">Any errors still in the queue are sent to the test
+   case. Any unfulfilled expectations trigger failures.</span><pre>tally()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul>
+<li class="property public "><a href="#property__expectation_queue" title="$_expectation_queue() :: "><span class="description"></span><pre>$_expectation_queue</pre></a></li>
+<li class="property public "><a href="#property__queue" title="$_queue() :: "><span class="description"></span><pre>$_queue</pre></a></li>
+<li class="property public "><a href="#property__test" title="$_test() :: "><span class="description"></span><pre>$_test</pre></a></li>
+<li class="property public "><a href="#property__using_expect_style" title="$_using_expect_style() :: "><span class="description"></span><pre>$_using_expect_style</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\SimpleErrorQueue"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/SimpleErrorQueue.html">SimpleErrorQueue</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">Error queue used to record trapped
+   errors.</p>
+<div class="details">
+<div class="long_description">@package  SimpleTest</div>
+<table class="table table-bordered"><tr>
+<th>subpackage</th>
+<td>UnitTester</td>
+</tr></table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method_SimpleErrorQueue"></a><div class="element clickable method public method_SimpleErrorQueue" data-toggle="collapse" data-target=".method_SimpleErrorQueue .collapse">
+<h2>Starts with an empty queue.</h2>
+<pre>SimpleErrorQueue() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method__extractExpectation"></a><div class="element clickable method public method__extractExpectation" data-toggle="collapse" data-target=".method__extractExpectation .collapse">
+<h2>Pulls the earliest expectation from the queue.</h2>
+<pre>_extractExpectation() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return     SimpleExpectation    False if none.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>private</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method__testLatestError"></a><div class="element clickable method public method__testLatestError" data-toggle="collapse" data-target=".method__testLatestError .collapse">
+<h2>Tests the error against the most recent expected
+   error.</h2>
+<pre>_testLatestError($severity, string $content, $filename, $line) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param integer $severity       PHP error code.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$severity</h4></div>
+<div class="subelement argument">
+<h4>$content</h4>
+<code>string</code><p>Text of error.
+   @param string $filename        File error occoured in.
+   @param integer $line           Line number of error.
+   @access private</p>
+</div>
+<div class="subelement argument"><h4>$filename</h4></div>
+<div class="subelement argument"><h4>$line</h4></div>
+</div></div>
+</div>
+<a id="method_add"></a><div class="element clickable method public method_add" data-toggle="collapse" data-target=".method_add .collapse">
+<h2>Adds an error to the front of the queue.</h2>
+<pre>add($severity, string $content, $filename, $line) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param integer $severity       PHP error code.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$severity</h4></div>
+<div class="subelement argument">
+<h4>$content</h4>
+<code>string</code><p>Text of error.
+   @param string $filename        File error occoured in.
+   @param integer $line           Line number of error.
+   @access public</p>
+</div>
+<div class="subelement argument"><h4>$filename</h4></div>
+<div class="subelement argument"><h4>$line</h4></div>
+</div></div>
+</div>
+<a id="method_assertError"></a><div class="element clickable method public method_assertError" data-toggle="collapse" data-target=".method_assertError .collapse">
+<h2>assertError()
+        </h2>
+<pre>assertError($expected, $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>deprecated</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$expected</h4></div>
+<div class="subelement argument"><h4>$message</h4></div>
+</div></div>
+</div>
+<a id="method_assertNoErrors"></a><div class="element clickable method public method_assertNoErrors" data-toggle="collapse" data-target=".method_assertNoErrors .collapse">
+<h2>assertNoErrors()
+        </h2>
+<pre>assertNoErrors($message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>deprecated</th>
+<td></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$message</h4></div>
+</div></div>
+</div>
+<a id="method_clear"></a><div class="element clickable method public method_clear" data-toggle="collapse" data-target=".method_clear .collapse">
+<h2>Discards the contents of the error queue.</h2>
+<pre>clear() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description">@access public</div></div></div>
+</div>
+<a id="method_expectError"></a><div class="element clickable method public method_expectError" data-toggle="collapse" data-target=".method_expectError .collapse">
+<h2>Sets up an expectation of an error. If this is
+   not fulfilled at the end of the test, a failure
+   will occour. If the error does happen, then this
+   will cancel it out and send a pass message.</h2>
+<pre>expectError($expected, string $message) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param SimpleExpectation $expected    Expected error match.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$expected</h4></div>
+<div class="subelement argument">
+<h4>$message</h4>
+<code>string</code><p>Message to display.
+   @access public</p>
+</div>
+</div></div>
+</div>
+<a id="method_extract"></a><div class="element clickable method public method_extract" data-toggle="collapse" data-target=".method_extract .collapse">
+<h2>Pulls the earliest error from the queue.</h2>
+<pre>extract() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@return  mixed    False if none, or a list of error
+                     information. Elements are: severity
+                     as the PHP error code, the error message,
+                     the file with the error, the line number
+                     and a list of PHP super global arrays.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getSeverityAsString"></a><div class="element clickable method public method_getSeverityAsString" data-toggle="collapse" data-target=".method_getSeverityAsString .collapse">
+<h2>Converts an error code into it's string
+   representation.</h2>
+<pre>getSeverityAsString($severity) : String</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param $severity  PHP integer error code.</div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$severity</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>String</code>version of error code.
+   @access public
+   @static</div>
+</div></div>
+</div>
+<a id="method_setTestCase"></a><div class="element clickable method public method_setTestCase" data-toggle="collapse" data-target=".method_setTestCase .collapse">
+<h2>Sets the currently running test case.</h2>
+<pre>setTestCase($test) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description">@param SimpleTestCase $test    Test case to send messages to.</div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$test</h4></div>
+</div></div>
+</div>
+<a id="method_tally"></a><div class="element clickable method public method_tally" data-toggle="collapse" data-target=".method_tally .collapse">
+<h2>Any errors still in the queue are sent to the test
+   case. Any unfulfilled expectations trigger failures.</h2>
+<pre>tally() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description">@access public</div></div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property__expectation_queue"> </a><div class="element clickable property public property__expectation_queue" data-toggle="collapse" data-target=".property__expectation_queue .collapse">
+<h2>$_expectation_queue</h2>
+<pre>$_expectation_queue </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__queue"> </a><div class="element clickable property public property__queue" data-toggle="collapse" data-target=".property__queue .collapse">
+<h2>$_queue</h2>
+<pre>$_queue </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__test"> </a><div class="element clickable property public property__test" data-toggle="collapse" data-target=".property__test .collapse">
+<h2>$_test</h2>
+<pre>$_test </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__using_expect_style"> </a><div class="element clickable property public property__using_expect_style" data-toggle="collapse" data-target=".property__using_expect_style .collapse">
+<h2>$_using_expect_style</h2>
+<pre>$_using_expect_style </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.1.0
+</a> and<br>
+            generated on 2013-12-03T13:06:30+01:00.<br></footer></div>
+</div>
+</body>
+</html>
