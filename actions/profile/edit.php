@@ -4,6 +4,8 @@
  *
  */
 
+elgg_make_sticky_form('profile:edit');
+
 $guid = get_input('guid');
 $owner = get_entity($guid);
 
@@ -80,7 +82,7 @@ if (sizeof($input) > 0) {
 		);
 		elgg_delete_metadata($options);
 		
-		if(!is_null($value) && ($value !== '')){
+		if (!is_null($value) && ($value !== '')) {
 			// only create metadata for non empty values (0 is allowed) to prevent metadata records with empty string values #4858
 			
 			if (isset($accesslevel[$shortname])) {
@@ -107,6 +109,7 @@ if (sizeof($input) > 0) {
 	// Notify of profile update
 	elgg_trigger_event('profileupdate', $owner->type, $owner);
 
+	elgg_clear_sticky_form('profile:edit');
 	system_message(elgg_echo("profile:saved"));
 }
 

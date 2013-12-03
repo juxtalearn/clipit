@@ -208,12 +208,12 @@ class ElggCoreRegressionBugsTest extends ElggCoreUnitTest {
 		$cases = array(
 			// acid test
 			"B&N > Amazon, OK? <bold> 'hey!' $34"
-			=> "b-and-n-greater-than-amazon-ok-bold-hey-34",
+			=> "bn-amazon-ok-bold-hey-34",
 
 			// hyphen, underscore and ASCII whitespace replaced by separator,
 			// other non-alphanumeric ASCII removed
-			"a-a_a a\na\ra\ta\va!a\"a#a\$a%a&a'a(a)a*a+a,a.a/a:a;a=a?a@a[a\\a]a^a`a{a|a}a~a"
-			=> "a-a-a-a-a-a-aaaaaaa-and-aaaaaaaaaaaaaaaaaaaaaaa",
+			"a-a_a a\na\ra\ta\va!a\"a#a\$a%aa'a(a)a*a+a,a.a/a:a;a=a?a@a[a\\a]a^a`a{a|a}a~a"
+			=> "a-a-a-a-a-a-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
 			
 			// separators trimmed
 			"-_ hello _-" 
@@ -283,9 +283,50 @@ class ElggCoreRegressionBugsTest extends ElggCoreUnitTest {
 			'ftp ftp://example.org/ test' =>
 				'ftp <a href="ftp://example.org/" rel="nofollow">ftp:/<wbr />/<wbr />example.org/<wbr /></a> test',
 
+			'web archive anchor <a href="http://web.archive.org/web/20000229040250/http://www.google.com/">google</a>' =>
+				'web archive anchor <a href="http://web.archive.org/web/20000229040250/http://www.google.com/">google</a>',
+
+			'single quotes already anchor <a href=\'http://www.yahoo.com\'>yahoo</a>' => 
+				'single quotes already anchor <a href=\'http://www.yahoo.com\'>yahoo</a>',
+
+			'unquoted already anchor <a href=http://www.yahoo.com>yahoo</a>' =>
+				'unquoted already anchor <a href=http://www.yahoo.com>yahoo</a>',
 		);
 		foreach ($cases as $input => $output) {
 			$this->assertEqual($output, parse_urls($input));
 		}
+	}
+	
+	/**
+	 * Ensure additional select columns do not end up in entity attributes.
+	 * 
+	 * https://github.com/Elgg/Elgg/issues/5538
+	 */
+	public function test_extra_columns_dont_appear_in_attributes() {
+		global $ENTITY_CACHE;
+
+		// may not have groups in DB - let's create one
+		$group = new ElggGroup();
+		$group->name = 'test_group';
+		$group->access_id = ACCESS_PUBLIC;
+		$this->assertTrue($group->save() !== false);
+		
+		// entity cache interferes with our test
+		$ENTITY_CACHE = array();
+		
+		foreach (array('site', 'user', 'group', 'object') as $type) {
+			$entities = elgg_get_entities(array(
+				'type' => $type,
+				'selects' => array('1 as _nonexistent_test_column'),
+				'limit' => 1,
+			));
+			if (!$this->assertTrue($entities, "Query for '$type' did not return an entity.")) {
+				continue;
+			}
+			$entity = $entities[0];
+			$this->assertNull($entity->_nonexistent_test_column, "Additional select columns are leaking to attributes for '$type'");
+		}
+		
+		$group->delete();
 	}
 }

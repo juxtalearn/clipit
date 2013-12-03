@@ -1,7 +1,6 @@
 <?php
 /**
  * Elgg groups plugin language pack
- * 
  *
  * @package ElggGroups
  */
@@ -171,7 +170,7 @@ View and reply to the discussion:
 	'groups:forum' => 'Discussion',
 	'groups:addtopic' => 'Add a topic',
 	'groups:forumlatest' => 'Latest discussion',
-	'groups:latestdiscussion' => 'Latest activity',
+	'groups:latestdiscussion' => 'Latest discussion',
 	'groups:newest' => 'Newest',
 	'groups:popular' => 'Popular',
 	'groupspost:success' => 'Your reply was succesfully posted',

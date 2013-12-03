@@ -191,19 +191,19 @@ function update_metadata($id, $name, $value, $value_type, $owner_guid, $access_i
 	}
 
 	// Add the metastring
-	$value = add_metastring($value);
-	if (!$value) {
+	$value_id = add_metastring($value);
+	if (!$value_id) {
 		return false;
 	}
 
-	$name = add_metastring($name);
-	if (!$name) {
+	$name_id = add_metastring($name);
+	if (!$name_id) {
 		return false;
 	}
 
 	// If ok then add it
 	$query = "UPDATE {$CONFIG->dbprefix}metadata"
-		. " set name_id='$name', value_id='$value', value_type='$value_type', access_id=$access_id,"
+		. " set name_id='$name_id', value_id='$value_id', value_type='$value_type', access_id=$access_id,"
 		. " owner_guid=$owner_guid where id=$id";
 
 	$result = update_data($query);
@@ -300,10 +300,8 @@ function elgg_get_metadata(array $options = array()) {
  *          This requires at least one constraint: metadata_owner_guid(s),
  *          metadata_name(s), metadata_value(s), or guid(s) must be set.
  *
- * @warning This returns null on no ops.
- *
  * @param array $options An options array. {@see elgg_get_metadata()}
- * @return mixed Null if the metadata name is invalid. Bool on success or fail.
+ * @return bool|null true on success, false on failure, null if no metadata to delete.
  * @since 1.8.0
  */
 function elgg_delete_metadata(array $options) {
@@ -325,10 +323,8 @@ function elgg_delete_metadata(array $options) {
  *
  * @warning Unlike elgg_get_metadata() this will not accept an empty options array!
  *
- * @warning This returns null on no ops.
- *
  * @param array $options An options array. {@See elgg_get_metadata()}
- * @return mixed
+ * @return bool|null true on success, false on failure, null if no metadata disabled.
  * @since 1.8.0
  */
 function elgg_disable_metadata(array $options) {
@@ -347,10 +343,11 @@ function elgg_disable_metadata(array $options) {
  *
  * @warning Unlike elgg_get_metadata() this will not accept an empty options array!
  *
- * @warning This returns null on no ops.
+ * @warning In order to enable metadata, you must first use
+ * {@link access_show_hidden_entities()}.
  *
  * @param array $options An options array. {@See elgg_get_metadata()}
- * @return mixed
+ * @return bool|null true on success, false on failure, null if no metadata enabled.
  * @since 1.8.0
  */
 function elgg_enable_metadata(array $options) {
@@ -954,7 +951,7 @@ elgg_register_plugin_hook_handler("export", "all", "export_metadata_plugin_hook"
 elgg_register_event_handler('update', 'all', 'metadata_update');
 
 // unit testing
-//elgg_register_plugin_hook_handler('unit_test', 'system', 'metadata_test');
+elgg_register_plugin_hook_handler('unit_test', 'system', 'metadata_test');
 
 /**
  * Metadata unit test

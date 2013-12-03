@@ -21,22 +21,12 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-namespace clipit;
-
 
 /**
- * Class ClipitSTA
+ * Class ClipitUser
  *
  * @package clipit
  */
-class ClipitSTA{
-    // Class properties
-    public $description = string;
-    public $file_array = array(ClipitFile);
-    public $id = int;
-    public $name = string;
-    public $taxonomy_tag_array = array(ClipitTaxonomyTag);
-    public $taxonomy = ClipitTaxonomy;
-
+class ClipitUser extends PebsUser{
 
 }

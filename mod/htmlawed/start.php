@@ -19,7 +19,7 @@ function htmlawed_init() {
 	$lib = elgg_get_plugins_path() . "htmlawed/vendors/htmLawed/htmLawed.php";
 	elgg_register_library('htmlawed', $lib);
 	
-	//elgg_register_plugin_hook_handler('unit_test', 'system', 'htmlawed_test');
+	elgg_register_plugin_hook_handler('unit_test', 'system', 'htmlawed_test');
 }
 
 /**

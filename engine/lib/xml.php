@@ -8,19 +8,6 @@
  */
 
 /**
- * Obtains an object class name without namespaces
- */
-function get_real_class($obj) {
-    $classname = get_class($obj);
-
-    if (preg_match('@\\\\([\w]+)$@', $classname, $matches)) {
-        $classname = $matches[1];
-    }
-
-    return $classname;
-}
-
-/**
  * This function serialises an object recursively into an XML representation.
  *
  * The function attempts to call $data->export() which expects a stdClass in return,
@@ -34,7 +21,7 @@ function get_real_class($obj) {
  * @return string The serialised XML output.
  */
 function serialise_object_to_xml($data, $name = "", $n = 0) {
-	$classname = ($name == "" ? get_real_class($data) : $name);
+	$classname = ($name == "" ? get_class($data) : $name);
 
 	$vars = method_exists($data, "export") ? get_object_vars($data->export()) : get_object_vars($data);
 

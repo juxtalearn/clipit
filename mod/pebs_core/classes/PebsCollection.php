@@ -1,13 +1,13 @@
 <?php
 /**
- * ClipIt - JuxtaLearn Web Space
+ * Pebs Core
  * PHP version:     >= 5.2
- * Creation date:   2013-10-10
+ * Creation date:   2013-11-01
  * Last update:     $Date$
  *
  * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, JuxtaLearn Project
  * @version         $Version$
- * @link            http://juxtalearn.org
+ * @link            http://
  * @license         GNU Affero General Public License v3
  *                  (http://www.gnu.org/licenses/agpl-3.0.txt)
  *                  This program is free software: you can redistribute it and/or modify
@@ -21,25 +21,7 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-namespace clipit;
 
+abstract class PebsCollection {
 
-/**
- * Class ClipitSite
- *
- * @package clipit
- */
-class ClipitSite{
-    // Class properties
-    public $description = string;
-    public $id = int;
-    public $name = string;
-    public $quiz_array = array(ClipitQuiz);
-    public $sta_array = array(ClipitSTA);
-    public $storyboard_array = array(ClipitStoryboard);
-    public $taxonomy_array = array(ClipitTaxonomy);
-    public $user_array = array(ClipitUser);
-    public $video_array = array(ClipitVideo);
-
-
-}
+} 

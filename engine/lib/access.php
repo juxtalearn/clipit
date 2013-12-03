@@ -1075,4 +1075,4 @@ elgg_register_event_handler('ready', 'system', 'access_init');
 elgg_register_plugin_hook_handler('permissions_check', 'all', 'elgg_override_permissions');
 elgg_register_plugin_hook_handler('container_permissions_check', 'all', 'elgg_override_permissions');
 
-//elgg_register_plugin_hook_handler('unit_test', 'system', 'access_test');
+elgg_register_plugin_hook_handler('unit_test', 'system', 'access_test');

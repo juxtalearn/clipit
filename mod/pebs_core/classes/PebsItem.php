@@ -21,9 +21,6 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-namespace pebs;
-
-use \ElggObject;
 
 class PebsItem{
     /**
@@ -129,17 +126,16 @@ class PebsItem{
      * Sets values into specified properties of the instance
      *
      * @param array $prop_value_array Array of prop=>value pairs to set into the instance
-     * @return bool|int Returns instance Id, or false if error
+     * @return int Returns instance Id, or false if error
+     * @throws InvalidParameterException
      */
     function setProperties($prop_value_array){
         foreach($prop_value_array as $prop => $value){
             if(!array_key_exists($prop, $this->list_properties())){
-                // lanzar excepción con mensaje
-                return false;
+                throw new InvalidParameterException("ERROR: One or more property names do not exist.");
             }
             if($prop == "id"){
-                // lanzar excepción con mensaje
-                return false;
+                throw new InvalidParameterException("ERROR: Cannot modify 'id' of instance.");
             }
             $this->$prop = $value;
         }
@@ -151,14 +147,11 @@ class PebsItem{
     /**
      * Create a new instance of this class, and assign values to its properties.
      *
-     * @param string $name Instance name
-     * @param string $description Instance description (optional)
+     * @param array $prop_value_array Array of [property]=>value pairs to set into the new instance
      * @return int|bool Returns instance Id if correct, or false if error
      */
-    static function create($name, $description = ""){
+    static function create($prop_value_array){
         $called_class = get_called_class();
-        $prop_value_array["name"] = $name;
-        $prop_value_array["description"] = $description;
         $item = new $called_class();
         return $item->setProperties($prop_value_array);
     }

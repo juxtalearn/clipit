@@ -224,7 +224,7 @@ function elgg_get_annotations(array $options = array()) {
  *          annotation_name(s), annotation_value(s), or guid(s) must be set.
  *
  * @param array $options An options array. {@See elgg_get_annotations()}
- * @return mixed Null if the metadata name is invalid. Bool on success or fail.
+ * @return bool|null true on success, false on failure, null if no annotations to delete.
  * @since 1.8.0
  */
 function elgg_delete_annotations(array $options) {
@@ -242,7 +242,7 @@ function elgg_delete_annotations(array $options) {
  * @warning Unlike elgg_get_annotations() this will not accept an empty options array!
  *
  * @param array $options An options array. {@See elgg_get_annotations()}
- * @return mixed
+ * @return bool|null true on success, false on failure, null if no annotations disabled.
  * @since 1.8.0
  */
 function elgg_disable_annotations(array $options) {
@@ -259,8 +259,11 @@ function elgg_disable_annotations(array $options) {
  *
  * @warning Unlike elgg_get_annotations() this will not accept an empty options array!
  *
+ * @warning In order to enable annotations, you must first use
+ * {@link access_show_hidden_entities()}.
+ *
  * @param array $options An options array. {@See elgg_get_annotations()}
- * @return mixed
+ * @return bool|null true on success, false on failure, null if no metadata enabled.
  * @since 1.8.0
  */
 function elgg_enable_annotations(array $options) {
@@ -416,8 +419,8 @@ function elgg_list_entities_from_annotations($options = array()) {
 function elgg_get_entities_from_annotation_calculation($options) {
 	$db_prefix = elgg_get_config('dbprefix');
 	$defaults = array(
-		'calculation'	=>	'sum',
-		'order_by'		=>	'annotation_calculation desc'
+		'calculation' => 'sum',
+		'order_by' => 'annotation_calculation desc'
 	);
 
 	$options = array_merge($defaults, $options);
@@ -454,6 +457,12 @@ function elgg_get_entities_from_annotation_calculation($options) {
  * @return string
  */
 function elgg_list_entities_from_annotation_calculation($options) {
+	$defaults = array(
+		'calculation' => 'sum',
+		'order_by' => 'annotation_calculation desc'
+	);
+	$options = array_merge($defaults, $options);
+
 	return elgg_list_entities($options, 'elgg_get_entities_from_annotation_calculation');
 }
 
@@ -532,15 +541,16 @@ function elgg_annotation_exists($entity_guid, $annotation_type, $owner_guid = NU
 		return FALSE;
 	}
 
-	$entity_guid = (int)$entity_guid;
-	$annotation_type = sanitise_string($annotation_type);
+	$entity_guid = sanitize_int($entity_guid);
+	$owner_guid = sanitize_int($owner_guid);
+	$annotation_type = sanitize_string($annotation_type);
 
-	$sql = "select a.id" .
-			" FROM {$CONFIG->dbprefix}annotations a, {$CONFIG->dbprefix}metastrings m " .
-			" WHERE a.owner_guid={$owner_guid} AND a.entity_guid={$entity_guid} " .
-			" AND a.name_id=m.id AND m.string='{$annotation_type}'";
+	$sql = "SELECT a.id FROM {$CONFIG->dbprefix}annotations a" .
+			" JOIN {$CONFIG->dbprefix}metastrings m ON a.name_id = m.id" .
+			" WHERE a.owner_guid = $owner_guid AND a.entity_guid = $entity_guid" .
+			" AND m.string = '$annotation_type'";
 
-	if ($check_annotation = get_data_row($sql)) {
+	if (get_data_row($sql)) {
 		return TRUE;
 	}
 
@@ -598,7 +608,7 @@ function elgg_annotations_init() {
 	elgg_register_annotation_url_handler('generic_comment', 'elgg_comment_url_handler');
 
 	elgg_register_plugin_hook_handler("export", "all", "export_annotation_plugin_hook", 2);
-	//elgg_register_plugin_hook_handler('unit_test', 'system', 'annotations_test');
+	elgg_register_plugin_hook_handler('unit_test', 'system', 'annotations_test');
 }
 
 elgg_register_event_handler('init', 'system', 'elgg_annotations_init');

@@ -21,19 +21,7 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-namespace pebs;
 
-/**
- * Alias so classes outside of this namespace can be used without path.
- * @use \ElggUser
- */
-use \ElggUser;
-
-/**
- * Class PebsUser
- *
- * @package pebs\user
- */
 class PebsUser extends PebsItem{
     //    Inherited properties:
     //    /**
@@ -122,15 +110,20 @@ class PebsUser extends PebsItem{
         return $this->id = $elgg_user->guid;
     }
 
+    /**
+     * Sets values into specified properties of the instance
+     *
+     * @param array $prop_value_array Array of prop=>value pairs to set into the instance
+     * @return int Returns instance Id, or false if error
+     * @throws InvalidParameterException
+     */
     function setProperties($prop_value_array){
         foreach($prop_value_array as $prop => $value){
             if(!array_key_exists($prop, $this->list_properties())){
-                // lanzar excepción con mensaje
-                return false;
+                throw new InvalidParameterException("ERROR: One or more property names do not exist.");
             }
             if($prop == "id"){
-                // lanzar excepción con mensaje
-                return false;
+                throw new InvalidParameterException("ERROR: Cannot modify 'id' of instance.");
             }
             if($prop == "password"){
                 $this->setPassword($value);
@@ -179,38 +172,6 @@ class PebsUser extends PebsItem{
      */
     static function logout(){
         return logout();
-    }
-
-    /**
-     * Create a new ClipItUser instance, and save it into the system.
-     *
-     * @param string $login User login
-     * @param string $password User password
-     * @param string $name User full name
-     * @param string $email User email
-     * @param string $role User role (optional)
-     * @param string $description User description (optional)
-     * @return bool|int Returns the new User Id, or 'false' if error
-     * @throws \InvalidParameterException
-     */
-    static function create($login,
-                           $password,
-                           $name,
-                           $email,
-                           $role = "",
-                           $description = ""){
-        $called_class = get_called_class();
-        if(get_user_by_username($login)){
-            throw(new \InvalidParameterException("The user login already exists"));
-        }
-        $prop_value_array["login"] = $login;
-        $prop_value_array["password"] = $password;
-        $prop_value_array["name"] = $name;
-        $prop_value_array["email"] = $email;
-        $prop_value_array["role"] = $role;
-        $prop_value_array["description"] = $description;
-        $user = new $called_class();
-        return $user->setProperties($prop_value_array);
     }
 
     /**

@@ -21,22 +21,24 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-namespace clipit;
-
 
 /**
- * Class ClipitStoryboard
+ * Class ClipitActivity
  *
  * @package clipit
  */
-class ClipitStoryboard{
+class ClipitActivity{
 
     // Class properties
-    public $content = ElggFile;
-    public $creation_date = DateTime;
-    public $id = int;
-    public $name = string;
-    public $palette_items = array();
-
+    public $description;
+    public $id;
+    public $name;
+    public $group_array;
+    public $palette_array;
+    public $quiz_array;
+    public $sta_array;
+    public $storyboard_array;
+    public $video_array;
+    public $creation_date;
 
 }

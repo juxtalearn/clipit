@@ -21,20 +21,20 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-namespace clipit;
 
-use \pebs\PebsItem;
 /**
- * Class ClipitTaxonomyTag
+ * Class ClipitStoryboard
  *
  * @package clipit
  */
-class ClipitTaxonomyTag extends PebsItem{
+class ClipitStoryboard{
 
     // Class properties
+    public $content = ElggFile;
+    public $creation_date = DateTime;
     public $id = int;
     public $name = string;
-    public $taxonomy = ClipitTaxonomy;
-    public $taxonomy_sb = ClipitTaxonomySB;
+    public $palette_items = array();
+
 
 }

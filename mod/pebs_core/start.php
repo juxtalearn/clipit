@@ -31,7 +31,7 @@ elgg_register_event_handler('init', 'system', 'pebs_core_init');
  * Initialization method which loads objects, libraries, exposes the REST API, and registers test classes.
  */
 function pebs_core_init(){
-    loadFiles(elgg_get_plugins_path()."pebs_core/objects/");
+    //loadFiles(elgg_get_plugins_path()."pebs_core/libraries/");
 }
 
 /**

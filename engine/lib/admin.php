@@ -134,11 +134,11 @@ function elgg_delete_admin_notice($id) {
 }
 
 /**
- * List all admin messages.
+ * Get admin notices. An admin must be logged in since the notices are private.
  *
  * @param int $limit Limit
  *
- * @return array List of admin notices
+ * @return array Array of admin notices
  * @since 1.8.0
  */
 function elgg_get_admin_notices($limit = 10) {
@@ -158,11 +158,13 @@ function elgg_get_admin_notices($limit = 10) {
  * @since 1.8.0
  */
 function elgg_admin_notice_exists($id) {
+	$old_ia = elgg_set_ignore_access(true);
 	$notice = elgg_get_entities_from_metadata(array(
 		'type' => 'object',
 		'subtype' => 'admin_notice',
 		'metadata_name_value_pair' => array('name' => 'admin_notice_id', 'value' => $id)
 	));
+	elgg_set_ignore_access($old_ia);
 
 	return ($notice) ? TRUE : FALSE;
 }
@@ -468,14 +470,18 @@ function admin_page_handler($page) {
 	$vars = array('page' => $page);
 
 	// special page for plugin settings since we create the form for them
-	if ($page[0] == 'plugin_settings' && isset($page[1]) &&
-		(elgg_view_exists("settings/{$page[1]}/edit") || elgg_view_exists("plugins/{$page[1]}/settings"))) {
+	if ($page[0] == 'plugin_settings') {
+		if (isset($page[1]) && (elgg_view_exists("settings/{$page[1]}/edit") || 
+			elgg_view_exists("plugins/{$page[1]}/settings"))) {
 
-		$view = 'admin/plugin_settings';
-		$plugin = elgg_get_plugin_from_id($page[1]);
-		$vars['plugin'] = $plugin;
+			$view = 'admin/plugin_settings';
+			$plugin = elgg_get_plugin_from_id($page[1]);
+			$vars['plugin'] = $plugin;
 
-		$title = elgg_echo("admin:{$page[0]}");
+			$title = elgg_echo("admin:{$page[0]}");
+		} else {
+			forward('', '404');
+		}
 	} else {
 		$view = 'admin/' . implode('/', $page);
 		$title = elgg_echo("admin:{$page[0]}");

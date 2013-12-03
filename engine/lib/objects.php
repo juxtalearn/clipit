@@ -117,4 +117,4 @@ function objects_test($hook, $type, $value, $params) {
 }
 
 elgg_register_event_handler('init', 'system', 'objects_init', 0);
-//elgg_register_plugin_hook_handler('unit_test', 'system', 'objects_test');
+elgg_register_plugin_hook_handler('unit_test', 'system', 'objects_test');

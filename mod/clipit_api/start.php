@@ -31,9 +31,8 @@ elgg_register_event_handler('init', 'system', 'clipit_api_init');
  * Initialization method which loads objects, libraries, exposes the REST API, and registers test classes.
  */
 function clipit_api_init(){
-    loadFiles(elgg_get_plugins_path()."clipit_api/objects/");
     loadFiles(elgg_get_plugins_path()."clipit_api/libraries/");
-    \clipit\expose_rest_api();
+    expose_clipit_api();
     //elgg_register_plugin_hook_handler('unit_test', 'system', 'clipit_api_tests');
 }
 

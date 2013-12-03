@@ -21,22 +21,19 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-namespace clipit;
-
 
 /**
- * Class ClipitTaxonomy
+ * Class ClipitTaxonomySB
  *
  * @package clipit
  */
-class ClipitTaxonomy{
+class ClipitTaxonomySB{
 
     // Class properties
-    public $description = string;
     public $id = int;
     public $name = string;
-    public $taxonomy_tc_list = array(ClipitTaxonomyTC);
-    public $creation_date = DateTime;
+    public $taxonomy_tag_list = array(ClipitTaxonomyTag);
+    public $taxonomy_tc = ClipitTaxonomyTC;
 
 
 }

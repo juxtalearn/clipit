@@ -27,7 +27,7 @@ function parse_urls($text) {
 	// By default htmlawed rewrites tags to this format.
 	// if PHP supported conditional negative lookbehinds we could use this:
 	// $r = preg_replace_callback('/(?<!=)(?<![ ])?(?<!["\'])((ht|f)tps?:\/\/[^\s\r\n\t<>"\'\!\(\),]+)/i',
-	$r = preg_replace_callback('/(?<!=)(?<!["\'])((ht|f)tps?:\/\/[^\s\r\n\t<>"\'\(\)]+)/i',
+	$r = preg_replace_callback('/(?<![=\/"\'])((ht|f)tps?:\/\/[^\s\r\n\t<>"\'\(\)]+)/i',
 	create_function(
 		'$matches',
 		'
@@ -444,7 +444,7 @@ function output_unit_test($hook, $type, $value, $params) {
  * @access private
  */
 function output_init() {
-	//elgg_register_plugin_hook_handler('unit_test', 'system', 'output_unit_test');
+	elgg_register_plugin_hook_handler('unit_test', 'system', 'output_unit_test');
 }
 
 elgg_register_event_handler('init', 'system', 'output_init');

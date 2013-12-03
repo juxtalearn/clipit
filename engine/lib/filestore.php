@@ -517,4 +517,4 @@ function filestore_test($hook, $type, $value, $params) {
 elgg_register_event_handler('init', 'system', 'filestore_init', 100);
 
 // Unit testing
-//elgg_register_plugin_hook_handler('unit_test', 'system', 'filestore_test');
+elgg_register_plugin_hook_handler('unit_test', 'system', 'filestore_test');

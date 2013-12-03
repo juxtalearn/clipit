@@ -253,4 +253,4 @@ function sites_test($hook, $type, $value, $params) {
 }
 
 // Register with unit test
-//elgg_register_plugin_hook_handler('unit_test', 'system', 'sites_test');
+elgg_register_plugin_hook_handler('unit_test', 'system', 'sites_test');

@@ -1,13 +1,13 @@
 <?php
 /**
- * Pebs Core
+ * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
- * Creation date:   2013-11-01
+ * Creation date:   2013-10-10
  * Last update:     $Date$
  *
  * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, JuxtaLearn Project
  * @version         $Version$
- * @link            http://
+ * @link            http://juxtalearn.org
  * @license         GNU Affero General Public License v3
  *                  (http://www.gnu.org/licenses/agpl-3.0.txt)
  *                  This program is free software: you can redistribute it and/or modify
@@ -22,9 +22,13 @@
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
 
-namespace pebs;
+/**
+ * Class ClipitFile
+ *
+ * @package clipit
+ */
+class ClipitFile extends PebsFile{
 
 
-abstract class PebsCollection {
 
-} 
+}

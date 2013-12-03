@@ -21,16 +21,6 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-namespace clipit;
-
-/**
- * Alias so classes outside of this namespace can be used without path.
- * @use \ElggObject
- *
- * @use pebs\PebsItem
- */
-use \ElggObject;
-use pebs\PebsItem;
 
 /**
  * Class ClipitComment
@@ -129,30 +119,5 @@ class ClipitComment extends PebsItem{
         return $this->id = $elgg_object->guid;
     }
 
-    /**
-     * Create a new ClipitComment instance, and save it into the system.
-     * @param string $name
-     * @param string $description
-     * @param int $target
-     * @param int $author
-     * @param bool $overall
-     * @param array $rating_array
-     * @return bool|int Returns the new Comment If, or false if error
-     */
-    static function create($name = "",
-                           $description = "",
-                           $target,
-                           $author,
-                           $overall,
-                           $rating_array = null){
-        $prop_value_array["name"] = (string)$name;
-        $prop_value_array["description"] = (string)$description;
-        $prop_value_array["target"] = (int)$target;
-        $prop_value_array["author"] = (int)$author;
-        $prop_value_array["overall"] = (bool)$overall;
-        $prop_value_array["rating_array"] = (array)$rating_array;
-        $comment = new ClipitComment();
-        return $comment->setProperties($prop_value_array);
-    }
 }
 

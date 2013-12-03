@@ -21,15 +21,6 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-namespace clipit;
-
-/**
- * Alias so classes outside of this namespace can be used without path.
- * @use \ElggObject
- * @use \pebs\PebsItem
- */
-use \ElggObject;
-use \pebs\PebsItem;
 
 /**
  * Class ClipitVideo
@@ -102,30 +93,6 @@ class ClipitVideo extends PebsItem{
         $elgg_object->taxonomy_tag_array = (array)$this->taxonomy_tag_array;
         $elgg_object->save();
         return $this->id = $elgg_object->guid;
-    }
-
-    /**
-     * Create a new ClipitVideo instance, and save it into the system.
-     *
-     * @param string $name Name of the Video
-     * @param string $description Description of the Video
-     * @param array $comment_array List of comments which target the Video
-     * @param string $link Link to where the video is hosted
-     * @param array $taxonomy_tag_array List of Taxonomy Tags related to the Video
-     * @return bool|int Returns the new Video Id, or false if error
-     */
-    static function create($name,
-                           $description = "",
-                           $link = "",
-                           $comment_array = array(),
-                           $taxonomy_tag_array = array()){
-        $prop_value_array["name"] = $name;
-        $prop_value_array["description"] = $description;
-        $prop_value_array["link"] = $link;
-        $prop_value_array["comment_array"] = $comment_array;
-        $prop_value_array["taxonomy_tag_array"] = $taxonomy_tag_array;
-        $video = new ClipitVideo();
-        return $video->setProperties($prop_value_array);
     }
 
     /**

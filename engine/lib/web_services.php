@@ -553,7 +553,7 @@ function get_and_validate_api_headers() {
 		throw new APIException(elgg_echo('APIException:NotGetOrPost'));
 	}
 
-	$result->api_key = getenv('HTTP_X_ELGG_APIKEY');
+	$result->api_key = $_SERVER['HTTP_X_ELGG_APIKEY'];
 	if ($result->api_key == "") {
 		throw new APIException(elgg_echo('APIException:MissingAPIKey'));
 	}
@@ -1418,7 +1418,7 @@ function api_init() {
 	// Register a page handler, so we can have nice URLs
 	register_service_handler('rest', 'rest_handler');
 
-	//elgg_register_plugin_hook_handler('unit_test', 'system', 'api_unit_test');
+	elgg_register_plugin_hook_handler('unit_test', 'system', 'api_unit_test');
 
 	// expose the list of api methods
 	expose_function("system.api.list", "list_all_apis", NULL,

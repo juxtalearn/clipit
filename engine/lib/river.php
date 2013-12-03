@@ -691,7 +691,7 @@ function elgg_river_init() {
 
 	elgg_register_action('river/delete', '', 'admin');
 
-	//elgg_register_plugin_hook_handler('unit_test', 'system', 'elgg_river_test');
+	elgg_register_plugin_hook_handler('unit_test', 'system', 'elgg_river_test');
 }
 
 elgg_register_event_handler('init', 'system', 'elgg_river_init');

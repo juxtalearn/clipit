@@ -1,5 +1,4 @@
 <?php
-
 /**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
@@ -22,12 +21,32 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-namespace clipit;
 
 /**
  * Expose all functions for the ClipIt REST API
  */
-function expose_rest_api(){
+function expose_clipit_api(){
+    $suffix_list = array(
+        "clipit.activity." => "ClipitActivity::",
+        "clipit.comment." => "ClipitComment::",
+        "clipit.file." => "ClipitFile::",
+        "clipit.group." => "ClipitGroup::",
+        "clipit.palette." => "ClipitPalette::",
+        "clipit.quiz." => "ClipitQuiz::",
+        "clipit.quiz.question." => "ClipitQuizQuestion::",
+        "clipit.quiz.result." => "ClipitQuizResult::",
+        "clipit.site." => "ClipitQuizSite::",
+        "clipit.sta." => "ClipitSTA::",
+        "clipit.storyboard." => "ClipitStoryboard::",
+        "clipit.taxonomy." => "ClipitTaxonomy::",
+        "clipit.taxonomy.sb." => "ClipitTaxonomySB::",
+        "clipit.taxonomy.tag." => "ClipitTaxonomyTag::",
+        "clipit.taxonomy.tc." => "ClipitTaxonomyTC::",
+        "clipit.user." => "ClipitUser::",
+        "clipit.video." => "ClipitVideo::");
+    foreach($suffix_list as $api_suffix => $class_suffix){
+        expose_common_functions($api_suffix, $class_suffix);
+    }
     expose_activity_functions();
     expose_comment_functions();
     expose_file_functions();
@@ -47,15 +66,7 @@ function expose_rest_api(){
     expose_video_functions();
 }
 
-function expose_activity_functions(){
-}
-
-function expose_comment_functions(){
-}
-
-function expose_file_functions(){
-    $api_suffix = "clipit.file.";
-    $class_suffix = "\\clipit\\ClipitFile::";
+function expose_common_functions($api_suffix, $class_suffix){
     expose_function(
         $api_suffix."list_properties",
         $class_suffix."list_properties",
@@ -84,23 +95,18 @@ function expose_file_functions(){
              "prop_value_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "Set property=>value array",
+        "Set property=>value array and save into the system",
         'POST', false, true);
     expose_function(
         $api_suffix."create",
         $class_suffix."create",
         array(
-             "name" => array(
-                 "type" => "string",
-                 "required" => true),
-             "description" => array(
-                 "type" => "string",
-                 "required" => false),
-             "data" => array(
-                 "type" => "string",
+             "prop_value_array" => array(
+                 "type" => "array",
                  "required" => true)),
-        "Create a new instance and save it into the system",
+        "Create a new instance, set property=>value array and save into the system",
         'POST', false, true);
+
     expose_function(
         $api_suffix."delete_by_id",
         $class_suffix."delete_by_id",
@@ -130,6 +136,15 @@ function expose_file_functions(){
         'GET', false, true);
 }
 
+function expose_activity_functions(){
+}
+
+function expose_comment_functions(){
+}
+
+function expose_file_functions(){
+}
+
 function expose_group_functions(){
 }
 
@@ -138,85 +153,7 @@ function expose_palette_functions(){
 
 function expose_quiz_functions(){
     $api_suffix = "clipit.quiz.";
-    $class_suffix = "\\clipit\\ClipitQuiz::";
-    expose_function(
-        $api_suffix."list_properties",
-        $class_suffix."list_properties",
-        null,
-        "Get class properties",
-        'GET', false, true);
-    expose_function(
-        $api_suffix."get_properties",
-        $class_suffix."get_properties",
-        array(
-             "id" => array(
-                 "type" => "int",
-                 "required" => true),
-             "prop_array" => array(
-                 "type" => "array",
-                 "required" => true)),
-        "Get property=>value array",
-        'GET', false, true);
-    expose_function(
-        $api_suffix."set_properties",
-        $class_suffix."set_properties",
-        array(
-             "id" => array(
-                 "type" => "int",
-                 "required" => true),
-             "prop_value_array" => array(
-                 "type" => "array",
-                 "required" => true)),
-        "Set property=>value array",
-        'POST', false, true);
-    expose_function(
-        $api_suffix."create",
-        $class_suffix."create",
-        array(
-             "name" => array(
-                 "type" => "string",
-                 "required" => true),
-             "target" => array(
-                 "type" => "string",
-                 "required" => true),
-             "description" => array(
-                 "type" => "string",
-                 "required" => false),
-             "public" => array(
-                 "type" => "bool",
-                 "required" => false),
-             "question_array" => array(
-                 "type" => "array",
-                 "required" => false),
-             "taxonomy" => array(
-                 "type" => "int",
-                 "required" => false)),
-        "Create new instance and save it into the system",
-        'POST', false, true);
-    expose_function(
-        $api_suffix."delete_by_id",
-        $class_suffix."delete_by_id",
-        array(
-             "id_array" => array(
-                 "type" => "array",
-                 "required" => true)),
-        "Delete instances by Id",
-        'POST', false, true);
-    expose_function(
-        $api_suffix."get_all",
-        $class_suffix."get_all",
-        null,
-        "Get all instances",
-        'GET', false, true);
-    expose_function(
-        $api_suffix."get_by_id",
-        $class_suffix."get_by_id",
-        array(
-             "id_array" => array(
-                 "type" => "array",
-                 "required" => true)),
-        "Get instances by Id",
-        'GET', false, true);
+    $class_suffix = "ClipitQuiz::";
     expose_function(
         $api_suffix."add_questions",
         $class_suffix."add_questions",
@@ -254,87 +191,7 @@ function expose_quiz_functions(){
 
 function expose_quiz_question_functions(){
     $api_suffix = "clipit.quiz.question.";
-    $class_suffix = "\\clipit\\ClipitQuizQuestion::";
-    expose_function(
-        $api_suffix."list_properties",
-        $class_suffix."list_properties",
-        null,
-        "Get class properties",
-        'GET', false, true);
-    expose_function(
-        $api_suffix."get_properties",
-        $class_suffix."get_properties",
-        array(
-             "id" => array(
-                 "type" => "int",
-                 "required" => true),
-             "prop_array" => array(
-                 "type" => "array",
-                 "required" => true)),
-        "Get property=>value array",
-        'GET', false, true);
-    expose_function(
-        $api_suffix."set_properties",
-        $class_suffix."set_properties",
-        array(
-             "id" => array(
-                 "type" => "int",
-                 "required" => true),
-             "prop_value_array" => array(
-                 "type" => "array",
-                 "required" => true)),
-        "Set property=>value array",
-        'POST', false, true);
-    expose_function(
-        $api_suffix."create",
-        $class_suffix."create",
-        array(
-             "name" => array(
-                 "type" => "string",
-                 "required" => true),
-             "description" => array(
-                 "type" => "string",
-                 "required" => true),
-             "option_array" => array(
-                 "type" => "array",
-                 "required" => true),
-             "option_type" => array(
-                 "type" => "string",
-                 "required" => true),
-             "taxonomy_tag_array" => array(
-                 "type" => "array",
-                 "required" => false),
-             "video" => array(
-                 "type" => "int",
-                 "required" => false)),
-        "Create a new instance and save it into the system",
-        'POST', false, true);
-    expose_function(
-        $api_suffix."delete_by_id",
-        $class_suffix."delete_by_id",
-        array(
-             "id_array" => array(
-                 "type" => "array",
-                 "required" => true)),
-        "Delete instances by Id",
-        'POST', false, true);
-    expose_function(
-        $api_suffix."get_all",
-        $class_suffix."get_all",
-        array(
-             "limit" => array(
-                 "type" => "int",
-                 "required" => false)),
-        "Get all instances", 'GET', false, true);
-    expose_function(
-        $api_suffix."get_by_id",
-        $class_suffix."get_by_id",
-        array(
-             "id_array" => array(
-                 "type" => "array",
-                 "required" => true)),
-        "Get instances by Id",
-        'GET', false, true);
+    $class_suffix = "ClipitQuizQuestion::";
     expose_function(
         $api_suffix."get_results",
         $class_suffix."get_results",
@@ -381,88 +238,7 @@ function expose_quiz_question_functions(){
 
 function expose_quiz_result_functions(){
     $api_suffix = "clipit.quiz.result.";
-    $class_suffix = "\\clipit\\ClipitQuizResult::";
-    expose_function(
-        $api_suffix."list_properties",
-        $class_suffix."list_properties",
-        null,
-        "Get class properties",
-        'GET', false, true);
-    expose_function(
-        $api_suffix."get_properties",
-        $class_suffix."get_properties",
-        array(
-             "id" => array(
-                 "type" => "int",
-                 "required" => true),
-             "prop_array" => array(
-                 "type" => "array",
-                 "required" => true)),
-        "Get property=>value array",
-        'GET', false, true);
-    expose_function(
-        $api_suffix."set_properties",
-        $class_suffix."set_properties",
-        array(
-             "id" => array(
-                 "type" => "int",
-                 "required" => true),
-             "prop_value_array" => array(
-                 "type" => "array",
-                 "required" => true)),
-        "Set property=>value array",
-        'POST', false, true);
-    expose_function(
-        $api_suffix."create",
-        $class_suffix."create",
-        array(
-             "name" => array(
-                 "type" => "string",
-                 "required" => false),
-             "description" => array(
-                 "type" => "string",
-                 "required" => false),
-             "quiz_question" => array(
-                 "type" => "int",
-                 "required" => true),
-             "result_array" => array(
-                 "type" => "array",
-                 "required" => true),
-             "user" => array(
-                 "type" => "int",
-                 "required" => true),
-             "correct" => array(
-                 "type" => "bool",
-                 "required" => false)),
-        "Create a new instance and save it into the system",
-        'POST', false, true);
-    expose_function(
-        $api_suffix."delete_by_id",
-        $class_suffix."delete_by_id",
-        array(
-             "id_array" => array(
-                 "type" => "array",
-                 "required" => true)),
-        "Delete instances by Id",
-        'POST', false, true);
-    expose_function(
-        $api_suffix."get_all",
-        $class_suffix."get_all",
-        array(
-             "limit" => array(
-                 "type" => "int",
-                 "required" => false)),
-        "Get all instances",
-        'GET', false, true);
-    expose_function(
-        $api_suffix."get_by_id",
-        $class_suffix."get_by_id",
-        array(
-             "id_array" => array(
-                 "type" => "array",
-                 "required" => true)),
-        "Get instances by Id",
-        'GET', false, true);
+    $class_suffix = "ClipitQuizResult::";
     expose_function(
         $api_suffix."get_by_question",
         $class_suffix."get_by_question",
@@ -496,84 +272,7 @@ function expose_taxonomy_tc_functions(){
 
 function expose_user_functions(){
     $api_suffix = "clipit.user.";
-    $class_suffix = "\\clipit\\ClipitUser::";
-    expose_function(
-        $api_suffix."list_properties",
-        $class_suffix."list_properties",
-        null,
-        "Get class properties",
-        'GET', false, true);
-    expose_function(
-        $api_suffix."get_properties",
-        $class_suffix."get_properties",
-        array(
-             "id" => array(
-                 "type" => "int",
-                 "required" => true),
-             "prop_array" => array(
-                 "type" => "array",
-                 "required" => true)),
-        "Get property=>value array",
-        'GET', false, true);
-    expose_function(
-        $api_suffix."set_properties",
-        $class_suffix."set_properties",
-        array(
-             "id" => array(
-                 "type" => "int",
-                 "required" => true),
-             "prop_value_array" => array(
-                 "type" => "array",
-                 "required" => true)),
-        "Set property=>value array",
-        'POST', false, true);
-    expose_function(
-        $api_suffix."create",
-        $class_suffix."create",
-        array(
-             "login" => array(
-                 "type" => "string",
-                 "required" => true),
-             "password" => array(
-                 "type" => "string",
-                 "required" => true),
-             "name" => array(
-                 "type" => "string",
-                 "required" => true),
-             "email" => array(
-                 "type" => "string",
-                 "required" => true),
-             "role" => array(
-                 "type" => "string",
-                 "required" => false),
-             "description" => array(
-                 "type" => "string",
-                 "required" => false)),
-        "Create a new instance and save it into the system",
-        'POST', false, true);
-    expose_function(
-        $api_suffix."delete_by_id",
-        $class_suffix."delete_by_id",
-        array(
-             "id_array" => array(
-                 "type" => "array",
-                 "required" => true)),
-        "Delete instances by Id", 'POST', false, true);
-    expose_function(
-        $api_suffix."get_all",
-        $class_suffix."get_all",
-        null,
-        "Get all instances",
-        'GET', false, true);
-    expose_function(
-        $api_suffix."get_by_id",
-        $class_suffix."get_by_id",
-        array(
-             "id_array" => array(
-                 "type" => "array",
-                 "required" => true)),
-        "Get instances by Id",
-        'GET', false, true);
+    $class_suffix = "ClipitUser::";
     expose_function(
         $api_suffix."get_by_login",
         $class_suffix."get_by_login",
@@ -605,85 +304,7 @@ function expose_user_functions(){
 
 function expose_video_functions(){
     $api_suffix = "clipit.video.";
-    $class_suffix = "\\clipit\\ClipitVideo::";
-    expose_function(
-        $api_suffix."list_properties",
-        $class_suffix."list_properties",
-        null,
-        "Get class properties",
-        'GET', false, true);
-    expose_function(
-        $api_suffix."get_properties",
-        $class_suffix."get_properties",
-        array(
-             "id" => array(
-                 "type" => "int",
-                 "required" => true),
-             "prop_array" => array(
-                 "type" => "array",
-                 "required" => true)),
-        "Get property=>value array",
-        'GET', false, true);
-    expose_function(
-        $api_suffix."set_properties",
-        $class_suffix."set_properties",
-        array(
-             "id" => array(
-                 "type" => "int",
-                 "required" => true),
-             "prop_value_array" => array(
-                 "type" => "array",
-                 "required" => true)),
-        "Set property=>value array",
-        'POST', false, true);
-    expose_function(
-        $api_suffix."create",
-        $class_suffix."create",
-        array(
-             "name" => array(
-                 "type" => "string",
-                 "required" => true),
-             "description" => array(
-                 "type" => "string",
-                 "required" => false),
-             "link" => array(
-                 "type" => "string",
-                 "required" => false),
-             "comment_array" => array(
-                 "type" => "array",
-                 "required" => false),
-             "taxonomy_tag_array" => array(
-                 "type" => "array",
-                 "required" => false)),
-        "Create a new instance and save it into the system",
-        'POST', false, true);
-    expose_function(
-        $api_suffix."delete_by_id",
-        $class_suffix."delete_by_id",
-        array(
-             "id_array" => array(
-                 "type" => "array",
-                 "required" => true)),
-        "Delete instances by Id",
-        'POST', false, true);
-    expose_function(
-        $api_suffix."get_all",
-        $class_suffix."get_all",
-        array(
-             "limit" => array(
-                 "type" => "int",
-                 "required" => false)),
-        "Get all instances",
-        'GET', false, true);
-    expose_function(
-        $api_suffix."get_by_id",
-        $class_suffix."get_by_id",
-        array(
-             "id_array" => array(
-                 "type" => "array",
-                 "required" => true)),
-        "Get instances by Id",
-        'GET', false, true);
+    $class_suffix = "ClipitVideo::";
     expose_function(
         $api_suffix."add_comments",
         $class_suffix."add_comments",

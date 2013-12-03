@@ -21,19 +21,21 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-namespace clipit;
 
 /**
- * Alias so classes outside of this namespace can be used without path.
- * @use \pebs\PebsUser
- */
-use \pebs\PebsUser;
-
-/**
- * Class ClipitUser
+ * Class ClipitPalette
  *
  * @package clipit
  */
-class ClipitUser extends PebsUser{
+class ClipitPalette{
+
+    // Class properties
+    public $activity = ClipitActivity;
+    public $id = int;
+    public $items = array();
+    public $name = string;
+    public $taxonomy = ClipitTaxonomy;
+    public $type = string;
+
 
 }

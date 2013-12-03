@@ -1,7 +1,6 @@
 <?php
 /**
  * Members English language file
- * 
  */
 
 $english = array(

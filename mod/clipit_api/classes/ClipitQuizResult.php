@@ -21,17 +21,6 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-namespace clipit;
-
-
-
-/**
- * Alias so classes outside of this namespace can be used without path.
- * @use \ElggObject
- * @use pebs\PebsItem
- */
-use \ElggObject;
-use pebs\PebsItem;
 
 /**
  * Class ClipitQuizResult
@@ -113,20 +102,19 @@ class ClipitQuizResult extends PebsItem{
     }
 
     /**
-     * Overrides PebsItem->setProperties to handle the (bool) $correct property correctly.
+     * Sets values into specified properties of the instance
      *
      * @param array $prop_value_array Array of prop=>value pairs to set into the instance
-     * @return bool|int Returns instance Id, or false if error
+     * @return int Returns instance Id, or false if error
+     * @throws InvalidParameterException
      */
     function setProperties($prop_value_array){
         foreach($prop_value_array as $prop => $value){
             if(!array_key_exists($prop, $this->list_properties())){
-                // lanzar excepción con mensaje
-                return false;
+                throw new InvalidParameterException("ERROR: One or more property names do not exist.");
             }
             if($prop == "id"){
-                // lanzar excepción con mensaje
-                return false;
+                throw new InvalidParameterException("ERROR: Cannot modify 'id' of instance.");
             }
             if($prop == "correct"){
                 $this->setCorrect($value);
@@ -150,33 +138,6 @@ class ClipitQuizResult extends PebsItem{
         } else{
             $this->correct = (bool) $value;
         }
-    }
-
-    /**
-     * Create a new ClipitQuizResult instance, and save it into the system.
-     *
-     * @param string $name Name of the Quiz Result
-     * @param string $description Quiz Result full description (optional)
-     * @param int $quiz_question Id of the Quiz Question this Result refers to
-     * @param array $result_array Array with the Result elements posted by a user
-     * @param int $user Id of the user who posted the result
-     * @param bool $correct If true: the result is correct, if false: the result is incorrect (optional)
-     * @return bool|int Returns Returns the new Quiz Result Id, or false if error
-     */
-    static function create($name = "",
-                    $description = "",
-                    $quiz_question,
-                    $result_array,
-                    $user,
-                    $correct = false){
-        $prop_value_array["name"] = $name;
-        $prop_value_array["description"] = $description;
-        $prop_value_array["quiz_question"] = $quiz_question;
-        $prop_value_array["result_array"] = $result_array;
-        $prop_value_array["user"] = $user;
-        $prop_value_array["correct"] = $correct;
-        $quiz_result = new ClipitQuizResult();
-        return $quiz_result->setProperties($prop_value_array);
     }
 
     /**

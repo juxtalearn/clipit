@@ -2,7 +2,6 @@
 /**
  * Embed English language strings
  *
- * 
  */
 
 $english = array(

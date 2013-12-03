@@ -21,15 +21,6 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-namespace clipit;
-
-/**
- * Alias so classes outside of this namespace can be used without path.
- * @use \ElggObject
- * @use pebs\PebsItem
- */
-use \ElggObject;
-use pebs\PebsItem;
 
 /**
  * Class ClipitQuiz
@@ -105,15 +96,20 @@ class ClipitQuiz extends PebsItem{
         return $this->id = $elgg_object->guid;
     }
 
+    /**
+     * Sets values into specified properties of the instance
+     *
+     * @param array $prop_value_array Array of prop=>value pairs to set into the instance
+     * @return int Returns instance Id, or false if error
+     * @throws InvalidParameterException
+     */
     function setProperties($prop_value_array){
         foreach($prop_value_array as $prop => $value){
             if(!array_key_exists($prop, $this->list_properties())){
-                // lanzar excepción con mensaje
-                return false;
+                throw new InvalidParameterException("ERROR: One or more property names do not exist.");
             }
             if($prop == "id"){
-                // lanzar excepción con mensaje
-                return false;
+                throw new InvalidParameterException("ERROR: Cannot modify 'id' of instance.");
             }
             if($prop == "public"){
                 $this->setPrivacy($value);
@@ -137,33 +133,6 @@ class ClipitQuiz extends PebsItem{
         } else{
             $this->public = (bool) $value;
         }
-    }
-
-    /**
-     * Create a new ClipitQuiz instance, and save it into the system.
-     *
-     * @param string $name Name of the Quiz
-     * @param string $target Target interface to present Quiz (web space, large display, etc.)
-     * @param string $description Quiz full description (optional)
-     * @param bool $public Whether the Quiz can be reused by other teachers (true= yes, false= no)
-     * @param array $question_array Array of ClipitQuizQuestions contained in this Quiz (optional)
-     * @param int $taxonomy Id of the Taxonomy referenced by this Quiz (optional)
-     * @return bool|int Returns the new Quiz Id, or false if error
-     */
-    static function create($name,
-                    $target,
-                    $description = "",
-                    $public = false,
-                    $question_array = array(),
-                    $taxonomy = -1){
-        $prop_value_array["name"] = $name;
-        $prop_value_array["target"] = $target;
-        $prop_value_array["description"] = $description;
-        $prop_value_array["public"] = $public;
-        $prop_value_array["question_array"] = $question_array;
-        $prop_value_array["taxonomy"] = $taxonomy;
-        $quiz = new ClipitQuiz();
-        return $quiz->setProperties($prop_value_array);
     }
 
     /**

@@ -40,6 +40,9 @@ class ElggUser extends ElggEntity
 		$this->attributes['code'] = NULL;
 		$this->attributes['banned'] = "no";
 		$this->attributes['admin'] = 'no';
+		$this->attributes['prev_last_action'] = NULL;
+		$this->attributes['last_login'] = NULL;
+		$this->attributes['prev_last_login'] = NULL;
 		$this->attributes['tables_split'] = 2;
 	}
 
@@ -129,9 +132,13 @@ class ElggUser extends ElggEntity
 		}
 
 		// Now save specific stuff
-		return create_user_entity($this->get('guid'), $this->get('name'), $this->get('username'),
+		_elgg_disable_caching_for_entity($this->guid);
+		$ret = create_user_entity($this->get('guid'), $this->get('name'), $this->get('username'),
 			$this->get('password'), $this->get('salt'), $this->get('email'), $this->get('language'),
 			$this->get('code'));
+		_elgg_enable_caching_for_entity($this->guid);
+
+		return $ret;
 	}
 
 	/**

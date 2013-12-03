@@ -421,9 +421,11 @@ function elgg_get_metastring_based_objects($options) {
 	if ($metastring_clauses) {
 		$wheres = array_merge($wheres, $metastring_clauses['wheres']);
 		$joins = array_merge($joins, $metastring_clauses['joins']);
+	} else {
+		$wheres[] = get_access_sql_suffix('n_table');
 	}
 
-	if ($options['metastring_calculation'] === ELGG_ENTITIES_NO_VALUE) {
+	if ($options['metastring_calculation'] === ELGG_ENTITIES_NO_VALUE && !$options['count']) {
 		$selects = array_unique($selects);
 		// evalutate selects
 		$select_str = '';
@@ -434,6 +436,9 @@ function elgg_get_metastring_based_objects($options) {
 		}
 
 		$query = "SELECT DISTINCT n_table.*{$select_str} FROM {$db_prefix}$type n_table";
+	} elseif ($options['count']) {
+		// count is over the entities
+		$query = "SELECT count(DISTINCT e.guid) as calculation FROM {$db_prefix}$type n_table";
 	} else {
 		$query = "SELECT {$options['metastring_calculation']}(v.string) as calculation FROM {$db_prefix}$type n_table";
 	}
@@ -462,7 +467,7 @@ function elgg_get_metastring_based_objects($options) {
 			$defaults['order_by']);
 	}
 
-	if ($options['metastring_calculation'] === ELGG_ENTITIES_NO_VALUE) {
+	if ($options['metastring_calculation'] === ELGG_ENTITIES_NO_VALUE && !$options['count']) {
 		if (isset($options['group_by'])) {
 			$options['group_by'] = sanitise_string($options['group_by']);
 			$query .= " GROUP BY {$options['group_by']}";
@@ -510,7 +515,7 @@ function elgg_get_metastring_sql($table, $names = null, $values = null,
 		&& !$ids
 		&& (!$pairs && $pairs !== 0)) {
 
-		return '';
+		return array();
 	}
 
 	$db_prefix = elgg_get_config('dbprefix');
@@ -519,8 +524,6 @@ function elgg_get_metastring_sql($table, $names = null, $values = null,
 	// it case- and diacritical-mark- sensitive.
 	// only supported on values.
 	$binary = ($case_sensitive) ? ' BINARY ' : '';
-
-	$access = get_access_sql_suffix($table);
 
 	$return = array (
 		'joins' => array (),
@@ -586,12 +589,14 @@ function elgg_get_metastring_sql($table, $names = null, $values = null,
 	}
 
 	if ($names_where && $values_where) {
-		$wheres[] = "($names_where AND $values_where AND $access)";
+		$wheres[] = "($names_where AND $values_where)";
 	} elseif ($names_where) {
-		$wheres[] = "($names_where AND $access)";
+		$wheres[] = $names_where;
 	} elseif ($values_where) {
-		$wheres[] = "($values_where AND $access)";
+		$wheres[] = $values_where;
 	}
+
+	$wheres[] = get_access_sql_suffix($table);
 
 	if ($where = implode(' AND ', $wheres)) {
 		$return['wheres'][] = "($where)";
@@ -878,7 +883,7 @@ function elgg_entities_get_metastrings_options($type, $options) {
 }
 
 // unit testing
-//elgg_register_plugin_hook_handler('unit_test', 'system', 'metastrings_test');
+elgg_register_plugin_hook_handler('unit_test', 'system', 'metastrings_test');
 
 /**
  * Metadata unit test

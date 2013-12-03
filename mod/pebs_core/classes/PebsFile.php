@@ -21,7 +21,6 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-namespace pebs;
 
 /**
  * Alias so classes outside of this namespace can be used without path.
@@ -106,26 +105,5 @@ class PebsFile extends PebsItem{
         $elgg_file->save();
         return $this->id = $elgg_file->guid;
     }
-
-    /**
-     * Create a new File instance, and save it into the system.
-     *
-     * @param string $name Filename for the File
-     * @param string $description File full description (optional)
-     * @param string $data File data in byte string format
-     * @return bool|int Returns the new File Id, or false if error
-     */
-    static function create($name,
-                           $description = "",
-                           $data){
-        $called_class = get_called_class();
-        $prop_value_array["name"] = $name;
-        $prop_value_array["description"] = $description;
-        $prop_value_array["data"] = $data;
-        $file = new $called_class();
-        return $file->setProperties($prop_value_array);
-    }
-
-
 
 }
