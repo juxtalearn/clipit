@@ -140,6 +140,17 @@ function expose_activity_functions(){
 }
 
 function expose_comment_functions(){
+    $api_suffix = "clipit.comment.";
+    $class_suffix = "ClipitComment::";
+    expose_function(
+        $api_suffix."get_by_author",
+        $class_suffix."get_by_author",
+        array(
+             "author_array" => array(
+                 "type" => "array",
+                 "required" => true)),
+        "Get all Comments by Author Id",
+        'GET', false, true);
 }
 
 function expose_file_functions(){
@@ -246,7 +257,8 @@ function expose_quiz_result_functions(){
              "quiz_question_array" => array(
                  "type" => "array",
                  "required" => true)),
-        "Get instances by Question Id", 'GET', false, true);
+        "Get instances by Question Id",
+        'GET', false, true);
 }
 
 function expose_site_functions(){

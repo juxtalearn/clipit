@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin_manifest xmlns="http://www.elgg.org/plugin_manifest/1.8">
     <name>clipit_api</name>
-    <author>Pablo Llinás</author>
+    <author>Pablo Llinás - pebs74@gmail.com</author>
     <version>1.0</version>
-    <description>This plugin provides the ClipIt API functionality.</description>
+    <description>This plugin provides the ClipIt (REST) API functionality.</description>
     <website>http://www.juxtalearn.org/</website>
     <copyright>(C) JuxtaLearn Project</copyright>
     <license>GNU General Public License version 3</license>
@@ -13,15 +13,15 @@
     </requires>
     <requires>
         <type>plugin</type>
-        <name>pebs_core</name>
+        <name>urjc_backend</name>
     </requires>
     <requires>
         <type>priority</type>
         <priority>after</priority>
-        <plugin>pebs_core</plugin>
+        <plugin>urjc_backend</plugin>
     </requires>
     <category>ClipIt</category>
-    <category>Back-End</category>
+    <category>Backend</category>
     <category>API</category>
     <category>REST API</category>
 </plugin_manifest>

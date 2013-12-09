@@ -27,28 +27,11 @@
  *
  * @package clipit
  */
-class ClipitComment extends PebsItem{
-    //    Inherited properties:
-    //    /**
-    //    * @const string Elgg entity TYPE for this class
-    //    */
-    //    const TYPE = "object";
-    //    /**
-    //    * @const string Elgg entity SUBTYPE for this class
-    //    */
-    //    const SUBTYPE = "";
-    //    /**
-    //    * @var int Unique Id of this instance
-    //    */
-    //    public $id = -1;
-    //    /**
-    //    * @var string Name of this instance
-    //    */
-    //    public $name = "";
-    //    /**
-    //    * @var string Description of this instance
-    //    */
-    //    public $description = "";
+class ClipitComment extends UBItem{
+    /**
+     * @const string Elgg entity subtype for this class
+     */
+    const SUBTYPE = "clipit_comment";
     /**
      * @var int Id of item this comment is targeting
      */
@@ -66,7 +49,7 @@ class ClipitComment extends PebsItem{
      */
     public $overall = false;
     /**
-     * @var array List of "rating_name"=>"rating_value" elements
+     * @var array Ratings in the form: rating_array["rating_name"]=>"rating_value"
      */
     public $rating_array = array();
 
@@ -119,5 +102,32 @@ class ClipitComment extends PebsItem{
         return $this->id = $elgg_object->guid;
     }
 
+    static function get_by_author($author_array){
+        $comment_array = array();
+        foreach($author_array as $author_id){
+            $elgg_object_array = elgg_get_entities_from_metadata(
+                array(
+                     "type" => ClipitComment::TYPE,
+                     "subtype" => ClipitComment::SUBTYPE,
+                     "metadata_names" => array("author"),
+                     "metadata_values" => ($author_id)
+                )
+            );
+            if(!$elgg_object_array){
+                $comment_array[] = null;
+            } else{
+                $temp_array = array();
+                foreach($elgg_object_array as $elgg_object){
+                    $temp_array[] = new ClipitComment($elgg_object->guid);
+                }
+                if(!$temp_array){
+                    $comment_array[] = null;
+                } else{
+                    $comment_array[] = $temp_array;
+                }
+            }
+        }
+        return $comment_array;
+    }
 }
 

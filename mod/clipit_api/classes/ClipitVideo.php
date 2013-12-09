@@ -27,7 +27,7 @@
  *
  * @package clipit
  */
-class ClipitVideo extends PebsItem{
+class ClipitVideo extends UBItem{
     /**
      * @const string Elgg entity sybtype for this class
      */

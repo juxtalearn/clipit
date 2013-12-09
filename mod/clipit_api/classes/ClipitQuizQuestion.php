@@ -27,7 +27,7 @@
  *
  * @package clipit
  */
-class ClipitQuizQuestion extends PebsItem{
+class ClipitQuizQuestion extends UBItem{
     /**
      * @const string Elgg entity subtype for this class
      */

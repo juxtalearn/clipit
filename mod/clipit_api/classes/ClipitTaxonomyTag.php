@@ -27,7 +27,7 @@
  *
  * @package clipit
  */
-class ClipitTaxonomyTag extends PebsItem{
+class ClipitTaxonomyTag extends UBItem{
 
     // Class properties
     public $id = int;

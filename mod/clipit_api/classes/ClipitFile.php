@@ -27,7 +27,7 @@
  *
  * @package clipit
  */
-class ClipitFile extends PebsFile{
+class ClipitFile extends UBFile{
 
 
 

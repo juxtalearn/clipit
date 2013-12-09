@@ -27,7 +27,7 @@
  *
  * @package clipit
  */
-class ClipitQuizResult extends PebsItem{
+class ClipitQuizResult extends UBItem{
     /**
      * @const string Elgg entity subtype for this class
      */
@@ -158,16 +158,17 @@ class ClipitQuizResult extends PebsItem{
                 )
             );
             if(!$elgg_object_array){
-                return $quiz_result_array;
-            }
-            $temp_array = array();
-            foreach($elgg_object_array as $elgg_object){
-                $temp_array[] =  new ClipitQuizResult($elgg_object->guid);
-            }
-            if(!$temp_array){
                 $quiz_result_array[] = null;
             } else{
-                $quiz_result_array[] = $temp_array;
+                $temp_array = array();
+                foreach($elgg_object_array as $elgg_object){
+                    $temp_array[] =  new ClipitQuizResult($elgg_object->guid);
+                }
+                if(!$temp_array){
+                    $quiz_result_array[] = null;
+                } else{
+                    $quiz_result_array[] = $temp_array;
+                }
             }
         }
         return $quiz_result_array;
