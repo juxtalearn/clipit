@@ -27,7 +27,7 @@
  *
  * @package clipit
  */
-class ClipitActivity{
+class ClipitActivity extends UBItem{
 
     // Class properties
     public $description;

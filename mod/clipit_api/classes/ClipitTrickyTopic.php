@@ -23,17 +23,16 @@
  */
 
 /**
- * Class ClipitTaxonomyTC
+ * Class ClipitTrickyTopic
  *
  * @package clipit
  */
-class ClipitTaxonomyTC{
+class ClipitTrickyTopic{
 
     // Class properties
     public $id = int;
     public $name = string;
-    public $taxonomy = ClipitTaxonomy;
-    public $taxonomy_sb_list = array(ClipitTaxonomySB);
+    public $stumbling_block_list = array(ClipitStumblingBlock);
 
 
 }

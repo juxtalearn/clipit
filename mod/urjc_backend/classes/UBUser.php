@@ -22,12 +22,19 @@
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
 
+/**
+ * Class UBUser
+ *
+ * @package urjc_backend
+ */
 class UBUser extends UBItem{
     /**
      * @const string Elgg entity type for this class
+     * @const string Elgg entity subtype for this class
      * @const string Default User Role if not specified
      */
     const TYPE = "user";
+    const SUBTYPE = "";
     const DEFAULT_ROLE = "user";
     /**
      * @var string Login name used to authenticate
@@ -86,6 +93,7 @@ class UBUser extends UBItem{
         $elgg_user->salt = $this->password_hash;
         $elgg_user->role = $this->role;
         $elgg_user->save();
+        $this->time_created = $elgg_user->time_created;
         return $this->id = $elgg_user->guid;
     }
 

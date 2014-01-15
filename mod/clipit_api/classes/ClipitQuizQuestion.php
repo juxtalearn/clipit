@@ -41,9 +41,9 @@ class ClipitQuizQuestion extends UBItem{
      */
     public $option_type = "";
     /**
-     * @var array Array of Taxonomy Tags relevant to this question
+     * @var array Array of Stumbling Block Tags relevant to this question
      */
-    public $taxonomy_tag_array = array();
+    public $tag_array = array();
     /**
      * @var int ID of ClipitVideo refered to by this question (optional)
      */
@@ -68,7 +68,7 @@ class ClipitQuizQuestion extends UBItem{
         $this->name = (string) $elgg_object->name;
         $this->description = (string) $elgg_object->description;
         $this->option_array = (array) $elgg_object->option_array;
-        $this->taxonomy_tag_array = (array) $elgg_object->taxonomy_tag_array;
+        $this->tag_array = (array) $elgg_object->tag_array;
         $this->option_type = (string) $elgg_object->option_type;
         $this->video = (int) $elgg_object->video;
         return $this;
@@ -89,7 +89,7 @@ class ClipitQuizQuestion extends UBItem{
         $elgg_object->name = (string)$this->name;
         $elgg_object->description = (string)$this->description;
         $elgg_object->option_array = (array) $this->option_array;
-        $elgg_object->taxonomy_tag_array = (array) $this->taxonomy_tag_array;
+        $elgg_object->tag_array = (array) $this->tag_array;
         $elgg_object->option_type = (string) $this->option_type;
         $elgg_object->video = (int) $this->video;
         $elgg_object->save();
@@ -109,20 +109,20 @@ class ClipitQuizQuestion extends UBItem{
 
 
     /**
-     * Add a list of Tags from the Taxonomy to a Quiz Question.
+     * Add a list of Stumbling Block Tags to a Quiz Question.
      *
      * @param int $id Id of the Quiz Question
-     * @param array $taxonomy_tag_array Array of Taxonomy Tags to add to the Quiz Question
+     * @param array $tag_array Array of Stumbling Block Tags to add to the Quiz Question
      * @return bool True if success, false if error
      */
-    static function add_taxonomy_tags($id, $taxonomy_tag_array){
+    static function add_tags($id, $tag_array){
         if(!$quiz_question = new ClipitQuizQuestion($id)){
             return false;
         }
-        if(!$quiz_question->taxonomy_tag_array){
-            $quiz_question->taxonomy_tag_array = $taxonomy_tag_array;
+        if(!$quiz_question->tag_array){
+            $quiz_question->tag_array = $tag_array;
         } else{
-            $quiz_question->taxonomy_tag_array = array_merge($quiz_question->taxonomy_tag_array, $taxonomy_tag_array);
+            $quiz_question->tag_array = array_merge($quiz_question->tag_array, $tag_array);
         }
         if(!$quiz_question->save()){
             return false;
@@ -131,23 +131,23 @@ class ClipitQuizQuestion extends UBItem{
     }
 
     /**
-     * Remove a list of Tags from the Taxonomy from a Quiz Question.
+     * Remove a list of Stumbling Block Tags from a Quiz Question.
      *
      * @param int $id Id of the Quiz Question
-     * @param array $taxonomy_tag_array Array of Taxonomy Tags to remove from the Quiz Question
+     * @param array $tag_array Array of Stumbling Block Tags to remove from the Quiz Question
      * @return bool True if success, false if error
      */
-    static function remove_taxonomy_tags($id, $taxonomy_tag_array){
+    static function remove_tags($id, $tag_array){
         if(!$quiz_question = new ClipitQuizQuestion($id)){
             return false;
         }
-        if(!$quiz_question->taxonomy_tag_array){
+        if(!$quiz_question->tag_array){
             return false;
         }
-        foreach($taxonomy_tag_array as $taxonomy_tag){
-            $key = array_search($taxonomy_tag, $quiz_question->taxonomy_tag_array);
+        foreach($tag_array as $tag){
+            $key = array_search($tag, $quiz_question->tag_array);
             if(isset($key)){
-                unset($quiz_question->taxonomy_tag_array[$key]);
+                unset($quiz_question->tag_array[$key]);
             }else{
                 return false;
             }
@@ -159,23 +159,15 @@ class ClipitQuizQuestion extends UBItem{
     }
 
     /**
-     * Get all Taxonomy Tags for a Quiz Question.
+     * Get all Stumbling Block Tags for a Quiz Question.
      *
-     * @param int $id Id from the Quiz Question to get Taxonomy Tags from
-     * @return array|bool Returns an array of Taxonomy Tag items, or false if error
+     * @param int $id Id from the Quiz Question to get Stumbling Block Tags from
+     * @return array|bool Returns an array of Stumbling Block Tag items, or false if error
      */
-    static function get_taxonomy_tags($id){
+    static function get_tags($id){
         if(!$quiz_question = new ClipitQuizQuestion($id)){
             return false;
         }
-        $taxonomy_tag_array = array();
-        foreach($quiz_question->taxonomy_tag_array as $taxonomy_tag_id){
-            if(!$taxonomy_tag = new ClipitTaxonomyTag($taxonomy_tag_id)){
-                $taxonomy_tag_array[] = null;
-            } else{
-                $taxonomy_tag_array[] = $taxonomy_tag;
-            }
-        }
-        return $taxonomy_tag_array;
+        return $quiz_question->tag_array;
     }
 }

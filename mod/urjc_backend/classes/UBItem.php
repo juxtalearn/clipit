@@ -22,6 +22,11 @@
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
 
+/**
+ * Class UBItem
+ *
+ * @package urjc_backend
+ */
 class UBItem{
     /**
      * @const string Elgg entity TYPE for this class
@@ -30,7 +35,7 @@ class UBItem{
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
-    const SUBTYPE = "";
+    const SUBTYPE = "item";
     /**
      * @var int Unique Id of this instance
      */

@@ -26,6 +26,7 @@
  * Expose all functions for the ClipIt REST API
  */
 function expose_clipit_api(){
+    expose_gettoken();
     $suffix_list = array(
         "clipit.activity." => "ClipitActivity::",
         "clipit.comment." => "ClipitComment::",
@@ -64,6 +65,35 @@ function expose_clipit_api(){
     expose_taxonomy_tc_functions();
     expose_user_functions();
     expose_video_functions();
+}
+
+function expose_gettoken(){
+    unexpose_function("auth.gettoken");
+    expose_function(
+        "auth.gettoken",
+        "clipit_gettoken",
+        array(
+             "login" => array(
+                 "type" => "string",
+                 "required" => true),
+             "password" => array(
+                 "type" => "string",
+                 "required" => true),
+             "timeout" => array(
+                 "type" => "int",
+                 "required" => false)),
+        "Obtain a user authentication token which can be used for authenticating future API calls. Pass it as the parameter auth_token",
+        'POST', false, false);
+}
+
+function clipit_gettoken($username, $password, $timeout = 60) {
+    if (true === elgg_authenticate($username, $password)) {
+        $token = create_user_token($username, $timeout);
+        if ($token) {
+            return $token;
+        }
+    }
+    throw new SecurityException(elgg_echo('SecurityException:authenticationfailed'));
 }
 
 function expose_common_functions($api_suffix, $class_suffix){

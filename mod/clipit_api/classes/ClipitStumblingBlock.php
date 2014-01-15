@@ -23,18 +23,16 @@
  */
 
 /**
- * Class ClipitTaxonomy
+ * Class ClipitTaxonomySB
  *
  * @package clipit
  */
-class ClipitTaxonomy{
+class ClipitTaxonomySB{
 
     // Class properties
-    public $description = string;
     public $id = int;
     public $name = string;
-    public $taxonomy_tc_list = array(ClipitTaxonomyTC);
-    public $creation_date = DateTime;
+    public $tricky_topic = int;
 
 
 }

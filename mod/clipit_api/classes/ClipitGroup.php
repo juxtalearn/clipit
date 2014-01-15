@@ -27,7 +27,7 @@
  *
  * @package clipit
  */
-class ClipitGroup{
+class ClipitGroup extends UBCollection{
 
     // Class properties
     public $activity_array = array(ClipitActivity);

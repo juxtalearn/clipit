@@ -23,7 +23,7 @@
  */
 
 /**
- * Class UBUser
+ * Class UBFile
  *
  * @package urjc_backend
  */
@@ -32,6 +32,7 @@ class UBFile extends UBItem{
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "file";
+    const TIMESTAMP_DELIMITER = "#";
     /**
      * @var string File data in byte string format
      */
@@ -52,7 +53,13 @@ class UBFile extends UBItem{
             return null;
         }
         $this->id = (int)$elgg_file->guid;
-        $this->name = (string)$elgg_file->getFilename();
+        $temp_name = explode($this::TIMESTAMP_DELIMITER, (string)$elgg_file->getFilename());
+        if(empty($temp_name[1])){
+            // no timestamp found
+            $this->name = $temp_name[0];
+        } else{
+            $this->name = $temp_name[1];
+        }
         $this->description = (string)$elgg_file->description;
         $this->data = $elgg_file->grabFile();
         $this->time_created = (int)$elgg_file->time_created;
@@ -70,12 +77,14 @@ class UBFile extends UBItem{
         } elseif(!$elgg_file = new ElggFile((int)$this->id)){
             return false;
         }
-        $elgg_file->setFilename((string)$this->name);
+        $date_obj = new DateTime();
+        $elgg_file->setFilename((string)$date_obj->getTimestamp().$this::TIMESTAMP_DELIMITER.(string)$this->name);
         $elgg_file->description = (string)$this->description;
         $elgg_file->open("write");
         $elgg_file->write($this->data);
         $elgg_file->close();
         $elgg_file->save();
+        $this->time_created = $elgg_file->time_created;
         return $this->id = $elgg_file->guid;
     }
 }
