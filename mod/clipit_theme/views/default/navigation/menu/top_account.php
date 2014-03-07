@@ -21,21 +21,10 @@ $viewer = elgg_get_logged_in_user_entity();
 $context = elgg_get_context();
 ?>
 <ul class="<?php echo $class; ?>">
-    <li <?php if ($context == "settings") echo "class='open'"; ?>>
-        <a title="<?php echo $viewer->name; ?>" class="avatar-user text-truncate" href="<?php echo $CONFIG->wwwroot; ?>profile/<?php echo $viewer->username; ?>">
-        <?php echo elgg_view('output/img', array(
-            'src' => $viewer->getIconURL('small'),
-            'alt' => $viewer->name,
-            'title' => elgg_echo('profile'),
-            'class' => 'elgg-border-plain elgg-transition',
-        )); ?>
-        <?php echo $viewer->name; ?>
-        </a>
-    </li>
-    <li class="separator">|</li>
     <li><a href="<?php echo $CONFIG->wwwroot; ?>my_activities">My activities</a></li>
     <li class="separator">|</li>
     <li><a href="<?php echo $url; ?>explore"><?=elgg_echo("Explore");?></a></li>
+    <li class="separator">|</li>
     <li>
         <a id="notifications" role="button" data-toggle="dropdown" href="javascript:;">
             <span class="badge">10</span>
@@ -88,6 +77,18 @@ $context = elgg_get_context();
             <!-- endforeach -->
         </ul>
     </li>
+    <li style="margin-left: 10px;" <?php if ($context == "settings") echo "class='open'"; ?>>
+        <a title="<?php echo $viewer->name; ?>" class="avatar-user text-truncate" href="<?php echo $CONFIG->wwwroot; ?>profile/<?php echo $viewer->username; ?>">
+            <?php echo elgg_view('output/img', array(
+                'src' => $viewer->getIconURL('small'),
+                'alt' => $viewer->name,
+                'title' => elgg_echo('profile'),
+                'class' => 'elgg-border-plain elgg-transition',
+            )); ?>
+            <?php echo $viewer->name; ?>
+        </a>
+    </li>
+    <li class="separator">|</li>
     <li>
         <a href="<?php echo $CONFIG->wwwroot; ?>action/logout">
             <i style="color: #ff4343;" class="fa fa-power-off"></i>
