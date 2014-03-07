@@ -81,7 +81,8 @@ $(function(){
     /**
      * Form general validation
      */
-    $("form[data-validate=true]").each(function(){
+    $("body").on("click", "form[data-validate=true]", function (e) {
+        //$("form[data-validate=true]").each(function(){
         var form_to = $(this);
         $(this).validate({
             errorElement: "span",
@@ -103,7 +104,7 @@ $(function(){
     /**
      * wysihtml5 editor default options
      */
-    // Load wysi each textarea
+        // Load wysi each textarea
     $('.wysihtml5').wysihtml5();
 
     /**
