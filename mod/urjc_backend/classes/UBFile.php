@@ -32,28 +32,41 @@ class UBFile extends UBItem{
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "file";
+    /**
+     * @const string Delimiter for timestamp string
+     */
     const TIMESTAMP_DELIMITER = "#";
     /**
      * @var string File data in byte string format
      */
     public $data = null;
+
+    /* Instance Functions */
     /**
-     * @var int Timestamp when the user uploaded this File
+     * Constructor
+     *
+     * @param int $id If $id is null, create new instance; else load instance with id = $id.
+     *
+     * @throws APIException
      */
-    public $time_created = -1;
+    function __construct($id = null){
+        if($id){
+            if(!($elgg_file = new ElggFile((int)$id))){
+                $called_class = get_called_class();
+                throw new APIException("ERROR 1: Id '" . $id . "' does not correspond to a " . $called_class . " object.");
+            }
+            $this->_load($elgg_file);
+        }
+    }
 
     /**
-     * Loads an instance from the system.
-     *
-     * @param int $id Id of the instance to load from the system.
-     * @return UBFile|bool Returns instance, or false if error.
+     * @param ElggFile $elgg_file
      */
-    protected function _load($id){
-        if(!($elgg_file = new ElggFile((int)$id))){
-            return null;
-        }
+    protected function _load($elgg_file){
         $this->id = (int)$elgg_file->guid;
-        $temp_name = explode($this::TIMESTAMP_DELIMITER, (string)$elgg_file->getFilename());
+        $this->type = (string)$elgg_file->type;
+        $this->subtype = $elgg_file->getSubtype();
+        $temp_name = explode(static::TIMESTAMP_DELIMITER, (string)$elgg_file->getFilename());
         if(empty($temp_name[1])){
             // no timestamp found
             $this->name = $temp_name[0];
@@ -61,9 +74,9 @@ class UBFile extends UBItem{
             $this->name = $temp_name[1];
         }
         $this->description = (string)$elgg_file->description;
-        $this->data = $elgg_file->grabFile();
+        $this->owner_id = (int)$elgg_file->owner_guid;
         $this->time_created = (int)$elgg_file->time_created;
-        return $this;
+        $this->data = $elgg_file->grabFile();
     }
 
     /**
@@ -74,17 +87,20 @@ class UBFile extends UBItem{
     function save(){
         if($this->id == -1){
             $elgg_file = new ElggFile();
+            $elgg_file->subtype = (string)static::SUBTYPE;
         } elseif(!$elgg_file = new ElggFile((int)$this->id)){
             return false;
         }
         $date_obj = new DateTime();
-        $elgg_file->setFilename((string)$date_obj->getTimestamp().$this::TIMESTAMP_DELIMITER.(string)$this->name);
+        $elgg_file->setFilename((string)$date_obj->getTimestamp() . static::TIMESTAMP_DELIMITER . (string)$this->name);
         $elgg_file->description = (string)$this->description;
         $elgg_file->open("write");
         $elgg_file->write($this->data);
         $elgg_file->close();
+        $elgg_file->access_id = ACCESS_PUBLIC;
         $elgg_file->save();
-        $this->time_created = $elgg_file->time_created;
-        return $this->id = $elgg_file->guid;
+        $this->owner_id = (int)$elgg_file->owner_guid;
+        $this->time_created = (int)$elgg_file->time_created;
+        return $this->id = (int)$elgg_file->guid;
     }
 }

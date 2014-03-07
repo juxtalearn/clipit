@@ -1,4 +1,6 @@
-/nbproject
-/engine/settings.php
-/.idea
-/php_errorlog
+.idea
+.DS_Store
+nbproject
+engine/settings.php
+php_errorlog
+mod_unused

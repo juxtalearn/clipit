@@ -1,10 +1,10 @@
 /**
  * JuxtaLearn ClipIt API
- * PHP version:     >= 5.2
+ * PHP version:     >= 5.3
  * Creation date:   2013-10-10
  * Last update:     $Date$
  *
- * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, JxL URJC Team (SPAIN)
  * @version         $Version$
  * @link            http://juxtalearn.org
  * @license         GNU Affero General Public License v3

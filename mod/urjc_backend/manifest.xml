@@ -11,4 +11,5 @@
     </requires>
     <category>Backend</category>
     <category>Plugin</category>
+    <activate_on_install>true</activate_on_install>
 </plugin_manifest>

@@ -12,7 +12,7 @@
     </transformer>
     <files>
         <directory>.</directory>
-        <ignore>tests/</ignore>
+        <ignore>test/</ignore>
     </files>
     <transformations>
         <template>zend</template>

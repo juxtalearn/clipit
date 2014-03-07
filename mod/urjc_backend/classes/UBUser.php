@@ -35,43 +35,51 @@ class UBUser extends UBItem{
      */
     const TYPE = "user";
     const SUBTYPE = "";
-    const DEFAULT_ROLE = "user";
+
     /**
      * @var string Login name used to authenticate
      * @var string Login password (md5 of password + password_hash)
      * @var string Random string to encode password
      * @var string User email
      * @var string User role (default: "user")
-     * @var int Timestamp when the user was first saved
      */
     public $login = "";
     public $password = "";
     public $email = "";
-    public $role = self::DEFAULT_ROLE;
-    public $time_created = -1;
-
+    public $role = "user";
+    public $language = "";
+    public $last_login = -1;
     private $password_hash = "";
+
+    function __construct($id = -1){
+        if($id != -1){
+            if(!($elgg_user = new ElggUser((int)$id))){
+                $called_class = get_called_class();
+                throw new APIException("ERROR: Id '" . $id . "' does not correspond to a " . $called_class . " object.");
+            }
+            $this->_load($elgg_user);
+        }
+    }
 
     /**
      * Loads a User instance from the system.
      *
-     * @param int $id Id of the User to load from the system.
+     * @param ElggUser $elgg_user User to load from the system.
+     *
      * @return UBUser|bool Returns User instance, or false if error.
      */
-    protected function _load($id){
-        if(!$elgg_user = new ElggUser((int)$id)){
-            return null;
-        }
-        $this->description = (string)$elgg_user->description;
-        $this->email = (string)$elgg_user->email;
-        $this->name = (string)$elgg_user->name;
+    protected function _load($elgg_user){
         $this->id = (int)$elgg_user->guid;
+        $this->name = (string)$elgg_user->name;
+        $this->description = (string)$elgg_user->description;
+        $this->time_created = (int)$elgg_user->time_created;
+        $this->email = (string)$elgg_user->email;
         $this->login = (string)$elgg_user->username;
         $this->password = (string)$elgg_user->password;
         $this->password_hash = (string)$elgg_user->salt;
         $this->role = (string)$elgg_user->role;
-        $this->time_created = (int)$elgg_user->time_created;
-        return true;
+        $this->language = (string)$elgg_user->language;
+        $this->last_login = (int)$elgg_user->last_login;
     }
 
     /**
@@ -82,6 +90,7 @@ class UBUser extends UBItem{
     function save(){
         if($this->id == -1){
             $elgg_user = new ElggUser();
+            $elgg_user->subtype = (string)static::SUBTYPE;
         } elseif(!$elgg_user = new ElggUser($this->id)){
             return false;
         }
@@ -92,6 +101,14 @@ class UBUser extends UBItem{
         $elgg_user->password = $this->password;
         $elgg_user->salt = $this->password_hash;
         $elgg_user->role = $this->role;
+        if($this->language = ""){
+            $elgg_user->language = get_language();
+        } else{
+            $elgg_user->language = $this->language;
+        }
+        $elgg_user->owner_guid = 0;
+        $elgg_user->container_guid = 0;
+        $elgg_user->access_id = ACCESS_PUBLIC;
         $elgg_user->save();
         $this->time_created = $elgg_user->time_created;
         return $this->id = $elgg_user->guid;
@@ -101,30 +118,27 @@ class UBUser extends UBItem{
      * Sets values into specified properties of the instance
      *
      * @param array $prop_value_array Array of prop=>value pairs to set into the instance
+     *
      * @return int Returns instance Id, or false if error
      * @throws InvalidParameterException
      */
     function setProperties($prop_value_array){
+        $new_prop_value_array = array();
         foreach($prop_value_array as $prop => $value){
-            if(!array_key_exists($prop, $this->list_properties())){
-                throw new InvalidParameterException("ERROR: One or more property names do not exist.");
-            }
-            if($prop == "id"){
-                throw new InvalidParameterException("ERROR: Cannot modify 'id' of instance.");
-            }
             if($prop == "password"){
                 $this->setPassword($value);
             } else{
-                $this->$prop = $value;
+                $new_prop_value_array[$prop] = $value;
             }
         }
-        return $this->save();
+        return parent::setProperties($new_prop_value_array);
     }
 
     /**
      * Creates an encoded user password using a random hash for encoding.
      *
      * @param string $password The new user password in clear text.
+     *
      * @return bool 'true' if success, 'false' if error.
      */
     function setPassword($password){
@@ -132,7 +146,7 @@ class UBUser extends UBItem{
             return false;
         }
         $this->password_hash = generate_random_cleartext_password();
-        $this->password = md5($password.$this->password_hash);
+        $this->password = md5($password . $this->password_hash);
         return true;
     }
 
@@ -141,7 +155,8 @@ class UBUser extends UBItem{
      *
      * @param string $login User login
      * @param string $password User password
-     * @param bool $persistent Determines whether to make the session persistent
+     * @param bool   $persistent Determines whether to make the session persistent
+     *
      * @return bool Returns true if ok, or false if error
      */
     static function login($login, $password, $persistent = false){
@@ -149,7 +164,7 @@ class UBUser extends UBItem{
             return false;
         }
         $elgg_user = get_user_by_username($login);
-        login($elgg_user, $persistent);
+        return login($elgg_user, $persistent);
     }
 
     /**
@@ -165,7 +180,8 @@ class UBUser extends UBItem{
      * Get users with login contained in a given list of logins.
      *
      * @param array $login_array Array of user logins
-     * @return array Returns an array of User objects
+     *
+     * @return UBUser[] Returns an array of User objects
      */
     static function get_by_login($login_array){
         $called_class = get_called_class();
@@ -187,7 +203,8 @@ class UBUser extends UBItem{
      * array.
      *
      * @param array $email_array Array of user emails
-     * @return array Returns an array of arrays of User objects
+     *
+     * @return UBUser[] Returns an array of arrays of User objects
      */
     static function get_by_email($email_array){
         $called_class = get_called_class();
@@ -211,7 +228,8 @@ class UBUser extends UBItem{
      * Get users with role contained in a given list of roles.
      *
      * @param array $role_array Array of user roles
-     * @return array Returns an array of arrays of User objects
+     *
+     * @return UBUser[] Returns an array of arrays of User objects
      */
     static function get_by_role($role_array){
         $called_class = get_called_class();
@@ -219,10 +237,10 @@ class UBUser extends UBItem{
         foreach($role_array as $role){
             $elgg_user_array = elgg_get_entities_from_metadata(
                 array(
-                     'type' => $called_class::TYPE,
-                     'subtype' => $called_class::SUBTYPE,
-                     'metadata_names' => array("role"),
-                     'metadata_values' => array($role)
+                    'type' => $called_class::TYPE,
+                    'subtype' => $called_class::SUBTYPE,
+                    'metadata_names' => array("role"),
+                    'metadata_values' => array($role)
                 )
             );
             if(!$elgg_user_array){
@@ -236,5 +254,11 @@ class UBUser extends UBItem{
             }
         }
         return $user_array;
+    }
+
+    static function get_last_login($id){
+        $called_class = get_called_class();
+        $user = new $called_class($id);
+        return $user->last_login;
     }
 }
