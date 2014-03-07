@@ -1,0 +1,38 @@
+//
+// Messages discussion
+// --------------------------------------------------
+.messages-discussion{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid @blue-lighter;
+  // Topic title
+  h4{
+    font-weight: bold;
+    margin: 0;
+  }
+  p{
+    .text-justify();
+    font-size: 13px;
+    color: @grey_dark;
+    margin: 0;
+  }
+  small{
+    margin-top: 5px;
+  }
+  .replies{
+    font-size: (@font-size-base * 1.14); // ~16px
+    margin: 10px;
+    .replies-count{
+      color: #fff;
+      font-size: @font-size-small;
+      font-style: normal;
+      font-weight: bold;
+    }
+  }
+  .reply-button{
+    padding: 3px 10px;
+    background: #fff;
+    color: @blue_clipit;
+    border: 1px solid @blue_clipit;
+  }
+}

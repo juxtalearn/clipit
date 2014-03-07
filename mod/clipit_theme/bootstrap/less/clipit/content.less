@@ -1,0 +1,126 @@
+//
+// Elgg avatar
+// --------------------------------------------------
+.elgg-avatar{
+  position: relative;
+  display: inline-block;
+}
+.elgg-avatar-tiny > a > img{
+  width: 25px;
+  height: 25px;
+  display: block;
+}
+//
+// Breadcrumbs
+// --------------------------------------------------
+.breadcrumb{
+  padding: 2px 0;
+  margin-bottom: 0;
+  margin-top: -15px;
+  background: transparent;
+  border-radius: 0;
+  font-size: 85%;
+  li:first-child{
+    &:before {
+      content: "\f054"; // Unicode space added since inline-block means non-collapsing white-space
+      padding: 0 5px;
+      font-family: FontAwesome;
+      color: @blue_clipit;
+    }
+  }
+}
+
+//
+// Elgg one layout with sidebar
+// --------------------------------------------------
+.elgg-layout-one-sidebar{
+  .make-row();
+
+  // Elgg main
+  .elgg-main{
+    .make-md-column(9);
+    // Head
+    h2{
+      color: @blue_clipit;
+    }
+    .content{
+      background: #FFF;
+      padding: 15px;
+      .elgg-head{
+      h2.elgg-heading-main{
+        color: @blue_clipit;
+        margin-top: 0;
+        .pull-left();
+      }
+      ul.elgg-menu{
+        margin: 0;
+        .pull-right();
+        // Button
+        li.elgg-menu-item-add{
+          .text-right();
+          a{
+            .btn();
+            .btn-default();
+          }
+        }
+      }
+    }
+    }
+    // Tabs
+    .elgg-htabs{
+      .nav();
+      .nav-tabs();
+    }
+
+    // Body content
+    .elgg-content,
+    ul.elgg-list-entity{
+      background: #FFF;
+      clear: both;
+      padding: 15px;
+
+      > li.elgg-item{
+        h3{
+          font-size: 1.2em;
+          margin: 0;
+        }
+        .elgg-image{
+          .pull-left();
+          margin-right: 5px;
+        }
+      }
+    }
+
+  }
+}
+
+//
+// Elgg sidebar
+// --------------------------------------------------
+.elgg-sidebar{
+  .make-md-column(3);
+  margin-top: 20px;
+  // Head
+  .elgg-head{
+    h3{
+      color: @blue_clipit;
+    }
+  }
+  // Button submit
+  input.elgg-button-submit{
+    .btn();
+    .btn-sm();
+    .btn-default();
+    padding: 5px 10px;
+    margin: 0 10px;
+  }
+  // Input texts
+  .elgg-input-text{
+    @shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.25), 0 0 0 2px rgba(225, 235, 240, 0.5);
+    .box-shadow(@shadow);
+    height: 25px;
+    border: 0;
+  }
+}
+
+

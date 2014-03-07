@@ -1,0 +1,5 @@
+NameError: variable @red_clipit is undefined in D:\ubuntu_compartido\clipit_befe\mod\clipit_theme\bootstrap\less\clipit\walled_garden.less on line 7, column 21:
+6 .bg-red{
+7   background-color: @red_clipit;
+8 }
+

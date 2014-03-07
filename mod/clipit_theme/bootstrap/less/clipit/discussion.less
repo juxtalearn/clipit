@@ -1,0 +1,84 @@
+.discussion{
+
+  .block{
+    overflow: hidden;
+  }
+  .body-post{
+    color: #666666;
+    margin-top: 10px;
+    margin-left: 50px;
+    ol, ul{
+      list-style: initial;
+      padding-left: 2.5em;
+    }
+  }
+}
+//
+// Discussion owner message
+// --------------------------------------------------
+.discussion-owner-msg{
+  margin-bottom: 20px;
+  .header-post{
+    .user-avatar{
+      margin-right: 10px;
+      margin-top: 5px;
+      .pull-left();
+    }
+    .block{
+      border-bottom: 1px solid @blue-lighter;
+      padding-bottom: 5px;
+      .title{
+        margin: 0;
+      }
+    }
+  }
+}
+//
+// Discussion reply message
+// --------------------------------------------------
+.discussion-reply-msg{
+  padding: 20px;
+  background: #ECF7FB;
+  margin-bottom: 10px;
+  padding-top: 15px;
+  .user-reply{
+    margin-right: 10px;
+    margin-top: 5px;
+    .pull-left();
+    img, button{
+      display: block;
+    }
+    .reply-button{
+      padding: 1px 3px;
+      margin-top: 5px;
+      font-size: 10px;
+      text-transform: uppercase;
+      font-family: @font-family-base;
+      font-weight: bold;
+      letter-spacing: 0;
+    }
+  }
+  // Form element
+  .form-block{
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    margin-left: 50px;
+    margin-top: 15px;
+    padding: 10px 15px 15px;
+    display: none;
+
+    .close-reply-to{
+      position: absolute;
+      right: 20px;
+      font-size: 20px;
+    }
+  }
+}
+// Second level
+.second_level{
+  margin-top: 20px;
+  .discussion-reply-msg{
+    background: #fff;
+
+  }
+}

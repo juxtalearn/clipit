@@ -1,0 +1,106 @@
+<?php
+/**
+ * Created by JetBrains PhpStorm.
+ * User: equipo
+ * Date: 28/02/14
+ * Time: 11:01
+ * To change this template use File | Settings | File Templates.
+ */
+$group = elgg_extract("entity", $vars);
+$activity_id = elgg_get_page_owner_guid();
+// Get all messages by group id
+$group_messages = array_pop(ClipitMessage::get_by_destination(array($group->id)));
+?>
+<div style="margin-bottom: 15px;">
+    <?php echo elgg_view_form('group/discussion/create', array('data-validate'=> "true" ), array('entity'  => $group)); ?>
+    <button type="button" data-toggle="modal" data-target="#create-new-topic" class="btn btn-default">Create a new topic</button>
+</div>
+<?php
+foreach($group_messages as $message):
+    $message_text = trim(elgg_strip_tags($message->description));
+    // Message text truncate max length 280
+    if(mb_strlen($message_text)>280){
+        $message_text = substr($message_text, 0, 280)."...";
+    }
+    $total_replies = count(ClipitMessage::get_replies($message->id));
+    // Get owner user object
+    $owner = array_pop(ClipitUser::get_by_id(array($message->owner_id)));
+    // Owner options (edit/delete)
+    $owner_options = "";
+    if($message->owner_id == elgg_get_logged_in_user_guid()){
+        $options = array(
+            'entity' => $message,
+            'edit' => array(
+                "data-target" => "#edit-discussion-{$message->id}",
+                "href" => elgg_get_site_url()."ajax/view/group/modal/discussion/edit?id={$message->id}",
+                "data-toggle" => "modal"
+             ),
+            'remove' => array("href" => "action/group/discussion/remove?id={$message->id}"),
+        );
+
+        $owner_options = elgg_view("page/components/options_list", $options);
+        // Remote modal, form content
+        echo elgg_view("page/components/modal_remote", array('id'=> "edit-discussion-{$message->id}" ));
+    }
+?>
+<div class="row row-table messages-discussion">
+    <div class="col-md-9">
+        <?php echo $owner_options; ?>
+        <h4>
+            <?php echo elgg_view('output/url', array(
+                'href' => "clipit_activity/{$activity_id}/group/discussion/view/{$message->id}",
+                'title' => $message->name,
+                'text' => $message->name,
+                'is_trusted' => true,
+            )); ?>
+        </h4>
+        <p>
+            <?php echo $message_text; ?>
+        </p>
+        <small class="show">
+            <i>
+                Created by
+                <?php echo elgg_view('output/url', array(
+                    'href'  => "profile/".$owner->login,
+                    'title' => $owner->name,
+                    'text'  => $owner->name));
+                ?>
+                <?php echo elgg_view('output/friendlytime', array('time' => $message->time_created));?>
+            </i>
+            <?php
+            if($total_replies > 0):
+                $last_post_id = end(ClipitMessage::get_replies($message->id));
+                $last_post = array_pop(ClipitMessage::get_by_id(array($last_post_id)));
+                $author_last_post = array_pop(ClipitUser::get_by_id(array($last_post->owner_id)));
+            ?>
+            <i class="pull-right">
+                Last post by
+                <?php echo elgg_view('output/url', array(
+                    'href'  => "profile/".$author_last_post->login,
+                    'title' => $author_last_post->name,
+                    'text'  => $author_last_post->name,
+                ));
+                ?> (<?php echo elgg_view('output/friendlytime', array('time' => $last_post->time_created));?>)</i>
+            <?php endif; ?>
+        </small>
+    </div>
+    <div class="col-md-3 text-center">
+        <?php echo elgg_view('output/url', array(
+            'href'  => "clipit_activity/{$activity_id}/group/discussion/view/{$message->id}#replies",
+            'title' => elgg_echo("discussion:reply"),
+            'text'  => '<i class="fa fa-comment fa-stack-2x"></i>
+                        <i class="fa-stack-1x replies-count">'.$total_replies.'</i>',
+            'class' => "fa-stack replies"
+        ));
+        ?>
+
+        <?php echo elgg_view('output/url', array(
+            'href'  => "clipit_activity/{$activity_id}/group/discussion/view/{$message->id}#create_reply",
+            'title' => elgg_echo("discussion:reply"),
+            'text'  => '<i class="fa fa-plus"></i> '.elgg_echo("discussion:reply"),
+            'class' => "btn btn-default btn-sm reply-button"
+        ));
+        ?>
+    </div>
+</div>
+<?php endforeach; ?>

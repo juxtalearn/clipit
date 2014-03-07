@@ -1,0 +1,59 @@
+//
+// Footer
+// --------------------------------------------------
+#footer {
+  height: auto;
+  background-color: @blue_clipit;
+  padding: 20px;
+  margin-top: 30px;
+  /*background-image: url('../img/sponsors.png');
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  background-size: 225px;
+  background-origin: content-box;*/
+  // Sponsor Logos
+  .sponsors img{
+    width: 225px;
+  }
+  // Contact
+  .contact{
+    h2{
+      font-family: @font-family-futurabold;
+      color: #FFFFFF;
+      font-size: ceil(@font-size-large * 2.5);
+      margin-top: 10px;
+    }
+    img{
+      width: 75px;
+      height: 75px;
+    }
+  }
+  // Site Map
+  .site-map{
+    h4{
+      font-size: ceil(@font-size-large * 1.11);
+      color: #FFFFFF;
+      font-family: @font-family-helvetica;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    ul{
+      list-style: none;
+      padding: 0px;
+      font-size: @font-size-large;
+      font-family: @font-family-helvetica;
+      > li{
+        margin: 10px 0px;
+        letter-spacing: 1px;
+        > a{
+          color: @blue-lighter;
+          &:hover, &:focus{
+            opacity: 0.5;
+            text-decoration: none;
+          }
+        }
+
+      }
+    }
+  }
+}

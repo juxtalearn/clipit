@@ -1,0 +1,366 @@
+//
+// Load core variables and mixins
+// --------------------------------------------------
+@import "../bootstrap";
+@import "variables_clipit";
+@import "mixins";
+@import "clipit_elgg_mod";
+@import "walled_garden";
+@import "content";
+@import "buttons";
+@import "forms";
+@import "modal";
+@import "lists";
+@import "widgets";
+@import "header";
+@import "footer";
+@import "activity";
+@import "discussion";
+@import "video";
+@import "messages";
+//@import "elgg_mod.less";
+//
+
+html{
+  overflow-y: scroll;
+}
+body{
+  background: #f1f2f7;
+}
+a{
+  color: @blue_clipit;
+}
+ul, ol {
+  list-style: none;
+  margin-top: 0;
+  margin-bottom: 10px;
+  padding: 0;
+}
+.text-truncate{
+  display: block;
+  .text-truncate();
+}
+.text-justify{
+  text-align: justify;
+}
+.view-all{
+  text-transform: uppercase;
+  font-size: 12px;
+}
+.title-bold{
+  font-family: @font-family-futurabold;
+  color: @blue_clipit;
+}
+.btn-sp{
+  padding: 5px 10px !important;
+  .pull-right();
+}
+small, .small{
+  font-size: 75%;
+  color: @gray-light;
+}
+// fontawesome
+.fa:hover{
+  opacity: .7;
+  text-decoration: none;
+}
+// toggle menu
+.toggle-menu{
+  display: none;
+}
+
+
+
+// Custom Font
+// --------------------------------------------------
+@font-face {
+  font-family: 'Futura';
+  src: url('@{font-path}@{font-name-futura}.eot');
+  src: url('@{font-path}@{font-name-futura}.eot') format('embedded-opentype'),
+  url('@{font-path}@{font-name-futura}.woff') format('woff'),
+  url('@{font-path}@{font-name-futura}.ttf') format('truetype'),
+  url('@{font-path}@{font-name-futura}.svg#FuturaLTRegular') format('svg');
+}
+@font-face {
+  font-family: 'FuturaBoldRegular';
+  src: url('@{font-path}@{font-name-futurabold}.eot');
+  src: url('@{font-path}@{font-name-futurabold}.eot') format('embedded-opentype'),
+  url('@{font-path}@{font-name-futurabold}.woff') format('woff'),
+  url('@{font-path}@{font-name-futurabold}.ttf') format('truetype'),
+  url('@{font-path}@{font-name-futurabold}.svg#FuturaLTBold') format('svg');
+}
+// Mixin for generating new styles
+.btn-styles(@btn-color: #555) {
+  border: none;
+  background-color: @btn-color;
+  background-repeat: repeat-x;
+  font-family: @font-family-futurabold;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 7px;
+  letter-spacing: 1px;
+  &:hover,
+  &:focus  {
+    background-color: darken(@btn-color, 8%);
+    background-position: 0 -15px;
+  }
+
+  &:active,
+  &.active {
+    background-color: darken(@btn-color, 12%);
+  }
+}
+// Progress
+// --------------------------------------------------
+.progress{
+  margin-bottom: 0;
+}
+
+
+//
+// Forms
+// --------------------------------------------------
+.form-control{
+  @shadow_input: inset 0 1px 4px 0 rgba(0, 0, 0, 0.25), 0 0 0 4px rgba(225, 235, 240, 0.5);
+  .box-shadow(@shadow_input);
+  border-radius: 0;
+  border: 0px;
+  //  height: 45px;
+  //  font-size: 18px;
+  height: 35px;
+  font-size: 15px;
+  padding: 10px 16px;
+  line-height: 1.33;
+  &:focus  {
+    .box-shadow(@shadow_input);
+    border-color: none;
+  }
+}
+select.form-control{
+  @shadow_input:  0 0 0 4px rgba(225, 235, 240, 0.5);
+  .box-shadow(@shadow_input) !important;
+}
+
+//
+// Tables
+// --------------------------------------------------
+.table{
+  font-size: 13px;
+  color: #797979;
+}
+.table-advance .label{
+  padding: 0.5em 0.8em;
+}
+.table-advance button{
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+  padding: 1px 5px;
+}
+//
+// Labels
+// --------------------------------------------------
+.label{
+  background-color: #FFF;
+}
+.label-danger{
+  color: @red_clipit;
+  border: 1px solid @red_clipit;
+}
+.label-success{
+  color: @green_clipit_2;
+  border: 1px solid @green_clipit_2;
+}
+.label-warning{
+  color: @orange_clipit;
+  border: 1px solid @orange_clipit;
+}
+.label-info{
+  color: @yellow_clipit;
+  border: 1px solid @yellow_clipit;
+}
+.label-primary{
+  color: @blue_clipit;
+  border: 1px solid @blue_clipit;
+}
+
+//
+// Pagination
+// --------------------------------------------------
+.pagination {
+  > li > a{
+    border: 1px solid @grey_border;
+    color: #9c9e9f;
+    font-family: @font-family-futurabold;
+  }
+  > .active > a{
+    background-color: @blue_clipit;
+    &:hover,
+    &:focus{
+      color: #9c9e9f;
+      background-color: #d6f0f9;
+      border-color: #9c9e9f;
+    }
+  }
+}
+//
+// Pagination
+// --------------------------------------------------
+.thumbnail{
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  &:hover,
+  &:focus{
+    border-color: transparent;
+  }
+}
+//
+// Headings
+// --------------------------------------------------
+h1, h2 {
+  font-family: @font-family-futurabold;
+}
+h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
+  font-family: @font-family-helvetica;
+}
+//
+// Dropdown
+// --------------------------------------------------
+.dropdown{
+  [role=button]{
+    border-radius: 0;
+  }
+  > a{
+    font-family: @font-family-futurabold;
+    font-size: 17px;
+    color: @blue_clipit;
+    .transition(all .5s);
+    &:hover,
+    &:focus{
+      color: darken(@blue_clipit, 12%);
+    }
+    b.caret{
+      border-top: 8px solid;
+      border-right: 8px solid transparent;
+      border-left: 8px solid transparent;
+    }
+  }
+}
+// Dropdown menu <ul>
+.dropdown-menu {
+  //  @shadow_input: 0px -2px 12px 0px rgba(0, 0, 0, 0.2), 0px 6px 12px 0px rgba(0, 0, 0, 0.2);
+  @shadow_input: 0 6px 12px rgba(0, 0, 0, 0.2);
+  .box-shadow(@shadow_input);
+  border-radius: 0;
+
+  > li > a{
+    font-family: @font-family-helvetica;
+//    font-size: 17px;
+    font-size: @font-size-base;
+    .transition(all .25s);
+    letter-spacing: 1px;
+    &:hover,
+    &:focus{
+      background-color: @blue_clipit;
+      color: #FFF;
+    }
+    &.remove{
+      color: #fff;
+      background-color: @red_clipit;
+    }
+  }
+}
+
+//
+// Tabs
+// --------------------------------------------------
+.nav-tabs {
+  border-bottom: 0;
+  > li {
+    &.active > a,
+    &.elgg-state-selected > a{
+      color: @blue_clipit;
+      border: 0;
+      border-bottom: 1px solid #FFF;
+      background-color: #FFF;
+      cursor: default;
+      &:hover,
+      &:focus{
+        color: darken(@blue_clipit, 12%);
+        border: 0;
+        border-bottom: 1px solid #FFF;
+      }
+    }
+    > a {
+      font-family: @font-family-helvetica;
+      font-size: 15px;
+      letter-spacing: 1px;
+      color: @grey_text;
+      &:hover,
+      &:focus{
+        color: darken(@grey_text, 12%);
+        border-bottom: 1px solid #FFF;
+      }
+      > .badge{
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border-radius: 10px;
+        vertical-align: text-bottom;
+        color: #FFF;
+        border: 2px solid #FFF;
+      }
+    }
+  }
+}
+//
+// Tooltip
+// --------------------------------------------------
+.tooltip-inner{
+  background-color: #eceded;
+  color: #000;
+  //  @shadow_input: 0 3px 6px rgba(0, 0, 0, 0.2);
+  //  .box-shadow(@shadow_input);
+  border: 1px solid @blue_clipit;
+}
+//
+// Badges Stacked
+// --------------------------------------------------
+.nav-stacked {
+  > li{
+    border-radius: 4px;
+    background: #FFF;
+    margin-bottom: 5px;
+    &:hover,
+    &:focus{
+      background-color: @blue-lighter !important;
+    }
+    > .badge{
+      border: 2px solid #FFF !important;
+      margin: 10px;
+    }
+    &.active {
+      background-color: @blue_clipit !important;
+      > .badge {
+        color: #FFF !important;
+        border: 2px solid #FFF !important;
+        background-color: transparent;
+      }
+    }
+  }
+  a{
+    color: @blue_clipit;
+    letter-spacing: 0px;
+    font-weight: bold;
+    font-size: 15px;
+    border-radius: 0 !important;
+    background-color: transparent !important;
+  }
+}
+// Con actividad relacionada
+.nav-stacked-activities .badge{
+  width: 20px;
+  height: 20px;
+}
+

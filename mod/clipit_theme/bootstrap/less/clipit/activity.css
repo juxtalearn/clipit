@@ -1,0 +1,5 @@
+NameError: .opacity is undefined in D:\ubuntu_compartido\clipit_befe\mod\clipit_theme\bootstrap\less\clipit\activity.less on line 19, column 9:
+18         color: #fff;
+19         .opacity(1);
+20       }
+

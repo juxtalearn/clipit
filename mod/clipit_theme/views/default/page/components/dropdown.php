@@ -1,0 +1,31 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: equipo
+ * Date: 3/03/14
+ * Time: 15:36
+ */
+
+$class = "dropdown";
+$style = "";
+if(isset($vars['style'])){
+    $style = 'style="'.$vars['style'].'"';
+}
+?>
+<div name="<?php echo $vars['name']; ?>" <?php echo $style; ?> class="<?php echo $class; ?>">
+    <?php echo $vars['button']; ?>
+    <ul class="dropdown-menu" role="menu">
+        <?php foreach ($vars['options'] as $option): ?>
+        <li role="presentation">
+            <a <?php echo elgg_format_attributes($option['attr']);?> role="menuitem" tabindex="-1">
+            <?php if($option['icon']): ?>
+                <i class="fa fa-<?php echo $option['icon'];?>"></i>
+            <?php endif; ?>
+
+            <?php echo $option['text'];?>
+            </a>
+        </li>
+        <?php endforeach; ?>
+    </ul>
+</div>
+

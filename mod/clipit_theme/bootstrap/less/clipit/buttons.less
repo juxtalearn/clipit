@@ -1,0 +1,38 @@
+//
+// Buttons
+// --------------------------------------------------
+.btn-normal {
+  .btn-styles(@btn-default-bg);
+  border: 2px solid #d9dadb;
+  color: #9c9e9f;
+  &:hover,
+  &:focus  {
+    color: #9c9e9f;
+    border: 2px solid #d9dadb;
+    background-color: #f0f1f1;
+  }
+}
+.btn-default, .btn-primary {
+  color: #FFF;
+  .btn-styles(@blue_clipit);
+  &:hover,
+  &:focus  {
+    color: #FFF;
+  }
+}
+.btn-success { .btn-styles(@green_clipit_2); }
+.btn-warning { .btn-styles(@orange_clipit); }
+.btn-danger  { .btn-styles(@red_clipit); }
+.btn-info    { .btn-styles(@yellow_clipit); }
+
+// Option list
+.btn-options{
+  color: #fff;
+  font-size: 12px;
+  padding: 1px 5px;
+  background: #d8ba05;
+  &:hover,
+  &:focus{
+    color: #fff;
+  }
+}

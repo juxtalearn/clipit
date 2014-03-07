@@ -1,0 +1,42 @@
+//
+// General form
+// --------------------------------------------------
+label{
+  display: block;
+  > span.error{
+    color: @red_clipit;
+    .pull-right();
+  }
+}
+input.error, textarea.error{
+  .box-shadow(inset 0 1px 4px @red_clipit) !important;
+}
+
+//
+// Form horizontal
+// --------------------------------------------------
+form.form-horizontal{
+  label{
+    color: #797979;
+  }
+  select{
+    height: 30px;
+    padding: 5px 16px;
+  }
+}
+
+//
+// Form modules
+// --------------------------------------------------
+form .elgg-module{
+  background: #FFF;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  border-radius: 3px;
+  overflow: hidden;
+
+  h3{
+    margin-top: 0;
+    color: @blue_clipit;
+  }
+}

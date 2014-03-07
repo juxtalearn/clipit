@@ -1,0 +1,134 @@
+.activity-layout{
+  .elgg-head-layout{
+    padding: 15px;
+    margin-top: -20px;
+    h2{
+      color: #FFF;
+      margin-bottom: 0;
+      margin-top: 30px;
+    }
+    .breadcrumb{
+      > li {
+        color: #fff;
+        a{
+          color: #fff;
+        }
+      }
+      li:first-child:before{
+        color: #fff;
+        .opacity(1);
+      }
+      > li + li:before{
+        color: #fff;
+        .opacity(1);
+      }
+      > .active{
+        color: #fff;
+        .opacity(0.7);
+      }
+    }
+  }
+  // Sidebar
+  .elgg-sidebar{
+    margin-top: 0;
+  }
+}
+//
+// Activity profile
+// --------------------------------------------------
+.activity-profile{
+  .elgg-head-layout{
+    h2{
+      .h3();
+      color: #fff;
+    }
+  }
+}
+//
+// Activity section
+// --------------------------------------------------
+.activity-section{
+  .elgg-head-layout{
+    h3{
+      color: #FFF;
+      .opacity(0.7);
+      margin-bottom: 0;
+    }
+    h2{
+      margin-top: 0;
+    }
+  }
+}
+
+//
+// Group tools & details
+// --------------------------------------------------
+.join-activity-button{
+  background: @blue-lighter;
+  display: block;
+  text-align: center;
+  border: 1px solid @blue_clipit;
+  border-radius: 10px;
+  font-family: @font-family-futurabold;
+  font-size: 18px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+// Title activity module
+.activity-module-title{
+  font-family: @font-family-futurabold;
+  color: @blue_clipit;
+  border-top: 6px solid @blue-lighter;
+  padding-top: 10px;
+}
+
+// Deadline list
+ul.deadline-list{
+  > li{
+    color: @grey_text;
+    border-bottom: 1px solid @blue-lighter;
+    padding: 10px;
+    &.soon{
+      opacity: .3;
+    }
+    a{
+      font-weight: bold;
+      border-left: 1px solid #ccc;
+      padding-left: 10px;
+    }
+    .fa{
+      font-size: 20px;
+    }
+  }
+}
+//
+// Group block (sidebar)
+// --------------------------------------------------
+.activity-group-block{
+  margin-bottom: 15px;
+  border-bottom: 4px solid @blue-lighter;
+  padding-bottom: 10px;
+  h3{
+    font-family: @font-family-futurabold;
+    margin-bottom: 5px;
+    margin-top: 0;
+    .group-menu{
+      margin-right: 10px;
+      color: @grey_text;
+      text-decoration: none;
+    }
+  }
+  .fa.status-deadline{
+    font-size: 15px;
+    vertical-align: text-bottom;
+    &.fa-check-square-o{
+      color: @green_clipit;
+    }
+    &.fa-times{
+      color: @red_clipit;
+    }
+    &.fa-minus-square-o{
+      color: @yellow_clipit;
+    }
+  }
+}

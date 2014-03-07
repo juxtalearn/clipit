@@ -1,0 +1,21 @@
+<?php
+/**
+ * Created by JetBrains PhpStorm.
+ * User: equipo
+ * Date: 25/02/14
+ * Time: 13:20
+ * To change this template use File | Settings | File Templates.
+ */
+$group = elgg_extract('entity', $vars);
+
+echo elgg_view("input/hidden", array(
+    'name' => 'group-id',
+    'value' => $group->id,
+));
+
+// Leave button
+echo elgg_view("input/button", array(
+    'class' => 'leave-group btn btn-sm btn-danger btn-sp',
+    'value' => elgg_echo("group:leave"),
+    'type'  => 'submit',
+));

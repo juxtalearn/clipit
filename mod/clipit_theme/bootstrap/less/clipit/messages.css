@@ -1,0 +1,5 @@
+NameError: variable @blue-lighter is undefined in D:\ubuntu_compartido\clipit_befe\mod\clipit_theme\bootstrap\less\clipit\messages.less on line 7, column 28:
+6   padding-bottom: 10px;
+7   border-bottom: 1px solid @blue-lighter;
+8   // Topic title
+

@@ -1,0 +1,5 @@
+NameError: variable @blue_clipit is undefined in D:\ubuntu_compartido\clipit_befe\mod\clipit_theme\bootstrap\less\clipit\footer.less on line 6, column 21:
+5   height: auto;
+6   background-color: @blue_clipit;
+7   padding: 20px;
+

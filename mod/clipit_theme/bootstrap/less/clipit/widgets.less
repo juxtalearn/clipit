@@ -1,0 +1,308 @@
+.landing h2.elgg-heading-main{
+  display: none;
+}
+//
+// Widgets student landing page
+// --------------------------------------------------
+.events-list{
+  padding-right: 0;
+}
+.elgg-module-widget{
+  overflow: hidden;
+  background: #FFF;
+  border-radius: 4px 4px 0 0;
+  margin: 20px 0;
+  .elgg-head{
+    padding: 10px;
+    color: @blue_clipit;
+    .widget-viewall{
+      .pull-right();
+      text-transform: uppercase;
+      color: @blue_clipit;
+      font-size: 12px;
+      border-right: 1px solid @blue-lighter;
+      padding-right: 5px;
+      margin-right: 8px;
+    }
+    .collapse{
+      .pull-right();
+    }
+    h3{
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 0px;
+      overflow: hidden;
+      font-weight: bold;
+      font-size: ceil(@font-size-base * 1.14); // ~16px;
+    }
+  }
+  .separator{
+    border-top: 1px solid @blue-lighter;
+  }
+  .wrapper{
+    padding:10px;
+  }
+}
+// Tags
+.module-tags{
+  ul.tag-cloud{
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    li {
+      .pull-left();
+      margin-right: 10px;
+      a {
+        text-decoration: none;
+        line-height: 2.3em;
+        padding: 2px 5px;
+        color: @blue_clipit;
+        border: 1px solid @blue_clipit;
+        border-radius: 3px;
+        &:hover,
+        &:focus{
+          opacity: .7;
+        }
+      }
+    }
+  }
+}
+// Pending
+.module-pending{
+  small{
+    margin-top: 3px;
+  }
+  .point{
+    width: 11px;
+    height: 11px;
+    display: inline-block;
+    border-radius: 30px;
+    border: 2px solid #fff;
+    .box-shadow(0px 0px 0px 1px @blue-lighter);
+  }
+}
+
+// Activity status
+.module-activity_status{
+  .elgg-head{
+    background: @blue_clipit;
+    color: #FFF ;
+    a{
+      color: #FFF;
+    }
+  }
+  .elgg-body{
+    background-color: @blue-lighter;
+    background-image: url('http://juxtalearn.org/sandbox/clipit_befe/mod/clipit_theme/graphics/bg-bar.png');
+    background-position-x: -10px;
+
+    .bar{
+      height: 50px;
+      line-height: 50px;
+      margin-bottom: 10px;
+      h3{
+        padding-left: 10px;
+        text-transform: uppercase;
+        position: absolute;
+        line-height: inherit;
+        width: 100%;
+        margin: 0;
+        font-size: @font-size-large;
+        .text-truncate();
+        a{
+          color: #FFF;
+          opacity: .7;
+        }
+      }
+    }
+  }
+
+}
+// group activity
+.module-group_activity{
+  .elgg-body{
+    position: relative;
+
+    h3{
+      margin-left: 10px;
+      margin-bottom: 0;
+    }
+    .fa{
+      position: absolute;
+      top: 50%;
+      color: @blue_clipit;
+      font-size: @font-size-large;
+    }
+    .fa-chevron-left{
+      left: 2px;
+    }
+    .fa-chevron-right{
+      right: 2px;
+    }
+  }
+}
+
+// recommended videos
+.module-recommended_videos{
+  .elgg-body{
+    .wrapper{
+      overflow: hidden;
+    }
+    img{
+      height: 90px;
+      width: 120px;
+      margin-right: 10px;
+    }
+    .text{
+      overflow: hidden;
+      h5{
+        margin: 0;
+        font-size: ceil(@font-size-base * 1.14); // ~16px;
+        font-weight: bold;
+        color: @blue_clipit;
+      }
+      .sbs{
+        margin: 0;
+        font-size: 11px;
+        color: @blue_clipit;
+        display: block;
+        padding: 5px 0;
+        p{
+          color: @blue_clipit;
+          border: 1px solid @blue_clipit;
+          padding: 2px 4px;
+          border-radius: 3px;
+          display: inline-block;
+          margin: 2px;
+          max-width: 89px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          text-align: center;
+          a{
+            color: inherit;
+          }
+        }
+        .more-sbs{
+          margin: 2px;
+          vertical-align: top;
+          padding: 3px 4px;
+          color: @blue_clipit;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+// events
+.module-events{
+  position: relative;
+  background: transparent;
+
+  .elgg-head{
+    display: none;
+  }
+  .margin-bar{
+    height: 100%;
+    position: absolute;
+    background: #CACCCE;
+    left: 8px;
+    width: 5px;
+    margin-left: -1px;
+    bottom: 10px;
+    z-index: 99;
+  }
+  ul{
+    width: 100%;
+    position: relative;
+    list-style: none;
+    overflow: hidden;
+    padding: 0;
+    margin: 0px;
+
+    > li.event{
+      .pull-right();
+      clear: right;
+      width: 100%;
+      position: relative;
+
+      .circle-activity{
+        position: absolute;
+        z-index: 100;
+        left: 2px;
+        border-radius: 30px;
+        width: 15px;
+        height: 15px;
+        top: 12px;
+      }
+
+      .event-section{
+        padding: 15px;
+        position: relative;
+        margin-bottom: 20px;
+        padding-bottom: 5px;
+        background: #FFF !important;
+        border: none;
+        padding-top: 10px;
+        margin-left: 35px;
+        &:before{
+          content: '';
+          display: block;
+          width: 0;
+          height: 0;
+          border-top: 10px solid transparent;
+          border-bottom: 10px solid transparent;
+          border-right: 10px solid #fff;
+          left: -10px;
+          top: 12px;
+          position: absolute;
+          z-index: 102;
+        }
+        .event-details{
+          margin-top: 10px;
+          background: #f1f2f7;
+          overflow: hidden;
+          border-radius: 3px;
+          padding: 8px;
+          color: #797979;
+          font-size: 14px;
+          .icon{
+            font-size: 20px;
+            float: left;
+            margin-right: 15px;
+            color: #797979;
+          }
+          .img-thumb{
+            float: left;
+            margin-right: 10px;
+            max-width: 120px;
+            max-height: 90px;
+          }
+          .section{
+            overflow: hidden;
+            .title{
+              .text-truncate();
+            }
+            .sub-title{
+              font-size: 11px;
+              display: block;
+            }
+            .description{
+              font-size: 12px;
+              margin-top: 5px;
+            }
+          }
+        }
+        .event-date{
+          display: block;
+          padding: 5px 0;
+          margin-top: 5px;
+          font-size: 75%;
+          color: #999999;
+          border-bottom: 0;
+          cursor: default;
+        }
+      }
+    }
+  }
+}
