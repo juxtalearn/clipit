@@ -118,7 +118,7 @@
 		            if($rel->relationship == ClipitActivity::REL_ACTIVITY_FILE OR $rel->relationship == ClipitActivity::REL_ACTIVITY_TASK OR $rel->relationship == ClipitActivity::REL_ACTIVITY_VIDEO){
 		                $activity_id = $rel->guid_one;
 		            }
-					elseif($rel->relationship == ClipitGroup::REL_GROUP_FILE OR $rel->relationship == ClipitGroup::REL_GROUP_TASK OR $rel->relationship == ClipitGroup::REL_GROUP_VIDEO){
+					elseif($rel->relationship == ClipitGroup::REL_GROUP_FILE /*OR $rel->relationship == ClipitGroup::REL_GROUP_TASK OR $rel->relationship == ClipitGroup::REL_GROUP_VIDEO */){
 						$group_id = $rel->guid_one;
 					}
 					//TODO Add support for courses when available 
