@@ -13,7 +13,7 @@ $url = $CONFIG->url;
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="<?php echo $CONFIG->wwwroot; ?>">
-                <img src="<?php echo $vars['logo_img'];?>" alt="ClipIt logo">
+                <img src="<?php echo $vars['logo_img'];?>" alt="ClipIt logo" title="ClipIt <?php echo elgg_echo("home");?>"">
             </a>
         </div>
         <?php if (elgg_is_logged_in()) { ?>
