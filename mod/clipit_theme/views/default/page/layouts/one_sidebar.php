@@ -22,6 +22,8 @@ if(isset($vars['title_style'])){
 }
 // navigation defaults to breadcrumbs
 $nav = elgg_extract('nav', $vars, elgg_view('navigation/breadcrumbs'));
+// Filter menu
+$filter = elgg_extract('filter', $vars);
 $subtitle = "";
 if($vars['sub-title']){
     $subtitle = "<h3>".$vars['sub-title']."</h3>";
@@ -36,6 +38,7 @@ if($vars['sub-title']){
 	</div>
 
 	<div class="elgg-main elgg-body col-md-pull-3">
+        <?php echo $filter; ?>
         <?php
             if (isset($vars['title'])) {
                 echo "<div class='elgg-head-layout' {$title_style}>
