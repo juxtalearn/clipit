@@ -87,7 +87,7 @@ foreach($group_messages as $message):
     <div class="col-md-3 text-center">
         <?php echo elgg_view('output/url', array(
             'href'  => "clipit_activity/{$activity_id}/group/discussion/view/{$message->id}#replies",
-            'title' => elgg_echo("discussion:reply"),
+            'title' => elgg_echo("discussion:reply:total", array($total_replies)),
             'text'  => '<i class="fa fa-comment fa-stack-2x"></i>
                         <i class="fa-stack-1x replies-count">'.$total_replies.'</i>',
             'class' => "fa-stack replies"
@@ -96,7 +96,7 @@ foreach($group_messages as $message):
 
         <?php echo elgg_view('output/url', array(
             'href'  => "clipit_activity/{$activity_id}/group/discussion/view/{$message->id}#create_reply",
-            'title' => elgg_echo("discussion:reply"),
+            'title' => elgg_echo("discussion:reply:create"),
             'text'  => '<i class="fa fa-plus"></i> '.elgg_echo("discussion:reply"),
             'class' => "btn btn-default btn-sm reply-button"
         ));

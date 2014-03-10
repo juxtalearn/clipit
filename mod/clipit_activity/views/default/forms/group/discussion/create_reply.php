@@ -7,9 +7,6 @@
  */
 $message = elgg_extract('entity', $vars);
 $reply_id = $message->id;
-if($vars['second_reply']){
-    $reply_id = $message->destination;
-}
 echo elgg_view("input/hidden", array(
     'name' => 'message-id',
     'value' => $reply_id,

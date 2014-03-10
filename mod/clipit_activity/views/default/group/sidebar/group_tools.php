@@ -12,12 +12,12 @@ elgg_register_menu_item('group:tools', array(
     'name' => 'group_discussion',
     'text' => elgg_echo('group:discussion'),
     'href' => "clipit_activity/".$activity->id."/group/discussion",
+    'badge' => 10
 ));
 elgg_register_menu_item('group:tools', array(
     'name' => 'group_files',
     'text' => elgg_echo('group:files'),
     'href' => "clipit_activity/".$activity->id."/group/files",
-    'badge' => 10
 ));
 elgg_register_menu_item('group:tools', array(
     'name' => 'group_activity_log',

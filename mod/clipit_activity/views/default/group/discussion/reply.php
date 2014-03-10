@@ -37,7 +37,9 @@ if($vars['second_reply']){
         <?php echo $owner_reply_options; ?>
         <div class="user-reply">
             <img class="user-avatar" src="<?php echo $user_reply->getIconURL('small'); ?>" />
+            <?php if(!$second_reply): ?>
             <button id="<?php echo $reply_msg->id; ?>" class="reply-to btn btn-default btn-sm reply-button">Reply</button>
+            <?php endif; ?>
         </div>
         <div class="block">
             <strong>
@@ -53,6 +55,20 @@ if($vars['second_reply']){
         </div>
     </div>
     <div class="body-post"><?php echo $reply_msg->description; ?></div>
+
+    <?php if(!empty($second_level_ids)): ?>
+        <!-- Reply second level -->
+        <div class="second_level">
+    <?php
+        foreach($second_level_ids as $second_level_id):
+            $second_level = array_pop(ClipitMessage::get_by_id(array($second_level_id)));
+            echo elgg_view("group/discussion/reply", array('entity' => $second_level, 'second_reply' => true));
+        endforeach;
+    ?>
+        <!-- Reply second level end-->
+        </div>
+    <?php endif; ?>
+
     <!-- Reply form -->
     <div class="form-block" id="form-<?php echo $reply_msg->id; ?>">
         <small class="block">
@@ -67,18 +83,5 @@ if($vars['second_reply']){
         <?php echo elgg_view_form("group/discussion/create_reply", array('data-validate'=> "true" ), array('entity'  => $reply_msg, 'second_reply' => $second_reply)); ?>
     </div>
     <!-- Reply form end-->
-
-    <?php if(!empty($second_level_ids)): ?>
-        <!-- Reply second level -->
-        <div class="second_level">
-    <?php
-        foreach($second_level_ids as $second_level_id):
-            $second_level = array_pop(ClipitMessage::get_by_id(array($second_level_id)));
-            echo elgg_view("group/discussion/reply", array('entity' => $second_level, 'second_reply' => true));
-        endforeach;
-    ?>
-        <!-- Reply second level end-->
-        </div>
-    <?php endif; ?>
 
 </div>

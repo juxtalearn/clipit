@@ -41,6 +41,7 @@ $english = array(
     // Reply
     'discussion:reply:create' => 'Create reply',
     'discussion:reply' => 'Reply',
+    'discussion:reply:total' => '%s replies',
 );
 
 add_translation('en', $english);
