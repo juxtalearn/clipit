@@ -13,14 +13,14 @@ $user_groups = ClipitUser::get_groups($user_id);
 $message_reply = get_input('message-reply');
 
 if(count($message)==0 || trim($message_reply) == "" ){
-    register_error(elgg_echo("discussion:reply:cantcreate"));
+    register_error(elgg_echo("reply:cantcreate"));
 } else{
     ClipitMessage::create(array(
         'name' => '',
         'description' => $message_reply,
         'destination' => $message->id,
     ));
-    system_message(elgg_echo('discussion:reply:created'));
+    system_message(elgg_echo('reply:created'));
 }
 
 forward(REFERER);

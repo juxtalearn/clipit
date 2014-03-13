@@ -15,12 +15,12 @@ $discussion_title = get_input('discussion-title');
 $discussion_text = get_input('discussion-text');
 
 if(!isset($discussion) || $discussion->owner_id != $user_id || trim($discussion_text) == ""){
-    register_error(elgg_echo("discussion:reply:cantedit"));
+    register_error(elgg_echo("reply:cantedit"));
 } else{
     ClipitMessage::set_properties($discussion->id, array(
         'description' => $discussion_text
     ));
-    system_message(elgg_echo('discussion:reply:edited'));
+    system_message(elgg_echo('reply:edited'));
 }
 
 
