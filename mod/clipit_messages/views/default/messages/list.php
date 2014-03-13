@@ -117,6 +117,7 @@ $(function(){
         }
 
         $user_from = array_pop(ClipitUser::get_by_id(array($message->owner_id)));
+        $user_from_elgg = new ElggUser($message->owner_id);
         $text_from = elgg_echo("message:from");
         if($vars['sent']){
             // $user_from = array_pop(ClipitUser::get_by_id(array($message->destination)));
@@ -130,7 +131,10 @@ $(function(){
         <td class="select">
             <input type="checkbox" name="check-msg[]" value="<?php echo $message->id; ?>" class="select-simple">
         </td>
-        <td <?php if($total_replies > 0):?> class="replied" <?php endif; ?> >
+        <td class="user-avatar">
+            <img src="<?php echo $user_from_elgg->getIconURL("tiny"); ?>">
+        </td>
+        <td class="user-owner">
             <?php echo $text_from; ?>:
             <?php echo elgg_view('output/url', array(
                 'href'  => "profile/".$user_from->login,
@@ -150,6 +154,10 @@ $(function(){
                 (<?php echo elgg_view('output/friendlytime', array('time' => $last_post->time_created));?>)</i>
             </small>
             </a>
+            <?php else: ?>
+            <small class="show">
+                <?php echo elgg_view('output/friendlytime', array('time' => $message->time_created));?>
+            </small>
             <?php endif; ?>
         </td>
         <td class="click-simulate" onclick="document.location.href = '<?php echo $message_url; ?>';">
@@ -168,9 +176,6 @@ $(function(){
         </td>
         <td class="click-simulate" onclick="document.location.href = '<?php echo $message_url; ?>';">
             <i class="fa fa-paperclip icon" title="<?php echo elgg_echo("file:contains"); ?>"></i>
-        </td>
-        <td class="click-simulate" onclick="document.location.href = '<?php echo $message_url; ?>';">
-            <?php echo elgg_view('output/friendlytime', array('time' => $message->time_created));?>
         </td>
         <td>
             <button class="btn btn-default btn-xs reply-button">
