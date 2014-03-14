@@ -173,9 +173,10 @@ class UBMessage extends UBItem{
         }
         $prop_array[] = "read_by_user";
         $read_by_user = $called_class::get_properties($id, $prop_array);
+        $read_by_user = array_pop($read_by_user);
         $return_array = array();
         foreach($user_array as $user_id){
-            if(array_search($user_id, $read_by_user)){
+            if(in_array($user_id, $read_by_user)){
                 $return_array[$user_id] = true;
             } else{
                 $return_array[$user_id] = false;
@@ -194,7 +195,7 @@ class UBMessage extends UBItem{
         $read_by_user = $called_class::get_properties($id, $prop_array);
         foreach($user_array as $user_id){
             if($read == true){
-                if(!array_search($user_id, $read_by_user)){
+                if(!in_array($user_id, $read_by_user)){
                     array_push($read_by_user, $user_id);
                 }
             } else if($read == false){
