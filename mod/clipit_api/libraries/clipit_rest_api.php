@@ -10,18 +10,14 @@ function clipit_expose_api(){
         "clipit.comment." => "ClipitComment::",
         "clipit.file." => "ClipitFile::",
         "clipit.group." => "ClipitGroup::",
+        "clipit.la." => "ClipitLA::",
         "clipit.message." => "ClipitMessage::",
-        "clipit.palette." => "ClipitPalette::",
         "clipit.quiz." => "ClipitQuiz::",
         "clipit.quiz.question." => "ClipitQuizQuestion::",
         "clipit.quiz.result." => "ClipitQuizResult::",
         "clipit.sta." => "ClipitSTA::",
         "clipit.storyboard." => "ClipitStoryboard::",
         "clipit.task." => "ClipitTask::",
-        "clipit.taxonomy." => "ClipitTaxonomy::",
-        "clipit.taxonomy.sb." => "ClipitTaxonomySB::",
-        "clipit.taxonomy.tag." => "ClipitTaxonomyTag::",
-        "clipit.taxonomy.tc." => "ClipitTaxonomyTC::",
         "clipit.user." => "ClipitUser::",
         "clipit.video." => "ClipitVideo::");
     foreach($suffix_list as $api_suffix => $class_suffix){
@@ -32,8 +28,8 @@ function clipit_expose_api(){
     expose_event_functions();
     expose_file_functions();
     expose_group_functions();
+    expose_la_functions();
     expose_message_functions();
-    expose_palette_functions();
     expose_quiz_functions();
     expose_quiz_question_functions();
     expose_quiz_result_functions();
@@ -41,10 +37,6 @@ function clipit_expose_api(){
     expose_sta_functions();
     expose_storyboard_functions();
     expose_task_functions();
-    expose_taxonomy_functions();
-    expose_taxonomy_sb_functions();
-    expose_taxonomy_tag_functions();
-    expose_taxonomy_tc_functions();
     expose_user_functions();
     expose_video_functions();
 }
@@ -476,6 +468,26 @@ function expose_group_functions(){
                 "required" => true)),
         "Gets Files from a Group",
         "GET", false, true);
+}
+
+function expose_la_functions(){
+    $api_suffix = "clipit.la.";
+    $class_suffix = "ClipitLA::";
+    expose_function(
+        $api_suffix . "send_metrics",
+        $class_suffix . "send_metrics",
+        array(
+            "returnId" => array(
+                "type" => "int",
+                "required" => true),
+            "data" => array(
+                "type" => "string",
+                "required" => true),
+            "statuscode" => array(
+                "type" => "int",
+                "required" => true)),
+        "Send Learning Analytics Metrics to ClipIt",
+        "POST", false, false);
 }
 
 function expose_message_functions(){
