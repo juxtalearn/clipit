@@ -37,6 +37,7 @@ function clipit_messages_init() {
 
     // Ajax views
     elgg_register_ajax_view("messages/search_to");
+    elgg_register_ajax_view('modal/messages/send');
     elgg_register_ajax_view('modal/messages/edit');
     elgg_register_ajax_view('modal/messages/reply/edit');
 
@@ -78,7 +79,7 @@ function messages_page_handler($page) {
                 if(!is_array($messages)){
                     $messages = array();
                 }
-                $messages_by_sender = array_pop(ClipitMessage::get_by_sender(array($user_id)));
+                $messages_by_sender = array_pop(ClipitMessage::get_by_sender(array($user_id), $category = 'pm'));
                 foreach($messages_by_sender as $message_sender){
                     if(count(ClipitMessage::get_replies($message_sender->id)) > 0){
                         $messages = array_merge(array($message_sender), $messages);
@@ -89,7 +90,7 @@ function messages_page_handler($page) {
             case 'sent_email':
                 $title = elgg_echo("messages:sent_email");
                 elgg_push_breadcrumb($title);
-                $messages = array_pop(ClipitMessage::get_by_sender(array($user_id)));
+                $messages = array_pop(ClipitMessage::get_by_sender(array($user_id), $category = 'pm'));
                 $content = elgg_view_form('messages/list', array(), array('entity' => $messages, 'sent' => true));
                 break;
             case 'view':
