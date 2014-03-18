@@ -21,6 +21,7 @@ if(count($group)==0 || !in_array($group->id, $user_groups) || trim($discussion_t
         'name' => $discussion_title,
         'description' => $discussion_text,
         'destination' => $group->id,
+        'category'  => 'discussion'
     ));
     system_message(elgg_echo('discussion:created'));
 }
