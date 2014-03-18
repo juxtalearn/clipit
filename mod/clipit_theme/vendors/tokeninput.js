@@ -36,8 +36,6 @@
         theme: null,
         zindex: 999,
         resultsLimit: null,
-        // Custom
-       uniqueID: (new Date()).getTime(),
 
         enableHTML: false,
 
@@ -400,7 +398,6 @@
         // The list to store the token items in
         var token_list = $("<ul />")
             .addClass($(input).data("settings").classes.tokenList)
-            .attr("id", $(input).data("settings").uniqueID)
             .click(function (event) {
                 var li = $(event.target).closest("li");
                 if(li && li.get(0) && $.data(li.get(0), "tokeninput")) {
