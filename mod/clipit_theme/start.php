@@ -118,8 +118,12 @@ function clipit_final_init() {
         elgg_register_js("jquery:bootbox", $CONFIG->url . "mod/clipit_theme/vendors/bootbox.js");
         // jQuery validate
         elgg_register_js("jquery:validate", $CONFIG->url . "mod/clipit_theme/vendors/jquery.validate.js");
-        elgg_register_js("clipit", $CONFIG->url . "mod/clipit_theme/js/clipit.js");
+        // jquery tokeninput (automcomplete)
+        elgg_register_js("jquery:tokeninput", $CONFIG->url . "mod/clipit_theme/vendors/tokeninput.js");
 
+        $clipit_js = elgg_get_simplecache_url('js', 'clipit');
+        elgg_register_simplecache_view('js/clipit');
+        elgg_register_js('clipit', $clipit_js);
 
         elgg_load_js("jquery");
         elgg_load_js("jquery-ui");
@@ -132,6 +136,7 @@ function clipit_final_init() {
         elgg_load_js("jquery:bootstrap:wysihtml5");
         elgg_load_css("wysihtml5:css");
         elgg_load_js("jquery:validate");
+        elgg_load_js("jquery:tokeninput");
         elgg_load_js("clipit");
         elgg_load_css("ui-lightness");
         elgg_load_css("twitter-bootstrap");

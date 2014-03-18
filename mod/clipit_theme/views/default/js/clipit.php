@@ -1,3 +1,4 @@
+elgg.provide('clipit');
 
 $(function(){
     /**
@@ -175,6 +176,9 @@ $(function(){
             }
             $(this).tokenInput(elgg.config.wwwroot+"ajax/view/messages/search_to",
                 {
+                    hintText: elgg.echo("autocomplete:hint"),
+                    noResultsText: elgg.echo("autocomplete:noresults"),
+                    searchingText: elgg.echo("autocomplete:searching"),
                     zindex: 1052,
                     searchDelay: 0,
                     preventDuplicates: true,
