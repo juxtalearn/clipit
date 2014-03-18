@@ -40,3 +40,30 @@ form .elgg-module{
     color: @blue_clipit;
   }
 }
+//
+// Search box
+// --------------------------------------------------
+.search-box{
+  @shadow_input:  0 0 0 4px rgba(225, 235, 240, 0.5);
+  .box-shadow(@shadow_input);
+  input[type=text]{
+    padding-left: 5px;
+    border: 0;
+    display: inline-block;
+  }
+  .input-group-btn{
+    display: inline-block;
+    span{
+      border-left: 2px solid rgba(225, 235, 240, 0.5);
+      padding-left: 5px;
+    }
+    button{
+      background-color: #fff;
+      border: 0;
+      .fa{
+        color: @blue_clipit;
+        font-size: ceil(@font-size-base * 1.14); // ~ 16px
+      }
+    }
+  }
+}

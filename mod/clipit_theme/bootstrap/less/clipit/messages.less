@@ -1,4 +1,73 @@
 //
+// Messages top menu
+// --------------------------------------------------
+#menu_messages{
+  li{
+    &.message-item{
+      > a{
+        padding: 5px 10px;
+        width: 300px;
+      }
+      .user-avatar{
+        .pull-left();
+        margin-right: 10px;
+      }
+    }
+    &.message-options{
+      background: #f5f5f5;
+      padding: 10px 0;
+      margin-top: -8px;
+      margin-bottom: -5px;
+      a{
+        display: inline-block;
+        font-size: @font-size-base;
+        text-transform: none;
+        letter-spacing: 0;
+        font-weight: bold;
+        &:hover,
+        &:focus{
+          background: none;
+          color: @blue_clipit;
+        }
+        > .fa{
+          font-size: @font-size-base;
+          float: none !important;
+        }
+      }
+      .btn-compose{
+        color: #fff;
+        font-size: 12px;
+        display: inline-block;
+        font-weight: bold;
+        letter-spacing: 0;
+        padding: 5px 10px;
+        margin-left: 10px;
+        text-transform: none;
+        margin-bottom: 5px;
+        font-family: @font-family-base;
+      }
+
+    }
+  }
+}
+
+//
+// Reply fa comment
+// --------------------------------------------------
+.replies{
+  font-size: ceil(@font-size-base * 1.14); // ~16px
+  .fa-stack-2x{
+    font-size: 2em !important;
+  }
+  .replies-count{
+    color: #fff;
+    font-size: @font-size-small !important;
+    font-style: normal;
+    font-weight: bold;
+  }
+}
+
+//
 // Messages discussion
 // --------------------------------------------------
 .messages-discussion{
@@ -20,19 +89,245 @@
     margin-top: 5px;
   }
   .replies{
-    font-size: (@font-size-base * 1.14); // ~16px
     margin: 10px;
-    .replies-count{
-      color: #fff;
-      font-size: @font-size-small;
-      font-style: normal;
-      font-weight: bold;
-    }
   }
   .reply-button{
     padding: 3px 10px;
     background: #fff;
     color: @blue_clipit;
     border: 1px solid @blue_clipit;
+  }
+}
+//
+// User messages
+// --------------------------------------------------
+.compose-message-button{
+  background: @blue_clipit;
+  display: block;
+  text-align: center;
+  border: 1px solid @blue_clipit;
+  border-radius: 10px;
+  font-family: @font-family-futurabold;
+  font-size: 18px;
+  padding: 15px;
+  color: #fff;
+  width: 100%;
+  margin-bottom: 33px;
+  &:hover,
+  &:focus{
+    color: #fff;
+  }
+}
+//
+// Messages table
+// --------------------------------------------------
+.messages-table{
+  tr.unread, tr.unread:hover, tr.unread:focus{
+    background: #ECF7FB;
+    > td{
+      background: #ECF7FB;
+    }
+  }
+  td{
+    font-size: @font-size-base;
+    border-top: 0 !important;
+    border-bottom: 1px solid @blue-lighter !important;
+    padding: 15px 10px !important;
+    &.replies-td{
+      padding: 0 10px !important;
+      text-align: center;
+      vertical-align: middle;
+    }
+    &.click-simulate{
+      cursor: pointer;
+    }
+    &.user-owner{
+      padding: 10px 10px !important;
+    }
+    &.user-avatar{
+      width: 25px;
+      padding-right: 0 !important;
+      padding-left: 0 !important;
+    }
+    .reply-button{
+      background: #fff;
+      color: @blue_clipit;
+      border: 1px solid @blue_clipit;
+      margin-right: 5px;
+    }
+    .label{
+      border-radius: 4px;
+      &.new-replies{
+        background-color: @blue_clipit;
+        color: #fff;
+      }
+    }
+    .fa.icon{
+      color: @blue_clipit;
+      font-size: ceil(@font-size-base * 1.42);
+      &.replies{
+        font-size: ceil(@font-size-base * 1.07);
+      }
+    }
+    &.select{
+      border: 0 !important;
+      text-align: right;
+    }
+  }
+}
+//
+// Message view
+// --------------------------------------------------
+.reply-section{
+  margin-top: 20px;
+}
+.message{
+  p{
+    margin: 0;
+    color: @grey_dark;
+  }
+  .reply-button{
+    background: #fff;
+    color: @blue_clipit;
+    border: 1px solid @blue_clipit;
+    margin-right: 5px;
+    padding: 3px 10px;
+  }
+}
+.message-owner{
+  img.user-avatar{
+    .pull-left();
+    margin-right: 10px;
+    margin-top: 5px;
+  }
+  .block{
+    overflow: hidden;
+    .header-msg{
+      p{
+        color: #999999;
+      }
+      .subject{
+        margin-top: 5px;
+        margin-bottom: 0;
+        padding-bottom: 10px;
+        border-bottom: 1px solid @blue-lighter;
+        color: @blue_clipit;
+        font-family: @font-family-futurabold;
+      }
+    }
+    .body-msg{
+      color: @grey_dark;
+      margin-top: 10px;
+    }
+  }
+}
+
+
+//
+// jquery-tokeninput
+// --------------------------------------------------
+ul.token-input-list {
+  overflow: hidden;
+  height: auto !important;
+  height: 1%;
+  width: 100%;
+  cursor: text;
+  z-index: 999;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  list-style-type: none;
+  clear: left;
+  .form-control();
+  padding: 5px 10px;
+  li{
+    list-style-type: none;
+    float: left;
+    input{
+      border: 0;
+      width: 80%;
+      padding: 3px 8px;
+      margin: 3px;
+      background-color: white;
+      -webkit-appearance: caret;
+    }
+
+  }
+}
+li.token-input-token {
+  overflow: hidden;
+  height: auto !important;
+  height: 1%;
+  margin: 3px;
+  padding: 2px 5px;
+  background-color: #fff;
+  color: @blue_clipit;
+  border: 1px solid @blue_clipit;
+  font-weight: bold;
+  cursor: default;
+  display: block;
+  border-radius: 4px;
+  .transition(all .25s linear);
+  &:hover,
+  &focus{
+    background-color: @blue_clipit;
+    color: #fff;
+  }
+  .token-input-delete-token{
+    float: right;
+    margin-left: 5px;
+    color: @blue-lighter;
+    cursor: pointer;
+  }
+}
+li.token-input-selected-token {
+  background-color: @blue_clipit;
+  color: #fff;
+}
+div.token-input-dropdown {
+  position: absolute;
+  width: 100%;
+  background-color: #fff;
+  overflow: hidden;
+  cursor: default;
+  font-size: @font-size-base;
+  z-index: 1;
+  .box-shadow(0 6px 12px rgba(0, 0, 0, 0.2));
+  padding: 3px;
+  ul{
+    margin: 0;
+    padding: 0;
+    li{
+      padding-left: 10px;
+      border-bottom: 1px solid #eee;
+      .title{
+        color: @blue_clipit;
+      }
+      .sub-title{
+        color: @grey_text;
+        font-size: @font-size-small;
+      }
+      .img{
+        vertical-align: baseline;
+        &.fa{
+          color: @blue_clipit;
+          font-size: 20px;
+          margin-top: 10px;
+          float: left;
+        }
+      }
+      &.token-input-dropdown-item{
+        background-color: #fafafa;
+      }
+      &.token-input-dropdown-item{
+        background-color: #fff;
+      }
+      &.token-input-selected-dropdown-item{
+        background-color: @blue_clipit;
+        .title, .sub-title, .img{
+          color: #fff;
+        }
+      }
+    }
   }
 }
