@@ -25,6 +25,9 @@
 elgg_register_event_handler('init', 'system', 'clipit_messages_init');
 
 function clipit_messages_init() {
+    // Register libraries
+    elgg_register_library('clipit:messages', elgg_get_plugins_path() . 'clipit_messages/lib/messages.php');
+    // Register page handlers
     elgg_register_page_handler('messages', 'messages_page_handler');
     elgg_register_event_handler('pagesetup', 'system', 'messages_setup_sidebar_menus');
     // Register actions
@@ -68,67 +71,31 @@ function messages_page_handler($page) {
         forward('messages/inbox');
     }
     if(isset($page[0])){
+        elgg_load_library("clipit:messages");
         $user_id = elgg_get_logged_in_user_guid();
         elgg_push_breadcrumb(elgg_echo("messages"), "/messages/inbox");
         $title = elgg_echo("messages");
+        elgg_extend_view("page/elements/owner_block", "page/components/button_compose_message");
+
         switch ($page[0]) {
+            case 'search':
+                messages_search_page($page);
+                break;
             case 'inbox':
-                $title = elgg_echo("messages:inbox");
-                elgg_push_breadcrumb($title);
-                $messages = array_pop(ClipitMessage::get_by_destination(array($user_id)));
-                if(!is_array($messages)){
-                    $messages = array();
-                }
-                $messages_by_sender = array_pop(ClipitMessage::get_by_sender(array($user_id), $category = 'pm'));
-                foreach($messages_by_sender as $message_sender){
-                    if(count(ClipitMessage::get_replies($message_sender->id)) > 0){
-                        $messages = array_merge(array($message_sender), $messages);
-                    }
-                }
-                $content = elgg_view_form('messages/list', array(), array('entity' => $messages));
+                messages_handle_inbox_page();
                 break;
             case 'sent_email':
-                $title = elgg_echo("messages:sent_email");
-                elgg_push_breadcrumb($title);
-                $messages = array_pop(ClipitMessage::get_by_sender(array($user_id), $category = 'pm'));
-                $content = elgg_view_form('messages/list', array(), array('entity' => $messages, 'sent' => true));
+                messages_handle_sent_page();
                 break;
             case 'view':
-                $message = array_pop(ClipitMessage::get_by_id(array((int)$page[1])));
-                if(!isset($page[1]) || empty($message)
-                    || ($message->destination != $user_id && $message->owner_id != $user_id )){
-                    return false;
-                }
-                $breadcrumb_title = $message->name;
-                // if subject is empty, set description in breadcrumb
-                if(trim($breadcrumb_title) == ""){
-                    $breadcrumb_title = $message->description;
-                    if(mb_strlen($breadcrumb_title)>40){
-                        $breadcrumb_title = substr($breadcrumb_title, 0, 40)."...";
-                    }
-                }
-                elgg_push_breadcrumb($breadcrumb_title);
-                $title = elgg_echo("message");
-                $content = elgg_view("messages/view", array('entity' => $message));
+                messages_handle_view_page($page);
                 break;
             default:
                 return false;
         }
-        $params = array(
-            'content'   => $content,
-            'filter'    => '',
-            'title'     => $title,
-            'class'     => ''
-        );
-        elgg_extend_view("page/elements/owner_block", "page/components/button_compose_message");
-        $body = elgg_view_layout('content', $params);
-        echo elgg_view_page($params['title'], $body);
+
     }
     return true;
-    // inbox
-
-    //$filter = elgg_view('messages/filter_menu', array('selected' => $selected_tab));
-    ///
 }
 
 
