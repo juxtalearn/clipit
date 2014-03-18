@@ -162,35 +162,17 @@ $(function(){
             $(this).button(elgg.echo("loading"));
         }
     });
-//    $('body').on('show.bs.modal', function(){
-//    $(".token-input-list").remove();
-//    $(this).find("input[name=message-to]").tokenInput(elgg.config.wwwroot+"ajax/view/messages/search_to",
-//        {
-//            zindex: 1052,
-//            preventDuplicates: true,
-//            animateDropdown: false,
-//            propertyToSearch: "first_name",
-//            resultsFormatter: function(item){
-//                var img = "<img class='img' src='" + item.avatar + "' title='" + item.first_name + "' height='25px' width='25px' />";
-//                if(item.icon){
-//                    img = "<i class='img fa fa-"+ item.icon +"'></i>";
-//                }
-//                return "<li>" + img + "<div style='display: inline-block; padding-left: 10px;'><div class='title'>" + item.first_name + "</div><div class='sub-title'>" + item.username + "</div></div></li>" },
-//            tokenFormatter: function(item) { return "<li>" + item.first_name + "</li>" }
-//        }
-//    );
-//    });
-    // Execute send_msg function
-    //send_msg();
+    /**
+     * jQuery send_msg function
+     * Autocomplete user info
+     * @param user    set default username value
+     *
+     */
     $.fn.extend({
         send_msg: function(username_data){
             if(!username_data){
                 username_data = [];
             }
-            //$(this).tokenInput("destroy");
-//            $("div.test:not(:first)").remove();
-//            var form = $(this).closest("form");
-//            form.find("ul.token-input-list").not(":eq(0)").remove();
             $(this).tokenInput(elgg.config.wwwroot+"ajax/view/messages/search_to",
                 {
                     zindex: 1052,
@@ -210,36 +192,7 @@ $(function(){
             );
         }
     });
+    // default execute send_msg function
     $("input#compose").send_msg();
 });
-
-/**
- * Autocomplete user info
- * @param user    set default user username value
- *
- */
-function send_msg(username_data){
-
-//    var prePopulate_data = [];
-//    if(!username_data){
-//        username_data = [];
-//    }
-//    $("input[name=message-to]").tokenInput(elgg.config.wwwroot+"ajax/view/messages/search_to",
-//        {
-//            zindex: 1052,
-//            preventDuplicates: true,
-//            animateDropdown: false,
-//            propertyToSearch: "first_name",
-//            prePopulate: username_data,
-//            resultsFormatter: function(item){
-//                var img = "<img class='img' src='" + item.avatar + "' title='" + item.first_name + "' height='25px' width='25px' />";
-//                if(item.icon){
-//                    img = "<i class='img fa fa-"+ item.icon +"'></i>";
-//                }
-//                return "<li>" + img + "<div style='display: inline-block; padding-left: 10px;'><div class='title'>" + item.first_name + "</div><div class='sub-title'>" + item.username + "</div></div></li>" },
-//            tokenFormatter: function(item) { return "<li>" + item.first_name + "</li>" }
-//        }
-//    );
-
-}
 
