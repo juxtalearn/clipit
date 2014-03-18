@@ -119,9 +119,9 @@ class ClipitQuizResult extends UBItem{
             } else{
                 $temp_array = array();
                 foreach($elgg_object_array as $elgg_object){
-                    $temp_array[] = new ClipitQuizResult($elgg_object->guid);
+                    $temp_array[] = new ClipitQuizResult((int)$elgg_object->guid);
                 }
-                if(!$temp_array){
+                if(empty($temp_array)){
                     $quiz_result_array[] = null;
                 } else{
                     $quiz_result_array[] = $temp_array;
