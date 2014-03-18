@@ -36,6 +36,7 @@ foreach($to_array as $to_id){
             'name' => $message_subject,
             'description' => $message_text,
             'destination' => $user->id,
+            'category'  => 'pm'
         ));
         system_message(elgg_echo('messages:created'));
     }
