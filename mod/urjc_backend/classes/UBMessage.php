@@ -29,6 +29,7 @@ class UBMessage extends UBItem{
     const REL_MESSAGE_DESTINATION = "message-destination";
     const REL_MESSAGE_FILE = "message-file";
 
+    public $category = "";
     public $read = false;
     public $read_by_user = array();
     public $destination = -1;
@@ -37,6 +38,7 @@ class UBMessage extends UBItem{
 
     protected function _load($elgg_object){
         parent::_load($elgg_object);
+        $this->category = (string)$elgg_object->category;
         $this->read = (bool)$elgg_object->read;
         $this->read_by_user = (array)$elgg_object->read_by_user;
         $this->destination = static::get_destination($this->id);
@@ -57,6 +59,7 @@ class UBMessage extends UBItem{
         }
         $elgg_object->name = (string)$this->name;
         $elgg_object->description = (string)$this->description;
+        $elgg_object->category = (string)$this->category;
         $elgg_object->read = (bool)$this->read;
         $elgg_object->read_by_user = (array)$this->read_by_user;
         $elgg_object->access_id = ACCESS_PUBLIC;
@@ -100,6 +103,7 @@ class UBMessage extends UBItem{
             UBCollection::remove_all_items($id, static::REL_MESSAGE_DESTINATION);
             return UBCollection::add_items($id, array($destination_id), static::REL_MESSAGE_DESTINATION);
         }
+        return -1;
     }
 
     static function get_files($id){
@@ -121,17 +125,58 @@ class UBMessage extends UBItem{
         return $reply_array;
     }
 
-    static function get_by_sender($sender_array){
+    static function get_by_category($category_array){
         $called_class = get_called_class();
-        $object_array = array();
-        foreach($sender_array as $sender_id){
-            $elgg_object_array = elgg_get_entities(
+        $message_array = array();
+        foreach($category_array as $category){
+            $elgg_object_array = elgg_get_entities_from_metadata(
                 array(
                     "type" => $called_class::TYPE,
                     "subtype" => $called_class::SUBTYPE,
-                    "owner_guid" => (int)$sender_id
+                    "metadata_names" => array("category"),
+                    "metadata_values" => array((string)$category)
                 )
             );
+            if(!$elgg_object_array){
+                $message_array[] = null;
+            } else{
+                $temp_array = array();
+                foreach($elgg_object_array as $elgg_object){
+                    $temp_array[] = new $called_class((int)$elgg_object->guid);
+                }
+                if(empty($temp_array)){
+                    $message_array[] = null;
+                } else{
+                    $message_array[] = $temp_array;
+                }
+            }
+        }
+        return $message_array;
+    }
+
+    static function get_by_sender($sender_array, $category = null){
+        $called_class = get_called_class();
+        $object_array = array();
+        foreach($sender_array as $sender_id){
+            if($category){
+                $elgg_object_array = elgg_get_entities_from_metadata(
+                    array(
+                        "type" => $called_class::TYPE,
+                        "subtype" => $called_class::SUBTYPE,
+                        "owner_guid" => (int)$sender_id,
+                        "metadata_names" => array("category"),
+                        "metadata_values" => array((string)$category)
+                    )
+                );
+            } else{
+                $elgg_object_array = elgg_get_entities(
+                    array(
+                        "type" => $called_class::TYPE,
+                        "subtype" => $called_class::SUBTYPE,
+                        "owner_guid" => (int)$sender_id
+                    )
+                );
+            }
             $temp_array = array();
             foreach($elgg_object_array as $elgg_object){
                 $temp_array[] = new $called_class((int)$elgg_object->guid);
@@ -145,7 +190,7 @@ class UBMessage extends UBItem{
         return $object_array;
     }
 
-    static function get_by_destination($destination_array){
+    static function get_by_destination($destination_array, $category = null){
         $called_class = get_called_class();
         $object_array = array();
         foreach($destination_array as $destination_id){
@@ -153,7 +198,13 @@ class UBMessage extends UBItem{
             $temp_array = array();
             foreach($rel_array as $rel){
                 if($rel->relationship == static::REL_MESSAGE_DESTINATION){
-                    $temp_array[] = new $called_class((int)$rel->guid_one);
+                    $message = new $called_class((int)$rel->guid_one);
+                    if(!$category){
+                        $temp_array[] = $message;
+
+                    } elseif($message->category == $category){
+                        $temp_array[] = $message;
+                    }
                 }
             }
             if(empty($temp_array)){

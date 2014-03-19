@@ -6,16 +6,16 @@
  * Time: 10:23
  */
 
-class ClipitLA extends UBItem{
+class ClipitLA extends UBFile{
 
-    public $return_id;
-    public $data;
-    public $status_code;
+    const SUBTYPE = "clipit_la";
+
+    public $return_id = -1;
+    public $status_code = -1;
 
     protected function _load($elgg_object){
         parent::_load($elgg_object);
         $this->return_id = (int)$elgg_object->return_id;
-        $this->data = (string)$elgg_object->data;
         $this->status_code = (int)$elgg_object->status_code;
     }
 
@@ -26,27 +26,37 @@ class ClipitLA extends UBItem{
      */
     function save(){
         if($this->id == -1){
-            $elgg_object = new ElggObject();
-            $elgg_object->subtype = (string)static::SUBTYPE;
-        } elseif(!$elgg_object = new ElggObject((int)$this->id)){
+            $elgg_file = new ElggFile();
+            $elgg_file->subtype = (string)static::SUBTYPE;
+        } elseif(!$elgg_file = new ElggFile((int)$this->id)){
             return false;
         }
-        $elgg_object->name = (string)$this->name;
-        $elgg_object->description = (string)$this->description;
-        $elgg_object->return_id = (int)$this->return_id;
-        $elgg_object->data = (string) $this->data;
-        $elgg_object->status_code = (int) $this->status_code;
-        $elgg_object->access_id = ACCESS_PUBLIC;
-        $elgg_object->save();
-        $this->owner_id = (int)$elgg_object->owner_guid;
-        $this->time_created = (int)$elgg_object->time_created;
-        return $this->id = (int)$elgg_object->guid;
+        $date_obj = new DateTime();
+        if(empty($this->name)){
+            $this->name = static::DEFAULT_FILENAME;
+        }
+        $elgg_file->setFilename((string)$date_obj->getTimestamp() . static::TIMESTAMP_DELIMITER . static::DEFAULT_FILENAME);
+        $elgg_file->description = (string)$this->description;
+        $elgg_file->open("write");
+        if($decoded_data = base64_decode($this->data, true)){
+            $elgg_file->write($decoded_data);
+        } else{
+            $elgg_file->write($this->data);
+        }
+        $elgg_file->close();
+        $elgg_file->access_id = ACCESS_PUBLIC;
+        $elgg_file->return_id = $this->return_id;
+        $elgg_file->status_code = $this->status_code;
+        $elgg_file->save();
+        $this->owner_id = (int)$elgg_file->owner_guid;
+        $this->time_created = (int)$elgg_file->time_created;
+        return $this->id = (int)$elgg_file->guid;
     }
 
     static function send_metrics($returnId, $data, $statuscode){
         $la = new ClipitLA();
         $prop_value_array["return_id"] = (int)$returnId;
-        $prop_value_array["data"] = (string)$data;
+        $prop_value_array["data"] = $data;
         $prop_value_array["status_code"] = (int)$statuscode;
         $la->setProperties($prop_value_array);
         return $la->save();

@@ -36,6 +36,7 @@ class UBFile extends UBItem{
      * @const string Delimiter for timestamp string
      */
     const TIMESTAMP_DELIMITER = "#";
+    const DEFAULT_FILENAME = "unnamed_file";
     /**
      * @var string File data in byte string format
      */
@@ -76,7 +77,7 @@ class UBFile extends UBItem{
         $this->description = (string)$elgg_file->description;
         $this->owner_id = (int)$elgg_file->owner_guid;
         $this->time_created = (int)$elgg_file->time_created;
-        $this->data = $elgg_file->grabFile();
+        $this->data = base64_encode($elgg_file->grabFile());
     }
 
     /**
@@ -92,11 +93,17 @@ class UBFile extends UBItem{
             return false;
         }
         $date_obj = new DateTime();
+        if(empty($this->name)){
+            $this->name = static::DEFAULT_FILENAME;
+        }
         $elgg_file->setFilename((string)$date_obj->getTimestamp() . static::TIMESTAMP_DELIMITER . (string)$this->name);
         $elgg_file->description = (string)$this->description;
         $elgg_file->open("write");
-        $elgg_file->write($this->data);
-        $elgg_file->close();
+        if($decoded_data = base64_decode($this->data, true)){
+            $elgg_file->write($decoded_data);
+        } else{
+            $elgg_file->write($this->data);
+        }        $elgg_file->close();
         $elgg_file->access_id = ACCESS_PUBLIC;
         $elgg_file->save();
         $this->owner_id = (int)$elgg_file->owner_guid;

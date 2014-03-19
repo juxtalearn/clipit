@@ -487,7 +487,7 @@ function expose_la_functions(){
                 "type" => "int",
                 "required" => true)),
         "Send Learning Analytics Metrics to ClipIt",
-        "POST", false, false);
+        "POST", false, true);
 }
 
 function expose_message_functions(){
@@ -515,12 +515,24 @@ function expose_message_functions(){
         "Set the Destination Id of a Message",
         'POST', false, true);
     expose_function(
+        $api_suffix . "get_by_category",
+        $class_suffix . "get_by_category",
+        array(
+            "category_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Get instances by Category",
+        "GET", false, true);
+    expose_function(
         $api_suffix . "get_by_sender",
         $class_suffix . "get_by_sender",
         array(
             "sender_array" => array(
                 "type" => "array",
-                "required" => true)),
+                "required" => true),
+            "category" => array(
+                "type" => "string",
+                "required" => false)),
         "Get instances by Sender",
         'GET', false, true);
     expose_function(
@@ -529,7 +541,10 @@ function expose_message_functions(){
         array(
             "destination_array" => array(
                 "type" => "array",
-                "required" => true)),
+                "required" => true),
+            "category" => array(
+                "type" => "string",
+                "required" => false)),
         "Get instances by Destination",
         'GET', false, true);
     expose_function(
