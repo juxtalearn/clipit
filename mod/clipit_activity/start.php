@@ -37,6 +37,8 @@ function clipit_activity_init() {
     elgg_register_event_handler('pagesetup', 'system', 'group_details_setup_menus');
 
     // Register actions
+    // File
+    elgg_register_action("files/upload", elgg_get_plugins_path() . "clipit_activity/actions/files/upload.php");
     // Group
     elgg_register_action("group/join", elgg_get_plugins_path() . "clipit_activity/actions/group/join.php");
     elgg_register_action("group/leave", elgg_get_plugins_path() . "clipit_activity/actions/group/leave.php");
@@ -45,11 +47,7 @@ function clipit_activity_init() {
     elgg_register_action("group/discussion/create", elgg_get_plugins_path() . "clipit_activity/actions/group/discussion/create.php");
     elgg_register_action("group/discussion/remove", elgg_get_plugins_path() . "clipit_activity/actions/group/discussion/remove.php");
     elgg_register_action("group/discussion/edit", elgg_get_plugins_path() . "clipit_activity/actions/group/discussion/edit.php");
-    elgg_register_action("group/discussion/create_reply", elgg_get_plugins_path() . "clipit_activity/actions/group/discussion/create_reply.php");
-    elgg_register_action("group/discussion/remove_reply", elgg_get_plugins_path() . "clipit_activity/actions/group/discussion/remove_reply.php");
-    elgg_register_action("group/discussion/edit_reply", elgg_get_plugins_path() . "clipit_activity/actions/group/discussion/edit_reply.php");
-    elgg_register_ajax_view('group/modal/discussion/edit');
-    elgg_register_ajax_view('group/modal/discussion/edit_reply');
+    elgg_register_ajax_view('modal/discussion/edit');
 }
 function activity_setup_sidebar_menus(){
     $activity_id =  elgg_get_page_owner_guid();
@@ -191,11 +189,15 @@ function activity_page_handler($page) {
                         return false;
                     }
                     $params = group_tools_page_handler($page, $activity);
+
                     break;
                 default:
                     return false;
             }
         }
+    }
+    if(!$params){
+        return false;
     }
     // Group sidebar components (group block info + group tools)
     if($user_status == GROUP_ROLLED){
@@ -268,19 +270,39 @@ function group_tools_page_handler($page, $activity){
             $title = elgg_echo("group:files");
             elgg_push_breadcrumb($title);
             $params = array(
-                'content'   => elgg_view('group/files', array('entity' => $group)),
+                'content'   => elgg_view('group/files/list', array('entity' => $group)),
                 'filter'    => '',
                 'title'     => $title,
                 'sub-title' => $group->name,
                 'title_style' => "background: #". $activity->color,
                 'class'     => 'activity-section activity-layout'
             );
+            if($page[3] == 'view' && $page[4]){
+                $file_id = (int)$page[4];
+                $file = array_pop(ClipitFile::get_by_id(array($file_id)));
+                $group_files = ClipitGroup::get_files($group->id);
+                elgg_pop_breadcrumb($title);
+                elgg_push_breadcrumb($title, "clipit_activity/{$activity->id}/group/files");
+                elgg_push_breadcrumb($file->name);
+                if($file && in_array($file_id, $group_files)){
+                    $params = array(
+                        'content'   => elgg_view('group/files/view', array('entity' => $file)),
+                        'filter'    => '',
+                        'title'     => $title,
+                        'sub-title' => $group->name,
+                        'title_style' => "background: #". $activity->color,
+                        'class'     => 'activity-section activity-layout'
+                    );
+                } else {
+                    return false;
+                }
+            }
             break;
         case 'discussion':
             $title = elgg_echo("group:discussion");
             elgg_push_breadcrumb($title);
             $params = array(
-                'content'   => elgg_view('group/discussion', array('entity' => $group)),
+                'content'   => elgg_view('group/discussion/list', array('entity' => $group)),
                 'filter'    => '',
                 'title'     => $title,
                 'sub-title' => $group->name,
@@ -302,6 +324,8 @@ function group_tools_page_handler($page, $activity){
                         'title_style' => "background: #". $activity->color,
                         'class'     => 'activity-section activity-layout'
                     );
+                } else {
+                    return false;
                 }
             }
             break;
