@@ -18,7 +18,7 @@ if($message->owner_id == elgg_get_logged_in_user_guid()){
         'entity' => $message,
         'edit' => array(
             "data-target" => "#edit-discussion-{$message->id}",
-            "href" => elgg_get_site_url()."ajax/view/group/modal/discussion/edit?id={$message->id}",
+            "href" => elgg_get_site_url()."ajax/view/modal/discussion/edit?id={$message->id}",
             "data-toggle" => "modal"
         ),
         'remove' => array("href" => "action/group/discussion/remove?id={$message->id}"),
@@ -76,19 +76,19 @@ if($message->owner_id == elgg_get_logged_in_user_guid()){
 foreach(ClipitMessage::get_replies($message->id) as $reply_msg_id){
     $reply_msg = array_pop(ClipitMessage::get_by_id(array($reply_msg_id)));
     $second_level_ids = ClipitMessage::get_replies($reply_msg->id);
-    echo elgg_view("group/discussion/reply", array('entity' => $reply_msg, 'second_level_ids' => $second_level_ids));
+    echo elgg_view("messages/reply", array('entity' => $reply_msg, 'discussion' => true, 'category' => 'discussion', 'second_level_ids' => $second_level_ids));
 }
 ?>
 
 <!-- Reply form -->
 <a name="create_reply"></a>
-<h3 class="activity-module-title"><?php echo elgg_echo("discussion:reply:create"); ?></h3>
+<h3 class="activity-module-title"><?php echo elgg_echo("reply:create"); ?></h3>
 <div class="discussion discussion-reply-msg">
     <div class="user-reply">
         <img class="user-avatar" src="<?php echo $user_loggedin->getIconURL('small'); ?>"/>
     </div>
     <div class="block">
-        <?php echo elgg_view_form("group/discussion/create_reply", array('data-validate'=> "true" ), array('entity'  => $message)); ?>
+        <?php echo elgg_view_form("messages/reply/create", array('data-validate'=> "true" ), array('entity'  => $message, 'category' => 'discussion')); ?>
     </div>
 </div>
 <!-- Reply form end-->

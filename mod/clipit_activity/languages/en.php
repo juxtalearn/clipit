@@ -24,6 +24,9 @@ $english = array(
     'group:cantjoin' => 'Can not join group',
     'group:left' => 'Successfully left group',
     'group:cantleave' => 'Could not leave group',
+    'group:member:remove' => 'Remove from group',
+    'group:member:cantremove' => 'Cannot remove user from group',
+    'group:member:removed' => 'Successfully removed %s from group',
 
     // Group tools
     'group:menu' => 'Group menu',
@@ -38,10 +41,7 @@ $english = array(
     'discussion:edit' => 'Edit topic',
     'discussion:title_topic' => 'Topic title',
     'discussion:text_topic' => 'Topic text',
-    // Reply
-    'discussion:reply:create' => 'Create reply',
-    'discussion:reply' => 'Reply',
-    'discussion:reply:total' => '%s replies',
+
 );
 
 add_translation('en', $english);

@@ -32,7 +32,7 @@ foreach($group_messages as $message):
             'entity' => $message,
             'edit' => array(
                 "data-target" => "#edit-discussion-{$message->id}",
-                "href" => elgg_get_site_url()."ajax/view/group/modal/discussion/edit?id={$message->id}",
+                "href" => elgg_get_site_url()."ajax/view/modal/discussion/edit?id={$message->id}",
                 "data-toggle" => "modal"
              ),
             'remove' => array("href" => "action/group/discussion/remove?id={$message->id}"),
@@ -51,8 +51,8 @@ foreach($group_messages as $message):
                 'href' => "clipit_activity/{$activity_id}/group/discussion/view/{$message->id}",
                 'title' => $message->name,
                 'text' => $message->name,
-                'is_trusted' => true,
-            )); ?>
+                'is_trusted' => true, ));
+            ?>
         </h4>
         <p>
             <?php echo $message_text; ?>
@@ -87,7 +87,7 @@ foreach($group_messages as $message):
     <div class="col-md-3 text-center">
         <?php echo elgg_view('output/url', array(
             'href'  => "clipit_activity/{$activity_id}/group/discussion/view/{$message->id}#replies",
-            'title' => elgg_echo("discussion:reply:total", array($total_replies)),
+            'title' => elgg_echo("reply:total", array($total_replies)),
             'text'  => '<i class="fa fa-comment fa-stack-2x"></i>
                         <i class="fa-stack-1x replies-count">'.$total_replies.'</i>',
             'class' => "fa-stack replies"
@@ -96,8 +96,8 @@ foreach($group_messages as $message):
 
         <?php echo elgg_view('output/url', array(
             'href'  => "clipit_activity/{$activity_id}/group/discussion/view/{$message->id}#create_reply",
-            'title' => elgg_echo("discussion:reply:create"),
-            'text'  => '<i class="fa fa-plus"></i> '.elgg_echo("discussion:reply"),
+            'title' => elgg_echo("reply:create"),
+            'text'  => '<i class="fa fa-plus"></i> '.elgg_echo("reply"),
             'class' => "btn btn-default btn-sm reply-button"
         ));
         ?>

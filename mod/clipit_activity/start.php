@@ -43,6 +43,7 @@ function clipit_activity_init() {
     elgg_register_action("group/join", elgg_get_plugins_path() . "clipit_activity/actions/group/join.php");
     elgg_register_action("group/leave", elgg_get_plugins_path() . "clipit_activity/actions/group/leave.php");
     elgg_register_action("group/create", elgg_get_plugins_path() . "clipit_activity/actions/group/create.php");
+    elgg_register_action("group/remove_member", elgg_get_plugins_path() . "clipit_activity/actions/group/remove_member.php");
     // Discussion
     elgg_register_action("group/discussion/create", elgg_get_plugins_path() . "clipit_activity/actions/group/discussion/create.php");
     elgg_register_action("group/discussion/remove", elgg_get_plugins_path() . "clipit_activity/actions/group/discussion/remove.php");
@@ -155,8 +156,7 @@ function activity_page_handler($page) {
             elgg_push_breadcrumb($activity->name, "clipit_activity/".$activity->id);
             switch ($page[1]) {
                 case 'groups':
-    //                set_input('activity', $page[1]);
-    //                activity_handle_groups_page($page[0]);
+
                     $title = elgg_echo("activity:groups");
                     elgg_push_breadcrumb($title);
                     $params = array(
@@ -199,15 +199,20 @@ function activity_page_handler($page) {
     if(!$params){
         return false;
     }
+    $group_tools_sidebar = "";
     // Group sidebar components (group block info + group tools)
     if($user_status == GROUP_ROLLED){
         elgg_extend_view("page/elements/owner_block", "page/elements/group_block");
-        $params['sidebar'] = elgg_view('group/sidebar/group_tools', array('entity' => $activity));
+        $group_tools_sidebar = elgg_view('group/sidebar/group_tools', array('entity' => $activity));
     }
     if($user_status == GROUP_ROLLING) {
         // Join to activity button
         elgg_extend_view("page/elements/owner_block", "page/components/button_join_activity");
     }
+    //$params['sidebar'] = elgg_view('activity/sidebar/teacher', array('entity' => $activity));
+    $teacher_sidebar = elgg_view('activity/sidebar/teacher', array('entity' => $activity));
+
+    $params['sidebar'] = $teacher_sidebar . $group_tools_sidebar;
 
     $body = elgg_view_layout('one_sidebar', $params);
     echo elgg_view_page($params['title'], $body);
@@ -229,6 +234,8 @@ function group_tools_page_handler($page, $activity){
     $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
 
     elgg_push_breadcrumb($group->name);
+    $group_status = "";
+    $group_name = '<i class="fa fa-lock"></i> '.$group->name;
     switch ($page[2]) {
         case 'edit':
             $title = elgg_echo("group:edit");
@@ -237,7 +244,7 @@ function group_tools_page_handler($page, $activity){
                 'content'   => elgg_view('group/edit', array('entity' => $activity)),
                 'filter'    => '',
                 'title'     => $title,
-                'sub-title' => $group->name,
+                'sub-title' => $group_name,
                 'title_style' => "background: #". $activity->color,
                 'class'     => 'activity-section activity-layout'
             );
@@ -249,7 +256,7 @@ function group_tools_page_handler($page, $activity){
                 'content'   => elgg_view('group/members', array('entity' => $group)),
                 'filter'    => '',
                 'title'     => $title,
-                'sub-title' => $group->name,
+                'sub-title' => $group_name,
                 'title_style' => "background: #". $activity->color,
                 'class'     => 'activity-section activity-layout'
             );
@@ -261,7 +268,7 @@ function group_tools_page_handler($page, $activity){
                 'content'   => elgg_view('group/activity_log', array('entity' => $group)),
                 'filter'    => '',
                 'title'     => $title,
-                'sub-title' => $group->name,
+                'sub-title' => $group_name,
                 'title_style' => "background: #". $activity->color,
                 'class'     => 'activity-section activity-layout'
             );
@@ -273,7 +280,7 @@ function group_tools_page_handler($page, $activity){
                 'content'   => elgg_view('group/files/list', array('entity' => $group)),
                 'filter'    => '',
                 'title'     => $title,
-                'sub-title' => $group->name,
+                'sub-title' => $group_name,
                 'title_style' => "background: #". $activity->color,
                 'class'     => 'activity-section activity-layout'
             );
@@ -289,7 +296,7 @@ function group_tools_page_handler($page, $activity){
                         'content'   => elgg_view('group/files/view', array('entity' => $file)),
                         'filter'    => '',
                         'title'     => $title,
-                        'sub-title' => $group->name,
+                        'sub-title' => $group_name,
                         'title_style' => "background: #". $activity->color,
                         'class'     => 'activity-section activity-layout'
                     );
@@ -305,7 +312,7 @@ function group_tools_page_handler($page, $activity){
                 'content'   => elgg_view('group/discussion/list', array('entity' => $group)),
                 'filter'    => '',
                 'title'     => $title,
-                'sub-title' => $group->name,
+                'sub-title' => $group_name,
                 'title_style' => "background: #". $activity->color,
                 'class'     => 'activity-section activity-layout'
             );
@@ -320,7 +327,7 @@ function group_tools_page_handler($page, $activity){
                         'content'   => elgg_view('group/discussion/view', array('entity' => $message)),
                         'filter'    => '',
                         'title'     => $title,
-                        'sub-title' => $group->name,
+                        'sub-title' => $group_name,
                         'title_style' => "background: #". $activity->color,
                         'class'     => 'activity-section activity-layout'
                     );
