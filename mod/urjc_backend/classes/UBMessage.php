@@ -39,7 +39,6 @@ class UBMessage extends UBItem{
     protected function _load($elgg_object){
         parent::_load($elgg_object);
         $this->category = (string)$elgg_object->category;
-        $this->read = (bool)$elgg_object->read;
         $this->read_array = (array)$elgg_object->read_array;
         $this->archived_array = (array)$elgg_object->archived_array;
         $this->destination = static::get_destination($this->id);
@@ -61,7 +60,6 @@ class UBMessage extends UBItem{
         $elgg_object->name = (string)$this->name;
         $elgg_object->description = (string)$this->description;
         $elgg_object->category = (string)$this->category;
-        $elgg_object->read = (bool)$this->read;
         $elgg_object->read_array = (array)$this->read_array;
         $elgg_object->archived_array = (array)$this->archived_array;
         $elgg_object->access_id = ACCESS_PUBLIC;
