@@ -30,8 +30,8 @@ class UBMessage extends UBItem{
     const REL_MESSAGE_FILE = "message-file";
 
     public $category = "";
-    public $read = false;
-    public $read_by_user = array();
+    public $read_array = array();
+    public $archived_array = array();
     public $destination = -1;
     public $file_array = array();
 
@@ -40,7 +40,8 @@ class UBMessage extends UBItem{
         parent::_load($elgg_object);
         $this->category = (string)$elgg_object->category;
         $this->read = (bool)$elgg_object->read;
-        $this->read_by_user = (array)$elgg_object->read_by_user;
+        $this->read_array = (array)$elgg_object->read_array;
+        $this->archived_array = (array)$elgg_object->archived_array;
         $this->destination = static::get_destination($this->id);
         $this->file_array = static::get_files($this->id);
     }
@@ -61,7 +62,8 @@ class UBMessage extends UBItem{
         $elgg_object->description = (string)$this->description;
         $elgg_object->category = (string)$this->category;
         $elgg_object->read = (bool)$this->read;
-        $elgg_object->read_by_user = (array)$this->read_by_user;
+        $elgg_object->read_array = (array)$this->read_array;
+        $elgg_object->archived_array = (array)$this->archived_array;
         $elgg_object->access_id = ACCESS_PUBLIC;
         $elgg_object->save();
         $this->id = (int)$elgg_object->guid;
@@ -218,44 +220,77 @@ class UBMessage extends UBItem{
 
     static function get_read_status($id, $user_array = null){
         $called_class = get_called_class();
+        $prop_array[] = "read_array";
+        $read_array = array_pop($called_class::get_properties($id, $prop_array));
         if(!$user_array){
-            $prop_array[] = "read";
-            return $called_class::get_properties($id, $prop_array);
-        }
-        $prop_array[] = "read_by_user";
-        $read_by_user = $called_class::get_properties($id, $prop_array);
-        $read_by_user = array_pop($read_by_user);
-        $return_array = array();
-        foreach($user_array as $user_id){
-            if(in_array($user_id, $read_by_user)){
-                $return_array[$user_id] = true;
-            } else{
-                $return_array[$user_id] = false;
+            return $read_array;
+        } else{
+            $return_array = array();
+            foreach($user_array as $user_id){
+                if(in_array($user_id, $read_array)){
+                    $return_array[$user_id] = true;
+                } else{
+                    $return_array[$user_id] = false;
+                }
             }
+            return $return_array;
         }
-        return $return_array;
     }
 
-    static function set_read_status($id, $read, $user_array = null){
+    static function set_read_status($id, $read_value, $user_array){
         $called_class = get_called_class();
-        if(!$user_array){
-            $prop_value_array["read"] = (bool)$read;
-            return $called_class::set_properties($id, $prop_value_array);
-        }
-        $prop_array[] = "read_by_user";
-        $read_by_user = $called_class::get_properties($id, $prop_array);
+        $prop_array[] = "read_array";
+        $read_array = array_pop($called_class::get_properties($id, $prop_array));
         foreach($user_array as $user_id){
-            if($read == true){
-                if(!in_array($user_id, $read_by_user)){
-                    array_push($read_by_user, $user_id);
+            if($read_value == true){
+                if(!in_array($user_id, $read_array)){
+                    array_push($read_array, $user_id);
                 }
-            } else if($read == false){
-                if($index = array_search($user_id, $read_by_user)){
-                    array_splice($read_by_user, $index, 1);
+            } else if($read_value == false){
+                if($index = array_search($user_id, $read_array)){
+                    array_splice($read_array, $index, 1);
                 }
             }
         }
-        $prop_value_array["read_by_user"] = $read_by_user;
+        $prop_value_array["read_array"] = $read_array;
+        return $called_class::set_properties($id, $prop_value_array);
+    }
+
+    static function get_archived_status($id, $user_array = null){
+        $called_class = get_called_class();
+        $prop_array[] = "archived_array";
+        $archived_array = array_pop($called_class::get_properties($id, $prop_array));
+        if(!$user_array){
+            return $archived_array;
+        } else{
+            $return_array = array();
+            foreach($user_array as $user_id){
+                if(in_array($user_id, $archived_array)){
+                    $return_array[$user_id] = true;
+                } else{
+                    $return_array[$user_id] = false;
+                }
+            }
+            return $return_array;
+        }
+    }
+
+    static function set_archived_status($id, $archived_value, $user_array){
+        $called_class = get_called_class();
+        $prop_array[] = "archived_array";
+        $archived_array = array_pop($called_class::get_properties($id, $prop_array));
+        foreach($user_array as $user_id){
+            if($archived_value == true){
+                if(!in_array($user_id, $archived_array)){
+                    array_push($archived_array, $user_id);
+                }
+            } else if($archived_value == false){
+                if($index = array_search($user_id, $archived_array)){
+                    array_splice($archived_array, $index, 1);
+                }
+            }
+        }
+        $prop_value_array["archived_array"] = $archived_array;
         return $called_class::set_properties($id, $prop_value_array);
     }
 

@@ -28,7 +28,7 @@ class UBSite{
      * @throws SecurityException
      */
     static function get_token($login, $password, $timeout = 60){
-        if(elgg_authenticate($login, $password)){
+        if(elgg_authenticate($login, $password) === true){
             $token = create_user_token($login, $timeout);
             if($token){
                 return $token;

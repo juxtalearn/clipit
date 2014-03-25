@@ -566,7 +566,8 @@ function expose_message_functions(){
             "user_array" => array(
                 "type" => "array",
                 "required" => false)),
-        "Get read message status. If user_array is specified, get read status by user.",
+        "Get read message status. If user_array is specified, get read status by user. If not, it returns the list of
+        users who have read the message.",
         'GET', false, true);
     expose_function(
         $api_suffix . "set_read_status",
@@ -575,13 +576,41 @@ function expose_message_functions(){
             "id" => array(
                 "type" => "int",
                 "required" => true),
-            "read" => array(
+            "read_value" => array(
                 "type" => "bool",
                 "required" => true),
             "user_array" => array(
                 "type" => "array",
+                "required" => true)),
+        "Set read message status per user.",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "get_archived_status",
+        $class_suffix . "get_archived_status",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "user_array" => array(
+                "type" => "array",
                 "required" => false)),
-        "Get read message status. If user_array is specified, set read status by user.",
+        "Get archived message status. If user_array is specified, get archived status by user. If not, it returns the
+        list of users who have archived the message.",
+        'GET', false, true);
+    expose_function(
+        $api_suffix . "set_archived_status",
+        $class_suffix . "set_archived_status",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "archived_value" => array(
+                "type" => "bool",
+                "required" => true),
+            "user_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Set archived message status per user.",
         'POST', false, true);
 }
 

@@ -77,7 +77,7 @@ class UBFile extends UBItem{
         $this->description = (string)$elgg_file->description;
         $this->owner_id = (int)$elgg_file->owner_guid;
         $this->time_created = (int)$elgg_file->time_created;
-        $this->data = base64_encode($elgg_file->grabFile());
+        $this->data = $elgg_file->grabFile();
     }
 
     /**
