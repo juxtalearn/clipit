@@ -2,8 +2,8 @@
 /**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
- * Creation date:   13/03/14
- * Last update:     13/03/14
+ * Creation date:   26/03/14
+ * Last update:     26/03/14
  *
  * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, JuxtaLearn Project
  * @version         $Version$
@@ -21,10 +21,25 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-$user_id_to = (int)get_input("id");
 $user_id = elgg_get_logged_in_user_guid();
-
-$user_to = array_pop(ClipitUser::get_by_id(array($user_id_to)));
-if($user_to && $user_id_to != $user_id){
-    echo elgg_view_form('messages/compose', array('data-validate'=> "true"),  array("entity" => $user_to ));
+$title = elgg_echo("messages:inbox");
+elgg_push_breadcrumb($title);
+$messages = array_pop(ClipitMessage::get_by_destination(array($user_id)));
+if(!is_array($messages)){
+    $messages = array();
 }
+$messages_by_sender = array_pop(ClipitMessage::get_by_sender(array($user_id), $category = 'pm'));
+foreach($messages_by_sender as $message_sender){
+    if(count(ClipitMessage::get_replies($message_sender->id)) > 0){
+        $messages = array_merge(array($message_sender), $messages);
+    }
+}
+$sidebar = elgg_view('messages/sidebar/group_list');
+$params = array(
+    'content'   => elgg_view_form('messages/list', array(), array('entity' => $messages, 'inbox' => true)),
+    'filter'    => '',
+    'title'     => $title,
+    'sidebar'   => $sidebar
+);
+$body = elgg_view_layout('content', $params);
+echo elgg_view_page($params['title'], $body);

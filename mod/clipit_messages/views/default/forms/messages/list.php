@@ -21,4 +21,11 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-echo elgg_view('messages/list', array('entity' => $vars['entity'], 'sent' => $vars['sent']));
+echo elgg_view('messages/list',
+    array(
+        'entity' => $vars['entity'],
+        'sent' => $vars['sent'],
+        'trash' => $vars['trash'],
+        'inbox' => $vars['inbox'],
+    )
+);

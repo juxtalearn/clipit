@@ -21,7 +21,6 @@ if(count($message)==0 || trim($message_reply) == "" || !in_array($category, $cat
         'name' => '',
         'description' => $message_reply,
         'destination' => $message->id,
-        'category'  => $category
     ));
     system_message(elgg_echo('reply:created'));
 }

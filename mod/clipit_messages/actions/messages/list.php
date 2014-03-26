@@ -31,20 +31,21 @@
 $option = get_input("set-option");
 $messages_id = get_input("check-msg");
 $user_id = elgg_get_logged_in_user_guid();
+
 switch($option){
     case "read":
         foreach($messages_id as $message_id){
             // Main message
             $message = array_pop(ClipitMessage::get_by_id(array($message_id)));
             if($message->destination == $user_id){
-                ClipitMessage::set_read_status($message->id, true);
+                ClipitMessage::set_read_status($message->id, true, array($user_id));
             }
             // Replies message
             $replies = ClipitMessage::get_replies($message_id);
             foreach($replies as $reply_id){
                 $reply = array_pop(ClipitMessage::get_by_id(array($reply_id)));
                 if($reply->owner_id != $user_id){
-                    ClipitMessage::set_read_status($reply->id, true);
+                    ClipitMessage::set_read_status($reply->id, true, array($user_id));
                 }
             }
         }
@@ -54,19 +55,43 @@ switch($option){
             // Main message
             $message = array_pop(ClipitMessage::get_by_id(array($message_id)));
             if($message->destination == $user_id){
-                ClipitMessage::set_read_status($message->id, false);
+                ClipitMessage::set_read_status($message->id, false, array($user_id));
             }
             // Replies message
             $replies = ClipitMessage::get_replies($message_id);
             foreach($replies as $reply_id){
                 $reply = array_pop(ClipitMessage::get_by_id(array($reply_id)));
                 if($reply->owner_id != $user_id){
-                    ClipitMessage::set_read_status($reply->id, false);
+                    ClipitMessage::set_read_status($reply->id, false, array($user_id));
                 }
             }
         }
         break;
     case "remove":
+        foreach($messages_id as $message_id){
+            // Main message
+            $message = array_pop(ClipitMessage::get_by_id(array($message_id)));
+            ClipitMessage::set_archived_status($message->id, true, array($user_id));
+            // Replies message
+            $replies = ClipitMessage::get_replies($message_id);
+            foreach($replies as $reply_id){
+                $reply = array_pop(ClipitMessage::get_by_id(array($reply_id)));
+                ClipitMessage::set_archived_status($reply->id, true, array($user_id));
+            }
+        }
+        break;
+    case "to_inbox":
+        foreach($messages_id as $message_id){
+            // Main message
+            $message = array_pop(ClipitMessage::get_by_id(array($message_id)));
+            ClipitMessage::set_archived_status($message->id, false, array($user_id));
+            // Replies message
+            $replies = ClipitMessage::get_replies($message_id);
+            foreach($replies as $reply_id){
+                $reply = array_pop(ClipitMessage::get_by_id(array($reply_id)));
+                ClipitMessage::set_archived_status($reply->id, false, array($user_id));
+            }
+        }
         break;
     default:
         forward(REFERER);

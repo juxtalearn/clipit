@@ -52,20 +52,35 @@ $(function(){
     });
 });
 </script>
-<div style="margin-bottom: 30px;color: #999;margin-left: 10px;">
+<div style="margin-bottom: 30px;color: #999;margin-left: 15px;">
+
     <div class="checkbox" style=" display: inline-block;margin: 0;">
         <label>
-            <input type="checkbox" class="select-all"> Select all
+            <input type="checkbox" class="select-all"> <?php echo elgg_echo("selectall"); ?>
         </label>
     </div>
+    <?php if(!$vars['sent']): ?>
     <div style=" display: inline-block; margin-left: 10px; ">
-        <select name="set-option" disabled class="form-control message-options" style="height: 20px;padding: 0;">
-            <option>[Options]</option>
-            <option value="read">Mark as read</option>
-            <option value="unread">Mark as unread</option>
-            <option value="remove">Delete</option>
-        </select>
+        <?php
+        $options_dropdown = array(
+            'disabled' => 'disabled',
+            'class' => 'form-control message-options',
+            'name'  => 'set-option',
+            'style' => 'height: 20px;padding: 0;',
+            'options_values' => array(
+                ''          => '['.elgg_echo('message:options').']',
+                'read'      => elgg_echo('message:markasread'),
+                'unread'    => elgg_echo('message:markasunread'),
+                'remove'    => elgg_echo('message:movetotrash'),
+            ));
+        if($vars['trash']){
+            unset($options_dropdown['options_values']['remove']);
+            $options_dropdown['options_values']['to_inbox'] = elgg_echo('message:movetoinbox');
+        }
+        echo elgg_view("input/dropdown", $options_dropdown); ?>
     </div>
+    <?php endif; ?>
+
     <div class="pull-right search-box">
         <input type="text" placeholder="<?php echo elgg_echo('search');?>">
         <div class="input-group-btn">
@@ -74,20 +89,18 @@ $(function(){
                 <i class="fa fa-search"></i>
             </button>
         </div>
-    <!--
-    <span> Order </span>
-        <div style=" display: inline-block; margin-left: 10px; ">
-            <select class="form-control" style="height: 20px;padding: 0;">
-                <option>Date</option>
-                <option>unread</option>
-                <option>***</option>
-            </select>
-        </div>-->
     </div>
 </div>
 <table class="messages-table table table-advance table-hover">
     <?php
     foreach($messages_array as $message):
+
+        $isRemoved = array_pop(ClipitMessage::get_archived_status($message->id, array($user_id)));
+        if($vars['trash']){
+            $isRemoved = false;
+        }
+        if(!$isRemoved):
+
         // Get replies
         $replies = ClipitMessage::get_replies($message->id);
         $message_text = trim(elgg_strip_tags($message->description));
@@ -97,16 +110,17 @@ $(function(){
         }
         // No read messages
         $message_unread = false;
-        $main_read_status = ClipitMessage::get_read_status($message->id);
-        if(empty($main_read_status["read"]) && $message->destination == $user_id){
+        $main_read_status = array_pop(ClipitMessage::get_read_status($message->id, array($user_id)));
+        if(empty($main_read_status) && $message->destination == $user_id){
             $message_unread = "unread";
         }
+
         $new_replies = false;
         $total_count = 0;
         foreach($replies as $reply_id){
-            $reply_reads = ClipitMessage::get_read_status($reply_id);
+            $reply_reads = array_pop(ClipitMessage::get_read_status($reply_id, array($user_id)));
             $reply = array_pop(ClipitMessage::get_by_id(array($reply_id)));
-            if(empty($reply_reads["read"]) && $reply->owner_id != $user_id){
+            if(empty($reply_reads) && $reply->owner_id != $user_id){
                 $total_count++;
                 $message_unread = "unread";
             }
@@ -121,6 +135,7 @@ $(function(){
         $text_from = elgg_echo("message:from");
         if($vars['sent']){
             // $user_from = array_pop(ClipitUser::get_by_id(array($message->destination)));
+            //print_r(ClipitMessage::get_by_id(array($message->destination)));
             $user_from = array_pop(ClipitUser::get_by_id(array($message->owner_id)));
             $text_from = elgg_echo("message:to");
         }
@@ -143,6 +158,7 @@ $(function(){
             ?>
             <?php
             if($total_replies > 0):
+                // Get last post data
                 $last_post_id = end($replies);
                 $last_post = array_pop(ClipitMessage::get_by_id(array($last_post_id)));
                 $author_last_post = array_pop(ClipitUser::get_by_id(array($last_post->owner_id)));
@@ -178,6 +194,7 @@ $(function(){
             <i class="fa fa-paperclip icon" title="<?php echo elgg_echo("file:contains"); ?>"></i>
         </td>
         <td>
+        <?php if($vars['inbox']): ?>
             <button class="btn btn-default btn-xs reply-button">
             <?php echo elgg_view('output/url', array(
                 'href'  => $message_url."#create_reply",
@@ -186,38 +203,30 @@ $(function(){
             ));
             ?>
             </button>
-            <button class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash "></i></button>
+            <?php
+            $remove_msg_url = "action/messages/list?set-option=remove&check-msg[]={$message->id}";
+            echo elgg_view('output/url', array(
+                'href'  => elgg_add_action_tokens_to_url($remove_msg_url, true),
+                'title' => elgg_echo("message:movetotrash"),
+                'text'  => '<i class="fa fa-trash-o" style="color: #fff;font-size: 18px;"></i> ',
+                'class' => 'btn btn-danger btn-xs',
+            ));
+            ?>
+        <?php endif; ?>
+
+        <?php if($vars['trash']): ?>
+            <?php
+            $move_msg_url = "action/messages/list?set-option=to_inbox&check-msg[]={$message->id}";
+            echo elgg_view('output/url', array(
+                'href'  => elgg_add_action_tokens_to_url($move_msg_url, true),
+                'title' => elgg_echo("message:movetoinbox"),
+                'style' => 'color:#fff;',
+                'text'  => '<i class="fa fa-check" style="color: #fff;"></i> '.elgg_echo("message:movetoinbox"),
+                'class' => 'btn btn-success btn-xs',
+            ));
+            ?>
+        <?php endif; ?>
         </td>
-        <!--<td><i class="fa fa-users"></i></td>-->
     </tr>
-    <?php endforeach; ?>
-    <!-- STATIC
-    <tr>
-        <td class="select"><input type="checkbox"></td>
-        <td><a>Juan</a></td>
-        <td class="replies-td">
-            <a class="fa-stack replies">
-                <i class="fa fa-comment-o fa-stack-2x"></i>
-                <i class="fa-stack-1x replies-count">26</i>
-            </a>
-        </td>
-        <td>Lorem ipsum sit amet constance</td>
-        <td><i class="fa fa-paperclip"></i></td>
-        <td>Jan 10, 2014</td>
-        <td><i class="fa fa-users"></i></td>
-    </tr>
-    <tr>
-        <td class="select"><input type="checkbox"></td>
-        <td><a>Pepe</a></td>
-        <td class="replies-td">
-            <a class="fa-stack replies">
-                <i class="fa fa-comment fa-stack-2x"></i>
-                <i class="fa-stack-1x replies-count" style="color: #32b4e5">+26</i>
-            </a>
-        </td>
-        <td>Lorem ipsum sit amet constance</td>
-        <td><i class="fa fa-paperclip"></i></td>
-        <td>Jan 10, 2014</td>
-        <td><i class="fa fa-users"></i></td>
-    </tr>-->
+    <?php endif; endforeach; ?>
 </table>

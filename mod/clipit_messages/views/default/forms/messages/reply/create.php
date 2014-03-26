@@ -22,10 +22,15 @@
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
 $message = elgg_extract('entity', $vars);
+$category = elgg_extract('category', $vars);
 
 echo elgg_view("input/hidden", array(
     'name' => 'message-id',
     'value' => $message->id,
+));
+echo elgg_view("input/hidden", array(
+    'name' => 'message-category',
+    'value' => $category,
 ));
 echo elgg_view("input/plaintext", array(
     'name' => 'message-reply',

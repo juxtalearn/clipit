@@ -56,7 +56,7 @@ function messages_handle_inbox_page($search = null){
     }
 
     $params = array(
-        'content'   => elgg_view_form('messages/list', array(), array('entity' => $messages)),
+        'content'   => elgg_view_form('messages/list', array(), array('entity' => $messages, 'inbox' => true)),
         'filter'    => '',
         'title'     => $title,
     );
@@ -71,6 +71,33 @@ function messages_handle_sent_page($search = null){
     $messages = array_pop(ClipitMessage::get_by_sender(array($user_id), $category = 'pm'));
     $params = array(
         'content'   => elgg_view_form('messages/list', array(), array('entity' => $messages, 'sent' => true)),
+        'filter'    => '',
+        'title'     => $title,
+        'sidebar'   => elgg_view("")
+    );
+    $body = elgg_view_layout('content', $params);
+    echo elgg_view_page($params['title'], $body);
+}
+
+function messages_handle_trash_page($search = null){
+    $user_id = elgg_get_logged_in_user_guid();
+    $title = elgg_echo("messages:trash");
+    elgg_push_breadcrumb($title);
+
+    $messages = array_pop(ClipitMessage::get_by_destination(array($user_id)));
+    if(!is_array($messages)){
+        $messages = array();
+    }
+    $messages_removed = array();
+    foreach($messages as $message){
+        $isRemoved = array_pop(ClipitMessage::get_archived_status($message->id, array($user_id)));
+        if($isRemoved){
+            $messages_removed = array_merge(array($message), $messages_removed);
+        }
+    }
+
+    $params = array(
+        'content'   => elgg_view_form('messages/list', array(), array('entity' => $messages_removed, 'trash' => true)),
         'filter'    => '',
         'title'     => $title,
     );

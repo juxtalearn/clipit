@@ -30,10 +30,10 @@ function clipit_messages_init() {
     // Register page handlers
     elgg_register_page_handler('messages', 'messages_page_handler');
     elgg_register_event_handler('pagesetup', 'system', 'messages_setup_sidebar_menus');
-    // Register actions
+    // message actions
     elgg_register_action("messages/compose", elgg_get_plugins_path() . "clipit_messages/actions/messages/create.php");
     elgg_register_action("messages/list", elgg_get_plugins_path() . "clipit_messages/actions/messages/list.php");
-    // reply actions
+    // reply msg actions
     elgg_register_action("messages/reply/create", elgg_get_plugins_path() . "clipit_messages/actions/messages/reply/create.php");
     elgg_register_action("messages/reply/remove", elgg_get_plugins_path() . "clipit_messages/actions/messages/reply/remove.php");
     elgg_register_action("messages/reply/edit", elgg_get_plugins_path() . "clipit_messages/actions/messages/reply/edit.php");
@@ -59,7 +59,7 @@ function clipit_messages_init() {
  * @return bool
  */
 function messages_page_handler($page) {
-    $current_user = elgg_get_logged_in_user_entity();
+    $current_user = elgg_get_logged_in_user_guid();
     elgg_set_context("messages_page");
     if (!$current_user) {
         register_error(elgg_echo('noaccess'));
@@ -76,19 +76,23 @@ function messages_page_handler($page) {
         elgg_push_breadcrumb(elgg_echo("messages"), "/messages/inbox");
         $title = elgg_echo("messages");
         elgg_extend_view("page/elements/owner_block", "page/components/button_compose_message");
-
+        $file_dir = elgg_get_plugins_path() . 'clipit_messages/pages/messages';
         switch ($page[0]) {
             case 'search':
                 messages_search_page($page);
                 break;
             case 'inbox':
-                messages_handle_inbox_page();
+                include "$file_dir/inbox.php";
+                //messages_handle_inbox_page();
                 break;
             case 'sent_email':
                 messages_handle_sent_page();
                 break;
+            case 'trash':
+                messages_handle_trash_page();
+                break;
             case 'view':
-                messages_handle_view_page($page);
+                 messages_handle_view_page($page);
                 break;
             default:
                 return false;
@@ -100,13 +104,17 @@ function messages_page_handler($page) {
 
 
 function messages_setup_sidebar_menus(){
+    $user_id = elgg_get_logged_in_user_guid();
     if (elgg_in_context('messages_page')) {
         $params = array(
             'name' => 'a_inbox',
             'text' => elgg_echo('messages:inbox'),
             'href' => "messages/inbox",
-            'badge' => 10
         );
+        $unread_count = ClipitMessage::get_unread_count($user_id);
+        if($unread_count > 0){
+            $params['badge'] = $unread_count;
+        }
         elgg_register_menu_item('page', $params);
         $params = array(
             'name' => 'sent_email',
@@ -115,9 +123,9 @@ function messages_setup_sidebar_menus(){
         );
         elgg_register_menu_item('page', $params);
         $params = array(
-            'name' => 'draft',
-            'text' => elgg_echo('messages:drafts'),
-            'href' => "messages/drafts",
+            'name' => 'trash',
+            'text' => elgg_echo('messages:trash'),
+            'href' => "messages/trash",
         );
         elgg_register_menu_item('page', $params);
     }

@@ -28,28 +28,34 @@ if(!$limit){
 }
 
 $messages = array_pop(ClipitMessage::get_by_destination(array($user_id)));
-if(!is_array($messages)){
-    $messages = array();
-}
-$messages_by_sender = array_pop(ClipitMessage::get_by_sender(array($user_id)));
-foreach($messages_by_sender as $message_sender){
-    if(count(ClipitMessage::get_replies($message_sender->id)) > 0){
-        $messages = array_merge(array($message_sender), $messages);
-    }
-}
+//if(!is_array($messages)){
+//    $messages = array();
+//}
+//$messages_by_sender = array_pop(ClipitMessage::get_by_sender(array($user_id)));
+//foreach($messages_by_sender as $message_sender){
+//    if(count(ClipitMessage::get_replies($message_sender->id)) > 0){
+//        $messages = array_merge(array($message_sender), $messages);
+//    }
+//}
 $messages = array_slice($messages, 0, $limit);
 foreach($messages as $message):
     $user = new ElggUser($message->owner_id);
+
+    $message_text = trim(elgg_strip_tags($message->description));
+    // Message text truncate max length 50
+    $message_text = substr($message_text, 0, 50);
 ?>
-<li role="presentation message-item">
-    <a style="padding: 5px 10px;width: 300px;" role="menuitem" tabindex="-1" href="">
-        <img style="float:left;margin-right: 10px;" src="http://juxtalearn.org/sandbox/clipit_befe/_graphics/icons/user/defaultsmall.gif">
+<li role="presentation" class="message-item">
+    <a role="menuitem" tabindex="-1" href="">
+        <img class="user-avatar" src="<?php echo $user->getIconURL("small"); ?>">
         <div style=" font-size: 13px; text-transform: none; overflow: hidden; letter-spacing: 0;">
-            <span class="label label-primary pull-right">Unread</span>
+            <?php if(array_pop(ClipitMessage::get_read_status($message->id)) == false): ?>
+            <span class="label label-primary pull-right"><?php echo elgg_echo("message:unread");?></span>
+            <?php endif; ?>
             <span><?php echo $user->name;?></span>
-            <small style="display: block;">12:00H, NOV 18, 2013</small>
+            <small class="show"><?php echo elgg_view('output/friendlytime', array('time' => $message->time_created));?></small>
             <div style="color: #333;" class="text-truncate">
-                Duis et ante turpis. Praesent risusligula, porta vitae hendrerit quis
+                <?php echo $message_text; ?>
             </div>
         </div>
     </a>

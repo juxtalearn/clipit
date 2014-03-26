@@ -21,9 +21,13 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
+$user_id = elgg_get_logged_in_user_guid();
+$unread_count = ClipitMessage::get_unread_count($user_id);
 ?>
 <a id="messages" role="button" data-toggle="dropdown" href="javascript:;">
-    <span class="badge">5</span>
+    <?php if($unread_count > 0): ?>
+    <span class="badge"><?php echo $unread_count; ?></span>
+    <?php endif; ?>
     <i class="fa fa-envelope"></i>
 </a>
 <ul id="menu_messages" class="dropdown-menu" role="menu" aria-labelledby="messages">

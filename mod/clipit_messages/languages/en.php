@@ -30,10 +30,21 @@ $english = array(
     'messages:inbox' => 'Inbox',
     'messages:drafts' => 'Drafts',
     'messages:sent_email' => 'Sent mail',
+    'messages:trash' => 'Trash',
     // Message
     'message:from'  => "From",
     'message:to'  => "To",
     'message:last_reply'  => "Last reply",
+    'message:unread'  => "Unread",
+    'message:notfound' => "Message not found",
+    'message:options'  => "Options",
+    'message:movetotrash' => "Move to trash",
+    'message:movetoinbox' => "Move to inbox",
+    'message:markasread' => "Mark as read",
+    'message:markasunread' => "Mark as unread",
+
+    // Search
+    'messages:search' => 'Search: %s',
     // Filter
     'messages:all' => 'All',
     'messages:private_msg' => 'Private messages',
@@ -42,7 +53,7 @@ $english = array(
     'reply:edit' => "Edit reply",
     'reply:create' => 'Create reply',
     'reply' => 'Reply',
-    'reply:total' => '%s replies in total',
+    'reply:total' => '%s total replies',
     'reply:unreads' => '%s unread replies',
 );
 

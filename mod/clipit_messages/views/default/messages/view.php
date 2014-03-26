@@ -28,14 +28,17 @@ $user_loggedin = new ElggUser($user_loggedin_id);
 $replies = ClipitMessage::get_replies($message->id);
 
 // Set read status when user visit this view
-if($message->destination == $user_loggedin_id){
-    ClipitMessage::set_read_status($message->id, true);
+$message_read_status = array_pop(ClipitMessage::get_read_status($message->id, array($user_loggedin_id)));
+if(!$message_read_status && $message->destination == $user_loggedin_id){
+    ClipitMessage::set_read_status($message->id, true, array($user_loggedin_id));
 }
 foreach($replies as $reply_id){
     $reply = array_pop(ClipitMessage::get_by_id(array($reply_id)));
-    if($reply->owner_id != $user_loggedin_id){
-        ClipitMessage::set_read_status($reply->id, true);
+    $reply_read_status = array_pop(ClipitMessage::get_read_status($reply->id, array($user_loggedin_id)));
+    if(!$reply_read_status && $reply->owner_id != $user_loggedin_id){
+        ClipitMessage::set_read_status($reply->id, true, array($user_loggedin_id));
     }
+
 }
 ?>
 <div class="message">
@@ -95,7 +98,7 @@ foreach($replies as $reply_msg_id){
         <img class="user-avatar" src="<?php echo $user_loggedin->getIconURL('small'); ?>"/>
     </div>
     <div class="block">
-        <?php echo elgg_view_form("messages/reply/create", array('data-validate'=> "true" ), array('entity'  => $message)); ?>
+        <?php echo elgg_view_form("messages/reply/create", array('data-validate'=> "true" ), array('entity'  => $message, 'category' => 'pm')); ?>
     </div>
 </div>
 <!-- Reply form end-->

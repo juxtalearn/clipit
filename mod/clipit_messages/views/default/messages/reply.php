@@ -97,7 +97,7 @@ if($vars['second_reply']){
             ?>
             <a href="javascript:;" id="<?php echo $reply_msg->id; ?>" class="close-reply-to" >&times;</a>
         </small>
-        <?php echo elgg_view_form("messages/reply/create", array('data-validate'=> "true" ), array('entity'  => $reply_msg, 'second_reply' => $second_reply)); ?>
+        <?php echo elgg_view_form("messages/reply/create", array('data-validate'=> "true" ), array('entity'  => $reply_msg, 'category' => $vars["category"], 'second_reply' => $second_reply)); ?>
     </div>
     <!-- Reply form end-->
 
