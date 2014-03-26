@@ -38,9 +38,15 @@ $messages = array_pop(ClipitMessage::get_by_destination(array($user_id)));
 //    }
 //}
 $messages = array_slice($messages, 0, $limit);
+?>
+<?php if(empty($messages)): ?>
+    <li role="presentation" class="message-item" style="margin-bottom: 10px;">
+        <a style="font-size: 13px;text-transform: none;letter-spacing: 0;"><?php echo elgg_echo('messages:inbox:none'); ?></a>
+    </li>
+<?php endif; ?>
+<?php
 foreach($messages as $message):
     $user = new ElggUser($message->owner_id);
-
     $message_text = trim(elgg_strip_tags($message->description));
     // Message text truncate max length 50
     $message_text = substr($message_text, 0, 50);

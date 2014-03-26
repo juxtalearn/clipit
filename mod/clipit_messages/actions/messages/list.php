@@ -31,7 +31,9 @@
 $option = get_input("set-option");
 $messages_id = get_input("check-msg");
 $user_id = elgg_get_logged_in_user_guid();
-
+if(empty($messages_id)){
+    register_error(elgg_echo("messages:error:messages_not_selected"));
+}
 switch($option){
     case "read":
         foreach($messages_id as $message_id){
@@ -48,6 +50,7 @@ switch($option){
                     ClipitMessage::set_read_status($reply->id, true, array($user_id));
                 }
             }
+            system_message(elgg_echo('messages:read:marked'));
         }
         break;
     case "unread":
@@ -65,6 +68,7 @@ switch($option){
                     ClipitMessage::set_read_status($reply->id, false, array($user_id));
                 }
             }
+            system_message(elgg_echo('messages:unread:marked'));
         }
         break;
     case "remove":
@@ -78,6 +82,7 @@ switch($option){
                 $reply = array_pop(ClipitMessage::get_by_id(array($reply_id)));
                 ClipitMessage::set_archived_status($reply->id, true, array($user_id));
             }
+            system_message(elgg_echo('messages:removed'));
         }
         break;
     case "to_inbox":
@@ -91,9 +96,11 @@ switch($option){
                 $reply = array_pop(ClipitMessage::get_by_id(array($reply_id)));
                 ClipitMessage::set_archived_status($reply->id, false, array($user_id));
             }
+            system_message(elgg_echo('messages:inbox:moved'));
         }
         break;
     default:
+        register_error(elgg_echo("messages:error"));
         forward(REFERER);
         break;
 }

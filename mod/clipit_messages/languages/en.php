@@ -38,10 +38,25 @@ $english = array(
     'message:unread'  => "Unread",
     'message:notfound' => "Message not found",
     'message:options'  => "Options",
+    'message:created' => "Your message was successfully sent.",
+    'message:cantcreate' => "Could not send the message",
+    'reply:created' => "Your reply was successfully sent.",
     'message:movetotrash' => "Move to trash",
     'message:movetoinbox' => "Move to inbox",
     'message:markasread' => "Mark as read",
     'message:markasunread' => "Mark as unread",
+    'messages:read:marked' => "Messages marked as read",
+    'messages:unread:marked' => "Messages marked as unread",
+    'messages:removed' => "Messages removed",
+    'messages:inbox:moved' => "Messages moved to inbox",
+    'messages:error' => 'There was a problem with your message. Please try again.',
+    'messages:error:messages_not_selected' => 'No messages selected',
+
+    // Error pages: empty folders
+    'messages:inbox:none' => "There are no messages in your inbox.",
+    'messages:sent:none' => "There are no messages sent.",
+    'messages:trash:none' => "There are no messages in your trash.",
+
 
     // Search
     'messages:search' => 'Search: %s',

@@ -133,19 +133,26 @@ $(function(){
         $user_from = array_pop(ClipitUser::get_by_id(array($message->owner_id)));
         $user_from_elgg = new ElggUser($message->owner_id);
         $text_from = elgg_echo("message:from");
+        $text_user_from = $user_from->name;
+        if($user_from->id == $user_id){
+            $text_user_from = elgg_echo("me");
+        }
         if($vars['sent']){
             // $user_from = array_pop(ClipitUser::get_by_id(array($message->destination)));
             //print_r(ClipitMessage::get_by_id(array($message->destination)));
             $user_from = array_pop(ClipitUser::get_by_id(array($message->owner_id)));
             $text_from = elgg_echo("message:to");
+            $text_user_from = $user_from->name;
         }
         $total_replies = count($replies);
         $message_url = elgg_get_site_url()."messages/view/$message->id";
     ?>
     <tr class="<?php echo $message_unread; ?>">
+        <?php if(!$vars['sent']): ?>
         <td class="select">
             <input type="checkbox" name="check-msg[]" value="<?php echo $message->id; ?>" class="select-simple">
         </td>
+        <?php endif; ?>
         <td class="user-avatar">
             <img src="<?php echo $user_from_elgg->getIconURL("tiny"); ?>">
         </td>
@@ -154,7 +161,7 @@ $(function(){
             <?php echo elgg_view('output/url', array(
                 'href'  => "profile/".$user_from->login,
                 'title' => $user_from->name,
-                'text'  => $user_from->name));
+                'text'  => $text_user_from));
             ?>
             <?php
             if($total_replies > 0):

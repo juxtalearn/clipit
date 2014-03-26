@@ -2,8 +2,8 @@
 /**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
- * Creation date:   18/03/14
- * Last update:     18/03/14
+ * Creation date:   26/03/14
+ * Last update:     26/03/14
  *
  * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, JuxtaLearn Project
  * @version         $Version$
@@ -21,21 +21,28 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-function messages_search_page($page){
-    $title = elgg_echo("messages:search");
-    $search = get_input("s");
-    $search_type = $page[1];
-    switch($search_type){
-        case "inbox":
-            $query = array();
-            messages_handle_inbox_page($query);
-            break;
-        case "sent_email":
-            $query = array();
-            messages_handle_sent_page($query);
-            break;
-        default:
-            return false;
+$title = elgg_echo("message");
+$message = array_pop(ClipitMessage::get_by_id(array((int)$page[1])));
+$breadcrumb_title = $message->name;
+// if subject is empty, set description in breadcrumb
+if(trim($breadcrumb_title) == ""){
+    $breadcrumb_title = $message->description;
+    if(mb_strlen($breadcrumb_title)>40){
+        $breadcrumb_title = substr($breadcrumb_title, 0, 40)."...";
     }
-    elgg_push_breadcrumb(elgg_echo('messages:search', array($search)));
 }
+elgg_push_breadcrumb($breadcrumb_title);
+
+if(!isset($page[1]) || empty($message)
+    || ($message->destination != $user_id && $message->owner_id != $user_id )){
+    register_error(elgg_echo('message:notfound'));
+    forward();
+}
+$params = array(
+    'content'   => elgg_view("messages/view", array('entity' => $message)),
+    'filter'    => '',
+    'title'     => $title,
+    'sidebar'   => elgg_view('messages/sidebar/group_list')
+);
+$body = elgg_view_layout('content', $params);
+echo elgg_view_page($params['title'], $body);

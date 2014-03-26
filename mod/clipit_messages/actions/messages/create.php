@@ -30,14 +30,14 @@ foreach($to_array as $to_id){
     $message_subject = get_input('message-subject');
     $message_text = get_input('message-text');
     if(!$user  || trim($message_text) == ""){
-        register_error(elgg_echo("messages:cantcreate"));
+        register_error(elgg_echo("message:cantcreate"));
     } else {
         ClipitMessage::create(array(
             'name' => $message_subject,
             'description' => $message_text,
             'destination' => $user->id,
         ));
-        system_message(elgg_echo('messages:created'));
+        system_message(elgg_echo('message:created'));
     }
 }
 

@@ -34,12 +34,16 @@ foreach($messages_by_sender as $message_sender){
         $messages = array_merge(array($message_sender), $messages);
     }
 }
-$sidebar = elgg_view('messages/sidebar/group_list');
+$content = elgg_view_form('messages/list', array(), array('entity' => $messages, 'inbox' => true));
+if (!$messages) {
+    $content = elgg_echo("messages:inbox:none");
+}
 $params = array(
-    'content'   => elgg_view_form('messages/list', array(), array('entity' => $messages, 'inbox' => true)),
+    'content'   => $content,
     'filter'    => '',
     'title'     => $title,
-    'sidebar'   => $sidebar
+    'sidebar'   => elgg_view('messages/sidebar/group_list')
 );
+
 $body = elgg_view_layout('content', $params);
 echo elgg_view_page($params['title'], $body);

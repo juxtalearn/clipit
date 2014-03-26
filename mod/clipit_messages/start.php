@@ -74,25 +74,23 @@ function messages_page_handler($page) {
         elgg_load_library("clipit:messages");
         $user_id = elgg_get_logged_in_user_guid();
         elgg_push_breadcrumb(elgg_echo("messages"), "/messages/inbox");
-        $title = elgg_echo("messages");
         elgg_extend_view("page/elements/owner_block", "page/components/button_compose_message");
         $file_dir = elgg_get_plugins_path() . 'clipit_messages/pages/messages';
         switch ($page[0]) {
             case 'search':
-                messages_search_page($page);
+                include "$file_dir/search.php";
                 break;
             case 'inbox':
                 include "$file_dir/inbox.php";
-                //messages_handle_inbox_page();
                 break;
             case 'sent_email':
-                messages_handle_sent_page();
+                include "$file_dir/sent.php";
                 break;
             case 'trash':
-                messages_handle_trash_page();
+                include "$file_dir/trash.php";
                 break;
             case 'view':
-                 messages_handle_view_page($page);
+                include "$file_dir/view.php";
                 break;
             default:
                 return false;

@@ -2,8 +2,8 @@
 /**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
- * Creation date:   18/03/14
- * Last update:     18/03/14
+ * Creation date:   26/03/14
+ * Last update:     26/03/14
  *
  * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, JuxtaLearn Project
  * @version         $Version$
@@ -20,22 +20,4 @@
  *                  You should have received a copy of the GNU Affero General Public License
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
- */
-function messages_search_page($page){
-    $title = elgg_echo("messages:search");
-    $search = get_input("s");
-    $search_type = $page[1];
-    switch($search_type){
-        case "inbox":
-            $query = array();
-            messages_handle_inbox_page($query);
-            break;
-        case "sent_email":
-            $query = array();
-            messages_handle_sent_page($query);
-            break;
-        default:
-            return false;
-    }
-    elgg_push_breadcrumb(elgg_echo('messages:search', array($search)));
-}
+ */ 

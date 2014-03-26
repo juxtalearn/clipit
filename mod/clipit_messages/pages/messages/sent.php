@@ -2,8 +2,8 @@
 /**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
- * Creation date:   18/03/14
- * Last update:     18/03/14
+ * Creation date:   26/03/14
+ * Last update:     26/03/14
  *
  * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, JuxtaLearn Project
  * @version         $Version$
@@ -21,21 +21,18 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-function messages_search_page($page){
-    $title = elgg_echo("messages:search");
-    $search = get_input("s");
-    $search_type = $page[1];
-    switch($search_type){
-        case "inbox":
-            $query = array();
-            messages_handle_inbox_page($query);
-            break;
-        case "sent_email":
-            $query = array();
-            messages_handle_sent_page($query);
-            break;
-        default:
-            return false;
-    }
-    elgg_push_breadcrumb(elgg_echo('messages:search', array($search)));
+$title = elgg_echo("messages:sent_email");
+elgg_push_breadcrumb($title);
+$messages = array_pop(ClipitMessage::get_by_sender(array($user_id), $category = 'pm'));
+$content = elgg_view_form('messages/list', array(), array('entity' => $messages, 'sent' => true));
+if (!$messages) {
+    $content = elgg_echo("messages:sent:none");
 }
+$params = array(
+    'content'   => $content,
+    'filter'    => '',
+    'title'     => $title,
+    'sidebar'   => elgg_view('messages/sidebar/group_list')
+);
+$body = elgg_view_layout('content', $params);
+echo elgg_view_page($params['title'], $body);
