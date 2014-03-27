@@ -25,6 +25,7 @@
     color: @blue-lighter;
     margin: 0px 5px;
     font-family: @font-family-base;
+    vertical-align: text-bottom;
   }
 }
 
@@ -194,4 +195,31 @@ ul.top-account{
   margin: 0 auto -60px;
   /* Pad bottom by footer height */
   padding: 0 0 60px;
+}
+
+//
+// elgg system messages
+// --------------------------------------------------
+.elgg-message{
+  background: #fff;
+  padding: 20px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &.elgg-state-success{
+    border: 1px solid @green_clipit;
+    p{
+      color: @green_clipit;
+    }
+  }
+  &.elgg-state-error{
+    border: 1px solid @red_clipit;
+    p{
+      color: @red_clipit;
+    }
+  }
+  p{
+    margin: 0;
+    font-weight: bold;
+  }
 }

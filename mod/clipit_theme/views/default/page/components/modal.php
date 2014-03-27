@@ -18,7 +18,7 @@ if($footer || $cancel_button || $ok_button){
     $footer = '<div class="modal-footer">'.$vars["footer"].$cancel_button.$ok_button.'</div>';
 }
 ?>
-<?php if(!isset($vars['remote'])): ?>
+<?php if(!$vars['remote']): ?>
 <div class="modal fade <?php echo $vars['class']; ?>" id="<?php echo $target ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <?php endif; ?>
     <div class="modal-dialog <?php echo $vars['dialog_class']; ?>">

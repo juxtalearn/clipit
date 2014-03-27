@@ -3102,6 +3102,8 @@ input[type="button"].btn-block {
   padding: 1px 5px;
   font-size: 12px;
   line-height: 1.5;
+  padding-left: 5px;
+  padding-right: 5px;
   border-radius: 3px;
 }
 .btn-group-sm > .btn {
@@ -6192,6 +6194,22 @@ td.visible-print {
 .clipit-home form.clipit-home-form input.btn-primary:focus {
   color: #bae6f6;
 }
+.frame-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 30px;
+  height: 0;
+  overflow: hidden;
+}
+.frame-container iframe,
+.frame-container object,
+.frame-container embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 .elgg-avatar {
   position: relative;
   display: inline-block;
@@ -6691,6 +6709,40 @@ fieldset[disabled] .elgg-sidebar input.elgg-button-submit.active {
   height: 25px;
   border: 0;
 }
+.sidebar-lg .elgg-sidebar {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 992px) {
+  .sidebar-lg .elgg-sidebar {
+    left: 66.66666666666666%;
+  }
+}
+@media (min-width: 992px) {
+  .sidebar-lg .elgg-sidebar {
+    float: left;
+    width: 33.33333333333333%;
+  }
+}
+.main-md .elgg-main {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 992px) {
+  .main-md .elgg-main {
+    float: left;
+    width: 66.66666666666666%;
+  }
+}
+@media (min-width: 992px) {
+  .main-md .elgg-main {
+    right: 33.33333333333333%;
+  }
+}
 .btn-normal {
   border: none;
   background-color: #ffffff;
@@ -6920,6 +6972,88 @@ form .elgg-module h3 {
 }
 .elgg-list h3 {
   margin-bottom: 0;
+}
+li.list-item {
+  border-bottom: 1px solid #bae6f6;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+.files-table .file-icon {
+  font-size: 36px;
+  color: #C9C9C9;
+}
+.files-table .file-info h4 {
+  margin: 0;
+  font-weight: bold;
+}
+.files-table p {
+  text-align: justify;
+  margin: 0;
+  font-size: 13px;
+  color: #666666;
+}
+.files-table .file-user-info {
+  margin-top: 5px;
+}
+.file-owner {
+  margin-bottom: 10px;
+}
+.file-owner .file-icon {
+  font-size: 50px;
+  color: #c9c9c9;
+  margin-right: 10px;
+  float: left;
+}
+.file-owner .block {
+  overflow: hidden;
+}
+.file-owner .header-file .comment-button {
+  float: right;
+}
+.file-owner .header-file h2 {
+  margin: 0;
+}
+.file-owner .header-file .sub-title {
+  margin-top: 5px;
+  border-bottom: 1px solid #bae6f6;
+  padding-bottom: 5px;
+}
+.file-owner .file-details {
+  background: #fafafa;
+  padding: 20px;
+  margin: 10px 0;
+}
+.file-owner .file-details .btn {
+  padding: 5px 10px;
+  margin-right: 10px;
+  float: left;
+}
+.file-owner .file-details .file-info {
+  overflow: hidden;
+}
+.file-owner .file-details .file-info strong {
+  margin-top: -5px;
+}
+.file-owner .file-details .frame-file {
+  margin-top: 5px;
+}
+.file-owner .body-file {
+  color: #666666;
+}
+.fileinput-button {
+  position: relative;
+  overflow: hidden;
+}
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  -ms-filter: 'alpha(opacity=0)';
+  font-size: 200px;
+  direction: ltr;
+  cursor: pointer;
 }
 .landing h2.elgg-heading-main {
   display: none;
@@ -7227,6 +7361,7 @@ form .elgg-module h3 {
   color: #bae6f6;
   margin: 0px 5px;
   font-family: Helvetica;
+  vertical-align: text-bottom;
 }
 .navbar-fixed-top {
   border-width: 1px solid transparent;
@@ -7377,6 +7512,28 @@ ul.top-account > li > a > span.badge {
   /* Pad bottom by footer height */
   padding: 0 0 60px;
 }
+.elgg-message {
+  background: #fff;
+  padding: 20px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.elgg-message.elgg-state-success {
+  border: 1px solid #99cb00;
+}
+.elgg-message.elgg-state-success p {
+  color: #99cb00;
+}
+.elgg-message.elgg-state-error {
+  border: 1px solid #ff4343;
+}
+.elgg-message.elgg-state-error p {
+  color: #ff4343;
+}
+.elgg-message p {
+  margin: 0;
+  font-weight: bold;
+}
 #footer {
   height: auto;
   background-color: #32b4e5;
@@ -7483,6 +7640,9 @@ ul.top-account > li > a > span.badge {
 .activity-section .elgg-head-layout h2 {
   margin-top: 0;
 }
+ul.menu-activity-section a {
+  border-radius: 0;
+}
 .join-activity-button {
   background: #bae6f6;
   display: block;
@@ -7543,6 +7703,12 @@ ul.deadline-list > li .fa {
 }
 .activity-group-block .fa.status-deadline.fa-minus-square-o {
   color: #d8ba05;
+}
+.comment-button {
+  border: 1px solid #32b4e5;
+  color: #32b4e5;
+  background: #fff;
+  padding: 3px 10px;
 }
 .discussion .block {
   overflow: hidden;
@@ -7882,6 +8048,40 @@ ul.deadline-list > li .fa {
   color: #666666;
   margin-top: 10px;
 }
+.group-members {
+  background: #EBEBEB;
+  padding: 10px;
+}
+.group-members .group {
+  background: #fff;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+.group-members .group ul.members-list {
+  background: #fff;
+  margin-top: 10px;
+  overflow-y: auto;
+  max-height: 300px;
+  margin-right: -10px;
+  padding-right: 10px;
+}
+.group-members .group ul.members-list > li {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #bae6f6;
+  overflow: hidden;
+  padding-bottom: 5px;
+}
+.group-members .group ul.members-list > li:first-child {
+  border-top: 1px solid #bae6f6;
+  padding-top: 10px;
+}
+.group-members .group ul.members-list > li:last-child {
+  margin-bottom: 0;
+}
+.group-members .group ul.members-list:last-child {
+  margin-bottom: 0;
+}
 ul.token-input-list {
   overflow: hidden;
   height: auto !important;
@@ -8082,10 +8282,19 @@ ol {
   padding: 5px 10px !important;
   float: right !important;
 }
+.btn-xs {
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 3px;
+}
 small,
 .small {
-  font-size: 75%;
+  /*font-size: 75%;*/
   color: #999999;
+}
+.no-transition {
+  -webkit-transition: all 0.001s;
+  transition: all 0.001s;
 }
 .fa:hover {
   opacity: .7;
@@ -8125,6 +8334,7 @@ small,
 select.form-control {
   -webkit-box-shadow: 0 0 0 4px rgba(225, 235, 240, 0.5) !important;
   box-shadow: 0 0 0 4px rgba(225, 235, 240, 0.5) !important;
+  border: 1px solid #EFF4F7;
 }
 .table {
   font-size: 13px;
@@ -8188,6 +8398,10 @@ select.form-control {
 h1,
 h2 {
   font-family: FuturaBoldRegular, Impact, 'Impact Bold', Helvetica, Arial, sans, sans-serif;
+}
+h3,
+h4 {
+  color: #32b4e5;
 }
 h3,
 h4,

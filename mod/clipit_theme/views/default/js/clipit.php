@@ -10,7 +10,7 @@ $(function(){
         var element_parent = $(this).closest(".elgg-module-widget");
         $(element_parent).find(".elgg-body").toggle("fast", function(){
             // complete
-            $obj.toggleClass("fa-chevron-up fa-chevron-down");
+            $obj.toggleClass("fa-plus fa-minus");
         });
     });
     /*
@@ -176,9 +176,9 @@ $(function(){
             }
             $(this).tokenInput(elgg.config.wwwroot+"ajax/view/messages/search_to",
                 {
-                    hintText: elgg.echo("autocomplete:hint"),
-                    noResultsText: elgg.echo("autocomplete:noresults"),
-                    searchingText: elgg.echo("autocomplete:searching"),
+                    hintText: "<?php echo elgg_echo("autocomplete:hint");?>",
+                    noResultsText: "<?php echo elgg_echo("autocomplete:noresults");?>",
+                    searchingText: "<?php echo elgg_echo("autocomplete:searching");?>",
                     zindex: 1052,
                     searchDelay: 0,
                     preventDuplicates: true,

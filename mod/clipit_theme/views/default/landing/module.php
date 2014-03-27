@@ -8,7 +8,7 @@
  */
 $group = elgg_get_page_owner_entity();
 
-$header ='<a class="fa fa-chevron-down collapse" href="javascript:;"></a>';
+$header ='<a class="fa fa-minus collapse" href="javascript:;"></a>';
 $header .= "<span class=\"widget-viewall\">{$vars['all_link']}</span>";
 $header .= '<h3>' . $vars['title'] . '</h3>';
 $class = "module-".$vars['name'];

@@ -71,6 +71,8 @@ function clipit_final_init() {
     elgg_register_action('user/requestnewpassword', elgg_get_plugins_path() . "clipit_theme/actions/user/requestnewpassword.php", 'public');
     elgg_register_action('user/passwordreset', elgg_get_plugins_path() . "clipit_theme/actions/user/passwordreset.php", 'public');
     elgg_register_action("user/check", elgg_get_plugins_path() . "clipit_theme/actions/check.php", 'public');
+    // Language selector
+    elgg_register_action('language/set', elgg_get_plugins_path() . "clipit_theme/actions/language/set.php");
     // Register ajax view for timeline events
     elgg_register_ajax_view('navigation/pagination_timeline');
     // Register public pages
@@ -107,9 +109,10 @@ function clipit_final_init() {
         elgg_register_js("jquery", $CONFIG->url . "mod/clipit_theme/vendors/jquery/jquery-1.9.1.min.js", "head", 0);
         elgg_register_js("jquery-migrate", $CONFIG->url . "mod/clipit_theme/vendors/jquery/jquery-migrate-1.1.1.js", "head", 1);
         elgg_register_js("jquery-ui", $CONFIG->url . "mod/clipit_theme/vendors/jquery-ui-1.10.2.custom/js/jquery-ui-1.10.2.custom.min.js", "head", 2);
-        elgg_register_js("jquery:waypoints", "http://rawgithub.com/imakewebthings/jquery-waypoints/master/waypoints.min.js");
-        elgg_register_js("jquery:waypoints:sticker", "http://rawgithub.com/imakewebthings/jquery-waypoints/master/shortcuts/sticky-elements/waypoints-sticky.min.js");
-        elgg_register_js("jquery:waypoints:infinite", "http://rawgithub.com/imakewebthings/jquery-waypoints/master/shortcuts/infinite-scroll/waypoints-infinite.min.js");
+        // Waypoints
+        elgg_register_js("jquery:waypoints", $CONFIG->url . "mod/clipit_theme/vendors/waypoints/waypoints.min.js");
+        elgg_register_js("jquery:waypoints:sticker", $CONFIG->url . "mod/clipit_theme/vendors/waypoints/waypoints-sticky.min.js");
+        elgg_register_js("jquery:waypoints:infinite", $CONFIG->url . "mod/clipit_theme/vendors/waypoints/waypoints-infinite.min.js");
         // Wysihtml5
         elgg_register_js("jquery:wysihtml5", $CONFIG->url . "mod/clipit_theme/vendors/wysihtml5/wysihtml5-0.3.0.min.js");
         elgg_register_js("jquery:bootstrap:wysihtml5", $CONFIG->url . "mod/clipit_theme/vendors/wysihtml5/bootstrap-wysihtml5.js");

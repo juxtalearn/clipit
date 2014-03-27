@@ -222,6 +222,43 @@
   }
 }
 
+//
+// Group member list
+// --------------------------------------------------
+.group-members{
+  background: #EBEBEB;
+  padding: 10px;
+  .group{
+    background: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    ul.members-list{
+      background: #fff;
+      margin-top: 10px;
+      overflow-y: auto;
+      max-height: 300px;
+      margin-right: -10px;
+      padding-right: 10px;
+      > li{
+        margin-bottom: 10px;
+        border-bottom: 1px solid @blue-lighter;
+        overflow: hidden;
+        padding-bottom: 5px;
+        &:first-child{
+          border-top: 1px solid @blue-lighter;
+          padding-top: 10px;
+        }
+        &:last-child{
+          margin-bottom: 0;
+        }
+      }
+      &:last-child{
+        margin-bottom: 0;
+      }
+    }
+  }
+}
 
 //
 // jquery-tokeninput

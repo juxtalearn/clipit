@@ -24,7 +24,6 @@ $sidebar = elgg_view('page/layouts/content/sidebar', $params);
 if (isset($vars['header'])) {
 	$vars['header_override'] = $vars['header'];
 }
-$header = elgg_view('page/layouts/content/header', $vars);
 
 // allow page handlers to override the default filter
 if (isset($vars['filter'])) {
@@ -41,9 +40,10 @@ $params = $vars;
 $params['content'] = $footer_content;
 $footer = elgg_view('page/layouts/content/footer', $params);
 
-$body =  $header . $content . $footer;
+$body =  $content . $footer;
 
 $params = array(
+    'title'   => $vars['title'],
     'filter'  => $filter,
 	'content' => $body,
 	'sidebar' => $sidebar,

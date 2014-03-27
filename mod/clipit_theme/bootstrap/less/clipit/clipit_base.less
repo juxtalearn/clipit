@@ -11,10 +11,12 @@
 @import "forms";
 @import "modal";
 @import "lists";
+@import "file";
 @import "widgets";
 @import "header";
 @import "footer";
 @import "activity";
+@import "comments";
 @import "discussion";
 @import "video";
 @import "messages";
@@ -55,9 +57,17 @@ ul, ol {
   padding: 5px 10px !important;
   .pull-right();
 }
+.btn-xs{
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 3px;
+}
 small, .small{
-  font-size: 75%;
+  /*font-size: 75%;*/
   color: @gray-light;
+}
+.no-transition {
+  .transition(all 0.001s);
 }
 // fontawesome
 .fa:hover{
@@ -139,6 +149,7 @@ small, .small{
 select.form-control{
   @shadow_input:  0 0 0 4px rgba(225, 235, 240, 0.5);
   .box-shadow(@shadow_input) !important;
+  border: 1px solid #EFF4F7;
 }
 
 //
@@ -220,6 +231,9 @@ select.form-control{
 // --------------------------------------------------
 h1, h2 {
   font-family: @font-family-futurabold;
+}
+h3, h4{
+  color: @blue_clipit;
 }
 h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
   font-family: @font-family-helvetica;

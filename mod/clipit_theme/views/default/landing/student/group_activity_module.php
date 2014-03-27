@@ -3,13 +3,11 @@ $user = elgg_get_logged_in_user_guid();
 // order activity by recent deadline
 $my_activities = ClipitActivity::get_from_user($user);
 ?>
-<script src="http://nvd3.org/lib/d3.v2.js"></script>
-<script src="http://nvd3.org/lib/fisheye.js"></script>
-<script src="http://nvd3.org/nv.d3.js"></script>
+<script src="http://rawgithub.com/novus/nvd3/master/lib/d3.v2.js"></script>
+<script src="http://rawgithub.com/novus/nvd3/master/lib/fisheye.js"></script>
+<script src="http://rawgithub.com/novus/nvd3/master/nv.d3.js"></script>
 
-<link href="http://nvd3.org/css/common.css" rel="stylesheet">
-<link href="http://nvd3.org/src/nv.d3.css" rel="stylesheet">
-<link href="http://nvd3.org/css/syntax.css" rel="stylesheet">
+<link href="http://rawgithub.com/novus/nvd3/master/src/nv.d3.css" rel="stylesheet">
 <style>
     .module-group_activity svg {
         height: 200px;

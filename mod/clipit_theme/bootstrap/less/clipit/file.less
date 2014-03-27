@@ -1,0 +1,97 @@
+//
+// Files table list
+// --------------------------------------------------
+.files-table{
+  .file-icon{
+    font-size: @font-size-h1;
+    color: #C9C9C9;
+  }
+  .file-info{
+    h4{
+      margin: 0;
+      font-weight: bold;
+    }
+  }
+  p{
+    text-align: justify;
+    margin: 0;
+    font-size: ceil(@font-size-base * 0.92); // ~13px;
+    color: #666666;
+  }
+  .file-user-info{
+    margin-top: 5px;
+  }
+}
+//
+// File view
+// --------------------------------------------------
+
+.file-owner{
+  margin-bottom: 10px;
+
+  .file-icon{
+    font-size: ceil(@font-size-base * 3.57); // ~50px
+    color: @grey_slow_3;
+    margin-right: 10px;
+    float: left;
+  }
+  .block{
+    overflow: hidden;
+  }
+  .header-file{
+    .comment-button{
+      float: right;
+    }
+    h2{
+      margin: 0;
+    }
+    .sub-title{
+      margin-top: 5px;
+      border-bottom: 1px solid @blue-lighter;
+      padding-bottom: 5px;
+    }
+  }
+  .file-details{
+    background: #fafafa;
+    padding: 20px;
+    margin: 10px 0;
+    .btn{
+      padding: 5px 10px;
+      margin-right: 10px;
+      float: left;
+    }
+    .file-info{
+      overflow: hidden;
+      strong{
+        margin-top: -5px;
+      }
+    }
+    .frame-file{
+      margin-top: 5px;
+    }
+  }
+
+  .body-file{
+    color: #666666;
+  }
+}
+
+//
+// jQuery-File-Upload
+// --------------------------------------------------
+.fileinput-button {
+  position: relative;
+  overflow: hidden;
+}
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  -ms-filter: 'alpha(opacity=0)';
+  font-size: 200px;
+  direction: ltr;
+  cursor: pointer;
+}
+

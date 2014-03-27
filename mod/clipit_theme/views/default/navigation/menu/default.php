@@ -14,7 +14,11 @@ $vars['name'] = preg_replace('/[^a-z0-9\-]/i', '-', $vars['name']);
 $headers = elgg_extract('show_section_headers', $vars, false);
 $item_class = elgg_extract('item_class', $vars, '');
 
-$class = "nav nav-pills nav-stacked elgg-menu-{$vars['name']}";
+$class = "elgg-menu-{$vars['name']}";
+// Only nav style in aside menu
+if($vars['name'] != 'filter'){
+    $class = "nav nav-pills nav-stacked elgg-menu-{$vars['name']}";
+}
 if (isset($vars['class'])) {
 	$class .= " {$vars['class']}";
 }

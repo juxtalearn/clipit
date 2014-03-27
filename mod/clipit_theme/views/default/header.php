@@ -26,7 +26,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<?php echo elgg_get_site_url(); ?>"><img src="<?php echo $vars['logo_img'];?>" alt="ClipIt logo"></a>
+                <a class="navbar-brand" href="<?php echo elgg_get_site_url(); ?>">
+                    <img src="<?php echo $vars['logo_img'];?>" alt="ClipIt logo" title="ClipIt <?php echo elgg_echo("home");?>">
+                </a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->

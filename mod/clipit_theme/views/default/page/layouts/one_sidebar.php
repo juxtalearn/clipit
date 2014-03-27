@@ -38,16 +38,17 @@ if($vars['sub-title']){
 	</div>
 
 	<div class="elgg-main elgg-body col-md-pull-3">
-        <?php echo $filter; ?>
         <?php
             if (isset($vars['title'])) {
                 echo "<div class='elgg-head-layout' {$title_style}>
                         {$nav}
+                        {$vars['special_header_content']}
                         {$subtitle}
                         ".elgg_view_title($vars['title'])."
                        </div>";
             }
         ?>
+        <?php echo $filter; ?>
         <div class="content">
 		<?php
 			// @todo deprecated so remove in Elgg 2.0

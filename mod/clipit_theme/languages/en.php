@@ -1,11 +1,14 @@
 <?php
 /**
- * Blog English language file.
+ * Clipit theme English language file.
  *
  */
 
 $english = array(
+    'me'    => "Me",
     'options' => 'Options',
+    'home' => 'home',
+    'selectall' => 'Select all',
 
     // Menu footer
     'menu:footer_clipit:header:clipit' => 'Clipit',
@@ -40,6 +43,10 @@ $english = array(
     'widget:student/landing/group_activity' => 'Group activity',
     'widget:student/landing/tags' => 'Tags',
     'widget:student/landing/events' => 'Events',
+    // Autocomplete
+    'autocomplete:hint' => "Type in a search term",
+    'autocomplete:noresults' => "No results",
+    'autocomplete:searching' => "Searching...",
 );
 
 add_translation('en', $english);

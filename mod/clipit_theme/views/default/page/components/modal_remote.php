@@ -8,7 +8,7 @@
  */
 $params = array(
     'title' => 'Loading content...',
-    'body' => '<i class="fa fa-spinner fa-spin" style="font-size: 40px;"></i>',
+    'body' => '<i class="fa fa-spinner fa-spin" style="font-size: 40px;color: #bae6f6"></i>',
     'target' => $vars['id']
 );
 echo elgg_view("page/components/modal", $params);

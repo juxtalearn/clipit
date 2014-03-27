@@ -623,7 +623,7 @@
                 "pre": 1
             }
         },
-        stylesheets: ["./wysiwyg-color.css", elgg.config.wwwroot+"mod/clipit_theme/vendors/wysihtml5/wysihtml5-default.css"], // (path_to_project/lib/css/wysiwyg-color.css)
+        stylesheets: [elgg.config.wwwroot+"mod/clipit_theme/vendors/wysihtml5/wysihtml5-default.css"], // (path_to_project/lib/css/wysiwyg-color.css)
         locale: "en"
     };
 
