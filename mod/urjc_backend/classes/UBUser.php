@@ -101,7 +101,7 @@ class UBUser extends UBItem{
         $elgg_user->password = $this->password;
         $elgg_user->salt = $this->password_hash;
         $elgg_user->role = $this->role;
-        if($this->language = ""){
+        if($this->language == ""){
             $elgg_user->language = get_language();
         } else{
             $elgg_user->language = $this->language;

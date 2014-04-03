@@ -29,16 +29,13 @@ class UBMessage extends UBItem{
     const REL_MESSAGE_DESTINATION = "message-destination";
     const REL_MESSAGE_FILE = "message-file";
 
-    public $category = "";
     public $read_array = array();
     public $archived_array = array();
     public $destination = -1;
     public $file_array = array();
 
-
     protected function _load($elgg_object){
         parent::_load($elgg_object);
-        $this->category = (string)$elgg_object->category;
         $this->read_array = (array)$elgg_object->read_array;
         $this->archived_array = (array)$elgg_object->archived_array;
         $this->destination = static::get_destination($this->id);
@@ -59,7 +56,6 @@ class UBMessage extends UBItem{
         }
         $elgg_object->name = (string)$this->name;
         $elgg_object->description = (string)$this->description;
-        $elgg_object->category = (string)$this->category;
         $elgg_object->read_array = (array)$this->read_array;
         $elgg_object->archived_array = (array)$this->archived_array;
         $elgg_object->access_id = ACCESS_PUBLIC;
@@ -90,6 +86,28 @@ class UBMessage extends UBItem{
 
     /* STATIC FUNCTIONS */
 
+    static function get_by_destination($destination_array){
+        $called_class = get_called_class();
+        $message_array = array();
+        foreach($destination_array as $destination_id){
+            $item_array = UBCollection::get_items($destination_id, static::REL_MESSAGE_DESTINATION, true);
+            $temp_array = array();
+            foreach($item_array as $item_id){
+                $temp_array[$item_id] = new $called_class((int)$item_id);
+            }
+            if(empty($temp_array)){
+                $message_array[$destination_id] = null;
+            } else{
+                $message_array[$destination_id] = $temp_array;
+            }
+        }
+        return $message_array;
+    }
+
+    static function get_by_sender($sender_array){
+        return static::get_by_owner($sender_array);
+    }
+
     static function get_destination($id){
         $item_array = UBCollection::get_items($id, static::REL_MESSAGE_DESTINATION);
         if(empty($item_array)){
@@ -114,112 +132,12 @@ class UBMessage extends UBItem{
         return UBCollection::add_items($id, $file_array, static::REL_MESSAGE_FILE, true);
     }
 
-    static function get_replies($id){
-        $temp_array = get_entity_relationships($id, true);
-        $reply_array = array();
-        foreach($temp_array as $rel){
-            if($rel->relationship == static::REL_MESSAGE_DESTINATION){
-                $reply_array[] = $rel->guid_one;
-            }
-        }
-        return $reply_array;
-    }
-
-    static function get_by_category($category_array){
-        $called_class = get_called_class();
-        $message_array = array();
-        foreach($category_array as $category){
-            $elgg_object_array = elgg_get_entities_from_metadata(
-                array(
-                    "type" => $called_class::TYPE,
-                    "subtype" => $called_class::SUBTYPE,
-                    "metadata_names" => array("category"),
-                    "metadata_values" => array((string)$category)
-                )
-            );
-            if(!$elgg_object_array){
-                $message_array[] = null;
-            } else{
-                $temp_array = array();
-                foreach($elgg_object_array as $elgg_object){
-                    $temp_array[] = new $called_class((int)$elgg_object->guid);
-                }
-                if(empty($temp_array)){
-                    $message_array[] = null;
-                } else{
-                    $message_array[] = $temp_array;
-                }
-            }
-        }
-        return $message_array;
-    }
-
-    static function get_by_sender($sender_array, $category = null){
-        $called_class = get_called_class();
-        $object_array = array();
-        foreach($sender_array as $sender_id){
-            if($category){
-                $elgg_object_array = elgg_get_entities_from_metadata(
-                    array(
-                        "type" => $called_class::TYPE,
-                        "subtype" => $called_class::SUBTYPE,
-                        "owner_guid" => (int)$sender_id,
-                        "metadata_names" => array("category"),
-                        "metadata_values" => array((string)$category)
-                    )
-                );
-            } else{
-                $elgg_object_array = elgg_get_entities(
-                    array(
-                        "type" => $called_class::TYPE,
-                        "subtype" => $called_class::SUBTYPE,
-                        "owner_guid" => (int)$sender_id
-                    )
-                );
-            }
-            $temp_array = array();
-            foreach($elgg_object_array as $elgg_object){
-                $temp_array[] = new $called_class((int)$elgg_object->guid);
-            }
-            if(!empty($temp_array)){
-                $object_array[] = $temp_array;
-            } else{
-                $object_array[] = null;
-            }
-        }
-        return $object_array;
-    }
-
-    static function get_by_destination($destination_array, $category = null){
-        $called_class = get_called_class();
-        $object_array = array();
-        foreach($destination_array as $destination_id){
-            $rel_array = get_entity_relationships($destination_id, true);
-            $temp_array = array();
-            foreach($rel_array as $rel){
-                if($rel->relationship == static::REL_MESSAGE_DESTINATION){
-                    $message = new $called_class((int)$rel->guid_one);
-                    if(!$category){
-                        $temp_array[] = $message;
-
-                    } elseif($message->category == $category){
-                        $temp_array[] = $message;
-                    }
-                }
-            }
-            if(empty($temp_array)){
-                $object_array[] = null;
-            } else{
-                $object_array[] = $temp_array;
-            }
-        }
-        return $object_array;
-    }
 
     static function get_read_status($id, $user_array = null){
         $called_class = get_called_class();
         $prop_array[] = "read_array";
-        $read_array = array_pop($called_class::get_properties($id, $prop_array));
+        $read_array = $called_class::get_properties($id, $prop_array);
+        $read_array = array_pop($read_array);
         if(!$user_array){
             return $read_array;
         } else{
@@ -238,14 +156,16 @@ class UBMessage extends UBItem{
     static function set_read_status($id, $read_value, $user_array){
         $called_class = get_called_class();
         $prop_array[] = "read_array";
-        $read_array = array_pop($called_class::get_properties($id, $prop_array));
+        $read_array = $called_class::get_properties($id, $prop_array);
+        $read_array = array_pop($read_array);
         foreach($user_array as $user_id){
             if($read_value == true){
                 if(!in_array($user_id, $read_array)){
                     array_push($read_array, $user_id);
                 }
             } else if($read_value == false){
-                if($index = array_search($user_id, $read_array)){
+                $index = array_search((int) $user_id, $read_array);
+                if(isset($index) && $index !== false){
                     array_splice($read_array, $index, 1);
                 }
             }
@@ -257,7 +177,8 @@ class UBMessage extends UBItem{
     static function get_archived_status($id, $user_array = null){
         $called_class = get_called_class();
         $prop_array[] = "archived_array";
-        $archived_array = array_pop($called_class::get_properties($id, $prop_array));
+        $archived_array = $called_class::get_properties($id, $prop_array);
+        $archived_array = array_pop($archived_array);
         if(!$user_array){
             return $archived_array;
         } else{
@@ -276,14 +197,16 @@ class UBMessage extends UBItem{
     static function set_archived_status($id, $archived_value, $user_array){
         $called_class = get_called_class();
         $prop_array[] = "archived_array";
-        $archived_array = array_pop($called_class::get_properties($id, $prop_array));
+        $archived_array = $called_class::get_properties($id, $prop_array);
+        $archived_array = array_pop($archived_array);
         foreach($user_array as $user_id){
             if($archived_value == true){
                 if(!in_array($user_id, $archived_array)){
                     array_push($archived_array, $user_id);
                 }
             } else if($archived_value == false){
-                if($index = array_search($user_id, $archived_array)){
+                $index = array_search((int) $user_id, $archived_array);
+                if(isset($index) && $index !== false){
                     array_splice($archived_array, $index, 1);
                 }
             }
@@ -292,4 +215,12 @@ class UBMessage extends UBItem{
         return $called_class::set_properties($id, $prop_value_array);
     }
 
+    static function get_count_by_destination($destination_array, $user_id = -1){
+        $called_class = get_called_class();
+        foreach($destination_array as $destination_id){
+            $count = 0;
+            //$direct_messages = static::get_by_destination()
+
+        }
+    }
 }

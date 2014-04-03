@@ -36,8 +36,10 @@ abstract class UBCollection{
     /**
      * Adds Items to a Collection.
      *
-     * @param int   $id Id from Collection to add Items to
-     * @param array $item_array Array of Item Ids to add
+     * @param int   $id Id from Collection to add Items to.
+     * @param array $item_array Array of Item Ids to add.
+     * @param string $rel_name Name of the relationship to use.
+     * @param bool $exclusive Whether the added items have an exclusive relationship with the collection.
      *
      * @return bool Returns true if success, false if error
      */
@@ -60,19 +62,24 @@ abstract class UBCollection{
      * Get Items from a Collection.
      *
      * @param int $id Id from Collection to get Items from.
+     * @param string $rel_name Name of the relationship linking the items.
+     * @param bool $inverse Whether the Id specified is in the first (false) or second (true) term of the relationship.
      *
      * @return int[]|bool Returns an array of Item IDs, or false if error.
      */
-    static function get_items($id, $rel_name){
-
-        $rel_array = get_entity_relationships($id);
-        $item_ids = array();
+    static function get_items($id, $rel_name, $inverse = false){
+        $rel_array = get_entity_relationships($id, $inverse);
+        $item_array = array();
         foreach($rel_array as $rel){
             if($rel->relationship == $rel_name){
-                $item_ids[] = (int)$rel->guid_two;
+                if($inverse){
+                    $item_array[] = (int)$rel->guid_one;
+                } else{
+                    $item_array[] = (int)$rel->guid_two;
+                }
             }
         }
-        return $item_ids;
+        return $item_array;
     }
 
     /**
@@ -80,6 +87,7 @@ abstract class UBCollection{
      *
      * @param int   $id Id from Collection to remove Items from.
      * @param array $item_array Array of Item Ids to remove.
+     * @param string $rel_name Name of the relationship to use.
      *
      * @return bool Returns true if success, false if error.
      */
@@ -89,6 +97,14 @@ abstract class UBCollection{
         }
     }
 
+    /**
+     * Remove all items from a collection.
+     *
+     * @param int $id ID of the Collection to remove items from.
+     * @param string $rel_name Name of the relationship to use.
+     *
+     * @return bool Returns true if success, false if error.
+     */
     static function remove_all_items($id, $rel_name){
         return remove_entity_relationships($id, $rel_name);
     }

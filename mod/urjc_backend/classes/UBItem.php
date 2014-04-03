@@ -80,6 +80,9 @@ class UBItem{
         }
     }
 
+    /**
+     * @param ElggObject $elgg_object Elgg Object to load parameters from.
+     */
     protected function _load($elgg_object){
         $this->id = (int)$elgg_object->guid;
         $this->description = (string)$elgg_object->description;
@@ -255,7 +258,7 @@ class UBItem{
             return array();
         }
         foreach($elgg_object_array as $elgg_object){
-            $object_array[] = new $called_class((int)$elgg_object->guid);
+            $object_array[(int)$elgg_object->guid] = new $called_class((int)$elgg_object->guid);
         }
         if(!isset($object_array)){
             return array();
@@ -275,9 +278,34 @@ class UBItem{
         $object_array = array();
         foreach($id_array as $id){
             if(elgg_entity_exists($id)){
-                $object_array[] = new $called_class((int)$id);
+                $object_array[(int)$id] = new $called_class((int)$id);
             } else{
-                $object_array[] = null;
+                $object_array[(int)$id] = null;
+            }
+        }
+        return $object_array;
+    }
+
+    static function get_by_owner($owner_array, $limit = 10){
+        $called_class = get_called_class();
+        $object_array = array();
+        foreach($owner_array as $owner_id){
+            $elgg_object_array = elgg_get_entities(
+                array(
+                    "type" => $called_class::TYPE,
+                    "subtype" => $called_class::SUBTYPE,
+                    "owner_guid" => (int)$owner_id,
+                    "limit" => $limit
+                )
+            );
+            $temp_array = array();
+            foreach($elgg_object_array as $elgg_object){
+                $temp_array[(int)$elgg_object->guid] = new $called_class((int)$elgg_object->guid);
+            }
+            if(!empty($temp_array)){
+                $object_array[(int)$owner_id] = $temp_array;
+            } else{
+                $object_array[(int)$owner_id] = null;
             }
         }
         return $object_array;
@@ -300,21 +328,25 @@ class UBItem{
             null); // $ip_address = ""
     }
 
-    static function get_from_owner($owner_id, $limit = 10){
+    static function get_from_search($search_string, $name_only = false){
         $called_class = get_called_class();
         $elgg_object_array = elgg_get_entities(
             array(
-                'owner_guid' => $owner_id,
                 'type' => $called_class::TYPE,
-                'subtype' => $called_class::SUBTYPE,
-                'limit' => $limit));
-        if(empty($elgg_object_array)){
-            return array();
-        }
-        $object_array = array();
+                'subtype' => $called_class::SUBTYPE)
+        );
+        $search_result = array();
         foreach($elgg_object_array as $elgg_object){
-            $object_array[] = new $called_class((int)$elgg_object->guid);
+            if(strpos($elgg_object->name, $search_string) !== false){
+                $search_result[(int)$elgg_object->guid] = new $called_class((int)$elgg_object->guid);
+                continue;
+            }
+            if($name_only === false){
+                if(strpos($elgg_object->description, $search_string) !== false){
+                    $search_result[(int)$elgg_object->guid] = new $called_class((int)$elgg_object->guid);
+                }
+            }
         }
-        return $object_array;
+        return $search_result;
     }
 }
