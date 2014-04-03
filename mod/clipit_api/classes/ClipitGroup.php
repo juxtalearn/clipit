@@ -14,6 +14,47 @@ class ClipitGroup extends UBItem{
 
     const REL_GROUP_USER = "group-user";
     const REL_GROUP_FILE = "group-file";
+    const REL_GROUP_VIDEO = "group-video";
+
+    public $user_array = array();
+    public $file_array = array();
+    public $video_array = array();
+
+    /**
+     * @param ElggObject $elgg_object Elgg Object to load parameters from.
+     */
+    protected function _load($elgg_object){
+        parent::_load($elgg_object);
+        $this->user_array = static::get_users($this->id);
+        $this->file_array = static::get_files($this->id);
+        $this->video_array = static::get_videos($this->id);
+    }
+
+    /**
+     * Saves this instance to the system.
+     *
+     * @return bool|int Returns id of saved instance, or false if error.
+     */
+    function save(){
+        if($this->id == -1){
+            $elgg_object = new ElggObject();
+            $elgg_object->subtype = (string)static::SUBTYPE;
+        } elseif(!$elgg_object = new ElggObject((int)$this->id)){
+            return false;
+        }
+        $elgg_object->name = (string)$this->name;
+        $elgg_object->description = (string)$this->description;
+        $elgg_object->access_id = ACCESS_PUBLIC;
+        $elgg_object->save();
+
+        $this->id = $elgg_object->guid;
+        $this->owner_id = (int)$elgg_object->owner_guid;
+        $this->time_created = (int)$elgg_object->time_created;
+        static::set_users($this->id, $this->user_array);
+        static::set_files($this->id, $this->file_array);
+        static::set_videos($this->id, $this->video_array);
+        return $this->id;
+    }
 
     function delete(){
         $rel_array = get_entity_relationships((int)$this->id);
@@ -22,10 +63,16 @@ class ClipitGroup extends UBItem{
                 case ClipitGroup::REL_GROUP_FILE:
                     $file_array[] = $rel->guid_two;
                     break;
+                case ClipitGroup::REL_GROUP_VIDEO:
+                    $video_array[] = $rel->guid_two;
+                    break;
             }
         }
         if(isset($file_array)){
             ClipitFile::delete_by_id($file_array);
+        }
+        if(isset($video_array)){
+            ClipitVideo::delete_by_id($video_array);
         }
         parent::delete();
     }
@@ -72,6 +119,11 @@ class ClipitGroup extends UBItem{
         return UBCollection::add_items($id, $user_array, ClipitGroup::REL_GROUP_USER);
     }
 
+    static function set_users($id, $user_array){
+        UBCollection::remove_all_items($id, ClipitGroup::REL_GROUP_USER);
+        return static::add_users($id, $user_array);
+    }
+
     /**
      * Remove Users from a Group.
      *
@@ -107,6 +159,11 @@ class ClipitGroup extends UBItem{
         return UBCollection::add_items($id, $file_array, ClipitGroup::REL_GROUP_FILE);
     }
 
+    static function set_files($id, $file_array){
+        UBCollection::remove_all_items($id, ClipitGroup::REL_GROUP_FILE);
+        return static::add_files($id, $file_array);
+    }
+
     /**
      * Remove Files from a Group.
      *
@@ -128,5 +185,45 @@ class ClipitGroup extends UBItem{
      */
     static function get_files($id){
         return UBCollection::get_items($id, ClipitGroup::REL_GROUP_FILE);
+    }
+
+    /**
+     * Add Videos to a Group.
+     *
+     * @param int   $id Id of the Group to add Videos to.
+     * @param array $video_array Array of Video Ids to add to the Group.
+     *
+     * @return bool Returns true if added correctly, or false if error.
+     */
+    static function add_videos($id, $video_array){
+        return UBCollection::add_items($id, $video_array, ClipitGroup::REL_GROUP_VIDEO);
+    }
+
+    static function set_videos($id, $video_array){
+        UBCollection::remove_all_items($id, ClipitGroup::REL_GROUP_VIDEO);
+        return static::add_users($id, $video_array);
+    }
+
+    /**
+     * Remove Videos from a Group.
+     *
+     * @param int   $id Id of the Group to remove Videos from.
+     * @param array $video_array Array of Video Ids to remove from the Group.
+     *
+     * @return bool Returns true if removed correctly, or false if error.
+     */
+    static function remove_videos($id, $video_array){
+        return UBCollection::remove_items($id, $video_array, ClipitGroup::REL_GROUP_VIDEOS);
+    }
+
+    /**
+     * Get Video Ids from a Group.
+     *
+     * @param int $id Id of the Group to get Videos from.
+     *
+     * @return bool Returns array of Video Ids, or false if error.
+     */
+    static function get_videos($id){
+        return UBCollection::get_items($id, ClipitGroup::REL_GROUP_VIDEO);
     }
 }

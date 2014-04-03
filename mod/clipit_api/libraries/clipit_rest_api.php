@@ -4,38 +4,18 @@
  * Expose all functions for the ClipIt REST API
  */
 function clipit_expose_api(){
-    // We don't add classes which don't extend ClipitItem (like ClipitEvent or ClipIt Site)
-    $suffix_list = array(
-        "clipit.activity." => "ClipitActivity::",
-        "clipit.comment." => "ClipitComment::",
-        "clipit.file." => "ClipitFile::",
-        "clipit.group." => "ClipitGroup::",
-        "clipit.la." => "ClipitLA::",
-        "clipit.message." => "ClipitMessage::",
-        "clipit.quiz." => "ClipitQuiz::",
-        "clipit.quiz.question." => "ClipitQuizQuestion::",
-        "clipit.quiz.result." => "ClipitQuizResult::",
-        "clipit.sta." => "ClipitSTA::",
-        "clipit.storyboard." => "ClipitStoryboard::",
-        "clipit.task." => "ClipitTask::",
-        "clipit.user." => "ClipitUser::",
-        "clipit.video." => "ClipitVideo::");
-    foreach($suffix_list as $api_suffix => $class_suffix){
-        expose_common_functions($api_suffix, $class_suffix);
-    }
     expose_activity_functions();
+    expose_chat_functions();
     expose_comment_functions();
     expose_event_functions();
     expose_file_functions();
     expose_group_functions();
     expose_la_functions();
-    expose_message_functions();
+    expose_post_functions();
     expose_quiz_functions();
     expose_quiz_question_functions();
     expose_quiz_result_functions();
     expose_site_functions();
-    expose_sta_functions();
-    expose_storyboard_functions();
     expose_task_functions();
     expose_user_functions();
     expose_video_functions();
@@ -127,11 +107,170 @@ function expose_common_functions($api_suffix, $class_suffix){
                 "required" => true)),
         "Get instances from an Owner",
         'GET', false, true);
+    expose_function(
+        $api_suffix . "get_from_search",
+        $class_suffix . "get_from_search",
+        array(
+            "search_string" => array(
+                "type" => "string",
+                "required" => true),
+            "name_only" => array(
+                "type" => "bool",
+                "required" => false)),
+        "Get instances from searching inside the object name and description for a string.",
+        'GET', false, true);
+}
+
+function expose_common_message_functions($api_suffix, $class_suffix){
+    expose_function(
+        $api_suffix . "get_destination",
+        $class_suffix . "get_destination",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Get Destination Id of a Post/Message",
+        'GET', false, true);
+    expose_function(
+        $api_suffix . "set_destination",
+        $class_suffix . "set_destination",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "destination_id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Set the Destination Id of a Post/Message",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "get_parent",
+        $class_suffix . "get_parent",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Get Parent Id of a Post/Message",
+        'GET', false, true);
+    expose_function(
+        $api_suffix . "set_parent",
+        $class_suffix . "set_parent",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "parent_id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Set the Parent Id of a Post/Message",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "get_by_sender",
+        $class_suffix . "get_by_sender",
+        array(
+            "sender_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Get Post/Message by Sender",
+        'GET', false, true);
+    expose_function(
+        $api_suffix . "get_by_destination",
+        $class_suffix . "get_by_destination",
+        array(
+            "destination_array" => array(
+                "type" => "array",
+                "required" => true),
+            "recursive" => array(
+                "type" => "bool",
+                "required" => false)),
+        "Get Post/Message by Destination",
+        'GET', false, true);
+    expose_function(
+        $api_suffix . "get_by_parent",
+        $class_suffix . "get_by_parent",
+        array(
+            "parent_array" => array(
+                "type" => "array",
+                "required" => true),
+            "recursive" => array(
+                "type" => "bool",
+                "required" => false)),
+        "Get Replies for a Post/Message",
+        "GET", false, true);
+    expose_function(
+        $api_suffix . "get_read_status",
+        $class_suffix . "get_read_status",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "user_array" => array(
+                "type" => "array",
+                "required" => false)),
+        "Get Post/Message read status. If user_array is specified, get read status by user.
+        Else, return the list of users who have read the Post/Message.",
+        'GET', false, true);
+    expose_function(
+        $api_suffix . "set_read_status",
+        $class_suffix . "set_read_status",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "read_value" => array(
+                "type" => "bool",
+                "required" => true),
+            "user_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Set Post/Message read status per user.",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "get_archived_status",
+        $class_suffix . "get_archived_status",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "user_array" => array(
+                "type" => "array",
+                "required" => false)),
+        "Get Post/Message archived status. If user_array is specified, get archived status by user.
+        Else, return the list of users who have archived the Post/Message.",
+        'GET', false, true);
+    expose_function(
+        $api_suffix . "set_archived_status",
+        $class_suffix . "set_archived_status",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "archived_value" => array(
+                "type" => "bool",
+                "required" => true),
+            "user_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Set Post/Message archived status per user.",
+        'POST', false, true);
+    expose_function( // Overwritten in expose_post_functions()
+        $api_suffix . "get_count_by_destination",
+        $class_suffix . "get_count_by_destination",
+        array(
+            "destination_array" => array(
+                "type" => "array",
+                "required" => true),
+            "user_id" => array(
+                "type" => "int",
+                "required" => false)),
+        "Get the number of Messages by destination. If User id set, returns number of unread Messages.",
+        "GET", false, true);
 }
 
 function expose_activity_functions(){
     $api_suffix = "clipit.activity.";
     $class_suffix = "ClipitActivity::";
+    expose_common_functions($api_suffix, $class_suffix);
     expose_function(
         $api_suffix . "get_from_user",
         $class_suffix . "get_from_user",
@@ -278,9 +417,29 @@ function expose_activity_functions(){
         "GET", false, true);
 }
 
+function expose_chat_functions(){
+    $api_suffix = "clipit.chat.";
+    $class_suffix = "ClipitChat::";
+    expose_common_functions($api_suffix, $class_suffix);
+    expose_common_message_functions($api_suffix, $class_suffix);
+    expose_function(
+        $api_suffix . "get_conversation",
+        $class_suffix . "get_conversation",
+        array(
+            "sender_id" => array(
+                "type" => "int",
+                "required" => true),
+            "destination_id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Returns all messages interchanged between two points (sender-destination)",
+        "GET", false, true);
+}
+
 function expose_comment_functions(){
     $api_suffix = "clipit.comment.";
     $class_suffix = "ClipitComment::";
+    expose_common_functions($api_suffix, $class_suffix);
     expose_function(
         $api_suffix . "get_target",
         $class_suffix . "get_target",
@@ -376,11 +535,15 @@ function expose_event_functions(){
 }
 
 function expose_file_functions(){
+    $api_suffix = "clipit.file.";
+    $class_suffix = "ClipitFile::";
+    expose_common_functions($api_suffix, $class_suffix);
 }
 
 function expose_group_functions(){
     $api_suffix = "clipit.group.";
     $class_suffix = "ClipitGroup::";
+    expose_common_functions($api_suffix, $class_suffix);
     expose_function(
         $api_suffix . "get_from_user_activity",
         $class_suffix . "get_from_user_activity",
@@ -412,7 +575,19 @@ function expose_group_functions(){
             "user_array" => array(
                 "type" => "array",
                 "required" => true)),
-        "Add Users by Id to a Group",
+        "Adds Users (by Id) to a Group",
+        "POST", false, true);
+    expose_function(
+        $api_suffix . "set_users",
+        $class_suffix . "set_users",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "user_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Sets Users (by Id) to a Group",
         "POST", false, true);
     expose_function(
         $api_suffix . "remove_users",
@@ -424,7 +599,7 @@ function expose_group_functions(){
             "user_array" => array(
                 "type" => "array",
                 "required" => true)),
-        "Removes Users by Id from a Group",
+        "Removes Users (by Id) from a Group",
         "POST", false, true);
     expose_function(
         $api_suffix . "get_users",
@@ -433,7 +608,7 @@ function expose_group_functions(){
             "id" => array(
                 "type" => "int",
                 "required" => true)),
-        "Gets Users from a Group",
+        "Gets Users (by Id) from a Group",
         "GET", false, true);
     expose_function(
         $api_suffix . "add_files",
@@ -445,7 +620,19 @@ function expose_group_functions(){
             "file_array" => array(
                 "type" => "array",
                 "required" => true)),
-        "Add Files by Id to a Group",
+        "Adds Files (by Id) to a Group",
+        "POST", false, true);
+    expose_function(
+        $api_suffix . "set_files",
+        $class_suffix . "set_files",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "file_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Sets Files (by Id) to a Group",
         "POST", false, true);
     expose_function(
         $api_suffix . "remove_files",
@@ -457,7 +644,7 @@ function expose_group_functions(){
             "file_array" => array(
                 "type" => "array",
                 "required" => true)),
-        "Removes Files by Id from a Group",
+        "Removes Files (by Id) from a Group",
         "POST", false, true);
     expose_function(
         $api_suffix . "get_files",
@@ -466,13 +653,59 @@ function expose_group_functions(){
             "id" => array(
                 "type" => "int",
                 "required" => true)),
-        "Gets Files from a Group",
+        "Gets Files (by Id) from a Group",
+        "GET", false, true);
+    expose_function(
+        $api_suffix . "add_videos",
+        $class_suffix . "add_videos",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "video_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Add Videos (by Id) to a Group",
+        "POST", false, true);
+    expose_function(
+        $api_suffix . "set_videos",
+        $class_suffix . "set_videos",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "video_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Sets Videos (by Id) to a Group",
+        "POST", false, true);
+    expose_function(
+        $api_suffix . "remove_videos",
+        $class_suffix . "remove_videos",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "video_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Removes Videos (by Id) from a Group",
+        "POST", false, true);
+    expose_function(
+        $api_suffix . "get_videos",
+        $class_suffix . "get_videos",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Gets Videos (by Id) from a Group",
         "GET", false, true);
 }
 
 function expose_la_functions(){
     $api_suffix = "clipit.la.";
     $class_suffix = "ClipitLA::";
+    expose_common_functions($api_suffix, $class_suffix);
     expose_function(
         $api_suffix . "send_metrics",
         $class_suffix . "send_metrics",
@@ -490,136 +723,30 @@ function expose_la_functions(){
         "POST", false, true);
 }
 
-function expose_message_functions(){
-    $api_suffix = "clipit.message.";
-    $class_suffix = "ClipitMessage::";
+function expose_post_functions(){
+    $api_suffix = "clipit.post.";
+    $class_suffix = "ClipitPost::";
+    expose_common_functions($api_suffix, $class_suffix);
+    expose_common_message_functions($api_suffix, $class_suffix);
+    unexpose_function("get_unread_count");
     expose_function(
-        $api_suffix . "get_destination",
-        $class_suffix . "get_destination",
+        $api_suffix . "get_unread_count",
+        $class_suffix . "get_unread_count",
         array(
-            "id" => array(
-                "type" => "int",
-                "required" => true)),
-        "Get Destination Id of a Message",
-        'GET', false, true);
-    expose_function(
-        $api_suffix . "set_destination",
-        $class_suffix . "set_destination",
-        array(
-            "id" => array(
+            "user_id" => array(
                 "type" => "int",
                 "required" => true),
-            "destination_id" => array(
+            "group_id" => array(
                 "type" => "int",
-                "required" => true)),
-        "Set the Destination Id of a Message",
-        'POST', false, true);
-    expose_function(
-        $api_suffix . "get_by_category",
-        $class_suffix . "get_by_category",
-        array(
-            "category_array" => array(
-                "type" => "array",
-                "required" => true)),
-        "Get instances by Category",
+                "required" => false)),
+        "Get the number of Posts unread by a User, optionally filtered by Group.",
         "GET", false, true);
-    expose_function(
-        $api_suffix . "get_by_sender",
-        $class_suffix . "get_by_sender",
-        array(
-            "sender_array" => array(
-                "type" => "array",
-                "required" => true),
-            "category" => array(
-                "type" => "string",
-                "required" => false)),
-        "Get instances by Sender",
-        'GET', false, true);
-    expose_function(
-        $api_suffix . "get_by_destination",
-        $class_suffix . "get_by_destination",
-        array(
-            "destination_array" => array(
-                "type" => "array",
-                "required" => true),
-            "category" => array(
-                "type" => "string",
-                "required" => false)),
-        "Get instances by Destination",
-        'GET', false, true);
-    expose_function(
-        $api_suffix . "get_replies",
-        $class_suffix . "get_replies",
-        array(
-            "id" => array(
-                "type" => "int",
-                "required" => true)),
-        "Get Replies for a Message",
-        "GET", false, true);
-    expose_function(
-        $api_suffix . "get_read_status",
-        $class_suffix . "get_read_status",
-        array(
-            "id" => array(
-                "type" => "int",
-                "required" => true),
-            "user_array" => array(
-                "type" => "array",
-                "required" => false)),
-        "Get read message status. If user_array is specified, get read status by user. If not, it returns the list of
-        users who have read the message.",
-        'GET', false, true);
-    expose_function(
-        $api_suffix . "set_read_status",
-        $class_suffix . "set_read_status",
-        array(
-            "id" => array(
-                "type" => "int",
-                "required" => true),
-            "read_value" => array(
-                "type" => "bool",
-                "required" => true),
-            "user_array" => array(
-                "type" => "array",
-                "required" => true)),
-        "Set read message status per user.",
-        'POST', false, true);
-    expose_function(
-        $api_suffix . "get_archived_status",
-        $class_suffix . "get_archived_status",
-        array(
-            "id" => array(
-                "type" => "int",
-                "required" => true),
-            "user_array" => array(
-                "type" => "array",
-                "required" => false)),
-        "Get archived message status. If user_array is specified, get archived status by user. If not, it returns the
-        list of users who have archived the message.",
-        'GET', false, true);
-    expose_function(
-        $api_suffix . "set_archived_status",
-        $class_suffix . "set_archived_status",
-        array(
-            "id" => array(
-                "type" => "int",
-                "required" => true),
-            "archived_value" => array(
-                "type" => "bool",
-                "required" => true),
-            "user_array" => array(
-                "type" => "array",
-                "required" => true)),
-        "Set archived message status per user.",
-        'POST', false, true);
-}
-
-function expose_palette_functions(){
 }
 
 function expose_quiz_functions(){
     $api_suffix = "clipit.quiz.";
     $class_suffix = "ClipitQuiz::";
+    expose_common_functions($api_suffix, $class_suffix);
     expose_function(
         $api_suffix . "add_questions",
         $class_suffix . "add_questions",
@@ -658,6 +785,7 @@ function expose_quiz_functions(){
 function expose_quiz_question_functions(){
     $api_suffix = "clipit.quiz.question.";
     $class_suffix = "ClipitQuizQuestion::";
+    expose_common_functions($api_suffix, $class_suffix);
     expose_function(
         $api_suffix . "get_results",
         $class_suffix . "get_results",
@@ -705,6 +833,7 @@ function expose_quiz_question_functions(){
 function expose_quiz_result_functions(){
     $api_suffix = "clipit.quiz.result.";
     $class_suffix = "ClipitQuizResult::";
+    expose_common_functions($api_suffix, $class_suffix);
     expose_function(
         $api_suffix . "get_by_question",
         $class_suffix . "get_by_question",
@@ -762,15 +891,10 @@ function expose_site_functions(){
         'GET', false, true);
 }
 
-function expose_sta_functions(){
-}
-
-function expose_storyboard_functions(){
-}
-
 function expose_task_functions(){
     $api_suffix = "clipit.task.";
     $class_suffix = "ClipitTask::";
+    expose_common_functions($api_suffix, $class_suffix);
     expose_function(
         $api_suffix . "get_activity",
         $class_suffix . "get_activity",
@@ -782,21 +906,10 @@ function expose_task_functions(){
         'GET', false, true);
 }
 
-function expose_taxonomy_functions(){
-}
-
-function expose_taxonomy_sb_functions(){
-}
-
-function expose_taxonomy_tag_functions(){
-}
-
-function expose_taxonomy_tc_functions(){
-}
-
 function expose_user_functions(){
     $api_suffix = "clipit.user.";
     $class_suffix = "ClipitUser::";
+    expose_common_functions($api_suffix, $class_suffix);
     expose_function(
         $api_suffix . "get_by_login",
         $class_suffix . "get_by_login",
@@ -874,6 +987,7 @@ function expose_user_functions(){
 function expose_video_functions(){
     $api_suffix = "clipit.video.";
     $class_suffix = "ClipitVideo::";
+    expose_common_functions($api_suffix, $class_suffix);
     expose_function(
         $api_suffix . "add_comments",
         $class_suffix . "add_comments",
