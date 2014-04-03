@@ -31,6 +31,7 @@ $english = array(
     'messages:drafts' => 'Drafts',
     'messages:sent_email' => 'Sent mail',
     'messages:trash' => 'Trash',
+    'messages:contactmembersgroup' => 'Contact group members',
     // Message
     'message:from'  => "From",
     'message:to'  => "To",

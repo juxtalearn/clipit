@@ -2,8 +2,8 @@
 /**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
- * Creation date:   13/03/14
- * Last update:     13/03/14
+ * Creation date:   1/04/14
+ * Last update:     1/04/14
  *
  * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, JuxtaLearn Project
  * @version         $Version$
@@ -21,15 +21,14 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-//$user_id = elgg_get_logged_in_user_guid();
-//$unread_count = ClipitMessage::get_unread_count($user_id);
-//?>
-<!--<a id="messages" role="button" data-toggle="dropdown" href="javascript:;">-->
-<!--    --><?php //if($unread_count > 0): ?>
-<!--    <span class="badge">--><?php //echo $unread_count; ?><!--</span>-->
-<!--    --><?php //endif; ?>
-<!--    <i class="fa fa-envelope"></i>-->
-<!--</a>-->
-<!--<ul id="menu_messages" class="dropdown-menu" role="menu" aria-labelledby="messages">-->
-<!--    --><?php //echo elgg_view('object/elements/message_summary'); ?>
-<!--</ul>-->
+$my_groups_id = elgg_extract("my_groups", $vars);
+$events_log = ClipitEvent::get_by_object($my_groups_id, 0, 60);
+?>
+<h3>Last activity</h3>
+<div style=" border-left: 10px solid #bae6f6; margin-left: -5px; ">
+    <ul style=" padding-left: 10px; background: #fff; padding: 10px; margin-left: 10px; ">
+    <?php foreach ($events_log as $event_log): ?>
+        <?php echo clipit_event($event_log, 'summary'); ?>
+    <?php endforeach; ?>
+    </ul>
+</div>

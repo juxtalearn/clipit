@@ -6524,6 +6524,7 @@ fieldset[disabled] .elgg-layout-one-sidebar .elgg-main .content .elgg-head ul.el
 }
 .elgg-layout-one-sidebar .elgg-main .elgg-htabs > li.active > a,
 .elgg-layout-one-sidebar .elgg-main .elgg-htabs > li.elgg-state-selected > a {
+  font-family: FuturaBoldRegular, Impact, 'Impact Bold', Helvetica, Arial, sans, sans-serif;
   color: #32b4e5;
   border: 0;
   border-bottom: 1px solid #FFF;
@@ -7132,9 +7133,12 @@ li.list-item {
 }
 .module-activity_status .elgg-head {
   background: #32b4e5;
-  color: #FFF ;
+  color: #FFF;
 }
 .module-activity_status .elgg-head a {
+  color: #FFF;
+}
+.module-activity_status .elgg-head h3 {
   color: #FFF;
 }
 .module-activity_status .elgg-body {
@@ -7301,6 +7305,7 @@ li.list-item {
   padding: 8px;
   color: #797979;
   font-size: 14px;
+  width: 100%;
 }
 .module-events ul > li.event .event-section .event-details .icon {
   font-size: 20px;
@@ -8460,6 +8465,7 @@ h6,
 }
 .nav-tabs > li.active > a,
 .nav-tabs > li.elgg-state-selected > a {
+  font-family: FuturaBoldRegular, Impact, 'Impact Bold', Helvetica, Arial, sans, sans-serif;
   color: #32b4e5;
   border: 0;
   border-bottom: 1px solid #FFF;

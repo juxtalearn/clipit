@@ -39,7 +39,8 @@ function clipit_final_init() {
     // Register & load libs
     elgg_register_library('clipit:functions', elgg_get_plugins_path() . 'clipit_theme/lib/functions.php');
     elgg_load_library('clipit:functions');
-
+    // Register events log
+    set_default_clipit_events();
 
     // Landing modules by role
     /*add_landing_tool_option("student_landing",
@@ -299,3 +300,172 @@ function user_landing_page($page) {
 }
 
 
+
+/**
+ * Register clipit events log
+ */
+function set_default_clipit_events(){
+//    register_clipit_event('group-user', function($relationship, $activity){
+//        $object = array_pop(ClipitGroup::get_by_id(array($relationship->guid_one)));
+//        $params = array(
+//            'icon' => 'user',
+//            'message' => 'Nuevo miembro en',
+//            'item' => array(
+//                'name' => $object->name,
+//                'url' => "clipit_activity/{$activity->id}/group/activity_log",
+//            )
+//        );
+//        return $params;
+//    });
+
+    register_clipit_event('group-user', function($event, $relationship){
+        $params = array(
+            'icon'    => 'user',
+            'message' => 'Se ha unido al grupo',
+        );
+        return $params;
+    });
+    register_clipit_event('group-file', function($event, $relationship){
+        $item = array_pop(ClipitFile::get_by_id(array($relationship->guid_two)));
+        $activity_id = ClipitGroup::get_activity($relationship->guid_one);
+        $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
+        $params = array(
+            'icon' => 'upload',
+            'message' => 'Subió el archivo',
+            'item' => array(
+                'name' => $item->name,
+                'description' => $item->description,
+                //'icon' => "$item->icon",
+                'icon' => "file-o",
+                'url' => "clipit_activity/{$activity->id}/group/files/view/{$item->id}",
+            )
+        );
+        return $params;
+    });
+    register_clipit_event('message-destination', function($event, $relationship){
+
+        $item = array_pop(ClipitPost::get_by_id(array($relationship->guid_one)));
+        $author = array_pop(ClipitUser::get_by_id(array($event->performed_by_guid)));
+        $author_elgg = new ElggUser($event->performed_by_guid);
+        $lookup = ClipitSite::lookup($relationship->guid_two);
+        switch($lookup['subtype']){
+            case 'clipit_group':
+                $activity_id = ClipitGroup::get_activity($relationship->guid_two);
+                $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
+
+                $params = array(
+                    'time'    => $event->time_created,
+                    'icon' => 'comment',
+                    'activity' => $activity,
+                    'message' => 'Abrió el tema',
+                    'author'  => array(
+                        'name'  => $author->name,
+                        'icon'  => $author_elgg->getIconURL('small'),
+                        'url'   => "profile/{$author->login}",
+                    ),
+                    'item' => array(
+                        'name' => $item->name,
+                        'description' => $item->description,
+                        'url'  => "clipit_activity/{$activity->id}/group/discussion/view/{$item->id}",
+                    ),
+                );
+                break;
+            case 'clipit_user':
+                // ClipitUser ClipitChat
+                break;
+        }
+        return $params;
+    });
+//    register_clipit_event('group-file', function($event, $relationship){
+//        $object = array_pop(ClipitGroup::get_by_id(array($relationship->guid_one)));
+//        $item = array_pop(ClipitFile::get_by_id(array($relationship->guid_two)));
+//        $activity_id = ClipitGroup::get_activity($object->id);
+//        $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
+//        $author = array_pop(ClipitUser::get_by_id(array($event->performed_by_guid)));
+//        $author_elgg = new ElggUser($event->performed_by_guid);
+//
+//        $params = array(
+//            'time'    => $event->time_created,
+//            'icon' => 'upload',
+//            'message' => 'File uploaded',
+//            'author' => array(
+//                'name'  => $author->name,
+//                'icon'  => $author_elgg->getIconURL('small'),
+//                'url'   => "profile/{$author->username}",
+//            ),
+//            'activity'  => $activity,
+//            'item' => array(
+//                'name' => $item->name,
+//                'description' => $item->description,
+//                //'icon' => "$item->icon",
+//                'icon' => "file-o",
+//                'url' => "clipit_activity/{$activity->id}/group/files/view/{$item->id}",
+//            )
+//        );
+//        return $params;
+//    });
+//    register_clipit_event('message-destination', function($event, $relationship){
+//        $object = array_pop(ClipitMessage::get_by_id(array($relationship->guid_one)));
+//        $activity_id = ClipitGroup::get_activity($object->id);
+//        $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
+//        $author = array_pop(ClipitUser::get_by_id(array($event->performed_by_guid)));
+//        $author_elgg = new ElggUser($event->performed_by_guid);
+//        $params = array(
+//            'time'    => $event->time_created,
+//            'icon' => 'comment',
+//            'message' => 'Nueva discussión',
+//            'author'  => array(
+//                'name'  => $author->name,
+//                'icon'  => $author_elgg->getIconURL('small'),
+//                'url'   => "profile/{$author->login}",
+//            ),
+//            'item' => array(
+//                'name' => $object->name,
+//                'description' => $object->description,
+//                'url' => "clipit_activity/{$activity->id}/group/discussion/view/{$object->id}",
+//            )
+//        );
+//        return $params;
+//    });
+
+//    register_clipit_event('group-file', function($relationship, $activity){
+//        $object = array_pop(ClipitFile::get_by_id(array($relationship->guid_two)));
+//        $params = array(
+//            'icon' => 'upload',
+//            'message' => 'File uploaded',
+//            'item' => array(
+//                'name' => $object->name,
+//                'description' => $object->description,
+//                'icon' => "ICONO!!",
+//                'url' => "clipit_activity/{$activity->id}/group/files/view/{$object->id}",
+//            )
+//        );
+//        return $params;
+//    });
+//    register_clipit_event('message-destination', function($relationship, $activity){
+//        $object = array_pop(ClipitMessage::get_by_id(array($relationship->guid_one)));
+//        $params = array(
+//            'icon' => 'comment',
+//            'message' => 'Nueva discussión',
+//            'item' => array(
+//                'name' => $object->name,
+//                'description' => $object->description,
+//                'url' => "clipit_activity/{$activity->id}/group/discussion/view/{$object->id}",
+//            )
+//        );
+//        return $params;
+//    });
+//    register_clipit_event('activity-user', function($relationship, $activity){
+//        $object = array_pop(ClipitGroup::get_by_id(array($relationship->guid_one)));
+//        $params = array(
+//            'icon' => 'user',
+//            'message' => 'Nuevo miembro en',
+//            'item' => array(
+//                'name' => $object->name,
+//                'url' => 'clipit_activity/%d/group/activity_log',
+//                'url_data' => array($activity->id)
+//            )
+//        );
+//        return $params;
+//    });
+}

@@ -69,8 +69,8 @@ function activity_setup_sidebar_menus(){
         elgg_register_menu_item('page', $params);
         $params = array(
             'name' => 'activity_sta',
-            'text' => elgg_echo('activity:sta'),
-            'href' => "settings/statistics/",
+            'text' => elgg_echo('activity:stas'),
+            'href' => "clipit_activity/".$activity->id."/stas",
         );
         elgg_register_menu_item('page', $params);
         $params = array(
@@ -113,25 +113,14 @@ function activity_page_handler($page) {
     $base_dir = elgg_get_plugins_path() . 'clipit_activity/pages/activity';
     elgg_load_library('clipit:activities');
 
-    // Group rolling, activity status
-    define("PUBLIC_ACTIVITY", 0);
-    define("GROUP_ROLLING", 1);
-    define("GROUP_ROLLED", 2);
-    define("ACTIVITY_STARTED", 3);
-
     elgg_set_context("activity_page");
     $activities = ClipitActivity::get_by_id(array($page[0]));
     $activity = array_pop($activities);
     $user_id = elgg_get_logged_in_user_guid();
     $isCalled = ClipitActivity::get_called_users($activity->id);
+    $hasGroup = ClipitGroup::get_from_user_activity($user_id, $activity->id);
     // Default status
-    $user_status = PUBLIC_ACTIVITY;
-    if(in_array($user_id, $isCalled)){
-        $user_status = GROUP_ROLLING;
-    }
-    if(ClipitGroup::get_from_user_activity($user_id, $activity->id)){
-        $user_status = GROUP_ROLLED;
-    }
+    $activity_status = array_pop(ClipitActivity::get_status($activity->id));
     // Check if activity exists
     if (!$activity ) {
         return false;
@@ -140,7 +129,6 @@ function activity_page_handler($page) {
 
     // Activity profile
     if(!isset($page[1])){
-//        activity_handle_profile_page($page[0]);
         elgg_push_breadcrumb($activity->name);
         $content = elgg_view('activity/profile/layout', array('entity' => $activity));
         $params = array(
@@ -156,7 +144,6 @@ function activity_page_handler($page) {
             elgg_push_breadcrumb($activity->name, "clipit_activity/".$activity->id);
             switch ($page[1]) {
                 case 'groups':
-
                     $title = elgg_echo("activity:groups");
                     elgg_push_breadcrumb($title);
                     $params = array(
@@ -165,11 +152,10 @@ function activity_page_handler($page) {
                         'title'     => $title,
                         'sub-title' => $activity->name,
                         'title_style' => "background: #". $activity->color,
-                        'class'     => 'activity-section activity-layout'
                     );
                     break;
                 case 'join':
-                    if($user_status == PUBLIC_ACTIVITY){
+                    if($activity_status == 'active' || !$isCalled){
                         return false;
                     }
                     $title = elgg_echo("activity:join");
@@ -180,16 +166,44 @@ function activity_page_handler($page) {
                         'title'     => $title,
                         'sub-title' => $activity->name,
                         'title_style' => "background: #". $activity->color,
-                        'class'     => 'activity-section activity-layout'
                     );
-
+                    break;
+                case 'stas':
+                    $title = elgg_echo("activity:stas");
+                    elgg_push_breadcrumb($title);
+                    $selected_tab = get_input('filter', 'files');
+                    switch ($selected_tab) {
+                        case 'files':
+                            $content = elgg_view('stas/files', array('entity' => $activity));
+                            if (!$content) {
+                                $content = elgg_echo('groups:none');
+                            }
+                            break;
+                        case 'videos':
+                            $content = elgg_view('stas/videos', array('entity' => $activity));
+                            if (!$content) {
+                                $content = elgg_echo('discussion:none');
+                            }
+                            break;
+                        case 'links':
+                        default:
+                            $content = elgg_view('stas/links', array('entity' => $activity));
+                            if (!$content) {
+                                $content = elgg_echo('groups:none');
+                            }
+                            break;
+                    }
+                    $filter = elgg_view('stas/sta_types_menu', array('selected' => $selected_tab, 'entity' => $activity));
+                    $params = array(
+                        'content'   => $content,
+                        'filter'    => $filter,
+                        'title'     => $title,
+                        'sub-title' => $activity->name,
+                        'title_style' => "background: #". $activity->color,
+                    );
                     break;
                 case 'group':
-                    if($user_status != GROUP_ROLLED){
-                        return false;
-                    }
                     $params = group_tools_page_handler($page, $activity);
-
                     break;
                 default:
                     return false;
@@ -201,11 +215,11 @@ function activity_page_handler($page) {
     }
     $group_tools_sidebar = "";
     // Group sidebar components (group block info + group tools)
-    if($user_status == GROUP_ROLLED){
+    if($hasGroup){
         elgg_extend_view("page/elements/owner_block", "page/elements/group_block");
         $group_tools_sidebar = elgg_view('group/sidebar/group_tools', array('entity' => $activity));
     }
-    if($user_status == GROUP_ROLLING) {
+    if(!$hasGroup && $isCalled && $activity_status == 'enroll') {
         // Join to activity button
         elgg_extend_view("page/elements/owner_block", "page/components/button_join_activity");
     }
@@ -213,7 +227,9 @@ function activity_page_handler($page) {
     $teacher_sidebar = elgg_view('activity/sidebar/teacher', array('entity' => $activity));
 
     $params['sidebar'] = $teacher_sidebar . $group_tools_sidebar;
-
+    if(!$params['class']){
+        $params['class'] = "activity-section activity-layout";
+    }
     $body = elgg_view_layout('one_sidebar', $params);
     echo elgg_view_page($params['title'], $body);
 
@@ -232,21 +248,24 @@ function group_tools_page_handler($page, $activity){
     $user_id = elgg_get_logged_in_user_guid();
     $group_id = ClipitGroup::get_from_user_activity($user_id, $activity->id);
     $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
-
+    if(!$group){
+        return false;
+    }
     elgg_push_breadcrumb($group->name);
-    $group_status = "";
-    $group_name = '<i class="fa fa-lock"></i> '.$group->name;
+    // set group icon status from activity status
+    $activity_status = array_pop(ClipitActivity::get_status($activity->id));
+    $icon_status = "lock";
+    if($activity_status == 'enroll'){
+        $icon_status = "unlock";
+    }
+    $group_name = '<i class="fa fa-'.$icon_status.'"></i> '.$group->name;
+
     switch ($page[2]) {
         case 'edit':
             $title = elgg_echo("group:edit");
             elgg_push_breadcrumb($title);
             $params = array(
                 'content'   => elgg_view('group/edit', array('entity' => $activity)),
-                'filter'    => '',
-                'title'     => $title,
-                'sub-title' => $group_name,
-                'title_style' => "background: #". $activity->color,
-                'class'     => 'activity-section activity-layout'
             );
             break;
         case 'members':
@@ -254,11 +273,6 @@ function group_tools_page_handler($page, $activity){
             elgg_push_breadcrumb($title);
             $params = array(
                 'content'   => elgg_view('group/members', array('entity' => $group)),
-                'filter'    => '',
-                'title'     => $title,
-                'sub-title' => $group_name,
-                'title_style' => "background: #". $activity->color,
-                'class'     => 'activity-section activity-layout'
             );
             break;
         case 'activity_log':
@@ -266,11 +280,6 @@ function group_tools_page_handler($page, $activity){
             elgg_push_breadcrumb($title);
             $params = array(
                 'content'   => elgg_view('group/activity_log', array('entity' => $group)),
-                'filter'    => '',
-                'title'     => $title,
-                'sub-title' => $group_name,
-                'title_style' => "background: #". $activity->color,
-                'class'     => 'activity-section activity-layout'
             );
             break;
         case 'files':
@@ -278,11 +287,6 @@ function group_tools_page_handler($page, $activity){
             elgg_push_breadcrumb($title);
             $params = array(
                 'content'   => elgg_view('group/files/list', array('entity' => $group)),
-                'filter'    => '',
-                'title'     => $title,
-                'sub-title' => $group_name,
-                'title_style' => "background: #". $activity->color,
-                'class'     => 'activity-section activity-layout'
             );
             if($page[3] == 'view' && $page[4]){
                 $file_id = (int)$page[4];
@@ -294,11 +298,6 @@ function group_tools_page_handler($page, $activity){
                 if($file && in_array($file_id, $group_files)){
                     $params = array(
                         'content'   => elgg_view('group/files/view', array('entity' => $file)),
-                        'filter'    => '',
-                        'title'     => $title,
-                        'sub-title' => $group_name,
-                        'title_style' => "background: #". $activity->color,
-                        'class'     => 'activity-section activity-layout'
                     );
                 } else {
                     return false;
@@ -310,11 +309,6 @@ function group_tools_page_handler($page, $activity){
             elgg_push_breadcrumb($title);
             $params = array(
                 'content'   => elgg_view('group/discussion/list', array('entity' => $group)),
-                'filter'    => '',
-                'title'     => $title,
-                'sub-title' => $group_name,
-                'title_style' => "background: #". $activity->color,
-                'class'     => 'activity-section activity-layout'
             );
             if($page[3] == 'view' && $page[4]){
                 $message_id = (int)$page[4];
@@ -325,11 +319,6 @@ function group_tools_page_handler($page, $activity){
                 if($message && $message->destination == $group->id){
                     $params = array(
                         'content'   => elgg_view('group/discussion/view', array('entity' => $message)),
-                        'filter'    => '',
-                        'title'     => $title,
-                        'sub-title' => $group_name,
-                        'title_style' => "background: #". $activity->color,
-                        'class'     => 'activity-section activity-layout'
                     );
                 } else {
                     return false;
@@ -339,6 +328,18 @@ function group_tools_page_handler($page, $activity){
         default:
             return false;
     }
+    // Default group params
+    $params['filter'] = "";
+    $params['title'] = $title;
+    $params['sub-title'] = $group_name;
+    $params['title_style'] = "background: #". $activity->color;
+
+    if($activity_status == 'enroll'){
+        $params['special_header_content'] = elgg_view_form("group/leave",
+            array('class' => 'pull-right'),
+            array('entity' => $group, 'text' => elgg_echo("group:leave:me")));
+    }
+
     return $params;
 }
 
@@ -356,7 +357,6 @@ function my_activities_page_handler($page) {
         $_SESSION['last_forward_from'] = current_page_url();
         forward('');
     }
-    elgg_push_breadcrumb(elgg_echo('activity'), 'my_activities/');
 
     $base_dir = elgg_get_plugins_path() . 'clipit_activity/pages/activity';
     $vars = array();

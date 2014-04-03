@@ -8,6 +8,7 @@
  */
 $group =  elgg_extract('entity', $vars);
 $users_id = ClipitGroup::get_users($group->id);
+$activity_status = array_pop(ClipitActivity::get_status(elgg_get_page_owner_guid()));
 ?>
 <?php if(count($users_id) > 0): ?>
    <div class="row">
@@ -38,7 +39,15 @@ foreach($users_id as $user_id):
         ?>
             <div class="text-truncate">
 
-            <?php echo elgg_view_form("group/remove_member" , array('class' => 'pull-right'), array('entity' => $user, 'group' => $group)); ?>
+            <?php
+            /**
+             * STATUS: enroll
+             * member users can remove members from group
+             */
+            if($activity_status == 'enroll'){
+                echo elgg_view_form("group/remove_member" , array('class' => 'pull-right'), array('entity' => $user, 'group' => $group));
+            }
+            ?>
 
             <?php echo elgg_view('output/url', array(
                 'href'  => "profile/".$user->login,

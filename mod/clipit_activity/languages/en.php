@@ -8,15 +8,17 @@
  */
 $english = array(
     // Activity
+    'my_activities' => 'My activities',
     'activity:profile' => 'Activity',
     'activity:groups' => 'Groups',
-    'activity:sta' => 'STA\'s',
+    'activity:stas' => 'STA\'s',
     'activity:publications' => 'Publications',
     'activity:join' => 'Join to activity',
     'activity:next_deadline' => 'Next deadline',
 
     'group:join' => 'Join',
     'group:leave' => 'Leave',
+    'group:leave:me' => 'Leave group',
     'group:join_to' => 'Join to group',
     'group:cantcreate' => 'You can not create a group.',
     'group:created' => 'Group created',
@@ -41,7 +43,10 @@ $english = array(
     'discussion:edit' => 'Edit topic',
     'discussion:title_topic' => 'Topic title',
     'discussion:text_topic' => 'Topic text',
-
+    // STA
+    'sta:files' => 'Files',
+    'sta:videos' => 'Videos',
+    'sta:links' => 'Interesting links',
 );
 
 add_translation('en', $english);

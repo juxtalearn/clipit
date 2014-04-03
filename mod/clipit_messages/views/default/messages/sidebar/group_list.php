@@ -26,7 +26,7 @@ $user_groups = ClipitUser::get_groups($user_loggedin);
 
 if(!empty($user_groups)):
 ?>
-<h3><?php echo elgg_echo('activity:groups'); ?></h3>
+<h3><?php echo elgg_echo('messages:contactmembersgroup'); ?></h3>
 <div class="group-members" id="accordion">
 <!-- User group list -->
 <?php

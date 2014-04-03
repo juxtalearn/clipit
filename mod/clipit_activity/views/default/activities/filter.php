@@ -2,8 +2,8 @@
 /**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
- * Creation date:   13/03/14
- * Last update:     13/03/14
+ * Creation date:   24/03/14
+ * Last update:     24/03/14
  *
  * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, JuxtaLearn Project
  * @version         $Version$
@@ -21,15 +21,34 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-//$user_id = elgg_get_logged_in_user_guid();
-//$unread_count = ClipitMessage::get_unread_count($user_id);
-//?>
-<!--<a id="messages" role="button" data-toggle="dropdown" href="javascript:;">-->
-<!--    --><?php //if($unread_count > 0): ?>
-<!--    <span class="badge">--><?php //echo $unread_count; ?><!--</span>-->
-<!--    --><?php //endif; ?>
-<!--    <i class="fa fa-envelope"></i>-->
-<!--</a>-->
-<!--<ul id="menu_messages" class="dropdown-menu" role="menu" aria-labelledby="messages">-->
-<!--    --><?php //echo elgg_view('object/elements/message_summary'); ?>
-<!--</ul>-->
+$activity = elgg_extract('entity', $vars);
+
+$tabs = array(
+    'all' => array(
+        'text' => elgg_echo('all'),
+        'href' => "my_activities",
+        'priority' => 200,
+    ),
+    'active' => array(
+        'text' => elgg_echo('active'),
+        'href' => "my_activities?filter=active",
+        'priority' => 300,
+    ),
+    'past' => array(
+        'text' => elgg_echo('past'),
+        'href' => "my_activities?filter=past",
+        'priority' => 400,
+    ),
+);
+
+foreach ($tabs as $name => $tab) {
+    $tab['name'] = $name;
+
+    if ($vars['selected'] == $name) {
+        $tab['selected'] = true;
+    }
+
+    elgg_register_menu_item('filter', $tab);
+}
+
+echo elgg_view_menu('filter', array('sort_by' => 'priority', 'class' => 'menu-activity-section nav nav-tabs'));
