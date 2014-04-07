@@ -115,16 +115,16 @@ class ClipitQuizResult extends UBItem{
                 )
             );
             if(!$elgg_object_array){
-                $quiz_result_array[] = null;
+                $quiz_result_array[$quiz_question_id] = null;
             } else{
                 $temp_array = array();
                 foreach($elgg_object_array as $elgg_object){
                     $temp_array[] = new ClipitQuizResult((int)$elgg_object->guid);
                 }
                 if(empty($temp_array)){
-                    $quiz_result_array[] = null;
+                    $quiz_result_array[$quiz_question_id] = null;
                 } else{
-                    $quiz_result_array[] = $temp_array;
+                    $quiz_result_array[$quiz_question_id] = $temp_array;
                 }
             }
         }

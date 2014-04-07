@@ -97,7 +97,9 @@ class UBMessage extends UBItem{
             } else{
                 $message_array[$destination_id] = $temp_array;
             }
+            usort($message_array[$destination_id], 'UBItem::sort_by_date');
         }
+
         return $message_array;
     }
 
@@ -138,8 +140,7 @@ class UBMessage extends UBItem{
 
     static function get_read_status($id, $user_array = null){
         $called_class = get_called_class();
-        $prop_array[] = "read_array";
-        $read_array = $called_class::get_properties($id, $prop_array);
+        $read_array = $called_class::get_properties($id, array("read_array"));
         $read_array = array_pop($read_array);
         if(!$user_array){
             return $read_array;
@@ -158,8 +159,7 @@ class UBMessage extends UBItem{
 
     static function set_read_status($id, $read_value, $user_array){
         $called_class = get_called_class();
-        $prop_array[] = "read_array";
-        $read_array = $called_class::get_properties($id, $prop_array);
+        $read_array = $called_class::get_properties($id, array("read_array"));
         $read_array = array_pop($read_array);
         foreach($user_array as $user_id){
             if($read_value == true){
