@@ -22,24 +22,20 @@
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
 $title = elgg_echo("message");
-$message = array_pop(ClipitMessage::get_by_id(array((int)$page[1])));
-$breadcrumb_title = $message->name;
-// if subject is empty, set description in breadcrumb
-if(trim($breadcrumb_title) == ""){
-    $breadcrumb_title = $message->description;
-    if(mb_strlen($breadcrumb_title)>40){
-        $breadcrumb_title = substr($breadcrumb_title, 0, 40)."...";
-    }
+$user_id = elgg_get_logged_in_user_guid();
+$user_sender = array_pop(ClipitUser::get_by_login(array($page[1])));
+if($user_sender){
+    $message = ClipitChat::get_conversation($user_sender->id, $user_id);
 }
-elgg_push_breadcrumb($breadcrumb_title);
-
-if(!isset($page[1]) || empty($message)
-    || ($message->destination != $user_id && $message->owner_id != $user_id )){
-    register_error(elgg_echo('message:notfound'));
-    forward();
-}
+$breadcrumb_title = $user_sender->name;
+elgg_push_breadcrumb($user_sender->name);
+//if(!isset($page[1]) || empty($message)
+//    || ($message->destination != $user_id && $message->owner_id != $user_id )){
+//    register_error(elgg_echo('message:notfound'));
+//    forward();
+//}
 $params = array(
-    'content'   => elgg_view("messages/view", array('entity' => $message)),
+    'content'   => elgg_view("messages/view", array('entity' => $message, 'sender' => $user_sender)),
     'filter'    => '',
     'title'     => $title,
     'sidebar'   => elgg_view('messages/sidebar/group_list')

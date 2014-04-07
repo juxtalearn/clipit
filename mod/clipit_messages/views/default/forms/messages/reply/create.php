@@ -21,21 +21,16 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-$message = elgg_extract('entity', $vars);
-$category = elgg_extract('category', $vars);
+$user = elgg_extract('entity', $vars);
 
 echo elgg_view("input/hidden", array(
-    'name' => 'message-id',
-    'value' => $message->id,
-));
-echo elgg_view("input/hidden", array(
-    'name' => 'message-category',
-    'value' => $category,
+    'name' => 'user-id',
+    'value' => $user->id,
 ));
 echo elgg_view("input/plaintext", array(
     'name' => 'message-reply',
     'class' => 'form-control wysihtml5',
-    'rows'  => 6,
+    'rows'  => 5,
     'style' => "width: 100%;"
 ));
 echo elgg_view('input/submit', array(

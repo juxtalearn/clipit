@@ -2,8 +2,8 @@
 /**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
- * Creation date:   13/03/14
- * Last update:     13/03/14
+ * Creation date:   3/04/14
+ * Last update:     3/04/14
  *
  * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, JuxtaLearn Project
  * @version         $Version$
@@ -22,14 +22,20 @@
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
 $user_id = elgg_get_logged_in_user_guid();
-//$unread_count = ClipitMessage::get_unread_count($user_id);
-?>
-<a id="messages" role="button" data-toggle="dropdown" href="javascript:;">
-    <?php if($unread_count > 0): ?>
-    <span class="badge"><?php echo $unread_count; ?></span>
-    <?php endif; ?>
-    <i class="fa fa-envelope"></i>
-</a>
-<ul id="menu_messages" class="dropdown-menu" role="menu" aria-labelledby="messages">
-    <?php echo elgg_view('object/elements/message_summary'); ?>
-</ul>
+$discussion_id = get_input('message-id');
+$discussion = array_pop(ClipitPost::get_by_id(array($discussion_id)));
+
+$discussion_title = get_input('discussion-title');
+$discussion_text = get_input('discussion-text');
+
+if(!isset($discussion) || $discussion->owner_id != $user_id || trim($discussion_text) == ""){
+    register_error(elgg_echo("reply:cantedit"));
+} else{
+    ClipitPost::set_properties($discussion->id, array(
+        'description' => $discussion_text
+    ));
+    system_message(elgg_echo('reply:edited'));
+}
+
+
+forward(REFERER);

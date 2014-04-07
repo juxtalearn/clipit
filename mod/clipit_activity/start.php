@@ -49,6 +49,10 @@ function clipit_activity_init() {
     elgg_register_action("group/discussion/remove", elgg_get_plugins_path() . "clipit_activity/actions/group/discussion/remove.php");
     elgg_register_action("group/discussion/edit", elgg_get_plugins_path() . "clipit_activity/actions/group/discussion/edit.php");
     elgg_register_ajax_view('modal/discussion/edit');
+    elgg_register_action("group/discussion/reply/create", elgg_get_plugins_path() . "clipit_activity/actions/group/discussion/reply/create.php");
+    elgg_register_action("group/discussion/reply/remove", elgg_get_plugins_path() . "clipit_activity/actions/group/discussion/reply/remove.php");
+    elgg_register_action("group/discussion/reply/edit", elgg_get_plugins_path() . "clipit_activity/actions/group/discussion/reply/edit.php");
+    elgg_register_ajax_view('modal/group/discussion/reply/edit');
 }
 function activity_setup_sidebar_menus(){
     $activity_id =  elgg_get_page_owner_guid();
@@ -312,7 +316,7 @@ function group_tools_page_handler($page, $activity){
             );
             if($page[3] == 'view' && $page[4]){
                 $message_id = (int)$page[4];
-                $message = array_pop(ClipitMessage::get_by_id(array($message_id)));
+                $message = array_pop(ClipitPost::get_by_id(array($message_id)));
                 elgg_pop_breadcrumb($title);
                 elgg_push_breadcrumb($title, "clipit_activity/{$activity->id}/group/discussion");
                 elgg_push_breadcrumb($message->name);

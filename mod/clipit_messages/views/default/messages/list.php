@@ -52,7 +52,7 @@ $(function(){
     });
 });
 </script>
-<div style="margin-bottom: 30px;color: #999;margin-left: 15px;">
+<div style="margin-bottom: 30px;color #999;margin-left: 15px;">
 
     <div class="checkbox" style=" display: inline-block;margin: 0;">
         <label>
@@ -94,58 +94,37 @@ $(function(){
 <table class="messages-table table table-advance table-hover">
     <?php
     foreach($messages_array as $message):
-
-        $isRemoved = array_pop(ClipitMessage::get_archived_status($message->id, array($user_id)));
+        $message = array_pop($message);
+        $isRemoved = array_pop(ClipitChat::get_archived_status($message->id, array($user_id)));
         if($vars['trash']){
             $isRemoved = false;
         }
         if(!$isRemoved):
 
         // Get replies
-        $replies = ClipitMessage::get_replies($message->id);
-        $message_text = trim(elgg_strip_tags($message->description));
-        // Message text truncate max length 280
-        if(mb_strlen($message_text)>35){
-            $message_text = substr($message_text, 0, 35)."...";
-        }
-        // No read messages
-        $message_unread = false;
-        $main_read_status = array_pop(ClipitMessage::get_read_status($message->id, array($user_id)));
-        if(empty($main_read_status) && $message->destination == $user_id){
-            $message_unread = "unread";
-        }
-
-        $new_replies = false;
-        $total_count = 0;
-        foreach($replies as $reply_id){
-            $reply_reads = array_pop(ClipitMessage::get_read_status($reply_id, array($user_id)));
-            $reply = array_pop(ClipitMessage::get_by_id(array($reply_id)));
-            if(empty($reply_reads) && $reply->owner_id != $user_id){
-                $total_count++;
-                $message_unread = "unread";
-            }
-        }
-
-        if(count($total_count) > 0){
-            $new_replies = $total_count;
+        $last_message = reset(ClipitChat::get_conversation($message->owner_id, $user_id));
+        $message_text = trim(elgg_strip_tags($last_message->description));
+        // Message text truncate max length 40
+        if(mb_strlen($message_text)>50){
+            $message_text = substr($message_text, 0, 50)."...";
         }
 
         $user_from = array_pop(ClipitUser::get_by_id(array($message->owner_id)));
         $user_from_elgg = new ElggUser($message->owner_id);
-        $text_from = elgg_echo("message:from");
+        $text_from = "";
         $text_user_from = $user_from->name;
         if($user_from->id == $user_id){
             $text_user_from = elgg_echo("me");
         }
         if($vars['sent']){
             // $user_from = array_pop(ClipitUser::get_by_id(array($message->destination)));
-            //print_r(ClipitMessage::get_by_id(array($message->destination)));
+            //print_r(ClipitChat::get_by_id(array($message->destination)));
             $user_from = array_pop(ClipitUser::get_by_id(array($message->owner_id)));
-            $text_from = elgg_echo("message:to");
+            $text_from = elgg_echo("message:to").":";
             $text_user_from = $user_from->name;
         }
         $total_replies = count($replies);
-        $message_url = elgg_get_site_url()."messages/view/$message->id";
+        $message_url = elgg_get_site_url()."messages/view/$user_from->login";
     ?>
     <tr class="<?php echo $message_unread; ?>">
         <?php if(!$vars['sent']): ?>
@@ -157,7 +136,7 @@ $(function(){
             <img src="<?php echo $user_from_elgg->getIconURL("tiny"); ?>">
         </td>
         <td class="user-owner">
-            <?php echo $text_from; ?>:
+            <?php echo $text_from; ?>
             <?php echo elgg_view('output/url', array(
                 'href'  => "profile/".$user_from->login,
                 'title' => $user_from->name,
@@ -167,7 +146,7 @@ $(function(){
             if($total_replies > 0):
                 // Get last post data
                 $last_post_id = end($replies);
-                $last_post = array_pop(ClipitMessage::get_by_id(array($last_post_id)));
+                $last_post = array_pop(ClipitChat::get_by_id(array($last_post_id)));
                 $author_last_post = array_pop(ClipitUser::get_by_id(array($last_post->owner_id)));
             ?>
             <a href="<?php echo $message_url."#reply_".$last_post->id; ?>">
@@ -196,9 +175,6 @@ $(function(){
         </td>
         <td class="click-simulate" onclick="document.location.href = '<?php echo $message_url; ?>';">
             <?php echo $message_text; ?>
-        </td>
-        <td class="click-simulate" onclick="document.location.href = '<?php echo $message_url; ?>';">
-            <i class="fa fa-paperclip icon" title="<?php echo elgg_echo("file:contains"); ?>"></i>
         </td>
         <td>
         <?php if($vars['inbox']): ?>

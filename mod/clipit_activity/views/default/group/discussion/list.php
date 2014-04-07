@@ -9,7 +9,7 @@
 $group = elgg_extract("entity", $vars);
 $activity_id = elgg_get_page_owner_guid();
 // Get all messages by group id
-$group_messages = array_pop(ClipitMessage::get_by_destination(array($group->id)));
+$group_messages = array_pop(ClipitPost::get_by_destination(array($group->id)));
 ?>
 <div style="margin-bottom: 15px;">
     <?php echo elgg_view_form('group/discussion/create', array('data-validate'=> "true" ), array('entity'  => $group)); ?>
@@ -22,7 +22,7 @@ foreach($group_messages as $message):
     if(mb_strlen($message_text)>280){
         $message_text = substr($message_text, 0, 280)."...";
     }
-    $total_replies = count(ClipitMessage::get_replies($message->id));
+    $total_replies = ClipitPost::get_count_by_destination(array($message->id));
     // Get owner user object
     $owner = array_pop(ClipitUser::get_by_id(array($message->owner_id)));
     // Owner options (edit/delete)
@@ -42,6 +42,7 @@ foreach($group_messages as $message):
         // Remote modal, form content
         echo elgg_view("page/components/modal_remote", array('id'=> "edit-discussion-{$message->id}" ));
     }
+
 ?>
 <div class="row row-table messages-discussion">
     <div class="col-md-9">

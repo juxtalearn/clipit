@@ -48,20 +48,13 @@ $body .='<div class="form-group">
     </div>
 </div>
 <div class="form-group">
-    <label for="discussion-title">'.elgg_echo("messages:subject").' <small>(Optional)</small></label>
-    '.elgg_view("input/text", array(
-        'name' => 'message-subject',
-        'class' => 'form-control'
-    )).'
-</div>
-<div class="form-group">
     <label for="discussion-text">'.elgg_echo("message").'</label>
     '.elgg_view("input/plaintext", array(
         'name' => 'message-text',
         'class' => 'form-control wysihtml5',
         'id'    => $textarea_id,
         'required' => true,
-        'rows'  => 6,
+        'rows'  => 5,
     )).'
 </div>';
 echo elgg_view("page/components/modal",

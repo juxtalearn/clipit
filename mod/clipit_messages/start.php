@@ -109,10 +109,10 @@ function messages_setup_sidebar_menus(){
             'text' => elgg_echo('messages:inbox'),
             'href' => "messages/inbox",
         );
-        $unread_count = ClipitMessage::get_unread_count($user_id);
-        if($unread_count > 0){
-            $params['badge'] = $unread_count;
-        }
+//        $unread_count = ClipitChat::get_unread_count($user_id);
+//        if($unread_count > 0){
+//            $params['badge'] = $unread_count;
+//        }
         elgg_register_menu_item('page', $params);
         $params = array(
             'name' => 'sent_email',

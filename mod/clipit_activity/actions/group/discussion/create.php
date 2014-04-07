@@ -17,11 +17,10 @@ $discussion_text = get_input('discussion-text');
 if(count($group)==0 || !in_array($group->id, $user_groups) || trim($discussion_title) == "" || trim($discussion_text) == ""){
     register_error(elgg_echo("discussion:cantcreate"));
 } else{
-    ClipitMessage::create(array(
+    ClipitPost::create(array(
         'name' => $discussion_title,
         'description' => $discussion_text,
         'destination' => $group->id,
-        'category'  => 'discussion'
     ));
     system_message(elgg_echo('discussion:created'));
 }

@@ -32,7 +32,7 @@ foreach($to_array as $to_id){
     if(!$user  || trim($message_text) == ""){
         register_error(elgg_echo("message:cantcreate"));
     } else {
-        ClipitMessage::create(array(
+        ClipitChat::create(array(
             'name' => $message_subject,
             'description' => $message_text,
             'destination' => $user->id,
