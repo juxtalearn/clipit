@@ -73,9 +73,9 @@ abstract class UBCollection{
         foreach($rel_array as $rel){
             if($rel->relationship == $rel_name){
                 if($inverse){
-                    $item_array[] = (int)$rel->guid_one;
+                    $item_array[$rel->id] = (int)$rel->guid_one;
                 } else{
-                    $item_array[] = (int)$rel->guid_two;
+                    $item_array[$rel->id] = (int)$rel->guid_two;
                 }
             }
         }

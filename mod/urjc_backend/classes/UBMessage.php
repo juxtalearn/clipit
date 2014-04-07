@@ -30,14 +30,12 @@ class UBMessage extends UBItem{
     const REL_MESSAGE_FILE = "message-file";
 
     public $read_array = array();
-    public $archived_array = array();
     public $destination = -1;
     public $file_array = array();
 
     protected function _load($elgg_object){
         parent::_load($elgg_object);
         $this->read_array = (array)$elgg_object->read_array;
-        $this->archived_array = (array)$elgg_object->archived_array;
         $this->destination = static::get_destination($this->id);
         $this->file_array = static::get_files($this->id);
     }
@@ -57,7 +55,6 @@ class UBMessage extends UBItem{
         $elgg_object->name = (string)$this->name;
         $elgg_object->description = (string)$this->description;
         $elgg_object->read_array = (array)$this->read_array;
-        $elgg_object->archived_array = (array)$this->archived_array;
         $elgg_object->access_id = ACCESS_PUBLIC;
         $elgg_object->save();
         $this->id = (int)$elgg_object->guid;
@@ -124,6 +121,12 @@ class UBMessage extends UBItem{
         return -1;
     }
 
+    static function get_sender($id){
+        $called_class = get_called_class();
+        $message = new $called_class($id);
+        return $message->owner_id;
+    }
+
     static function get_files($id){
         return UBCollection::get_items($id, static::REL_MESSAGE_FILE);
     }
@@ -171,47 +174,6 @@ class UBMessage extends UBItem{
             }
         }
         $prop_value_array["read_array"] = $read_array;
-        return $called_class::set_properties($id, $prop_value_array);
-    }
-
-    static function get_archived_status($id, $user_array = null){
-        $called_class = get_called_class();
-        $prop_array[] = "archived_array";
-        $archived_array = $called_class::get_properties($id, $prop_array);
-        $archived_array = array_pop($archived_array);
-        if(!$user_array){
-            return $archived_array;
-        } else{
-            $return_array = array();
-            foreach($user_array as $user_id){
-                if(in_array($user_id, $archived_array)){
-                    $return_array[$user_id] = true;
-                } else{
-                    $return_array[$user_id] = false;
-                }
-            }
-            return $return_array;
-        }
-    }
-
-    static function set_archived_status($id, $archived_value, $user_array){
-        $called_class = get_called_class();
-        $prop_array[] = "archived_array";
-        $archived_array = $called_class::get_properties($id, $prop_array);
-        $archived_array = array_pop($archived_array);
-        foreach($user_array as $user_id){
-            if($archived_value == true){
-                if(!in_array($user_id, $archived_array)){
-                    array_push($archived_array, $user_id);
-                }
-            } else if($archived_value == false){
-                $index = array_search((int) $user_id, $archived_array);
-                if(isset($index) && $index !== false){
-                    array_splice($archived_array, $index, 1);
-                }
-            }
-        }
-        $prop_value_array["archived_array"] = $archived_array;
         return $called_class::set_properties($id, $prop_value_array);
     }
 

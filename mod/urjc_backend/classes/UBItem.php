@@ -337,12 +337,13 @@ class UBItem{
         );
         $search_result = array();
         foreach($elgg_object_array as $elgg_object){
-            if(strpos($elgg_object->name, $search_string) !== false){
+            $search_string = strtolower($search_string);
+            if(strpos(strtolower($elgg_object->name), $search_string) !== false){
                 $search_result[(int)$elgg_object->guid] = new $called_class((int)$elgg_object->guid);
                 continue;
             }
             if($name_only === false){
-                if(strpos($elgg_object->description, $search_string) !== false){
+                if(strpos(strtolower($elgg_object->description), $search_string) !== false){
                     $search_result[(int)$elgg_object->guid] = new $called_class((int)$elgg_object->guid);
                 }
             }
