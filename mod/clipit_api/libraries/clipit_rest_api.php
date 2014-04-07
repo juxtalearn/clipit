@@ -99,12 +99,15 @@ function expose_common_functions($api_suffix, $class_suffix){
         "Get object-type associated events.",
         "GET", false, true);
     expose_function(
-        $api_suffix . "get_from_owner",
-        $class_suffix . "get_from_owner",
+        $api_suffix . "get_by_owner",
+        $class_suffix . "get_by_owner",
         array(
-            "owner_id" => array(
+            "owner_array" => array(
+                "type" => "array",
+                "required" => true),
+            "limit" => array(
                 "type" => "int",
-                "required" => true)),
+                "required" => false)),
         "Get instances from an Owner",
         'GET', false, true);
     expose_function(
@@ -129,7 +132,7 @@ function expose_common_message_functions($api_suffix, $class_suffix){
             "id" => array(
                 "type" => "int",
                 "required" => true)),
-        "Get Destination Id of a Post/Message",
+        "Get Destination Id of a Message",
         'GET', false, true);
     expose_function(
         $api_suffix . "set_destination",
@@ -141,29 +144,17 @@ function expose_common_message_functions($api_suffix, $class_suffix){
             "destination_id" => array(
                 "type" => "int",
                 "required" => true)),
-        "Set the Destination Id of a Post/Message",
+        "Set the Destination Id of a Message",
         'POST', false, true);
     expose_function(
-        $api_suffix . "get_parent",
-        $class_suffix . "get_parent",
+        $api_suffix . "get_sender",
+        $class_suffix . "get_sender",
         array(
             "id" => array(
                 "type" => "int",
                 "required" => true)),
-        "Get Parent Id of a Post/Message",
+        "Get Sender Id of a Message",
         'GET', false, true);
-    expose_function(
-        $api_suffix . "set_parent",
-        $class_suffix . "set_parent",
-        array(
-            "id" => array(
-                "type" => "int",
-                "required" => true),
-            "parent_id" => array(
-                "type" => "int",
-                "required" => true)),
-        "Set the Parent Id of a Post/Message",
-        'POST', false, true);
     expose_function(
         $api_suffix . "get_by_sender",
         $class_suffix . "get_by_sender",
@@ -183,20 +174,8 @@ function expose_common_message_functions($api_suffix, $class_suffix){
             "recursive" => array(
                 "type" => "bool",
                 "required" => false)),
-        "Get Post/Message by Destination",
+        "Get Message by Destination",
         'GET', false, true);
-    expose_function(
-        $api_suffix . "get_by_parent",
-        $class_suffix . "get_by_parent",
-        array(
-            "parent_array" => array(
-                "type" => "array",
-                "required" => true),
-            "recursive" => array(
-                "type" => "bool",
-                "required" => false)),
-        "Get Replies for a Post/Message",
-        "GET", false, true);
     expose_function(
         $api_suffix . "get_read_status",
         $class_suffix . "get_read_status",
@@ -207,7 +186,7 @@ function expose_common_message_functions($api_suffix, $class_suffix){
             "user_array" => array(
                 "type" => "array",
                 "required" => false)),
-        "Get Post/Message read status. If user_array is specified, get read status by user.
+        "Get Message read status. If user_array is specified, get read status by user.
         Else, return the list of users who have read the Post/Message.",
         'GET', false, true);
     expose_function(
@@ -223,48 +202,8 @@ function expose_common_message_functions($api_suffix, $class_suffix){
             "user_array" => array(
                 "type" => "array",
                 "required" => true)),
-        "Set Post/Message read status per user.",
+        "Set Message read status per user.",
         'POST', false, true);
-    expose_function(
-        $api_suffix . "get_archived_status",
-        $class_suffix . "get_archived_status",
-        array(
-            "id" => array(
-                "type" => "int",
-                "required" => true),
-            "user_array" => array(
-                "type" => "array",
-                "required" => false)),
-        "Get Post/Message archived status. If user_array is specified, get archived status by user.
-        Else, return the list of users who have archived the Post/Message.",
-        'GET', false, true);
-    expose_function(
-        $api_suffix . "set_archived_status",
-        $class_suffix . "set_archived_status",
-        array(
-            "id" => array(
-                "type" => "int",
-                "required" => true),
-            "archived_value" => array(
-                "type" => "bool",
-                "required" => true),
-            "user_array" => array(
-                "type" => "array",
-                "required" => true)),
-        "Set Post/Message archived status per user.",
-        'POST', false, true);
-    expose_function( // Overwritten in expose_post_functions()
-        $api_suffix . "get_count_by_destination",
-        $class_suffix . "get_count_by_destination",
-        array(
-            "destination_array" => array(
-                "type" => "array",
-                "required" => true),
-            "user_id" => array(
-                "type" => "int",
-                "required" => false)),
-        "Get the number of Messages by destination. If User id set, returns number of unread Messages.",
-        "GET", false, true);
 }
 
 function expose_activity_functions(){
@@ -423,53 +362,60 @@ function expose_chat_functions(){
     expose_common_functions($api_suffix, $class_suffix);
     expose_common_message_functions($api_suffix, $class_suffix);
     expose_function(
+        $api_suffix . "get_inbox",
+        $class_suffix . "get_inbox",
+        array(
+            "user_id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Returns Inbox messages for a given User, grouped by Sender",
+        "GET", false, true);
+    expose_function(
         $api_suffix . "get_conversation",
         $class_suffix . "get_conversation",
         array(
-            "sender_id" => array(
+            "user1_id" => array(
                 "type" => "int",
                 "required" => true),
-            "destination_id" => array(
+            "user2_id" => array(
                 "type" => "int",
                 "required" => true)),
-        "Returns all messages interchanged between two points (sender-destination)",
+        "Returns all Chat messages interchanged between two users",
         "GET", false, true);
+    expose_function(
+        $api_suffix . "get_archived_status",
+        $class_suffix . "get_archived_status",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "user_array" => array(
+                "type" => "array",
+                "required" => false)),
+        "Get Chat message archived status. If user_array is specified, get archived status by user.
+        Else, return the list of users who have archived the Post/Message.",
+        'GET', false, true);
+    expose_function(
+        $api_suffix . "set_archived_status",
+        $class_suffix . "set_archived_status",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "archived_value" => array(
+                "type" => "bool",
+                "required" => true),
+            "user_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Set Chat message archived status per user.",
+        'POST', false, true);
 }
 
 function expose_comment_functions(){
     $api_suffix = "clipit.comment.";
     $class_suffix = "ClipitComment::";
     expose_common_functions($api_suffix, $class_suffix);
-    expose_function(
-        $api_suffix . "get_target",
-        $class_suffix . "get_target",
-        array(
-            "id" => array(
-                "type" => "int",
-                "required" => true)),
-        "Get Target Id from a Comment",
-        'GET', false, true);
-    expose_function(
-        $api_suffix . "set_target",
-        $class_suffix . "set_target",
-        array(
-            "id" => array(
-                "type" => "int",
-                "required" => true),
-            "target_id" => array(
-                "type" => "int",
-                "required" => true)),
-        "Set Target Id for a Comment",
-        'POST', false, true);
-    expose_function(
-        $api_suffix . "get_by_target",
-        $class_suffix . "get_by_target",
-        array(
-            "target_id" => array(
-                "type" => "array",
-                "required" => true)),
-        "Get all Comments by Target object",
-        'GET', false, true);
 }
 
 function expose_event_functions(){
@@ -728,19 +674,6 @@ function expose_post_functions(){
     $class_suffix = "ClipitPost::";
     expose_common_functions($api_suffix, $class_suffix);
     expose_common_message_functions($api_suffix, $class_suffix);
-    unexpose_function("get_unread_count");
-    expose_function(
-        $api_suffix . "get_unread_count",
-        $class_suffix . "get_unread_count",
-        array(
-            "user_id" => array(
-                "type" => "int",
-                "required" => true),
-            "group_id" => array(
-                "type" => "int",
-                "required" => false)),
-        "Get the number of Posts unread by a User, optionally filtered by Group.",
-        "GET", false, true);
 }
 
 function expose_quiz_functions(){
