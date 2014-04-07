@@ -24,16 +24,18 @@
 $user_id = elgg_get_logged_in_user_guid();
 $title = elgg_echo("messages:inbox");
 elgg_push_breadcrumb($title);
-$messages = array_pop(ClipitMessage::get_by_destination(array($user_id)));
+
+$messages = ClipitChat::get_inbox($user_id);
+
 if(!is_array($messages)){
     $messages = array();
 }
-$messages_by_sender = array_pop(ClipitMessage::get_by_sender(array($user_id), $category = 'pm'));
-foreach($messages_by_sender as $message_sender){
-    if(count(ClipitMessage::get_replies($message_sender->id)) > 0){
-        $messages = array_merge(array($message_sender), $messages);
-    }
-}
+$messages_by_sender = array_pop(ClipitChat::get_by_sender(array($user_id)));
+//foreach($messages_by_sender as $message_sender){
+//    if(count(ClipitMessage::get_replies($message_sender->id)) > 0){
+//        $messages = array_merge(array($message_sender), $messages);
+//    }
+//}
 $content = elgg_view_form('messages/list', array(), array('entity' => $messages, 'inbox' => true));
 if (!$messages) {
     $content = elgg_echo("messages:inbox:none");

@@ -27,16 +27,9 @@ if(!$limit){
     $limit = 3;
 }
 
-$messages = array_pop(ClipitMessage::get_by_destination(array($user_id)));
-//if(!is_array($messages)){
-//    $messages = array();
-//}
-//$messages_by_sender = array_pop(ClipitMessage::get_by_sender(array($user_id)));
-//foreach($messages_by_sender as $message_sender){
-//    if(count(ClipitMessage::get_replies($message_sender->id)) > 0){
-//        $messages = array_merge(array($message_sender), $messages);
-//    }
-//}
+$messages = array_pop(ClipitChat::get_by_destination(array($user_id)));
+$messages = ClipitChat::get_inbox($user_id);
+
 $messages = array_slice($messages, 0, $limit);
 ?>
 <?php if(empty($messages)): ?>
@@ -46,21 +39,31 @@ $messages = array_slice($messages, 0, $limit);
 <?php endif; ?>
 <?php
 foreach($messages as $message):
-    $user = new ElggUser($message->owner_id);
-    $message_text = trim(elgg_strip_tags($message->description));
+    $message = array_pop($message);
+    $user = array_pop(ClipitUser::get_by_id(array($message->owner_id)));
+    $user_elgg = new ElggUser($message->owner_id);
+    $last_message = reset(ClipitChat::get_conversation($message->owner_id, $user_id));
+    $message_text = trim(elgg_strip_tags($last_message->description));
     // Message text truncate max length 50
     $message_text = substr($message_text, 0, 50);
 ?>
 <li role="presentation" class="message-item">
-    <a role="menuitem" tabindex="-1" href="">
-        <img class="user-avatar" src="<?php echo $user->getIconURL("small"); ?>">
-        <div style=" font-size: 13px; text-transform: none; overflow: hidden; letter-spacing: 0;">
-            <?php if(array_pop(ClipitMessage::get_read_status($message->id)) == false): ?>
+    <a
+        role="menuitem"
+        tabindex="-1"
+        href="<?php echo elgg_get_site_url(); ?>messages/view/<?php echo $user->login; ?>#reply_<?php echo $message->id; ?>">
+
+        <img class="user-avatar" src="<?php echo $user_elgg->getIconURL("small"); ?>">
+        <div class="text-truncate" style=" font-size: 13px; text-transform: none; overflow: hidden; letter-spacing: 0;">
+            <?php if(array_pop(ClipitChat::get_read_status($message->id)) == false): ?>
             <span class="label label-primary pull-right"><?php echo elgg_echo("message:unread");?></span>
             <?php endif; ?>
             <span><?php echo $user->name;?></span>
             <small class="show"><?php echo elgg_view('output/friendlytime', array('time' => $message->time_created));?></small>
             <div style="color: #333;" class="text-truncate">
+                <?php if($last_message->owner_id == $user_id): ?>
+                <small class="fa fa-mail-reply" style="font-size: 85% !important;color: #999;float: none !important;padding: 0;"></small>
+                <?php endif; ?>
                 <?php echo $message_text; ?>
             </div>
         </div>

@@ -20,4 +20,26 @@
  *                  You should have received a copy of the GNU Affero General Public License
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
- */ 
+ */
+$entity = elgg_extract('entity', $vars);
+$category = elgg_extract('category', $vars);
+
+echo elgg_view("input/hidden", array(
+    'name' => 'message-id',
+    'value' => $entity->id,
+));
+echo elgg_view("input/hidden", array(
+    'name' => 'message-category',
+    'value' => $category,
+));
+echo elgg_view("input/plaintext", array(
+    'name' => 'message-reply',
+    'class' => 'form-control wysihtml5',
+    'rows'  => 6,
+    'style' => "width: 100%;"
+));
+echo elgg_view('input/submit', array(
+    'value' => elgg_echo('submit'),
+    'class' => "btn btn-primary pull-right",
+    'style' => "margin-top: 20px;"
+));

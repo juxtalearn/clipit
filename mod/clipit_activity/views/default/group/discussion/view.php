@@ -9,8 +9,8 @@ $message = elgg_extract("entity", $vars);
 $owner = new ElggUser($message->owner_id);
 $user_loggedin_id = elgg_get_logged_in_user_guid();
 $user_loggedin = new ElggUser($user_loggedin_id);
+$total_replies = ClipitPost::get_count_by_destination(array($message->id));
 
-$total_replies = count(ClipitMessage::get_replies($message->id));
 // Owner options (edit/delete)
 $owner_options = "";
 if($message->owner_id == elgg_get_logged_in_user_guid()){
@@ -64,19 +64,15 @@ if($message->owner_id == elgg_get_logged_in_user_guid()){
         </div>
     </div>
     <div class="body-post"><?php echo $message->description; ?></div>
-    <?php
-    //    echo elgg_view('output/longtext', array(
-    //        'value' => $message->description,
-    //        'class' => 'body-post'));
-    ?>
 </div>
 
 <a name="replies"></a>
 <?php
-foreach(ClipitMessage::get_replies($message->id) as $reply_msg_id){
-    $reply_msg = array_pop(ClipitMessage::get_by_id(array($reply_msg_id)));
-    $second_level_ids = ClipitMessage::get_replies($reply_msg->id);
-    echo elgg_view("messages/reply", array('entity' => $reply_msg, 'discussion' => true, 'category' => 'discussion', 'second_level_ids' => $second_level_ids));
+foreach(array_pop(ClipitPost::get_by_parent(array($message->id))) as $reply_msg){
+    if(!empty($reply_msg)){
+        $second_level = array_pop(ClipitPost::get_by_parent(array($reply_msg->id)));
+        echo elgg_view("group/discussion/reply", array('entity' => $reply_msg, 'second_level' => $second_level));
+    }
 }
 ?>
 
@@ -88,7 +84,7 @@ foreach(ClipitMessage::get_replies($message->id) as $reply_msg_id){
         <img class="user-avatar" src="<?php echo $user_loggedin->getIconURL('small'); ?>"/>
     </div>
     <div class="block">
-        <?php echo elgg_view_form("messages/reply/create", array('data-validate'=> "true" ), array('entity'  => $message, 'category' => 'discussion')); ?>
+        <?php echo elgg_view_form("group/discussion/reply/create", array('data-validate'=> "true" ), array('entity'  => $message)); ?>
     </div>
 </div>
 <!-- Reply form end-->

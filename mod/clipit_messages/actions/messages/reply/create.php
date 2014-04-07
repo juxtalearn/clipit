@@ -7,20 +7,17 @@
  */
 
 
-$message_id = (int)get_input('message-id');
-$message = array_pop(ClipitMessage::get_by_id(array($message_id)));
+$user_id = (int)get_input('user-id');
+$user = array_pop(ClipitUser::get_by_id(array($user_id)));
 $message_reply = get_input('message-reply');
-$category = get_input('message-category');
 
-$categories_accepted = array('pm', 'discussion');
-
-if(count($message)==0 || trim($message_reply) == "" || !in_array($category, $categories_accepted)){
+if(!$user || trim($message_reply) == "" ){
     register_error(elgg_echo("reply:cantcreate"));
 } else{
-    ClipitMessage::create(array(
+    ClipitChat::create(array(
         'name' => '',
         'description' => $message_reply,
-        'destination' => $message->id,
+        'destination' => $user->id,
     ));
     system_message(elgg_echo('reply:created'));
 }
