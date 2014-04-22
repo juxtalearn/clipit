@@ -221,6 +221,38 @@
     }
   }
 }
+//
+// Quote
+// --------------------------------------------------
+.quote-ref{
+  &.active > a{
+    border-bottom: 0;
+    border-radius: 3px 3px 0 0;
+    padding-bottom: 6px;
+  }
+  a{
+    border-bottom: 1px dotted @blue_clipit;
+    background: #fff;
+    padding: 2px 5px;
+    border-radius: 4px;
+    border: 1px solid @blue-lighter;
+    font-weight: inherit;
+    display: initial;
+  }
+}
+.quote-content{
+  background: #fff;
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid @blue-lighter;
+  margin-top: 3px;
+  margin-bottom: 5px;
+  .loading{
+    i{
+      font-size: @font-size-large;
+    }
+  }
+}
 
 //
 // Group member list
@@ -255,6 +287,152 @@
       }
       &:last-child{
         margin-bottom: 0;
+      }
+    }
+  }
+}
+//
+// TinyMCE Skin
+// --------------------------------------------------
+.mce-container, .mce-container *, .mce-widget, .mce-widget *, .mce-reset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  vertical-align: top;
+  background: transparent;
+  text-decoration: none;
+  color: #333;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  text-shadow: none;
+  float: none;
+  position: static;
+  width: auto;
+  height: auto;
+  white-space: nowrap;
+  cursor: inherit;
+  -webkit-tap-highlight-color: transparent;
+  line-height: normal;
+  font-weight: normal;
+  text-align: left;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  direction: ltr;
+}
+.mce-container, .mce-container-body {
+  display: block;
+}
+.mce-tinymce {
+  visibility: visible !important;
+  position: relative;
+  //.form-control();
+}
+
+.mce-toolbar-grp{
+  background: #fff;
+}
+.mce-panel{
+  background-color: transparent;
+  zoom: 1;
+  margin: 5px 0;
+}
+
+.mce-edit-area{
+  .form-control();
+  height: auto;
+  padding: 5px;
+  width: auto;
+  margin: 5px;
+}
+.mce-stack-layout-item {
+  display: block;
+}
+.mce-btn-group {
+  button{
+    vertical-align: bottom;
+  }
+  .mce-btn {
+    margin: 0;
+    border-radius: 0;
+    border-left: 1px solid @blue-lighter;
+  }
+  .mce-first {
+    border-radius: 3px 0 0 3px;
+  }
+  .mce-last {
+    border-right: 1px solid #bae6f6;
+    border-radius: 0 3px 3px 0;
+  }
+
+}
+
+.mce-flow-layout-item {
+  display: inline-block;
+  margin: 0 3px;
+}
+.mce-btn {
+  .btn();
+  padding: 3px 10px;
+  font-size: 12px;
+  background: #fff;
+  color: #1ba1d3;
+  border: 1px solid @blue-lighter;
+  border-right: 0;
+  border-radius: 3px;
+  display: inline-block;
+  cursor: pointer;
+  &.mce-active{
+    background: @blue_clipit;
+    i{
+      color: #fff;
+    }
+  }
+  button i{
+    font-size: 14px;
+    color: @blue_clipit;
+  }
+}
+
+
+//
+// TinyMCE mention
+// --------------------------------------------------
+.mention-autocomplete{
+  width: 240px;
+  margin-top: 10px;
+  z-index: 1050;
+  li{
+    padding: 5px;
+    border-bottom: 1px solid #e5e5e5;
+    cursor: pointer;
+    &:hover,
+    &:focus,
+    &.active{
+      background-color: #f5f5f5;
+    }
+    &.loading{
+      border-bottom: 0;
+      font-size: ceil(@font-size-base * 1.42); // ~20px
+      padding-left: 10px;
+    }
+    &:last-child{
+      border: 0;
+    }
+    img{
+      .pull-left();
+      margin-top: 5px;
+    }
+    .block{
+      overflow: hidden;
+      padding-left: 10px;
+      .title{
+        color: @blue_clipit;
+      }
+      .sub-title{
+        color: @grey_text;
+        font-size: @font-size-small;
       }
     }
   }

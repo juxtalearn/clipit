@@ -118,12 +118,16 @@ function clipit_final_init() {
         elgg_register_js("jquery:wysihtml5", $CONFIG->url . "mod/clipit_theme/vendors/wysihtml5/wysihtml5-0.3.0.min.js");
         elgg_register_js("jquery:bootstrap:wysihtml5", $CONFIG->url . "mod/clipit_theme/vendors/wysihtml5/bootstrap-wysihtml5.js");
         elgg_register_css("wysihtml5:css", $CONFIG->url . "mod/clipit_theme/vendors/wysihtml5/wysihtml5.css");
+        // TinyMCE
+        elgg_register_js("tinymce", $CONFIG->url . "mod/clipit_theme/vendors/tinymce/tinymce.min.js");
+        elgg_register_js("jquery:tinymce", $CONFIG->url . "mod/clipit_theme/vendors/tinymce/jquery.tinymce.min.js");
         // Bootbox
         elgg_register_js("jquery:bootbox", $CONFIG->url . "mod/clipit_theme/vendors/bootbox.js");
         // jQuery validate
         elgg_register_js("jquery:validate", $CONFIG->url . "mod/clipit_theme/vendors/jquery.validate.js");
         // jquery tokeninput (automcomplete)
         elgg_register_js("jquery:tokeninput", $CONFIG->url . "mod/clipit_theme/vendors/tokeninput.js");
+
 
         $clipit_js = elgg_get_simplecache_url('js', 'clipit');
         elgg_register_simplecache_view('js/clipit');
@@ -136,6 +140,8 @@ function clipit_final_init() {
         elgg_load_js("jquery:waypoints:sticker");
         elgg_load_js("jquery:waypoints:infinite");
         elgg_load_js("jquery:wysihtml5");
+        elgg_load_js("jquery:tinymce");
+        elgg_load_js("tinymce");
         elgg_load_js("jquery:bootbox");
         elgg_load_js("jquery:bootstrap:wysihtml5");
         elgg_load_css("wysihtml5:css");
@@ -331,7 +337,7 @@ function set_default_clipit_events(){
         $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
         $params = array(
             'icon' => 'upload',
-            'message' => 'Subió el archivo',
+            'message' => 'Uploaded the file',
             'item' => array(
                 'name' => $item->name,
                 'description' => $item->description,
@@ -344,20 +350,20 @@ function set_default_clipit_events(){
     });
     register_clipit_event('message-destination', function($event, $relationship){
 
-        $item = array_pop(ClipitPost::get_by_id(array($relationship->guid_one)));
         $author = array_pop(ClipitUser::get_by_id(array($event->performed_by_guid)));
         $author_elgg = new ElggUser($event->performed_by_guid);
         $lookup = ClipitSite::lookup($relationship->guid_two);
         switch($lookup['subtype']){
             case 'clipit_group':
+                $item = array_pop(ClipitPost::get_by_id(array($relationship->guid_one)));
                 $activity_id = ClipitGroup::get_activity($relationship->guid_two);
                 $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
-
+                // Main post
                 $params = array(
                     'time'    => $event->time_created,
                     'icon' => 'comment',
                     'activity' => $activity,
-                    'message' => 'Abrió el tema',
+                    'message' => 'Added a new discussion topic',
                     'author'  => array(
                         'name'  => $author->name,
                         'icon'  => $author_elgg->getIconURL('small'),
@@ -369,6 +375,35 @@ function set_default_clipit_events(){
                         'url'  => "clipit_activity/{$activity->id}/group/discussion/view/{$item->id}",
                     ),
                 );
+//                // Reply post
+//                } else {
+//                    $msg_parent = array_pop(ClipitPost::get_by_id(array($item->parent)));
+//                    $params = array(
+//                        'time'    => $event->time_created,
+//                        'icon' => 'mail-reply',
+//                        'activity' => $activity,
+//                        'message' => 'Replied to the discussion topic',
+//                        'author'  => array(
+//                            'name'  => $author->name,
+//                            'icon'  => $author_elgg->getIconURL('small'),
+//                            'url'   => "profile/{$author->login}",
+//                        ),
+//                        'item' => array(
+//                            'name' => $msg_parent->name,
+//                            'description' => $item->description,
+//                            'url'  => "clipit_activity/{$activity->id}/group/discussion/view/{$msg_parent->id}#reply_{$item->id}",
+//                        ),
+//                    );
+//                    // Second level reply
+//                    if(!$msg_parent->name){
+//                        $params['icon'] = 'mail-reply-all';
+//                        $id_top_msg = ClipitPost::get_parent($item->id, $top = true);
+//                        $msg_parent = array_pop(ClipitPost::get_by_id(array($id_top_msg)));
+//                        $params['item']['name'] = $msg_parent->name;
+//                        $params['item']['url'] = "clipit_activity/{$activity->id}/group/discussion/view/{$msg_parent->id}#reply_{$item->id}";
+//                    }
+//
+//                }
                 break;
             case 'clipit_user':
                 // ClipitUser ClipitChat
@@ -376,6 +411,8 @@ function set_default_clipit_events(){
         }
         return $params;
     });
+
+
 //    register_clipit_event('group-file', function($event, $relationship){
 //        $object = array_pop(ClipitGroup::get_by_id(array($relationship->guid_one)));
 //        $item = array_pop(ClipitFile::get_by_id(array($relationship->guid_two)));

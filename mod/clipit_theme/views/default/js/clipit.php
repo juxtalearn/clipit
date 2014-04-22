@@ -1,5 +1,77 @@
 elgg.provide('clipit');
 
+/**
+ * TinyMce default configuration
+ */
+function tinymce_setup(specific_id){
+    tinymce.init({
+        setup : function(ed) {
+        ed.on("init",function() {
+            $(".mce-ico").addClass("fa");
+            // mce icons
+            $(".mce-i-bullist").addClass("fa-list-ul");
+            $(".mce-i-numlist").addClass("fa-list-ol");
+            $(".mce-i-outdent").addClass("fa-outdent");
+            $(".mce-i-indent").addClass("fa-indent");
+            $(".mce-i-underline").addClass("fa-underline");
+            $(".mce-i-italic").addClass("fa-italic");
+            $(".mce-i-bold").addClass("fa-bold");
+        });
+    },
+        convert_urls: true,
+        mode : "specific_textareas",
+        editor_selector : /(mceEditor|wysihtml5|"+specific_id+")/,
+        force_br_newlines : true,
+        force_p_newlines : false,
+        plugins: ["mention, autoresize, paste"],
+        content_css : elgg.config.wwwroot+"mod/clipit_theme/vendors/tinymce/content.css",
+        valid_styles : 'text-align',
+        paste_remove_spans: true,
+        verify_html: true,
+        paste_text_sticky : true,
+        paste_retain_style_properties : 'none',
+        inline_styles : false,
+        paste_remove_styles: true,
+        paste_auto_cleanup_on_paste: true,
+        paste_strip_class_attributes: true,
+        paste_remove_styles_if_webkit: true,
+        invalid_elements: 'img',
+        autoresize_min_height: 150,
+        mentions: {
+        delay: 0,
+                source: function (query, process, delimiter) {
+            // Do your ajax call
+            // When using multiple delimiters you can alter the query depending on the delimiter used
+            if (delimiter === '@') {
+                $.getJSON(elgg.config.wwwroot+"ajax/view/messages/search_to?q="+query, function (data) {
+                    //call process to show the result
+                    if(data){
+                        process(data);
+                    }
+                });
+            }
+        },
+                delimiter: '@',
+                queryBy: 'first_name',
+                render: function(item) {
+            var img = "<img class='img' src='" + item.avatar + "' title='" + item.first_name + "' height='25px' width='25px' />";
+            return "<li class='text-truncate'>" + img + "<div class='block'><div class='title'>" + item.first_name + "</div><div class='sub-title'>" + item.username + "</div></div></li>";
+        },
+                renderDropdown: function() {
+            //add twitter bootstrap dropdown-menu class
+            return '<ul class="rte-autocomplete dropdown-menu mention-autocomplete"><li class="loading"><i class="fa fa-spinner fa-spin"></i></li></ul>';
+        },
+
+                insert: function(item) {
+            return item.username;
+        }
+        },
+        menubar: false,
+        statusbar: false,
+        toolbar: "bold italic underline | bullist numlist | outdent indent"
+        });
+    }
+
 $(function(){
     /**
      * Collapse function
@@ -106,7 +178,7 @@ $(function(){
      * wysihtml5 editor default options
      */
         // Load wysi each textarea
-    $('.wysihtml5').wysihtml5();
+    //$('.wysihtml5').wysihtml5();
 
     /**
      * Default confirm dialog to remove objects
@@ -198,5 +270,19 @@ $(function(){
     });
     // default execute send_msg function
     $("input#compose").send_msg();
+    ///
+    tinymce_setup();
+    /*
+     * #int comment reference
+     */
+    $(".msg-quote").click(function (){
+    var editor = tinyMCE.editors['mceEditor'];
+    editor.execCommand('mceInsertContent', false, this.innerText+' ');
+    var form = editor.formElement;
+
+    $('html, body').animate({
+        scrollTop: $(form).offset().top
+        }, 50);
+    });
 });
 
