@@ -1,10 +1,18 @@
 <?php
+/**
+ * ClipIt - JuxtaLearn Web Space
+ * PHP version:     >= 5.2
+ * Creation date:   2013-10-10
+ * Last update:     $Date$
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC JuxtaLearn Team
+ * @version         $Version$
+ * @link            http://www.juxtalearn.eu
+ * @license         GNU Affero General Public License v3
+ * @package         Clipit
+ */
 
 /**
- * Created by PhpStorm.
- * User: Pablo Llinás
- * Date: 12/02/14
- * Time: 13:10
+
  */
 class UBSite{
     /**
