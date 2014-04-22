@@ -9,9 +9,10 @@
 $english = array(
     // Activity
     'my_activities' => 'My activities',
+    'past' => 'Past',
     'activity:profile' => 'Activity',
     'activity:groups' => 'Groups',
-    'activity:stas' => 'STA\'s',
+    'activity:stas' => 'Materials',
     'activity:publications' => 'Publications',
     'activity:join' => 'Join to activity',
     'activity:next_deadline' => 'Next deadline',

@@ -48,11 +48,12 @@ function clipit_activity_init() {
     elgg_register_action("group/discussion/create", elgg_get_plugins_path() . "clipit_activity/actions/group/discussion/create.php");
     elgg_register_action("group/discussion/remove", elgg_get_plugins_path() . "clipit_activity/actions/group/discussion/remove.php");
     elgg_register_action("group/discussion/edit", elgg_get_plugins_path() . "clipit_activity/actions/group/discussion/edit.php");
-    elgg_register_ajax_view('modal/discussion/edit');
+    elgg_register_ajax_view('modal/group/discussion/edit');
     elgg_register_action("group/discussion/reply/create", elgg_get_plugins_path() . "clipit_activity/actions/group/discussion/reply/create.php");
     elgg_register_action("group/discussion/reply/remove", elgg_get_plugins_path() . "clipit_activity/actions/group/discussion/reply/remove.php");
     elgg_register_action("group/discussion/reply/edit", elgg_get_plugins_path() . "clipit_activity/actions/group/discussion/reply/edit.php");
     elgg_register_ajax_view('modal/group/discussion/reply/edit');
+    elgg_register_ajax_view('group/discussion/quote');
 }
 function activity_setup_sidebar_menus(){
     $activity_id =  elgg_get_page_owner_guid();
@@ -74,13 +75,13 @@ function activity_setup_sidebar_menus(){
         $params = array(
             'name' => 'activity_sta',
             'text' => elgg_echo('activity:stas'),
-            'href' => "clipit_activity/".$activity->id."/stas",
+            'href' => "clipit_activity/".$activity->id."/materials",
         );
         elgg_register_menu_item('page', $params);
         $params = array(
             'name' => 'activity_publications',
             'text' => elgg_echo('activity:publications'),
-            'href' => "settings/statistics/",
+            'href' => "clipit_activity/".$activity->id."/publications",
         );
         elgg_register_menu_item('page', $params);
     }
@@ -172,7 +173,18 @@ function activity_page_handler($page) {
                         'title_style' => "background: #". $activity->color,
                     );
                     break;
-                case 'stas':
+                case 'publications':
+                    $title = elgg_echo("activity:publications");
+                    elgg_push_breadcrumb($title);
+                    $params = array(
+                        'content'   => elgg_view('publications/list', array('entity' => $activity)),
+                        'filter'    => '',
+                        'title'     => $title,
+                        'sub-title' => $activity->name,
+                        'title_style' => "background: #". $activity->color,
+                    );
+                    break;
+                case 'materials':
                     $title = elgg_echo("activity:stas");
                     elgg_push_breadcrumb($title);
                     $selected_tab = get_input('filter', 'files');
@@ -230,7 +242,7 @@ function activity_page_handler($page) {
     //$params['sidebar'] = elgg_view('activity/sidebar/teacher', array('entity' => $activity));
     $teacher_sidebar = elgg_view('activity/sidebar/teacher', array('entity' => $activity));
 
-    $params['sidebar'] = $teacher_sidebar . $group_tools_sidebar;
+    $params['sidebar'] = $group_tools_sidebar . $teacher_sidebar;
     if(!$params['class']){
         $params['class'] = "activity-section activity-layout";
     }

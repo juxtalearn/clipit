@@ -9,7 +9,7 @@
 
 $user_id = elgg_get_logged_in_user_guid();
 $discussion_id = get_input('message-id');
-$discussion = array_pop(ClipitMessage::get_by_id(array($discussion_id)));
+$discussion = array_pop(ClipitPost::get_by_id(array($discussion_id)));
 
 $discussion_title = get_input('discussion-title');
 $discussion_text = get_input('discussion-text');
@@ -17,7 +17,7 @@ $discussion_text = get_input('discussion-text');
 if(!isset($discussion) || $discussion->owner_id != $user_id || trim($discussion_title) == "" || trim($discussion_text) == ""){
     register_error(elgg_echo("discussion:cantedit"));
 } else{
-    ClipitMessage::set_properties($discussion->id, array(
+    ClipitPost::set_properties($discussion->id, array(
         'name' => $discussion_title,
         'description' => $discussion_text
     ));

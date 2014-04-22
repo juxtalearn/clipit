@@ -29,7 +29,8 @@ echo elgg_view("input/hidden", array(
 ));
 echo elgg_view("input/plaintext", array(
     'name' => 'message-reply',
-    'class' => 'form-control wysihtml5',
+    'class' => 'form-control mceEditor',
+    'id'    => 'mceEditor',
     'rows'  => 6,
     'style' => "width: 100%;"
 ));
@@ -38,3 +39,13 @@ echo elgg_view('input/submit', array(
     'class' => "btn btn-primary pull-right",
     'style' => "margin-top: 20px;"
 ));
+?>
+<div class="upload-files">
+    <strong>
+        <a style="position: relative;overflow: hidden">
+            <i class="fa fa-paperclip"></i> Attach file
+            <input id="uploadfiles" type="file" name="files[]">
+        </a>
+    </strong>
+    <div class="upload-files-list" style="float: left; width: 100%;"></div>
+</div>

@@ -32,7 +32,7 @@ foreach($group_messages as $message):
             'entity' => $message,
             'edit' => array(
                 "data-target" => "#edit-discussion-{$message->id}",
-                "href" => elgg_get_site_url()."ajax/view/modal/discussion/edit?id={$message->id}",
+                "href" => elgg_get_site_url()."ajax/view/modal/group/discussion/edit?id={$message->id}",
                 "data-toggle" => "modal"
              ),
             'remove' => array("href" => "action/group/discussion/remove?id={$message->id}"),

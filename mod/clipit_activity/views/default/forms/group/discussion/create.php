@@ -8,7 +8,6 @@
  */
 $group = elgg_extract('entity', $vars);
 
-
 $body = elgg_view("input/hidden", array(
     'name' => 'group-id',
     'value' => $group->id,

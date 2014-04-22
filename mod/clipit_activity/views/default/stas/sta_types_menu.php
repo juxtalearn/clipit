@@ -26,17 +26,17 @@ $activity = elgg_extract('entity', $vars);
 $tabs = array(
     'files' => array(
         'text' => elgg_echo('sta:files').' (n)',
-        'href' => "clipit_activity/{$activity->id}/stas?filter=files",
+        'href' => "clipit_activity/{$activity->id}/materials?filter=files",
         'priority' => 200,
     ),
     'videos' => array(
         'text' => elgg_echo('sta:videos').' (n)',
-        'href' => "clipit_activity/{$activity->id}/stas?filter=videos",
+        'href' => "clipit_activity/{$activity->id}/materials?filter=videos",
         'priority' => 300,
     ),
     'links' => array(
         'text' => elgg_echo('sta:links').' (n)',
-        'href' => "clipit_activity/{$activity->id}/stas?filter=links",
+        'href' => "clipit_activity/{$activity->id}/materials?filter=links",
         'priority' => 400,
     ),
 );

@@ -22,41 +22,22 @@
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
 $reply_msg = elgg_extract('entity', $vars);
-$second_level = elgg_extract('second_level', $vars);
+$auto_id = elgg_extract('auto_id', $vars);
 $user_reply = new ElggUser($reply_msg->owner_id);
 
-// Owner options (edit/delete)
-$owner_reply_options = "";
-if($reply_msg->owner_id == elgg_get_logged_in_user_guid()){
-    $options = array(
-        'entity' => $reply_msg,
-        'edit' => array(
-            "data-target" => "#edit-discussion-{$reply_msg->id}",
-            "href" => elgg_get_site_url()."ajax/view/modal/group/discussion/reply/edit?id={$reply_msg->id}",
-            "data-toggle" => "modal"
-        ),
-        'remove' => array("href" => "action/group/discussion/reply/remove?id={$reply_msg->id}"),
-    );
-
-    $owner_reply_options = elgg_view("page/components/options_list", $options);
-    // Remote modal, form content
-    echo elgg_view("page/components/modal_remote", array('id'=> "edit-discussion-{$reply_msg->id}" ));
-}
-
-$second_reply = false;
-if($vars['second_reply']){
-    $second_reply = true;
-}
 ?>
 <a name="reply_<?php echo $reply_msg->id; ?>"></a>
 <div class="discussion discussion-reply-msg">
     <div class="header-post">
+        <a class="show btn pull-right msg-quote" style="
+    background: #fff;
+    padding: 3px 7px;
+    border-radius: 4px;
+    border: 1px solid #bae6f6;
+">#<?php echo $auto_id;?></a>
         <?php echo $owner_reply_options; ?>
         <div class="user-reply">
             <img class="user-avatar" src="<?php echo $user_reply->getIconURL('small'); ?>" />
-            <?php if(!$second_reply): ?>
-                <button id="<?php echo $reply_msg->id; ?>" class="reply-to btn btn-default btn-sm reply-button">Reply</button>
-            <?php endif; ?>
         </div>
         <div class="block">
             <strong>
@@ -71,33 +52,5 @@ if($vars['second_reply']){
             </small>
         </div>
     </div>
-    <div class="body-post"><?php echo $reply_msg->description; ?></div>
-
-    <?php if(!empty($second_level)): ?>
-        <!-- Reply second level -->
-        <div class="second_level">
-            <?php
-            foreach($second_level as $second_level_msg):
-                echo elgg_view("group/discussion/reply", array('entity' => $second_level_msg, 'second_reply' => true));
-            endforeach;
-            ?>
-            <!-- Reply second level end-->
-        </div>
-    <?php endif; ?>
-
-    <!-- Reply form -->
-    <div class="form-block" id="form-<?php echo $reply_msg->id; ?>">
-        <small class="block">
-            Reply to:
-            <?php echo elgg_view('output/url', array(
-                'href'  => "profile/".$user_reply->login,
-                'title' => $user_reply->name,
-                'text'  => $user_reply->name));
-            ?>
-            <a href="javascript:;" id="<?php echo $reply_msg->id; ?>" class="close-reply-to" >&times;</a>
-        </small>
-        <?php echo elgg_view_form("group/discussion/reply/create", array('data-validate'=> "true" ), array('entity'  => $reply_msg, 'second_reply' => $second_reply)); ?>
-    </div>
-    <!-- Reply form end-->
-
+    <div class="body-post"><?php echo text_reference($reply_msg->description); ?></div>
 </div>

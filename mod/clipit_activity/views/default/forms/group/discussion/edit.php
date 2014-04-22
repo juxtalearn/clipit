@@ -8,8 +8,8 @@
  */
 $message = elgg_extract('entity', $vars);
 
-// Load wysihtml5 in textarea
-$body = "<script>$('#edit-".$message->id."').wysihtml5();</script>";
+// Load tinyMCE in textarea
+$body = "<script>$(function(){tinymce_setup();});</script>";
 
 $body .= elgg_view("input/hidden", array(
     'name' => 'message-id',
@@ -31,7 +31,7 @@ $body .='<div class="form-group">
         'name'  => 'discussion-text',
         'value' => $message->description,
         'id'    => 'edit-'.$message->id,
-        'class' => 'form-control wysihtml5',
+        'class' => 'form-control mceEditor',
         'required' => true,
         'rows'  => 6,
     )).'

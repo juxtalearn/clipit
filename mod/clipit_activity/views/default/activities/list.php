@@ -13,7 +13,8 @@ $count = elgg_extract('count', $vars);
 $base_url = elgg_extract('base_url', $vars, '');
 $pagination = elgg_extract('pagination', $vars, true);
 $progress_html = elgg_extract('progress_bar', $vars);
-$user = elgg_get_logged_in_user_entity();
+$user_loggedin_id = elgg_get_logged_in_user_guid();
+
 $list_class = 'row';
 if (isset($vars['list_class'])) {
     $list_class = "$list_class {$vars['list_class']}";
@@ -23,11 +24,13 @@ if (is_array($items) && count($items) > 0):
     echo "<ul class=\"$list_class\">";
     foreach ($items as $item):
         if($item):
-            $group_id = ClipitGroup::get_from_user_activity($user->guid, $item->id);
+            $group_id = ClipitGroup::get_from_user_activity($user_loggedin_id, $item->id);
             $group_array = ClipitGroup::get_by_id(array($group_id));
             $group =  array_pop($group_array); // ClipitGroup object
             $all_groups = ClipitActivity::get_groups($item->id);
             $activity_count = count($all_groups); // Activity count
+            $users = ClipitGroup::get_users($group_id);
+            $users = array_slice($users, 0, 10);
 
             $title = elgg_get_friendly_title($item->name);
             $activity_link = elgg_view('output/url', array(
@@ -63,14 +66,26 @@ if (is_array($items) && count($items) > 0):
                             <div class="col-xs-6" style="border-right: 1px solid #ccc; padding-right: 15px;">
                                 <div>
                                     <?php echo $progress_html; ?>
-                                    <strong><a><?php echo $group->name; ?></a></strong>
+                                    <strong>
+                                        <?php echo elgg_view('output/url', array(
+                                            'href'  => "clipit_activity/{$item->id}/group/activity_log",
+                                            'title' => $group->name,
+                                            'text'  => $group->name));
+                                        ?>
+                                    </strong>
                                 </div>
                                 <div style='margin-top: 5px;'>
-                                    <img style="margin: 1px;" src='http://juxtalearn.org/sandbox/clipit02/mod/profile/icondirect.php?lastcache=1383038225&amp;joindate=1382956838&amp;guid=2564&amp;size=tiny'>
-                                    <img style="margin: 1px;" src='http://juxtalearn.org/sandbox/clipit02/mod/profile/icondirect.php?lastcache=1381488327&amp;joindate=1379322994&amp;guid=811&amp;size=tiny'>
-                                    <img style="margin: 1px;" src='http://juxtalearn.org/sandbox/clipit02/mod/profile/icondirect.php?lastcache=1379966341&amp;joindate=1379965499&amp;guid=1357&amp;size=tiny'>
-                                    <img style="margin: 1px;" src='http://juxtalearn.org/sandbox/clipit02/mod/profile/icondirect.php?lastcache=1380278114&amp;joindate=1379609605&amp;guid=1174&amp;size=tiny'>
-                                    <img style="margin: 1px;" src='http://juxtalearn.org/sandbox/clipit02/mod/profile/icondirect.php?lastcache=1379258078&amp;joindate=1379257932&amp;guid=761&amp;size=tiny'>
+                                    <?php
+                                    foreach ($users as $user_id):
+                                        $user = array_pop(ClipitUser::get_by_id(array($user_id)));
+                                        $user_elgg = new ElggUser($user_id);
+                                    ?>
+                                        <?php echo elgg_view('output/url', array(
+                                            'href'  => "profile/".$user->login,
+                                            'title' => $user->name,
+                                            'text'  => '<img style="margin: 1px;" src="'.$user_elgg->getIconURL('tiny').'" />'));
+                                        ?>
+                                    <?php endforeach; ?>
                                 </div>
                             </div>
                             <div class="col-xs-6">
