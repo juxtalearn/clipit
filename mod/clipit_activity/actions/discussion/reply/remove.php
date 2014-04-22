@@ -2,8 +2,8 @@
 /**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
- * Creation date:   1/04/14
- * Last update:     1/04/14
+ * Creation date:   3/04/14
+ * Last update:     3/04/14
  *
  * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, JuxtaLearn Project
  * @version         $Version$
@@ -21,15 +21,15 @@
  *                  along with this program. If not, see
  *                  http://www.gnu.org/licenses/agpl-3.0.txt.
  */
-$my_groups_id = elgg_extract("my_groups", $vars);
-$events_log = ClipitEvent::get_by_object($my_groups_id, 0, 6);
-?>
-<h3>Last activity</h3>
-<div class="events-list elgg-module module-events elgg-module-widget elgg-module-info">
-    <div class="margin-bar"></div>
-    <ul class="events">
-    <?php foreach ($events_log as $event_log): ?>
-        <?php echo clipit_event($event_log, 'timeline'); ?>
-    <?php endforeach; ?>
-    </ul>
-</div>
+$discussion_id = (int)get_input('id');
+$user_id = elgg_get_logged_in_user_guid();
+$message = array_pop(ClipitPost::get_by_id(array($discussion_id)));
+
+if(count($message)==0 || $message->owner_id != $user_id){
+    register_error(elgg_echo("reply:cantdelete"));
+} else{
+    ClipitPost::delete_by_id(array($discussion_id));
+    system_message(elgg_echo('reply:deleted'));
+}
+
+forward(REFERER);

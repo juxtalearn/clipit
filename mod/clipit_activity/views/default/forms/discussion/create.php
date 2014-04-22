@@ -6,11 +6,11 @@
  * Time: 10:41
  * To change this template use File | Settings | File Templates.
  */
-$group = elgg_extract('entity', $vars);
+$entity = elgg_extract('entity', $vars);
 
 $body = elgg_view("input/hidden", array(
-    'name' => 'group-id',
-    'value' => $group->id,
+    'name' => 'entity-id',
+    'value' => $entity->id,
 ));
 // Attachment simulator
 $body .='<div class="form-group">

@@ -39,15 +39,6 @@ foreach($users_id as $user_id):
         ?>
             <div class="text-truncate">
 
-            <?php
-            /**
-             * STATUS: enroll
-             * member users can remove members from group
-             */
-            if($activity_status == 'enroll'){
-                echo elgg_view_form("group/remove_member" , array('class' => 'pull-right'), array('entity' => $user, 'group' => $group));
-            }
-            ?>
 
             <?php echo elgg_view('output/url', array(
                 'href'  => "profile/".$user->login,

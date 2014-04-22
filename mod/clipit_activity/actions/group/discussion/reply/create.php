@@ -23,18 +23,16 @@
  */
 $message_id = (int)get_input('message-id');
 $message = array_pop(ClipitPost::get_by_id(array($message_id)));
-$group = array_pop(ClipitGroup::get_by_id(array($message->destination)));
 $message_reply = get_input('message-reply');
 
 
-if(count($message)==0 || count($group)==0 || trim($message_reply) == ""){
+if(count($message)==0 || trim($message_reply) == ""){
     register_error(elgg_echo("reply:cantcreate"));
 } else{
     ClipitPost::create(array(
         'name' => '',
         'description' => $message_reply,
-        'destination' => $group->id,
-        'parent'      => $message->id,
+        'destination' => $message->id,
     ));
     system_message(elgg_echo('reply:created'));
 }

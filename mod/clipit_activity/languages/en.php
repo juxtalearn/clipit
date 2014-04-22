@@ -9,9 +9,11 @@
 $english = array(
     // Activity
     'my_activities' => 'My activities',
+    'past' => 'Past',
     'activity:profile' => 'Activity',
     'activity:groups' => 'Groups',
-    'activity:stas' => 'STA\'s',
+    'activity:discussion' => 'Activity discussion',
+    'activity:stas' => 'Materials',
     'activity:publications' => 'Publications',
     'activity:join' => 'Join to activity',
     'activity:next_deadline' => 'Next deadline',
@@ -34,12 +36,14 @@ $english = array(
     'group:menu' => 'Group menu',
     'group:tools' => 'Group tools',
     'group:discussion' => 'Discussion',
-    'group:files' => 'Files',
+    'group:files' => 'Multimedia',
     'group:activity_log' => 'Activity log',
     'group:progress' => 'Progress',
     'group:edit' => 'Group edit',
     'group:members' => 'Group members',
     // Discussion
+    'discussion:created' => 'Discussion created',
+    'discussion:cantcreate' => 'You can not create a discussion',
     'discussion:edit' => 'Edit topic',
     'discussion:title_topic' => 'Topic title',
     'discussion:text_topic' => 'Topic text',

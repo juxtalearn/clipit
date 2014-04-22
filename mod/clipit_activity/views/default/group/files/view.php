@@ -25,16 +25,12 @@ $file = elgg_extract("entity", $vars);
 $user_loggedin = elgg_get_logged_in_user_guid();
 $user_loggedin = new ElggUser($user_loggedin_id);
 $owner_user = new ElggUser($file->owner_id);
-$total_replies = count(ClipitMessage::get_replies($file->id));
 ?>
 <!-- File info + details -->
 <div class="file-owner">
     <i class="fa fa-file-o file-icon"></i>
     <div class="block">
         <div class="header-file">
-            <a href="#comment" title="Comment" class="btn btn-default btn-sm comment-button" rel="nofollow">
-                <i class="fa fa-comments"></i> Comment
-            </a>
             <h2 class="title"><?php echo $file->name; ?></h2>
             <small class="show sub-title">
                 <img class="user-avatar" src="<?php echo $owner_user->getIconURL("tiny");?>">
@@ -47,21 +43,6 @@ $total_replies = count(ClipitMessage::get_replies($file->id));
                     ?>
                     <?php echo elgg_view('output/friendlytime', array('time' => $file->time_created));?>
                 </i>
-                <?php
-                if($total_replies > 0):
-                    $last_post_id = end(ClipitMessage::get_replies($file->id));
-                    $last_post = array_pop(ClipitMessage::get_by_id(array($last_post_id)));
-                    $author_last_post = array_pop(ClipitUser::get_by_id(array($last_post->owner_id)));
-                    ?>
-                    <i class="pull-right">
-                        Last post by
-                        <?php echo elgg_view('output/url', array(
-                            'href'  => "profile/".$author_last_post->login,
-                            'title' => $author_last_post->name,
-                            'text'  => $author_last_post->name,
-                        ));
-                        ?> (<?php echo elgg_view('output/friendlytime', array('time' => $last_post->time_created));?>)</i>
-                <?php endif; ?>
             </small>
         </div>
         <div class="body-file">
@@ -87,29 +68,8 @@ $total_replies = count(ClipitMessage::get_replies($file->id));
 </div>
 <!-- File info + details end -->
 
-<!-- File comments -->
-<a name="comments"></a>
-<?php
-foreach(ClipitMessage::get_replies($file->id) as $reply_msg_id){
-    $reply_msg = array_pop(ClipitMessage::get_by_id(array($reply_msg_id)));
-    $second_level_ids = ClipitMessage::get_replies($reply_msg->id);
-    echo elgg_view("comments/reply", array('entity' => $reply_msg, 'discussion' => true, 'category' => 'discussion', 'second_level_ids' => $second_level_ids));
-}
-?>
-<!-- File comments end -->
 
-<!-- comment form -->
-<a name="comment"></a>
-<h3 class="activity-module-title"><?php echo elgg_echo("comment:create"); ?></h3>
-<div class="discussion discussion-reply-msg">
-    <div class="user-reply">
-        <img class="user-avatar" src="<?php echo $user_loggedin->getIconURL('small'); ?>"/>
-    </div>
-    <div class="block">
-        <?php echo elgg_view_form("comments/create", array('data-validate'=> "true" ), array('entity'  => $message, 'category' => 'discussion')); ?>
-    </div>
-</div>
-<!-- Reply comments end-->
+
 
 
 <div class="discussion discussion-owner-msg" style="display: none">

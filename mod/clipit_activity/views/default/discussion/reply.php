@@ -23,8 +23,11 @@
  */
 $reply_msg = elgg_extract('entity', $vars);
 $auto_id = elgg_extract('auto_id', $vars);
-$user_reply = new ElggUser($reply_msg->owner_id);
-
+$user_reply = array_pop(ClipitUser::get_by_id(array($reply_msg->owner_id)));
+$user_reply_elgg = new ElggUser($reply_msg->owner_id);
+if($vars['activity']){
+    $group_id = ClipitGroup::get_from_user_activity($user_reply->id, 74);
+}
 ?>
 <a name="reply_<?php echo $reply_msg->id; ?>"></a>
 <div class="discussion discussion-reply-msg">
@@ -37,7 +40,7 @@ $user_reply = new ElggUser($reply_msg->owner_id);
 ">#<?php echo $auto_id;?></a>
         <?php echo $owner_reply_options; ?>
         <div class="user-reply">
-            <img class="user-avatar" src="<?php echo $user_reply->getIconURL('small'); ?>" />
+            <img class="user-avatar" src="<?php echo $user_reply_elgg->getIconURL('small'); ?>" />
         </div>
         <div class="block">
             <strong>
@@ -48,6 +51,12 @@ $user_reply = new ElggUser($reply_msg->owner_id);
                 ?>
             </strong>
             <small class="show">
+                <?php if($vars['show_group'] && $group = array_pop(ClipitGroup::get_by_id(array($group_id)))):?>
+                    <span class="label label-primary" style="display: inline-block;background: #32b4e5;color: #fff;">
+                        <?php echo $group->name?>
+                    </span>
+                <?php endif; ?>
+
                 <?php echo elgg_view('output/friendlytime', array('time' => $reply_msg->time_created));?>
             </small>
         </div>

@@ -6,17 +6,18 @@
  * Time: 11:01
  * To change this template use File | Settings | File Templates.
  */
-$group = elgg_extract("entity", $vars);
+$entity = elgg_extract("entity", $vars);
+$href = elgg_extract("href", $vars);
 $activity_id = elgg_get_page_owner_guid();
-// Get all messages by group id
-$group_messages = array_pop(ClipitPost::get_by_destination(array($group->id)));
+// Get all messages by destination
+$messages_array = array_pop(ClipitPost::get_by_destination(array($entity->id)));
 ?>
 <div style="margin-bottom: 15px;">
-    <?php echo elgg_view_form('group/discussion/create', array('data-validate'=> "true" ), array('entity'  => $group)); ?>
+    <?php echo elgg_view_form('discussion/create', array('data-validate'=> "true" ), array('entity'  => $entity)); ?>
     <button type="button" data-toggle="modal" data-target="#create-new-topic" class="btn btn-default">Create a new topic</button>
 </div>
 <?php
-foreach($group_messages as $message):
+foreach($messages_array as $message):
     $message_text = trim(elgg_strip_tags($message->description));
     // Message text truncate max length 280
     if(mb_strlen($message_text)>280){
@@ -32,10 +33,10 @@ foreach($group_messages as $message):
             'entity' => $message,
             'edit' => array(
                 "data-target" => "#edit-discussion-{$message->id}",
-                "href" => elgg_get_site_url()."ajax/view/modal/group/discussion/edit?id={$message->id}",
+                "href" => elgg_get_site_url()."ajax/view/modal/discussion/edit?id={$message->id}",
                 "data-toggle" => "modal"
              ),
-            'remove' => array("href" => "action/group/discussion/remove?id={$message->id}"),
+            'remove' => array("href" => "action/discussion/remove?id={$message->id}"),
         );
 
         $owner_options = elgg_view("page/components/options_list", $options);
@@ -49,7 +50,7 @@ foreach($group_messages as $message):
         <?php echo $owner_options; ?>
         <h4>
             <?php echo elgg_view('output/url', array(
-                'href' => "clipit_activity/{$activity_id}/group/discussion/view/{$message->id}",
+                'href' => "{$href}/view/{$message->id}",
                 'title' => $message->name,
                 'text' => $message->name,
                 'is_trusted' => true, ));
@@ -87,7 +88,7 @@ foreach($group_messages as $message):
     </div>
     <div class="col-md-3 text-center">
         <?php echo elgg_view('output/url', array(
-            'href'  => "clipit_activity/{$activity_id}/group/discussion/view/{$message->id}#replies",
+            'href'  => "{$href}/view/{$message->id}#replies",
             'title' => elgg_echo("reply:total", array($total_replies)),
             'text'  => '<i class="fa fa-comment fa-stack-2x"></i>
                         <i class="fa-stack-1x replies-count">'.$total_replies.'</i>',
@@ -96,7 +97,7 @@ foreach($group_messages as $message):
         ?>
 
         <?php echo elgg_view('output/url', array(
-            'href'  => "clipit_activity/{$activity_id}/group/discussion/view/{$message->id}#create_reply",
+            'href'  => "{$href}/view/{$message->id}#create_reply",
             'title' => elgg_echo("reply:create"),
             'text'  => '<i class="fa fa-plus"></i> '.elgg_echo("reply"),
             'class' => "btn btn-default btn-sm reply-button"

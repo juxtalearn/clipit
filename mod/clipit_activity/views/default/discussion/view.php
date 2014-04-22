@@ -18,10 +18,10 @@ if($message->owner_id == elgg_get_logged_in_user_guid()){
         'entity' => $message,
         'edit' => array(
             "data-target" => "#edit-discussion-{$message->id}",
-            "href" => elgg_get_site_url()."ajax/view/modal/group/discussion/edit?id={$message->id}",
+            "href" => elgg_get_site_url()."ajax/view/modal/discussion/edit?id={$message->id}",
             "data-toggle" => "modal"
         ),
-        'remove' => array("href" => "action/group/discussion/remove?id={$message->id}"),
+        'remove' => array("href" => "action/discussion/remove?id={$message->id}"),
     );
 
     $owner_options = elgg_view("page/components/options_list", $options);
@@ -66,16 +66,9 @@ if($message->owner_id == elgg_get_logged_in_user_guid()){
     <div class="body-post"><?php echo $message->description; ?></div>
 </div>
 
-<!--<iframe id="someId"></iframe>-->
-<!--<div style="background: #000;position: absolute;z-index:10000;padding: 20px; color: #fff" id="light">-->
-<!--    <ul>-->
-<!--        <li>Miguel Ángel</li>-->
-<!--        <li>Jose Antonio</li>-->
-<!--    </ul>-->
-<!--</div>-->
 <script>
 $(function(){
-    $(".quote-ref").click(function(){
+    $("#wrap").on("click", ".quote-ref", function(){
         var quote_id = $(this).data("quote-ref");
         var parent = $(this).closest("div");
         var $obj = $(this);
@@ -87,7 +80,7 @@ $(function(){
             var quote_content = parent.find(".quote-content[data-quote-id="+quote_id+"]");
             quote_content.html("<a class='loading'><i class='fa fa-spinner fa-spin'></i> loading...</a>");
             $.ajax({
-                url: elgg.config.wwwroot+"ajax/view/group/discussion/quote",
+                url: elgg.config.wwwroot+"ajax/view/discussion/quote",
                 type: "POST",
                 data: { quote_id : quote_id, message_destination_id : <?php echo $message->id; ?>},
                 success: function(html){
@@ -106,46 +99,15 @@ $(function(){
 </script>
 <a name="replies"></a>
 <?php
-function text_reference($text_message){
-    if(preg_match('/(^|[^a-z0-9_])#([0-9_]+)/i', $text_message)){
-        $prex = '/#([0-9_]+)/i';
-        preg_match_all($prex, $text_message, $string_regex, PREG_PATTERN_ORDER);
-        $string_regexs = $string_regex[1];
-        foreach($string_regexs as $string){
-            $text_message = preg_replace(
-                "/\#$string\b/",
-                '<strong class="quote-ref" data-quote-ref="'.$string.'">
-                    <a class="btn">#'.$string.'</a>
-                </strong>',
-                $text_message);
-        }
-
-
-    }
-
-    if(preg_match('/(^|[^a-z0-9_])@([a-z0-9_]+)/i',$text_message)){
-        $prex = '/@([a-z0-9_]+)/i';
-        preg_match_all($prex, $text_message, $string_regex, PREG_PATTERN_ORDER);
-        $string_regexs = $string_regex[1];
-        foreach($string_regexs as $string){
-            /// OLD: "/(^|[^a-z0-9_])@".$string."/i"
-            $user = array_pop(ClipitUser::get_by_login(array($string)));
-            if(!empty($user)){
-                $url_link = elgg_view('output/url', array(
-                    'href'  => "profile/".$user->login,
-                    'title' => "@".$user->login,
-                    'text'  => $user->name,
-                    'style' => 'border-radius:3px; background: #bae6f6;padding: 1px 5px;font-weight: bold;',
-                ));
-                $text_message = preg_replace("/\@".$user->login."\b/",'$1'.$url_link, $text_message);
-            }
-        }
-    }
-    return $text_message;
-}
 $auto_id = 1;
 foreach(array_pop(ClipitPost::get_by_destination(array($message->id))) as $reply_msg){
-    echo elgg_view("group/discussion/reply", array('entity' => $reply_msg, 'auto_id' => $auto_id));
+    echo elgg_view("discussion/reply",
+            array(
+                'entity' => $reply_msg,
+                'auto_id' => $auto_id,
+                'activity' => $vars['activity'],
+                'show_group' => $vars['show_group']
+            ));
     $auto_id++;
 }
 ?>
@@ -158,7 +120,7 @@ foreach(array_pop(ClipitPost::get_by_destination(array($message->id))) as $reply
         <img class="user-avatar" src="<?php echo $user_loggedin->getIconURL('small'); ?>"/>
     </div>
     <div class="block">
-        <?php echo elgg_view_form("group/discussion/reply/create", array('data-validate'=> "true" ), array('entity'  => $message)); ?>
+        <?php echo elgg_view_form("discussion/reply/create", array('data-validate'=> "true" ), array('entity'  => $message)); ?>
     </div>
 </div>
 <!-- Reply form end-->
