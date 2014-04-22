@@ -1,2 +1,1 @@
-@echo off
-phpdoc
+phpdoc -d engine\classes,mod\clipit_api,mod\urjc_backend -t ../clipit_reference
