@@ -1,9 +1,14 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: equipo
- * Date: 3/03/14
- * Time: 15:31
+ * ClipIt - JuxtaLearn Web Space
+ * PHP version:     >= 5.2
+ * Creation date:   22/04/14
+ * Last update:     22/04/14
+ * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC JuxtaLearn Project
+ * @version         $Version$
+ * @link            http://www.juxtalearn.eu
+ * @license         GNU Affero General Public License v3
+ * @package         Clipit
  */
 $entity = elgg_extract('entity', $vars);
 $options_list = array();

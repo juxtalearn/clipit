@@ -1,9 +1,14 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: equipo
- * Date: 5/03/14
- * Time: 11:36
+ * ClipIt - JuxtaLearn Web Space
+ * PHP version:     >= 5.2
+ * Creation date:   22/04/14
+ * Last update:     22/04/14
+ * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC JuxtaLearn Project
+ * @version         $Version$
+ * @link            http://www.juxtalearn.eu
+ * @license         GNU Affero General Public License v3
+ * @package         Clipit
  */
 $message = elgg_extract("entity", $vars);
 $owner = new ElggUser($message->owner_id);
