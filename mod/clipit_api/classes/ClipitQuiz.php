@@ -162,9 +162,9 @@ class ClipitQuiz extends UBItem{
         $quiz_question_array = array();
         foreach($quiz->question_array as $quiz_question_id){
             if(!$quiz_question = new ClipitQuizQuestion($quiz_question_id)){
-                $quiz_question_array[] = null;
+                $quiz_question_array[$quiz_question_id] = null;
             } else{
-                $quiz_question_array[] = $quiz_question;
+                $quiz_question_array[$quiz_question_id] = $quiz_question;
             }
         }
         return $quiz_question_array;

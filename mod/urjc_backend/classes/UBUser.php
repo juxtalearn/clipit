@@ -189,9 +189,9 @@ class UBUser extends UBItem{
         foreach($login_array as $login){
             $elgg_user = get_user_by_username($login);
             if(!$elgg_user){
-                $user_array[] = null;
+                $user_array[$login] = null;
             } else{
-                $user_array[] = new $called_class((int)$elgg_user->guid);
+                $user_array[$login] = new $called_class((int)$elgg_user->guid);
             }
         }
         return $user_array;
@@ -212,13 +212,13 @@ class UBUser extends UBItem{
         foreach($email_array as $email){
             $elgg_user_array = get_user_by_email($email);
             if(!$elgg_user_array){
-                $user_array[] = null;
+                $user_array[$email] = null;
             } else{
                 $temp_array = array();
                 foreach($elgg_user_array as $elgg_user){
                     $temp_array[] = new $called_class((int)$elgg_user->guid);
                 }
-                $user_array[] = $temp_array;
+                $user_array[$email] = $temp_array;
             }
         }
         return $user_array;
@@ -244,13 +244,13 @@ class UBUser extends UBItem{
                 )
             );
             if(!$elgg_user_array){
-                $user_array[] = null;
+                $user_array[$role] = null;
             } else{
                 $temp_array = array();
                 foreach($elgg_user_array as $elgg_user){
                     $temp_array[] = new $called_class($elgg_user->guid);
                 }
-                $user_array[] = $temp_array;
+                $user_array[$role] = $temp_array;
             }
         }
         return $user_array;

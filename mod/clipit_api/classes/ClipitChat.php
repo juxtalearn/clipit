@@ -79,8 +79,7 @@ class ClipitChat extends UBMessage{
     }
 
     static function get_archived_status($id, $user_array = null){
-        $prop_array[] = "archived_array";
-        $archived_array = ClipitChat::get_properties($id, $prop_array);
+        $archived_array = ClipitChat::get_properties($id, array("archived_array"));
         $archived_array = array_pop($archived_array);
         if(!$user_array){
             return $archived_array;
@@ -98,8 +97,7 @@ class ClipitChat extends UBMessage{
     }
 
     static function set_archived_status($id, $archived_value, $user_array){
-        $prop_array[] = "archived_array";
-        $archived_array = ClipitChat::get_properties($id, $prop_array);
+        $archived_array = ClipitChat::get_properties($id, array("archived_array"));
         $archived_array = array_pop($archived_array);
         foreach($user_array as $user_id){
             if($archived_value == true){

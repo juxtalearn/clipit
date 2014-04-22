@@ -106,8 +106,7 @@ class ClipitActivity extends UBItem{
     /** STATIC FUNCTIONS */
 
     static function get_status($id){
-        $prop_array[] = "status";
-        return ClipitActivity::get_properties($id, $prop_array);
+        return ClipitActivity::get_properties($id, array("status"));
     }
 
     static function set_status_enroll($id){
