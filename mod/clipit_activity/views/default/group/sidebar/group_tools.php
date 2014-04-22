@@ -17,7 +17,7 @@ elgg_register_menu_item('group:tools', array(
 elgg_register_menu_item('group:tools', array(
     'name' => 'group_files',
     'text' => elgg_echo('group:files'),
-    'href' => "clipit_activity/".$activity->id."/group/files",
+    'href' => "clipit_activity/".$activity->id."/group/multimedia",
 ));
 elgg_register_menu_item('group:tools', array(
     'name' => 'group_activity_log',

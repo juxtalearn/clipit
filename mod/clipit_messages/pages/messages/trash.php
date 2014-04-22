@@ -8,7 +8,7 @@
  * @version         $Version$
  * @link            http://www.juxtalearn.eu
  * @license         GNU Affero General Public License v3
- * @package         Clipit
+ * @package         ClipIt
  */
 $title = elgg_echo("messages:trash");
 elgg_push_breadcrumb($title);

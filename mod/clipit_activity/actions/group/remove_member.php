@@ -8,7 +8,7 @@
  * @version         $Version$
  * @link            http://www.juxtalearn.eu
  * @license         GNU Affero General Public License v3
- * @package         Clipit
+ * @package         ClipIt
  */
 $user_id = get_input('user-id');
 $group_id = get_input('group-id');

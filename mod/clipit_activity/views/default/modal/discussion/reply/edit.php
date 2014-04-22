@@ -8,7 +8,7 @@
  * @version         $Version$
  * @link            http://www.juxtalearn.eu
  * @license         GNU Affero General Public License v3
- * @package         Clipit
+ * @package         ClipIt
  */
 $discussion_id = (int)get_input("id");
 $user_id = elgg_get_logged_in_user_guid();

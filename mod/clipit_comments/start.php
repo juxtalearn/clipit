@@ -8,7 +8,7 @@
  * @version         $Version$
  * @link            http://www.juxtalearn.eu
  * @license         GNU Affero General Public License v3
- * @package         Clipit
+ * @package         ClipIt
  */
 elgg_register_event_handler('init', 'system', 'clipit_comments_init');
 

@@ -8,6 +8,7 @@
  */
 
 function activityss_setup_sidebar_menus($entity){
+
     $sidebar = elgg_view('activity/sidebar/calendar', array('entity' => $entity));
     $sidebar .= elgg_view('activity/sidebar/teacher', array('entity' => $entity));
 }

@@ -8,7 +8,7 @@
  * @version         $Version$
  * @link            http://www.juxtalearn.eu
  * @license         GNU Affero General Public License v3
- * @package         Clipit
+ * @package         ClipIt
  */
 elgg_register_event_handler('init', 'system', 'clipit_activity_init');
 
@@ -220,6 +220,7 @@ function activity_page_handler($page) {
                     $title = elgg_echo("activity:stas");
                     elgg_push_breadcrumb($title);
                     $selected_tab = get_input('filter', 'files');
+                    $href = "clipit_activity/{$activity->id}/materials";
                     switch ($selected_tab) {
                         case 'files':
                             $content = elgg_view('stas/files', array('entity' => $activity));
@@ -241,7 +242,7 @@ function activity_page_handler($page) {
                             }
                             break;
                     }
-                    $filter = elgg_view('stas/sta_types_menu', array('selected' => $selected_tab, 'entity' => $activity));
+                    $filter = elgg_view('multimedia/filter', array('selected' => $selected_tab, 'entity' => $activity, 'href' => $href));
                     $params = array(
                         'content'   => $content,
                         'filter'    => $filter,
@@ -307,35 +308,51 @@ function group_tools_page_handler($page, $activity){
         $icon_status = "unlock";
     }
     $group_name = '<i class="fa fa-'.$icon_status.'"></i> '.$group->name;
-
+    $filter = "";
     switch ($page[2]) {
         case 'edit':
             $title = elgg_echo("group:edit");
             elgg_push_breadcrumb($title);
-            $params = array(
-                'content'   => elgg_view('group/edit', array('entity' => $activity)),
-            );
+            $content = elgg_view('group/edit', array('entity' => $activity));
             break;
         case 'members':
             $title = elgg_echo("group:members");
             elgg_push_breadcrumb($title);
-            $params = array(
-                'content'   => elgg_view('group/members', array('entity' => $group)),
-            );
+            $content = elgg_view('group/members', array('entity' => $group));
             break;
         case 'activity_log':
             $title = elgg_echo("group:activity_log");
             elgg_push_breadcrumb($title);
-            $params = array(
-                'content'   => elgg_view('group/activity_log', array('entity' => $group)),
-            );
+            $content =  elgg_view('group/activity_log', array('entity' => $group));
             break;
-        case 'files':
+        case 'multimedia':
             $title = elgg_echo("group:files");
             elgg_push_breadcrumb($title);
-            $params = array(
-                'content'   => elgg_view('group/files/list', array('entity' => $group)),
-            );
+            $selected_tab = get_input('filter', 'files');
+            $href = "clipit_activity/{$activity->id}/group/multimedia";
+            switch ($selected_tab) {
+                case 'files':
+                    $content = elgg_view('multimedia/files', array('entity' => $group));
+                    if (!$content) {
+                        $content = elgg_echo('groups:none');
+                    }
+                    break;
+                case 'videos':
+                    $content = elgg_view('multimedia/videos', array('entity' => $group));
+                    if (!$content) {
+                        $content = elgg_echo('discussion:none');
+                    }
+                    break;
+                case 'links':
+                default:
+                    $content = elgg_view('multimedia/links', array('entity' => $group));
+                    if (!$content) {
+                        $content = elgg_echo('groups:none');
+                    }
+                    break;
+            }
+            $filter = elgg_view('multimedia/filter', array('selected' => $selected_tab, 'entity' => $group, 'href' => $href));
+
             if($page[3] == 'view' && $page[4]){
                 $file_id = (int)$page[4];
                 $file = array_pop(ClipitFile::get_by_id(array($file_id)));
@@ -344,9 +361,7 @@ function group_tools_page_handler($page, $activity){
                 elgg_push_breadcrumb($title, "clipit_activity/{$activity->id}/group/files");
                 elgg_push_breadcrumb($file->name);
                 if($file && in_array($file_id, $group_files)){
-                    $params = array(
-                        'content'   => elgg_view('group/files/view', array('entity' => $file)),
-                    );
+                    $content = elgg_view('group/files/view', array('entity' => $file));
                 } else {
                     return false;
                 }
@@ -356,13 +371,11 @@ function group_tools_page_handler($page, $activity){
             $title = elgg_echo("group:discussion");
             $href = "clipit_activity/{$activity->id}/group/discussion";
             elgg_push_breadcrumb($title);
-            $params = array(
-                'content'   => elgg_view('discussion/list',
+            $content =  elgg_view('discussion/list',
                     array(
                         'entity' => $group,
                         'href'   => $href,
-                    )),
-            );
+                    ));
             if($page[3] == 'view' && $page[4]){
                 $message_id = (int)$page[4];
                 $message = array_pop(ClipitPost::get_by_id(array($message_id)));
@@ -370,9 +383,7 @@ function group_tools_page_handler($page, $activity){
                 elgg_push_breadcrumb($title, $href);
                 elgg_push_breadcrumb($message->name);
                 if($message && $message->destination == $group->id){
-                    $params = array(
-                        'content'   => elgg_view('discussion/view', array('entity' => $message)),
-                    );
+                    $content = elgg_view('discussion/view', array('entity' => $message));
                 } else {
                     return false;
                 }
@@ -382,7 +393,8 @@ function group_tools_page_handler($page, $activity){
             return false;
     }
     // Default group params
-    $params['filter'] = "";
+    $params['content'] = $content;
+    $params['filter'] = $filter;
     $params['title'] = $title;
     $params['sub-title'] = $group_name;
     $params['title_style'] = "background: #". $activity->color;

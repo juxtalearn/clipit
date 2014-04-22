@@ -8,7 +8,7 @@
  * @version         $Version$
  * @link            http://www.juxtalearn.eu
  * @license         GNU Affero General Public License v3
- * @package         Clipit
+ * @package         ClipIt
  */
 $my_groups_id = elgg_extract("my_groups", $vars);
 $events_log = ClipitEvent::get_by_object($my_groups_id, 0, 6);

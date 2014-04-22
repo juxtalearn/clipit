@@ -11,21 +11,22 @@
  * @package         ClipIt
  */
 $activity = elgg_extract('entity', $vars);
+$href = elgg_extract('href', $vars);
 
 $tabs = array(
-    'all' => array(
-        'text' => elgg_echo('all'),
-        'href' => "my_activities",
+    'files' => array(
+        'text' => elgg_echo('sta:files').' (n)',
+        'href' => "{$href}?filter=files",
         'priority' => 200,
     ),
-    'active' => array(
-        'text' => elgg_echo('active'),
-        'href' => "my_activities?filter=active",
+    'videos' => array(
+        'text' => elgg_echo('sta:videos').' (n)',
+        'href' => "{$href}?filter=videos",
         'priority' => 300,
     ),
-    'past' => array(
-        'text' => elgg_echo('past'),
-        'href' => "my_activities?filter=past",
+    'links' => array(
+        'text' => elgg_echo('sta:links').' (n)',
+        'href' => "{$href}?filter=links",
         'priority' => 400,
     ),
 );

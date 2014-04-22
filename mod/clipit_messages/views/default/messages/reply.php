@@ -8,7 +8,7 @@
  * @version         $Version$
  * @link            http://www.juxtalearn.eu
  * @license         GNU Affero General Public License v3
- * @package         Clipit
+ * @package         ClipIt
  */
 $reply_msg = elgg_extract('entity', $vars);
 $second_level_ids = elgg_extract('second_level_ids', $vars);

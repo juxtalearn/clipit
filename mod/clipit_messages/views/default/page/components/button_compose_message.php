@@ -8,7 +8,7 @@
  * @version         $Version$
  * @link            http://www.juxtalearn.eu
  * @license         GNU Affero General Public License v3
- * @package         Clipit
+ * @package         ClipIt
  */
 ?>
 <button type="button" data-toggle="modal" class="compose-message-button btn" data-target="#compose-msg" >

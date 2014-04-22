@@ -8,7 +8,7 @@
  * @version         $Version$
  * @link            http://www.juxtalearn.eu
  * @license         GNU Affero General Public License v3
- * @package         Clipit
+ * @package         ClipIt
  */
 $user_loggedin = elgg_get_logged_in_user_guid();
 $user_groups = ClipitUser::get_groups($user_loggedin);

@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 ?>
+
 <style>
     .video_prev:hover  #video-hover {display: table !important;}
 </style>
