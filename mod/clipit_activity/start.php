@@ -28,6 +28,9 @@ elgg_register_event_handler('init', 'system', 'clipit_activity_init');
 
 function clipit_activity_init() {
     elgg_register_library('clipit:activities', elgg_get_plugins_path() . 'clipit_activity/lib/activities.php');
+    elgg_register_library('clipit:activity:functions', elgg_get_plugins_path() . 'clipit_activity/lib/functions.php');
+    elgg_load_library('clipit:activity:functions');
+
     // Register "/my_activities" page handler
     elgg_register_page_handler('my_activities', 'my_activities_page_handler');
     // Register "/clipit_activity" page handler
@@ -45,15 +48,15 @@ function clipit_activity_init() {
     elgg_register_action("group/create", elgg_get_plugins_path() . "clipit_activity/actions/group/create.php");
     elgg_register_action("group/remove_member", elgg_get_plugins_path() . "clipit_activity/actions/group/remove_member.php");
     // Discussion
-    elgg_register_action("group/discussion/create", elgg_get_plugins_path() . "clipit_activity/actions/group/discussion/create.php");
-    elgg_register_action("group/discussion/remove", elgg_get_plugins_path() . "clipit_activity/actions/group/discussion/remove.php");
-    elgg_register_action("group/discussion/edit", elgg_get_plugins_path() . "clipit_activity/actions/group/discussion/edit.php");
-    elgg_register_ajax_view('modal/group/discussion/edit');
-    elgg_register_action("group/discussion/reply/create", elgg_get_plugins_path() . "clipit_activity/actions/group/discussion/reply/create.php");
-    elgg_register_action("group/discussion/reply/remove", elgg_get_plugins_path() . "clipit_activity/actions/group/discussion/reply/remove.php");
-    elgg_register_action("group/discussion/reply/edit", elgg_get_plugins_path() . "clipit_activity/actions/group/discussion/reply/edit.php");
-    elgg_register_ajax_view('modal/group/discussion/reply/edit');
-    elgg_register_ajax_view('group/discussion/quote');
+    elgg_register_action("discussion/create", elgg_get_plugins_path() . "clipit_activity/actions/discussion/create.php");
+    elgg_register_action("discussion/remove", elgg_get_plugins_path() . "clipit_activity/actions/discussion/remove.php");
+    elgg_register_action("discussion/edit", elgg_get_plugins_path() . "clipit_activity/actions/discussion/edit.php");
+    elgg_register_ajax_view('modal/discussion/edit');
+    elgg_register_action("discussion/reply/create", elgg_get_plugins_path() . "clipit_activity/actions/discussion/reply/create.php");
+    elgg_register_action("discussion/reply/remove", elgg_get_plugins_path() . "clipit_activity/actions/discussion/reply/remove.php");
+    elgg_register_action("discussion/reply/edit", elgg_get_plugins_path() . "clipit_activity/actions/discussion/reply/edit.php");
+    elgg_register_ajax_view('modal/discussion/reply/edit');
+    elgg_register_ajax_view('discussion/quote');
 }
 function activity_setup_sidebar_menus(){
     $activity_id =  elgg_get_page_owner_guid();
@@ -70,6 +73,12 @@ function activity_setup_sidebar_menus(){
             'name' => 'activity_groups',
             'text' => elgg_echo('activity:groups'),
             'href' => "clipit_activity/".$activity->id."/groups",
+        );
+        elgg_register_menu_item('page', $params);
+        $params = array(
+            'name' => 'activity_discussion',
+            'text' => elgg_echo('activity:discussion'),
+            'href' => "clipit_activity/".$activity->id."/discussion",
         );
         elgg_register_menu_item('page', $params);
         $params = array(
@@ -117,6 +126,7 @@ function activity_setup_sidebar_menus(){
 function activity_page_handler($page) {
     $base_dir = elgg_get_plugins_path() . 'clipit_activity/pages/activity';
     elgg_load_library('clipit:activities');
+
 
     elgg_set_context("activity_page");
     $activities = ClipitActivity::get_by_id(array($page[0]));
@@ -172,6 +182,42 @@ function activity_page_handler($page) {
                         'sub-title' => $activity->name,
                         'title_style' => "background: #". $activity->color,
                     );
+                    break;
+                case 'discussion':
+                    $title = elgg_echo("activity:discussion");
+                    $href = "clipit_activity/{$activity->id}/discussion";
+                    elgg_push_breadcrumb($title);
+                    $content = elgg_view('discussion/list',
+                        array(
+                            'entity' => $activity,
+                            'href'   => $href,
+                        ));
+
+                    if($page[2] == 'view' && $page[3]){
+                        $message_id = (int)$page[3];
+                        $message = array_pop(ClipitPost::get_by_id(array($message_id)));
+                        elgg_pop_breadcrumb($title);
+                        elgg_push_breadcrumb($title, $href);
+                        elgg_push_breadcrumb($message->name);
+                        if($message && $message->destination == $activity->id){
+                            $content = elgg_view('discussion/view',
+                                array(
+                                    'entity'     => $message,
+                                    'activity'   => $activity,
+                                    'show_group' => true,
+                                ));
+                        } else {
+                            return false;
+                        }
+                    }
+                    $params = array(
+                        'content'   => $content,
+                        'filter'    => '',
+                        'title'     => $title,
+                        'sub-title' => $activity->name,
+                        'title_style' => "background: #". $activity->color,
+                    );
+
                     break;
                 case 'publications':
                     $title = elgg_echo("activity:publications");
@@ -322,19 +368,24 @@ function group_tools_page_handler($page, $activity){
             break;
         case 'discussion':
             $title = elgg_echo("group:discussion");
+            $href = "clipit_activity/{$activity->id}/group/discussion";
             elgg_push_breadcrumb($title);
             $params = array(
-                'content'   => elgg_view('group/discussion/list', array('entity' => $group)),
+                'content'   => elgg_view('discussion/list',
+                    array(
+                        'entity' => $group,
+                        'href'   => $href,
+                    )),
             );
             if($page[3] == 'view' && $page[4]){
                 $message_id = (int)$page[4];
                 $message = array_pop(ClipitPost::get_by_id(array($message_id)));
                 elgg_pop_breadcrumb($title);
-                elgg_push_breadcrumb($title, "clipit_activity/{$activity->id}/group/discussion");
+                elgg_push_breadcrumb($title, $href);
                 elgg_push_breadcrumb($message->name);
                 if($message && $message->destination == $group->id){
                     $params = array(
-                        'content'   => elgg_view('group/discussion/view', array('entity' => $message)),
+                        'content'   => elgg_view('discussion/view', array('entity' => $message)),
                     );
                 } else {
                     return false;
