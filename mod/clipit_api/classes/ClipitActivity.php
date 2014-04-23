@@ -15,10 +15,16 @@
 /**
  * Class ClipitActivity
  *
+ * Represents a JuxtaLearn cycle of tasks around a selected Tricky Tipic. It contains users (which
+ * have been called to join the activity), groups (that actually participate in the activity),
+ * tasks (set by the teacher/s), videos and files.
+ *
+ * An Activity can have different status: enroll state, active state and closed state.
+ *
  */
 class ClipitActivity extends UBItem{
     /**
-     * @const string Elgg entity subtype for this class
+     * @const string SUBTYPE Elgg entity subtype for this class
      */
     const SUBTYPE = "clipit_activity";
 
@@ -50,7 +56,6 @@ class ClipitActivity extends UBItem{
         $this->video_array = static::get_videos($this->id);
         $this->file_array = static::get_files($this->id);
     }
-
     /**
      * Saves this instance to the system.
      *
