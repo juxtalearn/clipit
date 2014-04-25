@@ -13,6 +13,9 @@
 $messages = elgg_extract('entity', $vars);
 $items = array();
 foreach($messages as $message){
+    $user = array_pop(ClipitUser::get_by_id(array($message->owner_id)));
+    $user_elgg = new ElggUser($message->owner_id);
+
     $message->description = trim(elgg_strip_tags($message->description));
     // Message text truncate max length 50
     if(mb_strlen($message->description) > 50){
@@ -21,7 +24,7 @@ foreach($messages as $message){
     // Options
     $move_msg_url = "action/messages/list?set-option=to_inbox&check-msg[]={$message->id}";
     $message->option = array(
-        'buttons' => elgg_view('output/url', array(
+        elgg_view('output/url', array(
             'href'  => elgg_add_action_tokens_to_url($move_msg_url, true),
             'title' => elgg_echo("message:movetoinbox"),
             'style' => 'padding: 3px 9px;',
@@ -29,9 +32,12 @@ foreach($messages as $message){
             'class' => 'btn btn-success-o btn-xs',
         ))
     );
+    $user_data = '<input type="checkbox" name="check-msg[]" value="'.$message->owner_id.'" class="select-simple">';
     $item = array(
+        $user_data,
+        '<img src="'.$user_elgg->getIconURL("tiny").'">',
         $message->description,
-        $message->option
+        implode("", $message->option)
     );
     $items = array_merge($items, array($item));
 }

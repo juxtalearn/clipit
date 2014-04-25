@@ -17,7 +17,7 @@ if ($items_class = $vars['items_class']) {
 ?>
 <table class="messages-table table table-advance table-hover">
     <?php foreach($items as $item): ?>
-        <tr class="<?php echo $item_class; ?>">
+        <tr class="<?php echo $items_class; ?>">
             <?php echo elgg_view("messages/list/item", array('item' => $item)); ?>
         </tr>
     <?php endforeach; ?>
