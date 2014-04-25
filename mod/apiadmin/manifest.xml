@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin_manifest xmlns="http://www.elgg.org/plugin_manifest/1.8">
-	<name>API Key Generator</name>
+	<name>90-API Key Generator</name>
 	<author>Mitesh Chavda</author>
 	<version>1.8.x</version>
 	<blurb>API key administrator plugin</blurb>
