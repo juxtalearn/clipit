@@ -1,9 +1,15 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: pebs74
- * Date: 11/03/2014
- * Time: 10:23
+ * ClipIt - JuxtaLearn Web Space
+ * PHP version:     >= 5.2
+ * Creation date:   2013-10-10
+ * Last update:     $Date$
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC JuxtaLearn Team
+ * @version         $Version$
+ * @link            http://www.juxtalearn.eu
+ * @license         GNU Affero General Public License v3
+ * @package         ClipIt
+ * @subpackage      clipit_api
  */
 
 class ClipitLA extends UBFile{

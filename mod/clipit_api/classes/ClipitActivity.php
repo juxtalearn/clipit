@@ -1,14 +1,30 @@
 <?php
-
+/**
+ * ClipIt - JuxtaLearn Web Space
+ * PHP version:     >= 5.2
+ * Creation date:   2013-10-10
+ * Last update:     $Date$
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC JuxtaLearn Team
+ * @version         $Version$
+ * @link            http://www.juxtalearn.eu
+ * @license         GNU Affero General Public License v3
+ * @package         ClipIt
+ * @subpackage      clipit_api
+ */
 
 /**
  * Class ClipitActivity
  *
- * @package clipit
+ * Represents a JuxtaLearn cycle of tasks around a selected Tricky Tipic. It contains users (which
+ * have been called to join the activity), groups (that actually participate in the activity),
+ * tasks (set by the teacher/s), videos and files.
+ *
+ * An Activity can have different status: enroll state, active state and closed state.
+ *
  */
 class ClipitActivity extends UBItem{
     /**
-     * @const string Elgg entity subtype for this class
+     * @const string SUBTYPE Elgg entity subtype for this class
      */
     const SUBTYPE = "clipit_activity";
 
@@ -40,7 +56,6 @@ class ClipitActivity extends UBItem{
         $this->video_array = static::get_videos($this->id);
         $this->file_array = static::get_files($this->id);
     }
-
     /**
      * Saves this instance to the system.
      *

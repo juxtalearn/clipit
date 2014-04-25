@@ -8,7 +8,8 @@
  * @version         $Version$
  * @link            http://www.juxtalearn.eu
  * @license         GNU Affero General Public License v3
- * @package         Clipit
+ * @package         ClipIt
+ * @subpackage      urjc_backend
  */
 
 /**
@@ -30,7 +31,7 @@ class UBSite{
      *
      * @param string $login User login
      * @param string $password User password
-     * @param int    $timeout Session timeout
+     * @param int    $timeout Session timeout (minutes)
      *
      * @return string Authentication Token.
      * @throws SecurityException
