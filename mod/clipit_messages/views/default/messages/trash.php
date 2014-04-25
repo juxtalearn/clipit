@@ -32,10 +32,22 @@ foreach($messages as $message){
             'class' => 'btn btn-success-o btn-xs',
         ))
     );
-    $user_data = '<input type="checkbox" name="check-msg[]" value="'.$message->owner_id.'" class="select-simple">';
+    $check_msg = '<input type="checkbox" name="check-msg[]" value="'.$message->owner_id.'" class="select-simple">';
+    $text_user_from = $user->name;
+    if($message->owner_id == $user_logged_in){
+        $text_user_from = "<strong>".elgg_echo("me")."</strong>";
+    }
+    $user_data = '<img src="'.$user_elgg->getIconURL("tiny").'">';
+    $user_data .= elgg_view('output/url', array(
+        'href'  => "profile/".$user->login,
+        'title' => $user->name,
+        'text'  => $text_user_from));
     $item = array(
-        $user_data,
-        '<img src="'.$user_elgg->getIconURL("tiny").'">',
+        $check_msg,
+        array(
+            'item_class' => 'user-avatar',
+            ''
+        ),
         $message->description,
         implode("", $message->option)
     );
