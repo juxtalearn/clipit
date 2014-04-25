@@ -174,7 +174,7 @@ function expose_common_message_functions($api_suffix, $class_suffix){
             "sender_array" => array(
                 "type" => "array",
                 "required" => true)),
-        "Get Post/Message by Sender",
+        "Get Messages by Sender",
         'GET', false, true);
     expose_function(
         $api_suffix . "get_by_destination",
@@ -186,7 +186,55 @@ function expose_common_message_functions($api_suffix, $class_suffix){
             "recursive" => array(
                 "type" => "bool",
                 "required" => false)),
-        "Get Message by Destination",
+        "Get Messages by Destination",
+        'GET', false, true);
+    expose_function(
+        $api_suffix . "count_by_sender",
+        $class_suffix . "count_by_sender",
+        array(
+            "sender_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Count Messages by Sender",
+        'GET', false, true);
+    expose_function(
+        $api_suffix . "count_by_destination",
+        $class_suffix . "count_by_destination",
+        array(
+            "destination_array" => array(
+                "type" => "array",
+                "required" => true),
+            "recursive" => array(
+                "type" => "bool",
+                "required" => false)),
+        "Count Messages by Destination",
+        'GET', false, true);
+    expose_function(
+        $api_suffix . "unread_by_sender",
+        $class_suffix . "unread_by_sender",
+        array(
+            "sender_array" => array(
+                "type" => "array",
+                "required" => true),
+            "user_id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Count unread Messages by Sender",
+        'GET', false, true);
+    expose_function(
+        $api_suffix . "unread_by_destination",
+        $class_suffix . "unread_by_destination",
+        array(
+            "destination_array" => array(
+                "type" => "array",
+                "required" => true),
+            "user_id" => array(
+                "type" => "int",
+                "required" => true),
+            "recursive" => array(
+                "type" => "bool",
+                "required" => false)),
+        "Count unread Messages by Destination",
         'GET', false, true);
     expose_function(
         $api_suffix . "get_read_status",
@@ -383,6 +431,60 @@ function expose_chat_functions(){
         "Returns Inbox messages for a given User, grouped by Sender",
         "GET", false, true);
     expose_function(
+        $api_suffix . "get_inbox_count",
+        $class_suffix . "get_inbox_count",
+        array(
+            "user_id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Counts Inbox messages for a given User",
+        "GET", false, true);
+    expose_function(
+        $api_suffix . "get_inbox_unread",
+        $class_suffix . "get_inbox_unread",
+        array(
+            "user_id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Counts unread Inbox messages for a given User",
+        "GET", false, true);
+    expose_function(
+        $api_suffix . "get_sent",
+        $class_suffix . "get_sent",
+        array(
+            "user_id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Returns Sent messages for a given User",
+        "GET", false, true);
+    expose_function(
+        $api_suffix . "get_sent_count",
+        $class_suffix . "get_sent_count",
+        array(
+            "user_id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Counts Sent messages for a given User",
+        "GET", false, true);
+    expose_function(
+        $api_suffix . "get_archived",
+        $class_suffix . "get_archived",
+        array(
+            "user_id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Returns Archived messages for a given User",
+        "GET", false, true);
+    expose_function(
+        $api_suffix . "get_archived_count",
+        $class_suffix . "get_archived_count",
+        array(
+            "user_id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Counts Archived messages for a given User",
+        "GET", false, true);
+    expose_function(
         $api_suffix . "get_conversation",
         $class_suffix . "get_conversation",
         array(
@@ -393,6 +495,30 @@ function expose_chat_functions(){
                 "type" => "int",
                 "required" => true)),
         "Returns all Chat messages interchanged between two users",
+        "GET", false, true);
+    expose_function(
+        $api_suffix . "get_conversation_count",
+        $class_suffix . "get_conversation_count",
+        array(
+            "user1_id" => array(
+                "type" => "int",
+                "required" => true),
+            "user2_id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Counts all Chat messages interchanged between two users",
+        "GET", false, true);
+    expose_function(
+        $api_suffix . "get_conversation_unread",
+        $class_suffix . "get_conversation_unread",
+        array(
+            "user1_id" => array(
+                "type" => "int",
+                "required" => true),
+            "user2_id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Counts all unread Chat messages interchanged between two users",
         "GET", false, true);
     expose_function(
         $api_suffix . "get_archived_status",
@@ -428,6 +554,7 @@ function expose_comment_functions(){
     $api_suffix = "clipit.comment.";
     $class_suffix = "ClipitComment::";
     expose_common_functions($api_suffix, $class_suffix);
+    expose_common_message_functions($api_suffix, $class_suffix);
 }
 
 function expose_event_functions(){

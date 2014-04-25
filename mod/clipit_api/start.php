@@ -50,20 +50,3 @@ function clipit_register_subtypes(){
         }
     }
 }
-
-///**
-// * Method which runs and collects results for PHP Unit tests.
-// *
-// * @param $hook
-// * @param $type
-// * @param $value
-// * @param $params
-// * @return array
-// */
-//function clipit_api_tests($hook, $type, $value, $params){
-//    $test_files = elgg_get_file_list(elgg_get_plugins_path()."clipit_api/tests/", array(), array(), array(".php"));
-//    foreach($test_files as $file){
-//        $value[] = $file;
-//    }
-//    return $value;
-//}

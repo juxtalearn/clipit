@@ -236,20 +236,17 @@ class UBItem{
      * @return UBItem[] Returns an array of Objects
      */
     static function get_all($limit = 0){
+        $object_array = array();
         $called_class = get_called_class();
         $elgg_object_array = elgg_get_entities(
             array(
                 'type' => $called_class::TYPE,
                 'subtype' => $called_class::SUBTYPE,
                 'limit' => $limit));
-        if(!$elgg_object_array){
-            return array();
-        }
-        foreach($elgg_object_array as $elgg_object){
-            $object_array[(int)$elgg_object->guid] = new $called_class((int)$elgg_object->guid);
-        }
-        if(!isset($object_array)){
-            return array();
+        if($elgg_object_array){
+            foreach($elgg_object_array as $elgg_object){
+                $object_array[(int)$elgg_object->guid] = new $called_class((int)$elgg_object->guid);
+            }
         }
         return $object_array;
     }
@@ -292,6 +289,7 @@ class UBItem{
             }
             if(!empty($temp_array)){
                 $object_array[(int)$owner_id] = $temp_array;
+                usort($object_array[(int)$owner_id], 'UBItem::sort_by_date');
             } else{
                 $object_array[(int)$owner_id] = null;
             }

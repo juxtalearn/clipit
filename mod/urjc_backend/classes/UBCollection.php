@@ -72,6 +72,33 @@ abstract class UBCollection{
     }
 
     /**
+     * Count the number of related items.
+     *
+     * @param int $id Item to count related items with.
+     * @param string $rel_name Name of the relationship
+     * @param bool $inverse position of the Item in the relationship (first = false, seccond = true)
+     * @param bool $recursive Whether to count recursively or not
+     * @return int Number of items related with the one specified.
+     */
+    static function count_items($id, $rel_name, $inverse = false, $recursive = false){
+        $rel_array = get_entity_relationships($id, $inverse);
+        $count = 0;
+        foreach($rel_array as $rel){
+            if($rel->relationship == $rel_name){
+                $count++;
+                if($recursive){
+                    if($inverse){
+                        $count += static::count_items($rel->guid_one, $inverse, $recursive);
+                    } else{
+                        $count += static::count_items($rel->guid_two, $inverse, $recursive);
+                    }
+                }
+            }
+        }
+        return $count;
+    }
+
+    /**
      * Remove Items from a Collection.
      *
      * @param int   $id Id from Collection to remove Items from.
