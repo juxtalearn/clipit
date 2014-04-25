@@ -10,9 +10,14 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$item = $vars['entity'];
-
+$items = $vars['item'];
+if ($item_class = $vars['item_class']) {
+    $item_class = "$item_class row";
+}
 ?>
-<tr>
+
+<?php foreach($items as $item): ?>
+<td class="<?php echo $item_class; ?>">
     <?php echo $item; ?>
-</tr>
+</td>
+<?php endforeach; ?>

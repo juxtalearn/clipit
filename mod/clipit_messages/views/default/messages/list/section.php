@@ -10,13 +10,15 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$messages = elgg_extract('entity', $vars);
-
+$items = elgg_extract('items', $vars);
+if ($items_class = $vars['items_class']) {
+    $items_class = "$items_class row";
+}
 ?>
 <table class="messages-table table table-advance table-hover">
-    <?php foreach($messages as $message): ?>
-        <tr>
-            <?php echo elgg_view("messages/list/item", array('entity' => $message)); ?>
+    <?php foreach($items as $item): ?>
+        <tr class="<?php echo $item_class; ?>">
+            <?php echo elgg_view("messages/list/item", array('item' => $item)); ?>
         </tr>
     <?php endforeach; ?>
 </table>

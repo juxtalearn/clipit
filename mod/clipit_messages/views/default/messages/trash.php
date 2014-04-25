@@ -33,8 +33,7 @@ foreach($messages as $message){
         $message->description,
         $message->option
     );
-    $items = array_merge($items, $item);
+    $items = array_merge($items, array($item));
 }
-
 echo elgg_view("messages/list/section", array('items' => $items));
 ?>
