@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 $messages = elgg_extract('entity', $vars);
+
 ?>
 <table class="messages-table table table-advance table-hover">
     <?php foreach($messages as $message): ?>

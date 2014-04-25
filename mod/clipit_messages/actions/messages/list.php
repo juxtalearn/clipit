@@ -39,8 +39,8 @@ switch($option){
             foreach($messages_conversation as $message_conversation){
                 ClipitChat::set_read_status($message_conversation->id, false, array($user_id));
             }
-            system_message(elgg_echo('messages:unread:marked'));
         }
+        system_message(elgg_echo('messages:unread:marked'));
         break;
     case "remove":
         foreach($users_sender as $user_sender){
@@ -48,22 +48,27 @@ switch($option){
             foreach($messages_conversation as $message_conversation){
                 ClipitChat::set_archived_status($message_conversation->id, true, array($user_id));
             }
-            system_message(elgg_echo('messages:removed'));
         }
+        system_message(elgg_echo('messages:removed'));
         break;
     case "to_inbox":
+        $messages_id = $users_sender;
+//        foreach($messages_id as $message_id){
+//            // Main message
+//            $message = array_pop(ClipitMessage::get_by_id(array($message_id)));
+//            ClipitMessage::set_archived_status($message->id, false, array($user_id));
+//            // Replies message
+//            $replies = ClipitMessage::get_replies($message_id);
+//            foreach($replies as $reply_id){
+//                $reply = array_pop(ClipitMessage::get_by_id(array($reply_id)));
+//                ClipitMessage::set_archived_status($reply->id, false, array($user_id));
+//            }
+//            system_message(elgg_echo('messages:inbox:moved'));
+//        }
         foreach($messages_id as $message_id){
-            // Main message
-            $message = array_pop(ClipitMessage::get_by_id(array($message_id)));
-            ClipitMessage::set_archived_status($message->id, false, array($user_id));
-            // Replies message
-            $replies = ClipitMessage::get_replies($message_id);
-            foreach($replies as $reply_id){
-                $reply = array_pop(ClipitMessage::get_by_id(array($reply_id)));
-                ClipitMessage::set_archived_status($reply->id, false, array($user_id));
-            }
-            system_message(elgg_echo('messages:inbox:moved'));
+            ClipitChat::set_archived_status((int)$message_id, false, array($user_id));
         }
+        system_message(elgg_echo('messages:inbox:moved'));
         break;
     default:
         register_error(elgg_echo("messages:error"));
