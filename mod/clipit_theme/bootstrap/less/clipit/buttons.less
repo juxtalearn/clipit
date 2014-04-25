@@ -25,6 +25,17 @@
 .btn-danger  { .btn-styles(@red_clipit); }
 .btn-info    { .btn-styles(@yellow_clipit); }
 
+.btn-success-o{
+  .btn-styles(@green_clipit_2);
+  color: @green_clipit_2;
+  border: 1px solid @green_clipit_2;
+  background: #fff;
+  &:hover,
+  &focus{
+    color: #fff;
+  }
+}
+
 // Option list
 .btn-options{
   color: #fff;

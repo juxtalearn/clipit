@@ -83,15 +83,16 @@ $(function(){
 <table class="messages-table table table-advance table-hover">
     <?php
     foreach($messages_array as $message):
-        $message = array_pop($message);
-        $isRemoved = array_pop(ClipitChat::get_archived_status($message->id, array($user_id)));
+        $last_message = end($message);
         if($vars['trash']){
             $isRemoved = false;
+        } else {
+            $message = array_pop($message);
+            $isRemoved = array_pop(ClipitChat::get_archived_status($message->id, array($user_id)));
         }
-        if(!$isRemoved):
 
+        if(!$isRemoved):
         // Get replies
-        $last_message = reset(ClipitChat::get_conversation($message->owner_id, $user_id));
         $message_text = trim(elgg_strip_tags($last_message->description));
         // Message text truncate max length 40
         if(mb_strlen($message_text)>50){
@@ -107,18 +108,19 @@ $(function(){
         }
         if($vars['sent']){
             // $user_from = array_pop(ClipitUser::get_by_id(array($message->destination)));
-            //print_r(ClipitChat::get_by_id(array($message->destination)));
             $user_from = array_pop(ClipitUser::get_by_id(array($message->owner_id)));
             $text_from = elgg_echo("message:to").":";
             $text_user_from = $user_from->name;
         }
-        $total_replies = count($replies);
+
+        $new_replies = ClipitChat::get_conversation_unread($user_id, $message->owner_id);
+        $total_replies = ClipitChat::get_conversation_count($user_id, $message->owner_id);
         $message_url = elgg_get_site_url()."messages/view/$user_from->login";
     ?>
     <tr class="<?php echo $message_unread; ?>">
         <?php if(!$vars['sent']): ?>
         <td class="select">
-            <input type="checkbox" name="check-msg[]" value="<?php echo $message->id; ?>" class="select-simple">
+            <input type="checkbox" name="check-msg[]" value="<?php echo $message->owner_id; ?>" class="select-simple">
         </td>
         <?php endif; ?>
         <td class="user-avatar">
@@ -135,7 +137,8 @@ $(function(){
             if($total_replies > 0):
                 // Get last post data
                 $last_post_id = end($replies);
-                $last_post = array_pop(ClipitChat::get_by_id(array($last_post_id)));
+                $last_post = ClipitChat::get_conversation($message->owner_id, $user_id);
+                $last_post = end($last_post);
                 $author_last_post = array_pop(ClipitUser::get_by_id(array($last_post->owner_id)));
             ?>
             <a href="<?php echo $message_url."#reply_".$last_post->id; ?>">
@@ -156,10 +159,6 @@ $(function(){
             <span class="label label-primary label-mini new-replies" title="<?php echo elgg_echo("reply:unreads", array($new_replies)); ?>">
                 +<?php echo $new_replies; ?>
             </span>
-            <?php else: ?>
-            <span class="label label-primary label-mini" title="<?php echo elgg_echo("reply:total", array($total_replies)); ?>">
-                <?php echo $total_replies; ?>
-            </span>
             <?php endif; ?>
         </td>
         <td class="click-simulate" onclick="document.location.href = '<?php echo $message_url; ?>';">
@@ -176,7 +175,7 @@ $(function(){
             ?>
             </button>
             <?php
-            $remove_msg_url = "action/messages/list?set-option=remove&check-msg[]={$message->id}";
+            $remove_msg_url = "action/messages/list?set-option=remove&check-msg[]={$message->owner_id}";
             echo elgg_view('output/url', array(
                 'href'  => elgg_add_action_tokens_to_url($remove_msg_url, true),
                 'title' => elgg_echo("message:movetotrash"),
@@ -188,13 +187,13 @@ $(function(){
 
         <?php if($vars['trash']): ?>
             <?php
-            $move_msg_url = "action/messages/list?set-option=to_inbox&check-msg[]={$message->id}";
+            $move_msg_url = "action/messages/list?set-option=to_inbox&check-msg[]={$message->owner_id}";
             echo elgg_view('output/url', array(
                 'href'  => elgg_add_action_tokens_to_url($move_msg_url, true),
                 'title' => elgg_echo("message:movetoinbox"),
-                'style' => 'color:#fff;',
-                'text'  => '<i class="fa fa-check" style="color: #fff;"></i> '.elgg_echo("message:movetoinbox"),
-                'class' => 'btn btn-success btn-xs',
+                'style' => 'padding: 3px 9px;',
+                'text'  => '<i class="fa fa-check"></i> '.elgg_echo("message:movetoinbox"),
+                'class' => 'btn btn-success-o btn-xs',
             ));
             ?>
         <?php endif; ?>

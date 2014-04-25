@@ -8,6 +8,7 @@
  */
 $entity = elgg_extract("entity", $vars);
 $href = elgg_extract("href", $vars);
+$user_id = elgg_get_logged_in_user_guid();
 $activity_id = elgg_get_page_owner_guid();
 // Get all messages by destination
 $messages_array = array_pop(ClipitPost::get_by_destination(array($entity->id)));
@@ -23,7 +24,11 @@ foreach($messages_array as $message):
     if(mb_strlen($message_text)>280){
         $message_text = substr($message_text, 0, 280)."...";
     }
-    $total_replies = ClipitPost::get_count_by_destination(array($message->id));
+    $total_replies = array_pop(ClipitPost::count_by_destination(array($message->id)));
+    $total_unread_replies = array_pop(ClipitPost::unread_by_destination(array($message->id), $user_id, true));
+    if($total_unread_replies > 0){
+        $total_replies = "+ ".$total_unread_replies;
+    }
     // Get owner user object
     $owner = array_pop(ClipitUser::get_by_id(array($message->owner_id)));
     // Owner options (edit/delete)
@@ -43,7 +48,6 @@ foreach($messages_array as $message):
         // Remote modal, form content
         echo elgg_view("page/components/modal_remote", array('id'=> "edit-discussion-{$message->id}" ));
     }
-
 ?>
 <div class="row row-table messages-discussion">
     <div class="col-md-9">
@@ -71,8 +75,7 @@ foreach($messages_array as $message):
             </i>
             <?php
             if($total_replies > 0):
-                $last_post_id = end(ClipitMessage::get_replies($message->id));
-                $last_post = array_pop(ClipitMessage::get_by_id(array($last_post_id)));
+                $last_post = end(array_pop(ClipitPost::get_by_destination(array($message->id))));
                 $author_last_post = array_pop(ClipitUser::get_by_id(array($last_post->owner_id)));
             ?>
             <i class="pull-right">

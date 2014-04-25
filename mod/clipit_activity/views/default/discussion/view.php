@@ -14,8 +14,12 @@ $message = elgg_extract("entity", $vars);
 $owner = new ElggUser($message->owner_id);
 $user_loggedin_id = elgg_get_logged_in_user_guid();
 $user_loggedin = new ElggUser($user_loggedin_id);
-$total_replies = ClipitPost::get_count_by_destination(array($message->id));
+$total_replies = ClipitPost::count_by_destination(array($message->id));
 
+// set read status
+if($message->owner_id != $user_loggedin_id){
+    ClipitPost::set_read_status($message->id, true, array($user_loggedin_id));
+}
 // Owner options (edit/delete)
 $owner_options = "";
 if($message->owner_id == elgg_get_logged_in_user_guid()){
@@ -52,8 +56,7 @@ if($message->owner_id == elgg_get_logged_in_user_guid()){
                 </i>
                 <?php
                 if($total_replies > 0):
-                    $last_post_id = end(ClipitMessage::get_replies($message->id));
-                    $last_post = array_pop(ClipitMessage::get_by_id(array($last_post_id)));
+                    $last_post = end(array_pop(ClipitPost::get_by_destination(array($message->id))));
                     $author_last_post = array_pop(ClipitUser::get_by_id(array($last_post->owner_id)));
                     ?>
                     <i class="pull-right">

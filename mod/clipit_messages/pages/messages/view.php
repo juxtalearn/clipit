@@ -14,7 +14,7 @@ $title = elgg_echo("message");
 $user_id = elgg_get_logged_in_user_guid();
 $user_sender = array_pop(ClipitUser::get_by_login(array($page[1])));
 if($user_sender){
-    $message = ClipitChat::get_conversation($user_sender->id, $user_id);
+    $message = ClipitChat::get_conversation($user_id, $user_sender->id);
 }
 $breadcrumb_title = $user_sender->name;
 elgg_push_breadcrumb($user_sender->name);

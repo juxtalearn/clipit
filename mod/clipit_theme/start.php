@@ -52,7 +52,7 @@ function clipit_final_init() {
     elgg_register_admin_menu_item('administer', 'clipit_theme', 'clipit_plugins');
     elgg_register_action("clipit_theme/settings", elgg_get_plugins_path() . "clipit_theme/actions/settings.php", 'admin');
     elgg_register_action('login', elgg_get_plugins_path() . "clipit_theme/actions/login.php", 'public');
-    elgg_register_action('logout');
+    elgg_register_action('logout', elgg_get_plugins_path() . "clipit_theme/actions/logout.php");
     elgg_register_action('register', elgg_get_plugins_path() . "clipit_theme/actions/register.php", 'public');
 
     elgg_register_action('user/requestnewpassword', elgg_get_plugins_path() . "clipit_theme/actions/user/requestnewpassword.php", 'public');

@@ -55,6 +55,9 @@ $english = array(
     'sta:files' => 'Files',
     'sta:videos' => 'Videos',
     'sta:links' => 'Interesting links',
+    // Publications
+    'publications:no_evaluated' => 'No evaluated',
+    'publications:evaluated' => 'Evaluated',
 );
 
 add_translation('en', $english);

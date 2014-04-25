@@ -6878,6 +6878,32 @@ fieldset[disabled] .elgg-sidebar input.elgg-button-submit.active {
 .btn-info.active {
   background-color: #9c8604;
 }
+.btn-success-o {
+  border: none;
+  background-color: #669900;
+  background-repeat: repeat-x;
+  font-family: FuturaBoldRegular, Impact, 'Impact Bold', Helvetica, Arial, sans, sans-serif;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 7px;
+  letter-spacing: 1px;
+  color: #669900;
+  border: 1px solid #669900;
+  background: #fff;
+}
+.btn-success-o:hover,
+.btn-success-o:focus {
+  background-color: #4b7000;
+  background-position: 0 -15px;
+}
+.btn-success-o:active,
+.btn-success-o.active {
+  background-color: #3d5c00;
+}
+.btn-success-o:hover,
+.btn-success-ofocus {
+  color: #fff;
+}
 .btn-options {
   color: #fff;
   font-size: 12px;
@@ -8516,6 +8542,9 @@ body {
   background: #f1f2f7;
 }
 a {
+  color: #32b4e5;
+}
+.blue {
   color: #32b4e5;
 }
 ul,

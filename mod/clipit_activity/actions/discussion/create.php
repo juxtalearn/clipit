@@ -38,11 +38,14 @@ switch($object['subtype']){
 if(count($entity)==0 || trim($discussion_title) == "" || trim($discussion_text) == ""){
     register_error(elgg_echo("discussion:cantcreate"));
 } else{
-    ClipitPost::create(array(
+    $new_message_id = ClipitPost::create(array(
         'name' => $discussion_title,
         'description' => $discussion_text,
         'destination' => $entity->id,
     ));
+    // set read status true to the owner's message
+    ClipitPost::set_read_status($new_message_id, true, array($user_id));
+
     system_message(elgg_echo('discussion:created'));
 }
 

@@ -31,10 +31,12 @@ foreach($messages as $message):
     $message = array_pop($message);
     $user = array_pop(ClipitUser::get_by_id(array($message->owner_id)));
     $user_elgg = new ElggUser($message->owner_id);
-    $last_message = reset(ClipitChat::get_conversation($message->owner_id, $user_id));
+    $last_message = end(ClipitChat::get_conversation($user_id, $message->owner_id));
     $message_text = trim(elgg_strip_tags($last_message->description));
     // Message text truncate max length 50
     $message_text = substr($message_text, 0, 50);
+    // unread count messages
+    $unread_count = ClipitChat::get_conversation_unread($user_id, $message->owner_id);
 ?>
 <li role="presentation" class="message-item">
     <a
@@ -44,14 +46,17 @@ foreach($messages as $message):
 
         <img class="user-avatar" src="<?php echo $user_elgg->getIconURL("small"); ?>">
         <div class="text-truncate" style=" font-size: 13px; text-transform: none; overflow: hidden; letter-spacing: 0;">
-            <?php if(array_pop(ClipitChat::get_read_status($message->id)) == false): ?>
-            <span class="label label-primary pull-right"><?php echo elgg_echo("message:unread");?></span>
+            <?php if($unread_count > 0): ?>
+                <span class="label label-primary pull-right">
+                    <?php echo $unread_count; ?>
+                    <?php echo elgg_echo("message:unread");?>
+                </span>
             <?php endif; ?>
             <span><?php echo $user->name;?></span>
             <small class="show"><?php echo elgg_view('output/friendlytime', array('time' => $message->time_created));?></small>
             <div style="color: #333;" class="text-truncate">
                 <?php if($last_message->owner_id == $user_id): ?>
-                <small class="fa fa-mail-reply" style="font-size: 85% !important;color: #999;float: none !important;padding: 0;"></small>
+                    <small class="fa fa-mail-reply" style="font-size: 85% !important;color: #999;float: none !important;padding: 0;"></small>
                 <?php endif; ?>
                 <?php echo $message_text; ?>
             </div>

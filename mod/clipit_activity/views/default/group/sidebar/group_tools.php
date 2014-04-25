@@ -1,18 +1,25 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
- * User: equipo
- * Date: 17/02/14
- * Time: 12:43
- * To change this template use File | Settings | File Templates.
+ * ClipIt - JuxtaLearn Web Space
+ * PHP version:     >= 5.2
+ * Creation date:   22/04/14
+ * Last update:     22/04/14
+ * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC JuxtaLearn Project
+ * @version         $Version$
+ * @link            http://www.juxtalearn.eu
+ * @license         GNU Affero General Public License v3
+ * @package         ClipIt
  */
 $activity = elgg_extract('entity', $vars);
+$user_id = elgg_get_logged_in_user_guid();
+$group_id = ClipitGroup::get_from_user_activity($user_id, $activity->id);
+$total_unread_posts = array_pop(ClipitPost::unread_by_destination(array($group_id), $user_id, true));
 
 elgg_register_menu_item('group:tools', array(
     'name' => 'group_discussion',
     'text' => elgg_echo('group:discussion'),
     'href' => "clipit_activity/".$activity->id."/group/discussion",
-    'badge' => 10
+    'badge' => $total_unread_posts > 0 ? $total_unread_posts : ""
 ));
 elgg_register_menu_item('group:tools', array(
     'name' => 'group_files',

@@ -12,21 +12,28 @@
  */
 $title = elgg_echo("messages:trash");
 elgg_push_breadcrumb($title);
+$user_id = elgg_get_logged_in_user_guid();
 
-$messages = array_pop(ClipitMessage::get_by_destination(array($user_id)));
+$messages = ClipitChat::get_archived($user_id);
+
 if(!is_array($messages)){
     $messages = array();
 }
-$messages_removed = array();
+
+
+$content = elgg_view_form('messages/list', array(), array('entity' => $messages, 'trash' => true));
+//
 foreach($messages as $message){
-    $isRemoved = array_pop(ClipitMessage::get_archived_status($message->id, array($user_id)));
-    if($isRemoved){
-        $messages_removed = array_merge(array($message), $messages_removed);
+    $message->description = trim(elgg_strip_tags($message->description));
+    // Message text truncate max length 80
+    if(mb_strlen($message->description) > 80){
+        $message->description = substr($message->description, 0, 80)."...";
     }
 }
+$content = elgg_view("messages/list/section", array('entity' => $messages, 'trash' => true));
+//
 
-$content = elgg_view_form('messages/list', array(), array('entity' => $messages_removed, 'trash' => true));
-if(empty($messages_removed)){
+if(empty($messages)){
     $content = elgg_echo("messages:trash:none");
 }
 $params = array(

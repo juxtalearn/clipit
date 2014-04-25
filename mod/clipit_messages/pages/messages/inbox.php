@@ -15,16 +15,10 @@ $title = elgg_echo("messages:inbox");
 elgg_push_breadcrumb($title);
 
 $messages = ClipitChat::get_inbox($user_id);
-
+array_reverse($messages);
 if(!is_array($messages)){
     $messages = array();
 }
-$messages_by_sender = array_pop(ClipitChat::get_by_sender(array($user_id)));
-//foreach($messages_by_sender as $message_sender){
-//    if(count(ClipitMessage::get_replies($message_sender->id)) > 0){
-//        $messages = array_merge(array($message_sender), $messages);
-//    }
-//}
 $content = elgg_view_form('messages/list', array(), array('entity' => $messages, 'inbox' => true));
 if (!$messages) {
     $content = elgg_echo("messages:inbox:none");

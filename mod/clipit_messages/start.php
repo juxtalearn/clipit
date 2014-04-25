@@ -72,7 +72,7 @@ function messages_page_handler($page) {
             case 'inbox':
                 include "$file_dir/inbox.php";
                 break;
-            case 'sent_email':
+            case 'sent':
                 include "$file_dir/sent.php";
                 break;
             case 'trash':
@@ -93,20 +93,18 @@ function messages_page_handler($page) {
 function messages_setup_sidebar_menus(){
     $user_id = elgg_get_logged_in_user_guid();
     if (elgg_in_context('messages_page')) {
+        $unread_count = ClipitChat::get_inbox_unread($user_id);
         $params = array(
             'name' => 'a_inbox',
             'text' => elgg_echo('messages:inbox'),
             'href' => "messages/inbox",
+            'badge' => $unread_count > 0 ? $unread_count : ""
         );
-//        $unread_count = ClipitChat::get_unread_count($user_id);
-//        if($unread_count > 0){
-//            $params['badge'] = $unread_count;
-//        }
         elgg_register_menu_item('page', $params);
         $params = array(
-            'name' => 'sent_email',
+            'name' => 'sent',
             'text' => elgg_echo('messages:sent_email'),
-            'href' => "messages/sent_email",
+            'href' => "messages/sent",
         );
         elgg_register_menu_item('page', $params);
         $params = array(

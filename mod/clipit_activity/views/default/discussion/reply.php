@@ -10,24 +10,30 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$reply_msg = elgg_extract('entity', $vars);
+$message = elgg_extract('entity', $vars);
 $auto_id = elgg_extract('auto_id', $vars);
-$user_reply = array_pop(ClipitUser::get_by_id(array($reply_msg->owner_id)));
-$user_reply_elgg = new ElggUser($reply_msg->owner_id);
+$user_loggedin_id = elgg_get_logged_in_user_guid();
+$user_reply = array_pop(ClipitUser::get_by_id(array($message->owner_id)));
+$user_reply_elgg = new ElggUser($message->owner_id);
+
+// activity discussion, get group data
 if($vars['activity']){
     $group_id = ClipitGroup::get_from_user_activity($user_reply->id, 74);
 }
+// set read status
+if($message->owner_id != $user_loggedin_id){
+    ClipitPost::set_read_status($message->id, true, array($user_loggedin_id));
+}
 ?>
-<a name="reply_<?php echo $reply_msg->id; ?>"></a>
+<a name="reply_<?php echo $message->id; ?>"></a>
 <div class="discussion discussion-reply-msg">
     <div class="header-post">
         <a class="show btn pull-right msg-quote" style="
     background: #fff;
-    padding: 3px 7px;
+    padding: 2px 5px;
     border-radius: 4px;
     border: 1px solid #bae6f6;
 ">#<?php echo $auto_id;?></a>
-        <?php echo $owner_reply_options; ?>
         <div class="user-reply">
             <img class="user-avatar" src="<?php echo $user_reply_elgg->getIconURL('small'); ?>" />
         </div>
@@ -46,9 +52,9 @@ if($vars['activity']){
                     </span>
                 <?php endif; ?>
 
-                <?php echo elgg_view('output/friendlytime', array('time' => $reply_msg->time_created));?>
+                <?php echo elgg_view('output/friendlytime', array('time' => $message->time_created));?>
             </small>
         </div>
     </div>
-    <div class="body-post"><?php echo text_reference($reply_msg->description); ?></div>
+    <div class="body-post"><?php echo text_reference($message->description); ?></div>
 </div>

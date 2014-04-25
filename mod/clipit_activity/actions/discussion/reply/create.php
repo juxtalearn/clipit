@@ -14,15 +14,19 @@
 $message_id = (int)get_input('message-id');
 $message = array_pop(ClipitPost::get_by_id(array($message_id)));
 $message_reply = get_input('message-reply');
+$user_id = elgg_get_logged_in_user_guid();
 
 if(count($message)==0 || trim($message_reply) == ""){
     register_error(elgg_echo("reply:cantcreate"));
 } else{
-    ClipitPost::create(array(
+    $new_message_id = ClipitPost::create(array(
         'name' => '',
         'description' => $message_reply,
         'destination' => $message->id,
     ));
+    // set read status true to the owner's message
+    ClipitPost::set_read_status($new_message_id, true, array($user_id));
+
     system_message(elgg_echo('reply:created'));
 }
 

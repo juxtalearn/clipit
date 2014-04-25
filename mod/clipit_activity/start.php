@@ -33,6 +33,11 @@ function clipit_activity_init() {
     elgg_register_action("group/leave", elgg_get_plugins_path() . "clipit_activity/actions/group/leave.php");
     elgg_register_action("group/create", elgg_get_plugins_path() . "clipit_activity/actions/group/create.php");
     elgg_register_action("group/remove_member", elgg_get_plugins_path() . "clipit_activity/actions/group/remove_member.php");
+    // Multimedia
+    elgg_register_action("multimedia/videos/add", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/videos/add.php");
+    elgg_register_action("multimedia/links/add", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/links/add.php");
+    elgg_register_action("multimedia/files/upload", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/files/upload.php");
+    elgg_register_action("multimedia/links/extract_data", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/links/extract_data.php");
     // Discussion
     elgg_register_action("discussion/create", elgg_get_plugins_path() . "clipit_activity/actions/discussion/create.php");
     elgg_register_action("discussion/remove", elgg_get_plugins_path() . "clipit_activity/actions/discussion/remove.php");
@@ -208,9 +213,13 @@ function activity_page_handler($page) {
                 case 'publications':
                     $title = elgg_echo("activity:publications");
                     elgg_push_breadcrumb($title);
+                    $selected_tab = get_input('filter', 'no_evaluated');
+                    $href = "clipit_activity/{$activity->id}/publications";
+                    $filter = elgg_view('publications/filter', array('selected' => $selected_tab, 'entity' => $activity, 'href' => $href));
+                    $content = elgg_view('publications/list', array('entity' => $activity));
                     $params = array(
-                        'content'   => elgg_view('publications/list', array('entity' => $activity)),
-                        'filter'    => '',
+                        'content'   => $content,
+                        'filter'    => $filter,
                         'title'     => $title,
                         'sub-title' => $activity->name,
                         'title_style' => "background: #". $activity->color,
@@ -223,20 +232,20 @@ function activity_page_handler($page) {
                     $href = "clipit_activity/{$activity->id}/materials";
                     switch ($selected_tab) {
                         case 'files':
-                            $content = elgg_view('stas/files', array('entity' => $activity));
+                            $content = elgg_view('multimedia/files', array('entity' => $activity));
                             if (!$content) {
                                 $content = elgg_echo('groups:none');
                             }
                             break;
                         case 'videos':
-                            $content = elgg_view('stas/videos', array('entity' => $activity));
+                            $content = elgg_view('multimedia/videos', array('entity' => $activity));
                             if (!$content) {
                                 $content = elgg_echo('discussion:none');
                             }
                             break;
                         case 'links':
                         default:
-                            $content = elgg_view('stas/links', array('entity' => $activity));
+                            $content = elgg_view('multimedia/links', array('entity' => $activity));
                             if (!$content) {
                                 $content = elgg_echo('groups:none');
                             }

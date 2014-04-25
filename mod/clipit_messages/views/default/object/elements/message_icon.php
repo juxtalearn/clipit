@@ -11,7 +11,7 @@
  * @package         ClipIt
  */
 $user_id = elgg_get_logged_in_user_guid();
-//$unread_count = ClipitMessage::get_unread_count($user_id);
+$unread_count = ClipitChat::get_inbox_unread($user_id);
 ?>
 <a id="messages" role="button" data-toggle="dropdown" href="javascript:;">
     <?php if($unread_count > 0): ?>
