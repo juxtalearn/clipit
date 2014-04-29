@@ -41,8 +41,9 @@ class UBSite{
         if(elgg_authenticate($login, $password) === true){
             $user = get_user_by_username($login);
             $query = "select * from {$CONFIG->dbprefix}users_apisessions where user_guid = {$user->guid}";
-            $existing_token = get_data_row($query)["token"];
-            var_dump($existing_token);
+            if($row = get_data_row($query)){
+                var_dump($row);
+            }
             $token = create_user_token($login, $timeout);
             if($token){
                 return $token;
