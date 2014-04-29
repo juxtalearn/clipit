@@ -296,7 +296,7 @@ function expose_activity_functions(){
                 "type" => "int",
                 "required" => true)),
         "Set Activity Status to Enroll",
-        "GET", false, true);
+        "POST", false, true);
     expose_function(
         $api_suffix . "set_status_active",
         $class_suffix . "set_status_active",
@@ -305,7 +305,7 @@ function expose_activity_functions(){
                 "type" => "int",
                 "required" => true)),
         "Set Activity Status to Active",
-        "GET", false, true);
+        "POST", false, true);
     expose_function(
         $api_suffix . "set_status_closed",
         $class_suffix . "set_status_closed",
@@ -314,7 +314,7 @@ function expose_activity_functions(){
                 "type" => "int",
                 "required" => true)),
         "Set Activity Status to Closed",
-        "GET", false, true);
+        "POST", false, true);
     expose_function(
         $api_suffix . "add_called_users",
         $class_suffix . "add_called_users",
