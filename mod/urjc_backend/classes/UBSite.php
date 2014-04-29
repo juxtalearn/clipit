@@ -37,7 +37,12 @@ class UBSite{
      * @throws SecurityException
      */
     static function get_token($login, $password, $timeout = 60){
+        global $CONFIG;
         if(elgg_authenticate($login, $password) === true){
+            $user = get_user_by_username($login);
+            $query = "select * from {$CONFIG->dbprefix}users_apisessions where user_guid = {$user->guid}";
+            $existing_token = get_data_row($query)["token"];
+            var_dump($existing_token);
             $token = create_user_token($login, $timeout);
             if($token){
                 return $token;
