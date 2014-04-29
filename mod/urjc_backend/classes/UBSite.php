@@ -37,11 +37,17 @@ class UBSite{
      * @throws SecurityException
      */
     static function get_token($login, $password, $timeout = 60){
+        global $CONFIG;
         if(elgg_authenticate($login, $password) === true){
-            $token = create_user_token($login, $timeout);
-            if($token){
-                return $token;
+            $user = get_user_by_username($login);
+            $query = "select * from {$CONFIG->dbprefix}users_apisessions where user_guid = {$user->guid};";
+            $row = get_data_row($query);
+            if(isset($row->token) && ((int)$row->expires - time()) > 0){
+                $token = $row->token;
+            } else{
+                $token = create_user_token($login, $timeout);
             }
+            return $token;
         }
         throw new SecurityException(elgg_echo('SecurityException:authenticationfailed'));
     }
