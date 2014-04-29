@@ -42,7 +42,7 @@ class UBSite{
             $user = get_user_by_username($login);
             $query = "select * from {$CONFIG->dbprefix}users_apisessions where user_guid = {$user->guid};";
             $row = get_data_row($query);
-            if(isset($row->token)){
+            if(isset($row->token) && ((int)$row->expires - time()) > 0){
                 $token = $row->token;
             } else{
                 $token = create_user_token($login, $timeout);
