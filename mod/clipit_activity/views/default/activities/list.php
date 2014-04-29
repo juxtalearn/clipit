@@ -27,8 +27,6 @@ if (is_array($items) && count($items) > 0):
             $group_id = ClipitGroup::get_from_user_activity($user_loggedin_id, $item->id);
             $group_array = ClipitGroup::get_by_id(array($group_id));
             $group =  array_pop($group_array); // ClipitGroup object
-            $all_groups = ClipitActivity::get_groups($item->id);
-            $activity_count = count($all_groups); // Activity count
             $users = ClipitGroup::get_users($group_id);
             $users = array_slice($users, 0, 10);
 
@@ -64,6 +62,7 @@ if (is_array($items) && count($items) > 0):
                     <div class="col-md-6">
                         <div class="row">
                             <div class="col-xs-6" style="border-right: 1px solid #ccc; padding-right: 15px;">
+                                <?php if($group):?>
                                 <div>
                                     <?php echo $progress_html; ?>
                                     <strong>
@@ -87,6 +86,7 @@ if (is_array($items) && count($items) > 0):
                                         ?>
                                     <?php endforeach; ?>
                                 </div>
+                                <?php endif; ?>
                             </div>
                             <div class="col-xs-6">
                                 <small class='show'>Teacher</small>

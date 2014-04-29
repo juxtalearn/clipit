@@ -23,12 +23,10 @@ $params_progress = array(
     'value' => 30,
     'width' => '100%'
 );
-$progress_bar = elgg_view("page/components/progressbar", $params_progress);
 
 $params_list = array(
     'items'         => $my_activities,
     'pagination'    => false,
-    'progress_bar'  => $progress_bar,
     'list_class'    => 'my-activities',
     'full_view'     => false,
 );
@@ -39,7 +37,7 @@ $selected_tab = 'all';
 $filter = elgg_view('activities/filter', array('selected' => $selected_tab, 'entity' => $activity));
 $params = array(
     'content' => $content,
-    'title' => elgg_echo("my_activities"),
+    'title' => elgg_echo("explore"),
     'filter' => $filter,
     'sidebar' => $sidebar,
     'class' => 'sidebar-lg main-md'
