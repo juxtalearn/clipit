@@ -43,8 +43,9 @@ $(function(){
                             "<img src='<?php echo elgg_get_site_url()?>mod/clipit_theme/graphics/ok.png'/>" +
                             " <strong>Check your email to confirm your password reset.</strong></p>")
                     .remove();
+                form.submit();
+                return false;
             }
-        }
     });
 });
 </script>
