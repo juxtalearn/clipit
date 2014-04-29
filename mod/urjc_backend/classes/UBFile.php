@@ -29,6 +29,7 @@ class UBFile extends UBItem{
      * @var string File data in byte string format
      */
     public $data = null;
+    public $local_file = "";
 
     /* Instance Functions */
     /**
@@ -86,12 +87,21 @@ class UBFile extends UBItem{
         }
         $elgg_file->setFilename((string)$date_obj->getTimestamp() . static::TIMESTAMP_DELIMITER . (string)$this->name);
         $elgg_file->description = (string)$this->description;
-        $elgg_file->open("write");
-        if($decoded_data = base64_decode($this->data, true)){
-            $elgg_file->write($decoded_data);
-        } else{
-            $elgg_file->write($this->data);
-        }        $elgg_file->close();
+
+        if($this->data !== null){
+            $elgg_file->open("write");
+            if($decoded_data = base64_decode($this->data, true)){
+                $elgg_file->write($decoded_data);
+            } else{
+                $elgg_file->write($this->data);
+            }
+            $elgg_file->close();
+        }
+        else{ // File was uploaded into local temp dir
+            $elgg_file->open("write"); // to ensure file is created in disk
+            $elgg_file->close();
+            move_uploaded_file($this->local_file, $elgg_file->getFilenameOnFilestore());
+        }
         $elgg_file->access_id = ACCESS_PUBLIC;
         $elgg_file->save();
         $this->owner_id = (int)$elgg_file->owner_guid;

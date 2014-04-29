@@ -50,19 +50,21 @@ class ClipitChat extends UBMessage{
     }
 
     static function get_inbox($user_id){
+        $inbox_array = array();
         $incoming_messages = static::get_by_destination(array($user_id));
         $incoming_messages = array_pop($incoming_messages);
-        $sender_array = array();
-        $inbox_array = array();
-        foreach($incoming_messages as $message){
-            $archived_status = ClipitChat::get_archived_status($message->id, array($user_id));
-            $archived_status = (bool)array_pop($archived_status);
-            if($archived_status === false){
-                if(array_search($message->owner_id, $sender_array) === false){
-                    $sender_array[] = $message->owner_id;
-                    $inbox_array[$message->owner_id] = array($message);
-                } else{
-                    array_push($inbox_array[$message->owner_id], $message);
+        if($incoming_messages !== null){
+            $sender_array = array();
+            foreach($incoming_messages as $message){
+                $archived_status = ClipitChat::get_archived_status($message->id, array($user_id));
+                $archived_status = (bool)array_pop($archived_status);
+                if($archived_status === false){
+                    if(array_search($message->owner_id, $sender_array) === false){
+                        $sender_array[] = $message->owner_id;
+                        $inbox_array[$message->owner_id] = array($message);
+                    } else{
+                        array_push($inbox_array[$message->owner_id], $message);
+                    }
                 }
             }
         }
