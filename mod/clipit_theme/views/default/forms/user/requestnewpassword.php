@@ -36,15 +36,15 @@ $(function(){
         },
         submitHandler: function(form) {
             if ($(form).valid()){
-                $(form).find("input[name=email]").prop("disabled",true);
-                $(form).find("input[type=submit]")
-                    .after(
-                        "<p class='text-info'>" +
-                            "<img src='<?php echo elgg_get_site_url()?>mod/clipit_theme/graphics/ok.png'/>" +
-                            " <strong>Check your email to confirm your password reset.</strong></p>")
-                    .remove();
-                form.submit();
-                return false;
+                $.post( ""+$(form).attr('action')+"", $(form).serialize(), function(){
+                    $(form).find("input[name=email]").prop("disabled",true);
+                    $(form).find("input[type=submit]")
+                        .after(
+                            "<p class='text-info'>" +
+                                "<img src='<?php echo elgg_get_site_url()?>mod/clipit_theme/graphics/ok.png'/>" +
+                                " <strong>Check your email to confirm your password reset.</strong></p>")
+                        .remove();
+                });
             }
         }
     });
