@@ -5,6 +5,9 @@
  */
 
 $english = array(
+    // ERROR
+    'error:404' => "Esta funcionalidad aún no está operativa",
+
     'me'    => "Me",
     'options' => 'Options',
     'home' => 'home',

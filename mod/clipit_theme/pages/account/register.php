@@ -39,6 +39,7 @@ if (elgg_get_config('https_login')) {
 $form_params = array(
     'action' => $register_url,
     'class' => 'clipit-home-form',
+    'data-validate'=> 'true'
 );
 
 $body_params = array(

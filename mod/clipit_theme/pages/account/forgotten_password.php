@@ -19,6 +19,6 @@ $content .= elgg_view_form('user/requestnewpassword', array(
 ));
 
 $content .= '</div>';
-$body  = elgg_view_layout("one_column", array('content' => $content, 'class' => 'clipit-home'));
+$body  = elgg_view_layout("one_column", array('content' => $content, 'class' => 'clipit-home', 'data-validate'=> 'true'));
 
 echo elgg_view_page($title, $body);
