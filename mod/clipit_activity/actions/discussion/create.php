@@ -27,7 +27,7 @@ switch($object['subtype']){
     case 'clipit_group':
         $entity = array_pop(ClipitGroup::get_by_id(array($entity_id)));
         $user_groups = ClipitUser::get_groups($user_id);
-        if(!in_array($group->id, $user_groups)){
+        if(!in_array($entity->id, $user_groups)){
             register_error(elgg_echo("discussion:cantcreate"));
         }
         break;

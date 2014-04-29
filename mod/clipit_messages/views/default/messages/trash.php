@@ -43,15 +43,16 @@ foreach($messages as $message){
         'title' => $user->name,
         'text'  => $text_user_from));
     $item = array(
-        $check_msg,
+        array('item' => $check_msg),
         array(
             'item_class' => 'user-avatar',
-            ''
+            'item' => $user_data
         ),
-        $message->description,
-        implode("", $message->option)
+        array('item' => $message->description),
+        array('item' => implode("", $message->option)),
     );
     $items = array_merge($items, array($item));
 }
+    print_r($items);
 echo elgg_view("messages/list/section", array('items' => $items));
 ?>

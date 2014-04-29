@@ -217,6 +217,23 @@ function activity_page_handler($page) {
                     $href = "clipit_activity/{$activity->id}/publications";
                     $filter = elgg_view('publications/filter', array('selected' => $selected_tab, 'entity' => $activity, 'href' => $href));
                     $content = elgg_view('publications/list', array('entity' => $activity));
+                    if($page[2] == 'view' && $page[3]){
+                        $publication_id = (int)$page[3];
+                        $message = array_pop(ClipitPost::get_by_id(array($publication_id)));
+                        elgg_pop_breadcrumb($title);
+                        elgg_push_breadcrumb($title, $href);
+                        elgg_push_breadcrumb($message->name);
+                        if($message && $message->destination == $activity->id){
+                            $content = elgg_view('publications/view',
+                                array(
+                                    'entity'     => $message,
+                                    'activity'   => $activity,
+                                    'show_group' => true,
+                                ));
+                        } else {
+                            return false;
+                        }
+                    }
                     $params = array(
                         'content'   => $content,
                         'filter'    => $filter,
@@ -341,7 +358,8 @@ function group_tools_page_handler($page, $activity){
             $href = "clipit_activity/{$activity->id}/group/multimedia";
             switch ($selected_tab) {
                 case 'files':
-                    $content = elgg_view('multimedia/files', array('entity' => $group));
+                    $files = ClipitGroup::get_files($group->id);
+                    $content = elgg_view('multimedia/files', array('entity' => $group, 'files' => $files, 'href' => $href));
                     if (!$content) {
                         $content = elgg_echo('groups:none');
                     }
@@ -353,23 +371,33 @@ function group_tools_page_handler($page, $activity){
                     }
                     break;
                 case 'links':
-                default:
                     $content = elgg_view('multimedia/links', array('entity' => $group));
+                    if (!$content) {
+                        $content = elgg_echo('groups:none');
+                    }
+                    break;
+                default:
+                    $content = elgg_view('multimedia/files', array('entity' => $group));
                     if (!$content) {
                         $content = elgg_echo('groups:none');
                     }
                     break;
             }
             $filter = elgg_view('multimedia/filter', array('selected' => $selected_tab, 'entity' => $group, 'href' => $href));
-
+            if($page[3] == 'download' && $page[4]){
+                $file_dir = elgg_get_plugins_path() . 'clipit_activity/pages/file';
+                set_input('id', $page[4]);
+                include "$file_dir/download.php";
+            }
             if($page[3] == 'view' && $page[4]){
                 $file_id = (int)$page[4];
                 $file = array_pop(ClipitFile::get_by_id(array($file_id)));
                 $group_files = ClipitGroup::get_files($group->id);
                 elgg_pop_breadcrumb($title);
-                elgg_push_breadcrumb($title, "clipit_activity/{$activity->id}/group/files");
+                elgg_push_breadcrumb($title, $href);
                 elgg_push_breadcrumb($file->name);
                 if($file && in_array($file_id, $group_files)){
+                    $filter = "";
                     $content = elgg_view('group/files/view', array('entity' => $file));
                 } else {
                     return false;

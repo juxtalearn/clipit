@@ -11,6 +11,21 @@
  * @package         ClipIt
  */
 /**
+ * Get format file size
+ *
+ * @param int $size
+ * @return string
+ */
+function formatFileSize( $bytes, $precision = 0) {
+    $s = array('B', 'KB', 'MB', 'GB', 'TB', 'PB');
+    $e = floor(log($bytes)/log(1024));
+
+    $output = sprintf("%.{$precision}f ".$s[$e], ($bytes/pow(1024, floor($e))));
+
+    return $output;
+}
+
+/**
  * @param $id
  * @param $message_destination
  * @return mixed
