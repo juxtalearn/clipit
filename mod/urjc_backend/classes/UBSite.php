@@ -40,7 +40,7 @@ class UBSite{
         global $CONFIG;
         if(elgg_authenticate($login, $password) === true){
             $user = get_user_by_username($login);
-            $query = "select * from {$CONFIG->dbprefix}users_apisessions where user_guid = {$user->guid}";
+            $query = "select * from {$CONFIG->dbprefix}users_apisessions where user_guid = {$user->guid};";
             if($row = get_data_row($query)){
                 var_dump($row);
             }
