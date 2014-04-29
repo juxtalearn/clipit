@@ -36,6 +36,7 @@ $english = array(
     'user:login' => 'Log in',
     'user:forgotpassword' => 'Forgot your password?',
     'passwordagain' => 'Repeat password please',
+    'user:forgotpassword:ok' => 'Check your email to confirm your password reset.',
     // New password
     'user:resetpassword:newpassword' => 'New password',
     'user:resetpassword:newpasswordagain' => 'New password (again for verification)',
