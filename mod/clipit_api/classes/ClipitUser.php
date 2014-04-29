@@ -38,8 +38,8 @@ class ClipitUser extends UBUser{
      *
      * @return array Returns an array of Group Ids the user is member of.
      */
-    static function get_groups($id){
-        $rel_array = get_entity_relationships($id, true);
+    static function get_groups($user_id){
+        $rel_array = get_entity_relationships($user_id, true);
         $group_ids = array();
         foreach($rel_array as $rel){
             if($rel->relationship == ClipitGroup::REL_GROUP_USER){
@@ -56,9 +56,9 @@ class ClipitUser extends UBUser{
      *
      * @return int Returns the User Id if set correctly.
      */
-    static function set_role_student($id){
-        $user = new ClipitUser($id);
-        remove_user_admin($id);
+    static function set_role_student($user_id){
+        $user = new ClipitUser($user_id);
+        remove_user_admin($user_id);
         $prop_value_array["role"] = ClipitUser::ROLE_STUDENT;
         return $user->setProperties($prop_value_array);
     }
@@ -70,9 +70,9 @@ class ClipitUser extends UBUser{
      *
      * @return int Returns the User Id if set correctly.
      */
-    static function set_role_teacher($id){
-        $user = new ClipitUser($id);
-        make_user_admin($id);
+    static function set_role_teacher($user_id){
+        $user = new ClipitUser($user_id);
+        make_user_admin($user_id);
         $prop_value_array["role"] = ClipitUser::ROLE_TEACHER;
         return $user->setProperties($prop_value_array);
     }
@@ -84,9 +84,9 @@ class ClipitUser extends UBUser{
      *
      * @return int Returns the User Id if set correctly.
      */
-    static function set_role_admin($id){
-        $user = new ClipitUser($id);
-        make_user_admin($id);
+    static function set_role_admin($user_id){
+        $user = new ClipitUser($user_id);
+        make_user_admin($user_id);
         $prop_value_array["role"] = ClipitUser::ROLE_ADMIN;
         return $user->setProperties($prop_value_array);
     }
