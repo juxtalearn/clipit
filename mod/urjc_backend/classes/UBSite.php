@@ -41,13 +41,13 @@ class UBSite{
         if(elgg_authenticate($login, $password) === true){
             $user = get_user_by_username($login);
             $query = "select * from {$CONFIG->dbprefix}users_apisessions where user_guid = {$user->guid};";
-            if($row = get_data_row($query)){
-                var_dump($row);
+            $row = get_data_row($query);
+            if(isset($row->token)){
+                $token = $row->token;
+            } else{
+                $token = create_user_token($login, $timeout);
             }
-            $token = create_user_token($login, $timeout);
-            if($token){
-                return $token;
-            }
+            return $token;
         }
         throw new SecurityException(elgg_echo('SecurityException:authenticationfailed'));
     }
