@@ -117,6 +117,49 @@ $(function(){
         $("ul.elgg-menu-"+id_menu).toggle("fast");
     });
     /**
+    * Forgotpassword form validation
+    */
+    $(".elgg-form-user-requestnewpassword").validate({
+        errorElement: "span",
+        errorPlacement: function(error, element) {
+        error.appendTo($("label[for="+element.attr('name')+"]"));
+    },
+        onkeyup: false,
+        onblur: false,
+        rules: {
+        email: {
+            remote: {
+                url: "<?php echo elgg_get_site_url()?>action/user/check",
+                    type: "POST",
+                    data: {
+                    email: function() {
+                        return $( "input[name='email']" ).val();
+                    },
+                    __elgg_token: function() {
+                        return $( "input[name='__elgg_token']" ).val();
+                    },
+                    __elgg_ts: function() {
+                        return $( "input[name='__elgg_ts']" ).val();
+                    }
+                }
+                }
+        }
+    },
+        submitHandler: function(form) {
+        if ($(form).valid()){
+            $.post( ""+$(form).attr('action')+"", $(form).serialize(), function(){
+                $(form).find("input[name=email]").prop("disabled",true);
+                $(form).find("input[type=submit]")
+                .after(
+                    "<p class='text-info'>" +
+                    "<img src='<?php echo elgg_get_site_url()?>mod/clipit_theme/graphics/ok.png'/>" +
+                    " <strong><?php echo elgg_echo("user:forgotpassword:ok");?></strong></p>")
+                        .remove();
+                });
+        }
+    }
+    });
+    /**
      * Register form validation
      */
     $(".elgg-form-register").validate({
