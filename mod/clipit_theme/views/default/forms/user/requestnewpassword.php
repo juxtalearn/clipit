@@ -42,7 +42,7 @@ $(function(){
                         .after(
                             "<p class='text-info'>" +
                                 "<img src='<?php echo elgg_get_site_url()?>mod/clipit_theme/graphics/ok.png'/>" +
-                                " <strong>Check your email to confirm your password reset.</strong></p>")
+                                " <strong><?php echo elgg_echo("user:forgotpassword:ok");?></strong></p>")
                         .remove();
                 });
             }
