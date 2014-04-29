@@ -21,9 +21,9 @@ $viewer = elgg_get_logged_in_user_entity();
 $context = elgg_get_context();
 ?>
 <ul class="<?php echo $class; ?>">
-    <li><a href="<?php echo $CONFIG->wwwroot; ?>my_activities">My activities</a></li>
+    <li><a href="<?php echo $CONFIG->wwwroot; ?>my_activities"><?php echo elgg_echo("my_activities");?></a></li>
     <li class="separator">|</li>
-    <li><a href="<?php echo $url; ?>explore"><?=elgg_echo("Explore");?></a></li>
+    <li><a href="<?php echo $CONFIG->wwwroot; ?>explore"><?php echo elgg_echo("Explore");?></a></li>
     <li class="separator">|</li>
     <li>
         <a id="notifications" role="button" data-toggle="dropdown" href="javascript:;">

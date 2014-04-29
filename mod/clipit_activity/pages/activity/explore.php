@@ -1,13 +1,15 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: equipo
- * Date: 13/02/14
- * Time: 14:04
- * To change this template use File | Settings | File Templates.
+ /**
+ * ClipIt - JuxtaLearn Web Space
+ * PHP version:     >= 5.2
+ * Creation date:   29/04/14
+ * Last update:     29/04/14
+ * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC JuxtaLearn Project
+ * @version         $Version$
+ * @link            http://www.juxtalearn.eu
+ * @license         GNU Affero General Public License v3
+ * @package         ClipIt
  */
-
-
 $user = elgg_get_logged_in_user_entity();
 $my_groups_ids = ClipitUser::get_groups($user->guid);
 
@@ -16,7 +18,7 @@ foreach($my_groups_ids as $group_id){
     $id_activities_array[] = ClipitGroup::get_activity($group_id);
 }
 
-$my_activities = ClipitActivity::get_by_id($id_activities_array);
+$my_activities = ClipitActivity::get_all();
 $params_progress = array(
     'value' => 30,
     'width' => '100%'

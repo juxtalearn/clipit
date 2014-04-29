@@ -18,6 +18,21 @@ $href = elgg_extract("href", $vars);
 <div class="block" style="margin-bottom: 10px;">
     <?php echo elgg_view_form('multimedia/files/upload', array('data-validate'=> "true", 'enctype' => 'multipart/form-data'), array('entity'  => $entity)); ?>
 </div>
+<script src="http://blueimp.github.io/jQuery-File-Upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="http://blueimp.github.io/JavaScript-Load-Image/js/load-image.min.js"></script>
+<script src="http://blueimp.github.io/jQuery-File-Upload/js/jquery.iframe-transport.js"></script>
+<!-- The basic File Upload plugin -->
+<script src="http://blueimp.github.io/jQuery-File-Upload/js/jquery.fileupload.js"></script>
+<!-- The File Upload processing plugin -->
+<script src="http://blueimp.github.io/jQuery-File-Upload/js/jquery.fileupload-process.js"></script>
+<!-- The File Upload image preview & resize plugin -->
+<script src="http://blueimp.github.io/jQuery-File-Upload/js/jquery.fileupload-image.js"></script>
+<!-- The File Upload audio preview plugin -->
+<script src="http://blueimp.github.io/jQuery-File-Upload/js/jquery.fileupload-audio.js"></script>
+<!-- The File Upload video preview plugin -->
+<script src="http://blueimp.github.io/jQuery-File-Upload/js/jquery.fileupload-video.js"></script>
+<!-- The File Upload validation plugin -->
+<script src="http://blueimp.github.io/jQuery-File-Upload/js/jquery.fileupload-validate.js"></script>
 <script>
     function formatFileSize(bytes) {
         if (typeof bytes !== 'number') {
@@ -157,12 +172,14 @@ $href = elgg_extract("href", $vars);
 // MODAL SIMULATE
 for($i=0; $i<3; $i++){
 $body .='
+<div class="row">
 <div class="col-md-3">
-    <div class="no-file" style="display:table;text-align:center;">
-        <div style="display:table;vertical-align:center">
-           <h2>File</h2>
+    <div class="no-file" style="background: #f1f2f7;display:table;width:100%;height: 150px;">
+        <div style="display:table-cell;vertical-align:middle;text-align:center;">
+           <h2 style="text-transform: uppercase;color: #999;">'.elgg_echo("file:nofile").'</h2>
         </div>
     </div>
+    <div class="upload-files-list" style="float: left; width: 100%;"></div>
 </div>
 <div class="col-md-8">
     <div class="form-group">
@@ -176,19 +193,19 @@ $body .='
         )).'
     </div>
     <div class="form-group">
-        <label for="file-text">'.elgg_echo("discussion:text_topic").'</label>
         '.elgg_view("input/plaintext", array(
             'name' => 'file-text[]',
             'class' => 'form-control mceEditor',
             'required' => true,
-            'rows'  => 6,
+            'rows'  => 3,
         )).'
     </div>
+</div>
 </div>';
 }
 echo elgg_view("page/components/modal",
     array(
-        "dialog_class"     => "modal-lg",
+        "dialog_class"     => "modal-lg add-files-list",
         "target"    => "add-file",
         "title"     => elgg_echo("multimedia:files:add"),
         "form"      => true,
@@ -202,7 +219,12 @@ echo elgg_view("page/components/modal",
     ));
 // MODAL SIMULATE
 ?>
-<button type="button" data-toggle="modal" data-target="#add-file" class="btn btn-default">MODAL</button>
+<script>
+$(function(){
+    $('#add-file').modal('hide');
+});
+</script>
+<button type="button" data-toggle="modal" id="show-modal" data-target="#add-file" class="btn btn-default">MODAL</button>
 
 <div style="margin-bottom: 30px;color: #999;margin-left: 10px;">
     <div class="checkbox" style=" display: inline-block;margin: 0;">

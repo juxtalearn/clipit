@@ -14,12 +14,12 @@ $english = array(
     // Activity
     'my_activities' => 'My activities',
     'past' => 'Past',
-    'activity:profile' => 'Activity',
+    'activity:profile' => 'Activity home',
     'activity:groups' => 'Groups',
     'activity:discussion' => 'Activity discussion',
     'activity:stas' => 'Materials',
     'activity:publications' => 'Publications',
-    'activity:join' => 'Join to activity',
+    'activity:join' => 'Join activity',
     'activity:next_deadline' => 'Next deadline',
 
     'group:join' => 'Join',
@@ -55,6 +55,8 @@ $english = array(
     'sta:files' => 'Files',
     'sta:videos' => 'Videos',
     'sta:links' => 'Interesting links',
+    // Files
+    'file:nofile' => 'No file',
     // Publications
     'publications:no_evaluated' => 'No evaluated',
     'publications:evaluated' => 'Evaluated',

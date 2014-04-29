@@ -31,7 +31,7 @@ $body .='<div class="form-group">
     )).'
 </div>';
 
-$body .= '<div class="show" style="
+/*$body .= '<div class="show" style="
     background: #ECF7FB;
     padding: 5px;
 "><img src="http://www.ucci.urjc.es/wp-content/uploads/Juxtalearn-620x434.jpg" style="
@@ -62,7 +62,7 @@ $body .= '<div class="show" style="
 </div>
 
 
-</div>';
+</div>';*/
 
 
 echo elgg_view("page/components/modal",
