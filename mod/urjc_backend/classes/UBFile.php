@@ -29,7 +29,11 @@ class UBFile extends UBItem{
      * @var string File data in byte string format
      */
     public $data = null;
-    public $local_file = "";
+    public $size = 0;
+    public $file_path = "";
+
+    public $temp_path = "";
+
 
     /* Instance Functions */
     /**
@@ -67,6 +71,8 @@ class UBFile extends UBItem{
         $this->owner_id = (int)$elgg_file->owner_guid;
         $this->time_created = (int)$elgg_file->time_created;
         $this->data = $elgg_file->grabFile();
+        $this->size = $elgg_file->size();
+        $this->file_path = (string)$elgg_file->getFilenameOnFilestore();
     }
 
     /**
@@ -100,12 +106,15 @@ class UBFile extends UBItem{
         else{ // File was uploaded into local temp dir
             $elgg_file->open("write"); // to ensure file is created in disk
             $elgg_file->close();
-            move_uploaded_file($this->local_file, $elgg_file->getFilenameOnFilestore());
+            move_uploaded_file($this->temp_path, $elgg_file->getFilenameOnFilestore());
         }
         $elgg_file->access_id = ACCESS_PUBLIC;
         $elgg_file->save();
         $this->owner_id = (int)$elgg_file->owner_guid;
         $this->time_created = (int)$elgg_file->time_created;
+        $this->data = $elgg_file->grabFile();
+        $this->size = $elgg_file->size();
+        $this->file_path = (string)$elgg_file->getFilenameOnFilestore();
         return $this->id = (int)$elgg_file->guid;
     }
 }
