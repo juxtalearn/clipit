@@ -1013,7 +1013,7 @@ function expose_user_functions(){
         $api_suffix . "get_groups",
         $class_suffix . "get_groups",
         array(
-            "id" => array(
+            "user_id" => array(
                 "type" => "int",
                 "required" => true)),
         "Get all Group Ids in which this user is a member of.",
@@ -1022,7 +1022,7 @@ function expose_user_functions(){
         $api_suffix . "set_role_student",
         $class_suffix . "set_role_student",
         array(
-            "id" => array(
+            "user_id" => array(
                 "type" => "int",
                 "required" => true)),
         "Set the Role of a User to Student.",
@@ -1031,7 +1031,7 @@ function expose_user_functions(){
         $api_suffix . "set_role_teacher",
         $class_suffix . "set_role_teacher",
         array(
-            "id" => array(
+            "user_id" => array(
                 "type" => "int",
                 "required" => true)),
         "Set the Role of a User to Student.",
@@ -1040,7 +1040,7 @@ function expose_user_functions(){
         $api_suffix . "set_role_admin",
         $class_suffix . "set_role_admin",
         array(
-            "id" => array(
+            "user_id" => array(
                 "type" => "int",
                 "required" => true)),
         "Set the Role of a User to Student.",
@@ -1049,7 +1049,7 @@ function expose_user_functions(){
         $api_suffix . "get_last_login",
         $class_suffix . "get_last_login",
         array(
-            "id" => array(
+            "user_id" => array(
                 "type" => "int",
                 "required" => true)),
         "Get the last login time for a User.",
