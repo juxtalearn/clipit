@@ -3,7 +3,7 @@
 nbproject
 engine/settings.php
 php_errorlog
-engine/handlers/php_errorlog
+engine/handlers/php_errors.log
 mod_unused
 .project
 *.sublime-*
