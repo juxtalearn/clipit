@@ -12,10 +12,10 @@
  */
 $entity = elgg_extract('entity', $vars);
 ?>
-<a class="btn btn-default" style="position: relative; overflow: hidden">
-    Add files
-    <input id="uploadfiles" multiple type="file" name="files[]">
-</a>
+    <a class="btn btn-default" style="position: relative; overflow: hidden">
+        Add files
+        <input id="uploadfiles" multiple type="file" name="files[]">
+    </a>
 <?php echo elgg_view("input/hidden", array(
     'name' => 'entity-id',
     'value' => $entity->id,
