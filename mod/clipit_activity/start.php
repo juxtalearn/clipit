@@ -40,6 +40,7 @@ function clipit_activity_init() {
     elgg_register_action("multimedia/links/add", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/links/add.php");
     elgg_register_action("multimedia/files/upload", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/files/upload.php");
     elgg_register_action("multimedia/links/extract_data", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/links/extract_data.php");
+    elgg_register_ajax_view('multimedia/file_upload');
     // Discussion
     elgg_register_action("discussion/create", elgg_get_plugins_path() . "clipit_activity/actions/discussion/create.php");
     elgg_register_action("discussion/remove", elgg_get_plugins_path() . "clipit_activity/actions/discussion/remove.php");

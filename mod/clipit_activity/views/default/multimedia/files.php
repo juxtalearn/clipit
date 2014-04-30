@@ -69,6 +69,9 @@ $href = elgg_extract("href", $vars);
                         $this.remove();
                     });
                 });
+        $("#uploadfiles").change(function(){
+            $("#add-file .modal-body").html("");
+        });
         $('#uploadfiles').fileupload({
             url: url,
             dataType: 'json',
@@ -84,29 +87,36 @@ $href = elgg_extract("href", $vars);
             previewMaxHeight: 100,
             previewCrop: true
         }).on('fileuploadadd', function (e, data) {
-            data.context = $('<div class="file"/>').appendTo('.upload-files-list');
-            $.each(data.files, function (index, file) {
-                var node = $('<div class="details"/>')
-                    .append($('<small class="size pull-right"/>').text(formatFileSize(file.size)))
-                    .append($('<div class="name"/>').text(file.name))
-                    .append('<div id="progress" class="progress"><div class="progress-bar progress-bar-success"></div></div>');
-//                if (!index) {
-//                    node
-//                        .append('<br>')
-//                        .append(uploadButton.clone(true).data(data));
-//                }
-                node.appendTo(data.context);
-            });
+            $('#add-file').modal('show');
+            data.context = $('<div class="files-upload-list"/>').appendTo("#add-file .modal-body");
+
         }).on('fileuploadprocessalways', function (e, data) {
+
             var index = data.index,
                 file = data.files[index],
-                node = $(data.context.children()[index]);
+                vnode = $(data.context.children()[index]);
+//                node = $($(".upload-file-info").children()[index]);
 //                node.find(".size").text(formatFileSize(file.size));
-            console.log(formatFileSize(file.size))
+
+            console.log(formatFileSize(file.size));
+//            node = node.find('.file');
+//            node.remove();
+            console.log(node);
+
+            var node_row = $(<?php echo elgg_view("multimedia/file_upload");?>);
+            node_row.appendTo("#add-file .modal-body");
+            var node = node_row.find(".file-info");
+            var node_file_info = $('<div class="text-truncate"/>')
+                .append($('<small class="size pull-right"/>').text(formatFileSize(file.size)))
+                .append($('<div class="text-truncate"/>').text(file.name));
+            var progress = $('<div id="progress" class="progress"><div class="progress-bar progress-bar-success"></div></div>');
+
+            node_file_info.appendTo(node);
+            progress.appendTo(node);
+
             if (file.preview) {
-                node
-                    .before(file.preview)
-                    .append("<div></div>");
+                node.find(".no-file").remove();
+                $(file.preview).prependTo(node);
             }
             if (file.error) {
                 node
@@ -167,6 +177,15 @@ $href = elgg_extract("href", $vars);
         direction: ltr;
         cursor: pointer;
     }
+    .file-info > .upload-file-info{
+        background: #f1f2f7;
+        width:100%;
+        height: 150px;
+    }
+    .file-info > .upload-file-info canvas{
+        width: 100%;
+        height: 100%;
+    }
 </style>
 <?php
 // MODAL SIMULATE
@@ -203,6 +222,7 @@ $body .='
 </div>
 </div>';
 }
+$body = "";
 echo elgg_view("page/components/modal",
     array(
         "dialog_class"     => "modal-lg add-files-list",
@@ -219,12 +239,7 @@ echo elgg_view("page/components/modal",
     ));
 // MODAL SIMULATE
 ?>
-<script>
-$(function(){
-    $('#add-file').modal('hide');
-});
-</script>
-<button type="button" data-toggle="modal" id="show-modal" data-target="#add-file" class="btn btn-default">MODAL</button>
+
 
 <div style="margin-bottom: 30px;color: #999;margin-left: 10px;">
     <div class="checkbox" style=" display: inline-block;margin: 0;">

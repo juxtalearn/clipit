@@ -33,7 +33,7 @@ echo elgg_view('input/submit', array(
     <strong>
         <a style="position: relative;overflow: hidden">
             <i class="fa fa-paperclip"></i> Attach file
-            <input id="uploadfiles" type="file" name="files[]">
+            <input id="uploadfiles" type="file" multiple name="files[]">
         </a>
     </strong>
     <div class="upload-files-list" style="float: left; width: 100%;"></div>
