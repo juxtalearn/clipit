@@ -41,11 +41,15 @@ if(count($entity)==0){
     $count = 0;
     $new_file_ids = array();
     foreach($files['name'] as $file){
-        $new_file_ids[] = ClipitFile::create(array(
-            'name' => $files['name'][$count],
-            'description' => "",
-            'temp_path'  => $files['tmp_name'][$count]
-        ));
+        if(!empty($files['name'][$count])){
+            $new_file_ids[] = ClipitFile::create(array(
+                'name' => $files['name'][$count],
+                'description' => "",
+                'temp_path'  => $files['tmp_name'][$count]
+            ));
+        } else {
+            register_error(elgg_echo("file:cantupload"));
+        }
         $count++;
     }
     if(!empty($new_file_ids)){

@@ -13,6 +13,7 @@
 $english = array(
     // Activity
     'my_activities' => 'My activities',
+    'explore' => 'Explore',
     'past' => 'Past',
     'activity:profile' => 'Activity home',
     'activity:groups' => 'Groups',
