@@ -46,8 +46,7 @@ class UBFile extends UBItem{
     function __construct($id = null){
         if($id){
             if(!($elgg_file = new ElggFile((int)$id))){
-                $called_class = get_called_class();
-                throw new APIException("ERROR 1: Id '" . $id . "' does not correspond to a " . $called_class . " object.");
+                throw new APIException("ERROR 1: Id '" . $id . "' does not correspond to a " . get_class_name() . " object.");
             }
             $this->_load($elgg_file);
         }

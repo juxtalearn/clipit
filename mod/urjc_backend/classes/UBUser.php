@@ -42,12 +42,14 @@ class UBUser extends UBItem{
 
     function __construct($id = -1){
         if($id != -1){
-            if(!($elgg_user = new ElggUser((int)$id))){
-                $called_class = get_called_class();
-                throw new APIException("ERROR: Id '" . $id . "' does not correspond to a " . $called_class . " object.");
+            if(!($elgg_user = new ElggUser($id))){
+                throw new APIException("ERROR: Id '" . $id . "' does not correspond to a " . get_called_class() . " object.");
             }
-            $this->_load($elgg_user);
+        } else{
+            $elgg_user = new ElggUser();
+            $elgg_user->save();
         }
+        $this->_load($elgg_user);
     }
 
     /**
@@ -58,10 +60,7 @@ class UBUser extends UBItem{
      * @return UBUser|bool Returns User instance, or false if error.
      */
     protected function _load($elgg_user){
-        $this->id = (int)$elgg_user->guid;
-        $this->name = (string)$elgg_user->name;
-        $this->description = (string)$elgg_user->description;
-        $this->time_created = (int)$elgg_user->time_created;
+        parent::_load($elgg_user);
         $this->email = (string)$elgg_user->email;
         $this->login = (string)$elgg_user->username;
         $this->password = (string)$elgg_user->password;
@@ -129,8 +128,7 @@ class UBUser extends UBItem{
      * @throws InvalidParameterException
      */
     static function set_properties($id, $prop_value_array){
-        $called_class = get_called_class();
-        if(!$item = new $called_class((int)$id)){
+        if(!$item = new static((int)$id)){
             return false;
         }
         $new_prop_value_array = array();
@@ -183,14 +181,13 @@ class UBUser extends UBItem{
      * @return UBUser[] Returns an array of User objects
      */
     static function get_by_login($login_array){
-        $called_class = get_called_class();
         $user_array = array();
         foreach($login_array as $login){
             $elgg_user = get_user_by_username($login);
             if(!$elgg_user){
                 $user_array[$login] = null;
             } else{
-                $user_array[$login] = new $called_class((int)$elgg_user->guid);
+                $user_array[$login] = new static((int)$elgg_user->guid);
             }
         }
         return $user_array;
@@ -206,7 +203,6 @@ class UBUser extends UBItem{
      * @return UBUser[] Returns an array of arrays of User objects
      */
     static function get_by_email($email_array){
-        $called_class = get_called_class();
         $user_array = array();
         foreach($email_array as $email){
             $elgg_user_array = get_user_by_email($email);
@@ -215,7 +211,7 @@ class UBUser extends UBItem{
             } else{
                 $temp_array = array();
                 foreach($elgg_user_array as $elgg_user){
-                    $temp_array[] = new $called_class((int)$elgg_user->guid);
+                    $temp_array[] = new static((int)$elgg_user->guid);
                 }
                 $user_array[$email] = $temp_array;
             }
@@ -231,13 +227,12 @@ class UBUser extends UBItem{
      * @return UBUser[] Returns an array of arrays of User objects
      */
     static function get_by_role($role_array){
-        $called_class = get_called_class();
         $user_array = array();
         foreach($role_array as $role){
             $elgg_user_array = elgg_get_entities_from_metadata(
                 array(
-                    'type' => $called_class::TYPE,
-                    'subtype' => $called_class::SUBTYPE,
+                    'type' => static::TYPE,
+                    'subtype' => static::SUBTYPE,
                     'metadata_names' => array("role"),
                     'metadata_values' => array($role)
                 )
@@ -247,7 +242,7 @@ class UBUser extends UBItem{
             } else{
                 $temp_array = array();
                 foreach($elgg_user_array as $elgg_user){
-                    $temp_array[] = new $called_class($elgg_user->guid);
+                    $temp_array[] = new static($elgg_user->guid);
                 }
                 $user_array[$role] = $temp_array;
             }
@@ -256,8 +251,7 @@ class UBUser extends UBItem{
     }
 
     static function get_last_login($id){
-        $called_class = get_called_class();
-        $user = new $called_class($id);
+        $user = new static($id);
         return $user->last_login;
     }
 }

@@ -39,11 +39,11 @@ class UBItem{
     /**
      * @var int Unique Id of the owner/creator of this instance
      */
-    public $owner_id = -1;
+    public $owner_id = 0;
     /**
      * @var int Timestamp when this Item was created
      */
-    public $time_created = -1;
+    public $time_created = 0;
 
     /* Instance Functions */
     /**
@@ -54,21 +54,20 @@ class UBItem{
      * @throws APIException
      */
     function __construct($id = -1){
-        $called_class = get_called_class();
         if($id != -1){
             if(!($elgg_object = new ElggObject($id))){
-                throw new APIException("ERROR 1: Id '" . $id . "' does not correspond to a " . $called_class . " object.");
+                throw new APIException("ERROR: Id '" . $id . "' does not correspond to a " . get_called_class() . " object.");
             }
             $elgg_type = $elgg_object->type;
             $elgg_subtype = $elgg_object->getSubtype();
-            if(($elgg_type != $called_class::TYPE) || ($elgg_subtype != $called_class::SUBTYPE)){
-                throw new APIException("ERROR 2: Id '" . $id . "' does not correspond to a " . $called_class . " object.");
+            if(($elgg_type != static::TYPE) || ($elgg_subtype != static::SUBTYPE)){
+                throw new APIException("ERROR: Id '" . $id . "' does not correspond to a " . get_called_class() . " object.");
             }
 
         } else{
             $elgg_object = new ElggObject();
-            $elgg_object->type = $called_class::TYPE;
-            $elgg_object->subtype = $called_class::SUBTYPE;
+            $elgg_object->type = static::TYPE;
+            $elgg_object->subtype = static::SUBTYPE;
             $elgg_object->save();
         }
         $this->_load($elgg_object);
@@ -78,11 +77,11 @@ class UBItem{
      * @param ElggObject $elgg_object Elgg Object to load parameters from.
      */
     protected function _load($elgg_object){
-        $this->id = (int)$elgg_object->guid;
-        $this->description = (string)$elgg_object->description;
-        $this->name = (string)$elgg_object->name;
-        $this->owner_id = (int)$elgg_object->owner_guid;
-        $this->time_created = (int)$elgg_object->time_created;
+        $this->id = (int)$elgg_object->get("guid");
+        $this->name = (string)$elgg_object->get("name");
+        $this->description = (string)$elgg_object->get("description");
+        $this->owner_id = (int)$elgg_object->getOwnerGUID();
+        $this->time_created = (int)$elgg_object->getTimeCreated();
     }
 
     /**
@@ -97,13 +96,13 @@ class UBItem{
         } elseif(!$elgg_object = new ElggObject((int)$this->id)){
             return false;
         }
-        $elgg_object->name = (string)$this->name;
-        $elgg_object->description = (string)$this->description;
-        $elgg_object->access_id = ACCESS_PUBLIC;
+        $elgg_object->set("name", (string)$this->name);
+        $elgg_object->set("description", (string)$this->description);
+        $elgg_object->set("access_id", ACCESS_PUBLIC);
         $elgg_object->save();
-        $this->owner_id = (int)$elgg_object->owner_guid;
-        $this->time_created = (int)$elgg_object->time_created;
-        return $this->id = (int)$elgg_object->guid;
+        $this->owner_id = (int)$elgg_object->getOwnerGUID();
+        $this->time_created = (int)$elgg_object->getTimeCreated();
+        return $this->id = (int)$elgg_object->getGUID();
     }
 
     /**
@@ -159,8 +158,7 @@ class UBItem{
      * @return array|bool Returns an array of property=>value pairs, or false if error
      */
     static function get_properties($id, $prop_array){
-        $called_class = get_called_class();
-        if(!$item = new $called_class($id)){
+        if(!$item = new static($id)){
             return null;
         }
         $value_array = array();
@@ -180,8 +178,7 @@ class UBItem{
      * @throws InvalidParameterException
      */
     static function set_properties($id, $prop_value_array){
-        $called_class = get_called_class();
-        if(!$item = new $called_class((int)$id)){
+        if(!$item = new static((int)$id)){
             return false;
         }
         foreach($prop_value_array as $prop => $value){
@@ -204,8 +201,7 @@ class UBItem{
      * @return int|bool Returns instance Id if correct, or false if error
      */
     static function create($prop_value_array){
-        $called_class = get_called_class();
-        $item = new $called_class();
+        $item = new static();
         $item_id = $item->save();
         return static::set_properties($item_id, $prop_value_array);
     }
@@ -218,9 +214,8 @@ class UBItem{
      * @return bool Returns true if correct, or false if error
      */
     static function delete_by_id($id_array){
-        $called_class = get_called_class();
         foreach($id_array as $id){
-            if(!$item = new $called_class($id)){
+            if(!$item = new static($id)){
                 return false;
             }
             if(!$item->delete()){
@@ -239,15 +234,14 @@ class UBItem{
      */
     static function get_all($limit = 0){
         $object_array = array();
-        $called_class = get_called_class();
         $elgg_object_array = elgg_get_entities(
             array(
-                'type' => $called_class::TYPE,
-                'subtype' => $called_class::SUBTYPE,
+                'type' => static::TYPE,
+                'subtype' => static::SUBTYPE,
                 'limit' => $limit));
         if($elgg_object_array){
             foreach($elgg_object_array as $elgg_object){
-                $object_array[(int)$elgg_object->guid] = new $called_class((int)$elgg_object->guid);
+                $object_array[(int)$elgg_object->guid] = new static((int)$elgg_object->guid);
             }
         }
         return $object_array;
@@ -261,11 +255,10 @@ class UBItem{
      * @return UBItem[] Returns an array of Objects
      */
     static function get_by_id($id_array){
-        $called_class = get_called_class();
         $object_array = array();
         foreach($id_array as $id){
             if(elgg_entity_exists($id)){
-                $object_array[(int)$id] = new $called_class((int)$id);
+                $object_array[(int)$id] = new static((int)$id);
             } else{
                 $object_array[(int)$id] = null;
             }
@@ -274,20 +267,19 @@ class UBItem{
     }
 
     static function get_by_owner($owner_array, $limit = 10){
-        $called_class = get_called_class();
         $object_array = array();
         foreach($owner_array as $owner_id){
             $elgg_object_array = elgg_get_entities(
                 array(
-                    "type" => $called_class::TYPE,
-                    "subtype" => $called_class::SUBTYPE,
+                    "type" => static::TYPE,
+                    "subtype" => static::SUBTYPE,
                     "owner_guid" => (int)$owner_id,
                     "limit" => $limit
                 )
             );
             $temp_array = array();
             foreach($elgg_object_array as $elgg_object){
-                $temp_array[(int)$elgg_object->guid] = new $called_class((int)$elgg_object->guid);
+                $temp_array[(int)$elgg_object->guid] = new static((int)$elgg_object->guid);
             }
             if(!empty($temp_array)){
                 $object_array[(int)$owner_id] = $temp_array;
@@ -300,13 +292,12 @@ class UBItem{
     }
 
     static function get_events($limit = 10){
-        $called_class = get_called_class();
         return get_system_log(
             null, // $by_user = ""
             null, // $event = ""
             null, // $class = ""
-            $called_class::TYPE, // $type = ""
-            $called_class::SUBTYPE, // $subtype = ""
+            static::TYPE, // $type = ""
+            static::SUBTYPE, // $subtype = ""
             $limit, // $limit = 10
             null, // $offset = 0
             null, // $count = false
@@ -317,22 +308,21 @@ class UBItem{
     }
 
     static function get_from_search($search_string, $name_only = false){
-        $called_class = get_called_class();
         $elgg_object_array = elgg_get_entities(
             array(
-                'type' => $called_class::TYPE,
-                'subtype' => $called_class::SUBTYPE)
+                'type' => static::TYPE,
+                'subtype' => static::SUBTYPE)
         );
         $search_result = array();
         foreach($elgg_object_array as $elgg_object){
             $search_string = strtolower($search_string);
             if(strpos(strtolower($elgg_object->name), $search_string) !== false){
-                $search_result[(int)$elgg_object->guid] = new $called_class((int)$elgg_object->guid);
+                $search_result[(int)$elgg_object->guid] = new static((int)$elgg_object->guid);
                 continue;
             }
             if($name_only === false){
                 if(strpos(strtolower($elgg_object->description), $search_string) !== false){
-                    $search_result[(int)$elgg_object->guid] = new $called_class((int)$elgg_object->guid);
+                    $search_result[(int)$elgg_object->guid] = new static((int)$elgg_object->guid);
                 }
             }
         }

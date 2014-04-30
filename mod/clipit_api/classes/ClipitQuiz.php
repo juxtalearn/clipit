@@ -95,8 +95,7 @@ class ClipitQuiz extends UBItem{
      * @return int|bool Returns Id of Item if correct, or false if error
      */
     static function set_properties($id, $prop_value_array){
-        $called_class = get_called_class();
-        if(!$item = new $called_class($id)){
+        if(!$item = new static($id)){
             return false;
         }
         $new_prop_value_array = array();

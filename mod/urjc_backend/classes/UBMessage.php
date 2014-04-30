@@ -73,13 +73,12 @@ class UBMessage extends UBItem{
 
     /* STATIC FUNCTIONS */
     static function get_by_destination($destination_array){
-        $called_class = get_called_class();
         $message_array = array();
         foreach($destination_array as $destination_id){
             $item_array = UBCollection::get_items($destination_id, static::REL_MESSAGE_DESTINATION, true);
             $temp_array = array();
             foreach($item_array as $item_id){
-                $temp_array[$item_id] = new $called_class((int)$item_id);
+                $temp_array[$item_id] = new static((int)$item_id);
             }
             if(empty($temp_array)){
                 $message_array[$destination_id] = null;
@@ -108,8 +107,7 @@ class UBMessage extends UBItem{
         return -1;
     }
     static function get_sender($id){
-        $called_class = get_called_class();
-        $message = new $called_class($id);
+        $message = new static($id);
         return $message->owner_id;
     }
     static function get_files($id){
@@ -122,8 +120,7 @@ class UBMessage extends UBItem{
         return UBCollection::remove_items($id, $file_array, static::REL_MESSAGE_FILE);
     }
     static function get_read_status($id, $user_array = null){
-        $called_class = get_called_class();
-        $props = $called_class::get_properties($id, array("read_array", "owner_id"));
+        $props = static::get_properties($id, array("read_array", "owner_id"));
         $read_array = $props["read_array"];
         $owner_id = $props["owner_id"];
         if(!$user_array){
@@ -141,8 +138,7 @@ class UBMessage extends UBItem{
         }
     }
     static function set_read_status($id, $read_value, $user_array){
-        $called_class = get_called_class();
-        $read_array = $called_class::get_properties($id, array("read_array"));
+        $read_array = static::get_properties($id, array("read_array"));
         $read_array = array_pop($read_array);
         foreach($user_array as $user_id){
             if($read_value == true){
@@ -157,7 +153,7 @@ class UBMessage extends UBItem{
             }
         }
         $prop_value_array["read_array"] = $read_array;
-        return $called_class::set_properties($id, $prop_value_array);
+        return static::set_properties($id, $prop_value_array);
     }
     static function count_by_destination($destination_array, $recursive = false){
         $count_array = array();
