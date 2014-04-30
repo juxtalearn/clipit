@@ -104,39 +104,44 @@ class UBUser extends UBItem{
     }
 
     /**
-     * Sets values into specified properties of the instance
-     *
-     * @param array $prop_value_array Array of prop=>value pairs to set into the instance
-     *
-     * @return int Returns instance Id, or false if error
-     * @throws InvalidParameterException
-     */
-    function setProperties($prop_value_array){
-        $new_prop_value_array = array();
-        foreach($prop_value_array as $prop => $value){
-            if($prop == "password"){
-                $this->setPassword($value);
-            } else{
-                $new_prop_value_array[$prop] = $value;
-            }
-        }
-        return parent::setProperties($new_prop_value_array);
-    }
-
-    /**
      * Creates an encoded user password using a random hash for encoding.
      *
      * @param string $password The new user password in clear text.
      *
      * @return bool 'true' if success, 'false' if error.
      */
-    function setPassword($password){
+    private function setPassword($password){
         if(!$password){
             return false;
         }
         $this->password_hash = generate_random_cleartext_password();
         $this->password = md5($password . $this->password_hash);
         return true;
+    }
+
+    /**
+     * Sets values to specified properties of an Item
+     *
+     * @param int   $id Id of Item to set property valyes
+     * @param array $prop_value_array Array of property=>value pairs to set into the Item
+     *
+     * @return int|bool Returns Id of Item if correct, or false if error
+     * @throws InvalidParameterException
+     */
+    static function set_properties($id, $prop_value_array){
+        $called_class = get_called_class();
+        if(!$item = new $called_class((int)$id)){
+            return false;
+        }
+        $new_prop_value_array = array();
+        foreach($prop_value_array as $prop => $value){
+            if($prop == "password"){
+                $item->setPassword($value);
+            } else{
+                $new_prop_value_array[$prop] = $value;
+            }
+        }
+        return parent::set_properties($id, $new_prop_value_array);
     }
 
     /**

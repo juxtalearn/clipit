@@ -72,26 +72,6 @@ class ClipitQuizResult extends UBItem{
     }
 
     /**
-     * Sets values into specified properties of the instance
-     *
-     * @param array $prop_value_array Array of prop=>value pairs to set into the instance
-     *
-     * @return int Returns instance Id, or false if error
-     * @throws InvalidParameterException
-     */
-    function setProperties($prop_value_array){
-        $new_prop_value_array = array();
-        foreach($prop_value_array as $prop => $value){
-            if($prop == "correct"){
-                $this->setCorrect($value);
-            } else{
-                $new_prop_value_array[$prop] = $value;
-            }
-        }
-        return parent::setProperties($new_prop_value_array);
-    }
-
-    /**
      * Set Quiz Result Correct flag into "correct" property (true = yes, false = no)
      *
      * @param string $value Flag specifying if the Quiz Result is correct or not
@@ -104,6 +84,29 @@ class ClipitQuizResult extends UBItem{
         } else{
             $this->correct = (bool)$value;
         }
+    }
+
+    /**
+     * Sets values to specified properties of an Item
+     *
+     * @param int   $id Id of Item to set property valyes
+     * @param array $prop_value_array Array of property=>value pairs to set into the Item
+     *
+     * @return int|bool Returns Id of Item if correct, or false if error
+     */
+    static function set_properties($id, $prop_value_array){
+        $called_class = get_called_class();
+        if(!$item = new $called_class($id)){
+            return false;
+        }
+        foreach($prop_value_array as $prop => $value){
+            if($prop == "correct"){
+                $item->setCorrect($value);
+            } else{
+                $new_prop_value_array[$prop] = $value;
+            }
+        }
+        return parent::set_properties($id, $new_prop_value_array);
     }
 
     /**

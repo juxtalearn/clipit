@@ -18,6 +18,7 @@ $href = elgg_extract("href", $vars);
 <div class="block" style="margin-bottom: 10px;">
     <?php echo elgg_view_form('multimedia/files/upload', array('data-validate'=> "true", 'enctype' => 'multipart/form-data'), array('entity'  => $entity)); ?>
 </div>
+
 <script src="http://blueimp.github.io/jQuery-File-Upload/js/vendor/jquery.ui.widget.js"></script>
 <script src="http://blueimp.github.io/JavaScript-Load-Image/js/load-image.min.js"></script>
 <script src="http://blueimp.github.io/jQuery-File-Upload/js/jquery.iframe-transport.js"></script>
@@ -49,12 +50,10 @@ $href = elgg_extract("href", $vars);
     $(function () {
         'use strict';
         // Change this to the location of your server-side upload handler:
-        var url = window.location.hostname === 'blueimp.github.io' ?
-                '//jquery-file-upload.appspot.com/' : 'server/php/',
+        var url = "<?php echo elgg_add_action_tokens_to_url(elgg_normalize_url(elgg_get_site_url()."action/multimedia/files/upload"), true);?>",
             uploadButton = $('<button/>')
                 .addClass('btn btn-primary')
-                .prop('disabled', true)
-                .text('Processing...')
+                .text('Upload')
                 .on('click', function () {
                     var $this = $(this),
                         data = $this.data();
@@ -69,7 +68,7 @@ $href = elgg_extract("href", $vars);
                         $this.remove();
                     });
                 });
-        $("#uploadfiles").change(function(){
+        $(document).on("change", "#uploadfiles",function(){
             $("#add-file .modal-body").html("");
         });
         $('#uploadfiles').fileupload({
@@ -89,19 +88,17 @@ $href = elgg_extract("href", $vars);
         }).on('fileuploadadd', function (e, data) {
             $('#add-file').modal('show');
             data.context = $('<div class="files-upload-list"/>').appendTo("#add-file .modal-body");
+            $("#add-file .modal-footer").prepend(uploadButton.data(data));
 
         }).on('fileuploadprocessalways', function (e, data) {
-
             var index = data.index,
-                file = data.files[index],
-                vnode = $(data.context.children()[index]);
+                file = data.files[index];
 //                node = $($(".upload-file-info").children()[index]);
 //                node.find(".size").text(formatFileSize(file.size));
 
             console.log(formatFileSize(file.size));
 //            node = node.find('.file');
 //            node.remove();
-            console.log(node);
 
             var node_row = $(<?php echo elgg_view("multimedia/file_upload");?>);
             node_row.appendTo("#add-file .modal-body");
@@ -116,7 +113,7 @@ $href = elgg_extract("href", $vars);
 
             if (file.preview) {
                 node.find(".no-file").remove();
-                $(file.preview).prependTo(node);
+                $(file.preview).prependTo(node).wrap("<div class='img-prev'><div></div></div>");
             }
             if (file.error) {
                 node
@@ -177,14 +174,17 @@ $href = elgg_extract("href", $vars);
         direction: ltr;
         cursor: pointer;
     }
-    .file-info > .upload-file-info{
+    .file-info > .img-prev{
         background: #f1f2f7;
-        width:100%;
-        height: 150px;
-    }
-    .file-info > .upload-file-info canvas{
+        display: table;
         width: 100%;
         height: 100%;
+        padding: 10px;
+    }
+    .file-info > .img-prev > div{
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
     }
 </style>
 <?php

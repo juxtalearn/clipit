@@ -11,15 +11,16 @@
  * @package         ClipIt
  */
 $body .='
-<script>tinymce_setup();</script>
+<script>$(function(){tinymce_setup();});</script>
 <div class="row">
 <div class="col-md-3">
-    <div class="no-file" style="display:none;background: #f1f2f7;display:table;width:100%;height: 150px;">
-        <div style="display:table-cell;vertical-align:middle;text-align:center;">
-           <h2 style="text-transform: uppercase;color: #999;">'.elgg_echo("file:nofile").'</h2>
+    <div class="file-info">
+        <div class="no-file" style="display:none;background: #f1f2f7;display:table;width:100%;height: 150px;">
+            <div style="display:table-cell;vertical-align:middle;text-align:center;">
+               <h2 style="text-transform: uppercase;color: #999;">'.elgg_echo("file:nofile").'</h2>
+            </div>
         </div>
     </div>
-    <div class="file-info"></div>
 </div>
 <div class="col-md-8">
     <div class="form-group">

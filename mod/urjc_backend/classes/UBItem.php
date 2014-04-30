@@ -54,8 +54,8 @@ class UBItem{
      * @throws APIException
      */
     function __construct($id = -1){
+        $called_class = get_called_class();
         if($id != -1){
-            $called_class = get_called_class();
             if(!($elgg_object = new ElggObject($id))){
                 throw new APIException("ERROR 1: Id '" . $id . "' does not correspond to a " . $called_class . " object.");
             }
@@ -64,8 +64,14 @@ class UBItem{
             if(($elgg_type != $called_class::TYPE) || ($elgg_subtype != $called_class::SUBTYPE)){
                 throw new APIException("ERROR 2: Id '" . $id . "' does not correspond to a " . $called_class . " object.");
             }
-            $this->_load($elgg_object);
+
+        } else{
+            $elgg_object = new ElggObject();
+            $elgg_object->type = $called_class::TYPE;
+            $elgg_object->subtype = $called_class::SUBTYPE;
+            $elgg_object->save();
         }
+        $this->_load($elgg_object);
     }
 
     /**
@@ -113,21 +119,6 @@ class UBItem{
     }
 
     /**
-     * Gets the values for the properties specified in prop_array.
-     *
-     * @param array $prop_array Array of properties to get values from
-     *
-     * @return array Array of prop=>value items
-     */
-    function getProperties($prop_array){
-        $value_array = array();
-        foreach($prop_array as $prop){
-            $value_array[$prop] = $this->$prop;
-        }
-        return $value_array;
-    }
-
-    /**
      * Sets values into specified properties of the instance
      *
      * @param array $prop_value_array Array of prop=>value pairs to set into the instance
@@ -135,18 +126,18 @@ class UBItem{
      * @return int Returns instance Id, or false if error
      * @throws InvalidParameterException
      */
-    function setProperties($prop_value_array){
-        foreach($prop_value_array as $prop => $value){
-            if(!array_key_exists($prop, $this->list_properties())){
-                throw new InvalidParameterException("ERROR: One or more property names do not exist.");
-            }
-            if($prop == "id"){
-                throw new InvalidParameterException("ERROR: Cannot modify 'id' of instance.");
-            }
-            $this->$prop = $value;
-        }
-        return $this->save();
-    }
+//    function setProperties($prop_value_array){
+//        foreach($prop_value_array as $prop => $value){
+//            if(!array_key_exists($prop, $this->list_properties())){
+//                throw new InvalidParameterException("ERROR: One or more property names do not exist.");
+//            }
+//            if($prop == "id"){
+//                throw new InvalidParameterException("ERROR: Cannot modify 'id' of instance.");
+//            }
+//            $this->$prop = $value;
+//        }
+//        return $this->save();
+//    }
 
     /* Static Functions */
 
@@ -172,7 +163,11 @@ class UBItem{
         if(!$item = new $called_class($id)){
             return null;
         }
-        return $item->getProperties($prop_array);
+        $value_array = array();
+        foreach($prop_array as $prop){
+            $value_array[$prop] = $item->$prop;
+        }
+        return $value_array;
     }
 
     /**
@@ -182,16 +177,22 @@ class UBItem{
      * @param array $prop_value_array Array of property=>value pairs to set into the Item
      *
      * @return int|bool Returns Id of Item if correct, or false if error
+     * @throws InvalidParameterException
      */
     static function set_properties($id, $prop_value_array){
-        if(!is_integer($id)){
-            return false;
-        }
         $called_class = get_called_class();
-        if(!$item = new $called_class($id)){
+        if(!$item = new $called_class((int)$id)){
             return false;
         }
-        $item->setProperties($prop_value_array);
+        foreach($prop_value_array as $prop => $value){
+            if(!array_key_exists($prop, self::list_properties())){
+                throw new InvalidParameterException("ERROR: One or more property names do not exist.");
+            }
+            if($prop == "id"){
+                throw new InvalidParameterException("ERROR: Cannot modify 'id' of instance.");
+            }
+            $item->$prop = $value;
+        }
         return $item->save();
     }
 
@@ -205,7 +206,8 @@ class UBItem{
     static function create($prop_value_array){
         $called_class = get_called_class();
         $item = new $called_class();
-        return $item->setProperties($prop_value_array);
+        $item_id = $item->save();
+        return static::set_properties($item_id, $prop_value_array);
     }
 
     /**

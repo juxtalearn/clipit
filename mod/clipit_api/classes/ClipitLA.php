@@ -64,7 +64,8 @@ class ClipitLA extends UBFile{
         $prop_value_array["return_id"] = (int)$returnId;
         $prop_value_array["data"] = $data;
         $prop_value_array["status_code"] = (int)$statuscode;
-        $la->setProperties($prop_value_array);
-        return $la->save();
+        $id = $la->save();
+        ClipitLA::set_properties($id, $prop_value_array);
+        return $id;
     }
 }
