@@ -13,7 +13,8 @@
 $user_id = elgg_get_logged_in_user_guid();
 $entity_id = get_input('entity-id');
 $object = ClipitSite::lookup($entity_id);
-
+print_r($_FILES);
+die();
 switch($object['subtype']){
     // Clipit Activity
     case 'clipit_activity':
