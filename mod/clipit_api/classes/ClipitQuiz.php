@@ -72,26 +72,6 @@ class ClipitQuiz extends UBItem{
     }
 
     /**
-     * Sets values into specified properties of the instance
-     *
-     * @param array $prop_value_array Array of prop=>value pairs to set into the instance
-     *
-     * @return int Returns instance Id, or false if error
-     * @throws InvalidParameterException
-     */
-    function setProperties($prop_value_array){
-        $new_prop_value_array = array();
-        foreach($prop_value_array as $prop => $value){
-            if($prop == "public"){
-                $this->setPrivacy($value);
-            } else{
-                $new_prop_value_array[$prop] = $value;
-            }
-        }
-        return parent::setProperties($new_prop_value_array);
-    }
-
-    /**
      * Set Quiz privacy into "public" property (true = public, false = private)
      *
      * @param string $value Flag specifying if the quiz is public or not
@@ -104,6 +84,30 @@ class ClipitQuiz extends UBItem{
         } else{
             $this->public = (bool)$value;
         }
+    }
+
+    /**
+     * Sets values to specified properties of an Item
+     *
+     * @param int   $id Id of Item to set property valyes
+     * @param array $prop_value_array Array of property=>value pairs to set into the Item
+     *
+     * @return int|bool Returns Id of Item if correct, or false if error
+     */
+    static function set_properties($id, $prop_value_array){
+        $called_class = get_called_class();
+        if(!$item = new $called_class($id)){
+            return false;
+        }
+        $new_prop_value_array = array();
+        foreach($prop_value_array as $prop => $value){
+            if($prop == "public"){
+                $item->setPrivacy($value);
+            } else{
+                $new_prop_value_array[$prop] = $value;
+            }
+        }
+        return parent::set_properties($id, $new_prop_value_array);
     }
 
     /**

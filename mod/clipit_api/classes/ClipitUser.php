@@ -34,7 +34,7 @@ class ClipitUser extends UBUser{
     /**
      * Get all Group Ids in which a user is member of.
      *
-     * @param int $id Id of the user to get groups from.
+     * @param int $user_id Id of the user to get groups from.
      *
      * @return array Returns an array of Group Ids the user is member of.
      */
@@ -52,43 +52,40 @@ class ClipitUser extends UBUser{
     /**
      * Sets a User role to Student.
      *
-     * @param int $id User Id.
+     * @param int $user_id User Id.
      *
      * @return int Returns the User Id if set correctly.
      */
     static function set_role_student($user_id){
-        $user = new ClipitUser($user_id);
         remove_user_admin($user_id);
-        $prop_value_array["role"] = ClipitUser::ROLE_STUDENT;
-        return $user->setProperties($prop_value_array);
+        $prop_value_array["role"] = static::ROLE_STUDENT;
+        return static::set_properties($user_id, $prop_value_array);
     }
 
     /**
      * Sets a User role to Teacher.
      *
-     * @param int $id User Id.
+     * @param int $user_id User Id.
      *
      * @return int Returns the User Id if set correctly.
      */
     static function set_role_teacher($user_id){
-        $user = new ClipitUser($user_id);
         make_user_admin($user_id);
-        $prop_value_array["role"] = ClipitUser::ROLE_TEACHER;
-        return $user->setProperties($prop_value_array);
+        $prop_value_array["role"] = static::ROLE_TEACHER;
+        return static::set_properties($user_id, $prop_value_array);
     }
 
     /**
      * Sets a User role to Admin.
      *
-     * @param int $id User Id.
+     * @param int $user_id User Id.
      *
      * @return int Returns the User Id if set correctly.
      */
     static function set_role_admin($user_id){
-        $user = new ClipitUser($user_id);
         make_user_admin($user_id);
-        $prop_value_array["role"] = ClipitUser::ROLE_ADMIN;
-        return $user->setProperties($prop_value_array);
+        $prop_value_array["role"] = static::ROLE_ADMIN;
+        return static::set_properties($user_id, $prop_value_array);
     }
 
 }
