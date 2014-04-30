@@ -2,8 +2,8 @@
 .DS_Store
 nbproject
 engine/settings.php
-*php_errors.log
-*php_errorlog
+engine/handlers/php_errors.log
+php_errorlog
 mod_unused
 .project
 *.sublime-*
