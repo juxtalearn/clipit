@@ -117,27 +117,6 @@ class UBItem{
         return $elgg_entity->delete();
     }
 
-    /**
-     * Sets values into specified properties of the instance
-     *
-     * @param array $prop_value_array Array of prop=>value pairs to set into the instance
-     *
-     * @return int Returns instance Id, or false if error
-     * @throws InvalidParameterException
-     */
-//    function setProperties($prop_value_array){
-//        foreach($prop_value_array as $prop => $value){
-//            if(!array_key_exists($prop, $this->list_properties())){
-//                throw new InvalidParameterException("ERROR: One or more property names do not exist.");
-//            }
-//            if($prop == "id"){
-//                throw new InvalidParameterException("ERROR: Cannot modify 'id' of instance.");
-//            }
-//            $this->$prop = $value;
-//        }
-//        return $this->save();
-//    }
-
     /* Static Functions */
 
     /**
