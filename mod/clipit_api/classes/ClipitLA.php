@@ -19,10 +19,10 @@ class ClipitLA extends UBFile{
     public $return_id = -1;
     public $status_code = -1;
 
-    protected function load($elgg_object){
-        parent::load($elgg_object);
-        $this->return_id = (int)$elgg_object->return_id;
-        $this->status_code = (int)$elgg_object->status_code;
+    protected function load_from_elgg($elgg_file){
+        parent::load_from_elgg($elgg_file);
+        $this->return_id = (int)$elgg_file->return_id;
+        $this->status_code = (int)$elgg_file->status_code;
     }
 
     /**

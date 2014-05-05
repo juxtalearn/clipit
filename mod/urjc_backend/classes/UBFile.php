@@ -48,14 +48,14 @@ class UBFile extends UBItem{
             if(!($elgg_file = new ElggFile((int)$id))){
                 throw new APIException("ERROR: Id '" . $id . "' does not correspond to a " . get_class_name() . " object.");
             }
-            $this->load($elgg_file);
+            $this->load_from_elgg($elgg_file);
         }
     }
 
     /**
      * @param ElggFile $elgg_file
      */
-    protected function load($elgg_file){
+    protected function load_from_elgg($elgg_file){
         $this->id = (int)$elgg_file->get("guid");
         $this->name = $elgg_file->getFilename();
         $this->description = (string)$elgg_file->get("description");
@@ -119,5 +119,10 @@ class UBFile extends UBItem{
             $elgg_file->close();
             move_uploaded_file($this->temp_path, $elgg_file->getFilenameOnFilestore());
         }
+    }
+
+    static function detect_mimetype($id){
+        $elgg_file = new ElggFile($id);
+        return $elgg_file->detectMimeType($elgg_file->getFilenameOnFilestore());
     }
 }

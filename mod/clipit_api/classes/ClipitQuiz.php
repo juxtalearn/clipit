@@ -38,8 +38,8 @@ class ClipitQuiz extends UBItem{
      */
     public $taxonomy = -1;
 
-    protected function load($elgg_object){
-        parent::load($elgg_object);
+    protected function load_from_elgg($elgg_object){
+        parent::load_from_elgg($elgg_object);
         $this->public = (bool)$elgg_object->public;
         $this->question_array = (array)$elgg_object->question_array;
         $this->taxonomy = (int)$elgg_object->taxonomy;

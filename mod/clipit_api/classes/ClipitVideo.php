@@ -35,8 +35,8 @@ class ClipitVideo extends UBItem{
      * @param ElggObject $elgg_object Video to load
      *
      */
-    protected function load($elgg_object){
-        parent::load($elgg_object);
+    protected function load_from_elgg($elgg_object){
+        parent::load_from_elgg($elgg_object);
         $this->url = (string)$elgg_object->url;
     }
 

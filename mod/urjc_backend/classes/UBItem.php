@@ -63,19 +63,8 @@ class UBItem{
             if(($elgg_type != static::TYPE) || ($elgg_subtype != static::SUBTYPE)){
                 throw new APIException("ERROR: Id '" . $id . "' does not correspond to a " . get_called_class() . " object.");
             }
-            $this->load($elgg_object);
+            $this->load_from_elgg($elgg_object);
         }
-    }
-
-    /**
-     * @param ElggObject $elgg_object Elgg Object to load parameters from.
-     */
-    protected function load($elgg_object){
-        $this->id = (int)$elgg_object->get("guid");
-        $this->name = (string)$elgg_object->get("name");
-        $this->description = (string)$elgg_object->get("description");
-        $this->owner_id = (int)$elgg_object->getOwnerGUID();
-        $this->time_created = (int)$elgg_object->getTimeCreated();
     }
 
     /**
@@ -96,6 +85,17 @@ class UBItem{
         $this->copy_to_elgg($elgg_object);
         $elgg_object->save();
         return $this->id = $elgg_object->guid;
+    }
+
+    /**
+     * @param ElggObject $elgg_object Elgg Object to load parameters from.
+     */
+    protected function load_from_elgg($elgg_object){
+        $this->id = (int)$elgg_object->get("guid");
+        $this->name = (string)$elgg_object->get("name");
+        $this->description = (string)$elgg_object->get("description");
+        $this->owner_id = (int)$elgg_object->getOwnerGUID();
+        $this->time_created = (int)$elgg_object->getTimeCreated();
     }
 
     /**

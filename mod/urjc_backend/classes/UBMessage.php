@@ -24,8 +24,8 @@ class UBMessage extends UBItem{
     public $destination = -1;
     public $file_array = array();
 
-    protected function load($elgg_object){
-        parent::load($elgg_object);
+    protected function load_from_elgg($elgg_object){
+        parent::load_from_elgg($elgg_object);
         $this->read_array = (array)$elgg_object->read_array;
         $this->destination = static::get_destination($this->id);
         $this->file_array = static::get_files($this->id);

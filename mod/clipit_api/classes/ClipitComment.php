@@ -35,8 +35,8 @@ class ClipitComment extends UBMessage{
     public $comment_array = array();
 
 
-    protected function load($elgg_object){
-        parent::load($elgg_object);
+    protected function load_from_elgg($elgg_object){
+        parent::load_from_elgg($elgg_object);
         $this->overall = (int)$elgg_object->overall;
         $this->rating_array = (array)$elgg_object->rating_array;
         $this->comment_array = (array)$elgg_object->comment_array;

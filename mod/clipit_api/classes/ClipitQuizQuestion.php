@@ -39,8 +39,8 @@ class ClipitQuizQuestion extends UBItem{
     public $video = -1;
 
 
-    protected function load($elgg_object){
-        parent::load($elgg_object);
+    protected function load_from_elgg($elgg_object){
+        parent::load_from_elgg($elgg_object);
         $this->option_array = (array)$elgg_object->option_array;
         $this->tag_array = (array)$elgg_object->tag_array;
         $this->option_type = (string)$elgg_object->option_type;

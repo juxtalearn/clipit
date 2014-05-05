@@ -46,8 +46,8 @@ class ClipitActivity extends UBItem{
     public $video_array = array();
     public $file_array = array();
 
-    protected function load($elgg_object){
-        parent::load($elgg_object);
+    protected function load_from_elgg($elgg_object){
+        parent::load_from_elgg($elgg_object);
         $this->color = (string)$elgg_object->color;
         $this->status = (string)$elgg_object->status;
         $this->called_users_array = static::get_called_users($this->id, $this->called_users_array);
