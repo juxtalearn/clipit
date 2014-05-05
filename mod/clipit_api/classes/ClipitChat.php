@@ -18,35 +18,17 @@ class ClipitChat extends UBMessage{
 
     public $archived_array = array();
 
-    protected function _load($elgg_object){
-        parent::_load($elgg_object);
+    protected function load($elgg_object){
+        parent::load($elgg_object);
         $this->archived_array = (array)$elgg_object->archived_array;
     }
 
     /**
-     * Saves this instance to the system.
-     *
-     * @return bool|int Returns id of saved instance, or false if error.
+     * @param ElggObject $elgg_object Elgg object instance to save Item to
      */
-    function save(){
-        if($this->id == -1){
-            $elgg_object = new ElggObject();
-            $elgg_object->subtype = (string)static::SUBTYPE;
-        } elseif(!$elgg_object = new ElggObject((int)$this->id)){
-            return false;
-        }
-        $elgg_object->name = (string)$this->name;
-        $elgg_object->description = (string)$this->description;
-        $elgg_object->access_id = ACCESS_PUBLIC;
-        $elgg_object->read_array = (array)$this->read_array;
+    protected function copy_to_elgg($elgg_object){
+        parent::copy_to_elgg($elgg_object);
         $elgg_object->archived_array = (array)$this->archived_array;
-        $elgg_object->save();
-        $this->id = (int)$elgg_object->guid;
-        $this->owner_id = (int)$elgg_object->owner_guid;
-        $this->time_created = (int)$elgg_object->time_created;
-        static::set_destination($this->id, $this->destination);
-        static::add_files($this->id, $this->file_array);
-        return $this->id;
     }
 
     static function get_inbox($user_id){

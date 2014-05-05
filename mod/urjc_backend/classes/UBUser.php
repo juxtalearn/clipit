@@ -40,16 +40,13 @@ class UBUser extends UBItem{
     public $last_login = -1;
     private $password_hash = "";
 
-    function __construct($id = -1){
-        if($id != -1){
+    function __construct($id = null){
+        if(!empty($id)){
             if(!($elgg_user = new ElggUser($id))){
                 throw new APIException("ERROR: Id '" . $id . "' does not correspond to a " . get_called_class() . " object.");
             }
-        } else{
-            $elgg_user = new ElggUser();
-            $elgg_user->save();
+            $this->load($elgg_user);
         }
-        $this->_load($elgg_user);
     }
 
     /**
@@ -59,8 +56,8 @@ class UBUser extends UBItem{
      *
      * @return UBUser|bool Returns User instance, or false if error.
      */
-    protected function _load($elgg_user){
-        parent::_load($elgg_user);
+    protected function load($elgg_user){
+        parent::load($elgg_user);
         $this->email = (string)$elgg_user->email;
         $this->login = (string)$elgg_user->username;
         $this->password = (string)$elgg_user->password;
@@ -75,15 +72,20 @@ class UBUser extends UBItem{
      *
      * @return bool|int Returns id of saved instance, or false if error.
      */
-    function save(){
-        if($this->id == -1){
+    protected function save(){
+        if(empty($this->id)){
             $elgg_user = new ElggUser();
             $elgg_user->subtype = (string)static::SUBTYPE;
         } elseif(!$elgg_user = new ElggUser($this->id)){
             return false;
         }
-        $elgg_user->name = $this->name;
-        $elgg_user->description = $this->description;
+        $this->copy_to_elgg($elgg_user);
+        $elgg_user->save();
+        return $this->id = $elgg_user->guid;
+    }
+
+    protected function copy_to_elgg($elgg_user){
+        parent::copy_to_elgg($elgg_user);
         $elgg_user->email = $this->email;
         $elgg_user->username = $this->login;
         $elgg_user->password = $this->password;
@@ -96,12 +98,7 @@ class UBUser extends UBItem{
         }
         $elgg_user->owner_guid = 0;
         $elgg_user->container_guid = 0;
-        $elgg_user->access_id = ACCESS_PUBLIC;
-        $elgg_user->save();
-        $this->time_created = $elgg_user->time_created;
-        return $this->id = $elgg_user->guid;
     }
-
     /**
      * Creates an encoded user password using a random hash for encoding.
      *
@@ -109,7 +106,7 @@ class UBUser extends UBItem{
      *
      * @return bool 'true' if success, 'false' if error.
      */
-    private function setPassword($password){
+    protected function setPassword($password){
         if(!$password){
             return false;
         }
@@ -128,13 +125,13 @@ class UBUser extends UBItem{
      * @throws InvalidParameterException
      */
     static function set_properties($id, $prop_value_array){
-        if(!$item = new static((int)$id)){
+        if(!$item = new static($id)){
             return false;
         }
         $new_prop_value_array = array();
         foreach($prop_value_array as $prop => $value){
             if($prop == "password"){
-                $item->setPassword($value);
+                $item->setPassword($value); // @todo check for errors
             } else{
                 $new_prop_value_array[$prop] = $value;
             }

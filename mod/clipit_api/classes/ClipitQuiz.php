@@ -38,8 +38,8 @@ class ClipitQuiz extends UBItem{
      */
     public $taxonomy = -1;
 
-    protected function _load($elgg_object){
-        parent::_load($elgg_object);
+    protected function load($elgg_object){
+        parent::load($elgg_object);
         $this->public = (bool)$elgg_object->public;
         $this->question_array = (array)$elgg_object->question_array;
         $this->taxonomy = (int)$elgg_object->taxonomy;
@@ -47,28 +47,14 @@ class ClipitQuiz extends UBItem{
     }
 
     /**
-     * Saves this instance to the system.
-     *
-     * @return bool|int Returns id of saved instance, or false if error.
+     * @param ElggObject $elgg_object Elgg object instance to save Item to
      */
-    function save(){
-        if($this->id == -1){
-            $elgg_object = new ElggObject();
-            $elgg_object->subtype = (string)static::SUBTYPE;
-        } elseif(!$elgg_object = new ElggObject((int)$this->id)){
-            return false;
-        }
-        $elgg_object->name = (string)$this->name;
-        $elgg_object->description = (string)$this->description;
+    protected function copy_to_elgg($elgg_object){
+        parent::copy_to_elgg($elgg_object);
         $elgg_object->public = (bool)$this->public;
         $elgg_object->question_array = (array)$this->question_array;
         $elgg_object->taxonomy = (int)$this->taxonomy;
         $elgg_object->target = (string)$this->target;
-        $elgg_object->access_id = ACCESS_PUBLIC;
-        $elgg_object->save();
-        $this->owner_id = (int)$elgg_object->owner_guid;
-        $this->time_created = (int)$elgg_object->time_created;
-        return $this->id = $elgg_object->guid;
     }
 
     /**

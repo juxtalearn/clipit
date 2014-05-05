@@ -264,6 +264,39 @@ function expose_common_message_functions($api_suffix, $class_suffix){
                 "required" => true)),
         "Set Message read status per user.",
         'POST', false, true);
+    expose_function(
+        $api_suffix . "add_files",
+        $class_suffix . "add_files",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "file_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Attach files to a Message.",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "remove_files",
+        $class_suffix . "remove_files",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "file_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Remove attached files from a Message.",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "get_files",
+        $class_suffix . "get_files",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Get attached files from a Message.",
+        'GET', false, true);
 }
 
 function expose_activity_functions(){

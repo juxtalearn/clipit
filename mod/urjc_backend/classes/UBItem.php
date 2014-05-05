@@ -27,7 +27,7 @@ class UBItem{
     /**
      * @var int Unique Id of this instance
      */
-    public $id = -1;
+    public $id = null;
     /**
      * @var string Name of this instance
      */
@@ -53,8 +53,8 @@ class UBItem{
      *
      * @throws APIException
      */
-    function __construct($id = -1){
-        if($id != -1){
+    function __construct($id = null){
+        if(!empty($id)){
             if(!($elgg_object = new ElggObject($id))){
                 throw new APIException("ERROR: Id '" . $id . "' does not correspond to a " . get_called_class() . " object.");
             }
@@ -63,20 +63,14 @@ class UBItem{
             if(($elgg_type != static::TYPE) || ($elgg_subtype != static::SUBTYPE)){
                 throw new APIException("ERROR: Id '" . $id . "' does not correspond to a " . get_called_class() . " object.");
             }
-
-        } else{
-            $elgg_object = new ElggObject();
-            $elgg_object->type = static::TYPE;
-            $elgg_object->subtype = static::SUBTYPE;
-            $elgg_object->save();
+            $this->load($elgg_object);
         }
-        $this->_load($elgg_object);
     }
 
     /**
      * @param ElggObject $elgg_object Elgg Object to load parameters from.
      */
-    protected function _load($elgg_object){
+    protected function load($elgg_object){
         $this->id = (int)$elgg_object->get("guid");
         $this->name = (string)$elgg_object->get("name");
         $this->description = (string)$elgg_object->get("description");
@@ -89,20 +83,28 @@ class UBItem{
      *
      * @return bool|int Returns id of saved instance, or false if error.
      */
-    function save(){
-        if($this->id == -1){
+    protected function save(){
+        if(!empty($this->id)){
+            if(!$elgg_object = new ElggObject($this->id)){
+                return false;
+            }
+        } else{
             $elgg_object = new ElggObject();
-            $elgg_object->subtype = (string)static::SUBTYPE;
-        } elseif(!$elgg_object = new ElggObject((int)$this->id)){
-            return false;
+            $elgg_object->type = static::TYPE;
+            $elgg_object->subtype = static::SUBTYPE;
         }
+        $this->copy_to_elgg($elgg_object);
+        $elgg_object->save();
+        return $this->id = $elgg_object->guid;
+    }
+
+    /**
+     * @param ElggObject $elgg_object Elgg object instance to save Item to
+     */
+    protected function copy_to_elgg($elgg_object){
         $elgg_object->set("name", (string)$this->name);
         $elgg_object->set("description", (string)$this->description);
         $elgg_object->set("access_id", ACCESS_PUBLIC);
-        $elgg_object->save();
-        $this->owner_id = (int)$elgg_object->getOwnerGUID();
-        $this->time_created = (int)$elgg_object->getTimeCreated();
-        return $this->id = (int)$elgg_object->getGUID();
     }
 
     /**
@@ -110,7 +112,7 @@ class UBItem{
      *
      * @return bool True if success, false if error.
      */
-    function delete(){
+    protected function delete(){
         if(!$elgg_entity = get_Entity((int)$this->id)){
             return false;
         }
@@ -157,8 +159,14 @@ class UBItem{
      * @throws InvalidParameterException
      */
     static function set_properties($id, $prop_value_array){
-        if(!$item = new static((int)$id)){
+        if($id === -1){ //called from 'create' method
+            $item = new static();
+        } elseif(empty($id)){
             return false;
+        }else {
+            if(!$item = new static($id)){
+                return false;
+            }
         }
         foreach($prop_value_array as $prop => $value){
             if(!array_key_exists($prop, self::list_properties())){
@@ -180,9 +188,7 @@ class UBItem{
      * @return int|bool Returns instance Id if correct, or false if error
      */
     static function create($prop_value_array){
-        $item = new static();
-        $item_id = $item->save();
-        return static::set_properties($item_id, $prop_value_array);
+        return static::set_properties(-1, $prop_value_array);
     }
 
     /**
