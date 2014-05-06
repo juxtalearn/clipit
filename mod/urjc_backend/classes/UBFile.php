@@ -38,7 +38,7 @@ class UBFile extends UBItem{
     public $thumb_small = null;
     public $thumb_normal = null;
     public $thumb_large = null;
-    public $mime_type = "";
+    public $mime_type = array();
 
 
     /* Instance Functions */
@@ -85,7 +85,10 @@ class UBFile extends UBItem{
         $this->thumb_normal = $thumbs->grabFile();
         $thumbs->setFilename($elgg_file->thumb_large);
         $this->thumb_large = $thumbs->grabFile();
-        $this->mime_type = $elgg_file->getMimeType();
+        if(!empty($elgg_file->mime_type)){
+            $this->mime_type["full"] = $elgg_file->mime_type[0];
+            $this->mime_type["short"] = $elgg_file->mime_type[1];
+        }
     }
 
     /**
@@ -138,20 +141,54 @@ class UBFile extends UBItem{
             move_uploaded_file($this->temp_path, $elgg_file->getFilenameOnFilestore());
         }
         $filestore_name = $elgg_file->getFilenameOnFilestore();
-        $mime_type = $elgg_file->detectMimeType($filestore_name);
-        $elgg_file->setMimeType($mime_type);
+        $mime_type["full"] = (string)static::get_mime_type($filestore_name);
+        if($mime_type["full"] == "application/zip"){ // Detect Office 2007+ mimetype
+            $new_mime = static::getMicrosoftOfficeMimeInfo($filestore_name);
+            if($new_mime !== false){
+                $mime_type["full"] = (string)$new_mime["mime"];
+            }
+        }
+        $mime_type["short"] = (string)static::get_simple_mime_type($mime_type["full"]);
+        $elgg_file->mime_type = (array)$mime_type;
     }
+
+    /**
+     * @param string $file Filename on Filestore
+     * @return bool|mixed|null|string Mime Type
+     */
+    static function get_mime_type($file) {
+        $mime = false;
+
+        // for PHP5 folks.
+        if (function_exists('finfo_file') && defined('FILEINFO_MIME_TYPE')) {
+            $resource = finfo_open(FILEINFO_MIME_TYPE);
+            if ($resource) {
+                $mime = finfo_file($resource, $file);
+            }
+        }
+        // default
+        if (!$mime) {
+            return null;
+        }
+
+        return $mime;
+    }
+
+
+
 
     /**
      * Returns an overall file type from the mimetype
      *
-     * @param string $mimetype The MIME type
+     * @param string $mime_type The MIME type
      * @return string The overall type
      */
-    static function file_get_simple_type($mimetype) {
-        switch ($mimetype) {
+    static function get_simple_mime_type($mime_type) {
+        switch ($mime_type) {
             case "application/msword":
             case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+            case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
+            case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
                 return "document";
                 break;
             case "application/pdf":
@@ -162,23 +199,23 @@ class UBFile extends UBItem{
                 break;
         }
 
-        if (substr_count($mimetype, 'text/')) {
+        if (substr_count($mime_type, 'text/')) {
             return "document";
         }
 
-        if (substr_count($mimetype, 'audio/')) {
+        if (substr_count($mime_type, 'audio/')) {
             return "audio";
         }
 
-        if (substr_count($mimetype, 'image/')) {
+        if (substr_count($mime_type, 'image/')) {
             return "image";
         }
 
-        if (substr_count($mimetype, 'video/')) {
+        if (substr_count($mime_type, 'video/')) {
             return "video";
         }
 
-        if (substr_count($mimetype, 'opendocument')) {
+        if (substr_count($mime_type, 'opendocument')) {
             return "document";
         }
 
@@ -191,11 +228,10 @@ class UBFile extends UBItem{
     private static function create_thumbnails($elgg_file){
         $file_name = $elgg_file->getFilename();
         $filestore_name = $elgg_file->getFilenameOnFilestore();
-        $simple_mime_type = static::file_get_simple_type($elgg_file->getMimeType());
+        $simple_mime_type = static::get_simple_mime_type(static::get_mime_type($filestore_name));
         // if image, we need to create thumbnails (this should be moved into a function)
         if ($simple_mime_type == "image") {
             $thumb = new ElggFile();
-            $thumb->setMimeType($elgg_file->getMimeType());
             $thumbnail = get_resized_image_from_existing_file($filestore_name, static::THUMB_SMALL, static::THUMB_SMALL, false);
             if ($thumbnail) {
                 $thumb->setFilename("thumb_small".$file_name);
@@ -226,5 +262,136 @@ class UBFile extends UBItem{
                 unset($thumbnail);
             }
         }
+    }
+
+    private static function getMicrosoftOfficeMimeInfo($file) {
+        $fileInfo = array(
+            'word/' => array(
+                'type'      => 'Microsoft Word 2007+',
+                'mime'      => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                'extension' => 'docx'
+            ),
+            'ppt/' => array(
+                'type'      => 'Microsoft PowerPoint 2007+',
+                'mime'      => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+                'extension' => 'pptx'
+            ),
+            'xl/' => array(
+                'type'      => 'Microsoft Excel 2007+',
+                'mime'      => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'extension' => 'xlsx'
+            )
+        );
+
+        $pkEscapeSequence = "PK\x03\x04";
+
+        $file = new BinaryFile($file);
+        if ($file->bytesAre($pkEscapeSequence, 0x00)) {
+            if ($file->bytesAre('[Content_Types].xml', 0x1E)) {
+                if ($file->search($pkEscapeSequence, null, 2000)) {
+                    if ($file->search($pkEscapeSequence, null, 1000)) {
+                        $offset = $file->tell() + 26;
+                        foreach ($fileInfo as $searchWord => $info) {
+                            $file->seek($offset);
+                            if ($file->bytesAre($searchWord)) {
+                                return $fileInfo[$searchWord];
+                            }
+                        }
+                        return array(
+                            'type'      => 'Microsoft OOXML',
+                            'mime'      => null,
+                            'extension' => null
+                        );
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+}
+
+class BinaryFile_Exception extends Exception {}
+
+class BinaryFile_Seek_Method {
+    const ABSOLUTE = 1;
+    const RELATIVE = 2;
+}
+
+class BinaryFile {
+    const SEARCH_BUFFER_SIZE = 1024;
+
+    private $handle;
+
+    public function __construct($file) {
+        $this->handle = fopen($file, 'r');
+        if ($this->handle === false) {
+            throw new BinaryFile_Exception('Cannot open file');
+        }
+    }
+
+    public function __destruct() {
+        fclose($this->handle);
+    }
+
+    public function tell() {
+        return ftell($this->handle);
+    }
+
+    public function seek($offset, $seekMethod = null) {
+        if ($offset !== null) {
+            if ($seekMethod === null) {
+                $seekMethod = BinaryFile_Seek_Method::ABSOLUTE;
+            }
+            if ($seekMethod === BinaryFile_Seek_Method::RELATIVE) {
+                $offset += $this->tell();
+            }
+            return fseek($this->handle, $offset);
+        } else {
+            return true;
+        }
+    }
+
+    public function read($length) {
+        return fread($this->handle, $length);
+    }
+
+    public function search($string, $offset = null, $maxLength = null, $seekMethod = null) {
+        if ($offset !== null) {
+            $this->seek($offset);
+        } else {
+            $offset = $this->tell();
+        }
+
+        $bytesRead = 0;
+        $bufferSize = ($maxLength !== null ? min(self::SEARCH_BUFFER_SIZE, $maxLength) : self::SEARCH_BUFFER_SIZE);
+
+        while ($read = $this->read($bufferSize)) {
+            $bytesRead += strlen($read);
+            $search = strpos($read, $string);
+
+            if ($search !== false) {
+                $this->seek($offset + $search + strlen($string));
+                return true;
+            }
+
+            if ($maxLength !== null) {
+                $bufferSize = min(self::SEARCH_BUFFER_SIZE, $maxLength - $bytesRead);
+                if ($bufferSize == 0) {
+                    break;
+                }
+            }
+        }
+        return false;
+    }
+
+    public function getBytes($length, $offset = null, $seekMethod = null) {
+        $this->seek($offset, $seekMethod);
+        $read = $this->read($length);
+        return $read;
+    }
+
+    public function bytesAre($string, $offset = null, $seekMethod = null) {
+        return ($this->getBytes(strlen($string), $offset) == $string);
     }
 }
