@@ -188,7 +188,7 @@ class UBFile extends UBItem{
     /**
      * @param ElggFile $elgg_file
      */
-    static function create_thumbnails($elgg_file){
+    private static function create_thumbnails($elgg_file){
         $file_name = $elgg_file->getFilename();
         $filestore_name = $elgg_file->getFilenameOnFilestore();
         $simple_mime_type = static::file_get_simple_type($elgg_file->getMimeType());
