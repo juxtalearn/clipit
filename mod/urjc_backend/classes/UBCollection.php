@@ -68,6 +68,8 @@ abstract class UBCollection{
                 }
             }
         }
+        // IDs are created sequencially, so inverse ordering == reverse chrono-order
+        usort($item_array, 'UBItem::sort_numbers_inv');
         return $item_array;
     }
 

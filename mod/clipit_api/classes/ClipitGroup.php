@@ -33,8 +33,8 @@ class ClipitGroup extends UBItem{
     /**
      * @param ElggObject $elgg_object Elgg Object to load parameters from.
      */
-    protected function _load($elgg_object){
-        parent::_load($elgg_object);
+    protected function load_from_elgg($elgg_object){
+        parent::load_from_elgg($elgg_object);
         $this->user_array = static::get_users($this->id);
         $this->file_array = static::get_files($this->id);
         $this->video_array = static::get_videos($this->id);
@@ -45,28 +45,15 @@ class ClipitGroup extends UBItem{
      *
      * @return bool|int Returns id of saved instance, or false if error.
      */
-    function save(){
-        if($this->id == -1){
-            $elgg_object = new ElggObject();
-            $elgg_object->subtype = (string)static::SUBTYPE;
-        } elseif(!$elgg_object = new ElggObject((int)$this->id)){
-            return false;
-        }
-        $elgg_object->name = (string)$this->name;
-        $elgg_object->description = (string)$this->description;
-        $elgg_object->access_id = ACCESS_PUBLIC;
-        $elgg_object->save();
-
-        $this->id = $elgg_object->guid;
-        $this->owner_id = (int)$elgg_object->owner_guid;
-        $this->time_created = (int)$elgg_object->time_created;
+    protected function save(){
+        parent::save();
         static::set_users($this->id, $this->user_array);
         static::set_files($this->id, $this->file_array);
         static::set_videos($this->id, $this->video_array);
         return $this->id;
     }
 
-    function delete(){
+    protected function delete(){
         $rel_array = get_entity_relationships((int)$this->id);
         foreach($rel_array as $rel){
             switch($rel->relationship){

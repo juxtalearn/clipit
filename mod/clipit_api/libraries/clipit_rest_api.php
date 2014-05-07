@@ -28,7 +28,11 @@ function clipit_expose_api(){
     expose_quiz_question_functions();
     expose_quiz_result_functions();
     expose_site_functions();
+    expose_sta_functions();
+    expose_storyboard_functions();
+    expose_tag_functions();
     expose_task_functions();
+    expose_tricky_topic_functions();
     expose_user_functions();
     expose_video_functions();
 }
@@ -264,6 +268,39 @@ function expose_common_message_functions($api_suffix, $class_suffix){
                 "required" => true)),
         "Set Message read status per user.",
         'POST', false, true);
+    expose_function(
+        $api_suffix . "add_files",
+        $class_suffix . "add_files",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "file_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Attach files to a Message.",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "remove_files",
+        $class_suffix . "remove_files",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "file_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Remove attached files from a Message.",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "get_files",
+        $class_suffix . "get_files",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Get attached files from a Message.",
+        'GET', false, true);
 }
 
 function expose_activity_functions(){
@@ -963,6 +1000,24 @@ function expose_site_functions(){
         'GET', false, true);
 }
 
+function expose_sta_functions(){
+    $api_suffix = "clipit.sta.";
+    $class_suffix = "ClipitSTA::";
+    expose_common_functions($api_suffix, $class_suffix);
+}
+
+function expose_storyboard_functions(){
+    $api_suffix = "clipit.storyboard.";
+    $class_suffix = "ClipitStoryboard::";
+    expose_common_functions($api_suffix, $class_suffix);
+}
+
+function expose_tag_functions(){
+    $api_suffix = "clipit.tag.";
+    $class_suffix = "ClipitTag::";
+    expose_common_functions($api_suffix, $class_suffix);
+}
+
 function expose_task_functions(){
     $api_suffix = "clipit.task.";
     $class_suffix = "ClipitTask::";
@@ -976,6 +1031,12 @@ function expose_task_functions(){
                 "required" => true)),
         "Get Task Activity",
         'GET', false, true);
+}
+
+function expose_tricky_topic_functions(){
+    $api_suffix = "clipit.tricky_topic.";
+    $class_suffix = "ClipitTrickyTopic::";
+    expose_common_functions($api_suffix, $class_suffix);
 }
 
 function expose_user_functions(){

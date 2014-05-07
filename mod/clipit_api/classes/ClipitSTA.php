@@ -12,22 +12,29 @@
  * @subpackage      clipit_api
  */
 
-class ClipitPost extends UBMessage{
-    const SUBTYPE = "clipit_post";
+/**
+ * Class ClipitSTA
+ *
+ */
+class ClipitSTA extends UBFile{
+    const SUBTYPE = "clipit_sta";
 
-    public $topic_id = -1;
+    public $resource_url = "";
+    public $tricky_topic = -1;
+    public $tag_array = array();
 
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
-        $this->topic_id = (int)$elgg_object->topic_id;
+        $this->resource_url = (string)$elgg_object->resource_url;
+        $this->tricky_topic = (int)$elgg_object->tricky_topic;
+        $this->tag_array = (array)$elgg_object->tag_array;
     }
 
-    /**
-     * @param ElggObject $elgg_object Elgg object instance to save Item to
-     */
     protected function copy_to_elgg($elgg_object){
         parent::copy_to_elgg($elgg_object);
-        $elgg_object->topic_id = $this->topic_id;
+        $elgg_object->resource_url = (string)$this->resource_url;
+        $elgg_object->tricky_topic = (int)$this->tricky_topic;
+        $elgg_object->tag_array = (array)$this->tag_array;
     }
 
-} 
+}

@@ -24,45 +24,8 @@ class ClipitVideo extends UBItem{
 
     const REL_VIDEO_COMMENT = "video-comment";
     const REL_VIDEO_TAG = "video-tag";
-    /**
-     * @var string Link to where the video is hosted (Youtube, Vimeo...)
-     */
-    public $url = "";
 
-    /**
-     * Loads a ClipitVideo instance from the system.
-     *
-     * @param ElggObject $elgg_object Video to load
-     *
-     */
-    protected function _load($elgg_object){
-        parent::_load($elgg_object);
-        $this->url = (string)$elgg_object->url;
-    }
-
-    /**
-     * Saves this instance to the system
-     *
-     * @return bool|int Returns the Id of the saved instance, or false if error
-     */
-    function save(){
-        if($this->id == -1){
-            $elgg_object = new ElggObject();
-            $elgg_object->subtype = (string)static::SUBTYPE;
-        } elseif(!$elgg_object = new ElggObject($this->id)){
-            return false;
-        }
-        $elgg_object->name = (string)$this->name;
-        $elgg_object->description = (string)$this->description;
-        $elgg_object->url = (string)$this->url;
-        $elgg_object->access_id = ACCESS_PUBLIC;
-        $elgg_object->save();
-        $this->owner_id = (int)$elgg_object->owner_guid;
-        $this->time_created = (int)$elgg_object->time_created;
-        return $this->id = $elgg_object->guid;
-    }
-
-    function delete(){
+    protected function delete(){
         $rel_array = get_entity_relationships((int)$this->id);
         foreach($rel_array as $rel){
             switch($rel->relationship){

@@ -19,44 +19,20 @@ class ClipitLA extends UBFile{
     public $return_id = -1;
     public $status_code = -1;
 
-    protected function _load($elgg_object){
-        parent::_load($elgg_object);
-        $this->return_id = (int)$elgg_object->return_id;
-        $this->status_code = (int)$elgg_object->status_code;
+    protected function load_from_elgg($elgg_file){
+        parent::load_from_elgg($elgg_file);
+        $this->return_id = (int)$elgg_file->return_id;
+        $this->status_code = (int)$elgg_file->status_code;
     }
 
     /**
-     * Saves this instance to the system.
-     *
-     * @return bool|int Returns the Id of the saved instance, or false if error
+     * Saves this instance to the system
+     * @param ElggFile $elgg_file Elgg file instance to save Item to
      */
-    function save(){
-        if($this->id == -1){
-            $elgg_file = new ElggFile();
-            $elgg_file->subtype = (string)static::SUBTYPE;
-        } elseif(!$elgg_file = new ElggFile((int)$this->id)){
-            return false;
-        }
-        $date_obj = new DateTime();
-        if(empty($this->name)){
-            $this->name = static::DEFAULT_FILENAME;
-        }
-        $elgg_file->setFilename((string)$date_obj->getTimestamp() . static::TIMESTAMP_DELIMITER . static::DEFAULT_FILENAME);
-        $elgg_file->description = (string)$this->description;
-        $elgg_file->open("write");
-        if($decoded_data = base64_decode($this->data, true)){
-            $elgg_file->write($decoded_data);
-        } else{
-            $elgg_file->write($this->data);
-        }
-        $elgg_file->close();
-        $elgg_file->access_id = ACCESS_PUBLIC;
+    protected function copy_to_elgg($elgg_file){
+        parent::copy_to_elgg($elgg_file);
         $elgg_file->return_id = $this->return_id;
         $elgg_file->status_code = $this->status_code;
-        $elgg_file->save();
-        $this->owner_id = (int)$elgg_file->owner_guid;
-        $this->time_created = (int)$elgg_file->time_created;
-        return $this->id = (int)$elgg_file->guid;
     }
 
     static function send_metrics($returnId, $data, $statuscode){

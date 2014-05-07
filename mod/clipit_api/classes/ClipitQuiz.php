@@ -36,39 +36,35 @@ class ClipitQuiz extends UBItem{
     /**
      * @var int Id of Taxonomy used as topic for this Quiz (optional)
      */
-    public $taxonomy = -1;
+    public $tricky_topic = -1;
 
-    protected function _load($elgg_object){
-        parent::_load($elgg_object);
+    public $embed_url = "";
+    public $scores_url = "";
+    public $author_name = "";
+
+    protected function load_from_elgg($elgg_object){
+        parent::load_from_elgg($elgg_object);
         $this->public = (bool)$elgg_object->public;
         $this->question_array = (array)$elgg_object->question_array;
-        $this->taxonomy = (int)$elgg_object->taxonomy;
+        $this->tricky_topic = (int)$elgg_object->tricky_topic;
         $this->target = (string)$elgg_object->target;
+        $this->embed_url = (string) $elgg_object->embed_url;
+        $this->scores_url = (string) $elgg_object->scores_url;
+        $this->author_name = (string) $elgg_object->author_name;
     }
 
     /**
-     * Saves this instance to the system.
-     *
-     * @return bool|int Returns id of saved instance, or false if error.
+     * @param ElggObject $elgg_object Elgg object instance to save Item to
      */
-    function save(){
-        if($this->id == -1){
-            $elgg_object = new ElggObject();
-            $elgg_object->subtype = (string)static::SUBTYPE;
-        } elseif(!$elgg_object = new ElggObject((int)$this->id)){
-            return false;
-        }
-        $elgg_object->name = (string)$this->name;
-        $elgg_object->description = (string)$this->description;
+    protected function copy_to_elgg($elgg_object){
+        parent::copy_to_elgg($elgg_object);
         $elgg_object->public = (bool)$this->public;
         $elgg_object->question_array = (array)$this->question_array;
-        $elgg_object->taxonomy = (int)$this->taxonomy;
+        $elgg_object->tricky_topic = (int)$this->tricky_topic;
         $elgg_object->target = (string)$this->target;
-        $elgg_object->access_id = ACCESS_PUBLIC;
-        $elgg_object->save();
-        $this->owner_id = (int)$elgg_object->owner_guid;
-        $this->time_created = (int)$elgg_object->time_created;
-        return $this->id = $elgg_object->guid;
+        $elgg_object->embed_url = (string) $this->embed_url;
+        $elgg_object->scores_url = (string) $this->scores_url;
+        $elgg_object->author_name = (string) $this->author_name;
     }
 
     /**
@@ -95,8 +91,7 @@ class ClipitQuiz extends UBItem{
      * @return int|bool Returns Id of Item if correct, or false if error
      */
     static function set_properties($id, $prop_value_array){
-        $called_class = get_called_class();
-        if(!$item = new $called_class($id)){
+        if(!$item = new static($id)){
             return false;
         }
         $new_prop_value_array = array();

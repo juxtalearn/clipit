@@ -17,6 +17,6 @@
  *
  */
 class ClipitTag extends UBItem{
-
+    const SUBTYPE = "clipit_tag";
 
 }

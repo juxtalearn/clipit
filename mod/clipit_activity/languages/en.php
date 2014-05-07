@@ -57,10 +57,22 @@ $english = array(
     'sta:videos' => 'Videos',
     'sta:links' => 'Interesting links',
     // Files
+    'multimedia:file:description' => 'File description',
     'file:nofile' => 'No file',
+    'file:removed' => 'File %s removed',
+    'file:cantremove' => 'Can not remove file',
+    'file:edit' => 'Edit file',
+    /* File types */
+    'file:document' => 'Document',
+    'file:image' => 'Image',
+    'file:video' => 'Video',
+    'file:audio' => 'Audio',
+    'file:compressed' => 'Compressed file',
+
     // Publications
     'publications:no_evaluated' => 'No evaluated',
     'publications:evaluated' => 'Evaluated',
+
 );
 
 add_translation('en', $english);
