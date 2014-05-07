@@ -19,20 +19,22 @@
 class ClipitTrickyTopic extends UBItem{
     const SUBTYPE = "clipit_trickytopic";
 
+    public $subject = "";
     public $country = "";
-
     public $tag_array = array();
 
 
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
-        $this->country = (bool)$elgg_object->country;
-        $this->tag_array = (bool)$elgg_object->tag_array;
+        $this->subject = (string)$elgg_object->subject;
+        $this->country = (string)$elgg_object->country;
+        $this->tag_array = (array)$elgg_object->tag_array;
     }
 
     protected function copy_to_elgg($elgg_object){
         parent::copy_to_elgg($elgg_object);
-        $elgg_object->country = (bool)$this->country;
-        $elgg_object->tag_array = (bool)$this->tag_array;
+        $elgg_object->subject = (string)$this->subject;
+        $elgg_object->country = (string)$this->country;
+        $elgg_object->tag_array = (array)$this->tag_array;
     }
 }
