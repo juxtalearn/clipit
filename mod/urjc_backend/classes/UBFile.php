@@ -77,6 +77,7 @@ class UBFile extends UBItem{
         $this->data = $elgg_file->grabFile();
         $this->size = $elgg_file->size();
         $this->file_path = (string)$elgg_file->getFilenameOnFilestore();
+        $this->url = elgg_get_site_url()."file/download/".$this->id;
         $thumbs = new ElggFile();
         $thumbs->owner_guid = $elgg_file->owner_guid;
         $thumbs->setFilename($elgg_file->thumb_small);
