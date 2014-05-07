@@ -28,7 +28,9 @@ function clipit_expose_api(){
     expose_quiz_question_functions();
     expose_quiz_result_functions();
     expose_site_functions();
+    expose_tag_functions();
     expose_task_functions();
+    expose_tricky_topic_functions();
     expose_user_functions();
     expose_video_functions();
 }
@@ -996,6 +998,12 @@ function expose_site_functions(){
         'GET', false, true);
 }
 
+function expose_tag_functions(){
+    $api_suffix = "clipit.tag.";
+    $class_suffix = "ClipitTag::";
+    expose_common_functions($api_suffix, $class_suffix);
+}
+
 function expose_task_functions(){
     $api_suffix = "clipit.task.";
     $class_suffix = "ClipitTask::";
@@ -1009,6 +1017,12 @@ function expose_task_functions(){
                 "required" => true)),
         "Get Task Activity",
         'GET', false, true);
+}
+
+function expose_tricky_topic_functions(){
+    $api_suffix = "clipit.tricky_topic.";
+    $class_suffix = "ClipitTrickyTopic::";
+    expose_common_functions($api_suffix, $class_suffix);
 }
 
 function expose_user_functions(){

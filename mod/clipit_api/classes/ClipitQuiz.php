@@ -36,14 +36,21 @@ class ClipitQuiz extends UBItem{
     /**
      * @var int Id of Taxonomy used as topic for this Quiz (optional)
      */
-    public $taxonomy = -1;
+    public $tricky_topic = -1;
+
+    public $embed_url = "";
+    public $scores_url = "";
+    public $author_name = "";
 
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
         $this->public = (bool)$elgg_object->public;
         $this->question_array = (array)$elgg_object->question_array;
-        $this->taxonomy = (int)$elgg_object->taxonomy;
+        $this->tricky_topic = (int)$elgg_object->tricky_topic;
         $this->target = (string)$elgg_object->target;
+        $this->embed_url = (string) $elgg_object->embed_url;
+        $this->scores_url = (string) $elgg_object->scores_url;
+        $this->author_name = (string) $elgg_object->author_name;
     }
 
     /**
@@ -53,8 +60,11 @@ class ClipitQuiz extends UBItem{
         parent::copy_to_elgg($elgg_object);
         $elgg_object->public = (bool)$this->public;
         $elgg_object->question_array = (array)$this->question_array;
-        $elgg_object->taxonomy = (int)$this->taxonomy;
+        $elgg_object->tricky_topic = (int)$this->tricky_topic;
         $elgg_object->target = (string)$this->target;
+        $elgg_object->embed_url = (string) $this->embed_url;
+        $elgg_object->scores_url = (string) $this->scores_url;
+        $elgg_object->author_name = (string) $this->author_name;
     }
 
     /**

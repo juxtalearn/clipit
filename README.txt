@@ -1,4 +1,4 @@
-ClipIt
+ClipIt Reference: http://juxtalearn.github.io/clipit/
 
 /**
  * ClipIt - JuxtaLearn Web Space

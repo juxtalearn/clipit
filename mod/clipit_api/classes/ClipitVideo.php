@@ -24,30 +24,6 @@ class ClipitVideo extends UBItem{
 
     const REL_VIDEO_COMMENT = "video-comment";
     const REL_VIDEO_TAG = "video-tag";
-    /**
-     * @var string Link to where the video is hosted (Youtube, Vimeo...)
-     */
-    public $url = "";
-
-    /**
-     * Loads a ClipitVideo instance from the system.
-     *
-     * @param ElggObject $elgg_object Video to load
-     *
-     */
-    protected function load_from_elgg($elgg_object){
-        parent::load_from_elgg($elgg_object);
-        $this->url = (string)$elgg_object->url;
-    }
-
-    /**
-     * Saves this instance to the system
-     * @param ElggObject $elgg_object Elgg object instance to save Item to
-     */
-    protected function copy_to_elgg($elgg_object){
-        parent::copy_to_elgg($elgg_object);
-        $elgg_object->url = (string)$this->url;
-    }
 
     protected function delete(){
         $rel_array = get_entity_relationships((int)$this->id);

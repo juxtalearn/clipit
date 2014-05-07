@@ -37,6 +37,10 @@ class UBItem{
      */
     public $description = "";
     /**
+     * @var string URL of the instance
+     */
+    public $url = "";
+    /**
      * @var int Unique Id of the owner/creator of this instance
      */
     public $owner_id = 0;
@@ -94,6 +98,7 @@ class UBItem{
         $this->id = (int)$elgg_object->get("guid");
         $this->name = (string)$elgg_object->get("name");
         $this->description = (string)$elgg_object->get("description");
+        $this->url = (string)$elgg_object->get("url");
         $this->owner_id = (int)$elgg_object->getOwnerGUID();
         $this->time_created = (int)$elgg_object->getTimeCreated();
     }
@@ -104,6 +109,7 @@ class UBItem{
     protected function copy_to_elgg($elgg_object){
         $elgg_object->set("name", (string)$this->name);
         $elgg_object->set("description", (string)$this->description);
+        $elgg_object->set("url", (string)$this->url);
         $elgg_object->set("access_id", ACCESS_PUBLIC);
     }
 
