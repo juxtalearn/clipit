@@ -46,6 +46,9 @@ switch ($mime_type['short']){
     case "audio":
         $file_view = '<i class="fa fa-volume-up file-icon"></i>';
         break;
+    case "video":
+        $file_view = '<i class="fa fa-video-camera file-icon"></i>';
+        break;
 }
 
 echo $file_view;
