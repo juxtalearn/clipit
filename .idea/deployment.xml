@@ -5,7 +5,7 @@
       <paths name="jxl1.escet.urjc.es">
         <serverdata>
           <mappings>
-            <mapping deploy="/clipit_dev" local="$PROJECT_DIR$" web="/clipit_dev" />
+            <mapping deploy="/clipit_dev/clipit_reference" local="$PROJECT_DIR$" web="/clipit_dev/clipit_reference" />
           </mappings>
         </serverdata>
       </paths>

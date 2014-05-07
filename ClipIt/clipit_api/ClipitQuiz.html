@@ -75,7 +75,15 @@
 					</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-																																																<div class="var-title">
+																																																																								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$author_name" title="details" class="var-name">$author_name</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$embed_url" title="details" class="var-name">$embed_url</a>
+				</div>
+																<div class="var-title">
 					<span class="var-type">bool</span>
 					<a href="#$public" title="details" class="var-name">$public</a>
 				</div>
@@ -84,12 +92,16 @@
 					<a href="#$question_array" title="details" class="var-name">$question_array</a>
 				</div>
 																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$scores_url" title="details" class="var-name">$scores_url</a>
+				</div>
+																<div class="var-title">
 					<span class="var-type">string</span>
 					<a href="#$target" title="details" class="var-name">$target</a>
 				</div>
 																<div class="var-title">
 					<span class="var-type">int</span>
-					<a href="#$taxonomy" title="details" class="var-name">$taxonomy</a>
+					<a href="#$tricky_topic" title="details" class="var-name">$tricky_topic</a>
 				</div>
 											</div>
 		</div>
@@ -149,7 +161,49 @@
 							
 					</div>
 		<div class="info-box-body">
-			<a name="var$public" id="$public"><!-- --></A>
+			<a name="var$author_name" id="$author_name"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$author_name</span>
+			 = <span class="var-default"> &quot;&quot;</span>			(line <span class="line-number">43</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$embed_url" id="$embed_url"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$embed_url</span>
+			 = <span class="var-default"> &quot;&quot;</span>			(line <span class="line-number">41</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$public" id="$public"><!-- --></A>
 <div class="evenrow">
 
 	<div class="var-header">
@@ -193,8 +247,29 @@
 		
 
 </div>
-<a name="var$target" id="$target"><!-- --></A>
+<a name="var$scores_url" id="$scores_url"><!-- --></A>
 <div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$scores_url</span>
+			 = <span class="var-default"> &quot;&quot;</span>			(line <span class="line-number">42</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$target" id="$target"><!-- --></A>
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -215,13 +290,13 @@
 		
 
 </div>
-<a name="var$taxonomy" id="$taxonomy"><!-- --></A>
-<div class="oddrow">
+<a name="var$tricky_topic" id="$tricky_topic"><!-- --></A>
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">int</span>
-			<span class="var-name">$taxonomy</span>
+			<span class="var-name">$tricky_topic</span>
 			 = <span class="var-default"> -1</span>			(line <span class="line-number">39</span>)
 		</span>
 	</div>
@@ -256,6 +331,9 @@
 													<span class="var-title">
 								<span class="var-name"><a href="../../ClipIt/urjc_backend/UBItem.html#var$time_created">UBItem::$time_created</a></span><br>
 							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../ClipIt/urjc_backend/UBItem.html#var$url">UBItem::$url</a></span><br>
+							</span>
 											</blockquote> 
 										
 		</div>
@@ -275,10 +353,10 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="methodset_properties" id="set_properties"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method set_properties</span> (line <span class="line-number">83</span>)
+		<span class="method-title">static method set_properties</span> (line <span class="line-number">93</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -309,10 +387,10 @@
 	</div>
 
 <a name="methodcopy_to_elgg" id="copy_to_elgg"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">copy_to_elgg</span> (line <span class="line-number">52</span>)
+		<span class="method-title">copy_to_elgg</span> (line <span class="line-number">59</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -337,10 +415,10 @@
 			
 	</div>
 <a name="methodload_from_elgg" id="load_from_elgg"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">load_from_elgg</span> (line <span class="line-number">41</span>)
+		<span class="method-title">load_from_elgg</span> (line <span class="line-number">45</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -365,10 +443,10 @@
 			
 	</div>
 <a name="methodsetPrivacy" id="setPrivacy"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">setPrivacy</span> (line <span class="line-number">65</span>)
+		<span class="method-title">setPrivacy</span> (line <span class="line-number">75</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -416,7 +494,7 @@
 					</div>
 		<div class="info-box-body">
 			<a name="constSUBTYPE" id="SUBTYPE"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="const-header">
 		<span class="const-title">
@@ -446,7 +524,7 @@
 	</div>
 
 	<p class="notes" id="credit">
-		Documentation generated on Wed, 07 May 2014 13:27:49 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
+		Documentation generated on Wed, 07 May 2014 15:42:08 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
 	</p>
 	</div></body>
 </html>

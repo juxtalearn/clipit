@@ -16,7 +16,7 @@
 	<div class="info-box-title">Description</div>
 	<div class="nav-bar">
 					<span class="disabled">Description</span> |
-													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+													<a href="#sec-vars">Vars</a>
 						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
 						
 											<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
@@ -44,7 +44,7 @@
 		<div class="nav-bar">
 			<a href="#sec-description">Description</a> |
 						<span class="disabled">Constants</span> (<a href="#sec-consts">details</a>)
-												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+												<a href="#sec-vars">Vars</a>
 				 
 				|
 										| 
@@ -69,27 +69,6 @@
 		</div>
 	</div>
 
-	<a name="sec-var-summary"></a>
-	<div class="info-box">
-		<div class="info-box-title">Variable Summary</span></div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
-							| 
-									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-							
-															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
-							
-					</div>
-		<div class="info-box-body">
-			<div class="var-summary">
-																								<div class="var-title">
-					<span class="var-type">string</span>
-					<a href="#$url" title="details" class="var-name">$url</a>
-				</div>
-											</div>
-		</div>
-	</div>
 
 	<a name="sec-method-summary"></a>
 	<div class="info-box">
@@ -98,7 +77,7 @@
 			<a href="#sec-description">Description</a> |
 															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
 							
-															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+															<a href="#sec-vars">Vars</a>
 				 
 				|
 						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
@@ -115,7 +94,7 @@
 										<a href="#add_tags" title="details" class="method-name">add_tags</a>
 											(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$tag_array</span>)
 									</div>
-																																<div class="method-definition">
+																								<div class="method-definition">
 					static 						<span class="method-result">array|bool</span>
 										<a href="#get_comments" title="details" class="method-name">get_comments</a>
 											(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>)
@@ -125,7 +104,7 @@
 										<a href="#get_tags" title="details" class="method-name">get_tags</a>
 											(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>)
 									</div>
-																								<div class="method-definition">
+																<div class="method-definition">
 					static 						<span class="method-result">bool</span>
 										<a href="#remove_comments" title="details" class="method-name">remove_comments</a>
 											(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$comment_array</span>)
@@ -138,20 +117,10 @@
 								
 																												<div class="method-definition">
 											<span class="method-result">void</span>
-										<a href="#copy_to_elgg" title="details" class="method-name">copy_to_elgg</a>
-											(<span class="var-type"><a href="../../Elgg-Core/DataModel-Object/ElggObject.html">ElggObject</a></span>&nbsp;<span class="var-name">$elgg_object</span>)
-									</div>
-																<div class="method-definition">
-											<span class="method-result">void</span>
 										<a href="#delete" title="details" class="method-name">delete</a>
 										()
 									</div>
-																																<div class="method-definition">
-											<span class="method-result">void</span>
-										<a href="#load_from_elgg" title="details" class="method-name">load_from_elgg</a>
-											(<span class="var-type"><a href="../../Elgg-Core/DataModel-Object/ElggObject.html">ElggObject</a></span>&nbsp;<span class="var-name">$elgg_object</span>)
-									</div>
-																								</div>
+																																								</div>
 		</div>
 	</div>		
 
@@ -170,29 +139,7 @@
 							
 					</div>
 		<div class="info-box-body">
-			<a name="var$url" id="$url"><!-- --></A>
-<div class="oddrow">
-
-	<div class="var-header">
-		<span class="var-title">
-			<span class="var-type">string</span>
-			<span class="var-name">$url</span>
-			 = <span class="var-default"> &quot;&quot;</span>			(line <span class="line-number">30</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">var:</span> Link to where the video is hosted (Youtube, Vimeo...)</li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	
-		
-		
-
-</div>
-							<h4>Inherited Variables</h4>
+										<h4>Inherited Variables</h4>
 				<A NAME='inherited_vars'><!-- --></A>
 									<p>Inherited from <span class="classname"><a href="../../ClipIt/urjc_backend/UBItem.html">UBItem</a></span></p>
 					<blockquote>
@@ -211,6 +158,9 @@
 													<span class="var-title">
 								<span class="var-name"><a href="../../ClipIt/urjc_backend/UBItem.html#var$time_created">UBItem::$time_created</a></span><br>
 							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../ClipIt/urjc_backend/UBItem.html#var$url">UBItem::$url</a></span><br>
+							</span>
 											</blockquote> 
 										
 		</div>
@@ -221,7 +171,7 @@
 		<div class="info-box-title">Methods</div>
 		<div class="nav-bar">
 			<a href="#sec-description">Description</a> |
-															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+															<a href="#sec-vars">Vars</a>
 																			<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
 							
 										<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
@@ -230,10 +180,10 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="methodadd_comments" id="add_comments"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method add_comments</span> (line <span class="line-number">81</span>)
+		<span class="method-title">static method add_comments</span> (line <span class="line-number">57</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -263,10 +213,10 @@
 			
 	</div>
 <a name="methodadd_tags" id="add_tags"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method add_tags</span> (line <span class="line-number">116</span>)
+		<span class="method-title">static method add_tags</span> (line <span class="line-number">92</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -296,10 +246,10 @@
 			
 	</div>
 <a name="methodget_comments" id="get_comments"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_comments</span> (line <span class="line-number">104</span>)
+		<span class="method-title">static method get_comments</span> (line <span class="line-number">80</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -326,10 +276,10 @@
 			
 	</div>
 <a name="methodget_tags" id="get_tags"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_tags</span> (line <span class="line-number">139</span>)
+		<span class="method-title">static method get_tags</span> (line <span class="line-number">115</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -356,10 +306,10 @@
 			
 	</div>
 <a name="methodremove_comments" id="remove_comments"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method remove_comments</span> (line <span class="line-number">93</span>)
+		<span class="method-title">static method remove_comments</span> (line <span class="line-number">69</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -389,10 +339,10 @@
 			
 	</div>
 <a name="methodremove_tags" id="remove_tags"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method remove_tags</span> (line <span class="line-number">128</span>)
+		<span class="method-title">static method remove_tags</span> (line <span class="line-number">104</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -422,40 +372,11 @@
 			
 	</div>
 
-<a name="methodcopy_to_elgg" id="copy_to_elgg"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<span class="method-title">copy_to_elgg</span> (line <span class="line-number">47</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Saves this instance to the system</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			copy_to_elgg
-		</span>
-					(<span class="var-type"><a href="../../Elgg-Core/DataModel-Object/ElggObject.html">ElggObject</a></span>&nbsp;<span class="var-name">$elgg_object</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type"><a href="../../Elgg-Core/DataModel-Object/ElggObject.html">ElggObject</a></span>
-				<span class="var-name">$elgg_object</span><span class="var-description">: Elgg object instance to save Item to</span>			</li>
-				</ul>
-		
-			
-	</div>
 <a name="methoddelete" id="delete"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">delete</span> (line <span class="line-number">52</span>)
+		<span class="method-title">delete</span> (line <span class="line-number">28</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -471,35 +392,6 @@
 				()
 			</div>
 	
-		
-			
-	</div>
-<a name="methodload_from_elgg" id="load_from_elgg"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<span class="method-title">load_from_elgg</span> (line <span class="line-number">38</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Loads a ClipitVideo instance from the system.</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			load_from_elgg
-		</span>
-					(<span class="var-type"><a href="../../Elgg-Core/DataModel-Object/ElggObject.html">ElggObject</a></span>&nbsp;<span class="var-name">$elgg_object</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type"><a href="../../Elgg-Core/DataModel-Object/ElggObject.html">ElggObject</a></span>
-				<span class="var-name">$elgg_object</span><span class="var-description">: Video to load</span>			</li>
-				</ul>
 		
 			
 	</div>
@@ -522,14 +414,14 @@
 										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
 						
 			
-												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+												<a href="#sec-vars">Vars</a>
 														| 
 									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
 							
 					</div>
 		<div class="info-box-body">
 			<a name="constREL_VIDEO_COMMENT" id="REL_VIDEO_COMMENT"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="const-header">
 		<span class="const-title">
@@ -544,7 +436,7 @@
 	
 </div>
 <a name="constREL_VIDEO_TAG" id="REL_VIDEO_TAG"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="const-header">
 		<span class="const-title">
@@ -559,7 +451,7 @@
 	
 </div>
 <a name="constSUBTYPE" id="SUBTYPE"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="const-header">
 		<span class="const-title">
@@ -589,7 +481,7 @@
 	</div>
 
 	<p class="notes" id="credit">
-		Documentation generated on Wed, 07 May 2014 13:27:50 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
+		Documentation generated on Wed, 07 May 2014 15:42:09 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
 	</p>
 	</div></body>
 </html>
