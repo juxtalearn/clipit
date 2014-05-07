@@ -229,6 +229,7 @@ class UBItem{
                 $object_array[(int)$elgg_object->guid] = new static((int)$elgg_object->guid);
             }
         }
+        usort($object_array, 'UBItem::sort_by_date_inv');
         return $object_array;
     }
 
@@ -315,6 +316,8 @@ class UBItem{
     }
 
     /**
+     * Sort by Date, oldest to newest.
+     *
      * @param UBItem $i1
      * @param UBItem $i2
      * @return int Returns 0 if equal, -1 if i1 < i2, 1 if i1 > i2.
@@ -327,11 +330,48 @@ class UBItem{
     }
 
     /**
+     * Sort by Date Inverse order, newest to oldest.
+     *
      * @param UBItem $i1
      * @param UBItem $i2
      * @return int Returns 0 if equal, -1 if i1 < i2, 1 if i1 > i2.
      */
+    static function sort_by_date_inv($i1, $i2){
+        if((int)$i1->time_created == (int)$i2->time_created){
+            return 0;
+        }
+        return ((int)$i1->time_created > (int)$i2->time_created) ? -1 : 1;
+    }
+
+    /**
+ * @param UBItem $i1
+ * @param UBItem $i2
+ * @return int Returns 0 if equal, -1 if i1 < i2, 1 if i1 > i2.
+ */
     static function sort_by_name($i1, $i2){
         return strcmp($i1->name, $i2->name);
+    }
+
+    /**
+     * @param UBItem $i1
+     * @param UBItem $i2
+     * @return int Returns 0 if equal, -1 if i1 < i2, 1 if i1 > i2.
+     */
+    static function sort_by_name_inv($i1, $i2){
+        return strcmp($i2->name, $i1->name);
+    }
+
+    static function sort_numbers($n1, $n2){
+        if((int)$n1 == (int)$n2){
+            return 0;
+        }
+        return ((int)$n1 < (int)$n2) ? -1 : 1;
+    }
+
+    static function sort_numbers_inv($n1, $n2){
+        if((int)$n1 == (int)$n2){
+            return 0;
+        }
+        return ((int)$n1 > (int)$n2) ? -1 : 1;
     }
 }
