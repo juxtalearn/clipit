@@ -29,7 +29,7 @@ class UBFile extends UBItem{
     const THUMB_NORMAL = 128;
     const THUMB_LARGE = 256;
     /**
-     * @var string File data in byte string format
+     * @var string File data in byte string format.
      */
     public $data = null;
     public $size = 0;
@@ -74,7 +74,6 @@ class UBFile extends UBItem{
         } else{
             $this->name = $temp_name[1];
         }
-        $this->data = $elgg_file->grabFile();
         $this->size = $elgg_file->size();
         $this->file_path = (string)$elgg_file->getFilenameOnFilestore();
         $this->url = elgg_get_site_url()."file/download/".$this->id;
