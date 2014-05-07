@@ -28,6 +28,8 @@ function clipit_expose_api(){
     expose_quiz_question_functions();
     expose_quiz_result_functions();
     expose_site_functions();
+    expose_sta_functions();
+    expose_storyboard_functions();
     expose_tag_functions();
     expose_task_functions();
     expose_tricky_topic_functions();
@@ -996,6 +998,18 @@ function expose_site_functions(){
                 "required" => true)),
         "Returns basic information about an unknown object based on its id",
         'GET', false, true);
+}
+
+function expose_sta_functions(){
+    $api_suffix = "clipit.sta.";
+    $class_suffix = "ClipitSTA::";
+    expose_common_functions($api_suffix, $class_suffix);
+}
+
+function expose_storyboard_functions(){
+    $api_suffix = "clipit.storyboard.";
+    $class_suffix = "ClipitStoryboard::";
+    expose_common_functions($api_suffix, $class_suffix);
 }
 
 function expose_tag_functions(){
