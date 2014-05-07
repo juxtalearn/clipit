@@ -14,11 +14,67 @@ $entity = elgg_extract('entity', $vars);
 $files_id = elgg_extract('files', $vars);
 $href = elgg_extract("href", $vars);
 ?>
-
 <div class="block" style="margin-bottom: 10px;">
-    <?php echo elgg_view_form('multimedia/files/upload', array('data-validate'=> "true", 'enctype' => 'multipart/form-data'), array('entity'  => $entity)); ?>
+<?php //echo elgg_view_form('multimedia/files/upload', array('data-validate'=> "true", 'enctype' => 'multipart/form-data'), array('entity'  => $entity)); ?>
 </div>
+<div class="block" style="margin-bottom: 10px;">
+    <?php echo elgg_view_form('multimedia/files/upload_', array('id' => 'fileupload', 'enctype' => 'multipart/form-data'), array('entity'  => $entity)); ?>
+</div>
+<script id="template-upload" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+<div class="row template-upload fade">
+    <?php echo elgg_view("input/hidden", array(
+        'name' => 'entity-id',
+        'value' => $entity->id,
+    ));?>
+    <div class="col-md-3">
+        <div class="file-info">
+            <div class="img-prev"><div class="preview"></div></div>
+            <div class="text-truncate">
+                <small class="size pull-right">Processing...</small>
+                <div class="text-truncate"><a title="{%=file.name%}">{%=file.name%}</a></div>
+            </div>
+            <strong class="error text-danger"></strong>
+            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+            <a class="cancel btn" style="
+    color: #ff1a1a;
+    margin-top: 5px;
+    display: block;
+    text-transform: uppercase;
+    border: 1px solid #ff1a1a;
+">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Delete</span>
+                </a>
+        </div>
+    </div>
+    <button class="btn btn-primary start" style="display:none;" disabled>
+        <span>Start</span>
+    </button>
+    <div class="col-md-8">
+        <div class="form-group">
+            <label for="file-name"><?php echo elgg_echo("multimedia:file:description");?></label>
+            <?php echo elgg_view("input/plaintext", array(
+            'name' => 'file-text',
+            'class' => 'form-control mceEditor',
+            'rows'  => 3,
+        )); ?>
+        </div>
+    </div>
+</div>
+{% } %}
 
+</script>
+<script id="template-download" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <div class="template-download fade" style="display:none;">
+    </div>
+{% } %}
+</script>
+<!-- The template to display files available for download -->
+<script id="template-download" type="text/x-tmpl">
+</script>
+<script src="http://blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
 <script src="http://blueimp.github.io/jQuery-File-Upload/js/vendor/jquery.ui.widget.js"></script>
 <script src="http://blueimp.github.io/JavaScript-Load-Image/js/load-image.min.js"></script>
 <script src="http://blueimp.github.io/jQuery-File-Upload/js/jquery.iframe-transport.js"></script>
@@ -34,6 +90,88 @@ $href = elgg_extract("href", $vars);
 <script src="http://blueimp.github.io/jQuery-File-Upload/js/jquery.fileupload-video.js"></script>
 <!-- The File Upload validation plugin -->
 <script src="http://blueimp.github.io/jQuery-File-Upload/js/jquery.fileupload-validate.js"></script>
+<script src="http://blueimp.github.io/jQuery-File-Upload/js/jquery.fileupload-ui.js"></script>
+
+
+<script>
+    $(function () {
+        'use strict';
+        $.blueimp.fileupload.prototype._renderPreviews = function (data) {
+            // exec tinymce
+            tinymce_setup();
+            data.context.find('.preview').each(function (index, elm) {
+                var preview = data.files[index].preview;
+                if(preview){
+                    $(elm).append(preview);
+                } else {
+                    $(elm).append('<i class="icon fa fa-file-o" style="color: #C9C9C9;font-size: 50px;"></i>');
+                }
+            });
+        },
+        // Initialize the jQuery File Upload widget:
+        $('#fileupload').fileupload({
+            // Uncomment the following to send cross-domain cookies:
+            //xhrFields: {withCredentials: true},
+            maxFileSize: 500000000, // 500 MB
+            //url: '<?php echo elgg_add_action_tokens_to_url(elgg_normalize_url(elgg_get_site_url()."action/multimedia/files/upload"), true);?>'
+            url: '<?php echo elgg_get_site_url()."ajax/view/multimedia/upload";?>',
+            previewMaxWidth: 140,
+            previewMaxHeight: 140,
+            disableImageResize: /Android(?!.*Chrome)|Opera/
+                .test(window.navigator.userAgent),
+            previewCrop: true
+        }).on('fileuploadadd', function (e, data) {
+            $('#add-file').modal('show');
+            // exec tinymce
+            tinymce_setup();
+        }).on('fileuploadstop', function (e, data) {
+               $("#add-file .modal-body").html('<i class="fa fa-spinner fa-spin" style="font-size: 40px;color: #bae6f6"></i>');
+                $("#add-file .modal-footer").html("");
+                window.location.reload(false);
+//            $(".file-info .progress-bar-success").parent(".progress").hide();
+            //$("#fileupload").submit();
+        });
+
+        // Enable iframe cross-domain access via redirect option:
+        $('#fileupload').fileupload(
+            'option',
+            'redirect',
+            window.location.href.replace(
+                /\/[^\/]*$/,
+                '/cors/result.html?%s'
+            )
+        );
+        $('#fileupload').bind('fileuploadsubmit', function (e, data) {
+            var inputs = data.context.find(':input');
+            if (inputs.filter(function () {
+                return !this.value && $(this).prop('required');
+            }).first().focus().length) {
+                data.context.find('button').prop('disabled', false);
+                return false;
+            }
+            var textarea = data.context.find("textarea");
+            textarea.val(tinyMCE.get(textarea.attr("id")).getContent());
+            var total = data.context.find(':input, textarea');
+            data.formData = total.serializeArray();
+            //console.log(data.formData);
+        });
+        $('#fileupload').bind('fileuploadstopped', function (e, data) {
+            data.context.remove();
+        });
+        $('#add-file').on('hidden.bs.modal', function (e) {
+            $("#add-file .files").empty();
+        })
+//        $(document).on("change", "#uploadfilebutton",function(e){
+//            e.preventDefault();
+//            var fileList = $("#add-file .files");
+//            console.log(fileList.find("div").length);
+//            if(fileList.find("div").length > 0){
+//                fileList.empty();
+//            }
+//        });
+    });
+
+</script>
 <script>
     function formatFileSize(bytes) {
         if (typeof bytes !== 'number') {
@@ -53,6 +191,7 @@ $href = elgg_extract("href", $vars);
         var url = "<?php echo elgg_add_action_tokens_to_url(elgg_normalize_url(elgg_get_site_url()."action/multimedia/files/upload"), true);?>",
             uploadButton = $('<button/>')
                 .addClass('btn btn-primary')
+                .attr("type", "button")
                 .text('Upload')
                 .on('click', function () {
                     var $this = $(this),
@@ -69,7 +208,7 @@ $href = elgg_extract("href", $vars);
                     });
                 });
         $(document).on("change", "#uploadfiles",function(){
-            $("#add-file .modal-body").html("");
+            $("#add-file .modal-body").html("")
         });
         $('#uploadfiles').fileupload({
             url: url,
@@ -89,7 +228,11 @@ $href = elgg_extract("href", $vars);
             $('#add-file').modal('show');
             data.context = $('<div class="files-upload-list"/>').appendTo("#add-file .modal-body");
             $("#add-file .modal-footer").prepend(uploadButton.data(data));
-
+        }).on('fileuploadsubmit', function (e, data) {
+//            console.log(data);
+//            $.each(data.files, function (index, file) {
+//                console.log(file);
+//            });
         }).on('fileuploadprocessalways', function (e, data) {
             var index = data.index,
                 file = data.files[index];
@@ -133,6 +276,7 @@ $href = elgg_extract("href", $vars);
             );
         }).on('fileuploaddone', function (e, data) {
             $.each(data.result.files, function (index, file) {
+                console.log(file);
                 if (file.url) {
                     var link = $('<a>')
                         .attr('target', '_blank')
@@ -186,6 +330,23 @@ $href = elgg_extract("href", $vars);
         vertical-align: middle;
         text-align: center;
     }
+    .files .template-upload{
+         border-bottom: 1px solid #bae6f6;
+         margin-bottom: 10px;
+         padding-bottom: 10px;
+     }
+    .files .template-upload:last-child{
+        border-bottom: 0;
+    }
+    .progress-extended{
+        text-align: left;
+    }
+    /*.files .fade {
+        opacity: 1;
+    }
+    .files .fade .progress-striped[aria-valuenow=100]{
+        display: none;
+    }*/
 </style>
 <?php
 // MODAL SIMULATE
@@ -223,20 +384,21 @@ $body .='
 </div>';
 }
 $body = "";
-echo elgg_view("page/components/modal",
-    array(
-        "dialog_class"     => "modal-lg add-files-list",
-        "target"    => "add-file",
-        "title"     => elgg_echo("multimedia:files:add"),
-        "form"      => true,
-        "body"      => $body,
-        "cancel_button" => true,
-        "ok_button" => elgg_view('input/submit',
-            array(
-                'value' => elgg_echo('add'),
-                'class' => "btn btn-primary"
-            ))
-    ));
+//echo elgg_view("page/components/modal",
+//    array(
+//        "dialog_class"     => "modal-lg add-files-list",
+//        "target"    => "add-file",
+//        "title"     => elgg_echo("multimedia:files:add"),
+//        "form"      => true,
+//        "body"      => $body,
+//        "cancel_button" => true,
+//        "ok_button" => elgg_view('input/submit',
+//            array(
+//                'value' => elgg_echo('add'),
+//                'class' => "btn btn-primary"
+//            ))
+//    ));
+
 // MODAL SIMULATE
 ?>
 
@@ -270,13 +432,42 @@ echo elgg_view("page/components/modal",
 foreach($files_id as $file_id):
     $file = array_pop(ClipitFile::get_by_id(array($file_id)));
     $owner = array_pop(ClipitUser::get_by_id(array($file->owner_id)));
+
+    $file_description = trim(elgg_strip_tags($file->description));
+    // text truncate max length 165
+    if(mb_strlen($file_description)>165){
+        $file_description = substr($file_description, 0, 165)."...";
+    }
+    // Owner options (edit/delete)
+    $owner_options = "";
+    if($file->owner_id == elgg_get_logged_in_user_guid()){
+        $options = array(
+            'entity' => $file,
+            'edit' => array(
+                "data-target" => "#edit-file-{$file->id}",
+                "href" => elgg_get_site_url()."ajax/view/modal/multimedia/file/edit?id={$file->id}",
+                "data-toggle" => "modal"
+            ),
+            'remove' => array("href" => "action/multimedia/files/remove?id={$file->id}"),
+        );
+
+        $owner_options = elgg_view("page/components/options_list", $options);
+        // Remote modal, form content
+        echo elgg_view("page/components/modal_remote", array('id'=> "edit-file-{$file->id}" ));
+    }
 ?>
 <tr>
     <td>
         <input type="checkbox">
     </td>
-    <td>
-        <i class="fa fa-file-o file-icon"></i>
+    <td class="text-center">
+        <div class="file-preview">
+        <?php echo elgg_view('output/url', array(
+            'href'  => "{$href}/view/".$file->id,
+            'title' => $file->name,
+            'text'  => elgg_view("multimedia/file/preview", array('file'  => $file))));
+        ?>
+        </div>
     </td>
     <td class="col-md-9 file-info">
         <h4>
@@ -288,12 +479,12 @@ foreach($files_id as $file_id):
         </h4>
         <small class="show">
             <strong>
-                PDF document
+                <?php echo elgg_echo("file:" . $file->mime_type['short']);?>
             </strong>
         </small>
-        <p>
-            <?php echo $file->description; ?>
-        </p>
+        <div>
+            <?php echo $file_description; ?>
+        </div>
         <small class="show file-user-info">
             <i>Uploaded by
                 <?php echo elgg_view('output/url', array(
@@ -305,9 +496,9 @@ foreach($files_id as $file_id):
             </i>
         </small>
     </td>
-    <td style=" vertical-align: middle; text-align: center; " class="col-md-3">
+    <td style=" vertical-align: middle;" class="col-md-3">
         <div>
-            <div style="width: 35px;display: inline-block;float: right;">
+            <div style="width: 35px;display: inline-block;float: right;text-align: center;">
                 <?php echo elgg_view('output/url', array(
                     'href'  => "{$href}/download/".$file->id,
                     'title' => $owner->name,
@@ -319,6 +510,7 @@ foreach($files_id as $file_id):
                     <?php echo formatFileSize($file->size);?>
                 </small>
             </div>
+            <?php echo $owner_options; ?>
         </div>
     </td>
 </tr>

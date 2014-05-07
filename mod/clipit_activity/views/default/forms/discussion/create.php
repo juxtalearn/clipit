@@ -31,40 +31,6 @@ $body .='<div class="form-group">
     )).'
 </div>';
 
-/*$body .= '<div class="show" style="
-    background: #ECF7FB;
-    padding: 5px;
-"><img src="http://www.ucci.urjc.es/wp-content/uploads/Juxtalearn-620x434.jpg" style="
-    width: 150px;
-    margin: 5px;
-    height: 100px;
-    display: inline-block;
-"><img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTz_3Stt6EU0FOiFimoaAjKOteMcu-XW5VusMoXGTTmeE6JQQwHWw" style="
-    width: 150px;
-    margin: 5px;
-    height: 100px;
-    display: inline-block;
-">
-<div style="  display: inline-block; width: 100px; height: 100px; background: #fff; border-radius: 3px; margin: 5px; ">
-<span class="fa-stack fa-lg" style="
-    color: #1ba1d3;
-    height: 100%;
-    width: 100%;
-">
-  <i class="fa fa-file-o fa-stack-2x" style="
-    font-size: 100px;
-"></i>
-  <b class="fa-stack-1x" style="
-    height: 100%;
-    top: 50%;
-">Word</b>
-</span>
-</div>
-
-
-</div>';*/
-
-
 echo elgg_view("page/components/modal",
     array(
         "dialog_class"     => "modal-lg",

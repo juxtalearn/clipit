@@ -14,19 +14,23 @@
 $message_id = (int)get_input('message-id');
 $message = array_pop(ClipitPost::get_by_id(array($message_id)));
 $message_reply = get_input('message-reply');
+$file_ids = get_input('file-id');
 $user_id = elgg_get_logged_in_user_guid();
 
 if(count($message)==0 || trim($message_reply) == ""){
     register_error(elgg_echo("reply:cantcreate"));
 } else{
+
     $new_message_id = ClipitPost::create(array(
         'name' => '',
         'description' => $message_reply,
         'destination' => $message->id,
     ));
+    if($file_ids){
+        ClipitPost::add_files($new_message_id, $file_ids);
+    }
     // set read status true to the owner's message
     ClipitPost::set_read_status($new_message_id, true, array($user_id));
-
     system_message(elgg_echo('reply:created'));
 }
 

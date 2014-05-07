@@ -10,6 +10,8 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
+
+
 /**
  * Get format file size
  *

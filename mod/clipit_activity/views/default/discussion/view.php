@@ -128,7 +128,7 @@ foreach(array_pop(ClipitPost::get_by_destination(array($message->id))) as $reply
         <img class="user-avatar" src="<?php echo $user_loggedin->getIconURL('small'); ?>"/>
     </div>
     <div class="block">
-        <?php echo elgg_view_form("discussion/reply/create", array('data-validate'=> "true" ), array('entity'  => $message)); ?>
+        <?php echo elgg_view_form("discussion/reply/create", array('data-validate'=> "true", 'id'=>'fileupload' ), array('entity'  => $message)); ?>
     </div>
 </div>
 <!-- Reply form end-->
@@ -161,11 +161,20 @@ foreach(array_pop(ClipitPost::get_by_destination(array($message->id))) as $reply
     margin-bottom: 0;
     padding-bottom: 0;
 }
-.upload-files-list .file img, .upload-files-list .file canvas{
+.upload-files-list .file img, .upload-files-list .file canvas, .upload-files-list .file .preview i{
     width: 60px;
     height: 40px;
+}
+.upload-files-list .file .preview{
     float: left;
     margin-right: 10px;
+    text-align: center;
+}
+.upload-files-list .file .details{
+    overflow: hidden;
+}
+.upload-files-list .file .progress{
+    display: block;
 }
 .upload-files-list .file .cancel{
     color: #ff4343;
@@ -343,22 +352,6 @@ foreach(array_pop(ClipitPost::get_by_destination(array($message->id))) as $reply
 <br>
 
 
-
-<script src="http://blueimp.github.io/jQuery-File-Upload/js/vendor/jquery.ui.widget.js"></script>
-<script src="http://blueimp.github.io/JavaScript-Load-Image/js/load-image.min.js"></script>
-<script src="http://blueimp.github.io/jQuery-File-Upload/js/jquery.iframe-transport.js"></script>
-<!-- The basic File Upload plugin -->
-<script src="http://blueimp.github.io/jQuery-File-Upload/js/jquery.fileupload.js"></script>
-<!-- The File Upload processing plugin -->
-<script src="http://blueimp.github.io/jQuery-File-Upload/js/jquery.fileupload-process.js"></script>
-<!-- The File Upload image preview & resize plugin -->
-<script src="http://blueimp.github.io/jQuery-File-Upload/js/jquery.fileupload-image.js"></script>
-<!-- The File Upload audio preview plugin -->
-<script src="http://blueimp.github.io/jQuery-File-Upload/js/jquery.fileupload-audio.js"></script>
-<!-- The File Upload video preview plugin -->
-<script src="http://blueimp.github.io/jQuery-File-Upload/js/jquery.fileupload-video.js"></script>
-<!-- The File Upload validation plugin -->
-<script src="http://blueimp.github.io/jQuery-File-Upload/js/jquery.fileupload-validate.js"></script>
 <script>
     function formatFileSize(bytes) {
         if (typeof bytes !== 'number') {
@@ -395,7 +388,7 @@ foreach(array_pop(ClipitPost::get_by_destination(array($message->id))) as $reply
                         $this.remove();
                     });
                 });
-        $('#fileupload').fileupload({
+        $('#fileupload__').fileupload({
             url: url,
             dataType: 'json',
             autoUpload: false,

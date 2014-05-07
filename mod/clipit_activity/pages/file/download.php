@@ -12,10 +12,15 @@
  */
 // Get the guid
 $file_id = get_input("id");
-echo $file_id;
-die();
+
 // Get the file
-$file = get_entity($file_guid);
+$file = array_pop(ClipitFile::get_by_id(array($file_id)));
+header("Pragma: public");
+header("Content-Disposition: attachment; filename=\"$file->name\"");
+ob_clean();
+flush();
+echo $file->data;
+exit;
 if (!$file) {
     register_error(elgg_echo("file:downloadfailed"));
     forward();
