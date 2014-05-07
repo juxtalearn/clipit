@@ -197,6 +197,10 @@ class UBFile extends UBItem{
             case "application/ogg":
                 return "audio";
                 break;
+            case "application/x-rar":
+            case "application/zip":
+                return "compressed";
+                break;
         }
 
         if (substr_count($mime_type, 'text/')) {
