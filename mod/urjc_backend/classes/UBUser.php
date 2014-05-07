@@ -45,7 +45,7 @@ class UBUser extends UBItem{
             if(!($elgg_user = new ElggUser($id))){
                 throw new APIException("ERROR: Id '" . $id . "' does not correspond to a " . get_called_class() . " object.");
             }
-            $this->load($elgg_user);
+            $this->load_from_elgg($elgg_user);
         }
     }
 
@@ -56,8 +56,8 @@ class UBUser extends UBItem{
      *
      * @return UBUser|bool Returns User instance, or false if error.
      */
-    protected function load($elgg_user){
-        parent::load($elgg_user);
+    protected function load_from_elgg($elgg_user){
+        parent::load_from_elgg($elgg_user);
         $this->email = (string)$elgg_user->email;
         $this->login = (string)$elgg_user->username;
         $this->password = (string)$elgg_user->password;

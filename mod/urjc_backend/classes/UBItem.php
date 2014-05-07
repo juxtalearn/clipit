@@ -37,6 +37,10 @@ class UBItem{
      */
     public $description = "";
     /**
+     * @var string URL of the instance
+     */
+    public $url = "";
+    /**
      * @var int Unique Id of the owner/creator of this instance
      */
     public $owner_id = 0;
@@ -63,19 +67,8 @@ class UBItem{
             if(($elgg_type != static::TYPE) || ($elgg_subtype != static::SUBTYPE)){
                 throw new APIException("ERROR: Id '" . $id . "' does not correspond to a " . get_called_class() . " object.");
             }
-            $this->load($elgg_object);
+            $this->load_from_elgg($elgg_object);
         }
-    }
-
-    /**
-     * @param ElggObject $elgg_object Elgg Object to load parameters from.
-     */
-    protected function load($elgg_object){
-        $this->id = (int)$elgg_object->get("guid");
-        $this->name = (string)$elgg_object->get("name");
-        $this->description = (string)$elgg_object->get("description");
-        $this->owner_id = (int)$elgg_object->getOwnerGUID();
-        $this->time_created = (int)$elgg_object->getTimeCreated();
     }
 
     /**
@@ -99,11 +92,24 @@ class UBItem{
     }
 
     /**
+     * @param ElggObject $elgg_object Elgg Object to load parameters from.
+     */
+    protected function load_from_elgg($elgg_object){
+        $this->id = (int)$elgg_object->get("guid");
+        $this->name = (string)$elgg_object->get("name");
+        $this->description = (string)$elgg_object->get("description");
+        $this->url = (string)$elgg_object->get("url");
+        $this->owner_id = (int)$elgg_object->getOwnerGUID();
+        $this->time_created = (int)$elgg_object->getTimeCreated();
+    }
+
+    /**
      * @param ElggObject $elgg_object Elgg object instance to save Item to
      */
     protected function copy_to_elgg($elgg_object){
         $elgg_object->set("name", (string)$this->name);
         $elgg_object->set("description", (string)$this->description);
+        $elgg_object->set("url", (string)$this->url);
         $elgg_object->set("access_id", ACCESS_PUBLIC);
     }
 
@@ -229,6 +235,7 @@ class UBItem{
                 $object_array[(int)$elgg_object->guid] = new static((int)$elgg_object->guid);
             }
         }
+        usort($object_array, 'UBItem::sort_by_date_inv');
         return $object_array;
     }
 
@@ -315,6 +322,8 @@ class UBItem{
     }
 
     /**
+     * Sort by Date, oldest to newest.
+     *
      * @param UBItem $i1
      * @param UBItem $i2
      * @return int Returns 0 if equal, -1 if i1 < i2, 1 if i1 > i2.
@@ -327,11 +336,48 @@ class UBItem{
     }
 
     /**
+     * Sort by Date Inverse order, newest to oldest.
+     *
      * @param UBItem $i1
      * @param UBItem $i2
      * @return int Returns 0 if equal, -1 if i1 < i2, 1 if i1 > i2.
      */
+    static function sort_by_date_inv($i1, $i2){
+        if((int)$i1->time_created == (int)$i2->time_created){
+            return 0;
+        }
+        return ((int)$i1->time_created > (int)$i2->time_created) ? -1 : 1;
+    }
+
+    /**
+ * @param UBItem $i1
+ * @param UBItem $i2
+ * @return int Returns 0 if equal, -1 if i1 < i2, 1 if i1 > i2.
+ */
     static function sort_by_name($i1, $i2){
         return strcmp($i1->name, $i2->name);
+    }
+
+    /**
+     * @param UBItem $i1
+     * @param UBItem $i2
+     * @return int Returns 0 if equal, -1 if i1 < i2, 1 if i1 > i2.
+     */
+    static function sort_by_name_inv($i1, $i2){
+        return strcmp($i2->name, $i1->name);
+    }
+
+    static function sort_numbers($n1, $n2){
+        if((int)$n1 == (int)$n2){
+            return 0;
+        }
+        return ((int)$n1 < (int)$n2) ? -1 : 1;
+    }
+
+    static function sort_numbers_inv($n1, $n2){
+        if((int)$n1 == (int)$n2){
+            return 0;
+        }
+        return ((int)$n1 > (int)$n2) ? -1 : 1;
     }
 }

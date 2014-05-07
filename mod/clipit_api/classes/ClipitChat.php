@@ -18,8 +18,8 @@ class ClipitChat extends UBMessage{
 
     public $archived_array = array();
 
-    protected function load($elgg_object){
-        parent::load($elgg_object);
+    protected function load_from_elgg($elgg_object){
+        parent::load_from_elgg($elgg_object);
         $this->archived_array = (array)$elgg_object->archived_array;
     }
 

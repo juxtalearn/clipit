@@ -46,11 +46,11 @@ class ClipitActivity extends UBItem{
     public $video_array = array();
     public $file_array = array();
 
-    protected function load($elgg_object){
-        parent::load($elgg_object);
+    protected function load_from_elgg($elgg_object){
+        parent::load_from_elgg($elgg_object);
         $this->color = (string)$elgg_object->color;
         $this->status = (string)$elgg_object->status;
-        $this->called_users_array = static::get_called_users($this->id, $this->called_users_array);
+        $this->called_users_array = static::get_called_users($this->id);
         $this->group_array = static::get_groups($this->id);
         $this->task_array = static::get_tasks($this->id);
         $this->video_array = static::get_videos($this->id);
@@ -142,7 +142,7 @@ class ClipitActivity extends UBItem{
         return ClipitActivity::get_by_id($activity_ids);
     }
 
-    // USERS
+    // CALLED USERS
     static function add_called_users($id, $user_array){
         return UBCollection::add_items($id, $user_array, ClipitActivity::REL_ACTIVITY_USER);
     }

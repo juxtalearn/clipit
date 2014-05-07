@@ -38,8 +38,8 @@ class ClipitQuizResult extends UBItem{
      */
     public $correct = false;
 
-    protected function load($elgg_object){
-        parent::load($elgg_object);
+    protected function load_from_elgg($elgg_object){
+        parent::load_from_elgg($elgg_object);
         $this->result_array = (array)$elgg_object->result_array;
         $this->correct = (bool)$elgg_object->correct;
         $this->quiz_question = (int)$elgg_object->quiz_question;
