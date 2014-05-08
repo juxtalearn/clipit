@@ -19,7 +19,7 @@ header("Pragma: public");
 header("Content-Disposition: attachment; filename=\"$file->name\"");
 ob_clean();
 flush();
-echo $file->data;
+readfile($file->file_path);
 exit;
 if (!$file) {
     register_error(elgg_echo("file:downloadfailed"));

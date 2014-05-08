@@ -9,7 +9,7 @@
 $activity = elgg_extract("entity", $vars);
 ?>
 <div class="row">
-    <div class="col-md-6" style="overflow-y: auto;max-height: 150px;">
+    <div class="col-md-12" style="overflow-y: auto;max-height: 150px;">
         <p class="text-justify">
             <?php echo $activity->description;?>
         </p>

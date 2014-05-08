@@ -33,7 +33,7 @@ switch ($size) {
         $thumbdata = $file->thumb_large;
         break;
     default:
-        $thumbdata = $file->data;
+        $thumbdata = file_get_contents($file->file_path);
         break;
 }
 ob_clean();
