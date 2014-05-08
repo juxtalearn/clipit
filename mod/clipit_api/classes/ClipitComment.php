@@ -24,7 +24,7 @@ class ClipitComment extends UBMessage{
     /**
      * @var int Overall rating opinionfrom 0 to 10
      */
-    public $overall = -1;
+    public $overall = 0;
     /**
      * @var array Ratings in the form: rating_array["rating_name"]=>"rating_value"
      */

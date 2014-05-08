@@ -20,7 +20,7 @@ class ClipitSTA extends UBFile{
     const SUBTYPE = "clipit_sta";
 
     public $resource_url = "";
-    public $tricky_topic = -1;
+    public $tricky_topic = 0;
     public $tag_array = array();
 
     protected function load_from_elgg($elgg_object){

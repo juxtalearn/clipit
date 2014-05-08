@@ -36,7 +36,7 @@ class ClipitQuizQuestion extends UBItem{
     /**
      * @var int ID of ClipitVideo refered to by this question (optional)
      */
-    public $video = -1;
+    public $video = 0;
 
 
     protected function load_from_elgg($elgg_object){

@@ -24,7 +24,7 @@ class ClipitQuizResult extends UBItem{
     /**
      * @var int Id of ClipitQuizQuestion this ClipitQuizResult is related to
      */
-    public $quiz_question = -1;
+    public $quiz_question = 0;
     /**
      * @var array Array of results to the Quiz Question linked by $quiz_question
      */
@@ -32,7 +32,7 @@ class ClipitQuizResult extends UBItem{
     /**
      * @var int Id of User who posted this Quiz Result
      */
-    public $user = -1;
+    public $user = 0;
     /**
      * @var bool Determines if this Result is correct (true) or incorrect (false)
      */

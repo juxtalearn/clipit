@@ -36,7 +36,7 @@ class ClipitQuiz extends UBItem{
     /**
      * @var int Id of Taxonomy used as topic for this Quiz (optional)
      */
-    public $tricky_topic = -1;
+    public $tricky_topic = 0;
 
     public $embed_url = "";
     public $scores_url = "";
