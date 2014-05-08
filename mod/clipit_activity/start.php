@@ -63,7 +63,9 @@ function clipit_activity_init() {
 }
 function activity_setup_sidebar_menus(){
     $activity_id =  elgg_get_page_owner_guid();
-    if (elgg_in_context('activity_page')) {
+    $user_id = elgg_get_logged_in_user_guid();
+    $hasGroup = ClipitGroup::get_from_user_activity($user_id, $activity_id);
+    if (elgg_in_context('activity_page') && $hasGroup) {
         $activities = ClipitActivity::get_by_id(array($activity_id));
         $activity = array_pop($activities);
         $params = array(
