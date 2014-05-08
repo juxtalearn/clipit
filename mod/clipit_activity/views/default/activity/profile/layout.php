@@ -7,6 +7,8 @@
  * To change this template use File | Settings | File Templates.
  */
 $activity = elgg_extract("entity", $vars);
+$user_id = elgg_get_logged_in_user_guid();
+$user_inActivity = ClipitGroup::get_from_user_activity($user_id, $activity->id);
 ?>
 <div class="row">
     <div class="col-md-12" style="overflow-y: auto;max-height: 150px;">
@@ -14,10 +16,8 @@ $activity = elgg_extract("entity", $vars);
             <?php echo $activity->description;?>
         </p>
     </div>
-    <div class="col-md-6">
-
-    </div>
 </div>
+<?php if($user_inActivity):?>
 <div class="row">
     <div class="col-md-7">
         <?php echo elgg_view("activity/profile/deadline_module");?>
@@ -31,4 +31,4 @@ $activity = elgg_extract("entity", $vars);
         <?php echo elgg_view("activity/profile/related_videos_module");?>
     </div>
 </div>
-
+<?php endif; ?>
