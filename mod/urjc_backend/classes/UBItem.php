@@ -165,16 +165,14 @@ class UBItem{
      * @throws InvalidParameterException
      */
     static function set_properties($id, $prop_value_array){
-       if(empty($id)){
+        if(!$item = new static($id)){
             return false;
-        }else {
-            if(!$item = new static($id)){
-                return false;
-            }
         }
         foreach($prop_value_array as $prop => $value){
             if(!array_key_exists($prop, self::list_properties())){
-                throw new InvalidParameterException("ERROR: One or more property names do not exist.");
+                if($prop !== "hash"){
+                    throw new InvalidParameterException("ERROR: One or more property names do not exist.");
+                }
             }
             if($prop == "id"){
                 throw new InvalidParameterException("ERROR: Cannot modify 'id' of instance.");
@@ -192,9 +190,7 @@ class UBItem{
      * @return int|bool Returns instance Id if correct, or false if error
      */
     static function create($prop_value_array){
-        $item = new static();
-        $item->save();
-        return static::set_properties($item->id, $prop_value_array);
+        return static::set_properties(null, $prop_value_array);
     }
 
     /**

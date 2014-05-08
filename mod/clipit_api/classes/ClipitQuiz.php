@@ -68,21 +68,6 @@ class ClipitQuiz extends UBItem{
     }
 
     /**
-     * Set Quiz privacy into "public" property (true = public, false = private)
-     *
-     * @param string $value Flag specifying if the quiz is public or not
-     */
-    function setPrivacy($value){
-        if($value == "true"){
-            $this->public = true;
-        } elseif($value == "false"){
-            $this->public = false;
-        } else{
-            $this->public = (bool)$value;
-        }
-    }
-
-    /**
      * Sets values to specified properties of an Item
      *
      * @param int   $id Id of Item to set property valyes
@@ -91,13 +76,16 @@ class ClipitQuiz extends UBItem{
      * @return int|bool Returns Id of Item if correct, or false if error
      */
     static function set_properties($id, $prop_value_array){
-        if(!$item = new static($id)){
-            return false;
-        }
         $new_prop_value_array = array();
         foreach($prop_value_array as $prop => $value){
             if($prop == "public"){
-                $item->setPrivacy($value);
+                if($value == "true"){
+                    $new_prop_value_array["public"] = true;
+                } elseif($value == "false"){
+                    $new_prop_value_array["public"] = false;
+                } else{
+                    $new_prop_value_array["public"] = (bool)$value;
+                }
             } else{
                 $new_prop_value_array[$prop] = $value;
             }
