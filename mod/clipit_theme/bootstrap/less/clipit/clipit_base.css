@@ -5985,7 +5985,7 @@ td.visible-print {
 .elgg-system-messages {
   position: fixed;
   margin-top: 40px;
-  right: 20px;
+  left: 20px;
   max-width: 800px;
   z-index: 2000;
 }
@@ -7005,9 +7005,49 @@ li.list-item {
   padding-bottom: 10px;
   margin-bottom: 10px;
 }
-.files-table .file-icon {
-  font-size: 36px;
-  color: #C9C9C9;
+.file-preview {
+  position: relative;
+  display: inline-block;
+}
+.file-preview img {
+  width: 50px;
+}
+.file-preview .file-icon {
+  font-size: 40px;
+  color: #bae6f6;
+}
+.file-preview .img-preview {
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+}
+.file-preview .img-preview > div {
+  min-width: 100%;
+  min-height: 100%;
+  background-position: 50% 50%;
+  background-size: cover;
+}
+.file-preview span {
+  color: #fff;
+  font-weight: bold;
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  font-size: 12px;
+  z-index: 1;
+}
+.file-block {
+  overflow: hidden;
+  background: #ECF7FB;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.file-block .file-preview {
+  float: left;
+  margin-right: 10px;
+}
+.file-block .file-details {
+  overflow: hidden;
 }
 .files-table .file-info h4 {
   margin: 0;
@@ -7025,11 +7065,17 @@ li.list-item {
 .file-owner {
   margin-bottom: 10px;
 }
-.file-owner .file-icon {
-  font-size: 50px;
-  color: #c9c9c9;
+.file-owner .file-preview {
   margin-right: 10px;
   float: left;
+}
+.file-owner .file-preview span {
+  font-size: 16px;
+  bottom: 5px;
+}
+.file-owner .file-preview i {
+  font-size: 50px;
+  color: #c9c9c9;
 }
 .file-owner .block {
   overflow: hidden;
@@ -7756,7 +7802,6 @@ ul.deadline-list > li .fa {
 }
 .discussion .body-post ol,
 .discussion .body-post ul {
-  list-style: initial;
   padding-left: 2.5em;
 }
 .discussion-owner-msg {
@@ -7816,6 +7861,38 @@ ul.deadline-list > li .fa {
 }
 .second_level .discussion-reply-msg {
   background: #fff;
+}
+.attachment-files {
+  background: #fff;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #bae6f6;
+  border-radius: 3px;
+}
+.attachment-files .total-files {
+  margin-top: -5px;
+  display: block;
+  margin-bottom: 5px;
+}
+.attachment-files .file {
+  margin-bottom: 10px;
+  padding: 0;
+  height: 55px;
+}
+.attachment-files .file .preview {
+  float: left;
+  margin-right: 10px;
+  text-align: center;
+  width: 50px;
+}
+.attachment-files .file .preview > canvas,
+.attachment-files .file .preview > img,
+.attachment-files .file .preview > i {
+  width: 60px;
+  height: 40px;
+}
+.attachment-files .file .details {
+  overflow: hidden;
 }
 .video_prev {
   display: inline-block;
@@ -8083,6 +8160,10 @@ ul.deadline-list > li .fa {
 .message-owner .block .body-msg {
   color: #666666;
   margin-top: 10px;
+}
+.message-owner .block .body-msg ol,
+.message-owner .block .body-msg ul {
+  padding-left: 2.5em;
 }
 .quote-ref.active > a {
   border-bottom: 0;
@@ -8554,7 +8635,6 @@ a {
 }
 ul,
 ol {
-  list-style: none;
   margin-top: 0;
   margin-bottom: 10px;
   padding: 0;
