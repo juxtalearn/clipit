@@ -84,6 +84,18 @@ class UBUser extends UBItem{
         return $this->id = $elgg_user->guid;
     }
 
+    /**
+     * Deletes an instance from the system.
+     *
+     * @return bool True if success, false if error.
+     */
+    protected function delete(){
+        if(!$elgg_user = new ElggUser((int)$this->id)){
+            return false;
+        }
+        return $elgg_user->delete();
+    }
+
     protected function copy_to_elgg($elgg_user){
         parent::copy_to_elgg($elgg_user);
         $elgg_user->email = $this->email;

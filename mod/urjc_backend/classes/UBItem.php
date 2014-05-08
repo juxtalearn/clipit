@@ -94,23 +94,23 @@ class UBItem{
     /**
      * @param ElggObject $elgg_object Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_object){
-        $this->id = (int)$elgg_object->get("guid");
-        $this->name = (string)$elgg_object->get("name");
-        $this->description = (string)$elgg_object->get("description");
-        $this->url = (string)$elgg_object->get("url");
-        $this->owner_id = (int)$elgg_object->getOwnerGUID();
-        $this->time_created = (int)$elgg_object->getTimeCreated();
+    protected function load_from_elgg($elgg_entity){
+        $this->id = (int)$elgg_entity->get("guid");
+        $this->name = (string)$elgg_entity->get("name");
+        $this->description = (string)$elgg_entity->get("description");
+        $this->url = (string)$elgg_entity->get("url");
+        $this->owner_id = (int)$elgg_entity->getOwnerGUID();
+        $this->time_created = (int)$elgg_entity->getTimeCreated();
     }
 
     /**
      * @param ElggObject $elgg_object Elgg object instance to save Item to
      */
-    protected function copy_to_elgg($elgg_object){
-        $elgg_object->set("name", (string)$this->name);
-        $elgg_object->set("description", (string)$this->description);
-        $elgg_object->set("url", (string)$this->url);
-        $elgg_object->set("access_id", ACCESS_PUBLIC);
+    protected function copy_to_elgg($elgg_entity){
+        $elgg_entity->set("name", (string)$this->name);
+        $elgg_entity->set("description", (string)$this->description);
+        $elgg_entity->set("url", (string)$this->url);
+        $elgg_entity->set("access_id", ACCESS_PUBLIC);
     }
 
     /**
@@ -119,10 +119,10 @@ class UBItem{
      * @return bool True if success, false if error.
      */
     protected function delete(){
-        if(!$elgg_entity = get_Entity((int)$this->id)){
+        if(!$elgg_object = new ElggObject((int)$this->id)){
             return false;
         }
-        return $elgg_entity->delete();
+        return $elgg_object->delete();
     }
 
     /* Static Functions */
@@ -206,7 +206,7 @@ class UBItem{
      */
     static function delete_by_id($id_array){
         foreach($id_array as $id){
-            if(!$item = new static($id)){
+            if(!$item = new static((int)$id)){
                 return false;
             }
             if(!$item->delete()){
