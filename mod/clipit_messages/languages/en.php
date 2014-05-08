@@ -41,6 +41,7 @@ $english = array(
     'messages:inbox:moved' => "Messages moved to inbox",
     'messages:error' => 'There was a problem with your message. Please try again.',
     'messages:error:messages_not_selected' => 'No messages selected',
+    'messages:unreads' => '%s unread messages',
 
     // Error pages: empty folders
     'messages:inbox:none' => "There are no messages in your inbox.",

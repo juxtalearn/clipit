@@ -156,7 +156,7 @@ $(function(){
         </td>
         <td class="click-simulate" onclick="document.location.href = '<?php echo $message_url; ?>';">
             <?php if($new_replies): ?>
-            <span class="label label-primary label-mini new-replies" title="<?php echo elgg_echo("reply:unreads", array($new_replies)); ?>">
+            <span class="label label-primary label-mini new-replies" title="<?php echo elgg_echo("message:unreads", array($new_replies)); ?>">
                 +<?php echo $new_replies; ?>
             </span>
             <?php endif; ?>
