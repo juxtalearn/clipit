@@ -74,9 +74,10 @@ class UBFile extends UBItem{
         } else{
             $this->name = $temp_name[1];
         }
-        $this->size = $elgg_file->size();
+        //$this->data = $elgg_file->grabFile();
+        $this->size = (int)$elgg_file->size();
         $this->file_path = (string)$elgg_file->getFilenameOnFilestore();
-        $this->url = elgg_get_site_url()."file/download/".$this->id;
+        $this->url = (string)elgg_get_site_url()."file/download/".$this->id;
         $thumbs = new ElggFile();
         $thumbs->owner_guid = $elgg_file->owner_guid;
         $thumbs->setFilename($elgg_file->thumb_small);
@@ -121,7 +122,7 @@ class UBFile extends UBItem{
     protected function copy_to_elgg($elgg_file){
         $date_obj = new DateTime();
         if(empty($this->name)){
-            $this->name = static::DEFAULT_FILENAME;
+            return;
         }
         $elgg_file->setFilename((string)$date_obj->getTimestamp() . static::TIMESTAMP_DELIMITER . (string)$this->name);
         $elgg_file->description = (string)$this->description;

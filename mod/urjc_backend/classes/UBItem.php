@@ -165,9 +165,7 @@ class UBItem{
      * @throws InvalidParameterException
      */
     static function set_properties($id, $prop_value_array){
-        if($id === -1){ //called from 'create' method
-            $item = new static();
-        } elseif(empty($id)){
+       if(empty($id)){
             return false;
         }else {
             if(!$item = new static($id)){
@@ -194,7 +192,9 @@ class UBItem{
      * @return int|bool Returns instance Id if correct, or false if error
      */
     static function create($prop_value_array){
-        return static::set_properties(-1, $prop_value_array);
+        $item = new static();
+        $item->save();
+        return static::set_properties($item->id, $prop_value_array);
     }
 
     /**
