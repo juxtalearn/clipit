@@ -8,7 +8,6 @@
     margin-top: 10px;
     margin-left: 50px;
     ol, ul{
-      list-style: initial;
       padding-left: 2.5em;
     }
   }
@@ -81,4 +80,41 @@
     background: #fff;
 
   }
+}
+
+//
+// Attachment files
+// --------------------------------------------------
+.attachment-files{
+  background: #fff;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid @blue-lighter;
+  border-radius: 3px;
+  .total-files{
+    margin-top: -5px;
+    display: block;
+    margin-bottom: 5px;
+  }
+  .file {
+    margin-bottom: 10px;
+    padding: 0;
+    height: 55px;
+    .preview{
+      float: left;
+      margin-right: 10px;
+      text-align: center;
+      width: 50px;
+      > canvas,
+      > img,
+      > i{
+        width: 60px;
+        height: 40px;
+      }
+    }
+    .details{
+      overflow: hidden;
+    }
+  }
+
 }
