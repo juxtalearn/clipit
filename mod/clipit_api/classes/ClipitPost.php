@@ -15,7 +15,7 @@
 class ClipitPost extends UBMessage{
     const SUBTYPE = "clipit_post";
 
-    public $topic_id = -1;
+    public $topic_id = 0;
 
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);

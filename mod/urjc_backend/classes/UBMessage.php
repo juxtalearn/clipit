@@ -21,7 +21,7 @@ class UBMessage extends UBItem{
     const REL_MESSAGE_FILE = "message-file";
 
     public $read_array = array();
-    public $destination = -1;
+    public $destination = 0;
     public $file_array = array();
 
     protected function load_from_elgg($elgg_object){

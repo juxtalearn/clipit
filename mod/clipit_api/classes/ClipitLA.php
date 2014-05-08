@@ -16,8 +16,8 @@ class ClipitLA extends UBFile{
 
     const SUBTYPE = "clipit_la";
 
-    public $return_id = -1;
-    public $status_code = -1;
+    public $return_id = 0;
+    public $status_code = 0;
 
     protected function load_from_elgg($elgg_file){
         parent::load_from_elgg($elgg_file);

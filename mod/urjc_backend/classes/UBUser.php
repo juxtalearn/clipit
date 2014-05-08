@@ -37,7 +37,7 @@ class UBUser extends UBItem{
     public $email = "";
     public $role = "user";
     public $language = "";
-    public $last_login = -1;
+    public $last_login = 0;
     private $password_hash = "";
 
     function __construct($id = null){
@@ -79,8 +79,11 @@ class UBUser extends UBItem{
         } elseif(!$elgg_user = new ElggUser($this->id)){
             return false;
         }
+        //var_dump($elgg_user);
         $this->copy_to_elgg($elgg_user);
+        //var_dump($elgg_user);
         $elgg_user->save();
+        var_dump($elgg_user);
         return $this->id = $elgg_user->guid;
     }
 

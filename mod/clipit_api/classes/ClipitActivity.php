@@ -40,6 +40,8 @@ class ClipitActivity extends UBItem{
 
     public $color = "";
     public $status = "";
+    public $tricky_topic = 0;
+
     public $called_users_array = array();
     public $group_array = array();
     public $task_array = array();
@@ -50,6 +52,7 @@ class ClipitActivity extends UBItem{
         parent::load_from_elgg($elgg_object);
         $this->color = (string)$elgg_object->color;
         $this->status = (string)$elgg_object->status;
+        $this->tricky_topic = (int)$elgg_object->tricky_topic;
         $this->called_users_array = static::get_called_users($this->id);
         $this->group_array = static::get_groups($this->id);
         $this->task_array = static::get_tasks($this->id);
@@ -63,6 +66,7 @@ class ClipitActivity extends UBItem{
         parent::copy_to_elgg($elgg_object);
         $elgg_object->color = (string)$this->color;
         $elgg_object->status = (string)$this->status;
+        $elgg_object->tricky_topic = (int)$this->tricky_topic;
     }
 
     protected function save(){
