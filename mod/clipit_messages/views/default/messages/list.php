@@ -116,8 +116,9 @@ $(function(){
         $new_replies = ClipitChat::get_conversation_unread($user_id, $message->owner_id);
         $total_replies = ClipitChat::get_conversation_count($user_id, $message->owner_id);
         $message_url = elgg_get_site_url()."messages/view/$user_from->login";
+
     ?>
-    <tr class="<?php echo $message_unread; ?>">
+    <tr class="<?php echo $new_replies ? "unread":""; ?>">
         <?php if(!$vars['sent']): ?>
         <td class="select">
             <input type="checkbox" name="check-msg[]" value="<?php echo $message->owner_id; ?>" class="select-simple">
