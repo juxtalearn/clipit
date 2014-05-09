@@ -8165,6 +8165,22 @@ ul.deadline-list > li .fa {
 .message-owner .block .body-msg ul {
   padding-left: 2.5em;
 }
+.message-owner .block .body-msg ul {
+  list-style-type: disc;
+}
+.message-owner .block .body-msg ol {
+  list-style-type: decimal;
+}
+.message-owner .block .body-msg ul ul,
+.message-owner .block .body-msg ol ul {
+  list-style-type: circle;
+}
+.message-owner .block .body-msg ol ol ul,
+.message-owner .block .body-msg ol ul ul,
+.message-owner .block .body-msg ul ol ul,
+.message-owner .block .body-msg ul ul ul {
+  list-style-type: square;
+}
 .quote-ref.active > a {
   border-bottom: 0;
   border-radius: 3px 3px 0 0;
@@ -8638,6 +8654,27 @@ ol {
   margin-top: 0;
   margin-bottom: 10px;
   padding: 0;
+  list-style: none outside none;
+}
+.formated-list ol,
+.formated-list ul {
+  padding-left: 2.5em;
+}
+.formated-list ul {
+  list-style-type: disc;
+}
+.formated-list ol {
+  list-style-type: decimal;
+}
+.formated-list ul ul,
+.formated-list ol ul {
+  list-style-type: circle;
+}
+.formated-list ol ol ul,
+.formated-list ol ul ul,
+.formated-list ul ol ul,
+.formated-list ul ul ul {
+  list-style-type: square;
 }
 .text-truncate {
   display: block;

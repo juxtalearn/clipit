@@ -39,6 +39,27 @@ ul, ol {
   margin-top: 0;
   margin-bottom: 10px;
   padding: 0;
+  list-style: none outside none;
+}
+.formated-list{
+  ol, ul{
+    padding-left: 2.5em;
+  }
+  ul{
+    list-style-type: disc;
+  }
+  ol{
+    list-style-type: decimal;
+  }
+  ul ul,
+  ol ul {
+    list-style-type: circle;
+  }
+  ol ol ul,
+  ol ul ul, ul ol ul,
+  ul ul ul {
+    list-style-type: square;
+  }
 }
 .text-truncate{
   display: block;
