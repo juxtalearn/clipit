@@ -17,6 +17,7 @@ foreach($my_groups_ids as $group_id){
 }
 
 $my_activities = ClipitActivity::get_by_id($id_activities_array);
+
 $params_progress = array(
     'value' => 30,
     'width' => '100%'
@@ -32,16 +33,18 @@ $params_list = array(
 );
 $content = elgg_view("activities/list", $params_list);
 
-$sidebar = elgg_view("activities/sidebar/feed", array('my_groups' => $my_groups_ids));
 $selected_tab = 'all';
 $filter = elgg_view('activities/filter', array('selected' => $selected_tab, 'entity' => $activity));
+
+if(!$my_activities){
+    $filter = "";
+    $content = elgg_echo('activities:none');
+}
 $params = array(
     'content' => $content,
     'title' => elgg_echo("my_activities"),
     'filter' => $filter,
-    'sidebar' => $sidebar,
-    'class' => 'sidebar-lg main-md'
 );
-$body = elgg_view_layout('content', $params);
+$body = elgg_view_layout('one_column', $params);
 
 echo elgg_view_page($title, $body);

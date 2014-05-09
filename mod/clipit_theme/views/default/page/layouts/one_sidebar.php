@@ -37,7 +37,7 @@ if($vars['sub-title']){
 		?>
 	</div>
 
-	<div class="elgg-main elgg-body col-md-pull-3">
+	<div class="elgg-main elgg-body col-md-pull-3 col-md-9">
         <?php
             if (isset($vars['title'])) {
                 echo "<div class='elgg-head-layout' {$title_style}>
