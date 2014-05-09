@@ -28,7 +28,7 @@ $english = array(
     'community_guidelines' => 'Community Guidelines',
 
     // Form no login
-    'loginusername' => 'Email you signed up with',
+    'loginusername' => 'Username or email you signed up with',
     'user:password:lost' => 'Forgot password',
     'new_user' => 'New user?',
     'user:email:notfound' => 'Email not found.',

@@ -23,21 +23,20 @@ if (elgg_get_config('allow_registration')) {
         if (trim($password) == "" || trim($password2) == "") {
             throw new RegistrationException(elgg_echo('RegistrationException:EmptyPassword'));
         }
-
         if (strcmp($password, $password2) != 0) {
             throw new RegistrationException(elgg_echo('RegistrationException:PasswordMismatch'));
         }
+
         // Clipit create user
-        $guid = ClipitUser::create(array(
+        $user_id = ClipitUser::create(array(
             'login'     => $username,
             'password'  => $password,
             'name'      => $name,
             'email'     => $email
         ));
-
-        if ($guid) {
-            ClipitUser::set_role_student($guid);
-            $new_user = get_entity($guid);
+        if ($user_id) {
+            ClipitUser::set_role_student($user_id);
+            $new_user = get_entity($user_id);
 
             elgg_clear_sticky_form('register');
             system_message(elgg_echo("registerok", array(elgg_get_site_entity()->name)));

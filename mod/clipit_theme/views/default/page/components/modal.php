@@ -8,13 +8,13 @@ $target = elgg_extract('target', $vars);
 $footer = "";
 $cancel_button = "";
 $ok_button = "";
-if(isset($vars['cancel_button'])){
+if($vars['cancel_button']){
     $cancel_button = '<button type="button" class="btn btn-default" data-dismiss="modal">'.elgg_echo("cancel").'</button>';
 }
 if(isset($vars['ok_button'])){
     $ok_button = $vars['ok_button'];
 }
-if($footer || $cancel_button || $ok_button){
+if($vars['footer'] || $cancel_button || $ok_button){
     $footer = '<div class="modal-footer">'.$vars["footer"].$cancel_button.$ok_button.'</div>';
 }
 ?>

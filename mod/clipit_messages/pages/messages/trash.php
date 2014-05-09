@@ -13,38 +13,66 @@
 $title = elgg_echo("messages:trash");
 elgg_push_breadcrumb($title);
 $user_id = elgg_get_logged_in_user_guid();
-
 $messages = ClipitChat::get_archived($user_id);
 
-if(!is_array($messages)){
-    $messages = array();
+$rows = array();
+foreach($messages as $message){
+    $user = array_pop(ClipitUser::get_by_id(array($message->owner_id)));
+    $user_elgg = new ElggUser($message->owner_id);
+
+    $message->description = trim(elgg_strip_tags($message->description));
+    // Message text truncate max length 50
+    if(mb_strlen($message->description) > 50){
+        $message->description = substr($message->description, 0, 50)."...";
+    }
+    // Option buttons
+    $move_msg_url = "action/messages/set_options?set-option=to_inbox&check-msg[]={$message->id}";
+    $buttons =  elgg_view('output/url', array(
+            'href'  => elgg_add_action_tokens_to_url($move_msg_url, true),
+            'title' => elgg_echo("message:movetoinbox"),
+            'style' => 'padding: 3px 9px;',
+            'text'  => '<i class="fa fa-check"></i> '.elgg_echo("message:movetoinbox"),
+            'class' => 'btn btn-success-o btn-xs',
+        )
+    );
+    $check_msg = '<input type="checkbox" name="check-msg[]" value="'.$message->id.'" class="select-simple">';
+    $text_user_from = $user->name;
+    if($message->owner_id == elgg_get_logged_in_user_guid()){
+        $text_user_from = "<strong>".elgg_echo("me")."</strong>";
+    }
+    $user_avatar = '<img src="'.$user_elgg->getIconURL("tiny").'">';
+    $user_data = elgg_view('output/url', array(
+        'href'  => "profile/".$user->login,
+        'title' => $user->name,
+        'text'  => $text_user_from));
+    $time_created = '<small class="show">'.elgg_view('output/friendlytime', array('time' => $message->time_created)).'</small>';
+
+    $row = array(
+        array('content' => $check_msg),
+        array(
+            'class' => 'user-avatar',
+            'content' => $user_avatar
+        ),
+        array('content' => $user_data.$time_created),
+        array('content' => $message->description),
+        array('content' => $buttons),
+    );
+    $rows[] = array('content' => $row);
 }
+$list_options = array(
+    'options_values' => array(
+        ''          => '['.elgg_echo('message:options').']',
+        'read'      => elgg_echo('message:markasread'),
+        'unread'    => elgg_echo('message:markasunread'),
+        'to_inbox'    => elgg_echo('message:movetoinbox'),
+    ),
+    'search'    => true
+);
 
+$content_list .= elgg_view("page/elements/list/options", array('options' => $list_options));
+$content_list .= elgg_view("page/elements/list/table", array('rows' => $rows, 'class' => 'messages-table'));
 
-$content = elgg_view_form('messages/list', array(), array('entity' => $messages, 'trash' => true));
-//
-$options = array();
-//foreach($messages as $message){
-//    $message->description = trim(elgg_strip_tags($message->description));
-//    // Message text truncate max length 50
-//    if(mb_strlen($message->description) > 50){
-//        $message->description = substr($message->description, 0, 50)."...";
-//    }
-//    // Options
-//    $move_msg_url = "action/messages/list?set-option=to_inbox&check-msg[]={$message->id}";
-//    $message->option = array(
-//        'buttons' => elgg_view('output/url', array(
-//                        'href'  => elgg_add_action_tokens_to_url($move_msg_url, true),
-//                        'title' => elgg_echo("message:movetoinbox"),
-//                        'style' => 'padding: 3px 9px;',
-//                        'text'  => '<i class="fa fa-check"></i> '.elgg_echo("message:movetoinbox"),
-//                        'class' => 'btn btn-success-o btn-xs',
-//                    ))
-//    );
-//}
-//$content = elgg_view("messages/list/section", array('entity' => $messages, 'trash' => true));
-$content = elgg_view("messages/trash", array('entity' => $messages));
-//
+$content = elgg_view_form("messages/set_options", array('body' => $content_list));
 
 if(empty($messages)){
     $content = elgg_echo("messages:trash:none");

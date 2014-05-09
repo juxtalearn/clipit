@@ -1,11 +1,58 @@
 //
+// File preview
+// --------------------------------------------------
+.file-preview{
+  position: relative;
+  display: inline-block;
+  img {
+    width: 50px;
+  }
+  .file-icon{
+    font-size: ceil(@font-size-h1 * 1.11); // ~40px
+    color: @blue-lighter;
+  }
+  .img-preview{
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    > div {
+      min-width: 100%;
+      min-height: 100%;
+      background-position: 50% 50%;
+      background-size: cover;
+    }
+  }
+  span{
+    color: #fff;
+    font-weight: bold;
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    font-size: 12px;
+    z-index: 1;
+  }
+}
+//
+// File block
+// --------------------------------------------------
+.file-block{
+  overflow: hidden;
+  background: #ECF7FB;
+  padding: 10px;
+  margin-bottom: 10px;
+  .file-preview{
+    float: left;
+    margin-right: 10px;
+  }
+  .file-details{
+    overflow: hidden;
+  }
+}
+
+//
 // Files table list
 // --------------------------------------------------
 .files-table{
-  .file-icon{
-    font-size: @font-size-h1;
-    color: #C9C9C9;
-  }
   .file-info{
     h4{
       margin: 0;
@@ -29,11 +76,17 @@
 .file-owner{
   margin-bottom: 10px;
 
-  .file-icon{
-    font-size: ceil(@font-size-base * 3.57); // ~50px
-    color: @grey_slow_3;
+  .file-preview{
     margin-right: 10px;
     float: left;
+    span{
+      font-size: ceil(@font-size-base * 1.14); // ~ 16px
+      bottom: 5px;
+    }
+    i{
+      font-size: ceil(@font-size-base * 3.57); // ~50px
+      color: @grey_slow_3;
+    }
   }
   .block{
     overflow: hidden;

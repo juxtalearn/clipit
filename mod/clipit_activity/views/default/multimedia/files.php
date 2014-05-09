@@ -108,7 +108,7 @@ $href = elgg_extract("href", $vars);
         $('#fileupload').fileupload({
             // Uncomment the following to send cross-domain cookies:
             //xhrFields: {withCredentials: true},
-            maxFileSize: 500000000, // 500 MB
+            maxFileSize: 1073741824, // 500 MB
             //url: '<?php echo elgg_add_action_tokens_to_url(elgg_normalize_url(elgg_get_site_url()."action/multimedia/files/upload"), true);?>'
             url: '<?php echo elgg_get_site_url()."ajax/view/multimedia/upload";?>',
             previewMaxWidth: 140,

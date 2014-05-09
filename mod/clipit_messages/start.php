@@ -21,7 +21,7 @@ function clipit_messages_init() {
     elgg_register_event_handler('pagesetup', 'system', 'messages_setup_sidebar_menus');
     // message actions
     elgg_register_action("messages/compose", elgg_get_plugins_path() . "clipit_messages/actions/messages/create.php");
-    elgg_register_action("messages/list", elgg_get_plugins_path() . "clipit_messages/actions/messages/list.php");
+    elgg_register_action("messages/set_options", elgg_get_plugins_path() . "clipit_messages/actions/messages/set_options.php");
     // reply msg actions
     elgg_register_action("messages/reply/create", elgg_get_plugins_path() . "clipit_messages/actions/messages/reply/create.php");
     elgg_register_action("messages/reply/remove", elgg_get_plugins_path() . "clipit_messages/actions/messages/reply/remove.php");
