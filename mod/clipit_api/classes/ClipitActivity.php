@@ -28,6 +28,7 @@ class ClipitActivity extends UBItem{
      */
     const SUBTYPE = "clipit_activity";
 
+    const REL_ACTIVITY_TEACHER = "activity-teacher";
     const REL_ACTIVITY_USER = "activity-user";
     const REL_ACTIVITY_GROUP = "activity-group";
     const REL_ACTIVITY_TASK = "activity-task";
@@ -42,6 +43,7 @@ class ClipitActivity extends UBItem{
     public $status = "";
     public $tricky_topic = 0;
 
+    public $teacher_array = array();
     public $called_users_array = array();
     public $group_array = array();
     public $task_array = array();
@@ -53,6 +55,7 @@ class ClipitActivity extends UBItem{
         $this->color = (string)$elgg_object->color;
         $this->status = (string)$elgg_object->status;
         $this->tricky_topic = (int)$elgg_object->tricky_topic;
+        $this->teacher_array = static::get_teachers($this->id);
         $this->called_users_array = static::get_called_users($this->id);
         $this->group_array = static::get_groups($this->id);
         $this->task_array = static::get_tasks($this->id);
@@ -71,6 +74,7 @@ class ClipitActivity extends UBItem{
 
     protected function save(){
         parent::save();
+        static::add_teachers($this->id, $this->teacher_array);
         static::add_called_users($this->id, $this->called_users_array);
         static::add_groups($this->id, $this->group_array);
         static::add_tasks($this->id, $this->task_array);
@@ -144,6 +148,19 @@ class ClipitActivity extends UBItem{
             return false;
         }
         return ClipitActivity::get_by_id($activity_ids);
+    }
+
+    // TEACHERS
+    static function add_teachers($id, $teacher_array){
+        return UBCollection::add_items($id, $teacher_array, ClipitActivity::REL_ACTIVITY_TEACHER);
+    }
+
+    static function remove_teachers($id, $teacher_array){
+        return UBCollection::remove_items($id, $teacher_array, ClipitActivity::REL_ACTIVITY_TEACHER);
+    }
+
+    static function get_teachers($id){
+        return UBCollection::get_items($id, ClipitActivity::REL_ACTIVITY_TEACHER);
     }
 
     // CALLED USERS
