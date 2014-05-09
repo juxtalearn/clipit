@@ -31,7 +31,7 @@ class UBSite{
      *
      * @param string $login User login
      * @param string $password User password
-     * @param int    $timeout Session timeout (minutes)
+     * @param int    $timeout Session timeout in minutes
      *
      * @return string Authentication Token.
      * @throws SecurityException
