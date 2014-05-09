@@ -30,6 +30,56 @@ class ClipitUser extends UBUser{
      * @const Role name for Administrators
      */
     const ROLE_ADMIN = "admin";
+    /**
+     * @const Default cookie token duration in minutes
+     */
+    const COOKIE_TOKEN_DURATION = 60;
+
+    static function login($login, $password, $persistent = false){
+        if(!parent::login($login, $password, $persistent)){
+            return false;
+        }
+        static::create_cookies($login, $password);
+        return true;
+    }
+
+    static function logout(){
+        static::delete_cookies();
+        return parent::logout();
+    }
+
+    static function create_cookies($login, $password){
+        $site = elgg_get_site_entity();
+        $token = UBSite::get_token($login, $password, static::COOKIE_TOKEN_DURATION);
+        setcookie("clipit_token",
+            $token,
+            0,
+            "/",
+            '.'.get_site_domain($site->guid));
+        $user = static::get_by_login(array($login));
+        $user = $user[$login];
+        setcookie("clipit_user",
+            "id-".$user->id.
+            " login-".$user->login.
+            " role-".$user->role.
+            " login_time-".time(),
+            0,
+            "/",
+            '.'.get_site_domain($site->guid));
+        setcookie("clipit_name",
+            $user->name,
+            0,
+            "/",
+            '.'.get_site_domain($site->guid));
+    }
+
+    static function delete_cookies(){
+        UBSite::remove_token($_COOKIE["clipit_token"]);
+        $site = elgg_get_site_entity();
+        setcookie("clipit_token", "", 0, "/", '.'.get_site_domain($site->guid));
+        setcookie("clipit_user", "", 0, "/", '.'.get_site_domain($site->guid));
+        setcookie("clipit_name", "", 0, "/", '.'.get_site_domain($site->guid));
+    }
 
     /**
      * Get all Group Ids in which a user is member of.

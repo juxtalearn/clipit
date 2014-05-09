@@ -173,9 +173,6 @@ class UBUser extends UBItem{
             return false;
         }
         $elgg_user = get_user_by_username($login);
-        $token = UBSite::get_token($login, $password); // default timeout 1h
-        $site = elgg_get_site_entity();
-        setcookie("clipit_token", $token, 0, "/", '.'.get_site_domain($site->guid));
         return login($elgg_user, $persistent);
     }
 
@@ -185,8 +182,6 @@ class UBUser extends UBItem{
      * @return bool Returns true if ok, or false if error.
      */
     static function logout(){
-        UBSite::remove_token($_COOKIE["clipit_token"]);
-        setcookie("clipit_token", "", time() - (86400 * 365), "/");
         return logout();
     }
 
