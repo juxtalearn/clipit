@@ -20,6 +20,7 @@ function clipit_expose_api(){
     expose_chat_functions();
     expose_comment_functions();
     expose_event_functions();
+    expose_example_functions();
     expose_file_functions();
     expose_group_functions();
     expose_la_functions();
@@ -654,6 +655,12 @@ function expose_event_functions(){
                 "required" => true)),
         "Get events which may interest a User.",
         'GET', false, true);
+}
+
+function expose_example_functions(){
+    $api_suffix = "clipit.example.";
+    $class_suffix = "ClipitExample::";
+    expose_common_functions($api_suffix, $class_suffix);
 }
 
 function expose_file_functions(){

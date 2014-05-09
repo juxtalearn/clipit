@@ -17,7 +17,6 @@
  *
  */
 class ClipitUser extends UBUser{
-
     /**
      * @const Role name for Students
      */
@@ -49,36 +48,23 @@ class ClipitUser extends UBUser{
     }
 
     static function create_cookies($login, $password){
+        global $CONFIG;
         $site = elgg_get_site_entity();
-        $token = UBSite::get_token($login, $password, static::COOKIE_TOKEN_DURATION);
-        setcookie("clipit_token",
-            $token,
-            0,
-            "/",
-            '.'.get_site_domain($site->guid));
         $user = static::get_by_login(array($login));
         $user = $user[$login];
-        setcookie("clipit_user",
-            "id-".$user->id.
-            " login-".$user->login.
-            " role-".$user->role.
-            " login_time-".time(),
-            0,
-            "/",
-            '.'.get_site_domain($site->guid));
-        setcookie("clipit_name",
-            $user->name,
-            0,
-            "/",
-            '.'.get_site_domain($site->guid));
+        $token = UBSite::get_token($login, $password, static::COOKIE_TOKEN_DURATION);
+        $jxl_cookie_auth = new JuxtaLearn_Cookie_Authentication($CONFIG->JXL_SECRET, get_site_domain($site->guid));
+        $jxl_cookie_auth->set_required_cookie($user->login, $user->role, $user->id);
+        $jxl_cookie_auth->set_name_cookie($user->name);
+        $jxl_cookie_auth->set_token_cookie($token);
     }
 
     static function delete_cookies(){
+        global $CONFIG;
         UBSite::remove_token($_COOKIE["clipit_token"]);
         $site = elgg_get_site_entity();
-        setcookie("clipit_token", "", 0, "/", '.'.get_site_domain($site->guid));
-        setcookie("clipit_user", "", 0, "/", '.'.get_site_domain($site->guid));
-        setcookie("clipit_name", "", 0, "/", '.'.get_site_domain($site->guid));
+        $jxl_cookie_auth = new JuxtaLearn_Cookie_Authentication($CONFIG->JXL_SECRET, get_site_domain($site->guid));
+        $jxl_cookie_auth->delete_cookies();
     }
 
     /**
