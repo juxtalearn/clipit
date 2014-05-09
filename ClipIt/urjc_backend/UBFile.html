@@ -188,7 +188,7 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																				<div class="method-definition">
+																												<div class="method-definition">
 					static 						<span class="method-result">bool|mixed|null|string</span>
 										<a href="#get_mime_type" title="details" class="method-name">get_mime_type</a>
 											(<span class="var-type">string</span>&nbsp;<span class="var-name">$file</span>)
@@ -198,11 +198,16 @@
 										<a href="#get_simple_mime_type" title="details" class="method-name">get_simple_mime_type</a>
 											(<span class="var-type">string</span>&nbsp;<span class="var-name">$mime_type</span>)
 									</div>
-																																
+																								
 												<div class="method-definition">
 											<span class="method-result">void</span>
 										<a href="#copy_to_elgg" title="details" class="method-name">copy_to_elgg</a>
 											(<span class="var-type"><a href="../../Elgg-Core/DataModel-File/ElggFile.html">ElggFile</a></span>&nbsp;<span class="var-name">$elgg_file</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">UBFile</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											([<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span> = <span class="var-default">null</span>])
 									</div>
 																																<div class="method-definition">
 											<span class="method-result">void</span>
@@ -213,11 +218,6 @@
 											<span class="method-result">bool|int</span>
 										<a href="#save" title="details" class="method-name">save</a>
 										()
-									</div>
-																<div class="method-definition">
-											<span class="method-result">UBFile</span>
-										<a href="#__construct" title="details" class="method-name">__construct</a>
-											([<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span> = <span class="var-default">null</span>])
 									</div>
 								</div>
 		</div>
@@ -549,8 +549,43 @@
 							</li>
 				</ul>
 	</div>
-<a name="methodload_from_elgg" id="load_from_elgg"><!-- --></a>
+<a name="method__construct" id="__construct"><!-- --></a>
 <div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">52</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constructor</p>
+	<ul class="tags">
+				<li><span class="field">throws:</span> APIException</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">UBFile</span>
+		<span class="method-name">
+			__construct
+		</span>
+					([<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$id</span><span class="var-description">: If $id is null, create new instance; else load instance with id = $id.</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../ClipIt/urjc_backend/UBItem.html#method__construct">UBItem::__construct()</a></dt>
+						<dd>Constructor</dd>
+					</dl>
+			
+	</div>
+<a name="methodload_from_elgg" id="load_from_elgg"><!-- --></a>
+<div class="oddrow">
 	
 	<div class="method-header">
 		<span class="method-title">load_from_elgg</span> (line <span class="line-number">64</span>)
@@ -588,7 +623,7 @@
 				</ul>
 	</div>
 <a name="methodsave" id="save"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<span class="method-title">save</span> (line <span class="line-number">100</span>)
@@ -610,41 +645,6 @@
 			</div>
 	
 		
-			
-	</div>
-<a name="method__construct" id="__construct"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">52</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Constructor</p>
-	<ul class="tags">
-				<li><span class="field">throws:</span> APIException</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">UBFile</span>
-		<span class="method-name">
-			__construct
-		</span>
-					([<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span> = <span class="var-default">null</span>])
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">int</span>
-				<span class="var-name">$id</span><span class="var-description">: If $id is null, create new instance; else load instance with id = $id.</span>			</li>
-				</ul>
-		
-			<hr class="separator" />
-		<div class="notes">Redefinition of:</div>
-		<dl>
-			<dt><a href="../../ClipIt/urjc_backend/UBItem.html#method__construct">UBItem::__construct()</a></dt>
-						<dd>Constructor</dd>
-					</dl>
 			
 	</div>
 							<h4>Inherited Methods</h4>
@@ -779,7 +779,7 @@
 	</div>
 
 	<p class="notes" id="credit">
-		Documentation generated on Fri, 09 May 2014 15:01:02 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
+		Documentation generated on Fri, 09 May 2014 16:01:06 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
 	</p>
 	</div></body>
 </html>
