@@ -58,21 +58,6 @@ class ClipitQuizResult extends UBItem{
     }
 
     /**
-     * Set Quiz Result Correct flag into "correct" property (true = yes, false = no)
-     *
-     * @param string $value Flag specifying if the Quiz Result is correct or not
-     */
-    function setCorrect($value){
-        if($value == "true"){
-            $this->correct = true;
-        } elseif($value == "false"){
-            $this->correct = false;
-        } else{
-            $this->correct = (bool)$value;
-        }
-    }
-
-    /**
      * Sets values to specified properties of an Item
      *
      * @param int   $id Id of Item to set property valyes
@@ -81,12 +66,16 @@ class ClipitQuizResult extends UBItem{
      * @return int|bool Returns Id of Item if correct, or false if error
      */
     static function set_properties($id, $prop_value_array){
-        if(!$item = new static($id)){
-            return false;
-        }
+        $new_prop_value_array = array();
         foreach($prop_value_array as $prop => $value){
             if($prop == "correct"){
-                $item->setCorrect($value);
+                if($value == "true"){
+                    $new_prop_value_array["correct"] = true;
+                } elseif($value == "false"){
+                    $new_prop_value_array["correct"] = false;
+                } else{
+                    $new_prop_value_array["correct"] = (bool)$value;
+                }
             } else{
                 $new_prop_value_array[$prop] = $value;
             }
