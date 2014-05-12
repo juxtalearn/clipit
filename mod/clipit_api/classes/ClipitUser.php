@@ -53,7 +53,13 @@ class ClipitUser extends UBUser{
         $user = static::get_by_login(array($login));
         $user = $user[$login];
         $token = UBSite::get_token($login, $password, static::COOKIE_TOKEN_DURATION);
-        $jxl_cookie_auth = new JuxtaLearn_Cookie_Authentication($CONFIG->JXL_SECRET, get_site_domain($site->guid));
+        try {
+            $jxl_cookie_auth = new JuxtaLearn_Cookie_Authentication(
+                    $CONFIG->JXL_COOKIE_SECRET, $CONFIG->JXL_COOKIE_DOMAIN);
+        } catch (Exception $ex) {
+            // Error - I don't know how to hook into Elgg error handling/reporting.
+            die(get_class($jxl_cookie_auth) .': '. $ex->getMessage());
+        }
         $jxl_cookie_auth->set_required_cookie($user->login, $user->role, $user->id);
         $jxl_cookie_auth->set_name_cookie($user->name);
         $jxl_cookie_auth->set_token_cookie($token);
@@ -62,8 +68,12 @@ class ClipitUser extends UBUser{
     static function delete_cookies(){
         global $CONFIG;
         UBSite::remove_token($_COOKIE["clipit_token"]);
-        $site = elgg_get_site_entity();
-        $jxl_cookie_auth = new JuxtaLearn_Cookie_Authentication($CONFIG->JXL_SECRET, get_site_domain($site->guid));
+        try {
+            $jxl_cookie_auth = new JuxtaLearn_Cookie_Authentication(
+                    $CONFIG->JXL_COOKIE_SECRET, $CONFIG->JXL_COOKIE_DOMAIN);
+        } catch (Exception $ex) {
+            die(get_class($jxl_cookie_auth) .': '. $ex->getMessage());
+        }
         $jxl_cookie_auth->delete_cookies();
     }
 

@@ -23,7 +23,7 @@ function clipit_api_init(){
     global $CONFIG;
     loadFiles(elgg_get_plugins_path() . "clipit_api/libraries/");
     clipit_expose_api();
-    $CONFIG->JXL_SECRET = "697fe3f81946fb59a714471cd688360b";
+    //$CONFIG->JXL_SECRET; -- See '/engine/settings.CLIPIT-example.php'
 }
 
 function clipit_register_subtypes(){
