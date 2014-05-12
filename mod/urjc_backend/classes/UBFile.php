@@ -35,9 +35,9 @@ class UBFile extends UBItem{
     public $size = 0;
     public $file_path = "";
     public $temp_path = "";
-    public $thumb_small = null;
-    public $thumb_normal = null;
-    public $thumb_large = null;
+    public $thumb_small = array();
+    public $thumb_normal = array();
+    public $thumb_large = array();
     public $mime_type = array();
 
 
@@ -66,26 +66,18 @@ class UBFile extends UBItem{
         $this->description = (string)$elgg_file->get("description");
         $this->owner_id = (int)$elgg_file->getOwnerGUID();
         $this->time_created = (int)$elgg_file->getTimeCreated();
-        $file_name = $elgg_file->getFilename();
-        $temp_name = explode(static::TIMESTAMP_DELIMITER, $file_name);
-        if(empty($temp_name[1])){
-            // no timestamp found
-            $this->name = $temp_name[0];
-        } else{
-            $this->name = $temp_name[1];
-        }
-        //$this->data = $elgg_file->grabFile();
+        $this->name = (string)$elgg_file->name;
         $this->size = (int)$elgg_file->size();
         $this->file_path = (string)$elgg_file->getFilenameOnFilestore();
         $this->url = (string)elgg_get_site_url()."file/download/".$this->id;
-        $thumbs = new ElggFile();
-        $thumbs->owner_guid = $elgg_file->owner_guid;
-        $thumbs->setFilename($elgg_file->thumb_small);
-        $this->thumb_small = $thumbs->grabFile();
-        $thumbs->setFilename($elgg_file->thumb_normal);
-        $this->thumb_normal = $thumbs->grabFile();
-        $thumbs->setFilename($elgg_file->thumb_large);
-        $this->thumb_large = $thumbs->grabFile();
+        if(!empty($elgg_file->thumb_small)){
+            $this->thumb_small["path"] = (string)$elgg_file->thumb_small;
+            $this->thumb_small["url"] = (string)elgg_get_site_url()."file/thumbnail/small/".$this->id;
+            $this->thumb_normal["path"] = (string)$elgg_file->thumb_normal;
+            $this->thumb_normal["url"] = (string)elgg_get_site_url()."file/thumbnail/normal/".$this->id;
+            $this->thumb_large["path"] = (string)$elgg_file->thumb_large;
+            $this->thumb_large["url"] = (string)elgg_get_site_url()."file/thumbnail/large/".$this->id;
+        }
         if(!empty($elgg_file->mime_type)){
             $this->mime_type["full"] = $elgg_file->mime_type[0];
             $this->mime_type["short"] = $elgg_file->mime_type[1];
@@ -108,7 +100,6 @@ class UBFile extends UBItem{
             $elgg_file->subtype = static::SUBTYPE;
         }
         $this->copy_to_elgg($elgg_file);
-        static::create_thumbnails($elgg_file);
         $elgg_file->save();
         return $this->id = $elgg_file->guid;
     }
@@ -120,14 +111,13 @@ class UBFile extends UBItem{
      * @param ElggFile $elgg_file Elgg file instance to save Item to
      */
     protected function copy_to_elgg($elgg_file){
-        $date_obj = new DateTime();
-        if(empty($this->name)){
-            return;
+        if($this->time_created == 0){ // new file
+            $elgg_file->filename = (string)rand();
         }
-        $elgg_file->setFilename((string)$date_obj->getTimestamp() . static::TIMESTAMP_DELIMITER . (string)$this->name);
+        $elgg_file->name = (string)$this->name;
         $elgg_file->description = (string)$this->description;
         $elgg_file->access_id = ACCESS_PUBLIC;
-        if($this->data !== null){
+        if(!empty($this->data)){ // new file or new data
             $elgg_file->open("write");
             if($decoded_data = base64_decode($this->data, true)){
                 $elgg_file->write($decoded_data);
@@ -135,11 +125,19 @@ class UBFile extends UBItem{
                 $elgg_file->write($this->data);
             }
             $elgg_file->close();
+            static::create_thumbnails($elgg_file);
         }
-        else{ // File was uploaded into local temp dir
+        elseif(!empty($this->temp_path)){ // File was uploaded into local temp dir
             $elgg_file->open("write"); // to ensure file is created in disk
             $elgg_file->close();
             move_uploaded_file($this->temp_path, $elgg_file->getFilenameOnFilestore());
+            static::create_thumbnails($elgg_file);
+        } else{
+            if(!empty($this->thumb_small)){
+                $elgg_file->thumb_small = (string)$this->thumb_small["path"];
+                $elgg_file->thumb_normal = (string)$this->thumb_normal["path"];
+                $elgg_file->thumb_large = (string)$this->thumb_large["path"];
+            }
         }
         $filestore_name = $elgg_file->getFilenameOnFilestore();
         $mime_type["full"] = (string)static::get_mime_type($filestore_name);
@@ -239,31 +237,31 @@ class UBFile extends UBItem{
             $thumb = new ElggFile();
             $thumbnail = get_resized_image_from_existing_file($filestore_name, static::THUMB_SMALL, static::THUMB_SMALL, false);
             if ($thumbnail) {
-                $thumb->setFilename("thumb_small".$file_name);
+                $thumb->setFilename("thumb_small-".$file_name);
                 $thumb->open("write");
                 $thumb->write($thumbnail);
                 $thumb->close();
-                $elgg_file->thumb_small = "thumb_small".$file_name;
+                $elgg_file->thumb_small = (string)$thumb->getFilenameOnFilestore();
                 unset($thumbnail);
             }
 
             $thumbnail = get_resized_image_from_existing_file($filestore_name, static::THUMB_NORMAL, static::THUMB_NORMAL, false);
             if ($thumbnail) {
-                $thumb->setFilename("thumb_normal".$file_name);
+                $thumb->setFilename("thumb_normal-".$file_name);
                 $thumb->open("write");
                 $thumb->write($thumbnail);
                 $thumb->close();
-                $elgg_file->thumb_normal = "thumb_normal".$file_name;
+                $elgg_file->thumb_normal = (string)$thumb->getFilenameOnFilestore();
                 unset($thumbnail);
             }
 
             $thumbnail = get_resized_image_from_existing_file($filestore_name, static::THUMB_LARGE, static::THUMB_LARGE, false);
             if ($thumbnail) {
-                $thumb->setFilename("thumb_large".$file_name);
+                $thumb->setFilename("thumb_large-".$file_name);
                 $thumb->open("write");
                 $thumb->write($thumbnail);
                 $thumb->close();
-                $elgg_file->thumb_large = "thumb_large".$file_name;
+                $elgg_file->thumb_large = (string)$thumb->getFilenameOnFilestore();
                 unset($thumbnail);
             }
         }
