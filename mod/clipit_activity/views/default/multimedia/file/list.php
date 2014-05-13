@@ -13,7 +13,7 @@
 $files = elgg_extract("files", $vars);
 $entity = elgg_extract('entity', $vars);
 $href = elgg_extract("href", $vars);
-
+$add_files = elgg_extract("add_files", $vars);
 
 foreach($files as $file_id){
     $file =  array_pop(ClipitFile::get_by_id(array($file_id)));
@@ -81,19 +81,23 @@ foreach($files as $file_id){
 }
 
 $list_options = array(
-    'options_values' => array(
-        ''          => '['.elgg_echo('options').']',
-        'remove'      => elgg_echo('file:delete'),
-    ),
     'search'    => true
 );
+
+if($add_files){
+    // Add files button
+    echo elgg_view_form('multimedia/files/upload', array('id' => 'fileupload', 'enctype' => 'multipart/form-data'), array('entity'  => $entity));
+    // File options
+    $list_options['options_values'] = array(
+        ''          => '['.elgg_echo('options').']',
+        'remove'      => elgg_echo('file:delete'),
+    );
+}
 
 // set content
 $content_list .= elgg_view("page/elements/list/options", array('options' => $list_options));
 $content_list .= elgg_view("page/elements/list/table", array('rows' => $rows, 'class' => 'files-table'));
 
-// Add files button
-echo elgg_view_form('multimedia/files/upload', array('id' => 'fileupload', 'enctype' => 'multipart/form-data'), array('entity'  => $entity));
 // File list
 echo elgg_view_form("multimedia/files/set_options", array('body' => $content_list));
 ?>

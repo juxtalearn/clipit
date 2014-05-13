@@ -282,9 +282,15 @@ function activity_page_handler($page) {
                     switch ($selected_tab) {
                         case 'files':
                             $files = ClipitActivity::get_files($activity->id);
-                            $content = elgg_view('multimedia/files', array('entity' => $activity, 'files' => $files, 'href' => $href));
-                            if (!$content) {
-                                $content = elgg_echo('groups:none');
+                            $user = array_pop(ClipitUser::get_by_id(array($user_id)));
+                            $add_files = false;
+                            // Add files button for teacher
+                            if($user->role == 'teacher'){
+                                $add_files = true;
+                            }
+                                $content = elgg_view('multimedia/file/list', array('entity' => $activity, 'add_files' => $add_files, 'files' => $files, 'href' => $href));
+                            if (!$files) {
+                                $content .= elgg_echo('file:none');
                             }
                             break;
                         case 'videos':
@@ -442,11 +448,9 @@ function group_tools_page_handler($page, $activity){
             switch ($selected_tab) {
                 case 'files':
                     $files = ClipitGroup::get_files($group->id);
-//                    $content = elgg_view('multimedia/files', array('entity' => $group, 'files' => $files, 'href' => $href));
-                    $content = elgg_view('multimedia/file/list', array('entity' => $group, 'files' => $files, 'href' => $href));
-
-                    if (!$content) {
-                        $content = elgg_echo('groups:none');
+                    $content = elgg_view('multimedia/file/list', array('entity' => $group, 'add_files' => true, 'files' => $files, 'href' => $href));
+                    if (!$files) {
+                        $content .= elgg_echo('file:none');
                     }
                     break;
                 case 'videos':
