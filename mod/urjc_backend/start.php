@@ -28,6 +28,7 @@ function urjc_backend_init(){
             'limit' => 10));*/
     register_pam_handler('clipit_auth_usertoken');
     loadFiles(elgg_get_plugins_path() . "urjc_backend/libraries/");
+    date_default_timezone_set(get_config("timezone"));
 }
 
 /**

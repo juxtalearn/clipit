@@ -82,6 +82,7 @@ If you are ready to proceed, click the Next button.",
 	'install:settings:label:dataroot' => 'Data Directory',
 	'install:settings:label:language' => 'Site Language',
 	'install:settings:label:siteaccess' => 'Default Site Access',
+    'install:settings:label:timezone' => 'Site TimeZone',
 	'install:label:combo:dataroot' => 'Elgg creates data directory',
 
 	'install:settings:help:sitename' => 'The name of your new Elgg site',
@@ -92,6 +93,7 @@ If you are ready to proceed, click the Next button.",
 	'install:settings:help:dataroot:apache' => 'You have the option of Elgg creating the data directory or entering the directory that you already created for storing user files (the permissions on this directory are checked when you click Next)',
 	'install:settings:help:language' => 'The default language for the site',
 	'install:settings:help:siteaccess' => 'The default access level for new user created content',
+    'install:settings:help:timezone' => 'The timezone for the site ',
 
 	'install:admin:instructions' => "It is now time to create an administrator's account.",
 
