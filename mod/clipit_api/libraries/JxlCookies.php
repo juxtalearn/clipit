@@ -17,7 +17,7 @@ Questions:
 */
 
 
-class JuxtaLearn_Cookie_Authentication {
+class JxlCookies {
 
     // Names for optional `defined()` constants.
     const DF_KEY    = 'JXL_COOKIE_SECRET_KEY';

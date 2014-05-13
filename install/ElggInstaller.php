@@ -409,6 +409,11 @@ class ElggInstaller {
                 'value' => 'Europe/Madrid',
                 'required' => TRUE,
             ),
+            'jxl_secret' => array(
+                'type' => 'text',
+                'value' => '',
+                'required' => FALSE,
+            ),
         );
 
         // if Apache, we give user option of having Elgg create data directory
@@ -1438,6 +1443,7 @@ class ElggInstaller {
         set_config('walled_garden', FALSE, $site->getGUID());
         set_config('allow_user_default_access', '', $site->getGUID());
         set_config('timezone', $submissionVars['timezone'], $site->getGUID());
+        set_config('jxl_secret', $submissionVars['jxl_secret'], $site->getGUID());
         $this->enablePlugins();
 
         return TRUE;
