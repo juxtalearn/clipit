@@ -63,6 +63,7 @@ $english = array(
     'file:removed' => 'File %s removed',
     'file:cantremove' => 'Can not remove file',
     'file:edit' => 'Edit file',
+    'file:none' => "No files.",
     /* File types */
     'file:general' => 'File',
     'file:document' => 'Document',
