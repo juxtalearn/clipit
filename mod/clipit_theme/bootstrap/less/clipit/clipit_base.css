@@ -7284,6 +7284,29 @@ li.list-item:last-child {
   color: #ff4343;
   margin-left: 10px;
 }
+.files-list .file-info > .img-prev {
+  background: #f1f2f7;
+  display: table;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
+.files-list .file-info > .img-prev > div {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+.files-list .files .template-upload {
+  border-bottom: 1px solid #bae6f6;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+.files-list .files .template-upload:last-child {
+  border-bottom: 0;
+}
+.files-list .progress-extended {
+  text-align: left;
+}
 .landing h2.elgg-heading-main {
   display: none;
 }
