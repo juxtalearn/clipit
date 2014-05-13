@@ -26,8 +26,8 @@ function urjc_backend_init(){
             'type' => "object",
             'subtype' => "clipit_activity",
             'limit' => 10));*/
-    //loadFiles(elgg_get_plugins_path()."urjc_backend/libraries/");
     register_pam_handler('clipit_auth_usertoken');
+    loadFiles(elgg_get_plugins_path() . "urjc_backend/libraries/");
 }
 
 /**
