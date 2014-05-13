@@ -21,27 +21,36 @@ class ClipitVideo extends UBItem{
      * @const string Elgg entity sybtype for this class
      */
     const SUBTYPE = "clipit_video";
-
     const REL_VIDEO_COMMENT = "video-comment";
     const REL_VIDEO_TAG = "video-tag";
 
+    public $tag_array = array();
+    public $comment_array = array();
+
+    protected function load_from_elgg($elgg_object){
+        parent::load_from_elgg($elgg_object);
+        $this->comment_array = static::get_comments($this->id);
+        $this->tag_array = static::get_tags($this->id);
+    }
+
+    protected function save(){
+        parent::save();
+        static::set_comments($this->id, $this->comment_array);
+        static::set_tags($this->id, $this->tag_array);
+        return $this->id;
+    }
+
     protected function delete(){
         $rel_array = get_entity_relationships((int)$this->id);
+        // Delete comments hanging from the video to be deleted
+        $comment_array = array();
         foreach($rel_array as $rel){
-            switch($rel->relationship){
-                case ClipitVideo::REL_VIDEO_COMMENT:
-                    $comment_array[] = $rel->guid_two;
-                    break;
-                case ClipitVideo::REL_VIDEO_TAG:
-                    $tag_array[] = $rel->guid_two;
-                    break;
+            if($rel->relationship == static::REL_VIDEO_COMMENT){
+                $comment_array[] = $rel->guid_two;
             }
         }
-        if(isset($comment_array)){
+        if(!empty($comment_array)){
             ClipitComment::delete_by_id($comment_array);
-        }
-        if(isset($tag_array)){
-            ClipitTag::delete_by_id($tag_array);
         }
         parent::delete();
     }
@@ -56,6 +65,18 @@ class ClipitVideo extends UBItem{
      */
     static function add_comments($id, $comment_array){
         return UBCollection::add_items($id, $comment_array, ClipitVideo::REL_VIDEO_COMMENT);
+    }
+
+    /**
+     * Sets Comments to a Video, referenced by Id.
+     *
+     * @param int   $id Id from the Video to set Comments to
+     * @param array $comment_array Array of Comment Ids to be set to the Video
+     *
+     * @return bool Returns true if success, false if error
+     */
+    static function set_comments($id, $comment_array){
+        return UBCollection::set_items($id, $comment_array, ClipitVideo::REL_VIDEO_COMMENT);
     }
 
     /**
@@ -91,6 +112,18 @@ class ClipitVideo extends UBItem{
      */
     static function add_tags($id, $tag_array){
         return UBCollection::add_items($id, $tag_array, ClipitVideo::REL_VIDEO_TAG);
+    }
+
+    /**
+     * Sets Tags to a Video, referenced by Id.
+     *
+     * @param int   $id Id from the Video to set Tags to
+     * @param array $tag_array Array of Tag Ids to be set to the Video
+     *
+     * @return bool Returns true if success, false if error
+     */
+    static function set_tags($id, $tag_array){
+        return UBCollection::set_items($id, $tag_array, ClipitVideo::REL_VIDEO_TAG);
     }
 
     /**
