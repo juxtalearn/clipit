@@ -17,7 +17,7 @@ Questions:
 */
 
 
-class JxlCookies {
+class JuxtaLearn_Cookie_Authentication {
 
     // Names for optional `defined()` constants.
     const DF_KEY    = 'JXL_COOKIE_SECRET_KEY';
@@ -37,7 +37,7 @@ class JxlCookies {
 
     private $shared_secret_key;
     protected $cookie_domain;
-    protected $is_authenticated = FALSE;
+    protected $parse_r;
 
 
     /**
@@ -46,11 +46,13 @@ class JxlCookies {
      *
      * @throws InvalidArgumentException for a missing or too short secret key.
      * @useby auth-master
-     * @useby auth-slave 
+     * @useby auth-slave
      */
     public function __construct( $secret_key = NULL, $cookie_domain = NULL ) {
-        $this->shared_secret_key = $secret_key ? $secret_key : constant(self::DF_KEY);
-        $this->cookie_domain = $cookie_domain ? $cookie_domain : constant(self::DF_DOMAIN);
+        $this->shared_secret_key = $secret_key ? $secret_key :
+            defined(self::DF_KEY) ? constant(self::DF_KEY) : NULL;
+        $this->cookie_domain = $cookie_domain ? $cookie_domain :
+            defined(self::DF_DOMAIN) ? constant(self::DF_DOMAIN) : NULL;
 
         if (!$this->cookie_domain) {
             $this->cookie_domain = '.juxtalearn.org';
@@ -116,7 +118,7 @@ class JxlCookies {
      */
     public function set_name_cookie( $display_name, $expire = 0 ) {
         return setcookie(
-             self::CK_NAME, $display_name, $expire, '/', $this->cookie_domain );
+            self::CK_NAME, $display_name, $expire, '/', $this->cookie_domain );
     }
 
     /**
@@ -140,27 +142,27 @@ class JxlCookies {
      *
      * @return array  Flag indicating if authentication succeeded, user data, debug info.
      * @example  $result = $auth->parse_cookies();
-     *           var_dump( $result[ 'user_login' ] );
+     *           var_dump( $auth->get_user_login() );
      * @useby auth-slave
      */
     public function parse_cookies() {
-        $result = array( 'is_authenticated' => false );
- 
+        $this->parse_r = array( 'is_authenticated' => false );
+
         // Try a basic check.
         if (!isset( $_COOKIE[self::CK_USER] )) {
-            $result['msg'] = 'Warning, missing authentication cookie.';
-            return $result;
+            $this->parse_r['msg'] = 'Warning, missing authentication cookie.';
+            return $this->parse_r;
         }
 
         // Try to extract data.
         if (!preg_match( self::COOKIE_REGEX, $_COOKIE[self::CK_USER], $m )) {
-            $result['msg'] = 'Error, unexpected user-cookie format.';
-            return $result;
+            $this->parse_r['msg'] = 'Error, unexpected user-cookie format.';
+            return $this->parse_r;
         }
 
         $token_cookie = isset($_COOKIE[self::CK_TOKEN]) ? $_COOKIE[self::CK_TOKEN] : NULL;
         $name_cookie = isset($_COOKIE[self::CK_NAME]) ? $_COOKIE[self::CK_NAME] : NULL;
-        $result = array(
+        $this->parse_r = $r = array(
             'is_authenticated' => false,  // Still false!
             'token_cookie_value' => $token_cookie,
             'user_cookie_value' => $m[0],
@@ -176,19 +178,28 @@ class JxlCookies {
 
         // Try to validate.
         $payload = $this->user_payload(
-            $result['user_login'], $result['user_role'], $result['time'], $result['user_id'] );
-        $try_hash = $this->make_cookie_hash( $result['time'], $payload );
+            $r['user_login'], $r['user_role'], $r['time'], $r['user_id'] );
+        $try_hash = $this->make_cookie_hash( $r['time'], $payload );
 
-        if ($try_hash != $result['hash']) {
+        if ($try_hash != $r['hash']) {
             // ERROR.
-            return array( 'is_authenticated' => false, 'msg' => 'Error, invalid cookie.',
-                'regex_matches' => $m, 'regex' => self::COOKIE_REGEX ); 
+            $this->parse_r = array(
+                'is_authenticated' => false, 'msg' => 'Error, invalid cookie.',
+                'regex_matches' => $m, 'regex' => self::COOKIE_REGEX );
+            return $this->parse_r;
         }
 
-        $result['msg'] = 'Success';
-        $result['is_authenticated'] = $this->is_authenticated = true;
-        return $result;
+        $this->parse_r['msg'] = 'Success';
+        $this->parse_r['is_authenticated'] = true;
+        return $this->parse_r;
     }
+
+    public function authenticate() {
+        return $this->parse_cookies();
+    }
+
+    // ==========================================
+    // Public utilities.
 
     /**
      * @return bool Is the user authenticated?
@@ -197,9 +208,20 @@ class JxlCookies {
      * @useby auth-slave
      */
     public function is_authenticated() {
-        return $this->is_authenticated;
+        return $this->get_property( 'is_authenticated' );
     }
 
+    public function get_user_login() {
+        return $this->get_property( 'user_login' );
+    }
+
+    public function get_api_token() {
+        return $this->get_property( 'api_token' );
+    }
+
+    public function get_property( $key ) {
+        return isset($this->parse_r[ $key ]) ? $this->parse_r[ $key ] : NULL;
+    }
 
     // ==========================================
     // Utilities.
