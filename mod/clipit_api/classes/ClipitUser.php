@@ -59,7 +59,6 @@ class ClipitUser extends UBUser{
     }
 
     static function delete_cookies(){
-        global $CONFIG;
         $site = elgg_get_site_entity();
         $jxl_cookie_auth = new JxlCookies(get_config("JXL_SECRET"), get_site_domain($site->guid));
         $jxl_cookie_auth->delete_cookies();
