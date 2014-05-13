@@ -40,7 +40,7 @@ switch($mime_type['full']){
 switch ($mime_type['short']){
     case "image":
         $file_view = '<div class="img-preview">
-                    <div style="background-image: url(\''.elgg_normalize_url(elgg_format_url("file/thumbnail/$file->id/normal")).'\');"></div>
+                    <div style="background-image: url(\''.elgg_normalize_url(elgg_format_url("file/thumbnail/normal/$file->id")).'\');"></div>
                  </div>';
         break;
     case "audio":

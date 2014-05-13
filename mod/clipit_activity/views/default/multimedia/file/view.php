@@ -21,7 +21,7 @@ $file_view = "";
 switch($mimetype['short']){
     case "image":
         $file_view = elgg_view('output/img', array(
-            'src'  => "file/thumbnail/{$file->id}/{$size}",
+            'src'  => "file/thumbnail/{$size}/{$file->id}",
             'title' => $file->name,
             'class' => 'img-responsive'));
         break;
@@ -29,7 +29,7 @@ switch($mimetype['short']){
         if($mimetype['full'] == "application/pdf"){
             $file_view = '<div class="frame-container">';
             $file_view .= elgg_view('output/iframe', array(
-                'value'  => elgg_normalize_url(elgg_format_url("file/thumbnail/{$file->id}/{$size}")),
+                'value'  => elgg_normalize_url(elgg_format_url("file/thumbnail/{$size}/{$file->id}")),
                 'title' => $file->name,));
             $file_view .= '</div>';
         }

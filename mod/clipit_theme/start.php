@@ -16,7 +16,6 @@ function clipit_final_init() {
     global $CONFIG;
     $CONFIG->user = new ClipitUser(elgg_get_logged_in_user_guid());
     $role = $CONFIG->user->role;
-
     /**
      * Register menu footer
     */

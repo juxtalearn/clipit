@@ -6669,6 +6669,10 @@ fieldset[disabled] .elgg-layout-one-column .elgg-main .content .elgg-head ul.elg
   float: left !important;
   margin-right: 5px;
 }
+.landing .content {
+  padding: 0 !important;
+  background: transparent !important;
+}
 .elgg-sidebar {
   position: relative;
   min-height: 1px;
@@ -6837,6 +6841,10 @@ fieldset[disabled] .elgg-sidebar input.elgg-button-submit.active {
   .main-md .elgg-main {
     right: 33.33333333333333%;
   }
+}
+.table td {
+  border-bottom: 1px solid #bae6f6;
+  border-top: 0 !important;
 }
 .btn-normal {
   border: none;
@@ -7099,6 +7107,11 @@ li.list-item {
   padding-bottom: 10px;
   margin-bottom: 10px;
 }
+li.list-item:last-child {
+  margin-bottom: 0;
+  border-bottom: 0;
+  padding-bottom: 0;
+}
 .file-preview {
   position: relative;
   display: inline-block;
@@ -7221,6 +7234,55 @@ li.list-item {
   font-size: 200px;
   direction: ltr;
   cursor: pointer;
+}
+.upload-files input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  -ms-filter: 'alpha(opacity=0)';
+  direction: ltr;
+  cursor: pointer;
+}
+.upload-files-list {
+  background: #fff;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #bae6f6;
+  border-radius: 3px;
+}
+.upload-files-list .file {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  overflow: hidden;
+  border-bottom: 1px solid #bae6f6;
+}
+.upload-files-list .file:last-child {
+  border-bottom: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.upload-files-list .file img,
+.upload-files-list .file canvas,
+.upload-files-list .file .preview i {
+  width: 60px;
+  height: 40px;
+}
+.upload-files-list .file .preview {
+  float: left;
+  margin-right: 10px;
+  text-align: center;
+}
+.upload-files-list .file .details {
+  overflow: hidden;
+}
+.upload-files-list .file .progress {
+  display: block;
+}
+.upload-files-list .file .cancel {
+  color: #ff4343;
+  margin-left: 10px;
 }
 .landing h2.elgg-heading-main {
   display: none;

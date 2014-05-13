@@ -1,32 +1,24 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
- * User: equipo
- * Date: 17/02/14
- * Time: 12:27
- * To change this template use File | Settings | File Templates.
+ * ClipIt - JuxtaLearn Web Space
+ * PHP version:     >= 5.2
+ * Creation date:   9/05/14
+ * Last update:     9/05/14
+ * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC JuxtaLearn Project
+ * @version         $Version$
+ * @link            http://www.juxtalearn.eu
+ * @license         GNU Affero General Public License v3
+ * @package         ClipIt
  */
+$teachers = elgg_extract("teachers", $vars);
 ?>
 <h3 style="color: #32b4e5; margin-top: 5px;">Teachers</h3>
 <ul style="background: #fff; padding: 10px;">
+    <?php foreach($teachers as $teacher_id):
+        $teacher = array_pop(ClipitUser::get_by_id(array($teacher_id)));
+    ?>
     <li class="list-item">
-        <img class="pull-left" style="margin-right: 10px;" src="http://juxtalearn.org/sandbox/clipit02/mod/profile/icondirect.php?lastcache=1378461434&joindate=1378461161&guid=133&size=small">
-        <div class="text-truncate">
-            <a href="http://juxtalearn.org/sandbox/clipit_befe/profile/student_1" title="Jose Antonio Martín" rel="nofollow">Manuel Gertrudix</a>
-            <div class="show">
-                <a href="http://juxtalearn.org/sandbox/clipit_befe/ajax/view/modal/messages/send?id=60" title="Jose Antonio Martín" data-target="#send-message-60" data-toggle="modal" rel="nofollow"><i class="fa fa-envelope"></i></a>
-                <small>@gertrudix</small>
-            </div>
-        </div>
+        <?php echo elgg_view("page/elements/user_block", array('entity' => $teacher)); ?>
     </li>
-    <li class="list-item" style="border-bottom: 0; margin-bottom: 0; padding-bottom: 0">
-        <img class="pull-left" style="margin-right: 10px;" src="http://juxtalearn.org/sandbox/clipit02/mod/profile/icondirect.php?lastcache=1378934833&joindate=1378934545&guid=442&size=small">
-        <div class="text-truncate">
-            <a href="http://juxtalearn.org/sandbox/clipit_befe/profile/student_1" title="Jose Antonio Martín" rel="nofollow">Jaime Urquiza Sanchez</a>
-            <div class="show">
-                <a href="http://juxtalearn.org/sandbox/clipit_befe/ajax/view/modal/messages/send?id=60" title="Jose Antonio Martín" data-target="#send-message-60" data-toggle="modal" rel="nofollow"><i class="fa fa-envelope"></i></a>
-                <small>@jaime.urquiza</small>
-            </div>
-        </div>
-    </li>
+    <?php endforeach; ?>
 </ul>

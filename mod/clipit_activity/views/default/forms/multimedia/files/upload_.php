@@ -12,10 +12,12 @@
  */
 $entity = elgg_extract('entity', $vars);
 ?>
+<div class="block" style="margin-bottom: 10px;">
     <a class="btn btn-default fileinput-button" style="position: relative; overflow: hidden">
         Add files
         <input type="file" name="files" id="uploadfilebutton" multiple>
     </a>
+</div>
 <?php
 
 //$body .= '<table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>';

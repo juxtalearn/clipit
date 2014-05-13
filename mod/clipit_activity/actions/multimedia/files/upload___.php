@@ -13,9 +13,9 @@
 $user_id = elgg_get_logged_in_user_guid();
 $entity_id = get_input('entity-id');
 $object = ClipitSite::lookup($entity_id);
-$file_name = get_input('file-name');
-$file_text = get_input('file-text');
-
+print_r($_POST);
+print_r($_FILES);
+die();
 switch($object['subtype']){
     // Clipit Activity
     case 'clipit_activity':
@@ -41,21 +41,26 @@ if(count($entity)==0){
 } else{
     $files = $_FILES['files'];
     $count = 0;
-
-    $new_file_id = ClipitFile::create(array(
-        'name' => $files['name'],
-        'description' => $file_text,
-        'temp_path'  => $files['tmp_name']
-    ));
-    if($new_file_id){
-        $entity_class::add_files($entity_id, array($new_file_id));
-    } else {
-        register_error(elgg_echo("file:cantupload"));
+    $new_file_ids = array();
+    foreach($files['name'] as $file){
+        if(!empty($files['name'][$count])){
+            $new_file_ids[] = ClipitFile::create(array(
+                'name' => $files['name'][$count],
+                'description' => "",
+                'temp_path'  => $files['tmp_name'][$count]
+            ));
+        } else {
+            register_error(elgg_echo("file:cantupload"));
+        }
+        $count++;
+    }
+    if(!empty($new_file_ids)){
+        // add files to entity
+        $entity_class::add_files($entity_id, $new_file_ids);
     }
 
     system_message(elgg_echo('file:uploaded'));
 }
-die();
 
 
 forward(REFERER);

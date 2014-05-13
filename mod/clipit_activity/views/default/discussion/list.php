@@ -14,7 +14,7 @@ $activity_id = elgg_get_page_owner_guid();
 $messages_array = array_pop(ClipitPost::get_by_destination(array($entity->id)));
 ?>
 <div style="margin-bottom: 15px;">
-    <?php echo elgg_view_form('discussion/create', array('data-validate'=> "true" ), array('entity'  => $entity)); ?>
+    <?php echo elgg_view_form('discussion/create', array('data-validate'=> 'true' ,'class'=> 'fileupload'), array('entity'  => $entity)); ?>
     <button type="button" data-toggle="modal" data-target="#create-new-topic" class="btn btn-default">Create a new topic</button>
 </div>
 <?php

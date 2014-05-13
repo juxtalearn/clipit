@@ -40,6 +40,7 @@ if (is_array($items) && count($items) > 0):
             if($progress_html){
                 $progress_html = "<div style='margin-bottom: 5px;'>{$progress_html}</div>";
             }
+            $teachers = ClipitActivity::get_teachers($item->id);
             ?>
             <li class='list-item col-md-12'>
                 <div class="row">
@@ -89,28 +90,16 @@ if (is_array($items) && count($items) > 0):
                                 <?php endif; ?>
                             </div>
                             <div class="col-xs-6">
-                                <small class='show'>Teacher</small>
+                                <small class='show'>Teacher/s</small>
                                 <ul style="max-height: 100px; overflow: auto;">
+                                    <?php
+                                    foreach($teachers as $teacher_id):
+                                        $teacher = array_pop(ClipitUser::get_by_id(array($teacher_id)));
+                                    ?>
                                     <li style="margin-bottom: 5px;">
-                                        <img class='pull-left' style='margin-right: 10px;' src='http://juxtalearn.org/sandbox/clipit02/mod/profile/icondirect.php?lastcache=1378461434&amp;joindate=1378461161&amp;guid=133&amp;size=small'>
-                                        <div class='text-truncate'>
-                                            <a href='http://juxtalearn.org/sandbox/clipit_befe/profile/student_1' title='Jose Antonio Martín' rel='nofollow'>Manuel Gertrudix</a>
-                                            <div class='show'>
-                                                <a href='http://juxtalearn.org/sandbox/clipit_befe/ajax/view/modal/messages/send?id=60' title='Jose Antonio Martín' data-target='#send-message-60' data-toggle='modal' rel='nofollow'><i class='fa fa-envelope'></i></a>
-                                                <small>@gertrudix</small>
-                                            </div>
-                                        </div>
+                                        <?php echo elgg_view("page/elements/user_block", array('entity' => $teacher)); ?>
                                     </li>
-                                    <li style="margin-bottom: 5px;">
-                                        <img class='pull-left' style='margin-right: 10px;' src='http://juxtalearn.org/sandbox/clipit02/mod/profile/icondirect.php?lastcache=1378934833&joindate=1378934545&guid=442&size=small'>
-                                        <div class='text-truncate'>
-                                            <a href='http://juxtalearn.org/sandbox/clipit_befe/profile/student_1' title='Jose Antonio Martín' rel='nofollow'>Jaime Urquiza Sanchez</a>
-                                            <div class='show'>
-                                                <a href='http://juxtalearn.org/sandbox/clipit_befe/ajax/view/modal/messages/send?id=60' title='Jose Antonio Martín' data-target='#send-message-60' data-toggle='modal' rel='nofollow'><i class='fa fa-envelope'></i></a>
-                                                <small>@jaime.urquiza</small>
-                                            </div>
-                                        </div>
-                                    </li>
+                                    <?php endforeach; ?>
                                 </ul>
                             </div>
                         </div>

@@ -13,6 +13,7 @@
 $english = array(
     // Activity
     'my_activities' => 'My activities',
+    'activities:none' => 'There are no activities...',
     'explore' => 'Explore',
     'past' => 'Past',
     'activity:profile' => 'Activity home',
@@ -63,6 +64,7 @@ $english = array(
     'file:cantremove' => 'Can not remove file',
     'file:edit' => 'Edit file',
     /* File types */
+    'file:general' => 'File',
     'file:document' => 'Document',
     'file:image' => 'Image',
     'file:video' => 'Video',

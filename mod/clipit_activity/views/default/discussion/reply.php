@@ -59,68 +59,10 @@ if($message->owner_id != $user_loggedin_id){
     </div>
     <div class="body-post">
         <?php echo text_reference($message->description); ?>
-        <!-- files -->
+        <!-- Attachs files -->
         <?php if($files_id): ?>
-            <div class="attachment-files row">
-                <span class="total-files"><i class="fa fa-paperclip"></i> <?php echo count($files_id);?> attachments</span>
-                <?php
-                foreach($files_id as $file_id):
-                    $file = array_pop(ClipitFile::get_by_id(array($file_id)));
-
-                    $isViewer = elgg_view("multimedia/file/view", array(
-                        'file'  => $file,
-                        'size'  => 'original' ));
-                    $href_viewer = false;
-                    if($isViewer){
-                        echo elgg_view("page/components/modal_remote", array('id'=> "viewer-id-{$file->id}" ));
-                        $href_viewer = "ajax/view/multimedia/file/viewer?id=".$file->id;
-                    }
-                ?>
-                    <div class="file col-md-3">
-                        <div class="preview">
-                            <div class="file-preview">
-                                <?php echo elgg_view('output/url', array(
-                                    'href'  => $href_viewer,
-                                    'title' => $file->name,
-                                    'data-target' => '#viewer-id-'.$file->id,
-                                    'data-toggle' => 'modal',
-                                    'text'  => elgg_view("multimedia/file/preview", array('file'  => $file))));
-                                ?>
-                            </div>
-                        </div>
-                        <div class="details">
-                            <strong>
-                            <?php if ($isViewer): ?>
-                                <?php echo elgg_view('output/url', array(
-                                    'href'  => $href_viewer,
-                                    'title' => $file->name,
-                                    'class' => 'text-truncate',
-                                    'data-target' => '#viewer-id-'.$file->id,
-                                    'data-toggle' => 'modal',
-                                    'text'  => $file->name));
-                                ?>
-                            <?php else: ?>
-                                <div class="name text-truncate" title="<?php echo $file->name; ?>">
-                                    <?php echo $file->name; ?>
-                                </div>
-                            <?php endif; ?>
-                            </strong>
-                            <?php echo elgg_view('output/url', array(
-                                'class' => 'btn btn-default btn-xs',
-                                'style' => 'margin-right: 5px;font-family: inherit;',
-                                'href'  => "file/download/".$file->id,
-                                'title' => $file->name,
-                                'text'  => '<i class="fa fa-download""></i>',
-                                'target' => 'blank_'
-                            ));
-                            ?>
-
-                            <small><?php echo formatFileSize($file->size); ?></small>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
+            <?php echo elgg_view("multimedia/file/attach_files", array('files' => $files_id)); ?>
         <?php endif; ?>
-        <!-- files end-->
+        <!-- Attachs files end-->
     </div>
 </div>

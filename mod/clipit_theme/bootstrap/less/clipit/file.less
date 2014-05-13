@@ -147,4 +147,55 @@
   direction: ltr;
   cursor: pointer;
 }
-
+// File list
+.upload-files{
+  input[type=file]{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    opacity: 0;
+    -ms-filter: 'alpha(opacity=0)';
+    direction: ltr;
+    cursor: pointer;
+  }
+}
+.upload-files-list{
+  background: #fff;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #bae6f6;
+  border-radius: 3px;
+  .file{
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    overflow: hidden;
+    border-bottom: 1px solid #bae6f6;
+    &:last-child{
+      border-bottom: 0;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    img,
+    canvas,
+    .preview i{
+      width: 60px;
+      height: 40px;
+    }
+    .preview{
+      float: left;
+      margin-right: 10px;
+      text-align: center;
+    }
+    .details{
+      overflow: hidden;
+    }
+    .progress{
+      display: block;
+    }
+    .cancel{
+      color: #ff4343;
+      margin-left: 10px;
+    }
+  }
+}

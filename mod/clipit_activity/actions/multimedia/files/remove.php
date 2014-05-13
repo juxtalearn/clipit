@@ -11,14 +11,16 @@
  * @package         ClipIt
  */
 $id = get_input('id');
-$file = array_pop(ClipitFile::get_by_id(array((int)$id)));
 $user_id = elgg_get_logged_in_user_guid();
+$ids = is_array($id) ? $id : array($id);
 
-if($file &&  $file->owner_id == $user_id){
-    ClipitFile::delete_by_id(array($file->id));
-    system_message(elgg_echo("file:removed", array($file->name)));
-} else{
-    register_error(elgg_echo("file:cantremove"));
+foreach($ids as $file_id){
+    $file = array_pop(ClipitFile::get_by_id(array((int)$file_id)));
+    if($file &&  $file->owner_id == $user_id){
+        ClipitFile::delete_by_id(array($file->id));
+        system_message(elgg_echo("file:removed", array($file->name)));
+    } else{
+        register_error(elgg_echo("file:cantremove"));
+    }
 }
-
 forward(REFERER);

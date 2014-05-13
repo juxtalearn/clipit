@@ -10,6 +10,7 @@
 $user_id = elgg_get_logged_in_user_guid();
 $entity_id = get_input('entity-id');
 $object = ClipitSite::lookup($entity_id);
+$file_ids = get_input('file-id');
 $discussion_title = get_input('discussion-title');
 $discussion_text = get_input('discussion-text');
 
@@ -43,6 +44,9 @@ if(count($entity)==0 || trim($discussion_title) == "" || trim($discussion_text) 
         'description' => $discussion_text,
         'destination' => $entity->id,
     ));
+    if($file_ids){
+        ClipitPost::add_files($new_message_id, $file_ids);
+    }
     // set read status true to the owner's message
     ClipitPost::set_read_status($new_message_id, true, array($user_id));
 

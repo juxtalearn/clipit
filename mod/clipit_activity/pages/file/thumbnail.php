@@ -24,13 +24,13 @@ header("Content-Disposition: inline; filename='{$file->name}'");
 
 switch ($size) {
     case "small":
-        $thumbdata = $file->thumb_small;
+        $thumbdata = file_get_contents($file->thumb_small['path']);
         break;
     case "normal":
-        $thumbdata = $file->thumb_normal;
+        $thumbdata = file_get_contents($file->thumb_normal['path']);
         break;
     case "large":
-        $thumbdata = $file->thumb_large;
+        $thumbdata = file_get_contents($file->thumb_large['path']);
         break;
     default:
         $thumbdata = file_get_contents($file->file_path);

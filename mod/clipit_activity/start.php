@@ -43,13 +43,13 @@ function clipit_activity_init() {
     elgg_register_action("multimedia/files/upload", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/files/upload.php");
     elgg_register_action("multimedia/files/remove", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/files/remove.php");
     elgg_register_action("multimedia/files/edit", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/files/edit.php");
+    elgg_register_action("multimedia/files/set_options", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/files/set_options.php");
     elgg_register_ajax_view('modal/multimedia/file/edit');
     elgg_register_ajax_view('multimedia/file/viewer');
     elgg_register_action("multimedia/links/extract_data", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/links/extract_data.php");
-    elgg_register_ajax_view('multimedia/file_upload');
-    elgg_register_ajax_view('multimedia/upload'); // debug
-    elgg_register_ajax_view('multimedia/upload_simple'); // debug
-    elgg_register_action("multimedia/files/upload_", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/files/upload.php"); // debug
+    elgg_register_ajax_view('multimedia/file/upload');
+    elgg_register_ajax_view('multimedia/file/attach_action');
+    elgg_register_action("multimedia/files/upload", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/files/upload.php");
     // Discussion
     elgg_register_action("discussion/create", elgg_get_plugins_path() . "clipit_activity/actions/discussion/create.php");
     elgg_register_action("discussion/remove", elgg_get_plugins_path() . "clipit_activity/actions/discussion/remove.php");
@@ -60,6 +60,33 @@ function clipit_activity_init() {
     elgg_register_action("discussion/reply/edit", elgg_get_plugins_path() . "clipit_activity/actions/discussion/reply/edit.php");
     elgg_register_ajax_view('modal/discussion/reply/edit');
     elgg_register_ajax_view('discussion/quote');
+
+    // Register javascript files
+    $files_upload_js = elgg_get_simplecache_url('js', 'upload');
+    elgg_register_simplecache_view('js/upload');
+    elgg_register_js('file:upload', $files_upload_js);
+
+    $files_attach_js = elgg_get_simplecache_url('js', 'attach');
+    elgg_register_simplecache_view('js/attach');
+    elgg_register_js('file:attach', $files_attach_js);
+    // jQuery file upload
+    elgg_register_js("jquery:fileupload:tmpl", elgg_get_site_url() . "mod/clipit_activity/vendors/fileupload/tmpl.min.js");
+    elgg_register_js("jquery:fileupload:load_image", elgg_get_site_url() . "mod/clipit_activity/vendors/fileupload/load-image.min.js");
+    elgg_register_js("jquery:fileupload:iframe_transport", elgg_get_site_url() . "mod/clipit_activity/vendors/fileupload/iframe-transport.js");
+    elgg_register_js("jquery:fileupload", elgg_get_site_url() . "mod/clipit_activity/vendors/fileupload/fileupload.js");
+    elgg_register_js("jquery:fileupload:process", elgg_get_site_url() . "mod/clipit_activity/vendors/fileupload/fileupload-process.js");
+    elgg_register_js("jquery:fileupload:image", elgg_get_site_url() . "mod/clipit_activity/vendors/fileupload/fileupload-image.js");
+    elgg_register_js("jquery:fileupload:validate", elgg_get_site_url() . "mod/clipit_activity/vendors/fileupload/fileupload-validate.js");
+    elgg_register_js("jquery:fileupload:ui", elgg_get_site_url() . "mod/clipit_activity/vendors/fileupload/fileupload-ui.js");
+    elgg_load_js("jquery:fileupload:tmpl");
+    elgg_load_js("jquery:fileupload:load_image");
+    elgg_load_js("jquery:fileupload:iframe_transport");
+    elgg_load_js("jquery:fileupload");
+    elgg_load_js("jquery:fileupload:process");
+    elgg_load_js("jquery:fileupload:image");
+    elgg_load_js("jquery:fileupload:validate");
+    elgg_load_js("jquery:fileupload:ui");
+
 }
 function activity_setup_sidebar_menus(){
     $activity_id =  elgg_get_page_owner_guid();
@@ -149,7 +176,6 @@ function activity_page_handler($page) {
 
     // Activity profile
     if(!isset($page[1])){
-        elgg_push_breadcrumb($activity->name);
         $content = elgg_view('activity/profile/layout', array('entity' => $activity));
         $params = array(
             'content'   => $content,
@@ -324,8 +350,12 @@ function activity_page_handler($page) {
         // Join to activity button
         elgg_extend_view("page/elements/owner_block", "page/components/button_join_activity");
     }
-    //$params['sidebar'] = elgg_view('activity/sidebar/teacher', array('entity' => $activity));
-    $teacher_sidebar = elgg_view('activity/sidebar/teacher', array('entity' => $activity));
+
+    $teachers = ClipitActivity::get_teachers($activity->id);
+    $teacher_sidebar = "";
+    if(!empty($teachers)){
+        $teacher_sidebar = elgg_view('activity/sidebar/teacher', array('teachers' => $teachers));
+    }
 
     $params['sidebar'] = $group_tools_sidebar . $teacher_sidebar;
     if(!$params['class']){
@@ -342,11 +372,11 @@ function activity_page_handler($page) {
  */
 function file_page_handler($page){
     if(isset($page[0]) && isset($page[1])){
-        $id = (int)$page[1];
         $action = (string)$page[0];
         $file_dir = elgg_get_plugins_path() . 'clipit_activity/pages/file';
         switch($action){
             case "download":
+                $id = (int)$page[1];
                 set_input("id", $id);
                 include($file_dir . "/download.php");
                 break;
@@ -354,8 +384,9 @@ function file_page_handler($page){
                 if(!isset($page[2])){
                     return false;
                 }
+                $id = (int)$page[2];
                 set_input("id", $id);
-                set_input("size", (string)$page[2]);
+                set_input("size", (string)$page[1]);
                 include($file_dir . "/thumbnail.php");
                 break;
             default:
@@ -411,7 +442,9 @@ function group_tools_page_handler($page, $activity){
             switch ($selected_tab) {
                 case 'files':
                     $files = ClipitGroup::get_files($group->id);
-                    $content = elgg_view('multimedia/files', array('entity' => $group, 'files' => $files, 'href' => $href));
+//                    $content = elgg_view('multimedia/files', array('entity' => $group, 'files' => $files, 'href' => $href));
+                    $content = elgg_view('multimedia/file/list', array('entity' => $group, 'files' => $files, 'href' => $href));
+
                     if (!$content) {
                         $content = elgg_echo('groups:none');
                     }
