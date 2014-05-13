@@ -332,7 +332,7 @@ function set_default_clipit_events(){
                 'description' => $item->description,
                 //'icon' => "$item->icon",
                 'icon' => "file-o",
-                'url' => "clipit_activity/{$activity->id}/group/files/view/{$item->id}",
+                'url' => "clipit_activity/{$activity->id}/group/multimedia/view/{$item->id}",
             )
         );
         return $params;
