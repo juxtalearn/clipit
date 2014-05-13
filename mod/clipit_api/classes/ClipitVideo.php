@@ -26,11 +26,18 @@ class ClipitVideo extends UBItem{
 
     public $tag_array = array();
     public $comment_array = array();
+    public $preview = "";
 
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
         $this->comment_array = static::get_comments($this->id);
         $this->tag_array = static::get_tags($this->id);
+        $this->preview = (string)$elgg_object->preview;
+    }
+
+    protected function copy_to_elgg($elgg_object){
+        parent::copy_to_elgg($elgg_object);
+        $elgg_object->preview = (string)$this->preview;
     }
 
     protected function save(){

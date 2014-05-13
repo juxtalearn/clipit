@@ -98,3 +98,4 @@ function clipit_auth_usertoken(){
 
     return false;
 }
+
