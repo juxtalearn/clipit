@@ -2,12 +2,11 @@
 $user = elgg_get_logged_in_user_guid();
 // order activity by recent deadline
 $my_activities = ClipitActivity::get_from_user($user);
-?>
-<script src="http://rawgithub.com/novus/nvd3/master/lib/d3.v2.js"></script>
-<script src="http://rawgithub.com/novus/nvd3/master/lib/fisheye.js"></script>
-<script src="http://rawgithub.com/novus/nvd3/master/nv.d3.js"></script>
 
-<link href="http://rawgithub.com/novus/nvd3/master/src/nv.d3.css" rel="stylesheet">
+elgg_load_js("nvd3:d3_v2");
+elgg_load_js("nvd3");
+elgg_load_css("nvd3:css");
+?>
 <style>
     .module-group_activity svg {
         height: 200px;
@@ -22,9 +21,9 @@ $my_activities = ClipitActivity::get_from_user($user);
 </style>
 <script>
     <?php
-    $num = 1;
-    foreach($my_activities as $activity){
-    ?>
+     $num = 1;
+     foreach($my_activities as $activity){
+     ?>
     nv.addGraph(function() {
         var chart = nv.models.discreteBarChart()
             .x(function(d) { return d.label })
@@ -68,6 +67,7 @@ $my_activities = ClipitActivity::get_from_user($user);
      }
      ?>
 
+
     $(document).ready(function(){
 
         $("#next").click(function(){
@@ -94,15 +94,6 @@ $my_activities = ClipitActivity::get_from_user($user);
     });
 </script>
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: equipo
- * Date: 6/02/14
- * Time: 12:37
- * To change this template use File | Settings | File Templates.
- */
-
-
 
 
 $num = 1;

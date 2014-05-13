@@ -112,6 +112,10 @@ function clipit_final_init() {
         elgg_register_js("jquery:validate", $CONFIG->url . "mod/clipit_theme/vendors/jquery.validate.js");
         // jquery tokeninput (automcomplete)
         elgg_register_js("jquery:tokeninput", $CONFIG->url . "mod/clipit_theme/vendors/tokeninput.js");
+        // NVD3 chart
+        elgg_register_js("nvd3:d3_v2", $CONFIG->url . "mod/clipit_theme/vendors/nvd3/d3.v2.js");
+        elgg_register_js("nvd3", $CONFIG->url . "mod/clipit_theme/vendors/nvd3/nv.d3.js");
+        elgg_register_css("nvd3:css", $CONFIG->url . "mod/clipit_theme/vendors/nvd3/nv.d3.css");
 
 
         $clipit_js = elgg_get_simplecache_url('js', 'clipit');
