@@ -48,6 +48,32 @@ abstract class UBCollection{
     }
 
     /**
+     * Sets Items to a Collection.
+     *
+     * @param int   $id Id from Collection to add Items to.
+     * @param array $item_array Array of Item Ids to set.
+     * @param string $rel_name Name of the relationship to use.
+     * @param bool $exclusive Whether the added items have an exclusive relationship with the collection.
+     *
+     * @return bool Returns true if success, false if error
+     */
+    static function set_items($id, $item_array, $rel_name, $exclusive = false){
+        static::remove_all_items($id, $rel_name);
+        foreach($item_array as $item_id){
+            if($exclusive){
+                $rel_array = get_entity_relationships($item_id, true);
+                foreach($rel_array as $rel){
+                    if($rel->relationship == $rel_name){
+                        delete_relationship($rel->id);
+                    }
+                }
+            }
+            add_entity_relationship($id, $rel_name, $item_id);
+        }
+        return true;
+    }
+
+    /**
      * Get Items from a Collection.
      *
      * @param int $id Id from Collection to get Items from.

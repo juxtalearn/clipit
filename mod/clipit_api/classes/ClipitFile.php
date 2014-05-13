@@ -41,7 +41,7 @@ class ClipitFile extends UBFile{
      */
     protected function save(){
         parent::save();
-        static::add_tags($this->id, $this->tag_array);
+        static::set_tags($this->id, $this->tag_array);
         return $this->id;
     }
 
@@ -55,6 +55,18 @@ class ClipitFile extends UBFile{
      */
     static function add_tags($id, $tag_array){
         return UBCollection::add_items($id, $tag_array, static::REL_FILE_TAG);
+    }
+
+    /**
+     * Set Tags to a File.
+     *
+     * @param int   $id Id of the File to set Tags to.
+     * @param array $tag_array Array of Tag Ids to set to the Group.
+     *
+     * @return bool Returns true if added correctly, or false if error.
+     */
+    static function set_tags($id, $tag_array){
+        return UBCollection::set_items($id, $tag_array, static::REL_FILE_TAG);
     }
 
     /**
