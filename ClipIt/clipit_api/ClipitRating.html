@@ -3,13 +3,13 @@
   <html xmlns="http://www.w3.org/1999/xhtml">
 		<head>
 			<!-- template designed by Marco Von Ballmoos -->
-			<title>Docs For Class ClipitSTA</title>
+			<title>Docs For Class ClipitRating</title>
 			<link rel="stylesheet" href="../../media/stylesheet.css" />
 			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
 		</head>
 		<body>
 			<div class="page-body">			
-<h2 class="class-name">Class ClipitSTA</h2>
+<h2 class="class-name">Class ClipitRating</h2>
 
 <a name="sec-description"></a>
 <div class="info-box">
@@ -24,17 +24,15 @@
 			</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Class ClipitSTA</p>
+<p class="short-description">Class ClipitRating</p>
 		<p class="notes">
-			Located in <a class="field" href="_mod---clipit_api---classes---ClipitSTA.php.html">/mod/clipit_api/classes/ClipitSTA.php</a> (line <span class="field">19</span>)
+			Located in <a class="field" href="_mod---clipit_api---classes---ClipitRating.php.html">/mod/clipit_api/classes/ClipitRating.php</a> (line <span class="field">19</span>)
 		</p>
 		
 				
 		<pre><a href="../../ClipIt/urjc_backend/UBItem.html">UBItem</a>
    |
-   --<a href="../../ClipIt/urjc_backend/UBFile.html">UBFile</a>
-      |
-      --ClipitSTA</pre>
+   --ClipitRating</pre>
 	
 			</div>
 </div>
@@ -56,7 +54,7 @@
 		<div class="info-box-body">
 			<div class="const-summary">
 								<div class="const-title">
-					<a href="#SUBTYPE" title="details" class="const-name">SUBTYPE</a> = 					<span class="var-type"> &quot;clipit_sta&quot;</span>
+					<a href="#SUBTYPE" title="details" class="const-name">SUBTYPE</a> = 					<span class="var-type"> &quot;clipit_rating&quot;</span>
 
 				</div>
 							</div>
@@ -77,17 +75,21 @@
 					</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-																																								<div class="var-title">
-					<span class="var-type">mixed</span>
-					<a href="#$resource_url" title="details" class="var-name">$resource_url</a>
+																																																<div class="var-title">
+					<span class="var-type">int</span>
+					<a href="#$overall_rating" title="details" class="var-name">$overall_rating</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$rating_array" title="details" class="var-name">$rating_array</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$tag_comment_array" title="details" class="var-name">$tag_comment_array</a>
 				</div>
 																<div class="var-title">
 					<span class="var-type">mixed</span>
-					<a href="#$tag_array" title="details" class="var-name">$tag_array</a>
-				</div>
-																<div class="var-title">
-					<span class="var-type">mixed</span>
-					<a href="#$tricky_topic" title="details" class="var-name">$tricky_topic</a>
+					<a href="#$target" title="details" class="var-name">$target</a>
 				</div>
 											</div>
 		</div>
@@ -111,7 +113,7 @@
 												<div class="method-definition">
 											<span class="method-result">void</span>
 										<a href="#copy_to_elgg" title="details" class="method-name">copy_to_elgg</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$elgg_object</span>)
+											(<span class="var-type"><a href="../../Elgg-Core/DataModel-Object/ElggObject.html">ElggObject</a></span>&nbsp;<span class="var-name">$elgg_object</span>)
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
@@ -137,40 +139,20 @@
 							
 					</div>
 		<div class="info-box-body">
-			<a name="var$resource_url" id="$resource_url"><!-- --></A>
-<div class="oddrow">
-
-	<div class="var-header">
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$resource_url</span>
-			 = <span class="var-default"> &quot;&quot;</span>			(line <span class="line-number">22</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	
-		
-		
-
-</div>
-<a name="var$tag_array" id="$tag_array"><!-- --></A>
+			<a name="var$overall_rating" id="$overall_rating"><!-- --></A>
 <div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$tag_array</span>
-			 = <span class="var-default">array()</span>			(line <span class="line-number">24</span>)
+			<span class="var-type">int</span>
+			<span class="var-name">$overall_rating</span>
+			 = <span class="var-default"> 0</span>			(line <span class="line-number">29</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
 	<ul class="tags">
+				<li><span class="field">var:</span> Overall rating opinionfrom 0 to 10</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -179,14 +161,58 @@
 		
 
 </div>
-<a name="var$tricky_topic" id="$tricky_topic"><!-- --></A>
+<a name="var$rating_array" id="$rating_array"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$rating_array</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number">33</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> Ratings in the form: rating_array[&quot;rating_name&quot;]=&gt;&quot;rating_value&quot;</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$tag_comment_array" id="$tag_comment_array"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$tag_comment_array</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number">37</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">var:</span> Comments about Tags used in target in the form: comment_array[&quot;comment_name&quot;]=&gt;&quot;comment&quot;</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$target" id="$target"><!-- --></A>
 <div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
-			<span class="var-name">$tricky_topic</span>
-			 = <span class="var-default"> 0</span>			(line <span class="line-number">23</span>)
+			<span class="var-name">$target</span>
+			 = <span class="var-default"> 0</span>			(line <span class="line-number">25</span>)
 		</span>
 	</div>
 
@@ -202,33 +228,6 @@
 </div>
 							<h4>Inherited Variables</h4>
 				<A NAME='inherited_vars'><!-- --></A>
-									<p>Inherited from <span class="classname"><a href="../../ClipIt/urjc_backend/UBFile.html">UBFile</a></span></p>
-					<blockquote>
-													<span class="var-title">
-								<span class="var-name"><a href="../../ClipIt/urjc_backend/UBFile.html#var$data">UBFile::$data</a></span><br>
-							</span>
-													<span class="var-title">
-								<span class="var-name"><a href="../../ClipIt/urjc_backend/UBFile.html#var$file_path">UBFile::$file_path</a></span><br>
-							</span>
-													<span class="var-title">
-								<span class="var-name"><a href="../../ClipIt/urjc_backend/UBFile.html#var$mime_type">UBFile::$mime_type</a></span><br>
-							</span>
-													<span class="var-title">
-								<span class="var-name"><a href="../../ClipIt/urjc_backend/UBFile.html#var$size">UBFile::$size</a></span><br>
-							</span>
-													<span class="var-title">
-								<span class="var-name"><a href="../../ClipIt/urjc_backend/UBFile.html#var$temp_path">UBFile::$temp_path</a></span><br>
-							</span>
-													<span class="var-title">
-								<span class="var-name"><a href="../../ClipIt/urjc_backend/UBFile.html#var$thumb_large">UBFile::$thumb_large</a></span><br>
-							</span>
-													<span class="var-title">
-								<span class="var-name"><a href="../../ClipIt/urjc_backend/UBFile.html#var$thumb_normal">UBFile::$thumb_normal</a></span><br>
-							</span>
-													<span class="var-title">
-								<span class="var-name"><a href="../../ClipIt/urjc_backend/UBFile.html#var$thumb_small">UBFile::$thumb_small</a></span><br>
-							</span>
-											</blockquote> 
 									<p>Inherited from <span class="classname"><a href="../../ClipIt/urjc_backend/UBItem.html">UBItem</a></span></p>
 					<blockquote>
 													<span class="var-title">
@@ -272,7 +271,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">copy_to_elgg</span> (line <span class="line-number">33</span>)
+		<span class="method-title">copy_to_elgg</span> (line <span class="line-number">50</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -285,28 +284,22 @@
 		<span class="method-name">
 			copy_to_elgg
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$elgg_object</span>)
+					(<span class="var-type"><a href="../../Elgg-Core/DataModel-Object/ElggObject.html">ElggObject</a></span>&nbsp;<span class="var-name">$elgg_object</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$elgg_object</span>			</li>
+				<span class="var-type"><a href="../../Elgg-Core/DataModel-Object/ElggObject.html">ElggObject</a></span>
+				<span class="var-name">$elgg_object</span><span class="var-description">: Elgg object instance to save Item to</span>			</li>
 				</ul>
 		
-			<hr class="separator" />
-		<div class="notes">Redefinition of:</div>
-		<dl>
-			<dt><a href="../../ClipIt/urjc_backend/UBFile.html#methodcopy_to_elgg">UBFile::copy_to_elgg()</a></dt>
-						<dd>Saves this instance to the system</dd>
-					</dl>
 			
 	</div>
 <a name="methodload_from_elgg" id="load_from_elgg"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">load_from_elgg</span> (line <span class="line-number">26</span>)
+		<span class="method-title">load_from_elgg</span> (line <span class="line-number">40</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -328,25 +321,10 @@
 				<span class="var-name">$elgg_object</span>			</li>
 				</ul>
 		
-			<hr class="separator" />
-		<div class="notes">Redefinition of:</div>
-		<dl>
-			<dt><a href="../../ClipIt/urjc_backend/UBFile.html#methodload_from_elgg">UBFile::load_from_elgg()</a></dt>
-					</dl>
 			
 	</div>
 							<h4>Inherited Methods</h4>
 				<a name='inherited_methods'><!-- --></a>	
-									<!-- =========== Summary =========== -->
-					<p>Inherited From <span class="classname"><a href="../../ClipIt/urjc_backend/UBFile.html">UBFile</a></span></p>
-					<blockquote>
-													<span class="method-name"><a href="../../ClipIt/urjc_backend/UBFile.html#method__construct">UBFile::__construct()</a></span><br>
-													<span class="method-name"><a href="../../ClipIt/urjc_backend/UBFile.html#methodcopy_to_elgg">UBFile::copy_to_elgg()</a></span><br>
-													<span class="method-name"><a href="../../ClipIt/urjc_backend/UBFile.html#methodget_mime_type">UBFile::get_mime_type()</a></span><br>
-													<span class="method-name"><a href="../../ClipIt/urjc_backend/UBFile.html#methodget_simple_mime_type">UBFile::get_simple_mime_type()</a></span><br>
-													<span class="method-name"><a href="../../ClipIt/urjc_backend/UBFile.html#methodload_from_elgg">UBFile::load_from_elgg()</a></span><br>
-													<span class="method-name"><a href="../../ClipIt/urjc_backend/UBFile.html#methodsave">UBFile::save()</a></span><br>
-											</blockquote>
 									<!-- =========== Summary =========== -->
 					<p>Inherited From <span class="classname"><a href="../../ClipIt/urjc_backend/UBItem.html">UBItem</a></span></p>
 					<blockquote>
@@ -376,8 +354,8 @@
 	<div class="const-header">
 		<span class="const-title">
 			<span class="const-name">SUBTYPE</span>
-			 = <span class="const-default"> &quot;clipit_sta&quot;</span>
-			(line <span class="line-number">20</span>)
+			 = <span class="const-default"> &quot;clipit_rating&quot;</span>
+			(line <span class="line-number">23</span>)
 		</span>
 	</div>
 
@@ -387,27 +365,6 @@
 </div>
 							<h4>Inherited Constants</h4>
 				<A NAME='inherited_vars'><!-- --></A>
-									<p>Inherited from <span class="classname"><a href="../../ClipIt/urjc_backend/UBFile.html">UBFile</a></span></p>
-					<blockquote>
-													<span class="const-title">
-								<span class="const-name"><a href="../../ClipIt/urjc_backend/UBFile.html#constDEFAULT_FILENAME">UBFile::DEFAULT_FILENAME</a></span><br>
-							</span>
-													<span class="const-title">
-								<span class="const-name"><a href="../../ClipIt/urjc_backend/UBFile.html#constSUBTYPE">UBFile::SUBTYPE</a></span><br>
-							</span>
-													<span class="const-title">
-								<span class="const-name"><a href="../../ClipIt/urjc_backend/UBFile.html#constTHUMB_LARGE">UBFile::THUMB_LARGE</a></span><br>
-							</span>
-													<span class="const-title">
-								<span class="const-name"><a href="../../ClipIt/urjc_backend/UBFile.html#constTHUMB_NORMAL">UBFile::THUMB_NORMAL</a></span><br>
-							</span>
-													<span class="const-title">
-								<span class="const-name"><a href="../../ClipIt/urjc_backend/UBFile.html#constTHUMB_SMALL">UBFile::THUMB_SMALL</a></span><br>
-							</span>
-													<span class="const-title">
-								<span class="const-name"><a href="../../ClipIt/urjc_backend/UBFile.html#constTIMESTAMP_DELIMITER">UBFile::TIMESTAMP_DELIMITER</a></span><br>
-							</span>
-											</blockquote> 
 									<p>Inherited from <span class="classname"><a href="../../ClipIt/urjc_backend/UBItem.html">UBItem</a></span></p>
 					<blockquote>
 													<span class="const-title">
