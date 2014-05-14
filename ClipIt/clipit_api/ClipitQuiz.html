@@ -54,6 +54,10 @@
 		<div class="info-box-body">
 			<div class="const-summary">
 								<div class="const-title">
+					<a href="#REL_QUIZ_QUIZQUESTION" title="details" class="const-name">REL_QUIZ_QUIZQUESTION</a> = 					<span class="var-type"> &quot;quiz-quizquestion&quot;</span>
+
+				</div>
+								<div class="const-title">
 					<a href="#SUBTYPE" title="details" class="const-name">SUBTYPE</a> = 					<span class="var-type"> &quot;clipit_quiz&quot;</span>
 
 				</div>
@@ -136,10 +140,15 @@
 										<a href="#remove_questions" title="details" class="method-name">remove_questions</a>
 											(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$question_array</span>)
 									</div>
-																<div class="method-definition">
+																								<div class="method-definition">
 					static 						<span class="method-result">int|bool</span>
 										<a href="#set_properties" title="details" class="method-name">set_properties</a>
 											(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$prop_value_array</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">bool</span>
+										<a href="#set_questions" title="details" class="method-name">set_questions</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$question_array</span>)
 									</div>
 								
 																				<div class="method-definition">
@@ -151,6 +160,11 @@
 											<span class="method-result">void</span>
 										<a href="#load_from_elgg" title="details" class="method-name">load_from_elgg</a>
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$elgg_object</span>)
+									</div>
+																								<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#save" title="details" class="method-name">save</a>
+										()
 									</div>
 																								</div>
 		</div>
@@ -172,13 +186,13 @@
 					</div>
 		<div class="info-box-body">
 			<a name="var$author_name" id="$author_name"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$author_name</span>
-			 = <span class="var-default"> &quot;&quot;</span>			(line <span class="line-number">43</span>)
+			 = <span class="var-default"> &quot;&quot;</span>			(line <span class="line-number">44</span>)
 		</span>
 	</div>
 
@@ -193,13 +207,13 @@
 
 </div>
 <a name="var$embed_url" id="$embed_url"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$embed_url</span>
-			 = <span class="var-default"> &quot;&quot;</span>			(line <span class="line-number">41</span>)
+			 = <span class="var-default"> &quot;&quot;</span>			(line <span class="line-number">42</span>)
 		</span>
 	</div>
 
@@ -214,13 +228,13 @@
 
 </div>
 <a name="var$public" id="$public"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">bool</span>
 			<span class="var-name">$public</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">31</span>)
+			 = <span class="var-default"> false</span>			(line <span class="line-number">32</span>)
 		</span>
 	</div>
 
@@ -236,13 +250,13 @@
 
 </div>
 <a name="var$question_array" id="$question_array"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">array</span>
 			<span class="var-name">$question_array</span>
-			 = <span class="var-default">array()</span>			(line <span class="line-number">35</span>)
+			 = <span class="var-default">array()</span>			(line <span class="line-number">36</span>)
 		</span>
 	</div>
 
@@ -258,13 +272,13 @@
 
 </div>
 <a name="var$scores_url" id="$scores_url"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$scores_url</span>
-			 = <span class="var-default"> &quot;&quot;</span>			(line <span class="line-number">42</span>)
+			 = <span class="var-default"> &quot;&quot;</span>			(line <span class="line-number">43</span>)
 		</span>
 	</div>
 
@@ -279,13 +293,13 @@
 
 </div>
 <a name="var$target" id="$target"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$target</span>
-			 = <span class="var-default"> &quot;&quot;</span>			(line <span class="line-number">27</span>)
+			 = <span class="var-default"> &quot;&quot;</span>			(line <span class="line-number">28</span>)
 		</span>
 	</div>
 
@@ -301,13 +315,13 @@
 
 </div>
 <a name="var$tricky_topic" id="$tricky_topic"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">int</span>
 			<span class="var-name">$tricky_topic</span>
-			 = <span class="var-default"> 0</span>			(line <span class="line-number">39</span>)
+			 = <span class="var-default"> 0</span>			(line <span class="line-number">40</span>)
 		</span>
 	</div>
 
@@ -363,10 +377,10 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="methodadd_questions" id="add_questions"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method add_questions</span> (line <span class="line-number">104</span>)
+		<span class="method-title">static method add_questions</span> (line <span class="line-number">110</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -396,10 +410,10 @@
 			
 	</div>
 <a name="methodget_questions" id="get_questions"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_questions</span> (line <span class="line-number">155</span>)
+		<span class="method-title">static method get_questions</span> (line <span class="line-number">146</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -426,10 +440,10 @@
 			
 	</div>
 <a name="methodremove_questions" id="remove_questions"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method remove_questions</span> (line <span class="line-number">127</span>)
+		<span class="method-title">static method remove_questions</span> (line <span class="line-number">135</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -459,10 +473,10 @@
 			
 	</div>
 <a name="methodset_properties" id="set_properties"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method set_properties</span> (line <span class="line-number">78</span>)
+		<span class="method-title">static method set_properties</span> (line <span class="line-number">84</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -491,12 +505,45 @@
 		
 			
 	</div>
+<a name="methodset_questions" id="set_questions"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method set_questions</span> (line <span class="line-number">122</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets Quiz Questions to a Quiz.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Returns true if success, false if error</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			set_questions
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$question_array</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$id</span><span class="var-description">: Id from Quiz to set Questions to</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$question_array</span><span class="var-description">: Array of Questions to set</span>			</li>
+				</ul>
+		
+			
+	</div>
 
 <a name="methodcopy_to_elgg" id="copy_to_elgg"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">copy_to_elgg</span> (line <span class="line-number">59</span>)
+		<span class="method-title">copy_to_elgg</span> (line <span class="line-number">60</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -524,7 +571,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">load_from_elgg</span> (line <span class="line-number">45</span>)
+		<span class="method-title">load_from_elgg</span> (line <span class="line-number">46</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -545,6 +592,29 @@
 				<span class="var-type"></span>
 				<span class="var-name">$elgg_object</span>			</li>
 				</ul>
+		
+			
+	</div>
+<a name="methodsave" id="save"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">save</span> (line <span class="line-number">70</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			save
+		</span>
+				()
+			</div>
+	
 		
 			
 	</div>
@@ -573,7 +643,22 @@
 							
 					</div>
 		<div class="info-box-body">
-			<a name="constSUBTYPE" id="SUBTYPE"><!-- --></A>
+			<a name="constREL_QUIZ_QUIZQUESTION" id="REL_QUIZ_QUIZQUESTION"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<span class="const-title">
+			<span class="const-name">REL_QUIZ_QUIZQUESTION</span>
+			 = <span class="const-default"> &quot;quiz-quizquestion&quot;</span>
+			(line <span class="line-number">24</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constSUBTYPE" id="SUBTYPE"><!-- --></A>
 <div class="oddrow">
 
 	<div class="const-header">
@@ -604,7 +689,7 @@
 	</div>
 
 	<p class="notes" id="credit">
-		Documentation generated on Wed, 14 May 2014 14:00:23 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
+		Documentation generated on Wed, 14 May 2014 15:00:23 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
 	</p>
 	</div></body>
 </html>
