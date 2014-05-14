@@ -45,7 +45,9 @@ class ClipitQuizQuestion extends UBItem{
      */
     public $video = 0;
 
-
+    /**
+     * @param ElggObject $elgg_object
+     */
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
         $this->tag_array = static::get_tags($this->id);
@@ -92,13 +94,9 @@ class ClipitQuizQuestion extends UBItem{
         parent::delete();
     }
 
-    static function prueba(){
-
-    }
-
     /**
-     * @param $id
-     * @param $result_array
+     * @param int $id
+     * @param array $result_array
      * @return bool
      */
     static function add_quiz_results($id, $result_array){
@@ -106,8 +104,8 @@ class ClipitQuizQuestion extends UBItem{
     }
 
     /**
-     * @param $id
-     * @param $result_array
+     * @param int $id
+     * @param array $result_array
      * @return bool
      */
     static function set_quiz_results($id, $result_array){
