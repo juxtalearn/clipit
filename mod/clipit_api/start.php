@@ -21,6 +21,7 @@ elgg_register_event_handler('init', 'system', 'clipit_api_init');
  */
 function clipit_api_init(){
     loadFiles(elgg_get_plugins_path() . "clipit_api/libraries/");
+    loadFiles(elgg_get_plugins_path() . "clipit_api/libraries/juxtalearn-cookie-authentication/");
     clipit_expose_api();
 }
 

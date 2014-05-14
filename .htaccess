@@ -1,6 +1,3 @@
-# Added for Spain
-SetEnv TZ Europe/Madrid
-
 # Elgg htaccess directives
 
 <Files "htaccess_dist">
