@@ -75,4 +75,12 @@ class UBSite{
             }
         }
     }
+
+    static function get_domain(){
+        $site = elgg_get_site_entity();
+        $urlData = parse_url($site->url);
+        $hostData = explode('.', $urlData['host']);
+        $hostData = array_reverse($hostData);
+        return $hostData[1] . '.' . $hostData[0];
+    }
 } 

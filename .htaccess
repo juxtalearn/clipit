@@ -1,8 +1,5 @@
 # Elgg htaccess directives
 
-php_flag display_errors on
-php_flag html_errors on
-
 <Files "htaccess_dist">
 	order allow,deny
 	deny from all

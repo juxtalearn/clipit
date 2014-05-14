@@ -1,5 +1,6 @@
 .idea
 .DS_Store
+php_errors.log
 nbproject
 engine/settings.php
 engine/handlers/php_errors.log

@@ -51,23 +51,15 @@ class ClipitUser extends UBUser{
         $user = static::get_by_login(array($login));
         $user = $user[$login];
         $token = UBSite::get_token($login, $password, static::COOKIE_TOKEN_DURATION);
-        $jxl_cookie_auth = new JuxtaLearn_Cookie_Authentication(get_config("jxl_secret"), static::get_domain());
+        $jxl_cookie_auth = new JuxtaLearn_Cookie_Authentication(get_config("jxl_secret"), ClipitSite::get_domain());
         $jxl_cookie_auth->set_required_cookie($user->login, $user->role, $user->id);
         $jxl_cookie_auth->set_name_cookie($user->name);
         $jxl_cookie_auth->set_token_cookie($token);
     }
 
     static function delete_cookies(){
-        $jxl_cookie_auth = new JuxtaLearn_Cookie_Authentication(get_config("jxl_secret"), static::get_domain());
+        $jxl_cookie_auth = new JuxtaLearn_Cookie_Authentication(get_config("jxl_secret"), ClipitSite::get_domain());
         $jxl_cookie_auth->delete_cookies();
-    }
-
-    static function get_domain(){
-        $site = elgg_get_site_entity();
-        $urlData = parse_url($site->url);
-        $hostData = explode('.', $urlData['host']);
-        $hostData = array_reverse($hostData);
-        return $hostData[1] . '.' . $hostData[0];
     }
 
     /**
