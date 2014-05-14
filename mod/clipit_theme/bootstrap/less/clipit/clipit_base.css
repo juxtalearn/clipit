@@ -7307,6 +7307,43 @@ li.list-item:last-child {
 .files-list .progress-extended {
   text-align: left;
 }
+.add-video .video-prev {
+  margin-right: 10px;
+  width: 250px;
+  height: 140px;
+  display: table;
+  background: #bae6f6;
+}
+.add-video .video-prev > i {
+  color: #fff;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 60px;
+  opacity: 1;
+}
+.add-video .video-prev > a img {
+  width: 250px;
+  display: none;
+}
+.add-video .video-info {
+  overflow: hidden;
+}
+.add-video .video-info .icon {
+  position: relative;
+}
+.add-video .video-info .icon span {
+  position: absolute;
+  top: 7px;
+  left: 5px;
+}
+.add-video .video-info .error {
+  margin-top: 5px;
+  display: none;
+}
+.add-video .video-info .error > small {
+  color: #ff4343;
+}
 .landing h2.elgg-heading-main {
   display: none;
 }

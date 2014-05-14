@@ -130,6 +130,9 @@ function video_url_parser($url){
             }
         }
     }
+    if(!$output['id']){
+        return false;
+    }
     // Video Data output
     return $output;
 }

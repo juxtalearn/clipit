@@ -231,3 +231,49 @@
     text-align: left;
   }
 }
+
+//
+// Add video form
+// --------------------------------------------------
+.add-video{
+  .video-prev{
+    margin-right: 10px;
+    width: 250px;
+    height: 140px;
+    display: table;
+    background: #bae6f6;
+    background: @blue-lighter;
+    > i{
+      color: #fff;
+      display: table-cell;
+      text-align: center;
+      vertical-align: middle;
+      font-size: 60px;
+      opacity: 1;
+    }
+    > a{
+      img{
+        width: 250px;
+        display: none;
+      }
+    }
+  }
+  .video-info{
+    overflow: hidden;
+    .icon{
+      position: relative;
+      span{
+        position: absolute;
+        top: 7px;
+        left: 5px;
+      }
+    }
+    .error{
+      margin-top: 5px;
+      display: none;
+      > small {
+        color: @red_clipit;
+      }
+    }
+  }
+}

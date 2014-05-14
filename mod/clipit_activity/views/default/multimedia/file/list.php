@@ -28,6 +28,23 @@ foreach($files as $file_id){
                 'text'  => elgg_view("multimedia/file/preview", array('file'  => $file)))).'
         </div>';
 
+    // Owner options (edit/delete)
+    $owner_options = "";
+    if($file->owner_id == elgg_get_logged_in_user_guid()){
+        $options = array(
+            'entity' => $file,
+            'edit' => array(
+                "data-target" => "#edit-file-{$file->id}",
+                "href" => elgg_get_site_url()."ajax/view/modal/multimedia/file/edit?id={$file->id}",
+                "data-toggle" => "modal"
+            ),
+            'remove' => array("href" => "action/multimedia/files/remove?id={$file->id}"),
+        );
+
+        $owner_options = elgg_view("page/components/options_list", $options);
+        // Remote modal, form content
+        echo elgg_view("page/components/modal_remote", array('id'=> "edit-file-{$file->id}" ));
+    }
     // Action buttons (Download|Publish)
     $buttons = '<div style="width: 35px;display: inline-block;float: right;text-align: center;">
                     '.elgg_view('output/url', array(
@@ -40,7 +57,6 @@ foreach($files as $file_id){
                         '.formatFileSize($file->size).'
                     </small>
                     </div>';
-    $owner_options = elgg_view("multimedia/owner_options", array('entity' => $file, 'type' => 'file'));
 
     $row = array(
         array(

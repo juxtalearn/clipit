@@ -20,9 +20,9 @@ $body .= elgg_view("input/hidden", array(
     'value' => $entity->id,
 ));
 $body .= '
-    <div class="file-block">
-        <div class="file-preview" >'.elgg_view("multimedia/file/preview", array('file'  => $entity)).'</div>
-        <div class="file-details">
+    <div class="multimedia-block">
+        <div class="multimedia-preview" >'.elgg_view("multimedia/file/preview", array('file'  => $entity)).'</div>
+        <div class="multimedia-details">
         <div>'.$entity->name.'</div>
         <small class="show"><strong>'.elgg_echo("file:" . $entity->mime_type['short']).'</strong></small>
         <small class="show">'.formatFileSize($entity->size).'</small>

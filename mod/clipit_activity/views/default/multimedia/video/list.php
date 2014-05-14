@@ -14,39 +14,6 @@ $entity = elgg_extract('entity', $vars);
 $video_ids = elgg_extract('videos', $vars);
 $href = elgg_extract("href", $vars);
 ?>
-<script>
-    $(function(){
-        $("#wrap").on("keyup", "#video-url", function(){
-            var form = $(this).closest("form");
-            var that = $(this);
-            var query = form.serialize();
-            var regex = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
-            if(!regex.test($(this).val()))
-                return false;
-            form.find(".loading").show();
-            form.find(".video-prev > i").removeClass("fa-play").addClass("fa-spinner fa-spin");
-            form.find("#group-hide").hide();
-            form.find("#link-favicon").hide();
-            tinymce.activeEditor.setContent("");
-            $.getJSON(elgg.config.wwwroot+"action/multimedia/videos/extract_data?"+query, function (data) {
-                //call process to show the result
-                if(data.id){
-                    form.find(".video-prev > i").addClass("fa-play").removeClass("fa-spinner fa-spin").hide();
-                    form.find(".loading").hide();
-                    form.find("#link-favicon").show();
-                    form.find("#group-hide").show();
-
-                    form.find("#link-favicon").attr("src", data.favicon);
-                    form.find("#video-title").val(data.title);
-                    tinymce.activeEditor.setContent(data.description);
-                    form.find(".video-prev > a").attr("href", that.val()).show();
-                    form.find(".video-prev a > img").attr("src", data.preview).show();
-                }
-            });
-            return false;
-        });
-    });
-</script>
 <?php if($vars['add_video']):?>
     <?php echo elgg_view_form('multimedia/videos/add', array('data-validate'=> "true" ), array('entity'  => $entity)); ?>
     <div class="block" style="margin-bottom: 20px;">

@@ -16,34 +16,19 @@ $body .= elgg_view("input/hidden", array(
     'name' => 'entity-id',
     'value' => $entity->id,
 ));
-$body .= '<div class="col-md-12">';
+$body .= '<div class="col-md-12 add-video">';
 $body .= '
-<div class="pull-left video-prev" style="
-    margin-right: 10px;
-    width: 250px;
-    height: 140px;
-    display: table;
-    background: #bae6f6;
-">
-  <i class="fa fa-play" style="
-    color: #fff;
-    display: table-cell;
-    text-align: center;     vertical-align: middle;
-    font-size: 60px;
-    opacity: 1;
-"></i>
-<a target="_blank">
-<img id="video-prev" src="http://b.vimeocdn.com/ts/450/621/450621782_640.jpg" style="
-    width: 250px;
-    display: none;
-">
-</a>
+<div class="pull-left video-prev">
+    <i class="fa fa-play"></i>
+    <a target="_blank">
+        <img id="video-prev" src="">
+    </a>
 </div>';
-$body .='<div style="overflow: hidden">';
+$body .='<div class="video-info">';
 $body .= '<div class="form-group">
-    <label for="link-url">'.elgg_echo("multimedia:links:add").'</label>
-    <div style="position:relative;">
-      <span style="position: absolute;top: 7px;left: 5px;">
+    <label for="video-url">'.elgg_echo("multimedia:video:add").'</label>
+    <div class="icon">
+      <span>
         <a class="loading" style="display:none;"><i style="width:16px;height:16px;" class="fa fa-spinner fa-spin"></i></a>
         <img id="link-favicon" src="http://www.google.com/s2/favicons?domain=">
       </span>
@@ -55,12 +40,15 @@ $body .= '<div class="form-group">
         'required' => true
     )).'
     </div>
+    <div class="error">
+        <small><strong>'.elgg_echo("video:url:error").'</strong></small>
+    </div>
 </div>';
 // Input group set hidden by default
 $body .= '<div id="group-hide" style="display: none">';
 
 $body .= '<div class="form-group">
-    <label for="link-title">'.elgg_echo("multimedia:links:title").'</label>
+    <label for="video-title">'.elgg_echo("multimedia:links:title").'</label>
     '.elgg_view("input/text", array(
         'name' => 'video-title',
         'id' => 'video-title',

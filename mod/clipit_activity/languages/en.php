@@ -77,6 +77,7 @@ $english = array(
     'videos' => 'Videos',
     'video' => 'Video',
     'videos:none' => 'No videos',
+    'video:url:error' => 'Incorrect url or video not found',
     'video:add' => 'Add video url',
 
     // Publications
