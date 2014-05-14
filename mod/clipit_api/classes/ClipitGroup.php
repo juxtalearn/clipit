@@ -29,6 +29,7 @@ class ClipitGroup extends UBItem{
     public $user_array = array();
     public $file_array = array();
     public $video_array = array();
+    public $activity = 0;
 
     /**
      * @param ElggObject $elgg_object Elgg Object to load parameters from.
@@ -38,6 +39,7 @@ class ClipitGroup extends UBItem{
         $this->user_array = static::get_users($this->id);
         $this->file_array = static::get_files($this->id);
         $this->video_array = static::get_videos($this->id);
+        $this->activity = static::get_activity($this->id);
     }
 
     /**
@@ -50,6 +52,9 @@ class ClipitGroup extends UBItem{
         static::set_users($this->id, $this->user_array);
         static::set_files($this->id, $this->file_array);
         static::set_videos($this->id, $this->video_array);
+        if($this->activity != 0){
+            ClipitActivity::add_groups($this->activity, array($this->id));
+        }
         return $this->id;
     }
 

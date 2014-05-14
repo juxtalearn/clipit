@@ -21,6 +21,7 @@ class ClipitQuiz extends UBItem{
      * @const string Elgg entity subtype for this class
      */
     const SUBTYPE = "clipit_quiz";
+    const REL_QUIZ_QUIZQUESTION = "quiz-quiz_question";
     /**
      * @var string Target interface for Quiz display (e.g.: "web space", "large display"...)
      */
@@ -32,7 +33,7 @@ class ClipitQuiz extends UBItem{
     /**
      * @var array Array of ClipitQuizQuestion ids (int) included in this Quiz (optional)
      */
-    public $question_array = array();
+    public $quiz_question_array = array();
     /**
      * @var int Id of Taxonomy used as topic for this Quiz (optional)
      */
@@ -44,10 +45,10 @@ class ClipitQuiz extends UBItem{
 
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
-        $this->public = (bool)$elgg_object->public;
-        $this->question_array = (array)$elgg_object->question_array;
-        $this->tricky_topic = (int)$elgg_object->tricky_topic;
-        $this->target = (string)$elgg_object->target;
+        $this->quiz_question_array = static::get_quiz_questions($this->id);
+        $this->public = (bool) $elgg_object->public;
+        $this->tricky_topic = (int) $elgg_object->tricky_topic;
+        $this->target = (string) $elgg_object->target;
         $this->embed_url = (string) $elgg_object->embed_url;
         $this->scores_url = (string) $elgg_object->scores_url;
         $this->author_name = (string) $elgg_object->author_name;
@@ -59,12 +60,17 @@ class ClipitQuiz extends UBItem{
     protected function copy_to_elgg($elgg_object){
         parent::copy_to_elgg($elgg_object);
         $elgg_object->public = (bool)$this->public;
-        $elgg_object->question_array = (array)$this->question_array;
         $elgg_object->tricky_topic = (int)$this->tricky_topic;
         $elgg_object->target = (string)$this->target;
         $elgg_object->embed_url = (string) $this->embed_url;
         $elgg_object->scores_url = (string) $this->scores_url;
         $elgg_object->author_name = (string) $this->author_name;
+    }
+
+    protected function save(){
+        parent::save();
+        static::set_quiz_questions($this->id, $this->quiz_question_array);
+        return $this->id;
     }
 
     /**
@@ -101,20 +107,22 @@ class ClipitQuiz extends UBItem{
      *
      * @return bool Returns true if success, false if error
      */
-    static function add_questions($id, $question_array){
-        if(!$quiz = new ClipitQuiz($id)){
-            return false;
-        }
-        if(!$quiz->question_array){
-            $quiz->question_array = $question_array;
-        } else{
-            $quiz->question_array = array_merge($quiz->question_array, $question_array);
-        }
-        if(!$quiz->save()){
-            return false;
-        }
-        return true;
+    static function add_quiz_questions($id, $question_array){
+        return UBCollection::add_items($id, $question_array, static::REL_QUIZ_QUIZQUESTION);
     }
+
+    /**
+     * Sets Quiz Questions to a Quiz.
+     *
+     * @param int   $id Id from Quiz to set Questions to
+     * @param array $question_array Array of Questions to set
+     *
+     * @return bool Returns true if success, false if error
+     */
+    static function set_quiz_questions($id, $question_array){
+        return UBCollection::set_items($id, $question_array, static::REL_QUIZ_QUIZQUESTION);
+    }
+
 
     /**
      * Remove Quiz Questions from a Quiz.
@@ -124,25 +132,8 @@ class ClipitQuiz extends UBItem{
      *
      * @return bool Returns true if success, false if error
      */
-    static function remove_questions($id, $question_array){
-        if(!$quiz = new ClipitQuiz($id)){
-            return false;
-        }
-        if(!$quiz->question_array){
-            return false;
-        }
-        foreach($question_array as $question){
-            $key = array_search($question, $quiz->question_array);
-            if(isset($key)){
-                unset($quiz->question_array[$key]);
-            } else{
-                return false;
-            }
-        }
-        if(!$quiz->save()){
-            return false;
-        }
-        return true;
+    static function remove_quiz_questions($id, $question_array){
+        return UBCollection::remove_items($id, $question_array, static::REL_QUIZ_QUIZQUESTION);
     }
 
     /**
@@ -152,19 +143,7 @@ class ClipitQuiz extends UBItem{
      *
      * @return array|bool Returns an array of ClipitQuizQuestion objects, or false if error
      */
-    static function get_questions($id){
-        if(!$quiz = new ClipitQuiz($id)){
-            return false;
-        }
-        $quiz_question_array = array();
-        foreach($quiz->question_array as $quiz_question_id){
-            if(!$quiz_question = new ClipitQuizQuestion($quiz_question_id)){
-                $quiz_question_array[$quiz_question_id] = null;
-            } else{
-                $quiz_question_array[$quiz_question_id] = $quiz_question;
-            }
-        }
-        return $quiz_question_array;
-
+    static function get_quiz_questions($id){
+        return UBCollection::get_items($id, static::REL_QUIZ_QUIZQUESTION);
     }
 }
