@@ -6,12 +6,12 @@ http://www.urjc.es/version_ingles/
     - Estefanía Martín <estefania.martin@urjc.es>
     - Isidoro Hernán-Losada <isidoro.hernan@urjc.es>
     - Jaime Urquiza-Fuentes <jaime.urquiza@urjc.es>
-    - Pablo Llinás Arnaiz <pablo.llinas@urjc.es>
     - Jorge J. Castellanos <isidoro.hernan@urjc.es>
     - Pablo A. Haya Coll <pablo.haya@uam.es>
+    - Pablo Llinás Arnaiz <pablo.llinas@urjc.es>
     - Miguel Ángel Gutierrez <miguelangel.gutierrez@urjc.es>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-Duis volutpat feugiat leo non facilisis. Sed ante libero, 
-laoreet fermentum iaculis tincidunt tincidunt vel nibh. 
-Integer dictum enim et ligula posuere, vitae aliquet turpis dictum. 
-===============================================================================
+    - Virginia del Castillo <email@alumnos.urjc.es>
+    - Sergio González <email@alumnos.urjc.es>
+    - Ruben Muñoz <email@alumnos.urjc.es>
+    - Ángel Francisco Sánchez <email@alumnos.urjc.es>
+===========================================================================================

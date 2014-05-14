@@ -139,6 +139,7 @@ abstract class UBCollection{
         foreach($item_array as $item_id){
             remove_entity_relationship($id, $rel_name, $item_id);
         }
+        return true;
     }
 
     /**

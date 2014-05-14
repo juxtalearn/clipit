@@ -74,7 +74,7 @@ class ClipitVideo extends UBItem{
      * @return bool Returns true if success, false if error
      */
     static function add_comments($id, $comment_array){
-        return UBCollection::add_items($id, $comment_array, ClipitVideo::REL_VIDEO_COMMENT);
+        return UBCollection::add_items($id, $comment_array, static::REL_VIDEO_COMMENT);
     }
 
     /**
@@ -86,7 +86,7 @@ class ClipitVideo extends UBItem{
      * @return bool Returns true if success, false if error
      */
     static function set_comments($id, $comment_array){
-        return UBCollection::set_items($id, $comment_array, ClipitVideo::REL_VIDEO_COMMENT);
+        return UBCollection::set_items($id, $comment_array, static::REL_VIDEO_COMMENT);
     }
 
     /**
@@ -98,7 +98,7 @@ class ClipitVideo extends UBItem{
      * @return bool Returns true if success, false if error
      */
     static function remove_comments($id, $comment_array){
-        return UBCollection::remove_items($id, $comment_array, ClipitVideo::REL_VIDEO_COMMENT);
+        return UBCollection::remove_items($id, $comment_array, static::REL_VIDEO_COMMENT);
     }
 
     /**
@@ -109,7 +109,7 @@ class ClipitVideo extends UBItem{
      * @return array|bool Returns an array of ClipitComment items, or false if error
      */
     static function get_comments($id){
-        return UBCollection::get_items($id, ClipitVideo::REL_VIDEO_COMMENT);
+        return UBCollection::get_items($id, static::REL_VIDEO_COMMENT);
     }
 
     /**
@@ -121,7 +121,7 @@ class ClipitVideo extends UBItem{
      * @return bool Returns true if success, false if error
      */
     static function add_tags($id, $tag_array){
-        return UBCollection::add_items($id, $tag_array, ClipitVideo::REL_VIDEO_TAG);
+        return UBCollection::add_items($id, $tag_array, static::REL_VIDEO_TAG);
     }
 
     /**
@@ -133,7 +133,7 @@ class ClipitVideo extends UBItem{
      * @return bool Returns true if success, false if error
      */
     static function set_tags($id, $tag_array){
-        return UBCollection::set_items($id, $tag_array, ClipitVideo::REL_VIDEO_TAG);
+        return UBCollection::set_items($id, $tag_array, static::REL_VIDEO_TAG);
     }
 
     /**
@@ -145,7 +145,7 @@ class ClipitVideo extends UBItem{
      * @return bool Returns true if success, false if error
      */
     static function remove_tags($id, $tag_array){
-        return UBCollection::remove_items($id, $tag_array, ClipitVideo::REL_VIDEO_TAG);
+        return UBCollection::remove_items($id, $tag_array, static::REL_VIDEO_TAG);
     }
 
     /**
@@ -156,7 +156,7 @@ class ClipitVideo extends UBItem{
      * @return array|bool Returns an array of Tag items, or false if error
      */
     static function get_tags($id){
-        return UBCollection::get_items($id, ClipitVideo::REL_VIDEO_TAG);
+        return UBCollection::get_items($id, static::REL_VIDEO_TAG);
     }
 
 }

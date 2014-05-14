@@ -930,32 +930,44 @@ function expose_quiz_functions(){
     $class_suffix = "ClipitQuiz::";
     expose_common_functions($api_suffix, $class_suffix);
     expose_function(
-        $api_suffix . "add_questions",
-        $class_suffix . "add_questions",
+        $api_suffix . "add_quiz_questions",
+        $class_suffix . "add_quiz_questions",
         array(
             "id" => array(
                 "type" => "int",
                 "required" => true),
-            "question_array" => array(
+            "quiz_question_array" => array(
                 "type" => "array",
                 "required" => true)),
         "Add Quiz Questions by Id",
         'POST', false, true);
     expose_function(
-        $api_suffix . "remove_questions",
-        $class_suffix . "remove_questions",
+        $api_suffix . "set_quiz_questions",
+        $class_suffix . "set_quiz_questions",
         array(
             "id" => array(
                 "type" => "int",
                 "required" => true),
-            "question_array" => array(
+            "quiz_question_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Set Quiz Questions by Id",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "remove_quiz_questions",
+        $class_suffix . "remove_quiz_questions",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "quiz_question_array" => array(
                 "type" => "array",
                 "required" => true)),
         "Remove Quiz Questions by Id",
         'POST', false, true);
     expose_function(
-        $api_suffix . "get_questions",
-        $class_suffix . "get_questions",
+        $api_suffix . "get_quiz_questions",
+        $class_suffix . "get_quiz_questions",
         array(
             "id" => array(
                 "type" => "int",
@@ -965,45 +977,93 @@ function expose_quiz_functions(){
 }
 
 function expose_quiz_question_functions(){
-    $api_suffix = "clipit.quiz.question.";
+    $api_suffix = "clipit.quiz_question.";
     $class_suffix = "ClipitQuizQuestion::";
     expose_common_functions($api_suffix, $class_suffix);
     expose_function(
-        $api_suffix . "get_results",
-        $class_suffix . "get_results",
+        $api_suffix . "add_quiz_results",
+        $class_suffix . "add_quiz_results",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "quiz_result_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Add Quiz Results for the specified Quiz",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "set_quiz_results",
+        $class_suffix . "set_quiz_results",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "quiz_result_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Set Quiz Results for the specified Quiz",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "remove_quiz_results",
+        $class_suffix . "remove_quiz_results",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "quiz_result_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Remove Quiz Results from the specified Quiz",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "get_quiz_results",
+        $class_suffix . "get_quiz_results",
         array(
             "id" => array(
                 "type" => "int",
                 "required" => true)),
-        "Get Quiz Results for the specified Quiz",
+        "Get Quiz Results from the specified Quiz",
         'GET', false, true);
     expose_function(
-        $api_suffix . "add_taxonomy_tags",
-        $class_suffix . "add_taxonomy_tags",
+        $api_suffix . "add_tags",
+        $class_suffix . "add_tags",
         array(
             "id" => array(
                 "type" => "int",
                 "required" => true),
-            "taxonomy_tag_array" => array(
+            "tag_array" => array(
                 "type" => "array",
                 "required" => true)),
-        "Add Taxonomy Tags by Id",
+        "Add Tags by Id",
         'POST', false, true);
     expose_function(
-        $api_suffix . "remove_taxonomy_tags",
-        $class_suffix . "remove_taxonomy_tags",
+        $api_suffix . "set_tags",
+        $class_suffix . "set_tags",
         array(
             "id" => array(
                 "type" => "int",
                 "required" => true),
-            "taxonomy_tag_array" => array(
+            "tag_array" => array(
                 "type" => "array",
                 "required" => true)),
-        "Remove Taxonomy Tags by Id",
+        "Set Tags by Id",
         'POST', false, true);
     expose_function(
-        $api_suffix . "get_taxonomy_tags",
-        $class_suffix . "get_taxonomy_tags",
+        $api_suffix . "remove_tags",
+        $class_suffix . "remove_tags",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "tag_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Remove Tags by Id",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "get_tags",
+        $class_suffix . "get_tags",
         array(
             "id" => array(
                 "type" => "int",
@@ -1013,12 +1073,21 @@ function expose_quiz_question_functions(){
 }
 
 function expose_quiz_result_functions(){
-    $api_suffix = "clipit.quiz.result.";
+    $api_suffix = "clipit.quiz_result.";
     $class_suffix = "ClipitQuizResult::";
     expose_common_functions($api_suffix, $class_suffix);
     expose_function(
-        $api_suffix . "get_by_question",
-        $class_suffix . "get_by_question",
+        $api_suffix . "get_quiz_question",
+        $class_suffix . "get_quiz_question",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Get Quiz Question for this Quiz Result",
+        'GET', false, true);
+    expose_function(
+        $api_suffix . "get_by_quiz_question",
+        $class_suffix . "get_by_quiz_question",
         array(
             "quiz_question_array" => array(
                 "type" => "array",

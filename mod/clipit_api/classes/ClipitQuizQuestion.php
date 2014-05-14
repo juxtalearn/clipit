@@ -21,6 +21,9 @@ class ClipitQuizQuestion extends UBItem{
      * @const string Elgg entity subtype for this class
      */
     const SUBTYPE = "clipit_quiz_question";
+    const REL_QUIZQUESTION_TAG = "quiz_question-tag";
+    const REL_QUIZQUESTION_QUIZRESULT = "quiz_question-quiz_result";
+
     /**
      * @var array Array of options to chose from as an answer to the question
      */
@@ -30,9 +33,13 @@ class ClipitQuizQuestion extends UBItem{
      */
     public $option_type = "";
     /**
-     * @var array Array of Stumbling Block Tags relevant to this question
+     * @var array Array of Tags relevant to this question
      */
     public $tag_array = array();
+    /**
+     * @var array Array of Quiz Results which answer this Quiz Question
+     */
+    public $quiz_result_array = array();
     /**
      * @var int ID of ClipitVideo refered to by this question (optional)
      */
@@ -41,8 +48,9 @@ class ClipitQuizQuestion extends UBItem{
 
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
+        $this->tag_array = static::get_tags($this->id);
+        $this->quiz_result_array = static::get_quiz_results($this->id);
         $this->option_array = (array)$elgg_object->option_array;
-        $this->tag_array = (array)$elgg_object->tag_array;
         $this->option_type = (string)$elgg_object->option_type;
         $this->video = (int)$elgg_object->video;
     }
@@ -53,9 +61,41 @@ class ClipitQuizQuestion extends UBItem{
     protected function copy_to_elgg($elgg_object){
         parent::copy_to_elgg($elgg_object);
         $elgg_object->option_array = (array)$this->option_array;
-        $elgg_object->tag_array = (array)$this->tag_array;
         $elgg_object->option_type = (string)$this->option_type;
         $elgg_object->video = (int)$this->video;
+    }
+
+    protected function save(){
+        parent::save();
+        static::set_tags($this->id, $this->tag_array);
+        static::set_quiz_results($this->id, $this->quiz_result_array);
+        return $this->id;
+    }
+
+    protected function delete(){
+        $rel_array = get_entity_relationships((int)$this->id);
+        $result_array = array();
+        foreach($rel_array as $rel){
+            if($rel->relationship == static::REL_QUIZQUESTION_QUIZRESULT){
+                $result_array[] = $rel->guid_two;
+            }
+        }
+        if(!empty($result_array)){
+            ClipitQuizResult::delete_by_id($result_array);
+        }
+        parent::delete();
+    }
+
+    static function add_quiz_results($id, $result_array){
+        return UBCollection::add_items($id, $result_array, static::REL_QUIZQUESTION_QUIZRESULT, true);
+    }
+
+    static function set_quiz_results($id, $result_array){
+        return UBCollection::set_items($id, $result_array, static::REL_QUIZQUESTION_QUIZRESULT, true);
+    }
+
+    static function remove_quiz_results($id, $result_array){
+        return UBCollection::remove_items($id, $result_array, static::REL_QUIZQUESTION_QUIZRESULT);
     }
 
     /**
@@ -65,9 +105,8 @@ class ClipitQuizQuestion extends UBItem{
      *
      * @return array|bool Array of Quiz Results, or false if error
      */
-    static function get_results($id){
-        $quiz_result_array = ClipitQuizResult::get_by_question(array($id));
-        return array_pop($quiz_result_array);
+    static function get_quiz_results($id){
+        return UBCollection::get_items($id, static::REL_QUIZQUESTION_QUIZRESULT);
     }
 
 
@@ -80,18 +119,19 @@ class ClipitQuizQuestion extends UBItem{
      * @return bool True if success, false if error
      */
     static function add_tags($id, $tag_array){
-        if(!$quiz_question = new ClipitQuizQuestion($id)){
-            return false;
-        }
-        if(!$quiz_question->tag_array){
-            $quiz_question->tag_array = $tag_array;
-        } else{
-            $quiz_question->tag_array = array_merge($quiz_question->tag_array, $tag_array);
-        }
-        if(!$quiz_question->save()){
-            return false;
-        }
-        return true;
+        return UBCollection::add_items($id, $tag_array, static::REL_QUIZQUESTION_TAG);
+    }
+
+    /**
+     * Set a list of Stumbling Block Tags to a Quiz Question.
+     *
+     * @param int   $id Id of the Quiz Question
+     * @param array $tag_array Array of Stumbling Block Tags to set to the Quiz Question
+     *
+     * @return bool True if success, false if error
+     */
+    static function set_tags($id, $tag_array){
+        return UBCollection::set_items($id, $tag_array, static::REL_QUIZQUESTION_TAG);
     }
 
     /**
@@ -103,24 +143,7 @@ class ClipitQuizQuestion extends UBItem{
      * @return bool True if success, false if error
      */
     static function remove_tags($id, $tag_array){
-        if(!$quiz_question = new ClipitQuizQuestion($id)){
-            return false;
-        }
-        if(!$quiz_question->tag_array){
-            return false;
-        }
-        foreach($tag_array as $tag){
-            $key = array_search($tag, $quiz_question->tag_array);
-            if(isset($key)){
-                unset($quiz_question->tag_array[$key]);
-            } else{
-                return false;
-            }
-        }
-        if(!$quiz_question->save()){
-            return false;
-        }
-        return true;
+        return UBCollection::remove_items($id, $tag_array, static::REL_QUIZQUESTION_TAG);
     }
 
     /**
@@ -131,9 +154,6 @@ class ClipitQuizQuestion extends UBItem{
      * @return array|bool Returns an array of Stumbling Block Tag items, or false if error
      */
     static function get_tags($id){
-        if(!$quiz_question = new ClipitQuizQuestion($id)){
-            return false;
-        }
-        return $quiz_question->tag_array;
+        return UBCollection::get_items($id, static::REL_QUIZQUESTION_TAG);
     }
 }
