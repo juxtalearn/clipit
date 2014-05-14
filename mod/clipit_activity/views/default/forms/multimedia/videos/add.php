@@ -16,6 +16,7 @@ $body .= elgg_view("input/hidden", array(
     'name' => 'entity-id',
     'value' => $entity->id,
 ));
+$body .= '<div class="col-md-12">';
 $body .= '
 <div class="pull-left video-prev" style="
     margin-right: 10px;
@@ -47,7 +48,7 @@ $body .= '<div class="form-group">
         <img id="link-favicon" src="http://www.google.com/s2/favicons?domain=">
       </span>
      '.elgg_view("input/text", array(
-        'name' => 'link-url',
+        'name' => 'video-url',
         'id' => 'video-url',
         'style' => 'padding-left: 25px;',
         'class' => 'form-control blue',
@@ -61,7 +62,7 @@ $body .= '<div id="group-hide" style="display: none">';
 $body .= '<div class="form-group">
     <label for="link-title">'.elgg_echo("multimedia:links:title").'</label>
     '.elgg_view("input/text", array(
-        'name' => 'link-title',
+        'name' => 'video-title',
         'id' => 'video-title',
         'class' => 'form-control',
         'required' => true
@@ -69,9 +70,9 @@ $body .= '<div class="form-group">
 </div>';
 $body .= '<div class="form-group">
     '.elgg_view("input/plaintext", array(
-        'name' => 'link-description',
-        'class' => 'form-control',
-        'id' => 'link-description',
+        'name' => 'video-description',
+        'class' => 'form-control mceEditor',
+        'id' => 'video-description',
         'rows'  => 3,
         'placeholder' => 'Set description...',
         'style' => "width: 100%;"
@@ -79,12 +80,13 @@ $body .= '<div class="form-group">
 </div>';
 
 $body .='</div>';
+$body .='</div>';
 
 echo elgg_view("page/components/modal",
     array(
         "dialog_class"     => "modal-lg",
         "target"    => "add-video",
-        "title"     => elgg_echo("multimedia:videos:add"),
+        "title"     => elgg_echo("video:add"),
         "form"      => true,
         "body"      => $body,
         "cancel_button" => true,

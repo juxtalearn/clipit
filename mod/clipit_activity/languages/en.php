@@ -58,6 +58,8 @@ $english = array(
     'sta:videos' => 'Videos',
     'sta:links' => 'Interesting links',
     // Files
+    'files' => 'Files',
+    'file' => 'File',
     'multimedia:file:description' => 'File description',
     'file:nofile' => 'No file',
     'file:removed' => 'File %s removed',
@@ -71,6 +73,11 @@ $english = array(
     'file:video' => 'Video',
     'file:audio' => 'Audio',
     'file:compressed' => 'Compressed file',
+    // Videos
+    'videos' => 'Videos',
+    'video' => 'Video',
+    'videos:none' => 'No videos',
+    'video:add' => 'Add video url',
 
     // Publications
     'publications:no_evaluated' => 'No evaluated',

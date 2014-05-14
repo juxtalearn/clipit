@@ -78,3 +78,80 @@ function text_reference($text_message){
     }
     return $text_message;
 }
+
+/**
+ * URL video parser
+ *
+ * @param $url
+ * @return array|bool
+ */
+function video_url_parser($url){
+    if(!isset($url) || !filter_var($url, FILTER_VALIDATE_URL)){
+        return false;
+    }
+    $video_patterns = array('#(((http://)?)|(^./))(((www.)?)|(^./))youtube\.com/watch[?]v=([^\[\]()<.,\s\n\t\r]+)#i'
+    ,'#(((http://)?)|(^./))(((www.)?)|(^./))youtu\.be/([^\[\]()<.,\s\n\t\r]+)#i'
+    ,'/(http:\/\/)(www\.)?(vimeo\.com\/groups)(.*)(\/videos\/)([0-9]*)/'
+    ,'/(http:\/\/)(www\.)?(vimeo.com\/)([0-9]*)/');
+    $parse_url = parse_url($url);
+    $favicon_url_base = "http://www.google.com/s2/favicons?domain=";
+    foreach($video_patterns as $video_pattern){
+        if (preg_match($video_pattern, $url) > 0){
+            // Youtube
+            if (strpos($url, 'youtube.com') != false || strpos($url, 'youtu.be') != false) {
+                preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $url, $matches);
+                $data = file_get_contents("http://gdata.youtube.com/feeds/api/videos/$matches[0]?v=2&alt=jsonc");
+                $data = json_decode($data);
+                $data = $data->data;
+                $video_id = $matches[0];
+                $output = array(
+                    'id' => $data->id,
+                    'url'   => 'http://www.youtube.com/watch?v='.$data->id,
+                    'title' => $data->title,
+                    'description' => $data->description,
+                    'preview' => "http://i1.ytimg.com/vi/{$video_id}/mqdefault.jpg",
+                    'duration'      => $data->duration,
+                    'favicon'   => $favicon_url_base.$parse_url['host']
+                );
+            // Vimeo
+            } else if (strpos($url, 'vimeo.com') != false) {
+                preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=vimeo.com/)[^&\n]+#", $url, $matches);
+                $data = file_get_contents("http://vimeo.com/api/v2/video/$matches[0].json");
+                $data = array_pop(json_decode($data));
+                $output = array(
+                    'id' => $data->id,
+                    'url'   => $data->url,
+                    'title' => $data->title,
+                    'description' => $data->description,
+                    'preview' => $data->thumbnail_large,
+                    'duration'      => $data->duration,
+                    'favicon'   => $favicon_url_base.$parse_url['host']
+                );
+            }
+        }
+    }
+    // Video Data output
+    return $output;
+}
+function get_video_url_embed($url){
+    if (strpos($url, 'youtube.com') != false || strpos($url, 'youtu.be') != false) {
+        preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $url, $matches);
+        $embed_url = "//youtube.com/embed/".$matches[0];
+    } else if (strpos($url, 'vimeo.com') != false) {
+        preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=vimeo.com/)[^&\n]+#", $url, $matches);
+        $embed_url = "//player.vimeo.com/video/".$matches[0];
+    }
+    return $embed_url;
+}
+/**
+ * Get formated time
+ * @param int $seconds
+ * @return string (hh:mm:ss|mm:ss)
+ */
+function get_format_time(int $seconds){
+    $time = gmdate("i:s", $seconds);
+    if($seconds >=  3600){
+        $time = gmdate("H:i:s", $seconds);
+    }
+    return $time;
+}

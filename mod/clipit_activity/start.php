@@ -38,17 +38,24 @@ function clipit_activity_init() {
     elgg_register_action("group/create", elgg_get_plugins_path() . "clipit_activity/actions/group/create.php");
     elgg_register_action("group/remove_member", elgg_get_plugins_path() . "clipit_activity/actions/group/remove_member.php");
     // Multimedia
+    /* Videos */
     elgg_register_action("multimedia/videos/add", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/videos/add.php");
+    elgg_register_action("multimedia/videos/remove", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/videos/remove.php");
+    elgg_register_action("multimedia/videos/edit", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/videos/edit.php");
+    elgg_register_ajax_view('modal/multimedia/video/edit');
+    /* Links */
     elgg_register_action("multimedia/links/add", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/links/add.php");
+    /* Files */
     elgg_register_action("multimedia/files/upload", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/files/upload.php");
     elgg_register_action("multimedia/files/remove", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/files/remove.php");
     elgg_register_action("multimedia/files/edit", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/files/edit.php");
     elgg_register_action("multimedia/files/set_options", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/files/set_options.php");
     elgg_register_ajax_view('modal/multimedia/file/edit');
     elgg_register_ajax_view('multimedia/file/viewer');
-    elgg_register_action("multimedia/links/extract_data", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/links/extract_data.php");
     elgg_register_ajax_view('multimedia/file/upload');
     elgg_register_ajax_view('multimedia/file/attach_action');
+    elgg_register_action("multimedia/links/extract_data", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/links/extract_data.php");
+    elgg_register_action("multimedia/videos/extract_data", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/videos/extract_data.php");
     elgg_register_action("multimedia/files/upload", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/files/upload.php");
     // Discussion
     elgg_register_action("discussion/create", elgg_get_plugins_path() . "clipit_activity/actions/discussion/create.php");
@@ -164,6 +171,7 @@ function activity_page_handler($page) {
     $activities = ClipitActivity::get_by_id(array($page[0]));
     $activity = array_pop($activities);
     $user_id = elgg_get_logged_in_user_guid();
+    $user = array_pop(ClipitUser::get_by_id(array($user_id)));
     $isCalled = ClipitActivity::get_called_users($activity->id);
     $hasGroup = ClipitGroup::get_from_user_activity($user_id, $activity->id);
     // Default status
@@ -282,21 +290,26 @@ function activity_page_handler($page) {
                     switch ($selected_tab) {
                         case 'files':
                             $files = ClipitActivity::get_files($activity->id);
-                            $user = array_pop(ClipitUser::get_by_id(array($user_id)));
                             $add_files = false;
                             // Add files button for teacher
                             if($user->role == 'teacher'){
                                 $add_files = true;
                             }
-                                $content = elgg_view('multimedia/file/list', array('entity' => $activity, 'add_files' => $add_files, 'files' => $files, 'href' => $href));
+                            $content = elgg_view('multimedia/file/list', array('entity' => $activity, 'add_files' => $add_files, 'files' => $files, 'href' => $href));
                             if (!$files) {
-                                $content .= elgg_echo('file:none');
+                                $content .= elgg_view('output/empty', array('value' => elgg_echo('file:none')));
                             }
                             break;
                         case 'videos':
-                            $content = elgg_view('multimedia/videos', array('entity' => $activity));
-                            if (!$content) {
-                                $content = elgg_echo('discussion:none');
+                            $add_video = false;
+                            // Add files button for teacher
+                            if($user->role == 'teacher'){
+                                $add_video = true;
+                            }
+                            $videos = ClipitActivity::get_videos($activity->id);
+                            $content = elgg_view('multimedia/video/list', array('entity' => $activity, 'add_video' => $add_video, 'videos' => $videos, 'href' => $href));
+                            if (!$videos) {
+                                $content .= elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
                             }
                             break;
                         case 'links':
@@ -450,13 +463,19 @@ function group_tools_page_handler($page, $activity){
                     $files = ClipitGroup::get_files($group->id);
                     $content = elgg_view('multimedia/file/list', array('entity' => $group, 'add_files' => true, 'files' => $files, 'href' => $href));
                     if (!$files) {
-                        $content .= elgg_echo('file:none');
+                        $content .= elgg_view('output/empty', array('value' => elgg_echo('file:none')));
                     }
                     break;
                 case 'videos':
-                    $content = elgg_view('multimedia/videos', array('entity' => $group));
-                    if (!$content) {
-                        $content = elgg_echo('discussion:none');
+                    $videos = ClipitGroup::get_videos($group->id);
+                    $content = elgg_view('multimedia/video/list', array('entity' => $group, 'add_video' => true, 'videos' => $videos, 'href' => $href));
+                    if (!$videos) {
+                        $content .= elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
+                    }
+                    if($page[3] == 'view' && $page[4]){
+                        $entity_id = (int)$page[4];
+                        $entity = ClipitVideo::get_by_id(array($entity_id));
+                        $entities = ClipitGroup::get_videos($entity->id);
                     }
                     break;
                 case 'links':
@@ -479,18 +498,34 @@ function group_tools_page_handler($page, $activity){
                 include "$file_dir/download.php";
             }
             if($page[3] == 'view' && $page[4]){
-                $file_id = (int)$page[4];
-                $file = array_pop(ClipitFile::get_by_id(array($file_id)));
-                $group_files = ClipitGroup::get_files($group->id);
-                elgg_pop_breadcrumb($title);
-                elgg_push_breadcrumb($title, $href);
-                elgg_push_breadcrumb($file->name);
-                if($file && in_array($file_id, $group_files)){
-                    $filter = "";
-                    $content = elgg_view('multimedia/view', array('entity' => $file));
-                } else {
-                    return false;
+                elgg_pop_breadcrumb($entity->name);
+                $entity_id = (int)$page[4];
+                $object = ClipitSite::lookup($entity_id);
+                switch($object['subtype']){
+                    // Clipit Activity
+                    case 'clipit_file':
+                        elgg_push_breadcrumb(elgg_echo("files"), $href."?filter=files");
+                        $title = elgg_echo("file");
+                        $entity = array_pop(ClipitFile::get_by_id(array($entity_id)));
+                        $preview = elgg_view("multimedia/file/preview", array('file'  => $entity));
+                        $body = elgg_view("multimedia/file/body", array('entity'  => $entity));
+                        $content = elgg_view('multimedia/view', array('entity' => $entity, 'type' => 'file', 'preview' => $preview, 'body' => $body));
+                        break;
+                    // Clipit Group
+                    case 'clipit_video':
+                        elgg_push_breadcrumb(elgg_echo("videos"), $href."?filter=videos");
+                        $title = elgg_echo("video");
+                        $entity = array_pop(ClipitVideo::get_by_id(array($entity_id)));
+                        $preview = elgg_view("multimedia/video/preview", array('entity'  => $entity));
+                        $body = elgg_view("multimedia/video/body", array('entity'  => $entity));
+                        $content = elgg_view('multimedia/view', array('entity' => $entity, 'type' => 'video', 'preview' => $preview, 'body' => $body));
+                        break;
+                    default:
+                        return false;
+                        break;
                 }
+                elgg_push_breadcrumb($entity->name);
+                $filter = "";
             }
             break;
         case 'discussion':

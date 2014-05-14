@@ -1,7 +1,24 @@
 //
-// File preview
+// Multimedia block
 // --------------------------------------------------
-.file-preview{
+.multimedia-block{
+  overflow: hidden;
+  background: #ECF7FB;
+  padding: 10px;
+  margin-bottom: 10px;
+  .multimedia-preview{
+    float: left;
+    margin-right: 10px;
+  }
+  .multimedia-details{
+    overflow: hidden;
+  }
+}
+
+//
+// Multimedia preview
+// --------------------------------------------------
+.multimedia-preview{
   position: relative;
   display: inline-block;
   img {
@@ -32,22 +49,7 @@
     z-index: 1;
   }
 }
-//
-// File block
-// --------------------------------------------------
-.file-block{
-  overflow: hidden;
-  background: #ECF7FB;
-  padding: 10px;
-  margin-bottom: 10px;
-  .file-preview{
-    float: left;
-    margin-right: 10px;
-  }
-  .file-details{
-    overflow: hidden;
-  }
-}
+
 
 //
 // Files table list
@@ -70,13 +72,13 @@
   }
 }
 //
-// File view
+// Multimedia view
 // --------------------------------------------------
 
-.file-owner{
+.multimedia-owner{
   margin-bottom: 10px;
 
-  .file-preview{
+  .multimedia-preview{
     margin-right: 10px;
     float: left;
     span{
@@ -91,7 +93,7 @@
   .block{
     overflow: hidden;
   }
-  .header-file{
+  .header{
     .comment-button{
       float: right;
     }
@@ -104,7 +106,7 @@
       padding-bottom: 5px;
     }
   }
-  .file-details{
+  .multimedia-view{
     background: #fafafa;
     padding: 20px;
     margin: 10px 0;
@@ -124,7 +126,7 @@
     }
   }
 
-  .body-file{
+  .multimedia-body{
     color: #666666;
   }
 }
@@ -217,9 +219,9 @@
   }
   .files{
     .template-upload{
-    border-bottom: 1px solid #bae6f6;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
+      border-bottom: 1px solid #bae6f6;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
       &:last-child{
         border-bottom: 0;
       }

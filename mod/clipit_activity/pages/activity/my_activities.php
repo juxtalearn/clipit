@@ -38,7 +38,7 @@ $filter = elgg_view('activities/filter', array('selected' => $selected_tab, 'ent
 
 if(!$my_activities){
     $filter = "";
-    $content = elgg_echo('activities:none');
+    $content = elgg_view('output/empty', array('value' => elgg_echo('activities:none')));
 }
 $params = array(
     'content' => $content,

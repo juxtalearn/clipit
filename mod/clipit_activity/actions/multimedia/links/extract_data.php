@@ -42,6 +42,7 @@ if(filter_var($url, FILTER_VALIDATE_URL)){
         'url_min' => $string_regex[2][0],
         'video_prev_url' => 'http://b.vimeocdn.com/ts/432/509/432509421_640.jpg'
     );
-    echo json_encode($output);
+    echo json_encode(video_url_parser($url));
+//    echo json_encode($output);
 }
 die();

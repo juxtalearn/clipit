@@ -7112,29 +7112,42 @@ li.list-item:last-child {
   border-bottom: 0;
   padding-bottom: 0;
 }
-.file-preview {
+.multimedia-block {
+  overflow: hidden;
+  background: #ECF7FB;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.multimedia-block .multimedia-preview {
+  float: left;
+  margin-right: 10px;
+}
+.multimedia-block .multimedia-details {
+  overflow: hidden;
+}
+.multimedia-preview {
   position: relative;
   display: inline-block;
 }
-.file-preview img {
+.multimedia-preview img {
   width: 50px;
 }
-.file-preview .file-icon {
+.multimedia-preview .file-icon {
   font-size: 40px;
   color: #bae6f6;
 }
-.file-preview .img-preview {
+.multimedia-preview .img-preview {
   width: 50px;
   height: 50px;
   display: inline-block;
 }
-.file-preview .img-preview > div {
+.multimedia-preview .img-preview > div {
   min-width: 100%;
   min-height: 100%;
   background-position: 50% 50%;
   background-size: cover;
 }
-.file-preview span {
+.multimedia-preview span {
   color: #fff;
   font-weight: bold;
   position: absolute;
@@ -7142,19 +7155,6 @@ li.list-item:last-child {
   right: 2px;
   font-size: 12px;
   z-index: 1;
-}
-.file-block {
-  overflow: hidden;
-  background: #ECF7FB;
-  padding: 10px;
-  margin-bottom: 10px;
-}
-.file-block .file-preview {
-  float: left;
-  margin-right: 10px;
-}
-.file-block .file-details {
-  overflow: hidden;
 }
 .files-table .file-info h4 {
   margin: 0;
@@ -7169,55 +7169,55 @@ li.list-item:last-child {
 .files-table .file-user-info {
   margin-top: 5px;
 }
-.file-owner {
+.multimedia-owner {
   margin-bottom: 10px;
 }
-.file-owner .file-preview {
+.multimedia-owner .multimedia-preview {
   margin-right: 10px;
   float: left;
 }
-.file-owner .file-preview span {
+.multimedia-owner .multimedia-preview span {
   font-size: 16px;
   bottom: 5px;
 }
-.file-owner .file-preview i {
+.multimedia-owner .multimedia-preview i {
   font-size: 50px;
   color: #c9c9c9;
 }
-.file-owner .block {
+.multimedia-owner .block {
   overflow: hidden;
 }
-.file-owner .header-file .comment-button {
+.multimedia-owner .header .comment-button {
   float: right;
 }
-.file-owner .header-file h2 {
+.multimedia-owner .header h2 {
   margin: 0;
 }
-.file-owner .header-file .sub-title {
+.multimedia-owner .header .sub-title {
   margin-top: 5px;
   border-bottom: 1px solid #bae6f6;
   padding-bottom: 5px;
 }
-.file-owner .file-details {
+.multimedia-owner .multimedia-view {
   background: #fafafa;
   padding: 20px;
   margin: 10px 0;
 }
-.file-owner .file-details .btn {
+.multimedia-owner .multimedia-view .btn {
   padding: 5px 10px;
   margin-right: 10px;
   float: left;
 }
-.file-owner .file-details .file-info {
+.multimedia-owner .multimedia-view .file-info {
   overflow: hidden;
 }
-.file-owner .file-details .file-info strong {
+.multimedia-owner .multimedia-view .file-info strong {
   margin-top: -5px;
 }
-.file-owner .file-details .frame-file {
+.multimedia-owner .multimedia-view .frame-file {
   margin-top: 5px;
 }
-.file-owner .body-file {
+.multimedia-owner .multimedia-body {
   color: #666666;
 }
 .fileinput-button {
@@ -8165,6 +8165,57 @@ ul.deadline-list > li .fa {
   color: #32b4e5;
   font-size: 14px;
 }
+.video-list .video-item .img-preview {
+  position: relative;
+}
+.video-list .video-item .img-preview > img {
+  width: 100%;
+}
+.video-list .video-item .img-preview > .ratings {
+  color: #e7d333;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0 5px;
+  font-size: 12px;
+  display: inline-block;
+  position: absolute;
+  margin: 10px;
+  z-index: 2;
+}
+.video-list .video-item .img-preview > .duration {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
+  color: #fff;
+  border: 0;
+  bottom: 0;
+  position: absolute;
+  right: 0;
+  margin: 5px;
+  padding: 3px 6px;
+}
+.video-list .video-item .tags {
+  margin: 5px 0;
+}
+.video-list .video-item .tags > .label {
+  display: inline-block;
+  border: 1px solid;
+}
+.video-list .video-item .tags > .empty {
+  color: #c9c9c9;
+}
+.video-list .video-item h4 {
+  margin: 0;
+  font-weight: bold;
+}
+.video-list .video-item p {
+  color: #666666;
+  margin: 0;
+  height: 63px;
+  overflow: hidden;
+}
+.video-list .video-item small {
+  margin-top: 10px;
+}
 #menu_messages li.message-item > a {
   padding: 5px 10px;
   width: 300px;
@@ -8912,6 +8963,10 @@ small,
 }
 .toggle-menu {
   display: none;
+}
+h3.empty {
+  margin-top: 3px;
+  color: #c9c9c9;
 }
 @font-face {
   font-family: 'Futura';
