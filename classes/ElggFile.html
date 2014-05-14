@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>API Documentation</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="https://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">API Documentation</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">556</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">27</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">24</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1217803145"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-1217803145" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/Exportable.html">Exportable</a></li>
+                                                    <li class="interface"><a href="../classes/Friendable.html">Friendable</a></li>
+                                                    <li class="interface"><a href="../classes/Importable.html">Importable</a></li>
+                                                    <li class="interface"><a href="../classes/Locatable.html">Locatable</a></li>
+                                                    <li class="interface"><a href="../classes/Loggable.html">Loggable</a></li>
+                                                    <li class="interface"><a href="../classes/Notable.html">Notable</a></li>
+                                                                                                    <li class="class"><a href="../classes/APIException.html">APIException</a></li>
+                                                    <li class="class"><a href="../classes/BinaryFile.html">BinaryFile</a></li>
+                                                    <li class="class"><a href="../classes/BinaryFile_Exception.html">BinaryFile_Exception</a></li>
+                                                    <li class="class"><a href="../classes/BinaryFile_Seek_Method.html">BinaryFile_Seek_Method</a></li>
+                                                    <li class="class"><a href="../classes/CallException.html">CallException</a></li>
+                                                    <li class="class"><a href="../classes/ClassException.html">ClassException</a></li>
+                                                    <li class="class"><a href="../classes/ClassNotFoundException.html">ClassNotFoundException</a></li>
+                                                    <li class="class"><a href="../classes/ClipitActivity.html">ClipitActivity</a></li>
+                                                    <li class="class"><a href="../classes/ClipitChat.html">ClipitChat</a></li>
+                                                    <li class="class"><a href="../classes/ClipitComment.html">ClipitComment</a></li>
+                                                    <li class="class"><a href="../classes/ClipitEvent.html">ClipitEvent</a></li>
+                                                    <li class="class"><a href="../classes/ClipitExample.html">ClipitExample</a></li>
+                                                    <li class="class"><a href="../classes/ClipitFile.html">ClipitFile</a></li>
+                                                    <li class="class"><a href="../classes/ClipitGroup.html">ClipitGroup</a></li>
+                                                    <li class="class"><a href="../classes/ClipitLA.html">ClipitLA</a></li>
+                                                    <li class="class"><a href="../classes/ClipitPost.html">ClipitPost</a></li>
+                                                    <li class="class"><a href="../classes/ClipitQuiz.html">ClipitQuiz</a></li>
+                                                    <li class="class"><a href="../classes/ClipitQuizQuestion.html">ClipitQuizQuestion</a></li>
+                                                    <li class="class"><a href="../classes/ClipitQuizResult.html">ClipitQuizResult</a></li>
+                                                    <li class="class"><a href="../classes/ClipitRating.html">ClipitRating</a></li>
+                                                    <li class="class"><a href="../classes/ClipitSite.html">ClipitSite</a></li>
+                                                    <li class="class"><a href="../classes/ClipitSTA.html">ClipitSTA</a></li>
+                                                    <li class="class"><a href="../classes/ClipitStoryboard.html">ClipitStoryboard</a></li>
+                                                    <li class="class"><a href="../classes/ClipitTag.html">ClipitTag</a></li>
+                                                    <li class="class"><a href="../classes/ClipitTask.html">ClipitTask</a></li>
+                                                    <li class="class"><a href="../classes/ClipitTrickyTopic.html">ClipitTrickyTopic</a></li>
+                                                    <li class="class"><a href="../classes/ClipitUser.html">ClipitUser</a></li>
+                                                    <li class="class"><a href="../classes/ClipitVideo.html">ClipitVideo</a></li>
+                                                    <li class="class"><a href="../classes/ConfigurationException.html">ConfigurationException</a></li>
+                                                    <li class="class"><a href="../classes/CronException.html">CronException</a></li>
+                                                    <li class="class"><a href="../classes/DatabaseException.html">DatabaseException</a></li>
+                                                    <li class="class"><a href="../classes/DataFormatException.html">DataFormatException</a></li>
+                                                    <li class="class"><a href="../classes/ElggAccess.html">ElggAccess</a></li>
+                                                    <li class="class"><a href="../classes/ElggAttributeLoader.html">ElggAttributeLoader</a></li>
+                                                    <li class="class"><a href="../classes/ElggAutoP.html">ElggAutoP</a></li>
+                                                    <li class="class"><a href="../classes/ElggBatch.html">ElggBatch</a></li>
+                                                    <li class="class"><a href="../classes/ElggCache.html">ElggCache</a></li>
+                                                    <li class="class"><a href="../classes/ElggData.html">ElggData</a></li>
+                                                    <li class="class"><a href="../classes/ElggDiskFilestore.html">ElggDiskFilestore</a></li>
+                                                    <li class="class"><a href="../classes/ElggEntity.html">ElggEntity</a></li>
+                                                    <li class="class"><a href="../classes/ElggExtender.html">ElggExtender</a></li>
+                                                    <li class="class"><a href="../classes/ElggFile.html">ElggFile</a></li>
+                                                    <li class="class"><a href="../classes/ElggFileCache.html">ElggFileCache</a></li>
+                                                    <li class="class"><a href="../classes/ElggFilestore.html">ElggFilestore</a></li>
+                                                    <li class="class"><a href="../classes/ElggGroup.html">ElggGroup</a></li>
+                                                    <li class="class"><a href="../classes/ElggGroupItemVisibility.html">ElggGroupItemVisibility</a></li>
+                                                    <li class="class"><a href="../classes/ElggHMACCache.html">ElggHMACCache</a></li>
+                                                    <li class="class"><a href="../classes/ElggLRUCache.html">ElggLRUCache</a></li>
+                                                    <li class="class"><a href="../classes/ElggMemcache.html">ElggMemcache</a></li>
+                                                    <li class="class"><a href="../classes/ElggMenuBuilder.html">ElggMenuBuilder</a></li>
+                                                    <li class="class"><a href="../classes/ElggMenuItem.html">ElggMenuItem</a></li>
+                                                    <li class="class"><a href="../classes/ElggMetadata.html">ElggMetadata</a></li>
+                                                    <li class="class"><a href="../classes/ElggPAM.html">ElggPAM</a></li>
+                                                    <li class="class"><a href="../classes/ElggPlugin.html">ElggPlugin</a></li>
+                                                    <li class="class"><a href="../classes/ElggPluginManifest.html">ElggPluginManifest</a></li>
+                                                    <li class="class"><a href="../classes/ElggPluginManifestParser.html">ElggPluginManifestParser</a></li>
+                                                    <li class="class"><a href="../classes/ElggPluginManifestParser17.html">ElggPluginManifestParser17</a></li>
+                                                    <li class="class"><a href="../classes/ElggPluginManifestParser18.html">ElggPluginManifestParser18</a></li>
+                                                    <li class="class"><a href="../classes/ElggPluginPackage.html">ElggPluginPackage</a></li>
+                                                    <li class="class"><a href="../classes/ElggPriorityList.html">ElggPriorityList</a></li>
+                                                    <li class="class"><a href="../classes/ElggRelationship.html">ElggRelationship</a></li>
+                                                    <li class="class"><a href="../classes/ElggRiverItem.html">ElggRiverItem</a></li>
+                                                    <li class="class"><a href="../classes/ElggSession.html">ElggSession</a></li>
+                                                    <li class="class"><a href="../classes/ElggSharedMemoryCache.html">ElggSharedMemoryCache</a></li>
+                                                    <li class="class"><a href="../classes/ElggStaticVariableCache.html">ElggStaticVariableCache</a></li>
+                                                    <li class="class"><a href="../classes/ElggTranslit.html">ElggTranslit</a></li>
+                                                    <li class="class"><a href="../classes/ElggUser.html">ElggUser</a></li>
+                                                    <li class="class"><a href="../classes/ElggVolatileMetadataCache.html">ElggVolatileMetadataCache</a></li>
+                                                    <li class="class"><a href="../classes/ElggWidget.html">ElggWidget</a></li>
+                                                    <li class="class"><a href="../classes/ElggXMLElement.html">ElggXMLElement</a></li>
+                                                    <li class="class"><a href="../classes/ErrorResult.html">ErrorResult</a></li>
+                                                    <li class="class"><a href="../classes/ExportException.html">ExportException</a></li>
+                                                    <li class="class"><a href="../classes/GenericResult.html">GenericResult</a></li>
+                                                    <li class="class"><a href="../classes/ImportException.html">ImportException</a></li>
+                                                    <li class="class"><a href="../classes/IncompleteEntityException.html">IncompleteEntityException</a></li>
+                                                    <li class="class"><a href="../classes/InstallationException.html">InstallationException</a></li>
+                                                    <li class="class"><a href="../classes/InvalidClassException.html">InvalidClassException</a></li>
+                                                    <li class="class"><a href="../classes/InvalidParameterException.html">InvalidParameterException</a></li>
+                                                    <li class="class"><a href="../classes/IOException.html">IOException</a></li>
+                                                    <li class="class"><a href="../classes/JuxtaLearn_Cookie_Authentication.html">JuxtaLearn_Cookie_Authentication</a></li>
+                                                    <li class="class"><a href="../classes/LoginException.html">LoginException</a></li>
+                                                    <li class="class"><a href="../classes/NotificationException.html">NotificationException</a></li>
+                                                    <li class="class"><a href="../classes/NotImplementedException.html">NotImplementedException</a></li>
+                                                    <li class="class"><a href="../classes/ODD.html">ODD</a></li>
+                                                    <li class="class"><a href="../classes/ODDDocument.html">ODDDocument</a></li>
+                                                    <li class="class"><a href="../classes/ODDEntity.html">ODDEntity</a></li>
+                                                    <li class="class"><a href="../classes/ODDMetaData.html">ODDMetaData</a></li>
+                                                    <li class="class"><a href="../classes/ODDRelationship.html">ODDRelationship</a></li>
+                                                    <li class="class"><a href="../classes/PluginException.html">PluginException</a></li>
+                                                    <li class="class"><a href="../classes/RegistrationException.html">RegistrationException</a></li>
+                                                    <li class="class"><a href="../classes/SecurityException.html">SecurityException</a></li>
+                                                    <li class="class"><a href="../classes/SuccessResult.html">SuccessResult</a></li>
+                                                    <li class="class"><a href="../classes/UBCollection.html">UBCollection</a></li>
+                                                    <li class="class"><a href="../classes/UBEvent.html">UBEvent</a></li>
+                                                    <li class="class"><a href="../classes/UBFile.html">UBFile</a></li>
+                                                    <li class="class"><a href="../classes/UBItem.html">UBItem</a></li>
+                                                    <li class="class"><a href="../classes/UBMessage.html">UBMessage</a></li>
+                                                    <li class="class"><a href="../classes/UBSite.html">UBSite</a></li>
+                                                    <li class="class"><a href="../classes/UBUser.html">UBUser</a></li>
+                                                    <li class="class"><a href="../classes/XmlElement.html">XmlElement</a></li>
+                                                    <li class="class"><a href="../classes/XMLRPCArrayParameter.html">XMLRPCArrayParameter</a></li>
+                                                    <li class="class"><a href="../classes/XMLRPCBase64Parameter.html">XMLRPCBase64Parameter</a></li>
+                                                    <li class="class"><a href="../classes/XMLRPCBoolParameter.html">XMLRPCBoolParameter</a></li>
+                                                    <li class="class"><a href="../classes/XMLRPCCall.html">XMLRPCCall</a></li>
+                                                    <li class="class"><a href="../classes/XMLRPCDateParameter.html">XMLRPCDateParameter</a></li>
+                                                    <li class="class"><a href="../classes/XMLRPCDoubleParameter.html">XMLRPCDoubleParameter</a></li>
+                                                    <li class="class"><a href="../classes/XMLRPCErrorResponse.html">XMLRPCErrorResponse</a></li>
+                                                    <li class="class"><a href="../classes/XMLRPCIntParameter.html">XMLRPCIntParameter</a></li>
+                                                    <li class="class"><a href="../classes/XMLRPCParameter.html">XMLRPCParameter</a></li>
+                                                    <li class="class"><a href="../classes/XMLRPCResponse.html">XMLRPCResponse</a></li>
+                                                    <li class="class"><a href="../classes/XMLRPCStringParameter.html">XMLRPCStringParameter</a></li>
+                                                    <li class="class"><a href="../classes/XMLRPCStructParameter.html">XMLRPCStructParameter</a></li>
+                                                    <li class="class"><a href="../classes/XMLRPCSuccessResponse.html">XMLRPCSuccessResponse</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/default.html">\</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\</small>ElggFile</h1>
+                    <p><em>This class represents a physical file.</em></p>
+                    <p>Create a new ElggFile object and specify a filename, and optionally a
+FileStore (if one isn't specified then the default is assumed.)</p>
+<p>Open the file using the appropriate mode, and you will be able to
+read and write to the file.</p>
+<p>Optionally, you can also call the file's save() method, this will
+turn the file into an entity in the system and permit you to do
+things like attach tags to the file etc. This is not done automatically
+since there are many occasions where you may want access to file data
+on datastores using the ElggFile interface but do not want to create
+an Entity reference to it in the system (temporary files for example).</p>
+
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/ElggFile.html#method___construct" class="">__construct()</a><br />
+                                                                    <a href="../classes/ElggFile.html#method_setFilename" class="">setFilename()</a><br />
+                                                                    <a href="../classes/ElggFile.html#method_getFilename" class="">getFilename()</a><br />
+                                                                    <a href="../classes/ElggFile.html#method_getFilenameOnFilestore" class="">getFilenameOnFilestore()</a><br />
+                                                                    <a href="../classes/ElggFile.html#method_getFilestoreSize" class="">getFilestoreSize()</a><br />
+                                                                    <a href="../classes/ElggFile.html#method_getMimeType" class="">getMimeType()</a><br />
+                                                                    <a href="../classes/ElggFile.html#method_setMimeType" class="">setMimeType()</a><br />
+                                                                    <a href="../classes/ElggFile.html#method_detectMimeType" class="">detectMimeType()</a><br />
+                                                                    <a href="../classes/ElggFile.html#method_setDescription" class="">setDescription()</a><br />
+                                                                    <a href="../classes/ElggFile.html#method_open" class="">open()</a><br />
+                                                                    <a href="../classes/ElggFile.html#method_write" class="">write()</a><br />
+                                                                    <a href="../classes/ElggFile.html#method_read" class="">read()</a><br />
+                                                                    <a href="../classes/ElggFile.html#method_grabFile" class="">grabFile()</a><br />
+                                                                    <a href="../classes/ElggFile.html#method_close" class="">close()</a><br />
+                                                                    <a href="../classes/ElggFile.html#method_delete" class="">delete()</a><br />
+                                                                    <a href="../classes/ElggFile.html#method_seek" class="">seek()</a><br />
+                                                                    <a href="../classes/ElggFile.html#method_tell" class="">tell()</a><br />
+                                                                    <a href="../classes/ElggFile.html#method_size" class="">size()</a><br />
+                                                                    <a href="../classes/ElggFile.html#method_eof" class="">eof()</a><br />
+                                                                    <a href="../classes/ElggFile.html#method_exists" class="">exists()</a><br />
+                                                                    <a href="../classes/ElggFile.html#method_setFilestore" class="">setFilestore()</a><br />
+                                                                    <a href="../classes/ElggFile.html#method_save" class="">save()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No public properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No constants found</em>
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <a href="../classes/ElggFile.html#method_initializeAttributes" class="">initializeAttributes()</a><br />
+                                                                    <a href="../classes/ElggFile.html#method_getFilestore" class="">getFilestore()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No protected properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <em>No private methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/ElggFile.html#property_filestore" class="">$filestore</a><br />
+                                                                    <a href="../classes/ElggFile.html#property_handle" class="">$handle</a><br />
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/engine.classes.ElggFile.php.html"><div class="path-wrapper">engine/classes/ElggFile.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">\Elgg.Core\DataModel.File</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                                                                                                                                                
+                                        <div class="namespace-wrapper">\ElggObject</div>
+                                                                                                    <div class="namespace-wrapper">\ElggFile</div>
+                            </dd>
+
+                        
+                        
+                        
+                        
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr>
+                            <th>
+                                class
+                            </th>
+                            <td>
+                                                                    <p>ElggFile</p>
+                                                            </td>
+                        </tr>
+                                            <tr>
+                            <th>
+                                todo
+                            </th>
+                            <td>
+                                                            </td>
+                        </tr>
+                                        </table>
+                </aside>
+            </div>
+
+                        
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_filestore" name="property_filestore" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$filestore</h3>
+                <pre class="signature">$filestore</pre>
+                <p><em>Filestore</em></p>
+                
+
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_handle" name="property_handle" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$handle</h3>
+                <pre class="signature">$handle</pre>
+                <p><em>File handle used to identify this file in a filestore. Created by open.</em></p>
+                
+
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___construct" name="method___construct" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">__construct()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__construct(int <span class="argument">$guid</span>)</pre>
+                <p><em>Loads an ElggFile entity.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>int</td>
+                                <td>$guid </td>
+                                <td><p>GUID of the ElggFile object</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setFilename" name="method_setFilename" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setFilename()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setFilename(string <span class="argument">$name</span>) : void</pre>
+                <p><em>Set the filename of this file.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$name </td>
+                                <td><p>The filename.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getFilename" name="method_getFilename" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getFilename()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getFilename() : string</pre>
+                <p><em>Return the filename.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getFilenameOnFilestore" name="method_getFilenameOnFilestore" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getFilenameOnFilestore()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getFilenameOnFilestore() : string</pre>
+                <p><em>Return the filename of this file as it is/will be stored on the
+filestore, which may be different to the filename.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getFilestoreSize" name="method_getFilestoreSize" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getFilestoreSize()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getFilestoreSize(string <span class="argument">$prefix</span>, int <span class="argument">$container_guid</span>) : int</pre>
+                <p><em>Return the size of the filestore associated with this file</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$prefix </td>
+                                <td><p>Storage prefix</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>int</td>
+                                <td>$container_guid </td>
+                                <td><p>The container GUID of the checked filestore</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    int
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getMimeType" name="method_getMimeType" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getMimeType()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getMimeType() : string</pre>
+                <p><em>Get the mime type of the file.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setMimeType" name="method_setMimeType" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setMimeType()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setMimeType(string <span class="argument">$mimetype</span>) : bool</pre>
+                <p><em>Set the mime type of the file.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$mimetype </td>
+                                <td><p>The mimetype</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    bool
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_detectMimeType" name="method_detectMimeType" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">detectMimeType()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">detectMimeType(mixed <span class="argument">$file</span>, mixed <span class="argument">$default</span>) : mixed</pre>
+                <p><em>Detects mime types based on filename or actual file.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$file </td>
+                                <td><p>The full path of the file to check. For uploaded files, use tmp_name.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$default </td>
+                                <td><p>A default. Useful to pass what the browser thinks it is.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    mixed
+                                            &mdash; <p>Detected type on success, false on failure.</p>
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            1.7.12                                
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            note
+                        </th>
+                        <td>
+                                                                                            <p>If $file is provided, this may be called statically</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setDescription" name="method_setDescription" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setDescription()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setDescription(string <span class="argument">$description</span>) : bool</pre>
+                <p><em>Set the optional file description.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$description </td>
+                                <td><p>The description.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    bool
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_open" name="method_open" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">open()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">open(string <span class="argument">$mode</span>) : resource</pre>
+                <p><em>Open the file with the given mode</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$mode </td>
+                                <td><p>Either read/write/append</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\IOException|\InvalidParameterException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    resource
+                                            &mdash; <p>File handler</p>
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_write" name="method_write" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">write()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">write(string <span class="argument">$data</span>) : bool</pre>
+                <p><em>Write data.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$data </td>
+                                <td><p>The data</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    bool
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_read" name="method_read" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">read()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">read(int <span class="argument">$length</span>, int <span class="argument">$offset</span>) : mixed</pre>
+                <p><em>Read data.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>int</td>
+                                <td>$length </td>
+                                <td><p>Amount to read.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>int</td>
+                                <td>$offset </td>
+                                <td><p>The offset to start from.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    mixed
+                                            &mdash; <p>Data or false</p>
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_grabFile" name="method_grabFile" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">grabFile()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">grabFile() : mixed</pre>
+                <p><em>Gets the full contents of this file.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    mixed
+                                            &mdash; <p>The file contents.</p>
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_close" name="method_close" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">close()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">close() : bool</pre>
+                <p><em>Close the file and commit changes</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    bool
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_delete" name="method_delete" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">delete()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">delete() : bool</pre>
+                <p><em>Delete this file.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    bool
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_seek" name="method_seek" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">seek()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">seek(int <span class="argument">$position</span>) : bool</pre>
+                <p><em>Seek a position in the file.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>int</td>
+                                <td>$position </td>
+                                <td><p>Position in bytes</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    bool
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_tell" name="method_tell" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">tell()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">tell() : int</pre>
+                <p><em>Return the current position of the file.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    int
+                                            &mdash; <p>The file position</p>
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_size" name="method_size" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">size()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">size() : int</pre>
+                <p><em>Return the size of the file in bytes.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    int
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_eof" name="method_eof" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">eof()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">eof() : bool</pre>
+                <p><em>Return a boolean value whether the file handle is at the end of the file</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    bool
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_exists" name="method_exists" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">exists()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">exists() : bool</pre>
+                <p><em>Returns if the file exists</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    bool
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setFilestore" name="method_setFilestore" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setFilestore()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setFilestore(\ElggFilestore <span class="argument">$filestore</span>) : void</pre>
+                <p><em>Set a filestore.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td><a href="../classes/ElggFilestore.html">\ElggFilestore</a></td>
+                                <td>$filestore </td>
+                                <td><p>The file store.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_save" name="method_save" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">save()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">save() : bool</pre>
+                <p><em>Save the file</em></p>
+                <p>Write the file's data to the filestore and save
+the corresponding entity.</p>
+
+                
+                
+                                    <h4>Returns</h4>
+                    bool
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href=""><span class="namespace-wrapper"></span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_initializeAttributes" name="method_initializeAttributes" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">initializeAttributes()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">initializeAttributes() : void</pre>
+                <p><em>Set subtype to &#039;file&#039;.</em></p>
+                
+
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getFilestore" name="method_getFilestore" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">getFilestore()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getFilestore() : \ElggFilestore</pre>
+                <p><em>Return a filestore suitable for saving this file.</em></p>
+                <p>This filestore is either a pre-registered filestore,
+a filestore as recorded in metadata or the system default.</p>
+
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\ClassNotFoundException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/ElggFilestore.html">\ElggFilestore</a>
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">ElggFile.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/engine/classes/ElggFile.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on May 14th, 2014 at 15:04.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>
