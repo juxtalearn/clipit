@@ -20,9 +20,7 @@ elgg_register_event_handler('init', 'system', 'clipit_api_init');
  * Initialization method which loads objects, libraries, exposes the REST API, and registers test classes.
  */
 function clipit_api_init(){
-    global $CONFIG;
     loadFiles(elgg_get_plugins_path() . "clipit_api/libraries/");
     clipit_expose_api();
-    $CONFIG->JXL_SECRET = "697fe3f81946fb59a714471cd688360b";
 }
 
