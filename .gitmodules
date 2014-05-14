@@ -1,0 +1,3 @@
+[submodule "mod/clipit_api/libraries/juxtalearn-cookie-authentication"]
+	path = mod/clipit_api/libraries/juxtalearn-cookie-authentication
+	url = https://github.com/juxtalearn/juxtalearn-cookie-authentication.git
