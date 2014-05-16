@@ -88,6 +88,10 @@ class UBItem{
         }
         $this->copy_to_elgg($elgg_object);
         $elgg_object->save();
+        // Update owner id of elgg_object manually
+        if($this->owner_id != 0 && $this->owner_id != $elgg_object->owner_guid){
+            $elgg_object->owner_guid = $this->owner_id;
+        }
         return $this->id = $elgg_object->guid;
     }
 
