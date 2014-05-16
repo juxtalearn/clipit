@@ -44,7 +44,7 @@ if (!$user) {
 }
 try {
     ClipitUser::login($username, $password, $persistent);
-} catch (LoginException $e) {
+} catch (Exception $e) {
     register_error($e->getMessage());
     forward(REFERER);
 }
