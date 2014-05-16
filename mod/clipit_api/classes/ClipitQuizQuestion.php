@@ -45,7 +45,9 @@ class ClipitQuizQuestion extends UBItem{
      */
     public $video = 0;
 
-
+    /**
+     * @param ElggObject $elgg_object
+     */
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
         $this->tag_array = static::get_tags($this->id);
@@ -65,6 +67,9 @@ class ClipitQuizQuestion extends UBItem{
         $elgg_object->video = (int)$this->video;
     }
 
+    /**
+     * @return bool|int
+     */
     protected function save(){
         parent::save();
         static::set_tags($this->id, $this->tag_array);
@@ -72,6 +77,9 @@ class ClipitQuizQuestion extends UBItem{
         return $this->id;
     }
 
+    /**
+     * @return bool|void
+     */
     protected function delete(){
         $rel_array = get_entity_relationships((int)$this->id);
         $result_array = array();
@@ -86,14 +94,29 @@ class ClipitQuizQuestion extends UBItem{
         parent::delete();
     }
 
+    /**
+     * @param int $id
+     * @param array $result_array
+     * @return bool
+     */
     static function add_quiz_results($id, $result_array){
         return UBCollection::add_items($id, $result_array, static::REL_QUIZQUESTION_QUIZRESULT, true);
     }
 
+    /**
+     * @param int $id
+     * @param array $result_array
+     * @return bool
+     */
     static function set_quiz_results($id, $result_array){
         return UBCollection::set_items($id, $result_array, static::REL_QUIZQUESTION_QUIZRESULT, true);
     }
 
+    /**
+     * @param $id
+     * @param $result_array
+     * @return bool
+     */
     static function remove_quiz_results($id, $result_array){
         return UBCollection::remove_items($id, $result_array, static::REL_QUIZQUESTION_QUIZRESULT);
     }

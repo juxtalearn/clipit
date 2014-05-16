@@ -28,6 +28,7 @@ function clipit_expose_api(){
     expose_quiz_functions();
     expose_quiz_question_functions();
     expose_quiz_result_functions();
+    expose_rating_functions();
     expose_site_functions();
     expose_sta_functions();
     expose_storyboard_functions();
@@ -1094,6 +1095,12 @@ function expose_quiz_result_functions(){
                 "required" => true)),
         "Get instances by Question Id",
         'GET', false, true);
+}
+
+function expose_rating_functions(){
+    $api_suffix = "clipit.rating.";
+    $class_suffix = "ClipitRating::";
+    expose_common_functions($api_suffix, $class_suffix);
 }
 
 function expose_site_functions(){
