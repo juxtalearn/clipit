@@ -41,7 +41,7 @@ $english = array(
     // Group tools
     'group:menu' => 'Group menu',
     'group:tools' => 'Group tools',
-    'group:discussion' => 'Discussion',
+    'group:discussion' => 'Discussions',
     'group:files' => 'Multimedia',
     'group:activity_log' => 'Activity log',
     'group:progress' => 'Progress',
@@ -53,19 +53,21 @@ $english = array(
     'discussion:edit' => 'Edit topic',
     'discussion:title_topic' => 'Topic title',
     'discussion:text_topic' => 'Topic text',
-    // STA
-    'sta:files' => 'Files',
-    'sta:videos' => 'Videos',
-    'sta:links' => 'Interesting links',
+    // Multimedia
+    'multimedia:files' => 'Files',
+    'multimedia:videos' => 'Videos',
+    'multimedia:storyboards' => 'Storyboards',
+    'multimedia:links' => 'Interesting links',
     // Files
     'files' => 'Files',
     'file' => 'File',
     'multimedia:file:description' => 'File description',
+    'multimedia:files:add' => 'Add files',
     'file:nofile' => 'No file',
     'file:removed' => 'File %s removed',
     'file:cantremove' => 'Can not remove file',
     'file:edit' => 'Edit file',
-    'file:none' => "No files.",
+    'file:none' => "No files",
     /* File types */
     'file:general' => 'File',
     'file:document' => 'Document',
@@ -79,10 +81,14 @@ $english = array(
     'videos:none' => 'No videos',
     'video:url:error' => 'Incorrect url or video not found',
     'video:add' => 'Add video url',
-
+    // Storyboards
+    'storyboards:none' => 'No storyboards',
+    'multimedia:storyboards:add' => 'Add storyboards',
     // Publications
     'publications:no_evaluated' => 'No evaluated',
     'publications:evaluated' => 'Evaluated',
+    'input:no' => 'No',
+    'input:yes' => 'Yes',
 
 );
 

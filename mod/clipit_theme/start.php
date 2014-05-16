@@ -91,7 +91,7 @@ function clipit_final_init() {
         elgg_register_css("bubblegum", "http://fonts.googleapis.com/css?family=Bubblegum+Sans");
         elgg_register_css("righteous", "http://fonts.googleapis.com/css?family=Righteous");
         elgg_register_css("ubuntu", "http://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic");
-        elgg_register_css("fontawesome", "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
+        elgg_register_css("fontawesome", "//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
         elgg_register_js("jquery", $CONFIG->url . "mod/clipit_theme/vendors/jquery/jquery-1.9.1.min.js", "head", 0);
         elgg_register_js("jquery-migrate", $CONFIG->url . "mod/clipit_theme/vendors/jquery/jquery-migrate-1.1.1.js", "head", 1);
         elgg_register_js("jquery-ui", $CONFIG->url . "mod/clipit_theme/vendors/jquery-ui-1.10.2.custom/js/jquery-ui-1.10.2.custom.min.js", "head", 2);

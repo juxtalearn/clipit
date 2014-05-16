@@ -28,9 +28,9 @@ $url = $CONFIG->url;
             ?>
             <!--
             <ul class="nav navbar-nav navbar-right" style="margin-right: 0px;">
-                <li><a href="<?php echo $url; ?>explore"><?=elgg_echo("explore");?></a></li>
+                <li><a href="<?php echo $url; ?>explore"><?php echo elgg_echo("explore");?></a></li>
                 <?php if (elgg_is_admin_logged_in()) { ?>
-                    <li><a href="<?php echo $CONFIG->url; ?>admin"><?=elgg_echo("admin");?></a></li>
+                    <li><a href="<?php echo $CONFIG->url; ?>admin"><?php echo elgg_echo("admin");?></a></li>
                 <?php } ?>
             </ul>
              -->

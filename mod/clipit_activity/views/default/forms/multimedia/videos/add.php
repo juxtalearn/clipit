@@ -16,6 +16,7 @@ $body .= elgg_view("input/hidden", array(
     'name' => 'entity-id',
     'value' => $entity->id,
 ));
+$body .= '<div class="row">';
 $body .= '<div class="col-md-12 add-video">';
 $body .= '
 <div class="pull-left video-prev">
@@ -68,7 +69,8 @@ $body .= '<div class="form-group">
 </div>';
 
 $body .='</div>';
-$body .='</div>';
+$body .='</div>'; // .col-md-12
+$body .='</div>'; // .row
 
 echo elgg_view("page/components/modal",
     array(

@@ -2,8 +2,8 @@
  /**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
- * Creation date:   14/05/14
- * Last update:     14/05/14
+ * Creation date:   16/05/14
+ * Last update:     16/05/14
  * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC JuxtaLearn Project
  * @version         $Version$
  * @link            http://www.juxtalearn.eu
@@ -45,8 +45,8 @@ echo elgg_view("page/components/modal",
     array(
         "dialog_class"     => "modal-lg",
         "remote"    => true,
-        "target"    => "edit-video-{$entity->id}",
-        "title"     => elgg_echo("video:edit"),
+        "target"    => "publish-video-{$entity->id}",
+        "title"     => elgg_echo("video:publish"),
         "form"      => true,
         "body"      => $body,
         "cancel_button" => true,

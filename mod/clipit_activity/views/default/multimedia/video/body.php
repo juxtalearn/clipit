@@ -11,6 +11,15 @@
  * @package         ClipIt
  */
 $video = elgg_extract("entity", $vars);
+//$new_video_id = ClipitVideo::create(array(
+//    'name' => $video->name,
+//    'description' => $video->description,
+//    'url'  => $video->url,
+//    'preview' => $video->preview,
+//    'duration' => $video->duration,
+//    'author_id' => 75
+//));
+//ClipitActivity::add_videos(74, array($new_video_id));
 ?>
 <div class="frame-container">
     <?php echo elgg_view('output/iframe', array(

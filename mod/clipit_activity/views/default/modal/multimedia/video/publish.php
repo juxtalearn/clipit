@@ -2,22 +2,18 @@
  /**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
- * Creation date:   28/04/14
- * Last update:     28/04/14
+ * Creation date:   16/05/14
+ * Last update:     16/05/14
  * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC JuxtaLearn Project
  * @version         $Version$
  * @link            http://www.juxtalearn.eu
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-// Get the guid
-$file_id = get_input("id");
+$id = (int)get_input("id");
+$user_id = elgg_get_logged_in_user_guid();
+$video = array_pop(ClipitVideo::get_by_id(array($id)));
 
-// Get the file
-$file = array_pop(ClipitFile::get_by_id(array($file_id)));
-header("Pragma: public");
-header("Content-Disposition: attachment; filename=\"$file->name\"");
-ob_clean();
-flush();
-readfile($file->file_path);
-exit;
+if($video){
+    echo elgg_view_form('multimedia/videos/publish', array('data-validate'=> "true" ), array('entity'  => $video));
+}

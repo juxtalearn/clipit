@@ -29,7 +29,7 @@ $files_id = elgg_extract("files", $vars);
         ?>
         <div class="file col-md-3">
             <div class="preview">
-                <div class="file-preview">
+                <div class="multimedia-preview">
                     <?php echo elgg_view('output/url', array(
                         'href'  => $href_viewer,
                         'title' => $file->name,

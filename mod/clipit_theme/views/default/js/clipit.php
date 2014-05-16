@@ -345,6 +345,7 @@ $(function(){
         form.find(".video-prev a > img").hide();
         form.find(".video-info .error").hide();
         tinymce.activeEditor.setContent("");
+        form.find(".modal-footer").hide();
         $.getJSON(elgg.config.wwwroot+"action/multimedia/videos/extract_data?"+query, function (data) {
             //call process to show the result
             form.find(".loading").hide();
@@ -352,6 +353,7 @@ $(function(){
             form.find("#link-favicon").attr("src", "http://www.google.com/s2/favicons?domain=");
             form.find(".video-prev > i").addClass("fa-play").removeClass("fa-spinner fa-spin").show();
             if(data){
+                form.find(".modal-footer").show();
                 form.find(".video-prev > i").hide();
                 form.find("#group-hide").show();
                 form.find("#link-favicon").attr("src", data.favicon);

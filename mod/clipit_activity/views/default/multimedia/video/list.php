@@ -13,6 +13,7 @@
 $entity = elgg_extract('entity', $vars);
 $video_ids = elgg_extract('videos', $vars);
 $href = elgg_extract("href", $vars);
+$rating = elgg_extract("rating", $vars);
 ?>
 <?php if($vars['add_video']):?>
     <?php echo elgg_view_form('multimedia/videos/add', array('data-validate'=> "true" ), array('entity'  => $entity)); ?>
@@ -25,7 +26,6 @@ $href = elgg_extract("href", $vars);
     <?php
     foreach($video_ids as $video_id):
         $video = array_pop(ClipitVideo::get_by_id(array($video_id)));
-        $user = array_pop(ClipitUser::get_by_id(array($video->owner_id)));
         $description = trim(elgg_strip_tags($video->description));
         // Description truncate max length 280
         if(mb_strlen($description)>280){
@@ -51,6 +51,7 @@ $href = elgg_extract("href", $vars);
                 </a>
             </div>
             <div class="col-lg-8">
+                <?php echo elgg_view("multimedia/publish_button", array('entity' => $video, 'type' => 'video')); ?>
                 <?php echo elgg_view("multimedia/owner_options", array('entity' => $video, 'type' => 'video')); ?>
                 <h4 class="text-truncate">
                     <?php echo elgg_view('output/url', array(
@@ -66,13 +67,8 @@ $href = elgg_extract("href", $vars);
                     <?php echo $description;?>
                 </p>
                 <small class="show">
+                    <?php echo elgg_view("page/elements/owner_summary", array('owner_id' => $video->owner_id, 'msg' => 'Uploaded by')); ?>
                     <i>
-                        Uploaded by
-                        <?php echo elgg_view('output/url', array(
-                            'href'  => "profile/".$user->login,
-                            'title' => $user->name,
-                            'text'  => $user->name));
-                        ?>
                         <?php echo elgg_view('output/friendlytime', array('time' => $video->time_created));?>
                     </i>
                 </small>

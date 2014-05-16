@@ -17,19 +17,24 @@ $videos_count = count($entity->video_array) > 0 ? "(".count($entity->video_array
 
 $tabs = array(
     'files' => array(
-        'text' => elgg_echo('sta:files').' '.$files_count,
+        'text' => elgg_echo('multimedia:files').' '.$files_count,
         'href' => "{$href}?filter=files",
         'priority' => 200,
     ),
     'videos' => array(
-        'text' => elgg_echo('sta:videos').' '.$videos_count,
+        'text' => elgg_echo('multimedia:videos').' '.$videos_count,
         'href' => "{$href}?filter=videos",
         'priority' => 300,
     ),
-    'links' => array(
-        'text' => elgg_echo('sta:links').' (n)',
-        'href' => "{$href}?filter=links",
+    'storyboards' => array(
+        'text' => elgg_echo('multimedia:storyboards').' '.$sb_count,
+        'href' => "{$href}?filter=storyboards",
         'priority' => 400,
+    ),
+    'links' => array(
+        'text' => elgg_echo('multimedia:links').' (n)',
+        'href' => "{$href}?filter=links",
+        'priority' => 500,
     ),
 );
 

@@ -87,7 +87,6 @@
     }
     i{
       font-size: ceil(@font-size-base * 3.57); // ~50px
-      color: @grey_slow_3;
     }
   }
   .block{
@@ -231,10 +230,28 @@
     text-align: left;
   }
 }
+//
+// Multimedia full view in publications section
+// --------------------------------------------------
+.multimedia-pub{
+  .details{
+    .description{
+      background: #fafafa;
+      padding: 20px;
+      margin: 10px 0;
+      max-height: 150px;
+      overflow: auto;
+    }
+    .tags{
+      margin-bottom: 15px;
+    }
+  }
+}
 
 //
 // Add video form
 // --------------------------------------------------
+
 .add-video{
   .video-prev{
     margin-right: 10px;
@@ -275,5 +292,11 @@
         color: @red_clipit;
       }
     }
+  }
+}
+// Modal
+#add-video{
+  .modal-footer{
+    display: none;
   }
 }

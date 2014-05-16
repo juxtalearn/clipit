@@ -15,7 +15,7 @@ $user_loggedin = elgg_get_logged_in_user_guid();
 $user_loggedin = new ElggUser($user_loggedin_id);
 $owner_user = new ElggUser($entity->owner_id);
 ?>
-<!-- File info + details -->
+<!-- Multimedia info + details -->
 <div class="multimedia-owner">
     <?php echo elgg_view("multimedia/owner_options", array('entity' => $entity, 'type' => $vars['type'])); ?>
     <div class="multimedia-preview">
@@ -47,4 +47,32 @@ $owner_user = new ElggUser($entity->owner_id);
         </div>
     </div>
 </div>
-<!-- File info + details end -->
+<!-- Multimedia info + details end -->
+
+
+<a name="replies"></a>
+<?php
+$auto_id = 1;
+foreach(array_pop(ClipitPost::get_by_destination(array($entity->id))) as $reply_msg){
+    echo elgg_view("discussion/reply",
+        array(
+            'entity' => $reply_msg,
+            'auto_id' => $auto_id,
+        ));
+    $auto_id++;
+}
+?>
+
+
+<!-- Reply form -->
+<a name="create_reply"></a>
+<h3 class="activity-module-title"><?php echo elgg_echo("reply:create"); ?></h3>
+<div class="discussion discussion-reply-msg">
+    <div class="user-reply">
+        <img class="user-avatar" src="<?php echo $user_loggedin->getIconURL('small'); ?>"/>
+    </div>
+    <div class="block">
+        <?php echo elgg_view_form("discussion/reply/create", array('data-validate'=> "true", 'class'=>'fileupload' ), array('entity'  => $entity)); ?>
+    </div>
+</div>
+<!-- Reply form end-->

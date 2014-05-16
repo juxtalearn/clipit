@@ -10,6 +10,16 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
+$entity = elgg_extract("entity", $vars);
+$videos = ClipitActivity::get_videos($entity->id);
+$rating = "blabla";
+$content = elgg_view('multimedia/video/list', array(
+    'entity'    => $entity,
+    'videos'    => $videos,
+    'href'      => "clipit_activity/74/publications",
+    'rating'    => $rating
+));
+echo $content;
 ?>
 <div class="row" style="
     margin-bottom: 10px;

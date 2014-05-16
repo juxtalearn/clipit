@@ -46,6 +46,7 @@ if(count($entity)==0){
         'description' => $file_text,
         'temp_path'  => $files['tmp_name']
     ));
+
     if($new_file_id){
         $entity_class::add_files($entity_id, array($new_file_id));
     } else {
@@ -55,5 +56,3 @@ if(count($entity)==0){
     system_message(elgg_echo('file:uploaded'));
 }
 die();
-
-forward(REFERER);
