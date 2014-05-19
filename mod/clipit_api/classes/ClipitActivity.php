@@ -32,6 +32,7 @@ class ClipitActivity extends UBItem{
     const REL_ACTIVITY_USER = "activity-user";
     const REL_ACTIVITY_GROUP = "activity-group";
     const REL_ACTIVITY_TASK = "activity-task";
+    const REL_ACTIVITY_STORYBOARD = "activity-storyboard";
     const REL_ACTIVITY_VIDEO = "activity-video";
     const REL_ACTIVITY_FILE = "activity-file";
 
@@ -47,6 +48,7 @@ class ClipitActivity extends UBItem{
     public $called_users_array = array();
     public $group_array = array();
     public $task_array = array();
+    public $storyboard_array = array();
     public $video_array = array();
     public $file_array = array();
 
@@ -59,6 +61,7 @@ class ClipitActivity extends UBItem{
         $this->called_users_array = static::get_called_users($this->id);
         $this->group_array = static::get_groups($this->id);
         $this->task_array = static::get_tasks($this->id);
+        $this->storyboard_array = static::get_storyboards($this->id);
         $this->video_array = static::get_videos($this->id);
         $this->file_array = static::get_files($this->id);
     }
@@ -78,6 +81,7 @@ class ClipitActivity extends UBItem{
         static::set_called_users($this->id, $this->called_users_array);
         static::set_groups($this->id, $this->group_array);
         static::set_tasks($this->id, $this->task_array);
+        static::set_storyboards($this->id, $this->storyboard_array);
         static::set_videos($this->id, $this->video_array);
         static::set_files($this->id, $this->file_array);
         return $this->id;
@@ -216,6 +220,23 @@ class ClipitActivity extends UBItem{
 
     static function get_tasks($id){
         return UBCollection::get_items($id, ClipitActivity::REL_ACTIVITY_TASK);
+    }
+
+    // STORYBOARDS
+    static function add_storyboards($id, $storyboard_array){
+        return UBCollection::add_items($id, $storyboard_array, ClipitActivity::REL_ACTIVITY_STORYBOARD);
+    }
+
+    static function set_storyboards($id, $storyboard_array){
+        return UBCollection::set_items($id, $storyboard_array, ClipitActivity::REL_ACTIVITY_STORYBOARD);
+    }
+
+    static function remove_storyboards($id, $storyboard_array){
+        return UBCollection::remove_items($id, $storyboard_array, ClipitActivity::REL_ACTIVITY_STORYBOARD);
+    }
+
+    static function get_storyboards($id){
+        return UBCollection::get_items($id, ClipitActivity::REL_ACTIVITY_STORYBOARD);
     }
 
     // VIDEOS

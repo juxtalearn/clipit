@@ -49,9 +49,9 @@ class UBItem{
      */
     public $time_created = 0;
     /**
-     * @var int Parent object id, in case this object was cloned
+     * @var int Origin object id, in case this object was cloned. If not = 0.
      */
-    public $parent = 0;
+    public $clone_id = 0;
 
     /* Instance Functions */
     /**
@@ -105,7 +105,7 @@ class UBItem{
         $this->url = (string)$elgg_entity->get("url");
         $this->owner_id = (int)$elgg_entity->getOwnerGUID();
         $this->time_created = (int)$elgg_entity->getTimeCreated();
-        $this->parent = (int)$elgg_entity->get("parent");
+        $this->clone_id = (int)$elgg_entity->get("clone_id");
     }
 
     /**
@@ -116,7 +116,7 @@ class UBItem{
         $elgg_entity->set("description", (string)$this->description);
         $elgg_entity->set("url", (string)$this->url);
         $elgg_entity->set("access_id", ACCESS_PUBLIC);
-        $elgg_entity->set("parent", (int)$this->parent);
+        $elgg_entity->set("clone_id", (int)$this->clone_id);
     }
 
     /**
@@ -208,7 +208,7 @@ class UBItem{
 
     static function create_clone($id){
         $prop_value_array = static::get_properties($id);
-        $prop_value_array["parent"] = (int) $id;
+        $prop_value_array["clone_id"] = (int) $id;
         return static::set_properties(null, $prop_value_array);
     }
 

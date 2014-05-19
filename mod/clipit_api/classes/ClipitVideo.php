@@ -65,7 +65,52 @@ class ClipitVideo extends UBItem{
         parent::delete();
     }
 
+    static function get_publish_level($id){
+        $site = static::get_site($id);
+        if(!empty($site)){
+            return "site";
+        }
+        $activity = static::get_activity($id);
+        if(!empty($activity)){
+            return "activity";
+        }
+        $group = static::get_group($id);
+        if(!empty($group)){
+            return "group";
+        }
+        return null;
+    }
 
+    static function get_group($id){
+        $video = new static($id);
+        if(!empty($video->clone_id)){
+            return static::get_group($video->clone_id);
+        }
+        $group = UBCollection::get_items($id, ClipitGroup::REL_GROUP_VIDEO, true);
+        if(!empty($group)){
+            return array_pop($group);
+        }else{
+            return null;
+        }
+    }
+
+    static function get_activity($id){
+        $activity = UBCollection::get_items($id, ClipitActivity::REL_ACTIVITY_VIDEO, true);
+        if(!empty($activity)){
+            return array_pop($activity);
+        } else{
+            return null;
+        }
+    }
+
+    static function get_site($id){
+        $site = UBCollection::get_items($id, ClipitSite::REL_SITE_VIDEO, true);
+        if(!empty($site)){
+            return array_pop($site);
+        } else{
+            return null;
+        }
+    }
 
     /**
      * Adds Comments to a Video, referenced by Id.

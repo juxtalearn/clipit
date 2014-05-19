@@ -24,10 +24,12 @@ class ClipitGroup extends UBItem{
 
     const REL_GROUP_USER = "group-user";
     const REL_GROUP_FILE = "group-file";
+    const REL_GROUP_STORYBOARD = "group-storyboard";
     const REL_GROUP_VIDEO = "group-video";
 
     public $user_array = array();
     public $file_array = array();
+    public $storyboard_array = array();
     public $video_array = array();
     public $activity = 0;
 
@@ -38,6 +40,7 @@ class ClipitGroup extends UBItem{
         parent::load_from_elgg($elgg_object);
         $this->user_array = static::get_users($this->id);
         $this->file_array = static::get_files($this->id);
+        $this->storyboard_array = static::get_storyboards($this->id);
         $this->video_array = static::get_videos($this->id);
         $this->activity = static::get_activity($this->id);
     }
@@ -52,6 +55,7 @@ class ClipitGroup extends UBItem{
         static::set_users($this->id, $this->user_array);
         static::set_files($this->id, $this->file_array);
         static::set_videos($this->id, $this->video_array);
+        static::set_storyboards($this->id, $this->storyboard_array);
         if($this->activity != 0){
             ClipitActivity::add_groups($this->activity, array($this->id));
         }
@@ -59,21 +63,16 @@ class ClipitGroup extends UBItem{
     }
 
     protected function delete(){
-        $rel_array = get_entity_relationships((int)$this->id);
-        foreach($rel_array as $rel){
-            switch($rel->relationship){
-                case ClipitGroup::REL_GROUP_FILE:
-                    $file_array[] = $rel->guid_two;
-                    break;
-                case ClipitGroup::REL_GROUP_VIDEO:
-                    $video_array[] = $rel->guid_two;
-                    break;
-            }
+        $storyboard_array = (array) static::get_storyboards($this->id);
+        if(!empty($storyboard_array)){
+            ClipitStoryboard::delete_by_id($storyboard_array);
         }
-        if(isset($file_array)){
+        $file_array = (array) static::get_files($this->id);
+        if(!empty($file_array)){
             ClipitFile::delete_by_id($file_array);
         }
-        if(isset($video_array)){
+        $video_array = (array) static::get_videos($this->id);
+        if(!empty($video_array)){
             ClipitVideo::delete_by_id($video_array);
         }
         parent::delete();
@@ -185,6 +184,30 @@ class ClipitGroup extends UBItem{
      */
     static function get_files($id){
         return UBCollection::get_items($id, ClipitGroup::REL_GROUP_FILE);
+    }
+
+    /**
+     * Add Storyboards to a Group.
+     *
+     * @param int   $id Id of the Group to add Storyboards to.
+     * @param array $storyboard_array Array of Storyboard Ids to add to the Group.
+     *
+     * @return bool Returns true if added correctly, or false if error.
+     */
+    static function add_storyboards($id, $storyboard_array){
+        return UBCollection::add_items($id, $storyboard_array, ClipitGroup::REL_GROUP_STORYBOARD);
+    }
+
+    static function set_storyboards($id, $storyboard_array){
+        return UBCollection::set_items($id, $storyboard_array, ClipitGroup::REL_GROUP_STORYBOARD);
+    }
+
+    static function remove_storyboards($id, $storyboard_array){
+        return UBCollection::remove_items($id, $storyboard_array, ClipitGroup::REL_GROUP_STORYBOARD);
+    }
+
+    static function get_storyboards($id){
+        return UBCollection::get_items($id, ClipitGroup::REL_GROUP_STORYBOARD);
     }
 
     /**

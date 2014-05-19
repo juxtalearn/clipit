@@ -53,6 +53,5 @@ class ClipitRating extends UBItem{
         $elgg_object->rating_array = (array)$this->rating_array;
         $elgg_object->tag_comment_array = (array)$this->tag_comment_array;
     }
-
 }
 
