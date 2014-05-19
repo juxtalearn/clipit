@@ -122,7 +122,7 @@ class ClipitGroup extends UBItem{
     }
 
     static function set_users($id, $user_array){
-        return static::set_users($id, $user_array);
+        return UBCollection::set_items($id, $user_array, ClipitGroup::REL_GROUP_USER);
     }
 
     /**
@@ -161,7 +161,7 @@ class ClipitGroup extends UBItem{
     }
 
     static function set_files($id, $file_array){
-        return static::set_files($id, $file_array);
+        return UBCollection::set_items($id, $file_array, ClipitGroup::REL_GROUP_FILE);
     }
 
     /**
@@ -200,7 +200,7 @@ class ClipitGroup extends UBItem{
     }
 
     static function set_videos($id, $video_array){
-        return static::set_users($id, $video_array);
+        return UBCollection::set_items($id, $video_array, ClipitGroup::REL_GROUP_VIDEO);
     }
 
     /**
