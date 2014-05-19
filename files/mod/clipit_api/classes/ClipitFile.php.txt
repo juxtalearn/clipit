@@ -45,6 +45,25 @@ class ClipitFile extends UBFile{
         return $this->id;
     }
 
+    static function get_group($id){
+        $file = new static($id);
+        if(!empty($file->clone_id)){
+            return static::get_group($file->clone_id);
+        }
+        $group = UBCollection::get_items($id, ClipitGroup::REL_GROUP_FILE, true);
+        return array_pop($group);
+    }
+
+    static function get_activity($id){
+        $activity = UBCollection::get_items($id, ClipitActivity::REL_ACTIVITY_FILE, true);
+        return array_pop($activity);
+    }
+
+    static function get_site($id){
+        $site = UBCollection::get_items($id, ClipitSite::REL_SITE_FILE, true);
+        return array_pop($site);
+    }
+
     /**
      * Add Tags to a File.
      *

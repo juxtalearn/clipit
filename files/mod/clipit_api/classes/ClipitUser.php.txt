@@ -70,14 +70,18 @@ class ClipitUser extends UBUser{
      * @return array Returns an array of Group Ids the user is member of.
      */
     static function get_groups($user_id){
-        $rel_array = get_entity_relationships($user_id, true);
-        $group_ids = array();
-        foreach($rel_array as $rel){
-            if($rel->relationship == ClipitGroup::REL_GROUP_USER){
-                $group_ids[] = (int)$rel->guid_one;
-            }
-        }
-        return $group_ids;
+        return UBCollection::get_items($user_id, ClipitGroup::REL_GROUP_USER, true);
+    }
+
+    /**
+     * Get all Activity Ids in which a user is member of.
+     *
+     * @param int $user_id Id of the user to get activities from.
+     *
+     * @return array Returns an array of Activity Ids the user is member of.
+     */
+    static function get_activities($user_id){
+        return UBCollection::get_items($user_id, ClipitActivity::REL_ACTIVITY_USER, true);
     }
 
     /**
