@@ -314,6 +314,45 @@ function expose_common_message_functions($api_suffix, $class_suffix){
         'GET', false, true);
 }
 
+function expose_common_publication_functions($api_suffix, $class_suffix){
+    expose_function(
+        $api_suffix . "get_publish_level",
+        $class_suffix . "get_publish_level",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Get Publish level for a publication item (either 'group', 'activity' or 'site'.",
+        'GET', false, true);
+    expose_function(
+        $api_suffix . "get_group",
+        $class_suffix . "get_group",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Get the Group this publication item is inside of.",
+        'GET', false, true);
+    expose_function(
+        $api_suffix . "get_activity",
+        $class_suffix . "get_activity",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Get the Activity this publication item is inside of.",
+        'GET', false, true);
+    expose_function(
+        $api_suffix . "get_site",
+        $class_suffix . "get_site",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Get the Site this publication item is inside of.",
+        'GET', false, true);
+}
+
 function expose_activity_functions(){
     $api_suffix = "clipit.activity.";
     $class_suffix = "ClipitActivity::";
@@ -1168,6 +1207,7 @@ function expose_storyboard_functions(){
     $api_suffix = "clipit.storyboard.";
     $class_suffix = "ClipitStoryboard::";
     expose_common_functions($api_suffix, $class_suffix);
+    expose_common_publication_functions($api_suffix, $class_suffix);
 }
 
 function expose_tag_functions(){
@@ -1279,6 +1319,7 @@ function expose_video_functions(){
     $api_suffix = "clipit.video.";
     $class_suffix = "ClipitVideo::";
     expose_common_functions($api_suffix, $class_suffix);
+    expose_common_publication_functions($api_suffix, $class_suffix);
     expose_function(
         $api_suffix . "add_comments",
         $class_suffix . "add_comments",

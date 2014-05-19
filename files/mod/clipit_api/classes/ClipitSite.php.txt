@@ -18,4 +18,7 @@
  */
 class ClipitSite extends UBSite{
 
+    const REL_SITE_VIDEO = "site-video";
+    const REL_SITE_STORYBOARD = "site-storyboard";
+
 }
