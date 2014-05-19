@@ -61,8 +61,8 @@ function loadFiles($path){
  */
 function clipit_auth_usertoken(){
     global $CONFIG;
-    if(isset($_SERVER["HTTP_AUTHTOKEN"])){
-        $token = $_SERVER["HTTP_AUTHTOKEN"];
+    if(isset($_SERVER["HTTP_AUTH_TOKEN"])){
+        $token = $_SERVER["HTTP_AUTH_TOKEN"];
     }
     if(!isset($token) || empty($token)){
         return false;
