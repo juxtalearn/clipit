@@ -28,7 +28,6 @@ class ClipitVideo extends UBItem{
     public $comment_array = array();
     public $preview = "";
     public $duration = 0;
-    public $author = "";
 
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
@@ -36,14 +35,12 @@ class ClipitVideo extends UBItem{
         $this->tag_array = static::get_tags($this->id);
         $this->preview = (string)$elgg_object->preview;
         $this->duration = (int)$elgg_object->duration;
-        $this->author = (string)$elgg_object->author;
     }
 
     protected function copy_to_elgg($elgg_object){
         parent::copy_to_elgg($elgg_object);
         $elgg_object->preview = (string)$this->preview;
         $elgg_object->duration = (int)$this->duration;
-        $elgg_object->author = (string)$this->author;
     }
 
     protected function save(){

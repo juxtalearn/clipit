@@ -188,7 +188,7 @@ class UBItem{
                 }
             }
             if($prop == "id"){
-                throw new InvalidParameterException("ERROR: Cannot modify 'id' of instance.");
+                continue; // cannot set an item's ID manually.
             }
             $item->$prop = $value;
         }
@@ -207,7 +207,9 @@ class UBItem{
     }
 
     static function create_clone($id){
-        return static::set_properties(null, static::get_properties($id));
+        $prop_value_array = static::get_properties($id);
+        $prop_value_array["parent"] = (int) $id;
+        return static::set_properties(null, $prop_value_array);
     }
 
     /**
