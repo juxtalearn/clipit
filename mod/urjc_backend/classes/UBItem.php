@@ -48,6 +48,10 @@ class UBItem{
      * @var int Timestamp when this Item was created
      */
     public $time_created = 0;
+    /**
+     * @var int Parent object id, in case this object was cloned
+     */
+    public $parent = 0;
 
     /* Instance Functions */
     /**
@@ -101,6 +105,7 @@ class UBItem{
         $this->url = (string)$elgg_entity->get("url");
         $this->owner_id = (int)$elgg_entity->getOwnerGUID();
         $this->time_created = (int)$elgg_entity->getTimeCreated();
+        $this->parent = (int)$elgg_entity->get("parent");
     }
 
     /**
@@ -111,6 +116,7 @@ class UBItem{
         $elgg_entity->set("description", (string)$this->description);
         $elgg_entity->set("url", (string)$this->url);
         $elgg_entity->set("access_id", ACCESS_PUBLIC);
+        $elgg_entity->set("parent", (int)$this->parent);
     }
 
     /**
@@ -144,13 +150,20 @@ class UBItem{
      *
      * @return array|bool Returns an array of property=>value pairs, or false if error
      */
-    static function get_properties($id, $prop_array){
+    static function get_properties($id, $prop_array = null){
         if(!$item = new static($id)){
             return null;
         }
         $value_array = array();
-        foreach($prop_array as $prop){
-            $value_array[$prop] = $item->$prop;
+        if(!empty($prop_array)){
+            foreach($prop_array as $prop){
+                $value_array[$prop] = $item->$prop;
+            }
+        } else{
+            $prop_array = static::list_properties();
+            foreach($prop_array as $prop => $value){
+                $value_array[$prop] = $item->$prop;
+            }
         }
         return $value_array;
     }
@@ -175,7 +188,7 @@ class UBItem{
                 }
             }
             if($prop == "id"){
-                throw new InvalidParameterException("ERROR: Cannot modify 'id' of instance.");
+                continue; // cannot set an item's ID manually.
             }
             $item->$prop = $value;
         }
@@ -190,6 +203,12 @@ class UBItem{
      * @return int|bool Returns instance Id if correct, or false if error
      */
     static function create($prop_value_array){
+        return static::set_properties(null, $prop_value_array);
+    }
+
+    static function create_clone($id){
+        $prop_value_array = static::get_properties($id);
+        $prop_value_array["parent"] = (int) $id;
         return static::set_properties(null, $prop_value_array);
     }
 

@@ -56,7 +56,7 @@ function expose_common_functions($api_suffix, $class_suffix){
                 "required" => true),
             "prop_array" => array(
                 "type" => "array",
-                "required" => true)),
+                "required" => false)),
         "Get property=>value array",
         'GET', false, true);
     expose_function(
@@ -79,6 +79,15 @@ function expose_common_functions($api_suffix, $class_suffix){
                 "type" => "array",
                 "required" => true)),
         "Create a new instance, set property=>value array and save into the system",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "create_clone",
+        $class_suffix . "create_clone",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Create a clone copy of an instance",
         'POST', false, true);
     expose_function(
         $api_suffix . "delete_by_id",
