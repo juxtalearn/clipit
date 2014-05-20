@@ -22,26 +22,29 @@ class ClipitRating extends UBItem{
      */
     const SUBTYPE = "clipit_rating";
 
+    const REL_RATING_TAGRATING = "rating-tag_rating";
+    const REL_RATING_PERFORMANCERATING = "rating-performance_rating";
+
     public $target = 0;
     /**
      * @var int Overall rating opinionfrom 0 to 10
      */
     public $overall_rating = 0;
     /**
-     * @var array Ratings in the form: rating_array["rating_name"]=>"rating_value"
+     * @var array Ratings about Tags used"
      */
-    public $rating_array = array();
+    public $tag_rating_array = array();
     /**
-     * @var array Comments about Tags used in target in the form: comment_array["comment_name"]=>"comment"
+     * @var array Ratings about Performance tips used"
      */
-    public $tag_comment_array = array();
+    public $performance_rating_array = array();
 
 
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
         $this->overall_rating = (int)$elgg_object->overall;
-        $this->rating_array = (array)$elgg_object->rating_array;
-        $this->tag_comment_array = (array)$elgg_object->tag_comment_array;
+        $this->tag_rating_array = (array)static::get_tag_ratings($this->id);
+        $this->performance_rating_array = (array)static::get_performance_ratings($this->id);
     }
 
     /**
@@ -50,8 +53,47 @@ class ClipitRating extends UBItem{
     protected function copy_to_elgg($elgg_object){
         parent::copy_to_elgg($elgg_object);
         $elgg_object->overall_rating = (int)$this->overall_rating;
-        $elgg_object->rating_array = (array)$this->rating_array;
-        $elgg_object->tag_comment_array = (array)$this->tag_comment_array;
     }
+
+    protected function save(){
+        parent::save();
+        static::set_tag_ratings($this->id, (array)$this->tag_rating_array, static::REL_RATING_TAGRATING);
+        static::set_performance_ratings($this->id, (array)$this->performance_rating_array, static::REL_RATING_PERFORMANCERATING);
+        return $this->id;
+    }
+
+    static function add_tag_ratings($rating_id, $tag_rating_array){
+        return UBCollection::add_items($rating_id, $tag_rating_array, static::REL_RATING_TAGRATING);
+    }
+
+    static function set_tag_ratings($rating_id, $tag_rating_array){
+        return UBCollection::set_items($rating_id, $tag_rating_array, static::REL_RATING_TAGRATING);
+    }
+
+    static function remove_tag_ratings($rating_id, $tag_rating_array){
+        return UBCollection::remove_items($rating_id, $tag_rating_array, static::REL_RATING_TAGRATING);
+    }
+
+    static function get_tag_ratings($rating_id){
+        return UBCollection::get_items($rating_id, static::REL_RATING_TAGRATING);
+    }
+
+    static function add_performance_ratings($rating_id, $performance_rating_array){
+        return UBCollection::add_items($rating_id, $performance_rating_array, static::REL_RATING_PERFORMANCERATING);
+    }
+
+    static function set_performance_ratings($rating_id, $performance_rating_array){
+        return UBCollection::set_items($rating_id, $performance_rating_array, static::REL_RATING_PERFORMANCERATING);
+    }
+
+    static function remove_performance_ratings($rating_id, $performance_rating_array){
+        return UBCollection::remove_items($rating_id, $performance_rating_array, static::REL_RATING_PERFORMANCERATING);
+    }
+
+    static function get_performance_ratings($rating_id){
+        return UBCollection::get_items($rating_id, static::REL_RATING_PERFORMANCERATING);
+    }
+
+
 }
 

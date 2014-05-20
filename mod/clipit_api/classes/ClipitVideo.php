@@ -23,16 +23,19 @@ class ClipitVideo extends UBItem{
     const SUBTYPE = "clipit_video";
     const REL_VIDEO_COMMENT = "video-comment";
     const REL_VIDEO_TAG = "video-tag";
+    const REL_VIDEO_PERFORMANCE = "video-performance";
 
     public $tag_array = array();
+    public $performance_array = array();
     public $comment_array = array();
     public $preview = "";
     public $duration = 0;
 
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
-        $this->comment_array = static::get_comments($this->id);
-        $this->tag_array = static::get_tags($this->id);
+        $this->comment_array = (array)static::get_comments($this->id);
+        $this->tag_array = (array)static::get_tags($this->id);
+        $this->performance_array = (array)static::get_performance_items($this->id);
         $this->preview = (string)$elgg_object->preview;
         $this->duration = (int)$elgg_object->duration;
     }
@@ -45,8 +48,9 @@ class ClipitVideo extends UBItem{
 
     protected function save(){
         parent::save();
-        static::set_comments($this->id, $this->comment_array);
-        static::set_tags($this->id, $this->tag_array);
+        static::set_comments($this->id, (array)$this->comment_array);
+        static::set_tags($this->id, (array)$this->tag_array);
+        static::set_performance_items($this->id, (array)$this->performance_array);
         return $this->id;
     }
 
@@ -204,6 +208,22 @@ class ClipitVideo extends UBItem{
      */
     static function get_tags($id){
         return UBCollection::get_items($id, static::REL_VIDEO_TAG);
+    }
+
+    static function add_performance_items($id, $performance_array){
+        return UBCollection::add_items($id, $performance_array, static::REL_VIDEO_PERFORMANCE);
+    }
+
+    static function set_performance_items($id, $performance_array){
+        return UBCollection::set_items($id, $performance_array, static::REL_VIDEO_PERFORMANCE);
+    }
+
+    static function remove_performance_items($id, $performance_array){
+        return UBCollection::remove_items($id, $performance_array, static::REL_VIDEO_PERFORMANCE);
+    }
+
+    static function get_performance_items($id){
+        return UBCollection::get_items($id, static::REL_VIDEO_PERFORMANCE);
     }
 
 }
