@@ -20,7 +20,7 @@ class ClipitExample extends UBItem{
     /**
      * @const string Elgg entity subtype for this class
      */
-    const SUBTYPE = "clipit_example";
+    const SUBTYPE = "ClipitExample";
 
     public $resource_url = "";
 

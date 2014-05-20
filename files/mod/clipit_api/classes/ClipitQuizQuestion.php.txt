@@ -20,7 +20,7 @@ class ClipitQuizQuestion extends UBItem{
     /**
      * @const string Elgg entity subtype for this class
      */
-    const SUBTYPE = "clipit_quiz_question";
+    const SUBTYPE = "ClipitQuizQuestion";
     const REL_QUIZQUESTION_TAG = "quiz_question-tag";
     const REL_QUIZQUESTION_QUIZRESULT = "quiz_question-quiz_result";
 

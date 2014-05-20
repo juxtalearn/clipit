@@ -14,7 +14,7 @@
 
 class ClipitTagRating extends UBItem {
 
-    const SUBTYPE = "clipit_tag_rating";
+    const SUBTYPE = "ClipitTagRating";
 
     public $tag_id = 0;
     public $is_used = null;

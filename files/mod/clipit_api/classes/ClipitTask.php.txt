@@ -16,7 +16,7 @@
  * Class ClipitTask
  */
 class ClipitTask extends UBItem{
-    const SUBTYPE = "clipit_task";
+    const SUBTYPE = "ClipitTask";
 
     /**
      * Get the Activity Id in which a Task is contained in.

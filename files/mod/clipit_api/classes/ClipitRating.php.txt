@@ -20,7 +20,7 @@ class ClipitRating extends UBItem{
     /**
      * @const string Elgg entity subtype for this class
      */
-    const SUBTYPE = "clipit_rating";
+    const SUBTYPE = "ClipitRating";
 
     const REL_RATING_TAGRATING = "rating-tag_rating";
     const REL_RATING_PERFORMANCERATING = "rating-performance_rating";

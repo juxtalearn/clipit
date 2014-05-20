@@ -17,7 +17,7 @@
  *
  */
 class ClipitSTA extends UBFile{
-    const SUBTYPE = "clipit_sta";
+    const SUBTYPE = "ClipitSTA";
 
     public $resource_url = "";
     public $tricky_topic = 0;

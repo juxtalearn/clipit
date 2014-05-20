@@ -20,7 +20,7 @@ class ClipitGroup extends UBItem{
     /**
      * @const string Elgg entity subtype for this class
      */
-    const SUBTYPE = "clipit_group";
+    const SUBTYPE = "ClipitGroup";
 
     const REL_GROUP_USER = "group-user";
     const REL_GROUP_FILE = "group-file";

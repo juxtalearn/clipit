@@ -17,7 +17,7 @@
  *
  */
 class ClipitStoryboard extends UBItem{
-    const SUBTYPE = "clipit_storyboard";
+    const SUBTYPE = "ClipitStoryboard";
 
     static function get_publish_level($id){
         $site = static::get_site($id);

@@ -14,7 +14,7 @@
 
 class ClipitChat extends UBMessage{
 
-    const SUBTYPE = "clipit_chat";
+    const SUBTYPE = "ClipitChat";
 
     public $archived_array = array();
 
