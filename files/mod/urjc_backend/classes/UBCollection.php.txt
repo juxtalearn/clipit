@@ -17,10 +17,6 @@
  *
  */
 abstract class UBCollection{
-    /**
-     * @const string Elgg entity SUBTYPE for this class
-     */
-    const SUBTYPE = "collection";
 
     /**
      * Adds Items to a Collection.

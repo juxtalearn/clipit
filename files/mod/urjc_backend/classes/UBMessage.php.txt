@@ -15,7 +15,7 @@
 
 class UBMessage extends UBItem{
 
-    const SUBTYPE = "message";
+    const SUBTYPE = "UBMessage";
 
     const REL_MESSAGE_DESTINATION = "message-destination";
     const REL_MESSAGE_FILE = "message-file";

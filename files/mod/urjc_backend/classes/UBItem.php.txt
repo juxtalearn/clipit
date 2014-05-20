@@ -23,7 +23,7 @@ class UBItem{
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
-    const SUBTYPE = "item";
+    const SUBTYPE = "UBItem";
     /**
      * @var int Unique Id of this instance
      */

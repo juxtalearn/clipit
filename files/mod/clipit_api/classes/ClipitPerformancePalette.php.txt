@@ -9,8 +9,30 @@
 class ClipitPerformancePalette{
     const SUBTYPE = "ClipitPerformancePalette";
 
-    public $item_array = array();
+    public $performance_items = array();
 
+    /**
+     * Constructor
+     *
+     * @throws APIException
+     */
+    function __construct(){
+        global $CONFIG;
+        if(!$CONFIG->performance_palette_id){
+            return null;
+        }
+        $elgg_entity = new ElggObject($CONFIG->performance_palette_id);
+        $this->id = (int)$elgg_entity->get("guid");
+        $this->name = (string)$elgg_entity->get("name");
+        $this->description = (string)$elgg_entity->get("description");
+        $this->url = (string)$elgg_entity->get("url");
+        $this->owner_id = (int)$elgg_entity->getOwnerGUID();
+        $this->time_created = (int)$elgg_entity->getTimeCreated();
+        $this->performance_items = (array)$elgg_entity->performance_items;
+    }
 
+    static function get_performance_palette(){
+        return $performance_palette = new static();
+    }
 
 } 

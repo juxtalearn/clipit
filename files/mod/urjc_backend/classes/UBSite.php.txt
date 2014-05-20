@@ -17,7 +17,7 @@
  */
 class UBSite{
 
-    const SUBTYPE = "site";
+    const SUBTYPE = "UBSite";
 
     /**
      * Constructor
