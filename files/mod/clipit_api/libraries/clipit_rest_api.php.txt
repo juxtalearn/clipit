@@ -1154,6 +1154,12 @@ function expose_rating_functions(){
 function expose_site_functions(){
     $api_suffix = "clipit.site.";
     $class_suffix = "ClipitSite::";
+    expose_function(
+        $api_suffix . "get_site",
+        $class_suffix . "get_site",
+        null,
+        "Return the Site object.",
+        'GET', false, false);
     unexpose_function("system.api.list");
     expose_function(
         $api_suffix . "api_list",

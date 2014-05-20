@@ -16,6 +16,26 @@
 
  */
 class UBSite{
+
+    /**
+     * Constructor
+     *
+     * @throws APIException
+     */
+    function __construct(){
+        $elgg_site = elgg_get_site_entity();
+        $this->id = (int)$elgg_site->get("guid");
+        $this->name = (string)$elgg_site->get("name");
+        $this->description = (string)$elgg_site->get("description");
+        $this->url = (string)$elgg_site->get("url");
+        $this->owner_id = (int)$elgg_site->getOwnerGUID();
+        $this->time_created = (int)$elgg_site->getTimeCreated();
+    }
+
+    static function get_site(){
+        return new static();
+    }
+
     /**
      * Get the REST API method list, including description and required parameters.
      *

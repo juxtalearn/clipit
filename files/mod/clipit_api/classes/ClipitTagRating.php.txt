@@ -33,4 +33,4 @@ class ClipitTagRating extends UBItem {
         $elgg_object->$is_used = (bool)$this->$is_used;
         $elgg_object->$comment = (string)$this->$comment;
     }
-} 
+}
