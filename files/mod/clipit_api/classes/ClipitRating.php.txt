@@ -29,7 +29,7 @@ class ClipitRating extends UBItem{
     /**
      * @var int Overall rating opinionfrom 0 to 10
      */
-    public $overall_rating = 0;
+    public $overall_rating = -1;
     /**
      * @var array Ratings about Tags used"
      */

@@ -6,12 +6,7 @@
  * Time: 16:09
  */
 
-class ClipitPerformanceItem{
+class ClipitPerformanceItem extends UBItem{
     const SUBTYPE = "ClipitPerformanceItem";
 
-
-
-    static function get_performance_palette(){
-
-    }
 } 

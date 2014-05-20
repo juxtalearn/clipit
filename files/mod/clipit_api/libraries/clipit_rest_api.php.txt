@@ -24,6 +24,8 @@ function clipit_expose_api(){
     expose_file_functions();
     expose_group_functions();
     expose_la_functions();
+    expose_performance_item_functions();
+    expose_performance_palette_functions();
     expose_post_functions();
     expose_quiz_functions();
     expose_quiz_question_functions();
@@ -965,6 +967,32 @@ function expose_la_functions(){
                 "required" => true)),
         "Send Learning Analytics Metrics to ClipIt",
         "POST", false, true);
+}
+
+function expose_performance_item_functions(){
+    $api_suffix = "clipit.performance_item.";
+    $class_suffix = "ClipitPerformanceItem::";
+    expose_common_functions($api_suffix, $class_suffix);
+}
+
+function expose_performance_palette_functions(){
+    $api_suffix = "clipit.performance_palette.";
+    $class_suffix = "ClipitPerformancePalette::";
+    expose_function(
+        $api_suffix . "get_performance_palette",
+        $class_suffix . "get_performance_palette",
+        null,
+        "Get the JuxtaLearn Performance Palette",
+        'GET', false, true);
+    expose_function(
+        $api_suffix . "add_performance_items",
+        $class_suffix . "add_performance_items",
+        array(
+            "performance_items" => array(
+                "type" => "array",
+                "required" => true)),
+        "Add Performance Items to the Performance Palette",
+        'POST', false, true);
 }
 
 function expose_post_functions(){
