@@ -22,6 +22,9 @@ class ClipitRating extends UBItem{
      */
     const SUBTYPE = "clipit_rating";
 
+    const REL_RATING_TAGRATING = "rating-tag_rating";
+    const REL_RATING_PERFORMANCERATING = "rating-performance_rating";
+
     public $target = 0;
     /**
      * @var int Overall rating opinionfrom 0 to 10
@@ -40,8 +43,8 @@ class ClipitRating extends UBItem{
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
         $this->overall_rating = (int)$elgg_object->overall;
-        $this->tag_rating_array = (array)$elgg_object->tag_rating_array;
-        $this->performance_rating_array = (array)$elgg_object->performance_rating_array;
+        $this->tag_rating_array = (array)static::get_tag_ratings($this->id);
+        $this->performance_rating_array = (array)static::get_performance_ratings($this->id);
     }
 
     /**
@@ -50,36 +53,45 @@ class ClipitRating extends UBItem{
     protected function copy_to_elgg($elgg_object){
         parent::copy_to_elgg($elgg_object);
         $elgg_object->overall_rating = (int)$this->overall_rating;
-        $elgg_object->tag_rating_array = (array)$this->tag_rating_array;
-        $elgg_object->performance_rating_array = (array)$this->performance_rating_array;
     }
 
-    static function add_tag_rating($rating_id, $tag_id, $is_used, $comment){
-        $rating = new static($rating_id);
-        $prop_value_array["tag_id"] = $tag_id;
-        $prop_value_array["is_used"] = (bool)$is_used;
-        $prop_value_array["comment"] = (string)$comment;
-        $tag_rating_id = ClipitTagRating::create($prop_value_array);
-        if(!empty($tag_rating_id){
-            $rating->tag_rating_array[] = $tag_rating_id;
-            return $rating->save();
-        } else{
-            return null;
-        }
+    protected function save(){
+        parent::save();
+        static::set_tag_ratings($this->id, (array)$this->tag_rating_array, static::REL_RATING_TAGRATING);
+        static::set_performance_ratings($this->id, (array)$this->performance_rating_array, static::REL_RATING_PERFORMANCERATING);
+        return $this->id;
     }
 
-    static function add_performance_rating($rating_id, $performance_id, $star_rating){
-        $rating = new static($rating_id);
-        $prop_value_array["performance_id"] = $performance_id;
-        $prop_value_array["star_rating"] = (bool)$star_rating;
-        $prop_value_array["comment"] = (string)$comment;
-        $tag_rating_id = ClipitTagRating::create($prop_value_array);
-        if(!empty($tag_rating_id){
-            $rating->tag_rating_array[] = $tag_rating_id;
-            return $rating->save();
-        } else{
-            return null;
-        }
+    static function add_tag_ratings($rating_id, $tag_rating_array){
+        return UBCollection::add_items($rating_id, $tag_rating_array, static::REL_RATING_TAGRATING);
+    }
+
+    static function set_tag_ratings($rating_id, $tag_rating_array){
+        return UBCollection::set_items($rating_id, $tag_rating_array, static::REL_RATING_TAGRATING);
+    }
+
+    static function remove_tag_ratings($rating_id, $tag_rating_array){
+        return UBCollection::remove_items($rating_id, $tag_rating_array, static::REL_RATING_TAGRATING);
+    }
+
+    static function get_tag_ratings($rating_id){
+        return UBCollection::get_items($rating_id, static::REL_RATING_TAGRATING);
+    }
+
+    static function add_performance_ratings($rating_id, $performance_rating_array){
+        return UBCollection::add_items($rating_id, $performance_rating_array, static::REL_RATING_PERFORMANCERATING);
+    }
+
+    static function set_performance_ratings($rating_id, $performance_rating_array){
+        return UBCollection::set_items($rating_id, $performance_rating_array, static::REL_RATING_PERFORMANCERATING);
+    }
+
+    static function remove_performance_ratings($rating_id, $performance_rating_array){
+        return UBCollection::remove_items($rating_id, $performance_rating_array, static::REL_RATING_PERFORMANCERATING);
+    }
+
+    static function get_performance_ratings($rating_id){
+        return UBCollection::get_items($rating_id, static::REL_RATING_PERFORMANCERATING);
     }
 
 
