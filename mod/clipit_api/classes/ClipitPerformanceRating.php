@@ -14,20 +14,20 @@
 
 class ClipitPerformanceRating extends UBItem {
 
-    const SUBTYPE = "clipit_performance_rating";
+    const SUBTYPE = "ClipitPerformanceRating";
 
-    public $performance_id = 0;
+    public $performance_item = 0;
     public $star_rating = null;
 
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
-        $this->performance_id = (int)$elgg_object->performance_id;
+        $this->performance_item = (int)$elgg_object->performance_item;
         $this->star_rating = (int)$elgg_object->star_rating;
     }
 
     protected function copy_to_elgg($elgg_object){
         parent::copy_to_elgg($elgg_object);
-        $elgg_object->performance_id = (int)$this->performance_id;
+        $elgg_object->performance_item = (int)$this->performance_item;
         $elgg_object->star_rating = (int)$this->star_rating;
     }
 

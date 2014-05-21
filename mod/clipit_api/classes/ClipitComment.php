@@ -17,5 +17,5 @@
  *
  */
 class ClipitComment extends UBMessage{
-
+    const SUBTYPE = "ClipitComment";
 }

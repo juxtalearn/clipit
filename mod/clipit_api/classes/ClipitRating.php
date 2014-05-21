@@ -20,7 +20,7 @@ class ClipitRating extends UBItem{
     /**
      * @const string Elgg entity subtype for this class
      */
-    const SUBTYPE = "clipit_rating";
+    const SUBTYPE = "ClipitRating";
 
     const REL_RATING_TAGRATING = "rating-tag_rating";
     const REL_RATING_PERFORMANCERATING = "rating-performance_rating";
@@ -29,7 +29,7 @@ class ClipitRating extends UBItem{
     /**
      * @var int Overall rating opinionfrom 0 to 10
      */
-    public $overall_rating = 0;
+    public $overall_rating = -1;
     /**
      * @var array Ratings about Tags used"
      */
@@ -42,7 +42,8 @@ class ClipitRating extends UBItem{
 
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
-        $this->overall_rating = (int)$elgg_object->overall;
+        $this->target = (int)$elgg_object->target;
+        $this->overall_rating = (int)$elgg_object->overall_rating;
         $this->tag_rating_array = (array)static::get_tag_ratings($this->id);
         $this->performance_rating_array = (array)static::get_performance_ratings($this->id);
     }
@@ -52,6 +53,7 @@ class ClipitRating extends UBItem{
      */
     protected function copy_to_elgg($elgg_object){
         parent::copy_to_elgg($elgg_object);
+        $elgg_object->target = (int)$this->target;
         $elgg_object->overall_rating = (int)$this->overall_rating;
     }
 

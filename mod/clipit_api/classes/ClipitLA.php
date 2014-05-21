@@ -14,7 +14,7 @@
 
 class ClipitLA extends UBFile{
 
-    const SUBTYPE = "clipit_la";
+    const SUBTYPE = "ClipitLA";
 
     public $return_id = 0;
     public $status_code = 0;

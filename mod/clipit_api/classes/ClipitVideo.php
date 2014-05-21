@@ -20,7 +20,7 @@ class ClipitVideo extends UBItem{
     /**
      * @const string Elgg entity sybtype for this class
      */
-    const SUBTYPE = "clipit_video";
+    const SUBTYPE = "ClipitVideo";
     const REL_VIDEO_COMMENT = "video-comment";
     const REL_VIDEO_TAG = "video-tag";
     const REL_VIDEO_PERFORMANCE = "video-performance";

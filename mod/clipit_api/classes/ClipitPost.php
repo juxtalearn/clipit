@@ -13,7 +13,7 @@
  */
 
 class ClipitPost extends UBMessage{
-    const SUBTYPE = "clipit_post";
+    const SUBTYPE = "ClipitPost";
 
     public $topic_id = 0;
 

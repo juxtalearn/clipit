@@ -24,6 +24,9 @@ function clipit_expose_api(){
     expose_file_functions();
     expose_group_functions();
     expose_la_functions();
+    expose_performance_item_functions();
+    expose_performance_palette_functions();
+    expose_performance_rating_functions();
     expose_post_functions();
     expose_quiz_functions();
     expose_quiz_question_functions();
@@ -33,6 +36,7 @@ function clipit_expose_api(){
     expose_sta_functions();
     expose_storyboard_functions();
     expose_tag_functions();
+    expose_tag_rating_functions();
     expose_task_functions();
     expose_tricky_topic_functions();
     expose_user_functions();
@@ -967,6 +971,38 @@ function expose_la_functions(){
         "POST", false, true);
 }
 
+function expose_performance_item_functions(){
+    $api_suffix = "clipit.performance_item.";
+    $class_suffix = "ClipitPerformanceItem::";
+    expose_common_functions($api_suffix, $class_suffix);
+}
+
+function expose_performance_palette_functions(){
+    $api_suffix = "clipit.performance_palette.";
+    $class_suffix = "ClipitPerformancePalette::";
+    expose_function(
+        $api_suffix . "get_performance_palette",
+        $class_suffix . "get_performance_palette",
+        null,
+        "Get the JuxtaLearn Performance Palette",
+        'GET', false, true);
+    expose_function(
+        $api_suffix . "add_performance_items",
+        $class_suffix . "add_performance_items",
+        array(
+            "performance_items" => array(
+                "type" => "array",
+                "required" => true)),
+        "Add Performance Items to the Performance Palette",
+        'POST', false, true);
+}
+
+function expose_performance_rating_functions(){
+    $api_suffix = "clipit.performance_rating.";
+    $class_suffix = "ClipitPerformanceRating::";
+    expose_common_functions($api_suffix, $class_suffix);
+}
+
 function expose_post_functions(){
     $api_suffix = "clipit.post.";
     $class_suffix = "ClipitPost::";
@@ -1154,6 +1190,12 @@ function expose_rating_functions(){
 function expose_site_functions(){
     $api_suffix = "clipit.site.";
     $class_suffix = "ClipitSite::";
+    expose_function(
+        $api_suffix . "get_site",
+        $class_suffix . "get_site",
+        null,
+        "Return the Site object.",
+        'GET', false, false);
     unexpose_function("system.api.list");
     expose_function(
         $api_suffix . "api_list",
@@ -1213,6 +1255,12 @@ function expose_storyboard_functions(){
 function expose_tag_functions(){
     $api_suffix = "clipit.tag.";
     $class_suffix = "ClipitTag::";
+    expose_common_functions($api_suffix, $class_suffix);
+}
+
+function expose_tag_rating_functions(){
+    $api_suffix = "clipit.tag_rating.";
+    $class_suffix = "ClipitTagRating::";
     expose_common_functions($api_suffix, $class_suffix);
 }
 

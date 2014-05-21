@@ -23,7 +23,7 @@ class UBItem{
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
-    const SUBTYPE = "item";
+    const SUBTYPE = "UBItem";
     /**
      * @var int Unique Id of this instance
      */
@@ -96,7 +96,7 @@ class UBItem{
     }
 
     /**
-     * @param ElggObject $elgg_object Elgg Object to load parameters from.
+     * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
     protected function load_from_elgg($elgg_entity){
         $this->id = (int)$elgg_entity->get("guid");
@@ -109,7 +109,7 @@ class UBItem{
     }
 
     /**
-     * @param ElggObject $elgg_object Elgg object instance to save Item to
+     * @param ElggEntity $elgg_entity Elgg object instance to save Item to
      */
     protected function copy_to_elgg($elgg_entity){
         $elgg_entity->set("name", (string)$this->name);

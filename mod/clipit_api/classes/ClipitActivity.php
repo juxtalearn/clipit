@@ -26,7 +26,7 @@ class ClipitActivity extends UBItem{
     /**
      * @const string SUBTYPE Elgg entity subtype for this class
      */
-    const SUBTYPE = "clipit_activity";
+    const SUBTYPE = "ClipitActivity";
 
     const REL_ACTIVITY_TEACHER = "activity-teacher";
     const REL_ACTIVITY_USER = "activity-user";

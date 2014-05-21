@@ -19,7 +19,7 @@ class UBFile extends UBItem{
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
-    const SUBTYPE = "file";
+    const SUBTYPE = "UBFile";
     /**
      * @const string Delimiter for timestamp string
      */
