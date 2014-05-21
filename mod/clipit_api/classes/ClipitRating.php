@@ -64,6 +64,20 @@ class ClipitRating extends UBItem{
         return $this->id;
     }
 
+    static function get_user_ratings($user_id, $target_id = 0){
+        $user_ratings = static::get_by_owner(array($user_id));
+        $user_ratings = $user_ratings[$user_id];
+        if(!empty($target_id)){
+            foreach($user_ratings as $rating){
+                if($rating->target == (int)$target_id){
+                    return $rating;
+                }
+            }
+            return null;
+        }
+        return $user_ratings;
+    }
+
     static function add_tag_ratings($rating_id, $tag_rating_array){
         return UBCollection::add_items($rating_id, $tag_rating_array, static::REL_RATING_TAGRATING);
     }
