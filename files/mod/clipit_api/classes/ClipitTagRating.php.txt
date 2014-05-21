@@ -18,19 +18,16 @@ class ClipitTagRating extends UBItem {
 
     public $tag_id = 0;
     public $is_used = null;
-    public $comment = "";
 
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
         $this->tag_id = (int)$elgg_object->tag_id;
-        $this->$is_used = (bool)$elgg_object->$is_used;
-        $this->$comment = (string)$elgg_object->$comment;
+        $this->is_used = (bool)$elgg_object->is_used;
     }
 
     protected function copy_to_elgg($elgg_object){
         parent::copy_to_elgg($elgg_object);
         $elgg_object->tag_id = (int)$this->tag_id;
-        $elgg_object->$is_used = (bool)$this->$is_used;
-        $elgg_object->$comment = (string)$this->$comment;
+        $elgg_object->is_used = (bool)$this->is_used;
     }
 }

@@ -42,7 +42,8 @@ class ClipitRating extends UBItem{
 
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
-        $this->overall_rating = (int)$elgg_object->overall;
+        $this->target = (int)$elgg_object->target;
+        $this->overall_rating = (int)$elgg_object->overall_rating;
         $this->tag_rating_array = (array)static::get_tag_ratings($this->id);
         $this->performance_rating_array = (array)static::get_performance_ratings($this->id);
     }
@@ -52,6 +53,7 @@ class ClipitRating extends UBItem{
      */
     protected function copy_to_elgg($elgg_object){
         parent::copy_to_elgg($elgg_object);
+        $elgg_object->target = (int)$this->target;
         $elgg_object->overall_rating = (int)$this->overall_rating;
     }
 
