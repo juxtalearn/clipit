@@ -30,7 +30,7 @@ $body .='<div class="form-group">
         'rows'  => 6,
     )).'
 </div>';
-$body .= elgg_view("multimedia/file/attach", array('entity' => $entity, 'class' => 'col-md-9'));
+$body .= elgg_view("multimedia/file/attach", array('entity' => $entity, 'class' => 'col-md-8'));
 
 echo elgg_view("page/components/modal",
     array(

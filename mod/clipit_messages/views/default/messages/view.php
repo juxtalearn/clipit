@@ -16,83 +16,46 @@ $sender = elgg_extract('sender', $vars);
 $user_loggedin_id = elgg_get_logged_in_user_guid();
 $user_loggedin = new ElggUser($user_loggedin_id);
 
-foreach($messages as $message){
+foreach($messages as $message):
     $owner_user = array_pop(ClipitUser::get_by_id(array($message->owner_id)));
     $owner_user_elgg = new ElggUser($message->owner_id);
     // Set read status from user logged in
     ClipitChat::set_read_status($message->id, true, array($user_loggedin_id));
 
-    if($message->owner_id == $user_loggedin_id):
 ?>
 <a name="reply_<?php echo $message->id; ?>"></a>
-<div class="discussion discussion-reply-msg" style="background: #fff;border-bottom: 1px solid #bae6f6;">
-    <div class="message">
-        <div class="message-owner">
-            <img class="user-avatar" src="<?php echo $owner_user_elgg->getIconURL("small");?>">
-            <div class="block">
-                <div class="header-msg">
-                    <p>
-                        <strong>
-                            <?php echo elgg_view('output/url', array(
-                                'href'  => "profile/".$owner_user->login,
-                                'title' => $owner_user->name,
-                                'text'  => $owner_user->name,
-                            ));
-                            ?>
-                        </strong>
-                    </p>
-                    <small class="show">
-                        <?php echo elgg_view('output/friendlytime', array('time' => $message->time_created));?>
-                    </small>
-                    <?php if($message->name): ?>
-                        <h3 class="subject">
-                            <?php echo $message->name; ?>
-                        </h3>
-                    <?php endif; ?>
-                </div>
-                <div class="body-msg">
-                    <?php echo $message->description; ?>
-                </div>
+<div class="message"
+    <?php if($message->owner_id == $user_loggedin_id): ?>
+        style="background: #fff;border-bottom: 1px solid #bae6f6;"
+    <?php endif; ?>
+>
+    <div class="image-block">
+        <img src="<?php echo $owner_user_elgg->getIconURL("small");?>">
+    </div>
+        <div class="content-block">
+            <strong>
+                <?php echo elgg_view('output/url', array(
+                    'href'  => "profile/".$owner_user->login,
+                    'title' => $owner_user->name,
+                    'text'  => $owner_user->name,
+                ));
+                ?>
+            </strong>
+            <small class="show">
+                <?php echo elgg_view('output/friendlytime', array('time' => $message->time_created));?>
+            </small>
+                <?php if($message->name): ?>
+                    <h3 class="subject">
+                        <?php echo $message->name; ?>
+                    </h3>
+                <?php endif; ?>
+            <div class="body">
+                <?php echo $message->description; ?>
             </div>
         </div>
-    </div>
 </div>
-<?php else: ?>
-<a name="reply_<?php echo $message->id; ?>"></a>
-<div class="discussion discussion-reply-msg">
-    <div class="message">
-        <div class="message-owner">
-            <img class="user-avatar" src="<?php echo $owner_user_elgg->getIconURL("small");?>">
-            <div class="block">
-                <div class="header-msg">
-                    <p>
-                        <strong>
-                        <?php echo elgg_view('output/url', array(
-                            'href'  => "profile/".$owner_user->login,
-                            'title' => $owner_user->name,
-                            'text'  => $owner_user->name,
-                        ));
-                        ?>
-                        </strong>
-                    </p>
-                    <small class="show">
-                        <?php echo elgg_view('output/friendlytime', array('time' => $message->time_created));?>
-                    </small>
-                    <?php if($message->name): ?>
-                        <h3 class="subject">
-                            <?php echo $message->name; ?>
-                        </h3>
-                    <?php endif; ?>
-                </div>
-                <div class="body-msg">
-                    <?php echo $message->description; ?>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<?php endif; ?>
-<?php } ?>
+
+<?php endforeach ?>
 <!-- Reply section -->
 <div class="reply-section">
 <!-- Reply form -->

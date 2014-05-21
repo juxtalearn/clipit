@@ -11,14 +11,15 @@
  * @package         ClipIt
  */
 $entity = elgg_extract("entity", $vars);
+$owner_entity = elgg_extract("owner_entity", $vars);
 $type = elgg_extract("type", $vars);
 
 echo elgg_view("page/components/modal_remote", array('id'=> "publish-{$type}-{$entity->id}" ));
 echo elgg_view('output/url', array(
-    'href'  => "ajax/view/modal/multimedia/{$type}/publish?id={$entity->id}",
+    'href'  => "ajax/view/modal/multimedia/{$type}/publish?id={$entity->id}&parent_id={$owner_entity->id}",
     'title' => elgg_echo('publish'),
     'data-target' => "#publish-{$type}-{$entity->id}",
     'data-toggle'=> 'modal',
     'style' => 'padding: 1px 5px;  background: #47a447;color: #fff;font-weight: bold;',
     'class' => 'btn-xs btn pull-right',
-    'text'  => '<i class="fa fa-arrow-circle-up"></i> Publish'));
+    'text'  => '<i class="fa fa-arrow-circle-up"></i> '.elgg_echo('publish')));

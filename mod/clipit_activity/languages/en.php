@@ -80,7 +80,11 @@ $english = array(
     'video' => 'Video',
     'videos:none' => 'No videos',
     'video:url:error' => 'Incorrect url or video not found',
+    'video:edit' => 'Edit video',
     'video:add' => 'Add video url',
+    'video:url' => 'Video url',
+    'video:title' => 'Video title',
+    'video:description' => 'Video description',
     // Storyboards
     'storyboards:none' => 'No storyboards',
     'multimedia:storyboards:add' => 'Add storyboards',
@@ -89,6 +93,8 @@ $english = array(
     'publications:evaluated' => 'Evaluated',
     'input:no' => 'No',
     'input:yes' => 'Yes',
+    'publish'   => 'Publish',
+    'publish:video'   => 'Publish video',
 
 );
 

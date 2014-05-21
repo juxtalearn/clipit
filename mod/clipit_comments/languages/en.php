@@ -10,8 +10,10 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-elgg_register_event_handler('init', 'system', 'clipit_comments_init');
+$english = array(
+    // Comment
+    'comments' => 'Comments',
+    'comment:create' => 'Create comment',
+);
 
-function clipit_comments_init() {
-    elgg_register_action("comments/create", elgg_get_plugins_path() . "clipit_comments/actions/comments/create.php");
-}
+add_translation('en', $english);

@@ -8273,6 +8273,58 @@ ul.deadline-list > li .fa {
 .video-list .video-item small {
   margin-top: 10px;
 }
+.message {
+  padding: 20px;
+  background: #ECF7FB;
+  margin-bottom: 10px;
+  padding-top: 15px;
+}
+.message .image-block {
+  float: left;
+  margin-right: 10px;
+}
+.message .content-block {
+  overflow: hidden;
+}
+.message .content-block .body {
+  margin-top: 10px;
+  color: #666666;
+}
+.message.reply {
+  background: #fff;
+  margin-top: 20px;
+}
+.message .form-block {
+  position: relative;
+  background-color: #fff;
+  margin-top: 15px;
+  padding: 10px 15px 15px;
+  display: none;
+}
+.message .form-block .close-reply-to {
+  position: absolute;
+  right: 20px;
+  font-size: 20px;
+}
+.message .reply-button {
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  padding: 1px 3px;
+  margin-top: 5px;
+  font-size: 10px;
+  text-transform: uppercase;
+  font-family: Helvetica;
+  font-weight: bold;
+  letter-spacing: 0;
+  background: #bae6f6;
+  color: #fff;
+  border: 0;
+  border-radius: 3px;
+}
+.message:hover ¡ .reply-button,
+.message:focus ¡ .reply-button {
+  background: #32b4e5;
+}
 #menu_messages li.message-item > a {
   padding: 5px 10px;
   width: 300px;
@@ -8430,16 +8482,18 @@ ul.deadline-list > li .fa {
 .reply-section {
   margin-top: 20px;
 }
+.message {
+  /*.reply-button{
+    background: #fff;
+    color: @blue_clipit;
+    border: 1px solid @blue_clipit;
+    margin-right: 5px;
+    padding: 3px 10px;
+  }*/
+}
 .message p {
   margin: 0;
   color: #666666;
-}
-.message .reply-button {
-  background: #fff;
-  color: #32b4e5;
-  border: 1px solid #32b4e5;
-  margin-right: 5px;
-  padding: 3px 10px;
 }
 .message-owner img.user-avatar {
   float: left !important;
@@ -8952,6 +9006,9 @@ a {
 .blue {
   color: #32b4e5;
 }
+.blue-lighter {
+  color: #bae6f6;
+}
 ul,
 ol {
   margin-top: 0;
@@ -9120,6 +9177,11 @@ select.form-control {
 .label-info {
   color: #d8ba05;
   border: 1px solid #d8ba05;
+}
+.label-blue {
+  color: #fff;
+  background: #32b4e5;
+  border: 1px solid #32b4e5;
 }
 .label-primary {
   color: #32b4e5;

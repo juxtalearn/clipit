@@ -203,7 +203,7 @@ $(function(){
         $(this).validate({
             errorElement: "span",
             errorPlacement: function(error, element) {
-                error.appendTo($("label[for="+element.attr('name')+"]"));
+                error.appendTo($("label[for='"+element.attr('name')+"']"));
             },
             onkeyup: false,
             onblur: false,
@@ -331,7 +331,7 @@ $(function(){
      * Add video url
      * valid url and get video data
      */
-    $(document).on("keyup", "#video-url", function(){
+    $(document).on("keypress keyup", "#video-url", function(e){
         var form = $(this).closest("form");
         var that = $(this);
         var query = form.serialize();

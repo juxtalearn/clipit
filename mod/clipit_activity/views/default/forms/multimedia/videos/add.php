@@ -27,7 +27,7 @@ $body .= '
 </div>';
 $body .='<div class="video-info">';
 $body .= '<div class="form-group">
-    <label for="video-url">'.elgg_echo("multimedia:video:add").'</label>
+    <label for="video-url">'.elgg_echo("video:url").'</label>
     <div class="icon">
       <span>
         <a class="loading" style="display:none;"><i style="width:16px;height:16px;" class="fa fa-spinner fa-spin"></i></a>
@@ -49,7 +49,7 @@ $body .= '<div class="form-group">
 $body .= '<div id="group-hide" style="display: none">';
 
 $body .= '<div class="form-group">
-    <label for="video-title">'.elgg_echo("multimedia:links:title").'</label>
+    <label for="video-title">'.elgg_echo("video:title").'</label>
     '.elgg_view("input/text", array(
         'name' => 'video-title',
         'id' => 'video-title',
@@ -58,6 +58,7 @@ $body .= '<div class="form-group">
     )).'
 </div>';
 $body .= '<div class="form-group">
+    <label for="video-description">'.elgg_echo("video:description").'</label>
     '.elgg_view("input/plaintext", array(
         'name' => 'video-description',
         'class' => 'form-control mceEditor',

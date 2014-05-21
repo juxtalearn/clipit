@@ -42,6 +42,7 @@ function clipit_activity_init() {
     elgg_register_action("multimedia/videos/add", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/videos/add.php");
     elgg_register_action("multimedia/videos/remove", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/videos/remove.php");
     elgg_register_action("multimedia/videos/edit", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/videos/edit.php");
+    elgg_register_action("multimedia/videos/publish", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/videos/publish.php");
     elgg_register_ajax_view('modal/multimedia/video/edit');
     elgg_register_ajax_view('modal/multimedia/video/publish');
     /* Links */
@@ -58,6 +59,8 @@ function clipit_activity_init() {
     elgg_register_action("multimedia/links/extract_data", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/links/extract_data.php");
     elgg_register_action("multimedia/videos/extract_data", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/videos/extract_data.php");
     elgg_register_action("multimedia/files/upload", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/files/upload.php");
+    // Publications
+    elgg_register_action("publications/evaluate", elgg_get_plugins_path() . "clipit_activity/actions/publications/evaluate.php");
     // Discussion
     elgg_register_action("discussion/create", elgg_get_plugins_path() . "clipit_activity/actions/discussion/create.php");
     elgg_register_action("discussion/remove", elgg_get_plugins_path() . "clipit_activity/actions/discussion/remove.php");
@@ -73,6 +76,8 @@ function clipit_activity_init() {
     $files_upload_js = elgg_get_simplecache_url('js', 'upload');
     elgg_register_simplecache_view('js/upload');
     elgg_register_js('file:upload', $files_upload_js);
+    // Raty js modified by clipit
+    elgg_register_js('jquery:raty', elgg_get_site_url() . "mod/clipit_activity/vendors/jquery.raty.js");
 
     $files_attach_js = elgg_get_simplecache_url('js', 'attach');
     elgg_register_simplecache_view('js/attach');
@@ -265,12 +270,24 @@ function activity_page_handler($page) {
                     $selected_tab = get_input('filter', 'no_evaluated');
                     $href = "clipit_activity/{$activity->id}/publications";
                     $filter = elgg_view('publications/filter', array('selected' => $selected_tab, 'entity' => $activity, 'href' => $href));
-                    $content = elgg_view('publications/list', array('entity' => $activity));
+                    $videos = ClipitActivity::get_videos($activity->id);
+                    $rating = "blabla";
+                    $content = elgg_view('multimedia/video/list', array(
+                        'entity'    => $activity,
+                        'videos'    => $videos,
+                        'href'      => $href,
+                        'rating'    => $rating,
+                        'actions'   => false,
+                    ));
                     if($page[2] == 'view' && $page[3]){
                         $entity_id = (int)$page[3];
                         //TEST
                         $filter = "";
                         $entity = array_pop(ClipitVideo::get_by_id(array($entity_id)));
+                        $videos = ClipitActivity::get_videos($activity->id);
+                        if(!$entity || !in_array($entity_id, $videos)){
+                            return false;
+                        }
                         elgg_pop_breadcrumb($title);
                         elgg_push_breadcrumb($title, "clipit_activity/{$activity->id}/publications");
                         elgg_push_breadcrumb($entity->name);
@@ -310,7 +327,13 @@ function activity_page_handler($page) {
                                 $add_video = true;
                             }
                             $videos = ClipitActivity::get_videos($activity->id);
-                            $content = elgg_view('multimedia/video/list', array('entity' => $activity, 'add_video' => $add_video, 'videos' => $videos, 'href' => $href));
+                            $content = elgg_view('multimedia/video/list', array(
+                                'entity' => $activity,
+                                'add_video' => $add_video,
+                                'actions'   => true,
+                                'videos' => $videos,
+                                'href' => $href
+                            ));
                             if (!$videos) {
                                 $content .= elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
                             }
@@ -471,7 +494,13 @@ function group_tools_page_handler($page, $activity){
                     break;
                 case 'videos':
                     $videos = ClipitGroup::get_videos($group->id);
-                    $content = elgg_view('multimedia/video/list', array('entity' => $group, 'add_video' => true, 'videos' => $videos, 'href' => $href));
+                    $content = elgg_view('multimedia/video/list', array(
+                        'entity' => $group,
+                        'add_video' => true,
+                        'videos' => $videos,
+                        'actions'   => true,
+                        'href' => $href
+                    ));
                     if (!$videos) {
                         $content .= elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
                     }
@@ -517,8 +546,8 @@ function group_tools_page_handler($page, $activity){
                 $entity_id = (int)$page[4];
                 $object = ClipitSite::lookup($entity_id);
                 switch($object['subtype']){
-                    // Clipit Activity
-                    case 'clipit_file':
+                    // Clipit File
+                    case 'ClipitFile':
                         elgg_push_breadcrumb(elgg_echo("files"), $href."?filter=files");
                         $title = elgg_echo("file");
                         $entity = array_pop(ClipitFile::get_by_id(array($entity_id)));
@@ -526,8 +555,8 @@ function group_tools_page_handler($page, $activity){
                         $body = elgg_view("multimedia/file/body", array('entity'  => $entity));
                         $content = elgg_view('multimedia/view', array('entity' => $entity, 'type' => 'file', 'preview' => $preview, 'body' => $body));
                         break;
-                    // Clipit Group
-                    case 'clipit_video':
+                    // Clipit Video
+                    case 'ClipitVideo':
                         elgg_push_breadcrumb(elgg_echo("videos"), $href."?filter=videos");
                         $title = elgg_echo("video");
                         $entity = array_pop(ClipitVideo::get_by_id(array($entity_id)));

@@ -17,25 +17,8 @@ $entity_id = get_input("entity-id");
 $object = ClipitSite::lookup($entity_id);
 $user_id = elgg_get_logged_in_user_guid();
 $video_data = video_url_parser($url);
+$entity_class = $object['subtype'];
 
-switch($object['subtype']){
-    // Clipit Activity
-    case 'clipit_activity':
-        $entity_class = "ClipitActivity";
-        break;
-    // Clipit Group
-    case 'clipit_group':
-        $entity_class = "ClipitGroup";
-        $entity = array_pop(ClipitGroup::get_by_id(array($entity_id)));
-        $user_groups = ClipitUser::get_groups($user_id);
-        if(!in_array($entity->id, $user_groups)){
-            register_error(elgg_echo("video:cantadd"));
-        }
-        break;
-    default:
-        register_error(elgg_echo("video:cantadd"));
-        break;
-}
 $entity = array_pop($entity_class::get_by_id(array($entity_id)));
 if(count($entity)==0 || trim($title) == "" || trim($description) == "" || trim($url) == "" || !$video_data['id']){
     register_error(elgg_echo("video:cantadd"));

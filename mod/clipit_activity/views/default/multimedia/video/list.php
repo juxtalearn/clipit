@@ -26,6 +26,7 @@ $rating = elgg_extract("rating", $vars);
     <?php
     foreach($video_ids as $video_id):
         $video = array_pop(ClipitVideo::get_by_id(array($video_id)));
+        $tags = ClipitVideo::get_tags($video->id);
         $description = trim(elgg_strip_tags($video->description));
         // Description truncate max length 280
         if(mb_strlen($description)>280){
@@ -51,8 +52,10 @@ $rating = elgg_extract("rating", $vars);
                 </a>
             </div>
             <div class="col-lg-8">
-                <?php echo elgg_view("multimedia/publish_button", array('entity' => $video, 'type' => 'video')); ?>
-                <?php echo elgg_view("multimedia/owner_options", array('entity' => $video, 'type' => 'video')); ?>
+                <?php if($vars['actions']): ?>
+                    <?php echo elgg_view("multimedia/publish_button", array('entity' => $video, 'owner_entity' => $entity, 'type' => 'video')); ?>
+                    <?php echo elgg_view("multimedia/owner_options", array('entity' => $video, 'type' => 'video')); ?>
+                <?php endif; ?>
                 <h4 class="text-truncate">
                     <?php echo elgg_view('output/url', array(
                         'href'  => "{$href}/view/".$video->id,
@@ -61,13 +64,17 @@ $rating = elgg_extract("rating", $vars);
                     ?>
                 </h4>
                 <div class="tags">
-                    <span class="empty">no tags added</span>
+                    <?php echo elgg_view("page/elements/tags", array('tags' => $tags)); ?>
                 </div>
                 <p>
                     <?php echo $description;?>
                 </p>
                 <small class="show">
-                    <?php echo elgg_view("page/elements/owner_summary", array('owner_id' => $video->owner_id, 'msg' => 'Uploaded by')); ?>
+                    <?php echo elgg_view("publications/owner_summary", array(
+                        'entity' => $video,
+                        'entity_class' => 'ClipitVideo',
+                        'msg' => 'Uploaded by'
+                    )); ?>
                     <i>
                         <?php echo elgg_view('output/friendlytime', array('time' => $video->time_created));?>
                     </i>

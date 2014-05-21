@@ -1,4 +1,64 @@
 //
+// Message view (Comment, Discussion, Chat)
+// --------------------------------------------------
+.message{
+  padding: 20px;
+  background: #ECF7FB;
+  margin-bottom: 10px;
+  padding-top: 15px;
+
+  .image-block{
+    float: left;
+    margin-right: 10px;
+  }
+  .content-block{
+    overflow: hidden;
+    .body{
+      margin-top: 10px;
+      color: @grey_dark;
+    }
+  }
+  &.reply{
+    background: #fff;
+    margin-top: 20px;
+  }
+  // Form element
+  .form-block{
+    position: relative;
+    background-color: #fff;
+    margin-top: 15px;
+    padding: 10px 15px 15px;
+    display: none;
+
+    .close-reply-to{
+      position: absolute;
+      right: 20px;
+      font-size: 20px;
+    }
+  }
+  .reply-button{
+    .transition(all 0.5s);
+    padding: 1px 3px;
+    margin-top: 5px;
+    font-size: 10px;
+    text-transform: uppercase;
+    font-family: Helvetica;
+    font-weight: bold;
+    letter-spacing: 0;
+    background: @blue-lighter;
+    color: #fff;
+    border: 0;
+    border-radius: 3px;
+  }
+  &:hover,
+  &:focus{¡
+    .reply-button{
+      background: @blue_clipit;
+    }
+  }
+}
+
+//
 // Messages top menu
 // --------------------------------------------------
 #menu_messages{
@@ -186,13 +246,13 @@
     margin: 0;
     color: @grey_dark;
   }
-  .reply-button{
+  /*.reply-button{
     background: #fff;
     color: @blue_clipit;
     border: 1px solid @blue_clipit;
     margin-right: 5px;
     padding: 3px 10px;
-  }
+  }*/
 }
 .message-owner{
   img.user-avatar{

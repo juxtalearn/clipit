@@ -43,7 +43,8 @@ $(function () {
                     fileList.hide();
                 }
             }).on('fileuploadadd', function (e, data) {
-                var fileList = $(".upload-files-list");
+                var form = $(data.form);
+                var fileList = form.find(".upload-files-list");
                 if(fileList.is(":hidden")){
                     fileList.show();
                 }
@@ -54,7 +55,7 @@ $(function () {
     };
     $(document).on("click", ".fileupload input[type=submit]", function(e){
         var form = $(this).closest("form");
-        var file = form.find(".upload-files-list").find(".file");
+        var file = form.find(".upload-files-list").find(".template-upload");
         if(file.length > 0){
             file.each(function(index){
                 // upload starting

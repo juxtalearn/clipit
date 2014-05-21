@@ -343,7 +343,7 @@ function set_default_clipit_events(){
         $author_elgg = new ElggUser($event->performed_by_guid);
         $lookup = ClipitSite::lookup($relationship->guid_two);
         switch($lookup['subtype']){
-            case 'clipit_group':
+            case 'ClipitGroup':
                 $item = array_pop(ClipitPost::get_by_id(array($relationship->guid_one)));
                 $activity_id = ClipitGroup::get_activity($relationship->guid_two);
                 $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));

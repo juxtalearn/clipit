@@ -11,9 +11,10 @@
  * @package         ClipIt
  */
 $id = (int)get_input("id");
+$parent_id = (int)get_input("parent_id");
 $user_id = elgg_get_logged_in_user_guid();
 $video = array_pop(ClipitVideo::get_by_id(array($id)));
 
-if($video){
-    echo elgg_view_form('multimedia/videos/publish', array('data-validate'=> "true" ), array('entity'  => $video));
+if($video && $parent_id){
+    echo elgg_view_form('multimedia/videos/publish', array('data-validate'=> "true" ), array('entity'  => $video, 'parent_id' => $parent_id));
 }

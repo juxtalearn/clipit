@@ -15,25 +15,7 @@ $entity_id = get_input('entity-id');
 $object = ClipitSite::lookup($entity_id);
 $file_name = get_input('file-name');
 $file_text = get_input('file-text');
-
-switch($object['subtype']){
-    // Clipit Activity
-    case 'clipit_activity':
-        $entity_class = "ClipitActivity";
-        break;
-    // Clipit Group
-    case 'clipit_group':
-        $entity_class = "ClipitGroup";
-        $entity = array_pop(ClipitGroup::get_by_id(array($entity_id)));
-        $user_groups = ClipitUser::get_groups($user_id);
-        if(!in_array($entity->id, $user_groups)){
-            register_error(elgg_echo("file:cantupload"));
-        }
-        break;
-    default:
-        register_error(elgg_echo("file:cantupload"));
-        break;
-}
+$entity_class = $object['subtype'];
 
 $entity = array_pop($entity_class::get_by_id(array($entity_id)));
 if(count($entity)==0){
