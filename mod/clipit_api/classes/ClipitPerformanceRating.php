@@ -31,4 +31,30 @@ class ClipitPerformanceRating extends UBItem {
         $elgg_object->star_rating = (int)$this->star_rating;
     }
 
+    static function get_average_target_rating($target_id){
+        $rating_array = ClipitRating::get_by_target(array($target_id));
+        $average_rating = 0;
+        $count = 0;
+        foreach($rating_array as $rating){
+            foreach($rating->performance_rating_array as $performance_rating_id){
+                $performance_rating = new static($performance_rating_id);
+                $average_rating += (int)$performance_rating->star_rating;
+                $count++;
+            }
+        }
+        return $average_rating = $average_rating / $count;
+    }
+
+    static function get_average_user_rating_for_target($user_id, $target_id){
+        $rating = ClipitRating::get_from_user_for_target($user_id, $target_id);
+        $average_rating = 0;
+        $count = 0;
+        foreach($rating->performance_rating_array as $performance_rating_id){
+            $performance_rating = new static($performance_rating_id);
+            $average_rating += (int)$performance_rating->star_rating;
+            $count++;
+        }
+        return $average_rating = $average_rating / $count;
+    }
+
 } 
