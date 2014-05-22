@@ -30,4 +30,34 @@ class ClipitTagRating extends UBItem {
         $elgg_object->tag_id = (int)$this->tag_id;
         $elgg_object->is_used = (bool)$this->is_used;
     }
+
+    static function get_average_target_rating($target_id){
+        $rating_array = ClipitRating::get_by_target(array($target_id));
+        $average_rating = 0;
+        $count = 0;
+        foreach($rating_array as $rating){
+            foreach($rating->tag_rating_array as $tag_rating_id){
+                $tag_rating = new static($tag_rating_id);
+                if($tag_rating->isused){
+                    $average_rating++;
+                }
+                $count++;
+            }
+        }
+        return $average_rating = $average_rating / $count;
+    }
+
+    static function get_average_user_rating_for_target($user_id, $target_id){
+        $rating = ClipitRating::get_from_user_for_target($user_id, $target_id);
+        $average_rating = 0;
+        $count = 0;
+        foreach($rating->tag_rating_array as $tag_rating_id){
+            $tag_rating = new static($tag_rating_id);
+            if($tag_rating->isused){
+                $average_rating++;
+            }
+            $count++;
+        }
+        return $average_rating = $average_rating / $count;
+    }
 }
