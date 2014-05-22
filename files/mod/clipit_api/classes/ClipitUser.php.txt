@@ -55,6 +55,7 @@ class ClipitUser extends UBUser{
         $jxl_cookie_auth->set_required_cookie($user->login, $user->role, $user->id);
         $jxl_cookie_auth->set_name_cookie($user->name);
         $jxl_cookie_auth->set_token_cookie($token);
+        $jxl_cookie_auth->set_mail_cookie($user->email);
     }
 
     static function delete_cookies(){
