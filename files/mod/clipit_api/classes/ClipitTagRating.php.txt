@@ -33,6 +33,7 @@ class ClipitTagRating extends UBItem {
 
     static function get_average_target_rating($target_id){
         $rating_array = ClipitRating::get_by_target(array($target_id));
+        $rating_array = $rating_array[$target_id];
         $average_rating = 0;
         $count = 0;
         foreach($rating_array as $rating){
