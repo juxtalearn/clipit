@@ -20,7 +20,7 @@ class ClipitRating extends UBItem{
     /**
      * @const string Elgg entity subtype for this class
      */
-    const SUBTYPE = "clipit_rating";
+    const SUBTYPE = "ClipitRating";
 
     const REL_RATING_TAGRATING = "rating-tag_rating";
     const REL_RATING_PERFORMANCERATING = "rating-performance_rating";
@@ -29,7 +29,7 @@ class ClipitRating extends UBItem{
     /**
      * @var int Overall rating opinionfrom 0 to 10
      */
-    public $overall_rating = 0;
+    public $overall = false;
     /**
      * @var array Ratings about Tags used"
      */
@@ -42,7 +42,8 @@ class ClipitRating extends UBItem{
 
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
-        $this->overall_rating = (int)$elgg_object->overall;
+        $this->target = (int)$elgg_object->target;
+        $this->overall = (bool)$elgg_object->overall;
         $this->tag_rating_array = (array)static::get_tag_ratings($this->id);
         $this->performance_rating_array = (array)static::get_performance_ratings($this->id);
     }
@@ -52,7 +53,8 @@ class ClipitRating extends UBItem{
      */
     protected function copy_to_elgg($elgg_object){
         parent::copy_to_elgg($elgg_object);
-        $elgg_object->overall_rating = (int)$this->overall_rating;
+        $elgg_object->target = (int)$this->target;
+        $elgg_object->overall = (bool)$this->overall;
     }
 
     protected function save(){
@@ -60,6 +62,66 @@ class ClipitRating extends UBItem{
         static::set_tag_ratings($this->id, (array)$this->tag_rating_array, static::REL_RATING_TAGRATING);
         static::set_performance_ratings($this->id, (array)$this->performance_rating_array, static::REL_RATING_PERFORMANCERATING);
         return $this->id;
+    }
+
+
+
+    static function get_by_user($user_array){
+        return static::get_by_owner($user_array);
+    }
+
+    static function get_by_target($target_array){
+        $rating_array = array();
+        foreach($target_array as $target_id){
+            $elgg_objects = elgg_get_entities_from_metadata(
+                array(
+                    'type' => static::TYPE,
+                    'subtype' => static::SUBTYPE,
+                    'metadata_names' => array("target"),
+                    'metadata_values' => array($target_id)
+                )
+            );
+            if(!empty($elgg_objects)){
+                $temp_array = array();
+                foreach($elgg_objects as $elgg_object){
+                    $temp_array[] = new static($elgg_object->guid);
+                }
+                $rating_array[$target_id] = $temp_array;
+            } else{
+                $rating_array[$target_id] = null;
+            }
+        }
+        return $rating_array;
+    }
+
+    static function get_from_user_for_target($user_id, $target_id){
+        $user_ratings = static::get_by_user(array($user_id));
+        $user_ratings = $user_ratings[$user_id];
+        foreach($user_ratings as $rating){
+            if($rating->target == (int)$target_id){
+                return $rating;
+            }
+        }
+        return null;
+    }
+
+    // Average overall rating [0-1]
+    static function get_average_target_rating($target_id){
+        $rating_array = static::get_by_target(array($target_id));
+        $average_rating = 0;
+        $count = 0;
+        foreach($rating_array as $rating){
+            if($rating->overall){
+                $average_rating++;
+            }
+            $count++;
+        }
+        if(!empty($count)){
+            return $average_rating = $average_rating / $count;
+        } else{
+            return null;
+        }
+
     }
 
     static function add_tag_ratings($rating_id, $tag_rating_array){

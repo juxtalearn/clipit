@@ -17,7 +17,7 @@
  *
  */
 class ClipitTrickyTopic extends UBItem{
-    const SUBTYPE = "clipit_trickytopic";
+    const SUBTYPE = "ClipitTrickyTopic";
 
     public $subject = "";
     public $country = "";

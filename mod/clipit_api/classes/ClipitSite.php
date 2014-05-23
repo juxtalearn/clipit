@@ -18,7 +18,27 @@
  */
 class ClipitSite extends UBSite{
 
+    const SUBTYPE = "ClipitSite";
+
     const REL_SITE_VIDEO = "site-video";
     const REL_SITE_STORYBOARD = "site-storyboard";
+    const REL_SITE_FILE = "site-file";
 
+    public $file_array = array();
+    public $storyboard_array = array();
+    public $video_array = array();
+
+    static function get_class_from_subtype($subtype){
+        switch($subtype){
+            case "clipit_activity":
+                return "ClipitActivity";
+                break;
+            case "clipit_chat":
+                return "ClipitChat";
+                break;
+            case "clipit_comment":
+                return "ClipitComment";
+                break;
+        }
+    }
 }

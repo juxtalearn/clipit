@@ -16,6 +16,28 @@
 
  */
 class UBSite{
+
+    const SUBTYPE = "UBSite";
+
+    /**
+     * Constructor
+     *
+     * @throws APIException
+     */
+    function __construct(){
+        $elgg_site = elgg_get_site_entity();
+        $this->id = (int)$elgg_site->get("guid");
+        $this->name = (string)$elgg_site->get("name");
+        $this->description = (string)$elgg_site->get("description");
+        $this->url = (string)$elgg_site->get("url");
+        $this->owner_id = (int)$elgg_site->getOwnerGUID();
+        $this->time_created = (int)$elgg_site->getTimeCreated();
+    }
+
+    static function get_site(){
+        return new static();
+    }
+
     /**
      * Get the REST API method list, including description and required parameters.
      *
@@ -63,6 +85,7 @@ class UBSite{
             $object['subtype'] = (string)get_subtype_from_id($elgg_object->subtype);
             $object['name'] = (string)$elgg_object->name;
             $object['description'] = (string)$elgg_object->description;
+            //$object['class'] = get_class_from_subtype($object['subtype']);
             return $object;
         } catch(Exception $e){
             try{
@@ -74,6 +97,10 @@ class UBSite{
                 throw new APIException("ERROR: Unidentified ID provided.");
             }
         }
+    }
+
+    static function get_class_from_subtype($subtype){
+        return null;
     }
 
     static function get_domain(){
