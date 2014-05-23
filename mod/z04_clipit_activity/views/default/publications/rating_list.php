@@ -13,7 +13,6 @@
 $entities = elgg_extract('entity', $vars);
 $activity_id = elgg_get_page_owner_guid();
 $activity_id = 74;
-print_r(ClipitVideo::get_by_id(array(1000)));
 ?>
 <div class="panel-group" id="accordion">
     <?php

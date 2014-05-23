@@ -22,13 +22,13 @@ $header = "<h3 class='text-truncate' title='{$group->name}'>
 $params = array(
     'name' => 'group_edit',
     'text' => elgg_echo('group:edit'),
-    'href' => "z04_clipit_activity/{$activity_id}/group/edit",
+    'href' => "clipit_activity/{$activity_id}/group/edit",
 );
 elgg_register_menu_item('group_menu', $params);
 $params = array(
     'name' => 'group_members',
     'text' => elgg_echo('group:members'),
-    'href' => "z04_clipit_activity/{$activity_id}/group/members",
+    'href' => "clipit_activity/{$activity_id}/group/members",
 );
 elgg_register_menu_item('group_menu', $params);
 

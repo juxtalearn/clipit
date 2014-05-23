@@ -98,7 +98,7 @@ $activity_id = elgg_get_page_owner_guid();
         <td class="col-md-9 file-info">
             <h4>
                 <?php echo elgg_view('output/url', array(
-                    'href' => "z04_clipit_activity/{$activity_id}/group/files/view/{$file->id}",
+                    'href' => "clipit_activity/{$activity_id}/group/files/view/{$file->id}",
                     'title' => $file->name,
                     'text' => $file->name,
                     'is_trusted' => true

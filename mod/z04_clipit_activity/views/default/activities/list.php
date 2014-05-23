@@ -32,7 +32,7 @@ if (is_array($items) && count($items) > 0):
 
             $title = elgg_get_friendly_title($item->name);
             $activity_link = elgg_view('output/url', array(
-                'href' => "z04_clipit_activity/{$item->id}",
+                'href' => "clipit_activity/{$item->id}",
                 'text' => $item->name,
                 'is_trusted' => true,
                 'style' => 'color: #'.$item->color
@@ -68,7 +68,7 @@ if (is_array($items) && count($items) > 0):
                                     <?php echo $progress_html; ?>
                                     <strong>
                                         <?php echo elgg_view('output/url', array(
-                                            'href'  => "z04_clipit_activity/{$item->id}/group/activity_log",
+                                            'href'  => "clipit_activity/{$item->id}/group/activity_log",
                                             'title' => $group->name,
                                             'text'  => $group->name));
                                         ?>
