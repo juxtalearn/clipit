@@ -27,6 +27,9 @@ function clipit_api_init(){
     rename_subtypes();
 }
 
+/**
+ * Replace old subtypes with class names, for easier reference.
+ */
 function rename_subtypes(){
     global $CONFIG;
     $replace["clipit_activity"] = ClipitActivity::SUBTYPE;
@@ -58,7 +61,6 @@ function rename_subtypes(){
     $replace["clipit_video"] = ClipitVideo::SUBTYPE;
     foreach($replace as $old => $new){
         $query = "update {$CONFIG->dbprefix}entity_subtypes set subtype = \"{$new}\" where subtype = \"{$old}\";";
-        //var_dump($query);
         update_data($query);
     }
 }

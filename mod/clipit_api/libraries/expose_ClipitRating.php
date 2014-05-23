@@ -11,6 +11,15 @@ function expose_rating_functions(){
     $class_suffix = "ClipitRating::";
     expose_common_functions($api_suffix, $class_suffix);
     expose_function(
+        $api_suffix . "get_by_target",
+        $class_suffix . "get_by_target",
+        array(
+            "target_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Get all Ratings by Target",
+        "GET", false, true);
+    expose_function(
         $api_suffix . "get_user_ratings",
         $class_suffix . "get_user_ratings",
         array(
