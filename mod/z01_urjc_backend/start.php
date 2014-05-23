@@ -24,7 +24,7 @@ function urjc_backend_init(){
     /*echo elgg_get_entities(
         array(
             'type' => "object",
-            'subtype' => "clipit_activity",
+            'subtype' => "z04_clipit_activity",
             'limit' => 10));*/
     register_pam_handler('clipit_auth_usertoken');
     loadFiles(elgg_get_plugins_path() . "z01_urjc_backend/libraries/");

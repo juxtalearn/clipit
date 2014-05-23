@@ -30,7 +30,7 @@ class ClipitSite extends UBSite{
 
     static function get_class_from_subtype($subtype){
         switch($subtype){
-            case "clipit_activity":
+            case "z04_clipit_activity":
                 return "ClipitActivity";
                 break;
             case "clipit_chat":

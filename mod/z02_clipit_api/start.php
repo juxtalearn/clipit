@@ -32,7 +32,7 @@ function clipit_api_init(){
  */
 function rename_subtypes(){
     global $CONFIG;
-    $replace["clipit_activity"] = ClipitActivity::SUBTYPE;
+    $replace["z04_clipit_activity"] = ClipitActivity::SUBTYPE;
     $replace["clipit_chat"] = ClipitChat::SUBTYPE;
     $replace["clipit_comment"] = ClipitComment::SUBTYPE;
     $replace["clipit_example"] = ClipitExample::SUBTYPE;
