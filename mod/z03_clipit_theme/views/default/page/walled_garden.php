@@ -50,7 +50,7 @@ $footer = elgg_view('page/elements/footer', $vars);
         </div>
         <div class="row sponsors">
             <div class="col-sm-3 pull-right">
-                <img src="<?php echo $CONFIG->wwwroot; ?>mod/clipit_theme/graphics/sponsors.png">
+                <img src="<?php echo $CONFIG->wwwroot; ?>mod/z03_clipit_theme/graphics/sponsors.png">
             </div>
         </div>
     </div>
