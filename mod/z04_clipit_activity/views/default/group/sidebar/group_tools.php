@@ -18,23 +18,23 @@ $total_unread_posts = array_pop(ClipitPost::unread_by_destination(array($group_i
 elgg_register_menu_item('group:tools', array(
     'name' => 'group_discussion',
     'text' => elgg_echo('group:discussion'),
-    'href' => "z04_clipit_activity/".$activity->id."/group/discussion",
+    'href' => "clipit_activity/".$activity->id."/group/discussion",
     'badge' => $total_unread_posts > 0 ? $total_unread_posts : ""
 ));
 elgg_register_menu_item('group:tools', array(
     'name' => 'group_files',
     'text' => elgg_echo('group:files'),
-    'href' => "z04_clipit_activity/".$activity->id."/group/multimedia",
+    'href' => "clipit_activity/".$activity->id."/group/multimedia",
 ));
 elgg_register_menu_item('group:tools', array(
     'name' => 'group_activity_log',
     'text' => elgg_echo('group:activity_log'),
-    'href' => "z04_clipit_activity/".$activity->id."/group/activity_log",
+    'href' => "clipit_activity/".$activity->id."/group/activity_log",
 ));
 elgg_register_menu_item('group:tools', array(
     'name' => 'group_progress',
     'text' => elgg_echo('group:progress'),
-    'href' => "z04_clipit_activity/".$activity->id."/group/progress",
+    'href' => "clipit_activity/".$activity->id."/group/progress",
 ));
 
 $body = elgg_view_menu('group:tools', array(
