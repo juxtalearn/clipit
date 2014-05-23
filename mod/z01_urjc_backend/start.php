@@ -27,7 +27,7 @@ function urjc_backend_init(){
             'subtype' => "clipit_activity",
             'limit' => 10));*/
     register_pam_handler('clipit_auth_usertoken');
-    loadFiles(elgg_get_plugins_path() . "urjc_backend/libraries/");
+    loadFiles(elgg_get_plugins_path() . "z01_urjc_backend/libraries/");
     date_default_timezone_set(get_config("timezone"));
 }
 
