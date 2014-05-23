@@ -11,4 +11,4 @@
  * @package         ClipIt
  */
 ?>
-Insert coin...
+<iframe width="100%" height="500" src="URL_LINK" frameborder="0"></iframe>
