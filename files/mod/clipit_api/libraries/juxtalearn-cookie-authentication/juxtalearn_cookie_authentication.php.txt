@@ -11,9 +11,10 @@
  */
 
 /*
-Questions:
+Questions/ TODOs:
   - What is the maximum allowed length of the user-login (username)?
   - What characters can the user-login contain? (Example, spaces, punctuation?)
+  - 'user_role' is now optional (2014-05-16). This needs review.
 */
 
 
@@ -29,11 +30,12 @@ class JuxtaLearn_Cookie_Authentication {
     const CK_TOKEN = 'clipit_token';
     const CK_USER  = 'clipit_user';
     const CK_NAME  = 'clipit_name';
+    const CK_MAIL  = 'clipit_mail';
 
+    // TODO: role is now optional (2014-05-16).
     const COOKIE_FORMAT = '%hash.%time.login=%login.role=%role.id=%id';
     const COOKIE_REGEX  =
-        '/^(?P<H>\w+)\.(?P<T>\d+)\.login=(?P<L>\w+)\.role=(?P<R>\w+)\.id=(?P<i>\d*)$/';
-    const COOKIE_REGEX_N  = '/^(\w+)\.(\d+)\.login=(\w+)\.role=(\w+)\.id=(\d*)$/';
+        '/^(?P<H>\w+)\.(?P<T>\d+)\.login=(?P<L>\w+)\.role=(?P<R>\w*)\.id=(?P<i>\d*)$/';
 
     private $shared_secret_key;
     protected $cookie_domain;
@@ -122,6 +124,16 @@ class JuxtaLearn_Cookie_Authentication {
     }
 
     /**
+     * @param string $email Optionally, ClipIt sets the user's email address.
+     * @param int    $expire       The time the cookie expires.
+     * @example  $b_ok = $auth->set_mail_cookie( "pbs@example.org" );
+     * @useby auth-master
+     */
+    public function set_mail_cookie( $email, $expire = 0 ) {
+        return setcookie(
+             self::CK_MAIL, $email, $expire, '/', $this->cookie_domain );
+    }
+    /**
      * Called by ClipIt to delete all associated cookies - security.
      * @useby auth-master
      */
@@ -129,10 +141,12 @@ class JuxtaLearn_Cookie_Authentication {
         if (isset( $_COOKIE[self::CK_USER] )) {
             unset( $_COOKIE[self::CK_USER] );
             unset( $_COOKIE[self::CK_NAME] );
+            unset( $_COOKIE[self::CK_MAIL] );
             unset( $_COOKIE[self::CK_TOKEN] );
         }
         $expire = time() - 3600;
         setcookie( self::CK_NAME, '', $expire, '/', $this->cookie_domain );
+        setcookie( self::CK_MAIL, '', $expire, '/', $this->cookie_domain );
         setcookie( self::CK_TOKEN, '', $expire, '/', $this->cookie_domain );
         return setcookie( self::CK_USER, '', $expire, '/', $this->cookie_domain );
     }
@@ -149,29 +163,32 @@ class JuxtaLearn_Cookie_Authentication {
         $this->parse_r = array( 'is_authenticated' => false );
  
         // Try a basic check.
-        if (!isset( $_COOKIE[self::CK_USER] )) {
+        $user_cookie = $this->get_cookie(self::CK_USER);
+        if (!$user_cookie) {
             $this->parse_r['msg'] = 'Warning, missing authentication cookie.';
             return $this->parse_r;
         }
 
         // Try to extract data.
-        if (!preg_match( self::COOKIE_REGEX, $_COOKIE[self::CK_USER], $m )) {
+        if (!preg_match( self::COOKIE_REGEX, $user_cookie, $m )) {
             $this->parse_r['msg'] = 'Error, unexpected user-cookie format.';
+            $this->parse_r['cookie'] = $user_cookie;
+            $this->parse_r['regex'] = self::COOKIE_REGEX;
+            $this->parse_r['regex_matches'] = $m;
             return $this->parse_r;
         }
 
-        $token_cookie = isset($_COOKIE[self::CK_TOKEN]) ? $_COOKIE[self::CK_TOKEN] : NULL;
-        $name_cookie = isset($_COOKIE[self::CK_NAME]) ? $_COOKIE[self::CK_NAME] : NULL;
         $this->parse_r = $r = array(
             'is_authenticated' => false,  // Still false!
-            'token_cookie_value' => $token_cookie,
+            'token_cookie_value' => $this->get_cookie(self::CK_TOKEN),
             'user_cookie_value' => $m[0],
             'hash' => $m[ 'H' ],        //$m[1]
             'user_login' => $m[ 'L' ],  //$m[3] (We've swapped positions.)
-            'user_role' => $m[ 'R' ],   //$m[4]
+            'user_role'=>isset($m[ 'R' ]) ? $m[ 'R' ] : NULL, //$m[4]
             'user_id' => isset($m[ 'i' ]) ? $m[ 'i' ] : NULL, //$m[5]
-            'display_name' => $name_cookie,
-            'api_token' => $token_cookie,
+            'user_mail' => $this->get_cookie(self::CK_MAIL),
+            'display_name' => $this->get_cookie(self::CK_NAME),
+            'api_token' => $this->get_cookie(self::CK_TOKEN),
             'time' => $m[ 'T' ],   //$m[2]
             'time_formatted' => $this->cookie_date( $m[ 'T' ] ), //$m[2]
         );
@@ -223,6 +240,10 @@ class JuxtaLearn_Cookie_Authentication {
         return isset($this->parse_r[ $key ]) ? $this->parse_r[ $key ] : NULL;
     }
 
+    public function get_cookie( $key ) {
+        return isset($_COOKIE[ $key ]) ? $_COOKIE[ $key ] : NULL;
+    }
+
     // ==========================================
     // Utilities.
 
@@ -230,7 +251,7 @@ class JuxtaLearn_Cookie_Authentication {
         return md5( $this->shared_secret_key . $timestamp . $payload );
     }
 
-    function user_payload( $login, $role, $timestamp, $user_id = NULL ) {
+    protected function user_payload( $login, $role, $timestamp, $user_id = NULL ) {
         return strtr( self::COOKIE_FORMAT, array( '%hash' => '', '%login' => $login,
             '%role' => $role, '%id' => $user_id, '%time' => $timestamp ));
     }

@@ -45,7 +45,11 @@ class ClipitTagRating extends UBItem {
                 $count++;
             }
         }
-        return $average_rating = $average_rating / $count;
+        if(!empty($count)){
+            return $average_rating = $average_rating / $count;
+        } else{
+            return null;
+        }
     }
 
     static function get_average_user_rating_for_target($user_id, $target_id){
@@ -59,6 +63,11 @@ class ClipitTagRating extends UBItem {
             }
             $count++;
         }
-        return $average_rating = $average_rating / $count;
+        if(!empty($count)){
+            return $average_rating = $average_rating / $count;
+        } else{
+            return null;
+        }
+
     }
 }

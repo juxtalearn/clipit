@@ -116,7 +116,12 @@ class ClipitRating extends UBItem{
             }
             $count++;
         }
-        return $average_rating = $average_rating / $count;
+        if(!empty($count)){
+            return $average_rating = $average_rating / $count;
+        } else{
+            return null;
+        }
+
     }
 
     static function add_tag_ratings($rating_id, $tag_rating_array){

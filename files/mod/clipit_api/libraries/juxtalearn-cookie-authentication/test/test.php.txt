@@ -6,7 +6,7 @@ ini_set( 'display_errors', 1 );
 error_reporting( E_ALL );
 date_default_timezone_set( 'GMT' );
 
-require_once 'juxtalearn_cookie_authentication.php';
+require_once '../juxtalearn_cookie_authentication.php';
 
 if ('define' == _get('use')) {
     define( 'JXL_COOKIE_SECRET_KEY', '54321dcba{ Long, random and shared }' );
@@ -62,8 +62,9 @@ function test_auth_master_set_cookies() {
 
     $parse = $auth->parse_cookies();
     //if (!$auth->is_authenticated()) {
-        $set_result = $auth->set_required_cookie( 'pebs123', 'teacher', 999, $expire );
+        $set_result = $auth->set_required_cookie( 'pebs123', 'student', 999, $expire );
         $b_ok = $auth->set_name_cookie( 'Pablo Llinás Arnaiz', $expire );
+        $b_ok = $auth->set_mail_cookie( 'pebs@example.edu', $expire );
         $b_ok = $auth->set_token_cookie( '0491d9433979a6187a9bc03f868aa104', $expire );
     //}
     return $set_result;
