@@ -24,7 +24,7 @@ function tinymce_setup(specific_id){
         force_br_newlines : true,
         force_p_newlines : false,
         plugins: ["mention, autoresize, paste"],
-        content_css : elgg.config.wwwroot+"mod/clipit_theme/vendors/tinymce/content.css",
+        content_css : elgg.config.wwwroot+"mod/z03_clipit_theme/vendors/tinymce/content.css",
         valid_styles : 'text-align',
         paste_remove_spans: true,
         verify_html: true,
@@ -152,7 +152,7 @@ $(function(){
                 $(form).find("input[type=submit]")
                 .after(
                     "<p class='text-info'>" +
-                    "<img src='<?php echo elgg_get_site_url()?>mod/clipit_theme/graphics/ok.png'/>" +
+                    "<img src='<?php echo elgg_get_site_url()?>mod/z03_clipit_theme/graphics/ok.png'/>" +
                     " <strong><?php echo elgg_echo("user:forgotpassword:ok");?></strong></p>")
                         .remove();
                 });
