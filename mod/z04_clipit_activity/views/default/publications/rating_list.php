@@ -11,12 +11,17 @@
  * @package         ClipIt
  */
 $entities = elgg_extract('entity', $vars);
+$activity_id = elgg_get_page_owner_guid();
+$activity_id = 74;
+print_r(ClipitVideo::get_by_id(array(1000)));
 ?>
 <div class="panel-group" id="accordion">
     <?php
     foreach($entities as $entity):
         $user = array_pop(ClipitUser::get_by_id(array($entity->owner_id)));
         $user_elgg = new ElggUser($user->id);
+        $group_id = ClipitGroup::get_from_user_activity($entity->owner_id, $activity_id);
+        $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
         $performance_average = ClipitPerformanceRating::get_average_user_rating_for_target($entity->owner_id, $entity->target);
     ?>
         <div class="panel panel-default">
@@ -26,9 +31,16 @@ $entities = elgg_extract('entity', $vars);
                         <img src="<?php echo $user_elgg->getIconURL("small");?>">
                     </div>
                     <div class="content-block">
-                        <small class="pull-right"><?php echo elgg_view('output/friendlytime', array('time' => $entity->time_created));?></small>
+                        <div class="pull-right text-right" style="margin-right: 10px;">
+                            <small><?php echo elgg_view('output/friendlytime', array('time' => $entity->time_created));?></small>
+                            <div class="rating readonly"><?php echo star_rating_view($performance_average);?></div>
+                        </div>
                         <span class="blue"><?php echo $user->name;?></span>
-                        <div class="rating readonly"><?php echo star_rating_view($performance_average);?></div>
+                        <div>
+                            <span class="label label-primary " style="background: #32b4e5;color: #fff;vertical-align: middle;display: inline-block;">
+                                <?php echo $group->name;?>
+                            </span>
+                        </div>
                     </div>
                 </a>
             </div>
