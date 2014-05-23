@@ -13,7 +13,7 @@
     </requires>
     <requires>
         <type>plugin</type>
-        <name>urjc_backend</name>
+        <name>z01_urjc_backend</name>
     </requires>
     <requires>
         <type>priority</type>
