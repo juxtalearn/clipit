@@ -7,3 +7,62 @@
   background: #fff;
   padding: 3px 10px;
 }
+//
+// Rating
+// --------------------------------------------------
+.rating{
+  color: @yellow_rating;
+  font-size: ceil(@font-size-base * 1.14); // ~16px;
+}
+//
+// Rating resume (stars)
+// --------------------------------------------------
+.rating-resume{
+  background: #fafafa;
+  padding: 5px 10px;
+  border-radius: 3px;
+}
+.fa-star.empty{
+  color: #bae6f6;
+}
+.white-star{
+  .fa-star.empty{
+    color: rgba(255,255,255,0.5);
+  }
+}
+#my-rating{
+ .rating {
+   .fa-star{
+      cursor: pointer;
+    }
+ }
+}
+.rating{
+  width: auto !important;
+  &.readonly{
+    > i{
+      &:hover,
+      &focus{
+        opacity: 1;
+      }
+    }
+  }
+}
+//
+// Evaluation list
+// --------------------------------------------------
+.evaluations{
+  background: #fafafa;
+  padding: 10px;
+  margin: 20px 0 10px;
+  h4{
+    margin: 0;
+  }
+  .btn.all{
+    padding: 2px 5px;
+    color: @blue_clipit;
+    background: #fff;
+    border: 1px solid @blue-lighter;
+    margin-top: -2px;
+  }
+}

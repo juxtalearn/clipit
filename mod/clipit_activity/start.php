@@ -61,6 +61,7 @@ function clipit_activity_init() {
     elgg_register_action("multimedia/files/upload", elgg_get_plugins_path() . "clipit_activity/actions/multimedia/files/upload.php");
     // Publications
     elgg_register_action("publications/evaluate", elgg_get_plugins_path() . "clipit_activity/actions/publications/evaluate.php");
+    elgg_register_ajax_view('modal/publications/rating');
     // Discussion
     elgg_register_action("discussion/create", elgg_get_plugins_path() . "clipit_activity/actions/discussion/create.php");
     elgg_register_action("discussion/remove", elgg_get_plugins_path() . "clipit_activity/actions/discussion/remove.php");
@@ -78,6 +79,7 @@ function clipit_activity_init() {
     elgg_register_js('file:upload', $files_upload_js);
     // Raty js modified by clipit
     elgg_register_js('jquery:raty', elgg_get_site_url() . "mod/clipit_activity/vendors/jquery.raty.js");
+    elgg_load_js("jquery:raty");
 
     $files_attach_js = elgg_get_simplecache_url('js', 'attach');
     elgg_register_simplecache_view('js/attach');
@@ -271,7 +273,7 @@ function activity_page_handler($page) {
                     $href = "clipit_activity/{$activity->id}/publications";
                     $filter = elgg_view('publications/filter', array('selected' => $selected_tab, 'entity' => $activity, 'href' => $href));
                     $videos = ClipitActivity::get_videos($activity->id);
-                    $rating = "blabla";
+                    $rating = true;
                     $content = elgg_view('multimedia/video/list', array(
                         'entity'    => $activity,
                         'videos'    => $videos,

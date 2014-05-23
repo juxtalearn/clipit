@@ -37,14 +37,13 @@ $rating = elgg_extract("rating", $vars);
             <div class="col-lg-4">
                 <a href="<?php echo elgg_get_site_url()."{$href}/view/{$video->id}"; ?>">
                     <div class="img-preview">
-                        <?php if($rating):?>
-                            <div class="ratings">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
+                        <?php
+                        if($rating):
+                            $rating_average = ClipitPerformanceRating::get_average_target_rating($video->id);
+                        ?>
+                        <div class="pull-right rating ratings readonly white-star" data-score="<?php echo $rating_average;?>">
+                            <?php echo star_rating_view($rating_average);?>
+                        </div>
                         <?php endif; ?>
                         <img src="<?php echo $video->preview;?>">
                         <span class="duration label"><?php echo get_format_time($video->duration);?></span>

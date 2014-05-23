@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 $comment = elgg_extract('entity', $vars);
+$target_id = elgg_extract('target_id', $vars);
 $user = array_pop(ClipitUser::get_by_id(array($comment->owner_id)));
 $user_elgg = new ElggUser($comment->owner_id);
 $user_loggedin_elgg = new ElggUser(elgg_get_logged_in_user_guid());
@@ -25,6 +26,12 @@ $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
         <img src="<?php echo $user_elgg->getIconURL('small'); ?>"/>
     </div>
     <div class="content-block">
+        <?php
+        $owner_rating_entity = ClipitRating::get_from_user_for_target($comment->owner_id, $target_id);
+        if($owner_rating_entity){
+            echo elgg_view("publications/stars_summary", array('entity' => $owner_rating_entity));
+        }
+        ?>
         <strong>
             <?php echo elgg_view('output/url', array(
                 'href'  => "profile/".$user->login,
@@ -52,7 +59,12 @@ $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
         <div class="replies-block">
             <?php
             foreach($replies as $reply):
-                echo elgg_view("comments/comment", array('entity' => $reply, 'class' => 'reply', 'reply' => true));
+                echo elgg_view("comments/comment", array(
+                    'entity' => $reply,
+                    'class' => 'reply',
+                    'target_id' => $target_id,
+                    'reply' => true
+                ));
             endforeach; ?>
         </div>
         <?php endif; ?>
@@ -83,9 +95,3 @@ $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
     <!-- Reply form end-->
     <?php endif; ?>
 </div>
-
-<style>
-.message:hover .reply-to{
-    background: #32b4e5 !important;
-}
-</style>

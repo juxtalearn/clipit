@@ -13,9 +13,9 @@
 $entity = elgg_extract("entity", $vars);
 $user_loggedin = elgg_get_logged_in_user_guid();
 $user_loggedin_elgg = new ElggUser($user_loggedin);
-$tags = ClipitVideo::get_tags($entity->id);
+$tags = $entity->tag_array;
+$performance_average = ClipitPerformanceRating::get_average_target_rating($entity->id);
 ?>
-
 <!-- Multimedia info + details -->
 <div class="multimedia-owner multimedia-pub">
     <div class="block">
@@ -40,57 +40,61 @@ $tags = ClipitVideo::get_tags($entity->id);
                 <!-- Star rating -->
                 <div class="col-md-4">
                     <div>
-                        <div class="rating" style="
-    color: #e7d333;
-    float: right;
-    border-radius: 3px;
-    background: #fafafa;
-    padding: 5px 10px;
-    font-size: 18px;
-">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-half-o"></i>
-                            <i class="fa fa-star-o"></i>
+                        <div class="pull-right rating rating-resume readonly" data-score="<?php echo $performance_average;?>">
+                            <?php echo star_rating_view($performance_average);?>
                         </div>
                         <h4 style=" display: inline-block; margin-top: 0;">
                             <strong>Rating</strong>
-                            <small style="margin-top: 5px;" class="show">3/5 (4 VOTES)</small>
+                            <small style="margin-top: 5px;" class="show">
+                                <?php echo count(array_pop(ClipitRating::get_by_target(array($entity->id)))); ?>
+                                VOTES
+                            </small>
                         </h4>
-                        <div>
-                            <div class="rating" style="color: #e7d333;float: right;font-size: 18px;margin-right: 10px;">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-o"></i>
-                                <i class="fa fa-star" style="
-    color: #bae6f6;
-"></i>
+                        <?php
+                        $performance_items = $entity->performance_array;
+                        foreach($performance_items as $performance_item_id):
+                            $performance_item = array_pop(ClipitPerformanceItem::get_by_id(array($performance_item_id)));
+                            $average_for_item = ClipitPerformanceRating::get_average_item_rating_for_target($performance_item_id, $entity->id);
+                        ?>
+                            <div style="border-bottom: 1px solid #bae6f6;">
+                                <div class="pull-right rating readonly" style="margin-right: 10px;margin-top: -3px;" data-score="<?php echo $average_for_item;?>">
+                                    <?php echo star_rating_view($average_for_item); ?>
+                                </div>
+                                <h5 class="text-truncate blue" title="<?php echo $performance_item->name;?>" style="margin: 5px 0;"><?php echo $performance_item->name;?></h5>
                             </div>
-                            <h4 class="text-truncate">Innovation</h4>
-                        </div>
-                        <div>
-                            <div class="rating" style="color: #e7d333;float: right;font-size: 18px;margin-right: 10px;">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <h4 class="text-truncate">Design</h4>
-                        </div>
-                        <div>
-                            <div class="rating" style="color: #e7d333;float: right;font-size: 18px;margin-right: 10px;">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
-                            <h4 class="text-truncate">Learning</h4>
-                        </div>
+                        <?php endforeach; ?>
                     </div>
+                    <ul class="evaluations">
+                        <li class="list-item">
+                            <?php
+                            echo elgg_view("page/components/modal_remote", array('id'=> "rating-list-{$entity->id}" ));
+                            echo elgg_view('output/url', array(
+                                'href'  => "ajax/view/modal/publications/rating?by_target={$entity->id}",
+                                'text'  => elgg_echo("view"),
+                                'class' => 'btn btn-default btn-xs pull-right all',
+                                'data-toggle'   => 'modal',
+                                'data-target'   => '#rating-list-'.$entity->id
+                            ));
+                            ?>
+                            <h4><strong>All evaluations</strong></h4>
+                        </li>
+                        <?php if($me_rating_entity = ClipitRating::get_from_user_for_target($user_loggedin, $entity->id)): ?>
+                        <li class="list-item my-evaluation">
+                            <div class="content-block">
+                                <?php echo elgg_view('output/url', array(
+                                    'href'  => "ajax/view/modal/publications/rating?id={$me_rating_entity->id}",
+                                    'text'  => elgg_echo("view"),
+                                    'class' => 'btn btn-default btn-xs pull-right',
+                                    'data-toggle'   => 'modal',
+                                    'data-target'   => '#rating-average-'.$me_rating_entity->id
+                                ));
+                                ?>
+                                <h4><strong>My evaluation</strong></h4>
+                                <?php echo elgg_view("publications/stars_summary", array('entity' => $me_rating_entity, 'class' => ' ')); ?>
+                            </div>
+                        </li>
+                        <?php endif; ?>
+                    </ul>
                 </div>
                 <!-- Star rating end -->
             </div>
@@ -98,12 +102,19 @@ $tags = ClipitVideo::get_tags($entity->id);
     </div>
 </div>
 <!-- Multimedia info + details end -->
+<?php
+$hasRating = ClipitRating::get_from_user_for_target($user_loggedin, $entity->id);
+if(!$hasRating):
+?>
+<!-- Evaluate -->
 <h2 class="title-block">Evaluate</h2>
 <?php echo elgg_view_form("publications/evaluate", array(
     'style' => 'background: #f1f2f7;padding: 20px;margin: 10px 0;',
     'data-validate' => 'true'),
     array('entity' => $entity));
 ?>
+<!-- Evaluate end -->
+<?php endif; ?>
 
 <?php if($comments = array_pop(ClipitComment::get_by_destination(array($entity->id)))):?>
 <a name="comments"></a>
@@ -113,6 +124,7 @@ $tags = ClipitVideo::get_tags($entity->id);
         echo elgg_view("comments/comment",
             array(
                 'entity' => $comment,
+                'target_id' => $entity->id
             ));
     }
 endif;

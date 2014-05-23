@@ -184,7 +184,7 @@
         },
 
         _buildScoreField: function() {
-            return $('<input />', { type: 'hidden', name: this.opt.scoreName }).appendTo(this);
+            return $('<input />', { type: 'hidden', required: true, name: this.opt.scoreName }).appendTo(this);
         },
 
         _callback: function(options) {
@@ -195,6 +195,7 @@
             }
         }, _createCancel: function() {
             var that   = $(this),
+
                 icon   = this.opt.path + this.opt.cancelOff,
                 cancel = $('<img />', { class: icon, "data-rating": 'x', title: this.opt.cancelHint, 'class': 'raty-cancel' });
 

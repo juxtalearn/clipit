@@ -158,3 +158,33 @@ function get_format_time(int $seconds){
     }
     return $time;
 }
+
+/**
+ * Star rating view
+ *
+ * @param float $average
+ * @param int $number
+ * @return string
+ */
+function star_rating_view(float $average, $number = 5){
+    $rest = number_format(($average - floor($average)), 2);
+    $average_ceil = ceil($average);
+    $qualifications = array(elgg_echo('qual:bad'), elgg_echo('qual:poor'), elgg_echo('qual:regular'), elgg_echo('qual:good'), elgg_echo('qual:gorgeous'));
+    $output = "";
+    for($i = 1; $i<=$number; $i++){
+        $star_class = "fa-star empty";
+        if($average_ceil >= $i){
+            $star_class = "fa-star";
+            if($rest > .25 && $average_ceil == $i){
+                $star_class = "fa-star";
+                if($rest < .76){
+                    $star_class = "fa-star-half-o";
+                } else if($rest < .6){
+                    $star_class = "fa-star empty";
+                }
+            }
+        }
+        $output .= '<i class="fa '.$star_class.'" data-rating="'.$i.'"></i> ';
+    }
+    return $output;
+}

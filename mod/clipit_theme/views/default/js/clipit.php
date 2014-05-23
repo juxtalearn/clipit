@@ -205,6 +205,7 @@ $(function(){
             errorPlacement: function(error, element) {
                 error.appendTo($("label[for='"+element.attr('name')+"']"));
             },
+            ignore: [],
             onkeyup: false,
             onblur: false,
             submitHandler: function(form) {
@@ -327,6 +328,7 @@ $(function(){
         scrollTop: $(form).offset().top
         }, 50);
     });
+
     /**
      * Add video url
      * valid url and get video data
@@ -384,4 +386,5 @@ $(function(){
         return (bytes / 1000).toFixed(2) + ' KB';
     }
 });
+
 

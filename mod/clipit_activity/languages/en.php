@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 $english = array(
+    'view'  => 'View',
     // Activity
     'my_activities' => 'My activities',
     'activities:none' => 'There are no activities...',
@@ -91,10 +92,16 @@ $english = array(
     // Publications
     'publications:no_evaluated' => 'No evaluated',
     'publications:evaluated' => 'Evaluated',
+    'publications:rating' => '%s\'s Rating',
+    'publications:rating:list' => 'All evaluations',
+    'publications:starsrequired' => 'Stars rating required',
+    'publications:cantrating' => 'Can not rating',
+    'publications:rated' => 'Successfully evaluated',
     'input:no' => 'No',
     'input:yes' => 'Yes',
     'publish'   => 'Publish',
     'publish:video'   => 'Publish video',
+
 
 );
 

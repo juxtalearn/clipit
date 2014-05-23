@@ -38,6 +38,12 @@ a{
 .blue-lighter{
   color: @blue-lighter;
 }
+.green{
+  color: @green_clipit;
+}
+.red{
+  color: @red_clipit;
+}
 ul, ol {
   margin-top: 0;
   margin-bottom: 10px;
@@ -71,7 +77,11 @@ ul, ol {
 .text-justify{
   text-align: justify;
 }
-
+.child-decoration-none{
+  &:hover, &:focus *{
+    text-decoration: none !important;
+  }
+}
 .view-all{
   text-transform: uppercase;
   font-size: 12px;

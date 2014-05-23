@@ -10,31 +10,39 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-elgg_load_js("jquery:raty");
+
 $entity = elgg_extract("entity", $vars);
 $tags = $entity->tag_array;
-
-$new_tag_rating_id = ClipitRating::create(array(
-    'target'    => $entity->id,
-    'overall_rating'    => 1, // Yes
-));
-// Tag rating create
+//$t =  array(
+//    '1003' => array('is_used' => 0, 'comment' => 'blabla'),
+//    '1005' => array('is_used' => 1, 'comment' => 'mmmm')
+//);
+//$ts = array('tag_rating'=> $t);
+//print_r($ts);
+//foreach($ts['tag_rating'] as $id => $tvalue){
+//    echo $id." = ".$tvalue['comment']." \n";
+//}
+//$new_tag_rating_id = ClipitRating::create(array(
+//    'target'    => $entity->id,
+//    'overall_rating'    => 1, // Yes
+//));
+//// Tag rating create
 //$tags_rating[] = ClipitTagRating::create(array(
 //    'tag_id'    => 1003,
 //    'is_used'   => 0,
-//    'comment'   => '<p>&iquest;Qu&eacute; es esto?</p>'
+//    'description'   => '<p>&iquest;Qu&eacute; es esto?</p>'
 //));
 //$tags_rating[] = ClipitTagRating::create(array(
 //    'tag_id'    => 1002,
 //    'is_used'   => 0,
-//    'comment'   => '<p>Est&aacute; muy mal explicado, joder que mal</p>'
+//    'description'   => '<p>Est&aacute; muy mal explicado, joder que mal</p>'
 //));
 //$tags_rating[] = ClipitTagRating::create(array(
 //    'tag_id'    => 1001,
 //    'is_used'   => 1,
-//    'comment'   => ''
+//    'description'   => ''
 //));
-////ClipitRating::add_tag_ratings($new_tag_rating_id, $tags_rating);
+//ClipitRating::add_tag_ratings($new_tag_rating_id, $tags_rating);
 //
 //$performance_ratings[] = ClipitPerformanceRating::create(array(
 //    'performance_item' => 1036,
@@ -48,41 +56,34 @@ $new_tag_rating_id = ClipitRating::create(array(
 //    'performance_item' => 1038,
 //    'star_rating'   => 5
 //));
-
+//
 //ClipitRating::add_performance_ratings($new_tag_rating_id, $performance_ratings);
 //
-print_r(ClipitRating::get_all());
+//print_r(ClipitRating::get_all());
 ?>
-<style>
-.input-radios-horizontal{
-    margin-bottom: 0;
-}
-.fa-star.empty{
-    color: #bae6f6;
-}
-#my-rating .rating .fa-star{
-    cursor: pointer;
-}
-#my-rating .rating{
-    width: auto !important;
-}
-</style>
 <script>
 $(function(){
     $('#my-rating .rating').raty({
         width: "",
-        scoreName: "rating[]",
+        scoreName: function(){
+            var performance_id = $(this).data("performance-id");
+            var input = $(this).find("input");
+            input.prop({"required": true, "type": "text"});
+            return "performance_rating["+performance_id+"]";
+        },
         starOff : 'fa-star fa empty',
         starOn  : 'fa-star fa',
         click: function(score, evt) {
-            $(this).find("input").prop("required", true);
+            var input = $(this).find("input");
+            input.removeClass("error");
+            $("label[for='"+input.attr("name")+"'] > span").remove();
         }
     });
 });
 </script>
 <div class="row">
     <div class="col-md-8">
-        <label for="tricky-understand">
+        <label for="overall">
             Does this video help you to understand Tricky Topic?
         </label>
         <?php echo elgg_view("input/hidden", array(
@@ -90,7 +91,7 @@ $(function(){
         'value' => $entity->id,
         )); ?>
         <?php echo elgg_view('input/radio', array(
-            'name' => 'tricky-understand',
+            'name' => 'overall',
             'options' => array(
                 elgg_echo("input:yes") => 1,
                 elgg_echo("input:no") => 0
@@ -99,7 +100,7 @@ $(function(){
             'class' => 'input-radios-horizontal blue',
         )); ?>
         <span class="show" style="margin-bottom: 10px;">
-            Check topics covered in this video, and explain why:
+            Check if each topic was covered in this video, and explain why:
         </span>
         <?php
         foreach($tags as $tag_id):
@@ -107,18 +108,19 @@ $(function(){
         ?>
             <div style="margin-top: 5px;">
                 <?php echo elgg_view('input/radio', array(
-                    'name' => "tag[{$tag->id}][check]",
+                    'name' => "tag_rating[{$tag->id}][is_used]",
                     'options' => array(
                         elgg_echo("input:yes") => 1,
                         elgg_echo("input:no") => 0
                     ),
+                    'required'  => true,
                     'class' => 'input-radios-horizontal blue pull-right',
                 )); ?>
-                <label class="text-truncate" for="tag[<?php echo $tag->id; ?>][explain]">
+                <label for="tag_rating[<?php echo $tag->id; ?>][is_used]">
                     <?php echo $tag->name; ?>
                 </label>
                 <?php echo elgg_view("input/plaintext", array(
-                    'name'  => "tag[{$tag->id}][explain]",
+                    'name'  => "tag_rating[{$tag->id}][comment]",
                     'class' => 'form-control',
                     'placeholder' => 'Why is/isn\'t this SB correctly covered?',
                     'onclick'   => '$(this).addClass(\'mceEditor\');tinymce_setup();',
@@ -129,22 +131,22 @@ $(function(){
         <?php endforeach; ?>
     </div>
     <div class="col-md-4">
-        <div class="pull-right" id="my-rating">
+        <div id="my-rating">
             <h4>
                 <strong>My rating</strong>
             </h4>
-            <div style="margin: 10px 0;">
-                <div class="rating" style="color: #e7d333;float: right;font-size: 18px;margin: 0 10px;"></div>
-                <span class="text-truncate" style="padding-top: 2px;">Innovation</span>
-            </div>
-            <div style="margin: 10px 0;">
-                <div class="rating" style="color: #e7d333;float: right;font-size: 18px;margin: 0 10px;"></div>
-                <span class="text-truncate" style="padding-top: 2px;">Design</span>
-            </div>
-            <div style="margin: 10px 0;">
-                <div class="rating" style="color: #e7d333;float: right;font-size: 18px;margin: 0 10px;"></div>
-                <span class="text-truncate" style="padding-top: 2px;">Learning</span>
-            </div>
+            <ul>
+            <?php
+            $performance_items = $entity->performance_array;
+            foreach($performance_items as $performance_item_id):
+                $performance_item = array_pop(ClipitPerformanceItem::get_by_id(array($performance_item_id)));
+            ?>
+                <li class="list-item">
+                    <div class="rating" data-performance-id="<?php echo $performance_item->id;?>" style="color: #e7d333;float: right;font-size: 18px;margin: 0 10px;"></div>
+                    <label class="blue" for="performance_rating[<?php echo $performance_item->id;?>]" style="font-weight: normal;padding-top: 2px;margin: 0;"><?php echo $performance_item->name;?></label>
+                </li>
+            <?php endforeach; ?>
+            </ul>
         </div>
     </div>
 </div>

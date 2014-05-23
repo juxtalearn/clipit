@@ -7,16 +7,10 @@
   margin-bottom: 10px;
   padding-top: 15px;
 
-  .image-block{
-    float: left;
-    margin-right: 10px;
-  }
-  .content-block{
-    overflow: hidden;
-    .body{
-      margin-top: 10px;
-      color: @grey_dark;
-    }
+  .body{
+    margin-top: 10px;
+    color: @grey_dark;
+    .formated-list();
   }
   &.reply{
     background: #fff;
@@ -51,12 +45,13 @@
     border-radius: 3px;
   }
   &:hover,
-  &:focus{¡
+  &:focus{
     .reply-button{
       background: @blue_clipit;
     }
   }
 }
+
 
 //
 // Messages top menu
