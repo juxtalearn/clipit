@@ -29,7 +29,7 @@ class ClipitRating extends UBItem{
     /**
      * @var int Overall rating opinionfrom 0 to 10
      */
-    public $overall_rating = false;
+    public $overall = false;
     /**
      * @var array Ratings about Tags used"
      */
@@ -116,7 +116,12 @@ class ClipitRating extends UBItem{
             }
             $count++;
         }
-        return $average_rating = $average_rating / $count;
+        if(!empty($count)){
+            return $average_rating = $average_rating / $count;
+        } else{
+            return null;
+        }
+
     }
 
     static function add_tag_ratings($rating_id, $tag_rating_array){

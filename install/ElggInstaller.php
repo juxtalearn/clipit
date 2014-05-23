@@ -411,7 +411,7 @@ class ElggInstaller {
             ),
             'jxl_secret' => array(
                 'type' => 'text',
-                'value' => '',
+                'value' => '0123456789abcdef0123456789abcdef',
                 'required' => FALSE,
             ),
         );
