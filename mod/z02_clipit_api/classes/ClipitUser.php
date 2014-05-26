@@ -34,6 +34,22 @@ class ClipitUser extends UBUser{
      */
     const COOKIE_TOKEN_DURATION = 60;
 
+    protected function save(){
+        $id = parent::save();
+        switch(strtolower($this->role)){
+            case static::ROLE_STUDENT:
+                static::set_role_student($id);
+                break;
+            case static::ROLE_TEACHER:
+                static::set_role_teacher($id);
+                break;
+            case static::ROLE_ADMIN:
+                static::set_role_admin($id);
+                break;
+        }
+        return $id;
+    }
+
     static function login($login, $password, $persistent = false){
         if(!parent::login($login, $password, $persistent)){
             return false;
