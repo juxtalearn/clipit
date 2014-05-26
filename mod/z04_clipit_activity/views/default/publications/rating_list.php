@@ -12,7 +12,7 @@
  */
 $entities = elgg_extract('entity', $vars);
 $activity_id = elgg_get_page_owner_guid();
-$activity_id = 74;
+$activity_id = elgg_extract('activity_id', $vars);
 ?>
 <div class="panel-group" id="accordion">
     <?php

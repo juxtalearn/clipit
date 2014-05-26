@@ -21,11 +21,14 @@ $entity_class = $object['subtype'];
 switch($entity_class){
     // Clipit Activity
     case 'ClipitActivity':
+        $entity_level_class = "ClipitActivity";
         $parent_id = array_pop(ClipitActivity::get_by_id(array($parent_id)));
         break;
     // Clipit Group
     case 'ClipitGroup':
+        $entity_level_class = "ClipitActivity";
         $parent_id = ClipitGroup::get_activity($parent_id);
+        $href = "clipit_activity/{$parent_id}/publications";
         break;
     default:
         register_error(elgg_echo("video:cantadd"));
@@ -44,11 +47,11 @@ if(count($entity)==0 || trim($title) == "" || trim($description) == "" || trim($
     $new_video_id = ClipitVideo::create_clone($entity->id);
 
     if($new_video_id){
-        $entity_class::add_videos($parent_id, array($new_video_id));
+        $entity_level_class::add_videos($parent_id, array($new_video_id));
     } else {
         register_error(elgg_echo("cantpublish"));
     }
 
     system_message(elgg_echo('published'));
 }
-forward(REFERER);
+forward($href);

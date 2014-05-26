@@ -123,7 +123,9 @@ $(function(){
                     'name'  => "tag_rating[{$tag->id}][comment]",
                     'class' => 'form-control',
                     'placeholder' => 'Why is/isn\'t this SB correctly covered?',
-                    'onclick'   => '$(this).addClass(\'mceEditor\');tinymce_setup();',
+                    'onclick'   => '$(this).addClass(\'mceEditor\');
+                                    tinymce_setup();
+                                    tinymce.execCommand(\'mceFocus\',false,this.id);',
                     'rows'  => 1,
                 ));
                 ?>

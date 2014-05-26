@@ -26,8 +26,10 @@ if($rating = array_pop(ClipitRating::get_by_id(array($id)))){
             "body"      => $body,
             "footer"    => false
         ));
+
 } elseif($rating_target = array_pop(ClipitRating::get_by_target(array($by_target_id)))){
-    $body = elgg_view('publications/rating_list', array('entity'  => $rating_target));
+    $activity_id = (int)get_input("activiy_id");
+    $body = elgg_view('publications/rating_list', array('entity'  => $rating_target, 'activity_id' => $activity_id));
     echo elgg_view("page/components/modal",
         array(
             "dialog_class"     => "modal-lg",

@@ -267,34 +267,82 @@ function activity_page_handler($page) {
 
                     break;
                 case 'publications':
+                    $selected_tab = get_input('filter', 'videos');
                     $title = elgg_echo("activity:publications");
                     elgg_push_breadcrumb($title);
-                    $selected_tab = get_input('filter', 'no_evaluated');
                     $href = "clipit_activity/{$activity->id}/publications";
                     $filter = elgg_view('publications/filter', array('selected' => $selected_tab, 'entity' => $activity, 'href' => $href));
-                    $videos = ClipitActivity::get_videos($activity->id);
-                    $rating = true;
-                    $content = elgg_view('multimedia/video/list', array(
-                        'entity'    => $activity,
-                        'videos'    => $videos,
-                        'href'      => $href,
-                        'rating'    => $rating,
-                        'actions'   => false,
-                    ));
+
+                    switch($selected_tab){
+                        case 'videos':
+                            $entities = ClipitActivity::get_videos($activity->id);
+                            $evaluation_list = get_filter_evaluations($entities);
+                            $list_no_evaluated = elgg_view('multimedia/video/list', array(
+                                'videos'    => $evaluation_list["no_evaluated"],
+                                'href'      => $href,
+                                'rating'    => true,
+                                'actions'   => false,
+                            ));
+                            $list_evaluated = elgg_view('multimedia/video/list', array(
+                                'videos'    => $evaluation_list["evaluated"],
+                                'href'      => $href,
+                                'rating'    => true,
+                                'actions'   => false,
+                            ));
+                            if (!$entities) {
+                                $content = elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
+                            }
+                            break;
+                    }
+                    // No Evaluated section
+                    if(count($evaluation_list["no_evaluated"]) > 0){
+                        $title_block_no_evaluated = elgg_view("page/components/title_block", array(
+                            'title' => elgg_echo("publications:no_evaluated"),
+                            'secondary_text' => count($evaluation_list["no_evaluated"])
+                        ));
+                        $content .= $title_block_no_evaluated.$list_no_evaluated;
+                    }
+                    // Evaluated section
+                    if(count($evaluation_list["evaluated"]) > 0){
+                        $title_block_evaluated = elgg_view("page/components/title_block", array(
+                            'title' => elgg_echo("publications:evaluated"),
+                            'secondary_text' => count($evaluation_list["evaluated"])."/".count($entities)
+                        ));
+                        $content .= $title_block_evaluated.$list_evaluated;
+                    }
+
                     if($page[2] == 'view' && $page[3]){
                         $entity_id = (int)$page[3];
-                        //TEST
                         $filter = "";
-                        $entity = array_pop(ClipitVideo::get_by_id(array($entity_id)));
-                        $videos = ClipitActivity::get_videos($activity->id);
-                        if(!$entity || !in_array($entity_id, $videos)){
-                            return false;
-                        }
                         elgg_pop_breadcrumb($title);
                         elgg_push_breadcrumb($title, "clipit_activity/{$activity->id}/publications");
+                        $object = ClipitSite::lookup($entity_id);
+                        switch($object['subtype']){
+                            // Clipit Video publication
+                            case 'ClipitVideo':
+                                $entity = array_pop(ClipitVideo::get_by_id(array($entity_id)));
+                                $videos = ClipitActivity::get_videos($activity->id);
+                                if(!$entity || !in_array($entity_id, $videos)){
+                                    return false;
+                                }
+                                $body = elgg_view("multimedia/video/body", array('entity'  => $entity));
+                                $content = elgg_view('publications/view', array('entity' => $entity, 'type' => 'video', 'body' => $body));
+                                break;
+                            // Clipit Storyboard publication
+                            case 'ClipitStoryboard':
+                                $entity = array_pop(ClipitStoryboard::get_by_id(array($entity_id)));
+                                $sbs = ClipitActivity::get_storyboards($activity->id);
+                                if(!$entity || !in_array($entity_id, $sbs)){
+                                    return false;
+                                }
+                                $body = elgg_view("multimedia/storyboard/body", array('entity'  => $entity));
+                                $content = elgg_view('publications/view', array('entity' => $entity, 'type' => 'storyboard', 'body' => $body));
+                                break;
+                            default:
+                                return false;
+                                break;
+                        }
                         elgg_push_breadcrumb($entity->name);
-                        $body = elgg_view("multimedia/video/body", array('entity'  => $entity));
-                        $content = elgg_view('publications/view', array('entity' => $entity, 'type' => 'video', 'body' => $body));
                     }
                     $params = array(
                         'content'   => $content,
@@ -506,11 +554,6 @@ function group_tools_page_handler($page, $activity){
                     if (!$videos) {
                         $content .= elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
                     }
-                    if($page[3] == 'view' && $page[4]){
-                        $entity_id = (int)$page[4];
-                        $entity = ClipitVideo::get_by_id(array($entity_id));
-                        $entities = ClipitGroup::get_videos($entity->id);
-                    }
                     break;
                 case 'storyboards':
                     $sbs = "";
@@ -527,13 +570,13 @@ function group_tools_page_handler($page, $activity){
                 case 'links':
                     $content = elgg_view('multimedia/links', array('entity' => $group));
                     if (!$content) {
-                        $content = elgg_echo('groups:none');
+                        $content = elgg_echo('links:none');
                     }
                     break;
                 default:
                     $content = elgg_view('multimedia/files', array('entity' => $group));
                     if (!$content) {
-                        $content = elgg_echo('groups:none');
+                        $content = elgg_echo('file:none');
                     }
                     break;
             }
@@ -665,3 +708,23 @@ function explore_page_handler($page) {
 
 }
 
+/**
+ * Get evaluations by filter (no evaluated | evaluated)
+ *
+ * @param $entities
+ * @return array
+ */
+function get_filter_evaluations($entities){
+    $user_id = elgg_get_logged_in_user_guid();
+    foreach($entities as $entity_id){
+        $object = ClipitSite::lookup($entity_id);
+        $entity = array_pop($object['subtype']::get_by_id(array($entity_id)));
+        $rating = ClipitRating::get_from_user_for_target($user_id, $entity->id);
+        if(!$rating){
+            $output["no_evaluated"][] = $entity->id;
+        } else {
+            $output["evaluated"][] = $entity->id;
+        }
+    }
+    return $output;
+}

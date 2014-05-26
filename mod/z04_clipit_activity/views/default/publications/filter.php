@@ -13,14 +13,14 @@
 $href = elgg_extract('href', $vars);
 
 $tabs = array(
-    'no_evaluated' => array(
-        'text' => elgg_echo('publications:no_evaluated'),
+    'videos' => array(
+        'text' => elgg_echo('multimedia:videos'),
         'href' => "{$href}?filter=videos",
         'priority' => 200,
     ),
-    'evaluated' => array(
-        'text' => elgg_echo('publications:evaluated'),
-        'href' => "{$href}?filter=selected",
+    'storyboards' => array(
+        'text' => elgg_echo('multimedia:storyboards'),
+        'href' => "{$href}?filter=storyboards",
         'priority' => 300,
     ),
 );

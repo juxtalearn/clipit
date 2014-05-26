@@ -19,7 +19,7 @@ foreach($performance_ratings as $performance_rating_id){
     $performance_item = array_pop(ClipitPerformanceItem::get_by_id(array($performance_rating->performance_item)));
     $performance_view .= '
     <li class="list-item" style="margin: 10px 0;">
-        <div class="rating readonly" data-score="'.$performance_rating->star_rating.'" style="color: #e7d333;float: right;font-size: 18px;margin: 0 10px;">
+        <div class="rating readonly pull-right" data-score="'.$performance_rating->star_rating.'" style="margin: 0 10px;">
         '.star_rating_view($performance_rating->star_rating).'
         </div>
         <span class="blue" style="padding-top: 2px;">'.$performance_item->name.'</span>

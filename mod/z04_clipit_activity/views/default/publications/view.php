@@ -13,6 +13,7 @@
 $entity = elgg_extract("entity", $vars);
 $user_loggedin = elgg_get_logged_in_user_guid();
 $user_loggedin_elgg = new ElggUser($user_loggedin);
+$activity_id = elgg_get_page_owner_guid();
 $tags = $entity->tag_array;
 $performance_average = ClipitPerformanceRating::get_average_target_rating($entity->id);
 ?>
@@ -69,7 +70,7 @@ $performance_average = ClipitPerformanceRating::get_average_target_rating($entit
                             <?php
                             echo elgg_view("page/components/modal_remote", array('id'=> "rating-list-{$entity->id}" ));
                             echo elgg_view('output/url', array(
-                                'href'  => "ajax/view/modal/publications/rating?by_target={$entity->id}",
+                                'href'  => "ajax/view/modal/publications/rating?by_target={$entity->id}&activiy_id={$activity_id}",
                                 'text'  => elgg_echo("view"),
                                 'class' => 'btn btn-default btn-xs pull-right all',
                                 'data-toggle'   => 'modal',
