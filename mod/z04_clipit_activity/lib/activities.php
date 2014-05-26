@@ -45,7 +45,7 @@ function activity_handle_profile_page($guid) {
     $params = array(
         'name' => 'groups',
         'text' => elgg_echo('activity:groups'),
-        'href' => "z04_clipit_activity/".$guid."/groups",
+        'href' => "clipit_activity/".$guid."/groups",
     );
     elgg_register_menu_item('page', $params);
     $params = array(

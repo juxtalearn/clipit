@@ -22,7 +22,7 @@ if($event):
     <li class="list-item">
         <div class="pull-left" style="margin-right: 10px;margin-top: 5px; position: relative;">
             <?php echo elgg_view('output/url', array(
-                'href'  => "z04_clipit_activity/".$activity->id,
+                'href'  => "clipit_activity/".$activity->id,
                 'title' => $activity->name,
                 'text'  => "",
                 'style' => 'background: #'.$activity->color.';width: 22px; height: 22px; position: absolute; border-radius: 15px; border: 2px solid #fff; left: -5px; top: -5px;'
