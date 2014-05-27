@@ -314,6 +314,7 @@ $(function(){
     });
     // default execute send_msg function
     $("input#compose").send_msg();
+
     ///
     tinymce_setup();
     /*

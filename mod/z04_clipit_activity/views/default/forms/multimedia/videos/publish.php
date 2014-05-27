@@ -14,7 +14,7 @@ $entity = elgg_extract('entity', $vars);
 $parent_id = elgg_extract('parent_id', $vars);
 
 // Load tinyMCE in textarea
-$body = "<script>$(function(){tinymce_setup();});$('input#compose').send_msg();</script>";
+$body = "<script>$(function(){tinymce_setup();});</script>";
 $body .= '<div class="bg-info">Cuidadin.... bla bla bla</div>';
 $body .= elgg_view("input/hidden", array(
     'name' => 'entity-id',
@@ -50,6 +50,15 @@ $body .='
 </div>
 ';
 ?>
+<script>
+$(function(){
+    var sampleTags = ['c++', 'java', 'php', 'coldfusion', 'javascript', 'asp', 'ruby', 'python', 'c', 'scala', 'groovy', 'haskell', 'perl', 'erlang', 'apl', 'cobol', 'go', 'lua'];
+    $('ul#tags').tagit({
+        availableTags: sampleTags,
+        allowSpaces: true
+    });
+});
+</script>
 <style>
     .multiple-check{
         margin: 10px 0;
@@ -95,12 +104,13 @@ $body .='
     )).'
 </div>
 <div class="form-group">
+<ul id="tags"></ul>
     <label for="video-title">'.elgg_echo("video:tags").'</label>
     '.elgg_view("input/text", array(
         'name' => 'video-tags',
         'value' => "",
         'class' => 'form-control',
-        'id'    => 'compose',
+        'id'    => 'tags',
         'required' => true
     )).'
 </div>

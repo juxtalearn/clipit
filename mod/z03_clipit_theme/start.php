@@ -137,7 +137,7 @@ function clipit_final_init() {
         elgg_load_js("jquery:validate");
         elgg_load_js("jquery:tokeninput");
         elgg_load_js("clipit");
-        elgg_load_css("ui-lightness");
+        //elgg_load_css("ui-lightness");
         elgg_load_css("twitter-bootstrap");
         elgg_unregister_js("twitter-bootstrap");
         elgg_unregister_css("righteous");
@@ -316,7 +316,7 @@ function set_default_clipit_events(){
     register_clipit_event('group-user', function($event, $relationship){
         $params = array(
             'icon'    => 'user',
-            'message' => 'Se ha unido al grupo',
+            'message' => 'joined the group',
         );
         return $params;
     });
@@ -324,15 +324,18 @@ function set_default_clipit_events(){
         $item = array_pop(ClipitFile::get_by_id(array($relationship->guid_two)));
         $activity_id = ClipitGroup::get_activity($relationship->guid_one);
         $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
+        if(!$description = $item->description){
+            $description = "No description";
+        }
         $params = array(
             'icon' => 'upload',
             'message' => 'Uploaded the file',
             'item' => array(
                 'name' => $item->name,
-                'description' => $item->description,
+                'description' => $description,
                 //'icon' => "$item->icon",
                 'icon' => "file-o",
-                'url' => "z04_clipit_activity/{$activity->id}/group/multimedia/view/{$item->id}",
+                'url' => "clipit_activity/{$activity->id}/group/multimedia/view/{$item->id}",
             )
         );
         return $params;
@@ -361,7 +364,7 @@ function set_default_clipit_events(){
                     'item' => array(
                         'name' => $item->name,
                         'description' => $item->description,
-                        'url'  => "z04_clipit_activity/{$activity->id}/group/discussion/view/{$item->id}",
+                        'url'  => "clipit_activity/{$activity->id}/group/discussion/view/{$item->id}",
                     ),
                 );
 //                // Reply post

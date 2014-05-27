@@ -21,7 +21,7 @@ if(is_array($my_activities)){
     foreach($my_activities as $activity){
         $activity->progress = mt_rand(1,100);
         $activity_link = elgg_view('output/url', array(
-            'href' => "z04_clipit_activity/{$activity->id}",
+            'href' => "clipit_activity/{$activity->id}",
             'text' => $activity->name,
             'is_trusted' => true,
         ));

@@ -97,6 +97,9 @@ function clipit_event($event, $view_type){
     $explode_rel = explode("-", $relationship->relationship);
     switch($explode_rel[0]){
         case "group":
+            if($relationship->relationship == 'group-video'){
+                return false;
+            }
             $object = array_pop(ClipitGroup::get_by_id(array($relationship->guid_one)));
             $activity_id = ClipitGroup::get_activity($object->id);
             $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
@@ -111,7 +114,7 @@ function clipit_event($event, $view_type){
                 ),
                 'object' => array(
                     'name' => $object->name,
-                    'url' => "z04_clipit_activity/{$activity->id}/group/activity_log",
+                    'url' => "clipit_activity/{$activity->id}/group/activity_log",
                 ),
                 'activity'  => $activity,
             );
@@ -220,7 +223,7 @@ function group_events($subtype, $object_rel, $relationship){
             $params =  array(
                 'title' => 'File uploaded',
                 'id'    => $relationship->id,
-                'href'  => 'z04_clipit_activity/'.$activity->id.'/files/view/'.$file->id,
+                'href'  => 'clipit_activity/'.$activity->id.'/files/view/'.$file->id,
                 'icon'  => 'upload',
                 'color' => $activity->color,
                 'time'  => $relationship->time_created,

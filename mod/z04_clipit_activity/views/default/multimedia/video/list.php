@@ -15,6 +15,7 @@ $video_ids = elgg_extract('videos', $vars);
 $href = elgg_extract("href", $vars);
 $rating = elgg_extract("rating", $vars);
 ?>
+<script src="http://aehlke.github.io/tag-it/js/tag-it.js"></script>
 <?php if($vars['add_video']):?>
     <?php echo elgg_view_form('multimedia/videos/add', array('data-validate'=> "true" ), array('entity'  => $entity)); ?>
     <div class="block" style="margin-bottom: 20px;">

@@ -16,7 +16,7 @@ $params = array(
     'icon' => 'upload',
     'message' => 'Upload the file',
     'item' => array(
-        'url' => 'z04_clipit_activity/%d/file/view/%d',
+        'url' => 'clipit_activity/%d/file/view/%d',
         'description' => true,
         'icon' => "ICONO!!"
     )
