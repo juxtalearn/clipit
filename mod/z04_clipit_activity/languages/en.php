@@ -90,7 +90,7 @@ $english = array(
     'storyboards:none' => 'No storyboards',
     'multimedia:storyboards:add' => 'Add storyboards',
     // Publications
-    'publications:no_evaluated' => 'No evaluated',
+    'publications:no_evaluated' => 'Not evaluated',
     'publications:evaluated' => 'Evaluated',
     'publications:rating' => '%s\'s Rating',
     'publications:rating:list' => 'All evaluations',

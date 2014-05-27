@@ -6,17 +6,6 @@
 
 $items = elgg_extract('menu', $vars);
 $class = elgg_extract('class', $vars, false);
-
-/*foreach ($vars['menu'] as $section => $menu_items) {
-
-    echo elgg_view('navigation/menu/elements/section', array(
-        'items' => $menu_items,
-        'class' => "$class",
-        'section' => $section,
-        'name' => $vars['name']
-    ));
-}
-*/
 $viewer = elgg_get_logged_in_user_entity();
 $context = elgg_get_context();
 ?>
@@ -24,6 +13,8 @@ $context = elgg_get_context();
     <li><a href="<?php echo $CONFIG->wwwroot; ?>my_activities"><?php echo elgg_echo("my_activities");?></a></li>
     <li class="separator">|</li>
     <li><a href="<?php echo $CONFIG->wwwroot; ?>explore"><?php echo elgg_echo("explore");?></a></li>
+    <li class="separator">|</li>
+    <li><a href="http://trickytopic.juxtalearn.net/">Tricky topic tool</a></li>
     <li class="separator">|</li>
     <li>
         <a id="notifications" role="button" data-toggle="dropdown" href="javascript:;">

@@ -1,5 +1,5 @@
 <?php
- /**
+/**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
  * Creation date:   16/05/14
@@ -28,37 +28,11 @@ $body .= '<div class="row">';
 $body .= '
 <div class="col-md-4">
     <img src="'.$entity->preview.'" class="img-responsive">
-    <h5 class="blue"><strong>Select performance items</strong></h5>
-    <div class="multiple-check form-control">
-        <a href="javascript:;"><h4>- Learning</h4></a>
-            <div class="check-group">';
-       foreach(ClipitPerformanceItem::get_all() as $performance_item){
-           $body .= '
-                    <label for="tag_'.$performance_item->id.'">
-                        <input type="checkbox" id="tag_'.$performance_item->id.'"> <span>'.$performance_item->name.'</span>
-                    </label>';
-       }
-        foreach(ClipitPerformanceItem::get_all() as $performance_item){
-            $body .= '
-                    <label for="tag_'.$performance_item->id.'">
-                        <input type="checkbox" id="tag_'.$performance_item->id.'"> <span>'.$performance_item->name.'</span>
-                    </label>';
-        }
-$body .='
-            </div>
-    </div>
+
 </div>
 ';
 ?>
-<script>
-$(function(){
-    var sampleTags = ['c++', 'java', 'php', 'coldfusion', 'javascript', 'asp', 'ruby', 'python', 'c', 'scala', 'groovy', 'haskell', 'perl', 'erlang', 'apl', 'cobol', 'go', 'lua'];
-    $('ul#tags').tagit({
-        availableTags: sampleTags,
-        allowSpaces: true
-    });
-});
-</script>
+
 <style>
     .multiple-check{
         margin: 10px 0;
@@ -103,17 +77,7 @@ $body .='
         'required' => true
     )).'
 </div>
-<div class="form-group">
-<ul id="tags"></ul>
-    <label for="video-title">'.elgg_echo("video:tags").'</label>
-    '.elgg_view("input/text", array(
-        'name' => 'video-tags',
-        'value' => "",
-        'class' => 'form-control',
-        'id'    => 'tags',
-        'required' => true
-    )).'
-</div>
+
 <div class="form-group">
     <label for="video-description">'.elgg_echo("video:description").'</label>
     '.elgg_view("input/plaintext", array(
