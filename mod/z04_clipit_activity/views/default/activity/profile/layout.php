@@ -11,7 +11,7 @@ $user_id = elgg_get_logged_in_user_guid();
 $user_inActivity = ClipitGroup::get_from_user_activity($user_id, $activity->id);
 ?>
 <div class="row">
-    <div class="col-md-12" style="overflow-y: auto;max-height: 150px;">
+    <div class="col-md-12" data-shorten="true" style="overflow: hidden;max-height: 160px;">
         <p class="text-justify">
             <?php echo $activity->description;?>
         </p>

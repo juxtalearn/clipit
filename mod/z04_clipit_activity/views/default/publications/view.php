@@ -16,6 +16,7 @@ $user_loggedin_elgg = new ElggUser($user_loggedin);
 $activity_id = elgg_get_page_owner_guid();
 $tags = $entity->tag_array;
 $performance_average = ClipitPerformanceRating::get_average_target_rating($entity->id);
+$total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->id))));
 ?>
 <!-- Multimedia info + details -->
 <div class="multimedia-owner multimedia-pub">
@@ -29,12 +30,17 @@ $performance_average = ClipitPerformanceRating::get_average_target_rating($entit
             </div>
             <div class="row details">
                 <div class="col-md-8">
+                    <small class="show">
+                    <strong>Published on</strong> <?php echo htmlspecialchars(date(elgg_echo('friendlytime:date_format'), $entity->time_created));?>
+                    (<?php echo elgg_view('output/friendlytime', array('time' => $entity->time_created));?>)
+                    </small>
+                    <span class="label label-blue"><i class="fa fa-users"></i> Los manolos</span>
                     <h4><strong>Tags</strong></h4>
                     <div class="tags">
                         <?php echo elgg_view("page/elements/tags", array('tags' => $tags)); ?>
                     </div>
                     <h4><strong>Description</strong></h4>
-                    <div class="description">
+                    <div class="description" data-shorten="true">
                         <?php echo $entity->description; ?>
                     </div>
                 </div>
@@ -47,7 +53,7 @@ $performance_average = ClipitPerformanceRating::get_average_target_rating($entit
                         <h4 style=" display: inline-block; margin-top: 0;">
                             <strong>Rating</strong>
                             <small style="margin-top: 5px;" class="show">
-                                <?php echo count(array_pop(ClipitRating::get_by_target(array($entity->id)))); ?>
+                                <?php echo $total_evaluations; ?>
                                 VOTES
                             </small>
                         </h4>
@@ -65,6 +71,7 @@ $performance_average = ClipitPerformanceRating::get_average_target_rating($entit
                             </div>
                         <?php endforeach; ?>
                     </div>
+                    <?php if($total_evaluations > 0): ?>
                     <ul class="evaluations">
                         <li class="list-item">
                             <?php
@@ -96,6 +103,7 @@ $performance_average = ClipitPerformanceRating::get_average_target_rating($entit
                         </li>
                         <?php endif; ?>
                     </ul>
+                    <?php endif; ?>
                 </div>
                 <!-- Star rating end -->
             </div>

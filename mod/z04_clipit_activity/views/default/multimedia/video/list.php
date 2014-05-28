@@ -16,6 +16,56 @@ $href = elgg_extract("href", $vars);
 $rating = elgg_extract("rating", $vars);
 ?>
 <script src="http://aehlke.github.io/tag-it/js/tag-it.js"></script>
+<script>
+
+    //$(document).on("click", "ul#tags", function(){
+
+    //});
+
+        var performance_tags = function(element){
+            $(element).tagit({
+                allowSpaces: true,
+                removeConfirmation: true,
+                onTagExists: function(event, ui){
+                    $(ui.existingTag).fadeIn("slow", function() {
+                        $(this).addClass("selected");
+                    }).fadeOut("slow", function() {
+                        $(this).removeClass("selected");
+                    });;
+                },
+                autocomplete: {
+                    delay: 0,
+                    source: elgg.config.wwwroot+"ajax/view/publications/tags/search"
+                },
+                singleField: true,
+                singleFieldNode: $(element).closest("form").find("input[name=tags]")//$('#input_tags_<?php echo $entity->id;?>')
+            });
+        }
+    //$(document).on("click", ){
+    var performance_tags = function(){
+        that = $(this);
+        $(this).tagit({
+            allowSpaces: true,
+            removeConfirmation: true,
+            onTagExists: function(event, ui){
+                $(ui.existingTag).fadeIn("slow", function() {
+                    $(this).addClass("selected");
+                }).fadeOut("slow", function() {
+                    $(this).removeClass("selected");
+                });
+            },
+            autocomplete: {
+                delay: 0,
+                source: elgg.config.wwwroot+"ajax/view/publications/tags/search"
+            },
+            placeholderText: elgg.echo("tags:commas:separated"),
+            singleField: true,
+            singleFieldNode: that.closest("form").find("input[name=tags]")
+        });
+    };
+
+
+</script>
 <?php if($vars['add_video']):?>
     <?php echo elgg_view_form('multimedia/videos/add', array('data-validate'=> "true" ), array('entity'  => $entity)); ?>
     <div class="block" style="margin-bottom: 20px;">
