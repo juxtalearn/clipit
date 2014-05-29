@@ -55,6 +55,7 @@ $english = array(
     'discussion:title_topic' => 'Topic title',
     'discussion:text_topic' => 'Topic text',
     // Multimedia
+    'url'   => 'Url',
     'multimedia:files' => 'Files',
     'multimedia:videos' => 'Videos',
     'multimedia:storyboards' => 'Storyboards',
@@ -85,6 +86,7 @@ $english = array(
     'video:add' => 'Add video url',
     'video:url' => 'Video url',
     'video:title' => 'Video title',
+    'video:tags' => 'Video tags',
     'video:description' => 'Video description',
     // Storyboards
     'storyboards:none' => 'No storyboards',
@@ -92,7 +94,8 @@ $english = array(
     // Publications
     'publications:no_evaluated' => 'Not evaluated',
     'publications:evaluated' => 'Evaluated',
-    'publications:rating' => '%s\'s Rating',
+    'publications:rating' => 'Rating',
+    'publications:rating:name' => '%s\'s Rating',
     'publications:rating:list' => 'All evaluations',
     'publications:starsrequired' => 'Stars rating required',
     'publications:cantrating' => 'Can not rating',
@@ -100,8 +103,14 @@ $english = array(
     'input:no' => 'No',
     'input:yes' => 'Yes',
     'publish'   => 'Publish',
+    'published'   => 'Published',
+    'publish:to_activity'   => 'Publish %s to activity',
     'publish:video'   => 'Publish video',
-
+    // Tags
+    'tags:commas:separated' => 'Separated by commas',
+    // Performance items
+    'performance_item:select' => 'Select performance items',
+    'performance_item:info' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus dapibus lacus at nisl pharetra faucibus dapibus lacus',
 
 );
 

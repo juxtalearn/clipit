@@ -221,25 +221,6 @@ function activity_page_handler($page) {
                         'title_style' => "background: #". $activity->color,
                     );
                     break;
-                case 'publish':
-                    if(!$page[2]){
-                        return false;
-                    }
-                    $entity_id = (int)$page[2];
-                    $title =  elgg_echo("publish");
-                    elgg_push_breadcrumb($title);
-                    $entity = array_pop(ClipitVideo::get_by_id(array($entity_id)));
-                    $params = array(
-                        'content'   => elgg_view_form('publications/publish', array('data-validate'=> "true" ),
-                            array('entity'  => $entity,
-                                'parent_id' => $group->id
-                            )),
-                        'filter'    => '',
-                        'title'     => $title,
-                        'sub-title' => $activity->name,
-                        'title_style' => "background: #". $activity->color,
-                    );
-                    break;
                 case 'join':
                     if($activity_status == 'active' || !$isCalled){
                         return false;
@@ -553,18 +534,6 @@ function group_tools_page_handler($page, $activity){
             elgg_push_breadcrumb($title);
             $content =  elgg_view('group/activity_log', array('entity' => $group));
             break;
-        case 'publish':
-            if(!$entity_id = $page[3]){
-                return false;
-            }
-            $title =  elgg_echo("publish");
-            elgg_push_breadcrumb($title);
-            $entity = array_pop(ClipitVideo::get_by_id(array($entity_id)));
-            $content = elgg_view_form('publications/publish', array('data-validate'=> "true" ),
-                    array('entity'  => $entity,
-                        'parent_id' => $group->id
-                    ));
-            break;
         case 'multimedia':
             $title = elgg_echo("group:files");
             elgg_push_breadcrumb($title);
@@ -622,34 +591,71 @@ function group_tools_page_handler($page, $activity){
                 set_input('id', $page[4]);
                 include "$file_dir/download.php";
             }
-            if($page[3] == 'view' && $page[4]){
-                elgg_pop_breadcrumb($entity->name);
+            if($page[4]){
                 $entity_id = (int)$page[4];
-                $object = ClipitSite::lookup($entity_id);
-                switch($object['subtype']){
-                    // Clipit File
-                    case 'ClipitFile':
-                        elgg_push_breadcrumb(elgg_echo("files"), $href."?filter=files");
-                        $title = elgg_echo("file");
-                        $entity = array_pop(ClipitFile::get_by_id(array($entity_id)));
-                        $preview = elgg_view("multimedia/file/preview", array('file'  => $entity));
-                        $body = elgg_view("multimedia/file/body", array('entity'  => $entity));
-                        $content = elgg_view('multimedia/view', array('entity' => $entity, 'type' => 'file', 'preview' => $preview, 'body' => $body));
+                switch($page[3]){
+                    case "view":
+                        elgg_pop_breadcrumb($entity->name);
+                        $object = ClipitSite::lookup($entity_id);
+                        switch($object['subtype']){
+                            // Clipit File
+                            case 'ClipitFile':
+                                elgg_push_breadcrumb(elgg_echo("files"), $href."?filter=files");
+                                $title = elgg_echo("file");
+                                $entity = array_pop(ClipitFile::get_by_id(array($entity_id)));
+                                $content = elgg_view('multimedia/view', array(
+                                    'entity' => $entity,
+                                    'type' => 'file',
+                                    'preview' => elgg_view("multimedia/file/preview", array('file'  => $entity)),
+                                    'body' => elgg_view("multimedia/file/body", array('entity'  => $entity))
+                                ));
+                                break;
+                            // Clipit Video
+                            case 'ClipitVideo':
+                                elgg_push_breadcrumb(elgg_echo("videos"), $href."?filter=videos");
+                                $title = elgg_echo("video");
+                                $entity = array_pop(ClipitVideo::get_by_id(array($entity_id)));
+                                $content = elgg_view('multimedia/view', array(
+                                    'entity' => $entity,
+                                    'type' => 'video',
+                                    'preview' => elgg_view("multimedia/video/preview", array('entity'  => $entity)),
+                                    'body' => elgg_view("multimedia/video/body", array('entity'  => $entity))
+                                ));
+                                break;
+                            default:
+                                return false;
+                                break;
+                        }
                         break;
-                    // Clipit Video
-                    case 'ClipitVideo':
-                        elgg_push_breadcrumb(elgg_echo("videos"), $href."?filter=videos");
-                        $title = elgg_echo("video");
-                        $entity = array_pop(ClipitVideo::get_by_id(array($entity_id)));
-                        $preview = elgg_view("multimedia/video/preview", array('entity'  => $entity));
-                        $body = elgg_view("multimedia/video/body", array('entity'  => $entity));
-                        $content = elgg_view('multimedia/view', array('entity' => $entity, 'type' => 'video', 'preview' => $preview, 'body' => $body));
-                        break;
-                    default:
-                        return false;
+                    case "publish":
+                        $entity_id = (int)$page[4];
+                        elgg_pop_breadcrumb($entity->name);
+                        $object = ClipitSite::lookup($entity_id);
+                        switch($object['subtype']){
+                            // Clipit Video
+                            case 'ClipitVideo':
+                                $subtitle = elgg_echo("video");
+                                elgg_push_breadcrumb(elgg_echo("videos"), $href."?filter=videos");
+                                $entity = array_pop(ClipitVideo::get_by_id(array($entity_id)));
+                                break;
+                            // Clipit StoryBoard
+                            case 'ClipitStoryBoard':
+                                $subtitle = elgg_echo("storyboard");
+                                elgg_push_breadcrumb(elgg_echo("storyboards"), $href."?filter=storyboards");
+                                $entity = array_pop(ClipitStoryboard::get_by_id(array($entity_id)));
+                                break;
+                            default:
+                                return false;
+                                break;
+                        }
+                        $content = elgg_view_form('publications/publish', array('data-validate'=> "true" ),
+                            array(
+                                'entity'  => $entity,
+                                'parent_id' => $group->id
+                            ));
+                        $title =  elgg_echo("publish:to_activity", array($subtitle));
                         break;
                 }
-
                 elgg_push_breadcrumb($entity->name);
                 $filter = "";
             }

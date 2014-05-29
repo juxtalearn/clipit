@@ -15,57 +15,6 @@ $video_ids = elgg_extract('videos', $vars);
 $href = elgg_extract("href", $vars);
 $rating = elgg_extract("rating", $vars);
 ?>
-<script src="http://aehlke.github.io/tag-it/js/tag-it.js"></script>
-<script>
-
-    //$(document).on("click", "ul#tags", function(){
-
-    //});
-
-        var performance_tags = function(element){
-            $(element).tagit({
-                allowSpaces: true,
-                removeConfirmation: true,
-                onTagExists: function(event, ui){
-                    $(ui.existingTag).fadeIn("slow", function() {
-                        $(this).addClass("selected");
-                    }).fadeOut("slow", function() {
-                        $(this).removeClass("selected");
-                    });;
-                },
-                autocomplete: {
-                    delay: 0,
-                    source: elgg.config.wwwroot+"ajax/view/publications/tags/search"
-                },
-                singleField: true,
-                singleFieldNode: $(element).closest("form").find("input[name=tags]")//$('#input_tags_<?php echo $entity->id;?>')
-            });
-        }
-    //$(document).on("click", ){
-    var performance_tags = function(){
-        that = $(this);
-        $(this).tagit({
-            allowSpaces: true,
-            removeConfirmation: true,
-            onTagExists: function(event, ui){
-                $(ui.existingTag).fadeIn("slow", function() {
-                    $(this).addClass("selected");
-                }).fadeOut("slow", function() {
-                    $(this).removeClass("selected");
-                });
-            },
-            autocomplete: {
-                delay: 0,
-                source: elgg.config.wwwroot+"ajax/view/publications/tags/search"
-            },
-            placeholderText: elgg.echo("tags:commas:separated"),
-            singleField: true,
-            singleFieldNode: that.closest("form").find("input[name=tags]")
-        });
-    };
-
-
-</script>
 <?php if($vars['add_video']):?>
     <?php echo elgg_view_form('multimedia/videos/add', array('data-validate'=> "true" ), array('entity'  => $entity)); ?>
     <div class="block" style="margin-bottom: 20px;">
@@ -83,6 +32,7 @@ $rating = elgg_extract("rating", $vars);
         if(mb_strlen($description)>280){
             $description = substr($description, 0, 280)."...";
         }
+        $published = false;
         ?>
         <li class="video-item row list-item">
             <div class="col-lg-4">
@@ -102,9 +52,22 @@ $rating = elgg_extract("rating", $vars);
                 </a>
             </div>
             <div class="col-lg-8">
-                <?php if($vars['actions']): ?>
-                    <?php echo elgg_view("multimedia/publish_button", array('entity' => $video, 'owner_entity' => $entity, 'type' => 'video')); ?>
+                <?php if($vars['actions'] && !$published): ?>
+                    <?php echo elgg_view('output/url', array(
+                        'href'  => "{$href}/publish/{$video->id}",
+                        'title' => elgg_echo('publish'),
+                        'style' => 'padding: 1px 5px;  background: #47a447;color: #fff;font-weight: bold;',
+                        'class' => 'btn-xs btn pull-right',
+                        'text'  => '<i class="fa fa-arrow-circle-up"></i> '.elgg_echo('publish')));
+                    ?>
                     <?php echo elgg_view("multimedia/owner_options", array('entity' => $video, 'type' => 'video')); ?>
+                <?php elseif($published): ?>
+                    <?php echo elgg_view('output/url', array(
+                        'href'  => "{$href}/publish/{$video->id}",
+                        'title' => elgg_echo('published'),
+                        'class' => 'green pull-right',
+                        'text'  => '<i class="fa fa-check"></i> <strong>'.elgg_echo('published').'</strong>'));
+                    ?>
                 <?php endif; ?>
                 <h4 class="text-truncate">
                     <?php echo elgg_view('output/url', array(
