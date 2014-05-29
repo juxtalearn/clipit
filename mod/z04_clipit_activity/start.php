@@ -61,7 +61,9 @@ function clipit_activity_init() {
     elgg_register_action("multimedia/files/upload", elgg_get_plugins_path() . "z04_clipit_activity/actions/multimedia/files/upload.php");
     // Publications
     elgg_register_action("publications/evaluate", elgg_get_plugins_path() . "z04_clipit_activity/actions/publications/evaluate.php");
+    elgg_register_action("publications/publish", elgg_get_plugins_path() . "z04_clipit_activity/actions/publications/publish.php");
     elgg_register_ajax_view('modal/publications/rating');
+    elgg_register_ajax_view('publications/tags/search');
     // Discussion
     elgg_register_action("discussion/create", elgg_get_plugins_path() . "z04_clipit_activity/actions/discussion/create.php");
     elgg_register_action("discussion/remove", elgg_get_plugins_path() . "z04_clipit_activity/actions/discussion/remove.php");
@@ -80,6 +82,9 @@ function clipit_activity_init() {
     // Raty js modified by clipit
     elgg_register_js('jquery:raty', elgg_get_site_url() . "mod/z04_clipit_activity/vendors/jquery.raty.js");
     elgg_load_js("jquery:raty");
+    // E
+    elgg_register_js('jquery:tag_it', elgg_get_site_url() . "mod/z04_clipit_activity/vendors/jquery.tag-it.min.js");
+    elgg_load_js("jquery:tag_it");
 
     $files_attach_js = elgg_get_simplecache_url('js', 'attach');
     elgg_register_simplecache_view('js/attach');
@@ -210,6 +215,25 @@ function activity_page_handler($page) {
                     elgg_push_breadcrumb($title);
                     $params = array(
                         'content'   => elgg_view('group/list', array('entity' => $activity)),
+                        'filter'    => '',
+                        'title'     => $title,
+                        'sub-title' => $activity->name,
+                        'title_style' => "background: #". $activity->color,
+                    );
+                    break;
+                case 'publish':
+                    if(!$page[2]){
+                        return false;
+                    }
+                    $entity_id = (int)$page[2];
+                    $title =  elgg_echo("publish");
+                    elgg_push_breadcrumb($title);
+                    $entity = array_pop(ClipitVideo::get_by_id(array($entity_id)));
+                    $params = array(
+                        'content'   => elgg_view_form('publications/publish', array('data-validate'=> "true" ),
+                            array('entity'  => $entity,
+                                'parent_id' => $group->id
+                            )),
                         'filter'    => '',
                         'title'     => $title,
                         'sub-title' => $activity->name,
@@ -529,6 +553,18 @@ function group_tools_page_handler($page, $activity){
             elgg_push_breadcrumb($title);
             $content =  elgg_view('group/activity_log', array('entity' => $group));
             break;
+        case 'publish':
+            if(!$entity_id = $page[3]){
+                return false;
+            }
+            $title =  elgg_echo("publish");
+            elgg_push_breadcrumb($title);
+            $entity = array_pop(ClipitVideo::get_by_id(array($entity_id)));
+            $content = elgg_view_form('publications/publish', array('data-validate'=> "true" ),
+                    array('entity'  => $entity,
+                        'parent_id' => $group->id
+                    ));
+            break;
         case 'multimedia':
             $title = elgg_echo("group:files");
             elgg_push_breadcrumb($title);
@@ -613,6 +649,7 @@ function group_tools_page_handler($page, $activity){
                         return false;
                         break;
                 }
+
                 elgg_push_breadcrumb($entity->name);
                 $filter = "";
             }
