@@ -6857,6 +6857,25 @@ fieldset[disabled] .elgg-sidebar input.elgg-button-submit.active {
   border-bottom: 1px solid #bae6f6;
   border-top: 0 !important;
 }
+.full-content {
+  max-height: 100% !important;
+}
+.read-more,
+.less {
+  display: block;
+}
+.read-more:hover,
+.less:hover,
+.read-more:focus,
+.less:focus {
+  text-decoration: none;
+}
+.container-text {
+  overflow: hidden;
+}
+.shorten {
+  max-height: 100% !important;
+}
 .btn-normal {
   border: none;
   background-color: #ffffff;
@@ -7093,6 +7112,33 @@ form .elgg-module h3 {
 .search-box .input-group-btn button .fa {
   color: #32b4e5;
   font-size: 16px;
+}
+.multiple-check {
+  margin: 10px 0;
+  height: 300px !important;
+  overflow-y: auto;
+}
+.multiple-check .check-group {
+  margin: 5px 0 5px 10px;
+}
+.multiple-check .check-group > a {
+  display: block;
+}
+.multiple-check .check-group h4 {
+  margin-top: 10px;
+}
+.multiple-check .check-group input[type=checkbox]:checked + span {
+  background: #ECF7FB;
+  color: #32b4e5 !important;
+  padding: 3px 5px;
+}
+.multiple-check .check-group label {
+  font-weight: normal;
+  border-bottom: 1px solid #bae6f6;
+  padding: 3px;
+}
+.multiple-check .check-group label span {
+  vertical-align: text-bottom;
 }
 .modal-header {
   border-bottom: 0px;
@@ -7336,7 +7382,27 @@ li.list-item:last-child {
   padding: 20px;
   margin: 10px 0;
   max-height: 150px;
-  overflow: auto;
+  overflow: hidden;
+}
+.multimedia-pub .details .description ol,
+.multimedia-pub .details .description ul {
+  padding-left: 2.5em;
+}
+.multimedia-pub .details .description ul {
+  list-style-type: disc;
+}
+.multimedia-pub .details .description ol {
+  list-style-type: decimal;
+}
+.multimedia-pub .details .description ul ul,
+.multimedia-pub .details .description ol ul {
+  list-style-type: circle;
+}
+.multimedia-pub .details .description ol ol ul,
+.multimedia-pub .details .description ol ul ul,
+.multimedia-pub .details .description ul ol ul,
+.multimedia-pub .details .description ul ul ul {
+  list-style-type: square;
 }
 .multimedia-pub .details .tags {
   margin-bottom: 15px;
@@ -9068,6 +9134,16 @@ div.token-input-dropdown ul li.token-input-selected-dropdown-item .sub-title,
 div.token-input-dropdown ul li.token-input-selected-dropdown-item .img {
   color: #fff;
 }
+.ui-helper-hidden-accessible {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
 .tagit {
   overflow: hidden;
   height: auto !important;
@@ -9152,6 +9228,33 @@ textarea.tagit {
 }
 ul.tagit-autocomplete {
   z-index: 9999;
+  position: absolute;
+  background-color: #fff;
+  overflow: hidden;
+  cursor: default;
+  font-size: 14px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  padding: 3px;
+}
+ul.tagit-autocomplete li {
+  border-bottom: 1px solid #eee;
+}
+ul.tagit-autocomplete li > a {
+  display: block;
+  padding: 3px;
+  padding-left: 10px;
+  font-weight: bold;
+}
+ul.tagit-autocomplete li > a:hover,
+ul.tagit-autocomplete li > a:focus,
+ul.tagit-autocomplete li > a.ui-state-focus {
+  color: #fff;
+  text-decoration: none;
+  background: #32b4e5;
+}
+ul.tagit-autocomplete li:last-child {
+  border-bottom: 0;
 }
 .tagit-choice {
   overflow: hidden;
@@ -9180,17 +9283,19 @@ ul.tagit-autocomplete {
   color: #bae6f6;
   cursor: pointer;
 }
-ul.tagit {
-  padding: 1px 5px;
-  overflow: auto;
-  margin-left: inherit;
-  /* usually we don't want the regular ul margins. */
-  margin-right: inherit;
+.tagit-choice.remove,
+.tagit-choice.selected {
+  color: #fff;
+  text-decoration: none;
+  background: #32b4e5;
+}
+.tagit-choice > a:hover,
+.tagit-choice a:focus {
+  color: #FFF;
 }
 ul.tagit li {
   display: block;
   float: left;
-  margin: 2px 5px 2px 0;
 }
 ul.tagit li.tagit-choice {
   position: relative;
@@ -9202,27 +9307,21 @@ input.tagit-hidden-field {
 ul.tagit li.tagit-choice-read-only {
   padding: .2em .5em .2em .5em;
 }
-ul.tagit li.tagit-choice-editable {
-  padding: .2em 18px .2em .5em;
-}
 ul.tagit li.tagit-new {
-  padding: .25em 4px .25em 0;
+  margin: 3px;
+  padding: 2px 5px;
+  height: 25px;
 }
 ul.tagit li.tagit-choice a.tagit-label {
   cursor: pointer;
   text-decoration: none;
 }
-ul.tagit li.tagit-choice .tagit-close {
-  cursor: pointer;
-  position: absolute;
-  right: .1em;
-  top: 50%;
-  margin-top: -8px;
-  line-height: 17px;
-}
 /* used for some custom themes that don't need image icons */
 ul.tagit li.tagit-choice .tagit-close .text-icon {
-  display: none;
+  float: right;
+  margin-left: 5px;
+  color: #bae6f6;
+  cursor: pointer;
 }
 ul.tagit li.tagit-choice input {
   display: block;
@@ -9375,6 +9474,9 @@ h3.empty {
   background-color: #d9edf7;
   padding: 15px;
   margin: 0 0 10px;
+}
+.bg-info > i.fa {
+  color: #32b4e5;
 }
 .bg-warning {
   background-color: #fcf8e3;

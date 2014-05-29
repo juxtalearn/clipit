@@ -81,11 +81,12 @@ $tags_value = implode(", ", $tag_value);
             <?php endforeach; ?>
             </div>
         </div>
-        <div class="bg-info">
+            <div class="bg-info">
             <i class="fa fa-3x pull-left fa-info-circle"></i>
             <?php echo elgg_echo('performance_item:info'); ?>
         </div>
     </div>
 </div>
-
-<?php echo elgg_view('input/submit', array('value' => elgg_echo('publish'), 'class' => 'elgg-button btn btn-primary pull-right'));?>
+<p class="text-center">
+    <?php echo elgg_view('input/submit', array('value' => elgg_echo('publish'), 'class' => 'elgg-button btn btn-primary'));?>
+</p>

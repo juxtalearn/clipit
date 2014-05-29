@@ -315,6 +315,66 @@ $(function(){
     // default execute send_msg function
     $("input#compose").send_msg();
 
+    /*
+     * jQuery Shorten plugin
+     *
+     */
+    (function($) {
+        $.fn.shorten = function () {
+            return this.each(function () {
+                var element_shorten = $(this);
+                var element_height = element_shorten.css("max-height");
+                element_shorten.addClass("shorten");
+                element_shorten.wrapInner("<div class='container-text'/>");
+                var container = element_shorten.find('.container-text');
+                var container_height = container.css("height");
+                if(parseInt(container_height) < parseInt(element_height)){
+                    return false;
+                }
+                var readmore_link = $("<a href='javascript:;' class='read-more'>Read more<strong>...</strong></a>");
+                element_shorten.append(readmore_link);
+                container.css("max-height",element_height);
+                readmore_link.on("click", function(){
+                    if (container.hasClass('full-content')) {
+                        container.removeClass('full-content');
+                        container.addClass('less-content');
+                        $(this).text("Read more...");
+                    } else {
+                        container.addClass('full-content');
+                        $(this).text("Less");
+                    }
+                });
+            });
+        }
+    })(jQuery);
+    ///
+    $("[data-shorten=true]").shorten();
+    /**
+     * Tag-it for performance items
+     *
+     */
+
+    $('ul#tags').each(function(){
+        that = $(this);
+        $(this).tagit({
+            allowSpaces: true,
+            removeConfirmation: true,
+            onTagExists: function(event, ui){
+                $(ui.existingTag).fadeIn("slow", function() {
+                    $(this).addClass("selected");
+                }).fadeOut("slow", function() {
+                    $(this).removeClass("selected");
+                });
+            },
+            autocomplete: {
+                delay: 0,
+                source: elgg.config.wwwroot+"ajax/view/publications/tags/search"
+            },
+            placeholderText: "<?php echo elgg_echo("tags:commas:separated");?>",
+            singleField: true,
+            singleFieldNode: that.closest("form").find("input[name=tags]")
+        });
+    });
     ///
     tinymce_setup();
     /*

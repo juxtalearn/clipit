@@ -85,3 +85,33 @@ form .elgg-module{
     }
   }
 }
+//
+// Multiple check (checkbox simulate)
+// --------------------------------------------------
+.multiple-check{
+  margin: 10px 0;
+  height: 300px !important;
+  overflow-y: auto;
+  .check-group{
+    margin: 5px 0 5px 10px;
+    > a{
+      display: block;
+    }
+    h4{
+      margin-top: 10px;
+    }
+    input[type=checkbox]:checked + span{
+      background: #ECF7FB;
+      color: #32b4e5 !important;
+      padding: 3px 5px;
+    }
+    label{
+      font-weight: normal;
+      border-bottom: 1px solid #bae6f6;
+      padding: 3px;
+      span{
+        vertical-align: text-bottom;
+      }
+    }
+  }
+}

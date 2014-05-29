@@ -50,12 +50,20 @@ if(count($entity)==0 || trim($title) == "" || trim($description) == "" || trim($
         'name' => $title,
         'description' => $description
     ));
+    foreach(ClipitTag::get_all() as $tag_exist){
+        if(($key = array_search($tag_exist->name, $tags)) !== false) {
+            $tags_id[$tag_exist->name] = $tag_exist->id;
+            unset($tags[$key]);
+        }
+    }
+    $new_tag_ids = array();
     foreach($tags as $tag_value){
         $new_tag_ids[] = ClipitTag::create(array(
             'name'    => $tag_value,
         ));
     }
-    $entity_class::add_tags($entity_id, $new_tag_ids);
+    $entity_class::set_tags($entity_id, array_merge($tags_id, $new_tag_ids));
+
     $entity_class::add_performance_items($entity_id, $performance_items);
     // Clone
     $new_video_id = $entity_class::create_clone($entity->id);

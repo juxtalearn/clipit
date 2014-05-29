@@ -1,22 +1,61 @@
+.ui-helper-hidden-accessible {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
 .tagit{
   .token-input-list();
 }
+
 ul.tagit-autocomplete{
   z-index: 9999;
+  position: absolute;
+  background-color: #fff;
+  overflow: hidden;
+  cursor: default;
+  font-size: @font-size-base;
+  .box-shadow(0 6px 12px rgba(0, 0, 0, 0.2));
+  padding: 3px;
+  li{
+    border-bottom: 1px solid #eee;
+    > a{
+      display: block;
+      padding: 3px;
+      padding-left: 10px;
+      font-weight: bold;
+      &:hover,
+      &:focus, &.ui-state-focus{
+        color: #fff;
+        text-decoration: none;
+        background: @blue_clipit;
+      }
+    }
+    &:last-child{
+      border-bottom: 0;
+    }
+  }
 }
 .tagit-choice{
   .token-input-token();
+  &.remove,
+  &.selected{
+    color: #fff;
+    text-decoration: none;
+    background: @blue_clipit;
+  }
+  > a:hover, a:focus{
+    color: #FFF;
+  }
 }
-ul.tagit {
-  padding: 1px 5px;
-  overflow: auto;
-  margin-left: inherit; /* usually we don't want the regular ul margins. */
-  margin-right: inherit;
-}
+
 ul.tagit li {
   display: block;
   float: left;
-  margin: 2px 5px 2px 0;
 }
 ul.tagit li.tagit-choice {
   position: relative;
@@ -29,30 +68,25 @@ ul.tagit li.tagit-choice-read-only {
   padding: .2em .5em .2em .5em;
 }
 
-ul.tagit li.tagit-choice-editable {
-  padding: .2em 18px .2em .5em;
-}
 
 ul.tagit li.tagit-new {
-  padding: .25em 4px .25em 0;
+  margin: 3px;
+  padding: 2px 5px;
+  height: 25px;
 }
 
 ul.tagit li.tagit-choice a.tagit-label {
   cursor: pointer;
   text-decoration: none;
 }
-ul.tagit li.tagit-choice .tagit-close {
-  cursor: pointer;
-  position: absolute;
-  right: .1em;
-  top: 50%;
-  margin-top: -8px;
-  line-height: 17px;
-}
+
 
 /* used for some custom themes that don't need image icons */
 ul.tagit li.tagit-choice .tagit-close .text-icon {
-  display: none;
+  float: right;
+  margin-left: 5px;
+  color: @blue-lighter;
+  cursor: pointer;
 }
 
 ul.tagit li.tagit-choice input {

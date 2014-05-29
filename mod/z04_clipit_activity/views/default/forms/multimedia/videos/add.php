@@ -16,6 +16,9 @@ $body .= elgg_view("input/hidden", array(
     'name' => 'entity-id',
     'value' => $entity->id,
 ));
+$body .= elgg_view("input/hidden", array(
+    'name' => 'tags',
+));
 $body .= '<div class="row">';
 $body .= '<div class="col-md-12 add-video">';
 $body .= '
