@@ -83,7 +83,7 @@ class UBSite{
             $elgg_object = new ElggObject((int)$id);
             $object['type'] = (string)$elgg_object->type;
             $object['subtype'] = (string)get_subtype_from_id($elgg_object->subtype);
-            $object['name'] = (string)$elgg_object->name;
+            $object['name'] = (string)$elgg_object->get("name");
             $object['description'] = (string)$elgg_object->description;
             //$object['class'] = get_class_from_subtype($object['subtype']);
             return $object;
@@ -97,10 +97,6 @@ class UBSite{
                 throw new APIException("ERROR: Unidentified ID provided.");
             }
         }
-    }
-
-    static function get_class_from_subtype($subtype){
-        return null;
     }
 
     static function get_domain(){
