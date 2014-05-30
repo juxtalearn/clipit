@@ -28,17 +28,4 @@ class ClipitSite extends UBSite{
     public $storyboard_array = array();
     public $video_array = array();
 
-    static function get_class_from_subtype($subtype){
-        switch($subtype){
-            case "z04_clipit_activity":
-                return "ClipitActivity";
-                break;
-            case "clipit_chat":
-                return "ClipitChat";
-                break;
-            case "clipit_comment":
-                return "ClipitComment";
-                break;
-        }
-    }
 }
