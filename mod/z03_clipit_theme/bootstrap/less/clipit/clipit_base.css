@@ -7046,6 +7046,72 @@ fieldset[disabled] .elgg-sidebar input.elgg-button-submit.active {
 .btn-options:focus {
   color: #fff;
 }
+.btn-border-blue {
+  color: #ffffff;
+  background-color: #428bca;
+  border-color: #357ebd;
+  color: #FFF;
+  border: none;
+  background-color: #32b4e5;
+  background-repeat: repeat-x;
+  font-family: FuturaBoldRegular, Impact, 'Impact Bold', Helvetica, Arial, sans, sans-serif;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 7px;
+  letter-spacing: 1px;
+  color: #32b4e5;
+  background: #fff;
+  border: 1px solid #32b4e5;
+}
+.btn-border-blue:hover,
+.btn-border-blue:focus,
+.btn-border-blue:active,
+.btn-border-blue.active,
+.open .dropdown-toggle.btn-border-blue {
+  color: #ffffff;
+  background-color: #3276b1;
+  border-color: #285e8e;
+}
+.btn-border-blue:active,
+.btn-border-blue.active,
+.open .dropdown-toggle.btn-border-blue {
+  background-image: none;
+}
+.btn-border-blue.disabled,
+.btn-border-blue[disabled],
+fieldset[disabled] .btn-border-blue,
+.btn-border-blue.disabled:hover,
+.btn-border-blue[disabled]:hover,
+fieldset[disabled] .btn-border-blue:hover,
+.btn-border-blue.disabled:focus,
+.btn-border-blue[disabled]:focus,
+fieldset[disabled] .btn-border-blue:focus,
+.btn-border-blue.disabled:active,
+.btn-border-blue[disabled]:active,
+fieldset[disabled] .btn-border-blue:active,
+.btn-border-blue.disabled.active,
+.btn-border-blue[disabled].active,
+fieldset[disabled] .btn-border-blue.active {
+  background-color: #428bca;
+  border-color: #357ebd;
+}
+.btn-border-blue .badge {
+  color: #428bca;
+  background-color: #fff;
+}
+.btn-border-blue:hover,
+.btn-border-blue:focus {
+  background-color: #1ba1d3;
+  background-position: 0 -15px;
+}
+.btn-border-blue:active,
+.btn-border-blue.active {
+  background-color: #1993c1;
+}
+.btn-border-blue:hover,
+.btn-border-blue:focus {
+  color: #FFF;
+}
 label {
   display: block;
 }

@@ -24,6 +24,7 @@ $english = array(
     'activity:publications' => 'Publications',
     'activity:join' => 'Join activity',
     'activity:next_deadline' => 'Next deadline',
+    'activity:quiz' => 'Activity Quiz',
 
     'group:join' => 'Join',
     'group:leave' => 'Leave',
@@ -38,6 +39,8 @@ $english = array(
     'group:member:remove' => 'Remove from group',
     'group:member:cantremove' => 'Cannot remove user from group',
     'group:member:removed' => 'Successfully removed %s from group',
+    // Quizz
+    'quiz' => 'Quiz',
 
     // Group tools
     'group:menu' => 'Group menu',

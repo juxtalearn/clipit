@@ -29,27 +29,24 @@
 
 $(document).ready(function() {
     $(window).scroll(function() {
-        var isVisible_firstElem = $(".module-group_activity").visible();
-        var isVisible_secondElem = $(".module-tags").visible();
-        if(!isVisible_firstElem && !isVisible_secondElem){
-            if($("#pending-clone").length == 0){
-                var pendingClone = $(".module-pending").clone();
-                var col = $(".col-md-6:last");
-                pendingClone.hide();
-                $(pendingClone).insertAfter(col);
-                var cloneWrap = pendingClone.wrap('<div class="col-md-12"></div>');
-                cloneWrap.attr("id", "pending-clone");
-                pendingClone.fadeIn(1000);
-            }
+        if(!$(".module-group_activity").visible(true) && !$(".module-tags").visible(true)){
+            $(".module-pending").addClass('pending-fixed');
         } else {
-            if($("#pending-clone").length > 0){
-                $("#pending-clone").remove();
-            }
+            $(".module-pending").removeClass('pending-fixed');
         }
     });
 
 });
 </script>
+<style>
+.pending-fixed{
+    position: fixed;
+    top: 50px;
+    right: auto;
+    left: auto;
+    width: 50%;
+}
+</style>
 <style>
     .stuck {
         position:fixed;
@@ -89,11 +86,12 @@ $(document).ready(function() {
 </style>
 <?php
 $user_id = elgg_get_logged_in_user_guid();
-$limit = 10;
+$limit = 5;
 $recommended_events = ClipitEvent::get_recommended_events($user_id, 0, $limit);
+
 $content = '<div class="margin-bar"></div> <ul class="events">';
 foreach ($recommended_events as $event_log){
-    $content .= clipit_event($event_log, 'timeline');
+    $content .= view_recommended_event($event_log);
 }
 
 //$content .= clipit_student_events($recommended_events);

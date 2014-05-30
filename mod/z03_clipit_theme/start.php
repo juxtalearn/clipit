@@ -24,28 +24,10 @@ function clipit_final_init() {
     // Register & load libs
     elgg_register_library('clipit:functions', elgg_get_plugins_path() . 'z03_clipit_theme/lib/functions.php');
     elgg_load_library('clipit:functions');
-    // Register events log
+    // Register & load events lib
+    elgg_register_library('clipit:recommended:events', elgg_get_plugins_path() . 'z03_clipit_theme/lib/recommended/events.php');
+    elgg_load_library('clipit:recommended:events');
     set_default_clipit_events();
-
-    // Landing modules by role
-    /*add_landing_tool_option("student_landing",
-        array(
-            "col-md-8" => array(
-            'name' => 'pending',
-            'text' => 'Pending task',
-            'column' => 2,
-            'order' => 1,
-            'view' => 'landing/student/pending_module')
-        ));
-    add_landing_tool_option("student_landing",
-        array(
-            'name' => 'events',
-            'text' => 'Events',
-            'column' => 1,
-            'order' => 1,
-            'view' => 'landing/student/events_module'
-        ));
-    print_r($CONFIG->landing_tool_options);*/
 
 
     elgg_register_admin_menu_item('administer', 'z03_clipit_theme', 'clipit_plugins');

@@ -221,6 +221,19 @@ function activity_page_handler($page) {
                         'title_style' => "background: #". $activity->color,
                     );
                     break;
+                case 'quiz':
+                    if($page[2] == 'view' && $page[3]){
+                        $title = elgg_echo("activity:quiz");
+                        elgg_push_breadcrumb($title);
+                        $params = array(
+                            'content'   => elgg_view('quizzes/view', array('entity' => $activity)),
+                            'filter'    => '',
+                            'title'     => $title,
+                            'sub-title' => $activity->name,
+                            'title_style' => "background: #". $activity->color,
+                        );
+                    }
+                    break;
                 case 'join':
                     if($activity_status == 'active' || !$isCalled){
                         return false;
@@ -648,10 +661,14 @@ function group_tools_page_handler($page, $activity){
                                 return false;
                                 break;
                         }
+                        $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($activity->tricky_topic)));
+                        $tags = $tricky_topic->tag_array;
                         $content = elgg_view_form('publications/publish', array('data-validate'=> "true" ),
                             array(
                                 'entity'  => $entity,
-                                'parent_id' => $group->id
+//                                'parent_id' => $group->id
+                                'activity' => $activity,
+                                'tags' => $tags,
                             ));
                         $title =  elgg_echo("publish:to_activity", array($subtitle));
                         break;

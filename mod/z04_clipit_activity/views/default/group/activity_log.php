@@ -14,9 +14,8 @@ $group = elgg_extract("entity", $vars);
 $activity_id = ClipitGroup::get_activity($group->id);
 $events_log = ClipitEvent::get_by_object(array($group->id), 0, 30);
 
-
 echo "<ul>";
 foreach ($events_log as $event_log){
-    echo clipit_event($event_log, 'full');
+    echo view_recommended_event($event_log, 'simple');
 }
 echo "</ul>";

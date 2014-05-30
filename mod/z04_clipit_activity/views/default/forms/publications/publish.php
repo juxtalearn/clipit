@@ -11,7 +11,9 @@
  * @package         ClipIt
  */
 $entity = elgg_extract('entity', $vars);
-$parent_id = elgg_extract('parent_id', $vars);
+$activity = elgg_extract('activity', $vars);
+$tt_tags = elgg_extract('tags', $vars);
+
 $tags = $entity->tag_array;
 $tag_value = array();
 foreach($tags as $tag_id){
@@ -28,7 +30,7 @@ $tags_value = implode(", ", $tag_value);
 )); ?>
 <?php echo elgg_view("input/hidden", array(
     'name' => 'parent-id',
-    'value' => $parent_id,
+    'value' => $parent->id,
 )); ?>
 
 <?php echo elgg_view("input/hidden", array(
@@ -36,6 +38,13 @@ $tags_value = implode(", ", $tag_value);
     'id' => 'input_tags',
     'value' => $tags_value
 ));?>
+<link rel="stylesheet" href="http://harvesthq.github.io/chosen/chosen.css">
+<script src="http://harvesthq.github.io/chosen/chosen.jquery.js"></script>
+<script>
+$(function(){
+    $(".chosen-select").chosen({disable_search_threshold: 10});
+});
+</script>
 <div class="row">
     <div class="col-md-8">
         <div class="form-group">
@@ -52,6 +61,20 @@ $tags_value = implode(", ", $tag_value);
         </div>
         <div class="form-group">
             <label for="title"><?php echo elgg_echo("tags");?></label>
+            <div>
+                <select data-placeholder="Your Favorite Types of Bear" style="width:350px;" multiple class="chosen-select" tabindex="8">
+                    <option value=""></option>
+                    <?php
+                    foreach($tt_tags as $tag_id):
+                        $tag = array_pop(ClipitTag::get_by_id(array($tag_id)));
+                    ?>
+                        <option><?php echo $tag->name;?></option>
+                    <?php endforeach;?>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title"><?php echo elgg_echo("labels");?></label>
             <ul id="tags"></ul>
         </div>
         <div class="form-group">
@@ -80,10 +103,6 @@ $tags_value = implode(", ", $tag_value);
                 </label>
             <?php endforeach; ?>
             </div>
-        </div>
-            <div class="bg-info">
-            <i class="fa fa-3x pull-left fa-info-circle"></i>
-            <?php echo elgg_echo('performance_item:info'); ?>
         </div>
     </div>
 </div>

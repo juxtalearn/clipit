@@ -16,9 +16,10 @@ $user_loggedin_id = elgg_get_logged_in_user_guid();
 $user_loggedin = new ElggUser($user_loggedin_id);
 $total_replies = array_pop(ClipitPost::count_by_destination(array($message->id)));
 $files_id = $message->get_files($message->id);
+$user_read_status = array_pop(ClipitPost::get_read_status($message->id, array($user_loggedin_id)));
 
 // set read status
-if($message->owner_id != $user_loggedin_id){
+if($message->owner_id != $user_loggedin_id && !$user_read_status){
     ClipitPost::set_read_status($message->id, true, array($user_loggedin_id));
 }
 // Owner options (edit/delete)

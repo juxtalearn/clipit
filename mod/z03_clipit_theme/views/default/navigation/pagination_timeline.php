@@ -8,8 +8,8 @@
  */
 $user_id = elgg_get_logged_in_user_guid();
 $offset = (int)get_input('offset');
+echo '<script>p();</script>';
 $recommended_events = ClipitEvent::get_recommended_events($user_id, $offset, 5);
 foreach ($recommended_events as $event_log){
-    echo '<ul class="events">'.clipit_event($event_log, 'timeline').'</ul>';
+    echo '<ul class="events">'.view_recommended_event($event_log).'</ul>';
 }
-//echo '<ul class="events">'.clipit_student_events($recommended_events).'</ul>';
