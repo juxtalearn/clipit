@@ -43,6 +43,7 @@ function loadFiles($path){
             throw new InstallationException($msg);
         }
     }
+    return true;
 }
 
 /**

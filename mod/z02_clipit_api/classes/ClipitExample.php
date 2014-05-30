@@ -22,16 +22,20 @@ class ClipitExample extends UBItem{
      */
     const SUBTYPE = "ClipitExample";
 
+    public $tag = 0;
+
     public $resource_url = "";
 
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
-        $this->resource_url = (string)$elgg_object->resource_url;
+        $this->resource_url = (string)$elgg_object->get("resource_url");
+        $this->tag = (int)$elgg_object->get("tag");
     }
 
     protected function copy_to_elgg($elgg_object){
         parent::copy_to_elgg($elgg_object);
-        $elgg_object->resource_url = (string)$this->resource_url;
+        $elgg_object->set("resource_url", (string)$this->resource_url);
+        $elgg_object->set("tag", (int)$this->tag);
     }
 
 }

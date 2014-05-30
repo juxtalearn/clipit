@@ -117,11 +117,11 @@ class ClipitGroup extends UBItem{
      * @return bool Returns true if added correctly, or false if error.
      */
     static function add_users($id, $user_array){
-        return UBCollection::add_items($id, $user_array, ClipitGroup::REL_GROUP_USER);
+        return UBCollection::add_items($id, $user_array, static::REL_GROUP_USER);
     }
 
     static function set_users($id, $user_array){
-        return UBCollection::set_items($id, $user_array, ClipitGroup::REL_GROUP_USER);
+        return UBCollection::set_items($id, $user_array, static::REL_GROUP_USER);
     }
 
     /**
@@ -133,7 +133,7 @@ class ClipitGroup extends UBItem{
      * @return bool Returns true if removed correctly, or false if error.
      */
     static function remove_users($id, $user_array){
-        return UBCollection::remove_items($id, $user_array, ClipitGroup::REL_GROUP_USER);
+        return UBCollection::remove_items($id, $user_array, static::REL_GROUP_USER);
     }
 
     /**
@@ -144,7 +144,7 @@ class ClipitGroup extends UBItem{
      * @return bool Returns array of User Ids, or false if error.
      */
     static function get_users($id){
-        return UBCollection::get_items($id, ClipitGroup::REL_GROUP_USER);
+        return UBCollection::get_items($id, static::REL_GROUP_USER);
     }
 
     /**
@@ -156,11 +156,11 @@ class ClipitGroup extends UBItem{
      * @return bool Returns true if added correctly, or false if error.
      */
     static function add_files($id, $file_array){
-        return UBCollection::add_items($id, $file_array, ClipitGroup::REL_GROUP_FILE);
+        return UBCollection::add_items($id, $file_array, static::REL_GROUP_FILE);
     }
 
     static function set_files($id, $file_array){
-        return UBCollection::set_items($id, $file_array, ClipitGroup::REL_GROUP_FILE);
+        return UBCollection::set_items($id, $file_array, static::REL_GROUP_FILE);
     }
 
     /**
@@ -172,7 +172,7 @@ class ClipitGroup extends UBItem{
      * @return bool Returns true if removed correctly, or false if error.
      */
     static function remove_files($id, $file_array){
-        return UBCollection::remove_items($id, $file_array, ClipitGroup::REL_GROUP_FILE);
+        return UBCollection::remove_items($id, $file_array, static::REL_GROUP_FILE);
     }
 
     /**
@@ -183,7 +183,7 @@ class ClipitGroup extends UBItem{
      * @return bool Returns array of User Ids, or false if error.
      */
     static function get_files($id){
-        return UBCollection::get_items($id, ClipitGroup::REL_GROUP_FILE);
+        return UBCollection::get_items($id, static::REL_GROUP_FILE);
     }
 
     /**
@@ -195,19 +195,19 @@ class ClipitGroup extends UBItem{
      * @return bool Returns true if added correctly, or false if error.
      */
     static function add_storyboards($id, $storyboard_array){
-        return UBCollection::add_items($id, $storyboard_array, ClipitGroup::REL_GROUP_STORYBOARD);
+        return UBCollection::add_items($id, $storyboard_array, static::REL_GROUP_STORYBOARD);
     }
 
     static function set_storyboards($id, $storyboard_array){
-        return UBCollection::set_items($id, $storyboard_array, ClipitGroup::REL_GROUP_STORYBOARD);
+        return UBCollection::set_items($id, $storyboard_array, static::REL_GROUP_STORYBOARD);
     }
 
     static function remove_storyboards($id, $storyboard_array){
-        return UBCollection::remove_items($id, $storyboard_array, ClipitGroup::REL_GROUP_STORYBOARD);
+        return UBCollection::remove_items($id, $storyboard_array, static::REL_GROUP_STORYBOARD);
     }
 
     static function get_storyboards($id){
-        return UBCollection::get_items($id, ClipitGroup::REL_GROUP_STORYBOARD);
+        return UBCollection::get_items($id, static::REL_GROUP_STORYBOARD);
     }
 
     /**
@@ -219,11 +219,11 @@ class ClipitGroup extends UBItem{
      * @return bool Returns true if added correctly, or false if error.
      */
     static function add_videos($id, $video_array){
-        return UBCollection::add_items($id, $video_array, ClipitGroup::REL_GROUP_VIDEO);
+        return UBCollection::add_items($id, $video_array, static::REL_GROUP_VIDEO);
     }
 
     static function set_videos($id, $video_array){
-        return UBCollection::set_items($id, $video_array, ClipitGroup::REL_GROUP_VIDEO);
+        return UBCollection::set_items($id, $video_array, static::REL_GROUP_VIDEO);
     }
 
     /**
@@ -235,7 +235,7 @@ class ClipitGroup extends UBItem{
      * @return bool Returns true if removed correctly, or false if error.
      */
     static function remove_videos($id, $video_array){
-        return UBCollection::remove_items($id, $video_array, ClipitGroup::REL_GROUP_VIDEOS);
+        return UBCollection::remove_items($id, $video_array, static::REL_GROUP_VIDEO);
     }
 
     /**
@@ -246,6 +246,6 @@ class ClipitGroup extends UBItem{
      * @return bool Returns array of Video Ids, or false if error.
      */
     static function get_videos($id){
-        return UBCollection::get_items($id, ClipitGroup::REL_GROUP_VIDEO);
+        return UBCollection::get_items($id, static::REL_GROUP_VIDEO);
     }
 }

@@ -90,7 +90,7 @@ class BinaryFile {
         return fread($this->handle, $length);
     }
 
-    public function search($string, $offset = null, $maxLength = null, $seekMethod = null) {
+    public function search($string, $offset = null, $maxLength = null) {
         if ($offset !== null) {
             $this->seek($offset);
         } else {
@@ -125,7 +125,7 @@ class BinaryFile {
         return $read;
     }
 
-    public function bytesAre($string, $offset = null, $seekMethod = null) {
+    public function bytesAre($string, $offset = null) {
         return ($this->getBytes(strlen($string), $offset) == $string);
     }
 }

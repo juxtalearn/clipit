@@ -19,7 +19,7 @@ class ClipitPost extends UBMessage{
 
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
-        $this->topic_id = (int)$elgg_object->topic_id;
+        $this->topic_id = (int)$elgg_object->get("topic_id");
     }
 
     /**
@@ -27,7 +27,7 @@ class ClipitPost extends UBMessage{
      */
     protected function copy_to_elgg($elgg_object){
         parent::copy_to_elgg($elgg_object);
-        $elgg_object->topic_id = $this->topic_id;
+        $elgg_object->set("topic_id", $this->topic_id);
     }
 
 } 

@@ -52,9 +52,9 @@ class ClipitQuizQuestion extends UBItem{
         parent::load_from_elgg($elgg_object);
         $this->tag_array = static::get_tags($this->id);
         $this->quiz_result_array = static::get_quiz_results($this->id);
-        $this->option_array = (array)$elgg_object->option_array;
-        $this->option_type = (string)$elgg_object->option_type;
-        $this->video = (int)$elgg_object->video;
+        $this->option_array = (array)$elgg_object->get("option_array");
+        $this->option_type = (string)$elgg_object->get("option_type");
+        $this->video = (int)$elgg_object->get("video");
     }
 
     /**
@@ -62,9 +62,9 @@ class ClipitQuizQuestion extends UBItem{
      */
     protected function copy_to_elgg($elgg_object){
         parent::copy_to_elgg($elgg_object);
-        $elgg_object->option_array = (array)$this->option_array;
-        $elgg_object->option_type = (string)$this->option_type;
-        $elgg_object->video = (int)$this->video;
+        $elgg_object->set("option_array", (array)$this->option_array);
+        $elgg_object->set("option_type", (string)$this->option_type);
+        $elgg_object->set("video", (int)$this->video);
     }
 
     /**

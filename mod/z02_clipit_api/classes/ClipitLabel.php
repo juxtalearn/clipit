@@ -13,10 +13,10 @@
  */
 
 /**
- * Class ClipitTag
+ * Class ClipitLabel
  *
  */
-class ClipitTag extends UBItem{
-    const SUBTYPE = "ClipitTag";
+class ClipitLabel extends UBItem{
+    const SUBTYPE = "ClipitLabel";
 
 }

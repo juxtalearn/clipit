@@ -21,8 +21,8 @@ class ClipitLA extends UBFile{
 
     protected function load_from_elgg($elgg_file){
         parent::load_from_elgg($elgg_file);
-        $this->return_id = (int)$elgg_file->return_id;
-        $this->status_code = (int)$elgg_file->status_code;
+        $this->return_id = (int)$elgg_file->get("return_id");
+        $this->status_code = (int)$elgg_file->get("status_code");
     }
 
     /**
@@ -31,8 +31,8 @@ class ClipitLA extends UBFile{
      */
     protected function copy_to_elgg($elgg_file){
         parent::copy_to_elgg($elgg_file);
-        $elgg_file->return_id = $this->return_id;
-        $elgg_file->status_code = $this->status_code;
+        $elgg_file->set("return_id", $this->return_id);
+        $elgg_file->set("status_code", $this->status_code);
     }
 
     static function send_metrics($returnId, $data, $statuscode){

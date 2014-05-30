@@ -62,9 +62,9 @@ class UBUser extends UBItem{
         $this->login = (string)$elgg_user->username;
         $this->password = (string)$elgg_user->password;
         $this->hash = (string)$elgg_user->salt;
-        $this->role = (string)$elgg_user->role;
+        $this->role = (string)$elgg_user->get("role");
         $this->language = (string)$elgg_user->language;
-        $this->last_login = (int)$elgg_user->last_login;
+        $this->last_login = (int)$elgg_user->get("last_login");
     }
 
     /**
@@ -96,13 +96,16 @@ class UBUser extends UBItem{
         return $elgg_user->delete();
     }
 
+    /**
+     * @param ElggUser $elgg_user
+     */
     protected function copy_to_elgg($elgg_user){
         parent::copy_to_elgg($elgg_user);
-        $elgg_user->email = $this->email;
-        $elgg_user->username = $this->login;
-        $elgg_user->password = $this->password;
-        $elgg_user->salt = $this->hash;
-        $elgg_user->role = $this->role;
+        $elgg_user->email = (string)$this->email;
+        $elgg_user->username = (string)$this->login;
+        $elgg_user->password = (string)$this->password;
+        $elgg_user->salt = (string)$this->hash;
+        $elgg_user->set("role", (string)$this->role);
         if($this->language == ""){
             $elgg_user->language = get_language();
         } else{

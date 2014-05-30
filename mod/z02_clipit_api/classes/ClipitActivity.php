@@ -52,11 +52,14 @@ class ClipitActivity extends UBItem{
     public $video_array = array();
     public $file_array = array();
 
+    /**
+     * @param ElggEntity $elgg_object
+     */
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
-        $this->color = (string)$elgg_object->color;
-        $this->status = (string)$elgg_object->status;
-        $this->tricky_topic = (int)$elgg_object->tricky_topic;
+        $this->color = (string)$elgg_object->get("color");
+        $this->status = (string)$elgg_object->get("status");
+        $this->tricky_topic = (int)$elgg_object->get("tricky_topic");
         $this->teacher_array = static::get_teachers($this->id);
         $this->called_users_array = static::get_called_users($this->id);
         $this->group_array = static::get_groups($this->id);
@@ -70,9 +73,9 @@ class ClipitActivity extends UBItem{
      */
     protected function copy_to_elgg($elgg_object){
         parent::copy_to_elgg($elgg_object);
-        $elgg_object->color = (string)$this->color;
-        $elgg_object->status = (string)$this->status;
-        $elgg_object->tricky_topic = (int)$this->tricky_topic;
+        $elgg_object->set("color", (string)$this->color);
+        $elgg_object->get("status", (string)$this->status);
+        $elgg_object->get("tricky_topic", (int)$this->tricky_topic);
     }
 
     protected function save(){

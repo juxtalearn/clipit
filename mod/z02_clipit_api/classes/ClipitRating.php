@@ -42,8 +42,8 @@ class ClipitRating extends UBItem{
 
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
-        $this->target = (int)$elgg_object->target;
-        $this->overall = (bool)$elgg_object->overall;
+        $this->target = (int)$elgg_object->get("target");
+        $this->overall = (bool)$elgg_object->get("overall");
         $this->tag_rating_array = (array)static::get_tag_ratings($this->id);
         $this->performance_rating_array = (array)static::get_performance_ratings($this->id);
     }
@@ -53,8 +53,8 @@ class ClipitRating extends UBItem{
      */
     protected function copy_to_elgg($elgg_object){
         parent::copy_to_elgg($elgg_object);
-        $elgg_object->target = (int)$this->target;
-        $elgg_object->overall = (bool)$this->overall;
+        $elgg_object->set("target", (int)$this->target);
+        $elgg_object->set("overall", (bool)$this->overall);
     }
 
     protected function save(){
@@ -65,11 +65,18 @@ class ClipitRating extends UBItem{
     }
 
 
-
+    /**
+     * @param $user_array
+     * @return ClipitRating[]
+     */
     static function get_by_user($user_array){
         return static::get_by_owner($user_array);
     }
 
+    /**
+     * @param $target_array
+     * @return ClipitRating[]
+     */
     static function get_by_target($target_array){
         $rating_array = array();
         foreach($target_array as $target_id){
@@ -94,6 +101,11 @@ class ClipitRating extends UBItem{
         return $rating_array;
     }
 
+    /**
+     * @param $user_id
+     * @param $target_id
+     * @return ClipitRating|null
+     */
     static function get_from_user_for_target($user_id, $target_id){
         $user_ratings = static::get_by_user(array($user_id));
         $user_ratings = $user_ratings[$user_id];

@@ -23,15 +23,18 @@ class ClipitFile extends UBFile{
     const SUBTYPE = "ClipitFile";
 
     const REL_FILE_TAG = "file-tag";
+    const REL_FILE_LABEL = "file-label";
 
     public $tag_array = array();
+    public $label_array = array();
 
     /**
-     * @param ElggObject $elgg_object Elgg Object to load parameters from.
+     * @param ElggFile $elgg_file Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_object){
-        parent::load_from_elgg($elgg_object);
+    protected function load_from_elgg($elgg_file){
+        parent::load_from_elgg($elgg_file);
         $this->tag_array = static::get_tags($this->id);
+        $this->label_array = static::get_labels($this->id);
     }
 
     /**
@@ -42,6 +45,7 @@ class ClipitFile extends UBFile{
     protected function save(){
         parent::save();
         static::set_tags($this->id, $this->tag_array);
+        static::set_labels($this->id, $this->label_array);
         return $this->id;
     }
 
@@ -109,6 +113,53 @@ class ClipitFile extends UBFile{
      */
     static function get_tags($id){
         return UBCollection::get_items($id, static::REL_FILE_TAG);
+    }
+
+    /**
+     * Add Labels to a File.
+     *
+     * @param int   $id Id of the File to add Labels to.
+     * @param array $label_array Array of Label Ids to add to the Group.
+     *
+     * @return bool Returns true if added correctly, or false if error.
+     */
+    static function add_labels($id, $label_array){
+        return UBCollection::add_items($id, $label_array, static::REL_FILE_LABEL);
+    }
+
+    /**
+     * Set Labels to a File.
+     *
+     * @param int   $id Id of the File to set Labels to.
+     * @param array $label_array Array of Label Ids to set to the Group.
+     *
+     * @return bool Returns true if added correctly, or false if error.
+     */
+    static function set_labels($id, $label_array){
+        return UBCollection::set_items($id, $label_array, static::REL_FILE_LABEL);
+    }
+
+    /**
+     * Remove Labels from a File.
+     *
+     * @param int   $id Id of the File to remove Labels from.
+     * @param array $label_array Array of Label Ids to remove from the File.
+     *
+     * @return bool Returns true if removed correctly, or false if error.
+     */
+    static function remove_labels($id, $label_array){
+        return UBCollection::remove_items($id, $label_array, static::REL_FILE_LABEL);
+    }
+
+    /**
+     * Get Label Ids from a File.
+     *
+     * @param int $id Id of the File to get Labels from.
+     *
+     * @return bool Returns array of Label Ids, or false if error.
+     */
+    static function get_labels($id){
+        return UBCollection::get_items($id, static::REL_FILE_LABEL);
     }
 
 }

@@ -21,18 +21,38 @@ class ClipitPerformanceRating extends UBItem {
 
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
-        $this->performance_item = (int)$elgg_object->performance_item;
-        $this->star_rating = (int)$elgg_object->star_rating;
+        $this->performance_item = (int)$elgg_object->get("performance_item");
+        $this->star_rating = (int)$elgg_object->get("star_rating");
     }
 
     protected function copy_to_elgg($elgg_object){
         parent::copy_to_elgg($elgg_object);
-        $elgg_object->performance_item = (int)$this->performance_item;
-        $elgg_object->star_rating = (int)$this->star_rating;
+        $elgg_object->set("performance_item", (int)$this->performance_item);
+        $elgg_object->set("star_rating", (int)$this->star_rating);
     }
 
     static function get_by_item($item_array){
-        //@TODO
+        $performance_rating_array = array();
+        foreach($item_array as $item_id){
+            $elgg_objects = elgg_get_entities_from_metadata(
+                array(
+                    'type' => static::TYPE,
+                    'subtype' => static::SUBTYPE,
+                    'metadata_names' => array("performance_item"),
+                    'metadata_values' => array($item_id)
+                )
+            );
+            if(!empty($elgg_objects)){
+                $temp_array = array();
+                foreach($elgg_objects as $elgg_object){
+                    $temp_array[] = new static($elgg_object->guid);
+                }
+                $performance_rating_array[$item_id] = $temp_array;
+            } else{
+                $performance_rating_array[$item_id] = null;
+            }
+        }
+        return $performance_rating_array;
     }
 
     static function get_average_target_rating($target_id){
