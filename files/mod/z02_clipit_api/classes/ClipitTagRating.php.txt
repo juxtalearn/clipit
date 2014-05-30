@@ -21,15 +21,16 @@ class ClipitTagRating extends UBItem {
 
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
-        $this->tag_id = (int)$elgg_object->tag_id;
-        $this->is_used = (bool)$elgg_object->is_used;
+        $this->tag_id = (int)$elgg_object->get("tag_id");
+        $this->is_used = (bool)$elgg_object->get("is_used");
     }
 
     protected function copy_to_elgg($elgg_object){
         parent::copy_to_elgg($elgg_object);
-        $elgg_object->tag_id = (int)$this->tag_id;
-        $elgg_object->is_used = (bool)$this->is_used;
+        $elgg_object->set("tag_id", (int)$this->tag_id);
+        $elgg_object->set("is_used", (bool)$this->is_used);
     }
+
 
     static function get_average_target_rating($target_id){
         $rating_array = ClipitRating::get_by_target(array($target_id));
@@ -39,7 +40,7 @@ class ClipitTagRating extends UBItem {
         foreach($rating_array as $rating){
             foreach($rating->tag_rating_array as $tag_rating_id){
                 $tag_rating = new static($tag_rating_id);
-                if($tag_rating->isused){
+                if($tag_rating->is_used){
                     $average_rating++;
                 }
                 $count++;
@@ -58,7 +59,7 @@ class ClipitTagRating extends UBItem {
         $count = 0;
         foreach($rating->tag_rating_array as $tag_rating_id){
             $tag_rating = new static($tag_rating_id);
-            if($tag_rating->isused){
+            if($tag_rating->is_used){
                 $average_rating++;
             }
             $count++;

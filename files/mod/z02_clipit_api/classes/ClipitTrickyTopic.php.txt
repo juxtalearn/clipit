@@ -26,15 +26,15 @@ class ClipitTrickyTopic extends UBItem{
 
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
-        $this->subject = (string)$elgg_object->subject;
-        $this->country = (string)$elgg_object->country;
-        $this->tag_array = (array)$elgg_object->tag_array;
+        $this->subject = (string)$elgg_object->get("subject");
+        $this->country = (string)$elgg_object->get("country");
+        $this->tag_array = (array)$elgg_object->get("tag_array");
     }
 
     protected function copy_to_elgg($elgg_object){
         parent::copy_to_elgg($elgg_object);
-        $elgg_object->subject = (string)$this->subject;
-        $elgg_object->country = (string)$this->country;
-        $elgg_object->tag_array = (array)$this->tag_array;
+        $elgg_object->set("subject", (string)$this->subject);
+        $elgg_object->set("country", (string)$this->country);
+        $elgg_object->set("tag_array", (array)$this->tag_array);
     }
 }

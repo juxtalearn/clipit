@@ -36,9 +36,9 @@ class ClipitQuizResult extends UBItem{
 
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
-        $this->correct = (bool)$elgg_object->correct;
+        $this->user = (int)$elgg_object->get("user");
+        $this->correct = (bool)$elgg_object->get("correct");
         $this->quiz_question = (int)static::get_quiz_question($this->id);
-        $this->user = (int)$elgg_object->user;
     }
 
     /**
@@ -46,14 +46,14 @@ class ClipitQuizResult extends UBItem{
      */
     protected function copy_to_elgg($elgg_object){
         parent::copy_to_elgg($elgg_object);
-        $elgg_object->correct = (bool)$this->correct;
-        $elgg_object->user = (int)$this->user;
+        $elgg_object->set("correct", (bool)$this->correct);
+        $elgg_object->set("user", (int)$this->user);
     }
 
     protected function save(){
         parent::save();
         if($this->quiz_question != 0){
-            ClipitQuizQuestion::add_quiz_results($this->quiz_question, $this->id);
+            ClipitQuizQuestion::add_quiz_results($this->quiz_question, array($this->id));
         }
         return $this->id;
     }
@@ -102,11 +102,12 @@ class ClipitQuizResult extends UBItem{
      * @return array|bool Array of nested arrays per question with Quiz Results, or false if error
      */
     static function get_by_quiz_question($quiz_question_array){
+        $quiz_result_array = array();
         foreach($quiz_question_array as $quiz_question){
             $result_array = ClipitQuizQuestion::get_quiz_results($quiz_question);
             $quiz_result_array[$quiz_question] = static::get_by_id($result_array);
-            return $quiz_result_array;
         }
+        return $quiz_result_array;
     }
 
 }

@@ -29,7 +29,7 @@ class ClipitPerformancePalette{
         $this->url = (string)$elgg_entity->get("url");
         $this->owner_id = (int)$elgg_entity->getOwnerGUID();
         $this->time_created = (int)$elgg_entity->getTimeCreated();
-        $this->performance_items = (array)$elgg_entity->performance_items;
+        $this->performance_items = (array)$elgg_entity->get("performance_items");
         return $this->id;
     }
 
@@ -40,7 +40,7 @@ class ClipitPerformancePalette{
         } else{
             $elgg_entity = new ElggObject($CONFIG->performance_palette_id);
         }
-        $elgg_entity->performance_items = (array)$this->performance_items;
+        $elgg_entity->set("performance_items", (array)$this->performance_items);
         return $elgg_entity->save();
     }
 

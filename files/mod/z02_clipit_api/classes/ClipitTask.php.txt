@@ -27,6 +27,6 @@ class ClipitTask extends UBItem{
      */
     static function get_activity($task_id){
         $activity = UBCollection::get_items($task_id, ClipitActivity::REL_ACTIVITY_TASK, true);
-        return array_poop($activity);
+        return array_pop($activity);
     }
 } 

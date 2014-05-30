@@ -20,7 +20,7 @@ class ClipitChat extends UBMessage{
 
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
-        $this->archived_array = (array)$elgg_object->archived_array;
+        $this->archived_array = (array)$elgg_object->get("archived_array");
     }
 
     /**
@@ -28,7 +28,7 @@ class ClipitChat extends UBMessage{
      */
     protected function copy_to_elgg($elgg_object){
         parent::copy_to_elgg($elgg_object);
-        $elgg_object->archived_array = (array)$this->archived_array;
+        $elgg_object->set("archived_array", (array)$this->archived_array);
     }
 
     static function get_inbox($user_id){

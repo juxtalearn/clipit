@@ -46,12 +46,12 @@ class ClipitQuiz extends UBItem{
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
         $this->quiz_question_array = static::get_quiz_questions($this->id);
-        $this->public = (bool) $elgg_object->public;
-        $this->tricky_topic = (int) $elgg_object->tricky_topic;
-        $this->target = (string) $elgg_object->target;
-        $this->embed_url = (string) $elgg_object->embed_url;
-        $this->scores_url = (string) $elgg_object->scores_url;
-        $this->author_name = (string) $elgg_object->author_name;
+        $this->public = (bool) $elgg_object->get("public");
+        $this->tricky_topic = (int) $elgg_object->get("tricky_topic");
+        $this->target = (string) $elgg_object->get("target");
+        $this->embed_url = (string) $elgg_object->get("embed_url");
+        $this->scores_url = (string) $elgg_object->get("scores_url");
+        $this->author_name = (string) $elgg_object->get("author_name");
     }
 
     /**
@@ -59,12 +59,12 @@ class ClipitQuiz extends UBItem{
      */
     protected function copy_to_elgg($elgg_object){
         parent::copy_to_elgg($elgg_object);
-        $elgg_object->public = (bool)$this->public;
-        $elgg_object->tricky_topic = (int)$this->tricky_topic;
-        $elgg_object->target = (string)$this->target;
-        $elgg_object->embed_url = (string) $this->embed_url;
-        $elgg_object->scores_url = (string) $this->scores_url;
-        $elgg_object->author_name = (string) $this->author_name;
+        $elgg_object->set("public", (bool)$this->public);
+        $elgg_object->set("tricky_topic", (int)$this->tricky_topic);
+        $elgg_object->set("target", (string)$this->target);
+        $elgg_object->set("embed_url", (string) $this->embed_url);
+        $elgg_object->set("scores_url", (string) $this->scores_url);
+        $elgg_object->set("author_name", (string) $this->author_name);
     }
 
     protected function save(){
