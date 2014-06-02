@@ -26,7 +26,7 @@
 <text text-anchor="middle" x="695" y="-1027.6" font-family="Times Roman,serif" font-size="11.00">IncompleteEntityException</text>
 </g>
 <!-- \\Exception -->
-<g id="node126" class="node"><title>\\Exception</title>
+<g id="node127" class="node"><title>\\Exception</title>
 <ellipse fill="none" stroke="black" cx="264" cy="-113" rx="53.033" ry="19.0919"/>
 <text text-anchor="middle" x="264" y="-109.9" font-family="Times Roman,serif" font-size="14.00" fill="gray">\Exception</text>
 </g>
@@ -80,14 +80,14 @@
 </g>
 <!-- \\XMLRPCParameter -->
 <g id="node8" class="node"><title>\\XMLRPCParameter</title>
-<polygon fill="none" stroke="black" points="522,-2661 414,-2661 414,-2625 522,-2625 522,-2661"/>
-<text text-anchor="start" x="445" y="-2648.43" font-family="Times Roman,serif" font-size="11.00">«abstract»</text>
-<text text-anchor="start" x="422" y="-2635.23" font-family="Times Roman,serif" font-size="11.00">XMLRPCParameter</text>
+<polygon fill="none" stroke="black" points="522,-2668 414,-2668 414,-2632 522,-2632 522,-2668"/>
+<text text-anchor="start" x="445" y="-2655.43" font-family="Times Roman,serif" font-size="11.00">«abstract»</text>
+<text text-anchor="start" x="422" y="-2642.23" font-family="Times Roman,serif" font-size="11.00">XMLRPCParameter</text>
 </g>
 <!-- \\XMLRPCStringParameter&#45;&gt;\\XMLRPCParameter -->
 <g id="edge9" class="edge"><title>\\XMLRPCStringParameter&#45;&gt;\\XMLRPCParameter</title>
-<path fill="none" stroke="black" d="M627.596,-2504.49C620.707,-2507.46 614.033,-2510.93 608,-2515 566.094,-2543.24 574.376,-2570.12 536,-2603 528.973,-2609.02 520.918,-2614.65 512.868,-2619.67"/>
-<polygon fill="none" stroke="black" points="510.962,-2616.74 504.184,-2624.88 514.561,-2622.74 510.962,-2616.74"/>
+<path fill="none" stroke="black" d="M627.889,-2504.07C620.869,-2507.12 614.086,-2510.73 608,-2515 564.625,-2545.42 575.584,-2574.79 536,-2610 529.161,-2616.08 521.259,-2621.72 513.314,-2626.72"/>
+<polygon fill="none" stroke="black" points="511.486,-2623.74 504.725,-2631.89 515.097,-2629.73 511.486,-2623.74"/>
 </g>
 <!-- \\ElggPluginManifest -->
 <g id="node7" class="node"><title>\\ElggPluginManifest</title>
@@ -101,8 +101,8 @@
 </g>
 <!-- \\XMLRPCStructParameter&#45;&gt;\\XMLRPCParameter -->
 <g id="edge11" class="edge"><title>\\XMLRPCStructParameter&#45;&gt;\\XMLRPCParameter</title>
-<path fill="none" stroke="black" d="M627.814,-2647.93C597.875,-2647 562.748,-2645.92 533.062,-2645.01"/>
-<polygon fill="none" stroke="black" points="532.909,-2641.5 522.806,-2644.69 532.693,-2648.5 532.909,-2641.5"/>
+<path fill="none" stroke="black" d="M627.814,-2650C597.875,-2650 562.748,-2650 533.062,-2650"/>
+<polygon fill="none" stroke="black" points="532.806,-2646.5 522.806,-2650 532.806,-2653.5 532.806,-2646.5"/>
 </g>
 <!-- \\ElggPluginManifestParser18 -->
 <g id="node10" class="node"><title>\\ElggPluginManifestParser18</title>
@@ -234,7 +234,7 @@
 <polygon fill="none" stroke="black" points="508.42,-3230.79 499.502,-3236.51 510.04,-3237.6 508.42,-3230.79"/>
 </g>
 <!-- \\ArrayAccess -->
-<g id="node141" class="node"><title>\\ArrayAccess</title>
+<g id="node142" class="node"><title>\\ArrayAccess</title>
 <ellipse fill="none" stroke="black" cx="64" cy="-4022" rx="63.1385" ry="19.0919"/>
 <text text-anchor="middle" x="64" y="-4018.9" font-family="Times Roman,serif" font-size="14.00" fill="gray">\ArrayAccess</text>
 </g>
@@ -328,7 +328,7 @@
 <polygon fill="none" stroke="black" points="305.606,-2970.5 295.606,-2974 305.606,-2977.5 305.606,-2970.5"/>
 </g>
 <!-- \\Importable -->
-<g id="node124" class="node"><title>\\Importable</title>
+<g id="node125" class="node"><title>\\Importable</title>
 <polygon fill="none" stroke="black" points="296,-2830 232,-2830 232,-2794 296,-2794 296,-2830"/>
 <text text-anchor="middle" x="264" y="-2809.6" font-family="Times Roman,serif" font-size="11.00">Importable</text>
 </g>
@@ -344,8 +344,8 @@
 </g>
 <!-- \\XMLRPCBase64Parameter&#45;&gt;\\XMLRPCParameter -->
 <g id="edge49" class="edge"><title>\\XMLRPCBase64Parameter&#45;&gt;\\XMLRPCParameter</title>
-<path fill="none" stroke="black" d="M625.7,-2793.99C619.535,-2791.35 613.539,-2788.37 608,-2785 557.234,-2754.1 511.601,-2700.79 487.044,-2669.02"/>
-<polygon fill="none" stroke="black" points="489.818,-2666.89 480.976,-2661.05 484.249,-2671.13 489.818,-2666.89"/>
+<path fill="none" stroke="black" d="M625.79,-2793.84C619.606,-2791.24 613.581,-2788.3 608,-2785 558.854,-2755.94 513.549,-2706.36 488.454,-2676.06"/>
+<polygon fill="none" stroke="black" points="490.959,-2673.59 481.926,-2668.05 485.534,-2678.02 490.959,-2673.59"/>
 </g>
 <!-- \\ElggAccess -->
 <g id="node32" class="node"><title>\\ElggAccess</title>
@@ -399,8 +399,8 @@
 </g>
 <!-- \\XMLRPCBoolParameter&#45;&gt;\\XMLRPCParameter -->
 <g id="edge59" class="edge"><title>\\XMLRPCBoolParameter&#45;&gt;\\XMLRPCParameter</title>
-<path fill="none" stroke="black" d="M630.255,-2609.41C599.761,-2615.72 563.471,-2623.23 532.951,-2629.55"/>
-<polygon fill="none" stroke="black" points="531.922,-2626.19 522.839,-2631.65 533.341,-2633.05 531.922,-2626.19"/>
+<path fill="none" stroke="black" d="M630.255,-2611.4C599.761,-2618.66 563.471,-2627.29 532.951,-2634.55"/>
+<polygon fill="none" stroke="black" points="531.757,-2631.24 522.839,-2636.95 533.378,-2638.05 531.757,-2631.24"/>
 </g>
 <!-- \\ElggHMACCache -->
 <g id="node38" class="node"><title>\\ElggHMACCache</title>
@@ -458,7 +458,7 @@
 <text text-anchor="middle" x="695" y="-1405.6" font-family="Times Roman,serif" font-size="11.00">ElggBatch</text>
 </g>
 <!-- \\Iterator -->
-<g id="node162" class="node"><title>\\Iterator</title>
+<g id="node163" class="node"><title>\\Iterator</title>
 <ellipse fill="none" stroke="black" cx="64" cy="-113" rx="41.9273" ry="19.0919"/>
 <text text-anchor="middle" x="64" y="-109.9" font-family="Times Roman,serif" font-size="14.00" fill="gray">\Iterator</text>
 </g>
@@ -473,8 +473,8 @@
 </g>
 <!-- \\XMLRPCDateParameter&#45;&gt;\\XMLRPCParameter -->
 <g id="edge73" class="edge"><title>\\XMLRPCDateParameter&#45;&gt;\\XMLRPCParameter</title>
-<path fill="none" stroke="black" d="M629.579,-2338.31C621.574,-2342 614.087,-2346.79 608,-2353 527.082,-2435.59 606.869,-2511.64 536,-2603 531.16,-2609.24 525.051,-2614.7 518.49,-2619.41"/>
-<polygon fill="none" stroke="black" points="516.439,-2616.57 509.999,-2624.98 520.28,-2622.42 516.439,-2616.57"/>
+<path fill="none" stroke="black" d="M629.974,-2338.06C621.811,-2341.79 614.175,-2346.65 608,-2353 525.296,-2438.03 608.363,-2516.01 536,-2610 531.241,-2616.18 525.234,-2621.59 518.77,-2626.27"/>
+<polygon fill="none" stroke="black" points="516.809,-2623.37 510.397,-2631.8 520.669,-2629.21 516.809,-2623.37"/>
 </g>
 <!-- \\XMLRPCCall -->
 <g id="node47" class="node"><title>\\XMLRPCCall</title>
@@ -532,8 +532,8 @@
 </g>
 <!-- \\XMLRPCDoubleParameter&#45;&gt;\\XMLRPCParameter -->
 <g id="edge83" class="edge"><title>\\XMLRPCDoubleParameter&#45;&gt;\\XMLRPCParameter</title>
-<path fill="none" stroke="black" d="M631.779,-2560.1C623.694,-2562.86 615.595,-2565.85 608,-2569 572.871,-2583.59 534.819,-2604.02 507.266,-2619.72"/>
-<polygon fill="none" stroke="black" points="505.269,-2616.83 498.343,-2624.85 508.757,-2622.9 505.269,-2616.83"/>
+<path fill="none" stroke="black" d="M630.731,-2560.15C622.976,-2562.87 615.243,-2565.83 608,-2569 602.739,-2571.3 547.01,-2603.75 507.476,-2626.87"/>
+<polygon fill="none" stroke="black" points="505.677,-2623.87 498.813,-2631.94 509.212,-2629.91 505.677,-2623.87"/>
 </g>
 <!-- \\ElggXMLElement -->
 <g id="node56" class="node"><title>\\ElggXMLElement</title>
@@ -552,24 +552,24 @@
 </g>
 <!-- \\ElggEntity -->
 <g id="node70" class="node"><title>\\ElggEntity</title>
-<polygon fill="none" stroke="black" points="500,-2594 436,-2594 436,-2558 500,-2558 500,-2594"/>
-<text text-anchor="start" x="445" y="-2581.43" font-family="Times Roman,serif" font-size="11.00">«abstract»</text>
-<text text-anchor="start" x="444.5" y="-2568.23" font-family="Times Roman,serif" font-size="11.00">ElggEntity</text>
+<polygon fill="none" stroke="black" points="500,-2601 436,-2601 436,-2565 500,-2565 500,-2601"/>
+<text text-anchor="start" x="445" y="-2588.43" font-family="Times Roman,serif" font-size="11.00">«abstract»</text>
+<text text-anchor="start" x="444.5" y="-2575.23" font-family="Times Roman,serif" font-size="11.00">ElggEntity</text>
 </g>
 <!-- \\ElggUser&#45;&gt;\\ElggEntity -->
 <g id="edge85" class="edge"><title>\\ElggUser&#45;&gt;\\ElggEntity</title>
-<path fill="none" stroke="black" d="M665.171,-2275.3C646.917,-2278.66 624.062,-2285.42 608,-2299 527.789,-2366.82 488.557,-2491.97 474.405,-2547.81"/>
-<polygon fill="none" stroke="black" points="470.96,-2547.17 471.977,-2557.71 477.759,-2548.84 470.96,-2547.17"/>
+<path fill="none" stroke="black" d="M665.124,-2275.25C646.852,-2278.59 623.994,-2285.34 608,-2299 526.124,-2368.93 487.579,-2498.11 473.991,-2554.93"/>
+<polygon fill="none" stroke="black" points="470.51,-2554.45 471.67,-2564.98 477.33,-2556.03 470.51,-2554.45"/>
 </g>
 <!-- \\Friendable -->
-<g id="node120" class="node"><title>\\Friendable</title>
-<polygon fill="none" stroke="black" points="500,-2337 436,-2337 436,-2301 500,-2301 500,-2337"/>
-<text text-anchor="middle" x="468" y="-2316.6" font-family="Times Roman,serif" font-size="11.00">Friendable</text>
+<g id="node121" class="node"><title>\\Friendable</title>
+<polygon fill="none" stroke="black" points="500,-2351 436,-2351 436,-2315 500,-2315 500,-2351"/>
+<text text-anchor="middle" x="468" y="-2330.6" font-family="Times Roman,serif" font-size="11.00">Friendable</text>
 </g>
 <!-- \\ElggUser&#45;&gt;\\Friendable -->
 <g id="edge87" class="edge"><title>\\ElggUser&#45;&gt;\\Friendable</title>
-<path fill="none" stroke="black" stroke-dasharray="1,5" d="M665.324,-2278.14C625.744,-2286.34 555.436,-2300.9 510.309,-2310.24"/>
-<polygon fill="none" stroke="black" points="509.331,-2306.87 500.249,-2312.32 510.751,-2313.72 509.331,-2306.87"/>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M665.324,-2279.97C625.66,-2290.63 555.14,-2309.58 510.025,-2321.71"/>
+<polygon fill="none" stroke="black" points="508.998,-2318.36 500.249,-2324.33 510.814,-2325.12 508.998,-2318.36"/>
 </g>
 <!-- \\NotificationException -->
 <g id="node59" class="node"><title>\\NotificationException</title>
@@ -586,7 +586,7 @@
 <text text-anchor="middle" x="695" y="-325.6" font-family="Times Roman,serif" font-size="11.00">ElggWidget</text>
 </g>
 <!-- \\ElggObject -->
-<g id="node173" class="node"><title>\\ElggObject</title>
+<g id="node174" class="node"><title>\\ElggObject</title>
 <ellipse fill="none" stroke="black" cx="468" cy="-19" rx="57.9828" ry="19.0919"/>
 <text text-anchor="middle" x="468" y="-15.9" font-family="Times Roman,serif" font-size="14.00" fill="gray">\ElggObject</text>
 </g>
@@ -606,7 +606,7 @@
 <polygon fill="none" stroke="black" points="99.9076,-91.37 92.2367,-98.6781 102.791,-97.7487 99.9076,-91.37"/>
 </g>
 <!-- \\Countable -->
-<g id="node176" class="node"><title>\\Countable</title>
+<g id="node177" class="node"><title>\\Countable</title>
 <ellipse fill="none" stroke="black" cx="468" cy="-113" rx="53.2379" ry="19.0919"/>
 <text text-anchor="middle" x="468" y="-109.9" font-family="Times Roman,serif" font-size="14.00" fill="gray">\Countable</text>
 </g>
@@ -642,8 +642,8 @@
 </g>
 <!-- \\XMLRPCIntParameter&#45;&gt;\\XMLRPCParameter -->
 <g id="edge101" class="edge"><title>\\XMLRPCIntParameter&#45;&gt;\\XMLRPCParameter</title>
-<path fill="none" stroke="black" d="M634.764,-2687.81C603.22,-2679.34 564.578,-2668.95 532.436,-2660.32"/>
-<polygon fill="none" stroke="black" points="533.25,-2656.91 522.685,-2657.7 531.434,-2663.67 533.25,-2656.91"/>
+<path fill="none" stroke="black" d="M634.764,-2689.67C603.22,-2682.17 564.578,-2672.97 532.436,-2665.33"/>
+<polygon fill="none" stroke="black" points="533.223,-2661.92 522.685,-2663.01 531.603,-2668.73 533.223,-2661.92"/>
 </g>
 <!-- \\ODDDocument -->
 <g id="node66" class="node"><title>\\ODDDocument</title>
@@ -683,33 +683,33 @@
 </g>
 <!-- \\ElggEntity&#45;&gt;\\ElggData -->
 <g id="edge109" class="edge"><title>\\ElggEntity&#45;&gt;\\ElggData</title>
-<path fill="none" stroke="black" d="M435.722,-2588.9C423.051,-2595.37 409.337,-2604.35 400,-2616 334.862,-2697.27 366.389,-2742.18 328,-2839 312.843,-2877.22 291.916,-2919.88 278.177,-2946.82"/>
-<polygon fill="none" stroke="black" points="274.919,-2945.5 273.464,-2955.99 281.146,-2948.7 274.919,-2945.5"/>
+<path fill="none" stroke="black" d="M435.776,-2595.94C423.114,-2602.42 409.392,-2611.4 400,-2623 336.338,-2701.66 365.743,-2745.11 328,-2839 312.663,-2877.15 291.778,-2919.82 278.098,-2946.78"/>
+<polygon fill="none" stroke="black" points="274.839,-2945.47 273.408,-2955.97 281.073,-2948.66 274.839,-2945.47"/>
 </g>
 <!-- \\Notable -->
-<g id="node121" class="node"><title>\\Notable</title>
-<polygon fill="none" stroke="black" points="291,-2594 237,-2594 237,-2558 291,-2558 291,-2594"/>
-<text text-anchor="middle" x="264" y="-2573.6" font-family="Times Roman,serif" font-size="11.00">Notable</text>
+<g id="node122" class="node"><title>\\Notable</title>
+<polygon fill="none" stroke="black" points="291,-2648 237,-2648 237,-2612 291,-2612 291,-2648"/>
+<text text-anchor="middle" x="264" y="-2627.6" font-family="Times Roman,serif" font-size="11.00">Notable</text>
 </g>
 <!-- \\ElggEntity&#45;&gt;\\Notable -->
 <g id="edge111" class="edge"><title>\\ElggEntity&#45;&gt;\\Notable</title>
-<path fill="none" stroke="black" stroke-dasharray="1,5" d="M435.676,-2576C399.219,-2576 340.016,-2576 301.543,-2576"/>
-<polygon fill="none" stroke="black" points="301.277,-2572.5 291.277,-2576 301.277,-2579.5 301.277,-2572.5"/>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M435.676,-2590.45C399.064,-2598.88 339.51,-2612.6 301.05,-2621.46"/>
+<polygon fill="none" stroke="black" points="300.236,-2618.06 291.277,-2623.72 301.807,-2624.88 300.236,-2618.06"/>
 </g>
 <!-- \\Locatable -->
-<g id="node122" class="node"><title>\\Locatable</title>
-<polygon fill="none" stroke="black" points="294,-2648 234,-2648 234,-2612 294,-2612 294,-2648"/>
-<text text-anchor="middle" x="264" y="-2627.6" font-family="Times Roman,serif" font-size="11.00">Locatable</text>
+<g id="node123" class="node"><title>\\Locatable</title>
+<polygon fill="none" stroke="black" points="294,-2594 234,-2594 234,-2558 294,-2558 294,-2594"/>
+<text text-anchor="middle" x="264" y="-2573.6" font-family="Times Roman,serif" font-size="11.00">Locatable</text>
 </g>
 <!-- \\ElggEntity&#45;&gt;\\Locatable -->
 <g id="edge113" class="edge"><title>\\ElggEntity&#45;&gt;\\Locatable</title>
-<path fill="none" stroke="black" stroke-dasharray="1,5" d="M435.676,-2584.56C400.095,-2593.97 342.847,-2609.13 304.35,-2619.32"/>
-<polygon fill="none" stroke="black" points="303.279,-2615.98 294.507,-2621.92 305.07,-2622.75 303.279,-2615.98"/>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M435.676,-2581.89C400.246,-2580.68 343.334,-2578.72 304.842,-2577.4"/>
+<polygon fill="none" stroke="black" points="304.621,-2573.89 294.507,-2577.05 304.381,-2580.89 304.621,-2573.89"/>
 </g>
 <!-- \\ElggEntity&#45;&gt;\\Importable -->
 <g id="edge115" class="edge"><title>\\ElggEntity&#45;&gt;\\Importable</title>
-<path fill="none" stroke="black" stroke-dasharray="1,5" d="M435.938,-2591.12C423.877,-2597.73 410.543,-2606.22 400,-2616 344.907,-2667.11 299.588,-2744.24 277.866,-2784.82"/>
-<polygon fill="none" stroke="black" points="274.675,-2783.37 273.103,-2793.85 280.866,-2786.64 274.675,-2783.37"/>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M435.681,-2598.41C423.721,-2605 410.525,-2613.4 400,-2623 346.078,-2672.17 300.575,-2745.98 278.432,-2785.23"/>
+<polygon fill="none" stroke="black" points="275.371,-2783.53 273.564,-2793.97 281.487,-2786.93 275.371,-2783.53"/>
 </g>
 <!-- \\ElggPlugin -->
 <g id="node71" class="node"><title>\\ElggPlugin</title>
@@ -744,16 +744,16 @@
 </g>
 <!-- \\ElggGroup&#45;&gt;\\ElggEntity -->
 <g id="edge121" class="edge"><title>\\ElggGroup&#45;&gt;\\ElggEntity</title>
-<path fill="none" stroke="black" d="M662.332,-2221.39C644.417,-2224.77 622.889,-2231.52 608,-2245 560.388,-2288.11 498.812,-2475.95 476.524,-2547.86"/>
-<polygon fill="none" stroke="black" points="473.124,-2547.01 473.527,-2557.59 479.814,-2549.07 473.124,-2547.01"/>
+<path fill="none" stroke="black" d="M662.294,-2221.35C644.366,-2224.71 622.839,-2231.46 608,-2245 559.585,-2289.16 498.258,-2481.74 476.292,-2554.78"/>
+<polygon fill="none" stroke="black" points="472.85,-2554.07 473.343,-2564.65 479.558,-2556.07 472.85,-2554.07"/>
 </g>
 <!-- \\ElggGroup&#45;&gt;\\Friendable -->
 <g id="edge123" class="edge"><title>\\ElggGroup&#45;&gt;\\Friendable</title>
-<path fill="none" stroke="black" stroke-dasharray="1,5" d="M662.382,-2225.81C645.699,-2230.38 625.316,-2236.86 608,-2245 573.419,-2261.26 569.929,-2274.42 536,-2292 527.635,-2296.34 518.409,-2300.42 509.523,-2304.05"/>
-<polygon fill="none" stroke="black" points="508.084,-2300.85 500.071,-2307.78 510.658,-2307.36 508.084,-2300.85"/>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M662.347,-2224.82C645.466,-2229.15 624.915,-2235.72 608,-2245 571.232,-2265.18 571.964,-2284.42 536,-2306 527.841,-2310.9 518.635,-2315.24 509.693,-2318.93"/>
+<polygon fill="none" stroke="black" points="508.182,-2315.76 500.156,-2322.68 510.743,-2322.28 508.182,-2315.76"/>
 </g>
 <!-- \\Loggable -->
-<g id="node119" class="node"><title>\\Loggable</title>
+<g id="node120" class="node"><title>\\Loggable</title>
 <polygon fill="none" stroke="black" points="93,-2965 35,-2965 35,-2929 93,-2929 93,-2965"/>
 <text text-anchor="middle" x="64" y="-2944.6" font-family="Times Roman,serif" font-size="11.00">Loggable</text>
 </g>
@@ -763,7 +763,7 @@
 <polygon fill="none" stroke="black" points="103.643,-2948.82 93.2649,-2950.95 102.707,-2955.76 103.643,-2948.82"/>
 </g>
 <!-- \\Exportable -->
-<g id="node123" class="node"><title>\\Exportable</title>
+<g id="node124" class="node"><title>\\Exportable</title>
 <polygon fill="none" stroke="black" points="96,-3019 32,-3019 32,-2983 96,-2983 96,-3019"/>
 <text text-anchor="middle" x="64" y="-2998.6" font-family="Times Roman,serif" font-size="11.00">Exportable</text>
 </g>
@@ -804,8 +804,8 @@
 </g>
 <!-- \\XMLRPCArrayParameter&#45;&gt;\\XMLRPCParameter -->
 <g id="edge135" class="edge"><title>\\XMLRPCArrayParameter&#45;&gt;\\XMLRPCParameter</title>
-<path fill="none" stroke="black" d="M627.767,-2850.1C620.77,-2847.02 614.025,-2843.35 608,-2839 545.74,-2794.01 500.747,-2712.67 480.297,-2670.31"/>
-<polygon fill="none" stroke="black" points="483.407,-2668.7 475.968,-2661.16 477.079,-2671.69 483.407,-2668.7"/>
+<path fill="none" stroke="black" d="M627.842,-2850C620.831,-2846.93 614.062,-2843.3 608,-2839 547.262,-2795.91 502.01,-2718.29 481.006,-2677.21"/>
+<polygon fill="none" stroke="black" points="484.036,-2675.44 476.427,-2668.07 477.778,-2678.58 484.036,-2675.44"/>
 </g>
 <!-- \\NotImplementedException -->
 <g id="node80" class="node"><title>\\NotImplementedException</title>
@@ -843,33 +843,33 @@
 </g>
 <!-- \\ClipitQuizQuestion -->
 <g id="node84" class="node"><title>\\ClipitQuizQuestion</title>
-<polygon fill="none" stroke="black" points="315,-2513 213,-2513 213,-2477 315,-2477 315,-2513"/>
-<text text-anchor="middle" x="264" y="-2492.6" font-family="Times Roman,serif" font-size="11.00">ClipitQuizQuestion</text>
+<polygon fill="none" stroke="black" points="315,-1527 213,-1527 213,-1491 315,-1491 315,-1527"/>
+<text text-anchor="middle" x="264" y="-1506.6" font-family="Times Roman,serif" font-size="11.00">ClipitQuizQuestion</text>
 </g>
 <!-- \\UBItem -->
-<g id="node113" class="node"><title>\\UBItem</title>
-<polygon fill="none" stroke="black" points="91,-2054 37,-2054 37,-2018 91,-2018 91,-2054"/>
-<text text-anchor="middle" x="64" y="-2033.6" font-family="Times Roman,serif" font-size="11.00">UBItem</text>
+<g id="node114" class="node"><title>\\UBItem</title>
+<polygon fill="none" stroke="black" points="91,-2013 37,-2013 37,-1977 91,-1977 91,-2013"/>
+<text text-anchor="middle" x="64" y="-1992.6" font-family="Times Roman,serif" font-size="11.00">UBItem</text>
 </g>
 <!-- \\ClipitQuizQuestion&#45;&gt;\\UBItem -->
 <g id="edge143" class="edge"><title>\\ClipitQuizQuestion&#45;&gt;\\UBItem</title>
-<path fill="none" stroke="black" d="M212.369,-2478.19C207.805,-2475.3 203.571,-2471.92 200,-2468 90.5492,-2347.72 69.1815,-2139.81 65.011,-2064.38"/>
-<polygon fill="none" stroke="black" points="68.4993,-2064.05 64.512,-2054.24 61.5077,-2064.4 68.4993,-2064.05"/>
+<path fill="none" stroke="black" d="M212.388,-1524.9C207.7,-1527.98 203.434,-1531.64 200,-1536 78.161,-1690.6 255.033,-1822.64 128,-1973 121.176,-1981.08 111.24,-1986.19 101.223,-1989.43"/>
+<polygon fill="none" stroke="black" points="100.049,-1986.13 91.2921,-1992.09 101.857,-1992.89 100.049,-1986.13"/>
 </g>
 <!-- \\ClipitPost -->
 <g id="node85" class="node"><title>\\ClipitPost</title>
-<polygon fill="none" stroke="black" points="498,-2081 438,-2081 438,-2045 498,-2045 498,-2081"/>
-<text text-anchor="middle" x="468" y="-2060.6" font-family="Times Roman,serif" font-size="11.00">ClipitPost</text>
+<polygon fill="none" stroke="black" points="498,-2068 438,-2068 438,-2032 498,-2032 498,-2068"/>
+<text text-anchor="middle" x="468" y="-2047.6" font-family="Times Roman,serif" font-size="11.00">ClipitPost</text>
 </g>
 <!-- \\UBMessage -->
-<g id="node112" class="node"><title>\\UBMessage</title>
-<polygon fill="none" stroke="black" points="300,-1703 228,-1703 228,-1667 300,-1667 300,-1703"/>
-<text text-anchor="middle" x="264" y="-1682.6" font-family="Times Roman,serif" font-size="11.00">UBMessage</text>
+<g id="node113" class="node"><title>\\UBMessage</title>
+<polygon fill="none" stroke="black" points="300,-1689 228,-1689 228,-1653 300,-1653 300,-1689"/>
+<text text-anchor="middle" x="264" y="-1668.6" font-family="Times Roman,serif" font-size="11.00">UBMessage</text>
 </g>
 <!-- \\ClipitPost&#45;&gt;\\UBMessage -->
 <g id="edge145" class="edge"><title>\\ClipitPost&#45;&gt;\\UBMessage</title>
-<path fill="none" stroke="black" d="M437.807,-2057.67C424.415,-2053.81 409.557,-2047.21 400,-2036 304.323,-1923.72 422.479,-1825.29 328,-1712 322.949,-1705.94 316.303,-1701.22 309.206,-1697.54"/>
-<polygon fill="none" stroke="black" points="310.617,-1694.34 300.062,-1693.42 307.742,-1700.72 310.617,-1694.34"/>
+<path fill="none" stroke="black" d="M437.804,-2044.67C424.411,-2040.81 409.553,-2034.22 400,-2023 304.078,-1910.36 422.72,-1811.65 328,-1698 322.951,-1691.94 316.306,-1687.22 309.209,-1683.54"/>
+<polygon fill="none" stroke="black" points="310.62,-1680.34 300.065,-1679.42 307.745,-1686.72 310.62,-1680.34"/>
 </g>
 <!-- \\ClipitEvent -->
 <g id="node86" class="node"><title>\\ClipitEvent</title>
@@ -877,49 +877,49 @@
 <text text-anchor="middle" x="695" y="-2053.6" font-family="Times Roman,serif" font-size="11.00">ClipitEvent</text>
 </g>
 <!-- \\UBEvent -->
-<g id="node116" class="node"><title>\\UBEvent</title>
-<polygon fill="none" stroke="black" points="497,-2027 439,-2027 439,-1991 497,-1991 497,-2027"/>
-<text text-anchor="middle" x="468" y="-2006.6" font-family="Times Roman,serif" font-size="11.00">UBEvent</text>
+<g id="node117" class="node"><title>\\UBEvent</title>
+<polygon fill="none" stroke="black" points="497,-2014 439,-2014 439,-1978 497,-1978 497,-2014"/>
+<text text-anchor="middle" x="468" y="-1993.6" font-family="Times Roman,serif" font-size="11.00">UBEvent</text>
 </g>
 <!-- \\ClipitEvent&#45;&gt;\\UBEvent -->
 <g id="edge147" class="edge"><title>\\ClipitEvent&#45;&gt;\\UBEvent</title>
-<path fill="none" stroke="black" d="M661.016,-2048.96C619.795,-2040.43 550.453,-2026.07 507.067,-2017.09"/>
-<polygon fill="none" stroke="black" points="507.663,-2013.64 497.161,-2015.04 506.244,-2020.49 507.663,-2013.64"/>
+<path fill="none" stroke="black" d="M661.016,-2047.02C619.795,-2036.12 550.453,-2017.79 507.067,-2006.33"/>
+<polygon fill="none" stroke="black" points="507.723,-2002.88 497.161,-2003.71 505.934,-2009.65 507.723,-2002.88"/>
 </g>
 <!-- \\ClipitLA -->
 <g id="node87" class="node"><title>\\ClipitLA</title>
-<polygon fill="none" stroke="black" points="496,-2229 440,-2229 440,-2193 496,-2193 496,-2229"/>
-<text text-anchor="middle" x="468" y="-2208.6" font-family="Times Roman,serif" font-size="11.00">ClipitLA</text>
+<polygon fill="none" stroke="black" points="496,-2243 440,-2243 440,-2207 496,-2207 496,-2243"/>
+<text text-anchor="middle" x="468" y="-2222.6" font-family="Times Roman,serif" font-size="11.00">ClipitLA</text>
 </g>
 <!-- \\UBFile -->
-<g id="node114" class="node"><title>\\UBFile</title>
-<polygon fill="none" stroke="black" points="291,-2351 237,-2351 237,-2315 291,-2315 291,-2351"/>
-<text text-anchor="middle" x="264" y="-2330.6" font-family="Times Roman,serif" font-size="11.00">UBFile</text>
+<g id="node115" class="node"><title>\\UBFile</title>
+<polygon fill="none" stroke="black" points="291,-2391 237,-2391 237,-2355 291,-2355 291,-2391"/>
+<text text-anchor="middle" x="264" y="-2370.6" font-family="Times Roman,serif" font-size="11.00">UBFile</text>
 </g>
 <!-- \\ClipitLA&#45;&gt;\\UBFile -->
 <g id="edge149" class="edge"><title>\\ClipitLA&#45;&gt;\\UBFile</title>
-<path fill="none" stroke="black" d="M439.716,-2219.52C427.032,-2224.01 412.211,-2230.22 400,-2238 362.882,-2261.66 364.865,-2281.95 328,-2306 319.604,-2311.48 309.913,-2316.24 300.653,-2320.18"/>
-<polygon fill="none" stroke="black" points="299.194,-2317 291.231,-2323.99 301.814,-2323.49 299.194,-2317"/>
+<path fill="none" stroke="black" d="M439.776,-2232.42C426.815,-2236.73 411.752,-2243.11 400,-2252 358.029,-2283.75 369.632,-2313.81 328,-2346 319.928,-2352.24 310.201,-2357.31 300.794,-2361.29"/>
+<polygon fill="none" stroke="black" points="299.223,-2358.15 291.19,-2365.06 301.778,-2364.66 299.223,-2358.15"/>
 </g>
 <!-- \\ClipitTag -->
 <g id="node88" class="node"><title>\\ClipitTag</title>
-<polygon fill="none" stroke="black" points="293,-2459 235,-2459 235,-2423 293,-2423 293,-2459"/>
-<text text-anchor="middle" x="264" y="-2438.6" font-family="Times Roman,serif" font-size="11.00">ClipitTag</text>
+<polygon fill="none" stroke="black" points="293,-2499 235,-2499 235,-2463 293,-2463 293,-2499"/>
+<text text-anchor="middle" x="264" y="-2478.6" font-family="Times Roman,serif" font-size="11.00">ClipitTag</text>
 </g>
 <!-- \\ClipitTag&#45;&gt;\\UBItem -->
 <g id="edge151" class="edge"><title>\\ClipitTag&#45;&gt;\\UBItem</title>
-<path fill="none" stroke="black" d="M234.197,-2434.07C222.224,-2429.97 209.124,-2423.63 200,-2414 102.329,-2310.92 73.9923,-2132.7 66.4846,-2064.06"/>
-<polygon fill="none" stroke="black" points="69.9562,-2063.61 65.4511,-2054.02 62.9929,-2064.32 69.9562,-2063.61"/>
+<path fill="none" stroke="black" d="M234.252,-2474.43C222.142,-2470.38 208.925,-2463.98 200,-2454 140.827,-2387.85 85.7318,-2112.62 69.0934,-2023.2"/>
+<polygon fill="none" stroke="black" points="72.5127,-2022.44 67.2573,-2013.24 65.6287,-2023.71 72.5127,-2022.44"/>
 </g>
 <!-- \\ClipitExample -->
 <g id="node89" class="node"><title>\\ClipitExample</title>
-<polygon fill="none" stroke="black" points="304,-2405 224,-2405 224,-2369 304,-2369 304,-2405"/>
-<text text-anchor="middle" x="264" y="-2384.6" font-family="Times Roman,serif" font-size="11.00">ClipitExample</text>
+<polygon fill="none" stroke="black" points="304,-2445 224,-2445 224,-2409 304,-2409 304,-2445"/>
+<text text-anchor="middle" x="264" y="-2424.6" font-family="Times Roman,serif" font-size="11.00">ClipitExample</text>
 </g>
 <!-- \\ClipitExample&#45;&gt;\\UBItem -->
 <g id="edge153" class="edge"><title>\\ClipitExample&#45;&gt;\\UBItem</title>
-<path fill="none" stroke="black" d="M223.842,-2375.65C215.183,-2371.76 206.645,-2366.66 200,-2360 114.214,-2274.06 79.6112,-2125.89 68.4607,-2064.21"/>
-<polygon fill="none" stroke="black" points="71.8591,-2063.32 66.6999,-2054.07 64.9623,-2064.52 71.8591,-2063.32"/>
+<path fill="none" stroke="black" d="M223.813,-2416.14C215.053,-2412.23 206.478,-2406.99 200,-2400 96.6158,-2288.53 71.5987,-2095.92 65.7334,-2023.57"/>
+<polygon fill="none" stroke="black" points="69.2094,-2023.11 64.9735,-2013.4 62.2288,-2023.64 69.2094,-2023.11"/>
 </g>
 <!-- \\ClipitSTA -->
 <g id="node90" class="node"><title>\\ClipitSTA</title>
@@ -927,109 +927,109 @@
 <text text-anchor="middle" x="695" y="-2107.6" font-family="Times Roman,serif" font-size="11.00">ClipitSTA</text>
 </g>
 <!-- \\ClipitFile -->
-<g id="node107" class="node"><title>\\ClipitFile</title>
-<polygon fill="none" stroke="black" points="497,-2283 439,-2283 439,-2247 497,-2247 497,-2283"/>
-<text text-anchor="middle" x="468" y="-2262.6" font-family="Times Roman,serif" font-size="11.00">ClipitFile</text>
+<g id="node108" class="node"><title>\\ClipitFile</title>
+<polygon fill="none" stroke="black" points="497,-2297 439,-2297 439,-2261 497,-2261 497,-2297"/>
+<text text-anchor="middle" x="468" y="-2276.6" font-family="Times Roman,serif" font-size="11.00">ClipitFile</text>
 </g>
 <!-- \\ClipitSTA&#45;&gt;\\ClipitFile -->
 <g id="edge155" class="edge"><title>\\ClipitSTA&#45;&gt;\\ClipitFile</title>
-<path fill="none" stroke="black" d="M663.802,-2114.6C646.152,-2118.39 624.402,-2125.14 608,-2137 563.333,-2169.31 579.39,-2204 536,-2238 527.514,-2244.65 517.181,-2249.86 507.158,-2253.85"/>
-<polygon fill="none" stroke="black" points="505.898,-2250.58 497.713,-2257.31 508.307,-2257.16 505.898,-2250.58"/>
+<path fill="none" stroke="black" d="M663.944,-2114.15C646.129,-2117.79 624.165,-2124.55 608,-2137 560.22,-2173.79 582.327,-2213.4 536,-2252 527.644,-2258.96 517.269,-2264.29 507.161,-2268.29"/>
+<polygon fill="none" stroke="black" points="505.842,-2265.05 497.627,-2271.74 508.221,-2271.63 505.842,-2265.05"/>
 </g>
 <!-- \\ClipitUser -->
 <g id="node91" class="node"><title>\\ClipitUser</title>
-<polygon fill="none" stroke="black" points="499,-2175 437,-2175 437,-2139 499,-2139 499,-2175"/>
-<text text-anchor="middle" x="468" y="-2154.6" font-family="Times Roman,serif" font-size="11.00">ClipitUser</text>
+<polygon fill="none" stroke="black" points="499,-2189 437,-2189 437,-2153 499,-2153 499,-2189"/>
+<text text-anchor="middle" x="468" y="-2168.6" font-family="Times Roman,serif" font-size="11.00">ClipitUser</text>
 </g>
 <!-- \\UBUser -->
-<g id="node117" class="node"><title>\\UBUser</title>
-<polygon fill="none" stroke="black" points="291,-2297 237,-2297 237,-2261 291,-2261 291,-2297"/>
-<text text-anchor="middle" x="264" y="-2276.6" font-family="Times Roman,serif" font-size="11.00">UBUser</text>
+<g id="node118" class="node"><title>\\UBUser</title>
+<polygon fill="none" stroke="black" points="291,-2337 237,-2337 237,-2301 291,-2301 291,-2337"/>
+<text text-anchor="middle" x="264" y="-2316.6" font-family="Times Roman,serif" font-size="11.00">UBUser</text>
 </g>
 <!-- \\ClipitUser&#45;&gt;\\UBUser -->
 <g id="edge157" class="edge"><title>\\ClipitUser&#45;&gt;\\UBUser</title>
-<path fill="none" stroke="black" d="M436.332,-2166.74C424.452,-2171.11 411.14,-2176.9 400,-2184 362.882,-2207.66 364.865,-2227.95 328,-2252 319.604,-2257.48 309.913,-2262.24 300.653,-2266.18"/>
-<polygon fill="none" stroke="black" points="299.194,-2263 291.231,-2269.99 301.814,-2269.49 299.194,-2263"/>
+<path fill="none" stroke="black" d="M436.381,-2179.58C424.243,-2183.85 410.738,-2189.88 400,-2198 358.029,-2229.75 369.632,-2259.81 328,-2292 319.928,-2298.24 310.201,-2303.31 300.794,-2307.29"/>
+<polygon fill="none" stroke="black" points="299.223,-2304.15 291.19,-2311.06 301.778,-2310.66 299.223,-2304.15"/>
 </g>
 <!-- \\ClipitVideo -->
 <g id="node92" class="node"><title>\\ClipitVideo</title>
-<polygon fill="none" stroke="black" points="298,-2243 230,-2243 230,-2207 298,-2207 298,-2243"/>
-<text text-anchor="middle" x="264" y="-2222.6" font-family="Times Roman,serif" font-size="11.00">ClipitVideo</text>
+<polygon fill="none" stroke="black" points="298,-2283 230,-2283 230,-2247 298,-2247 298,-2283"/>
+<text text-anchor="middle" x="264" y="-2262.6" font-family="Times Roman,serif" font-size="11.00">ClipitVideo</text>
 </g>
 <!-- \\ClipitVideo&#45;&gt;\\UBItem -->
 <g id="edge159" class="edge"><title>\\ClipitVideo&#45;&gt;\\UBItem</title>
-<path fill="none" stroke="black" d="M229.846,-2214.07C219.703,-2209.93 208.927,-2204.59 200,-2198 148.332,-2159.87 103.792,-2098.24 80.7512,-2063.01"/>
-<polygon fill="none" stroke="black" points="83.4562,-2060.74 75.0995,-2054.23 77.5709,-2064.53 83.4562,-2060.74"/>
+<path fill="none" stroke="black" d="M229.699,-2255.33C219.321,-2251.21 208.448,-2245.56 200,-2238 131.549,-2176.76 89.7941,-2072.58 72.8111,-2022.92"/>
+<polygon fill="none" stroke="black" points="76.0485,-2021.57 69.5625,-2013.19 69.4086,-2023.78 76.0485,-2021.57"/>
 </g>
 <!-- \\ClipitPerformanceRating -->
 <g id="node93" class="node"><title>\\ClipitPerformanceRating</title>
-<polygon fill="none" stroke="black" points="328,-2189 200,-2189 200,-2153 328,-2153 328,-2189"/>
-<text text-anchor="middle" x="264" y="-2168.6" font-family="Times Roman,serif" font-size="11.00">ClipitPerformanceRating</text>
+<polygon fill="none" stroke="black" points="328,-2229 200,-2229 200,-2193 328,-2193 328,-2229"/>
+<text text-anchor="middle" x="264" y="-2208.6" font-family="Times Roman,serif" font-size="11.00">ClipitPerformanceRating</text>
 </g>
 <!-- \\ClipitPerformanceRating&#45;&gt;\\UBItem -->
 <g id="edge161" class="edge"><title>\\ClipitPerformanceRating&#45;&gt;\\UBItem</title>
-<path fill="none" stroke="black" d="M217.125,-2152.98C211.237,-2150.21 205.394,-2147.2 200,-2144 159.339,-2119.89 117.473,-2084.81 91.1282,-2061.23"/>
-<polygon fill="none" stroke="black" points="93.2348,-2058.42 83.469,-2054.31 88.5412,-2063.61 93.2348,-2058.42"/>
+<path fill="none" stroke="black" d="M213.557,-2192.92C208.762,-2190.28 204.149,-2187.31 200,-2184 142.649,-2138.27 98.2724,-2062.41 77.291,-2022.11"/>
+<polygon fill="none" stroke="black" points="80.3712,-2020.45 72.7013,-2013.14 74.1391,-2023.64 80.3712,-2020.45"/>
 </g>
 <!-- \\ClipitTrickyTopic -->
 <g id="node94" class="node"><title>\\ClipitTrickyTopic</title>
-<polygon fill="none" stroke="black" points="312,-2135 216,-2135 216,-2099 312,-2099 312,-2135"/>
-<text text-anchor="middle" x="264" y="-2114.6" font-family="Times Roman,serif" font-size="11.00">ClipitTrickyTopic</text>
+<polygon fill="none" stroke="black" points="312,-2175 216,-2175 216,-2139 312,-2139 312,-2175"/>
+<text text-anchor="middle" x="264" y="-2154.6" font-family="Times Roman,serif" font-size="11.00">ClipitTrickyTopic</text>
 </g>
 <!-- \\ClipitTrickyTopic&#45;&gt;\\UBItem -->
 <g id="edge163" class="edge"><title>\\ClipitTrickyTopic&#45;&gt;\\UBItem</title>
-<path fill="none" stroke="black" d="M219.116,-2098.82C183.372,-2084.35 133.965,-2064.34 100.593,-2050.82"/>
-<polygon fill="none" stroke="black" points="101.79,-2047.53 91.2079,-2047.02 99.1628,-2054.02 101.79,-2047.53"/>
+<path fill="none" stroke="black" d="M215.765,-2139.04C210.283,-2136.31 204.909,-2133.29 200,-2130 153.773,-2099.02 109.892,-2050.89 85.0272,-2021.24"/>
+<polygon fill="none" stroke="black" points="87.6069,-2018.87 78.5323,-2013.4 82.2162,-2023.34 87.6069,-2018.87"/>
 </g>
 <!-- \\ClipitGroup -->
 <g id="node95" class="node"><title>\\ClipitGroup</title>
-<polygon fill="none" stroke="black" points="298,-2081 230,-2081 230,-2045 298,-2045 298,-2081"/>
-<text text-anchor="middle" x="264" y="-2060.6" font-family="Times Roman,serif" font-size="11.00">ClipitGroup</text>
+<polygon fill="none" stroke="black" points="298,-2121 230,-2121 230,-2085 298,-2085 298,-2121"/>
+<text text-anchor="middle" x="264" y="-2100.6" font-family="Times Roman,serif" font-size="11.00">ClipitGroup</text>
 </g>
 <!-- \\ClipitGroup&#45;&gt;\\UBItem -->
 <g id="edge165" class="edge"><title>\\ClipitGroup&#45;&gt;\\UBItem</title>
-<path fill="none" stroke="black" d="M229.163,-2058.3C193.409,-2053.47 137.972,-2045.99 101.334,-2041.04"/>
-<polygon fill="none" stroke="black" points="101.449,-2037.52 91.0704,-2039.65 100.512,-2044.46 101.449,-2037.52"/>
+<path fill="none" stroke="black" d="M229.392,-2089.43C219.753,-2085.37 209.363,-2080.73 200,-2076 165.077,-2058.34 126.925,-2035.26 99.9419,-2018.26"/>
+<polygon fill="none" stroke="black" points="101.56,-2015.14 91.2402,-2012.74 97.812,-2021.05 101.56,-2015.14"/>
 </g>
 <!-- \\ClipitQuizResult -->
 <g id="node96" class="node"><title>\\ClipitQuizResult</title>
-<polygon fill="none" stroke="black" points="310,-2027 218,-2027 218,-1991 310,-1991 310,-2027"/>
-<text text-anchor="middle" x="264" y="-2006.6" font-family="Times Roman,serif" font-size="11.00">ClipitQuizResult</text>
+<polygon fill="none" stroke="black" points="310,-2067 218,-2067 218,-2031 310,-2031 310,-2067"/>
+<text text-anchor="middle" x="264" y="-2046.6" font-family="Times Roman,serif" font-size="11.00">ClipitQuizResult</text>
 </g>
 <!-- \\ClipitQuizResult&#45;&gt;\\UBItem -->
 <g id="edge167" class="edge"><title>\\ClipitQuizResult&#45;&gt;\\UBItem</title>
-<path fill="none" stroke="black" d="M217.865,-2015.23C182.472,-2020.01 134.249,-2026.52 101.28,-2030.97"/>
-<polygon fill="none" stroke="black" points="100.589,-2027.53 91.1468,-2032.34 101.525,-2034.47 100.589,-2027.53"/>
+<path fill="none" stroke="black" d="M217.865,-2036.54C182.319,-2026.95 133.831,-2013.85 100.852,-2004.95"/>
+<polygon fill="none" stroke="black" points="101.713,-2001.56 91.1468,-2002.33 99.8888,-2008.32 101.713,-2001.56"/>
 </g>
 <!-- \\ClipitTagRating -->
 <g id="node97" class="node"><title>\\ClipitTagRating</title>
-<polygon fill="none" stroke="black" points="308,-1973 220,-1973 220,-1937 308,-1937 308,-1973"/>
-<text text-anchor="middle" x="264" y="-1952.6" font-family="Times Roman,serif" font-size="11.00">ClipitTagRating</text>
+<polygon fill="none" stroke="black" points="308,-2013 220,-2013 220,-1977 308,-1977 308,-2013"/>
+<text text-anchor="middle" x="264" y="-1992.6" font-family="Times Roman,serif" font-size="11.00">ClipitTagRating</text>
 </g>
 <!-- \\ClipitTagRating&#45;&gt;\\UBItem -->
 <g id="edge169" class="edge"><title>\\ClipitTagRating&#45;&gt;\\UBItem</title>
-<path fill="none" stroke="black" d="M220.92,-1973.04C213.917,-1976.01 206.75,-1979.08 200,-1982 167.866,-1995.92 160.589,-2001.18 128,-2014 119.341,-2017.41 109.914,-2020.81 101.024,-2023.89"/>
-<polygon fill="none" stroke="black" points="99.6203,-2020.67 91.2833,-2027.2 101.878,-2027.29 99.6203,-2020.67"/>
+<path fill="none" stroke="black" d="M219.614,-1995C184.099,-1995 134.863,-1995 101.349,-1995"/>
+<polygon fill="none" stroke="black" points="101.057,-1991.5 91.0574,-1995 101.057,-1998.5 101.057,-1991.5"/>
 </g>
 <!-- \\ClipitRating -->
 <g id="node98" class="node"><title>\\ClipitRating</title>
-<polygon fill="none" stroke="black" points="299,-1919 229,-1919 229,-1883 299,-1883 299,-1919"/>
-<text text-anchor="middle" x="264" y="-1898.6" font-family="Times Roman,serif" font-size="11.00">ClipitRating</text>
+<polygon fill="none" stroke="black" points="299,-1959 229,-1959 229,-1923 299,-1923 299,-1959"/>
+<text text-anchor="middle" x="264" y="-1938.6" font-family="Times Roman,serif" font-size="11.00">ClipitRating</text>
 </g>
 <!-- \\ClipitRating&#45;&gt;\\UBItem -->
 <g id="edge171" class="edge"><title>\\ClipitRating&#45;&gt;\\UBItem</title>
-<path fill="none" stroke="black" d="M228.182,-1912.61C218.531,-1916.65 208.437,-1921.76 200,-1928 159.912,-1957.63 169.074,-1985.75 128,-2014 119.809,-2019.63 110.041,-2023.95 100.634,-2027.2"/>
-<polygon fill="none" stroke="black" points="99.534,-2023.87 91.0423,-2030.21 101.632,-2030.55 99.534,-2023.87"/>
+<path fill="none" stroke="black" d="M228.244,-1950.65C192.298,-1960.36 137.147,-1975.25 100.826,-1985.06"/>
+<polygon fill="none" stroke="black" points="99.8546,-1981.69 91.1127,-1987.68 101.679,-1988.45 99.8546,-1981.69"/>
 </g>
 <!-- \\ClipitActivity -->
 <g id="node99" class="node"><title>\\ClipitActivity</title>
-<polygon fill="none" stroke="black" points="302,-1865 226,-1865 226,-1829 302,-1829 302,-1865"/>
-<text text-anchor="middle" x="264" y="-1844.6" font-family="Times Roman,serif" font-size="11.00">ClipitActivity</text>
+<polygon fill="none" stroke="black" points="302,-1905 226,-1905 226,-1869 302,-1869 302,-1905"/>
+<text text-anchor="middle" x="264" y="-1884.6" font-family="Times Roman,serif" font-size="11.00">ClipitActivity</text>
 </g>
 <!-- \\ClipitActivity&#45;&gt;\\UBItem -->
 <g id="edge173" class="edge"><title>\\ClipitActivity&#45;&gt;\\UBItem</title>
-<path fill="none" stroke="black" d="M225.21,-1858.29C216.202,-1862.22 207.164,-1867.36 200,-1874 148.686,-1921.57 180.904,-1968.21 128,-2014 120.352,-2020.62 110.609,-2025.28 101.046,-2028.54"/>
-<polygon fill="none" stroke="black" points="99.8252,-2025.25 91.2408,-2031.46 101.824,-2031.96 99.8252,-2025.25"/>
+<path fill="none" stroke="black" d="M225.212,-1901.25C216.676,-1904.96 207.848,-1909.27 200,-1914 164.576,-1935.37 164.131,-1952.85 128,-1973 119.56,-1977.71 109.937,-1981.66 100.762,-1984.86"/>
+<polygon fill="none" stroke="black" points="99.4763,-1981.6 91.06,-1988.03 101.653,-1988.25 99.4763,-1981.6"/>
 </g>
 <!-- \\ClipitComment -->
 <g id="node100" class="node"><title>\\ClipitComment</title>
@@ -1038,120 +1038,130 @@
 </g>
 <!-- \\ClipitComment&#45;&gt;\\UBMessage -->
 <g id="edge175" class="edge"><title>\\ClipitComment&#45;&gt;\\UBMessage</title>
-<path fill="none" stroke="black" d="M425.731,-1743.67C391.808,-1731.36 344.276,-1714.12 309.521,-1701.51"/>
-<polygon fill="none" stroke="black" points="310.673,-1698.21 300.078,-1698.09 308.286,-1704.79 310.673,-1698.21"/>
+<path fill="none" stroke="black" d="M425.751,-1742.71C417.187,-1739.27 408.273,-1735.59 400,-1732 367.538,-1717.91 360.31,-1712.44 328,-1698 322.147,-1695.38 315.966,-1692.69 309.844,-1690.07"/>
+<polygon fill="none" stroke="black" points="310.902,-1686.71 300.33,-1686.02 308.16,-1693.15 310.902,-1686.71"/>
 </g>
 <!-- \\ClipitTask -->
 <g id="node101" class="node"><title>\\ClipitTask</title>
-<polygon fill="none" stroke="black" points="295,-1811 233,-1811 233,-1775 295,-1775 295,-1811"/>
-<text text-anchor="middle" x="264" y="-1790.6" font-family="Times Roman,serif" font-size="11.00">ClipitTask</text>
+<polygon fill="none" stroke="black" points="295,-1851 233,-1851 233,-1815 295,-1815 295,-1851"/>
+<text text-anchor="middle" x="264" y="-1830.6" font-family="Times Roman,serif" font-size="11.00">ClipitTask</text>
 </g>
 <!-- \\ClipitTask&#45;&gt;\\UBItem -->
 <g id="edge177" class="edge"><title>\\ClipitTask&#45;&gt;\\UBItem</title>
-<path fill="none" stroke="black" d="M232.277,-1800.67C220.86,-1804.78 208.672,-1810.94 200,-1820 136.409,-1886.44 193.817,-1949.76 128,-2014 120.559,-2021.26 110.614,-2026.13 100.785,-2029.4"/>
-<polygon fill="none" stroke="black" points="99.7532,-2026.05 91.093,-2032.16 101.669,-2032.78 99.7532,-2026.05"/>
+<path fill="none" stroke="black" d="M232.259,-1842.06C221.23,-1846.28 209.305,-1852.14 200,-1860 154.505,-1898.43 174.777,-1936.15 128,-1973 120.123,-1979.21 110.384,-1983.72 100.901,-1986.98"/>
+<polygon fill="none" stroke="black" points="99.7418,-1983.67 91.1992,-1989.94 101.785,-1990.37 99.7418,-1983.67"/>
+</g>
+<!-- \\ClipitLabel -->
+<g id="node102" class="node"><title>\\ClipitLabel</title>
+<polygon fill="none" stroke="black" points="297,-1797 231,-1797 231,-1761 297,-1761 297,-1797"/>
+<text text-anchor="middle" x="264" y="-1776.6" font-family="Times Roman,serif" font-size="11.00">ClipitLabel</text>
+</g>
+<!-- \\ClipitLabel&#45;&gt;\\UBItem -->
+<g id="edge179" class="edge"><title>\\ClipitLabel&#45;&gt;\\UBItem</title>
+<path fill="none" stroke="black" d="M230.212,-1787.77C219.503,-1791.89 208.304,-1797.76 200,-1806 142.623,-1862.93 187.282,-1918.06 128,-1973 120.517,-1979.94 110.747,-1984.7 101.102,-1987.96"/>
+<polygon fill="none" stroke="black" points="99.8176,-1984.69 91.1975,-1990.85 101.778,-1991.41 99.8176,-1984.69"/>
 </g>
 <!-- \\ClipitQuiz -->
-<g id="node102" class="node"><title>\\ClipitQuiz</title>
-<polygon fill="none" stroke="black" points="295,-1757 233,-1757 233,-1721 295,-1721 295,-1757"/>
-<text text-anchor="middle" x="264" y="-1736.6" font-family="Times Roman,serif" font-size="11.00">ClipitQuiz</text>
+<g id="node103" class="node"><title>\\ClipitQuiz</title>
+<polygon fill="none" stroke="black" points="295,-1743 233,-1743 233,-1707 295,-1707 295,-1743"/>
+<text text-anchor="middle" x="264" y="-1722.6" font-family="Times Roman,serif" font-size="11.00">ClipitQuiz</text>
 </g>
 <!-- \\ClipitQuiz&#45;&gt;\\UBItem -->
-<g id="edge179" class="edge"><title>\\ClipitQuiz&#45;&gt;\\UBItem</title>
-<path fill="none" stroke="black" d="M232.252,-1746.23C220.695,-1750.3 208.416,-1756.54 200,-1766 123.712,-1851.75 207.164,-1930.9 128,-2014 120.767,-2021.59 110.799,-2026.57 100.881,-2029.82"/>
-<polygon fill="none" stroke="black" points="99.7843,-2026.49 91.0838,-2032.54 101.656,-2033.24 99.7843,-2026.49"/>
+<g id="edge181" class="edge"><title>\\ClipitQuiz&#45;&gt;\\UBItem</title>
+<path fill="none" stroke="black" d="M232.411,-1732.37C220.875,-1736.46 208.569,-1742.68 200,-1752 130.095,-1828.06 200.454,-1899.37 128,-1973 120.707,-1980.41 110.808,-1985.33 100.976,-1988.59"/>
+<polygon fill="none" stroke="black" points="99.9392,-1985.24 91.2654,-1991.33 101.84,-1991.98 99.9392,-1985.24"/>
 </g>
 <!-- \\ClipitChat -->
-<g id="node103" class="node"><title>\\ClipitChat</title>
+<g id="node104" class="node"><title>\\ClipitChat</title>
 <polygon fill="none" stroke="black" points="499,-1723 437,-1723 437,-1687 499,-1687 499,-1723"/>
 <text text-anchor="middle" x="468" y="-1702.6" font-family="Times Roman,serif" font-size="11.00">ClipitChat</text>
 </g>
 <!-- \\ClipitChat&#45;&gt;\\UBMessage -->
-<g id="edge181" class="edge"><title>\\ClipitChat&#45;&gt;\\UBMessage</title>
-<path fill="none" stroke="black" d="M436.572,-1701.92C402.818,-1698.61 348.839,-1693.32 310.24,-1689.53"/>
-<polygon fill="none" stroke="black" points="310.58,-1686.05 300.287,-1688.56 309.897,-1693.02 310.58,-1686.05"/>
+<g id="edge183" class="edge"><title>\\ClipitChat&#45;&gt;\\UBMessage</title>
+<path fill="none" stroke="black" d="M436.572,-1699.76C402.818,-1694.14 348.839,-1685.14 310.24,-1678.71"/>
+<polygon fill="none" stroke="black" points="310.726,-1675.24 300.287,-1677.05 309.575,-1682.14 310.726,-1675.24"/>
 </g>
 <!-- \\ClipitPerformancePalette -->
-<g id="node104" class="node"><title>\\ClipitPerformancePalette</title>
+<g id="node105" class="node"><title>\\ClipitPerformancePalette</title>
 <polygon fill="none" stroke="black" points="759,-454 631,-454 631,-418 759,-418 759,-454"/>
 <text text-anchor="middle" x="695" y="-433.6" font-family="Times Roman,serif" font-size="11.00">ClipitPerformancePalette</text>
 </g>
 <!-- \\ClipitStoryboard -->
-<g id="node105" class="node"><title>\\ClipitStoryboard</title>
-<polygon fill="none" stroke="black" points="308,-1649 220,-1649 220,-1613 308,-1613 308,-1649"/>
-<text text-anchor="middle" x="264" y="-1628.6" font-family="Times Roman,serif" font-size="11.00">ClipitStoryboard</text>
+<g id="node106" class="node"><title>\\ClipitStoryboard</title>
+<polygon fill="none" stroke="black" points="308,-1635 220,-1635 220,-1599 308,-1599 308,-1635"/>
+<text text-anchor="middle" x="264" y="-1614.6" font-family="Times Roman,serif" font-size="11.00">ClipitStoryboard</text>
 </g>
 <!-- \\ClipitStoryboard&#45;&gt;\\UBItem -->
-<g id="edge183" class="edge"><title>\\ClipitStoryboard&#45;&gt;\\UBItem</title>
-<path fill="none" stroke="black" d="M219.221,-1643.19C211.937,-1646.92 205.115,-1651.75 200,-1658 97.7996,-1782.95 234.396,-1892.6 128,-2014 121.03,-2021.95 111.051,-2027.03 101.04,-2030.28"/>
-<polygon fill="none" stroke="black" points="99.873,-2026.97 91.1281,-2032.95 101.694,-2033.73 99.873,-2026.97"/>
+<g id="edge185" class="edge"><title>\\ClipitStoryboard&#45;&gt;\\UBItem</title>
+<path fill="none" stroke="black" d="M219.302,-1629.26C212.01,-1632.98 205.165,-1637.79 200,-1644 104.316,-1759.11 227.548,-1861.22 128,-1973 120.967,-1980.9 110.969,-1985.96 100.96,-1989.21"/>
+<polygon fill="none" stroke="black" points="99.7965,-1985.9 91.057,-1991.88 101.624,-1992.65 99.7965,-1985.9"/>
 </g>
 <!-- \\ClipitSite -->
-<g id="node106" class="node"><title>\\ClipitSite</title>
+<g id="node107" class="node"><title>\\ClipitSite</title>
 <polygon fill="none" stroke="black" points="724,-1480 666,-1480 666,-1444 724,-1444 724,-1480"/>
 <text text-anchor="middle" x="695" y="-1459.6" font-family="Times Roman,serif" font-size="11.00">ClipitSite</text>
 </g>
 <!-- \\UBSite -->
-<g id="node115" class="node"><title>\\UBSite</title>
+<g id="node116" class="node"><title>\\UBSite</title>
 <polygon fill="none" stroke="black" points="495,-1480 441,-1480 441,-1444 495,-1444 495,-1480"/>
 <text text-anchor="middle" x="468" y="-1459.6" font-family="Times Roman,serif" font-size="11.00">UBSite</text>
 </g>
 <!-- \\ClipitSite&#45;&gt;\\UBSite -->
-<g id="edge185" class="edge"><title>\\ClipitSite&#45;&gt;\\UBSite</title>
+<g id="edge187" class="edge"><title>\\ClipitSite&#45;&gt;\\UBSite</title>
 <path fill="none" stroke="black" d="M665.324,-1462C624.269,-1462 550.156,-1462 505.374,-1462"/>
 <polygon fill="none" stroke="black" points="505.202,-1458.5 495.202,-1462 505.202,-1465.5 505.202,-1458.5"/>
 </g>
 <!-- \\ClipitFile&#45;&gt;\\UBFile -->
-<g id="edge187" class="edge"><title>\\ClipitFile&#45;&gt;\\UBFile</title>
-<path fill="none" stroke="black" d="M438.337,-2274.89C401.866,-2287.04 339.976,-2307.67 300.591,-2320.8"/>
-<polygon fill="none" stroke="black" points="299.471,-2317.49 291.091,-2323.97 301.685,-2324.13 299.471,-2317.49"/>
+<g id="edge189" class="edge"><title>\\ClipitFile&#45;&gt;\\UBFile</title>
+<path fill="none" stroke="black" d="M438.19,-2289.88C426.176,-2294.51 412.282,-2300.18 400,-2306 366.92,-2321.68 360.912,-2329.97 328,-2346 319.148,-2350.31 309.433,-2354.62 300.306,-2358.49"/>
+<polygon fill="none" stroke="black" points="298.95,-2355.26 291.068,-2362.34 301.645,-2361.72 298.95,-2355.26"/>
 </g>
 <!-- \\ClipitPerformanceItem -->
-<g id="node108" class="node"><title>\\ClipitPerformanceItem</title>
-<polygon fill="none" stroke="black" points="323,-1595 205,-1595 205,-1559 323,-1559 323,-1595"/>
-<text text-anchor="middle" x="264" y="-1574.6" font-family="Times Roman,serif" font-size="11.00">ClipitPerformanceItem</text>
+<g id="node109" class="node"><title>\\ClipitPerformanceItem</title>
+<polygon fill="none" stroke="black" points="323,-1581 205,-1581 205,-1545 323,-1545 323,-1581"/>
+<text text-anchor="middle" x="264" y="-1560.6" font-family="Times Roman,serif" font-size="11.00">ClipitPerformanceItem</text>
 </g>
 <!-- \\ClipitPerformanceItem&#45;&gt;\\UBItem -->
-<g id="edge189" class="edge"><title>\\ClipitPerformanceItem&#45;&gt;\\UBItem</title>
-<path fill="none" stroke="black" d="M209.434,-1595.03C205.915,-1597.63 202.705,-1600.6 200,-1604 84.7189,-1748.7 248.142,-1873.31 128,-2014 121.133,-2022.04 111.185,-2027.15 101.17,-2030.39"/>
-<polygon fill="none" stroke="black" points="99.9978,-2027.08 91.2442,-2033.05 101.809,-2033.84 99.9978,-2027.08"/>
+<g id="edge191" class="edge"><title>\\ClipitPerformanceItem&#45;&gt;\\UBItem</title>
+<path fill="none" stroke="black" d="M209.479,-1581.06C205.95,-1583.66 202.725,-1586.62 200,-1590 91.266,-1724.82 241.262,-1841.96 128,-1973 121.085,-1981 111.122,-1986.09 101.109,-1989.34"/>
+<polygon fill="none" stroke="black" points="99.9395,-1986.03 91.1899,-1992 101.756,-1992.79 99.9395,-1986.03"/>
 </g>
 <!-- \\BinaryFile_Exception -->
-<g id="node109" class="node"><title>\\BinaryFile_Exception</title>
+<g id="node110" class="node"><title>\\BinaryFile_Exception</title>
 <polygon fill="none" stroke="black" points="751,-1102 639,-1102 639,-1066 751,-1066 751,-1102"/>
 <text text-anchor="middle" x="695" y="-1081.6" font-family="Times Roman,serif" font-size="11.00">BinaryFile_Exception</text>
 </g>
 <!-- \\BinaryFile_Exception&#45;&gt;\\Exception -->
-<g id="edge191" class="edge"><title>\\BinaryFile_Exception&#45;&gt;\\Exception</title>
+<g id="edge193" class="edge"><title>\\BinaryFile_Exception&#45;&gt;\\Exception</title>
 <path fill="none" stroke="black" d="M638.426,-1099.85C573.351,-1117.73 474.552,-1143.64 468,-1138"/>
 </g>
 <!-- \\BinaryFile_Seek_Method -->
-<g id="node110" class="node"><title>\\BinaryFile_Seek_Method</title>
+<g id="node111" class="node"><title>\\BinaryFile_Seek_Method</title>
 <polygon fill="none" stroke="black" points="760,-292 630,-292 630,-256 760,-256 760,-292"/>
 <text text-anchor="middle" x="695" y="-271.6" font-family="Times Roman,serif" font-size="11.00">BinaryFile_Seek_Method</text>
 </g>
 <!-- \\BinaryFile -->
-<g id="node111" class="node"><title>\\BinaryFile</title>
+<g id="node112" class="node"><title>\\BinaryFile</title>
 <polygon fill="none" stroke="black" points="727,-238 663,-238 663,-202 727,-202 727,-238"/>
 <text text-anchor="middle" x="695" y="-217.6" font-family="Times Roman,serif" font-size="11.00">BinaryFile</text>
 </g>
 <!-- \\UBMessage&#45;&gt;\\UBItem -->
-<g id="edge193" class="edge"><title>\\UBMessage&#45;&gt;\\UBItem</title>
-<path fill="none" stroke="black" d="M227.685,-1693.62C217.454,-1697.67 207.171,-1703.53 200,-1712 110.812,-1817.29 220.722,-1911.81 128,-2014 120.954,-2021.77 111.041,-2026.79 101.118,-2030.04"/>
-<polygon fill="none" stroke="black" points="100.014,-2026.72 91.2972,-2032.74 101.867,-2033.47 100.014,-2026.72"/>
+<g id="edge195" class="edge"><title>\\UBMessage&#45;&gt;\\UBItem</title>
+<path fill="none" stroke="black" d="M227.799,-1679.72C217.573,-1683.77 207.264,-1689.61 200,-1698 117.28,-1793.5 213.924,-1880.38 128,-1973 120.868,-1980.69 110.931,-1985.69 101.01,-1988.94"/>
+<polygon fill="none" stroke="black" points="99.9091,-1985.62 91.1997,-1991.65 101.77,-1992.36 99.9091,-1985.62"/>
 </g>
 <!-- \\UBFile&#45;&gt;\\UBItem -->
-<g id="edge195" class="edge"><title>\\UBFile&#45;&gt;\\UBItem</title>
-<path fill="none" stroke="black" d="M236.682,-2326.18C224.318,-2321.99 210.219,-2315.55 200,-2306 125.772,-2236.61 86.0349,-2117.76 71.0722,-2063.94"/>
-<polygon fill="none" stroke="black" points="74.3945,-2062.82 68.4072,-2054.08 67.6369,-2064.65 74.3945,-2062.82"/>
+<g id="edge197" class="edge"><title>\\UBFile&#45;&gt;\\UBItem</title>
+<path fill="none" stroke="black" d="M236.899,-2366.82C224.284,-2362.74 209.912,-2356.21 200,-2346 108.366,-2251.62 76.751,-2088.65 67.4237,-2023.31"/>
+<polygon fill="none" stroke="black" points="70.8826,-2022.77 66.0666,-2013.33 63.9465,-2023.71 70.8826,-2022.77"/>
 </g>
 <!-- \\UBUser&#45;&gt;\\UBItem -->
-<g id="edge197" class="edge"><title>\\UBUser&#45;&gt;\\UBItem</title>
-<path fill="none" stroke="black" d="M236.762,-2271.62C224.559,-2267.34 210.571,-2260.98 200,-2252 137.195,-2198.66 93.8777,-2108.86 74.8715,-2063.7"/>
-<polygon fill="none" stroke="black" points="78.025,-2062.16 70.9785,-2054.25 71.5532,-2064.83 78.025,-2062.16"/>
+<g id="edge199" class="edge"><title>\\UBUser&#45;&gt;\\UBItem</title>
+<path fill="none" stroke="black" d="M236.841,-2312.45C224.365,-2308.31 210.126,-2301.83 200,-2292 119.918,-2214.3 82.5979,-2080.6 69.6133,-2022.87"/>
+<polygon fill="none" stroke="black" points="73.0133,-2022.04 67.4671,-2013.01 66.1733,-2023.53 73.0133,-2022.04"/>
 </g>
 <!-- \\UBCollection -->
-<g id="node118" class="node"><title>\\UBCollection</title>
+<g id="node119" class="node"><title>\\UBCollection</title>
 <polygon fill="none" stroke="black" points="734,-184 656,-184 656,-148 734,-148 734,-184"/>
 <text text-anchor="start" x="672" y="-171.433" font-family="Times Roman,serif" font-size="11.00">«abstract»</text>
 <text text-anchor="start" x="664" y="-158.233" font-family="Times Roman,serif" font-size="11.00">UBCollection</text>

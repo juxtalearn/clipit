@@ -29,6 +29,23 @@ class ClipitStoryboard extends UBItem{
     public $performance_array = array();
     public $comment_array = array();
 
+    protected function load_from_elgg($elgg_object){
+        parent::load_from_elgg($elgg_object);
+        $this->comment_array = (array)static::get_comments($this->id);
+        $this->tag_array = (array)static::get_tags($this->id);
+        $this->label_array = (array)static::get_labels($this->id);
+        $this->performance_array = (array)static::get_performance_items($this->id);
+    }
+
+    protected function save(){
+        parent::save();
+        static::set_comments($this->id, (array)$this->comment_array);
+        static::set_tags($this->id, (array)$this->tag_array);
+        static::set_labels($this->id, (array)$this->label_array);
+        static::set_performance_items($this->id, (array)$this->performance_array);
+        return $this->id;
+    }
+
     static function get_publish_level($id){
         $site = static::get_site($id);
         if(!empty($site)){

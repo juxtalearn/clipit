@@ -26,7 +26,7 @@ class UBMessage extends UBItem{
 
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
-        $this->read_array = (array)$elgg_object->read_array;
+        $this->read_array = (array)$elgg_object->get("read_array");
         $this->destination = static::get_destination($this->id);
         $this->file_array = static::get_files($this->id);
     }
@@ -36,7 +36,7 @@ class UBMessage extends UBItem{
      */
     protected function copy_to_elgg($elgg_object){
         parent::copy_to_elgg($elgg_object);
-        $elgg_object->read_array = (array)$this->read_array;
+        $elgg_object->set("read_array", (array)$this->read_array);
     }
 
     /**

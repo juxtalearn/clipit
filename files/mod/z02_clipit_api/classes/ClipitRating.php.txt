@@ -85,7 +85,8 @@ class ClipitRating extends UBItem{
                     'type' => static::TYPE,
                     'subtype' => static::SUBTYPE,
                     'metadata_names' => array("target"),
-                    'metadata_values' => array($target_id)
+                    'metadata_values' => array($target_id),
+                    'limit' => 0
                 )
             );
             if(!empty($elgg_objects)){

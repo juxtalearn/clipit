@@ -13,7 +13,7 @@
  */
 
 /**
- * Class ClipitTaxonomySB
+ * Class ClipitTag
  *
  */
 class ClipitTag extends UBItem{

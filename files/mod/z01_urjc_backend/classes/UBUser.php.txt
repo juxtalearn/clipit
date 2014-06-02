@@ -249,7 +249,8 @@ class UBUser extends UBItem{
                     'type' => static::TYPE,
                     'subtype' => static::SUBTYPE,
                     'metadata_names' => array("role"),
-                    'metadata_values' => array($role)
+                    'metadata_values' => array($role),
+                    'limit' => 0
                 )
             );
             if(!$elgg_user_array){
