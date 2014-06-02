@@ -35,6 +35,12 @@ class ClipitLA extends UBFile{
         $elgg_file->set("status_code", $this->status_code);
     }
 
+    static function request_metrics($category, $type, $name){
+        $return_id = 0;
+
+        return $return_id;
+    }
+
     static function send_metrics($returnId, $data, $statuscode){
         $la = new ClipitLA();
         $prop_value_array["return_id"] = (int)$returnId;
