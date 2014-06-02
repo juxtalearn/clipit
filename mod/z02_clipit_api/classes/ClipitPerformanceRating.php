@@ -61,11 +61,13 @@ class ClipitPerformanceRating extends UBItem {
         $rating_array = $rating_array[$target_id];
         $average_rating = 0;
         $count = 0;
-        foreach($rating_array as $rating){
-            foreach($rating->performance_rating_array as $performance_rating_id){
-                $performance_rating = new static($performance_rating_id);
-                $average_rating += (int)$performance_rating->star_rating;
-                $count++;
+        if(!empty($rating_array)) {
+            foreach ($rating_array as $rating) {
+                foreach ($rating->performance_rating_array as $performance_rating_id) {
+                    $performance_rating = new static($performance_rating_id);
+                    $average_rating += (int)$performance_rating->star_rating;
+                    $count++;
+                }
             }
         }
         if(!empty($count)){
