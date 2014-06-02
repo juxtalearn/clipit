@@ -21,11 +21,14 @@ class ClipitVideo extends UBItem{
      * @const string Elgg entity sybtype for this class
      */
     const SUBTYPE = "ClipitVideo";
-    const REL_VIDEO_COMMENT = "video-comment";
+
     const REL_VIDEO_TAG = "video-tag";
+    const REL_VIDEO_LABEL = "video-label";
+    const REL_VIDEO_COMMENT = "video-comment";
     const REL_VIDEO_PERFORMANCE = "video-performance";
 
     public $tag_array = array();
+    public $label_array = array();
     public $performance_array = array();
     public $comment_array = array();
     public $preview = "";
@@ -208,6 +211,53 @@ class ClipitVideo extends UBItem{
      */
     static function get_tags($id){
         return UBCollection::get_items($id, static::REL_VIDEO_TAG);
+    }
+
+    /**
+     * Add Labels to a Video.
+     *
+     * @param int   $id Id of the Video to add Labels to.
+     * @param array $label_array Array of Label Ids to add to the Video.
+     *
+     * @return bool Returns true if added correctly, or false if error.
+     */
+    static function add_labels($id, $label_array){
+        return UBCollection::add_items($id, $label_array, static::REL_VIDEO_LABEL);
+    }
+
+    /**
+     * Set Labels to a Video.
+     *
+     * @param int   $id Id of the Video to set Labels to.
+     * @param array $label_array Array of Label Ids to set to the Video.
+     *
+     * @return bool Returns true if added correctly, or false if error.
+     */
+    static function set_labels($id, $label_array){
+        return UBCollection::set_items($id, $label_array, static::REL_VIDEO_LABEL);
+    }
+
+    /**
+     * Remove Labels from a Video.
+     *
+     * @param int   $id Id of the Video to remove Labels from.
+     * @param array $label_array Array of Label Ids to remove from the Video.
+     *
+     * @return bool Returns true if removed correctly, or false if error.
+     */
+    static function remove_labels($id, $label_array){
+        return UBCollection::remove_items($id, $label_array, static::REL_VIDEO_LABEL);
+    }
+
+    /**
+     * Get Label Ids from a Video.
+     *
+     * @param int $id Id of the Video to get Labels from.
+     *
+     * @return bool Returns array of Label Ids, or false if error.
+     */
+    static function get_labels($id){
+        return UBCollection::get_items($id, static::REL_VIDEO_LABEL);
     }
 
     static function add_performance_items($id, $performance_array){

@@ -72,7 +72,7 @@ class ClipitFile extends UBFile{
      * Add Tags to a File.
      *
      * @param int   $id Id of the File to add Tags to.
-     * @param array $tag_array Array of Tag Ids to add to the Group.
+     * @param array $tag_array Array of Tag Ids to add to the File.
      *
      * @return bool Returns true if added correctly, or false if error.
      */
@@ -84,7 +84,7 @@ class ClipitFile extends UBFile{
      * Set Tags to a File.
      *
      * @param int   $id Id of the File to set Tags to.
-     * @param array $tag_array Array of Tag Ids to set to the Group.
+     * @param array $tag_array Array of Tag Ids to set to the File.
      *
      * @return bool Returns true if added correctly, or false if error.
      */
@@ -119,7 +119,7 @@ class ClipitFile extends UBFile{
      * Add Labels to a File.
      *
      * @param int   $id Id of the File to add Labels to.
-     * @param array $label_array Array of Label Ids to add to the Group.
+     * @param array $label_array Array of Label Ids to add to the File.
      *
      * @return bool Returns true if added correctly, or false if error.
      */
@@ -131,7 +131,7 @@ class ClipitFile extends UBFile{
      * Set Labels to a File.
      *
      * @param int   $id Id of the File to set Labels to.
-     * @param array $label_array Array of Label Ids to set to the Group.
+     * @param array $label_array Array of Label Ids to set to the File.
      *
      * @return bool Returns true if added correctly, or false if error.
      */

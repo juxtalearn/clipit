@@ -16,25 +16,22 @@
  * Class ClipitSTA
  *
  */
-class ClipitSTA extends UBFile{
+class ClipitSTA extends ClipitFile{
     const SUBTYPE = "ClipitSTA";
 
     public $resource_url = "";
     public $tricky_topic = 0;
-    public $tag_array = array();
 
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
         $this->resource_url = (string)$elgg_object->get("resource_url");
         $this->tricky_topic = (int)$elgg_object->get("tricky_topic");
-        $this->tag_array = (array)$elgg_object->get("tag_array");
     }
 
     protected function copy_to_elgg($elgg_object){
         parent::copy_to_elgg($elgg_object);
         $elgg_object->set("resource_url", (string)$this->resource_url);
         $elgg_object->set("tricky_topic", (int)$this->tricky_topic);
-        $elgg_object->set("tag_array", (array)$this->tag_array);
     }
 
 }

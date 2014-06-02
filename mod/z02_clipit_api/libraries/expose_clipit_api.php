@@ -24,6 +24,7 @@ function expose_clipit_api(){
     expose_file_functions();
     expose_group_functions();
     expose_la_functions();
+    expose_label_functions();
     expose_performance_item_functions();
     expose_performance_palette_functions();
     expose_performance_rating_functions();

@@ -314,21 +314,39 @@ class UBItem{
             null); // $ip_address = ""
     }
 
-    static function get_from_search($search_string, $name_only = false){
-        $elgg_object_array = elgg_get_entities(
-            array(
-                'type' => static::TYPE,
-                'subtype' => static::SUBTYPE)
-        );
+    static function get_from_search($search_string, $name_only = false, $strict = false){
         $search_result = array();
-        foreach($elgg_object_array as $elgg_object){
-            $search_string = strtolower($search_string);
-            if(strpos(strtolower($elgg_object->name), $search_string) !== false){
-                $search_result[(int)$elgg_object->guid] = new static((int)$elgg_object->guid);
-                continue;
+        if(!$strict) {
+            $elgg_object_array = elgg_get_entities(
+                array(
+                    'type' => static::TYPE,
+                    'subtype' => static::SUBTYPE)
+            );
+            $search_result = array();
+            foreach ($elgg_object_array as $elgg_object) {
+
+                $search_string = strtolower($search_string);
+                if (strpos(strtolower($elgg_object->name), $search_string) !== false) {
+                    $search_result[(int)$elgg_object->guid] = new static((int)$elgg_object->guid);
+                    continue;
+                }
+                if ($name_only === false) {
+                    if (strpos(strtolower($elgg_object->description), $search_string) !== false) {
+                        $search_result[(int)$elgg_object->guid] = new static((int)$elgg_object->guid);
+                    }
+                }
             }
-            if($name_only === false){
-                if(strpos(strtolower($elgg_object->description), $search_string) !== false){
+        } else{ // $strict == true
+            $elgg_object_array = elgg_get_entities_from_metadata(
+                array(
+                    'type' => static::TYPE,
+                    'subtype' => static::SUBTYPE,
+                    'metadata_names' => array("name"),
+                    'metadata_values' => array($search_string)
+                )
+            );
+            if(!empty($elgg_object_array)) {
+                foreach ($elgg_object_array as $elgg_object) {
                     $search_result[(int)$elgg_object->guid] = new static((int)$elgg_object->guid);
                 }
             }
