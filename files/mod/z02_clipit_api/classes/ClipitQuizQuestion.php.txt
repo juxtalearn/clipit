@@ -44,6 +44,11 @@ class ClipitQuizQuestion extends UBItem{
      * @var int ID of ClipitVideo refered to by this question (optional)
      */
     public $video = 0;
+    /**
+     * @var int Difficulty of the QuizQuestion, in a numeric scale from X to Y.
+     */
+    public $difficulty = 0;
+
 
     /**
      * @param ElggObject $elgg_object
@@ -55,6 +60,7 @@ class ClipitQuizQuestion extends UBItem{
         $this->option_array = (array)$elgg_object->get("option_array");
         $this->option_type = (string)$elgg_object->get("option_type");
         $this->video = (int)$elgg_object->get("video");
+        $this->difficulty = (int)$elgg_object->get("difficulty");
     }
 
     /**
@@ -65,6 +71,7 @@ class ClipitQuizQuestion extends UBItem{
         $elgg_object->set("option_array", (array)$this->option_array);
         $elgg_object->set("option_type", (string)$this->option_type);
         $elgg_object->set("video", (int)$this->video);
+        $elgg_object->set("difficulty", (int)$this->difficulty);
     }
 
     /**
