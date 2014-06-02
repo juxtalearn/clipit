@@ -78,6 +78,9 @@ class ClipitActivity extends UBItem{
         $elgg_object->get("tricky_topic", (int)$this->tricky_topic);
     }
 
+    /**
+     * @return bool|int The saved instance ID.
+     */
     protected function save(){
         parent::save();
         static::set_teachers($this->id, $this->teacher_array);
@@ -90,6 +93,9 @@ class ClipitActivity extends UBItem{
         return $this->id;
     }
 
+    /**
+     * @return bool True if success, false if error.
+     */
     protected function delete(){
         $rel_array = get_entity_relationships((int)$this->id);
         foreach($rel_array as $rel){
@@ -125,8 +131,13 @@ class ClipitActivity extends UBItem{
 
     /** STATIC FUNCTIONS */
 
+    /**
+     * @param int $id Activity ID
+     * @return string The status of the activity: STATUS_ENROLL, STATUS_ACTIVE or STATUS_CLOSED
+     */
     static function get_status($id){
-        return ClipitActivity::get_properties($id, array("status"));
+        $prop_value_array = ClipitActivity::get_properties($id, array("status"));
+        return $prop_value_array["status"];
     }
 
     static function set_status_enroll($id){
