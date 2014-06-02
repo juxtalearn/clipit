@@ -13,10 +13,6 @@
     </requires>
     <requires>
         <type>plugin</type>
-        <name>z01_urjc_backend</name>
-    </requires>
-    <requires>
-        <type>plugin</type>
         <name>z02_clipit_api</name>
     </requires>
     <category>plugin</category>

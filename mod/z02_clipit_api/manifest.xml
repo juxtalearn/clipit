@@ -15,11 +15,6 @@
         <type>plugin</type>
         <name>z01_urjc_backend</name>
     </requires>
-    <requires>
-        <type>priority</type>
-        <priority>after</priority>
-        <plugin>urjc_backend</plugin>
-    </requires>
     <category>plugin</category>
     <category>back-end</category>
     <category>api</category>
