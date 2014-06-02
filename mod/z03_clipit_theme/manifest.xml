@@ -3,10 +3,9 @@
     <name>ClipIt Theme</name>
     <author>JuxtaLearn Team URJC</author>
     <version>1.0</version>
-    <category>plugin</category>
-    <blurb>ClipIt Theme plugin</blurb>
     <description>ClipIt Theme Plugin for Elgg</description>
     <website>http://www.juxtalearn.eu</website>
+    <copyright>(C) JuxtaLearn Project</copyright>
     <license>GNU General Public License version 2</license>
     <requires>
         <type>elgg_release</type>
@@ -20,5 +19,8 @@
         <type>plugin</type>
         <name>z02_clipit_api</name>
     </requires>
+    <category>plugin</category>
+    <category>front-end</category>
+    <blurb>ClipIt Theme plugin</blurb>
     <activate_on_install>true</activate_on_install>
 </plugin_manifest>

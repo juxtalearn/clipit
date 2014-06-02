@@ -3,8 +3,8 @@
     <name>clipit_api</name>
     <author>Pablo Llinás - pebs74@gmail.com</author>
     <version>1.0</version>
-    <description>This plugin provides the ClipIt (REST) API functionality.</description>
-    <website>http://www.juxtalearn.org/</website>
+    <description>This plugin provides the ClipIt (REST) API functionality</description>
+    <website>http://www.juxtalearn.eu</website>
     <copyright>(C) JuxtaLearn Project</copyright>
     <license>GNU General Public License version 3</license>
     <requires>
@@ -20,9 +20,9 @@
         <priority>after</priority>
         <plugin>urjc_backend</plugin>
     </requires>
-    <category>ClipIt</category>
-    <category>Backend</category>
-    <category>API</category>
-    <category>REST API</category>
+    <category>plugin</category>
+    <category>back-end</category>
+    <category>api</category>
+    <blurb>ClipIt Back-End and (REST) API</blurb>
     <activate_on_install>true</activate_on_install>
 </plugin_manifest>

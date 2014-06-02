@@ -3,13 +3,16 @@
     <name>urjc_backend</name>
     <author>Pablo Llinás Arnaiz</author>
     <version>1.0</version>
-    <description>This plugin provides the URJC Backend functionality.</description>
+    <description>This plugin provides the URJC Backend functionality</description>
+    <website>http://www.juxtalearn.eu</website>
+    <copyright>(C) JuxtaLearn Project</copyright>
     <license>GNU General Public License version 3</license>
     <requires>
         <type>elgg_release</type>
         <version>1.8</version>
     </requires>
-    <category>Backend</category>
-    <category>Plugin</category>
+    <category>back-end</category>
+    <category>plugin</category>
+    <blurb>URJC Back-End</blurb>
     <activate_on_install>true</activate_on_install>
 </plugin_manifest>
