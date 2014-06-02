@@ -273,7 +273,7 @@ class UBItem{
         return $object_array;
     }
 
-    static function get_by_owner($owner_array, $limit = 10){
+    static function get_by_owner($owner_array, $limit = 0){
         $object_array = array();
         foreach($owner_array as $owner_id){
             $elgg_object_array = elgg_get_entities(
@@ -320,7 +320,9 @@ class UBItem{
             $elgg_object_array = elgg_get_entities(
                 array(
                     'type' => static::TYPE,
-                    'subtype' => static::SUBTYPE)
+                    'subtype' => static::SUBTYPE,
+                    'limit' => 0
+                )
             );
             $search_result = array();
             foreach ($elgg_object_array as $elgg_object) {
@@ -342,7 +344,8 @@ class UBItem{
                     'type' => static::TYPE,
                     'subtype' => static::SUBTYPE,
                     'metadata_names' => array("name"),
-                    'metadata_values' => array($search_string)
+                    'metadata_values' => array($search_string),
+                    'limit' => 0
                 )
             );
             if(!empty($elgg_object_array)) {

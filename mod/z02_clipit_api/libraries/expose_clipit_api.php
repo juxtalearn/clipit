@@ -150,6 +150,9 @@ function expose_common_functions($api_suffix, $class_suffix){
                 "required" => true),
             "name_only" => array(
                 "type" => "bool",
+                "required" => false),
+            "strict" => array(
+                "type" => "bool",
                 "required" => false)),
         "Get instances from searching inside the object name and description for a string.",
         'GET', false, true);

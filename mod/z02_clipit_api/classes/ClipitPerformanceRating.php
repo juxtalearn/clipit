@@ -39,7 +39,8 @@ class ClipitPerformanceRating extends UBItem {
                     'type' => static::TYPE,
                     'subtype' => static::SUBTYPE,
                     'metadata_names' => array("performance_item"),
-                    'metadata_values' => array($item_id)
+                    'metadata_values' => array($item_id),
+                    'limit' => 0
                 )
             );
             if(!empty($elgg_objects)){
