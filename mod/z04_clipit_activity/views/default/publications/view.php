@@ -89,7 +89,7 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
                             </small>
                         </h4>
                         <?php
-                        $performance_items = $entity->performance_array;
+                        $performance_items = $entity->performance_item_array;
                         foreach($performance_items as $performance_item_id):
                             $performance_item = array_pop(ClipitPerformanceItem::get_by_id(array($performance_item_id)));
                             $average_for_item = ClipitPerformanceRating::get_average_item_rating_for_target($performance_item_id, $entity->id);

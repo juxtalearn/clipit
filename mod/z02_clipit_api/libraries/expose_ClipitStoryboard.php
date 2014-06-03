@@ -10,5 +10,5 @@ function expose_storyboard_functions(){
     $api_suffix = "clipit.storyboard.";
     $class_suffix = "ClipitStoryboard::";
     expose_common_functions($api_suffix, $class_suffix);
-    expose_common_publication_functions($api_suffix, $class_suffix);
+    expose_common_material_functions($api_suffix, $class_suffix);
 }

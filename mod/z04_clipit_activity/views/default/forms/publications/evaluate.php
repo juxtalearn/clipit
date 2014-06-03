@@ -94,7 +94,7 @@ $(function(){
             </h4>
             <ul>
                 <?php
-                $performance_items = $entity->performance_array;
+                $performance_items = $entity->performance_item_array;
                 foreach($performance_items as $performance_item_id):
                     $performance_item = array_pop(ClipitPerformanceItem::get_by_id(array($performance_item_id)));
                 ?>

@@ -51,7 +51,11 @@ class UBItem{
     /**
      * @var int Origin object id, in case this object was cloned. If not = 0.
      */
-    public $clone_id = 0;
+    public $cloned_from = 0;
+    /**
+     * @var array Object clone ids.
+     */
+    public $clone_array = array();
 
     /* Instance Functions */
     /**
@@ -92,7 +96,7 @@ class UBItem{
         }
         $this->copy_to_elgg($elgg_object);
         $elgg_object->save();
-        return $this->id = $elgg_object->guid;
+        return $this->id = $elgg_object->get("guid");
     }
 
     /**
@@ -105,7 +109,8 @@ class UBItem{
         $this->url = (string)$elgg_entity->get("url");
         $this->owner_id = (int)$elgg_entity->getOwnerGUID();
         $this->time_created = (int)$elgg_entity->getTimeCreated();
-        $this->clone_id = (int)$elgg_entity->get("clone_id");
+        $this->cloned_from = (int)$elgg_entity->get("cloned_from");
+        $this->clone_array = (array)static::get_clones($this->id);
     }
 
     /**
@@ -116,7 +121,7 @@ class UBItem{
         $elgg_entity->set("description", (string)$this->description);
         $elgg_entity->set("url", (string)$this->url);
         $elgg_entity->set("access_id", ACCESS_PUBLIC);
-        $elgg_entity->set("clone_id", (int)$this->clone_id);
+        $elgg_entity->set("cloned_from", (int)$this->cloned_from);
     }
 
     /**
@@ -125,6 +130,13 @@ class UBItem{
      * @return bool True if success, false if error.
      */
     protected function delete(){
+        // Unset all "cloned_from" properties pointing to this object
+        if(!empty($this->clone_array)){
+            $prop_value_array["cloned_from"] = 0;
+            foreach($this->clone_array as $clone_id){
+                static::set_properties($clone_id, $prop_value_array);
+            }
+        }
         if(!$elgg_object = new ElggObject((int)$this->id)){
             return false;
         }
@@ -206,10 +218,31 @@ class UBItem{
         return static::set_properties(null, $prop_value_array);
     }
 
+    /**
+     * @param int $id Item id from which to create a clone.
+     * @return bool|int Id of the new clone Item, false in case of error.
+     */
     static function create_clone($id){
         $prop_value_array = static::get_properties($id);
-        $prop_value_array["clone_id"] = (int) $id;
+        $prop_value_array["cloned_from"] = (int) $id;
         return static::set_properties(null, $prop_value_array);
+    }
+
+    static function get_clones($id){
+        $clone_array = array();
+        $item_array = elgg_get_entities_from_metadata(
+            array(
+                'type' => static::TYPE,
+                'subtype' => static::SUBTYPE,
+                'metadata_names' => array("cloned_from"),
+                'metadata_values' => array($id),
+                'limit' => 0
+            )
+        );
+        foreach($item_array as $item){
+            $clone_array[] = $item->guid;
+        }
+        return $clone_array;
     }
 
     /**

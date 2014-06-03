@@ -94,6 +94,15 @@ function expose_common_functions($api_suffix, $class_suffix){
         "Create a clone copy of an instance",
         'POST', false, true);
     expose_function(
+        $api_suffix . "get_clones",
+        $class_suffix . "get_clones",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Get all Item IDs which were cloned from the one given",
+        "GET", false, true);
+    expose_function(
         $api_suffix . "delete_by_id",
         $class_suffix . "delete_by_id",
         array(
@@ -321,7 +330,7 @@ function expose_common_message_functions($api_suffix, $class_suffix){
         'GET', false, true);
 }
 
-function expose_common_publication_functions($api_suffix, $class_suffix){
+function expose_common_material_functions($api_suffix, $class_suffix){
     expose_function(
         $api_suffix . "get_publish_level",
         $class_suffix . "get_publish_level",
@@ -329,7 +338,7 @@ function expose_common_publication_functions($api_suffix, $class_suffix){
             "id" => array(
                 "type" => "int",
                 "required" => true)),
-        "Get Publish level for a publication item (either 'group', 'activity' or 'site'.",
+        "Get Publish level for a Material ('group', 'activity' or 'site').",
         'GET', false, true);
     expose_function(
         $api_suffix . "get_group",
@@ -338,7 +347,7 @@ function expose_common_publication_functions($api_suffix, $class_suffix){
             "id" => array(
                 "type" => "int",
                 "required" => true)),
-        "Get the Group this publication item is inside of.",
+        "Get the Group this Material is inside of.",
         'GET', false, true);
     expose_function(
         $api_suffix . "get_activity",
@@ -347,7 +356,7 @@ function expose_common_publication_functions($api_suffix, $class_suffix){
             "id" => array(
                 "type" => "int",
                 "required" => true)),
-        "Get the Activity this publication item is inside of.",
+        "Get the Activity this Material is inside of.",
         'GET', false, true);
     expose_function(
         $api_suffix . "get_site",
@@ -356,6 +365,186 @@ function expose_common_publication_functions($api_suffix, $class_suffix){
             "id" => array(
                 "type" => "int",
                 "required" => true)),
-        "Get the Site this publication item is inside of.",
+        "Get the Site this Material is inside of.",
+        'GET', false, true);
+    expose_function(
+        $api_suffix . "add_tags",
+        $class_suffix . "add_tags",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "tag_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Add Tags by Id to a Material",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "set_tags",
+        $class_suffix . "set_tags",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "tag_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Set Tags by Id to a Material",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "remove_tags",
+        $class_suffix . "remove_tags",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "tag_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Remove Tags by Id from a Material",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "get_tags",
+        $class_suffix . "get_tags",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Get Tags from a Material",
+        'GET', false, true);
+    expose_function(
+        $api_suffix . "add_labels",
+        $class_suffix . "add_labels",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "label_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Add Labels by Id to a Material",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "set_labels",
+        $class_suffix . "set_labels",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "label_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Set Labels by Id to a Material",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "remove_labels",
+        $class_suffix . "remove_labels",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "label_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Remove Tags by Id from a Material",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "get_labels",
+        $class_suffix . "get_labels",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Get Labels from a Material",
+        'GET', false, true);
+    expose_function(
+        $api_suffix . "add_comments",
+        $class_suffix . "add_comments",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "comment_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Add Comments by Id to a Material",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "set_comments",
+        $class_suffix . "set_comments",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "comment_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Set Comments by Id to a Material",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "remove_comments",
+        $class_suffix . "remove_comments",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "comment_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Remove Comments by Id from a Material",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "get_comments",
+        $class_suffix . "get_comments",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Get Comments from a Material",
+        'GET', false, true);
+    expose_function(
+        $api_suffix . "add_performance_items",
+        $class_suffix . "add_performance_items",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "performance_item_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Add Performance Items by Id to a Material",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "set_performance_items",
+        $class_suffix . "set_performance_items",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "performance_item_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Set Performance Items by Id to a Material",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "remove_performance_items",
+        $class_suffix . "remove_performance_items",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "performance_item_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Remove Performance Items by Id from a Material",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "get_performance_items",
+        $class_suffix . "get_performance_items",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Get Performance Items from a Material",
         'GET', false, true);
 }
