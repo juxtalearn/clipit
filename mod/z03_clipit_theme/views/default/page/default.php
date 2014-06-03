@@ -74,6 +74,5 @@ $lang = get_current_language();
     </div>
 </footer>
 <?php echo elgg_view('page/elements/foot'); ?>
-<script src="//tdcdn.blob.core.windows.net/toolbar/assets/prod/td.js" data-trackduck-id="538c87248a0f268ae922cb25" async=""></script>
 </body>
 </html>
