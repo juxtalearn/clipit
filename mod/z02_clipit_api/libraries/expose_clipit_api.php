@@ -24,6 +24,7 @@ function expose_clipit_api(){
     expose_file_functions();
     expose_group_functions();
     expose_la_functions();
+    expose_label_functions();
     expose_performance_item_functions();
     expose_performance_palette_functions();
     expose_performance_rating_functions();
@@ -148,6 +149,9 @@ function expose_common_functions($api_suffix, $class_suffix){
                 "type" => "string",
                 "required" => true),
             "name_only" => array(
+                "type" => "bool",
+                "required" => false),
+            "strict" => array(
                 "type" => "bool",
                 "required" => false)),
         "Get instances from searching inside the object name and description for a string.",
