@@ -330,7 +330,7 @@ function expose_common_message_functions($api_suffix, $class_suffix){
         'GET', false, true);
 }
 
-function expose_common_publication_functions($api_suffix, $class_suffix){
+function expose_common_material_functions($api_suffix, $class_suffix){
     expose_function(
         $api_suffix . "get_publish_level",
         $class_suffix . "get_publish_level",

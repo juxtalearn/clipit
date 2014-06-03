@@ -10,6 +10,7 @@ function expose_file_functions(){
     $api_suffix = "clipit.file.";
     $class_suffix = "ClipitFile::";
     expose_common_functions($api_suffix, $class_suffix);
+    expose_common_material_functions($api_suffix, $class_suffix);
     expose_function(
         $api_suffix . "add_tags",
         $class_suffix . "add_tags",
