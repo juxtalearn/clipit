@@ -64,8 +64,8 @@ class ClipitStoryboard extends UBItem{
 
     static function get_group($id){
         $storyboard = new static($id);
-        if(!empty($storyboard->clone_id)){
-            return static::get_group($storyboard->clone_id);
+        if(!empty($storyboard->cloned_from)){
+            return static::get_group($storyboard->cloned_from);
         }
         $group = UBCollection::get_items($id, ClipitGroup::REL_GROUP_STORYBOARD, true);
         return array_pop($group);

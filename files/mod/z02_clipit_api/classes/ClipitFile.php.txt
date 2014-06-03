@@ -51,8 +51,8 @@ class ClipitFile extends UBFile{
 
     static function get_group($id){
         $file = new static($id);
-        if(!empty($file->clone_id)){
-            return static::get_group($file->clone_id);
+        if(!empty($file->cloned_from)){
+            return static::get_group($file->cloned_from);
         }
         $group = UBCollection::get_items($id, ClipitGroup::REL_GROUP_FILE, true);
         return array_pop($group);

@@ -25,6 +25,10 @@ class UBItem{
      */
     const SUBTYPE = "UBItem";
     /**
+     * @const string Relationship between an item and each of its clones.
+     */
+    const REL_ITEM_CLONE = "item-clone";
+    /**
      * @var int Unique Id of this instance
      */
     public $id = null;
@@ -51,7 +55,11 @@ class UBItem{
     /**
      * @var int Origin object id, in case this object was cloned. If not = 0.
      */
-    public $clone_id = 0;
+    public $cloned_from = 0;
+    /**
+     * @var array Object clone ids.
+     */
+    public $clone_array = array();
 
     /* Instance Functions */
     /**
@@ -91,8 +99,9 @@ class UBItem{
             $elgg_object->subtype = static::SUBTYPE;
         }
         $this->copy_to_elgg($elgg_object);
-        $elgg_object->save();
-        return $this->id = $elgg_object->guid;
+        $this->id = $elgg_object->save();
+        static::set_clones($this->id, $this->clone_array);
+        return $this->id;
     }
 
     /**
@@ -105,7 +114,8 @@ class UBItem{
         $this->url = (string)$elgg_entity->get("url");
         $this->owner_id = (int)$elgg_entity->getOwnerGUID();
         $this->time_created = (int)$elgg_entity->getTimeCreated();
-        $this->clone_id = (int)$elgg_entity->get("clone_id");
+        $this->cloned_from = (int)$elgg_entity->get("cloned_from");
+        $this->clone_array = (array)static::get_clones($this->id);
     }
 
     /**
@@ -116,7 +126,7 @@ class UBItem{
         $elgg_entity->set("description", (string)$this->description);
         $elgg_entity->set("url", (string)$this->url);
         $elgg_entity->set("access_id", ACCESS_PUBLIC);
-        $elgg_entity->set("clone_id", (int)$this->clone_id);
+        $elgg_entity->set("cloned_from", (int)$this->cloned_from);
     }
 
     /**
@@ -208,8 +218,26 @@ class UBItem{
 
     static function create_clone($id){
         $prop_value_array = static::get_properties($id);
-        $prop_value_array["clone_id"] = (int) $id;
-        return static::set_properties(null, $prop_value_array);
+        $prop_value_array["cloned_from"] = (int) $id;
+        $clone_id = static::set_properties(null, $prop_value_array);
+        static::add_clones($id, array($clone_id));
+        return $clone_id;
+    }
+
+    static function add_clones($id, $clone_array){
+        return UBCollection::add_items($id, static::REL_ITEM_CLONE, $clone_array);
+    }
+
+    static function set_clones($id, $clone_array){
+        return UBCollection::set_items($id, static::REL_ITEM_CLONE, $clone_array);
+    }
+
+    static function remove_clones($id, $clone_array){
+        return UBCollection::remove_items($id, static::REL_ITEM_CLONE, $clone_array);
+    }
+
+    static function get_clones($id){
+        return UBCollection::get_items($id, static::REL_ITEM_CLONE);
     }
 
     /**

@@ -92,8 +92,8 @@ class ClipitVideo extends UBItem{
 
     static function get_group($id){
         $video = new static($id);
-        if(!empty($video->clone_id)){
-            return static::get_group($video->clone_id);
+        if(!empty($video->cloned_from)){
+            return static::get_group($video->cloned_from);
         }
         $group = UBCollection::get_items($id, ClipitGroup::REL_GROUP_VIDEO, true);
         if(!empty($group)){
