@@ -135,6 +135,22 @@ class UBItem{
      * @return bool True if success, false if error.
      */
     protected function delete(){
+        if(!empty($this->cloned_from)){
+            $prop_value_array = static::get_properties($this->cloned_from, "clone_array");
+            $clone_array = $prop_value_array["clone_array"];
+            $pos = array_search($this->id, $clone_array);
+            if($pos !== false){
+                array_splice($clone_array, $pos, 1);
+                $prop_value_array["clone_array"] = $clone_array;
+                static::set_properties($this->cloned_from, $prop_value_array);
+            }
+        }
+        if(!empty($this->clone_array)){
+            $prop_value_array["cloned_from"] = 0;
+            foreach($this->clone_array as $clone_id){
+                static::set_properties($clone_id, $prop_value_array);
+            }
+        }
         if(!$elgg_object = new ElggObject((int)$this->id)){
             return false;
         }
@@ -216,28 +232,19 @@ class UBItem{
         return static::set_properties(null, $prop_value_array);
     }
 
+    /**
+     * @param int $id Item id from which to create a clone.
+     * @return bool|int Id of the new clone Item, false in case of error.
+     */
     static function create_clone($id){
         $prop_value_array = static::get_properties($id);
+        $orig_cloned_from = $prop_value_array["cloned_from"];
         $prop_value_array["cloned_from"] = (int) $id;
         $clone_id = static::set_properties(null, $prop_value_array);
-        static::add_clones($id, array($clone_id));
+        $prop_value_array["cloned_from"] = (int) $orig_cloned_from;
+        array_push($prop_value_array["clone_array"], $clone_id);
+        static::set_properties($id, $prop_value_array);
         return $clone_id;
-    }
-
-    static function add_clones($id, $clone_array){
-        return UBCollection::add_items($id, static::REL_ITEM_CLONE, $clone_array);
-    }
-
-    static function set_clones($id, $clone_array){
-        return UBCollection::set_items($id, static::REL_ITEM_CLONE, $clone_array);
-    }
-
-    static function remove_clones($id, $clone_array){
-        return UBCollection::remove_items($id, static::REL_ITEM_CLONE, $clone_array);
-    }
-
-    static function get_clones($id){
-        return UBCollection::get_items($id, static::REL_ITEM_CLONE);
     }
 
     /**
