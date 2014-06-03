@@ -10,5 +10,12 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
+$la = new ClipitLA(1314);
+$file = $la->file_path;
+
 ?>
-<iframe width="100%" height="500" src="URL_LINK" frameborder="0"></iframe>
+<?php
+echo $url;
+print_r($la);
+?>
+<iframe width="100%" height="500" src="/clipit_dev_data/2014/02/12/64/kk.html" frameborder="0"></iframe>
