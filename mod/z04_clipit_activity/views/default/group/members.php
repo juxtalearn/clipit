@@ -12,7 +12,6 @@
  */
 $group =  elgg_extract('entity', $vars);
 $users_id = ClipitGroup::get_users($group->id);
-$activity_status = array_pop(ClipitActivity::get_status(elgg_get_page_owner_guid()));
 ?>
 <?php if(count($users_id) > 0): ?>
    <div class="row">

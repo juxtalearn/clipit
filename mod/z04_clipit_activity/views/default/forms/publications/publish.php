@@ -22,7 +22,6 @@ foreach($tags as $tag_id){
 }
 $tags_value = implode(", ", $tag_value);
 ?>
-<div class="bg-warning">Cuidadin.... bla bla bla</div>
 
 <?php echo elgg_view("input/hidden", array(
     'name' => 'entity-id',
@@ -38,11 +37,13 @@ $tags_value = implode(", ", $tag_value);
     'id' => 'input_tags',
     'value' => $tags_value
 ));?>
-<link rel="stylesheet" href="http://harvesthq.github.io/chosen/chosen.css">
 <script src="http://harvesthq.github.io/chosen/chosen.jquery.js"></script>
 <script>
 $(function(){
-    $(".chosen-select").chosen({disable_search_threshold: 10});
+    $(".chosen-select").chosen({disable_search_threshold: 1});
+    $(".chosen-select-items").chosen({max_selected_options: 5}).on("chosen:maxselected", function () {
+        alert("max");
+    });
 });
 </script>
 <div class="row">
@@ -60,15 +61,15 @@ $(function(){
             ));?>
         </div>
         <div class="form-group">
-            <label for="title"><?php echo elgg_echo("tags");?></label>
+            <label><?php echo elgg_echo("tags");?></label>
             <div>
-                <select data-placeholder="Your Favorite Types of Bear" style="width:350px;" multiple class="chosen-select" tabindex="8">
+                <select data-placeholder="Select tags" style="width:100%;" multiple class="chosen-select" tabindex="8">
                     <option value=""></option>
                     <?php
                     foreach($tt_tags as $tag_id):
                         $tag = array_pop(ClipitTag::get_by_id(array($tag_id)));
                     ?>
-                        <option><?php echo $tag->name;?></option>
+                        <option value="<?php echo $tag->id;?>"><?php echo $tag->name;?></option>
                     <?php endforeach;?>
                 </select>
             </div>
@@ -89,10 +90,52 @@ $(function(){
             ));?>
         </div>
     </div>
-
+<style>
+.chosen-select-items + .chosen-container .chosen-choices li{
+    float: none;
+    font-weight: normal;
+    border: 0;
+    border-bottom: 1px solid #bae6f6;
+    border-radius: 0;
+}
+.chosen-select-items + .chosen-container .chosen-choices li input{
+    cursor: default;
+}
+.chosen-select-items + .chosen-container .chosen-choices li:last-child{
+    border: 0;
+}
+.chosen-select-items + .chosen-container .chosen-results li.group-option{
+    font-weight: normal;
+}
+</style>
     <div class="col-md-4">
         <img src="<?php echo $entity->preview;?>" class="img-responsive"><br>
-        <h5 class="blue"><strong><?php echo elgg_echo('performance_item:select'); ?></strong></h5>
+        <label><?php echo elgg_echo("performance_items");?></label>
+        <div>
+            <select data-placeholder="<?php echo elgg_echo('performance_item:select'); ?>" style="width:100%;" multiple class="chosen-select-items" tabindex="8">
+                <option value=""></option>
+                <optgroup label="Format">
+                    <option value="20">Stop motion</option>
+                    <option>Tutorial</option>
+                    <option>Video diary</option>
+                </optgroup>
+                <optgroup label="Genre">
+                    <option>Stop motion <i class="fa fa-question"></i></option>
+                    <option>Tutorial</option>
+                    <option>Video diary</option>
+                </optgroup>
+                <optgroup label="Story">
+                    <option>Stop motion</option>
+                    <option>Tutorial</option>
+                    <option>Video diary</option>
+                </optgroup>
+            </select>
+            <ul>
+                <li class="list-item">item</li>
+                <li class="list-item">item</li>
+                <li class="list-item">item</li>
+            </ul>
+        </div>
         <div class="multiple-check form-control">
             <a href="javascript:;"><h4>- Learning</h4></a>
             <div class="check-group">

@@ -14,20 +14,25 @@ $id = (int)get_input("id");
 $by_target_id = (int)get_input("by_target");
 
 if($rating = array_pop(ClipitRating::get_by_id(array($id)))){
-    $body = elgg_view('publications/rating_full', array('entity'  => $rating));
+    $group_id = (int)get_input("group_id");
+    $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
+    $body = '<div style="margin-bottom: 10px;">
+                <span class="label label-blue"><i class="fa fa-users"></i> '.$group->name.'</span>
+             </div>';
+    $body .= elgg_view('publications/rating_full', array('entity'  => $rating));
     $user = array_pop(ClipitUser::get_by_id(array($rating->owner_id)));
     echo elgg_view("page/components/modal",
         array(
             "dialog_class"     => "modal-lg",
             "remote"    => true,
             "target"    => "rating-average-{$rating->id}",
-            "title"     => elgg_echo("publications:rating:name", array("@".$user->login)),
+            "title"     => elgg_echo("publications:rating:name", array($user->name)),
             "form"      => false,
             "body"      => $body,
             "footer"    => false
         ));
 
-} elseif($rating_target = array_pop(ClipitRating::get_by_target(array($by_target_id)))){
+} elseif($rating_target = array_pop(ClipitRating::get_by_target(array($by_target_id))) ){
     $activity_id = (int)get_input("activiy_id");
     $body = elgg_view('publications/rating_list', array('entity'  => $rating_target, 'activity_id' => $activity_id));
     echo elgg_view("page/components/modal",
