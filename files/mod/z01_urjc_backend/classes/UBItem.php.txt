@@ -25,10 +25,6 @@ class UBItem{
      */
     const SUBTYPE = "UBItem";
     /**
-     * @const string Relationship between an item and each of its clones.
-     */
-    const REL_ITEM_CLONE = "item-clone";
-    /**
      * @var int Unique Id of this instance
      */
     public $id = null;
@@ -99,8 +95,8 @@ class UBItem{
             $elgg_object->subtype = static::SUBTYPE;
         }
         $this->copy_to_elgg($elgg_object);
-        $this->id = $elgg_object->save();
-        return $this->id;
+        $elgg_object->save();
+        return $this->id = $elgg_object->get("guid");
     }
 
     /**

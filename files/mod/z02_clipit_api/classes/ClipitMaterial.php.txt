@@ -30,14 +30,14 @@ class ClipitMaterial extends UBItem{
 
     public $tag_array = array();
     public $label_array = array();
-    public $performance_array = array();
+    public $performance_item_array = array();
     public $comment_array = array();
 
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
         $this->tag_array = (array)static::get_tags($this->id);
         $this->label_array = (array)static::get_labels($this->id);
-        $this->performance_array = (array)static::get_performance_items($this->id);
+        $this->performance_item_array = (array)static::get_performance_items($this->id);
         $this->comment_array = (array)static::get_comments($this->id);
     }
 
@@ -45,7 +45,7 @@ class ClipitMaterial extends UBItem{
         parent::save();
         static::set_tags($this->id, (array)$this->tag_array);
         static::set_labels($this->id, (array)$this->label_array);
-        static::set_performance_items($this->id, (array)$this->performance_array);
+        static::set_performance_items($this->id, (array)$this->performance_item_array);
         static::set_comments($this->id, (array)$this->comment_array);
         return $this->id;
     }
@@ -194,16 +194,16 @@ class ClipitMaterial extends UBItem{
         return UBCollection::get_items($id, static::REL_MATERIAL_LABEL);
     }
 
-    static function add_performance_items($id, $performance_array){
-        return UBCollection::add_items($id, $performance_array, static::REL_MATERIAL_PERFORMANCE);
+    static function add_performance_items($id, $performance_item_array){
+        return UBCollection::add_items($id, $performance_item_array, static::REL_MATERIAL_PERFORMANCE);
     }
 
-    static function set_performance_items($id, $performance_array){
-        return UBCollection::set_items($id, $performance_array, static::REL_MATERIAL_PERFORMANCE);
+    static function set_performance_items($id, $performance_item_array){
+        return UBCollection::set_items($id, $performance_item_array, static::REL_MATERIAL_PERFORMANCE);
     }
 
-    static function remove_performance_items($id, $performance_array){
-        return UBCollection::remove_items($id, $performance_array, static::REL_MATERIAL_PERFORMANCE);
+    static function remove_performance_items($id, $performance_item_array){
+        return UBCollection::remove_items($id, $performance_item_array, static::REL_MATERIAL_PERFORMANCE);
     }
 
     static function get_performance_items($id){
