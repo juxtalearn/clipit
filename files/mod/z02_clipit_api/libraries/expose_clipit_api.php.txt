@@ -94,6 +94,15 @@ function expose_common_functions($api_suffix, $class_suffix){
         "Create a clone copy of an instance",
         'POST', false, true);
     expose_function(
+        $api_suffix . "get_clones",
+        $class_suffix . "get_clones",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Get all Item IDs which were cloned from the one given",
+        "GET", false, true);
+    expose_function(
         $api_suffix . "delete_by_id",
         $class_suffix . "delete_by_id",
         array(

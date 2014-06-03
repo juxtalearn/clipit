@@ -100,7 +100,6 @@ class UBItem{
         }
         $this->copy_to_elgg($elgg_object);
         $this->id = $elgg_object->save();
-        static::set_clones($this->id, $this->clone_array);
         return $this->id;
     }
 
@@ -135,16 +134,7 @@ class UBItem{
      * @return bool True if success, false if error.
      */
     protected function delete(){
-        if(!empty($this->cloned_from)){
-            $prop_value_array = static::get_properties($this->cloned_from, "clone_array");
-            $clone_array = $prop_value_array["clone_array"];
-            $pos = array_search($this->id, $clone_array);
-            if($pos !== false){
-                array_splice($clone_array, $pos, 1);
-                $prop_value_array["clone_array"] = $clone_array;
-                static::set_properties($this->cloned_from, $prop_value_array);
-            }
-        }
+        // Unset all "cloned_from" properties pointing to this object
         if(!empty($this->clone_array)){
             $prop_value_array["cloned_from"] = 0;
             foreach($this->clone_array as $clone_id){
@@ -238,13 +228,25 @@ class UBItem{
      */
     static function create_clone($id){
         $prop_value_array = static::get_properties($id);
-        $orig_cloned_from = $prop_value_array["cloned_from"];
         $prop_value_array["cloned_from"] = (int) $id;
-        $clone_id = static::set_properties(null, $prop_value_array);
-        $prop_value_array["cloned_from"] = (int) $orig_cloned_from;
-        array_push($prop_value_array["clone_array"], $clone_id);
-        static::set_properties($id, $prop_value_array);
-        return $clone_id;
+        return static::set_properties(null, $prop_value_array);
+    }
+
+    static function get_clones($id){
+        $clone_array = array();
+        $item_array = elgg_get_entities_from_metadata(
+            array(
+                'type' => static::TYPE,
+                'subtype' => static::SUBTYPE,
+                'metadata_names' => array("cloned_from"),
+                'metadata_values' => array($id),
+                'limit' => 0
+            )
+        );
+        foreach($item_array as $item){
+            $clone_array[] = $item->guid;
+        }
+        return $clone_array;
     }
 
     /**
