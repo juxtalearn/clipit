@@ -388,6 +388,27 @@ $(function(){
             singleFieldNode: that.closest("form").find("input[name=tags]")
         });
     });
+    $('ul#labels').each(function(){
+        that = $(this);
+        $(this).tagit({
+            allowSpaces: true,
+            removeConfirmation: true,
+            onTagExists: function(event, ui){
+            $(ui.existingTag).fadeIn("slow", function() {
+                $(this).addClass("selected");
+            }).fadeOut("slow", function() {
+                $(this).removeClass("selected");
+            });
+        },
+            autocomplete: {
+            delay: 0,
+                source: elgg.config.wwwroot+"ajax/view/publications/labels/search"
+            },
+            placeholderText: "<?php echo elgg_echo("tags:commas:separated");?>",
+            singleField: true,
+            singleFieldNode: that.closest("form").find("input[name=labels]")
+        });
+    });
     ///
     tinymce_setup();
     /*

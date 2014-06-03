@@ -7112,6 +7112,13 @@ fieldset[disabled] .btn-border-blue.active {
 .btn-border-blue:focus {
   color: #FFF;
 }
+.btn-border-blue.cancel:hover,
+.btn-border-blue.cancel:focus {
+  background: #fff;
+  border: 1px solid #32b4e5;
+  color: #32b4e5;
+  opacity: 0.7;
+}
 label {
   display: block;
 }
@@ -9199,6 +9206,221 @@ div.token-input-dropdown ul li.token-input-selected-dropdown-item .title,
 div.token-input-dropdown ul li.token-input-selected-dropdown-item .sub-title,
 div.token-input-dropdown ul li.token-input-selected-dropdown-item .img {
   color: #fff;
+}
+.chosen-container {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 13px;
+  zoom: 1;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+.chosen-container .chosen-choices {
+  overflow: hidden;
+  height: auto !important;
+  height: 1%;
+  cursor: text;
+  z-index: 999;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  list-style-type: none;
+  clear: left;
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.428571429;
+  color: #555555;
+  vertical-align: middle;
+  background-color: #ffffff;
+  background-image: none;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  -webkit-box-shadow: inset 0 1px 4px 0 rgba(0, 0, 0, 0.25), 0 0 0 4px rgba(225, 235, 240, 0.5);
+  box-shadow: inset 0 1px 4px 0 rgba(0, 0, 0, 0.25), 0 0 0 4px rgba(225, 235, 240, 0.5);
+  border-radius: 0;
+  border: 0px;
+  height: 35px;
+  font-size: 15px;
+  padding: 10px 16px;
+  line-height: 1.33;
+  padding: 5px 10px;
+}
+.chosen-container .chosen-choices:focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+}
+.chosen-container .chosen-choices:-moz-placeholder {
+  color: #999999;
+}
+.chosen-container .chosen-choices::-moz-placeholder {
+  color: #999999;
+  opacity: 1;
+}
+.chosen-container .chosen-choices:-ms-input-placeholder {
+  color: #999999;
+}
+.chosen-container .chosen-choices::-webkit-input-placeholder {
+  color: #999999;
+}
+.chosen-container .chosen-choices[disabled],
+.chosen-container .chosen-choices[readonly],
+fieldset[disabled] .chosen-container .chosen-choices {
+  cursor: not-allowed;
+  background-color: #eeeeee;
+}
+textarea.chosen-container .chosen-choices {
+  height: auto;
+}
+.chosen-container .chosen-choices:focus {
+  -webkit-box-shadow: inset 0 1px 4px 0 rgba(0, 0, 0, 0.25), 0 0 0 4px rgba(225, 235, 240, 0.5);
+  box-shadow: inset 0 1px 4px 0 rgba(0, 0, 0, 0.25), 0 0 0 4px rgba(225, 235, 240, 0.5);
+  border-color: none;
+}
+.chosen-container .chosen-choices li {
+  list-style-type: none;
+  float: left;
+}
+.chosen-container .chosen-choices li input {
+  border: 0;
+  width: 80%;
+  padding: 3px 8px;
+  margin: 3px;
+  background-color: white;
+  -webkit-appearance: caret;
+}
+.chosen-container .chosen-choices input {
+  outline: 0px;
+}
+.chosen-container .search-choice {
+  overflow: hidden;
+  height: auto !important;
+  height: 1%;
+  margin: 3px;
+  padding: 2px 5px;
+  background-color: #fff;
+  color: #32b4e5;
+  border: 1px solid #32b4e5;
+  font-weight: bold;
+  cursor: default;
+  border-radius: 4px;
+  -webkit-transition: all 0.25s linear;
+  transition: all 0.25s linear;
+  display: block;
+  float: left;
+}
+.chosen-container .search-choice:hover,
+.chosen-container .search-choicefocus {
+  background-color: #32b4e5;
+  color: #fff;
+}
+.chosen-container .search-choice .token-input-delete-token {
+  float: right;
+  margin-left: 5px;
+  color: #bae6f6;
+  cursor: pointer;
+}
+.chosen-container .search-choice .search-choice-close {
+  float: right;
+  margin-left: 5px;
+  margin-top: 1px;
+  color: #bae6f6;
+  cursor: pointer;
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.chosen-container .search-choice .search-choice-close:before {
+  content: "\f00d";
+}
+.chosen-container .search-choice .search-choice-close:active,
+.chosen-container .search-choice .search-choice-close:focus {
+  text-decoration: none;
+}
+.chosen-container .chosen-drop {
+  position: absolute;
+  top: 100%;
+  left: -9999px;
+  z-index: 1010;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  background: #fff;
+  border-top: 0;
+  font-size: 14px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  padding: 3px;
+}
+.chosen-container .chosen-drop .chosen-results {
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  max-height: 240px;
+  -webkit-overflow-scrolling: touch;
+}
+.chosen-container .chosen-drop .chosen-results li {
+  display: none;
+  margin: 0;
+  padding: 5px 6px;
+  list-style: none;
+  line-height: 15px;
+  -webkit-touch-callout: none;
+  border-bottom: 1px solid #eee;
+}
+.chosen-container .chosen-drop .chosen-results li > em {
+  font-style: normal;
+  text-decoration: underline;
+}
+.chosen-container .chosen-drop .chosen-results li:last-child {
+  border-bottom: 0;
+}
+.chosen-container .chosen-drop .chosen-results li.active-result {
+  display: list-item;
+  cursor: pointer;
+  color: #32b4e5;
+  font-weight: bold;
+}
+.chosen-container .chosen-drop .chosen-results li.group-result {
+  display: list-item;
+  font-weight: bold;
+  cursor: default;
+  border-bottom: 0;
+}
+.chosen-container .chosen-drop .chosen-results li.result-selected {
+  display: list-item;
+  color: #ccc;
+  cursor: default;
+}
+.chosen-container .chosen-drop .chosen-results li.no-results {
+  display: list-item;
+  background: #f4f4f4;
+}
+.chosen-container .chosen-drop .chosen-results li.highlighted {
+  background: #32b4e5;
+  color: #fff;
+}
+.chosen-container.chosen-with-drop .chosen-drop {
+  left: 0;
 }
 .ui-helper-hidden-accessible {
   border: 0;

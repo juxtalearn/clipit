@@ -14,8 +14,6 @@ $context = elgg_get_context();
     <li class="separator">|</li>
     <li><a href="<?php echo $CONFIG->wwwroot; ?>explore"><?php echo elgg_echo("explore");?></a></li>
     <li class="separator">|</li>
-    <li><a href="http://trickytopic.juxtalearn.net/">Tricky topic tool</a></li>
-    <li class="separator">|</li>
     <li>
         <a id="notifications" role="button" data-toggle="dropdown" href="javascript:;">
             <span class="badge">10</span>
