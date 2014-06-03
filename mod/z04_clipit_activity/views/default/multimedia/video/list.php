@@ -83,6 +83,21 @@ $rating = elgg_extract("rating", $vars);
                     <?php echo $description;?>
                 </p>
                 <small class="show">
+                    <?php
+                    if($vars['total_comments']):
+                        $total_comments = array_pop(ClipitComment::count_by_destination(array($video->id), true));
+                    ?>
+                        <!-- Count total comments -->
+                        <strong>
+                        <?php echo elgg_view('output/url', array(
+                        'href'  => "{$href}/view/{$video->id}#comments",
+                        'title' => elgg_echo('comments'),
+                        'class' => 'pull-right',
+                        'text'  => $total_comments. ' <i class="fa fa-comments"></i>'))
+                        ?>
+                        </strong>
+                        <!-- Count total comments end-->
+                    <?php endif; ?>
                     <?php echo elgg_view("publications/owner_summary", array(
                         'entity' => $video,
                         'entity_class' => 'ClipitVideo',

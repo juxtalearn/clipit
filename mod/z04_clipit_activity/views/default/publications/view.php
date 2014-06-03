@@ -14,6 +14,7 @@ $entity = elgg_extract("entity", $vars);
 $user_loggedin = elgg_get_logged_in_user_guid();
 $user_loggedin_elgg = new ElggUser($user_loggedin);
 $activity_id = elgg_get_page_owner_guid();
+$activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
 $tags = $entity->tag_array;
 $performance_average = ClipitPerformanceRating::get_average_target_rating($entity->id);
 $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->id))));
@@ -39,6 +40,36 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
                     <div class="tags">
                         <?php echo elgg_view("page/elements/tags", array('tags' => $tags)); ?>
                     </div>
+                    <h4><strong>Labels</strong></h4>
+                    <div class="labels">
+                        <?php echo elgg_view('output/url', array(
+                            'href'  => "javascript:;",
+                            'text'  => '<i style="margin-left: 10px;" class="fa fa-plus"></i>',
+                            'class' => 'pull-right',
+                            'onclick' => 'javascript:$(\'#add_labels\').toggle().find(\'input[type=text]\').focus();'
+                        ));
+                        ?>
+                        <small class="blue text-truncate">
+                            <span style="border-bottom: 1px dotted #32b4e5;">mola mucho</span>,
+                            <span style="border-bottom: 1px dotted #32b4e5;">comedia</span>
+                            <span style="border-bottom: 1px dotted #32b4e5;">lorem ipsum</span>
+                            <span style="border-bottom: 1px dotted #32b4e5;">lorem</span>
+                            <span style="border-bottom: 1px dotted #32b4e5;">lorem</span>
+                            <span style="border-bottom: 1px dotted #32b4e5;">lorem</span>
+                            <span style="border-bottom: 1px dotted #32b4e5;">Lorem ipsum dolor sit</span>
+                            <span style="border-bottom: 1px dotted #32b4e5;">Lorem ipsum dolor sit</span>
+                            <span style="border-bottom: 1px dotted #32b4e5;">Lorem ipsum dolor sit</span>
+                        </small>
+                    </div>
+                    <?php echo elgg_view("page/elements/labels", array('tags' => $tags)); ?>
+                    <?php echo elgg_view_form("publications/labels/add",
+                        array(
+                            'body' => elgg_view("publications/labels/add", array('entity_id' => $entity->id)),
+                            'id' => 'add_labels',
+                            'style' => 'display:none;background: #fafafa;padding: 10px;margin-top: 10px;',
+                        )
+                        );
+                    ?>
                     <h4><strong>Description</strong></h4>
                     <div class="description" data-shorten="true">
                         <?php echo $entity->description; ?>
@@ -120,7 +151,7 @@ if(!$hasRating):
 <?php echo elgg_view_form("publications/evaluate", array(
     'style' => 'background: #f1f2f7;padding: 20px;margin: 10px 0;',
     'data-validate' => 'true'),
-    array('entity' => $entity));
+    array('entity' => $entity, 'activity' => $activity));
 ?>
 <!-- Evaluate end -->
 <?php endif; ?>

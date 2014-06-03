@@ -47,7 +47,7 @@ if($entity->overall_rating){
 <div class="row">
     <div class="col-md-8">
         <label for="tricky-understand">
-            Does this video help you to understand Tricky Topic?
+            <?php echo elgg_echo('publications:question:tricky_topic',array(''));?>
         </label>
         <p class="show blue"><strong><?php echo $overall_rating;?></strong></p>
         <?php echo $tags_view;?>
@@ -55,7 +55,7 @@ if($entity->overall_rating){
     <div class="col-md-4">
         <div>
             <h4>
-                <strong>Rating</strong>
+                <strong><?php echo elgg_echo('publications:rating');?></strong>
             </h4>
             <ul><?php echo $performance_view;?> </ul>
         </div>

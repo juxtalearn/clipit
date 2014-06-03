@@ -29,7 +29,7 @@ function clipit_activity_init() {
     elgg_register_event_handler('pagesetup', 'system', 'activity_setup_sidebar_menus');
     elgg_register_event_handler('pagesetup', 'system', 'group_details_setup_menus');
 
-    // Register actions
+    // Register actions, ajax views
     // File
     elgg_register_action("files/upload", elgg_get_plugins_path() . "z04_clipit_activity/actions/files/upload.php");
     // Group
@@ -37,6 +37,8 @@ function clipit_activity_init() {
     elgg_register_action("group/leave", elgg_get_plugins_path() . "z04_clipit_activity/actions/group/leave.php");
     elgg_register_action("group/create", elgg_get_plugins_path() . "z04_clipit_activity/actions/group/create.php");
     elgg_register_action("group/remove_member", elgg_get_plugins_path() . "z04_clipit_activity/actions/group/remove_member.php");
+    // Tricky Topic
+    elgg_register_ajax_view('modal/tricky_topic/view');
     // Multimedia
     /* Videos */
     elgg_register_action("multimedia/videos/add", elgg_get_plugins_path() . "z04_clipit_activity/actions/multimedia/videos/add.php");
@@ -62,6 +64,7 @@ function clipit_activity_init() {
     // Publications
     elgg_register_action("publications/evaluate", elgg_get_plugins_path() . "z04_clipit_activity/actions/publications/evaluate.php");
     elgg_register_action("publications/publish", elgg_get_plugins_path() . "z04_clipit_activity/actions/publications/publish.php");
+    elgg_register_action("publications/labels/add", elgg_get_plugins_path() . "z04_clipit_activity/actions/publications/labels/add.php");
     elgg_register_ajax_view('modal/publications/rating');
     elgg_register_ajax_view('publications/tags/search');
     // Discussion
@@ -82,7 +85,7 @@ function clipit_activity_init() {
     // Raty js modified by clipit
     elgg_register_js('jquery:raty', elgg_get_site_url() . "mod/z04_clipit_activity/vendors/jquery.raty.js");
     elgg_load_js("jquery:raty");
-    // E
+    // Tag-it
     elgg_register_js('jquery:tag_it', elgg_get_site_url() . "mod/z04_clipit_activity/vendors/jquery.tag-it.min.js");
     elgg_load_js("jquery:tag_it");
 
@@ -188,7 +191,7 @@ function activity_page_handler($page) {
     $isCalled = ClipitActivity::get_called_users($activity->id);
     $hasGroup = ClipitGroup::get_from_user_activity($user_id, $activity->id);
     // Default status
-    $activity_status = array_pop(ClipitActivity::get_status($activity->id));
+    $activity_status = ClipitActivity::get_status($activity->id);
     // Check if activity exists
     if (!$activity ) {
         return false;
@@ -300,12 +303,14 @@ function activity_page_handler($page) {
                                 'href'      => $href,
                                 'rating'    => true,
                                 'actions'   => false,
+                                'total_comments' => true,
                             ));
                             $list_evaluated = elgg_view('multimedia/video/list', array(
                                 'videos'    => $evaluation_list["evaluated"],
                                 'href'      => $href,
                                 'rating'    => true,
                                 'actions'   => false,
+                                'total_comments' => true,
                             ));
                             if (!$entities) {
                                 $content = elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
@@ -524,7 +529,7 @@ function group_tools_page_handler($page, $activity){
     }
     elgg_push_breadcrumb($group->name);
     // set group icon status from activity status
-    $activity_status = array_pop(ClipitActivity::get_status($activity->id));
+    $activity_status = ClipitActivity::get_status($activity->id);
     $icon_status = "lock";
     if($activity_status == 'enroll'){
         $icon_status = "unlock";
@@ -670,7 +675,7 @@ function group_tools_page_handler($page, $activity){
                                 'activity' => $activity,
                                 'tags' => $tags,
                             ));
-                        $title =  elgg_echo("publish:to_activity", array($subtitle));
+                        $title =  elgg_echo("publish:to_activity", array($subtitle, $activity->name));
                         break;
                 }
                 elgg_push_breadcrumb($entity->name);

@@ -12,54 +12,9 @@
  */
 
 $entity = elgg_extract("entity", $vars);
+$activity = elgg_extract("activity", $vars);
 $tags = $entity->tag_array;
-//$t =  array(
-//    '1003' => array('is_used' => 0, 'comment' => 'blabla'),
-//    '1005' => array('is_used' => 1, 'comment' => 'mmmm')
-//);
-//$ts = array('tag_rating'=> $t);
-//print_r($ts);
-//foreach($ts['tag_rating'] as $id => $tvalue){
-//    echo $id." = ".$tvalue['comment']." \n";
-//}
-//$new_tag_rating_id = ClipitRating::create(array(
-//    'target'    => $entity->id,
-//    'overall_rating'    => 1, // Yes
-//));
-//// Tag rating create
-//$tags_rating[] = ClipitTagRating::create(array(
-//    'tag_id'    => 1003,
-//    'is_used'   => 0,
-//    'description'   => '<p>&iquest;Qu&eacute; es esto?</p>'
-//));
-//$tags_rating[] = ClipitTagRating::create(array(
-//    'tag_id'    => 1002,
-//    'is_used'   => 0,
-//    'description'   => '<p>Est&aacute; muy mal explicado, joder que mal</p>'
-//));
-//$tags_rating[] = ClipitTagRating::create(array(
-//    'tag_id'    => 1001,
-//    'is_used'   => 1,
-//    'description'   => ''
-//));
-//ClipitRating::add_tag_ratings($new_tag_rating_id, $tags_rating);
-//
-//$performance_ratings[] = ClipitPerformanceRating::create(array(
-//    'performance_item' => 1036,
-//    'star_rating'   => 1
-//));
-//$performance_ratings[] = ClipitPerformanceRating::create(array(
-//    'performance_item' => 1037,
-//    'star_rating'   => 3
-//));
-//$performance_ratings[] = ClipitPerformanceRating::create(array(
-//    'performance_item' => 1038,
-//    'star_rating'   => 5
-//));
-//
-//ClipitRating::add_performance_ratings($new_tag_rating_id, $performance_ratings);
-//
-//print_r(ClipitRating::get_all());
+$tricky_topic_view = elgg_view("tricky_topic/preview", array('activity' => $activity));
 ?>
 <script>
 $(function(){
@@ -84,7 +39,7 @@ $(function(){
 <div class="row">
     <div class="col-md-8">
         <label for="overall">
-            Does this video help you to understand Tricky Topic?
+            <?php echo elgg_echo('publications:question:tricky_topic',array($tricky_topic_view));?>
         </label>
         <?php echo elgg_view("input/hidden", array(
         'name' => 'entity-id',
@@ -100,7 +55,7 @@ $(function(){
             'class' => 'input-radios-horizontal blue',
         )); ?>
         <span class="show" style="margin-bottom: 10px;">
-            Check if each topic was covered in this video, and explain why:
+            <?php echo elgg_echo('publications:question:if_covered');?>
         </span>
         <?php
         foreach($tags as $tag_id):
@@ -122,7 +77,7 @@ $(function(){
                 <?php echo elgg_view("input/plaintext", array(
                     'name'  => "tag_rating[{$tag->id}][comment]",
                     'class' => 'form-control',
-                    'placeholder' => 'Why is/isn\'t this SB correctly covered?',
+                    'placeholder' => elgg_echo('publications:question:sb'),
                     'onclick'   => '$(this).addClass(\'mceEditor\');
                                     tinymce_setup();
                                     tinymce.execCommand(\'mceFocus\',false,this.id);',
@@ -135,19 +90,19 @@ $(function(){
     <div class="col-md-4">
         <div id="my-rating">
             <h4>
-                <strong>My rating</strong>
+                <strong><?php echo elgg_echo('publications:my_rating');?></strong>
             </h4>
             <ul>
-            <?php
-            $performance_items = $entity->performance_array;
-            foreach($performance_items as $performance_item_id):
-                $performance_item = array_pop(ClipitPerformanceItem::get_by_id(array($performance_item_id)));
-            ?>
-                <li class="list-item">
-                    <div class="rating" data-performance-id="<?php echo $performance_item->id;?>" style="color: #e7d333;float: right;font-size: 18px;margin: 0 10px;"></div>
-                    <label class="blue" for="performance_rating[<?php echo $performance_item->id;?>]" style="font-weight: normal;padding-top: 2px;margin: 0;"><?php echo $performance_item->name;?></label>
-                </li>
-            <?php endforeach; ?>
+                <?php
+                $performance_items = $entity->performance_array;
+                foreach($performance_items as $performance_item_id):
+                    $performance_item = array_pop(ClipitPerformanceItem::get_by_id(array($performance_item_id)));
+                ?>
+                    <li class="list-item">
+                        <div class="rating" data-performance-id="<?php echo $performance_item->id;?>" style="color: #e7d333;float: right;font-size: 18px;margin: 0 10px;"></div>
+                        <label class="blue" for="performance_rating[<?php echo $performance_item->id;?>]" style="font-weight: normal;padding-top: 2px;margin: 0;"><?php echo $performance_item->name;?></label>
+                    </li>
+                <?php endforeach; ?>
             </ul>
         </div>
     </div>
@@ -156,7 +111,7 @@ $(function(){
 <?php echo elgg_view('input/submit',
     array(
         'value' => elgg_echo('submit'),
-        'class' => "btn btn-primary"
+        'class' => "btn btn-primary pull-right"
     ));
 ?>
 </div>

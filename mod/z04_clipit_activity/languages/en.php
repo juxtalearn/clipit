@@ -94,6 +94,8 @@ $english = array(
     // Storyboards
     'storyboards:none' => 'No storyboards',
     'multimedia:storyboards:add' => 'Add storyboards',
+    // Tricky Topic
+    'tricky_topic' => 'Tricky Topic',
     // Publications
     'publications:no_evaluated' => 'Not evaluated',
     'publications:evaluated' => 'Evaluated',
@@ -103,15 +105,22 @@ $english = array(
     'publications:starsrequired' => 'Stars rating required',
     'publications:cantrating' => 'Can not rating',
     'publications:rated' => 'Successfully evaluated',
+    'publications:my_rating' => 'My rating',
+    'publications:question:tricky_topic' => 'Does this video help you understand the %s Tricky Topic?',
+    'publications:question:sb' => 'Why is/isn\'t this tag correctly covered?',
+    'publications:question:if_covered' => 'Check if each topic was covered in this video, and explain why:',
     'input:no' => 'No',
     'input:yes' => 'Yes',
     'publish'   => 'Publish',
     'published'   => 'Published',
-    'publish:to_activity'   => 'Publish %s to activity',
+    'publish:to_activity'   => 'Publish %s in %s',
     'publish:video'   => 'Publish video',
+    // Labels
+    'labels' => 'Labels',
     // Tags
     'tags:commas:separated' => 'Separated by commas',
     // Performance items
+    'performance_items' => 'Performance items',
     'performance_item:select' => 'Select performance items',
     'performance_item:info' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus dapibus lacus at nisl pharetra faucibus dapibus lacus',
 
