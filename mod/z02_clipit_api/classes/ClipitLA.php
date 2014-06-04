@@ -13,12 +13,19 @@
  */
 
 class ClipitLA extends UBFile{
-
+    /**
+     * @const string Elgg entity SUBTYPE for this class
+     */
     const SUBTYPE = "ClipitLA";
 
     public $return_id = 0;
     public $status_code = 0;
 
+    /**
+     * Loads object parameters stored in Elgg
+     *
+     * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
+     */
     protected function load_from_elgg($elgg_file){
         parent::load_from_elgg($elgg_file);
         $this->return_id = (int)$elgg_file->get("return_id");
@@ -26,8 +33,9 @@ class ClipitLA extends UBFile{
     }
 
     /**
-     * Saves this instance to the system
-     * @param ElggFile $elgg_file Elgg file instance to save Item to
+     * Copy $this file parameters into an Elgg File entity.
+     *
+     * @param ElggFile $elgg_file Elgg object instance to save $this to
      */
     protected function copy_to_elgg($elgg_file){
         parent::copy_to_elgg($elgg_file);

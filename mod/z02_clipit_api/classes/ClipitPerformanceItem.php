@@ -7,18 +7,31 @@
  */
 
 class ClipitPerformanceItem extends UBItem{
+    /**
+     * @const string Elgg entity SUBTYPE for this class
+     */
     const SUBTYPE = "ClipitPerformanceItem";
 
     public $category = "";
 
+    /**
+     * Loads object parameters stored in Elgg
+     *
+     * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
+     */
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
         $this->category = (int)$elgg_object->get("category");
     }
 
-    protected function copy_to_elgg($elgg_object){
-        parent::copy_to_elgg($elgg_object);
-        $elgg_object->set("category", (int)$this->category);
+    /**
+     * Copy $this object parameters into an Elgg entity.
+     *
+     * @param ElggEntity $elgg_entity Elgg object instance to save $this to
+     */
+    protected function copy_to_elgg($elgg_entity){
+        parent::copy_to_elgg($elgg_entity);
+        $elgg_entity->set("category", (int)$this->category);
     }
 
 } 

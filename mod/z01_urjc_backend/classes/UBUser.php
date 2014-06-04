@@ -18,11 +18,12 @@
  */
 class UBUser extends UBItem{
     /**
-     * @const string Elgg entity type for this class
-     * @const string Elgg entity subtype for this class
-     * @const string Default User Role if not specified
+     * @const string Elgg entity TYPE for this class
      */
     const TYPE = "user";
+    /**
+     * @const string Elgg entity SUBTYPE for this class
+     */
     const SUBTYPE = "";
 
     /**
@@ -40,6 +41,13 @@ class UBUser extends UBItem{
     public $last_login = 0;
     private $hash = "";
 
+    /**
+     * Constructor
+     *
+     * @param int $id If !null, load instance.
+     *
+     * @throws APIException
+     */
     function __construct($id = null){
         if(!empty($id)){
             if(!($elgg_user = new ElggUser($id))){
@@ -53,8 +61,6 @@ class UBUser extends UBItem{
      * Loads a User instance from the system.
      *
      * @param ElggUser $elgg_user User to load from the system.
-     *
-     * @return UBUser|bool Returns User instance, or false if error.
      */
     protected function load_from_elgg($elgg_user){
         parent::load_from_elgg($elgg_user);
@@ -85,7 +91,7 @@ class UBUser extends UBItem{
     }
 
     /**
-     * Deletes an instance from the system.
+     * Deletes $this instance from the system.
      *
      * @return bool True if success, false if error.
      */
@@ -97,7 +103,9 @@ class UBUser extends UBItem{
     }
 
     /**
-     * @param ElggUser $elgg_user
+     * Copy $this user parameters into an Elgg User entity.
+     *
+     * @param ElggUser $elgg_user Elgg User object instance to save $this to
      */
     protected function copy_to_elgg($elgg_user){
         parent::copy_to_elgg($elgg_user);
@@ -132,12 +140,12 @@ class UBUser extends UBItem{
     }
 
     /**
-     * Sets values to specified properties of an Item
+     * Sets values to specified properties of a User
      *
-     * @param int   $id Id of Item to set property valyes
-     * @param array $prop_value_array Array of property=>value pairs to set into the Item
+     * @param int   $id Id of User to set property values
+     * @param array $prop_value_array Array of property=>value pairs to set into the User
      *
-     * @return int|bool Returns Id of Item if correct, or false if error
+     * @return int|bool Returns Id of User if correct, or false if error
      * @throws InvalidParameterException
      */
     static function set_properties($id, $prop_value_array){
@@ -193,7 +201,7 @@ class UBUser extends UBItem{
      *
      * @param array $login_array Array of user logins
      *
-     * @return UBUser[] Returns an array of User objects
+     * @return static[] Returns an array of User objects
      */
     static function get_by_login($login_array){
         $user_array = array();
@@ -215,7 +223,7 @@ class UBUser extends UBItem{
      *
      * @param array $email_array Array of user emails
      *
-     * @return UBUser[] Returns an array of arrays of User objects
+     * @return static[] Returns an array of arrays of User objects
      */
     static function get_by_email($email_array){
         $user_array = array();
@@ -239,7 +247,7 @@ class UBUser extends UBItem{
      *
      * @param array $role_array Array of user roles
      *
-     * @return UBUser[] Returns an array of arrays of User objects
+     * @return static[] Returns an array of arrays of User objects
      */
     static function get_by_role($role_array){
         $user_array = array();

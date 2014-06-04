@@ -14,7 +14,6 @@
 
 /**
  * Class UBCollection
- *
  */
 abstract class UBCollection{
 

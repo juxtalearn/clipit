@@ -13,22 +13,34 @@
  */
 
 class ClipitPerformanceRating extends UBItem {
-
+    /**
+     * @const string Elgg entity SUBTYPE for this class
+     */
     const SUBTYPE = "ClipitPerformanceRating";
 
     public $performance_item = 0;
     public $star_rating = null;
 
+    /**
+     * Loads object parameters stored in Elgg
+     *
+     * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
+     */
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
         $this->performance_item = (int)$elgg_object->get("performance_item");
         $this->star_rating = (int)$elgg_object->get("star_rating");
     }
 
-    protected function copy_to_elgg($elgg_object){
-        parent::copy_to_elgg($elgg_object);
-        $elgg_object->set("performance_item", (int)$this->performance_item);
-        $elgg_object->set("star_rating", (int)$this->star_rating);
+    /**
+     * Copy $this object parameters into an Elgg entity.
+     *
+     * @param ElggEntity $elgg_entity Elgg object instance to save $this to
+     */
+    protected function copy_to_elgg($elgg_entity){
+        parent::copy_to_elgg($elgg_entity);
+        $elgg_entity->set("performance_item", (int)$this->performance_item);
+        $elgg_entity->set("star_rating", (int)$this->star_rating);
     }
 
     static function get_by_item($item_array){

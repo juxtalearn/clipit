@@ -57,11 +57,10 @@ class UBItem{
      */
     public $clone_array = array();
 
-    /* Instance Functions */
     /**
      * Constructor
      *
-     * @param int $id If $id is null, create new instance; else load instance with id = $id.
+     * @param int $id If !null, load instance.
      *
      * @throws APIException
      */
@@ -100,6 +99,8 @@ class UBItem{
     }
 
     /**
+     * Loads object parameters stored in Elgg
+     *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
     protected function load_from_elgg($elgg_entity){
@@ -114,7 +115,9 @@ class UBItem{
     }
 
     /**
-     * @param ElggEntity $elgg_entity Elgg object instance to save Item to
+     * Copy $this object parameters into an Elgg entity.
+     *
+     * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
     protected function copy_to_elgg($elgg_entity){
         $elgg_entity->set("name", (string)$this->name);
@@ -125,7 +128,7 @@ class UBItem{
     }
 
     /**
-     * Deletes an instance from the system.
+     * Deletes $this instance from the system.
      *
      * @return bool True if success, false if error.
      */
@@ -183,7 +186,7 @@ class UBItem{
     /**
      * Sets values to specified properties of an Item
      *
-     * @param int   $id Id of Item to set property valyes
+     * @param int   $id Id of Item to set property values
      * @param array $prop_value_array Array of property=>value pairs to set into the Item
      *
      * @return int|bool Returns Id of Item if correct, or false if error
@@ -219,6 +222,8 @@ class UBItem{
     }
 
     /**
+     * Clone the specified Item, including all of its properties.
+     *
      * @param int $id Item id from which to create a clone.
      * @return bool|int Id of the new clone Item, false in case of error.
      */
@@ -228,6 +233,12 @@ class UBItem{
         return static::set_properties(null, $prop_value_array);
     }
 
+    /**
+     * Get an ID array of all cloned Items from a specified one.
+     *
+     * @param int $id Item from which to return clones
+     * @return int[] Array of Item IDs
+     */
     static function get_clones($id){
         $clone_array = array();
         $item_array = elgg_get_entities_from_metadata(
@@ -249,7 +260,6 @@ class UBItem{
      * Delete Items given their Id.
      *
      * @param array $id_array List of Item Ids to delete
-     *
      * @return bool Returns true if correct, or false if error
      */
     static function delete_by_id($id_array){
@@ -265,11 +275,10 @@ class UBItem{
     }
 
     /**
-     * Get all Objects of this TYPE/SUBTYPE from the system.
+     * Get all Objects of this TYPE and SUBTYPE from the system.
      *
      * @param int $limit Number of results to show, default= 0 [no limit] (optional)
-     *
-     * @return UBItem[] Returns an array of Objects
+     * @return static[] Returns an array of Objects
      */
     static function get_all($limit = 0){
         $object_array = array();
@@ -283,7 +292,7 @@ class UBItem{
                 $object_array[(int)$elgg_object->guid] = new static((int)$elgg_object->guid);
             }
         }
-        usort($object_array, 'UBItem::sort_by_date_inv');
+        usort($object_array, 'static::sort_by_date_inv');
         return $object_array;
     }
 
@@ -291,8 +300,7 @@ class UBItem{
      * Get Objects with id contained in a given list.
      *
      * @param array $id_array Array of Object Ids
-     *
-     * @return UBItem[] Returns an array of Objects
+     * @return static[] Returns an array of Objects
      */
     static function get_by_id($id_array){
         $object_array = array();
@@ -306,6 +314,12 @@ class UBItem{
         return $object_array;
     }
 
+    /**
+     * Get Items with Owner Id contained in a given list.
+     *
+     * @param array $owner_array Array of Owner Ids
+     * @return static[] Returns an array of Items
+     */
     static function get_by_owner($owner_array, $limit = 0){
         $object_array = array();
         foreach($owner_array as $owner_id){
@@ -323,7 +337,7 @@ class UBItem{
             }
             if(!empty($temp_array)){
                 $object_array[(int)$owner_id] = $temp_array;
-                usort($object_array[(int)$owner_id], 'UBItem::sort_by_date');
+                usort($object_array[(int)$owner_id], 'static::sort_by_date');
             } else{
                 $object_array[(int)$owner_id] = null;
             }
@@ -331,7 +345,14 @@ class UBItem{
         return $object_array;
     }
 
-    static function get_events($limit = 10){
+    /**
+     * Gett all system events filtered by the class TYPE and SUBTYPE.
+     *
+     * @param int $offset Skip the first $offset events
+     * @param int $limit Return at most $limit events
+     * @return array Array of system events
+     */
+    static function get_events($offset = 0, $limit = 10){
         return get_system_log(
             null, // $by_user = ""
             null, // $event = ""
@@ -339,7 +360,7 @@ class UBItem{
             static::TYPE, // $type = ""
             static::SUBTYPE, // $subtype = ""
             $limit, // $limit = 10
-            null, // $offset = 0
+            $offset, // $offset = 0
             null, // $count = false
             null, // $timebefore = 0
             null, // $timeafter = 0
@@ -347,6 +368,14 @@ class UBItem{
             null); // $ip_address = ""
     }
 
+    /**
+     * Get all objects which match a $search_string
+     *
+     * @param string $search_string String for searching matching objects
+     * @param bool $name_only Whether to look only in the name property, default false.
+     * @param bool $strict Whether to match the $search_string exactly, including case, or only partially.
+     * @return static[] An array of matched objects
+     */
     static function get_from_search($search_string, $name_only = false, $strict = false){
         $search_result = array();
         if(!$strict) {
@@ -393,9 +422,9 @@ class UBItem{
     /**
      * Sort by Date, oldest to newest.
      *
-     * @param UBItem $i1
-     * @param UBItem $i2
-     * @return int Returns 0 if equal, -1 if i1 < i2, 1 if i1 > i2.
+     * @param static $i1
+     * @param static $i2
+     * @return int Returns 0 if equal, -1 if i1 before i2, 1 if i1 after i2.
      */
     static function sort_by_date($i1, $i2){
         if((int)$i1->time_created == (int)$i2->time_created){
@@ -407,9 +436,9 @@ class UBItem{
     /**
      * Sort by Date Inverse order, newest to oldest.
      *
-     * @param UBItem $i1
-     * @param UBItem $i2
-     * @return int Returns 0 if equal, -1 if i1 < i2, 1 if i1 > i2.
+     * @param static $i1
+     * @param static $i2
+     * @return int Returns 0 if equal, -1 if i1 before i2, 1 if i1 after i2.
      */
     static function sort_by_date_inv($i1, $i2){
         if((int)$i1->time_created == (int)$i2->time_created){
@@ -419,34 +448,52 @@ class UBItem{
     }
 
     /**
- * @param UBItem $i1
- * @param UBItem $i2
- * @return int Returns 0 if equal, -1 if i1 < i2, 1 if i1 > i2.
- */
+     * Sort by Name, in alphabetical order.
+     *
+     * @param static $i1
+     * @param static $i2
+     * @return int Returns 0 if equal, -1 if i1 before i2, 1 if i1 after i2.
+     */
     static function sort_by_name($i1, $i2){
         return strcmp($i1->name, $i2->name);
     }
 
     /**
-     * @param UBItem $i1
-     * @param UBItem $i2
-     * @return int Returns 0 if equal, -1 if i1 < i2, 1 if i1 > i2.
+     * Sort by Name, in inverse alphabetical order.
+     *
+     * @param static $i1
+     * @param static $i2
+     * @return int Returns 0 if equal, -1 if i1 before i2, 1 if i1 after i2.
      */
     static function sort_by_name_inv($i1, $i2){
         return strcmp($i2->name, $i1->name);
     }
 
-    static function sort_numbers($n1, $n2){
-        if((int)$n1 == (int)$n2){
+    /**
+     * Sort numbers, in increasing order.
+     *
+     * @param float $n1
+     * @param float $n2
+     * @return int Returns 0 if equal, -1 if i1 before i2, 1 if i1 after i2.
+     */
+    static function sort_numbers($i1, $i2){
+        if((int)$i1 == (int)$i2){
             return 0;
         }
-        return ((int)$n1 < (int)$n2) ? -1 : 1;
+        return ((int)$i1 < (int)$i2) ? -1 : 1;
     }
 
-    static function sort_numbers_inv($n1, $n2){
-        if((int)$n1 == (int)$n2){
+    /**
+     * Sort numbers, in decreasing order.
+     *
+     * @param float $n1
+     * @param float $n2
+     * @return int Returns 0 if equal, -1 if i1 before i2, 1 if i1 after i2.
+     */
+    static function sort_numbers_inv($i1, $i2){
+        if((int)$i1 == (int)$i2){
             return 0;
         }
-        return ((int)$n1 > (int)$n2) ? -1 : 1;
+        return ((int)$i1 > (int)$i2) ? -1 : 1;
     }
 }

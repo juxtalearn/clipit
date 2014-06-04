@@ -16,7 +16,9 @@
 
  */
 class UBSite{
-
+    /**
+     * @const string Elgg entity SUBTYPE for this class
+     */
     const SUBTYPE = "UBSite";
 
     /**
