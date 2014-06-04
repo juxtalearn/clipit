@@ -45,7 +45,7 @@ class ClipitQuizQuestion extends UBItem{
      */
     public $video = 0;
     /**
-     * @var int Difficulty of the QuizQuestion, in a numeric scale from X to Y.
+     * @var int Difficulty of the QuizQuestion, in an integer scale from 1 to 10.
      */
     public $difficulty = 0;
 
