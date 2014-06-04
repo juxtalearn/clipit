@@ -13,21 +13,31 @@
  */
 
 class ClipitPost extends UBMessage{
+    /**
+     * @const string Elgg entity SUBTYPE for this class
+     */
     const SUBTYPE = "ClipitPost";
 
     public $topic_id = 0;
 
+    /**
+     * Loads object parameters stored in Elgg
+     *
+     * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
+     */
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
         $this->topic_id = (int)$elgg_object->get("topic_id");
     }
 
     /**
-     * @param ElggObject $elgg_object Elgg object instance to save Item to
+     * Copy $this object parameters into an Elgg entity.
+     *
+     * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function copy_to_elgg($elgg_object){
-        parent::copy_to_elgg($elgg_object);
-        $elgg_object->set("topic_id", $this->topic_id);
+    protected function copy_to_elgg($elgg_entity){
+        parent::copy_to_elgg($elgg_entity);
+        $elgg_entity->set("topic_id", $this->topic_id);
     }
 
 } 

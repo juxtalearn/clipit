@@ -17,5 +17,8 @@
  *
  */
 class ClipitComment extends UBMessage{
+    /**
+     * @const string Elgg entity SUBTYPE for this class
+     */
     const SUBTYPE = "ClipitComment";
 }

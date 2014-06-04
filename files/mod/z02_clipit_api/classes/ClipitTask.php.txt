@@ -16,6 +16,9 @@
  * Class ClipitTask
  */
 class ClipitTask extends UBItem{
+    /**
+     * @const string Elgg entity SUBTYPE for this class
+     */
     const SUBTYPE = "ClipitTask";
 
     /**

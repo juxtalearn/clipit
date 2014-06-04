@@ -18,11 +18,12 @@
  */
 class UBUser extends UBItem{
     /**
-     * @const string Elgg entity type for this class
-     * @const string Elgg entity subtype for this class
-     * @const string Default User Role if not specified
+     * @const string Elgg entity TYPE for this class
      */
     const TYPE = "user";
+    /**
+     * @const string Elgg entity SUBTYPE for this class
+     */
     const SUBTYPE = "";
 
     /**
@@ -40,6 +41,13 @@ class UBUser extends UBItem{
     public $last_login = 0;
     private $hash = "";
 
+    /**
+     * Constructor
+     *
+     * @param int $id If !null, load instance.
+     *
+     * @throws APIException
+     */
     function __construct($id = null){
         if(!empty($id)){
             if(!($elgg_user = new ElggUser($id))){
@@ -97,7 +105,9 @@ class UBUser extends UBItem{
     }
 
     /**
-     * @param ElggUser $elgg_user
+     * Copy $this user parameters into an Elgg User entity.
+     *
+     * @param ElggUser $elgg_user Elgg User object instance to save $this to
      */
     protected function copy_to_elgg($elgg_user){
         parent::copy_to_elgg($elgg_user);

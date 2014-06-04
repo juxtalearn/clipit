@@ -16,15 +16,18 @@
  * Class ClipitStoryboard
  *
  */
-class ClipitStoryboard extends ClipitMaterial{
+class ClipitStoryboard extends ClipitPublication{
+    /**
+     * @const string Elgg entity SUBTYPE for this class
+     */
     const SUBTYPE = "ClipitStoryboard";
 
-    const REL_MATERIAL_TAG = "storyboard-tag";
-    const REL_MATERIAL_LABEL = "storyboard-label";
-    const REL_MATERIAL_COMMENT = "storyboard-comment";
-    const REL_MATERIAL_PERFORMANCE = "storyboard-performance";
+    const REL_PUBLICATION_TAG = "storyboard-tag";
+    const REL_PUBLICATION_LABEL = "storyboard-label";
+    const REL_PUBLICATION_COMMENT = "storyboard-comment";
+    const REL_PUBLICATION_PERFORMANCE = "storyboard-performance";
 
-    const REL_GROUP_MATERIAL = "group-storyboard";
-    const REL_ACTIVITY_MATERIAL = "activity-storyboard";
-    const REL_SITE_MATERIAL = "site-storyboard";
+    const REL_GROUP_PUBLICATION = "group-storyboard";
+    const REL_ACTIVITY_PUBLICATION = "activity-storyboard";
+    const REL_SITE_PUBLICATION = "site-storyboard";
 }

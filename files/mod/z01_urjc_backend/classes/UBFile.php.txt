@@ -21,7 +21,7 @@ class UBFile extends UBItem{
      */
     const SUBTYPE = "UBFile";
     /**
-     * @const string Delimiter for timestamp string
+     * Class constants
      */
     const TIMESTAMP_DELIMITER = "#";
     const DEFAULT_FILENAME = "unnamed_file";
@@ -29,7 +29,7 @@ class UBFile extends UBItem{
     const THUMB_NORMAL = 128;
     const THUMB_LARGE = 256;
     /**
-     * @var string File data in byte string format.
+     * Class variables
      */
     public $data = null;
     public $size = 0;
@@ -40,12 +40,10 @@ class UBFile extends UBItem{
     public $thumb_large = array();
     public $mime_type = array();
 
-
-    /* Instance Functions */
     /**
      * Constructor
      *
-     * @param int $id If $id is null, create new instance; else load instance with id = $id.
+     * @param int $id If !null, load instance.
      *
      * @throws APIException
      */
@@ -59,6 +57,8 @@ class UBFile extends UBItem{
     }
 
     /**
+     * Loads object parameters stored in Elgg
+     *
      * @param ElggFile $elgg_file
      */
     protected function load_from_elgg($elgg_file){
@@ -85,7 +85,7 @@ class UBFile extends UBItem{
     }
 
     /**
-     * Saves this instance to the system.
+     * Saves this instance into the system.
      *
      * @return bool|int Returns id of saved instance, or false if error.
      */
@@ -107,8 +107,9 @@ class UBFile extends UBItem{
 
 
     /**
-     * Saves this instance to the system
-     * @param ElggFile $elgg_file Elgg file instance to save Item to
+     * Copy $this file parameters into an Elgg File entity.
+     *
+     * @param ElggFile $elgg_file Elgg object instance to save $this to
      */
     protected function copy_to_elgg($elgg_file){
         if($this->time_created == 0){ // new file

@@ -57,11 +57,10 @@ class UBItem{
      */
     public $clone_array = array();
 
-    /* Instance Functions */
     /**
      * Constructor
      *
-     * @param int $id If $id is null, create new instance; else load instance with id = $id.
+     * @param int $id If !null, load instance.
      *
      * @throws APIException
      */
@@ -100,6 +99,8 @@ class UBItem{
     }
 
     /**
+     * Loads object parameters stored in Elgg
+     *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
     protected function load_from_elgg($elgg_entity){
@@ -114,7 +115,9 @@ class UBItem{
     }
 
     /**
-     * @param ElggEntity $elgg_entity Elgg object instance to save Item to
+     * Copy $this object parameters into an Elgg entity.
+     *
+     * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
     protected function copy_to_elgg($elgg_entity){
         $elgg_entity->set("name", (string)$this->name);

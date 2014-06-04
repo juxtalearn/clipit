@@ -18,7 +18,7 @@
  */
 class ClipitQuiz extends UBItem{
     /**
-     * @const string Elgg entity subtype for this class
+     * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitQuiz";
     const REL_QUIZ_QUIZQUESTION = "quiz-quiz_question";
@@ -43,6 +43,11 @@ class ClipitQuiz extends UBItem{
     public $scores_url = "";
     public $author_name = "";
 
+    /**
+     * Loads object parameters stored in Elgg
+     *
+     * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
+     */
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
         $this->quiz_question_array = static::get_quiz_questions($this->id);
@@ -55,18 +60,25 @@ class ClipitQuiz extends UBItem{
     }
 
     /**
-     * @param ElggObject $elgg_object Elgg object instance to save Item to
+     * Copy $this object parameters into an Elgg entity.
+     *
+     * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function copy_to_elgg($elgg_object){
-        parent::copy_to_elgg($elgg_object);
-        $elgg_object->set("public", (bool)$this->public);
-        $elgg_object->set("tricky_topic", (int)$this->tricky_topic);
-        $elgg_object->set("target", (string)$this->target);
-        $elgg_object->set("embed_url", (string) $this->embed_url);
-        $elgg_object->set("scores_url", (string) $this->scores_url);
-        $elgg_object->set("author_name", (string) $this->author_name);
+    protected function copy_to_elgg($elgg_entity){
+        parent::copy_to_elgg($elgg_entity);
+        $elgg_entity->set("public", (bool)$this->public);
+        $elgg_entity->set("tricky_topic", (int)$this->tricky_topic);
+        $elgg_entity->set("target", (string)$this->target);
+        $elgg_entity->set("embed_url", (string) $this->embed_url);
+        $elgg_entity->set("scores_url", (string) $this->scores_url);
+        $elgg_entity->set("author_name", (string) $this->author_name);
     }
 
+    /**
+     * Saves this instance into the system.
+     *
+     * @return bool|int Returns id of saved instance, or false if error.
+     */
     protected function save(){
         parent::save();
         static::set_quiz_questions($this->id, $this->quiz_question_array);

@@ -17,7 +17,9 @@
  *
  */
 class ClipitSite extends UBSite{
-
+    /**
+     * @const string Elgg entity SUBTYPE for this class
+     */
     const SUBTYPE = "ClipitSite";
 
     const REL_SITE_VIDEO = "site-video";

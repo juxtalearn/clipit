@@ -18,7 +18,7 @@
  */
 class ClipitRating extends UBItem{
     /**
-     * @const string Elgg entity subtype for this class
+     * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitRating";
 
@@ -40,6 +40,11 @@ class ClipitRating extends UBItem{
     public $performance_rating_array = array();
 
 
+    /**
+     * Loads object parameters stored in Elgg
+     *
+     * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
+     */
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
         $this->target = (int)$elgg_object->get("target");
@@ -49,14 +54,21 @@ class ClipitRating extends UBItem{
     }
 
     /**
-     * @param ElggObject $elgg_object Elgg object instance to save Item to
+     * Copy $this object parameters into an Elgg entity.
+     *
+     * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function copy_to_elgg($elgg_object){
-        parent::copy_to_elgg($elgg_object);
-        $elgg_object->set("target", (int)$this->target);
-        $elgg_object->set("overall", (bool)$this->overall);
+    protected function copy_to_elgg($elgg_entity){
+        parent::copy_to_elgg($elgg_entity);
+        $elgg_entity->set("target", (int)$this->target);
+        $elgg_entity->set("overall", (bool)$this->overall);
     }
 
+    /**
+     * Saves this instance into the system.
+     *
+     * @return bool|int Returns id of saved instance, or false if error.
+     */
     protected function save(){
         parent::save();
         static::set_tag_ratings($this->id, (array)$this->tag_rating_array, static::REL_RATING_TAGRATING);
