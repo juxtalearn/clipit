@@ -13,31 +13,10 @@ $group_id = ClipitGroup::get_from_user_activity($user_id, $activity_id);
 $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
 
 $header = "<h3 class='text-truncate' title='{$group->name}'>
-            <a class='group-menu toggle-menu-link' id='group-menu' data-toggle='dropdown' href='javascript:;'>
-                <i class='fa fa-bars' title='".elgg_echo("group:menu")."'></i>
-            </a>
             {$group->name}
            </h3>";
-// Group menu settings
-$params = array(
-    'name' => 'group_edit',
-    'text' => elgg_echo('group:edit'),
-    'href' => "clipit_activity/{$activity_id}/group/edit",
-);
-elgg_register_menu_item('group_menu', $params);
-$params = array(
-    'name' => 'group_members',
-    'text' => elgg_echo('group:members'),
-    'href' => "clipit_activity/{$activity_id}/group/members",
-);
-elgg_register_menu_item('group_menu', $params);
 
-$header .= elgg_view_menu('group_menu', array(
-    'sort_by' => 'name',
-    'class' => 'toggle-menu',
-));
-
-$body .= "<small>Progress</small>";
+$body .= "<small>".elgg_echo('group:progress')."</small>";
 $params_progress = array(
     'value' => 30,
     'width' => '100%',

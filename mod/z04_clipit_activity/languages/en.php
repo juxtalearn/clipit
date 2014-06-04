@@ -16,7 +16,7 @@ $english = array(
     'my_activities' => 'My activities',
     'activities:none' => 'There are no activities...',
     'explore' => 'Explore',
-    'past' => 'Past',
+    'past' => 'Finished',
     'activity:profile' => 'Activity home',
     'activity:groups' => 'Groups',
     'activity:discussion' => 'Activity discussion',
@@ -25,6 +25,11 @@ $english = array(
     'activity:join' => 'Join activity',
     'activity:next_deadline' => 'Next deadline',
     'activity:quiz' => 'Activity Quiz',
+    'activity:teachers' => 'Teachers',
+    // Activity status
+    'status:enroll' => 'Enrolling',
+    'status:active' => 'Active',
+    'status:closed' => 'Finished',
 
     'group:join' => 'Join',
     'group:leave' => 'Leave',
@@ -47,10 +52,11 @@ $english = array(
     'group:tools' => 'Group tools',
     'group:discussion' => 'Discussions',
     'group:files' => 'Multimedia',
+    'group:home' => 'Group home',
     'group:activity_log' => 'Activity log',
     'group:progress' => 'Progress',
     'group:edit' => 'Group edit',
-    'group:members' => 'Group members',
+    'group:members' => 'Members',
     // Discussion
     'discussion:created' => 'Discussion created',
     'discussion:cantcreate' => 'You can not create a discussion',

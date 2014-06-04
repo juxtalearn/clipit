@@ -22,7 +22,7 @@ switch($object['subtype']){
         echo elgg_view('output/url', array(
             'href'  => "clipit_activity/".$author_id,
             'title' => $object['name'],
-            'class' => 'show',
+            'class' => 'show text-truncate',
             'text'  => $object['name'],
         ));
         break;
@@ -33,7 +33,7 @@ if($object['type'] == 'user'){
     echo elgg_view('output/url', array(
         'href'  => "profile/".$user->login,
         'title' => $user->name,
-        'class' => 'show',
+        'class' => 'show text-truncate',
         'text'  => $user->name,
     ));
 }

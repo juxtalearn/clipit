@@ -11,14 +11,14 @@
  * @package         ClipIt
  */
 $teachers = elgg_extract("teachers", $vars);
+$body = '
+    <ul style="background: #fff; padding: 10px;">';
+        foreach($teachers as $teacher_id){
+            $teacher = array_pop(ClipitUser::get_by_id(array($teacher_id)));
+            $body .='<li class="list-item">
+                '.elgg_view("page/elements/user_block", array("entity" => $teacher)).'
+            </li>';
+        }
+    $body .='</ul>';
+echo elgg_view_module('aside', elgg_echo('activity:teachers'), $body );
 ?>
-<h3 style="color: #32b4e5; margin-top: 5px;">Teachers</h3>
-<ul style="background: #fff; padding: 10px;">
-    <?php foreach($teachers as $teacher_id):
-        $teacher = array_pop(ClipitUser::get_by_id(array($teacher_id)));
-    ?>
-    <li class="list-item">
-        <?php echo elgg_view("page/elements/user_block", array('entity' => $teacher)); ?>
-    </li>
-    <?php endforeach; ?>
-</ul>

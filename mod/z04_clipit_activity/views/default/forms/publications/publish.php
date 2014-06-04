@@ -130,22 +130,6 @@ $(function(){
                     <option>Video diary</option>
                 </optgroup>
             </select>
-            <ul>
-                <li class="list-item">item</li>
-                <li class="list-item">item</li>
-                <li class="list-item">item</li>
-            </ul>
-        </div>
-        <div class="multiple-check form-control">
-            <a href="javascript:;"><h4>- Learning</h4></a>
-            <div class="check-group">
-            <?php foreach(ClipitPerformanceItem::get_all() as $performance_item): ?>
-                <label for="pi_<?php echo $performance_item->id;?>">
-                    <input type="checkbox" name="performance_items[]" value="<?php echo $performance_item->id;?>" id="pi_<?php echo $performance_item->id;?>">
-                    <span><?php echo $performance_item->name;?></span>
-                </label>
-            <?php endforeach; ?>
-            </div>
         </div>
     </div>
 </div>

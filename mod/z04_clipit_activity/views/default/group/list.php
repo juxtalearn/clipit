@@ -56,8 +56,6 @@ foreach($groups_id as $group_id):
                         'text'  => $user->name));
                     ?>
                     <div class="pull-right">
-                        <small>@<?php echo $user->username; ?></small>
-                        &nbsp;
                         <?php echo elgg_view('output/url', array(
                                 'href'  => "ajax/view/modal/messages/send?id=".$user_id,
                                 'title' => $user->name,

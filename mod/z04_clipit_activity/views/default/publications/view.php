@@ -41,15 +41,15 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
                         <?php echo elgg_view("page/elements/tags", array('tags' => $tags)); ?>
                     </div>
                     <h4><strong>Labels</strong></h4>
-                    <div class="labels">
+                    <div>
                         <?php echo elgg_view('output/url', array(
                             'href'  => "javascript:;",
                             'text'  => '<i style="margin-left: 10px;" class="fa fa-plus"></i>',
                             'class' => 'pull-right',
-                            'onclick' => 'javascript:$(\'#add_labels\').toggle().find(\'input[type=text]\').focus();'
+                            'id'    => 'labels_view',
                         ));
                         ?>
-                        <small class="blue text-truncate">
+                        <small class="blue text-truncate" id="label_list">
                             <span style="border-bottom: 1px dotted #32b4e5;">mola mucho</span>,
                             <span style="border-bottom: 1px dotted #32b4e5;">comedia</span>
                             <span style="border-bottom: 1px dotted #32b4e5;">lorem ipsum</span>

@@ -47,16 +47,17 @@ if (is_array($items) && count($items) > 0):
 
                     <div class="col-md-6">
                         <div class="pull-right">
-                            <span class="label label-primary">Active</span>
+                            <small class="activity-status status-<?php echo $item->status;?>">
+                                <strong><?php echo elgg_echo("status:".$item->status);?></strong>
+                            </small>
                         </div>
-                        <h3 style='margin: 0' class="text-truncate">
-                            <a style='display: none; color: #<?php echo $item->color; ?>;opacity: 0.7;'><i class='fa fa-bars' title='Activity menu'></i></a>
+                        <h4 style='margin-top: 0'>
                             <?php echo $activity_link; ?>
-                        </h3>
+                        </h4>
                         <div style='color: #999;'>
                             <i class='fa fa-calendar'></i> 20/03/2014 - 01/10/2014
                         </div>
-                        <div style='max-height: 45px; overflow: hidden; color: #666666; '>
+                        <div style='max-height: 40px; overflow: hidden; color: #666666;margin-top: 5px; '>
                             <?php echo $item->description; ?>
                         </div>
                     </div>
@@ -96,7 +97,7 @@ if (is_array($items) && count($items) > 0):
                                     foreach($teachers as $teacher_id):
                                         $teacher = array_pop(ClipitUser::get_by_id(array($teacher_id)));
                                     ?>
-                                    <li style="margin-bottom: 5px;">
+                                    <li class="list-item" style="border-bottom: 0;margin-bottom: 0;">
                                         <?php echo elgg_view("page/elements/user_block", array('entity' => $teacher)); ?>
                                     </li>
                                     <?php endforeach; ?>

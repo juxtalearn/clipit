@@ -29,7 +29,7 @@ $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
         <?php
         $owner_rating_entity = ClipitRating::get_from_user_for_target($comment->owner_id, $target_id);
         if($owner_rating_entity){
-            echo elgg_view("publications/rating_summary", array('entity' => $owner_rating_entity));
+            echo elgg_view("publications/rating_summary", array('entity' => $owner_rating_entity, 'group_id' => $group->id));
         }
         ?>
         <strong>

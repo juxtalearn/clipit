@@ -34,6 +34,23 @@
   }
 }
 //
+// Activity status
+// --------------------------------------------------
+.activity-status{
+  text-transform: uppercase;
+  font-size: 75%;
+  letter-spacing: .5px;
+  &.status-enroll{
+    color: @yellow_clipit;
+  }
+  &.status-active{
+    color: @blue_clipit;
+  }
+  &.status-closed{
+    color: @red_clipit;
+  }
+}
+//
 // Activity profile
 // --------------------------------------------------
 .activity-profile{
@@ -110,8 +127,7 @@ ul.deadline-list{
 // Group block (sidebar)
 // --------------------------------------------------
 .activity-group-block{
-  margin-bottom: 15px;
-  border-bottom: 4px solid @blue-lighter;
+  margin-bottom: 40px;
   padding-bottom: 10px;
   h3{
     font-family: @font-family-futurabold;

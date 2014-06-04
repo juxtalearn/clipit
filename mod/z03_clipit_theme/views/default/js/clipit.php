@@ -388,6 +388,14 @@ $(function(){
             singleFieldNode: that.closest("form").find("input[name=tags]")
         });
     });
+    /*
+     * Labels complete view  & labels form to create
+     */
+    $("#labels_view").click(function(){
+        $('#add_labels').toggle().find('input[type=text]').focus();
+        $(this).children(".fa").toggleClass("fa-minus");
+        $('#label_list').toggleClass('text-truncate');
+    });
     $('ul#labels').each(function(){
         that = $(this);
         $(this).tagit({

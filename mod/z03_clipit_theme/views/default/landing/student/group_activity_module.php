@@ -16,7 +16,13 @@ elgg_load_css("nvd3:css");
     }
     .module-group_activity svg text {
         font: normal 12px Helvetica;
-        fill: #333333;
+        fill: #999999;
+    }
+    .module-group_activity svg .nv-x .nv-axis text {
+        fill: #000;
+    }
+    .module-group_activity svg .nv-axis path {
+        stroke: #999999;
     }
 </style>
 <script>

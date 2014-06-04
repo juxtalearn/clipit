@@ -32,9 +32,15 @@ body{
 }
 a{
   color: @blue_clipit;
+  &:hover,
+  &:focus{
+    color: @blue_clipit;
+    opacity: .7;
+  }
 }
 .blue{
   color: @blue_clipit;
+
 }
 .blue-lighter{
   color: @blue-lighter;
@@ -44,6 +50,9 @@ a{
 }
 .red{
   color: @red_clipit;
+}
+.yellow{
+  color: @yellow_clipit;
 }
 ul, ol {
   margin-top: 0;
@@ -125,7 +134,11 @@ h3.empty{
   margin-top: 3px;
   color: @grey_slow_3;
 }
-
+// Progress bar
+// --------------------------------------------------
+.progress-bar{
+  background: @blue_clipit;
+}
 
 // Custom Font
 // --------------------------------------------------

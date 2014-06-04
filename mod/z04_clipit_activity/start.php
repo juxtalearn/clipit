@@ -125,6 +125,12 @@ function activity_setup_sidebar_menus(){
         );
         elgg_register_menu_item('page', $params);
         $params = array(
+            'name' => 'activity_sta',
+            'text' => elgg_echo('activity:stas'),
+            'href' => "clipit_activity/".$activity->id."/materials",
+        );
+        elgg_register_menu_item('page', $params);
+        $params = array(
             'name' => 'activity_groups',
             'text' => elgg_echo('activity:groups'),
             'href' => "clipit_activity/".$activity->id."/groups",
@@ -134,12 +140,6 @@ function activity_setup_sidebar_menus(){
             'name' => 'activity_discussion',
             'text' => elgg_echo('activity:discussion'),
             'href' => "clipit_activity/".$activity->id."/discussion",
-        );
-        elgg_register_menu_item('page', $params);
-        $params = array(
-            'name' => 'activity_sta',
-            'text' => elgg_echo('activity:stas'),
-            'href' => "clipit_activity/".$activity->id."/materials",
         );
         elgg_register_menu_item('page', $params);
         $params = array(
@@ -527,7 +527,7 @@ function group_tools_page_handler($page, $activity){
     if(!$group){
         return false;
     }
-    elgg_push_breadcrumb($group->name);
+    elgg_push_breadcrumb($group->name, "clipit_activity/{$activity->id}/group");
     // set group icon status from activity status
     $activity_status = ClipitActivity::get_status($activity->id);
     $icon_status = "lock";
@@ -537,15 +537,11 @@ function group_tools_page_handler($page, $activity){
     $group_name = '<i class="fa fa-'.$icon_status.'"></i> '.$group->name;
     $filter = "";
     switch ($page[2]) {
-        case 'edit':
-            $title = elgg_echo("group:edit");
-            elgg_push_breadcrumb($title);
-            $content = elgg_view('group/edit', array('entity' => $activity));
-            break;
-        case 'members':
-            $title = elgg_echo("group:members");
-            elgg_push_breadcrumb($title);
-            $content = elgg_view('group/members', array('entity' => $group));
+        case '':
+            $title = elgg_echo("group:home");
+            elgg_pop_breadcrumb($group->name);
+            elgg_push_breadcrumb($group->name);
+            $content = elgg_view('group/dashboard', array('entity' => $group));
             break;
         case 'activity_log':
             $title = elgg_echo("group:activity_log");

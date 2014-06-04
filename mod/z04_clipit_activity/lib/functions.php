@@ -151,7 +151,7 @@ function get_video_url_embed($url){
  * @param int $seconds
  * @return string (hh:mm:ss|mm:ss)
  */
-function get_format_time(int $seconds){
+function get_format_time($seconds = 0){
     $time = gmdate("i:s", $seconds);
     if($seconds >=  3600){
         $time = gmdate("H:i:s", $seconds);
@@ -166,7 +166,7 @@ function get_format_time(int $seconds){
  * @param int $number
  * @return string
  */
-function star_rating_view(float $average, $number = 5){
+function star_rating_view($average = 0, $number = 5){
     $rest = number_format(($average - floor($average)), 2);
     $average_ceil = ceil($average);
     $qualifications = array(elgg_echo('qual:bad'), elgg_echo('qual:poor'), elgg_echo('qual:regular'), elgg_echo('qual:good'), elgg_echo('qual:gorgeous'));

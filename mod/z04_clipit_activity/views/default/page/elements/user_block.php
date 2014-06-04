@@ -13,15 +13,14 @@
 $user = elgg_extract("entity", $vars);
 $user_elgg = new ElggUser($user->id);
 ?>
-<img class="pull-left" style="margin-right: 10px;" src="<?php echo $user_elgg->getIconURL('small');?>">
+<img class="pull-left" style="margin-right: 10px;" src="<?php echo $user_elgg->getIconURL('tiny');?>">
 <div class="text-truncate">
+    <?php echo elgg_view("messages/compose_icon", array('entity' => $user));?>
     <?php echo elgg_view('output/url', array(
         'href'  => "profile/".$user->login,
         'title' => $user->name,
-        'text'  => $user->name));
+        'text'  => $user->name,
+        'style' => 'border-left: 1px solid #C9C9C9;padding-left: 5px;'
+    ));
     ?>
-    <div class="show">
-        <?php echo elgg_view("messages/compose_icon", array('entity' => $user));?>
-        <small>@<?php echo $user->login;?></small>
-    </div>
 </div>

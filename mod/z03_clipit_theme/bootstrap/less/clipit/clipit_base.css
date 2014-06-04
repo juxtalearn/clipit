@@ -6819,6 +6819,14 @@ fieldset[disabled] .elgg-sidebar input.elgg-button-submit.active {
   height: 25px;
   border: 0;
 }
+.elgg-sidebar .elgg-module-aside h4 {
+  margin-top: 25px;
+}
+.elgg-sidebar .nav > li > a {
+  padding: 5px 10px;
+  font-size: 13px;
+  font-weight: normal;
+}
 .sidebar-lg .elgg-sidebar {
   position: relative;
   min-height: 1px;
@@ -8017,14 +8025,10 @@ ul.top-account > li > a > span.badge {
   background-color: #32b4e5;
   padding: 20px;
   margin-top: 30px;
-  /*background-image: url('../img/sponsors.png');
-  background-repeat: no-repeat;
-  background-position: bottom right;
-  background-size: 225px;
-  background-origin: content-box;*/
 }
 #footer .sponsors img {
-  width: 225px;
+  width: 200px;
+  float: right !important;
 }
 #footer .contact h2 {
   font-family: FuturaBoldRegular, Impact, 'Impact Bold', Helvetica, Arial, sans, sans-serif;
@@ -8094,6 +8098,20 @@ ul.top-account > li > a > span.badge {
 .activity-layout .elgg-sidebar {
   margin-top: 0;
 }
+.activity-status {
+  text-transform: uppercase;
+  font-size: 75%;
+  letter-spacing: .5px;
+}
+.activity-status.status-enroll {
+  color: #d8ba05;
+}
+.activity-status.status-active {
+  color: #32b4e5;
+}
+.activity-status.status-closed {
+  color: #ff4343;
+}
 .activity-profile .elgg-head-layout h2 {
   font-family: Helvetica;
   font-weight: 500;
@@ -8155,8 +8173,7 @@ ul.deadline-list > li .fa {
   font-size: 20px;
 }
 .activity-group-block {
-  margin-bottom: 15px;
-  border-bottom: 4px solid #bae6f6;
+  margin-bottom: 40px;
   padding-bottom: 10px;
 }
 .activity-group-block h3 {
@@ -9640,6 +9657,11 @@ body {
 a {
   color: #32b4e5;
 }
+a:hover,
+a:focus {
+  color: #32b4e5;
+  opacity: .7;
+}
 .blue {
   color: #32b4e5;
 }
@@ -9651,6 +9673,9 @@ a {
 }
 .red {
   color: #ff4343;
+}
+.yellow {
+  color: #d8ba05;
 }
 ul,
 ol {
@@ -9733,6 +9758,9 @@ small,
 h3.empty {
   margin-top: 3px;
   color: #c9c9c9;
+}
+.progress-bar {
+  background: #32b4e5;
 }
 @font-face {
   font-family: 'Futura';

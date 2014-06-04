@@ -17,7 +17,7 @@ $content = '
 <!-- foreach-->
 <div class="separator wrapper">
     <span class="point" style="background: #ed1e79;"></span>
-    1/3 <a>PDF\'s uploaded</a>
+    <a>1/3 PDF\'s uploaded</a>
     <small class="pull-right">12:00H, NOV 18, 2013</small>
 </div>
 <!-- endforeach-->

@@ -12,7 +12,7 @@
  */
 $entity = elgg_extract('entity', $vars);
 ?>
-<a href="<?php echo elgg_get_site_url()."{$vars['href']}/view/{$entity->id}"; ?>">
+<a href="<?php echo elgg_get_site_url()."{$vars['href']}/view/{$entity->id}"; ?>" class="show">
     <div class="video-list">
         <div class="video-item">
             <strong><?php echo $entity->name; ?></strong>
