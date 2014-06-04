@@ -12,17 +12,22 @@
  * @subpackage      clipit_api
  */
 
-function load_performance_palette($file){
+function load_performance_palette($json_file){
     $jsonIterator = new RecursiveIteratorIterator(
-        new RecursiveArrayIterator(json_decode($file, TRUE)),
+        new RecursiveArrayIterator(json_decode($json_file, TRUE)),
         RecursiveIteratorIterator::SELF_FIRST);
 
     $performance_palette = ClipitPerformancePalette::get_performance_palette();
-    foreach ($jsonIterator as $key => $val) {
-        if(is_array($val)) {
-            echo "$key:\n";
-        } else {
-            echo "$key => $val\n";
+    $performance_items = array();
+    foreach ($jsonIterator as $key_1 => $val_1) { // category => item
+        if(is_array($val_1)) {
+            $performance_item = new ClipitPerformanceItem();
+            $performance_item->category = $key_1;
+            foreach($val_1 as $key_2 => $val_2){ // property => value
+                $performance_item->$key2 = $val_2;
+            }
+            $performance_items[] = $performance_item;
         }
     }
+    $performance_palette->add_performance_items($performance_items);
 }

@@ -13,6 +13,7 @@ class ClipitPerformanceItem extends UBItem{
     const SUBTYPE = "ClipitPerformanceItem";
 
     public $category = "";
+    public $example = "";
 
     /**
      * Loads object parameters stored in Elgg
@@ -22,6 +23,7 @@ class ClipitPerformanceItem extends UBItem{
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
         $this->category = (int)$elgg_object->get("category");
+        $this->example = (string)$elgg_object->get("example");
     }
 
     /**
@@ -32,6 +34,7 @@ class ClipitPerformanceItem extends UBItem{
     protected function copy_to_elgg($elgg_entity){
         parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("category", (int)$this->category);
+        $elgg_entity->set("example", (string)$this->example);
     }
 
 } 
