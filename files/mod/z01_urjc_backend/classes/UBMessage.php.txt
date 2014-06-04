@@ -60,6 +60,11 @@ class UBMessage extends UBItem{
         return $this->id;
     }
 
+    /**
+     * Deletes $this instance from the system.
+     *
+     * @return bool True if success, false if error.
+     */
     protected function delete(){
         if($rel_array = get_entity_relationships($this->id, true)){
             foreach($rel_array as $rel){

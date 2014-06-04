@@ -91,7 +91,9 @@ class ClipitQuizQuestion extends UBItem{
     }
 
     /**
-     * @return bool|void
+     * Deletes $this instance from the system.
+     *
+     * @return bool True if success, false if error.
      */
     protected function delete(){
         $rel_array = get_entity_relationships((int)$this->id);

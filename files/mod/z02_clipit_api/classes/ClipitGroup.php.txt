@@ -64,6 +64,11 @@ class ClipitGroup extends UBItem{
         return $this->id;
     }
 
+    /**
+     * Deletes $this instance from the system.
+     *
+     * @return bool True if success, false if error.
+     */
     protected function delete(){
         $storyboard_array = (array) static::get_storyboards($this->id);
         if(!empty($storyboard_array)){

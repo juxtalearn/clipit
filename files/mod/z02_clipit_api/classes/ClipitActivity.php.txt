@@ -101,6 +101,8 @@ class ClipitActivity extends UBItem{
     }
 
     /**
+     * Deletes $this instance from the system.
+     *
      * @return bool True if success, false if error.
      */
     protected function delete(){

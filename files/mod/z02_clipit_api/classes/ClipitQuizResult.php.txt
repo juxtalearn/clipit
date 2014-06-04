@@ -73,10 +73,11 @@ class ClipitQuizResult extends UBItem{
     /**
      * Sets values to specified properties of an Item
      *
-     * @param int   $id Id of Item to set property valyes
+     * @param int   $id Id of Item to set property values
      * @param array $prop_value_array Array of property=>value pairs to set into the Item
      *
      * @return int|bool Returns Id of Item if correct, or false if error
+     * @throws InvalidParameterException
      */
     static function set_properties($id, $prop_value_array){
         $new_prop_value_array = array();
