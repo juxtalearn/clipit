@@ -13,6 +13,7 @@ class ClipitPerformanceItem extends UBItem{
     const SUBTYPE = "ClipitPerformanceItem";
 
     public $category = "";
+    public $category_description = "";
     public $example = "";
 
     /**

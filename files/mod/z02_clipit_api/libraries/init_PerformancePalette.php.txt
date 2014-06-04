@@ -19,11 +19,16 @@ function load_performance_palette($json_file){
 
     $performance_palette = ClipitPerformancePalette::get_performance_palette();
     $performance_items = array();
-    foreach ($jsonIterator as $key_1 => $val_1) { // category => item
-        if(is_array($val_1)) {
+    foreach ($jsonIterator as $key_1 => $val_1) { // key_1 = performance_palette, val_1 = category_group
+        if($key_1 != "performance_palette" || !is_array($val_1)) {
+            return false;
+        }
+        foreach($val_1 as $key_2 => $val_2) { // category
+
             $performance_item = new ClipitPerformanceItem();
             $performance_item->category = $key_1;
-            foreach($val_1 as $key_2 => $val_2){ // property => value
+            $performance_item->category_description
+            foreach ($val_1 as $key_2 => $val_2) { //item
                 $performance_item->$key2 = $val_2;
             }
             $performance_items[] = $performance_item;
