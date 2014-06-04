@@ -133,6 +133,9 @@ function expose_common_functions($api_suffix, $class_suffix){
         $api_suffix . "get_events",
         $class_suffix . "get_events",
         array(
+            "offset" => array(
+                "type" => "int",
+                "required" => false),
             "limit" => array(
                 "type" => "int",
                 "required" => false)),

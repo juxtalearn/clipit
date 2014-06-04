@@ -13,22 +13,34 @@
  */
 
 class ClipitTagRating extends UBItem {
-
+    /**
+     * @const string Elgg entity SUBTYPE for this class
+     */
     const SUBTYPE = "ClipitTagRating";
 
     public $tag_id = 0;
     public $is_used = null;
 
+    /**
+     * Loads object parameters stored in Elgg
+     *
+     * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
+     */
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
         $this->tag_id = (int)$elgg_object->get("tag_id");
         $this->is_used = (bool)$elgg_object->get("is_used");
     }
 
-    protected function copy_to_elgg($elgg_object){
-        parent::copy_to_elgg($elgg_object);
-        $elgg_object->set("tag_id", (int)$this->tag_id);
-        $elgg_object->set("is_used", (bool)$this->is_used);
+    /**
+     * Copy $this object parameters into an Elgg entity.
+     *
+     * @param ElggEntity $elgg_entity Elgg object instance to save $this to
+     */
+    protected function copy_to_elgg($elgg_entity){
+        parent::copy_to_elgg($elgg_entity);
+        $elgg_entity->set("tag_id", (int)$this->tag_id);
+        $elgg_entity->set("is_used", (bool)$this->is_used);
     }
 
 

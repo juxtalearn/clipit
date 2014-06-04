@@ -18,7 +18,7 @@
  */
 class ClipitFile extends UBFile{
     /**
-     * @const string Elgg entity subtype for this class
+     * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitFile";
 
@@ -29,7 +29,9 @@ class ClipitFile extends UBFile{
     public $label_array = array();
 
     /**
-     * @param ElggFile $elgg_file Elgg Object to load parameters from.
+     * Loads object parameters stored in Elgg
+     *
+     * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
     protected function load_from_elgg($elgg_file){
         parent::load_from_elgg($elgg_file);

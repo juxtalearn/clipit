@@ -12,9 +12,17 @@
  * @subpackage      urjc_backend
  */
 
-
+/**
+ * Class UBEvent
+ */
 class UBEvent{
-
+    /**
+     * Get latest array of system events, which cover all user interactions.
+     *
+     * @param int $offset Skip the first $offset events
+     * @param int $limit Return at most $limit events
+     * @return array Array of system events
+     */
     static function get_latest($offset = 0, $limit = 10){
         return get_system_log(
             null, // $by_user
@@ -33,7 +41,18 @@ class UBEvent{
         );
     }
 
+    /**
+     * Get events performed or owned by certain users.
+     *
+     * @param array $user_array List of user IDs to get related events from
+     * @param int $offset Skip the first $offset events
+     * @param int $limit Return at most $limit events
+     * @return array Array of system events
+     */
     static function get_by_user($user_array, $offset = 0, $limit = 10){
+        if(empty($user_array)){
+            return array();
+        }
         global $CONFIG;
         $query = "SELECT * FROM {$CONFIG->dbprefix}system_log where ";
         $query .= "performed_by_guid in (" . implode(",", $user_array) . ")";
@@ -61,6 +80,14 @@ class UBEvent{
         return get_data($query);
     }
 
+    /**
+     * Get events related to certain objects. The events include relationship events which concern each object.
+     *
+     * @param array $object_array List of object IDs from which to obtain events
+     * @param int $offset Skip the first $offset events
+     * @param int $limit Return at most $limit events
+     * @return array Array of system events
+     */
     static function get_by_object($object_array, $offset = 0, $limit = 10){
         if(empty($object_array)){
             return array();

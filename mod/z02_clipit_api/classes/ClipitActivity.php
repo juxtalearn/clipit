@@ -24,7 +24,7 @@
  */
 class ClipitActivity extends UBItem{
     /**
-     * @const string SUBTYPE Elgg entity subtype for this class
+     * @const string SUBTYPE Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitActivity";
 
@@ -53,6 +53,8 @@ class ClipitActivity extends UBItem{
     public $file_array = array();
 
     /**
+     * Loads object parameters stored in Elgg
+     *
      * @param ElggEntity $elgg_object
      */
     protected function load_from_elgg($elgg_object){
@@ -68,18 +70,23 @@ class ClipitActivity extends UBItem{
         $this->video_array = static::get_videos($this->id);
         $this->file_array = static::get_files($this->id);
     }
+
     /**
-     * @param ElggObject $elgg_object Elgg object instance to save Item to
+     * Copy $this object parameters into an Elgg entity.
+     *
+     * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function copy_to_elgg($elgg_object){
-        parent::copy_to_elgg($elgg_object);
-        $elgg_object->set("color", (string)$this->color);
-        $elgg_object->get("status", (string)$this->status);
-        $elgg_object->get("tricky_topic", (int)$this->tricky_topic);
+    protected function copy_to_elgg($elgg_entity){
+        parent::copy_to_elgg($elgg_entity);
+        $elgg_entity->set("color", (string)$this->color);
+        $elgg_entity->get("status", (string)$this->status);
+        $elgg_entity->get("tricky_topic", (int)$this->tricky_topic);
     }
 
     /**
-     * @return bool|int The saved instance ID.
+     * Saves this instance into the system.
+     *
+     * @return bool|int Returns id of saved instance, or false if error.
      */
     protected function save(){
         parent::save();
@@ -94,6 +101,8 @@ class ClipitActivity extends UBItem{
     }
 
     /**
+     * Deletes $this instance from the system.
+     *
      * @return bool True if success, false if error.
      */
     protected function delete(){

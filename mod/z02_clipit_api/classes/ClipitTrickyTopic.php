@@ -17,6 +17,9 @@
  *
  */
 class ClipitTrickyTopic extends UBItem{
+    /**
+     * @const string Elgg entity SUBTYPE for this class
+     */
     const SUBTYPE = "ClipitTrickyTopic";
 
     public $subject = "";
@@ -24,6 +27,11 @@ class ClipitTrickyTopic extends UBItem{
     public $tag_array = array();
 
 
+    /**
+     * Loads object parameters stored in Elgg
+     *
+     * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
+     */
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
         $this->subject = (string)$elgg_object->get("subject");
@@ -31,10 +39,15 @@ class ClipitTrickyTopic extends UBItem{
         $this->tag_array = (array)$elgg_object->get("tag_array");
     }
 
-    protected function copy_to_elgg($elgg_object){
-        parent::copy_to_elgg($elgg_object);
-        $elgg_object->set("subject", (string)$this->subject);
-        $elgg_object->set("country", (string)$this->country);
-        $elgg_object->set("tag_array", (array)$this->tag_array);
+    /**
+     * Copy $this object parameters into an Elgg entity.
+     *
+     * @param ElggEntity $elgg_entity Elgg object instance to save $this to
+     */
+    protected function copy_to_elgg($elgg_entity){
+        parent::copy_to_elgg($elgg_entity);
+        $elgg_entity->set("subject", (string)$this->subject);
+        $elgg_entity->set("country", (string)$this->country);
+        $elgg_entity->set("tag_array", (array)$this->tag_array);
     }
 }

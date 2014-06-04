@@ -16,33 +16,43 @@
  * Class ClipitVideo
  *
  */
-class ClipitVideo extends ClipitMaterial{
+class ClipitVideo extends ClipitPublication{
     /**
-     * @const string Elgg entity sybtype for this class
+     * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitVideo";
 
-    const REL_MATERIAL_TAG = "video-tag";
-    const REL_MATERIAL_LABEL = "video-label";
-    const REL_MATERIAL_COMMENT = "video-comment";
-    const REL_MATERIAL_PERFORMANCE = "video-performance";
+    const REL_PUBLICATION_TAG = "video-tag";
+    const REL_PUBLICATION_LABEL = "video-label";
+    const REL_PUBLICATION_COMMENT = "video-comment";
+    const REL_PUBLICATION_PERFORMANCE = "video-performance";
 
-    const REL_GROUP_MATERIAL = "group-video";
-    const REL_ACTIVITY_MATERIAL = "activity-video";
-    const REL_SITE_MATERIAL = "site-video";
+    const REL_GROUP_PUBLICATION = "group-video";
+    const REL_ACTIVITY_PUBLICATION = "activity-video";
+    const REL_SITE_PUBLICATION = "site-video";
 
     public $preview = "";
     public $duration = 0;
 
+    /**
+     * Loads object parameters stored in Elgg
+     *
+     * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
+     */
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
         $this->preview = (string)$elgg_object->get("preview");
         $this->duration = (int)$elgg_object->get("duration");
     }
 
-    protected function copy_to_elgg($elgg_object){
-        parent::copy_to_elgg($elgg_object);
-        $elgg_object->set("preview", (string)$this->preview);
-        $elgg_object->set("duration", (int)$this->duration);
+    /**
+     * Copy $this object parameters into an Elgg entity.
+     *
+     * @param ElggEntity $elgg_entity Elgg object instance to save $this to
+     */
+    protected function copy_to_elgg($elgg_entity){
+        parent::copy_to_elgg($elgg_entity);
+        $elgg_entity->set("preview", (string)$this->preview);
+        $elgg_entity->set("duration", (int)$this->duration);
     }
 }

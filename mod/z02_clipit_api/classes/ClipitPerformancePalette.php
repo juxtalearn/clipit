@@ -7,6 +7,9 @@
  */
 
 class ClipitPerformancePalette{
+    /**
+     * @const string Elgg entity SUBTYPE for this class
+     */
     const SUBTYPE = "ClipitPerformancePalette";
 
     public $performance_items = array();
@@ -33,6 +36,11 @@ class ClipitPerformancePalette{
         return $this->id;
     }
 
+    /**
+     * Saves this instance into the system.
+     *
+     * @return bool|int Returns id of saved instance, or false if error.
+     */
     protected function save(){
         global $CONFIG;
         if(empty($CONFIG->performance_palette_id)){

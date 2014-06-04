@@ -34,6 +34,11 @@ class ClipitUser extends UBUser{
      */
     const COOKIE_TOKEN_DURATION = 60;
 
+    /**
+     * Saves this instance into the system.
+     *
+     * @return bool|int Returns id of saved instance, or false if error.
+     */
     protected function save(){
         $id = parent::save();
         switch(strtolower($this->role)){
