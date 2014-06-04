@@ -1,0 +1,28 @@
+<?php
+/**
+ * ClipIt - JuxtaLearn Web Space
+ * PHP version:     >= 5.2
+ * Creation date:   2013-10-10
+ * Last update:     $Date$
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC JuxtaLearn Team
+ * @version         $Version$
+ * @link            http://www.juxtalearn.eu
+ * @license         GNU Affero General Public License v3
+ * @package         ClipIt
+ * @subpackage      clipit_api
+ */
+
+function load_performance_palette($file){
+    $jsonIterator = new RecursiveIteratorIterator(
+        new RecursiveArrayIterator(json_decode($file, TRUE)),
+        RecursiveIteratorIterator::SELF_FIRST);
+
+    $performance_palette = ClipitPerformancePalette::get_performance_palette();
+    foreach ($jsonIterator as $key => $val) {
+        if(is_array($val)) {
+            echo "$key:\n";
+        } else {
+            echo "$key => $val\n";
+        }
+    }
+}
