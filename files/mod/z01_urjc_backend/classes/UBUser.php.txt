@@ -274,6 +274,12 @@ class UBUser extends UBItem{
         return $user_array;
     }
 
+    /**
+     * Get a User's last login timestamp.
+     *
+     * @param int $id User ID
+     * @return int|bool Last login timestamp, or false in case of error
+     */
     static function get_last_login($id){
         $user = new static($id);
         return $user->last_login;
