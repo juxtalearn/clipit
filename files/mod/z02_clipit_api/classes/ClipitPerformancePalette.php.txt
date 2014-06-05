@@ -22,14 +22,14 @@ class ClipitPerformancePalette{
     function __construct(){
         global $CONFIG;
         if(empty($CONFIG->performance_palette_id)){
-            return null;
+            $elgg_entity = new ElggObject();
+            $elgg_entity->set("name", "Performance Palette");
+            $CONFIG->performance_palette_id = (int)$elgg_entity->save();
         } else{
-            $elgg_entity = new ElggObject($CONFIG->performance_palette_id);
+            $elgg_entity = new ElggObject((int)$CONFIG->performance_palette_id);
         }
         $this->id = (int)$elgg_entity->get("guid");
         $this->name = (string)$elgg_entity->get("name");
-        $this->description = (string)$elgg_entity->get("description");
-        $this->url = (string)$elgg_entity->get("url");
         $this->owner_id = (int)$elgg_entity->getOwnerGUID();
         $this->time_created = (int)$elgg_entity->getTimeCreated();
         $this->performance_items = (array)$elgg_entity->get("performance_items");
@@ -54,6 +54,18 @@ class ClipitPerformancePalette{
 
     static function get_performance_palette(){
         return new static();
+    }
+
+    static function remove_all_items(){
+        $performance_palette = new static();
+        ClipitPerformanceItem::delete_by_id($performance_palette->performance_items);
+        $performance_palette->performance_items = array();
+        return $performance_palette->save();
+    }
+
+    static function set_performance_items($performance_items){
+        static::remove_all_items();
+        return static::add_performance_items($performance_items);
     }
 
     static function add_performance_items($performance_items){

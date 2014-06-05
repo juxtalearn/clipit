@@ -23,7 +23,8 @@ class ClipitPerformanceItem extends UBItem{
      */
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
-        $this->category = (int)$elgg_object->get("category");
+        $this->category = (string)$elgg_object->get("category");
+        $this->category_description = (string)$elgg_object->get("category_description");
         $this->example = (string)$elgg_object->get("example");
     }
 
@@ -34,7 +35,8 @@ class ClipitPerformanceItem extends UBItem{
      */
     protected function copy_to_elgg($elgg_entity){
         parent::copy_to_elgg($elgg_entity);
-        $elgg_entity->set("category", (int)$this->category);
+        $elgg_entity->set("category", (string)$this->category);
+        $elgg_entity->set("category_description", (string)$this->category_description);
         $elgg_entity->set("example", (string)$this->example);
     }
 
