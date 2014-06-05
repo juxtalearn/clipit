@@ -275,6 +275,21 @@ class UBItem{
     }
 
     /**
+     * Delete All Items for this class.
+     *
+     * @return bool Returns true if correct, or false if error
+     */
+    static function delete_all(){
+        $items = static::get_all();
+        foreach($items as $item){
+            if(!$item->delete()){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * Get all Objects of this TYPE and SUBTYPE from the system.
      *
      * @param int $limit Number of results to show, default= 0 [no limit] (optional)
