@@ -1,7 +1,7 @@
 {
     "performance_palette" : [
         {
-            "category": "format",
+            "category": "Format",
             "category_description": "Performance format is the manner of executing a performance",
             "items": [
                 {
@@ -77,24 +77,104 @@
             ]
         },
         {
-            "category": "genre",
+            "category": "Genre",
             "category_description" : "Genre is the style or category of the performance.",
             "items" : [
                 {
                     "name": "Action",
                     "description": "Action includes creative fiction with exciting sequences such as car chases or martial arts.",
-                    "example": ""
+                    "example": "Bruce Lee, James Bond, The Hunger Games: Catching Fire (2013)"
+                },
+				{
+                    "name": "Adventure",
+                    "description": "Adventure is fictional writing where the story is about something exciting and risky happening.",
+                    "example": "King Kong (2005), Indiana Jones films"
+                },
+				{
+                    "name": "Comedy",
+                    "description": "A comedy is an amusing plot, written to please and cause people to laugh.",
+                    "example": "Mrs Brown’s Boys on BBC, Pink Panther films with Peter Sellers as Inspector Clouseau, Jacques Tati – Monsieur Hulot’s Holiday (1953), Robert Altman's M*A*S*H (1970)"
+                },
+				{
+                    "name": "Documentary",
+                    "description": "A documentary is not fiction, but aims to tell of or show the lives of the people or places of interest, often aiming to analyse or to persuade. Documentaries are developing stylistic devices commonly associated with other genres, such as the use of sfx & dramatic re-enactment.",
+                    "example": "Supersize Me (2004), Fahrenheit 9/11 (2004)"
+                },
+				{
+                    "name": "Drama",
+                    "description": "Drama is a (usually) serious performance of fiction, and might be comedy or tragedy. It has an underlying plot, realistic characters and settings.",
+                    "example": "Shakespeare’s plays"
+                },
+				{
+                    "name": "Fantasy",
+                    "description": "Fantasy is fiction that uses magic, imagination, the supernatural and fantastic to plot the story.  It may also be considered a sci-fi genre.",
+                    "example": "The Lord of the Rings, Harry Potter & the Deathly Hallows, Pan’s Labyrinth (Spain 2006)"
+                },
+				{
+                    "name": "History",
+                    "description": "This genre includes stories of adventure, biography, drama or war.",
+                    "example": "Elizabeth (1998), All Quiet on the Western Front (Germany 1930), Saving Private Ryan  (1998)"
+                },
+				{
+                    "name": "Musical",
+                    "description": "Musicals have the main members of the cast singing and dancing.",
+                    "example": "West Side Story, Mamma Mia, Hum Saath Saath Hain (Bollywood 1999)"
+                },
+				{
+                    "name": "Mystery",
+                    "description": "A mystery is a fictional plot with a puzzle to investigate and solve.  For instance, a murder mystery might open with a dead body found floating face down in the swimming pool of a plush mansion.",
+                    "example": "Sherlock"
+                },
+				{
+                    "name": "Parody",
+                    "description": "A parody mocks by imitating and exaggerating, making a comic effect.",
+                    "example": "Spitting Image, The Thick of It (UK)"
+                },
+				{
+                    "name": "Sci-fi",
+                    "description": "Science fiction deals with fiction that includes technology, science or something futuristic.",
+                    "example": "Frankenstein (commonly regarded as horror), War of the Worlds (1953 and 2005), Solaris (Russian 1972), AI, The Matrix"
+                },
+				{
+                    "name": "Sports",
+                    "description": "Sports films have a sports setting or a competitive event.",
+                    "example": "Field of Dreams (1989), The Loneliness of the Long Distance Runner (1962), Senna (2011)"
+                },
+				{
+                    "name": "Suspense",
+                    "description": "Suspense keeps you excited, uneasy and uncertain, feeling on the edge of knowledge, knowledge that might scare or please you.",
+                    "example": "Hitchcock films – ‘Hitch’ was regarded as the ‘master of suspense’, Alien (1979), The French Connection (1971), Double Indemnity (1944)"
+                },
+				{
+                    "name": "Thriller",
+                    "description": "Thrillers combine genres of suspense, mystery, crime and suspense, exciting the viewer, and raising the tension, anticipation, excitement.",
+                    "example": "Hitchcock films e.g. The Birds (1963)"
                 }
             ]
         },
         {
-            "category": "story",
+            "category": "Story",
             "category_description": "Choices of plot, characters and setting interrelate and make one story different from another.",
             "items": [
                 {
-                    "name": "Animation",
+                    "name": "Plot",
                     "description": "A plot explains events and resolves some sort of a conflict, so it goes beyond mere description e.g., not “boy meets girl” but “boy meets girl and wants to marry her, but to win her love, he has to kill the dragon”.  Choice of character and setting make a plot more convincing.",
-                    "example": ""
+                    "example": "‘The king died, and then the queen died’ is a story, whereas’ the king died, and then the queen died of grief’ is a plot."
+                },
+				{
+                    "name": "Setting",
+                    "description": "Consider the location, time and setting of the action, whether it is indoors or outdoors, day or evening. The plot takes place in these circumstances.",
+                    "example": "A dark black space, The moon, A grassy field, A large deserted derelict Gothic mansion"
+                },
+				{
+                    "name": "Characters",
+                    "description": "Characters are the people whose actions, thoughts and emotions make the story.",
+                    "example": "A quiet and reticent mouse, An angry scientist and his mischievous student, A humorous pair who know nothing about science but ‘spout’ all the wrong (but commonly held misconceptions) about a topic."
+                },
+				{
+                    "name": "Concept",
+                    "description": "Concept or visual concept acts an alternative to a story in a conventional sense. It can be visual style meaning how the director creates image and style.",
+                    "example": "Concept of family such as in The Godfather (1972)"
                 }
             ]
         }
