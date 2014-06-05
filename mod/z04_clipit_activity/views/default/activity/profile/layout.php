@@ -9,6 +9,8 @@
 $activity = elgg_extract("entity", $vars);
 $user_id = elgg_get_logged_in_user_guid();
 $user_inActivity = ClipitGroup::get_from_user_activity($user_id, $activity->id);
+$tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($activity->tricky_topic)));
+$tags = $tricky_topic->tag_array;
 ?>
 <div class="row">
     <div class="col-md-12" data-shorten="true" style="overflow: hidden;max-height: 160px;">
@@ -23,7 +25,7 @@ $user_inActivity = ClipitGroup::get_from_user_activity($user_id, $activity->id);
         <?php echo elgg_view("activity/profile/deadline_module");?>
     </div>
     <div class="col-md-5">
-        <?php echo elgg_view("activity/profile/stumbling_block_module");?>
+        <?php echo elgg_view("activity/profile/stumbling_block_module", array('tags' => $tags));?>
     </div>
 </div>
 <div class="row">

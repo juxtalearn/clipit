@@ -296,6 +296,12 @@ function activity_page_handler($page) {
 
                     switch($selected_tab){
                         case 'videos':
+                            // Solamente mostrar la vista para evaluar si se encuentra en un task para evaluar.
+                            // Contemplar otra vista para el periodo de feedback, que el listado sea diferente
+                            // Periodo de subida de videos a la actividad:
+                            //  - Profe da comienzo a un periodo de subida de video
+                            //  - Feedback
+                            //  - Deadline acabado, comienza el periodo de evaluación
                             $entities = ClipitActivity::get_videos($activity->id);
                             $evaluation_list = get_filter_evaluations($entities);
                             $list_no_evaluated = elgg_view('multimedia/video/list', array(
@@ -333,6 +339,14 @@ function activity_page_handler($page) {
                         ));
                         $content .= $title_block_evaluated.$list_evaluated;
                     }
+                    // Si es el periodo de feedback, mostrar las versiones de cada grupo
+//                    $content = elgg_view('publications/versions_list', array(
+//                        'videos'    => $evaluation_list["evaluated"],
+//                        'href'      => $href,
+//                        'rating'    => true,
+//                        'actions'   => false,
+//                        'total_comments' => true,
+//                    ));;
 
                     if($page[2] == 'view' && $page[3]){
                         $entity_id = (int)$page[3];
@@ -667,7 +681,7 @@ function group_tools_page_handler($page, $activity){
                         $content = elgg_view_form('publications/publish', array('data-validate'=> "true" ),
                             array(
                                 'entity'  => $entity,
-//                                'parent_id' => $group->id
+                                'parent_id' => $group->id,
                                 'activity' => $activity,
                                 'tags' => $tags,
                             ));

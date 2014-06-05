@@ -18,6 +18,7 @@
   &:hover,
   &:focus  {
     color: #FFF;
+    opacity: 1;
   }
 }
 .btn-success { .btn-styles(@green_clipit_2); }
@@ -38,13 +39,15 @@
 
 // Option list
 .btn-options{
-  color: #fff;
+  color: @blue_clipit;
+  border: 1px solid @blue_clipit;
   font-size: 12px;
   padding: 1px 5px;
-  background: #d8ba05;
+  background: #fff;
   &:hover,
   &:focus{
-    color: #fff;
+    color: @blue_clipit;
+    opacity: 0.7;
   }
 }
 .btn-border-blue{

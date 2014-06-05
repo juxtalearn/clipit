@@ -111,6 +111,28 @@
   }
 
 }
+
+.chosen-select-items{
+  + .chosen-container{
+    .chosen-choices li{
+      float: none;
+      font-weight: normal;
+      border: 0;
+      border-bottom: 1px solid #bae6f6;
+      border-radius: 0;
+      &:last-child{
+        border: 0;
+      }
+      &.group-option{
+        font-weight: normal;
+      }
+      input{
+        cursor: default;
+      }
+    }
+  }
+}
+
 //
 // Tag-it
 // --------------------------------------------------

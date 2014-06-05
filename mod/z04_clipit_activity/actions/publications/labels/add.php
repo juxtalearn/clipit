@@ -27,7 +27,7 @@ if($object && !empty($labels)){
         }
     }
     $entity_class = $object['subtype'];
-    $entity_class::set_labels($entity_id, $total_labels);
+    $entity_class::add_labels($entity_id, $total_labels);
 
     system_message(elgg_echo('labels:added'));
 } else {

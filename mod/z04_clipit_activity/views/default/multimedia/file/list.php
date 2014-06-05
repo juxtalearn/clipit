@@ -46,7 +46,7 @@ foreach($files as $file_id){
         echo elgg_view("page/components/modal_remote", array('id'=> "edit-file-{$file->id}" ));
     }
     // Action buttons (Download|Publish)
-    $buttons = '<div style="width: 35px;display: inline-block;float: right;text-align: center;">
+    $buttons = '<div style="width: 35px;display: inline-block;float: right;text-align: center;margin-left:10px;">
                     '.elgg_view('output/url', array(
                         'href'  => "{$href}/download/".$file->id,
                         'title' => $owner->name,

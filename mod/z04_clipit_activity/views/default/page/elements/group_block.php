@@ -12,9 +12,12 @@ $user_id = elgg_get_logged_in_user_guid();
 $group_id = ClipitGroup::get_from_user_activity($user_id, $activity_id);
 $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
 
-$header = "<h3 class='text-truncate' title='{$group->name}'>
-            {$group->name}
-           </h3>";
+$header = elgg_view('output/url', array(
+    'href'  => "clipit_activity/{$activity_id}/group",
+    'text'  => "<h3>{$group->name}</h3>",
+    'title' => $group->name,
+    'class' => 'text-truncate',
+));
 
 $body .= "<small>".elgg_echo('group:progress')."</small>";
 $params_progress = array(

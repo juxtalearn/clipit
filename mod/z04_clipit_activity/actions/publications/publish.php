@@ -12,8 +12,9 @@
  */
 $title = get_input("title");
 $description = get_input("description");
+$labels = get_input("labels");
+$labels = explode(",", $labels);
 $tags = get_input("tags");
-$tags = explode(",", $tags);
 $performance_items = get_input("performance_items");
 $entity_id = get_input("entity-id");
 $parent_id = get_input("parent-id");
@@ -50,23 +51,24 @@ if(count($entity)==0 || trim($title) == "" || trim($description) == "" || trim($
         'name' => $title,
         'description' => $description
     ));
-    foreach(ClipitTag::get_all() as $tag_exist){
-        if(($key = array_search($tag_exist->name, $tags)) !== false) {
-            $tags_id[$tag_exist->name] = $tag_exist->id;
-            unset($tags[$key]);
+    // Labels
+    $total_labels = array();
+    foreach($labels as $label){
+        if($label_exist = array_pop(ClipitLabel::get_from_search($label, true, true))){
+            $total_labels[] = $label_exist->id;
+        } else {
+            $total_labels[] = ClipitLabel::create(array(
+                'name'    => $label,
+            ));
         }
     }
-    $new_tag_ids = array();
-    foreach($tags as $tag_value){
-        $new_tag_ids[] = ClipitTag::create(array(
-            'name'    => $tag_value,
-        ));
-    }
-    $entity_class::set_tags($entity_id, array_merge($tags_id, $new_tag_ids));
-
+    $entity_class::set_labels($entity_id, $total_labels);
+    // Tags
+    $entity_class::set_tags($entity_id, $tags);
+    // Performance items
     $entity_class::add_performance_items($entity_id, $performance_items);
     // Clone
-    $new_video_id = $entity_class::create_clone($entity->id);
+    $new_video_id = $entity_class::create_clone($entity_id);
 
     if($new_video_id){
         $entity_level_class::add_videos($parent_id, array($new_video_id));

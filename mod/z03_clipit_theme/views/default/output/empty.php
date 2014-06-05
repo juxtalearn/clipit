@@ -11,4 +11,4 @@
  * @package         ClipIt
  */
 ?>
-<h3 class="empty"><?php echo $vars['value'];?></h3>
+<h4 class="empty"><?php echo $vars['value'];?></h4>

@@ -16,9 +16,11 @@ $by_target_id = (int)get_input("by_target");
 if($rating = array_pop(ClipitRating::get_by_id(array($id)))){
     $group_id = (int)get_input("group_id");
     $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
-    $body = '<div style="margin-bottom: 10px;">
-                <span class="label label-blue"><i class="fa fa-users"></i> '.$group->name.'</span>
-             </div>';
+    if($group){
+        $body = '<div style="margin-bottom: 10px;">
+                    <span class="label label-blue"><i class="fa fa-users"></i> '.$group->name.'</span>
+                 </div>';
+    }
     $body .= elgg_view('publications/rating_full', array('entity'  => $rating));
     $user = array_pop(ClipitUser::get_by_id(array($rating->owner_id)));
     echo elgg_view("page/components/modal",

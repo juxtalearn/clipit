@@ -31,16 +31,21 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
             </div>
             <div class="row details">
                 <div class="col-md-8">
-                    <small class="show">
-                    <strong>Published on</strong> <?php echo htmlspecialchars(date(elgg_echo('friendlytime:date_format'), $entity->time_created));?>
-                    (<?php echo elgg_view('output/friendlytime', array('time' => $entity->time_created));?>)
-                    </small>
-                    <span class="label label-blue"><i class="fa fa-users"></i> Los manolos</span>
-                    <h4><strong>Tags</strong></h4>
+                    <div class="description" data-shorten="true">
+                        <div style="margin-bottom: 10px;">
+                            <span class="label label-blue pull-right"><i class="fa fa-users"></i> Los manolos</span>
+                            <small class="show">
+                                <strong>Published on</strong> <?php echo htmlspecialchars(date(elgg_echo('friendlytime:date_format'), $entity->time_created));?>
+                                (<?php echo elgg_view('output/friendlytime', array('time' => $entity->time_created));?>)
+                            </small>
+                        </div>
+                        <?php echo $entity->description; ?>
+                    </div>
+                    <h4><strong><?php echo elgg_echo("tags"); ?></strong></h4>
                     <div class="tags">
                         <?php echo elgg_view("page/elements/tags", array('tags' => $tags)); ?>
                     </div>
-                    <h4><strong>Labels</strong></h4>
+                    <h4><strong><?php echo elgg_echo("labels"); ?></strong></h4>
                     <div>
                         <?php echo elgg_view('output/url', array(
                             'href'  => "javascript:;",
@@ -50,18 +55,9 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
                         ));
                         ?>
                         <small class="blue text-truncate" id="label_list">
-                            <span style="border-bottom: 1px dotted #32b4e5;">mola mucho</span>,
-                            <span style="border-bottom: 1px dotted #32b4e5;">comedia</span>
-                            <span style="border-bottom: 1px dotted #32b4e5;">lorem ipsum</span>
-                            <span style="border-bottom: 1px dotted #32b4e5;">lorem</span>
-                            <span style="border-bottom: 1px dotted #32b4e5;">lorem</span>
-                            <span style="border-bottom: 1px dotted #32b4e5;">lorem</span>
-                            <span style="border-bottom: 1px dotted #32b4e5;">Lorem ipsum dolor sit</span>
-                            <span style="border-bottom: 1px dotted #32b4e5;">Lorem ipsum dolor sit</span>
-                            <span style="border-bottom: 1px dotted #32b4e5;">Lorem ipsum dolor sit</span>
+                            <?php echo elgg_view("page/elements/labels", array('labels' => $entity->label_array)); ?>
                         </small>
                     </div>
-                    <?php echo elgg_view("page/elements/labels", array('tags' => $tags)); ?>
                     <?php echo elgg_view_form("publications/labels/add",
                         array(
                             'body' => elgg_view("publications/labels/add", array('entity_id' => $entity->id)),
@@ -70,10 +66,6 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
                         )
                         );
                     ?>
-                    <h4><strong>Description</strong></h4>
-                    <div class="description" data-shorten="true">
-                        <?php echo $entity->description; ?>
-                    </div>
                 </div>
                 <!-- Star rating -->
                 <div class="col-md-4">

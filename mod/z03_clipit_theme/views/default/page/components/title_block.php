@@ -13,9 +13,9 @@
 $title = elgg_extract('title', $vars, '');
 $secondary_text = elgg_extract('secondary_text', $vars, '');
 ?>
-<h2 class="title-block">
+<h3 class="title-block">
     <?php echo $title; ?>
     <?php if($secondary_text): ?>
     <span class="pull-right blue-lighter"><?php echo $secondary_text; ?></span>
     <?php endif; ?>
-</h2>
+</h3>

@@ -55,7 +55,7 @@ if (is_array($items) && count($items) > 0):
                             <?php echo $activity_link; ?>
                         </h4>
                         <div style='color: #999;'>
-                            <i class='fa fa-calendar'></i> 20/03/2014 - 01/10/2014
+                            <i class='fa fa-calendar'></i> <?php echo $item->time_created;?> - 01/10/2014
                         </div>
                         <div style='max-height: 40px; overflow: hidden; color: #666666;margin-top: 5px; '>
                             <?php echo $item->description; ?>

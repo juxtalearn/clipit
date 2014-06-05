@@ -11,16 +11,18 @@
  * @package         ClipIt
  */
 $entity = elgg_extract('entity', $vars);
-$activity = elgg_extract('activity', $vars);
+$parent_id = elgg_extract('parent_id', $vars);
 $tt_tags = elgg_extract('tags', $vars);
 
+$performance_items = $entity->performance_item_array;
 $tags = $entity->tag_array;
-$tag_value = array();
-foreach($tags as $tag_id){
-    $tag = array_pop(ClipitTag::get_by_id(array($tag_id)));
-    $tag_value[] = $tag->name;
+$labels = $entity->label_array;
+$label_value = array();
+foreach($labels as $label_id){
+    $label = array_pop(ClipitLabel::get_by_id(array($label_id)));
+    $label_value[] = $label->name;
 }
-$tags_value = implode(", ", $tag_value);
+$labels_value = implode(", ", $label_value);
 ?>
 
 <?php echo elgg_view("input/hidden", array(
@@ -29,13 +31,13 @@ $tags_value = implode(", ", $tag_value);
 )); ?>
 <?php echo elgg_view("input/hidden", array(
     'name' => 'parent-id',
-    'value' => $parent->id,
+    'value' => $parent_id,
 )); ?>
 
 <?php echo elgg_view("input/hidden", array(
-    'name' => 'tags',
-    'id' => 'input_tags',
-    'value' => $tags_value
+    'name' => 'labels',
+    'id' => 'input_labels',
+    'value' => $labels_value
 ));?>
 <script src="http://harvesthq.github.io/chosen/chosen.jquery.js"></script>
 <script>
@@ -63,20 +65,20 @@ $(function(){
         <div class="form-group">
             <label><?php echo elgg_echo("tags");?></label>
             <div>
-                <select data-placeholder="Select tags" style="width:100%;" multiple class="chosen-select" tabindex="8">
+                <select name="tags[]" data-placeholder="Select tags" style="width:100%;" multiple class="chosen-select" tabindex="8">
                     <option value=""></option>
                     <?php
                     foreach($tt_tags as $tag_id):
                         $tag = array_pop(ClipitTag::get_by_id(array($tag_id)));
                     ?>
-                        <option value="<?php echo $tag->id;?>"><?php echo $tag->name;?></option>
+                        <option <?php echo in_array($tag_id, $tags) ? "selected" : "";?> value="<?php echo $tag->id;?>"><?php echo $tag->name;?></option>
                     <?php endforeach;?>
                 </select>
             </div>
         </div>
         <div class="form-group">
             <label for="title"><?php echo elgg_echo("labels");?></label>
-            <ul id="tags"></ul>
+            <ul id="labels"></ul>
         </div>
         <div class="form-group">
             <label for="description"><?php echo elgg_echo("description");?></label>
@@ -91,44 +93,21 @@ $(function(){
         </div>
     </div>
 <style>
-.chosen-select-items + .chosen-container .chosen-choices li{
-    float: none;
-    font-weight: normal;
-    border: 0;
-    border-bottom: 1px solid #bae6f6;
-    border-radius: 0;
-}
-.chosen-select-items + .chosen-container .chosen-choices li input{
-    cursor: default;
-}
-.chosen-select-items + .chosen-container .chosen-choices li:last-child{
-    border: 0;
-}
-.chosen-select-items + .chosen-container .chosen-results li.group-option{
-    font-weight: normal;
-}
+
 </style>
     <div class="col-md-4">
         <img src="<?php echo $entity->preview;?>" class="img-responsive"><br>
         <label><?php echo elgg_echo("performance_items");?></label>
         <div>
-            <select data-placeholder="<?php echo elgg_echo('performance_item:select'); ?>" style="width:100%;" multiple class="chosen-select-items" tabindex="8">
+            <select name="performance_items[]" data-placeholder="<?php echo elgg_echo('performance_item:select'); ?>" style="width:100%;" multiple class="chosen-select-items" tabindex="8">
                 <option value=""></option>
-                <optgroup label="Format">
-                    <option value="20">Stop motion</option>
-                    <option>Tutorial</option>
-                    <option>Video diary</option>
+                <?php foreach(ClipitPerformanceItem::get_by_category() as $category => $items): ?>
+                <optgroup label="<?php echo $category; ?>">
+                    <?php foreach($items as $item): ?>
+                        <option <?php echo in_array($item->id, $performance_items) ? "selected" : "";?> value="<?php echo $item->id; ?>"><?php echo $item->name; ?></option>
+                    <?php endforeach; ?>
                 </optgroup>
-                <optgroup label="Genre">
-                    <option>Stop motion <i class="fa fa-question"></i></option>
-                    <option>Tutorial</option>
-                    <option>Video diary</option>
-                </optgroup>
-                <optgroup label="Story">
-                    <option>Stop motion</option>
-                    <option>Tutorial</option>
-                    <option>Video diary</option>
-                </optgroup>
+                <?php endforeach; ?>
             </select>
         </div>
     </div>

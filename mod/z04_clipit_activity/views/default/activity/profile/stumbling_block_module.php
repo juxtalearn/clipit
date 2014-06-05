@@ -1,59 +1,25 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
- * User: equipo
- * Date: 24/02/14
- * Time: 16:16
- * To change this template use File | Settings | File Templates.
+ * ClipIt - JuxtaLearn Web Space
+ * PHP version:     >= 5.2
+ * Creation date:   14/05/14
+ * Last update:     14/05/14
+ * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC JuxtaLearn Project
+ * @version         $Version$
+ * @link            http://www.juxtalearn.eu
+ * @license         GNU Affero General Public License v3
+ * @package         ClipIt
  */
+$tags = elgg_extract("tags", $vars);
 ?>
-<div style="
-    background: #BAE6F6;
-    margin-top: 20px;
-"><h3 style="
-    font-family: FuturaBoldRegular, Impact, 'Impact Bold', Helvetica, Arial;
-    color: #32b4e5;
-    margin-top: 0;
-    padding: 15px 25px;
-    margin-bottom: 0;
-    padding-right: 0;
-">Stumbling blocks</h3>
-
-    <ul>
-
-
-        <li style="
-    border-bottom: 1px solid #fff;
-
-"><div style="
-    color: #32b4e5;  font-weight: bold;
-    margin: 5px;
-    padding-left: 20px;
-">Lorem</div></li><li style="
-    border-bottom: 1px solid #fff;
-           "><div style="
-    color: #32b4e5;  font-weight: bold;
-    margin: 5px;
-    padding-left: 20px;
-">Lorem</div></li>
-        <li style="
-    border-bottom: 1px solid #fff;
-           "><div style="
-    color: #32b4e5;  font-weight: bold;
-    margin: 5px;
-    padding-left: 20px;
-">Lorem</div></li>
-        <li style="
-    border-bottom: 1px solid #fff;
-           "><div style="
-    color: #32b4e5;  font-weight: bold;
-    margin: 5px;
-    padding-left: 20px;
-">Lorem</div></li><li style="
-    border-bottom: 1px solid #fff;
-           "><div style="
-    color: #32b4e5;  font-weight: bold;
-    margin: 5px;
-    padding-left: 20px;
-">Lorem</div></li>
-    </ul></div>
+<div class="tags-block">
+    <h3><?php echo elgg_echo("tags");?></h3>
+    <ul class="tags-list">
+        <?php
+        foreach($tags as $tag_id):
+            $tag = array_pop(ClipitTag::get_by_id(array($tag_id)));
+            ?>
+            <li><a href=""><strong><?php echo $tag->name;?></strong></a></li>
+        <?php endforeach;?>
+    </ul>
+</div>

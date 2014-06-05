@@ -26,7 +26,7 @@ $nav = elgg_extract('nav', $vars, elgg_view('navigation/breadcrumbs'));
 $filter = elgg_extract('filter', $vars);
 $subtitle = "";
 if($vars['sub-title']){
-    $subtitle = "<h3>".$vars['sub-title']."</h3>";
+    $subtitle = "<h4>".$vars['sub-title']."</h4>";
 }
 ?>
 

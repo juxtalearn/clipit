@@ -23,6 +23,7 @@ $english = array(
     'activity:stas' => 'Materials',
     'activity:publications' => 'Publications',
     'activity:join' => 'Join activity',
+    'activity:actual_deadline' => 'Actual deadline',
     'activity:next_deadline' => 'Next deadline',
     'activity:quiz' => 'Activity Quiz',
     'activity:teachers' => 'Teachers',
@@ -124,6 +125,7 @@ $english = array(
     // Labels
     'labels' => 'Labels',
     // Tags
+    'tags' => 'Tags',
     'tags:commas:separated' => 'Separated by commas',
     // Performance items
     'performance_items' => 'Performance items',

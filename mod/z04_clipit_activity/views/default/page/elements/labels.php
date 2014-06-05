@@ -1,5 +1,5 @@
 <?php
- /**
+/**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
  * Creation date:   19/05/14
@@ -10,19 +10,19 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$tags = elgg_extract("tags", $vars);
-if(!$tags): ?>
-    <span class="text-muted">no tags added</span>
+$labels = elgg_extract("labels", $vars);
+if(!$labels): ?>
+    <span class="text-muted">no labels added</span>
 <?php endif; ?>
 <?php
-foreach($tags as $tag_id):
-    $tag = array_pop(ClipitTag::get_by_id(array($tag_id)));
-?>
+foreach($labels as $label_id):
+    $label = array_pop(ClipitLabel::get_by_id(array($label_id)));
+    ?>
     <?php echo elgg_view('output/url', array(
-    'href'  => "explore/".$tag->name,
-    'title' => $tag->name,
-    'text'  => $tag->name,
-    'class' => 'label label-primary'
-    ));
+    'href'  => "explore/".$label->name,
+    'title' => $label->name,
+    'text'  => $label->name,
+    'style' => 'border-bottom: 1px dotted #32b4e5;margin-right: 5px;',
+));
     ?>
 <?php endforeach; ?>

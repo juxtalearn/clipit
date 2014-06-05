@@ -29,14 +29,9 @@ if(isset($vars['remove'])){
         'icon' => 'trash-o',
     );
 }
-// Config icon -> left position
-/*$options = array(
-    'style' => 'float:left;margin-right:10px;',
-    'button' => '<button data-toggle="dropdown" class="btn-options btn btn-xs"><i class="fa fa-cog"></i> <b class="caret"></b></button>',
-    'options' => $options_list,
-);*/
+
 $options = array(
-    'style' => 'float:right;margin-right:10px;',
+    'style' => 'float:right;',
     'button' => '<button data-toggle="dropdown" class="btn-options btn btn-xs"><b>'.elgg_echo("options").'</b> <b class="caret"></b></button>',
     'options' => $options_list,
 );
