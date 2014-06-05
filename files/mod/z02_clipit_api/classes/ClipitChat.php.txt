@@ -43,7 +43,7 @@ class ClipitChat extends UBMessage{
     static function get_inbox($user_id){
         $inbox_array = array();
         $incoming_messages = static::get_by_destination(array($user_id));
-        $incoming_messages = array_pop($incoming_messages);
+        $incoming_messages = $incoming_messages[$user_id];
         if($incoming_messages !== null){
             $sender_array = array();
             foreach($incoming_messages as $message){
