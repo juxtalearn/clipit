@@ -25,6 +25,7 @@ function clipit_api_init(){
     loadFiles(elgg_get_plugins_path() . "z02_clipit_api/libraries/juxtalearn-cookie-authentication/");
     expose_clipit_api();
     rename_subtypes(); // temporal to avoid loosing data
+    //include_once(elgg_get_plugins_path() . "z02_clipit_api/activate.php");
 }
 
 /**
