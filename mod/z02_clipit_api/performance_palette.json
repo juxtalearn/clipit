@@ -1,0 +1,102 @@
+{
+    "performance_palette" : [
+        {
+            "category": "format",
+            "category_description": "Performance format is the manner of executing a performance",
+            "items": [
+                {
+                    "name": "Animation",
+                    "description": "To animate a film, the filmmaker films drawings, illustrations or models frame by frame. Each frame differs slightly from the one before it, giving the illusion of movement when frames are projected in rapid succession at 24 frames per second.",
+                    "example": "Spirited Away (Japan 2001 – classic Studio Ghibli), Snow White (1937), The Adventures of Prince Achmed (1937), Shrek 2 (2004)."
+                },
+                {
+                    "name": "Behind-the-scenes",
+                    "description": "A behind-the-scenes is a documentary that uses video to discuss the process of making the video, the roles taken in its production, and the learning from the experience. It might look at the costumes, the scene painting, rehearsals, wardrobe, and take-outs.",
+                    "example": "Lost In La Mancha (Gilliam 2002)."
+                },
+                {
+                    "name": "Commentary",
+                    "description": "This genre is most commonly associated with DVDs and Blu-ray special features. Crewmembers, such as actors, directors and producers, are gathered in a studio to speak in real-time (or what appears to be real time) about the movie as it plays.",
+                    "example": ""
+                },
+                {
+                    "name": "Mash-up",
+                    "description": "A mash-up consists of lots of assets (videos, music, audio, stills) collected together into one film.",
+                    "example": ""
+                },
+                {
+                    "name": "Chat show",
+                    "description": "A chat show involves a host and a guest or guests who discuss the topics and questions that the host puts to them.",
+                    "example": "Richard & Judy, The Jerry Springer show, Die Harald Schmidt Show."
+                },
+                {
+                    "name": "Game",
+                    "description": "A game is play that is fun, provides a challenge or a goal, with rules that allow or constrain moves or behaviours or things.",
+                    "example": "Space invaders, Noughts and crosses (tac-tac-toe), Carcassonne."
+                },
+                {
+                    "name": "Non-verbal",
+                    "description": "",
+                    "example": "Juggling, dance, silent movie, music."
+                },
+                {
+                    "name": "Piece-to-camera",
+                    "description": "Subject or presenter addresses the camera directly, and by association the audience. This has an immediate and direct effect on the audience. This is commonly used in a video diary format or when a news reporter is in a dramatic situation and is reporting directly from there.",
+                    "example": "Reporting from a famine or war zone."
+                },
+                {
+                    "name": "Pitch",
+                    "description": "A pitch is a verbal argument as to why your film is worth making so you make a proposal for support of cash or time for your film. A pitch could be a formal presentation or a chance encounter.",
+                    "example": ""
+                },
+                {
+                    "name": "Puppets",
+                    "description": "Puppets can be hand puppets or marionettes, and the video is created in real.",
+                    "example": "The Muppets, Sesame Street, Spitting Image"
+                },
+                {
+                    "name": "Tutorial",
+                    "description": "A tutorial is a means for interactively teaching a small group of people with examples and exercises on a specific topic.",
+                    "example": "Code academy: http://www.codecademy.com/, https://www.khanacademy.org/"
+                },
+                {
+                    "name": "Video diary",
+                    "description": "A video diary is a personal view of how the speaker sees the world, with immediate reactions and thoughts. The setting will reflect the speaker’s passions and interests.  The technical simplicity of the set-up means that anyone can record their thoughts straight to camera without recourse to complex camera set-ups. Non-professionals often use video diary is used by to create an intimate diary of a situation, and it is usually recorded alone.",
+                    "example": ""
+                },
+                {
+                    "name": "Stop motion",
+                    "description": "Stop motion is the same as animation, where, by moving an object a small bit at a time between frames, it appears animated.  It can be done for example with Lego bricks, or clay models.",
+                    "example": "The Polar Express (2004)"
+                },
+                {
+                    "name": "Treatment",
+                    "description": "A treatment is a written proposal that summarises the proposed film, with enough detail to decide if the idea is worth supporting, what purpose it will serve, & who might be the potential audience. It will include: title, tagline, duration, target audience, concept, production, creative and technical descriptions.",
+                    "example": ""
+                }
+            ]
+        },
+        {
+            "category": "genre",
+            "category_description" : "Genre is the style or category of the performance.",
+            "items" : [
+                {
+                    "name": "Action",
+                    "description": "Action includes creative fiction with exciting sequences such as car chases or martial arts.",
+                    "example": ""
+                }
+            ]
+        },
+        {
+            "category": "story",
+            "category_description": "Choices of plot, characters and setting interrelate and make one story different from another.",
+            "items": [
+                {
+                    "name": "Animation",
+                    "description": "A plot explains events and resolves some sort of a conflict, so it goes beyond mere description e.g., not “boy meets girl” but “boy meets girl and wants to marry her, but to win her love, he has to kill the dragon”.  Choice of character and setting make a plot more convincing.",
+                    "example": ""
+                }
+            ]
+        }
+    ]
+}

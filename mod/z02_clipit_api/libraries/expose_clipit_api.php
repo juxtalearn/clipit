@@ -26,7 +26,6 @@ function expose_clipit_api(){
     expose_la_functions();
     expose_label_functions();
     expose_performance_item_functions();
-    expose_performance_palette_functions();
     expose_performance_rating_functions();
     expose_post_functions();
     expose_quiz_functions();
@@ -110,6 +109,12 @@ function expose_common_functions($api_suffix, $class_suffix){
                 "type" => "array",
                 "required" => true)),
         "Delete instances by Id",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "delete_all",
+        $class_suffix . "delete_all",
+        null,
+        "Delete all instances of this class",
         'POST', false, true);
     expose_function(
         $api_suffix . "get_all",

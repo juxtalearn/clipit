@@ -13,6 +13,8 @@ class ClipitPerformanceItem extends UBItem{
     const SUBTYPE = "ClipitPerformanceItem";
 
     public $category = "";
+    public $category_description = "";
+    public $example = "";
 
     /**
      * Loads object parameters stored in Elgg
@@ -21,7 +23,9 @@ class ClipitPerformanceItem extends UBItem{
      */
     protected function load_from_elgg($elgg_object){
         parent::load_from_elgg($elgg_object);
-        $this->category = (int)$elgg_object->get("category");
+        $this->category = (string)$elgg_object->get("category");
+        $this->category_description = (string)$elgg_object->get("category_description");
+        $this->example = (string)$elgg_object->get("example");
     }
 
     /**
@@ -31,7 +35,26 @@ class ClipitPerformanceItem extends UBItem{
      */
     protected function copy_to_elgg($elgg_entity){
         parent::copy_to_elgg($elgg_entity);
-        $elgg_entity->set("category", (int)$this->category);
+        $elgg_entity->set("category", (string)$this->category);
+        $elgg_entity->set("category_description", (string)$this->category_description);
+        $elgg_entity->set("example", (string)$this->example);
+    }
+
+    static function get_by_category($category = null){
+        $performance_items = static::get_all();
+        $category_array = array();
+        if(empty($category)){
+            foreach($performance_items as $performance_item){
+                $category_array[$performance_item->category][] = $performance_item;
+            }
+        } else{
+            foreach($performance_items as $performance_item){
+                if($performance_item->category == $category){
+                    $category_array[$category] = $performance_item;
+                }
+            }
+        }
+        return $category_array;
     }
 
 } 
