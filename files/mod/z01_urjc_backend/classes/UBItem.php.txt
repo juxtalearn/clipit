@@ -281,9 +281,11 @@ class UBItem{
      */
     static function delete_all(){
         $items = static::get_all();
-        foreach($items as $item){
-            if(!$item->delete()){
-                return false;
+        if(!empty($items)) {
+            foreach ($items as $item) {
+                if (!$item->delete()) {
+                    return false;
+                }
             }
         }
         return true;
