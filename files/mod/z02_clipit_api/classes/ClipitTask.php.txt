@@ -39,6 +39,7 @@ class ClipitTask extends UBItem{
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
     protected function load_from_elgg($elgg_entity){
+        $save_after_load = false;
         parent::load_from_elgg($elgg_entity);
         $this->task_type = (string)$elgg_entity->get("task_type");
         // if $this->type not one of the valid types, then type = other
@@ -51,12 +52,25 @@ class ClipitTask extends UBItem{
                 static::TYPE_OTHER))
             === false){
             $this->task_type = static::TYPE_OTHER;
+            $save_after_load = true;
         }
         $this->start = (int)$elgg_entity->get("start");
         if((int)$this->start == 0){
             $this->start = (int)$elgg_entity->time_created;
+            $save_after_load = true;
         }
         $this->end = (int)$elgg_entity->get("end");
+        if($this->end == 0){
+            $activity_id = static::get_activity($this->id);
+            if(!empty($activity_id)){
+                $prop_value_array = (int) ClipitActivity::get_properties($activity_id, array("deadline"));
+                $this->end = $prop_value_array["deadline"];
+                $save_after_load = true;
+            }
+        }
+        if($save_after_load){
+            $this->save();
+        }
     }
 
     /**
