@@ -37,13 +37,18 @@ $total_replies = array_pop(ClipitPost::count_by_destination(array($entity->id)))
         <?php endif; ?>
     </div>
     <small class="show">
-        <?php echo $total_replies; ?>
-        <i class="fa fa-comment blue"></i>
+        <?php echo elgg_view('output/url', array(
+            'href'  => $vars['href']."#replies",
+            'title' => elgg_echo("reply:total", array($total_replies)),
+            'text'  => '<i class="fa fa-comment fa-stack-2x"></i><i class="fa-stack-1x replies-count" style="color:#fff;font-style: normal;">'.$total_replies.'</i>',
+            'class' => 'fa-stack'
+        ));
+        ?>
         <?php echo elgg_view('output/url', array(
             'href'  => $vars['href']."#create_reply",
             'title' => elgg_echo('reply'),
-            'text'  => '<i class="fa fa-plus"></i>'.elgg_echo('reply'),
-            'class' => 'btn btn-xs btn-border-blue pull-right'
+            'text'  => '<i class="fa fa-plus"></i> '.elgg_echo('reply'),
+            'class' => 'btn btn-xs btn-primary pull-right'
         ));
         ?>
     </small>

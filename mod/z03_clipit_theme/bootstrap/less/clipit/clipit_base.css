@@ -7062,6 +7062,17 @@ fieldset[disabled] .elgg-sidebar input.elgg-button-submit.active {
   color: #32b4e5;
   opacity: 0.7;
 }
+.btn-options + .dropdown-menu {
+  min-width: initial;
+}
+.btn-options + .dropdown-menu > li > a {
+  font-weight: bold;
+  letter-spacing: 0;
+  font-size: 12px;
+}
+.btn-options + .dropdown-menu > li > a > i.fa {
+  margin-right: 3px;
+}
 .btn-border-blue {
   color: #ffffff;
   background-color: #428bca;
@@ -8223,15 +8234,6 @@ ul.deadline-list > li .fa {
   font-size: 15px;
   vertical-align: text-bottom;
 }
-.activity-group-block .fa.status-deadline.fa-check-square-o {
-  color: #99cb00;
-}
-.activity-group-block .fa.status-deadline.fa-times {
-  color: #ff4343;
-}
-.activity-group-block .fa.status-deadline.fa-minus-square-o {
-  color: #d8ba05;
-}
 .comment-button {
   border: 1px solid #32b4e5;
   color: #32b4e5;
@@ -8319,7 +8321,7 @@ ul.deadline-list > li .fa {
   padding-bottom: 5px;
 }
 .discussion-owner-msg .header-post .block .title {
-  margin: 0;
+  margin-top: 0;
 }
 .discussion-reply-msg {
   padding: 20px;
@@ -9982,21 +9984,29 @@ h6,
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
   border-radius: 0;
 }
+.dropdown-menu > li {
+  border-bottom: 1px solid #bae6f6;
+}
+.dropdown-menu > li:last-child {
+  border: 0;
+}
 .dropdown-menu > li > a {
-  font-family: Helvetica, Arial, sans-serif;
   font-size: 14px;
   -webkit-transition: all 0.25s;
   transition: all 0.25s;
   letter-spacing: 1px;
+  color: #32b4e5;
 }
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus {
   background-color: #f5f5f5;
   color: #32b4e5 !important;
 }
-.dropdown-menu > li > a.remove {
-  color: #fff;
+.dropdown-menu > li > a.remove:hover,
+.dropdown-menu > li > a.remove:focus {
+  color: #fff !important;
   background-color: #ff4343;
+  opacity: 1;
 }
 .nav-tabs {
   border-bottom: 0;

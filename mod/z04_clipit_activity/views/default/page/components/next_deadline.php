@@ -17,8 +17,8 @@
 <!--    <strong><a>Upload storyboard</a></strong>-->
 <!--</div>-->
 <div>
-    <i class="status-deadline fa fa-check-square-o"></i>
-    <strong><a>Upload storyboard</a></strong>
+    <i class="status-deadline fa fa-check-square-o green"></i>
+    <strong><a href="">Upload storyboard</a></strong>
 </div>
 <!--<div>-->
 <!--    <i class="status-deadline fa fa-times"></i>-->

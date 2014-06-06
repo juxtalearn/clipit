@@ -45,7 +45,7 @@ if($message->owner_id == elgg_get_logged_in_user_guid()){
         <?php echo $owner_options; ?>
         <img class="user-avatar" src="<?php echo $owner->getIconURL('small'); ?>" />
         <div class="block">
-            <h2 class="title"><?php echo $message->name; ?></h2>
+            <h3 class="title"><?php echo $message->name; ?></h3>
             <small class="show">
                 <i>
                     Created by

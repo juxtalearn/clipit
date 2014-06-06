@@ -14,8 +14,14 @@ $group = elgg_extract('entity', $vars);
 ?>
 <div class="row">
     <div class="col-md-12">
-        <?php echo elgg_view("page/components/title_block", array('title' => elgg_echo("group:progress"))); ?>
-        Barra de progreso... y alguna info más
+        <h3><?php echo elgg_echo("group:progress"); ?></h3>
+        <?php
+        echo elgg_view("page/components/progressbar", array(
+            'value' => 30,
+            'width' => '100%',
+        ));
+        ?>
+        <?php echo elgg_view("page/components/next_deadline", array('entity' => $group)); ?>
     </div>
 </div>
 <div class="row">

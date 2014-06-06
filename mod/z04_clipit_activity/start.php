@@ -66,7 +66,7 @@ function clipit_activity_init() {
     elgg_register_action("publications/publish", elgg_get_plugins_path() . "z04_clipit_activity/actions/publications/publish.php");
     elgg_register_action("publications/labels/add", elgg_get_plugins_path() . "z04_clipit_activity/actions/publications/labels/add.php");
     elgg_register_ajax_view('modal/publications/rating');
-    elgg_register_ajax_view('publications/tags/search');
+    elgg_register_ajax_view('publications/labels/search');
     // Discussion
     elgg_register_action("discussion/create", elgg_get_plugins_path() . "z04_clipit_activity/actions/discussion/create.php");
     elgg_register_action("discussion/remove", elgg_get_plugins_path() . "z04_clipit_activity/actions/discussion/remove.php");
@@ -153,17 +153,6 @@ function activity_setup_sidebar_menus(){
 }
 
 
-/**
- * Populates the ->getUrl() method for group objects
- *
- * @param ElggEntity $entity File entity
- * @return string File URL
- */
-//function activity_url($entity) {
-//    $title = elgg_get_friendly_title($entity->name);
-//
-//    return "activity_{$entity->id}";
-//}
 
 /**
  * Activity page handler
