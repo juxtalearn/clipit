@@ -40,7 +40,13 @@ class ClipitPerformanceItem extends UBItem{
         $elgg_entity->set("example", (string)$this->example);
     }
 
-    static function get_by_category($category = null){
+    /**
+     * Gets all Items by category, or all items grouped by category if no category is specified.
+     *
+     * @param string $category
+     * @return static[] Array of Items for the specified category
+     */
+    static function get_by_category($category = ""){
         $performance_items = static::get_all();
         $category_array = array();
         if(empty($category)){
@@ -50,7 +56,7 @@ class ClipitPerformanceItem extends UBItem{
         } else{
             foreach($performance_items as $performance_item){
                 if($performance_item->category == $category){
-                    $category_array[$category] = $performance_item;
+                    $category_array[] = $performance_item;
                 }
             }
         }
