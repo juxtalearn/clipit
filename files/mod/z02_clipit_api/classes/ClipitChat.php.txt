@@ -25,9 +25,9 @@ class ClipitChat extends UBMessage{
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_object){
-        parent::load_from_elgg($elgg_object);
-        $this->archived_array = (array)$elgg_object->get("archived_array");
+    protected function load_from_elgg($elgg_entity){
+        parent::load_from_elgg($elgg_entity);
+        $this->archived_array = (array)$elgg_entity->get("archived_array");
     }
 
     /**

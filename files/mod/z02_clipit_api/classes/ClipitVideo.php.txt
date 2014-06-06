@@ -39,10 +39,10 @@ class ClipitVideo extends ClipitPublication{
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_object){
-        parent::load_from_elgg($elgg_object);
-        $this->preview = (string)$elgg_object->get("preview");
-        $this->duration = (int)$elgg_object->get("duration");
+    protected function load_from_elgg($elgg_entity){
+        parent::load_from_elgg($elgg_entity);
+        $this->preview = (string)$elgg_entity->get("preview");
+        $this->duration = (int)$elgg_entity->get("duration");
     }
 
     /**

@@ -32,11 +32,11 @@ class ClipitTrickyTopic extends UBItem{
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_object){
-        parent::load_from_elgg($elgg_object);
-        $this->subject = (string)$elgg_object->get("subject");
-        $this->country = (string)$elgg_object->get("country");
-        $this->tag_array = (array)$elgg_object->get("tag_array");
+    protected function load_from_elgg($elgg_entity){
+        parent::load_from_elgg($elgg_entity);
+        $this->subject = (string)$elgg_entity->get("subject");
+        $this->country = (string)$elgg_entity->get("country");
+        $this->tag_array = (array)$elgg_entity->get("tag_array");
     }
 
     /**

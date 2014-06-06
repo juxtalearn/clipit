@@ -55,14 +55,14 @@ class ClipitQuizQuestion extends UBItem{
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_object){
-        parent::load_from_elgg($elgg_object);
+    protected function load_from_elgg($elgg_entity){
+        parent::load_from_elgg($elgg_entity);
         $this->tag_array = static::get_tags($this->id);
         $this->quiz_result_array = static::get_quiz_results($this->id);
-        $this->option_array = (array)$elgg_object->get("option_array");
-        $this->option_type = (string)$elgg_object->get("option_type");
-        $this->video = (int)$elgg_object->get("video");
-        $this->difficulty = (int)$elgg_object->get("difficulty");
+        $this->option_array = (array)$elgg_entity->get("option_array");
+        $this->option_type = (string)$elgg_entity->get("option_type");
+        $this->video = (int)$elgg_entity->get("video");
+        $this->difficulty = (int)$elgg_entity->get("difficulty");
     }
 
     /**

@@ -21,11 +21,11 @@ class ClipitPerformanceItem extends UBItem{
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_object){
-        parent::load_from_elgg($elgg_object);
-        $this->category = (string)$elgg_object->get("category");
-        $this->category_description = (string)$elgg_object->get("category_description");
-        $this->example = (string)$elgg_object->get("example");
+    protected function load_from_elgg($elgg_entity){
+        parent::load_from_elgg($elgg_entity);
+        $this->category = (string)$elgg_entity->get("category");
+        $this->category_description = (string)$elgg_entity->get("category_description");
+        $this->example = (string)$elgg_entity->get("example");
     }
 
     /**

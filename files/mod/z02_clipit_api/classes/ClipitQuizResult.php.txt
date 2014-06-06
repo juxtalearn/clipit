@@ -39,10 +39,10 @@ class ClipitQuizResult extends UBItem{
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_object){
-        parent::load_from_elgg($elgg_object);
-        $this->user = (int)$elgg_object->get("user");
-        $this->correct = (bool)$elgg_object->get("correct");
+    protected function load_from_elgg($elgg_entity){
+        parent::load_from_elgg($elgg_entity);
+        $this->user = (int)$elgg_entity->get("user");
+        $this->correct = (bool)$elgg_entity->get("correct");
         $this->quiz_question = (int)static::get_quiz_question($this->id);
     }
 
