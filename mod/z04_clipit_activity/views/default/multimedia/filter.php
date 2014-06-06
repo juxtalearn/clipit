@@ -31,11 +31,6 @@ $tabs = array(
         'href' => "{$href}?filter=storyboards",
         'priority' => 400,
     ),
-    'links' => array(
-        'text' => elgg_echo('multimedia:links').' (n)',
-        'href' => "{$href}?filter=links",
-        'priority' => 500,
-    ),
 );
 
 foreach ($tabs as $name => $tab) {

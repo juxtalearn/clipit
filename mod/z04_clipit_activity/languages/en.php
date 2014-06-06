@@ -59,6 +59,7 @@ $english = array(
     'group:edit' => 'Group edit',
     'group:members' => 'Members',
     // Discussion
+    'discussions:none' => 'No discussions',
     'discussion:created' => 'Discussion created',
     'discussion:cantcreate' => 'You can not create a discussion',
     'discussion:edit' => 'Edit topic',

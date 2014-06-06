@@ -7,18 +7,17 @@
  * To change this template use File | Settings | File Templates.
  */
 $entity = elgg_extract("entity", $vars);
+$messages = elgg_extract("messages", $vars);
 $href = elgg_extract("href", $vars);
 $user_id = elgg_get_logged_in_user_guid();
 $activity_id = elgg_get_page_owner_guid();
-// Get all messages by destination
-$messages_array = array_pop(ClipitPost::get_by_destination(array($entity->id)));
 ?>
 <div style="margin-bottom: 15px;">
     <?php echo elgg_view_form('discussion/create', array('data-validate'=> 'true' ,'class'=> 'fileupload'), array('entity'  => $entity)); ?>
     <button type="button" data-toggle="modal" data-target="#create-new-topic" class="btn btn-default">Create a new topic</button>
 </div>
 <?php
-foreach($messages_array as $message):
+foreach($messages as $message):
     $message_text = trim(elgg_strip_tags($message->description));
     // Message text truncate max length 280
     if(mb_strlen($message_text)>280){
@@ -27,7 +26,7 @@ foreach($messages_array as $message):
     $total_replies = array_pop(ClipitPost::count_by_destination(array($message->id)));
     $total_unread_replies = array_pop(ClipitPost::unread_by_destination(array($message->id), $user_id, true));
     if($total_unread_replies > 0){
-        $total_replies = "+ ".$total_unread_replies;
+        $total_replies = "+".$total_unread_replies;
     }
     // Get owner user object
     $owner = array_pop(ClipitUser::get_by_id(array($message->owner_id)));

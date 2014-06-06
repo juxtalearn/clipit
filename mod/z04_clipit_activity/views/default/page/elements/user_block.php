@@ -20,7 +20,6 @@ $user_elgg = new ElggUser($user->id);
         'href'  => "profile/".$user->login,
         'title' => $user->name,
         'text'  => $user->name,
-        'style' => 'border-left: 1px solid #C9C9C9;padding-left: 5px;'
     ));
     ?>
 </div>

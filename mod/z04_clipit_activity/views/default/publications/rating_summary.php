@@ -22,10 +22,9 @@ $rating_overall = '<div class="rating readonly '.$class.'" data-score="'.$perfor
 echo elgg_view("page/components/modal_remote", array('id'=> "rating-average-{$rating->id}" ));
 echo elgg_view('output/url', array(
     'href'  => "ajax/view/modal/publications/rating?id={$rating->id}&group_id={$group_id}",
-    'class' => 'btn btn-default btn-xs pull-right',
+    'class' => 'btn btn-default btn-xs pull-right btn-border-yellow',
     'text'  => '<i class="fa fa-star"></i> '.elgg_echo("publications:rating"),
     'data-toggle'   => 'modal',
-    'style' => 'color: #e7d333;background: #fff;border: 1px solid #e7d333;',
     'data-target'   => '#rating-average-'.$rating->id
 ));
 ?>

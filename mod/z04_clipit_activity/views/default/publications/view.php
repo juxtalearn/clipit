@@ -23,7 +23,7 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
 <div class="multimedia-owner multimedia-pub">
     <div class="block">
         <div class="header">
-            <h2 class="title"><?php echo $entity->name; ?></h2>
+            <h3 class="title"><?php echo $entity->name; ?></h3>
         </div>
         <div class="multimedia-body">
             <div class="multimedia-view">
@@ -102,7 +102,7 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
                             echo elgg_view('output/url', array(
                                 'href'  => "ajax/view/modal/publications/rating?by_target={$entity->id}&activiy_id={$activity_id}",
                                 'text'  => elgg_echo("view"),
-                                'class' => 'btn btn-default btn-xs pull-right all',
+                                'class' => 'btn btn-xs btn-default pull-right btn-border-blue',
                                 'data-toggle'   => 'modal',
                                 'data-target'   => '#rating-list-'.$entity->id
                             ));

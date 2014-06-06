@@ -14,7 +14,12 @@ $files = elgg_extract("files", $vars);
 $entity = elgg_extract('entity', $vars);
 $href = elgg_extract("href", $vars);
 $add_files = elgg_extract("add_files", $vars);
-
+$task_id = ClipitTask::create(array(
+    'name' => 'Upload video',
+    'type' => '',
+    'deadline' => time()
+));
+ClipitActivity::add_tasks(74, array($task_id));
 foreach($files as $file_id){
     $file =  array_pop(ClipitFile::get_by_id(array($file_id)));
     $file_url = "{$href}/view/{$file->id}";
@@ -50,8 +55,7 @@ foreach($files as $file_id){
                     '.elgg_view('output/url', array(
                         'href'  => "{$href}/download/".$file->id,
                         'title' => $owner->name,
-                        'class' => 'btn btn-default',
-                        'style' => 'padding: 5px 10px;',
+                        'class' => 'btn btn-default btn-icon',
                         'text'  => '<i class="fa fa-download"></i>')).'
                     <small class="show text-truncate" title="'.formatFileSize($file->size).'" style="margin-top: 3px;">
                         '.formatFileSize($file->size).'
@@ -101,3 +105,16 @@ $content_list .= elgg_view("page/elements/list/table", array('rows' => $rows, 'c
 // File list
 echo elgg_view_form("multimedia/files/set_options", array('body' => $content_list));
 ?>
+<style>
+.labelx:after{
+    content: " ";
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px solid;
+    border-right: 4px solid #32b4e5;
+    border-left: 4px solid #32b4e5;
+}
+</style>
