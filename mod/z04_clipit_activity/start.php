@@ -47,8 +47,6 @@ function clipit_activity_init() {
     elgg_register_action("multimedia/videos/publish", elgg_get_plugins_path() . "z04_clipit_activity/actions/multimedia/videos/publish.php");
     elgg_register_ajax_view('modal/multimedia/video/edit');
     elgg_register_ajax_view('modal/multimedia/video/publish');
-    /* Links */
-    elgg_register_action("multimedia/links/add", elgg_get_plugins_path() . "z04_clipit_activity/actions/multimedia/links/add.php");
     /* Files */
     elgg_register_action("multimedia/files/upload", elgg_get_plugins_path() . "z04_clipit_activity/actions/multimedia/files/upload.php");
     elgg_register_action("multimedia/files/remove", elgg_get_plugins_path() . "z04_clipit_activity/actions/multimedia/files/remove.php");
@@ -58,7 +56,6 @@ function clipit_activity_init() {
     elgg_register_ajax_view('multimedia/file/viewer');
     elgg_register_ajax_view('multimedia/file/upload');
     elgg_register_ajax_view('multimedia/file/attach_action');
-    elgg_register_action("multimedia/links/extract_data", elgg_get_plugins_path() . "z04_clipit_activity/actions/multimedia/links/extract_data.php");
     elgg_register_action("multimedia/videos/extract_data", elgg_get_plugins_path() . "z04_clipit_activity/actions/multimedia/videos/extract_data.php");
     elgg_register_action("multimedia/files/upload", elgg_get_plugins_path() . "z04_clipit_activity/actions/multimedia/files/upload.php");
     // Publications
@@ -136,10 +133,13 @@ function activity_setup_sidebar_menus(){
             'href' => "clipit_activity/".$activity->id."/groups",
         );
         elgg_register_menu_item('page', $params);
+
+        $total_unread_posts = array_pop(ClipitPost::unread_by_destination(array($activity_id), $user_id, true));
         $params = array(
             'name' => 'activity_discussion',
             'text' => elgg_echo('activity:discussion'),
             'href' => "clipit_activity/".$activity->id."/discussion",
+            'badge' => $total_unread_posts > 0 ? $total_unread_posts : "",
         );
         elgg_register_menu_item('page', $params);
         $params = array(
@@ -244,12 +244,16 @@ function activity_page_handler($page) {
                     $title = elgg_echo("activity:discussion");
                     $href = "clipit_activity/{$activity->id}/discussion";
                     elgg_push_breadcrumb($title);
-                    $content = elgg_view('discussion/list',
+                    $messages = array_pop(ClipitPost::get_by_destination(array($activity->id)));
+                    $content =  elgg_view('discussion/list',
                         array(
                             'entity' => $activity,
+                            'messages' => $messages,
                             'href'   => $href,
                         ));
-
+                    if(!$messages){
+                        $content .= elgg_view('output/empty', array('value' => elgg_echo('discussions:none')));
+                    }
                     if($page[2] == 'view' && $page[3]){
                         $message_id = (int)$page[3];
                         $message = array_pop(ClipitPost::get_by_id(array($message_id)));
@@ -412,13 +416,6 @@ function activity_page_handler($page) {
                             ));
                             if (!$videos) {
                                 $content .= elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
-                            }
-                            break;
-                        case 'links':
-                        default:
-                            $content = elgg_view('multimedia/links', array('entity' => $activity));
-                            if (!$content) {
-                                $content = elgg_echo('groups:none');
                             }
                             break;
                     }
@@ -589,18 +586,6 @@ function group_tools_page_handler($page, $activity){
                         $entities = ClipitGroup::get_videos($entity->id);
                     }
                     break;
-                case 'links':
-                    $content = elgg_view('multimedia/links', array('entity' => $group));
-                    if (!$content) {
-                        $content = elgg_echo('links:none');
-                    }
-                    break;
-                default:
-                    $content = elgg_view('multimedia/files', array('entity' => $group));
-                    if (!$content) {
-                        $content = elgg_echo('file:none');
-                    }
-                    break;
             }
             $filter = elgg_view('multimedia/filter', array('selected' => $selected_tab, 'entity' => $group, 'href' => $href));
             if($page[3] == 'download' && $page[4]){
@@ -685,11 +670,16 @@ function group_tools_page_handler($page, $activity){
             $title = elgg_echo("group:discussion");
             $href = "clipit_activity/{$activity->id}/group/discussion";
             elgg_push_breadcrumb($title);
+            $messages = array_pop(ClipitPost::get_by_destination(array($group->id)));
             $content =  elgg_view('discussion/list',
                     array(
                         'entity' => $group,
+                        'messages' => $messages,
                         'href'   => $href,
                     ));
+            if(!$messages){
+                $content .= elgg_view('output/empty', array('value' => elgg_echo('discussions:none')));
+            }
             if($page[3] == 'view' && $page[4]){
                 $message_id = (int)$page[4];
                 $message = array_pop(ClipitPost::get_by_id(array($message_id)));

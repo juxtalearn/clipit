@@ -23,7 +23,7 @@ $owner_user = new ElggUser($entity->owner_id);
     </div>
     <div class="block">
         <div class="header">
-            <h2 class="title"><?php echo $entity->name; ?></h2>
+            <h3 class="title"><?php echo $entity->name; ?></h3>
             <small class="show sub-title">
                 <img class="user-avatar" src="<?php echo $owner_user->getIconURL("tiny");?>">
                 <i>
