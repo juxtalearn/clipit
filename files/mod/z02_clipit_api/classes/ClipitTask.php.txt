@@ -90,7 +90,7 @@ class ClipitTask extends UBItem{
      *
      * @param int $task_id Id of the Task to get Activity from.
      *
-     * @return array Returns an the Activity Id for the Task.
+     * @return int Returns an the Activity Id for the Task.
      */
     static function get_activity($task_id){
         $activity = UBCollection::get_items($task_id, ClipitActivity::REL_ACTIVITY_TASK, true);
