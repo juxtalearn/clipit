@@ -1,0 +1,22 @@
+[Actividad]
+- Name
+- Description
+- Final deadline (no more work can be done)
+- Group creation mode by teacher/by students (*)
+- Min/max students/group
+- Intermediate tasks:
+- Start date
+- End date (no more linking to task)
+- Output (# of items & type)
+
+[Tricky Topic]
+- Name
+- Tag array
+
+[Students]
+- Login list
+- Passwords list
+
+[Groups] depends on (*)
+- Name
+- Student list

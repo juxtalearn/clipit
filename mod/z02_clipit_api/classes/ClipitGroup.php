@@ -38,8 +38,8 @@ class ClipitGroup extends UBItem{
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_object){
-        parent::load_from_elgg($elgg_object);
+    protected function load_from_elgg($elgg_entity){
+        parent::load_from_elgg($elgg_entity);
         $this->user_array = static::get_users($this->id);
         $this->file_array = static::get_files($this->id);
         $this->storyboard_array = static::get_storyboards($this->id);

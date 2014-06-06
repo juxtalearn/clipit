@@ -45,10 +45,10 @@ class ClipitRating extends UBItem{
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_object){
-        parent::load_from_elgg($elgg_object);
-        $this->target = (int)$elgg_object->get("target");
-        $this->overall = (bool)$elgg_object->get("overall");
+    protected function load_from_elgg($elgg_entity){
+        parent::load_from_elgg($elgg_entity);
+        $this->target = (int)$elgg_entity->get("target");
+        $this->overall = (bool)$elgg_entity->get("overall");
         $this->tag_rating_array = (array)static::get_tag_ratings($this->id);
         $this->performance_rating_array = (array)static::get_performance_ratings($this->id);
     }
