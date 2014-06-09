@@ -31,10 +31,10 @@ class ClipitExample extends UBItem{
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_object){
-        parent::load_from_elgg($elgg_object);
-        $this->resource_url = (string)$elgg_object->get("resource_url");
-        $this->tag = (int)$elgg_object->get("tag");
+    protected function load_from_elgg($elgg_entity){
+        parent::load_from_elgg($elgg_entity);
+        $this->resource_url = (string)$elgg_entity->get("resource_url");
+        $this->tag = (int)$elgg_entity->get("tag");
     }
 
     /**

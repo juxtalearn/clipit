@@ -25,9 +25,9 @@ class ClipitPost extends UBMessage{
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_object){
-        parent::load_from_elgg($elgg_object);
-        $this->topic_id = (int)$elgg_object->get("topic_id");
+    protected function load_from_elgg($elgg_entity){
+        parent::load_from_elgg($elgg_entity);
+        $this->topic_id = (int)$elgg_entity->get("topic_id");
     }
 
     /**

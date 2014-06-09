@@ -26,6 +26,20 @@ function clipit_api_init(){
     expose_clipit_api();
     rename_subtypes(); // temporal to avoid loosing data
     //include_once(elgg_get_plugins_path() . "z02_clipit_api/activate.php");
+
+    elgg_register_page_handler('youtube_test', 'youtube_test_page_handler');
+}
+
+function youtube_test_page_handler($page){
+    $title = "Youtube Test";
+    $params = array(
+        'content' => elgg_view("youtube_test"),
+        'title' => $title,
+        'filter' => "",
+    );
+    $body = elgg_view_layout('one_column', $params);
+
+    echo elgg_view_page($title, $body);
 }
 
 /**

@@ -41,8 +41,8 @@ class ClipitPublication extends UBItem{
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_object){
-        parent::load_from_elgg($elgg_object);
+    protected function load_from_elgg($elgg_entity){
+        parent::load_from_elgg($elgg_entity);
         $this->tag_array = (array)static::get_tags($this->id);
         $this->label_array = (array)static::get_labels($this->id);
         $this->performance_item_array = (array)static::get_performance_items($this->id);

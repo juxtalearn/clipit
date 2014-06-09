@@ -43,7 +43,7 @@ class ClipitActivity extends UBItem{
     public $color = "";
     public $status = "";
     public $tricky_topic = 0;
-
+    public $deadline = 0;
     public $teacher_array = array();
     public $called_users_array = array();
     public $group_array = array();
@@ -55,13 +55,14 @@ class ClipitActivity extends UBItem{
     /**
      * Loads object parameters stored in Elgg
      *
-     * @param ElggEntity $elgg_object
+     * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_object){
-        parent::load_from_elgg($elgg_object);
-        $this->color = (string)$elgg_object->get("color");
-        $this->status = (string)$elgg_object->get("status");
-        $this->tricky_topic = (int)$elgg_object->get("tricky_topic");
+    protected function load_from_elgg($elgg_entity){
+        parent::load_from_elgg($elgg_entity);
+        $this->color = (string)$elgg_entity->get("color");
+        $this->status = (string)$elgg_entity->get("status");
+        $this->tricky_topic = (int)$elgg_entity->get("tricky_topic");
+        $this->deadline = (int)$elgg_entity->get("deadline");
         $this->teacher_array = static::get_teachers($this->id);
         $this->called_users_array = static::get_called_users($this->id);
         $this->group_array = static::get_groups($this->id);
@@ -81,6 +82,7 @@ class ClipitActivity extends UBItem{
         $elgg_entity->set("color", (string)$this->color);
         $elgg_entity->get("status", (string)$this->status);
         $elgg_entity->get("tricky_topic", (int)$this->tricky_topic);
+        $elgg_entity->set("deadline", (int)$this->deadline);
     }
 
     /**

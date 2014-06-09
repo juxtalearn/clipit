@@ -26,10 +26,10 @@ class ClipitTagRating extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_object){
-        parent::load_from_elgg($elgg_object);
-        $this->tag_id = (int)$elgg_object->get("tag_id");
-        $this->is_used = (bool)$elgg_object->get("is_used");
+    protected function load_from_elgg($elgg_entity){
+        parent::load_from_elgg($elgg_entity);
+        $this->tag_id = (int)$elgg_entity->get("tag_id");
+        $this->is_used = (bool)$elgg_entity->get("is_used");
     }
 
     /**

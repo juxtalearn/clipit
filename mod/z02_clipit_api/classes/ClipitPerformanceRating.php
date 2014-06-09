@@ -26,10 +26,10 @@ class ClipitPerformanceRating extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_object){
-        parent::load_from_elgg($elgg_object);
-        $this->performance_item = (int)$elgg_object->get("performance_item");
-        $this->star_rating = (int)$elgg_object->get("star_rating");
+    protected function load_from_elgg($elgg_entity){
+        parent::load_from_elgg($elgg_entity);
+        $this->performance_item = (int)$elgg_entity->get("performance_item");
+        $this->star_rating = (int)$elgg_entity->get("star_rating");
     }
 
     /**

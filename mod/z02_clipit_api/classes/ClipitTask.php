@@ -21,18 +21,56 @@ class ClipitTask extends UBItem{
      */
     const SUBTYPE = "ClipitTask";
 
-    public $type = "";
-    public $deadline = 0;
+    // Task types
+    const TYPE_QUIZ_ANSWER = "quiz_answer";
+    const TYPE_STORYBOARD_UPLOAD = "storyboard_upload";
+    const TYPE_STORYBOARD_FEEDBACK = "storyboard_feedback";
+    const TYPE_VIDEO_UPLOAD = "video_upload";
+    const TYPE_VIDEO_FEEDBACK = "video_feedback";
+    const TYPE_OTHER = "other";
+
+    public $task_type = "";
+    public $start = 0;
+    public $end = 0;
 
     /**
      * Loads object parameters stored in Elgg
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_object){
-        parent::load_from_elgg($elgg_object);
-        $this->type = (string)$elgg_object->get("type");
-        $this->deadline = (int)$elgg_object->get("deadline");
+    protected function load_from_elgg($elgg_entity){
+        $save_after_load = false;
+        parent::load_from_elgg($elgg_entity);
+        $this->task_type = (string)$elgg_entity->get("task_type");
+        // if $this->type not one of the valid types, then type = other
+        if(array_search((string)$this->task_type, array(
+                static::TYPE_QUIZ_ANSWER,
+                static::TYPE_STORYBOARD_UPLOAD,
+                static::TYPE_STORYBOARD_FEEDBACK,
+                static::TYPE_VIDEO_UPLOAD,
+                static::TYPE_VIDEO_FEEDBACK,
+                static::TYPE_OTHER))
+            === false){
+            $this->task_type = static::TYPE_OTHER;
+            $save_after_load = true;
+        }
+        $this->start = (int)$elgg_entity->get("start");
+        if((int)$this->start == 0){
+            $this->start = (int)$elgg_entity->time_created;
+            $save_after_load = true;
+        }
+        $this->end = (int)$elgg_entity->get("end");
+        if($this->end == 0){
+            $activity_id = static::get_activity($this->id);
+            if(!empty($activity_id)){
+                $prop_value_array = (int) ClipitActivity::get_properties($activity_id, array("deadline"));
+                $this->end = $prop_value_array["deadline"];
+                $save_after_load = true;
+            }
+        }
+        if($save_after_load){
+            $this->save();
+        }
     }
 
     /**
@@ -42,8 +80,9 @@ class ClipitTask extends UBItem{
      */
     protected function copy_to_elgg($elgg_entity){
         parent::copy_to_elgg($elgg_entity);
-        $elgg_entity->set("type", (string)$this->type);
-        $elgg_entity->set("deadline", (int)$this->deadline);
+        $elgg_entity->set("task_type", (string)$this->task_type);
+        $elgg_entity->set("start", (int)$this->start);
+        $elgg_entity->set("end", (int)$this->end);
     }
 
     /**
