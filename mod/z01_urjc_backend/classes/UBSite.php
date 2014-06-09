@@ -27,13 +27,41 @@ class UBSite{
      * @throws APIException
      */
     function __construct(){
-        $elgg_site = elgg_get_site_entity();
-        $this->id = (int)$elgg_site->get("guid");
-        $this->name = (string)$elgg_site->get("name");
-        $this->description = (string)$elgg_site->get("description");
-        $this->url = (string)$elgg_site->get("url");
-        $this->owner_id = (int)$elgg_site->getOwnerGUID();
-        $this->time_created = (int)$elgg_site->getTimeCreated();
+        $elgg_entity = elgg_get_site_entity();
+        $this->load_from_elgg($elgg_entity);
+    }
+
+    /**
+     * Loads object parameters stored in Elgg
+     *
+     * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
+     */
+    protected function load_from_elgg($elgg_entity){
+        $this->id = (int)$elgg_entity->get("guid");
+        $this->name = (string)$elgg_entity->get("name");
+        $this->description = (string)$elgg_entity->get("description");
+        $this->url = (string)$elgg_entity->get("url");
+        $this->owner_id = (int)$elgg_entity->getOwnerGUID();
+        $this->time_created = (int)$elgg_entity->getTimeCreated();
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function save(){
+        $elgg_entity = elgg_get_site_entity();
+        $this->copy_to_elgg($elgg_entity);
+        $elgg_entity->save();
+        return $this->id = $elgg_entity->get("guid");
+    }
+
+    /**
+     * @param ElggEntity $elgg_entity
+     */
+    protected function copy_to_elgg($elgg_entity){
+        $elgg_entity->set("name", (string)$this->name);
+        $elgg_entity->set("description", (string)$this->description);
+        $elgg_entity->set("url", (string)$this->url);
     }
 
     static function get_site(){
@@ -108,4 +136,5 @@ class UBSite{
         $hostData = array_reverse($hostData);
         return $hostData[1] . '.' . $hostData[0];
     }
+
 } 
