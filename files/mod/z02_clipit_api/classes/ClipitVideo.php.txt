@@ -57,18 +57,24 @@ class ClipitVideo extends ClipitPublication{
     }
 
     /**
-     * @param string $local_video_path Local server path of the video file to upload to YouTube
+     * Uploads to YouTube a video file from a local path in the server.
+     *
+     * @param string $local_video_path Local server path of the video
+     * @param string $title Video title
      * @return string YouTube video URL
      */
-    public function upload_to_youtube($local_video_path){
+    static function upload_to_youtube($local_video_path, $title){
         set_include_path( get_include_path() . PATH_SEPARATOR . elgg_get_plugins_path() . "z02_clipit_api/libraries/google_api/src/" );
         require_once 'Google/Client.php';
         require_once 'Google/Service/YouTube.php';
         $client = new Google_Client();
+        $client->setClientId(get_config("google_id"));
+        $client->setClientSecret(get_config("google_secret"));
+
         if (isset($_SESSION['token'])) {
             $client->setAccessToken($_SESSION['token']);
         } else {
-            $google_token = ClipitSite::get_google_token();
+            $google_token = get_config("google_token");
             if (!empty($google_token)) {
                 try {
                     $client->setAccessToken($google_token);
@@ -78,7 +84,7 @@ class ClipitVideo extends ClipitPublication{
             }
         }
         if($client->isAccessTokenExpired()){
-            $refresh_token = ClipitSite::get_google_refresh_token();
+            $refresh_token = get_config("google_refresh_token");
             $client->refreshToken($refresh_token);
         }
         if ($client->getAccessToken()) {
@@ -91,13 +97,11 @@ class ClipitVideo extends ClipitPublication{
                 // This example sets the video's title, description, keyword tags, and
                 // video category.
                 $snippet = new Google_Service_YouTube_VideoSnippet();
-                $snippet->setTitle("Test title");
-                $snippet->setDescription("Test description");
-                $snippet->setTags(array("tag1", "tag2"));
+                $snippet->setTitle($title);
 
                 // Numeric video category. See
                 // https://developers.google.com/youtube/v3/docs/videoCategories/list
-                $snippet->setCategoryId("22");
+                $snippet->setCategoryId("28");
 
                 // Set the video's status to "public". Valid statuses are "public",
                 // "private" and "unlisted".
@@ -119,7 +123,7 @@ class ClipitVideo extends ClipitPublication{
                 $client->setDefer(true);
 
                 // Create a request for the API's videos.insert method to create and upload the video.
-                $insertRequest = $youtube->videos->insert("status,snippet", $video);
+                var_dump($insertRequest = $youtube->videos->insert("status,snippet", $video));
 
                 // Create a MediaFileUpload object for resumable uploads.
                 $media = new Google_Http_MediaFileUpload(
@@ -146,11 +150,12 @@ class ClipitVideo extends ClipitPublication{
                 // If you want to make other calls after the file upload, set setDefer back to false
                 $client->setDefer(false);
                 $_SESSION['token'] = $client->getAccessToken();
-                ClipitSite::set_google_token($_SESSION['token']);
+                set_config("google_token", $_SESSION['token']);
+                return (string) "http://www.youtube.com/watch?v=".$status['id'];
             } catch (Exception $e) {
                 var_dump($e);
             }
-            return $video_url;
+            return false;
         }
     }
 }
