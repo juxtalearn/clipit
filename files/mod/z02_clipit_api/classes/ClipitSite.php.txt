@@ -29,5 +29,29 @@ class ClipitSite extends UBSite{
     public $file_array = array();
     public $storyboard_array = array();
     public $video_array = array();
+    public $google_token = "";
+    public $google_refresh_token = "";
+
+    static function get_google_token(){
+        $site = static::get_site();
+        return (string) $site->google_token;
+    }
+
+    static function set_google_token($token){
+        $site = static::get_site();
+        $site->google_token = (string) $token;
+        return $site->save();
+    }
+
+    static function get_google_refresh_token(){
+        $site = static::get_site();
+        return (string) $site->google_refresh_token;
+    }
+
+    static function set_google_refresh_token($token){
+        $site = static::get_site();
+        $site->google_refresh_token = (string) $token;
+        return $site->save();
+    }
 
 }

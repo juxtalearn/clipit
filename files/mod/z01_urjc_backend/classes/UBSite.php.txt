@@ -40,6 +40,10 @@ class UBSite{
         return new static();
     }
 
+    protected function save(){
+        
+    }
+
     /**
      * Get the REST API method list, including description and required parameters.
      *
@@ -108,4 +112,5 @@ class UBSite{
         $hostData = array_reverse($hostData);
         return $hostData[1] . '.' . $hostData[0];
     }
+
 } 
