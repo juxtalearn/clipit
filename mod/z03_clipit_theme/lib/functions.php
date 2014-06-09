@@ -6,6 +6,70 @@
  * Time: 10:44
  * To change this template use File | Settings | File Templates.
  */
+/**
+ * Obtain friendly time (past|future)
+ *
+ * @param $time
+ * @return mixed|null|string
+ */
+function get_friendly_time($time){
+    $params = array('time' => $time);
+    $result = elgg_trigger_plugin_hook('format', 'friendly:time', $params, NULL);
+    if ($result) {
+        return $result;
+    }
+
+    if(time() > (int) $time){
+        // Ago
+        $translate = "friendlytime";
+        $diff = time() - (int)$time;
+    } else {
+        $translate = "friendlytime:next";
+        $diff = (int)$time - time();
+    }
+
+
+    $minute = 60;
+    $hour = $minute * 60;
+    $day = $hour * 24;
+
+    if ($diff < $minute) {
+        return elgg_echo("$translate:justnow");
+    } else if ($diff < $hour) {
+        $diff = round($diff / $minute);
+        if ($diff == 0) {
+            $diff = 1;
+        }
+
+        if ($diff > 1) {
+            return elgg_echo("$translate:minutes", array($diff));
+        } else {
+            return elgg_echo("$translate:minutes:singular", array($diff));
+        }
+    } else if ($diff < $day) {
+        $diff = round($diff / $hour);
+        if ($diff == 0) {
+            $diff = 1;
+        }
+
+        if ($diff > 1) {
+            return elgg_echo("$translate:hours", array($diff));
+        } else {
+            return elgg_echo("$translate:hours:singular", array($diff));
+        }
+    } else {
+        $diff = round($diff / $day);
+        if ($diff == 0) {
+            $diff = 1;
+        }
+
+        if ($diff > 1) {
+            return elgg_echo("$translate:days", array($diff));
+        } else {
+            return elgg_echo("$translate:days:singular", array($diff));
+        }
+    }
+}
 
 function clipit_events_feed($entity){
     $vars['author'] = array_pop(ClipitUser::get_by_id(array($entity->performed_by_guid)));

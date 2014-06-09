@@ -51,6 +51,14 @@ $english = array(
     'autocomplete:hint' => "Type in a search term",
     'autocomplete:noresults' => "No results",
     'autocomplete:searching' => "Searching...",
+    // Time (future)
+    'friendlytime:next:justnow' => "just now",
+    'friendlytime:next:minutes' => "%s minutes",
+    'friendlytime:next:minutes:singular' => "a minute",
+    'friendlytime:next:hours' => "%s hours",
+    'friendlytime:next:hours:singular' => "an hour",
+    'friendlytime:next:days' => "%s days",
+    'friendlytime:next:days:singular' => "yesterday",
 );
 
 add_translation('en', $english);

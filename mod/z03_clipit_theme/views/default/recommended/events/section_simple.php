@@ -21,6 +21,7 @@ $author = elgg_extract('author', $vars);
     margin-top: 10px;
     background: #fafafa;
     padding: 10px;
+    overflow: hidden;
 }
 .event-simple .description{
     color: #666666;
@@ -38,9 +39,9 @@ $author = elgg_extract('author', $vars);
                 <?php echo elgg_view("recommended/events/author_image", array('author_id' => $author, 'activity' => $activity));?>
             </div>
             <div class="content-block">
-                <div class="text-muted pull-right">
+                <small class="pull-right">
                     <?php echo elgg_view('output/friendlytime', array('time' => $vars["time_created"]));?>
-                </div>
+                </small>
                 <?php echo elgg_view("recommended/events/author", array('author_id' => $author, 'activity' => $activity));?>
                 <small class="show">
                     <i class="fa <?php echo $vars['icon'];?>" style="color: #<?php echo $activity->color;?>;"></i>

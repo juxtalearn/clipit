@@ -14,12 +14,7 @@ $files = elgg_extract("files", $vars);
 $entity = elgg_extract('entity', $vars);
 $href = elgg_extract("href", $vars);
 $add_files = elgg_extract("add_files", $vars);
-$task_id = ClipitTask::create(array(
-    'name' => 'Upload video',
-    'type' => '',
-    'deadline' => time()
-));
-ClipitActivity::add_tasks(74, array($task_id));
+
 foreach($files as $file_id){
     $file =  array_pop(ClipitFile::get_by_id(array($file_id)));
     $file_url = "{$href}/view/{$file->id}";

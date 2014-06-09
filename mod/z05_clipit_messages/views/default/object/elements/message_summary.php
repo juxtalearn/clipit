@@ -16,10 +16,13 @@ if(!$limit){
     $limit = 3;
 }
 
-$messages = array_pop(ClipitChat::get_by_destination(array($user_id)));
-$messages = ClipitChat::get_inbox($user_id);
+//$messages = array_pop(ClipitChat::get_by_destination(array($user_id)));
+//$messages = ClipitChat::get_inbox($user_id);
+// DEBUG
+$messages = array();
 
 $messages = array_slice($messages, 0, $limit);
+
 ?>
 <?php if(empty($messages)): ?>
     <li role="presentation" class="message-item" style="margin-bottom: 10px;">

@@ -109,11 +109,6 @@ ul, ol {
   padding: 5px 10px !important;
   .pull-right();
 }
-.btn-xs{
-  padding-left: 5px;
-  padding-right: 5px;
-  border-radius: 3px;
-}
 small, .small{
   /*font-size: 75%;*/
   color: @gray-light;
@@ -367,7 +362,9 @@ h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
   border-radius: 0;
 
   > li {
-    border-bottom: 1px solid @blue-lighter;
+    &.divider{
+      background-color: @blue-lighter;
+    }
     &:last-child{
       border: 0;
     }
@@ -399,6 +396,7 @@ h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
 .nav-tabs {
   border-bottom: 0;
   > li {
+    outline: 0;
     &.active > a,
     &.elgg-state-selected > a{
       font-family: @font-family-futurabold;
@@ -419,6 +417,8 @@ h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
       font-size: 15px;
       letter-spacing: 1px;
       color: @grey_text;
+      background-color: #f7f7f7;
+      margin-right: 4px;
       &:hover,
       &:focus{
         color: darken(@grey_text, 12%);

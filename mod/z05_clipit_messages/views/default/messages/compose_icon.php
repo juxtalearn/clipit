@@ -20,7 +20,8 @@ if($user->id != elgg_get_logged_in_user_guid()){
     $params_message = array(
         'text'  => '<i class="fa fa-envelope"></i>',
         'data-target' => '#send-message-'.$user->id,
-        'data-toggle' => 'modal'
+        'data-toggle' => 'modal',
+        'style' => 'border-right: 1px solid #C9C9C9;padding-right: 5px;'
     );
 }
 echo elgg_view('output/url', array(

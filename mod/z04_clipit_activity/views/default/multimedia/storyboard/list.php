@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 $entity = elgg_extract("entity", $vars);
-echo elgg_view_form('multimedia/storyboards/upload', array('id' => 'fileupload', 'enctype' => 'multipart/form-data'), array('entity'  => $entity));
-
+if($vars['add_sbs']){
+    echo elgg_view_form('multimedia/storyboards/upload', array('id' => 'fileupload', 'enctype' => 'multipart/form-data'), array('entity'  => $entity));
+}
 ?>

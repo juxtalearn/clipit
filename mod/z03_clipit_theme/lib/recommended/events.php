@@ -54,7 +54,16 @@ function view_recommended_event($event, $view_type = 'full'){
             );
             break;
         case "message-destination":
-            $activity_id = ClipitGroup::get_activity($relationship->guid_two);
+            // Message from group|activity
+            $object = ClipitSite::lookup($relationship->guid_two);
+            switch($object['subtype']){
+                case "ClipitGroup":
+                    $activity_id = ClipitGroup::get_activity($relationship->guid_two);
+                    break;
+                case "ClipitActivity":
+                    $activity_id = $relationship->guid_two;
+                    break;
+            }
             $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
             $entity = array_pop(ClipitPost::get_by_id(array($relationship->guid_one)));
             $href = "clipit_activity/{$activity->id}/group/discussion/view/{$entity->id}";
@@ -71,7 +80,7 @@ function view_recommended_event($event, $view_type = 'full'){
             $group = array_pop(ClipitGroup::get_by_id(array($relationship->guid_one)));
             $entity = array_pop(ClipitUser::get_by_id(array($relationship->guid_two)));
             $group_info = elgg_view('output/url', array(
-                'href'  => "clipit_activity/{$activity->id}/group/activity_log",
+                'href'  => "clipit_activity/{$activity->id}/group",
                 'title' => $group->name,
                 'text'  => $group->name,
             ));

@@ -6,7 +6,7 @@
  * @uses string $vars['time'] Unix-style epoch timestamp
  */
 
-$friendly_time = elgg_get_friendly_time($vars['time']);
+$friendly_time = get_friendly_time($vars['time']);
 $timestamp = htmlspecialchars(date(elgg_echo('friendlytime:date_format'), $vars['time']));
 
 echo "<abbr title=\"{$timestamp}\">{$friendly_time}</abbr>";

@@ -3102,9 +3102,8 @@ input[type="button"].btn-block {
   padding: 1px 5px;
   font-size: 12px;
   line-height: 1.5;
-  padding-left: 5px;
-  padding-right: 5px;
   border-radius: 3px;
+  padding: 2px 5px;
 }
 .btn-group-sm > .btn {
   padding: 5px 10px;
@@ -6608,6 +6607,10 @@ fieldset[disabled] .elgg-layout-one-column .elgg-main .content .elgg-head ul.elg
     border-bottom-color: #ffffff;
   }
 }
+.elgg-layout-one-sidebar .elgg-main .elgg-htabs > li,
+.elgg-layout-one-column .elgg-main .elgg-htabs > li {
+  outline: 0;
+}
 .elgg-layout-one-sidebar .elgg-main .elgg-htabs > li.active > a,
 .elgg-layout-one-column .elgg-main .elgg-htabs > li.active > a,
 .elgg-layout-one-sidebar .elgg-main .elgg-htabs > li.elgg-state-selected > a,
@@ -6637,6 +6640,8 @@ fieldset[disabled] .elgg-layout-one-column .elgg-main .content .elgg-head ul.elg
   font-size: 15px;
   letter-spacing: 1px;
   color: #9c9e9f;
+  background-color: #f7f7f7;
+  margin-right: 4px;
 }
 .elgg-layout-one-sidebar .elgg-main .elgg-htabs > li > a:hover,
 .elgg-layout-one-column .elgg-main .elgg-htabs > li > a:hover,
@@ -7054,7 +7059,7 @@ fieldset[disabled] .elgg-sidebar input.elgg-button-submit.active {
   color: #32b4e5;
   border: 1px solid #32b4e5;
   font-size: 12px;
-  padding: 1px 5px;
+  padding: 1px 5px !important;
   background: #fff;
 }
 .btn-options:hover,
@@ -7065,6 +7070,9 @@ fieldset[disabled] .elgg-sidebar input.elgg-button-submit.active {
 .btn-options + .dropdown-menu {
   min-width: initial;
 }
+.btn-options + .dropdown-menu > li {
+  border-bottom: 1px solid #bae6f6;
+}
 .btn-options + .dropdown-menu > li > a {
   font-weight: bold;
   letter-spacing: 0;
@@ -7074,78 +7082,39 @@ fieldset[disabled] .elgg-sidebar input.elgg-button-submit.active {
   margin-right: 3px;
 }
 .btn-border-blue {
-  color: #ffffff;
-  background-color: #428bca;
-  border-color: #357ebd;
-  color: #FFF;
-  border: none;
-  background-color: #32b4e5;
-  background-repeat: repeat-x;
-  font-family: FuturaBoldRegular, Impact, 'Impact Bold', Helvetica, Arial, sans, sans-serif;
-  padding-left: 20px;
-  padding-right: 20px;
-  border-radius: 7px;
-  letter-spacing: 1px;
   color: #32b4e5;
   background: #fff;
   border: 1px solid #32b4e5;
 }
 .btn-border-blue:hover,
-.btn-border-blue:focus,
-.btn-border-blue:active,
-.btn-border-blue.active,
-.open .dropdown-toggle.btn-border-blue {
-  color: #ffffff;
-  background-color: #3276b1;
-  border-color: #285e8e;
-}
-.btn-border-blue:active,
-.btn-border-blue.active,
-.open .dropdown-toggle.btn-border-blue {
-  background-image: none;
-}
-.btn-border-blue.disabled,
-.btn-border-blue[disabled],
-fieldset[disabled] .btn-border-blue,
-.btn-border-blue.disabled:hover,
-.btn-border-blue[disabled]:hover,
-fieldset[disabled] .btn-border-blue:hover,
-.btn-border-blue.disabled:focus,
-.btn-border-blue[disabled]:focus,
-fieldset[disabled] .btn-border-blue:focus,
-.btn-border-blue.disabled:active,
-.btn-border-blue[disabled]:active,
-fieldset[disabled] .btn-border-blue:active,
-.btn-border-blue.disabled.active,
-.btn-border-blue[disabled].active,
-fieldset[disabled] .btn-border-blue.active {
-  background-color: #428bca;
-  border-color: #357ebd;
-}
-.btn-border-blue .badge {
-  color: #428bca;
-  background-color: #fff;
-}
-.btn-border-blue:hover,
 .btn-border-blue:focus {
-  background-color: #1ba1d3;
-  background-position: 0 -15px;
-}
-.btn-border-blue:active,
-.btn-border-blue.active {
-  background-color: #1993c1;
-}
-.btn-border-blue:hover,
-.btn-border-blue:focus {
-  color: #FFF;
-  opacity: 1;
-}
-.btn-border-blue.cancel:hover,
-.btn-border-blue.cancel:focus {
-  background: #fff;
+  background: #fff !important;
   border: 1px solid #32b4e5;
   color: #32b4e5;
   opacity: 0.7;
+}
+.btn-border-yellow {
+  color: #d8ba05;
+  background: #fff;
+  border: 1px solid #d8ba05;
+}
+.btn-border-yellow:hover,
+.btn-border-yellow:focus {
+  background: #fff !important;
+  border: 1px solid #d8ba05;
+  color: #d8ba05;
+  opacity: 0.7;
+}
+.btn-sm,
+.btn-xs,
+.btn-icon {
+  border-radius: 3px;
+}
+.btn-xs {
+  padding: 2px 5px;
+}
+.btn-icon {
+  padding: 5px 8px;
 }
 label {
   display: block;
@@ -7261,11 +7230,6 @@ form .elgg-module h3 {
   padding-left: 65px;
   padding-top: 0px;
 }
-.modal-footer .btn-default {
-  background: #fff;
-  border: 1px solid #32b4e5;
-  color: #32b4e5;
-}
 .modal-footer p {
   color: #bae6f6;
   margin-top: 15px;
@@ -7305,12 +7269,12 @@ li.list-item:last-child {
   width: 50px;
 }
 .multimedia-preview .file-icon {
-  font-size: 40px;
+  font-size: 36px;
   color: #bae6f6;
 }
 .multimedia-preview .img-preview {
-  width: 50px;
-  height: 50px;
+  width: 36px;
+  height: 36px;
   display: inline-block;
 }
 .multimedia-preview .img-preview > div {
@@ -7361,8 +7325,8 @@ li.list-item:last-child {
 .multimedia-owner .header .comment-button {
   float: right;
 }
-.multimedia-owner .header h2 {
-  margin: 0;
+.multimedia-owner .header h3 {
+  margin-top: 0;
 }
 .multimedia-owner .header .sub-title {
   margin-top: 5px;
@@ -8233,6 +8197,15 @@ ul.deadline-list > li .fa {
 .activity-group-block .fa.status-deadline {
   font-size: 15px;
   vertical-align: text-bottom;
+}
+.activity-group-block .fa.status-deadline.fa-check-square-o {
+  color: #99cb00;
+}
+.activity-group-block .fa.status-deadline.fa-times {
+  color: #ff4343;
+}
+.activity-group-block .fa.status-deadline.fa-minus-square-o {
+  color: #d8ba05;
 }
 .comment-button {
   border: 1px solid #32b4e5;
@@ -9784,11 +9757,6 @@ ol {
   padding: 5px 10px !important;
   float: right !important;
 }
-.btn-xs {
-  padding-left: 5px;
-  padding-right: 5px;
-  border-radius: 3px;
-}
 small,
 .small {
   /*font-size: 75%;*/
@@ -9984,8 +9952,8 @@ h6,
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
   border-radius: 0;
 }
-.dropdown-menu > li {
-  border-bottom: 1px solid #bae6f6;
+.dropdown-menu > li.divider {
+  background-color: #bae6f6;
 }
 .dropdown-menu > li:last-child {
   border: 0;
@@ -10011,6 +9979,9 @@ h6,
 .nav-tabs {
   border-bottom: 0;
 }
+.nav-tabs > li {
+  outline: 0;
+}
 .nav-tabs > li.active > a,
 .nav-tabs > li.elgg-state-selected > a {
   font-family: FuturaBoldRegular, Impact, 'Impact Bold', Helvetica, Arial, sans, sans-serif;
@@ -10033,6 +10004,8 @@ h6,
   font-size: 15px;
   letter-spacing: 1px;
   color: #9c9e9f;
+  background-color: #f7f7f7;
+  margin-right: 4px;
 }
 .nav-tabs > li > a:hover,
 .nav-tabs > li > a:focus {

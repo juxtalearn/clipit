@@ -69,7 +69,7 @@ if (is_array($items) && count($items) > 0):
                                     <?php echo $progress_html; ?>
                                     <strong>
                                         <?php echo elgg_view('output/url', array(
-                                            'href'  => "clipit_activity/{$item->id}/group/activity_log",
+                                            'href'  => "clipit_activity/{$item->id}/group",
                                             'title' => $group->name,
                                             'text'  => $group->name));
                                         ?>

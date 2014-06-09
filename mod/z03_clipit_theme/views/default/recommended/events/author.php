@@ -16,7 +16,17 @@ $object = ClipitSite::lookup($author_id);
 
 switch($object['subtype']){
     case "ClipitGroup":
-        echo "<span class='show'>{$object[name]}</span>";
+        $hasGroup = ClipitGroup::get_from_user_activity(elgg_get_logged_in_user_guid(), $activity->id);
+        if($hasGroup == $author_id){
+            echo elgg_view('output/url', array(
+                'href'  => "clipit_activity/".$activity->id."/group",
+                'title' => $object['name'],
+                'class' => 'show text-truncate',
+                'text'  => $object['name'],
+            ));
+        } else {
+            echo "<span class='show'>{$object[name]}</span>";
+        }
         break;
     case "ClipitActivity":
         echo elgg_view('output/url', array(

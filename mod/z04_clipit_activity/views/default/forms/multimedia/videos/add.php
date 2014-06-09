@@ -61,10 +61,6 @@ $body .= '<div class="form-group">
     )).'
 </div>';
 $body .= '<div class="form-group">
-            <label for="title">'.elgg_echo("tags").'</label>
-            <ul id="tags"></ul>
-          </div>';
-$body .= '<div class="form-group">
     <label for="video-description">'.elgg_echo("video:description").'</label>
     '.elgg_view("input/plaintext", array(
         'name' => 'video-description',

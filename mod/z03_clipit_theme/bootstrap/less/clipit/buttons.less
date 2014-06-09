@@ -1,6 +1,7 @@
 //
 // Buttons
 // --------------------------------------------------
+
 .btn-normal {
   .btn-styles(@btn-default-bg);
   border: 2px solid #d9dadb;
@@ -42,7 +43,7 @@
   color: @blue_clipit;
   border: 1px solid @blue_clipit;
   font-size: 12px;
-  padding: 1px 5px;
+  padding: 1px 5px !important;
   background: #fff;
   &:hover,
   &:focus{
@@ -51,28 +52,60 @@
   }
   + .dropdown-menu{
     min-width: initial;
-    > li > a{
-      font-weight: bold;
-      letter-spacing: 0;
-      font-size: @font-size-small;
-      > i.fa{
-        margin-right: 3px;
+    > li{
+      border-bottom: 1px solid @blue-lighter;
+      > a{
+        font-weight: bold;
+        letter-spacing: 0;
+        font-size: @font-size-small;
+        > i.fa{
+          margin-right: 3px;
+        }
       }
     }
   }
 }
+//
+// Color border buttons
+// --------------------------------------------------
 .btn-border-blue{
-  .btn-primary();
   color: @blue_clipit;
   background: #fff;
   border: 1px solid @blue_clipit;
-  &.cancel{
-    &:hover,
-    &:focus{
-      background: #fff;
-      border: 1px solid @blue_clipit;
-      color: @blue_clipit;
-      opacity: 0.7;
-    }
+  &:hover,
+  &:focus{
+    background: #fff !important;
+    border: 1px solid @blue_clipit;
+    color: @blue_clipit;
+    opacity: 0.7;
   }
+}
+.btn-border-yellow{
+  color: @yellow_clipit;
+  background: #fff;
+  border: 1px solid @yellow_clipit;
+  &:hover,
+  &:focus{
+    background: #fff !important;
+    border: 1px solid @yellow_clipit;
+    color: @yellow_clipit;
+    opacity: 0.7;
+  }
+}
+//
+// Button sizes
+// --------------------------------------------------
+.btn-sm,
+.btn-xs,
+.btn-icon{
+  border-radius: 3px;
+}
+.btn-xs{
+  padding: 2px 5px;
+}
+//
+// Button with fa icon inside
+// --------------------------------------------------
+.btn-icon{
+  padding: 5px 8px;
 }

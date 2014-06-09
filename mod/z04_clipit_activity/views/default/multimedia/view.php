@@ -63,8 +63,7 @@ foreach(array_pop(ClipitPost::get_by_destination(array($entity->id))) as $reply_
 }
 ?>
 
-
-<!-- Reply form -->
+<!--
 <a name="create_reply"></a>
 <h3 class="activity-module-title"><?php echo elgg_echo("reply:create"); ?></h3>
 <div class="discussion discussion-reply-msg">
@@ -75,4 +74,4 @@ foreach(array_pop(ClipitPost::get_by_destination(array($entity->id))) as $reply_
         <?php echo elgg_view_form("discussion/reply/create", array('data-validate'=> "true", 'class'=>'fileupload' ), array('entity'  => $entity)); ?>
     </div>
 </div>
-<!-- Reply form end-->
+-->

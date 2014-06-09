@@ -132,7 +132,9 @@ $english = array(
     'performance_items' => 'Performance items',
     'performance_item:select' => 'Select performance items',
     'performance_item:info' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus dapibus lacus at nisl pharetra faucibus dapibus lacus',
-
+    // Tasks
+    'activity:tasks' => 'Tasks',
+    'activity:task' => 'Task',
 );
 
 add_translation('en', $english);

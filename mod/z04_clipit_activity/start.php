@@ -280,6 +280,40 @@ function activity_page_handler($page) {
                     );
 
                     break;
+                case 'tasks':
+                    $title = elgg_echo("activity:tasks");
+                    elgg_push_breadcrumb($title);
+                    $tasks = ClipitTask::get_all();
+                    $href = "clipit_activity/{$activity->id}/tasks";
+                    $content = elgg_view('tasks/list', array('entity' => $tasks, 'href' => $href));
+                    if($page[2] == 'view' && $page[3]){
+                        $entity_id = (int)$page[3];
+                        $task = array_pop(ClipitTask::get_by_id(array($entity_id)));
+                        if($task){
+                            elgg_pop_breadcrumb($title);
+                            elgg_push_breadcrumb($title, $href);
+                            elgg_push_breadcrumb($task->name);
+                            $filter = "";
+                            $title = elgg_echo('activity:task');
+                            switch($task->task_type){
+                                case "video_upload":
+                                    $body = "upload form";
+                                    break;
+                                default:
+                                    return false;
+                                    break;
+                            }
+                            $content = elgg_view('tasks/view', array('entity' => $task, 'body' => $body));
+                        }
+                    }
+                    $params = array(
+                        'content'   => $content,
+                        'filter'    => $filter,
+                        'title'     => $title,
+                        'sub-title' => $activity->name,
+                        'title_style' => "background: #". $activity->color,
+                    );
+                    break;
                 case 'publications':
                     $selected_tab = get_input('filter', 'videos');
                     $title = elgg_echo("activity:publications");
@@ -418,6 +452,25 @@ function activity_page_handler($page) {
                                 $content .= elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
                             }
                             break;
+                        case 'storyboards':
+                            $sbs = "";
+                            $add_sbs = false;
+                            if($user->role == 'teacher'){
+                                $add_sbs = true;
+                            }
+                            $content = elgg_view('multimedia/storyboard/list', array('entity' => $activity, 'add_sb' => $add_sbs, 'storyboards' => $sbs, 'href' => $href));
+                            if (!$sbs) {
+                                $content .= elgg_view('output/empty', array('value' => elgg_echo('storyboards:none')));
+                            }
+                            if($page[3] == 'view' && $page[4]){
+                                $entity_id = (int)$page[4];
+                                $entity = ClipitVideo::get_by_id(array($entity_id));
+                                $entities = ClipitGroup::get_videos($entity->id);
+                            }
+                            break;
+                        default:
+                            return false;
+                            break;
                     }
                     $filter = elgg_view('multimedia/filter', array('selected' => $selected_tab, 'entity' => $activity, 'href' => $href));
                     if($page[2] == 'download' && $page[3]){
@@ -543,11 +596,6 @@ function group_tools_page_handler($page, $activity){
             elgg_push_breadcrumb($group->name);
             $content = elgg_view('group/dashboard', array('entity' => $group));
             break;
-        case 'activity_log':
-            $title = elgg_echo("group:activity_log");
-            elgg_push_breadcrumb($title);
-            $content =  elgg_view('group/activity_log', array('entity' => $group));
-            break;
         case 'multimedia':
             $title = elgg_echo("group:files");
             elgg_push_breadcrumb($title);
@@ -585,6 +633,9 @@ function group_tools_page_handler($page, $activity){
                         $entity = ClipitVideo::get_by_id(array($entity_id));
                         $entities = ClipitGroup::get_videos($entity->id);
                     }
+                    break;
+                default:
+                    return false;
                     break;
             }
             $filter = elgg_view('multimedia/filter', array('selected' => $selected_tab, 'entity' => $group, 'href' => $href));

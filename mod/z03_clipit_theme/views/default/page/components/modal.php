@@ -9,7 +9,7 @@ $footer = "";
 $cancel_button = "";
 $ok_button = "";
 if($vars['cancel_button']){
-    $cancel_button = '<button type="button" class="btn btn-default" data-dismiss="modal">'.elgg_echo("cancel").'</button>';
+    $cancel_button = '<button type="button" class="btn-border-blue btn btn-default cancel" data-dismiss="modal">'.elgg_echo("cancel").'</button>';
 }
 if(isset($vars['ok_button'])){
     $ok_button = $vars['ok_button'];
