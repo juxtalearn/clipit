@@ -55,4 +55,11 @@ class ClipitVideo extends ClipitPublication{
         $elgg_entity->set("preview", (string)$this->preview);
         $elgg_entity->set("duration", (int)$this->duration);
     }
+
+    public function upload_to_youtube($video_path){
+        set_include_path( get_include_path() . PATH_SEPARATOR . elgg_get_plugins_path() . "z02_clipit_api/libraries/google_api/src/" );
+        require_once 'Google/Client.php';
+        require_once 'Google/Service/YouTube.php';
+
+    }
 }

@@ -32,6 +32,21 @@ class ClipitSite extends UBSite{
     public $google_token = "";
     public $google_refresh_token = "";
 
+    protected function load_from_elgg($elgg_entity){
+        parent::load_from_elgg($elgg_entity);
+        $this->google_token = (string)$elgg_entity->get("google_token");
+        $this->google_refresh_token = (string)$elgg_entity->get("google_refresh_token");
+    }
+
+    /**
+     * @param ElggEntity $elgg_entity
+     */
+    protected function copy_to_elgg($elgg_entity){
+        parent::copy_to_elgg($elgg_entity);
+        $elgg_entity->set("google_token", (string)$this->google_token);
+        $elgg_entity->set("google_refresh_token", (string)$this->google_refresh_token);
+    }
+
     static function get_google_token(){
         $site = static::get_site();
         return (string) $site->google_token;
