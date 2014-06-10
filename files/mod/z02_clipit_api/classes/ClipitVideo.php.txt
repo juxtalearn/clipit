@@ -64,20 +64,19 @@ class ClipitVideo extends ClipitPublication{
      * @return string YouTube video URL
      */
     static function upload_to_youtube($local_video_path, $title){
+        if(!get_config("google_refresh_token")){
+            return false;
+        }
         set_include_path( get_include_path() . PATH_SEPARATOR . elgg_get_plugins_path() . "z02_clipit_api/libraries/google_api/src/");
         require_once 'Google/Client.php';
         require_once 'Google/Service/YouTube.php';
         $client = new Google_Client();
         $client->setClientId(get_config("google_id"));
         $client->setClientSecret(get_config("google_secret"));
-
-        $google_token = get_config("google_token");
-        if (!empty($google_token)) {
-            try {
-                $client->setAccessToken($google_token);
-            } catch(Exception $e){
-                error_log($e);
-            }
+        try {
+            $client->setAccessToken(get_config("google_token"));
+        } catch(Exception $e){
+            error_log($e);
         }
         if($client->isAccessTokenExpired()){
             $refresh_token = get_config("google_refresh_token");
