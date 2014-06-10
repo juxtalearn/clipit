@@ -93,7 +93,7 @@ class ElggInstaller {
      * @return void
      */
     public function setAutoLogin(bool $flag) {
-        $this->autoLogin = $value;
+        $this->autoLogin = $flag;
     }
 
     /**
@@ -1180,7 +1180,7 @@ class ElggInstaller {
         $mysql_dblink = mysql_connect($host, $user, $password, true);
         if ($mysql_dblink == FALSE) {
             register_error(elgg_echo('install:error:databasesettings'));
-            return $FALSE;
+            return FALSE;
         }
 
         $result = mysql_select_db($dbname, $mysql_dblink);

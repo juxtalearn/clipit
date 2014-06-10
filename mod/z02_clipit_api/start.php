@@ -27,13 +27,13 @@ function clipit_api_init(){
     rename_subtypes(); // temporal to avoid loosing data
     //include_once(elgg_get_plugins_path() . "z02_clipit_api/activate.php");
 
-    elgg_register_page_handler('youtube_test', 'youtube_test_page_handler');
+    elgg_register_page_handler('youtube_auth', 'youtube_auth_page_handler');
 }
 
-function youtube_test_page_handler($page){
-    $title = "Youtube Test";
+function youtube_auth_page_handler($page){
+    $title = "YouTube Authentication";
     $params = array(
-        'content' => elgg_view("youtube_test"),
+        'content' => elgg_view("youtube_auth"),
         'title' => $title,
         'filter' => "",
     );

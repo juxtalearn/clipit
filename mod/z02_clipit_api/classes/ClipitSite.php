@@ -30,4 +30,18 @@ class ClipitSite extends UBSite{
     public $storyboard_array = array();
     public $video_array = array();
 
+
+    protected function load_from_elgg($elgg_entity){
+        parent::load_from_elgg($elgg_entity);
+        /** @todo: load all arrays */
+    }
+
+    /**
+     * @param ElggEntity $elgg_entity
+     */
+    protected function copy_to_elgg($elgg_entity)
+    {
+        parent::copy_to_elgg($elgg_entity);
+        /** @todo: save all arrays */
+    }
 }
