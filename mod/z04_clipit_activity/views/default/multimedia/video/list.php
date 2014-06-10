@@ -16,9 +16,33 @@ $href = elgg_extract("href", $vars);
 $rating = elgg_extract("rating", $vars);
 ?>
 <?php if($vars['add_video']):?>
-    <?php echo elgg_view_form('multimedia/videos/add', array('data-validate'=> "true" ), array('entity'  => $entity)); ?>
+    <?php
+    $modal = elgg_view("page/components/modal",
+        array(
+            "dialog_class"     => "modal-md",
+            "target"    => "add-video",
+            "title"     => elgg_echo("video:add"),
+            "form"      => true,
+            "body"      => elgg_view('multimedia/video/add', array('entity'  => $entity)),
+            "cancel_button" => true,
+            "ok_button" => elgg_view('input/submit',
+                array(
+                    'value' => elgg_echo('add'),
+                    'class' => "btn btn-primary"
+                ))
+        ));
+
+    ?>
+    <?php echo elgg_view_form('multimedia/videos/add', array(
+            'data-validate'=> "true",
+            'body' => $modal,
+            'enctype' => 'multipart/form-data'
+        ),
+        array('entity'  => $entity)
+    );
+    ?>
     <div class="block" style="margin-bottom: 20px;">
-        <button type="button" data-toggle="modal" data-target="#add-video" class="btn btn-default">Add video</button>
+        <button type="button" data-toggle="modal" data-target="#add-video" class="btn btn-default"><?php echo elgg_echo("video:add");?></button>
     </div>
 <?php endif; ?>
 
@@ -47,7 +71,6 @@ $rating = elgg_extract("rating", $vars);
                         </div>
                         <?php endif; ?>
                         <img src="<?php echo $video->preview;?>">
-                        <span class="duration label"><?php echo get_format_time($video->duration);?></span>
                     </div>
                 </a>
             </div>

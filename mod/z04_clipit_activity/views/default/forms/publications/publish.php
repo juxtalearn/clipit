@@ -48,6 +48,10 @@ $(function(){
     });
 });
 </script>
+<div class="bg-warning">
+    Select task:
+    <input type="radio" > Upload video
+</div>
 <div class="row">
     <div class="col-md-8">
         <div class="form-group">

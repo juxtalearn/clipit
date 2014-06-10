@@ -7508,13 +7508,10 @@ li.list-item:last-child {
 }
 .add-video .video-info .error {
   margin-top: 5px;
-  display: none;
+  /*display: none;*/
 }
 .add-video .video-info .error > small {
   color: #ff4343;
-}
-#add-video .modal-footer {
-  display: none;
 }
 .landing h2.elgg-heading-main {
   display: none;

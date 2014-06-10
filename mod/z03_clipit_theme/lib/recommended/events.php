@@ -56,22 +56,24 @@ function view_recommended_event($event, $view_type = 'full'){
         case "message-destination":
             // Message from group|activity
             $object = ClipitSite::lookup($relationship->guid_two);
+            $entity = array_pop(ClipitPost::get_by_id(array($relationship->guid_one)));
             switch($object['subtype']){
                 case "ClipitGroup":
                     $activity_id = ClipitGroup::get_activity($relationship->guid_two);
+                    $group = "group/";
                     break;
                 case "ClipitActivity":
                     $activity_id = $relationship->guid_two;
+                    $group = "";
                     break;
             }
             $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
-            $entity = array_pop(ClipitPost::get_by_id(array($relationship->guid_one)));
-            $href = "clipit_activity/{$activity->id}/group/discussion/view/{$entity->id}";
+            $href = "clipit_activity/{$activity->id}/{$group}discussion/view/{$entity->id}";
             $params = array(
                 'title' => 'Added a new discussion topic',
                 'icon' => 'fa-comment',
                 'author' => $entity->owner_id,
-                'body' => elgg_view("recommended/events/discussion", array('entity' => $entity,'href' => $href,))
+                'body' => elgg_view("recommended/events/discussion", array('entity' => $entity,'href' => $href))
             );
             break;
         case "group-user":

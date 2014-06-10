@@ -26,7 +26,6 @@ $body .='<div class="form-group">
     '.elgg_view("input/plaintext", array(
         'name' => 'discussion-text',
         'class' => 'form-control wysihtml5',
-        'required' => true,
         'rows'  => 6,
     )).'
 </div>';

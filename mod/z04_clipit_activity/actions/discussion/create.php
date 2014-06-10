@@ -48,7 +48,6 @@ if(count($entity)==0 || trim($discussion_title) == "" || trim($discussion_text) 
     ));
     if($file_ids){
         ClipitPost::add_files($new_message_id, $file_ids);
-        $entity_class::add_files($entity->id, $file_ids);
     }
     // set read status true to the owner's message
     ClipitPost::set_read_status($new_message_id, true, array($user_id));

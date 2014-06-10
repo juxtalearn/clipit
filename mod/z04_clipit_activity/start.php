@@ -283,9 +283,9 @@ function activity_page_handler($page) {
                 case 'tasks':
                     $title = elgg_echo("activity:tasks");
                     elgg_push_breadcrumb($title);
-                    $tasks = ClipitTask::get_all();
+                    $tasks = ClipitActivity::get_tasks($activity->id);
                     $href = "clipit_activity/{$activity->id}/tasks";
-                    $content = elgg_view('tasks/list', array('entity' => $tasks, 'href' => $href));
+                    $content = elgg_view('tasks/list', array('tasks' => $tasks, 'href' => $href));
                     if($page[2] == 'view' && $page[3]){
                         $entity_id = (int)$page[3];
                         $task = array_pop(ClipitTask::get_by_id(array($entity_id)));
@@ -297,7 +297,37 @@ function activity_page_handler($page) {
                             $title = elgg_echo('activity:task');
                             switch($task->task_type){
                                 case "video_upload":
-                                    $body = "upload form";
+                                    $videos = ClipitGroup::get_videos($hasGroup);
+                                    $body = "";
+                                    foreach($videos as $video_id){
+                                        $video = ClipitVideo::get_by_id(array($video_id));
+                                        $body .= elgg_view('tasks/video/upload', array('video' => $video));
+                                    }
+
+                                    $href_multimedia = "clipit_activity/{$activity->id}/group/multimedia";
+                                    //$body =  elgg_view('tasks/video/upload', array('videos'=> $videos, 'href' => $href_multimedia));
+                                    $body = elgg_view('multimedia/video/list', array(
+                                        'videos'    => $videos,
+                                        'href'      => $href_multimedia,
+                                        'rating'    => false,
+                                        'actions'   => true,
+                                        'total_comments' => false,
+                                    ));
+
+                                    break;
+                                case "quiz_answer":
+                                    $body = elgg_view('quizzes/view', array('quiz' => $quiz));
+                                    break;
+                                case "video_feedback":
+                                    $entities = ClipitActivity::get_videos($activity->id);
+                                    $href = "clipit_activity/{$activity->id}/publications";
+                                    $body = elgg_view('multimedia/video/list', array(
+                                        'videos'    => $entities,
+                                        'href'      => $href,
+                                        'rating'    => true,
+                                        'actions'   => false,
+                                        'total_comments' => true,
+                                    ));
                                     break;
                                 default:
                                     return false;
@@ -330,6 +360,7 @@ function activity_page_handler($page) {
                             //  - Feedback
                             //  - Deadline acabado, comienza el periodo de evaluación
                             $entities = ClipitActivity::get_videos($activity->id);
+                            $entities = ClipitTask::get_videos(2353);
                             $evaluation_list = get_filter_evaluations($entities);
                             $list_no_evaluated = elgg_view('multimedia/video/list', array(
                                 'videos'    => $evaluation_list["no_evaluated"],

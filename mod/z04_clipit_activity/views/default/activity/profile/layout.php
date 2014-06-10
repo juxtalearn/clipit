@@ -11,6 +11,7 @@ $user_id = elgg_get_logged_in_user_guid();
 $user_inActivity = ClipitGroup::get_from_user_activity($user_id, $activity->id);
 $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($activity->tricky_topic)));
 $tags = $tricky_topic->tag_array;
+$tasks = array_slice($activity->task_array, 0, 4);
 ?>
 <div class="row">
     <div class="col-md-12" data-shorten="true" style="overflow: hidden;max-height: 160px;">
@@ -22,7 +23,19 @@ $tags = $tricky_topic->tag_array;
 <?php if($user_inActivity):?>
 <div class="row">
     <div class="col-md-7">
-        <?php echo elgg_view("activity/profile/deadline_module");?>
+        <h3 class="activity-module-title">Deadlines</h3>
+        <?php echo elgg_view("tasks/list", array(
+            'tasks' => $tasks,
+            'href' => "clipit_activity/{$activity->id}/tasks"
+        ));
+        ?>
+        <p class="text-right view-all">
+            <?php echo elgg_view('output/url', array(
+                'href'  => "clipit_activity/{$activity->id}/tasks",
+                'title' => elgg_echo('view_all'),
+                'text'  => elgg_echo('view_all')));
+            ?>
+        </p>
     </div>
     <div class="col-md-5">
         <?php echo elgg_view("activity/profile/stumbling_block_module", array('tags' => $tags));?>

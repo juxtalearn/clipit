@@ -431,47 +431,6 @@ $(function(){
         scrollTop: $(form).offset().top
         }, 50);
     });
-
-    /**
-     * Add video url
-     * valid url and get video data
-     */
-    $(document).on("keypress keyup", "#video-url", function(e){
-        var form = $(this).closest("form");
-        var that = $(this);
-        var query = form.serialize();
-        var regex = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
-        if(!regex.test($(this).val()))
-            return false;
-        form.find(".loading").show();
-        form.find(".video-prev > i").removeClass("fa-play").addClass("fa-spinner fa-spin");
-        form.find("#group-hide").hide();
-        form.find("#link-favicon").hide();
-        form.find(".video-prev a > img").hide();
-        form.find(".video-info .error").hide();
-        tinymce.activeEditor.setContent("");
-        form.find(".modal-footer").hide();
-        $.getJSON(elgg.config.wwwroot+"action/multimedia/videos/extract_data?"+query, function (data) {
-            //call process to show the result
-            form.find(".loading").hide();
-            form.find("#link-favicon").show();
-            form.find("#link-favicon").attr("src", "http://www.google.com/s2/favicons?domain=");
-            form.find(".video-prev > i").addClass("fa-play").removeClass("fa-spinner fa-spin").show();
-            if(data){
-                form.find(".modal-footer").show();
-                form.find(".video-prev > i").hide();
-                form.find("#group-hide").show();
-                form.find("#link-favicon").attr("src", data.favicon);
-                form.find("#video-title").val(data.title);
-                tinymce.activeEditor.setContent(data.description);
-                form.find(".video-prev > a").attr("href", that.val()).show();
-                form.find(".video-prev a > img").attr("src", data.preview).show();
-            } else {
-                form.find(".video-info .error").show();
-            }
-        });
-        return false;
-    });
     /*
      * Format file size
      *

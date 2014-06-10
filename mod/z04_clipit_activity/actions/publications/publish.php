@@ -71,7 +71,9 @@ if(count($entity)==0 || trim($title) == "" || trim($description) == "" || trim($
     $new_video_id = $entity_class::create_clone($entity_id);
 
     if($new_video_id){
-        $entity_level_class::add_videos($parent_id, array($new_video_id));
+        //$entity_level_class::add_videos($parent_id, array($new_video_id));
+        $task_id = 2353;
+        ClipitTask::add_videos($task_id, array($new_video_id));
     } else {
         register_error(elgg_echo("cantpublish"));
     }

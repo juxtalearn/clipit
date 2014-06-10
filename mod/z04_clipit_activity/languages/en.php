@@ -94,8 +94,9 @@ $english = array(
     'videos:none' => 'No videos',
     'video:url:error' => 'Incorrect url or video not found',
     'video:edit' => 'Edit video',
-    'video:add' => 'Add video url',
+    'video:add' => 'Add video',
     'video:url' => 'Video url',
+    'video:upload' => 'Video upload',
     'video:title' => 'Video title',
     'video:tags' => 'Video tags',
     'video:description' => 'Video description',
@@ -135,6 +136,7 @@ $english = array(
     // Tasks
     'activity:tasks' => 'Tasks',
     'activity:task' => 'Task',
+    'tasks:none' => 'No tasks',
 );
 
 add_translation('en', $english);
