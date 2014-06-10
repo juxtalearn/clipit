@@ -71,16 +71,12 @@ class ClipitVideo extends ClipitPublication{
         $client->setClientId(get_config("google_id"));
         $client->setClientSecret(get_config("google_secret"));
 
-        if (isset($_SESSION['token'])) {
-            $client->setAccessToken($_SESSION['token']);
-        } else {
-            $google_token = get_config("google_token");
-            if (!empty($google_token)) {
-                try {
-                    $client->setAccessToken($google_token);
-                } catch(Exception $e){
-                    error_log($e);
-                }
+        $google_token = get_config("google_token");
+        if (!empty($google_token)) {
+            try {
+                $client->setAccessToken($google_token);
+            } catch(Exception $e){
+                error_log($e);
             }
         }
         if($client->isAccessTokenExpired()){
