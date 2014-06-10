@@ -24,9 +24,11 @@ class ClipitTask extends UBItem{
     // Task types
     const TYPE_QUIZ_ANSWER = "quiz_answer";
     const TYPE_STORYBOARD_UPLOAD = "storyboard_upload";
-    const TYPE_STORYBOARD_FEEDBACK = "storyboard_feedback";
     const TYPE_VIDEO_UPLOAD = "video_upload";
+
+    const TYPE_STORYBOARD_FEEDBACK = "storyboard_feedback";
     const TYPE_VIDEO_FEEDBACK = "video_feedback";
+
     const TYPE_OTHER = "other";
 
     const REL_TASK_STORYBOARD = "task-storyboard";
@@ -36,6 +38,7 @@ class ClipitTask extends UBItem{
     public $task_type = "";
     public $start = 0;
     public $end = 0;
+    public $parent_task = 0;
 
     public $storyboard_array = array();
     public $video_array = array();
@@ -48,10 +51,10 @@ class ClipitTask extends UBItem{
      */
     protected function load_from_elgg($elgg_entity){
         parent::load_from_elgg($elgg_entity);
-        $save_after_load = false;
         $this->task_type = (string)$elgg_entity->get("task_type");
         $this->start = (int)$elgg_entity->get("start");
         $this->end = (int)$elgg_entity->get("end");
+        $this->parent_task = (int)$elgg_entity->get("parent_task");
         if($this->end == 0){
             $activity_id = static::get_activity($this->id);
             if(!empty($activity_id)){
@@ -74,6 +77,7 @@ class ClipitTask extends UBItem{
         $elgg_entity->set("task_type", (string)$this->task_type);
         $elgg_entity->set("start", (int)$this->start);
         $elgg_entity->set("end", (int)$this->end);
+        $elgg_entity->set("parent_task", (int)$this->parent_task);
     }
 
     protected function save(){

@@ -197,10 +197,8 @@ class UBItem{
             return false;
         }
         foreach($prop_value_array as $prop => $value){
-            if(!array_key_exists($prop, self::list_properties())){
-                if($prop !== "hash"){
-                    throw new InvalidParameterException("ERROR: One or more property names do not exist.");
-                }
+            if(!array_key_exists($prop, static::list_properties())){
+                throw new InvalidParameterException("ERROR: One or more property names do not exist.");
             }
             if($prop == "id"){
                 continue; // cannot set an item's ID manually.
