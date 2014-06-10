@@ -31,7 +31,7 @@ class ClipitFile extends UBFile{
     /**
      * Loads object parameters stored in Elgg
      *
-     * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
+     * @param ElggFile $elgg_file Elgg Object to load parameters from.
      */
     protected function load_from_elgg($elgg_file){
         parent::load_from_elgg($elgg_file);
@@ -58,6 +58,11 @@ class ClipitFile extends UBFile{
         }
         $group = UBCollection::get_items($id, ClipitGroup::REL_GROUP_FILE, true);
         return array_pop($group);
+    }
+
+    static function get_task($id){
+        $task = UBCollection::get_items($id, ClipitTask::REL_TASK_FILE, true);
+        return array_pop($task);
     }
 
     static function get_activity($id){

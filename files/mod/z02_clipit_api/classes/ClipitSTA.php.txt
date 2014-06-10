@@ -28,23 +28,23 @@ class ClipitSTA extends ClipitFile{
     /**
      * Loads object parameters stored in Elgg
      *
-     * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
+     * @param ElggFile $elgg_file Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_entity){
-        parent::load_from_elgg($elgg_entity);
-        $this->resource_url = (string)$elgg_entity->get("resource_url");
-        $this->tricky_topic = (int)$elgg_entity->get("tricky_topic");
+    protected function load_from_elgg($elgg_file){
+        parent::load_from_elgg($elgg_file);
+        $this->resource_url = (string)$elgg_file->get("resource_url");
+        $this->tricky_topic = (int)$elgg_file->get("tricky_topic");
     }
 
     /**
      * Copy $this object parameters into an Elgg entity.
      *
-     * @param ElggEntity $elgg_entity Elgg object instance to save $this to
+     * @param ElggFile $elgg_file Elgg object instance to save $this to
      */
-    protected function copy_to_elgg($elgg_entity){
-        parent::copy_to_elgg($elgg_entity);
-        $elgg_entity->set("resource_url", (string)$this->resource_url);
-        $elgg_entity->set("tricky_topic", (int)$this->tricky_topic);
+    protected function copy_to_elgg($elgg_file){
+        parent::copy_to_elgg($elgg_file);
+        $elgg_file->set("resource_url", (string)$this->resource_url);
+        $elgg_file->set("tricky_topic", (int)$this->tricky_topic);
     }
 
 }
