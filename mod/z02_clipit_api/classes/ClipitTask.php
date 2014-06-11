@@ -24,14 +24,26 @@ class ClipitTask extends UBItem{
     // Task types
     const TYPE_QUIZ_ANSWER = "quiz_answer";
     const TYPE_STORYBOARD_UPLOAD = "storyboard_upload";
-    const TYPE_STORYBOARD_FEEDBACK = "storyboard_feedback";
     const TYPE_VIDEO_UPLOAD = "video_upload";
+
+    const TYPE_STORYBOARD_FEEDBACK = "storyboard_feedback";
     const TYPE_VIDEO_FEEDBACK = "video_feedback";
+
     const TYPE_OTHER = "other";
+
+    const REL_TASK_STORYBOARD = "task-storyboard";
+    const REL_TASK_VIDEO = "task-video";
+    const REL_TASK_FILE = "task-file";
 
     public $task_type = "";
     public $start = 0;
     public $end = 0;
+    public $parent_task = 0;
+    public $task_count = 0;
+
+    public $storyboard_array = array();
+    public $video_array = array();
+    public $file_array = array();
 
     /**
      * Loads object parameters stored in Elgg
@@ -39,38 +51,22 @@ class ClipitTask extends UBItem{
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
     protected function load_from_elgg($elgg_entity){
-        $save_after_load = false;
         parent::load_from_elgg($elgg_entity);
         $this->task_type = (string)$elgg_entity->get("task_type");
-        // if $this->type not one of the valid types, then type = other
-        if(array_search((string)$this->task_type, array(
-                static::TYPE_QUIZ_ANSWER,
-                static::TYPE_STORYBOARD_UPLOAD,
-                static::TYPE_STORYBOARD_FEEDBACK,
-                static::TYPE_VIDEO_UPLOAD,
-                static::TYPE_VIDEO_FEEDBACK,
-                static::TYPE_OTHER))
-            === false){
-            $this->task_type = static::TYPE_OTHER;
-            $save_after_load = true;
-        }
         $this->start = (int)$elgg_entity->get("start");
-        if((int)$this->start == 0){
-            $this->start = (int)$elgg_entity->time_created;
-            $save_after_load = true;
-        }
         $this->end = (int)$elgg_entity->get("end");
+        $this->parent_task = (int)$elgg_entity->get("parent_task");
+        $this->task_count = (int)$elgg_entity->get("task_count");
         if($this->end == 0){
             $activity_id = static::get_activity($this->id);
             if(!empty($activity_id)){
                 $prop_value_array = (int) ClipitActivity::get_properties($activity_id, array("deadline"));
                 $this->end = $prop_value_array["deadline"];
-                $save_after_load = true;
             }
         }
-        if($save_after_load){
-            $this->save();
-        }
+        $this->storyboard_array = static::get_storyboards((int)$this->id);
+        $this->video_array = static::get_videos($this->id);
+        $this->file_array = static::get_files($this->id);
     }
 
     /**
@@ -83,6 +79,16 @@ class ClipitTask extends UBItem{
         $elgg_entity->set("task_type", (string)$this->task_type);
         $elgg_entity->set("start", (int)$this->start);
         $elgg_entity->set("end", (int)$this->end);
+        $elgg_entity->set("parent_task", (int)$this->parent_task);
+        $elgg_entity->set("task_count", (int)$this->task_count);
+    }
+
+    protected function save(){
+        parent::save();
+        static::set_storyboards($this->id, $this->storyboard_array);
+        static::set_videos($this->id, $this->video_array);
+        static::set_files($this->id, $this->file_array);
+        return $this->id;
     }
 
     /**
@@ -95,5 +101,56 @@ class ClipitTask extends UBItem{
     static function get_activity($task_id){
         $activity = UBCollection::get_items($task_id, ClipitActivity::REL_ACTIVITY_TASK, true);
         return array_pop($activity);
+    }
+
+    // STORYBOARDS
+    static function add_storyboards($id, $storyboard_array){
+        return UBCollection::add_items($id, $storyboard_array, ClipitTask::REL_TASK_STORYBOARD);
+    }
+
+    static function set_storyboards($id, $storyboard_array){
+        return UBCollection::set_items($id, $storyboard_array, ClipitTask::REL_TASK_STORYBOARD);
+    }
+
+    static function remove_storyboards($id, $storyboard_array){
+        return UBCollection::remove_items($id, $storyboard_array, ClipitTask::REL_TASK_STORYBOARD);
+    }
+
+    static function get_storyboards($id){
+        return UBCollection::get_items($id, ClipitTask::REL_TASK_STORYBOARD);
+    }
+
+    // VIDEOS
+    static function add_videos($id, $video_array){
+        return UBCollection::add_items($id, $video_array, ClipitTask::REL_TASK_VIDEO);
+    }
+
+    static function set_videos($id, $video_array){
+        return UBCollection::set_items($id, $video_array, ClipitTask::REL_TASK_VIDEO);
+    }
+
+    static function remove_videos($id, $video_array){
+        return UBCollection::remove_items($id, $video_array, ClipitTask::REL_TASK_VIDEO);
+    }
+
+    static function get_videos($id){
+        return UBCollection::get_items($id, ClipitTask::REL_TASK_VIDEO);
+    }
+
+    // FILES
+    static function add_files($id, $file_array){
+        return UBCollection::add_items($id, $file_array, ClipitTask::REL_TASK_FILE);
+    }
+
+    static function set_files($id, $file_array){
+        return UBCollection::set_items($id, $file_array, ClipitTask::REL_TASK_FILE);
+    }
+
+    static function remove_files($id, $file_array){
+        return UBCollection::remove_items($id, $file_array, ClipitTask::REL_TASK_FILE);
+    }
+
+    static function get_files($id){
+        return UBCollection::get_items($id, ClipitTask::REL_TASK_FILE);
     }
 } 

@@ -27,9 +27,10 @@ class ClipitVideo extends ClipitPublication{
     const REL_PUBLICATION_COMMENT = "video-comment";
     const REL_PUBLICATION_PERFORMANCE = "video-performance";
 
-    const REL_GROUP_PUBLICATION = "group-video";
-    const REL_ACTIVITY_PUBLICATION = "activity-video";
-    const REL_SITE_PUBLICATION = "site-video";
+    const REL_GROUP_PUBLICATION = ClipitGroup::REL_GROUP_VIDEO;
+    const REL_TASK_PUBLICATION = ClipitTask::REL_TASK_VIDEO;
+    const REL_ACTIVITY_PUBLICATION = ClipitActivity::REL_ACTIVITY_VIDEO;
+    const REL_SITE_PUBLICATION = ClipitSite::REL_SITE_VIDEO;
 
     public $preview = "";
     public $duration = 0;
@@ -64,24 +65,19 @@ class ClipitVideo extends ClipitPublication{
      * @return string YouTube video URL
      */
     static function upload_to_youtube($local_video_path, $title){
+        if(!get_config("google_refresh_token")){
+            return false;
+        }
         set_include_path( get_include_path() . PATH_SEPARATOR . elgg_get_plugins_path() . "z02_clipit_api/libraries/google_api/src/");
         require_once 'Google/Client.php';
         require_once 'Google/Service/YouTube.php';
         $client = new Google_Client();
         $client->setClientId(get_config("google_id"));
         $client->setClientSecret(get_config("google_secret"));
-
-        if (isset($_SESSION['token'])) {
-            $client->setAccessToken($_SESSION['token']);
-        } else {
-            $google_token = get_config("google_token");
-            if (!empty($google_token)) {
-                try {
-                    $client->setAccessToken($google_token);
-                } catch(Exception $e){
-                    error_log($e);
-                }
-            }
+        try {
+            $client->setAccessToken(get_config("google_token"));
+        } catch(Exception $e){
+            error_log($e);
         }
         if($client->isAccessTokenExpired()){
             $refresh_token = get_config("google_refresh_token");

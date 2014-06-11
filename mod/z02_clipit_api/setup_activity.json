@@ -1,4 +1,4 @@
-[Actividad]
+[Activity]
 - Name
 - Description
 - Final deadline (no more work can be done)
@@ -20,3 +20,27 @@
 [Groups] depends on (*)
 - Name
 - Student list
+
+// Parameters are described as { "key" : "value" } pairs, where "value" can be an array of pairs, e.g.:
+//
+// { "key1" = [ { "key2" : "value2"} , { "key3" : "value3" } ] }
+//
+// In the above example, the key "key1" has a value consisting in an array of 2 key:value pairs.
+// In this document, all values which may be edited to customize ClipIt will be indicated. All other parameters
+// (keys or values) should not be modified.
+
+
+{
+    // do not edit
+    "activity" : [
+        {
+            // edit value
+            "name" : "SAMPLE NAME"
+        },{
+            // edit value
+            "description" : "This is a sample description of the activity"
+        },{
+            "deadline" : "DD-MM-YYYY"
+        }
+    ]
+}

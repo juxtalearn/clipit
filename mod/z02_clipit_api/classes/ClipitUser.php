@@ -43,13 +43,13 @@ class ClipitUser extends UBUser{
         $id = parent::save();
         switch(strtolower($this->role)){
             case static::ROLE_STUDENT:
-                static::set_role_student($id);
+                remove_user_admin($this->id);
                 break;
             case static::ROLE_TEACHER:
-                static::set_role_teacher($id);
+                make_user_admin($this->id);
                 break;
             case static::ROLE_ADMIN:
-                static::set_role_admin($id);
+                make_user_admin($this->id);
                 break;
         }
         return $id;
@@ -114,7 +114,6 @@ class ClipitUser extends UBUser{
      * @return int Returns the User Id if set correctly.
      */
     static function set_role_student($user_id){
-        remove_user_admin($user_id);
         $prop_value_array["role"] = static::ROLE_STUDENT;
         return static::set_properties($user_id, $prop_value_array);
     }
@@ -127,7 +126,6 @@ class ClipitUser extends UBUser{
      * @return int Returns the User Id if set correctly.
      */
     static function set_role_teacher($user_id){
-        make_user_admin($user_id);
         $prop_value_array["role"] = static::ROLE_TEACHER;
         return static::set_properties($user_id, $prop_value_array);
     }
@@ -140,7 +138,6 @@ class ClipitUser extends UBUser{
      * @return int Returns the User Id if set correctly.
      */
     static function set_role_admin($user_id){
-        make_user_admin($user_id);
         $prop_value_array["role"] = static::ROLE_ADMIN;
         return static::set_properties($user_id, $prop_value_array);
     }

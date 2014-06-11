@@ -161,7 +161,7 @@ class UBUser extends UBItem{
                 $item->password = $new_password["password"];
                 $item->hash = $new_password["hash"];
                 continue;
-            } if(!array_key_exists($prop, self::list_properties())){
+            } if(!array_key_exists($prop, static::list_properties())){
                 throw new InvalidParameterException("ERROR: One or more property names do not exist.");
             }else{
                 $item->$prop = $value;

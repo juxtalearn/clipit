@@ -30,6 +30,7 @@ class ClipitPublication extends UBItem{
     const REL_GROUP_PUBLICATION = "group-publication";
     const REL_ACTIVITY_PUBLICATION = "activity-publication";
     const REL_SITE_PUBLICATION = "site-publication";
+    const REL_TASK_PUBLICATION = "task-publication";
 
     public $tag_array = array();
     public $label_array = array();
@@ -92,6 +93,10 @@ class ClipitPublication extends UBItem{
         if(!empty($activity)){
             return "activity";
         }
+        $task = static::get_task($id);
+        if(!empty($task)){
+            return "task";
+        }
         $group = static::get_group($id);
         if(!empty($group)){
             return "group";
@@ -106,6 +111,11 @@ class ClipitPublication extends UBItem{
         }
         $group = UBCollection::get_items($id, static::REL_GROUP_PUBLICATION, true);
         return array_pop($group);
+    }
+
+    static function get_task($id){
+        $task = UBCollection::get_items($id, static::REL_TASK_PUBLICATION, true);
+        return array_pop($task);
     }
 
     static function get_activity($id){
