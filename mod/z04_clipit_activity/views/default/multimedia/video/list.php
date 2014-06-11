@@ -48,6 +48,7 @@ $rating = elgg_extract("rating", $vars);
 
 <ul class="video-list">
     <?php
+    $count = 0;
     foreach($video_ids as $video_id):
         $video = array_pop(ClipitVideo::get_by_id(array($video_id)));
         $tags = ClipitVideo::get_tags($video->id);
@@ -59,7 +60,7 @@ $rating = elgg_extract("rating", $vars);
         $published = false;
         ?>
         <li class="video-item row list-item">
-            <div class="col-lg-4">
+            <div class="col-md-4">
                 <a href="<?php echo elgg_get_site_url()."{$href}/view/{$video->id}"; ?>">
                     <div class="img-preview">
                         <?php
@@ -74,10 +75,10 @@ $rating = elgg_extract("rating", $vars);
                     </div>
                 </a>
             </div>
-            <div class="col-lg-8">
+            <div class="col-md-8">
                 <?php if($vars['actions'] && !$published): ?>
                     <?php echo elgg_view('output/url', array(
-                        'href'  => "{$href}/publish/{$video->id}",
+                        'href'  => "{$href}/publish/{$video->id}".($vars['task_id'] ? "?task_id=".$vars['task_id']: ""),
                         'title' => elgg_echo('publish'),
                         'style' => 'padding: 1px 5px;  background: #47a447;color: #fff;font-weight: bold;margin-left:10px;',
                         'class' => 'btn-xs btn pull-right',
@@ -132,5 +133,8 @@ $rating = elgg_extract("rating", $vars);
                 </small>
             </div>
         </li>
-    <?php endforeach; ?>
+    <?php
+        $count++;
+    endforeach;
+    ?>
 </ul>

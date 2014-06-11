@@ -26,9 +26,11 @@ $tasks = array_slice($activity->task_array, 0, 4);
         <h3 class="activity-module-title">Deadlines</h3>
         <?php echo elgg_view("tasks/list", array(
             'tasks' => $tasks,
-            'href' => "clipit_activity/{$activity->id}/tasks"
+            'href' => "clipit_activity/{$activity->id}/tasks",
+            'activity_id' => $activity->id
         ));
         ?>
+        <?php if($tasks): ?>
         <p class="text-right view-all">
             <?php echo elgg_view('output/url', array(
                 'href'  => "clipit_activity/{$activity->id}/tasks",
@@ -36,6 +38,7 @@ $tasks = array_slice($activity->task_array, 0, 4);
                 'text'  => elgg_echo('view_all')));
             ?>
         </p>
+        <?php endif; ?>
     </div>
     <div class="col-md-5">
         <?php echo elgg_view("activity/profile/stumbling_block_module", array('tags' => $tags));?>
