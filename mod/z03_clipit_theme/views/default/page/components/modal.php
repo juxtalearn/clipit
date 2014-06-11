@@ -25,7 +25,7 @@ if($vars['footer'] || $cancel_button || $ok_button){
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title"><?php echo $title; ?></h4>
+                <h3 class="modal-title"><?php echo $title; ?></h3>
             </div>
             <div class="modal-body"><?php echo $body; ?></div>
             <?php echo $footer; ?>

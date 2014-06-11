@@ -100,17 +100,10 @@ function video_url_parser($url){
             // Youtube
             if (strpos($url, 'youtube.com') != false || strpos($url, 'youtu.be') != false) {
                 preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $url, $matches);
-                $data = file_get_contents("http://gdata.youtube.com/feeds/api/videos/$matches[0]?v=2&alt=jsonc");
-                $data = json_decode($data);
-                $data = $data->data;
-                $video_id = $matches[0];
                 $output = array(
-                    'id' => $data->id,
-                    'url'   => 'http://www.youtube.com/watch?v='.$data->id,
-                    'title' => $data->title,
-                    'description' => $data->description,
-                    'preview' => "http://i1.ytimg.com/vi/{$video_id}/mqdefault.jpg",
-                    'duration'      => $data->duration,
+                    'id' => $matches[0],
+                    'url'   => 'http://www.youtube.com/watch?v='.$matches[0],
+                    'preview' => "http://i1.ytimg.com/vi/{$matches[0]}/mqdefault.jpg",
                     'favicon'   => $favicon_url_base.$parse_url['host']
                 );
             // Vimeo
@@ -119,12 +112,9 @@ function video_url_parser($url){
                 $data = file_get_contents("http://vimeo.com/api/v2/video/$matches[0].json");
                 $data = array_pop(json_decode($data));
                 $output = array(
-                    'id' => $data->id,
-                    'url'   => $data->url,
-                    'title' => $data->title,
-                    'description' => $data->description,
+                    'id' => $matches[0],
+                    'url'   => "http://vimeo.com/{$matches[0]}",
                     'preview' => $data->thumbnail_large,
-                    'duration'      => $data->duration,
                     'favicon'   => $favicon_url_base.$parse_url['host']
                 );
             }
@@ -187,4 +177,63 @@ function star_rating_view($average = 0, $number = 5){
         $output .= '<i class="fa '.$star_class.'" data-rating="'.$i.'"></i> ';
     }
     return $output;
+}
+
+/**
+ * Get task status
+ *
+ * @param ClipitTask $task
+ * @param $activity_id
+ * @return array
+ */
+function get_task_status(ClipitTask $task, $activity_id){
+    $user_id = elgg_get_logged_in_user_guid();
+    if($activity_id){
+        $group_id = ClipitGroup::get_from_user_activity($user_id, $activity_id);
+    }
+    $status = array(
+        'icon' => '<i class="fa fa-minus yellow"></i>',
+        'text' => elgg_echo('task:pending'),
+        'color' => 'yellow',
+        'status' => false
+    );
+    /* Types
+    $status = array(
+                'icon' => '<i class="fa fa-minus yellow"></i>',
+                'text' => elgg_echo('pending'),
+                'status' => false
+            );
+    $status = array(
+                'icon' => '<i class="fa fa-minus yellow"></i>',
+                'count' => '1/10',
+                'text' => elgg_echo('pending'),
+                'status' => false
+            );
+    */
+
+    switch($task->task_type){
+        case "video_upload":
+            foreach($task->video_array as $video_id){
+                $group_video = ClipitVideo::get_group($video_id);
+                if($group_id == $group_video){
+                    $status = array(
+                        'icon' => '<i class="fa fa-check green"></i>',
+                        'text' => elgg_echo('task:completed'),
+                        'color' => 'green',
+                        'status' => true,
+                        'result' => $video_id
+                    );
+                }
+            }
+            break;
+        case "video_feedback":
+            $status = array(
+                'icon' => '<i class="fa fa-minus yellow"></i>',
+                'text' => elgg_echo('task:pending'),
+                'color' => 'yellow',
+                'status' => false
+            );
+            break;
+    }
+    return $status;
 }

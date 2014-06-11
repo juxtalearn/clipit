@@ -24,7 +24,10 @@ foreach($labels as $label_id){
 }
 $labels_value = implode(", ", $label_value);
 ?>
-
+<?php echo elgg_view("input/hidden", array(
+    'name' => 'task-id',
+    'value' => get_input('task_id'),
+)); ?>
 <?php echo elgg_view("input/hidden", array(
     'name' => 'entity-id',
     'value' => $entity->id,
@@ -48,10 +51,10 @@ $(function(){
     });
 });
 </script>
-<div class="bg-warning">
-    Select task:
-    <input type="radio" > Upload video
-</div>
+<!--<div class="bg-warning">-->
+<!--    Select task:-->
+<!--    <input type="radio" > Upload video-->
+<!--</div>-->
 <div class="row">
     <div class="col-md-8">
         <div class="form-group">

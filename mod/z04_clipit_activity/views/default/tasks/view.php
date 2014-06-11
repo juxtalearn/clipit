@@ -11,16 +11,44 @@
  * @package         ClipIt
  */
 $task = elgg_extract('entity', $vars);
+$status = elgg_extract('status', $vars);
 ?>
-<h3>
-    <?php echo $task->name;?>
-    <span class="pull-right blue-lighter">
-        <?php echo elgg_view('output/friendlytime', array('time' => $task->end));?>
-    </span>
-</h3>
-<div class="description">
-    <?php echo $task->description;?>
+<style>
+.task-info{
+    margin-bottom: 15px;
+}
+.task-info h3{
+    margin-top: 0;
+}
+.task-info .details{
+    border-bottom: 1px solid #bae6f6;
+    padding-bottom: 5px;
+}
+.task-info .description{
+    color: #666666;
+    margin-top: 10px;
+    background: #fafafa;
+    padding: 10px;
+}
+</style>
+<div class="task-info">
+    <h3>
+        <span class="<?php echo $status['color'];?> pull-right"><?php echo $status['text'];?></span>
+        <?php echo $task->name;?>
+    </h3>
+    <small class="show details">
+        <strong>Start: </strong>
+        <?php echo elgg_view('output/friendlytime', array('time' => $task->start));?>
+        <span class="pull-right">
+            <strong>End: </strong>
+            <?php echo elgg_view('output/friendlytime', array('time' => $task->end));?>
+        </span>
+    </small>
+    <div class="description">
+        <?php echo $task->description;?>
+    </div>
 </div>
-<div>
+
+<div class="task-body">
     <?php echo $vars['body']; ?>
 </div>

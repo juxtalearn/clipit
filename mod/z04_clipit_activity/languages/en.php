@@ -137,6 +137,10 @@ $english = array(
     'activity:tasks' => 'Tasks',
     'activity:task' => 'Task',
     'tasks:none' => 'No tasks',
+    'task:completed' => 'Completed',
+    'task:pending' => 'Pending',
+    'task:my_video' => 'My video',
+    'task:other_videos' => 'Other videos',
 );
 
 add_translation('en', $english);
