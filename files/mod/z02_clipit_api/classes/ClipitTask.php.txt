@@ -39,6 +39,7 @@ class ClipitTask extends UBItem{
     public $start = 0;
     public $end = 0;
     public $parent_task = 0;
+    public $task_count = 0;
 
     public $storyboard_array = array();
     public $video_array = array();
@@ -55,6 +56,7 @@ class ClipitTask extends UBItem{
         $this->start = (int)$elgg_entity->get("start");
         $this->end = (int)$elgg_entity->get("end");
         $this->parent_task = (int)$elgg_entity->get("parent_task");
+        $this->task_count = (int)$elgg_entity->get("task_count");
         if($this->end == 0){
             $activity_id = static::get_activity($this->id);
             if(!empty($activity_id)){
@@ -78,6 +80,7 @@ class ClipitTask extends UBItem{
         $elgg_entity->set("start", (int)$this->start);
         $elgg_entity->set("end", (int)$this->end);
         $elgg_entity->set("parent_task", (int)$this->parent_task);
+        $elgg_entity->set("task_count", (int)$this->task_count);
     }
 
     protected function save(){
