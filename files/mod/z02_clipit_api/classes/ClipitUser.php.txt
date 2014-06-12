@@ -141,5 +141,4 @@ class ClipitUser extends UBUser{
         $prop_value_array["role"] = static::ROLE_ADMIN;
         return static::set_properties($user_id, $prop_value_array);
     }
-
 }
