@@ -31,12 +31,13 @@ switch($parent_entity_class){
     case 'ClipitActivity':
         $entity_level_class = "ClipitActivity";
         $parent_id = array_pop(ClipitActivity::get_by_id(array($parent_id)));
+        $href = "clipit_activity/{$parent_id}/publications";
         break;
     // Clipit Group
     case 'ClipitGroup':
         $entity_level_class = "ClipitActivity";
         $parent_id = ClipitGroup::get_activity($parent_id);
-        $href = "clipit_activity/{$parent_id}/publications";
+        $href = "clipit_activity/{$parent_id}/tasks/view/{$task_id}";
         break;
     default:
         register_error(elgg_echo("video:cantadd"));

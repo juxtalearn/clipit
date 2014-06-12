@@ -72,7 +72,7 @@ $(function(){
         <div class="form-group">
             <label><?php echo elgg_echo("tags");?></label>
             <div>
-                <select name="tags[]" data-placeholder="Select tags" style="width:100%;" multiple class="chosen-select" tabindex="8">
+                <select name="tags[]" data-placeholder="<?php echo elgg_echo('click_add');?>" style="width:100%;" multiple class="chosen-select" tabindex="8">
                     <option value=""></option>
                     <?php
                     foreach($tt_tags as $tag_id):
@@ -106,7 +106,7 @@ $(function(){
         <img src="<?php echo $entity->preview;?>" class="img-responsive"><br>
         <label><?php echo elgg_echo("performance_items");?></label>
         <div>
-            <select name="performance_items[]" data-placeholder="<?php echo elgg_echo('performance_item:select'); ?>" style="width:100%;" multiple class="chosen-select-items" tabindex="8">
+            <select name="performance_items[]" data-placeholder="<?php echo elgg_echo('click_add');?>" style="width:100%;" multiple class="chosen-select-items" tabindex="8">
                 <option value=""></option>
                 <?php foreach(ClipitPerformanceItem::get_by_category() as $category => $items): ?>
                 <optgroup label="<?php echo $category; ?>">

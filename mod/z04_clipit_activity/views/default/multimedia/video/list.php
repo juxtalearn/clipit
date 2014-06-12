@@ -48,7 +48,6 @@ $rating = elgg_extract("rating", $vars);
 
 <ul class="video-list">
     <?php
-    $count = 0;
     foreach($video_ids as $video_id):
         $video = array_pop(ClipitVideo::get_by_id(array($video_id)));
         $tags = ClipitVideo::get_tags($video->id);
@@ -133,8 +132,5 @@ $rating = elgg_extract("rating", $vars);
                 </small>
             </div>
         </li>
-    <?php
-        $count++;
-    endforeach;
-    ?>
+    <?php endforeach;?>
 </ul>

@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 $english = array(
+    'click_add' => 'Click to add',
     'view'  => 'View',
     // Activity
     'my_activities' => 'My activities',
@@ -23,8 +24,8 @@ $english = array(
     'activity:stas' => 'Materials',
     'activity:publications' => 'Publications',
     'activity:join' => 'Join activity',
-    'activity:actual_deadline' => 'Actual deadline',
-    'activity:next_deadline' => 'Next deadline',
+    'activity:actual_deadline' => 'Actual task',
+    'activity:next_deadline' => 'Next task',
     'activity:quiz' => 'Activity Quiz',
     'activity:teachers' => 'Teachers',
     // Activity status
@@ -138,6 +139,7 @@ $english = array(
     'activity:task' => 'Task',
     'tasks:none' => 'No tasks',
     'task:completed' => 'Completed',
+    'task:not_completed' => 'Not completed',
     'task:pending' => 'Pending',
     'task:my_video' => 'My video',
     'task:other_videos' => 'Other videos',

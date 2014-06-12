@@ -16,12 +16,14 @@ switch($type){
     case "video_upload":
     case "storyboard_upload":
            $output = "users";
+            $title = "Group task";
         break;
     case "quiz_answer":
     case "video_feedback":
     case "storyboard_feedback":
         $output = "user";
+        $title = "User task";
         break;
 }
 ?>
-<i class="fa fa-<?php echo $output; ?>"></i>
+<i class="fa fa-<?php echo $output; ?>" title="<?php echo $title; ?>"></i>

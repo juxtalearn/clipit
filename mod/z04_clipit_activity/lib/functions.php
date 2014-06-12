@@ -227,13 +227,35 @@ function get_task_status(ClipitTask $task, $activity_id){
             }
             break;
         case "video_feedback":
-            $status = array(
-                'icon' => '<i class="fa fa-minus yellow"></i>',
-                'text' => elgg_echo('task:pending'),
-                'color' => 'yellow',
-                'status' => false
-            );
+            $entities = ClipitTask::get_videos($task->parent_task);
+            $evaluation_list = get_filter_evaluations($entities, $activity_id);
+            $total = count($evaluation_list["evaluated"]) + count($evaluation_list["no_evaluated"]);
+            $total_evaluated = count($evaluation_list["evaluated"]);
+            $text = $total_evaluated."/".$total;
+            if($total == $total_evaluated){
+                $status = array(
+                    'icon' => '<i class="fa fa-check green"></i>',
+                    'text' => $text." ".elgg_echo('task:completed'),
+                    'color' => 'green',
+                    'status' => true,
+                );
+            } else {
+                $status = array(
+                    'icon' => '<i class="fa fa-minus yellow"></i>',
+                    'text' => $text." ".elgg_echo('task:pending'),
+                    'color' => 'yellow',
+                    'status' => false
+                );
+            }
             break;
+    }
+    if($task->end <= time() && $status['status'] === false){
+        $status = array(
+            'icon' => '<i class="fa fa-times red"></i>',
+            'text' => $text." ".elgg_echo('task:not_completed'),
+            'color' => 'red',
+            'status' => false
+        );
     }
     return $status;
 }

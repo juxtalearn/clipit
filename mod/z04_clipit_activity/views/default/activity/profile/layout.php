@@ -23,7 +23,7 @@ $tasks = array_slice($activity->task_array, 0, 4);
 <?php if($user_inActivity):?>
 <div class="row">
     <div class="col-md-7">
-        <h3 class="activity-module-title">Deadlines</h3>
+        <h3 class="activity-module-title"><?php echo elgg_echo('activity:tasks');?></h3>
         <?php echo elgg_view("tasks/list", array(
             'tasks' => $tasks,
             'href' => "clipit_activity/{$activity->id}/tasks",
