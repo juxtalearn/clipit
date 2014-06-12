@@ -60,7 +60,7 @@ class UBItem{
     /**
      * Constructor
      *
-     * @param int $id If !null, load instance.
+     * @param int $id If != null, load instance.
      *
      * @throws APIException
      */
