@@ -34,5 +34,5 @@ class ClipitStoryboard extends ClipitPublication{
 
     public $file = 0;
 
-    
+
 }
