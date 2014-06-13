@@ -21,19 +21,31 @@ elgg_register_event_handler('init', 'system', 'clipit_api_init');
  * Initialization method which loads objects, libraries, exposes the REST API, and registers test classes.
  */
 function clipit_api_init(){
-    loadFiles(elgg_get_plugins_path() . "z02_clipit_api/libraries/");
+    loadFiles(elgg_get_plugins_path() . "z02_clipit_api/libraries/clipit_rest_api/");
     loadFiles(elgg_get_plugins_path() . "z02_clipit_api/libraries/juxtalearn-cookie-authentication/");
+    loadFiles(elgg_get_plugins_path() . "z02_clipit_api/libraries/simple_xlsx/");
     expose_clipit_api();
-    rename_subtypes(); // temporal to avoid loosing data
-    //include_once(elgg_get_plugins_path() . "z02_clipit_api/activate.php");
-
+    rename_subtypes();
     elgg_register_page_handler('youtube_auth', 'youtube_auth_page_handler');
+    elgg_register_page_handler("data_input", "data_input_page_handler");
 }
 
 function youtube_auth_page_handler($page){
     $title = "YouTube Authentication";
     $params = array(
         'content' => elgg_view("youtube_auth"),
+        'title' => $title,
+        'filter' => "",
+    );
+    $body = elgg_view_layout('one_column', $params);
+
+    echo elgg_view_page($title, $body);
+}
+
+function data_input_page_handler($page){
+    $title = "ClipIt Setup";
+    $params = array(
+        'content' => elgg_view("data_input"),
         'title' => $title,
         'filter' => "",
     );

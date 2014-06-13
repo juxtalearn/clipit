@@ -25,15 +25,14 @@ class ClipitTask extends UBItem{
     const TYPE_QUIZ_ANSWER = "quiz_answer";
     const TYPE_STORYBOARD_UPLOAD = "storyboard_upload";
     const TYPE_VIDEO_UPLOAD = "video_upload";
-
     const TYPE_STORYBOARD_FEEDBACK = "storyboard_feedback";
     const TYPE_VIDEO_FEEDBACK = "video_feedback";
-
     const TYPE_OTHER = "other";
 
     const REL_TASK_STORYBOARD = "task-storyboard";
     const REL_TASK_VIDEO = "task-video";
     const REL_TASK_FILE = "task-file";
+    const REL_TASK_QUIZ = "task-quiz";
 
     public $task_type = "";
     public $start = 0;
@@ -41,9 +40,11 @@ class ClipitTask extends UBItem{
     public $parent_task = 0;
     public $task_count = 0;
 
+    public $activity = 0;
     public $storyboard_array = array();
     public $video_array = array();
     public $file_array = array();
+    public $quiz_array = array();
 
     /**
      * Loads object parameters stored in Elgg
@@ -64,9 +65,11 @@ class ClipitTask extends UBItem{
                 $this->end = $prop_value_array["deadline"];
             }
         }
+        $this->activity = static::get_activity((int)$this->id);
         $this->storyboard_array = static::get_storyboards((int)$this->id);
         $this->video_array = static::get_videos($this->id);
         $this->file_array = static::get_files($this->id);
+        $this->quiz_array = static::get_quizzes($this->id);
     }
 
     /**
@@ -85,12 +88,15 @@ class ClipitTask extends UBItem{
 
     protected function save(){
         parent::save();
+        static::set_activity($this->id, $this->activity);
         static::set_storyboards($this->id, $this->storyboard_array);
         static::set_videos($this->id, $this->video_array);
         static::set_files($this->id, $this->file_array);
+        static::set_quizzes($this->id, $this->quiz_array);
         return $this->id;
     }
 
+    // ACTIVITY
     /**
      * Get the Activity Id in which a Task is contained in.
      *
@@ -103,54 +109,76 @@ class ClipitTask extends UBItem{
         return array_pop($activity);
     }
 
+    static function set_activity($id, $activity_id){
+        return UBCollection::add_items($activity_id, array($id), ClipitActivity::REL_ACTIVITY_TASK, true);
+
+    }
+
     // STORYBOARDS
     static function add_storyboards($id, $storyboard_array){
-        return UBCollection::add_items($id, $storyboard_array, ClipitTask::REL_TASK_STORYBOARD);
+        return UBCollection::add_items($id, $storyboard_array, static::REL_TASK_STORYBOARD);
     }
 
     static function set_storyboards($id, $storyboard_array){
-        return UBCollection::set_items($id, $storyboard_array, ClipitTask::REL_TASK_STORYBOARD);
+        return UBCollection::set_items($id, $storyboard_array, static::REL_TASK_STORYBOARD);
     }
 
     static function remove_storyboards($id, $storyboard_array){
-        return UBCollection::remove_items($id, $storyboard_array, ClipitTask::REL_TASK_STORYBOARD);
+        return UBCollection::remove_items($id, $storyboard_array, static::REL_TASK_STORYBOARD);
     }
 
     static function get_storyboards($id){
-        return UBCollection::get_items($id, ClipitTask::REL_TASK_STORYBOARD);
+        return UBCollection::get_items($id, static::REL_TASK_STORYBOARD);
     }
 
     // VIDEOS
     static function add_videos($id, $video_array){
-        return UBCollection::add_items($id, $video_array, ClipitTask::REL_TASK_VIDEO);
+        return UBCollection::add_items($id, $video_array, static::REL_TASK_VIDEO);
     }
 
     static function set_videos($id, $video_array){
-        return UBCollection::set_items($id, $video_array, ClipitTask::REL_TASK_VIDEO);
+        return UBCollection::set_items($id, $video_array, static::REL_TASK_VIDEO);
     }
 
     static function remove_videos($id, $video_array){
-        return UBCollection::remove_items($id, $video_array, ClipitTask::REL_TASK_VIDEO);
+        return UBCollection::remove_items($id, $video_array, static::REL_TASK_VIDEO);
     }
 
     static function get_videos($id){
-        return UBCollection::get_items($id, ClipitTask::REL_TASK_VIDEO);
+        return UBCollection::get_items($id, static::REL_TASK_VIDEO);
     }
 
     // FILES
     static function add_files($id, $file_array){
-        return UBCollection::add_items($id, $file_array, ClipitTask::REL_TASK_FILE);
+        return UBCollection::add_items($id, $file_array, static::REL_TASK_FILE);
     }
 
     static function set_files($id, $file_array){
-        return UBCollection::set_items($id, $file_array, ClipitTask::REL_TASK_FILE);
+        return UBCollection::set_items($id, $file_array, static::REL_TASK_FILE);
     }
 
     static function remove_files($id, $file_array){
-        return UBCollection::remove_items($id, $file_array, ClipitTask::REL_TASK_FILE);
+        return UBCollection::remove_items($id, $file_array, static::REL_TASK_FILE);
     }
 
     static function get_files($id){
-        return UBCollection::get_items($id, ClipitTask::REL_TASK_FILE);
+        return UBCollection::get_items($id, static::REL_TASK_FILE);
+    }
+
+    // QUIZZES
+    static function add_quizzes($id, $quiz_array){
+        return UBCollection::add_items($id, $quiz_array, static::REL_TASK_QUIZ);
+    }
+
+    static function set_quizzes($id, $quiz_array){
+        return UBCollection::set_items($id, $quiz_array, static::REL_TASK_QUIZ);
+    }
+
+    static function remove_quizzes($id, $quiz_array){
+        return UBCollection::remove_items($id, $quiz_array, static::REL_TASK_QUIZ);
+    }
+
+    static function get_quizzes($id){
+        return UBCollection::get_items($id, static::REL_TASK_QUIZ);
     }
 } 
