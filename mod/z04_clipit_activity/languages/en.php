@@ -17,7 +17,6 @@ $english = array(
     'my_activities' => 'My activities',
     'activities:none' => 'There are no activities...',
     'explore' => 'Explore',
-    'past' => 'Finished',
     'activity:profile' => 'Activity home',
     'activity:groups' => 'Groups',
     'activity:discussion' => 'Activity discussion',
@@ -61,6 +60,7 @@ $english = array(
     'group:members' => 'Members',
     // Discussion
     'discussions:none' => 'No discussions',
+    'discussion:create' => 'Create a new topic',
     'discussion:created' => 'Discussion created',
     'discussion:cantcreate' => 'You can not create a discussion',
     'discussion:edit' => 'Edit topic',
@@ -143,6 +143,7 @@ $english = array(
     'task:pending' => 'Pending',
     'task:my_video' => 'My video',
     'task:other_videos' => 'Other videos',
+    'task:not_actual' => 'There are no actual tasks',
 );
 
 add_translation('en', $english);

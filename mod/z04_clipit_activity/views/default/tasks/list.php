@@ -12,7 +12,6 @@
  */
 $tasks = elgg_extract('tasks', $vars);
 $href = elgg_extract('href', $vars);
-$activity_id = elgg_extract('activity_id', $vars);
 if(!$tasks){
     echo elgg_view('output/empty', array('value' => elgg_echo('tasks:none')));
 }
@@ -20,7 +19,7 @@ if(!$tasks){
 <ul class="deadline-list">
     <?php foreach($tasks as $task_id):
     $task = array_pop(ClipitTask::get_by_id(array($task_id)));
-    $status = get_task_status($task, $activity_id);
+    $status = get_task_status($task);
     ?>
     <li <?php echo (time() < $task->start) ? "class='soon'" : ""; ?> style="overflow: hidden;">
         <div class="image-block">

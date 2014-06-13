@@ -26,7 +26,6 @@ $entity = elgg_extract('entity', $vars);
                     </div>
                 <?php endif; ?>
                 <img src="<?php echo $entity->preview;?>">
-                <span class="duration label"><?php echo get_format_time($entity->duration);?></span>
             </div>
         </div>
     </div>

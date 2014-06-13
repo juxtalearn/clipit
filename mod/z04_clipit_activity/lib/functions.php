@@ -186,10 +186,10 @@ function star_rating_view($average = 0, $number = 5){
  * @param $activity_id
  * @return array
  */
-function get_task_status(ClipitTask $task, $activity_id){
+function get_task_status(ClipitTask $task, $group_id = 0){
     $user_id = elgg_get_logged_in_user_guid();
-    if($activity_id){
-        $group_id = ClipitGroup::get_from_user_activity($user_id, $activity_id);
+    if(!$group_id){
+        $group_id = ClipitGroup::get_from_user_activity($user_id, $task->activity);
     }
     $status = array(
         'icon' => '<i class="fa fa-minus yellow"></i>',
@@ -197,19 +197,6 @@ function get_task_status(ClipitTask $task, $activity_id){
         'color' => 'yellow',
         'status' => false
     );
-    /* Types
-    $status = array(
-                'icon' => '<i class="fa fa-minus yellow"></i>',
-                'text' => elgg_echo('pending'),
-                'status' => false
-            );
-    $status = array(
-                'icon' => '<i class="fa fa-minus yellow"></i>',
-                'count' => '1/10',
-                'text' => elgg_echo('pending'),
-                'status' => false
-            );
-    */
 
     switch($task->task_type){
         case "video_upload":
@@ -228,7 +215,7 @@ function get_task_status(ClipitTask $task, $activity_id){
             break;
         case "video_feedback":
             $entities = ClipitTask::get_videos($task->parent_task);
-            $evaluation_list = get_filter_evaluations($entities, $activity_id);
+            $evaluation_list = get_filter_evaluations($entities, $task->activity);
             $total = count($evaluation_list["evaluated"]) + count($evaluation_list["no_evaluated"]);
             $total_evaluated = count($evaluation_list["evaluated"]);
             $text = $total_evaluated."/".$total;
@@ -236,6 +223,7 @@ function get_task_status(ClipitTask $task, $activity_id){
                 $status = array(
                     'icon' => '<i class="fa fa-check green"></i>',
                     'text' => $text." ".elgg_echo('task:completed'),
+                    'count' => $text,
                     'color' => 'green',
                     'status' => true,
                 );
@@ -243,6 +231,7 @@ function get_task_status(ClipitTask $task, $activity_id){
                 $status = array(
                     'icon' => '<i class="fa fa-minus yellow"></i>',
                     'text' => $text." ".elgg_echo('task:pending'),
+                    'count' => $text,
                     'color' => 'yellow',
                     'status' => false
                 );
@@ -253,9 +242,31 @@ function get_task_status(ClipitTask $task, $activity_id){
         $status = array(
             'icon' => '<i class="fa fa-times red"></i>',
             'text' => $text." ".elgg_echo('task:not_completed'),
+            'count' => $text,
             'color' => 'red',
             'status' => false
         );
     }
     return $status;
+}
+
+/**
+ * Get group progress from activity
+ *
+ * @param $group_id
+ * @return float
+ */
+function get_group_progress($group_id){
+    $activity_id = ClipitGroup::get_activity($group_id);
+    $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
+    $completed = array();
+    foreach($activity->task_array as $task_id){
+        $task = array_pop(ClipitTask::get_by_id(array($task_id)));
+        $status = get_task_status($task, $group_id);
+        if($status['status'] === true){
+            $completed[] = true;
+        }
+    }
+    $val = count($completed)/(count($activity->task_array));
+    return $val*100;
 }

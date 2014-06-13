@@ -51,10 +51,20 @@ $(function(){
     });
 });
 </script>
-<!--<div class="bg-warning">-->
-<!--    Select task:-->
-<!--    <input type="radio" > Upload video-->
-<!--</div>-->
+<?php
+if($task_id = get_input('task_id')):
+    $task = array_pop(ClipitTask::get_by_id(array($task_id)));
+?>
+<div class="bg-warning">
+    Task:
+    <?php echo elgg_view('output/url', array(
+            'href'  => "clipit_activity/{$task->activity}/tasks/view/{$task->id}",
+            'title' => $task->name,
+            'text'  => $task->name,
+        ));
+    ?>
+</div>
+<?php endif; ?>
 <div class="row">
     <div class="col-md-8">
         <div class="form-group">

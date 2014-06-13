@@ -301,7 +301,7 @@ function activity_page_handler($page) {
                     elgg_push_breadcrumb($title);
                     $tasks = ClipitActivity::get_tasks($activity->id);
                     $href = "clipit_activity/{$activity->id}/tasks";
-                    $content = elgg_view('tasks/list', array('tasks' => $tasks, 'href' => $href, 'activity_id' => $activity->id));
+                    $content = elgg_view('tasks/list', array('tasks' => $tasks, 'href' => $href));
                     if($page[2] == 'view' && $page[3]){
                         $entity_id = (int)$page[3];
                         $task = array_pop(ClipitTask::get_by_id(array($entity_id)));
@@ -311,14 +311,14 @@ function activity_page_handler($page) {
                             elgg_push_breadcrumb($task->name);
                             $filter = "";
                             $title = elgg_echo('activity:task');
-                            $status = get_task_status($task, $activity->id);
+                            $status = get_task_status($task);
                             switch($task->task_type){
                                 case "video_upload":
                                     $videos = ClipitGroup::get_videos($hasGroup);
                                     $href_publications = "clipit_activity/{$activity->id}/publications";
                                     $body = elgg_view('multimedia/video/list', array(
                                         'videos'    => $videos,
-                                        'href'      => $href_publications,
+                                        'href'      => "clipit_activity/{$activity->id}/group/multimedia",
                                         'task_id'   => $task->id,
                                         'rating'    => false,
                                         'actions'   => true,
@@ -347,11 +347,15 @@ function activity_page_handler($page) {
                                         if(($key = array_search($status['result'], $task->video_array)) !== false) {
                                             unset($task->video_array[$key]);
                                         }
-                                        $body .= elgg_view('multimedia/video/list', array(
-                                            'videos'    => $task->video_array,
-                                            'href'      => $href_publications,
-                                            'task_id'   => $task->id,
-                                        ));
+                                        if($task->video_array){
+                                            $body .= elgg_view('multimedia/video/list', array(
+                                                'videos'    => $task->video_array,
+                                                'href'      => $href_publications,
+                                                'task_id'   => $task->id,
+                                            ));
+                                        } else {
+                                            $body .= elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
+                                        }
                                     }
                                     break;
                                 case "quiz_answer":
@@ -418,45 +422,43 @@ function activity_page_handler($page) {
 
                     switch($selected_tab){
                         case 'videos':
-                            $entities = ClipitActivity::get_videos($activity->id);
-                            //DEBUG
-                            //$entities = ClipitTask::get_videos(2353);
-                            $evaluation_list = get_filter_evaluations($entities, $activity->id);
-                            $list_no_evaluated = elgg_view('multimedia/video/list', array(
-                                'videos'    => $evaluation_list["no_evaluated"],
+                            // Get last task [type: video_upload]
+                            $video_task = array();
+                            $tasks = ClipitActivity::get_tasks($activity->id);
+                            foreach($tasks as $task_id){
+                                $task = array_pop(ClipitTask::get_by_id(array($task_id)));
+                                if($task->task_type == 'video_upload'){
+                                    $task_video[] = $task;
+                                    $video_task[$task->id] = $task->name;
+                                }
+                            }
+                            $last_task = reset($task_video);
+                            $get_task = get_input('task_id', $last_task->id);
+
+                            $task = array_pop(ClipitTask::get_by_id(array($get_task)));
+                            $videos = $task->video_array;
+                            $content = elgg_view('input/dropdown', array(
+                                'name' => 'task_id',
+                                'id' => 'task_id',
+                                'class' => 'form-control',
+                                'style' => 'height: auto;margin-bottom: 20px;width: auto;padding: 0;font-weight: bold;',
+                                'value' => get_input('task_id'),
+                                'onchange' => "location.href='?task_id='+this.value",
+                                'options_values' => $video_task
+                            ));
+                            $content .= elgg_view('multimedia/video/list', array(
+                                'videos'    => $videos,
                                 'href'      => $href,
                                 'rating'    => true,
                                 'actions'   => false,
                                 'total_comments' => true,
                             ));
-                            $list_evaluated = elgg_view('multimedia/video/list', array(
-                                'videos'    => $evaluation_list["evaluated"],
-                                'href'      => $href,
-                                'rating'    => true,
-                                'actions'   => false,
-                                'total_comments' => true,
-                            ));
-                            if (!$entities) {
-                                $content = elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
+                            if (!$videos) {
+                                $content .= elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
                             }
                             break;
                     }
-                    // No Evaluated section
-                    if(count($evaluation_list["no_evaluated"]) > 0){
-                        $title_block_no_evaluated = elgg_view("page/components/title_block", array(
-                            'title' => elgg_echo("publications:no_evaluated"),
-                            'secondary_text' => count($evaluation_list["no_evaluated"])
-                        ));
-                        $content .= $title_block_no_evaluated.$list_no_evaluated;
-                    }
-                    // Evaluated section
-                    if(count($evaluation_list["evaluated"]) > 0){
-                        $title_block_evaluated = elgg_view("page/components/title_block", array(
-                            'title' => elgg_echo("publications:evaluated"),
-                            'secondary_text' => count($evaluation_list["evaluated"])."/".count($entities)
-                        ));
-                        $content .= $title_block_evaluated.$list_evaluated;
-                    }
+
 
                     if($page[2] == 'view' && $page[3]){
                         $entity_id = (int)$page[3];
@@ -519,16 +521,16 @@ function activity_page_handler($page) {
                             }
                             break;
                         case 'videos':
-                            $add_video = false;
+                            $teacher = false;
                             // Add files button for teacher
                             if($user->role == 'teacher'){
-                                $add_video = true;
+                                $teacher = true;
                             }
                             $videos = ClipitActivity::get_videos($activity->id);
                             $content = elgg_view('multimedia/video/list', array(
                                 'entity' => $activity,
-                                'add_video' => $add_video,
-                                'actions'   => true,
+                                'add_video' => $teacher,
+                                'actions'   => $teacher,
                                 'videos' => $videos,
                                 'href' => $href
                             ));

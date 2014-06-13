@@ -16,17 +16,13 @@ $entity_class = elgg_extract("entity_class", $vars);
 $publish_level = $entity_class::get_publish_level($entity->id);
 switch($publish_level){
     case "group":
+    case "activity":
         $output = $msg." ";
         $user = array_pop(ClipitUser::get_by_id(array($entity->owner_id)));
         $output .= elgg_view('output/url', array(
             'href'  => "profile/".$user->login,
             'title' => $user->name,
             'text'  => $user->name));
-        break;
-    case "activity":
-        $group_id = $entity_class::get_group($entity->id);
-        $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
-        $output = '<span class="label label-blue '.$vars['class'].'"><i class="fa fa-users"></i> '.$group->name.'</span>';
         break;
     case "site":
         $activity_id = $entity_class::get_activity($entity->id);

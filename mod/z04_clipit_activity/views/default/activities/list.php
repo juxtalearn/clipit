@@ -8,11 +8,6 @@
  */
 $items = $vars['items'];
 $offset = elgg_extract('offset', $vars);
-$limit = elgg_extract('limit', $vars);
-$count = elgg_extract('count', $vars);
-$base_url = elgg_extract('base_url', $vars, '');
-$pagination = elgg_extract('pagination', $vars, true);
-$progress_html = elgg_extract('progress_bar', $vars);
 $user_loggedin_id = elgg_get_logged_in_user_guid();
 
 $list_class = 'row';
@@ -30,6 +25,12 @@ if (is_array($items) && count($items) > 0):
             $users = ClipitGroup::get_users($group_id);
             $users = array_slice($users, 0, 10);
 
+            $params_progress = array(
+                'value' => get_group_progress($group->id),
+                'width' => '100%'
+            );
+            $progress_bar = elgg_view("page/components/progressbar", $params_progress);
+
             $title = elgg_get_friendly_title($item->name);
             $activity_link = elgg_view('output/url', array(
                 'href' => "clipit_activity/{$item->id}",
@@ -37,9 +38,6 @@ if (is_array($items) && count($items) > 0):
                 'is_trusted' => true,
                 'style' => 'color: #'.$item->color
             ));
-            if($progress_html){
-                $progress_html = "<div style='margin-bottom: 5px;'>{$progress_html}</div>";
-            }
             $teachers = ClipitActivity::get_teachers($item->id);
             ?>
             <li class='list-item col-md-12'>
@@ -54,8 +52,11 @@ if (is_array($items) && count($items) > 0):
                         <h4 style='margin-top: 0'>
                             <?php echo $activity_link; ?>
                         </h4>
-                        <div style='color: #999;'>
-                            <i class='fa fa-calendar'></i> <?php echo $item->time_created;?> - 01/10/2014
+                        <div style='color: #999;text-transform: uppercase;'>
+                            <i class='fa fa-calendar'></i>
+                            <?php echo date("d M Y", $item->time_created);?>
+                            -
+                            <?php echo date("d M Y", $item->deadline);?>
                         </div>
                         <div style='max-height: 40px; overflow: hidden; color: #666666;margin-top: 5px; '>
                             <?php echo $item->description; ?>
@@ -66,7 +67,7 @@ if (is_array($items) && count($items) > 0):
                             <div class="col-xs-6" style="border-right: 1px solid #ccc; padding-right: 15px;">
                                 <?php if($group):?>
                                 <div>
-                                    <?php echo $progress_html; ?>
+                                    <?php echo $progress_bar; ?>
                                     <strong>
                                         <?php echo elgg_view('output/url', array(
                                             'href'  => "clipit_activity/{$item->id}/group",

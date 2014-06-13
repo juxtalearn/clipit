@@ -21,7 +21,7 @@ $header = elgg_view('output/url', array(
 
 $body .= "<small>".elgg_echo('group:progress')."</small>";
 $params_progress = array(
-    'value' => 30,
+    'value' => get_group_progress($group->id),
     'width' => '100%',
 );
 $body .= elgg_view("page/components/progressbar", $params_progress);

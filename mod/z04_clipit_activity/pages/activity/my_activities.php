@@ -6,38 +6,35 @@
  * Time: 14:04
  * To change this template use File | Settings | File Templates.
  */
-
-
 $user = elgg_get_logged_in_user_entity();
+$selected_tab = get_input('filter', 'all');
 $my_groups_ids = ClipitUser::get_groups($user->guid);
 
 $id_activities_array = array();
 foreach($my_groups_ids as $group_id){
-    $id_activities_array[] = ClipitGroup::get_activity($group_id);
+    //$id_activities_array[] = ClipitGroup::get_activity($group_id);
+    $activity_id = ClipitGroup::get_activity($group_id);
+    $status = ClipitActivity::get_status($activity_id);
+    if($selected_tab == 'all'){
+        $id_activities_array[$selected_tab][] = $activity_id;
+    } else {
+        $id_activities_array[$status][] = $activity_id;
+    }
 }
-
-$my_activities = ClipitActivity::get_by_id($id_activities_array);
-
-$params_progress = array(
-    'value' => 30,
-    'width' => '100%'
-);
-$progress_bar = elgg_view("page/components/progressbar", $params_progress);
+$my_activities = ClipitActivity::get_by_id($id_activities_array[$selected_tab]);
 
 $params_list = array(
     'items'         => $my_activities,
     'pagination'    => false,
-    'progress_bar'  => $progress_bar,
     'list_class'    => 'my-activities',
     'full_view'     => false,
 );
 $content = elgg_view("activities/list", $params_list);
 
-$selected_tab = 'all';
+
 $filter = elgg_view('activities/filter', array('selected' => $selected_tab, 'entity' => $activity));
 
 if(!$my_activities){
-    $filter = "";
     $content = elgg_view('output/empty', array('value' => elgg_echo('activities:none')));
 }
 $params = array(

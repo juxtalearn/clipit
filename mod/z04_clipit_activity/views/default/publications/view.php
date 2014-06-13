@@ -136,7 +136,10 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
 <!-- Multimedia info + details end -->
 <?php
 $hasRating = ClipitRating::get_from_user_for_target($user_loggedin, $entity->id);
-if(!$hasRating):
+$owner_group = $entity->get_group($entity->id);
+$my_group = ClipitGroup::get_from_user_activity($user_loggedin, $activity_id);
+
+if(!$hasRating && ($my_group != $owner_group)):
 ?>
 <!-- Evaluate -->
 <h2 class="title-block">Evaluate</h2>

@@ -19,14 +19,19 @@ $tabs = array(
         'priority' => 200,
     ),
     'active' => array(
-        'text' => elgg_echo('active'),
+        'text' => elgg_echo('status:active'),
         'href' => "my_activities?filter=active",
         'priority' => 300,
     ),
-    'past' => array(
-        'text' => elgg_echo('past'),
-        'href' => "my_activities?filter=past",
+    'enroll' => array(
+        'text' => elgg_echo('status:enroll'),
+        'href' => "my_activities?filter=enroll",
         'priority' => 400,
+    ),
+    'past' => array(
+        'text' => elgg_echo('status:closed'),
+        'href' => "my_activities?filter=closed",
+        'priority' => 500,
     ),
 );
 

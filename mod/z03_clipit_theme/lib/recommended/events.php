@@ -10,21 +10,72 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-
 function view_recommended_event($event, $view_type = 'full'){
     $relationship = get_relationship($event->object_id);
     switch($relationship->relationship){
         case "activity-video":
             $activity = array_pop(ClipitActivity::get_by_id(array($relationship->guid_one)));
             $entity = array_pop(ClipitVideo::get_by_id(array($relationship->guid_two)));
-            $href = "clipit_activity/{$activity->id}/publications";
+            $href = "clipit_activity/{$activity->id}/materials";
             $params = array(
-                'title' => 'Added new video to activity',
+                'title' => 'Teacher added new video to materials',
                 'icon' => 'fa-video-camera',
-                'author' => ClipitVideo::get_group($relationship->guid_two),
-                'body' => elgg_view("recommended/events/video", array('entity' => $entity, 'href' => $href, 'rating' => true))
+                'author' => $entity->owner_id,
+                'body' => elgg_view("recommended/events/video", array('entity' => $entity, 'href' => $href, 'rating' => false))
             );
             break;
+        case "activity-file":
+            $activity = array_pop(ClipitActivity::get_by_id(array($relationship->guid_one)));
+            $entity = array_pop(ClipitFile::get_by_id(array($relationship->guid_two)));
+            $href = "clipit_activity/{$activity->id}/materials/view/{$entity->id}";
+            $params = array(
+                'title' => 'Teacher added new file to materials',
+                'icon' => 'fa-file',
+                'author' => $entity->owner_id,
+                'body' => elgg_view("recommended/events/file", array(
+                    'entity' => $entity,
+                    'href' => $href,
+                    'image' => elgg_view("multimedia/file/preview", array('file'  => $entity)
+                    )))
+            );
+            break;
+        case "activity-user":
+            $activity = array_pop(ClipitActivity::get_by_id(array($relationship->guid_one)));
+            $entity = array_pop(ClipitUser::get_by_id(array($relationship->guid_two)));
+            $href = "clipit_activity/{$activity->id}/materials/view/{$entity->id}";
+            $params = array(
+                'title' => 'User called',
+                'icon' => 'fa-bullhorn',
+                'author' => $entity->owner_id,
+                'body' => ''
+            );
+            break;
+        case "activity-group":
+            $activity = array_pop(ClipitActivity::get_by_id(array($relationship->guid_one)));
+            $entity = array_pop(ClipitGroup::get_by_id(array($relationship->guid_two)));
+            $activity_link = elgg_view('output/url', array(
+                'href'  => "clipit_activity/{$activity->id}",
+                'title' => $activity->name,
+                'text'  => $activity->name,
+            ));
+            $params = array(
+                'title' => 'Group added to activity <strong class="show">'.$activity_link.'</strong>',
+                'icon' => 'fa-bullhorn',
+                'author' => $entity->id,
+                'body' => ''
+            );
+            break;
+        /*case "activity-task":
+            $activity = array_pop(ClipitActivity::get_by_id(array($relationship->guid_one)));
+            $entity = array_pop(ClipitTask::get_by_id(array($relationship->guid_two)));
+            $href = "clipit_activity/{$activity->id}/task";
+            $params = array(
+                'title' => 'Teacher added new video to materials',
+                'icon' => 'fa-video-camera',
+                'author' => $entity->owner_id,
+                'body' => elgg_view("recommended/events/video", array('entity' => $entity, 'href' => $href, 'rating' => false))
+            );
+            break;*/
         case "group-video":
             $activity_id = ClipitGroup::get_activity($relationship->guid_one);
             $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));

@@ -17,7 +17,7 @@ $group = elgg_extract('entity', $vars);
         <h3><?php echo elgg_echo("group:progress"); ?></h3>
         <?php
         echo elgg_view("page/components/progressbar", array(
-            'value' => 30,
+            'value' => get_group_progress($group->id),
             'width' => '100%',
         ));
         ?>

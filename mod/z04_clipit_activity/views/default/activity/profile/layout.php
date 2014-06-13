@@ -27,7 +27,6 @@ $tasks = array_slice($activity->task_array, 0, 4);
         <?php echo elgg_view("tasks/list", array(
             'tasks' => $tasks,
             'href' => "clipit_activity/{$activity->id}/tasks",
-            'activity_id' => $activity->id
         ));
         ?>
         <?php if($tasks): ?>

@@ -53,7 +53,7 @@ elgg_load_css("nvd3:css");
                         foreach($groups as $group_id){
                             $group = ClipitGroup::get_by_id(array($group_id));
                             $group = array_pop($group);
-                            $value = mt_rand(20,100);
+                            $value = get_group_progress($group_id);
                             echo "{ 'label': 'G{$num_group}', 'value':{$value}},";
                             $num_group ++;
                         }

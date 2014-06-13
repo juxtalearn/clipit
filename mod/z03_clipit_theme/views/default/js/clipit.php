@@ -118,9 +118,9 @@ $(function(){
             var offset = hrefArray[1];
             var totalEvents = $("ul.events > li.event").length;
             $(".events-more-link").attr("href", hrefString.replace(offset, totalEvents));
-
         }
     });
+
     /**
      * Toggle menu
      */

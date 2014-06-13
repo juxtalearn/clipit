@@ -1,40 +1,44 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
- * User: equipo
- * Date: 6/02/14
- * Time: 12:37
- * To change this template use File | Settings | File Templates.
+ * ClipIt - JuxtaLearn Web Space
+ * PHP version:     >= 5.2
+ * Creation date:   28/05/14
+ * Last update:     28/05/14
+ * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC JuxtaLearn Project
+ * @version         $Version$
+ * @link            http://www.juxtalearn.eu
+ * @license         GNU Affero General Public License v3
+ * @package         ClipIt
  */
-$content = '
-<!-- foreach-->
-<div class="separator wrapper">
-    <span class="point" style="background: #00a99d;"></span>
-    <a>Pending task 1</a>
-    <small class="pull-right">12:00H, NOV 18, 2013</small>
-</div>
-<!-- endforeach-->
-<!-- foreach-->
-<div class="separator wrapper">
-    <span class="point" style="background: #ed1e79;"></span>
-    <a>1/3 PDF\'s uploaded</a>
-    <small class="pull-right">12:00H, NOV 18, 2013</small>
-</div>
-<!-- endforeach-->
-<!-- foreach-->
-<div class="separator wrapper">
-    <span class="point" style="background: #ed1e79;"></span>
-    <a>Pending task 3</a>
-    <small class="pull-right">12:00H, NOV 18, 2013</small>
-</div>
-<!-- endforeach-->
-<!-- foreach-->
-<div class="separator wrapper">
-    <span class="point" style="background: #f7931e;"></span>
-    <a>Pending task 4</a>
-    <small class="pull-right">12:00H, NOV 18, 2013</small>
-</div>
-<!-- endforeach-->';
+$my_groups_ids = ClipitUser::get_groups(elgg_get_logged_in_user_guid());
+foreach($my_groups_ids as $group_id){
+    $activity_ids[] = ClipitGroup::get_activity($group_id);
+}
+
+$activities = ClipitActivity::get_by_id($activity_ids);
+foreach($activities as $activity):
+    $task_found = false;
+    foreach(ClipitTask::get_by_id($activity->task_array) as $task):
+        $status = get_task_status($task);
+        if($task->start <= time() && $task->end >= time()):
+            $task_found = true;
+            $activity = array_pop(ClipitActivity::get_by_id(array($task->activity)));
+            $content .= '
+            <div class="separator wrapper">
+                <span class="point" style="background: #'.$activity->color.'"></span>
+                '.elgg_view('output/url', array(
+                    'href'  => "clipit_activity/{$task->activity}/tasks/view/{$task->id}",
+                    'title' => $task->name,
+                    'text'  => $status['count']." ".$task->name,
+                )).'
+                <small class="pull-right" style="text-transform:uppercase">'.date("d M Y", $task->end).'</small>
+            </div>';
+        endif;
+    endforeach;
+endforeach;
+if(!$task_found):
+    $content = '<small><strong>'.elgg_echo('task:no_pending').'</strong></small>';
+endif;
 
 $all_link = elgg_view('output/url', array(
     'href' => "linkHref",
@@ -47,5 +51,3 @@ echo elgg_view('landing/module', array(
     'content'   => $content,
     'all_link'  => $all_link,
 ));
-?>
-
