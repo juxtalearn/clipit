@@ -79,7 +79,11 @@ class ClipitActivity extends UBItem{
      */
     protected function copy_to_elgg($elgg_entity){
         parent::copy_to_elgg($elgg_entity);
-        $elgg_entity->set("color", (string)$this->color);
+        if(!empty($this->color)) {
+            $elgg_entity->set("color", (string)$this->color);
+        } else{
+            $elgg_entity->set("color", static::get_rand_color());
+        }
         $elgg_entity->get("status", (string)$this->status);
         $elgg_entity->get("tricky_topic", (int)$this->tricky_topic);
         $elgg_entity->set("deadline", (int)$this->deadline);
@@ -141,6 +145,26 @@ class ClipitActivity extends UBItem{
     }
 
     /** STATIC FUNCTIONS */
+
+    /**
+     * Returns a random color, from a predefined palette, to assign to an Activity
+     *
+     * @return string
+     */
+    static function get_rand_color(){
+        $color_array = array(
+            "E7DF1A", // yellow
+            "98BF0E", // light green
+            "ED1E79", // pink
+            "4174B5", // purple
+            "EC7227", // orange
+            "019B67", // dark green
+            "E4391B", // red
+            "14B8DD", // light blue
+        );
+        $pos = (int) rand(0, count($color_array));
+        return $color_array[$pos];
+    }
 
     /**
      * @param int $id Activity ID
