@@ -40,6 +40,7 @@ class ClipitTask extends UBItem{
     public $parent_task = 0;
     public $task_count = 0;
 
+    public $activity = 0;
     public $storyboard_array = array();
     public $video_array = array();
     public $file_array = array();
@@ -64,6 +65,7 @@ class ClipitTask extends UBItem{
                 $this->end = $prop_value_array["deadline"];
             }
         }
+        $this->activity = static::get_activity((int)$this->id);
         $this->storyboard_array = static::get_storyboards((int)$this->id);
         $this->video_array = static::get_videos($this->id);
         $this->file_array = static::get_files($this->id);
@@ -86,6 +88,7 @@ class ClipitTask extends UBItem{
 
     protected function save(){
         parent::save();
+        static::set_activity($this->id, $this->activity);
         static::set_storyboards($this->id, $this->storyboard_array);
         static::set_videos($this->id, $this->video_array);
         static::set_files($this->id, $this->file_array);
@@ -93,6 +96,7 @@ class ClipitTask extends UBItem{
         return $this->id;
     }
 
+    // ACTIVITY
     /**
      * Get the Activity Id in which a Task is contained in.
      *
@@ -103,6 +107,11 @@ class ClipitTask extends UBItem{
     static function get_activity($task_id){
         $activity = UBCollection::get_items($task_id, ClipitActivity::REL_ACTIVITY_TASK, true);
         return array_pop($activity);
+    }
+
+    static function set_activity($id, $activity_id){
+        return UBCollection::add_items($activity_id, array($id), ClipitActivity::REL_ACTIVITY_TASK, true);
+
     }
 
     // STORYBOARDS
