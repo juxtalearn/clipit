@@ -31,4 +31,8 @@ class ClipitStoryboard extends ClipitPublication{
     const REL_TASK_PUBLICATION = ClipitTask::REL_TASK_STORYBOARD;
     const REL_ACTIVITY_PUBLICATION = ClipitActivity::REL_ACTIVITY_STORYBOARD;
     const REL_SITE_PUBLICATION = ClipitSite::REL_SITE_STORYBOARD;
+
+    public $file = 0;
+
+    
 }
