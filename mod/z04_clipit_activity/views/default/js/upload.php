@@ -25,16 +25,16 @@ $(function () {
                 }
             });
     },
-            // Initialize the jQuery File Upload widget:
-            $('#fileupload').fileupload({
-                maxFileSize: 1073741824, // 1 GB
-                url: '<?php echo elgg_get_site_url()."ajax/view/multimedia/file/upload";?>',
-                previewMaxWidth: 140,
-                previewMaxHeight: 140,
-                disableImageResize: /Android(?!.*Chrome)|Opera/
-                    .test(window.navigator.userAgent),
-                previewCrop: true
-            }).on('fileuploadadd', function (e, data) {
+    // Initialize the jQuery File Upload widget:
+    $('#fileupload').fileupload({
+        maxFileSize: 1073741824, // 1 GB
+        url: '<?php echo elgg_get_site_url()."ajax/view/multimedia/file/upload";?>',
+        previewMaxWidth: 140,
+        previewMaxHeight: 140,
+        disableImageResize: /Android(?!.*Chrome)|Opera/
+            .test(window.navigator.userAgent),
+        previewCrop: true
+    }).on('fileuploadadd', function (e, data) {
         $('#add-file').modal('show');
         // exec tinymce
         tinymce_setup();
@@ -44,32 +44,33 @@ $(function () {
         window.location.reload(false);
     });
 
-        // Enable iframe cross-domain access via redirect option:
-        $('#fileupload').fileupload(
-            'option',
-            'redirect',
-            window.location.href.replace(
-                /\/[^\/]*$/,
-                '/cors/result.html?%s'
-            )
-        );
-        $('#fileupload').bind('fileuploadsubmit', function (e, data) {
-            var inputs = data.context.find(':input');
-            if (inputs.filter(function () {
-                    return !this.value && $(this).prop('required');
-                }).first().focus().length) {
-                data.context.find('button').prop('disabled', false);
-                return false;
-            }
-            var textarea = data.context.find("textarea");
-            textarea.val(tinyMCE.get(textarea.attr("id")).getContent());
-            var total = data.context.find(':input, textarea');
-            data.formData = total.serializeArray();
-        });
-        $('#fileupload').bind('fileuploadstopped', function (e, data) {
-            data.context.remove();
-        });
-        $('#add-file').on('hidden.bs.modal', function (e) {
-            $("#add-file .files").empty();
-        })
+    // Enable iframe cross-domain access via redirect option:
+    $('#fileupload').fileupload(
+        'option',
+        'redirect',
+        window.location.href.replace(
+            /\/[^\/]*$/,
+            '/cors/result.html?%s'
+        )
+    );
+    $('#fileupload').bind('fileuploadsubmit', function (e, data) {
+        var inputs = data.context.find(':input');
+        if (inputs.filter(function () {
+                return !this.value && $(this).prop('required');
+            }).first().focus().length) {
+            data.context.find('button').prop('disabled', false);
+            return false;
+        }
+        var textarea = data.context.find("textarea");
+        textarea.val(tinyMCE.get(textarea.attr("id")).getContent());
+        var total = data.context.find(':input, textarea');
+console.log(data.context.closest("form").find(":hidden").serializeArray());
+        data.formData = total.serializeArray();
     });
+    $('#fileupload').bind('fileuploadstopped', function (e, data) {
+        data.context.remove();
+    });
+    $('#add-file').on('hidden.bs.modal', function (e) {
+        $("#add-file .files").empty();
+    })
+});

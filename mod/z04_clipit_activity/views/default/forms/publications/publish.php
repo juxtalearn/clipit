@@ -56,13 +56,15 @@ if($task_id = get_input('task_id')):
     $task = array_pop(ClipitTask::get_by_id(array($task_id)));
 ?>
 <div class="bg-warning">
-    Task:
-    <?php echo elgg_view('output/url', array(
+    <small><?php echo elgg_echo('activity:task');?>:</small>
+    <h4 style="margin: 0">
+        <?php echo elgg_view('output/url', array(
             'href'  => "clipit_activity/{$task->activity}/tasks/view/{$task->id}",
             'title' => $task->name,
             'text'  => $task->name,
-        ));
-    ?>
+            ));
+        ?>
+    </h4>
 </div>
 <?php endif; ?>
 <div class="row">

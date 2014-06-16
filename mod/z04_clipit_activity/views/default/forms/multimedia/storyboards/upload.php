@@ -12,22 +12,16 @@
  */
 $entity = elgg_extract('entity', $vars);
 elgg_load_js("file:upload");
-
-echo elgg_view("multimedia/file/templates/upload", array('entity' => $entity));
+echo elgg_view("multimedia/file/templates/upload", array('entity' => $entity, 'type' => 'storyboard'));
 ?>
-
 <div class="block" style="margin-bottom: 10px;">
     <a class="btn btn-default fileinput-button" style="position: relative; overflow: hidden">
-        Add storyboards
+        <?php echo elgg_echo("multimedia:storyboards:add");?>
         <input type="file" name="files" id="uploadfilebutton" multiple>
     </a>
 </div>
 <?php
 $body .= '<div class="files"></div>';
-$body .= elgg_view("input/hidden", array(
-    'name' => 'type',
-    'value' => 'storyboard',
-));
 $footer = '
 <div class="fileupload-buttonbar row">
         <div class="col-md-6">
@@ -46,7 +40,7 @@ $footer = '
         <div class="col-md-6">
             <span class="btn btn-success fileinput-button">
                 <i class="fa fa-plus"></i>
-                <span>Add files...</span>
+                <span>'.elgg_echo("multimedia:storyboards:add").'...</span>
                 <input type="file" name="files" multiple>
             </span>
             <button type="submit" class="btn btn-primary start">

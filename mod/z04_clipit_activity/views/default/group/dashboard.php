@@ -40,7 +40,7 @@ $group = elgg_extract('entity', $vars);
         </ul>
     </div>
     <div class="col-md-8">
-        <?php echo elgg_view("page/components/title_block", array('title' => elgg_echo("activity"))); ?>
+        <?php echo elgg_view("page/components/title_block", array('title' => elgg_echo("group:timeline"))); ?>
         <ul>
             <?php
             $events_log = ClipitEvent::get_by_object(array($group->id), 0, 30);

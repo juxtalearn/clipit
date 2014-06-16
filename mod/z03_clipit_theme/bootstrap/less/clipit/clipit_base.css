@@ -7248,6 +7248,16 @@ li.list-item:last-child {
   border-bottom: 0;
   padding-bottom: 0;
 }
+.task-list {
+  border-bottom: 1px solid #bae6f6;
+  padding-bottom: 2px;
+  margin-bottom: 2px;
+}
+.task-list:last-child {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
 .multimedia-block {
   overflow: hidden;
   background: #ECF7FB;
@@ -9775,6 +9785,10 @@ h4.empty {
 }
 .progress-bar {
   background: #32b4e5;
+}
+.progress-bar[value='0'] {
+  color: #32b4e5;
+  margin-left: 10px;
 }
 @font-face {
   font-family: 'Futura';

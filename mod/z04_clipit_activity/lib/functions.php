@@ -218,8 +218,11 @@ function get_task_status(ClipitTask $task, $group_id = 0){
             $evaluation_list = get_filter_evaluations($entities, $task->activity);
             $total = count($evaluation_list["evaluated"]) + count($evaluation_list["no_evaluated"]);
             $total_evaluated = count($evaluation_list["evaluated"]);
-            $text = $total_evaluated."/".$total;
-            if($total == $total_evaluated){
+            $text = "";
+            if($total > 0){
+                $text = $total_evaluated."/".$total;
+            }
+            if($total == $total_evaluated && $total > 0){
                 $status = array(
                     'icon' => '<i class="fa fa-check green"></i>',
                     'text' => $text." ".elgg_echo('task:completed'),

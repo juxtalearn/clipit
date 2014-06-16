@@ -14,7 +14,17 @@ $group = elgg_extract('entity', $vars);
 $activity_id = ClipitGroup::get_activity($group->id);
 $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
 ?>
-    <small class="show" style="margin-top: 5px;"><?php echo elgg_echo("activity:actual_deadline")?></small>
+    <small class="show" style="margin-top: 5px;">
+        <span class="pull-right">
+            <?php echo elgg_view('output/url', array(
+                'href'  => "clipit_activity/{$activity_id}/tasks",
+                'title' => elgg_echo('view_all'),
+                'text'  => elgg_echo('view_all'),
+            ));
+            ?>
+        </span>
+        <?php echo elgg_echo("activity:actual_deadline")?>
+    </small>
 <?php
 $task_found = false;
 foreach(ClipitTask::get_by_id($activity->task_array) as $task):
@@ -22,7 +32,7 @@ foreach(ClipitTask::get_by_id($activity->task_array) as $task):
         $task_found = true;
         $status = get_task_status($task);
 ?>
-    <div>
+    <div class="task-list">
         <small class="pull-right">
             <?php echo elgg_view('output/friendlytime', array('time' => $task->end));?>
         </small>

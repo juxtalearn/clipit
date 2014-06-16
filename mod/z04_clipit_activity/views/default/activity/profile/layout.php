@@ -40,7 +40,10 @@ $tasks = array_slice($activity->task_array, 0, 4);
         <?php endif; ?>
     </div>
     <div class="col-md-5">
-        <?php echo elgg_view("activity/profile/stumbling_block_module", array('tags' => $tags));?>
+        <?php echo elgg_view("activity/profile/stumbling_block_module", array(
+            'tags' => $tags,
+            'tt' => $activity->tricky_topic
+        ));?>
     </div>
 </div>
 <div class="row">

@@ -13,7 +13,7 @@
 $entity = elgg_extract('entity', $vars);
 elgg_load_js("file:upload");
 
-echo elgg_view("multimedia/file/templates/upload", array('entity' => $entity));
+echo elgg_view("multimedia/file/templates/upload", array('entity' => $entity, 'type' => 'file'));
 ?>
 
 <div class="block" style="margin-bottom: 10px;">

@@ -10,4 +10,12 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-include(elgg_get_plugins_path() . 'z04_clipit_activity/actions/multimedia/files/upload.php');
+$type = get_input("type");
+switch($type){
+    case "file":
+        include(elgg_get_plugins_path() . 'z04_clipit_activity/actions/multimedia/files/upload.php');
+        break;
+    case "storyboard":
+        include(elgg_get_plugins_path() . 'z04_clipit_activity/actions/multimedia/storyboards/upload.php');
+        break;
+}

@@ -11,9 +11,21 @@
  * @package         ClipIt
  */
 $tags = elgg_extract("tags", $vars);
+$tricky_topic_id = elgg_extract("tt", $vars);
+$tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($tricky_topic_id)));
 ?>
 <div class="tags-block">
-    <h3><?php echo elgg_echo("tags");?></h3>
+    <?php echo elgg_view("page/components/modal_remote", array('id'=> "tricky-topic-{$tricky_topic->id}" ));?>
+    <h3>
+        <?php
+        echo elgg_view('output/url', array(
+            'href'  => "ajax/view/modal/tricky_topic/view?id={$tricky_topic->id}",
+            'text'  => $tricky_topic->name,
+            'data-toggle'   => 'modal',
+            'data-target'   => '#tricky-topic-'.$tricky_topic->id
+        ));
+        ?>
+    </h3>
     <ul class="tags-list">
         <?php
         foreach($tags as $tag_id):

@@ -22,6 +22,21 @@ $tags = $entity->tag_array;
     });
 </script>
 <style>
+.jOrgChart .down{
+    background-color: #bae6f6;
+}
+.jOrgChart .left {
+    border-right: 2px solid #bae6f6;
+}
+.jOrgChart .right {
+    border-left: 2px solid #bae6f6;
+}
+.jOrgChart .top {
+    border-top: 3px solid #bae6f6;
+}
+.jOrgChart table{
+    width: 100%;
+}
 .jOrgChart .node {
     background-color: #fff;
     width: auto;
@@ -29,17 +44,18 @@ $tags = $entity->tag_array;
     color: #32b4e5;
     border: 1px solid #32b4e5;
     padding: 10px;
+    border-radius: 3px;
 }
 </style>
 <ul id="org" style="display:none">
     <li>
-        <?php echo $entity->name; ?>
+        <strong><?php echo $entity->name; ?></strong>
         <ul>
             <?php
             foreach($tags as $tag_id):
             $tag = array_pop(ClipitTag::get_by_id(array($tag_id)));
             ?>
-            <li id="<?php echo $tag->id; ?>"><?php echo $tag->name; ?></li>
+            <li id="<?php echo $tag->id; ?>"><strong><?php echo $tag->name; ?></strong></li>
             <?php endforeach; ?>
         </ul>
     </li>

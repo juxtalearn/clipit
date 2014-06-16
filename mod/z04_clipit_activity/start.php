@@ -32,6 +32,8 @@ function clipit_activity_init() {
     // Register actions, ajax views
     // File
     elgg_register_action("files/upload", elgg_get_plugins_path() . "z04_clipit_activity/actions/files/upload.php");
+    // Storyboard
+    elgg_register_action("storyboards/upload", elgg_get_plugins_path() . "z04_clipit_activity/actions/storyboards/upload.php");
     // Group
     elgg_register_action("group/join", elgg_get_plugins_path() . "z04_clipit_activity/actions/group/join.php");
     elgg_register_action("group/leave", elgg_get_plugins_path() . "z04_clipit_activity/actions/group/leave.php");
@@ -296,7 +298,6 @@ function activity_page_handler($page) {
 //                        'parent_task' => $task_id_1
 //                    ));
                     //ClipitActivity::add_tasks(74,array($task_id_1, $task_id_2));
-                    ClipitTask::set_properties(2416, array('end'=> time()+(60*60*24*2)));
                     $title = elgg_echo("activity:tasks");
                     elgg_push_breadcrumb($title);
                     $tasks = ClipitActivity::get_tasks($activity->id);
@@ -322,6 +323,7 @@ function activity_page_handler($page) {
                                         'task_id'   => $task->id,
                                         'rating'    => false,
                                         'actions'   => true,
+                                        'publish'   => true,
                                         'total_comments' => false,
                                     ));
 
@@ -544,7 +546,12 @@ function activity_page_handler($page) {
                             if($user->role == 'teacher'){
                                 $add_sbs = true;
                             }
-                            $content = elgg_view('multimedia/storyboard/list', array('entity' => $activity, 'add_sb' => $add_sbs, 'storyboards' => $sbs, 'href' => $href));
+                            $content = elgg_view('multimedia/storyboard/list', array(
+                                'entity' => $activity,
+                                'add_sb' => $add_sbs,
+                                'storyboards' => $sbs,
+                                'href' => $href
+                            ));
                             if (!$sbs) {
                                 $content .= elgg_view('output/empty', array('value' => elgg_echo('storyboards:none')));
                             }
@@ -712,7 +719,12 @@ function group_tools_page_handler($page, $activity){
             switch ($selected_tab) {
                 case 'files':
                     $files = ClipitGroup::get_files($group->id);
-                    $content = elgg_view('multimedia/file/list', array('entity' => $group, 'add_files' => true, 'files' => $files, 'href' => $href));
+                    $content = elgg_view('multimedia/file/list', array(
+                        'entity' => $group,
+                        'add_files' => true,
+                        'files' => $files,
+                        'href' => $href
+                    ));
                     if (!$files) {
                         $content .= elgg_view('output/empty', array('value' => elgg_echo('file:none')));
                     }
@@ -731,8 +743,13 @@ function group_tools_page_handler($page, $activity){
                     }
                     break;
                 case 'storyboards':
-                    $sbs = "";
-                    $content = elgg_view('multimedia/storyboard/list', array('entity' => $group, 'add_sb' => true, 'storyboards' => $sbs, 'href' => $href));
+                    $sbs = ClipitGroup::get_storyboards($group->id);
+                    $content = elgg_view('multimedia/storyboard/list', array(
+                        'entity' => $group,
+                        'add_sb' => true,
+                        'storyboards' => $sbs,
+                        'href' => $href
+                    ));
                     if (!$sbs) {
                         $content .= elgg_view('output/empty', array('value' => elgg_echo('storyboards:none')));
                     }

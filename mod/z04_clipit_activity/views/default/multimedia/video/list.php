@@ -75,7 +75,7 @@ $rating = elgg_extract("rating", $vars);
                 </a>
             </div>
             <div class="col-md-8">
-                <?php if($vars['actions'] && !$published): ?>
+                <?php if($vars['publish']): ?>
                     <?php echo elgg_view('output/url', array(
                         'href'  => "{$href}/publish/{$video->id}".($vars['task_id'] ? "?task_id=".$vars['task_id']: ""),
                         'title' => elgg_echo('publish'),
@@ -83,14 +83,10 @@ $rating = elgg_extract("rating", $vars);
                         'class' => 'btn-xs btn pull-right',
                         'text'  => '<i class="fa fa-arrow-circle-up"></i> '.elgg_echo('publish')));
                     ?>
+                <?php endif; ?>
+
+                <?php if($vars['actions']): ?>
                     <?php echo elgg_view("multimedia/owner_options", array('entity' => $video, 'type' => 'video')); ?>
-                <?php elseif($published): ?>
-                    <?php echo elgg_view('output/url', array(
-                        'href'  => "{$href}/publish/{$video->id}",
-                        'title' => elgg_echo('published'),
-                        'class' => 'green pull-right',
-                        'text'  => '<i class="fa fa-check"></i> <strong>'.elgg_echo('published').'</strong>'));
-                    ?>
                 <?php endif; ?>
                 <h4 class="text-truncate">
                     <?php echo elgg_view('output/url', array(

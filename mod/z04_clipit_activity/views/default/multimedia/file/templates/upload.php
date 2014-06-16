@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 $entity = elgg_extract("entity", $vars);
+$type = elgg_extract("type", $vars);
 ?>
 <script id="template-upload" type="text/x-tmpl">
 {% for (var i=0, file; file=o.files[i]; i++) { %}
@@ -18,7 +19,13 @@ $entity = elgg_extract("entity", $vars);
     <?php echo elgg_view("input/hidden", array(
         'name' => 'entity-id',
         'value' => $entity->id,
-    ));?>
+    ));
+    ?>
+    <?php echo elgg_view("input/hidden", array(
+        'name' => 'type',
+        'value' => $type,
+    ));
+    ?>
     <div class="col-md-3">
         <div class="file-info">
             <div class="img-prev"><div class="preview"></div></div>
@@ -47,10 +54,11 @@ $entity = elgg_extract("entity", $vars);
         <div class="form-group">
             <label for="file-name"><?php echo elgg_echo("multimedia:file:description");?></label>
             <?php echo elgg_view("input/plaintext", array(
-        'name' => 'file-text',
-        'class' => 'form-control mceEditor',
-        'rows'  => 3,
-    )); ?>
+                    'name' => 'file-text',
+                    'class' => 'form-control mceEditor',
+                    'rows'  => 3,
+                ));
+            ?>
         </div>
     </div>
 </div>

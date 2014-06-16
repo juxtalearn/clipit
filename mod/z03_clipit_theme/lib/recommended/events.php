@@ -65,17 +65,22 @@ function view_recommended_event($event, $view_type = 'full'){
                 'body' => ''
             );
             break;
-        /*case "activity-task":
+        case "activity-task":
             $activity = array_pop(ClipitActivity::get_by_id(array($relationship->guid_one)));
             $entity = array_pop(ClipitTask::get_by_id(array($relationship->guid_two)));
             $href = "clipit_activity/{$activity->id}/task";
+            $task_link = elgg_view('output/url', array(
+                'href'  => "clipit_activity/{$activity->id}/tasks/view/{$entity->id}",
+                'title' => $entity->name,
+                'text'  => $entity->name,
+            ));
             $params = array(
-                'title' => 'Teacher added new video to materials',
-                'icon' => 'fa-video-camera',
-                'author' => $entity->owner_id,
-                'body' => elgg_view("recommended/events/video", array('entity' => $entity, 'href' => $href, 'rating' => false))
+                'title' => 'Added new task <strong>'.$task_link.'</strong>',
+                'icon' => 'fa-tasks',
+                'author' => $activity->id,
+                'body' => ''
             );
-            break;*/
+            break;
         case "group-video":
             $activity_id = ClipitGroup::get_activity($relationship->guid_one);
             $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
