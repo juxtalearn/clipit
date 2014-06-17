@@ -31,4 +31,26 @@ class ClipitStoryboard extends ClipitPublication{
     const REL_TASK_PUBLICATION = ClipitTask::REL_TASK_STORYBOARD;
     const REL_ACTIVITY_PUBLICATION = ClipitActivity::REL_ACTIVITY_STORYBOARD;
     const REL_SITE_PUBLICATION = ClipitSite::REL_SITE_STORYBOARD;
+
+    public $file = 0;
+
+    /**
+     * Loads object parameters stored in Elgg
+     *
+     * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
+     */
+    protected function load_from_elgg($elgg_entity){
+        parent::load_from_elgg($elgg_entity);
+        $this->file = (int)$elgg_entity->get("file");
+    }
+
+    /**
+     * Copy $this object parameters into an Elgg entity.
+     *
+     * @param ElggEntity $elgg_entity Elgg object instance to save $this to
+     */
+    protected function copy_to_elgg($elgg_entity){
+        parent::copy_to_elgg($elgg_entity);
+        $elgg_entity->set("file", (int)$this->file);
+    }
 }
