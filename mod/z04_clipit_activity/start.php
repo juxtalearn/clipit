@@ -114,9 +114,12 @@ function activity_setup_sidebar_menus(){
     $activity_id =  elgg_get_page_owner_guid();
     $user_id = elgg_get_logged_in_user_guid();
     $hasGroup = ClipitGroup::get_from_user_activity($user_id, $activity_id);
-    if (elgg_in_context('activity_page') && $hasGroup) {
-        $activities = ClipitActivity::get_by_id(array($activity_id));
-        $activity = array_pop($activities);
+    if (elgg_in_context('activity_page')) {
+        $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
+        $isTeacher = in_array($user_id, $activity->teacher_array);
+        if(!$hasGroup && !$isTeacher){
+            return false;
+        }
         $params = array(
             'name' => 'activity_aprofile',
             'text' => elgg_echo('activity:profile'),
@@ -173,12 +176,10 @@ function activity_page_handler($page) {
     $base_dir = elgg_get_plugins_path() . 'z04_clipit_activity/pages/activity';
     elgg_load_library('clipit:activities');
     elgg_set_context("activity_page");
-    $activities = ClipitActivity::get_by_id(array($page[0]));
-    $activity = array_pop($activities);
+    $activity = array_pop(ClipitActivity::get_by_id(array($page[0])));
     $user_id = elgg_get_logged_in_user_guid();
     $user = array_pop(ClipitUser::get_by_id(array($user_id)));
     $isCalled = ClipitActivity::get_called_users($activity->id);
-    $hasGroup = ClipitGroup::get_from_user_activity($user_id, $activity->id);
     // Default status
     $activity_status = ClipitActivity::get_status($activity->id);
     // Check if activity exists
@@ -186,10 +187,21 @@ function activity_page_handler($page) {
         return false;
     }
     elgg_set_page_owner_guid($activity->id);
-
+    /**
+     * Set access
+     * ACCESS_PUBLIC, ACCESS_TEACHER, ACCESS_MEMBER
+     */
+    if($hasGroup = ClipitGroup::get_from_user_activity($user_id, $activity->id)){
+        $access = 'ACCESS_MEMBER';
+    }
+    elseif(in_array($user_id, $activity->teacher_array)){
+        $access = 'ACCESS_TEACHER';
+    } else{
+        $access = 'ACCESS_PUBLIC';
+    }
     // Activity profile
     if(!isset($page[1])){
-        $content = elgg_view('activity/profile/layout', array('entity' => $activity));
+        $content = elgg_view('activity/profile/layout', array('entity' => $activity, 'access' => $access));
         $params = array(
             'content'   => $content,
             'title'     => $activity->name,
@@ -245,11 +257,16 @@ function activity_page_handler($page) {
                     $href = "clipit_activity/{$activity->id}/discussion";
                     elgg_push_breadcrumb($title);
                     $messages = array_pop(ClipitPost::get_by_destination(array($activity->id)));
+                    $canCreate = false;
+                    if($access == 'ACCESS_TEACHER' || $access == 'ACCESS_MEMBER'){
+                        $canCreate = true;
+                    }
                     $content =  elgg_view('discussion/list',
                         array(
                             'entity' => $activity,
                             'messages' => $messages,
                             'href'   => $href,
+                            'create' => $canCreate
                         ));
                     if(!$messages){
                         $content .= elgg_view('output/empty', array('value' => elgg_echo('discussions:none')));
@@ -302,6 +319,7 @@ function activity_page_handler($page) {
                     elgg_push_breadcrumb($title);
                     $tasks = ClipitActivity::get_tasks($activity->id);
                     $href = "clipit_activity/{$activity->id}/tasks";
+                    $group_id = ClipitGroup::get_from_user_activity($user_id, $activity->id);
                     $content = elgg_view('tasks/list', array('tasks' => $tasks, 'href' => $href));
                     if($page[2] == 'view' && $page[3]){
                         $entity_id = (int)$page[3];
@@ -319,7 +337,7 @@ function activity_page_handler($page) {
                                     $href_publications = "clipit_activity/{$activity->id}/publications";
                                     $body = elgg_view('multimedia/video/list', array(
                                         'videos'    => $videos,
-                                        'href'      => "clipit_activity/{$activity->id}/group/multimedia",
+                                        'href'      => "clipit_activity/{$activity->id}/group/{$group_id}/multimedia",
                                         'task_id'   => $task->id,
                                         'rating'    => false,
                                         'actions'   => true,
@@ -361,7 +379,20 @@ function activity_page_handler($page) {
                                     }
                                     break;
                                 case "quiz_answer":
-                                    $body = elgg_view('quizzes/view', array('quiz' => $quiz));
+//                                    $quiz[] = ClipitQuiz::create(array(
+//                                        'name' => 'Biology concepts',
+//                                        'description' => 'lorem ipsum...',
+//                                        'url' => elgg_get_site_url().'juxtalearn_quiz/1/?embed=1'
+//                                    ));
+//                                    $quiz[] = ClipitQuiz::create(array(
+//                                        'name' => 'Cells & Alleles',
+//                                        'description' => 'lorem ipsum...',
+//                                        'url' => elgg_get_site_url().'juxtalearn_quiz/2/?embed=1'
+//                                    ));
+//                                    ClipitTask::add_quizzes($task->id, $quiz);
+                                    $href = "clipit_activity/{$activity->id}/quizzes";
+                                    $quizzes = ClipitTask::get_quizzes($task->id);
+                                    $body = elgg_view('quizzes/list', array('quizzes' => $quizzes, 'href' => $href));
                                     break;
                                 case "video_feedback":
                                     $href = "clipit_activity/{$activity->id}/publications";
@@ -512,26 +543,31 @@ function activity_page_handler($page) {
                     switch ($selected_tab) {
                         case 'files':
                             $files = ClipitActivity::get_files($activity->id);
-                            $add_files = false;
+                            $canCreate = false;
                             // Add files button for teacher
-                            if($user->role == 'teacher'){
-                                $add_files = true;
+                            if($access == 'ACCESS_TEACHER'){
+                                $canCreate = true;
                             }
-                            $content = elgg_view('multimedia/file/list', array('entity' => $activity, 'add_files' => $add_files, 'files' => $files, 'href' => $href));
+                            $content = elgg_view('multimedia/file/list', array(
+                                'entity' => $activity,
+                                'create' => $canCreate,
+                                'files' => $files,
+                                'href' => $href
+                            ));
                             if (!$files) {
                                 $content .= elgg_view('output/empty', array('value' => elgg_echo('file:none')));
                             }
                             break;
                         case 'videos':
-                            $teacher = false;
+                            $canCreate = false;
                             // Add files button for teacher
-                            if($user->role == 'teacher'){
-                                $teacher = true;
+                            if($access == 'ACCESS_TEACHER'){
+                                $canCreate = true;
                             }
                             $videos = ClipitActivity::get_videos($activity->id);
                             $content = elgg_view('multimedia/video/list', array(
                                 'entity' => $activity,
-                                'add_video' => $teacher,
+                                'create' => $canCreate,
                                 'actions'   => $teacher,
                                 'videos' => $videos,
                                 'href' => $href
@@ -541,14 +577,15 @@ function activity_page_handler($page) {
                             }
                             break;
                         case 'storyboards':
-                            $sbs = "";
-                            $add_sbs = false;
-                            if($user->role == 'teacher'){
-                                $add_sbs = true;
+                            $sbs = ClipitActivity::get_storyboards($activity->id);
+                            $canCreate = false;
+                            // Add sbs button for teacher
+                            if($access == 'ACCESS_TEACHER'){
+                                $canCreate = true;
                             }
                             $content = elgg_view('multimedia/storyboard/list', array(
                                 'entity' => $activity,
-                                'add_sb' => $add_sbs,
+                                'create' => $canCreate,
                                 'storyboards' => $sbs,
                                 'href' => $href
                             ));
@@ -601,6 +638,19 @@ function activity_page_handler($page) {
                                     'body' => elgg_view("multimedia/video/body", array('entity'  => $entity))
                                 ));
                                 break;
+                            // Clipit Storyboard
+                            case 'ClipitStoryboard':
+                                elgg_push_breadcrumb(elgg_echo("storyboards"), $href."?filter=storyboards");
+                                $title = elgg_echo("storyboard");
+                                $entity = array_pop(ClipitStoryboard::get_by_id(array($entity_id)));
+                                $file = array_pop(ClipitFile::get_by_id(array($entity->file)));
+                                $content = elgg_view('multimedia/view', array(
+                                    'entity' => $entity,
+                                    'type' => 'storyboard',
+                                    'preview' => elgg_view("multimedia/file/preview", array('file'  => $file)),
+                                    'body' => elgg_view("multimedia/file/body", array('entity'  => $file))
+                                ));
+                                break;
                             default:
                                 return false;
                                 break;
@@ -616,7 +666,9 @@ function activity_page_handler($page) {
                     );
                     break;
                 case 'group':
-                    $params = group_tools_page_handler($page, $activity);
+                    if($page[2]){ // group/{$group_id}
+                        $params = group_tools_page_handler($page, $activity);
+                    }
                     break;
                 default:
                     return false;
@@ -636,13 +688,20 @@ function activity_page_handler($page) {
         // Join to activity button
         elgg_extend_view("page/elements/owner_block", "page/components/button_join_activity");
     }
-
     $teachers = ClipitActivity::get_teachers($activity->id);
     $teacher_sidebar = "";
     if(!empty($teachers)){
-        $teacher_sidebar = elgg_view('activity/sidebar/teacher', array('teachers' => $teachers));
+        // Teacher admin
+        if($isTeacher = in_array($user_id, $teachers)){
+            $groups = ClipitActivity::get_groups($activity->id);
+            $teacher_sidebar = elgg_view('activity/sidebar/groups', array(
+                'entities' => $groups,
+                'activity_id' => $activity->id
+            ));
+        }
+        // Default teacher's list
+        $teacher_sidebar .= elgg_view('activity/sidebar/teacher', array('teachers' => $teachers));
     }
-
     $params['sidebar'] = $group_tools_sidebar . $teacher_sidebar;
     if(!$params['class']){
         $params['class'] = "activity-section activity-layout";
@@ -690,12 +749,25 @@ function file_page_handler($page){
  */
 function group_tools_page_handler($page, $activity){
     $user_id = elgg_get_logged_in_user_guid();
-    $group_id = ClipitGroup::get_from_user_activity($user_id, $activity->id);
+    $my_group = ClipitGroup::get_from_user_activity($user_id, $activity->id);
+    $isTeacher = in_array($user_id, $activity->teacher_array);
+    $group_id = (int)$page[2];
     $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
-    if(!$group){
+    $canCreate = false;
+    if($my_group == $group_id){
+        $canCreate = true;
+    }
+    if($group &&
+        ((!$isTeacher && $my_group == $group_id) // I am group member
+            ||
+        ($isTeacher && $my_group != $group_id)) // I am a teacher from activity
+    ){
+        $access_group = true;
+    }
+    if(!$access_group){
         return false;
     }
-    elgg_push_breadcrumb($group->name, "clipit_activity/{$activity->id}/group");
+    elgg_push_breadcrumb($group->name, "clipit_activity/{$activity->id}/group/{$group->id}");
     // set group icon status from activity status
     $activity_status = ClipitActivity::get_status($activity->id);
     $icon_status = "lock";
@@ -704,7 +776,7 @@ function group_tools_page_handler($page, $activity){
     }
     $group_name = '<i class="fa fa-'.$icon_status.'"></i> '.$group->name;
     $filter = "";
-    switch ($page[2]) {
+    switch ($page[3]) {
         case '':
             $title = elgg_echo("group:home");
             elgg_pop_breadcrumb($group->name);
@@ -715,7 +787,7 @@ function group_tools_page_handler($page, $activity){
             $title = elgg_echo("group:files");
             elgg_push_breadcrumb($title);
             $selected_tab = get_input('filter', 'files');
-            $href = "clipit_activity/{$activity->id}/group/multimedia";
+            $href = "clipit_activity/{$activity->id}/group/{$group->id}/multimedia";
             switch ($selected_tab) {
                 case 'files':
                     $files = ClipitGroup::get_files($group->id);
@@ -723,7 +795,8 @@ function group_tools_page_handler($page, $activity){
                         'entity' => $group,
                         'add_files' => true,
                         'files' => $files,
-                        'href' => $href
+                        'href' => $href,
+                        'create' => $canCreate
                     ));
                     if (!$files) {
                         $content .= elgg_view('output/empty', array('value' => elgg_echo('file:none')));
@@ -736,7 +809,8 @@ function group_tools_page_handler($page, $activity){
                         'add_video' => true,
                         'videos' => $videos,
                         'actions'   => true,
-                        'href' => $href
+                        'href' => $href,
+                        'create' => $canCreate
                     ));
                     if (!$videos) {
                         $content .= elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
@@ -748,7 +822,8 @@ function group_tools_page_handler($page, $activity){
                         'entity' => $group,
                         'add_sb' => true,
                         'storyboards' => $sbs,
-                        'href' => $href
+                        'href' => $href,
+                        'create' => $canCreate
                     ));
                     if (!$sbs) {
                         $content .= elgg_view('output/empty', array('value' => elgg_echo('storyboards:none')));
@@ -764,14 +839,14 @@ function group_tools_page_handler($page, $activity){
                     break;
             }
             $filter = elgg_view('multimedia/filter', array('selected' => $selected_tab, 'entity' => $group, 'href' => $href));
-            if($page[3] == 'download' && $page[4]){
+            if($page[4] == 'download' && $page[5]){
                 $file_dir = elgg_get_plugins_path() . 'z04_clipit_activity/pages/file';
                 set_input('id', $page[4]);
                 include "$file_dir/download.php";
             }
             if($page[4]){
-                $entity_id = (int)$page[4];
-                switch($page[3]){
+                $entity_id = (int)$page[5];
+                switch($page[4]){
                     case "view":
                         elgg_pop_breadcrumb($entity->name);
                         $object = ClipitSite::lookup($entity_id);
@@ -800,13 +875,26 @@ function group_tools_page_handler($page, $activity){
                                     'body' => elgg_view("multimedia/video/body", array('entity'  => $entity))
                                 ));
                                 break;
+                            // Clipit Storyboard
+                            case 'ClipitStoryboard':
+                                elgg_push_breadcrumb(elgg_echo("storyboards"), $href."?filter=storyboards");
+                                $title = elgg_echo("storyboard");
+                                $entity = array_pop(ClipitStoryboard::get_by_id(array($entity_id)));
+                                $file = array_pop(ClipitFile::get_by_id(array($entity->file)));
+                                $content = elgg_view('multimedia/view', array(
+                                    'entity' => $entity,
+                                    'type' => 'storyboard',
+                                    'preview' => elgg_view("multimedia/file/preview", array('file'  => $file)),
+                                    'body' => elgg_view("multimedia/file/body", array('entity'  => $file))
+                                ));
+                                break;
                             default:
                                 return false;
                                 break;
                         }
                         break;
                     case "publish":
-                        $entity_id = (int)$page[4];
+                        $entity_id = (int)$page[5];
                         elgg_pop_breadcrumb($entity->name);
                         $object = ClipitSite::lookup($entity_id);
                         switch($object['subtype']){
@@ -844,20 +932,22 @@ function group_tools_page_handler($page, $activity){
             break;
         case 'discussion':
             $title = elgg_echo("group:discussion");
-            $href = "clipit_activity/{$activity->id}/group/discussion";
+            $href = "clipit_activity/{$activity->id}/group/{$group->id}/discussion";
             elgg_push_breadcrumb($title);
             $messages = array_pop(ClipitPost::get_by_destination(array($group->id)));
+
             $content =  elgg_view('discussion/list',
                     array(
                         'entity' => $group,
                         'messages' => $messages,
                         'href'   => $href,
+                        'create' => $canCreate
                     ));
             if(!$messages){
                 $content .= elgg_view('output/empty', array('value' => elgg_echo('discussions:none')));
             }
-            if($page[3] == 'view' && $page[4]){
-                $message_id = (int)$page[4];
+            if($page[4] == 'view' && $page[5]){
+                $message_id = (int)$page[5];
                 $message = array_pop(ClipitPost::get_by_id(array($message_id)));
                 elgg_pop_breadcrumb($title);
                 elgg_push_breadcrumb($title, $href);

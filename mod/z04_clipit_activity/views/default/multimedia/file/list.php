@@ -13,7 +13,6 @@
 $files = elgg_extract("files", $vars);
 $entity = elgg_extract('entity', $vars);
 $href = elgg_extract("href", $vars);
-$add_files = elgg_extract("add_files", $vars);
 
 foreach($files as $file_id){
     $file =  array_pop(ClipitFile::get_by_id(array($file_id)));
@@ -48,7 +47,7 @@ foreach($files as $file_id){
     // Action buttons (Download|Publish)
     $buttons = '<div style="width: 35px;display: inline-block;float: right;text-align: center;margin-left:10px;">
                     '.elgg_view('output/url', array(
-                        'href'  => "{$href}/download/".$file->id,
+                        'href'  => "file/download/".$file->id,
                         'title' => $owner->name,
                         'class' => 'btn btn-default btn-icon',
                         'text'  => '<i class="fa fa-download"></i>')).'
@@ -83,7 +82,7 @@ $list_options = array(
     'search'    => true
 );
 
-if($add_files){
+if($vars['create']){
     // Add files button
     echo elgg_view_form('multimedia/files/upload', array('id' => 'fileupload', 'enctype' => 'multipart/form-data'), array('entity'  => $entity));
     // File options
@@ -100,16 +99,3 @@ $content_list .= elgg_view("page/elements/list/table", array('rows' => $rows, 'c
 // File list
 echo elgg_view_form("multimedia/files/set_options", array('body' => $content_list));
 ?>
-<style>
-.labelx:after{
-    content: " ";
-    display: inline-block;
-    width: 0;
-    height: 0;
-    margin-left: 2px;
-    vertical-align: middle;
-    border-top: 4px solid;
-    border-right: 4px solid #32b4e5;
-    border-left: 4px solid #32b4e5;
-}
-</style>

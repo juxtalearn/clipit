@@ -15,7 +15,7 @@ $video_ids = elgg_extract('videos', $vars);
 $href = elgg_extract("href", $vars);
 $rating = elgg_extract("rating", $vars);
 ?>
-<?php if($vars['add_video']):?>
+<?php if($vars['create']):?>
     <?php
     $modal = elgg_view("page/components/modal",
         array(

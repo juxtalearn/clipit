@@ -10,6 +10,7 @@ $user = elgg_get_logged_in_user_entity();
 $my_groups_ids = ClipitUser::get_groups($user->guid);
 $content = '<div class="wrapper separator">';
 foreach($my_groups_ids as $group_id){
+    $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
     $activity_id = ClipitGroup::get_activity($group_id);
     $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
     $activity_link = elgg_view('output/url', array(
@@ -22,8 +23,12 @@ foreach($my_groups_ids as $group_id){
         $progress = 5;
     }
     $content .='<div class="bar" style="width:'.$progress.'%;background: #'.$activity->color.';">
-                        <h3>'.$activity_link.'</a></h3>
-                    </div>';
+                    <div>
+                        <h4>'.$activity_link.'</a>
+                            <small class="show">'.$group->name.'</small>
+                        </h4>
+                    </div>
+                </div>';
 }
 $content .= '</div>';
 
@@ -35,7 +40,7 @@ $all_link = elgg_view('output/url', array(
 ));
 echo elgg_view('landing/module', array(
     'name'      => "activity_status",
-    'title'     => "Group status",
+    'title'     => elgg_echo('my_group:progress'),
     'content'   => $content,
     'all_link'  => $all_link,
 ));

@@ -19,8 +19,10 @@ if ($headers) {
 	$section = elgg_extract('section', $vars);
 	echo '<h2>' . elgg_echo("menu:$name:header:$section") . '</h2>';
 }
-
-echo "<ul class=\"$class\" role=\"menu\">";
+if($id = $vars['id']){
+    $id = 'id="'.$id.'"';
+}
+echo "<ul class=\"$class\" $id role=\"menu\">";
 foreach ($vars['items'] as $menu_item) {
 	echo elgg_view('navigation/menu/elements/item', array(
 		'item' => $menu_item,

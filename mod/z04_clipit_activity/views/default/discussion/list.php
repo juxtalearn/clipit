@@ -12,12 +12,14 @@ $href = elgg_extract("href", $vars);
 $user_id = elgg_get_logged_in_user_guid();
 $activity_id = elgg_get_page_owner_guid();
 ?>
+<?php if($vars['create']): ?>
 <div style="margin-bottom: 15px;">
     <?php echo elgg_view_form('discussion/create', array('data-validate'=> 'true' ,'class'=> 'fileupload'), array('entity'  => $entity)); ?>
     <button type="button" data-toggle="modal" data-target="#create-new-topic" class="btn btn-default">
         <?php echo elgg_echo('discussion:create'); ?>
     </button>
 </div>
+<?php endif; ?>
 <?php
 foreach($messages as $message):
     $message_text = trim(elgg_strip_tags($message->description));

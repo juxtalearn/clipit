@@ -13,7 +13,7 @@ $group_id = ClipitGroup::get_from_user_activity($user_id, $activity_id);
 $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
 
 $header = elgg_view('output/url', array(
-    'href'  => "clipit_activity/{$activity_id}/group",
+    'href'  => "clipit_activity/{$activity_id}/group/{$group->id}",
     'text'  => "<h3>{$group->name}</h3>",
     'title' => $group->name,
     'class' => 'text-truncate',

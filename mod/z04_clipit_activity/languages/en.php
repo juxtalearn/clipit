@@ -104,6 +104,8 @@ $english = array(
     'video:tags' => 'Video tags',
     'video:description' => 'Video description',
     // Storyboards
+    'storyboards' => 'Storyboards',
+    'storyboard' => 'Storyboard',
     'storyboards:none' => 'No storyboards',
     'multimedia:storyboards:add' => 'Add storyboards',
     // Tricky Topic

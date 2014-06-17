@@ -7,6 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 $activity = elgg_extract("entity", $vars);
+$access = elgg_extract("access", $vars);
 $user_id = elgg_get_logged_in_user_guid();
 $user_inActivity = ClipitGroup::get_from_user_activity($user_id, $activity->id);
 $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($activity->tricky_topic)));
@@ -20,7 +21,7 @@ $tasks = array_slice($activity->task_array, 0, 4);
         </p>
     </div>
 </div>
-<?php if($user_inActivity):?>
+<?php if($access == 'ACCESS_TEACHER' || $access == 'ACCESS_MEMBER'):?>
 <div class="row">
     <div class="col-md-7">
         <h3 class="activity-module-title"><?php echo elgg_echo('activity:tasks');?></h3>

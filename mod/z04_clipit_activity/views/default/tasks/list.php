@@ -24,10 +24,10 @@ if(!$tasks){
     <li <?php echo (time() < $task->start) ? "class='soon'" : ""; ?> style="overflow: hidden;">
         <div class="image-block">
             <small class="date show" style="text-transform: uppercase">
-                <span class="pull-right" style="margin-left: 10px;"><?php echo date("d M Y", $task->start);?></span>
+                <span><?php echo date("d M Y", $task->start);?></span>
             </small>
             <small class="date show" style="text-transform: uppercase">
-                <span class="pull-right" style="margin-left: 10px;"><?php echo date("d M Y", $task->end);?></span>
+                <span><?php echo date("d M Y", $task->end);?></span>
             </small>
         </div>
         <div class="content-block">

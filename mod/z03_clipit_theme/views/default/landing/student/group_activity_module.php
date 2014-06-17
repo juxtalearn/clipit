@@ -131,7 +131,7 @@ $all_link = elgg_view('output/url', array(
 ));
 echo elgg_view('landing/module', array(
     'name'      => "group_activity",
-    'title'     => "Group Activity",
+    'title'     => elgg_echo('group:activity'),
     'content'   => $content,
     'all_link'  => $all_link,
 ));

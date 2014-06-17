@@ -86,25 +86,25 @@ $(document).ready(function() {
 </style>
 <?php
 $user_id = elgg_get_logged_in_user_guid();
-$limit = 15;
+$limit = 5;
 $recommended_events = ClipitEvent::get_recommended_events($user_id, 0, $limit);
 $content = '<div class="margin-bar"></div> <ul class="events">';
 foreach ($recommended_events as $event_log){
     $content .= view_recommended_event($event_log);
 }
-$content .= '<li>';
-$content .= elgg_view('output/url', array(
-                'href'  => 'ajax/view/navigation/pagination_timeline?offset='.$limit,
-                'text'  => 'More',
-                'class' => 'events-more-link'
-            ));
-$content .= '</li>';
 
 $content .= "</ul>";
-
+$content .= "<div>";
+$content .= elgg_view('output/url', array(
+    'href'  => 'ajax/view/navigation/pagination_timeline?offset='.$limit,
+    'text'  => 'More',
+    'class' => 'events-more-link'
+));
+$content .= "</div>";
 echo elgg_view('landing/module', array(
     'name'      => 'events',
     'title'     => "Events",
     'content'   => $content,
 ));
+
 ?>

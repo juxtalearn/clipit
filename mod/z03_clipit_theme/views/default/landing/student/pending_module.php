@@ -16,8 +16,8 @@ foreach($my_groups_ids as $group_id){
 }
 
 $activities = ClipitActivity::get_by_id($activity_ids);
+$task_found = false;
 foreach($activities as $activity):
-    $task_found = false;
     foreach(ClipitTask::get_by_id($activity->task_array) as $task):
         $status = get_task_status($task);
         if($task->start <= time() && $task->end >= time()):
@@ -25,7 +25,13 @@ foreach($activities as $activity):
             $activity = array_pop(ClipitActivity::get_by_id(array($task->activity)));
             $content .= '
             <div class="separator wrapper">
-                <span class="point" style="background: #'.$activity->color.'"></span>
+                '.elgg_view('output/url', array(
+                    'href'  => "clipit_activity/{$task->activity}",
+                    'title' => $activity->name,
+                    'style' => 'background: #'.$activity->color,
+                    'class' => 'point',
+                    'text'  => '',
+                )).'
                 '.elgg_view('output/url', array(
                     'href'  => "clipit_activity/{$task->activity}/tasks/view/{$task->id}",
                     'title' => $task->name,
@@ -37,7 +43,9 @@ foreach($activities as $activity):
     endforeach;
 endforeach;
 if(!$task_found):
-    $content = '<small><strong>'.elgg_echo('task:no_pending').'</strong></small>';
+    $content = '<div class="separator wrapper">
+                    <small><strong>'.elgg_echo('task:no_pending').'</strong></small>
+                </div>';
 endif;
 
 $all_link = elgg_view('output/url', array(

@@ -71,21 +71,7 @@ function tinymce_setup(specific_id){
         toolbar: "bold italic underline | bullist numlist | outdent indent"
         });
     }
-var p = function(){
-$('ul.events').waypoint('infinite', {
-items: 'li.event',
-more: '.events-more-link',
-loadingClass: 'events-loading',
-onAfterPageLoad:function(){
-var hrefString = $(".events-more-link").attr("href");
-var hrefArray  = hrefString.split("offset=");
-var offset = hrefArray[1];
-var totalEvents = $("ul.events > li.event").length;
-$(".events-more-link").attr("href", hrefString.replace(offset, totalEvents));
 
-}
-});
-}
 $(function(){
     /**
      * Collapse function
@@ -121,6 +107,13 @@ $(function(){
         }
     });
 
+    /**
+     * Collapse in tree menu
+     */
+    var isSelected = $("#accordion").find("li.active");
+    if(isSelected){
+        isSelected.parent("ul").addClass("in").prev().find("a").css("opacity", 0.7);
+    }
     /**
      * Toggle menu
      */

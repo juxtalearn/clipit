@@ -105,7 +105,7 @@
       height: 50px;
       line-height: 50px;
       margin-bottom: 10px;
-      h3{
+      > div{
         padding-left: 10px;
         text-transform: uppercase;
         position: absolute;
@@ -114,9 +114,15 @@
         margin: 0;
         font-size: @font-size-large;
         .text-truncate();
-        a{
-          color: #FFF;
-          opacity: .7;
+        h4{
+          a{
+            color: #FFF;
+            opacity: .7;
+          }
+          small{
+            color: #fff;
+            font-size: 75%;
+          }
         }
       }
     }

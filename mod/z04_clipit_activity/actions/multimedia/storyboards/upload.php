@@ -22,14 +22,19 @@ if(count($entity)==0){
     register_error(elgg_echo("storyboard:cantupload"));
 } else{
     $files = $_FILES['files'];
-    $new_file_id = ClipitStoryboard::create(array(
+    $new_file_id = ClipitFile::create(array(
         'name' => $files['name'],
         'description' => $file_text,
         'temp_path'  => $files['tmp_name']
     ));
 
     if($new_file_id){
-        $entity_class::add_files($entity_id, array($new_file_id));
+        $new_sb_id = ClipitStoryBoard::create(array(
+            'name' => $files['name'],
+            'description' => $file_text,
+            'file' => $new_file_id
+        ));
+        $entity_class::add_storyboards($entity_id, array($new_sb_id));
     } else {
         register_error(elgg_echo("storyboard:cantupload"));
     }

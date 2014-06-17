@@ -6837,6 +6837,16 @@ fieldset[disabled] .elgg-sidebar input.elgg-button-submit.active {
   font-size: 13px;
   font-weight: normal;
 }
+.aside-tree .elgg-body ul > ul {
+  margin-left: 25px;
+}
+.aside-tree .panel {
+  margin: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
 .sidebar-lg .elgg-sidebar {
   position: relative;
   min-height: 1px;
@@ -7621,7 +7631,7 @@ li.list-item:last-child {
   line-height: 50px;
   margin-bottom: 10px;
 }
-.module-activity_status .elgg-body .bar h3 {
+.module-activity_status .elgg-body .bar > div {
   padding-left: 10px;
   text-transform: uppercase;
   position: absolute;
@@ -7634,9 +7644,13 @@ li.list-item:last-child {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.module-activity_status .elgg-body .bar h3 a {
+.module-activity_status .elgg-body .bar > div h4 a {
   color: #FFF;
   opacity: .7;
+}
+.module-activity_status .elgg-body .bar > div h4 small {
+  color: #fff;
+  font-size: 75%;
 }
 .module-group_activity .elgg-body {
   position: relative;

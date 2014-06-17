@@ -39,6 +39,22 @@ function view_recommended_event($event, $view_type = 'full'){
                     )))
             );
             break;
+        case "activity-storyboard":
+            $activity = array_pop(ClipitActivity::get_by_id(array($relationship->guid_one)));
+            $entity = array_pop(ClipitStoryboard::get_by_id(array($relationship->guid_two)));
+            $file = array_pop(ClipitFile::get_by_id(array($entity->file)));
+            $href = "clipit_activity/{$activity->id}/materials/view/{$entity->id}";
+            $params = array(
+                'title' => 'Teacher added new storyboard to materials',
+                'icon' => 'fa-file',
+                'author' => $entity->owner_id,
+                'body' => elgg_view("recommended/events/file", array(
+                    'entity' => $entity,
+                    'href' => $href,
+                    'image' => elgg_view("multimedia/file/preview", array('file'  => $file)
+                    )))
+            );
+            break;
         case "activity-user":
             $activity = array_pop(ClipitActivity::get_by_id(array($relationship->guid_one)));
             $entity = array_pop(ClipitUser::get_by_id(array($relationship->guid_two)));
@@ -85,7 +101,7 @@ function view_recommended_event($event, $view_type = 'full'){
             $activity_id = ClipitGroup::get_activity($relationship->guid_one);
             $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
             $entity = array_pop(ClipitVideo::get_by_id(array($relationship->guid_two)));
-            $href = "clipit_activity/{$activity->id}/group/multimedia";
+            $href = "clipit_activity/{$activity->id}/group/{$relationship->guid_one}/multimedia";
             $params = array(
                 'title' => 'Added new video to group',
                 'icon' => 'fa-video-camera',
@@ -97,7 +113,7 @@ function view_recommended_event($event, $view_type = 'full'){
             $activity_id = ClipitGroup::get_activity($relationship->guid_one);
             $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
             $entity = array_pop(ClipitFile::get_by_id(array($relationship->guid_two)));
-            $href = "clipit_activity/{$activity->id}/group/multimedia/view/{$entity->id}";
+            $href = "clipit_activity/{$activity->id}/group/{$relationship->guid_one}/multimedia/view/{$entity->id}";
             $params = array(
                 'title' => 'Added new file to group',
                 'icon' => 'fa-file',
@@ -109,6 +125,23 @@ function view_recommended_event($event, $view_type = 'full'){
                     )))
             );
             break;
+        case "group-storyboard":
+            $activity_id = ClipitGroup::get_activity($relationship->guid_one);
+            $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
+            $entity = array_pop(ClipitStoryboard::get_by_id(array($relationship->guid_two)));
+            $file = array_pop(ClipitFile::get_by_id(array($entity->file)));
+            $href = "clipit_activity/{$activity->id}/group/{$relationship->guid_one}/multimedia/view/{$entity->id}";
+            $params = array(
+                'title' => 'Added new storyboard to group',
+                'icon' => 'fa-file',
+                'author' => $entity->owner_id,
+                'body' => elgg_view("recommended/events/file", array(
+                    'entity' => $entity,
+                    'href' => $href,
+                    'image' => elgg_view("multimedia/file/preview", array('file'  => $file)
+                    )))
+            );
+            break;
         case "message-destination":
             // Message from group|activity
             $object = ClipitSite::lookup($relationship->guid_two);
@@ -116,7 +149,7 @@ function view_recommended_event($event, $view_type = 'full'){
             switch($object['subtype']){
                 case "ClipitGroup":
                     $activity_id = ClipitGroup::get_activity($relationship->guid_two);
-                    $group = "group/";
+                    $group = "group/{$relationship->guid_two}/";
                     break;
                 case "ClipitActivity":
                     $activity_id = $relationship->guid_two;
@@ -138,7 +171,7 @@ function view_recommended_event($event, $view_type = 'full'){
             $group = array_pop(ClipitGroup::get_by_id(array($relationship->guid_one)));
             $entity = array_pop(ClipitUser::get_by_id(array($relationship->guid_two)));
             $group_info = elgg_view('output/url', array(
-                'href'  => "clipit_activity/{$activity->id}/group",
+                'href'  => "clipit_activity/{$activity->id}/group/{$group->id}",
                 'title' => $group->name,
                 'text'  => $group->name,
             ));

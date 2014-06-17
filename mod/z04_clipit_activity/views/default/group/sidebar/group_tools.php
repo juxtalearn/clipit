@@ -18,20 +18,20 @@ $total_unread_posts = array_pop(ClipitPost::unread_by_destination(array($group_i
 elgg_register_menu_item('group:tools', array(
     'name' => 'group_dashboard',
     'text' => elgg_echo('group:home'),
-    'href' => "clipit_activity/".$activity->id."/group",
+    'href' => "clipit_activity/{$activity->id}/group/{$group_id}",
     'priority' => 100,
 ));
 elgg_register_menu_item('group:tools', array(
     'name' => 'group_discussion',
     'text' => elgg_echo('group:discussion'),
-    'href' => "clipit_activity/".$activity->id."/group/discussion",
+    'href' => "clipit_activity/".$activity->id."/group/{$group_id}/discussion",
     'badge' => $total_unread_posts > 0 ? $total_unread_posts : "",
     'priority' => 200,
 ));
 elgg_register_menu_item('group:tools', array(
     'name' => 'group_files',
     'text' => elgg_echo('group:files'),
-    'href' => "clipit_activity/".$activity->id."/group/multimedia",
+    'href' => "clipit_activity/".$activity->id."/group/{$group_id}/multimedia",
     'priority' => 300,
 ));
 $body = elgg_view_menu('group:tools', array(
