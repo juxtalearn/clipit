@@ -401,7 +401,7 @@ class ElggInstaller {
             ),
             'siteaccess' => array(
                 'type' => 'access',
-                'value' =>  ACCESS_PUBLIC,
+                'value' =>  ACCESS_LOGGED_IN,
                 'required' => TRUE,
             ),
             'timezone' => array(
