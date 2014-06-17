@@ -32,6 +32,8 @@ $english = array(
     'status:active' => 'Active',
     'status:closed' => 'Finished',
 
+    'my_group:progress' => 'My group progress',
+    'group:activity' => 'Group health',
     'group:join' => 'Join',
     'group:leave' => 'Leave',
     'group:leave:me' => 'Leave group',
@@ -56,7 +58,7 @@ $english = array(
     'group:home' => 'Group home',
     'group:activity_log' => 'Activity log',
     'group:progress' => 'Progress',
-    'group:edit' => 'Group edit',
+    'group:timeline' => 'Timeline',
     'group:members' => 'Members',
     // Discussion
     'discussions:none' => 'No discussions',
