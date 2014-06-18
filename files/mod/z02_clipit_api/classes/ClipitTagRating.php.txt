@@ -18,7 +18,13 @@ class ClipitTagRating extends UBItem {
      */
     const SUBTYPE = "ClipitTagRating";
 
+    /**
+     * @var int ID of the Tag that this rating refers to.
+     */
     public $tag_id = 0;
+    /**
+     * @var bool Defines whether the linked Tag has been correctly covered or not.
+     */
     public $is_used = null;
 
     /**
