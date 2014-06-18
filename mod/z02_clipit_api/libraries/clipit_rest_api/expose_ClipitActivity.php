@@ -293,6 +293,18 @@ function expose_activity_functions(){
         "Add Videos by Id to an Activity",
         "POST", false, true);
     expose_function(
+        $api_suffix . "set_videos",
+        $class_suffix . "set_videos",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "video_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Set Videos by Id to an Activity",
+        "POST", false, true);
+    expose_function(
         $api_suffix . "remove_videos",
         $class_suffix . "remove_videos",
         array(
@@ -324,6 +336,18 @@ function expose_activity_functions(){
                 "type" => "array",
                 "required" => true)),
         "Add Files by Id to an Activity",
+        "POST", false, true);
+    expose_function(
+        $api_suffix . "set_files",
+        $class_suffix . "set_files",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "file_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Set Files by Id to an Activity",
         "POST", false, true);
     expose_function(
         $api_suffix . "remove_files",
