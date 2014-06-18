@@ -466,51 +466,6 @@ function expose_common_material_functions($api_suffix, $class_suffix){
         "Get Labels from a Material",
         'GET', false, true);
     expose_function(
-        $api_suffix . "add_comments",
-        $class_suffix . "add_comments",
-        array(
-            "id" => array(
-                "type" => "int",
-                "required" => true),
-            "comment_array" => array(
-                "type" => "array",
-                "required" => true)),
-        "Add Comments by Id to a Material",
-        'POST', false, true);
-    expose_function(
-        $api_suffix . "set_comments",
-        $class_suffix . "set_comments",
-        array(
-            "id" => array(
-                "type" => "int",
-                "required" => true),
-            "comment_array" => array(
-                "type" => "array",
-                "required" => true)),
-        "Set Comments by Id to a Material",
-        'POST', false, true);
-    expose_function(
-        $api_suffix . "remove_comments",
-        $class_suffix . "remove_comments",
-        array(
-            "id" => array(
-                "type" => "int",
-                "required" => true),
-            "comment_array" => array(
-                "type" => "array",
-                "required" => true)),
-        "Remove Comments by Id from a Material",
-        'POST', false, true);
-    expose_function(
-        $api_suffix . "get_comments",
-        $class_suffix . "get_comments",
-        array(
-            "id" => array(
-                "type" => "int",
-                "required" => true)),
-        "Get Comments from a Material",
-        'GET', false, true);
-    expose_function(
         $api_suffix . "add_performance_items",
         $class_suffix . "add_performance_items",
         array(
@@ -554,5 +509,50 @@ function expose_common_material_functions($api_suffix, $class_suffix){
                 "type" => "int",
                 "required" => true)),
         "Get Performance Items from a Material",
+        'GET', false, true);
+    expose_function(
+        $api_suffix . "add_comments",
+        $class_suffix . "add_comments",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "comment_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Add Comments by Id to a Material",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "set_comments",
+        $class_suffix . "set_comments",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "comment_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Set Comments by Id to a Material",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "remove_comments",
+        $class_suffix . "remove_comments",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "comment_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Remove Comments by Id from a Material",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "get_comments",
+        $class_suffix . "get_comments",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Get Comments from a Material",
         'GET', false, true);
 }

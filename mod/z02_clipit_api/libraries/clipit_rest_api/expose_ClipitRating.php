@@ -29,7 +29,7 @@ function expose_rating_functions(){
             "target_id" => array(
                 "type" => "int",
                 "required" => false)),
-        "Return all ratings made by a user, optionally the rating for a target if specified",
+        "Return all ratings made by a user, optionally filtered by target if specified",
         'GET', false, true);
     expose_function(
         $api_suffix . "add_tag_ratings",
@@ -75,5 +75,50 @@ function expose_rating_functions(){
                 "type" => "int",
                 "required" => true)),
         "Get Tag Ratings from a Rating.",
+        'GET', false, true);
+    expose_function(
+        $api_suffix . "add_performance_ratings",
+        $class_suffix . "add_performance_ratings",
+        array(
+            "rating_id" => array(
+                "type" => "int",
+                "required" => true),
+            "performance_rating_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Add Performance Ratings to a Rating.",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "set_performance_ratings",
+        $class_suffix . "set_performance_ratings",
+        array(
+            "rating_id" => array(
+                "type" => "int",
+                "required" => true),
+            "performance_rating_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Set Performance Ratings to a Rating.",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "remove_performance_ratings",
+        $class_suffix . "remove_performance_ratings",
+        array(
+            "rating_id" => array(
+                "type" => "int",
+                "required" => true),
+            "performance_rating_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Remove Performance Ratings from a Rating.",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "get_performance_ratings",
+        $class_suffix . "get_performance_ratings",
+        array(
+            "rating_id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Get Performance Ratings from a Rating.",
         'GET', false, true);
 }

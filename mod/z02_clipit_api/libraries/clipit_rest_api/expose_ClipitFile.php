@@ -20,6 +20,15 @@ function expose_file_functions(){
         "Get the Group this File is inside of.",
         'GET', false, true);
     expose_function(
+        $api_suffix . "get_task",
+        $class_suffix . "get_task",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Get the Task this File is inside of.",
+        'GET', false, true);
+    expose_function(
         $api_suffix . "get_activity",
         $class_suffix . "get_activity",
         array(

@@ -20,6 +20,18 @@ function expose_task_functions(){
         "Get Task Activity",
         'GET', false, true);
     expose_function(
+        $api_suffix . "set_activity",
+        $class_suffix . "set_activity",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "activity_id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Set Task Activity",
+        'POST', false, true);
+    expose_function(
         $api_suffix . "add_storyboards",
         $class_suffix . "add_storyboards",
         array(
