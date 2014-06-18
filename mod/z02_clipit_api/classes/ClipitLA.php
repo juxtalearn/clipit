@@ -24,7 +24,7 @@ class ClipitLA extends UBFile{
     /**
      * Loads object parameters stored in Elgg
      *
-     * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
+     * @param ElggFile $elgg_file Elgg Object to load parameters from.
      */
     protected function load_from_elgg($elgg_file){
         parent::load_from_elgg($elgg_file);
@@ -43,6 +43,9 @@ class ClipitLA extends UBFile{
         $elgg_file->set("status_code", $this->status_code);
     }
 
+    /*
+     * @todo request_metrics function to ask the LA API for metrics
+     */
     static function request_metrics($category, $type, $name){
         $return_id = 0;
 
