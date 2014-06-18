@@ -14,6 +14,9 @@ $files = elgg_extract("files", $vars);
 $entity = elgg_extract('entity', $vars);
 $href = elgg_extract("href", $vars);
 
+// if search form is activated
+echo elgg_view("files/search");
+
 foreach($files as $file_id){
     $file =  array_pop(ClipitFile::get_by_id(array($file_id)));
     $file_url = "{$href}/view/{$file->id}";
@@ -78,10 +81,6 @@ foreach($files as $file_id){
     $rows[] = array('content' => $row);
 }
 
-$list_options = array(
-    'search'    => true
-);
-
 if($vars['create']){
     // Add files button
     echo elgg_view_form('multimedia/files/upload', array('id' => 'fileupload', 'enctype' => 'multipart/form-data'), array('entity'  => $entity));
@@ -97,5 +96,5 @@ $content_list .= elgg_view("page/elements/list/options", array('options' => $lis
 $content_list .= elgg_view("page/elements/list/table", array('rows' => $rows, 'class' => 'files-table'));
 
 // File list
-echo elgg_view_form("multimedia/files/set_options", array('body' => $content_list));
+echo elgg_view_form("multimedia/files/set_options", array('body' => $content_list, 'class' => 'block-total'));
 ?>

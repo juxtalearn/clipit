@@ -13,6 +13,8 @@
 $storyboards = elgg_extract("storyboards", $vars);
 $entity = elgg_extract('entity', $vars);
 $href = elgg_extract("href", $vars);
+// if search form is activated
+echo elgg_view("storyboards/search");
 
 foreach($storyboards as $sb_id){
     $storyboard =  array_pop(ClipitStoryboard::get_by_id(array($sb_id)));
@@ -33,7 +35,7 @@ foreach($storyboards as $sb_id){
         $options = array(
             'entity' => $storyboard,
             'edit' => array(
-                "data-target" => "#edit-file-{$storyboard->id}",
+                "data-target" => "#edit-storyboard-{$storyboard->id}",
                 "href" => elgg_get_site_url()."ajax/view/modal/multimedia/storyboard/edit?id={$storyboard->id}",
                 "data-toggle" => "modal"
             ),
@@ -42,7 +44,7 @@ foreach($storyboards as $sb_id){
 
         $owner_options = elgg_view("page/components/options_list", $options);
         // Remote modal, form content
-        echo elgg_view("page/components/modal_remote", array('id'=> "edit-sb-{$storyboard->id}" ));
+        echo elgg_view("page/components/modal_remote", array('id'=> "edit-storyboard-{$storyboard->id}" ));
     }
     // Action buttons (Download|Publish)
     $buttons = '<div style="width: 35px;display: inline-block;float: right;text-align: center;margin-left:10px;">
@@ -67,7 +69,11 @@ foreach($storyboards as $sb_id){
         ),
         array(
             'class' => 'col-md-9 file-info',
-            'content' => elgg_view("multimedia/file/summary", array('entity' => $file, 'href' => $sb_url))
+            'content' => elgg_view("multimedia/storyboard/summary", array(
+                'entity' => $storyboard,
+                'file' => $file,
+                'href' => $sb_url
+            ))
         ),
         array(
             'class' => 'col-md-3',
@@ -77,10 +83,6 @@ foreach($storyboards as $sb_id){
     );
     $rows[] = array('content' => $row);
 }
-
-$list_options = array(
-    'search'    => true
-);
 
 if($vars['create']){
     // Add files button
@@ -100,5 +102,5 @@ $content_list .= elgg_view("page/elements/list/options", array('options' => $lis
 $content_list .= elgg_view("page/elements/list/table", array('rows' => $rows, 'class' => 'files-table'));
 
 // File list
-echo elgg_view_form("multimedia/files/set_options", array('body' => $content_list));
+echo elgg_view_form("multimedia/files/set_options", array('body' => $content_list, 'class' => 'block-total'));
 ?>

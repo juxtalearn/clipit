@@ -15,6 +15,8 @@ $video_ids = elgg_extract('videos', $vars);
 $href = elgg_extract("href", $vars);
 $rating = elgg_extract("rating", $vars);
 ?>
+<?php echo elgg_view("videos/search"); ?>
+
 <?php if($vars['create']):?>
     <?php
     $modal = elgg_view("page/components/modal",
@@ -84,7 +86,6 @@ $rating = elgg_extract("rating", $vars);
                         'text'  => '<i class="fa fa-arrow-circle-up"></i> '.elgg_echo('publish')));
                     ?>
                 <?php endif; ?>
-
                 <?php if($vars['actions']): ?>
                     <?php echo elgg_view("multimedia/owner_options", array('entity' => $video, 'type' => 'video')); ?>
                 <?php endif; ?>

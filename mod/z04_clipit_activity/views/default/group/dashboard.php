@@ -41,13 +41,22 @@ $group = elgg_extract('entity', $vars);
     </div>
     <div class="col-md-8">
         <?php echo elgg_view("page/components/title_block", array('title' => elgg_echo("group:timeline"))); ?>
-        <ul>
+        <ul class="events">
             <?php
-            $events_log = ClipitEvent::get_by_object(array($group->id), 0, 30);
-            foreach($events_log as $event_log):
+                $limit = 5;
+                $events_log = ClipitEvent::get_by_object(array($group->id), 0, $limit);
+                foreach($events_log as $event_log):
             ?>
                 <?php echo view_recommended_event($event_log, 'simple'); ?>
             <?php endforeach; ?>
         </ul>
+        <div>
+            <?php echo elgg_view('output/url', array(
+                'href'  => 'ajax/view/navigation/pagination_timeline?view=simple&type=group&id='.$group->id.'&offset='.$limit,
+                'text'  => 'More',
+                'class' => 'events-more-link'
+                ));
+            ?>
+        </div>
     </div>
 </div>
