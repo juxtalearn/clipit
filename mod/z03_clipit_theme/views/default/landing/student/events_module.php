@@ -47,43 +47,6 @@ $(document).ready(function() {
     width: 50%;
 }
 </style>
-<style>
-    .stuck {
-        position:fixed;
-        top:0;
-        box-shadow:0 2px 4px rgba(0, 0, 0, .3);
-    }
-
-    .events-more-link {
-        display:none;
-    }
-    .events {
-        width:480px;
-        margin-left:-20px;
-        overflow:hidden;
-        position:relative;
-        opacity: 1;
-    }
-    .events.events-loading{
-        opacity: .6;
-    }
-    .events.events-loading:after {
-        content: "Loading...";
-        height: 30px;
-        line-height: 29px;
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        text-align: center;
-        z-index: 1000;
-        border-radius: 3px;
-        background: #32b4e5;
-        border: 2px solid #fff;
-        color: #fff;
-        font-weight: bold;
-    }
-</style>
 <?php
 $user_id = elgg_get_logged_in_user_guid();
 $limit = 5;
@@ -92,11 +55,10 @@ $content = '<div class="margin-bar"></div> <ul class="events">';
 foreach ($recommended_events as $event_log){
     $content .= view_recommended_event($event_log);
 }
-
 $content .= "</ul>";
 $content .= "<div>";
 $content .= elgg_view('output/url', array(
-    'href'  => 'ajax/view/navigation/pagination_timeline?offset='.$limit,
+    'href'  => 'ajax/view/navigation/pagination_timeline?view=full&type=user&offset='.$limit,
     'text'  => 'More',
     'class' => 'events-more-link'
 ));

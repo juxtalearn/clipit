@@ -6904,6 +6904,21 @@ fieldset[disabled] .elgg-sidebar input.elgg-button-submit.active {
 .shorten {
   max-height: 100% !important;
 }
+.events-more-link {
+  visibility: hidden;
+}
+ul.events {
+  position: relative;
+}
+ul.events.events-loading:after {
+  content: "Loading...";
+  color: #bae6f6;
+  margin-top: 5px;
+  padding-top: 5px;
+  width: 100%;
+  float: left;
+  margin-left: 35px;
+}
 .btn-normal {
   border: none;
   background-color: #ffffff;
@@ -7337,7 +7352,7 @@ li.list-item:last-child {
   bottom: 5px;
 }
 .multimedia-owner .multimedia-preview i {
-  font-size: 50px;
+  font-size: 42px;
 }
 .multimedia-owner .block {
   overflow: hidden;
@@ -7598,15 +7613,6 @@ li.list-item:last-child {
 }
 .module-pending small {
   margin-top: 3px;
-}
-.module-pending .point {
-  width: 11px;
-  height: 11px;
-  display: inline-block;
-  border-radius: 30px;
-  border: 2px solid #fff;
-  -webkit-box-shadow: 0px 0px 0px 1px #bae6f6;
-  box-shadow: 0px 0px 0px 1px #bae6f6;
 }
 .module-activity_status .elgg-head {
   background: #32b4e5;
@@ -7949,6 +7955,7 @@ ul.top-account > li.open > a,
 ul.top-account > li.open > a > i {
   background: #32b4e5 !important;
   color: #FFF !important;
+  opacity: 0.7;
 }
 ul.top-account > li.separator {
   color: #bae6f6;
@@ -7966,6 +7973,45 @@ ul.top-account > li .fa {
 ul.top-account > li .fa:hover {
   opacity: 1;
 }
+ul.top-account > li ul.caret-menu > li > a {
+  padding: 5px 10px;
+  font-size: 14px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+ul.top-account > li ul.caret-menu > li > a > .fa {
+  opacity: 0.7;
+  font-size: 15px;
+  padding-top: 2px;
+}
+ul.top-account > li ul.caret-menu .divider {
+  display: block;
+  margin: 0;
+}
+ul.top-account > li ul#menu_activities li {
+  width: 300px;
+}
+ul.top-account > li ul#menu_activities li div {
+  font-size: 14px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+ul.top-account > li ul#menu_activities li div small {
+  font-size: 75%;
+}
+ul.top-account > li ul#menu_activities li.divider {
+  margin: 0;
+}
+ul.top-account > li ul#menu_activities li.divider:last-child {
+  background: none;
+}
+ul.top-account > li ul#menu_activities li .activity-point {
+  vertical-align: text-top;
+  margin-top: 2px;
+}
+ul.top-account > li ul#menu_activities li > a {
+  padding: 5px 10px;
+}
 ul.top-account > li > a {
   font-family: FuturaBoldRegular, Impact, 'Impact Bold', Helvetica, Arial, sans, sans-serif !important;
   text-transform: none !important;
@@ -7980,6 +8026,14 @@ ul.top-account > li > a:hover {
 }
 ul.top-account > li > a:hover > i {
   color: #FFF !important;
+}
+ul.top-account > li > a.caret-down {
+  padding: 6px 3px 0 3px;
+  line-height: 40px;
+  height: 49px;
+}
+ul.top-account > li > a.caret-down > .fa {
+  line-height: inherit;
 }
 ul.top-account > li > a > span.badge {
   color: #32b4e5;
@@ -8380,7 +8434,8 @@ ul.deadline-list > li .fa {
   float: left;
   margin-right: 10px;
   text-align: center;
-  width: 50px;
+  width: 36px;
+  padding-top: 5px;
 }
 .attachment-files .file .preview > canvas,
 .attachment-files .file .preview > img,
@@ -9768,6 +9823,10 @@ ol {
   font-family: FuturaBoldRegular, Impact, 'Impact Bold', Helvetica, Arial, sans, sans-serif;
   color: #32b4e5;
 }
+.block-total {
+  width: 100%;
+  overflow: hidden;
+}
 .title-block {
   color: #32b4e5;
   border-bottom: 6px solid #bae6f6;
@@ -10082,4 +10141,13 @@ h6,
 .nav-stacked-activities .badge {
   width: 20px;
   height: 20px;
+}
+.activity-point {
+  width: 11px;
+  height: 11px;
+  display: inline-block;
+  border-radius: 30px;
+  border: 2px solid #fff;
+  -webkit-box-shadow: 0px 0px 0px 1px #bae6f6;
+  box-shadow: 0px 0px 0px 1px #bae6f6;
 }

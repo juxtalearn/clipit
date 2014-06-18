@@ -8,9 +8,17 @@ $items = elgg_extract('menu', $vars);
 $class = elgg_extract('class', $vars, false);
 $viewer = elgg_get_logged_in_user_entity();
 $context = elgg_get_context();
+$user_id = elgg_get_logged_in_user_guid();
 ?>
 <ul class="<?php echo $class; ?>">
-    <li><a href="<?php echo $CONFIG->wwwroot; ?>my_activities"><?php echo elgg_echo("my_activities");?></a></li>
+    <li>
+        <a href="<?php echo $CONFIG->wwwroot; ?>my_activities"><?php echo elgg_echo("my_activities");?></a>
+        <a href="#" data-toggle="dropdown" class="caret-down" style="height: 50px;" id="activities">
+            <i class="fa fa-caret-down"></i>
+        </a>
+        <!-- My activities dropdown menu -->
+        <?php echo elgg_view("my_activities/dropdown_menu");?>
+    </li>
     <li class="separator">|</li>
     <li><a href="<?php echo $CONFIG->wwwroot; ?>explore"><?php echo elgg_echo("explore");?></a></li>
     <li class="separator">|</li>
@@ -51,6 +59,30 @@ $context = elgg_get_context();
             )); ?>
             <?php echo $viewer->name; ?>
         </a>
+        <!-- -->
+        <a href="#" data-toggle="dropdown" class="caret-down" id="settings">
+            <i class="fa fa-caret-down"></i>
+        </a>
+        <ul id="menu_settings" class="dropdown-menu caret-menu" role="menu" aria-labelledby="settings">
+            <li role="presentation">
+                <?php echo elgg_view('output/url', array(
+                    'href'  => "settings/user",
+                    'title' => elgg_echo('profile:settings:edit_profile'),
+                    'text'  => '<i class="fa fa-cog"></i> '.elgg_echo('settings:edit_profile'),
+                ));
+                ?>
+            </li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation">
+                <?php echo elgg_view('output/url', array(
+                    'href'  => "settings/user",
+                    'title' => elgg_echo('profile:stats'),
+                    'text'  => '<i class="fa fa-bar-chart-o"></i> '.elgg_echo('profile:stats'),
+                ));
+                ?>
+            </li>
+        </ul>
+        <!-- -->
     </li>
     <li class="separator">|</li>
     <li>

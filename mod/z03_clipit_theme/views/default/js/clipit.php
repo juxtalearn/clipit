@@ -103,7 +103,7 @@ $(function(){
             var hrefArray  = hrefString.split("offset=");
             var offset = hrefArray[1];
             var totalEvents = $("ul.events > li.event").length;
-            $(".events-more-link").attr("href", hrefString.replace(offset, totalEvents));
+            $(".events-more-link").attr("href", hrefString.replace("offset=" + offset, "offset=" + totalEvents));
         }
     });
 

@@ -237,3 +237,22 @@
 .shorten{
   max-height: 100% !important;
 }
+
+//
+// Events timeline
+// --------------------------------------------------
+.events-more-link{
+  visibility: hidden;
+}
+ul.events{
+  position: relative;
+}
+ul.events.events-loading:after{
+  content: "Loading...";
+  color: @blue-lighter;
+  margin-top: 5px;
+  padding-top: 5px;
+  width: 100%;
+  float: left;
+  margin-left: 35px;
+}

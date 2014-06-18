@@ -41,7 +41,7 @@ $option = elgg_extract('options', $vars);
         });
     });
 </script>
-<div style="margin-bottom: 30px;color #999;margin-left: 15px;">
+<div style="margin-bottom: 30px;color #999;margin-left: 15px;margin-top: 10px;">
     <?php if($option['options_values']):?>
         <div class="checkbox" style=" display: inline-block;margin: 0;">
             <label>

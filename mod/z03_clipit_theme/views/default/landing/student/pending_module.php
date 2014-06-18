@@ -29,7 +29,7 @@ foreach($activities as $activity):
                     'href'  => "clipit_activity/{$task->activity}",
                     'title' => $activity->name,
                     'style' => 'background: #'.$activity->color,
-                    'class' => 'point',
+                    'class' => 'activity-point',
                     'text'  => '',
                 )).'
                 '.elgg_view('output/url', array(

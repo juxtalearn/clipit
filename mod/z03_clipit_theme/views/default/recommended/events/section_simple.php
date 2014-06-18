@@ -32,7 +32,7 @@ $author = elgg_extract('author', $vars);
     padding-bottom: 5px;
 }
 </style>
-<li class="list-item event-simple">
+<li class="list-item event-simple event">
     <div class="event-section">
         <div>
             <div class="image-block">

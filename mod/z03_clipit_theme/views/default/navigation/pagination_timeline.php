@@ -8,19 +8,30 @@
  */
 $user_id = elgg_get_logged_in_user_guid();
 $offset = (int)get_input('offset');
-//echo '<script>p();</script>';
-$recommended_events = ClipitEvent::get_recommended_events($user_id, $offset, 5);
-echo '<ul class="events">';
-foreach ($recommended_events as $event_log){
-        echo view_recommended_event($event_log);
-
+$view_type = get_input('view');
+$type = get_input('type');
+$id = (int)get_input('id');
+$recommended_events = array();
+switch($type){
+    case "group":
+        $recommended_events = ClipitEvent::get_by_object(array($id), $offset, 5);
+        break;
+    default:
+        $recommended_events = ClipitEvent::get_recommended_events($user_id, $offset, 5);
+        break;
 }
-echo '</ul>';
 ?>
-<div>
-    <?php echo elgg_view('output/url', array(
-        'href'  => 'ajax/view/navigation/pagination_timeline?offset='.$offset,
-        'text'  => 'More',
-        'class' => 'events-more-link'
-    )); ?>
-</div>
+<ul class="events">
+<?php foreach ($recommended_events as $event_log):?>
+    <?php echo $show_recommended = view_recommended_event($event_log, $view_type); ?>
+<?php endforeach; ?>
+</ul>
+<?php if($show_recommended): ?>
+    <div class="timeline-more">
+        <?php echo elgg_view('output/url', array(
+            'href'  => 'ajax/view/navigation/pagination_timeline?view='.$view_type.'&type='.$type.'&id='.$id.'&offset='.$offset,
+            'text'  => 'More',
+            'class' => 'events-more-link'
+        )); ?>
+    </div>
+<?php endif; ?>

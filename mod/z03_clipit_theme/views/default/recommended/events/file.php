@@ -40,9 +40,9 @@ if(mb_strlen($description)>180){
             ?>
         </strong>
     </div>
-    <div class="description">
+    <small class="description">
         <?php if($description): ?>
             <?php echo $description;?>
         <?php endif; ?>
-    </div>
+    </small>
 </div>
