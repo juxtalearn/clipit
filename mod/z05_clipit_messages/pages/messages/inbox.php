@@ -15,6 +15,13 @@ $title = elgg_echo("messages:inbox");
 elgg_push_breadcrumb($title);
 
 $messages = ClipitChat::get_inbox($user_id);
+// Search items
+if($search_term = stripslashes(get_input("search"))){
+    $items_search = array_keys(ClipitChat::get_from_search($search_term));
+    $messages = array_uintersect($items_search, $messages, "strcasecmp");
+    $messages = ClipitChat::get_by_id($messages);
+}
+
 array_reverse($messages);
 if(!is_array($messages)){
     $messages = array();
@@ -22,7 +29,9 @@ if(!is_array($messages)){
 
 $rows = array();
 foreach($messages as $message){
-    $message = array_pop($message);
+    if(is_array($message)){
+        $message = array_pop($message);
+    }
     $user = array_pop(ClipitUser::get_by_id(array($message->owner_id)));
     $user_elgg = new ElggUser($message->owner_id);
 
@@ -101,14 +110,14 @@ $list_options = array(
         'read'      => elgg_echo('message:markasread'),
         'unread'    => elgg_echo('message:markasunread'),
         'remove'    => elgg_echo('message:movetotrash'),
-    ),
-    'search'    => true
+    )
 );
 // set content
 $content_list .= elgg_view("page/elements/list/options", array('options' => $list_options));
 $content_list .= elgg_view("page/elements/list/table", array('rows' => $rows, 'class' => 'messages-table'));
 
-$content = elgg_view_form("messages/set_options", array('body' => $content_list));
+$content = elgg_view("search/search");
+$content .= elgg_view_form("messages/set_options", array('body' => $content_list, 'class' => 'block-total'));
 
 if (!$messages) {
     $content = elgg_echo("messages:inbox:none");

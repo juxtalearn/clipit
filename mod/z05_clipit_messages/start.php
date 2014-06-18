@@ -14,8 +14,6 @@
 elgg_register_event_handler('init', 'system', 'clipit_messages_init');
 
 function clipit_messages_init() {
-    // Register libraries
-    elgg_register_library('clipit:messages', elgg_get_plugins_path() . 'z05_clipit_messages/lib/messages.php');
     // Register page handlers
     elgg_register_page_handler('messages', 'messages_page_handler');
     elgg_register_event_handler('pagesetup', 'system', 'messages_setup_sidebar_menus');
@@ -60,15 +58,11 @@ function messages_page_handler($page) {
         forward('messages/inbox');
     }
     if(isset($page[0])){
-        elgg_load_library("clipit:messages");
         $user_id = elgg_get_logged_in_user_guid();
         elgg_push_breadcrumb(elgg_echo("messages"), "/messages/inbox");
         elgg_extend_view("page/elements/owner_block", "page/components/button_compose_message");
         $file_dir = elgg_get_plugins_path() . 'z05_clipit_messages/pages/messages';
         switch ($page[0]) {
-            case 'search':
-                include "$file_dir/search.php";
-                break;
             case 'inbox':
                 include "$file_dir/inbox.php";
                 break;

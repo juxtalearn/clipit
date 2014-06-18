@@ -11,10 +11,17 @@
  * @package         ClipIt
  */
 $title = elgg_echo("messages:sent_email");
+$user_id = elgg_get_logged_in_user_guid();
 elgg_push_breadcrumb($title);
 $messages = ClipitChat::get_sent($user_id);
 if (!$messages) {
     $content = elgg_echo("messages:sent:none");
+}
+// Search items
+if($search_term = stripslashes(get_input("search"))){
+    $items_search = array_keys(ClipitChat::get_from_search($search_term));
+    $messages = array_uintersect($items_search, $messages, "strcasecmp");
+    $messages = ClipitChat::get_by_id($messages);
 }
 
 $rows = array();
@@ -67,11 +74,8 @@ foreach($messages as $message){
 }
 
 
-// set content
-$list_options = array(
-    'search'    => true
-);
-$content = elgg_view("page/elements/list/options", array('options' => $list_options));
+$content = elgg_view("search/search");
+$content .= elgg_view("page/elements/list/options", array('options' => $list_options));
 $content .= elgg_view("page/elements/list/table", array('rows' => $rows, 'class' => 'messages-table'));
 
 

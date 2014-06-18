@@ -15,7 +15,7 @@ $user_groups = ClipitUser::get_groups($user_loggedin);
 
 if(!empty($user_groups)):
     ?>
-    <h3><?php echo elgg_echo('messages:contactmembersgroup'); ?></h3>
+    <h4><?php echo elgg_echo('messages:contactmembersgroup'); ?></h4>
     <div class="group-members" id="accordion">
         <!-- User group list -->
         <?php
@@ -37,30 +37,8 @@ if(!empty($user_groups)):
                             $user = array_pop(ClipitUser::get_by_id(array($user_id)));
                             $user_elgg = new ElggUser($user->id);
                             ?>
-                            <li class="text-truncate">
-                                <?php echo elgg_view("page/components/modal_remote", array('id'=> "send-message-{$user->id}" )); ?>
-                                <?php echo elgg_view('output/img', array(
-                                    'src' => $user_elgg->getIconURL('tiny'),
-                                    'alt' => $user->name,
-                                    'title' => elgg_echo('profile'),
-                                    'style' => 'margin-right: 10px;',
-                                    'class' => 'pull-left'));
-                                ?>
-                                <div class="text-truncate">
-                                    <?php echo elgg_view('output/url', array(
-                                        'href'  => "ajax/view/modal/messages/send?id=".$user->id,
-                                        'title' => $user->name,
-                                        'class' => 'pull-right',
-                                        'text'  => '<i class="fa fa-envelope"></i>',
-                                        'data-target' => '#send-message-'.$user->id,
-                                        'data-toggle' => 'modal'
-                                    )); ?>
-                                    <?php echo elgg_view('output/url', array(
-                                        'href'  => "profile/".$user->login,
-                                        'title' => $user->name,
-                                        'text'  => $user->name));
-                                    ?>
-                                </div>
+                            <li class="text-truncate list-item">
+                                <?php echo elgg_view("page/elements/user_block", array("entity" => $user));?>
                             </li>
                         <?php endif; ?>
                     <?php endforeach; ?>
