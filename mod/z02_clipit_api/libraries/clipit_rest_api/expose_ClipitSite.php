@@ -57,33 +57,9 @@ function expose_site_functions(){
         "Returns basic information about an unknown object based on its id",
         'GET', false, true);
     expose_function(
-        $api_suffix . "get_google_token",
-        $class_suffix . "get_google_token",
+        $api_suffix . "get_domain",
+        $class_suffix . "get_domain",
         null,
-        "Get a Google API authentication token from the system",
+        "Get the server domain from the system",
         'GET', false, true);
-    expose_function(
-        $api_suffix . "set_google_token",
-        $class_suffix . "set_google_token",
-        array(
-            "token" => array(
-                "type" => "string",
-                "required" => true)),
-        "Set a Google API authentication token from the system",
-        'POST', false, true);
-    expose_function(
-        $api_suffix . "get_google_refresh_token",
-        $class_suffix . "get_google_refresh_token",
-        null,
-        "Get a Google API refresh authentication token from the system",
-        'GET', false, true);
-    expose_function(
-        $api_suffix . "set_google_refresh_token",
-        $class_suffix . "set_google_refresh_token",
-        array(
-            "token" => array(
-                "type" => "string",
-                "required" => true)),
-        "Set a Google API refresh authentication token from the system",
-        'POST', false, true);
 }

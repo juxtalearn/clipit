@@ -82,7 +82,7 @@ class ClipitActivity extends UBItem{
         if(!empty($this->color)) {
             $elgg_entity->set("color", (string)$this->color);
         } else{
-            $elgg_entity->set("color", static::get_rand_color());
+            $elgg_entity->set("color", $this->get_rand_color());
         }
         $elgg_entity->set("status", (string)$this->status);
         $elgg_entity->set("tricky_topic", (int)$this->tricky_topic);
@@ -144,14 +144,12 @@ class ClipitActivity extends UBItem{
         parent::delete();
     }
 
-    /** STATIC FUNCTIONS */
-
     /**
      * Returns a random hex color, from a predefined palette, to assign to an Activity
      *
-     * @return string
+     * @return string Hex color.
      */
-    static function get_rand_color(){
+    protected function get_rand_color(){
         $color_array = array(
             "E7DF1A", // yellow
             "98BF0E", // light green
@@ -164,6 +162,21 @@ class ClipitActivity extends UBItem{
         );
         $pos = (int) rand(0, count($color_array));
         return $color_array[$pos];
+    }
+
+    /** STATIC FUNCTIONS */
+
+    static function get_from_user($user_id){
+        if(!$group_ids = ClipitUser::get_groups($user_id)){
+            return false;
+        }
+        foreach($group_ids as $group_id){
+            $activity_ids[] = ClipitGroup::get_activity($group_id);
+        }
+        if(!isset($activity_ids)){
+            return false;
+        }
+        return ClipitActivity::get_by_id($activity_ids);
     }
 
     /**
@@ -188,19 +201,6 @@ class ClipitActivity extends UBItem{
     static function set_status_closed($id){
         $prop_value_array["status"] = ClipitActivity::STATUS_CLOSED;
         return ClipitActivity::set_properties($id, $prop_value_array);
-    }
-
-    static function get_from_user($user_id){
-        if(!$group_ids = ClipitUser::get_groups($user_id)){
-            return false;
-        }
-        foreach($group_ids as $group_id){
-            $activity_ids[] = ClipitGroup::get_activity($group_id);
-        }
-        if(!isset($activity_ids)){
-            return false;
-        }
-        return ClipitActivity::get_by_id($activity_ids);
     }
 
     // TEACHERS

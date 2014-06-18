@@ -26,6 +26,6 @@ function expose_quiz_result_functions(){
             "quiz_question_array" => array(
                 "type" => "array",
                 "required" => true)),
-        "Get instances by Question Id",
+        "Get Quiz Results by Quiz Question Id",
         'GET', false, true);
 }
