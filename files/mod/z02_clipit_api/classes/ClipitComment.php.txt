@@ -13,7 +13,7 @@
  */
 
 /**
- * Class ClipitRating
+ * Class ClipitComment
  *
  */
 class ClipitComment extends UBMessage{
