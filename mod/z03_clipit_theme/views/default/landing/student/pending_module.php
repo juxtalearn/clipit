@@ -25,6 +25,7 @@ foreach($activities as $activity):
             $activity = array_pop(ClipitActivity::get_by_id(array($task->activity)));
             $content .= '
             <div class="separator wrapper">
+                <small class="pull-right" style="text-transform:uppercase">'.date("d M Y", $task->end).'</small>
                 '.elgg_view('output/url', array(
                     'href'  => "clipit_activity/{$task->activity}",
                     'title' => $activity->name,
@@ -37,7 +38,6 @@ foreach($activities as $activity):
                     'title' => $task->name,
                     'text'  => $status['count']." ".$task->name,
                 )).'
-                <small class="pull-right" style="text-transform:uppercase">'.date("d M Y", $task->end).'</small>
             </div>';
         endif;
     endforeach;
@@ -48,11 +48,11 @@ if(!$task_found):
                 </div>';
 endif;
 
-$all_link = elgg_view('output/url', array(
+/*$all_link = elgg_view('output/url', array(
     'href' => "linkHref",
     'text' => elgg_echo('link:view:all'),
     'is_trusted' => true,
-));
+));*/
 echo elgg_view('landing/module', array(
     'name'      => "pending",
     'title'     => "Pending",

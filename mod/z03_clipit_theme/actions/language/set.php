@@ -17,5 +17,6 @@ $user_id = elgg_get_logged_in_user_guid();
 if(!empty($new_lang_id) && array_key_exists($new_lang_id, $installed) && $user_id){
     ClipitUser::set_properties($user_id, array('language' => $new_lang_id));
 }
-
-forward(REFERER);
+if(!get_input('no_forward')){
+    forward(REFERER);
+}

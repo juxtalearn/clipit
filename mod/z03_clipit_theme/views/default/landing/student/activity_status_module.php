@@ -33,11 +33,11 @@ foreach($my_groups_ids as $group_id){
 $content .= '</div>';
 
 
-$all_link = elgg_view('output/url', array(
+/*$all_link = elgg_view('output/url', array(
     'href' => "linkHref",
     'text' => elgg_echo('link:view:all'),
     'is_trusted' => true,
-));
+));*/
 echo elgg_view('landing/module', array(
     'name'      => "activity_status",
     'title'     => elgg_echo('my_group:progress'),

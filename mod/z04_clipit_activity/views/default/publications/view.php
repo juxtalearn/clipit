@@ -18,6 +18,8 @@ $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
 $tags = $entity->tag_array;
 $performance_average = ClipitPerformanceRating::get_average_target_rating($entity->id);
 $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->id))));
+$owner_group_id = $entity->get_group($entity->id);
+$owner_group = array_pop(ClipitGroup::get_by_id(array($owner_group_id)));
 ?>
 <!-- Multimedia info + details -->
 <div class="multimedia-owner multimedia-pub">
@@ -33,7 +35,10 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
                 <div class="col-md-8">
                     <div class="description" data-shorten="true">
                         <div style="margin-bottom: 10px;">
-                            <span class="label label-blue pull-right"><i class="fa fa-users"></i> Los manolos</span>
+                            <span class="label label-blue pull-right">
+                                <i class="fa fa-users"></i>
+                                <?php echo $owner_group->name;?>
+                            </span>
                             <small class="show">
                                 <strong>Published on</strong> <?php echo htmlspecialchars(date(elgg_echo('friendlytime:date_format'), $entity->time_created));?>
                                 (<?php echo elgg_view('output/friendlytime', array('time' => $entity->time_created));?>)

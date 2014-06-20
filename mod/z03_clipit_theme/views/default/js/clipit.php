@@ -35,7 +35,7 @@ function tinymce_setup(specific_id){
         paste_auto_cleanup_on_paste: true,
         paste_strip_class_attributes: true,
         paste_remove_styles_if_webkit: true,
-        invalid_elements: 'img',
+        invalid_elements: 'img,h1,h2',
         autoresize_min_height: 150,
         mentions: {
         delay: 0,

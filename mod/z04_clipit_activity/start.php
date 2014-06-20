@@ -21,8 +21,6 @@ function clipit_activity_init() {
 
     // Register "/my_activities" page handler
     elgg_register_page_handler('my_activities', 'my_activities_page_handler');
-    // Register "/explore" page handler
-    elgg_register_page_handler('explore', 'explore_page_handler');
     // Register "/file" page handler
     elgg_register_page_handler('file', 'file_page_handler');
     // Register "/z04_clipit_activity" page handler
@@ -1034,30 +1032,6 @@ function my_activities_page_handler($page) {
 
 }
 
-/**
- * Explore page handler
- *
- * @param array $page Array of URL components for routing
- * @return bool
- */
-function explore_page_handler($page) {
-    $current_user = elgg_get_logged_in_user_entity();
-
-    if (!$current_user) {
-        register_error(elgg_echo('noaccess'));
-        $_SESSION['last_forward_from'] = current_page_url();
-        forward('');
-    }
-
-    $base_dir = elgg_get_plugins_path() . 'z04_clipit_activity/pages/activity';
-    $vars = array();
-    $vars['page'] = $page[0];
-
-    require_once "$base_dir/explore.php";
-
-    return true;
-
-}
 
 /**
  * Get evaluations by filter (no evaluated | evaluated)

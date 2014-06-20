@@ -61,22 +61,13 @@ function usersettings_clipit_page_handler($page){
         $user = elgg_get_logged_in_user_entity();
         elgg_set_page_owner_guid($user->guid);
     }
-
+    $user_id = elgg_get_logged_in_user_guid();
     elgg_push_breadcrumb(elgg_echo('settings'), "settings/user");
     elgg_set_context('user_settings');
 
     switch ($page[0]) {
-        case 'statistics':
-            elgg_push_breadcrumb(elgg_echo('usersettings:statistics:opt:linktext'));
-            $path = $CONFIG->path . "pages/settings/statistics.php";
-            break;
-        case 'plugins':
-            elgg_push_breadcrumb(elgg_echo('usersettings:plugins:opt:linktext'));
-            $path = $CONFIG->path . "pages/settings/tools.php";
-            break;
         case 'user':
             $title = elgg_echo("profile:settings:edit");
-            $path = $CONFIG->path . "pages/settings/account.php";
             // extend the account settings form
             elgg_extend_view('forms/settings/account', 'settings/account/name', 100);
             elgg_extend_view('forms/settings/account', 'settings/account/password', 100);
@@ -88,8 +79,8 @@ function usersettings_clipit_page_handler($page){
         case 'avatar':
             $title = elgg_echo("profile:settings:edit_avatar");
             elgg_push_breadcrumb($title);
-            $entity = new ElggUser($user);
-            $content = elgg_view('core/avatar/upload', array('entity' => $entity));
+            $entity = $user;
+            $content = elgg_view('settings/avatar/upload', array('entity' => $entity));
             break;
         default:
             return false;
@@ -116,15 +107,15 @@ function usersettings_clipit_pagesetup() {
 
     if ($user_id && elgg_get_context() == "user_settings") {
         $params = array(
-            'name' => '1_account',
+            'name' => 'settings_account',
             'text' => elgg_echo('usersettings:user:opt:linktext'),
             'href' => "settings/user",
         );
         elgg_register_menu_item('page', $params);
         $params = array(
-            'name' => '1_avatar',
-            'href' => "settings/avatar",
+            'name' => 'settings_avatar',
             'text' => elgg_echo('avatar:edit'),
+            'href' => "settings/avatar",
         );
         elgg_register_menu_item('page', $params);
     }

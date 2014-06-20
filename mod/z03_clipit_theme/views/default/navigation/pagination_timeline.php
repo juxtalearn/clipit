@@ -23,10 +23,10 @@ switch($type){
 ?>
 <ul class="events">
 <?php foreach ($recommended_events as $event_log):?>
-    <?php echo $show_recommended = view_recommended_event($event_log, $view_type); ?>
+    <?php echo view_recommended_event($event_log, $view_type); ?>
 <?php endforeach; ?>
 </ul>
-<?php if($show_recommended): ?>
+<?php if($recommended_events): ?>
     <div class="timeline-more">
         <?php echo elgg_view('output/url', array(
             'href'  => 'ajax/view/navigation/pagination_timeline?view='.$view_type.'&type='.$type.'&id='.$id.'&offset='.$offset,

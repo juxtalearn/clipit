@@ -271,5 +271,5 @@ function get_group_progress($group_id){
         }
     }
     $val = count($completed)/(count($activity->task_array));
-    return $val*100;
+    return round($val*100);
 }
