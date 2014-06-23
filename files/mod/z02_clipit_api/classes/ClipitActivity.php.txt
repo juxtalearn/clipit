@@ -179,6 +179,27 @@ class ClipitActivity extends UBItem{
         return ClipitActivity::get_by_id($activity_ids);
     }
 
+    static function get_from_tricky_topic($tricky_topic_id){
+        $elgg_objects = elgg_get_entities_from_metadata(
+            array(
+                'type' => static::TYPE,
+                'subtype' => static::SUBTYPE,
+                'metadata_names' => array("tricky_topic"),
+                'metadata_values' => array($tricky_topic_id),
+                'limit' => 0
+            )
+        );
+        if(!empty($elgg_objects)){
+            $activity_array = array();
+        } else{
+            return null;
+        }
+        foreach($elgg_objects as $elgg_object){
+            $activity_array[] = new static($elgg_object->guid);
+        }
+        return $activity_array;
+    }
+
     /**
      * @param int $id Activity ID
      * @return string The status of the activity: STATUS_ENROLL, STATUS_ACTIVE or STATUS_CLOSED

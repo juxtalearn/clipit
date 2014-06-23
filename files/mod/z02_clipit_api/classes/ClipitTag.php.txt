@@ -22,4 +22,8 @@ class ClipitTag extends UBItem{
      */
     const SUBTYPE = "ClipitTag";
 
+    static function get_tricky_topics($id){
+        return UBCollection::get_items($id, ClipitTrickyTopic::REL_TRICKYTOPIC_TAG, true);
+    }
+
 }
