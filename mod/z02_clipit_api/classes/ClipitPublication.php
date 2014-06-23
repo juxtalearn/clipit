@@ -110,22 +110,42 @@ class ClipitPublication extends UBItem{
             return static::get_group($publication->cloned_from);
         }
         $group = UBCollection::get_items($id, static::REL_GROUP_PUBLICATION, true);
-        return array_pop($group);
+        if(!empty($group)){
+            return array_pop($group);
+        } else{
+            return null;
+        }
     }
 
     static function get_task($id){
         $task = UBCollection::get_items($id, static::REL_TASK_PUBLICATION, true);
-        return array_pop($task);
+        if(!empty($task)){
+            return array_pop($task);
+        } else{
+            return null;
+        }
     }
 
     static function get_activity($id){
-        $activity = UBCollection::get_items($id, static::REL_ACTIVITY_PUBLICATION, true);
-        return array_pop($activity);
+        $group_id = static::get_group($id);
+        if(!empty($group_id)){
+            return ClipitGroup::get_activity($group_id);
+        } else{
+            $activity = UBCollection::get_items($id, static::REL_ACTIVITY_PUBLICATION, true);
+            if(!empty($activity)){
+                return array_pop($activity);
+            }
+        }
+        return null;
     }
 
     static function get_site($id){
         $site = UBCollection::get_items($id, static::REL_SITE_PUBLICATION, true);
-        return array_pop($site);
+        if(!empty($site)){
+            return array_pop($site);
+        } else{
+            return null;
+        }
     }
 
     /**

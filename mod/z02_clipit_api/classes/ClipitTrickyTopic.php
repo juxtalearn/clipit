@@ -22,6 +22,8 @@ class ClipitTrickyTopic extends UBItem{
      */
     const SUBTYPE = "ClipitTrickyTopic";
 
+    const REL_TRICKYTOPIC_TAG = "trickytopic-tag";
+
     public $subject = "";
     public $country = "";
     public $tag_array = array();
@@ -36,7 +38,7 @@ class ClipitTrickyTopic extends UBItem{
         parent::load_from_elgg($elgg_entity);
         $this->subject = (string)$elgg_entity->get("subject");
         $this->country = (string)$elgg_entity->get("country");
-        $this->tag_array = (array)$elgg_entity->get("tag_array");
+        $this->tag_array = static::get_tags((int)$this->id);
     }
 
     /**
@@ -48,6 +50,58 @@ class ClipitTrickyTopic extends UBItem{
         parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("subject", (string)$this->subject);
         $elgg_entity->set("country", (string)$this->country);
-        $elgg_entity->set("tag_array", (array)$this->tag_array);
+    }
+
+    protected function save(){
+        parent::save();
+        static::set_tags((int)$this->id, (array)$this->tag_array);
+        return (int)$this->id;
+    }
+
+    /**
+     * Adds Tags to a Tricky Topic, referenced by Id.
+     *
+     * @param int   $id Id from the Tricky Topic to add Tags to
+     * @param array $tag_array Array of Tag Ids to be added to the Tricky Topic
+     *
+     * @return bool Returns true if success, false if error
+     */
+    static function add_tags($id, $tag_array){
+        return UBCollection::add_items($id, $tag_array, static::REL_TRICKYTOPIC_TAG);
+    }
+
+    /**
+     * Sets Tags to a Tricky Topic, referenced by Id.
+     *
+     * @param int   $id Id from the Tricky Topic to set Tags to
+     * @param array $tag_array Array of Tag Ids to be set to the Tricky Topic
+     *
+     * @return bool Returns true if success, false if error
+     */
+    static function set_tags($id, $tag_array){
+        return UBCollection::set_items($id, $tag_array, static::REL_TRICKYTOPIC_TAG);
+    }
+
+    /**
+     * Remove Tags from a Tricky Topic.
+     *
+     * @param int   $id Id from Tricky Topic to remove Tags from
+     * @param array $tag_array Array of Tag Ids to remove from Tricky Topic
+     *
+     * @return bool Returns true if success, false if error
+     */
+    static function remove_tags($id, $tag_array){
+        return UBCollection::remove_items($id, $tag_array, static::REL_TRICKYTOPIC_TAG);
+    }
+
+    /**
+     * Get all Tags from a Tricky Topic
+     *
+     * @param int $id Id of the Tricky Topic to get Tags from
+     *
+     * @return array|bool Returns an array of Tag items, or false if error
+     */
+    static function get_tags($id){
+        return UBCollection::get_items($id, static::REL_TRICKYTOPIC_TAG);
     }
 }
