@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1045162734"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-504566369"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1045162734" class="accordion-body collapse in">
+            <div id="namespace-504566369" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -1252,7 +1252,7 @@ Last update:     $Date$</em></p>
             <article class="method">
                 <h3 class="public ">get_all()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">get_all(int <span class="argument">$limit</span>) : static[]</pre>
+                <pre class="signature" style="margin-right: 54px;">get_all(int <span class="argument">$limit</span>, bool <span class="argument">$id_only</span>) : static[]|int[]</pre>
                 <p><em>Get all Objects of this TYPE and SUBTYPE from the system.</em></p>
                 
 
@@ -1263,12 +1263,17 @@ Last update:     $Date$</em></p>
                                 <td>$limit </td>
                                 <td><p>Number of results to show, default= 0 [no limit] (optional)</p></td>
                             </tr>
+                                                    <tr>
+                                <td>bool</td>
+                                <td>$id_only </td>
+                                <td><p>Only return object IDs</p></td>
+                            </tr>
                                             </table>
                 
                 
                                     <h4>Returns</h4>
-                    static[]
-                                            &mdash; <p>Returns an array of Objects</p>
+                    static[]|int[]
+                                            &mdash; <p>Returns an array of Objects, or Object IDs if id_only = true</p>
                                                 </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1697,19 +1702,19 @@ Last update:     $Date$</em></p>
             <article class="method">
                 <h3 class="public ">sort_numbers()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">sort_numbers( <span class="argument">$i1</span>,  <span class="argument">$i2</span>) : int</pre>
+                <pre class="signature" style="margin-right: 54px;">sort_numbers(float <span class="argument">$i1</span>, float <span class="argument">$i2</span>) : int</pre>
                 <p><em>Sort numbers, in increasing order.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>float</td>
                                 <td>$i1 </td>
                                 <td></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>float</td>
                                 <td>$i2 </td>
                                 <td></td>
                             </tr>
@@ -1747,19 +1752,19 @@ Last update:     $Date$</em></p>
             <article class="method">
                 <h3 class="public ">sort_numbers_inv()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">sort_numbers_inv( <span class="argument">$i1</span>,  <span class="argument">$i2</span>) : int</pre>
+                <pre class="signature" style="margin-right: 54px;">sort_numbers_inv(float <span class="argument">$i1</span>, float <span class="argument">$i2</span>) : int</pre>
                 <p><em>Sort numbers, in decreasing order.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>float</td>
                                 <td>$i1 </td>
                                 <td></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>float</td>
                                 <td>$i2 </td>
                                 <td></td>
                             </tr>
@@ -2075,7 +2080,7 @@ Last update:     $Date$</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on June 24th, 2014 at 08:01.
+                    on June 24th, 2014 at 09:01.
                 </section>
             </section>
         </section>

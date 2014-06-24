@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-198301612"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1193868123"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-198301612" class="accordion-body collapse in">
+            <div id="namespace-1193868123" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -300,6 +300,7 @@
                         </section>
                         <section class="row-fluid public">
                             <section class="span4">
+                                                                    <a href="../classes/ClipitFile.html#method_get_by_tags" class="">get_by_tags()</a><br />
                                                                     <a href="../classes/ClipitFile.html#method_get_group" class="">get_group()</a><br />
                                                                     <a href="../classes/ClipitFile.html#method_get_task" class="">get_task()</a><br />
                                                                     <a href="../classes/ClipitFile.html#method_get_activity" class="">get_activity()</a><br />
@@ -1346,6 +1347,48 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
+            <a id="method_get_by_tags" name="method_get_by_tags" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">get_by_tags()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">get_by_tags( <span class="argument">$tag_array</span>)</pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$tag_array </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ClipitFile.html"><div class="path-wrapper">\ClipitFile</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
             <a id="method_get_group" name="method_get_group" class="anchor"></a>
             <article class="method">
                 <h3 class="public ">get_group()</h3>
@@ -1668,7 +1711,7 @@
             <article class="method">
                 <h3 class="public ">get_tags()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">get_tags(int <span class="argument">$id</span>) : bool</pre>
+                <pre class="signature" style="margin-right: 54px;">get_tags(int <span class="argument">$id</span>) : int[]</pre>
                 <p><em>Get Tag Ids from a File.</em></p>
                 
 
@@ -1683,7 +1726,7 @@
                 
                 
                                     <h4>Returns</h4>
-                    bool
+                    int[]
                                             &mdash; <p>Returns array of Tag Ids, or false if error.</p>
                                                 </article>
         </div>
@@ -1863,7 +1906,7 @@
             <article class="method">
                 <h3 class="public ">get_labels()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">get_labels(int <span class="argument">$id</span>) : bool</pre>
+                <pre class="signature" style="margin-right: 54px;">get_labels(int <span class="argument">$id</span>) : int[]</pre>
                 <p><em>Get Label Ids from a File.</em></p>
                 
 
@@ -1878,7 +1921,7 @@
                 
                 
                                     <h4>Returns</h4>
-                    bool
+                    int[]
                                             &mdash; <p>Returns array of Label Ids, or false if error.</p>
                                                 </article>
         </div>
@@ -2403,7 +2446,7 @@
             <article class="method">
                 <h3 class="public ">get_all()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">get_all(int <span class="argument">$limit</span>) : static[]</pre>
+                <pre class="signature" style="margin-right: 54px;">get_all(int <span class="argument">$limit</span>, bool <span class="argument">$id_only</span>) : static[]|int[]</pre>
                 <p><em>Get all Objects of this TYPE and SUBTYPE from the system.</em></p>
                 
 
@@ -2414,12 +2457,17 @@
                                 <td>$limit </td>
                                 <td><p>Number of results to show, default= 0 [no limit] (optional)</p></td>
                             </tr>
+                                                    <tr>
+                                <td>bool</td>
+                                <td>$id_only </td>
+                                <td><p>Only return object IDs</p></td>
+                            </tr>
                                             </table>
                 
                 
                                     <h4>Returns</h4>
-                    static[]
-                                            &mdash; <p>Returns an array of Objects</p>
+                    static[]|int[]
+                                            &mdash; <p>Returns an array of Objects, or Object IDs if id_only = true</p>
                                                 </article>
         </div>
         <aside class="span4 detailsbar">
@@ -2848,19 +2896,19 @@
             <article class="method">
                 <h3 class="public ">sort_numbers()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">sort_numbers( <span class="argument">$i1</span>,  <span class="argument">$i2</span>) : int</pre>
+                <pre class="signature" style="margin-right: 54px;">sort_numbers(float <span class="argument">$i1</span>, float <span class="argument">$i2</span>) : int</pre>
                 <p><em>Sort numbers, in increasing order.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>float</td>
                                 <td>$i1 </td>
                                 <td></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>float</td>
                                 <td>$i2 </td>
                                 <td></td>
                             </tr>
@@ -2898,19 +2946,19 @@
             <article class="method">
                 <h3 class="public ">sort_numbers_inv()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">sort_numbers_inv( <span class="argument">$i1</span>,  <span class="argument">$i2</span>) : int</pre>
+                <pre class="signature" style="margin-right: 54px;">sort_numbers_inv(float <span class="argument">$i1</span>, float <span class="argument">$i2</span>) : int</pre>
                 <p><em>Sort numbers, in decreasing order.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>float</td>
                                 <td>$i1 </td>
                                 <td></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>float</td>
                                 <td>$i2 </td>
                                 <td></td>
                             </tr>
@@ -3183,7 +3231,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on June 24th, 2014 at 08:01.
+                    on June 24th, 2014 at 09:01.
                 </section>
             </section>
         </section>

@@ -293,9 +293,10 @@ class UBItem{
      * Get all Objects of this TYPE and SUBTYPE from the system.
      *
      * @param int $limit Number of results to show, default= 0 [no limit] (optional)
-     * @return static[] Returns an array of Objects
+     * @param bool $id_only Only return object IDs
+     * @return static[]|int[] Returns an array of Objects, or Object IDs if id_only = true
      */
-    static function get_all($limit = 0){
+    static function get_all($limit = 0, $id_only = false){
         $object_array = array();
         $elgg_object_array = elgg_get_entities(
             array(
@@ -304,10 +305,16 @@ class UBItem{
                 'limit' => $limit));
         if($elgg_object_array){
             foreach($elgg_object_array as $elgg_object){
-                $object_array[(int)$elgg_object->guid] = new static((int)$elgg_object->guid);
+                if($id_only){
+                    $object_array[] = (int)$elgg_object->guid;
+                } else {
+                    $object_array[(int)$elgg_object->guid] = new static((int)$elgg_object->guid);
+                }
             }
         }
-        usort($object_array, 'static::sort_by_date_inv');
+        if(!$id_only) {
+            usort($object_array, 'static::sort_by_date_inv');
+        }
         return $object_array;
     }
 
@@ -487,8 +494,8 @@ class UBItem{
     /**
      * Sort numbers, in increasing order.
      *
-     * @param float $n1
-     * @param float $n2
+     * @param float $i1
+     * @param float $i2
      * @return int Returns 0 if equal, -1 if i1 before i2, 1 if i1 after i2.
      */
     static function sort_numbers($i1, $i2){
@@ -501,8 +508,8 @@ class UBItem{
     /**
      * Sort numbers, in decreasing order.
      *
-     * @param float $n1
-     * @param float $n2
+     * @param float $i1
+     * @param float $i2
      * @return int Returns 0 if equal, -1 if i1 before i2, 1 if i1 after i2.
      */
     static function sort_numbers_inv($i1, $i2){
