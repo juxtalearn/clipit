@@ -20,6 +20,15 @@ function expose_activity_functions(){
         "Get an array of Activity Ids in which a User is involved",
         "GET", false, true);
     expose_function(
+        $api_suffix . "get_from_tricky_topic",
+        $class_suffix . "get_from_tricky_topic",
+        array(
+            "tricky_topic_id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Get an array of Activity Ids which treat a Tricky Topic",
+        "GET", false, true);
+    expose_function(
         $api_suffix . "get_status",
         $class_suffix . "get_status",
         array(
