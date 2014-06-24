@@ -165,18 +165,20 @@ class ClipitActivity extends UBItem{
     }
 
     /** STATIC FUNCTIONS */
-
-    static function get_from_user($user_id){
-        if(!$group_ids = ClipitUser::get_groups($user_id)){
-            return false;
+    /**
+     * Returns the Activities where a User has been called in, or has joined.
+     *
+     * @param int $user_id ID of the User to get Activities from
+     * @param bool $joined_only Only return Activities where the User has joined to a Group
+     * @return static[] Array of Activities
+     */
+    static function get_from_user($user_id, $joined_only = false){
+        $activity_id_array = ClipitUser::get_activities($user_id, $joined_only);
+        $activity_array = array();
+        foreach($activity_id_array as $activity_id){
+            $activity_array[$activity_id] = new static($activity_id);
         }
-        foreach($group_ids as $group_id){
-            $activity_ids[] = ClipitGroup::get_activity($group_id);
-        }
-        if(!isset($activity_ids)){
-            return false;
-        }
-        return ClipitActivity::get_by_id($activity_ids);
+        return $activity_array;
     }
 
     static function get_from_tricky_topic($tricky_topic_id){

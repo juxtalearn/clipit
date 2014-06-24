@@ -89,7 +89,10 @@ function expose_user_functions(){
         array(
             "user_id" => array(
                 "type" => "int",
-                "required" => true)),
-        "Get all Activities in which this user is a member of.",
+                "required" => true),
+            "joined_only" => array(
+                "type" => "bool",
+                "required" => false)),
+        "Get all Activities in which this user is a called to, or has joined.",
         'GET', false, true);
 }

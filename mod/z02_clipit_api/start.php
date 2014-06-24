@@ -31,7 +31,7 @@ function clipit_api_init(){
     load_performance_palette();
 }
 
-function youtube_auth_page_handler($page){
+function youtube_auth_page_handler(){
     $title = "YouTube Authentication";
     $params = array(
         'content' => elgg_view("youtube_auth"),
@@ -43,7 +43,7 @@ function youtube_auth_page_handler($page){
     echo elgg_view_page($title, $body);
 }
 
-function data_input_page_handler($page){
+function data_input_page_handler(){
     $title = "ClipIt Setup";
     $params = array(
         'content' => elgg_view("data_input"),
@@ -57,7 +57,7 @@ function data_input_page_handler($page){
 
 function load_performance_palette(){
     if(get_config("performance_palette") == true){
-        return;
+        return false;
     } else{
         set_config("performance_palette", true);
     }
@@ -67,6 +67,8 @@ function load_performance_palette(){
     }
     ClipitPerformanceItem::delete_all();
     $performance_items = array();
+    $category = "";
+    $category_description = "";
     foreach($json_object["performance_palette"] as $category_array){
         foreach($category_array as $key => $val){
             switch ($key){
@@ -90,5 +92,6 @@ function load_performance_palette(){
             }
         }
     }
+    return true;
 }
 

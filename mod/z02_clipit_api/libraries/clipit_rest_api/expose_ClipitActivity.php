@@ -16,8 +16,11 @@ function expose_activity_functions(){
         array(
             "user_id" => array(
                 "type" => "int",
-                "required" => true)),
-        "Get an array of Activity Ids in which a User is involved",
+                "required" => true),
+            "joined_only" => array(
+                "type" => "bool",
+                "required" => false)),
+        "Get an array of Activity Ids in which a User is called, or has joined",
         "GET", false, true);
     expose_function(
         $api_suffix . "get_from_tricky_topic",
