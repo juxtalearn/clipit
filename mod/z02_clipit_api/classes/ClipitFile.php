@@ -51,6 +51,21 @@ class ClipitFile extends UBFile{
         return $this->id;
     }
 
+    static function get_by_tags($tag_array){
+        $return_array = array();
+        $all_items = static::get_all(0, true); // Get all item ids, not objects
+        foreach($all_items as $item_id){
+            $item_tags = static::get_tags((int) $item_id);
+            foreach($tag_array as $search_tag){
+                if(array_search($search_tag, $item_tags) !== false){
+                    $return_array[] = new static((int)$item_id);
+                    break;
+                }
+            }
+        }
+        return $return_array;
+    }
+
     static function get_group($id){
         $file = new static($id);
         if(!empty($file->clone_id)){
@@ -116,7 +131,7 @@ class ClipitFile extends UBFile{
      *
      * @param int $id Id of the File to get Tags from.
      *
-     * @return bool Returns array of Tag Ids, or false if error.
+     * @return int[] Returns array of Tag Ids, or false if error.
      */
     static function get_tags($id){
         return UBCollection::get_items($id, static::REL_FILE_TAG);
@@ -163,7 +178,7 @@ class ClipitFile extends UBFile{
      *
      * @param int $id Id of the File to get Labels from.
      *
-     * @return bool Returns array of Label Ids, or false if error.
+     * @return int[] Returns array of Label Ids, or false if error.
      */
     static function get_labels($id){
         return UBCollection::get_items($id, static::REL_FILE_LABEL);

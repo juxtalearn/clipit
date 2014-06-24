@@ -84,6 +84,21 @@ class ClipitPublication extends UBItem{
         parent::delete();
     }
 
+    static function get_by_tags($tag_array){
+        $return_array = array();
+        $all_items = static::get_all(0, true); // Get all item ids, not objects
+        foreach($all_items as $item_id){
+            $item_tags = static::get_tags((int) $item_id);
+            foreach($tag_array as $search_tag){
+                if(array_search($search_tag, $item_tags) !== false){
+                    $return_array[] = new static((int)$item_id);
+                    break;
+                }
+            }
+        }
+        return $return_array;
+    }
+
     static function get_publish_level($id){
         $site = static::get_site($id);
         if(!empty($site)){
