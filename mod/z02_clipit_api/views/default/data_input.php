@@ -20,7 +20,7 @@ $html_body = "";
 if($file_path = $_FILES["file"]){
     process_data($file_path["tmp_name"], $html_title, $html_body);
 }else{
-    $html_title = "Upload Setup File";
+    $html_title = "Upload Excel File";
     $html_body .=
         "<form action='data_input' method='post' enctype='multipart/form-data'>
             <label for='file'>Filename:</label>
