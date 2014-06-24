@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 set_include_path(get_include_path() . PATH_SEPARATOR . elgg_get_plugins_path() . "z02_clipit_api/libraries/google_api/src/");
 require_once 'Google/Client.php';
 require_once 'Google/Service/YouTube.php';
