@@ -19,6 +19,8 @@ class ClipitPost extends UBMessage{
     const SUBTYPE = "ClipitPost";
 
     public $topic_id = 0;
+    public $storyboard_array = array();
+    public $video_array = array();
 
     /**
      * Loads object parameters stored in Elgg
