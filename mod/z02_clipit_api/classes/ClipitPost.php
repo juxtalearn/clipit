@@ -18,7 +18,15 @@ class ClipitPost extends UBMessage{
      */
     const SUBTYPE = "ClipitPost";
 
+    const REL_MESSAGE_DESTINATION = "post-destination";
+    const REL_MESSAGE_FILE = "post-file";
+
+    const REL_POST_STORYBOARD = "post-storyboard";
+    const REL_POST_VIDEO = "post-video";
+
     public $topic_id = 0;
+    public $storyboard_array = array();
+    public $video_array = array();
 
     /**
      * Loads object parameters stored in Elgg
@@ -28,6 +36,8 @@ class ClipitPost extends UBMessage{
     protected function load_from_elgg($elgg_entity){
         parent::load_from_elgg($elgg_entity);
         $this->topic_id = (int)$elgg_entity->get("topic_id");
+        $this->storyboard_array = (array)static::get_storyboards((int)$this->id);
+        $this->video_array = (array)static::get_videos((int)$this->id);
     }
 
     /**
@@ -38,6 +48,52 @@ class ClipitPost extends UBMessage{
     protected function copy_to_elgg($elgg_entity){
         parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("topic_id", $this->topic_id);
+    }
+
+    /**
+     * Saves this instance into the system.
+     *
+     * @return bool|int Returns id of saved instance, or false if error.
+     */
+    protected function save(){
+        parent::save();
+        static::set_storyboards($this->id, $this->storyboard_array);
+        static::set_videos($this->id, $this->video_array);
+        return $this->id;
+    }
+
+    // STORYBOARDS
+    static function add_storyboards($id, $storyboard_array){
+        return UBCollection::add_items($id, $storyboard_array, static::REL_POST_STORYBOARD);
+    }
+
+    static function set_storyboards($id, $storyboard_array){
+        return UBCollection::set_items($id, $storyboard_array, static::REL_POST_STORYBOARD);
+    }
+
+    static function remove_storyboards($id, $storyboard_array){
+        return UBCollection::remove_items($id, $storyboard_array, static::REL_POST_STORYBOARD);
+    }
+
+    static function get_storyboards($id){
+        return UBCollection::get_items($id, static::REL_POST_STORYBOARD);
+    }
+
+    // VIDEOS
+    static function add_videos($id, $video_array){
+        return UBCollection::add_items($id, $video_array, static::REL_POST_VIDEO);
+    }
+
+    static function set_videos($id, $video_array){
+        return UBCollection::set_items($id, $video_array, static::REL_POST_VIDEO);
+    }
+
+    static function remove_videos($id, $video_array){
+        return UBCollection::remove_items($id, $video_array, static::REL_POST_VIDEO);
+    }
+
+    static function get_videos($id){
+        return UBCollection::get_items($id, static::REL_POST_VIDEO);
     }
 
 } 

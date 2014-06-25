@@ -78,7 +78,7 @@ class ClipitRating extends UBItem{
 
     /**
      * @param $target_array
-     * @return ClipitRating[]
+     * @return static[]
      */
     static function get_by_target($target_array){
         $rating_array = array();
@@ -108,7 +108,7 @@ class ClipitRating extends UBItem{
     /**
      * @param $user_id
      * @param $target_id
-     * @return ClipitRating|null
+     * @return static|null
      */
     static function get_from_user_for_target($user_id, $target_id){
         $user_ratings = static::get_by_owner(array($user_id));

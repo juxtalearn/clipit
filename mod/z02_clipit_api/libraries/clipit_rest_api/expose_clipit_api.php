@@ -316,7 +316,19 @@ function expose_common_message_functions($api_suffix, $class_suffix){
             "file_array" => array(
                 "type" => "array",
                 "required" => true)),
-        "Attach files to a Message.",
+        "Add Attachment files to a Message.",
+        'POST', false, true);
+    expose_function(
+        $api_suffix . "set_files",
+        $class_suffix . "set_files",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "file_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Set Attachment files to a Message.",
         'POST', false, true);
     expose_function(
         $api_suffix . "remove_files",
