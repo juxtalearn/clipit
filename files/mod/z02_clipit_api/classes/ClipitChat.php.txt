@@ -18,6 +18,9 @@ class ClipitChat extends UBMessage{
      */
     const SUBTYPE = "ClipitChat";
 
+    const REL_MESSAGE_DESTINATION = "chat-destination";
+    const REL_MESSAGE_FILE = "chat-file";
+
     public $archived_array = array();
 
     /**
@@ -47,7 +50,7 @@ class ClipitChat extends UBMessage{
         if($incoming_messages !== null){
             $sender_array = array();
             foreach($incoming_messages as $message){
-                $archived_status = ClipitChat::get_archived_status($message->id, array($user_id));
+                $archived_status = static::get_archived_status($message->id, array($user_id));
                 $archived_status = (bool)array_pop($archived_status);
                 if($archived_status === false){
                     if(array_search($message->owner_id, $sender_array) === false){
@@ -91,7 +94,7 @@ class ClipitChat extends UBMessage{
         $sent_messages = array_pop($sent_messages);
         $sent_array = array();
         foreach($sent_messages as $message){
-            $archived_status = ClipitChat::get_archived_status($message->id, array($user_id));
+            $archived_status = static::get_archived_status($message->id, array($user_id));
             $archived_status = (bool)array_pop($archived_status);
             if($archived_status === false){
                 $sent_array[] = $message;
@@ -105,7 +108,7 @@ class ClipitChat extends UBMessage{
         $sent_messages = static::get_by_sender(array($user_id));
         $sent_messages = array_pop($sent_messages);
         foreach($sent_messages as $message){
-            $archived_status = ClipitChat::get_archived_status($message->id, array($user_id));
+            $archived_status = static::get_archived_status($message->id, array($user_id));
             $archived_status = (bool)array_pop($archived_status);
             if($archived_status === false){
                 $count++;
@@ -121,14 +124,14 @@ class ClipitChat extends UBMessage{
         $sent_messages = array_pop($sent_messages);
         $archived_array = array();
         foreach($incoming_messages as $message){
-            $archived_status = ClipitChat::get_archived_status($message->id, array($user_id));
+            $archived_status = static::get_archived_status($message->id, array($user_id));
             $archived_status = (bool)array_pop($archived_status);
             if($archived_status === true){
                 array_push($archived_array, $message);
             }
         }
         foreach($sent_messages as $message){
-            $archived_status = ClipitChat::get_archived_status($message->id, array($user_id));
+            $archived_status = static::get_archived_status($message->id, array($user_id));
             $archived_status = (bool)array_pop($archived_status);
             if($archived_status === true){
                 array_push($archived_array, $message);
@@ -229,7 +232,7 @@ class ClipitChat extends UBMessage{
         return $count;
     }
     static function get_archived_status($id, $user_array = null){
-        $archived_array = ClipitChat::get_properties($id, array("archived_array"));
+        $archived_array = static::get_properties($id, array("archived_array"));
         $archived_array = array_pop($archived_array);
         if(!$user_array){
             return $archived_array;
@@ -247,7 +250,7 @@ class ClipitChat extends UBMessage{
     }
 
     static function set_archived_status($id, $archived_value, $user_array){
-        $archived_array = ClipitChat::get_properties($id, array("archived_array"));
+        $archived_array = static::get_properties($id, array("archived_array"));
         $archived_array = array_pop($archived_array);
         foreach($user_array as $user_id){
             if($archived_value == true){
@@ -262,6 +265,6 @@ class ClipitChat extends UBMessage{
             }
         }
         $prop_value_array["archived_array"] = $archived_array;
-        return ClipitChat::set_properties($id, $prop_value_array);
+        return static::set_properties($id, $prop_value_array);
     }
 }
