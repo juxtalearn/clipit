@@ -120,14 +120,17 @@ class UBMessage extends UBItem{
         $message = new static($id);
         return $message->owner_id;
     }
-    static function get_files($id){
-        return UBCollection::get_items($id, static::REL_MESSAGE_FILE);
-    }
     static function add_files($id, $file_array){
         return UBCollection::add_items($id, $file_array, static::REL_MESSAGE_FILE, true);
     }
+    static function set_files($id, $file_array){
+        return UBCollection::set_items($id, $file_array, static::REL_MESSAGE_FILE, true);
+    }
     static function remove_files($id, $file_array){
         return UBCollection::remove_items($id, $file_array, static::REL_MESSAGE_FILE);
+    }
+    static function get_files($id){
+        return UBCollection::get_items($id, static::REL_MESSAGE_FILE);
     }
     static function get_read_status($id, $user_array = null){
         $props = static::get_properties($id, array("read_array", "owner_id"));
