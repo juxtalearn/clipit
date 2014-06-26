@@ -38,8 +38,8 @@ class ClipitChat extends UBMessage{
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function copy_to_elgg($elgg_entity){
-        parent::copy_to_elgg($elgg_entity);
+    protected function save_to_elgg($elgg_entity){
+        parent::save_to_elgg($elgg_entity);
         $elgg_entity->set("archived_array", (array)$this->archived_array);
     }
 

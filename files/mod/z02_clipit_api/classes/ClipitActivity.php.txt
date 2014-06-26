@@ -77,8 +77,8 @@ class ClipitActivity extends UBItem{
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function copy_to_elgg($elgg_entity){
-        parent::copy_to_elgg($elgg_entity);
+    protected function save_to_elgg($elgg_entity){
+        parent::save_to_elgg($elgg_entity);
         if(!empty($this->color)) {
             $elgg_entity->set("color", (string)$this->color);
         } else{

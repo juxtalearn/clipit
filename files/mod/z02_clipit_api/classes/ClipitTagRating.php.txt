@@ -43,8 +43,8 @@ class ClipitTagRating extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function copy_to_elgg($elgg_entity){
-        parent::copy_to_elgg($elgg_entity);
+    protected function save_to_elgg($elgg_entity){
+        parent::save_to_elgg($elgg_entity);
         $elgg_entity->set("tag_id", (int)$this->tag_id);
         $elgg_entity->set("is_used", (bool)$this->is_used);
     }

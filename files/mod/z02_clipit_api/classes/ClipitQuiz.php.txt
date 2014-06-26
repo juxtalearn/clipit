@@ -64,8 +64,8 @@ class ClipitQuiz extends UBItem{
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function copy_to_elgg($elgg_entity){
-        parent::copy_to_elgg($elgg_entity);
+    protected function save_to_elgg($elgg_entity){
+        parent::save_to_elgg($elgg_entity);
         $elgg_entity->set("public", (bool)$this->public);
         $elgg_entity->set("tricky_topic", (int)$this->tricky_topic);
         $elgg_entity->set("target", (string)$this->target);

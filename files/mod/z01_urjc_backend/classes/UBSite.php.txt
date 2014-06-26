@@ -21,6 +21,13 @@ class UBSite{
      */
     const SUBTYPE = "UBSite";
 
+    public $id = 0;
+    public $name = "";
+    public $description = "";
+    public $url = "";
+    public $owner_id = 0;
+    public $time_created = 0;
+
     /**
      * Constructor
      *
@@ -46,11 +53,13 @@ class UBSite{
     }
 
     /**
-     * @return mixed
+     * Saves Site parameters into Elgg
+     *
+     * @return int Site ID
      */
     protected function save(){
         $elgg_entity = elgg_get_site_entity();
-        $this->copy_to_elgg($elgg_entity);
+        $this->save_to_elgg($elgg_entity);
         $elgg_entity->save();
         return $this->id = $elgg_entity->get("guid");
     }
@@ -58,7 +67,7 @@ class UBSite{
     /**
      * @param ElggEntity $elgg_entity
      */
-    protected function copy_to_elgg($elgg_entity){
+    protected function save_to_elgg($elgg_entity){
         $elgg_entity->set("name", (string)$this->name);
         $elgg_entity->set("description", (string)$this->description);
         $elgg_entity->set("url", (string)$this->url);
@@ -66,6 +75,10 @@ class UBSite{
 
     static function get_site(){
         return new static();
+    }
+
+    static function get_site_id(){
+        return (int)datalist_get("default_site");
     }
 
     /**
