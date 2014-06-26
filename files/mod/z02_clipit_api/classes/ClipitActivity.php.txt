@@ -356,7 +356,7 @@ class ClipitActivity extends UBItem{
         $tasks = static::get_tasks($id);
         $storyboard_array = array();
         foreach($tasks as $task_id){
-            $storyboard_array[$task_id][] = ClipitTask::get_storyboards($task_id);
+            $storyboard_array[$task_id] = ClipitTask::get_storyboards($task_id);
         }
         return $storyboard_array;
     }
@@ -373,7 +373,7 @@ class ClipitActivity extends UBItem{
         $tasks = static::get_tasks($id);
         $video_array = array();
         foreach ($tasks as $task_id) {
-            $video_array[$task_id][] = ClipitTask::get_videos($task_id);
+            $video_array[$task_id] = ClipitTask::get_videos($task_id);
         }
         return $video_array;
     }
