@@ -15,6 +15,12 @@ function expose_site_functions(){
         null,
         "Return the Site object.",
         'GET', false, true);
+    expose_function(
+        $api_suffix . "get_site_id",
+        $class_suffix . "get_site_id",
+        null,
+        "Return the Site ID.",
+        'GET', false, true);
     unexpose_function("system.api.list");
     expose_function(
         $api_suffix . "api_list",
@@ -45,7 +51,7 @@ function expose_site_functions(){
             "token" => array(
                 "type" => "string",
                 "required" => true)),
-        "Remove an API user authentication token from the system",
+        "Remove an API user authentication token from the Site",
         'POST', false, true);
     expose_function(
         $api_suffix . "lookup",
@@ -60,6 +66,100 @@ function expose_site_functions(){
         $api_suffix . "get_domain",
         $class_suffix . "get_domain",
         null,
-        "Get the server domain from the system",
+        "Get the server domain from the Site",
         'GET', false, true);
+    expose_function(
+        $api_suffix . "add_storyboards",
+        $class_suffix . "add_storyboards",
+        array("storyboard_array" => array(
+            "type" => "array",
+            "required" => true)),
+        "Add Storyboards by Id to the Site",
+        "POST", false, true);
+    expose_function(
+        $api_suffix . "set_storyboards",
+        $class_suffix . "set_storyboards",
+        array("storyboard_array" => array(
+            "type" => "array",
+            "required" => true)),
+        "Set Storyboards by Id to the Site",
+        "POST", false, true);
+    expose_function(
+        $api_suffix . "remove_storyboards",
+        $class_suffix . "remove_storyboards",
+        array("storyboard_array" => array(
+            "type" => "array",
+            "required" => true)),
+        "Removes Storyboards by Id from the Site",
+        "POST", false, true);
+    expose_function(
+        $api_suffix . "get_storyboards",
+        $class_suffix . "get_storyboards",
+        null,
+        "Gets Storyboards from the Site",
+        "GET", false, true);
+    expose_function(
+        $api_suffix . "add_videos",
+        $class_suffix . "add_videos",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "video_array" => array(
+                "type" => "array",
+                "required" => true)),
+        "Add Videos by Id to the Site",
+        "POST", false, true);
+    expose_function(
+        $api_suffix . "set_videos",
+        $class_suffix . "set_videos",
+        array("video_array" => array(
+            "type" => "array",
+            "required" => true)),
+        "Set Videos by Id to the Site",
+        "POST", false, true);
+    expose_function(
+        $api_suffix . "remove_videos",
+        $class_suffix . "remove_videos",
+        array("video_array" => array(
+            "type" => "array",
+            "required" => true)),
+        "Removes Videos by Id from the Site",
+        "POST", false, true);
+    expose_function(
+        $api_suffix . "get_videos",
+        $class_suffix . "get_videos",
+        null,
+        "Gets Videos from the Site",
+        "GET", false, true);
+    expose_function(
+        $api_suffix . "add_files",
+        $class_suffix . "add_files",
+        array("file_array" => array(
+            "type" => "array",
+            "required" => true)),
+        "Add Files by Id to the Site",
+        "POST", false, true);
+    expose_function(
+        $api_suffix . "set_files",
+        $class_suffix . "set_files",
+        array("file_array" => array(
+            "type" => "array",
+            "required" => true)),
+        "Set Files by Id to the Site",
+        "POST", false, true);
+    expose_function(
+        $api_suffix . "remove_files",
+        $class_suffix . "remove_files",
+        array("file_array" => array(
+            "type" => "array",
+            "required" => true)),
+        "Removes Files by Id from the Site",
+        "POST", false, true);
+    expose_function(
+        $api_suffix . "get_files",
+        $class_suffix . "get_files",
+        null,
+        "Gets Files from the Site",
+        "GET", false, true);
 }

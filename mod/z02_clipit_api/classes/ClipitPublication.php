@@ -91,7 +91,7 @@ class ClipitPublication extends UBItem{
             $item_tags = static::get_tags((int) $item_id);
             foreach($tag_array as $search_tag){
                 if(array_search($search_tag, $item_tags) !== false){
-                    $return_array[] = new static((int)$item_id);
+                    $return_array[(int)$item_id] = new static((int)$item_id);
                     break;
                 }
             }

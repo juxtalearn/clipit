@@ -85,7 +85,7 @@ class UBUser extends UBItem{
         } elseif(!$elgg_user = new ElggUser($this->id)){
             return false;
         }
-        $this->copy_to_elgg($elgg_user);
+        $this->save_to_elgg($elgg_user);
         $elgg_user->save();
         return $this->id = $elgg_user->guid;
     }
@@ -107,8 +107,8 @@ class UBUser extends UBItem{
      *
      * @param ElggUser $elgg_user Elgg User object instance to save $this to
      */
-    protected function copy_to_elgg($elgg_user){
-        parent::copy_to_elgg($elgg_user);
+    protected function save_to_elgg($elgg_user){
+        parent::save_to_elgg($elgg_user);
         $elgg_user->email = (string)$this->email;
         $elgg_user->username = (string)$this->login;
         $elgg_user->password = (string)$this->password;

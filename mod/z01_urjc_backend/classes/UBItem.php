@@ -93,7 +93,7 @@ class UBItem{
             $elgg_object->type = static::TYPE;
             $elgg_object->subtype = static::SUBTYPE;
         }
-        $this->copy_to_elgg($elgg_object);
+        $this->save_to_elgg($elgg_object);
         $elgg_object->save();
         return $this->id = $elgg_object->get("guid");
     }
@@ -119,7 +119,7 @@ class UBItem{
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function copy_to_elgg($elgg_entity){
+    protected function save_to_elgg($elgg_entity){
         $elgg_entity->set("name", (string)$this->name);
         $elgg_entity->set("description", (string)$this->description);
         $elgg_entity->set("url", (string)$this->url);

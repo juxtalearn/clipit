@@ -37,8 +37,8 @@ class ClipitLA extends UBFile{
      *
      * @param ElggFile $elgg_file Elgg object instance to save $this to
      */
-    protected function copy_to_elgg($elgg_file){
-        parent::copy_to_elgg($elgg_file);
+    protected function save_to_elgg($elgg_file){
+        parent::save_to_elgg($elgg_file);
         $elgg_file->set("return_id", $this->return_id);
         $elgg_file->set("status_code", $this->status_code);
     }

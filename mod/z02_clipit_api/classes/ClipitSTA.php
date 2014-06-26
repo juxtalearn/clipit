@@ -41,8 +41,8 @@ class ClipitSTA extends ClipitFile{
      *
      * @param ElggFile $elgg_file Elgg object instance to save $this to
      */
-    protected function copy_to_elgg($elgg_file){
-        parent::copy_to_elgg($elgg_file);
+    protected function save_to_elgg($elgg_file){
+        parent::save_to_elgg($elgg_file);
         $elgg_file->set("resource_url", (string)$this->resource_url);
         $elgg_file->set("tricky_topic", (int)$this->tricky_topic);
     }

@@ -22,26 +22,96 @@ class ClipitSite extends UBSite{
      */
     const SUBTYPE = "ClipitSite";
 
+    const REL_SITE_FILE = "site-file";
     const REL_SITE_VIDEO = "site-video";
     const REL_SITE_STORYBOARD = "site-storyboard";
-    const REL_SITE_FILE = "site-file";
 
     public $file_array = array();
-    public $storyboard_array = array();
     public $video_array = array();
+    public $storyboard_array = array();
 
 
     protected function load_from_elgg($elgg_entity){
         parent::load_from_elgg($elgg_entity);
-        /** @todo: load all arrays */
+        $this->file_array = (array)static::get_files();
+        $this->video_array = (array)static::get_videos();
+        $this->storyboard_array = (array)static::get_storyboards();
     }
 
     /**
-     * @param ElggEntity $elgg_entity
+     * Saves Site parameters into Elgg
+     *
+     * @return int Site ID
      */
-    protected function copy_to_elgg($elgg_entity)
+    protected function save()
     {
-        parent::copy_to_elgg($elgg_entity);
-        /** @todo: save all arrays */
+        $site_id = parent::save();
+        static::set_files($this->file_array);
+        static::set_videos($this->video_array);
+        static::set_storyboards($this->storyboard_array);
+        return $site_id;
+    }
+
+    // FILES
+    static function add_files($file_array){
+        $id = static::get_site_id();
+        return UBCollection::add_items($id, $file_array, static::REL_SITE_FILE);
+    }
+
+    static function set_files($file_array){
+        $id = static::get_site_id();
+        return UBCollection::set_items($id, $file_array, static::REL_SITE_FILE);
+    }
+
+    static function remove_files($file_array){
+        $id = static::get_site_id();
+        return UBCollection::remove_items($id, $file_array, static::REL_SITE_FILE);
+    }
+
+    static function get_files(){
+        $id = static::get_site_id();
+        return UBCollection::get_items($id, static::REL_SITE_FILE);
+    }
+
+    // VIDEOS
+    static function add_videos($video_array){
+        $id = static::get_site_id();
+        return UBCollection::add_items($id, $video_array, static::REL_SITE_VIDEO);
+    }
+
+    static function set_videos($video_array){
+        $id = static::get_site_id();
+        return UBCollection::set_items($id, $video_array, static::REL_SITE_VIDEO);
+    }
+
+    static function remove_videos($video_array){
+        $id = static::get_site_id();
+        return UBCollection::remove_items($id, $video_array, static::REL_SITE_VIDEO);
+    }
+
+    static function get_videos(){
+        $id = static::get_site_id();
+        return UBCollection::get_items($id, static::REL_SITE_VIDEO);
+    }
+
+    // STORYBOARDS
+    static function add_storyboards($storyboard_array){
+        $id = static::get_site_id();
+        return UBCollection::add_items($id, $storyboard_array, static::REL_SITE_STORYBOARD);
+    }
+
+    static function set_storyboards($storyboard_array){
+        $id = static::get_site_id();
+        return UBCollection::set_items($id, $storyboard_array, static::REL_SITE_STORYBOARD);
+    }
+
+    static function remove_storyboards($storyboard_array){
+        $id = static::get_site_id();
+        return UBCollection::remove_items($id, $storyboard_array, static::REL_SITE_STORYBOARD);
+    }
+
+    static function get_storyboards(){
+        $id = static::get_site_id();
+        return UBCollection::get_items($id, static::REL_SITE_STORYBOARD);
     }
 }

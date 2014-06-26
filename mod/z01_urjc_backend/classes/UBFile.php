@@ -99,7 +99,7 @@ class UBFile extends UBItem{
             $elgg_file->type = static::TYPE;
             $elgg_file->subtype = static::SUBTYPE;
         }
-        $this->copy_to_elgg($elgg_file);
+        $this->save_to_elgg($elgg_file);
         $elgg_file->save();
         return $this->id = $elgg_file->guid;
     }
@@ -111,7 +111,7 @@ class UBFile extends UBItem{
      *
      * @param ElggFile $elgg_file Elgg object instance to save $this to
      */
-    protected function copy_to_elgg($elgg_file){
+    protected function save_to_elgg($elgg_file){
         if($this->time_created == 0){ // new file
             $elgg_file->set("filename", (string)rand());
         }
