@@ -31,9 +31,9 @@ class UBMessage extends UBItem{
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_object){
-        parent::load_from_elgg($elgg_object);
-        $this->read_array = (array)$elgg_object->get("read_array");
+    protected function load_from_elgg($elgg_entity){
+        parent::load_from_elgg($elgg_entity);
+        $this->read_array = (array)$elgg_entity->get("read_array");
         $this->destination = static::get_destination($this->id);
         $this->file_array = static::get_files($this->id);
     }
@@ -120,14 +120,17 @@ class UBMessage extends UBItem{
         $message = new static($id);
         return $message->owner_id;
     }
-    static function get_files($id){
-        return UBCollection::get_items($id, static::REL_MESSAGE_FILE);
-    }
     static function add_files($id, $file_array){
         return UBCollection::add_items($id, $file_array, static::REL_MESSAGE_FILE, true);
     }
+    static function set_files($id, $file_array){
+        return UBCollection::set_items($id, $file_array, static::REL_MESSAGE_FILE, true);
+    }
     static function remove_files($id, $file_array){
         return UBCollection::remove_items($id, $file_array, static::REL_MESSAGE_FILE);
+    }
+    static function get_files($id){
+        return UBCollection::get_items($id, static::REL_MESSAGE_FILE);
     }
     static function get_read_status($id, $user_array = null){
         $props = static::get_properties($id, array("read_array", "owner_id"));
