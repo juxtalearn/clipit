@@ -26,7 +26,7 @@ class UBFile extends UBItem{
     const TIMESTAMP_DELIMITER = "#";
     const DEFAULT_FILENAME = "unnamed_file";
     const THUMB_SMALL = 64;
-    const THUMB_NORMAL = 128;
+    const THUMB_MEDIUM = 128;
     const THUMB_LARGE = 256;
     /**
      * Class variables
@@ -36,7 +36,7 @@ class UBFile extends UBItem{
     public $file_path = "";
     public $temp_path = "";
     public $thumb_small = array();
-    public $thumb_normal = array();
+    public $thumb_medium = array();
     public $thumb_large = array();
     public $mime_type = array();
 
@@ -73,8 +73,8 @@ class UBFile extends UBItem{
         if(!empty($elgg_file->thumb_small)){
             $this->thumb_small["path"] = (string)$elgg_file->get("thumb_small");
             $this->thumb_small["url"] = (string)elgg_get_site_url()."file/thumbnail/small/".$this->id;
-            $this->thumb_normal["path"] = (string)$elgg_file->get("thumb_normal");
-            $this->thumb_normal["url"] = (string)elgg_get_site_url()."file/thumbnail/normal/".$this->id;
+            $this->thumb_medium["path"] = (string)$elgg_file->get("thumb_medium");
+            $this->thumb_medium["url"] = (string)elgg_get_site_url()."file/thumbnail/medium/".$this->id;
             $this->thumb_large["path"] = (string)$elgg_file->get("thumb_large");
             $this->thumb_large["url"] = (string)elgg_get_site_url()."file/thumbnail/large/".$this->id;
         }
@@ -136,7 +136,7 @@ class UBFile extends UBItem{
         } else{
             if(!empty($this->thumb_small)){
                 $elgg_file->set("thumb_small", (string)$this->thumb_small["path"]);
-                $elgg_file->set("thumb_normal", (string)$this->thumb_normal["path"]);
+                $elgg_file->set("thumb_medium", (string)$this->thumb_medium["path"]);
                 $elgg_file->set("thumb_large", (string)$this->thumb_large["path"]);
             }
         }
@@ -246,13 +246,13 @@ class UBFile extends UBItem{
                 unset($thumbnail);
             }
 
-            $thumbnail = get_resized_image_from_existing_file($filestore_name, static::THUMB_NORMAL, static::THUMB_NORMAL, false);
+            $thumbnail = get_resized_image_from_existing_file($filestore_name, static::THUMB_MEDIUM, static::THUMB_MEDIUM, false);
             if ($thumbnail) {
-                $thumb->setFilename("thumb_normal-".$file_name);
+                $thumb->setFilename("thumb_medium-".$file_name);
                 $thumb->open("write");
                 $thumb->write($thumbnail);
                 $thumb->close();
-                $elgg_file->set("thumb_normal", (string)$thumb->getFilenameOnFilestore());
+                $elgg_file->set("thumb_medium", (string)$thumb->getFilenameOnFilestore());
                 unset($thumbnail);
             }
 
