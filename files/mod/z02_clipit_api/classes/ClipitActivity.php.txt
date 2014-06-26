@@ -294,7 +294,7 @@ class ClipitActivity extends UBItem{
         return UBCollection::get_items($id, static::REL_ACTIVITY_TASK);
     }
 
-    // STORYBOARDS
+    // RESOURCE STORYBOARDS
     static function add_storyboards($id, $storyboard_array){
         return UBCollection::add_items($id, $storyboard_array, static::REL_ACTIVITY_STORYBOARD);
     }
@@ -311,7 +311,7 @@ class ClipitActivity extends UBItem{
         return UBCollection::get_items($id, static::REL_ACTIVITY_STORYBOARD);
     }
 
-    // VIDEOS
+    // RESOURCE VIDEOS
     static function add_videos($id, $video_array){
         return UBCollection::add_items($id, $video_array, static::REL_ACTIVITY_VIDEO);
     }
@@ -328,7 +328,7 @@ class ClipitActivity extends UBItem{
         return UBCollection::get_items($id, static::REL_ACTIVITY_VIDEO);
     }
 
-    // FILES
+    // RESOURCE FILES
     static function add_files($id, $file_array){
         return UBCollection::add_items($id, $file_array, static::REL_ACTIVITY_FILE);
     }
@@ -343,5 +343,38 @@ class ClipitActivity extends UBItem{
 
     static function get_files($id){
         return UBCollection::get_items($id, static::REL_ACTIVITY_FILE);
+    }
+
+    // PUBLISHED STORYBOARDS
+    /**
+     * Gets all published Storyboards from the Tasks contained inside an Activity
+     *
+     * @param int $id Activity ID
+     * @return ClipitStoryboard[] Array of Storyboards, with Task ID as key
+     */
+    static function get_published_storyboards($id){
+        $tasks = static::get_tasks($id);
+        $storyboard_array = array();
+        foreach($tasks as $task_id){
+            $storyboard_array[$task_id][] = ClipitTask::get_storyboards($task_id);
+        }
+        return $storyboard_array;
+    }
+
+    // PUBLISHED VIDEOS
+    /**
+     * Gets all published Videos from the Tasks contained inside an Activity
+     *
+     * @param int $id Activity ID
+     * @return ClipitVideo[] Array of Videos, with Task ID as key
+     */
+    static function get_published_videos($id)
+    {
+        $tasks = static::get_tasks($id);
+        $video_array = array();
+        foreach ($tasks as $task_id) {
+            $video_array[$task_id][] = ClipitTask::get_videos($task_id);
+        }
+        return $video_array;
     }
 }
