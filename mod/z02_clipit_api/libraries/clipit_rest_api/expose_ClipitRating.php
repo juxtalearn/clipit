@@ -35,7 +35,7 @@ function expose_rating_functions(){
         $api_suffix . "add_tag_ratings",
         $class_suffix . "add_tag_ratings",
         array(
-            "rating_id" => array(
+            "id" => array(
                 "type" => "int",
                 "required" => true),
             "tag_rating_array" => array(
@@ -47,7 +47,7 @@ function expose_rating_functions(){
         $api_suffix . "set_tag_ratings",
         $class_suffix . "set_tag_ratings",
         array(
-            "rating_id" => array(
+            "id" => array(
                 "type" => "int",
                 "required" => true),
             "tag_rating_array" => array(
@@ -59,7 +59,7 @@ function expose_rating_functions(){
         $api_suffix . "remove_tag_ratings",
         $class_suffix . "remove_tag_ratings",
         array(
-            "rating_id" => array(
+            "id" => array(
                 "type" => "int",
                 "required" => true),
             "tag_rating_array" => array(
@@ -71,7 +71,7 @@ function expose_rating_functions(){
         $api_suffix . "get_tag_ratings",
         $class_suffix . "get_tag_ratings",
         array(
-            "rating_id" => array(
+            "id" => array(
                 "type" => "int",
                 "required" => true)),
         "Get Tag Ratings from a Rating.",
@@ -80,7 +80,7 @@ function expose_rating_functions(){
         $api_suffix . "add_performance_ratings",
         $class_suffix . "add_performance_ratings",
         array(
-            "rating_id" => array(
+            "id" => array(
                 "type" => "int",
                 "required" => true),
             "performance_rating_array" => array(
@@ -92,7 +92,7 @@ function expose_rating_functions(){
         $api_suffix . "set_performance_ratings",
         $class_suffix . "set_performance_ratings",
         array(
-            "rating_id" => array(
+            "id" => array(
                 "type" => "int",
                 "required" => true),
             "performance_rating_array" => array(
@@ -104,7 +104,7 @@ function expose_rating_functions(){
         $api_suffix . "remove_performance_ratings",
         $class_suffix . "remove_performance_ratings",
         array(
-            "rating_id" => array(
+            "id" => array(
                 "type" => "int",
                 "required" => true),
             "performance_rating_array" => array(
@@ -116,7 +116,7 @@ function expose_rating_functions(){
         $api_suffix . "get_performance_ratings",
         $class_suffix . "get_performance_ratings",
         array(
-            "rating_id" => array(
+            "id" => array(
                 "type" => "int",
                 "required" => true)),
         "Get Performance Ratings from a Rating.",

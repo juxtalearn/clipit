@@ -10,5 +10,5 @@ function expose_video_functions(){
     $api_suffix = "clipit.video.";
     $class_suffix = "ClipitVideo::";
     expose_common_functions($api_suffix, $class_suffix);
-    expose_common_publication_functions($api_suffix, $class_suffix);
+    expose_common_resource_functions($api_suffix, $class_suffix);
 }

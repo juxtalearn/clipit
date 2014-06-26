@@ -42,7 +42,7 @@ function expose_user_functions(){
         $api_suffix . "set_role_student",
         $class_suffix . "set_role_student",
         array(
-            "user_id" => array(
+            "id" => array(
                 "type" => "int",
                 "required" => true)),
         "Set the Role of a User to Student.",
@@ -51,7 +51,7 @@ function expose_user_functions(){
         $api_suffix . "set_role_teacher",
         $class_suffix . "set_role_teacher",
         array(
-            "user_id" => array(
+            "id" => array(
                 "type" => "int",
                 "required" => true)),
         "Set the Role of a User to Student.",
@@ -60,7 +60,7 @@ function expose_user_functions(){
         $api_suffix . "set_role_admin",
         $class_suffix . "set_role_admin",
         array(
-            "user_id" => array(
+            "id" => array(
                 "type" => "int",
                 "required" => true)),
         "Set the Role of a User to Student.",
@@ -69,7 +69,7 @@ function expose_user_functions(){
         $api_suffix . "get_last_login",
         $class_suffix . "get_last_login",
         array(
-            "user_id" => array(
+            "id" => array(
                 "type" => "int",
                 "required" => true)),
         "Get the last login time for a User.",
@@ -78,7 +78,7 @@ function expose_user_functions(){
         $api_suffix . "get_groups",
         $class_suffix . "get_groups",
         array(
-            "user_id" => array(
+            "id" => array(
                 "type" => "int",
                 "required" => true)),
         "Get all Groups in which this user is a member of.",
@@ -87,12 +87,24 @@ function expose_user_functions(){
         $api_suffix . "get_activities",
         $class_suffix . "get_activities",
         array(
-            "user_id" => array(
+            "id" => array(
                 "type" => "int",
                 "required" => true),
             "joined_only" => array(
                 "type" => "bool",
                 "required" => false)),
         "Get all Activities in which this user is a called to, or has joined.",
+        'GET', false, true);
+    expose_function(
+        $api_suffix . "get_avatar",
+        $class_suffix . "get_avatar",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "size" => array(
+                "type" => "string",
+                "required" => false)),
+        "Get Avatar for a User.",
         'GET', false, true);
 }

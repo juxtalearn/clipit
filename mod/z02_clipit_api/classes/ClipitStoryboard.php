@@ -16,21 +16,21 @@
  * Class ClipitStoryboard
  *
  */
-class ClipitStoryboard extends ClipitPublication{
+class ClipitStoryboard extends ClipitResource{
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitStoryboard";
 
-    const REL_PUBLICATION_TAG = "storyboard-tag";
-    const REL_PUBLICATION_LABEL = "storyboard-label";
-    const REL_PUBLICATION_COMMENT = "storyboard-comment";
-    const REL_PUBLICATION_PERFORMANCE = "storyboard-performance";
+    const REL_RESOURCE_TAG = "storyboard-tag";
+    const REL_RESOURCE_LABEL = "storyboard-label";
+    const REL_RESOURCE_COMMENT = "storyboard-comment";
+    const REL_RESOURCE_PERFORMANCE = "storyboard-performance";
 
-    const REL_GROUP_PUBLICATION = ClipitGroup::REL_GROUP_STORYBOARD;
-    const REL_TASK_PUBLICATION = ClipitTask::REL_TASK_STORYBOARD;
-    const REL_ACTIVITY_PUBLICATION = ClipitActivity::REL_ACTIVITY_STORYBOARD;
-    const REL_SITE_PUBLICATION = ClipitSite::REL_SITE_STORYBOARD;
+    const REL_GROUP_RESOURCE = ClipitGroup::REL_GROUP_STORYBOARD;
+    const REL_TASK_RESOURCE = ClipitTask::REL_TASK_STORYBOARD;
+    const REL_ACTIVITY_RESOURCE = ClipitActivity::REL_ACTIVITY_STORYBOARD;
+    const REL_SITE_RESOURCE = ClipitSite::REL_SITE_STORYBOARD;
 
     public $file = 0;
 

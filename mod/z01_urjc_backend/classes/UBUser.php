@@ -39,6 +39,8 @@ class UBUser extends UBItem{
     public $role = "user";
     public $language = "";
     public $last_login = 0;
+    public $avatar_file = 0;
+
     private $hash = "";
 
     /**
@@ -71,6 +73,7 @@ class UBUser extends UBItem{
         $this->role = (string)$elgg_user->get("role");
         $this->language = (string)$elgg_user->language;
         $this->last_login = (int)$elgg_user->get("last_login");
+        $this->avatar_file = (int)$elgg_user->get("avatar_file");
     }
 
     /**
@@ -121,6 +124,7 @@ class UBUser extends UBItem{
         }
         $elgg_user->owner_guid = 0;
         $elgg_user->container_guid = 0;
+        $elgg_user->set("avatar_file", (int)$this->avatar_file);
     }
     /**
      * Creates an encoded user password using a random hash for encoding.
@@ -283,5 +287,27 @@ class UBUser extends UBItem{
     static function get_last_login($id){
         $user = new static($id);
         return $user->last_login;
+    }
+
+    static function get_avatar($id, $size = "medium"){
+        $prop_value_array = static::get_properties($id, array("avatar_file"));
+        $avatar_file = new ClipitFile((int)$prop_value_array["avatar_file"]);
+        if(empty($avatar_file)){
+            return null;
+        }
+
+        $avatar = null;
+        switch($size){
+            case "small":
+                $avatar = (array)$avatar_file->thumb_small;
+                break;
+            case "medium":
+                $avatar = (array)$avatar_file->thumb_medium;
+                break;
+            case "large":
+                $avatar = (array)$avatar_file->thumb_large;
+                break;
+        }
+        return $avatar;
     }
 }

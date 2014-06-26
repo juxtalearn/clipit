@@ -382,4 +382,22 @@ function expose_activity_functions(){
                 "required" => true)),
         "Gets Files from an Activity",
         "GET", false, true);
+    expose_function(
+        $api_suffix . "get_published_storyboards",
+        $class_suffix . "get_published_storyboards",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Gets Published Storyboards from Tasks of an Activity",
+        "GET", false, true);
+    expose_function(
+        $api_suffix . "get_published_videos",
+        $class_suffix . "get_published_videos",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Gets Published Videos from Tasks of an Activity",
+        "GET", false, true);
 }
