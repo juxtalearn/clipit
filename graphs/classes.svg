@@ -951,7 +951,7 @@
 <text text-anchor="middle" x="680" y="-782.6" font-family="Times Roman,serif" font-size="11.00">ClipitSTA</text>
 </g>
 <!-- \\ClipitFile -->
-<g id="node114" class="node"><title>\\ClipitFile</title>
+<g id="node113" class="node"><title>\\ClipitFile</title>
 <polygon fill="none" stroke="black" points="497,-965 439,-965 439,-929 497,-929 497,-965"/>
 <text text-anchor="middle" x="468" y="-944.6" font-family="Times Roman,serif" font-size="11.00">ClipitFile</text>
 </g>
@@ -975,15 +975,15 @@
 <polygon fill="none" stroke="black" points="502,-319 434,-319 434,-283 502,-283 502,-319"/>
 <text text-anchor="middle" x="468" y="-298.6" font-family="Times Roman,serif" font-size="11.00">ClipitVideo</text>
 </g>
-<!-- \\ClipitPublication -->
-<g id="node108" class="node"><title>\\ClipitPublication</title>
-<polygon fill="none" stroke="black" points="309,-263 219,-263 219,-227 309,-227 309,-263"/>
-<text text-anchor="middle" x="264" y="-242.6" font-family="Times Roman,serif" font-size="11.00">ClipitPublication</text>
+<!-- \\ClipitResource -->
+<g id="node115" class="node"><title>\\ClipitResource</title>
+<polygon fill="none" stroke="black" points="305,-263 223,-263 223,-227 305,-227 305,-263"/>
+<text text-anchor="middle" x="264" y="-242.6" font-family="Times Roman,serif" font-size="11.00">ClipitResource</text>
 </g>
-<!-- \\ClipitVideo&#45;&gt;\\ClipitPublication -->
-<g id="edge165" class="edge"><title>\\ClipitVideo&#45;&gt;\\ClipitPublication</title>
-<path fill="none" stroke="black" d="M433.855,-291.627C402.752,-283.089 356.242,-270.322 319.751,-260.305"/>
-<polygon fill="none" stroke="black" points="320.316,-256.83 309.746,-257.558 318.463,-263.58 320.316,-256.83"/>
+<!-- \\ClipitVideo&#45;&gt;\\ClipitResource -->
+<g id="edge165" class="edge"><title>\\ClipitVideo&#45;&gt;\\ClipitResource</title>
+<path fill="none" stroke="black" d="M433.855,-291.627C401.611,-282.776 352.811,-269.38 315.779,-259.214"/>
+<polygon fill="none" stroke="black" points="316.24,-255.711 305.67,-256.439 314.386,-262.462 316.24,-255.711"/>
 </g>
 <!-- \\ClipitPerformanceRating -->
 <g id="node99" class="node"><title>\\ClipitPerformanceRating</title>
@@ -1075,75 +1075,75 @@
 <path fill="none" stroke="black" d="M232.178,-469.479C221.014,-473.654 209.021,-479.638 200,-488 148.686,-535.566 180.904,-582.21 128,-628 120.352,-634.62 110.609,-639.276 101.046,-642.54"/>
 <polygon fill="none" stroke="black" points="99.8252,-639.251 91.2408,-645.461 101.824,-645.96 99.8252,-639.251"/>
 </g>
-<!-- \\ClipitPublication&#45;&gt;\\UBItem -->
-<g id="edge185" class="edge"><title>\\ClipitPublication&#45;&gt;\\UBItem</title>
-<path fill="none" stroke="black" d="M218.246,-257.7C211.33,-261.352 204.886,-266.026 200,-272 97.7996,-396.954 234.396,-506.6 128,-628 121.03,-635.953 111.051,-641.033 101.04,-644.277"/>
-<polygon fill="none" stroke="black" points="99.873,-640.967 91.1281,-646.948 101.694,-647.726 99.873,-640.967"/>
-</g>
 <!-- \\ClipitLabel -->
-<g id="node109" class="node"><title>\\ClipitLabel</title>
+<g id="node108" class="node"><title>\\ClipitLabel</title>
 <polygon fill="none" stroke="black" points="297,-425 231,-425 231,-389 297,-389 297,-425"/>
 <text text-anchor="middle" x="264" y="-404.6" font-family="Times Roman,serif" font-size="11.00">ClipitLabel</text>
 </g>
 <!-- \\ClipitLabel&#45;&gt;\\UBItem -->
-<g id="edge187" class="edge"><title>\\ClipitLabel&#45;&gt;\\UBItem</title>
+<g id="edge185" class="edge"><title>\\ClipitLabel&#45;&gt;\\UBItem</title>
 <path fill="none" stroke="black" d="M230.294,-415.403C219.466,-419.505 208.172,-425.463 200,-434 136.409,-500.442 193.817,-563.763 128,-628 120.559,-635.263 110.614,-640.134 100.785,-643.398"/>
 <polygon fill="none" stroke="black" points="99.7532,-640.053 91.093,-646.156 101.669,-646.785 99.7532,-640.053"/>
 </g>
 <!-- \\ClipitQuiz -->
-<g id="node110" class="node"><title>\\ClipitQuiz</title>
+<g id="node109" class="node"><title>\\ClipitQuiz</title>
 <polygon fill="none" stroke="black" points="295,-371 233,-371 233,-335 295,-335 295,-371"/>
 <text text-anchor="middle" x="264" y="-350.6" font-family="Times Roman,serif" font-size="11.00">ClipitQuiz</text>
 </g>
 <!-- \\ClipitQuiz&#45;&gt;\\UBItem -->
-<g id="edge189" class="edge"><title>\\ClipitQuiz&#45;&gt;\\UBItem</title>
+<g id="edge187" class="edge"><title>\\ClipitQuiz&#45;&gt;\\UBItem</title>
 <path fill="none" stroke="black" d="M232.252,-360.226C220.695,-364.298 208.416,-370.54 200,-380 123.712,-465.751 207.164,-544.898 128,-628 120.767,-635.593 110.799,-640.566 100.881,-643.822"/>
 <polygon fill="none" stroke="black" points="99.7843,-640.494 91.0838,-646.54 101.656,-647.239 99.7843,-640.494"/>
 </g>
 <!-- \\ClipitChat -->
-<g id="node111" class="node"><title>\\ClipitChat</title>
+<g id="node110" class="node"><title>\\ClipitChat</title>
 <polygon fill="none" stroke="black" points="499,-373 437,-373 437,-337 499,-337 499,-373"/>
 <text text-anchor="middle" x="468" y="-352.6" font-family="Times Roman,serif" font-size="11.00">ClipitChat</text>
 </g>
 <!-- \\ClipitChat&#45;&gt;\\UBMessage -->
-<g id="edge191" class="edge"><title>\\ClipitChat&#45;&gt;\\UBMessage</title>
+<g id="edge189" class="edge"><title>\\ClipitChat&#45;&gt;\\UBMessage</title>
 <path fill="none" stroke="black" d="M436.572,-346.373C402.818,-337.107 348.839,-322.29 310.24,-311.694"/>
 <polygon fill="none" stroke="black" points="310.856,-308.234 300.287,-308.961 309.003,-314.984 310.856,-308.234"/>
 </g>
 <!-- \\ClipitStoryboard -->
-<g id="node112" class="node"><title>\\ClipitStoryboard</title>
+<g id="node111" class="node"><title>\\ClipitStoryboard</title>
 <polygon fill="none" stroke="black" points="512,-265 424,-265 424,-229 512,-229 512,-265"/>
 <text text-anchor="middle" x="468" y="-244.6" font-family="Times Roman,serif" font-size="11.00">ClipitStoryboard</text>
 </g>
-<!-- \\ClipitStoryboard&#45;&gt;\\ClipitPublication -->
-<g id="edge193" class="edge"><title>\\ClipitStoryboard&#45;&gt;\\ClipitPublication</title>
-<path fill="none" stroke="black" d="M423.483,-246.564C393.123,-246.266 352.673,-245.87 320.108,-245.551"/>
-<polygon fill="none" stroke="black" points="319.869,-242.048 309.835,-245.45 319.8,-249.048 319.869,-242.048"/>
+<!-- \\ClipitStoryboard&#45;&gt;\\ClipitResource -->
+<g id="edge191" class="edge"><title>\\ClipitStoryboard&#45;&gt;\\ClipitResource</title>
+<path fill="none" stroke="black" d="M423.483,-246.564C391.853,-246.254 349.273,-245.836 316.066,-245.511"/>
+<polygon fill="none" stroke="black" points="315.673,-242.007 305.639,-245.409 315.605,-249.007 315.673,-242.007"/>
 </g>
 <!-- \\ClipitSite -->
-<g id="node113" class="node"><title>\\ClipitSite</title>
+<g id="node112" class="node"><title>\\ClipitSite</title>
 <polygon fill="none" stroke="black" points="709,-587 651,-587 651,-551 709,-551 709,-587"/>
 <text text-anchor="middle" x="680" y="-566.6" font-family="Times Roman,serif" font-size="11.00">ClipitSite</text>
 </g>
 <!-- \\ClipitSite&#45;&gt;\\UBSite -->
-<g id="edge195" class="edge"><title>\\ClipitSite&#45;&gt;\\UBSite</title>
+<g id="edge193" class="edge"><title>\\ClipitSite&#45;&gt;\\UBSite</title>
 <path fill="none" stroke="black" d="M650.258,-564.652C635.544,-560.996 618.69,-554.288 608,-542 511.746,-431.366 631.188,-331.553 536,-220 528.029,-210.659 516.38,-204.522 504.968,-200.502"/>
 <polygon fill="none" stroke="black" points="505.685,-197.061 495.099,-197.487 503.64,-203.756 505.685,-197.061"/>
 </g>
 <!-- \\ClipitFile&#45;&gt;\\UBFile -->
-<g id="edge197" class="edge"><title>\\ClipitFile&#45;&gt;\\UBFile</title>
+<g id="edge195" class="edge"><title>\\ClipitFile&#45;&gt;\\UBFile</title>
 <path fill="none" stroke="black" d="M438.337,-947C402.021,-947 340.5,-947 301.092,-947"/>
 <polygon fill="none" stroke="black" points="301.091,-943.501 291.091,-947 301.091,-950.501 301.091,-943.501"/>
 </g>
 <!-- \\ClipitPerformanceItem -->
-<g id="node115" class="node"><title>\\ClipitPerformanceItem</title>
+<g id="node114" class="node"><title>\\ClipitPerformanceItem</title>
 <polygon fill="none" stroke="black" points="323,-209 205,-209 205,-173 323,-173 323,-209"/>
 <text text-anchor="middle" x="264" y="-188.6" font-family="Times Roman,serif" font-size="11.00">ClipitPerformanceItem</text>
 </g>
 <!-- \\ClipitPerformanceItem&#45;&gt;\\UBItem -->
-<g id="edge199" class="edge"><title>\\ClipitPerformanceItem&#45;&gt;\\UBItem</title>
+<g id="edge197" class="edge"><title>\\ClipitPerformanceItem&#45;&gt;\\UBItem</title>
 <path fill="none" stroke="black" d="M209.434,-209.026C205.915,-211.63 202.705,-214.605 200,-218 84.7189,-362.704 248.142,-487.306 128,-628 121.133,-636.042 111.185,-641.148 101.17,-644.389"/>
 <polygon fill="none" stroke="black" points="99.9978,-641.08 91.2442,-647.049 101.809,-647.841 99.9978,-641.08"/>
+</g>
+<!-- \\ClipitResource&#45;&gt;\\UBItem -->
+<g id="edge199" class="edge"><title>\\ClipitResource&#45;&gt;\\UBItem</title>
+<path fill="none" stroke="black" d="M222.179,-255.752C213.8,-259.644 205.803,-264.906 200,-272 97.7996,-396.954 234.396,-506.6 128,-628 121.03,-635.953 111.051,-641.033 101.04,-644.277"/>
+<polygon fill="none" stroke="black" points="99.873,-640.967 91.1281,-646.948 101.694,-647.726 99.873,-640.967"/>
 </g>
 </g>
 </svg>

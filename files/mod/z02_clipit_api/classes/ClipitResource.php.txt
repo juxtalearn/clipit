@@ -13,24 +13,24 @@
  */
 
 /**
- * Class ClipiPublication
+ * Class ClipiResource
  *
  */
-class ClipitPublication extends UBItem{
+class ClipitResource extends UBItem{
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
-    const SUBTYPE = "ClipitPublication";
+    const SUBTYPE = "ClipitResource";
 
-    const REL_PUBLICATION_TAG = "publication-tag";
-    const REL_PUBLICATION_LABEL = "publication-label";
-    const REL_PUBLICATION_COMMENT = "publication-comment";
-    const REL_PUBLICATION_PERFORMANCE = "publication-performance";
+    const REL_RESOURCE_TAG = "resource-tag";
+    const REL_RESOURCE_LABEL = "resource-label";
+    const REL_RESOURCE_COMMENT = "resource-comment";
+    const REL_RESOURCE_PERFORMANCE = "resource-performance";
 
-    const REL_GROUP_PUBLICATION = "group-publication";
-    const REL_ACTIVITY_PUBLICATION = "activity-publication";
-    const REL_SITE_PUBLICATION = "site-publication";
-    const REL_TASK_PUBLICATION = "task-publication";
+    const REL_GROUP_RESOURCE = "group-resource";
+    const REL_ACTIVITY_RESOURCE = "activity-resource";
+    const REL_SITE_RESOURCE = "site-resource";
+    const REL_TASK_RESOURCE = "task-resource";
 
     public $tag_array = array();
     public $label_array = array();
@@ -73,8 +73,8 @@ class ClipitPublication extends UBItem{
         $rel_array = get_entity_relationships((int)$this->id);
         $comment_array = array();
         foreach($rel_array as $rel){
-            // Delete comments hanging from the Publication to be deleted
-            if($rel->relationship == static::REL_PUBLICATION_COMMENT){
+            // Delete comments hanging from the Resource to be deleted
+            if($rel->relationship == static::REL_RESOURCE_COMMENT){
                 $comment_array[] = $rel->guid_two;
             }
         }
@@ -120,11 +120,11 @@ class ClipitPublication extends UBItem{
     }
 
     static function get_group($id){
-        $publication = new static($id);
-        if(!empty($publication->cloned_from)){
-            return static::get_group($publication->cloned_from);
+        $resource = new static($id);
+        if(!empty($resource->cloned_from)){
+            return static::get_group($resource->cloned_from);
         }
-        $group = UBCollection::get_items($id, static::REL_GROUP_PUBLICATION, true);
+        $group = UBCollection::get_items($id, static::REL_GROUP_RESOURCE, true);
         if(!empty($group)){
             return array_pop($group);
         } else{
@@ -133,7 +133,7 @@ class ClipitPublication extends UBItem{
     }
 
     static function get_task($id){
-        $task = UBCollection::get_items($id, static::REL_TASK_PUBLICATION, true);
+        $task = UBCollection::get_items($id, static::REL_TASK_RESOURCE, true);
         if(!empty($task)){
             return array_pop($task);
         } else{
@@ -146,7 +146,7 @@ class ClipitPublication extends UBItem{
         if(!empty($group_id)){
             return ClipitGroup::get_activity($group_id);
         } else{
-            $activity = UBCollection::get_items($id, static::REL_ACTIVITY_PUBLICATION, true);
+            $activity = UBCollection::get_items($id, static::REL_ACTIVITY_RESOURCE, true);
             if(!empty($activity)){
                 return array_pop($activity);
             }
@@ -155,7 +155,7 @@ class ClipitPublication extends UBItem{
     }
 
     static function get_site($id){
-        $site = UBCollection::get_items($id, static::REL_SITE_PUBLICATION, true);
+        $site = UBCollection::get_items($id, static::REL_SITE_RESOURCE, true);
         if(!empty($site)){
             return array_pop($site);
         } else{
@@ -164,160 +164,160 @@ class ClipitPublication extends UBItem{
     }
 
     /**
-     * Adds Tags to a Publication, referenced by Id.
+     * Adds Tags to a Resource, referenced by Id.
      *
-     * @param int   $id Id from the Publication to add Tags to
-     * @param array $tag_array Array of Tag Ids to be added to the Publication
+     * @param int   $id Id from the Resource to add Tags to
+     * @param array $tag_array Array of Tag Ids to be added to the Resource
      *
      * @return bool Returns true if success, false if error
      */
     static function add_tags($id, $tag_array){
-        return UBCollection::add_items($id, $tag_array, static::REL_PUBLICATION_TAG);
+        return UBCollection::add_items($id, $tag_array, static::REL_RESOURCE_TAG);
     }
 
     /**
-     * Sets Tags to a Publication, referenced by Id.
+     * Sets Tags to a Resource, referenced by Id.
      *
-     * @param int   $id Id from the Publication to set Tags to
-     * @param array $tag_array Array of Tag Ids to be set to the Publication
+     * @param int   $id Id from the Resource to set Tags to
+     * @param array $tag_array Array of Tag Ids to be set to the Resource
      *
      * @return bool Returns true if success, false if error
      */
     static function set_tags($id, $tag_array){
-        return UBCollection::set_items($id, $tag_array, static::REL_PUBLICATION_TAG);
+        return UBCollection::set_items($id, $tag_array, static::REL_RESOURCE_TAG);
     }
 
     /**
-     * Remove Tags from a Publication.
+     * Remove Tags from a Resource.
      *
-     * @param int   $id Id from Publication to remove Tags from
-     * @param array $tag_array Array of Tag Ids to remove from Publication
+     * @param int   $id Id from Resource to remove Tags from
+     * @param array $tag_array Array of Tag Ids to remove from Resource
      *
      * @return bool Returns true if success, false if error
      */
     static function remove_tags($id, $tag_array){
-        return UBCollection::remove_items($id, $tag_array, static::REL_PUBLICATION_TAG);
+        return UBCollection::remove_items($id, $tag_array, static::REL_RESOURCE_TAG);
     }
 
     /**
-     * Get all Tags from a Publication
+     * Get all Tags from a Resource
      *
-     * @param int $id Id of the Publication to get Tags from
+     * @param int $id Id of the Resource to get Tags from
      *
      * @return array|bool Returns an array of Tag items, or false if error
      */
     static function get_tags($id){
-        return UBCollection::get_items($id, static::REL_PUBLICATION_TAG);
+        return UBCollection::get_items($id, static::REL_RESOURCE_TAG);
     }
 
     /**
-     * Add Labels to a Publication.
+     * Add Labels to a Resource.
      *
-     * @param int   $id Id of the Publication to add Labels to.
-     * @param array $label_array Array of Label Ids to add to the Publication.
+     * @param int   $id Id of the Resource to add Labels to.
+     * @param array $label_array Array of Label Ids to add to the Resource.
      *
      * @return bool Returns true if added correctly, or false if error.
      */
     static function add_labels($id, $label_array){
-        return UBCollection::add_items($id, $label_array, static::REL_PUBLICATION_LABEL);
+        return UBCollection::add_items($id, $label_array, static::REL_RESOURCE_LABEL);
     }
 
     /**
-     * Set Labels to a Publication.
+     * Set Labels to a Resource.
      *
-     * @param int   $id Id of the Publication to set Labels to.
-     * @param array $label_array Array of Label Ids to set to the Publication.
+     * @param int   $id Id of the Resource to set Labels to.
+     * @param array $label_array Array of Label Ids to set to the Resource.
      *
      * @return bool Returns true if added correctly, or false if error.
      */
     static function set_labels($id, $label_array){
-        return UBCollection::set_items($id, $label_array, static::REL_PUBLICATION_LABEL);
+        return UBCollection::set_items($id, $label_array, static::REL_RESOURCE_LABEL);
     }
 
     /**
-     * Remove Labels from a Publication.
+     * Remove Labels from a Resource.
      *
-     * @param int   $id Id of the Publication to remove Labels from.
-     * @param array $label_array Array of Label Ids to remove from the Publication.
+     * @param int   $id Id of the Resource to remove Labels from.
+     * @param array $label_array Array of Label Ids to remove from the Resource.
      *
      * @return bool Returns true if removed correctly, or false if error.
      */
     static function remove_labels($id, $label_array){
-        return UBCollection::remove_items($id, $label_array, static::REL_PUBLICATION_LABEL);
+        return UBCollection::remove_items($id, $label_array, static::REL_RESOURCE_LABEL);
     }
 
     /**
-     * Get Label Ids from a Publication.
+     * Get Label Ids from a Resource.
      *
-     * @param int $id Id of the Publication to get Labels from.
+     * @param int $id Id of the Resource to get Labels from.
      *
      * @return bool Returns array of Label Ids, or false if error.
      */
     static function get_labels($id){
-        return UBCollection::get_items($id, static::REL_PUBLICATION_LABEL);
+        return UBCollection::get_items($id, static::REL_RESOURCE_LABEL);
     }
 
     static function add_performance_items($id, $performance_item_array){
-        return UBCollection::add_items($id, $performance_item_array, static::REL_PUBLICATION_PERFORMANCE);
+        return UBCollection::add_items($id, $performance_item_array, static::REL_RESOURCE_PERFORMANCE);
     }
 
     static function set_performance_items($id, $performance_item_array){
-        return UBCollection::set_items($id, $performance_item_array, static::REL_PUBLICATION_PERFORMANCE);
+        return UBCollection::set_items($id, $performance_item_array, static::REL_RESOURCE_PERFORMANCE);
     }
 
     static function remove_performance_items($id, $performance_item_array){
-        return UBCollection::remove_items($id, $performance_item_array, static::REL_PUBLICATION_PERFORMANCE);
+        return UBCollection::remove_items($id, $performance_item_array, static::REL_RESOURCE_PERFORMANCE);
     }
 
     static function get_performance_items($id){
-        return UBCollection::get_items($id, static::REL_PUBLICATION_PERFORMANCE);
+        return UBCollection::get_items($id, static::REL_RESOURCE_PERFORMANCE);
     }
 
     /**
-     * Adds Comments to a Publication, referenced by Id.
+     * Adds Comments to a Resource, referenced by Id.
      *
-     * @param int   $id Id from the Publication to add Comments to
-     * @param array $comment_array Array of Comment Ids to be added to the Publication
+     * @param int   $id Id from the Resource to add Comments to
+     * @param array $comment_array Array of Comment Ids to be added to the Resource
      *
      * @return bool Returns true if success, false if error
      */
     static function add_comments($id, $comment_array){
-        return UBCollection::add_items($id, $comment_array, static::REL_PUBLICATION_COMMENT);
+        return UBCollection::add_items($id, $comment_array, static::REL_RESOURCE_COMMENT);
     }
 
     /**
-     * Sets Comments to a Publication, referenced by Id.
+     * Sets Comments to a Resource, referenced by Id.
      *
-     * @param int   $id Id from the Publication to set Comments to
-     * @param array $comment_array Array of Comment Ids to be set to the Publication
+     * @param int   $id Id from the Resource to set Comments to
+     * @param array $comment_array Array of Comment Ids to be set to the Resource
      *
      * @return bool Returns true if success, false if error
      */
     static function set_comments($id, $comment_array){
-        return UBCollection::set_items($id, $comment_array, static::REL_PUBLICATION_COMMENT);
+        return UBCollection::set_items($id, $comment_array, static::REL_RESOURCE_COMMENT);
     }
 
     /**
-     * Remove Comments from a Publication.
+     * Remove Comments from a Resource.
      *
-     * @param int   $id Id from Publication to remove Comments from
-     * @param array $comment_array Array of Comment Ids to remove from Publication
+     * @param int   $id Id from Resource to remove Comments from
+     * @param array $comment_array Array of Comment Ids to remove from Resource
      *
      * @return bool Returns true if success, false if error
      */
     static function remove_comments($id, $comment_array){
-        return UBCollection::remove_items($id, $comment_array, static::REL_PUBLICATION_COMMENT);
+        return UBCollection::remove_items($id, $comment_array, static::REL_RESOURCE_COMMENT);
     }
 
     /**
-     * Get all Comments for a Publication
+     * Get all Comments for a Resource
      *
-     * @param int $id Id of the Publication to get Comments from
+     * @param int $id Id of the Resource to get Comments from
      *
      * @return array|bool Returns an array of ClipitComment items, or false if error
      */
     static function get_comments($id){
-        return UBCollection::get_items($id, static::REL_PUBLICATION_COMMENT);
+        return UBCollection::get_items($id, static::REL_RESOURCE_COMMENT);
     }
 
 

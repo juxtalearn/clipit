@@ -16,21 +16,21 @@
  * Class ClipitVideo
  *
  */
-class ClipitVideo extends ClipitPublication{
+class ClipitVideo extends ClipitResource{
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitVideo";
 
-    const REL_PUBLICATION_TAG = "video-tag";
-    const REL_PUBLICATION_LABEL = "video-label";
-    const REL_PUBLICATION_COMMENT = "video-comment";
-    const REL_PUBLICATION_PERFORMANCE = "video-performance";
+    const REL_RESOURCE_TAG = "video-tag";
+    const REL_RESOURCE_LABEL = "video-label";
+    const REL_RESOURCE_COMMENT = "video-comment";
+    const REL_RESOURCE_PERFORMANCE = "video-performance";
 
-    const REL_GROUP_PUBLICATION = ClipitGroup::REL_GROUP_VIDEO;
-    const REL_TASK_PUBLICATION = ClipitTask::REL_TASK_VIDEO;
-    const REL_ACTIVITY_PUBLICATION = ClipitActivity::REL_ACTIVITY_VIDEO;
-    const REL_SITE_PUBLICATION = ClipitSite::REL_SITE_VIDEO;
+    const REL_GROUP_RESOURCE = ClipitGroup::REL_GROUP_VIDEO;
+    const REL_TASK_RESOURCE = ClipitTask::REL_TASK_VIDEO;
+    const REL_ACTIVITY_RESOURCE = ClipitActivity::REL_ACTIVITY_VIDEO;
+    const REL_SITE_RESOURCE = ClipitSite::REL_SITE_VIDEO;
 
     public $preview = "";
     public $duration = 0;

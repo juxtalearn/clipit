@@ -350,13 +350,13 @@ class ClipitActivity extends UBItem{
      * Gets all published Storyboards from the Tasks contained inside an Activity
      *
      * @param int $id Activity ID
-     * @return ClipitStoryboard[] Array of Storyboards, with Task ID as key
+     * @return ClipitStoryboard[] Array of Storyboards
      */
     static function get_published_storyboards($id){
         $tasks = static::get_tasks($id);
         $storyboard_array = array();
         foreach($tasks as $task_id){
-            $storyboard_array[$task_id] = ClipitTask::get_storyboards($task_id);
+            $storyboard_array = array_merge($storyboard_array, ClipitTask::get_storyboards($task_id));
         }
         return $storyboard_array;
     }
@@ -366,14 +366,14 @@ class ClipitActivity extends UBItem{
      * Gets all published Videos from the Tasks contained inside an Activity
      *
      * @param int $id Activity ID
-     * @return ClipitVideo[] Array of Videos, with Task ID as key
+     * @return ClipitVideo[] Array of Videos
      */
     static function get_published_videos($id)
     {
         $tasks = static::get_tasks($id);
         $video_array = array();
         foreach ($tasks as $task_id) {
-            $video_array[$task_id] = ClipitTask::get_videos($task_id);
+            $video_array = array_merge($video_array, ClipitTask::get_videos($task_id));
         }
         return $video_array;
     }
