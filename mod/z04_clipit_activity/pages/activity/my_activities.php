@@ -13,9 +13,8 @@ $selected_tab = get_input('filter', 'all');
 $id_activities_array = array();
 // Group members
 $my_groups_ids = ClipitUser::get_groups($user_id);
-foreach($my_groups_ids as $group_id){
-    //$id_activities_array[] = ClipitGroup::get_activity($group_id);
-    $activity_id = ClipitGroup::get_activity($group_id);
+$my_activities_ids = ClipitUser::get_activities($user_id);
+foreach($my_activities_ids as $activity_id){
     $status = ClipitActivity::get_status($activity_id);
     if($selected_tab == 'all'){
         $id_activities_array[$selected_tab][] = $activity_id;
@@ -44,7 +43,6 @@ $params_list = array(
     'items'         => $my_activities,
     'pagination'    => false,
     'list_class'    => 'my-activities',
-    'full_view'     => false,
 );
 $content = elgg_view("activities/list", $params_list);
 

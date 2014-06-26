@@ -22,10 +22,13 @@ if(mb_strlen($sb_description)>165){
 }
 ?>
 <h4>
+    <strong>
     <?php echo elgg_view('output/url', array(
         'href'  => $file_url,
         'title' => $file->name,
-        'text'  => $file->name)); ?>
+        'text'  => $file->name));
+    ?>
+    </strong>
 </h4>
 <small class="show">
     <strong><?php echo elgg_echo("file:" . $file->mime_type['short']);?></strong>
@@ -33,6 +36,7 @@ if(mb_strlen($sb_description)>165){
 <div>
     <?php echo $sb_description; ?>
 </div>
+<?php echo elgg_view('tricky_topic/tags/view', array('tags' => $storyboard->tag_array)); ?>
 <small class="show file-user-info">
     <i>Uploaded by
         <?php echo elgg_view('output/url', array(

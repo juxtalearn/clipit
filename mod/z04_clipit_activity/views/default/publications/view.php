@@ -48,7 +48,7 @@ $owner_group = array_pop(ClipitGroup::get_by_id(array($owner_group_id)));
                     </div>
                     <h4><strong><?php echo elgg_echo("tags"); ?></strong></h4>
                     <div class="tags">
-                        <?php echo elgg_view("page/elements/tags", array('tags' => $tags)); ?>
+                        <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $tags)); ?>
                     </div>
                     <h4><strong><?php echo elgg_echo("labels"); ?></strong></h4>
                     <div>

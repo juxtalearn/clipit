@@ -1,7 +1,7 @@
 <?php
 $user = elgg_get_logged_in_user_guid();
 // order activity by recent deadline
-$my_activities = ClipitActivity::get_from_user($user);
+$my_activities = ClipitUser::get_activities($user, true);
 
 elgg_load_js("nvd3:d3_v2");
 elgg_load_js("nvd3");
@@ -28,7 +28,8 @@ elgg_load_css("nvd3:css");
 <script>
     <?php
      $num = 1;
-     foreach($my_activities as $activity){
+     foreach($my_activities as $activity_id){
+     $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
      ?>
     nv.addGraph(function() {
         var chart = nv.models.discreteBarChart()

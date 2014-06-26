@@ -1,5 +1,5 @@
 <?php
- /**
+/**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
  * Creation date:   12/05/14
@@ -61,7 +61,7 @@ $files_id = elgg_extract("files", $vars);
                     'style' => 'margin-right: 5px;font-family: inherit;',
                     'href'  => "file/download/".$file->id,
                     'title' => $file->name,
-                    'text'  => '<i class="fa fa-download""></i>',
+                    'text'  => '<i class="fa fa-download"></i>',
                     'target' => 'blank_'
                 ));
                 ?>

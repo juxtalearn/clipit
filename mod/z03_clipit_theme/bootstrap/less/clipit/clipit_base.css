@@ -7130,6 +7130,11 @@ ul.events.events-loading:after {
   color: #d8ba05;
   opacity: 0.7;
 }
+.btn-border-blue-lighter {
+  border: 1px solid #32b4e5;
+  background: #bae6f6;
+  color: #32b4e5;
+}
 .btn-sm,
 .btn-xs,
 .btn-icon {
@@ -7329,7 +7334,6 @@ li.list-item:last-child {
 }
 .files-table .file-info h4 {
   margin: 0;
-  font-weight: bold;
 }
 .files-table p {
   text-align: justify;
@@ -7548,8 +7552,103 @@ li.list-item:last-child {
 .add-video .video-info .error > small {
   color: #ff4343;
 }
+#attach-loading {
+  display: table;
+  width: 100%;
+  height: 255px;
+  vertical-align: middle;
+  text-align: center;
+}
+#attach-loading > span {
+  display: table-cell;
+  vertical-align: middle;
+}
+#attach-loading > span > .fa {
+  font-size: 40px;
+  color: #bae6f6;
+}
+#attach_list {
+  background: #fff;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #bae6f6;
+  border-radius: 3px;
+  overflow: hidden;
+}
+#attach_list ul.menu-list > li {
+  padding: 5px 0;
+  border-bottom: 1px solid #bae6f6;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+#attach_list ul.menu-list > li.selected {
+  background: #32b4e5;
+}
+#attach_list ul.menu-list > li.selected a {
+  color: #fff;
+}
+#attach_list ul.menu-list > li h4 {
+  margin: 0;
+  padding: 0 10px;
+}
+#attach_list .multimedia-list {
+  overflow: auto;
+  max-height: 340px;
+}
+#attach_list .multimedia-list .multimedia-preview {
+  height: 65px;
+}
+#attach_list .multimedia-list .multimedia-preview .img-preview {
+  width: 60px;
+  height: 60px;
+}
+#attach_list .multimedia-list .multimedia-preview .file-icon {
+  font-size: 60px;
+}
+#attach_list .multimedia-list .attach-block {
+  background: #ECF7FB;
+  padding: 10px;
+  margin: 5px;
+  overflow: hidden;
+  border-radius: 4px;
+}
+.attach-preview {
+  width: 60px;
+  height: 55px;
+}
+.attach-preview .img-preview {
+  width: inherit;
+  height: inherit;
+}
+.attach-preview img {
+  width: 60px;
+}
+.attach-preview .file-icon {
+  font-size: 60px;
+}
+.attach-count {
+  width: 60px;
+  margin: 5px 5px 5px 0;
+  border: 1px solid #bae6f6;
+  border-radius: 3px;
+  padding: 5px;
+}
+.attach-count h4 {
+  margin: 0;
+}
+.attach-count h4 sub {
+  color: #adadad;
+}
+.attach-count h4 sub span {
+  font-size: large;
+}
 .landing h2.elgg-heading-main {
   display: none;
+}
+.elgg-module-aside .wrapper {
+  background: #fff;
+  padding: 10px;
+  border-radius: 4px;
 }
 .events-list {
   padding-right: 0;
@@ -8280,6 +8379,43 @@ ul.deadline-list > li .fa {
 }
 .activity-group-block .fa.status-deadline.fa-minus-square-o {
   color: #d8ba05;
+}
+.jOrgChart .line {
+  height: 20px;
+  width: 4px;
+}
+.jOrgChart .down {
+  background-color: #bae6f6;
+  margin: 0px auto;
+}
+.jOrgChart .left {
+  border-right: 2px solid #bae6f6;
+}
+.jOrgChart .right {
+  border-left: 2px solid #bae6f6;
+}
+.jOrgChart .top {
+  border-top: 3px solid #bae6f6;
+}
+.jOrgChart table {
+  width: 100%;
+}
+.jOrgChart table td {
+  text-align: center;
+  vertical-align: top;
+  padding: 0;
+}
+.jOrgChart .node {
+  background-color: #fff;
+  width: auto;
+  height: auto;
+  color: #32b4e5;
+  border: 1px solid #32b4e5;
+  padding: 10px;
+  border-radius: 3px;
+  display: inline-block;
+  margin: 0 2px;
+  z-index: 10;
 }
 .comment-button {
   border: 1px solid #32b4e5;
@@ -9305,6 +9441,47 @@ div.token-input-dropdown ul li.token-input-selected-dropdown-item .title,
 div.token-input-dropdown ul li.token-input-selected-dropdown-item .sub-title,
 div.token-input-dropdown ul li.token-input-selected-dropdown-item .img {
   color: #fff;
+}
+/*.tag-list{
+  margin: 0;
+  font-size: 11px;
+  color: @blue_clipit;
+  display: block;
+  padding: 5px 0;
+  p{
+    color: @blue_clipit;
+    border: 1px solid @blue_clipit;
+    padding: 2px 4px;
+    border-radius: 3px;
+    margin: 2px;
+    max-width: 70px;
+    .text-truncate();
+    display: inline-block;
+    font-size: inherit;
+    &:first-child{
+      margin-left: 0;
+    }
+  }
+}*/
+.tags {
+  margin: 5px 0;
+}
+.tags > a.label {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 11px;
+  display: inline-block;
+  border: 1px solid;
+  padding: .2em .6em .3em !important;
+}
+.more-tags {
+  display: inline-block;
+  margin: 2px;
+  vertical-align: top;
+  color: #32b4e5;
+  font-size: 14px;
 }
 .chosen-container {
   position: relative;

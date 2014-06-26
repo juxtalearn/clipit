@@ -1,3 +1,43 @@
+/*.tag-list{
+  margin: 0;
+  font-size: 11px;
+  color: @blue_clipit;
+  display: block;
+  padding: 5px 0;
+  p{
+    color: @blue_clipit;
+    border: 1px solid @blue_clipit;
+    padding: 2px 4px;
+    border-radius: 3px;
+    margin: 2px;
+    max-width: 70px;
+    .text-truncate();
+    display: inline-block;
+    font-size: inherit;
+    &:first-child{
+      margin-left: 0;
+    }
+  }
+}*/
+.tags{
+  margin: 5px 0;
+    > a.label{
+      .text-truncate();
+      font-size: 11px;
+      display: inline-block;
+      border: 1px solid;
+      padding: .2em .6em .3em !important;
+    }
+}
+.more-tags{
+  display: inline-block;
+  margin: 2px;
+  vertical-align: top;
+//  padding: 3px 4px;
+  color: @blue_clipit;
+  font-size: 14px;
+}
+
 //
 // jQuery Chosen
 // --------------------------------------------------

@@ -36,6 +36,9 @@ function clipit_activity_init() {
     elgg_register_action("group/leave", elgg_get_plugins_path() . "z04_clipit_activity/actions/group/leave.php");
     elgg_register_action("group/create", elgg_get_plugins_path() . "z04_clipit_activity/actions/group/create.php");
     elgg_register_action("group/remove_member", elgg_get_plugins_path() . "z04_clipit_activity/actions/group/remove_member.php");
+    elgg_register_ajax_view('multimedia/attach/videos');
+    elgg_register_ajax_view('multimedia/attach/storyboards');
+    elgg_register_ajax_view('multimedia/attach/files');
     // Tricky Topic
     elgg_register_ajax_view('modal/tricky_topic/view');
     // Multimedia
@@ -969,6 +972,7 @@ function group_tools_page_handler($page, $activity){
                     array(
                         'entity' => $group,
                         'messages' => $messages,
+                        'attach_multimedia_group' => true,
                         'href'   => $href,
                         'create' => $canCreate
                     ));
@@ -982,7 +986,7 @@ function group_tools_page_handler($page, $activity){
                 elgg_push_breadcrumb($title, $href);
                 elgg_push_breadcrumb($message->name);
                 if($message && $message->destination == $group->id){
-                    $content = elgg_view('discussion/view', array('entity' => $message));
+                    $content = elgg_view('discussion/view', array('entity' => $message, 'group' => $group));
                 } else {
                     return false;
                 }

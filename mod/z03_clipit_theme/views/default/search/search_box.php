@@ -8,7 +8,7 @@
 
 if (array_key_exists('value', $vars)) {
     $value = $vars['value'];
-} elseif ($value = get_input('q', get_input('tag', NULL))) {
+} elseif ($value = get_input('text', get_input('tag', NULL))) {
     $value = $value;
 } else {
     $value = elgg_echo('search');
@@ -34,12 +34,12 @@ $display_query = htmlspecialchars($display_query, ENT_QUOTES, 'UTF-8', false);
 
 ?>
 
-<form class="<?php echo $class; ?>" action="<?php echo elgg_get_site_url(); ?>search" method="get">
+<form class="<?php echo $class; ?>" action="<?php echo elgg_get_site_url();?>explore/search" method="GET">
     <div class="input-group">
-        <input type="text" class="form-control" size="21" name="q" value="<?php echo $display_query; ?>" onblur="if (this.value=='') { this.value='<?php echo elgg_echo('search'); ?>' }" onfocus="if (this.value=='<?php echo elgg_echo('search'); ?>') { this.value='' };" />
-        <input type="hidden" name="search_type" value="all" />
+        <input type="text" class="form-control" size="21" name="text" value="<?php echo $display_query; ?>" onblur="if (this.value=='') { this.value='<?php echo elgg_echo('search'); ?>' }" onfocus="if (this.value=='<?php echo elgg_echo('search'); ?>') { this.value='' };" />
+        <input type="hidden" name="by" value="all" />
         <div class="input-group-btn">
-            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+            <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
         </div>
     </div>
 </form>

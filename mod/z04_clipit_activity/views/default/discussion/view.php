@@ -15,9 +15,13 @@ $owner = new ElggUser($message->owner_id);
 $user_loggedin_id = elgg_get_logged_in_user_guid();
 $user_loggedin = new ElggUser($user_loggedin_id);
 $total_replies = array_pop(ClipitPost::count_by_destination(array($message->id)));
-$files_id = $message->get_files($message->id);
-$user_read_status = array_pop(ClipitPost::get_read_status($message->id, array($user_loggedin_id)));
+// Attach multimedia items
+$videos = ClipitPost::get_videos($message->id);
+$files = ClipitPost::get_files($message->id);
+$storyboards = ClipitPost::get_storyboards($message->id);
+$multimedia = array_merge($videos, $files, $storyboards);
 
+$user_read_status = array_pop(ClipitPost::get_read_status($message->id, array($user_loggedin_id)));
 // set read status
 if($message->owner_id != $user_loggedin_id && !$user_read_status){
     ClipitPost::set_read_status($message->id, true, array($user_loggedin_id));
@@ -75,11 +79,13 @@ if($message->owner_id == elgg_get_logged_in_user_guid()){
     </div>
     <div class="body-post">
         <?php echo $message->description; ?>
-        <!-- Attachs files -->
-        <?php if($files_id): ?>
-            <?php echo elgg_view("multimedia/file/attach_files", array('files' => $files_id)); ?>
+        <!-- Attachs multimedia -->
+        <?php if($files && $vars['show_group']): ?>
+            <?php echo elgg_view("multimedia/attach/summary", array('files' => $files)); ?>
+        <?php elseif(count($multimedia) > 0): ?>
+            <?php echo elgg_view("multimedia/attach/full", array('entities' => $multimedia, 'group' => $vars['group'])); ?>
         <?php endif; ?>
-        <!-- Attachs files end-->
+        <!-- Attachs multimedia end -->
     </div>
 </div>
 

@@ -47,7 +47,7 @@ $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
             <?php echo text_reference($comment->description); ?>
             <!-- Attachs files -->
             <?php if($files_id): ?>
-                <?php echo elgg_view("multimedia/file/attach_files", array('files' => $files_id)); ?>
+                <?php echo elgg_view("multimedia/attach/summary", array('files' => $files_id)); ?>
             <?php endif; ?>
             <!-- Attachs files end-->
         </div>

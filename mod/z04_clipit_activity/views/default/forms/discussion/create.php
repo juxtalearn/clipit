@@ -29,6 +29,20 @@ $body .='<div class="form-group">
         'rows'  => 6,
     )).'
 </div>';
+
+if($vars['attach_multimedia_group']){
+    $body .= '
+    <div class="col-md-12">
+    '.elgg_view('output/url', array(
+        'href'  => "javascript:;",
+        'title' => "Attach group multimedia",
+        'id' => 'attach_multimedia',
+        'class' => 'show',
+        'text'  => "<strong><i class='fa fa-image'></i> ".elgg_echo('multimedia:attach_group')."</strong>")).'
+        '.elgg_view("multimedia/attach/list").'
+    </div>';
+}
+// Attach simple file
 $body .= elgg_view("multimedia/file/attach", array('entity' => $entity, 'class' => 'col-md-8'));
 
 echo elgg_view("page/components/modal",
@@ -45,3 +59,33 @@ echo elgg_view("page/components/modal",
                 'class' => "btn btn-primary"
             ))
 ));
+?>
+<script>
+$(function(){
+    $("#attach_multimedia").click(function(){
+        $("#attach_list").toggle();
+        $("#attach_list ul.menu-list > li[data-menu=files]").click();
+    });
+    $(document).on("click", "#attach_list ul.menu-list > li", function(){
+        var attach_list = $("#attach_list");
+        $("#attach_list .multimedia-list > div").hide();
+        var type = $(this).data('menu');
+        var content = $("#attach_list .multimedia-list");
+        var list = $("[data-list="+ type +"]");
+        if(list.length == 0){
+            $("#attach_list #attach-loading").show();
+            $.ajax({
+                type: "GET",
+                url: '<?php echo elgg_get_site_url()."ajax/view/multimedia/attach/";?>' + type,
+                data: { list: type, entity_id: "<?php echo $entity->id;?>" },
+                success: function(data){
+                    content.append(data);
+                    $("#attach_list #attach-loading").hide();
+                }
+            });
+        } else {
+            list.show();
+        }
+    });
+});
+</script>

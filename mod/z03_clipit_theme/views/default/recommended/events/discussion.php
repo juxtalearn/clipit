@@ -12,9 +12,9 @@
  */
 $entity = elgg_extract('entity', $vars);
 $description = trim(elgg_strip_tags($entity->description));
-// text truncate max length 180
-if(mb_strlen($description)>180){
-    $description = substr($description, 0, 180)."...";
+// text truncate max length 100
+if(mb_strlen($description) > 100){
+    $description = substr($description, 0, 100)."...";
 }
 $total_replies = array_pop(ClipitPost::count_by_destination(array($entity->id)))
 ?>

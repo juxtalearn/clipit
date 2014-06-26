@@ -11,27 +11,48 @@
  * @package         ClipIt
  */
 $href = elgg_extract('href', $vars);
+$counts = elgg_extract('counts', $vars);
+$video_count = isset($counts['videos']) ? " (".$counts['videos'].")" : "";
+$sb_count = isset($counts['storyboards']) ? " (".$counts['storyboards'].")" : "";
+$files_count = isset($counts['files']) ? " (".$counts['files'].")" : "";
+$activities_count = isset($counts['activities']) ? " (".$counts['activities'].")" : "";
+
+$href = http_build_query(array(
+    'by' => get_input('by'),
+    'id' => get_input('id'),
+    'text' => get_input('text'),
+));
+if(get_input('by')){
+    $href = "/search?{$href}";
+}
+//$href = get_input('by') ? $href.'&' : '?';
+$href = (get_input('by') || get_input('text')) ? $href.'&' : '?';
 
 $tabs = array(
-    'videos' => array(
-        'text' => elgg_echo('videos'),
-        'href' => "{$href}?filter=videos",
+    'all' => array(
+        'text' => elgg_echo('all'),
+        'href' => "explore".rtrim($href,'&'),
         'priority' => 100,
     ),
-    'storyboards' => array(
-        'text' => elgg_echo('storyboards'),
-        'href' => "{$href}?filter=storyboards",
+    'videos' => array(
+        'text' => elgg_echo('videos') ."{$video_count}",
+        'href' => "explore{$href}filter=videos",
         'priority' => 200,
     ),
-    'files' => array(
-        'text' => elgg_echo('files'),
-        'href' => "{$href}?filter=files",
+    'storyboards' => array(
+        'text' => elgg_echo('storyboards') ."{$sb_count}",
+        'href' => "explore{$href}filter=storyboards",
         'priority' => 300,
     ),
-    'activities' => array(
-        'text' => elgg_echo('activities'),
-        'href' => "{$href}?filter=activities",
+    'files' => array(
+        'text' => elgg_echo('files') ."{$files_count}",
+        'href' => "explore{$href}filter=files",
         'priority' => 400,
+    ),
+    'activities' => array(
+        'text' => elgg_echo('activities') ."{$activities_count}",
+        'href' => "explore{$href}filter=activities",
+        'priority' => 500,
     ),
 );
 

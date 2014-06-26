@@ -21,10 +21,13 @@ if(mb_strlen($file_description)>165){
 }
 ?>
 <h4>
+    <strong>
     <?php echo elgg_view('output/url', array(
     'href'  => $file_url,
     'title' => $file->name,
-    'text'  => $file->name)); ?>
+    'text'  => $file->name));
+    ?>
+    </strong>
 </h4>
 <small class="show">
     <strong><?php echo elgg_echo("file:" . $file->mime_type['short']);?></strong>

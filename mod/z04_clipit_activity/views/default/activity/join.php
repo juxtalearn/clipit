@@ -42,17 +42,17 @@ foreach($groups_id as $group_id){
         $content .= '<ul style="height: 150px;overflow-y: auto;" class="member-list">';
         foreach($users_id as $user_id){
             $user = array_pop(ClipitUser::get_by_id(array($user_id)));
-            $user = new ElggUser($user->id);
+            $user_elgg = new ElggUser($user->id);
             $content .= "<li style='border-bottom: 1px solid #bae6f6; padding: 5px;'>";
             $content .= elgg_view('output/img', array(
-                'src' => $user->getIconURL('tiny'),
+                'src' => $user_elgg->getIconURL('tiny'),
                 'alt' => $user->name,
                 'title' => elgg_echo('profile'),
                 'style' => 'margin-right: 10px;',
                 'class' => 'elgg-border-plain elgg-transition',
             ));
             $content .= elgg_view('output/url', array(
-                'href'  => "profile/".$user->username,
+                'href'  => "profile/".$user->login,
                 'title' => $user->name,
                 'text'  => $user->name,
             ));

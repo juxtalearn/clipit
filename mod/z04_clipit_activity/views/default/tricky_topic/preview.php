@@ -17,6 +17,7 @@ echo elgg_view("page/components/modal_remote", array('id'=> "tricky-topic-{$tric
 echo elgg_view('output/url', array(
     'href'  => "ajax/view/modal/tricky_topic/view?id={$tricky_topic->id}",
     'text'  => $tricky_topic->name,
+    'title' => $tricky_topic->name,
     'data-toggle'   => 'modal',
     'data-target'   => '#tricky-topic-'.$tricky_topic->id
 ));

@@ -111,9 +111,7 @@ if($task_id = get_input('task_id')):
             ));?>
         </div>
     </div>
-<style>
 
-</style>
     <div class="col-md-4">
         <img src="<?php echo $entity->preview;?>" class="img-responsive"><br>
         <label><?php echo elgg_echo("performance_items");?></label>

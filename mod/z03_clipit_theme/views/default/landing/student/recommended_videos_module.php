@@ -13,6 +13,7 @@ $content = '
     <div class="text">
         <h5 class="text-truncate"><a>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></h5>
         <small>12:00H, NOV 18, 2013</small>
+        <a class="show">Tricky topic</a>
         <div class="sbs">
             <p style="color: #00a99d;border-color: #00a99d;"><a>SB</a></p>
             <p style="color: #00a99d;border-color: #00a99d;"><a>Lorem ipsum</a></p>
@@ -27,6 +28,7 @@ $content = '
     <div class="text">
         <h5 class="text-truncate"><a>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></h5>
         <small>12:00H, NOV 18, 2013</small>
+        <a class="show">Tricky topic 2</a>
         <div class="sbs">
             <p style="color: #ed1e79;border-color: #ed1e79;"><a>SB</a></p>
             <p style="color: #ed1e79;border-color: #ed1e79;"><a>Lorem ipsum</a></p>
@@ -41,6 +43,7 @@ $content = '
     <div class="text">
         <h5 class="text-truncate"><a>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></h5>
         <small>12:00H, NOV 18, 2013</small>
+        <a class="show">Tricky topic 3</a>
         <div class="sbs">
             <p style="color: #00a99d;border-color: #00a99d;"><a>SB</a></p>
             <p style="color: #00a99d;border-color: #00a99d;"><a>Lorem ipsum</a></p>

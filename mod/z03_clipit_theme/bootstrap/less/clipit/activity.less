@@ -180,3 +180,45 @@ ul.deadline-list{
     }
   }
 }
+//
+// jOrgChart (Tricky topic view)
+// --------------------------------------------------
+.jOrgChart{
+  .line {
+    height : 20px;
+    width : 4px;
+  }
+  .down{
+    background-color: @blue-lighter;
+    margin : 0px auto;
+  }
+  .left {
+    border-right: 2px solid @blue-lighter;
+  }
+  .right {
+    border-left: 2px solid @blue-lighter;
+  }
+  .top {
+    border-top: 3px solid @blue-lighter;
+  }
+  table{
+    width: 100%;
+    td {
+      text-align : center;
+      vertical-align : top;
+      padding : 0;
+    }
+  }
+  .node {
+    background-color: #fff;
+    width: auto;
+    height: auto;
+    color: @blue_clipit;
+    border: 1px solid @blue_clipit;
+    padding: 10px;
+    border-radius: 3px;
+    display: inline-block;
+    margin : 0 2px;
+    z-index : 10;
+  }
+}

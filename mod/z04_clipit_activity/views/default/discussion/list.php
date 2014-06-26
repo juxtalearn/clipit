@@ -14,7 +14,10 @@ $activity_id = elgg_get_page_owner_guid();
 ?>
 <?php if($vars['create']): ?>
 <div style="margin-bottom: 15px;">
-    <?php echo elgg_view_form('discussion/create', array('data-validate'=> 'true' ,'class'=> 'fileupload'), array('entity'  => $entity)); ?>
+    <?php echo elgg_view_form('discussion/create',
+        array('data-validate'=> 'true' ,'class'=> 'fileupload'),
+        array('entity'  => $entity, 'attach_multimedia_group' => $vars['attach_multimedia_group'])
+    ); ?>
     <button type="button" data-toggle="modal" data-target="#create-new-topic" class="btn btn-default">
         <?php echo elgg_echo('discussion:create'); ?>
     </button>
@@ -51,6 +54,11 @@ foreach($messages as $message):
         // Remote modal, form content
         echo elgg_view("page/components/modal_remote", array('id'=> "edit-discussion-{$message->id}" ));
     }
+    // Attach multimedia items
+    $videos = ClipitPost::get_videos($message->id);
+    $files = ClipitPost::get_files($message->id);
+    $storyboards = ClipitPost::get_storyboards($message->id);
+    $multimedia = array_merge($videos, $files, $storyboards);
 ?>
 <div class="row row-table messages-discussion">
     <div class="col-md-9">
@@ -63,34 +71,50 @@ foreach($messages as $message):
                 'is_trusted' => true, ));
             ?>
         </h4>
-        <p>
-            <?php echo $message_text; ?>
-        </p>
-        <small class="show">
-            <i>
-                Created by
-                <?php echo elgg_view('output/url', array(
-                    'href'  => "profile/".$owner->login,
-                    'title' => $owner->name,
-                    'text'  => $owner->name));
+        <?php if(count($multimedia) > 0): ?>
+                <?php if(count($multimedia) > 1):?>
+                <div class="attach-count pull-left text-center">
+                    <h4>
+                        <i class="fa fa-paperclip"></i>
+                        <sub> x<span class="blue"><?php echo count($multimedia);?></span></sub>
+                    </h4>
+                </div>
+                <?php else: ?>
+                    <div style="margin: 5px 5px 5px 0;" class="pull-left">
+                        <?php echo elgg_view('multimedia/preview', array('entity_id' => array_pop($multimedia)));?>
+                    </div>
+                <?php endif;?>
+        <?php endif; ?>
+        <div class="content-block">
+            <p>
+                <?php echo $message_text; ?>
+            </p>
+            <small class="show">
+                <i>
+                    <?php echo elgg_echo('discussion:created_by');?>
+                    <?php echo elgg_view('output/url', array(
+                        'href'  => "profile/".$owner->login,
+                        'title' => $owner->name,
+                        'text'  => $owner->name));
+                    ?>
+                    <?php echo elgg_view('output/friendlytime', array('time' => $message->time_created));?>
+                </i>
+                <?php
+                if($total_replies > 0):
+                    $last_post = end(array_pop(ClipitPost::get_by_destination(array($message->id))));
+                    $author_last_post = array_pop(ClipitUser::get_by_id(array($last_post->owner_id)));
                 ?>
-                <?php echo elgg_view('output/friendlytime', array('time' => $message->time_created));?>
-            </i>
-            <?php
-            if($total_replies > 0):
-                $last_post = end(array_pop(ClipitPost::get_by_destination(array($message->id))));
-                $author_last_post = array_pop(ClipitUser::get_by_id(array($last_post->owner_id)));
-            ?>
-            <i class="pull-right">
-                Last post by
-                <?php echo elgg_view('output/url', array(
-                    'href'  => "profile/".$author_last_post->login,
-                    'title' => $author_last_post->name,
-                    'text'  => $author_last_post->name,
-                ));
-                ?> (<?php echo elgg_view('output/friendlytime', array('time' => $last_post->time_created));?>)</i>
-            <?php endif; ?>
-        </small>
+                <i class="pull-right">
+                    <?php echo elgg_echo('discussion:last_post_by');?>
+                    <?php echo elgg_view('output/url', array(
+                        'href'  => "profile/".$author_last_post->login,
+                        'title' => $author_last_post->name,
+                        'text'  => $author_last_post->name,
+                    ));
+                    ?> (<?php echo elgg_view('output/friendlytime', array('time' => $last_post->time_created));?>)</i>
+                <?php endif; ?>
+            </small>
+        </div>
     </div>
     <div class="col-md-3 text-center">
         <?php echo elgg_view('output/url', array(

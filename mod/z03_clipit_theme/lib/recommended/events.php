@@ -58,9 +58,13 @@ function view_recommended_event($event, $view_type = 'full'){
         case "activity-user":
             $activity = array_pop(ClipitActivity::get_by_id(array($relationship->guid_one)));
             $entity = array_pop(ClipitUser::get_by_id(array($relationship->guid_two)));
-            $href = "clipit_activity/{$activity->id}/materials/view/{$entity->id}";
+            $activity_link = elgg_view('output/url', array(
+                'href'  => "clipit_activity/{$activity->id}",
+                'title' => $activity->name,
+                'text'  => $activity->name,
+            ));
             $params = array(
-                'title' => 'User called',
+                'title' => 'Called for '.$activity_link.' activity',
                 'icon' => 'fa-bullhorn',
                 'author' => $entity->owner_id,
                 'body' => ''
@@ -142,10 +146,9 @@ function view_recommended_event($event, $view_type = 'full'){
                     )))
             );
             break;
-        case "message-destination":
+        case "post-destination":
             // Message from group|activity
             $object = ClipitSite::lookup($relationship->guid_two);
-            $entity = array_pop(ClipitPost::get_by_id(array($relationship->guid_one)));
             switch($object['subtype']){
                 case "ClipitGroup":
                     $activity_id = ClipitGroup::get_activity($relationship->guid_two);
@@ -155,7 +158,11 @@ function view_recommended_event($event, $view_type = 'full'){
                     $activity_id = $relationship->guid_two;
                     $group = "";
                     break;
+                default:
+                    return false;
+                    break;
             }
+            $entity = array_pop(ClipitPost::get_by_id(array($relationship->guid_one)));
             $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
             $href = "clipit_activity/{$activity->id}/{$group}discussion/view/{$entity->id}";
             $params = array(

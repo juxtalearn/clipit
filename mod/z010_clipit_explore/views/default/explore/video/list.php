@@ -49,27 +49,7 @@ $videos = elgg_extract('videos', $vars);
                     ?>
                     <?php echo elgg_view('output/friendlytime', array('time' => $video->time_created));?>
                 </p>
-                <div class="sbs">
-                    <?php
-                    if($tags = $video->tag_array):
-                    foreach(array_slice($tags, 0, 3) as $tag_id):
-                        $tag = array_pop(ClipitTag::get_by_id(array($tag_id)));
-                    ?>
-                     <p>
-                         <?php echo elgg_view('output/url', array(
-                             'href' => "explore/search?by=tag&id={$tag->id}",
-                             'text' => $tag->name,
-                             'title' => $tag->name,
-                             'is_trusted' => true,
-                         ));
-                         ?>
-                     </p>
-                    <?php endforeach;?>
-                        <?php if(count($tags) > 3): ?>
-                            <span class="more-sbs fa fa-plus"></span>
-                        <?php endif; ?>
-                    <?php endif; ?>
-                </div>
+                <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $video->tag_array, 'width' => 105, 'limit' => 2)); ?>
             </div>
         </div>
     </div>

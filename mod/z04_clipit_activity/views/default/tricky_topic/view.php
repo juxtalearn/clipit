@@ -13,7 +13,6 @@
 $entity = elgg_extract('entity', $vars);
 $tags = $entity->tag_array;
 ?>
-<link rel="stylesheet" href="http://dl.dropboxusercontent.com/u/4151695/html/jOrgChart/example/css/jquery.jOrgChart.css"/>
 <script src="<?php echo elgg_get_site_url() . "mod/z04_clipit_activity/vendors/jquery.jOrgChart.js";?>"></script>
 <script>
     $("#org").jOrgChart({
@@ -21,32 +20,6 @@ $tags = $entity->tag_array;
         dragAndDrop  : false
     });
 </script>
-<style>
-.jOrgChart .down{
-    background-color: #bae6f6;
-}
-.jOrgChart .left {
-    border-right: 2px solid #bae6f6;
-}
-.jOrgChart .right {
-    border-left: 2px solid #bae6f6;
-}
-.jOrgChart .top {
-    border-top: 3px solid #bae6f6;
-}
-.jOrgChart table{
-    width: 100%;
-}
-.jOrgChart .node {
-    background-color: #fff;
-    width: auto;
-    height: auto;
-    color: #32b4e5;
-    border: 1px solid #32b4e5;
-    padding: 10px;
-    border-radius: 3px;
-}
-</style>
 <ul id="org" style="display:none">
     <li>
         <strong><?php echo $entity->name; ?></strong>

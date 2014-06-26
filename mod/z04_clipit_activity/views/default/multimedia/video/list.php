@@ -96,9 +96,7 @@ $rating = elgg_extract("rating", $vars);
                         'text'  => $video->name));
                     ?>
                 </h4>
-                <div class="tags">
-                    <?php echo elgg_view("page/elements/tags", array('tags' => $tags)); ?>
-                </div>
+                <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $tags)); ?>
                 <p>
                     <?php echo $description;?>
                 </p>

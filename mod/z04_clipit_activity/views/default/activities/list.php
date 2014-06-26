@@ -32,17 +32,11 @@ if (is_array($items) && count($items) > 0):
             $progress_bar = elgg_view("page/components/progressbar", $params_progress);
 
             $title = elgg_get_friendly_title($item->name);
-            $activity_link = elgg_view('output/url', array(
-                'href' => "clipit_activity/{$item->id}",
-                'text' => $item->name,
-                'is_trusted' => true,
-                'style' => 'color: #'.$item->color
-            ));
             $teachers = ClipitActivity::get_teachers($item->id);
+            $isCalled = in_array($user_loggedin_id, $item->called_users_array);
             ?>
             <li class='list-item col-md-12'>
                 <div class="row">
-
                     <div class="col-md-6">
                         <div class="pull-right">
                             <small class="activity-status status-<?php echo $item->status;?>">
@@ -50,7 +44,13 @@ if (is_array($items) && count($items) > 0):
                             </small>
                         </div>
                         <h4 style='margin-top: 0'>
-                            <?php echo $activity_link; ?>
+                            <?php echo elgg_view('output/url', array(
+                                    'href' => "clipit_activity/{$item->id}",
+                                    'text' => $item->name,
+                                    'is_trusted' => true,
+                                    'style' => 'color: #'.$item->color
+                                ));
+                            ?>
                         </h4>
                         <div style='color: #999;text-transform: uppercase;'>
                             <i class='fa fa-calendar'></i>
@@ -65,6 +65,21 @@ if (is_array($items) && count($items) > 0):
                     <div class="col-md-6">
                         <div class="row">
                             <div class="col-xs-6" style="border-right: 1px solid #ccc; padding-right: 15px;">
+                                <?php if($item->tricky_topic):?>
+                                <div style="margin-bottom: 10px;" class="text-truncate">
+                                    <small class="show"><?php echo elgg_echo('tricky_topic');?></small>
+                                    <?php echo elgg_view('tricky_topic/preview', array('activity' => $item));?>
+                                </div>
+                                <?php endif; ?>
+                                <?php if($item->status == 'enroll' && $isCalled): ?>
+                                    <?php echo elgg_view('output/url', array(
+                                        'href'  => "clipit_activity/{$item->id}/join",
+                                        'class' => 'btn btn-xs btn-default btn-border-blue-lighter',
+                                        'title' => elgg_echo('activity:join'),
+                                        'text'  => elgg_echo('activity:join')
+                                    ));
+                                    ?>
+                                <?php endif; ?>
                                 <?php if($group):?>
                                 <div>
                                     <?php echo $progress_bar; ?>

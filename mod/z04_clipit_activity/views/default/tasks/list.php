@@ -31,6 +31,7 @@ if(!$tasks){
             </small>
         </div>
         <div class="content-block">
+            <?php echo elgg_view("tasks/icon_task_type", array('type' => $task->task_type)); ?>
             <strong>
             <?php if(time() > $task->start): ?>
                 <?php echo elgg_view('output/url', array(
@@ -44,8 +45,8 @@ if(!$tasks){
                 <span><?php echo $task->name; ?></span>
             <?php endif; ?>
             </strong>
-            <span class="pull-right blue">
-                <?php echo elgg_view("tasks/type_icon", array('type' => $task->task_type)); ?>
+            <span class="pull-right blue-lighter">
+                <?php echo elgg_view("tasks/icon_user_type", array('type' => $task->task_type)); ?>
             </span>
             <small class="show <?php echo $status['color']; ?>">
                 <?php echo $status['text']; ?>

@@ -13,8 +13,10 @@
 $english = array(
     'click_add' => 'Click to add',
     'view'  => 'View',
+    'bulk_actions' => 'Bulk actions',
     // Activity
     'my_activities' => 'My activities',
+    'activities' => 'Activities',
     'activities:none' => 'There are no activities...',
     'explore' => 'Explore',
     'activity:profile' => 'Activity home',
@@ -68,17 +70,22 @@ $english = array(
     'discussion:edit' => 'Edit topic',
     'discussion:title_topic' => 'Topic title',
     'discussion:text_topic' => 'Topic text',
+    'discussion:last_post_by' => 'Last post by',
+    'discussion:created_by' => 'Created by',
     // Multimedia
     'url'   => 'Url',
     'multimedia:files' => 'Files',
     'multimedia:videos' => 'Videos',
     'multimedia:storyboards' => 'Storyboards',
     'multimedia:links' => 'Interesting links',
+    'multimedia:attach_group' => 'Attach multimedia group',
+    'multimedia:attach_files' => 'Attach files',
     // Files
     'files' => 'Files',
     'file' => 'File',
     'multimedia:file:description' => 'File description',
     'multimedia:files:add' => 'Add files',
+    'file:delete' => 'Delete files',
     'file:nofile' => 'No file',
     'file:removed' => 'File %s removed',
     'file:cantremove' => 'Can not remove file',
@@ -110,6 +117,7 @@ $english = array(
     'multimedia:storyboards:add' => 'Add storyboards',
     // Tricky Topic
     'tricky_topic' => 'Tricky Topic',
+    'tricky_topic:none' => 'Not tricky Topic',
     // Publications
     'publications:no_evaluated' => 'Not evaluated',
     'publications:evaluated' => 'Evaluated',
@@ -132,7 +140,10 @@ $english = array(
     // Labels
     'labels' => 'Labels',
     // Tags
+    'tag' => 'Tag',
     'tags' => 'Tags',
+    'tags:none' => 'Not tags',
+    'tags:recommended' => 'Recommended tags',
     'tags:commas:separated' => 'Separated by commas',
     // Performance items
     'performance_items' => 'Performance items',

@@ -61,7 +61,7 @@ foreach($files as $file_id){
 
     $row = array(
         array(
-            'class' => 'select',
+            'class' => $vars['create'] ? 'select' : 'hide',
             'content' => $select
         ),
         array(
@@ -86,7 +86,7 @@ if($vars['create']){
     echo elgg_view_form('multimedia/files/upload', array('id' => 'fileupload', 'enctype' => 'multipart/form-data'), array('entity'  => $entity));
     // File options
     $list_options['options_values'] = array(
-        ''          => '['.elgg_echo('options').']',
+        ''          => elgg_echo('bulk_actions'),
         'remove'      => elgg_echo('file:delete'),
     );
 }

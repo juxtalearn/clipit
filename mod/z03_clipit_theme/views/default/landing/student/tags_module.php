@@ -34,6 +34,8 @@ $content = '
     'text' => elgg_echo('link:view:all'),
     'is_trusted' => true,
 ));*/
+$tags = ClipitTag::get_all(10);
+$content = elgg_view("tricky_topic/tags/tag_cloud", array('tags' => $tags));
 echo elgg_view('landing/module', array(
     'name'      => "tags",
     'title'     => "Tags",

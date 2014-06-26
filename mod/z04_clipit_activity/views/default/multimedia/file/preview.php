@@ -37,10 +37,14 @@ switch($mime_type['full']){
         $file_view = '<i class="fa fa-file file-icon"></i>';
         break;
 }
+$size = elgg_extract('size', $vars);
+if(!$size){
+    $size = 'small';
+}
 switch ($mime_type['short']){
     case "image":
         $file_view = '<div class="img-preview">
-                    <div style="background-image: url(\''.elgg_normalize_url(elgg_format_url("file/thumbnail/small/$file->id")).'\');"></div>
+                    <div style="background-image: url(\''.elgg_normalize_url(elgg_format_url("file/thumbnail/{$size}/$file->id")).'\');"></div>
                  </div>';
         break;
     case "audio":
