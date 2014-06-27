@@ -14,7 +14,8 @@ $href = http_build_query(array(
     'by' => get_input('by'),
     'id' => get_input('id'),
     'text' => get_input('text'),
-    'filter' => $vars['filter']
+    'filter' => $vars['filter'],
+    'activity' => get_input('activity'),
 ));
 if(get_input('by')){
     $href = "/search?{$href}";

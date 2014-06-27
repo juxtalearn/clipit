@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 $videos = elgg_extract('videos', $vars);
+$href = elgg_extract('href', $vars);
 ?>
 <div class="row">
     <?php
@@ -22,7 +23,7 @@ $videos = elgg_extract('videos', $vars);
     <div class="col-md-5 col-lg-4">
         <div class="video_prev">
             <?php echo elgg_view('output/url', array(
-                'href' => "explore/video/view/{$video->id}",
+                'href' => "{$href}/view/{$video->id}",
                 'text' => '<div class="bg-video" style="background-image: url(\''.$video->preview.'\');"></div>',
                 'title' => $video->name,
                 'is_trusted' => true,
@@ -31,7 +32,7 @@ $videos = elgg_extract('videos', $vars);
             <div>
                 <h4>
                     <?php echo elgg_view('output/url', array(
-                        'href' => "explore/video/view/{$video->id}",
+                        'href' => "{$href}/view/{$video->id}",
                         'text' => $video->name,
                         'title' => $video->name,
                         'is_trusted' => true,
