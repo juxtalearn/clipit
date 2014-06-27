@@ -15,7 +15,6 @@ $counts = elgg_extract('counts', $vars);
 $video_count = isset($counts['videos']) ? " (".$counts['videos'].")" : "";
 $sb_count = isset($counts['storyboards']) ? " (".$counts['storyboards'].")" : "";
 $files_count = isset($counts['files']) ? " (".$counts['files'].")" : "";
-$activities_count = isset($counts['activities']) ? " (".$counts['activities'].")" : "";
 
 $href = http_build_query(array(
     'by' => get_input('by'),
@@ -25,44 +24,37 @@ $href = http_build_query(array(
 if(get_input('by')){
     $href = "/search?{$href}";
 }
-//$href = get_input('by') ? $href.'&' : '?';
 $href = (get_input('by') || get_input('text')) ? $href.'&' : '?';
+$href_activity = get_input('activity') ? "&activity=".get_input('activity') : "";
 
 $tabs = array(
     'all' => array(
         'text' => elgg_echo('all'),
-        'href' => "explore".rtrim($href,'&'),
+        'href' => "explore".rtrim($href,'&').$href_activity,
         'priority' => 100,
     ),
     'videos' => array(
         'text' => elgg_echo('videos') ."{$video_count}",
-        'href' => "explore{$href}filter=videos",
+        'href' => "explore{$href}filter=videos{$href_activity}",
         'priority' => 200,
     ),
     'storyboards' => array(
         'text' => elgg_echo('storyboards') ."{$sb_count}",
-        'href' => "explore{$href}filter=storyboards",
+        'href' => "explore{$href}filter=storyboards{$href_activity}",
         'priority' => 300,
     ),
     'files' => array(
         'text' => elgg_echo('files') ."{$files_count}",
-        'href' => "explore{$href}filter=files",
+        'href' => "explore{$href}filter=files{$href_activity}",
         'priority' => 400,
     ),
-    'activities' => array(
-        'text' => elgg_echo('activities') ."{$activities_count}",
-        'href' => "explore{$href}filter=activities",
-        'priority' => 500,
-    ),
 );
-
 foreach ($tabs as $name => $tab) {
     $tab['name'] = $name;
 
     if ($vars['selected'] == $name) {
         $tab['selected'] = true;
     }
-
     elgg_register_menu_item('filter', $tab);
 }
 

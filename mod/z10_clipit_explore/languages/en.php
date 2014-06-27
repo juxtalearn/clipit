@@ -13,6 +13,8 @@
 $english = array(
     'search:results_for' => 'Results for',
     'search:not_found' => 'No results',
+
+    'explore:menu' => 'Publications',
 );
 
 add_translation('en', $english);
