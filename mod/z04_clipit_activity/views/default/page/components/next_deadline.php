@@ -23,7 +23,7 @@ $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
             ));
             ?>
         </span>
-        <?php echo elgg_echo("activity:actual_deadline")?>
+        <?php echo elgg_echo("activity:pending_tasks")?>
     </small>
 <?php
 $task_found = false;

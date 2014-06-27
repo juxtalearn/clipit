@@ -23,7 +23,7 @@ foreach(ClipitGroup::get_storyboards($entity_id) as $sb_id):
         <input type="checkbox" style="display: none" name="attach_storyboards[]" value="<?php echo $sb_id;?>" id="item_<?php echo $sb_id;?>">
         <div class="attach-block">
             <div class="multimedia-preview" >
-                <?php echo elgg_view("multimedia/file/preview", array('file'  => $file, 'size' => 'normal'));?>
+                <?php echo elgg_view("multimedia/file/preview", array('file'  => $file, 'size' => 'medium'));?>
             </div>
             <div class="multimedia-details">
                 <div class="blue text-truncate">

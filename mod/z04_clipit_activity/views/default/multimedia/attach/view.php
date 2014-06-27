@@ -42,7 +42,7 @@ $file = elgg_extract('file', $vars);
         <div class="preview" style="width: auto;padding: 0;">
             <div class="multimedia-preview">
                 <?php if($file):?>
-                    <?php $preview =  elgg_view("multimedia/file/preview", array('file'  => $file, 'size' => 'normal'));?>
+                    <?php $preview =  elgg_view("multimedia/file/preview", array('file'  => $file, 'size' => 'medium'));?>
                 <?php else: ?>
                     <?php $preview = '<img src="'.$entity->preview.'"/>'; ?>
                 <?php endif; ?>

@@ -22,7 +22,7 @@ foreach(ClipitGroup::get_files($entity_id) as $file_id):
         <input type="checkbox" style="display: none" name="attach_files[]" value="<?php echo $file_id;?>" id="item_<?php echo $file_id;?>">
         <div class="attach-block">
             <div class="multimedia-preview" >
-                <?php echo elgg_view("multimedia/file/preview", array('file'  => $file, 'size' => 'normal'));?>
+                <?php echo elgg_view("multimedia/file/preview", array('file'  => $file, 'size' => 'medium'));?>
             </div>
             <div class="multimedia-details">
                 <div class="blue text-truncate">

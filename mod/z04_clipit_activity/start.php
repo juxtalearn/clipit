@@ -134,7 +134,7 @@ function activity_setup_sidebar_menus(){
         $params = array(
             'name' => 'activity_sta',
             'text' => elgg_echo('activity:stas'),
-            'href' => "clipit_activity/".$activity->id."/materials",
+            'href' => "clipit_activity/".$activity->id."/resources",
         );
         elgg_register_menu_item('page', $params);
         $params = array(
@@ -523,11 +523,11 @@ function activity_page_handler($page) {
                         'title_style' => "background: #". $activity->color,
                     );
                     break;
-                case 'materials':
+                case 'resources':
                     $title = elgg_echo("activity:stas");
                     elgg_push_breadcrumb($title);
                     $selected_tab = get_input('filter', 'files');
-                    $href = "clipit_activity/{$activity->id}/materials";
+                    $href = "clipit_activity/{$activity->id}/resources";
                     switch ($selected_tab) {
                         case 'files':
                             $files = ClipitActivity::get_files($activity->id);

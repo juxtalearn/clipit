@@ -18,6 +18,7 @@ $file_text = get_input('file-text');
 $entity_class = $object['subtype'];
 
 $entity = array_pop($entity_class::get_by_id(array($entity_id)));
+
 if(count($entity)==0){
     register_error(elgg_echo("storyboard:cantupload"));
 } else{
@@ -27,9 +28,8 @@ if(count($entity)==0){
         'description' => $file_text,
         'temp_path'  => $files['tmp_name']
     ));
-
     if($new_file_id){
-        $new_sb_id = ClipitStoryBoard::create(array(
+        $new_sb_id = ClipitStoryboard::create(array(
             'name' => $files['name'],
             'description' => $file_text,
             'file' => $new_file_id

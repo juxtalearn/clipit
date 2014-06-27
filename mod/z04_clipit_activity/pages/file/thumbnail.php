@@ -26,8 +26,8 @@ switch ($size) {
     case "small":
         $thumbdata = file_get_contents($file->thumb_small['path']);
         break;
-    case "normal":
-        $thumbdata = file_get_contents($file->thumb_normal['path']);
+    case "medium":
+        $thumbdata = file_get_contents($file->thumb_medium['path']);
         break;
     case "large":
         $thumbdata = file_get_contents($file->thumb_large['path']);
