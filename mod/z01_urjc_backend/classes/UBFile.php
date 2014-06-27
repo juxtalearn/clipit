@@ -28,6 +28,7 @@ class UBFile extends UBItem{
     const THUMB_SMALL = 64;
     const THUMB_MEDIUM = 128;
     const THUMB_LARGE = 256;
+
     /**
      * Class variables
      */
@@ -104,8 +105,6 @@ class UBFile extends UBItem{
         return $this->id = $elgg_file->guid;
     }
 
-
-
     /**
      * Copy $this file parameters into an Elgg File entity.
      *
@@ -174,9 +173,6 @@ class UBFile extends UBItem{
         return $mime;
     }
 
-
-
-
     /**
      * Returns an overall file type from the mimetype
      *
@@ -236,7 +232,8 @@ class UBFile extends UBItem{
         // if image, we need to create thumbnails (this should be moved into a function)
         if ($simple_mime_type == "image") {
             $thumb = new ElggFile();
-            $thumbnail = get_resized_image_from_existing_file($filestore_name, static::THUMB_SMALL, static::THUMB_SMALL, false);
+            // squared small thumbnail
+            $thumbnail = get_resized_image_from_existing_file($filestore_name, static::THUMB_SMALL, static::THUMB_SMALL, true);
             if ($thumbnail) {
                 $thumb->setFilename("thumb_small-".$file_name);
                 $thumb->open("write");
@@ -245,8 +242,8 @@ class UBFile extends UBItem{
                 $elgg_file->set("thumb_small", (string)$thumb->getFilenameOnFilestore());
                 unset($thumbnail);
             }
-
-            $thumbnail = get_resized_image_from_existing_file($filestore_name, static::THUMB_MEDIUM, static::THUMB_MEDIUM, false);
+            // squared medium thumbnail
+            $thumbnail = get_resized_image_from_existing_file($filestore_name, static::THUMB_MEDIUM, static::THUMB_MEDIUM, true);
             if ($thumbnail) {
                 $thumb->setFilename("thumb_medium-".$file_name);
                 $thumb->open("write");
@@ -255,7 +252,7 @@ class UBFile extends UBItem{
                 $elgg_file->set("thumb_medium", (string)$thumb->getFilenameOnFilestore());
                 unset($thumbnail);
             }
-
+            // original proportion large thumbnail
             $thumbnail = get_resized_image_from_existing_file($filestore_name, static::THUMB_LARGE, static::THUMB_LARGE, false);
             if ($thumbnail) {
                 $thumb->setFilename("thumb_large-".$file_name);
