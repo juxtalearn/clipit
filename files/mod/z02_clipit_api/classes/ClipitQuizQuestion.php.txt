@@ -28,6 +28,8 @@ class ClipitQuizQuestion extends UBItem{
      * @var array Array of options to chose from as an answer to the question
      */
     public $option_array = array();
+
+
     /**
      * @var string Type of Question: single choice, multiple choice, select 2...
      */
