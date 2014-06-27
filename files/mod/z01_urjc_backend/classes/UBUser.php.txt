@@ -289,13 +289,32 @@ class UBUser extends UBItem{
         return $user->last_login;
     }
 
+    /**
+     * Sets the avatar for a User
+     *
+     * @param int $id User ID
+     * @param int $file_id Id of the image file containing the User's avatar
+     * @return int|false Returns the ID of the User, or false if error.
+     */
+    static function set_avatar($id, $file_id){
+        $prop_value_array = array();
+        $prop_value_array["avatar_file"] = (int)$file_id;
+        return static::set_properties((int)$id, $prop_value_array);
+    }
+
+    /**
+     * Returns the avatar for a User
+     *
+     * @param int $id User ID
+     * @param string $size Desired size of avatar image: small, medium or large.
+     * @return array|null Returns the avatar from the linked avatar_file, or null if not set.
+     */
     static function get_avatar($id, $size = "medium"){
         $prop_value_array = static::get_properties($id, array("avatar_file"));
         $avatar_file = new ClipitFile((int)$prop_value_array["avatar_file"]);
         if(empty($avatar_file)){
             return null;
         }
-
         $avatar = null;
         switch($size){
             case "small":
