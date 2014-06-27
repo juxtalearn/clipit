@@ -28,6 +28,10 @@ class UBFile extends UBItem{
     const THUMB_SMALL = 64;
     const THUMB_MEDIUM = 128;
     const THUMB_LARGE = 256;
+    const THUMB_SQUARE_SMALL = 32;
+    const THUMB_SQUARE_MEDIUM = 64;
+    const THUMB_SQUARE_LARGE = 128;
+
     /**
      * Class variables
      */
@@ -38,6 +42,7 @@ class UBFile extends UBItem{
     public $thumb_small = array();
     public $thumb_medium = array();
     public $thumb_large = array();
+    public $thumb_square = array();
     public $mime_type = array();
 
     /**
@@ -77,6 +82,8 @@ class UBFile extends UBItem{
             $this->thumb_medium["url"] = (string)elgg_get_site_url()."file/thumbnail/medium/".$this->id;
             $this->thumb_large["path"] = (string)$elgg_file->get("thumb_large");
             $this->thumb_large["url"] = (string)elgg_get_site_url()."file/thumbnail/large/".$this->id;
+            $this->thumb_square["path"] = (string)$elgg_file->get("thumb_square");
+            $this->thumb_square["url"] = (string)elgg_get_site_url()."file/thumbnail/square/".$this->id;
         }
         if(!empty($elgg_file->mime_type)){
             $this->mime_type["full"] = $elgg_file->mime_type[0];
@@ -138,6 +145,7 @@ class UBFile extends UBItem{
                 $elgg_file->set("thumb_small", (string)$this->thumb_small["path"]);
                 $elgg_file->set("thumb_medium", (string)$this->thumb_medium["path"]);
                 $elgg_file->set("thumb_large", (string)$this->thumb_large["path"]);
+                $elgg_file->set("thumb_square", (string)$this->thumb_square["path"]);
             }
         }
         $filestore_name = $elgg_file->getFilenameOnFilestore();
@@ -263,6 +271,16 @@ class UBFile extends UBItem{
                 $thumb->write($thumbnail);
                 $thumb->close();
                 $elgg_file->set("thumb_large", (string)$thumb->getFilenameOnFilestore());
+                unset($thumbnail);
+            }
+
+            $thumbnail = get_resized_image_from_existing_file($filestore_name, static::THUMB_SQUARE, static::THUMB_SQUARE, true);
+            if ($thumbnail) {
+                $thumb->setFilename("thumb_square-".$file_name);
+                $thumb->open("write");
+                $thumb->write($thumbnail);
+                $thumb->close();
+                $elgg_file->set("thumb_square", (string)$thumb->getFilenameOnFilestore());
                 unset($thumbnail);
             }
         }

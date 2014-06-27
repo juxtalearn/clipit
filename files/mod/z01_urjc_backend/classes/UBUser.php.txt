@@ -307,6 +307,8 @@ class UBUser extends UBItem{
             case "large":
                 $avatar = (array)$avatar_file->thumb_large;
                 break;
+            case "square":
+                $avatar = (array)$avatar_file->thumb_square;
         }
         return $avatar;
     }
