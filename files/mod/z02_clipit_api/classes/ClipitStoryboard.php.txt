@@ -24,7 +24,6 @@ class ClipitStoryboard extends ClipitResource{
 
     const REL_RESOURCE_TAG = "storyboard-tag";
     const REL_RESOURCE_LABEL = "storyboard-label";
-    const REL_RESOURCE_COMMENT = "storyboard-comment";
     const REL_RESOURCE_PERFORMANCE = "storyboard-performance";
 
     const REL_GROUP_RESOURCE = ClipitGroup::REL_GROUP_STORYBOARD;

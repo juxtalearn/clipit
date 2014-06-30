@@ -66,6 +66,21 @@ class ClipitFile extends UBFile{
         return $return_array;
     }
 
+    static function get_by_labels($label_array){
+        $return_array = array();
+        $all_items = static::get_all(0, true); // Get all item ids, not objects
+        foreach($all_items as $item_id){
+            $item_labels = (array)static::get_labels((int) $item_id);
+            foreach($label_array as $search_tag){
+                if(array_search($search_tag, $item_labels) !== false){
+                    $return_array[(int)$item_id] = new static((int)$item_id);
+                    break;
+                }
+            }
+        }
+        return $return_array;
+    }
+
     static function get_group($id){
         $file = new static($id);
         if(!empty($file->clone_id)){
