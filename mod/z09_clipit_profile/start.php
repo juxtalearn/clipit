@@ -17,10 +17,15 @@ function clipit_profile_init() {
     elgg_register_page_handler('profile', 'profile_page_handler');
     // Register "/settings" page handler
     elgg_register_page_handler('settings', 'usersettings_clipit_page_handler');
+    // Register library
+    elgg_register_library('clipit:profile', elgg_get_plugins_path() . 'z09_clipit_profile/lib/profile/functions.php');
+    elgg_load_library('clipit:profile');
 
     elgg_register_event_handler('pagesetup', 'system', 'usersettings_clipit_pagesetup');
     // Actions
     elgg_register_action("settings/account", elgg_get_plugins_path() . "z09_clipit_profile/actions/settings/account.php");
+    elgg_register_action("settings/avatar/upload", elgg_get_plugins_path() . "z09_clipit_profile/actions/settings/avatar/upload.php");
+    elgg_register_action("settings/avatar/remove", elgg_get_plugins_path() . "z09_clipit_profile/actions/settings/avatar/remove.php");
 }
 
 /**
@@ -62,6 +67,7 @@ function usersettings_clipit_page_handler($page){
         elgg_set_page_owner_guid($user->guid);
     }
     $user_id = elgg_get_logged_in_user_guid();
+    $user = array_pop(ClipitUser::get_by_id(array($user_id)));
     elgg_push_breadcrumb(elgg_echo('settings'), "settings/user");
     elgg_set_context('user_settings');
 
@@ -79,8 +85,7 @@ function usersettings_clipit_page_handler($page){
         case 'avatar':
             $title = elgg_echo("profile:settings:edit_avatar");
             elgg_push_breadcrumb($title);
-            $entity = $user;
-            $content = elgg_view('settings/avatar/upload', array('entity' => $entity));
+            $content = elgg_view('settings/avatar/upload', array('entity' => $user));
             break;
         default:
             return false;
@@ -108,7 +113,7 @@ function usersettings_clipit_pagesetup() {
     if ($user_id && elgg_get_context() == "user_settings") {
         $params = array(
             'name' => 'settings_account',
-            'text' => elgg_echo('usersettings:user:opt:linktext'),
+            'text' => elgg_echo('profile:settings:change'),
             'href' => "settings/user",
         );
         elgg_register_menu_item('page', $params);

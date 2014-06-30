@@ -16,9 +16,9 @@ function view_recommended_event($event, $view_type = 'full'){
         case "activity-video":
             $activity = array_pop(ClipitActivity::get_by_id(array($relationship->guid_one)));
             $entity = array_pop(ClipitVideo::get_by_id(array($relationship->guid_two)));
-            $href = "clipit_activity/{$activity->id}/materials";
+            $href = "clipit_activity/{$activity->id}/resources";
             $params = array(
-                'title' => 'Teacher added new video to materials',
+                'title' => 'Teacher added new video to resources',
                 'icon' => 'fa-video-camera',
                 'author' => $entity->owner_id,
                 'body' => elgg_view("recommended/events/video", array('entity' => $entity, 'href' => $href, 'rating' => false))
@@ -27,9 +27,9 @@ function view_recommended_event($event, $view_type = 'full'){
         case "activity-file":
             $activity = array_pop(ClipitActivity::get_by_id(array($relationship->guid_one)));
             $entity = array_pop(ClipitFile::get_by_id(array($relationship->guid_two)));
-            $href = "clipit_activity/{$activity->id}/materials/view/{$entity->id}";
+            $href = "clipit_activity/{$activity->id}/resources/view/{$entity->id}";
             $params = array(
-                'title' => 'Teacher added new file to materials',
+                'title' => 'Teacher added new file to resources',
                 'icon' => 'fa-file',
                 'author' => $entity->owner_id,
                 'body' => elgg_view("recommended/events/file", array(
@@ -43,9 +43,9 @@ function view_recommended_event($event, $view_type = 'full'){
             $activity = array_pop(ClipitActivity::get_by_id(array($relationship->guid_one)));
             $entity = array_pop(ClipitStoryboard::get_by_id(array($relationship->guid_two)));
             $file = array_pop(ClipitFile::get_by_id(array($entity->file)));
-            $href = "clipit_activity/{$activity->id}/materials/view/{$entity->id}";
+            $href = "clipit_activity/{$activity->id}/resources/view/{$entity->id}";
             $params = array(
-                'title' => 'Teacher added new storyboard to materials',
+                'title' => 'Teacher added new storyboard to resources',
                 'icon' => 'fa-file',
                 'author' => $entity->owner_id,
                 'body' => elgg_view("recommended/events/file", array(

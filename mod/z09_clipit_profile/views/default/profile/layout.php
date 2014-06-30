@@ -19,14 +19,14 @@ $elgg_user = new ElggUser($entity->id);
     </div>
     <div class="col-md-9">
         <ul>
-        <?php
-        $limit = 15;
-        $recommended_events = ClipitEvent::get_by_object(array($entity->id), 0, 30);
-        foreach ($recommended_events as $event_log){
-            $content .= view_recommended_event($event_log);
-        }
-        echo $content;
-        ?>
+            <?php
+            $limit = 15;
+            $recommended_events = ClipitEvent::get_by_object(array($entity->id), 0, 30);
+            foreach ($recommended_events as $event_log){
+                $content .= view_recommended_event($event_log);
+            }
+            echo $content;
+            ?>
         </ul>
     </div>
 </div>

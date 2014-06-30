@@ -25,7 +25,6 @@ $params_progress = array(
     'width' => '100%',
 );
 $body .= elgg_view("page/components/progressbar", $params_progress);
-$body .= elgg_view("page/components/next_deadline", array('entity' => $group));
 // Module view
 echo elgg_view('page/components/module', array(
     'header' => $header,

@@ -17,9 +17,8 @@ $entity = elgg_extract('entity', $vars);
 </p>
 <div>
     <label><?php echo elgg_echo("avatar:upload"); ?></label>
-    <?php echo elgg_view("input/file",array('name' => 'avatar')); ?>
+    <?php echo elgg_view("input/file", array('name' => 'avatar')); ?>
 </div>
 <p style="margin-top: 20px" class="pull-right">
-    <?php echo elgg_view('input/hidden', array('name' => 'guid', 'value' => $entity->id)); ?>
-    <?php echo elgg_view('input/submit', array('value' => elgg_echo('upload'), 'class' => 'btn btn-default')); ?>
+    <?php echo elgg_view('input/submit', array('value' => elgg_echo('upload'), 'class' => 'btn btn-primary')); ?>
 </p>

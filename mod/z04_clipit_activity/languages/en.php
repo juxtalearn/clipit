@@ -59,7 +59,7 @@ $english = array(
     'group:files' => 'Multimedia',
     'group:home' => 'Group home',
     'group:activity_log' => 'Activity log',
-    'group:progress' => 'Progress',
+    'group:progress' => 'Group progress',
     'group:timeline' => 'Timeline',
     'group:members' => 'Members',
     // Discussion
@@ -158,7 +158,7 @@ $english = array(
     'task:pending' => 'Pending',
     'task:my_video' => 'My video',
     'task:other_videos' => 'Other videos',
-    'task:not_actual' => 'There are no actual tasks',
+    'task:not_actual' => 'There are no pending tasks',
 );
 
 add_translation('en', $english);

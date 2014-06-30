@@ -41,7 +41,6 @@ $english = array(
     'user:resetpassword:newpassword' => 'New password',
     'user:resetpassword:newpasswordagain' => 'New password (again for verification)',
     // Widgets
-    'widget:student/landing/pending' => 'Pending',
     'widget:student/landing/recommended_videos' => 'Recommended videos',
     'widget:student/landing/activity_status' => 'Activity status',
     'widget:student/landing/group_activity' => 'Group activity',

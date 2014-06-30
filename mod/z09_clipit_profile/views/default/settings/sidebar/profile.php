@@ -14,8 +14,8 @@ $user_id = elgg_get_logged_in_user_guid();
 $user = array_pop(ClipitUser::get_by_id(array($user_id)));
 $user_elgg = new ElggUser($user_id);
 $body = elgg_view('output/img', array(
-    'src' => $user_elgg->getIconURL('small'),
-    'class' => 'image-block'
+    'src' => get_avatar($user, 'small'),
+    'class' => 'image-block avatar-small'
 ));
 $body .= '<div class="content-block">
             <h3 class="text-truncate">';
@@ -28,6 +28,6 @@ $body .= '
         </div>';
 $body .= '<small class="show">@'.$user->login.'</small>';
 
-echo elgg_view_module('aside', '', $body, array('class' => 'activity-group-block'));
+echo elgg_view_module('aside', '', $body, array('class' => 'activity-group-block margin-bottom-10'));
 ?>
 

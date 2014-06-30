@@ -14,48 +14,18 @@ $my_groups_ids = ClipitUser::get_groups(elgg_get_logged_in_user_guid());
 foreach($my_groups_ids as $group_id){
     $activity_ids[] = ClipitGroup::get_activity($group_id);
 }
-
 $activities = ClipitActivity::get_by_id($activity_ids);
-$task_found = false;
-foreach($activities as $activity):
-    foreach(ClipitTask::get_by_id($activity->task_array) as $task):
-        $status = get_task_status($task);
-        if($task->start <= time() && $task->end >= time()):
-            $task_found = true;
-            $activity = array_pop(ClipitActivity::get_by_id(array($task->activity)));
-            $content .= '
-            <div class="separator wrapper">
-                <small class="pull-right" style="text-transform:uppercase">'.date("d M Y", $task->end).'</small>
-                '.elgg_view('output/url', array(
-                    'href'  => "clipit_activity/{$task->activity}",
-                    'title' => $activity->name,
-                    'style' => 'background: #'.$activity->color,
-                    'class' => 'activity-point',
-                    'text'  => '',
-                )).'
-                '.elgg_view('output/url', array(
-                    'href'  => "clipit_activity/{$task->activity}/tasks/view/{$task->id}",
-                    'title' => $task->name,
-                    'text'  => $status['count']." ".$task->name,
-                )).'
-            </div>';
-        endif;
-    endforeach;
-endforeach;
-if(!$task_found):
-    $content = '<div class="separator wrapper">
-                    <small><strong>'.elgg_echo('task:no_pending').'</strong></small>
-                </div>';
-endif;
+$content = elgg_view("page/components/pending_tasks_activities", array('entities' => $activities));
 
 /*$all_link = elgg_view('output/url', array(
     'href' => "linkHref",
     'text' => elgg_echo('link:view:all'),
     'is_trusted' => true,
 ));*/
+
 echo elgg_view('landing/module', array(
     'name'      => "pending",
-    'title'     => "Pending",
+    'title'     => elgg_echo('activity:pending_tasks'),
     'content'   => $content,
     'all_link'  => $all_link,
 ));

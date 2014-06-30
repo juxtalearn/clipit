@@ -11,17 +11,22 @@
  * @package         ClipIt
  */
 $group = elgg_extract('entity', $vars);
+$activity_id = ClipitGroup::get_activity($group->id);
+$activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
 ?>
 <div class="row">
     <div class="col-md-12">
-        <h3><?php echo elgg_echo("group:progress"); ?></h3>
-        <?php
-        echo elgg_view("page/components/progressbar", array(
-            'value' => get_group_progress($group->id),
-            'width' => '100%',
-        ));
-        ?>
-        <?php echo elgg_view("page/components/next_deadline", array('entity' => $group)); ?>
+        <div>
+            <h3><?php echo elgg_echo("group:progress"); ?></h3>
+            <?php
+            echo elgg_view("page/components/progressbar", array(
+                'value' => get_group_progress($group->id),
+                'width' => '100%',
+            ));
+            ?>
+        </div>
+        <small class="show" style="margin: 5px 0"><?php echo elgg_echo('activity:pending_tasks');?></small>
+        <?php echo elgg_view("group/pending_tasks", array('entity' => $activity)); ?>
     </div>
 </div>
 <div class="row">

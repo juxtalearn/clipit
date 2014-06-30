@@ -6832,6 +6832,13 @@ fieldset[disabled] .elgg-sidebar input.elgg-button-submit.active {
 .elgg-sidebar .elgg-module-aside h4 {
   margin-top: 25px;
 }
+.elgg-sidebar .elgg-module-aside.aside-block .elgg-body {
+  background: #fff;
+  padding: 10px;
+}
+.elgg-sidebar .elgg-module-aside.aside-block .elgg-body > ul {
+  margin: 0;
+}
 .elgg-sidebar .nav > li > a {
   padding: 5px 10px;
   font-size: 13px;
@@ -7689,6 +7696,13 @@ li.list-item:last-child {
 .elgg-module-widget .wrapper {
   padding: 10px;
 }
+.elgg-module-widget ul.wrapper-list {
+  margin: 0;
+}
+.elgg-module-widget ul.wrapper-list > li {
+  margin: 0;
+  padding: 10px;
+}
 .module-tags ul.tag-cloud {
   overflow: hidden;
   margin: 0;
@@ -8353,19 +8367,10 @@ ul.deadline-list > li .fa {
 .tags-block ul.tags-list li:last-child {
   border: 0;
 }
-.activity-group-block {
-  margin-bottom: 40px;
-  padding-bottom: 10px;
-}
 .activity-group-block h3 {
   font-family: FuturaBoldRegular, Impact, 'Impact Bold', Helvetica, Arial, sans, sans-serif;
   margin-bottom: 5px;
   margin-top: 0;
-}
-.activity-group-block h3 .group-menu {
-  margin-right: 10px;
-  color: #9c9e9f;
-  text-decoration: none;
 }
 .activity-group-block .fa.status-deadline {
   font-size: 15px;
@@ -10032,6 +10037,66 @@ small,
 h4.empty {
   margin-top: 3px;
   color: #c9c9c9;
+}
+.avatar-tiny {
+  width: 25px;
+  height: 25px;
+}
+.avatar-small {
+  width: 40px;
+  height: 40px;
+}
+.avatar-medium {
+  width: 100px;
+  height: 100px;
+}
+.margin-top-5 {
+  margin-top: 5px;
+}
+.margin-bottom-5 {
+  margin-bottom: 5px;
+}
+.margin-right-5 {
+  margin-right: 5px;
+}
+.margin-left-5 {
+  margin-left: 5px;
+}
+.margin-top-10 {
+  margin-top: 10px;
+}
+.margin-bottom-10 {
+  margin-bottom: 10px;
+}
+.margin-right-10 {
+  margin-right: 10px;
+}
+.margin-left-10 {
+  margin-left: 10px;
+}
+.margin-top-15 {
+  margin-top: 15px;
+}
+.margin-bottom-15 {
+  margin-bottom: 15px;
+}
+.margin-right-15 {
+  margin-right: 15px;
+}
+.margin-left-15 {
+  margin-left: 15px;
+}
+.margin-top-20 {
+  margin-top: 20px;
+}
+.margin-bottom-20 {
+  margin-bottom: 20px;
+}
+.margin-right-20 {
+  margin-right: 20px;
+}
+.margin-left-20 {
+  margin-left: 20px;
 }
 .progress-bar {
   background: #32b4e5;

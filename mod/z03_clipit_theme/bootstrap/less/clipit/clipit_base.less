@@ -133,6 +133,44 @@ h4.empty{
   margin-top: 3px;
   color: @grey_slow_3;
 }
+// Avatar sizes
+// --------------------------------------------------
+.avatar-tiny{
+  width: 25px;
+  height: 25px;
+}
+.avatar-small{
+  width: 40px;
+  height: 40px;
+}
+.avatar-medium{
+  width: 100px;
+  height: 100px;
+}
+// Margins
+// --------------------------------------------------
+.margin-set(@size) {
+  .margin-top-@{size}{
+    margin-top: @size*1px;
+  }
+  .margin-bottom-@{size}{
+    margin-bottom: @size*1px;
+  }
+  .margin-right-@{size}{
+    margin-right: @size*1px;
+  }
+  .margin-left-@{size}{
+    margin-left: @size*1px;
+  }
+}
+
+//.margin-bottom-10{
+//  margin-bottom: 10px;
+//}
+.margin-set(5);
+.margin-set(10);
+.margin-set(15);
+.margin-set(20);
 // Progress bar
 // --------------------------------------------------
 .progress-bar{

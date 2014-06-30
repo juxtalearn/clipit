@@ -26,8 +26,6 @@ function clipit_activity_init() {
     // Register "/z04_clipit_activity" page handler
     elgg_register_page_handler('clipit_activity', 'activity_page_handler');
 //    elgg_register_entity_url_handler('object', 'z04_clipit_activity', 'activity_url');
-    elgg_register_event_handler('pagesetup', 'system', 'activity_setup_sidebar_menus');
-    elgg_register_event_handler('pagesetup', 'system', 'group_details_setup_menus');
 
     // Register actions, ajax views
 
@@ -184,7 +182,8 @@ function activity_page_handler($page) {
     $activity = array_pop(ClipitActivity::get_by_id(array($page[0])));
     $user_id = elgg_get_logged_in_user_guid();
     $user = array_pop(ClipitUser::get_by_id(array($user_id)));
-    $isCalled = ClipitActivity::get_called_users($activity->id);
+    $called_users = ClipitActivity::get_called_users($activity->id);
+    $isCalled = in_array($user_id, $called_users);
     // Default status
     $activity_status = ClipitActivity::get_status($activity->id);
     // Check if activity exists
@@ -688,13 +687,23 @@ function activity_page_handler($page) {
     if(!$params){
         return false;
     }
-    $group_tools_sidebar = "";
+    $group_menu_sidebar = "";
+    $pending_tasks_sidebar = "";
+    $activity_menu_sidebar = "";
+
+    if($hasGroup || $access == 'ACCESS_TEACHER'){
+        $activity_menu = elgg_view("activity/sidebar/activity_menu", array('entity' => $activity));
+        $activity_menu_sidebar = elgg_view_module('aside', elgg_echo('activity'), $activity_menu);
+    }
     // Group sidebar components (group block info + group tools)
     if($hasGroup){
+        $pending_tasks = elgg_view("page/components/pending_tasks", array('entity' => $activity));
+        $pending_tasks_sidebar = elgg_view_module('aside', elgg_echo('activity:pending_tasks'), $pending_tasks, array('class' => 'aside-block'));
+
         elgg_extend_view("page/elements/owner_block", "page/elements/group_block");
-        $group_tools_sidebar = elgg_view('group/sidebar/group_tools', array('entity' => $activity));
+        $group_menu_sidebar = elgg_view('group/sidebar/group_menu', array('entity' => $activity));
     }
-    if(!$hasGroup && $isCalled && $activity_status == 'enroll') {
+    if(!$hasGroup && ($isCalled && $activity_status == 'enroll')) {
         // Join to activity button
         elgg_extend_view("page/elements/owner_block", "page/components/button_join_activity");
     }
@@ -712,7 +721,7 @@ function activity_page_handler($page) {
         // Default teacher's list
         $teacher_sidebar .= elgg_view('activity/sidebar/teacher', array('teachers' => $teachers));
     }
-    $params['sidebar'] = $group_tools_sidebar . $teacher_sidebar;
+    $params['sidebar'] = $pending_tasks_sidebar . $activity_menu_sidebar . $group_menu_sidebar . $teacher_sidebar;
     if(!$params['class']){
         $params['class'] = "activity-section activity-layout";
     }
@@ -996,6 +1005,13 @@ function group_tools_page_handler($page, $activity){
             return false;
     }
     // Default group params
+//    $defaults_params = array(
+//        'content' => $content,
+//        'filter' => $filter,
+//        'title' => $title,
+//        'sub-title' => $group_name,
+//        'title_style' => "background: #". $activity->color
+//    );
     $params['content'] = $content;
     $params['filter'] = $filter;
     $params['title'] = $title;

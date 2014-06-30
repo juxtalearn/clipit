@@ -11,17 +11,16 @@
  * @package         ClipIt
  */
 $entity = elgg_extract('entity', $vars);
-
 $current_label = elgg_echo('avatar:current');
-
 $remove_button = '';
-if ($vars['entity']->icontime) {
+
+if ($entity->avatar_file) {
     $remove_button = elgg_view('output/url', array(
         'text' => elgg_echo('remove'),
         'title' => elgg_echo('avatar:remove'),
-        'href' => 'action/avatar/remove?guid=' . elgg_get_page_owner_guid(),
+        'href' => 'action/settings/avatar/remove?guid=' . elgg_get_page_owner_guid(),
         'is_action' => true,
-        'class' => 'elgg-button elgg-button-cancel mll',
+        'class' => 'show btn btn-danger margin-top-10',
     ));
 }
 
@@ -29,11 +28,12 @@ $form_params = array('enctype' => 'multipart/form-data');
 ?>
 <div class="image-block">
     <?php echo elgg_view('output/img', array(
-            'src' => $entity->getIconUrl('medium'),
+            'src' => get_avatar($entity),
             'alt' => elgg_echo('avatar'),
         ));
     ?>
+    <?php echo $remove_button;;?>
 </div>
 <div class="content-block">
-    <?php echo elgg_view_form('settings/upload', $form_params, $vars);?>
+    <?php echo elgg_view_form('settings/avatar/upload', $form_params, $vars);?>
 </div>

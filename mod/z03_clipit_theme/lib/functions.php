@@ -143,68 +143,7 @@ function load_clipit_event($event, $relationship){
 
     }
 }
-function clipit_event($event, $view_type){
 
-    $relationship = get_relationship($event->object_id);
-
-//    $activity = get_group_activity($event);
-//    $default = array(
-//        'activity'  => $activity,
-//        'event'     => $event,
-//        'author'    => array_pop(ClipitUser::get_by_id(array($event->performed_by_guid))),
-//        'time'      => $event->time_created
-//    );
-//    $feed = load_clipit_event($relationship, $activity);
-//    $params = array_merge($feed, $default);
-
-    $default = array();
-    $explode_rel = explode("-", $relationship->relationship);
-    switch($explode_rel[0]){
-        case "group":
-            if($relationship->relationship == 'group-video'){
-                return false;
-            }
-            $object = array_pop(ClipitGroup::get_by_id(array($relationship->guid_one)));
-            $activity_id = ClipitGroup::get_activity($object->id);
-            $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
-            $author = array_pop(ClipitUser::get_by_id(array($event->performed_by_guid)));
-            $author_elgg = new ElggUser($event->performed_by_guid);
-
-            $default = array(
-                'author'  => array(
-                    'name'  => $author->name,
-                    'icon'  => $author_elgg->getIconURL('small'),
-                    'url'   => "profile/{$author->login}",
-                ),
-                'object' => array(
-                    'name' => $object->name,
-                    'url' => "clipit_activity/{$activity->id}/group/activity_log",
-                ),
-                'activity'  => $activity,
-            );
-            break;
-        case "activity":
-            $activity = array_pop(ClipitActivity::get_by_id(array($relationship->guid_one)));
-            $author = array_pop(ClipitUser::get_by_id(array($event->performed_by_guid)));
-            $author_elgg = new ElggUser($event->performed_by_guid);
-            $default = array(
-                'author'  => array(
-                    'name'  => $author->name,
-                    'icon'  => $author_elgg->getIconURL('small'),
-                    'url'   => "profile/{$author->login}",
-                ),
-                'activity'  => $activity,
-            );
-            break;
-    }
-//    $params = array('event'=> load_clipit_event($event, $relationship));
-    $default['time'] = $event->time_created;
-
-    $event_params = load_clipit_event($event, $relationship);
-    $params = array_merge($default, $event_params);
-    $params = array('event' => $params);
-    return elgg_view("feed/".$view_type, $params);
-}
 function get_group_activity($event){
     $object_rel = get_relationship($event->object_id);
     $activity_id = ClipitGroup::get_activity($object_rel->guid_one);
@@ -246,63 +185,6 @@ function clipit_student_events($rel_array){
     return $content;
 }
 
-/*
- * Group events types
- */
-function group_events($subtype, $object_rel, $relationship){
-    $content = "";
-    // Activity object
-    $activity_id = ClipitGroup::get_activity($object_rel->guid_one);
-    $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
-    // Group object
-    $group = array_pop(ClipitGroup::get_by_id(array($object_rel->guid_one)));
-    // User object
-    $user = array_pop(ClipitUser::get_by_id(array($relationship->performed_by_guid)));
-    $user = new ElggUser($user->id);
-
-    switch($subtype){
-        case "group-user":
-            $params =  array(
-                'title' => 'New member',
-                'id'    => $relationship->id,
-                'href'  => 'profile/'.$user->login,
-                'icon'  => 'user',
-                'color' => $activity->color,
-                'time'  => $relationship->time_created,
-                'details' => array(
-                    'img'   => elgg_view('output/img', array(
-                        'src' => $user->getIconURL('small'),
-                        'alt' => $user->name,
-                        'title' => elgg_echo('profile'),
-                        'class' => 'img-thumb',
-                    )),
-                    'title' => $user->name,
-                    'sub-title' => 'In '.$group->name,
-                ),
-            );
-            $content .= elgg_view("page/components/timeline_event", $params);
-            break;
-        case "group-file":
-            $file = array_pop(ClipitFile::get_by_id(array($object_rel->guid_two)));
-            $params =  array(
-                'title' => 'File uploaded',
-                'id'    => $relationship->id,
-                'href'  => 'clipit_activity/'.$activity->id.'/files/view/'.$file->id,
-                'icon'  => 'upload',
-                'color' => $activity->color,
-                'time'  => $relationship->time_created,
-                'details' => array(
-                    'icon'   => 'file-text',
-                    'title' => $file->name,
-                    'sub-title' => 'By '.$user->name,
-                    'description' => $file->description,
-                ),
-            );
-            $content .= elgg_view("page/components/timeline_event", $params);
-            break;
-    }
-    return $content;
-}
 /*
  * Activity events types
  */

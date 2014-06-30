@@ -15,7 +15,7 @@ elgg_register_event_handler('init', 'system', 'clipit_explore_init');
 function clipit_explore_init() {
     // Register "/explore" page handler
     elgg_register_page_handler('explore', 'explore_page_handler');
-    elgg_register_library('clipit:explore', elgg_get_plugins_path() . 'z10_clipit_explore/lib/functions.php');
+    elgg_register_library('clipit:explore', elgg_get_plugins_path() . 'z10_clipit_explore/lib/explore/functions.php');
     elgg_load_library('clipit:explore');
 }
 

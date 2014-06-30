@@ -14,6 +14,7 @@ $english = array(
     'profile' => 'Profile',
     'profile:stats' => 'Statistics page',
     // Settings
+    'profile:settings:change' => 'Change your settings',
     'profile:settings:edit_profile' => 'Edit profile',
     'profile:settings:edit_avatar' => 'Edit avatar',
     'profile:settings:edit' => 'Your settings',

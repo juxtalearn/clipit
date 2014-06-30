@@ -13,7 +13,10 @@
 $user = elgg_extract("entity", $vars);
 $user_elgg = new ElggUser($user->id);
 ?>
-<img class="pull-left" style="margin-right: 10px;" src="<?php echo $user_elgg->getIconURL('tiny');?>">
+<?php echo elgg_view('output/img', array(
+    'src' => get_avatar($user, 'small'),
+    'class' => 'pull-left margin-right-10 avatar-tiny'
+));?>
 <div class="text-truncate">
     <?php echo elgg_view("messages/compose_icon", array('entity' => $user));?>
     <?php echo elgg_view('output/url', array(
