@@ -11,8 +11,8 @@
  * @package         ClipIt
  */
 $entity = elgg_extract("entity", $vars);
-$user_loggedin = elgg_get_logged_in_user_guid();
-$user_loggedin_elgg = new ElggUser($user_loggedin);
+$user_loggedin_id = elgg_get_logged_in_user_guid();
+$user_logged = array_pop(ClipitUser::get_by_id(array($user_loggedin_id)));
 $activity_id = elgg_get_page_owner_guid();
 $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
 $tags = $entity->tag_array;
@@ -114,7 +114,7 @@ $owner_group = array_pop(ClipitGroup::get_by_id(array($owner_group_id)));
                             ?>
                             <h4><strong>All evaluations</strong></h4>
                         </li>
-                        <?php if($me_rating_entity = ClipitRating::get_from_user_for_target($user_loggedin, $entity->id)): ?>
+                        <?php if($me_rating_entity = ClipitRating::get_from_user_for_target($user_loggedin_id, $entity->id)): ?>
                         <li class="list-item my-evaluation">
                             <div class="content-block">
                                 <?php echo elgg_view('output/url', array(
@@ -140,9 +140,9 @@ $owner_group = array_pop(ClipitGroup::get_by_id(array($owner_group_id)));
 </div>
 <!-- Multimedia info + details end -->
 <?php
-$hasRating = ClipitRating::get_from_user_for_target($user_loggedin, $entity->id);
+$hasRating = ClipitRating::get_from_user_for_target($user_loggedin_id, $entity->id);
 $owner_group = $entity->get_group($entity->id);
-$my_group = ClipitGroup::get_from_user_activity($user_loggedin, $activity_id);
+$my_group = ClipitGroup::get_from_user_activity($user_loggedin_id, $activity_id);
 
 if(!$hasRating && ($my_group != $owner_group)):
 ?>
@@ -174,7 +174,10 @@ endif;
 <h3 class="activity-module-title"><?php echo elgg_echo("comment:create"); ?></h3>
 <div class="discussion discussion-reply-msg">
     <div class="user-reply">
-        <img class="user-avatar" src="<?php echo $user_loggedin_elgg->getIconURL('small'); ?>"/>
+        <?php echo elgg_view('output/img', array(
+            'src' => get_avatar($user_logged, 'small'),
+            'class' => 'user-avatar avatar-small'
+        ));?>
     </div>
     <div class="block">
         <?php echo elgg_view_form("comments/create", array('data-validate'=> "true", 'class'=>'fileupload' ), array('entity'  => $entity)); ?>

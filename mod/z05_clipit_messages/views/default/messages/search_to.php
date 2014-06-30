@@ -15,24 +15,23 @@ $query = stripslashes(get_input('q', get_input('tag', '')));
 $display_query = mb_convert_encoding($query, 'HTML-ENTITIES', 'UTF-8');
 $display_query = htmlspecialchars($display_query, ENT_QUOTES, 'UTF-8', false);
 // Simulate
-$users = ClipitUser::get_all();
+$users = ClipitUser::get_from_search($display_query);
 $user_id = $vars['user_id'];
 if($user_id){
     $users = ClipitUser::get_by_id(array($user_id));
     $display_query = $users[$user_id]->name;
 }
 
-foreach($users as $user){
-    $user_elgg = new ElggUser($user->id);
-    if( stripos( $user->name, $display_query )!== false  ||  stripos( $user->login, $display_query )!== false ){
-        $user_avatar = $user_elgg->getIconURL('tiny');
+foreach(array_slice($users,0, 10) as $user){
+    //if( stripos( $user->name, $display_query )!== false  ||  stripos( $user->login, $display_query )!== false ){
+        $user_avatar = get_avatar_url($user,'small');
         $json_output[] = array(
             "id" => $user->id,
             "first_name" => $user->name,
             "username"     => "@".$user->login,
             "avatar" =>  $user_avatar,
         );
-    }
+    //}
 }
 
 echo json_encode($json_output);

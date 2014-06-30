@@ -108,9 +108,6 @@ function explore_page_handler($page) {
                     break;
             }
             break;
-        default:
-            return false;
-            break;
     }
     // Get publications items
     if($activity_id){
@@ -162,7 +159,7 @@ function explore_page_handler($page) {
             }
             break;
     }
-    switch($page[0]){
+    switch($page[1]){
 
         case 'video':
             echo "VIDEO PREVIEW";

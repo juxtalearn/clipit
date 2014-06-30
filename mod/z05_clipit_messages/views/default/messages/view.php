@@ -14,11 +14,10 @@ $messages = elgg_extract('entity', $vars);
 $sender = elgg_extract('sender', $vars);
 
 $user_loggedin_id = elgg_get_logged_in_user_guid();
-$user_loggedin = new ElggUser($user_loggedin_id);
+$user_logged = array_pop(ClipitUser::get_by_id(array($user_loggedin_id)));
 
 foreach($messages as $message):
     $owner_user = array_pop(ClipitUser::get_by_id(array($message->owner_id)));
-    $owner_user_elgg = new ElggUser($message->owner_id);
     // Set read status from user logged in
     ClipitChat::set_read_status($message->id, true, array($user_loggedin_id));
 
@@ -30,7 +29,10 @@ foreach($messages as $message):
     <?php endif; ?>
 >
     <div class="image-block">
-        <img src="<?php echo $owner_user_elgg->getIconURL("small");?>">
+        <?php echo elgg_view('output/img', array(
+            'src' => get_avatar($owner_user, 'small'),
+            'class' => 'avatar-small'
+        ));?>
     </div>
         <div class="content-block">
             <strong>
@@ -62,7 +64,10 @@ foreach($messages as $message):
 <a name="create_reply"></a>
 <div class="discussion discussion-reply-msg">
     <div class="user-reply">
-        <img class="user-avatar" src="<?php echo $user_loggedin->getIconURL('small'); ?>"/>
+        <?php echo elgg_view('output/img', array(
+            'src' => get_avatar($user_logged, 'small'),
+            'class' => 'user-avatar avatar-small'
+        ));?>
     </div>
     <div class="block">
         <?php echo elgg_view_form("messages/reply/create", array('data-validate'=> "true" ), array('entity'  => $sender, 'category' => 'pm')); ?>

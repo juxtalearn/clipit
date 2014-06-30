@@ -95,12 +95,17 @@ if (is_array($items) && count($items) > 0):
                                     <?php
                                     foreach ($users as $user_id):
                                         $user = array_pop(ClipitUser::get_by_id(array($user_id)));
-                                        $user_elgg = new ElggUser($user_id);
+                                        $user_avatar = elgg_view('output/img', array(
+                                            'src' => get_avatar($user, 'small'),
+                                            'style' => 'margin: 1px;',
+                                            'class' => 'avatar-tiny'
+                                        ));
                                     ?>
                                         <?php echo elgg_view('output/url', array(
                                             'href'  => "profile/".$user->login,
                                             'title' => $user->name,
-                                            'text'  => '<img style="margin: 1px;" src="'.$user_elgg->getIconURL('tiny').'" />'));
+                                            'text' => $user_avatar
+                                         ));
                                         ?>
                                     <?php endforeach; ?>
                                 </div>

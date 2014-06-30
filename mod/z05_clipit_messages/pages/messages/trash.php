@@ -24,7 +24,6 @@ if($search_term = stripslashes(get_input("search"))){
 $rows = array();
 foreach($messages as $message){
     $user = array_pop(ClipitUser::get_by_id(array($message->owner_id)));
-    $user_elgg = new ElggUser($message->owner_id);
 
     $message->description = trim(elgg_strip_tags($message->description));
     // Message text truncate max length 50
@@ -46,7 +45,10 @@ foreach($messages as $message){
     if($message->owner_id == elgg_get_logged_in_user_guid()){
         $text_user_from = "<strong>".elgg_echo("me")."</strong>";
     }
-    $user_avatar = '<img src="'.$user_elgg->getIconURL("tiny").'">';
+    $user_avatar = elgg_view('output/img', array(
+        'src' => get_avatar($user, 'small'),
+        'class' => 'avatar-tiny'
+    ));
     $user_data = elgg_view('output/url', array(
         'href'  => "profile/".$user->login,
         'title' => $user->name,

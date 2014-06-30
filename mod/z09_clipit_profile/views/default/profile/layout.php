@@ -15,7 +15,11 @@ $elgg_user = new ElggUser($entity->id);
 ?>
 <div class="row">
     <div class="col-md-3">
-        <img src="<?php echo $elgg_user->getIconURL('large');?>" style="width: auto"/>
+        <?php echo elgg_view('output/img', array(
+            'src' => get_avatar($entity, 'large'),
+            'style' => 'width: auto',
+            'class' => 'avatar-large'
+        ));?>
     </div>
     <div class="col-md-9">
         <ul>

@@ -12,7 +12,7 @@
  */
 $reply_msg = elgg_extract('entity', $vars);
 $second_level_ids = elgg_extract('second_level_ids', $vars);
-$user_reply = new ElggUser($reply_msg->owner_id);
+$user_reply = array_pop(ClipitUser::get_by_id(array($reply_msg->owner_id)));
 
 // Owner options (edit/delete)
 $owner_reply_options = "";
@@ -42,7 +42,10 @@ if($vars['second_reply']){
     <div class="header-post">
         <?php echo $owner_reply_options; ?>
         <div class="user-reply">
-            <img class="user-avatar" src="<?php echo $user_reply->getIconURL('small'); ?>" />
+            <?php echo elgg_view('output/img', array(
+                'src' => get_avatar($user_reply, 'small'),
+                'class' => 'user-avatar avatar-small'
+            ));?>
             <?php if(!$second_reply && isset($vars['discussion'])): ?>
                 <button id="<?php echo $reply_msg->id; ?>" class="reply-to btn btn-default btn-sm reply-button">Reply</button>
             <?php endif; ?>

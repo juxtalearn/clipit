@@ -18,7 +18,6 @@ $activity_id = elgg_extract('activity_id', $vars);
     <?php
     foreach($entities as $entity):
         $user = array_pop(ClipitUser::get_by_id(array($entity->owner_id)));
-        $user_elgg = new ElggUser($user->id);
         $group_id = ClipitGroup::get_from_user_activity($entity->owner_id, $activity_id);
         $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
         $performance_average = ClipitPerformanceRating::get_average_user_rating_for_target($entity->owner_id, $entity->target);
@@ -27,7 +26,10 @@ $activity_id = elgg_extract('activity_id', $vars);
             <div class="panel-heading">
                 <a href="#collapse_<?php echo $entity->id;?>" data-toggle="collapse" data-parent="#accordion" class="child-decoration-none">
                     <div class="image-block">
-                        <img src="<?php echo $user_elgg->getIconURL("small");?>">
+                        <?php echo elgg_view('output/img', array(
+                            'src' => get_avatar($user, 'small'),
+                            'class' => 'avatar-small'
+                        ));?>
                     </div>
                     <div class="content-block">
                         <div class="pull-right text-right" style="margin-right: 10px;">

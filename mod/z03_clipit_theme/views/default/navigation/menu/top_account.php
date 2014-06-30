@@ -50,7 +50,7 @@ $context = elgg_get_context();
         <?php echo elgg_view('object/elements/message_icon'); ?>
     </li>
     <li style="margin-left: 10px;" <?php if ($context == "settings") echo "class='open'"; ?>>
-        <a title="<?php echo $user->name; ?>" class="avatar-user text-truncate" href="<?php echo elgg_get_site_url(); ?>profile/<?php echo $user->username; ?>">
+        <a title="<?php echo $user->name; ?>" class="avatar-user text-truncate" href="<?php echo elgg_get_site_url(); ?>profile/<?php echo $user->login; ?>">
             <?php echo elgg_view('output/img', array(
                 'src' => get_avatar($user, 'small'),
                 'alt' => $user->name,

@@ -11,9 +11,7 @@
  * @package         ClipIt
  */
 $entity = elgg_extract("entity", $vars);
-$user_loggedin = elgg_get_logged_in_user_guid();
-$user_loggedin = new ElggUser($user_loggedin_id);
-$owner_user = new ElggUser($entity->owner_id);
+$owner_user = array_pop(ClipitUser::get_by_id(array($entity->owner_id)));
 ?>
 <!-- Multimedia info + details -->
 <div class="multimedia-owner">
@@ -25,9 +23,12 @@ $owner_user = new ElggUser($entity->owner_id);
         <div class="header">
             <h3 class="title"><?php echo $entity->name; ?></h3>
             <small class="show sub-title">
-                <img class="user-avatar" src="<?php echo $owner_user->getIconURL("tiny");?>">
+                <?php echo elgg_view('output/img', array(
+                    'src' => get_avatar($owner_user, 'small'),
+                    'class' => 'user-avatar avatar-tiny'
+                ));?>
                 <i>
-                    Uploaded by
+                    <?php echo elgg_echo('multimedia:uploaded_by');?>
                     <?php echo elgg_view('output/url', array(
                         'href'  => "profile/".$owner_user->login,
                         'title' => $owner_user->name,
@@ -48,30 +49,3 @@ $owner_user = new ElggUser($entity->owner_id);
     </div>
 </div>
 <!-- Multimedia info + details end -->
-
-
-<a name="replies"></a>
-<?php
-$auto_id = 1;
-foreach(array_pop(ClipitPost::get_by_destination(array($entity->id))) as $reply_msg){
-    echo elgg_view("discussion/reply",
-        array(
-            'entity' => $reply_msg,
-            'auto_id' => $auto_id,
-        ));
-    $auto_id++;
-}
-?>
-
-<!--
-<a name="create_reply"></a>
-<h3 class="activity-module-title"><?php echo elgg_echo("reply:create"); ?></h3>
-<div class="discussion discussion-reply-msg">
-    <div class="user-reply">
-        <img class="user-avatar" src="<?php echo $user_loggedin->getIconURL('small'); ?>"/>
-    </div>
-    <div class="block">
-        <?php echo elgg_view_form("discussion/reply/create", array('data-validate'=> "true", 'class'=>'fileupload' ), array('entity'  => $entity)); ?>
-    </div>
-</div>
--->

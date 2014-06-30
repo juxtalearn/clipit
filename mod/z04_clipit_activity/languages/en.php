@@ -80,6 +80,7 @@ $english = array(
     'multimedia:links' => 'Interesting links',
     'multimedia:attach_group' => 'Attach multimedia group',
     'multimedia:attach_files' => 'Attach files',
+    'multimedia:uploaded_by' => 'Uploaded by',
     // Files
     'files' => 'Files',
     'file' => 'File',

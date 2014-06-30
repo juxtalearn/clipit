@@ -16,10 +16,9 @@ if(!$limit){
     $limit = 3;
 }
 
-//$messages = array_pop(ClipitChat::get_by_destination(array($user_id)));
-//$messages = ClipitChat::get_inbox($user_id);
-// DEBUG
-$messages = array();
+$messages = array_pop(ClipitChat::get_by_destination(array($user_id)));
+$messages = ClipitChat::get_inbox($user_id);
+
 
 $messages = array_slice($messages, 0, $limit);
 
@@ -33,7 +32,6 @@ $messages = array_slice($messages, 0, $limit);
 foreach($messages as $message):
     $message = array_pop($message);
     $user = array_pop(ClipitUser::get_by_id(array($message->owner_id)));
-    $user_elgg = new ElggUser($message->owner_id);
     $last_message = end(ClipitChat::get_conversation($user_id, $message->owner_id));
     $message_text = trim(elgg_strip_tags($last_message->description));
     // Message text truncate max length 50
@@ -47,7 +45,10 @@ foreach($messages as $message):
         tabindex="-1"
         href="<?php echo elgg_get_site_url(); ?>messages/view/<?php echo $user->login; ?>#reply_<?php echo $message->id; ?>">
 
-        <img class="user-avatar" src="<?php echo $user_elgg->getIconURL("small"); ?>">
+        <?php echo elgg_view('output/img', array(
+            'src' => get_avatar($user, 'small'),
+            'class' => 'user-avatar avatar-small'
+        ));?>
         <div class="text-truncate" style=" font-size: 13px; text-transform: none; overflow: hidden; letter-spacing: 0;">
             <?php if($unread_count > 0): ?>
                 <span class="label label-primary pull-right">

@@ -11,9 +11,9 @@
  * @package         ClipIt
  */
 $message = elgg_extract("entity", $vars);
-$owner = new ElggUser($message->owner_id);
+$owner = array_pop(ClipitUser::get_by_id(array($message->owner_id)));
 $user_loggedin_id = elgg_get_logged_in_user_guid();
-$user_loggedin = new ElggUser($user_loggedin_id);
+$user_logged = array_pop(ClipitUser::get_by_id(array($user_loggedin_id)));
 $total_replies = array_pop(ClipitPost::count_by_destination(array($message->id)));
 // Attach multimedia items
 $videos = ClipitPost::get_videos($message->id);
@@ -47,12 +47,15 @@ if($message->owner_id == elgg_get_logged_in_user_guid()){
 <div class="discussion discussion-owner-msg">
     <div class="header-post">
         <?php echo $owner_options; ?>
-        <img class="user-avatar" src="<?php echo $owner->getIconURL('small'); ?>" />
+        <?php echo elgg_view('output/img', array(
+            'src' => get_avatar($owner, 'small'),
+            'class' => 'user-avatar avatar-small'
+        ));?>
         <div class="block">
             <h3 class="title"><?php echo $message->name; ?></h3>
             <small class="show">
                 <i>
-                    Created by
+                    <?php echo elgg_echo('discussion:created_by');?>
                     <?php echo elgg_view('output/url', array(
                         'href'  => "profile/".$owner->login,
                         'title' => $owner->name,
@@ -140,7 +143,10 @@ foreach(array_pop(ClipitPost::get_by_destination(array($message->id))) as $reply
 <h3 class="activity-module-title"><?php echo elgg_echo("reply:create"); ?></h3>
 <div class="discussion discussion-reply-msg">
     <div class="user-reply">
-        <img class="user-avatar" src="<?php echo $user_loggedin->getIconURL('small'); ?>"/>
+        <?php echo elgg_view('output/img', array(
+            'src' => get_avatar($user_logged, 'small'),
+            'class' => 'user-avatar avatar-small'
+        ));?>
     </div>
     <div class="block">
         <?php echo elgg_view_form("discussion/reply/create", array('data-validate'=> "true", 'class'=>'fileupload' ), array('entity'  => $message)); ?>

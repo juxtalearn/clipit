@@ -15,10 +15,13 @@ $message_destination_id = get_input('message_destination_id');
 
 $quote = get_text_from_quote($quote_id, $message_destination_id);
 $user = array_pop(ClipitUser::get_by_id(array($quote->owner_id)));
-$elgg_user = new ElggUser($quote->owner_id);
 ?>
-<img src="<?php echo $elgg_user->getIconURL('tiny');?>" class="pull-left" style="margin-right: 5px;margin-top: 5px;">
-<div style="overflow: hidden;">
+<?php echo elgg_view('output/img', array(
+    'src' => get_avatar($user, 'small'),
+    'style' => 'margin-right: 5px;margin-top: 5px;',
+    'class' => 'image-block avatar-tiny'
+));?>
+<div class="content-block">
     <div>
         <small class="pull-right"><?php echo elgg_view('output/friendlytime', array('time' => $quote->time_created));?></small>
         <small>

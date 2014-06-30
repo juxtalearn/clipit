@@ -11,7 +11,6 @@
  * @package         ClipIt
  */
 $user = elgg_extract("entity", $vars);
-$user_elgg = new ElggUser($user->id);
 ?>
 <?php echo elgg_view('output/img', array(
     'src' => get_avatar($user, 'small'),

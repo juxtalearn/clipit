@@ -12,7 +12,6 @@
  */
 $user_id = elgg_get_logged_in_user_guid();
 $user = array_pop(ClipitUser::get_by_id(array($user_id)));
-$user_elgg = new ElggUser($user_id);
 $body = elgg_view('output/img', array(
     'src' => get_avatar($user, 'small'),
     'class' => 'image-block avatar-small'

@@ -14,7 +14,6 @@ $message = elgg_extract('entity', $vars);
 $auto_id = elgg_extract('auto_id', $vars);
 $user_loggedin_id = elgg_get_logged_in_user_guid();
 $user_reply = array_pop(ClipitUser::get_by_id(array($message->owner_id)));
-$user_reply_elgg = new ElggUser($message->owner_id);
 $files_id = $message->get_files($message->id);
 // activity discussion, get group data
 if($vars['activity']){
@@ -36,7 +35,10 @@ if($message->owner_id != $user_loggedin_id){
     border: 1px solid #bae6f6;
 ">#<?php echo $auto_id;?></a>
         <div class="user-reply">
-            <img class="user-avatar" src="<?php echo $user_reply_elgg->getIconURL('small'); ?>" />
+            <?php echo elgg_view('output/img', array(
+                'src' => get_avatar($user_reply, 'small'),
+                'class' => 'user-avatar avatar-small'
+            ));?>
         </div>
         <div class="block">
             <strong>

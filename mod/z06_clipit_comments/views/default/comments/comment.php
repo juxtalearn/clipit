@@ -12,9 +12,8 @@
  */
 $comment = elgg_extract('entity', $vars);
 $target_id = elgg_extract('target_id', $vars);
-$user = array_pop(ClipitUser::get_by_id(array($comment->owner_id)));
-$user_elgg = new ElggUser($comment->owner_id);
-$user_loggedin_elgg = new ElggUser(elgg_get_logged_in_user_guid());
+$owner_user = array_pop(ClipitUser::get_by_id(array($comment->owner_id)));
+$user_loggedin = array_pop(ClipitUser::get_by_id(array(elgg_get_logged_in_user_guid())));;
 $files_id = $comment->get_files($comment->id);
 $activity_id = elgg_get_page_owner_guid();
 $group_id = ClipitGroup::get_from_user_activity($comment->owner_id, $activity_id);
@@ -23,7 +22,10 @@ $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
 <a name="comment_<?php echo $comment->id; ?>"></a>
 <div class="message <?php echo $vars['class'];?>">
     <div class="image-block">
-        <img src="<?php echo $user_elgg->getIconURL('small'); ?>"/>
+        <?php echo elgg_view('output/img', array(
+            'src' => get_avatar($owner_user, 'small'),
+            'class' => 'avatar-small'
+        ));?>
     </div>
     <div class="content-block">
         <?php
@@ -34,9 +36,9 @@ $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
         ?>
         <strong>
             <?php echo elgg_view('output/url', array(
-                'href'  => "profile/".$user->login,
-                'title' => $user->name,
-                'text'  => $user->name));
+                'href'  => "profile/".$owner_user->login,
+                'title' => $owner_user->name,
+                'text'  => $owner_user->name));
             ?>
         </strong>
         <small class="show">
@@ -77,15 +79,18 @@ $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
     <!-- Reply form -->
     <div class="form-block message" id="form-<?php echo $comment->id; ?>">
         <div class="image-block">
-            <img src="<?php echo $user_loggedin_elgg->getIconURL('small'); ?>"/>
+            <?php echo elgg_view('output/img', array(
+                'src' => get_avatar($user_loggedin, 'small'),
+                'class' => 'avatar-small'
+            ));?>
         </div>
         <div class="content-block">
             <small class="block">
                 <i class="fa fa-reply"></i> Reply to:
                 <?php echo elgg_view('output/url', array(
-                    'href'  => "profile/".$user->login,
-                    'title' => $user->name,
-                    'text'  => $user->name));
+                    'href'  => "profile/".$user_loggedin->login,
+                    'title' => $user_loggedin->name,
+                    'text'  => $user_loggedin->name));
                 ?>
                 <a href="javascript:;" id="<?php echo $comment->id; ?>" class="close-reply-to" >&times;</a>
             </small>
