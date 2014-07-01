@@ -139,6 +139,7 @@ $english = array(
     'publish:to_activity'   => 'Publish %s in %s',
     'publish:video'   => 'Publish video',
     // Labels
+    'label' => 'Label',
     'labels' => 'Labels',
     // Tags
     'tag' => 'Tag',
@@ -147,6 +148,7 @@ $english = array(
     'tags:recommended' => 'Recommended tags',
     'tags:commas:separated' => 'Separated by commas',
     // Performance items
+    'performance_item' => 'Performance item',
     'performance_items' => 'Performance items',
     'performance_item:select' => 'Select performance items',
     'performance_item:info' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus dapibus lacus at nisl pharetra faucibus dapibus lacus',

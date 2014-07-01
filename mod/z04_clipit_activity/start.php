@@ -449,7 +449,7 @@ function activity_page_handler($page) {
                                 $task = array_pop(ClipitTask::get_by_id(array($task_id)));
                                 if($task->task_type == 'video_upload'){
                                     $task_video[] = $task;
-                                    $video_task[$task->id] = $task->name;
+                                    $video_task[$task->id] = $task->name ." [".date("d M Y", $task->start)." - ".date("d M Y", $task->end)."]";
                                 }
                             }
                             $last_task = reset($task_video);
@@ -457,15 +457,8 @@ function activity_page_handler($page) {
 
                             $task = array_pop(ClipitTask::get_by_id(array($get_task)));
                             $videos = $task->video_array;
-                            $content = elgg_view('input/dropdown', array(
-                                'name' => 'task_id',
-                                'id' => 'task_id',
-                                'class' => 'form-control',
-                                'style' => 'height: auto;margin-bottom: 20px;width: auto;padding: 0;font-weight: bold;',
-                                'value' => get_input('task_id'),
-                                'onchange' => "location.href='?task_id='+this.value",
-                                'options_values' => $video_task
-                            ));
+                            $content = elgg_view('tasks/select', array('entities' => $video_task, 'entity' => $task));
+
                             $content .= elgg_view('multimedia/video/list', array(
                                 'videos'    => $videos,
                                 'href'      => $href,
@@ -486,27 +479,48 @@ function activity_page_handler($page) {
                         elgg_pop_breadcrumb($title);
                         elgg_push_breadcrumb($title, "clipit_activity/{$activity->id}/publications");
                         $object = ClipitSite::lookup($entity_id);
+                        $entity = array_pop($object['subtype']::get_by_id(array($entity_id)));
+                        // Check if user can evaluate own group video
+                        $hasRating = ClipitRating::get_from_user_for_target($user_id, $entity_id);
+                        $owner_group_id = $entity->get_group($entity->id);
+                        $my_group = ClipitGroup::get_from_user_activity($user_id, $activity->id);
+                        $canEvaluate = false;
+                        if(!$hasRating && ($my_group != $owner_group_id)){
+                            $canEvaluate = true;
+                        }
+                        $owner_group = array_pop(ClipitGroup::get_by_id(array($owner_group_id)));
                         switch($object['subtype']){
                             // Clipit Video publication
                             case 'ClipitVideo':
-                                $entity = array_pop(ClipitVideo::get_by_id(array($entity_id)));
                                 $task_id = ClipitVideo::get_task($entity_id);
                                 $videos = ClipitTask::get_videos($task_id);
                                 if(!$entity || !in_array($entity_id, $videos)){
                                     return false;
                                 }
                                 $body = elgg_view("multimedia/video/body", array('entity'  => $entity));
-                                $content = elgg_view('publications/view', array('entity' => $entity, 'type' => 'video', 'body' => $body));
+                                $content = elgg_view('publications/view', array(
+                                    'entity' => $entity,
+                                    'body' => $body,
+                                    'canEvaluate' => $canEvaluate,
+                                    'activity' => $activity,
+                                    'group' => $owner_group
+                                ));
                                 break;
                             // Clipit Storyboard publication
                             case 'ClipitStoryboard':
-                                $entity = array_pop(ClipitStoryboard::get_by_id(array($entity_id)));
                                 $sbs = ClipitActivity::get_storyboards($activity->id);
                                 if(!$entity || !in_array($entity_id, $sbs)){
                                     return false;
                                 }
                                 $body = elgg_view("multimedia/storyboard/body", array('entity'  => $entity));
-                                $content = elgg_view('publications/view', array('entity' => $entity, 'type' => 'storyboard', 'body' => $body));
+                                $content = elgg_view('publications/view', array(
+                                    'entity' => $entity,
+                                    'type' => 'storyboard',
+                                    'body' => $body,
+                                    'canEvaluate' => $canEvaluate,
+                                    'activity' => $activity,
+                                    'group' => $owner_group
+                                ));
                                 break;
                             default:
                                 return false;
