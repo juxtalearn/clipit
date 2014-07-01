@@ -241,6 +241,13 @@ class UBMessage extends UBItem{
         $prop_value_array["read_array"] = $read_array;
         return static::set_properties($id, $prop_value_array);
     }
+
+    /**
+     * Count the number os Messages for each Destination specified
+     * @param array$destination_array List of Destination IDs
+     * @param bool $recursive Whether to recurse
+     * @return array
+     */
     static function count_by_destination($destination_array, $recursive = false){
         $count_array = array();
         foreach($destination_array as $dest_id){
