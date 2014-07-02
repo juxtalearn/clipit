@@ -107,13 +107,13 @@ abstract class UBCollection{
         $rel_array = get_entity_relationships($id, $inverse);
         $count = 0;
         foreach($rel_array as $rel){
-            if($rel->relationship == $rel_name){
+            if($rel->relationship === $rel_name){
                 $count++;
                 if($recursive){
                     if($inverse){
-                        $count += static::count_items($rel->guid_one, $inverse, $recursive);
+                        $count += static::count_items($rel->guid_one, $rel_name, $inverse, $recursive);
                     } else{
-                        $count += static::count_items($rel->guid_two, $inverse, $recursive);
+                        $count += static::count_items($rel->guid_two, $rel_name, $inverse, $recursive);
                     }
                 }
             }

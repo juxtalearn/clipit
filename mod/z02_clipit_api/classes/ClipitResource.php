@@ -24,7 +24,6 @@ class ClipitResource extends UBItem{
 
     const REL_RESOURCE_TAG = "resource-tag";
     const REL_RESOURCE_LABEL = "resource-label";
-    const REL_RESOURCE_COMMENT = "resource-comment";
     const REL_RESOURCE_PERFORMANCE = "resource-performance";
 
     const REL_GROUP_RESOURCE = "group-resource";
@@ -35,7 +34,6 @@ class ClipitResource extends UBItem{
     public $tag_array = array();
     public $label_array = array();
     public $performance_item_array = array();
-    public $comment_array = array();
 
     /**
      * Loads object parameters stored in Elgg
@@ -47,7 +45,6 @@ class ClipitResource extends UBItem{
         $this->tag_array = (array)static::get_tags($this->id);
         $this->label_array = (array)static::get_labels($this->id);
         $this->performance_item_array = (array)static::get_performance_items($this->id);
-        $this->comment_array = (array)static::get_comments($this->id);
     }
 
     /**
@@ -55,42 +52,53 @@ class ClipitResource extends UBItem{
      *
      * @return bool|int Returns id of saved instance, or false if error.
      */
-    protected function save(){
+    protected function save()
+    {
         parent::save();
         static::set_tags($this->id, (array)$this->tag_array);
         static::set_labels($this->id, (array)$this->label_array);
         static::set_performance_items($this->id, (array)$this->performance_item_array);
-        static::set_comments($this->id, (array)$this->comment_array);
         return $this->id;
     }
 
-    /**
-     * Deletes $this instance from the system.
-     *
-     * @return bool True if success, false if error.
-     */
-    protected function delete(){
-        $rel_array = get_entity_relationships((int)$this->id);
-        $comment_array = array();
-        foreach($rel_array as $rel){
-            // Delete comments hanging from the Resource to be deleted
-            if($rel->relationship == static::REL_RESOURCE_COMMENT){
-                $comment_array[] = $rel->guid_two;
-            }
-        }
-        if(!empty($comment_array)){
-            ClipitComment::delete_by_id($comment_array);
-        }
-        parent::delete();
-    }
 
     static function get_by_tags($tag_array){
         $return_array = array();
         $all_items = static::get_all(0, true); // Get all item ids, not objects
         foreach($all_items as $item_id){
-            $item_tags = static::get_tags((int) $item_id);
+            $item_tags = (array)static::get_tags((int) $item_id);
             foreach($tag_array as $search_tag){
                 if(array_search($search_tag, $item_tags) !== false){
+                    $return_array[(int)$item_id] = new static((int)$item_id);
+                    break;
+                }
+            }
+        }
+        return $return_array;
+    }
+
+    static function get_by_labels($label_array){
+        $return_array = array();
+        $all_items = static::get_all(0, true); // Get all item ids, not objects
+        foreach($all_items as $item_id){
+            $item_labels = (array)static::get_labels((int) $item_id);
+            foreach($label_array as $search_tag){
+                if(array_search($search_tag, $item_labels) !== false){
+                    $return_array[(int)$item_id] = new static((int)$item_id);
+                    break;
+                }
+            }
+        }
+        return $return_array;
+    }
+
+    static function get_by_performance_items($performance_item_array){
+        $return_array = array();
+        $all_items = static::get_all(0, true); // Get all item ids, not objects
+        foreach($all_items as $item_id){
+            $item_performance_items = static::get_performance_items((int) $item_id);
+            foreach($performance_item_array as $search_tag){
+                if(array_search($search_tag, $item_performance_items) !== false){
                     $return_array[(int)$item_id] = new static((int)$item_id);
                     break;
                 }
@@ -251,7 +259,7 @@ class ClipitResource extends UBItem{
      *
      * @param int $id Id of the Resource to get Labels from.
      *
-     * @return bool Returns array of Label Ids, or false if error.
+     * @return array|bool Returns array of Label Ids, or false if error.
      */
     static function get_labels($id){
         return UBCollection::get_items($id, static::REL_RESOURCE_LABEL);
@@ -272,53 +280,5 @@ class ClipitResource extends UBItem{
     static function get_performance_items($id){
         return UBCollection::get_items($id, static::REL_RESOURCE_PERFORMANCE);
     }
-
-    /**
-     * Adds Comments to a Resource, referenced by Id.
-     *
-     * @param int   $id Id from the Resource to add Comments to
-     * @param array $comment_array Array of Comment Ids to be added to the Resource
-     *
-     * @return bool Returns true if success, false if error
-     */
-    static function add_comments($id, $comment_array){
-        return UBCollection::add_items($id, $comment_array, static::REL_RESOURCE_COMMENT);
-    }
-
-    /**
-     * Sets Comments to a Resource, referenced by Id.
-     *
-     * @param int   $id Id from the Resource to set Comments to
-     * @param array $comment_array Array of Comment Ids to be set to the Resource
-     *
-     * @return bool Returns true if success, false if error
-     */
-    static function set_comments($id, $comment_array){
-        return UBCollection::set_items($id, $comment_array, static::REL_RESOURCE_COMMENT);
-    }
-
-    /**
-     * Remove Comments from a Resource.
-     *
-     * @param int   $id Id from Resource to remove Comments from
-     * @param array $comment_array Array of Comment Ids to remove from Resource
-     *
-     * @return bool Returns true if success, false if error
-     */
-    static function remove_comments($id, $comment_array){
-        return UBCollection::remove_items($id, $comment_array, static::REL_RESOURCE_COMMENT);
-    }
-
-    /**
-     * Get all Comments for a Resource
-     *
-     * @param int $id Id of the Resource to get Comments from
-     *
-     * @return array|bool Returns an array of ClipitComment items, or false if error
-     */
-    static function get_comments($id){
-        return UBCollection::get_items($id, static::REL_RESOURCE_COMMENT);
-    }
-
 
 }

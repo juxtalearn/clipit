@@ -24,7 +24,6 @@ class ClipitVideo extends ClipitResource{
 
     const REL_RESOURCE_TAG = "video-tag";
     const REL_RESOURCE_LABEL = "video-label";
-    const REL_RESOURCE_COMMENT = "video-comment";
     const REL_RESOURCE_PERFORMANCE = "video-performance";
 
     const REL_GROUP_RESOURCE = ClipitGroup::REL_GROUP_VIDEO;
