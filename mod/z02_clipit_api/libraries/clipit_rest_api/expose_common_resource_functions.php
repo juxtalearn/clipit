@@ -20,16 +20,16 @@ function expose_common_resource_functions($api_suffix, $class_suffix){
             "tag_array" => array(
                 "type" => "array",
                 "required" => true)),
-        "Get the Resources containing at least one of the specified tags.",
+        "Get the Resources containing at least one of the specified tags",
         'GET', false, true);
     expose_function(
-        $api_suffix . "get_publish_level",
-        $class_suffix . "get_publish_level",
+        $api_suffix . "get_resource_scope",
+        $class_suffix . "get_resource_scope",
         array(
             "id" => array(
                 "type" => "int",
                 "required" => true)),
-        "Get Publish level for a Resource ('group', 'activity' or 'site').",
+        "Get Resource scope for a Resource ('group', 'activity', 'task' or 'site')",
         'GET', false, true);
     expose_function(
         $api_suffix . "get_group",
@@ -38,7 +38,7 @@ function expose_common_resource_functions($api_suffix, $class_suffix){
             "id" => array(
                 "type" => "int",
                 "required" => true)),
-        "Get the Group this Resource is inside of.",
+        "Get the Group this Resource is inside of",
         'GET', false, true);
     expose_function(
         $api_suffix . "get_activity",
@@ -47,7 +47,16 @@ function expose_common_resource_functions($api_suffix, $class_suffix){
             "id" => array(
                 "type" => "int",
                 "required" => true)),
-        "Get the Activity this Resource is inside of.",
+        "Get the Activity this Resource is inside of",
+        'GET', false, true);
+    expose_function(
+        $api_suffix . "get_task",
+        $class_suffix . "get_task",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Get the Task this Resource is inside of",
         'GET', false, true);
     expose_function(
         $api_suffix . "get_site",
@@ -56,7 +65,7 @@ function expose_common_resource_functions($api_suffix, $class_suffix){
             "id" => array(
                 "type" => "int",
                 "required" => true)),
-        "Get the Site this Resource is inside of.",
+        "Get the Site this Resource is inside of",
         'GET', false, true);
     expose_function(
         $api_suffix . "add_tags",
