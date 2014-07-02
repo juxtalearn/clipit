@@ -112,13 +112,13 @@ class ClipitResource extends UBItem{
         if(!empty($site)){
             return "site";
         }
-        $activity = static::get_activity($id);
-        if(!empty($activity)){
-            return "activity";
-        }
         $task = static::get_task($id);
         if(!empty($task)){
             return "task";
+        }
+        $activity = static::get_activity($id);
+        if(!empty($activity)){
+            return "activity";
         }
         $group = static::get_group($id);
         if(!empty($group)){
@@ -127,6 +127,11 @@ class ClipitResource extends UBItem{
         return null;
     }
 
+    /**
+     * Get the Group where a Resource is located
+     * @param int $id Resource ID
+     * @return int|null Returns the Group ID, or null if none.
+     */
     static function get_group($id){
         $resource = new static($id);
         if(!empty($resource->cloned_from)){
@@ -134,7 +139,7 @@ class ClipitResource extends UBItem{
         }
         $group = UBCollection::get_items($id, static::REL_GROUP_RESOURCE, true);
         if(!empty($group)){
-            return array_pop($group);
+            return (int)array_pop($group);
         } else{
             return null;
         }

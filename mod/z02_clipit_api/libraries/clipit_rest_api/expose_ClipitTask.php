@@ -211,4 +211,16 @@ function expose_task_functions(){
                 "required" => true)),
         "Gets Quizzes from an Activity",
         "GET", false, true);
+    expose_function(
+        $api_suffix . "get_completed_status",
+        $class_suffix . "get_completed_status",
+        array(
+            "id" => array(
+                "type" => "int",
+                "required" => true),
+            "entity_id" => array(
+                "type" => "int",
+                "required" => true)),
+        "Returns whether a Task has been completed by an Entity (User or Group)",
+        "GET", false, true);
 }
