@@ -13,8 +13,9 @@
 $tags = elgg_extract('tags', $vars);
 $limit = $vars['limit'] ? $vars['limit'] : count($tags);
 $width = elgg_extract('width', $vars);
+$width = is_integer($width) ? $width."px" : $width;
 if($width){
-    $width = "max-width:{$width}px;";
+    $width = "max-width:{$width}";
 }
 ?>
 
@@ -34,7 +35,7 @@ if($width){
         ));
         ?>
     <?php endforeach;?>
-    <?php if(count($tags) > 2 && $vars['limit']): ?>
+    <?php if(count($tags) > $limit ): ?>
         <a class="more-tags fa fa-plus"></a>
     <?php endif; ?>
 </div>

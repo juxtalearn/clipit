@@ -23,9 +23,11 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
 <!-- Multimedia info + details -->
 <div class="multimedia-owner multimedia-pub">
     <div class="block">
-        <div class="header">
-            <h3 class="title"><?php echo $entity->name; ?></h3>
-        </div>
+        <?php if($vars['title'] !== false):?>
+            <div class="header">
+                <h3 class="title"><?php echo $entity->name; ?></h3>
+            </div>
+        <?php endif;?>
         <div class="multimedia-body">
             <div class="multimedia-view">
                 <?php echo $vars['body'];?>
@@ -153,16 +155,19 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
     ?>
 <?php endif; ?>
 
-<?php if($comments = array_pop(ClipitComment::get_by_destination(array($entity->id)))):?>
+<?php
+if($comments = array_pop(ClipitComment::get_by_destination(array($entity->id)))):
+    $total_comments = array_pop(ClipitComment::count_by_destination(array($entity->id), true));
+?>
     <a name="comments"></a>
-    <h3 class="activity-module-title"><?php echo elgg_echo("comments"); ?> <span class="blue-lighter">(<?php echo count($comments);?>)</span></h3>
+    <h3 class="activity-module-title"><?php echo elgg_echo("comments"); ?> <span class="blue-lighter">(<?php echo $total_comments;?>)</span></h3>
     <?php
     foreach($comments as $comment){
         echo elgg_view("comments/comment",
             array(
                 'entity' => $comment,
                 'target_id' => $entity->id,
-                'group' => $group
+                'activity_id' => $activity->id
             ));
     }
 endif;

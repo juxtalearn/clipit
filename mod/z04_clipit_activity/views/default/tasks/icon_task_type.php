@@ -14,16 +14,25 @@ $type = elgg_extract('type', $vars);
 
 switch($type){
     case "video_upload":
+        $title = elgg_echo('task:video_upload');
+        $icon = "arrow-up";
+        break;
     case "storyboard_upload":
-        $output = "arrow-up";
+        $title = elgg_echo('task:storyboard_upload');
+        $icon = "arrow-up";
         break;
     case "quiz_answer":
-        $output = "pencil-square-o";
+        $title = elgg_echo('task:quiz_answer');
+        $icon = "pencil-square-o";
         break;
     case "video_feedback":
+        $title = elgg_echo('task:video_feedback');
+        $icon = "signal";
+        break;
     case "storyboard_feedback":
-        $output = "signal";
+        $title = elgg_echo('task:storyboard_feedback');
+        $icon = "signal";
         break;
 }
 ?>
-<i style="font-size: 14px;" class="blue fa fa-<?php echo $output; ?>"></i>
+<i style="font-size: 14px;" class="blue fa fa-<?php echo $icon; ?>" title="<?php echo $title; ?>"></i>

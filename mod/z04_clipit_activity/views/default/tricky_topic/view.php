@@ -28,7 +28,15 @@ $tags = $entity->tag_array;
             foreach($tags as $tag_id):
             $tag = array_pop(ClipitTag::get_by_id(array($tag_id)));
             ?>
-            <li id="<?php echo $tag->id; ?>"><strong><?php echo $tag->name; ?></strong></li>
+            <li id="<?php echo $tag->id; ?>">
+                <strong>
+                <?php echo elgg_view('output/url', array(
+                    'href'  => "explore/search?by=tag&id=".$tag->id,
+                    'title' => $tag->name,
+                    'text'  => $tag->name));
+                ?>
+                </strong>
+            </li>
             <?php endforeach; ?>
         </ul>
     </li>

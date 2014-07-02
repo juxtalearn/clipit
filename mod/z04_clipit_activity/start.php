@@ -345,7 +345,15 @@ function activity_page_handler($page) {
                                                 'task_id'   => $task->id,
                                             ));
                                         } else {
-                                            $body .= elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
+                                            $body = elgg_view('multimedia/video/list', array(
+                                                'videos'    => $videos,
+                                                'href'      => "clipit_activity/{$activity->id}/group/{$group_id}/multimedia",
+                                                'task_id'   => $task->id,
+                                                'rating'    => false,
+                                                'actions'   => true,
+                                                'publish'   => true,
+                                                'total_comments' => false,
+                                            ));
                                         }
                                         // View other videos
                                         $body .= elgg_view("page/components/title_block", array(
@@ -355,7 +363,7 @@ function activity_page_handler($page) {
                                             unset($task->video_array[$key]);
                                         }
                                         if($task->video_array){
-                                            $body .= elgg_view('multimedia/video/list', array(
+                                            $body .= elgg_view('multimedia/video/list_summary', array(
                                                 'videos'    => $task->video_array,
                                                 'href'      => $href_publications,
                                                 'task_id'   => $task->id,
@@ -439,7 +447,6 @@ function activity_page_handler($page) {
                     elgg_push_breadcrumb($title);
                     $href = "clipit_activity/{$activity->id}/publications";
                     $filter = elgg_view('publications/filter', array('selected' => $selected_tab, 'entity' => $activity, 'href' => $href));
-
                     switch($selected_tab){
                         case 'videos':
                             // Get last task [type: video_upload]
@@ -471,7 +478,6 @@ function activity_page_handler($page) {
                             }
                             break;
                     }
-
 
                     if($page[2] == 'view' && $page[3]){
                         $entity_id = (int)$page[3];

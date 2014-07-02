@@ -102,6 +102,9 @@ $english = array(
     // Videos
     'videos' => 'Videos',
     'video' => 'Video',
+    'videos:recommended' => 'Recommended videos',
+    'videos:recommended:none' => 'There are no recommended videos',
+    'videos:related' => 'Related videos',
     'videos:none' => 'No videos',
     'video:url:error' => 'Incorrect url or video not found',
     'video:edit' => 'Edit video',
@@ -162,6 +165,12 @@ $english = array(
     'task:my_video' => 'My video',
     'task:other_videos' => 'Other videos',
     'task:not_actual' => 'There are no pending tasks',
+    'task:video_feedback' => 'Video feedback',
+    'task:video_upload' => 'Video upload',
+    'task:storyboard_upload' => 'Storyboard upload',
+    'task:quiz_answer' => 'Quiz answer',
+    'task:video_feedback' => 'Video feedback',
+    'task:storyboard_feedback' => 'Storyboard feedback',
 );
 
 add_translation('en', $english);

@@ -262,14 +262,19 @@ function get_task_status(ClipitTask $task, $group_id = 0){
 function get_group_progress($group_id){
     $activity_id = ClipitGroup::get_activity($group_id);
     $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
+    $individual_tasks = array('video_feedback', 'storyboard_feedback', 'quiz_answer');
     $completed = array();
+    $total = 0;
     foreach($activity->task_array as $task_id){
         $task = array_pop(ClipitTask::get_by_id(array($task_id)));
         $status = get_task_status($task, $group_id);
-        if($status['status'] === true){
-            $completed[] = true;
+        if(!in_array($task->task_type, $individual_tasks)){
+            $total++;
+            if($status['status'] === true){
+                $completed[] = true;
+            }
         }
     }
-    $val = count($completed)/(count($activity->task_array));
+    $val = count($completed)/($total);
     return round($val*100);
 }
