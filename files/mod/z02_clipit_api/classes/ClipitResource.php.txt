@@ -107,7 +107,7 @@ class ClipitResource extends UBItem{
         return $return_array;
     }
 
-    static function get_publish_level($id){
+    static function get_resource_scope($id){
         $site = static::get_site($id);
         if(!empty($site)){
             return "site";
