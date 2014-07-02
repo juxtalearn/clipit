@@ -184,23 +184,89 @@ class ClipitTask extends UBItem{
     }
 
     // TASK COMPLETION
-    static function check_completed($id, $entity_id){
+
+    /**
+     * Set a Task as Completed for an Entity (User or Group)
+     * @param int $id Task ID
+     * @param itn $entity_id Entity ID (User or Group)
+     * @return bool True if OK, false if error
+     */
+    static function set_completed($id, $entity_id){
+        $task = new static($id);
+        if(array_search($entity_id, $task->completed_array) === false){
+            array_push($task->completed_array, $entity_id);
+            $task->save();
+        }
+        return true;
+    }
+
+    /**
+     * Get the list of entities which have completed a task, or the completion status for a single entity if specified
+     * @param int $id Task ID
+     * @param int $entity_id Entity ID (User or Group)
+     * @return bool|array Returns an array of Entity IDs, or true/false if an entity_id was specified
+     */
+    static function get_completed($id, $entity_id = 0){
+        $task = new static($id);
+        if($entity_id !== 0) {
+            if (array_search((int)$entity_id, (array)$task->completed_array) !== null) {
+                return true;
+            }
+        } else{
+            return (array)$task->completed_array;
+        }
+    }
+
+    static function check_if_completed($id, $entity_id){
         $task = new static($id);
         switch($task->task_type){
             case static::TYPE_QUIZ_ANSWER:
-
+                //@todo: ClipitQuiz::has_answered_quiz($id, $user_id);
+                return false;
             case static::TYPE_STORYBOARD_UPLOAD:
-
+                foreach($task->storyboard_array as $storyboard_id){
+                    if((int)ClipitStoryboard::get_group($storyboard_id) === (int)$entity_id){
+                        return static::set_completed($id, $entity_id);
+                    }
+                }
+                return false;
             case static::TYPE_STORYBOARD_FEEDBACK:
-
+                $user_ratings = ClipitRating::get_by_owner(array($entity_id));
+                $rating_targets = array();
+                foreach($user_ratings[$entity_id] as $user_rating_id){
+                    $prop_value_array = ClipitRating::get_properties((int)$user_rating_id, array("target"));
+                    $rating_targets[] = (int)$prop_value_array["target"];
+                }
+                foreach($task->storyboard_array as $storyboard_id){
+                    if(array_search((int)$storyboard_id, $rating_targets) !== true){
+                        // at least one of the targets was not rated
+                        return false;
+                    }
+                }
+                return static::set_completed($id, $entity_id);
             case static::TYPE_VIDEO_UPLOAD:
-
+                foreach($task->video_array as $video_id){
+                    if((int)ClipitVideo::get_group($video_id) === (int)$entity_id){
+                        return static::set_completed($id, $entity_id);
+                    }
+                }
+                return false;
             case static::TYPE_VIDEO_FEEDBACK:
-
-            case static::TYPE_OTHER:
-
+                $user_ratings = ClipitRating::get_by_owner(array($entity_id));
+                $rating_targets = array();
+                foreach($user_ratings[$entity_id] as $user_rating_id){
+                    $prop_value_array = ClipitRating::get_properties((int)$user_rating_id, array("target"));
+                    $rating_targets[] = (int)$prop_value_array["target"];
+                }
+                foreach($task->video_array as $video_id){
+                    if(array_search((int)$video_id, $rating_targets) !== true){
+                        // at least one of the targets was not rated
+                        return false;
+                    }
+                }
+                return static::set_completed($id, $entity_id);
             default:
-                
+                return false;
         }
     }
 } 
