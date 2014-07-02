@@ -41,6 +41,7 @@ class ClipitTask extends UBItem{
     public $task_count = 0;
 
     public $activity = 0;
+    public $completed_array = array();
     public $storyboard_array = array();
     public $video_array = array();
     public $file_array = array();
@@ -180,5 +181,26 @@ class ClipitTask extends UBItem{
 
     static function get_quizzes($id){
         return UBCollection::get_items($id, static::REL_TASK_QUIZ);
+    }
+
+    // TASK COMPLETION
+    static function check_completed($id, $entity_id){
+        $task = new static($id);
+        switch($task->task_type){
+            case static::TYPE_QUIZ_ANSWER:
+
+            case static::TYPE_STORYBOARD_UPLOAD:
+
+            case static::TYPE_STORYBOARD_FEEDBACK:
+
+            case static::TYPE_VIDEO_UPLOAD:
+
+            case static::TYPE_VIDEO_FEEDBACK:
+
+            case static::TYPE_OTHER:
+
+            default:
+                
+        }
     }
 } 
