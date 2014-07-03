@@ -183,7 +183,6 @@ class ClipitTask extends UBItem{
     }
 
     // TASK COMPLETION
-
     static function get_completed_status($id, $entity_id){
         $task = new static($id);
         switch($task->task_type){
