@@ -27,7 +27,7 @@ class ClipitActivity extends UBItem{
      * @const string SUBTYPE Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitActivity";
-
+    // Relationship names
     const REL_ACTIVITY_TEACHER = "activity-teacher";
     const REL_ACTIVITY_USER = "activity-user";
     const REL_ACTIVITY_GROUP = "activity-group";
@@ -35,11 +35,11 @@ class ClipitActivity extends UBItem{
     const REL_ACTIVITY_STORYBOARD = "activity-storyboard";
     const REL_ACTIVITY_VIDEO = "activity-video";
     const REL_ACTIVITY_FILE = "activity-file";
-
+    // Status values
     const STATUS_ENROLL = "enroll";
     const STATUS_ACTIVE = "active";
     const STATUS_CLOSED = "closed";
-
+    // Class variables
     public $color = "";
     public $status = "";
     public $tricky_topic = 0;
