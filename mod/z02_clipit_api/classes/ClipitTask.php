@@ -86,6 +86,11 @@ class ClipitTask extends UBItem{
         $elgg_entity->set("task_count", (int)$this->task_count);
     }
 
+    /**
+     * Saves this instance to the system.
+     *
+     * @return bool|int Returns id of saved instance, or false if error.
+     */
     protected function save(){
         parent::save();
         static::set_activity($this->id, $this->activity);
@@ -98,9 +103,9 @@ class ClipitTask extends UBItem{
 
     // ACTIVITY
     /**
-     * Get the Activity Id in which a Task is contained in.
+     * Get the Activity in which a Task is contained.
      *
-     * @param int $id Id of the Task to get Activity from.
+     * @param int $id Id of the Task.
      *
      * @return int Returns an the Activity Id for the Task.
      */
@@ -108,7 +113,14 @@ class ClipitTask extends UBItem{
         $activity = UBCollection::get_items($id, ClipitActivity::REL_ACTIVITY_TASK, true);
         return array_pop($activity);
     }
-
+    /**
+     * Set the Activity in which a Task is contained.
+     *
+     * @param int $id Id of the Task.
+     * @param int $activity_id ID of the Activity.
+     *
+     * @return bool Returns true if OK, or false if error.
+     */
     static function set_activity($id, $activity_id){
         return UBCollection::add_items($activity_id, array($id), ClipitActivity::REL_ACTIVITY_TASK, true);
 

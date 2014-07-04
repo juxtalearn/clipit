@@ -205,7 +205,7 @@ class UBUser extends UBItem{
      *
      * @param array $login_array Array of user logins
      *
-     * @return static[] Returns an array of User objects
+     * @return array Returns an array of User objects
      */
     static function get_by_login($login_array){
         $user_array = array();
@@ -227,7 +227,7 @@ class UBUser extends UBItem{
      *
      * @param array $email_array Array of user emails
      *
-     * @return static[] Returns an array of arrays of User objects
+     * @return array Returns an array of arrays of User objects
      */
     static function get_by_email($email_array){
         $user_array = array();
@@ -251,7 +251,7 @@ class UBUser extends UBItem{
      *
      * @param array $role_array Array of user roles
      *
-     * @return static[] Returns an array of arrays of User objects
+     * @return array Returns an array of [role] => array(Users)
      */
     static function get_by_role($role_array){
         $user_array = array();

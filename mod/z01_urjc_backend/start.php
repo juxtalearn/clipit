@@ -30,7 +30,9 @@ function urjc_backend_init(){
 /**
  * Loads PHP files.
  *
+ * @param string $path Path to load php files from
  * @throws InstallationException
+ * @return bool True if success.
  */
 function loadFiles($path){
     if(!$path){
