@@ -21,7 +21,6 @@ elgg_register_event_handler('init', 'system', 'clipit_api_init');
  * Initialization method which loads objects, libraries, exposes the REST API, and registers test classes.
  */
 function clipit_api_init(){
-    //loadFiles(elgg_get_plugins_path() . "z02_clipit_api/classes/");
     loadFiles(elgg_get_plugins_path() . "z02_clipit_api/libraries/clipit_rest_api/");
     loadFiles(elgg_get_plugins_path() . "z02_clipit_api/libraries/juxtalearn-cookie-authentication/");
     loadFiles(elgg_get_plugins_path() . "z02_clipit_api/libraries/simple_xlsx/");
