@@ -323,7 +323,7 @@ class UBItem{
      * Get Objects with id contained in a given list.
      *
      * @param array $id_array Array of Object Ids
-     * @return array Returns an array of Objects
+     * @return static[] Returns an array of Objects
      */
     static function get_by_id($id_array){
         $object_array = array();
@@ -336,6 +336,8 @@ class UBItem{
         }
         return $object_array;
     }
+    
+    
 
     /**
      * Get Items with Owner Id contained in a given list.
