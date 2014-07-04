@@ -118,6 +118,8 @@ $english = array(
     // Storyboards
     'storyboards' => 'Storyboards',
     'storyboard' => 'Storyboard',
+    'storyboards:recommended' => 'Recommended storyboards',
+    'storyboards:recommended:none' => 'There are no recommended storyboards',
     'storyboards:none' => 'No storyboards',
     'multimedia:storyboards:add' => 'Add storyboards',
     // Tricky Topic

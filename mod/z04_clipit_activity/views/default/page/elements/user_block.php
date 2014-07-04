@@ -17,7 +17,9 @@ $user = elgg_extract("entity", $vars);
     'class' => 'pull-left margin-right-10 avatar-tiny'
 ));?>
 <div class="text-truncate">
-    <?php echo elgg_view("messages/compose_icon", array('entity' => $user));?>
+    <?php if($vars['mail'] !== false): ?>
+        <?php echo elgg_view("messages/compose_icon", array('entity' => $user));?>
+    <?php endif;?>
     <?php echo elgg_view('output/url', array(
         'href'  => "profile/".$user->login,
         'title' => $user->name,

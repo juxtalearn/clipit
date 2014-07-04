@@ -64,14 +64,6 @@ $rating = elgg_extract("rating", $vars);
             <div class="col-md-4">
                 <a href="<?php echo elgg_get_site_url()."{$href}/view/{$video->id}"; ?>">
                     <div class="img-preview">
-                        <?php
-                        if($rating):
-                            $rating_average = ClipitPerformanceRating::get_average_target_rating($video->id);
-                        ?>
-                        <div class="pull-right rating ratings readonly white-star" data-score="<?php echo $rating_average;?>">
-                            <?php echo star_rating_view($rating_average);?>
-                        </div>
-                        <?php endif; ?>
                         <img src="<?php echo $video->preview;?>">
                     </div>
                 </a>
@@ -88,6 +80,14 @@ $rating = elgg_extract("rating", $vars);
                 <?php endif; ?>
                 <?php if($vars['actions']): ?>
                     <?php echo elgg_view("multimedia/owner_options", array('entity' => $video, 'type' => 'video')); ?>
+                <?php endif; ?>
+                <?php
+                if($rating):
+                    $rating_average = ClipitPerformanceRating::get_average_target_rating($video->id);
+                    ?>
+                    <div class="pull-right rating ratings readonly" data-score="<?php echo $rating_average;?>">
+                        <?php echo star_rating_view($rating_average);?>
+                    </div>
                 <?php endif; ?>
                 <h4 class="text-truncate">
                     <?php echo elgg_view('output/url', array(

@@ -15,7 +15,7 @@ $activity = elgg_extract("activity", $vars);
 $group = elgg_extract("group", $vars);
 $user_loggedin_id = elgg_get_logged_in_user_guid();
 $user_logged = array_pop(ClipitUser::get_by_id(array($user_loggedin_id)));
-ClipitStoryboard::create_clone(3655);
+
 $tags = $entity->tag_array;
 $performance_average = ClipitPerformanceRating::get_average_target_rating($entity->id);
 $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->id))));
@@ -35,12 +35,13 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
             <div class="row details">
                 <div class="col-md-<?php echo ($vars['rating']!== false) ? 8 : 12; ?>">
                     <div class="description" data-shorten="true">
-                        <div style="margin-bottom: 10px;">
+                        <div class="margin-bottom-10">
                             <?php if($group):?>
-                            <span class="label label-blue pull-right">
-                                <i class="fa fa-users"></i>
-                                <?php echo $group->name;?>
-                            </span>
+                                <div class="pull-right">
+                                    <?php echo elgg_view("publications/owner_summary", array(
+                                        'entity' => $entity,
+                                    )); ?>
+                                </div>
                             <?php endif;?>
                             <small class="show">
                                 <strong>Published on</strong> <?php echo htmlspecialchars(date(elgg_echo('friendlytime:date_format'), $entity->time_created));?>
@@ -54,7 +55,7 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
                         <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $tags)); ?>
                     </div>
                     <h4><strong><?php echo elgg_echo("labels"); ?></strong></h4>
-                    <div>
+                    <div class="margin-bottom-10">
                         <?php echo elgg_view('output/url', array(
                             'href'  => "javascript:;",
                             'text'  => '<i class="fa fa-plus"></i>',

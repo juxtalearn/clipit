@@ -41,6 +41,7 @@ function clipit_activity_init() {
     elgg_register_action("group/leave", elgg_get_plugins_path() . "z04_clipit_activity/actions/group/leave.php");
     elgg_register_action("group/create", elgg_get_plugins_path() . "z04_clipit_activity/actions/group/create.php");
     elgg_register_action("group/remove_member", elgg_get_plugins_path() . "z04_clipit_activity/actions/group/remove_member.php");
+    elgg_register_ajax_view('modal/group/view');
     elgg_register_ajax_view('multimedia/attach/videos');
     elgg_register_ajax_view('multimedia/attach/storyboards');
     elgg_register_ajax_view('multimedia/attach/files');
@@ -403,7 +404,7 @@ function activity_page_handler($page) {
                                             ));
                                         } else {
                                             $body = elgg_view('multimedia/storyboard/list', array(
-                                                'entities'    => $videos,
+                                                'entities'    => $storyboards,
                                                 'href'      => "clipit_activity/{$activity->id}/group/{$group_id}/multimedia",
                                                 'task_id'   => $task->id,
                                                 'rating'    => false,
@@ -412,21 +413,21 @@ function activity_page_handler($page) {
                                                 'total_comments' => false,
                                             ));
                                         }
-                                        // View other videos
+                                        // View other storyboards
                                         $body .= elgg_view("page/components/title_block", array(
                                             'title' => elgg_echo("task:other_storyboards"),
                                         ));
-                                        if(($key = array_search($status['result'], $task->video_array)) !== false) {
-                                            unset($task->video_array[$key]);
+                                        if(($key = array_search($status['result'], $task->storyboard_array)) !== false) {
+                                            unset($task->storyboard_array[$key]);
                                         }
-                                        if($task->video_array){
-                                            $body .= elgg_view('multimedia/video/list_summary', array(
-                                                'videos'    => $task->video_array,
+                                        if($task->storyboard_array){
+                                            $body .= elgg_view('multimedia/storyboard/list_summary', array(
+                                                'entities'    => $task->storyboard_array,
                                                 'href'      => $href_publications,
                                                 'task_id'   => $task->id,
                                             ));
                                         } else {
-                                            $body .= elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
+                                            $body .= elgg_view('output/empty', array('value' => elgg_echo('storyboards:none')));
                                         }
                                     }
                                     break;
@@ -782,7 +783,7 @@ function activity_page_handler($page) {
         $activity_menu_sidebar = elgg_view_module('aside', elgg_echo('activity'), $activity_menu);
     }
     // Group sidebar components (group block info + group tools)
-    if($hasGroup){
+    if($hasGroup && $activity_status == 'active'){
         $pending_tasks = elgg_view("page/components/pending_tasks", array('entity' => $activity));
         $pending_tasks_sidebar = elgg_view_module('aside', elgg_echo('activity:pending_tasks'), $pending_tasks, array('class' => 'aside-block'));
 

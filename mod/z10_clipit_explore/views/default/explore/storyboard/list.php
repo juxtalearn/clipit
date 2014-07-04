@@ -29,7 +29,7 @@ $href = elgg_extract('href', $vars);
                     )); ?>
                 </div>
             </div>
-            <div class="content-block" style="height: 70px;">
+            <div class="content-block">
                 <div style="width: 35px;display: inline-block;float: right;text-align: center;margin-left:10px;">
                     <?php echo elgg_view('output/url', array(
                         'href'  => "file/download/".$file->id,
@@ -53,6 +53,21 @@ $href = elgg_extract('href', $vars);
                         <strong><?php echo elgg_echo("file:" . $file->mime_type['short']);?></strong>
                     </small>
                     <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $storyboard->tag_array, 'width' => 100, 'limit' => 2)); ?>
+                    <small class="show" style="margin-top: -5px;">
+                        <?php
+                        $total_comments = array_pop(ClipitComment::count_by_destination(array($storyboard->id), true));
+                        ?>
+                        <!-- Count total comments -->
+                        <strong>
+                            <?php echo elgg_view('output/url', array(
+                                'href'  => "{$href}/view/{$storyboard->id}#comments",
+                                'title' => elgg_echo('comments'),
+                                'class' => 'pull-right',
+                                'text'  => $total_comments. ' <i class="fa fa-comments"></i>'))
+                            ?>
+                        </strong>
+                        <?php echo elgg_view('output/friendlytime', array('time' => $storyboard->time_created));?>
+                    </small>
                 </div>
             </div>
         </div>

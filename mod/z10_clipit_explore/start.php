@@ -208,6 +208,7 @@ function explore_page_handler($page) {
                     return true;
                     break;
                 case 'ClipitStoryboard':
+                    set_input('entity_id', $entity_id);
                     include "$file_dir/storyboard.php";
                     return true;
                     break;

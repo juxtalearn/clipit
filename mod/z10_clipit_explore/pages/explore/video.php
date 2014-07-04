@@ -19,7 +19,7 @@ elgg_push_breadcrumb($title);
 $related_video_ids = array_slice(ClipitSite::get_videos(), 0, 4);
 $related_videos = ClipitVideo::get_by_id($related_video_ids);
 
-$recommended_videos = elgg_view("multimedia/video/view/summary", array('entities' => $related_videos));
+$recommended_videos = elgg_view("multimedia/video/recommended/view", array('entities' => $related_videos));
 $sidebar = elgg_view_module('aside', elgg_echo('videos:recommended'), $recommended_videos, array('class' => 'videos-summary'));
 // Tags
 $tags = ClipitTag::get_all(10);

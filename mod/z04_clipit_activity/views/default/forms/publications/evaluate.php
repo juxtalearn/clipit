@@ -108,12 +108,12 @@ $(function(){
             </ul>
         </div>
     </div>
-</div>
-<div style="margin-top: 20px;">
-<?php echo elgg_view('input/submit',
-    array(
-        'value' => elgg_echo('submit'),
-        'class' => "btn btn-primary pull-right"
-    ));
-?>
+    <div class="margin-top-20 col-md-12 text-right">
+        <?php echo elgg_view('input/submit',
+            array(
+                'value' => elgg_echo('submit'),
+                'class' => "btn btn-primary pull-right"
+            ));
+        ?>
+    </div>
 </div>
