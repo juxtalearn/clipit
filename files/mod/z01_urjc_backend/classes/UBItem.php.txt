@@ -19,6 +19,9 @@ class UBItem{
     /**
      * @var string Elgg entity TYPE for this class
      */
+    /**
+     * string Elgg entity TYPE for this class
+     */
     const TYPE = "object";
     /**
      * @var string Elgg entity SUBTYPE for this class
