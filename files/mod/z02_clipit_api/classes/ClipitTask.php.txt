@@ -61,8 +61,8 @@ class ClipitTask extends UBItem{
         if($this->end == 0){
             $activity_id = static::get_activity($this->id);
             if(!empty($activity_id)){
-                $prop_value_array = (int) ClipitActivity::get_properties($activity_id, array("deadline"));
-                $this->end = $prop_value_array["deadline"];
+                $prop_value_array = (int) ClipitActivity::get_properties($activity_id, array("end"));
+                $this->end = $prop_value_array["end"];
             }
         }
         $this->activity = static::get_activity((int)$this->id);
@@ -86,6 +86,11 @@ class ClipitTask extends UBItem{
         $elgg_entity->set("task_count", (int)$this->task_count);
     }
 
+    /**
+     * Saves this instance to the system.
+     *
+     * @return bool|int Returns id of saved instance, or false if error.
+     */
     protected function save(){
         parent::save();
         static::set_activity($this->id, $this->activity);
@@ -98,9 +103,9 @@ class ClipitTask extends UBItem{
 
     // ACTIVITY
     /**
-     * Get the Activity Id in which a Task is contained in.
+     * Get the Activity in which a Task is contained.
      *
-     * @param int $id Id of the Task to get Activity from.
+     * @param int $id Id of the Task.
      *
      * @return int Returns an the Activity Id for the Task.
      */
@@ -108,7 +113,14 @@ class ClipitTask extends UBItem{
         $activity = UBCollection::get_items($id, ClipitActivity::REL_ACTIVITY_TASK, true);
         return array_pop($activity);
     }
-
+    /**
+     * Set the Activity in which a Task is contained.
+     *
+     * @param int $id Id of the Task.
+     * @param int $activity_id ID of the Activity.
+     *
+     * @return bool Returns true if OK, or false if error.
+     */
     static function set_activity($id, $activity_id){
         return UBCollection::add_items($activity_id, array($id), ClipitActivity::REL_ACTIVITY_TASK, true);
 

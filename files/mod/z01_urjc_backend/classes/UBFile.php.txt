@@ -152,6 +152,8 @@ class UBFile extends UBItem{
     }
 
     /**
+     * Get File MIME Type
+     *
      * @param string $file Filename on Filestore
      * @return bool|mixed|null|string Mime Type
      */
@@ -223,6 +225,8 @@ class UBFile extends UBItem{
     }
 
     /**
+     * Create thumbnails for Files with MIME type = image
+     *
      * @param ElggFile $elgg_file
      */
     private static function create_thumbnails($elgg_file){

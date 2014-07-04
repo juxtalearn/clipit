@@ -17,11 +17,11 @@
  */
 class UBItem{
     /**
-     * @const string Elgg entity TYPE for this class
+     * @var string Elgg entity TYPE for this class
      */
     const TYPE = "object";
     /**
-     * @const string Elgg entity SUBTYPE for this class
+     * @var string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "UBItem";
     /**
