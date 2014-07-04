@@ -17,14 +17,11 @@
  */
 class UBItem{
     /**
-     * @var string Elgg entity TYPE for this class
-     */
-    /**
-     * string Elgg entity TYPE for this class
+     * @const string Elgg entity TYPE for this class
      */
     const TYPE = "object";
     /**
-     * @var string Elgg entity SUBTYPE for this class
+     * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "UBItem";
     /**
@@ -343,6 +340,7 @@ class UBItem{
      * Get Items with Owner Id contained in a given list.
      *
      * @param array $owner_array Array of Owner Ids
+     * @param int $limit Number of Items to return, default 0 = all
      * @return static[] Returns an array of Items
      */
     static function get_by_owner($owner_array, $limit = 0){

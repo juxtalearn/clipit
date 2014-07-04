@@ -108,7 +108,7 @@ class UBMessage extends UBItem{
     /**
      * Get Messages by Sender
      * @param array $sender_array Array of Sender IDs
-     * @return static[] Array of Messages
+     * @return array(static) Array of Messages
      */
     static function get_by_sender($sender_array){
         return static::get_by_owner($sender_array);
@@ -255,6 +255,12 @@ class UBMessage extends UBItem{
         }
         return $count_array;
     }
+
+    /**
+     * Count number of Messages sent by Sender
+     * @param array $sender_array Array of User IDs
+     * @return array Array with [(int)sender] => [(int)message_count]
+     */
     static function count_by_sender($sender_array){
         $message_array = static::get_by_sender($sender_array);
         $count_array = array();
