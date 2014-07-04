@@ -85,6 +85,12 @@ class ClipitGroup extends UBItem{
         parent::delete();
     }
 
+    /**
+     * Returns the Group where a User is taking part in an Activity
+     * @param int $user_id User ID
+     * @param int $activity_id Activity ID
+     * @return bool|int Returns the Group ID, or false if not found
+     */
     static function get_from_user_activity($user_id, $activity_id){
         $user_groups = array_flip(ClipitUser::get_groups($user_id));
         $activity_groups = array_flip(ClipitActivity::get_groups($activity_id));
@@ -92,7 +98,7 @@ class ClipitGroup extends UBItem{
         if(empty($intersection) || count($intersection) != 1){
             return false;
         }
-        return array_pop($intersection);
+        return (int)array_pop($intersection);
     }
 
     /**
