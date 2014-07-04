@@ -76,9 +76,28 @@ function explore_page_handler($page) {
                     $storyboards = ClipitStoryboard::get_by_tags(array($tag->id));
                     $files = ClipitFile::get_by_tags(array($tag->id));
                     break;
+                case 'label':
+                    $label = array_pop(ClipitLabel::get_by_id(array($id)));
+                    $title = $label->name;
+                    elgg_push_breadcrumb(elgg_echo('label'));
+                    elgg_push_breadcrumb($label->name);
+                    $videos = ClipitVideo::get_by_labels(array($label->id));
+                    $storyboards = ClipitStoryboard::get_by_labels(array($label->id));
+                    $files = ClipitFile::get_by_labels(array($label->id));
+                    break;
+                case 'performance_item':
+                    $performance_item = array_pop(ClipitPerformanceItem::get_by_id(array($id)));
+                    $title = $performance_item->name;
+                    elgg_push_breadcrumb(elgg_echo('performance_item'));
+                    elgg_push_breadcrumb($performance_item->name);
+                    $videos = ClipitVideo::get_by_performance_items(array($performance_item->id));
+                    $storyboards = ClipitStoryboard::get_by_performance_items(array($performance_item->id));
+                    //$files = ClipitFile::get_by_performance_items(array($performance_item->id));
+                    $files = array();
+                    break;
                 case 'all':
                     if(!$text){
-                        return false;
+                        forward("explore");
                     }
                     $title = elgg_echo('search:results_for') . ' <span style="opacity: .7">'.$text.'</span>';
                     $content = get_explore(array(
@@ -88,20 +107,22 @@ function explore_page_handler($page) {
                     ));
                     $videos = ClipitVideo::get_from_search($text);
                     $storyboards = ClipitStoryboard::get_from_search($text);
-                    $activities = ClipitActivity::get_from_search($text);
+                    $files = ClipitFile::get_from_search($text);
                     break;
             }
             break;
-        case '': // explore (filter: all)
-            $videos = ClipitVideo::get_all(6);
-            $storyboards = ClipitStoryboard::get_all(6);
-            $activities = ClipitActivity::get_all(3);
+        case '': // explore (filter tab: all)
+            $video_ids = ClipitSite::get_videos();
+            $videos = array_slice(ClipitVideo::get_by_id($video_ids), 0, 6);
+            $href = "explore";
+            $storyboard_ids = ClipitSite::get_storyboards();
+            $storyboards = array_slice(ClipitStoryboard::get_by_id($storyboard_ids), 0, 6);
             switch($selected_tab){
                 case 'videos':
-                    $videos = ClipitVideo::get_all(15);
+                    $videos = ClipitVideo::get_by_id($video_ids);
                     break;
                 case 'storyboards':
-                    $storyboards = ClipitStoryboard::get_all(15);
+                    $storyboards = ClipitStoryboard::get_by_id($storyboard_ids);
                     break;
                 case 'files':
                     $files = ClipitFile::get_all(15);
@@ -124,6 +145,15 @@ function explore_page_handler($page) {
         $storyboards = ClipitStoryboard::get_by_id($visible_storyboards);
 
         $href = "clipit_activity/{$activity_id}/publications";
+    } elseif($by){
+        $visible_videos = get_visible_items_by_site($videos, 'videos');
+        $visible_storyboards = get_visible_items_by_site($storyboards, 'storyboards');
+        // Videos
+        $videos = ClipitVideo::get_by_id($visible_videos);
+        // Storyboards
+        $storyboards = ClipitStoryboard::get_by_id($visible_storyboards);
+
+        $href = "explore";
     }
     switch($selected_tab){
         case 'videos':
@@ -150,7 +180,7 @@ function explore_page_handler($page) {
             break;
         default:
             $content = get_explore(array(
-                'videos' => array('limit' => 3, 'entities' => $videos),
+                'videos' => array('limit' => 3, 'entities' => $videos, 'href' => $href),
                 'storyboards' => array('limit' => 4, 'entities' => $storyboards),
                 'title' => true
             ));
@@ -159,16 +189,34 @@ function explore_page_handler($page) {
             }
             break;
     }
-    switch($page[1]){
 
-        case 'video':
-            echo "VIDEO PREVIEW";
-            break;
-        default:
-            //require_once "$base_dir/all.php";
-
-
-            break;
+    switch($page[0]){
+        case 'view':
+            if(!$entity_id = (int)$page[1]){
+                return false;
+            }
+            $file_dir = elgg_get_plugins_path() . 'z10_clipit_explore/pages/explore';
+            $object = ClipitSite::lookup($entity_id);
+            $publish_level = $object['subtype']::get_resource_scope($entity_id);
+            if($publish_level != 'site'){
+                return false;
+            }
+            switch ($object['subtype']) {
+                case 'ClipitVideo':
+                    set_input('entity_id', $entity_id);
+                    include "$file_dir/video.php";
+                    return true;
+                    break;
+                case 'ClipitStoryboard':
+                    include "$file_dir/storyboard.php";
+                    return true;
+                    break;
+                case 'ClipitFile':
+                    include "$file_dir/trash.php";
+                    return true;
+                default:
+                    return false;
+            }
     }
     /**
      * Sidebar
@@ -225,7 +273,8 @@ function get_explore($params = array()){
            $entities = array_slice($entities, 0, $limit);
         }
         $params_video_list = array(
-            'videos' => $entities
+            'videos' => $entities,
+            'href' => $videos['href']
         );
         $content .= elgg_view("explore/video/list", $params_video_list);
         if(count($videos['entities']) > $limit ){

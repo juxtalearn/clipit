@@ -30,20 +30,21 @@ if(mb_strlen($sb_description)>165){
     ?>
     </strong>
 </h4>
-<small class="show">
+<small class="show smaller">
     <strong><?php echo elgg_echo("file:" . $file->mime_type['short']);?></strong>
 </small>
 <div>
     <?php echo $sb_description; ?>
 </div>
 <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $storyboard->tag_array)); ?>
-<small class="show file-user-info">
-    <i>Uploaded by
-        <?php echo elgg_view('output/url', array(
-            'href'  => "profile/".$owner->login,
-            'title' => $owner->name,
-            'text'  => $owner->name));
-        ?>
+<small class="show">
+    <?php echo elgg_view("publications/owner_summary", array(
+        'entity' => $storyboard,
+        'entity_class' => 'ClipitStoryboard',
+        'msg' => 'Uploaded by'
+    ));
+    ?>
+    <i>
         <?php echo elgg_view('output/friendlytime', array('time' => $storyboard->time_created));?>
     </i>
 </small>

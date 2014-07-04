@@ -39,17 +39,9 @@ $href = elgg_extract('href', $vars);
                     ));
                     ?>
                 </h4>
-                <p class="date">
-                    <?php echo elgg_view('output/url', array(
-                        'href' => "explore/search?by=tricky_topic&id={$tricky_topic->id}",
-                        'text' => $tricky_topic->name,
-                        'title' => $tricky_topic->name,
-                        'class' => 'pull-right',
-                        'is_trusted' => true,
-                    ));
-                    ?>
+                <div class="date">
                     <?php echo elgg_view('output/friendlytime', array('time' => $video->time_created));?>
-                </p>
+                </div>
                 <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $video->tag_array, 'width' => 105, 'limit' => 2)); ?>
             </div>
         </div>

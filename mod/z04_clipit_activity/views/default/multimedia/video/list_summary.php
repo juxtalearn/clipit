@@ -89,9 +89,9 @@ $rating = elgg_extract("rating", $vars);
                 ?>
             </h4>
             <div class="tags">
-                <?php echo elgg_view("page/elements/tags", array('tags' => $tags)); ?>
+                <?php echo elgg_view("tricky_topic/tags/view", array('tags' => $tags)); ?>
             </div>
-            <small class="show">
+            <small class="show" style="margin: 0">
                 <?php
                     $total_comments = array_pop(ClipitComment::count_by_destination(array($video->id), true));
                 ?>

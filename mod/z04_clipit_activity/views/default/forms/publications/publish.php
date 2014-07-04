@@ -65,14 +65,19 @@ if($task_id = get_input('task_id')):
             ));
         ?>
     </h4>
+    <div><?php echo $task->description;?></div>
 </div>
 <?php endif; ?>
 <div class="row">
     <div class="col-md-8">
+        <?php if($entity->url):?>
         <div class="form-group">
             <label for="title"><?php echo elgg_echo("url");?></label>
             <a href="<?php echo $entity->url;?>" target="_blank"><?php echo $entity->url;?></a>
             <hr style="margin: 10px 0;">
+        </div>
+        <?php endif;?>
+        <div class="form-group">
             <label for="title"><?php echo elgg_echo("title");?></label>
             <?php echo elgg_view("input/text", array(
                 'name' => 'title',
@@ -113,7 +118,10 @@ if($task_id = get_input('task_id')):
     </div>
 
     <div class="col-md-4">
-        <img src="<?php echo $entity->preview;?>" class="img-responsive"><br>
+        <!-- Entity preview -->
+        <?php echo $vars['entity_preview'];?>
+        <!-- Entity preview end -->
+        <br>
         <label><?php echo elgg_echo("performance_items");?></label>
         <div>
             <select name="performance_items[]" data-placeholder="<?php echo elgg_echo('click_add');?>" style="width:100%;" multiple class="chosen-select-items" tabindex="8">

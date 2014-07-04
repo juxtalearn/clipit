@@ -102,6 +102,9 @@ $english = array(
     // Videos
     'videos' => 'Videos',
     'video' => 'Video',
+    'videos:recommended' => 'Recommended videos',
+    'videos:recommended:none' => 'There are no recommended videos',
+    'videos:related' => 'Related videos',
     'videos:none' => 'No videos',
     'video:url:error' => 'Incorrect url or video not found',
     'video:edit' => 'Edit video',
@@ -139,6 +142,7 @@ $english = array(
     'publish:to_activity'   => 'Publish %s in %s',
     'publish:video'   => 'Publish video',
     // Labels
+    'label' => 'Label',
     'labels' => 'Labels',
     // Tags
     'tag' => 'Tag',
@@ -147,6 +151,7 @@ $english = array(
     'tags:recommended' => 'Recommended tags',
     'tags:commas:separated' => 'Separated by commas',
     // Performance items
+    'performance_item' => 'Performance item',
     'performance_items' => 'Performance items',
     'performance_item:select' => 'Select performance items',
     'performance_item:info' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus dapibus lacus at nisl pharetra faucibus dapibus lacus',
@@ -159,7 +164,15 @@ $english = array(
     'task:pending' => 'Pending',
     'task:my_video' => 'My video',
     'task:other_videos' => 'Other videos',
+    'task:my_storyboard' => 'My storyboard',
+    'task:other_storyboards' => 'Other storyboards',
     'task:not_actual' => 'There are no pending tasks',
+    'task:video_feedback' => 'Video feedback',
+    'task:video_upload' => 'Video upload',
+    'task:storyboard_upload' => 'Storyboard upload',
+    'task:quiz_answer' => 'Quiz answer',
+    'task:video_feedback' => 'Video feedback',
+    'task:storyboard_feedback' => 'Storyboard feedback',
 );
 
 add_translation('en', $english);

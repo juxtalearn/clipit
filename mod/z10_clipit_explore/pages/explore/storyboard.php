@@ -2,8 +2,8 @@
  /**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
- * Creation date:   23/06/14
- * Last update:     23/06/14
+ * Creation date:   30/06/14
+ * Last update:     30/06/14
  * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC JuxtaLearn Project
  * @version         $Version$
  * @link            http://www.juxtalearn.eu

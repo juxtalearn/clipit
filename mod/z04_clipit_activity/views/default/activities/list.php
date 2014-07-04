@@ -56,7 +56,7 @@ if (is_array($items) && count($items) > 0):
                             <i class='fa fa-calendar'></i>
                             <?php echo date("d M Y", $item->time_created);?>
                             -
-                            <?php echo date("d M Y", $item->deadline);?>
+                            <?php echo date("d M Y", $item->end);?>
                         </div>
                         <div style='max-height: 40px; overflow: hidden; color: #666666;margin-top: 5px; '>
                             <?php echo $item->description; ?>

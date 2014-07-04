@@ -13,11 +13,11 @@
 $tags = elgg_extract('tags', $vars);
 $limit = $vars['limit'] ? $vars['limit'] : count($tags);
 $width = elgg_extract('width', $vars);
+$width = is_integer($width) ? $width."px" : $width;
 if($width){
-    $width = "max-width:{$width}px;";
+    $width = "max-width:{$width}";
 }
 ?>
-
 <?php if($tags):?>
 <div class="tags">
     <?php
@@ -34,8 +34,11 @@ if($width){
         ));
         ?>
     <?php endforeach;?>
-    <?php if(count($tags) > 2 && $vars['limit']): ?>
-        <a class="more-tags fa fa-plus"></a>
+    <?php if(count($tags) > $limit ): ?>
+        <a href="javascript:;" style="vertical-align: bottom;" data-toggle="popover" class="more-tags fa fa-ellipsis-h" rel="popover" data-placement="bottom"></a>
+        <div id="popover_content_wrapper" class="popover-content tags" style="display: none">
+            <?php echo elgg_view('tricky_topic/tags/view', array('tags' => array_slice($tags, $limit, count($tags)), 'limit' => count($tags)));?>
+        </div>
     <?php endif; ?>
 </div>
 <?php endif; ?>

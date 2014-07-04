@@ -58,6 +58,9 @@ $content = '
     'text' => elgg_echo('link:view:all'),
     'is_trusted' => true,
 ));*/
+$related_video_ids = array_slice(ClipitSite::get_videos(), 0, 3);
+$related_videos = ClipitVideo::get_by_id($related_video_ids);
+$content = elgg_view("multimedia/video/view/summary", array('entities' => $related_videos));
 echo elgg_view('landing/module', array(
     'name'      => "recommended_videos",
     'title'     => "Recommended Videos",

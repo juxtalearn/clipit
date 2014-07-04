@@ -70,7 +70,7 @@ foreach($files as $file_id){
         ),
         array(
             'class' => 'col-md-9 file-info',
-            'content' => elgg_view("multimedia/file/summary", array('entity' => $file, 'href' => $file_url))
+            'content' => elgg_view("multimedia/file/title_summary", array('entity' => $file, 'href' => $file_url))
         ),
         array(
             'class' => 'col-md-3',

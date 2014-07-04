@@ -45,8 +45,7 @@ switch($parent_entity_class){
 }
 
 $entity = array_pop($entity_class::get_by_id(array($entity_id)));
-
-if(count($entity)==0 || trim($title) == "" || trim($description) == "" || trim($entity->url) == ""){
+if(count($entity)==0 || trim($title) == "" || trim($description) == ""){
     register_error(elgg_echo("cantpublish"));
 } else{
     $entity_class::set_properties($entity_id, array(
@@ -70,14 +69,23 @@ if(count($entity)==0 || trim($title) == "" || trim($description) == "" || trim($
     // Performance items
     $entity_class::add_performance_items($entity_id, $performance_items);
     // Clone
-    $new_video_id = $entity_class::create_clone($entity_id);
+    $new_entity_id = $entity_class::create_clone($entity_id);
 
-    if($new_video_id){
-        ClipitTask::add_videos($task_id, array($new_video_id));
+    if($new_entity_id){
+        switch($entity_class){
+            case "ClipitVideo":
+                ClipitTask::add_videos($task_id, array($new_entity_id));
+                break;
+            case "ClipitStoryboard":
+                ClipitTask::add_storyboards($task_id, array($new_entity_id));
+                break;
+            default:
+                register_error(elgg_echo("cantpublish"));
+                break;
+        }
     } else {
         register_error(elgg_echo("cantpublish"));
     }
-
     system_message(elgg_echo('published'));
 }
 forward($href);

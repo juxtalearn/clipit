@@ -19,7 +19,7 @@ foreach($labels as $label_id):
     $label = array_pop(ClipitLabel::get_by_id(array($label_id)));
     ?>
     <?php echo elgg_view('output/url', array(
-    'href'  => "explore/".$label->name,
+    'href'  => "explore/search?by=label&id=".$label->id,
     'title' => $label->name,
     'text'  => $label->name,
     'style' => 'border-bottom: 1px dotted #32b4e5;margin-right: 5px;',

@@ -11,22 +11,23 @@
  * @package         ClipIt
  */
 $entity = elgg_extract("entity", $vars);
+$activity = elgg_extract("activity", $vars);
+$group = elgg_extract("group", $vars);
 $user_loggedin_id = elgg_get_logged_in_user_guid();
 $user_logged = array_pop(ClipitUser::get_by_id(array($user_loggedin_id)));
-$activity_id = elgg_get_page_owner_guid();
-$activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
+
 $tags = $entity->tag_array;
 $performance_average = ClipitPerformanceRating::get_average_target_rating($entity->id);
 $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->id))));
-$owner_group_id = $entity->get_group($entity->id);
-$owner_group = array_pop(ClipitGroup::get_by_id(array($owner_group_id)));
 ?>
 <!-- Multimedia info + details -->
 <div class="multimedia-owner multimedia-pub">
     <div class="block">
-        <div class="header">
-            <h3 class="title"><?php echo $entity->name; ?></h3>
-        </div>
+        <?php if($vars['title'] !== false):?>
+            <div class="header">
+                <h3 class="title"><?php echo $entity->name; ?></h3>
+            </div>
+        <?php endif;?>
         <div class="multimedia-body">
             <div class="multimedia-view">
                 <?php echo $vars['body'];?>
@@ -35,10 +36,12 @@ $owner_group = array_pop(ClipitGroup::get_by_id(array($owner_group_id)));
                 <div class="col-md-8">
                     <div class="description" data-shorten="true">
                         <div style="margin-bottom: 10px;">
+                            <?php if($group):?>
                             <span class="label label-blue pull-right">
                                 <i class="fa fa-users"></i>
-                                <?php echo $owner_group->name;?>
+                                <?php echo $group->name;?>
                             </span>
+                            <?php endif;?>
                             <small class="show">
                                 <strong>Published on</strong> <?php echo htmlspecialchars(date(elgg_echo('friendlytime:date_format'), $entity->time_created));?>
                                 (<?php echo elgg_view('output/friendlytime', array('time' => $entity->time_created));?>)
@@ -95,7 +98,14 @@ $owner_group = array_pop(ClipitGroup::get_by_id(array($owner_group_id)));
                                 <div class="pull-right rating readonly" style="margin-right: 10px;margin-top: -3px;" data-score="<?php echo $average_for_item;?>">
                                     <?php echo star_rating_view($average_for_item); ?>
                                 </div>
-                                <h5 class="text-truncate blue" title="<?php echo $performance_item->name;?>" style="margin: 5px 0;"><?php echo $performance_item->name;?></h5>
+                                <h5 class="text-truncate blue" style="margin: 5px 0;">
+                                    <?php echo elgg_view('output/url', array(
+                                        'title' => $performance_item->name,
+                                        'href'  => "explore/search?by=performance_item&id=".$performance_item->id,
+                                        'text'  => $performance_item->name,
+                                    ));
+                                    ?>
+                                </h5>
                             </div>
                         <?php endforeach; ?>
                     </div>
@@ -105,7 +115,7 @@ $owner_group = array_pop(ClipitGroup::get_by_id(array($owner_group_id)));
                             <?php
                             echo elgg_view("page/components/modal_remote", array('id'=> "rating-list-{$entity->id}" ));
                             echo elgg_view('output/url', array(
-                                'href'  => "ajax/view/modal/publications/rating?by_target={$entity->id}&activiy_id={$activity_id}",
+                                'href'  => "ajax/view/modal/publications/rating?by_target={$entity->id}&activiy_id={$activity->id}",
                                 'text'  => elgg_echo("view"),
                                 'class' => 'btn btn-xs btn-default pull-right btn-border-blue',
                                 'data-toggle'   => 'modal',
@@ -139,32 +149,25 @@ $owner_group = array_pop(ClipitGroup::get_by_id(array($owner_group_id)));
     </div>
 </div>
 <!-- Multimedia info + details end -->
-<?php
-$hasRating = ClipitRating::get_from_user_for_target($user_loggedin_id, $entity->id);
-$owner_group = $entity->get_group($entity->id);
-$my_group = ClipitGroup::get_from_user_activity($user_loggedin_id, $activity_id);
-
-if(!$hasRating && ($my_group != $owner_group)):
-?>
-<!-- Evaluate -->
-<h2 class="title-block">Evaluate</h2>
-<?php echo elgg_view_form("publications/evaluate", array(
-    'style' => 'background: #f1f2f7;padding: 20px;margin: 10px 0;',
-    'data-validate' => 'true'),
-    array('entity' => $entity, 'activity' => $activity));
-?>
-<!-- Evaluate end -->
+<?php if($vars['canEvaluate']):?>
+    <?php echo elgg_view_form("publications/evaluate", array('data-validate' => 'true'),
+        array('entity' => $entity, 'activity' => $activity));
+    ?>
 <?php endif; ?>
 
-<?php if($comments = array_pop(ClipitComment::get_by_destination(array($entity->id)))):?>
-<a name="comments"></a>
-<h3 class="activity-module-title"><?php echo elgg_echo("comments"); ?> <span class="blue-lighter">(<?php echo count($comments);?>)</span></h3>
 <?php
+if($comments = array_pop(ClipitComment::get_by_destination(array($entity->id)))):
+    $total_comments = array_pop(ClipitComment::count_by_destination(array($entity->id), true));
+?>
+    <a name="comments"></a>
+    <h3 class="activity-module-title"><?php echo elgg_echo("comments"); ?> <span class="blue-lighter">(<?php echo $total_comments;?>)</span></h3>
+    <?php
     foreach($comments as $comment){
         echo elgg_view("comments/comment",
             array(
                 'entity' => $comment,
-                'target_id' => $entity->id
+                'target_id' => $entity->id,
+                'activity_id' => $activity->id
             ));
     }
 endif;

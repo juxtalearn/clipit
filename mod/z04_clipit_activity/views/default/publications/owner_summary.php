@@ -13,10 +13,11 @@
 $entity = elgg_extract("entity", $vars);
 $msg = elgg_extract("msg", $vars);
 $entity_class = elgg_extract("entity_class", $vars);
-$publish_level = $entity_class::get_publish_level($entity->id);
+$publish_level = $entity_class::get_resource_scope($entity->id);
 
 switch($publish_level){
     case "group":
+    case "activity":
         $output = $msg." ";
         $user = array_pop(ClipitUser::get_by_id(array($entity->owner_id)));
         $output .= elgg_view('output/url', array(
@@ -30,7 +31,7 @@ switch($publish_level){
         $output = '<a class="btn btn-primary btn-xs '.$vars['class'].'">'.$activity->name.'</a>';
         break;
     case "task":
-    case "activity":
+
         $group_id = $entity_class::get_group($entity->id);
         $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
         $output = '<span class="label label-blue '.$vars['class'].'"><i class="fa fa-users"></i> '.$group->name.'</span>';

@@ -12,12 +12,15 @@
  */
 $comment = elgg_extract('entity', $vars);
 $target_id = elgg_extract('target_id', $vars);
+$activity_id = elgg_extract('activity_id', $vars);
 $owner_user = array_pop(ClipitUser::get_by_id(array($comment->owner_id)));
 $user_loggedin = array_pop(ClipitUser::get_by_id(array(elgg_get_logged_in_user_guid())));;
 $files_id = $comment->get_files($comment->id);
-$activity_id = elgg_get_page_owner_guid();
-$group_id = ClipitGroup::get_from_user_activity($comment->owner_id, $activity_id);
-$group = array_pop(ClipitGroup::get_by_id(array($group_id)));
+$group = "";
+if($activity_id){
+    $group_id = ClipitGroup::get_from_user_activity($comment->owner_id, $activity_id);
+    $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
+}
 ?>
 <a name="comment_<?php echo $comment->id; ?>"></a>
 <div class="message <?php echo $vars['class'];?>">
@@ -42,7 +45,11 @@ $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
             ?>
         </strong>
         <small class="show">
-            <span class="label label-primary text-truncate" style="background: #32b4e5;color: #fff;max-width: 80px;display: inline-block;        vertical-align: middle;"><?php echo $group->name;?></span>
+            <?php if($group):?>
+            <span class="label label-primary text-truncate" style="background: #32b4e5;color: #fff;max-width: 80px;display: inline-block;vertical-align: middle;">
+                <?php echo $group->name;?>
+            </span>
+            <?php endif;?>
             <?php echo elgg_view('output/friendlytime', array('time' => $comment->time_created));?>
         </small>
         <div class="body">
@@ -65,7 +72,8 @@ $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
                     'entity' => $reply,
                     'class' => 'reply',
                     'target_id' => $target_id,
-                    'reply' => true
+                    'activity_id' => $activity_id,
+                    'reply' => true,
                 ));
             endforeach; ?>
         </div>

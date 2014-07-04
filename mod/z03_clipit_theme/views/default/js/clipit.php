@@ -424,6 +424,22 @@ $(function(){
         scrollTop: $(form).offset().top
         }, 50);
     });
+    /**
+     * Popover set default settings
+     */
+    $('body').on('click', function (e) {
+        //did not click a popover toggle or popover
+        if ($(e.target).data('toggle') !== 'popover'
+            && $(e.target).parents('.popover.in').length === 0) {
+            $('[data-toggle="popover"]').popover('hide');
+        }
+    });
+    $('[rel=popover]').popover({
+        html : true,
+        content: function() {
+        return $('#popover_content_wrapper').html();
+    }
+    });
     /*
      * Format file size
      *
