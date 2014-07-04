@@ -43,7 +43,8 @@ class ClipitActivity extends UBItem{
     public $color = "";
     public $status = "";
     public $tricky_topic = 0;
-    public $deadline = 0;
+    public $start = 0;
+    public $end = 0;
     public $teacher_array = array();
     public $called_users_array = array();
     public $group_array = array();
