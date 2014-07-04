@@ -18,7 +18,6 @@ if($width){
     $width = "max-width:{$width}";
 }
 ?>
-
 <?php if($tags):?>
 <div class="tags">
     <?php
@@ -36,7 +35,10 @@ if($width){
         ?>
     <?php endforeach;?>
     <?php if(count($tags) > $limit ): ?>
-        <a class="more-tags fa fa-plus"></a>
+        <a href="javascript:;" style="vertical-align: bottom;" data-toggle="popover" class="more-tags fa fa-ellipsis-h" rel="popover" data-placement="bottom"></a>
+        <div id="popover_content_wrapper" class="popover-content tags" style="display: none">
+            <?php echo elgg_view('tricky_topic/tags/view', array('tags' => array_slice($tags, $limit, count($tags)), 'limit' => count($tags)));?>
+        </div>
     <?php endif; ?>
 </div>
 <?php endif; ?>

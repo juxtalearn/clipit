@@ -27,29 +27,6 @@ foreach($entities as $video):
 }
 </style>
     <div class="wrapper separator" style="
-    display: none;
-    overflow: hidden;
-    border-bottom: 1px solid #bae6f6;
-    border-radius: 0;
-">
-        <a href="<?php echo $video->id;?>"><img src="<?php echo $video->preview;?>" class="pull-left" style="
-    width: 75px;
-    margin-right: 10px;
-"></a>
-        <div class="text" style="
-    overflow: hidden;
-">
-            <a class="text-truncate" style="
-    font-weight: bold;
-"><?php echo $video->name;?></a>
-            <small class="show">
-                <?php echo elgg_view('output/friendlytime', array('time' => $video->time_created));?>
-            </small>
-            <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $tags, 'limit' => 1, 'width' => "85%")); ?>
-        </div>
-
-    </div>
-    <div class="wrapper separator" style="
     overflow: hidden;
     border-radius: 0;
 ">

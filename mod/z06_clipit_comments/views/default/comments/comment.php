@@ -11,11 +11,16 @@
  * @package         ClipIt
  */
 $comment = elgg_extract('entity', $vars);
-$group = elgg_extract('group', $vars);
 $target_id = elgg_extract('target_id', $vars);
+$activity_id = elgg_extract('activity_id', $vars);
 $owner_user = array_pop(ClipitUser::get_by_id(array($comment->owner_id)));
 $user_loggedin = array_pop(ClipitUser::get_by_id(array(elgg_get_logged_in_user_guid())));;
 $files_id = $comment->get_files($comment->id);
+$group = "";
+if($activity_id){
+    $group_id = ClipitGroup::get_from_user_activity($comment->owner_id, $activity_id);
+    $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
+}
 ?>
 <a name="comment_<?php echo $comment->id; ?>"></a>
 <div class="message <?php echo $vars['class'];?>">
@@ -67,7 +72,8 @@ $files_id = $comment->get_files($comment->id);
                     'entity' => $reply,
                     'class' => 'reply',
                     'target_id' => $target_id,
-                    'reply' => true
+                    'activity_id' => $activity_id,
+                    'reply' => true,
                 ));
             endforeach; ?>
         </div>

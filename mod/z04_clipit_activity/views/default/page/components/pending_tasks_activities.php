@@ -18,7 +18,7 @@ $task_found = false;
 foreach($activities as $activity):
     foreach(ClipitTask::get_by_id($activity->task_array) as $task):
         $status = get_task_status($task);
-        if($task->start <= time() && $task->end >= time()):
+        if($task->start <= time() && $task->end >= time() && $status['status'] === false):
             $task_found = true;
             $activity = array_pop(ClipitActivity::get_by_id(array($task->activity)));
         ?>

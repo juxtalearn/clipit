@@ -1,0 +1,37 @@
+<?php
+ /**
+ * ClipIt - JuxtaLearn Web Space
+ * PHP version:     >= 5.2
+ * Creation date:   30/06/14
+ * Last update:     30/06/14
+ * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC JuxtaLearn Project
+ * @version         $Version$
+ * @link            http://www.juxtalearn.eu
+ * @license         GNU Affero General Public License v3
+ * @package         ClipIt
+ */
+$entity_id = get_input('entity_id');
+$entity = array_pop(ClipitVideo::get_by_id(array($entity_id)));
+$title = $entity->name;
+elgg_push_breadcrumb(elgg_echo('videos'), "explore?filter=videos");
+elgg_push_breadcrumb($title);
+// GET RECOMMENDED VIDEO
+$related_video_ids = array_slice(ClipitSite::get_videos(), 0, 4);
+$related_videos = ClipitVideo::get_by_id($related_video_ids);
+
+$recommended_videos = elgg_view("multimedia/video/view/summary", array('entities' => $related_videos));
+$sidebar = elgg_view_module('aside', elgg_echo('videos:recommended'), $recommended_videos, array('class' => 'videos-summary'));
+// Tags
+$tags = ClipitTag::get_all(10);
+$tag_cloud = elgg_view("tricky_topic/tags/tag_cloud", array('tags' => $tags));
+$sidebar .= elgg_view_module('aside', elgg_echo('tags:recommended'), $tag_cloud, array('class' => 'module-tags'));
+
+$body = elgg_view("multimedia/video/body", array('entity'  => $entity));
+$params = array(
+    'content' => elgg_view('publications/view', array('title' => false, 'entity' => $entity, 'body' => $body)),
+    'title' => $title,
+    'filter' => '',
+    'sidebar' => $sidebar,
+);
+$body = elgg_view_layout('content', $params);
+echo elgg_view_page($title, $body);

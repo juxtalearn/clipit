@@ -10168,11 +10168,17 @@ select.form-control {
   border: 1px solid #EFF4F7;
 }
 .table {
-  font-size: 13px;
+  /*font-size: 13px;*/
   color: #797979;
 }
+.table .smaller {
+  font-size: 11px;
+}
+.table .tags {
+  margin-bottom: 0;
+}
 .table-advance .label {
-  padding: 0.5em 0.8em;
+  /*padding: 0.5em 0.8em;*/
 }
 .table-advance button {
   font-size: 12px;
@@ -10211,6 +10217,7 @@ select.form-control {
 .label-primary:hover,
 .label-primary:focus {
   background-color: #32b4e5 !important;
+  color: #fff;
 }
 .pagination > li > a {
   border: 1px solid #d9dadb;
@@ -10350,6 +10357,12 @@ h6,
   background-color: #eceded;
   color: #000;
   border: 1px solid #32b4e5;
+}
+.popover {
+  border: 1px solid #32b4e5;
+}
+.popover .arrow {
+  border-bottom-color: #32b4e5 !important;
 }
 .nav-stacked > li {
   border-radius: 4px;

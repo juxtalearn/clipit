@@ -11,7 +11,7 @@
  * @package         ClipIt
  */
 $query = stripslashes(get_input('q', get_input('term', '')));
-foreach(ClipitLabel::get_all() as $label){
+foreach(ClipitLabel::get_from_search($query) as $label){
     $output[] = $label->name;
 }
 echo json_encode($output);

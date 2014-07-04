@@ -207,8 +207,22 @@ function get_task_status(ClipitTask $task, $group_id = 0){
                         'icon' => '<i class="fa fa-check green"></i>',
                         'text' => elgg_echo('task:completed'),
                         'color' => 'green',
-                        'status' => true,
+                        'status' => ClipitTask::get_completed_status($task->id, $group_id),
                         'result' => $video_id
+                    );
+                }
+            }
+            break;
+        case "storyboard_upload":
+            foreach($task->storyboard_array as $storyboard_id){
+                $group_sb = ClipitStoryboard::get_group($storyboard_id);
+                if($group_id == $group_sb){
+                    $status = array(
+                        'icon' => '<i class="fa fa-check green"></i>',
+                        'text' => elgg_echo('task:completed'),
+                        'color' => 'green',
+                        'status' => ClipitTask::get_completed_status($task->id, $group_id),
+                        'result' => $storyboard_id
                     );
                 }
             }
@@ -228,7 +242,7 @@ function get_task_status(ClipitTask $task, $group_id = 0){
                     'text' => $text." ".elgg_echo('task:completed'),
                     'count' => $text,
                     'color' => 'green',
-                    'status' => true,
+                    'status' => ClipitTask::get_completed_status($task->id, $user_id),
                 );
             } else {
                 $status = array(
@@ -236,7 +250,7 @@ function get_task_status(ClipitTask $task, $group_id = 0){
                     'text' => $text." ".elgg_echo('task:pending'),
                     'count' => $text,
                     'color' => 'yellow',
-                    'status' => false
+                    'status' => ClipitTask::get_completed_status($task->id, $user_id)
                 );
             }
             break;

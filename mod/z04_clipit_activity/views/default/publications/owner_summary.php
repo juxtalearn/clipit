@@ -13,7 +13,7 @@
 $entity = elgg_extract("entity", $vars);
 $msg = elgg_extract("msg", $vars);
 $entity_class = elgg_extract("entity_class", $vars);
-$publish_level = $entity_class::get_publish_level($entity->id);
+$publish_level = $entity_class::get_resource_scope($entity->id);
 
 switch($publish_level){
     case "group":

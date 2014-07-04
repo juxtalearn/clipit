@@ -20,7 +20,7 @@ foreach($storyboards as $sb_id){
     $storyboard =  array_pop(ClipitStoryboard::get_by_id(array($sb_id)));
     $file =  array_pop(ClipitFile::get_by_id(array($storyboard->file)));
     $sb_url = "{$href}/view/{$storyboard->id}";
-    $select = '<input type="checkbox" name="check-file[]" value="'.$file->id.'" class="select-simple">';
+
     $file_icon = '
         <div class="multimedia-preview">
             '.elgg_view('output/url', array(
@@ -31,6 +31,7 @@ foreach($storyboards as $sb_id){
 
     // Owner options (edit/delete)
     $owner_options = "";
+    $select = "";
     if($storyboard->owner_id == elgg_get_logged_in_user_guid()){
         $options = array(
             'entity' => $storyboard,
@@ -41,22 +42,34 @@ foreach($storyboards as $sb_id){
             ),
             'remove' => array("href" => "action/multimedia/storyboards/remove?id={$storyboard->id}"),
         );
-
-        $owner_options = elgg_view("page/components/options_list", $options);
+        if($vars['actions']){
+            $owner_options = elgg_view("page/components/options_list", $options);
+            $select = '<input type="checkbox" name="check-file[]" value="'.$file->id.'" class="select-simple">';
+        }
         // Remote modal, form content
         echo elgg_view("page/components/modal_remote", array('id'=> "edit-storyboard-{$storyboard->id}" ));
     }
     // Action buttons (Download|Publish)
     $buttons = '<div style="width: 35px;display: inline-block;float: right;text-align: center;margin-left:10px;">
                     '.elgg_view('output/url', array(
-            'href'  => "file/download/".$file->id,
-            'title' => $owner->name,
-            'class' => 'btn btn-default btn-icon',
-            'text'  => '<i class="fa fa-download"></i>')).'
-                    <small class="show text-truncate" title="'.formatFileSize($file->size).'" style="margin-top: 3px;">
+                        'href'  => "file/download/".$file->id,
+                        'title' => $owner->name,
+                        'class' => 'btn btn-default btn-icon',
+                        'text'  => '<i class="fa fa-download"></i>'
+                    )).'
+                    <small class="show text-truncate smaller" title="'.formatFileSize($file->size).'" style="margin-top: 3px;">
                         '.formatFileSize($file->size).'
                     </small>
                     </div>';
+    if($vars['publish']){
+        $buttons .= elgg_view('output/url', array(
+            'href'  => "{$href}/publish/{$storyboard->id}".($vars['task_id'] ? "?task_id=".$vars['task_id']: ""),
+            'title' => elgg_echo('publish'),
+            'style' => 'padding: 1px 5px;  background: #47a447;color: #fff;font-weight: bold;margin-left:10px;',
+            'class' => 'btn-xs btn pull-right',
+            'text'  => '<i class="fa fa-arrow-circle-up"></i> '.elgg_echo('publish')
+        ));
+    }
 
     $row = array(
         array(

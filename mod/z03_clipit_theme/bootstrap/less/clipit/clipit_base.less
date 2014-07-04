@@ -287,11 +287,17 @@ select.form-control{
 // Tables
 // --------------------------------------------------
 .table{
-  font-size: 13px;
+  /*font-size: 13px;*/
   color: #797979;
+  .smaller{
+    font-size: 11px;
+  }
+  .tags{
+    margin-bottom: 0;
+  }
 }
 .table-advance .label{
-  padding: 0.5em 0.8em;
+  /*padding: 0.5em 0.8em;*/
 }
 .table-advance button{
   font-size: 12px;
@@ -332,6 +338,7 @@ select.form-control{
   &:hover,
   &:focus{
     background-color: @blue_clipit !important;
+    color: #fff;
   }
 }
 
@@ -492,6 +499,16 @@ h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
   //  .box-shadow(@shadow_input);
   border: 1px solid @blue_clipit;
 }
+//
+// PopOver
+// -------------------------------------------------
+.popover{
+  border: 1px solid @blue_clipit;
+  .arrow{
+    border-bottom-color: @blue_clipit !important;
+  }
+}
+
 //
 // Badges Stacked
 // --------------------------------------------------

@@ -49,7 +49,7 @@ $(document).ready(function() {
 </style>
 <?php
 $user_id = elgg_get_logged_in_user_guid();
-$limit = 5;
+$limit = 3;
 $recommended_events = ClipitEvent::get_recommended_events($user_id, 0, $limit);
 $content = '<div class="margin-bar"></div> <ul class="events">';
 foreach ($recommended_events as $event_log){

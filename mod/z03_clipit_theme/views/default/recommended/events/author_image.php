@@ -30,7 +30,7 @@ if($object['type'] == 'user'){
     $user = array_pop(ClipitUser::get_by_id(array($author_id)));
     echo elgg_view('output/img', array(
         'src' => get_avatar($user, 'small'),
-        'class' => 'image-block avatar-small'
+        'class' => 'avatar-small'
     ));
 }
 
