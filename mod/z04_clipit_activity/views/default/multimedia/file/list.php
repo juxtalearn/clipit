@@ -80,7 +80,7 @@ foreach($files as $file_id){
     );
     $rows[] = array('content' => $row);
 }
-
+$list_options = array();
 if($vars['create']){
     // Add files button
     echo elgg_view_form('multimedia/files/upload', array('id' => 'fileupload', 'enctype' => 'multipart/form-data'), array('entity'  => $entity));

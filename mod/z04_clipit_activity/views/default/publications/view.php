@@ -15,7 +15,7 @@ $activity = elgg_extract("activity", $vars);
 $group = elgg_extract("group", $vars);
 $user_loggedin_id = elgg_get_logged_in_user_guid();
 $user_logged = array_pop(ClipitUser::get_by_id(array($user_loggedin_id)));
-
+ClipitStoryboard::create_clone(3655);
 $tags = $entity->tag_array;
 $performance_average = ClipitPerformanceRating::get_average_target_rating($entity->id);
 $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->id))));
@@ -33,7 +33,7 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
                 <?php echo $vars['body'];?>
             </div>
             <div class="row details">
-                <div class="col-md-8">
+                <div class="col-md-<?php echo ($vars['rating']!== false) ? 8 : 12; ?>">
                     <div class="description" data-shorten="true">
                         <div style="margin-bottom: 10px;">
                             <?php if($group):?>
@@ -57,13 +57,13 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
                     <div>
                         <?php echo elgg_view('output/url', array(
                             'href'  => "javascript:;",
-                            'text'  => '<i style="margin-left: 10px;" class="fa fa-plus"></i>',
-                            'class' => 'pull-right',
+                            'text'  => '<i class="fa fa-plus"></i>',
+                            'class' => 'image-block',
                             'id'    => 'labels_view',
                         ));
                         ?>
-                        <small class="blue text-truncate" id="label_list">
-                            <?php echo elgg_view("page/elements/labels", array('labels' => $entity->label_array)); ?>
+                        <small class="blue text-truncate content-block" id="label_list">
+                            <?php echo elgg_view("publications/labels/view", array('labels' => $entity->label_array)); ?>
                         </small>
                     </div>
                     <?php echo elgg_view_form("publications/labels/add",
@@ -75,6 +75,7 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
                         );
                     ?>
                 </div>
+                <?php if($vars['rating']!== false): ?>
                 <!-- Star rating -->
                 <div class="col-md-4">
                     <div>
@@ -141,9 +142,10 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
                         </li>
                         <?php endif; ?>
                     </ul>
-                    <?php endif; ?>
                 </div>
                 <!-- Star rating end -->
+                <?php endif; // rating = true ?>
+                <?php endif;?>
             </div>
         </div>
     </div>

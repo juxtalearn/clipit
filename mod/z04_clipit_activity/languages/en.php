@@ -84,6 +84,7 @@ $english = array(
     // Files
     'files' => 'Files',
     'file' => 'File',
+    'file:download' => 'Download',
     'multimedia:file:description' => 'File description',
     'multimedia:files:add' => 'Add files',
     'file:delete' => 'Delete files',

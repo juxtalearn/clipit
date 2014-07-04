@@ -12,13 +12,21 @@
  */
 $file = elgg_extract('entity', $vars);
 ?>
+<?php if($vars['preview']):?>
+    <div class="multimedia-preview">
+        <?php echo elgg_view('output/url', array(
+        'href'  => $file_url,
+        'title' => $file->name,
+        'text'  => elgg_view("multimedia/file/preview", array('file'  => $file))));?>
+    </div>
+<?php endif;?>
 <div>
     <?php echo elgg_view('output/url', array(
         'href'  => "file/download/".$file->id,
         'title' => elgg_echo('download'),
         'target' => '_blank',
         'class' => 'btn btn-default',
-        'text'  => '<i class="fa fa-download"></i> '.elgg_echo('download')));
+        'text'  => '<i class="fa fa-download"></i> '.elgg_echo('file:download')));
     ?>
     <div class="file-info">
         <strong class="show"><?php echo elgg_echo("file:" . $file->mime_type['short']);?></strong>

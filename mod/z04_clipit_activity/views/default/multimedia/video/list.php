@@ -11,7 +11,7 @@
  * @package         ClipIt
  */
 $entity = elgg_extract('entity', $vars);
-$video_ids = elgg_extract('videos', $vars);
+$entities_ids = elgg_extract('entities', $vars);
 $href = elgg_extract("href", $vars);
 $rating = elgg_extract("rating", $vars);
 ?>
@@ -50,7 +50,7 @@ $rating = elgg_extract("rating", $vars);
 
 <ul class="video-list">
     <?php
-    foreach($video_ids as $video_id):
+    foreach($entities_ids as $video_id):
         $video = array_pop(ClipitVideo::get_by_id(array($video_id)));
         $tags = ClipitVideo::get_tags($video->id);
         $description = trim(elgg_strip_tags($video->description));

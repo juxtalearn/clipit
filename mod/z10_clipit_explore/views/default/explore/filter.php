@@ -43,11 +43,11 @@ $tabs = array(
         'href' => "explore{$href}filter=storyboards{$href_activity}",
         'priority' => 300,
     ),
-    'files' => array(
+    /*'files' => array(
         'text' => elgg_echo('files') ."{$files_count}",
         'href' => "explore{$href}filter=files{$href_activity}",
         'priority' => 400,
-    ),
+    ),*/
 );
 foreach ($tabs as $name => $tab) {
     $tab['name'] = $name;

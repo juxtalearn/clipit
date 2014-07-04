@@ -10,7 +10,7 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$storyboards = elgg_extract("storyboards", $vars);
+$storyboards = elgg_extract("entities", $vars);
 $entity = elgg_extract('entity', $vars);
 $href = elgg_extract("href", $vars);
 // if search form is activated
@@ -96,7 +96,7 @@ foreach($storyboards as $sb_id){
     );
     $rows[] = array('content' => $row);
 }
-
+$list_options = array();
 if($vars['create']){
     // Add files button
     echo elgg_view_form('multimedia/storyboards/upload', array(

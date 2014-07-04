@@ -28,7 +28,12 @@ $sidebar .= elgg_view_module('aside', elgg_echo('tags:recommended'), $tag_cloud,
 
 $body = elgg_view("multimedia/video/body", array('entity'  => $entity));
 $params = array(
-    'content' => elgg_view('publications/view', array('title' => false, 'entity' => $entity, 'body' => $body)),
+    'content' => elgg_view('publications/view', array(
+        'title' => false,
+        'entity' => $entity,
+        'rating' => false,
+        'body' => $body
+    )),
     'title' => $title,
     'filter' => '',
     'sidebar' => $sidebar,

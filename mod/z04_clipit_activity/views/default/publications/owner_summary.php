@@ -31,7 +31,6 @@ switch($publish_level){
         $output = '<a class="btn btn-primary btn-xs '.$vars['class'].'">'.$activity->name.'</a>';
         break;
     case "task":
-
         $group_id = $entity_class::get_group($entity->id);
         $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
         $output = '<span class="label label-blue '.$vars['class'].'"><i class="fa fa-users"></i> '.$group->name.'</span>';

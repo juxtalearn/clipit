@@ -7343,9 +7343,6 @@ li.list-item:last-child {
   margin: 0;
 }
 .files-table p {
-  text-align: justify;
-  margin: 0;
-  font-size: 13px;
   color: #666666;
 }
 .files-table .file-user-info {
@@ -7648,6 +7645,22 @@ li.list-item:last-child {
 }
 .attach-count h4 sub span {
   font-size: large;
+}
+.storyboard-list {
+  border-bottom: 1px solid #bae6f6;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  height: 75px;
+}
+.storyboard-list .multimedia-preview {
+  width: 70px;
+}
+.storyboard-list .multimedia-preview .img-preview {
+  width: 70px;
+  height: 70px;
+}
+.storyboard-list .multimedia-preview .file-icon {
+  font-size: 50px;
 }
 .landing h2.elgg-heading-main {
   display: none;
@@ -10049,6 +10062,9 @@ h4.empty {
 .avatar-medium {
   width: 100px;
   height: 100px;
+}
+.margin-0 {
+  margin: 0;
 }
 .margin-top-5 {
   margin-top: 5px;

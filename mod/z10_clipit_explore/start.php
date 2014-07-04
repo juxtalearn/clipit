@@ -181,7 +181,7 @@ function explore_page_handler($page) {
         default:
             $content = get_explore(array(
                 'videos' => array('limit' => 3, 'entities' => $videos, 'href' => $href),
-                'storyboards' => array('limit' => 4, 'entities' => $storyboards),
+                'storyboards' => array('limit' => 4, 'entities' => $storyboards, 'href' => $href),
                 'title' => true
             ));
             if(!$content){
@@ -211,9 +211,6 @@ function explore_page_handler($page) {
                     include "$file_dir/storyboard.php";
                     return true;
                     break;
-                case 'ClipitFile':
-                    include "$file_dir/trash.php";
-                    return true;
                 default:
                     return false;
             }
@@ -294,7 +291,8 @@ function get_explore($params = array()){
             $entities = array_slice($entities, 0, $limit);
         }
         $params_sb_list = array(
-            'storyboards' => $entities
+            'storyboards' => $entities,
+            'href' => $storyboards['href']
         );
         $content .= elgg_view("explore/storyboard/list", $params_sb_list);
         if(count($storyboards['entities']) > $limit ){

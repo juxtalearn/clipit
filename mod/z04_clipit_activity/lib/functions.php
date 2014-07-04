@@ -227,6 +227,33 @@ function get_task_status(ClipitTask $task, $group_id = 0){
                 }
             }
             break;
+        case "storyboard_feedback":
+            $entities = ClipitTask::get_storyboards($task->parent_task);
+            $evaluation_list = get_filter_evaluations($entities, $task->activity);
+            $total = count($evaluation_list["evaluated"]) + count($evaluation_list["no_evaluated"]);
+            $total_evaluated = count($evaluation_list["evaluated"]);
+            $text = "";
+            if($total > 0){
+                $text = $total_evaluated."/".$total;
+            }
+            if($total == $total_evaluated && $total > 0){
+                $status = array(
+                    'icon' => '<i class="fa fa-check green"></i>',
+                    'text' => $text." ".elgg_echo('task:completed'),
+                    'count' => $text,
+                    'color' => 'green',
+                    'status' => ClipitTask::get_completed_status($task->id, $user_id),
+                );
+            } else {
+                $status = array(
+                    'icon' => '<i class="fa fa-minus yellow"></i>',
+                    'text' => $text." ".elgg_echo('task:pending'),
+                    'count' => $text,
+                    'color' => 'yellow',
+                    'status' => ClipitTask::get_completed_status($task->id, $user_id)
+                );
+            }
+            break;
         case "video_feedback":
             $entities = ClipitTask::get_videos($task->parent_task);
             $evaluation_list = get_filter_evaluations($entities, $task->activity);

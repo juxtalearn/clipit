@@ -12,6 +12,7 @@
  */
 $option = elgg_extract('options', $vars);
 ?>
+<?php if(!empty($option)):?>
 <script>
     $(function(){
         $('.select-all').click(function(){
@@ -72,3 +73,4 @@ $option = elgg_extract('options', $vars);
         </div>
     <?php endif; ?>
 </div>
+<?php endif;?>

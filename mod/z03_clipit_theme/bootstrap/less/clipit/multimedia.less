@@ -61,9 +61,9 @@
     }
   }
   p{
-    text-align: justify;
-    margin: 0;
-    font-size: ceil(@font-size-base * 0.92); // ~13px;
+//    text-align: justify;
+//    margin: 0;
+//    font-size: ceil(@font-size-base * 0.92); // ~13px;
     color: #666666;
   }
   .file-user-info{
@@ -391,4 +391,22 @@
     }
   }
 }
-// Discussion view
+//
+// Storyboard list
+// --------------------------------------------------
+.storyboard-list{
+  border-bottom: 1px solid @blue-lighter;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  height: 75px;
+  .multimedia-preview{
+    width: 70px;
+    .img-preview{
+      width: 70px;
+      height: 70px;
+    }
+    .file-icon{
+      font-size: 50px;
+    }
+  }
+}

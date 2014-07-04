@@ -49,11 +49,6 @@ foreach($entities as $video):
         <div class="text" style="
     overflow: hidden;
 ">
-            <div class="rating readonly" data-score="3.6666666666667" style="
-    font-size: 13px;
-">
-                <i class="fa fa-star" data-rating="1"></i> <i class="fa fa-star" data-rating="2"></i> <i class="fa fa-star" data-rating="3"></i> <i class="fa fa-star-half-o" data-rating="4"></i> <i class="fa fa-star empty" data-rating="5"></i>
-            </div>
             <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $tags, 'limit' => 1, 'width' => "85%")); ?>
             <small class="show"><?php echo elgg_view('output/friendlytime', array('time' => $video->time_created));?></small>
         </div>

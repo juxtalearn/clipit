@@ -32,10 +32,10 @@ if(mb_strlen($file_description)>165){
 <small class="show">
     <strong><?php echo elgg_echo("file:" . $file->mime_type['short']);?></strong>
 </small>
-<div>
+<p>
     <?php echo $file_description; ?>
-</div>
-<small class="show file-user-info">
+</p>
+<small class="show">
     <i>Uploaded by
         <?php echo elgg_view('output/url', array(
             'href'  => "profile/".$owner->login,
