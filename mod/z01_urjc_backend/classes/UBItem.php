@@ -176,9 +176,10 @@ class UBItem{
             }
         } else{
             $prop_array = static::list_properties();
-            foreach($prop_array as $prop => $value){
+            do{
+                $prop = key($prop_array);
                 $value_array[$prop] = $item->$prop;
-            }
+            } while(next($prop_array) !== false);
         }
         return $value_array;
     }
