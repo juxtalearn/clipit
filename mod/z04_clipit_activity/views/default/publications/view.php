@@ -143,10 +143,10 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
                         </li>
                         <?php endif; ?>
                     </ul>
+                    <?php endif;?>
                 </div>
                 <!-- Star rating end -->
                 <?php endif; // rating = true ?>
-                <?php endif;?>
             </div>
         </div>
     </div>

@@ -22,13 +22,13 @@ $context = elgg_get_context();
     <li class="separator">|</li>
     <li><a href="<?php echo elgg_get_site_url(); ?>explore"><?php echo elgg_echo("explore");?></a></li>
     <li class="separator">|</li>
+    <!--
     <li>
         <a id="notifications" role="button" data-toggle="dropdown" href="javascript:;">
             <span class="badge">10</span>
             <i class="fa fa-bell"></i>
         </a>
         <ul id="menu_notifications" class="dropdown-menu" role="menu" aria-labelledby="notifications">
-            <!-- foreach-->
             <?php for($i=0; $i<=3; $i++){ ?>
                 <li role="presentation">
                     <a style="padding: 5px 10px;width: 300px;" role="menuitem" tabindex="-1" href="">
@@ -43,9 +43,9 @@ $context = elgg_get_context();
                 </li>
                 <li role="presentation" style="display: block;" class="divider"></li>
             <?php } ?>
-            <!-- endforeach -->
         </ul>
     </li>
+    -->
     <li>
         <?php echo elgg_view('object/elements/message_icon'); ?>
     </li>

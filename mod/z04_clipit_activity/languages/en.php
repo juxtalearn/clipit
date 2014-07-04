@@ -36,6 +36,8 @@ $english = array(
 
     'my_group:progress' => 'My group progress',
     'group:activity' => 'Group health',
+    'group:name' => 'Group name',
+    'group:create' => 'Group create',
     'group:join' => 'Join',
     'group:leave' => 'Leave',
     'group:leave:me' => 'Leave group',

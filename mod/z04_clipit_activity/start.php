@@ -859,8 +859,11 @@ function group_tools_page_handler($page, $activity){
     $isTeacher = in_array($user_id, $activity->teacher_array);
     $group_id = (int)$page[2];
     $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
+    if($activity->status == 'enroll'){
+        return false;
+    }
     $canCreate = false;
-    if($my_group == $group_id && $activity->status != 'closed'){
+    if($my_group == $group_id && $activity->status != 'active'){
         $canCreate = true;
     }
     if($group &&

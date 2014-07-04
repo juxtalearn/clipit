@@ -13,7 +13,7 @@
 $entity_id = get_input('entity_id');
 $entity = array_pop(ClipitStoryboard::get_by_id(array($entity_id)));
 $title = $entity->name;
-elgg_push_breadcrumb(elgg_echo('storyboards'), "explore?filter=videos");
+elgg_push_breadcrumb(elgg_echo('storyboards'), "explore?filter=storyboards");
 elgg_push_breadcrumb($title);
 // GET RECOMMENDED Storyboards
 $related_sb_ids = array_slice(ClipitSite::get_storyboards(), 0, 4);

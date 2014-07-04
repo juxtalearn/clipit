@@ -15,7 +15,7 @@ $group = elgg_extract('entity', $vars);
 ));
 
 echo elgg_view("input/button", array(
-    'class' => 'join-group btn btn-sm btn-default btn-sp',
+    'class' => 'join-group btn btn-sm btn-primary btn-sp',
     'value' => elgg_echo("group:join"),
     'type'  => 'submit',
 ));

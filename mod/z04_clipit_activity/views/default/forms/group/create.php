@@ -14,21 +14,18 @@ $activity = elgg_extract('entity', $vars);
 ));
 ?>
 <div class="form-group">
-    <label><?php echo elgg_echo("activity:group_create:name"); ?></label>
+    <label><?php echo elgg_echo("group:name"); ?></label>
     <?php echo elgg_view("input/text", array(
         'name' => 'group-name',
-        'placeholder' => 'Los manolos',
         'class' => 'form-control'
     ));
     ?>
 </div>
-<div class="form-group">
-    <label><?php echo elgg_echo("activity:group_create:description"); ?> <small>(<?php echo elgg_echo("optional"); ?>)</small></label>
-    <?php echo elgg_view("input/plaintext", array(
-        'name' => 'group-description',
-        'class' => 'form-control',
-        'rows'  => 4,
+<p class="text-left">
+<?php echo elgg_view('input/submit',
+    array(
+        'value' => elgg_echo('group:create'),
+        'class' => "btn btn-primary"
     ));
-    ?>
-</div>
-<?php echo elgg_view('input/submit', array('value' => elgg_echo('Create'))); ?>
+?>
+</p>
