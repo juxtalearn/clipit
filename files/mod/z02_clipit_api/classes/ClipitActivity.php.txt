@@ -173,7 +173,7 @@ class ClipitActivity extends UBItem{
      *
      * @param int $user_id ID of the User to get Activities from
      * @param bool $joined_only Only return Activities where the User has joined to a Group
-     * @return static[] Array of Activities
+     * @return array Array of Activities
      */
     static function get_from_user($user_id, $joined_only = false){
         $activity_id_array = ClipitUser::get_activities($user_id, $joined_only);

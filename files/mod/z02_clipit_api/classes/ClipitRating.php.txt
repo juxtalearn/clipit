@@ -77,8 +77,9 @@ class ClipitRating extends UBItem{
     }
 
     /**
-     * @param $target_array
-     * @return static[]
+     * Get Ratings by Target
+     * @param array $target_array Array of Target IDs
+     * @return array Array of [target] => array(Ratings)
      */
     static function get_by_target($target_array){
         $rating_array = array();
@@ -106,9 +107,10 @@ class ClipitRating extends UBItem{
     }
 
     /**
-     * @param $user_id
-     * @param $target_id
-     * @return static|null
+     * Get Ratings made by a User for a Target
+     * @param int $user_id User ID
+     * @param int $target_id Target ID
+     * @return ClipitRating|null Returns a Rating, or null if any.
      */
     static function get_from_user_for_target($user_id, $target_id){
         $user_ratings = static::get_by_owner(array($user_id));
