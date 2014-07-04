@@ -112,7 +112,7 @@ class ClipitQuizResult extends UBItem{
      *
      * @param array $quiz_question_array Array of Quiz Question IDs to get Results form
      *
-     * @return array|bool Array of nested arrays per question with Quiz Results, or false if error
+     * @return array|bool Array of Quiz Results nested per Quiz Question IDs, or false if error
      */
     static function get_by_quiz_question($quiz_question_array){
         $quiz_result_array = array();

@@ -20,6 +20,7 @@ class UBFile extends UBItem{
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "UBFile";
+    
     /**
      * Class constants
      */
@@ -43,11 +44,9 @@ class UBFile extends UBItem{
 
     /**
      * Constructor
-     *
-     * @param int $id If !null, load instance.
-     *
+     * @param int $id If != null, load instance.
      * @throws APIException
-     */
+     **/
     function __construct($id = null){
         if(!empty($id)){
             if(!($elgg_file = new ElggFile((int)$id))){
@@ -119,7 +118,8 @@ class UBFile extends UBItem{
         $elgg_file->access_id = ACCESS_PUBLIC;
         if(!empty($this->data)){ // new file or new data
             $elgg_file->open("write");
-            if($decoded_data = base64_decode($this->data, true)){
+            $decoded_data = base64_decode($this->data, true);
+            if($decoded_data !== false){
                 $elgg_file->write($decoded_data);
             } else{
                 $elgg_file->write($this->data);
@@ -188,17 +188,13 @@ class UBFile extends UBItem{
             case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
             case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
                 return "document";
-                break;
             case "application/pdf":
                 return "document";
-                break;
             case "application/ogg":
                 return "audio";
-                break;
             case "application/x-rar":
             case "application/zip":
                 return "compressed";
-                break;
         }
 
         if (substr_count($mime_type, 'text/')) {
@@ -237,34 +233,31 @@ class UBFile extends UBItem{
         if ($simple_mime_type == "image") {
             $thumb = new ElggFile();
             // squared small thumbnail
-            $thumbnail = get_resized_image_from_existing_file($filestore_name, static::THUMB_SMALL, static::THUMB_SMALL, true);
-            if ($thumbnail) {
+            $thumbnail_small = get_resized_image_from_existing_file($filestore_name, static::THUMB_SMALL, static::THUMB_SMALL, true);
+            if ($thumbnail_small) {
                 $thumb->setFilename("thumb_small-".$file_name);
                 $thumb->open("write");
-                $thumb->write($thumbnail);
+                $thumb->write($thumbnail_small);
                 $thumb->close();
                 $elgg_file->set("thumb_small", (string)$thumb->getFilenameOnFilestore());
-                unset($thumbnail);
             }
             // squared medium thumbnail
-            $thumbnail = get_resized_image_from_existing_file($filestore_name, static::THUMB_MEDIUM, static::THUMB_MEDIUM, true);
-            if ($thumbnail) {
+            $thumbnail_medium = get_resized_image_from_existing_file($filestore_name, static::THUMB_MEDIUM, static::THUMB_MEDIUM, true);
+            if ($thumbnail_medium) {
                 $thumb->setFilename("thumb_medium-".$file_name);
                 $thumb->open("write");
-                $thumb->write($thumbnail);
+                $thumb->write($thumbnail_medium);
                 $thumb->close();
                 $elgg_file->set("thumb_medium", (string)$thumb->getFilenameOnFilestore());
-                unset($thumbnail);
             }
             // original proportion large thumbnail
-            $thumbnail = get_resized_image_from_existing_file($filestore_name, static::THUMB_LARGE, static::THUMB_LARGE, false);
-            if ($thumbnail) {
+            $thumbnail_large = get_resized_image_from_existing_file($filestore_name, static::THUMB_LARGE, static::THUMB_LARGE, false);
+            if ($thumbnail_large) {
                 $thumb->setFilename("thumb_large-".$file_name);
                 $thumb->open("write");
-                $thumb->write($thumbnail);
+                $thumb->write($thumbnail_large);
                 $thumb->close();
                 $elgg_file->set("thumb_large", (string)$thumb->getFilenameOnFilestore());
-                unset($thumbnail);
             }
         }
     }

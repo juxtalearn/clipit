@@ -217,7 +217,7 @@ class ClipitResource extends UBItem{
      *
      * @param int $id Id of the Resource to get Tags from
      *
-     * @return array|bool Returns an array of Tag items, or false if error
+     * @return array|bool Returns an array of Tag IDs, or false if error
      */
     static function get_tags($id){
         return UBCollection::get_items($id, static::REL_RESOURCE_TAG);

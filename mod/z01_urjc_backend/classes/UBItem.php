@@ -176,9 +176,10 @@ class UBItem{
             }
         } else{
             $prop_array = static::list_properties();
-            foreach($prop_array as $prop => $value){
+            do{
+                $prop = key($prop_array);
                 $value_array[$prop] = $item->$prop;
-            }
+            } while(next($prop_array) !== false);
         }
         return $value_array;
     }
@@ -294,7 +295,7 @@ class UBItem{
      *
      * @param int $limit Number of results to show, default= 0 [no limit] (optional)
      * @param bool $id_only Only return object IDs
-     * @return array|int[] Returns an array of Objects, or Object IDs if id_only = true
+     * @return static[]|int[] Returns an array of Objects, or Object IDs if id_only = true
      */
     static function get_all($limit = 0, $id_only = false){
         $object_array = array();
@@ -322,7 +323,7 @@ class UBItem{
      * Get Objects with id contained in a given list.
      *
      * @param array $id_array Array of Object Ids
-     * @return array Returns an array of Objects
+     * @return static[] Returns an array of Objects
      */
     static function get_by_id($id_array){
         $object_array = array();
@@ -335,13 +336,15 @@ class UBItem{
         }
         return $object_array;
     }
+    
+    
 
     /**
      * Get Items with Owner Id contained in a given list.
      *
      * @param array $owner_array Array of Owner Ids
      * @param int $limit Number of Items to return, default 0 = all
-     * @return array Returns an array of Items
+     * @return static[] Returns an array of Items
      */
     static function get_by_owner($owner_array, $limit = 0){
         $object_array = array();
@@ -397,7 +400,7 @@ class UBItem{
      * @param string $search_string String for searching matching objects
      * @param bool $name_only Whether to look only in the name property, default false.
      * @param bool $strict Whether to match the $search_string exactly, including case, or only partially.
-     * @return array An array of matched objects
+     * @return static[] Returns an array of matched objects
      */
     static function get_from_search($search_string, $name_only = false, $strict = false){
         $search_result = array();
