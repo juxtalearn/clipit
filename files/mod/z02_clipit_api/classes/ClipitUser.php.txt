@@ -89,7 +89,7 @@ class ClipitUser extends UBUser{
      *
      * @param int $user_id Id of the user to get groups from.
      *
-     * @return array Returns an array of Group Ids the user is member of.
+     * @return array Returns an array of Group IDs the user is member of.
      */
     static function get_groups($user_id){
         return UBCollection::get_items($user_id, ClipitGroup::REL_GROUP_USER, true);
@@ -101,7 +101,7 @@ class ClipitUser extends UBUser{
      * @param int $user_id Id of the user to get activities from.
      * @param bool $joined_only Only returnes Activities where the user has joined.
      *
-     * @return array Returns an array of Activity Ids the user is member of.
+     * @return array Returns an array of Activity IDs the user is member of.
      */
     static function get_activities($user_id, $joined_only = false){
         if($joined_only){

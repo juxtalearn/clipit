@@ -142,7 +142,7 @@ class ClipitQuizQuestion extends UBItem{
      *
      * @param int $id Id of Quiz Question to get Results form
      *
-     * @return array|bool Array of Quiz Results, or false if error
+     * @return array|bool Array of Quiz Result IDs, or false if error
      */
     static function get_quiz_results($id){
         return UBCollection::get_items($id, static::REL_QUIZQUESTION_QUIZRESULT);
@@ -153,7 +153,7 @@ class ClipitQuizQuestion extends UBItem{
      * Add a list of Stumbling Block Tags to a Quiz Question.
      *
      * @param int   $id Id of the Quiz Question
-     * @param array $tag_array Array of Stumbling Block Tags to add to the Quiz Question
+     * @param array $tag_array Array of Tags to add to the Quiz Question
      *
      * @return bool True if success, false if error
      */
@@ -165,7 +165,7 @@ class ClipitQuizQuestion extends UBItem{
      * Set a list of Stumbling Block Tags to a Quiz Question.
      *
      * @param int   $id Id of the Quiz Question
-     * @param array $tag_array Array of Stumbling Block Tags to set to the Quiz Question
+     * @param array $tag_array Array of Tags to set to the Quiz Question
      *
      * @return bool True if success, false if error
      */
@@ -177,7 +177,7 @@ class ClipitQuizQuestion extends UBItem{
      * Remove a list of Stumbling Block Tags from a Quiz Question.
      *
      * @param int   $id Id of the Quiz Question
-     * @param array $tag_array Array of Stumbling Block Tags to remove from the Quiz Question
+     * @param array $tag_array Array of Tags to remove from the Quiz Question
      *
      * @return bool True if success, false if error
      */
@@ -190,7 +190,7 @@ class ClipitQuizQuestion extends UBItem{
      *
      * @param int $id Id from the Quiz Question to get Stumbling Block Tags from
      *
-     * @return array|bool Returns an array of Stumbling Block Tag items, or false if error
+     * @return array|bool Returns an array of Tag IDs, or false if error
      */
     static function get_tags($id){
         return UBCollection::get_items($id, static::REL_QUIZQUESTION_TAG);

@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1509291506"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1152692908"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1509291506" class="accordion-body collapse in">
+            <div id="namespace-1152692908" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -1740,7 +1740,7 @@ Last update:     $Date$</em></p>
             <article class="method">
                 <h3 class="public ">get_all()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">get_all(int <span class="argument">$limit</span>, bool <span class="argument">$id_only</span>) : array|int[]</pre>
+                <pre class="signature" style="margin-right: 54px;">get_all(int <span class="argument">$limit</span>, bool <span class="argument">$id_only</span>) : static[]|int[]</pre>
                 <p><em>Get all Objects of this TYPE and SUBTYPE from the system.</em></p>
                 
 
@@ -1760,7 +1760,7 @@ Last update:     $Date$</em></p>
                 
                 
                                     <h4>Returns</h4>
-                    array|int[]
+                    static[]|int[]
                                             &mdash; <p>Returns an array of Objects, or Object IDs if id_only = true</p>
                                                 </article>
         </div>
@@ -1835,7 +1835,7 @@ Last update:     $Date$</em></p>
             <article class="method">
                 <h3 class="public ">get_by_owner()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">get_by_owner(array <span class="argument">$owner_array</span>, int <span class="argument">$limit</span>) : array</pre>
+                <pre class="signature" style="margin-right: 54px;">get_by_owner(array <span class="argument">$owner_array</span>, int <span class="argument">$limit</span>) : static[]</pre>
                 <p><em>Get Items with Owner Id contained in a given list.</em></p>
                 
 
@@ -1855,7 +1855,7 @@ Last update:     $Date$</em></p>
                 
                 
                                     <h4>Returns</h4>
-                    array
+                    static[]
                                             &mdash; <p>Returns an array of Items</p>
                                                 </article>
         </div>
@@ -1935,7 +1935,7 @@ Last update:     $Date$</em></p>
             <article class="method">
                 <h3 class="public ">get_from_search()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">get_from_search(string <span class="argument">$search_string</span>, bool <span class="argument">$name_only</span>, bool <span class="argument">$strict</span>) : array</pre>
+                <pre class="signature" style="margin-right: 54px;">get_from_search(string <span class="argument">$search_string</span>, bool <span class="argument">$name_only</span>, bool <span class="argument">$strict</span>) : static[]</pre>
                 <p><em>Get all objects which match a $search_string</em></p>
                 
 
@@ -1960,8 +1960,8 @@ Last update:     $Date$</em></p>
                 
                 
                                     <h4>Returns</h4>
-                    array
-                                            &mdash; <p>An array of matched objects</p>
+                    static[]
+                                            &mdash; <p>Returns an array of matched objects</p>
                                                 </article>
         </div>
         <aside class="span4 detailsbar">
@@ -2625,7 +2625,7 @@ Last update:     $Date$</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on July 4th, 2014 at 14:01.
+                    on July 4th, 2014 at 15:01.
                 </section>
             </section>
         </section>

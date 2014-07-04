@@ -154,7 +154,7 @@ class ClipitQuiz extends UBItem{
      *
      * @param int $id The Id of the Quiz to get questions from
      *
-     * @return array|bool Returns an array of ClipitQuizQuestion objects, or false if error
+     * @return array|bool Returns an array of ClipitQuizQuestion IDs, or false if error
      */
     static function get_quiz_questions($id){
         return UBCollection::get_items($id, static::REL_QUIZ_QUIZQUESTION);

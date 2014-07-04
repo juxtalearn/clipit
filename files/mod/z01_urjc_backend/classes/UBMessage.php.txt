@@ -85,7 +85,7 @@ class UBMessage extends UBItem{
     /**
      * Get Messages by Destination
      * @param array $destination_array Array of Destination IDs
-     * @return array Array of Messages
+     * @return static[] Array of Messages
      */
     static function get_by_destination($destination_array){
         $message_array = array();
@@ -108,7 +108,7 @@ class UBMessage extends UBItem{
     /**
      * Get Messages by Sender
      * @param array $sender_array Array of Sender IDs
-     * @return array Array of Messages
+     * @return static[] Array of Messages
      */
     static function get_by_sender($sender_array){
         return static::get_by_owner($sender_array);
@@ -184,7 +184,7 @@ class UBMessage extends UBItem{
     /**
      * Get Files attached to a Message
      * @param int $id ID of the Message
-     * @return array Array of File IDs
+     * @return static[] Array of File IDs
      */
     static function get_files($id){
         return UBCollection::get_items($id, static::REL_MESSAGE_FILE);
@@ -194,7 +194,7 @@ class UBMessage extends UBItem{
      * Get a list of Users who have Read a Message, or optionally whether certain Users have read it
      * @param int $id ID of the Message
      * @param null|array $user_array List of User IDs - optional
-     * @return array Array with key => value: user_id => read_status, where read_status is bool
+     * @return static[] Array with key => value: user_id => read_status, where read_status is bool
      */
     static function get_read_status($id, $user_array = null){
         $props = static::get_properties($id, array("read_array", "owner_id"));
@@ -246,7 +246,7 @@ class UBMessage extends UBItem{
      * Count the number os Messages for each Destination specified
      * @param array$destination_array List of Destination IDs
      * @param bool $recursive Whether to recurse
-     * @return array
+     * @return array Returns array of destination => message_count elements.
      */
     static function count_by_destination($destination_array, $recursive = false){
         $count_array = array();
@@ -259,7 +259,7 @@ class UBMessage extends UBItem{
     /**
      * Count number of Messages sent by Sender
      * @param array $sender_array Array of User IDs
-     * @return array Array with [(int)sender] => [(int)message_count]
+     * @return array Array of sender => message_count elements
      */
     static function count_by_sender($sender_array){
         $message_array = static::get_by_sender($sender_array);

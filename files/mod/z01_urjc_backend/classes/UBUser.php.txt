@@ -205,7 +205,7 @@ class UBUser extends UBItem{
      *
      * @param array $login_array Array of user logins
      *
-     * @return array Returns an array of User objects
+     * @return static[] Returns an array of User objects
      */
     static function get_by_login($login_array){
         $user_array = array();
@@ -227,7 +227,7 @@ class UBUser extends UBItem{
      *
      * @param array $email_array Array of user emails
      *
-     * @return array Returns an array of arrays of User objects
+     * @return static[] Returns an array of arrays of User objects
      */
     static function get_by_email($email_array){
         $user_array = array();
@@ -251,7 +251,7 @@ class UBUser extends UBItem{
      *
      * @param array $role_array Array of user roles
      *
-     * @return array Returns an array of [role] => array(Users)
+     * @return static[] Returns an array of [role] => array(Users)
      */
     static function get_by_role($role_array){
         $user_array = array();
@@ -307,7 +307,7 @@ class UBUser extends UBItem{
      *
      * @param int $id User ID
      * @param string $size Desired size of avatar image: small, medium or large.
-     * @return array|null Returns the avatar from the linked avatar_file, or null if not set.
+     * @return array|null Returns an array with 2 elements: "url" => <avatar_url> and "path" => <avatar_path>, or null if none.
      */
     static function get_avatar($id, $size = "medium"){
         $prop_value_array = static::get_properties($id, array("avatar_file"));
