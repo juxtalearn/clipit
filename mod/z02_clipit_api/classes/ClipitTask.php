@@ -61,8 +61,8 @@ class ClipitTask extends UBItem{
         if($this->end == 0){
             $activity_id = static::get_activity($this->id);
             if(!empty($activity_id)){
-                $prop_value_array = (int) ClipitActivity::get_properties($activity_id, array("deadline"));
-                $this->end = $prop_value_array["deadline"];
+                $prop_value_array = (int) ClipitActivity::get_properties($activity_id, array("end"));
+                $this->end = $prop_value_array["end"];
             }
         }
         $this->activity = static::get_activity((int)$this->id);
@@ -183,7 +183,6 @@ class ClipitTask extends UBItem{
     }
 
     // TASK COMPLETION
-
     static function get_completed_status($id, $entity_id){
         $task = new static($id);
         switch($task->task_type){

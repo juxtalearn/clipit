@@ -43,7 +43,8 @@ class ClipitActivity extends UBItem{
     public $color = "";
     public $status = "";
     public $tricky_topic = 0;
-    public $deadline = 0;
+    public $start = 0;
+    public $end = 0;
     public $teacher_array = array();
     public $called_users_array = array();
     public $group_array = array();
@@ -62,7 +63,8 @@ class ClipitActivity extends UBItem{
         $this->color = (string)$elgg_entity->get("color");
         $this->status = (string)$elgg_entity->get("status");
         $this->tricky_topic = (int)$elgg_entity->get("tricky_topic");
-        $this->deadline = (int)$elgg_entity->get("deadline");
+        $this->start = (int)$elgg_entity->get("start");
+        $this->end = (int)$elgg_entity->get("end");
         $this->teacher_array = static::get_teachers($this->id);
         $this->called_users_array = static::get_called_users($this->id);
         $this->group_array = static::get_groups($this->id);
@@ -86,7 +88,8 @@ class ClipitActivity extends UBItem{
         }
         $elgg_entity->set("status", (string)$this->status);
         $elgg_entity->set("tricky_topic", (int)$this->tricky_topic);
-        $elgg_entity->set("deadline", (int)$this->deadline);
+        $elgg_entity->set("start", (int)$this->start);
+        $elgg_entity->set("end", (int)$this->end);
     }
 
     /**

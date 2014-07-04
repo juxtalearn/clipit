@@ -105,7 +105,7 @@ function input_row($object_type, $row, $xlsx){
             $prop_value_array["description"] = (string) next($row);
             // deadline
             $timestamp = (int) $xlsx->unixstamp((string) next($row));
-            $prop_value_array["deadline"] = $timestamp;
+            $prop_value_array["end"] = $timestamp;
             // tricky topic
             var_dump($search_array = ClipitTrickyTopic::get_from_search((string) next($row), true, true));
             if(!empty($search_array)) {

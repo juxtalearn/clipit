@@ -116,7 +116,7 @@ function expose_common_functions($api_suffix, $class_suffix){
             "limit" => array(
                 "type" => "int",
                 "required" => false)),
-        "Get object-type associated events.",
+        "Get object-type associated events",
         "GET", false, true);
     expose_function(
         $api_suffix . "get_by_owner",
@@ -143,6 +143,6 @@ function expose_common_functions($api_suffix, $class_suffix){
             "strict" => array(
                 "type" => "bool",
                 "required" => false)),
-        "Get instances from searching inside the object name and description for a string.",
+        "Get instances from searching inside the object name and description for a string",
         'GET', false, true);
 }
