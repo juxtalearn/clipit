@@ -186,7 +186,7 @@ class ClipitTask extends UBItem{
         return UBCollection::set_items($id, $quiz_array, static::REL_TASK_QUIZ);
     }
 
-    static function remove_quizzes($id, $quiz_array){        
+    static function remove_quizzes($id, $quiz_array){
         return UBCollection::remove_items($id, $quiz_array, static::REL_TASK_QUIZ);
     }
 
