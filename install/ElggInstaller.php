@@ -122,7 +122,7 @@ class ElggInstaller {
 
         $defaults = array(
             'dbhost' => 'localhost',
-            'dbprefix' => 'elgg_',
+            'dbprefix' => 'clipit_',
             'path' => $CONFIG->path,
             'language' => 'en',
             'siteaccess' => ACCESS_PUBLIC,
@@ -290,7 +290,7 @@ class ElggInstaller {
         $formVars = array(
             'dbuser' => array(
                 'type' => 'text',
-                'value' => '',
+                'value' => 'root',
                 'required' => TRUE,
             ),
             'dbpassword' => array(
@@ -300,7 +300,7 @@ class ElggInstaller {
             ),
             'dbname' => array(
                 'type' => 'text',
-                'value' => '',
+                'value' => 'clipit',
                 'required' => TRUE,
             ),
             'dbhost' => array(
@@ -310,7 +310,7 @@ class ElggInstaller {
             ),
             'dbprefix' => array(
                 'type' => 'text',
-                'value' => 'elgg_',
+                'value' => 'clipit_',
                 'required' => TRUE,
             ),
         );
@@ -372,7 +372,8 @@ class ElggInstaller {
      */
     protected function settings($submissionVars) {
         global $CONFIG;
-
+        $data_path = $CONFIG->path;
+        $data_path = rtrim($data_path, '/') . "_data/";
         $formVars = array(
             'sitename' => array(
                 'type' => 'text',
@@ -381,7 +382,7 @@ class ElggInstaller {
             ),
             'siteemail' => array(
                 'type' => 'text',
-                'value' => '',
+                'value' => 'clipit@'.gethostname(),
                 'required' => FALSE,
             ),
             'wwwroot' => array(
@@ -396,7 +397,7 @@ class ElggInstaller {
             ),
             'dataroot' => array(
                 'type' => 'text',
-                'value' => '',
+                'value' => $data_path,
                 'required' => TRUE,
             ),
             'siteaccess' => array(
@@ -462,17 +463,17 @@ class ElggInstaller {
         $formVars = array(
             'displayname' => array(
                 'type' => 'text',
-                'value' => '',
+                'value' => 'Administrator',
                 'required' => TRUE,
             ),
             'email' => array(
                 'type' => 'text',
-                'value' => '',
+                'value' => 'admin@'.gethostname(),
                 'required' => TRUE,
             ),
             'username' => array(
                 'type' => 'text',
-                'value' => '',
+                'value' => 'admin',
                 'required' => TRUE,
             ),
             'password1' => array(
@@ -1440,7 +1441,7 @@ class ElggInstaller {
         set_config('language', 'en', $site->getGUID());
         set_config('default_access', $submissionVars['siteaccess'], $site->getGUID());
         set_config('allow_registration', TRUE, $site->getGUID());
-        set_config('walled_garden', FALSE, $site->getGUID());
+        set_config('walled_garden', TRUE, $site->getGUID());
         set_config('allow_user_default_access', '', $site->getGUID());
         set_config('timezone', $submissionVars['timezone'], $site->getGUID());
         set_config('jxl_secret', $submissionVars['jxl_secret'], $site->getGUID());
