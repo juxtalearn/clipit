@@ -94,7 +94,7 @@ If you are ready to proceed, click the Next button.",
 	'install:settings:help:dataroot:apache' => 'You have the option of Elgg creating the data directory or entering the directory that you already created for storing user files (the permissions on this directory are checked when you click Next).',
 	'install:settings:help:language' => 'The default language for the site.',
 	'install:settings:help:siteaccess' => 'The default access level for new user created content.',
-    'install:settings:help:timezone' => 'The Time Zone for the site (see: <a href="http://www.php.net/manual/en/timezones.php" target="_blank">PHP TimeZones</a>).',
+    'install:settings:help:timezone' => 'The Time Zone for the site (see: <a href="http://www.php.net/manual/en/timezones.php" target="_blank">PHP Time Zones</a>).',
     'install:settings:help:jxl_secret' => 'The JuxtaLearn secret key for interoperability between components.',
 
 	'install:admin:instructions' => "It is now time to create an administrator's account.",
