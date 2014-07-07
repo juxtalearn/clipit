@@ -96,29 +96,37 @@ class ClipitUser extends UBUser{
     }
 
     /**
-     * Get all Activity Ids in which a user is member of.
+     * Get all Activity Ids in which a user is member of, or a teacher is in charge of.
      *
      * @param int $user_id Id of the user to get activities from.
-     * @param bool $joined_only Only returnes Activities where the user has joined.
+     * @param bool $joined_only Only returnes Activities where a Student user has joined to a group.
      *
      * @return array Returns an array of Activity IDs the user is member of.
      */
     static function get_activities($user_id, $joined_only = false){
-        if($joined_only){
-            $group_ids = static::get_groups($user_id);
-            if(empty($group_ids)){
-                return false;
-            }
-            foreach($group_ids as $group_id){
-                $activity_array[] = ClipitGroup::get_activity($group_id);
-            }
-            if(!isset($activity_array)){
-                return false;
-            }
-            return $activity_array;
-        } else{
-            return UBCollection::get_items($user_id, ClipitActivity::REL_ACTIVITY_USER, true);
+        $prop_value_array = static::get_properties($user_id, array("role"));
+        $user_role = $prop_value_array["role"];
+        switch ($user_role){
+            case static::ROLE_STUDENT:
+                if($joined_only){
+                    $group_ids = static::get_groups($user_id);
+                    if(empty($group_ids)){
+                        return false;
+                    }
+                    foreach($group_ids as $group_id){
+                        $activity_array[] = ClipitGroup::get_activity($group_id);
+                    }
+                    if(!isset($activity_array)){
+                        return false;
+                    }
+                    return $activity_array;
+                } else{
+                    return UBCollection::get_items($user_id, ClipitActivity::REL_ACTIVITY_USER, true);
+                }
+            case static::ROLE_TEACHER:
+                return UBCollection::get_items($user_id, ClipitActivity::REL_ACTIVITY_TEACHER, true);
         }
+        return null;
     }
 
     /**
