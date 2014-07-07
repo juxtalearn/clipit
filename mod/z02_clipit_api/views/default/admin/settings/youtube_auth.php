@@ -4,7 +4,7 @@ session_start();
 set_include_path(get_include_path() . PATH_SEPARATOR . elgg_get_plugins_path() . "z02_clipit_api/libraries/google_api/src/");
 require_once 'Google/Client.php';
 require_once 'Google/Service/YouTube.php';
-$REDIRECT = elgg_get_site_url()."youtube_auth";
+$REDIRECT = elgg_get_site_url()."admin/settings/youtube_auth";
 $APP_NAME = elgg_get_site_entity()->name;
 $SCOPE = "https://www.googleapis.com/auth/youtube";
 

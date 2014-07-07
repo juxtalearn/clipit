@@ -25,34 +25,22 @@ function clipit_api_init(){
     loadFiles(elgg_get_plugins_path() . "z02_clipit_api/libraries/juxtalearn-cookie-authentication/");
     loadFiles(elgg_get_plugins_path() . "z02_clipit_api/libraries/simple_xlsx/");
     expose_clipit_api();
-    elgg_register_page_handler('youtube_auth', 'youtube_auth_page_handler');
-    elgg_register_page_handler("data_input", "data_input_page_handler");
+    //elgg_register_page_handler("data_input", "data_input_page_handler");
+    elgg_register_admin_menu_item('configure', 'youtube_auth', 'settings');
     load_performance_palette();
 }
 
-function youtube_auth_page_handler(){
-    $title = "YouTube Authentication";
-    $params = array(
-        'content' => elgg_view("youtube_auth"),
-        'title' => $title,
-        'filter' => "",
-    );
-    $body = elgg_view_layout('one_column', $params);
-
-    echo elgg_view_page($title, $body);
-}
-
-function data_input_page_handler(){
-    $title = "ClipIt Setup";
-    $params = array(
-        'content' => elgg_view("data_input"),
-        'title' => $title,
-        'filter' => "",
-    );
-    $body = elgg_view_layout('one_column', $params);
-
-    echo elgg_view_page($title, $body);
-}
+//function data_input_page_handler(){
+//    $title = "ClipIt Setup";
+//    $params = array(
+//        'content' => elgg_view("data_input"),
+//        'title' => $title,
+//        'filter' => "",
+//    );
+//    $body = elgg_view_layout('one_column', $params);
+//
+//    echo elgg_view_page($title, $body);
+//}
 
 function load_performance_palette(){
     if(get_config("performance_palette") == true){
