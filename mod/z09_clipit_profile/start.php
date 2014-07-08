@@ -26,6 +26,8 @@ function clipit_profile_init() {
     elgg_register_action("settings/account", elgg_get_plugins_path() . "z09_clipit_profile/actions/settings/account.php");
     elgg_register_action("settings/avatar/upload", elgg_get_plugins_path() . "z09_clipit_profile/actions/settings/avatar/upload.php");
     elgg_register_action("settings/avatar/remove", elgg_get_plugins_path() . "z09_clipit_profile/actions/settings/avatar/remove.php");
+
+    elgg_extend_view("navigation/menu/top", "navigation/menu/profile", 400);
 }
 
 /**

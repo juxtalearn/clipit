@@ -24,7 +24,7 @@ $activity = elgg_extract('entity', $vars);
 <p class="text-left">
 <?php echo elgg_view('input/submit',
     array(
-        'value' => elgg_echo('group:create'),
+        'value' => elgg_echo('create'),
         'class' => "btn btn-primary"
     ));
 ?>

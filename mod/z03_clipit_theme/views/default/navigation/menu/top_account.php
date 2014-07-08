@@ -6,22 +6,9 @@
 
 $items = elgg_extract('menu', $vars);
 $class = elgg_extract('class', $vars, false);
-$user_id = elgg_get_logged_in_user_guid();
-$user = array_pop(ClipitUser::get_by_id(array($user_id)));
-$context = elgg_get_context();
 ?>
 <ul class="<?php echo $class; ?>">
-    <li>
-        <a href="<?php echo elgg_get_site_url(); ?>my_activities"><?php echo elgg_echo("my_activities");?></a>
-        <a href="#" data-toggle="dropdown" class="caret-down" style="height: 50px;" id="activities">
-            <i class="fa fa-caret-down"></i>
-        </a>
-        <!-- My activities dropdown menu -->
-        <?php echo elgg_view("my_activities/dropdown_menu");?>
-    </li>
-    <li class="separator">|</li>
-    <li><a href="<?php echo elgg_get_site_url(); ?>explore"><?php echo elgg_echo("explore");?></a></li>
-    <li class="separator">|</li>
+    <?php echo elgg_view("navigation/menu/top");?>
     <!--
     <li>
         <a id="notifications" role="button" data-toggle="dropdown" href="javascript:;">
@@ -46,29 +33,4 @@ $context = elgg_get_context();
         </ul>
     </li>
     -->
-    <li>
-        <?php echo elgg_view('object/elements/message_icon'); ?>
-    </li>
-    <li style="margin-left: 10px;" <?php if ($context == "settings") echo "class='open'"; ?>>
-        <a title="<?php echo $user->name; ?>" class="avatar-user text-truncate" href="<?php echo elgg_get_site_url(); ?>profile/<?php echo $user->login; ?>">
-            <?php echo elgg_view('output/img', array(
-                'src' => get_avatar($user, 'small'),
-                'alt' => $user->name,
-                'title' => elgg_echo('profile'),
-                'class' => 'elgg-border-plain elgg-transition avatar-small',
-            )); ?>
-            <?php echo $user->name; ?>
-        </a>
-        <a href="#" data-toggle="dropdown" class="caret-down" id="settings">
-            <i class="fa fa-caret-down"></i>
-        </a>
-        <!-- Profile menu -->
-        <?php echo elgg_view("profile/dropdown_menu");?>
-    </li>
-    <li class="separator">|</li>
-    <li>
-        <a href="<?php echo elgg_get_site_url(); ?>action/logout">
-            <i style="color: #ff4343;" class="fa fa-power-off"></i>
-        </a>
-    </li>
 </ul>
