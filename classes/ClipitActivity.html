@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1272888709"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-138510373"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1272888709" class="accordion-body collapse in">
+            <div id="namespace-138510373" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -325,7 +325,6 @@ tasks (set by the teacher/s), videos and files.</p>
                                                                     <a href="../classes/UBItem.html#method_sort_numbers_inv" class="">sort_numbers_inv()</a><br />
                                                                     <a href="../classes/ClipitActivity.html#method_get_from_user" class="">get_from_user()</a><br />
                                                                     <a href="../classes/ClipitActivity.html#method_get_from_tricky_topic" class="">get_from_tricky_topic()</a><br />
-                                                                    <a href="../classes/ClipitActivity.html#method_get_status" class="">get_status()</a><br />
                                                                     <a href="../classes/ClipitActivity.html#method_add_teachers" class="">add_teachers()</a><br />
                                                                     <a href="../classes/ClipitActivity.html#method_set_teachers" class="">set_teachers()</a><br />
                                                                     <a href="../classes/ClipitActivity.html#method_remove_teachers" class="">remove_teachers()</a><br />
@@ -411,7 +410,7 @@ tasks (set by the teacher/s), videos and files.</p>
                         </section>
                         <section class="row-fluid private">
                             <section class="span4">
-                                                                    <em>No private methods found</em>
+                                                                    <a href="../classes/ClipitActivity.html#method_get_status" class="">get_status()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No private properties found</em>
@@ -1520,6 +1519,11 @@ tasks (set by the teacher/s), videos and files.</p>
                             </tr>
                                             </table>
                 
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\InvalidParameterException</dt>
+                            <dd></dd>
+                                                                    </dl>
                 
                                     <h4>Returns</h4>
                     array|bool
@@ -2437,49 +2441,6 @@ tasks (set by the teacher/s), videos and files.</p>
                 
                 
                             </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            todo
-                        </th>
-                        <td>
-                                                    </td>
-                    </tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_get_status" name="method_get_status" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">get_status()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">get_status(int <span class="argument">$id</span>) : string</pre>
-                <p><em>Get the Activity Status depending on the current date, and the Start and End of the activity.</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>int</td>
-                                <td>$id </td>
-                                <td><p>Activity ID</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    string
-                                            &mdash; <p>The status of the activity: STATUS_ENROLL, STATUS_ACTIVE or STATUS_CLOSED</p>
-                                                </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
@@ -3990,7 +3951,54 @@ tasks (set by the teacher/s), videos and files.</p>
         </aside>
     </div>
 
-                                                    </div>
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_get_status" name="method_get_status" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">get_status()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">get_status(int <span class="argument">$start</span>, int <span class="argument">$end</span>) : string</pre>
+                <p><em>Get the Activity Status depending on the current date, and the Start and End of the activity.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>int</td>
+                                <td>$start </td>
+                                <td><p>Activity Start timestamp</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>int</td>
+                                <td>$end </td>
+                                <td><p>Activity End timestamp</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>The status of the activity: STATUS_ENROLL, STATUS_ACTIVE or STATUS_CLOSED</p>
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    </div>
     </section>
 
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
@@ -4039,7 +4047,7 @@ tasks (set by the teacher/s), videos and files.</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on July 8th, 2014 at 15:01.
+                    on July 8th, 2014 at 16:01.
                 </section>
             </section>
         </section>
