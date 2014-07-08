@@ -61,8 +61,8 @@ class ClipitActivity extends UBItem{
     protected function load_from_elgg($elgg_entity){
         parent::load_from_elgg($elgg_entity);
         $this->color = (string)$elgg_entity->get("color");
-        $this->status = (string)$elgg_entity->get("status");
         $this->tricky_topic = (int)$elgg_entity->get("tricky_topic");
+        $this->status = static::get_status($this->id);
         $this->start = (int)$elgg_entity->get("start");
         $this->end = (int)$elgg_entity->get("end");
         $this->teacher_array = static::get_teachers($this->id);
@@ -86,7 +86,6 @@ class ClipitActivity extends UBItem{
         } else{
             $elgg_entity->set("color", $this->get_rand_color());
         }
-        $elgg_entity->set("status", (string)$this->status);
         $elgg_entity->set("tricky_topic", (int)$this->tricky_topic);
         $elgg_entity->set("start", (int)$this->start);
         $elgg_entity->set("end", (int)$this->end);
@@ -206,27 +205,23 @@ class ClipitActivity extends UBItem{
     }
 
     /**
+     * Get the Activity Status depending on the current date, and the Start and End of the activity.
      * @param int $id Activity ID
      * @return string The status of the activity: STATUS_ENROLL, STATUS_ACTIVE or STATUS_CLOSED
      */
     static function get_status($id){
-        $prop_value_array = static::get_properties($id, array("status"));
-        return $prop_value_array["status"];
-    }
-
-    static function set_status_enroll($id){
-        $prop_value_array["status"] = static::STATUS_ENROLL;
-        return static::set_properties($id, $prop_value_array);
-    }
-
-    static function set_status_active($id){
-        $prop_value_array["status"] = static::STATUS_ACTIVE;
-        return static::set_properties($id, $prop_value_array);
-    }
-
-    static function set_status_closed($id){
-        $prop_value_array["status"] = static::STATUS_CLOSED;
-        return static::set_properties($id, $prop_value_array);
+        $prop_value_array = static::get_properties($id, array("start", "end"));
+        $start = (int)$prop_value_array["start"];
+        $end = (int)$prop_value_array["end"];
+        $date = new DateTime();
+        $now = (int)$date->getTimestamp();
+        if($now < $start){
+            return static::STATUS_ENROLL;
+        } elseif($now >= $start && $now <= $end){
+            return static::STATUS_ACTIVE;
+        } else{
+            return static::STATUS_CLOSED;
+        }
     }
 
     // TEACHERS
