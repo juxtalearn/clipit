@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 $english = array(
+    'user:logout' => 'Logout',
     'profile' => 'Profile',
     'profile:stats' => 'Statistics page',
     // Settings

@@ -29,7 +29,6 @@ function clipit_final_init() {
     elgg_load_library('clipit:recommended:events');
 
 
-    elgg_register_admin_menu_item('administer', 'z03_clipit_theme', 'clipit_plugins');
     elgg_register_action("clipit_theme/settings", elgg_get_plugins_path() . "z04_clipit_activity/actions/settings.php", 'admin');
     elgg_register_action('login', elgg_get_plugins_path() . "z03_clipit_theme/actions/login.php", 'public');
     elgg_register_action('logout', elgg_get_plugins_path() . "z03_clipit_theme/actions/logout.php");

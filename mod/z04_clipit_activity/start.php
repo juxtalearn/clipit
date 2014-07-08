@@ -13,6 +13,8 @@
 elgg_register_event_handler('init', 'system', 'clipit_activity_init');
 
 function clipit_activity_init() {
+    $user_id = elgg_get_logged_in_user_guid();
+    $user = array_pop(ClipitUser::get_by_id(array($user_id)));
     /**
      * Register clipit libraries
      */
@@ -23,8 +25,13 @@ function clipit_activity_init() {
     elgg_register_library('clipit:activity:publications', elgg_get_plugins_path() . 'z04_clipit_activity/lib/publications.php');
     elgg_load_library('clipit:activity:publications');
 
-    // My activities list from dropdown menu (top header)
-    elgg_extend_view("my_activities/dropdown_menu", "activities/dropdown_menu");
+    // Create activity, role = teacher
+    if($user->role == 'teacher'){
+        elgg_extend_view("navigation/menu/top", "navigation/menu/create_activity", 50);
+        elgg_register_page_handler('create_activity', 'create_activity_page_handler');
+    }
+    // My activities list (top header)
+    elgg_extend_view("navigation/menu/top", "navigation/menu/my_activities", 100);
 
     // Register "/my_activities" page handler
     elgg_register_page_handler('my_activities', 'my_activities_page_handler');
@@ -47,6 +54,7 @@ function clipit_activity_init() {
     elgg_register_ajax_view('multimedia/attach/files');
     // Tricky Topic
     elgg_register_ajax_view('modal/tricky_topic/view');
+    elgg_register_ajax_view('tricky_topic/list');
     // Multimedia
     /* Videos */
     elgg_register_action("multimedia/videos/add", elgg_get_plugins_path() . "z04_clipit_activity/actions/multimedia/videos/add.php");
@@ -168,7 +176,18 @@ function activity_setup_sidebar_menus(){
 
 }
 
+function create_activity_page_handler($page) {
+    $base_dir = elgg_get_plugins_path() . 'z04_clipit_activity/pages/activity';
+    $vars = array();
+    $vars['page'] = $page[0];
+    set_input('step', $page);
+    elgg_extend_view('forms/activity/create', 'activity/create/step_1', 100);
+    elgg_extend_view('forms/activity/create', 'activity/create/step_2', 100);
+    elgg_extend_view('forms/activity/create', 'activity/create/step_3', 100);
+    require_once "$base_dir/create.php";
 
+    return true;
+}
 
 /**
  * Activity page handler

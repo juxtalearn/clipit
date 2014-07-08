@@ -19,6 +19,7 @@ $english = array(
     'activities' => 'Activities',
     'activities:none' => 'There are no activities...',
     'explore' => 'Explore',
+    'activity:create' => 'Create activity',
     'activity:profile' => 'Activity home',
     'activity:groups' => 'Groups',
     'activity:discussion' => 'Activity discussion',
