@@ -12,8 +12,9 @@
  */
 $step = get_input('step');
 $content = elgg_view("activities/list", $params_list);
+$selected_tab = 'step_1';
 
-$filter = elgg_view('activity/create/steps', array('selected' => $selected_tab, 'step' => $step));
+$filter = elgg_view('activity/create/filter', array('selected' => $selected_tab, 'step' => $step));
 
 if(!$my_activities){
     $content = elgg_view('output/empty', array('value' => elgg_echo('activities:none')));
@@ -21,7 +22,7 @@ if(!$my_activities){
 $params = array(
     'content' => elgg_view_form('activity/create', array('id' => 'activity-create')),
     'title' => elgg_echo("activity:create"),
-    'filter' => $steps,
+    'filter' => $filter,
 );
 $body = elgg_view_layout('one_column', $params);
 

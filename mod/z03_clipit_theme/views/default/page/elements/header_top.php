@@ -19,7 +19,8 @@
                     $active = 'active';
                 }
                 echo elgg_view('output/url', array(
-                    'href'  => elgg_add_action_tokens_to_url("action/language/set?lang={$key}", true),
+                    'href'  => "action/language/set?lang={$key}",
+                    'is_action' => true,
                     'title' => $language,
                     'text'  => $key,
                     'class' => $active,

@@ -41,8 +41,10 @@ function clipit_activity_init() {
     elgg_register_page_handler('clipit_activity', 'activity_page_handler');
 //    elgg_register_entity_url_handler('object', 'z04_clipit_activity', 'activity_url');
 
-    // Register actions, ajax views
+    // Register actions & ajax views
 
+    // Create Activity
+    elgg_register_action("activity/create/add_users", elgg_get_plugins_path() . "z04_clipit_activity/actions/activity/create/add_users.php");
     // Group
     elgg_register_action("group/join", elgg_get_plugins_path() . "z04_clipit_activity/actions/group/join.php");
     elgg_register_action("group/leave", elgg_get_plugins_path() . "z04_clipit_activity/actions/group/leave.php");
@@ -177,13 +179,14 @@ function activity_setup_sidebar_menus(){
 }
 
 function create_activity_page_handler($page) {
+
     $base_dir = elgg_get_plugins_path() . 'z04_clipit_activity/pages/activity';
     $vars = array();
     $vars['page'] = $page[0];
     set_input('step', $page);
     elgg_extend_view('forms/activity/create', 'activity/create/step_1', 100);
     elgg_extend_view('forms/activity/create', 'activity/create/step_2', 100);
-    elgg_extend_view('forms/activity/create', 'activity/create/step_3', 100);
+    //elgg_extend_view('forms/activity/create', 'activity/create/step_3', 100);
     require_once "$base_dir/create.php";
 
     return true;
@@ -212,7 +215,7 @@ function activity_page_handler($page) {
     $called_users = ClipitActivity::get_called_users($activity->id);
     $isCalled = in_array($user_id, $called_users);
     // Default status
-    $activity_status = ClipitActivity::get_status($activity->id);
+    $activity_status = $activity->status;
     // Check if activity exists
     if (!$activity ) {
         return false;
@@ -882,7 +885,7 @@ function group_tools_page_handler($page, $activity){
         return false;
     }
     $canCreate = false;
-    if($my_group == $group_id && $activity->status != 'active'){
+    if($my_group == $group_id && $activity->status == 'active'){
         $canCreate = true;
     }
     if($group &&
@@ -897,7 +900,7 @@ function group_tools_page_handler($page, $activity){
     }
     elgg_push_breadcrumb($group->name, "clipit_activity/{$activity->id}/group/{$group->id}");
     // set group icon status from activity status
-    $activity_status = ClipitActivity::get_status($activity->id);
+    $activity_status = $activity->status;
     $icon_status = "lock";
     if($activity_status == 'enroll'){
         $icon_status = "unlock";

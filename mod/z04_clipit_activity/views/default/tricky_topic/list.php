@@ -30,7 +30,7 @@ foreach($tricky_topic->tag_array as $tag_id):
     $tag = array_pop(ClipitTag::get_by_id(array($tag_id)));
 ?>
 <div class="col-md-6 text-truncate" style="padding:5px;">
-    Tag name:
+    <?php echo elgg_echo("tag");?>:
     <?php echo elgg_view('output/url', array(
         'href'  => "explore/search?by=tag&id={$tag->id}",
         'target' => '_blank',

@@ -15,25 +15,11 @@ $id_activities_array = array();
 $my_groups_ids = ClipitUser::get_groups($user_id);
 $my_activities_ids = ClipitUser::get_activities($user_id);
 foreach($my_activities_ids as $activity_id){
-    $status = ClipitActivity::get_status($activity_id);
+    $status = array_pop(ClipitActivity::get_properties($activity_id, array("status")));
     if($selected_tab == 'all'){
         $id_activities_array[$selected_tab][] = $activity_id;
     } else {
         $id_activities_array[$status][] = $activity_id;
-    }
-}
-// Teacher activities
-if($user->role == 'teacher'){
-    $my_groups_ids = ClipitUser::get_groups($user_id);
-    foreach($my_groups_ids as $group_id){
-        //$id_activities_array[] = ClipitGroup::get_activity($group_id);
-        $activity_id = ClipitGroup::get_activity($group_id);
-        $status = ClipitActivity::get_status($activity_id);
-        if($selected_tab == 'all'){
-            $id_activities_array[$selected_tab][] = $activity_id;
-        } else {
-            $id_activities_array[$status][] = $activity_id;
-        }
     }
 }
 

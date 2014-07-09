@@ -32,7 +32,6 @@ $footer = elgg_view('page/elements/footer', $vars);
 </head>
 <body>
 <div class="elgg-page elgg-page-walledgarden">
-    <!--<?php echo elgg_echo('welcome'); ?>-->
 	<div class="elgg-page-messages">
 		<?php echo elgg_view('page/elements/messages', array('object' => $vars['sysmessages'])); ?>
 	</div>

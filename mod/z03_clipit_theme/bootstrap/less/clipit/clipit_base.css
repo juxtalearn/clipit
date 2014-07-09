@@ -10422,3 +10422,14 @@ h6,
   -webkit-box-shadow: 0px 0px 0px 1px #bae6f6;
   box-shadow: 0px 0px 0px 1px #bae6f6;
 }
+.nav-steps > li > a {
+  font-size: 30px;
+  padding: 0 20px;
+  font-family: FuturaBoldRegular, Impact, 'Impact Bold', Helvetica, Arial, sans, sans-serif;
+  background: transparent;
+  color: #bae6f6;
+}
+.nav-steps > li > a.active {
+  background: #fff;
+  color: #32b4e5;
+}
