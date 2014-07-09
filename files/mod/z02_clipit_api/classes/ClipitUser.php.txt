@@ -57,8 +57,9 @@ class ClipitUser extends UBUser{
 
     static function add_from_excel($file_path){
         $xlsx = new SimpleXLSX($file_path);
-        foreach($xlsx->rows() as $row) {
-            if ((string)$row[0] == "Users" || (string)$row[0] == "Name") {
+        $user_array = array();
+        foreach($xlsx->rows() as $row){
+            if (empty($row[0]) || strtolower($row[0]) == "users" || strtolower($row[0]) == "name") {
                 continue;
             } else {
                 $row_result = static::process_excel_row($row);
@@ -68,6 +69,7 @@ class ClipitUser extends UBUser{
                 $user_array[] = (int)$row_result;
             }
         }
+        return $user_array;
     }
 
     /**
@@ -81,7 +83,7 @@ class ClipitUser extends UBUser{
         // login
         $login = (string)next($row);
         $user_array = static::get_by_login(array($login));
-        if(!empty($user_array)){ // user already exists
+        if(!empty($user_array[$login])){ // user already exists
             return (int)$user_array[$login]->id;
         }
         $prop_value_array["login"] = $login;
