@@ -62,9 +62,9 @@ class ClipitActivity extends UBItem{
         parent::load_from_elgg($elgg_entity);
         $this->color = (string)$elgg_entity->get("color");
         $this->tricky_topic = (int)$elgg_entity->get("tricky_topic");
-        $this->status = static::get_status($this->id);
         $this->start = (int)$elgg_entity->get("start");
         $this->end = (int)$elgg_entity->get("end");
+        $this->status = (string)static::get_status($this->start, $this->end);
         $this->teacher_array = static::get_teachers($this->id);
         $this->called_users_array = static::get_called_users($this->id);
         $this->group_array = static::get_groups($this->id);
@@ -72,6 +72,24 @@ class ClipitActivity extends UBItem{
         $this->storyboard_array = static::get_storyboards($this->id);
         $this->video_array = static::get_videos($this->id);
         $this->file_array = static::get_files($this->id);
+    }
+
+    /**
+     * Get the Activity Status depending on the current date, and the Start and End of the activity.
+     * @param int $start Activity Start timestamp
+     * @param int $end Activity End timestamp
+     * @return string The status of the activity: STATUS_ENROLL, STATUS_ACTIVE or STATUS_CLOSED
+     */
+    private function get_status($start, $end){
+        $date = new DateTime();
+        $now = (int)$date->getTimestamp();
+        if($now < $start){
+            return static::STATUS_ENROLL;
+        } elseif($now >= $start && $now <= $end){
+            return static::STATUS_ACTIVE;
+        } else{
+            return static::STATUS_CLOSED;
+        }
     }
 
     /**
@@ -183,7 +201,8 @@ class ClipitActivity extends UBItem{
         return $activity_array;
     }
 
-    static function get_from_tricky_topic($tricky_topic_id){
+    static function get_from_tricky_topic($tricky_topic_id)
+    {
         $elgg_objects = elgg_get_entities_from_metadata(
             array(
                 'type' => static::TYPE,
@@ -193,35 +212,15 @@ class ClipitActivity extends UBItem{
                 'limit' => 0
             )
         );
-        if(!empty($elgg_objects)){
+        if (!empty($elgg_objects)) {
             $activity_array = array();
-        } else{
+        } else {
             return null;
         }
-        foreach($elgg_objects as $elgg_object){
+        foreach ($elgg_objects as $elgg_object) {
             $activity_array[] = new static($elgg_object->guid);
         }
         return $activity_array;
-    }
-
-    /**
-     * Get the Activity Status depending on the current date, and the Start and End of the activity.
-     * @param int $id Activity ID
-     * @return string The status of the activity: STATUS_ENROLL, STATUS_ACTIVE or STATUS_CLOSED
-     */
-    static function get_status($id){
-        $prop_value_array = static::get_properties($id, array("start", "end"));
-        $start = (int)$prop_value_array["start"];
-        $end = (int)$prop_value_array["end"];
-        $date = new DateTime();
-        $now = (int)$date->getTimestamp();
-        if($now < $start){
-            return static::STATUS_ENROLL;
-        } elseif($now >= $start && $now <= $end){
-            return static::STATUS_ACTIVE;
-        } else{
-            return static::STATUS_CLOSED;
-        }
     }
 
     // TEACHERS

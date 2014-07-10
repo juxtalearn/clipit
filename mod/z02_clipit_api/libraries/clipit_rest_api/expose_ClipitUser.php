@@ -11,6 +11,15 @@ function expose_user_functions(){
     $class_suffix = "ClipitUser::";
     expose_common_functions($api_suffix, $class_suffix);
     expose_function(
+        $api_suffix . "add_from_excel",
+        $class_suffix . "add_from_excel",
+        array(
+            "file_path" => array(
+                "type" => "string",
+                "required" => true)),
+        "Add Users contained in an Excel file",
+        "POST", false, true);
+    expose_function(
         $api_suffix . "get_by_login",
         $class_suffix . "get_by_login",
         array(
