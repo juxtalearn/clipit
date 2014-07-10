@@ -54,7 +54,7 @@ if (is_array($items) && count($items) > 0):
                         </h4>
                         <div style='color: #999;text-transform: uppercase;'>
                             <i class='fa fa-calendar'></i>
-                            <?php echo date("d M Y", $item->time_created);?>
+                            <?php echo date("d M Y", $item->start);?>
                             -
                             <?php echo date("d M Y", $item->end);?>
                         </div>

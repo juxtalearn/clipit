@@ -116,7 +116,7 @@ $english = array(
     'video:url' => 'Video url',
     'video:upload' => 'Video upload',
     'video:title' => 'Video title',
-    'video:tags' => 'Video tags',
+    'video:tags' => 'Video stumbling blocks',
     'video:description' => 'Video description',
     // Storyboards
     'storyboards' => 'Storyboards',
@@ -139,7 +139,7 @@ $english = array(
     'publications:rated' => 'Successfully evaluated',
     'publications:my_rating' => 'My rating',
     'publications:question:tricky_topic' => 'Does this video help you understand the %s Tricky Topic?',
-    'publications:question:sb' => 'Why is/isn\'t this tag correctly covered?',
+    'publications:question:sb' => 'Why is/isn\'t this stumbling block correctly covered?',
     'publications:question:if_covered' => 'Check if each topic was covered in this video, and explain why:',
     'input:no' => 'No',
     'input:yes' => 'Yes',
@@ -151,10 +151,10 @@ $english = array(
     'label' => 'Label',
     'labels' => 'Labels',
     // Tags
-    'tag' => 'Tag',
-    'tags' => 'Tags',
-    'tags:none' => 'Not tags',
-    'tags:recommended' => 'Recommended tags',
+    'tag' => 'Stumbling block',
+    'tags' => 'Stumbling blocks',
+    'tags:none' => 'Not stumbling blocks',
+    'tags:recommended' => 'Recommended stumbling blocks',
     'tags:commas:separated' => 'Separated by commas',
     // Performance items
     'performance_item' => 'Performance item',

@@ -35,7 +35,7 @@ foreach($quizzes as $quiz_id):
             <div class="pull-right">
                 <?php echo elgg_view('output/url', array(
                     'href' => "#collapse_{$quiz->id}",
-                    'text' => "Make",
+                    'text' => "Take",
                     'is_trusted' => true,
                     'data-toggle' => "collapse",
                     'data-parent' => "#accordion_quiz",

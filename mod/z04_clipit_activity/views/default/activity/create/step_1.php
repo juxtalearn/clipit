@@ -65,17 +65,20 @@ $(function(){
     }
 $(function(){
     datepicker_setup();
-    $(".button_step").click(function(){
+    $(".button_step, .nav-steps a").click(function(){
        var step = $(this).data("step");
         // is validated
-        //if($(".elgg-form-activity-create").valid()){
-            $(this).closest(".step").hide();
+//       if($(".elgg-form-activity-create").valid()){
+            $(".nav-steps li").removeClass("active");
+            $("#nav-step-"+ step).parent("li").addClass("active");
+            $(this).closest(".container").find(".step").hide();
             $("#step_"+ step).fadeIn();
-       // }
+//       }
 
     });
 });
 </script>
+<?php echo elgg_view('activity/create/step_3');?>
 <div id="step_1" class="row step">
     <div class="col-md-12">
         <h3 class="title-block"><?php echo elgg_echo('activity:setup');?></h3>
