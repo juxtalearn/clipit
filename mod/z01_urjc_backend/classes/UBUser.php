@@ -27,11 +27,14 @@ class UBUser extends UBItem{
     const SUBTYPE = "";
 
     /**
-     * @var string Login name used to authenticate
-     * @var string Login password (md5 of password + password_hash)
-     * @var string Random string to encode password
-     * @var string User email
-     * @var string User role (default: "user")
+     * @var string $login Login name used to authenticate, must be unique
+     * @var string $password Login password (md5 of password + password_hash)
+     * @var string $hash Random string to encode password
+     * @var string $email User email
+     * @var string $role User role (default: "user")
+     * @var string $language User interface language
+     * @var int $last_login Timestamp from last login
+     * @var int $avatar_file Id of file containing Avatar
      */
     public $login = "";
     public $password = "";
@@ -165,7 +168,14 @@ class UBUser extends UBItem{
                 $item->password = $new_password["password"];
                 $item->hash = $new_password["hash"];
                 continue;
-            } if(!array_key_exists($prop, static::list_properties())){
+            }
+            if($prop == "login"){
+                $user_array = static::get_by_login(array($value));
+                if(!empty($user_array[$value])){
+                    return $user_array[$value]->id;
+                }
+            }
+            if(!array_key_exists($prop, static::list_properties())){
                 throw new InvalidParameterException("ERROR: One or more property names do not exist.");
             }else{
                 $item->$prop = $value;

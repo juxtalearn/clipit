@@ -55,6 +55,46 @@ class ClipitUser extends UBUser{
         return $id;
     }
 
+    static function save_to_excel($id_array = null){
+        // New Excel object
+        $php_excel = new PHPExcel();
+        // Set document properties
+        $php_excel->getProperties()->setCreator("ClipIt")
+            ->setTitle("ClipIt User Accounts")
+            ->setKeywords("clipit user account");
+        // Add table title and columns
+        $active_sheet = $php_excel->setActiveSheetIndex(0);
+        $row = 1;
+        $col = 0;
+        $values = array("NAME", "LOGIN", "PASSWORD", "EMAIL", "ROLE");
+        foreach($values as $value) {
+            $active_sheet->setCellValueByColumnAndRow($col++, $row, $value);
+        }
+        // Load ClipIt Users
+        if(!empty($id_array)){
+            $user_array = static::get_by_id($id_array);
+        } else{
+            $user_array = static::get_all();
+        }
+        // Write Users to spreadsheet
+        $row = 2;
+        $col = 0;
+        foreach($user_array as $user){
+            $values = array($user->name, $user->login, "<password>", $user->email, $user->role);
+            foreach($values as $value){
+                $active_sheet->setCellValueByColumnAndRow($col++, $row, $value);
+            }
+            $row++;
+            $col = 0;
+        }
+
+        $objWriter = PHPExcel_IOFactory::createWriter($php_excel, 'Excel2007');
+        $objWriter->save('/tmp/test.xlsx');
+
+        return true;
+
+    }
+
     /**
      * Add Users from an Excel file, and return an array of User Ids from those created or selected from the file.
      *
@@ -62,45 +102,68 @@ class ClipitUser extends UBUser{
      * @return array|null Array of User IDs, or null if error.
      */
     static function add_from_excel($file_path){
-        $xlsx = new SimpleXLSX($file_path);
+        $php_excel = PHPExcel_IOFactory::load($file_path);
         $user_array = array();
-        foreach($xlsx->rows() as $row){
-            if (empty($row[0]) || strtolower($row[0]) == "users" || strtolower($row[0]) == "name") {
-                continue;
-            } else {
-                $row_result = static::process_excel_row($row);
-                if (empty($row_result)){
-                    return null;
-                }
+        $row_iterator = $php_excel->getSheet()->getRowIterator();
+        while($row_iterator->valid()){
+            $row_result = static::process_excel_row($row_iterator->current());
+            if(!empty($row_result)){
                 $user_array[] = (int)$row_result;
             }
+            $row_iterator->next();
         }
         return $user_array;
     }
 
     /**
-     * Process a single role from an Excel file, containing one user
+     * Process a single role from an Excel file, containing one user, and add it to ClipIt if new
      *
-     * @param array $row
-     * @return int|false ID of new object created, or false in case of error.
+     * @param PHPExcel_Worksheet_Row $row_iterator
+     * @return int|false ID of User contained in row, or false in case of error.
      */
-    private function process_excel_row($row){
+    private function process_excel_row($row_iterator){
         $prop_value_array = array();
-        // name
-        $prop_value_array["name"] = (string) reset($row);
-        // login
-        $login = (string)next($row);
-        $user_array = static::get_by_login(array($login));
-        if(!empty($user_array[$login])){ // user already exists, no need to create it
-            return (int)$user_array[$login]->id;
+        $cell_iterator = $row_iterator->getCellIterator();
+        // Check for non-user row
+        $value = $cell_iterator->current()->getValue();
+        if(empty($value) || strtolower($value) == "users" || strtolower($value) == "name") {
+            return null;
         }
-        $prop_value_array["login"] = $login;
+        // name
+        $name = $value;
+        $prop_value_array["name"] = (string) $name;
+        $cell_iterator->next();
+        // login
+        $login = (string) $cell_iterator->current()->getValue();
+        if(!empty($login)){
+            $user_array = static::get_by_login(array($login));
+            if(!empty($user_array[$login])){ // user already exists, no need to create it
+                return (int)$user_array[$login]->id;
+            }
+            $prop_value_array["login"] = $login;
+        } else{
+            return null;
+        }
+        $cell_iterator->next();
         // password
-        $prop_value_array["password"] = (string) next($row);
+        $password = (string) $cell_iterator->current()->getValue();
+        if(!empty($password)) {
+            $prop_value_array["password"] = $password;
+        } else{
+            return null;
+        }
+        $cell_iterator->next();
         // email
-        $prop_value_array["email"] = (string) next($row);
+        $email = (string) $cell_iterator->current()->getValue();
+        if(!empty($email)) {
+            $prop_value_array["email"] = $email;
+        }
+        $cell_iterator->next();
         // role
-        $prop_value_array["role"] = (string) next($row);
+        $role = (string) $cell_iterator->current()->getValue();
+        if(!empty($role)) {
+            $prop_value_array["role"] = $role;
+        }
         return static::create($prop_value_array);
     }
 
