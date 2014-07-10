@@ -164,6 +164,7 @@ class UBItem{
      * @param array $prop_array Array of property names to get values from
      *
      * @return array|bool Returns an array of property=>value pairs, or false if error
+     * @throws InvalidParameterException
      */
     static function get_properties($id, $prop_array = null){
         if(!$item = new static($id)){
@@ -172,7 +173,11 @@ class UBItem{
         $value_array = array();
         if(!empty($prop_array)){
             foreach($prop_array as $prop){
-                $value_array[$prop] = $item->$prop;
+                if(array_key_exists($prop, static::list_properties())) {
+                    $value_array[$prop] = $item->$prop;
+                }else{
+                    throw new InvalidParameterException("ERROR: One or more property names do not exist.");
+                }
             }
         } else{
             $prop_array = static::list_properties();
@@ -313,9 +318,7 @@ class UBItem{
                 }
             }
         }
-        if(!$id_only) {
-            usort($object_array, 'static::sort_by_date_inv');
-        }
+        usort($object_array, 'static::sort_by_date_inv');
         return $object_array;
     }
 

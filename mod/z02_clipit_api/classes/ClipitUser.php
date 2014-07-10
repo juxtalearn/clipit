@@ -55,6 +55,55 @@ class ClipitUser extends UBUser{
         return $id;
     }
 
+    /**
+     * Add Users from an Excel file, and return an array of User Ids from those created or selected from the file.
+     *
+     * @param string $file_path Local file path
+     * @return array|null Array of User IDs, or null if error.
+     */
+    static function add_from_excel($file_path){
+        $xlsx = new SimpleXLSX($file_path);
+        $user_array = array();
+        foreach($xlsx->rows() as $row){
+            if (empty($row[0]) || strtolower($row[0]) == "users" || strtolower($row[0]) == "name") {
+                continue;
+            } else {
+                $row_result = static::process_excel_row($row);
+                if (empty($row_result)){
+                    return null;
+                }
+                $user_array[] = (int)$row_result;
+            }
+        }
+        return $user_array;
+    }
+
+    /**
+     * Process a single role from an Excel file, containing one user
+     *
+     * @param array $row
+     * @return int|false ID of new object created, or false in case of error.
+     */
+    private function process_excel_row($row){
+        $prop_value_array = array();
+        // name
+        $prop_value_array["name"] = (string) reset($row);
+        // login
+        $login = (string)next($row);
+        $user_array = static::get_by_login(array($login));
+        if(!empty($user_array[$login])){ // user already exists, no need to create it
+            return (int)$user_array[$login]->id;
+        }
+        $prop_value_array["login"] = $login;
+        // password
+        $prop_value_array["password"] = (string) next($row);
+        // email
+        $prop_value_array["email"] = (string) next($row);
+        // role
+        $prop_value_array["role"] = (string) next($row);
+        return static::create($prop_value_array);
+    }
+
     static function login($login, $password, $persistent = false){
         if(!parent::login($login, $password, $persistent)){
             return false;
