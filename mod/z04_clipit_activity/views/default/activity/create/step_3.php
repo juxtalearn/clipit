@@ -17,8 +17,10 @@ ClipitActivity::get_all()
 <script>
 $(function(){
     $('#callbacks').multiSelect({
-        selectableHeader: "<h4>Existing students</h4>",
-        selectionHeader: "<h4>Students called to activity</h4>",
+        keepOrder: false,
+        selectableOptgroup: true,
+        selectableHeader: "<h4><?php echo elgg_echo("activity:site:students");?></h4>",
+        selectionHeader: "<h4><?php echo elgg_echo("activity:students");?></h4>"
     });
     $(document).on("click", "#add_user",function(){
         var content = $(".add-user-list");
@@ -34,7 +36,7 @@ $(function(){
         $.getJSON(url_action, data_inputs, function(data) {
             $.each(data, function(key, user) {
                 $('#callbacks').multiSelect('addOption',
-                    { value: user.id, text: user.name, index: 0, nested: 'optgroup_label' }
+                    { value: user.id, text: user.name, index: 0, nested: 'Loaded' }
                 );
             });
             // remove all elements created
@@ -89,40 +91,69 @@ echo elgg_view("multimedia/file/templates/attach", array('entity' => $entity));
 <script>
 $(function () {
     'use strict';
-    $("#upload-users_test").fileupload({
+    $(".upload-users").fileupload({
         maxFileSize: 500000000, // 500 MB
-        //url: elgg.config.wwwroot+"ajax/view/tricky_topic/list",
-        url: $("#add_users_button").attr("href"),
-        acceptFileTypes: /(\.|\/)(xlsx|jpe?g|png)$/i,
+        url: "<?php echo elgg_add_action_tokens_to_url("action/activity/create/add_users_upload", true);?>",
+        acceptFileTypes: /(\.|\/)(xlsx|xls)$/i,
         autoUpload: true,
         previewCrop: false
     }).on('fileuploadadd', function (e, data) {
-        console.log("HOLA");
+        $(".upload-messages").show().html($("<span id='loading-file'><i class='fa fa-spinner fa-spin'/> loading</span>"));
+    }).on('fileuploadstop', function (e, data) {
+        $(".upload-messages").html("<strong>Uploaded</strong>").fadeOut(4000);
+
+    }).on('fileuploadprocessalways', function (e, data) {
+        var messages_content = $(".upload-messages");
+        var index = data.index,
+            file = data.files[index],
+            node = messages_content;
+        if (file.error) {
+            node.html($('<span class="text-danger"/>').text(file.error));
+        }
+    }).on('fileuploaddone', function (e, data) {
+        var parent_id = $(this).parent("a").attr("id");
+
+        $.each(data.result, function(index, user) {
+            $('#callbacks').multiSelect('addOption',
+                { value: user.id, text: user.name, index: 0, nested: 'Loaded' }
+            );
+            if(parent_id == 'insert-activity'){
+                $('#callbacks').multiSelect('select', [""+user.id+""]);
+            }
+        });
+//        $.each(data.result.files, function (index, file) {
+//            if (file.url) {
+//                var link = $('<a>')
+//                    .attr('target', '_blank')
+//                    .prop('href', file.url);
+//                $(data.context.children()[index])
+//                    .wrap(link);
+//            } else if (file.error) {
+//                var error = $('<span class="text-danger"/>').text(file.error);
+//                $(data.context.children()[index])
+//                    .append('<br>')
+//                    .append(error);
+//            }
+//        });
     });
 });
 </script>
-<div class="upload-files <?php echo $col_class; ?>">
-    <a style="position: relative;overflow: hidden">
-        <strong>
-            <i class="fa fa-paperclip"></i> <?php echo elgg_echo('multimedia:attach_files');?>
-            <input type="file" multiple name="files" id="upload-users_test">
-        </strong>
-    </a>
-    <div class="upload-files-list files" style="display:none;float: left; width: 100%;"></div>
-</div>
 <style>
-    .ms-container{
-        width: 100%;
-    }
+.ms-container{
+    width: 100%;
+}
+.ms-elem-selectable{
+    cursor: pointer;
+}
 </style>
 <div id="step_3" class="row step">
     <div class="col-md-12">
         <h3 class="title-block"><?php echo elgg_echo('activity:called_users');?></h3>
     </div>
-    <a class="p">CLICK</a>
     <div class="col-md-9">
         <select id='callbacks' multiple='multiple'>
-            <optgroup label='Site'>
+<!--            <optgroup label="Loaded"></optgroup>-->
+            <optgroup label="Site">
                 <?php
                 foreach(ClipitUser::get_all() as $user):
                     if($user->role == 'student'):
@@ -134,10 +165,6 @@ $(function () {
                     endif;
                 endforeach;
                 ?>
-            </optgroup>
-            <optgroup label='Enemies'>
-                <option value='3'>Palpatine</option>
-                <option value='4' disabled>Darth Vader</option>
             </optgroup>
         </select>
         <div class="margin-top-10 col-md-12" style="background: #fafafa; padding: 10px;">
@@ -172,15 +199,39 @@ $(function () {
                 </strong>
             </div>
         </div>
+        <div class="col-md-12">
         <div class="form-group">
-            <label for="upload-users"><?php echo elgg_echo("called:users:upload");?></label>
-            <?php echo elgg_view("input/file", array(
-                'name' => 'upload-users',
-                'id' => 'upload-users',
-                'style' => "width: 100%;",
-                'multiple' => true
-            ));
-            ?>
+            <label for="upload-users">
+                <?php echo elgg_echo("called:students:upload:from_excel");?>
+                <br>
+                <a href="/URL_TEMPLATE_FILE" target="_blank">
+                    <i class="fa fa-file-excel-o green"></i>
+                    <small>Download excel template</small>
+                </a>
+                <br>
+            </label>
+            <a class="btn btn-primary fileinput-button" id="insert-site">
+                <?php echo elgg_echo('called:students:insert_to_site');?>
+                <?php echo elgg_view("input/file", array(
+                    'name' => 'upload-users',
+                    'class' => 'upload-users',
+                    'id' => 'upload-users',
+                ));
+                ?>
+            </a>
+            <a class="btn btn-primary fileinput-button" id="insert-activity">
+                <?php echo elgg_echo('called:students:insert_to_activity');?>
+                <?php echo elgg_view("input/file", array(
+                    'name' => 'upload-users',
+                    'class' => 'upload-users',
+                    'id' => 'upload-users',
+                ));
+                ?>
+            </a>
+            <div>
+                <a class="upload-messages"></a>
+            </div>
+        </div>
         </div>
     </div>
     <div class="col-md-3">

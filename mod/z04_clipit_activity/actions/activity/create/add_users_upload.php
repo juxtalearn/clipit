@@ -10,15 +10,15 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$user_name = get_input('user-name');
-$user_login = get_input('user-login');
-$user_password = get_input('user-password');
-$user_email = get_input('user-email');
-for($i=0; $i < count($user_name); $i++){
+$file = $_FILES['upload-users'];
+$users = ClipitUser::add_from_excel($file['tmp_name']);
+foreach($users as $user_id){
+    $user = array_pop(ClipitUser::get_by_id(array($user_id)));
     $output[] = array(
-        'name' => $user_name[$i],
-        'id' => mt_rand(10,500),
+        'name' => $user->name,
+        'id' => $user->id
     );
 }
+
 echo json_encode($output);
 die();

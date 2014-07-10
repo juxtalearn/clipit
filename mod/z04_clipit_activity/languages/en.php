@@ -179,6 +179,13 @@ $english = array(
     'task:quiz_answer' => 'Quiz answer',
     'task:video_feedback' => 'Video feedback',
     'task:storyboard_feedback' => 'Storyboard feedback',
+
+    // Create activity
+    'activity:site:students' => 'Site students',
+    'activity:students' => 'Activity students',
+    'called:students:upload:from_excel' => 'Upload from excel',
+    'called:students:insert_to_site' => 'Upload to site',
+    'called:students:insert_to_activity' => 'Upload to activity',
 );
 
 add_translation('en', $english);

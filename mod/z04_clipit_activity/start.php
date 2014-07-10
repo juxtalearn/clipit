@@ -45,6 +45,7 @@ function clipit_activity_init() {
 
     // Create Activity
     elgg_register_action("activity/create/add_users", elgg_get_plugins_path() . "z04_clipit_activity/actions/activity/create/add_users.php");
+    elgg_register_action("activity/create/add_users_upload", elgg_get_plugins_path() . "z04_clipit_activity/actions/activity/create/add_users_upload.php");
     // Group
     elgg_register_action("group/join", elgg_get_plugins_path() . "z04_clipit_activity/actions/group/join.php");
     elgg_register_action("group/leave", elgg_get_plugins_path() . "z04_clipit_activity/actions/group/leave.php");
