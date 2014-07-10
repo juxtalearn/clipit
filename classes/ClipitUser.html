@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-462161772"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-649608540"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-462161772" class="accordion-body collapse in">
+            <div id="namespace-649608540" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -3076,15 +3076,15 @@ array.</em></p>
             <article class="method">
                 <h3 class="private ">process_excel_row()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">process_excel_row(array <span class="argument">$row</span>) : int|false</pre>
-                <p><em>Process a single role from an Excel file, containing one user</em></p>
+                <pre class="signature" style="margin-right: 54px;">process_excel_row(\PHPExcel_Worksheet_Row <span class="argument">$row_iterator</span>) : int|false</pre>
+                <p><em>Process a single role from an Excel file, containing one user, and add it to ClipIt if new</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>array</td>
-                                <td>$row </td>
+                                <td>\PHPExcel_Worksheet_Row</td>
+                                <td>$row_iterator </td>
                                 <td></td>
                             </tr>
                                             </table>
@@ -3092,7 +3092,7 @@ array.</em></p>
                 
                                     <h4>Returns</h4>
                     int|false
-                                            &mdash; <p>ID of new object created, or false in case of error.</p>
+                                            &mdash; <p>ID of User contained in row, or false in case of error.</p>
                                                 </article>
         </div>
         <aside class="span4 detailsbar">
@@ -3161,7 +3161,7 @@ array.</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on July 10th, 2014 at 14:01.
+                    on July 10th, 2014 at 15:01.
                 </section>
             </section>
         </section>
