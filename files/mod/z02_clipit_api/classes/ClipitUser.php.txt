@@ -55,6 +55,12 @@ class ClipitUser extends UBUser{
         return $id;
     }
 
+    /**
+     * Add Users from an Excel file, and return an array of User Ids from those created or selected from the file.
+     *
+     * @param string $file_path Local file path
+     * @return array|null Array of User IDs, or null if error.
+     */
     static function add_from_excel($file_path){
         $xlsx = new SimpleXLSX($file_path);
         $user_array = array();
@@ -73,6 +79,8 @@ class ClipitUser extends UBUser{
     }
 
     /**
+     * Process a single role from an Excel file, containing one user
+     *
      * @param array $row
      * @return int|false ID of new object created, or false in case of error.
      */
@@ -83,7 +91,7 @@ class ClipitUser extends UBUser{
         // login
         $login = (string)next($row);
         $user_array = static::get_by_login(array($login));
-        if(!empty($user_array[$login])){ // user already exists
+        if(!empty($user_array[$login])){ // user already exists, no need to create it
             return (int)$user_array[$login]->id;
         }
         $prop_value_array["login"] = $login;
