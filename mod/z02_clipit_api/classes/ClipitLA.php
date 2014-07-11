@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
@@ -11,13 +12,11 @@
  * @package         ClipIt
  * @subpackage      clipit_api
  */
-
-class ClipitLA extends UBFile{
+class ClipitLA extends UBFile {
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitLA";
-
     public $return_id = 0;
     public $status_code = 0;
 
@@ -26,7 +25,7 @@ class ClipitLA extends UBFile{
      *
      * @param ElggFile $elgg_file Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_file){
+    protected function load_from_elgg($elgg_file) {
         parent::load_from_elgg($elgg_file);
         $this->return_id = (int)$elgg_file->get("return_id");
         $this->status_code = (int)$elgg_file->get("status_code");
@@ -37,7 +36,7 @@ class ClipitLA extends UBFile{
      *
      * @param ElggFile $elgg_file Elgg object instance to save $this to
      */
-    protected function save_to_elgg($elgg_file){
+    protected function save_to_elgg($elgg_file) {
         parent::save_to_elgg($elgg_file);
         $elgg_file->set("return_id", $this->return_id);
         $elgg_file->set("status_code", $this->status_code);
@@ -46,13 +45,12 @@ class ClipitLA extends UBFile{
     /*
      * @todo request_metrics function to ask the LA API for metrics
      */
-    static function request_metrics($category, $type, $name){
+    static function request_metrics($category, $type, $name) {
         $return_id = 0;
-
         return $return_id;
     }
 
-    static function send_metrics($returnId, $data, $statuscode){
+    static function send_metrics($returnId, $data, $statuscode) {
         $la = new ClipitLA();
         $prop_value_array["return_id"] = (int)$returnId;
         $prop_value_array["data"] = $data;

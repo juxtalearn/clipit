@@ -14,16 +14,15 @@
 
 /**
  * Class ClipitTag
- *
+
  */
-class ClipitTag extends UBItem{
+class ClipitTag extends UBItem {
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitTag";
 
-    static function get_tricky_topics($id){
+    static function get_tricky_topics($id) {
         return UBCollection::get_items($id, ClipitTrickyTopic::REL_TRICKYTOPIC_TAG, true);
     }
-
 }

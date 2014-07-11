@@ -11,11 +11,10 @@
  * @package         ClipIt
  * @subpackage      clipit_api
  */
-
 /**
  * Expose all functions for the ClipIt REST API
  */
-function expose_clipit_api(){
+function expose_clipit_api() {
     expose_activity_functions();
     expose_chat_functions();
     expose_comment_functions();
