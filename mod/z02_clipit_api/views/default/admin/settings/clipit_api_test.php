@@ -18,5 +18,8 @@ switch($action) {
     case "export_users":
         print_r(ClipitUser::export_data());
         break;
+    case "export_activities":
+        print_r(ClipitActivity::export_data());
+        break;
 }
 

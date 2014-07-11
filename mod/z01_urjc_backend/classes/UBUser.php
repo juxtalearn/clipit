@@ -347,12 +347,8 @@ class UBUser extends UBItem {
                   ->setKeywords("clipit user account");
         // Add table title and columns
         $active_sheet = $php_excel->setActiveSheetIndex(0);
-        $active_sheet->getColumnDimension('A')->setWidth(50);
-        $active_sheet->getColumnDimension('B')->setWidth(30);
-        $active_sheet->getColumnDimension('C')->setWidth(30);
-        $active_sheet->getColumnDimension('D')->setWidth(30);
-        $active_sheet->getColumnDimension('E')->setWidth(30);
-        $active_sheet->getStyle('A1:E1')->getFont()->setBold(true);
+        $active_sheet->getDefaultColumnDimension()->setWidth(30);
+        $active_sheet->getStyle(1)->getFont()->setBold(true);
         $row = 1;
         $col = 0;
         $values = array("NAME", "LOGIN", "PASSWORD", "EMAIL", "ROLE");
