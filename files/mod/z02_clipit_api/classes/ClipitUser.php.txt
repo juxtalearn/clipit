@@ -55,7 +55,7 @@ class ClipitUser extends UBUser{
         return $id;
     }
 
-    static function save_to_excel($id_array = null){
+    static function export_data($id_array = null, $format = "excel"){
         // New Excel object
         $php_excel = new PHPExcel();
         // Set document properties
@@ -94,8 +94,11 @@ class ClipitUser extends UBUser{
             $row++;
             $col = 0;
         }
-        $objWriter = PHPExcel_IOFactory::createWriter($php_excel, 'Excel2007');
-        $objWriter->save('/tmp/clipit_users.xlsx');
+        switch($format){
+            case "excel":
+                $objWriter = PHPExcel_IOFactory::createWriter($php_excel, 'Excel2007');
+                $objWriter->save('/tmp/clipit_users.xlsx');
+        }
         return true;
 
     }
@@ -106,7 +109,7 @@ class ClipitUser extends UBUser{
      * @param string $file_path Local file path
      * @return array|null Array of User IDs, or null if error.
      */
-    static function add_from_excel($file_path){
+    static function import_data($file_path){
         $php_excel = PHPExcel_IOFactory::load($file_path);
         $user_array = array();
         $row_iterator = $php_excel->getSheet()->getRowIterator();
