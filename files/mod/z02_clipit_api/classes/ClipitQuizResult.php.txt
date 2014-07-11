@@ -14,9 +14,9 @@
 
 /**
  * Class ClipitQuizResult
- *
+
  */
-class ClipitQuizResult extends UBItem{
+class ClipitQuizResult extends UBItem {
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
@@ -39,7 +39,7 @@ class ClipitQuizResult extends UBItem{
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_entity){
+    protected function load_from_elgg($elgg_entity) {
         parent::load_from_elgg($elgg_entity);
         $this->user = (int)$elgg_entity->get("user");
         $this->correct = (bool)$elgg_entity->get("correct");
@@ -51,7 +51,7 @@ class ClipitQuizResult extends UBItem{
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function save_to_elgg($elgg_entity){
+    protected function save_to_elgg($elgg_entity) {
         parent::save_to_elgg($elgg_entity);
         $elgg_entity->set("correct", (bool)$this->correct);
         $elgg_entity->set("user", (int)$this->user);
@@ -59,12 +59,11 @@ class ClipitQuizResult extends UBItem{
 
     /**
      * Saves this instance into the system.
-     *
      * @return bool|int Returns id of saved instance, or false if error.
      */
-    protected function save(){
+    protected function save() {
         parent::save();
-        if($this->quiz_question != 0){
+        if($this->quiz_question != 0) {
             ClipitQuizQuestion::add_quiz_results($this->quiz_question, array($this->id));
         }
         return $this->id;
@@ -73,34 +72,34 @@ class ClipitQuizResult extends UBItem{
     /**
      * Sets values to specified properties of an Item
      *
-     * @param int   $id Id of Item to set property values
+     * @param int   $id               Id of Item to set property values
      * @param array $prop_value_array Array of property=>value pairs to set into the Item
      *
      * @return int|bool Returns Id of Item if correct, or false if error
      * @throws InvalidParameterException
      */
-    static function set_properties($id, $prop_value_array){
+    static function set_properties($id, $prop_value_array) {
         $new_prop_value_array = array();
-        foreach($prop_value_array as $prop => $value){
-            if($prop == "correct"){
-                if($value == "true"){
+        foreach($prop_value_array as $prop => $value) {
+            if($prop == "correct") {
+                if($value == "true") {
                     $new_prop_value_array["correct"] = true;
-                } elseif($value == "false"){
+                } elseif($value == "false") {
                     $new_prop_value_array["correct"] = false;
-                } else{
+                } else {
                     $new_prop_value_array["correct"] = (bool)$value;
                 }
-            } else{
+            } else {
                 $new_prop_value_array[$prop] = $value;
             }
         }
         return parent::set_properties($id, $new_prop_value_array);
     }
 
-    static function get_quiz_question($id){
+    static function get_quiz_question($id) {
         $rel_array = get_entity_relationships($id, true);
-        foreach($rel_array as $rel){
-            if($rel->relationship == ClipitQuizQuestion::REL_QUIZQUESTION_QUIZRESULT){
+        foreach($rel_array as $rel) {
+            if($rel->relationship == ClipitQuizQuestion::REL_QUIZQUESTION_QUIZRESULT) {
                 return $question_id = $rel->guid_one;
             }
         }
@@ -114,13 +113,12 @@ class ClipitQuizResult extends UBItem{
      *
      * @return array|bool Array of Quiz Results nested per Quiz Question IDs, or false if error
      */
-    static function get_by_quiz_question($quiz_question_array){
+    static function get_by_quiz_question($quiz_question_array) {
         $quiz_result_array = array();
-        foreach($quiz_question_array as $quiz_question){
+        foreach($quiz_question_array as $quiz_question) {
             $result_array = ClipitQuizQuestion::get_quiz_results($quiz_question);
             $quiz_result_array[$quiz_question] = static::get_by_id($result_array);
         }
         return $quiz_result_array;
     }
-
 }

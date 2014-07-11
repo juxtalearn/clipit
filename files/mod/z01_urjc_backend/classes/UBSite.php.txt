@@ -15,12 +15,11 @@
 /**
 
  */
-class UBSite{
+class UBSite {
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "UBSite";
-
     public $id = 0;
     public $name = "";
     public $description = "";
@@ -30,10 +29,9 @@ class UBSite{
 
     /**
      * Constructor
-     *
      * @throws APIException
      */
-    function __construct(){
+    function __construct() {
         $elgg_entity = elgg_get_site_entity();
         $this->load_from_elgg($elgg_entity);
     }
@@ -43,7 +41,7 @@ class UBSite{
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_entity){
+    protected function load_from_elgg($elgg_entity) {
         $this->id = (int)$elgg_entity->get("guid");
         $this->name = (string)$elgg_entity->get("name");
         $this->description = (string)$elgg_entity->get("description");
@@ -54,10 +52,9 @@ class UBSite{
 
     /**
      * Saves Site parameters into Elgg
-     *
      * @return int Site ID
      */
-    protected function save(){
+    protected function save() {
         $elgg_entity = elgg_get_site_entity();
         $this->save_to_elgg($elgg_entity);
         $elgg_entity->save();
@@ -67,26 +64,25 @@ class UBSite{
     /**
      * @param ElggEntity $elgg_entity
      */
-    protected function save_to_elgg($elgg_entity){
+    protected function save_to_elgg($elgg_entity) {
         $elgg_entity->set("name", (string)$this->name);
         $elgg_entity->set("description", (string)$this->description);
         $elgg_entity->set("url", (string)$this->url);
     }
 
-    static function get_site(){
+    static function get_site() {
         return new static();
     }
 
-    static function get_site_id(){
+    static function get_site_id() {
         return (int)datalist_get("default_site");
     }
 
     /**
      * Get the REST API method list, including description and required parameters.
-     *
      * @return array List of all available REST API Methods.
      */
-    static function api_list(){
+    static function api_list() {
         return list_all_apis();
     }
 
@@ -94,22 +90,22 @@ class UBSite{
      * Get authentication token, required for all other REST API calls. The token must be set as the value for the
      * "auth_token" key in each REST API call.
      *
-     * @param string $login User login
+     * @param string $login    User login
      * @param string $password User password
-     * @param int    $timeout Session timeout in minutes
+     * @param int    $timeout  Session timeout in minutes
      *
      * @return string Authentication Token.
      * @throws SecurityException
      */
-    static function get_token($login, $password, $timeout = 60){
+    static function get_token($login, $password, $timeout = 60) {
         global $CONFIG;
-        if(elgg_authenticate($login, $password) === true){
+        if(elgg_authenticate($login, $password) === true) {
             $user = get_user_by_username($login);
             $query = "select * from {$CONFIG->dbprefix}users_apisessions where user_guid = {$user->guid};";
             $row = get_data_row($query);
-            if(isset($row->token) && ((int)$row->expires - time()) > 0){
+            if(isset($row->token) && ((int)$row->expires - time()) > 0) {
                 $token = $row->token;
-            } else{
+            } else {
                 $token = create_user_token($login, $timeout);
             }
             return $token;
@@ -117,12 +113,12 @@ class UBSite{
         throw new SecurityException(elgg_echo('SecurityException:authenticationfailed'));
     }
 
-    static function remove_token($token){
+    static function remove_token($token) {
         return remove_user_token($token, null);
     }
 
-    static function lookup($id){
-        try{
+    static function lookup($id) {
+        try {
             $elgg_object = new ElggObject((int)$id);
             $object['type'] = (string)$elgg_object->type;
             $object['subtype'] = (string)get_subtype_from_id($elgg_object->subtype);
@@ -130,24 +126,23 @@ class UBSite{
             $object['description'] = (string)$elgg_object->description;
             //$object['class'] = get_class_from_subtype($object['subtype']);
             return $object;
-        } catch(Exception $e){
-            try{
+        } catch(Exception $e) {
+            try {
                 $elgg_user = new ElggUser((int)$id);
                 $object['type'] = (string)$elgg_user->type;
                 $object['subtype'] = (string)get_subtype_from_id($elgg_user->subtype);
                 return $object;
-            } catch(Exception $e){
+            } catch(Exception $e) {
                 throw new APIException("ERROR: Unidentified ID provided.");
             }
         }
     }
 
-    static function get_domain(){
+    static function get_domain() {
         $site = elgg_get_site_entity();
         $urlData = parse_url($site->url);
         $hostData = explode('.', $urlData['host']);
         $hostData = array_reverse($hostData);
         return $hostData[1] . '.' . $hostData[0];
     }
-
-} 
+}

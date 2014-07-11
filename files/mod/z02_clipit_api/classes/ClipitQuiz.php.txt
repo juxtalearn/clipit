@@ -14,9 +14,9 @@
 
 /**
  * Class ClipitQuiz
- *
+
  */
-class ClipitQuiz extends UBItem{
+class ClipitQuiz extends UBItem {
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
@@ -38,7 +38,6 @@ class ClipitQuiz extends UBItem{
      * @var int Id of Taxonomy used as topic for this Quiz (optional)
      */
     public $tricky_topic = 0;
-
     public $embed_url = "";
     public $scores_url = "";
     public $author_name = "";
@@ -48,15 +47,15 @@ class ClipitQuiz extends UBItem{
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_entity){
+    protected function load_from_elgg($elgg_entity) {
         parent::load_from_elgg($elgg_entity);
         $this->quiz_question_array = static::get_quiz_questions($this->id);
-        $this->public = (bool) $elgg_entity->get("public");
-        $this->tricky_topic = (int) $elgg_entity->get("tricky_topic");
-        $this->target = (string) $elgg_entity->get("target");
-        $this->embed_url = (string) $elgg_entity->get("embed_url");
-        $this->scores_url = (string) $elgg_entity->get("scores_url");
-        $this->author_name = (string) $elgg_entity->get("author_name");
+        $this->public = (bool)$elgg_entity->get("public");
+        $this->tricky_topic = (int)$elgg_entity->get("tricky_topic");
+        $this->target = (string)$elgg_entity->get("target");
+        $this->embed_url = (string)$elgg_entity->get("embed_url");
+        $this->scores_url = (string)$elgg_entity->get("scores_url");
+        $this->author_name = (string)$elgg_entity->get("author_name");
     }
 
     /**
@@ -64,22 +63,21 @@ class ClipitQuiz extends UBItem{
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function save_to_elgg($elgg_entity){
+    protected function save_to_elgg($elgg_entity) {
         parent::save_to_elgg($elgg_entity);
         $elgg_entity->set("public", (bool)$this->public);
         $elgg_entity->set("tricky_topic", (int)$this->tricky_topic);
         $elgg_entity->set("target", (string)$this->target);
-        $elgg_entity->set("embed_url", (string) $this->embed_url);
-        $elgg_entity->set("scores_url", (string) $this->scores_url);
-        $elgg_entity->set("author_name", (string) $this->author_name);
+        $elgg_entity->set("embed_url", (string)$this->embed_url);
+        $elgg_entity->set("scores_url", (string)$this->scores_url);
+        $elgg_entity->set("author_name", (string)$this->author_name);
     }
 
     /**
      * Saves this instance into the system.
-     *
      * @return bool|int Returns id of saved instance, or false if error.
      */
-    protected function save(){
+    protected function save() {
         parent::save();
         static::set_quiz_questions($this->id, $this->quiz_question_array);
         return $this->id;
@@ -88,24 +86,24 @@ class ClipitQuiz extends UBItem{
     /**
      * Sets values to specified properties of an Item
      *
-     * @param int   $id Id of Item to set property values
+     * @param int   $id               Id of Item to set property values
      * @param array $prop_value_array Array of property=>value pairs to set into the Item
      *
      * @return int|bool Returns Id of Item if correct, or false if error
      * @throws InvalidParameterException
      */
-    static function set_properties($id, $prop_value_array){
+    static function set_properties($id, $prop_value_array) {
         $new_prop_value_array = array();
-        foreach($prop_value_array as $prop => $value){
-            if($prop == "public"){
-                if($value == "true"){
+        foreach($prop_value_array as $prop => $value) {
+            if($prop == "public") {
+                if($value == "true") {
                     $new_prop_value_array["public"] = true;
-                } elseif($value == "false"){
+                } elseif($value == "false") {
                     $new_prop_value_array["public"] = false;
-                } else{
+                } else {
                     $new_prop_value_array["public"] = (bool)$value;
                 }
-            } else{
+            } else {
                 $new_prop_value_array[$prop] = $value;
             }
         }
@@ -115,37 +113,36 @@ class ClipitQuiz extends UBItem{
     /**
      * Adds Quiz Questions to a Quiz.
      *
-     * @param int   $id Id from Quiz to add Questions to
+     * @param int   $id             Id from Quiz to add Questions to
      * @param array $question_array Array of Questions to add
      *
      * @return bool Returns true if success, false if error
      */
-    static function add_quiz_questions($id, $question_array){
+    static function add_quiz_questions($id, $question_array) {
         return UBCollection::add_items($id, $question_array, static::REL_QUIZ_QUIZQUESTION);
     }
 
     /**
      * Sets Quiz Questions to a Quiz.
      *
-     * @param int   $id Id from Quiz to set Questions to
+     * @param int   $id             Id from Quiz to set Questions to
      * @param array $question_array Array of Questions to set
      *
      * @return bool Returns true if success, false if error
      */
-    static function set_quiz_questions($id, $question_array){
+    static function set_quiz_questions($id, $question_array) {
         return UBCollection::set_items($id, $question_array, static::REL_QUIZ_QUIZQUESTION);
     }
-
 
     /**
      * Remove Quiz Questions from a Quiz.
      *
-     * @param int   $id Id from Quiz to remove Questions from
+     * @param int   $id             Id from Quiz to remove Questions from
      * @param array $question_array Array of Questions to remove
      *
      * @return bool Returns true if success, false if error
      */
-    static function remove_quiz_questions($id, $question_array){
+    static function remove_quiz_questions($id, $question_array) {
         return UBCollection::remove_items($id, $question_array, static::REL_QUIZ_QUIZQUESTION);
     }
 
@@ -156,7 +153,7 @@ class ClipitQuiz extends UBItem{
      *
      * @return array|bool Returns an array of ClipitQuizQuestion IDs, or false if error
      */
-    static function get_quiz_questions($id){
+    static function get_quiz_questions($id) {
         return UBCollection::get_items($id, static::REL_QUIZ_QUIZQUESTION);
     }
 }

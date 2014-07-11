@@ -14,17 +14,15 @@
 
 /**
  * Class ClipitFile
- *
+
  */
-class ClipitFile extends UBFile{
+class ClipitFile extends UBFile {
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitFile";
-
     const REL_FILE_TAG = "file-tag";
     const REL_FILE_LABEL = "file-label";
-
     public $tag_array = array();
     public $label_array = array();
 
@@ -33,7 +31,7 @@ class ClipitFile extends UBFile{
      *
      * @param ElggFile $elgg_file Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_file){
+    protected function load_from_elgg($elgg_file) {
         parent::load_from_elgg($elgg_file);
         $this->tag_array = static::get_tags($this->id);
         $this->label_array = static::get_labels($this->id);
@@ -41,23 +39,22 @@ class ClipitFile extends UBFile{
 
     /**
      * Saves this instance to the system.
-     *
      * @return bool|int Returns id of saved instance, or false if error.
      */
-    protected function save(){
+    protected function save() {
         parent::save();
         static::set_tags($this->id, $this->tag_array);
         static::set_labels($this->id, $this->label_array);
         return $this->id;
     }
 
-    static function get_by_tags($tag_array){
+    static function get_by_tags($tag_array) {
         $return_array = array();
         $all_items = static::get_all(0, true); // Get all item ids, not objects
-        foreach($all_items as $item_id){
-            $item_tags = static::get_tags((int) $item_id);
-            foreach($tag_array as $search_tag){
-                if(array_search($search_tag, $item_tags) !== false){
+        foreach($all_items as $item_id) {
+            $item_tags = static::get_tags((int)$item_id);
+            foreach($tag_array as $search_tag) {
+                if(array_search($search_tag, $item_tags) !== false) {
                     $return_array[(int)$item_id] = new static((int)$item_id);
                     break;
                 }
@@ -66,13 +63,13 @@ class ClipitFile extends UBFile{
         return $return_array;
     }
 
-    static function get_by_labels($label_array){
+    static function get_by_labels($label_array) {
         $return_array = array();
         $all_items = static::get_all(0, true); // Get all item ids, not objects
-        foreach($all_items as $item_id){
-            $item_labels = (array)static::get_labels((int) $item_id);
-            foreach($label_array as $search_tag){
-                if(array_search($search_tag, $item_labels) !== false){
+        foreach($all_items as $item_id) {
+            $item_labels = (array)static::get_labels((int)$item_id);
+            foreach($label_array as $search_tag) {
+                if(array_search($search_tag, $item_labels) !== false) {
                     $return_array[(int)$item_id] = new static((int)$item_id);
                     break;
                 }
@@ -81,26 +78,26 @@ class ClipitFile extends UBFile{
         return $return_array;
     }
 
-    static function get_group($id){
+    static function get_group($id) {
         $file = new static($id);
-        if(!empty($file->clone_id)){
+        if(!empty($file->clone_id)) {
             return static::get_group($file->clone_id);
         }
         $group = UBCollection::get_items($id, ClipitGroup::REL_GROUP_FILE, true);
         return array_pop($group);
     }
 
-    static function get_task($id){
+    static function get_task($id) {
         $task = UBCollection::get_items($id, ClipitTask::REL_TASK_FILE, true);
         return array_pop($task);
     }
 
-    static function get_activity($id){
+    static function get_activity($id) {
         $activity = UBCollection::get_items($id, ClipitActivity::REL_ACTIVITY_FILE, true);
         return array_pop($activity);
     }
 
-    static function get_site($id){
+    static function get_site($id) {
         $site = UBCollection::get_items($id, ClipitSite::REL_SITE_FILE, true);
         return array_pop($site);
     }
@@ -108,36 +105,36 @@ class ClipitFile extends UBFile{
     /**
      * Add Tags to a File.
      *
-     * @param int   $id Id of the File to add Tags to.
+     * @param int   $id        Id of the File to add Tags to.
      * @param array $tag_array Array of Tag Ids to add to the File.
      *
      * @return bool Returns true if added correctly, or false if error.
      */
-    static function add_tags($id, $tag_array){
+    static function add_tags($id, $tag_array) {
         return UBCollection::add_items($id, $tag_array, static::REL_FILE_TAG);
     }
 
     /**
      * Set Tags to a File.
      *
-     * @param int   $id Id of the File to set Tags to.
+     * @param int   $id        Id of the File to set Tags to.
      * @param array $tag_array Array of Tag Ids to set to the File.
      *
      * @return bool Returns true if added correctly, or false if error.
      */
-    static function set_tags($id, $tag_array){
+    static function set_tags($id, $tag_array) {
         return UBCollection::set_items($id, $tag_array, static::REL_FILE_TAG);
     }
 
     /**
      * Remove Tags from a File.
      *
-     * @param int   $id Id of the File to remove Tags from.
+     * @param int   $id        Id of the File to remove Tags from.
      * @param array $tag_array Array of Tags Ids to remove from the File.
      *
      * @return bool Returns true if removed correctly, or false if error.
      */
-    static function remove_tags($id, $tag_array){
+    static function remove_tags($id, $tag_array) {
         return UBCollection::remove_items($id, $tag_array, static::REL_FILE_TAG);
     }
 
@@ -148,43 +145,43 @@ class ClipitFile extends UBFile{
      *
      * @return int[] Returns array of Tag Ids, or false if error.
      */
-    static function get_tags($id){
+    static function get_tags($id) {
         return UBCollection::get_items($id, static::REL_FILE_TAG);
     }
 
     /**
      * Add Labels to a File.
      *
-     * @param int   $id Id of the File to add Labels to.
+     * @param int   $id          Id of the File to add Labels to.
      * @param array $label_array Array of Label Ids to add to the File.
      *
      * @return bool Returns true if added correctly, or false if error.
      */
-    static function add_labels($id, $label_array){
+    static function add_labels($id, $label_array) {
         return UBCollection::add_items($id, $label_array, static::REL_FILE_LABEL);
     }
 
     /**
      * Set Labels to a File.
      *
-     * @param int   $id Id of the File to set Labels to.
+     * @param int   $id          Id of the File to set Labels to.
      * @param array $label_array Array of Label Ids to set to the File.
      *
      * @return bool Returns true if added correctly, or false if error.
      */
-    static function set_labels($id, $label_array){
+    static function set_labels($id, $label_array) {
         return UBCollection::set_items($id, $label_array, static::REL_FILE_LABEL);
     }
 
     /**
      * Remove Labels from a File.
      *
-     * @param int   $id Id of the File to remove Labels from.
+     * @param int   $id          Id of the File to remove Labels from.
      * @param array $label_array Array of Label Ids to remove from the File.
      *
      * @return bool Returns true if removed correctly, or false if error.
      */
-    static function remove_labels($id, $label_array){
+    static function remove_labels($id, $label_array) {
         return UBCollection::remove_items($id, $label_array, static::REL_FILE_LABEL);
     }
 
@@ -195,9 +192,8 @@ class ClipitFile extends UBFile{
      *
      * @return int[] Returns array of Label Ids, or false if error.
      */
-    static function get_labels($id){
+    static function get_labels($id) {
         return UBCollection::get_items($id, static::REL_FILE_LABEL);
     }
-
 }
 

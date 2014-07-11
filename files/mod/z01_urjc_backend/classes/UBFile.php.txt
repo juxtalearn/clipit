@@ -15,12 +15,11 @@
 /**
  * Class UBFile
  */
-class UBFile extends UBItem{
+class UBFile extends UBItem {
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "UBFile";
-    
     /**
      * Class constants
      */
@@ -29,7 +28,6 @@ class UBFile extends UBItem{
     const THUMB_SMALL = 64;
     const THUMB_MEDIUM = 128;
     const THUMB_LARGE = 256;
-
     /**
      * Class variables
      */
@@ -44,13 +42,17 @@ class UBFile extends UBItem{
 
     /**
      * Constructor
+     *
      * @param int $id If != null, load instance.
+     *
      * @throws APIException
      **/
-    function __construct($id = null){
-        if(!empty($id)){
-            if(!($elgg_file = new ElggFile((int)$id))){
-                throw new APIException("ERROR: Id '" . $id . "' does not correspond to a " . get_called_class() . " object.");
+    function __construct($id = null) {
+        if(!empty($id)) {
+            if(!($elgg_file = new ElggFile((int)$id))) {
+                throw new APIException(
+                    "ERROR: Id '" . $id . "' does not correspond to a " . get_called_class() . " object."
+                );
             }
             $this->load_from_elgg($elgg_file);
         }
@@ -61,7 +63,7 @@ class UBFile extends UBItem{
      *
      * @param ElggFile $elgg_file
      */
-    protected function load_from_elgg($elgg_file){
+    protected function load_from_elgg($elgg_file) {
         $this->id = (int)$elgg_file->get("guid");
         $this->description = (string)$elgg_file->get("description");
         $this->owner_id = (int)$elgg_file->getOwnerGUID();
@@ -69,16 +71,16 @@ class UBFile extends UBItem{
         $this->name = (string)$elgg_file->get("name");
         $this->size = (int)$elgg_file->size();
         $this->file_path = (string)$elgg_file->getFilenameOnFilestore();
-        $this->url = (string)elgg_get_site_url()."file/download/".$this->id;
-        if(!empty($elgg_file->thumb_small)){
+        $this->url = (string)elgg_get_site_url() . "file/download/" . $this->id;
+        if(!empty($elgg_file->thumb_small)) {
             $this->thumb_small["path"] = (string)$elgg_file->get("thumb_small");
-            $this->thumb_small["url"] = (string)elgg_get_site_url()."file/thumbnail/small/".$this->id;
+            $this->thumb_small["url"] = (string)elgg_get_site_url() . "file/thumbnail/small/" . $this->id;
             $this->thumb_medium["path"] = (string)$elgg_file->get("thumb_medium");
-            $this->thumb_medium["url"] = (string)elgg_get_site_url()."file/thumbnail/medium/".$this->id;
+            $this->thumb_medium["url"] = (string)elgg_get_site_url() . "file/thumbnail/medium/" . $this->id;
             $this->thumb_large["path"] = (string)$elgg_file->get("thumb_large");
-            $this->thumb_large["url"] = (string)elgg_get_site_url()."file/thumbnail/large/".$this->id;
+            $this->thumb_large["url"] = (string)elgg_get_site_url() . "file/thumbnail/large/" . $this->id;
         }
-        if(!empty($elgg_file->mime_type)){
+        if(!empty($elgg_file->mime_type)) {
             $this->mime_type["full"] = $elgg_file->mime_type[0];
             $this->mime_type["short"] = $elgg_file->mime_type[1];
         }
@@ -86,15 +88,14 @@ class UBFile extends UBItem{
 
     /**
      * Saves this instance into the system.
-     *
      * @return bool|int Returns id of saved instance, or false if error.
      */
-    protected function save(){
-        if(!empty($this->id)){
-            if(!$elgg_file = new ElggFile($this->id)){
+    protected function save() {
+        if(!empty($this->id)) {
+            if(!$elgg_file = new ElggFile($this->id)) {
                 return false;
             }
-        } else{
+        } else {
             $elgg_file = new ElggFile();
             $elgg_file->type = static::TYPE;
             $elgg_file->subtype = static::SUBTYPE;
@@ -109,31 +110,30 @@ class UBFile extends UBItem{
      *
      * @param ElggFile $elgg_file Elgg object instance to save $this to
      */
-    protected function save_to_elgg($elgg_file){
-        if($this->time_created == 0){ // new file
+    protected function save_to_elgg($elgg_file) {
+        if($this->time_created == 0) { // new file
             $elgg_file->set("filename", (string)rand());
         }
         $elgg_file->set("name", (string)$this->name);
         $elgg_file->description = (string)$this->description;
         $elgg_file->access_id = ACCESS_PUBLIC;
-        if(!empty($this->data)){ // new file or new data
+        if(!empty($this->data)) { // new file or new data
             $elgg_file->open("write");
             $decoded_data = base64_decode($this->data, true);
-            if($decoded_data !== false){
+            if($decoded_data !== false) {
                 $elgg_file->write($decoded_data);
-            } else{
+            } else {
                 $elgg_file->write($this->data);
             }
             $elgg_file->close();
             static::create_thumbnails($elgg_file);
-        }
-        elseif(!empty($this->temp_path)){ // File was uploaded into local temp dir
+        } elseif(!empty($this->temp_path)) { // File was uploaded into local temp dir
             $elgg_file->open("write"); // to ensure file is created in disk
             $elgg_file->close();
             move_uploaded_file($this->temp_path, $elgg_file->getFilenameOnFilestore());
             static::create_thumbnails($elgg_file);
-        } else{
-            if(!empty($this->thumb_small)){
+        } else {
+            if(!empty($this->thumb_small)) {
                 $elgg_file->set("thumb_small", (string)$this->thumb_small["path"]);
                 $elgg_file->set("thumb_medium", (string)$this->thumb_medium["path"]);
                 $elgg_file->set("thumb_large", (string)$this->thumb_large["path"]);
@@ -141,9 +141,9 @@ class UBFile extends UBItem{
         }
         $filestore_name = $elgg_file->getFilenameOnFilestore();
         $mime_type["full"] = (string)static::get_mime_type($filestore_name);
-        if($mime_type["full"] == "application/zip"){ // Detect Office 2007+ mimetype
+        if($mime_type["full"] == "application/zip") { // Detect Office 2007+ mimetype
             $new_mime = getMicrosoftOfficeMimeInfo($filestore_name);
-            if($new_mime !== false){
+            if($new_mime !== false) {
                 $mime_type["full"] = (string)$new_mime["mime"];
             }
         }
@@ -155,23 +155,22 @@ class UBFile extends UBItem{
      * Get File MIME Type
      *
      * @param string $file Filename on Filestore
+     *
      * @return bool|mixed|null|string Mime Type
      */
     static function get_mime_type($file) {
         $mime = false;
-
         // for PHP5 folks.
-        if (function_exists('finfo_file') && defined('FILEINFO_MIME_TYPE')) {
+        if(function_exists('finfo_file') && defined('FILEINFO_MIME_TYPE')) {
             $resource = finfo_open(FILEINFO_MIME_TYPE);
-            if ($resource) {
+            if($resource) {
                 $mime = finfo_file($resource, $file);
             }
         }
         // default
-        if (!$mime) {
+        if(!$mime) {
             return null;
         }
-
         return $mime;
     }
 
@@ -179,10 +178,11 @@ class UBFile extends UBItem{
      * Returns an overall file type from the mimetype
      *
      * @param string $mime_type The MIME type
+     *
      * @return string The overall type
      */
     static function get_simple_mime_type($mime_type) {
-        switch ($mime_type) {
+        switch($mime_type) {
             case "application/msword":
             case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
             case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
@@ -196,27 +196,21 @@ class UBFile extends UBItem{
             case "application/zip":
                 return "compressed";
         }
-
-        if (substr_count($mime_type, 'text/')) {
+        if(substr_count($mime_type, 'text/')) {
             return "document";
         }
-
-        if (substr_count($mime_type, 'audio/')) {
+        if(substr_count($mime_type, 'audio/')) {
             return "audio";
         }
-
-        if (substr_count($mime_type, 'image/')) {
+        if(substr_count($mime_type, 'image/')) {
             return "image";
         }
-
-        if (substr_count($mime_type, 'video/')) {
+        if(substr_count($mime_type, 'video/')) {
             return "video";
         }
-
-        if (substr_count($mime_type, 'opendocument')) {
+        if(substr_count($mime_type, 'opendocument')) {
             return "document";
         }
-
         return "general";
     }
 
@@ -225,35 +219,41 @@ class UBFile extends UBItem{
      *
      * @param ElggFile $elgg_file
      */
-    private static function create_thumbnails($elgg_file){
+    private static function create_thumbnails($elgg_file) {
         $file_name = $elgg_file->getFilename();
         $filestore_name = $elgg_file->getFilenameOnFilestore();
         $simple_mime_type = static::get_simple_mime_type(static::get_mime_type($filestore_name));
         // if image, we need to create thumbnails (this should be moved into a function)
-        if ($simple_mime_type == "image") {
+        if($simple_mime_type == "image") {
             $thumb = new ElggFile();
             // squared small thumbnail
-            $thumbnail_small = get_resized_image_from_existing_file($filestore_name, static::THUMB_SMALL, static::THUMB_SMALL, true);
-            if ($thumbnail_small) {
-                $thumb->setFilename("thumb_small-".$file_name);
+            $thumbnail_small = get_resized_image_from_existing_file(
+                $filestore_name, static::THUMB_SMALL, static::THUMB_SMALL, true
+            );
+            if($thumbnail_small) {
+                $thumb->setFilename("thumb_small-" . $file_name);
                 $thumb->open("write");
                 $thumb->write($thumbnail_small);
                 $thumb->close();
                 $elgg_file->set("thumb_small", (string)$thumb->getFilenameOnFilestore());
             }
             // squared medium thumbnail
-            $thumbnail_medium = get_resized_image_from_existing_file($filestore_name, static::THUMB_MEDIUM, static::THUMB_MEDIUM, true);
-            if ($thumbnail_medium) {
-                $thumb->setFilename("thumb_medium-".$file_name);
+            $thumbnail_medium = get_resized_image_from_existing_file(
+                $filestore_name, static::THUMB_MEDIUM, static::THUMB_MEDIUM, true
+            );
+            if($thumbnail_medium) {
+                $thumb->setFilename("thumb_medium-" . $file_name);
                 $thumb->open("write");
                 $thumb->write($thumbnail_medium);
                 $thumb->close();
                 $elgg_file->set("thumb_medium", (string)$thumb->getFilenameOnFilestore());
             }
             // original proportion large thumbnail
-            $thumbnail_large = get_resized_image_from_existing_file($filestore_name, static::THUMB_LARGE, static::THUMB_LARGE, false);
-            if ($thumbnail_large) {
-                $thumb->setFilename("thumb_large-".$file_name);
+            $thumbnail_large = get_resized_image_from_existing_file(
+                $filestore_name, static::THUMB_LARGE, static::THUMB_LARGE, false
+            );
+            if($thumbnail_large) {
+                $thumb->setFilename("thumb_large-" . $file_name);
                 $thumb->open("write");
                 $thumb->write($thumbnail_large);
                 $thumb->close();

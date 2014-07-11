@@ -14,12 +14,11 @@
 
 /**
  * Class ClipitLabel
- *
+
  */
-class ClipitLabel extends UBItem{
+class ClipitLabel extends UBItem {
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitLabel";
-
 }
