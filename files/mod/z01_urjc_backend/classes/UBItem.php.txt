@@ -142,9 +142,7 @@ class UBItem {
                 static::set_properties($clone_id, $prop_value_array);
             }
         }
-        if(!$elgg_object = new ElggObject((int)$this->id)) {
-            return false;
-        }
+        $elgg_object = new ElggObject((int)$this->id);
         return $elgg_object->delete();
     }
 
@@ -268,10 +266,8 @@ class UBItem {
      */
     static function delete_by_id($id_array) {
         foreach($id_array as $id) {
-            if(!$item = new static((int)$id)) {
-                return false;
-            }
-            if(!$item->delete()) {
+            $item = new static((int)$id);
+            if($item->delete() === false) {
                 return false;
             }
         }
