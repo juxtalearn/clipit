@@ -240,11 +240,12 @@ class UBItem {
      * Get an ID array of all cloned Items from a specified one.
      *
      * @param int $id Item from which to return clones
+     * @param bool $recursive Whether to look for clones recursively
      *
      * @return int[] Array of Item IDs
      */
-    static function get_clones($id) {
-        $clone_array = array();
+    static function get_clones($id, $recursive = false) {
+        $clone_array[] = $id;
         $item_array = elgg_get_entities_from_metadata(
             array(
                 'type' => static::TYPE, 'subtype' => static::SUBTYPE, 'metadata_names' => array("cloned_from"),
@@ -252,9 +253,33 @@ class UBItem {
             )
         );
         foreach($item_array as $item) {
-            $clone_array[] = $item->guid;
+            if($recursive) {
+                $clone_array = array_merge($clone_array, static::get_clones($item->guid, true));
+            } else{
+                $clone_array[] = $item->guid;
+            }
         }
         return $clone_array;
+    }
+
+    /**
+     * Get an array with the full clone list of the clone tree an item belongs to
+     * @param int $id ID of Item
+     *
+     * @return int[] Array of item IDs
+     * @throws InvalidParameterException
+     */
+    static function get_clone_tree($id){
+        // Find top parent in clone tree
+        $top_parent = $id;
+        $prop_value_array = static::get_properties($top_parent, array("cloned_from"));
+        $new_parent = $prop_value_array["cloned_from"];
+        while($new_parent != 0){
+            $top_parent = $new_parent;
+            $prop_value_array = static::get_properties($top_parent, array("cloned_from"));
+            $new_parent = $prop_value_array["cloned_from"];
+        }
+        return static::get_clones($top_parent, true);
     }
 
     /**

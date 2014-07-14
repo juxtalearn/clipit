@@ -39,9 +39,15 @@ function expose_common_functions($api_suffix, $class_suffix) {
         true
     );
     expose_function(
-        $api_suffix . "get_clones", $class_suffix . "get_clones",
-        array("id" => array("type" => "int", "required" => true)),
-        "Get all Item IDs which were cloned from the one given", "GET", false, true
+        $api_suffix . "get_clones", $class_suffix . "get_clones", array(
+            "id" => array("type" => "int", "required" => true),
+            "recursive" => array("type" => "bool", "required" => false)
+        ), "Get all Item IDs which were cloned from the one given", "GET", false, true
+    );
+    expose_function(
+        $api_suffix . "get_clone_tree", $class_suffix . "get_clone_tree", array(
+            "id" => array("type" => "int", "required" => true)
+        ), "Get the complete clone tree from any given item contained", "GET", false, true
     );
     expose_function(
         $api_suffix . "delete_by_id", $class_suffix . "delete_by_id",

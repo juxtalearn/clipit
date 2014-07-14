@@ -110,13 +110,13 @@ class ClipitResource extends UBItem {
         if(!empty($task)) {
             return "task";
         }
-        $activity = static::get_activity($id);
-        if(!empty($activity)) {
-            return "activity";
-        }
         $group = static::get_group($id);
         if(!empty($group)) {
             return "group";
+        }
+        $activity = static::get_activity($id);
+        if(!empty($activity)) {
+            return "activity";
         }
         return null;
     }
