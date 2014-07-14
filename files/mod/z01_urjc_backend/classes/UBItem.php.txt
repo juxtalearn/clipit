@@ -352,14 +352,18 @@ class UBItem {
                     "limit" => $limit
                 )
             );
-            $temp_array = array();
-            foreach($elgg_object_array as $elgg_object) {
-                $temp_array[(int)$elgg_object->guid] = new static((int)$elgg_object->guid);
-            }
-            if(!empty($temp_array)) {
-                $object_array[(int)$owner_id] = $temp_array;
-                usort($object_array[(int)$owner_id], 'static::sort_by_date');
-            } else {
+            if(!empty($elgg_object_array)) {
+                $temp_array = array();
+                foreach($elgg_object_array as $elgg_object) {
+                    $temp_array[(int)$elgg_object->guid] = new static((int)$elgg_object->guid);
+                }
+                if(!empty($temp_array)) {
+                    $object_array[(int)$owner_id] = $temp_array;
+                    usort($object_array[(int)$owner_id], 'static::sort_by_date');
+                } else {
+                    $object_array[(int)$owner_id] = null;
+                }
+            } else{
                 $object_array[(int)$owner_id] = null;
             }
         }

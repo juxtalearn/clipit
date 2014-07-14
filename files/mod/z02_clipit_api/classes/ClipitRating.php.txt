@@ -114,9 +114,11 @@ class ClipitRating extends UBItem {
     static function get_from_user_for_target($user_id, $target_id) {
         $user_ratings = static::get_by_owner(array($user_id));
         $user_ratings = $user_ratings[$user_id];
-        foreach($user_ratings as $rating) {
-            if($rating->target == (int)$target_id) {
-                return $rating;
+        if(!empty($user_ratings)) {
+            foreach($user_ratings as $rating) {
+                if($rating->target == (int)$target_id) {
+                    return $rating;
+                }
             }
         }
         return null;
