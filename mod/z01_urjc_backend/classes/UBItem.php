@@ -352,14 +352,18 @@ class UBItem {
                     "limit" => $limit
                 )
             );
-            $temp_array = array();
-            foreach($elgg_object_array as $elgg_object) {
-                $temp_array[(int)$elgg_object->guid] = new static((int)$elgg_object->guid);
-            }
-            if(!empty($temp_array)) {
-                $object_array[(int)$owner_id] = $temp_array;
-                usort($object_array[(int)$owner_id], 'static::sort_by_date');
-            } else {
+            if(!empty($elgg_object_array)) {
+                $temp_array = array();
+                foreach($elgg_object_array as $elgg_object) {
+                    $temp_array[(int)$elgg_object->guid] = new static((int)$elgg_object->guid);
+                }
+                if(!empty($temp_array)) {
+                    $object_array[(int)$owner_id] = $temp_array;
+                    usort($object_array[(int)$owner_id], 'static::sort_by_date');
+                } else {
+                    $object_array[(int)$owner_id] = null;
+                }
+            } else{
                 $object_array[(int)$owner_id] = null;
             }
         }
@@ -536,23 +540,22 @@ class UBItem {
         foreach(array_keys($properties) as $prop_name) {
             $active_sheet->setCellValueByColumnAndRow($col ++, $row, $prop_name);
         }
-//        // Load ClipIt Users
-//        if(!empty($id_array)) {
-//            $user_array = static::get_by_id($id_array);
-//        } else {
-//            $user_array = static::get_all();
-//        }
-//        // Write Users to spreadsheet
-//        $row = 2;
-//        $col = 0;
-//        foreach($user_array as $user) {
-//            $values = array($user->name, $user->login, "<password>", $user->email, $user->role);
-//            foreach($values as $value) {
-//                $active_sheet->setCellValueByColumnAndRow($col ++, $row, $value);
-//            }
-//            $row ++;
-//            $col = 0;
-//        }
+        // Load Items
+        if(!empty($id_array)) {
+            $item_array = static::get_by_id($id_array);
+        } else {
+            $item_array = static::get_all();
+        }
+        // Write Items to spreadsheet
+        $row = 2;
+        $col = 0;
+        foreach($item_array as $item) {
+            foreach(array_keys($properties) as $prop_name){
+                $active_sheet->setCellValueByColumnAndRow($col++, $row, $item->$prop_name);
+            }
+            $row++;
+            $col = 0;
+        }
         switch($format) {
             case "excel":
                 $objWriter = PHPExcel_IOFactory::createWriter($php_excel, 'Excel2007');
