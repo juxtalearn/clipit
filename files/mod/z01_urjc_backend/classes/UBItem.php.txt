@@ -240,10 +240,11 @@ class UBItem {
      * Get an ID array of all cloned Items from a specified one.
      *
      * @param int $id Item from which to return clones
+     * @param bool $recursive Whether to look for clones recursively
      *
      * @return int[] Array of Item IDs
      */
-    static function get_clones($id) {
+    static function get_clones($id, $recursive = false) {
         $clone_array = array();
         $item_array = elgg_get_entities_from_metadata(
             array(
@@ -253,6 +254,9 @@ class UBItem {
         );
         foreach($item_array as $item) {
             $clone_array[] = $item->guid;
+            if($recursive) {
+                $clone_array = array_merge($clone_array, static::get_clones($item->guid, true));
+            }
         }
         return $clone_array;
     }
