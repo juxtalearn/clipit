@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-70271611"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1567047709"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-70271611" class="accordion-body collapse in">
+            <div id="namespace-1567047709" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -307,6 +307,7 @@
                                                                     <a href="../classes/UBItem.html#method_create" class="">create()</a><br />
                                                                     <a href="../classes/UBItem.html#method_create_clone" class="">create_clone()</a><br />
                                                                     <a href="../classes/UBItem.html#method_get_clones" class="">get_clones()</a><br />
+                                                                    <a href="../classes/UBItem.html#method_get_clone_tree" class="">get_clone_tree()</a><br />
                                                                     <a href="../classes/UBItem.html#method_delete_by_id" class="">delete_by_id()</a><br />
                                                                     <a href="../classes/UBItem.html#method_delete_all" class="">delete_all()</a><br />
                                                                     <a href="../classes/UBItem.html#method_get_all" class="">get_all()</a><br />
@@ -1119,6 +1120,56 @@
                                     <h4>Returns</h4>
                     int[]
                                             &mdash; <p>Array of Item IDs</p>
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/UBItem.html"><div class="path-wrapper">\UBItem</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_get_clone_tree" name="method_get_clone_tree" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">get_clone_tree()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">get_clone_tree(int <span class="argument">$id</span>) : int[]</pre>
+                <p><em>Get an array with the full clone list of the clone tree an item belongs to</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>int</td>
+                                <td>$id </td>
+                                <td><p>ID of Item</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\InvalidParameterException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    int[]
+                                            &mdash; <p>Array of item IDs</p>
                                                 </article>
         </div>
         <aside class="span4 detailsbar">
@@ -2108,7 +2159,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on July 14th, 2014 at 13:01.
+                    on July 14th, 2014 at 14:01.
                 </section>
             </section>
         </section>
