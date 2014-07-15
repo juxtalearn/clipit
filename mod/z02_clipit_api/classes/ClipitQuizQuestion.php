@@ -28,6 +28,10 @@ class ClipitQuizQuestion extends UBItem {
      */
     public $option_array = array();
     /**
+     * @var array Array for validation of the options
+     */
+    public $validation_array = array();
+    /**
      * @var string Type of Question: single choice, multiple choice, select 2...
      */
     public $option_type = "";
@@ -58,6 +62,7 @@ class ClipitQuizQuestion extends UBItem {
         $this->tag_array = static::get_tags($this->id);
         $this->quiz_result_array = static::get_quiz_results($this->id);
         $this->option_array = (array)$elgg_entity->get("option_array");
+        $this->validation_array = (array)$elgg_entity->get("validation_array");
         $this->option_type = (string)$elgg_entity->get("option_type");
         $this->video = (int)$elgg_entity->get("video");
         $this->difficulty = (int)$elgg_entity->get("difficulty");
@@ -71,6 +76,7 @@ class ClipitQuizQuestion extends UBItem {
     protected function save_to_elgg($elgg_entity) {
         parent::save_to_elgg($elgg_entity);
         $elgg_entity->set("option_array", (array)$this->option_array);
+        $elgg_entity->set("validation_array", (array)$this->validation_array);
         $elgg_entity->set("option_type", (string)$this->option_type);
         $elgg_entity->set("video", (int)$this->video);
         $elgg_entity->set("difficulty", (int)$this->difficulty);

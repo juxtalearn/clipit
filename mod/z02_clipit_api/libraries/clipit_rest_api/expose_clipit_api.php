@@ -32,7 +32,6 @@ function expose_clipit_api() {
     expose_quiz_result_functions();
     expose_rating_functions();
     expose_site_functions();
-    expose_sta_functions();
     expose_storyboard_functions();
     expose_tag_functions();
     expose_tag_rating_functions();
