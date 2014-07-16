@@ -288,7 +288,9 @@ class UBItem {
             $prop_value_array = static::get_properties($top_parent, array("cloned_from"));
             $new_parent = $prop_value_array["cloned_from"];
         }
-        return static::get_clones($top_parent, true);
+        $clone_tree = static::get_clones($top_parent, true);
+        array_push($clone_tree, $top_parent);
+        return $clone_tree;
     }
 
     /**
