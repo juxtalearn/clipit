@@ -238,12 +238,12 @@ class UBItem {
         $clone_array = array();
         $item_clones = UBCollection::get_items($id, static::REL_PARENT_CLONE);
         if($recursive) {
-            $clone_array[] = $id;
             foreach($item_clones as $clone) {
+                array_push($clone_array, $clone);
                 $clone_array = array_merge($clone_array, static::get_clones($clone, true));
             }
         }else{
-            $clone_array = array_merge(array($id), $item_clones);
+            $clone_array = $item_clones;
         }
         return $clone_array;
     }
@@ -288,7 +288,9 @@ class UBItem {
             $prop_value_array = static::get_properties($top_parent, array("cloned_from"));
             $new_parent = $prop_value_array["cloned_from"];
         }
-        return static::get_clones($top_parent, true);
+        $clone_tree = static::get_clones($top_parent, true);
+        array_push($clone_tree, $top_parent);
+        return $clone_tree;
     }
 
     /**
