@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1361826178"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1599932921"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1361826178" class="accordion-body collapse in">
+            <div id="namespace-1599932921" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -310,6 +310,7 @@ Last update:     $Date$</em></p>
                                                                     <a href="../classes/UBItem.html#method_create" class="">create()</a><br />
                                                                     <a href="../classes/UBItem.html#method_create_clone" class="">create_clone()</a><br />
                                                                     <a href="../classes/UBItem.html#method_get_clones" class="">get_clones()</a><br />
+                                                                    <a href="../classes/UBItem.html#method_get_cloned_from" class="">get_cloned_from()</a><br />
                                                                     <a href="../classes/UBItem.html#method_get_clone_tree" class="">get_clone_tree()</a><br />
                                                                     <a href="../classes/UBItem.html#method_delete_by_id" class="">delete_by_id()</a><br />
                                                                     <a href="../classes/UBItem.html#method_delete_all" class="">delete_all()</a><br />
@@ -325,7 +326,6 @@ Last update:     $Date$</em></p>
                                                                     <a href="../classes/UBItem.html#method_sort_numbers" class="">sort_numbers()</a><br />
                                                                     <a href="../classes/UBItem.html#method_sort_numbers_inv" class="">sort_numbers_inv()</a><br />
                                                                     <a href="../classes/UBItem.html#method_export_data" class="">export_data()</a><br />
-                                                                    <a href="../classes/UBItem.html#method_import_data" class="">import_data()</a><br />
                                                                     <a href="../classes/ClipitPerformanceRating.html#method_get_by_item" class="">get_by_item()</a><br />
                                                                     <a href="../classes/ClipitPerformanceRating.html#method_get_average_target_rating" class="">get_average_target_rating()</a><br />
                                                                     <a href="../classes/ClipitPerformanceRating.html#method_get_average_user_rating_for_target" class="">get_average_user_rating_for_target()</a><br />
@@ -346,6 +346,7 @@ Last update:     $Date$</em></p>
                             <section class="span4">
                                                                     <a href="../classes/UBItem.html#constant_TYPE" class="">TYPE</a><br />
                                                                     <a href="../classes/ClipitPerformanceRating.html#constant_SUBTYPE" class="">SUBTYPE</a><br />
+                                                                    <a href="../classes/UBItem.html#constant_REL_PARENT_CLONE" class="">REL_PARENT_CLONE</a><br />
                                                             </section>
                         </section>
                         <section class="row-fluid protected">
@@ -353,7 +354,6 @@ Last update:     $Date$</em></p>
                                                                     <a href="../classes/UBItem.html#method_save" class="">save()</a><br />
                                                                     <a href="../classes/ClipitPerformanceRating.html#method_load_from_elgg" class="">load_from_elgg()</a><br />
                                                                     <a href="../classes/ClipitPerformanceRating.html#method_save_to_elgg" class="">save_to_elgg()</a><br />
-                                                                    <a href="../classes/UBItem.html#method_delete" class="">delete()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No protected properties found</em>
@@ -364,7 +364,7 @@ Last update:     $Date$</em></p>
                         </section>
                         <section class="row-fluid private">
                             <section class="span4">
-                                                                    <a href="../classes/UBItem.html#method_parse_excel_row" class="">parse_excel_row()</a><br />
+                                                                    <em>No private methods found</em>
                                                             </section>
                             <section class="span4">
                                                                     <em>No private properties found</em>
@@ -501,6 +501,43 @@ Last update:     $Date$</em></p>
                         </th>
                         <td>
                                                             <p>string Elgg entity SUBTYPE for this class</p>
+                                                    </td>
+                    </tr>
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_REL_PARENT_CLONE" name="constant_REL_PARENT_CLONE" class="anchor"></a>
+            <article id="constant_REL_PARENT_CLONE" class="constant">
+                <h3 class="">REL_PARENT_CLONE</h3>
+                <pre class="signature">REL_PARENT_CLONE</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/UBItem.html"><div class="path-wrapper">\UBItem</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            const
+                        </th>
+                        <td>
+                                                            <p>string Clone-Parent relationship name</p>
                                                     </td>
                     </tr>
                                     <tr>
@@ -848,7 +885,7 @@ Last update:     $Date$</em></p>
             <article class="method">
                 <h3 class="public ">__construct()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__construct(int <span class="argument">$id</span>)</pre>
+                <pre class="signature" style="margin-right: 54px;">__construct(int <span class="argument">$id</span>, \ElggObject <span class="argument">$elgg_object</span>)</pre>
                 <p><em>Constructor</em></p>
                 
 
@@ -858,6 +895,11 @@ Last update:     $Date$</em></p>
                                 <td>int</td>
                                 <td>$id </td>
                                 <td><p>If !null, load instance.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\ElggObject</td>
+                                <td>$elgg_object </td>
+                                <td><p>Object to load instance from, if passed</p></td>
                             </tr>
                                             </table>
                 
@@ -1177,6 +1219,56 @@ Last update:     $Date$</em></p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
+            <a id="method_get_cloned_from" name="method_get_cloned_from" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">get_cloned_from()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">get_cloned_from(int <span class="argument">$id</span>, bool <span class="argument">$recursive</span>) : int[]</pre>
+                <p><em>Get the parent Item ID for an Item.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>int</td>
+                                <td>$id </td>
+                                <td><p>Item from which to return parent</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>bool</td>
+                                <td>$recursive </td>
+                                <td><p>Whether to look for parent recursively</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    int[]
+                                            &mdash; <p>Array of Item IDs</p>
+                                                </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/UBItem.html"><div class="path-wrapper">\UBItem</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            todo
+                        </th>
+                        <td>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
             <a id="method_get_clone_tree" name="method_get_clone_tree" class="anchor"></a>
             <article class="method">
                 <h3 class="public ">get_clone_tree()</h3>
@@ -1313,21 +1405,21 @@ Last update:     $Date$</em></p>
             <article class="method">
                 <h3 class="public ">get_all()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">get_all(array <span class="argument">$prop_array</span>, int <span class="argument">$limit</span>) : static[]|int[]</pre>
+                <pre class="signature" style="margin-right: 54px;">get_all(int <span class="argument">$limit</span>, array <span class="argument">$prop_array</span>) : static[]|int[]</pre>
                 <p><em>Get all Object instances of this TYPE and SUBTYPE from the system, optionally only a specified property.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>array</td>
-                                <td>$prop_array </td>
-                                <td><p>Properties to return (with key = ID). Default = [all] (object instance)</p></td>
-                            </tr>
-                                                    <tr>
                                 <td>int</td>
                                 <td>$limit </td>
                                 <td><p>Number of results to show, default= 0 [no limit] (optional)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$prop_array </td>
+                                <td><p>Properties to return (with key = ID). Default = [all] (object instance)</p></td>
                             </tr>
                                             </table>
                 
@@ -1906,51 +1998,6 @@ Last update:     $Date$</em></p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_import_data" name="method_import_data" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">import_data()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">import_data(string <span class="argument">$file_path</span>) : array|null</pre>
-                <p><em>Add Users from an Excel file, and return an array of User Ids from those created or selected from the file.</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$file_path </td>
-                                <td><p>Local file path</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    array|null
-                                            &mdash; <p>Array of User IDs, or null if error.</p>
-                                                </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
-                                                            <dl>
-                                                    <dt>Inherited from</dt>
-                    <dd><a href="../classes/UBItem.html"><div class="path-wrapper">\UBItem</div></a></dd>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            todo
-                        </th>
-                        <td>
-                                                    </td>
-                    </tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
             <a id="method_get_by_item" name="method_get_by_item" class="anchor"></a>
             <article class="method">
                 <h3 class="public ">get_by_item()</h3>
@@ -2233,87 +2280,7 @@ Last update:     $Date$</em></p>
         </aside>
     </div>
 
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_delete" name="method_delete" class="anchor"></a>
-            <article class="method">
-                <h3 class="protected ">delete()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">delete() : bool</pre>
-                <p><em>Deletes $this instance from the system.</em></p>
-                
-
-                
-                
-                                    <h4>Returns</h4>
-                    bool
-                                            &mdash; <p>True if success, false if error.</p>
-                                                </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                    <dt>Inherited from</dt>
-                    <dd><a href="../classes/UBItem.html"><div class="path-wrapper">\UBItem</div></a></dd>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            todo
-                        </th>
-                        <td>
-                                                    </td>
-                    </tr>
-                            </table>
-        </aside>
-    </div>
-
-                                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_parse_excel_row" name="method_parse_excel_row" class="anchor"></a>
-            <article class="method">
-                <h3 class="private ">parse_excel_row()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">parse_excel_row(\PHPExcel_Worksheet_Row <span class="argument">$row_iterator</span>) : int|false</pre>
-                <p><em>Parse a single role from an Excel file, containing one user, and add it to ClipIt if new</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>\PHPExcel_Worksheet_Row</td>
-                                <td>$row_iterator </td>
-                                <td></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    int|false
-                                            &mdash; <p>ID of User contained in row, or false in case of error.</p>
-                                                </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                    <dt>Inherited from</dt>
-                    <dd><a href="../classes/UBItem.html"><div class="path-wrapper">\UBItem</div></a></dd>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            todo
-                        </th>
-                        <td>
-                                                    </td>
-                    </tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    </div>
+                                                    </div>
     </section>
 
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
@@ -2362,7 +2329,7 @@ Last update:     $Date$</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on July 16th, 2014 at 14:01.
+                    on July 16th, 2014 at 17:01.
                 </section>
             </section>
         </section>

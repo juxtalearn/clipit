@@ -62,26 +62,6 @@ class ClipitGroup extends UBItem {
     }
 
     /**
-     * Deletes $this instance from the system.
-     * @return bool True if success, false if error.
-     */
-    protected function delete() {
-        $storyboard_array = (array)static::get_storyboards($this->id);
-        if(!empty($storyboard_array)) {
-            ClipitStoryboard::delete_by_id($storyboard_array);
-        }
-        $file_array = (array)static::get_files($this->id);
-        if(!empty($file_array)) {
-            ClipitFile::delete_by_id($file_array);
-        }
-        $video_array = (array)static::get_videos($this->id);
-        if(!empty($video_array)) {
-            ClipitVideo::delete_by_id($video_array);
-        }
-        parent::delete();
-    }
-
-    /**
      * Returns the Group where a User is taking part in an Activity
      *
      * @param int $user_id     User ID
