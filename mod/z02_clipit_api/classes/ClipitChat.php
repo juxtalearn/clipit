@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
@@ -11,16 +12,13 @@
  * @package         ClipIt
  * @subpackage      clipit_api
  */
-
-class ClipitChat extends UBMessage{
+class ClipitChat extends UBMessage {
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitChat";
-
     const REL_MESSAGE_DESTINATION = "chat-destination";
     const REL_MESSAGE_FILE = "chat-file";
-
     public $archived_array = array();
 
     /**
@@ -28,7 +26,7 @@ class ClipitChat extends UBMessage{
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_entity){
+    protected function load_from_elgg($elgg_entity) {
         parent::load_from_elgg($elgg_entity);
         $this->archived_array = (array)$elgg_entity->get("archived_array");
     }
@@ -38,25 +36,25 @@ class ClipitChat extends UBMessage{
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function save_to_elgg($elgg_entity){
+    protected function save_to_elgg($elgg_entity) {
         parent::save_to_elgg($elgg_entity);
         $elgg_entity->set("archived_array", (array)$this->archived_array);
     }
 
-    static function get_inbox($user_id){
+    static function get_inbox($user_id) {
         $inbox_array = array();
         $incoming_messages = static::get_by_destination(array($user_id));
         $incoming_messages = $incoming_messages[$user_id];
-        if($incoming_messages !== null){
+        if($incoming_messages !== null) {
             $sender_array = array();
-            foreach($incoming_messages as $message){
+            foreach($incoming_messages as $message) {
                 $archived_status = static::get_archived_status($message->id, array($user_id));
                 $archived_status = (bool)array_pop($archived_status);
-                if($archived_status === false){
-                    if(array_search($message->owner_id, $sender_array) === false){
+                if($archived_status === false) {
+                    if(array_search($message->owner_id, $sender_array) === false) {
                         $sender_array[] = $message->owner_id;
                         $inbox_array[$message->owner_id] = array($message);
-                    } else{
+                    } else {
                         array_push($inbox_array[$message->owner_id], $message);
                     }
                 }
@@ -65,99 +63,99 @@ class ClipitChat extends UBMessage{
         return $inbox_array;
     }
 
-    static function get_inbox_count($user_id){
+    static function get_inbox_count($user_id) {
         $count = 0;
         $inbox_array = static::get_inbox($user_id);
-        foreach($inbox_array as $owner_messages){
+        foreach($inbox_array as $owner_messages) {
             $count += count($owner_messages);
         }
         return $count;
     }
 
-    static function get_inbox_unread($user_id){
+    static function get_inbox_unread($user_id) {
         $count = 0;
         $inbox_array = static::get_inbox($user_id);
-        foreach($inbox_array as $owner_messages){
-            foreach($owner_messages as $message){
+        foreach($inbox_array as $owner_messages) {
+            foreach($owner_messages as $message) {
                 $read_status = static::get_read_status($message->id, array($user_id));
                 $read_status = (bool)array_pop($read_status);
-                if(!$read_status){
-                    $count++;
+                if(!$read_status) {
+                    $count ++;
                 }
             }
         }
         return $count;
     }
 
-    static function get_sent($user_id){
+    static function get_sent($user_id) {
         $sent_messages = static::get_by_sender(array($user_id));
         $sent_messages = array_pop($sent_messages);
         $sent_array = array();
-        foreach($sent_messages as $message){
+        foreach($sent_messages as $message) {
             $archived_status = static::get_archived_status($message->id, array($user_id));
             $archived_status = (bool)array_pop($archived_status);
-            if($archived_status === false){
+            if($archived_status === false) {
                 $sent_array[] = $message;
             }
         }
         return $sent_array;
     }
 
-    static function get_sent_count($user_id){
+    static function get_sent_count($user_id) {
         $count = 0;
         $sent_messages = static::get_by_sender(array($user_id));
         $sent_messages = array_pop($sent_messages);
-        foreach($sent_messages as $message){
+        foreach($sent_messages as $message) {
             $archived_status = static::get_archived_status($message->id, array($user_id));
             $archived_status = (bool)array_pop($archived_status);
-            if($archived_status === false){
-                $count++;
+            if($archived_status === false) {
+                $count ++;
             }
         }
         return $count;
     }
 
-    static function get_archived($user_id){
+    static function get_archived($user_id) {
         $incoming_messages = static::get_by_destination(array($user_id));
         $incoming_messages = array_pop($incoming_messages);
         $sent_messages = static::get_by_sender(array($user_id));
         $sent_messages = array_pop($sent_messages);
         $archived_array = array();
-        foreach($incoming_messages as $message){
+        foreach($incoming_messages as $message) {
             $archived_status = static::get_archived_status($message->id, array($user_id));
             $archived_status = (bool)array_pop($archived_status);
-            if($archived_status === true){
+            if($archived_status === true) {
                 array_push($archived_array, $message);
             }
         }
-        foreach($sent_messages as $message){
+        foreach($sent_messages as $message) {
             $archived_status = static::get_archived_status($message->id, array($user_id));
             $archived_status = (bool)array_pop($archived_status);
-            if($archived_status === true){
+            if($archived_status === true) {
                 array_push($archived_array, $message);
             }
         }
         return $archived_array;
     }
 
-    static function get_archived_count($user_id){
+    static function get_archived_count($user_id) {
         $count = 0;
         $archived_array = static::get_archived($user_id);
-        foreach($archived_array as $owner_messages){
+        foreach($archived_array as $owner_messages) {
             $count += count($owner_messages);
         }
         return $count;
     }
 
-    static function get_conversation($user1_id, $user2_id){
+    static function get_conversation($user1_id, $user2_id) {
         // user1 --> user2
         $sender_messages = static::get_by_sender(array($user1_id));
         $sender_messages = $sender_messages[$user1_id];
         $conversation = array();
-        foreach($sender_messages as $message){
-            if($message->destination == (int)$user2_id){
+        foreach($sender_messages as $message) {
+            if($message->destination == (int)$user2_id) {
                 $archived = static::get_archived_status($message->id, array($user1_id));
-                if(!$archived[$user1_id]){
+                if(!$archived[$user1_id]) {
                     $conversation[$message->id] = $message;
                 }
             }
@@ -165,10 +163,10 @@ class ClipitChat extends UBMessage{
         // user2 --> user1
         $sender_messages = static::get_by_sender(array($user2_id));
         $sender_messages = $sender_messages[$user2_id];
-        foreach($sender_messages as $message){
-            if($message->destination == (int)$user1_id){
+        foreach($sender_messages as $message) {
+            if($message->destination == (int)$user1_id) {
                 $archived = static::get_archived_status($message->id, array($user1_id));
-                if(!$archived[$user1_id]){
+                if(!$archived[$user1_id]) {
                     $conversation[$message->id] = $message;
                 }
             }
@@ -177,71 +175,73 @@ class ClipitChat extends UBMessage{
         return $conversation;
     }
 
-    static function get_conversation_count($user1_id, $user2_id){
+    static function get_conversation_count($user1_id, $user2_id) {
         $count = 0;
         // user1 --> user2
         $sender_messages = static::get_by_sender(array($user1_id));
         $sender_messages = $sender_messages[$user1_id];
-        foreach($sender_messages as $message){
-            if($message->destination == (int)$user2_id){
+        foreach($sender_messages as $message) {
+            if($message->destination == (int)$user2_id) {
                 $archived = static::get_archived_status($message->id, array($user1_id));
-                if(!$archived[$user1_id]){
-                    $count++;
+                if(!$archived[$user1_id]) {
+                    $count ++;
                 }
             }
         }
         // user2 --> user1
         $sender_messages = static::get_by_sender(array($user2_id));
         $sender_messages = $sender_messages[$user2_id];
-        foreach($sender_messages as $message){
-            if($message->destination == (int)$user1_id){
+        foreach($sender_messages as $message) {
+            if($message->destination == (int)$user1_id) {
                 $archived = static::get_archived_status($message->id, array($user1_id));
-                if(!$archived[$user1_id]){
-                    $count++;
+                if(!$archived[$user1_id]) {
+                    $count ++;
                 }
             }
         }
         return $count;
     }
-    static function get_conversation_unread($user1_id, $user2_id){
+
+    static function get_conversation_unread($user1_id, $user2_id) {
         $count = 0;
         // user1 --> user2
         $sender_messages = static::get_by_sender(array($user1_id));
         $sender_messages = $sender_messages[$user1_id];
-        foreach($sender_messages as $message){
-            if($message->destination == (int)$user2_id){
+        foreach($sender_messages as $message) {
+            if($message->destination == (int)$user2_id) {
                 $archived = static::get_archived_status($message->id, array($user1_id));
                 $read = static::get_read_status($message->id, array($user1_id));
-                if(!$archived[$user1_id] && !$read[$user1_id]){
-                    $count++;
+                if(!$archived[$user1_id] && !$read[$user1_id]) {
+                    $count ++;
                 }
             }
         }
         // user2 --> user1
         $sender_messages = static::get_by_sender(array($user2_id));
         $sender_messages = $sender_messages[$user2_id];
-        foreach($sender_messages as $message){
-            if($message->destination == (int)$user1_id){
+        foreach($sender_messages as $message) {
+            if($message->destination == (int)$user1_id) {
                 $archived = static::get_archived_status($message->id, array($user1_id));
                 $read = static::get_read_status($message->id, array($user1_id));
-                if(!$archived[$user1_id] && !$read[$user1_id]){
-                    $count++;
+                if(!$archived[$user1_id] && !$read[$user1_id]) {
+                    $count ++;
                 }
             }
         }
         return $count;
     }
-    static function get_archived_status($id, $user_array = null){
+
+    static function get_archived_status($id, $user_array = null) {
         $archived_array = static::get_properties($id, array("archived_array"));
         $archived_array = array_pop($archived_array);
-        if(!$user_array){
+        if(!$user_array) {
             return $archived_array;
-        } else{
+        } else {
             $return_array = array();
-            foreach($user_array as $user_id){
-                if(in_array($user_id, $archived_array)){
+            foreach($user_array as $user_id) {
+                if(in_array($user_id, $archived_array)) {
                     $return_array[$user_id] = true;
-                } else{
+                } else {
                     $return_array[$user_id] = false;
                 }
             }
@@ -249,17 +249,17 @@ class ClipitChat extends UBMessage{
         }
     }
 
-    static function set_archived_status($id, $archived_value, $user_array){
+    static function set_archived_status($id, $archived_value, $user_array) {
         $archived_array = static::get_properties($id, array("archived_array"));
         $archived_array = array_pop($archived_array);
-        foreach($user_array as $user_id){
-            if($archived_value == true){
-                if(!in_array($user_id, $archived_array)){
+        foreach($user_array as $user_id) {
+            if($archived_value == true) {
+                if(!in_array($user_id, $archived_array)) {
                     array_push($archived_array, $user_id);
                 }
-            } else if($archived_value == false){
-                $index = array_search((int) $user_id, $archived_array);
-                if(isset($index) && $index !== false){
+            } else if($archived_value == false) {
+                $index = array_search((int)$user_id, $archived_array);
+                if(isset($index) && $index !== false) {
                     array_splice($archived_array, $index, 1);
                 }
             }

@@ -14,21 +14,23 @@
 
 /**
  * Class ClipitQuizQuestion
- *
+
  */
-class ClipitQuizQuestion extends UBItem{
+class ClipitQuizQuestion extends UBItem {
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitQuizQuestion";
     const REL_QUIZQUESTION_TAG = "quiz_question-tag";
     const REL_QUIZQUESTION_QUIZRESULT = "quiz_question-quiz_result";
-
     /**
      * @var array Array of options to chose from as an answer to the question
      */
     public $option_array = array();
-
+    /**
+     * @var array Array for validation of the options
+     */
+    public $validation_array = array();
     /**
      * @var string Type of Question: single choice, multiple choice, select 2...
      */
@@ -50,17 +52,17 @@ class ClipitQuizQuestion extends UBItem{
      */
     public $difficulty = 0;
 
-
     /**
      * Loads object parameters stored in Elgg
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_entity){
+    protected function load_from_elgg($elgg_entity) {
         parent::load_from_elgg($elgg_entity);
         $this->tag_array = static::get_tags($this->id);
         $this->quiz_result_array = static::get_quiz_results($this->id);
         $this->option_array = (array)$elgg_entity->get("option_array");
+        $this->validation_array = (array)$elgg_entity->get("validation_array");
         $this->option_type = (string)$elgg_entity->get("option_type");
         $this->video = (int)$elgg_entity->get("video");
         $this->difficulty = (int)$elgg_entity->get("difficulty");
@@ -71,9 +73,10 @@ class ClipitQuizQuestion extends UBItem{
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function save_to_elgg($elgg_entity){
+    protected function save_to_elgg($elgg_entity) {
         parent::save_to_elgg($elgg_entity);
         $elgg_entity->set("option_array", (array)$this->option_array);
+        $elgg_entity->set("validation_array", (array)$this->validation_array);
         $elgg_entity->set("option_type", (string)$this->option_type);
         $elgg_entity->set("video", (int)$this->video);
         $elgg_entity->set("difficulty", (int)$this->difficulty);
@@ -81,10 +84,9 @@ class ClipitQuizQuestion extends UBItem{
 
     /**
      * Saves this instance into the system.
-     *
      * @return bool|int Returns id of saved instance, or false if error.
      */
-    protected function save(){
+    protected function save() {
         parent::save();
         static::set_tags($this->id, $this->tag_array);
         static::set_quiz_results($this->id, $this->quiz_result_array);
@@ -93,47 +95,49 @@ class ClipitQuizQuestion extends UBItem{
 
     /**
      * Deletes $this instance from the system.
-     *
      * @return bool True if success, false if error.
      */
-    protected function delete(){
+    protected function delete() {
         $rel_array = get_entity_relationships((int)$this->id);
         $result_array = array();
-        foreach($rel_array as $rel){
-            if($rel->relationship == static::REL_QUIZQUESTION_QUIZRESULT){
+        foreach($rel_array as $rel) {
+            if($rel->relationship == static::REL_QUIZQUESTION_QUIZRESULT) {
                 $result_array[] = $rel->guid_two;
             }
         }
-        if(!empty($result_array)){
+        if(!empty($result_array)) {
             ClipitQuizResult::delete_by_id($result_array);
         }
         parent::delete();
     }
 
     /**
-     * @param int $id
+     * @param int   $id
      * @param array $result_array
+     *
      * @return bool
      */
-    static function add_quiz_results($id, $result_array){
+    static function add_quiz_results($id, $result_array) {
         return UBCollection::add_items($id, $result_array, static::REL_QUIZQUESTION_QUIZRESULT, true);
     }
 
     /**
-     * @param int $id
+     * @param int   $id
      * @param array $result_array
+     *
      * @return bool
      */
-    static function set_quiz_results($id, $result_array){
+    static function set_quiz_results($id, $result_array) {
         return UBCollection::set_items($id, $result_array, static::REL_QUIZQUESTION_QUIZRESULT, true);
     }
 
     /**
      * @param $id
      * @param $result_array
+     *
      * @return bool
      */
-    static function remove_quiz_results($id, $result_array){
+    static function remove_quiz_results($id, $result_array) {
         return UBCollection::remove_items($id, $result_array, static::REL_QUIZQUESTION_QUIZRESULT);
     }
 
@@ -144,44 +148,43 @@ class ClipitQuizQuestion extends UBItem{
      *
      * @return array|bool Array of Quiz Result IDs, or false if error
      */
-    static function get_quiz_results($id){
+    static function get_quiz_results($id) {
         return UBCollection::get_items($id, static::REL_QUIZQUESTION_QUIZRESULT);
     }
-
 
     /**
      * Add a list of Stumbling Block Tags to a Quiz Question.
      *
-     * @param int   $id Id of the Quiz Question
+     * @param int   $id        Id of the Quiz Question
      * @param array $tag_array Array of Tags to add to the Quiz Question
      *
      * @return bool True if success, false if error
      */
-    static function add_tags($id, $tag_array){
+    static function add_tags($id, $tag_array) {
         return UBCollection::add_items($id, $tag_array, static::REL_QUIZQUESTION_TAG);
     }
 
     /**
      * Set a list of Stumbling Block Tags to a Quiz Question.
      *
-     * @param int   $id Id of the Quiz Question
+     * @param int   $id        Id of the Quiz Question
      * @param array $tag_array Array of Tags to set to the Quiz Question
      *
      * @return bool True if success, false if error
      */
-    static function set_tags($id, $tag_array){
+    static function set_tags($id, $tag_array) {
         return UBCollection::set_items($id, $tag_array, static::REL_QUIZQUESTION_TAG);
     }
 
     /**
      * Remove a list of Stumbling Block Tags from a Quiz Question.
      *
-     * @param int   $id Id of the Quiz Question
+     * @param int   $id        Id of the Quiz Question
      * @param array $tag_array Array of Tags to remove from the Quiz Question
      *
      * @return bool True if success, false if error
      */
-    static function remove_tags($id, $tag_array){
+    static function remove_tags($id, $tag_array) {
         return UBCollection::remove_items($id, $tag_array, static::REL_QUIZQUESTION_TAG);
     }
 
@@ -192,7 +195,7 @@ class ClipitQuizQuestion extends UBItem{
      *
      * @return array|bool Returns an array of Tag IDs, or false if error
      */
-    static function get_tags($id){
+    static function get_tags($id) {
         return UBCollection::get_items($id, static::REL_QUIZQUESTION_TAG);
     }
 }

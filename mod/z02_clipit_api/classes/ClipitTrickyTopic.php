@@ -14,27 +14,24 @@
 
 /**
  * Class ClipitTrickyTopic
- *
+
  */
-class ClipitTrickyTopic extends UBItem{
+class ClipitTrickyTopic extends UBItem {
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitTrickyTopic";
-
     const REL_TRICKYTOPIC_TAG = "trickytopic-tag";
-
     public $subject = "";
     public $country = "";
     public $tag_array = array();
-
 
     /**
      * Loads object parameters stored in Elgg
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_entity){
+    protected function load_from_elgg($elgg_entity) {
         parent::load_from_elgg($elgg_entity);
         $this->subject = (string)$elgg_entity->get("subject");
         $this->country = (string)$elgg_entity->get("country");
@@ -46,13 +43,13 @@ class ClipitTrickyTopic extends UBItem{
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function save_to_elgg($elgg_entity){
+    protected function save_to_elgg($elgg_entity) {
         parent::save_to_elgg($elgg_entity);
         $elgg_entity->set("subject", (string)$this->subject);
         $elgg_entity->set("country", (string)$this->country);
     }
 
-    protected function save(){
+    protected function save() {
         parent::save();
         static::set_tags((int)$this->id, (array)$this->tag_array);
         return (int)$this->id;
@@ -61,36 +58,36 @@ class ClipitTrickyTopic extends UBItem{
     /**
      * Adds Tags to a Tricky Topic, referenced by Id.
      *
-     * @param int   $id Id from the Tricky Topic to add Tags to
+     * @param int   $id        Id from the Tricky Topic to add Tags to
      * @param array $tag_array Array of Tag Ids to be added to the Tricky Topic
      *
      * @return bool Returns true if success, false if error
      */
-    static function add_tags($id, $tag_array){
+    static function add_tags($id, $tag_array) {
         return UBCollection::add_items($id, $tag_array, static::REL_TRICKYTOPIC_TAG);
     }
 
     /**
      * Sets Tags to a Tricky Topic, referenced by Id.
      *
-     * @param int   $id Id from the Tricky Topic to set Tags to
+     * @param int   $id        Id from the Tricky Topic to set Tags to
      * @param array $tag_array Array of Tag Ids to be set to the Tricky Topic
      *
      * @return bool Returns true if success, false if error
      */
-    static function set_tags($id, $tag_array){
+    static function set_tags($id, $tag_array) {
         return UBCollection::set_items($id, $tag_array, static::REL_TRICKYTOPIC_TAG);
     }
 
     /**
      * Remove Tags from a Tricky Topic.
      *
-     * @param int   $id Id from Tricky Topic to remove Tags from
+     * @param int   $id        Id from Tricky Topic to remove Tags from
      * @param array $tag_array Array of Tag Ids to remove from Tricky Topic
      *
      * @return bool Returns true if success, false if error
      */
-    static function remove_tags($id, $tag_array){
+    static function remove_tags($id, $tag_array) {
         return UBCollection::remove_items($id, $tag_array, static::REL_TRICKYTOPIC_TAG);
     }
 
@@ -101,7 +98,7 @@ class ClipitTrickyTopic extends UBItem{
      *
      * @return array|bool Returns an array of Tag IDs, or false if error
      */
-    static function get_tags($id){
+    static function get_tags($id) {
         return UBCollection::get_items($id, static::REL_TRICKYTOPIC_TAG);
     }
 }

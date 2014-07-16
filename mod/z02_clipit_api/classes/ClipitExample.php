@@ -14,16 +14,14 @@
 
 /**
  * Class ClipitExample
- *
+
  */
-class ClipitExample extends UBItem{
+class ClipitExample extends UBItem {
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitExample";
-
     public $tag = 0;
-
     public $resource_url = "";
 
     /**
@@ -31,7 +29,7 @@ class ClipitExample extends UBItem{
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_entity){
+    protected function load_from_elgg($elgg_entity) {
         parent::load_from_elgg($elgg_entity);
         $this->resource_url = (string)$elgg_entity->get("resource_url");
         $this->tag = (int)$elgg_entity->get("tag");
@@ -42,10 +40,9 @@ class ClipitExample extends UBItem{
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function save_to_elgg($elgg_entity){
+    protected function save_to_elgg($elgg_entity) {
         parent::save_to_elgg($elgg_entity);
         $elgg_entity->set("resource_url", (string)$this->resource_url);
         $elgg_entity->set("tag", (int)$this->tag);
     }
-
 }
