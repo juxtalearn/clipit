@@ -11,14 +11,17 @@
  * @package         ClipIt
  */
 $entity = elgg_extract('entity', $vars);
-
+$wysiwyg = "";
+if($vars['wysiwyg'] !== false){
+    $wysiwyg = "mceEditor";
+}
 echo elgg_view("input/hidden", array(
     'name' => 'entity-id',
     'value' => $entity->id,
 ));
 echo elgg_view("input/plaintext", array(
     'name' => 'comment-text',
-    'class' => 'form-control mceEditor',
+    'class' => 'form-control '.$wysiwyg,
     'id'    => uniqid(),
     'rows'  => 6,
     'style' => "width: 100%;"

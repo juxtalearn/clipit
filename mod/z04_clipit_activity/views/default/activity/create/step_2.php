@@ -111,8 +111,8 @@
 $(function(){
 
     $(document).on("click", "#add_task",function(){
-       var content = $(".task:last");
-        content.after(<?php echo json_encode(elgg_view('activity/create/task_list'));?>);
+       var content = $(".task-list");
+        content.append(<?php echo json_encode(elgg_view('activity/create/task_list'));?>);
     });
 
     $(document).on("click", ".feedback-check",function(){
@@ -158,7 +158,9 @@ $(function(){
     <div class="col-md-12">
         <h3 class="title-block"><?php echo elgg_echo('activity:tasks');?></h3>
     </div>
-    <?php echo elgg_view('activity/create/task_list');?>
+    <ul class="task-list">
+        <?php echo elgg_view('activity/create/task_list');?>
+    </ul>
     <div class="col-md-12 margin-top-5 margin-bottom-5">
         <strong>
         <?php echo elgg_view('output/url', array(
@@ -180,6 +182,7 @@ $(function(){
         <?php echo elgg_view('input/button', array(
             'value' => elgg_echo('next'),
             'data-step' => 3,
+            'id' => 'next_step',
             'class' => "btn btn-primary button_step",
         ));
         ?>

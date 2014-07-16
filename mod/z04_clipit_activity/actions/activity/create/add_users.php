@@ -15,10 +15,18 @@ $user_login = get_input('user-login');
 $user_password = get_input('user-password');
 $user_email = get_input('user-email');
 for($i=0; $i < count($user_name); $i++){
-    $output[] = array(
-        'name' => $user_name[$i],
-        'id' => mt_rand(10,500),
-    );
+    if(trim($user_name[$i]) != "" && trim($user_login[$i]) != "" && trim($user_password[$i]) != "" && trim($user_email[$i]) != ""){
+        $user_id = ClipitUser::create(array(
+            'login'     => $user_login[$i],
+            'password'  => $user_password[$i],
+            'name'      => $user_name[$i],
+            'email'     => $user_email[$i]
+        ));
+        $output[] = array(
+            'name' => $user_name[$i],
+            'id' => $user_id,
+        );
+    }
 }
 echo json_encode($output);
 die();

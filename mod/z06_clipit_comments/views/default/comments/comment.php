@@ -46,9 +46,7 @@ if($activity_id){
         </strong>
         <small class="show">
             <?php if($group):?>
-            <span class="label label-primary text-truncate" style="background: #32b4e5;color: #fff;max-width: 80px;display: inline-block;vertical-align: middle;">
-                <?php echo $group->name;?>
-            </span>
+                <?php echo elgg_view("group/preview", array('entity' => $group, 'class' => 'text-truncate inline'));?>
             <?php endif;?>
             <?php echo elgg_view('output/friendlytime', array('time' => $comment->time_created));?>
         </small>
@@ -102,7 +100,11 @@ if($activity_id){
                 ?>
                 <a href="javascript:;" id="<?php echo $comment->id; ?>" class="close-reply-to" >&times;</a>
             </small>
-            <?php echo elgg_view_form("comments/create", array('data-validate'=> "true", 'class'=>'fileupload'), array('entity'  => $comment)); ?>
+            <?php echo elgg_view_form("comments/create",
+                array('data-validate'=> "true", 'class'=>'fileupload'),
+                array('entity'  => $comment, 'wysiwyg' => false)
+            );
+            ?>
         </div>
     </div>
     <!-- Reply form end-->

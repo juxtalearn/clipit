@@ -50,9 +50,7 @@ if($message->owner_id != $user_loggedin_id){
             </strong>
             <small class="show">
                 <?php if($vars['show_group'] && $group = array_pop(ClipitGroup::get_by_id(array($group_id)))):?>
-                    <span class="label label-primary" style="display: inline-block;background: #32b4e5;color: #fff;">
-                        <?php echo $group->name?>
-                    </span>
+                    <?php echo elgg_view("group/preview", array('entity' => $group, 'class' => 'text-truncate inline'));?>
                 <?php endif; ?>
 
                 <?php echo elgg_view('output/friendlytime', array('time' => $message->time_created));?>

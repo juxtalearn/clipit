@@ -1,28 +1,4 @@
 <div class="container">
-    <!-- Clipit blocks -->
-    <div class="row">
-        <div class="col-sm-4 bg-red block text-center">
-            <div class="arrow">
-                <span class="red"></span>
-            </div>
-            <img src="<?php echo $vars['img_path'];?>crea.png">
-            <h2>Create</h2>
-            <p>Lorem ipsum sit amet constance ectetuer adipicin. Lorem ipsum sit amet constance</p>
-        </div>
-        <div class="col-sm-4 bg-yellow block text-center">
-            <div class="arrow">
-                <span class="yellow"></span>
-            </div>
-            <img src="<?php echo $vars['img_path'];?>aprende.png">
-            <h2>Learn</h2>
-            <p>Lorem ipsum sit amet constance ectetuer adipicin. Lorem ipsum sit amet constance</p>
-        </div>
-        <div class="col-sm-4 bg-blue block text-center">
-            <img src="<?php echo $vars['img_path'];?>comparte.png">
-            <h2>Share</h2>
-            <p>Lorem ipsum sit amet constance ectetuer adipicin. Lorem ipsum sit amet constance</p>
-        </div>
-    </div><!-- Clipit blocks end -->
     <!-- Social -->
     <div class="row">
         <div class="col-sm-12 social-connect text-center">

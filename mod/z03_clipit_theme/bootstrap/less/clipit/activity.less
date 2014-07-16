@@ -215,3 +215,108 @@ ul.deadline-list{
     z-index : 10;
   }
 }
+//
+// Multi Select plugin (two-column transfer multi-select)
+// --------------------------------------------------
+.ms-container{
+  position: relative;
+  width: 100%;
+  &:after{
+    content: ".";
+    display: block;
+    height: 0;
+    line-height: 0;
+    font-size: 0;
+    clear: both;
+    min-height: 0;
+    visibility: hidden;
+  }
+  .ms-selectable,
+  .ms-selection{
+    background: #fff;
+    color: #555555;
+    float: left;
+    width: 45%;
+    li.disabled{
+      background-color: #eee;
+      color: #aaa;
+      cursor: text;
+    }
+  }
+  .ms-list{
+    border: 2px solid @blue-lighter;
+    position: relative;
+    height: 200px;
+    padding: 0;
+    overflow-y: auto;
+
+    .ms-elem-selection,
+    .ms-elem-selectable{
+      border-bottom: 1px #eee solid;
+      padding: 3px 10px;
+      padding-left: 20px;
+      color: #555;
+      font-size: 14px;
+      cursor: pointer;
+      &:hover,
+      &:focus{
+        cursor: pointer;
+        color: #fff !important;
+        text-decoration: none;
+        background-color: @blue_clipit;
+        &:after{
+          font-family: FontAwesome;
+          color: @blue-lighter;
+          position: absolute;
+        }
+      }
+    }
+    // icon arrow left
+    .ms-elem-selection{
+      padding-left: 25px !important;
+      &:hover,
+      &:focus{
+        &:after{
+          content: "\f060";
+          left: 5px;
+        }
+      }
+    }
+    // icon arrow right
+    .ms-elem-selectable{
+      &:hover,
+      &:focus{
+        &:after{
+          content: "\f061";
+          right: 5px;
+        }
+      }
+    }
+  }
+  .ms-optgroup-label{
+    margin: 0;
+    padding: 5px 0px 0px 5px;
+    cursor: pointer;
+    color: #999;
+  }
+  .ms-selectable{
+    margin-right: 10%;
+    &:after{
+      color: #bae6f6;
+      position: absolute;
+      left: 47%;
+      top: 50%;
+      font-family: 'FontAwesome';
+      font-size: 23px;
+      content: "\f060" " \f061";
+    }
+  }
+  ul{
+    margin: 0;
+    list-style-type: none;
+    padding: 0;
+  }
+  .ms-optgroup-container{
+    width: 100%;
+  }
+}

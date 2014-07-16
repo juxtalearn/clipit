@@ -183,9 +183,11 @@ $english = array(
     // Create activity
     'activity:site:students' => 'Site students',
     'activity:students' => 'Activity students',
-    'called:students:upload:from_excel' => 'Upload from excel',
+    'called:students:add' => 'Add users',
+    'called:students:add:from_excel' => 'Upload from Excel file',
     'called:students:insert_to_site' => 'Upload to site',
     'called:students:insert_to_activity' => 'Upload to activity',
+    'activity:grouping_mode' => 'Grouping mode',
 );
 
 add_translation('en', $english);

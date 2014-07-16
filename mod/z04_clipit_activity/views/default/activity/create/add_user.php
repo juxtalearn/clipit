@@ -13,9 +13,9 @@
 ?>
 <div class="add-user">
     <div class="form-group col-md-3">
-        <i class="fa fa-times red image-block" onclick="javascript:$(this).closest('.add-user').remove();"></i>
+        <i class="fa fa-times red image-block" style="cursor: pointer" onclick="javascript:$(this).closest('.add-user').remove();"></i>
         <div class="content-block">
-            <label for="activity-title"><?php echo elgg_echo("user:name");?></label>
+            <label for="activity-title"><?php echo elgg_echo("user:username");?></label>
             <?php echo elgg_view("input/text", array(
                 'name' => 'user-name[]',
                 'class' => 'form-control',
@@ -25,7 +25,7 @@
         </div>
     </div>
     <div class="form-group col-md-3">
-        <label for="activity-title"><?php echo elgg_echo("user:login");?></label>
+        <label for="activity-title"><?php echo elgg_echo("user:log_in");?></label>
         <?php echo elgg_view("input/text", array(
             'name' => 'user-login[]',
             'class' => 'form-control',

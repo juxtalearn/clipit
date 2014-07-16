@@ -11,7 +11,7 @@
  * @package         ClipIt
  */
 $file = $_FILES['upload-users'];
-$users = ClipitUser::add_from_excel($file['tmp_name']);
+$users = ClipitUser::import_data($file['tmp_name']);
 foreach($users as $user_id){
     $user = array_pop(ClipitUser::get_by_id(array($user_id)));
     $output[] = array(

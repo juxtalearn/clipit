@@ -11,7 +11,7 @@
  * @package         ClipIt
  */
 $tricky_topics = ClipitTrickyTopic::get_all(10);
-$tt = array('Select tricky topic');
+$tt = array('' => 'Select tricky topic');
 foreach($tricky_topics as $tricky_topic){
     $tt[$tricky_topic->id] = $tricky_topic->name;
 }
@@ -65,9 +65,11 @@ $(function(){
     }
 $(function(){
     datepicker_setup();
-    $(".button_step, .nav-steps a").click(function(){
+    $(document).on("click", ".button_step, .nav-steps a",function(){
+    //$(".button_step, .nav-steps a").click(function(){
        var step = $(this).data("step");
         // is validated
+        //if($(this).attr("id") == 'next_step' && $(".elgg-form-activity-create").valid()){
 //       if($(".elgg-form-activity-create").valid()){
             $(".nav-steps li").removeClass("active");
             $("#nav-step-"+ step).parent("li").addClass("active");
@@ -76,9 +78,26 @@ $(function(){
 //       }
 
     });
+
+    /*$(".elgg-form-activity-create")
+        .find("input:not([type='button'],[type='checkbox']), select, textarea")
+        .each(function () {
+            console.log(this);
+        //console.log($(this).attr("name") +" => "+ $(this).valid());
+        $(this).rules('add', {
+            required: true
+        });
+    });*/
+    /*$("#next_summary").click(function(){
+        // is validated
+       if($(".elgg-form-activity-create").valid()){
+            $(".nav-steps li").removeClass("active");
+            $(this).closest(".container").find(".step").hide();
+            $("#summary").fadeIn();
+       }
+    });*/
 });
 </script>
-<?php echo elgg_view('activity/create/step_3');?>
 <div id="step_1" class="row step">
     <div class="col-md-12">
         <h3 class="title-block"><?php echo elgg_echo('activity:setup');?></h3>
@@ -117,7 +136,7 @@ $(function(){
             <label for="activity-description"><?php echo elgg_echo("activity:description");?></label>
             <?php echo elgg_view("input/plaintext", array(
                 'name'  => 'video-description',
-                'class' => 'form-control mceEditor',
+                'class' => 'form-control',
                 'required' => true,
                 'rows'  => 6,
                 ));
@@ -130,6 +149,7 @@ $(function(){
             <?php echo elgg_view('input/dropdown', array(
                 'name' => 'activity-tricky-topic',
                 'class' => 'form-control',
+                'required' => true,
                 'style' => 'padding-top: 5px;padding-bottom: 5px;',
                 'id' => 'tricky_topic_list',
                 'options_values' => $tt
@@ -142,6 +162,7 @@ $(function(){
         <?php echo elgg_view('input/button', array(
                 'value' => elgg_echo('next'),
                 'data-step' => 2,
+                'id' => 'next_step',
                 'class' => "btn btn-primary button_step",
             ));
         ?>

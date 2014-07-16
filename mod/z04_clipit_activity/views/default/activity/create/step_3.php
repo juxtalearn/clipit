@@ -10,13 +10,11 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-ClipitActivity::get_all()
 ?>
-<link href="http://loudev.com/css/multi-select.css" media="screen" rel="stylesheet" type="text/css" />
 <script src="http://loudev.com/js/jquery.multi-select.js" type="text/javascript"></script>
 <script>
 $(function(){
-    $('#callbacks').multiSelect({
+    $('#called_users').multiSelect({
         keepOrder: false,
         selectableOptgroup: true,
         selectableHeader: "<h4><?php echo elgg_echo("activity:site:students");?></h4>",
@@ -29,64 +27,28 @@ $(function(){
             .find("input[name='user-name[]']")
             .focus();
     });
-    //elgg_add_action_tokens_to_url("action/language/set?lang={$key}", true),
+    $(".select-radio").click(function(){
+        $(this).find("input[type=radio]").prop("checked", true);
+    });
     $(document).on("click", "#add_users_button",function(){
         var url_action = $(this).attr("href");
         var data_inputs = $(".add-user-list :input").serialize();
         $.getJSON(url_action, data_inputs, function(data) {
             $.each(data, function(key, user) {
-                $('#callbacks').multiSelect('addOption',
+                $('#called_users').multiSelect('addOption',
                     { value: user.id, text: user.name, index: 0, nested: 'Loaded' }
                 );
+                $('#called_users').multiSelect('select', [""+user.id+""]);
             });
             // remove all elements created
             $(".add-user").remove();
         });
         return false;
     });
-    /*$(document).on("change", "#upload-users",function(){
-        console.log("loading");
-        console.log($("#upload-users").val());
-
-        $.ajax(elgg.config.wwwroot+"ajax/view/tricky_topic/list", {
-            files: $("#upload-users"),
-            dataType: 'json',
-            iframe: true,
-            processData: false,
-            success: function(html){
-                console.log(html);
-            }
-        }).complete(function(data) {
-            console.log(data);
-        });
-//        $.ajax(
-//            elgg.config.wwwroot+"ajax/view/tricky_topic/list", {
-//            files: $(":file", this),
-//            iframe: true
-//        }).complete(function(data) {
-//            console.log(data);
-//        });
-    });*/
-//    $('form.p').on('click', 'input[type=submit]', function(evt) {
-//        evt.preventDefault();
-//        var form = $(this).closest("form");
-//        $.ajax(elgg.config.wwwroot+"ajax/view/tricky_topic/list", {
-//            data: form.find('textarea').serializeArray(),
-//            dataType: 'json',
-//            files: form.find(':file'),
-//            iframe: true,
-//            processData: false
-//        }).complete(function(data) {
-//            console.log(data);
-//        });
-//        return false;
-//    });
 });
 </script>
-<?php //echo elgg_view("multimedia/file/attach", array('entity' => $entity)); ?>
 <?php
-//elgg_load_js("file:attach");
-echo elgg_view("multimedia/file/templates/attach", array('entity' => $entity));
+echo elgg_view("multimedia/file/templates/attach");
 ?>
 <script>
 $(function () {
@@ -112,48 +74,22 @@ $(function () {
         }
     }).on('fileuploaddone', function (e, data) {
         var parent_id = $(this).parent("a").attr("id");
-
         $.each(data.result, function(index, user) {
-            $('#callbacks').multiSelect('addOption',
+            $('#called_users').multiSelect('addOption',
                 { value: user.id, text: user.name, index: 0, nested: 'Loaded' }
             );
             if(parent_id == 'insert-activity'){
-                $('#callbacks').multiSelect('select', [""+user.id+""]);
+                $('#called_users').multiSelect('select', [""+user.id+""]);
             }
         });
-//        $.each(data.result.files, function (index, file) {
-//            if (file.url) {
-//                var link = $('<a>')
-//                    .attr('target', '_blank')
-//                    .prop('href', file.url);
-//                $(data.context.children()[index])
-//                    .wrap(link);
-//            } else if (file.error) {
-//                var error = $('<span class="text-danger"/>').text(file.error);
-//                $(data.context.children()[index])
-//                    .append('<br>')
-//                    .append(error);
-//            }
-//        });
     });
 });
 </script>
-<style>
-.ms-container{
-    width: 100%;
-}
-.ms-elem-selectable{
-    cursor: pointer;
-}
-</style>
-<div id="step_3" class="row step">
-    <div class="col-md-12">
+<div id="step_3" class="row step" style="display: none;">
+    <div class="col-md-8">
         <h3 class="title-block"><?php echo elgg_echo('activity:called_users');?></h3>
-    </div>
-    <div class="col-md-9">
-        <select id='callbacks' multiple='multiple'>
-<!--            <optgroup label="Loaded"></optgroup>-->
-            <optgroup label="Site">
+        <div>
+            <select id="called_users" multiple="multiple">
                 <?php
                 foreach(ClipitUser::get_all() as $user):
                     if($user->role == 'student'):
@@ -165,77 +101,98 @@ $(function () {
                     endif;
                 endforeach;
                 ?>
-            </optgroup>
-        </select>
-        <div class="margin-top-10 col-md-12" style="background: #fafafa; padding: 10px;">
-            <div class="add-user-list">
-<!--                --><?php //echo elgg_view("input/hidden", array(
-//                    'name' => 'activity-id',
-//                    'class' => 'form-control',
-//                    //DEBUG
-//                    'value' => 2491
-//                ));
-//                ?>
-                <?php echo elgg_view('activity/create/add_user');?>
-            </div>
-            <div class="col-md-12 margin-top-5 margin-bottom-5">
-                <?php echo elgg_view('output/url', array(
-                    'title' => elgg_echo('create'),
-                    'text' => elgg_echo('create'),
-                    'href' => "action/activity/create/add_users",
-                    'is_action' => true,
-                    'id' => 'add_users_button',
-                    'class' => "btn btn-primary pull-right",
-                ));
-                ?>
-                <strong>
-                    <?php echo elgg_view('output/url', array(
-                        'href'  => "javascript:;",
-                        'id' => 'add_user',
-                        'title' => elgg_echo('user:add'),
-                        'text'  => '<i class="fa fa-plus"></i> '.elgg_echo('user:add'),
-                    ));
-                    ?>
-                </strong>
-            </div>
+            </select>
         </div>
-        <div class="col-md-12">
-        <div class="form-group">
-            <label for="upload-users">
-                <?php echo elgg_echo("called:students:upload:from_excel");?>
-                <br>
-                <a href="/URL_TEMPLATE_FILE" target="_blank">
-                    <i class="fa fa-file-excel-o green"></i>
-                    <small>Download excel template</small>
-                </a>
-                <br>
-            </label>
-            <a class="btn btn-primary fileinput-button" id="insert-site">
-                <?php echo elgg_echo('called:students:insert_to_site');?>
-                <?php echo elgg_view("input/file", array(
-                    'name' => 'upload-users',
-                    'class' => 'upload-users',
-                    'id' => 'upload-users',
-                ));
-                ?>
-            </a>
-            <a class="btn btn-primary fileinput-button" id="insert-activity">
-                <?php echo elgg_echo('called:students:insert_to_activity');?>
-                <?php echo elgg_view("input/file", array(
-                    'name' => 'upload-users',
-                    'class' => 'upload-users',
-                    'id' => 'upload-users',
-                ));
-                ?>
-            </a>
-            <div>
-                <a class="upload-messages"></a>
+        <div class="margin-top-20">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse_add">
+                            <h4 class="panel-title">
+                                <i class="fa fa-angle-down pull-right"></i>
+                                <i class="fa fa-plus"></i>
+                                <?php echo elgg_echo("called:students:add");?>
+                            </h4>
+                        </a>
+                    </div>
+                    <div id="collapse_add" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="margin-top-10">
+                                <div class="add-user-list">
+                                    <?php echo elgg_view('activity/create/add_user');?>
+                                </div>
+                                <div class="col-md-12 margin-top-5 margin-bottom-5">
+                                    <?php echo elgg_view('output/url', array(
+                                        'title' => elgg_echo('create'),
+                                        'text' => elgg_echo('create'),
+                                        'href' => "action/activity/create/add_users",
+                                        'is_action' => true,
+                                        'id' => 'add_users_button',
+                                        'class' => "btn btn-primary pull-right",
+                                    ));
+                                    ?>
+                                    <strong>
+                                        <?php echo elgg_view('output/url', array(
+                                            'href'  => "javascript:;",
+                                            'id' => 'add_user',
+                                            'title' => elgg_echo('user:add'),
+                                            'text'  => '<i class="fa fa-plus"></i> '.elgg_echo('user:add'),
+                                        ));
+                                        ?>
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse_upload">
+                            <h4 class="panel-title">
+                                <i class="fa fa-angle-down pull-right"></i>
+                                <i class="fa fa-file-excel-o"></i>
+                                <?php echo elgg_echo("called:students:add:from_excel");?>
+                            </h4>
+                        </a>
+                    </div>
+                    <div id="collapse_upload" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <a class="btn btn-primary fileinput-button" id="insert-activity">
+                                    <?php echo elgg_echo('called:students:insert_to_activity');?>
+                                    <?php echo elgg_view("input/file", array(
+                                        'name' => 'upload-users',
+                                        'class' => 'upload-users',
+                                        'id' => 'upload-users',
+                                    ));
+                                    ?>
+                                </a>
+                                <a class="btn btn-primary fileinput-button" id="insert-site">
+                                    <?php echo elgg_echo('called:students:insert_to_site');?>
+                                    <?php echo elgg_view("input/file", array(
+                                        'name' => 'upload-users',
+                                        'class' => 'upload-users',
+                                        'id' => 'upload-users',
+                                    ));
+                                    ?>
+                                </a>
+                                <div>
+                                    <a class="upload-messages"></a>
+                                </div>
+                                <hr>
+                                <a href="<?php echo elgg_get_site_url();?>mod/z04_clipit_activity/vendors/templates/clipit_users.xlsx" target="_blank">
+                                    <i class="fa fa-file-excel-o green"></i>
+                                    <strong>Download Excel template</strong>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
         </div>
     </div>
-    <div class="col-md-3">
-        test
+    <div class="col-md-4">
+        <?php echo elgg_view('activity/create/groups/grouping_mode');?>
     </div>
     <div class="col-md-12 text-right margin-top-20">
         <?php echo elgg_view('input/button', array(
@@ -244,5 +201,22 @@ $(function () {
             'class' => "btn btn-primary btn-border-blue pull-left button_step",
         ));
         ?>
+        <div style="dis" id="next_step_button">
+            <?php echo elgg_view('input/button', array(
+                'value' => elgg_echo('activity:make_groups'),
+                'data-step' => 4,
+                'id' => 'load_called_users',
+                'class' => "btn btn-primary button_step",
+            ));
+            ?>
+            <?php echo elgg_view('output/url', array(
+                'href'  => "javascript:;",
+                'id'    => 'next_summary',
+                'class' => 'margin-left-10',
+                'title' => elgg_echo('task:add'),
+                'text'  => '<i class="fa fa-angle-double-right"></i> '.elgg_echo('activity:skip'),
+            ));
+            ?>
+        </div>
     </div>
 </div>

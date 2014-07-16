@@ -84,8 +84,9 @@ function clipit_final_init() {
         elgg_register_js("jquery:bootstrap:wysihtml5", $CONFIG->url . "mod/z03_clipit_theme/vendors/wysihtml5/bootstrap-wysihtml5.js");
         elgg_register_css("wysihtml5:css", $CONFIG->url . "mod/z03_clipit_theme/vendors/wysihtml5/wysihtml5.css");
         // TinyMCE
-        elgg_register_js("tinymce", $CONFIG->url . "mod/z03_clipit_theme/vendors/tinymce/tinymce.min.js");
         elgg_register_js("jquery:tinymce", $CONFIG->url . "mod/z03_clipit_theme/vendors/tinymce/jquery.tinymce.min.js");
+        elgg_register_js("tinymce", $CONFIG->url . "mod/z03_clipit_theme/vendors/tinymce/tinymce.min.js");
+
         // Bootbox
         elgg_register_js("jquery:bootbox", $CONFIG->url . "mod/z03_clipit_theme/vendors/bootbox.js");
         // jQuery validate

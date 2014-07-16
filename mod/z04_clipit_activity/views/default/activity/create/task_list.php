@@ -16,16 +16,15 @@ $(function(){
    datepicker_setup();
 });
 </script>
-<ul>
-    <li class="list-item col-md-12 task">
-        <?php echo elgg_view('activity/create/task', array('task_type' => 'upload'));?>
-        <ul class="feedback_form" style="display: none;margin-left: 20px;">
-            <li style="padding: 10px;background: #fafafa;" class="col-md-12">
-                <div class="col-md-12">
-                    <h4>Feedback task</h4>
-                </div>
-                <?php echo elgg_view('activity/create/task', array('task_type' => 'feedback'));?>
-            </li>
-        </ul>
-    </li>
-</ul>
+
+<li class="list-item col-md-12 task">
+    <?php echo elgg_view('activity/create/task', array('task_type' => 'upload'));?>
+    <ul class="feedback_form" style="margin-left: 20px;display: none">
+        <li style="padding: 10px;background: #fafafa;" class="col-md-12">
+            <div class="col-md-12">
+                <h4>Feedback task</h4>
+            </div>
+            <?php echo elgg_view('activity/create/task', array('task_type' => 'feedback'));?>
+        </li>
+    </ul>
+</li>

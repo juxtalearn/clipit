@@ -34,15 +34,7 @@ switch($publish_level){
     case "task":
         $group_id = $entity_class::get_group($entity->id);
         $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
-        $output = elgg_view("page/components/modal_remote", array('id'=> "group-{$group->id}" ));
-        $output .= elgg_view('output/url', array(
-            'href'  => "ajax/view/modal/group/view?id={$group->id}",
-            'text'  => '<i class="fa fa-users"></i> '.$group->name,
-            'title' => $group->name,
-            'class' => 'label label-blue '.$vars['class'],
-            'data-toggle'   => 'modal',
-            'data-target'   => '#group-'.$group->id
-        ));
+        $output = elgg_view("group/preview", array('entity' => $group, 'class' => $vars['class']));
         break;
 }
 

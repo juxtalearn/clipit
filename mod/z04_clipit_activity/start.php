@@ -187,7 +187,8 @@ function create_activity_page_handler($page) {
     set_input('step', $page);
     elgg_extend_view('forms/activity/create', 'activity/create/step_1', 100);
     elgg_extend_view('forms/activity/create', 'activity/create/step_2', 100);
-    //elgg_extend_view('forms/activity/create', 'activity/create/step_3', 100);
+    elgg_extend_view('forms/activity/create', 'activity/create/step_3', 100);
+    elgg_extend_view('forms/activity/create', 'activity/create/groups/create', 100);
     require_once "$base_dir/create.php";
 
     return true;
@@ -607,7 +608,11 @@ function activity_page_handler($page) {
                                     return false;
                                 }
                                 $file = array_pop(ClipitFile::get_by_id(array($entity->file)));
-                                $body = elgg_view("multimedia/file/body", array('entity'  => $file, 'preview' => true));
+                                $body = elgg_view("multimedia/storyboard/body", array(
+                                    'entity' => $entity,
+                                    'file'  => $file,
+                                    'preview' => true
+                                ));
                                 $content = elgg_view('publications/view', array(
                                     'entity' => $entity,
                                     'type' => 'storyboard',
@@ -767,7 +772,7 @@ function activity_page_handler($page) {
                                     'entity' => $entity,
                                     'type' => 'storyboard',
                                     'preview' => elgg_view("multimedia/file/preview", array('file'  => $file)),
-                                    'body' => elgg_view("multimedia/file/body", array('entity'  => $file))
+                                    'body' => elgg_view("multimedia/storyboard/body", array('entity'  => $entity, 'file'  => $file))
                                 ));
                                 break;
                             default:
@@ -1040,7 +1045,7 @@ function group_tools_page_handler($page, $activity){
                                     'entity' => $entity,
                                     'type' => 'storyboard',
                                     'preview' => elgg_view("multimedia/file/preview", array('file'  => $file)),
-                                    'body' => elgg_view("multimedia/file/body", array('entity'  => $file))
+                                    'body' => elgg_view("multimedia/storyboard/body", array('entity'  => $entity, 'file' => $file))
                                 ));
                                 break;
                             default:

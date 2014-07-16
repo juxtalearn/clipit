@@ -12,7 +12,8 @@
  */
 $video = elgg_extract("entity", $vars);
 ?>
-<div class="frame-container">
+<?php echo elgg_view("publications/view_scope", array('entity' => $video));?>
+<div class="frame-container" style="width: 100%;">
     <?php echo elgg_view('output/iframe', array(
         'value'  => get_video_url_embed($video->url)));
     ?>
