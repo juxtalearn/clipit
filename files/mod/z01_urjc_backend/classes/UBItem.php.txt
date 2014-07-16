@@ -304,40 +304,47 @@ class UBItem {
      * @return bool Returns true if correct, or false if error
      */
     static function delete_all() {
-        $items = static::get_all();
+        $items = static::get_all("id");
         if(!empty($items)) {
-            foreach($items as $item) {
-                if(!$item->delete()) {
-                    return false;
-                }
-            }
+            static::delete_by_id($items);
         }
         return true;
     }
 
     /**
-     * Get all Objects of this TYPE and SUBTYPE from the system.
+     * Get all Object instances of this TYPE and SUBTYPE from the system, optionally only a specified property.
      *
-     * @param int  $limit   Number of results to show, default= 0 [no limit] (optional)
-     * @param bool $id_only Only return object IDs
+     * @param array $prop_array Properties to return (with key = ID). Default = [all] (object instance)
+     * @param int   $limit      Number of results to show, default= 0 [no limit] (optional)
      *
      * @return static[]|int[] Returns an array of Objects, or Object IDs if id_only = true
      */
-    static function get_all($limit = 0, $id_only = false) {
+    static function get_all($prop_array = null, $limit = 0) {
         $object_array = array();
-        $elgg_object_array = elgg_get_entities(
+        $elgg_entity_array = elgg_get_entities(
             array('type' => static::TYPE, 'subtype' => static::SUBTYPE, 'limit' => $limit)
         );
-        if($elgg_object_array) {
-            foreach($elgg_object_array as $elgg_object) {
-                if($id_only) {
-                    $object_array[] = (int)$elgg_object->guid;
-                } else {
-                    $object_array[(int)$elgg_object->guid] = new static((int)$elgg_object->guid);
+        usort($elgg_entity_array, 'static::sort_by_date_inv');
+        if(!empty($elgg_entity_array)) {
+            foreach($elgg_entity_array as $elgg_entity) {
+                if(empty($prop_array)){
+                    $object_array[(int)$elgg_entity->guid] = new static((int)$elgg_entity->guid);
+                }
+                foreach($prop_array as $property) {
+                    switch($property) {
+                        case "id":
+                            $object_array[] = (int)$elgg_entity->guid;
+                            break;
+                        case "login":
+                            $object_array[(int)$elgg_entity->guid] = $elgg_entity->username;
+                            break;
+                        default:
+                            $object_array[(int)$elgg_entity->guid] = $elgg_entity->$property;
+                            break;
+                    }
                 }
             }
         }
-        usort($object_array, 'static::sort_by_date_inv');
         return $object_array;
     }
 
