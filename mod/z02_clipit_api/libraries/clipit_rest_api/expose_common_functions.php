@@ -59,8 +59,8 @@ function expose_common_functions($api_suffix, $class_suffix) {
     );
     expose_function(
         $api_suffix . "get_all", $class_suffix . "get_all", array(
-            "limit" => array("type" => "int", "required" => false),
-            "id_only" => array("type" => "bool", "required" => false)
+            "property" => array("type" => "string", "required" => false),
+            "limit" => array("type" => "int", "required" => false)
         ), "Get all instances", 'GET', false, true
     );
     expose_function(

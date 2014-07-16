@@ -58,7 +58,7 @@ class ClipitResource extends UBItem {
 
     static function get_by_tags($tag_array) {
         $return_array = array();
-        $all_items = static::get_all(0, true); // Get all item ids, not objects
+        $all_items = static::get_all(0, "id"); // Get all item ids, not objects
         foreach($all_items as $item_id) {
             $item_tags = (array)static::get_tags((int)$item_id);
             foreach($tag_array as $search_tag) {
@@ -73,7 +73,7 @@ class ClipitResource extends UBItem {
 
     static function get_by_labels($label_array) {
         $return_array = array();
-        $all_items = static::get_all(0, true); // Get all item ids, not objects
+        $all_items = static::get_all(0, "id"); // Get all item ids, not objects
         foreach($all_items as $item_id) {
             $item_labels = (array)static::get_labels((int)$item_id);
             foreach($label_array as $search_tag) {
@@ -88,7 +88,7 @@ class ClipitResource extends UBItem {
 
     static function get_by_performance_items($performance_item_array) {
         $return_array = array();
-        $all_items = static::get_all(0, true); // Get all item ids, not objects
+        $all_items = static::get_all(0, "id"); // Get all item ids, not objects
         foreach($all_items as $item_id) {
             $item_performance_items = static::get_performance_items((int)$item_id);
             foreach($performance_item_array as $search_tag) {

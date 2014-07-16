@@ -56,26 +56,6 @@ class UBMessage extends UBItem {
         return $this->id;
     }
 
-    /**
-     * Deletes $this instance from the system.
-     * @return bool True if success, false if error.
-     */
-    protected function delete() {
-        if($rel_array = get_entity_relationships($this->id, true)) {
-            foreach($rel_array as $rel) {
-                switch($rel->relationship) {
-                    case static::REL_MESSAGE_DESTINATION:
-                        $reply_array[] = $rel->guid_one;
-                        break;
-                }
-            }
-            if(isset($reply_array)) {
-                static::delete_by_id($reply_array);
-            }
-        }
-        return parent::delete();
-    }
-
     /* STATIC FUNCTIONS */
     /**
      * Get Messages by Destination
