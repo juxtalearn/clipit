@@ -28,11 +28,11 @@ function processURL($url) {
 }
 
 function convertURLToActivityStream($url) {
-	GLOBAL $con;	
-		
-	$object_Id = processURL($url); 
+	GLOBAL $con;
+
+    $transaction_id = $_SESSION['tid'];
+	$object_Id = processURL($url);
 	if ($object_Id != 0) {
-		$transaction_id = $_SESSION['tid'];
 		$published = time();
 		$user = elgg_get_logged_in_user_entity();	
 		$ip_address = sanitise_string($_SERVER['REMOTE_ADDR']);
@@ -59,7 +59,7 @@ function convertURLToActivityStream($url) {
 			$group_id = 0;
 			$course_id = 0;
 			if (class_exists(ClipitActivity) AND class_exists(ClipitGroup)) {
-				$temp_array = get_entity_relationships($object_id, true);
+				$temp_array = get_entity_relationships($object['objectId'], true);
 		        foreach($temp_array as $rel){
 		            if($rel->relationship == ClipitActivity::REL_ACTIVITY_FILE OR $rel->relationship == ClipitActivity::REL_ACTIVITY_TASK OR $rel->relationship == ClipitActivity::REL_ACTIVITY_VIDEO){
 		                $activity_id = $rel->guid_one;
@@ -70,7 +70,7 @@ function convertURLToActivityStream($url) {
 					//TODO Add support for courses when available 
 		        }
 				
-				$role = ClipitUser::get_properties($performed_by, array("role"));
+				//$role = ClipitUser::get_properties($performed_by, array("role"));
 			}
 			$object['groupId'] = $group_id;
 			$object['courseId'] = $course_id;
@@ -110,6 +110,14 @@ function convertLogTransactionToActivityStream($transaction) {
 	$actor['courseId'] = $transaction[0]['CourseId'];
 	$actor['activityId'] = $transaction[0]['ActivityId'];
 	
+	// For some values, we need to determine the line number
+	$l = 0;
+
+	// These will most likely be zero, but sometimes we can put a value into them...
+	$group_id = 0;
+	$course_id = 0;
+	$activity_id = 0;
+
 	
 //	Same is true for the published value	
 	$published = $transaction[0]['Timestamp'];
@@ -119,64 +127,39 @@ function convertLogTransactionToActivityStream($transaction) {
 		case "Unidentified":
 			$verb = "Unidentified";
 			break;
-		case "Comment":
-		case "Fivestar":
+		case "Discussion":
+			$object['objectTitle'] = $transaction[0]['ObjectTitle'];
+			$l = findValue($transaction, "create", "clipit_post", "ObjectId", TRUE);
 			$verb = "annotate";
-			$object['objectId'] = $transaction[1]['ObjectId'];
-			$object['objectType'] = $transaction[1]['ObjectType'];
-			$subtype = $transaction[1]['ObjectSubtype'];
-			if ($subtype == "elggx_fivestar_rating") {
-				$subtype = "fivestar";
-			}
-			$object['objectSubtype'] = $subtype;
-			$object['objectClass'] = $transaction[1]['ObjectClass'];
-			$object['ownerGUID'] = $transaction[1]['OwnerGUID'];
-			$object['content'] = $transaction[1]['Content'];
-			$object['targetId'] = $transaction[0]['ObjectId'];
-			$object['targetName'] = $transaction[0]['ObjectTitle'];
-			$targetSubtype = $transaction[0]['ObjectSubtype'];
-			if ($targetSubtype == "elggx_fivestar_rating") {
-				$targetSubtype = "fivestar";
-			echo print_r($transaction);
-			echo "<br />";
-			echo "<br />";
-			echo "<br />";
-			}
-			$object['targetSubtype'] = $targetSubtype;
-			$object['groupId'] = $transaction[0]['GroupId'];
-			$object['courseId'] = $transaction[0]['CourseId'];
-			$object['activityId'] = $transaction[0]['ActivityId'];
-			break;
-		case "BlogPost":
-			$verb = "add";
-			$objectId = findValue($transaction, "create", "blog", "ObjectId");
-			$objectName = findValue($transaction, "create", "blog", "ObjectTitle");
-			$object['objectId'] = $objectId;
-			$object['displayName'] = $objectName;
-			$object['objectType'] = $transaction[0]['ObjectType'];
-			$object['objectSubtype'] = $transaction[0]['ObjectSubtype'];
-			$object['objectClass'] = $transaction[0]['ObjectClass'];
-			$object['ownerGUID'] = $transaction[0]['OwnerGUID'];
-			$object['content'] = $transaction[0]['Content'];
-			$object['groupId'] = $transaction[0]['GroupId'];
-			$object['courseId'] = $transaction[0]['CourseId'];
-			$object['activityId'] = $transaction[0]['ActivityId'];
-			break;
-		case "DeleteComment":
-		case "DeleteFile":
-			$verb = "delete";
-			$object['objectId'] = $transaction[0]['ObjectId'];
-			$object['displayName'] = $transaction[0]['ObjectTitle'];
-			$object['objectType'] = $transaction[0]['ObjectType'];
-			$object['objectSubtype'] = $transaction[0]['ObjectSubtype'];
-			$object['objectClass'] = $transaction[0]['ObjectClass'];
-			$object['ownerGUID'] = $transaction[0]['OwnerGUID'];
-			$object['content'] = "";
-			$object['groupId'] = $transaction[0]['GroupId'];
-			$object['courseId'] = $transaction[0]['CourseId'];
-			$object['activityId'] = $transaction[0]['ActivityId'];
-			break;
+			$object['objectId'] = $transaction[$l]['ObjectId'];
+			$object['objectType'] = $transaction[$l]['ObjectType'];
+			$object['objectSubtype'] = $transaction[$l]['ObjectSubtype'];
+			$object['objectClass'] = $transaction[$l]['ObjectClass'];
+			$object['ownerGUID'] = $transaction[$l]['OwnerGUID'];
+			$object['content'] = $transaction[$l]['Content'];
 			
+			$target_id = findValue($transaction, "create", "message-destination", "Content", FALSE);
+			$type = "clipit_post";
+			if ($target_id == "new") {
+				$activity_id = findValue($transaction, "create", "message-destination", "ActivityId", FALSE);
+				$group_id = findValue($transaction, "create", "message-destination", "GroupId", FALSE);
+				if ($activity_id > 0) {
+					$target_id = $activity_id;
+					$type = "clipit_activity";
+				}
+				if ($group_id > 0) {
+					$target_id = $group_id;
+					$type = "clipit_group";
+				}
+			}
+			$object['targetId'] = $target_id;
+			$object['targetType'] = "object";
+			$object['targetSubtype'] = $type;
+									
+			$object['groupId'] = $group_id;
+			$object['courseId'] = $course_id;
+			$object['activityId'] = $activity_id;
+			break;
 		case "Login":
 		case "AccountCreation":
 			$verb = "login";
@@ -200,32 +183,17 @@ function convertLogTransactionToActivityStream($transaction) {
 			$object['courseId'] = "0";
 			$object['activityId'] = "0";
 			break;
-		case "UploadFile":
-			$verb = "add";
-			$object['objectId'] = $transaction[5]['ObjectId'];
-			$object['displayName'] = $transaction[5]['ObjectTitle'];
-			$object['objectType'] = $transaction[5]['ObjectType'];
-			$object['objectSubtype'] = $transaction[5]['ObjectSubtype'];
-			$object['objectClass'] = $transaction[5]['ObjectClass'];
-			$object['ownerGUID'] = $transaction[5]['OwnerGUID'];
-			$object['content'] = $transaction[5]['Content'];
-			$object['groupId'] = $transaction[5]['GroupId'];
-			$object['courseId'] = $transaction[5]['CourseId'];
-			$object['activityId'] = $transaction[5]['ActivityId'];
-			break;
-		case "ReadMessage":
-			$verb = "read";
-			$object['objectId'] = $transaction[0]['ObjectId'];
-			$object['displayName'] = "message";
-			$object['objectType'] = $transaction[0]['ObjectType'];
-			$object['objectSubtype'] = $transaction[0]['ObjectSubtype'];
-			$object['objectClass'] = $transaction[0]['ObjectClass'];
-			$object['ownerGUID'] = $transaction[0]['OwnerGUID'];
-			$object['content'] = "";
-			$object['groupId'] = $transaction[0]['GroupId'];
-			$object['courseId'] = $transaction[0]['CourseId'];
-			$object['activityId'] = $transaction[0]['ActivityId'];
-			break;
+        case "GroupCreation":
+            $verb = "create";
+            $object['objectType'] = "site";
+            $object['objectSubtype'] = $transaction[0]['ObjectSubtype'];
+            $object['objectClass'] = $transaction[0]['ObjectClass'];
+            $object['ownerGUID'] = $transaction[0]['OwnerGUID'];
+            $object['content'] = "JuxtaLearn Platform";
+            $object['groupId'] = "0";
+            $object['courseId'] = "0";
+            $object['activityId'] = "0";
+            break;
 		default:
 			$verb = "Unidentified";
 //			$verb = $type;
@@ -236,12 +204,19 @@ function convertLogTransactionToActivityStream($transaction) {
 	return $activity;
 }
 
-function findValue($transaction, $event, $subtype, $field) {
+function findValue($transaction, $event, $subtype, $field, $line) {
 	$value = 0;
+	$line_number = 0;
 	foreach($transaction as $log_row) {
-		if (!empty($transaction['Event']) AND $transaction['Event'] == $event AND !empty($transaction['ObjectSubtype']) AND $transaction['ObjectSubtype'] == $subtype) {
-			$value = $transaction[$field];
+		if (!empty($log_row['Event']) AND $log_row['Event'] == $event AND !empty($log_row['ObjectSubtype']) AND $log_row['ObjectSubtype'] == $subtype) {
+			if ($line) {
+				$value = intval($line_number);
+			}
+			else {
+				$value = $log_row[$field];
+			}
 		}
+		$line_number++;
 	}
 	
 	return $value;
@@ -249,183 +224,53 @@ function findValue($transaction, $event, $subtype, $field) {
 
 function determineActivityType($transaction) {
 	$type = "";
-	if ($transaction[0]['Event'] == 'annotate') {
-		if ($transaction[0]['ObjectSubtype'] == 'bb_chat') {
-			$type = "ChatMessage";
-		}
-		elseif (!empty($transaction[1])) {
-			if ($transaction[1]['ObjectSubtype'] == 'generic_comment') {
-				$type = "Comment";
-			}
-			elseif ($transaction[1]['ObjectSubtype'] == 'fivestar') {
-				$type = "Fivestar";
-			}
-		}
-		elseif ($transaction[0]['ObjectSubtype'] == 'groupforumtopic') {
-			if (!empty($transaction[1])) {
-				if ($transaction[1]['ObjectSubtype'] == 'group_topic_post') {
-					$type = "ForumReply";
-				}
-				elseif ($transaction[1]['ObjectSubtype'] == 'toId') {
-					$type = "ForumNotification";
-				}
-			}
-		}
-	}
-	elseif ($transaction[0]['Event'] == 'create') {
-		if ($transaction[0]['ObjectSubtype'] == 'friendrequest') {
-			$type = "SendFriendRequest";
-		}
-		elseif ($transaction[0]['ObjectSubtype'] == 'member_of_site') {
-			$type = "AccountCreation";
-		}
-		elseif ($transaction[0]['ObjectSubtype'] == 'status') {
-			$objectId = findValue($transaction, "create", "blog", "ObjectId");
-			if ($objectId > 0) {
-				$type = "BlogPost";
-			}
-			else {
-				$objectId = findValue($transaction, "create", "groupforumtopic", "ObjectId");
-				if ($objectId > 0) {
-					$type = "ForumTopicCreation";
-				}
-				else {
-//					echo("Kaputt!<br />");
-				}
-			}
- 		}
-		elseif ($transaction[0]['ObjectSubtype'] == 'membership_request') {
-			$type = "SendMembershipRequest";
-		}
-		//The log plugin needs to decode what type of container is joined, until then group is assumed
-		elseif ($transaction[0]['ObjectSubtype'] == 'member') {
-			$type = "JoinGroup";
-		}
-		elseif ($transaction[0]['ObjectSubtype'] == 'x1') {
-			$type = "AddProfilePicture";
-		}
-		elseif ($transaction[0]['ObjectSubtype'] == 'file') {
-			$type = "UploadFile";
-		}
-		elseif ($transaction[0]['ObjectSubtype'] == 'filename') {
-			if (!empty($transaction[4])) {
-				if ($transaction[4]['ObjectSubtype'] == 'file') {
-					$type = "UploadFile";
-				}
-			}
-			elseif (!empty($transaction[12])) {
-				if ($transaction[12]['ObjectSubtype'] == 'file') {
-					$type = "UploadFile";
-				}
-			}
-		}
-		elseif ($transaction[0]['ObjectSubtype'] == 'tags') {
-			if (!empty($transaction[5])) {
-				if ($transaction[5]['ObjectSubtype'] == 'file') {
-					$type = "UploadFile";
-				}
-			}
-			elseif (!empty($transaction[13])) {
-				if ($transaction[13]['ObjectSubtype'] == 'file') {
-					$type = "UploadFile";
-				}
-			}
-		}
-		elseif ($transaction[0]['ObjectSubtype'] == 'bb_chat') {
-			$type = "ChatMessage";
-		}
-		elseif (!empty($transaction[1])) {
-			if ($transaction[1]['ObjectSubtype'] == 'generic_comment') {
-				$type = "Comment";
-			}
-			elseif ($transaction[1]['ObjectSubtype'] == 'fivestar') {
-				$type = "Fivestar";
-			}
-		}
-	}
-	elseif ($transaction[0]['Event'] == 'update') {
-		if (!empty($transaction[1])) {
-			if ($transaction[1]['ObjectSubtype'] == 'generic_comment') {
-				$type = "KommentarUpdate";
-			}
-			elseif (!empty($transaction[1]) && $transaction[1]['Event'] == 'login') {
-				$type = "Login";
-			}
-			elseif (!empty($transaction[2]) && $transaction[2]['Event'] == 'login') {
-				$type = "Login";
-			}
-			elseif (!empty($transaction[2]) && $transaction[2]['Event'] == 'logout') {
-				$type = "Logout";
-			}
-			elseif (!empty($transaction[2]) && $transaction[2]['Event'] == 'profileupdate') {
-				$type = "ProfileUpdate";
-			}
-			elseif (!empty($transaction[4]) && $transaction[4]['Event'] == 'profileupdate') {
-				$type = "ProfileUpdate";
-			}
-		}
-		if ($transaction[0]['ObjectSubtype'] == 'fivestar') {
-			if (!empty($transaction[1]) && $transaction[1]['Event'] == 'delete') {
-				$type = "UpdateFivestar";
-			}
-		}
-	}
-	elseif ($transaction[0]['Event'] == 'delete') {
-		if ($transaction[0]['ObjectSubtype'] == 'friendrequest') {
-			if (!empty($transaction[1]) && $transaction[1]['Event'] == 'create')  { 
-				$type = "AcceptFriendRequest";
-			}
-			else {
-				$type = "DenyFriendRequest";
-			}
-		}
-		elseif ($transaction[0]['ObjectSubtype'] == 'icontime') {
-			if (!empty($transaction[1]) && $transaction[1]['Event'] == 'create')  { 
-				if ($transaction[0]['ObjectSubtype'] == 'icontime') {
-					$type = "UpdateProfilePicture";
-				}
-			}
-		}
-		elseif ($transaction[0]['ObjectSubtype'] == 'x1') {
-			if (!empty($transaction[4]) && $transaction[4]['Event'] == 'delete' && $transaction[4]['ObjectSubtype'] == 'icontime')  { 
-				$type = "DeleteProfilePicture";
-			}
-		}
-		elseif ($transaction[0]['ObjectType'] == 'group') {
-			$type = "DeleteGroup";
-		}
-		elseif ($transaction[0]['ObjectType'] == 'groupforumtopic') {
-			$type = "DeleteForumTopic";
-		}
-		elseif ($transaction[0]['ObjectSubtype'] == 'file') {
-			$type = "DeleteFile";
-		}
-		elseif ($transaction[0]['ObjectSubtype'] == 'blog') {
-			$type = "DeleteBlog";
-		}
-		elseif ($transaction[0]['ObjectSubtype'] == 'messages') {
-			$type = "DeleteMessage";
-		}
-		elseif ($transaction[0]['ObjectSubtype'] == 'member') {
-			$type = "LeaveGroup";
-		}
-		elseif ($transaction[0]['ObjectSubtype'] == 'readYet') {
-			$type = "ReadMessage";
-		}
-		elseif ($transaction[0]['ObjectSubtype'] == 'event_calendar') {
-			$type = "DeleteCalendarEntry";
-		}
-		elseif ($transaction[0]['ObjectSubtype'] == 'generic_comment') {
-			$type = "DeleteComment";
-		}
-	}
-	elseif ($transaction[0]['Event'] == 'logout') {
-		$type = "Logout";
-	}
-	elseif ($transaction[0]['Event'] == 'disable') {
-		$type = "Disable";
-	}
-	if ($type == "") {
+    if (isset($transaction[0])) {
+        if ($transaction[0]['Event'] == 'create') {
+            if ($transaction[0]['ObjectSubtype'] == 'name') {
+                if (findValue($transaction, "create", "ClipitPost", "ObjectId", FALSE) > 0) {
+                    $type = "Discussion";
+                }
+                elseif (findValue($transaction, "create", "ClipitGroup", "ObjectId", FALSE) > 0) {
+                    $type = "GroupCreation";
+                }
+                elseif (findValue($transaction, "create", "ClipitVideo", "ObjectId", FALSE) > 0) {
+                    $type = "VideoUpload";
+                }
+                elseif (findValue($transaction, "create", "ClipitTask", "ObjectId", FALSE) > 0) {
+                    $type = "CreateTask";
+                }
+                elseif (findValue($transaction, "create", "ClipitActivity", "ObjectId", FALSE) > 0) {
+                    $type = "CreateActivity";
+                }
+            }
+        }
+        elseif ($transaction[0]['Event'] == 'update') {
+            if (!empty($transaction[1])) {
+                if (!empty($transaction[1]) && $transaction[1]['Event'] == 'login') {
+                    $type = "Login";
+                }
+                elseif (!empty($transaction[2]) && $transaction[2]['Event'] == 'login') {
+                    //if transaction has no value in [3] it is a normal login, otherwise it probably is a login followed by a payload through ClipIt's API
+                    if (empty($transaction[3])) {
+                        $type = "Login";
+                    }
+                    else {
+                        //If it is an API call, we will simply remove the login and restart detection:
+                        $new_transaction = array_diff($transaction, array($transaction[0], $transaction[1], $transaction[2]));
+                        $type = determineActivityType($new_transaction);
+                    }
+
+                }
+                elseif (!empty($transaction[2]) && $transaction[2]['Event'] == 'logout') {
+                    $type = "Logout";
+                }
+            }
+        }
+        elseif ($transaction[0]['Event'] == 'logout') {
+            $type = "Logout";
+        }
+    }
+    if ($type == "") {
 		$type = "Unidentified";
 	}
 	return $type;

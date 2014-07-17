@@ -5,11 +5,11 @@
 	{
 		global $CONFIG;
 		register_page_handler('activitystreamer','activitystreamer_page_handler');
-		session_start();		
 		$_SESSION['logging_table'] = $CONFIG->dbprefix."extended_log";
 		$_SESSION['activity_table'] = $CONFIG->dbprefix."activitystreams";
 		$_SESSION['logged'] = false;
 		$_SESSION['enabled'] = false;
+		$_SESSION['transaction_artifact'] = array();
 		$data = elgg_get_entities(array("types"=>"object", "subtypes"=>"modactivitystreamer", "owner_guids"=> '0' , "order_by"=>"","limit"=>0));
 		if(isset($data[0])) {
 			$entity = $data[0];
@@ -17,13 +17,21 @@
 			if ($entity->showga) {
 				$_SESSION['enabled'] = true;
 			}
+			//Edit for the uk trials, just in case the plugin is updated instead of reinstalled so it works without it beeing activated in the tab
+			$_SESSION['enabled'] = true;
 		}	
 	}
 
+    function is_session_started()
+    {
+        return session_status() === PHP_SESSION_ACTIVE ? TRUE : FALSE;
+    }
+
+
 	function init_transaction()
 	{
-		session_start();
-		$time = time();
+        if ( is_session_started() === FALSE ) session_start();
+        $time = time();
 		$ip_address = sanitise_string($_SERVER['REMOTE_ADDR']);
 		$guid = get_loggedin_user()->guid;
 		$_SESSION['tid'] = md5("".$time.$ip_address.$guid);
@@ -48,43 +56,94 @@
 	//Because of PHP constraints, we now implement an indirect approach and use the mysql db as a buffer. 
 	function extended_log($object, $event) {
 		global $CONFIG;
-		session_start();
-		$log_table = $_SESSION['logging_table'];
+        if ( is_session_started() === FALSE ) session_start();
+        $log_table = $_SESSION['logging_table'];
 		$activity_table = $_SESSION['activity_table'];
 		
 		static $log_cache;
 		static $cache_size = 0;
 		if($_SESSION['enabled']) {
 			if ($object instanceof Loggable) {
-				// If the object implements loggable interface, extract the necessary information and store a tuple in the space
-				$dir=dirname(__FILE__);
 				$data = elgg_get_entities(array("types"=>"object", "subtypes"=>"modactivitystreamer", "owner_guids"=> '0' , "order_by"=>"","limit"=>0));
-				$i = 1;
-				$object_id = (int)$object->getSystemLogID();
+				$i = 1;				
+				$group_id = 0;
+				$course_id = 0;
+				$activity_id = 0;
+				$object_id = (int)$object->getSystemLogID();				
 				if (is_null($object_id)) {
 				   $object_id = 0;
 				}
 				$object_class = $object->getClassName();
-				if ($object_class == null) {$object_class = "";}
-				if ($object_class == "ElggAnnotation") {
+				if (is_null($object_class)) {$object_class = "";}
+				if ($object_class == "ElggAnnotation" || $object_class == "ElggMetadata") {
 					$object_content = $object->value;
+				}
+				else if ($object_class == "ElggRelationship") {
+					$rel = get_relationship($object_id);
+					$target_id = $rel->guid_two;
+					$target = get_entity($target_id);
+					if (!is_null($target) && $target instanceof ElggEntity) {
+						if ($target->getSubtype() == ClipitGroup::SUBTYPE) {
+							$object_content = "new";
+							$group_id = $target_id;				
+						} 
+						else if ($target->getSubtype() == ClipitActivity::SUBTYPE) {
+							$object_content = "new";
+							$activity_id = $target_id;					
+						}
+						else {
+							$object_content = $target_id;
+						}
+					}
 				}
 				else {
 					$object_content = $object->description;
+					$temp_array = get_entity_relationships($object_id, true);
+			        foreach($temp_array as $rel) {
+						$rel_id = $rel->guid_two;
+						$target = get_entity($rel_id);
+						if (!is_null($target) && $target instanceof ElggEntity) {
+							if ($target->getSubtype() == ClipitPost::SUBTYPE || $target->getSubtype() == ClipitComment::SUBTYPE) {
+								$rel_array = get_entity_relationships($rel_id, true);
+						        foreach($rel_array as $rel2) {
+									$target_id2 = $rel2->guid_two;
+									$target2 = get_entity($target_id2);
+									if (!is_null($target2) && $target2 instanceof ElggEntity) {
+										if ($target2->getSubtype() == ClipitGroup::SUBTYPE) {
+                                            $groupd_id = $target_id2;
+										} 
+										else if ($target2->getSubtype() == ClipitActivity::SUBTYPE) {
+											$activity_id = $target_id2;
+										}
+									}
+								}
+							}
+						}
+					}
 				}
 				if ($object_content == null) {$object_content = "";}
 				$object_type = $object->getType();
 				if ($object_type == null) {$object_type = "";}
 				$object_subtype = $object->getSubtype();
 				if ($object_subtype == null) {$object_subtype = "none";}
+				if ($object_type == "object") {
+					$elgg_object = get_entity($object_id);
+					if (!is_null($elgg_object)) {
+						$object_title = $elgg_object->title;
+					}
+				}
+				else {
+					$object_title = $object_subtype;
+				}
 				$event = sanitise_string($event);
-				if ($event == null) {$event = "";}
+				if (is_null($event)) {$event = "";}
 				$time = time();
 				$ip_address = sanitise_string($_SERVER['REMOTE_ADDR']);
-				if ($ip_address == null) {$ip_address = "";}
+				if (is_null($ip_address)) {$ip_address = "";}
 				$performed_by = (int)elgg_get_logged_in_user_guid();
-				if ($performed_by == null) {$performed_by = 0;}
-
+				if (is_null($performed_by)) {$performed_by = 0;}
+				$user_name = elgg_get_logged_in_user_entity()->name;
+				if (is_null($user_name)) {$user_name = "";}
 				if (isset($object->access_id)) {
 					$access_id = (int)$object->access_id;
 				} else {
@@ -108,30 +167,30 @@
 				}
 				
 				
-				$group_id = 0;
-				$course_id = 0;
-				$activity_id = 0;
 				$role = "";
-
-				$temp_array = get_entity_relationships($object_id, true);
-		        foreach($temp_array as $rel){
-		            if($rel->relationship == ClipitActivity::REL_ACTIVITY_FILE OR $rel->relationship == ClipitActivity::REL_ACTIVITY_TASK OR $rel->relationship == ClipitActivity::REL_ACTIVITY_VIDEO){
-		                $activity_id = $rel->guid_one;
-		            }
-					elseif($rel->relationship == ClipitGroup::REL_GROUP_FILE /*OR $rel->relationship == ClipitGroup::REL_GROUP_TASK OR $rel->relationship == ClipitGroup::REL_GROUP_VIDEO */){
-						$group_id = $rel->guid_one;
-					}
-					//TODO Add support for courses when available 
-		        }
-				
-				$role = ClipitUser::get_properties($performed_by, array("role"));
-				
-				
+				if ($object_subtype == "clipit_post") {
+					$role = print_r(ClipitUser::get_properties($performed_by, array("role")));
+				}
 				$con=mysqli_connect($CONFIG->dbhost,$CONFIG->dbuser,$CONFIG->dbpass,$CONFIG->dbname);
+				$result = mysqli_query($con,"SHOW COLUMNS FROM `".$log_table."` LIKE 'user_name';");
+				$exists_username = (mysqli_num_rows($result))?TRUE:FALSE;
+				$result = mysqli_query($con,"SHOW COLUMNS FROM `".$log_table."` LIKE 'object_title';");
+				$exists_object_title = (mysqli_num_rows($result))?TRUE:FALSE;
+				if (!$exists_username || !$exists_object_title) {
+					if ($stmt = mysqli_prepare($con, "RENAME TABLE ".$log_table." TO ".$log_table."_".$time.";")) {
+ 						mysqli_stmt_execute($stmt);
+					}
+					else {
+						system_message($stmt->error);
+					}
+					$stmt->close();
+				}
+				
 				//If the table doesn't exist, we need to create it...
 				mysqli_query($con,"CREATE TABLE IF NOT EXISTS `".$log_table."` (".
 									  "`log_id` int(255) NOT NULL AUTO_INCREMENT,".
 									  "`object_id` int(255) NOT NULL, ".
+									  "`object_title` varchar(255) NOT NULL, ".
 									  "`transaction_id` varchar(255) NOT NULL, ".
 									  "`object_class` varchar(255) NOT NULL, ".
 									  "`object_type` varchar(255) NOT NULL, ".
@@ -139,7 +198,8 @@
 									  "`event` varchar(255) NOT NULL, ".
 									  "`time` varchar(255) NOT NULL, ".
 									  "`ip_address` varchar(255) NOT NULL, ".
-									  "`performed_by` varchar(255) NOT NULL, ".
+									  "`user_id` int(255) NOT NULL, ".
+									  "`user_name` varchar(255) NOT NULL, ".
 									  "`access_id` int(255) NOT NULL, ".
 									  "`enabled` varchar(255) NOT NULL, ".
 									  "`owner_guid` int(255) NOT NULL, ".
@@ -148,13 +208,20 @@
 									  "`course_id` int(255) NOT NULL, ".
 									  "`activity_id` int(255) NOT NULL, ".
 									  "`role` varchar(255) NOT NULL, ".
-									  "PRIMARY KEY (`log_id`) ".
-									") ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;");
+									   "PRIMARY KEY (`log_id`) ".
+									") ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;");
+				
+			
 				mysqli_query($con,"INSERT INTO `".$log_table."` ".
-									"(object_id, transaction_id, object_class, object_type, object_subtype, event, time, ip_address, performed_by, access_id, enabled, owner_guid, content, group_id, course_id, activity_id, role) ".
-									"VALUES (".$object_id.", '".$transaction_id."', '".$object_class."', '".$object_type."', '".$object_subtype."', '".$event."', '".$time."', '".$ip_address."', '".$performed_by."', ".$access_id.", '".$enabled."', ".$owner_guid.", '".$object_content."', ".$group_id.", ".$course_id.", ".$activity_id.", '".$role."');");
+									"(object_id, object_title, transaction_id, object_class, object_type, object_subtype, event, time, ip_address, user_id, user_name, access_id, enabled, owner_guid, content, group_id, course_id, activity_id, role) ".
+									"VALUES (".$object_id.", '".$object_title."', '".$transaction_id."', '".$object_class."', '".$object_type."', '".$object_subtype."', '".$event."', '".$time."', '".$ip_address."', '".$performed_by.
+									"', '".$user_name."', ".$access_id.", '".$enabled."', ".$owner_guid.", '".$object_content."', ".$group_id.", ".$course_id.", ".$activity_id.", '".$role."');");
 									
+				
 				mysqli_store_result($con);
+				$_SESSION['transaction_artifact'][] = array('ObjectId' => $object_id, 'ObjectTitle' => $object_title, 'ObjectType' => $object_type, 'ObjectSubtype' => $object_subtype, 'ObjectClass' => $object_class, 'OwnerGUID' => $owner_guid, 
+														'GroupId' => $group_id, 'CourseId' => $course_id, 'ActivityId' => $activity_id, 'Event' => $event, 'Content' => $object_content,
+														'Timestamp' => $time, 'PerformedBy'=> $performed_by, 'UserName'=> $user_name, 'IPAdress' => $ip_address, 'Role' => $role, 'TransactionId' => $transaction_id);
 				$con->close();					
 				//If we actually logged something, we need to let the transaction handler know	
 				$_SESSION['logged'] = true;
@@ -162,6 +229,16 @@
 		}
 	}
 	
+	function transactionExists($where, $con) {
+        $act_table = $_SESSION['activity_table'];	
+        $query = "SELECT * FROM `".$act_table."` WHERE transaction_id = `".$where."`;";
+        $result = $con->query($query);
+ 
+        if($result->num_rows > 0) {
+                return true; // The record(s) do exist
+        }
+        return false; // No record found
+	}
 	
 	function transaction_handling()
 	{
@@ -169,49 +246,32 @@
 		global $CONFIG;
 		$con=mysqli_connect($CONFIG->dbhost,$CONFIG->dbuser,$CONFIG->dbpass,$CONFIG->dbname);
 
-		session_start();		
 		$act_table = $_SESSION['activity_table'];
-		$log_table = $_SESSION['logging_table'];
 		$logged = $_SESSION['logged'];
-		$transaction_id = $_SESSION['tid'];
 
 		if($_SESSION['enabled']) {
 			if ($logged) {
 				//First we get the recently added transaction and transform it into json activitystream
-				if ($transaction_log = $con->query("SELECT * FROM ".$log_table." WHERE transaction_id = '".$transaction_id."';")) {
-					$action_particles[] = $transaction_log->num_rows;
-					$i = 0;
-					while ($action_row = $transaction_log->fetch_row()) {
-						$content = $action_row[13];
-						$action_particles[$i] = array('ObjectId' => $action_row[1], 'ObjectType' => $action_row[4], 'ObjectSubtype' => $action_row[5], 'ObjectClass' => $action_row[3], 'OwnerGUID' => $action_row[12], 
-														'GroupId' => $action_row[14], 'CourseId' => $action_row[15], 'ActivityId' => $action_row[16], 'Event' => $action_row[6], 'Content' => $content,
-														'Timestamp' => $action_row[7], 'PerformedBy'=> $action_row[9], 'IPAdress' => $action_row[8], 'Role' => $action_row[17], 'TransactionId' => $transaction_id);
-						$i++;
-					}
-					$action = convertLogTransactionToActivityStream($action_particles);
-					//Then we put this new information into a separate table, coupled with ids for access management and timestamps for ordering purposes
-					//Unless we were unable to identify the activity
+				$action_particles = $_SESSION['transaction_artifact'];
+				$action = convertLogTransactionToActivityStream($action_particles);
+				//Then we put this new information into a separate table, coupled with ids for access management and timestamps for ordering purposes
+				//Unless we were unable to identify the activity
+				if (!($action['verb'] == 'Unidentified')) {
+					storeJSON($action, $act_table, $con);	
+				}
+
+			}
+			/*
+            elseif (!transactionExists($transaction_id, $con)) {
+				$url = $_SERVER[ "REQUEST_URI" ];
+				if (strpos($url, '/js/') == FALSE AND strpos($url, '/mod/') == FALSE AND strpos($url, '/action/') == FALSE) {
+					$action = convertURLToActivityStream($url);					
 					if (!($action['verb'] == 'Unidentified')) {
-						$activity_json = json_encode($action);
-						//Create the table if it doesn't exist
-						$con->query("CREATE TABLE IF NOT EXISTS `".$act_table."` (".
-										  "`transaction_id` varchar(255) NOT NULL, ".
-										  "`json` longtext NOT NULL, ".
-										  "`actor_id` int(255) NOT NULL, ".
-										  "`group_id` int(255) NOT NULL, ".
-										  "`course_id` int(255) NOT NULL, ".
-										  "`activity_id` int(255) NOT NULL, ".
-										  "`timestamp` varchar(255) NOT NULL, ".
-										  "PRIMARY KEY (`transaction_id`) ".
-										  ") ENGINE=InnoDB DEFAULT CHARSET=latin1;");
-					
-						$con->query("INSERT INTO `".$act_table."` ".
-										  "(transaction_id, json, actor_id, group_id, course_id, activity_id, timestamp) ".
-										  "VALUES ('".$transaction_id."', '".$activity_json."', '".$action['actor']['actorId']."', '".$action['object']['groupId']."', '".$action['object']['courseId']."', '".$action['object']['activityId']."', '".$action['published']."');");
+						storeJSON($action, $act_table, $con);	
 					}
-					$transaction_log->close();
 				}
 			}
+			*/
 		}
 		$con->close();
 	}
@@ -240,6 +300,6 @@
 	register_elgg_event_handler('log', 'extended_log', 'extended_log_default_logger', 999);
 	register_elgg_event_handler('init','system','activitystreamer_init');
 	register_elgg_event_handler('plugins_boot','system','init_transaction');
-	register_elgg_event_handler('shutdown','system','transaction_handling');
+	register_shutdown_function('transaction_handling');
 	register_elgg_event_handler('pagesetup','system','activitystreamer_pagesetup');
 	register_action('activitystreamer/modify',false,$CONFIG->pluginspath . "activitystreamer/actions/modify.php");
