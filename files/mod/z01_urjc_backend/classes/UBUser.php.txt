@@ -48,15 +48,16 @@ class UBUser extends UBItem {
      * Constructor
      *
      * @param int $id If !null, load instance.
+     * @param ElggUser $elgg_user Object to load instance from (optional)
      *
      * @throws APIException
      */
-    function __construct($id = null) {
+    function __construct($id = null, $elgg_user = null) {
         if(!empty($id)) {
-            if(!($elgg_user = new ElggUser($id))) {
-                throw new APIException(
-                    "ERROR: Id '" . $id . "' does not correspond to a " . get_called_class() . " object."
-                );
+            if(empty($elgg_user)){
+                if(!($elgg_user = new ElggUser($id))) {
+                    throw new APIException("ERROR: Failed to load ".get_called_class()." object with ID '" . $id . "'.");
+                }
             }
             $this->load_from_elgg($elgg_user);
         }
@@ -211,7 +212,7 @@ class UBUser extends UBItem {
             if(!$elgg_user) {
                 $user_array[$login] = null;
             } else {
-                $user_array[$login] = new static((int)$elgg_user->guid);
+                $user_array[$login] = new static((int)$elgg_user->guid, $elgg_user);
             }
         }
         return $user_array;
@@ -235,7 +236,7 @@ class UBUser extends UBItem {
             } else {
                 $temp_array = array();
                 foreach($elgg_user_array as $elgg_user) {
-                    $temp_array[] = new static((int)$elgg_user->guid);
+                    $temp_array[] = new static((int)$elgg_user->guid, $elgg_user);
                 }
                 $user_array[$email] = $temp_array;
             }
@@ -264,7 +265,7 @@ class UBUser extends UBItem {
             } else {
                 $temp_array = array();
                 foreach($elgg_user_array as $elgg_user) {
-                    $temp_array[] = new static($elgg_user->guid);
+                    $temp_array[] = new static($elgg_user->guid, $elgg_user);
                 }
                 $user_array[$role] = $temp_array;
             }

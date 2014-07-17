@@ -175,7 +175,7 @@ class ClipitActivity extends UBItem {
             return null;
         }
         foreach($elgg_objects as $elgg_object) {
-            $activity_array[] = new static($elgg_object->guid);
+            $activity_array[] = new static($elgg_object->guid, $elgg_object);
         }
         return $activity_array;
     }

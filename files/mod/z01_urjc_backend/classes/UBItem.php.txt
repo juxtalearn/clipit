@@ -64,8 +64,8 @@ class UBItem {
     /**
      * Constructor
      *
-     * @param int        $id          If !null, load instance.
-     * @param ElggObject $elgg_object Object to load instance from, if passed
+     * @param int                   $id          If !null, load instance.
+     * @param ElggObject|ElggEntity $elgg_object Object to load instance from (optional)
      *
      * @throws APIException
      */
@@ -73,8 +73,7 @@ class UBItem {
         if(!empty($id)) {
             if(empty($elgg_object)){
                 if(!$elgg_object = new ElggObject($id)) {
-                    throw new APIException(
-                        "ERROR: Failed to load " . get_called_class() ." object with ID '" . $id . "'.");
+                    throw new APIException("ERROR: Failed to load " . get_called_class() ." object with ID '" . $id . "'.");
                 }
             }
             $elgg_type = $elgg_object->type;
@@ -338,7 +337,7 @@ class UBItem {
         if(!empty($elgg_entity_array)) {
             foreach($elgg_entity_array as $elgg_entity) {
                 if(empty($prop_array)){
-                    $object_array[(int)$elgg_entity->guid] = new static((int)$elgg_entity->guid);
+                    $object_array[(int)$elgg_entity->guid] = new static((int)$elgg_entity->guid, $elgg_entity);
                 }
                 foreach($prop_array as $property) {
                     switch($property) {
@@ -397,7 +396,7 @@ class UBItem {
             if(!empty($elgg_object_array)) {
                 $temp_array = array();
                 foreach($elgg_object_array as $elgg_object) {
-                    $temp_array[(int)$elgg_object->guid] = new static((int)$elgg_object->guid);
+                    $temp_array[(int)$elgg_object->guid] = new static((int)$elgg_object->guid, $elgg_object);
                 }
                 if(!empty($temp_array)) {
                     $object_array[(int)$owner_id] = $temp_array;
@@ -456,12 +455,12 @@ class UBItem {
             foreach($elgg_object_array as $elgg_object) {
                 $search_string = strtolower($search_string);
                 if(strpos(strtolower($elgg_object->name), $search_string) !== false) {
-                    $search_result[(int)$elgg_object->guid] = new static((int)$elgg_object->guid);
+                    $search_result[(int)$elgg_object->guid] = new static((int)$elgg_object->guid, $elgg_object);
                     continue;
                 }
                 if($name_only === false) {
                     if(strpos(strtolower($elgg_object->description), $search_string) !== false) {
-                        $search_result[(int)$elgg_object->guid] = new static((int)$elgg_object->guid);
+                        $search_result[(int)$elgg_object->guid] = new static((int)$elgg_object->guid, $elgg_object);
                     }
                 }
             }
@@ -474,7 +473,7 @@ class UBItem {
             );
             if(!empty($elgg_object_array)) {
                 foreach($elgg_object_array as $elgg_object) {
-                    $search_result[(int)$elgg_object->guid] = new static((int)$elgg_object->guid);
+                    $search_result[(int)$elgg_object->guid] = new static((int)$elgg_object->guid, $elgg_object);
                 }
             }
         }
