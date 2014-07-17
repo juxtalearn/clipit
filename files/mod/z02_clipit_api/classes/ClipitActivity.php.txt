@@ -43,6 +43,7 @@ class ClipitActivity extends UBItem {
     public $tricky_topic = 0;
     public $start = 0;
     public $end = 0;
+    public $max_group_size = 0;
     public $teacher_array = array();
     public $called_users_array = array();
     public $group_array = array();
@@ -62,6 +63,7 @@ class ClipitActivity extends UBItem {
         $this->tricky_topic = (int)$elgg_entity->get("tricky_topic");
         $this->start = (int)$elgg_entity->get("start");
         $this->end = (int)$elgg_entity->get("end");
+        $this->max_group_size = (int)$elgg_entity->get("max_group_size");
         $this->status = (string)static::get_status($this->start, $this->end);
         $this->teacher_array = static::get_teachers($this->id);
         $this->called_users_array = static::get_called_users($this->id);
@@ -107,6 +109,7 @@ class ClipitActivity extends UBItem {
         $elgg_entity->set("tricky_topic", (int)$this->tricky_topic);
         $elgg_entity->set("start", (int)$this->start);
         $elgg_entity->set("end", (int)$this->end);
+        $elgg_entity->set("max_group_size", (int)$this->max_group_size);
     }
 
     /**
