@@ -50,7 +50,7 @@ class ClipitFile extends UBFile {
 
     static function get_by_tags($tag_array) {
         $return_array = array();
-        $all_items = static::get_all(0, "id"); // Get all item ids, not objects
+        $all_items = static::get_all(0, true); // Get all item ids, not objects
         foreach($all_items as $item_id) {
             $item_tags = static::get_tags((int)$item_id);
             foreach($tag_array as $search_tag) {
@@ -65,7 +65,7 @@ class ClipitFile extends UBFile {
 
     static function get_by_labels($label_array) {
         $return_array = array();
-        $all_items = static::get_all(0, "id"); // Get all item ids, not objects
+        $all_items = static::get_all(0, true); // Get all item ids, not objects
         foreach($all_items as $item_id) {
             $item_labels = (array)static::get_labels((int)$item_id);
             foreach($label_array as $search_tag) {

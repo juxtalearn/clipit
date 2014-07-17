@@ -107,26 +107,4 @@ function expose_common_resource_functions($api_suffix, $class_suffix) {
         array("id" => array("type" => "int", "required" => true)), "Get Performance Items from a Resource", 'GET',
         false, true
     );
-    expose_function(
-        $api_suffix . "add_comments", $class_suffix . "add_comments", array(
-            "id" => array("type" => "int", "required" => true),
-            "comment_array" => array("type" => "array", "required" => true)
-        ), "Add Comments by Id to a Resource", 'POST', false, true
-    );
-    expose_function(
-        $api_suffix . "set_comments", $class_suffix . "set_comments", array(
-            "id" => array("type" => "int", "required" => true),
-            "comment_array" => array("type" => "array", "required" => true)
-        ), "Set Comments by Id to a Resource", 'POST', false, true
-    );
-    expose_function(
-        $api_suffix . "remove_comments", $class_suffix . "remove_comments", array(
-            "id" => array("type" => "int", "required" => true),
-            "comment_array" => array("type" => "array", "required" => true)
-        ), "Remove Comments by Id from a Resource", 'POST', false, true
-    );
-    expose_function(
-        $api_suffix . "get_comments", $class_suffix . "get_comments",
-        array("id" => array("type" => "int", "required" => true)), "Get Comments from a Resource", 'GET', false, true
-    );
 }

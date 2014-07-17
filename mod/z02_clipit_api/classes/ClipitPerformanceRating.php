@@ -54,7 +54,7 @@ class ClipitPerformanceRating extends UBItem {
             if(!empty($elgg_objects)) {
                 $temp_array = array();
                 foreach($elgg_objects as $elgg_object) {
-                    $temp_array[] = new static($elgg_object->guid);
+                    $temp_array[] = new static($elgg_object->guid, $elgg_object);
                 }
                 $performance_rating_array[$item_id] = $temp_array;
             } else {
@@ -72,8 +72,8 @@ class ClipitPerformanceRating extends UBItem {
         if(!empty($rating_array)) {
             foreach($rating_array as $rating) {
                 foreach($rating->performance_rating_array as $performance_rating_id) {
-                    $performance_rating = new static($performance_rating_id);
-                    $average_rating += (int)$performance_rating->star_rating;
+                    $prop_value_array = static::get_properties($performance_rating_id, array("star_rating"));
+                    $average_rating += (int)$prop_value_array["star_rating"];
                     $count ++;
                 }
             }
@@ -90,8 +90,8 @@ class ClipitPerformanceRating extends UBItem {
         $average_rating = 0;
         $count = 0;
         foreach($rating->performance_rating_array as $performance_rating_id) {
-            $performance_rating = new static($performance_rating_id);
-            $average_rating += (int)$performance_rating->star_rating;
+            $prop_value_array = static::get_properties($performance_rating_id, array("star_rating"));
+            $average_rating += (int)$prop_value_array["star_rating"];
             $count ++;
         }
         if(!empty($count)) {
@@ -109,9 +109,9 @@ class ClipitPerformanceRating extends UBItem {
         if(!empty($rating_array)) {
             foreach($rating_array as $rating) {
                 foreach($rating->performance_rating_array as $performance_rating_id) {
-                    $performance_rating = new static($performance_rating_id);
-                    if($performance_rating->performance_item == (int)$performance_item_id) {
-                        $average_rating += (int)$performance_rating->star_rating;
+                    $prop_value_array = static::get_properties($performance_rating_id, array("performance_item", "star_rating"));
+                    if((int)$prop_value_array["performance_item"] == (int)$performance_item_id) {
+                        $average_rating += (int)$prop_value_array["star_rating"];
                         $count ++;
                     }
                 }

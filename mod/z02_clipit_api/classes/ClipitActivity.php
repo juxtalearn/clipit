@@ -140,7 +140,7 @@ class ClipitActivity extends UBItem {
             "E4391B", // red
             "14B8DD", // light blue
         );
-        $pos = (int)rand(0, count($color_array));
+        $pos = (int)rand(0, count($color_array)-1);
         return $color_array[$pos];
     }
 
@@ -175,7 +175,7 @@ class ClipitActivity extends UBItem {
             return null;
         }
         foreach($elgg_objects as $elgg_object) {
-            $activity_array[] = new static($elgg_object->guid);
+            $activity_array[] = new static($elgg_object->guid, $elgg_object);
         }
         return $activity_array;
     }
@@ -299,7 +299,6 @@ class ClipitActivity extends UBItem {
         return UBCollection::get_items($id, static::REL_ACTIVITY_FILE);
     }
 
-    // PUBLISHED STORYBOARDS
     /**
      * Gets all published Storyboards from the Tasks contained inside an Activity
      *
@@ -316,7 +315,6 @@ class ClipitActivity extends UBItem {
         return $storyboard_array;
     }
 
-    // PUBLISHED VIDEOS
     /**
      * Gets all published Videos from the Tasks contained inside an Activity
      *

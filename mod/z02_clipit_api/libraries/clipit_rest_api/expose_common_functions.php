@@ -60,7 +60,7 @@ function expose_common_functions($api_suffix, $class_suffix) {
     expose_function(
         $api_suffix . "get_all", $class_suffix . "get_all", array(
             "limit" => array("type" => "int", "required" => false),
-            "prop_array" => array("type" => "array", "required" => false)
+            "id_only" => array("type" => "bool", "required" => false)
         ), "Get all instances", 'GET', false, true
     );
     expose_function(
