@@ -140,7 +140,7 @@ class ClipitActivity extends UBItem {
             "E4391B", // red
             "14B8DD", // light blue
         );
-        $pos = (int)rand(0, count($color_array));
+        $pos = (int)rand(0, count($color_array)-1);
         return $color_array[$pos];
     }
 

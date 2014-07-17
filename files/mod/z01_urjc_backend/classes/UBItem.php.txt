@@ -313,7 +313,7 @@ class UBItem {
      * @return bool Returns true if correct, or false if error
      */
     static function delete_all() {
-        $items = static::get_all(0, "id");
+        $items = static::get_all(0, true);
         if(!empty($items)) {
             static::delete_by_id($items);
         }
@@ -323,38 +323,27 @@ class UBItem {
     /**
      * Get all Object instances of this TYPE and SUBTYPE from the system, optionally only a specified property.
      *
-     * @param array $prop_array Properties to return (with key = ID). Default = [all] (object instance)
-     * @param int   $limit      Number of results to show, default= 0 [no limit] (optional)
+     * @param bool $id_only Properties to return (with key = ID). Default = [all] (object instance)
+     * @param int  $limit   Number of results to show, default= 0 [no limit] (optional)
      *
      * @return static[]|int[] Returns an array of Objects, or Object IDs if id_only = true
      */
-    static function get_all($limit = 0, $prop_array = null) {
-        $object_array = array();
+    static function get_all($limit = 0, $id_only = false) {
+        $return_array = array();
         $elgg_entity_array = elgg_get_entities(
             array('type' => static::TYPE, 'subtype' => static::SUBTYPE, 'limit' => $limit)
         );
         usort($elgg_entity_array, 'static::sort_by_date_inv');
         if(!empty($elgg_entity_array)) {
             foreach($elgg_entity_array as $elgg_entity) {
-                if(empty($prop_array)){
-                    $object_array[(int)$elgg_entity->guid] = new static((int)$elgg_entity->guid, $elgg_entity);
-                }
-                foreach($prop_array as $property) {
-                    switch($property) {
-                        case "id":
-                            $object_array[] = (int)$elgg_entity->guid;
-                            break;
-                        case "login":
-                            $object_array[(int)$elgg_entity->guid] = $elgg_entity->username;
-                            break;
-                        default:
-                            $object_array[(int)$elgg_entity->guid] = $elgg_entity->$property;
-                            break;
-                    }
+                if($id_only){
+                    $return_array[] = $elgg_entity->guid;
+                } else {
+                    $return_array[(int)$elgg_entity->guid] = new static((int)$elgg_entity->guid, $elgg_entity);
                 }
             }
         }
-        return $object_array;
+        return $return_array;
     }
 
     /**
