@@ -299,7 +299,6 @@ class ClipitActivity extends UBItem {
         return UBCollection::get_items($id, static::REL_ACTIVITY_FILE);
     }
 
-    // PUBLISHED STORYBOARDS
     /**
      * Gets all published Storyboards from the Tasks contained inside an Activity
      *
@@ -316,7 +315,6 @@ class ClipitActivity extends UBItem {
         return $storyboard_array;
     }
 
-    // PUBLISHED VIDEOS
     /**
      * Gets all published Videos from the Tasks contained inside an Activity
      *
