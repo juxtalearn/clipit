@@ -339,7 +339,6 @@ $(function(){
                     scrollTop: offset}, 'slow');
             }
         });
-
     });
     /**
      * Button loading state

@@ -10,6 +10,7 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
+$id = uniqid();
 ?>
 <script>
 $(function(){
@@ -18,13 +19,13 @@ $(function(){
 </script>
 
 <li class="list-item col-md-12 task">
-    <?php echo elgg_view('activity/create/task', array('task_type' => 'upload'));?>
+    <?php echo elgg_view('activity/create/task', array('task_type' => 'upload', 'id' => $id));?>
     <ul class="feedback_form" style="margin-left: 20px;display: none">
         <li style="padding: 10px;background: #fafafa;" class="col-md-12">
             <div class="col-md-12">
                 <h4>Feedback task</h4>
             </div>
-            <?php echo elgg_view('activity/create/task', array('task_type' => 'feedback'));?>
+            <?php echo elgg_view('activity/create/task', array('task_type' => 'feedback', 'id' => $id));?>
         </li>
     </ul>
 </li>

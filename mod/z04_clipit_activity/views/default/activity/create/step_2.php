@@ -112,20 +112,22 @@ $(function(){
 
     $(document).on("click", "#add_task",function(){
        var content = $(".task-list");
-        content.append(<?php echo json_encode(elgg_view('activity/create/task_list'));?>);
+        $.get( "ajax/view/activity/create/task_list", function( data ) {
+            content.append(data);
+        });
     });
 
     $(document).on("click", ".feedback-check",function(){
         var parent = $(this).closest("li");
         var feedback_content = parent.find(".feedback_form");
         if($(this).find("input").is(':checked')){
-            var task_end = parent.find("input[name='task-end[]']").val();
+            var task_end = parent.find(".input-task-end").val();
             if(task_end.length > 0){
-                feedback_content.find("input[name='task-start[]']").val(task_end);
+                feedback_content.find(".input-task-start").val(task_end);
             }
             feedback_content
                 .show()
-                .find("input[name='task-title[]']")
+                .find(".input-task-title")
                 .focus();
         } else {
             feedback_content.hide();
@@ -176,6 +178,7 @@ $(function(){
         <?php echo elgg_view('input/button', array(
             'value' => elgg_echo('back'),
             'data-step' => 1,
+            'id' => 'back_step',
             'class' => "btn btn-primary btn-border-blue pull-left button_step",
         ));
         ?>

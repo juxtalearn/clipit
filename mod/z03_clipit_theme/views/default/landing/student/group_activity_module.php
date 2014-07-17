@@ -2,7 +2,7 @@
 $user = elgg_get_logged_in_user_guid();
 // order activity by recent deadline
 $my_activities = ClipitUser::get_activities($user, true);
-
+$my_activities = array_filter($my_activities, 'strlen');
 elgg_load_js("nvd3:d3_v2");
 elgg_load_js("nvd3");
 elgg_load_css("nvd3:css");

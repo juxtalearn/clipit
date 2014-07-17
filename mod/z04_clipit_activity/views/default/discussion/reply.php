@@ -16,8 +16,8 @@ $user_loggedin_id = elgg_get_logged_in_user_guid();
 $user_reply = array_pop(ClipitUser::get_by_id(array($message->owner_id)));
 $files_id = $message->get_files($message->id);
 // activity discussion, get group data
-if($vars['activity']){
-    $group_id = ClipitGroup::get_from_user_activity($user_reply->id, 74);
+if($activity_id = $vars['activity_id']){
+    $group_id = ClipitGroup::get_from_user_activity($user_reply->id, $activity_id);
 }
 // set read status
 if($message->owner_id != $user_loggedin_id){

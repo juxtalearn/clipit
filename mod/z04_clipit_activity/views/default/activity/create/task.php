@@ -11,6 +11,8 @@
  * @package         ClipIt
  */
 $task_type = elgg_extract('task_type', $vars);
+$id = elgg_extract('id', $vars);
+
 switch($task_type){
     case "upload":
         $task_types = array(
@@ -18,6 +20,7 @@ switch($task_type){
             'video_upload' => elgg_echo('task:video_upload'),
             'storyboard_upload' => elgg_echo('task:storyboard_upload')
         );
+        $input_array = "[{$id}]";
         $disabled = false;
         break;
     case "feedback":
@@ -25,6 +28,7 @@ switch($task_type){
             'video_feedback' => elgg_echo('task:video_feedback'),
             'storyboard_feedback' => elgg_echo('task:storyboard_feedback')
         );
+        $input_array = "[{$id}][feedback-form]";
         $disabled = true;
         break;
 }
@@ -38,8 +42,8 @@ switch($task_type){
         <div class="form-group">
             <label for="task-title"><?php echo elgg_echo("task:title");?></label>
             <?php echo elgg_view("input/text", array(
-                'name' => 'task-title[]',
-                'class' => 'form-control',
+                'name' => "task{$input_array}[title]",
+                'class' => 'form-control input-task-title',
                 'required' => true
             ));
             ?>
@@ -48,19 +52,26 @@ switch($task_type){
     <div class="col-md-3">
         <label for="task-type"><?php echo elgg_echo("task:task_type");?></label>
         <?php echo elgg_view('input/dropdown', array(
-            'name' => 'task-type[]',
+            'name' => "task{$input_array}[type]",
             'class' => 'form-control task-types',
             'style' => 'padding-top: 5px;padding-bottom: 5px;',
             'disabled' => $disabled,
             'options_values' => $task_types
         ));
         ?>
+        <?php if($disabled):?>
+            <?php echo elgg_view("input/hidden", array(
+                'name' => "task{$input_array}[type]",
+                'class' => 'form-control task-types',
+            ));
+            ?>
+        <?php endif;?>
     </div>
     <div class="col-md-2">
         <label for="task-start"><?php echo elgg_echo("task:start");?></label>
         <?php echo elgg_view("input/text", array(
-            'name' => 'task-start[]',
-            'class' => 'form-control datepicker',
+            'name' => "task{$input_array}[start]",
+            'class' => 'form-control datepicker input-task-start',
             'required' => true
         ));
         ?>
@@ -68,8 +79,8 @@ switch($task_type){
     <div class="col-md-2">
         <label for="task-end"><?php echo elgg_echo("task:end");?></label>
         <?php echo elgg_view("input/text", array(
-            'name' => 'task-end[]',
-            'class' => 'form-control datepicker',
+            'name' => "task{$input_array}[end]",
+            'class' => 'form-control datepicker input-task-end',
             'required' => true
         ));
         ?>
@@ -78,7 +89,7 @@ switch($task_type){
         <div class="form-group">
             <label for="task-description"><?php echo elgg_echo("task:description");?></label>
             <?php echo elgg_view("input/plaintext", array(
-                'name' => 'task-description[]',
+                'name' => "task{$input_array}[description]",
                 'class' => 'form-control',
                 'required' => true,
                 'rows' => 1,
@@ -92,7 +103,7 @@ switch($task_type){
         <label for="activity-title"><?php echo elgg_echo("task:feedback:check");?></label>
         <div class="checkbox feedback-check">
             <label>
-                <input type="checkbox" value="1" name="feedback[]"> <?php echo elgg_echo("task:feedback:check");?>
+                <input type="checkbox" value="1" name="<?php echo "task{$input_array}[feedback]";?>"> <?php echo elgg_echo("task:feedback:check");?>
             </label>
         </div>
     </div>

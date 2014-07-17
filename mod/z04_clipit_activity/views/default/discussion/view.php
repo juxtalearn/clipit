@@ -131,7 +131,7 @@ foreach(array_pop(ClipitPost::get_by_destination(array($message->id))) as $reply
             array(
                 'entity' => $reply_msg,
                 'auto_id' => $auto_id,
-                'activity' => $vars['activity'],
+                'activity_id' => $vars['activity_id'],
                 'show_group' => $vars['show_group']
             ));
     $auto_id++;

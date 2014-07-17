@@ -22,6 +22,7 @@ foreach($my_groups_ids as $group_id){
     if($progress == 0){
         $progress = 5;
     }
+    if($activity_id){
     $content .='<div class="bar" style="width:'.$progress.'%;background: #'.$activity->color.';">
                     <div>
                         <h4>'.$activity_link.'</a>
@@ -29,6 +30,7 @@ foreach($my_groups_ids as $group_id){
                         </h4>
                     </div>
                 </div>';
+    }
 }
 $content .= '</div>';
 

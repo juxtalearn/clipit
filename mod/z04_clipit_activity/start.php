@@ -44,8 +44,11 @@ function clipit_activity_init() {
     // Register actions & ajax views
 
     // Create Activity
-    elgg_register_action("activity/create/add_users", elgg_get_plugins_path() . "z04_clipit_activity/actions/activity/create/add_users.php");
-    elgg_register_action("activity/create/add_users_upload", elgg_get_plugins_path() . "z04_clipit_activity/actions/activity/create/add_users_upload.php");
+    elgg_register_action("activity/create/add_users", elgg_get_plugins_path() . "z04_clipit_activity/actions/activity/add_users.php");
+    elgg_register_action("activity/create/add_users_upload", elgg_get_plugins_path() . "z04_clipit_activity/actions/activity/add_users_upload.php");
+    elgg_register_action("activity/create", elgg_get_plugins_path() . "z04_clipit_activity/actions/activity/create.php");
+    elgg_register_ajax_view('activity/create/task_list');
+    elgg_register_ajax_view('activity/create/groups/create');
     // Group
     elgg_register_action("group/join", elgg_get_plugins_path() . "z04_clipit_activity/actions/group/join.php");
     elgg_register_action("group/leave", elgg_get_plugins_path() . "z04_clipit_activity/actions/group/leave.php");
@@ -188,7 +191,7 @@ function create_activity_page_handler($page) {
     elgg_extend_view('forms/activity/create', 'activity/create/step_1', 100);
     elgg_extend_view('forms/activity/create', 'activity/create/step_2', 100);
     elgg_extend_view('forms/activity/create', 'activity/create/step_3', 100);
-    elgg_extend_view('forms/activity/create', 'activity/create/groups/create', 100);
+//    elgg_extend_view('forms/activity/create', 'activity/create/groups/create', 100);
     require_once "$base_dir/create.php";
 
     return true;
@@ -317,7 +320,7 @@ function activity_page_handler($page) {
                             $content = elgg_view('discussion/view',
                                 array(
                                     'entity'     => $message,
-                                    'activity'   => $activity,
+                                    'activity_id'   => $activity->id,
                                     'show_group' => true,
                                 ));
                         } else {

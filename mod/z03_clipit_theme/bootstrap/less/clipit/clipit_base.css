@@ -7160,6 +7160,9 @@ label > span.error {
   color: #ff4343;
   float: right !important;
 }
+label.error {
+  color: #ff4343;
+}
 input.error,
 textarea.error {
   -webkit-box-shadow: inset 0 1px 4px #ff4343 !important;
@@ -10544,6 +10547,7 @@ h6,
   height: 100%;
   left: 0;
   cursor: not-allowed;
+  z-index: 100;
 }
 .bg-center-icon > .bg {
   position: absolute;

@@ -43,59 +43,35 @@ $(function(){
             minDate: activity_form.find("input[name=activity-start]").val(),
             onClose: function (text, inst) {
                 $(activity_form
-                    .find("input[name='task-start[]'], input[name='task-end[]'], input[name='activity-end']"))
+                    .find(".input-task-start, .input-task-end, input[name='activity-end']"))
                         .datepicker( "option", "minDate", activity_form.find("input[name=activity-start]").val() );
                 $(activity_form
-                    .find("input[name='task-start[]'], input[name='task-end[]'], input[name='activity-start']"))
+                    .find(".input-task-start, .input-task-end, input[name='activity-start']"))
                         .datepicker( "option", "maxDate", activity_form.find("input[name=activity-end]").val() );
-
-//                var parent = $(this).closest("li");
-//                if($(this).attr("name") == 'task-start[]'){
-//                    $(parent.find("input[name='task-end[]']")).datepicker( "option", "minDate", text );
-//                }
-
-//                $(parent.find("input.datepicker")).each(function(){
-//                    if($(this).val().length == 0){
-//                        $(this).focus();
-//                    }
-//                });
-
             }
         });
     }
 $(function(){
     datepicker_setup();
     $(document).on("click", ".button_step, .nav-steps a",function(){
-    //$(".button_step, .nav-steps a").click(function(){
-       var step = $(this).data("step");
+        // Step 4 (Make groups) empty
+        $("#nav-step-4").hide();
+        $("#step_4").html('');
+        var step = $(this).data("step");
+        var current_step = parseInt($(".step:visible").attr("id").replace("step_", ""));
         // is validated
-        //if($(this).attr("id") == 'next_step' && $(".elgg-form-activity-create").valid()){
-//       if($(".elgg-form-activity-create").valid()){
-            $(".nav-steps li").removeClass("active");
-            $("#nav-step-"+ step).parent("li").addClass("active");
-            $(this).closest(".container").find(".step").hide();
-            $("#step_"+ step).fadeIn();
-//       }
+        if($(this).attr("id") == 'next_step' || step > current_step){
+            if(!$(".elgg-form-activity-create").valid()){
+                return false;
+            }
+        }
+        $(".nav-steps li").removeClass("active");
+        $("#nav-step-"+ step).parent("li").addClass("active");
+        $(this).closest(".container").find(".step").hide();
+        $("#step_"+ step).fadeIn();
 
     });
 
-    /*$(".elgg-form-activity-create")
-        .find("input:not([type='button'],[type='checkbox']), select, textarea")
-        .each(function () {
-            console.log(this);
-        //console.log($(this).attr("name") +" => "+ $(this).valid());
-        $(this).rules('add', {
-            required: true
-        });
-    });*/
-    /*$("#next_summary").click(function(){
-        // is validated
-       if($(".elgg-form-activity-create").valid()){
-            $(".nav-steps li").removeClass("active");
-            $(this).closest(".container").find(".step").hide();
-            $("#summary").fadeIn();
-       }
-    });*/
 });
 </script>
 <div id="step_1" class="row step">
@@ -135,7 +111,7 @@ $(function(){
         <div class="form-group margin-top-10">
             <label for="activity-description"><?php echo elgg_echo("activity:description");?></label>
             <?php echo elgg_view("input/plaintext", array(
-                'name'  => 'video-description',
+                'name'  => 'activity-description',
                 'class' => 'form-control',
                 'required' => true,
                 'rows'  => 6,

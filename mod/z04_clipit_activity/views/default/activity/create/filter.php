@@ -33,6 +33,14 @@ $tabs = array(
         'data-step' => 3,
         'priority' => 300,
     ),
+    'step_4' => array(
+        'text' => 4,
+        'href' => "javascript:;",
+        'id' => 'nav-step-4',
+        'style' => 'display:none;',
+        'data-step' => 4,
+        'priority' => 400,
+    ),
 );
 foreach ($tabs as $name => $tab) {
     $tab['name'] = $name;
