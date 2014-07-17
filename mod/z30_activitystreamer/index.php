@@ -14,7 +14,7 @@
 	    	$entity = new ElggObject;
 		$entity->subtype = 'modactivitystreamer';
 		$entity->owner_guid = $_SESSION['user']->getGUID();
-	    	$entity->showga = false;
+	    	$entity->showga = true;
 	    	$entity->access_id = 2;
 	    	if ($entity->save()) {
 			system_message('DEBUG: Initial ElggObject created with guid as: ' . $entity->guid);

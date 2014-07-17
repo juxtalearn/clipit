@@ -46,7 +46,7 @@ class ClipitPerformanceItem extends UBItem {
      *
      * @return static[] Array of Items for the specified category
      */
-    static function get_by_category($category = "") {
+    static function get_by_category($category = null) {
         $performance_items = static::get_all();
         $category_array = array();
         if(empty($category)) {

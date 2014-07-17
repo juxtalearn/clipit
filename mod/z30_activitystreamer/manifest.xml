@@ -8,8 +8,8 @@
 	<copyright>(C) Oliver Daems</copyright>
 	<license>GNU General Public License version 3</license>
 	<requires>
-		<type>elgg_release</type>
-		<version>1.8</version>
+		<type>plugin</type>
+	        <name>z02_clipit_api</name>
 	</requires>
 	<activate_on_install>true</activate_on_install>
 	<field key="author" value="Oliver Daems" />

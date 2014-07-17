@@ -94,24 +94,6 @@ class ClipitQuizQuestion extends UBItem {
     }
 
     /**
-     * Deletes $this instance from the system.
-     * @return bool True if success, false if error.
-     */
-    protected function delete() {
-        $rel_array = get_entity_relationships((int)$this->id);
-        $result_array = array();
-        foreach($rel_array as $rel) {
-            if($rel->relationship == static::REL_QUIZQUESTION_QUIZRESULT) {
-                $result_array[] = $rel->guid_two;
-            }
-        }
-        if(!empty($result_array)) {
-            ClipitQuizResult::delete_by_id($result_array);
-        }
-        parent::delete();
-    }
-
-    /**
      * @param int   $id
      * @param array $result_array
      *

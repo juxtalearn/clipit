@@ -126,43 +126,6 @@ class ClipitActivity extends UBItem {
     }
 
     /**
-     * Deletes $this instance from the system.
-     * @return bool True if success, false if error.
-     */
-    protected function delete() {
-        $rel_array = get_entity_relationships((int)$this->id);
-        foreach($rel_array as $rel) {
-            switch($rel->relationship) {
-                case static::REL_ACTIVITY_GROUP:
-                    $group_array[] = $rel->guid_two;
-                    break;
-                case static::REL_ACTIVITY_TASK:
-                    $task_array[] = $rel->guid_two;
-                    break;
-                case static::REL_ACTIVITY_VIDEO:
-                    $video_array[] = $rel->guid_two;
-                    break;
-                case static::REL_ACTIVITY_FILE:
-                    $file_array[] = $rel->guid_two;
-                    break;
-            }
-        }
-        if(isset($group_array)) {
-            ClipitGroup::delete_by_id($group_array);
-        }
-        if(isset($task_array)) {
-            ClipitTask::delete_by_id($task_array);
-        }
-        if(isset($video_array)) {
-            ClipitVideo::delete_by_id($video_array);
-        }
-        if(isset($file_array)) {
-            ClipitFile::delete_by_id($file_array);
-        }
-        parent::delete();
-    }
-
-    /**
      * Returns a random hex color, from a predefined palette, to assign to an Activity
      * @return string Hex color.
      */
@@ -177,7 +140,7 @@ class ClipitActivity extends UBItem {
             "E4391B", // red
             "14B8DD", // light blue
         );
-        $pos = (int)rand(0, count($color_array));
+        $pos = (int)rand(0, count($color_array)-1);
         return $color_array[$pos];
     }
 
@@ -212,7 +175,7 @@ class ClipitActivity extends UBItem {
             return null;
         }
         foreach($elgg_objects as $elgg_object) {
-            $activity_array[] = new static($elgg_object->guid);
+            $activity_array[] = new static($elgg_object->guid, $elgg_object);
         }
         return $activity_array;
     }
@@ -336,7 +299,6 @@ class ClipitActivity extends UBItem {
         return UBCollection::get_items($id, static::REL_ACTIVITY_FILE);
     }
 
-    // PUBLISHED STORYBOARDS
     /**
      * Gets all published Storyboards from the Tasks contained inside an Activity
      *
@@ -353,7 +315,6 @@ class ClipitActivity extends UBItem {
         return $storyboard_array;
     }
 
-    // PUBLISHED VIDEOS
     /**
      * Gets all published Videos from the Tasks contained inside an Activity
      *
