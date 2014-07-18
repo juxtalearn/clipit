@@ -109,6 +109,10 @@ function expose_task_functions() {
         array("id" => array("type" => "int", "required" => true)), "Gets Quizzes from an Activity", "GET", false, true
     );
     expose_function(
+        $api_suffix . "get_status", $class_suffix . "get_status",
+        array("id" => array("type" => "int", "required" => true)), "Get Task Status", "GET", false, true
+    );
+    expose_function(
         $api_suffix . "get_completed_status", $class_suffix . "get_completed_status", array(
             "id" => array("type" => "int", "required" => true),
             "entity_id" => array("type" => "int", "required" => true)
