@@ -27,13 +27,20 @@ class ClipitTask extends UBItem {
     const TYPE_STORYBOARD_FEEDBACK = "storyboard_feedback";
     const TYPE_VIDEO_FEEDBACK = "video_feedback";
     const TYPE_OTHER = "other";
+    // Relationship names
     const REL_TASK_STORYBOARD = "task-storyboard";
     const REL_TASK_VIDEO = "task-video";
     const REL_TASK_FILE = "task-file";
     const REL_TASK_QUIZ = "task-quiz";
+    // Status values
+    const STATUS_LOCKED = "locked";
+    const STATUS_ACTIVE = "active";
+    const STATUS_FINISHED = "finished";
+    // Properties
     public $task_type = "";
     public $start = 0;
     public $end = 0;
+    public $status = "";
     public $parent_task = 0;
     public $task_count = 0;
     public $activity = 0;
@@ -52,6 +59,7 @@ class ClipitTask extends UBItem {
         $this->task_type = (string)$elgg_entity->get("task_type");
         $this->start = (int)$elgg_entity->get("start");
         $this->end = (int)$elgg_entity->get("end");
+        $this->status = (string)static::get_status($this->start, $this->end);
         $this->parent_task = (int)$elgg_entity->get("parent_task");
         $this->task_count = (int)$elgg_entity->get("task_count");
         if($this->end == 0) {
@@ -94,6 +102,26 @@ class ClipitTask extends UBItem {
         static::set_files($this->id, $this->file_array);
         static::set_quizzes($this->id, $this->quiz_array);
         return $this->id;
+    }
+
+    /**
+     * Get the Activity Status depending on the current date, and the Start and End of the activity.
+     *
+     * @param int $start Activity Start timestamp
+     * @param int $end   Activity End timestamp
+     *
+     * @return string The status of the activity: STATUS_ENROLL, STATUS_ACTIVE or STATUS_CLOSED
+     */
+    private function get_status($start, $end) {
+        $date = new DateTime();
+        $now = (int)$date->getTimestamp();
+        if($now < $start) {
+            return static::STATUS_LOCKED;
+        } elseif($now >= $start && $now <= $end) {
+            return static::STATUS_ACTIVE;
+        } else {
+            return static::STATUS_FINISHED;
+        }
     }
 
     // ACTIVITY
