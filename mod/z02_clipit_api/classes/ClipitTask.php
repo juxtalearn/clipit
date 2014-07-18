@@ -59,7 +59,7 @@ class ClipitTask extends UBItem {
         $this->task_type = (string)$elgg_entity->get("task_type");
         $this->start = (int)$elgg_entity->get("start");
         $this->end = (int)$elgg_entity->get("end");
-        $this->status = (string)static::get_status($this->start, $this->end);
+        $this->status = (string)static::calc_status($this->start, $this->end);
         $this->parent_task = (int)$elgg_entity->get("parent_task");
         $this->task_count = (int)$elgg_entity->get("task_count");
         if($this->end == 0) {
@@ -105,14 +105,14 @@ class ClipitTask extends UBItem {
     }
 
     /**
-     * Get the Activity Status depending on the current date, and the Start and End of the activity.
+     * Calculate the Status depending on the current date, and the Start and End of the Task.
      *
-     * @param int $start Activity Start timestamp
-     * @param int $end   Activity End timestamp
+     * @param int $start Task Start timestamp
+     * @param int $end   Task End timestamp
      *
-     * @return string The status of the activity: STATUS_ENROLL, STATUS_ACTIVE or STATUS_CLOSED
+     * @return string The status of the task: STATUS_LOCKED, STATUS_ACTIVE or STATUS_FINISHED
      */
-    private function get_status($start, $end) {
+    private function calc_status($start, $end) {
         $date = new DateTime();
         $now = (int)$date->getTimestamp();
         if($now < $start) {
@@ -215,6 +215,18 @@ class ClipitTask extends UBItem {
 
     static function get_quizzes($id) {
         return UBCollection::get_items($id, static::REL_TASK_QUIZ);
+    }
+
+    /**
+     * Get the Status for a Task
+     * @param int $id ID of Task
+     *
+     * @return string Status
+     * @throws InvalidParameterException
+     */
+    static function get_status($id){
+        $prop_value_array = static::get_properties($id, array("status"));
+        return $prop_value_array["status"];
     }
 
     // TASK COMPLETION
