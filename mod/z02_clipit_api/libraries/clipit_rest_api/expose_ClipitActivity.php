@@ -25,18 +25,6 @@ function expose_activity_functions() {
         array("id" => array("type" => "int", "required" => true)), "Get Activity Status", "GET", false, true
     );
     expose_function(
-        $api_suffix . "set_status_enroll", $class_suffix . "set_status_enroll",
-        array("id" => array("type" => "int", "required" => true)), "Set Activity Status to Enroll", "POST", false, true
-    );
-    expose_function(
-        $api_suffix . "set_status_active", $class_suffix . "set_status_active",
-        array("id" => array("type" => "int", "required" => true)), "Set Activity Status to Active", "POST", false, true
-    );
-    expose_function(
-        $api_suffix . "set_status_closed", $class_suffix . "set_status_closed",
-        array("id" => array("type" => "int", "required" => true)), "Set Activity Status to Closed", "POST", false, true
-    );
-    expose_function(
         $api_suffix . "add_teachers", $class_suffix . "add_teachers", array(
             "id" => array("type" => "int", "required" => true),
             "teacher_array" => array("type" => "array", "required" => true)
