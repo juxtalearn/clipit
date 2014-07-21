@@ -13,8 +13,7 @@
  */
 
 /**
- * Class ClipitRating
-
+ * <Class Description>
  */
 class ClipitRating extends UBItem {
     /**

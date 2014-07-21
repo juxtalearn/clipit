@@ -13,8 +13,7 @@
  */
 
 /**
- * Class ClipitFile
-
+ * <Class Description>
  */
 class ClipitFile extends UBFile {
     /**

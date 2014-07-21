@@ -13,8 +13,7 @@
  */
 
 /**
- * Class ClipitVideo
-
+ * <Class Description>
  */
 class ClipitVideo extends ClipitResource {
     /**

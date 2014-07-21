@@ -13,7 +13,7 @@
  */
 
 /**
- * Class ClipitTask
+ * <Class Description>
  */
 class ClipitTask extends UBItem {
     /**

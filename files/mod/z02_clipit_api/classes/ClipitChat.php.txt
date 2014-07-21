@@ -1,5 +1,4 @@
 <?php
-
 /**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
@@ -11,6 +10,11 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  * @subpackage      clipit_api
+ */
+
+/**
+ * An individual direct message sent through ClipIt. It has a sender (owner), a single destination, and can
+ * have attached files.
  */
 class ClipitChat extends UBMessage {
     /**

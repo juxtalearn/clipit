@@ -13,8 +13,7 @@
  */
 
 /**
- * Class ClipiResource
-
+ * <Class Description>
  */
 class ClipitResource extends UBItem {
     /**

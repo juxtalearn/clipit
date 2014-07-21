@@ -13,8 +13,7 @@
  */
 
 /**
- * Class ClipitSite
-
+ * <Class Description>
  */
 class ClipitSite extends UBSite {
     /**

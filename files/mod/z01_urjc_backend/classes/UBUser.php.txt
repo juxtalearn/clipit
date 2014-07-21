@@ -13,8 +13,7 @@
  */
 
 /**
- * Class UBUser
-
+ * <Class Description>
  */
 class UBUser extends UBItem {
     /**

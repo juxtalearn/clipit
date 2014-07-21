@@ -13,7 +13,7 @@
  */
 
 /**
- * Class UBItem
+ * <Class Description>
  */
 class UBItem {
     /**

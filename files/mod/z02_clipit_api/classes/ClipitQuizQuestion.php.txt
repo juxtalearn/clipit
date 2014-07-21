@@ -13,8 +13,7 @@
  */
 
 /**
- * Class ClipitQuizQuestion
-
+ * <Class Description>
  */
 class ClipitQuizQuestion extends UBItem {
     /**

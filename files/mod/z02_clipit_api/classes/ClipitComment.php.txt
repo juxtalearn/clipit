@@ -13,8 +13,8 @@
  */
 
 /**
- * Class ClipitComment
-
+ * A rich-text Comment written by a User and directed to any single Resource. It may contain attached files, and can
+ * respond to another user's comment (optionally).
  */
 class ClipitComment extends UBMessage {
     /**

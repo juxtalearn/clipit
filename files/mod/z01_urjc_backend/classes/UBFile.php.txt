@@ -13,7 +13,7 @@
  */
 
 /**
- * Class UBFile
+ * <Class Description>
  */
 class UBFile extends UBItem {
     /**

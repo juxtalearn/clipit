@@ -13,12 +13,12 @@
  */
 
 /**
- * Class ClipitActivity
- * Represents a JuxtaLearn cycle of tasks around a selected Tricky Tipic. It contains users (which
- * have been called to join the activity), groups (that actually participate in the activity),
- * tasks (set by the teacher/s), videos and files.
- * An Activity can have different status: enroll state, active state and closed state.
-
+ * Contains all elements required to carry out the JuxtaLearn learning method in which Student work in Groups around a
+ * selected Tricky Topic.
+ * It contains a list of enrolled/called Students, Groups (that actually participate in the activity), Tasks (set by the
+ * teacher/s), support Resources and student Publications.
+ * An Activity can have different statuses: "enroll" state, "active" state and "closed" state, marked by start and
+ * end dates which define the current status.
  */
 class ClipitActivity extends UBItem {
     /**

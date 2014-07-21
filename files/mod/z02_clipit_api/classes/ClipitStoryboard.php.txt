@@ -13,8 +13,7 @@
  */
 
 /**
- * Class ClipitStoryboard
-
+ * <Class Description>
  */
 class ClipitStoryboard extends ClipitResource {
     /**

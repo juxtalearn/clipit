@@ -13,8 +13,7 @@
  */
 
 /**
- * Class ClipitGroup
-
+ * <Class Description>
  */
 class ClipitGroup extends UBItem {
     /**

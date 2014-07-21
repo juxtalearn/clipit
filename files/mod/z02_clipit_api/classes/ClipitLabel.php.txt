@@ -13,8 +13,7 @@
  */
 
 /**
- * Class ClipitLabel
-
+ * <Class Description>
  */
 class ClipitLabel extends UBItem {
     /**

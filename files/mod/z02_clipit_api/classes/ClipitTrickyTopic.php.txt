@@ -13,8 +13,7 @@
  */
 
 /**
- * Class ClipitTrickyTopic
-
+ * <Class Description>
  */
 class ClipitTrickyTopic extends UBItem {
     /**
