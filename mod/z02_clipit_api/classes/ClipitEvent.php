@@ -13,8 +13,7 @@
  */
 
 /**
- * Class ClipitEvent
-
+ * A system event triggered by any user action (directly or indirectly).
  */
 class ClipitEvent extends UBEvent {
     static function get_recommended_events($user_id, $offset = 0, $limit = 10) {
@@ -28,4 +27,4 @@ class ClipitEvent extends UBEvent {
         $object_array = array_merge($user_groups, $user_activities);
         return static::get_by_object($object_array, $offset, $limit);
     }
-} 
+}

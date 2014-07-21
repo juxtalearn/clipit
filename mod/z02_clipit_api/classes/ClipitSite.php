@@ -13,23 +13,22 @@
  */
 
 /**
- * Class ClipitSite
-
+ * <Class Description>
  */
 class ClipitSite extends UBSite {
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitSite";
-    const REL_SITE_FILE = "site-file";
-    const REL_SITE_VIDEO = "site-video";
-    const REL_SITE_STORYBOARD = "site-storyboard";
+    const REL_SITE_FILE = "ClipitSite-ClipitFile";
+    const REL_SITE_VIDEO = "ClipitSite-ClipitVideo";
+    const REL_SITE_STORYBOARD = "ClipitSite-ClipitStoryboard";
     public $file_array = array();
     public $video_array = array();
     public $storyboard_array = array();
 
-    protected function load_from_elgg($elgg_entity) {
-        parent::load_from_elgg($elgg_entity);
+    protected function copy_from_elgg($elgg_entity) {
+        parent::copy_from_elgg($elgg_entity);
         $this->file_array = (array)static::get_files();
         $this->video_array = (array)static::get_videos();
         $this->storyboard_array = (array)static::get_storyboards();

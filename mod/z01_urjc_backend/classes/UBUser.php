@@ -13,8 +13,7 @@
  */
 
 /**
- * Class UBUser
-
+ * <Class Description>
  */
 class UBUser extends UBItem {
     /**
@@ -59,7 +58,7 @@ class UBUser extends UBItem {
                     throw new APIException("ERROR: Failed to load ".get_called_class()." object with ID '" . $id . "'.");
                 }
             }
-            $this->load_from_elgg($elgg_user);
+            $this->copy_from_elgg($elgg_user);
         }
     }
 
@@ -68,8 +67,8 @@ class UBUser extends UBItem {
      *
      * @param ElggUser $elgg_user User to load from the system.
      */
-    protected function load_from_elgg($elgg_user) {
-        parent::load_from_elgg($elgg_user);
+    protected function copy_from_elgg($elgg_user) {
+        parent::copy_from_elgg($elgg_user);
         $this->email = (string)$elgg_user->email;
         $this->login = (string)$elgg_user->username;
         $this->password = (string)$elgg_user->password;
@@ -91,7 +90,7 @@ class UBUser extends UBItem {
         } elseif(!$elgg_user = new ElggUser($this->id)) {
             return false;
         }
-        $this->save_to_elgg($elgg_user);
+        $this->copy_to_elgg($elgg_user);
         $elgg_user->save();
         return $this->id = $elgg_user->guid;
     }
@@ -101,8 +100,8 @@ class UBUser extends UBItem {
      *
      * @param ElggUser $elgg_user Elgg User object instance to save $this to
      */
-    protected function save_to_elgg($elgg_user) {
-        parent::save_to_elgg($elgg_user);
+    protected function copy_to_elgg($elgg_user) {
+        parent::copy_to_elgg($elgg_user);
         $elgg_user->email = (string)$this->email;
         $elgg_user->username = (string)$this->login;
         $elgg_user->password = (string)$this->password;

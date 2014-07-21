@@ -13,7 +13,7 @@
  */
 
 /**
- * Class UBItem
+ * <Class Description>
  */
 class UBItem {
     /**
@@ -83,7 +83,7 @@ class UBItem {
                     "ERROR: ID '" . $id . "' does not correspond to a " . get_called_class() . " object."
                 );
             }
-            $this->load_from_elgg($elgg_object);
+            $this->copy_from_elgg($elgg_object);
         }
     }
 
@@ -101,7 +101,7 @@ class UBItem {
             $elgg_object->type = static::TYPE;
             $elgg_object->subtype = static::SUBTYPE;
         }
-        $this->save_to_elgg($elgg_object);
+        $this->copy_to_elgg($elgg_object);
         $elgg_object->save();
         return $this->id = $elgg_object->get("guid");
     }
@@ -111,7 +111,7 @@ class UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_entity) {
+    protected function copy_from_elgg($elgg_entity) {
         $this->id = (int)$elgg_entity->get("guid");
         $this->name = (string)$elgg_entity->get("name");
         $this->description = (string)$elgg_entity->get("description");
@@ -127,7 +127,7 @@ class UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function save_to_elgg($elgg_entity) {
+    protected function copy_to_elgg($elgg_entity) {
         $elgg_entity->set("name", (string)$this->name);
         $elgg_entity->set("description", (string)$this->description);
         $elgg_entity->set("url", (string)$this->url);

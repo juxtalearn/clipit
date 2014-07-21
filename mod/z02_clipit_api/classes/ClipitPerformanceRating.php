@@ -1,5 +1,4 @@
 <?php
-
 /**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
@@ -11,6 +10,10 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  * @subpackage      clipit_api
+ */
+
+/**
+ * Contains Ratings on Performance Items created by users
  */
 class ClipitPerformanceRating extends UBItem {
     /**
@@ -25,8 +28,8 @@ class ClipitPerformanceRating extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_entity) {
-        parent::load_from_elgg($elgg_entity);
+    protected function copy_from_elgg($elgg_entity) {
+        parent::copy_from_elgg($elgg_entity);
         $this->performance_item = (int)$elgg_entity->get("performance_item");
         $this->star_rating = (int)$elgg_entity->get("star_rating");
     }
@@ -36,8 +39,8 @@ class ClipitPerformanceRating extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function save_to_elgg($elgg_entity) {
-        parent::save_to_elgg($elgg_entity);
+    protected function copy_to_elgg($elgg_entity) {
+        parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("performance_item", (int)$this->performance_item);
         $elgg_entity->set("star_rating", (int)$this->star_rating);
     }

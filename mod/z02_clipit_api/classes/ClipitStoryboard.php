@@ -13,17 +13,16 @@
  */
 
 /**
- * Class ClipitStoryboard
-
+ * <Class Description>
  */
 class ClipitStoryboard extends ClipitResource {
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitStoryboard";
-    const REL_RESOURCE_TAG = "storyboard-tag";
-    const REL_RESOURCE_LABEL = "storyboard-label";
-    const REL_RESOURCE_PERFORMANCE = "storyboard-performance";
+    const REL_RESOURCE_TAG = "ClipitStoryboard-ClipitTag";
+    const REL_RESOURCE_LABEL = "ClipitStoryboard-ClipitLabel";
+    const REL_RESOURCE_PERFORMANCE = "ClipitStoryboard-ClipitPerformanceItem";
     const REL_GROUP_RESOURCE = ClipitGroup::REL_GROUP_STORYBOARD;
     const REL_TASK_RESOURCE = ClipitTask::REL_TASK_STORYBOARD;
     const REL_ACTIVITY_RESOURCE = ClipitActivity::REL_ACTIVITY_STORYBOARD;
@@ -35,8 +34,8 @@ class ClipitStoryboard extends ClipitResource {
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_entity) {
-        parent::load_from_elgg($elgg_entity);
+    protected function copy_from_elgg($elgg_entity) {
+        parent::copy_from_elgg($elgg_entity);
         $this->file = (int)$elgg_entity->get("file");
     }
 
@@ -45,8 +44,8 @@ class ClipitStoryboard extends ClipitResource {
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function save_to_elgg($elgg_entity) {
-        parent::save_to_elgg($elgg_entity);
+    protected function copy_to_elgg($elgg_entity) {
+        parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("file", (int)$this->file);
     }
 }

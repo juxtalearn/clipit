@@ -13,14 +13,14 @@
  */
 
 /**
- * Class ClipitComment
-
+ * A rich-text Comment written by a User and directed to any single Resource. It may contain attached files, and can
+ * respond to another user's comment (optionally).
  */
 class ClipitComment extends UBMessage {
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitComment";
-    const REL_MESSAGE_DESTINATION = "comment-destination";
-    const REL_MESSAGE_FILE = "comment-file";
+    const REL_MESSAGE_DESTINATION = "ClipitComment-destination";
+    const REL_MESSAGE_FILE = "ClipitComment-ClipitFile";
 }

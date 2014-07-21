@@ -13,15 +13,14 @@
  */
 
 /**
- * Class ClipitQuiz
-
+ * <Class Description>
  */
 class ClipitQuiz extends UBItem {
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitQuiz";
-    const REL_QUIZ_QUIZQUESTION = "quiz-quiz_question";
+    const REL_QUIZ_QUIZQUESTION = "ClipitQuiz-ClipitQuizQuestion";
     /**
      * @var string Target interface for Quiz display (e.g.: "web space", "large display"...)
      */
@@ -47,8 +46,8 @@ class ClipitQuiz extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_entity) {
-        parent::load_from_elgg($elgg_entity);
+    protected function copy_from_elgg($elgg_entity) {
+        parent::copy_from_elgg($elgg_entity);
         $this->quiz_question_array = static::get_quiz_questions($this->id);
         $this->public = (bool)$elgg_entity->get("public");
         $this->tricky_topic = (int)$elgg_entity->get("tricky_topic");
@@ -63,8 +62,8 @@ class ClipitQuiz extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function save_to_elgg($elgg_entity) {
-        parent::save_to_elgg($elgg_entity);
+    protected function copy_to_elgg($elgg_entity) {
+        parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("public", (bool)$this->public);
         $elgg_entity->set("tricky_topic", (int)$this->tricky_topic);
         $elgg_entity->set("target", (string)$this->target);

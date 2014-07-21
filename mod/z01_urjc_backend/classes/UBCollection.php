@@ -13,7 +13,7 @@
  */
 
 /**
- * Class UBCollection
+ * <Class Description>
  */
 abstract class UBCollection {
     /**

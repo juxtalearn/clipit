@@ -13,7 +13,7 @@
  */
 
 /**
- * Class ClipitTask
+ * <Class Description>
  */
 class ClipitTask extends UBItem {
     /**
@@ -28,10 +28,10 @@ class ClipitTask extends UBItem {
     const TYPE_VIDEO_FEEDBACK = "video_feedback";
     const TYPE_OTHER = "other";
     // Relationship names
-    const REL_TASK_STORYBOARD = "task-storyboard";
-    const REL_TASK_VIDEO = "task-video";
-    const REL_TASK_FILE = "task-file";
-    const REL_TASK_QUIZ = "task-quiz";
+    const REL_TASK_STORYBOARD = "ClipitTask-ClipitStoryboard";
+    const REL_TASK_VIDEO = "ClipitTask-ClipitVideo";
+    const REL_TASK_FILE = "ClipitTask-ClipitFile";
+    const REL_TASK_QUIZ = "ClipitTask-ClipitQuiz";
     // Status values
     const STATUS_LOCKED = "locked";
     const STATUS_ACTIVE = "active";
@@ -54,8 +54,8 @@ class ClipitTask extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_entity) {
-        parent::load_from_elgg($elgg_entity);
+    protected function copy_from_elgg($elgg_entity) {
+        parent::copy_from_elgg($elgg_entity);
         $this->task_type = (string)$elgg_entity->get("task_type");
         $this->start = (int)$elgg_entity->get("start");
         $this->end = (int)$elgg_entity->get("end");
@@ -81,8 +81,8 @@ class ClipitTask extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function save_to_elgg($elgg_entity) {
-        parent::save_to_elgg($elgg_entity);
+    protected function copy_to_elgg($elgg_entity) {
+        parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("task_type", (string)$this->task_type);
         $elgg_entity->set("start", (int)$this->start);
         $elgg_entity->set("end", (int)$this->end);
@@ -215,6 +215,22 @@ class ClipitTask extends UBItem {
 
     static function get_quizzes($id) {
         return UBCollection::get_items($id, static::REL_TASK_QUIZ);
+    }
+
+    // OTHER
+    /**
+     * Get the Child Task (if any)
+     * @param int $id ID of Task
+     * @return int ID of Child Task
+     */
+    static function get_child($id){
+        $task_array = static::get_all(0);
+        foreach($task_array as $task){
+            if($task->parent_task === $id){
+                return $task->id;
+            }
+        }
+        return 0;
     }
 
     /**

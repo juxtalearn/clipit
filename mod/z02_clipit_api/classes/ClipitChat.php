@@ -1,5 +1,4 @@
 <?php
-
 /**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
@@ -12,13 +11,18 @@
  * @package         ClipIt
  * @subpackage      clipit_api
  */
+
+/**
+ * An individual direct message sent through ClipIt. It has a sender (owner), a single destination, and can
+ * have attached files.
+ */
 class ClipitChat extends UBMessage {
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitChat";
-    const REL_MESSAGE_DESTINATION = "chat-destination";
-    const REL_MESSAGE_FILE = "chat-file";
+    const REL_MESSAGE_DESTINATION = "ClipitChat-destination";
+    const REL_MESSAGE_FILE = "ClipitChat-ClipitFile";
     public $archived_array = array();
 
     /**
@@ -26,8 +30,8 @@ class ClipitChat extends UBMessage {
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_entity) {
-        parent::load_from_elgg($elgg_entity);
+    protected function copy_from_elgg($elgg_entity) {
+        parent::copy_from_elgg($elgg_entity);
         $this->archived_array = (array)$elgg_entity->get("archived_array");
     }
 
@@ -36,8 +40,8 @@ class ClipitChat extends UBMessage {
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function save_to_elgg($elgg_entity) {
-        parent::save_to_elgg($elgg_entity);
+    protected function copy_to_elgg($elgg_entity) {
+        parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("archived_array", (array)$this->archived_array);
     }
 

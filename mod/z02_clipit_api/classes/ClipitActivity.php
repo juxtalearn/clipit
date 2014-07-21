@@ -13,12 +13,12 @@
  */
 
 /**
- * Class ClipitActivity
- * Represents a JuxtaLearn cycle of tasks around a selected Tricky Tipic. It contains users (which
- * have been called to join the activity), groups (that actually participate in the activity),
- * tasks (set by the teacher/s), videos and files.
- * An Activity can have different status: enroll state, active state and closed state.
-
+ * Contains all elements required to carry out the JuxtaLearn learning method in which Student work in Groups around a
+ * selected Tricky Topic.
+ * It contains a list of enrolled/called Students, Groups (that actually participate in the activity), Tasks (set by the
+ * teacher/s), support Resources and student Publications.
+ * An Activity can have different statuses: "enroll" state, "active" state and "closed" state, marked by start and
+ * end dates which define the current status.
  */
 class ClipitActivity extends UBItem {
     /**
@@ -26,13 +26,13 @@ class ClipitActivity extends UBItem {
      */
     const SUBTYPE = "ClipitActivity";
     // Relationship names
-    const REL_ACTIVITY_TEACHER = "activity-teacher";
-    const REL_ACTIVITY_USER = "activity-user";
-    const REL_ACTIVITY_GROUP = "activity-group";
-    const REL_ACTIVITY_TASK = "activity-task";
-    const REL_ACTIVITY_STORYBOARD = "activity-storyboard";
-    const REL_ACTIVITY_VIDEO = "activity-video";
-    const REL_ACTIVITY_FILE = "activity-file";
+    const REL_ACTIVITY_TEACHER = "ClipitActivity-teacher";
+    const REL_ACTIVITY_STUDENT = "ClipitActivity-student";
+    const REL_ACTIVITY_GROUP = "ClipitActivity-ClipitGroup";
+    const REL_ACTIVITY_TASK = "ClipitActivity-ClipitTask";
+    const REL_ACTIVITY_STORYBOARD = "ClipitActivity-ClipitStoryboard";
+    const REL_ACTIVITY_VIDEO = "ClipitActivity-ClipitVideo";
+    const REL_ACTIVITY_FILE = "ClipitActivity-ClipitFile";
     // Status values
     const STATUS_ENROLL = "enroll";
     const STATUS_ACTIVE = "active";
@@ -45,7 +45,7 @@ class ClipitActivity extends UBItem {
     public $end = 0;
     public $max_group_size = 0;
     public $teacher_array = array();
-    public $called_users_array = array();
+    public $student_array = array();
     public $group_array = array();
     public $task_array = array();
     public $storyboard_array = array();
@@ -57,8 +57,8 @@ class ClipitActivity extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_entity) {
-        parent::load_from_elgg($elgg_entity);
+    protected function copy_from_elgg($elgg_entity) {
+        parent::copy_from_elgg($elgg_entity);
         $this->color = (string)$elgg_entity->get("color");
         $this->tricky_topic = (int)$elgg_entity->get("tricky_topic");
         $this->start = (int)$elgg_entity->get("start");
@@ -66,7 +66,7 @@ class ClipitActivity extends UBItem {
         $this->max_group_size = (int)$elgg_entity->get("max_group_size");
         $this->status = (string)static::calc_status($this->start, $this->end);
         $this->teacher_array = static::get_teachers($this->id);
-        $this->called_users_array = static::get_called_users($this->id);
+        $this->student_array = static::get_students($this->id);
         $this->group_array = static::get_groups($this->id);
         $this->task_array = static::get_tasks($this->id);
         $this->storyboard_array = static::get_storyboards($this->id);
@@ -99,8 +99,8 @@ class ClipitActivity extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function save_to_elgg($elgg_entity) {
-        parent::save_to_elgg($elgg_entity);
+    protected function copy_to_elgg($elgg_entity) {
+        parent::copy_to_elgg($elgg_entity);
         if(!empty($this->color)) {
             $elgg_entity->set("color", (string)$this->color);
         } else {
@@ -119,7 +119,7 @@ class ClipitActivity extends UBItem {
     protected function save() {
         parent::save();
         static::set_teachers($this->id, $this->teacher_array);
-        static::set_called_users($this->id, $this->called_users_array);
+        static::set_students($this->id, $this->student_array);
         static::set_groups($this->id, $this->group_array);
         static::set_tasks($this->id, $this->task_array);
         static::set_storyboards($this->id, $this->storyboard_array);
@@ -211,21 +211,21 @@ class ClipitActivity extends UBItem {
         return UBCollection::get_items($id, static::REL_ACTIVITY_TEACHER);
     }
 
-    // CALLED USERS
-    static function add_called_users($id, $user_array) {
-        return UBCollection::add_items($id, $user_array, static::REL_ACTIVITY_USER);
+    // STUDENTS
+    static function add_students($id, $user_array) {
+        return UBCollection::add_items($id, $user_array, static::REL_ACTIVITY_STUDENT);
     }
 
-    static function set_called_users($id, $user_array) {
-        return UBCollection::set_items($id, $user_array, static::REL_ACTIVITY_USER);
+    static function set_students($id, $user_array) {
+        return UBCollection::set_items($id, $user_array, static::REL_ACTIVITY_STUDENT);
     }
 
-    static function remove_called_users($id, $user_array) {
-        return UBCollection::remove_items($id, $user_array, static::REL_ACTIVITY_USER);
+    static function remove_students($id, $user_array) {
+        return UBCollection::remove_items($id, $user_array, static::REL_ACTIVITY_STUDENT);
     }
 
-    static function get_called_users($id) {
-        return UBCollection::get_items($id, static::REL_ACTIVITY_USER);
+    static function get_students($id) {
+        return UBCollection::get_items($id, static::REL_ACTIVITY_STUDENT);
     }
 
     // GROUPS

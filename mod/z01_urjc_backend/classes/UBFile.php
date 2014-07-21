@@ -13,7 +13,7 @@
  */
 
 /**
- * Class UBFile
+ * <Class Description>
  */
 class UBFile extends UBItem {
     /**
@@ -54,7 +54,7 @@ class UBFile extends UBItem {
                     "ERROR: Id '" . $id . "' does not correspond to a " . get_called_class() . " object."
                 );
             }
-            $this->load_from_elgg($elgg_file);
+            $this->copy_from_elgg($elgg_file);
         }
     }
 
@@ -63,7 +63,7 @@ class UBFile extends UBItem {
      *
      * @param ElggFile $elgg_file
      */
-    protected function load_from_elgg($elgg_file) {
+    protected function copy_from_elgg($elgg_file) {
         $this->id = (int)$elgg_file->get("guid");
         $this->description = (string)$elgg_file->get("description");
         $this->owner_id = (int)$elgg_file->getOwnerGUID();
@@ -100,7 +100,7 @@ class UBFile extends UBItem {
             $elgg_file->type = static::TYPE;
             $elgg_file->subtype = static::SUBTYPE;
         }
-        $this->save_to_elgg($elgg_file);
+        $this->copy_to_elgg($elgg_file);
         $elgg_file->save();
         return $this->id = $elgg_file->guid;
     }
@@ -110,7 +110,7 @@ class UBFile extends UBItem {
      *
      * @param ElggFile $elgg_file Elgg object instance to save $this to
      */
-    protected function save_to_elgg($elgg_file) {
+    protected function copy_to_elgg($elgg_file) {
         if($this->time_created == 0) { // new file
             $elgg_file->set("filename", (string)rand());
         }
