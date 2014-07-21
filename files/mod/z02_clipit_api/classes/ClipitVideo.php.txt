@@ -35,8 +35,8 @@ class ClipitVideo extends ClipitResource {
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_entity) {
-        parent::load_from_elgg($elgg_entity);
+    protected function copy_from_elgg($elgg_entity) {
+        parent::copy_from_elgg($elgg_entity);
         $this->preview = (string)$elgg_entity->get("preview");
         $this->duration = (int)$elgg_entity->get("duration");
     }
@@ -46,8 +46,8 @@ class ClipitVideo extends ClipitResource {
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function save_to_elgg($elgg_entity) {
-        parent::save_to_elgg($elgg_entity);
+    protected function copy_to_elgg($elgg_entity) {
+        parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("preview", (string)$this->preview);
         $elgg_entity->set("duration", (int)$this->duration);
     }
@@ -111,7 +111,7 @@ class ClipitVideo extends ClipitResource {
         // with ->execute(); instead of making the API call immediately.
         $client->setDefer(true);
         // Create a request for the API's videos.insert method to create and upload the video.
-        var_dump($insertRequest = $youtube->videos->insert("status,snippet", $video));
+        $insertRequest = $youtube->videos->insert("status,snippet", $video);
         // Create a MediaFileUpload object for resumable uploads.
         $media = new Google_Http_MediaFileUpload($client, $insertRequest, 'video/*', null, true, $chunkSizeBytes);
         $media->setFileSize(filesize($local_video_path));

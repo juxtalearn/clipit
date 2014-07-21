@@ -57,8 +57,8 @@ class ClipitActivity extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_entity) {
-        parent::load_from_elgg($elgg_entity);
+    protected function copy_from_elgg($elgg_entity) {
+        parent::copy_from_elgg($elgg_entity);
         $this->color = (string)$elgg_entity->get("color");
         $this->tricky_topic = (int)$elgg_entity->get("tricky_topic");
         $this->start = (int)$elgg_entity->get("start");
@@ -99,8 +99,8 @@ class ClipitActivity extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function save_to_elgg($elgg_entity) {
-        parent::save_to_elgg($elgg_entity);
+    protected function copy_to_elgg($elgg_entity) {
+        parent::copy_to_elgg($elgg_entity);
         if(!empty($this->color)) {
             $elgg_entity->set("color", (string)$this->color);
         } else {

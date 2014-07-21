@@ -33,7 +33,7 @@ class UBSite {
      */
     function __construct() {
         $elgg_entity = elgg_get_site_entity();
-        $this->load_from_elgg($elgg_entity);
+        $this->copy_from_elgg($elgg_entity);
     }
 
     /**
@@ -41,7 +41,7 @@ class UBSite {
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_entity) {
+    protected function copy_from_elgg($elgg_entity) {
         $this->id = (int)$elgg_entity->get("guid");
         $this->name = (string)$elgg_entity->get("name");
         $this->description = (string)$elgg_entity->get("description");
@@ -56,7 +56,7 @@ class UBSite {
      */
     protected function save() {
         $elgg_entity = elgg_get_site_entity();
-        $this->save_to_elgg($elgg_entity);
+        $this->copy_to_elgg($elgg_entity);
         $elgg_entity->save();
         return $this->id = $elgg_entity->get("guid");
     }
@@ -64,7 +64,7 @@ class UBSite {
     /**
      * @param ElggEntity $elgg_entity
      */
-    protected function save_to_elgg($elgg_entity) {
+    protected function copy_to_elgg($elgg_entity) {
         $elgg_entity->set("name", (string)$this->name);
         $elgg_entity->set("description", (string)$this->description);
         $elgg_entity->set("url", (string)$this->url);

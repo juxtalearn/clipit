@@ -13,7 +13,7 @@
  */
 
 /**
- * <Class Description>
+ * A collection of Students contained inside an Activity. Also holds all Group Resources.
  */
 class ClipitGroup extends UBItem {
     /**
@@ -35,8 +35,8 @@ class ClipitGroup extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_entity) {
-        parent::load_from_elgg($elgg_entity);
+    protected function copy_from_elgg($elgg_entity) {
+        parent::copy_from_elgg($elgg_entity);
         $this->user_array = static::get_users($this->id);
         $this->file_array = static::get_files($this->id);
         $this->storyboard_array = static::get_storyboards($this->id);

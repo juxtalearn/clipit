@@ -13,7 +13,7 @@
  */
 
 /**
- * <Class Description>
+ * Contains an Example experience in which students have trouble understanding a Stumbling Block (or Tag).
  */
 class ClipitExample extends UBItem {
     /**
@@ -28,19 +28,19 @@ class ClipitExample extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_entity) {
-        parent::load_from_elgg($elgg_entity);
+    protected function copy_from_elgg($elgg_entity) {
+        parent::copy_from_elgg($elgg_entity);
         $this->resource_url = (string)$elgg_entity->get("resource_url");
         $this->tag = (int)$elgg_entity->get("tag");
     }
 
     /**
-     * Copy $this object parameters into an Elgg entity.
+     * Copy $this object's parameters into an Elgg entity.
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function save_to_elgg($elgg_entity) {
-        parent::save_to_elgg($elgg_entity);
+    protected function copy_to_elgg($elgg_entity) {
+        parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("resource_url", (string)$this->resource_url);
         $elgg_entity->set("tag", (int)$this->tag);
     }
