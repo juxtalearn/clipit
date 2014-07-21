@@ -20,10 +20,10 @@ class ClipitGroup extends UBItem {
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitGroup";
-    const REL_GROUP_USER = "group-user";
-    const REL_GROUP_FILE = "group-file";
-    const REL_GROUP_STORYBOARD = "group-storyboard";
-    const REL_GROUP_VIDEO = "group-video";
+    const REL_GROUP_USER = "ClipitGroup-ClipitUser";
+    const REL_GROUP_FILE = "ClipitGroup-ClipitFile";
+    const REL_GROUP_STORYBOARD = "ClipitGroup-ClipitStoryboard";
+    const REL_GROUP_VIDEO = "ClipitGroup-ClipitVideo";
     public $user_array = array();
     public $file_array = array();
     public $storyboard_array = array();

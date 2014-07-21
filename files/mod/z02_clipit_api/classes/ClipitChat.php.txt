@@ -21,8 +21,8 @@ class ClipitChat extends UBMessage {
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitChat";
-    const REL_MESSAGE_DESTINATION = "chat-destination";
-    const REL_MESSAGE_FILE = "chat-file";
+    const REL_MESSAGE_DESTINATION = "ClipitChat-destination";
+    const REL_MESSAGE_FILE = "ClipitChat-ClipitFile";
     public $archived_array = array();
 
     /**

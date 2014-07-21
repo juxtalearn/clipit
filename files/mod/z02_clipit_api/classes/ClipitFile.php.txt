@@ -20,8 +20,8 @@ class ClipitFile extends UBFile {
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitFile";
-    const REL_FILE_TAG = "file-tag";
-    const REL_FILE_LABEL = "file-label";
+    const REL_FILE_TAG = "ClipitFile-ClipitTag";
+    const REL_FILE_LABEL = "ClipitFile-ClipitLabel";
     public $tag_array = array();
     public $label_array = array();
 

@@ -20,10 +20,10 @@ class ClipitPost extends UBMessage {
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitPost";
-    const REL_MESSAGE_DESTINATION = "post-destination";
-    const REL_MESSAGE_FILE = "post-file";
-    const REL_POST_STORYBOARD = "post-storyboard";
-    const REL_POST_VIDEO = "post-video";
+    const REL_MESSAGE_DESTINATION = "ClipitPost-destination";
+    const REL_MESSAGE_FILE = "ClipitPost-ClipitFile";
+    const REL_POST_STORYBOARD = "ClipitPost-ClipitStoryboard";
+    const REL_POST_VIDEO = "ClipitPost-ClipitVideo";
     public $topic_id = 0;
     public $storyboard_array = array();
     public $video_array = array();

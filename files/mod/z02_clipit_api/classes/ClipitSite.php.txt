@@ -20,9 +20,9 @@ class ClipitSite extends UBSite {
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitSite";
-    const REL_SITE_FILE = "site-file";
-    const REL_SITE_VIDEO = "site-video";
-    const REL_SITE_STORYBOARD = "site-storyboard";
+    const REL_SITE_FILE = "ClipitSite-ClipitFile";
+    const REL_SITE_VIDEO = "ClipitSite-ClipitVideo";
+    const REL_SITE_STORYBOARD = "ClipitSite-ClipitStoryboard";
     public $file_array = array();
     public $video_array = array();
     public $storyboard_array = array();

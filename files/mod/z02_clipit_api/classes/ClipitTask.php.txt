@@ -28,10 +28,10 @@ class ClipitTask extends UBItem {
     const TYPE_VIDEO_FEEDBACK = "video_feedback";
     const TYPE_OTHER = "other";
     // Relationship names
-    const REL_TASK_STORYBOARD = "task-storyboard";
-    const REL_TASK_VIDEO = "task-video";
-    const REL_TASK_FILE = "task-file";
-    const REL_TASK_QUIZ = "task-quiz";
+    const REL_TASK_STORYBOARD = "ClipitTask-ClipitStoryboard";
+    const REL_TASK_VIDEO = "ClipitTask-ClipitVideo";
+    const REL_TASK_FILE = "ClipitTask-ClipitFile";
+    const REL_TASK_QUIZ = "ClipitTask-ClipitQuiz";
     // Status values
     const STATUS_LOCKED = "locked";
     const STATUS_ACTIVE = "active";

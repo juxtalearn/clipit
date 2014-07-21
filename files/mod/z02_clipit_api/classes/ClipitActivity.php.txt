@@ -26,13 +26,13 @@ class ClipitActivity extends UBItem {
      */
     const SUBTYPE = "ClipitActivity";
     // Relationship names
-    const REL_ACTIVITY_TEACHER = "activity-teacher";
-    const REL_ACTIVITY_USER = "activity-user";
-    const REL_ACTIVITY_GROUP = "activity-group";
-    const REL_ACTIVITY_TASK = "activity-task";
-    const REL_ACTIVITY_STORYBOARD = "activity-storyboard";
-    const REL_ACTIVITY_VIDEO = "activity-video";
-    const REL_ACTIVITY_FILE = "activity-file";
+    const REL_ACTIVITY_TEACHER = "ClipitActivity-teacher";
+    const REL_ACTIVITY_STUDENT = "ClipitActivity-student";
+    const REL_ACTIVITY_GROUP = "ClipitActivity-ClipitGroup";
+    const REL_ACTIVITY_TASK = "ClipitActivity-ClipitTask";
+    const REL_ACTIVITY_STORYBOARD = "ClipitActivity-ClipitStoryboard";
+    const REL_ACTIVITY_VIDEO = "ClipitActivity-ClipitVideo";
+    const REL_ACTIVITY_FILE = "ClipitActivity-ClipitFile";
     // Status values
     const STATUS_ENROLL = "enroll";
     const STATUS_ACTIVE = "active";
@@ -45,7 +45,7 @@ class ClipitActivity extends UBItem {
     public $end = 0;
     public $max_group_size = 0;
     public $teacher_array = array();
-    public $called_users_array = array();
+    public $student_array = array();
     public $group_array = array();
     public $task_array = array();
     public $storyboard_array = array();
@@ -66,7 +66,7 @@ class ClipitActivity extends UBItem {
         $this->max_group_size = (int)$elgg_entity->get("max_group_size");
         $this->status = (string)static::calc_status($this->start, $this->end);
         $this->teacher_array = static::get_teachers($this->id);
-        $this->called_users_array = static::get_called_users($this->id);
+        $this->student_array = static::get_students($this->id);
         $this->group_array = static::get_groups($this->id);
         $this->task_array = static::get_tasks($this->id);
         $this->storyboard_array = static::get_storyboards($this->id);
@@ -119,7 +119,7 @@ class ClipitActivity extends UBItem {
     protected function save() {
         parent::save();
         static::set_teachers($this->id, $this->teacher_array);
-        static::set_called_users($this->id, $this->called_users_array);
+        static::set_students($this->id, $this->student_array);
         static::set_groups($this->id, $this->group_array);
         static::set_tasks($this->id, $this->task_array);
         static::set_storyboards($this->id, $this->storyboard_array);
@@ -211,21 +211,21 @@ class ClipitActivity extends UBItem {
         return UBCollection::get_items($id, static::REL_ACTIVITY_TEACHER);
     }
 
-    // CALLED USERS
-    static function add_called_users($id, $user_array) {
-        return UBCollection::add_items($id, $user_array, static::REL_ACTIVITY_USER);
+    // STUDENTS
+    static function add_students($id, $user_array) {
+        return UBCollection::add_items($id, $user_array, static::REL_ACTIVITY_STUDENT);
     }
 
-    static function set_called_users($id, $user_array) {
-        return UBCollection::set_items($id, $user_array, static::REL_ACTIVITY_USER);
+    static function set_students($id, $user_array) {
+        return UBCollection::set_items($id, $user_array, static::REL_ACTIVITY_STUDENT);
     }
 
-    static function remove_called_users($id, $user_array) {
-        return UBCollection::remove_items($id, $user_array, static::REL_ACTIVITY_USER);
+    static function remove_students($id, $user_array) {
+        return UBCollection::remove_items($id, $user_array, static::REL_ACTIVITY_STUDENT);
     }
 
-    static function get_called_users($id) {
-        return UBCollection::get_items($id, static::REL_ACTIVITY_USER);
+    static function get_students($id) {
+        return UBCollection::get_items($id, static::REL_ACTIVITY_STUDENT);
     }
 
     // GROUPS

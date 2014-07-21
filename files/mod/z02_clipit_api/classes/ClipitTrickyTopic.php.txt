@@ -20,7 +20,7 @@ class ClipitTrickyTopic extends UBItem {
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitTrickyTopic";
-    const REL_TRICKYTOPIC_TAG = "trickytopic-tag";
+    const REL_TRICKYTOPIC_TAG = "ClipitTrickyTopic-ClipitTag";
     public $subject = "";
     public $country = "";
     public $tag_array = array();

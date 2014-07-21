@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-939444424"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1151674721"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-939444424" class="accordion-body collapse in">
+            <div id="namespace-1151674721" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -334,10 +334,10 @@ end dates which define the current status.</p>
                                                                     <a href="../classes/ClipitActivity.html#method_set_teachers" class="">set_teachers()</a><br />
                                                                     <a href="../classes/ClipitActivity.html#method_remove_teachers" class="">remove_teachers()</a><br />
                                                                     <a href="../classes/ClipitActivity.html#method_get_teachers" class="">get_teachers()</a><br />
-                                                                    <a href="../classes/ClipitActivity.html#method_add_called_users" class="">add_called_users()</a><br />
-                                                                    <a href="../classes/ClipitActivity.html#method_set_called_users" class="">set_called_users()</a><br />
-                                                                    <a href="../classes/ClipitActivity.html#method_remove_called_users" class="">remove_called_users()</a><br />
-                                                                    <a href="../classes/ClipitActivity.html#method_get_called_users" class="">get_called_users()</a><br />
+                                                                    <a href="../classes/ClipitActivity.html#method_add_students" class="">add_students()</a><br />
+                                                                    <a href="../classes/ClipitActivity.html#method_set_students" class="">set_students()</a><br />
+                                                                    <a href="../classes/ClipitActivity.html#method_remove_students" class="">remove_students()</a><br />
+                                                                    <a href="../classes/ClipitActivity.html#method_get_students" class="">get_students()</a><br />
                                                                     <a href="../classes/ClipitActivity.html#method_add_groups" class="">add_groups()</a><br />
                                                                     <a href="../classes/ClipitActivity.html#method_set_groups" class="">set_groups()</a><br />
                                                                     <a href="../classes/ClipitActivity.html#method_remove_groups" class="">remove_groups()</a><br />
@@ -377,7 +377,7 @@ end dates which define the current status.</p>
                                                                     <a href="../classes/ClipitActivity.html#property_end" class="">$end</a><br />
                                                                     <a href="../classes/ClipitActivity.html#property_max_group_size" class="">$max_group_size</a><br />
                                                                     <a href="../classes/ClipitActivity.html#property_teacher_array" class="">$teacher_array</a><br />
-                                                                    <a href="../classes/ClipitActivity.html#property_called_users_array" class="">$called_users_array</a><br />
+                                                                    <a href="../classes/ClipitActivity.html#property_student_array" class="">$student_array</a><br />
                                                                     <a href="../classes/ClipitActivity.html#property_group_array" class="">$group_array</a><br />
                                                                     <a href="../classes/ClipitActivity.html#property_task_array" class="">$task_array</a><br />
                                                                     <a href="../classes/ClipitActivity.html#property_storyboard_array" class="">$storyboard_array</a><br />
@@ -389,7 +389,7 @@ end dates which define the current status.</p>
                                                                     <a href="../classes/ClipitActivity.html#constant_SUBTYPE" class="">SUBTYPE</a><br />
                                                                     <a href="../classes/UBItem.html#constant_REL_PARENT_CLONE" class="">REL_PARENT_CLONE</a><br />
                                                                     <a href="../classes/ClipitActivity.html#constant_REL_ACTIVITY_TEACHER" class="">REL_ACTIVITY_TEACHER</a><br />
-                                                                    <a href="../classes/ClipitActivity.html#constant_REL_ACTIVITY_USER" class="">REL_ACTIVITY_USER</a><br />
+                                                                    <a href="../classes/ClipitActivity.html#constant_REL_ACTIVITY_STUDENT" class="">REL_ACTIVITY_STUDENT</a><br />
                                                                     <a href="../classes/ClipitActivity.html#constant_REL_ACTIVITY_GROUP" class="">REL_ACTIVITY_GROUP</a><br />
                                                                     <a href="../classes/ClipitActivity.html#constant_REL_ACTIVITY_TASK" class="">REL_ACTIVITY_TASK</a><br />
                                                                     <a href="../classes/ClipitActivity.html#constant_REL_ACTIVITY_STORYBOARD" class="">REL_ACTIVITY_STORYBOARD</a><br />
@@ -606,10 +606,10 @@ end dates which define the current status.</p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="constant_REL_ACTIVITY_USER" name="constant_REL_ACTIVITY_USER" class="anchor"></a>
-            <article id="constant_REL_ACTIVITY_USER" class="constant">
-                <h3 class="">REL_ACTIVITY_USER</h3>
-                <pre class="signature">REL_ACTIVITY_USER</pre>
+            <a id="constant_REL_ACTIVITY_STUDENT" name="constant_REL_ACTIVITY_STUDENT" class="anchor"></a>
+            <article id="constant_REL_ACTIVITY_STUDENT" class="constant">
+                <h3 class="">REL_ACTIVITY_STUDENT</h3>
+                <pre class="signature">REL_ACTIVITY_STUDENT</pre>
                 <p><em></em></p>
                 
             </article>
@@ -1310,10 +1310,10 @@ end dates which define the current status.</p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="property_called_users_array" name="property_called_users_array" class="anchor"></a>
+            <a id="property_student_array" name="property_student_array" class="anchor"></a>
             <article class="property">
-                <h3 class="public ">$called_users_array</h3>
-                <pre class="signature">$called_users_array</pre>
+                <h3 class="public ">$student_array</h3>
+                <pre class="signature">$student_array</pre>
                 <p><em></em></p>
                 
 
@@ -2912,11 +2912,11 @@ end dates which define the current status.</p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_add_called_users" name="method_add_called_users" class="anchor"></a>
+            <a id="method_add_students" name="method_add_students" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">add_called_users()</h3>
+                <h3 class="public ">add_students()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">add_called_users( <span class="argument">$id</span>,  <span class="argument">$user_array</span>)</pre>
+                <pre class="signature" style="margin-right: 54px;">add_students( <span class="argument">$id</span>,  <span class="argument">$user_array</span>)</pre>
                 <p><em></em></p>
                 
 
@@ -2957,11 +2957,11 @@ end dates which define the current status.</p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_set_called_users" name="method_set_called_users" class="anchor"></a>
+            <a id="method_set_students" name="method_set_students" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">set_called_users()</h3>
+                <h3 class="public ">set_students()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">set_called_users( <span class="argument">$id</span>,  <span class="argument">$user_array</span>)</pre>
+                <pre class="signature" style="margin-right: 54px;">set_students( <span class="argument">$id</span>,  <span class="argument">$user_array</span>)</pre>
                 <p><em></em></p>
                 
 
@@ -3002,11 +3002,11 @@ end dates which define the current status.</p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_remove_called_users" name="method_remove_called_users" class="anchor"></a>
+            <a id="method_remove_students" name="method_remove_students" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">remove_called_users()</h3>
+                <h3 class="public ">remove_students()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">remove_called_users( <span class="argument">$id</span>,  <span class="argument">$user_array</span>)</pre>
+                <pre class="signature" style="margin-right: 54px;">remove_students( <span class="argument">$id</span>,  <span class="argument">$user_array</span>)</pre>
                 <p><em></em></p>
                 
 
@@ -3047,11 +3047,11 @@ end dates which define the current status.</p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_get_called_users" name="method_get_called_users" class="anchor"></a>
+            <a id="method_get_students" name="method_get_students" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">get_called_users()</h3>
+                <h3 class="public ">get_students()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">get_called_users( <span class="argument">$id</span>)</pre>
+                <pre class="signature" style="margin-right: 54px;">get_students( <span class="argument">$id</span>)</pre>
                 <p><em></em></p>
                 
 
@@ -4288,7 +4288,7 @@ end dates which define the current status.</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on July 21st, 2014 at 14:01.
+                    on July 21st, 2014 at 15:01.
                 </section>
             </section>
         </section>
