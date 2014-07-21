@@ -13,7 +13,7 @@
  */
 
 /**
- * <Class Description>
+ * Learning Analytics instance and interface class, for working with the external Learning Analytics Toolkit.
  */
 class ClipitLA extends UBFile {
     /**
