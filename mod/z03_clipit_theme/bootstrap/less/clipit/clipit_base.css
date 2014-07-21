@@ -7061,6 +7061,13 @@ ul.events.events-loading:after {
 .btn-info.active {
   background-color: #9c8604;
 }
+.btn-blue-lighter {
+  background: #d6f0fa !important;
+}
+.btn-blue-lighter:hover,
+.btn-blue-lighter:focus {
+  opacity: 0.7;
+}
 .btn-success-o {
   border: none;
   background-color: #669900;
@@ -8360,6 +8367,9 @@ ul.deadline-list > li.soon {
 }
 ul.deadline-list > li .fa {
   font-size: 20px;
+}
+ul.deadline-list > li .fa.fa-users {
+  font-size: 14px;
 }
 .tags-block {
   background: #d6f0fa;
@@ -10063,6 +10073,9 @@ a:focus {
 .blue-lighter {
   color: #bae6f6;
 }
+.text-muted-2 {
+  color: #c9c9c9;
+}
 .green {
   color: #99cb00;
 }
@@ -10568,4 +10581,39 @@ h6,
 }
 .bg-center-icon > .center-icon > div > span {
   font-size: 40px;
+}
+.panel-blue {
+  border: 0;
+  border-radius: 0 !important;
+  box-shadow: none;
+}
+.panel-blue > .panel-heading {
+  background: #d6f0fa;
+  padding: 15px;
+  border-radius: 0;
+}
+.panel-blue .panel-body {
+  border: 0 !important;
+}
+.progressbar-mini {
+  width: 90px;
+  height: 10px;
+  background: #f1f2f7;
+}
+.progressbar-mini > div {
+  float: left;
+  width: 5%;
+  height: 100%;
+  font-size: 12px;
+  line-height: 20px;
+  color: #ffffff;
+  text-align: center;
+  background-color: #32b4e5;
+  -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  -webkit-transition: width 0.6s ease;
+  transition: width 0.6s ease;
+}
+.progressbar-mini > div[data-value='0'] {
+  width: 5% !important;
 }

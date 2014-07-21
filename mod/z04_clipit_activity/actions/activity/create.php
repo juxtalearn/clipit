@@ -13,14 +13,13 @@
 function get_timestamp_from_string($string){
     return strtotime(str_replace('/', '-', $string));
 }
-
 // Activity setup
 $activity_name = get_input('activity-title');
 $activity_description = get_input('activity-description');
 $activity_start = get_input('activity-start');
 $activity_end = get_input('activity-end');
 $activity_tt = get_input('activity-tricky-topic');
-//debug
+
 $activity_id = ClipitActivity::create(array(
     'name' => $activity_name,
     'description' => $activity_description,

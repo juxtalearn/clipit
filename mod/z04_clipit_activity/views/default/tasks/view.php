@@ -12,6 +12,7 @@
  */
 $task = elgg_extract('entity', $vars);
 $status = elgg_extract('status', $vars);
+$super_title = elgg_extract('super_title', $vars);
 ?>
 <style>
 .task-info{
@@ -34,13 +35,16 @@ $status = elgg_extract('status', $vars);
 <div class="task-info">
     <h3>
         <span class="<?php echo $status['color'];?> pull-right"><?php echo $status['text'];?></span>
+        <?php if($super_title):?>
+            <span class="text-muted show"><?php echo $super_title;?></span>
+        <?php endif;?>
         <?php echo $task->name;?>
     </h3>
     <small class="show details">
-        <strong>Start: </strong>
+        <strong><?php echo elgg_echo('start');?>: </strong>
         <?php echo elgg_view('output/friendlytime', array('time' => $task->start));?>
         <span class="pull-right">
-            <strong>End: </strong>
+            <strong><?php echo elgg_echo('end');?>: </strong>
             <?php echo elgg_view('output/friendlytime', array('time' => $task->end));?>
         </span>
     </small>

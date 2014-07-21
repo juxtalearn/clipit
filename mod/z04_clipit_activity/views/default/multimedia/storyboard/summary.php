@@ -25,8 +25,8 @@ if(mb_strlen($sb_description)>165){
     <strong>
     <?php echo elgg_view('output/url', array(
         'href'  => $file_url,
-        'title' => $file->name,
-        'text'  => $file->name));
+        'title' => $storyboard->name,
+        'text'  => $storyboard->name));
     ?>
     </strong>
 </h4>

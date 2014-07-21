@@ -28,7 +28,7 @@ html{
   overflow-y: scroll;
 }
 body{
-  background: #f1f2f7;
+  background: @bg_body;
 }
 a{
   color: @blue_clipit;
@@ -44,6 +44,9 @@ a{
 }
 .blue-lighter{
   color: @blue-lighter;
+}
+.text-muted-2{
+  color: @grey_slow_3;
 }
 .green{
   color: @green_clipit;
@@ -610,6 +613,46 @@ h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
       > span{
         font-size: 40px;
       }
+    }
+  }
+}
+//
+// Panel collapse blue
+// --------------------------------------------------
+.panel-blue{
+  border: 0;
+  border-radius: 0 !important;
+  box-shadow: none;
+  > .panel-heading{
+    background: @blue-lighter_2;
+    padding: 15px;
+    border-radius: 0;
+  }
+  .panel-body{
+    border: 0 !important;
+  }
+}
+//
+// Progressbar mini
+// --------------------------------------------------
+.progressbar-mini{
+  width: 90px;
+  height: 10px;
+  background: @bg_body;
+  > div{
+    float: left;
+    width: 5%; // default
+    height: 100%;
+    font-size: 12px;
+    line-height: 20px;
+    color: #ffffff;
+    text-align: center;
+    background-color: @blue_clipit;
+    @shadow_input:  inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    .box-shadow(@shadow_input);
+    .transition(width 0.6s ease);
+    &[data-value='0']{
+      width: 5% !important;
     }
   }
 }

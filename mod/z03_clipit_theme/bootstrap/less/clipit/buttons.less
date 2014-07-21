@@ -26,7 +26,12 @@
 .btn-warning { .btn-styles(@orange_clipit); }
 .btn-danger  { .btn-styles(@red_clipit); }
 .btn-info    { .btn-styles(@yellow_clipit); }
-
+.btn-blue-lighter{
+  background: @blue-lighter_2 !important;
+  &:hover, &:focus{
+    opacity: 0.7;
+  }
+}
 .btn-success-o{
   .btn-styles(@green_clipit_2);
   color: @green_clipit_2;

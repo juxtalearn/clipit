@@ -57,7 +57,7 @@ $english = array(
     'friendlytime:next:hours' => "%s hours",
     'friendlytime:next:hours:singular' => "an hour",
     'friendlytime:next:days' => "%s days",
-    'friendlytime:next:days:singular' => "yesterday",
+    'friendlytime:next:days:singular' => "tomorrow",
 );
 
 add_translation('en', $english);

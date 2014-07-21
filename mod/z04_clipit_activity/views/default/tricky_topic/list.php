@@ -11,17 +11,20 @@
  * @package         ClipIt
  */
 $tricky_topic_id = get_input('tricky_topic');
+if($from_view = elgg_extract('tricky_topic', $vars)){
+    $tricky_topic_id = $from_view;
+}
 $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($tricky_topic_id)));
 ?>
 <div class="col-md-12" style="padding:5px;">
     <h4>
-    <?php echo elgg_view('output/url', array(
-        'href'  => "explore/search?by=tricky_topic&id={$tricky_topic->id}",
-        'target' => '_blank',
-        'title' => $tricky_topic->name,
-        'text'  => $tricky_topic->name,
-    ));
-    ?>
+        <?php echo elgg_view('output/url', array(
+            'href'  => "explore/search?by=tricky_topic&id={$tricky_topic->id}",
+            'target' => '_blank',
+            'title' => $tricky_topic->name,
+            'text'  => $tricky_topic->name,
+        ));
+        ?>
     </h4>
     <hr class="margin-0">
 </div>

@@ -43,7 +43,7 @@ $(function(){
             $("#finish_setup").show();
         }
     });
-    $(document).on("click", "#add_users_button",function(){
+    $(document).on("click", "#add_users_button", function(){
         var url_action = $(this).attr("href");
         var data_inputs = $(".add-user-list :input").serialize();
         $.getJSON(url_action, data_inputs, function(data) {

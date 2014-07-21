@@ -11,10 +11,18 @@
  * @package         ClipIt
  */
 $english = array(
+    'users:none' => 'No users',
+    'start' => 'Start',
+    'end' => 'End',
+    'expand:all' => 'Expand all',
+    'collapse:all' => 'Collapse all',
     'click_add' => 'Click to add',
     'view'  => 'View',
     'bulk_actions' => 'Bulk actions',
     // Activity
+    'activity:title' => 'Activity name',
+    'activity:description' => 'Activity description',
+    'activity:admin' => 'Activity admin',
     'my_activities' => 'My activities',
     'activities' => 'Activities',
     'activities:none' => 'There are no activities...',
@@ -179,6 +187,11 @@ $english = array(
     'task:quiz_answer' => 'Quiz answer',
     'task:video_feedback' => 'Video feedback',
     'task:storyboard_feedback' => 'Storyboard feedback',
+    'task:group_storyboard' => '%s\'s storyboards',
+    /// Task status
+    'task:locked' => 'Task locked',
+    'task:active' => 'Task open',
+    'task:finished' => 'Task finished',
 
     // Create activity
     'activity:site:students' => 'Site students',
@@ -188,6 +201,11 @@ $english = array(
     'called:students:insert_to_site' => 'Upload to site',
     'called:students:insert_to_activity' => 'Upload to activity',
     'activity:grouping_mode' => 'Grouping mode',
+    // Activity admin
+    'activity:admin:dashboard' => 'Dashboard',
+    'activity:admin:task_setup' => 'Tasks setup',
+    'activity:admin:groups' => 'Groups setup',
+    'activity:admin:setup' => 'Activity setup',
 );
 
 add_translation('en', $english);

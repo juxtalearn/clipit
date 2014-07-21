@@ -14,9 +14,9 @@
 <h3 class="title-block"><?php echo elgg_echo('activity:grouping_mode');?></h3>
 <div class="panel-group" id="accordion_grouping">
     <div class="panel panel-default">
-        <div class="panel-heading" style="background: #fff;">
-            <h4 class="panel-title blue select-radio" data-toggle="collapse" data-parent="#accordion_grouping" href="#collapse_1">
-            <input class="margin-right-5" value="1" type="radio" required name="groups_creation"/>
+        <div class="panel-heading select-radio" style="background: #fff;">
+            <h4 class="panel-title blue " data-toggle="collapse" data-parent="#accordion_grouping" href="#collapse_1">
+            <input value="1" style="visibility: hidden" type="radio" required name="groups_creation"/>
                 <a href="javascript:;">
                     <i class="fa fa-user"></i>
                     Teacher make groups
@@ -30,9 +30,9 @@
         </div>
     </div>
     <div class="panel panel-default">
-        <div class="panel-heading" style="background: #fff;">
-            <h4 class="panel-title blue select-radio" data-toggle="collapse" data-parent="#accordion_grouping" href="#collapse_2">
-                <input class="margin-right-5" value="2" type="radio" required name="groups_creation"/>
+        <div class="panel-heading select-radio" style="background: #fff;">
+            <h4 class="panel-title blue" data-toggle="collapse" data-parent="#accordion_grouping" href="#collapse_2">
+                <input value="2" style="visibility: hidden" type="radio" required name="groups_creation"/>
                 <a href="javascript:;">
                     <i class="fa fa-users"></i>
                     Students make groups
@@ -46,9 +46,9 @@
         </div>
     </div>
     <div class="panel panel-default">
-        <div class="panel-heading" style="background: #fff;">
-            <h4 class="panel-title blue select-radio" data-toggle="collapse" data-parent="#accordion_grouping" href="#collapse_3">
-                <input class="margin-right-5" value="3" type="radio" required name="groups_creation"/>
+        <div class="panel-heading select-radio" style="background: #fff;">
+            <h4 class="panel-title blue" data-toggle="collapse" data-parent="#accordion_grouping" href="#collapse_3">
+                <input value="3" style="visibility: hidden" type="radio" required name="groups_creation"/>
                 <a href="javascript:;">
                     <i class="fa fa-users"></i>
                     Create random groups
