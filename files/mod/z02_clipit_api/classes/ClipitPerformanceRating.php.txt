@@ -13,7 +13,7 @@
  */
 
 /**
- * <Class Description>
+ * Contains Ratings on Performance Items created by users
  */
 class ClipitPerformanceRating extends UBItem {
     /**

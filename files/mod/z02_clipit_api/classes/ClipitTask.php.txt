@@ -217,6 +217,22 @@ class ClipitTask extends UBItem {
         return UBCollection::get_items($id, static::REL_TASK_QUIZ);
     }
 
+    // OTHER
+    /**
+     * Get the Child Task (if any)
+     * @param int $id ID of Task
+     * @return int ID of Child Task
+     */
+    static function get_child($id){
+        $task_array = static::get_all(0);
+        foreach($task_array as $task){
+            if($task->parent_task === $id){
+                return $task->id;
+            }
+        }
+        return 0;
+    }
+
     /**
      * Get the Status for a Task
      * @param int $id ID of Task

@@ -13,7 +13,7 @@
  */
 
 /**
- * <Class Description>
+ * Holds Performance Items which can be linked from Resources as metadata for richer linkage, searching and context.
  */
 class ClipitPerformanceItem extends UBItem {
     /**
