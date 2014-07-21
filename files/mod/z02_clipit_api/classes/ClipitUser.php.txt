@@ -94,7 +94,7 @@ class ClipitUser extends UBUser {
     }
 
     /**
-     * Get all Activity Ids in which a user is member of, or a teacher is in charge of.
+     * Get all Activity Ids in which a Student is member of, or a Teacher is in charge of.
      *
      * @param int  $user_id     Id of the user to get activities from.
      * @param bool $joined_only Only returnes Activities where a Student user has joined to a group.
@@ -119,7 +119,7 @@ class ClipitUser extends UBUser {
                     }
                     return $activity_array;
                 } else {
-                    return UBCollection::get_items($user_id, ClipitActivity::REL_ACTIVITY_USER, true);
+                    return UBCollection::get_items($user_id, ClipitActivity::REL_ACTIVITY_STUDENT, true);
                 }
             case static::ROLE_TEACHER:
                 return UBCollection::get_items($user_id, ClipitActivity::REL_ACTIVITY_TEACHER, true);
