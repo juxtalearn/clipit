@@ -13,7 +13,9 @@
  */
 
 /**
- * <Class Description>
+ * A Quiz Question containing a main question (in the "name" and "description" properties), with a set of Options,
+ * a Validation array with the correct pattern of Options, a Difficulty value, can be Tagged, can be linked to a Video,
+ * and contains links to all Results submitted by Students to this Question.
  */
 class ClipitQuizQuestion extends UBItem {
     /**

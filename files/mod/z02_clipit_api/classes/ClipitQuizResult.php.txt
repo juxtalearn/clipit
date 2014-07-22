@@ -13,7 +13,7 @@
  */
 
 /**
- * <Class Description>
+ * A Student Result for a Quiz Question, with a link to it, and a boolean value to show whether it is Correct or not.
  */
 class ClipitQuizResult extends UBItem {
     /**

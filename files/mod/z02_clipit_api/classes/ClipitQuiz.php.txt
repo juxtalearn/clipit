@@ -13,7 +13,8 @@
  */
 
 /**
- * <Class Description>
+ * A collection of Quiz Questions, with a link to a Tricky Topic, links to the Tricky Topic Tool Quiz answering and
+ * score review URLs, and Author name.
  */
 class ClipitQuiz extends UBItem {
     /**
