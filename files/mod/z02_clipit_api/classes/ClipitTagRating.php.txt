@@ -13,7 +13,7 @@
  */
 
 /**
- * <Class Description>
+ * A rating of whether a Tag has correctly been covered in a resource
  */
 class ClipitTagRating extends UBItem {
     /**
