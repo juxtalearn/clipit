@@ -233,8 +233,7 @@ class ClipitTask extends UBItem {
         $task = new static($id);
         switch($task->task_type) {
             case static::TYPE_QUIZ_TAKE:
-                //@todo: ClipitQuiz::has_answered_quiz($id, $user_id);
-                return false;
+                return ClipitQuiz::has_answered_quiz($task->quiz, $entity_id);
             case static::TYPE_STORYBOARD_UPLOAD:
                 foreach($task->storyboard_array as $storyboard_id) {
                     if((int)ClipitStoryboard::get_group($storyboard_id) === (int)$entity_id) {
