@@ -13,8 +13,7 @@
  */
 
 /**
- * An individual direct message sent through ClipIt. It has a sender (owner), a single destination, and can
- * have attached files.
+ * A direct message sent through ClipIt. It has a sender (owner), a single destination, and can have attached files.
  */
 class ClipitChat extends UBMessage {
     /**

@@ -13,7 +13,7 @@
  */
 
 /**
- * Contains Ratings on Performance Items created by users
+ * A 5-star Rating on a Performance Items applied to a Resource, submitted by a user as evaluation feedback.
  */
 class ClipitPerformanceRating extends UBItem {
     /**

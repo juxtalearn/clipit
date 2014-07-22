@@ -13,7 +13,8 @@
  */
 
 /**
- * <Class Description>
+ * A complete User Rating linked to a published Resource, containing an Overall boolean rating, links to Tag Ratings and
+ * Performance item Ratings.
  */
 class ClipitRating extends UBItem {
     /**

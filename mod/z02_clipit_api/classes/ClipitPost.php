@@ -13,7 +13,9 @@
  */
 
 /**
- * <Class Description>
+ * A discussion forum Post which can be a topic starter or a reply to another Post. Contains Link to the topic starter
+ * Post ID, and may have files and/or Resources as attachments.
+
  */
 class ClipitPost extends UBMessage {
     /**

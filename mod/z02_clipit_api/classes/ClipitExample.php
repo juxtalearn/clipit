@@ -13,7 +13,7 @@
  */
 
 /**
- * Contains an Example experience in which students have trouble understanding a Stumbling Block (or Tag).
+ * An Example experience in which students have trouble understanding a Stumbling Block (or Tag).
  */
 class ClipitExample extends UBItem {
     /**

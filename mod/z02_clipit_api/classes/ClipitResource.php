@@ -13,7 +13,8 @@
  */
 
 /**
- * <Class Description>
+ * An extensible class which holds common functionality and properties for Resource objects such as Videos or
+ * Storyboards.
  */
 class ClipitResource extends UBItem {
     /**
