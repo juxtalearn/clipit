@@ -97,28 +97,6 @@ function expose_task_functions() {
         array("id" => array("type" => "int", "required" => true)), "Gets Files from an Activity", "GET", false, true
     );
     expose_function(
-        $api_suffix . "add_quizzes", $class_suffix . "add_quizzes", array(
-            "id" => array("type" => "int", "required" => true),
-            "quiz_array" => array("type" => "array", "required" => true)
-        ), "Add Quizzes by Id to an Activity", "POST", false, true
-    );
-    expose_function(
-        $api_suffix . "set_quizzes", $class_suffix . "set_quizzes", array(
-            "id" => array("type" => "int", "required" => true),
-            "quiz_array" => array("type" => "array", "required" => true)
-        ), "Set Quizzes by Id to an Activity", "POST", false, true
-    );
-    expose_function(
-        $api_suffix . "remove_quizzes", $class_suffix . "remove_quizzes", array(
-            "id" => array("type" => "int", "required" => true),
-            "quiz_array" => array("type" => "array", "required" => true)
-        ), "Removes Quizzes by Id from an Activity", "POST", false, true
-    );
-    expose_function(
-        $api_suffix . "get_quizzes", $class_suffix . "get_quizzes",
-        array("id" => array("type" => "int", "required" => true)), "Gets Quizzes from an Activity", "GET", false, true
-    );
-    expose_function(
         $api_suffix . "get_child", $class_suffix . "get_child",
         array("id" => array("type" => "int", "required" => true)), "Get the Child Task (if any)", "GET", false, true
     );

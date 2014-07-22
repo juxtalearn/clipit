@@ -111,6 +111,28 @@ class ClipitQuiz extends UBItem {
     }
 
     /**
+     * Returns whether a user has completely answered a Quiz - this is: all Quiz Questions inside a Quiz
+     *
+     * @param int $quiz_id The Quiz ID
+     * @param int $user_id The User ID
+     * @return bool 'true' if yes, 'false' if no
+     */
+    static function has_answered_quiz($quiz_id, $user_id){
+        $quiz_questions = ClipitQuiz::get_quiz_questions($quiz_id);
+        $quiz_results = ClipitQuizResult::get_by_owner(array($user_id));
+        $result_questions = array();
+        foreach($quiz_results as $quiz_result){
+            $result_questions[] = $quiz_result->quiz_question;
+        }
+        foreach($quiz_questions as $quiz_question){
+            if(array_search($quiz_question, $result_questions) === false){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * Adds Quiz Questions to a Quiz.
      *
      * @param int   $id             Id from Quiz to add Questions to

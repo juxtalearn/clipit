@@ -13,7 +13,7 @@
  */
 
 /**
- * <Class Description>
+ * The Site class, which is unique (only one instance) and holds general Site information and Site-layer Resources.
  */
 class ClipitSite extends UBSite {
     /**
