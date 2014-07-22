@@ -13,7 +13,8 @@
  */
 
 /**
- * <Class Description>
+ * A Stumbling Block term which is linked from one or more Tricky Topics, and which can be linked from any
+ * topic-related Items or Resources
  */
 class ClipitTag extends UBItem {
     /**

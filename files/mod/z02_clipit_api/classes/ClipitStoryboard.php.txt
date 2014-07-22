@@ -13,7 +13,7 @@
  */
 
 /**
- * <Class Description>
+ * A Storyboard object linking to a binary file to use with external authoring component.
  */
 class ClipitStoryboard extends ClipitResource {
     /**
