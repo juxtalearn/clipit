@@ -13,7 +13,8 @@
  */
 
 /**
- * Holds Performance Items which can be linked from Resources as metadata for richer linkage, searching and context.
+ * A Performance element which can be linked from Resources to denote that it has been applied to them, and allows for
+ * richer linkage, searching and context of Resources.
  */
 class ClipitPerformanceItem extends UBItem {
     /**

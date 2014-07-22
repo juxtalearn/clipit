@@ -13,7 +13,7 @@
  */
 
 /**
- * Holds single files with thumbnails (in case of images), and can be tagged and labeled.
+ * A binary file with thumbnails (in case of images), and can be tagged and labeled.
  */
 class ClipitFile extends UBFile {
     /**

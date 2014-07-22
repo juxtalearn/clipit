@@ -13,7 +13,7 @@
  */
 
 /**
- * A collection of Students contained inside an Activity. Also holds all Group Resources.
+ * A collection of Students contained inside an Activity. Also links to all Group Resources.
  */
 class ClipitGroup extends UBItem {
     /**
