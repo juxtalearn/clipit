@@ -249,6 +249,7 @@ class ClipitTask extends UBItem {
                     $rating_targets[] = (int)$user_rating->target;
                 }
                 $parent_task = new static($task->parent_task);
+                $parent_task->storyboard_array;
                 foreach($parent_task->storyboard_array as $storyboard_id) {
                     if(array_search((int)$storyboard_id, $rating_targets) === false) {
                         $storyboard_group = (int)ClipitStoryboard::get_group((int)$storyboard_id);
