@@ -13,7 +13,7 @@
 $entities = elgg_extract('entities', $vars);
 $activities = ClipitActivity::get_by_id($entities);
 // debug
-$activities = ClipitActivity::get_by_id(array(3926));
+//$activities = ClipitActivity::get_by_id(array(3926));
 ?>
 <style>
 .panel-blue > .panel-heading{
@@ -24,15 +24,21 @@ $activities = ClipitActivity::get_by_id(array(3926));
     padding: 5px;
 }
 .panel-blue{
-    border-bottom: 2px solid #bae6f6 !important;
+    /*border-bottom: 2px solid #bae6f6 !important;*/
 }
 </style>
-<div class="wrapper">
+
 <?php
 foreach($activities as $activity):
     $tasks = ClipitTask::get_by_id($activity->task_array);
 ?>
-    <h4><?php echo $activity->name;?></h4>
+    <h4 style="background: #<?php echo $activity->color;?>;padding: 10px;color: #fff">
+        <div class="progressbar-mini progressbar-blue inline-block pull-right margin-top-5">
+            <div class="blue" data-value="22" style="width: 22%"></div>
+        </div>
+        <?php echo $activity->name;?>
+    </h4>
+    <div class="wrapper">
     <ul class="panel-group" id="accordion">
     <?php
     foreach($tasks as $task):
@@ -47,7 +53,7 @@ foreach($activities as $activity):
 //            }
 //        }
     ?>
-        <li class="panel panel-blue list-item-5">
+        <li class="panel panel-blue list-item">
             <div class="panel-heading" style="cursor: pointer" data-toggle="collapse" data-parent="#accordion" href="#collapse_<?php echo $task->id;?>">
                 <i class="blue-lighter fa fa-chevron-down pull-right"></i>
                 <small class="pull-right hide">
@@ -57,11 +63,20 @@ foreach($activities as $activity):
                     <strong class="inline-block blue margin-left-5"><?php echo $completed_count['text'];?></strong>
                 </small>
                 <?php echo elgg_view("tasks/icon_task_type", array('type' => $task->task_type)); ?>
-                <span class="blue"><?php echo $task->name;?></span>
+                <strong class="blue"><?php echo $task->name;?></strong>
+                <small class="margin-bottom-10 hide">
+                    <div class="pull-right">
+                        <strong><?php echo elgg_echo('end');?>:</strong>
+                        <?php echo elgg_view('output/friendlytime', array('time' => $task->end));?>
+                    </div>
+                    <div>
+                        <strong><?php echo elgg_echo('start');?>:</strong>
+                        <?php echo elgg_view('output/friendlytime', array('time' => $task->start));?>
+                    </div>
+                </small>
             </div>
             <div id="collapse_<?php echo $task->id;?>" class="panel-collapse collapse">
                 <div class="panel-body">
-                    <hr class="margin-0 margin-bottom-10">
                     <?php
                     switch($task->task_type):
                         case ClipitTask::TYPE_VIDEO_UPLOAD:
@@ -83,5 +98,5 @@ foreach($activities as $activity):
 
     <?php endforeach;?>
     </ul>
+    </div>
 <?php endforeach;?>
-</div>

@@ -27,27 +27,22 @@ $task = elgg_extract('task', $vars);
         }
 ?>
 <small class="margin-bottom-10 show">
-
-    <div class="align-left margin-bottom-5" style="
-    float: right;
-    margin-top: 5px;
-">
+    <div class="pull-right margin-top-5">
         <div class="progressbar-mini progressbar-blue inline-block">
-            <div class="blue" data-value="22" style="width: 22%"></div>
+            <div class="<?php echo $progress_color;?>" data-value="<?php echo $completed_count['count'];?>" style="width: <?php echo $completed_count['count'];?>%"></div>
         </div>
-        <strong class="inline-block blue margin-left-5">2/9</strong>
-    </div><div>
-        <strong>End:</strong>
-        <abbr title="25 July 2014 @ 12:00am">tomorrow</abbr>                    </div>
+        <strong class="inline-block blue margin-left-5"><?php echo $completed_count['text'];?></strong>
+    </div>
     <div>
-        <strong>Start:</strong>
-        <abbr title="21 July 2014 @ 12:00am">3 days ago</abbr>                    </div>
-</small>
-<small class="show text-left margin-bottom-5" style="display: none !important;">
-    <div class="progressbar-mini progressbar-blue inline-block">
-        <div class="<?php echo $progress_color;?>" data-value="<?php echo $completed_count['count'];?>" style="width: <?php echo $completed_count['count'];?>%"></div>
+        <strong><?php echo elgg_echo('start');?>:</strong>
+        <?php echo elgg_view('output/friendlytime', array('time' => $task->start));?>
+    </div>
+    <div>
+        <strong><?php echo elgg_echo('end');?>:</strong>
+        <?php echo elgg_view('output/friendlytime', array('time' => $task->end));?>
     </div>
 </small>
+<hr class="margin-0 margin-bottom-10">
 <ul>
     <?php
     foreach($groups as $group):
@@ -70,14 +65,12 @@ $task = elgg_extract('task', $vars);
         <?php endif;?>
         <div class="text-truncate">
             <?php echo $status['icon']; ?>
-            <strong>
-                <?php echo elgg_view('output/url', array(
-                    'href'  => "clipit_activity/{$task->activity}/group/{$group->id}",
-                    'title' => $group->name,
-                    'text'  => $group->name,
-                ));
-                ?>
-            </strong>
+            <?php echo elgg_view('output/url', array(
+                'href'  => "clipit_activity/{$task->activity}/group/{$group->id}",
+                'title' => $group->name,
+                'text'  => $group->name,
+            ));
+            ?>
         </div>
         <?php if($storyboard_id):?>
             <small>
