@@ -13,7 +13,7 @@
  */
 
 /**
- * Class ClipitTask
+ * <Class Description>
  */
 class ClipitTask extends UBItem {
     /**
@@ -21,17 +21,17 @@ class ClipitTask extends UBItem {
      */
     const SUBTYPE = "ClipitTask";
     // Task types
-    const TYPE_QUIZ_ANSWER = "quiz_answer";
+    const TYPE_QUIZ_TAKE = "quiz_take";
     const TYPE_STORYBOARD_UPLOAD = "storyboard_upload";
     const TYPE_VIDEO_UPLOAD = "video_upload";
     const TYPE_STORYBOARD_FEEDBACK = "storyboard_feedback";
     const TYPE_VIDEO_FEEDBACK = "video_feedback";
     const TYPE_OTHER = "other";
     // Relationship names
-    const REL_TASK_STORYBOARD = "task-storyboard";
-    const REL_TASK_VIDEO = "task-video";
-    const REL_TASK_FILE = "task-file";
-    const REL_TASK_QUIZ = "task-quiz";
+    const REL_TASK_STORYBOARD = "ClipitTask-ClipitStoryboard";
+    const REL_TASK_VIDEO = "ClipitTask-ClipitVideo";
+    const REL_TASK_FILE = "ClipitTask-ClipitFile";
+    const REL_TASK_QUIZ = "ClipitTask-ClipitQuiz";
     // Status values
     const STATUS_LOCKED = "locked";
     const STATUS_ACTIVE = "active";
@@ -44,18 +44,18 @@ class ClipitTask extends UBItem {
     public $parent_task = 0;
     public $task_count = 0;
     public $activity = 0;
+    public $quiz = 0; // in case of TYPE_QUIZ_TAKE
     public $storyboard_array = array();
     public $video_array = array();
     public $file_array = array();
-    public $quiz_array = array();
 
     /**
      * Loads object parameters stored in Elgg
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_entity) {
-        parent::load_from_elgg($elgg_entity);
+    protected function copy_from_elgg($elgg_entity) {
+        parent::copy_from_elgg($elgg_entity);
         $this->task_type = (string)$elgg_entity->get("task_type");
         $this->start = (int)$elgg_entity->get("start");
         $this->end = (int)$elgg_entity->get("end");
@@ -70,10 +70,10 @@ class ClipitTask extends UBItem {
             }
         }
         $this->activity = static::get_activity((int)$this->id);
+        $this->quiz = (int)$elgg_entity->get("quiz");
         $this->storyboard_array = static::get_storyboards((int)$this->id);
         $this->video_array = static::get_videos($this->id);
         $this->file_array = static::get_files($this->id);
-        $this->quiz_array = static::get_quizzes($this->id);
     }
 
     /**
@@ -81,13 +81,14 @@ class ClipitTask extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function save_to_elgg($elgg_entity) {
-        parent::save_to_elgg($elgg_entity);
+    protected function copy_to_elgg($elgg_entity) {
+        parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("task_type", (string)$this->task_type);
         $elgg_entity->set("start", (int)$this->start);
         $elgg_entity->set("end", (int)$this->end);
         $elgg_entity->set("parent_task", (int)$this->parent_task);
         $elgg_entity->set("task_count", (int)$this->task_count);
+        $elgg_entity->set("quiz", (int)$this->quiz);
     }
 
     /**
@@ -100,7 +101,6 @@ class ClipitTask extends UBItem {
         static::set_storyboards($this->id, $this->storyboard_array);
         static::set_videos($this->id, $this->video_array);
         static::set_files($this->id, $this->file_array);
-        static::set_quizzes($this->id, $this->quiz_array);
         return $this->id;
     }
 
@@ -200,21 +200,20 @@ class ClipitTask extends UBItem {
         return UBCollection::get_items($id, static::REL_TASK_FILE);
     }
 
-    // QUIZZES
-    static function add_quizzes($id, $quiz_array) {
-        return UBCollection::add_items($id, $quiz_array, static::REL_TASK_QUIZ);
-    }
-
-    static function set_quizzes($id, $quiz_array) {
-        return UBCollection::set_items($id, $quiz_array, static::REL_TASK_QUIZ);
-    }
-
-    static function remove_quizzes($id, $quiz_array) {
-        return UBCollection::remove_items($id, $quiz_array, static::REL_TASK_QUIZ);
-    }
-
-    static function get_quizzes($id) {
-        return UBCollection::get_items($id, static::REL_TASK_QUIZ);
+    // OTHER
+    /**
+     * Get the Child Task (if any)
+     * @param int $id ID of Task
+     * @return int ID of Child Task
+     */
+    static function get_child($id){
+        $task_array = static::get_all(0);
+        foreach($task_array as $task){
+            if((int)$task->parent_task == (int)$id){
+                return $task->id;
+            }
+        }
+        return 0;
     }
 
     /**
@@ -233,9 +232,8 @@ class ClipitTask extends UBItem {
     static function get_completed_status($id, $entity_id) {
         $task = new static($id);
         switch($task->task_type) {
-            case static::TYPE_QUIZ_ANSWER:
-                //@todo: ClipitQuiz::has_answered_quiz($id, $user_id);
-                return false;
+            case static::TYPE_QUIZ_TAKE:
+                return ClipitQuiz::has_answered_quiz($task->quiz, $entity_id);
             case static::TYPE_STORYBOARD_UPLOAD:
                 foreach($task->storyboard_array as $storyboard_id) {
                     if((int)ClipitStoryboard::get_group($storyboard_id) === (int)$entity_id) {
@@ -250,6 +248,7 @@ class ClipitTask extends UBItem {
                     $rating_targets[] = (int)$user_rating->target;
                 }
                 $parent_task = new static($task->parent_task);
+                $parent_task->storyboard_array;
                 foreach($parent_task->storyboard_array as $storyboard_id) {
                     if(array_search((int)$storyboard_id, $rating_targets) === false) {
                         $storyboard_group = (int)ClipitStoryboard::get_group((int)$storyboard_id);

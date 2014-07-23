@@ -13,7 +13,7 @@
  */
 
 /**
- * Class UBEvent
+ * <Class Description>
  */
 class UBEvent {
     /**

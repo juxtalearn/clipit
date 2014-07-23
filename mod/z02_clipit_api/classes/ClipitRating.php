@@ -13,16 +13,16 @@
  */
 
 /**
- * Class ClipitRating
-
+ * A complete User Rating linked to a published Resource, containing an Overall boolean rating, links to Tag Ratings and
+ * Performance item Ratings.
  */
 class ClipitRating extends UBItem {
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitRating";
-    const REL_RATING_TAGRATING = "rating-tag_rating";
-    const REL_RATING_PERFORMANCERATING = "rating-performance_rating";
+    const REL_RATING_TAGRATING = "ClipitRating-ClipitTagRating";
+    const REL_RATING_PERFORMANCERATING = "ClipitRating-ClipitPerformanceRating";
     public $target = 0;
     /**
      * @var int Overall rating opinionfrom 0 to 10
@@ -42,8 +42,8 @@ class ClipitRating extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_entity) {
-        parent::load_from_elgg($elgg_entity);
+    protected function copy_from_elgg($elgg_entity) {
+        parent::copy_from_elgg($elgg_entity);
         $this->target = (int)$elgg_entity->get("target");
         $this->overall = (bool)$elgg_entity->get("overall");
         $this->tag_rating_array = (array)static::get_tag_ratings($this->id);
@@ -55,8 +55,8 @@ class ClipitRating extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function save_to_elgg($elgg_entity) {
-        parent::save_to_elgg($elgg_entity);
+    protected function copy_to_elgg($elgg_entity) {
+        parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("target", (int)$this->target);
         $elgg_entity->set("overall", (bool)$this->overall);
     }

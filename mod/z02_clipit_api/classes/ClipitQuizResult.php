@@ -13,8 +13,7 @@
  */
 
 /**
- * Class ClipitQuizResult
-
+ * A Student Result for a Quiz Question, with a link to it, and a boolean value to show whether it is Correct or not.
  */
 class ClipitQuizResult extends UBItem {
     /**
@@ -39,8 +38,8 @@ class ClipitQuizResult extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_entity) {
-        parent::load_from_elgg($elgg_entity);
+    protected function copy_from_elgg($elgg_entity) {
+        parent::copy_from_elgg($elgg_entity);
         $this->user = (int)$elgg_entity->get("user");
         $this->correct = (bool)$elgg_entity->get("correct");
         $this->quiz_question = (int)static::get_quiz_question($this->id);
@@ -51,8 +50,8 @@ class ClipitQuizResult extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function save_to_elgg($elgg_entity) {
-        parent::save_to_elgg($elgg_entity);
+    protected function copy_to_elgg($elgg_entity) {
+        parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("correct", (bool)$this->correct);
         $elgg_entity->set("user", (int)$this->user);
     }

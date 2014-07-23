@@ -13,15 +13,15 @@
  */
 
 /**
- * Class ClipitQuiz
-
+ * A collection of Quiz Questions, with a link to a Tricky Topic, links to the Tricky Topic Tool Quiz answering and
+ * score review URLs, and Author name.
  */
 class ClipitQuiz extends UBItem {
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitQuiz";
-    const REL_QUIZ_QUIZQUESTION = "quiz-quiz_question";
+    const REL_QUIZ_QUIZQUESTION = "ClipitQuiz-ClipitQuizQuestion";
     /**
      * @var string Target interface for Quiz display (e.g.: "web space", "large display"...)
      */
@@ -47,8 +47,8 @@ class ClipitQuiz extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_entity) {
-        parent::load_from_elgg($elgg_entity);
+    protected function copy_from_elgg($elgg_entity) {
+        parent::copy_from_elgg($elgg_entity);
         $this->quiz_question_array = static::get_quiz_questions($this->id);
         $this->public = (bool)$elgg_entity->get("public");
         $this->tricky_topic = (int)$elgg_entity->get("tricky_topic");
@@ -63,8 +63,8 @@ class ClipitQuiz extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function save_to_elgg($elgg_entity) {
-        parent::save_to_elgg($elgg_entity);
+    protected function copy_to_elgg($elgg_entity) {
+        parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("public", (bool)$this->public);
         $elgg_entity->set("tricky_topic", (int)$this->tricky_topic);
         $elgg_entity->set("target", (string)$this->target);
@@ -108,6 +108,28 @@ class ClipitQuiz extends UBItem {
             }
         }
         return parent::set_properties($id, $new_prop_value_array);
+    }
+
+    /**
+     * Returns whether a user has completely answered a Quiz - this is: all Quiz Questions inside a Quiz
+     *
+     * @param int $quiz_id The Quiz ID
+     * @param int $user_id The User ID
+     * @return bool 'true' if yes, 'false' if no
+     */
+    static function has_answered_quiz($quiz_id, $user_id){
+        $quiz_questions = ClipitQuiz::get_quiz_questions($quiz_id);
+        $quiz_results = ClipitQuizResult::get_by_owner(array($user_id));
+        $result_questions = array();
+        foreach($quiz_results as $quiz_result){
+            $result_questions[] = $quiz_result->quiz_question;
+        }
+        foreach($quiz_questions as $quiz_question){
+            if(array_search($quiz_question, $result_questions) === false){
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

@@ -11,6 +11,7 @@
  * @package         ClipIt
  * @subpackage      clipit_api
  */
+
 /**
  * Expose all functions for the ClipIt REST API
  */

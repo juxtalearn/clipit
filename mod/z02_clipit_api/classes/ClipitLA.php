@@ -1,5 +1,4 @@
 <?php
-
 /**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
@@ -11,6 +10,10 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  * @subpackage      clipit_api
+ */
+
+/**
+ * Learning Analytics instance and interface class, for working with the external Learning Analytics Toolkit.
  */
 class ClipitLA extends UBFile {
     /**
@@ -25,8 +28,8 @@ class ClipitLA extends UBFile {
      *
      * @param ElggFile $elgg_file Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_file) {
-        parent::load_from_elgg($elgg_file);
+    protected function copy_from_elgg($elgg_file) {
+        parent::copy_from_elgg($elgg_file);
         $this->return_id = (int)$elgg_file->get("return_id");
         $this->status_code = (int)$elgg_file->get("status_code");
     }
@@ -36,8 +39,8 @@ class ClipitLA extends UBFile {
      *
      * @param ElggFile $elgg_file Elgg object instance to save $this to
      */
-    protected function save_to_elgg($elgg_file) {
-        parent::save_to_elgg($elgg_file);
+    protected function copy_to_elgg($elgg_file) {
+        parent::copy_to_elgg($elgg_file);
         $elgg_file->set("return_id", $this->return_id);
         $elgg_file->set("status_code", $this->status_code);
     }

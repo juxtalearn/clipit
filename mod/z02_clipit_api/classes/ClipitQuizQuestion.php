@@ -13,16 +13,17 @@
  */
 
 /**
- * Class ClipitQuizQuestion
-
+ * A Quiz Question containing a main question (in the "name" and "description" properties), with a set of Options,
+ * a Validation array with the correct pattern of Options, a Difficulty value, can be Tagged, can be linked to a Video,
+ * and contains links to all Results submitted by Students to this Question.
  */
 class ClipitQuizQuestion extends UBItem {
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitQuizQuestion";
-    const REL_QUIZQUESTION_TAG = "quiz_question-tag";
-    const REL_QUIZQUESTION_QUIZRESULT = "quiz_question-quiz_result";
+    const REL_QUIZQUESTION_TAG = "ClipitQuizQuestion-ClipitTag";
+    const REL_QUIZQUESTION_QUIZRESULT = "ClipitQuizQuestion-ClipitQuizResult";
     /**
      * @var array Array of options to chose from as an answer to the question
      */
@@ -57,8 +58,8 @@ class ClipitQuizQuestion extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_entity) {
-        parent::load_from_elgg($elgg_entity);
+    protected function copy_from_elgg($elgg_entity) {
+        parent::copy_from_elgg($elgg_entity);
         $this->tag_array = static::get_tags($this->id);
         $this->quiz_result_array = static::get_quiz_results($this->id);
         $this->option_array = (array)$elgg_entity->get("option_array");
@@ -73,8 +74,8 @@ class ClipitQuizQuestion extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function save_to_elgg($elgg_entity) {
-        parent::save_to_elgg($elgg_entity);
+    protected function copy_to_elgg($elgg_entity) {
+        parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("option_array", (array)$this->option_array);
         $elgg_entity->set("validation_array", (array)$this->validation_array);
         $elgg_entity->set("option_type", (string)$this->option_type);

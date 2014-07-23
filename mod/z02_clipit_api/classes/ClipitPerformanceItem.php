@@ -1,10 +1,20 @@
 <?php
+/**
+ * ClipIt - JuxtaLearn Web Space
+ * PHP version:     >= 5.2
+ * Creation date:   2013-10-10
+ * Last update:     $Date$
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC JuxtaLearn Team
+ * @version         $Version$
+ * @link            http://www.juxtalearn.eu
+ * @license         GNU Affero General Public License v3
+ * @package         ClipIt
+ * @subpackage      clipit_api
+ */
 
 /**
- * Created by PhpStorm.
- * User: Pablo Llinás
- * Date: 20/05/14
- * Time: 16:09
+ * A Performance element which can be linked from Resources to denote that it has been applied to them, and allows for
+ * richer linkage, searching and context of Resources.
  */
 class ClipitPerformanceItem extends UBItem {
     /**
@@ -20,8 +30,8 @@ class ClipitPerformanceItem extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_entity) {
-        parent::load_from_elgg($elgg_entity);
+    protected function copy_from_elgg($elgg_entity) {
+        parent::copy_from_elgg($elgg_entity);
         $this->category = (string)$elgg_entity->get("category");
         $this->category_description = (string)$elgg_entity->get("category_description");
         $this->example = (string)$elgg_entity->get("example");
@@ -32,8 +42,8 @@ class ClipitPerformanceItem extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function save_to_elgg($elgg_entity) {
-        parent::save_to_elgg($elgg_entity);
+    protected function copy_to_elgg($elgg_entity) {
+        parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("category", (string)$this->category);
         $elgg_entity->set("category_description", (string)$this->category_description);
         $elgg_entity->set("example", (string)$this->example);

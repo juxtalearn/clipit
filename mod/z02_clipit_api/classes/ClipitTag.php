@@ -13,8 +13,8 @@
  */
 
 /**
- * Class ClipitTag
-
+ * A Stumbling Block identifier which is linked from one or more Tricky Topics, and which can be added as metadata to
+ * Items or Resources.
  */
 class ClipitTag extends UBItem {
     /**

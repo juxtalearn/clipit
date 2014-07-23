@@ -13,16 +13,15 @@
  */
 
 /**
- * Class ClipitFile
-
+ * A binary file with thumbnails (in case of images), and can be tagged and labeled.
  */
 class ClipitFile extends UBFile {
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitFile";
-    const REL_FILE_TAG = "file-tag";
-    const REL_FILE_LABEL = "file-label";
+    const REL_FILE_TAG = "ClipitFile-ClipitTag";
+    const REL_FILE_LABEL = "ClipitFile-ClipitLabel";
     public $tag_array = array();
     public $label_array = array();
 
@@ -31,8 +30,8 @@ class ClipitFile extends UBFile {
      *
      * @param ElggFile $elgg_file Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_file) {
-        parent::load_from_elgg($elgg_file);
+    protected function copy_from_elgg($elgg_file) {
+        parent::copy_from_elgg($elgg_file);
         $this->tag_array = static::get_tags($this->id);
         $this->label_array = static::get_labels($this->id);
     }

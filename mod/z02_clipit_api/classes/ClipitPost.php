@@ -1,5 +1,4 @@
 <?php
-
 /**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
@@ -12,15 +11,21 @@
  * @package         ClipIt
  * @subpackage      clipit_api
  */
+
+/**
+ * A discussion forum Post which can be a topic starter or a reply to another Post. Contains Link to the topic starter
+ * Post ID, and may have files and/or Resources as attachments.
+
+ */
 class ClipitPost extends UBMessage {
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitPost";
-    const REL_MESSAGE_DESTINATION = "post-destination";
-    const REL_MESSAGE_FILE = "post-file";
-    const REL_POST_STORYBOARD = "post-storyboard";
-    const REL_POST_VIDEO = "post-video";
+    const REL_MESSAGE_DESTINATION = "ClipitPost-destination";
+    const REL_MESSAGE_FILE = "ClipitPost-ClipitFile";
+    const REL_POST_STORYBOARD = "ClipitPost-ClipitStoryboard";
+    const REL_POST_VIDEO = "ClipitPost-ClipitVideo";
     public $topic_id = 0;
     public $storyboard_array = array();
     public $video_array = array();
@@ -30,8 +35,8 @@ class ClipitPost extends UBMessage {
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_entity) {
-        parent::load_from_elgg($elgg_entity);
+    protected function copy_from_elgg($elgg_entity) {
+        parent::copy_from_elgg($elgg_entity);
         $this->topic_id = (int)$elgg_entity->get("topic_id");
         $this->storyboard_array = (array)static::get_storyboards((int)$this->id);
         $this->video_array = (array)static::get_videos((int)$this->id);
@@ -42,8 +47,8 @@ class ClipitPost extends UBMessage {
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function save_to_elgg($elgg_entity) {
-        parent::save_to_elgg($elgg_entity);
+    protected function copy_to_elgg($elgg_entity) {
+        parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("topic_id", $this->topic_id);
     }
 

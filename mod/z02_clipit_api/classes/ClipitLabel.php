@@ -13,8 +13,7 @@
  */
 
 /**
- * Class ClipitLabel
-
+ * A key term (Label) which can be linked from any Resource as metadata for richer linkage, searching and context.
  */
 class ClipitLabel extends UBItem {
     /**

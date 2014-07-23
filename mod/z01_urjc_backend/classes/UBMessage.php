@@ -1,5 +1,4 @@
 <?php
-
 /**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
@@ -12,13 +11,17 @@
  * @package         ClipIt
  * @subpackage      urjc_backend
  */
+
+/**
+ * <Class Description>
+ */
 class UBMessage extends UBItem {
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "UBMessage";
-    const REL_MESSAGE_DESTINATION = "message-destination";
-    const REL_MESSAGE_FILE = "message-file";
+    const REL_MESSAGE_DESTINATION = "UBMessage-destination";
+    const REL_MESSAGE_FILE = "UBMessage-UBFile";
     public $read_array = array();
     public $destination = 0;
     public $file_array = array();
@@ -28,8 +31,8 @@ class UBMessage extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_entity) {
-        parent::load_from_elgg($elgg_entity);
+    protected function copy_from_elgg($elgg_entity) {
+        parent::copy_from_elgg($elgg_entity);
         $this->read_array = (array)$elgg_entity->get("read_array");
         $this->destination = (int)static::get_destination($this->id);
         $this->file_array = (array)static::get_files($this->id);
@@ -40,8 +43,8 @@ class UBMessage extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function save_to_elgg($elgg_entity) {
-        parent::save_to_elgg($elgg_entity);
+    protected function copy_to_elgg($elgg_entity) {
+        parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("read_array", (array)$this->read_array);
     }
 
@@ -268,7 +271,7 @@ class UBMessage extends UBItem {
         $message_array = static::get_by_sender($sender_array);
         $count_array = array();
         foreach($sender_array as $sender_id) {
-            $count_array[$sender_id] = count($message_array[$sender_id]);
+            $count_array[$sender_id] = count((array)$message_array[$sender_id]);
         }
         return $count_array;
     }

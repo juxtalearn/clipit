@@ -11,6 +11,15 @@
  * @package         ClipIt
  * @subpackage      clipit_api
  */
+
+/**
+ * Exposes functions common to most ClipIt classes to the REST API
+ *
+ * @param string $api_suffix The API suffix for a certain class
+ * @param string $class_suffix The PHP suffix for a certain class
+ *
+ * @throws InvalidParameterException
+ */
 function expose_common_functions($api_suffix, $class_suffix) {
     expose_function(
         $api_suffix . "list_properties", $class_suffix . "list_properties", null, "Get class properties", 'GET', false,

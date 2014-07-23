@@ -13,18 +13,17 @@
  */
 
 /**
- * Class ClipitGroup
-
+ * A collection of Students contained inside an Activity. Also links to all Group Resources.
  */
 class ClipitGroup extends UBItem {
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitGroup";
-    const REL_GROUP_USER = "group-user";
-    const REL_GROUP_FILE = "group-file";
-    const REL_GROUP_STORYBOARD = "group-storyboard";
-    const REL_GROUP_VIDEO = "group-video";
+    const REL_GROUP_USER = "ClipitGroup-ClipitUser";
+    const REL_GROUP_FILE = "ClipitGroup-ClipitFile";
+    const REL_GROUP_STORYBOARD = "ClipitGroup-ClipitStoryboard";
+    const REL_GROUP_VIDEO = "ClipitGroup-ClipitVideo";
     public $user_array = array();
     public $file_array = array();
     public $storyboard_array = array();
@@ -36,8 +35,8 @@ class ClipitGroup extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_entity) {
-        parent::load_from_elgg($elgg_entity);
+    protected function copy_from_elgg($elgg_entity) {
+        parent::copy_from_elgg($elgg_entity);
         $this->user_array = static::get_users($this->id);
         $this->file_array = static::get_files($this->id);
         $this->storyboard_array = static::get_storyboards($this->id);

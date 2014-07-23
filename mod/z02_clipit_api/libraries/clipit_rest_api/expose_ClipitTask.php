@@ -1,9 +1,19 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Pablo Llinás
- * Date: 21/05/14
- * Time: 16:03
+ * ClipIt - JuxtaLearn Web Space
+ * PHP version:     >= 5.2
+ * Creation date:   2013-10-10
+ * Last update:     $Date$
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC JuxtaLearn Team
+ * @version         $Version$
+ * @link            http://www.juxtalearn.eu
+ * @license         GNU Affero General Public License v3
+ * @package         ClipIt
+ * @subpackage      clipit_api
+ */
+
+/**
+ * Expose class functions for the ClipIt REST API
  */
 function expose_task_functions() {
     $api_suffix = "clipit.task.";
@@ -87,26 +97,8 @@ function expose_task_functions() {
         array("id" => array("type" => "int", "required" => true)), "Gets Files from an Activity", "GET", false, true
     );
     expose_function(
-        $api_suffix . "add_quizzes", $class_suffix . "add_quizzes", array(
-            "id" => array("type" => "int", "required" => true),
-            "quiz_array" => array("type" => "array", "required" => true)
-        ), "Add Quizzes by Id to an Activity", "POST", false, true
-    );
-    expose_function(
-        $api_suffix . "set_quizzes", $class_suffix . "set_quizzes", array(
-            "id" => array("type" => "int", "required" => true),
-            "quiz_array" => array("type" => "array", "required" => true)
-        ), "Set Quizzes by Id to an Activity", "POST", false, true
-    );
-    expose_function(
-        $api_suffix . "remove_quizzes", $class_suffix . "remove_quizzes", array(
-            "id" => array("type" => "int", "required" => true),
-            "quiz_array" => array("type" => "array", "required" => true)
-        ), "Removes Quizzes by Id from an Activity", "POST", false, true
-    );
-    expose_function(
-        $api_suffix . "get_quizzes", $class_suffix . "get_quizzes",
-        array("id" => array("type" => "int", "required" => true)), "Gets Quizzes from an Activity", "GET", false, true
+        $api_suffix . "get_child", $class_suffix . "get_child",
+        array("id" => array("type" => "int", "required" => true)), "Get the Child Task (if any)", "GET", false, true
     );
     expose_function(
         $api_suffix . "get_status", $class_suffix . "get_status",

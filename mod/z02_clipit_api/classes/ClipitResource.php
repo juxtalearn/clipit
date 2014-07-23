@@ -13,21 +13,22 @@
  */
 
 /**
- * Class ClipiResource
-
+ * An extensible class which holds common functionality and properties for Resource objects such as Videos or
+ * Storyboards.
  */
 class ClipitResource extends UBItem {
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitResource";
-    const REL_RESOURCE_TAG = "resource-tag";
-    const REL_RESOURCE_LABEL = "resource-label";
-    const REL_RESOURCE_PERFORMANCE = "resource-performance";
-    const REL_GROUP_RESOURCE = "group-resource";
-    const REL_ACTIVITY_RESOURCE = "activity-resource";
-    const REL_SITE_RESOURCE = "site-resource";
-    const REL_TASK_RESOURCE = "task-resource";
+    const REL_RESOURCE_TAG = "ClipitResource-ClipitTag";
+    const REL_RESOURCE_LABEL = "ClipitResource-ClipitLabel";
+    const REL_RESOURCE_PERFORMANCE = "ClipitResource-ClipitPerformanceItem";
+    const REL_GROUP_RESOURCE = "ClipitGroup-ClipitResource";
+    const REL_ACTIVITY_RESOURCE = "ClipitActivity-ClipitResource";
+    const REL_SITE_RESOURCE = "ClipitSite-ClipitResource";
+    const REL_TASK_RESOURCE = "ClipitTask-ClipitResource";
+
     public $tag_array = array();
     public $label_array = array();
     public $performance_item_array = array();
@@ -37,8 +38,8 @@ class ClipitResource extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function load_from_elgg($elgg_entity) {
-        parent::load_from_elgg($elgg_entity);
+    protected function copy_from_elgg($elgg_entity) {
+        parent::copy_from_elgg($elgg_entity);
         $this->tag_array = (array)static::get_tags($this->id);
         $this->label_array = (array)static::get_labels($this->id);
         $this->performance_item_array = (array)static::get_performance_items($this->id);
