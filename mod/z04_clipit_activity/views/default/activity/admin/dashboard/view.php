@@ -41,11 +41,28 @@ $(function(){
 <?php if($activity->status == ClipitActivity::STATUS_ACTIVE):?>
     <h3>Activity progress</h3>
     <div class="margin-bottom-20">
-        <?php echo elgg_view("page/components/progressbar", array(
-            'value' => $activity_progress,
-            'width' => '100%',
-        ));
-        ?>
+        <div style="position: relative;">
+            <?php echo elgg_view("page/components/progressbar", array(
+                'value' => $activity_progress,
+                'width' => '100%',
+            ));
+            ?>
+            <?php
+            foreach(ClipitTask::get_by_id($activity->task_array) as $task):
+                $task_progress = round((($task->start - $start)/($end - $start)) * 100);
+            ?>
+                <div style="position: absolute; top:0; left: <?php echo $task_progress+0.3;?>%">
+                    <?php echo elgg_view('output/url', array(
+                        'title' =>  elgg_echo('activity:task'). ": ".$task->name,
+                        'text' => '',
+                        'style' => "opacity: 0.7;".($activity_progress > $task_progress ? "color:#fff;": ""),
+                        'class' => 'fa fa-exclamation',
+                        'href' => "clipit_activity/{$activity->id}/tasks/view/{$task->id}",
+                    ));
+                    ?>
+                </div>
+            <?php endforeach;?>
+        </div>
         <small class="show margin-top-5">
             <strong><?php echo elgg_echo('start');?>: </strong>
             <?php echo elgg_view('output/friendlytime', array('time' => $activity->start));?>

@@ -23,7 +23,7 @@ if(!$tasks){
     <?php
     foreach($tasks as $task):
         $status = get_task_status($task, $group_id);
-        $user_tasks = array('video_feedback', 'storyboard_feedback', 'quiz_answer');
+        $user_tasks = array('video_feedback', 'storyboard_feedback', 'quiz_take');
         $locked = false;
         if($task->status == ClipitTask::STATUS_LOCKED){
             $locked = true;
@@ -40,6 +40,9 @@ if(!$tasks){
                     if(ClipitTask::get_completed_status($task->id, $user_id)){
                         $completed++;
                     }
+                }
+                if($completed == count($users)){
+                    $status['icon'] = '<i class="fa fa-check green"></i>';
                 }
             ?>
                 <strong>
@@ -68,11 +71,10 @@ if(!$tasks){
                 <span class="text-muted"><?php echo $task->name; ?></span>
             <?php else: ?>
                 <?php echo $status['icon']; ?>
-                <?php echo $status['count']; ?>
                 <?php echo elgg_view('output/url', array(
                     'href' => "{$href}/view/{$task->id}?group_id={$group_id}",
                     'title' => $task->name,
-                    'text' => $task->name,
+                    'text' => $status['count']." ".$task->name,
                     'is_trusted' => true,
                 ));
                 ?>

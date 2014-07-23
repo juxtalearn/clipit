@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 $english = array(
+    'exit:page:confirmation' => '...Data you have entered may not be saved...',
     'users:none' => 'No users',
     'start' => 'Start',
     'end' => 'End',
@@ -136,6 +137,7 @@ $english = array(
     // Tricky Topic
     'tricky_topic' => 'Tricky Topic',
     'tricky_topic:none' => 'Not tricky Topic',
+    'tricky_topic:tool' => 'Tricky Topic tool',
     // Publications
     'publications:no_evaluated' => 'Not evaluated',
     'publications:evaluated' => 'Evaluated',
@@ -188,6 +190,8 @@ $english = array(
     'task:video_feedback' => 'Video feedback',
     'task:storyboard_feedback' => 'Storyboard feedback',
     'task:group_storyboard' => '%s\'s storyboards',
+    'task:create' => 'Create new task',
+    'task:edit' => 'Edit task',
     /// Task status
     'task:locked' => 'Task locked',
     'task:active' => 'Task open',

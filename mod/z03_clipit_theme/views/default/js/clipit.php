@@ -279,7 +279,7 @@ $(function(){
             errorPlacement: function(error, element) {
                 error.appendTo($("label[for='"+element.attr('name')+"']"));
             },
-            ignore: [],
+            //ignore: [], // DEBUG
             onkeyup: false,
             onblur: false,
             submitHandler: function(form) {

@@ -27,13 +27,13 @@ $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($tricky_topic_id)))
         ?>
     </h4>
     <hr class="margin-0">
+    <small class="show"><?php echo elgg_echo("tags");?></small>
 </div>
 <?php
 foreach($tricky_topic->tag_array as $tag_id):
     $tag = array_pop(ClipitTag::get_by_id(array($tag_id)));
 ?>
-<div class="col-md-6 text-truncate" style="padding:5px;">
-    <?php echo elgg_echo("tag");?>:
+<div class="col-md-4 text-truncate" style="padding:5px;">
     <?php echo elgg_view('output/url', array(
         'href'  => "explore/search?by=tag&id={$tag->id}",
         'target' => '_blank',

@@ -24,7 +24,7 @@ switch($entity_class){
     case 'ClipitActivity':
         $entity = array_pop(ClipitActivity::get_by_id(array($entity_id)));
         $user_activity = ClipitGroup::get_from_user_activity($user_id, $entity->id);
-        $called_user = ClipitActivity::get_called_users($entity->id);
+        $called_user = ClipitActivity::get_students($entity->id);
 //        if(!$user_activity || !in_array($user_id, $called_user)){
 //            register_error(elgg_echo("discussion:cantcreate"));
 //        }

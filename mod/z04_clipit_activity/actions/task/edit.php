@@ -1,0 +1,33 @@
+<?php
+ /**
+ * ClipIt - JuxtaLearn Web Space
+ * PHP version:     >= 5.2
+ * Creation date:   21/07/14
+ * Last update:     21/07/14
+ * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC JuxtaLearn Project
+ * @version         $Version$
+ * @link            http://www.juxtalearn.eu
+ * @license         GNU Affero General Public License v3
+ * @package         ClipIt
+ */
+$entity_id = get_input('entity-id');
+$task = array_pop(get_input('task'));
+$task_array = $task;
+
+if($task['feedback-form']){
+    $task_array = $task['feedback-form'];
+}
+$updated = ClipitTask::set_properties($entity_id, array(
+    'name' => $task_array['title'],
+    'description' => $task_array['description'],
+    'start' => get_timestamp_from_string($task_array['start']),
+    'end' => get_timestamp_from_string($task_array['end']),
+    'quiz' => $task_array['quiz']
+));
+if($updated){
+    system_message(elgg_echo('task:updated'));
+} else {
+    register_error(elgg_echo("task:cantupdate"));
+}
+
+forward(REFERRER);

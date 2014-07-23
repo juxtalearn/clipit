@@ -41,6 +41,7 @@ $(function(){
         var activity_form = $("#activity-create");
         $(".datepicker").datepicker({
             minDate: activity_form.find("input[name=activity-start]").val(),
+            maxDate: activity_form.find("input[name=activity-end]").val(),
             onClose: function (text, inst) {
                 $(activity_form
                     .find(".input-task-start, .input-task-end, input[name='activity-end']"))
@@ -71,7 +72,12 @@ $(function(){
         $("#step_"+ step).fadeIn();
 
     });
-
+    $(window).bind('beforeunload', function(){
+        return '<?php echo elgg_echo('exit:page:confirmation');?>';
+    });
+    $(document).on("click", '#finish_setup', function(e){
+        $(window).unbind('beforeunload');
+    });
 });
 </script>
 <div id="step_1" class="row step">
@@ -120,6 +126,16 @@ $(function(){
         </div>
     </div>
     <div class="col-md-6">
+        <div class="bg-info">
+            <span class="show">Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
+            <?php echo elgg_view('output/url', array(
+                'href'  => "http://trickytopic.".ClipitSite::get_domain(),
+                'class' => 'btn btn-primary btn-xs',
+                'title' => elgg_echo('tricky_topic:tool'),
+                'text'  => elgg_echo('tricky_topic:tool'),
+            ));
+            ?>
+        </div>
         <div class="form-group">
             <label for="activity-tricky-topic"><?php echo elgg_echo("activity:select:tricky_topic");?></label>
             <?php echo elgg_view('input/dropdown', array(

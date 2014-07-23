@@ -14,12 +14,12 @@
 <h3 class="title-block"><?php echo elgg_echo('activity:grouping_mode');?></h3>
 <div class="panel-group" id="accordion_grouping">
     <div class="panel panel-default">
-        <div class="panel-heading select-radio" style="background: #fff;">
-            <h4 class="panel-title blue " data-toggle="collapse" data-parent="#accordion_grouping" href="#collapse_1">
+        <div class="panel-heading" style="background: #fff;">
+            <h4 class="panel-title blue select-radio" data-toggle="collapse" data-parent="#accordion_grouping" href="#collapse_1">
             <input value="1" style="visibility: hidden" type="radio" required name="groups_creation"/>
                 <a href="javascript:;">
                     <i class="fa fa-user"></i>
-                    Teacher make groups
+                    Teacher makes groups
                 </a>
             </h4>
         </div>
@@ -30,8 +30,8 @@
         </div>
     </div>
     <div class="panel panel-default">
-        <div class="panel-heading select-radio" style="background: #fff;">
-            <h4 class="panel-title blue" data-toggle="collapse" data-parent="#accordion_grouping" href="#collapse_2">
+        <div class="panel-heading" style="background: #fff;">
+            <h4 class="panel-title blue select-radio" data-toggle="collapse" data-parent="#accordion_grouping" href="#collapse_2">
                 <input value="2" style="visibility: hidden" type="radio" required name="groups_creation"/>
                 <a href="javascript:;">
                     <i class="fa fa-users"></i>
@@ -46,8 +46,8 @@
         </div>
     </div>
     <div class="panel panel-default">
-        <div class="panel-heading select-radio" style="background: #fff;">
-            <h4 class="panel-title blue" data-toggle="collapse" data-parent="#accordion_grouping" href="#collapse_3">
+        <div class="panel-heading" style="background: #fff;">
+            <h4 class="panel-title blue select-radio" data-toggle="collapse" data-parent="#accordion_grouping" href="#collapse_3">
                 <input value="3" style="visibility: hidden" type="radio" required name="groups_creation"/>
                 <a href="javascript:;">
                     <i class="fa fa-users"></i>

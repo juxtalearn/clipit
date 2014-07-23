@@ -52,7 +52,7 @@ echo elgg_view("page/components/modal",
         "dialog_class"     => "modal-md",
         "remote"    => true,
         "target"    => "users-task-{$task_id}-{$group_id}",
-        "title"     => elgg_echo('activity:task').$object['name'],
+        "title"     => elgg_echo('activity:task').": ".$object['name'],
         "form"      => false,
         "body"      => $body,
         "footer"    => false

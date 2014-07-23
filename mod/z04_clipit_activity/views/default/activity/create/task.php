@@ -12,11 +12,12 @@
  */
 $task_type = elgg_extract('task_type', $vars);
 $id = elgg_extract('id', $vars);
+$task = elgg_extract('task', $vars); // task data
 
 switch($task_type){
     case "upload":
         $task_types = array(
-            'quiz_answer' => elgg_echo('task:quiz_answer'),
+            'quiz_take' => elgg_echo('task:quiz_answer'),
             'video_upload' => elgg_echo('task:video_upload'),
             'storyboard_upload' => elgg_echo('task:storyboard_upload')
         );
@@ -32,10 +33,12 @@ switch($task_type){
         $disabled = true;
         break;
 }
+$task_types = array_merge(array('' => 'Select task type'), $task_types);
 ?>
+
 <div class="col-md-12">
-<?php if(!$disabled):?>
-    <i class="fa fa-times red pull-left margin-top-5" style="cursor: pointer" onclick="javascript:$(this).closest('.task').remove();"></i>
+<?php if(!$disabled && !$task):?>
+    <i class="delete-task fa fa-times red pull-left margin-top-5" style="cursor: pointer" onclick="javascript:$(this).closest('.task').remove();"></i>
 <?php endif;?>
 <div class="content-block">
     <div class="col-md-5">
@@ -44,6 +47,7 @@ switch($task_type){
             <?php echo elgg_view("input/text", array(
                 'name' => "task{$input_array}[title]",
                 'class' => 'form-control input-task-title',
+                'value' => $task->name,
                 'required' => true
             ));
             ?>
@@ -55,7 +59,9 @@ switch($task_type){
             'name' => "task{$input_array}[type]",
             'class' => 'form-control task-types',
             'style' => 'padding-top: 5px;padding-bottom: 5px;',
-            'disabled' => $disabled,
+            'required' => true,
+            'disabled' => $task->task_type ? true : $disabled,
+            'value' => $task->task_type,
             'options_values' => $task_types
         ));
         ?>
@@ -72,6 +78,7 @@ switch($task_type){
         <?php echo elgg_view("input/text", array(
             'name' => "task{$input_array}[start]",
             'class' => 'form-control datepicker input-task-start',
+            'value' => $task->start ? date("d/m/Y", $task->start) : "",
             'required' => true
         ));
         ?>
@@ -81,6 +88,7 @@ switch($task_type){
         <?php echo elgg_view("input/text", array(
             'name' => "task{$input_array}[end]",
             'class' => 'form-control datepicker input-task-end',
+            'value' => $task->end ? date("d/m/Y", $task->end) : "",
             'required' => true
         ));
         ?>
@@ -92,13 +100,43 @@ switch($task_type){
                 'name' => "task{$input_array}[description]",
                 'class' => 'form-control',
                 'required' => true,
-                'rows' => 1,
+                'value' => $task->description,
+                'rows' => $task->description ? 5:1,
                 'onclick' => 'javascript:this.rows=5;'
             ));
             ?>
         </div>
     </div>
     <?php if(!$disabled):?>
+        <?php
+            $quizzes = array('' => 'Select quiz');
+            foreach(ClipitQuiz::get_all() as $quiz){
+                $quizzes[$quiz->id] = $quiz->name;
+            }
+        ?>
+    <div class="col-md-4 quiz-module <?php echo $task->task_type == ClipitTask::TYPE_QUIZ_TAKE ? "show":"" ?>"
+         style="display: none;padding: 10px;background: #fafafa;">
+        <div class="bg-info">
+            <span class="show">Lorem ipsum dolor sit amet, consectetur</span>
+            <?php echo elgg_view('output/url', array(
+                'href'  => "http://trickytopic.".ClipitSite::get_domain(),
+                'class' => 'btn btn-primary btn-xs',
+                'title' => elgg_echo('tricky_topic:tool'),
+                'text'  => elgg_echo('tricky_topic:tool'),
+            ));
+            ?>
+        </div>
+        <label for="activity-title"><?php echo elgg_echo("task:quiz:select");?></label>
+        <?php echo elgg_view('input/dropdown', array(
+            'name' => "task{$input_array}[quiz]",
+            'class' => 'form-control',
+            'style' => 'padding-top: 5px;padding-bottom: 5px;',
+            'required' => true,
+            'value' => $task->quiz,
+            'options_values' => $quizzes
+        ));
+        ?>
+    </div>
     <div class="col-md-4 feedback-module" style="display: none;padding: 10px;background: #fafafa;">
         <label for="activity-title"><?php echo elgg_echo("task:feedback:check");?></label>
         <div class="checkbox feedback-check">

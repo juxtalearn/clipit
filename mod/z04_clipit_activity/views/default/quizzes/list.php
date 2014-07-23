@@ -10,8 +10,9 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$quizzes = elgg_extract("quizzes", $vars);
+$quiz_id = elgg_extract("quiz", $vars);
 $href = elgg_extract("href", $vars);
+$quiz = array_pop(ClipitQuiz::get_by_id(array($quiz_id)));
 ?>
 <style>
 .panel.list-item{
@@ -25,57 +26,11 @@ $href = elgg_extract("href", $vars);
     border: 0;
 }
 </style>
-<ul class="panel-group" id="accordion_quiz" style="margin-bottom: 10px;">
-<?php
-foreach($quizzes as $quiz_id):
-    $quiz = array_pop(ClipitQuiz::get_by_id(array($quiz_id)));
-?>
-    <li class="panel panel-default list-item">
-        <div class="panel-heading">
-            <div class="pull-right">
-                <?php echo elgg_view('output/url', array(
-                    'href' => "#collapse_{$quiz->id}",
-                    'text' => "Take",
-                    'is_trusted' => true,
-                    'data-toggle' => "collapse",
-                    'data-parent' => "#accordion_quiz",
-                    'class' => 'btn btn-default btn-xs'
-                ));
-                ?>
-                <?php echo elgg_view('output/url', array(
-                    'href' => "#collapse_{$quiz->id}_result",
-                    'text' => "Result",
-                    'is_trusted' => true,
-                    'data-toggle' => "collapse",
-                    'data-parent' => "#accordion_quiz",
-                    'class' => 'btn btn-default btn-xs btn-border-blue'
-                ));
-                ?>
-            </div>
-            <?php echo elgg_view('output/url', array(
-                'href' => "#collapse_{$quiz->id}",
-                'title' => $quiz->name,
-                'text' => $quiz->name,
-                'is_trusted' => true,
-                'data-toggle' => "collapse",
-                'data-parent' => "#accordion_quiz",
-            ));
-            ?>
-        </div>
-        <div id="collapse_<?php echo $quiz->id;?>" class="panel-collapse collapse">
-            <div class="panel-body">
-                <div class="form-group frame-container" frameborder="0">
-                    <iframe src="<?php echo $quiz->embed_url;?>"></iframe>
-                </div>
-            </div>
-        </div>
-        <div id="collapse_<?php echo $quiz->id;?>_result" class="panel-collapse collapse">
-            <div class="panel-body">
-                <div class="form-group frame-container" frameborder="0">
-                    <iframe src="<?php echo $quiz->scores_url;?>"></iframe>
-                </div>
-            </div>
-        </div>
-    </li>
-<?php endforeach; ?>
-</ul>
+<h4><?php echo $quiz->name;?></h4>
+<p>
+    <?php echo $quiz->description;?>
+</p>
+<div class="form-group frame-container" frameborder="0">
+    <iframe src="<?php echo $quiz->embed_url;?>?embed=1"></iframe>
+</div>
+

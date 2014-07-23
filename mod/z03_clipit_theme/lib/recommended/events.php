@@ -13,7 +13,7 @@
 function view_recommended_event($event, $view_type = 'full'){
     $relationship = get_relationship($event->object_id);
     switch($relationship->relationship){
-        case "activity-video":
+        case "ClipitActivity-ClipitVideo":
             $activity = array_pop(ClipitActivity::get_by_id(array($relationship->guid_one)));
             $entity = array_pop(ClipitVideo::get_by_id(array($relationship->guid_two)));
             $href = "clipit_activity/{$activity->id}/resources";
@@ -24,7 +24,7 @@ function view_recommended_event($event, $view_type = 'full'){
                 'body' => elgg_view("recommended/events/video", array('entity' => $entity, 'href' => $href, 'rating' => false))
             );
             break;
-        case "activity-file":
+        case "ClipitActivity-ClipitFile":
             $activity = array_pop(ClipitActivity::get_by_id(array($relationship->guid_one)));
             $entity = array_pop(ClipitFile::get_by_id(array($relationship->guid_two)));
             $href = "clipit_activity/{$activity->id}/resources/view/{$entity->id}";
@@ -39,7 +39,7 @@ function view_recommended_event($event, $view_type = 'full'){
                     )))
             );
             break;
-        case "activity-storyboard":
+        case "ClipitActivity-ClipitStoryboard":
             $activity = array_pop(ClipitActivity::get_by_id(array($relationship->guid_one)));
             $entity = array_pop(ClipitStoryboard::get_by_id(array($relationship->guid_two)));
             $file = array_pop(ClipitFile::get_by_id(array($entity->file)));
@@ -55,7 +55,7 @@ function view_recommended_event($event, $view_type = 'full'){
                     )))
             );
             break;
-        case "activity-user":
+        case "ClipitActivity-ClipitUser":
             $activity = array_pop(ClipitActivity::get_by_id(array($relationship->guid_one)));
             $entity = array_pop(ClipitUser::get_by_id(array($relationship->guid_two)));
             $activity_link = elgg_view('output/url', array(
@@ -70,7 +70,7 @@ function view_recommended_event($event, $view_type = 'full'){
                 'body' => ''
             );
             break;
-        case "activity-group":
+        case "ClipitActivity-ClipitGroup":
             $activity = array_pop(ClipitActivity::get_by_id(array($relationship->guid_one)));
             $entity = array_pop(ClipitGroup::get_by_id(array($relationship->guid_two)));
             $activity_link = elgg_view('output/url', array(
@@ -85,7 +85,7 @@ function view_recommended_event($event, $view_type = 'full'){
                 'body' => ''
             );
             break;
-        case "activity-task":
+        case "ClipitActivity-ClipitTask":
             $activity = array_pop(ClipitActivity::get_by_id(array($relationship->guid_one)));
             $entity = array_pop(ClipitTask::get_by_id(array($relationship->guid_two)));
             $href = "clipit_activity/{$activity->id}/task";
@@ -101,7 +101,7 @@ function view_recommended_event($event, $view_type = 'full'){
                 'body' => ''
             );
             break;
-        case "group-video":
+        case "ClipitGroup-ClipitVideo":
             $activity_id = ClipitGroup::get_activity($relationship->guid_one);
             $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
             $entity = array_pop(ClipitVideo::get_by_id(array($relationship->guid_two)));
@@ -113,7 +113,7 @@ function view_recommended_event($event, $view_type = 'full'){
                 'body' => elgg_view("recommended/events/video", array('entity' => $entity, 'href' => $href, 'rating' => false))
             );
             break;
-        case "group-file":
+        case "ClipitGroup-ClipitFile":
             $activity_id = ClipitGroup::get_activity($relationship->guid_one);
             $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
             $entity = array_pop(ClipitFile::get_by_id(array($relationship->guid_two)));
@@ -129,7 +129,7 @@ function view_recommended_event($event, $view_type = 'full'){
                     )))
             );
             break;
-        case "group-storyboard":
+        case "ClipitGroup-ClipitStoryboard":
             $activity_id = ClipitGroup::get_activity($relationship->guid_one);
             $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
             $entity = array_pop(ClipitStoryboard::get_by_id(array($relationship->guid_two)));
@@ -146,7 +146,7 @@ function view_recommended_event($event, $view_type = 'full'){
                     )))
             );
             break;
-        case "post-destination":
+        case "ClipitPost-destination":
             // Message from group|activity
             $object = ClipitSite::lookup($relationship->guid_two);
             switch($object['subtype']){
@@ -172,7 +172,7 @@ function view_recommended_event($event, $view_type = 'full'){
                 'body' => elgg_view("recommended/events/discussion", array('entity' => $entity,'href' => $href))
             );
             break;
-        case "group-user":
+        case "ClipitGroup-ClipitUser":
             $activity_id = ClipitGroup::get_activity($relationship->guid_one);
             $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
             $group = array_pop(ClipitGroup::get_by_id(array($relationship->guid_one)));

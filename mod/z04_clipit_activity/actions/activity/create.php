@@ -10,9 +10,7 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-function get_timestamp_from_string($string){
-    return strtotime(str_replace('/', '-', $string));
-}
+
 // Activity setup
 $activity_name = get_input('activity-title');
 $activity_description = get_input('activity-description');
@@ -35,7 +33,8 @@ foreach($tasks as $task){
         'description' => $task['description'],
         'task_type' => $task['type'],
         'start' => get_timestamp_from_string($task['start']),
-        'end' => get_timestamp_from_string($task['end'])
+        'end' => get_timestamp_from_string($task['end']),
+        'quiz' => $task['type'] == ClipitTask::TYPE_QUIZ_TAKE ? $task['quiz'] : 0
     ));
     ClipitActivity::add_tasks($activity_id, array($task_id));
     if($task['feedback']){
@@ -55,7 +54,7 @@ foreach($tasks as $task){
 }
 // Called users
 $called_users = get_input('called_users');
-ClipitActivity::add_called_users($activity_id, $called_users);
+ClipitActivity::add_students($activity_id, $called_users);
 /**
  * Groups creation
  */
@@ -82,7 +81,7 @@ switch($groups_creation){
         ClipitActivity::set_properties($activity_id, array('max_group_size' => $max_users));
         break;
 }
-if($groups_creation && $max_users){
+if($groups_creation){
     foreach($groups as $group){
         $group_id = ClipitGroup::create(array(
             'name' => $group['name'],
@@ -92,7 +91,6 @@ if($groups_creation && $max_users){
         ClipitActivity::add_groups($activity_id, array($group_id));
     }
 }
-
 // Add me as teacher
 $user_id = elgg_get_logged_in_user_guid();
 ClipitActivity::add_teachers($activity_id, array($user_id));

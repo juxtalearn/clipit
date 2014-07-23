@@ -52,9 +52,13 @@ function clipit_activity_init() {
     elgg_register_ajax_view('activity/create/groups/create');
     // Admin activity
     elgg_register_action("activity/admin/setup", elgg_get_plugins_path() . "z04_clipit_activity/actions/activity/admin/setup.php");
+    elgg_register_action("task/edit", elgg_get_plugins_path() . "z04_clipit_activity/actions/task/edit.php");
+    elgg_register_action("task/remove", elgg_get_plugins_path() . "z04_clipit_activity/actions/task/remove.php");
+    elgg_register_action("task/create", elgg_get_plugins_path() . "z04_clipit_activity/actions/task/create.php");
     elgg_register_ajax_view('activity/admin/dashboard/group_info');
     elgg_register_ajax_view('modal/activity/admin/user_stats');
     elgg_register_ajax_view('modal/activity/admin/users_task');
+    elgg_register_ajax_view('modal/task/edit');
 
     // Group
     elgg_register_action("group/join", elgg_get_plugins_path() . "z04_clipit_activity/actions/group/join.php");
@@ -119,7 +123,12 @@ function clipit_activity_init() {
     // Tag-it
     elgg_register_js('jquery:tag_it', elgg_get_site_url() . "mod/z04_clipit_activity/vendors/jquery.tag-it.min.js");
     elgg_load_js("jquery:tag_it");
-
+    // Activity javascript libraries
+    $activity_js = elgg_get_simplecache_url('js', 'activity');
+    elgg_register_simplecache_view('js/activity');
+    elgg_register_js('clipit:activity', $activity_js);
+    elgg_load_js('clipit:activity');
+    // Attach files
     $files_attach_js = elgg_get_simplecache_url('js', 'attach');
     elgg_register_simplecache_view('js/attach');
     elgg_register_js('file:attach', $files_attach_js);
@@ -224,7 +233,7 @@ function activity_page_handler($page) {
     $activity = array_pop(ClipitActivity::get_by_id(array($page[0])));
     $user_id = elgg_get_logged_in_user_guid();
     $user = array_pop(ClipitUser::get_by_id(array($user_id)));
-    $called_users = ClipitActivity::get_called_users($activity->id);
+    $called_users = ClipitActivity::get_students($activity->id);
     $isCalled = in_array($user_id, $called_users);
     // Default status
     $activity_status = $activity->status;
@@ -527,10 +536,10 @@ function activity_page_handler($page) {
                                     }
 
                                     break;
-                                case "quiz_answer":
+                                case "quiz_take":
                                     $href = "clipit_activity/{$activity->id}/quizzes";
-                                    $quizzes = ClipitTask::get_quizzes($task->id);
-                                    $body = elgg_view('quizzes/list', array('quizzes' => $quizzes, 'href' => $href));
+                                    $quiz = $task->quiz;
+                                    $body = elgg_view('quizzes/list', array('quiz' => $quiz, 'href' => $href));
                                     break;
                                 case "video_feedback":
                                     $href = "clipit_activity/{$activity->id}/publications";

@@ -656,3 +656,107 @@ h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
     }
   }
 }
+//
+// Custom datepicker
+// --------------------------------------------------
+.ui-datepicker.ui-widget-content{
+  padding: 10px;
+  background: #fff;
+  border-radius: 4px;
+  border: 1px solid #32b4e5;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  display: none;
+}
+.ui-datepicker{
+  th {
+    padding: .7em .3em;
+    text-align: center;
+    font-weight: bold;
+    border: 0;
+    color: #32b4e5;
+  }
+   td {
+    border: 0;
+    padding: 1px;
+     span, a{
+       display: block;
+       padding: 5px 10px;
+       text-align: right;
+       text-decoration: none;
+     }
+     a{
+       background: #d6f0fa;
+       &:hover,
+       &:focus{
+         text-decoration: none;
+       }
+       &.ui-state-active{
+         background: #32b4e5;
+         color: #fff;
+         font-weight: bold;
+       }
+     }
+     span{
+       color: #999;
+       background: #fafafa;
+       opacity: 0.7;
+     }
+  }
+  .ui-datepicker-header {
+    position: relative;
+    padding: .2em 0;
+    border-bottom: 1px solid #d6f0fa;
+  }
+  .ui-datepicker-title{
+    margin: 0 2.3em;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #32b4e5;
+  }
+  .ui-datepicker-prev,
+  .ui-datepicker-next {
+    position: absolute;
+    top: 2px;
+    height: 1.8em;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: @blue_clipit;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: right;
+    font-size: 20px;
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .ui-datepicker-prev {
+    left: 2px;
+  }
+  .ui-datepicker-prev:before {
+    content: "\f0d9";
+  }
+  .ui-datepicker-next {
+    right: 2px;
+  }
+  .ui-datepicker-next:before {
+    content: "\f0da";
+  }
+  .ui-icon{
+    text-align: left;
+    display: block;
+    text-indent: -99999px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+  }
+  .ui-state-disabled {
+    cursor: default !important;
+  }
+}
+//
+// FullCalendar plugin
+// --------------------------------------------------

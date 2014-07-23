@@ -12,6 +12,7 @@
  */
 ?>
 <script src="http://loudev.com/js/jquery.multi-select.js" type="text/javascript"></script>
+<script src="http://rawgit.com/riklomas/quicksearch/master/jquery.quicksearch.js"></script>
 <script>
 $(function(){
     // Finish activity setup
@@ -22,8 +23,41 @@ $(function(){
     $('#called_users').multiSelect({
         keepOrder: false,
         selectableOptgroup: true,
-        selectableHeader: "<h4><?php echo elgg_echo("activity:site:students");?></h4>",
-        selectionHeader: "<h4><?php echo elgg_echo("activity:students");?></h4>"
+        selectableHeader: "<h4><?php echo elgg_echo("activity:site:students");?></h4>"+
+                            "<input type='text' class='search-input form-control margin-bottom-10' autocomplete='off' placeholder='Filter...'>",
+        selectionHeader: "<h4><?php echo elgg_echo("activity:students");?></h4>"+
+                            "<input type='text' class='search-input form-control margin-bottom-10' autocomplete='off' placeholder='Filter...'>",
+        afterInit: function(ms){
+            var that = this,
+                $selectableSearch = that.$selectableUl.prev(),
+                $selectionSearch = that.$selectionUl.prev(),
+                selectableSearchString = '#'+that.$container.attr('id')+' .ms-elem-selectable:not(.ms-selected)',
+                selectionSearchString = '#'+that.$container.attr('id')+' .ms-elem-selection.ms-selected';
+
+            that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
+                .on('keydown', function(e){
+                    if (e.which === 40){
+                        that.$selectableUl.focus();
+                        return false;
+                    }
+                });
+
+            that.qs2 = $selectionSearch.quicksearch(selectionSearchString)
+                .on('keydown', function(e){
+                    if (e.which == 40){
+                        that.$selectionUl.focus();
+                        return false;
+                    }
+                });
+        },
+        afterSelect: function(){
+            this.qs1.cache();
+            this.qs2.cache();
+        },
+        afterDeselect: function(){
+            this.qs1.cache();
+            this.qs2.cache();
+        }
     });
     $(document).on("click", "#add_user",function(){
         var content = $(".add-user-list");
@@ -104,7 +138,7 @@ $(function () {
         var parent_id = $(this).parent("a").attr("id");
         $.each(data.result, function(index, user) {
             $('#called_users').multiSelect('addOption',
-                { value: user.id, text: user.name, index: 0, nested: 'Loaded' }
+                { value: user.id, text: user.name, index: 0}
             );
             if(parent_id == 'insert-activity'){
                 $('#called_users').multiSelect('select', [""+user.id+""]);
@@ -358,7 +392,7 @@ function get_default_group_name(){
                     <div id="collapse_upload" class="panel-collapse collapse">
                         <div class="panel-body">
                             <div class="form-group">
-                                <a class="btn btn-primary fileinput-button" id="insert-activity">
+                                <a class="btn btn-primary pull-right fileinput-button" id="insert-activity">
                                     <?php echo elgg_echo('called:students:insert_to_activity');?>
                                     <?php echo elgg_view("input/file", array(
                                         'name' => 'upload-users',
@@ -406,6 +440,7 @@ function get_default_group_name(){
             'href'  => "javascript:;",
             'id'    => 'finish_setup',
             'title' => elgg_echo('finish'),
+            'text' => elgg_echo('finish'),
             'class' => "btn btn-primary",
         ));
         ?>
@@ -421,7 +456,6 @@ function get_default_group_name(){
                 'href'  => "javascript:;",
                 'id'    => 'finish_setup',
                 'class' => 'margin-left-10',
-                'onclick' => "$('#activity-create').submit();",
                 'title' => elgg_echo('task:add'),
                 'text'  => '<i class="fa fa-angle-double-right"></i> '.elgg_echo('activity:skip'),
             ));

@@ -128,7 +128,7 @@ $(function(){
     <?php echo elgg_view('input/submit', array(
         'value' => elgg_echo('finish'),
         'type' => 'submit',
-        'onclick' => "$('#activity-create').submit();",
+        'id' => 'finish_setup',
         'class' => "btn btn-primary",
     ));
     ?>

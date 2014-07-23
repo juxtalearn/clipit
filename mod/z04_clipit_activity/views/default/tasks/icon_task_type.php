@@ -13,26 +13,26 @@
 $type = elgg_extract('type', $vars);
 
 switch($type){
-    case "video_upload":
+    case ClipitTask::TYPE_VIDEO_UPLOAD:
         $title = elgg_echo('task:video_upload');
         $icon = "arrow-up";
         break;
-    case "storyboard_upload":
+    case ClipitTask::TYPE_STORYBOARD_UPLOAD:
         $title = elgg_echo('task:storyboard_upload');
         $icon = "arrow-up";
         break;
-    case "quiz_answer":
+    case ClipitTask::TYPE_QUIZ_TAKE:
         $title = elgg_echo('task:quiz_answer');
         $icon = "pencil-square-o";
         break;
-    case "video_feedback":
+    case ClipitTask::TYPE_VIDEO_FEEDBACK:
         $title = elgg_echo('task:video_feedback');
         $icon = "signal";
         break;
-    case "storyboard_feedback":
+    case ClipitTask::TYPE_STORYBOARD_FEEDBACK:
         $title = elgg_echo('task:storyboard_feedback');
         $icon = "signal";
         break;
 }
 ?>
-<i style="font-size: 14px;" class="blue fa fa-<?php echo $icon; ?>" title="<?php echo $title; ?>"></i>
+<i style="<?php echo $vars['size']!==false ? 'font-size: 14px;' : '';?>" class="blue fa fa-<?php echo $icon; ?>" title="<?php echo $title; ?>"></i>
