@@ -2,7 +2,7 @@
 	admin_gatekeeper();
 	action_gatekeeper("modify");
 	
-	$showga = (int)get_input('showga', 0);
+	$showga = (int)get_input('showga', 1);
 	
 	if (isset($showga)) {
 		//First we need to find the ElggObject that contains our setting already.
@@ -32,5 +32,5 @@
 		
 		register_error(elgg_echo('activitystreamer:failed:noparams'));
 	    	forward('pg/activitystreamer');
-    	}
+    }
 ?>
