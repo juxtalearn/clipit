@@ -17,6 +17,10 @@
  */
 class ClipitUser extends UBUser {
     /**
+     * @const string Elgg entity SUBTYPE for this class
+     */
+    const SUBTYPE = "ClipitUser";
+    /**
      * @const Role name for Students
      */
     const ROLE_STUDENT = "student";
