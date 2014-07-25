@@ -8,3 +8,4 @@ php_errorlog
 mod_unused
 .project
 *.sublime-*
+error_log.txt
