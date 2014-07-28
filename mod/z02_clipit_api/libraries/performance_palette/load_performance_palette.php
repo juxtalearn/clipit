@@ -11,7 +11,7 @@
  * @package         ClipIt
  * @subpackage      clipit_api
  */
-const FILE_NAME = "performance_palette.json";
+const FILE_NAME = "load_performance_palette.json";
 const KEY_NAME = "performance_palette";
 // Check if Performance Palette has already been loaded.
 if(get_config(KEY_NAME) === true) {
@@ -20,7 +20,7 @@ if(get_config(KEY_NAME) === true) {
     set_config(KEY_NAME, true);
 }
 // Parse json containing Performance Palette Items
-$json_object = json_decode(file_get_contents(FILE_NAME), true);
+$json_object = json_decode(file_get_contents(elgg_get_plugins_path() . "z02_clipit_api/libraries/performance_palette/". FILE_NAME), true);
 if(!is_array($json_object) || key($json_object) != KEY_NAME) {
     return false;
 }
