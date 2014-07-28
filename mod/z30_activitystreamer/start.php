@@ -24,7 +24,8 @@
         $time = time();
 		$ip_address = sanitise_string($_SERVER['REMOTE_ADDR']);
 		$guid = elgg_get_logged_in_user_entity()->guid;
-		$_SESSION['tid'] = md5("".$time.$ip_address.$guid);
+        $pid = getmypid();
+		$_SESSION['tid'] = md5("".$time.$ip_address.$guid.$pid);
 	}
 
 

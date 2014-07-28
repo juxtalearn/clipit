@@ -43,7 +43,7 @@ if (isset($affirmative) && $affirmative) {
                 $current_ID = $new_ID;
             }
             $transaction_artifacts[] = array('ObjectId' => $row['object_id'], 'ObjectTitle' => $row['object_title'], 'ObjectType' => $row['object_type'], 'ObjectSubtype' => $row['object_subtype'], 'ObjectClass' => $row['object_class'], 'OwnerGUID' => $row['owner_guid'],
-                'GroupId' => $row['group_id'], 'CourseId' => $row['course_id'], 'ActivityId' => $row['activity_id'], 'Event' => $row['event'], 'Content' => $row['object_content'],
+                'GroupId' => $row['group_id'], 'CourseId' => $row['course_id'], 'ActivityId' => $row['activity_id'], 'Event' => $row['event'], 'Content' => $row['content'],
                 'Timestamp' => $row['time'], 'UserId'=> $row['user_id'], 'UserName'=> $row['user_name'], 'IPAddress' => $row['ip_address'], 'Role' => $row['role'], 'TransactionId' => $row['transaction_id']);
 
         }
@@ -55,7 +55,7 @@ if (isset($affirmative) && $affirmative) {
                 storeJSON($action, $act_table, $con, $stmt);
             }
             else {
-                error_log(": ".$current_ID.build_log_string($transaction_artifacts));
+                error_log("\n\n".$current_ID.build_log_string($transaction_artifacts));
             }
         }
     } else die(mysqli_error($con));
