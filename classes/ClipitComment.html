@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1994527119"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-820611465"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1994527119" class="accordion-body collapse in">
+            <div id="namespace-820611465" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -2209,7 +2209,7 @@ respond to another user&#039;s comment (optionally).</em></p>
             <article class="method">
                 <h3 class="public ">get_all()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">get_all(int <span class="argument">$limit</span>, bool <span class="argument">$id_only</span>) : static[]|int[]</pre>
+                <pre class="signature" style="margin-right: 54px;">get_all(int <span class="argument">$limit</span>, bool <span class="argument">$id_only</span>, bool <span class="argument">$order_by_name</span>) : static[]|int[]</pre>
                 <p><em>Get all Object instances of this TYPE and SUBTYPE from the system, optionally only a specified property.</em></p>
                 
 
@@ -2224,6 +2224,11 @@ respond to another user&#039;s comment (optionally).</em></p>
                                 <td>bool</td>
                                 <td>$id_only </td>
                                 <td><p>Properties to return (with key = ID). Default = [all] (object instance)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>bool</td>
+                                <td>$order_by_name </td>
+                                <td><p>Default = false (order by date_inv)</p></td>
                             </tr>
                                             </table>
                 
@@ -2259,7 +2264,7 @@ respond to another user&#039;s comment (optionally).</em></p>
             <article class="method">
                 <h3 class="public ">get_by_id()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">get_by_id(array <span class="argument">$id_array</span>) : static[]</pre>
+                <pre class="signature" style="margin-right: 54px;">get_by_id(array <span class="argument">$id_array</span>, bool <span class="argument">$order_by_name</span>) : static[]</pre>
                 <p><em>Get Objects with id contained in a given list.</em></p>
                 
 
@@ -2269,6 +2274,11 @@ respond to another user&#039;s comment (optionally).</em></p>
                                 <td>array</td>
                                 <td>$id_array </td>
                                 <td><p>Array of Object Ids</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>bool</td>
+                                <td>$order_by_name </td>
+                                <td><p>Default = false (order by date_inv)</p></td>
                             </tr>
                                             </table>
                 
@@ -2967,7 +2977,7 @@ respond to another user&#039;s comment (optionally).</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on July 28th, 2014 at 09:01.
+                    on July 28th, 2014 at 10:01.
                 </section>
             </section>
         </section>
