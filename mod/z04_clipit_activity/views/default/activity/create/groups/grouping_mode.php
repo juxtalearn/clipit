@@ -14,10 +14,10 @@
 <h3 class="title-block"><?php echo elgg_echo('activity:grouping_mode');?></h3>
 <div class="panel-group" id="accordion_grouping">
     <div class="panel panel-default">
-        <div class="panel-heading" style="background: #fff;">
+        <div class="panel-heading bg-white cursor-pointer">
             <h4 class="panel-title blue select-radio" data-toggle="collapse" data-parent="#accordion_grouping" href="#collapse_1">
             <input value="1" style="visibility: hidden" type="radio" required name="groups_creation"/>
-                <a href="javascript:;">
+                <a href="javascript:;" class="child-decoration-none">
                     <i class="fa fa-user"></i>
                     Teacher makes groups
                 </a>
@@ -30,10 +30,10 @@
         </div>
     </div>
     <div class="panel panel-default">
-        <div class="panel-heading" style="background: #fff;">
+        <div class="panel-heading bg-white cursor-pointer">
             <h4 class="panel-title blue select-radio" data-toggle="collapse" data-parent="#accordion_grouping" href="#collapse_2">
                 <input value="2" style="visibility: hidden" type="radio" required name="groups_creation"/>
-                <a href="javascript:;">
+                <a href="javascript:;" class="child-decoration-none">
                     <i class="fa fa-users"></i>
                     Students make groups
                 </a>
@@ -46,10 +46,10 @@
         </div>
     </div>
     <div class="panel panel-default">
-        <div class="panel-heading" style="background: #fff;">
+        <div class="panel-heading bg-white cursor-pointer">
             <h4 class="panel-title blue select-radio" data-toggle="collapse" data-parent="#accordion_grouping" href="#collapse_3">
                 <input value="3" style="visibility: hidden" type="radio" required name="groups_creation"/>
-                <a href="javascript:;">
+                <a href="javascript:;" class="child-decoration-none">
                     <i class="fa fa-users"></i>
                     Create random groups
                 </a>

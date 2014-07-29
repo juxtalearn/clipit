@@ -84,6 +84,11 @@ ul.menu-activity-section{
     border-radius: 0;
   }
 }
+.activity-admin-section{
+  .btn-admin{
+    opacity: 0.7;
+  }
+}
 //
 // Group tools & details
 // --------------------------------------------------
@@ -240,11 +245,6 @@ ul.deadline-list{
     color: #555555;
     float: left;
     width: 45%;
-    li.disabled{
-      background-color: #eee;
-      color: #aaa;
-      cursor: text;
-    }
   }
   .ms-list{
     border: 2px solid @blue-lighter;
@@ -271,6 +271,20 @@ ul.deadline-list{
           font-family: FontAwesome;
           color: @blue-lighter;
           position: absolute;
+        }
+      }
+      &.disabled{
+        background-color: #eee !important;
+        color: #aaa !important;
+        cursor: default !important;
+        border-bottom: 1px #D8D8D8 solid;
+        &:after{
+//          content: "" !important;
+          content: "\f0c0" !important;
+          font-family: FontAwesome;
+          right: 5px;
+          position: absolute;
+          color: @grey_slow_3;
         }
       }
     }

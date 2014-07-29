@@ -11,10 +11,11 @@
  * @package         ClipIt
  */
 $entity_id = elgg_extract('entity_id', $vars);
+$videos = ClipitGroup::get_videos($entity_id);
 ?>
 <div data-list="videos">
 <?php
-foreach(ClipitGroup::get_videos($entity_id) as $video_id):
+foreach($videos as $video_id):
     $video = array_pop(ClipitVideo::get_by_id(array($video_id)));
     ?>
     <div class="multimedia-block col-md-4" style="position:relative;border-radius: 4px;margin-bottom: 0;padding: 0;background: transparent;">
@@ -34,4 +35,7 @@ foreach(ClipitGroup::get_videos($entity_id) as $video_id):
         </div>
     </div>
 <?php endforeach;?>
+<?php if(!$videos):?>
+    <?php echo elgg_view('output/empty', array('value' => elgg_echo('videos:none')));?>
+<?php endif;?>
 </div>

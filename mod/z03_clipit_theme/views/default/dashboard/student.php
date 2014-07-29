@@ -38,9 +38,13 @@ $user = elgg_extract("entity", $vars);
         ));
         ?>
         <?php echo elgg_view('dashboard/module', array(
-            'name'      => 'activity_groups_status',
-            'title'     => elgg_echo('activity_groups_status'),
-            'content'   => elgg_view('dashboard/modules/activity_groups_status'),
+            'name'      => 'group_activity',
+            'title'     => elgg_echo('group:activity'),
+            'content'   => elgg_view('dashboard/modules/activity_groups_status',
+                array(
+                    'entities' => ClipitUser::get_activities($user->id)
+                )
+            ),
         ));
         ?>
     </div>

@@ -76,6 +76,8 @@ $english = array(
     'group:members' => 'Members',
     // Discussion
     'discussions:none' => 'No discussions',
+    'discussion:start' => 'Start a discussion',
+    'discussion:multimedia:go' => 'Go to discussion',
     'discussion:create' => 'Create a new topic',
     'discussion:created' => 'Discussion created',
     'discussion:cantcreate' => 'You can not create a discussion',
@@ -196,7 +198,7 @@ $english = array(
     'task:locked' => 'Task locked',
     'task:active' => 'Task open',
     'task:finished' => 'Task finished',
-
+    'rating:none' => 'No rating',
     // Create activity
     'activity:site:students' => 'Site students',
     'activity:students' => 'Activity students',
@@ -205,6 +207,9 @@ $english = array(
     'called:students:insert_to_site' => 'Upload to site',
     'called:students:insert_to_activity' => 'Upload to activity',
     'activity:grouping_mode' => 'Grouping mode',
+    'called:students:excel_template' => 'Excel template',
+    'called:students:add_from_site' => 'Add from site',
+    'called:students:add_from_excel' => 'Add from excel file',
     // Activity admin
     'activity:admin:dashboard' => 'Dashboard',
     'activity:admin:task_setup' => 'Tasks setup',

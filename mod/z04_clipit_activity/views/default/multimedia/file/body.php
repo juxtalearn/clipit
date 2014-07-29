@@ -11,7 +11,38 @@
  * @package         ClipIt
  */
 $file = elgg_extract('entity', $vars);
+$scope = ClipitFile::get_resource_scope($file->id);
 ?>
+<div class="overflow-hidden">
+    <?php echo elgg_view("publications/view_scope", array('entity' => $file));?>
+    <?php
+    if($scope == 'group'):
+        $group = ClipitFile::get_group($file->id);
+        $related_discussion = false;
+        ?>
+        <?php foreach(ClipitPost::get_by_destination(array($group)) as $discussion):
+        $discussion = array_pop($discussion);
+        if(in_array($file->id, $discussion->video_array)):
+            $related_discussion = true;
+            $activity_id = ClipitFile::get_activity($file->id);
+            ?>
+            <?php echo elgg_view('output/url', array(
+            'title' => elgg_echo('discussion:multimedia:go'),
+            'text' => '<i class="fa fa-comments"></i> '.elgg_echo('discussion:multimedia:go'),
+            'href' => "clipit_activity/{$activity_id}/group/{$group}/discussion/view/{$discussion->id}",
+            'class' => 'btn btn-primary pull-right',
+        ));
+            ?>
+        <?php
+        endif;
+    endforeach;
+        ?>
+    <?php if(!$related_discussion):?>
+        <?php echo elgg_view_form("discussion/create_from_multimedia", array(), array('entity' => $file));?>
+    <?php endif;?>
+    <?php endif;?>
+</div>
+<hr class="margin-0 margin-bottom-10">
 <?php if($vars['preview']):?>
     <div class="multimedia-preview">
         <?php echo elgg_view('output/url', array(

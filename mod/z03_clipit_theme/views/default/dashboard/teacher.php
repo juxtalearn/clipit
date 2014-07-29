@@ -28,16 +28,6 @@ $user = elgg_extract("entity", $vars);
 <div class="col-md-8">
     <div class="col-md-6">
         <?php echo elgg_view('dashboard/module', array(
-            'name'      => 'activity_status',
-            'title'     => elgg_echo('activity:progress'),
-            'content'   => elgg_view('dashboard/modules/activity_status',
-                array(
-                'entities' => ClipitUser::get_activities($user->id)
-                )
-            ),
-        ));
-        ?>
-        <?php echo elgg_view('dashboard/module', array(
             'name'      => 'group_activity',
             'title'     => elgg_echo('group:activity'),
             'content'   => elgg_view('dashboard/modules/activity_groups_status',

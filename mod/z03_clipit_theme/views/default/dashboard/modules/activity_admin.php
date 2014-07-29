@@ -27,42 +27,86 @@ $activities = ClipitActivity::get_by_id($entities);
     /*border-bottom: 2px solid #bae6f6 !important;*/
 }
 </style>
-
+<script>
+$(function(){
+    $(".task-view").click(function(){
+        $(this).find('.collapse-icon').toggleClass('fa-chevron-down fa-chevron-up');
+        var content = $(this).closest(".panel").find(".panel-body");
+        if(content.find('.task-details').length == 0){
+            content.html('<span class="blue-lighter"><i class="fa fa-spinner fa-spin fa-1x"></i> <?php echo elgg_echo('loading');?></span>');
+            $.ajax({
+                url: elgg.config.wwwroot+"ajax/view/dashboard/modules/activity_admin/task_list",
+                type: "POST",
+                data: { task_id : $(this).data("task")},
+                success: function(html){
+                    content.html(html);
+                }
+            });
+        }
+    });
+});
+</script>
+<div class="separator">
 <?php
 foreach($activities as $activity):
     $tasks = ClipitTask::get_by_id($activity->task_array);
+    $activity_progress = round(((time() - $activity->start)/($activity->end - $activity->start)) * 100);
+    if($activity_progress == 0){
+        $activity_progress = 5;
+    } elseif($activity_progress < 0){
+        $activity_progress = 0;
+    }
 ?>
-    <h4 style="background: #<?php echo $activity->color;?>;padding: 10px;color: #fff">
-        <div class="progressbar-mini progressbar-blue inline-block pull-right margin-top-5">
-            <div class="blue" data-value="22" style="width: 22%"></div>
+    <div style="background: #<?php echo $activity->color;?>;padding: 10px;color: #fff">
+        <div class="pull-right">
+            <small class="show text-right white" style="line-height: 5px;">
+                <?php echo $activity_progress;?>%
+            </small>
+            <div class="progressbar-mini progressbar-blue inline-block">
+                <div class="blue" data-value="<?php echo $activity_progress;?>" style="width: <?php echo $activity_progress;?>%"></div>
+            </div>
         </div>
-        <?php echo $activity->name;?>
-    </h4>
+        <h4 class="margin-0">
+            <?php echo elgg_view('output/url', array(
+                'href'  => "clipit_activity/{$activity->id}",
+                'style' => 'color: #FFF;',
+                'title' => $activity->name,
+                'text'  => $activity->name,
+            ));
+            ?>
+        </h4>
+    </div>
     <div class="wrapper">
-    <ul class="panel-group" id="accordion">
+    <ul class="panel-group" id="accordion_<?php echo $activity->id;?>">
     <?php
     foreach($tasks as $task):
-//        $users_completed = count($task->storyboard_array)."/".count($activity->group_array);
-//        $task_progress = (count($task->storyboard_array)/count($activity->group_array)) * 100;
-//        $completed_count = get_task_completed_count($task);
-//        $progress_color = "blue";
-//        if($completed_count['count'] > 50 ){
-//            $progress_color = "yellow";
-//            if($completed_count['count'] == 100){
-//                $progress_color = "green";
-//            }
-//        }
+        $current_task = false;
+        if($task->start <= time() && $task->end >= time()){
+           $current_task = true;
+        }
     ?>
+    <?php if($current_task):?>
+        <script>
+        $(function(){
+            $("[data-task='<?php echo $task->id;?>']").click();
+        });
+        </script>
+    <?php endif;?>
         <li class="panel panel-blue list-item">
-            <div class="panel-heading" style="cursor: pointer" data-toggle="collapse" data-parent="#accordion" href="#collapse_<?php echo $task->id;?>">
-                <i class="blue-lighter fa fa-chevron-down pull-right"></i>
+            <div class="panel-heading task-view" data-task="<?php echo $task->id;?>" style="cursor: pointer" data-toggle="collapse" data-parent="#accordion_<?php echo $activity->id;?>" href="#collapse_<?php echo $task->id;?>">
+                <div class="pull-right margin-top-5">
+                    <?php echo elgg_view("tasks/icon_task_status", array('status' => $task->status)); ?>
+                    <i class="blue-lighter fa fa-chevron-down collapse-icon"></i>
+                </div>
                 <small class="pull-right hide">
                     <div class="progressbar-mini progressbar-blue inline-block">
                         <div class="<?php echo $progress_color;?>" data-value="<?php echo $completed_count['count'];?>" style="width: <?php echo $completed_count['count'];?>%"></div>
                     </div>
                     <strong class="inline-block blue margin-left-5"><?php echo $completed_count['text'];?></strong>
                 </small>
-                <?php echo elgg_view("tasks/icon_task_type", array('type' => $task->task_type)); ?>
+                <span style="border-right: 1px solid #bae6f6;padding-right: 5px;margin-right: 5px;">
+                    <?php echo elgg_view("tasks/icon_task_type", array('type' => $task->task_type)); ?>
+                </span>
                 <strong class="blue"><?php echo $task->name;?></strong>
                 <small class="margin-bottom-10 hide">
                     <div class="pull-right">
@@ -75,12 +119,16 @@ foreach($activities as $activity):
                     </div>
                 </small>
             </div>
-            <div id="collapse_<?php echo $task->id;?>" class="panel-collapse collapse">
-                <div class="panel-body">
+            <div id="collapse_<?php echo $task->id;?>" class="panel-collapse collapse ">
+                <div class="panel-body"></div>
                     <?php
-                    switch($task->task_type):
+                    /*switch($task->task_type):
                         case ClipitTask::TYPE_VIDEO_UPLOAD:
-                            echo elgg_view('dashboard/modules/activity_admin/video_upload', array('entities' => $task->video_array));
+                            echo elgg_view('dashboard/modules/activity_admin/video_upload',
+                                array(
+                                    'groups' => $activity->group_array,
+                                    'task' => $task
+                                ));
                             break;
                         case ClipitTask::TYPE_STORYBOARD_UPLOAD:
                             echo elgg_view('dashboard/modules/activity_admin/storyboard_upload',
@@ -89,9 +137,15 @@ foreach($activities as $activity):
                                     'task' => $task
                                 ));
                             break;
-                    endswitch;
+                        case ClipitTask::TYPE_STORYBOARD_FEEDBACK:
+                            echo elgg_view('dashboard/modules/activity_admin/storyboard_feedback',
+                                array(
+                                    'users' => $activity->student_array,
+                                    'task' => $task
+                                ));
+                            break;
+                    endswitch;*/
                     ?>
-                </div>
             </div>
         </li>
 
@@ -100,3 +154,4 @@ foreach($activities as $activity):
     </ul>
     </div>
 <?php endforeach;?>
+</div>

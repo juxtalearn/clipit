@@ -55,11 +55,10 @@ elgg_load_css("nvd3:css");
                     values: [
                         <?php
                         $num_group = 1;
-                        $groups = ClipitActivity::get_groups($activity->id);
-                        foreach($groups as $group_id){
-                            $group = ClipitGroup::get_by_id(array($group_id));
-                            $group = array_pop($group);
-                            $value = get_group_progress($group_id);
+                        $group_ids = ClipitActivity::get_groups($activity->id);
+                        $groups = ClipitGroup::get_by_id($group_ids);
+                        foreach($groups as $group){
+                            $value = get_group_progress($group->id);
                             echo "{ 'label': 'G{$num_group}', 'value':{$value}},";
                             $num_group ++;
                         }

@@ -99,7 +99,6 @@ $task_types = array_merge(array('' => 'Select task type'), $task_types);
             <?php echo elgg_view("input/plaintext", array(
                 'name' => "task{$input_array}[description]",
                 'class' => 'form-control',
-                'required' => true,
                 'value' => $task->description,
                 'rows' => $task->description ? 5:1,
                 'onclick' => 'javascript:this.rows=5;'

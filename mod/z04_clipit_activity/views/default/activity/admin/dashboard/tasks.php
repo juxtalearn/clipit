@@ -31,7 +31,7 @@ if(!$tasks){
         }
         echo elgg_view("page/components/modal_remote", array('id'=> "users-task-{$task->id}-{$group_id}" ));
     ?>
-    <li class="list-item" <?php echo $locked ? 'style="opacity: .5;"' : ""; ?>>
+    <li class="list-item content-block" <?php echo $locked ? 'style="opacity: .5;"' : ""; ?>>
         <div class="pull-right margin-left-5 text-muted">
             <?php
             if(in_array($task->task_type, $user_tasks)):
@@ -57,9 +57,11 @@ if(!$tasks){
                 ?>
                 </strong>
             <?php else: // Group task ?>
-                <?php echo elgg_view("tasks/icon_user_type", array('type' => $task->task_type)); ?>
+                <span class="pull-left">
+                    <?php echo elgg_view("tasks/icon_user_type", array('type' => $task->task_type)); ?>
+                </span>
             <?php endif;?>
-            <small style="width: 70px;border-left: 1px solid #ccc" class="margin-left-5 inline-block text-right">
+            <small style="width: 70px;border-left: 1px solid #ccc" class="margin-left-5 pull-right inline-block text-right">
                 <?php echo elgg_view('output/friendlytime', array('time' => $task->end));?>
                 <span class="margin-left-5">
                     <?php echo elgg_view("tasks/icon_task_status", array('status' => $task->status)); ?>

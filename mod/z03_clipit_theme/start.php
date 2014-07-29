@@ -28,6 +28,8 @@ function clipit_final_init() {
     elgg_register_library('clipit:recommended:events', elgg_get_plugins_path() . 'z03_clipit_theme/lib/recommended/events.php');
     elgg_load_library('clipit:recommended:events');
 
+    // Activity admin module ajax
+    elgg_register_ajax_view('dashboard/modules/activity_admin/task_list');
 
     elgg_register_action("clipit_theme/settings", elgg_get_plugins_path() . "z04_clipit_activity/actions/settings.php", 'admin');
     elgg_register_action('login', elgg_get_plugins_path() . "z03_clipit_theme/actions/login.php", 'public');
@@ -49,6 +51,10 @@ function clipit_final_init() {
     }
 
     elgg_register_page_handler('activity', 'user_landing_page');
+    // Footer links
+    elgg_register_page_handler('clipit', 'clipit_footer_page');
+    elgg_register_page_handler('help', 'help_footer_page');
+    elgg_register_page_handler('legal', 'legal_footer_page');
     elgg_register_page_handler('forgotpassword', 'home_user_account_page_handler');
     elgg_register_page_handler('resetpassword', 'home_user_account_page_handler');
     elgg_register_page_handler('register', 'home_user_account_page_handler');
@@ -171,7 +177,7 @@ function setup_footer_menus(){
         'footer_clipit',
         array(
             'name' => 'about',
-            'href' => 'about',
+            'href' => 'clipit/about',
             'text' => elgg_echo('about'),
             'priority' => 450,
             'section' => 'clipit',
@@ -181,7 +187,7 @@ function setup_footer_menus(){
         'footer_clipit',
         array(
             'name' => 'team',
-            'href' => 'team',
+            'href' => 'clipit/team',
             'text' => elgg_echo('team'),
             'priority' => 455,
             'section' => 'clipit',
@@ -191,7 +197,7 @@ function setup_footer_menus(){
         'footer_clipit',
         array(
             'name' => 'developers',
-            'href' => 'developers',
+            'href' => 'clipit/developers',
             'text' => elgg_echo('developers'),
             'priority' => 460,
             'section' => 'clipit',
@@ -202,7 +208,7 @@ function setup_footer_menus(){
         'footer_clipit',
         array(
             'name' => 'terms',
-            'href' => 'terms',
+            'href' => 'legal/terms',
             'text' => elgg_echo('terms'),
             'priority' => 460,
             'section' => 'legal',
@@ -212,7 +218,7 @@ function setup_footer_menus(){
         'footer_clipit',
         array(
             'name' => 'privacy',
-            'href' => 'privacy',
+            'href' => 'legal/privacy',
             'text' => elgg_echo('privacy'),
             'priority' => 465,
             'section' => 'legal',
@@ -222,7 +228,7 @@ function setup_footer_menus(){
         'footer_clipit',
         array(
             'name' => 'community_guidelines',
-            'href' => 'community_guidelines',
+            'href' => 'legal/community_guidelines',
             'text' => elgg_echo('community_guidelines'),
             'priority' => 470,
             'section' => 'legal',
@@ -233,7 +239,7 @@ function setup_footer_menus(){
         'footer_clipit',
         array(
             'name' => 'support_center',
-            'href' => 'support_center',
+            'href' => 'help/support_center',
             'text' => elgg_echo('support_center'),
             'priority' => 470,
             'section' => 'help',
@@ -243,15 +249,41 @@ function setup_footer_menus(){
         'footer_clipit',
         array(
             'name' => 'basics',
-            'href' => 'basics',
+            'href' => 'help/basics',
             'text' => elgg_echo('basics'),
             'priority' => 475,
             'section' => 'help',
         )
     );
 }
+function clipit_footer_page($page) {
+    switch($page[0]){
+        case "about":
+            break;
+        case "team":
+            $content = elgg_view('pages/clipit/team');
+            $title = "Team";
+            break;
+        case "developers":
+            break;
+    }
+    $params = array(
+        'content' => $content,
+        'title'     => $title,
+        'filter'    => '',
+        'class'     => ''
+    );
+    $body = elgg_view_layout('one_column', $params);
+    echo elgg_view_page('', $body);
+}
+function help_footer_page($page) {
+    var_dump($page);
+}
 
-// STUDENT LANDING PAGE
+function legal_footer_page($page) {
+    var_dump($page);
+}
+// Dashboard page
 function user_landing_page($page) {
     global $CONFIG;
     // Activity page cambiado a Dashboard
@@ -272,5 +304,27 @@ function user_landing_page($page) {
     );
     $body = elgg_view_layout('one_column', $params);
 
-    echo elgg_view_page($role." Landing", $body);
+//    echo elgg_view_page($role." Landing", $body);
+
+    // DEBUG
+    $user_id = elgg_get_logged_in_user_guid();
+    $user = array_pop(ClipitUser::get_by_id(array($user_id)));
+    switch($user->role){
+        case ClipitUser::ROLE_TEACHER:
+            $content = elgg_view('dashboard/teacher', array('entity' => $user));
+            break;
+        case ClipitUser::ROLE_STUDENT:
+            $content = elgg_view('dashboard/student', array('entity' => $user));
+            break;
+        case ClipitUser::ROLE_ADMIN:
+            $content = elgg_view('dashboard/admin', array('entity' => $user));
+            break;
+    }
+    $params = array(
+        'content' => $content,
+        'filter'    => '',
+        'class'     => 'landing row'
+    );
+    $body = elgg_view_layout('one_column', $params);
+    echo elgg_view_page('', $body);
 }

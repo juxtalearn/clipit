@@ -35,8 +35,7 @@ $users = get_input('users_list');
         overflow: hidden;
     }
     .items-padding{
-        min-height: 60px;
-        max-height: 200px;
+        height: 220px;
         overflow-y: auto;
     }
     .items-padding li{
@@ -114,7 +113,7 @@ $(function(){
     </div>
 </div>
 <div class="col-md-12">
-    <h3 class="title-block"><?php echo elgg_echo('groups');?></h3>
+    <h3 class="title-block"><?php echo elgg_echo('activity:groups');?></h3>
     <div id="groups"></div>
 </div>
 <div class="col-md-12 text-right margin-top-20">
