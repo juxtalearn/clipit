@@ -46,11 +46,12 @@ class ClipitResource extends UBItem {
     }
 
     /**
-     * Saves this instance into the system.
-     * @return bool|int Returns id of saved instance, or false if error.
+     * Saves this instance to the system.
+     * @param  bool $double_save if $double_save is true, this object is saved twice to ensure that all properties are updated properly. E.g. the time created property can only beset on ElggObjects during an update. Defaults to false!
+     * @return bool|int Returns the Id of the saved instance, or false if error
      */
-    protected function save() {
-        parent::save();
+    protected function save($double_save=false) {
+        parent::save($double_save);
         static::set_tags($this->id, (array)$this->tag_array);
         static::set_labels($this->id, (array)$this->label_array);
         static::set_performance_items($this->id, (array)$this->performance_item_array);
@@ -135,20 +136,18 @@ class ClipitResource extends UBItem {
             return static::get_group($resource->cloned_from);
         }
         $group = UBCollection::get_items($id, static::REL_GROUP_RESOURCE, true);
-        if(!empty($group)) {
-            return (int)array_pop($group);
-        } else {
+        if(empty($group)) {
             return null;
         }
+        return (int)array_pop($group);
     }
 
     static function get_task($id) {
         $task = UBCollection::get_items($id, static::REL_TASK_RESOURCE, true);
-        if(!empty($task)) {
-            return array_pop($task);
-        } else {
+        if(empty($task)) {
             return null;
         }
+        return array_pop($task);
     }
 
     static function get_activity($id) {
@@ -157,20 +156,19 @@ class ClipitResource extends UBItem {
             return ClipitGroup::get_activity($group_id);
         } else {
             $activity = UBCollection::get_items($id, static::REL_ACTIVITY_RESOURCE, true);
-            if(!empty($activity)) {
-                return array_pop($activity);
+            if(empty($activity)) {
+                return null;
             }
+            return array_pop($activity);
         }
-        return null;
     }
 
     static function get_site($id) {
         $site = UBCollection::get_items($id, static::REL_SITE_RESOURCE, true);
-        if(!empty($site)) {
-            return array_pop($site);
-        } else {
+        if(empty($site)) {
             return null;
         }
+        return array_pop($site);
     }
 
     /**

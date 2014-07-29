@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-843972124"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-732482759"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-843972124" class="accordion-body collapse in">
+            <div id="namespace-732482759" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -3096,15 +3096,23 @@ Storyboards.</em></p>
             <article class="method">
                 <h3 class="protected ">save()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">save() : bool|int</pre>
-                <p><em>Saves this instance into the system.</em></p>
+                <pre class="signature" style="margin-right: 54px;">save(bool <span class="argument">$double_save</span>) : bool|int</pre>
+                <p><em>Saves this instance to the system.</em></p>
                 
 
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>bool</td>
+                                <td>$double_save </td>
+                                <td><p>if $double_save is true, this object is saved twice to ensure that all properties are updated properly. E.g. the time created property can only beset on ElggObjects during an update. Defaults to false!</p></td>
+                            </tr>
+                                            </table>
                 
                 
                                     <h4>Returns</h4>
                     bool|int
-                                            &mdash; <p>Returns id of saved instance, or false if error.</p>
+                                            &mdash; <p>Returns the Id of the saved instance, or false if error</p>
                                                 </article>
         </div>
         <aside class="span4 detailsbar">
@@ -3253,7 +3261,7 @@ Storyboards.</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on July 29th, 2014 at 16:01.
+                    on July 29th, 2014 at 17:01.
                 </section>
             </section>
         </section>
