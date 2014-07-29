@@ -948,6 +948,7 @@ $allow_multiple_emails = false, $friend_guid = 0, $invitecode = '') {
 
 	// Create user
 	$user = new ElggUser();
+    $user->subtype = "ClipitUser";
 	$user->username = $username;
 	$user->email = $email;
 	$user->name = $name;

@@ -89,9 +89,10 @@ class UBItem {
 
     /**
      * Saves this instance to the system.
+     * @param double_save if double_save is true, this object is saved twice to ensure that all properties are updated properly. E.g. the time created property can only beset on ElggObjects during an update. Defaults to false!
      * @return bool|int Returns id of saved instance, or false if error.
      */
-    protected function save() {
+    protected function save($double_save=false) {
         if(!empty($this->id)) {
             if(!$elgg_object = new ElggObject($this->id)) {
                 return false;
@@ -103,6 +104,9 @@ class UBItem {
         }
         $this->copy_to_elgg($elgg_object);
         $elgg_object->save();
+        if ($double_save) {
+            $elgg_object->save(); // Only updates are saving time_created, thus first save for creation, second save for updating to proper creation time if given
+        }
         return $this->id = $elgg_object->get("guid");
     }
 
@@ -131,6 +135,7 @@ class UBItem {
         $elgg_entity->set("name", (string)$this->name);
         $elgg_entity->set("description", (string)$this->description);
         $elgg_entity->set("url", (string)$this->url);
+        $elgg_entity->set("time_created",(int)$this->time_created);
         $elgg_entity->set("access_id", ACCESS_PUBLIC);
     }
 
@@ -196,8 +201,13 @@ class UBItem {
                 continue; // cannot set an item's ID manually.
             }
             $item->$prop = $value;
+
         }
-        return $item->save();
+        if (array_key_exists("time_created",$prop_value_array)) {
+            return $item->save(true);
+        } else {
+            return $item->save(false);
+        }
     }
 
     /**
@@ -323,17 +333,22 @@ class UBItem {
     /**
      * Get all Object instances of this TYPE and SUBTYPE from the system, optionally only a specified property.
      *
-     * @param bool $id_only Properties to return (with key = ID). Default = [all] (object instance)
-     * @param int  $limit   Number of results to show, default= 0 [no limit] (optional)
+     * @param int  $limit           Number of results to show, default= 0 [no limit] (optional)
+     * @param bool $id_only         Properties to return (with key = ID). Default = [all] (object instance)
+     * @param bool $order_by_name   Default = false (order by date_inv)
      *
      * @return static[]|int[] Returns an array of Objects, or Object IDs if id_only = true
      */
-    static function get_all($limit = 0, $id_only = false) {
+    static function get_all($limit = 0, $id_only = false, $order_by_name = false) {
         $return_array = array();
         $elgg_entity_array = elgg_get_entities(
             array('type' => static::TYPE, 'subtype' => static::SUBTYPE, 'limit' => $limit)
         );
-        usort($elgg_entity_array, 'static::sort_by_date_inv');
+        if($order_by_name){
+            usort($elgg_entity_array, 'static::sort_by_name');
+        } else {
+            usort($elgg_entity_array, 'static::sort_by_date_inv');
+        }
         if(!empty($elgg_entity_array)) {
             foreach($elgg_entity_array as $elgg_entity) {
                 if($id_only){
@@ -350,10 +365,11 @@ class UBItem {
      * Get Objects with id contained in a given list.
      *
      * @param array $id_array Array of Object Ids
+     * @param bool $order_by_name   Default = false (order by date_inv)
      *
      * @return static[] Returns an array of Objects
      */
-    static function get_by_id($id_array) {
+    static function get_by_id($id_array, $order_by_name = false) {
         $object_array = array();
         foreach($id_array as $id) {
             if(elgg_entity_exists($id)) {
@@ -361,6 +377,9 @@ class UBItem {
             } else {
                 $object_array[(int)$id] = null;
             }
+        }
+        if($order_by_name){
+            usort($object_array, 'static::sort_by_name');
         }
         return $object_array;
     }
@@ -478,6 +497,13 @@ class UBItem {
      * @return int Returns 0 if equal, -1 if i1 before i2, 1 if i1 after i2.
      */
     static function sort_by_date($i1, $i2) {
+        if(!$i1 && !$i2){
+            return 0;
+        }elseif(!$i1){
+            return 1;
+        }elseif(!$i1){
+            return -1;
+        }
         if((int)$i1->time_created == (int)$i2->time_created) {
             return 0;
         }
@@ -493,6 +519,13 @@ class UBItem {
      * @return int Returns 0 if equal, -1 if i1 before i2, 1 if i1 after i2.
      */
     static function sort_by_date_inv($i1, $i2) {
+        if(!$i1 && !$i2){
+            return 0;
+        }elseif(!$i1){
+            return 1;
+        }elseif(!$i1){
+            return -1;
+        }
         if((int)$i1->time_created == (int)$i2->time_created) {
             return 0;
         }
@@ -508,6 +541,13 @@ class UBItem {
      * @return int Returns 0 if equal, -1 if i1 before i2, 1 if i1 after i2.
      */
     static function sort_by_name($i1, $i2) {
+        if(!$i1 && !$i2){
+            return 0;
+        }elseif(!$i1){
+            return 1;
+        }elseif(!$i1){
+            return -1;
+        }
         return strcmp($i1->name, $i2->name);
     }
 
@@ -520,6 +560,13 @@ class UBItem {
      * @return int Returns 0 if equal, -1 if i1 before i2, 1 if i1 after i2.
      */
     static function sort_by_name_inv($i1, $i2) {
+        if(!$i1 && !$i2){
+            return 0;
+        }elseif(!$i1){
+            return 1;
+        }elseif(!$i1){
+            return -1;
+        }
         return strcmp($i2->name, $i1->name);
     }
 
@@ -532,6 +579,13 @@ class UBItem {
      * @return int Returns 0 if equal, -1 if i1 before i2, 1 if i1 after i2.
      */
     static function sort_numbers($i1, $i2) {
+        if(!$i1 && !$i2){
+            return 0;
+        }elseif(!$i1){
+            return 1;
+        }elseif(!$i1){
+            return -1;
+        }
         if((int)$i1 == (int)$i2) {
             return 0;
         }
@@ -547,6 +601,13 @@ class UBItem {
      * @return int Returns 0 if equal, -1 if i1 before i2, 1 if i1 after i2.
      */
     static function sort_numbers_inv($i1, $i2) {
+        if(!$i1 && !$i2){
+            return 0;
+        }elseif(!$i1){
+            return 1;
+        }elseif(!$i1){
+            return -1;
+        }
         if((int)$i1 == (int)$i2) {
             return 0;
         }
