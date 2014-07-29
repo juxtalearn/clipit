@@ -165,8 +165,9 @@
 
 
             $role = "";
-            if ($object_subtype == ClipitPost::SUBTYPE) {
-                $role = print_r(ClipitUser::get_properties($performed_by, array("role")));
+            $user_properties = ClipitUser::get_properties($performed_by, array("role"));
+            if (is_not_null($user_properties) && !empty($user_properties[0])) {
+                $role = $user_properties[0];
             }
             $con=mysqli_connect($CONFIG->dbhost,$CONFIG->dbuser,$CONFIG->dbpass,$CONFIG->dbname);
             $result = mysqli_query($con,"SHOW COLUMNS FROM `".$log_table."` LIKE 'user_name';");

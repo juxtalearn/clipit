@@ -21,7 +21,7 @@ if (isset($affirmative) && $affirmative) {
         "VALUES (?,?,?,?,?,?,?,?)");
     $log_table = $_SESSION['logging_table'];
     mysqli_query($con, "TRUNCATE ".$act_table.";");
-    $result = mysqli_query($con, "SELECT * FROM ".$log_table." ORDER BY log_id;");
+    $result = mysqli_query($con, "SELECT * FROM ".$log_table." ORDER BY log_id LIMIT 1000;");
     $amount = $result->num_rows;
     $current_ID = "";
     $error_log = "";

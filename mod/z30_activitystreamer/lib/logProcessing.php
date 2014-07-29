@@ -122,6 +122,14 @@ function convertLogTransactionToActivityStream($transaction) {
 	$actor['courseId'] = $transaction[0]['CourseId'];
 	$actor['activityId'] = $transaction[0]['ActivityId'];
 	
+	if (is_null($actor['objectType']) || $actor['objectType'] == "") {
+        $user_properties = ClipitUser::get_properties($actor['actorId'], array("role"));
+        if (is_not_null($user_properties) && !empty($user_properties[0])) {
+            $actor['objectType'] = $user_properties[0];
+        }
+
+    }
+
 	// For some values, we need to determine the line number
 	$l = 0;
 
@@ -171,7 +179,7 @@ function convertLogTransactionToActivityStream($transaction) {
             else {
                 //If activityId couldn't be determined it might be due to object beeing posted to a group instead of to an activity
                 $group = get_entity($target_id);
-                if ($group instanceof ElggEntity && $group.getSubtype() == ClipitGroup::SUBTYPE) {
+                if ($group instanceof ElggEntity && $group->getSubtype() == ClipitGroup::SUBTYPE) {
                     $group_id = $target_id;
                     $activity_id = getActivityIdFromGroupId($group_id);
                 }
@@ -211,7 +219,7 @@ function convertLogTransactionToActivityStream($transaction) {
                 //If activityId couldn't be determined it might be due to object beeing posted to a group instead of an activity
                 $group_id = getGroupIdFromVideoId($video_id);
                 $group = get_entity($group_id);
-                if ($group instanceof ElggEntity && $group.getSubtype() == ClipitGroup::SUBTYPE) {
+                if ($group instanceof ElggEntity && $group->getSubtype() == ClipitGroup::SUBTYPE) {
                     $activity_id = getActivityIdFromGroupId($group_id);
                 }
             }
