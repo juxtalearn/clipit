@@ -89,9 +89,10 @@ class UBItem {
 
     /**
      * Saves this instance to the system.
+     * @param double_save if double_save is true, this object is saved twice to ensure that all properties are updated properly. E.g. the time created property can only beset on ElggObjects during an update. Defaults to false!
      * @return bool|int Returns id of saved instance, or false if error.
      */
-    protected function save() {
+    protected function save($double_save=false) {
         if(!empty($this->id)) {
             if(!$elgg_object = new ElggObject($this->id)) {
                 return false;
@@ -103,6 +104,9 @@ class UBItem {
         }
         $this->copy_to_elgg($elgg_object);
         $elgg_object->save();
+        if ($double_save) {
+            $elgg_object->save(); // Only updates are saving time_created, thus first save for creation, second save for updating to proper creation time if given
+        }
         return $this->id = $elgg_object->get("guid");
     }
 
@@ -131,6 +135,7 @@ class UBItem {
         $elgg_entity->set("name", (string)$this->name);
         $elgg_entity->set("description", (string)$this->description);
         $elgg_entity->set("url", (string)$this->url);
+        $elgg_entity->set("time_created",(int)$this->time_created);
         $elgg_entity->set("access_id", ACCESS_PUBLIC);
     }
 
@@ -196,8 +201,13 @@ class UBItem {
                 continue; // cannot set an item's ID manually.
             }
             $item->$prop = $value;
+
         }
-        return $item->save();
+        if (array_key_exists("time_created",$prop_value_array)) {
+            return $item->save(true);
+        } else {
+            return $item->save(false);
+        }
     }
 
     /**
