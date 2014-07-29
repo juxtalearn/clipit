@@ -74,11 +74,12 @@ class ClipitQuiz extends UBItem {
     }
 
     /**
-     * Saves this instance into the system.
-     * @return bool|int Returns id of saved instance, or false if error.
+     * Saves this instance to the system.
+     * @param  bool $double_save if $double_save is true, this object is saved twice to ensure that all properties are updated properly. E.g. the time created property can only beset on ElggObjects during an update. Defaults to false!
+     * @return bool|int Returns the Id of the saved instance, or false if error
      */
-    protected function save() {
-        parent::save();
+    protected function save($double_save=false) {
+        parent::save($double_save);
         static::set_quiz_questions($this->id, $this->quiz_question_array);
         return $this->id;
     }
