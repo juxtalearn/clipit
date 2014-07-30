@@ -52,7 +52,12 @@ $params = array(
     'href' => "clipit_activity/".$activity->id."/publications",
 );
 elgg_register_menu_item('activity:menu', $params);
-
+?>
+<small class="show margin-bottom-5">
+    <span class="pull-right"><strong><?php echo elgg_echo('end');?>:</strong> <?php echo date("d/m/Y", $activity->end);?></span>
+    <span><strong><?php echo elgg_echo('start');?>:</strong> <?php echo date("d/m/Y", $activity->start);?></span>
+</small>
+<?php
 echo elgg_view_menu('activity:menu', array(
     'sort_by' => 'register',
 ));

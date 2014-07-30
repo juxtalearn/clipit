@@ -129,6 +129,8 @@ $g_array = array(
 //}
 //var_dump($g_array);
 ?>
+<?php echo elgg_view('activity/admin/dashboard/activity_status', array('entity' => $activity));?>
+<hr>
 <h3>Activity progress</h3>
 <div class="margin-bottom-20">
     <div style="position: relative;">

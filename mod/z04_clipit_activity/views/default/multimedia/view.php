@@ -39,6 +39,7 @@ $owner_user = array_pop(ClipitUser::get_by_id(array($entity->owner_id)));
             </small>
         </div>
         <div class="multimedia-body">
+            <?php echo elgg_view('multimedia/admin_options', array('entity' => $entity));?>
             <div class="multimedia-view">
                 <?php echo $vars['body'];?>
             </div>

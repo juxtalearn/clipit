@@ -13,6 +13,7 @@
 $entity_id = get_input('entity-id');
 $object = ClipitSite::lookup($entity_id);
 $entity = array_pop($object['subtype']::get_by_id(array($entity_id)));
+$user_id = elgg_get_logged_in_user_guid();
 
 if(!$entity){
     register_error(elgg_echo("discussion:cantcreate"));
@@ -34,5 +35,6 @@ if(!$entity){
             break;
     }
     system_message(elgg_echo('discussion:created'));
+    ClipitPost::set_read_status($new_message_id, true, array($user_id));
 }
 forward("/clipit_activity/{$entity::get_activity($entity_id)}/group/{$entity::get_group($entity_id)}/discussion/view/{$new_message_id}");

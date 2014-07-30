@@ -13,33 +13,25 @@
 
 $tabs = array(
     'step_1' => array(
-        'text' => 1,
+        'text' => elgg_echo('activity:admin:setup'),
         'href' => "javascript:;",
         'id' => 'nav-step-1',
         'data-step' => 1,
         'priority' => 100,
     ),
     'step_2' => array(
-        'text' => 2,
+        'text' => elgg_echo('activity:admin:task_setup'),
         'href' => "javascript:;",
         'id' => 'nav-step-2',
         'data-step' => 2,
         'priority' => 200,
     ),
     'step_3' => array(
-        'text' => 3,
+        'text' => elgg_echo('activity:admin:groups'),
         'href' => "javascript:;",
         'id' => 'nav-step-3',
         'data-step' => 3,
         'priority' => 300,
-    ),
-    'step_4' => array(
-        'text' => 4,
-        'href' => "javascript:;",
-        'id' => 'nav-step-4',
-        'style' => 'display:none;',
-        'data-step' => 4,
-        'priority' => 400,
     ),
 );
 foreach ($tabs as $name => $tab) {

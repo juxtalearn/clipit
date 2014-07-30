@@ -121,31 +121,6 @@ foreach($activities as $activity):
             </div>
             <div id="collapse_<?php echo $task->id;?>" class="panel-collapse collapse ">
                 <div class="panel-body"></div>
-                    <?php
-                    /*switch($task->task_type):
-                        case ClipitTask::TYPE_VIDEO_UPLOAD:
-                            echo elgg_view('dashboard/modules/activity_admin/video_upload',
-                                array(
-                                    'groups' => $activity->group_array,
-                                    'task' => $task
-                                ));
-                            break;
-                        case ClipitTask::TYPE_STORYBOARD_UPLOAD:
-                            echo elgg_view('dashboard/modules/activity_admin/storyboard_upload',
-                                array(
-                                    'groups' => $activity->group_array,
-                                    'task' => $task
-                                ));
-                            break;
-                        case ClipitTask::TYPE_STORYBOARD_FEEDBACK:
-                            echo elgg_view('dashboard/modules/activity_admin/storyboard_feedback',
-                                array(
-                                    'users' => $activity->student_array,
-                                    'task' => $task
-                                ));
-                            break;
-                    endswitch;*/
-                    ?>
             </div>
         </li>
 

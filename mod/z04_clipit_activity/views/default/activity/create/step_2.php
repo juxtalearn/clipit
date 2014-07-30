@@ -12,9 +12,6 @@
  */
 ?>
 <div style="display: none;" id="step_2" class="row step">
-    <div class="col-md-12">
-        <h3 class="title-block"><?php echo elgg_echo('activity:tasks');?></h3>
-    </div>
     <ul class="task-list">
         <?php echo elgg_view('activity/create/task_list');?>
     </ul>

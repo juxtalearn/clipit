@@ -25,6 +25,7 @@ if(empty($users) || trim($group_name) == ""){
     $group_id = ClipitGroup::create(array(
         'name' => $group_name,
     ));
+    ClipitActivity::add_students($activity_id, $users);
     ClipitGroup::add_users($group_id, $users);
     ClipitActivity::add_groups($activity_id, array($group_id));
     //system_message(elgg_echo('group:created'));

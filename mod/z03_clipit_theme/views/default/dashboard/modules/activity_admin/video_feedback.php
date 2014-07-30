@@ -19,22 +19,16 @@ foreach($users as $user):
     $status = get_task_status($task, 0, $user->id);
     ?>
     <li class="list-item-5">
-        <?php
-        if($video_id = $status['result']):
-            $video = array_pop(ClipitVideo::get_by_id(array($video_id)));
+        <?php if(ClipitTask::get_completed_status($task->id, $user->id)):?>
+        <small class="pull-right margin-right-5">
+            <?php echo elgg_view('output/url', array(
+                'href'  => "clipit_activity/{$task->activity}/tasks/view/{$task->id}#{$user->id}",
+                'title' => elgg_echo('view:feedback'),
+                'text'  => elgg_echo('view'),
+            ));
             ?>
-            <small class="pull-right">
-                <?php echo elgg_view('output/friendlytime', array('time' => $video->time_created));?>
-            </small>
+        </small>
         <?php endif;?>
-        <!--        <small class="pull-right margin-right-5">-->
-        <!--            --><?php //echo elgg_view('output/url', array(
-        //                'href'  => "clipit_activity/{$activity_id}/publications/view/{$storyboard->id}",
-        //                'title' => elgg_echo('view:storyboard'),
-        //                'text'  => elgg_echo('view'),
-        //            ));
-        //            ?>
-        <!--        </small>-->
         <div class="text-truncate">
             <?php echo $status['icon']; ?>
             <?php echo elgg_view('output/url', array(

@@ -13,7 +13,6 @@
 $entities = elgg_extract('entities', $vars);
 $activity = elgg_extract('activity', $vars);
 $task = elgg_extract('task', $vars);
-//$users = ClipitUser::get_by_id($activity->student_array);
 $entities_ids = array_keys($entities);
 $groups = ClipitGroup::get_by_id($activity->group_array);
 ?>

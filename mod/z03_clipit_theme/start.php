@@ -261,7 +261,10 @@ function clipit_footer_page($page) {
         case "about":
             break;
         case "team":
-            $content = elgg_view('pages/clipit/team');
+            $members = array(
+
+            );
+            $content = elgg_view('pages/clipit/team', array('team' => $members, 'intership' => $intership));
             $title = "Team";
             break;
         case "developers":
@@ -277,11 +280,11 @@ function clipit_footer_page($page) {
     echo elgg_view_page('', $body);
 }
 function help_footer_page($page) {
-    var_dump($page);
+    return false;
 }
 
 function legal_footer_page($page) {
-    var_dump($page);
+    return false;
 }
 // Dashboard page
 function user_landing_page($page) {

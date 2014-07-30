@@ -87,8 +87,8 @@ $groups = ClipitGroup::get_by_id($activity->group_array , $order_by_name = true)
         color: #fff;
     }
 </style>
-    <script src="http://loudev.com/js/jquery.multi-select.js" type="text/javascript"></script>
-    <script src="http://rawgit.com/riklomas/quicksearch/master/jquery.quicksearch.js"></script>
+<script src="http://loudev.com/js/jquery.multi-select.js" type="text/javascript"></script>
+<script src="http://rawgit.com/riklomas/quicksearch/master/jquery.quicksearch.js"></script>
 <script>
 $(function(){
     var sortable_groups = function(){
@@ -98,23 +98,21 @@ $(function(){
         receive: function(event, ui) {
             var current_list = $(ui.item).closest(".group-list");
             var sender_list = $(ui.sender).closest(".group-list");
-//                sender_list.remove();
-
-                var user_ids = [];
-                // Current users values
-                $.each(current_list.find("li"), function( index, item ) {
-                    user_ids.push($(this).data("user"));
-                });
-                current_list.find(".input-users").val(user_ids);
-                var user_ids = [];
-                // Sender users values
-                $.each(sender_list.find("li"), function( index, item ) {
-                    user_ids.push($(this).data("user"));
-                });
-                sender_list.find(".input-users").val(user_ids);
-                elgg.action('activity/admin/groups_setup', {
-                    data: $(".groups-form").serialize()
-                });
+            var user_ids = [];
+            // Current users values
+            $.each(current_list.find("li"), function( index, item ) {
+                user_ids.push($(this).data("user"));
+            });
+            current_list.find(".input-users").val(user_ids);
+            var user_ids = [];
+            // Sender users values
+            $.each(sender_list.find("li"), function( index, item ) {
+                user_ids.push($(this).data("user"));
+            });
+            sender_list.find(".input-users").val(user_ids);
+            elgg.action('activity/admin/groups_setup', {
+                data: $(".groups-form").serialize()
+            });
             if(sender_list.find("li").length == 0){
                 sender_list.find(".delete-group").click();
             }
@@ -215,11 +213,6 @@ $(function(){
                 $("#groups").prepend(content.text);
                 $('#called_users option:selected').prop("disabled", true);
                 $('#called_users').multiSelect('deselect_all');
-                var list = $(content.text);
-//                $.each(data_users, function( index, item ) {
-//                    $("#called_users option[value='"+$(this).data("user")+"']").prop("disabled", false);
-//                    $(this).remove();
-//                });
                 that.button('reset');
                 $('#called_users').multiSelect('refresh');
                 sortable_groups();
@@ -256,7 +249,6 @@ function get_default_group_name(){
 }
 </script>
 <a name="create-group"></a>
-<h3 class="title-block"><?php echo elgg_echo('activity:groups');?></h3>
 <?php echo elgg_view_form('activity/admin/groups_create',
     array(
         'body' => elgg_view('activity/admin/groups/create',
@@ -265,6 +257,7 @@ function get_default_group_name(){
 );
 ?>
 <hr>
+<h3 class="title-block margin-top-0"><?php echo elgg_echo('activity:groups');?></h3>
 <?php echo elgg_view_form('activity/admin/groups_setup',
     array(
         'class' => 'groups-form',

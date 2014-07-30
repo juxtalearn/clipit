@@ -202,6 +202,7 @@ $english = array(
     // Create activity
     'activity:site:students' => 'Site students',
     'activity:students' => 'Activity students',
+    'teachers:add' => 'Add teachers',
     'called:students:add' => 'Add users',
     'called:students:add:from_excel' => 'Upload from Excel file',
     'called:students:insert_to_site' => 'Upload to site',

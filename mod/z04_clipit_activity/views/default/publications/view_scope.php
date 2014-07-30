@@ -48,21 +48,19 @@ foreach($clone_ids as $clone_id){
     }
 }
 ?>
-<div class="margin-bottom-10 pull-left">
-    <div class="dropdown pull-left">
-        <button id="drop_scope" class="btn btn-primary btn-xs" data-toggle="dropdown" href="#">View scope <span class="caret"></span></button>
-        <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop_scope">
-            <?php foreach($outputs as $output):?>
-                <li role="presentation">
-                    <?php echo elgg_view('output/url', array(
-                        'href'  => $output['href']."/view/".$output['id'],
-                        'text'  => $output['text'],
-                        'role'    => 'menuitem',
-                        'tabindex' => -1
-                    ));
-                    ?>
-                </li>
-            <?php endforeach;?>
-        </ul>
-    </div>
+<div class="dropdown inline-block">
+    <button id="drop_scope" class="btn btn-primary btn-xs" data-toggle="dropdown" href="#">View scope <span class="caret"></span></button>
+    <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop_scope">
+        <?php foreach($outputs as $output):?>
+            <li role="presentation">
+                <?php echo elgg_view('output/url', array(
+                    'href'  => $output['href']."/view/".$output['id'],
+                    'text'  => $output['text'],
+                    'role'    => 'menuitem',
+                    'tabindex' => -1
+                ));
+                ?>
+            </li>
+        <?php endforeach;?>
+    </ul>
 </div>

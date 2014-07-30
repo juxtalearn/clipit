@@ -59,13 +59,6 @@ $(function(){
             this.qs2.cache();
         }
     });
-    $(document).on("click", "#add_user",function(){
-        var content = $(".add-user-list");
-        content
-            .append(<?php echo json_encode(elgg_view('activity/create/add_user'));?>)
-            .find("input[name='user-name[]']")
-            .focus();
-    });
     $(".select-radio").click(function(){
         var input = $(this).find("input[type=radio]");
         input.prop("checked", true);

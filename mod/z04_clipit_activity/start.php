@@ -52,6 +52,7 @@ function clipit_activity_init() {
     elgg_register_ajax_view('activity/create/groups/create');
     // Admin activity
     elgg_register_action("activity/admin/setup", elgg_get_plugins_path() . "z04_clipit_activity/actions/activity/admin/setup.php");
+    elgg_register_action("activity/admin/teachers", elgg_get_plugins_path() . "z04_clipit_activity/actions/activity/admin/teachers.php");
     elgg_register_action("activity/admin/groups_setup", elgg_get_plugins_path() . "z04_clipit_activity/actions/activity/admin/groups_setup.php");
     elgg_register_action("activity/admin/groups_create", elgg_get_plugins_path() . "z04_clipit_activity/actions/activity/admin/groups_create.php");
     elgg_register_action("task/edit", elgg_get_plugins_path() . "z04_clipit_activity/actions/task/edit.php");
@@ -462,6 +463,20 @@ function activity_page_handler($page) {
                                             $body .= elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
                                         }
                                     }
+                                    // Teacher view
+                                    if($user->role == ClipitUser::ROLE_TEACHER){
+                                        $videos = ClipitVideo::get_by_id($task->video_array);
+                                        if($videos){
+                                            $body = elgg_view('tasks/admin/task_upload', array(
+                                                'entities'    => $videos,
+                                                'activity'      => $activity,
+                                                'task'      => $task,
+                                                'list_view' => 'multimedia/video/list'
+                                            ));
+                                        } else {
+                                            $body = elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
+                                        }
+                                    }
                                     break;
                                 case "storyboard_upload":
                                     $storyboards = ClipitGroup::get_storyboards($hasGroup);
@@ -528,7 +543,20 @@ function activity_page_handler($page) {
                                             $body .= elgg_view('output/empty', array('value' => elgg_echo('storyboards:none')));
                                         }
                                     }
-
+                                    // Teacher view
+                                    if($user->role == ClipitUser::ROLE_TEACHER){
+                                        $storyboards = ClipitStoryboard::get_by_id($task->storyboard_array);
+                                        if($storyboards){
+                                            $body = elgg_view('tasks/admin/task_upload', array(
+                                                'entities'    => $storyboards,
+                                                'activity'      => $activity,
+                                                'task'      => $task,
+                                                'list_view' => 'multimedia/storyboard/list'
+                                            ));
+                                        } else {
+                                            $body = elgg_view('output/empty', array('value' => elgg_echo('storyboards:none')));
+                                        }
+                                    }
                                     break;
                                 case "quiz_take":
                                     $href = "clipit_activity/{$activity->id}/quizzes";
@@ -571,6 +599,20 @@ function activity_page_handler($page) {
                                     if (!$entities) {
                                         $body = elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
                                     }
+                                    // Teacher view
+                                    if($user->role == ClipitUser::ROLE_TEACHER){
+                                        $task_parent = array_pop(ClipitTask::get_by_id(array($task->parent_task)));
+                                        $videos = ClipitVideo::get_by_id($task_parent->video_array);
+                                        if($videos){
+                                            $body = elgg_view('tasks/admin/task_feedback', array(
+                                                'entities'    => $videos,
+                                                'activity'      => $activity,
+                                                'task'      => $task,
+                                            ));
+                                        } else {
+                                            $body = elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
+                                        }
+                                    }
                                     break;
                                 case "storyboard_feedback":
                                     $href = "clipit_activity/{$activity->id}/publications";
@@ -612,7 +654,7 @@ function activity_page_handler($page) {
                                         $task_parent = array_pop(ClipitTask::get_by_id(array($task->parent_task)));
                                         $storyboards = ClipitStoryboard::get_by_id($task_parent->storyboard_array);
                                         if($storyboards){
-                                            $body = elgg_view('publications/admin/feedbacks', array(
+                                            $body = elgg_view('tasks/admin/task_feedback', array(
                                                 'entities'    => $storyboards,
                                                 'activity'      => $activity,
                                                 'task'      => $task,
@@ -904,7 +946,7 @@ function activity_page_handler($page) {
         $activity_menu_sidebar = elgg_view_module('aside', elgg_echo('activity'), $activity_menu);
     }
     // Group sidebar components (group block info + group tools)
-    if($hasGroup && $activity_status == 'active'){
+    if($hasGroup && ($activity_status == 'active' || $activity_status == 'closed')){
         $pending_tasks = elgg_view("page/components/pending_tasks", array('entity' => $activity));
         $pending_tasks_sidebar = elgg_view_module('aside', elgg_echo('activity:pending_tasks'), $pending_tasks, array('class' => 'aside-block'));
 
@@ -928,11 +970,16 @@ function activity_page_handler($page) {
             ));
         }
         // Default teacher's list
-        $teacher_sidebar .= elgg_view('activity/sidebar/teacher', array('teachers' => $teachers));
+        $teacher_sidebar .= elgg_view('activity/sidebar/teacher',
+            array('teachers' => $teachers, 'access' => $access, 'activity_id' => $activity->id)
+        );
     }
     $params['sidebar'] = $pending_tasks_sidebar . $activity_menu_sidebar . $group_menu_sidebar . $teacher_sidebar;
     if(!$params['class']){
         $params['class'] = "activity-section activity-layout";
+    }
+    if($activity_status != 'enrol'){
+    $params['special_header_content'] = elgg_view('activity/status', array('entity' => $activity));
     }
     $body = elgg_view_layout('one_sidebar', $params);
     echo elgg_view_page($params['title'], $body);

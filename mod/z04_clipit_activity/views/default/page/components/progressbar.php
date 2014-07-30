@@ -20,13 +20,14 @@ $defaults = array(
     'aria-valuemax' => 100,
     'style'         => 'width: '.$vars['value'].'%',
 );
-
+$value = $vars['value'];
 $vars = array_merge($defaults, $vars);
-
-
+if($value > 100){
+    $value = 100;
+}
 ?>
 <div class="progress" style="width:<?php echo $vars['width']; ?>">
   <div class="progress-bar" role="progressbar" <?php echo elgg_format_attributes($vars); ?>>
-      <?php echo $vars['value']; ?>%
+      <?php echo $value; ?>%
   </div>
 </div>

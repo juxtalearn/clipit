@@ -21,6 +21,6 @@ $entity = elgg_extract('entity', $vars);
 <?php echo elgg_view('input/submit',
     array(
         'value' => elgg_echo('discussion:start'),
-        'class' => "btn btn-primary pull-right"
+        'class' => "btn btn-primary btn-xs pull-right"
     ));
 ?>
