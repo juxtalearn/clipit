@@ -20,6 +20,21 @@ function expose_file_functions() {
     $class_suffix = "ClipitFile::";
     expose_common_functions($api_suffix, $class_suffix);
     expose_function(
+        $api_suffix . "get_by_labels", $class_suffix . "get_by_labels",
+        array("label_array" => array("type" => "array", "required" => true)),
+        "Get the Files containing at least one of the specified labels", 'GET', false, true
+    );
+    expose_function(
+        $api_suffix . "get_by_tags", $class_suffix . "get_by_tags",
+        array("tag_array" => array("type" => "array", "required" => true)),
+        "Get the Files containing at least one of the specified tags", 'GET', false, true
+    );
+    expose_function(
+        $api_suffix . "get_resource_scope", $class_suffix . "get_resource_scope",
+        array("id" => array("type" => "int", "required" => true)),
+        "Get Resource scope for a File ('group', 'activity', 'task' or 'site')", 'GET', false, true
+    );
+    expose_function(
         $api_suffix . "get_group", $class_suffix . "get_group",
         array("id" => array("type" => "int", "required" => true)), "Get the Group this File is inside of.", 'GET',
         false, true

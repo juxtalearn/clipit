@@ -136,20 +136,18 @@ class ClipitResource extends UBItem {
             return static::get_group($resource->cloned_from);
         }
         $group = UBCollection::get_items($id, static::REL_GROUP_RESOURCE, true);
-        if(!empty($group)) {
-            return (int)array_pop($group);
-        } else {
+        if(empty($group)) {
             return null;
         }
+        return (int)array_pop($group);
     }
 
     static function get_task($id) {
         $task = UBCollection::get_items($id, static::REL_TASK_RESOURCE, true);
-        if(!empty($task)) {
-            return array_pop($task);
-        } else {
+        if(empty($task)) {
             return null;
         }
+        return array_pop($task);
     }
 
     static function get_activity($id) {
@@ -158,20 +156,19 @@ class ClipitResource extends UBItem {
             return ClipitGroup::get_activity($group_id);
         } else {
             $activity = UBCollection::get_items($id, static::REL_ACTIVITY_RESOURCE, true);
-            if(!empty($activity)) {
-                return array_pop($activity);
+            if(empty($activity)) {
+                return null;
             }
+            return array_pop($activity);
         }
-        return null;
     }
 
     static function get_site($id) {
         $site = UBCollection::get_items($id, static::REL_SITE_RESOURCE, true);
-        if(!empty($site)) {
-            return array_pop($site);
-        } else {
+        if(empty($site)) {
             return null;
         }
+        return array_pop($site);
     }
 
     /**
