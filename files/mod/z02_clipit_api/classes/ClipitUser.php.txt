@@ -13,7 +13,7 @@
  */
 
 /**
- * <Class Description>
+ * Represents each human user interacting directly or indirectly with the ClipIt.
  */
 class ClipitUser extends UBUser {
     /**

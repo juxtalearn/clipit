@@ -13,7 +13,7 @@
  */
 
 /**
- * <Class Description>
+ * Contains the final product (video) of a group during an activity.
  */
 class ClipitVideo extends ClipitResource {
     /**
