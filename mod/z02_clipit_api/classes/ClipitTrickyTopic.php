@@ -13,7 +13,7 @@
  */
 
 /**
- * <Class Description>
+ * A main topic to explain through videos, which can be decomposed into tags (Stumbling Blocks).
  */
 class ClipitTrickyTopic extends UBItem {
     /**
