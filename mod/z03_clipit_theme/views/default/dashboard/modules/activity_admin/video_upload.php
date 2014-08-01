@@ -48,9 +48,18 @@ foreach($groups as $group):
                 <?php echo elgg_view('output/url', array(
                     'href'  => "clipit_activity/{$task->activity}/publications/view/{$video->id}",
                     'title' => elgg_echo('view'),
+                    'class' => 'btn btn-primary btn-xs pull-right',
+                    'text'  => '<i class="fa fa-youtube-play"></i>',
+                ));
+                ?>
+                <strong>
+                <?php echo elgg_view('output/url', array(
+                    'href'  => "clipit_activity/{$task->activity}/publications/view/{$video->id}",
+                    'title' => elgg_echo('view'),
                     'text'  => $video->name,
                 ));
                 ?>
+                </strong>
             </small>
         <?php endif;?>
     </li>

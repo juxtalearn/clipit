@@ -129,11 +129,15 @@ $g_array = array(
 //}
 //var_dump($g_array);
 ?>
-<?php echo elgg_view('activity/admin/dashboard/activity_status', array('entity' => $activity));?>
+<?php
+$activity_status = elgg_view('activity/admin/dashboard/activity_status', array('entity' => $activity));
+echo elgg_view_form('activity/admin/setup', array('body' => $activity_status));
+?>
+
 <hr>
 <h3>Activity progress</h3>
 <div class="margin-bottom-20">
-    <div style="position: relative;">
+    <div style="position: relative;" class="overflow-hidden">
         <?php echo elgg_view("page/components/progressbar", array(
             'value' => $activity_progress,
             'width' => '100%',
@@ -197,7 +201,7 @@ $g_array = array(
                     </small>
                     <h4 class="margin-0">
                         <a data-toggle="collapse" class="show" data-parent="#gr_accordion" href="#gr_<?php echo $group->id;?>">
-                            <?php echo $group->name;?>
+                            <strong><?php echo $group->name;?></strong>
                         </a>
                     </h4>
                 </div>

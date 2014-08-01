@@ -110,7 +110,7 @@ $rating = elgg_extract("rating", $vars);
                         <?php echo elgg_view('output/url', array(
                         'href'  => "{$href}/view/{$video->id}#comments",
                         'title' => elgg_echo('comments'),
-                        'class' => 'pull-right',
+                        'class' => 'pull-right btn btn-xs btn-xs-5 btn-blue-lighter',
                         'text'  => $total_comments. ' <i class="fa fa-comments"></i>'))
                         ?>
                         </strong>

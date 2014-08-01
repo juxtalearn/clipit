@@ -6926,6 +6926,40 @@ ul.events.events-loading:after {
   float: left;
   margin-left: 35px;
 }
+.clipit-sections .content {
+  background: transparent !important;
+}
+.clipit-sections h2 {
+  font-size: 40px;
+}
+.clipit-sections.team h2 {
+  margin-left: 50px;
+}
+.clipit-sections.team a {
+  text-decoration: none !important;
+}
+.author-text {
+  font-size: 12px;
+  text-transform: uppercase;
+  font-family: FuturaBoldRegular, Impact, 'Impact Bold', Helvetica, Arial, sans, sans-serif;
+  color: inherit;
+  letter-spacing: 1px;
+}
+.author-description {
+  font-size: 20px;
+}
+.twitter-color {
+  color: #33CCFF;
+}
+.linkedin-color {
+  color: #4875B4;
+}
+.youtube-color {
+  color: #FF3333;
+}
+.globe-color {
+  color: #999;
+}
 .btn-normal {
   border: none;
   background-color: #ffffff;
@@ -7180,6 +7214,9 @@ ul.events.events-loading:after {
 }
 .btn-xs {
   padding: 2px 5px;
+}
+.btn-xs-5 {
+  padding: 0px 5px !important;
 }
 .btn-icon {
   padding: 5px 8px;

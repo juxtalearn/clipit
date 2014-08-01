@@ -74,7 +74,7 @@ $task_types = array_merge(array('' => 'Select task type'), $task_types);
         <?php endif;?>
     </div>
     <div class="col-md-2">
-        <label for="task-start"><?php echo elgg_echo("task:start");?></label>
+        <label for="task-start"><?php echo elgg_echo("start");?></label>
         <?php echo elgg_view("input/text", array(
             'name' => "task{$input_array}[start]",
             'class' => 'form-control datepicker input-task-start',
@@ -84,7 +84,7 @@ $task_types = array_merge(array('' => 'Select task type'), $task_types);
         ?>
     </div>
     <div class="col-md-2">
-        <label for="task-end"><?php echo elgg_echo("task:end");?></label>
+        <label for="task-end"><?php echo elgg_echo("end");?></label>
         <?php echo elgg_view("input/text", array(
             'name' => "task{$input_array}[end]",
             'class' => 'form-control datepicker input-task-end',
@@ -95,7 +95,7 @@ $task_types = array_merge(array('' => 'Select task type'), $task_types);
     </div>
     <div class="col-md-8">
         <div class="form-group">
-            <label for="task-description"><?php echo elgg_echo("task:description");?></label>
+            <label for="task-description"><?php echo elgg_echo("description");?></label>
             <?php echo elgg_view("input/plaintext", array(
                 'name' => "task{$input_array}[description]",
                 'class' => 'form-control',
@@ -137,7 +137,7 @@ $task_types = array_merge(array('' => 'Select task type'), $task_types);
         ?>
     </div>
     <div class="col-md-4 feedback-module" style="display: none;padding: 10px;background: #fafafa;">
-        <label for="activity-title"><?php echo elgg_echo("task:feedback:check");?></label>
+        <label for="activity-title"><?php echo elgg_echo("task:feedback");?></label>
         <div class="checkbox feedback-check">
             <label>
                 <input type="checkbox" value="1" name="<?php echo "task{$input_array}[feedback]";?>"> <?php echo elgg_echo("task:feedback:check");?>

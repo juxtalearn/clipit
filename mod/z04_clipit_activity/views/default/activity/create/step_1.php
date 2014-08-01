@@ -112,7 +112,7 @@ $(function(){
             </div>
         </div>
         <div class="form-group margin-top-10">
-            <label for="activity-description"><?php echo elgg_echo("activity:description");?></label>
+            <label for="activity-description"><?php echo elgg_echo("description");?></label>
             <?php echo elgg_view("input/plaintext", array(
                 'name'  => 'activity-description',
                 'class' => 'form-control',
@@ -123,16 +123,6 @@ $(function(){
         </div>
     </div>
     <div class="col-md-6">
-        <div class="bg-info">
-            <span class="show">Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
-            <?php echo elgg_view('output/url', array(
-                'href'  => "http://trickytopic.".ClipitSite::get_domain(),
-                'class' => 'btn btn-primary btn-xs',
-                'title' => elgg_echo('tricky_topic:tool'),
-                'text'  => elgg_echo('tricky_topic:tool'),
-            ));
-            ?>
-        </div>
         <div class="form-group">
             <label for="activity-tricky-topic"><?php echo elgg_echo("activity:select:tricky_topic");?></label>
             <?php echo elgg_view('input/dropdown', array(
@@ -145,7 +135,17 @@ $(function(){
                 ));
             ?>
         </div>
-        <div class="row margin-0" id="tricky_topic_view" style="display: none;background: #fafafa;padding: 10px;"></div>
+        <div class="row margin-0 margin-bottom-10" id="tricky_topic_view" style="display: none;background: #fafafa;padding: 10px;"></div>
+        <div class="bg-info">
+            <span class="show">Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
+            <?php echo elgg_view('output/url', array(
+                'href'  => "http://trickytopic.".ClipitSite::get_domain(),
+                'class' => 'btn btn-primary btn-xs',
+                'title' => elgg_echo('tricky_topic:tool'),
+                'text'  => elgg_echo('tricky_topic:tool'),
+            ));
+            ?>
+        </div>
     </div>
     <div class="col-md-12 text-right margin-top-20">
         <?php echo elgg_view('input/button', array(
