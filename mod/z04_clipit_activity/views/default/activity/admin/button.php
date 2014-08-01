@@ -16,6 +16,6 @@ $activity_id = elgg_get_page_owner_guid();
     'title' => elgg_echo('activity:admin'),
     'text' => '<i class="fa fa-user" style="font-size: 21px;"></i> '.elgg_echo('activity:admin'),
     'href' => "clipit_activity/{$activity_id}/admin",
-    'class' => 'compose-message-button btn',
+    'class' => 'compose-message-button btn btn-lg btn-admin',
 ));
 ?>

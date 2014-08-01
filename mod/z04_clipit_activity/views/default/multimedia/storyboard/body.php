@@ -13,5 +13,4 @@
 $storyboard = elgg_extract('entity', $vars);
 $file = elgg_extract('file', $vars);
 ?>
-<?php echo elgg_view("publications/view_scope", array('entity' => $storyboard));?>
 <?php echo elgg_view("multimedia/file/body", array('entity' => $file));?>

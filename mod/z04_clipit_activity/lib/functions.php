@@ -181,7 +181,47 @@ function star_rating_view($average = 0, $number = 5){
     }
     return $output;
 }
-
+function get_task_completed_count(ClipitTask $task){
+    $activity = array_pop(ClipitActivity::get_by_id(array($task->activity)));
+    switch($task->task_type){
+        case ClipitTask::TYPE_VIDEO_UPLOAD:
+            $text = count($task->video_array)."/".count($activity->group_array);
+            $count  = (count($task->video_array)/count($activity->group_array)) * 100;
+            break;
+        case ClipitTask::TYPE_STORYBOARD_UPLOAD:
+            $text = count($task->storyboard_array)."/".count($activity->group_array);
+            $count  = (count($task->storyboard_array)/count($activity->group_array)) * 100;
+            break;
+        case ClipitTask::TYPE_VIDEO_FEEDBACK:
+        case ClipitTask::TYPE_STORYBOARD_FEEDBACK:
+            $completed = 0;
+            foreach($activity->student_array as $user_id){
+//                if(ClipitTask::get_completed_status($task->id, $user_id)
+//                    && (count(ClipitTask::get_storyboards($task->parent_task)) > 0
+//                        || count(ClipitTask::get_videos($task->parent_task)) > 0)){
+                if(ClipitTask::get_completed_status($task->id, $user_id)){
+                    $completed++;
+                }
+            }
+            $text = $completed."/".count($activity->student_array);
+            $count  = ($completed/count($activity->student_array)) * 100;
+            break;
+        case ClipitTask::TYPE_QUIZ_TAKE:
+            $completed = 0;
+            foreach($activity->student_array as $user_id){
+                if(ClipitTask::get_completed_status($task->id, $user_id)){
+                    $completed++;
+                }
+            }
+            $text = $completed."/".count($activity->student_array);
+            $count  = ($completed/count($activity->student_array)) * 100;
+            break;
+    }
+    return array(
+      'text' => $text,
+      'count' => round($count)
+    );
+}
 /**
  * Get task status
  *
@@ -189,8 +229,10 @@ function star_rating_view($average = 0, $number = 5){
  * @param $activity_id
  * @return array
  */
-function get_task_status(ClipitTask $task, $group_id = 0){
-    $user_id = elgg_get_logged_in_user_guid();
+function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
+    if(!$user_id){
+        $user_id = elgg_get_logged_in_user_guid();
+    }
     if(!$group_id){
         $group_id = ClipitGroup::get_from_user_activity($user_id, $task->activity);
     }
@@ -231,60 +273,65 @@ function get_task_status(ClipitTask $task, $group_id = 0){
             }
             break;
         case "storyboard_feedback":
+
             $entities = ClipitTask::get_storyboards($task->parent_task);
-            $evaluation_list = get_filter_evaluations($entities, $task->activity);
+            $evaluation_list = get_filter_evaluations($entities, $task->activity, $user_id);
             $total = count($evaluation_list["evaluated"]) + count($evaluation_list["no_evaluated"]);
             $total_evaluated = count($evaluation_list["evaluated"]);
             $text = "";
             if($total > 0){
                 $text = $total_evaluated."/".$total;
             }
-            if($total == $total_evaluated && $total > 0){
-                $status = array(
+            if(ClipitTask::get_completed_status($task->id, $user_id)){
+                $custom = array(
                     'icon' => '<i class="fa fa-check green"></i>',
                     'text' => $text." ".elgg_echo('task:completed'),
-                    'count' => $text,
                     'color' => 'green',
-                    'status' => ClipitTask::get_completed_status($task->id, $user_id),
                 );
             } else {
-                $status = array(
+                $custom = array(
                     'icon' => '<i class="fa fa-minus yellow"></i>',
                     'text' => $text." ".elgg_echo('task:pending'),
-                    'count' => $text,
                     'color' => 'yellow',
-                    'status' => ClipitTask::get_completed_status($task->id, $user_id)
                 );
             }
+            $status = array_merge(
+                array(
+                    'count' => $text,
+                    'status' => ClipitTask::get_completed_status($task->id, $user_id)
+                ), $custom);
             break;
         case "video_feedback":
             $entities = ClipitTask::get_videos($task->parent_task);
-            $evaluation_list = get_filter_evaluations($entities, $task->activity);
+            $evaluation_list = get_filter_evaluations($entities, $task->activity, $user_id);
             $total = count($evaluation_list["evaluated"]) + count($evaluation_list["no_evaluated"]);
             $total_evaluated = count($evaluation_list["evaluated"]);
             $text = "";
             if($total > 0){
                 $text = $total_evaluated."/".$total;
             }
-            if($total == $total_evaluated && $total > 0){
-                $status = array(
+            if(ClipitTask::get_completed_status($task->id, $user_id)){
+                $custom = array(
                     'icon' => '<i class="fa fa-check green"></i>',
                     'text' => $text." ".elgg_echo('task:completed'),
-                    'count' => $text,
                     'color' => 'green',
-                    'status' => ClipitTask::get_completed_status($task->id, $user_id),
                 );
             } else {
-                $status = array(
+                $custom = array(
                     'icon' => '<i class="fa fa-minus yellow"></i>',
                     'text' => $text." ".elgg_echo('task:pending'),
-                    'count' => $text,
                     'color' => 'yellow',
-                    'status' => ClipitTask::get_completed_status($task->id, $user_id)
                 );
             }
+            $status = array_merge(
+                array(
+                    'count' => $text,
+                    'status' => ClipitTask::get_completed_status($task->id, $user_id)
+                ), $custom);
+
             break;
     }
+
     if($task->end <= time() && $status['status'] === false){
         $status = array(
             'icon' => '<i class="fa fa-times red"></i>',
@@ -293,6 +340,11 @@ function get_task_status(ClipitTask $task, $group_id = 0){
             'color' => 'red',
             'status' => false
         );
+    }
+    $role = array_pop(ClipitUser::get_properties($user_id, array('role')));
+    if($role == 'teacher'){
+//        $status['count'] = false;
+        $status['text'] = false;
     }
     return $status;
 }
@@ -321,4 +373,39 @@ function get_group_progress($group_id){
     }
     $val = count($completed)/($total);
     return round($val*100);
+}
+
+/**
+ * Get current activity status
+ *
+ * @param $status ClipitActivity->status
+ * @return array
+ */
+function get_activity_status($status){
+    switch($status){
+        case ClipitActivity::STATUS_ENROLL:
+            $output = array(
+                'icon' => 'lock',
+                'color' => 'yellow',
+                'text' => elgg_echo('status:enroll')
+            );
+            break;
+        case ClipitActivity::STATUS_ACTIVE:
+            $output = array(
+                'icon' => 'unlock',
+                'color' => 'green',
+                'text' => elgg_echo('status:active'),
+                'btn_change_to' => '<span class="btn btn-border-red btn-xs"><strong><i class="fa fa-ban red"></i> '.elgg_echo('status:closed').'</strong></span>'
+            );
+            break;
+        case ClipitActivity::STATUS_CLOSED:
+            $output = array(
+                'icon' => 'ban',
+                'color' => 'red',
+                'text' => elgg_echo('status:closed'),
+                'btn_change_to' => '<span class="btn btn-border-green btn-xs"><strong><i class="fa fa-unlock green"></i> '.elgg_echo('status:active').'</strong></span>'
+            );
+            break;
+    }
+    return $output;
 }

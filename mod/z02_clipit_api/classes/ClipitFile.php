@@ -77,27 +77,71 @@ class ClipitFile extends UBFile {
         return $return_array;
     }
 
+    static function get_resource_scope($id) {
+        $site = static::get_site($id);
+        if(!empty($site)) {
+            return "site";
+        }
+        $task = static::get_task($id);
+        if(!empty($task)) {
+            return "task";
+        }
+        $group = static::get_group($id);
+        if(!empty($group)) {
+            return "group";
+        }
+        $activity = static::get_activity($id);
+        if(!empty($activity)) {
+            return "activity";
+        }
+        return null;
+    }
+
+    /**
+     * Get the Group where a Resource is located
+     *
+     * @param int $id Resource ID
+     *
+     * @return int|null Returns the Group ID, or null if none.
+     */
     static function get_group($id) {
         $file = new static($id);
-        if(!empty($file->clone_id)) {
-            return static::get_group($file->clone_id);
+        if(!empty($file->cloned_from)) {
+            return static::get_group($file->cloned_from);
         }
         $group = UBCollection::get_items($id, ClipitGroup::REL_GROUP_FILE, true);
-        return array_pop($group);
+        if(empty($group)) {
+            return null;
+        }
+        return (int)array_pop($group);
     }
 
     static function get_task($id) {
         $task = UBCollection::get_items($id, ClipitTask::REL_TASK_FILE, true);
+        if(empty($task)) {
+            return null;
+        }
         return array_pop($task);
     }
 
     static function get_activity($id) {
-        $activity = UBCollection::get_items($id, ClipitActivity::REL_ACTIVITY_FILE, true);
-        return array_pop($activity);
+        $group_id = static::get_group($id);
+        if(!empty($group_id)) {
+            return ClipitGroup::get_activity($group_id);
+        } else {
+            $activity = UBCollection::get_items($id, ClipitActivity::REL_ACTIVITY_FILE, true);
+            if(empty($activity)) {
+                return null;
+            }
+            return array_pop($activity);
+        }
     }
 
     static function get_site($id) {
         $site = UBCollection::get_items($id, ClipitSite::REL_SITE_FILE, true);
+        if(empty($site)) {
+            return null;
+        }
         return array_pop($site);
     }
 

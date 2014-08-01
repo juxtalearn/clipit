@@ -34,7 +34,7 @@ $super_title = elgg_extract('super_title', $vars);
 </style>
 <div class="task-info">
     <h3>
-        <span class="<?php echo $status['color'];?> pull-right"><?php echo $status['text'];?></span>
+        <span class="task-status <?php echo $status['color'];?> pull-right"><?php echo $status['text'];?></span>
         <?php if($super_title):?>
             <span class="text-muted show"><?php echo $super_title;?></span>
         <?php endif;?>

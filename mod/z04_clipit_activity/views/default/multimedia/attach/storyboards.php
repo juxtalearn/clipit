@@ -11,10 +11,11 @@
  * @package         ClipIt
  */
 $entity_id = elgg_extract('entity_id', $vars);
+$storyboards = ClipitGroup::get_storyboards($entity_id);
 ?>
 <div data-list="storyboards">
 <?php
-foreach(ClipitGroup::get_storyboards($entity_id) as $sb_id):
+foreach($storyboards as $sb_id):
     $storyboard = array_pop(ClipitStoryboard::get_by_id(array($sb_id)));
     $file = array_pop(ClipitFile::get_by_id(array($storyboard->file)));
 ?>
@@ -34,4 +35,7 @@ foreach(ClipitGroup::get_storyboards($entity_id) as $sb_id):
         </div>
     </div>
 <?php endforeach;?>
+    <?php if(!$storyboards):?>
+        <?php echo elgg_view('output/empty', array('value' => elgg_echo('storyboards:none')));?>
+    <?php endif;?>
 </div>

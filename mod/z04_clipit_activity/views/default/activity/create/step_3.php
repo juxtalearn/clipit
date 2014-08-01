@@ -59,16 +59,11 @@ $(function(){
             this.qs2.cache();
         }
     });
-    $(document).on("click", "#add_user",function(){
-        var content = $(".add-user-list");
-        content
-            .append(<?php echo json_encode(elgg_view('activity/create/add_user'));?>)
-            .find("input[name='user-name[]']")
-            .focus();
-    });
     $(".select-radio").click(function(){
         var input = $(this).find("input[type=radio]");
         input.prop("checked", true);
+        $("#accordion_grouping").find(".panel-heading").removeClass('bg-blue-lighter').addClass('bg-white');
+        $(this).parent(".panel-heading").toggleClass('bg-white bg-blue-lighter');
         $("#next_step_button").hide();
         if(input.val() == 1){
             $("#next_step_button").show();

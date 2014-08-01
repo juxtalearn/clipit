@@ -52,7 +52,7 @@ $(function() {
                 id: "<?php echo $task->id;?>",
                 title: "<?php echo $task->name;?>",
                 start: "<?php echo date("Y-m-d",$task->start);?>",
-                end: "<?php echo date("Y-m-d",$task->end);?>",
+                end: "<?php echo date("Y-m-d",$task->end);?>T10:00:00",
                 icon: '<?php echo elgg_view("tasks/icon_task_type", array('type' => $task->task_type)); ?>'
             },
             <?php endforeach;?>
@@ -90,6 +90,21 @@ $(function() {
 }
 .fc-event-inner{
     cursor: pointer;
+}
+.fc-event-time{
+    display: none;
+}
+.fc-event-end{
+    padding-left: 10px;
+}
+.fc-event-end .fa{
+    display: none;
+}
+.fc-event-start{
+    padding-left: 0 !important;
+}
+.fc-event-start .fa{
+    display: inline-block !important;
 }
 .fc-widget-content{
     border: 1px solid #fff !important;

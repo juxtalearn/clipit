@@ -13,6 +13,7 @@
 $activity_id = get_input('entity-id');
 $activity_title = get_input('activity-title');
 $activity_description = get_input('activity-description');
+
 if(trim($activity_title) == "" || trim($activity_description) == ""){
     register_error(elgg_echo("activity:cantupdate"));
 } else {

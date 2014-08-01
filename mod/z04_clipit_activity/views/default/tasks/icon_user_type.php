@@ -20,7 +20,7 @@ switch($type){
         break;
     case ClipitTask::TYPE_QUIZ_TAKE:
     case ClipitTask::TYPE_VIDEO_FEEDBACK:
-    case ClipitTask::TYPE_STORYBOARD_UPLOAD:
+    case ClipitTask::TYPE_STORYBOARD_FEEDBACK:
         $output = "user";
         $title = "User task";
         break;

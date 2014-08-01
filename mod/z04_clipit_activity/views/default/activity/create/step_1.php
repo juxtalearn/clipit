@@ -81,9 +81,6 @@ $(function(){
 });
 </script>
 <div id="step_1" class="row step">
-    <div class="col-md-12">
-        <h3 class="title-block"><?php echo elgg_echo('activity:setup');?></h3>
-    </div>
     <div class="col-md-6">
         <div class="form-group">
             <label for="activity-title"><?php echo elgg_echo("activity:title");?></label>
