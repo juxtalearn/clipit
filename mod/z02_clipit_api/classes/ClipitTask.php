@@ -13,7 +13,7 @@
  */
 
 /**
- * <Class Description>
+ * An atomic set of work which composes activities.
  */
 class ClipitTask extends UBItem {
     /**
