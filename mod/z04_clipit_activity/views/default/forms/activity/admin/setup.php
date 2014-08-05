@@ -31,6 +31,28 @@ $teachers = ClipitUser::get_by_id($teachers);
             ));
             ?>
         </div>
+        <div class="row">
+            <div class="col-md-5">
+                <label for="activity-start"><?php echo elgg_echo("activity:start");?></label>
+                <?php echo elgg_view("input/text", array(
+                    'name' => 'activity-start',
+                    'class' => 'form-control datepicker',
+                    'required' => true,
+                    'value' => date("d/m/Y", $activity->start),
+                ));
+                ?>
+            </div>
+            <div class="col-md-5">
+                <label for="task-end"><?php echo elgg_echo("activity:end");?></label>
+                <?php echo elgg_view("input/text", array(
+                    'name' => 'activity-end',
+                    'class' => 'form-control datepicker',
+                    'required' => true,
+                    'value' => date("d/m/Y", $activity->end),
+                ));
+                ?>
+            </div>
+        </div>
         <div class="form-group margin-top-10">
             <label for="activity-description"><?php echo elgg_echo("activity:description");?></label>
             <?php echo elgg_view("input/plaintext", array(

@@ -466,16 +466,16 @@ function activity_page_handler($page) {
                                     // Teacher view
                                     if($user->role == ClipitUser::ROLE_TEACHER){
                                         $videos = ClipitVideo::get_by_id($task->video_array);
-                                        if($videos){
+                                        //if($videos){
                                             $body = elgg_view('tasks/admin/task_upload', array(
                                                 'entities'    => $videos,
                                                 'activity'      => $activity,
                                                 'task'      => $task,
                                                 'list_view' => 'multimedia/video/list'
                                             ));
-                                        } else {
-                                            $body = elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
-                                        }
+//                                        } else {
+//                                            $body = elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
+//                                        }
                                     }
                                     break;
                                 case "storyboard_upload":

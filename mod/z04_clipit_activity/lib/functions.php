@@ -387,7 +387,9 @@ function get_activity_status($status){
             $output = array(
                 'icon' => 'lock',
                 'color' => 'yellow',
-                'text' => elgg_echo('status:enroll')
+                'text' => elgg_echo('status:enroll'),
+                'change_to' => elgg_echo('status:active'),
+                'btn_change_to' => '<span class="change-status btn btn-border-green btn-xs" data-status="active"><strong><i class="fa fa-unlock green"></i> '.elgg_echo('status:active').'</strong></span>'
             );
             break;
         case ClipitActivity::STATUS_ACTIVE:
@@ -395,7 +397,8 @@ function get_activity_status($status){
                 'icon' => 'unlock',
                 'color' => 'green',
                 'text' => elgg_echo('status:active'),
-                'btn_change_to' => '<span class="btn btn-border-red btn-xs"><strong><i class="fa fa-ban red"></i> '.elgg_echo('status:closed').'</strong></span>'
+                'change_to' => elgg_echo('status:closed'),
+                'btn_change_to' => '<span class="change-status btn btn-border-red btn-xs" data-status="closed"><strong><i class="fa fa-ban red"></i> '.elgg_echo('status:closed').'</strong></span>'
             );
             break;
         case ClipitActivity::STATUS_CLOSED:
@@ -403,7 +406,8 @@ function get_activity_status($status){
                 'icon' => 'ban',
                 'color' => 'red',
                 'text' => elgg_echo('status:closed'),
-                'btn_change_to' => '<span class="btn btn-border-green btn-xs"><strong><i class="fa fa-unlock green"></i> '.elgg_echo('status:active').'</strong></span>'
+                'change_to' => elgg_echo('status:active'),
+                'btn_change_to' => '<span class="change-status btn btn-border-green btn-xs" data-status="active"><strong><i class="fa fa-unlock green"></i> '.elgg_echo('status:active').'</strong></span>'
             );
             break;
     }

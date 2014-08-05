@@ -13,6 +13,7 @@ $english = array(
     'options' => 'Options',
     'home' => 'home',
     'selectall' => 'Select all',
+    'apply' => 'Apply',
 
     // Menu footer
     'menu:footer_clipit:header:clipit' => 'Clipit',

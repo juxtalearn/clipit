@@ -21,7 +21,6 @@
             <?php echo elgg_view("input/text", array(
                 'name' => 'user-name[]',
                 'class' => 'form-control',
-                'required' => true
             ));
             ?>
         </div>
@@ -30,7 +29,6 @@
             <?php echo elgg_view("input/text", array(
                 'name' => 'user-login[]',
                 'class' => 'form-control',
-                'required' => true
             ));
             ?>
         </div>
@@ -39,7 +37,6 @@
             <?php echo elgg_view("input/password", array(
                 'name' => 'user-password[]',
                 'class' => 'form-control',
-                'required' => true
             ));
             ?>
         </div>
@@ -48,7 +45,6 @@
             <?php echo elgg_view("input/text", array(
                 'name' => 'user-email[]',
                 'class' => 'form-control',
-                'required' => true
             ));
             ?>
         </div>

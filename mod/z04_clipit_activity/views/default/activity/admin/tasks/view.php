@@ -64,13 +64,15 @@ $(function() {
             $("[data-target='#edit-task-"+event.id+"']").click();
         },
         dayRender: function(date, cell) {
-            var date_formated = date.format("X");
+//            var date_formated = date.format("X");
+            var date_formated = date.add(-2, 'hours').format("X"); // Added -2hours T00:00:00
             if(date_formated >= <?php echo $activity->start;?> && date_formated <= <?php echo $activity->end;?> ){
                 $(cell).addClass('fc-ranged');
             }
         },
         dayClick: function(date, jsEvent, view) {
-            var date_formated = date.format("X");
+//            var date_formated = date.format("X");
+            var date_formated = date.add(-2, 'hours').format("X"); // Added -2hours T00:00:00
             if(date_formated >= <?php echo $activity->start;?> && date_formated <= <?php echo $activity->end;?> ){
                 $("#create-new-task").modal('show').find(".input-task-start").val(date.format('DD/MM/YYYY'));
             } else {

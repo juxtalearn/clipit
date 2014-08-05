@@ -48,7 +48,7 @@ $(function(){
         }
     });
     var hash = window.location.hash.replace('#', '');
-    var collapse = $("[href='#collapse_"+hash+"']");
+    var collapse = $("[href='#user_"+hash+"']");
     if(collapse.length > 0){
         collapse.click();
     }
@@ -78,20 +78,22 @@ $(function(){
         $users_ids = $group->user_array;
         $users = ClipitUser::get_by_id($users_ids);
     ?>
+    <a name="<?php echo $group->id;?>"></a>
     <h4 class="title-block"><?php echo $group->name;?></h4>
-
     <?php
     foreach($users as $user):
-//        $status = get_task_status($task,0, $user->id);
         $status = ClipitTask::get_completed_status($task->id, $user->id);
     ?>
     <div class="panel panel-blue">
         <a name="<?php echo $user->id;?>"></a>
         <div class="panel-heading cursor-pointer expand user-rating" data-user="<?php echo $user->id;?>" style="padding: 10px;">
-            <strong class="pull-right blue">
-                <?php echo elgg_view('tasks/icon_entity_status', array('status' => $status));?>
-            </strong>
-            <h4 class="panel-title blue" data-toggle="collapse" data-parent="#accordion_users" href="#collapse_<?php echo $user->id;?>">
+            <div class="pull-right blue">
+                <?php echo elgg_view("messages/compose_icon", array('entity' => $user));?>
+                <strong>
+                    <?php echo elgg_view('tasks/icon_entity_status', array('status' => $status));?>
+                </strong>
+            </div>
+            <h4 class="panel-title blue" data-toggle="collapse" data-parent="#accordion_users" href="#user_<?php echo $user->id;?>">
                 <?php echo elgg_view('output/img', array(
                     'src' => get_avatar($user, 'small'),
                     'class' => 'avatar-tiny margin-right-5'
@@ -99,7 +101,7 @@ $(function(){
                 <?php echo $user->name;?>
             </h4>
         </div>
-        <div id="collapse_<?php echo $user->id;?>" class="panel-collapse collapse">
+        <div id="user_<?php echo $user->id;?>" class="panel-collapse collapse">
             <div class="panel-body"></div>
         </div>
     </div>

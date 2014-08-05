@@ -11,6 +11,8 @@
  * @package         ClipIt
  */
 $english = array(
+    'change_to' => 'Change to',
+    'current_status' => 'Current status',
     'exit:page:confirmation' => '...Data you have entered may not be saved...',
     'users:none' => 'No users',
     'start' => 'Start',
@@ -23,6 +25,9 @@ $english = array(
     // Activity
     'activity:title' => 'Activity name',
     'activity:description' => 'Activity description',
+    'activity:start' => 'Activity start',
+    'activity:end' => 'Activity end',
+    'activity:select:tricky_topic' => 'Tricky topic',
     'activity:admin' => 'Activity admin',
     'my_activities' => 'My activities',
     'activities' => 'Activities',
@@ -74,6 +79,7 @@ $english = array(
     'group:progress' => 'Group progress',
     'group:timeline' => 'Timeline',
     'group:members' => 'Members',
+    'group:students' => 'Group students',
     // Discussion
     'discussions:none' => 'No discussions',
     'discussion:start' => 'Start a discussion',
@@ -141,6 +147,7 @@ $english = array(
     'tricky_topic:none' => 'Not tricky Topic',
     'tricky_topic:tool' => 'Tricky Topic tool',
     // Publications
+    'publish:none' => 'There are no published',
     'publications:no_evaluated' => 'Not evaluated',
     'publications:evaluated' => 'Evaluated',
     'publications:rating' => 'Rating',
@@ -176,6 +183,11 @@ $english = array(
     // Tasks
     'activity:tasks' => 'Tasks',
     'activity:task' => 'Task',
+    'task:title' => 'Task title',
+    'task:add' => 'Add task',
+    'task:task_type' => 'Task type',
+    'task:feedback' => 'Task feedback',
+    'task:feedback:check' => 'lorem ipsum...',
     'tasks:none' => 'No tasks',
     'task:completed' => 'Completed',
     'task:not_completed' => 'Not completed',

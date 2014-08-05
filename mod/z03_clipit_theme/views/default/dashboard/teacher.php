@@ -13,7 +13,7 @@
 $user = elgg_extract("entity", $vars);
 ?>
 <div class="col-md-4 events-list">
-    <?php echo elgg_view('landing/module', array(
+    <?php echo elgg_view('dashboard/module', array(
         'name'      => 'events',
         'title'     => '',
         'content'   => elgg_view('dashboard/modules/events',

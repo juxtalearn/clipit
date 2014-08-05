@@ -11,6 +11,11 @@
  * @package         ClipIt
  */
 $english = array(
+    'user:username' => 'Name',
+    'user:log_in' => 'Username',
+    'user:password' => 'Password',
+    'user:email' => 'Email',
+    'user:add' => 'Add user',
     'user:logout' => 'Logout',
     'profile' => 'Profile',
     'profile:stats' => 'Statistics page',

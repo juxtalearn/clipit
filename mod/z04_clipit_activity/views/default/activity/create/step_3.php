@@ -64,13 +64,6 @@ $(function(){
         input.prop("checked", true);
         $("#accordion_grouping").find(".panel-heading").removeClass('bg-blue-lighter').addClass('bg-white');
         $(this).parent(".panel-heading").toggleClass('bg-white bg-blue-lighter');
-        $("#next_step_button").hide();
-        if(input.val() == 1){
-            $("#next_step_button").show();
-            $("#finish_setup").hide();
-        } else {
-            $("#finish_setup").show();
-        }
     });
     $(document).on("click", "#add_users_button", function(){
         var url_action = $(this).attr("href");
@@ -316,7 +309,6 @@ function get_default_group_name(){
 </script>
 <div id="step_3" class="row step" style="display: none;">
     <div class="col-md-8">
-        <h3 class="title-block"><?php echo elgg_echo('activity:called_users');?></h3>
         <div>
             <select id="called_users" name="called_users[]" multiple="multiple">
                 <?php
@@ -439,23 +431,6 @@ function get_default_group_name(){
             'class' => "btn btn-primary",
         ));
         ?>
-        <div style="display: none;" id="next_step_button">
-            <?php echo elgg_view('input/button', array(
-                'value' => elgg_echo('activity:make_groups'),
-                'id' => 'load_called_users',
-                'data-step' => 4,
-                'class' => "btn btn-primary button_step",
-            ));
-            ?>
-            <?php echo elgg_view('output/url', array(
-                'href'  => "javascript:;",
-                'id'    => 'finish_setup',
-                'class' => 'margin-left-10',
-                'title' => elgg_echo('task:add'),
-                'text'  => '<i class="fa fa-angle-double-right"></i> '.elgg_echo('activity:skip'),
-            ));
-            ?>
-        </div>
     </div>
 </div>
 <div style="display: none;" id="step_4" class="row step create_groups"></div>

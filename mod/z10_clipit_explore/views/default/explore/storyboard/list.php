@@ -62,7 +62,7 @@ $href = elgg_extract('href', $vars);
                             <?php echo elgg_view('output/url', array(
                                 'href'  => "{$href}/view/{$storyboard->id}#comments",
                                 'title' => elgg_echo('comments'),
-                                'class' => 'pull-right',
+                                'class' => 'pull-right btn btn-xs btn-xs-5 btn-blue-lighter',
                                 'text'  => $total_comments. ' <i class="fa fa-comments"></i>'))
                             ?>
                         </strong>

@@ -47,6 +47,17 @@ function clipit_final_init() {
     elgg_register_plugin_hook_handler('public_pages', 'walled_garden', 'actions_clipit_public_pages');
     function actions_clipit_public_pages($hook, $type, $return_value, $params) {
         $return_value[] = 'action/user/check';
+        // Clipit sections
+        $return_value[] = 'clipit/team';
+        $return_value[] = 'clipit/about';
+        $return_value[] = 'clipit/developers';
+        // Help sections
+        $return_value[] = 'help/support_center';
+        $return_value[] = 'help/basics';
+        // Legal sections
+        $return_value[] = 'legal/terms';
+        $return_value[] = 'legal/privacy';
+        $return_value[] = 'legal/community_guidelines';
         return $return_value;
     }
 
@@ -257,27 +268,31 @@ function setup_footer_menus(){
     );
 }
 function clipit_footer_page($page) {
+    $page_shell = 'default';
+    $class = '';
+    $options = array();
     switch($page[0]){
         case "about":
+            return false;
             break;
         case "team":
-            $members = array(
-
-            );
-            $content = elgg_view('pages/clipit/team', array('team' => $members, 'intership' => $intership));
+            $content = elgg_view('pages/clipit/team', array('team' => $members));
             $title = "Team";
+            $page_shell = 'team';
+            $class = 'team';
             break;
         case "developers":
+            return false;
             break;
     }
     $params = array(
         'content' => $content,
         'title'     => $title,
         'filter'    => '',
-        'class'     => ''
+        'class'     => 'clipit-sections '.$class
     );
     $body = elgg_view_layout('one_column', $params);
-    echo elgg_view_page('', $body);
+    echo elgg_view_page('', $body, $page_shell, $options);
 }
 function help_footer_page($page) {
     return false;
@@ -288,28 +303,6 @@ function legal_footer_page($page) {
 }
 // Dashboard page
 function user_landing_page($page) {
-    global $CONFIG;
-    // Activity page cambiado a Dashboard
-
-    // Ensure that only logged-in users can see this page
-    gatekeeper();
-    $role = $CONFIG->user->role;
-    // Set context
-    elgg_set_context($role.'_landing');
-    elgg_set_page_owner_guid(elgg_get_logged_in_user_guid());
-
-    $content = elgg_view('landing/widgets', array('role' => $role));
-    $params = array(
-        'content' => $content,
-        'title'     => '',
-        'filter'    => '',
-        'class'     => 'landing row'
-    );
-    $body = elgg_view_layout('one_column', $params);
-
-//    echo elgg_view_page($role." Landing", $body);
-
-    // DEBUG
     $user_id = elgg_get_logged_in_user_guid();
     $user = array_pop(ClipitUser::get_by_id(array($user_id)));
     switch($user->role){

@@ -82,6 +82,7 @@ $groups = ClipitGroup::get_by_id($activity->group_array);
                 <div class="panel-body" style="padding: 0;padding-top: 10px;">
                     <?php
                     $not_found = true;
+                    if($entities):
                     foreach($entities as $entity):
                         if($entity::get_group($entity->id) == $group->id):
                             $not_found = false;
@@ -94,6 +95,7 @@ $groups = ClipitGroup::get_by_id($activity->group_array);
                         ?>
                     <?php endif;?>
                     <?php endforeach;?>
+                    <?php endif;?>
 
                     <?php if($not_found):?>
                         <?php echo elgg_view('output/empty', array('value' => elgg_echo('publish:none')));?>
