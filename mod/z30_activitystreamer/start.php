@@ -8,13 +8,20 @@
         $_SESSION['logging_table'] = $CONFIG->dbprefix."extended_log";
 		$_SESSION['activity_table'] = $CONFIG->dbprefix."activitystreams";
 		$_SESSION['logged'] = false;
-		$_SESSION['enabled'] = false;
+		$_SESSION['enabled'] = true;
 		$_SESSION['transaction_artifact'] = array();
 	}
 
     function is_session_started()
     {
-        return session_status() === PHP_SESSION_ACTIVE ? TRUE : FALSE;
+        if ( php_sapi_name() !== 'cli' ) {
+            if ( version_compare(phpversion(), '5.4.0', '>=') ) {
+                return session_status() === PHP_SESSION_ACTIVE ? TRUE : FALSE;
+            } else {
+                return session_id() === '' ? FALSE : TRUE;
+            }
+        }
+        return FALSE;
     }
 
 
@@ -38,7 +45,6 @@
             'filter' => "",
         );
         $body = elgg_view_layout('one_column', $params);
-
         echo elgg_view_page($title, $body);
 
 	}
@@ -77,11 +83,18 @@
             }
             else if ($object_class == "ElggRelationship") {
                 $rel = get_relationship($object_id);
+                $source_id = $rel->guid_one;
+                $source = get_entity($source_id);
                 $target_id = $rel->guid_two;
                 $target = get_entity($target_id);
                 if (!is_null($target) && $target instanceof ElggEntity) {
                     if ($target->getSubtype() == ClipitGroup::SUBTYPE) {
-                        $object_content = "new";
+                        if ($source->getSubtype() == ClipitActivity::SUBTYPE) {
+                            $object_content = $source_id."-".$target_id;
+                        }
+                        else {
+                            $object_content = "new";
+                        }
                         $group_id = $target_id;
                     }
                     else if ($target->getSubtype() == ClipitActivity::SUBTYPE) {
@@ -89,7 +102,7 @@
                         $activity_id = $target_id;
                     }
                     else {
-                        $object_content = $target_id;
+                        $object_content = $source_id."-".$target_id;
                     }
                 }
             }
@@ -135,6 +148,9 @@
             $event = sanitise_string($event);
             if (is_null($event)) {$event = "";}
             $time = time();
+            if (is_not_null($object->time_created) && $object->time_created != "") {
+                $time = $object->time_created;
+            }
             $ip_address = sanitise_string($_SERVER['REMOTE_ADDR']);
             if (is_null($ip_address)) {$ip_address = "";}
             $performed_by = (int)elgg_get_logged_in_user_guid();
@@ -166,24 +182,33 @@
 
             $role = "";
             $user_properties = ClipitUser::get_properties($performed_by, array("role"));
-            if (is_not_null($user_properties) && !empty($user_properties[0])) {
-                $role = $user_properties[0];
+            if (is_not_null($user_properties) && !empty($user_properties['role'])) {
+                $role = $user_properties['role'];
             }
             $con=mysqli_connect($CONFIG->dbhost,$CONFIG->dbuser,$CONFIG->dbpass,$CONFIG->dbname);
             $result = mysqli_query($con,"SHOW COLUMNS FROM `".$log_table."` LIKE 'user_name';");
-            $exists_username = (mysqli_num_rows($result))?TRUE:FALSE;
+            if ($result) {
+                $exists_username = (mysqli_num_rows($result))?TRUE:FALSE;
+            }
             $result = mysqli_query($con,"SHOW COLUMNS FROM `".$log_table."` LIKE 'object_title';");
-            $exists_object_title = (mysqli_num_rows($result))?TRUE:FALSE;
+            if ($result) {
+                $exists_object_title = (mysqli_num_rows($result))?TRUE:FALSE;
+            }
             if (!$exists_username || !$exists_object_title) {
                 if ($stmt = mysqli_prepare($con, "RENAME TABLE ".$log_table." TO ".$log_table."_".$time.";")) {
                     mysqli_stmt_execute($stmt);
                 }
                 else {
-                    system_message($stmt->error);
+                    error_log($stmt->error);
                 }
                 $stmt->close();
             }
-
+            if ($object_content == null) {
+                $object_content = "";
+            }
+            else {
+                $object_content = urlencode($object_content);
+            }
             //If the table doesn't exist, we need to create it...
             mysqli_query($con,"CREATE TABLE IF NOT EXISTS `".$log_table."` (".
                                   "`log_id` int(255) NOT NULL AUTO_INCREMENT,".
@@ -244,9 +269,9 @@
         $act_table = $_SESSION['activity_table'];
         $con=mysqli_connect($CONFIG->dbhost,$CONFIG->dbuser,$CONFIG->dbpass,$CONFIG->dbname);
         $stmt = $con->prepare("INSERT INTO `".$act_table."` ".
-            "(transaction_id, json, actor_id, group_id, course_id, activity_id, verb, timestamp) ".
-            "VALUES (?,?,?,?,?,?,?,?)");
-    	$act_table = $_SESSION['activity_table'];
+            "(transaction_id, json, actor_id, group_id, course_id, activity_id, verb, role, timestamp) ".
+            "VALUES (?,?,?,?,?,?,?,?,?)");
+       	$act_table = $_SESSION['activity_table'];
 		$logged = $_SESSION['logged'];
 
 		if($_SESSION['enabled']) {
@@ -259,8 +284,10 @@
 				if (!($action['verb'] == 'Unidentified')) {
 					storeJSON($action, $act_table, $con, $stmt);
 				}
-
-			}
+                else {
+                    error_log("Found no corresponding activity for ".print_r($action_particles, true));
+                }
+ 			}
 			/*
             elseif (!transactionExists($transaction_id, $con)) {
 				$url = $_SERVER[ "REQUEST_URI" ];
@@ -276,7 +303,9 @@
 		$con->close();
 	}
 
-	function extended_log_default_logger($event, $object_type, $object) {
+
+
+function extended_log_default_logger($event, $object_type, $object) {
    		extended_log($object['object'], $object['event']);
 	   	return true;
  	}
