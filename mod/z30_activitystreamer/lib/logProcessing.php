@@ -1,32 +1,17 @@
 <?php
-function storeJSON($action, $act_table = null, $con = null, $stmt = null) {
+function storeJSON($action) {
+	global $transaction_stmt;
     $action['object']['content'] = 	urlencode($action['object']['content']);
     $action['object']['objectTitle'] = 	urlencode($action['object']['objectTitle']);
 	$activity_json = json_encode($action);
-    $extra_con = false;
-    if (is_null($act_table)) {
-       $act_table = $_SESSION['activity_table'];
-    }
-
-    if (!($stmt instanceof mysqli_stmt) || is_null($con)) {
-        $extra_con = true;
-        global $CONFIG;
-        $con=mysqli_connect($CONFIG->dbhost,$CONFIG->dbuser,$CONFIG->dbpass,$CONFIG->dbname);
-        $stmt = $con->prepare("INSERT INTO `".$act_table."` ".
-            "(transaction_id, json, actor_id, group_id, course_id, activity_id, verb, role, timestamp) ".
-            "VALUES (?,?,?,?,?,?,?,?,?)");
-    }
     createActivityTable($con, $act_table);
-    if ($stmt && $action['verb'] != "Ignore") {
-        $stmt->bind_param('ssiiiissi', $action['transactionId'], $activity_json, $action['actor']['actorId'], $action['object']['groupId'],
+    if ($transaction_stmt && $action['verb'] != "Ignore") {
+        $transaction_stmt->bind_param('ssiiiissi', $action['transactionId'], $activity_json, $action['actor']['actorId'], $action['object']['groupId'],
             $action['object']['courseId'], $action['object']['activityId'], $action['verb'], $action['actor']['objectType'], $action['published']);
-        $stmt->execute();
+        $transaction_stmt->execute();
     }
     else {
         error_log(mysqli_error($con));
-    }
-    if ($extra_con) {
-        $con->close();
     }
 }
 
