@@ -217,9 +217,6 @@
 //                                   "PRIMARY KEY (`log_id`) ".
 //                                ") ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;");
 
-			if (is_null($logging_stmt) || !$logging_stmt) {
-				activitystreamer_init();
-			}
             $logging_stmt->bind_param('iisssssssisisisiiis', $object_id, $object_title, $transaction_id, $object_class, $object_type, $object_subtype, $event, $time, $ip_address, $performed_by,
                                                              $user_name, $access_id, $enabled, $owner_guid, $object_content, $group_id, $course_id, $activity_id, $role);
             $logging_stmt->execute();

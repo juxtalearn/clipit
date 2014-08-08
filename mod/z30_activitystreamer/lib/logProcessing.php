@@ -1,10 +1,11 @@
 <?php
 function storeJSON($action) {
+	global $con;
 	global $transaction_stmt;
-    $action['object']['content'] = 	urlencode($action['object']['content']);
+	$action['object']['content'] = 	urlencode($action['object']['content']);
     $action['object']['objectTitle'] = 	urlencode($action['object']['objectTitle']);
 	$activity_json = json_encode($action);
-    createActivityTable($con, $act_table);
+    createActivityTable($con, $_SESSION['activity_table']);
     if ($transaction_stmt && $action['verb'] != "Ignore") {
         $transaction_stmt->bind_param('ssiiiissi', $action['transactionId'], $activity_json, $action['actor']['actorId'], $action['object']['groupId'],
             $action['object']['courseId'], $action['object']['activityId'], $action['verb'], $action['actor']['objectType'], $action['published']);
