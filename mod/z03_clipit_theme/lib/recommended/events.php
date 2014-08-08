@@ -18,7 +18,7 @@ function view_recommended_event($event, $view_type = 'full'){
             $entity = array_pop(ClipitVideo::get_by_id(array($relationship->guid_two)));
             $href = "clipit_activity/{$activity->id}/resources";
             $params = array(
-                'title' => 'Teacher added new video to resources',
+                'title' => elgg_echo('teacher:addedresource') /*'Teacher added new video to resources'*/,
                 'icon' => 'fa-video-camera',
                 'author' => $entity->owner_id,
                 'body' => elgg_view("recommended/events/video", array('entity' => $entity, 'href' => $href, 'rating' => false))
@@ -29,7 +29,7 @@ function view_recommended_event($event, $view_type = 'full'){
             $entity = array_pop(ClipitFile::get_by_id(array($relationship->guid_two)));
             $href = "clipit_activity/{$activity->id}/resources/view/{$entity->id}";
             $params = array(
-                'title' => 'Teacher added new file to resources',
+                'title' => elgg_echo('teacher:addedresource') /*'Teacher added new file to resources' */,
                 'icon' => 'fa-file',
                 'author' => $entity->owner_id,
                 'body' => elgg_view("recommended/events/file", array(
@@ -45,7 +45,7 @@ function view_recommended_event($event, $view_type = 'full'){
             $file = array_pop(ClipitFile::get_by_id(array($entity->file)));
             $href = "clipit_activity/{$activity->id}/resources/view/{$entity->id}";
             $params = array(
-                'title' => 'Teacher added new storyboard to resources',
+                'title' => elgg_echo('teacher:addedresource') /*'Teacher added new storyboard to resources'*/,
                 'icon' => 'fa-file',
                 'author' => $entity->owner_id,
                 'body' => elgg_view("recommended/events/file", array(
@@ -64,7 +64,7 @@ function view_recommended_event($event, $view_type = 'full'){
                 'text'  => $activity->name,
             ));
             $params = array(
-                'title' => 'Called for '.$activity_link.' activity',
+                'title' => elgg_echo ('activity:invited') . /*'Called for '*/ ' ' .$activity_link.' activity',
                 'icon' => 'fa-bullhorn',
                 'author' => $entity->owner_id,
                 'body' => ''
@@ -79,7 +79,7 @@ function view_recommended_event($event, $view_type = 'full'){
                 'text'  => $activity->name,
             ));
             $params = array(
-                'title' => 'Group added to activity <strong class="show">'.$activity_link.'</strong>',
+                'title' => elgg_echo('group:added'). /* 'Group added to activity'  */ ': <strong class="show">'.$activity_link.'</strong>',
                 'icon' => 'fa-bullhorn',
                 'author' => $entity->id,
                 'body' => ''
@@ -95,7 +95,7 @@ function view_recommended_event($event, $view_type = 'full'){
                 'text'  => $entity->name,
             ));
             $params = array(
-                'title' => 'Added new task <strong>'.$task_link.'</strong>',
+                'title' => elgg_echo('task:added'). /*'Added new task */': <strong>'.$task_link.'</strong>',
                 'icon' => 'fa-tasks',
                 'author' => $activity->id,
                 'body' => ''
@@ -107,7 +107,7 @@ function view_recommended_event($event, $view_type = 'full'){
             $entity = array_pop(ClipitVideo::get_by_id(array($relationship->guid_two)));
             $href = "clipit_activity/{$activity->id}/group/{$relationship->guid_one}/multimedia";
             $params = array(
-                'title' => 'Added new video to group',
+                'title' => elgg_echo ('video:uploaded'), //Added new video to group',
                 'icon' => 'fa-video-camera',
                 'author' => $entity->owner_id,
                 'body' => elgg_view("recommended/events/video", array('entity' => $entity, 'href' => $href, 'rating' => false))
@@ -119,7 +119,7 @@ function view_recommended_event($event, $view_type = 'full'){
             $entity = array_pop(ClipitFile::get_by_id(array($relationship->guid_two)));
             $href = "clipit_activity/{$activity->id}/group/{$relationship->guid_one}/multimedia/view/{$entity->id}";
             $params = array(
-                'title' => 'Added new file to group',
+                'title' => elgg_echo('multimedia:file_uploaded'), //'Added new file to group',
                 'icon' => 'fa-file',
                 'author' => $entity->owner_id,
                 'body' => elgg_view("recommended/events/file", array(
@@ -136,7 +136,7 @@ function view_recommended_event($event, $view_type = 'full'){
             $file = array_pop(ClipitFile::get_by_id(array($entity->file)));
             $href = "clipit_activity/{$activity->id}/group/{$relationship->guid_one}/multimedia/view/{$entity->id}";
             $params = array(
-                'title' => 'Added new storyboard to group',
+                'title' => elgg_echo('task:storyboard_uploaded'), //'Added new storyboard to group',
                 'icon' => 'fa-file',
                 'author' => $entity->owner_id,
                 'body' => elgg_view("recommended/events/file", array(
@@ -166,7 +166,7 @@ function view_recommended_event($event, $view_type = 'full'){
             $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
             $href = "clipit_activity/{$activity->id}/{$group}discussion/view/{$entity->id}";
             $params = array(
-                'title' => 'Added a new discussion topic',
+                'title' => elgg_echo('discussion:created'), //'Added a new discussion topic',
                 'icon' => 'fa-comment',
                 'author' => $entity->owner_id,
                 'body' => elgg_view("recommended/events/discussion", array('entity' => $entity,'href' => $href))
@@ -183,7 +183,7 @@ function view_recommended_event($event, $view_type = 'full'){
                 'text'  => $group->name,
             ));
             $params = array(
-                'title' => 'joined the group <strong>'.$group_info.'</strong>',
+                'title' => elgg_echo('group:joined').': <strong>'.$group_info.'</strong>',
                 'icon' => 'fa-user',
                 'author' => $entity->id,
                 'body' => ''
@@ -204,7 +204,7 @@ function view_recommended_event($event, $view_type = 'full'){
                 'text'  => $entity->name,
             ));
             $params = array(
-                'title' => 'Added storyboard to task '.$storyboard_info,
+                'title' => elgg_echo('task:storyboard_upload') .' '.$storyboard_info,
                 'icon' => 'fa-file',
                 'author' => $group->id,
                 'body' => elgg_view("recommended/events/file", array(
