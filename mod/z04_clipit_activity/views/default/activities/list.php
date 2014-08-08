@@ -112,7 +112,7 @@ if (is_array($items) && count($items) > 0):
                                 <?php endif; ?>
                             </div>
                             <div class="col-xs-6">
-                                <small class='show'>Teacher/s</small>
+                                <small class='show'><?php echo elgg_echo('activity:teachers') ?></small>
                                 <ul style="max-height: 100px; overflow: auto;">
                                     <?php
                                     foreach($teachers as $teacher_id):
