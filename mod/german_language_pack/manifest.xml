@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin_manifest xmlns="http://www.elgg.org/plugin_manifest/1.8">
+	<name>ClipIt German language Pack </name>
+	<id>german_language_pack</id>
+	<author>RIAS</author>
+	<version>2.0</version>
+	<category>communication</category>
+	<description>This plugin provides the German translations for the language files of Elgg including bundled plugins 
+		based on German Language Pack for Elgg 1.9 by iionly (https://github.com/iionly)</description>
+	<website>https://github.com/iionly</website>
+	<copyright>(C) iionly 2012-2014</copyright>
+	<license>Dual licensed under the MIT </license>
+	<requires>
+		<type>elgg_release</type>
+		<version>1.8</version>
+	</requires>
+	<activate_on_install>true</activate_on_install>
+</plugin_manifest>
