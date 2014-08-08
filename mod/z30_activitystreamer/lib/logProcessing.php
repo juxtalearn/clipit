@@ -43,7 +43,7 @@ function createActivityTable($con, $act_table) {
         "`role` varchar(255) NOT NULL, ".
         "`timestamp` varchar(255) NOT NULL, ".
         "PRIMARY KEY (`stream_id`) ".
-        ") ENGINE=InnoDB DEFAULT CHARSET=utf8 DEFAULT COLLATE utf8_general_ci AUTO_INCREMENT=1;");
+        ") ENGINE=MyISAM DEFAULT CHARSET=utf8 DEFAULT COLLATE utf8_general_ci AUTO_INCREMENT=1;");
 }
 function processURL($url) {
 	$object_Id = 0;
@@ -119,6 +119,7 @@ function convertURLToActivityStream($url) {
 }
 
 function convertLogTransactionToActivityStream($transaction) {
+    global $con;
     $transaction = removeAPILogins($transaction);
 
 	global $CONFIG;

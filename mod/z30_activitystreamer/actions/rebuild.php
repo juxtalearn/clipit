@@ -16,7 +16,7 @@ if (isset($affirmative) && $affirmative) {
     $act_table = $_SESSION['activity_table'];
     $con=mysqli_connect($CONFIG->dbhost,$CONFIG->dbuser,$CONFIG->dbpass,$CONFIG->dbname);
     createActivityTable($con, $act_table);
-    $stmt = $con->prepare("INSERT INTO `".$act_table."` ".
+    $transaction_stmt = $con->prepare("INSERT INTO `".$act_table."` ".
         "(transaction_id, json, actor_id, group_id, course_id, activity_id, verb, role, timestamp) ".
         "VALUES (?,?,?,?,?,?,?,?,?)");
     $log_table = $_SESSION['logging_table'];
@@ -34,7 +34,7 @@ if (isset($affirmative) && $affirmative) {
             if ($current_ID != $new_ID) {
                 $action = convertLogTransactionToActivityStream($_SESSION['transaction']);
                 if (!($action['verb'] == 'Unidentified') && !($action['verb'] == 'Ignore')) {
-                    storeJSON($action, $act_table, $con, $stmt);
+                    storeJSON($action, $act_table, $con, $transaction_stmt);
                     //error_log("\n\n".$current_ID.": ".$action['verb'].build_log_string());
                 }
                 else {
@@ -55,7 +55,7 @@ if (isset($affirmative) && $affirmative) {
         if ($_SESSION['transaction'] != "") {
             $action = convertLogTransactionToActivityStream($_SESSION['transaction']);
             if (!($action['verb'] == 'Unidentified')) {
-                storeJSON($action, $act_table, $con, $stmt);
+                storeJSON($action, $act_table, $con, $transaction_stmt);
                 error_log("\n\n".$current_ID.": ".$action['verb'].build_log_string());
             }
             else {
@@ -63,7 +63,7 @@ if (isset($affirmative) && $affirmative) {
             }
         }
     } else die(mysqli_error($con));
-    $stmt->close();
+    $transaction_stmt->close();
     $con->close();
 
     system_message("<h1>Successfully rebuild ActivityStream from ".$amount." log entries.");
