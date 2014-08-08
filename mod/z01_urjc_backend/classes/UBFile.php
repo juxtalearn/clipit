@@ -88,9 +88,15 @@ class UBFile extends UBItem {
 
     /**
      * Saves this instance into the system.
+     *
+     * @param bool $double_save defaults to false. This param has no effect
+     * in the current implementation and is just added for compatibility reasons to UBFile's ancestors.
      * @return bool|int Returns id of saved instance, or false if error.
      */
-    protected function save() {
+    protected function save($double_save=false) {
+        if ( $double_save !== false) { //just to ensure that everybody knows about useless usage of parameters
+            error_log("WARNING: double_save parameter has been used on UBFile. Please note this has currently no effect!!");
+        }
         if(!empty($this->id)) {
             if(!$elgg_file = new ElggFile($this->id)) {
                 return false;
