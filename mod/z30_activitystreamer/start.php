@@ -15,12 +15,59 @@
 		$_SESSION['transaction_artifact'] = array();
         $con=mysqli_connect($CONFIG->dbhost,$CONFIG->dbuser,$CONFIG->dbpass,$CONFIG->dbname);
         $transaction_stmt = $con->prepare("INSERT DELAYED INTO `".$_SESSION['activity_table']."` ".
-            "(transaction_id, json, actor_id, group_id, course_id, activity_id, verb, role, timestamp) ".
-            "VALUES (?,?,?,?,?,?,?,?,?)");
+            "(transaction_id, json, actor_id, object_id, group_id, course_id, activity_id, verb, role, timestamp) ".
+            "VALUES (?,?,?,?,?,?,?,?,?,?)");
         $logging_stmt = $con->prepare("INSERT DELAYED INTO `".$_SESSION['logging_table']."` ".
             "(object_id, object_title, transaction_id, object_class, object_type, object_subtype, event, time, ip_address, user_id, user_name, access_id, enabled, owner_guid, content, group_id, course_id, activity_id, role) ".
             "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
+        createTables();
+    }
 
+    function createTables() {
+        global $con;
+        mysqli_query($con,"CREATE TABLE IF NOT EXISTS `".$_SESSION['logging_table']."` (".
+            "`log_id` int(255) NOT NULL AUTO_INCREMENT,".
+            "`object_id` int(255) NOT NULL, ".
+            "`object_title` varchar(255) NOT NULL, ".
+            "`transaction_id` varchar(255) NOT NULL, ".
+            "`object_class` varchar(255) NOT NULL, ".
+            "`object_type` varchar(255) NOT NULL, ".
+            "`object_subtype` varchar(255) NOT NULL, ".
+            "`event` varchar(255) NOT NULL, ".
+            "`time` varchar(255) NOT NULL, ".
+            "`ip_address` varchar(255) NOT NULL, ".
+            "`user_id` int(255) NOT NULL, ".
+            "`user_name` varchar(255) NOT NULL, ".
+            "`access_id` int(255) NOT NULL, ".
+            "`enabled` varchar(255) NOT NULL, ".
+            "`owner_guid` int(255) NOT NULL, ".
+            "`content` longtext NOT NULL, ".
+            "`group_id` int(255) NOT NULL, ".
+            "`course_id` int(255) NOT NULL, ".
+            "`activity_id` int(255) NOT NULL, ".
+            "`role` varchar(255) NOT NULL, ".
+            "PRIMARY KEY (`log_id`) ".
+            ") ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;");
+        mysqli_query($con, "CREATE TABLE IF NOT EXISTS `".$_SESSION['activity_table']."` (".
+            "`stream_id` int(255) NOT NULL AUTO_INCREMENT,".
+            "`transaction_id` varchar(255) NOT NULL, ".
+            "`json` longtext NOT NULL, ".
+            "`actor_id` int(255) NOT NULL, ".
+            "`object_id` int(255) NOT NULL, ".
+            "`group_id` int(255) NOT NULL, ".
+            "`course_id` int(255) NOT NULL, ".
+            "`activity_id` int(255) NOT NULL, ".
+            "`verb` varchar(255) NOT NULL, ".
+            "`role` varchar(255) NOT NULL, ".
+            "`timestamp` varchar(255) NOT NULL, ".
+            "PRIMARY KEY (`stream_id`), ".
+            "PRIMARY KEY (`stream_id`), ".
+            "KEY `actor_id` (`actor_id`), ".
+            "KEY `object_id` (`object_id`), ".
+            "KEY `group_id` (`group_id`), ".
+            "KEY `activity_id` (`activity_id`), ".
+            "KEY `verb` (`verb`) ".
+            ") ENGINE=MyISAM DEFAULT CHARSET=utf8 DEFAULT COLLATE utf8_general_ci AUTO_INCREMENT=1;");
     }
 
     function is_session_started()
@@ -129,6 +176,9 @@
                 if (!is_null($elgg_object)) {
                     $object_title = $elgg_object->title;
                 }
+                else {
+                    $object_title = "none";
+                }
             }
             else {
                 $object_title = $object_subtype;
@@ -192,30 +242,7 @@
             else {
                 $object_content = urlencode($object_content);
             }
-            //If the table doesn't exist, we need to create it...
-//            mysqli_query($con,"CREATE TABLE IF NOT EXISTS `".$log_table."` (".
-//                                  "`log_id` int(255) NOT NULL AUTO_INCREMENT,".
-//                                  "`object_id` int(255) NOT NULL, ".
-//                                  "`object_title` varchar(255) NOT NULL, ".
-//                                  "`transaction_id` varchar(255) NOT NULL, ".
-//                                  "`object_class` varchar(255) NOT NULL, ".
-//                                  "`object_type` varchar(255) NOT NULL, ".
-//                                  "`object_subtype` varchar(255) NOT NULL, ".
-//                                  "`event` varchar(255) NOT NULL, ".
-//                                  "`time` varchar(255) NOT NULL, ".
-//                                  "`ip_address` varchar(255) NOT NULL, ".
-//                                  "`user_id` int(255) NOT NULL, ".
-//                                  "`user_name` varchar(255) NOT NULL, ".
-//                                  "`access_id` int(255) NOT NULL, ".
-//                                  "`enabled` varchar(255) NOT NULL, ".
-//                                  "`owner_guid` int(255) NOT NULL, ".
-//                                  "`content` longtext NOT NULL, ".
-//                                  "`group_id` int(255) NOT NULL, ".
-//                                  "`course_id` int(255) NOT NULL, ".
-//                                  "`activity_id` int(255) NOT NULL, ".
-//                                  "`role` varchar(255) NOT NULL, ".
-//                                   "PRIMARY KEY (`log_id`) ".
-//                                ") ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;");
+           //4 If the table doesn't exist, we need to create it...
 
             $logging_stmt->bind_param('iisssssssisisisiiis', $object_id, $object_title, $transaction_id, $object_class, $object_type, $object_subtype, $event, $time, $ip_address, $performed_by,
                                                              $user_name, $access_id, $enabled, $owner_guid, $object_content, $group_id, $course_id, $activity_id, $role);

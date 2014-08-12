@@ -11,14 +11,13 @@ action_gatekeeper("rebuild");
 include_once(elgg_get_plugins_path(). "z30_activitystreamer" . DIRECTORY_SEPARATOR . "lib" . DIRECTORY_SEPARATOR . "logProcessing.php");
 $_SESSION['transaction'] = "";
 $affirmative = get_input('affirmative', 1);
+$_SESSION['activity_table'] = $CONFIG->dbprefix."activitystreams";
 if (isset($affirmative) && $affirmative) {
     global $CONFIG;
+    global $con;
+    global $transaction_stmt;
     $act_table = $_SESSION['activity_table'];
-    $con=mysqli_connect($CONFIG->dbhost,$CONFIG->dbuser,$CONFIG->dbpass,$CONFIG->dbname);
     createActivityTable($con, $act_table);
-    $transaction_stmt = $con->prepare("INSERT INTO `".$act_table."` ".
-        "(transaction_id, json, actor_id, group_id, course_id, activity_id, verb, role, timestamp) ".
-        "VALUES (?,?,?,?,?,?,?,?,?)");
     $log_table = $_SESSION['logging_table'];
     mysqli_query($con, "TRUNCATE ".$act_table.";");
     $result = mysqli_query($con, "SELECT * FROM ".$log_table." ORDER BY log_id;");
@@ -40,9 +39,11 @@ if (isset($affirmative) && $affirmative) {
                 else {
                     error_log("\n\n".$current_ID.": ".$action['verb'].build_log_string());
                 }
+                /*
                 if ($action['verb'] == ClipitPost::SUBTYPE) {
                     error_log("\n\n".$current_ID.": ".$action['verb'].build_log_string());
                 }
+                */
                 $_SESSION['transaction'] = "";
                 $current_ID = $new_ID;
             }

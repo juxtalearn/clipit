@@ -7,7 +7,7 @@ function storeJSON($action) {
 	$activity_json = json_encode($action);
     createActivityTable($con, $_SESSION['activity_table']);
     if ($transaction_stmt && $action['verb'] != "Ignore") {
-        $transaction_stmt->bind_param('ssiiiissi', $action['transactionId'], $activity_json, $action['actor']['actorId'], $action['object']['groupId'],
+        $transaction_stmt->bind_param('ssiiiiissi', $action['transactionId'], $activity_json, $action['actor']['actorId'], $action['object']['objectId'], $action['object']['groupId'],
             $action['object']['courseId'], $action['object']['activityId'], $action['verb'], $action['actor']['objectType'], $action['published']);
         $transaction_stmt->execute();
     }
@@ -22,13 +22,20 @@ function createActivityTable($con, $act_table) {
         "`transaction_id` varchar(255) NOT NULL, ".
         "`json` longtext NOT NULL, ".
         "`actor_id` int(255) NOT NULL, ".
+        "`object_id` int(255) NOT NULL, ".
         "`group_id` int(255) NOT NULL, ".
         "`course_id` int(255) NOT NULL, ".
         "`activity_id` int(255) NOT NULL, ".
         "`verb` varchar(255) NOT NULL, ".
         "`role` varchar(255) NOT NULL, ".
         "`timestamp` varchar(255) NOT NULL, ".
-        "PRIMARY KEY (`stream_id`) ".
+        "PRIMARY KEY (`stream_id`), ".
+        "PRIMARY KEY (`stream_id`), ".
+        "KEY `actor_id` (`actor_id`), ".
+        "KEY `object_id` (`object_id`), ".
+        "KEY `group_id` (`group_id`), ".
+        "KEY `activity_id` (`activity_id`), ".
+        "KEY `verb` (`verb`) ".
         ") ENGINE=MyISAM DEFAULT CHARSET=utf8 DEFAULT COLLATE utf8_general_ci AUTO_INCREMENT=1;");
 }
 function processURL($url) {
@@ -368,7 +375,7 @@ function convertLogTransactionToActivityStream($transaction) {
                 $l = 1;
             }
             $verb = "added";
-            $title = $transaction[$l]['ObjectTitle'];
+            $title = $transaction[$l]['ObjectSubtype'];
             $values = $transaction[$l]['Content'];
             if (!(strpos($title,"-") !== false)) {
                 error_log($transaction_id."\nTitle kaputt: ".$title);
@@ -433,7 +440,7 @@ function convertLogTransactionToActivityStream($transaction) {
         $object['activityId'] = 0;
     }
     if (is_null($actor['objectType']) || $actor['objectType'] == "") {
-        $actor['objectType'] = "n/a";
+        $actor['objectType'] = "none";
     }
     if (is_null($verb) || $verb == "") {
         $verb = "Unidentified";
