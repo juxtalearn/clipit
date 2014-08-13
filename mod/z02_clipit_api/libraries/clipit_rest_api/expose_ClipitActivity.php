@@ -57,26 +57,26 @@ function expose_activity_functions() {
         array("id" => array("type" => "int", "required" => true)), "Gets Teachers from an Activity", "GET", false, true
     );
     expose_function(
-        $api_suffix . "add_called_users", $class_suffix . "add_called_users", array(
+        $api_suffix . "add_students", $class_suffix . "add_students", array(
             "id" => array("type" => "int", "required" => true),
             "user_array" => array("type" => "array", "required" => true)
-        ), "Add Called Users by Id to an Activity", "POST", false, true
+        ), "Add Students to an activity", "POST", false, true
     );
     expose_function(
-        $api_suffix . "set_called_users", $class_suffix . "set_called_users", array(
+        $api_suffix . "set_students", $class_suffix . "set_students", array(
             "id" => array("type" => "int", "required" => true),
             "user_array" => array("type" => "array", "required" => true)
-        ), "Set Called Users by Id to an Activity", "POST", false, true
+        ), "Set student_array of an Activity", "POST", false, true
     );
     expose_function(
-        $api_suffix . "remove_called_users", $class_suffix . "remove_called_users", array(
+        $api_suffix . "remove_students", $class_suffix . "remove_students", array(
             "id" => array("type" => "int", "required" => true),
             "user_array" => array("type" => "array", "required" => true)
-        ), "Removes Called Users by Id from an Activity", "POST", false, true
+        ), "Removes students  by Id from an Activity", "POST", false, true
     );
     expose_function(
-        $api_suffix . "get_called_users", $class_suffix . "get_called_users",
-        array("id" => array("type" => "int", "required" => true)), "Gets Called Users from an Activity", "GET", false,
+        $api_suffix . "get_students", $class_suffix . "get_students",
+        array("id" => array("type" => "int", "required" => true)), "Gets Students from an Activity", "GET", false,
         true
     );
     expose_function(
