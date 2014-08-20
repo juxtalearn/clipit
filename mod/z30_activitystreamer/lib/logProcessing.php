@@ -190,7 +190,7 @@ function convertLogTransactionToActivityStream($transaction) {
 
 			$values = findValue($transaction, "create", $transaction[$l]['ObjectSubtype']."-destination", "Content", FALSE);
             if (!(strpos($values,"-") !== false) && !($values == "new")) {
-                error_log("Missing destination line!");
+//                error_log("Missing destination line!");
                 $verb = "Unidentified";
                 break;
             }
@@ -345,7 +345,7 @@ function convertLogTransactionToActivityStream($transaction) {
                 $values = $transaction[0]['Content'];
                 if (!(strpos($title,"-") !== false)) {
                     // error_log($transaction_id."\nRelationship ".$relationship_id.": ".$title.print_r($transaction, true));
-                    error_log($transaction_id."FoundNoTitle\n\n\n\n");
+//                    error_log($transaction_id."FoundNoTitle\n\n\n\n");
                     $verb = "Unidentified";
                     break;
                 }
@@ -353,7 +353,7 @@ function convertLogTransactionToActivityStream($transaction) {
                     $types = preg_split('/[-]/', $title);
                 }
                 if (!(strpos($values,"-") !== false)) {
-                    error_log($transaction_id."FoundNoContent\n\n\n\n");
+//                    error_log($transaction_id."FoundNoContent\n\n\n\n");
                     $verb = "Unidentified";
                     break;
                 }
@@ -378,7 +378,7 @@ function convertLogTransactionToActivityStream($transaction) {
             $title = $transaction[$l]['ObjectSubtype'];
             $values = $transaction[$l]['Content'];
             if (!(strpos($title,"-") !== false)) {
-                error_log($transaction_id."\nTitle kaputt: ".$title);
+//                error_log($transaction_id."\nTitle kaputt: ".$title);
                 $verb = "Unidentified";
                 break;
             }
@@ -386,7 +386,7 @@ function convertLogTransactionToActivityStream($transaction) {
                 $types = preg_split('/[-]/', $title);
             }
             if (!(strpos($values,"-") !== false)) {
-                error_log($transaction_id."\nValues kaputt");
+//                error_log($transaction_id."\nValues kaputt");
                 $verb = "Unidentified";
                 break;
             }
