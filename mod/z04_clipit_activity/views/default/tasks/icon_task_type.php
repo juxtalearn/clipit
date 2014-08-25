@@ -33,6 +33,10 @@ switch($type){
         $title = elgg_echo('task:storyboard_feedback');
         $icon = "signal";
         break;
+    case ClipitTask::TYPE_OTHER:
+        $title = elgg_echo('task:other');
+        $icon = "question-circle";
+        break;
 }
 ?>
 <i style="<?php echo $vars['size']!==false ? 'font-size: 14px;' : '';?>" class="blue fa fa-<?php echo $icon; ?>" title="<?php echo $title; ?>"></i>

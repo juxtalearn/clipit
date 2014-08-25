@@ -11,10 +11,6 @@ $groups_id = ClipitActivity::get_groups($activity->id);
 $user_owner = elgg_get_logged_in_user_guid();
 $user_group = ClipitGroup::get_from_user_activity($user_owner, $activity->id);
 
-if(!$user_group):
-    // Create group form
-    echo elgg_view_form('group/create', array(), array('entity'  => $activity));
-endif;
 ?>
 <div class="row">
 <?php foreach($groups_id as $group_id):

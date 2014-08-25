@@ -110,12 +110,12 @@ $(function(){
                 user_ids.push($(this).data("user"));
             });
             sender_list.find(".input-users").val(user_ids);
-            elgg.action('activity/admin/groups_setup', {
-                data: $(".groups-form").serialize()
-            });
             if(sender_list.find("li").length == 0){
                 sender_list.find(".delete-group").click();
             }
+            elgg.action('activity/admin/groups_setup', {
+                data: $(".groups-form").serialize()
+            });
         }
     }).disableSelection();
     };

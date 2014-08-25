@@ -29,12 +29,14 @@ $user_id = elgg_get_logged_in_user_guid();
     ));
     ?>
     <!-- My activities dropdown menu -->
-    <?php if($my_activities = ClipitUser::get_activities($user_id)):?>
-        <ul id="menu_activities" class="dropdown-menu" role="menu" aria-labelledby="activities">
+    <ul id="menu_activities" class="dropdown-menu" role="menu" aria-labelledby="activities">
     <?php
+    $activities_found = false;
+    if($my_activities = ClipitUser::get_activities($user_id)):
     foreach($my_activities as $activity_id):
         $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
         if($activity->status != 'closed'):
+            $activities_found = true;
             $group_id = ClipitGroup::get_from_user_activity($user_id, $activity_id);
             $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
             ?>
@@ -56,7 +58,13 @@ $user_id = elgg_get_logged_in_user_guid();
             <li role="presentation" class="divider"></li>
         <?php endif; ?>
     <?php endforeach; ?>
-        </ul>
     <?php endif; ?>
+    <?php $activities_found = false; if(!$activities_found): ?>
+        <li role="presentation"><a>
+            <small class="show">Theare are no activity atm</small>
+            </a>
+        </li>
+    <?php endif;?>
+    </ul>
 </li>
 <li class="separator">|</li>
