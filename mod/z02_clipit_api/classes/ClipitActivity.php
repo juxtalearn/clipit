@@ -37,12 +37,17 @@ class ClipitActivity extends UBItem {
     const STATUS_ENROLL = "enroll";
     const STATUS_ACTIVE = "active";
     const STATUS_CLOSED = "closed";
+    // Grouping Modes
+    const GROUP_MODE_TEACHER = "teacher";
+    const GROUP_MODE_SYSTEM = "system";
+    const GROUP_MODE_STUDENT = "student";
     // Class variables
     public $color = "";
     public $status = "";
     public $tricky_topic = 0;
     public $start = 0;
     public $end = 0;
+    public $group_mode = "";
     public $max_group_size = 0;
     public $teacher_array = array();
     public $student_array = array();
@@ -63,6 +68,7 @@ class ClipitActivity extends UBItem {
         $this->tricky_topic = (int)$elgg_entity->get("tricky_topic");
         $this->start = (int)$elgg_entity->get("start");
         $this->end = (int)$elgg_entity->get("end");
+        $this->group_mode = (string)$elgg_entity->get("group_mode");
         $this->max_group_size = (int)$elgg_entity->get("max_group_size");
         $this->status = (string)static::calc_status($this->start, $this->end);
         $this->teacher_array = static::get_teachers($this->id);
@@ -109,6 +115,7 @@ class ClipitActivity extends UBItem {
         $elgg_entity->set("tricky_topic", (int)$this->tricky_topic);
         $elgg_entity->set("start", (int)$this->start);
         $elgg_entity->set("end", (int)$this->end);
+        $elgg_entity->set("group_mode", (string)$this->group_mode);
         $elgg_entity->set("max_group_size", (int)$this->max_group_size);
     }
 
