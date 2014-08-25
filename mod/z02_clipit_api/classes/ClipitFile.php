@@ -40,8 +40,8 @@ class ClipitFile extends UBFile {
      * Saves this instance to the system.
      * @return bool|int Returns id of saved instance, or false if error.
      */
-    protected function save() {
-        parent::save();
+    protected function save($double_save=false) {
+        parent::save($double_save);
         static::set_tags($this->id, $this->tag_array);
         static::set_labels($this->id, $this->label_array);
         return $this->id;

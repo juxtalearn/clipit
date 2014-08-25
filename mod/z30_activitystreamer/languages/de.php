@@ -17,7 +17,6 @@
 			'activitystreamer:modify:failed' => 'Einstellungen konnten nicht ge&auml;ndert werden.',
 			'activitystreamer:failed:noparams' => 'Fehler: Daten sind nicht korrekt oder unvollst&auml;ndig.',
 			'item:object:modactivitystreamer' => 'ActivityStreamer Objekt'
-
 	);
 					
 	add_translation("de",$german);

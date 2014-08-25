@@ -4,17 +4,82 @@
 	function activitystreamer_init()
 	{
 		global $CONFIG;
+        global $con;
+        global $transaction_stmt;
+        global $logging_stmt;
         elgg_register_page_handler('activitystreamer','activitystreamer_page_handler');
         $_SESSION['logging_table'] = $CONFIG->dbprefix."extended_log";
 		$_SESSION['activity_table'] = $CONFIG->dbprefix."activitystreams";
 		$_SESSION['logged'] = false;
-		$_SESSION['enabled'] = false;
+		$_SESSION['enabled'] = true;
 		$_SESSION['transaction_artifact'] = array();
-	}
+        $con=mysqli_connect($CONFIG->dbhost,$CONFIG->dbuser,$CONFIG->dbpass,$CONFIG->dbname);
+        $transaction_stmt = $con->prepare("INSERT DELAYED INTO `".$_SESSION['activity_table']."` ".
+            "(transaction_id, json, actor_id, object_id, group_id, course_id, activity_id, verb, role, timestamp) ".
+            "VALUES (?,?,?,?,?,?,?,?,?,?)");
+        $logging_stmt = $con->prepare("INSERT DELAYED INTO `".$_SESSION['logging_table']."` ".
+            "(object_id, object_title, transaction_id, object_class, object_type, object_subtype, event, time, ip_address, user_id, user_name, access_id, enabled, owner_guid, content, group_id, course_id, activity_id, role) ".
+            "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
+        createTables();
+    }
+
+    function createTables() {
+        global $con;
+        mysqli_query($con,"CREATE TABLE IF NOT EXISTS `".$_SESSION['logging_table']."` (".
+            "`log_id` int(255) NOT NULL AUTO_INCREMENT,".
+            "`object_id` int(255) NOT NULL, ".
+            "`object_title` varchar(255) NOT NULL, ".
+            "`transaction_id` varchar(255) NOT NULL, ".
+            "`object_class` varchar(255) NOT NULL, ".
+            "`object_type` varchar(255) NOT NULL, ".
+            "`object_subtype` varchar(255) NOT NULL, ".
+            "`event` varchar(255) NOT NULL, ".
+            "`time` varchar(255) NOT NULL, ".
+            "`ip_address` varchar(255) NOT NULL, ".
+            "`user_id` int(255) NOT NULL, ".
+            "`user_name` varchar(255) NOT NULL, ".
+            "`access_id` int(255) NOT NULL, ".
+            "`enabled` varchar(255) NOT NULL, ".
+            "`owner_guid` int(255) NOT NULL, ".
+            "`content` longtext NOT NULL, ".
+            "`group_id` int(255) NOT NULL, ".
+            "`course_id` int(255) NOT NULL, ".
+            "`activity_id` int(255) NOT NULL, ".
+            "`role` varchar(255) NOT NULL, ".
+            "PRIMARY KEY (`log_id`) ".
+            ") ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;");
+        mysqli_query($con, "CREATE TABLE IF NOT EXISTS `".$_SESSION['activity_table']."` (".
+            "`stream_id` int(255) NOT NULL AUTO_INCREMENT,".
+            "`transaction_id` varchar(255) NOT NULL, ".
+            "`json` longtext NOT NULL, ".
+            "`actor_id` int(255) NOT NULL, ".
+            "`object_id` int(255) NOT NULL, ".
+            "`group_id` int(255) NOT NULL, ".
+            "`course_id` int(255) NOT NULL, ".
+            "`activity_id` int(255) NOT NULL, ".
+            "`verb` varchar(255) NOT NULL, ".
+            "`role` varchar(255) NOT NULL, ".
+            "`timestamp` varchar(255) NOT NULL, ".
+            "PRIMARY KEY (`stream_id`), ".
+            "PRIMARY KEY (`stream_id`), ".
+            "KEY `actor_id` (`actor_id`), ".
+            "KEY `object_id` (`object_id`), ".
+            "KEY `group_id` (`group_id`), ".
+            "KEY `activity_id` (`activity_id`), ".
+            "KEY `verb` (`verb`) ".
+            ") ENGINE=MyISAM DEFAULT CHARSET=utf8 DEFAULT COLLATE utf8_general_ci AUTO_INCREMENT=1;");
+    }
 
     function is_session_started()
     {
-        return session_status() === PHP_SESSION_ACTIVE ? TRUE : FALSE;
+        if ( php_sapi_name() !== 'cli' ) {
+            if ( version_compare(phpversion(), '5.4.0', '>=') ) {
+                return session_status() === PHP_SESSION_ACTIVE ? TRUE : FALSE;
+            } else {
+                return session_id() === '' ? FALSE : TRUE;
+            }
+        }
+        return FALSE;
     }
 
 
@@ -38,7 +103,6 @@
             'filter' => "",
         );
         $body = elgg_view_layout('one_column', $params);
-
         echo elgg_view_page($title, $body);
 
 	}
@@ -58,9 +122,8 @@
 	
 	//Because of PHP constraints, we now implement an indirect approach and use the mysql db as a buffer. 
 	function extended_log($object, $event) {
-		global $CONFIG;
+        global $logging_stmt;
         if ( is_session_started() === FALSE ) session_start();
-        $log_table = $_SESSION['logging_table'];
 
         if ($object instanceof Loggable) {
             $group_id = 0;
@@ -77,11 +140,18 @@
             }
             else if ($object_class == "ElggRelationship") {
                 $rel = get_relationship($object_id);
+                $source_id = $rel->guid_one;
+                $source = get_entity($source_id);
                 $target_id = $rel->guid_two;
                 $target = get_entity($target_id);
                 if (!is_null($target) && $target instanceof ElggEntity) {
                     if ($target->getSubtype() == ClipitGroup::SUBTYPE) {
-                        $object_content = "new";
+                        if ($source->getSubtype() == ClipitActivity::SUBTYPE) {
+                            $object_content = $source_id."-".$target_id;
+                        }
+                        else {
+                            $object_content = "new";
+                        }
                         $group_id = $target_id;
                     }
                     else if ($target->getSubtype() == ClipitActivity::SUBTYPE) {
@@ -89,34 +159,12 @@
                         $activity_id = $target_id;
                     }
                     else {
-                        $object_content = $target_id;
+                        $object_content = $source_id."-".$target_id;
                     }
                 }
             }
             else {
                 $object_content = $object->description;
-                $temp_array = get_entity_relationships($object_id, true);
-                foreach($temp_array as $rel) {
-                    $rel_id = $rel->guid_two;
-                    $target = get_entity($rel_id);
-                    if (!is_null($target) && $target instanceof ElggEntity) {
-                        if ($target->getSubtype() == ClipitPost::SUBTYPE || $target->getSubtype() == ClipitComment::SUBTYPE) {
-                            $rel_array = get_entity_relationships($rel_id, true);
-                            foreach($rel_array as $rel2) {
-                                $target_id2 = $rel2->guid_two;
-                                $target2 = get_entity($target_id2);
-                                if (!is_null($target2) && $target2 instanceof ElggEntity) {
-                                    if ($target2->getSubtype() == ClipitGroup::SUBTYPE) {
-                                        $group_id = $target_id2;
-                                    }
-                                    else if ($target2->getSubtype() == ClipitActivity::SUBTYPE) {
-                                        $activity_id = $target_id2;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
             }
             if ($object_content == null) {$object_content = "";}
             $object_type = $object->getType();
@@ -128,6 +176,9 @@
                 if (!is_null($elgg_object)) {
                     $object_title = $elgg_object->title;
                 }
+                else {
+                    $object_title = "none";
+                }
             }
             else {
                 $object_title = $object_subtype;
@@ -135,6 +186,9 @@
             $event = sanitise_string($event);
             if (is_null($event)) {$event = "";}
             $time = time();
+            if (is_not_null($object->time_created) && $object->time_created != "") {
+                $time = $object->time_created;
+            }
             $ip_address = sanitise_string($_SERVER['REMOTE_ADDR']);
             if (is_null($ip_address)) {$ip_address = "";}
             $performed_by = (int)elgg_get_logged_in_user_guid();
@@ -159,67 +213,50 @@
             }
 
             $transaction_id = $_SESSION['tid'];
-            if (is_null($transaction_id) || $transaction_id == "") {
-                $transaction_id = "none";
-            }
-
-
             $role = "";
-            if ($object_subtype == ClipitPost::SUBTYPE) {
-                $role = print_r(ClipitUser::get_properties($performed_by, array("role")));
+            $user_properties = ClipitUser::get_properties($performed_by, array("role"));
+            if (is_not_null($user_properties) && !empty($user_properties['role'])) {
+                $role = $user_properties['role'];
             }
-            $con=mysqli_connect($CONFIG->dbhost,$CONFIG->dbuser,$CONFIG->dbpass,$CONFIG->dbname);
-            $result = mysqli_query($con,"SHOW COLUMNS FROM `".$log_table."` LIKE 'user_name';");
-            $exists_username = (mysqli_num_rows($result))?TRUE:FALSE;
-            $result = mysqli_query($con,"SHOW COLUMNS FROM `".$log_table."` LIKE 'object_title';");
-            $exists_object_title = (mysqli_num_rows($result))?TRUE:FALSE;
-            if (!$exists_username || !$exists_object_title) {
-                if ($stmt = mysqli_prepare($con, "RENAME TABLE ".$log_table." TO ".$log_table."_".$time.";")) {
-                    mysqli_stmt_execute($stmt);
-                }
-                else {
-                    system_message($stmt->error);
-                }
-                $stmt->close();
+//
+//            $result = mysqli_query($con,"SHOW COLUMNS FROM `".$log_table."` LIKE 'user_name';");
+//            if ($result) {
+//                $exists_username = (mysqli_num_rows($result))?TRUE:FALSE;
+//            }
+//            $result = mysqli_query($con,"SHOW COLUMNS FROM `".$log_table."` LIKE 'object_title';");
+//            if ($result) {
+//                $exists_object_title = (mysqli_num_rows($result))?TRUE:FALSE;
+//            }
+//            if (!$exists_username || !$exists_object_title) {
+//                if ($stmt = mysqli_prepare($con, "RENAME TABLE ".$log_table." TO ".$log_table."_".$time.";")) {
+//                    mysqli_stmt_execute($stmt);
+//                }
+//                else {
+//                    error_log($stmt->error);
+//                }
+//                $stmt->close();
+//            }
+            if ($object_content == null) {
+                $object_content = "";
             }
+            else {
+                $object_content = urlencode($object_content);
+            }
+           //4 If the table doesn't exist, we need to create it...
 
-            //If the table doesn't exist, we need to create it...
-            mysqli_query($con,"CREATE TABLE IF NOT EXISTS `".$log_table."` (".
-                                  "`log_id` int(255) NOT NULL AUTO_INCREMENT,".
-                                  "`object_id` int(255) NOT NULL, ".
-                                  "`object_title` varchar(255) NOT NULL, ".
-                                  "`transaction_id` varchar(255) NOT NULL, ".
-                                  "`object_class` varchar(255) NOT NULL, ".
-                                  "`object_type` varchar(255) NOT NULL, ".
-                                  "`object_subtype` varchar(255) NOT NULL, ".
-                                  "`event` varchar(255) NOT NULL, ".
-                                  "`time` varchar(255) NOT NULL, ".
-                                  "`ip_address` varchar(255) NOT NULL, ".
-                                  "`user_id` int(255) NOT NULL, ".
-                                  "`user_name` varchar(255) NOT NULL, ".
-                                  "`access_id` int(255) NOT NULL, ".
-                                  "`enabled` varchar(255) NOT NULL, ".
-                                  "`owner_guid` int(255) NOT NULL, ".
-                                  "`content` longtext NOT NULL, ".
-                                  "`group_id` int(255) NOT NULL, ".
-                                  "`course_id` int(255) NOT NULL, ".
-                                  "`activity_id` int(255) NOT NULL, ".
-                                  "`role` varchar(255) NOT NULL, ".
-                                   "PRIMARY KEY (`log_id`) ".
-                                ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;");
-
-
-            mysqli_query($con,"INSERT INTO `".$log_table."` ".
+            $logging_stmt->bind_param('iisssssssisisisiiis', $object_id, $object_title, $transaction_id, $object_class, $object_type, $object_subtype, $event, $time, $ip_address, $performed_by,
+                                                             $user_name, $access_id, $enabled, $owner_guid, $object_content, $group_id, $course_id, $activity_id, $role);
+            $logging_stmt->execute();
+/*            insert_data("INSERT DELAYED INTO `".$_SESSION['logging_table']."` ".
                                 "(object_id, object_title, transaction_id, object_class, object_type, object_subtype, event, time, ip_address, user_id, user_name, access_id, enabled, owner_guid, content, group_id, course_id, activity_id, role) ".
                                 "VALUES (".$object_id.", '".$object_title."', '".$transaction_id."', '".$object_class."', '".$object_type."', '".$object_subtype."', '".$event."', '".$time."', '".$ip_address."', '".$performed_by.
                                 "', '".$user_name."', ".$access_id.", '".$enabled."', ".$owner_guid.", '".$object_content."', ".$group_id.", ".$course_id.", ".$activity_id.", '".$role."');");
 
-
-            mysqli_store_result($con);
+*/
             $_SESSION['transaction_artifact'][] = array('ObjectId' => $object_id, 'ObjectTitle' => $object_title, 'ObjectType' => $object_type, 'ObjectSubtype' => $object_subtype, 'ObjectClass' => $object_class, 'OwnerGUID' => $owner_guid,
                                                     'GroupId' => $group_id, 'CourseId' => $course_id, 'ActivityId' => $activity_id, 'Event' => $event, 'Content' => $object_content,
                                                     'Timestamp' => $time, 'UserId'=> $performed_by, 'UserName'=> $user_name, 'IPAddress' => $ip_address, 'Role' => $role, 'TransactionId' => $transaction_id);
-            $con->close();
+//            $con->close();
             //If we actually logged something, we need to let the transaction handler know
             $_SESSION['logged'] = true;
         }
@@ -238,14 +275,11 @@
 	
 	function transaction_handling()
 	{
-        include_once(elgg_get_plugins_path(). "z30_activitystreamer" . DIRECTORY_SEPARATOR . "lib" . DIRECTORY_SEPARATOR . "logProcessing.php");
-		global $CONFIG;
-        $act_table = $_SESSION['activity_table'];
-        $con=mysqli_connect($CONFIG->dbhost,$CONFIG->dbuser,$CONFIG->dbpass,$CONFIG->dbname);
-        $stmt = $con->prepare("INSERT INTO `".$act_table."` ".
-            "(transaction_id, json, actor_id, group_id, course_id, activity_id, verb, timestamp) ".
-            "VALUES (?,?,?,?,?,?,?,?)");
-    	$act_table = $_SESSION['activity_table'];
+   //     include_once(elgg_get_plugins_path(). "z30_activitystreamer" . DIRECTORY_SEPARATOR . "lib" . DIRECTORY_SEPARATOR . "logProcessing.php");
+        include_once(elgg_get_plugins_path(). "z30_activitystreamer/lib/logProcessing.php");
+		global $con;
+        global $transaction_stmt;
+       	$act_table = $_SESSION['activity_table'];
 		$logged = $_SESSION['logged'];
 
 		if($_SESSION['enabled']) {
@@ -256,10 +290,12 @@
 				//Then we put this new information into a separate table, coupled with ids for access management and timestamps for ordering purposes
 				//Unless we were unable to identify the activity
 				if (!($action['verb'] == 'Unidentified')) {
-					storeJSON($action, $act_table, $con, $stmt);
+					storeJSON($action);
 				}
-
-			}
+                else {
+                    error_log("Found no corresponding activity for ".print_r($action_particles, true));
+                }
+ 			}
 			/*
             elseif (!transactionExists($transaction_id, $con)) {
 				$url = $_SERVER[ "REQUEST_URI" ];
@@ -275,7 +311,9 @@
 		$con->close();
 	}
 
-	function extended_log_default_logger($event, $object_type, $object) {
+
+
+function extended_log_default_logger($event, $object_type, $object) {
    		extended_log($object['object'], $object['event']);
 	   	return true;
  	}

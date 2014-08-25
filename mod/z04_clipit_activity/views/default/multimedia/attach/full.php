@@ -16,7 +16,7 @@ $activity_id = ClipitGroup::get_activity($group->id);
 $href = "clipit_activity/{$activity_id}/group/{$group->id}/multimedia/view";
 ?>
 <div class="attachment-files message-owner" style="overflow: hidden;">
-    <span class="total-files"><i class="fa fa-paperclip"></i> <?php echo count($entities);?> multimedia attachments</span>
+    <span class="total-files"><i class="fa fa-paperclip"></i> <?php echo count($entities) . ' '.(count($entities)>1?elgg_echo('multimedia:attachments'):elgg_echo('multimedia:attachment'))?> </span>
     <?php foreach($entities as $entity_id):
         $object = ClipitSite::lookup($entity_id);
         $entity = array_pop($object['subtype']::get_by_id(array($entity_id)));

@@ -137,6 +137,7 @@ class UBItem {
         $elgg_entity->set("url", (string)$this->url);
         $elgg_entity->set("time_created",(int)$this->time_created);
         $elgg_entity->set("access_id", ACCESS_PUBLIC);
+
     }
 
     /* Static Functions */
