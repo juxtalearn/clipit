@@ -55,7 +55,9 @@ foreach($activities as $activity):
         $activity_progress = 5;
     } elseif($activity_progress < 0){
         $activity_progress = 0;
-    }
+    } elseif($activity_progress > 100){
+    $activity_progress = 100;
+}
 ?>
     <div style="background: #<?php echo $activity->color;?>;padding: 10px;color: #fff">
         <div class="pull-right">

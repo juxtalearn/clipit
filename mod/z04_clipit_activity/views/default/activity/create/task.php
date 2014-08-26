@@ -19,7 +19,8 @@ switch($task_type){
         $task_types = array(
             'quiz_take' => elgg_echo('task:quiz_answer'),
             'video_upload' => elgg_echo('task:video_upload'),
-            'storyboard_upload' => elgg_echo('task:storyboard_upload')
+            'storyboard_upload' => elgg_echo('task:storyboard_upload'),
+            'other' => elgg_echo('task:other')
         );
         $input_array = "[{$id}]";
         $disabled = false;
