@@ -30,8 +30,11 @@ $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
     </div>
 </div>
 <div class="row">
+    <?php
+    $users_id = ClipitGroup::get_users($group->id);
+    ?>
     <div class="col-md-4">
-        <?php echo elgg_view("page/components/title_block", array('title' => elgg_echo("group:members"))); ?>
+        <?php echo elgg_view("page/components/title_block", array('title' => elgg_echo("group:members"), 'badge_text' => count($users_id))); ?>
         <ul>
         <?php
         $users_id = ClipitGroup::get_users($group->id);
