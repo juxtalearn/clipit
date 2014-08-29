@@ -12,10 +12,13 @@
  */
 $title = elgg_extract('title', $vars, '');
 $secondary_text = elgg_extract('secondary_text', $vars, '');
+$badge_text = elgg_extract('badge_text', $vars, '');
 ?>
 <h3 class="title-block">
     <?php echo $title; ?>
     <?php if($secondary_text): ?>
     <span class="pull-right blue-lighter"><?php echo $secondary_text; ?></span>
+    <?php elseif($badge_text): //at the moment mutual exclusive with secondary texts!?>
+    <span class="badge" style="font-size: xx-small;font-weight:normal;vertical-align: top;"><?php echo $badge_text; ?></span>
     <?php endif; ?>
 </h3>
