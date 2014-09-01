@@ -20,7 +20,7 @@ $intership_members = array(
             'description' => 'lorem ipsum.....',
         ),
         array(
-            'name' => 'Ángel Francisco',
+            'name' => 'Ángel F. Sánchez',
             'position' => 'Intership',
             'image' => "angel.png",
             'description' => 'lorem ipsum.....',

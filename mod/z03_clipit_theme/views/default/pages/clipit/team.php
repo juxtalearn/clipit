@@ -21,9 +21,9 @@ $team_members = array(
             'position' => 'Lead investigator',
             'description' => 'lorem ipsum.....',
             'social' => array(
-                'twitter' => 'account',
-                'youtube' => 'account',
-                'linkedin' => 'account'
+                'twitter' => 'EstefaniaURJC',
+                'youtube' => 'channel/UCAZfYqqx1pGvpyUaxikBlTw',
+                'linkedin' => 'pub/estefania-martin/4/2a9/90a'
             )
         ),
         array(
@@ -32,9 +32,9 @@ $team_members = array(
             'position' => 'Technical Project Manager',
             'description' => 'lorem ipsum.....',
             'social' => array(
-                'twitter' => 'account',
-                'youtube' => 'account',
-                'linkedin' => 'account'
+                'twitter' => 'pebs74',
+                'youtube' => 'channel/UC9hkD-wj4pQiSnyKjN0FSng',
+                'linkedin' => 'pub/pablo-llin%C3%A1s-arnaiz/4b/b43/b36'
             )
         ),
         array(
@@ -43,9 +43,9 @@ $team_members = array(
             'position' => 'Senior Web Developer',
             'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at tincidunt lectus, vel bibendum odio. Nam',
             'social' => array(
-                'twitter' => 'account',
-                'youtube' => 'account',
-                'linkedin' => 'account'
+                'twitter' => 'miguelangelgm91',
+                'youtube' => 'channel/UCAZfYqqx1pGvpyUaxikBlTw',
+                'linkedin' => 'pub/miguel-%C3%A1ngel-guti%C3%A9rrez-moreno/8b/311/24b'
             )
         ),
         array(
@@ -54,9 +54,8 @@ $team_members = array(
             'position' => 'Researcher',
             'description' => 'lorem ipsum.....',
             'social' => array(
-                'twitter' => 'account',
-                'youtube' => 'account',
-                'linkedin' => 'account'
+                'youtube' => 'channel/UCAZfYqqx1pGvpyUaxikBlTw',
+                'linkedin' => 'pub/isidoro-hern%C3%A1n/1b/12b/254'
             )
         )
     ),
@@ -67,9 +66,9 @@ $team_members = array(
             'position' => 'Researcher',
             'description' => 'lorem ipsum.....',
             'social' => array(
-                'twitter' => 'account',
-                'youtube' => 'account',
-                'linkedin' => 'account'
+                'twitter' => 'jaimeurquizaf',
+                'youtube' => 'channel/UCAZfYqqx1pGvpyUaxikBlTw',
+                'linkedin' => 'pub/jaime-urquiza-fuentes/50/8a0/711'
             )
         ),
         array(
@@ -78,9 +77,9 @@ $team_members = array(
             'position' => 'Researcher',
             'description' => 'lorem ipsum.....',
             'social' => array(
-                'twitter' => 'account',
-                'youtube' => 'account',
-                'linkedin' => 'account'
+                'twitter' => 'gertrudix',
+                'youtube' => 'user/pantropia',
+                'linkedin' => 'pub/manuel-g%C3%A9rtrudix-barrio/16/191/44b'
             )
         ),
         array(
@@ -89,9 +88,8 @@ $team_members = array(
             'position' => 'Graphic Designer',
             'description' => 'lorem ipsum.....',
             'social' => array(
-                'twitter' => 'account',
-                'youtube' => 'account',
-                'linkedin' => 'account'
+                'web' => 'http://www.gemmayuscula.com/',
+                'linkedin' => 'pub/gemma-de-castro/22/987/427'
             )
         ),
         array(
@@ -101,7 +99,7 @@ $team_members = array(
             'description' => 'lorem ipsum.....',
             'social' => array(
                 'twitter' => 'account',
-                'web' => 'http://myweb.com',
+                'web' => 'http://pablohaya.com',
                 'linkedin' => 'account'
             )
         )
@@ -113,9 +111,8 @@ $team_members = array(
             'position' => 'Technical Advisor',
             'description' => 'lorem ipsum.....',
             'social' => array(
-                'twitter' => 'account',
-                'youtube' => 'account',
-                'linkedin' => 'account'
+                'twitter' => 'jorgejjcv',
+                'linkedin' => 'pub/jorge-castellanos-vega/65/514/969'
             )
         )
     )
