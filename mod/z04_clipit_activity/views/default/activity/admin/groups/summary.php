@@ -19,8 +19,8 @@ foreach($groups as $group):
     ?>
     <div class="col-md-4 group-list margin-bottom-10">
         <a title="Delete" href="javascript:;" class="pull-right btn btn-xs btn-danger delete-group" rel="nofollow"><i class="fa fa-trash-o"></i></a>
-        <input type="text" name="group[<?php echo $id;?>][name]" value="<?php echo $group->name;?>" style="width: 85%;" class="form-control margin-bottom-10">
-        <ul class="items-padding">
+        <input type="text" name="group[<?php echo $id;?>][name]" value="<?php echo $group->name;?>" style="width: 85%;" class="input-group-name form-control margin-bottom-10">
+        <ul class="items-padding users-list">
             <?php foreach($group_users as $group_user):?>
                 <li data-user="<?php echo $group_user->id;?>">
                     <?php echo elgg_view('output/url', array(

@@ -59,6 +59,7 @@ function clipit_activity_init() {
     elgg_register_action("task/remove", elgg_get_plugins_path() . "z04_clipit_activity/actions/task/remove.php");
     elgg_register_action("task/create", elgg_get_plugins_path() . "z04_clipit_activity/actions/task/create.php");
 
+    elgg_register_ajax_view('activity/admin/groups/users_list');
     elgg_register_ajax_view('activity/admin/dashboard/group_info');
     elgg_register_ajax_view('publications/admin/user_ratings');
     elgg_register_ajax_view('modal/activity/admin/user_stats');
@@ -155,7 +156,10 @@ function clipit_activity_init() {
     elgg_load_js("jquery:fileupload:image");
     elgg_load_js("jquery:fileupload:validate");
     elgg_load_js("jquery:fileupload:ui");
-
+    // jQuery Multi-select
+    elgg_register_js("jquery:multiselect", elgg_get_site_url() . "mod/z04_clipit_activity/vendors/jquery.multi-select.js");
+    // jQuery QuickSearch
+    elgg_register_js("jquery:quicksearch", elgg_get_site_url() . "mod/z04_clipit_activity/vendors/jquery.quicksearch.js");
 }
 function activity_setup_sidebar_menus(){
     $activity_id =  elgg_get_page_owner_guid();
@@ -318,10 +322,10 @@ function activity_page_handler($page) {
                     );
                     break;
                 case 'join':
-                    if($activity_status == 'active' || !$isCalled){
+                    if($activity_status == 'active' || !$isCalled || $activity->group_mode != ClipitActivity::GROUP_MODE_STUDENT){
                         return false;
                     }
-                    $title = elgg_echo("activity:join");
+                    $title = elgg_echo("activity:group:join");
                     elgg_push_breadcrumb($title);
                     $params = array(
                         'content'   => elgg_view('activity/join', array('entity' => $activity)),
@@ -664,6 +668,9 @@ function activity_page_handler($page) {
                                         }
                                     }
                                     break;
+                                case "other":
+                                    // $body empty
+                                    break;
                                 default:
                                     return false;
                                     break;
@@ -941,7 +948,7 @@ function activity_page_handler($page) {
     $pending_tasks_sidebar = "";
     $activity_menu_sidebar = "";
 
-    if($hasGroup || $access == 'ACCESS_TEACHER'){
+    if($hasGroup || $isCalled || $access == 'ACCESS_TEACHER'){
         $activity_menu = elgg_view("activity/sidebar/activity_menu", array('entity' => $activity));
         $activity_menu_sidebar = elgg_view_module('aside', elgg_echo('activity'), $activity_menu);
     }
@@ -949,13 +956,16 @@ function activity_page_handler($page) {
     if($hasGroup && ($activity_status == 'active' || $activity_status == 'closed')){
         $pending_tasks = elgg_view("page/components/pending_tasks", array('entity' => $activity));
         $pending_tasks_sidebar = elgg_view_module('aside', elgg_echo('activity:pending_tasks'), $pending_tasks, array('class' => 'aside-block'));
-
         elgg_extend_view("page/elements/owner_block", "page/elements/group_block");
         $group_menu_sidebar = elgg_view('group/sidebar/group_menu', array('entity' => $activity));
     }
-    if(!$hasGroup && ($isCalled && $activity_status == 'enroll')) {
+    if($activity_status == 'enroll' && $hasGroup){
+        elgg_extend_view("page/elements/owner_block", "page/elements/group_block");
+    }
+//    ClipitActivity::set_properties($activity->id, array('group_mode' => ClipitActivity::GROUP_MODE_STUDENT));
+    if(!$hasGroup && $isCalled && $activity->group_mode == ClipitActivity::GROUP_MODE_STUDENT && $activity_status == 'enroll') {
         // Join to activity button
-        elgg_extend_view("page/elements/owner_block", "page/components/button_join_activity");
+        elgg_extend_view("page/elements/owner_block", "page/components/button_join_group");
     }
     $teachers = ClipitActivity::get_teachers($activity->id);
     $teacher_sidebar = "";
@@ -1028,11 +1038,11 @@ function group_tools_page_handler($page, $activity){
     $isTeacher = in_array($user_id, $activity->teacher_array);
     $group_id = (int)$page[2];
     $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
-    if($activity->status == 'enroll'){
+    if($activity->status == 'enroll' && !$isTeacher ){
         return false;
     }
     $canCreate = false;
-    if($my_group == $group_id && $activity->status == 'active'){
+    if(($my_group == $group_id && $activity->status == 'active') || $isTeacher){
         $canCreate = true;
     }
     if($group &&
@@ -1052,7 +1062,6 @@ function group_tools_page_handler($page, $activity){
     if($activity_status == 'enroll'){
         $icon_status = "unlock";
     }
-    $group_name = '<i class="fa fa-'.$icon_status.'"></i> '.$group->name;
     $filter = "";
     switch ($page[3]) {
         case '':
@@ -1289,7 +1298,7 @@ function group_tools_page_handler($page, $activity){
     $params['content'] = $content;
     $params['filter'] = $filter;
     $params['title'] = $title;
-    $params['sub-title'] = $group_name;
+    $params['sub-title'] = $group->name;
     $params['title_style'] = "background: #". $activity->color;
 
     if($activity_status == 'enroll'){

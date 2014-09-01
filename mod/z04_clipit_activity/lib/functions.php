@@ -244,6 +244,9 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
     );
 
     switch($task->task_type){
+        case "other":
+            return false;
+        break;
         case "video_upload":
             foreach($task->video_array as $video_id){
                 $group_video = ClipitVideo::get_group($video_id);

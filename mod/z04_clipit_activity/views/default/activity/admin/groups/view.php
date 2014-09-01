@@ -13,6 +13,8 @@
 $activity = elgg_extract('entity', $vars);
 $users = ClipitUser::get_by_id($activity->student_array);
 $groups = ClipitGroup::get_by_id($activity->group_array , $order_by_name = true);
+elgg_load_js("jquery:multiselect");
+elgg_load_js("jquery:quicksearch");
 ?>
 <style>
     #users_group_test{
@@ -44,7 +46,6 @@ $groups = ClipitGroup::get_by_id($activity->group_array , $order_by_name = true)
         margin-bottom: 5px;
         padding: 5px;
         padding-bottom: 5px;
-        padding-left: 25px;
         border-bottom: 1px solid #bae6f6;
         overflow: hidden;
     }
@@ -54,7 +55,9 @@ $groups = ClipitGroup::get_by_id($activity->group_array , $order_by_name = true)
     .group-list{
         position: relative;
     }
-
+    .ui-sortable-helper, .group-list ul.users-list li{
+        padding-left: 25px;
+    }
     .ui-sortable-helper, .group-list li:hover{
         background-color: #32b4e5;
 
@@ -63,7 +66,7 @@ $groups = ClipitGroup::get_by_id($activity->group_array , $order_by_name = true)
         cursor: default;
         height: auto !important;
     }
-    .ui-sortable-helper:after, .group-list li:hover:after{
+    .ui-sortable-helper:after, .group-list ul.users-list li:hover:after{
         position: absolute;
         left: 5px;
         content: "\f047";
@@ -87,13 +90,11 @@ $groups = ClipitGroup::get_by_id($activity->group_array , $order_by_name = true)
         color: #fff;
     }
 </style>
-<script src="http://loudev.com/js/jquery.multi-select.js" type="text/javascript"></script>
-<script src="http://rawgit.com/riklomas/quicksearch/master/jquery.quicksearch.js"></script>
 <script>
 $(function(){
     var sortable_groups = function(){
-    $( ".group-list ul" ).sortable({
-        connectWith: ".group-list ul",
+    $( ".group-list ul.users-list" ).sortable({
+        connectWith: ".group-list ul.users-list",
         dropOnEmpty: true,
         receive: function(event, ui) {
             var current_list = $(ui.item).closest(".group-list");
@@ -118,6 +119,19 @@ $(function(){
             });
         }
     }).disableSelection();
+        $("#move-group").html("");
+        $("<option></option>")
+            .val("")
+            .text("<?php echo elgg_echo('groups:select:move');?>")
+            .appendTo("#move-group");
+        $(".group-list").each(function(){
+            var id = $(this).find(".input-group").val();
+            var name = $(this).find(".input-group-name").val();
+            $("<option></option>")
+                .val(id)
+                .text(name)
+                .appendTo("#move-group");
+        });
     };
     sortable_groups();
     // Multiselect
@@ -216,6 +230,26 @@ $(function(){
                 that.button('reset');
                 $('#called_users').multiSelect('refresh');
                 sortable_groups();
+            }
+        });
+    });
+    // Move to group
+    $(document).on("change, click", "#move-group", function(e){
+        e.preventDefault();
+        if($(this).val() == "" || $('#called_users option:selected').length == 0){
+            return false;
+        }
+        var parent = $("input[value="+$(this).val()+"]").parent();
+        var users = parent.find(".input-users");
+        var data_users = $("#called_users").val();
+        var merge_users = data_users.concat(users.val().split(","));
+        users.val(merge_users);
+        $("#move-loading").show();
+        elgg.action('activity/admin/groups_setup', {
+            data: $(".groups-form").serialize(),
+            success: function(content){
+                $('#called_users option:selected').remove();
+                $("#save-groups").click();
             }
         });
     });

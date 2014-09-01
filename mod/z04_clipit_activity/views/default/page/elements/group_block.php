@@ -11,8 +11,15 @@ $activity_id = elgg_get_page_owner_guid();
 $user_id = elgg_get_logged_in_user_guid();
 $group_id = ClipitGroup::get_from_user_activity($user_id, $activity_id);
 $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
+$activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
 
-$header = elgg_view('output/url', array(
+if($activity->status == ClipitActivity::STATUS_ENROLL && $activity->group_mode == ClipitActivity::GROUP_MODE_STUDENT){
+    $header = elgg_view_form('group/leave',
+        array('class'   => 'pull-right'),
+        array('entity'  => $group)
+    );
+}
+$header .= elgg_view('output/url', array(
     'href'  => "clipit_activity/{$activity_id}/group/{$group->id}",
     'text'  => "<h3>{$group->name}</h3>",
     'title' => $group->name,

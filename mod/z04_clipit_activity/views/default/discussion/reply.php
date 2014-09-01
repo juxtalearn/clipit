@@ -42,11 +42,7 @@ if($message->owner_id != $user_loggedin_id){
         </div>
         <div class="block">
             <strong>
-                <?php echo elgg_view('output/url', array(
-                    'href'  => "profile/".$user_reply->login,
-                    'title' => $user_reply->name,
-                    'text'  => $user_reply->name));
-                ?>
+                <?php echo elgg_view('page/elements/user_summary', array('user' => $user_reply)); ?>
             </strong>
             <small class="show">
                 <?php if($vars['show_group'] && $group = array_pop(ClipitGroup::get_by_id(array($group_id)))):?>

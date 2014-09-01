@@ -56,11 +56,7 @@ if($message->owner_id == elgg_get_logged_in_user_guid()){
             <small class="show">
                 <i>
                     <?php echo elgg_echo('discussion:created_by');?>
-                    <?php echo elgg_view('output/url', array(
-                        'href'  => "profile/".$owner->login,
-                        'title' => $owner->name,
-                        'text'  => $owner->name));
-                    ?>
+                    <?php echo elgg_view('page/elements/user_summary', array('user' => $owner)); ?>
                     <?php echo elgg_view('output/friendlytime', array('time' => $message->time_created));?>
                 </i>
                 <?php
@@ -69,13 +65,10 @@ if($message->owner_id == elgg_get_logged_in_user_guid()){
                     $author_last_post = array_pop(ClipitUser::get_by_id(array($last_post->owner_id)));
                     ?>
                     <i class="pull-right">
-                        Last post by
-                        <?php echo elgg_view('output/url', array(
-                            'href'  => "profile/".$author_last_post->login,
-                            'title' => $author_last_post->name,
-                            'text'  => $author_last_post->name,
-                        ));
-                        ?> (<?php echo elgg_view('output/friendlytime', array('time' => $last_post->time_created));?>)</i>
+                        <?php echo elgg_echo('discussion:last_post_by');?>
+                        <?php echo elgg_view('page/elements/user_summary', array('user' => $author_last_post)); ?>
+                        (<?php echo elgg_view('output/friendlytime', array('time' => $last_post->time_created));?>)
+                    </i>
                 <?php endif; ?>
             </small>
         </div>
