@@ -7422,6 +7422,26 @@ li.list-item:last-child {
 .multimedia-owner {
   margin-bottom: 10px;
 }
+.multimedia-owner p ol,
+.multimedia-owner p ul {
+  padding-left: 2.5em;
+}
+.multimedia-owner p ul {
+  list-style-type: disc;
+}
+.multimedia-owner p ol {
+  list-style-type: decimal;
+}
+.multimedia-owner p ul ul,
+.multimedia-owner p ol ul {
+  list-style-type: circle;
+}
+.multimedia-owner p ol ol ul,
+.multimedia-owner p ol ul ul,
+.multimedia-owner p ul ol ul,
+.multimedia-owner p ul ul ul {
+  list-style-type: square;
+}
 .multimedia-owner .multimedia-preview {
   margin-right: 10px;
   float: left;
@@ -8170,6 +8190,15 @@ ul.top-account > li .fa {
 ul.top-account > li .fa:hover {
   opacity: 1;
 }
+ul.top-account > li > ul.dropdown-menu > li {
+  width: 300px;
+}
+ul.top-account > li > ul.dropdown-menu > li > a {
+  padding: 5px 10px;
+  font-size: 14px;
+  letter-spacing: 0;
+  text-transform: none;
+}
 ul.top-account > li ul.caret-menu > li > a {
   padding: 5px 10px;
   font-size: 14px;
@@ -8185,17 +8214,6 @@ ul.top-account > li ul.caret-menu .divider {
   display: block;
   margin: 0;
 }
-ul.top-account > li ul#menu_activities li {
-  width: 300px;
-}
-ul.top-account > li ul#menu_activities li div {
-  font-size: 14px;
-  text-transform: none;
-  letter-spacing: 0;
-}
-ul.top-account > li ul#menu_activities li div small {
-  font-size: 75%;
-}
 ul.top-account > li ul#menu_activities li.divider {
   margin: 0;
 }
@@ -8205,9 +8223,6 @@ ul.top-account > li ul#menu_activities li.divider:last-child {
 ul.top-account > li ul#menu_activities li .activity-point {
   vertical-align: text-top;
   margin-top: 2px;
-}
-ul.top-account > li ul#menu_activities li > a {
-  padding: 5px 10px;
 }
 ul.top-account > li > a {
   font-family: FuturaBoldRegular, Impact, 'Impact Bold', Helvetica, Arial, sans, sans-serif !important;
@@ -10631,6 +10646,12 @@ h6,
   border: 2px solid #fff;
   -webkit-box-shadow: 0px 0px 0px 1px #bae6f6;
   box-shadow: 0px 0px 0px 1px #bae6f6;
+}
+.admin-owner {
+  padding: 1px 5px;
+  font-weight: bold;
+  color: #d8ba05;
+  background: rgba(216, 186, 5, 0.2);
 }
 .bg-center-icon {
   position: absolute;
