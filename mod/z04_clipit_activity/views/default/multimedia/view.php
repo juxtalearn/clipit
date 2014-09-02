@@ -15,12 +15,12 @@ $owner_user = array_pop(ClipitUser::get_by_id(array($entity->owner_id)));
 ?>
 <!-- Multimedia info + details -->
 <div class="multimedia-owner">
-    <?php echo elgg_view("multimedia/owner_options", array('entity' => $entity, 'type' => $vars['type'])); ?>
     <div class="multimedia-preview">
         <?php echo $vars['preview'];?>
     </div>
     <div class="block">
         <div class="header">
+            <?php echo elgg_view("multimedia/owner_options", array('entity' => $entity, 'type' => $vars['type'])); ?>
             <h3 class="title"><?php echo $entity->name; ?></h3>
             <small class="show sub-title">
                 <?php echo elgg_view('output/img', array(

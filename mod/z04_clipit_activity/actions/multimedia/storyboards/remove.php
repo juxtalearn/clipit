@@ -16,6 +16,16 @@ $ids = is_array($id) ? $id : array($id);
 
 foreach($ids as $sb_id){
     $storyboard = array_pop(ClipitStoryboard::get_by_id(array((int)$sb_id)));
+    $activity_id = ClipitStoryboard::get_activity($storyboard->id);
+    $scope = ClipitStoryboard::get_resource_scope($storyboard->id);
+    switch($scope){
+        case 'group':
+            $url = "group/".ClipitStoryboard::get_group($storyboard->id)."/multimedia";
+            break;
+        case 'activity':
+            $url = "resources";
+            break;
+    }
     if($storyboard &&  $storyboard->owner_id == $user_id){
         ClipitStoryboard::delete_by_id(array($storyboard->id));
         system_message(elgg_echo("storyboard:removed", array($storyboard->name)));
@@ -23,4 +33,8 @@ foreach($ids as $sb_id){
         register_error(elgg_echo("storyboard:cantremove"));
     }
 }
-forward(REFERER);
+if($url){
+    forward("clipit_activity/{$activity_id}/{$url}?filter=storyboards");
+} else {
+    forward(REFERRER);
+}

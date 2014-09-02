@@ -100,6 +100,7 @@ function clipit_activity_init() {
     /* Storyboards */
     elgg_register_action("storyboards/upload", elgg_get_plugins_path() . "z04_clipit_activity/actions/storyboards/upload.php");
     elgg_register_action("multimedia/storyboards/edit", elgg_get_plugins_path() . "z04_clipit_activity/actions/multimedia/storyboards/edit.php");
+    elgg_register_action("multimedia/storyboards/set_options", elgg_get_plugins_path() . "z04_clipit_activity/actions/multimedia/storyboards/set_options.php");
     elgg_register_action("multimedia/storyboards/remove", elgg_get_plugins_path() . "z04_clipit_activity/actions/multimedia/storyboards/remove.php");
     elgg_register_ajax_view('modal/multimedia/storyboard/edit');
     // Publications

@@ -44,7 +44,7 @@ foreach($storyboards as $sb_id){
         );
         if($vars['actions']){
             $owner_options = elgg_view("page/components/options_list", $options);
-            $select = '<input type="checkbox" name="check-file[]" value="'.$file->id.'" class="select-simple">';
+            $select = '<input type="checkbox" name="check-file[]" value="'.$storyboard->id.'" class="select-simple">';
         }
         // Remote modal, form content
         echo elgg_view("page/components/modal_remote", array('id'=> "edit-storyboard-{$storyboard->id}" ));
@@ -115,5 +115,5 @@ $content_list .= elgg_view("page/elements/list/options", array('options' => $lis
 $content_list .= elgg_view("page/elements/list/table", array('rows' => $rows, 'class' => 'files-table'));
 
 // File list
-echo elgg_view_form("multimedia/files/set_options", array('body' => $content_list, 'class' => 'block-total'));
+echo elgg_view_form("multimedia/storyboards/set_options", array('body' => $content_list, 'class' => 'block-total'));
 ?>

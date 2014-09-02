@@ -31,7 +31,7 @@ echo elgg_view("input/hidden", array(
                             <h4 class="panel-title">
                                 <strong>
                                     <i class="fa fa-angle-down pull-right"></i>
-                                    Upload video to youtube
+                                    <?php echo elgg_echo('video:add:to_youtube');?>
                                 </strong>
                             </h4>
                         </a>
@@ -57,7 +57,7 @@ echo elgg_view("input/hidden", array(
                             <h4 class="panel-title">
                                 <strong>
                                     <i class="fa fa-angle-down pull-right"></i>
-                                    Add youtube or vimeo video url
+                                    <?php echo elgg_echo('video:add:paste_url');?>
                                 </strong>
                             </h4>
                         </a>
