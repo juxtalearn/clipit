@@ -268,31 +268,21 @@ function setup_footer_menus(){
     );
 }
 function clipit_footer_page($page) {
-    $page_shell = 'default';
-    $class = '';
-    $options = array();
+    $file_dir = elgg_get_plugins_path() . 'z03_clipit_theme/pages/clipit';
     switch($page[0]){
         case "about":
             return false;
             break;
         case "team":
-            $content = elgg_view('pages/clipit/team', array('team' => $members));
-            $title = "Team";
-            $page_shell = 'team';
-            $class = 'team';
+            include "$file_dir/team.php";
             break;
         case "developers":
             return false;
             break;
+        default:
+            return false;
     }
-    $params = array(
-        'content' => $content,
-        'title'     => $title,
-        'filter'    => '',
-        'class'     => 'clipit-sections '.$class
-    );
-    $body = elgg_view_layout('one_column', $params);
-    echo elgg_view_page('', $body, $page_shell, $options);
+    return true;
 }
 function help_footer_page($page) {
     return false;

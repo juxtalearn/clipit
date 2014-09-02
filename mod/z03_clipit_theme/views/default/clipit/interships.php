@@ -10,32 +10,11 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$images_dir = "mod/z03_clipit_theme/graphics/team/";
-$intership_members = array(
-    array(
-        array(
-            'name' => 'Virginia del Castillo',
-            'position' => 'Intership',
-            'image' => "virginia.png",
-            'description' => 'lorem ipsum.....',
-        ),
-        array(
-            'name' => 'Ángel F. Sánchez',
-            'position' => 'Intership',
-            'image' => "angel.png",
-            'description' => 'lorem ipsum.....',
-        ),
-        array(
-            'name' => 'Rocío Blanco',
-            'position' => 'Intership',
-            'image' => "rocio.png",
-            'description' => 'lorem ipsum.....',
-        )
-    ),
-);
+$interships_members = elgg_extract('interships', $vars);
+$images_dir = elgg_extract('images_dir', $vars);
 ?>
 <h3 style="margin-left: 50px;" class="blue margin-bottom-20">Interships</h3>
-<?php foreach($intership_members as $members):?>
+<?php foreach($interships_members as $members):?>
     <div class="margin-top-20 row" style="padding-left: 50px;">
         <?php
         foreach($members as $member):
