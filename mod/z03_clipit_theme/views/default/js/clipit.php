@@ -181,6 +181,15 @@ $(function(){
     if(isSelected){
         isSelected.parent("ul").addClass("in").prev().find("a").css("opacity", 0.7);
     }
+    var full_url = window.location.href;
+    var urls_type = ['/view/', '?filter='];
+    for(i in urls_type){
+        var path = full_url.split(urls_type[i])
+        var menu_item = $(".elgg-sidebar li a[href='"+ path[0] +"']");
+        if(menu_item.length > 0){
+            menu_item.parent("li").addClass("active");
+        }
+    }
     /**
      * Toggle menu
      */
