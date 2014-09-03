@@ -12,9 +12,12 @@
  */
 $groups = elgg_extract('entities', $vars);
 $activity_id = elgg_extract('activity_id', $vars);
+$user_id = elgg_get_logged_in_user_guid();
 
 foreach($groups as $group_id){
     $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
+    $total_unread_posts = array_pop(ClipitPost::unread_by_destination(array($group_id), $user_id, true));
+
     elgg_register_menu_item('groups:admin_'.$group_id, array(
         'name' => 'group_dashboard',
         'text' => elgg_echo('group:home'),
@@ -25,6 +28,7 @@ foreach($groups as $group_id){
         'name' => 'group_discussion',
         'text' => elgg_echo('group:discussion'),
         'href' => "clipit_activity/{$activity_id}/group/{$group_id}/discussion",
+        'badge' => $total_unread_posts > 0 ? $total_unread_posts : "",
         'priority' => 200,
     ));
     elgg_register_menu_item('groups:admin_'.$group_id, array(
