@@ -62,7 +62,7 @@ $lang = get_current_language();
     </div>
     <div class="overflow-hidden" style="background: #f1f2f7 !important;">
         <div class="container margin-bottom-20">
-            <?php echo $vars['interships'];?>
+            <?php echo $vars['internships'];?>
         </div>
     </div>
 </div>

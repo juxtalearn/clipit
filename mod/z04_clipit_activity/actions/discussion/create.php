@@ -23,20 +23,11 @@ switch($entity_class){
     // Clipit Activity
     case 'ClipitActivity':
         $entity = array_pop(ClipitActivity::get_by_id(array($entity_id)));
-        $user_activity = ClipitGroup::get_from_user_activity($user_id, $entity->id);
-        $called_user = ClipitActivity::get_students($entity->id);
-//        if(!$user_activity || !in_array($user_id, $called_user)){
-//            register_error(elgg_echo("discussion:cantcreate"));
-//        }
         break;
     // Clipit Group
     case 'ClipitGroup':
         $group = true;
         $entity = array_pop(ClipitGroup::get_by_id(array($entity_id)));
-        $user_groups = ClipitUser::get_groups($user_id);
-        if(!in_array($entity->id, $user_groups)){
-            register_error(elgg_echo("discussion:cantcreate"));
-        }
         break;
     default:
         register_error(elgg_echo("discussion:cantcreate"));

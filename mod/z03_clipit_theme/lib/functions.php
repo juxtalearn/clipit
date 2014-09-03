@@ -181,28 +181,20 @@ function get_group_activity($event){
 }
 
 
-
-
-function clipit_student_events($rel_array){
-    $content = "";
-    foreach($rel_array as $relationship){
-        $subtype = $relationship->object_subtype;
-        $object_rel = get_relationship($relationship->object_id);
-        $general_subtype = explode("-", $subtype);
-        $general_subtype = (string)$general_subtype[0];
-        // Group, Activity
-        switch($general_subtype){
-            case 'group':
-                $content .= group_events($subtype, $object_rel, $relationship);
-                break;
-            case 'activity':
-                $content .= activity_events($subtype, $object_rel, $relationship);
-                break;
-            case 'message':
-                $content .= message_events($subtype, $object_rel, $relationship);
-                break;
-        }
-
+/**
+ * Forward to $location.
+ *
+ * @param $delimiter
+ * @param null $to
+ * @return string
+ */
+function custom_forward_referer($delimiter, $location = null){
+    $referer = $_SERVER['HTTP_REFERER'];
+    $path = explode($delimiter, $referer);
+    if(strpos($referer, $delimiter) !== false){
+        return $path[0] . $location;
+    } else {
+        return $referer;
     }
-    return $content;
+
 }

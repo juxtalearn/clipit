@@ -6,7 +6,7 @@
 
 $english = array(
     // ERROR
-    'error:404' => "Esta funcionalidad aún no está operativa",
+    'error:404' => "Sorry. We could not find the page that you requested.",
     'view_all' => 'View all',
     'view_as' => 'View as',
     'me'    => "Me",
@@ -22,6 +22,8 @@ $english = array(
 
     'about' => 'About',
     'team' => 'Team',
+    'internship' => 'Internship',
+    'internships' => 'Internships',
     'developers' => 'Developers',
     'support_center' => 'Support Center',
     'basics' => 'Basics',

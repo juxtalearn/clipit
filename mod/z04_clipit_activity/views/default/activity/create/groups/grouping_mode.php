@@ -19,7 +19,7 @@
             <input value="1" style="visibility: hidden" type="radio" required name="groups_creation"/>
                 <a href="javascript:;" class="child-decoration-none">
                     <i class="fa fa-user"></i>
-                    Teacher makes groups
+                    <?php echo elgg_echo('activity:grouping_mode:teacher'); ?>
                 </a>
             </h4>
         </div>
@@ -35,7 +35,7 @@
                 <input value="2" style="visibility: hidden" type="radio" required name="groups_creation"/>
                 <a href="javascript:;" class="child-decoration-none">
                     <i class="fa fa-users"></i>
-                    Students make groups
+                    <?php echo elgg_echo('activity:grouping_mode:student'); ?>
                 </a>
             </h4>
         </div>
@@ -51,7 +51,7 @@
                 <input value="3" style="visibility: hidden" type="radio" required name="groups_creation"/>
                 <a href="javascript:;" class="child-decoration-none">
                     <i class="fa fa-users"></i>
-                    Create random groups
+                    <?php echo elgg_echo('activity:grouping_mode:system'); ?>
                 </a>
             </h4>
         </div>

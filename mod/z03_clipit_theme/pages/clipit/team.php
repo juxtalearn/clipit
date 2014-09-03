@@ -13,7 +13,7 @@
 // Team members description
 $spanish = array(
     'team:estefania' => 'Profesor contratado doctor de la Universidad Rey Juan Carlos. Sus intereses son el aprendizaje a través de las tecnologías, los sistemas de recomendación y las TIC para personas con discapacidad.',
-    'team:pablollinas' => 'Ingeniero informático por la Universidad Autónoma de Madrid (España). Sus intereses son la programación, las redes, la aplicación de nuevas tecnologías en la vida cotidiana, y el análisis de "big data".',
+    'team:pablollinas' => 'Ingeniero informático por la Universidad Autónoma de Madrid (España). Sus intereses son la programación, las redes, la aplicación de nuevas tecnologías en la vida cotidiana, y el análisis de big data.',
     'team:miguelangel' => 'Técnico Superior en desarrollo de aplicaciones web. Interesado en proyectos Open Source, cultura digital y nuevas tecnologias web.',
     'team:isidoro' => 'Doctor por la Universidad Rey Juan Carlos. Sus intereses se centran en la innovación docente y el desarrollo de software educativo para la enseñanza de la programación (informática educativa).',
     'team:jaime' => 'Profesor contratado doctor de la Universidad Rey Juan Carlos. Sus intereses de investigación son la enseñanza de informática, los sistemas interactivos y el aprendizaje a través de las tecnologías.',
@@ -25,28 +25,28 @@ $spanish = array(
 add_translation('es', $spanish);
 $english = array(
     'team:estefania' => 'Associate professor at Universidad Rey Juan Carlos, Spain. Her interests are focused on e-learning, recommender systems and ICT for people with disabilities.',
-    'team:pablollinas' => 'Computer Engineer by the Universidad Autónoma de Madrid (Spain). His interests are programming, networking, new technology integration in daily life, and "big data" analysis.',
+    'team:pablollinas' => 'Computer Engineer by the Universidad Autónoma de Madrid (Spain). His interests are programming, networking, new technology integration in daily life, and big data analysis.',
     'team:miguelangel' => 'Bachelor Degree in Web development. He is interested in Open Source projects, digital culture and last trends in Web technologies.',
     'team:isidoro' => 'PhD by Universidad Rey Juan Carlos. His interests are educational innovation and the development of educational software for teaching programming.',
     'team:jaime' => 'Associate professor at Universidad Rey Juan Carlos, Spain. His main research interests are CS education, interactive systems and technology enhanced learning.',
     'team:manuel' => 'Professor at the Rey Juan Carlos University. His interests are focused in how the emerging technologies improve the learning and the creativity.',
     'team:gemma' => 'Graphic designer, and multidisciplinary artist with a degree in Fine Arts. Her work specializes in editorial design, corporate identity, posters, and illustration. She collaborates in multiple projects related to new technologies applied in the field of education.',
     'team:phaya' => 'PhD in Computer Science and Telecommunication Engineer. He is a passionate about technology innovation and its application in learning and social networks. He is currently working at Instituto de Ingeniería del Conocimiento (Madrid, Spain).',
-    'team:jorge' => 'Jorge Castellanos works at a secondary school computer science teacher for the Comunidad de Madrid government. He has also been working as associated professor at Universidad Rey Juan Carlos.',
+    'team:jorge' => 'Jorge Castellanos works at a secondary school computer science teacher for the Comunidad de Madrid government. He has also been working as associate professor at Universidad Rey Juan Carlos.',
 );
 add_translation('en', $english);
-// Interships description
+// Internships description
 $spanish = array(
-    'intership:virginia' => 'Graduada en Ingeniería del Software por la Universidad Rey Juan Carlos. Ha desarrollado un sistema de recomendación basado en contenido para ClipIt.',
-    'intership:angel' => '',
-    'intership:rocio' => 'Estudiante de Ingeniería del Software de la Universidad Rey Juan Carlos. Ha desarrollado una herramienta para incluir preguntas en ClipIt.',
+    'internship:virginia' => 'Graduada en Ingeniería del Software por la Universidad Rey Juan Carlos. Ha desarrollado un sistema de recomendación basado en contenido.',
+    'internship:angel' => 'Estudiante del Grado en Ingeniería Informática en la Universidad Rey Juan Carlos. Está desarrollando la versión de ClipIt para dispositivos móviles.',
+    'internship:rocio' => 'Estudiante de Ingeniería del Software de la Universidad Rey Juan Carlos. Ha desarrollado una herramienta para incluir preguntas.',
 );
 add_translation('es', $spanish);
 
 $english = array(
-    'intership:virginia' => 'Computer Software Engineer by Universidad Rey Juan Carlos. She has developed a content-based recommender system for ClipIt.',
-    'intership:angel' => '',
-    'intership:rocio' => 'Undergraduate student of Computer Software Engineering at Universidad Rey Juan Carlos. She has developed a quizzes tool for ClipIt.',
+    'internship:virginia' => 'Computer Software Engineer by Universidad Rey Juan Carlos. She has developed a content-based recommender system.',
+    'internship:angel' => 'Computer Engineering student at Universidad Rey Juan Carlos. He is developing the mobile version.',
+    'internship:rocio' => 'Undergraduate student of Computer Software Engineering at Universidad Rey Juan Carlos. She has developed a quizzes tool.',
 );
 add_translation('en', $english);
 
@@ -157,25 +157,25 @@ $team_members = array(
     )
 );
 
-$intership_members = array(
+$internship_members = array(
     array(
         array(
             'name' => 'Virginia del Castillo',
-            'position' => 'Intership',
+            'position' => elgg_echo('internship'),
             'image' => "virginia.png",
-            'description' => elgg_echo('intership:virginia'),
+            'description' => elgg_echo('internship:virginia'),
         ),
         array(
             'name' => 'Ángel F. Sánchez',
-            'position' => 'Intership',
+            'position' => elgg_echo('internship'),
             'image' => "angel.png",
-            'description' => elgg_echo('intership:angel'),
+            'description' => elgg_echo('internship:angel'),
         ),
         array(
             'name' => 'Rocío Blanco',
-            'position' => 'Intership',
+            'position' => elgg_echo('internship'),
             'image' => "rocio.png",
-            'description' => elgg_echo('intership:rocio'),
+            'description' => elgg_echo('internship:rocio'),
         )
     ),
 );
@@ -187,6 +187,6 @@ $params = array(
     'class'     => 'clipit-sections team',
 
 );
-$interships = array('interships' => elgg_view('clipit/interships', array('interships' => $intership_members, 'images_dir' => $images_dir)));
+$internships = array('internships' => elgg_view('clipit/internships', array('internships' => $internship_members, 'images_dir' => $images_dir)));
 $body = elgg_view_layout('one_column', $params);
-echo elgg_view_page('', $body, 'team', $interships);
+echo elgg_view_page('', $body, 'team', $internships);

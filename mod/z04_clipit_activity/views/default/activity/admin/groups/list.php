@@ -19,16 +19,6 @@ $activity = elgg_extract('activity', $vars);
     'class' => 'input-activity'
 ));
 ?>
-<div class="bg-info">
-    <h3 class="panel-title">Grouping mode</h3>
-    <?php echo $activity->group_mode; ?>
-</div>
-<?php echo elgg_view("input/text", array(
-    'name' => 'entity-max_group_size',
-    'value' => $activity->max_group_size,
-    'class' => 'form-control'
-));
-?>
 <p class="text-right margin-bottom-20">
     <?php echo elgg_view('input/submit',
         array(

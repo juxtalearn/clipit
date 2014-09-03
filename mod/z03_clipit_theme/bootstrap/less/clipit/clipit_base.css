@@ -7422,26 +7422,6 @@ li.list-item:last-child {
 .multimedia-owner {
   margin-bottom: 10px;
 }
-.multimedia-owner p ol,
-.multimedia-owner p ul {
-  padding-left: 2.5em;
-}
-.multimedia-owner p ul {
-  list-style-type: disc;
-}
-.multimedia-owner p ol {
-  list-style-type: decimal;
-}
-.multimedia-owner p ul ul,
-.multimedia-owner p ol ul {
-  list-style-type: circle;
-}
-.multimedia-owner p ol ol ul,
-.multimedia-owner p ol ul ul,
-.multimedia-owner p ul ol ul,
-.multimedia-owner p ul ul ul {
-  list-style-type: square;
-}
 .multimedia-owner .multimedia-preview {
   margin-right: 10px;
   float: left;
@@ -7488,6 +7468,26 @@ li.list-item:last-child {
 }
 .multimedia-owner .multimedia-body {
   color: #666666;
+}
+.multimedia-owner .multimedia-body .description ol,
+.multimedia-owner .multimedia-body .description ul {
+  padding-left: 2.5em;
+}
+.multimedia-owner .multimedia-body .description ul {
+  list-style-type: disc;
+}
+.multimedia-owner .multimedia-body .description ol {
+  list-style-type: decimal;
+}
+.multimedia-owner .multimedia-body .description ul ul,
+.multimedia-owner .multimedia-body .description ol ul {
+  list-style-type: circle;
+}
+.multimedia-owner .multimedia-body .description ol ol ul,
+.multimedia-owner .multimedia-body .description ol ul ul,
+.multimedia-owner .multimedia-body .description ul ol ul,
+.multimedia-owner .multimedia-body .description ul ul ul {
+  list-style-type: square;
 }
 .fileinput-button {
   position: relative;
@@ -8284,6 +8284,10 @@ ul.top-account > li > a > span.badge {
 .elgg-message p {
   margin: 0;
   font-weight: bold;
+}
+.back-top {
+  text-transform: uppercase;
+  font-size: 16px;
 }
 #footer {
   height: auto;

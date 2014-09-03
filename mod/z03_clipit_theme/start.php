@@ -11,11 +11,25 @@
  * @package         ClipIt
  */
 elgg_register_event_handler('init', 'system', 'clipit_final_init');
+elgg_register_event_handler('plugins_boot', 'system', 'language_selector_boot');
 
+function language_selector_boot(){
+    global $CONFIG;
+    $client_language = $_COOKIE['client_language'];
+    if(!elgg_is_logged_in()){
+        if(!empty($client_language)){
+            $CONFIG->language = $client_language;
+        }
+        reload_all_translations();
+    } else {
+        if(!empty($client_language)){
+            setcookie('client_language', '', time()-60*60*24*30, '/'); // reset cookie
+        }
+    }
+}
 function clipit_final_init() {
     global $CONFIG;
     $CONFIG->user = new ClipitUser(elgg_get_logged_in_user_guid());
-    $role = $CONFIG->user->role;
     /**
      * Register menu footer
     */
@@ -40,13 +54,14 @@ function clipit_final_init() {
     elgg_register_action('user/passwordreset', elgg_get_plugins_path() . "z03_clipit_theme/actions/user/passwordreset.php", 'public');
     elgg_register_action("user/check", elgg_get_plugins_path() . "z03_clipit_theme/actions/check.php", 'public');
     // Language selector
-    elgg_register_action('language/set', elgg_get_plugins_path() . "z03_clipit_theme/actions/language/set.php");
+    elgg_register_action('language/set', elgg_get_plugins_path() . "z03_clipit_theme/actions/language/set.php", 'public');
     // Register ajax view for timeline events
     elgg_register_ajax_view('navigation/pagination_timeline');
     // Register public pages
     elgg_register_plugin_hook_handler('public_pages', 'walled_garden', 'actions_clipit_public_pages');
     function actions_clipit_public_pages($hook, $type, $return_value, $params) {
         $return_value[] = 'action/user/check';
+        $return_value[] = 'action/language/set';
         // Clipit sections
         $return_value[] = 'clipit/team';
         $return_value[] = 'clipit/about';

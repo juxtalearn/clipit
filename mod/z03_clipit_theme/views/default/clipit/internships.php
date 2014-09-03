@@ -10,17 +10,17 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$interships_members = elgg_extract('interships', $vars);
+$internships_members = elgg_extract('internships', $vars);
 $images_dir = elgg_extract('images_dir', $vars);
 ?>
-<h3 style="margin-left: 50px;" class="blue margin-bottom-20">Interships</h3>
-<?php foreach($interships_members as $members):?>
-    <div class="margin-top-20 row" style="padding-left: 50px;">
+<h3 style="margin-left: 50px;" class="blue margin-bottom-20"><?php echo elgg_echo('internships');?></h3>
+<?php foreach($internships_members as $members):?>
+    <div class="margin-top-20 row">
         <?php
         foreach($members as $member):
             $id = uniqid();
             ?>
-            <div class="col-md-2 col-xs-4 text-center">
+            <div class="col-md-3 col-xs-5 text-center">
                 <?php if($member['image']):?>
                     <?php echo elgg_view('output/img', array(
                         'src' => $images_dir.$member['image'],

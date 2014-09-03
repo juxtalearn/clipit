@@ -31,6 +31,23 @@ foreach($groups as $group_id){
         'badge' => $total_unread_posts > 0 ? $total_unread_posts : "",
         'priority' => 200,
     ));
+    global $CONFIG;
+    $dest = $CONFIG->menus['groups:admin_'.$group_id];
+//    print_r($dest);
+//    print_r(full_url());
+    $full = full_url();
+    //$full = 'http://jxl1.escet.urjc.es/clipit_dev/clipit_activity/4256/group/4260/discussion/view/4363';
+    //print_r(explode("/view/", $full));
+    $selected_items = array('/view/', '?filter=');
+    $register = elgg_get_site_url()."clipit_activity/{$activity_id}/group/{$group_id}/discussion";
+//    foreach($selected_items as $selected_item){
+//        $path = explode($selected_item, $full);
+//        print_r($path);
+//        if($path[0] == $register){
+//            echo "atm";
+//        }
+//    }
+
     elgg_register_menu_item('groups:admin_'.$group_id, array(
         'name' => 'group_files',
         'text' => elgg_echo('group:files'),
@@ -62,3 +79,20 @@ foreach($groups as $group_id){
     array('class' => 'aside-tree'
     ));
 ?>
+<script>
+    <?php
+    $full = full_url();
+    $selected_items = array('/view/', '?filter=');
+    foreach($selected_items as $selected_item){
+        $path = explode($selected_item, $full);
+    ?>
+    var register_menu_item = '<?php echo $path[0];?>';
+    var menu_item = $(".elgg-sidebar li a[href='"+ register_menu_item +"']");
+    if(menu_item.length > 0){
+        menu_item.parent("li").addClass("active");
+    }
+    console.log(register_menu_item);
+    <?php
+    }
+ ?>
+</script>

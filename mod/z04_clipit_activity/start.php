@@ -55,6 +55,7 @@ function clipit_activity_init() {
     elgg_register_action("activity/admin/teachers", elgg_get_plugins_path() . "z04_clipit_activity/actions/activity/admin/teachers.php");
     elgg_register_action("activity/admin/groups_setup", elgg_get_plugins_path() . "z04_clipit_activity/actions/activity/admin/groups_setup.php");
     elgg_register_action("activity/admin/groups_create", elgg_get_plugins_path() . "z04_clipit_activity/actions/activity/admin/groups_create.php");
+    elgg_register_action("activity/admin/group_mode", elgg_get_plugins_path() . "z04_clipit_activity/actions/activity/admin/group_mode.php");
     elgg_register_action("task/edit", elgg_get_plugins_path() . "z04_clipit_activity/actions/task/edit.php");
     elgg_register_action("task/remove", elgg_get_plugins_path() . "z04_clipit_activity/actions/task/remove.php");
     elgg_register_action("task/create", elgg_get_plugins_path() . "z04_clipit_activity/actions/task/create.php");

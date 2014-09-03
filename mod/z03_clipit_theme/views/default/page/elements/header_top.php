@@ -5,12 +5,18 @@
         <div class="col-sm-3 col-md-3 pull-right">
             <?php echo elgg_view('search/search_box', array('class' => 'navbar-form navbar-right search-form')); ?>
         </div>
-        <?php else: ?>
+        <?php elseif(!$vars['walled_garden']): ?>
         <p class="navbar-text navbar-left">
-            <a href="<?php echo elgg_get_site_url(); ?>" class="active" style="text-transform: uppercase;font-size: 16px;"><span class="glyphicon-chevron-left glyphicon"></span> Back</a>
+            <?php echo elgg_view('output/url', array(
+                'href'  => "/",
+                'title' => elgg_echo('back'),
+                'text'  => '<i class="fa fa-chevron-left"></i> '. elgg_echo('back'),
+                'class' => 'active back-top',
+            ));
+            ?>
         </p>
         <?php endif; ?>
-        <p class="navbar-text navbar-right lang" style="text-transform: uppercase">
+        <p class="navbar-text navbar-right lang" style="text-transform: uppercase;">
             <?php
             $installed_langs = get_installed_translations();
             foreach($installed_langs as $key => $language):

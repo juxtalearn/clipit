@@ -282,6 +282,13 @@ function get_default_group_name(){
     return "<?php echo elgg_echo("group");?> "+ (get_num+1);
 }
 </script>
+<?php echo elgg_view_form('activity/admin/group_mode',
+    array(
+        'body' => elgg_view('activity/admin/groups/mode',
+            array('activity' => $activity)
+        ))
+);
+?>
 <a name="create-group"></a>
 <?php echo elgg_view_form('activity/admin/groups_create',
     array(
