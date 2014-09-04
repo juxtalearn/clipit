@@ -20,6 +20,8 @@ $spanish = array(
 
     'about' => 'sobre',
     'team' => 'Equipo',
+    'internship' => 'Colaborador',
+    'internships' => 'Colaboradores',
     'developers' => 'Desarrolladores',
     'support_center' => 'Centro de soporte',
     'basics' => 'Lo esencial',

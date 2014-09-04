@@ -161,19 +161,16 @@ $internship_members = array(
     array(
         array(
             'name' => 'Virginia del Castillo',
-            'position' => elgg_echo('internship'),
             'image' => "virginia.png",
             'description' => elgg_echo('internship:virginia'),
         ),
         array(
             'name' => 'Ángel F. Sánchez',
-            'position' => elgg_echo('internship'),
             'image' => "angel.png",
             'description' => elgg_echo('internship:angel'),
         ),
         array(
             'name' => 'Rocío Blanco',
-            'position' => elgg_echo('internship'),
             'image' => "rocio.png",
             'description' => elgg_echo('internship:rocio'),
         )

@@ -13,7 +13,7 @@
 $english = array(
     'search:results_for' => 'Results for',
     'search:not_found' => 'No results',
-
+    'search:reset' => 'Reset search',
     'explore:menu' => 'Publications',
 );
 

@@ -31,7 +31,17 @@ $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($tricky_topic_id)))
         foreach($tags as $tag_id):
             $tag = array_pop(ClipitTag::get_by_id(array($tag_id)));
             ?>
-            <li><a href=""><strong><?php echo $tag->name;?></strong></a></li>
+            <li>
+                <strong>
+                <?php echo elgg_view('output/url', array(
+                    'href' => "explore/search?by=tag&id={$tag->id}",
+                    'text' => $tag->name,
+                    'title' => $tag->name,
+                    'is_trusted' => true,
+                ));
+                ?>
+                </strong>
+            </li>
         <?php endforeach;?>
     </ul>
 </div>

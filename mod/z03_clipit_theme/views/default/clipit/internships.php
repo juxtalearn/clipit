@@ -33,7 +33,9 @@ $images_dir = elgg_extract('images_dir', $vars);
                 <?php endif;?>
                 <div class="margin-top-10 blue">
                     <span class="cursor-default author-text" style="font-size: 11px;"><?php echo $member['name'];?></span>
+                    <?php if($member['position']):?>
                     <i class="show"><?php echo $member['position'];?></i>
+                    <?php endif;?>
                     <div class="margin-top-5">
                         <?php
                         foreach($member['social'] as $name => $account):

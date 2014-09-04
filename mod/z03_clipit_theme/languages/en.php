@@ -5,6 +5,7 @@
  */
 
 $english = array(
+
     // ERROR
     'error:404' => "Sorry. We could not find the page that you requested.",
     'view_all' => 'View all',
@@ -19,6 +20,7 @@ $english = array(
     'menu:footer_clipit:header:clipit' => 'Clipit',
     'menu:footer_clipit:header:help' => 'Help',
     'menu:footer_clipit:header:legal' => 'Legal',
+    'send:email_to_admin' => 'Send email to Admin',
 
     'about' => 'About',
     'team' => 'Team',
