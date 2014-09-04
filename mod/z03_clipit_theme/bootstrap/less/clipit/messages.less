@@ -136,7 +136,7 @@
   }
   p{
     .text-justify();
-    font-size: 13px;
+    font-size: ceil(@font-size-base * 0.92); // ~13px;
     color: @grey_dark;
     margin: 0;
   }
@@ -317,7 +317,8 @@
   padding: 10px;
   .group{
     background: #fff;
-    padding: 10px;
+    padding: 5px 10px;
+    font-size: ceil(@font-size-base * 0.92); // ~13px;
     border-radius: 4px;
     margin-bottom: 10px;
     ul.members-list{

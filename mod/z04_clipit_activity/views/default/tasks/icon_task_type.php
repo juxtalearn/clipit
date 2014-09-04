@@ -15,11 +15,19 @@ $type = elgg_extract('type', $vars);
 switch($type){
     case ClipitTask::TYPE_VIDEO_UPLOAD:
         $title = elgg_echo('task:video_upload');
-        $icon = "arrow-up";
+        echo '<span class="fa-stack fa-lg blue " style="font-size: 50%;">
+                  <i class="fa fa-file-o fa-stack-2x"></i>
+                  <i class="fa fa-plus fa-stack-1x" style="top:2px;"></i>
+              </span>';
+        $custom = true;
         break;
     case ClipitTask::TYPE_STORYBOARD_UPLOAD:
         $title = elgg_echo('task:storyboard_upload');
-        $icon = "arrow-up";
+        echo '<span class="fa-stack fa-lg blue " style="font-size: 50%;">
+                  <i class="fa fa-file-o fa-stack-2x"></i>
+                  <i class="fa fa-plus fa-stack-1x" style="top:2px;"></i>
+              </span>';
+        $custom = true;
         break;
     case ClipitTask::TYPE_QUIZ_TAKE:
         $title = elgg_echo('task:quiz_answer');
@@ -27,7 +35,7 @@ switch($type){
         break;
     case ClipitTask::TYPE_VIDEO_FEEDBACK:
         $title = elgg_echo('task:video_feedback');
-        $icon = "signal";
+        $icon = "comment";
         break;
     case ClipitTask::TYPE_STORYBOARD_FEEDBACK:
         $title = elgg_echo('task:storyboard_feedback');
@@ -39,4 +47,6 @@ switch($type){
         break;
 }
 ?>
+<?php if(!$custom):?>
 <i style="<?php echo $vars['size']!==false ? 'font-size: 14px;' : '';?>" class="blue fa fa-<?php echo $icon; ?>" title="<?php echo $title; ?>"></i>
+<?php endif;?>

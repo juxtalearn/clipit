@@ -34,7 +34,7 @@ foreach($groups as $group_id){
     elgg_register_menu_item('groups:admin_'.$group_id, array(
         'name' => 'group_files',
         'text' => elgg_echo('group:files'),
-        'href' => "clipit_activity/{$activity_id}/group/{$group_id}/multimedia",
+        'href' => "clipit_activity/{$activity_id}/group/{$group_id}/repository",
         'priority' => 300,
     ));
     $body .= '<ul class="nav nav-pills nav-stacked panel">';

@@ -25,17 +25,19 @@ if(!empty($user_groups)):
             $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
             ?>
             <div class="group">
-                <strong>
-                    <a class="show text-truncate" style="color: #<?php echo $activity->color; ?>" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $group->id;?>">
-                        <i class="pull-right fa fa-caret-down"></i> <?php echo $group->name; ?>
-                    </a>
-                </strong>
+                <a class="text-truncate child-decoration-none" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $group->id;?>">
+                    <i class="pull-right fa fa-caret-down"></i>
+                    <strong><?php echo $group->name; ?></strong>
+                    <span class="text-muted text-truncate">
+                        <i class="activity-point" style="background: #<?php echo $activity->color; ?>"></i>
+                        <?php echo $activity->name;?>
+                    </span>
+                </a>
                 <ul class="panel-collapse collapse no-transition members-list" id="collapse<?php echo $group->id;?>">
                     <?php
                     foreach(ClipitGroup::get_users($group->id) as $user_id):
                         if($user_id != $user_loggedin):
                             $user = array_pop(ClipitUser::get_by_id(array($user_id)));
-                            $user_elgg = new ElggUser($user->id);
                             ?>
                             <li class="text-truncate list-item">
                                 <?php echo elgg_view("page/elements/user_block", array("entity" => $user));?>

@@ -41,7 +41,7 @@ foreach($clone_ids as $clone_id){
         case 'group':
             $outputs[] = array(
                 'id' => $clone_id,
-                'href' => "clipit_activity/{$activity_id}/group/{$group_id}/multimedia",
+                'href' => "clipit_activity/{$activity_id}/group/{$group_id}/repository",
                 'text' => "Group",
             );
             break;

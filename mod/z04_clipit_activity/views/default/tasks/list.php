@@ -21,7 +21,7 @@ if(!$tasks){
     $task = array_pop(ClipitTask::get_by_id(array($task_id)));
     $status = get_task_status($task);
     ?>
-    <li <?php echo (time() < $task->start) ? "class='soon'" : ""; ?> style="overflow: hidden;">
+    <li class="overflow-hidden list-item-5 <?php echo (time() < $task->start) ? "soon" : ""; ?>">
         <div class="image-block">
             <small class="date show" style="text-transform: uppercase">
                 <span><?php echo date("d M Y", $task->start);?></span>

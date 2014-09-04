@@ -8439,6 +8439,7 @@ ul.deadline-list > li {
   color: #9c9e9f;
   border-bottom: 1px solid #bae6f6;
   padding: 10px;
+  padding-top: 0;
 }
 ul.deadline-list > li .date {
   border-right: 1px solid #ccc;
@@ -8447,11 +8448,8 @@ ul.deadline-list > li .date {
 ul.deadline-list > li.soon {
   opacity: .5;
 }
-ul.deadline-list > li .fa {
+ul.deadline-list > li .fa-user {
   font-size: 20px;
-}
-ul.deadline-list > li .fa.fa-users {
-  font-size: 14px;
 }
 .tags-block {
   background: #d6f0fa;
@@ -9238,7 +9236,8 @@ ul.deadline-list > li .fa.fa-users {
 }
 .group-members .group {
   background: #fff;
-  padding: 10px;
+  padding: 5px 10px;
+  font-size: 13px;
   border-radius: 4px;
   margin-bottom: 10px;
 }
@@ -10143,9 +10142,6 @@ ul.tagit input[type="text"] {
   width: inherit;
   background-color: inherit;
   outline: none;
-}
-html {
-  overflow-y: scroll;
 }
 body {
   background: #f1f2f7;

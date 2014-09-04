@@ -117,6 +117,7 @@ ul.deadline-list{
     color: @grey_text;
     border-bottom: 1px solid @blue-lighter;
     padding: 10px;
+    padding-top: 0;
     .date{
       border-right: 1px solid #ccc;
       padding-right: 10px;
@@ -124,12 +125,10 @@ ul.deadline-list{
     &.soon{
       opacity: .5;
     }
-    .fa{
+    .fa-user{
       font-size: @line-height-computed; // ~20px
-      &.fa-users{
-        font-size: ceil(@font-size-base * 0.93); // ~15px
-      }
     }
+
   }
 }
 //

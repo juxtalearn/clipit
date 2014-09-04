@@ -53,7 +53,7 @@ $(function() {
                 title: "<?php echo $task->name;?>",
                 start: "<?php echo date("Y-m-d",$task->start);?>",
                 end: "<?php echo date("Y-m-d",$task->end);?>T10:00:00",
-                icon: '<?php echo elgg_view("tasks/icon_task_type", array('type' => $task->task_type)); ?>'
+                icon: <?php echo json_encode(elgg_view("tasks/icon_task_type", array('type' => $task->task_type))); ?>
             },
             <?php endforeach;?>
         ],
@@ -165,17 +165,17 @@ $(function() {
     ));
     ?>
 </div>
-<hr>
 
+<button type="button" data-toggle="modal" data-target="#create-new-task" class="btn btn-default margin-top-10">
+    <?php echo elgg_echo('task:create'); ?>
+</button>
+<hr>
 <!-- Calendar view -->
 <div id="full-calendar" class="view-element" data-view="calendar" style="display: nonse;"></div>
 
 
 <?php echo elgg_view_form('task/create', array('data-validate' => "true" ), array('entity'  => $activity)); ?>
 <div class="margin-bottom-20 view-element" data-view="list" style="display: none">
-    <button type="button" data-toggle="modal" data-target="#create-new-task" class="btn btn-default">
-        <?php echo elgg_echo('task:create'); ?>
-    </button>
 </div>
 <ul>
     <?php

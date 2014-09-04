@@ -66,12 +66,12 @@ if (is_array($items) && count($items) > 0):
                         <div class="row">
                             <div class="col-xs-6" style="border-right: 1px solid #ccc; padding-right: 15px;">
                                 <?php if($item->tricky_topic):?>
-                                <div style="margin-bottom: 10px;" class="text-truncate">
+                                <div class="text-truncate margin-bottom-10">
                                     <small class="show"><?php echo elgg_echo('tricky_topic');?></small>
                                     <?php echo elgg_view('tricky_topic/preview', array('activity' => $item));?>
                                 </div>
                                 <?php endif; ?>
-                                <?php if($item->status == 'enroll' && $isCalled): ?>
+                                <?php if($item->status == 'enroll' && $item->group_mode == ClipitActivity::GROUP_MODE_STUDENT && $isCalled): ?>
                                     <?php echo elgg_view('output/url', array(
                                         'href'  => "clipit_activity/{$item->id}/join",
                                         'class' => 'btn btn-xs btn-default btn-border-blue-lighter',

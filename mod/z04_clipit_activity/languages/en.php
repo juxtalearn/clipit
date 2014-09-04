@@ -11,6 +11,11 @@
  * @package         ClipIt
  */
 $english = array(
+    // Roles
+    'teacher' => 'Teacher',
+    'student' => 'Student',
+    'admin' => 'Administrator',
+
     'change_to' => 'Change to',
     'current_status' => 'Current status',
     'exit:page:confirmation' => '...Data you have entered may not be saved...',
@@ -28,6 +33,7 @@ $english = array(
     'activity:start' => 'Activity start',
     'activity:end' => 'Activity end',
     'activity:select:tricky_topic' => 'Tricky topic',
+    'activity:overview' => 'Activity overview',
     'activity:admin' => 'Activity admin',
     'my_activities' => 'My activities',
     'my_activities:none' => 'No active activities',
@@ -37,8 +43,8 @@ $english = array(
     'activity:create' => 'Create activity',
     'activity:profile' => 'Activity home',
     'activity:groups' => 'Groups',
-    'activity:discussion' => 'Activity discussion',
-    'activity:stas' => 'Resources',
+    'activity:discussion' => 'Discussion',
+    'activity:stas' => 'Teacher resources',
     'activity:publications' => 'Publications',
     'activity:join' => 'Join activity',
     'activity:group:join' => 'Join group',
@@ -77,8 +83,8 @@ $english = array(
     // Group tools
     'group:menu' => 'Group menu',
     'group:tools' => 'Group tools',
-    'group:discussion' => 'Discussions',
-    'group:files' => 'Multimedia',
+    'group:discussion' => 'Discussion',
+    'group:files' => 'Repository',
     'group:home' => 'Group home',
     'group:activity_log' => 'Activity log',
     'group:progress' => 'Group progress',
@@ -104,11 +110,11 @@ $english = array(
     'multimedia:videos' => 'Videos',
     'multimedia:storyboards' => 'Storyboards',
     'multimedia:links' => 'Interesting links',
-    'multimedia:attach_group' => 'Attach multimedia group',
+    'multimedia:attach_group' => 'Attach repository group',
     'multimedia:attach_files' => 'Attach files',
     'multimedia:uploaded_by' => 'Uploaded by',
-    'multimedia:attachments' => 'multimedia attachments',
-    'multimedia:attachment' => 'multimedia attachment',
+    'multimedia:attachments' => 'repository attachments',
+    'multimedia:attachment' => 'repository attachment',
     // Files
     'files' => 'Files',
     'file' => 'File',
@@ -229,7 +235,7 @@ $english = array(
     'or:create' => 'or create a',
     'activity:site:students' => 'Site students',
     'activity:students' => 'Activity students',
-    'teacher' => 'Teacher',
+
     'teachers:add' => 'Add teachers',
     'teacher:addedresource' => 'Teacher added resource',
     'called:students:add' => 'Add users',

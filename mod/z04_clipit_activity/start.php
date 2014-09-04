@@ -406,7 +406,7 @@ function activity_page_handler($page) {
                                     $href_publications = "clipit_activity/{$activity->id}/publications";
                                     $body = elgg_view('multimedia/video/list', array(
                                         'entities'    => $videos,
-                                        'href'      => "clipit_activity/{$activity->id}/group/{$group_id}/multimedia",
+                                        'href'      => "clipit_activity/{$activity->id}/group/{$group_id}/repository",
                                         'task_id'   => $task->id,
                                         'rating'    => false,
                                         'actions'   => false,
@@ -444,7 +444,7 @@ function activity_page_handler($page) {
                                         } else {
                                             $body = elgg_view('multimedia/video/list', array(
                                                 'entities'    => $videos,
-                                                'href'      => "clipit_activity/{$activity->id}/group/{$group_id}/multimedia",
+                                                'href'      => "clipit_activity/{$activity->id}/group/{$group_id}/repository",
                                                 'task_id'   => $task->id,
                                                 'rating'    => false,
                                                 'actions'   => true,
@@ -489,7 +489,7 @@ function activity_page_handler($page) {
                                     $href_publications = "clipit_activity/{$activity->id}/publications";
                                     $body = elgg_view('multimedia/storyboard/list', array(
                                         'entities'    => $storyboards,
-                                        'href'      => "clipit_activity/{$activity->id}/group/{$group_id}/multimedia",
+                                        'href'      => "clipit_activity/{$activity->id}/group/{$group_id}/repository",
                                         'task_id'   => $task->id,
                                         'publish'   => true,
                                     ));
@@ -524,7 +524,7 @@ function activity_page_handler($page) {
                                         } else {
                                             $body = elgg_view('multimedia/storyboard/list', array(
                                                 'entities'    => $storyboards,
-                                                'href'      => "clipit_activity/{$activity->id}/group/{$group_id}/multimedia",
+                                                'href'      => "clipit_activity/{$activity->id}/group/{$group_id}/repository",
                                                 'task_id'   => $task->id,
                                                 'rating'    => false,
                                                 'actions'   => true,
@@ -1072,11 +1072,11 @@ function group_tools_page_handler($page, $activity){
             elgg_push_breadcrumb($group->name);
             $content = elgg_view('group/dashboard', array('entity' => $group));
             break;
-        case 'multimedia':
+        case 'repository':
             $title = elgg_echo("group:files");
             elgg_push_breadcrumb($title);
             $selected_tab = get_input('filter', 'files');
-            $href = "clipit_activity/{$activity->id}/group/{$group->id}/multimedia";
+            $href = "clipit_activity/{$activity->id}/group/{$group->id}/repository";
             switch ($selected_tab) {
                 case 'files':
                     $files = ClipitGroup::get_files($group->id);

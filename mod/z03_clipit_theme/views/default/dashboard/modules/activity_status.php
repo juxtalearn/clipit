@@ -21,7 +21,7 @@ foreach($activities as $activity):
         $activity_progress = 5;
     }
 ?>
-    <div class="bar" style="max-width:100%;width:<?php echo $activity_progress;?>%;background: #<?php echo $activity->color;?>;">
+    <div class="bar" style="height: 35px;line-height: 35px;max-width:100%;width:<?php echo $activity_progress;?>%;background: #<?php echo $activity->color;?>;">
         <div>
             <h4>
              <?php echo elgg_view('output/url', array(
