@@ -36,12 +36,13 @@ if(mb_strlen($file_description)>165){
     <?php echo $file_description; ?>
 </p>
 <small class="show">
+    <?php echo elgg_view("publications/owner_summary", array(
+        'entity' => $file,
+        'entity_class' => 'ClipitFile',
+        'msg' => elgg_echo('multimedia:uploaded_by')
+    ));
+    ?>
     <i>
-        <?php echo elgg_view("publications/owner_summary", array(
-            'entity' => $file,
-            'entity_class' => 'ClipitFile',
-            'msg' => elgg_echo('multimedia:uploaded_by')
-        ));
-        ?>
+        <?php echo elgg_view('output/friendlytime', array('time' => $storyboard->time_created));?>
     </i>
 </small>

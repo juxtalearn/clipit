@@ -57,7 +57,7 @@ $team_members = array(
         array(
             'name' => 'Estefanía Martín',
             'image' => "estefania.png",
-            'position' => 'Lead investigator',
+            'position' => elgg_echo('position:li'),
             'description' => elgg_echo('team:estefania'),
             'social' => array(
                 'twitter' => 'EstefaniaURJC',
@@ -68,7 +68,7 @@ $team_members = array(
         array(
             'name' => 'Pablo llinás',
             'image' => "llinas.png",
-            'position' => 'Technical Project Manager',
+            'position' => elgg_echo('position:tpm'),
             'description' => elgg_echo('team:pablollinas'),
             'social' => array(
                 'twitter' => 'pebs74',
@@ -79,7 +79,7 @@ $team_members = array(
         array(
             'name' => 'Miguel A. Gutiérrez',
             'image' => "miguel.png",
-            'position' => 'Senior Web Developer',
+            'position' => elgg_echo('position:swd'),
             'description' => elgg_echo('team:miguelangel'),
             'social' => array(
                 'twitter' => 'miguelangelgm91',
@@ -90,7 +90,7 @@ $team_members = array(
         array(
             'name' => 'Isidoro Hernán',
             'image' => "isi.png",
-            'position' => 'Researcher',
+            'position' => elgg_echo('position:researcher'),
             'description' => elgg_echo('team:isidoro'),
             'social' => array(
                 'youtube' => 'channel/UCAZfYqqx1pGvpyUaxikBlTw',
@@ -102,7 +102,7 @@ $team_members = array(
         array(
             'name' => 'Jaime Urquiza',
             'image' => "jaime.png",
-            'position' => 'Researcher',
+            'position' => elgg_echo('position:researcher'),
             'description' => elgg_echo('team:jaime'),
             'social' => array(
                 'twitter' => 'jaimeurquizaf',
@@ -113,7 +113,7 @@ $team_members = array(
         array(
             'name' => 'Manuel Gertrudix',
             'image' => "manuel.png",
-            'position' => 'Researcher',
+            'position' => elgg_echo('position:researcher'),
             'description' => elgg_echo('team:manuel'),
             'social' => array(
                 'twitter' => 'gertrudix',
@@ -124,7 +124,7 @@ $team_members = array(
         array(
             'name' => 'Gemma de Castro',
             'image' => "gemma.png",
-            'position' => 'Graphic Designer',
+            'position' => elgg_echo('position:gd'),
             'description' => elgg_echo('team:gemma'),
             'social' => array(
                 'web' => 'http://www.gemmayuscula.com/',
@@ -133,13 +133,13 @@ $team_members = array(
         ),
         array(
             'name' => 'Pablo A. Haya',
-            'position' => 'Research Advisor',
+            'position' => elgg_echo('position:ra'),
             'image' => "pabloh.png",
             'description' => elgg_echo('team:phaya'),
             'social' => array(
-                'twitter' => 'account',
+                'twitter' => 'pablohaya',
                 'web' => 'http://pablohaya.com',
-                'linkedin' => 'account'
+                'linkedin' => 'pub/pablo-haya/5/90b/536'
             )
         )
     ),
@@ -147,7 +147,7 @@ $team_members = array(
         array(
             'name' => 'Jorge J. Castellanos',
             'image' => "jorge.png",
-            'position' => 'Technical Advisor',
+            'position' => elgg_echo('position:ta'),
             'description' => elgg_echo('team:jorge'),
             'social' => array(
                 'twitter' => 'jorgejjcv',

@@ -133,6 +133,8 @@ function explore_page_handler($page) {
             break;
     }
     // Get publications items
+    $searched_videos = $videos;
+    $searched_storyboards= $storyboards;
     if($activity_id){
         if($by){
             $visible_videos = get_visible_items_by_activity($activity_id, $videos, 'videos');
@@ -224,7 +226,12 @@ function explore_page_handler($page) {
     // Filter
     $my_activities_ids = ClipitUser::get_activities($user_id);
     $my_activities = ClipitActivity::get_by_id($my_activities_ids);
-    $menu_filter = elgg_view("explore/sidebar/menu", array('entities' => $my_activities));
+    $menu_filter = elgg_view("explore/sidebar/menu",
+        array(
+            'entities' => $my_activities,
+            'videos' => $searched_videos,
+            'storyboards' => $searched_storyboards
+        ));
     $sidebar = elgg_view_module('aside', elgg_echo('explore:menu'), $menu_filter);
     // Tags
     $tags = ClipitTag::get_all(10);

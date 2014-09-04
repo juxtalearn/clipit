@@ -53,6 +53,7 @@ $english = array(
     'status:closed' => 'Finished',
 
     'my_group:progress' => 'My group progress',
+    'group:max_size' => 'Max students per group',
     'group:activity' => 'Group health',
     'group:name' => 'Group name',
     'group:create' => 'Group create',
@@ -225,6 +226,7 @@ $english = array(
     'task:finished' => 'Task finished',
     'rating:none' => 'No rating',
     // Create activity
+    'or:create' => 'or create a',
     'activity:site:students' => 'Site students',
     'activity:students' => 'Activity students',
     'teacher' => 'Teacher',

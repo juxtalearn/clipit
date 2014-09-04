@@ -59,6 +59,15 @@ $spanish = array(
     'friendlytime:next:hours:singular' => "una hora",
     'friendlytime:next:days' => "%s días",
     'friendlytime:next:days:singular' => "ayer",
+
+    // Positions
+    'position:li' => 'Investigador Principal',
+    'position:tpm' => 'Responsable Técnico del Proyecto',
+    'position:swd' => 'Desarrollador Web Senior',
+    'position:researcher' => 'Investigador',
+    'position:gd' => 'Diseñadora Gráfica',
+    'position:ra' => 'Consultor de Investigación',
+    'position:ta' => 'Consultor Técnico',
 );
 
 add_translation('es', $spanish);

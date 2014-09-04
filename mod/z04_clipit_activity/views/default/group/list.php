@@ -23,7 +23,6 @@ foreach($groups_id as $group_id):
     <div class="col-md-6">
         <div style="border-bottom: 6px solid #bae6f6; padding-bottom: 15px;">
             <h3><?php echo $group->name; ?></h3>
-            <?php if(count($users_id) > 0): ?>
             <ul style="height: 250px;overflow-y: auto;">
                 <?php
                 foreach($users_id as $user_id):
@@ -34,7 +33,6 @@ foreach($groups_id as $group_id):
                     </li>
                 <?php endforeach ?>
             </ul>
-            <?php endif ?>
         </div>
     </div>
 <?php endforeach ?>

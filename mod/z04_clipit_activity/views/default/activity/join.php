@@ -35,7 +35,6 @@ $user_group = ClipitGroup::get_from_user_activity($user_owner, $activity->id);
     <!-- Button group join/leave -->
     <?php echo $optButton;?>
     <h3 class='title-bold'><?php echo $group->name;?></h3>
-    <?php if(count($users_id) > 0):?>
         <ul style="height: 150px;overflow-y: auto;" class="member-list">
         <?php
         foreach($users_id as $user_id):
@@ -46,7 +45,6 @@ $user_group = ClipitGroup::get_from_user_activity($user_owner, $activity->id);
             </li>
         <?php endforeach;?>
         </ul>
-    <?php endif; ?>
     </div>
 </div>
 <?php endforeach;?>

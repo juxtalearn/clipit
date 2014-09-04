@@ -173,14 +173,10 @@ $(function(){
             $(".events-more-link").attr("href", hrefString.replace("offset=" + offset, "offset=" + totalEvents));
         }
     });
-
     /**
-     * Collapse in tree menu
+     * Menu builder tracking
+     * Right sidebar set active when href found register menu
      */
-    var isSelected = $("#accordion").find("li.active");
-    if(isSelected){
-        isSelected.parent("ul").addClass("in").prev().find("a").css("opacity", 0.7);
-    }
     var full_url = window.location.href;
     var urls_type = ['/view/', '?filter='];
     for(i in urls_type){
@@ -190,6 +186,14 @@ $(function(){
             menu_item.parent("li").addClass("active");
         }
     }
+    /**
+     * Collapse in tree menu
+     */
+    var isSelected = $("#accordion").find("li.active");
+    if(isSelected){
+        isSelected.parent("ul").addClass("in").prev().find("a").css("opacity", 0.7);
+    }
+
     /**
      * Toggle menu
      */

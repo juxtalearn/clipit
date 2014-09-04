@@ -41,7 +41,7 @@
         </div>
         <div id="collapse_2" class="panel-collapse collapse">
             <div class="panel-body">
-                <?php echo elgg_view("activity/create/groups/limit");?>
+                <?php echo elgg_view("activity/create/groups/limit", array('name' => 'max-users[2]'));?>
             </div>
         </div>
     </div>
@@ -57,7 +57,7 @@
         </div>
         <div id="collapse_3" class="panel-collapse collapse">
             <div class="panel-body form-group">
-                <?php echo elgg_view("activity/create/groups/limit");?>
+                <?php echo elgg_view("activity/create/groups/limit", array('name' => 'max-users[3]'));?>
             </div>
         </div>
     </div>

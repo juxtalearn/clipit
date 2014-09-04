@@ -62,6 +62,15 @@ $english = array(
     'friendlytime:next:hours:singular' => "an hour",
     'friendlytime:next:days' => "%s days",
     'friendlytime:next:days:singular' => "tomorrow",
+
+    // Positions
+    'position:li' => 'Lead Investigator',
+    'position:tpm' => 'Technical Project Manager',
+    'position:swd' => 'Senior Web Developer',
+    'position:researcher' => 'Researcher',
+    'position:gd' => 'Graphic Designer',
+    'position:ra' => 'Research Advisor',
+    'position:ta' => 'Technical Advisor',
 );
 
 add_translation('en', $english);

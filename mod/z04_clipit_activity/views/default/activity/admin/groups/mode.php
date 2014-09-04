@@ -22,7 +22,7 @@ $activity = elgg_extract('activity', $vars);
         <div class="col-xs-9">
             <?php if($activity->group_mode != ClipitActivity::GROUP_MODE_TEACHER):?>
                 <div class="pull-right">
-                    <small class="show">Max students per group</small>
+                    <small class="show"><?php echo elgg_echo('group:max_size');?></small>
                     <?php
                         echo elgg_view("input/text", array(
                             'name' => 'max-users',

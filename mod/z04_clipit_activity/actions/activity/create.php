@@ -64,12 +64,26 @@ switch($groups_creation){
     // Teacher make groups
     case 1:
         $groups = get_input('group');
-        ClipitActivity::set_properties($activity_id, array('max_group_size' => $max_users));
+        $group_mode = ClipitActivity::GROUP_MODE_TEACHER;
+        break;
+    // Student makes groups
+    case 2:
+        $group_mode = ClipitActivity::GROUP_MODE_STUDENT;
+        shuffle($called_users);
+        $chunks = array_chunk($called_users, $max_users[2]);
+        $num = 1;
+        foreach($chunks as $users_array){
+            $groups[] = array(
+                'name' => elgg_echo('group'). " ". $num,
+            );
+            $num++;
+        }
+        ClipitActivity::set_properties($activity_id, array('max_group_size' => $max_users[2]));
         break;
     // Random
     case 3:
         shuffle($called_users);
-        $chunks = array_chunk($called_users, $max_users);
+        $chunks = array_chunk($called_users, $max_users[3]);
         $num = 1;
         foreach($chunks as $users_array){
             $groups[] = array(
@@ -78,16 +92,20 @@ switch($groups_creation){
             );
             $num++;
         }
-        ClipitActivity::set_properties($activity_id, array('max_group_size' => $max_users));
+        ClipitActivity::set_properties($activity_id, array('max_group_size' => $max_users[3]));
+        $group_mode = ClipitActivity::GROUP_MODE_SYSTEM;
         break;
 }
+ClipitActivity::set_properties($activity_id, array('group_mode' => $group_mode));
 if($groups_creation){
     foreach($groups as $group){
         $group_id = ClipitGroup::create(array(
             'name' => $group['name'],
         ));
-        $users = explode(",", $group['users']);
-        ClipitGroup::add_users($group_id, $users);
+        if($group['users']){
+            $users = explode(",", $group['users']);
+            ClipitGroup::add_users($group_id, $users);
+        }
         ClipitActivity::add_groups($activity_id, array($group_id));
     }
 }

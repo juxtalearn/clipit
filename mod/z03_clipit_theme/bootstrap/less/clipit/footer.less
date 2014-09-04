@@ -27,7 +27,7 @@
   // Site Map
   .site-map{
     h4{
-      font-size: ceil(@font-size-large * 1.11);
+      font-size: @font-size-large;
       color: #FFFFFF;
       font-family: @font-family-helvetica;
       text-transform: uppercase;
@@ -36,7 +36,7 @@
     ul{
       list-style: none;
       padding: 0px;
-      font-size: @font-size-large;
+      font-size: ceil(@font-size-base * 1.14); // ~16px;
       font-family: @font-family-helvetica;
       > li{
         margin: 10px 0px;
@@ -52,4 +52,8 @@
       }
     }
   }
+}
+// Team section
+.team-section + #footer{
+  margin: 0;
 }

@@ -199,11 +199,12 @@ function home_user_account_page_handler($page_elements, $handler) {
 }
 
 function setup_footer_menus(){
+    $clipit_global_href = "http://www.clipit.es/";
     elgg_register_menu_item(
         'footer_clipit',
         array(
             'name' => 'about',
-            'href' => 'clipit/about',
+            'href' => $clipit_global_href . 'clipit/about',
             'text' => elgg_echo('about'),
             'priority' => 450,
             'section' => 'clipit',
@@ -213,7 +214,7 @@ function setup_footer_menus(){
         'footer_clipit',
         array(
             'name' => 'team',
-            'href' => 'clipit/team',
+            'href' => $clipit_global_href . 'clipit/team',
             'text' => elgg_echo('team'),
             'priority' => 455,
             'section' => 'clipit',
@@ -223,7 +224,7 @@ function setup_footer_menus(){
         'footer_clipit',
         array(
             'name' => 'developers',
-            'href' => 'clipit/developers',
+            'href' => $clipit_global_href . 'clipit/developers',
             'text' => elgg_echo('developers'),
             'priority' => 460,
             'section' => 'clipit',
@@ -234,7 +235,7 @@ function setup_footer_menus(){
         'footer_clipit',
         array(
             'name' => 'terms',
-            'href' => 'legal/terms',
+            'href' => $clipit_global_href . 'legal/terms',
             'text' => elgg_echo('terms'),
             'priority' => 460,
             'section' => 'legal',
@@ -244,41 +245,10 @@ function setup_footer_menus(){
         'footer_clipit',
         array(
             'name' => 'privacy',
-            'href' => 'legal/privacy',
+            'href' => $clipit_global_href . 'legal/privacy',
             'text' => elgg_echo('privacy'),
             'priority' => 465,
             'section' => 'legal',
-        )
-    );
-    elgg_register_menu_item(
-        'footer_clipit',
-        array(
-            'name' => 'community_guidelines',
-            'href' => 'legal/community_guidelines',
-            'text' => elgg_echo('community_guidelines'),
-            'priority' => 470,
-            'section' => 'legal',
-        )
-    );
-    // Help section
-    elgg_register_menu_item(
-        'footer_clipit',
-        array(
-            'name' => 'support_center',
-            'href' => 'help/support_center',
-            'text' => elgg_echo('support_center'),
-            'priority' => 470,
-            'section' => 'help',
-        )
-    );
-    elgg_register_menu_item(
-        'footer_clipit',
-        array(
-            'name' => 'basics',
-            'href' => 'help/basics',
-            'text' => elgg_echo('basics'),
-            'priority' => 475,
-            'section' => 'help',
         )
     );
 }
