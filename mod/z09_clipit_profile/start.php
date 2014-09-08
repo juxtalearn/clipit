@@ -36,20 +36,22 @@ function clipit_profile_init() {
  */
 function profile_page_handler($page){
     if($page[0] && $user = array_pop(ClipitUser::get_by_login(array($page[0])))){
+        $title = $user->name;
         switch($user->role){
             case ClipitUser::ROLE_STUDENT:
-                $title = '<small class="margin-top-5 show">'.elgg_echo('student').'</small>';
+                $sub_title = '<small class="margin-top-5 show">'.elgg_echo('student').'</small>';
                 break;
             case ClipitUser::ROLE_TEACHER:
-                $title = '<small class="margin-top-5 show yellow">'.elgg_echo('teacher').'</small>';
+                $sub_title = '<small class="margin-top-5 show yellow">'.elgg_echo('teacher').'</small>';
                 break;
             case ClipitUser::ROLE_ADMIN:
-                $title = '<small class="margin-top-5 red">'.elgg_echo('admin').'</small>';
+                $sub_title = '<small class="margin-top-5 red">'.elgg_echo('admin').'</small>';
                 break;
         }
         $params = array(
             'content' => elgg_view("profile/layout", array('entity' => $user)),
-            'title' => $user->name . $title,
+            'title' => $title,
+            'sub_title' => $sub_title,
             'filter' => "",
         );
         $body = elgg_view_layout('one_column', $params);
