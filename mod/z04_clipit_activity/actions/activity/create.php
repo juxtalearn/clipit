@@ -58,6 +58,7 @@ ClipitActivity::add_students($activity_id, $called_users);
 /**
  * Groups creation
  */
+$filter = false;
 $groups_creation = get_input('groups_creation');
 $max_users = get_input('max-users');
 switch($groups_creation){
@@ -65,6 +66,7 @@ switch($groups_creation){
     case 1:
         $groups = get_input('group');
         $group_mode = ClipitActivity::GROUP_MODE_TEACHER;
+        $filter = "?filter=groups";
         break;
     // Student makes groups
     case 2:
@@ -113,4 +115,4 @@ if($groups_creation){
 $user_id = elgg_get_logged_in_user_guid();
 ClipitActivity::add_teachers($activity_id, array($user_id));
 
-forward("clipit_activity/{$activity_id}/admin");
+forward("clipit_activity/{$activity_id}/admin".$filter);

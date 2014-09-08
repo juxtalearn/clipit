@@ -64,7 +64,7 @@ function view_recommended_event($event, $view_type = 'full'){
                 'text'  => $activity->name,
             ));
             $params = array(
-                'title' => elgg_echo ('activity:invited') . /*'Called for '*/ ' ' .$activity_link.' activity',
+                'title' => elgg_echo ('activity:invited') . "" . /*'Called for '*/ ' ' .$activity_link,
                 'icon' => 'fa-bullhorn',
                 'author' => $entity->owner_id,
                 'body' => ''

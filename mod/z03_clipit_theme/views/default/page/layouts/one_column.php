@@ -24,10 +24,7 @@ $filter = elgg_extract('filter', $vars);
     <?php if (isset($vars['title'])):?>
         <div class='elgg-head-layout' <?php echo $title_style;?>>
             <?php echo $nav;?>
-            <?php echo elgg_view_title($vars['title']);?>
-        <?php if ($sub_title = $vars['sub_title']):?>
-            <small class="<?php echo $sub_title['title'];?>"><?php echo $sub_title['title'];?></small>
-        <?php endif;?>
+            <?php echo elgg_view_title($vars['title'] . $vars['sub_title']);?>
        </div>
     <?php endif;?>
         <?php echo $filter; ?>

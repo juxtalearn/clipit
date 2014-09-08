@@ -137,6 +137,6 @@ if($task_id = get_input('task_id')):
         </div>
     </div>
 </div>
-<p class="text-center">
+<p class="text-right">
     <?php echo elgg_view('input/submit', array('value' => elgg_echo('publish'), 'class' => 'elgg-button btn btn-primary'));?>
 </p>

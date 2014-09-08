@@ -162,6 +162,10 @@ function clipit_activity_init() {
     elgg_register_js("jquery:multiselect", elgg_get_site_url() . "mod/z04_clipit_activity/vendors/jquery.multi-select.js");
     // jQuery QuickSearch
     elgg_register_js("jquery:quicksearch", elgg_get_site_url() . "mod/z04_clipit_activity/vendors/jquery.quicksearch.js");
+    // FullCalendar
+    elgg_register_js("fullcalendar:moment", elgg_get_site_url() . "mod/z04_clipit_activity/vendors/fullcalendar/moment.min.js");
+    elgg_register_js("fullcalendar", elgg_get_site_url() . "mod/z04_clipit_activity/vendors/fullcalendar/fullcalendar.min.js");
+    elgg_register_css("fullcalendar", elgg_get_site_url() . "mod/z04_clipit_activity/vendors/fullcalendar/fullcalendar.css");
 }
 function activity_setup_sidebar_menus(){
     $activity_id =  elgg_get_page_owner_guid();

@@ -38,6 +38,4 @@ echo elgg_view('js/admin');
                 .find("input[name='user-name[]']")
                 .focus();
     });
-    // Datepicker start
-    $(".datepicker").datepicker();
 });

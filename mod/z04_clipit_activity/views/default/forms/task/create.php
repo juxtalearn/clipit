@@ -16,16 +16,6 @@ $body = elgg_view("input/hidden", array(
     'name' => 'entity-id',
     'value' => $activity->id,
 ));
-$body .= '
-<script>
-$(function(){
-    $(".datepicker").datepicker({
-        minDate: "'.date("d/m/Y", $activity->start).'",
-        maxDate: "'.date("d/m/Y", $activity->end).'"
-    });
-});
-</script>
-';
 $id = uniqid();
 $body .= '<div class="task">';
 $body .= elgg_view('activity/create/task', array('task_type' => 'upload', 'id' => $id));

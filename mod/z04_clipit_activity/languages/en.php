@@ -110,7 +110,7 @@ $english = array(
     'multimedia:videos' => 'Videos',
     'multimedia:storyboards' => 'Storyboards',
     'multimedia:links' => 'Interesting links',
-    'multimedia:attach_group' => 'Attach repository group',
+    'multimedia:attach_group' => 'Attach group repositories',
     'multimedia:attach_files' => 'Attach files',
     'multimedia:uploaded_by' => 'Uploaded by',
     'multimedia:attachments' => 'repository attachments',
@@ -254,6 +254,8 @@ $english = array(
     'activity:admin:task_setup' => 'Tasks setup',
     'activity:admin:groups' => 'Groups setup',
     'activity:admin:setup' => 'Activity setup',
+    'groups:select:move' => 'move to group...',
+    'or' => 'or',
 );
 
 add_translation('en', $english);

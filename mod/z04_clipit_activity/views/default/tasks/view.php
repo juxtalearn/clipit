@@ -38,6 +38,7 @@ $super_title = elgg_extract('super_title', $vars);
         <?php if($super_title):?>
             <span class="text-muted show"><?php echo $super_title;?></span>
         <?php endif;?>
+        <?php echo elgg_view("tasks/icon_task_type", array('type' => $task->task_type, 'size' => false)); ?>
         <?php echo $task->name;?>
     </h3>
     <small class="show details">

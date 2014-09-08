@@ -70,6 +70,7 @@ $task_types = array_merge(array('' => 'Select task type'), $task_types);
                 <?php echo elgg_view("input/hidden", array(
                     'name' => "task{$input_array}[type]",
                     'class' => 'form-control task-types',
+                    'value' => $vars['default_task'] ? $vars['default_task'] : false,
                 ));
                 ?>
             <?php endif;?>

@@ -130,7 +130,7 @@ $(function(){
             <?php endforeach;?>
         </select>
         <div style="display: inline-block;text-transform: uppercase;margin: 0 10px;" class="text-muted">
-            <i class="fa fa-minus"></i> Or <i class="fa fa-minus"></i>
+            <i class="fa fa-minus"></i> <?php echo elgg_echo('or');?> <i class="fa fa-minus"></i>
         </div>
         <?php echo elgg_view('input/button',
             array(

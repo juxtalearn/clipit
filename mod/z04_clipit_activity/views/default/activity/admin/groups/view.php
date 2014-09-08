@@ -119,19 +119,7 @@ $(function(){
             });
         }
     }).disableSelection();
-        $("#move-group").html("");
-        $("<option></option>")
-            .val("")
-            .text("<?php echo elgg_echo('groups:select:move');?>")
-            .appendTo("#move-group");
-        $(".group-list").each(function(){
-            var id = $(this).find(".input-group").val();
-            var name = $(this).find(".input-group-name").val();
-            $("<option></option>")
-                .val(id)
-                .text(name)
-                .appendTo("#move-group");
-        });
+        update_move_to_group();
     };
     sortable_groups();
     // Multiselect
@@ -200,6 +188,7 @@ $(function(){
         elgg.action('activity/admin/groups_setup', {
              data: $(".groups-form").serialize()
         });
+        update_move_to_group();
     });
     $(document).on("click", ".site-users li", function(){
         var user = $(this);
@@ -254,6 +243,21 @@ $(function(){
         });
     });
 });
+function update_move_to_group(){
+    $("#move-group").html("");
+    $("<option></option>")
+        .val("")
+        .text("<?php echo elgg_echo('groups:select:move');?>")
+        .appendTo("#move-group");
+    $(".group-list:visible").each(function(){
+        var id = $(this).find(".input-group").val();
+        var name = $(this).find(".input-group-name").val();
+        $("<option></option>")
+            .val(id)
+            .text(name)
+            .appendTo("#move-group");
+    });
+}
 function refresh_users_list(list){
     var user_ids = [];
     // users values
