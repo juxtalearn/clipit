@@ -168,24 +168,24 @@ echo elgg_view_form('activity/admin/setup', array('body' => $activity_status));
     </span>
     </small>
 </div>
-<p>
-    <?php echo elgg_view('output/url', array(
-        'title' => elgg_echo('expand:all'),
-        'text' => elgg_echo('expand:all'),
-        'href' => "javascript:;",
-        'id' => 'panel-expand-all',
-    ));
-    ?>
-    <span class="text-muted">|</span>
-    <?php echo elgg_view('output/url', array(
-        'title' => elgg_echo('collapse:all'),
-        'text' => elgg_echo('collapse:all'),
-        'href' => "javascript:;",
-        'id' => 'panel-collapse-all',
-    ));
-    ?>
-</p>
 <?php if($groups):?>
+    <p>
+        <?php echo elgg_view('output/url', array(
+            'title' => elgg_echo('expand:all'),
+            'text' => elgg_echo('expand:all'),
+            'href' => "javascript:;",
+            'id' => 'panel-expand-all',
+        ));
+        ?>
+        <span class="text-muted">|</span>
+        <?php echo elgg_view('output/url', array(
+            'title' => elgg_echo('collapse:all'),
+            'text' => elgg_echo('collapse:all'),
+            'href' => "javascript:;",
+            'id' => 'panel-collapse-all',
+        ));
+        ?>
+    </p>
     <div class="panel-group" id="gr_accordion">
         <?php
         foreach($groups as $group):
@@ -211,4 +211,6 @@ echo elgg_view_form('activity/admin/setup', array('body' => $activity_status));
             </div>
         <?php endforeach;?>
     </div>
+<?php else:?>
+    <?php echo elgg_view('output/empty', array('value' => elgg_echo('groups:none')));?>
 <?php endif;?>

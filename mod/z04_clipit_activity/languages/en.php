@@ -77,6 +77,7 @@ $english = array(
     'group:member:cantremove' => 'Cannot remove user from group',
     'group:member:removed' => 'Successfully removed %s from group',
     'group:added' => 'Group added to activity',
+    'groups:none' => 'No groups',
     // Quizz
     'quiz' => 'Quiz',
 

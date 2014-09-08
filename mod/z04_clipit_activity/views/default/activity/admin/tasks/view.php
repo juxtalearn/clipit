@@ -16,9 +16,6 @@ elgg_load_js("fullcalendar:moment");
 elgg_load_js("fullcalendar");
 elgg_load_css("fullcalendar");
 ?>
-<!--<script src="http://arshaw.com/js/fullcalendar-2.0.2/lib/moment.min.js"></script>-->
-<!--<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.0.2/fullcalendar.min.js"></script>-->
-<!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.0.2/fullcalendar.css" type="text/css" />-->
 <script>
 $(function() {
     // Task views
