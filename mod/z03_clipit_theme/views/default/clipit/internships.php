@@ -10,38 +10,17 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$images_dir = "mod/z03_clipit_theme/graphics/team/";
-$intership_members = array(
-    array(
-        array(
-            'name' => 'Virginia del Castillo',
-            'position' => 'Intership',
-            'image' => "virginia.png",
-            'description' => 'lorem ipsum.....',
-        ),
-        array(
-            'name' => 'Ángel Francisco',
-            'position' => 'Intership',
-            'image' => "angel.png",
-            'description' => 'lorem ipsum.....',
-        ),
-        array(
-            'name' => 'Rocío Blanco',
-            'position' => 'Intership',
-            'image' => "rocio.png",
-            'description' => 'lorem ipsum.....',
-        )
-    ),
-);
+$internships_members = elgg_extract('internships', $vars);
+$images_dir = elgg_extract('images_dir', $vars);
 ?>
-<h3 style="margin-left: 50px;" class="blue margin-bottom-20">Interships</h3>
-<?php foreach($intership_members as $members):?>
-    <div class="margin-top-20 row" style="padding-left: 50px;">
+<h3 style="margin-left: 50px;" class="blue margin-bottom-20"><?php echo elgg_echo('internships');?></h3>
+<?php foreach($internships_members as $members):?>
+    <div class="margin-top-20 row">
         <?php
         foreach($members as $member):
             $id = uniqid();
             ?>
-            <div class="col-md-2 col-xs-4 text-center">
+            <div class="col-md-3 col-xs-5 text-center">
                 <?php if($member['image']):?>
                     <?php echo elgg_view('output/img', array(
                         'src' => $images_dir.$member['image'],
@@ -54,7 +33,9 @@ $intership_members = array(
                 <?php endif;?>
                 <div class="margin-top-10 blue">
                     <span class="cursor-default author-text" style="font-size: 11px;"><?php echo $member['name'];?></span>
+                    <?php if($member['position']):?>
                     <i class="show"><?php echo $member['position'];?></i>
+                    <?php endif;?>
                     <div class="margin-top-5">
                         <?php
                         foreach($member['social'] as $name => $account):

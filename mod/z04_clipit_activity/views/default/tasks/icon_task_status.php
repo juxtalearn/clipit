@@ -15,15 +15,15 @@ $status = elgg_extract('status', $vars);
 switch($status){
     case ClipitTask::STATUS_LOCKED:
         $title = elgg_echo('task:locked');
-        $icon = "lock";
+        $icon = "clock";
         break;
     case ClipitTask::STATUS_ACTIVE:
         $title = elgg_echo('task:active');
-        $icon = "unlock-alt";
+        $icon = "play";
         break;
     case ClipitTask::STATUS_FINISHED:
         $title = elgg_echo('task:finished');
-        $icon = "ban";
+        $icon = "stop";
         break;
 }
 ?>

@@ -83,6 +83,28 @@ $(function(){
 <div id="step_1" class="row step">
     <div class="col-md-6">
         <div class="form-group">
+            <label for="activity-tricky-topic"><?php echo elgg_echo("activity:select:tricky_topic");?></label>
+            <?php echo elgg_view('input/dropdown', array(
+                'name' => 'activity-tricky-topic',
+                'class' => 'form-control',
+                'required' => true,
+                'style' => 'padding-top: 5px;padding-bottom: 5px;',
+                'id' => 'tricky_topic_list',
+                'options_values' => $tt
+            ));
+            ?>
+        </div>
+        <div class="row margin-0 margin-bottom-10" id="tricky_topic_view" style="display: none;background: #fafafa;padding: 10px;"></div>
+        <?php echo elgg_echo('or:create');?>
+        <?php echo elgg_view('output/url', array(
+            'href'  => "http://trickytopic.".ClipitSite::get_domain(),
+            'title' => elgg_echo('tricky_topic'),
+            'text'  => elgg_echo('tricky_topic'),
+        ));
+        ?>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
             <label for="activity-title"><?php echo elgg_echo("activity:title");?></label>
             <?php echo elgg_view("input/text", array(
                 'name' => 'activity-title',
@@ -122,31 +144,7 @@ $(function(){
             ?>
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="form-group">
-            <label for="activity-tricky-topic"><?php echo elgg_echo("activity:select:tricky_topic");?></label>
-            <?php echo elgg_view('input/dropdown', array(
-                'name' => 'activity-tricky-topic',
-                'class' => 'form-control',
-                'required' => true,
-                'style' => 'padding-top: 5px;padding-bottom: 5px;',
-                'id' => 'tricky_topic_list',
-                'options_values' => $tt
-                ));
-            ?>
-        </div>
-        <div class="row margin-0 margin-bottom-10" id="tricky_topic_view" style="display: none;background: #fafafa;padding: 10px;"></div>
-        <div class="bg-info">
-            <span class="show">Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
-            <?php echo elgg_view('output/url', array(
-                'href'  => "http://trickytopic.".ClipitSite::get_domain(),
-                'class' => 'btn btn-primary btn-xs',
-                'title' => elgg_echo('tricky_topic:tool'),
-                'text'  => elgg_echo('tricky_topic:tool'),
-            ));
-            ?>
-        </div>
-    </div>
+
     <div class="col-md-12 text-right margin-top-20">
         <?php echo elgg_view('input/button', array(
                 'value' => elgg_echo('next'),

@@ -71,6 +71,28 @@ function get_friendly_time($time){
     }
 }
 
+/**
+ * Convert Hex Color to RGB
+ *
+ * @param $hex
+ * @return array
+ */
+function hex2rgb($hex) {
+    $hex = str_replace("#", "", $hex);
+
+    if(strlen($hex) == 3) {
+        $r = hexdec(substr($hex,0,1).substr($hex,0,1));
+        $g = hexdec(substr($hex,1,1).substr($hex,1,1));
+        $b = hexdec(substr($hex,2,1).substr($hex,2,1));
+    } else {
+        $r = hexdec(substr($hex,0,2));
+        $g = hexdec(substr($hex,2,2));
+        $b = hexdec(substr($hex,4,2));
+    }
+    $rgb = array($r, $g, $b);
+    //return implode(",", $rgb); // returns the rgb values separated by commas
+    return $rgb; // returns an array with the rgb values
+}
 function clipit_events_feed($entity){
     $vars['author'] = array_pop(ClipitUser::get_by_id(array($entity->performed_by_guid)));
     $vars['time'] = $entity->time_created;
@@ -159,28 +181,20 @@ function get_group_activity($event){
 }
 
 
-
-
-function clipit_student_events($rel_array){
-    $content = "";
-    foreach($rel_array as $relationship){
-        $subtype = $relationship->object_subtype;
-        $object_rel = get_relationship($relationship->object_id);
-        $general_subtype = explode("-", $subtype);
-        $general_subtype = (string)$general_subtype[0];
-        // Group, Activity
-        switch($general_subtype){
-            case 'group':
-                $content .= group_events($subtype, $object_rel, $relationship);
-                break;
-            case 'activity':
-                $content .= activity_events($subtype, $object_rel, $relationship);
-                break;
-            case 'message':
-                $content .= message_events($subtype, $object_rel, $relationship);
-                break;
-        }
-
+/**
+ * Forward to $location.
+ *
+ * @param $delimiter
+ * @param null $to
+ * @return string
+ */
+function custom_forward_referer($delimiter, $location = null){
+    $referer = $_SERVER['HTTP_REFERER'];
+    $path = explode($delimiter, $referer);
+    if(strpos($referer, $delimiter) !== false){
+        return $path[0] . $location;
+    } else {
+        return $referer;
     }
-    return $content;
+
 }

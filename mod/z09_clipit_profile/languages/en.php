@@ -18,7 +18,7 @@ $english = array(
     'user:add' => 'Add user',
     'user:logout' => 'Logout',
     'profile' => 'Profile',
-    'profile:stats' => 'Statistics page',
+    'profile:stats' => 'Learning Analytics',
     // Settings
     'profile:settings:change' => 'Change your settings',
     'profile:settings:edit_profile' => 'Edit profile',

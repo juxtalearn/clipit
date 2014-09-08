@@ -15,13 +15,15 @@ $href = elgg_extract('href', $vars);
 if(!$tasks){
     echo elgg_view('output/empty', array('value' => elgg_echo('tasks:none')));
 }
+$user_id = elgg_get_logged_in_user_guid();
+$user = array_pop(ClipitUser::get_by_id(array($user_id)));
 ?>
 <ul class="deadline-list">
     <?php foreach($tasks as $task_id):
     $task = array_pop(ClipitTask::get_by_id(array($task_id)));
     $status = get_task_status($task);
     ?>
-    <li <?php echo (time() < $task->start) ? "class='soon'" : ""; ?> style="overflow: hidden;">
+    <li class="overflow-hidden list-item-5 <?php echo (time() < $task->start && $user->role == ClipitUser::ROLE_STUDENT) ? "soon" : ""; ?>">
         <div class="image-block">
             <small class="date show" style="text-transform: uppercase">
                 <span><?php echo date("d M Y", $task->start);?></span>
@@ -33,7 +35,7 @@ if(!$tasks){
         <div class="content-block">
             <?php echo elgg_view("tasks/icon_task_type", array('type' => $task->task_type)); ?>
             <strong>
-            <?php if(time() > $task->start): ?>
+            <?php if(time() > $task->start || $user->role == ClipitUser::ROLE_TEACHER): ?>
                 <?php echo elgg_view('output/url', array(
                     'href' => "{$href}/view/{$task->id}",
                     'title' => $task->name,

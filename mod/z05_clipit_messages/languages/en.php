@@ -15,6 +15,7 @@ $english = array(
     'messages' => 'Messages',
     'messages:compose' => 'Compose a message',
     'messages:subject' => 'Subject',
+    'message:send' => 'Send a message',
 
     'messages:inbox' => 'Inbox',
     'messages:drafts' => 'Drafts',

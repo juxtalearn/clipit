@@ -12,6 +12,7 @@
  */
 $users = elgg_extract('users', $vars);
 $activity = elgg_extract('activity', $vars);
+$groups = ClipitGroup::get_by_id($activity->group_array);
 ?>
 <script>
 $(function(){
@@ -70,66 +71,73 @@ $(function(){
     'value' => $activity->id,
 ));
 ?>
-<p class="pull-right margin-top-20">
-<!--    --><?php //echo elgg_view('input/submit',
-//        array(
-//            'id'    => 'create',
-//            'value' => elgg_echo('create'),
-//            'class' => "btn btn-primary"
-//        ));
-//    ?>
-    <?php echo elgg_view('input/button',
-        array(
-            'id'    => 'create',
-            'value' => elgg_echo('create'),
-            'class' => "btn btn-primary"
-        ));
-    ?>
-</p>
-<div class="form-group margin-top-10">
-    <a class="btn btn-primary btn-xs fileinput-button" id="insert-site">
-        <i class="fa fa-upload"></i>
-        <?php echo elgg_echo('called:students:add_from_excel');?>
-        <?php echo elgg_view("input/file", array(
-            'name' => 'upload-users',
-            'class' => 'upload-users',
-            'id' => 'upload-users',
-        ));
-        ?>
-    </a>
-    <?php echo elgg_view('output/url', array(
-        'title' => elgg_echo('called:students:add_from_site'),
-        'text' => '<i class="fa fa-plus"></i> '. elgg_echo('called:students:add_from_site'),
-        'href' => "javascript:;",
-        'onclick' => "$('.site-users').toggle();",
-        'class' => 'btn btn-xs btn-primary',
-    ));
-    ?>
-    <ul class="margin-top-10 site-users" style="display: none;width: 45%;overflow-y: auto;max-height: 200px">
-        <?php
-        foreach(ClipitUser::get_all() as $user):
-            if(!in_array($user->id, $activity->student_array) && $user->role == 'student'):
-                ?>
-                <li data-user="<?php echo $user->id;?>" style="padding: 2px;" class="cursor-pointer list-item-5" value="<?php echo $user->id;?>">
-                    <?php echo elgg_view('output/img', array(
-                        'src' => get_avatar($user, 'small'),
-                        'class' => 'avatar-tiny'
-                    ));
-                    ?>
-                    <?php echo $user->name;?>
-                </li>
-            <?php
-            endif;
-        endforeach;
-        ?>
-    </ul>
-    <div>
-        <a class="upload-messages"></a>
-    </div>
-    <div class="margin-top-10">
-        <a href="<?php echo elgg_get_site_url();?>mod/z04_clipit_activity/vendors/templates/clipit_users.xlsx" target="_blank">
-            <i class="fa fa-file-excel-o green"></i>
-            <strong><?php echo elgg_echo('called:students:excel_template');?></strong>
+<div class="row margin-top-10">
+    <div class="col-md-6 form-group">
+        <a class="btn btn-primary btn-xs fileinput-button" id="insert-site">
+            <i class="fa fa-upload"></i>
+            <?php echo elgg_echo('called:students:add_from_excel');?>
+            <?php echo elgg_view("input/file", array(
+                'name' => 'upload-users',
+                'class' => 'upload-users',
+                'id' => 'upload-users',
+            ));
+            ?>
         </a>
+        <?php echo elgg_view('output/url', array(
+            'title' => elgg_echo('called:students:add_from_site'),
+            'text' => '<i class="fa fa-plus"></i> '. elgg_echo('called:students:add_from_site'),
+            'href' => "javascript:;",
+            'onclick' => "$('.site-users').toggle();",
+            'class' => 'btn btn-xs btn-primary',
+        ));
+        ?>
+        <ul class="margin-top-10 site-users" style="display: none;width: 100%;overflow-y: auto;max-height: 200px">
+            <?php
+            foreach(ClipitUser::get_all() as $user):
+                if(!in_array($user->id, $activity->student_array) && $user->role == 'student'):
+                    ?>
+                    <li data-user="<?php echo $user->id;?>" style="padding: 2px;" class="cursor-pointer list-item-5" value="<?php echo $user->id;?>">
+                        <?php echo elgg_view('output/img', array(
+                            'src' => get_avatar($user, 'small'),
+                            'class' => 'avatar-tiny'
+                        ));
+                        ?>
+                        <?php echo $user->name;?>
+                    </li>
+                <?php
+                endif;
+            endforeach;
+            ?>
+        </ul>
+        <div>
+            <a class="upload-messages"></a>
+        </div>
+        <div class="margin-top-10">
+            <a href="<?php echo elgg_get_site_url();?>mod/z04_clipit_activity/vendors/templates/clipit_users.xlsx" target="_blank">
+                <i class="fa fa-file-excel-o green"></i>
+                <strong><?php echo elgg_echo('called:students:excel_template');?></strong>
+            </a>
+        </div>
+    </div>
+    <div class="col-md-6 text-right">
+        <i class="fa fa-spinner fa-spin blue margin-right-10" id="move-loading" style="display: none;"></i>
+        <select class="form-control" id="move-group" style="display: inline-block;width: auto;padding: 2px;">
+            <option value=""><?php echo elgg_echo('groups:select_move');?></option>
+            <?php foreach($groups as $group):?>
+                <option value="<?php echo $group->id;?>">
+                    <?php echo $group->name;?>
+                </option>
+            <?php endforeach;?>
+        </select>
+        <div style="display: inline-block;text-transform: uppercase;margin: 0 10px;" class="text-muted">
+            <i class="fa fa-minus"></i> <?php echo elgg_echo('or');?> <i class="fa fa-minus"></i>
+        </div>
+        <?php echo elgg_view('input/button',
+            array(
+                'id'    => 'create',
+                'value' => elgg_echo('create'),
+                'class' => "btn btn-primary"
+            ));
+        ?>
     </div>
 </div>

@@ -38,11 +38,7 @@ if($activity_id){
         }
         ?>
         <strong>
-            <?php echo elgg_view('output/url', array(
-                'href'  => "profile/".$owner_user->login,
-                'title' => $owner_user->name,
-                'text'  => $owner_user->name));
-            ?>
+            <?php echo elgg_view('page/elements/user_summary', array('user' => $owner_user)) ?>
         </strong>
         <small class="show">
             <?php if($group):?>

@@ -5,8 +5,9 @@
  */
 
 $english = array(
+
     // ERROR
-    'error:404' => "Esta funcionalidad aún no está operativa",
+    'error:404' => "Sorry. We could not find the page that you requested.",
     'view_all' => 'View all',
     'view_as' => 'View as',
     'me'    => "Me",
@@ -19,9 +20,12 @@ $english = array(
     'menu:footer_clipit:header:clipit' => 'Clipit',
     'menu:footer_clipit:header:help' => 'Help',
     'menu:footer_clipit:header:legal' => 'Legal',
+    'send:email_to_admin' => 'Send email to Admin',
 
     'about' => 'About',
     'team' => 'Team',
+    'internship' => 'Internship',
+    'internships' => 'Internships',
     'developers' => 'Developers',
     'support_center' => 'Support Center',
     'basics' => 'Basics',
@@ -60,6 +64,15 @@ $english = array(
     'friendlytime:next:hours:singular' => "an hour",
     'friendlytime:next:days' => "%s days",
     'friendlytime:next:days:singular' => "tomorrow",
+
+    // Positions
+    'position:li' => 'Lead Investigator',
+    'position:tpm' => 'Technical Project Manager',
+    'position:swd' => 'Senior Web Developer',
+    'position:researcher' => 'Researcher',
+    'position:gd' => 'Graphic Designer',
+    'position:ra' => 'Research Advisor',
+    'position:ta' => 'Technical Advisor',
 );
 
 add_translation('en', $english);

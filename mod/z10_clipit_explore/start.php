@@ -40,15 +40,26 @@ function explore_page_handler($page) {
     $activity_id = get_input('activity');
     $vars = array();
     $vars['page'] = $page[0];
-    if($page[0]){
+//    if($page[0]){
         elgg_push_breadcrumb(elgg_echo('explore'), 'explore');
-    }
+//    }
     $selected_tab = get_input('filter', 'all');
+    $searching = true;
+    $href_breadcrumb = false;
+    if($activity_id){
+        $activity_object = ClipitSite::lookup($activity_id);
+        $href_breadcrumb = get_input('by') ? "/search" :  false;
+        elgg_push_breadcrumb($activity_object['name'], "explore" .$href_breadcrumb. "?activity={$activity_id}");
+    } else {
+        $href_breadcrumb = get_input('by') ? "/search" :  false;
+        elgg_push_breadcrumb(elgg_echo('site'), "explore" .$href_breadcrumb. "?site=true");
+    }
     switch($page[0]){
         case 'search':
             $by = get_input('by');
             $id = (int)get_input('id');
             $text = get_input('text');
+
             switch($by){
                 case 'tricky_topic':
                     $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($id)));
@@ -114,6 +125,8 @@ function explore_page_handler($page) {
             }
             break;
         case '': // explore (filter tab: all)
+            $title = "";
+            $searching = false;
             $video_ids = ClipitSite::get_videos();
             $videos = array_slice(ClipitVideo::get_by_id($video_ids), 0, 6);
             $href = "explore";
@@ -133,6 +146,8 @@ function explore_page_handler($page) {
             break;
     }
     // Get publications items
+    $searched_videos = $videos;
+    $searched_storyboards= $storyboards;
     if($activity_id){
         if($by){
             $visible_videos = get_visible_items_by_activity($activity_id, $videos, 'videos');
@@ -224,7 +239,12 @@ function explore_page_handler($page) {
     // Filter
     $my_activities_ids = ClipitUser::get_activities($user_id);
     $my_activities = ClipitActivity::get_by_id($my_activities_ids);
-    $menu_filter = elgg_view("explore/sidebar/menu", array('entities' => $my_activities));
+    $menu_filter = elgg_view("explore/sidebar/menu",
+        array(
+            'entities' => $my_activities,
+            'videos' => $searched_videos,
+            'storyboards' => $searched_storyboards
+        ));
     $sidebar = elgg_view_module('aside', elgg_echo('explore:menu'), $menu_filter);
     // Tags
     $tags = ClipitTag::get_all(10);
@@ -238,7 +258,14 @@ function explore_page_handler($page) {
      */
     $counts = array('videos' => count($videos), 'storyboards' => count($storyboards), 'files' => count($files));
     $filter = elgg_view('explore/filter', array('selected' => $selected_tab, 'counts' => $counts));
-
+    if($searching){
+        $title = elgg_view('output/url', array(
+            'href' => "explore?site=true",
+            'title' => elgg_echo('search:reset'),
+            'text' => '<i class="fa fa-times"></i>',
+            'class' => 'blue-lighter'
+        )) . " " . $title;
+    }
     $params = array(
         'content' => $content,
         'title' => $title,

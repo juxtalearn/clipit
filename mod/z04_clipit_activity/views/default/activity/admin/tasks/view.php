@@ -12,10 +12,13 @@
  */
 $activity = elgg_extract('entity', $vars);
 $tasks = ClipitTask::get_by_id($activity->task_array);
+elgg_load_js("fullcalendar:moment");
+elgg_load_js("fullcalendar");
+elgg_load_css("fullcalendar");
 ?>
-<script src="http://arshaw.com/js/fullcalendar-2.0.2/lib/moment.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.0.2/fullcalendar.min.js"></script>
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.0.2/fullcalendar.css" type="text/css" />
+<!--<script src="http://arshaw.com/js/fullcalendar-2.0.2/lib/moment.min.js"></script>-->
+<!--<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.0.2/fullcalendar.min.js"></script>-->
+<!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.0.2/fullcalendar.css" type="text/css" />-->
 <script>
 $(function() {
     // Task views
@@ -27,7 +30,12 @@ $(function() {
             return 'active';
         });
     });
-
+    $(".datepicker").each(function(){
+        $(this).datepicker({
+            minDate: "<?php echo date("d/m/Y", $activity->start);?>",
+            maxDate: "<?php echo date("d/m/Y", $activity->end);?>"
+        });
+    });
     $('#full-calendar').fullCalendar({
         header: {
             left: 'prev,next today',
@@ -53,7 +61,7 @@ $(function() {
                 title: "<?php echo $task->name;?>",
                 start: "<?php echo date("Y-m-d",$task->start);?>",
                 end: "<?php echo date("Y-m-d",$task->end);?>T10:00:00",
-                icon: '<?php echo elgg_view("tasks/icon_task_type", array('type' => $task->task_type)); ?>'
+                icon: <?php echo json_encode(elgg_view("tasks/icon_task_type", array('type' => $task->task_type))); ?>
             },
             <?php endforeach;?>
         ],
@@ -165,17 +173,17 @@ $(function() {
     ));
     ?>
 </div>
-<hr>
 
+<button type="button" data-toggle="modal" data-target="#create-new-task" class="btn btn-default margin-top-10">
+    <?php echo elgg_echo('task:create'); ?>
+</button>
+<hr>
 <!-- Calendar view -->
 <div id="full-calendar" class="view-element" data-view="calendar" style="display: nonse;"></div>
 
 
 <?php echo elgg_view_form('task/create', array('data-validate' => "true" ), array('entity'  => $activity)); ?>
 <div class="margin-bottom-20 view-element" data-view="list" style="display: none">
-    <button type="button" data-toggle="modal" data-target="#create-new-task" class="btn btn-default">
-        <?php echo elgg_echo('task:create'); ?>
-    </button>
 </div>
 <ul>
     <?php

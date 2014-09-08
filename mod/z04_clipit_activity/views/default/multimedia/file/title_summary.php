@@ -36,12 +36,12 @@ if(mb_strlen($file_description)>165){
     <?php echo $file_description; ?>
 </p>
 <small class="show">
-    <i>Uploaded by
-        <?php echo elgg_view('output/url', array(
-            'href'  => "profile/".$owner->login,
-            'title' => $owner->name,
-            'text'  => $owner->name));
-        ?>
+    <?php echo elgg_view("publications/owner_summary", array(
+        'entity' => $file,
+        'msg' => elgg_echo('multimedia:uploaded_by')
+    ));
+    ?>
+    <i>
         <?php echo elgg_view('output/friendlytime', array('time' => $file->time_created));?>
     </i>
 </small>

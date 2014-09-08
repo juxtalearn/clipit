@@ -25,12 +25,38 @@ $body .= elgg_view("input/hidden", array(
     'value' => $task->id,
 ));
 $task_type = 'upload';
+
+$feedback_check = false;
+if(ClipitTask::get_child($task->id) == 0 && $task->task_type != ClipitTask::TYPE_QUIZ_TAKE && $task->task_type != ClipitTask::TYPE_OTHER){
+    $feedback_check = true;
+}
 if($task->parent_task){
     $task_type = 'feedback';
 }
 $id = uniqid();
-$body .= elgg_view('activity/create/task', array('task_type' => $task_type, 'id' => $id, 'task' => $task));
-
+//$body .= elgg_view('activity/create/task', array('task_type' => $task_type, 'id' => $id, 'task' => $task));
+switch($task->task_type){
+    case ClipitTask::TYPE_STORYBOARD_UPLOAD:
+        $feedback_option = ClipitTask::TYPE_STORYBOARD_FEEDBACK;
+        break;
+    case ClipitTask::TYPE_VIDEO_UPLOAD:
+        $feedback_option = ClipitTask::TYPE_VIDEO_FEEDBACK;
+        break;
+}
+$body .='
+<li class="list-item col-md-12 task">
+    '.elgg_view('activity/create/task', array('task_type' => $task_type, 'feedback_check' => $feedback_check, 'id' => $id, 'task' => $task));
+if($task_type == 'upload'){
+$body .= '<ul class="feedback_form" style="margin-left: 20px;display: none">
+        <li style="padding: 10px;background: #fafafa;" class="col-md-12">
+            <div class="col-md-12">
+                <h4>Feedback task</h4>
+            </div>
+            '.elgg_view('activity/create/task', array('task_type' => 'feedback', 'id' => $id, 'default_task' => $feedback_option)).'
+        </li>
+    </ul>';
+}
+$body .= '</li>';
 echo elgg_view("page/components/modal",
     array(
         "dialog_class"     => "modal-lg",

@@ -248,6 +248,9 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
     );
 
     switch($task->task_type){
+        case "other":
+            return false;
+        break;
         case "video_upload":
             foreach($task->video_array as $video_id){
                 $group_video = ClipitVideo::get_group($video_id);
@@ -389,29 +392,29 @@ function get_activity_status($status){
     switch($status){
         case ClipitActivity::STATUS_ENROLL:
             $output = array(
-                'icon' => 'lock',
+                'icon' => 'clock-o',
                 'color' => 'yellow',
                 'text' => elgg_echo('status:enroll'),
                 'change_to' => elgg_echo('status:active'),
-                'btn_change_to' => '<span class="change-status btn btn-border-green btn-xs" data-status="active"><strong><i class="fa fa-unlock green"></i> '.elgg_echo('status:active').'</strong></span>'
+                'btn_change_to' => '<span class="change-status btn btn-border-green btn-xs" data-status="active"><strong><i class="fa fa-play green"></i> '.elgg_echo('status:active').'</strong></span>'
             );
             break;
         case ClipitActivity::STATUS_ACTIVE:
             $output = array(
-                'icon' => 'unlock',
+                'icon' => 'play',
                 'color' => 'green',
                 'text' => elgg_echo('status:active'),
                 'change_to' => elgg_echo('status:closed'),
-                'btn_change_to' => '<span class="change-status btn btn-border-red btn-xs" data-status="closed"><strong><i class="fa fa-ban red"></i> '.elgg_echo('status:closed').'</strong></span>'
+                'btn_change_to' => '<span class="change-status btn btn-border-red btn-xs" data-status="closed"><strong><i class="fa fa-stop red"></i> '.elgg_echo('status:closed').'</strong></span>'
             );
             break;
         case ClipitActivity::STATUS_CLOSED:
             $output = array(
-                'icon' => 'ban',
+                'icon' => 'stop',
                 'color' => 'red',
                 'text' => elgg_echo('status:closed'),
                 'change_to' => elgg_echo('status:active'),
-                'btn_change_to' => '<span class="change-status btn btn-border-green btn-xs" data-status="active"><strong><i class="fa fa-unlock green"></i> '.elgg_echo('status:active').'</strong></span>'
+                'btn_change_to' => '<span class="change-status btn btn-border-green btn-xs" data-status="active"><strong><i class="fa fa-play green"></i> '.elgg_echo('status:active').'</strong></span>'
             );
             break;
     }

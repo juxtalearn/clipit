@@ -14,9 +14,10 @@ $entity_id = get_input('entity-id');
 $task = array_pop(get_input('task'));
 $task_array = $task;
 
-if($task['feedback-form']){
+if($task['feedback-form'] && $task['title'] == ""){
     $task_array = $task['feedback-form'];
 }
+
 $updated = ClipitTask::set_properties($entity_id, array(
     'name' => $task_array['title'],
     'description' => $task_array['description'],
@@ -24,6 +25,22 @@ $updated = ClipitTask::set_properties($entity_id, array(
     'end' => get_timestamp_from_string($task_array['end']),
     'quiz' => $task_array['quiz']
 ));
+if($task['feedback'] && $task['feedback-form']){
+    $task_array = $task['feedback-form'];
+    $new_task_id = ClipitTask::create(array(
+        'name' => $task_array['title'],
+        'description' => $task_array['description'],
+        'task_type' => $task_array['type'],
+        'start' => get_timestamp_from_string($task_array['start']),
+        'end' => get_timestamp_from_string($task_array['end']),
+        'parent_task' => $entity_id,
+        'quiz' => $task_array['type'] == ClipitTask::TYPE_QUIZ_TAKE ? $task_array['quiz'] : 0
+    ));
+    $task_object = array_pop(ClipitTask::get_by_id(array($entity_id)));
+    ClipitActivity::add_tasks($task_object->activity, array($new_task_id));
+
+}
+
 if($updated){
     system_message(elgg_echo('task:updated'));
 } else {

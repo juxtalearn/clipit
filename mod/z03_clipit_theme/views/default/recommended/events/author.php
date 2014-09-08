@@ -39,11 +39,10 @@ switch($object['subtype']){
 }
 if($object['type'] == 'user'){
     $user = array_pop(ClipitUser::get_by_id(array($author_id)));
-    $elgg_user = new ElggUser($author_id);
     echo elgg_view('output/url', array(
         'href'  => "profile/".$user->login,
         'title' => $user->name,
-        'class' => 'show text-truncate',
+        'class' => 'show text-truncate event-author',
         'text'  => $user->name,
     ));
 }

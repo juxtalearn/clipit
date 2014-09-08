@@ -61,7 +61,7 @@ if(!$tasks){
                     <?php echo elgg_view("tasks/icon_user_type", array('type' => $task->task_type)); ?>
                 </span>
             <?php endif;?>
-            <small style="width: 70px;border-left: 1px solid #ccc" class="margin-left-5 pull-right inline-block text-right">
+            <small style="width: 100px;border-left: 1px solid #ccc" class="margin-left-5 pull-right inline-block text-right">
                 <?php echo elgg_view('output/friendlytime', array('time' => $task->end));?>
                 <span class="margin-left-5">
                     <?php echo elgg_view("tasks/icon_task_status", array('status' => $task->status)); ?>

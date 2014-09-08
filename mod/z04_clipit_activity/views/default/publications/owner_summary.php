@@ -21,10 +21,7 @@ switch($publish_level){
     case "activity":
         $output = $msg." ";
         $user = array_pop(ClipitUser::get_by_id(array($entity->owner_id)));
-        $output .= elgg_view('output/url', array(
-            'href'  => "profile/".$user->login,
-            'title' => $user->name,
-            'text'  => $user->name));
+        $output .= elgg_view('page/elements/user_summary', array('user' => $user));
         break;
     case "site":
         $activity_id = $entity_class::get_activity($entity->id);
@@ -37,5 +34,6 @@ switch($publish_level){
         $output = elgg_view("group/preview", array('entity' => $group, 'class' => $vars['class']));
         break;
 }
+
 
 echo $output;

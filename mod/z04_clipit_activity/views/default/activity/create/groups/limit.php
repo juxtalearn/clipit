@@ -14,11 +14,11 @@
 
 <div class="row form-group margin-top-15">
     <div class="col-md-7">
-        <label>Max students per group</label>
+        <label><?php echo elgg_echo('group:max_size');?></label>
     </div>
     <div class="col-md-5">
         <?php echo elgg_view("input/text", array(
-            'name' => 'max-users',
+            'name' => $vars['name'],
             'class' => 'form-control',
             'required' => true,
             'placeholder' => '0',

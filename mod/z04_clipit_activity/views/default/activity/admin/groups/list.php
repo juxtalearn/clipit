@@ -13,11 +13,17 @@
 $groups = elgg_extract('groups', $vars);
 $activity = elgg_extract('activity', $vars);
 ?>
-<input type="hidden" class="input-activity" name="entity-id" value="<?php echo $activity->id;?>">
+<?php echo elgg_view("input/hidden", array(
+    'name' => 'entity-id',
+    'value' => $activity->id,
+    'class' => 'input-activity'
+));
+?>
 <p class="text-right margin-bottom-20">
     <?php echo elgg_view('input/submit',
         array(
             'value' => elgg_echo('save'),
+            'id' => 'save-groups',
             'class' => "btn btn-primary"
         ));
     ?>

@@ -11,11 +11,25 @@
  * @package         ClipIt
  */
 elgg_register_event_handler('init', 'system', 'clipit_final_init');
+elgg_register_event_handler('plugins_boot', 'system', 'language_selector_boot');
 
+function language_selector_boot(){
+    global $CONFIG;
+    $client_language = $_COOKIE['client_language'];
+    if(!elgg_is_logged_in()){
+        if(!empty($client_language)){
+            $CONFIG->language = $client_language;
+        }
+        reload_all_translations();
+    } else {
+        if(!empty($client_language)){
+            setcookie('client_language', '', time()-60*60*24*30, '/'); // reset cookie
+        }
+    }
+}
 function clipit_final_init() {
     global $CONFIG;
     $CONFIG->user = new ClipitUser(elgg_get_logged_in_user_guid());
-    $role = $CONFIG->user->role;
     /**
      * Register menu footer
     */
@@ -40,13 +54,14 @@ function clipit_final_init() {
     elgg_register_action('user/passwordreset', elgg_get_plugins_path() . "z03_clipit_theme/actions/user/passwordreset.php", 'public');
     elgg_register_action("user/check", elgg_get_plugins_path() . "z03_clipit_theme/actions/check.php", 'public');
     // Language selector
-    elgg_register_action('language/set', elgg_get_plugins_path() . "z03_clipit_theme/actions/language/set.php");
+    elgg_register_action('language/set', elgg_get_plugins_path() . "z03_clipit_theme/actions/language/set.php", 'public');
     // Register ajax view for timeline events
     elgg_register_ajax_view('navigation/pagination_timeline');
     // Register public pages
     elgg_register_plugin_hook_handler('public_pages', 'walled_garden', 'actions_clipit_public_pages');
     function actions_clipit_public_pages($hook, $type, $return_value, $params) {
         $return_value[] = 'action/user/check';
+        $return_value[] = 'action/language/set';
         // Clipit sections
         $return_value[] = 'clipit/team';
         $return_value[] = 'clipit/about';
@@ -184,11 +199,12 @@ function home_user_account_page_handler($page_elements, $handler) {
 }
 
 function setup_footer_menus(){
+    $clipit_global_href = "http://www.clipit.es/";
     elgg_register_menu_item(
         'footer_clipit',
         array(
             'name' => 'about',
-            'href' => 'clipit/about',
+            'href' => $clipit_global_href . 'clipit/about',
             'text' => elgg_echo('about'),
             'priority' => 450,
             'section' => 'clipit',
@@ -198,7 +214,7 @@ function setup_footer_menus(){
         'footer_clipit',
         array(
             'name' => 'team',
-            'href' => 'clipit/team',
+            'href' => $clipit_global_href . 'clipit/team',
             'text' => elgg_echo('team'),
             'priority' => 455,
             'section' => 'clipit',
@@ -208,7 +224,7 @@ function setup_footer_menus(){
         'footer_clipit',
         array(
             'name' => 'developers',
-            'href' => 'clipit/developers',
+            'href' => $clipit_global_href . 'clipit/developers',
             'text' => elgg_echo('developers'),
             'priority' => 460,
             'section' => 'clipit',
@@ -219,7 +235,7 @@ function setup_footer_menus(){
         'footer_clipit',
         array(
             'name' => 'terms',
-            'href' => 'legal/terms',
+            'href' => $clipit_global_href . 'legal/terms',
             'text' => elgg_echo('terms'),
             'priority' => 460,
             'section' => 'legal',
@@ -229,70 +245,29 @@ function setup_footer_menus(){
         'footer_clipit',
         array(
             'name' => 'privacy',
-            'href' => 'legal/privacy',
+            'href' => $clipit_global_href . 'legal/privacy',
             'text' => elgg_echo('privacy'),
             'priority' => 465,
             'section' => 'legal',
         )
     );
-    elgg_register_menu_item(
-        'footer_clipit',
-        array(
-            'name' => 'community_guidelines',
-            'href' => 'legal/community_guidelines',
-            'text' => elgg_echo('community_guidelines'),
-            'priority' => 470,
-            'section' => 'legal',
-        )
-    );
-    // Help section
-    elgg_register_menu_item(
-        'footer_clipit',
-        array(
-            'name' => 'support_center',
-            'href' => 'help/support_center',
-            'text' => elgg_echo('support_center'),
-            'priority' => 470,
-            'section' => 'help',
-        )
-    );
-    elgg_register_menu_item(
-        'footer_clipit',
-        array(
-            'name' => 'basics',
-            'href' => 'help/basics',
-            'text' => elgg_echo('basics'),
-            'priority' => 475,
-            'section' => 'help',
-        )
-    );
 }
 function clipit_footer_page($page) {
-    $page_shell = 'default';
-    $class = '';
-    $options = array();
+    $file_dir = elgg_get_plugins_path() . 'z03_clipit_theme/pages/clipit';
     switch($page[0]){
         case "about":
             return false;
             break;
         case "team":
-            $content = elgg_view('pages/clipit/team', array('team' => $members));
-            $title = "Team";
-            $page_shell = 'team';
-            $class = 'team';
+            include "$file_dir/team.php";
             break;
         case "developers":
             return false;
             break;
+        default:
+            return false;
     }
-    $params = array(
-        'content' => $content,
-        'title'     => $title,
-        'filter'    => '',
-        'class'     => 'clipit-sections '.$class
-    );
-    $body = elgg_view_layout('one_column', $params);
-    echo elgg_view_page('', $body, $page_shell, $options);
+    return true;
 }
 function help_footer_page($page) {
     return false;

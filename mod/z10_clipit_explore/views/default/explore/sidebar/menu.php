@@ -11,6 +11,8 @@
  * @package         ClipIt
  */
 $entities = elgg_extract('entities', $vars);
+$videos = elgg_extract('videos', $vars);
+$storyboards = elgg_extract('storyboards', $vars);
 
 $href = http_build_query(array(
     'by' => get_input('by'),
@@ -35,8 +37,15 @@ elgg_register_menu_item('explore:menu', array(
     'href' => "explore{$href}site=true",
     'selected' => $activity_get ? false : true
 ));
-
+function activity_total_found($activity_id, $videos, $storyboards){
+    $t_videos = get_visible_items_by_activity($activity_id, $videos, 'videos');
+    $t_storyboards = array();
+    return count(array_merge($t_videos, $t_storyboards));
+}
 foreach($entities as $entity){
+    $visible_videos = get_visible_items_by_activity($entity->id, $videos, 'videos');
+    $visible_storyboards = get_visible_items_by_activity($entity->id, $storyboards, 'storyboards');
+    $total_items_found = count(array_merge($visible_videos, $visible_storyboards));
     $selected = false;
     if($activity_get == $entity->id){
         $selected = true;
@@ -49,7 +58,8 @@ foreach($entities as $entity){
         'name' => 'explore_'.$entity->id,
         'text' => $icon.$entity->name,
         'href' => "explore{$href}activity={$entity->id}",
-        'selected' => $selected
+        'selected' => $selected,
+        'badge' => $total_items_found > 0 ? $total_items_found : false,
     ));
 }
 echo elgg_view_menu('explore:menu', array(

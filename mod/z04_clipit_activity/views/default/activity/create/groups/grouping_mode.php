@@ -19,7 +19,7 @@
             <input value="1" style="visibility: hidden" type="radio" required name="groups_creation"/>
                 <a href="javascript:;" class="child-decoration-none">
                     <i class="fa fa-user"></i>
-                    Teacher makes groups
+                    <?php echo elgg_echo('activity:grouping_mode:teacher'); ?>
                 </a>
             </h4>
         </div>
@@ -35,13 +35,13 @@
                 <input value="2" style="visibility: hidden" type="radio" required name="groups_creation"/>
                 <a href="javascript:;" class="child-decoration-none">
                     <i class="fa fa-users"></i>
-                    Students make groups
+                    <?php echo elgg_echo('activity:grouping_mode:student'); ?>
                 </a>
             </h4>
         </div>
         <div id="collapse_2" class="panel-collapse collapse">
             <div class="panel-body">
-                <?php echo elgg_view("activity/create/groups/limit");?>
+                <?php echo elgg_view("activity/create/groups/limit", array('name' => 'max-users[2]'));?>
             </div>
         </div>
     </div>
@@ -51,13 +51,13 @@
                 <input value="3" style="visibility: hidden" type="radio" required name="groups_creation"/>
                 <a href="javascript:;" class="child-decoration-none">
                     <i class="fa fa-users"></i>
-                    Create random groups
+                    <?php echo elgg_echo('activity:grouping_mode:system'); ?>
                 </a>
             </h4>
         </div>
         <div id="collapse_3" class="panel-collapse collapse">
             <div class="panel-body form-group">
-                <?php echo elgg_view("activity/create/groups/limit");?>
+                <?php echo elgg_view("activity/create/groups/limit", array('name' => 'max-users[3]'));?>
             </div>
         </div>
     </div>

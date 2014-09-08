@@ -7469,6 +7469,26 @@ li.list-item:last-child {
 .multimedia-owner .multimedia-body {
   color: #666666;
 }
+.multimedia-owner .multimedia-body .description ol,
+.multimedia-owner .multimedia-body .description ul {
+  padding-left: 2.5em;
+}
+.multimedia-owner .multimedia-body .description ul {
+  list-style-type: disc;
+}
+.multimedia-owner .multimedia-body .description ol {
+  list-style-type: decimal;
+}
+.multimedia-owner .multimedia-body .description ul ul,
+.multimedia-owner .multimedia-body .description ol ul {
+  list-style-type: circle;
+}
+.multimedia-owner .multimedia-body .description ol ol ul,
+.multimedia-owner .multimedia-body .description ol ul ul,
+.multimedia-owner .multimedia-body .description ul ol ul,
+.multimedia-owner .multimedia-body .description ul ul ul {
+  list-style-type: square;
+}
 .fileinput-button {
   position: relative;
   overflow: hidden;
@@ -8170,6 +8190,15 @@ ul.top-account > li .fa {
 ul.top-account > li .fa:hover {
   opacity: 1;
 }
+ul.top-account > li > ul.dropdown-menu > li {
+  width: 300px;
+}
+ul.top-account > li > ul.dropdown-menu > li > a {
+  padding: 5px 10px;
+  font-size: 14px;
+  letter-spacing: 0;
+  text-transform: none;
+}
 ul.top-account > li ul.caret-menu > li > a {
   padding: 5px 10px;
   font-size: 14px;
@@ -8185,17 +8214,6 @@ ul.top-account > li ul.caret-menu .divider {
   display: block;
   margin: 0;
 }
-ul.top-account > li ul#menu_activities li {
-  width: 300px;
-}
-ul.top-account > li ul#menu_activities li div {
-  font-size: 14px;
-  text-transform: none;
-  letter-spacing: 0;
-}
-ul.top-account > li ul#menu_activities li div small {
-  font-size: 75%;
-}
 ul.top-account > li ul#menu_activities li.divider {
   margin: 0;
 }
@@ -8206,13 +8224,11 @@ ul.top-account > li ul#menu_activities li .activity-point {
   vertical-align: text-top;
   margin-top: 2px;
 }
-ul.top-account > li ul#menu_activities li > a {
-  padding: 5px 10px;
-}
 ul.top-account > li > a {
   font-family: FuturaBoldRegular, Impact, 'Impact Bold', Helvetica, Arial, sans, sans-serif !important;
   text-transform: none !important;
-  font-size: 17px !important;
+  font-size: 15px !important;
+  letter-spacing: 0.2px;
   padding-right: 5px;
   padding-left: 5px;
   float: left !important;
@@ -8270,6 +8286,10 @@ ul.top-account > li > a > span.badge {
   margin: 0;
   font-weight: bold;
 }
+.back-top {
+  text-transform: uppercase;
+  font-size: 16px;
+}
 #footer {
   height: auto;
   background-color: #32b4e5;
@@ -8291,7 +8311,7 @@ ul.top-account > li > a > span.badge {
   height: 75px;
 }
 #footer .site-map h4 {
-  font-size: 20px;
+  font-size: 18px;
   color: #FFFFFF;
   font-family: Helvetica, Arial, sans-serif;
   text-transform: uppercase;
@@ -8300,7 +8320,7 @@ ul.top-account > li > a > span.badge {
 #footer .site-map ul {
   list-style: none;
   padding: 0px;
-  font-size: 18px;
+  font-size: 16px;
   font-family: Helvetica, Arial, sans-serif;
 }
 #footer .site-map ul > li {
@@ -8314,6 +8334,9 @@ ul.top-account > li > a > span.badge {
 #footer .site-map ul > li > a:focus {
   opacity: 0.5;
   text-decoration: none;
+}
+.team-section + #footer {
+  margin: 0;
 }
 .activity-layout .elgg-head-layout {
   padding: 15px;
@@ -8416,6 +8439,7 @@ ul.deadline-list > li {
   color: #9c9e9f;
   border-bottom: 1px solid #bae6f6;
   padding: 10px;
+  padding-top: 0;
 }
 ul.deadline-list > li .date {
   border-right: 1px solid #ccc;
@@ -8424,11 +8448,8 @@ ul.deadline-list > li .date {
 ul.deadline-list > li.soon {
   opacity: .5;
 }
-ul.deadline-list > li .fa {
+ul.deadline-list > li .fa-user {
   font-size: 20px;
-}
-ul.deadline-list > li .fa.fa-users {
-  font-size: 14px;
 }
 .tags-block {
   background: #d6f0fa;
@@ -9215,7 +9236,8 @@ ul.deadline-list > li .fa.fa-users {
 }
 .group-members .group {
   background: #fff;
-  padding: 10px;
+  padding: 5px 10px;
+  font-size: 13px;
   border-radius: 4px;
   margin-bottom: 10px;
 }
@@ -10121,9 +10143,6 @@ ul.tagit input[type="text"] {
   background-color: inherit;
   outline: none;
 }
-html {
-  overflow-y: scroll;
-}
 body {
   background: #f1f2f7;
 }
@@ -10631,6 +10650,12 @@ h6,
   border: 2px solid #fff;
   -webkit-box-shadow: 0px 0px 0px 1px #bae6f6;
   box-shadow: 0px 0px 0px 1px #bae6f6;
+}
+.admin-owner {
+  padding: 1px 5px;
+  font-weight: bold;
+  color: #d8ba05;
+  background: rgba(216, 186, 5, 0.2);
 }
 .bg-center-icon {
   position: absolute;

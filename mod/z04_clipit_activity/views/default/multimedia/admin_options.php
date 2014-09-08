@@ -50,5 +50,6 @@ endforeach;
 <?php if($output):?>
     <div class="bg-blue-lighter" style="padding: 10px;">
         <?php echo $output;?>
+        <div class="clearfix"></div>
     </div>
 <?php endif;?>

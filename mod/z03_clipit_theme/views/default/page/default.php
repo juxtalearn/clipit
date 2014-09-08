@@ -61,18 +61,7 @@ $lang = get_current_language();
         <?php echo $body; ?>
     </div>
 </div>
-<footer id="footer">
-    <div class="container">
-        <div class="row">
-            <?php echo $footer; ?>
-        </div>
-        <div class="row sponsors">
-            <div class="col-sm-3 pull-right">
-                <img src="<?php echo $CONFIG->wwwroot; ?>mod/z03_clipit_theme/graphics/sponsors.png">
-            </div>
-        </div>
-    </div>
-</footer>
-<?php echo elgg_view('page/elements/foot'); ?>
+
+<?php echo elgg_view('page/elements/footer'); ?>
 </body>
 </html>

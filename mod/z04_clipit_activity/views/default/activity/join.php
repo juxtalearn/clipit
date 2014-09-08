@@ -10,14 +10,13 @@ $activity = elgg_extract("entity", $vars);
 $groups_id = ClipitActivity::get_groups($activity->id);
 $user_owner = elgg_get_logged_in_user_guid();
 $user_group = ClipitGroup::get_from_user_activity($user_owner, $activity->id);
-
 ?>
 <div class="row">
 <?php foreach($groups_id as $group_id):
     $users_id = ClipitGroup::get_users($group_id);
     $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
-
-    $optGroup = "";
+    $optGroup = false;
+    $optButton = false;
     if(!$user_group){
         $optGroup = "join";
     }elseif($user_group == $group_id){
@@ -31,11 +30,11 @@ $user_group = ClipitGroup::get_from_user_activity($user_owner, $activity->id);
     }
 ?>
 
-    <div class="col-md-6 col-lg-4 group-info"><div style="border-bottom: 6px solid #bae6f6; padding-bottom: 15px; ">
+    <div class="col-md-6 col-lg-4 group-info">
+        <div style="border-bottom: 6px solid #bae6f6; padding-bottom: 15px; ">
     <!-- Button group join/leave -->
     <?php echo $optButton;?>
     <h3 class='title-bold'><?php echo $group->name;?></h3>
-    <?php if(count($users_id) > 0):?>
         <ul style="height: 150px;overflow-y: auto;" class="member-list">
         <?php
         foreach($users_id as $user_id):
@@ -46,7 +45,6 @@ $user_group = ClipitGroup::get_from_user_activity($user_owner, $activity->id);
             </li>
         <?php endforeach;?>
         </ul>
-    <?php endif; ?>
     </div>
 </div>
 <?php endforeach;?>

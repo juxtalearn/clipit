@@ -19,6 +19,7 @@ if(count($video)==0 || $video->owner_id != $user_id){
 } else{
     ClipitVideo::delete_by_id(array($id));
     system_message(elgg_echo('video:deleted'));
+    forward(custom_forward_referer("/view/", "?filter=videos"));
 }
 
 forward(REFERER);

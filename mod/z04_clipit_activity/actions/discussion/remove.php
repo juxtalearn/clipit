@@ -9,12 +9,10 @@
 $discussion_id = (int)get_input('id');
 $user_id = elgg_get_logged_in_user_guid();
 $message = array_pop(ClipitPost::get_by_id(array($discussion_id)));
-
 if(count($message)==0 || $message->owner_id != $user_id){
     register_error(elgg_echo("discussion:cantdelete"));
 } else{
     ClipitPost::delete_by_id(array($discussion_id));
     system_message(elgg_echo('discussion:deleted'));
 }
-
-forward(REFERER);
+forward(custom_forward_referer("/view/"));

@@ -149,6 +149,36 @@
                     "name": "Thriller",
                     "description": "Thrillers combine genres of suspense, mystery, crime and suspense, exciting the viewer, and raising the tension, anticipation, excitement.",
                     "example": "Hitchcock films e.g. The Birds (1963)"
+                },
+                {
+                    "name": "Video diary or Vlog",
+                    "description": "",
+                    "example": ""
+                },
+                {
+                    "name": "Current affairs",
+                    "description": "",
+                    "example": ""
+                },
+                {
+                    "name": "Chat show",
+                    "description": "",
+                    "example": ""
+                },
+                {
+                    "name": "Reality TV",
+                    "description": "",
+                    "example": ""
+                },
+                {
+                    "name": "Wildlife documentary",
+                    "description": "",
+                    "example": ""
+                },
+                {
+                    "name": "Soap opera",
+                    "description": "",
+                    "example": ""
                 }
             ]
         },

@@ -45,7 +45,7 @@ $rating = elgg_extract("rating", $vars);
                     'entity' => $storyboard,
                     'class' => 'pull-right',
                     'entity_class' => 'ClipitStoryboard',
-                    'msg' => 'Uploaded by'
+                    'msg' => elgg_echo('multimedia:uploaded_by')
                 )); ?>
                 <h4 class="text-truncate margin-0">
                     <strong>

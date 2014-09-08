@@ -59,9 +59,9 @@ $user_id = elgg_get_logged_in_user_guid();
         <?php endif; ?>
     <?php endforeach; ?>
     <?php endif; ?>
-    <?php $activities_found = false; if(!$activities_found): ?>
+    <?php if(!$activities_found): ?>
         <li role="presentation"><a>
-            <small class="show">Theare are no activity atm</small>
+            <small class="show"><?php echo elgg_echo('my_activities:none');?></small>
             </a>
         </li>
     <?php endif;?>

@@ -119,7 +119,7 @@ $rating = elgg_extract("rating", $vars);
                     <?php echo elgg_view("publications/owner_summary", array(
                         'entity' => $video,
                         'entity_class' => 'ClipitVideo',
-                        'msg' => 'Uploaded by'
+                        'msg' => elgg_echo('multimedia:uploaded_by')
                     )); ?>
                     <i>
                         <?php echo elgg_view('output/friendlytime', array('time' => $video->time_created));?>

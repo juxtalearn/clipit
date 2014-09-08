@@ -49,7 +49,7 @@ $lang = get_current_language();
     <?php echo elgg_view('page/elements/head', $vars); ?>
 </head>
 <body style="background: #fff">
-<div id="wrap"  <?php if (!elgg_is_logged_in()) echo 'class="bg-grey"'; ?>>
+<div id="wrap" class="team-section">
     <div class="elgg-page-messages">
         <?php echo $messages; ?>
     </div>
@@ -62,22 +62,10 @@ $lang = get_current_language();
     </div>
     <div class="overflow-hidden" style="background: #f1f2f7 !important;">
         <div class="container margin-bottom-20">
-            <?php echo elgg_view('pages/clipit/interships', array('interships' => $interships));?>
+            <?php echo $vars['internships'];?>
         </div>
     </div>
 </div>
-<footer id="footer" style="margin: 0;">
-    <div class="container">
-        <div class="row">
-            <?php echo $footer; ?>
-        </div>
-        <div class="row sponsors">
-            <div class="col-sm-3 pull-right">
-                <img src="<?php echo $CONFIG->wwwroot; ?>mod/z03_clipit_theme/graphics/sponsors.png">
-            </div>
-        </div>
-    </div>
-</footer>
-<?php echo elgg_view('page/elements/foot'); ?>
+<?php echo elgg_view('page/elements/footer'); ?>
 </body>
 </html>

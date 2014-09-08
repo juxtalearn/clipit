@@ -14,8 +14,9 @@ $entity = elgg_extract("entity", $vars);
 $owner_user = array_pop(ClipitUser::get_by_id(array($entity->owner_id)));
 ?>
 <!-- Multimedia info + details -->
+<?php echo elgg_view("multimedia/owner_options", array('entity' => $entity, 'type' => $vars['type'])); ?>
+<div class="clearfix"></div>
 <div class="multimedia-owner">
-    <?php echo elgg_view("multimedia/owner_options", array('entity' => $entity, 'type' => $vars['type'])); ?>
     <div class="multimedia-preview">
         <?php echo $vars['preview'];?>
     </div>
@@ -43,7 +44,7 @@ $owner_user = array_pop(ClipitUser::get_by_id(array($entity->owner_id)));
             <div class="multimedia-view">
                 <?php echo $vars['body'];?>
             </div>
-            <div>
+            <div class="description">
                 <?php echo $entity->description; ?>
             </div>
         </div>

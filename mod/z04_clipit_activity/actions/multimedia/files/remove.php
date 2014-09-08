@@ -23,4 +23,4 @@ foreach($ids as $file_id){
         register_error(elgg_echo("file:cantremove"));
     }
 }
-forward(REFERER);
+forward(custom_forward_referer("/view/", "?filter=files"));

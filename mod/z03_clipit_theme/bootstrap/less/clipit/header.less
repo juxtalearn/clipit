@@ -1,8 +1,6 @@
 //
 // Navbar
 // --------------------------------------------------
-
-
 .navbar-text{
   margin: 7px 0px;
   margin-right: 15px;
@@ -47,7 +45,7 @@
   @shadow: inset 0 1px 0 rgba(255,255,255,.15), 0 1px 5px rgba(0,0,0,.075);
   .box-shadow(@shadow);
 
-  .navbar-nav li >a {
+  .navbar-nav li > a {
     text-transform: uppercase;
     color: @blue_clipit;
     font-family: @font-family-helvetica;
@@ -160,6 +158,17 @@ ul.top-account{
         opacity: 1;
       }
     }
+    > ul.dropdown-menu{
+      > li {
+        width: 300px;
+        > a{
+          padding: 5px 10px;
+          font-size: @font-size-base;
+          letter-spacing: 0;
+          text-transform: none;
+        }
+      }
+    }
     // Caret Menu
     ul.caret-menu{
       > li > a{
@@ -181,15 +190,6 @@ ul.top-account{
     // My activities menu
     ul#menu_activities{
       li{
-        width: 300px;
-        div{
-          font-size: @font-size-base;
-          text-transform: none;
-          letter-spacing: 0;
-          small{
-            font-size: 75%;
-          }
-        }
         &.divider{
           margin: 0;
           &:last-child{
@@ -200,16 +200,15 @@ ul.top-account{
           vertical-align: text-top;
           margin-top: 2px;
         }
-        > a{
-          padding: 5px 10px;
-        }
       }
     }
 
     > a{
       font-family: @font-family-futurabold !important;
       text-transform: none !important;
-      font-size: ceil(@font-size-base * 1.21) !important; // ~17px
+//      font-size: ceil(@font-size-base * 1.21) !important; // ~17px
+      font-size: ceil(@font-size-base * 1.07) !important; // ~15px;
+      letter-spacing: 0.2px;
       padding-right: 5px;
       padding-left: 5px;
       .pull-left();
@@ -275,4 +274,9 @@ ul.top-account{
     margin: 0;
     font-weight: bold;
   }
+}
+// Back button
+.back-top{
+  text-transform: uppercase;
+  font-size: ceil(@font-size-base * 1.14); // ~16px
 }

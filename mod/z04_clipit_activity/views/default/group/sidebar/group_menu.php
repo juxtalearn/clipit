@@ -31,7 +31,7 @@ elgg_register_menu_item('group:tools', array(
 elgg_register_menu_item('group:tools', array(
     'name' => 'group_files',
     'text' => elgg_echo('group:files'),
-    'href' => "clipit_activity/".$activity->id."/group/{$group_id}/multimedia",
+    'href' => "clipit_activity/".$activity->id."/group/{$group_id}/repository",
     'priority' => 300,
 ));
 $body = elgg_view_menu('group:tools', array(

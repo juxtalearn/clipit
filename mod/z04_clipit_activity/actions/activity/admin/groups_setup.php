@@ -26,8 +26,10 @@ foreach($groups as $group){
     } else {
         $groups_ids[] = $group_id;
         $users = explode(",", $group['users']);
+        $users = array_filter($users);
         ClipitGroup::set_users($group_id, $users);
         ClipitGroup::set_properties($group_id, array('name' => $group['name']));
+        ClipitActivity::add_students($activity_id, $users);
     }
 
 }
