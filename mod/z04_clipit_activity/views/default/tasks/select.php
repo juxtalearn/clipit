@@ -11,16 +11,17 @@
  * @package         ClipIt
  */
 $entities = elgg_extract('entities', $vars);
-$entity = elgg_extract('entity', $vars);
 ?>
-<small class="show margin-bottom-5">Select task</small>
-<?php echo elgg_view('input/dropdown', array(
-    'name' => 'task_id',
-    'id' => 'task_id',
-    'class' => 'form-control margin-bottom-20',
-    'style' => 'height: auto;width: auto;padding: 0;font-weight: bold;',
-    'value' => get_input('task_id'),
-    'onchange' => "location.href='?task_id='+this.value",
-    'options_values' => $entities
-));
-?>
+<?php if($entities):?>
+    <small class="show margin-bottom-5">Select task</small>
+    <?php echo elgg_view('input/dropdown', array(
+        'name' => 'task_id',
+        'id' => 'task_id',
+        'class' => 'form-control margin-bottom-20',
+        'style' => 'height: auto;width: auto;padding: 0;font-weight: bold;',
+        'value' => get_input('task_id'),
+        'onchange' => "location.href='?task_id='+this.value",
+        'options_values' => $entities
+    ));
+    ?>
+<?php endif;?>

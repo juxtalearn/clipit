@@ -24,6 +24,12 @@ function clipit_activity_init() {
     // Publications
     elgg_register_library('clipit:activity:publications', elgg_get_plugins_path() . 'z04_clipit_activity/lib/publications.php');
     elgg_load_library('clipit:activity:publications');
+    // Discussions
+    elgg_register_library('clipit:activity:discussions', elgg_get_plugins_path() . 'z04_clipit_activity/lib/discussions.php');
+    elgg_load_library('clipit:activity:discussions');
+    // Multimedia
+    elgg_register_library('clipit:activity:multimedia', elgg_get_plugins_path() . 'z04_clipit_activity/lib/multimedia.php');
+    elgg_load_library('clipit:activity:multimedia');
 
     // Special views for role = teacher
     if($user->role == 'teacher'){
@@ -284,6 +290,7 @@ function activity_page_handler($page) {
     // Sections
         if(isset($page[1])){
             elgg_push_breadcrumb($activity->name, "clipit_activity/".$activity->id);
+            $activity_dir = elgg_get_plugins_path() . 'z04_clipit_activity/pages/activity';
             switch ($page[1]) {
                 case 'groups':
                     $title = elgg_echo("activity:groups");
@@ -342,49 +349,7 @@ function activity_page_handler($page) {
                     );
                     break;
                 case 'discussion':
-                    $title = elgg_echo("activity:discussion");
-                    $href = "clipit_activity/{$activity->id}/discussion";
-                    elgg_push_breadcrumb($title);
-                    $messages = array_pop(ClipitPost::get_by_destination(array($activity->id)));
-                    $canCreate = false;
-                    if( ($access == 'ACCESS_TEACHER' || $access == 'ACCESS_MEMBER') && $activity_status != 'closed'){
-                        $canCreate = true;
-                    }
-                    $content =  elgg_view('discussion/list',
-                        array(
-                            'entity' => $activity,
-                            'messages' => $messages,
-                            'href'   => $href,
-                            'create' => $canCreate
-                        ));
-                    if(!$messages){
-                        $content .= elgg_view('output/empty', array('value' => elgg_echo('discussions:none')));
-                    }
-                    if($page[2] == 'view' && $page[3]){
-                        $message_id = (int)$page[3];
-                        $message = array_pop(ClipitPost::get_by_id(array($message_id)));
-                        elgg_pop_breadcrumb($title);
-                        elgg_push_breadcrumb($title, $href);
-                        elgg_push_breadcrumb($message->name);
-                        if($message && $message->destination == $activity->id){
-                            $content = elgg_view('discussion/view',
-                                array(
-                                    'entity'     => $message,
-                                    'activity_id'   => $activity->id,
-                                    'show_group' => true,
-                                ));
-                        } else {
-                            return false;
-                        }
-                    }
-                    $params = array(
-                        'content'   => $content,
-                        'filter'    => '',
-                        'title'     => $title,
-                        'sub-title' => $activity->name,
-                        'title_style' => "background: #". $activity->color,
-                    );
-
+                    include("$activity_dir}/discussion.php");
                     break;
                 case 'tasks':
                     $title = elgg_echo("activity:tasks");
@@ -698,244 +663,11 @@ function activity_page_handler($page) {
                     );
                     break;
                 case 'publications':
-                    $selected_tab = get_input('filter', 'videos');
-                    $title = elgg_echo("activity:publications");
-                    elgg_push_breadcrumb($title);
-                    $href = "clipit_activity/{$activity->id}/publications";
-                    $filter = elgg_view('publications/filter', array('selected' => $selected_tab, 'entity' => $activity, 'href' => $href));
-                    $tasks = ClipitActivity::get_tasks($activity->id);
-                    switch($selected_tab){
-                        case 'videos':
-                            // Get last task [type: video_upload]
-                            $content = publications_get_page_content_list('video_upload', $tasks, $href);
-                            break;
-                        case 'storyboards':
-                            // Get last task [type: storyboard_upload]
-                            $content = publications_get_page_content_list('storyboard_upload', $tasks, $href);
-                            break;
-                    }
 
-                    if($page[2] == 'view' && $page[3]){
-                        $entity_id = (int)$page[3];
-                        $filter = "";
-                        elgg_pop_breadcrumb($title);
-                        elgg_push_breadcrumb($title, "clipit_activity/{$activity->id}/publications");
-                        $object = ClipitSite::lookup($entity_id);
-                        $entity = array_pop($object['subtype']::get_by_id(array($entity_id)));
-                        // Check if user can evaluate own group video
-                        $hasRating = ClipitRating::get_from_user_for_target($user_id, $entity_id);
-                        $owner_group_id = $entity->get_group($entity->id);
-                        $my_group = ClipitGroup::get_from_user_activity($user_id, $activity->id);
-                        $canEvaluate = false;
-                        if(!$hasRating && ($my_group != $owner_group_id)){
-                            $canEvaluate = true;
-                        }
-                        $owner_group = array_pop(ClipitGroup::get_by_id(array($owner_group_id)));
-                        switch($object['subtype']){
-                            // Clipit Video publication
-                            case 'ClipitVideo':
-                                $task_id = ClipitVideo::get_task($entity_id);
-                                $videos = ClipitTask::get_videos($task_id);
-                                if(!$entity || !in_array($entity_id, $videos)){
-                                    return false;
-                                }
-                                $body = elgg_view("multimedia/video/body", array('entity'  => $entity));
-                                $content = elgg_view('publications/view', array(
-                                    'entity' => $entity,
-                                    'body' => $body,
-                                    'canEvaluate' => $canEvaluate,
-                                    'activity' => $activity,
-                                    'group' => $owner_group
-                                ));
-                                break;
-                            // Clipit Storyboard publication
-                            case 'ClipitStoryboard':
-                                $task_id = ClipitStoryboard::get_task($entity_id);
-                                $sbs = ClipitTask::get_storyboards($task_id);
-                                if(!$entity || !in_array($entity_id, $sbs)){
-                                    return false;
-                                }
-                                $file = array_pop(ClipitFile::get_by_id(array($entity->file)));
-                                $body = elgg_view("multimedia/storyboard/body", array(
-                                    'entity' => $entity,
-                                    'file'  => $file,
-                                    'preview' => true
-                                ));
-                                $content = elgg_view('publications/view', array(
-                                    'entity' => $entity,
-                                    'type' => 'storyboard',
-                                    'body' => $body,
-                                    'canEvaluate' => $canEvaluate,
-                                    'activity' => $activity,
-                                    'group' => $owner_group
-                                ));
-                                break;
-                            default:
-                                return false;
-                                break;
-                        }
-                        elgg_push_breadcrumb($entity->name);
-                    }
-                    $params = array(
-                        'content'   => $content,
-                        'filter'    => $filter,
-                        'title'     => $title,
-                        'sub-title' => $activity->name,
-                        'title_style' => "background: #". $activity->color,
-                    );
+                    include("{$activity_dir}/publications.php");
                     break;
                 case 'resources':
-                    $title = elgg_echo("activity:stas");
-                    elgg_push_breadcrumb($title);
-                    $selected_tab = get_input('filter', 'files');
-                    $href = "clipit_activity/{$activity->id}/resources";
-                    switch ($selected_tab) {
-                        case 'files':
-                            $files = ClipitActivity::get_files($activity->id);
-                            // Search items
-                            if($search_term = stripslashes(get_input("search"))){
-                                $items_search = array_keys(ClipitFile::get_from_search($search_term));
-                                $files = array_uintersect($items_search, $files, "strcasecmp");
-                            }
-                            elgg_extend_view("files/search", "search/search");
-
-                            $canCreate = false;
-                            // Add files button for teacher
-                            if($access == 'ACCESS_TEACHER' && $activity_status != 'closed'){
-                                $canCreate = true;
-                            }
-                            $content = elgg_view('multimedia/file/list', array(
-                                'entity' => $activity,
-                                'create' => $canCreate,
-                                'files' => $files,
-                                'href' => $href
-                            ));
-                            if (!$files) {
-                                $content .= elgg_view('output/empty', array('value' => elgg_echo('file:none')));
-                            }
-                            break;
-                        case 'videos':
-                            $videos = ClipitActivity::get_videos($activity->id);
-                            // Search items
-                            if($search_term = stripslashes(get_input("search"))){
-                                $items_search = array_keys(ClipitVideo::get_from_search($search_term));
-                                $videos = array_uintersect($items_search, $videos, "strcasecmp");
-                            }
-                            elgg_extend_view("videos/search", "search/search");
-
-                            $canCreate = false;
-                            // Add files button for teacher
-                            if($access == 'ACCESS_TEACHER' && $activity_status != 'closed'){
-                                $canCreate = true;
-                            }
-                            $content = elgg_view('multimedia/video/list', array(
-                                'entity' => $activity,
-                                'create' => $canCreate,
-                                'actions'   => true,
-                                'entities' => $videos,
-                                'href' => $href
-                            ));
-                            if (!$videos) {
-                                $content .= elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
-                            }
-                            break;
-                        case 'storyboards':
-                            $sbs = ClipitActivity::get_storyboards($activity->id);
-                            // Search items
-                            if($search_term = stripslashes(get_input("search"))){
-                                $items_search = array_keys(ClipitStoryboard::get_from_search($search_term));
-                                $sbs = array_uintersect($items_search, $sbs, "strcasecmp");
-                            }
-                            elgg_extend_view("storyboards/search", "search/search");
-
-                            $canCreate = false;
-                            // Add sbs button for teacher
-                            if($access == 'ACCESS_TEACHER' && $activity_status != 'closed'){
-                                $canCreate = true;
-                            }
-                            $content = elgg_view('multimedia/storyboard/list', array(
-                                'entity' => $activity,
-                                'create' => $canCreate,
-                                'entities' => $sbs,
-                                'actions' => true,
-                                'href' => $href
-                            ));
-                            if (!$sbs) {
-                                $content .= elgg_view('output/empty', array('value' => elgg_echo('storyboards:none')));
-                            }
-                            if($page[3] == 'view' && $page[4]){
-                                $entity_id = (int)$page[4];
-                                $entity = ClipitVideo::get_by_id(array($entity_id));
-                                $entities = ClipitGroup::get_videos($entity->id);
-                            }
-                            break;
-                        default:
-                            return false;
-                            break;
-                    }
-                    $filter = elgg_view('multimedia/filter', array('selected' => $selected_tab, 'entity' => $activity, 'href' => $href));
-                    if($page[2] == 'download' && $page[3]){
-                        $file_dir = elgg_get_plugins_path() . 'z04_clipit_activity/pages/file';
-                        set_input('id', $page[4]);
-                        include "$file_dir/download.php";
-                    }
-                    if($page[2] == 'view' && $page[3]){
-                        $entity_id = (int)$page[3];
-                        elgg_pop_breadcrumb($title);
-                        elgg_push_breadcrumb($title, $href);
-                        $filter = "";
-                        $object = ClipitSite::lookup($entity_id);
-                        switch($object['subtype']){
-                            // Clipit File
-                            case 'ClipitFile':
-                                elgg_push_breadcrumb(elgg_echo("files"), $href."?filter=files");
-                                $title = elgg_echo("file");
-                                $entity = array_pop(ClipitFile::get_by_id(array($entity_id)));
-                                $content = elgg_view('multimedia/view', array(
-                                    'entity' => $entity,
-                                    'type' => 'file',
-                                    'preview' => elgg_view("multimedia/file/preview", array('file'  => $entity)),
-                                    'body' => elgg_view("multimedia/file/body", array('entity'  => $entity))
-                                ));
-                                break;
-                            // Clipit Video
-                            case 'ClipitVideo':
-                                elgg_push_breadcrumb(elgg_echo("videos"), $href."?filter=videos");
-                                $title = elgg_echo("video");
-                                $entity = array_pop(ClipitVideo::get_by_id(array($entity_id)));
-                                $content = elgg_view('multimedia/view', array(
-                                    'entity' => $entity,
-                                    'type' => 'video',
-                                    'preview' => elgg_view("multimedia/video/preview", array('entity'  => $entity)),
-                                    'body' => elgg_view("multimedia/video/body", array('entity'  => $entity))
-                                ));
-                                break;
-                            // Clipit Storyboard
-                            case 'ClipitStoryboard':
-                                elgg_push_breadcrumb(elgg_echo("storyboards"), $href."?filter=storyboards");
-                                $title = elgg_echo("storyboard");
-                                $entity = array_pop(ClipitStoryboard::get_by_id(array($entity_id)));
-                                $file = array_pop(ClipitFile::get_by_id(array($entity->file)));
-                                $content = elgg_view('multimedia/view', array(
-                                    'entity' => $entity,
-                                    'type' => 'storyboard',
-                                    'preview' => elgg_view("multimedia/file/preview", array('file'  => $file)),
-                                    'body' => elgg_view("multimedia/storyboard/body", array('entity'  => $entity, 'file'  => $file))
-                                ));
-                                break;
-                            default:
-                                return false;
-                                break;
-                        }
-                        elgg_push_breadcrumb($entity->name);
-                    }
-                    $params = array(
-                        'content'   => $content,
-                        'filter'    => $filter,
-                        'title'     => $title,
-                        'sub-title' => $activity->name,
-                        'title_style' => "background: #". $activity->color,
-                    );
+                    include("{$activity_dir}/resources.php");
                     break;
                 case 'group':
                     if($page[2]){ // group/{$group_id}
@@ -1069,226 +801,16 @@ function group_tools_page_handler($page, $activity){
         $icon_status = "unlock";
     }
     $filter = "";
+    $group_dir = elgg_get_plugins_path() . 'z04_clipit_activity/pages/group';
     switch ($page[3]) {
         case '':
-            $title = elgg_echo("group:home");
-            elgg_pop_breadcrumb($group->name);
-            elgg_push_breadcrumb($group->name);
-            $content = elgg_view('group/dashboard', array('entity' => $group));
+            include("{$group_dir}/dashboard.php");
             break;
         case 'repository':
-            $title = elgg_echo("group:files");
-            elgg_push_breadcrumb($title);
-            $selected_tab = get_input('filter', 'files');
-            $href = "clipit_activity/{$activity->id}/group/{$group->id}/repository";
-            switch ($selected_tab) {
-                case 'files':
-                    $files = ClipitGroup::get_files($group->id);
-                    // Search items
-                    if($search_term = stripslashes(get_input("search"))){
-                        $items_search = array_keys(ClipitFile::get_from_search($search_term));
-                        $files = array_uintersect($items_search, $files, "strcasecmp");
-                    }
-                    elgg_extend_view("files/search", "search/search");
-
-                    $content = elgg_view('multimedia/file/list', array(
-                        'entity' => $group,
-                        'add_files' => true,
-                        'files' => $files,
-                        'href' => $href,
-                        'create' => $canCreate
-                    ));
-                    if (!$files) {
-                        $content .= elgg_view('output/empty', array('value' => elgg_echo('file:none')));
-                    }
-                    break;
-                case 'videos':
-                    $videos = ClipitGroup::get_videos($group->id);
-                    // Search items
-                    if($search_term = stripslashes(get_input("search"))){
-                        $items_search = array_keys(ClipitVideo::get_from_search($search_term));
-                        $videos = array_uintersect($items_search, $videos, "strcasecmp");
-                    }
-                    elgg_extend_view("videos/search", "search/search");
-
-                    $content = elgg_view('multimedia/video/list', array(
-                        'entity' => $group,
-                        'add_video' => true,
-                        'entities' => $videos,
-                        'actions'   => true,
-                        'href' => $href,
-                        'create' => $canCreate
-                    ));
-                    if (!$videos) {
-                        $content .= elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
-                    }
-                    break;
-                case 'storyboards':
-                    $sbs = ClipitGroup::get_storyboards($group->id);
-                    // Search items
-                    if($search_term = stripslashes(get_input("search"))){
-                        $items_search = array_keys(ClipitStoryboard::get_from_search($search_term));
-                        $sbs = array_uintersect($items_search, $sbs, "strcasecmp");
-                    }
-                    elgg_extend_view("storyboards/search", "search/search");
-
-                    $content = elgg_view('multimedia/storyboard/list', array(
-                        'entity' => $group,
-                        'add_sb' => true,
-                        'entities' => $sbs,
-                        'href' => $href,
-                        'create' => $canCreate,
-                        'actions' => true
-                    ));
-                    if (!$sbs) {
-                        $content .= elgg_view('output/empty', array('value' => elgg_echo('storyboards:none')));
-                    }
-                    if($page[3] == 'view' && $page[4]){
-                        $entity_id = (int)$page[4];
-                        $entity = ClipitVideo::get_by_id(array($entity_id));
-                        $entities = ClipitGroup::get_videos($entity->id);
-                    }
-                    break;
-                default:
-                    return false;
-                    break;
-            }
-            $filter = elgg_view('multimedia/filter', array('selected' => $selected_tab, 'entity' => $group, 'href' => $href));
-            if($page[4] == 'download' && $page[5]){
-                $file_dir = elgg_get_plugins_path() . 'z04_clipit_activity/pages/file';
-                set_input('id', $page[4]);
-                include "$file_dir/download.php";
-            }
-            if($page[4]){
-                $entity_id = (int)$page[5];
-                switch($page[4]){
-                    case "view":
-                        elgg_pop_breadcrumb($title);
-                        elgg_push_breadcrumb($title, $href);
-                        $object = ClipitSite::lookup($entity_id);
-                        switch($object['subtype']){
-                            // Clipit File
-                            case 'ClipitFile':
-                                elgg_push_breadcrumb(elgg_echo("files"), $href."?filter=files");
-                                $title = elgg_echo("file");
-                                $entity = array_pop(ClipitFile::get_by_id(array($entity_id)));
-                                $content = elgg_view('multimedia/view', array(
-                                    'entity' => $entity,
-                                    'type' => 'file',
-                                    'preview' => elgg_view("multimedia/file/preview", array('file'  => $entity)),
-                                    'body' => elgg_view("multimedia/file/body", array('entity'  => $entity))
-                                ));
-                                break;
-                            // Clipit Video
-                            case 'ClipitVideo':
-                                elgg_push_breadcrumb(elgg_echo("videos"), $href."?filter=videos");
-                                $title = elgg_echo("video");
-                                $entity = array_pop(ClipitVideo::get_by_id(array($entity_id)));
-                                $content = elgg_view('multimedia/view', array(
-                                    'entity' => $entity,
-                                    'type' => 'video',
-                                    'preview' => elgg_view("multimedia/video/preview", array('entity'  => $entity)),
-                                    'body' => elgg_view("multimedia/video/body", array('entity'  => $entity))
-                                ));
-                                break;
-                            // Clipit Storyboard
-                            case 'ClipitStoryboard':
-                                elgg_push_breadcrumb(elgg_echo("storyboards"), $href."?filter=storyboards");
-                                $title = elgg_echo("storyboard");
-                                $entity = array_pop(ClipitStoryboard::get_by_id(array($entity_id)));
-                                $file = array_pop(ClipitFile::get_by_id(array($entity->file)));
-                                $content = elgg_view('multimedia/view', array(
-                                    'entity' => $entity,
-                                    'type' => 'storyboard',
-                                    'preview' => elgg_view("multimedia/file/preview", array('file'  => $file)),
-                                    'body' => elgg_view("multimedia/storyboard/body", array('entity'  => $entity, 'file' => $file))
-                                ));
-                                break;
-                            default:
-                                return false;
-                                break;
-                        }
-                        break;
-                    case "publish":
-                        $entity_id = (int)$page[5];
-                        elgg_pop_breadcrumb($entity->name);
-                        $object = ClipitSite::lookup($entity_id);
-                        switch($object['subtype']){
-                            // Clipit Video
-                            case 'ClipitVideo':
-                                $subtitle = elgg_echo("video");
-                                elgg_push_breadcrumb(elgg_echo("videos"), $href."?filter=videos");
-                                $entity = array_pop(ClipitVideo::get_by_id(array($entity_id)));
-                                $entity_preview = '<img src="'.$entity->preview.'" class="img-responsive">';
-                                break;
-                            // Clipit StoryBoard
-                            case 'ClipitStoryboard':
-                                $subtitle = elgg_echo("storyboard");
-                                elgg_push_breadcrumb(elgg_echo("storyboards"), $href."?filter=storyboards");
-                                $entity = array_pop(ClipitStoryboard::get_by_id(array($entity_id)));
-                                $entity_preview = elgg_view("multimedia/file/view_summary", array(
-                                    'file' => array_pop(ClipitFile::get_by_id(array($entity->file))),
-                                    'title' => false
-                                ));
-                                break;
-                            default:
-                                return false;
-                                break;
-                        }
-                        $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($activity->tricky_topic)));
-                        $tags = $tricky_topic->tag_array;
-                        if(isset($entity_preview)){
-                            $entity_preview = elgg_view('output/url', array(
-                                'href'  => "{$href}/view/{$entity->id}",
-                                'target' => "_blank",
-                                'title' => $entity->name,
-                                'text'  => $entity_preview
-                            ));
-                        }
-                        $content = elgg_view_form('publications/publish', array('data-validate'=> "true" ),
-                            array(
-                                'entity'  => $entity,
-                                'parent_id' => $group->id,
-                                'activity' => $activity,
-                                'tags' => $tags,
-                                'entity_preview' => $entity_preview
-                            ));
-                        $title =  elgg_echo("publish:to_activity", array($subtitle, $activity->name));
-                        break;
-                }
-                elgg_push_breadcrumb($entity->name);
-                $filter = "";
-            }
+            include("{$group_dir}/repository.php");
             break;
         case 'discussion':
-            $title = elgg_echo("group:discussion");
-            $href = "clipit_activity/{$activity->id}/group/{$group->id}/discussion";
-            elgg_push_breadcrumb($title);
-            $messages = array_pop(ClipitPost::get_by_destination(array($group->id)));
-
-            $content =  elgg_view('discussion/list',
-                    array(
-                        'entity' => $group,
-                        'messages' => $messages,
-                        'attach_multimedia_group' => true,
-                        'href'   => $href,
-                        'create' => $canCreate
-                    ));
-            if(!$messages){
-                $content .= elgg_view('output/empty', array('value' => elgg_echo('discussions:none')));
-            }
-            if($page[4] == 'view' && $page[5]){
-                $message_id = (int)$page[5];
-                $message = array_pop(ClipitPost::get_by_id(array($message_id)));
-                elgg_pop_breadcrumb($title);
-                elgg_push_breadcrumb($title, $href);
-                elgg_push_breadcrumb($message->name);
-                if($message && $message->destination == $group->id){
-                    $content = elgg_view('discussion/view', array('entity' => $message, 'group' => $group));
-                } else {
-                    return false;
-                }
-            }
+            include("{$group_dir}/discussion.php");
             break;
         default:
             return false;

@@ -14,6 +14,14 @@ $activity = elgg_extract('entity', $vars);
 $teachers = ClipitActivity::get_teachers($activity->id);
 $teachers = ClipitUser::get_by_id($teachers);
 ?>
+<script>
+$(function(){
+    $(".datepicker").datepicker({
+        minDate: "<?php echo date("d/m/Y", $activity->start);?>",
+        maxDate: "<?php echo date("d/m/Y", $activity->end);?>"
+    });
+});
+</script>
 <div class="row">
     <?php echo elgg_view("input/hidden", array(
         'name' => 'entity-id',

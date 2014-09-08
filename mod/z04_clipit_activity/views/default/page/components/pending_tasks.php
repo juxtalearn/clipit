@@ -36,7 +36,7 @@ foreach(ClipitTask::get_by_id($activity->task_array) as $task):
             <?php echo elgg_view('output/url', array(
                 'href'  => "clipit_activity/{$task->activity}/tasks/view/{$task->id}",
                 'title' => $task->name,
-                'text'  => $status['count']." ".$task->name,
+                'text'  => elgg_view("tasks/icon_task_type", array('type' => $task->task_type)) . $status['count']." ".$task->name,
             ));
             ?>
         </li>
