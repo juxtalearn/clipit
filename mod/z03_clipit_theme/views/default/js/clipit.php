@@ -321,10 +321,11 @@ $(function(){
             title: elgg.echo("question:areyousure"),
             buttons: {
                 confirm: {
-                    label: "Yes"
+                    label: elgg.echo("input:yes")
                 },
                 cancel: {
-                    label: "No"
+                    label: elgg.echo("input:no"),
+                    className: "btn-border-blue btn-default"
                 }
             },
             message: elgg.echo("deleteconfirm"),
@@ -461,6 +462,33 @@ $(function(){
             singleField: true,
             singleFieldNode: that.closest("form").find("input[name=tags]")
         });
+    });
+    /**
+     * Quote reference for discussion posts
+     */
+    $(document).on("click", ".quote-ref", function(){
+        var quote_id = $(this).data("quote-ref");
+        var parent = $(this).closest("div");
+        var $obj = $(this);
+        var quote_content = parent.find(".quote-content[data-quote-id="+quote_id+"]");
+
+        if(quote_content.length == 0){
+            $(this).addClass("active");
+            $(this).after("<div class='quote-content' data-quote-id='"+quote_id+"'></div>");
+            var quote_content = parent.find(".quote-content[data-quote-id="+quote_id+"]");
+            quote_content.html("<a class='loading'><i class='fa fa-spinner fa-spin'></i> loading...</a>");
+            var message_id = $(this).closest(".discussion-reply-msg").data("message-destination");
+            elgg.get("ajax/view/discussion/quote", {
+                data: { quote_id : quote_id, message_destination_id : message_id},
+                success: function(data){
+                quote_content.html(data);
+            }
+            });
+        } else {
+            parent.find(".quote-content[data-quote-id="+quote_id+"]").toggle(1,function(){
+                $obj.toggleClass("active");
+            });
+        }
     });
     /*
      * Labels complete view  & labels form to create

@@ -24,9 +24,8 @@ if($message->owner_id != $user_loggedin_id){
     ClipitPost::set_read_status($message->id, true, array($user_loggedin_id));
 }
 ?>
-
 <a name="reply_<?php echo $message->id; ?>"></a>
-<div class="discussion discussion-reply-msg">
+<div class="discussion discussion-reply-msg"  data-message-destination="<?php echo ClipitPost::get_destination($message->id);?>">
     <div class="header-post">
         <a class="show btn pull-right msg-quote" style="
     background: #fff;

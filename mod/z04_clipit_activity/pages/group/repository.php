@@ -75,3 +75,9 @@ if($page[4]){
             break;
     }
 }
+
+$params = array(
+    'content'   => $content,
+    'filter'    => $filter,
+    'title'     => $title,
+);

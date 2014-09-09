@@ -40,3 +40,8 @@ if($page[4] == 'view' && $page[5]){
         return false;
     }
 }
+$params = array(
+    'content'   => $content,
+    'filter'    => '',
+    'title'     => $title,
+);
