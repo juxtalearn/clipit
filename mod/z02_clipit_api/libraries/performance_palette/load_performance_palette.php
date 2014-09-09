@@ -11,7 +11,7 @@
  * @package         ClipIt
  * @subpackage      clipit_api
  */
-const FILE_NAME = "load_performance_palette.json";
+const FILE_NAME = "performance_palette.json";
 const KEY_NAME = "performance_palette";
 // Check if Performance Palette has already been loaded.
 if(get_config(KEY_NAME) === true) {
