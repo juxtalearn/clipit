@@ -294,60 +294,13 @@ function activity_page_handler($page) {
             $activity_dir = elgg_get_plugins_path() . 'z04_clipit_activity/pages/activity';
             switch ($page[1]) {
                 case 'groups':
-                    $title = elgg_echo("activity:groups");
-                    elgg_push_breadcrumb($title);
-                    $params = array(
-                        'content'   => elgg_view('group/list', array('entity' => $activity)),
-                        'filter'    => '',
-                        'title'     => $title,
-                        'sub-title' => $activity->name,
-                        'title_style' => "background: #". $activity->color,
-                    );
+                    include("{$activity_dir}/groups.php");
                     break;
-
                 case 'admin':
-                    if($user->role == 'student' || $access != 'ACCESS_TEACHER'){
-                        return false;
-                    }
-                    $title = elgg_echo('activity:admin');
-                    $href = "clipit_activity/{$activity->id}/admin";
-                    $selected_tab = get_input('filter', 'setup');
-                    $filter = elgg_view('activity/admin/filter', array('selected' => $selected_tab, 'href' => $href));
-                    // dashboard, default admin view
-                    switch($selected_tab){
-                        case 'tasks':
-                            $content = elgg_view('activity/admin/tasks/view', array('entity' => $activity));
-                            break;
-                        case 'setup':
-                            $setup_view = elgg_view('activity/admin/setup', array('entity' => $activity));
-                            $content = elgg_view_form('activity/admin/setup', array('body' => $setup_view));
-                            break;
-                        case 'groups':
-                            $content = elgg_view('activity/admin/groups/view', array('entity' => $activity));
-                            break;
-                    }
-                    $params = array(
-                        'content'   => $content,
-                        'filter'    => $filter,
-                        'class' => "activity-section activity-layout activity-admin-section",
-                        'title'     => $title,
-                        'sub-title' => $activity->name,
-                        'title_style' => "background: #". $activity->color,
-                    );
+                    include("{$activity_dir}/admin.php");
                     break;
                 case 'join':
-                    if($activity_status == 'active' || !$isCalled || $activity->group_mode != ClipitActivity::GROUP_MODE_STUDENT){
-                        return false;
-                    }
-                    $title = elgg_echo("activity:group:join");
-                    elgg_push_breadcrumb($title);
-                    $params = array(
-                        'content'   => elgg_view('activity/join', array('entity' => $activity)),
-                        'filter'    => '',
-                        'title'     => $title,
-                        'sub-title' => $activity->name,
-                        'title_style' => "background: #". $activity->color,
-                    );
+                    include("{$activity_dir}/join.php");
                     break;
                 case 'discussion':
                     include("{$activity_dir}/discussion.php");
@@ -361,9 +314,9 @@ function activity_page_handler($page) {
                 case 'resources':
                     include("{$activity_dir}/resources.php");
                     break;
+                // Group tools
                 case 'group':
                     if($page[2]){ // group/{$group_id}
-//                        $params = group_tools_page_handler($page, $activity);
                         set_input('group_id', (int)$page[2]);
                         include elgg_get_plugins_path() . 'z04_clipit_activity/pages/activity/group.php';
                     }
@@ -455,81 +408,6 @@ function file_page_handler($page){
                 return false;
         }
     }
-}
-
-/**
- * Group tools sections
- *
- * @param $page
- * @param $activity
- * @return array|bool
- */
-function group_tools_page_handler($page, $activity){
-    $user_id = elgg_get_logged_in_user_guid();
-    $my_group = ClipitGroup::get_from_user_activity($user_id, $activity->id);
-    $isTeacher = in_array($user_id, $activity->teacher_array);
-    $group_id = (int)$page[2];
-    $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
-    if($activity->status == 'enroll' && !$isTeacher ){
-        return false;
-    }
-    $canCreate = false;
-    if(($my_group == $group_id && $activity->status == 'active') || $isTeacher){
-        $canCreate = true;
-    }
-    if($group &&
-        ((!$isTeacher && $my_group == $group_id) // I am group member
-            ||
-        ($isTeacher && $my_group != $group_id)) // I am a teacher from activity
-    ){
-        $access_group = true;
-    }
-    if(!$access_group){
-        return false;
-    }
-    elgg_push_breadcrumb($group->name, "clipit_activity/{$activity->id}/group/{$group->id}");
-    // set group icon status from activity status
-    $activity_status = $activity->status;
-    $icon_status = "lock";
-    if($activity_status == 'enroll'){
-        $icon_status = "unlock";
-    }
-    $filter = "";
-    $group_dir = elgg_get_plugins_path() . 'z04_clipit_activity/pages/group';
-    switch ($page[3]) {
-        case '':
-            include("{$group_dir}/dashboard.php");
-            break;
-        case 'repository':
-            include("{$group_dir}/repository.php");
-            break;
-        case 'discussion':
-            include("{$group_dir}/discussion.php");
-            break;
-        default:
-            return false;
-    }
-    // Default group params
-//    $defaults_params = array(
-//        'content' => $content,
-//        'filter' => $filter,
-//        'title' => $title,
-//        'sub-title' => $group_name,
-//        'title_style' => "background: #". $activity->color
-//    );
-    $params['content'] = $content;
-    $params['filter'] = $filter;
-    $params['title'] = $title;
-    $params['sub-title'] = $group->name;
-    $params['title_style'] = "background: #". $activity->color;
-
-    if($activity_status == 'enroll'){
-        $params['special_header_content'] = elgg_view_form("group/leave",
-            array('class' => 'pull-right'),
-            array('entity' => $group, 'text' => elgg_echo("group:leave:me")));
-    }
-
-    return $params;
 }
 
 /**
