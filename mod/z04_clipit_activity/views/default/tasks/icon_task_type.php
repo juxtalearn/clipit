@@ -39,7 +39,7 @@ switch($type){
         break;
     case ClipitTask::TYPE_STORYBOARD_FEEDBACK:
         $title = elgg_echo('task:storyboard_feedback');
-        $icon = "signal";
+        $icon = "comment";
         break;
     case ClipitTask::TYPE_OTHER:
         $title = elgg_echo('task:other');

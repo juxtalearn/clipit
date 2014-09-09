@@ -49,22 +49,22 @@ function clipit_activity_init() {
 //    elgg_register_entity_url_handler('object', 'z04_clipit_activity', 'activity_url');
 
     // Register actions & ajax views
-
+    $actions_dir = elgg_get_plugins_path() . "z04_clipit_activity/actions";
     // Create Activity
-    elgg_register_action("activity/create/add_users", elgg_get_plugins_path() . "z04_clipit_activity/actions/activity/add_users.php");
-    elgg_register_action("activity/create/add_users_upload", elgg_get_plugins_path() . "z04_clipit_activity/actions/activity/add_users_upload.php");
-    elgg_register_action("activity/create", elgg_get_plugins_path() . "z04_clipit_activity/actions/activity/create.php");
+    elgg_register_action("activity/create/add_users", "{$actions_dir}/activity/add_users.php");
+    elgg_register_action("activity/create/add_users_upload", "{$actions_dir}/activity/add_users_upload.php");
+    elgg_register_action("activity/create", "{$actions_dir}/activity/create.php");
     elgg_register_ajax_view('activity/create/task_list');
     elgg_register_ajax_view('activity/create/groups/create');
     // Admin activity
-    elgg_register_action("activity/admin/setup", elgg_get_plugins_path() . "z04_clipit_activity/actions/activity/admin/setup.php");
-    elgg_register_action("activity/admin/teachers", elgg_get_plugins_path() . "z04_clipit_activity/actions/activity/admin/teachers.php");
-    elgg_register_action("activity/admin/groups_setup", elgg_get_plugins_path() . "z04_clipit_activity/actions/activity/admin/groups_setup.php");
-    elgg_register_action("activity/admin/groups_create", elgg_get_plugins_path() . "z04_clipit_activity/actions/activity/admin/groups_create.php");
-    elgg_register_action("activity/admin/group_mode", elgg_get_plugins_path() . "z04_clipit_activity/actions/activity/admin/group_mode.php");
-    elgg_register_action("task/edit", elgg_get_plugins_path() . "z04_clipit_activity/actions/task/edit.php");
-    elgg_register_action("task/remove", elgg_get_plugins_path() . "z04_clipit_activity/actions/task/remove.php");
-    elgg_register_action("task/create", elgg_get_plugins_path() . "z04_clipit_activity/actions/task/create.php");
+    elgg_register_action("activity/admin/setup", "{$actions_dir}/activity/admin/setup.php");
+    elgg_register_action("activity/admin/teachers", "{$actions_dir}/activity/admin/teachers.php");
+    elgg_register_action("activity/admin/groups_setup", "{$actions_dir}/activity/admin/groups_setup.php");
+    elgg_register_action("activity/admin/groups_create", "{$actions_dir}/activity/admin/groups_create.php");
+    elgg_register_action("activity/admin/group_mode", "{$actions_dir}/activity/admin/group_mode.php");
+    elgg_register_action("task/edit", "{$actions_dir}/task/edit.php");
+    elgg_register_action("task/remove", "{$actions_dir}/task/remove.php");
+    elgg_register_action("task/create", "{$actions_dir}/task/create.php");
 
     elgg_register_ajax_view('activity/admin/groups/users_list');
     elgg_register_ajax_view('activity/admin/dashboard/group_info');
@@ -74,10 +74,10 @@ function clipit_activity_init() {
     elgg_register_ajax_view('modal/task/edit');
 
     // Group
-    elgg_register_action("group/join", elgg_get_plugins_path() . "z04_clipit_activity/actions/group/join.php");
-    elgg_register_action("group/leave", elgg_get_plugins_path() . "z04_clipit_activity/actions/group/leave.php");
-    elgg_register_action("group/create", elgg_get_plugins_path() . "z04_clipit_activity/actions/group/create.php");
-    elgg_register_action("group/remove_member", elgg_get_plugins_path() . "z04_clipit_activity/actions/group/remove_member.php");
+    elgg_register_action("group/join", "{$actions_dir}/group/join.php");
+    elgg_register_action("group/leave", "{$actions_dir}/group/leave.php");
+    elgg_register_action("group/create", "{$actions_dir}/group/create.php");
+    elgg_register_action("group/remove_member", "{$actions_dir}/group/remove_member.php");
     elgg_register_ajax_view('modal/group/view');
     elgg_register_ajax_view('multimedia/attach/videos');
     elgg_register_ajax_view('multimedia/attach/storyboards');
@@ -87,56 +87,57 @@ function clipit_activity_init() {
     elgg_register_ajax_view('tricky_topic/list');
     // Multimedia
     /* Videos */
-    elgg_register_action("multimedia/videos/add", elgg_get_plugins_path() . "z04_clipit_activity/actions/multimedia/videos/add.php");
-    elgg_register_action("multimedia/videos/remove", elgg_get_plugins_path() . "z04_clipit_activity/actions/multimedia/videos/remove.php");
-    elgg_register_action("multimedia/videos/edit", elgg_get_plugins_path() . "z04_clipit_activity/actions/multimedia/videos/edit.php");
-    elgg_register_action("multimedia/videos/publish", elgg_get_plugins_path() . "z04_clipit_activity/actions/multimedia/videos/publish.php");
+    elgg_register_action("multimedia/videos/add", "{$actions_dir}/multimedia/videos/add.php");
+    elgg_register_action("multimedia/videos/remove", "{$actions_dir}/multimedia/videos/remove.php");
+    elgg_register_action("multimedia/videos/edit", "{$actions_dir}/multimedia/videos/edit.php");
+    elgg_register_action("multimedia/videos/publish", "{$actions_dir}/multimedia/videos/publish.php");
     elgg_register_ajax_view('modal/multimedia/video/edit');
     elgg_register_ajax_view('modal/multimedia/video/publish');
     /* Files */
-    elgg_register_action("multimedia/files/upload", elgg_get_plugins_path() . "z04_clipit_activity/actions/multimedia/files/upload.php");
-    elgg_register_action("multimedia/files/remove", elgg_get_plugins_path() . "z04_clipit_activity/actions/multimedia/files/remove.php");
-    elgg_register_action("multimedia/files/edit", elgg_get_plugins_path() . "z04_clipit_activity/actions/multimedia/files/edit.php");
-    elgg_register_action("multimedia/files/set_options", elgg_get_plugins_path() . "z04_clipit_activity/actions/multimedia/files/set_options.php");
+    elgg_register_action("multimedia/files/upload", "{$actions_dir}/multimedia/files/upload.php");
+    elgg_register_action("multimedia/files/remove", "{$actions_dir}/multimedia/files/remove.php");
+    elgg_register_action("multimedia/files/edit", "{$actions_dir}/multimedia/files/edit.php");
+    elgg_register_action("multimedia/files/set_options", "{$actions_dir}/multimedia/files/set_options.php");
     elgg_register_ajax_view('modal/multimedia/file/edit');
     elgg_register_ajax_view('multimedia/file/viewer');
     elgg_register_ajax_view('multimedia/file/upload');
     elgg_register_ajax_view('multimedia/file/attach_action');
-    elgg_register_action("multimedia/videos/extract_data", elgg_get_plugins_path() . "z04_clipit_activity/actions/multimedia/videos/extract_data.php");
-    elgg_register_action("multimedia/files/upload", elgg_get_plugins_path() . "z04_clipit_activity/actions/multimedia/files/upload.php");
+    elgg_register_action("multimedia/videos/extract_data", "{$actions_dir}/multimedia/videos/extract_data.php");
+    elgg_register_action("multimedia/files/upload", "{$actions_dir}/multimedia/files/upload.php");
     /* Storyboards */
-    elgg_register_action("storyboards/upload", elgg_get_plugins_path() . "z04_clipit_activity/actions/storyboards/upload.php");
-    elgg_register_action("multimedia/storyboards/edit", elgg_get_plugins_path() . "z04_clipit_activity/actions/multimedia/storyboards/edit.php");
-    elgg_register_action("multimedia/storyboards/set_options", elgg_get_plugins_path() . "z04_clipit_activity/actions/multimedia/storyboards/set_options.php");
-    elgg_register_action("multimedia/storyboards/remove", elgg_get_plugins_path() . "z04_clipit_activity/actions/multimedia/storyboards/remove.php");
+    elgg_register_action("storyboards/upload", "{$actions_dir}/storyboards/upload.php");
+    elgg_register_action("multimedia/storyboards/edit", "{$actions_dir}/multimedia/storyboards/edit.php");
+    elgg_register_action("multimedia/storyboards/set_options", "{$actions_dir}/multimedia/storyboards/set_options.php");
+    elgg_register_action("multimedia/storyboards/remove", "{$actions_dir}/multimedia/storyboards/remove.php");
     elgg_register_ajax_view('modal/multimedia/storyboard/edit');
     // Publications
-    elgg_register_action("publications/evaluate", elgg_get_plugins_path() . "z04_clipit_activity/actions/publications/evaluate.php");
-    elgg_register_action("publications/publish", elgg_get_plugins_path() . "z04_clipit_activity/actions/publications/publish.php");
-    elgg_register_action("publications/labels/add", elgg_get_plugins_path() . "z04_clipit_activity/actions/publications/labels/add.php");
+    elgg_register_action("publications/evaluate", "{$actions_dir}/publications/evaluate.php");
+    elgg_register_action("publications/publish", "{$actions_dir}/publications/publish.php");
+    elgg_register_action("publications/labels/add", "{$actions_dir}/publications/labels/add.php");
     elgg_register_ajax_view('modal/publications/rating');
     elgg_register_ajax_view('publications/labels/search');
     // Discussion
-    elgg_register_action("discussion/create", elgg_get_plugins_path() . "z04_clipit_activity/actions/discussion/create.php");
-    elgg_register_action("discussion/create_from_multimedia", elgg_get_plugins_path() . "z04_clipit_activity/actions/discussion/create_from_multimedia.php");
-    elgg_register_action("discussion/remove", elgg_get_plugins_path() . "z04_clipit_activity/actions/discussion/remove.php");
-    elgg_register_action("discussion/edit", elgg_get_plugins_path() . "z04_clipit_activity/actions/discussion/edit.php");
+    elgg_register_action("discussion/create", "{$actions_dir}/discussion/create.php");
+    elgg_register_action("discussion/create_from_multimedia", "{$actions_dir}/discussion/create_from_multimedia.php");
+    elgg_register_action("discussion/remove", "{$actions_dir}/discussion/remove.php");
+    elgg_register_action("discussion/edit", "{$actions_dir}/discussion/edit.php");
     elgg_register_ajax_view('modal/discussion/edit');
-    elgg_register_action("discussion/reply/create", elgg_get_plugins_path() . "z04_clipit_activity/actions/discussion/reply/create.php");
-    elgg_register_action("discussion/reply/remove", elgg_get_plugins_path() . "z04_clipit_activity/actions/discussion/reply/remove.php");
-    elgg_register_action("discussion/reply/edit", elgg_get_plugins_path() . "z04_clipit_activity/actions/discussion/reply/edit.php");
+    elgg_register_action("discussion/reply/create", "{$actions_dir}/discussion/reply/create.php");
+    elgg_register_action("discussion/reply/remove", "{$actions_dir}/discussion/reply/remove.php");
+    elgg_register_action("discussion/reply/edit", "{$actions_dir}/discussion/reply/edit.php");
     elgg_register_ajax_view('modal/discussion/reply/edit');
     elgg_register_ajax_view('discussion/quote');
 
     // Register javascript files
+    $vendors_dir = elgg_get_site_url() . "mod/z04_clipit_activity/vendors";
     $files_upload_js = elgg_get_simplecache_url('js', 'upload');
     elgg_register_simplecache_view('js/upload');
     elgg_register_js('file:upload', $files_upload_js);
     // Raty js modified by clipit
-    elgg_register_js('jquery:raty', elgg_get_site_url() . "mod/z04_clipit_activity/vendors/jquery.raty.js");
+    elgg_register_js('jquery:raty', "{$vendors_dir}/jquery.raty.js");
     elgg_load_js("jquery:raty");
     // Tag-it
-    elgg_register_js('jquery:tag_it', elgg_get_site_url() . "mod/z04_clipit_activity/vendors/jquery.tag-it.min.js");
+    elgg_register_js('jquery:tag_it', "{$vendors_dir}/jquery.tag-it.min.js");
     elgg_load_js("jquery:tag_it");
     // Activity javascript libraries
     $activity_js = elgg_get_simplecache_url('js', 'activity');
@@ -148,14 +149,14 @@ function clipit_activity_init() {
     elgg_register_simplecache_view('js/attach');
     elgg_register_js('file:attach', $files_attach_js);
     // jQuery file upload
-    elgg_register_js("jquery:fileupload:tmpl", elgg_get_site_url() . "mod/z04_clipit_activity/vendors/fileupload/tmpl.min.js");
-    elgg_register_js("jquery:fileupload:load_image", elgg_get_site_url() . "mod/z04_clipit_activity/vendors/fileupload/load-image.min.js");
-    elgg_register_js("jquery:fileupload:iframe_transport", elgg_get_site_url() . "mod/z04_clipit_activity/vendors/fileupload/iframe-transport.js");
-    elgg_register_js("jquery:fileupload", elgg_get_site_url() . "mod/z04_clipit_activity/vendors/fileupload/fileupload.js");
-    elgg_register_js("jquery:fileupload:process", elgg_get_site_url() . "mod/z04_clipit_activity/vendors/fileupload/fileupload-process.js");
-    elgg_register_js("jquery:fileupload:image", elgg_get_site_url() . "mod/z04_clipit_activity/vendors/fileupload/fileupload-image.js");
-    elgg_register_js("jquery:fileupload:validate", elgg_get_site_url() . "mod/z04_clipit_activity/vendors/fileupload/fileupload-validate.js");
-    elgg_register_js("jquery:fileupload:ui", elgg_get_site_url() . "mod/z04_clipit_activity/vendors/fileupload/fileupload-ui.js");
+    elgg_register_js("jquery:fileupload:tmpl", "{$vendors_dir}/fileupload/tmpl.min.js");
+    elgg_register_js("jquery:fileupload:load_image", "{$vendors_dir}/fileupload/load-image.min.js");
+    elgg_register_js("jquery:fileupload:iframe_transport", "{$vendors_dir}/fileupload/iframe-transport.js");
+    elgg_register_js("jquery:fileupload", "{$vendors_dir}/fileupload/fileupload.js");
+    elgg_register_js("jquery:fileupload:process", "{$vendors_dir}/fileupload/fileupload-process.js");
+    elgg_register_js("jquery:fileupload:image", "{$vendors_dir}/fileupload/fileupload-image.js");
+    elgg_register_js("jquery:fileupload:validate", "{$vendors_dir}/fileupload/fileupload-validate.js");
+    elgg_register_js("jquery:fileupload:ui", "{$vendors_dir}/fileupload/fileupload-ui.js");
     elgg_load_js("jquery:fileupload:tmpl");
     elgg_load_js("jquery:fileupload:load_image");
     elgg_load_js("jquery:fileupload:iframe_transport");
@@ -165,13 +166,13 @@ function clipit_activity_init() {
     elgg_load_js("jquery:fileupload:validate");
     elgg_load_js("jquery:fileupload:ui");
     // jQuery Multi-select
-    elgg_register_js("jquery:multiselect", elgg_get_site_url() . "mod/z04_clipit_activity/vendors/jquery.multi-select.js");
+    elgg_register_js("jquery:multiselect", "{$vendors_dir}/jquery.multi-select.js");
     // jQuery QuickSearch
-    elgg_register_js("jquery:quicksearch", elgg_get_site_url() . "mod/z04_clipit_activity/vendors/jquery.quicksearch.js");
+    elgg_register_js("jquery:quicksearch", "{$vendors_dir}/jquery.quicksearch.js");
     // FullCalendar
-    elgg_register_js("fullcalendar:moment", elgg_get_site_url() . "mod/z04_clipit_activity/vendors/fullcalendar/moment.min.js");
-    elgg_register_js("fullcalendar", elgg_get_site_url() . "mod/z04_clipit_activity/vendors/fullcalendar/fullcalendar.min.js");
-    elgg_register_css("fullcalendar", elgg_get_site_url() . "mod/z04_clipit_activity/vendors/fullcalendar/fullcalendar.css");
+    elgg_register_js("fullcalendar:moment", "{$vendors_dir}/fullcalendar/moment.min.js");
+    elgg_register_js("fullcalendar", "{$vendors_dir}/fullcalendar/fullcalendar.min.js");
+    elgg_register_css("fullcalendar", "{$vendors_dir}/fullcalendar/fullcalendar.css");
 }
 function activity_setup_sidebar_menus(){
     $activity_id =  elgg_get_page_owner_guid();
@@ -310,16 +311,16 @@ function activity_page_handler($page) {
                     }
                     $title = elgg_echo('activity:admin');
                     $href = "clipit_activity/{$activity->id}/admin";
-                    $selected_tab = get_input('filter', 'dashboard');
+                    $selected_tab = get_input('filter', 'setup');
                     $filter = elgg_view('activity/admin/filter', array('selected' => $selected_tab, 'href' => $href));
                     // dashboard, default admin view
-                    $content = elgg_view('activity/admin/dashboard/view', array('entity' => $activity));
                     switch($selected_tab){
                         case 'tasks':
                             $content = elgg_view('activity/admin/tasks/view', array('entity' => $activity));
                             break;
                         case 'setup':
-                            $content = elgg_view_form('activity/admin/setup', array(), array('entity' => $activity));
+                            $setup_view = elgg_view('activity/admin/setup', array('entity' => $activity));
+                            $content = elgg_view_form('activity/admin/setup', array('body' => $setup_view));
                             break;
                         case 'groups':
                             $content = elgg_view('activity/admin/groups/view', array('entity' => $activity));

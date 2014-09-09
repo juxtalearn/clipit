@@ -20,15 +20,6 @@ if($feedback_task){
 <li data-view="list" style="display: none;" class="view-element list-item <?php echo $feedback_task ? 'margin-left-10' : '';?>">
     <div class="pull-right">
         <?php echo elgg_view('output/url', array(
-            'href'  => "ajax/view/modal/task/edit?id={$task->id}",
-            'class' => 'btn btn-xs btn-primary',
-            'title' => elgg_echo('edit'),
-            'text'  => '<i class="fa fa-pencil"></i> '.elgg_echo('edit'),
-            'data-toggle'   => 'modal',
-            'data-target'   => '#edit-task-'.$task->id
-        ));
-        ?>
-        <?php echo elgg_view('output/url', array(
             'href'  => "action/task/remove?id={$task->id}",
             'class' => 'btn btn-xs btn-danger remove remove-object',
             'is_action' => true,
@@ -40,7 +31,7 @@ if($feedback_task){
     <div>
         <?php if($feedback_task): ?>
             <i class="fa fa-level-up text-muted-2 fa-rotate-90 margin-right-10 pull-left" style="font-size: 21px;margin-right: 10px;"></i>
-            <small class="show">Feedback task</small>
+            <small class="show"><?php echo elgg_echo('task:feedback');?></small>
         <?php endif; ?>
         <div class="image-block fa-2x">
             <?php echo elgg_view("tasks/icon_task_type", array('type' => $task->task_type, 'size' => false)); ?>
@@ -52,7 +43,10 @@ if($feedback_task){
             <strong>
                 <?php echo elgg_view('output/url', array(
                     'text' => $task->name,
-                    'href' => "clipit_activity/{$task->activity}/tasks/view/{$task->id}",
+                    'href'  => "ajax/view/modal/task/edit?id={$task->id}",
+                    'title' => elgg_echo('edit'),
+                    'data-toggle'   => 'modal',
+                    'data-target'   => '#edit-task-'.$task->id
                 ));
                 ?>
             </strong>

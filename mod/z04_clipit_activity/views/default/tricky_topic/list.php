@@ -27,7 +27,7 @@ $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($tricky_topic_id)))
         ?>
     </h4>
     <hr class="margin-0">
-    <small class="show"><?php echo elgg_echo("tags");?></small>
+    <small class="show margin-top-5"><?php echo elgg_echo("tags");?></small>
 </div>
 <?php
 foreach($tricky_topic->tag_array as $tag_id):

@@ -26,12 +26,10 @@ switch($selected_tab){
         $content = publications_get_page_content_list('storyboard_upload', $tasks, $href);
         break;
 }
-$publications_dir = elgg_get_plugins_path() . 'z04_clipit_activity/pages/publications';
 
 if($page[2] == 'view' && $page[3]){
     $entity_id = (int)$page[3];
     $filter = "";
-//    include ("{$publications_dir}/view");
     elgg_pop_breadcrumb($title);
     elgg_push_breadcrumb($title, "clipit_activity/{$activity->id}/publications");
     $object = ClipitSite::lookup($entity_id);

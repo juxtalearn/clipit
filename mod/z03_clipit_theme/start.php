@@ -29,7 +29,8 @@ function language_selector_boot(){
 }
 function clipit_final_init() {
     global $CONFIG;
-    $CONFIG->user = new ClipitUser(elgg_get_logged_in_user_guid());
+    $user_id = elgg_get_logged_in_user_guid();
+    $user = array_pop(ClipitUser::get_by_id(array($user_id)));
     /**
      * Register menu footer
     */
@@ -88,6 +89,10 @@ function clipit_final_init() {
 
 
     if (elgg_get_context() === "admin") {
+        if($user->role == ClipitUser::ROLE_TEACHER){
+            elgg_unregister_page_handler('admin');
+            return false;
+        }
         elgg_unregister_css("twitter-bootstrap");
         elgg_unregister_css("ui-lightness");
         elgg_unregister_css("clipit");
