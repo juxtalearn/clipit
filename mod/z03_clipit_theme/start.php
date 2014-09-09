@@ -35,27 +35,27 @@ function clipit_final_init() {
      * Register menu footer
     */
     setup_footer_menus();
-
+    $plugin_dir = elgg_get_plugins_path() . "z03_clipit_theme";
     // Register & load libs
-    elgg_register_library('clipit:functions', elgg_get_plugins_path() . 'z03_clipit_theme/lib/functions.php');
+    elgg_register_library('clipit:functions', "{$plugin_dir}/lib/functions.php");
     elgg_load_library('clipit:functions');
     // Register & load events lib
-    elgg_register_library('clipit:recommended:events', elgg_get_plugins_path() . 'z03_clipit_theme/lib/recommended/events.php');
+    elgg_register_library('clipit:recommended:events', "{$plugin_dir}/lib/recommended/events.php");
     elgg_load_library('clipit:recommended:events');
 
     // Activity admin module ajax
     elgg_register_ajax_view('dashboard/modules/activity_admin/task_list');
 
-    elgg_register_action("clipit_theme/settings", elgg_get_plugins_path() . "z04_clipit_activity/actions/settings.php", 'admin');
-    elgg_register_action('login', elgg_get_plugins_path() . "z03_clipit_theme/actions/login.php", 'public');
-    elgg_register_action('logout', elgg_get_plugins_path() . "z03_clipit_theme/actions/logout.php");
-    elgg_register_action('register', elgg_get_plugins_path() . "z03_clipit_theme/actions/register.php", 'public');
+    elgg_register_action("clipit_theme/settings", "{$plugin_dir}/actions/settings.php", 'admin');
+    elgg_register_action('login', "{$plugin_dir}/actions/login.php", 'public');
+    elgg_register_action('logout', "{$plugin_dir}/actions/logout.php");
+    elgg_register_action('register', "{$plugin_dir}/actions/register.php", 'public');
 
-    elgg_register_action('user/requestnewpassword', elgg_get_plugins_path() . "z03_clipit_theme/actions/user/requestnewpassword.php", 'public');
-    elgg_register_action('user/passwordreset', elgg_get_plugins_path() . "z03_clipit_theme/actions/user/passwordreset.php", 'public');
-    elgg_register_action("user/check", elgg_get_plugins_path() . "z03_clipit_theme/actions/check.php", 'public');
+    elgg_register_action('user/requestnewpassword', "{$plugin_dir}/actions/user/requestnewpassword.php", 'public');
+    elgg_register_action('user/passwordreset', "{$plugin_dir}/actions/user/passwordreset.php", 'public');
+    elgg_register_action("user/check", "{$plugin_dir}/actions/check.php", 'public');
     // Language selector
-    elgg_register_action('language/set', elgg_get_plugins_path() . "z03_clipit_theme/actions/language/set.php", 'public');
+    elgg_register_action('language/set', "{$plugin_dir}/actions/language/set.php", 'public');
     // Register ajax view for timeline events
     elgg_register_ajax_view('navigation/pagination_timeline');
     // Register public pages
@@ -87,7 +87,7 @@ function clipit_final_init() {
     elgg_register_page_handler('register', 'home_user_account_page_handler');
     elgg_register_page_handler('login', 'home_user_account_page_handler');
 
-
+    $plugin_url = elgg_get_site_url() . "mod/z03_clipit_theme";
     if (elgg_get_context() === "admin") {
         if($user->role == ClipitUser::ROLE_TEACHER){
             elgg_unregister_page_handler('admin');
@@ -96,44 +96,33 @@ function clipit_final_init() {
         elgg_unregister_css("twitter-bootstrap");
         elgg_unregister_css("ui-lightness");
         elgg_unregister_css("clipit");
-        elgg_unregister_css("bubblegum");
-        elgg_unregister_css("righteous");
-        elgg_unregister_css("ubuntu");
         elgg_unregister_js("jquery-migrate");
         elgg_unregister_js("twitter-bootstrap");
     } else {
-        elgg_register_css("twitter-bootstrap", $CONFIG->url . "mod/clipit/vendors/bootstrap/css/bootstrap.css");
-        elgg_register_css("ui-lightness", $CONFIG->url . "mod/z03_clipit_theme/vendors/jquery-ui-1.10.2.custom/css/ui-lightness/jquery-ui-1.10.2.custom.min.css");
-        elgg_register_css("clipit", $CONFIG->url . "mod/z03_clipit_theme/bootstrap/less/clipit/clipit_base.css");
-        elgg_register_css("bubblegum", "http://fonts.googleapis.com/css?family=Bubblegum+Sans");
-        elgg_register_css("righteous", "http://fonts.googleapis.com/css?family=Righteous");
-        elgg_register_css("ubuntu", "http://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic");
-        elgg_register_css("fontawesome", "//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
-        elgg_register_js("jquery", $CONFIG->url . "mod/z03_clipit_theme/vendors/jquery/jquery-1.9.1.min.js", "head", 0);
-        elgg_register_js("jquery-migrate", $CONFIG->url . "mod/z03_clipit_theme/vendors/jquery/jquery-migrate-1.1.1.js", "head", 1);
-        elgg_register_js("jquery-ui", $CONFIG->url . "mod/z03_clipit_theme/vendors/jquery-ui-1.10.2.custom/js/jquery-ui-1.10.2.custom.min.js", "head", 2);
+        elgg_register_css("ui-lightness", "{$plugin_url}/vendors/jquery-ui-1.10.2.custom/css/ui-lightness/jquery-ui-1.10.2.custom.min.css");
+        elgg_register_css("clipit", "{$plugin_url}/bootstrap/less/clipit/clipit_base.css");
+        elgg_register_css("fontawesome", "{$plugin_url}/vendors/fontawesome/fontawesome.min.css");
+        elgg_register_js("jquery", "{$plugin_url}/vendors/jquery/jquery-1.9.1.min.js", "head", 0);
+        elgg_register_js("jquery-migrate", "{$plugin_url}/vendors/jquery/jquery-migrate-1.1.1.js", "head", 1);
+        elgg_register_js("jquery-ui", "{$plugin_url}/vendors/jquery-ui-1.10.2.custom/js/jquery-ui-1.10.2.custom.min.js", "head", 2);
         // Waypoints
-        elgg_register_js("jquery:waypoints", $CONFIG->url . "mod/z03_clipit_theme/vendors/waypoints/waypoints.min.js");
-        elgg_register_js("jquery:waypoints:sticker", $CONFIG->url . "mod/z03_clipit_theme/vendors/waypoints/waypoints-sticky.min.js");
-        elgg_register_js("jquery:waypoints:infinite", $CONFIG->url . "mod/z03_clipit_theme/vendors/waypoints/waypoints-infinite.min.js");
-        // Wysihtml5
-        elgg_register_js("jquery:wysihtml5", $CONFIG->url . "mod/z03_clipit_theme/vendors/wysihtml5/wysihtml5-0.3.0.min.js");
-        elgg_register_js("jquery:bootstrap:wysihtml5", $CONFIG->url . "mod/z03_clipit_theme/vendors/wysihtml5/bootstrap-wysihtml5.js");
-        elgg_register_css("wysihtml5:css", $CONFIG->url . "mod/z03_clipit_theme/vendors/wysihtml5/wysihtml5.css");
+        elgg_register_js("jquery:waypoints", "{$plugin_url}/vendors/waypoints/waypoints.min.js");
+        elgg_register_js("jquery:waypoints:sticker", "{$plugin_url}/vendors/waypoints/waypoints-sticky.min.js");
+        elgg_register_js("jquery:waypoints:infinite", "{$plugin_url}/vendors/waypoints/waypoints-infinite.min.js");
         // TinyMCE
-        elgg_register_js("jquery:tinymce", $CONFIG->url . "mod/z03_clipit_theme/vendors/tinymce/jquery.tinymce.min.js");
-        elgg_register_js("tinymce", $CONFIG->url . "mod/z03_clipit_theme/vendors/tinymce/tinymce.min.js");
+        elgg_register_js("jquery:tinymce", "{$plugin_url}/vendors/tinymce/jquery.tinymce.min.js");
+        elgg_register_js("tinymce", "{$plugin_url}/vendors/tinymce/tinymce.min.js");
 
         // Bootbox
-        elgg_register_js("jquery:bootbox", $CONFIG->url . "mod/z03_clipit_theme/vendors/bootbox.js");
+        elgg_register_js("jquery:bootbox", "{$plugin_url}/vendors/bootbox.js");
         // jQuery validate
-        elgg_register_js("jquery:validate", $CONFIG->url . "mod/z03_clipit_theme/vendors/jquery.validate.js");
+        elgg_register_js("jquery:validate", "{$plugin_url}/vendors/jquery.validate.js");
         // jquery tokeninput (automcomplete)
-        elgg_register_js("jquery:tokeninput", $CONFIG->url . "mod/z03_clipit_theme/vendors/tokeninput.js");
+        elgg_register_js("jquery:tokeninput", "{$plugin_url}/vendors/tokeninput.js");
         // NVD3 chart
-        elgg_register_js("nvd3:d3_v2", $CONFIG->url . "mod/z03_clipit_theme/vendors/nvd3/d3.v2.js");
-        elgg_register_js("nvd3", $CONFIG->url . "mod/z03_clipit_theme/vendors/nvd3/nv.d3.js");
-        elgg_register_css("nvd3:css", $CONFIG->url . "mod/z03_clipit_theme/vendors/nvd3/nv.d3.css");
+        elgg_register_js("nvd3:d3_v2", "{$plugin_url}/vendors/nvd3/d3.v2.js");
+        elgg_register_js("nvd3", "{$plugin_url}/vendors/nvd3/nv.d3.js");
+        elgg_register_css("nvd3:css", "{$plugin_url}/vendors/nvd3/nv.d3.css");
 
 
         $clipit_js = elgg_get_simplecache_url('js', 'clipit');
@@ -158,25 +147,12 @@ function clipit_final_init() {
         //elgg_load_css("ui-lightness");
         elgg_load_css("twitter-bootstrap");
         elgg_unregister_js("twitter-bootstrap");
-        elgg_unregister_css("righteous");
         elgg_load_css("fontawesome");
-        elgg_load_css("ubuntu");
         elgg_load_css("clipit");
-        elgg_load_css("bubblegum");
-        elgg_unregister_css("twitter-bootstrap");
         elgg_unregister_css("elgg");
         elgg_unregister_css("elgg.walled_garden");
-        ///////////////////////////////////////
-        elgg_register_js("less_dev", $CONFIG->url . "mod/z03_clipit_theme/bootstrap/js/less_dev.js");
-        elgg_load_js("less_dev");
-        elgg_register_js("clipit_theme_less", $CONFIG->url . "mod/z03_clipit_theme/bootstrap/js/less.js");
-        elgg_load_js("clipit_theme_less");
-        elgg_register_js("clipit_theme_bootstrap", $CONFIG->url . "mod/z03_clipit_theme/bootstrap/dist/js/bootstrap.js");
+        elgg_register_js("clipit_theme_bootstrap", "{$plugin_url}/bootstrap/dist/js/bootstrap.js");
         elgg_load_js("clipit_theme_bootstrap");
-
-
-
-
     }
 }
 
