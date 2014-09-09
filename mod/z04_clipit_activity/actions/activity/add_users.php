@@ -20,7 +20,8 @@ for($i=0; $i < count($user_name); $i++){
             'login'     => $user_login[$i],
             'password'  => $user_password[$i],
             'name'      => $user_name[$i],
-            'email'     => $user_email[$i]
+            'email'     => $user_email[$i],
+            'role'      => ClipitUser::ROLE_STUDENT
         ));
         $output[] = array(
             'name' => $user_name[$i],

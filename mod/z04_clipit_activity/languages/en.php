@@ -237,7 +237,7 @@ $english = array(
     'or:create' => 'or create a',
     'activity:site:students' => 'Site students',
     'activity:students' => 'Activity students',
-
+    'finish' => 'Finish',
     'teachers:add' => 'Add teachers',
     'teacher:addedresource' => 'Teacher added resource',
     'called:students:add' => 'Add users',

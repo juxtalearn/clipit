@@ -231,12 +231,10 @@ function create_activity_page_handler($page) {
     elgg_extend_view('forms/activity/create', 'activity/create/step_1', 100);
     elgg_extend_view('forms/activity/create', 'activity/create/step_2', 100);
     elgg_extend_view('forms/activity/create', 'activity/create/step_3', 100);
-//    elgg_extend_view('forms/activity/create', 'activity/create/groups/create', 100);
     require_once "$base_dir/create.php";
 
     return true;
 }
-
 /**
  * Activity page handler
  *
