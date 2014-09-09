@@ -67,7 +67,7 @@ function clipit_activity_init() {
     elgg_register_action("task/create", "{$actions_dir}/task/create.php");
 
     elgg_register_ajax_view('activity/admin/groups/users_list');
-    elgg_register_ajax_view('activity/admin/dashboard/group_info');
+    elgg_register_ajax_view('activity/admin/group_info');
     elgg_register_ajax_view('publications/admin/user_ratings');
     elgg_register_ajax_view('modal/activity/admin/user_stats');
     elgg_register_ajax_view('modal/activity/admin/users_task');
@@ -350,7 +350,7 @@ function activity_page_handler($page) {
                     );
                     break;
                 case 'discussion':
-                    include("$activity_dir}/discussion.php");
+                    include("{$activity_dir}/discussion.php");
                     break;
                 case 'tasks':
                     $title = elgg_echo("activity:tasks");

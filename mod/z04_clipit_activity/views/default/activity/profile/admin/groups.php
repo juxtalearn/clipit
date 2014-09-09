@@ -26,7 +26,7 @@ $groups = elgg_extract('entities', $vars);
             var gr_id = $(this).data("group");
             if(content.is(':empty')){
                 content.html('<i class="fa fa-spinner fa-spin fa-2x blue"></i>');
-                $.get( elgg.config.wwwroot+"ajax/view/activity/admin/dashboard/group_info", {group_id: gr_id}, function( data ) {
+                $.get( elgg.config.wwwroot+"ajax/view/activity/admin/group_info", {group_id: gr_id}, function( data ) {
                     content.html(data);
                 });
             }
