@@ -71,7 +71,7 @@ if($page[4]){
             include elgg_get_plugins_path() . 'z04_clipit_activity/pages/multimedia/view.php';
             break;
         case "publish":
-            include elgg_get_plugins_path() . 'z04_clipit_activity/pages/publications/publish.php';
+            include elgg_get_plugins_path() . 'z04_clipit_activity/pages/multimedia/publish.php';
             break;
     }
 }

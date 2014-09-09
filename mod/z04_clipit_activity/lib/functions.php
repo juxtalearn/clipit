@@ -416,3 +416,28 @@ function get_activity_status($status){
     }
     return $output;
 }
+
+/**
+ * array_chunk() php function, balanced
+ *
+ * @param $l
+ * @param $n
+ * @return array
+ */
+function split_chunks($l, $n){
+
+    $result = array_fill(0, $n, array());
+    $sums   = array_fill(0, $n, 0);
+    $c = 0;
+    foreach ($l as $e){
+        foreach ($sums as $i=>$sum){
+            if ($c == $sum){
+                $result[$i][] = $e;
+                break;
+            } // if
+        } // foreach
+        $sums[$i] += $e;
+        $c = min($sums);
+    } // foreach
+    return $result;
+}

@@ -72,7 +72,8 @@ switch($groups_creation){
     case 2:
         $group_mode = ClipitActivity::GROUP_MODE_STUDENT;
         shuffle($called_users);
-        $chunks = array_chunk($called_users, $max_users[2]);
+        $total_groups = ceil(count($called_users)/$max_users[2]);
+        $chunks = split_chunks($called_users, $total_groups);
         $num = 1;
         foreach($chunks as $users_array){
             $groups[] = array(
@@ -85,7 +86,8 @@ switch($groups_creation){
     // Random
     case 3:
         shuffle($called_users);
-        $chunks = array_chunk($called_users, $max_users[3]);
+        $total_groups = ceil(count($called_users)/$max_users[3]);
+        $chunks = split_chunks($called_users, $total_groups);
         $num = 1;
         foreach($chunks as $users_array){
             $groups[] = array(
