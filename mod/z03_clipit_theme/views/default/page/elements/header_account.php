@@ -2,9 +2,11 @@
 $context = elgg_get_context();
 $url = $CONFIG->url;
 ?>
+<?php if (elgg_is_logged_in()) : ?>
 <!-- Messages modal -->
 <?php echo elgg_view_form('messages/compose', array('data-validate'=> "true" )); ?>
 <!-- Messages modal end -->
+<?php endif; ?>
 <nav class="navbar navbar-default" id="navbar-sticky" role="navigation">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->

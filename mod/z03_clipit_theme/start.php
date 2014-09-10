@@ -152,6 +152,7 @@ function clipit_final_init() {
         elgg_unregister_css("elgg");
         elgg_unregister_css("elgg.walled_garden");
         elgg_register_js("clipit_theme_bootstrap", "{$plugin_url}/bootstrap/dist/js/bootstrap.js");
+        elgg_register_js("elgg.walled_gaarden", "{$plugin_url}/bootstrap/dist/js/adadadaotstrap.js");
         elgg_load_js("clipit_theme_bootstrap");
     }
 }

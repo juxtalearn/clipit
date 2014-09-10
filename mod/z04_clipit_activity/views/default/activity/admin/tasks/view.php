@@ -53,7 +53,6 @@ elgg_load_css("fullcalendar");
     foreach($tasks as $task):
         // Task edit (modal remote)
         echo '<li>'.elgg_view("page/components/modal_remote", array('id'=> "edit-task-{$task->id}" )).'</li>';
-
         if(!$task->parent_task):
     ?>
             <?php echo elgg_view('activity/admin/tasks/list', array('task' => $task));?>

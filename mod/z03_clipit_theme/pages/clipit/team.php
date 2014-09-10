@@ -63,7 +63,7 @@ $team_members = array(
         array(
             'name' => 'Estefanía Martín',
             'image' => "estefania.png",
-            'position' => elgg_echo('position:li'),
+            'position' => elgg_echo('position:li:es'),
             'description' => elgg_echo('team:estefania'),
             'social' => array(
                 'twitter' => 'EstefaniaURJC',
@@ -163,7 +163,7 @@ $team_members = array(
         array(
             'name' => 'H. Ulrich Hoppe',
             'image' => "hoppe.png",
-            'position' => elgg_echo('position:li'),
+            'position' => elgg_echo('position:li:de'),
             'description' => elgg_echo('team:ulrich'),
             'cartoon' => false,
             'social' => array(

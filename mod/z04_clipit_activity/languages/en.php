@@ -99,6 +99,8 @@ $english = array(
     'discussion:multimedia:go' => 'Go to discussion',
     'discussion:create' => 'Create a new topic',
     'discussion:created' => 'Discussion created',
+    'discussion:deleted' => 'Discussion removed',
+    'discussion:cantdelete' => 'Discussion can not remove',
     'discussion:cantcreate' => 'You can not create a discussion',
     'discussion:edit' => 'Edit topic',
     'discussion:title_topic' => 'Topic title',
@@ -252,6 +254,7 @@ $english = array(
     'called:students:excel_template' => 'Excel template',
     'called:students:add_from_site' => 'Add from site',
     'called:students:add_from_excel' => 'Add from Excel file',
+    'activity:created' => 'Activity %s created',
     // Activity admin
     'activity:admin:dashboard' => 'Dashboard',
     'activity:admin:task_setup' => 'Tasks setup',
@@ -259,6 +262,8 @@ $english = array(
     'activity:admin:setup' => 'Activity setup',
     'groups:select:move' => 'move to group...',
     'or' => 'or',
+    'activity:updated' => 'Activity updated',
+    'activity:cantupdate' => 'Cannot update activity',
 );
 
 add_translation('en', $english);

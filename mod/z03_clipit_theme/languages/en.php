@@ -5,6 +5,11 @@
  */
 
 $english = array(
+    'follow_us' => 'Follow us',
+    'clipit:slogan' => 'Create, learn and share',
+    'clipit:slogan:create' => 'Create',
+    'clipit:slogan:learn' => 'Learn',
+    'clipit:slogan:share' => 'Share',
 
     // ERROR
     'error:404' => "Sorry. We could not find the page that you requested.",
@@ -20,7 +25,7 @@ $english = array(
     'menu:footer_clipit:header:clipit' => 'Clipit',
     'menu:footer_clipit:header:help' => 'Help',
     'menu:footer_clipit:header:legal' => 'Legal',
-    'send:email_to_admin' => 'Send email to Admin',
+    'send:email_to_site' => 'Send email to site',
 
     'about' => 'About',
     'team' => 'Team',
@@ -66,7 +71,8 @@ $english = array(
     'friendlytime:next:days:singular' => "tomorrow",
 
     // Positions
-    'position:li' => 'Lead Investigator',
+    'position:li:es' => 'Lead Investigator - Spain',
+    'position:li:de' => 'Lead Investigator - Germany',
     'position:tpm' => 'Technical Project Manager',
     'position:swd' => 'Senior Web Developer',
     'position:researcher' => 'Researcher',

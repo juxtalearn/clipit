@@ -117,4 +117,7 @@ if($groups_creation){
 $user_id = elgg_get_logged_in_user_guid();
 ClipitActivity::add_teachers($activity_id, array($user_id));
 
+$object = ClipitSite::lookup($activity_id);
+system_message(elgg_echo("activity:created", array($object['name'])));
+
 forward("clipit_activity/{$activity_id}/admin".$filter);

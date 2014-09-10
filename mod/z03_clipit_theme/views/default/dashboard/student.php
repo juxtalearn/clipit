@@ -51,7 +51,7 @@ $user = elgg_extract("entity", $vars);
     <div class="col-md-6" style="background: #EBEBEB;">
         <?php echo elgg_view('dashboard/module', array(
             'name'      => 'recommended_videos',
-            'title'     => elgg_echo('recommended_videos'),
+            'title'     => elgg_echo('videos:recommended'),
             'content'   => elgg_view('dashboard/modules/recommended_videos'),
         ));
         ?>
