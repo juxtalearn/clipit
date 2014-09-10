@@ -27,8 +27,8 @@ if(!is_array($json_object) || key($json_object) != $KEY_NAME) {
 }
 
 // Clean previous Pedagogical Items
-ClipitTag::delete_all();
-ClipitTrickyTopic::delete_all();
+#ClipitTag::delete_all();
+#ClipitTrickyTopic::delete_all();
 
 // Add Pedagogical Items
 foreach($json_object[$KEY_NAME] as $tricky_topic_array) {
