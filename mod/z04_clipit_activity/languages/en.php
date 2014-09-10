@@ -248,6 +248,7 @@ $english = array(
     'activity:grouping_mode:teacher' => 'Teacher makes groups',
     'activity:grouping_mode:student' => 'Students make groups',
     'activity:grouping_mode:system' => 'Create random groups',
+    'activity:download:excel_template' => 'Download Excel template',
     'called:students:excel_template' => 'Excel template',
     'called:students:add_from_site' => 'Add from site',
     'called:students:add_from_excel' => 'Add from Excel file',

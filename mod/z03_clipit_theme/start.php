@@ -180,12 +180,11 @@ function home_user_account_page_handler($page_elements, $handler) {
 }
 
 function setup_footer_menus(){
-    $clipit_global_href = "http://www.clipit.es/";
     elgg_register_menu_item(
         'footer_clipit',
         array(
             'name' => 'about',
-            'href' => $clipit_global_href . 'clipit/about',
+            'href' => 'clipit/about',
             'text' => elgg_echo('about'),
             'priority' => 450,
             'section' => 'clipit',
@@ -195,7 +194,7 @@ function setup_footer_menus(){
         'footer_clipit',
         array(
             'name' => 'team',
-            'href' => $clipit_global_href . 'clipit/team',
+            'href' => 'clipit/team',
             'text' => elgg_echo('team'),
             'priority' => 455,
             'section' => 'clipit',
@@ -205,7 +204,7 @@ function setup_footer_menus(){
         'footer_clipit',
         array(
             'name' => 'developers',
-            'href' => $clipit_global_href . 'clipit/developers',
+            'href' => 'http://juxtalearn.github.io/clipit/',
             'text' => elgg_echo('developers'),
             'priority' => 460,
             'section' => 'clipit',
@@ -216,7 +215,7 @@ function setup_footer_menus(){
         'footer_clipit',
         array(
             'name' => 'terms',
-            'href' => $clipit_global_href . 'legal/terms',
+            'href' => 'legal/terms',
             'text' => elgg_echo('terms'),
             'priority' => 460,
             'section' => 'legal',
@@ -226,7 +225,7 @@ function setup_footer_menus(){
         'footer_clipit',
         array(
             'name' => 'privacy',
-            'href' => $clipit_global_href . 'legal/privacy',
+            'href' => 'legal/privacy',
             'text' => elgg_echo('privacy'),
             'priority' => 465,
             'section' => 'legal',

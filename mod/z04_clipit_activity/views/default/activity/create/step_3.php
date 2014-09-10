@@ -221,10 +221,14 @@ $(function () {
                                     <a class="upload-messages"></a>
                                 </div>
                                 <hr>
-                                <a href="<?php echo elgg_get_site_url();?>mod/z04_clipit_activity/vendors/templates/clipit_users.xlsx" target="_blank">
-                                    <i class="fa fa-file-excel-o green"></i>
-                                    <strong>Download Excel template</strong>
-                                </a>
+                                <?php echo elgg_view('output/url', array(
+                                    'href'  => "mod/z04_clipit_activity/vendors/templates/clipit_users.xlsx",
+                                    'title' => elgg_echo('activity:download:excel_template'),
+                                    'target' => '_blank',
+                                    'text'  => '<i class="fa fa-file-excel-o green"></i>
+                                                <strong>'.elgg_echo('activity:download:excel_template').'</strong>',
+                                ));
+                                ?>
                             </div>
                         </div>
                     </div>
