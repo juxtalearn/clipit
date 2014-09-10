@@ -1,6 +1,7 @@
 <?php
 $context = elgg_get_context();
 $url = $CONFIG->url;
+$images_dir = elgg_extract('images_dir', $vars);
 ?>
 <?php if (elgg_is_logged_in()) : ?>
 <!-- Messages modal -->
@@ -20,6 +21,15 @@ $url = $CONFIG->url;
             <a class="navbar-brand" href="<?php echo $CONFIG->wwwroot; ?>">
                 <img src="<?php echo $vars['logo_img'];?>" alt="ClipIt logo" title="ClipIt <?php echo elgg_echo("home");?>"">
             </a>
+            <?php echo elgg_view('output/url', array(
+                'href' => "/",
+                'class' => 'navbar-brand',
+                'title' => 'ClipIt'. elgg_echo("home"),
+                'text'  => elgg_view('output/img', array(
+                    'src' => $images_dir . "icons/clipit_logo.png"
+                ))
+            ));
+            ?>
         </div>
         <?php if (elgg_is_logged_in()) { ?>
         <!-- Collect the nav links, forms, and other content for toggling -->
