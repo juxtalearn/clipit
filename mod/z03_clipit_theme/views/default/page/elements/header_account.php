@@ -18,9 +18,6 @@ $images_dir = elgg_extract('images_dir', $vars);
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="<?php echo $CONFIG->wwwroot; ?>">
-                <img src="<?php echo $vars['logo_img'];?>" alt="ClipIt logo" title="ClipIt <?php echo elgg_echo("home");?>"">
-            </a>
             <?php echo elgg_view('output/url', array(
                 'href' => "/",
                 'class' => 'navbar-brand',
