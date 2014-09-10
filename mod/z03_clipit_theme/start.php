@@ -207,6 +207,7 @@ function setup_footer_menus(){
             'href' => 'http://juxtalearn.github.io/clipit/',
             'text' => elgg_echo('developers'),
             'priority' => 460,
+            'target' => true,
             'section' => 'clipit',
         )
     );

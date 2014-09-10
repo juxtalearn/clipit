@@ -21,6 +21,7 @@ $class = elgg_extract('class', $vars, false);
             'class' => "$class",
             'section' => $section,
             'name' => $vars['name'],
+            'target' => $vars['target'] !== true ? "_blank" : false,
             'show_section_headers' => $section
         ));
         ?>
