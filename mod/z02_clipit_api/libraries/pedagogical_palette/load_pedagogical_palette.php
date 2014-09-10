@@ -11,8 +11,9 @@
  * @package         ClipIt
  * @subpackage      clipit_api
  */
-$FILE_NAME = "performance_palette.json";
-$KEY_NAME = "performance_palette";
+
+$FILE_NAME = "pedagogical_palette.json";
+$KEY_NAME = "pedagogical_palette";
 // Check if Performance Palette has already been loaded.
 if(get_config($KEY_NAME) === true) {
     return;
@@ -20,33 +21,35 @@ if(get_config($KEY_NAME) === true) {
     set_config($KEY_NAME, true);
 }
 // Parse json containing Performance Palette Items
-$json_object = json_decode(file_get_contents(elgg_get_plugins_path() . "z02_clipit_api/libraries/performance_palette/". $FILE_NAME), true);
+$json_object = json_decode(file_get_contents(elgg_get_plugins_path() . "z02_clipit_api/libraries/pedagogical_palette/". $FILE_NAME), true);
 if(!is_array($json_object) || key($json_object) != $KEY_NAME) {
     return false;
 }
-// Clean previous Performance Items
-ClipitPerformanceItem::delete_all();
-// Add Performance Items
-$category = $category_description = "";
-foreach($json_object[$KEY_NAME] as $category_array) {
-    foreach($category_array as $key => $val) {
+
+// Clean previous Pedagogical Items
+ClipitTag::delete_all();
+ClipitTrickyTopic::delete_all();
+
+// Add Pedagogical Items
+foreach($json_object[$KEY_NAME] as $tricky_topic_array) {
+    foreach($tricky_topic_array as $key => $val) {
         switch($key) {
-            case "category":
-                $category = $val;
-                break;
-            case "category_description":
-                $category_description = $val;
+            case "tricky_topic":
+                $tricky_topic = $val;
+                $prop_value_array = array();
+                $prop_value_array["name"] = $tricky_topic;
+                $tricky_topic_id = ClipitTrickyTopic::create($prop_value_array);
                 break;
             case "items":
+                $tag_id_array = array();
                 foreach($val as $item) {
                     $prop_value_array = array();
-                    $prop_value_array["category"] = $category;
-                    $prop_value_array["category_description"] = $category_description;
                     foreach($item as $key_2 => $val_2) {
                         $prop_value_array[$key_2] = $val_2;
                     }
-                    ClipitPerformanceItem::create($prop_value_array);
+                    $tag_id_array[] = ClipitTag::create($prop_value_array);
                 }
+                ClipitTrickyTopic::add_tags($tricky_topic_id, $tag_id_array);
                 break;
         }
     }
