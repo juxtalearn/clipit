@@ -167,6 +167,7 @@ $english = array(
     'tricky_topic' => 'Tricky Topic',
     'tricky_topic:none' => 'Not tricky Topic',
     'tricky_topic:tool' => 'Tricky Topic tool',
+    'tricky_topic:select' => 'Select tricky topic',
     // Publications
     'publish:none' => 'There are no published',
     'publications:no_evaluated' => 'Not evaluated',

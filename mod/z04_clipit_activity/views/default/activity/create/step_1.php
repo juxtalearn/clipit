@@ -10,8 +10,8 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$tricky_topics = ClipitTrickyTopic::get_all(10);
-$tt = array('' => 'Select tricky topic');
+$tricky_topics = ClipitTrickyTopic::get_all();
+$tt = array('' => elgg_echo('tricky_topic:select'));
 foreach($tricky_topics as $tricky_topic){
     $tt[$tricky_topic->id] = $tricky_topic->name;
 }
