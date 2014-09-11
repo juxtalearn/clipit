@@ -183,16 +183,6 @@ function setup_footer_menus(){
     elgg_register_menu_item(
         'footer_clipit',
         array(
-            'name' => 'about',
-            'href' => 'clipit/about',
-            'text' => elgg_echo('about'),
-            'priority' => 450,
-            'section' => 'clipit',
-        )
-    );
-    elgg_register_menu_item(
-        'footer_clipit',
-        array(
             'name' => 'team',
             'href' => 'clipit/team',
             'text' => elgg_echo('team'),
@@ -211,27 +201,7 @@ function setup_footer_menus(){
             'section' => 'clipit',
         )
     );
-    // Legal section
-    elgg_register_menu_item(
-        'footer_clipit',
-        array(
-            'name' => 'terms',
-            'href' => 'legal/terms',
-            'text' => elgg_echo('terms'),
-            'priority' => 460,
-            'section' => 'legal',
-        )
-    );
-    elgg_register_menu_item(
-        'footer_clipit',
-        array(
-            'name' => 'privacy',
-            'href' => 'legal/privacy',
-            'text' => elgg_echo('privacy'),
-            'priority' => 465,
-            'section' => 'legal',
-        )
-    );
+
 }
 function clipit_footer_page($page) {
     $file_dir = elgg_get_plugins_path() . 'z03_clipit_theme/pages/clipit';
