@@ -11,11 +11,26 @@
  * @package         ClipIt
  */
 $spanish = array(
+    // Roles
+    'teacher' => 'Profesor',
+    'student' => 'Estudiante',
+    'admin' => 'Administrador',
+
+    'change_to' => 'Cambiar a',
+    'current_status' => 'Estado actual',
+    'exit:page:confirmation' => 'Si abandona la página, los datos que ha introducido no se guardaran',
+    'users:none' => 'No hay estudiantes',
+    'start' => 'Inicio',
+    'end' => 'Fin',
+    'expand:all' => 'Expandir todos',
+    'collapse:all' => 'Cerrar todos',
+    'click_add' => 'Click to add',
+
     'view'  => 'vista',
     // Activity
     'my_activities' => 'mis actividades',
     'activities:none' => 'no hay actividades...',
-    'explore' => 'explorando',
+    'explore' => 'Explorar',
     'past' => 'acabado',
     'activity:profile' => 'perfil',
     'activity:groups' => 'grupos',
@@ -103,7 +118,7 @@ $spanish = array(
     'storyboards:none' => 'sin guion',
     'multimedia:storyboards:add' => 'añadir guion',
     // Tricky Topic
-    'tricky_topic' => 'concepto complicado',
+    'tricky_topic' => 'Concepto',
     // Publications
     'publications:no_evaluated' => 'no evaluado',
     'publications:evaluated' => 'evaluado',
@@ -126,7 +141,7 @@ $spanish = array(
     // Labels
     'labels' => 'etiquetas',
     // Tags
-    'tags' => 'conceptos',
+    'tags' => 'Conceptos',
     'tags:commas:separated' => 'separado por comas',
     // Performance items
     'performance_items' => 'desarrollo artículos',

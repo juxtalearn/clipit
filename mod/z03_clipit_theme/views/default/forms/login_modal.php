@@ -10,7 +10,7 @@
     </div>
     <div class="form-group">
         <label style="font-weight: normal;">
-            <input type="checkbox" name="persistent" value="true" checked="true"> <?php echo elgg_echo('user:persistent'); ?>
+            <input type="checkbox" name="persistent" value="true"> <?php echo elgg_echo('user:persistent'); ?>
         </label>
     </div>
     <input type="submit" class="btn btn-primary" value="<?php echo elgg_echo("login");?>"/>

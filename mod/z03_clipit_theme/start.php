@@ -23,6 +23,8 @@ function language_selector_boot(){
         reload_all_translations();
     } else {
         if(!empty($client_language)){
+            $user_id = elgg_get_logged_in_user_guid();
+            ClipitUser::set_properties($user_id, array('language' => $client_language));
             setcookie('client_language', '', time()-60*60*24*30, '/'); // reset cookie
         }
     }
@@ -152,6 +154,7 @@ function clipit_final_init() {
         elgg_unregister_css("elgg");
         elgg_unregister_css("elgg.walled_garden");
         elgg_register_js("clipit_theme_bootstrap", "{$plugin_url}/bootstrap/dist/js/bootstrap.js");
+        elgg_register_js("elgg.walled_gaarden", "{$plugin_url}/bootstrap/dist/js/adadadaotstrap.js");
         elgg_load_js("clipit_theme_bootstrap");
     }
 }
@@ -180,22 +183,21 @@ function home_user_account_page_handler($page_elements, $handler) {
 }
 
 function setup_footer_menus(){
-    $clipit_global_href = "http://www.clipit.es/";
-    elgg_register_menu_item(
+    /*elgg_register_menu_item(
         'footer_clipit',
         array(
             'name' => 'about',
-            'href' => $clipit_global_href . 'clipit/about',
+            'href' => 'clipit/about',
             'text' => elgg_echo('about'),
             'priority' => 450,
             'section' => 'clipit',
         )
-    );
+    );*/
     elgg_register_menu_item(
         'footer_clipit',
         array(
             'name' => 'team',
-            'href' => $clipit_global_href . 'clipit/team',
+            'href' => 'clipit/team',
             'text' => elgg_echo('team'),
             'priority' => 455,
             'section' => 'clipit',
@@ -205,18 +207,19 @@ function setup_footer_menus(){
         'footer_clipit',
         array(
             'name' => 'developers',
-            'href' => $clipit_global_href . 'clipit/developers',
+            'href' => 'http://juxtalearn.github.io/clipit/',
             'text' => elgg_echo('developers'),
             'priority' => 460,
+            'target' => true,
             'section' => 'clipit',
         )
     );
     // Legal section
-    elgg_register_menu_item(
+    /*elgg_register_menu_item(
         'footer_clipit',
         array(
             'name' => 'terms',
-            'href' => $clipit_global_href . 'legal/terms',
+            'href' => 'legal/terms',
             'text' => elgg_echo('terms'),
             'priority' => 460,
             'section' => 'legal',
@@ -226,12 +229,12 @@ function setup_footer_menus(){
         'footer_clipit',
         array(
             'name' => 'privacy',
-            'href' => $clipit_global_href . 'legal/privacy',
+            'href' => 'legal/privacy',
             'text' => elgg_echo('privacy'),
             'priority' => 465,
             'section' => 'legal',
         )
-    );
+    );*/
 }
 function clipit_footer_page($page) {
     $file_dir = elgg_get_plugins_path() . 'z03_clipit_theme/pages/clipit';

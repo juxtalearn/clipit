@@ -20,7 +20,7 @@ $site = elgg_get_site_entity();
                     <?php
                     echo elgg_view('output/url', array(
                         'href' => "mailto:{$site->email}",
-                        'title' => elgg_echo('send:email_to_admin'),
+                        'title' => elgg_echo('send:email_to_site'),
                         'text' => elgg_view('output/img', array(
                             'src' => "mod/z03_clipit_theme/graphics/mail.png",
                         )),

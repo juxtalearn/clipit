@@ -44,8 +44,8 @@ elgg_load_css("fullcalendar");
 <!-- Calendar view -->
 <div id="full-calendar" class="view-element" data-view="calendar" style="display: nonse;"></div>
 
-
 <?php echo elgg_view_form('task/create', array('data-validate' => "true" ), array('entity'  => $activity)); ?>
+
 <div class="margin-bottom-20 view-element" data-view="list" style="display: none">
 </div>
 <ul>
@@ -53,7 +53,6 @@ elgg_load_css("fullcalendar");
     foreach($tasks as $task):
         // Task edit (modal remote)
         echo '<li>'.elgg_view("page/components/modal_remote", array('id'=> "edit-task-{$task->id}" )).'</li>';
-
         if(!$task->parent_task):
     ?>
             <?php echo elgg_view('activity/admin/tasks/list', array('task' => $task));?>
