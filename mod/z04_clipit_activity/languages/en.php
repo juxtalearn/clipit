@@ -207,6 +207,7 @@ $english = array(
     'task:added' => 'Added task',
     'task:task_type' => 'Task type',
     'task:feedback' => 'Task feedback',
+    'task:feedback:linked' => 'Linked feedback task',
     'task:feedback:check' => 'Check to create a feedback task',
     'tasks:none' => 'No tasks',
     'task:completed' => 'Completed',
