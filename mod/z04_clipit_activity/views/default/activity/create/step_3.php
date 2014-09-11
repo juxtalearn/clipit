@@ -10,9 +10,10 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
+elgg_load_js("jquery:multiselect");
+elgg_load_js("jquery:quicksearch");
 ?>
-<script src="http://loudev.com/js/jquery.multi-select.js" type="text/javascript"></script>
-<script src="http://rawgit.com/riklomas/quicksearch/master/jquery.quicksearch.js"></script>
+
 <script>
 $(function(){
     // Finish activity setup
