@@ -1,5 +1,8 @@
 elgg.provide('clipit');
 
+$.fn.button.defaults = {
+    loadingText: '<?php echo elgg_echo('loading');?>...'
+}
 /**
  * TinyMce default configuration
  */
@@ -297,11 +300,11 @@ $(function(){
             onblur: false,
             submitHandler: function(form) {
                 var button_submit = form_to.find("input[type=submit]");
-                button_submit.button(elgg.echo("loading"));
+                button_submit.button("loading");
                 if ($(form).valid())
                     form.submit();
                 else
-                    button_submit.button(elgg.echo("loading"));
+                    button_submit.button("loading");
             }
         });
     });

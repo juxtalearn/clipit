@@ -18,11 +18,12 @@ $vars = array_merge($vars_plugin, $vars);
 elgg_unregister_css('elgg.walled_garden');
 elgg_unregister_js('elgg.walled_garden');
 
+$images_dir = elgg_get_site_url() . "mod/z03_clipit_theme/graphics/";
 $footer = elgg_view('page/elements/footer', $vars);
 $header_top = elgg_view('page/elements/header_top', array('walled_garden' => true));
-$header_account = elgg_view('page/elements/header_account', $vars);
+$header_account = elgg_view('page/elements/header_account', array('images_dir' => $images_dir));
 
-$images_dir = elgg_get_site_url() . "mod/z03_clipit_theme/graphics/";
+
 $accounts = array(
     'facebook'  => 'https://www.facebook.com/jxl.juxtalearn',
     'twitter'   => 'https://twitter.com/juxtalearn_eu',

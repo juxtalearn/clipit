@@ -31,8 +31,9 @@ $vars_plugin['logo_img'] = $vars_plugin['img_path']."icons/".$vars_plugin['logo_
 $vars = array_merge($vars_plugin, $vars);
 
 $messages = elgg_view('page/elements/messages', array('object' => $vars['sysmessages']));
+$images_dir = elgg_get_site_url() . "mod/z03_clipit_theme/graphics/";
 $header_top = elgg_view('page/elements/header_top', $vars);
-$header_account = elgg_view('page/elements/header_account', $vars);
+$header_account = elgg_view('page/elements/header_account', array('images_dir' => $images_dir));
 $body = elgg_view('page/elements/body', $vars);
 $footer = elgg_view('page/elements/footer', $vars);
 

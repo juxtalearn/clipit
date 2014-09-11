@@ -5,20 +5,29 @@
  */
 
 $spanish = array(
-    // ERROR
-    'error:404' => "Esta funcionalidad aún no está operativa",
+    'loading' => 'cargando',
+    'follow_us' => 'Síguenos',
+    'clipit:slogan' => 'Crear, aprender y compartir',
+    'clipit:slogan:create' => 'Crear',
+    'clipit:slogan:learn' => 'Aprender',
+    'clipit:slogan:share' => 'Compartir',
 
+    // ERROR
+    'error:404' => "Esta funcionalidad aún no está operativa.",
+    'view_all' => 'Ver todos',
+    'view_as' => 'Ver como',
     'me'    => "yo",
-    'options' => 'opciones',
+    'options' => 'Opciones',
     'home' => 'inicio',
-    'selectall' => 'seleccionar todo',
+    'selectall' => 'Seleccionar todo',
+    'apply' => 'Aplicar',
 
     // Menu footer
     'menu:footer_clipit:header:clipit' => 'Clipit',
-    'menu:footer_clipit:header:help' => 'Help',
+    'menu:footer_clipit:header:help' => 'Ayuda',
     'menu:footer_clipit:header:legal' => 'Legal',
 
-    'about' => 'sobre',
+    'about' => 'Sobre',
     'team' => 'Equipo',
     'internship' => 'Colaborador',
     'internships' => 'Colaboradores',
@@ -30,29 +39,23 @@ $spanish = array(
     'community_guidelines' => 'directrices comunitarias',
 
     // Form no login
-    'loginusername' => 'usuario o correo para identificarse',
-    'user:password:lost' => 'olvidó la contraseña',
-    'new_user' => 'nuevo usuario?',
-    'user:email:notfound' => 'correo no encontrado.',
-    'user:register' => 'registrarse',
-    'user:login' => 'entrar',
-    'user:forgotpassword' => 'olvidó su contraseña?',
-    'passwordagain' => 'repita la contraseña',
-    'user:forgotpassword:ok' => 'compruebe su correo para cambiar su contraseña',
+    'loginusername' => 'Usuario o correo para identificarse',
+    'user:password:lost' => 'Contraseña olvidada',
+    'new_user' => '¿Nuevo usuario?',
+    'user:email:notfound' => 'Correo no encontrado.',
+    'user:register' => 'Registrarse',
+    'user:login' => 'Entrar',
+    'user:forgotpassword' => '¿Olvidó su contraseña?',
+    'passwordagain' => 'Por favor, repita la contraseña',
+    'user:forgotpassword:ok' => 'Compruebe su correo para cambiar su contraseña',
     // New password
-    'user:resetpassword:newpassword' => 'nueva contraseña',
-    'user:resetpassword:newpasswordagain' => 'nueva contraseña (de nuevo para verificación)',
-    // Widgets
-    'widget:student/landing/pending' => 'pendiente',
-    'widget:student/landing/recommended_videos' => 'videos recomendados',
-    'widget:student/landing/activity_status' => 'estado de actividad',
-    'widget:student/landing/group_activity' => 'grupo de actividad',
-    'widget:student/landing/tags' => 'conceptos',
-    'widget:student/landing/events' => 'eventos',
+    'user:resetpassword:newpassword' => 'Nueva contraseña',
+    'user:resetpassword:newpasswordagain' => 'Nueva contraseña (de nuevo para verificación)',
+
     // Autocomplete
-    'autocomplete:hint' => "teclee el término de la búsqueda",
-    'autocomplete:noresults' => "sin resultados",
-    'autocomplete:searching' => "buscando...",
+    'autocomplete:hint' => "Teclee el término de la búsqueda",
+    'autocomplete:noresults' => "Sin resultados",
+    'autocomplete:searching' => "Buscando...",
     // Time (future)
     'friendlytime:next:justnow' => "justo ahora",
     'friendlytime:next:minutes' => "%s minutos",
@@ -60,10 +63,11 @@ $spanish = array(
     'friendlytime:next:hours' => "%s horas",
     'friendlytime:next:hours:singular' => "una hora",
     'friendlytime:next:days' => "%s días",
-    'friendlytime:next:days:singular' => "ayer",
+    'friendlytime:next:days:singular' => "mañana",
 
     // Positions
-    'position:li' => 'Investigador Principal',
+    'position:li:es' => 'Investigador Principal - España',
+    'position:li:de' => 'Investigador Principal - Alemania',
     'position:tpm' => 'Responsable Técnico del Proyecto',
     'position:swd' => 'Desarrollador Web Senior',
     'position:researcher' => 'Investigador',

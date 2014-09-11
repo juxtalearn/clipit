@@ -181,7 +181,7 @@ function home_user_account_page_handler($page_elements, $handler) {
 }
 
 function setup_footer_menus(){
-    elgg_register_menu_item(
+    /*elgg_register_menu_item(
         'footer_clipit',
         array(
             'name' => 'about',
@@ -190,7 +190,7 @@ function setup_footer_menus(){
             'priority' => 450,
             'section' => 'clipit',
         )
-    );
+    );*/
     elgg_register_menu_item(
         'footer_clipit',
         array(
@@ -213,7 +213,7 @@ function setup_footer_menus(){
         )
     );
     // Legal section
-    elgg_register_menu_item(
+    /*elgg_register_menu_item(
         'footer_clipit',
         array(
             'name' => 'terms',
@@ -232,7 +232,7 @@ function setup_footer_menus(){
             'priority' => 465,
             'section' => 'legal',
         )
-    );
+    );*/
 }
 function clipit_footer_page($page) {
     $file_dir = elgg_get_plugins_path() . 'z03_clipit_theme/pages/clipit';
