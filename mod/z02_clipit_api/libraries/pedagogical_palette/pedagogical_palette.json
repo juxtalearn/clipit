@@ -1,0 +1,833 @@
+{
+    "pedagogical_palette": [
+        {
+            "tricky_topic": "Biology and life sciences",
+            "items": [
+                {
+                    "name": "Agriculture"
+                },
+                {
+                    "name": "Anatomy"
+                },
+                {
+                    "name": "Bioacoustics"
+                },
+                {
+                    "name": "Biochemistry"
+                },
+                {
+                    "name": "Bioethics"
+                },
+                {
+                    "name": "Biogeography"
+                },
+                {
+                    "name": "Biomechanics"
+                },
+                {
+                    "name": "Biophysics"
+                },
+                {
+                    "name": "Biotechnology"
+                },
+                {
+                    "name": "Cell biology"
+                },
+                {
+                    "name": "Chronobiology"
+                },
+                {
+                    "name": "Computational biology"
+                },
+                {
+                    "name": "Cryobiology"
+                },
+                {
+                    "name": "Developmental biology"
+                },
+                {
+                    "name": "Ecology"
+                },
+                {
+                    "name": "Evolutionary biology"
+                },
+                {
+                    "name": "Genetics"
+                },
+                {
+                    "name": "Immunology"
+                },
+                {
+                    "name": "Marine biology"
+                },
+                {
+                    "name": "Microbiology"
+                },
+                {
+                    "name": "Molecular biology"
+                },
+                {
+                    "name": "Mycology"
+                },
+                {
+                    "name": "Neuroscience"
+                },
+                {
+                    "name": "Nutrition"
+                },
+                {
+                    "name": "Organisms"
+                },
+                {
+                    "name": "Paleontology"
+                },
+                {
+                    "name": "Parasitology"
+                },
+                {
+                    "name": "Physical anthropology"
+                },
+                {
+                    "name": "Physiology"
+                },
+                {
+                    "name": "Plant science"
+                },
+                {
+                    "name": "Population biology"
+                },
+                {
+                    "name": "Psychology"
+                },
+                {
+                    "name": "Radiobiology"
+                },
+                {
+                    "name": "Species interactions"
+                },
+                {
+                    "name": "Synthetic biology"
+                },
+                {
+                    "name": "Systems biology"
+                },
+                {
+                    "name": "Taxonomy"
+                },
+                {
+                    "name": "Theoretical biology"
+                },
+                {
+                    "name": "Toxicology"
+                },
+                {
+                    "name": "Veterinary science"
+                },
+                {
+                    "name": "Zoology"
+                }
+            ]
+        },
+        {
+            "tricky_topic": "Computer and information sciences",
+            "items": [
+                {
+                    "name": "Artificial intelligence"
+                },
+                {
+                    "name": "Catalogs"
+                },
+                {
+                    "name": "Computer applications"
+                },
+                {
+                    "name": "Computer architecture"
+                },
+                {
+                    "name": "Computer modeling"
+                },
+                {
+                    "name": "Computer networks"
+                },
+                {
+                    "name": "Computer peripherals"
+                },
+                {
+                    "name": "Computer security"
+                },
+                {
+                    "name": "Computer software"
+                },
+                {
+                    "name": "Computer vision"
+                },
+                {
+                    "name": "Computerized simulations"
+                },
+                {
+                    "name": "Computers"
+                },
+                {
+                    "name": "Computing methods"
+                },
+                {
+                    "name": "Computing systems"
+                },
+                {
+                    "name": "Cryptography"
+                },
+                {
+                    "name": "Data acquisition"
+                },
+                {
+                    "name": "Data management"
+                },
+                {
+                    "name": "Data visualization"
+                },
+                {
+                    "name": "Geoinformatics"
+                },
+                {
+                    "name": "Graph theory"
+                },
+                {
+                    "name": "Information technology"
+                },
+                {
+                    "name": "Information theory"
+                },
+                {
+                    "name": "Library science"
+                },
+                {
+                    "name": "Network analysis"
+                },
+                {
+                    "name": "Neural networks"
+                },
+                {
+                    "name": "Operating systems"
+                },
+                {
+                    "name": "Programming languages"
+                },
+                {
+                    "name": "Random number generators"
+                },
+                {
+                    "name": "Real time computing"
+                },
+                {
+                    "name": "Software engineering"
+                },
+                {
+                    "name": "Systems science"
+                }
+            ]
+        },
+        {
+            "tricky_topic": "Earth sciences",
+            "items": [
+                {
+                    "name": "Atmospheric science"
+                },
+                {
+                    "name": "Earth"
+                },
+                {
+                    "name": "Geochemistry"
+                },
+                {
+                    "name": "Geography"
+                },
+                {
+                    "name": "Geology"
+                },
+                {
+                    "name": "Geomorphology"
+                },
+                {
+                    "name": "Geophysics"
+                },
+                {
+                    "name": "Glaciology"
+                },
+                {
+                    "name": "Hydrology"
+                },
+                {
+                    "name": "Marine and aquatic sciences"
+                },
+                {
+                    "name": "Mineralogy"
+                },
+                {
+                    "name": "Natural disasters"
+                },
+                {
+                    "name": "Paleontology"
+                }
+            ]
+        },
+        {
+            "tricky_topic": "Ecology and environmental sciences",
+            "items": [
+                {
+                    "name": "Aquatic environments"
+                },
+                {
+                    "name": "Biogeochemistry"
+                },
+                {
+                    "name": "Biogeography"
+                },
+                {
+                    "name": "Bioindicators"
+                },
+                {
+                    "name": "Conservation genetics"
+                },
+                {
+                    "name": "Conservation science"
+                },
+                {
+                    "name": "Daylight"
+                },
+                {
+                    "name": "Drought"
+                },
+                {
+                    "name": "Ecology"
+                },
+                {
+                    "name": "Environmental chemistry"
+                },
+                {
+                    "name": "Environmental economics"
+                },
+                {
+                    "name": "Environmental geography"
+                },
+                {
+                    "name": "Environmental impacts"
+                },
+                {
+                    "name": "Environmental management"
+                },
+                {
+                    "name": "Environmental protection"
+                },
+                {
+                    "name": "Extremophiles"
+                },
+                {
+                    "name": "Habitats"
+                },
+                {
+                    "name": "Limnology"
+                },
+                {
+                    "name": "Natural resources"
+                },
+                {
+                    "name": "Soil science"
+                },
+                {
+                    "name": "Species colonization"
+                },
+                {
+                    "name": "Sustainability science"
+                },
+                {
+                    "name": "Terrestrial environments"
+                },
+                {
+                    "name": "Wildfires"
+                }
+            ]
+        },
+        {
+            "tricky_topic": "Engineering and technology",
+            "items": [
+                {
+                    "name": "Acoustical engineering"
+                },
+                {
+                    "name": "Aerospace engineering"
+                },
+                {
+                    "name": "Architectural engineering"
+                },
+                {
+                    "name": "Bioengineering"
+                },
+                {
+                    "name": "Chemical engineering"
+                },
+                {
+                    "name": "Civil engineering"
+                },
+                {
+                    "name": "Control engineering"
+                },
+                {
+                    "name": "Digital imaging"
+                },
+                {
+                    "name": "Earthquake engineering"
+                },
+                {
+                    "name": "Electrical engineering"
+                },
+                {
+                    "name": "Electronics"
+                },
+                {
+                    "name": "Electronics engineering"
+                },
+                {
+                    "name": "Energy and power"
+                },
+                {
+                    "name": "Environmental engineering"
+                },
+                {
+                    "name": "Equipment"
+                },
+                {
+                    "name": "Fire engineering"
+                },
+                {
+                    "name": "Fluidics"
+                },
+                {
+                    "name": "Human factors engineering"
+                },
+                {
+                    "name": "Industrial engineering"
+                },
+                {
+                    "name": "Instrumentation"
+                },
+                {
+                    "name": "Management engineering"
+                },
+                {
+                    "name": "Manufacturing processes"
+                },
+                {
+                    "name": "Marine engineering"
+                },
+                {
+                    "name": "Measurement"
+                },
+                {
+                    "name": "Mechanical engineering"
+                },
+                {
+                    "name": "Membrane technology"
+                },
+                {
+                    "name": "Mining engineering"
+                },
+                {
+                    "name": "Nanotechnology"
+                },
+                {
+                    "name": "Navigation"
+                },
+                {
+                    "name": "Nuclear engineering"
+                },
+                {
+                    "name": "Production engineering"
+                },
+                {
+                    "name": "Reliability engineering"
+                },
+                {
+                    "name": "Remote sensing"
+                },
+                {
+                    "name": "Sanitary engineering"
+                },
+                {
+                    "name": "Signal processing"
+                },
+                {
+                    "name": "Software engineering"
+                },
+                {
+                    "name": "Structural engineering"
+                },
+                {
+                    "name": "Synthetic biology"
+                },
+                {
+                    "name": "Systems engineering"
+                },
+                {
+                    "name": "Technology development"
+                },
+                {
+                    "name": "Telecommunications"
+                },
+                {
+                    "name": "Transportation"
+                }
+            ]
+        },
+        {
+            "tricky_topic": "Medicine and health sciences",
+            "items": [
+                {
+                    "name": "Anatomy"
+                },
+                {
+                    "name": "Anesthesiology"
+                },
+                {
+                    "name": "Cardiology"
+                },
+                {
+                    "name": "Clinical genetics"
+                },
+                {
+                    "name": "Clinical medicine"
+                },
+                {
+                    "name": "Complementary and alternative medicine"
+                },
+                {
+                    "name": "Congenital disorders"
+                },
+                {
+                    "name": "Critical care and emergency medicine"
+                },
+                {
+                    "name": "Dermatology"
+                },
+                {
+                    "name": "Diagnostic medicine"
+                },
+                {
+                    "name": "Endocrinology"
+                },
+                {
+                    "name": "Epidemiology"
+                },
+                {
+                    "name": "Gastroenterology and hepatology"
+                },
+                {
+                    "name": "Geriatrics"
+                },
+                {
+                    "name": "Health care"
+                },
+                {
+                    "name": "Hematology"
+                },
+                {
+                    "name": "Immunology"
+                },
+                {
+                    "name": "Infectious diseases"
+                },
+                {
+                    "name": "Inflammatory diseases"
+                },
+                {
+                    "name": "Medical devices and equipment"
+                },
+                {
+                    "name": "Medical ethics"
+                },
+                {
+                    "name": "Medical humanities"
+                },
+                {
+                    "name": "Mental health and psychiatry"
+                },
+                {
+                    "name": "Metabolic disorders"
+                },
+                {
+                    "name": "Nephrology"
+                },
+                {
+                    "name": "Neurology"
+                },
+                {
+                    "name": "Nutrition"
+                },
+                {
+                    "name": "Oncology"
+                },
+                {
+                    "name": "Ophthalmology"
+                },
+                {
+                    "name": "Oral medicine"
+                },
+                {
+                    "name": "Otorhinolaryngology"
+                },
+                {
+                    "name": "Pain management"
+                },
+                {
+                    "name": "Parasitic diseases"
+                },
+                {
+                    "name": "Pathology and laboratory medicine"
+                },
+                {
+                    "name": "Pediatrics"
+                },
+                {
+                    "name": "Pharmaceutics"
+                },
+                {
+                    "name": "Pharmacology"
+                },
+                {
+                    "name": "Physiology"
+                },
+                {
+                    "name": "Public and occupational health"
+                },
+                {
+                    "name": "Pulmonology"
+                },
+                {
+                    "name": "Radiology and imaging"
+                },
+                {
+                    "name": "Rheumatology"
+                },
+                {
+                    "name": "Sports and exercise medicine"
+                },
+                {
+                    "name": "Surgical and invasive medical procedures"
+                },
+                {
+                    "name": "Tropical diseases"
+                },
+                {
+                    "name": "Urology"
+                },
+                {
+                    "name": "Vascular medicine"
+                },
+                {
+                    "name": "Women's health"
+                }
+            ]
+        },
+        {
+            "tricky_topic": "People and places",
+            "items": [
+                {
+                    "name": "Demography"
+                },
+                {
+                    "name": "Geographical locations"
+                },
+                {
+                    "name": "Population groupings"
+                }
+            ]
+        },
+        {
+            "tricky_topic": "Physical sciences",
+            "items": [
+                {
+                    "name": "Astronomical sciences"
+                },
+                {
+                    "name": "Chemistry"
+                },
+                {
+                    "name": "Materials science"
+                },
+                {
+                    "name": "Mathematics"
+                },
+                {
+                    "name": "Physics"
+                }
+            ]
+        },
+        {
+            "tricky_topic": "Research and analysis methods",
+            "items": [
+                {
+                    "name": "Animal studies"
+                },
+                {
+                    "name": "Bioassays and physiological analysis"
+                },
+                {
+                    "name": "Biological cultures"
+                },
+                {
+                    "name": "Cell enumeration techniques"
+                },
+                {
+                    "name": "Cell separation techniques"
+                },
+                {
+                    "name": "Chemical characterization"
+                },
+                {
+                    "name": "Chemical synthesis"
+                },
+                {
+                    "name": "Chromatographic techniques"
+                },
+                {
+                    "name": "Clinical trials"
+                },
+                {
+                    "name": "Computational techniques"
+                },
+                {
+                    "name": "Crystallographic techniques"
+                },
+                {
+                    "name": "Cytogenetic techniques"
+                },
+                {
+                    "name": "Database and informatics methods"
+                },
+                {
+                    "name": "Decision analysis"
+                },
+                {
+                    "name": "Electrophoretic techniques"
+                },
+                {
+                    "name": "Equipment preparation"
+                },
+                {
+                    "name": "Extraction techniques"
+                },
+                {
+                    "name": "Histochemistry and cytochemistry techniques"
+                },
+                {
+                    "name": "Imaging techniques"
+                },
+                {
+                    "name": "Immunologic techniques"
+                },
+                {
+                    "name": "Mathematical and statistical techniques"
+                },
+                {
+                    "name": "Microscopy"
+                },
+                {
+                    "name": "Model organisms"
+                },
+                {
+                    "name": "Molecular biology techniques"
+                },
+                {
+                    "name": "Precipitation techniques"
+                },
+                {
+                    "name": "Purification techniques"
+                },
+                {
+                    "name": "Research assessment"
+                },
+                {
+                    "name": "Research design"
+                },
+                {
+                    "name": "Research facilities"
+                },
+                {
+                    "name": "Separation processes"
+                },
+                {
+                    "name": "Simulation and modeling"
+                },
+                {
+                    "name": "Specimen preparation and treatment"
+                },
+                {
+                    "name": "Spectrum analysis techniques"
+                },
+                {
+                    "name": "Storage and handling"
+                },
+                {
+                    "name": "Structural characterization"
+                }
+            ]
+        },
+        {
+            "tricky_topic": "Science policy",
+            "items": [
+                {
+                    "name": "Bioethics"
+                },
+                {
+                    "name": "Research funding"
+                },
+                {
+                    "name": "Research integrity"
+                },
+                {
+                    "name": "Science and technology workforce"
+                },
+                {
+                    "name": "Science education"
+                },
+                {
+                    "name": "Science policy and economics"
+                }
+            ]
+        },
+        {
+            "tricky_topic": "Social sciences",
+            "items": [
+                {
+                    "name": "Anthropology"
+                },
+                {
+                    "name": "Archaeology"
+                },
+                {
+                    "name": "Economics"
+                },
+                {
+                    "name": "Human geography"
+                },
+                {
+                    "name": "Law and legal sciences"
+                },
+                {
+                    "name": "Linguistics"
+                },
+                {
+                    "name": "Philosophy"
+                },
+                {
+                    "name": "Political science"
+                },
+                {
+                    "name": "Psychology"
+                },
+                {
+                    "name": "Sociology"
+                }
+            ]
+        }
+    ]
+}
