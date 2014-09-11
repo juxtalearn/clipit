@@ -25,7 +25,7 @@
         </div>
         <div id="collapse_1" class="panel-collapse collapse">
             <div class="panel-body">
-                Anim pariatur cliche reprehenderit,
+                After creating the Activity, you can add Students into Groups from the Activity Admin page
             </div>
         </div>
     </div>
