@@ -49,7 +49,7 @@ foreach($clone_ids as $clone_id){
 }
 ?>
 <div class="dropdown inline-block">
-    <button id="drop_scope" class="btn btn-primary btn-xs" data-toggle="dropdown" href="#">View scope <span class="caret"></span></button>
+    <button id="drop_scope" class="btn btn-primary btn-xs" data-toggle="dropdown" href="#"><?php echo elgg_echo('publications:view_scope');?> <span class="caret"></span></button>
     <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop_scope">
         <?php foreach($outputs as $output):?>
             <li role="presentation">

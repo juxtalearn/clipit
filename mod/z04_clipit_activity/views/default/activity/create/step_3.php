@@ -28,9 +28,9 @@ $(function(){
         keepOrder: false,
         selectableOptgroup: true,
         selectableHeader: "<h4><?php echo elgg_echo("activity:site:students");?></h4>"+
-                            "<input type='text' class='search-input form-control margin-bottom-10' autocomplete='off' placeholder='Filter...'>",
+                            "<input type='text' class='search-input form-control margin-bottom-10' autocomplete='off' placeholder='<?php echo elgg_echo('search:filter');?>...'>",
         selectionHeader: "<h4><?php echo elgg_echo("activity:students");?></h4>"+
-                            "<input type='text' class='search-input form-control margin-bottom-10' autocomplete='off' placeholder='Filter...'>",
+                            "<input type='text' class='search-input form-control margin-bottom-10' autocomplete='off' placeholder='<?php echo elgg_echo('search:filter');?>...'>",
         afterInit: function(ms){
             var that = this,
                 $selectableSearch = that.$selectableUl.prev(),
@@ -164,8 +164,8 @@ $(function () {
                                 </div>
                                 <div class="col-md-12 margin-top-5 margin-bottom-5">
                                     <?php echo elgg_view('output/url', array(
-                                        'title' => elgg_echo('create'),
-                                        'text' => elgg_echo('create'),
+                                        'title' => elgg_echo('add'),
+                                        'text' => elgg_echo('add'),
                                         'href' => "action/activity/create/add_users",
                                         'is_action' => true,
                                         'id' => 'add_users_button',

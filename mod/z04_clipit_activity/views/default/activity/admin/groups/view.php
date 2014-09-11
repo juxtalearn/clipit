@@ -126,9 +126,9 @@ $(function(){
     $("#called_users").multiSelect({
         keepOrder: false,
         selectableHeader: '<h4 class="margin-bottom-20"><?php echo elgg_echo("activity:students");?></h4>'+
-            "<input type='text' class='search-input form-control margin-bottom-10' autocomplete='off' placeholder='Filter...'>",
+            "<input type='text' class='search-input form-control margin-bottom-10' autocomplete='off' placeholder='<?php echo elgg_echo('search:filter');?>...'>",
         selectionHeader:
-            '<label>Group name</label>'+
+            '<label><?php echo elgg_echo('group:name');?></label>'+
                 '<input type="text" name="group_name" id="group_name" class="form-control margin-bottom-10">'+
                 '<h4><?php echo elgg_echo("group:students");?></h4>',
         afterInit: function(ms){

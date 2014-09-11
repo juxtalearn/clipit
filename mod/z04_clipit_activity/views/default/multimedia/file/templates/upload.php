@@ -42,7 +42,7 @@ $type = elgg_extract("type", $vars);
     text-transform: uppercase;
     border: 1px solid #ff1a1a;
 ">
-                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <i class="fa fa-ban"></i>
                     <span>Delete</span>
                 </a>
         </div>

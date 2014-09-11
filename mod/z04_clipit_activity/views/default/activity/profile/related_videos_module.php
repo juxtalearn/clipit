@@ -11,6 +11,6 @@ $related_videos = ClipitVideo::get_by_id($related_video_ids);
 $href = "explore";
 ?>
 <?php if(count($related_videos)):?>
-    <h3 class="activity-module-title"><?php echo elgg_echo('videos:related');?></h3>
+    <h3 class="activity-module-title"><?php echo elgg_echo('videos:recommended');?></h3>
     <?php echo elgg_view("explore/video/list", array('videos' => $related_videos, 'href' => $href));?>
 <?php endif;?>

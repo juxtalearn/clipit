@@ -95,13 +95,13 @@ $(function(){
             ?>
         </div>
         <div class="row margin-0 margin-bottom-10" id="tricky_topic_view" style="display: none;background: #fafafa;padding: 10px;"></div>
-        <?php echo elgg_echo('or:create');?>
-        <?php echo elgg_view('output/url', array(
-            'href'  => "http://trickytopic.".ClipitSite::get_domain(),
-            'title' => elgg_echo('tricky_topic'),
-            'text'  => elgg_echo('tricky_topic'),
-        ));
-        ?>
+<!--        --><?php //echo elgg_echo('or:create');?>
+<!--        --><?php //echo elgg_view('output/url', array(
+//            'href'  => "http://trickytopic.".ClipitSite::get_domain(),
+//            'title' => elgg_echo('tricky_topic'),
+//            'text'  => elgg_echo('tricky_topic'),
+//        ));
+//        ?>
     </div>
     <div class="col-md-6">
         <div class="form-group">

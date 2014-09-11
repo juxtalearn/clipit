@@ -35,6 +35,6 @@ foreach($files as $file_id):
     </div>
 <?php endforeach;?>
 <?php if(!$files):?>
-    <?php echo elgg_view('output/empty', array('value' => elgg_echo('files:none')));?>
+    <?php echo elgg_view('output/empty', array('value' => elgg_echo('file:none')));?>
 <?php endif;?>
 </div>

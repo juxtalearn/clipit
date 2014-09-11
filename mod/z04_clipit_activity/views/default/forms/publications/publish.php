@@ -46,9 +46,10 @@ $labels_value = implode(", ", $label_value);
 <script>
 $(function(){
     $(".chosen-select").chosen({disable_search_threshold: 1});
-    $(".chosen-select-items").chosen({max_selected_options: 5}).on("chosen:maxselected", function () {
-        alert("max");
-    });
+//    $(".chosen-select-items").chosen({max_selected_options: 5}).on("chosen:maxselected", function () {
+//        alert("max");
+//    });
+    $(".chosen-select-items").chosen();
 });
 </script>
 <?php
