@@ -37,7 +37,7 @@ $(function(){
 });
 </script>
 <!-- Evaluate -->
-<h2 class="title-block">Evaluate</h2>
+<h2 class="title-block"><?php echo elgg_echo('publications:evaluate');?></h2>
 <div class="row" style="background: #f1f2f7;padding: 20px;margin: 10px 0;">
     <div class="col-md-8">
         <label for="overall">

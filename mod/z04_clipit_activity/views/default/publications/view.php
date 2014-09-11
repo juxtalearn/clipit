@@ -85,10 +85,10 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
                             <?php echo star_rating_view($performance_average);?>
                         </div>
                         <h4 style=" display: inline-block; margin-top: 0;">
-                            <strong>Rating</strong>
+                            <strong><?php echo elgg_echo('publications:rating');?></strong>
                             <small style="margin-top: 5px;" class="show">
                                 <?php echo $total_evaluations; ?>
-                                VOTES
+                                <?php echo elgg_echo('rating:votes');?>
                             </small>
                         </h4>
                         <?php
@@ -125,7 +125,7 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
                                 'data-target'   => '#rating-list-'.$entity->id
                             ));
                             ?>
-                            <h4><strong>All evaluations</strong></h4>
+                            <h4><strong><?php echo elgg_echo('publications:rating:list');?></strong></h4>
                         </li>
                         <?php if($me_rating_entity = ClipitRating::get_from_user_for_target($user_loggedin_id, $entity->id)): ?>
                         <li class="list-item my-evaluation">

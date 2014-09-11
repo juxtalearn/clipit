@@ -25,6 +25,7 @@ function language_selector_boot(){
         if(!empty($client_language)){
             $user_id = elgg_get_logged_in_user_guid();
             ClipitUser::set_properties($user_id, array('language' => $client_language));
+            die;
             setcookie('client_language', '', time()-60*60*24*30, '/'); // reset cookie
         }
     }

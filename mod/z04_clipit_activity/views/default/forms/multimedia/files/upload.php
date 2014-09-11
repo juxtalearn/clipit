@@ -18,7 +18,7 @@ echo elgg_view("multimedia/file/templates/upload", array('entity' => $entity, 't
 
 <div class="block" style="margin-bottom: 10px;">
     <a class="btn btn-default fileinput-button" style="position: relative; overflow: hidden">
-        Add files
+        <?php echo elgg_echo('multimedia:files:add');?>
         <input type="file" name="files" id="uploadfilebutton" multiple>
     </a>
 </div>

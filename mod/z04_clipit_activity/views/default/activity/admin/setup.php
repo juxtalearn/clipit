@@ -18,10 +18,7 @@ elgg_load_js('fullcalendar:moment');
 ?>
 <script>
     $(function(){
-        $(".datepicker").datepicker({
-            minDate: "<?php echo date("d/m/Y", $activity->start);?>",
-            maxDate: "<?php echo date("d/m/Y", $activity->end);?>"
-        });
+        $(".datepicker").datepicker();
         $(document).on("click", ".change-status", function(){
             var status = $(this).data("status");
             switch(status){

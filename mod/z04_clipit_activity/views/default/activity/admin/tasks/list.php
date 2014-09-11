@@ -31,7 +31,7 @@ if($feedback_task){
     <div>
         <?php if($feedback_task): ?>
             <i class="fa fa-level-up text-muted-2 fa-rotate-90 margin-right-10 pull-left" style="font-size: 21px;margin-right: 10px;"></i>
-            <small class="show"><?php echo elgg_echo('task:feedback');?></small>
+            <small class="show"><?php echo elgg_echo('task:feedback:linked');?></small>
         <?php endif; ?>
         <div class="image-block fa-2x">
             <?php echo elgg_view("tasks/icon_task_type", array('type' => $task->task_type, 'size' => false)); ?>
