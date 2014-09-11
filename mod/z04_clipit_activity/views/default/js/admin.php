@@ -13,7 +13,7 @@
 ?>
 $(document).on("click", ".submit-add-teachers", function(){
     var form = $(this).closest("form");
-    $(this).button('loading');
+    $(this).button('loading').data("loading-text", "<?php echo elgg_echo('loading');?>...").button('loading');
     elgg.action('activity/admin/teachers', {
         data: form.serialize(),
         success: function(){

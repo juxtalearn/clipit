@@ -1,8 +1,6 @@
 elgg.provide('clipit');
 
-$.fn.button.defaults = {
-    loadingText: '<?php echo elgg_echo('loading');?>...'
-}
+
 /**
  * TinyMce default configuration
  */
@@ -300,11 +298,11 @@ $(function(){
             onblur: false,
             submitHandler: function(form) {
                 var button_submit = form_to.find("input[type=submit]");
-                button_submit.button("loading");
+                button_submit.data("loading-text", "<?php echo elgg_echo('loading');?>...").button('loading');
                 if ($(form).valid())
                     form.submit();
                 else
-                    button_submit.button("loading");
+                    button_submit.data("loading-text", "<?php echo elgg_echo('loading');?>...").button('loading');
             }
         });
     });
@@ -361,14 +359,13 @@ $(function(){
      * Button loading state
      * (input submit only)
      */
-//    $.fn.button.defaults = {
-//        loadingText: 'Car...'
-//    };
+
     $("body").on("click", "input[type=submit]", function(){
         // Check if form is validated
         var form = $(this).closest("form");
+        var btn = $(this);
         if(!form.data("validate")){
-            $(this).button(elgg.echo("loading"));
+            btn.data("loading-text", "<?php echo elgg_echo('loading');?>...").button('loading');
         }
     });
     /**

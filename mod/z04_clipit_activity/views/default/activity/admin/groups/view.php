@@ -202,7 +202,7 @@ $(function(){
     $(document).on("click", "#create", function(e){
         e.preventDefault();
         var that = $(this);
-        that.button(elgg.echo("loading"));
+        that.data("loading-text", "<?php echo elgg_echo('loading');?>...").button('loading');
         var data_users = $("#called_users").val();
         elgg.action('activity/admin/groups_create', {
             data: {

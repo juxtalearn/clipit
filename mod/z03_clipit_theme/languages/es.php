@@ -7,10 +7,10 @@
 $spanish = array(
     'loading' => 'cargando',
     'follow_us' => 'Síguenos',
-    'clipit:slogan' => 'Crear, aprender y compartir',
-    'clipit:slogan:create' => 'Crear',
-    'clipit:slogan:learn' => 'Aprender',
-    'clipit:slogan:share' => 'Compartir',
+    'clipit:slogan' => 'Crea, aprende y comparte',
+    'clipit:slogan:create' => 'Crea',
+    'clipit:slogan:learn' => 'Aprende',
+    'clipit:slogan:share' => 'Comparte',
 
     // ERROR
     'error:404' => "Esta funcionalidad aún no está operativa.",

@@ -20,7 +20,7 @@ $(function(){
         var form = $(this).closest("form");
         form.submit();
         if(form.valid()){
-            $(this).button(elgg.echo("loading"));
+            $(this).data("loading-text", "<?php echo elgg_echo('loading');?>...").button('loading');
         }
     });
 
