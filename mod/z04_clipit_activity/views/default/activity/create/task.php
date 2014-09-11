@@ -17,7 +17,6 @@ $task = elgg_extract('task', $vars); // task data
 switch($task_type){
     case "upload":
         $task_types = array(
-            'quiz_take' => elgg_echo('task:quiz_answer'),
             'video_upload' => elgg_echo('task:video_upload'),
             'storyboard_upload' => elgg_echo('task:storyboard_upload'),
             'other' => elgg_echo('task:other')
@@ -109,34 +108,6 @@ $task_types = array_merge(array('' => 'Select task type'), $task_types);
             </div>
         </div>
         <?php if(!$disabled):?>
-            <?php
-            $quizzes = array('' => 'Select quiz');
-            foreach(ClipitQuiz::get_all() as $quiz){
-                $quizzes[$quiz->id] = $quiz->name;
-            }
-            ?>
-            <div class="col-md-4 quiz-module <?php echo $task->task_type == ClipitTask::TYPE_QUIZ_TAKE ? "show":"" ?>"
-                 style="display: none;padding: 10px;background: #fafafa;">
-                <label for="activity-title"><?php echo elgg_echo("task:quiz:select");?></label>
-                <?php echo elgg_view('input/dropdown', array(
-                    'name' => "task{$input_array}[quiz]",
-                    'class' => 'form-control',
-                    'style' => 'padding-top: 5px;padding-bottom: 5px;',
-                    'required' => true,
-                    'value' => $task->quiz,
-                    'options_values' => $quizzes
-                ));
-                ?>
-                <div class="margin-top-5">
-                    <?php echo elgg_echo('or:create');?>
-                    <?php echo elgg_view('output/url', array(
-                        'href'  => "http://trickytopic.".ClipitSite::get_domain(),
-                        'title' => elgg_echo('quiz'),
-                        'text'  => elgg_echo('quiz'),
-                    ));
-                    ?>
-                </div>
-            </div>
             <div class="col-md-4 feedback-module" style="<?php echo $vars['feedback_check'] != false ? '' : 'display: none;'; ?>padding: 10px;background: #fafafa;">
                 <label for="activity-title"><?php echo elgg_echo("task:feedback");?></label>
                 <div class="checkbox feedback-check">
