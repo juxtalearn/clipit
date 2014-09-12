@@ -152,33 +152,33 @@
                 },
                 {
                     "name": "Video diary or Vlog",
-                    "description": "",
-                    "example": ""
+                    "description": "These videos show personal views of life, of how something has happened or is still happening.",
+                    "example": "Zoella (on YouTube)"
                 },
                 {
                     "name": "Current affairs",
-                    "description": "",
-                    "example": ""
+                    "description": "This genre is broadcast journalism, requiring analysis and discussion of news.",
+                    "example": "BBC Radio 4 Today programme"
                 },
                 {
                     "name": "Chat show",
-                    "description": "",
-                    "example": ""
+                    "description": "This genre involves a group of people chatting with their host about various topics. People may call in to offer their opinions and share experience",
+                    "example": "Oprah Winfrey"
                 },
                 {
                     "name": "Reality TV",
-                    "description": "",
-                    "example": ""
+                    "description": "Unscripted events and situations make reality TV, and may include competitions.",
+                    "example": "The Apprentice, Big Brother, Film of Slumdog, Millionaire, Dragons’ Den"
                 },
                 {
                     "name": "Wildlife documentary",
-                    "description": "",
-                    "example": ""
+                    "description": "This genre is documentary about nature or wild life.",
+                    "example": "Life on Earth"
                 },
                 {
                     "name": "Soap opera",
-                    "description": "",
-                    "example": ""
+                    "description": "This genre has a domestic or melodramatic theme, of family matters with multiple stock characters and situations, in a serialised programme.",
+                    "example": "East Enders, Neighbours, Home & Away, Lindenstraße"
                 }
             ]
         },
