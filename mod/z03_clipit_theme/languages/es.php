@@ -5,7 +5,9 @@
  */
 
 $spanish = array(
-    'loading' => 'cargando',
+    'clipit:site' => 'ClipIt',
+    'loading' => 'Cargando',
+    'loading:content' => 'Cargando contenido',
     'follow_us' => 'Síguenos',
     'clipit:slogan' => 'Crea, aprende y comparte',
     'clipit:slogan:create' => 'Crea',
@@ -21,11 +23,30 @@ $spanish = array(
     'home' => 'inicio',
     'selectall' => 'Seleccionar todo',
     'apply' => 'Aplicar',
+    // Validation
+    'validation:required' =>  "Campo obligatorio.",
+    'validation:remote' =>  "Por favor corrige este campo.",
+    'validation:email' =>  "Por favor inserte un correo electrónico válido.",
+    'validation:url' =>  "Por favor inserte una URL válida.",
+    'validation:date' =>  "Por favor inserte una fecha válida.",
+    'validation:dateISO' =>  "Por favor inserte una fecha válida (ISO).",
+    'validation:number' =>  "Por favor inserte un número válido.",
+    'validation:digits' =>  "Por favor inserte solamente digitos.",
+    'validation:creditcard' =>  "Por favor inserte una tarjeta de crédito válida.",
+    'validation:equalTo' =>  "Por favor inserte el mismo valor otra vez.",
+    'validation:accept' =>  "Por favor inserte un valor con una extensión válida.",
+    'validation:maxlength' =>  "Por favor inserte no más de {0} caracteres.",
+    'validation:minlength' =>  "Por favor inserte al menos {0} caracteres.",
+    'validation:rangelength' =>  "Por favor inserte un valor entre {0} y {1} caracteres de longitud.",
+    'validation:range' =>  "Por favor inserte un valor entre {0} y {1}.",
+    'validation:max' =>  "Por favor inserte un valor menor o igual que {0}.",
+    'validation:min' =>  "Por favor inserte un valor mayor o igual que {0}.",
 
     // Menu footer
     'menu:footer_clipit:header:clipit' => 'Clipit',
     'menu:footer_clipit:header:help' => 'Ayuda',
     'menu:footer_clipit:header:legal' => 'Legal',
+    'send:email_to_site' => 'Enviar email al sitio web',
 
     'about' => 'Sobre',
     'team' => 'Equipo',

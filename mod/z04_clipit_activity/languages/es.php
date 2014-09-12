@@ -119,8 +119,11 @@ $spanish = array(
     'multimedia:attach_group' => 'Adjuntar material del grupo',
     'multimedia:attach_files' => 'Adjuntar archivos',
     'multimedia:uploaded_by' => 'Subido por',
+    'multimedia:delete' => 'Eliminar',
+    'multimedia:processing' => 'Procesando',
     'multimedia:attachments' => 'materiales adjuntos',
     'multimedia:attachment' => 'material adjunto',
+    'attachments' => 'adjunto(s)',
     // Files
     'files' => 'Archivos',
     'file' => 'Archivo',

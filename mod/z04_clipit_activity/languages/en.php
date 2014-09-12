@@ -119,8 +119,11 @@ $english = array(
     'multimedia:attach_group' => 'Attach group repositories',
     'multimedia:attach_files' => 'Attach files',
     'multimedia:uploaded_by' => 'Uploaded by',
+    'multimedia:delete' => 'Delete',
+    'multimedia:processing' => 'Processing',
     'multimedia:attachments' => 'repository attachments',
     'multimedia:attachment' => 'repository attachment',
+    'attachments' => 'attachment(s)',
     // Files
     'files' => 'Files',
     'file' => 'File',

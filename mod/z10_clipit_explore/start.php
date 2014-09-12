@@ -52,7 +52,7 @@ function explore_page_handler($page) {
         elgg_push_breadcrumb($activity_object['name'], "explore" .$href_breadcrumb. "?activity={$activity_id}");
     } else {
         $href_breadcrumb = get_input('by') ? "/search" :  false;
-        elgg_push_breadcrumb(elgg_echo('site'), "explore" .$href_breadcrumb. "?site=true");
+        elgg_push_breadcrumb(elgg_echo('clipit:site'), "explore" .$href_breadcrumb. "?site=true");
     }
     switch($page[0]){
         case 'search':

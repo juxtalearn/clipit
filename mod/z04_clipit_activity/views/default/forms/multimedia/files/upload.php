@@ -42,7 +42,7 @@ $footer = '
         <div class="col-md-6">
             <span class="btn btn-success fileinput-button">
                 <i class="fa fa-plus"></i>
-                <span>Add files...</span>
+                <span>'.elgg_echo('multimedia:files:add').'...</span>
                 <input type="file" name="files" multiple>
             </span>
             <button type="submit" class="btn btn-primary start">

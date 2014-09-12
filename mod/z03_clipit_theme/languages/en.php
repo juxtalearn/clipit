@@ -5,7 +5,9 @@
  */
 
 $english = array(
+    'clipit:site' => 'ClipIt',
     'loading' => 'loading',
+    'loading:content' => 'Loading content',
     'follow_us' => 'Follow us',
     'clipit:slogan' => 'Create, learn and share',
     'clipit:slogan:create' => 'Create',
@@ -21,6 +23,24 @@ $english = array(
     'home' => 'home',
     'selectall' => 'Select all',
     'apply' => 'Apply',
+    // Validation
+    'validation:required' =>  "This field is required.",
+    'validation:remote' =>  "Please fix this field.",
+    'validation:email' =>  "Please enter a valid email address.",
+    'validation:url' =>  "Please enter a valid URL.",
+    'validation:date' =>  "Please enter a valid date.",
+    'validation:dateISO' =>  "Please enter a valid date (ISO).",
+    'validation:number' =>  "Please enter a valid number.",
+    'validation:digits' =>  "Please enter only digits.",
+    'validation:creditcard' =>  "Please enter a valid credit card number.",
+    'validation:equalTo' =>  "Please enter the same value again.",
+    'validation:accept' =>  "Please enter a value with a valid extension.",
+    'validation:maxlength' =>  "Please enter no more than {0} characters.",
+    'validation:minlength' =>  "Please enter at least {0} characters.",
+    'validation:rangelength' =>  "Please enter a value between {0} and {1} characters long.",
+    'validation:range' =>  "Please enter a value between {0} and {1}.",
+    'validation:max' =>  "Please enter a value less than or equal to {0}.",
+    'validation:min' =>  "Please enter a value greater than or equal to {0}.",
 
     // Menu footer
     'menu:footer_clipit:header:clipit' => 'Clipit',

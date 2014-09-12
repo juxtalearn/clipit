@@ -23,6 +23,7 @@ if(!empty($user_groups)):
             $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
             $activity_id = ClipitGroup::get_activity($group->id);
             $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
+            if($activity->status != ClipitActivity::STATUS_CLOSED):
             ?>
             <div class="group">
                 <a class="text-truncate child-decoration-none" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $group->id;?>">
@@ -46,6 +47,7 @@ if(!empty($user_groups)):
                     <?php endforeach; ?>
                 </ul>
             </div>
+            <?php endif; ?>
         <?php endforeach; ?>
         <!-- User group list end-->
     </div>
