@@ -28,6 +28,7 @@ $english = array(
     'view'  => 'View',
     'bulk_actions' => 'Bulk actions',
     // Activity
+    'activity' => 'Activity',
     'activity:status' => 'Activity status',
     'activity:title' => 'Activity name',
     'activity:description' => 'Activity description',
@@ -60,6 +61,7 @@ $english = array(
     'status:active' => 'Active',
     'status:closed' => 'Finished',
 
+    'group' => 'Group',
     'my_group:progress' => 'My group progress',
     'group:graph' => 'Group graph',
     'group:max_size' => 'Max students per group',
@@ -187,9 +189,9 @@ $english = array(
     'publications:rated' => 'Successfully evaluated',
     'publications:my_rating' => 'My rating',
     'publications:evaluate' => 'Evaluate',
-    'publications:question:tricky_topic' => 'Does this video help you understand the %s Tricky Topic?',
+    'publications:question:tricky_topic' => 'Does this publication help you understand the %s Tricky Topic?',
     'publications:question:sb' => 'Why is/isn\'t this stumbling block correctly covered?',
-    'publications:question:if_covered' => 'Check if each topic was covered in this video, and explain why:',
+    'publications:question:if_covered' => 'Check if each Stumbling Block was correcty covered in this publication, and explain why:',
     'publications:view_scope' => 'View scope',
     'input:no' => 'No',
     'input:yes' => 'Yes',

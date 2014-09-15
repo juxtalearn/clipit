@@ -28,6 +28,7 @@ $spanish = array(
     'view'  => 'Ver',
     'bulk_actions' => 'Acciones en lote',
     // Activity
+    'activity' => 'Actividad',
     'activity:status' => 'Progreso de las actividades',
     'activity:title' => 'Nombre de la actividad',
     'activity:description' => 'Descripción de la actividad',
@@ -60,6 +61,7 @@ $spanish = array(
     'status:active' => 'En curso',
     'status:closed' => 'Cerrada',
 
+    'group' => 'Grupo',
     'my_group:progress' => 'Progreso de mis grupos',
     'group:graph' => 'Gráfica del grupo',
     'group:max_size' => 'Máximo de estudiantes por grupo',

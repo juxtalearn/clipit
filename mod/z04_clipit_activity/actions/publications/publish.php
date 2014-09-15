@@ -12,6 +12,7 @@
  */
 $title = get_input("title");
 $description = get_input("description");
+
 $labels = get_input("labels");
 $labels = array_filter(explode(",", $labels));
 $tags = get_input("tags");
