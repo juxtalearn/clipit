@@ -54,6 +54,13 @@ class UBFile extends UBItem {
                     "ERROR: Id '" . $id . "' does not correspond to a " . get_called_class() . " object."
                 );
             }
+            $elgg_type = $elgg_file->type;
+            $elgg_subtype = $elgg_file->getSubtype();
+            if(($elgg_type != static::TYPE) || ($elgg_subtype != static::SUBTYPE)) {
+                throw new APIException(
+                    "ERROR: ID '" . $id . "' does not correspond to a " . get_called_class() . " object."
+                );
+            }
             $this->copy_from_elgg($elgg_file);
         }
     }
