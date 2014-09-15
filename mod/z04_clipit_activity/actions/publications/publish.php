@@ -13,7 +13,7 @@
 $title = get_input("title");
 $description = get_input("description");
 $labels = get_input("labels");
-$labels = explode(",", $labels);
+$labels = array_filter(explode(",", $labels));
 $tags = get_input("tags");
 $performance_items = get_input("performance_items");
 $entity_id = get_input("entity-id");
