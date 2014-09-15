@@ -52,14 +52,6 @@ $type = elgg_extract("type", $vars);
     </button>
     <div class="col-md-8">
         <div class="form-group">
-            <?php echo elgg_view("input/text", array(
-                'name' => 'file-name',
-                'class' => 'form-control',
-                'value' => '{%=file.name%}',
-            ));
-            ?>
-        </div>
-        <div class="form-group">
             <label for="file-name"><?php echo elgg_echo("multimedia:file:description");?></label>
             <?php echo elgg_view("input/plaintext", array(
                     'name' => 'file-text',

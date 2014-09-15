@@ -22,15 +22,6 @@ $body .= elgg_view("input/hidden", array(
 $body .= elgg_view('multimedia/file/view_summary', array('file' => $entity));
 $body .='
 <div class="form-group">
-    <label for="file-description">'.elgg_echo("multimedia:file:name").'</label>
-    '.elgg_view("input/text", array(
-        'name'  => 'file-name',
-        'value' => $entity->name,
-        'class' => 'form-control',
-    )).'
-</div>';
-$body .='
-<div class="form-group">
     <label for="file-description">'.elgg_echo("multimedia:file:description").'</label>
     '.elgg_view("input/plaintext", array(
         'name'  => 'file-description',
