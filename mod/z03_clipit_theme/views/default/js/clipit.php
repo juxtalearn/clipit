@@ -308,7 +308,6 @@ $(function(){
      * Form general validation
      */
     $("body").on("click", "form[data-validate=true]", function (e) {
-alert("validando");
         //$("form[data-validate=true]").each(function(){
         var form_to = $(this);
         $(this).validate({
