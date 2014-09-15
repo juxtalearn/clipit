@@ -242,6 +242,9 @@ $english = array(
     'task:video_feedback' => 'Video feedback',
     'task:storyboard_feedback' => 'Storyboard feedback',
     'task:other' => 'Other',
+    'task:videos:none' => 'Add video to %s for publish',
+    'task:storyboards:none' => 'Add storyboard to %s for publish',
+    'repository:group' => 'repository group',
     'task:create' => 'Create new task',
     'task:edit' => 'Edit task',
     /// Task status

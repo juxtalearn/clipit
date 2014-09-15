@@ -40,6 +40,14 @@ if($page[2] == 'view' && $page[3]){
                     'publish'   => true,
                     'total_comments' => false,
                 ));
+                if(!$videos){
+                    $body = elgg_view('output/empty', array('value' => elgg_echo('task:videos:none', array(elgg_view('output/url',
+                        array(
+                            'href'=> "clipit_activity/{$activity->id}/group/{$group_id}/repository?filter=videos",
+                            'text' => elgg_echo('repository:group')
+                        )
+                    )))));
+                }
                 // Group id get parameter
                 if($group_id = get_input('group_id')){
                     $object = ClipitSite::lookup($group_id);
@@ -56,6 +64,8 @@ if($page[2] == 'view' && $page[3]){
                         $body = elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
                     }
                 }
+
+
                 if($status['status'] === true || $task->end <= time()){
                     $video = array($status['result']);
                     $body = elgg_view("page/components/title_block", array(
@@ -74,7 +84,7 @@ if($page[2] == 'view' && $page[3]){
                             'href'      => "clipit_activity/{$activity->id}/group/{$group_id}/repository",
                             'task_id'   => $task->id,
                             'rating'    => false,
-                            'actions'   => true,
+                            'actions'   => false,
                             'publish'   => true,
                             'total_comments' => false,
                         ));
@@ -116,6 +126,14 @@ if($page[2] == 'view' && $page[3]){
                     'task_id'   => $task->id,
                     'publish'   => true,
                 ));
+                if(!$storyboards){
+                    $body = elgg_view('output/empty', array('value' => elgg_echo('task:storyboards:none', array(elgg_view('output/url',
+                        array(
+                            'href'=> "clipit_activity/{$activity->id}/group/{$group_id}/repository?filter=storyboards",
+                            'text' => elgg_echo('repository:group')
+                        )
+                    )))));
+                }
                 // Group id get parameter
                 if($group_id = get_input('group_id')){
                     $object = ClipitSite::lookup($group_id);

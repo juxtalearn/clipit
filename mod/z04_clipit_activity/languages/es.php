@@ -242,6 +242,9 @@ $spanish = array(
     'task:video_feedback' => 'Feedback de videos',
     'task:storyboard_feedback' => 'Feedback de storyboards',
     'task:other' => 'Otro',
+    'task:videos:none' => 'Sube un video a %s para poder publicar',
+    'task:storyboards:none' => 'Sube un storyboard a %s para poder publicar',
+    'repository:group' => 'materiales del grupo',
     'task:create' => 'Crear nueva tarea',
     'task:edit' => 'Editar tarea',
     /// Task status
