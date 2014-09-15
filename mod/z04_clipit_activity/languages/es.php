@@ -156,6 +156,7 @@ $spanish = array(
     'video:url:error' => 'Incorrect url or video not found',
     'video:edit' => 'Editar video',
     'video:add' => 'Añadir video',
+    'video:added' => 'Video añadido correctamente',
     'video:add:to_youtube' => 'Subir video a Youtube',
     'video:add:paste_url' => 'Pegar dirección url de Youtube o Vimeo',
     'video:url' => 'Url del video',
