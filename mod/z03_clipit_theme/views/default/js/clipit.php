@@ -1,5 +1,27 @@
 elgg.provide('clipit');
 
+/**
+ * jQuery validator int messages
+ */
+jQuery.extend(jQuery.validator.messages, {
+    required: "<?php echo elgg_echo('validation:required');?>",
+    remote: "<?php echo elgg_echo('validation:remote');?>",
+    email: "<?php echo elgg_echo('validation:email');?>",
+    url: "<?php echo elgg_echo('validation:url');?>",
+    date: "<?php echo elgg_echo('validation:date');?>",
+    dateISO: "<?php echo elgg_echo('validation:dateISO');?>",
+    number: "<?php echo elgg_echo('validation:number');?>",
+    digits: "<?php echo elgg_echo('validation:digits');?>",
+    creditcard: "<?php echo elgg_echo('validation:creditcard');?>",
+    equalTo: "<?php echo elgg_echo('validation:equalTo');?>",
+    accept: "<?php echo elgg_echo('validation:accept');?>",
+    maxlength: jQuery.validator.format("<?php echo elgg_echo('validation:maxlength');?>"),
+    minlength: jQuery.validator.format("<?php echo elgg_echo('validation:minlength');?>"),
+    rangelength: jQuery.validator.format("<?php echo elgg_echo('validation:rangelength');?>"),
+    range: jQuery.validator.format("<?php echo elgg_echo('validation:range');?>"),
+    max: jQuery.validator.format("<?php echo elgg_echo('validation:max');?>"),
+    min: jQuery.validator.format("<?php echo elgg_echo('validation:min');?>")
+});
 
 /**
  * TinyMce default configuration
@@ -286,6 +308,7 @@ $(function(){
      * Form general validation
      */
     $("body").on("click", "form[data-validate=true]", function (e) {
+alert("validando");
         //$("form[data-validate=true]").each(function(){
         var form_to = $(this);
         $(this).validate({

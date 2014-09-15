@@ -19,7 +19,10 @@ $english = array(
     'user:logout' => 'Logout',
     'profile' => 'Profile',
     'profile:stats' => 'Learning Analytics',
+    'timeline:none' => 'Not found',
+    'timeline:public' => 'Public timeline',
     // Settings
+    'profile:settings:password' => 'Change password',
     'profile:settings:change' => 'Change your settings',
     'profile:settings:edit_profile' => 'Edit profile',
     'profile:settings:edit_avatar' => 'Edit avatar',
