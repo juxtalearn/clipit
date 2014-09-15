@@ -219,6 +219,7 @@ $spanish = array(
     'task:title' => 'Título de la tarea',
     'task:add' => 'Añadir tarea',
     'task:added' => 'Tarea añadida',
+    'task:select' => 'Seleccionar tarea',
     'task:select:task_type' => 'Seleccionar tipo de tarea',
     'task:task_type' => 'Tipo de tarea',
     'task:feedback' => 'Tarea de feedback',

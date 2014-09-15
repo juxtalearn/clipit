@@ -219,6 +219,7 @@ $english = array(
     'task:title' => 'Task title',
     'task:add' => 'Add task',
     'task:added' => 'Added task',
+    'task:select' => 'Select task',
     'task:select:task_type' => 'Select task type',
     'task:task_type' => 'Task type',
     'task:feedback' => 'Task feedback',
