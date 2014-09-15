@@ -11,7 +11,7 @@
  * @package         ClipIt
  */
 $entity = elgg_extract('entity', $vars);
-
+$hasToken = get_config("google_refresh_token");
 echo elgg_view("input/hidden", array(
     'name' => 'entity-id',
     'value' => $entity->id,
@@ -26,6 +26,7 @@ echo elgg_view("input/hidden", array(
             <div class="panel-group" id="accordion" style="margin-bottom: 10px;">
                 <!-- Video upload -->
                 <div class="panel panel-default">
+                    <?php if($hasToken):?>
                     <div class="panel-heading">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
                             <h4 class="panel-title">
@@ -36,6 +37,7 @@ echo elgg_view("input/hidden", array(
                             </h4>
                         </a>
                     </div>
+                    <?php endif;?>
                     <div id="collapseThree" class="panel-collapse collapse">
                         <div class="panel-body">
                             <div class="form-group">
