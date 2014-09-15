@@ -24,7 +24,7 @@ if(count($entity)==0){
     $files = $_FILES['files'];
 
     $new_file_id = ClipitFile::create(array(
-        'name' => $file_name,
+        'name' => $files['name'],
         'description' => $file_text,
         'temp_path'  => $files['tmp_name']
     ));
