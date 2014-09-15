@@ -180,12 +180,12 @@ $team_members = array(
                 'web' => 'http://www.rias-institute.eu',
             )
         ),
-//        array(
-//            'name' => 'Oliver Daems',
-//            'image' => "oliver.png",
-//            'position' => elgg_echo('position:researcher'),
-//            'description' => elgg_echo('team:oliver'),
-//        )
+        array(
+            'name' => 'Oliver Daems',
+            'image' => "oliver.png",
+            'position' => elgg_echo('position:researcher'),
+            'description' => elgg_echo('team:oliver'),
+        )
     )
 );
 
