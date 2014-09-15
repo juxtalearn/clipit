@@ -88,7 +88,7 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
                             <strong><?php echo elgg_echo('publications:rating');?></strong>
                             <small style="margin-top: 5px;" class="show">
                                 <?php echo $total_evaluations; ?>
-                                <?php echo elgg_echo('rating:votes');?>
+                                <?php echo elgg_echo('publications:rating:votes');?>
                             </small>
                         </h4>
                         <?php
