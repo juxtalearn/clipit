@@ -185,6 +185,10 @@ $team_members = array(
             'image' => "oliver.png",
             'position' => elgg_echo('position:researcher'),
             'description' => elgg_echo('team:oliver'),
+            'social' => array(
+                'web' => 'http://www.rias-institute.eu',
+                'twitter' => 'ODaems'
+            )
         )
     )
 );
