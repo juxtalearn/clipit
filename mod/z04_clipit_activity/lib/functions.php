@@ -364,12 +364,19 @@ function get_group_progress($group_id){
     $individual_tasks = array(ClipitTask::TYPE_VIDEO_FEEDBACK, ClipitTask::TYPE_STORYBOARD_FEEDBACK, ClipitTask::TYPE_QUIZ_TAKE);
     $completed = array();
     $total = 0;
+    $group_users = ClipitGroup::get_users($group_id);
     foreach($activity->task_array as $task_id){
         $task = array_pop(ClipitTask::get_by_id(array($task_id)));
-        $status = get_task_status($task, $group_id);
-        if(!in_array($task->task_type, $individual_tasks)){
+        if(in_array($task->task_type, $individual_tasks)){
+            foreach($group_users as $user_id){
+                if(ClipitTask::get_completed_status($task_id, $user_id)){
+                    $completed[] = true;
+                }
+                $total++;
+            }
+        } else {
             $total++;
-            if($status['status'] === true){
+            if(ClipitTask::get_completed_status($task_id, $group_id)){
                 $completed[] = true;
             }
         }
