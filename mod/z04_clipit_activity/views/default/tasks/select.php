@@ -11,6 +11,10 @@
  * @package         ClipIt
  */
 $entities = elgg_extract('entities', $vars);
+$filter = "";
+if($filter = get_input("filter")){
+    $filter = "+'&filter={$filter}'";
+}
 ?>
 <?php if($entities):?>
     <small class="show margin-bottom-5">Select task</small>
@@ -20,7 +24,7 @@ $entities = elgg_extract('entities', $vars);
         'class' => 'form-control margin-bottom-20',
         'style' => 'height: auto;width: auto;padding: 0;font-weight: bold;',
         'value' => get_input('task_id'),
-        'onchange' => "location.href='?task_id='+this.value",
+        'onchange' => "location.href='?task_id='+this.value".$filter,
         'options_values' => $entities
     ));
     ?>
