@@ -17,7 +17,7 @@ if($filter = get_input("filter")){
 }
 ?>
 <?php if($entities):?>
-    <small class="show margin-bottom-5">Select task</small>
+    <small class="show margin-bottom-5"><?php echo elgg_echo('task:select');?></small>
     <?php echo elgg_view('input/dropdown', array(
         'name' => 'task_id',
         'id' => 'task_id',
