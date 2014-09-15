@@ -276,6 +276,7 @@ $english = array(
     'clipit:or' => 'or',
     'activity:updated' => 'Activity updated',
     'activity:cantupdate' => 'Cannot update activity',
+    'timeline:none' => 'Not found',
 );
 
 add_translation('en', $english);
