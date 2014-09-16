@@ -19,6 +19,11 @@ $performance_items = get_input("performance_items");
 $entity_id = get_input("entity-id");
 $task_id = get_input("task-id");
 $parent_id = get_input("parent-id");
+// for trial
+$performance_items = array();
+$rubrics_concept = ClipitPerformanceItem::get_by_category('Concepto');
+$rubrics_audiovisual = ClipitPerformanceItem::get_by_category('Audiovisual');
+
 
 $object = ClipitSite::lookup($entity_id);
 $entity_class = $object['subtype'];
@@ -69,22 +74,29 @@ if(count($entity)==0 || trim($title) == "" || trim($description) == ""){
     $entity_class::set_labels($new_entity_id, $total_labels);
     // Tags
     $entity_class::set_tags($new_entity_id, $tags);
-    // Performance items
-    $entity_class::add_performance_items($new_entity_id, $performance_items);
-
 
     if($new_entity_id){
         switch($entity_class){
             case "ClipitVideo":
                 ClipitTask::add_videos($task_id, array($new_entity_id));
+                $rubrics = array_merge($rubrics_audiovisual, $rubrics_concept);
+                foreach($rubrics as $rubric){
+                    $performance_items[] = $rubric->id;
+                }
                 break;
             case "ClipitStoryboard":
                 ClipitTask::add_storyboards($task_id, array($new_entity_id));
+                $rubrics = array_merge($rubrics_concept);
+                foreach($rubrics as $rubric){
+                    $performance_items[] = $rubric->id;
+                }
                 break;
             default:
                 register_error(elgg_echo("cantpublish"));
                 break;
         }
+        // Performance items
+        $entity_class::set_performance_items($new_entity_id, $performance_items);
     } else {
         register_error(elgg_echo("cantpublish"));
     }

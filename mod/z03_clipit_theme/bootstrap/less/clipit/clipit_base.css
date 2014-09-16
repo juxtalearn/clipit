@@ -8507,6 +8507,9 @@ ul.deadline-list > li .fa-user {
 .activity-group-block .fa.status-deadline.fa-minus-square-o {
   color: #d8ba05;
 }
+.jOrgChart {
+  overflow: auto;
+}
 .jOrgChart .line {
   height: 20px;
   width: 4px;
