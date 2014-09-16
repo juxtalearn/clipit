@@ -49,7 +49,8 @@ if($page[2] == 'view' && $page[3]){
                     )))));
                 }
                 // Group id get parameter
-                if($group_id = get_input('group_id')){
+                if( get_input('group_id')){
+                    $group_id = get_input('group_id');
                     $object = ClipitSite::lookup($group_id);
                     $status = get_task_status($task, $group_id);
                     $video = array($status['result']);
