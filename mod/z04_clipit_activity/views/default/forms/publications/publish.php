@@ -14,6 +14,9 @@ $entity = elgg_extract('entity', $vars);
 $parent_id = elgg_extract('parent_id', $vars);
 $tt_tags = elgg_extract('tags', $vars);
 
+//load jQuery Chosen
+elgg_load_js("jquery:chosen");
+
 $performance_items = $entity->performance_item_array;
 $tags = $entity->tag_array;
 $labels = $entity->label_array;
@@ -42,7 +45,6 @@ $labels_value = implode(", ", $label_value);
     'id' => 'input_labels',
     'value' => $labels_value
 ));?>
-<script src="http://harvesthq.github.io/chosen/chosen.jquery.js"></script>
 <script>
 $(function(){
     $(".chosen-select").chosen({disable_search_threshold: 1});
