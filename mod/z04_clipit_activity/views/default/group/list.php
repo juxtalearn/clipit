@@ -12,29 +12,27 @@
  */
 $activity = elgg_extract('entity', $vars);
 $groups_id = ClipitActivity::get_groups($activity->id);
+$groups = ClipitGroup::get_by_id($groups_id, true);
 ?>
-
 <div class="row">
-<?php
-foreach($groups_id as $group_id):
-    $users_id = ClipitGroup::get_users($group_id);
-    $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
-?>
-    <div class="col-md-6">
-        <div style="border-bottom: 6px solid #bae6f6; padding-bottom: 15px;">
-            <h3><?php echo $group->name; ?></h3>
-            <ul style="height: 250px;overflow-y: auto;">
-                <?php
-                foreach($users_id as $user_id):
-                    $user = array_pop(ClipitUser::get_by_id(array($user_id)));
-                ?>
-                    <li class="list-item">
-                        <?php echo elgg_view("page/elements/user_block", array("entity" => $user)); ?>
-                    </li>
-                <?php endforeach ?>
-            </ul>
+    <?php
+    foreach($groups as $group):
+        $users_id = ClipitGroup::get_users($group->id);
+        ?>
+        <div class="col-md-6">
+            <div style="border-bottom: 6px solid #bae6f6; padding-bottom: 15px;">
+                <h3><?php echo $group->name; ?></h3>
+                <ul style="height: 250px;overflow-y: auto;">
+                    <?php
+                    foreach($users_id as $user_id):
+                        $user = array_pop(ClipitUser::get_by_id(array($user_id)));
+                        ?>
+                        <li class="list-item">
+                            <?php echo elgg_view("page/elements/user_block", array("entity" => $user)); ?>
+                        </li>
+                    <?php endforeach ?>
+                </ul>
+            </div>
         </div>
-    </div>
-<?php endforeach ?>
-
+    <?php endforeach ?>
 </div>

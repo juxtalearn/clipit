@@ -17,7 +17,7 @@ echo elgg_view("page/components/modal",
         "dialog_class"     => "modal-lg",
         "remote"    => true,
         "target"    => "assessment-rubric",
-        "title"     => 'Rubrica',
+        "title"     => 'Rúbrica',
         "form"      => false,
         "body"      => $body,
         "footer"    => false

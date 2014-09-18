@@ -47,7 +47,6 @@ $lang = get_current_language();
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--<link rel="stylesheet/less" href="<?php echo $CONFIG->wwwroot; ?>mod/clipit_theme/bootstrap/less/components_clipit.less" />-->
     <?php echo elgg_view('page/elements/head', $vars); ?>
 </head>
 <body>
