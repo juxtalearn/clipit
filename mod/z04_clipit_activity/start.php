@@ -173,7 +173,7 @@ function clipit_activity_init() {
     // jQuery QuickSearch
     elgg_register_js("jquery:quicksearch", "{$vendors_dir}/jquery.quicksearch.js");
     // jQuery Chosen
-    elgg_register_js("jquery:chosen", "{$vendors_dir}/jquery.chosen.js");
+    elgg_register_js("jquery:chosen", "{$vendors_dir}/jquery.chosen.min.js");
     // FullCalendar
     elgg_register_js("fullcalendar:moment", "{$vendors_dir}/fullcalendar/moment.min.js");
     elgg_register_js("fullcalendar", "{$vendors_dir}/fullcalendar/fullcalendar.min.js");

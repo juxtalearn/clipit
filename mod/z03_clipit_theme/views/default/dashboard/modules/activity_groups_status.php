@@ -16,32 +16,21 @@ elgg_load_js("nvd3:d3_v2");
 elgg_load_js("nvd3");
 elgg_load_css("nvd3:css");
 ?>
-<style>
-    .module-group_activity svg {
-        height: 200px;
-    }
-    .module-group_activity svg .nvd3 .nv-axis line{
-        stroke: #EBEBEB;
-    }
-    .module-group_activity svg text {
-        font: normal 12px Helvetica;
-        fill: #999999;
-    }
-    .module-group_activity svg .nv-x .nv-axis text {
-        fill: #000;
-    }
-    .module-group_activity svg .nv-axis path {
-        stroke: #999999;
-    }
-</style>
 <script>
-<?php foreach($activities as $activity):?>
+<?php
+foreach($activities as $activity):
+    if($activity->status != 'closed'):
+?>
     nv.addGraph(function() {
         var chart = nv.models.discreteBarChart()
             .x(function(d) { return d.label })
             .y(function(d) { return d.value })
+            .tooltips(true)
             .staggerLabels(false)
-            .tooltips(false)
+            .tooltipContent(function(key, y, e, graph) {
+                var name = graph.point.ctext;
+                return  name
+            })
             .showValues(true)
             .forceY([0,100])
             .valueFormat(d3.format('f'))
@@ -56,10 +45,10 @@ elgg_load_css("nvd3:css");
                         <?php
                         $num_group = 1;
                         $group_ids = ClipitActivity::get_groups($activity->id);
-                        $groups = ClipitGroup::get_by_id($group_ids);
+                        $groups = ClipitGroup::get_by_id($group_ids, $order_by_name = true);
                         foreach($groups as $group){
                             $value = get_group_progress($group->id);
-                            echo "{ 'label': 'G{$num_group}', 'value':{$value}},";
+                            echo "{ 'label': 'G{$num_group}', 'value':{$value}, 'ctext':'{$group->name}'},";
                             $num_group ++;
                         }
                         ?>
@@ -73,6 +62,7 @@ elgg_load_css("nvd3:css");
 
         return chart;
     });
+    <?php endif;?>
 <?php endforeach;?>
     $(document).ready(function(){
 
@@ -109,14 +99,19 @@ elgg_load_css("nvd3:css");
 <?php
 $count = 0;
 foreach($activities as $activity):
-    $show = "block";
-    if($count > 0){
-        $show = "none";
-    }
+    if($activity->status != 'closed'):
+        $show = "block";
+        if($count > 0){
+            $show = "none";
+        }
 ?>
     <div id="chart_bar_<?php echo $activity->id;?>" class="group_activities separator" style="display: <?php echo $show;?>">
         <h3 style="color: #<?php echo $activity->color;?>;"><?php echo $activity->name;?></h3>
         <svg></svg>
     </div>
-<?php $count++; endforeach;?>
+<?php
+    $count++;
+    endif;
+endforeach;
+?>
 </div>

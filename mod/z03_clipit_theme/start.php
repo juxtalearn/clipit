@@ -102,8 +102,6 @@ function clipit_final_init() {
         elgg_unregister_js("twitter-bootstrap");
     } else {
         elgg_register_css("ui-lightness", "{$plugin_url}/vendors/jquery-ui-1.10.2.custom/css/ui-lightness/jquery-ui-1.10.2.custom.min.css");
-        elgg_register_css("clipit", "{$plugin_url}/bootstrap/less/clipit/clipit_base.css");
-        elgg_register_css("fontawesome", "{$plugin_url}/vendors/fontawesome/fontawesome.min.css");
         elgg_register_js("jquery", "{$plugin_url}/vendors/jquery/jquery-1.9.1.min.js", "head", 0);
         elgg_register_js("jquery-migrate", "{$plugin_url}/vendors/jquery/jquery-migrate-1.1.1.js", "head", 1);
         elgg_register_js("jquery-ui", "{$plugin_url}/vendors/jquery-ui-1.10.2.custom/js/jquery-ui-1.10.2.custom.min.js", "head", 2);
@@ -125,7 +123,10 @@ function clipit_final_init() {
         elgg_register_js("nvd3:d3_v2", "{$plugin_url}/vendors/nvd3/d3.v2.js");
         elgg_register_js("nvd3", "{$plugin_url}/vendors/nvd3/nv.d3.js");
         elgg_register_css("nvd3:css", "{$plugin_url}/vendors/nvd3/nv.d3.css");
-
+        // ClipIt
+        elgg_register_css("clipit", "{$plugin_url}/bootstrap/less/clipit/clipit_base.min.css");
+        // FontAwesome
+        elgg_register_css("fontawesome", "{$plugin_url}/vendors/fontawesome/fontawesome.min.css");
 
         $clipit_js = elgg_get_simplecache_url('js', 'clipit');
         elgg_register_simplecache_view('js/clipit');

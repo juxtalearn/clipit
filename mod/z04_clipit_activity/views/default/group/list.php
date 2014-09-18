@@ -10,8 +10,8 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$activity_id =  (int)elgg_get_page_owner_guid();
-$groups_id = ClipitActivity::get_groups($activity_id);
+$activity = elgg_extract('entity', $vars);
+$groups_id = ClipitActivity::get_groups($activity->id);
 ?>
 
 <div class="row">

@@ -15,7 +15,7 @@ $tags = $tricky_topic->tag_array;
 $tasks = array_slice($activity->task_array, 0, 4);
 
 if($access == 'ACCESS_TEACHER'){
-    $groups = ClipitGroup::get_by_id($activity->group_array);
+    $groups = ClipitGroup::get_by_id($activity->group_array, $order_by_name = true);
 }
 ?>
 <div class="row">
