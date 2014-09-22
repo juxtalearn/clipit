@@ -115,9 +115,9 @@ class ClipitQuizResult extends UBItem {
      */
     static function get_by_quiz_question($quiz_question_array) {
         $quiz_result_array = array();
-        foreach($quiz_question_array as $quiz_question) {
-            $result_array = ClipitQuizQuestion::get_quiz_results($quiz_question);
-            $quiz_result_array[$quiz_question] = static::get_by_id($result_array);
+        foreach($quiz_question_array as $quiz_question_id) {
+            $result_array = ClipitQuizQuestion::get_quiz_results($quiz_question_id);
+            $quiz_result_array[$quiz_question_id] = static::get_by_id($result_array);
         }
         return $quiz_result_array;
     }
