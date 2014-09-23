@@ -231,49 +231,62 @@ class ClipitTask extends UBItem {
 
     // TASK COMPLETION
     static function get_completed_status($id, $entity_id) {
-        $task = new ClipitTask($id);
+        $task = new static($id);
         switch($task->task_type) {
-            case ClipitTask::TYPE_QUIZ_TAKE:
+            case static::TYPE_QUIZ_TAKE:
                 return ClipitQuiz::has_answered_quiz($task->quiz, $entity_id);
-            case ClipitTask::TYPE_STORYBOARD_UPLOAD:
+            case static::TYPE_STORYBOARD_UPLOAD:
                 foreach($task->storyboard_array as $storyboard_id) {
                     if((int)ClipitStoryboard::get_group($storyboard_id) === (int)$entity_id) {
                         return true;
                     }
                 }
                 return false;
-            case ClipitTask::TYPE_STORYBOARD_FEEDBACK:
-                $parent_task = new ClipitTask($task->parent_task);
-                $count_entities = elgg_get_entities_from_metadata(array(
-                    'type' => 'object', 'subtype' => 'ClipitRating', 'metadata_names' => array("target"),
-                    'metadata_values' => $parent_task->storyboard_array, 'limit' => 0, 'owner_guid' => $entity_id, 'count' => true
-                ));
-//            var_dump($parent_task->video_array);
-                if($count_entities > 0){
-                    return true;
+            case static::TYPE_STORYBOARD_FEEDBACK:
+                $user_ratings = ClipitRating::get_by_owner(array($entity_id));
+                $rating_targets = array();
+                foreach($user_ratings[$entity_id] as $user_rating) {
+                    $rating_targets[] = (int)$user_rating->target;
                 }
-                return false;
-            case ClipitTask::TYPE_VIDEO_UPLOAD:
+                $parent_task = new static($task->parent_task);
+                $parent_task->storyboard_array;
+                foreach($parent_task->storyboard_array as $storyboard_id) {
+                    if(array_search((int)$storyboard_id, $rating_targets) === false) {
+                        $storyboard_group = (int)ClipitStoryboard::get_group((int)$storyboard_id);
+                        $user_group = (int)ClipitGroup::get_from_user_activity($entity_id, $task->activity);
+                        if($storyboard_group !== $user_group) {
+                            // at least one of the targets was not rated
+                            return false;
+                        } // else the user is part of the group who published the storyboard, so no feedback required
+                    }
+                }
+                return true;
+            case static::TYPE_VIDEO_UPLOAD:
                 foreach($task->video_array as $video_id) {
                     if((int)ClipitVideo::get_group($video_id) === (int)$entity_id) {
                         return true;
                     }
                 }
                 return false;
-            case ClipitTask::TYPE_VIDEO_FEEDBACK:
-                $parent_task = new ClipitTask($task->parent_task);
-                if(!$parent_task->video_array){
-                    return true;
+            case static::TYPE_VIDEO_FEEDBACK:
+                $user_ratings = ClipitRating::get_by_owner(array($entity_id));
+                $rating_targets = array();
+                foreach($user_ratings[$entity_id] as $user_rating) {
+                    $rating_targets[] = (int)$user_rating->target;
                 }
-                $count_entities = elgg_get_entities_from_metadata(array(
-                    'type' => 'object', 'subtype' => 'ClipitRating', 'metadata_names' => array("target"),
-                    'metadata_values' => $parent_task->video_array, 'limit' => 0, 'owner_guid' => $entity_id, 'count' => true
-                ));
-            var_dump($parent_task->video_array);
-                if($count_entities > 0){
-                    return true;
+                $parent_task = new static($task->parent_task);
+                foreach($parent_task->video_array as $video_id) {
+                    if(array_search((int)$video_id, $rating_targets) === false) {
+                        $video_group = (int)ClipitVideo::get_group((int)$video_id);
+                        $user_group = (int)ClipitGroup::get_from_user_activity($entity_id, $task->activity);
+                        if($video_group !== $user_group) {
+                            // at least one of the targets was not rated
+                            return false;
+                        }
+                        // else the user is part of the group who published the video, so no feedback required
+                    }
                 }
-                return false;
+                return true;
             default:
                 return false;
         }
