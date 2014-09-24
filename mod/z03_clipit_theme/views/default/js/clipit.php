@@ -272,6 +272,15 @@ $(function(){
     /**
      * Register form validation
      */
+    $.validator.addMethod(
+        "login_normalize",
+        function(value, element) {
+            var re = new RegExp(/^[a-zA-Z0-9_]*$/);
+            re.test( element.value );
+            return this.optional(element) || re.test(value);
+        },
+        "Use a valid username."
+    );
     $(".elgg-form-register").validate({
         errorElement: "span",
         errorPlacement: function(error, element) {
@@ -282,6 +291,8 @@ $(function(){
         rules: {
             username: {
                 required: true,
+                minlength: 1,
+                login_normalize: true,
                 remote: {
                     url: elgg.config.wwwroot+"action/user/check",
                     type: "POST",
@@ -390,6 +401,16 @@ $(function(){
             btn.data("loading-text", "<?php echo elgg_echo('loading');?>...").button('loading');
         }
     });
+    if( $(".module-group_activity").length > 0) {
+        elgg.get('ajax/view/dashboard/modules/activity_groups_status', {
+            data: {
+                entities: <?php echo json_encode(ClipitUser::get_activities(elgg_get_logged_in_user_guid()));?>
+            },
+            success: function (content) {
+                $(".module-group_activity .elgg-body").html(content);
+            }
+        });
+    }
     /**
      * jQuery send_msg function
      * Autocomplete user info

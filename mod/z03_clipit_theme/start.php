@@ -60,6 +60,8 @@ function clipit_final_init() {
     elgg_register_action('language/set', "{$plugin_dir}/actions/language/set.php", 'public');
     // Register ajax view for timeline events
     elgg_register_ajax_view('navigation/pagination_timeline');
+    // Register ajax view for activity group status
+    elgg_register_ajax_view('dashboard/modules/activity_groups_status');
     // Register public pages
     elgg_register_plugin_hook_handler('public_pages', 'walled_garden', 'actions_clipit_public_pages');
     function actions_clipit_public_pages($hook, $type, $return_value, $params) {

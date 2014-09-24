@@ -11,7 +11,15 @@
  * @package         ClipIt
  */
 $user = elgg_extract("entity", $vars);
+elgg_load_js("nvd3:d3_v2");
+elgg_load_js("nvd3");
+elgg_load_css("nvd3:css");
 ?>
+<script>
+$(function(){
+
+});
+</script>
 <div class="col-md-4 events-list">
     <?php echo elgg_view('dashboard/module', array(
         'name'      => 'events',
@@ -40,11 +48,7 @@ $user = elgg_extract("entity", $vars);
         <?php echo elgg_view('dashboard/module', array(
             'name'      => 'group_activity',
             'title'     => elgg_echo('group:activity'),
-            'content'   => elgg_view('dashboard/modules/activity_groups_status',
-                array(
-                    'entities' => ClipitUser::get_activities($user->id)
-                )
-            ),
+            'content'   => elgg_view('page/components/loading_block', array('height' => '245px', 'text' => elgg_echo('loading:charts'))),
         ));
         ?>
     </div>

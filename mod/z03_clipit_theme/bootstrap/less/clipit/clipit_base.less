@@ -375,22 +375,22 @@ select.form-control{
 // --------------------------------------------------
 .pagination {
   > li > a{
-    border: 1px solid @grey_border;
-    color: #9c9e9f;
-    font-family: @font-family-futurabold;
+    border: 1px solid @blue-lighter;
   }
-  > .active > a{
+  > .active > a,
+  > .active > span{
     background-color: @blue_clipit;
+    border: 1px solid @blue_clipit;
     &:hover,
     &:focus{
-      color: #9c9e9f;
-      background-color: #d6f0f9;
-      border-color: #9c9e9f;
+      color: @blue_clipit;
+      background-color: @blue-lighter;
+      border-color: @blue_clipit;
     }
   }
 }
 //
-// Pagination
+// Thumbnail
 // --------------------------------------------------
 .thumbnail{
   padding: 0;
@@ -856,5 +856,23 @@ h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
     .nv-axis path {
       stroke: #999999;
     }
+  }
+}
+//
+// Loading block
+// --------------------------------------------------
+.loading-block{
+  display: table;
+  width: 100%;
+  height: auto;
+  > div{
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+  }
+  .fa-spin{
+    font-size: 40px !important;
+    position: initial !important;
+    top: 0 !important;
   }
 }

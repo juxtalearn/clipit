@@ -11,10 +11,8 @@
  * @package         ClipIt
  */
 $entities = elgg_extract('entities', $vars);
+$entities = get_input("entities");
 $activities = ClipitActivity::get_by_id($entities);
-elgg_load_js("nvd3:d3_v2");
-elgg_load_js("nvd3");
-elgg_load_css("nvd3:css");
 ?>
 <script>
 <?php

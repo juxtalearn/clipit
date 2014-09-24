@@ -10484,18 +10484,20 @@ select.form-control {
   color: #fff;
 }
 .pagination > li > a {
-  border: 1px solid #d9dadb;
-  color: #9c9e9f;
-  font-family: FuturaBoldRegular, Impact, 'Impact Bold', Helvetica, Arial, sans, sans-serif;
+  border: 1px solid #bae6f6;
 }
-.pagination > .active > a {
+.pagination > .active > a,
+.pagination > .active > span {
   background-color: #32b4e5;
+  border: 1px solid #32b4e5;
 }
 .pagination > .active > a:hover,
-.pagination > .active > a:focus {
-  color: #9c9e9f;
-  background-color: #d6f0f9;
-  border-color: #9c9e9f;
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  color: #32b4e5;
+  background-color: #bae6f6;
+  border-color: #32b4e5;
 }
 .thumbnail {
   padding: 0;
@@ -10915,4 +10917,19 @@ h6,
 }
 .module-group_activity svg .nv-axis path {
   stroke: #999999;
+}
+.loading-block {
+  display: table;
+  width: 100%;
+  height: auto;
+}
+.loading-block > div {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+.loading-block .fa-spin {
+  font-size: 40px !important;
+  position: initial !important;
+  top: 0 !important;
 }

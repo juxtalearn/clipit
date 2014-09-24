@@ -8,21 +8,16 @@
 
 
 // Get variables
-$username = get_input('username');
-$email = get_input('email');
+$username = get_input("username");
+$user = get_input('email');
 
-
-if (elgg_get_config('allow_registration')) {
+$result = "false";
+if(isset($username) && !get_user_by_username($username)){
     $result = "true";
-    /*if(!get_user_by_email($email) || !isset($email)){
-        $result = "false";
-    }*/
-    if(get_user_by_username($username) && isset($username)){
-        $result = "false";
-    }
-    if(!get_user_by_email($email) && isset($email)){
-        $result = "false";
-    }
-    echo $result;
 }
+if(get_user_by_username($user) || get_user_by_email($user) && isset($user)){
+    $result = "true";
+}
+echo $result;
+
 die();
