@@ -12,11 +12,11 @@
  */
 
 $vendors_dir = elgg_get_plugins_path() . "z04_clipit_activity/vendors/fileupload/";
-require_once("{$vendors_dir}tmpl.min.js");
-require_once("{$vendors_dir}load-image.min.js");
-require_once("{$vendors_dir}iframe-transport.js");
-require_once("{$vendors_dir}fileupload.js");
-require_once("{$vendors_dir}fileupload-process.js");
-require_once("{$vendors_dir}fileupload-image.js");
-require_once("{$vendors_dir}fileupload-validate.js");
-require_once("{$vendors_dir}fileupload-ui.js");
+include("{$vendors_dir}tmpl.min.js");
+include("{$vendors_dir}load-image.min.js");
+include("{$vendors_dir}iframe-transport.js");
+include("{$vendors_dir}fileupload.js");
+include("{$vendors_dir}fileupload-process.js");
+include("{$vendors_dir}fileupload-image.js");
+include("{$vendors_dir}fileupload-validate.js");
+include("{$vendors_dir}fileupload-ui.js");
