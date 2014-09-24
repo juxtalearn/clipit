@@ -145,4 +145,13 @@ class UBSite {
         $hostData = array_reverse($hostData);
         return $hostData[1] . '.' . $hostData[0];
     }
+
+
+    static function normalize_xml_key($key){
+        return str_replace(
+            array('!','"','#','$','%','&','(',')','*','+',',','/',';','<','=',
+                '>','?','@','\\','[',']','^','`','{','}','|','~'),
+            '_',
+            $key);
+    }
 }
