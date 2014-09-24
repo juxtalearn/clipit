@@ -160,14 +160,18 @@ function clipit_activity_init() {
     elgg_register_js("jquery:fileupload:image", "{$vendors_dir}/fileupload/fileupload-image.js");
     elgg_register_js("jquery:fileupload:validate", "{$vendors_dir}/fileupload/fileupload-validate.js");
     elgg_register_js("jquery:fileupload:ui", "{$vendors_dir}/fileupload/fileupload-ui.js");
-    elgg_load_js("jquery:fileupload:tmpl");
-    elgg_load_js("jquery:fileupload:load_image");
-    elgg_load_js("jquery:fileupload:iframe_transport");
-    elgg_load_js("jquery:fileupload");
-    elgg_load_js("jquery:fileupload:process");
-    elgg_load_js("jquery:fileupload:image");
-    elgg_load_js("jquery:fileupload:validate");
-    elgg_load_js("jquery:fileupload:ui");
+//    elgg_load_js("jquery:fileupload:tmpl");
+//    elgg_load_js("jquery:fileupload:load_image");
+//    elgg_load_js("jquery:fileupload:iframe_transport");
+//    elgg_load_js("jquery:fileupload");
+//    elgg_load_js("jquery:fileupload:process");
+//    elgg_load_js("jquery:fileupload:image");
+//    elgg_load_js("jquery:fileupload:validate");
+//    elgg_load_js("jquery:fileupload:ui");
+    $fileupload_js = elgg_get_simplecache_url('js', 'fileupload');
+    elgg_register_simplecache_view('js/fileupload');
+    elgg_register_js('clipit:fileupload', $fileupload_js);
+    elgg_load_js('clipit:fileupload');
     // jQuery Multi-select
     elgg_register_js("jquery:multiselect", "{$vendors_dir}/jquery.multi-select.js");
     // jQuery QuickSearch
