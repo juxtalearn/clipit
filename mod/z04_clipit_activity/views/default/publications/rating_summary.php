@@ -12,13 +12,11 @@
  */
 $rating = elgg_extract('entity', $vars);
 $group_id = elgg_extract('group_id', $vars);
-$performance_average = ClipitPerformanceRating::get_average_user_rating_for_target($rating->owner_id, $rating->target);
 
 $class = 'pull-right rating-resume';
 if($vars['class']){
     $class = $vars['class'];
 }
-$rating_overall = '<div class="rating readonly '.$class.'" data-score="'.$performance_average.'">'.star_rating_view($performance_average).'</div>';
 echo elgg_view("page/components/modal_remote", array('id'=> "rating-average-{$rating->id}" ));
 echo elgg_view('output/url', array(
     'href'  => "ajax/view/modal/publications/rating?id={$rating->id}&group_id={$group_id}",
