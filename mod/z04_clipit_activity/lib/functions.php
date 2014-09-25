@@ -109,7 +109,7 @@ function video_url_parser($url){
                     'preview' => "http://i1.ytimg.com/vi/{$matches[0]}/mqdefault.jpg",
                     'favicon'   => $favicon_url_base.$parse_url['host']
                 );
-            // Vimeo
+                // Vimeo
             } else if (strpos($url, 'vimeo.com') != false) {
                 preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=vimeo.com/)[^&\n]+#", $url, $matches);
                 $data = file_get_contents("http://vimeo.com/api/v2/video/$matches[0].json");
@@ -218,8 +218,8 @@ function get_task_completed_count(ClipitTask $task){
             break;
     }
     return array(
-      'text' => $text,
-      'count' => round($count)
+        'text' => $text,
+        'count' => round($count)
     );
 }
 /**
@@ -242,12 +242,17 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
         'color' => 'yellow',
         'status' => false
     );
-
+    if(time() < $task->start && $task->task_type != ClipitTask::TYPE_OTHER){
+        return $status;
+    }
     switch($task->task_type){
-        case "other":
-            return false;
-        break;
-        case "video_upload":
+        case ClipitTask::TYPE_OTHER:
+            $status = array(
+                'status' => false
+            );
+            return $status;
+            break;
+        case ClipitTask::TYPE_VIDEO_UPLOAD:
             foreach($task->video_array as $video_id){
                 $group_video = ClipitVideo::get_group($video_id);
                 if($group_id == $group_video){
@@ -261,7 +266,7 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
                 }
             }
             break;
-        case "storyboard_upload":
+        case ClipitTask::TYPE_STORYBOARD_UPLOAD:
             foreach($task->storyboard_array as $storyboard_id){
                 $group_sb = ClipitStoryboard::get_group($storyboard_id);
                 if($group_id == $group_sb){
@@ -275,7 +280,7 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
                 }
             }
             break;
-        case "storyboard_feedback":
+        case ClipitTask::TYPE_STORYBOARD_FEEDBACK:
 
             $entities = ClipitTask::get_storyboards($task->parent_task);
             $evaluation_list = get_filter_evaluations($entities, $task->activity, $user_id);
@@ -304,7 +309,7 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
                     'status' => ClipitTask::get_completed_status($task->id, $user_id)
                 ), $custom);
             break;
-        case "video_feedback":
+        case ClipitTask::TYPE_VIDEO_FEEDBACK:
             $entities = ClipitTask::get_videos($task->parent_task);
             $evaluation_list = get_filter_evaluations($entities, $task->activity, $user_id);
             $total = count($evaluation_list["evaluated"]) + count($evaluation_list["no_evaluated"]);
@@ -367,17 +372,19 @@ function get_group_progress($group_id){
     $group_users = ClipitGroup::get_users($group_id);
     foreach($activity->task_array as $task_id){
         $task = array_pop(ClipitTask::get_by_id(array($task_id)));
-        if(in_array($task->task_type, $individual_tasks)){
-            foreach($group_users as $user_id){
-                if(ClipitTask::get_completed_status($task_id, $user_id)){
+        if(time() > $task->start) {
+            if (in_array($task->task_type, $individual_tasks)) {
+                foreach ($group_users as $user_id) {
+                    if (ClipitTask::get_completed_status($task_id, $user_id)) {
+                        $completed[] = true;
+                    }
+                    $total++;
+                }
+            } else {
+                $total++;
+                if (ClipitTask::get_completed_status($task_id, $group_id)) {
                     $completed[] = true;
                 }
-                $total++;
-            }
-        } else {
-            $total++;
-            if(ClipitTask::get_completed_status($task_id, $group_id)){
-                $completed[] = true;
             }
         }
     }

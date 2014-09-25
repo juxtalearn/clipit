@@ -30,6 +30,7 @@ $tasks = ClipitActivity::get_tasks($group->activity);
             ));
             ?>
             <div class="content-block">
+                <!--
                 <?php echo elgg_view('output/url', array(
                     'text' => '<i class="fa fa-info blue"></i>',
                     'href' => "profile/{$user->login}?view_as=teacher&group_id={$group_id}",
@@ -37,7 +38,7 @@ $tasks = ClipitActivity::get_tasks($group->activity);
                     'style' => 'padding-left: 10px;padding-right: 10px;',
                     'class' => "pull-right btn btn-xs btn-primary btn-blue-lighter",
                 ));
-                ?>
+                ?>-->
                 <?php echo elgg_view("messages/compose_icon", array('entity' => $user));?>
                 <?php echo elgg_view('output/url', array(
                     'title' => $user->name,

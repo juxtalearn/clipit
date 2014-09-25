@@ -14,6 +14,7 @@ $english = array(
     // Comment
     'comments' => 'Comments',
     'comment:create' => 'Create comment',
+    'comment:reply:to' => 'Reply to',
 );
 
 add_translation('en', $english);
