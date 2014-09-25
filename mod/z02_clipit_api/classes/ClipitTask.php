@@ -22,9 +22,11 @@ class ClipitTask extends UBItem {
     const SUBTYPE = "ClipitTask";
     // Task types
     const TYPE_QUIZ_TAKE = "quiz_take";
+    const TYPE_RESOURCE_UPLOAD = "resource_upload";
+    const TYPE_RESOURCE_FEEDBACK = "resource_feedback";
     const TYPE_STORYBOARD_UPLOAD = "storyboard_upload";
-    const TYPE_VIDEO_UPLOAD = "video_upload";
     const TYPE_STORYBOARD_FEEDBACK = "storyboard_feedback";
+    const TYPE_VIDEO_UPLOAD = "video_upload";
     const TYPE_VIDEO_FEEDBACK = "video_feedback";
     const TYPE_OTHER = "other";
     // Relationship names
@@ -256,6 +258,31 @@ class ClipitTask extends UBItem {
         switch($task->task_type) {
             case static::TYPE_QUIZ_TAKE:
                 return ClipitQuiz::has_answered_quiz($task->quiz, $entity_id);
+            case static::TYPE_RESOURCE_UPLOAD:
+                foreach($task->resource_array as $resource_id) {
+                    if((int)ClipitResource::get_group($resource_id) === (int)$entity_id) {
+                        return true;
+                    }
+                }
+                return false;
+            case static::TYPE_RESOURCE_FEEDBACK:
+                $user_ratings = ClipitRating::get_by_owner(array($entity_id));
+                $rating_targets = array();
+                foreach($user_ratings[$entity_id] as $user_rating) {
+                    $rating_targets[] = (int)$user_rating->target;
+                }
+                $parent_task = new static($task->parent_task);
+                foreach($parent_task->resource_array as $resource_id) {
+                    if(array_search((int)$resource_id, $rating_targets) === false) {
+                        $resource_group = (int)ClipitStoryboard::get_group((int)$resource_id);
+                        $user_group = (int)ClipitGroup::get_from_user_activity($entity_id, $task->activity);
+                        if($resource_group !== $user_group) {
+                            // at least one of the targets was not rated
+                            return false;
+                        } // else the user is part of the group who published the storyboard, so no feedback required
+                    }
+                }
+                return true;
             case static::TYPE_STORYBOARD_UPLOAD:
                 foreach($task->storyboard_array as $storyboard_id) {
                     if((int)ClipitStoryboard::get_group($storyboard_id) === (int)$entity_id) {
@@ -270,7 +297,6 @@ class ClipitTask extends UBItem {
                     $rating_targets[] = (int)$user_rating->target;
                 }
                 $parent_task = new static($task->parent_task);
-                $parent_task->storyboard_array;
                 foreach($parent_task->storyboard_array as $storyboard_id) {
                     if(array_search((int)$storyboard_id, $rating_targets) === false) {
                         $storyboard_group = (int)ClipitStoryboard::get_group((int)$storyboard_id);
