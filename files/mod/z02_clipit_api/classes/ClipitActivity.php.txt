@@ -30,6 +30,7 @@ class ClipitActivity extends UBItem {
     const REL_ACTIVITY_STUDENT = "ClipitActivity-student";
     const REL_ACTIVITY_GROUP = "ClipitActivity-ClipitGroup";
     const REL_ACTIVITY_TASK = "ClipitActivity-ClipitTask";
+    const REL_ACTIVITY_RESOURCE = "ClipitActivity-ClipitResource";
     const REL_ACTIVITY_STORYBOARD = "ClipitActivity-ClipitStoryboard";
     const REL_ACTIVITY_VIDEO = "ClipitActivity-ClipitVideo";
     const REL_ACTIVITY_FILE = "ClipitActivity-ClipitFile";
@@ -53,6 +54,8 @@ class ClipitActivity extends UBItem {
     public $student_array = array();
     public $group_array = array();
     public $task_array = array();
+    // Teacher Resources
+    public $resource_array = array();
     public $storyboard_array = array();
     public $video_array = array();
     public $file_array = array();
@@ -75,6 +78,7 @@ class ClipitActivity extends UBItem {
         $this->student_array = static::get_students($this->id);
         $this->group_array = static::get_groups($this->id);
         $this->task_array = static::get_tasks($this->id);
+        $this->resource_array = static::get_resources($this->id);
         $this->storyboard_array = static::get_storyboards($this->id);
         $this->video_array = static::get_videos($this->id);
         $this->file_array = static::get_files($this->id);
@@ -130,6 +134,7 @@ class ClipitActivity extends UBItem {
         static::set_students($this->id, $this->student_array);
         static::set_groups($this->id, $this->group_array);
         static::set_tasks($this->id, $this->task_array);
+        static::set_resources($this->id, $this->resource_array);
         static::set_storyboards($this->id, $this->storyboard_array);
         static::set_videos($this->id, $this->video_array);
         static::set_files($this->id, $this->file_array);
@@ -268,6 +273,23 @@ class ClipitActivity extends UBItem {
 
     static function get_tasks($id) {
         return UBCollection::get_items($id, static::REL_ACTIVITY_TASK);
+    }
+
+    // RESOURCES
+    static function add_resources($id, $resource_array) {
+        return UBCollection::add_items($id, $resource_array, static::REL_ACTIVITY_RESOURCE);
+    }
+
+    static function set_resources($id, $resource_array) {
+        return UBCollection::set_items($id, $resource_array, static::REL_ACTIVITY_RESOURCE);
+    }
+
+    static function remove_resources($id, $resource_array) {
+        return UBCollection::remove_items($id, $resource_array, static::REL_ACTIVITY_RESOURCE);
+    }
+
+    static function get_resources($id) {
+        return UBCollection::get_items($id, static::REL_ACTIVITY_RESOURCE);
     }
 
     // RESOURCE STORYBOARDS

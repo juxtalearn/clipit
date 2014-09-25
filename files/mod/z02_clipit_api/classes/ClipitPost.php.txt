@@ -24,9 +24,11 @@ class ClipitPost extends UBMessage {
     const SUBTYPE = "ClipitPost";
     const REL_MESSAGE_DESTINATION = "ClipitPost-destination";
     const REL_MESSAGE_FILE = "ClipitPost-ClipitFile";
+    const REL_POST_RESOURCE = "ClipitPost-ClipitResource";
     const REL_POST_STORYBOARD = "ClipitPost-ClipitStoryboard";
     const REL_POST_VIDEO = "ClipitPost-ClipitVideo";
     public $topic_id = 0;
+    public $resource_array = array();
     public $storyboard_array = array();
     public $video_array = array();
 
@@ -38,6 +40,7 @@ class ClipitPost extends UBMessage {
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
         $this->topic_id = (int)$elgg_entity->get("topic_id");
+        $this->resource_array = (array)static::get_resources((int)$this->id);
         $this->storyboard_array = (array)static::get_storyboards((int)$this->id);
         $this->video_array = (array)static::get_videos((int)$this->id);
     }
@@ -59,9 +62,27 @@ class ClipitPost extends UBMessage {
      */
     protected function save($double_save=false) {
         parent::save($double_save);
+        static::set_resources($this->id, $this->resource_array);
         static::set_storyboards($this->id, $this->storyboard_array);
         static::set_videos($this->id, $this->video_array);
         return $this->id;
+    }
+
+    // RESOURCES
+    static function add_resources($id, $resource_array) {
+        return UBCollection::add_items($id, $resource_array, static::REL_POST_RESOURCE);
+    }
+
+    static function set_resources($id, $resource_array) {
+        return UBCollection::set_items($id, $resource_array, static::REL_POST_RESOURCE);
+    }
+
+    static function remove_resources($id, $resource_array) {
+        return UBCollection::remove_items($id, $resource_array, static::REL_POST_RESOURCE);
+    }
+
+    static function get_resources($id) {
+        return UBCollection::get_items($id, static::REL_POST_RESOURCE);
     }
 
     // STORYBOARDS
