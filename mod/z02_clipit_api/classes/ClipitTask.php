@@ -28,6 +28,7 @@ class ClipitTask extends UBItem {
     const TYPE_VIDEO_FEEDBACK = "video_feedback";
     const TYPE_OTHER = "other";
     // Relationship names
+    const REL_TASK_RESOURCE = "ClipitTask-ClipitResource";
     const REL_TASK_STORYBOARD = "ClipitTask-ClipitStoryboard";
     const REL_TASK_VIDEO = "ClipitTask-ClipitVideo";
     const REL_TASK_FILE = "ClipitTask-ClipitFile";
@@ -45,6 +46,7 @@ class ClipitTask extends UBItem {
     public $task_count = 0;
     public $activity = 0;
     public $quiz = 0; // in case of TYPE_QUIZ_TAKE
+    public $resource_array = array();
     public $storyboard_array = array();
     public $video_array = array();
     public $file_array = array();
@@ -71,6 +73,7 @@ class ClipitTask extends UBItem {
         }
         $this->activity = static::get_activity((int)$this->id);
         $this->quiz = (int)$elgg_entity->get("quiz");
+        $this->resource_array = static::get_resources((int)$this->id);
         $this->storyboard_array = static::get_storyboards((int)$this->id);
         $this->video_array = static::get_videos($this->id);
         $this->file_array = static::get_files($this->id);
@@ -99,6 +102,7 @@ class ClipitTask extends UBItem {
     protected function save($double_save=false) {
         parent::save($double_save);
         static::set_activity($this->id, $this->activity);
+        static::set_resources($this->id, $this->resource_array);
         static::set_storyboards($this->id, $this->storyboard_array);
         static::set_videos($this->id, $this->video_array);
         static::set_files($this->id, $this->file_array);
@@ -148,6 +152,23 @@ class ClipitTask extends UBItem {
      */
     static function set_activity($id, $activity_id) {
         return UBCollection::add_items($activity_id, array($id), ClipitActivity::REL_ACTIVITY_TASK, true);
+    }
+
+    // RESOURCES
+    static function add_resources($id, $resource_array) {
+        return UBCollection::add_items($id, $resource_array, static::REL_TASK_RESOURCE);
+    }
+
+    static function set_resources($id, $resource_array) {
+        return UBCollection::set_items($id, $resource_array, static::REL_TASK_RESOURCE);
+    }
+
+    static function remove_resources($id, $resource_array) {
+        return UBCollection::remove_items($id, $resource_array, static::REL_TASK_RESOURCE);
+    }
+
+    static function get_resources($id) {
+        return UBCollection::get_items($id, static::REL_TASK_RESOURCE);
     }
 
     // STORYBOARDS
