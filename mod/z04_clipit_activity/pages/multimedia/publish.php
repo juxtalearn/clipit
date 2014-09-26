@@ -22,6 +22,12 @@ switch($object['subtype']){
         $entity = array_pop(ClipitVideo::get_by_id(array($entity_id)));
         $entity_preview = '<img src="'.$entity->preview.'" class="img-responsive">';
         break;
+    // Clipit Video
+    case 'ClipitResource':
+        $subtitle = elgg_echo("resource");
+        elgg_push_breadcrumb(elgg_echo("resources"), $href."?filter=resources");
+        $entity = array_pop(ClipitResource::get_by_id(array($entity_id)));
+        break;
     // Clipit StoryBoard
     case 'ClipitStoryboard':
         $subtitle = elgg_echo("storyboard");

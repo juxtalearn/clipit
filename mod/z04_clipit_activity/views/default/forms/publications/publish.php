@@ -71,8 +71,9 @@ if($task_id = get_input('task_id')):
     <div><?php echo $task->description;?></div>
 </div>
 <?php endif; ?>
+
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-<?php echo ($vars['entity_preview'] ? 8 : 12);?>">
         <?php if($entity->url):?>
         <div class="form-group">
             <label for="title"><?php echo elgg_echo("url");?></label>

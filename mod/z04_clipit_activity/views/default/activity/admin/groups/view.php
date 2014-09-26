@@ -17,9 +17,6 @@ elgg_load_js("jquery:multiselect");
 elgg_load_js("jquery:quicksearch");
 ?>
 <style>
-    #users_group_test{
-        position: relative;
-    }
     .bootstrap-duallistbox-container select > option{
         border-bottom: 1px #eee solid;
         padding: 3px 10px;
@@ -27,17 +24,8 @@ elgg_load_js("jquery:quicksearch");
     .bootstrap-duallistbox-container select > option:hover{
         background: #000;
     }
-    #users_group_test option::after {
-        font-family: FontAwesome;
-        color: #bae6f6;
-        position: absolute;
-        content: "\f061";
-        right: 5px;
-    }
+
     <!-- -->
-    .ms-container{
-        overflow: hidden;
-    }
     .items-padding{
         height: 220px;
         overflow-y: auto;
@@ -72,6 +60,7 @@ elgg_load_js("jquery:quicksearch");
         content: "\f047";
         font-family: FontAwesome;
         color: #bae6f6;
+        top: 8px;
     }
     .ui-sortable-placeholder{
         position: relative;

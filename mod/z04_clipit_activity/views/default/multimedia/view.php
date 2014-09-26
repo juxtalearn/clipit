@@ -44,9 +44,11 @@ $owner_user = array_pop(ClipitUser::get_by_id(array($entity->owner_id)));
             <div class="multimedia-view">
                 <?php echo $vars['body'];?>
             </div>
+            <?php if($vars['description'] !== false):?>
             <div class="description">
                 <?php echo $entity->description; ?>
             </div>
+            <?php endif;?>
         </div>
     </div>
 </div>

@@ -21,6 +21,10 @@ switch($selected_tab){
         // Get last task [type: video_upload]
         $content = publications_get_page_content_list('video_upload', $tasks, $href);
         break;
+    case 'resources':
+        // Get last task [type: storyboard_upload]
+        $content = publications_get_page_content_list('resource_upload', $tasks, $href);
+        break;
     case 'storyboards':
         // Get last task [type: storyboard_upload]
         $content = publications_get_page_content_list('storyboard_upload', $tasks, $href);
@@ -58,6 +62,23 @@ if($page[2] == 'view' && $page[3]){
                 'canEvaluate' => $canEvaluate,
                 'activity' => $activity,
                 'group' => $owner_group
+            ));
+            break;
+        // Clipit Video publication
+        case 'ClipitResource':
+            $task_id = ClipitResource::get_task($entity_id);
+            $resources = ClipitTask::get_resources($task_id);
+            if(!$entity || !in_array($entity_id, $resources)){
+                return false;
+            }
+            $body = elgg_view("multimedia/resource/body", array('entity'  => $entity));
+            $content = elgg_view('publications/view', array(
+                'entity' => $entity,
+                'body' => $body,
+                'canEvaluate' => $canEvaluate,
+                'activity' => $activity,
+                'group' => $owner_group,
+                'description' => false
             ));
             break;
         // Clipit Storyboard publication

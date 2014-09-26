@@ -84,6 +84,13 @@ if(count($entity)==0 || trim($title) == "" || trim($description) == ""){
                     $performance_items[] = $rubric->id;
                 }
                 break;
+            case "ClipitResource":
+                ClipitTask::add_resources($task_id, array($new_entity_id));
+                $rubrics = array_merge($rubrics_audiovisual, $rubrics_concept);
+                foreach($rubrics as $rubric){
+                    $performance_items[] = $rubric->id;
+                }
+                break;
             case "ClipitStoryboard":
                 ClipitTask::add_storyboards($task_id, array($new_entity_id));
                 $rubrics = array_merge($rubrics_concept);

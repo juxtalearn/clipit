@@ -49,7 +49,9 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
                                 (<?php echo elgg_view('output/friendlytime', array('time' => $entity->time_created));?>)
                             </small>
                         </div>
-                        <?php echo $entity->description; ?>
+                        <?php if($vars['description'] !== false):?>
+                            <?php echo $entity->description; ?>
+                        <?php endif;?>
                     </div>
                     <h4><strong><?php echo elgg_echo("tags"); ?></strong></h4>
                     <div class="tags">

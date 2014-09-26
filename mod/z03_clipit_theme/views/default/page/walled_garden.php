@@ -13,7 +13,7 @@ $vars_plugin['img_path'] = $CONFIG->wwwroot."mod/z03_clipit_theme/graphics/";
 $vars_plugin['bg_img'] = $vars_plugin['img_path']."icons/".$vars_plugin['bg_img'];
 $vars_plugin['logo_img'] = $vars_plugin['img_path']."icons/".$vars_plugin['logo_img'];
 $vars = array_merge($vars_plugin, $vars);
-
+forward("login");
 // Unregister default walled_garden js & css
 elgg_unregister_css('elgg.walled_garden');
 elgg_unregister_js('elgg.walled_garden');

@@ -39,6 +39,19 @@ switch($object['subtype']){
             'body' => elgg_view("multimedia/video/body", array('entity'  => $entity))
         ));
         break;
+    // Clipit Resource
+    case 'ClipitResource':
+        elgg_push_breadcrumb(elgg_echo("resources"), $href."?filter=resources");
+        $title = elgg_echo("resource");
+        $entity = array_pop(ClipitResource::get_by_id(array($entity_id)));
+        $content = elgg_view('multimedia/view', array(
+            'entity' => $entity,
+            'type' => 'video',
+            'preview' => false,
+            'body' => elgg_view("multimedia/resource/body", array('entity'  => $entity)),
+            'description' => false
+        ));
+        break;
     // Clipit Storyboard
     case 'ClipitStoryboard':
         elgg_push_breadcrumb(elgg_echo("storyboards"), $href."?filter=storyboards");

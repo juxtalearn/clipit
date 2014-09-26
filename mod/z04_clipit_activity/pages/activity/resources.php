@@ -40,6 +40,18 @@ switch ($selected_tab) {
         );
         $content = videos_get_page_content_list($params);
         break;
+    case 'resources':
+        $resources = ClipitActivity::get_resources($activity->id);
+        $params = array(
+            'entity' => $activity,
+            'add_resource' => true,
+            'entities' => $resources,
+            'actions'   => true,
+            'href' => $href,
+            'create' => $canCreate
+        );
+        $content = resources_get_page_content_list($params);
+        break;
     case 'storyboards':
         $sbs = ClipitActivity::get_storyboards($activity->id);
         $params = array(
@@ -55,7 +67,7 @@ switch ($selected_tab) {
         return false;
         break;
 }
-$filter = elgg_view('multimedia/filter', array('selected' => $selected_tab, 'entity' => $activity, 'href' => $href));
+$filter = elgg_view('multimedia/filter', array('tab_videos' => true, 'selected' => $selected_tab, 'entity' => $activity, 'href' => $href));
 
 if($page[2] == 'download' && $page[3]){
     $file_dir = elgg_get_plugins_path() . 'z04_clipit_activity/pages/file';

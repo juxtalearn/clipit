@@ -36,7 +36,9 @@ foreach($groups as $group):
                         'class' => 'image-block avatar-tiny'
                     ));
                     ?>
-                    <?php echo $group_user->name;?>
+                    <span class="text-truncate" title="<?php echo $group_user->name;?>">
+                        <?php echo $group_user->name;?>
+                    </span>
                 </li>
             <?php endforeach;?>
             <input type="hidden" class="input-group" name="group[<?php echo $id;?>][id]" value="<?php echo $group->id;?>">

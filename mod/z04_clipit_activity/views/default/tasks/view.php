@@ -32,7 +32,7 @@ $super_title = elgg_extract('super_title', $vars);
         </span>
     </small>
     <div class="description">
-        <?php echo $task->description;?>
+        <?php echo nl2br($task->description);?>
     </div>
 </div>
 
