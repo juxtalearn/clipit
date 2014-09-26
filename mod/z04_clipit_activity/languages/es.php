@@ -193,7 +193,7 @@ $spanish = array(
     'publications:evaluate' => 'Evaluar',
     'publications:question:tricky_topic' => '¿Te ha ayudado a entender el Tema %s?',
     'publications:question:sb' => '¿Por qué este concepto está/no está correctamente explicado?',
-    'publications:question:if_covered' => 'Comprueba si cada concepto se ha explicado, y comenta por qué:',
+    'publications:question:if_covered' => '¿Se han explicado los siguientes conceptos correctamente? (explica por qué)',
     'publications:view_scope' => 'Ver en',
     'input:no' => 'No',
     'input:yes' => 'Si',
@@ -289,12 +289,15 @@ $spanish = array(
     'resource:title' => 'Título',
     'resource:description' => 'Enlaces y descripción',
     'resource:added' => 'Enlaces añadidos',
+    'resource:deleted' => 'Enlaces borrados',
     'resources:none' => 'No hay enlaces',
     'task:resource_upload' => 'Publicar enlaces',
     'task:resource_feedback' => 'Feedback sobre enlaces',
     'task:resources:none' => 'Añade un enlace a %s para poder publicar',
     'task:other_resources' => 'Enlaces de otros grupos',
     'task:my_resource' => 'Mi enlace',
+    'resource:event:added' => 'Ha añadido un enlace al grupo',
+    'resource:added_by' => 'Añadido por',
 );
 
 add_translation('es', $spanish);

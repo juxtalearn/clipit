@@ -10,7 +10,7 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$selected_tab = get_input('filter', 'videos');
+$selected_tab = get_input('filter', 'resources');
 $title = elgg_echo("activity:publications");
 elgg_push_breadcrumb($title);
 $href = "clipit_activity/{$activity->id}/publications";
@@ -64,7 +64,7 @@ if($page[2] == 'view' && $page[3]){
                 'group' => $owner_group
             ));
             break;
-        // Clipit Video publication
+        // Clipit Resource publication
         case 'ClipitResource':
             $task_id = ClipitResource::get_task($entity_id);
             $resources = ClipitTask::get_resources($task_id);

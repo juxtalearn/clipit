@@ -46,7 +46,7 @@ switch($object['subtype']){
         $entity = array_pop(ClipitResource::get_by_id(array($entity_id)));
         $content = elgg_view('multimedia/view', array(
             'entity' => $entity,
-            'type' => 'video',
+            'type' => 'resource',
             'preview' => false,
             'body' => elgg_view("multimedia/resource/body", array('entity'  => $entity)),
             'description' => false

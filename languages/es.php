@@ -1002,7 +1002,7 @@ Una vez autenticado, le recomendamos que modifique su contraseña.
 	'friendlytime:hours:singular' => "hace una hora",
 	'friendlytime:days' => "hace %s días",
 	'friendlytime:days:singular' => "ayer",
- 	'friendlytime:date_format' => 'j F Y @ g:ia',
+ 	'friendlytime:date_format' => 'j F Y @ H:i',
  
 	'date:month:01' => 'Enero %s',
 	'date:month:02' => 'Febrero %s',

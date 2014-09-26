@@ -18,7 +18,7 @@ $tabs = array(
 //        'href' => "{$href}?filter=videos",
 //        'priority' => 200,
 //    ),
-    'videos' => array(
+    'resources' => array(
         'text' => elgg_echo('resources'),
         'href' => "{$href}?filter=resources",
         'priority' => 200,

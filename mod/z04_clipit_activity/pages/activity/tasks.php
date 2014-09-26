@@ -143,16 +143,16 @@ if($page[2] == 'view' && $page[3]){
                     $group_id = get_input('group_id');
                     $object = ClipitSite::lookup($group_id);
                     $status = get_task_status($task, $group_id);
-                    $video = array($status['result']);
+                    $resource = array($status['result']);
                     $super_title = $object['name'];
                     if($status['status']){
-                        $body .= elgg_view('multimedia/video/list', array(
-                            'entities'    => $video,
+                        $body .= elgg_view('multimedia/resource/list', array(
+                            'entities'    => $resource,
                             'href'      => $href_publications,
                             'task_id'   => $task->id,
                         ));
                     } else {
-                        $body = elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
+                        $body = elgg_view('output/empty', array('value' => elgg_echo('resources:none')));
                     }
                 }
 
@@ -349,6 +349,57 @@ if($page[2] == 'view' && $page[3]){
                         ));
                     } else {
                         $body = elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
+                    }
+                }
+                break;
+            case ClipitTask::TYPE_RESOURCE_FEEDBACK:
+                $href = "clipit_activity/{$activity->id}/publications";
+                $body = "";
+                $entities = ClipitTask::get_resources($task->parent_task);
+                $evaluation_list = get_filter_evaluations($entities, $activity->id);
+                $list_no_evaluated = elgg_view('multimedia/resource/list', array(
+                    'videos'    => $evaluation_list["no_evaluated"],
+                    'href'      => $href,
+                    'rating'    => true,
+                    'total_comments' => true,
+                ));
+                $list_evaluated = elgg_view('multimedia/resource/list', array(
+                    'videos'    => $evaluation_list["evaluated"],
+                    'href'      => $href,
+                    'rating'    => true,
+                    'actions'   => false,
+                    'total_comments' => true,
+                ));
+
+                // No Evaluated section
+                if(count($evaluation_list["no_evaluated"]) > 0){
+                    $title_block_no_evaluated = elgg_view("page/components/title_block", array(
+                        'title' => elgg_echo("publications:no_evaluated")
+                    ));
+                    $body .= $title_block_no_evaluated.$list_no_evaluated;
+                }
+                // Evaluated section
+                if(count($evaluation_list["evaluated"]) > 0){
+                    $title_block_evaluated = elgg_view("page/components/title_block", array(
+                        'title' => elgg_echo("publications:evaluated")
+                    ));
+                    $body .= $title_block_evaluated.$list_evaluated;
+                }
+                if (!$entities) {
+                    $body = elgg_view('output/empty', array('value' => elgg_echo('resources:none')));
+                }
+                // Teacher view
+                if($user->role == ClipitUser::ROLE_TEACHER){
+                    $task_parent = array_pop(ClipitTask::get_by_id(array($task->parent_task)));
+                    $resources = ClipitResource::get_by_id($task_parent->video_array);
+                    if($resources){
+                        $body = elgg_view('tasks/admin/task_feedback', array(
+                            'entities'    => $resources,
+                            'activity'      => $activity,
+                            'task'      => $task,
+                        ));
+                    } else {
+                        $body = elgg_view('output/empty', array('value' => elgg_echo('resources:none')));
                     }
                 }
                 break;
