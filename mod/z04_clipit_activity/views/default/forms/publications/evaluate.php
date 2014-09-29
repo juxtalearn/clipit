@@ -35,8 +35,11 @@ $tricky_topic_view = elgg_view("tricky_topic/preview", array('activity' => $acti
             }
         });
         $(".enable-comment label").click(function(){
-            var text = $(this).closest(".checking").find("textarea").show();
-            text.click();
+            var text = $(this).closest(".checking").find("textarea");
+            if($(this).closest(".checking").find("iframe").length == 0){
+                text.show().click();
+            }
+
         });
     });
 </script>
