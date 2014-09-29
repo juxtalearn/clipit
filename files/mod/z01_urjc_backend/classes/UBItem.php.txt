@@ -493,9 +493,9 @@ class UBItem {
             }
         }
         if(empty($limit)){
-            return array_splice($search_result, $offset, count($search_result));
+            return array_splice($search_result, (int)$offset, count($search_result));
         } else {
-            return array_splice($search_result, $offset, $limit);
+            return array_splice($search_result, (int)$offset, (int)$limit);
         }
         //return $search_result;
     }
