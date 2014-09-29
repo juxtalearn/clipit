@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1948676955"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1062588641"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1948676955" class="accordion-body collapse in">
+            <div id="namespace-1062588641" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -2343,7 +2343,7 @@ array.</em></p>
                 <h3 class="public ">get_events()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">get_events(int <span class="argument">$offset</span>, int <span class="argument">$limit</span>) : array</pre>
-                <p><em>Gett all system events filtered by the class TYPE and SUBTYPE.</em></p>
+                <p><em>Get all system events filtered by the class TYPE and SUBTYPE.</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -2392,7 +2392,7 @@ array.</em></p>
             <article class="method">
                 <h3 class="public ">get_from_search()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">get_from_search(string <span class="argument">$search_string</span>, bool <span class="argument">$name_only</span>, bool <span class="argument">$strict</span>) : static[]</pre>
+                <pre class="signature" style="margin-right: 54px;">get_from_search(string <span class="argument">$search_string</span>, bool <span class="argument">$name_only</span>, bool <span class="argument">$strict</span>, int <span class="argument">$offset</span>, int <span class="argument">$limit</span>) : static[]</pre>
                 <p><em>Get all objects which match a $search_string</em></p>
                 
 
@@ -2412,6 +2412,16 @@ array.</em></p>
                                 <td>bool</td>
                                 <td>$strict </td>
                                 <td><p>Whether to match the $search_string exactly, including case, or only partially.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>int</td>
+                                <td>$offset </td>
+                                <td><p>The offset of the returned array</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>int</td>
+                                <td>$limit </td>
+                                <td><p>The limit of the returned array</p></td>
                             </tr>
                                             </table>
                 
@@ -3292,7 +3302,7 @@ array.</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on September 29th, 2014 at 15:01.
+                    on September 29th, 2014 at 16:01.
                 </section>
             </section>
         </section>
