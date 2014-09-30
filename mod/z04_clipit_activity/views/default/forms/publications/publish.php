@@ -126,19 +126,19 @@ if($task_id = get_input('task_id')):
         <?php echo $vars['entity_preview'];?>
         <!-- Entity preview end -->
         <br>
-<!--        <label>--><?php //echo elgg_echo("performance_items");?><!--</label>-->
-<!--        <div>-->
-<!--            <select name="performance_items[]" data-placeholder="--><?php //echo elgg_echo('click_add');?><!--" style="width:100%;" multiple class="chosen-select-items" tabindex="8">-->
-<!--                <option value=""></option>-->
-<!--                --><?php //foreach(ClipitPerformanceItem::get_by_category() as $category => $items): ?>
-<!--                <optgroup label="--><?php //echo $category; ?><!--">-->
-<!--                    --><?php //foreach($items as $item): ?>
-<!--                        <option --><?php //echo in_array($item->id, $performance_items) ? "selected" : "";?><!-- value="--><?php //echo $item->id; ?><!--">--><?php //echo $item->name; ?><!--</option>-->
-<!--                    --><?php //endforeach; ?>
-<!--                </optgroup>-->
-<!--                --><?php //endforeach; ?>
-<!--            </select>-->
-<!--        </div>-->
+        <label><?php echo elgg_echo("performance_items");?></label>
+        <div>
+            <select name="performance_items[]" data-placeholder="<?php echo elgg_echo('click_add');?>" style="width:100%;" multiple class="chosen-select-items" tabindex="8">
+                <option value=""></option>
+                <?php foreach(ClipitPerformanceItem::get_by_category() as $category => $items): ?>
+                <optgroup label="<?php echo $category; ?>">
+                    <?php foreach($items as $item): ?>
+                        <option <?php echo in_array($item->id, $performance_items) ? "selected" : "";?> value="<?php echo $item->id; ?>"><?php echo $item->name; ?></option>
+                    <?php endforeach; ?>
+                </optgroup>
+                <?php endforeach; ?>
+            </select>
+        </div>
     </div>
 </div>
 <p class="text-right">
