@@ -198,3 +198,18 @@ function custom_forward_referer($delimiter, $location = null){
     }
 
 }
+
+function clipit_get_offset(){
+    return get_input("offset", 0);
+}
+function clipit_get_limit($limit = 15){
+    return get_input("limit", $limit);
+}
+function clipit_get_pagination($params){
+    $defaults = array(
+        'offset' => clipit_get_offset(),
+        'limit' => clipit_get_limit()
+    );
+    $params = array_merge($params, $defaults);
+    return elgg_view("navigation/pagination", $params);
+}
