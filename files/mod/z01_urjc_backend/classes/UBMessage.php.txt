@@ -75,14 +75,20 @@ class UBMessage extends UBItem {
         foreach($destination_array as $destination_id) {
             $item_array = UBCollection::get_items($destination_id, static::REL_MESSAGE_DESTINATION, true);
             $temp_array = array();
-            foreach($item_array as $item_id) {
+            foreach ($item_array as $item_id) {
                 $temp_array[$item_id] = new static((int)$item_id);
             }
-            if(empty($temp_array)) {
+            if (empty($temp_array)) {
                 $message_array[$destination_id] = null;
             } else {
                 $message_array[$destination_id] = $temp_array;
                 usort($message_array[$destination_id], 'UBItem::sort_by_date');
+                //var_dump($message_array[$destination_id]);
+                if(!empty($limit)) {
+                    $message_array[$destination_id] = array_splice($message_array[$destination_id], $offset, $limit);
+                } else{
+                    $message_array[$destination_id] = array_splice($message_array[$destination_id], $offset);
+                }
             }
         }
         return $message_array;
