@@ -89,7 +89,7 @@ class UBItem {
 
     /**
      * Saves this instance to the system.
-     * @param double_save if double_save is true, this object is saved twice to ensure that all properties are updated properly. E.g. the time created property can only beset on ElggObjects during an update. Defaults to false!
+     * @param bool $double_save if double_save is true, this object is saved twice to ensure that all properties are updated properly. E.g. the time created property can only beset on ElggObjects during an update. Defaults to false!
      * @return bool|int Returns id of saved instance, or false if error.
      */
     protected function save($double_save=false) {
@@ -334,21 +334,40 @@ class UBItem {
     /**
      * Get all Object instances of this TYPE and SUBTYPE from the system, optionally only a specified property.
      *
-     * @param int  $limit           Number of results to show, default= 0 [no limit] (optional)
-     * @param bool $id_only         Properties to return (with key = ID). Default = [all] (object instance)
-     * @param bool $order_by_name   Default = false (order by date_inv)
+     * @param int    $limit           Number of results to show, default= 0 [no limit] (optional)
+     * @param int    $offset          Offset from where to show results, default=0 [from the begining] (optional)
+     * @param string $order_by        Default = "" (don't order)
+     * @param bool   $ascending       Default = true (ascending order)
+     * @param bool   $id_only         Properties to return (with key = ID). Default = [all] (object instance)
      *
      * @return static[]|int[] Returns an array of Objects, or Object IDs if id_only = true
      */
-    static function get_all($limit = 0, $id_only = false, $order_by_name = false) {
+    static function get_all($limit = 0, $offset = 0, $order_by = "", $ascending = true, $id_only = false) {
         $return_array = array();
-        $elgg_entity_array = elgg_get_entities(
-            array('type' => static::TYPE, 'subtype' => static::SUBTYPE, 'limit' => $limit)
-        );
-        if($order_by_name){
-            usort($elgg_entity_array, 'static::sort_by_name');
+        if(!empty($order_by)){
+            // directly retrieve entities with name = $search_string
+            $elgg_entity_array = elgg_get_entities_from_metadata(
+                array(
+                    'type' => static::TYPE,
+                    'subtype' => static::SUBTYPE,
+                    'limit' => $limit,
+                    'offset' => $offset,
+                    'order_by_metadata' => array(
+                        "name" => $order_by,
+                        "direction" => ($ascending === true ? "ASC" : "DESC")
+                    )
+                )
+            );
         } else {
-            usort($elgg_entity_array, 'static::sort_by_date_inv');
+            $elgg_entity_array = elgg_get_entities(
+                array(
+                    'type' => static::TYPE,
+                    'subtype' => static::SUBTYPE,
+                    'limit' => $limit,
+                    'offset' => $offset,
+                    'sort_by' => "e.time_created"
+                )
+            );
         }
         if(!empty($elgg_entity_array)) {
             foreach($elgg_entity_array as $elgg_entity) {
@@ -421,7 +440,7 @@ class UBItem {
     }
 
     /**
-     * Gett all system events filtered by the class TYPE and SUBTYPE.
+     * Get all system events filtered by the class TYPE and SUBTYPE.
      *
      * @param int $offset Skip the first $offset events
      * @param int $limit  Return at most $limit events
@@ -451,22 +470,27 @@ class UBItem {
      * @param string $search_string String for searching matching objects
      * @param bool   $name_only     Whether to look only in the name property, default false.
      * @param bool   $strict        Whether to match the $search_string exactly, including case, or only partially.
+     * @param int    $offset        The offset of the returned array
+     * @param int    $limit         The limit of the returned array
      *
      * @return static[] Returns an array of matched objects
      */
-    static function get_from_search($search_string, $name_only = false, $strict = false) {
+    static function get_from_search($search_string, $name_only = false, $strict = false, $offset = 0, $limit = 0) {
         $search_result = array();
         if(!$strict) {
+            // get the full array of entities
             $elgg_object_array = elgg_get_entities(
                 array('type' => static::TYPE, 'subtype' => static::SUBTYPE, 'limit' => 0)
             );
             $search_result = array();
             foreach($elgg_object_array as $elgg_object) {
                 $search_string = strtolower($search_string);
+                // search for string in name
                 if(strpos(strtolower($elgg_object->name), $search_string) !== false) {
                     $search_result[(int)$elgg_object->guid] = new static((int)$elgg_object->guid, $elgg_object);
                     continue;
                 }
+                // if not in name, search in description
                 if($name_only === false) {
                     if(strpos(strtolower($elgg_object->description), $search_string) !== false) {
                         $search_result[(int)$elgg_object->guid] = new static((int)$elgg_object->guid, $elgg_object);
@@ -474,6 +498,7 @@ class UBItem {
                 }
             }
         } else { // $strict == true
+            // directly retrieve entities with name = $search_string
             $elgg_object_array = elgg_get_entities_from_metadata(
                 array(
                     'type' => static::TYPE, 'subtype' => static::SUBTYPE, 'metadata_names' => array("name"),
@@ -486,7 +511,12 @@ class UBItem {
                 }
             }
         }
-        return $search_result;
+        if(empty($limit)){
+            return array_splice($search_result, (int)$offset, count($search_result));
+        } else {
+            return array_splice($search_result, (int)$offset, (int)$limit);
+        }
+        //return $search_result;
     }
 
     /**

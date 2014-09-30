@@ -66,10 +66,14 @@ function expose_common_functions($api_suffix, $class_suffix) {
         $api_suffix . "delete_all", $class_suffix . "delete_all", null, "Delete all instances of this class", 'POST',
         false, true
     );
+    //get_all($limit = 0, $offset = 0, $order_by = "", $ascending = true, $id_only = false) {
     expose_function(
         $api_suffix . "get_all", $class_suffix . "get_all", array(
             "limit" => array("type" => "int", "required" => false),
-            "id_only" => array("type" => "bool", "required" => false)
+            "offset" => array("type" => "int", "required" => false),
+            "order_by" => array("type" => "string", "required" => false),
+            "ascending" => array("type" => "bool", "required" => false),
+            "id_only" => array("type" => "bool", "required" => false),
         ), "Get all instances", 'GET', false, true
     );
     expose_function(
@@ -92,7 +96,9 @@ function expose_common_functions($api_suffix, $class_suffix) {
         $api_suffix . "get_from_search", $class_suffix . "get_from_search", array(
             "search_string" => array("type" => "string", "required" => true),
             "name_only" => array("type" => "bool", "required" => false),
-            "strict" => array("type" => "bool", "required" => false)
+            "strict" => array("type" => "bool", "required" => false),
+            "offset" => array("type" => "int", "required" => false),
+            "limit" => array("type" => "int", "required" => false),
         ), "Get instances from searching inside the object name and description for a string", 'GET', false, true
     );
 }
