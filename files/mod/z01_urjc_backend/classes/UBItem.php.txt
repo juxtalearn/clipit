@@ -334,22 +334,40 @@ class UBItem {
     /**
      * Get all Object instances of this TYPE and SUBTYPE from the system, optionally only a specified property.
      *
-     * @param int  $limit           Number of results to show, default= 0 [no limit] (optional)
-     * @param int  $offset          Offset from where to show results, default=0 [from the begining] (optional)
-     * @param bool $id_only         Properties to return (with key = ID). Default = [all] (object instance)
-     * @param bool $order_by_name   Default = false (order by date_inv)
+     * @param int    $limit           Number of results to show, default= 0 [no limit] (optional)
+     * @param int    $offset          Offset from where to show results, default=0 [from the begining] (optional)
+     * @param string $order_by        Default = "" (don't order)
+     * @param bool   $ascending       Default = true (ascending order)
+     * @param bool   $id_only         Properties to return (with key = ID). Default = [all] (object instance)
      *
      * @return static[]|int[] Returns an array of Objects, or Object IDs if id_only = true
      */
-    static function get_all($limit = 0, $offset = 0, $id_only = false, $order_by_name = false) {
+    static function get_all($limit = 0, $offset = 0, $order_by = "", $ascending = true, $id_only = false) {
         $return_array = array();
-        $elgg_entity_array = elgg_get_entities(
-            array('type' => static::TYPE, 'subtype' => static::SUBTYPE, 'limit' => $limit, 'offset' => $offset)
-        );
-        if($order_by_name){
-            usort($elgg_entity_array, 'static::sort_by_name');
+        if(!empty($order_by)){
+            // directly retrieve entities with name = $search_string
+            $elgg_entity_array = elgg_get_entities_from_metadata(
+                array(
+                    'type' => static::TYPE,
+                    'subtype' => static::SUBTYPE,
+                    'limit' => $limit,
+                    'offset' => $offset,
+                    'order_by_metadata' => array(
+                        "name" => $order_by,
+                        "direction" => ($ascending === true ? "ASC" : "DESC")
+                    )
+                )
+            );
         } else {
-            usort($elgg_entity_array, 'static::sort_by_date_inv');
+            $elgg_entity_array = elgg_get_entities(
+                array(
+                    'type' => static::TYPE,
+                    'subtype' => static::SUBTYPE,
+                    'limit' => $limit,
+                    'offset' => $offset,
+                    'sort_by' => "e.time_created"
+                )
+            );
         }
         if(!empty($elgg_entity_array)) {
             foreach($elgg_entity_array as $elgg_entity) {
