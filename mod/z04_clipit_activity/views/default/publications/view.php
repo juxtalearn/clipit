@@ -13,6 +13,7 @@
 $entity = elgg_extract("entity", $vars);
 $activity = elgg_extract("activity", $vars);
 $group = elgg_extract("group", $vars);
+$comments = elgg_extract("comments", $vars);
 $user_loggedin_id = elgg_get_logged_in_user_guid();
 $user_logged = array_pop(ClipitUser::get_by_id(array($user_loggedin_id)));
 
@@ -162,7 +163,7 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
 <?php endif; ?>
 
 <?php
-if($comments = array_pop(ClipitComment::get_by_destination(array($entity->id)))):
+if($comments):
     $total_comments = array_pop(ClipitComment::count_by_destination(array($entity->id), true));
 ?>
     <a name="comments"></a>
@@ -178,6 +179,7 @@ if($comments = array_pop(ClipitComment::get_by_destination(array($entity->id))))
     }
 endif;
 ?>
+<?php echo clipit_get_pagination(array('count' => $total_comments)); ?>
 <!-- Comment form -->
 <a name="create_reply"></a>
 <h3 class="activity-module-title"><?php echo elgg_echo("comment:create"); ?></h3>

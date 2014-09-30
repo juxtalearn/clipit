@@ -46,7 +46,9 @@ if($page[2] == 'view' && $page[3]){
     if(!$hasRating && ($my_group != $owner_group_id)){
         $canEvaluate = true;
     }
+
     $owner_group = array_pop(ClipitGroup::get_by_id(array($owner_group_id)));
+    $comments = array_pop(ClipitComment::get_by_destination(array($entity->id), clipit_get_offset(), clipit_get_limit()));
     switch($object['subtype']){
         // Clipit Video publication
         case 'ClipitVideo':
@@ -61,7 +63,8 @@ if($page[2] == 'view' && $page[3]){
                 'body' => $body,
                 'canEvaluate' => $canEvaluate,
                 'activity' => $activity,
-                'group' => $owner_group
+                'group' => $owner_group,
+                'comments' => $comments
             ));
             break;
         // Clipit Resource publication
@@ -78,6 +81,7 @@ if($page[2] == 'view' && $page[3]){
                 'canEvaluate' => $canEvaluate,
                 'activity' => $activity,
                 'group' => $owner_group,
+                'comments' => $comments,
                 'description' => false
             ));
             break;
@@ -100,6 +104,7 @@ if($page[2] == 'view' && $page[3]){
                 'body' => $body,
                 'canEvaluate' => $canEvaluate,
                 'activity' => $activity,
+                'comments' => $comments,
                 'group' => $owner_group
             ));
             break;
