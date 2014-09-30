@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-432859019"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-232960707"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-432859019" class="accordion-body collapse in">
+            <div id="namespace-232960707" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -1649,7 +1649,7 @@
             <article class="method">
                 <h3 class="public ">get_all()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">get_all(int <span class="argument">$limit</span>, bool <span class="argument">$id_only</span>, bool <span class="argument">$order_by_name</span>) : static[]|int[]</pre>
+                <pre class="signature" style="margin-right: 54px;">get_all(int <span class="argument">$limit</span>, int <span class="argument">$offset</span>, bool <span class="argument">$id_only</span>, bool <span class="argument">$order_by_name</span>) : static[]|int[]</pre>
                 <p><em>Get all Object instances of this TYPE and SUBTYPE from the system, optionally only a specified property.</em></p>
                 
 
@@ -1659,6 +1659,11 @@
                                 <td>int</td>
                                 <td>$limit </td>
                                 <td><p>Number of results to show, default= 0 [no limit] (optional)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>int</td>
+                                <td>$offset </td>
+                                <td><p>Offset from where to show results, default=0 [from the begining] (optional)</p></td>
                             </tr>
                                                     <tr>
                                 <td>bool</td>
@@ -3430,7 +3435,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on September 30th, 2014 at 08:01.
+                    on September 30th, 2014 at 09:01.
                 </section>
             </section>
         </section>
