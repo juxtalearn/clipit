@@ -275,8 +275,8 @@ class ClipitGroup extends UBItem {
     /**
      * Add Tags for a Group to work on.
      *
-    * @param int   $id          Id of the Group to add Tags to.
-     * @param array $tag_Array  Array of Tag Ids to add to the Group.
+     * @param int   $id          Id of the Group to add Tags to.
+     * @param array $tag_array  Array of Tag Ids to add to the Group.
      *
      * @return bool Returns true if added correctly, or false if error.
      */
