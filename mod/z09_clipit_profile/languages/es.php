@@ -10,7 +10,7 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$english = array(
+$spanish = array(
     'user:username' => 'Nombre',
     'user:log_in' => 'Usuario',
     'user:password' => 'Contraseña',
@@ -29,4 +29,4 @@ $english = array(
     'profile:settings:edit' => 'Tu cofiguración',
 );
 
-add_translation('en', $english);
+add_translation('es', $spanish);

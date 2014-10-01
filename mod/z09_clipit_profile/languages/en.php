@@ -10,26 +10,23 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$spanish = array(
-    'user:username' => 'Nombre',
-    'user:log_in' => 'Usuario',
-    'user:password' => 'Contraseña',
+$english = array(
+    'user:username' => 'Name',
+    'user:log_in' => 'Username',
+    'user:password' => 'Password',
     'user:email' => 'Email',
-    'user:add' => 'Añadir usuario',
-    'user:logout' => 'Cerrar sesión',
-    'profile' => 'Perfil',
+    'user:add' => 'Add user',
+    'user:logout' => 'Logout',
+    'profile' => 'Profile',
     'profile:stats' => 'Learning Analytics',
-    'timeline:none' => 'No se ha encontrado',
-    'timeline:public' => 'Cronología pública',
+    'timeline:none' => 'Not found',
+    'timeline:public' => 'Public timeline',
     // Settings
-    'profile:settings:password' => 'Cambiar contraseña',
-    'profile:settings:change' => 'Editar configuración',
-    'profile:settings:edit_profile' => 'Editar perfil',
-    'profile:settings:edit_avatar' => 'Editar imagen de perfil',
-    'profile:settings:edit' => 'Tu cofiguración',
-    'avatar:uploaded' => 'Imagen de perfil actualizada',
-    'profile:edit' => 'Editar perfil',
+    'profile:settings:password' => 'Change password',
+    'profile:settings:change' => 'Change your settings',
+    'profile:settings:edit_profile' => 'Edit profile',
+    'profile:settings:edit_avatar' => 'Edit avatar',
+    'profile:settings:edit' => 'Your settings',
 );
 
-add_translation('es', $spanish);
-
+add_translation('en', $english);
