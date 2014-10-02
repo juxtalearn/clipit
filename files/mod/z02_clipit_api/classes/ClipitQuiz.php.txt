@@ -22,8 +22,6 @@ class ClipitQuiz extends UBItem {
      */
     const SUBTYPE = "ClipitQuiz";
     const REL_QUIZ_QUIZQUESTION = "ClipitQuiz-ClipitQuizQuestion";
-    const VIEW_MODE_LIST = "list";
-    const VIEW_MODE_PAGED = "paged";
     /**
      * @var string Target interface for Quiz display (e.g.: "web space", "large display"...)
      */
@@ -43,7 +41,6 @@ class ClipitQuiz extends UBItem {
     public $embed_url = "";
     public $scores_url = "";
     public $author_name = "";
-    public $view_mode = "";
 
     /**
      * Loads object parameters stored in Elgg
@@ -59,7 +56,6 @@ class ClipitQuiz extends UBItem {
         $this->embed_url = (string)$elgg_entity->get("embed_url");
         $this->scores_url = (string)$elgg_entity->get("scores_url");
         $this->author_name = (string)$elgg_entity->get("author_name");
-        $this->view_mode = (string)$elgg_entity->get("view_mode");
     }
 
     /**
@@ -75,11 +71,6 @@ class ClipitQuiz extends UBItem {
         $elgg_entity->set("embed_url", (string)$this->embed_url);
         $elgg_entity->set("scores_url", (string)$this->scores_url);
         $elgg_entity->set("author_name", (string)$this->author_name);
-        if((string)$this->view_mode == ""){
-            $elgg_entity->set("view_mode", static::VIEW_MODE_LIST);
-        }else{
-            $elgg_entity->set("view_mode", (string)$this->view_mode);
-        }
     }
 
     /**

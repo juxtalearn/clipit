@@ -65,30 +65,22 @@ class UBMessage extends UBItem {
      * Get Messages by Destination
      *
      * @param array $destination_array Array of Destination IDs
-     * @param int $offset (default = 0 : begining)
-     * @param int $limit (default = 0 : none)
      *
      * @return static[] Array of Messages
      */
-    static function get_by_destination($destination_array, $offset = 0, $limit = 0) {
+    static function get_by_destination($destination_array) {
         $message_array = array();
         foreach($destination_array as $destination_id) {
             $item_array = UBCollection::get_items($destination_id, static::REL_MESSAGE_DESTINATION, true);
             $temp_array = array();
-            foreach ($item_array as $item_id) {
+            foreach($item_array as $item_id) {
                 $temp_array[$item_id] = new static((int)$item_id);
             }
-            if (empty($temp_array)) {
+            if(empty($temp_array)) {
                 $message_array[$destination_id] = null;
             } else {
                 $message_array[$destination_id] = $temp_array;
                 usort($message_array[$destination_id], 'UBItem::sort_by_date');
-                //var_dump($message_array[$destination_id]);
-                if(!empty($limit)) {
-                    $message_array[$destination_id] = array_splice($message_array[$destination_id], $offset, $limit);
-                } else{
-                    $message_array[$destination_id] = array_splice($message_array[$destination_id], $offset);
-                }
             }
         }
         return $message_array;

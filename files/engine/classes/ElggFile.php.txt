@@ -147,7 +147,7 @@ class ElggFile extends ElggObject {
 		if (function_exists('finfo_file') && defined('FILEINFO_MIME_TYPE')) {
 			$resource = finfo_open(FILEINFO_MIME_TYPE);
 			if ($resource) {
-                $mime = finfo_file($resource, $file);
+				$mime = finfo_file($resource, $file);
 			}
 		}
 
