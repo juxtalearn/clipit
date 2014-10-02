@@ -39,3 +39,9 @@ echo elgg_view('js/admin');
                 .focus();
     });
 });
+function selected_count(){
+    var count_selected = $("#called_users option:selected").length;
+    $(".ms-selection h4").find("span").text(count_selected);
+    var count_selectable = $("#called_users option:not(:selected)").length;
+    $(".ms-selectable h4").find("span").text(count_selectable);
+}

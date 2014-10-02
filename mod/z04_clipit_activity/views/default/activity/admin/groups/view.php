@@ -72,7 +72,7 @@ elgg_load_js("jquery:quicksearch");
         height: 250px;
     }
     .ms-selection .ms-list{
-        height: 245px;
+        height: 235px;
     }
     .site-users li:hover{
         background-color: #32b4e5;
@@ -114,14 +114,18 @@ $(function(){
     // Multiselect
     $("#called_users").multiSelect({
         keepOrder: false,
-        selectableHeader: '<h4 class="margin-bottom-20"><?php echo elgg_echo("activity:students");?></h4>'+
+        selectableHeader: '<h4 class="margin-bottom-20"><?php echo elgg_echo("activity:students");?> <span class="pull-right blue-lighter">0</span></h4>'+
             "<input type='text' class='search-input form-control margin-bottom-10' autocomplete='off' placeholder='<?php echo elgg_echo('search:filter');?>...'>",
         selectionHeader:
             '<label><?php echo elgg_echo('group:name');?></label>'+
-                '<input type="text" name="group_name" id="group_name" class="form-control margin-bottom-10">'+
-                '<h4><?php echo elgg_echo("group:students");?></h4>',
+            '<input type="text" name="group_name" id="group_name" class="form-control margin-bottom-10"/>'+
+            '<h4><?php echo elgg_echo("group:students");?> <span class="pull-right blue-lighter">0</span></h4>',
         afterInit: function(ms){
+            $("ul .ms-elem-selectable:not('.disabled')")
+                .css({"padding-left": "25px", "position": "relative"})
+                .prepend('<i class="red fa fa-trash-o move-to-site" style="position: absolute;/* left: 5px; *//* top: 5px; */font-size: 17px;z-index: 2;left: 0;width: 25px;text-align: center;line-height: 20px;"></i>');
             set_default_group_name();
+            selected_count();
             var that = this,
                 $selectableSearch = that.$selectableUl.prev(),
                 $selectionSearch = that.$selectionUl.prev(),
@@ -147,11 +151,30 @@ $(function(){
         afterSelect: function(){
             this.qs1.cache();
             this.qs2.cache();
+            selected_count();
         },
         afterDeselect: function(){
             this.qs1.cache();
             this.qs2.cache();
+            selected_count();
         }
+    });
+    $(document).on("click", ".move-to-site", function(e){
+        e.preventDefault();
+        var text = $(this).parent("li").text();
+        var option = $("#called_users option:contains('"+text.trim()+"')");
+        elgg.action('activity/admin/users', {
+            data: {
+                id: option.val(),
+                activity_id: <?php echo $activity->id;?>,
+                act: "to_site"
+            },
+            success: function(){
+                option.remove();
+                $('#called_users').multiSelect('refresh');
+            }
+        });
+        return false;
     });
     $(document).on("click", ".delete-user", function(){
         var user = $(this).parent("li");
@@ -184,6 +207,13 @@ $(function(){
         $('#called_users').multiSelect('addOption',
             { value: user.data("user"), text: user.text(), index: 0}
         );
+        elgg.action('activity/admin/users', {
+            data: {
+                id: user.data("user"),
+                activity_id: <?php echo $activity->id;?>,
+                act: "to_activity"
+            }
+        });
         $('#called_users').multiSelect('refresh');
         user.remove();
     });
@@ -232,6 +262,7 @@ $(function(){
         });
     });
 });
+
 function update_move_to_group(){
     $("#move-group").html("");
     $("<option></option>")

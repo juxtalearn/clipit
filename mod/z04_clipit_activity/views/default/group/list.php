@@ -11,24 +11,68 @@
  * @package         ClipIt
  */
 $activity = elgg_extract('entity', $vars);
+
 $groups_id = ClipitActivity::get_groups($activity->id);
 $groups = ClipitGroup::get_by_id($groups_id, true);
+$user_id = elgg_get_logged_in_user_guid();
+$user_group = ClipitGroup::get_from_user_activity($user_id, $activity->id);
+$user = array_pop(ClipitUser::get_by_id(array($user_id)));
+$isCalled = in_array($user_id, $activity->student_array);
 ?>
+<style>
+    .group-details .tags-list{
+        height: 30px;
+    }
+    .group-details .tags-list .tags{
+        margin: 0;
+    }
+</style>
 <div class="row">
     <?php
     foreach($groups as $group):
-        $users_id = ClipitGroup::get_users($group->id);
+        $students_id = ClipitGroup::get_users($group->id);
+        $rest = $activity->max_group_size - count(ClipitGroup::get_users($group->id));
+        if(($user->role == ClipitUser::ROLE_STUDENT || $user->role == ClipitUser::ROLE_ADMIN)
+            && $isCalled
+            && $activity->status != ClipitActivity::STATUS_CLOSED
+            && $activity->group_mode == ClipitActivity::GROUP_MODE_STUDENT
+        ) {
+            $optGroup = false;
+            $optButton = false;
+            if (!$user_group) {
+                $optGroup = "join";
+            } elseif ($user_group == $group->id) {
+                $optGroup = "leave";
+            }
+            if ($optGroup) {
+                $optButton = elgg_view_form('group/' . $optGroup,
+                    array('class' => 'pull-right'),
+                    array('entity' => $group)
+                );
+            }
+        }
         ?>
         <div class="col-md-6">
             <div style="border-bottom: 6px solid #bae6f6; padding-bottom: 15px;">
-                <h3><?php echo $group->name; ?></h3>
+                <?php echo $optButton;?>
+                <h3 class="margin-bottom-5"><?php echo $group->name; ?></h3>
+                <div class="group-details">
+                    <?php if($optGroup == 'join'):?>
+                        <small class="show">
+                            <?php echo elgg_echo('group:free_slot', array($rest));?>
+                        </small>
+                    <?php endif;?>
+                    <div class="tags-list margin-top-10">
+                        <?php echo elgg_view("tricky_topic/tags/view", array('tags' => $group->tag_array, 'limit' => 4, 'width' => '22%')); ?>
+                    </div>
+                </div>
                 <ul style="height: 250px;overflow-y: auto;">
                     <?php
-                    foreach($users_id as $user_id):
-                        $user = array_pop(ClipitUser::get_by_id(array($user_id)));
+                    foreach($students_id as $student_id):
+                        $student = array_pop(ClipitUser::get_by_id(array($student_id)));
                         ?>
                         <li class="list-item">
-                            <?php echo elgg_view("page/elements/user_block", array("entity" => $user)); ?>
+                            <?php echo elgg_view("page/elements/user_block", array("entity" => $student)); ?>
                         </li>
                     <?php endforeach ?>
                 </ul>

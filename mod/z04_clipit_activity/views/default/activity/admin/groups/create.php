@@ -73,51 +73,10 @@ $(function(){
 ?>
 <div class="row margin-top-10">
     <div class="col-md-6 form-group">
-        <a class="btn btn-primary btn-xs fileinput-button" id="insert-site">
-            <i class="fa fa-upload"></i>
-            <?php echo elgg_echo('called:students:add_from_excel');?>
-            <?php echo elgg_view("input/file", array(
-                'name' => 'upload-users',
-                'class' => 'upload-users',
-                'id' => 'upload-users',
-            ));
-            ?>
-        </a>
-        <?php echo elgg_view('output/url', array(
-            'title' => elgg_echo('called:students:add_from_site'),
-            'text' => '<i class="fa fa-plus"></i> '. elgg_echo('called:students:add_from_site'),
-            'href' => "javascript:;",
-            'onclick' => "$('.site-users').toggle();",
-            'class' => 'btn btn-xs btn-primary',
-        ));
-        ?>
-        <ul class="margin-top-10 site-users" style="display: none;width: 100%;overflow-y: auto;max-height: 200px">
-            <?php
-            foreach(ClipitUser::get_all() as $user):
-                if(!in_array($user->id, $activity->student_array) && $user->role == 'student'):
-                    ?>
-                    <li data-user="<?php echo $user->id;?>" style="padding: 2px;" class="cursor-pointer list-item-5" value="<?php echo $user->id;?>">
-                        <?php echo elgg_view('output/img', array(
-                            'src' => get_avatar($user, 'small'),
-                            'class' => 'avatar-tiny'
-                        ));
-                        ?>
-                        <?php echo $user->name;?>
-                    </li>
-                <?php
-                endif;
-            endforeach;
-            ?>
-        </ul>
-        <div>
-            <a class="upload-messages"></a>
-        </div>
-        <div class="margin-top-10">
-            <a href="<?php echo elgg_get_site_url();?>mod/z04_clipit_activity/vendors/templates/clipit_users.xlsx" target="_blank">
-                <i class="fa fa-file-excel-o green"></i>
-                <strong><?php echo elgg_echo('called:students:excel_template');?></strong>
-            </a>
-        </div>
+        <!-- Add students -->
+        <?php echo elgg_view('activity/admin/groups/add_students', array('entity' => $activity));?>
+        <!-- Add students end -->
+
     </div>
     <div class="col-md-6 text-right">
         <i class="fa fa-spinner fa-spin blue margin-right-10" id="move-loading" style="display: none;"></i>

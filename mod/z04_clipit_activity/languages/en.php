@@ -63,6 +63,7 @@ $english = array(
 
     'group' => 'Group',
     'my_group:progress' => 'My group progress',
+    'group:free_slot' => '<strong><u>%s</u></strong> free slot',
     'group:graph' => 'Group graph',
     'group:max_size' => 'Max students per group',
     'group:activity' => 'Group effort',
@@ -242,9 +243,9 @@ $english = array(
     'task:video_feedback' => 'Video feedback',
     'task:storyboard_feedback' => 'Storyboard feedback',
     'task:other' => 'Other',
-    'task:videos:none' => 'Add video to %s for publish',
-    'task:storyboards:none' => 'Add storyboard to %s for publish',
-    'repository:group' => 'repository group',
+    'task:videos:none' => 'Add videos from your %s',
+    'task:storyboards:none' => 'Add storyboards from your %s',
+    'repository:group' => 'group repository',
     'task:create' => 'Create new task',
     'task:edit' => 'Edit task',
     /// Task status

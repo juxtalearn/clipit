@@ -63,6 +63,7 @@ $spanish = array(
 
     'group' => 'Grupo',
     'my_group:progress' => 'Progreso de mis grupos',
+    'group:free_slot' => 'Queda <strong><u>%s</u></strong> huecos libres',
     'group:graph' => 'Gráfica del grupo',
     'group:max_size' => 'Máximo de estudiantes por grupo',
     'group:activity' => 'Progreso de los grupos',
