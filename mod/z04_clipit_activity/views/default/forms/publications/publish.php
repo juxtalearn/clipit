@@ -13,7 +13,9 @@
 $entity = elgg_extract('entity', $vars);
 $parent_id = elgg_extract('parent_id', $vars);
 $tt_tags = elgg_extract('tags', $vars);
-
+$group_id = $entity::get_group($entity->id);
+$group_tags = ClipitGroup::get_tags($group_id);
+$tt_tags = array_diff($tt_tags, $group_tags);
 //load jQuery Chosen
 elgg_load_js("jquery:chosen");
 
@@ -92,6 +94,7 @@ if($task_id = get_input('task_id')):
         </div>
         <div class="form-group">
             <label><?php echo elgg_echo("tags");?></label>
+            <?php echo elgg_view("tricky_topic/tags/view", array('tags' => $group_tags, 'width' => '45%')); ?>
             <div>
                 <select name="tags[]" data-placeholder="<?php echo elgg_echo('click_add');?>" style="width:100%;" multiple class="chosen-select" tabindex="8">
                     <option value=""></option>

@@ -149,6 +149,7 @@ elgg_load_js('fullcalendar:moment');
                     </li>
                 <?php endforeach;?>
                 <li class="margin-top-10">
+                    <?php echo elgg_view('activity/admin/add_teachers', array('entity' => $activity));?>
                     <div class="dropdown">
                         <span id="drop4" class="btn btn-xs btn-border-blue btn-primary" role="button" data-toggle="dropdown" href="#">Add teachers <i class="caret"></i></span>
                         <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4">
@@ -184,28 +185,6 @@ elgg_load_js('fullcalendar:moment');
                             ));
                             ?>
                         </p>
-                    </div>
-                    <div class="option-content margin-top-10 overflow-hidden" id="create" style="display: none;background: #fafafa;padding: 10px;">
-                        <div class="add-user-list">
-                            <?php echo elgg_view('activity/admin/add_teacher');?>
-                        </div>
-                        <div class="col-md-12 margin-top-5 margin-bottom-5">
-                            <?php
-                            echo elgg_view('input/button', array(
-                                'value' => elgg_echo('create'),
-                                'class' => "submit-add-teachers btn btn-primary btn-xs pull-right",
-                            ));
-                            ?>
-                            <strong>
-                                <?php echo elgg_view('output/url', array(
-                                    'href'  => "javascript:;",
-                                    'id' => 'add_teacher',
-                                    'title' => elgg_echo('user:add'),
-                                    'text'  => '<i class="fa fa-plus"></i> '.elgg_echo('user:add'),
-                                ));
-                                ?>
-                            </strong>
-                        </div>
                     </div>
                 </li>
             </ul>
