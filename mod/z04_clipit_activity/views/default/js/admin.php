@@ -21,3 +21,15 @@ $(document).on("click", ".submit-add-teachers", function(){
         }
     });
 });
+
+$("#get-users").click(function(){
+    var data_role = $(this).data("role"),
+        data_activity = $(this).data("activity");
+    $("#site ul").html($("<i class='fa fa-spinner fa-spin blue'/>"));
+    elgg.action('activity/admin/users', {
+        data: {act: "get_users", role: data_role, activity_id: data_activity},
+        success: function(data){
+            $("#site ul").html(data.output);
+        }
+    });
+});

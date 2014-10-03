@@ -58,11 +58,13 @@ function clipit_activity_init() {
     elgg_register_ajax_view('activity/create/task_list');
     elgg_register_ajax_view('activity/create/groups/create');
     // Admin activity
+    elgg_register_action("activity/admin/users", "{$plugin_dir}/actions/activity/admin/users.php");
     elgg_register_action("activity/admin/setup", "{$plugin_dir}/actions/activity/admin/setup.php");
     elgg_register_action("activity/admin/teachers", "{$plugin_dir}/actions/activity/admin/teachers.php");
     elgg_register_action("activity/admin/groups_setup", "{$plugin_dir}/actions/activity/admin/groups_setup.php");
     elgg_register_action("activity/admin/groups_create", "{$plugin_dir}/actions/activity/admin/groups_create.php");
     elgg_register_action("activity/admin/group_mode", "{$plugin_dir}/actions/activity/admin/group_mode.php");
+    elgg_register_action("activity/admin/assign_sb", "{$plugin_dir}/actions/activity/admin/assign_sb.php");
     elgg_register_action("task/edit", "{$plugin_dir}/actions/task/edit.php");
     elgg_register_action("task/remove", "{$plugin_dir}/actions/task/remove.php");
     elgg_register_action("task/create", "{$plugin_dir}/actions/task/create.php");
@@ -72,7 +74,9 @@ function clipit_activity_init() {
     elgg_register_ajax_view('publications/admin/user_ratings');
     elgg_register_ajax_view('modal/activity/admin/user_stats');
     elgg_register_ajax_view('modal/activity/admin/users_task');
+    elgg_register_ajax_view('modal/group/assign_sb');
     elgg_register_ajax_view('modal/task/edit');
+    elgg_register_ajax_view('user/add');
 
     // Group
     elgg_register_action("group/join", "{$plugin_dir}/actions/group/join.php");
@@ -236,7 +240,6 @@ function activity_setup_sidebar_menus(){
 }
 
 function create_activity_page_handler($page) {
-
     $base_dir = elgg_get_plugins_path() . 'z04_clipit_activity/pages/activity';
     $vars = array();
     $vars['page'] = $page[0];
@@ -262,6 +265,8 @@ function create_activity_page_handler($page) {
  * @return bool
  */
 function activity_page_handler($page) {
+    // Ensure that only logged-in users can see this page
+    gatekeeper();
     $base_dir = elgg_get_plugins_path() . 'z04_clipit_activity/pages/activity';
     elgg_load_library('clipit:activities');
     elgg_set_context("activity_page");
@@ -360,7 +365,7 @@ function activity_page_handler($page) {
         elgg_extend_view("page/elements/owner_block", "page/elements/group_block");
     }
 //    ClipitActivity::set_properties($activity->id, array('group_mode' => ClipitActivity::GROUP_MODE_STUDENT));
-    if(!$hasGroup && $isCalled && $activity->group_mode == ClipitActivity::GROUP_MODE_STUDENT && $activity_status == 'enroll') {
+    if(!$hasGroup && $isCalled && $activity->group_mode == ClipitActivity::GROUP_MODE_STUDENT && $activity_status != ClipitActivity::STATUS_CLOSED) {
         // Join to activity button
         elgg_extend_view("page/elements/owner_block", "page/components/button_join_group");
     }

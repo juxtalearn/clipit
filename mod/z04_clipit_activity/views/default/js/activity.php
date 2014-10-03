@@ -25,18 +25,9 @@ echo elgg_view('js/admin');
     });
     $(document).on("click", "#add_user",function(){
         var content = $(".add-user-list");
-            content
-                .append(<?php echo json_encode(elgg_view('activity/create/add_user'));?>)
-                .find("input[name='user-name[]']")
-                .focus();
-    });
-
-    $(document).on("click", "#add_teacher",function(){
-        var content = $(".add-user-list");
-            content
-                .append(<?php echo json_encode(elgg_view('activity/admin/add_teacher'));?>)
-                .find("input[name='user-name[]']")
-                .focus();
+        elgg.get( "ajax/view/user/add", function( data ) {
+            content.append(data).find(".focus-in").focus();
+        });
     });
 });
 function selected_count(){

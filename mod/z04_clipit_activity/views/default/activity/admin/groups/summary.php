@@ -28,7 +28,7 @@ foreach($groups as $group):
                 <?php
                 echo elgg_view('output/url', array(
                     'href'  => "ajax/view/modal/group/assign_sb?group_id={$group->id}",
-                    'text'  => '<i class="fa fa-plus"></i> Assign stumbling blocks',
+                    'text'  => '<i class="fa fa-plus"></i> '.elgg_echo('group:assign_sb'),
                     'id' => 'assign-sb',
                     'data-toggle'   => 'modal',
                     'data-target'   => '#sb-group-'.$group->id

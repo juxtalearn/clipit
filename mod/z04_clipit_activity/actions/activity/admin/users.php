@@ -15,6 +15,47 @@ $activity_id = get_input("activity_id");
 $id = get_input("id");
 
 switch($action){
+    case "create":
+        $user_name = get_input('user-name');
+        $user_login = get_input('user-login');
+        $user_password = get_input('user-password');
+        $user_email = get_input('user-email');
+        $users = get_input('user');
+        $role = get_input('role');
+        foreach($users as $user){
+            if(
+                trim($user['login']) != "" &&
+                trim($user['password']) != "" &&
+                trim($user['name']) != "" &&
+                filter_var($user['email'], FILTER_VALIDATE_EMAIL)
+            ) {
+                $user_id = ClipitUser::create(array(
+                    'login'     => $user['login'],
+                    'password'  => $user['password'],
+                    'name'      => $user['name'],
+                    'email'     => $user['email'],
+                    'role'      => $role
+                ));
+                $output[] = array(
+                    'name' => $user['name'],
+                    'id' => $user_id,
+                );
+                $users_added[] = $user_id;
+            }
+        }
+        if(count($users_added) > 0) {
+            switch ($role) {
+                case ClipitUser::ROLE_STUDENT:
+                    ClipitActivity::add_students($activity_id, $users_added);
+                    break;
+                case ClipitUser::ROLE_TEACHER:
+                    ClipitActivity::add_teachers($activity_id, $users);
+                    break;
+            }
+        }
+
+        echo json_encode($output);
+        break;
     case "to_site":
         ClipitActivity::remove_students($activity_id, array($id));
         break;

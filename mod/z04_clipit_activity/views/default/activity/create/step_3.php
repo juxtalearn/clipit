@@ -23,15 +23,22 @@ $(function(){
             $(this).data("loading-text", "<?php echo elgg_echo('loading');?>...").button('loading');
         }
     });
-
+    $(document).on("click", "#create_add_user",function(){
+        var content = $(".add-user-list");
+        content
+            .append(<?php echo json_encode(elgg_view('activity/create/add_user'));?>)
+            .find("input[name='user-name[]']")
+            .focus();
+    });
     $('#called_users').multiSelect({
         keepOrder: false,
         selectableOptgroup: true,
-        selectableHeader: "<h4><?php echo elgg_echo("activity:site:students");?></h4>"+
+        selectableHeader: "<h4><?php echo elgg_echo("activity:site:students");?> <span class='pull-right blue-lighter'>0</span></h4>"+
                             "<input type='text' class='search-input form-control margin-bottom-10' autocomplete='off' placeholder='<?php echo elgg_echo('search:filter');?>...'>",
-        selectionHeader: "<h4><?php echo elgg_echo("activity:students");?></h4>"+
+        selectionHeader: "<h4><?php echo elgg_echo("activity:students");?> <span class='pull-right blue-lighter'>0</span></h4>"+
                             "<input type='text' class='search-input form-control margin-bottom-10' autocomplete='off' placeholder='<?php echo elgg_echo('search:filter');?>...'>",
         afterInit: function(ms){
+            selected_count();
             var that = this,
                 $selectableSearch = that.$selectableUl.prev(),
                 $selectionSearch = that.$selectionUl.prev(),
@@ -57,10 +64,12 @@ $(function(){
         afterSelect: function(){
             this.qs1.cache();
             this.qs2.cache();
+            selected_count();
         },
         afterDeselect: function(){
             this.qs1.cache();
             this.qs2.cache();
+            selected_count();
         }
     });
     $(".select-radio").click(function(){
@@ -175,7 +184,7 @@ $(function () {
                                     <strong>
                                         <?php echo elgg_view('output/url', array(
                                             'href'  => "javascript:;",
-                                            'id' => 'add_user',
+                                            'id' => 'create_add_user',
                                             'title' => elgg_echo('user:add'),
                                             'text'  => '<i class="fa fa-plus"></i> '.elgg_echo('user:add'),
                                         ));

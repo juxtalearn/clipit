@@ -202,6 +202,31 @@ $(function(){
         });
         update_move_to_group();
     });
+    // Create students, add button
+    $(document).on("click", ".submit-add-students", function(){
+        var that = $(this);
+        var content = $(".add-user-list").find(".add-user");
+        if(content.length == 0){
+            return false;
+        }
+        that.button('loading').data("loading-text", "<?php echo elgg_echo('loading');?>...").button('loading');
+        var form = $(this).closest("form");
+        elgg.action('activity/admin/users', {
+            data: form.serialize(),
+            success: function(data){
+                var $data = data.output;
+                $.each($data, function(i, user) {
+                    $('#called_users').multiSelect('addOption',
+                        { value: user.id, text: user.name, index: 0}
+                    );
+                });
+                content.remove();
+                that.button('reset');
+                $('#called_users').multiSelect('refresh');
+            }
+        });
+    });
+    // Move students to site
     $(document).on("click", ".site-users li", function(){
         var user = $(this);
         $('#called_users').multiSelect('addOption',
@@ -253,13 +278,7 @@ $(function(){
         var merge_users = data_users.concat(users.val().split(","));
         users.val(merge_users);
         $("#move-loading").show();
-        elgg.action('activity/admin/groups_setup', {
-            data: $(".groups-form").serialize(),
-            success: function(content){
-                $('#called_users option:selected').remove();
-                $("#save-groups").click();
-            }
-        });
+        $("#save-groups").click();
     });
 });
 

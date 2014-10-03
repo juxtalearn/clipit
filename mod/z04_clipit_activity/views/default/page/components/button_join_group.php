@@ -12,7 +12,7 @@
  */
 $activity_id = (int)elgg_get_page_owner_guid();
 echo elgg_view('output/url', array(
-    'href' => "clipit_activity/{$activity_id}/join",
+    'href' => "clipit_activity/{$activity_id}/groups",
     'text' => elgg_echo('activity:group:join'),
     'class' => 'join-activity-button',
     'is_trusted' => true,
