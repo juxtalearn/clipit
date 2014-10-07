@@ -24,6 +24,7 @@ class ClipitTask extends UBItem {
     const TYPE_QUIZ_TAKE = "quiz_take";
     const TYPE_RESOURCE_UPLOAD = "resource_upload";
     const TYPE_RESOURCE_FEEDBACK = "resource_feedback";
+    const TYPE_RESOURCE_DOWNLOAD = "resource_download";
     const TYPE_STORYBOARD_UPLOAD = "storyboard_upload";
     const TYPE_STORYBOARD_FEEDBACK = "storyboard_feedback";
     const TYPE_VIDEO_UPLOAD = "video_upload";
