@@ -272,6 +272,10 @@ class ClipitTask extends UBItem {
                     $rating_targets[] = (int)$user_rating->target;
                 }
                 $parent_task = new static($task->parent_task);
+                // If there are no resources to give feedback on, the status is false = uncompleted
+                if(empty($parent_task->resource_array)){
+                    return false;
+                }
                 foreach($parent_task->resource_array as $resource_id) {
                     if(array_search((int)$resource_id, $rating_targets) === false) {
                         $resource_group = (int)ClipitStoryboard::get_group((int)$resource_id);
@@ -297,6 +301,10 @@ class ClipitTask extends UBItem {
                     $rating_targets[] = (int)$user_rating->target;
                 }
                 $parent_task = new static($task->parent_task);
+                // If there are no storyboards to give feedback on, the status is false = uncompleted
+                if(empty($parent_task->storyboard_array)){
+                    return false;
+                }
                 foreach($parent_task->storyboard_array as $storyboard_id) {
                     if(array_search((int)$storyboard_id, $rating_targets) === false) {
                         $storyboard_group = (int)ClipitStoryboard::get_group((int)$storyboard_id);
@@ -322,6 +330,10 @@ class ClipitTask extends UBItem {
                     $rating_targets[] = (int)$user_rating->target;
                 }
                 $parent_task = new static($task->parent_task);
+                // If there are no storyboards to give feedback on, the status is false = uncompleted
+                if(empty($parent_task->storyboard_array)){
+                    return false;
+                }
                 foreach($parent_task->video_array as $video_id) {
                     if(array_search((int)$video_id, $rating_targets) === false) {
                         $video_group = (int)ClipitVideo::get_group((int)$video_id);
