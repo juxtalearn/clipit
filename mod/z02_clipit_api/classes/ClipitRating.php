@@ -129,13 +129,14 @@ class ClipitRating extends UBItem {
         return new static($rating_id);
     }
 
-    // Average overall rating [0-1]
+    // Average overall rating (float)[0-1]
     static function get_average_target_rating($target_id) {
         $rating_array = static::get_by_target(array($target_id));
+        $rating_array = $rating_array[$target_id];
         $average_rating = 0;
         $count = 0;
         foreach($rating_array as $rating) {
-            if($rating->overall) {
+            if($rating->overall === true) {
                 $average_rating ++;
             }
             $count ++;

@@ -234,20 +234,23 @@ class UBMessage extends UBItem {
     static function set_read_status($id, $read_value, $user_array) {
         $read_array = static::get_properties($id, array("read_array"));
         $read_array = array_pop($read_array);
+        $update_flag = false;
         foreach($user_array as $user_id) {
-            if($read_value == true) {
-                if(!in_array($user_id, $read_array)) {
-                    array_push($read_array, $user_id);
-                }
-            } else if($read_value == false) {
-                $index = array_search((int)$user_id, $read_array);
-                if(isset($index) && $index !== false) {
-                    array_splice($read_array, $index, 1);
-                }
+            $index = array_search((int)$user_id, $read_array);
+            if($read_value === true && $index === false) {
+                array_push($read_array, $user_id);
+                $update_flag = true;
+            } else if($read_value === false && $index !== false) {
+                array_splice($read_array, $index, 1);
+                $update_flag = true;
             }
         }
-        $prop_value_array["read_array"] = $read_array;
-        return static::set_properties($id, $prop_value_array);
+        if($update_flag){
+            $prop_value_array["read_array"] = $read_array;
+            return static::set_properties($id, $prop_value_array);
+        }else{
+            return $id;
+        }
     }
 
     /**
