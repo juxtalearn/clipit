@@ -236,6 +236,7 @@ $(function(){
             data: {
                 id: user.data("user"),
                 activity_id: <?php echo $activity->id;?>,
+                role: "student",
                 act: "to_activity"
             }
         });

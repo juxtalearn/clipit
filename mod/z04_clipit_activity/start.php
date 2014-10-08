@@ -161,22 +161,7 @@ function clipit_activity_init() {
     elgg_register_simplecache_view('js/attach');
     elgg_register_js('file:attach', $files_attach_js);
     // jQuery file upload
-    elgg_register_js("jquery:fileupload:tmpl", "{$vendors_dir}/fileupload/tmpl.min.js");
-    elgg_register_js("jquery:fileupload:load_image", "{$vendors_dir}/fileupload/load-image.min.js");
-    elgg_register_js("jquery:fileupload:iframe_transport", "{$vendors_dir}/fileupload/iframe-transport.js");
-    elgg_register_js("jquery:fileupload", "{$vendors_dir}/fileupload/fileupload.js");
-    elgg_register_js("jquery:fileupload:process", "{$vendors_dir}/fileupload/fileupload-process.js");
-    elgg_register_js("jquery:fileupload:image", "{$vendors_dir}/fileupload/fileupload-image.js");
-    elgg_register_js("jquery:fileupload:validate", "{$vendors_dir}/fileupload/fileupload-validate.js");
-    elgg_register_js("jquery:fileupload:ui", "{$vendors_dir}/fileupload/fileupload-ui.js");
-//    elgg_load_js("jquery:fileupload:tmpl");
-//    elgg_load_js("jquery:fileupload:load_image");
-//    elgg_load_js("jquery:fileupload:iframe_transport");
-//    elgg_load_js("jquery:fileupload");
-//    elgg_load_js("jquery:fileupload:process");
-//    elgg_load_js("jquery:fileupload:image");
-//    elgg_load_js("jquery:fileupload:validate");
-//    elgg_load_js("jquery:fileupload:ui");
+
     $fileupload_js = elgg_get_simplecache_url('js', 'fileupload');
     elgg_register_simplecache_view('js/fileupload');
     elgg_register_js('clipit:fileupload', $fileupload_js);

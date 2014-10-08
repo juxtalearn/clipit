@@ -72,6 +72,12 @@ $activity = elgg_extract('entity', $vars);
     </div>
 </div>
 <div class="option-content margin-top-10" id="site" style="display: none;background: #fafafa;padding: 10px;">
+    <?php echo elgg_view("input/text", array(
+        'id' => 'search-users',
+        'class' => 'form-control',
+        'placeholder' => elgg_echo('filter')."...",
+    ));
+    ?>
     <ul class="margin-top-10 site-users" style="max-height: 200px;overflow-y: auto;background: #fff;"></ul>
 </div>
 <div class="option-content margin-top-10" id="file" style="display: none;background: #fafafa;padding: 10px;">

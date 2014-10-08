@@ -16,7 +16,7 @@ $id = uniqid();
     <div class="col-md-1">
         <i class="fa fa-times red image-block" style="cursor: pointer" onclick="javascript:$(this).closest('.add-user').remove();"></i>
     </div>
-    <div class="col-md-11">
+    <div class="col-md-12">
         <div class="col-md-12 form-group">
             <label for="activity-title"><?php echo elgg_echo("user:username");?></label>
             <?php echo elgg_view("input/text", array(

@@ -15,6 +15,7 @@ $teachers = ClipitActivity::get_teachers($activity->id);
 $teachers = ClipitUser::get_by_id($teachers);
 $status = get_activity_status($activity->status);
 elgg_load_js('fullcalendar:moment');
+elgg_load_js("jquery:quicksearch");
 ?>
 <script>
     $(function(){
@@ -128,7 +129,7 @@ elgg_load_js('fullcalendar:moment');
                             <?php echo elgg_view('output/url', array(
                                 'title' => elgg_echo('delete'),
                                 'text' => '<i class="fa fa-trash-o"></i>',
-                                'href' => "action/activity/admin/teachers?entity-id={$activity->id}&remove_teacher={$teacher->id}",
+                                'href' => "action/activity/admin/users?activity_id={$activity->id}&act=remove_from_activity&id={$teacher->id}&role=teacher",
                                 'is_action' => true,
                                 'class' => 'pull-right btn btn-xs btn-danger delete-user',
                             ));
@@ -150,42 +151,6 @@ elgg_load_js('fullcalendar:moment');
                 <?php endforeach;?>
                 <li class="margin-top-10">
                     <?php echo elgg_view('activity/admin/add_teachers', array('entity' => $activity));?>
-                    <div class="dropdown">
-                        <span id="drop4" class="btn btn-xs btn-border-blue btn-primary" role="button" data-toggle="dropdown" href="#">Add teachers <i class="caret"></i></span>
-                        <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4">
-                            <li role="presentation">
-                                <a role="menuitem" tabindex="-1" data-toggle="create" class="option-select" href="javascript:;">
-                                    <i class="fa fa-user"></i> Create users
-                                </a>
-                            </li>
-                            <li role="presentation">
-                                <a role="menuitem" tabindex="-1" data-toggle="site" class="option-select" href="javascript:;">
-                                    <i class="fa fa-globe"></i> Select from site
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="option-content margin-top-10" id="site" style="display: none;background: #fafafa;padding: 10px;">
-                        <select multiple class="form-control" name="teachers_list[]">
-                            <?php
-                            foreach(array_pop(ClipitUser::get_by_role(array('teacher'))) as $user):
-                                if(!in_array($user->id, $activity->teacher_array)):
-                                    ?>
-                                    <option value="<?php echo $user->id;?>"><?php echo $user->name;?></option>
-                                <?php
-                                endif;
-                            endforeach;
-                            ?>
-                        </select>
-                        <p class="margin-top-10 text-right">
-                            <?php
-                            echo elgg_view('input/button', array(
-                                'value' => elgg_echo('add'),
-                                'class' => "submit-add-teachers btn btn-primary btn-xs",
-                            ));
-                            ?>
-                        </p>
-                    </div>
                 </li>
             </ul>
         </div>

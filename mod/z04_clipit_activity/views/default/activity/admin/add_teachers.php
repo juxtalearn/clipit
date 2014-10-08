@@ -12,6 +12,11 @@
  */
 $activity = elgg_extract('entity', $vars);
 ?>
+<?php echo elgg_view("input/hidden", array(
+    'name' => 'activity_id',
+    'value' => $activity->id,
+));
+?>
 <div class="dropdown">
     <span id="drop4" class="btn btn-xs btn-border-blue btn-primary" role="button" data-toggle="dropdown" href="#">
         <?php echo elgg_echo('teachers:add');?> <i class="caret"></i>
@@ -32,6 +37,17 @@ $activity = elgg_extract('entity', $vars);
 <div class="option-content margin-top-10 overflow-hidden" id="create" style="display: none;background: #fafafa;padding: 10px;">
     <div class="add-user-list">
         <?php echo elgg_view('user/add');?>
+
+        <?php echo elgg_view("input/hidden", array(
+            'name' => 'act',
+            'value' => 'create',
+        ));
+        ?>
+        <?php echo elgg_view("input/hidden", array(
+            'name' => 'role',
+            'value' => 'teacher',
+        ));
+        ?>
     </div>
     <div class="col-md-12 margin-top-5 margin-bottom-5">
         <?php
@@ -51,6 +67,20 @@ $activity = elgg_extract('entity', $vars);
         </strong>
     </div>
 </div>
-<div class="option-content margin-top-10" id="site" style="display: none;background: #fafafa;padding: 10px;">
-    <ul class="margin-top-10 site-users" style="max-height: 200px;overflow-y: auto;background: #fff;"></ul>
+<div class="option-content margin-top-10" id="site" id="get-users" data-activity="<?php echo $activity->id;?>" data-role="teacher" style="display: none;background: #fafafa;padding: 10px;">
+    <?php echo elgg_view("input/text", array(
+        'id' => 'search-users',
+        'class' => 'form-control margin-bottom-20',
+        'placeholder' => elgg_echo('filter')."...",
+    ));
+    ?>
+    <select multiple class="form-control" name="select_users[]"></select>
+    <p class="margin-top-10 text-right">
+        <?php
+        echo elgg_view('input/button', array(
+            'value' => elgg_echo('add'),
+            'class' => "submit-add-teachers btn btn-primary btn-xs",
+        ));
+        ?>
+    </p>
 </div>
