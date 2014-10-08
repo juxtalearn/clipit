@@ -25,11 +25,15 @@ function expose_rating_functions() {
         false, true
     );
     expose_function(
-        $api_suffix . "get_user_ratings", $class_suffix . "get_user_ratings", array(
+        $api_suffix . "get_from_user_for_target", $class_suffix . "get_from_user_for_target", array(
             "user_id" => array("type" => "int", "required" => true),
-            "target_id" => array("type" => "int", "required" => false)
-        ), "Return all ratings made by a user, optionally filtered by target if specified", 'GET', false, true
+            "target_id" => array("type" => "int", "required" => true)
+        ), "Return the rating made by a user upon a target", 'GET', false, true
     );
+    expose_function(
+        $api_suffix . "get_average_target_rating", $class_suffix . "get_average_target_rating", array(
+            "target_id" => array("type" => "int", "required" => true)
+        ),"Return the average rating for a target", "GET", false, true);
     expose_function(
         $api_suffix . "add_tag_ratings", $class_suffix . "add_tag_ratings", array(
             "id" => array("type" => "int", "required" => true),
