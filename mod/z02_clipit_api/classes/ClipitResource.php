@@ -32,6 +32,7 @@ class ClipitResource extends UBItem {
     public $tag_array = array();
     public $label_array = array();
     public $performance_item_array = array();
+    public $read_array = array();
 
     /**
      * Loads object parameters stored in Elgg
@@ -43,6 +44,17 @@ class ClipitResource extends UBItem {
         $this->tag_array = (array)static::get_tags($this->id);
         $this->label_array = (array)static::get_labels($this->id);
         $this->performance_item_array = (array)static::get_performance_items($this->id);
+        $this->read_array = (array)$elgg_entity->get("read_array");
+    }
+
+    /**
+     * Copy $this object parameters into an Elgg entity.
+     *
+     * @param ElggEntity $elgg_entity Elgg object instance to save $this to
+     */
+    protected function copy_to_elgg($elgg_entity) {
+        parent::copy_to_elgg($elgg_entity);
+        $elgg_entity->set("read_array", (string)$this->read_array);
     }
 
     /**
@@ -279,5 +291,60 @@ class ClipitResource extends UBItem {
 
     static function get_performance_items($id) {
         return UBCollection::get_items($id, static::REL_RESOURCE_PERFORMANCE);
+    }
+
+    /**
+     * Get a list of Users who have Read a Resource, or optionally whether certain Users have read it
+     *
+     * @param int        $id         ID of the Resource
+     * @param null|array $user_array List of User IDs - optional
+     *
+     * @return static[] Array with key => value: user_id => read_status, where read_status is bool
+     */
+    static function get_read_status($id, $user_array = null) {
+        $props = static::get_properties($id, array("read_array", "owner_id"));
+        $read_array = $props["read_array"];
+        if(!$user_array) {
+            return $read_array;
+        } else {
+            $return_array = array();
+            foreach($user_array as $user_id) {
+                if(in_array($user_id, $read_array)) {
+                    $return_array[$user_id] = true;
+                } else {
+                    $return_array[$user_id] = false;
+                }
+            }
+            return $return_array;
+        }
+    }
+
+    /**
+     * Set the Read status for a Resource
+     *
+     * @param int   $id         ID of Resource
+     * @param bool  $read_value Read status value: true = read, false = unread
+     * @param array $user_array Array of User IDs
+     *
+     * @return bool|int ID of Resource if Ok, false if error
+     * @throws InvalidParameterException
+     */
+    static function set_read_status($id, $read_value, $user_array) {
+        $read_array = static::get_properties($id, array("read_array"));
+        $read_array = array_pop($read_array);
+        foreach($user_array as $user_id) {
+            if($read_value == true) {
+                if(!in_array($user_id, $read_array)) {
+                    array_push($read_array, $user_id);
+                }
+            } else if($read_value == false) {
+                $index = array_search((int)$user_id, $read_array);
+                if(isset($index) && $index !== false) {
+                    array_splice($read_array, $index, 1);
+                }
+            }
+        }
+        $prop_value_array["read_array"] = $read_array;
+        return static::set_properties($id, $prop_value_array);
     }
 }

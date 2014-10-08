@@ -24,6 +24,7 @@ class ClipitTask extends UBItem {
     const TYPE_QUIZ_TAKE = "quiz_take";
     const TYPE_RESOURCE_UPLOAD = "resource_upload";
     const TYPE_RESOURCE_FEEDBACK = "resource_feedback";
+    const TYPE_RESOURCE_DOWNLOAD = "resource_download";
     const TYPE_STORYBOARD_UPLOAD = "storyboard_upload";
     const TYPE_STORYBOARD_FEEDBACK = "storyboard_feedback";
     const TYPE_VIDEO_UPLOAD = "video_upload";
@@ -272,6 +273,10 @@ class ClipitTask extends UBItem {
                     $rating_targets[] = (int)$user_rating->target;
                 }
                 $parent_task = new static($task->parent_task);
+                // If there are no resources to give feedback on, the status is false = uncompleted
+                if(empty($parent_task->resource_array)){
+                    return false;
+                }
                 foreach($parent_task->resource_array as $resource_id) {
                     if(array_search((int)$resource_id, $rating_targets) === false) {
                         $resource_group = (int)ClipitStoryboard::get_group((int)$resource_id);
@@ -297,6 +302,10 @@ class ClipitTask extends UBItem {
                     $rating_targets[] = (int)$user_rating->target;
                 }
                 $parent_task = new static($task->parent_task);
+                // If there are no storyboards to give feedback on, the status is false = uncompleted
+                if(empty($parent_task->storyboard_array)){
+                    return false;
+                }
                 foreach($parent_task->storyboard_array as $storyboard_id) {
                     if(array_search((int)$storyboard_id, $rating_targets) === false) {
                         $storyboard_group = (int)ClipitStoryboard::get_group((int)$storyboard_id);
@@ -322,6 +331,10 @@ class ClipitTask extends UBItem {
                     $rating_targets[] = (int)$user_rating->target;
                 }
                 $parent_task = new static($task->parent_task);
+                // If there are no storyboards to give feedback on, the status is false = uncompleted
+                if(empty($parent_task->storyboard_array)){
+                    return false;
+                }
                 foreach($parent_task->video_array as $video_id) {
                     if(array_search((int)$video_id, $rating_targets) === false) {
                         $video_group = (int)ClipitVideo::get_group((int)$video_id);
