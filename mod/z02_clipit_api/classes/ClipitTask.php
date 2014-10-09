@@ -276,10 +276,18 @@ class ClipitTask extends UBItem {
                 // If there are no resources to give feedback on, the status is false = uncompleted
                 if(empty($parent_task->resource_array)){
                     return false;
+                } // If the only resource was authored by the user's group
+                elseif(count($parent_task->resource_array) == 1){
+                    $resource_id = array_pop($parent_task->resource_array);
+                    $resource_group = (int)ClipitResource::get_group($resource_id);
+                    $user_group = (int)ClipitGroup::get_from_user_activity($entity_id, $task->activity);
+                    if($resource_group === $user_group){
+                        return false;
+                    }
                 }
                 foreach($parent_task->resource_array as $resource_id) {
                     if(array_search((int)$resource_id, $rating_targets) === false) {
-                        $resource_group = (int)ClipitStoryboard::get_group((int)$resource_id);
+                        $resource_group = (int)ClipitResource::get_group((int)$resource_id);
                         $user_group = (int)ClipitGroup::get_from_user_activity($entity_id, $task->activity);
                         if($resource_group !== $user_group) {
                             // at least one of the targets was not rated
@@ -305,6 +313,14 @@ class ClipitTask extends UBItem {
                 // If there are no storyboards to give feedback on, the status is false = uncompleted
                 if(empty($parent_task->storyboard_array)){
                     return false;
+                }// If the only storyboard was authored by the user's group
+                elseif(count($parent_task->storyboard_array) == 1){
+                    $storyboard_id = array_pop($parent_task->storyboard_array);
+                    $storyboard_group = (int)ClipitStoryboard::get_group($storyboard_id);
+                    $user_group = (int)ClipitGroup::get_from_user_activity($entity_id, $task->activity);
+                    if($storyboard_group === $user_group){
+                        return false;
+                    }
                 }
                 foreach($parent_task->storyboard_array as $storyboard_id) {
                     if(array_search((int)$storyboard_id, $rating_targets) === false) {
@@ -332,8 +348,18 @@ class ClipitTask extends UBItem {
                 }
                 $parent_task = new static($task->parent_task);
                 // If there are no storyboards to give feedback on, the status is false = uncompleted
-                if(empty($parent_task->storyboard_array)){
+                if(empty($parent_task->video_array)){
                     return false;
+                }elseif(count($parent_task->video_array) == 1){ // If the only video was authored by the user's group
+                    $video_id = array_pop($parent_task->video_array);
+                    $video_group = (int)ClipitVideo::get_group($video_id);
+                    $user_group = (int)ClipitGroup::get_from_user_activity($entity_id, $task->activity);
+                    if($video_group === $user_group){
+                        return false;
+                    }
+                    if(array_search((int)$video_id, $rating_targets) === false){
+                        return false;
+                    } return true;
                 }
                 foreach($parent_task->video_array as $video_id) {
                     if(array_search((int)$video_id, $rating_targets) === false) {
