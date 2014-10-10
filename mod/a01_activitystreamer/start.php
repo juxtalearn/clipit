@@ -21,6 +21,8 @@
             "(object_id, object_title, transaction_id, object_class, object_type, object_subtype, event, time, ip_address, user_id, user_name, access_id, enabled, owner_guid, content, group_id, course_id, activity_id, role) ".
             "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
         createTables();
+        include_once(elgg_get_plugins_path(). "a01_activitystreamer/lib/ActivityStreamer.php");
+
     }
 
     function createTables() {
@@ -101,8 +103,9 @@
             'content' => elgg_view("activitystreamer/activitystreamer"),
             'title' => $title,
             'filter' => "",
+            'class' => 'default'
         );
-        $body = elgg_view_layout('one_column', $params);
+        $body = elgg_view_layout('one-column', $params);
         echo elgg_view_page($title, $body);
 
 	}
@@ -243,7 +246,6 @@
                 $object_content = urlencode($object_content);
             }
            //4 If the table doesn't exist, we need to create it...
-
             $logging_stmt->bind_param('iisssssssisisisiiis', $object_id, $object_title, $transaction_id, $object_class, $object_type, $object_subtype, $event, $time, $ip_address, $performed_by,
                                                              $user_name, $access_id, $enabled, $owner_guid, $object_content, $group_id, $course_id, $activity_id, $role);
             $logging_stmt->execute();
@@ -275,8 +277,8 @@
 	
 	function transaction_handling()
 	{
-   //     include_once(elgg_get_plugins_path(). "z30_activitystreamer" . DIRECTORY_SEPARATOR . "lib" . DIRECTORY_SEPARATOR . "logProcessing.php");
-        include_once(elgg_get_plugins_path(). "z30_activitystreamer/lib/logProcessing.php");
+   //     include_once(elgg_get_plugins_path(). "a01_activitystreamer" . DIRECTORY_SEPARATOR . "lib" . DIRECTORY_SEPARATOR . "logProcessing.php");
+        include_once(elgg_get_plugins_path(). "a01_activitystreamer/lib/logProcessing.php");
 		global $con;
         global $transaction_stmt;
        	$act_table = $_SESSION['activity_table'];
@@ -339,4 +341,5 @@ function extended_log_default_logger($event, $object_type, $object) {
     elgg_register_event_handler('plugins_boot','system','init_transaction');
 	register_shutdown_function('transaction_handling');
     elgg_register_event_handler('pagesetup','system','activitystreamer_pagesetup');
-    elgg_register_action('activitystreamer/rebuild', elgg_get_plugins_path(). "z30_activitystreamer/actions/rebuild.php");
+    elgg_register_action('activitystreamer/rebuild', elgg_get_plugins_path(). "a01_activitystreamer/actions/rebuild.php");
+    elgg_register_action('activitystreamer/request', elgg_get_plugins_path(). "a01_activitystreamer/actions/request.php");

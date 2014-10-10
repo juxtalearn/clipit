@@ -8,7 +8,7 @@
 
 admin_gatekeeper();
 action_gatekeeper("rebuild");
-include_once(elgg_get_plugins_path(). "z30_activitystreamer" . DIRECTORY_SEPARATOR . "lib" . DIRECTORY_SEPARATOR . "logProcessing.php");
+include_once(elgg_get_plugins_path(). "a01_activitystreamer" . DIRECTORY_SEPARATOR . "lib" . DIRECTORY_SEPARATOR . "logProcessing.php");
 $_SESSION['transaction'] = "";
 $affirmative = get_input('affirmative', 1);
 $_SESSION['activity_table'] = $CONFIG->dbprefix."activitystreams";
@@ -32,18 +32,13 @@ if (isset($affirmative) && $affirmative) {
             }
             if ($current_ID != $new_ID) {
                 $action = convertLogTransactionToActivityStream($_SESSION['transaction']);
-                if (!($action['verb'] == 'Unidentified') && !($action['verb'] == 'Ignore')) {
+                if (!($action['verb'] == 'Unidentified') && !($action['verb'] == 'Ignore') && !($action['verb'] == 'Multiple')) {
                     storeJSON($action, $act_table, $con, $transaction_stmt);
                     //error_log("\n\n".$current_ID.": ".$action['verb'].build_log_string());
                 }
                 else {
-                    error_log("\n\n".$current_ID.": ".$action['verb'].build_log_string());
+                    error_log($current_ID.": ".$action['verb'].build_log_string());
                 }
-                /*
-                if ($action['verb'] == ClipitPost::SUBTYPE) {
-                    error_log("\n\n".$current_ID.": ".$action['verb'].build_log_string());
-                }
-                */
                 $_SESSION['transaction'] = "";
                 $current_ID = $new_ID;
             }
@@ -65,8 +60,6 @@ if (isset($affirmative) && $affirmative) {
         }
     } else die(mysqli_error($con));
     $transaction_stmt->close();
-    $con->close();
-
     system_message("<h1>Successfully rebuild ActivityStream from ".$amount." log entries.");
 
 }
