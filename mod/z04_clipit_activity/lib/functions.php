@@ -1,4 +1,6 @@
 <?php
+
+
 /**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
@@ -136,6 +138,8 @@ function get_video_url_embed($url){
     } else if (strpos($url, 'vimeo.com') != false) {
         preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=vimeo.com/)[^&\n]+#", $url, $matches);
         $embed_url = "//player.vimeo.com/video/".$matches[0];
+    } else {
+        $embed_url = elgg_get_site_url(). "mod/z04_clipit_activity/lib/ownvideo.php?v=".urlencode($url);
     }
     return $embed_url;
 }

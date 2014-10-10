@@ -14,8 +14,8 @@
 	$ts = time();
 	$token = generate_action_token($ts);
     
-	$area2 = elgg_view("activitystreamer/activitystreamer", array('token' => $token, 'ts' => $ts));
+	$body = elgg_view("activitystreamer/activitystreamer", array('token' => $token, 'ts' => $ts));
 	
 	// Display main admin menu
-	elgg_view_page(elgg_echo('activitystreamer'),elgg_view_layout("two_column_left_sidebar", '', $title . $area2));
+	elgg_view_page(elgg_echo('activitystreamer'),$body);
 ?>
