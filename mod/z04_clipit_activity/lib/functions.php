@@ -366,13 +366,18 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
 function get_group_progress($group_id){
     $activity_id = ClipitGroup::get_activity($group_id);
     $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
-    $individual_tasks = array(ClipitTask::TYPE_VIDEO_FEEDBACK, ClipitTask::TYPE_STORYBOARD_FEEDBACK, ClipitTask::TYPE_QUIZ_TAKE);
+    $individual_tasks = array(
+        ClipitTask::TYPE_VIDEO_FEEDBACK,
+        ClipitTask::TYPE_STORYBOARD_FEEDBACK,
+        ClipitTask::TYPE_QUIZ_TAKE,
+        ClipitTask::TYPE_RESOURCE_DOWNLOAD
+    );
     $completed = array();
     $total = 0;
     $group_users = ClipitGroup::get_users($group_id);
     foreach($activity->task_array as $task_id){
         $task = array_pop(ClipitTask::get_by_id(array($task_id)));
-        if(time() > $task->start) {
+        //if(time() > $task->start) {
             if (in_array($task->task_type, $individual_tasks)) {
                 foreach ($group_users as $user_id) {
                     if (ClipitTask::get_completed_status($task_id, $user_id)) {
@@ -381,12 +386,13 @@ function get_group_progress($group_id){
                     $total++;
                 }
             } else {
-                $total++;
+                //$total++;
                 if (ClipitTask::get_completed_status($task_id, $group_id)) {
                     $completed[] = true;
                 }
             }
-        }
+        //}
+        $total++;
     }
     $val = count($completed)/($total);
     return round($val*100);
