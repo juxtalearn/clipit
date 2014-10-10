@@ -81,6 +81,10 @@ function clipit_final_init() {
         return $return_value;
     }
 
+    if($user->role == ClipitUser::ROLE_ADMIN) {
+        elgg_extend_view("navigation/menu/top", "navigation/menu/admin", 100);
+    }
+
     elgg_register_page_handler('activity', 'user_landing_page');
     // Footer links
     elgg_register_page_handler('clipit', 'clipit_footer_page');

@@ -34,13 +34,15 @@ function clipit_activity_init() {
     elgg_load_library('clipit:activity:multimedia');
 
     // Special views for role = teacher
-    if($user->role == 'teacher'){
+    if($user->role == ClipitUser::ROLE_TEACHER){
         // Create activity
         elgg_extend_view("navigation/menu/top", "navigation/menu/create_activity", 50);
         elgg_register_page_handler('create_activity', 'create_activity_page_handler');
     }
-    // My activities list (top header)
-    elgg_extend_view("navigation/menu/top", "navigation/menu/my_activities", 100);
+    if($user->role != ClipitUser::ROLE_ADMIN) {
+        // My activities list (top header)
+        elgg_extend_view("navigation/menu/top", "navigation/menu/my_activities", 100);
+    }
 
     // Register "/my_activities" page handler
     elgg_register_page_handler('my_activities', 'my_activities_page_handler');
