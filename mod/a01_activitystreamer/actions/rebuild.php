@@ -37,7 +37,7 @@ if (isset($affirmative) && $affirmative) {
                     //error_log("\n\n".$current_ID.": ".$action['verb'].build_log_string());
                 }
                 else {
-                    error_log($current_ID.": ".$action['verb'].build_log_string());
+                    //error_log($current_ID.": ".$action['verb'].build_log_string());
                 }
                 $_SESSION['transaction'] = "";
                 $current_ID = $new_ID;

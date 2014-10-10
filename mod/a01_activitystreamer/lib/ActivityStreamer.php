@@ -4,8 +4,26 @@ class ActivityStreamer {
     static function get_metric($metric_id, $return_id, $context) {
         global $con;
         global $CONFIG;
-	$server_url = "https://analytictk.rias-institute.eu:1443/requestAnalysis";
-	$return_url = elgg_get_site_url() . "services/api/rest/xml/?method=clipit.la.save_metric";
+
+        $entities = elgg_get_entities(array("types" => "object", "subtypes" => "modactivitystreamer", "owner_guids" => '0', "order_by" => "", "limit" => 0));
+        if (!isset($entities[0])) {
+            $entity = $entities[0];
+            $workbenchurl = "https://analyticstk.rias-institute.eu:1443/requestAnalysis";
+            $entity = new ElggObject;
+            $entity->subtype = 'modactivitystreamer';
+            $entity->owner_guid = $_SESSION['user']->getGUID();
+            $entity->workbenchurl = $workbenchurl;
+            $entity->access_id = 2;    //Make sure this object is public.
+        } else {
+            $entity = $entities[0];
+            $workbenchurl = $entity->workbenchurl;
+        }
+        error_log("Server URL = ".$workbenchurl);
+
+
+//        $server_url = "https://analyticstk.rias-institute.eu:1443/requestAnalysis";
+//        $return_url = elgg_get_site_url() . "services/api/rest/xml/?method=clipit.la.save_metric";
+        $return_url = "http://176.28.14.94/~workbench/jxlDefinitions/clipItDriver.php";
         $sql = "SELECT json FROM ".$CONFIG->dbprefix."activitystreams";
         $filter = "";
         $parameter_string = "";
@@ -87,9 +105,11 @@ class ActivityStreamer {
         }
         $statement->close();
         $json = json_encode($activities);
-
+        $token_array = get_user_tokens(elgg_get_logged_in_user_guid(), $CONFIG->site_id);
+        $token = $token_array[0];
+        $token_string = $token->token;
         define('AnalysisData', $json);
-        $data = array('TemplateId' => $metric_id, 'ReturnId' => $return_id, 'ReturnURL' => $return_url, 'AnalysisData' => base64_encode(AnalysisData));
+        $data = array('AuthToken' => $token_string, 'TemplateId' => $metric_id, 'ReturnId' => $return_id, 'ReturnURL' => $return_url, 'AnalysisData' => base64_encode(AnalysisData));
 
 // use key 'http' even if you send the request to https://...
         $options = array(
@@ -99,9 +119,13 @@ class ActivityStreamer {
                 'content' => http_build_query($data),
             ),
         );
+
         $request_context  = stream_context_create($options);
-        $runId = file_get_contents($server_url, false, $request_context);
+
+        error_log($workbenchurl);
+        $runId = file_get_contents($workbenchurl, false, $request_context);
 
         return $runId;
     }
 }
+

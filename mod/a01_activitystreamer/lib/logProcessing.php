@@ -1,52 +1,55 @@
 <?php
-function storeJSON($action) {
+function storeJSON($action)
+{
     global $con;
     global $transaction_stmt;
-    $action['object']['content'] = 	urlencode($action['object']['content']);
-    $action['object']['objectTitle'] = 	urlencode($action['object']['objectTitle']);
+    $action['object']['content'] = urlencode($action['object']['content']);
+    $action['object']['objectTitle'] = urlencode($action['object']['objectTitle']);
     $activity_json = json_encode($action);
     createActivityTable($con, $_SESSION['activity_table']);
     if ($transaction_stmt && $action['verb'] != "Ignore") {
         $transaction_stmt->bind_param('ssiiiiissi', $action['transactionId'], $activity_json, $action['actor']['actorId'], $action['object']['objectId'], $action['object']['groupId'],
             $action['object']['courseId'], $action['object']['activityId'], $action['verb'], $action['actor']['objectType'], $action['published']);
         $transaction_stmt->execute();
-    }
-    else {
+    } else {
         error_log(mysqli_error($con));
     }
 }
 
-function createActivityTable($con, $act_table) {
-    mysqli_query($con, "CREATE TABLE IF NOT EXISTS `".$act_table."` (".
-        "`stream_id` int(255) NOT NULL AUTO_INCREMENT,".
-        "`transaction_id` varchar(255) NOT NULL, ".
-        "`json` longtext NOT NULL, ".
-        "`actor_id` int(255) NOT NULL, ".
-        "`object_id` int(255) NOT NULL, ".
-        "`group_id` int(255) NOT NULL, ".
-        "`course_id` int(255) NOT NULL, ".
-        "`activity_id` int(255) NOT NULL, ".
-        "`verb` varchar(255) NOT NULL, ".
-        "`role` varchar(255) NOT NULL, ".
-        "`timestamp` varchar(255) NOT NULL, ".
-        "PRIMARY KEY (`stream_id`), ".
-        "PRIMARY KEY (`stream_id`), ".
-        "KEY `actor_id` (`actor_id`), ".
-        "KEY `object_id` (`object_id`), ".
-        "KEY `group_id` (`group_id`), ".
-        "KEY `activity_id` (`activity_id`), ".
-        "KEY `verb` (`verb`) ".
+function createActivityTable($con, $act_table)
+{
+    mysqli_query($con, "CREATE TABLE IF NOT EXISTS `" . $act_table . "` (" .
+        "`stream_id` int(255) NOT NULL AUTO_INCREMENT," .
+        "`transaction_id` varchar(255) NOT NULL, " .
+        "`json` longtext NOT NULL, " .
+        "`actor_id` int(255) NOT NULL, " .
+        "`object_id` int(255) NOT NULL, " .
+        "`group_id` int(255) NOT NULL, " .
+        "`course_id` int(255) NOT NULL, " .
+        "`activity_id` int(255) NOT NULL, " .
+        "`verb` varchar(255) NOT NULL, " .
+        "`role` varchar(255) NOT NULL, " .
+        "`timestamp` varchar(255) NOT NULL, " .
+        "PRIMARY KEY (`stream_id`), " .
+        "PRIMARY KEY (`stream_id`), " .
+        "KEY `actor_id` (`actor_id`), " .
+        "KEY `object_id` (`object_id`), " .
+        "KEY `group_id` (`group_id`), " .
+        "KEY `activity_id` (`activity_id`), " .
+        "KEY `verb` (`verb`) " .
         ") ENGINE=MyISAM DEFAULT CHARSET=utf8 DEFAULT COLLATE utf8_general_ci AUTO_INCREMENT=1;");
 }
 
-function processURL($url) {
+function processURL($url)
+{
     $object_Id = 0;
     $values = explode("/", $url);
     $object_Id = end($values);
     return $object_Id;
 }
 
-function convertURLToActivityStream($url) {
+function convertURLToActivityStream($url)
+{
     GLOBAL $con;
 
     $transaction_id = $_SESSION['tid'];
@@ -55,7 +58,9 @@ function convertURLToActivityStream($url) {
         $published = time();
         $user = elgg_get_logged_in_user_entity();
         $ip_address = sanitise_string($_SERVER['REMOTE_ADDR']);
-        if (is_null($ip_address)) {$ip_address = "";}
+        if (is_null($ip_address)) {
+            $ip_address = "";
+        }
         $actor['IPAddress'] = $ip_address;
         $actor['displayName'] = $user->name;
         $actor['actorId'] = $user->guid;
@@ -79,11 +84,10 @@ function convertURLToActivityStream($url) {
             $course_id = 0;
             if (class_exists(ClipitActivity) AND class_exists(ClipitGroup)) {
                 $temp_array = get_entity_relationships($object['objectId'], true);
-                foreach($temp_array as $rel){
-                    if($rel->relationship == ClipitActivity::REL_ACTIVITY_FILE OR $rel->relationship == ClipitActivity::REL_ACTIVITY_TASK OR $rel->relationship == ClipitActivity::REL_ACTIVITY_VIDEO){
+                foreach ($temp_array as $rel) {
+                    if ($rel->relationship == ClipitActivity::REL_ACTIVITY_FILE OR $rel->relationship == ClipitActivity::REL_ACTIVITY_TASK OR $rel->relationship == ClipitActivity::REL_ACTIVITY_VIDEO) {
                         $activity_id = $rel->guid_one;
-                    }
-                    elseif($rel->relationship == ClipitGroup::REL_GROUP_FILE /*OR $rel->relationship == ClipitGroup::REL_GROUP_TASK OR $rel->relationship == ClipitGroup::REL_GROUP_VIDEO */){
+                    } elseif ($rel->relationship == ClipitGroup::REL_GROUP_FILE /*OR $rel->relationship == ClipitGroup::REL_GROUP_TASK OR $rel->relationship == ClipitGroup::REL_GROUP_VIDEO */) {
                         $group_id = $rel->guid_one;
                     }
                     //TODO Add support for courses when available
@@ -94,26 +98,26 @@ function convertURLToActivityStream($url) {
             $object['groupId'] = $group_id;
             $object['courseId'] = $course_id;
             $object['activityId'] = $activity_id;
-        }
-        else {
+        } else {
             $verb = "Unidentified";
-            mysqli_query($con,"INSERT INTO `tracking` ".
-                "(transaction_id, url) ".
-                "VALUES ('".$transaction_id."', '".$url."');");
+            mysqli_query($con, "INSERT INTO `tracking` " .
+                "(transaction_id, url) " .
+                "VALUES ('" . $transaction_id . "', '" . $url . "');");
         }
-    }
-    else {
-        mysqli_query($con,"INSERT INTO `tracking` ".
-            "(transaction_id, url) ".
-            "VALUES ('".$transaction_id."', '".$url."');");
+    } else {
+        mysqli_query($con, "INSERT INTO `tracking` " .
+            "(transaction_id, url) " .
+            "VALUES ('" . $transaction_id . "', '" . $url . "');");
         $verb = "Unidentified";
     }
     $activity = array('actor' => $actor, 'verb' => $verb, 'object' => $object, 'published' => $published, 'transactionId' => $transaction_id);
     return $activity;
 }
 
-function convertLogTransactionToActivityStream($transaction) {
+function convertLogTransactionToActivityStream($transaction)
+{
     global $con;
+    set_time_limit(300);
     $transaction = removeAPILogins($transaction);
 
     global $CONFIG;
@@ -137,8 +141,7 @@ function convertLogTransactionToActivityStream($transaction) {
         $user_properties = ClipitUser::get_properties($actor['actorId']);
         if (is_not_null($user_properties) && !empty($user_properties['role']) && !($user_properties['role'] == "")) {
             $actor['objectType'] = $user_properties['role'];
-        }
-        else {
+        } else {
             $actor['objectType'] = "n/a";
         }
     }
@@ -167,16 +170,14 @@ function convertLogTransactionToActivityStream($transaction) {
                 $l = findValue($transaction, "update", ClipitPost::SUBTYPE, "ObjectId", TRUE);
                 if ($l > 0) {
                     //If we find an update, we need to make sure its the second update
-                    if (isset($transaction[$l+1]['Event']) && $transaction[$l+1]['Event'] == "update") {
-                        $l = $l+1;
+                    if (isset($transaction[$l + 1]['Event']) && $transaction[$l + 1]['Event'] == "update") {
+                        $l = $l + 1;
                     }
-                }
-                else {
+                } else {
                     //Reset to create line:
                     $l = findValue($transaction, "create", ClipitPost::SUBTYPE, "ObjectId", TRUE);
                 }
-            }
-            else {
+            } else {
                 $l = findValue($transaction, "create", ClipitComment::SUBTYPE, "ObjectId", TRUE);
 
             }
@@ -189,18 +190,16 @@ function convertLogTransactionToActivityStream($transaction) {
             $object['content'] = $transaction[$l]['Content'];
             $published = $transaction[$l]['Timestamp'];
 
-            $values = findValue($transaction, "create", $transaction[$l]['ObjectSubtype']."-destination", "Content", FALSE);
-            if (!(strpos($values,"-") !== false) && !($values == "new")) {
+            $values = findValue($transaction, "create", $transaction[$l]['ObjectSubtype'] . "-destination", "Content", FALSE);
+            if (!(strpos($values, "-") !== false) && !($values == "new")) {
 //                error_log("Missing destination line!");
                 $verb = "Unidentified";
                 break;
-            }
-            else {
+            } else {
                 if ($values == "new") {
                     $target_id = "new";
-                }
-                else {
-                    $ids = preg_split('/[-]/',$values);
+                } else {
+                    $ids = preg_split('/[-]/', $values);
                     $target_id = $ids[1];
                 }
             }
@@ -211,18 +210,15 @@ function convertLogTransactionToActivityStream($transaction) {
                 if ($activity_id == 0) {
                     $group_id = getGroupIdFromObjectId($transaction[$l]['ObjectId']);
                     $target_id = $group_id;
-                }
-                else {
+                } else {
                     $target_id = $activity_id;
                 }
-            }
-            else {
+            } else {
                 $activity_id = determineActivityId($target_id);
             }
             if ($activity_id > 0 && $group_id == 0) {
                 $group_id = determineGroupId($transaction[0]['UserId'], $activity_id);
-            }
-            else {
+            } else {
                 //If activityId couldn't be determined it might be due to object beeing posted to a group instead of to an activity
                 if ($group_id == 0) {
                     $group_id = getGroupIdFromObjectId($target_id);
@@ -237,7 +233,6 @@ function convertLogTransactionToActivityStream($transaction) {
             $object['targetType'] = $type[0];
             $object['targetSubtype'] = $type[1];
             $object['targetTitle'] = getObjectTitle($target_id);
-
 
 
             /*
@@ -278,8 +273,7 @@ function convertLogTransactionToActivityStream($transaction) {
             $activity_id = determineActivityId($video_id);
             if ($activity_id > 0) {
                 $group_id = determineGroupId($transaction[0]['UserId'], $activity_id);
-            }
-            else {
+            } else {
                 //If activityId couldn't be determined it might be due to object beeing posted to a group instead of an activity
                 $group_id = getGroupIdFromObjectId($video_id);
                 $group = get_entity($group_id);
@@ -320,8 +314,7 @@ function convertLogTransactionToActivityStream($transaction) {
             $activity_id = determineActivityId($video_id);
             if ($activity_id > 0) {
                 $group_id = determineGroupId($transaction[0]['UserId'], $activity_id);
-            }
-            else {
+            } else {
                 //If activityId couldn't be determined it might be due to object beeing posted to a group instead of an activity
                 $group_id = getGroupIdFromObjectId($video_id);
                 $group = get_entity($group_id);
@@ -402,20 +395,18 @@ function convertLogTransactionToActivityStream($transaction) {
             $verb = "added";
             $title = $transaction[$l]['ObjectSubtype'];
             $values = $transaction[$l]['Content'];
-            if (!(strpos($title,"-") !== false)) {
+            if (!(strpos($title, "-") !== false)) {
 //                error_log($transaction_id."\nTitle kaputt: ".$title);
                 $verb = "Unidentified";
                 break;
-            }
-            else {
+            } else {
                 $types = preg_split('/[-]/', $title);
             }
-            if (!(strpos($values,"-") !== false)) {
+            if (!(strpos($values, "-") !== false)) {
 //                error_log($transaction_id."\nValues kaputt");
                 $verb = "Unidentified";
                 break;
-            }
-            else {
+            } else {
                 $ids = preg_split('/[-]/', $values);
             }
             $object['objectId'] = $ids[1];
@@ -423,57 +414,56 @@ function convertLogTransactionToActivityStream($transaction) {
             $object['objectType'] = $transaction[$l]['ObjectType'];
             $object['objectSubtype'] = $types[1];
             if ($object['objectSubtype'] == "destination") {
-                $object['objectSubtype'] = determineObjectType($object['objectId'])[1];
+                $objectId = $object['objectId'];
+                $type = determineObjectType($objectId);
+                $object['objectSubtype'] = $type[1];
             }
 
 
             $object['objectClass'] = $transaction[$l]['ObjectClass'];
             $object['ownerGUID'] = $transaction[$l]['OwnerGUID'];
-
             $object['targetId'] = $ids[0];
             $object['targetType'] = 'ElggEntity';
             $object['targetSubtype'] = $types[0];
 
             if ($object['targetSubtype'] == "ClipitTag") {
-                $object['targetTitle'] =  urlencode(getTagContent($ids[0]));
-            }
-            else {
-                $object['targetTitle'] =  urlencode(getObjectTitle($ids[0]));
+                $object['targetTitle'] = urlencode(getTagContent($ids[0]));
+            } else {
+                $object['targetTitle'] = urlencode(getObjectTitle($ids[0]));
             }
             if ($object['objectSubtype'] == "ClipitTag") {
-                $object['objectTitle'] =  urlencode(getTagContent($ids[1]));
-            }
-            else {
-                $object['objectTitle'] =  urlencode(getObjectTitle($ids[1]));
+                $object['objectTitle'] = urlencode(getTagContent($ids[1]));
+            } else {
+                $object['objectTitle'] = urlencode(getObjectTitle($ids[1]));
             }
             break;
         case "ModifyRelationship":
             $verb = "remove";
             $title = $transaction[0]['ObjectSubtype'];
             $values = $transaction[0]['Content'];
-            if (!(strpos($title,"-") !== false)) {
+            if (!(strpos($title, "-") !== false)) {
                 error_log("TitleKaputt");
 //                    error_log($transaction_id."FoundNoTitle\n\n\n\n");
                 $verb = "Unidentified";
                 break;
-            }
-            else {
+            } else {
                 $types = preg_split('/[-]/', $title);
             }
-            if (!(strpos($values,"-") !== false)) {
-                error_log($transaction_id."FoundNoContent\n\n\n\n");
+            if (!(strpos($values, "-") !== false)) {
+                error_log($transaction_id . "FoundNoContent\n\n\n\n");
                 $verb = "Unidentified";
                 break;
-            }
-            else {
-                $ids = preg_split('/[-]/',$values);
+            } else {
+                $ids = preg_split('/[-]/', $values);
             }
             $object['objectId'] = $ids[1];
             $object['objectTitle'] = $title;
             $object['objectType'] = $transaction[0]['ObjectType'];
             $object['objectSubtype'] = $types[1];
             if ($object['objectSubtype'] == "destination") {
-                $object['objectSubtype'] = determineObjectType($object['objectId'])[1];
+                $objectId = $object['objectId'];
+                $type = determineObjectType($objectId);
+                $object['objectSubtype'] = $type[1];
             }
 
 
@@ -490,20 +480,18 @@ function convertLogTransactionToActivityStream($transaction) {
                 $verb = "added";
                 $title = $transaction[$l]['ObjectSubtype'];
                 $values = $transaction[$l]['Content'];
-                if (!(strpos($title,"-") !== false)) {
+                if (!(strpos($title, "-") !== false)) {
 //                error_log($transaction_id."\nTitle kaputt: ".$title);
                     $verb = "Unidentified";
                     break;
-                }
-                else {
+                } else {
                     $types = preg_split('/[-]/', $title);
                 }
-                if (!(strpos($values,"-") !== false)) {
+                if (!(strpos($values, "-") !== false)) {
 //                error_log($transaction_id."\nValues kaputt");
                     $verb = "Unidentified";
                     break;
-                }
-                else {
+                } else {
                     $ids = preg_split('/[-]/', $values);
                 }
                 $object['objectId'] = $ids[1];
@@ -511,7 +499,9 @@ function convertLogTransactionToActivityStream($transaction) {
                 $object['objectType'] = $transaction[$l]['ObjectType'];
                 $object['objectSubtype'] = $types[1];
                 if ($object['objectSubtype'] == "destination") {
-                    $object['objectSubtype'] = determineObjectType($object['objectId'])[1];
+                    $objectId = $object['objectId'];
+                    $type = determineObjectType($objectId);
+                    $object['objectSubtype'] = $type[1];
                 }
 
                 $object['objectClass'] = $transaction[$l]['ObjectClass'];
@@ -521,16 +511,14 @@ function convertLogTransactionToActivityStream($transaction) {
                 $object['targetType'] = 'ElggEntity';
                 $object['targetSubtype'] = $types[0];
                 if ($object['targetSubtype'] == "ClipitTag") {
-                    $object['targetTitle'] =  urlencode(getTagContent($ids[0]));
-                }
-                else {
-                    $object['targetTitle'] =  urlencode(getObjectTitle($ids[0]));
+                    $object['targetTitle'] = urlencode(getTagContent($ids[0]));
+                } else {
+                    $object['targetTitle'] = urlencode(getObjectTitle($ids[0]));
                 }
                 if ($object['objectSubtype'] == "ClipitTag") {
-                    $object['objectTitle'] =  urlencode(getTagContent($ids[1]));
-                }
-                else {
-                    $object['objectTitle'] =  urlencode(getObjectTitle($ids[1]));
+                    $object['objectTitle'] = urlencode(getTagContent($ids[1]));
+                } else {
+                    $object['objectTitle'] = urlencode(getObjectTitle($ids[1]));
                 }
             }
 
@@ -617,7 +605,7 @@ function convertLogTransactionToActivityStream($transaction) {
 
             //Anschließend sollte man noch direkt die Activity-Zugehörigkeit klären:
 
-            $relationline = findValue($transaction, "create", ClipitActivity::SUBTYPE."-".ClipitTask::SUBTYPE, "ObjectId", TRUE);
+            $relationline = findValue($transaction, "create", ClipitActivity::SUBTYPE . "-" . ClipitTask::SUBTYPE, "ObjectId", TRUE);
             $temptrans[0] = $transaction[$relationline];
             $activity = convertLogTransactionToActivityStream($temptrans);
             storeJSON($activity);
@@ -633,17 +621,16 @@ function convertLogTransactionToActivityStream($transaction) {
             $object['ownerGUID'] = $transaction[$chatline]['OwnerGUID'];
             $object['content'] = $transaction[$chatline]['Content'];
 
-            $relationline = findValue($transaction, "create", ClipitChat::SUBTYPE."-destination", "ObjectId", TRUE);
+            $relationline = findValue($transaction, "create", ClipitChat::SUBTYPE . "-destination", "ObjectId", TRUE);
             $temptrans[0] = $transaction[$relationline];
             $activity = convertLogTransactionToActivityStream($temptrans);
             storeJSON($activity);
 
             $values = $transaction[$relationline]['Content'];
-            if (!(strpos($values,"-") !== false)) {
+            if (!(strpos($values, "-") !== false)) {
                 $verb = "Unidentified";
                 break;
-            }
-            else {
+            } else {
                 $ids = preg_split('/[-]/', $values);
             }
             $object['targetId'] = $ids[1];
@@ -680,18 +667,19 @@ function convertLogTransactionToActivityStream($transaction) {
     return $activity;
 }
 
-function getTagContent($id) {
+function getTagContent($id)
+{
     $tag = get_entity($id);
     if ($tag instanceof ElggMetadata) {
-        return "ElggMetadata".$id;
-    }
-    elseif ($tag instanceof ElggEntity) {
+        return "ElggMetadata" . $id;
+    } elseif ($tag instanceof ElggEntity) {
         return $tag->name;
     }
     return "Deleted";
 }
 
-function getObjectTitle($id) {
+function getObjectTitle($id)
+{
     $object = get_entity($id);
     if ($object instanceof ElggEntity) {
         if ($object->getSubType() == ClipitUser::SUBTYPE || $object->getSubType() == "student" || $object->getSubType() == "teacher") {
@@ -702,35 +690,35 @@ function getObjectTitle($id) {
     return "Deleted";
 }
 
-function getActivityIdFromGroupId($group_id) {
+function getActivityIdFromGroupId($group_id)
+{
     $activity_id = 0;
     $activity_array = get_entity_relationships($group_id, true);
-    foreach($activity_array as $rel) {
-        if ($rel->relationship == ClipitActivity::SUBTYPE."-".ClipitGroup::SUBTYPE) {
+    foreach ($activity_array as $rel) {
+        if ($rel->relationship == ClipitActivity::SUBTYPE . "-" . ClipitGroup::SUBTYPE) {
             $activity_id = $rel->guid_one;
         }
     }
     return $activity_id;
 }
 
-function getGroupIdFromObjectId($object_id) {
+function getGroupIdFromObjectId($object_id)
+{
     $group_id = 0;
     $object = get_entity($object_id);
     if ($object instanceof ElggEntity) {
         if ($object instanceof ElggEntity && $object->getSubtype() == ClipitGroup::SUBTYPE) {
             $group_id = getActivityIdFromGroupId($group_id);
-        }
-        else {
+        } else {
             $subtype = $object->getSubtype();
             $group_array = get_entity_relationships($object_id, true);
-            foreach($group_array as $rel) {
+            foreach ($group_array as $rel) {
                 if ($subtype == ClipitComment::SUBTYPE || $subtype == ClipitPost::SUBTYPE) {
-                    if ($rel->relationship == $subtype."-destination") {
+                    if ($rel->relationship == $subtype . "-destination") {
                         $group_id = $rel->guid_one;
                     }
-                }
-                else {
-                    if ($rel->relationship == ClipitGroup::SUBTYPE."-".$subtype) {
+                } else {
+                    if ($rel->relationship == ClipitGroup::SUBTYPE . "-" . $subtype) {
                         $group_id = $rel->guid_one;
                     }
                 }
@@ -740,23 +728,24 @@ function getGroupIdFromObjectId($object_id) {
     return $group_id;
 }
 
-function determineGroupId($userId, $activityId) {
+function determineGroupId($userId, $activityId)
+{
     $matchedId = 0;
     $groupsFound = false;
     //First we get all groups the user is in...
     $group_array = get_entity_relationships($userId, true);
-    foreach($group_array as $rel) {
-        if ($rel->relationship == ClipitGroup::SUBTYPE."-".ClipitUser::SUBTYPE) {
+    foreach ($group_array as $rel) {
+        if ($rel->relationship == ClipitGroup::SUBTYPE . "-" . ClipitUser::SUBTYPE) {
             $groupIds[] = $rel->guid_one;
             $groupsFound = true;
         }
     }
     //...then we check if one of these is in the current activity:
     if ($groupsFound) {
-        foreach($groupIds as $groupId) {
+        foreach ($groupIds as $groupId) {
             $activity_array = get_entity_relationships($groupId, true);
-            foreach($activity_array as $rel) {
-                if ($rel->relationship == ClipitActivity::SUBTYPE."-".ClipitGroup::SUBTYPE) {
+            foreach ($activity_array as $rel) {
+                if ($rel->relationship == ClipitActivity::SUBTYPE . "-" . ClipitGroup::SUBTYPE) {
                     if ($activityId == $rel->guid_one) {
                         $matchedId = $groupId;
                         unset($groupId);
@@ -768,30 +757,30 @@ function determineGroupId($userId, $activityId) {
     return $matchedId;
 }
 
-function determineObjectType($object_id) {
+function determineObjectType($object_id)
+{
     $entity = get_entity($object_id);
     if ($entity instanceof ElggEntity) {
         $type[0] = "UBItem";
         $type[1] = $entity->getSubtype();
-    }
-    else {
+    } else {
         $type[0] = "Unknown";
         $type[1] = "Unknown";
     }
     return $type;
 }
 
-function findValue($transaction, $event, $subtype, $field, $line) {
+function findValue($transaction, $event, $subtype, $field, $line)
+{
     $value = 0;
     $found = false;
     $line_number = 0;
-    foreach($transaction as $log_row) {
+    foreach ($transaction as $log_row) {
         if (!$found AND !empty($log_row['Event']) AND $log_row['Event'] == $event AND !empty($log_row['ObjectSubtype']) AND $log_row['ObjectSubtype'] == $subtype) {
             if ($line) {
                 $value = intval($line_number);
                 $found = true;
-            }
-            else {
+            } else {
                 $value = $log_row[$field];
                 $found = true;
             }
@@ -802,7 +791,8 @@ function findValue($transaction, $event, $subtype, $field, $line) {
     return $value;
 }
 
-function determineActivityId($object_id) {
+function determineActivityId($object_id)
+{
     $activity_id = 0;
     $object = get_entity($object_id);
     if ($object instanceof ElggEntity) {
@@ -810,27 +800,25 @@ function determineActivityId($object_id) {
         if ($subtype == ClipitComment::SUBTYPE || $subtype == ClipitPost::SUBTYPE) {
             $temp_array = get_entity_relationships($object_id);
             $target_id = 0;
-            foreach($temp_array as $rel) {
-                if ($rel->relationship == $subtype."-destination") {
+            foreach ($temp_array as $rel) {
+                if ($rel->relationship == $subtype . "-destination") {
                     $target_id = $rel->guid_two;
                 }
             }
             if ($target_id == 0) {
                 return 0;
             }
-        }
-        else {
+        } else {
             $target_id = $object_id;
         }
         $target = get_entity($target_id);
         if ($target->getSubtype() == ClipitActivity::SUBTYPE) {
             $activity_id = $target_id;
-        }
-        else if ($target->getSubtype() == ClipitGroup::SUBTYPE || $target->getSubtype() == ClipitFile::SUBTYPE || $target->getSubtype() == ClipitStoryboard::SUBTYPE || $target->getSubtype() == ClipitVideo::SUBTYPE) {
+        } else if ($target->getSubtype() == ClipitGroup::SUBTYPE || $target->getSubtype() == ClipitFile::SUBTYPE || $target->getSubtype() == ClipitStoryboard::SUBTYPE || $target->getSubtype() == ClipitVideo::SUBTYPE) {
             $temp_array = get_entity_relationships($target_id, true);
             $activity_id = 0;
-            foreach($temp_array as $rel) {
-                if ($rel->relationship == ClipitActivity::SUBTYPE."-".$target->getSubtype()) {
+            foreach ($temp_array as $rel) {
+                if ($rel->relationship == ClipitActivity::SUBTYPE . "-" . $target->getSubtype()) {
                     $activity_id = $rel->guid_one;
                 }
             }
@@ -839,7 +827,8 @@ function determineActivityId($object_id) {
     return $activity_id;
 }
 
-function removeAPILogins($transaction) {
+function removeAPILogins($transaction)
+{
     if (!empty($transaction[2]) && $transaction[2]['Event'] == 'login') {
         //if transaction has no value in [3] it is a normal login, otherwise it probably is a login followed by a payload through ClipIt's API
         if (isset($transaction[3]) && !empty($transaction[3])) {
@@ -853,10 +842,11 @@ function removeAPILogins($transaction) {
             }
             $anotherLoginAt = findValue($new_transaction, "login", "none", "ObjectType", true);
             if ($anotherLoginAt > 1) {
-                if ($new_transaction[$anotherLoginAt-2]['Event'] == "update" &&
-                    $new_transaction[$anotherLoginAt-1]['Event'] == "update") {
+                if ($new_transaction[$anotherLoginAt - 2]['Event'] == "update" &&
+                    $new_transaction[$anotherLoginAt - 1]['Event'] == "update"
+                ) {
                     foreach ($new_transaction as $line => $number) {
-                        if ($number != $anotherLoginAt || $number != $anotherLoginAt-1 || $number != $anotherLoginAt-2) {
+                        if ($number != $anotherLoginAt || $number != $anotherLoginAt - 1 || $number != $anotherLoginAt - 2) {
                             $temp_trans[] = $line;
                         }
                     }
@@ -869,9 +859,9 @@ function removeAPILogins($transaction) {
 }
 
 
-function determineActivityType($transaction) {
+function determineActivityType($transaction)
+{
     $type = "";
-
 
 
     if (isset($transaction[0]) && !empty($transaction[0])) {
@@ -880,81 +870,63 @@ function determineActivityType($transaction) {
             $transaction[0]['ObjectSubtype'] == "plugin" ||
             findValue($transaction, "delete", "active_plugin", "ObjectId", FALSE) > 0 ||
             findValue($transaction, "create", "active_plugin", "ObjectId", FALSE) > 0 ||
-            findValue($transaction, "update", "active_plugin", "ObjectId", FALSE) > 0) {
+            findValue($transaction, "update", "active_plugin", "ObjectId", FALSE) > 0
+        ) {
             $type = "Ignore";
-        }
-        elseif ($transaction[0]['Event'] == 'create') {
+        } elseif ($transaction[0]['Event'] == 'create') {
             if (findValue($transaction, "create", ClipitVideo::SUBTYPE, "ObjectId", FALSE) > 0) {
                 $type = "VideoUpload";
-            }
-            elseif (findValue($transaction, "create", ClipitFile::SUBTYPE, "ObjectId", FALSE) > 0) {
+            } elseif (findValue($transaction, "create", ClipitFile::SUBTYPE, "ObjectId", FALSE) > 0) {
                 $type = "FileUpload";
-            }
-            elseif (findValue($transaction, "create", ClipitUser::SUBTYPE, "ObjectId", FALSE) > 0) {
+            } elseif (findValue($transaction, "create", ClipitUser::SUBTYPE, "ObjectId", FALSE) > 0) {
                 $type = "AccountCreation";
-            }
-            elseif ($transaction[0]['ObjectSubtype'] == 'name') {
+            } elseif ($transaction[0]['ObjectSubtype'] == 'name') {
 
                 if (findValue($transaction, "create", ClipitChat::SUBTYPE, "ObjectId", FALSE) > 0) {
                     $type = "Messaging";
-                }
-                elseif (findValue($transaction, "create", ClipitPost::SUBTYPE, "ObjectId", FALSE) > 0) {
+                } elseif (findValue($transaction, "create", ClipitPost::SUBTYPE, "ObjectId", FALSE) > 0) {
                     $type = "Discussion";
-                }
-                elseif (findValue($transaction, "create", ClipitComment::SUBTYPE, "ObjectId", FALSE) > 0) {
+                } elseif (findValue($transaction, "create", ClipitComment::SUBTYPE, "ObjectId", FALSE) > 0) {
                     $type = "Discussion";
-                }
-                elseif (findValue($transaction, "create", ClipitGroup::SUBTYPE, "ObjectId", FALSE) > 0) {
+                } elseif (findValue($transaction, "create", ClipitGroup::SUBTYPE, "ObjectId", FALSE) > 0) {
                     $type = "GroupCreation";
-                }
-                elseif (findValue($transaction, "create", ClipitTask::SUBTYPE, "ObjectId", FALSE) > 0) {
+                } elseif (findValue($transaction, "create", ClipitTask::SUBTYPE, "ObjectId", FALSE) > 0) {
                     $type = "CreateTask";
-                }
-                elseif (findValue($transaction, "create", ClipitActivity::SUBTYPE, "ObjectId", FALSE) > 0) {
+                } elseif (findValue($transaction, "create", ClipitActivity::SUBTYPE, "ObjectId", FALSE) > 0) {
                     $type = "CreateActivity";
-                }
-                elseif (findValue($transaction, "create", ClipitTrickyTopic::SUBTYPE, "ObjectId", FALSE) > 0) {
+                } elseif (findValue($transaction, "create", ClipitTrickyTopic::SUBTYPE, "ObjectId", FALSE) > 0) {
                     $type = "CreateTrickyTopic";
-                }
-                elseif (!empty($transaction[2]) && $transaction[2]['ObjectSubtype'] == ClipitTag::SUBTYPE) {
+                } elseif (!empty($transaction[2]) && $transaction[2]['ObjectSubtype'] == ClipitTag::SUBTYPE) {
                     $type = "CreateTag";
                 }
-            }
-            elseif ($transaction[0]['ObjectType'] == 'relationship') {
+            } elseif ($transaction[0]['ObjectType'] == 'relationship') {
                 if (isset($transaction[1]['ObjectType']) && $transaction[1]['ObjectType'] == 'relationship' && $transaction[1]['Event'] == 'create') {
                     $type = "AssignMultipleRelationships";
-                }
-                else {
+                } else {
                     $type = "AssignRelationShip";
                 }
             }
-        }
-        elseif ($transaction[0]['Event'] == 'update') {
+        } elseif ($transaction[0]['Event'] == 'update') {
             if (!empty($transaction[1])) {
                 if (!empty($transaction[1]) && $transaction[1]['Event'] == 'login') {
                     $type = "Login";
-                }
-                elseif (!empty($transaction[2]) && $transaction[2]['Event'] == 'login') {
+                } elseif (!empty($transaction[2]) && $transaction[2]['Event'] == 'login') {
                     //if transaction has no value in [3] it is a normal login, otherwise it probably is a login followed by a payload through ClipIt's API
                     if (!isset($transaction[3]) || empty($transaction[3])) {
                         $type = "Login";
                     }
 
-                }
-                elseif (!empty($transaction[2]) && $transaction[2]['Event'] == 'logout') {
+                } elseif (!empty($transaction[2]) && $transaction[2]['Event'] == 'logout') {
                     $type = "Logout";
                 }
             }
-        }
-        elseif ($transaction[0]['Event'] == 'delete') {
+        } elseif ($transaction[0]['Event'] == 'delete') {
             if ($transaction[0]['ObjectType'] == 'relationship') {
                 $type = "ModifyRelationship";
-            }
-            elseif ($transaction[0]['ObjectSubtype'] == ClipitGroup::SUBTYPE) {
+            } elseif ($transaction[0]['ObjectSubtype'] == ClipitGroup::SUBTYPE) {
                 $type = "DeleteGroup";
             }
-        }
-        elseif ($transaction[0]['Event'] == 'logout') {
+        } elseif ($transaction[0]['Event'] == 'logout') {
             $type = "Logout";
         }
     }
@@ -968,7 +940,8 @@ function determineActivityType($transaction) {
     return $type;
 }
 
-function splitTransaction($trans, $limiter) {
+function splitTransaction($trans, $limiter)
+{
     $row = 0;
     $login_transaction = array();
     $new_transaction = array();
@@ -976,8 +949,7 @@ function splitTransaction($trans, $limiter) {
         if ($row < $limiter) {
             $login_transaction[$row] = $value;
             $login_transaction[$row]['TransactionId'] = $login_transaction[$row]['TransactionId'];
-        }
-        else {
+        } else {
             $new_transaction[] = $value;
         }
         unset($value);
