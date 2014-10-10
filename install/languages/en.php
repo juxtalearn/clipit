@@ -84,6 +84,8 @@ If you are ready to proceed, click the Next button.",
 	'install:settings:label:siteaccess' => 'Default Site Access',
     'install:settings:label:timezone' => 'Site Time Zone',
     'install:settings:label:jxl_secret' => "JuxtaLearn Secret Key",
+    'install:settings:label:la_metrics_class' => "LA Metrics Class",
+    'install:settings:label:recommendations_class' => "Recommendations Class",
 	'install:label:combo:dataroot' => 'Elgg creates data directory',
 
 	'install:settings:help:sitename' => 'The name of your new Elgg site',
@@ -96,6 +98,8 @@ If you are ready to proceed, click the Next button.",
 	'install:settings:help:siteaccess' => 'The default access level for new user created content.',
     'install:settings:help:timezone' => 'The Time Zone for the site (see: <a href="http://www.php.net/manual/en/timezones.php" target="_blank">PHP Time Zones</a>).',
     'install:settings:help:jxl_secret' => 'The JuxtaLearn secret key for interoperability between components.',
+    'install:settings:help:la_metrics_class' => 'Name of the Learning Analytics metrics class',
+    'install:settings:help:recommendations_class' => 'Name of the Recommendations class',
 
 	'install:admin:instructions' => "It is now time to create an administrator's account.",
 

@@ -413,8 +413,17 @@ class ElggInstaller {
             'jxl_secret' => array(
                 'type' => 'text',
                 'value' => '0123456789abcdef0123456789abcdef',
-                'required' => FALSE,
+                'required' => TRUE,
             ),
+            'la_metrics_class' => array(
+                'type' => 'text',
+                'value' => 'ActivityStreamer',
+                'required' => TRUE,
+            ),
+            'recommendations_class' => array(
+                'type' => 'text',
+                'value' => 'RecommendationEngine'
+            )
         );
 
         // if Apache, we give user option of having Elgg create data directory
@@ -1445,8 +1454,9 @@ class ElggInstaller {
         set_config('allow_user_default_access', '', $site->getGUID());
         set_config('timezone', $submissionVars['timezone'], $site->getGUID());
         set_config('jxl_secret', $submissionVars['jxl_secret'], $site->getGUID());
+        set_config('la_metrics_class', $submissionVars['la_metrics_class'], $site->getGUID());
+        set_config('recommendations_class', $submissionVars['recommendations_class'], $site->getGUID());
         $this->enablePlugins();
-
         return TRUE;
     }
 
