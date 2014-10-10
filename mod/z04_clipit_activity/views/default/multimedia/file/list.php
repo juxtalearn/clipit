@@ -19,7 +19,7 @@ echo elgg_view("files/search");
 
 foreach($files as $file_id){
     $file =  array_pop(ClipitFile::get_by_id(array($file_id)));
-    $file_url = "{$href}/view/{$file->id}";
+    $file_url = "{$href}/view/{$file->id}". ($vars['task_id'] ? "?task_id=".$vars['task_id']: "");
 
     $select = '<input type="checkbox" name="check-file[]" value="'.$file->id.'" class="select-simple">';
     $file_icon = '
@@ -50,7 +50,7 @@ foreach($files as $file_id){
     // Action buttons (Download|Publish)
     $buttons = '<div style="width: 35px;display: inline-block;float: right;text-align: center;margin-left:10px;">
                     '.elgg_view('output/url', array(
-                        'href'  => "file/download/".$file->id,
+                        'href'  => "file/download/".$file->id. ($vars['task_id'] ? "?task_id=".$vars['task_id']: ""),
                         'title' => $owner->name,
                         'class' => 'btn btn-default btn-icon',
                         'text'  => '<i class="fa fa-download"></i>')).'

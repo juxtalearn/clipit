@@ -11,12 +11,12 @@
  * @package         ClipIt
  */
 $activity = elgg_extract('entity', $vars);
+$id = elgg_extract('id', $vars);
 
 $body = elgg_view("input/hidden", array(
     'name' => 'entity-id',
     'value' => $activity->id,
 ));
-$id = uniqid();
 $body .= '<div class="task">';
 $body .= elgg_view('activity/create/task', array('task_type' => 'upload', 'id' => $id));
 

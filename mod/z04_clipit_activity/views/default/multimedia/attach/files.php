@@ -10,17 +10,30 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
+$selected_files = elgg_extract('selected', $vars);
 $entity_id = elgg_extract('entity_id', $vars);
-$files = ClipitGroup::get_files($entity_id);
+$object = ClipitSite::lookup($entity_id);
+$files = $object['subtype']::get_files($entity_id);
 ?>
 <div data-list="files">
 <?php
 foreach($files as $file_id):
     $file = array_pop(ClipitFile::get_by_id(array($file_id)));
+    $selected = false;
+    if(in_array($file_id, $selected_files)){
+        $selected = true;
+    }
 ?>
     <div class="multimedia-block col-md-4" style="position:relative;border-radius: 4px;margin-bottom: 0;padding: 0;background: transparent;">
-        <label class="select-item attach-item" title="<?php echo $file->name;?>" for="item_<?php echo $file_id;?>"></label>
-        <input type="checkbox" style="display: none" name="attach_files[]" value="<?php echo $file_id;?>" id="item_<?php echo $file_id;?>">
+        <label class="select-item attach-item <?php echo  $selected ? 'selected' : false;?>" title="<?php echo $file->name;?>" for="item_<?php echo $file_id;?>"></label>
+        <input
+            type="checkbox"
+            <?php echo  $selected ? 'checked' : false;?>
+            style="display: none"
+            name="attach_files[]"
+            value="<?php echo $file_id;?>"
+            id="item_<?php echo $file_id;?>"
+            >
         <div class="attach-block">
             <div class="multimedia-preview" >
                 <?php echo elgg_view("multimedia/file/preview", array('file'  => $file, 'size' => 'medium'));?>
