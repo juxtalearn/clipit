@@ -139,10 +139,11 @@ function get_video_url_embed($url){
         preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=vimeo.com/)[^&\n]+#", $url, $matches);
         $embed_url = "//player.vimeo.com/video/".$matches[0];
     } else {
-        $embed_url = elgg_get_site_url(). "mod/z04_clipit_activity/lib/ownvideo.php?v=".urlencode($url);
+        return false;
     }
     return $embed_url;
 }
+
 /**
  * Get formated time
  * @param int $seconds
