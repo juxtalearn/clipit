@@ -52,10 +52,10 @@ class ClipitLA extends UBFile {
      */
     static function get_metric($metric_id, $context) {
         $la_id = new static();
-        set_config('la_metrics_class', "ActivityStreamer", elgg_get_site_entity()->getGUID());
-        set_config('recommendations_class', "RecommendationEngine", elgg_get_site_entity()->getGUID());
-//        $la_metrics_class = elgg_get_config("la_metrics_class");
-//        $la_metrics_class::get_metric($metric_id, $la_id, $context);
+        if(!$la_metrics_class = elgg_get_config("la_metrics_class")){
+            return null;
+        }
+        $la_metrics_class::get_metric($metric_id, $la_id, $context);
         return $la_id;
     }
 
