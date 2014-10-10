@@ -46,18 +46,18 @@ class ClipitLA extends UBFile {
     }
 
     /*
-     * @todo request_metrics function to ask the LA API for metrics
      */
-    static function request_metrics($category, $type, $name) {
-        $return_id = 0;
-        return $return_id;
+    static function get_metric($metric_id, $context) {
+        $la_id = new static();
+        //ActivityStreamer::get_metric($metric_id, $la_id, $context);
+        return $la_id;
     }
 
-    static function send_metrics($returnId, $data, $statuscode) {
+    static function save_metric($return_id, $data, $status_code) {
         $la = new ClipitLA();
-        $prop_value_array["return_id"] = (int)$returnId;
+        $prop_value_array["return_id"] = (int)$return_id;
         $prop_value_array["data"] = $data;
-        $prop_value_array["status_code"] = (int)$statuscode;
+        $prop_value_array["status_code"] = (int)$status_code;
         $id = $la->save();
         ClipitLA::set_properties($id, $prop_value_array);
         return $id;

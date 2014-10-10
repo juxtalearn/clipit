@@ -10,7 +10,7 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-print_r($_POST);
+
 $entity_id = get_input('entity-id');
 $tasks = get_input('task');
 foreach($tasks as $task){
@@ -25,7 +25,7 @@ foreach($tasks as $task){
     ClipitActivity::add_tasks($entity_id, array($task_id));
     if($task['feedback']){
         $feedback = $task['feedback-form'];
-        if($feedback['title'] && $feedback['description'] && $feedback['type'] && $feedback['start'] && $feedback['end'] ){
+        if($feedback['title'] && $feedback['type'] && $feedback['start'] && $feedback['end'] ){
             $feedback_task_id = ClipitTask::create(array(
                 'name' => $feedback['title'],
                 'description' => $feedback['description'],

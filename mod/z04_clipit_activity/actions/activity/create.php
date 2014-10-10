@@ -72,7 +72,8 @@ switch($groups_creation){
     case 2:
         $group_mode = ClipitActivity::GROUP_MODE_STUDENT;
         shuffle($called_users);
-        $chunks = array_chunk($called_users, $max_users[2]);
+        $total_groups = ceil(count($called_users)/$max_users[2]);
+        $chunks = split_chunks($called_users, $total_groups);
         $num = 1;
         foreach($chunks as $users_array){
             $groups[] = array(
@@ -85,7 +86,8 @@ switch($groups_creation){
     // Random
     case 3:
         shuffle($called_users);
-        $chunks = array_chunk($called_users, $max_users[3]);
+        $total_groups = ceil(count($called_users)/$max_users[3]);
+        $chunks = split_chunks($called_users, $total_groups);
         $num = 1;
         foreach($chunks as $users_array){
             $groups[] = array(
@@ -114,5 +116,8 @@ if($groups_creation){
 // Add me as teacher
 $user_id = elgg_get_logged_in_user_guid();
 ClipitActivity::add_teachers($activity_id, array($user_id));
+
+$object = ClipitSite::lookup($activity_id);
+system_message(elgg_echo("activity:created", array($object['name'])));
 
 forward("clipit_activity/{$activity_id}/admin".$filter);

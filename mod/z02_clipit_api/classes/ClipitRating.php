@@ -113,25 +113,30 @@ class ClipitRating extends UBItem {
      * @return ClipitRating|null Returns a Rating, or null if any.
      */
     static function get_from_user_for_target($user_id, $target_id) {
-        $user_ratings = static::get_by_owner(array($user_id));
-        $user_ratings = $user_ratings[$user_id];
-        if(!empty($user_ratings)) {
-            foreach($user_ratings as $rating) {
-                if($rating->target == (int)$target_id) {
-                    return $rating;
-                }
-            }
+        $rating = elgg_get_entities_from_metadata(array(
+            'type' => static::TYPE,
+            'subtype' => static::SUBTYPE,
+            'metadata_names' => array("target"),
+            'metadata_values' => array($target_id),
+            'owner_guid' => $user_id
+        ));
+        // Should only return one entity
+        if(empty($rating) || count($rating) != 1){
+            return null;
+        } else{
+            $rating_id = array_pop($rating)->guid;
         }
-        return null;
+        return new static($rating_id);
     }
 
-    // Average overall rating [0-1]
+    // Average overall rating (float)[0-1]
     static function get_average_target_rating($target_id) {
         $rating_array = static::get_by_target(array($target_id));
+        $rating_array = $rating_array[$target_id];
         $average_rating = 0;
         $count = 0;
         foreach($rating_array as $rating) {
-            if($rating->overall) {
+            if($rating->overall === true) {
                 $average_rating ++;
             }
             $count ++;

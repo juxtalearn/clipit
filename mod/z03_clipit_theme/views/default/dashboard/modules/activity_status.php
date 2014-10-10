@@ -16,6 +16,7 @@ $activities = ClipitActivity::get_by_id($entities);
 <div class="wrapper separator">
 <?php
 foreach($activities as $activity):
+    if($activity->status != 'closed'):
     $activity_progress = round(((time() - $activity->start)/($activity->end - $activity->start)) * 100);
     if($activity_progress == 0){
         $activity_progress = 5;
@@ -34,5 +35,6 @@ foreach($activities as $activity):
             </h4>
         </div>
     </div>
+    <?php endif;?>
 <?php endforeach;?>
 </div>

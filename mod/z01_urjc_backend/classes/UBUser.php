@@ -231,13 +231,13 @@ class UBUser extends UBItem {
         foreach($email_array as $email) {
             $elgg_user_array = get_user_by_email($email);
             if(!$elgg_user_array) {
-                $user_array[$email] = null;
+                $user_array[UBSite::normalize_xml_key($email)] = null;
             } else {
                 $temp_array = array();
                 foreach($elgg_user_array as $elgg_user) {
                     $temp_array[] = new static((int)$elgg_user->guid, $elgg_user);
                 }
-                $user_array[$email] = $temp_array;
+                $user_array[UBSite::normalize_xml_key($email)] = $temp_array;
             }
         }
         return $user_array;

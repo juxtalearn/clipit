@@ -25,7 +25,7 @@
         </div>
         <div id="collapse_1" class="panel-collapse collapse">
             <div class="panel-body">
-                Anim pariatur cliche reprehenderit,
+                <?php echo elgg_echo('activity:grouping_mode:teacher:desc');?>
             </div>
         </div>
     </div>

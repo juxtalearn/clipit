@@ -7,7 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 $params = array(
-    'title' => 'Loading content...',
+    'title' => elgg_echo('loading:content') . '...',
     'body' => '<i class="fa fa-spinner fa-spin" style="font-size: 40px;color: #bae6f6"></i>',
     'target' => $vars['id']
 );

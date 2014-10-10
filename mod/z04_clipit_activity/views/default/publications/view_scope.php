@@ -28,28 +28,28 @@ foreach($clone_ids as $clone_id){
             $outputs[] = array(
                 'id' => $clone_id,
                 'href' => "explore",
-                'text' => "Site",
+                'text' => elgg_echo('clipit:site'),
             );
             break;
         case 'task':
             $outputs[] = array(
                 'id' => $clone_id,
                 'href' => "clipit_activity/{$activity_id}/publications",
-                'text' => "Activity",
+                'text' => elgg_echo('activity'),
             );
             break;
         case 'group':
             $outputs[] = array(
                 'id' => $clone_id,
                 'href' => "clipit_activity/{$activity_id}/group/{$group_id}/repository",
-                'text' => "Group",
+                'text' => elgg_echo('group'),
             );
             break;
     }
 }
 ?>
 <div class="dropdown inline-block">
-    <button id="drop_scope" class="btn btn-primary btn-xs" data-toggle="dropdown" href="#">View scope <span class="caret"></span></button>
+    <button id="drop_scope" class="btn btn-primary btn-xs" data-toggle="dropdown" href="#"><?php echo elgg_echo('publications:view_scope');?> <span class="caret"></span></button>
     <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop_scope">
         <?php foreach($outputs as $output):?>
             <li role="presentation">

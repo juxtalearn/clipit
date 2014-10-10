@@ -13,7 +13,6 @@
 $entity = elgg_extract('entity', $vars);
 $activities = ClipitUser::get_activities($entity->id);
 $activities = ClipitActivity::get_by_id($activities);
-//$activities = array();
 ?>
 <style>
 .event-simple .avatar-small{
@@ -95,7 +94,7 @@ $activities = ClipitActivity::get_by_id($activities);
             <?php endforeach;?>
         </div>
         <h3 class="title-block">
-            Public timeline
+            <?php echo elgg_echo('timeline:public');?>
         </h3>
         <ul>
             <?php

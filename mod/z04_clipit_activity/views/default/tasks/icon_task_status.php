@@ -15,7 +15,7 @@ $status = elgg_extract('status', $vars);
 switch($status){
     case ClipitTask::STATUS_LOCKED:
         $title = elgg_echo('task:locked');
-        $icon = "clock";
+        $icon = "clock-o";
         break;
     case ClipitTask::STATUS_ACTIVE:
         $title = elgg_echo('task:active');

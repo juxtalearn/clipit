@@ -30,7 +30,7 @@ $type = elgg_extract("type", $vars);
         <div class="file-info">
             <div class="img-prev"><div class="preview"></div></div>
             <div class="text-truncate">
-                <small class="size pull-right">Processing...</small>
+                <small class="size pull-right"><?php echo elgg_echo('multimedia:processing');?>...</small>
                 <div class="text-truncate"><a title="{%=file.name%}">{%=file.name%}</a></div>
             </div>
             <strong class="error text-danger"></strong>
@@ -42,8 +42,8 @@ $type = elgg_extract("type", $vars);
     text-transform: uppercase;
     border: 1px solid #ff1a1a;
 ">
-                    <i class="glyphicon glyphicon-ban-circle"></i>
-                    <span>Delete</span>
+                    <i class="fa fa-ban"></i>
+                    <span><?php echo elgg_echo('multimedia:delete');?></span>
                 </a>
         </div>
     </div>

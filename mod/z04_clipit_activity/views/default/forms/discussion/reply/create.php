@@ -23,7 +23,7 @@ echo elgg_view("input/plaintext", array(
     'style' => "width: 100%;"
 ));
 echo elgg_view('input/submit', array(
-    'value' => elgg_echo('create'),
+    'value' => elgg_echo('send'),
     'class' => "btn btn-primary pull-right",
     'style' => "margin-top: 20px;"
 ));

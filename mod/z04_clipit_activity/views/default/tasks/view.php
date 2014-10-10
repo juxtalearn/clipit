@@ -14,24 +14,6 @@ $task = elgg_extract('entity', $vars);
 $status = elgg_extract('status', $vars);
 $super_title = elgg_extract('super_title', $vars);
 ?>
-<style>
-.task-info{
-    margin-bottom: 15px;
-}
-.task-info h3{
-    margin-top: 0;
-}
-.task-info .details{
-    border-bottom: 1px solid #bae6f6;
-    padding-bottom: 5px;
-}
-.task-info .description{
-    color: #666666;
-    margin-top: 10px;
-    background: #fafafa;
-    padding: 10px;
-}
-</style>
 <div class="task-info">
     <h3>
         <span class="task-status <?php echo $status['color'];?> pull-right"><?php echo $status['text'];?></span>
@@ -50,7 +32,7 @@ $super_title = elgg_extract('super_title', $vars);
         </span>
     </small>
     <div class="description">
-        <?php echo $task->description;?>
+        <?php echo nl2br($task->description);?>
     </div>
 </div>
 

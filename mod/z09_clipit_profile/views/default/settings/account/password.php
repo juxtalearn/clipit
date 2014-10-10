@@ -9,7 +9,7 @@
 $user = elgg_get_page_owner_entity();
 
 if ($user) {
-	$title = elgg_echo('user:set:password');
+	$title = elgg_echo('profile:settings:password');
 
 	// only make the admin user enter current password for changing his own password.
 	$admin = '';

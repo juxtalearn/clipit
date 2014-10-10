@@ -13,6 +13,10 @@ $user_inActivity = ClipitGroup::get_from_user_activity($user_id, $activity->id);
 $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($activity->tricky_topic)));
 $tags = $tricky_topic->tag_array;
 $tasks = array_slice($activity->task_array, 0, 4);
+
+if($access == 'ACCESS_TEACHER'){
+    $groups = ClipitGroup::get_by_id($activity->group_array, $order_by_name = true);
+}
 ?>
 <div class="row">
     <div class="col-md-12" data-shorten="true" style="overflow: hidden;max-height: 160px;">
@@ -24,6 +28,10 @@ $tasks = array_slice($activity->task_array, 0, 4);
 <?php if($access == 'ACCESS_TEACHER' || $access == 'ACCESS_MEMBER'):?>
 <div class="row">
     <div class="col-md-7">
+        <?php if($access == 'ACCESS_TEACHER'):?>
+            <h3 class="activity-module-title"><?php echo elgg_echo('activity:progress');?></h3>
+            <?php echo elgg_view('activity/profile/admin/activity_progress', array('entity' => $activity));?>
+        <?php endif;?>
         <h3 class="activity-module-title"><?php echo elgg_echo('activity:tasks');?></h3>
         <?php echo elgg_view("tasks/list", array(
             'tasks' => $tasks,
@@ -47,9 +55,16 @@ $tasks = array_slice($activity->task_array, 0, 4);
         ));?>
     </div>
 </div>
+<?php if($access == 'ACCESS_MEMBER'):?>
 <div class="row">
     <div class="col-md-12">
         <?php echo elgg_view("activity/profile/related_videos_module");?>
     </div>
 </div>
+<?php endif;?>
+
+<?php if($access == 'ACCESS_TEACHER'):?>
+    <?php echo elgg_view('activity/profile/admin/groups', array('entities' => $groups));?>
+<?php endif;?>
+
 <?php endif; ?>

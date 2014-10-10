@@ -1,5 +1,5 @@
 <?php
- /**
+/**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
  * Creation date:   28/05/14
@@ -13,8 +13,8 @@
 $title = get_input("title");
 $description = get_input("description");
 $labels = get_input("labels");
-$labels = explode(",", $labels);
-$tags = get_input("tags");
+$labels = array_filter(explode(",", $labels));
+$tags = get_input("tags", array());
 $performance_items = get_input("performance_items");
 $entity_id = get_input("entity-id");
 $task_id = get_input("task-id");
@@ -22,6 +22,7 @@ $parent_id = get_input("parent-id");
 
 $object = ClipitSite::lookup($entity_id);
 $entity_class = $object['subtype'];
+$group_tags = ClipitGroup::get_tags($entity_class::get_group($entity_id));
 
 $parent_object = ClipitSite::lookup($parent_id);
 $parent_entity_class = $parent_object['subtype'];
@@ -48,7 +49,10 @@ $entity = array_pop($entity_class::get_by_id(array($entity_id)));
 if(count($entity)==0 || trim($title) == "" || trim($description) == ""){
     register_error(elgg_echo("cantpublish"));
 } else{
-    $entity_class::set_properties($entity_id, array(
+    // Clone
+    $new_entity_id = $entity_class::create_clone($entity_id);
+
+    $entity_class::set_properties($new_entity_id, array(
         'name' => $title,
         'description' => $description
     ));
@@ -63,13 +67,17 @@ if(count($entity)==0 || trim($title) == "" || trim($description) == ""){
             ));
         }
     }
-    $entity_class::set_labels($entity_id, $total_labels);
+    $entity_class::set_labels($new_entity_id, $total_labels);
     // Tags
-    $entity_class::set_tags($entity_id, $tags);
+    /* get tags from group */
+    $group_tags = ClipitGroup::get_tags($entity_class::get_group($entity_id));
+    if($group_tags){
+        $tags = array_merge($tags, $group_tags);
+    }
+    $entity_class::set_tags($new_entity_id, $tags);
     // Performance items
-    $entity_class::add_performance_items($entity_id, $performance_items);
-    // Clone
-    $new_entity_id = $entity_class::create_clone($entity_id);
+    $entity_class::add_performance_items($new_entity_id, $performance_items);
+
 
     if($new_entity_id){
         switch($entity_class){

@@ -13,7 +13,7 @@
 $files_id = elgg_extract("files", $vars);
 ?>
 <div class="attachment-files" style="overflow: hidden;">
-    <span class="total-files"><i class="fa fa-paperclip"></i> <?php echo count($files_id);?> attachments</span>
+    <span class="total-files"><i class="fa fa-paperclip"></i> <?php echo count($files_id);?> <?php echo elgg_echo('attachments');?></span>
     <?php
     foreach($files_id as $file_id):
         $file = array_pop(ClipitFile::get_by_id(array($file_id)));

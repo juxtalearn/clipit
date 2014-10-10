@@ -25,7 +25,7 @@ for($i = 0; $i < count($user_name); $i++){
             'password'  => $user_password[$i],
             'name'      => $user_name[$i],
             'email'     => $user_email[$i],
-            'role'      => 'teacher'
+            'role'      => ClipitUser::ROLE_TEACHER,
         ));
         ClipitActivity::add_teachers($activity_id, array($user_id));
     }

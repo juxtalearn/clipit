@@ -11,10 +11,8 @@
     <?php echo elgg_view('input/text', array(
         'name' => 'email',
         'class' => 'form-control input-lg',
-        'placeholder' => 'hello@email.com',
-        'data-rule-email' => 'true',
         'data-rule-required' => 'true',
-        'data-msg-remote' => elgg_echo('user:email:notfound')
+        'data-msg-remote' => elgg_echo('user:notfound')
     ));
     ?>
 </div>

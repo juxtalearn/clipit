@@ -1,6 +1,29 @@
 elgg.provide('clipit');
 
 /**
+ * jQuery validator int messages
+ */
+jQuery.extend(jQuery.validator.messages, {
+    required: "<?php echo elgg_echo('validation:required');?>",
+    remote: "<?php echo elgg_echo('validation:remote');?>",
+    email: "<?php echo elgg_echo('validation:email');?>",
+    url: "<?php echo elgg_echo('validation:url');?>",
+    date: "<?php echo elgg_echo('validation:date');?>",
+    dateISO: "<?php echo elgg_echo('validation:dateISO');?>",
+    number: "<?php echo elgg_echo('validation:number');?>",
+    digits: "<?php echo elgg_echo('validation:digits');?>",
+    creditcard: "<?php echo elgg_echo('validation:creditcard');?>",
+    equalTo: "<?php echo elgg_echo('validation:equalTo');?>",
+    accept: "<?php echo elgg_echo('validation:accept');?>",
+    maxlength: jQuery.validator.format("<?php echo elgg_echo('validation:maxlength');?>"),
+    minlength: jQuery.validator.format("<?php echo elgg_echo('validation:minlength');?>"),
+    rangelength: jQuery.validator.format("<?php echo elgg_echo('validation:rangelength');?>"),
+    range: jQuery.validator.format("<?php echo elgg_echo('validation:range');?>"),
+    max: jQuery.validator.format("<?php echo elgg_echo('validation:max');?>"),
+    min: jQuery.validator.format("<?php echo elgg_echo('validation:min');?>")
+});
+
+/**
  * TinyMce default configuration
  */
 function tinymce_setup(specific_id){
@@ -23,7 +46,7 @@ function tinymce_setup(specific_id){
     editor_selector : /(mceEditor|wysihtml5|"+specific_id+")/,
     force_br_newlines : true,
     force_p_newlines : false,
-    plugins: ["mention, autoresize, paste"],
+    plugins: ["mention, autoresize, paste, autolink"],
     content_css : elgg.config.wwwroot+"mod/z03_clipit_theme/vendors/tinymce/content.css",
     valid_styles : 'text-align',
     paste_remove_spans: true,
@@ -92,7 +115,7 @@ function get_tinymce_init(){
     mode : "specific_textareas",
     force_br_newlines : true,
     force_p_newlines : false,
-    plugins: ["mention, autoresize, paste"],
+    plugins: ["mention, autoresize, paste, autolink"],
     content_css : elgg.config.wwwroot+"mod/z03_clipit_theme/vendors/tinymce/content.css",
     valid_styles : 'text-align',
     paste_remove_spans: true,
@@ -249,6 +272,15 @@ $(function(){
     /**
      * Register form validation
      */
+    $.validator.addMethod(
+        "login_normalize",
+        function(value, element) {
+            var re = new RegExp(/^[a-zA-Z0-9_]*$/);
+            re.test( element.value );
+            return this.optional(element) || re.test(value);
+        },
+        "Use a valid username."
+    );
     $(".elgg-form-register").validate({
         errorElement: "span",
         errorPlacement: function(error, element) {
@@ -259,6 +291,8 @@ $(function(){
         rules: {
             username: {
                 required: true,
+                minlength: 1,
+                login_normalize: true,
                 remote: {
                     url: elgg.config.wwwroot+"action/user/check",
                     type: "POST",
@@ -297,11 +331,11 @@ $(function(){
             onblur: false,
             submitHandler: function(form) {
                 var button_submit = form_to.find("input[type=submit]");
-                button_submit.button(elgg.echo("loading"));
+                button_submit.data("loading-text", "<?php echo elgg_echo('loading');?>...").button('loading');
                 if ($(form).valid())
                     form.submit();
                 else
-                    button_submit.button(elgg.echo("loading"));
+                    button_submit.data("loading-text", "<?php echo elgg_echo('loading');?>...").button('loading');
             }
         });
     });
@@ -321,10 +355,11 @@ $(function(){
             title: elgg.echo("question:areyousure"),
             buttons: {
                 confirm: {
-                    label: "Yes"
+                    label: elgg.echo("input:yes")
                 },
                 cancel: {
-                    label: "No"
+                    label: elgg.echo("input:no"),
+                    className: "btn-border-blue btn-default"
                 }
             },
             message: elgg.echo("deleteconfirm"),
@@ -357,16 +392,25 @@ $(function(){
      * Button loading state
      * (input submit only)
      */
-//    $.fn.button.defaults = {
-//        loadingText: 'Car...'
-//    };
+
     $("body").on("click", "input[type=submit]", function(){
         // Check if form is validated
         var form = $(this).closest("form");
+        var btn = $(this);
         if(!form.data("validate")){
-            $(this).button(elgg.echo("loading"));
+            btn.data("loading-text", "<?php echo elgg_echo('loading');?>...").button('loading');
         }
     });
+    if( $(".module-group_activity").length > 0) {
+        elgg.get('ajax/view/dashboard/modules/activity_groups_status', {
+            data: {
+                entities: <?php echo json_encode(ClipitUser::get_activities(elgg_get_logged_in_user_guid()));?>
+            },
+            success: function (content) {
+                $(".module-group_activity .elgg-body").html(content);
+            }
+        });
+    }
     /**
      * jQuery send_msg function
      * Autocomplete user info
@@ -461,6 +505,33 @@ $(function(){
             singleField: true,
             singleFieldNode: that.closest("form").find("input[name=tags]")
         });
+    });
+    /**
+     * Quote reference for discussion posts
+     */
+    $(document).on("click", ".quote-ref", function(){
+        var quote_id = $(this).data("quote-ref");
+        var parent = $(this).closest("div");
+        var $obj = $(this);
+        var quote_content = parent.find(".quote-content[data-quote-id="+quote_id+"]");
+
+        if(quote_content.length == 0){
+            $(this).addClass("active");
+            $(this).after("<div class='quote-content' data-quote-id='"+quote_id+"'></div>");
+            var quote_content = parent.find(".quote-content[data-quote-id="+quote_id+"]");
+            quote_content.html("<a class='loading'><i class='fa fa-spinner fa-spin'></i> loading...</a>");
+            var message_id = $(this).closest(".discussion-reply-msg").data("message-destination");
+            elgg.get("ajax/view/discussion/quote", {
+                data: { quote_id : quote_id, message_destination_id : message_id},
+                success: function(data){
+                quote_content.html(data);
+            }
+            });
+        } else {
+            parent.find(".quote-content[data-quote-id="+quote_id+"]").toggle(1,function(){
+                $obj.toggleClass("active");
+            });
+        }
     });
     /*
      * Labels complete view  & labels form to create

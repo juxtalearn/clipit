@@ -18,7 +18,7 @@ $search_term = get_input("search");
         <?php foreach(array_intersect($accepted_inputs, array_keys($_REQUEST)) as $request_input):?>
             <input type="hidden" value="<?php echo get_input($request_input);?>" name="<?php echo $request_input;?>">
         <?php endforeach; ?>
-        <input type="text" value="<?php echo isset($search_term) ? $search_term : "";?>" placeholder="Search" name="search">
+        <input type="text" value="<?php echo isset($search_term) ? $search_term : "";?>" placeholder="<?php echo elgg_echo('search');?>" name="search">
         <div class="input-group-btn">
             <span></span>
             <button type="submit">

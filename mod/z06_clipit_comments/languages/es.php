@@ -12,8 +12,9 @@
  */
 $spanish = array(
     // Comment
-    'comments' => 'comentarios',
-    'comment:create' => 'Crear comentario',
+    'comments' => 'Comentarios',
+    'comment:create' => 'Enviar comentario',
+    'comment:reply:to' => 'Responder a',
 );
 
 add_translation('es', $spanish);

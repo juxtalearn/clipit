@@ -35,7 +35,7 @@ switch($entity_class){
 }
 
 $entity = array_pop($entity_class::get_by_id(array($entity_id)));
-if(count($entity)==0 || trim($discussion_title) == "" || trim($discussion_text) == ""){
+if(count($entity)==0 || trim($discussion_title) == ""){
     register_error(elgg_echo("discussion:cantcreate"));
 } else{
     $new_message_id = ClipitPost::create(array(

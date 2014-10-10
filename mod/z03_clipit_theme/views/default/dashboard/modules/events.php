@@ -25,7 +25,7 @@ $object_array = array_merge($groups, $activities, $tasks);
 
 $recommended_events = ClipitEvent::get_by_object($object_array, 0, $limit);
 
-//$recommended_events = ClipitEvent::get_recommended_events($user_id, 0, $limit);
+$recommended_events = ClipitEvent::get_recommended_events($user_id, 0, $limit);
 ?>
 <div class="margin-bar"></div>
 <ul class="events">

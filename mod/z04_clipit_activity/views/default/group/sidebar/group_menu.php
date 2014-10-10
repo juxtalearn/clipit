@@ -38,4 +38,4 @@ $body = elgg_view_menu('group:tools', array(
     'sort_by' => 'priority',
 ));
 
-echo elgg_view_module('aside', elgg_echo('group:tools'), $body );
+echo elgg_view_module('aside', elgg_echo('group:tools'), $body, array('class' => 'group-tools-aside') );

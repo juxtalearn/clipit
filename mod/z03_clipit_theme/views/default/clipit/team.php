@@ -17,8 +17,11 @@ $images_dir = elgg_extract('images_dir', $vars);
 $(function(){
     $(".view-first").hover(function(){
         $(".first-img").show();
-        $(this).find(".first-img").hide();
-        $(this).find(".mask img").show();
+        if($(this).find(".mask").length > 0){
+            $(this).find(".first-img").hide();
+            $(this).find(".mask img").show();
+        }
+
     },function(){
         $(".view-first").find(".mask img").hide();
         $(this).find(".first-img").show();
@@ -38,6 +41,7 @@ $(function(){
                     'class' => 'img-circle first-img'
                 ));
                 ?>
+                <?php if($member['cartoon'] !== false):?>
                 <div class="mask">
                     <?php echo elgg_view('output/img', array(
                         'src' => $images_dir."cartoon/".$member['image'],
@@ -46,6 +50,7 @@ $(function(){
                     ));
                     ?>
                 </div>
+                <?php endif;?>
             </div>
             <div class="margin-top-10 <?php echo $color;?>">
                 <span class="cursor-default author-text"><?php echo $member['name'];?></span>

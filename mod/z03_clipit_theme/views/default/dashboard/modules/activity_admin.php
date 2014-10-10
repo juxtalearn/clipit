@@ -49,6 +49,8 @@ $(function(){
 <div class="separator">
 <?php
 foreach($activities as $activity):
+    if($activity->status != 'closed'):
+
     $tasks = ClipitTask::get_by_id($activity->task_array);
     $activity_progress = round(((time() - $activity->start)/($activity->end - $activity->start)) * 100);
     if($activity_progress == 0){
@@ -130,5 +132,6 @@ foreach($activities as $activity):
     <?php endforeach;?>
     </ul>
     </div>
+    <?php endif;?>
 <?php endforeach;?>
 </div>

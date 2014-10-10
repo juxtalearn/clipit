@@ -113,6 +113,24 @@ function view_recommended_event($event, $view_type = 'full'){
                 'body' => elgg_view("recommended/events/video", array('entity' => $entity, 'href' => $href, 'rating' => false))
             );
             break;
+        case ClipitGroup::REL_GROUP_RESOURCE:
+            $activity_id = ClipitGroup::get_activity($relationship->guid_one);
+            $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
+            $entity = array_pop(ClipitResource::get_by_id(array($relationship->guid_two)));
+            $href = "clipit_activity/{$activity->id}/group/{$relationship->guid_one}/repository/view/{$entity->id}";
+            $group = array_pop(ClipitGroup::get_by_id(array($relationship->guid_one)));
+            $group_link = elgg_view('output/url', array(
+                'href'  => "clipit_activity/{$activity->id}/group/{$group->id}/repository/view/{$entity->id}",
+                'title' => $entity->name,
+                'text'  => $entity->name,
+            ));
+            $params = array(
+                'title' => elgg_echo('resource:event:added'). " <strong>".$group_link."</strong>", //'Added new resource to group',
+                'icon' => 'fa-globe',
+                'author' => $entity->owner_id,
+                'body' => elgg_view("recommended/events/resource", array('entity' => $entity, 'href' => $href))
+            );
+            break;
         case ClipitGroup::REL_GROUP_FILE:
             $activity_id = ClipitGroup::get_activity($relationship->guid_one);
             $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));

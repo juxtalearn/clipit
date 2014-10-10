@@ -22,6 +22,7 @@
             'class' => 'form-control',
             'required' => true,
             'placeholder' => '0',
+            'data-rule-number' => true
         ));
         ?>
     </div>

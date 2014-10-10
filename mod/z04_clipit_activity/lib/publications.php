@@ -15,7 +15,7 @@ function publications_get_page_content_list($task_type, $tasks, $href){
     $entity_tasks = array();
     foreach($tasks as $task_id){
         $task = array_pop(ClipitTask::get_by_id(array($task_id)));
-        if($task->task_type == $task_type){
+        if($task->task_type == $task_type && $task->status != ClipitTask::STATUS_LOCKED){
             $task_entity[] = $task->id;
             $entity_tasks[$task->id] = $task->name ." [".date("d M Y", $task->start)." - ".date("d M Y", $task->end)."]";
         }
@@ -28,6 +28,11 @@ function publications_get_page_content_list($task_type, $tasks, $href){
             $view = 'multimedia/video/list';
             $entities = $task->video_array;
             $none_msg = elgg_echo('videos:none');
+            break;
+        case ClipitTask::TYPE_RESOURCE_UPLOAD:
+            $view = 'multimedia/resource/list';
+            $entities = $task->resource_array;
+            $none_msg = elgg_echo('resources:none');
             break;
         case "storyboard_upload":
             $view = 'multimedia/storyboard/list_summary';

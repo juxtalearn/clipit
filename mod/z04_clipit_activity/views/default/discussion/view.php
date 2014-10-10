@@ -84,38 +84,6 @@ if($message->owner_id == elgg_get_logged_in_user_guid()){
         <!-- Attachs multimedia end -->
     </div>
 </div>
-
-<script>
-$(function(){
-    $("#wrap").on("click", ".quote-ref", function(){
-        var quote_id = $(this).data("quote-ref");
-        var parent = $(this).closest("div");
-        var $obj = $(this);
-        var quote_content = parent.find(".quote-content[data-quote-id="+quote_id+"]");
-
-        if(quote_content.length == 0){
-            $(this).addClass("active");
-            $(this).after("<div class='quote-content' data-quote-id='"+quote_id+"'></div>");
-            var quote_content = parent.find(".quote-content[data-quote-id="+quote_id+"]");
-            quote_content.html("<a class='loading'><i class='fa fa-spinner fa-spin'></i> loading...</a>");
-            $.ajax({
-                url: elgg.config.wwwroot+"ajax/view/discussion/quote",
-                type: "POST",
-                data: { quote_id : quote_id, message_destination_id : <?php echo $message->id; ?>},
-                success: function(html){
-                    quote_content.html(html);
-                    console.log(html);
-                }
-            });
-        } else {
-            parent.find(".quote-content[data-quote-id="+quote_id+"]").toggle(1,function(){
-                $obj.toggleClass("active");
-            });
-        }
-    });
-
-});
-</script>
 <a name="replies"></a>
 <?php
 $auto_id = 1;

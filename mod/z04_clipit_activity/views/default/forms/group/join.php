@@ -13,7 +13,7 @@ $activity = array_pop(ClipitActivity::get_by_id(array($group->activity)));
     'name' => 'group-id',
     'value' => $group->id,
 ));
-$text = elgg_echo("group:join"). " ".count(ClipitGroup::get_users($group->id))."/".$activity->max_group_size;
+$text = elgg_echo("group:join");
 if(count(ClipitGroup::get_users($group->id)) >= $activity->max_group_size){
     $text = elgg_echo('group:full');
 }

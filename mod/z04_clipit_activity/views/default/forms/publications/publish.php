@@ -13,6 +13,11 @@
 $entity = elgg_extract('entity', $vars);
 $parent_id = elgg_extract('parent_id', $vars);
 $tt_tags = elgg_extract('tags', $vars);
+$group_id = $entity::get_group($entity->id);
+$group_tags = ClipitGroup::get_tags($group_id);
+$tt_tags = array_diff($tt_tags, $group_tags);
+//load jQuery Chosen
+elgg_load_js("jquery:chosen");
 
 $performance_items = $entity->performance_item_array;
 $tags = $entity->tag_array;
@@ -42,13 +47,13 @@ $labels_value = implode(", ", $label_value);
     'id' => 'input_labels',
     'value' => $labels_value
 ));?>
-<script src="http://harvesthq.github.io/chosen/chosen.jquery.js"></script>
 <script>
 $(function(){
     $(".chosen-select").chosen({disable_search_threshold: 1});
-    $(".chosen-select-items").chosen({max_selected_options: 5}).on("chosen:maxselected", function () {
-        alert("max");
-    });
+//    $(".chosen-select-items").chosen({max_selected_options: 5}).on("chosen:maxselected", function () {
+//        alert("max");
+//    });
+    $(".chosen-select-items").chosen();
 });
 </script>
 <?php
@@ -68,8 +73,9 @@ if($task_id = get_input('task_id')):
     <div><?php echo $task->description;?></div>
 </div>
 <?php endif; ?>
+
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-<?php echo ($vars['entity_preview'] ? 8 : 12);?>">
         <?php if($entity->url):?>
         <div class="form-group">
             <label for="title"><?php echo elgg_echo("url");?></label>
@@ -88,6 +94,7 @@ if($task_id = get_input('task_id')):
         </div>
         <div class="form-group">
             <label><?php echo elgg_echo("tags");?></label>
+            <?php echo elgg_view("tricky_topic/tags/view", array('tags' => $group_tags, 'width' => '45%')); ?>
             <div>
                 <select name="tags[]" data-placeholder="<?php echo elgg_echo('click_add');?>" style="width:100%;" multiple class="chosen-select" tabindex="8">
                     <option value=""></option>

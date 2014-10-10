@@ -8451,6 +8451,22 @@ ul.deadline-list > li.soon {
 ul.deadline-list > li .fa-user {
   font-size: 20px;
 }
+.task-info {
+  margin-bottom: 15px;
+}
+.task-info h3 {
+  margin-top: 0;
+}
+.task-info .details {
+  border-bottom: 1px solid #bae6f6;
+  padding-bottom: 5px;
+}
+.task-info .description {
+  color: #666666;
+  margin-top: 10px;
+  background: #fafafa;
+  padding: 10px;
+}
 .tags-block {
   background: #d6f0fa;
   margin-top: 20px;
@@ -8490,6 +8506,9 @@ ul.deadline-list > li .fa-user {
 }
 .activity-group-block .fa.status-deadline.fa-minus-square-o {
   color: #d8ba05;
+}
+.jOrgChart {
+  overflow: auto;
 }
 .jOrgChart .line {
   height: 20px;
@@ -10465,18 +10484,20 @@ select.form-control {
   color: #fff;
 }
 .pagination > li > a {
-  border: 1px solid #d9dadb;
-  color: #9c9e9f;
-  font-family: FuturaBoldRegular, Impact, 'Impact Bold', Helvetica, Arial, sans, sans-serif;
+  border: 1px solid #bae6f6;
 }
-.pagination > .active > a {
+.pagination > .active > a,
+.pagination > .active > span {
   background-color: #32b4e5;
+  border: 1px solid #32b4e5;
 }
 .pagination > .active > a:hover,
-.pagination > .active > a:focus {
-  color: #9c9e9f;
-  background-color: #d6f0f9;
-  border-color: #9c9e9f;
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  color: #32b4e5;
+  background-color: #bae6f6;
+  border-color: #32b4e5;
 }
 .thumbnail {
   padding: 0;
@@ -10822,4 +10843,93 @@ h6,
 }
 .ui-datepicker .ui-state-disabled {
   cursor: default !important;
+}
+.delete-task {
+  display: none;
+}
+.fc-event {
+  background: #32b4e5;
+  border: 1px solid #32b4e5;
+}
+.fc-event-inner {
+  cursor: pointer;
+}
+.fc-event-time {
+  display: none;
+}
+.fc-event-end {
+  padding-left: 10px;
+}
+.fc-event-end .fa {
+  display: none;
+}
+.fc-event-start {
+  padding-left: 0 !important;
+}
+.fc-event-start .fa {
+  display: inline-block !important;
+}
+.fc-widget-content {
+  border: 1px solid #fff !important;
+  color: #999;
+  background: #fafafa;
+}
+.fc-ranged {
+  color: #32b4e5;
+  font-weight: bold;
+  background-color: #d6f0fa;
+  cursor: pointer;
+}
+.fc-state-highlight {
+  background: #FFF !important;
+  border: 3px solid #d6f0fa !important;
+}
+.fc-ranged.fc-other-month {
+  background-color: #F2FBFF;
+}
+.fc-grid .fc-other-month .fc-day-number {
+  opacity: .5;
+}
+.task-item {
+  display: none;
+}
+.nvtooltip {
+  padding: 5px;
+  margin-top: 30px;
+  top: 100px !important;
+  border: 1px solid #32b4e5;
+  color: #32b4e5;
+  font-weight: bold;
+}
+.module-group_activity svg {
+  height: 200px;
+}
+.module-group_activity svg .nvd3 .nv-axis line {
+  stroke: #EBEBEB;
+}
+.module-group_activity svg text {
+  font: normal 12px Helvetica;
+  fill: #999999;
+}
+.module-group_activity svg .nv-x .nv-axis text {
+  fill: #000;
+  font-size: 10px;
+}
+.module-group_activity svg .nv-axis path {
+  stroke: #999999;
+}
+.loading-block {
+  display: table;
+  width: 100%;
+  height: auto;
+}
+.loading-block > div {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+.loading-block .fa-spin {
+  font-size: 40px !important;
+  position: initial !important;
+  top: 0 !important;
 }

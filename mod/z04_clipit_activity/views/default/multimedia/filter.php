@@ -15,6 +15,7 @@ $href = elgg_extract('href', $vars);
 $files_count = count($entity->file_array) > 0 ? "(".count($entity->file_array).")" : "(0)";
 $videos_count = count($entity->video_array) > 0 ? "(".count($entity->video_array).")" : "(0)";
 $sb_count = count($entity->storyboard_array) > 0 ? "(".count($entity->storyboard_array).")" : "(0)";
+$resources_count = count($entity->resource_array) > 0 ? "(".count($entity->resource_array).")" : "(0)";
 
 $tabs = array(
     'files' => array(
@@ -27,13 +28,29 @@ $tabs = array(
         'href' => "{$href}?filter=videos",
         'priority' => 300,
     ),
+    /*'multimedia' => array(
+        'text' => elgg_echo('resources').' '.$resources_count,
+        'href' => "{$href}?filter=resources",
+        'priority' => 400,
+    ),*/
     'storyboards' => array(
         'text' => elgg_echo('multimedia:storyboards').' '.$sb_count,
         'href' => "{$href}?filter=storyboards",
-        'priority' => 400,
+        'priority' => 300,
     ),
 );
-
+//if($vars['tab_videos']){
+//   $tabs = array_merge($tabs, array('videos' => array(
+//        'text' => elgg_echo('multimedia:videos').' '.$videos_count,
+//        'href' => "{$href}?filter=videos",
+//        'priority' => 300,
+//    )));
+//    $tabs = array_merge($tabs, array('files' => array(
+//        'text' => elgg_echo('multimedia:files').' '.$videos_count,
+//        'href' => "{$href}?filter=files",
+//        'priority' => 200,
+//    )));
+//}
 foreach ($tabs as $name => $tab) {
     $tab['name'] = $name;
 

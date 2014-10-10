@@ -18,6 +18,11 @@ $tabs = array(
         'href' => "{$href}?filter=videos",
         'priority' => 200,
     ),
+    /*'resources' => array(
+        'text' => elgg_echo('resources'),
+        'href' => "{$href}?filter=resources",
+        'priority' => 200,
+    ),*/
     'storyboards' => array(
         'text' => elgg_echo('multimedia:storyboards'),
         'href' => "{$href}?filter=storyboards",

@@ -27,13 +27,15 @@ if (elgg_get_config('allow_registration')) {
             throw new RegistrationException(elgg_echo('RegistrationException:PasswordMismatch'));
         }
 
-        // Clipit create user
-        $user_id = ClipitUser::create(array(
-            'login'     => $username,
-            'password'  => $password,
-            'name'      => $name,
-            'email'     => $email
-        ));
+        if(preg_match("/^[a-zA-Z0-9_]*$/i", $username)) {
+            // Clipit create user
+            $user_id = ClipitUser::create(array(
+                'login' => $username,
+                'password' => $password,
+                'name' => $name,
+                'email' => $email
+            ));
+        }
         if ($user_id) {
             ClipitUser::set_role_student($user_id);
             $new_user = get_entity($user_id);

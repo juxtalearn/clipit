@@ -14,13 +14,14 @@
 $file_id = (int)get_input("id");
 $size = get_input("size");
 
-echo $size;
 // Get the file
 $mime_type = $file->mime_type;
 $file = array_pop(ClipitFile::get_by_id(array($file_id)));
 header("Pragma: public");
 header("Content-type: {$mime_type['full']}");
 header("Content-Disposition: inline; filename='{$file->name}'");
+header("Cache-Control: public", true);
+header('Expires: ' . date('r', time() + 864000));
 
 switch ($size) {
     case "small":
@@ -36,6 +37,9 @@ switch ($size) {
         $thumbdata = file_get_contents($file->file_path);
         break;
 }
+$content_length = strlen($thumbdata);
+header("Content-Length: $content_length");
+
 ob_clean();
 flush();
 echo $thumbdata;

@@ -14,5 +14,6 @@ $query = stripslashes(get_input('q', get_input('term', '')));
 foreach(ClipitLabel::get_from_search($query) as $label){
     $output[] = $label->name;
 }
+$output = array_slice($output, 0, 10);
 echo json_encode($output);
 die();

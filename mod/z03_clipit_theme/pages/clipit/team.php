@@ -1,5 +1,5 @@
 <?php
- /**
+/**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
  * Creation date:   2/09/14
@@ -19,8 +19,11 @@ $spanish = array(
     'team:jaime' => 'Profesor contratado doctor de la Universidad Rey Juan Carlos. Sus intereses de investigación son la enseñanza de informática, los sistemas interactivos y el aprendizaje a través de las tecnologías.',
     'team:manuel' => 'Profesor Titular de la Universidad Rey Juan Carlos. Interesado en las nuevas formas expresivas y de aprendizaje que permiten las tecnologías emergentes. ',
     'team:gemma' => 'Diseñadora gráfica y artista multidisciplinar licenciada en Bellas Artes. Su trabajo se desarrolla en las áreas de diseño editorial, imagen corporativa, cartelería e ilustración. Colabora en múltiples proyectos relacionados con las nuevas tecnologías aplicadas a la educación.',
-    'team:phaya' => 'Doctor en Informática e Ing. de Telecomunicación. Apasionado de la innovación tecnológica y su aplicación a la educación y las redes sociales. Actualmente trabaja en el Instituto de Ingeniería del Conocimiento (Madrid, Spain).',
+    'team:phaya' => 'Doctor en Informática e Ing. de Telecomunicación. Apasionado de la innovación tecnológica y su aplicación a la educación y las redes sociales. Actualmente trabaja en el Instituto de Ingeniería del Conocimiento (Madrid, España).',
     'team:jorge' => 'Profesor de secundaria de la especialidad de informática de la Comunidad de Madrid. También ha trabajado como profesor asociado de la Universidad Rey Juan Carlos.',
+    'team:ulrich' => 'Catedrático de la Universidad Duisburg-Essen y presidente del Rhine-Ruhr Institute for Applied Systeminnovation e.V.. Sus intereses incluyen el análisis, modelado y soporte de procesos de aprendizaje interactivos y colaborativos así como el análisis de redes sociales y comunidades.',
+    'team:nils' => 'Director de tecnología e investigador en el Rhine-Ruhr Institute for Applied Systeminnovation e.V. Sus intereses incluyen el análisis, modelado y soporte de procesos de aprendizaje interactivos y colaborativos dentro de comunidades.',
+    'team:oliver' => 'Ingeniero software e investigador junior en el Rhine-Ruhr Institute for Applied Systeminnovation e.V. Sus intereses se centran en los sistemas de recomendación para entornos de aprendizaje.',
 );
 add_translation('es', $spanish);
 $english = array(
@@ -33,6 +36,9 @@ $english = array(
     'team:gemma' => 'Graphic designer, and multidisciplinary artist with a degree in Fine Arts. Her work specializes in editorial design, corporate identity, posters, and illustration. She collaborates in multiple projects related to new technologies applied in the field of education.',
     'team:phaya' => 'PhD in Computer Science and Telecommunication Engineer. He is a passionate about technology innovation and its application in learning and social networks. He is currently working at Instituto de Ingeniería del Conocimiento (Madrid, Spain).',
     'team:jorge' => 'Jorge Castellanos works at a secondary school computer science teacher for the Comunidad de Madrid government. He has also been working as associate professor at Universidad Rey Juan Carlos.',
+    'team:ulrich' => 'Full professor at University Duisburg-Essen and Chairman of the Rhine-Ruhr Institute for Applied Systeminnovation e.V.. His research interests include analysis, modelling, and intelligent support of interactive and collaborative learning processes as well as social network analysis and community support.',
+    'team:nils' => 'Chief Technology Officer and researcher at Rhine-Ruhr Institute for Applied Systeminnovation e.V. His interests include analysis, modelling, and intelligent support of interactive and collaborative learning processed esp. within communities.',
+    'team:oliver' => 'Software engineer and junior researcher at  Rhine-Ruhr Institute for Applied Systeminnovation e.V. His research interests are focussed on recommender systems for learning environments.',
 );
 add_translation('en', $english);
 // Internships description
@@ -57,7 +63,7 @@ $team_members = array(
         array(
             'name' => 'Estefanía Martín',
             'image' => "estefania.png",
-            'position' => elgg_echo('position:li'),
+            'position' => elgg_echo('position:li:es'),
             'description' => elgg_echo('team:estefania'),
             'social' => array(
                 'twitter' => 'EstefaniaURJC',
@@ -152,6 +158,37 @@ $team_members = array(
             'social' => array(
                 'twitter' => 'jorgejjcv',
                 'linkedin' => 'pub/jorge-castellanos-vega/65/514/969'
+            )
+        ),
+        array(
+            'name' => 'H. Ulrich Hoppe',
+            'image' => "hoppe.png",
+            'position' => elgg_echo('position:li:de'),
+            'description' => elgg_echo('team:ulrich'),
+            'cartoon' => false,
+            'social' => array(
+                'web' => 'http://www.rias-institute.eu',
+            )
+        ),
+        array(
+            'name' => 'Nils Malzahn',
+            'image' => "malzahn.png",
+            'position' => elgg_echo('position:researcher'),
+            'description' => elgg_echo('team:nils'),
+            'cartoon' => false,
+            'social' => array(
+                'web' => 'http://www.rias-institute.eu',
+            )
+        ),
+        array(
+            'name' => 'Oliver Daems',
+            'image' => "oliver.png",
+            'position' => elgg_echo('position:researcher'),
+            'description' => elgg_echo('team:oliver'),
+            'cartoon' => false,
+            'social' => array(
+                'web' => 'http://www.rias-institute.eu',
+                'twitter' => 'ODaems'
             )
         )
     )

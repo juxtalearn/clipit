@@ -111,7 +111,7 @@ function video_url_parser($url){
                     'preview' => "http://i1.ytimg.com/vi/{$matches[0]}/mqdefault.jpg",
                     'favicon'   => $favicon_url_base.$parse_url['host']
                 );
-            // Vimeo
+                // Vimeo
             } else if (strpos($url, 'vimeo.com') != false) {
                 preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=vimeo.com/)[^&\n]+#", $url, $matches);
                 $data = file_get_contents("http://vimeo.com/api/v2/video/$matches[0].json");
@@ -222,8 +222,8 @@ function get_task_completed_count(ClipitTask $task){
             break;
     }
     return array(
-      'text' => $text,
-      'count' => round($count)
+        'text' => $text,
+        'count' => round($count)
     );
 }
 /**
@@ -246,12 +246,17 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
         'color' => 'yellow',
         'status' => false
     );
-
+    if(time() < $task->start && $task->task_type != ClipitTask::TYPE_OTHER){
+        return $status;
+    }
     switch($task->task_type){
-        case "other":
-            return false;
-        break;
-        case "video_upload":
+        case ClipitTask::TYPE_OTHER:
+            $status = array(
+                'status' => false
+            );
+            return $status;
+            break;
+        case ClipitTask::TYPE_VIDEO_UPLOAD:
             foreach($task->video_array as $video_id){
                 $group_video = ClipitVideo::get_group($video_id);
                 if($group_id == $group_video){
@@ -265,7 +270,7 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
                 }
             }
             break;
-        case "storyboard_upload":
+        case ClipitTask::TYPE_STORYBOARD_UPLOAD:
             foreach($task->storyboard_array as $storyboard_id){
                 $group_sb = ClipitStoryboard::get_group($storyboard_id);
                 if($group_id == $group_sb){
@@ -279,7 +284,7 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
                 }
             }
             break;
-        case "storyboard_feedback":
+        case ClipitTask::TYPE_STORYBOARD_FEEDBACK:
 
             $entities = ClipitTask::get_storyboards($task->parent_task);
             $evaluation_list = get_filter_evaluations($entities, $task->activity, $user_id);
@@ -308,7 +313,7 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
                     'status' => ClipitTask::get_completed_status($task->id, $user_id)
                 ), $custom);
             break;
-        case "video_feedback":
+        case ClipitTask::TYPE_VIDEO_FEEDBACK:
             $entities = ClipitTask::get_videos($task->parent_task);
             $evaluation_list = get_filter_evaluations($entities, $task->activity, $user_id);
             $total = count($evaluation_list["evaluated"]) + count($evaluation_list["no_evaluated"]);
@@ -365,16 +370,25 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
 function get_group_progress($group_id){
     $activity_id = ClipitGroup::get_activity($group_id);
     $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
-    $individual_tasks = array('video_feedback', 'storyboard_feedback', 'quiz_take');
+    $individual_tasks = array(ClipitTask::TYPE_VIDEO_FEEDBACK, ClipitTask::TYPE_STORYBOARD_FEEDBACK, ClipitTask::TYPE_QUIZ_TAKE);
     $completed = array();
     $total = 0;
+    $group_users = ClipitGroup::get_users($group_id);
     foreach($activity->task_array as $task_id){
         $task = array_pop(ClipitTask::get_by_id(array($task_id)));
-        $status = get_task_status($task, $group_id);
-        if(!in_array($task->task_type, $individual_tasks)){
-            $total++;
-            if($status['status'] === true){
-                $completed[] = true;
+        if(time() > $task->start) {
+            if (in_array($task->task_type, $individual_tasks)) {
+                foreach ($group_users as $user_id) {
+                    if (ClipitTask::get_completed_status($task_id, $user_id)) {
+                        $completed[] = true;
+                    }
+                    $total++;
+                }
+            } else {
+                $total++;
+                if (ClipitTask::get_completed_status($task_id, $group_id)) {
+                    $completed[] = true;
+                }
             }
         }
     }
@@ -419,4 +433,29 @@ function get_activity_status($status){
             break;
     }
     return $output;
+}
+
+/**
+ * array_chunk() php function, balanced
+ *
+ * @param $l
+ * @param $n
+ * @return array
+ */
+function split_chunks($l, $n){
+
+    $result = array_fill(0, $n, array());
+    $sums   = array_fill(0, $n, 0);
+    $c = 0;
+    foreach ($l as $e){
+        foreach ($sums as $i=>$sum){
+            if ($c == $sum){
+                $result[$i][] = $e;
+                break;
+            } // if
+        } // foreach
+        $sums[$i] += $e;
+        $c = min($sums);
+    } // foreach
+    return $result;
 }

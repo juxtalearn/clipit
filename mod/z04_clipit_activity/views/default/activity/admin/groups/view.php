@@ -17,9 +17,6 @@ elgg_load_js("jquery:multiselect");
 elgg_load_js("jquery:quicksearch");
 ?>
 <style>
-    #users_group_test{
-        position: relative;
-    }
     .bootstrap-duallistbox-container select > option{
         border-bottom: 1px #eee solid;
         padding: 3px 10px;
@@ -27,17 +24,8 @@ elgg_load_js("jquery:quicksearch");
     .bootstrap-duallistbox-container select > option:hover{
         background: #000;
     }
-    #users_group_test option::after {
-        font-family: FontAwesome;
-        color: #bae6f6;
-        position: absolute;
-        content: "\f061";
-        right: 5px;
-    }
+
     <!-- -->
-    .ms-container{
-        overflow: hidden;
-    }
     .items-padding{
         height: 220px;
         overflow-y: auto;
@@ -72,6 +60,7 @@ elgg_load_js("jquery:quicksearch");
         content: "\f047";
         font-family: FontAwesome;
         color: #bae6f6;
+        top: 8px;
     }
     .ui-sortable-placeholder{
         position: relative;
@@ -83,7 +72,7 @@ elgg_load_js("jquery:quicksearch");
         height: 250px;
     }
     .ms-selection .ms-list{
-        height: 245px;
+        height: 235px;
     }
     .site-users li:hover{
         background-color: #32b4e5;
@@ -125,14 +114,18 @@ $(function(){
     // Multiselect
     $("#called_users").multiSelect({
         keepOrder: false,
-        selectableHeader: '<h4 class="margin-bottom-20"><?php echo elgg_echo("activity:students");?></h4>'+
-            "<input type='text' class='search-input form-control margin-bottom-10' autocomplete='off' placeholder='Filter...'>",
+        selectableHeader: '<h4 class="margin-bottom-20"><?php echo elgg_echo("activity:students");?> <span class="pull-right blue-lighter">0</span></h4>'+
+            "<input type='text' class='search-input form-control margin-bottom-10' autocomplete='off' placeholder='<?php echo elgg_echo('search:filter');?>...'>",
         selectionHeader:
-            '<label>Group name</label>'+
-                '<input type="text" name="group_name" id="group_name" class="form-control margin-bottom-10">'+
-                '<h4><?php echo elgg_echo("group:students");?></h4>',
+            '<label><?php echo elgg_echo('group:name');?></label>'+
+            '<input type="text" name="group_name" id="group_name" class="form-control margin-bottom-10"/>'+
+            '<h4><?php echo elgg_echo("group:students");?> <span class="pull-right blue-lighter">0</span></h4>',
         afterInit: function(ms){
+            $("ul .ms-elem-selectable:not('.disabled')")
+                .css({"padding-left": "25px", "position": "relative"})
+                .prepend('<i class="red fa fa-trash-o move-to-site" style="position: absolute;/* left: 5px; *//* top: 5px; */font-size: 17px;z-index: 2;left: 0;width: 25px;text-align: center;line-height: 20px;"></i>');
             set_default_group_name();
+            selected_count();
             var that = this,
                 $selectableSearch = that.$selectableUl.prev(),
                 $selectionSearch = that.$selectionUl.prev(),
@@ -158,11 +151,30 @@ $(function(){
         afterSelect: function(){
             this.qs1.cache();
             this.qs2.cache();
+            selected_count();
         },
         afterDeselect: function(){
             this.qs1.cache();
             this.qs2.cache();
+            selected_count();
         }
+    });
+    $(document).on("click", ".move-to-site", function(e){
+        e.preventDefault();
+        var text = $(this).parent("li").text();
+        var option = $("#called_users option:contains('"+text.trim()+"')");
+        elgg.action('activity/admin/users', {
+            data: {
+                id: option.val(),
+                activity_id: <?php echo $activity->id;?>,
+                act: "to_site"
+            },
+            success: function(){
+                option.remove();
+                $('#called_users').multiSelect('refresh');
+            }
+        });
+        return false;
     });
     $(document).on("click", ".delete-user", function(){
         var user = $(this).parent("li");
@@ -190,11 +202,44 @@ $(function(){
         });
         update_move_to_group();
     });
+    // Create students, add button
+    $(document).on("click", ".submit-add-students", function(){
+        var that = $(this);
+        var content = $(".add-user-list").find(".add-user");
+        if(content.length == 0){
+            return false;
+        }
+        that.button('loading').data("loading-text", "<?php echo elgg_echo('loading');?>...").button('loading');
+        var form = $(this).closest("form");
+        elgg.action('activity/admin/users', {
+            data: form.serialize(),
+            success: function(data){
+                var $data = data.output;
+                $.each($data, function(i, user) {
+                    $('#called_users').multiSelect('addOption',
+                        { value: user.id, text: user.name, index: 0}
+                    );
+                });
+                content.remove();
+                that.button('reset');
+                $('#called_users').multiSelect('refresh');
+            }
+        });
+    });
+    // Move students to site
     $(document).on("click", ".site-users li", function(){
         var user = $(this);
         $('#called_users').multiSelect('addOption',
             { value: user.data("user"), text: user.text(), index: 0}
         );
+        elgg.action('activity/admin/users', {
+            data: {
+                id: user.data("user"),
+                activity_id: <?php echo $activity->id;?>,
+                role: "student",
+                act: "to_activity"
+            }
+        });
         $('#called_users').multiSelect('refresh');
         user.remove();
     });
@@ -202,7 +247,7 @@ $(function(){
     $(document).on("click", "#create", function(e){
         e.preventDefault();
         var that = $(this);
-        that.button(elgg.echo("loading"));
+        that.data("loading-text", "<?php echo elgg_echo('loading');?>...").button('loading');
         var data_users = $("#called_users").val();
         elgg.action('activity/admin/groups_create', {
             data: {
@@ -234,15 +279,10 @@ $(function(){
         var merge_users = data_users.concat(users.val().split(","));
         users.val(merge_users);
         $("#move-loading").show();
-        elgg.action('activity/admin/groups_setup', {
-            data: $(".groups-form").serialize(),
-            success: function(content){
-                $('#called_users option:selected').remove();
-                $("#save-groups").click();
-            }
-        });
+        $("#save-groups").click();
     });
 });
+
 function update_move_to_group(){
     $("#move-group").html("");
     $("<option></option>")

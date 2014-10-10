@@ -24,6 +24,7 @@ class ClipitFile extends UBFile {
     const REL_FILE_LABEL = "ClipitFile-ClipitLabel";
     public $tag_array = array();
     public $label_array = array();
+    public $read_array = array();
 
     /**
      * Loads object parameters stored in Elgg
@@ -34,10 +35,24 @@ class ClipitFile extends UBFile {
         parent::copy_from_elgg($elgg_file);
         $this->tag_array = static::get_tags($this->id);
         $this->label_array = static::get_labels($this->id);
+        $this->read_array = (array)$elgg_file->get("read_array");
+    }
+
+    /**
+     * Copy $this object parameters into an Elgg file.
+     *
+     * @param ElggFile $elgg_file Elgg file instance to save $this to
+     */
+    protected function copy_to_elgg($elgg_file) {
+        parent::copy_to_elgg($elgg_file);
+        $elgg_file->set("read_array", (string)$this->read_array);
     }
 
     /**
      * Saves this instance to the system.
+     *
+     * @param bool $double_save Specifies whether to save file twice (necessary for file_creation_date edit)
+     *
      * @return bool|int Returns id of saved instance, or false if error.
      */
     protected function save($double_save=false) {
@@ -237,5 +252,60 @@ class ClipitFile extends UBFile {
      */
     static function get_labels($id) {
         return UBCollection::get_items($id, static::REL_FILE_LABEL);
+    }
+
+    /**
+     * Get a list of Users who have read a File, or optionally whether certain Users have read it
+     *
+     * @param int        $id         ID of the File
+     * @param null|array $user_array List of User IDs - optional
+     *
+     * @return static[] Array with key => value: user_id => read_status, where read_status is bool
+     */
+    static function get_read_status($id, $user_array = null) {
+        $props = static::get_properties($id, array("read_array", "owner_id"));
+        $read_array = $props["read_array"];
+        if(!$user_array) {
+            return $read_array;
+        } else {
+            $return_array = array();
+            foreach($user_array as $user_id) {
+                if(in_array($user_id, $read_array)) {
+                    $return_array[$user_id] = true;
+                } else {
+                    $return_array[$user_id] = false;
+                }
+            }
+            return $return_array;
+        }
+    }
+
+    /**
+     * Set the Read status for a File
+     *
+     * @param int   $id         ID of File
+     * @param bool  $read_value Read status value: true = read, false = unread
+     * @param array $user_array Array of User IDs
+     *
+     * @return bool|int ID of File if Ok, false if error
+     * @throws InvalidParameterException
+     */
+    static function set_read_status($id, $read_value, $user_array) {
+        $read_array = static::get_properties($id, array("read_array"));
+        $read_array = array_pop($read_array);
+        foreach($user_array as $user_id) {
+            if($read_value == true) {
+                if(!in_array($user_id, $read_array)) {
+                    array_push($read_array, $user_id);
+                }
+            } else if($read_value == false) {
+                $index = array_search((int)$user_id, $read_array);
+                if(isset($index) && $index !== false) {
+                    array_splice($read_array, $index, 1);
+                }
+            }
+        }
+        $prop_value_array["read_array"] = $read_array;
+        return static::set_properties($id, $prop_value_array);
     }
 }

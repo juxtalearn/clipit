@@ -12,7 +12,6 @@
     <?php echo elgg_view('input/text', array(
         'name' => 'username',
         'class' => 'form-control input-lg',
-        'placeholder' => 'hello@email.com'
     ));
     ?>
 </div>

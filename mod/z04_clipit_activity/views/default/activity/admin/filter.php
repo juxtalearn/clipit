@@ -12,10 +12,6 @@
  */
 $href = elgg_extract('href', $vars);
 $tabs = array(
-    'dashboard' => array(
-        'text' => elgg_echo('activity:admin:dashboard'),
-        'href' => "{$href}?filter=dashboard",
-    ),
     'setup' => array(
         'text' => elgg_echo('activity:admin:setup'),
         'href' => "{$href}?filter=setup",

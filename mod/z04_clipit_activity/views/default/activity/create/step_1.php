@@ -10,8 +10,8 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$tricky_topics = ClipitTrickyTopic::get_all(10);
-$tt = array('' => 'Select tricky topic');
+$tricky_topics = ClipitTrickyTopic::get_all();
+$tt = array('' => elgg_echo('tricky_topic:select'));
 foreach($tricky_topics as $tricky_topic){
     $tt[$tricky_topic->id] = $tricky_topic->name;
 }
@@ -95,13 +95,13 @@ $(function(){
             ?>
         </div>
         <div class="row margin-0 margin-bottom-10" id="tricky_topic_view" style="display: none;background: #fafafa;padding: 10px;"></div>
-        <?php echo elgg_echo('or:create');?>
-        <?php echo elgg_view('output/url', array(
-            'href'  => "http://trickytopic.".ClipitSite::get_domain(),
-            'title' => elgg_echo('tricky_topic'),
-            'text'  => elgg_echo('tricky_topic'),
-        ));
-        ?>
+<!--        --><?php //echo elgg_echo('or:create');?>
+<!--        --><?php //echo elgg_view('output/url', array(
+//            'href'  => "http://trickytopic.".ClipitSite::get_domain(),
+//            'title' => elgg_echo('tricky_topic'),
+//            'text'  => elgg_echo('tricky_topic'),
+//        ));
+//        ?>
     </div>
     <div class="col-md-6">
         <div class="form-group">

@@ -25,4 +25,4 @@ if(in_array($group_id, $user_groups) || $hasGroup){
 }
 
 
-forward("clipit_activity/{$activity_id}/join");
+forward(REFERER);
