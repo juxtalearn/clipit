@@ -15,7 +15,7 @@ $href = "clipit_activity/{$activity->id}/discussion";
 elgg_push_breadcrumb($title);
 $messages = array_pop(ClipitPost::get_by_destination(array($activity->id)));
 $canCreate = false;
-if( ($access == 'ACCESS_TEACHER' || $access == 'ACCESS_MEMBER') && $activity_status != 'closed'){
+if( ($access == 'ACCESS_TEACHER' || $access == 'ACCESS_MEMBER' || in_array($user_id, $activity->student_array)) && $activity_status != 'closed'){
     $canCreate = true;
 }
 $content =  elgg_view('discussion/list',
