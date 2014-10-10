@@ -4,9 +4,7 @@ class ActivityStreamer {
     static function get_metric($metric_id, $return_id, $context) {
         global $con;
         global $CONFIG;
-        $server_url = "https://analyticstk.rias-institute.eu:1443/requestAnalysis";
-//        $return_url = elgg_get_site_url() . "services/api/rest/xml/?method=clipit.la.save_metric";
-        $return_url = "http://176.28.14.94/~workbench/jxlDefinitions/clipItDriver.php";
+        $return_url = elgg_get_site_url() . "services/api/rest/xml/?method=clipit.la.save_metric";
         $sql = "SELECT json FROM ".$CONFIG->dbprefix."activitystreams";
         $filter = "";
         $parameter_string = "";
