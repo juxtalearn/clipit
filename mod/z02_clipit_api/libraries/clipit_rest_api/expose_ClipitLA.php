@@ -20,10 +20,16 @@ function expose_la_functions() {
     $class_suffix = "ClipitLA::";
     expose_common_functions($api_suffix, $class_suffix);
     expose_function(
-        $api_suffix . "save_metric", $class_suffix . "save_metrics", array(
+        $api_suffix . "get_metric", $class_suffix . "get_metric", array(
+            "metric_id" => array("type" => "int", "required" => true),
+            "context" => array("type" => "string", "required" => true),
+        ), "Get Learning Analytics Metric", "POST", false, true
+    );
+    expose_function(
+        $api_suffix . "save_metric", $class_suffix . "save_metric", array(
             "return_id" => array("type" => "int", "required" => true),
             "data" => array("type" => "string", "required" => true),
             "status_code" => array("type" => "int", "required" => true)
-        ), "Send Learning Analytics Metrics to ClipIt", "POST", false, true
+        ), "Send Learning Analytics Metric to ClipIt", "POST", false, true
     );
 }
