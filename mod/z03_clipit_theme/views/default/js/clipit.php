@@ -275,7 +275,7 @@ $(function(){
     $.validator.addMethod(
         "login_normalize",
         function(value, element) {
-            var re = new RegExp(/^[a-zA-Z0-9_]*$/);
+            var re = new RegExp(/^[a-zA-Z0-9_.]*$/);
             re.test( element.value );
             return this.optional(element) || re.test(value);
         },
@@ -589,8 +589,9 @@ $(function(){
     $('[rel=popover]').popover({
         html : true,
         content: function() {
-        return $('#popover_content_wrapper').html();
-    }
+            var popover_content = $(this).closest(".tags").find('.popover_content_wrapper');
+            return popover_content.html();
+        }
     });
     /*
      * Format file size
