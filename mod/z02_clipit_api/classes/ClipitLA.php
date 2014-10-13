@@ -15,58 +15,58 @@
 /**
  * Learning Analytics instance and interface class, for working with the external Learning Analytics Toolkit.
  */
-class ClipitLA extends UBFile {
+class ClipitLA extends UBItem {
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitLA";
-    public $return_id = 0;
     public $status_code = 0;
     public $metric_received = false;
+    public $file_id = 0;
 
     /**
      * Loads object parameters stored in Elgg
      *
-     * @param ElggFile $elgg_file Elgg Object to load parameters from.
+     * @param ElggObject $elgg_object Elgg Object to load parameters from.
      */
-    protected function copy_from_elgg($elgg_file) {
-        parent::copy_from_elgg($elgg_file);
-        $this->return_id = (int)$elgg_file->get("return_id");
-        $this->status_code = (int)$elgg_file->get("status_code");
-        $this->metric_received = (bool)$elgg_file->get("metric_received");
+    protected function copy_from_elgg($elgg_object) {
+        parent::copy_from_elgg($elgg_object);
+        $this->status_code = (int)$elgg_object->get("status_code");
+        $this->metric_received = (bool)$elgg_object->get("metric_received");
+        $this->file_id = (int)$elgg_object->get("file_id");
     }
 
     /**
      * Copy $this file parameters into an Elgg File entity.
      *
-     * @param ElggFile $elgg_file Elgg object instance to save $this to
+     * @param ElggObject $elgg_object Elgg object instance to save $this to
      */
-    protected function copy_to_elgg($elgg_file) {
-        parent::copy_to_elgg($elgg_file);
-        $elgg_file->set("return_id", $this->return_id);
-        $elgg_file->set("status_code", $this->status_code);
-        $elgg_file->set("metric_received", $this->metric_received);
+    protected function copy_to_elgg($elgg_object) {
+        parent::copy_to_elgg($elgg_object);
+        $elgg_object->set("status_code", $this->status_code);
+        $elgg_object->set("metric_received", $this->metric_received);
+        $elgg_object->set("file_id", $this->file_id);
+
     }
 
     /*
      */
     static function get_metric($metric_id, $context) {
-        $la_id = new static();
         if(!$la_metrics_class = elgg_get_config("la_metrics_class")){
             return null;
         }
-        $la_metrics_class::get_metric($metric_id, $la_id, $context);
-        return $la_id;
+        $return_id = new static();
+        $la_metrics_class::get_metric($metric_id, $return_id, $context);
+        return $return_id;
     }
 
     static function save_metric($return_id, $data, $status_code) {
-        $la = new ClipitLA();
-        $prop_value_array["return_id"] = (int)$return_id;
         $prop_value_array["data"] = $data;
+        $la_file_id = ClipitFile::set_properties(null, $prop_value_array);
+        $prop_value_array = array();
+        $prop_value_array["file_id"] = $la_file_id;
         $prop_value_array["status_code"] = (int)$status_code;
         $prop_value_array["metric_received"] = true;
-        $id = $la->save();
-        ClipitLA::set_properties($id, $prop_value_array);
-        return $id;
+        return static::set_properties($return_id, $prop_value_array);
     }
 }
