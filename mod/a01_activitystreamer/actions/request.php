@@ -12,6 +12,7 @@ include_once(elgg_get_plugins_path(). "a01_activitystreamer" . DIRECTORY_SEPARAT
 $_SESSION['transaction'] = "";
 $affirmative = get_input('affirmative', 1);
 $context = array();
-$runId = ActivityStreamer::get_metric(1,1, $context);
+$context['activity_id'] = 3802;
+$runId = ActivityStreamer::get_metric(23,1, $context);
 system_message("<h1>Successfully requested analysis with runId = ".$runId);
 

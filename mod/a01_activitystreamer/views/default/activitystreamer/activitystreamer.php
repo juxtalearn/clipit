@@ -23,7 +23,6 @@ if (!isset($entities[0])) {
     $entity = $entities[0];
     $workbenchurl = $entity->workbenchurl;
 }
-error_log("Retrieved config: ".$workbenchurl);
 ?>
 
     <form action="<?php echo $vars['url']; ?>action/activitystreamer/modify" method="post">

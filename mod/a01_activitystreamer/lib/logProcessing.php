@@ -442,7 +442,7 @@ function convertLogTransactionToActivityStream($transaction)
             $title = $transaction[0]['ObjectSubtype'];
             $values = $transaction[0]['Content'];
             if (!(strpos($title, "-") !== false)) {
-                error_log("TitleKaputt");
+                //error_log("TitleKaputt");
 //                    error_log($transaction_id."FoundNoTitle\n\n\n\n");
                 $verb = "Unidentified";
                 break;
@@ -450,7 +450,7 @@ function convertLogTransactionToActivityStream($transaction)
                 $types = preg_split('/[-]/', $title);
             }
             if (!(strpos($values, "-") !== false)) {
-                error_log($transaction_id . "FoundNoContent\n\n\n\n");
+                //error_log($transaction_id . "FoundNoContent\n\n\n\n");
                 $verb = "Unidentified";
                 break;
             } else {
