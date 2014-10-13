@@ -7,8 +7,7 @@ class ActivityStreamer {
 
         $entities = elgg_get_entities(array("types" => "object", "subtypes" => "modactivitystreamer", "owner_guids" => '0', "order_by" => "", "limit" => 0));
         if (!isset($entities[0])) {
-            $entity = $entities[0];
-            $workbenchurl = "https://analyticstk.rias-institute.eu:1443/requestAnalysis";
+            $workbenchurl = "https://analyticstk.rias-institute.eu:1443";
             $entity = new ElggObject;
             $entity->subtype = 'modactivitystreamer';
             $entity->owner_guid = $_SESSION['user']->getGUID();
@@ -20,7 +19,7 @@ class ActivityStreamer {
         }
 
 
-        //$workbenchurl = "https://192.168.1.21:443/requestAnalysis";
+        $workbenchurl = $workbenchurl."/requestAnalysis";
         $return_url = elgg_get_site_url() . "services/api/rest/xml/?method=clipit.la.save_metric";
         //$return_url = "http://176.28.14.94/~workbench/jxlDefinitions/clipItDriver.php";
         $sql = "SELECT json FROM ".$CONFIG->dbprefix."activitystreams";
@@ -116,6 +115,7 @@ class ActivityStreamer {
                 'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
                 'method'  => 'POST',
                 'content' => http_build_query($data),
+                'timeout' => 15
             ),
         );
         $request_context  = stream_context_create($options);
@@ -125,6 +125,44 @@ class ActivityStreamer {
         $runId = file_get_contents($workbenchurl, false, $request_context);
 
         return $runId;
+    }
+
+
+    static function get_available_metrics() {
+        $metrics = array();
+        define('ENDPOINT', "requestAvailableTemplates");
+        $entities = elgg_get_entities(array("types" => "object", "subtypes" => "modactivitystreamer", "owner_guids" => '0', "order_by" => "", "limit" => 0));
+        if (!isset($entities[0])) {
+            $workbenchurl = "https://analyticstk.rias-institute.eu:1443";
+            $entity = new ElggObject;
+            $entity->subtype = 'modactivitystreamer';
+            $entity->owner_guid = $_SESSION['user']->getGUID();
+            $entity->workbenchurl = $workbenchurl;
+            $entity->access_id = 2;    //Make sure this object is public.
+        } else {
+            $entity = $entities[0];
+            $workbenchurl = $entity->workbenchurl;
+        }
+
+
+        $workbenchurl = $workbenchurl."/requestAvailableTemplates";
+        # retrieve JSON-String
+        $jsonArrayString = file_get_contents($workbenchurl);
+        # converst JSON-String to JSON data structure
+        $jsonArray = json_decode($jsonArrayString,true);
+
+        #output
+        if (empty($jsonArray)) {
+            echo "No Templates found! Please ensure that you have saved some in the Workbench!";
+        } else { # if the array is not empty, every array item should contain all three of the variables below
+            foreach ($jsonArray as $entry) {
+                $templateId = $entry["TemplateId"]; //String
+                $templateName = $entry["Name"]; //String
+                $templateDescription = $entry["Description"]; //String
+                $metrics[] = ["TemplateId" => $templateId, "Name" => $templateName, "Description" => $templateDescription];
+            }
+        }
+        return $metrics;
     }
 }
 

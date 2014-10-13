@@ -104,3 +104,15 @@ if (!isset($entities[0])) {
 
     ?>
 </p>
+<h1>Available templates:</h1>
+<ul>
+
+<?php
+    $metrics = ActivityStreamer::get_available_metrics();
+    foreach ($metrics as $metric) {
+        echo("<li>");
+        echo($metric['TemplateId'].": ".$metric['Name']." - ".$metric['Description']);
+        echo("</li>");
+    }
+ ?>
+</ul>
