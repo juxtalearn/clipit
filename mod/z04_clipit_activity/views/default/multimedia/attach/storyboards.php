@@ -10,18 +10,31 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
+$selected_sbs = elgg_extract('selected', $vars);
 $entity_id = elgg_extract('entity_id', $vars);
-$storyboards = ClipitGroup::get_storyboards($entity_id);
+$object = ClipitSite::lookup($entity_id);
+$storyboards = $object['subtype']::get_storyboards($entity_id);
 ?>
 <div data-list="storyboards">
 <?php
 foreach($storyboards as $sb_id):
     $storyboard = array_pop(ClipitStoryboard::get_by_id(array($sb_id)));
     $file = array_pop(ClipitFile::get_by_id(array($storyboard->file)));
+    $selected = false;
+    if(in_array($sb_id, $selected_sbs)){
+        $selected = true;
+    }
 ?>
     <div class="multimedia-block col-md-4" style="position:relative;border-radius: 4px;margin-bottom: 0;padding: 0;background: transparent;">
-        <label class="select-item attach-item" title="<?php echo $storyboard->name;?>" for="item_<?php echo $sb_id;?>"></label>
-        <input type="checkbox" style="display: none" name="attach_storyboards[]" value="<?php echo $sb_id;?>" id="item_<?php echo $sb_id;?>">
+        <label class="select-item attach-item <?php echo  $selected ? 'checked' : false;?>" title="<?php echo $storyboard->name;?>" for="item_<?php echo $sb_id;?>"></label>
+        <input
+            type="checkbox"
+            <?php echo  $selected ? 'checked' : false;?>
+            style="display: none"
+            name="attach_storyboards[]"
+            value="<?php echo $sb_id;?>"
+            id="item_<?php echo $sb_id;?>"
+            >
         <div class="attach-block">
             <div class="multimedia-preview" >
                 <?php echo elgg_view("multimedia/file/preview", array('file'  => $file, 'size' => 'medium'));?>

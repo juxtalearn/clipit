@@ -10,7 +10,7 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$selected_tab = get_input('filter', 'resources');
+$selected_tab = get_input('filter', 'videos');
 $title = elgg_echo("activity:publications");
 elgg_push_breadcrumb($title);
 $href = "clipit_activity/{$activity->id}/publications";

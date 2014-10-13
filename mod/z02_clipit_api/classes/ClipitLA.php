@@ -22,6 +22,7 @@ class ClipitLA extends UBFile {
     const SUBTYPE = "ClipitLA";
     public $return_id = 0;
     public $status_code = 0;
+    public $metric_received = false;
 
     /**
      * Loads object parameters stored in Elgg
@@ -32,6 +33,7 @@ class ClipitLA extends UBFile {
         parent::copy_from_elgg($elgg_file);
         $this->return_id = (int)$elgg_file->get("return_id");
         $this->status_code = (int)$elgg_file->get("status_code");
+        $this->metric_received = (bool)$elgg_file->get("metric_received");
     }
 
     /**
@@ -43,13 +45,17 @@ class ClipitLA extends UBFile {
         parent::copy_to_elgg($elgg_file);
         $elgg_file->set("return_id", $this->return_id);
         $elgg_file->set("status_code", $this->status_code);
+        $elgg_file->set("metric_received", $this->metric_received);
     }
 
     /*
      */
     static function get_metric($metric_id, $context) {
         $la_id = new static();
-        //ActivityStreamer::get_metric($metric_id, $la_id, $context);
+        if(!$la_metrics_class = elgg_get_config("la_metrics_class")){
+            return null;
+        }
+        $la_metrics_class::get_metric($metric_id, $la_id, $context);
         return $la_id;
     }
 
@@ -58,6 +64,7 @@ class ClipitLA extends UBFile {
         $prop_value_array["return_id"] = (int)$return_id;
         $prop_value_array["data"] = $data;
         $prop_value_array["status_code"] = (int)$status_code;
+        $prop_value_array["metric_received"] = true;
         $id = $la->save();
         ClipitLA::set_properties($id, $prop_value_array);
         return $id;

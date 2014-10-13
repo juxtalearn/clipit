@@ -6839,6 +6839,15 @@ fieldset[disabled] .elgg-sidebar input.elgg-button-submit.active {
 .elgg-sidebar .elgg-module-aside.aside-block .elgg-body > ul {
   margin: 0;
 }
+.elgg-sidebar .group-tools-aside {
+  margin-top: 25px;
+  padding: 10px;
+  background: #d6f0fa;
+  border-radius: 4px;
+}
+.elgg-sidebar .group-tools-aside h4 {
+  margin-top: 0;
+}
 .elgg-sidebar .nav > li > a {
   padding: 5px 10px;
   font-size: 13px;

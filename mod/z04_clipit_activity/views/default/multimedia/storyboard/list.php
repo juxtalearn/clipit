@@ -19,7 +19,7 @@ echo elgg_view("storyboards/search");
 foreach($storyboards as $sb_id){
     $storyboard =  array_pop(ClipitStoryboard::get_by_id(array($sb_id)));
     $file =  array_pop(ClipitFile::get_by_id(array($storyboard->file)));
-    $sb_url = "{$href}/view/{$storyboard->id}";
+    $sb_url = "{$href}/view/{$storyboard->id}". ($vars['task_id'] ? "?task_id=".$vars['task_id']: "");
 
     $file_icon = '
         <div class="multimedia-preview">

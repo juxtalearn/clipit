@@ -27,7 +27,7 @@ if (elgg_get_config('allow_registration')) {
             throw new RegistrationException(elgg_echo('RegistrationException:PasswordMismatch'));
         }
 
-        if(preg_match("/^[a-zA-Z0-9_]*$/i", $username)) {
+        if(preg_match("/^[a-zA-Z0-9_.]*$/i", $username)) {
             // Clipit create user
             $user_id = ClipitUser::create(array(
                 'login' => $username,

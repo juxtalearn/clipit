@@ -11,13 +11,13 @@
  * @package         ClipIt
  */
 $entity_id = get_input('entity-id');
+$entity = array_pop(ClipitTask::get_by_id(array($entity_id)));
 $task = array_pop(get_input('task'));
 $task_array = $task;
 
-if($task['feedback-form'] && $task['title'] == ""){
+if($task['feedback-form'] && $task['title'] == "") {
     $task_array = $task['feedback-form'];
 }
-
 $updated = ClipitTask::set_properties($entity_id, array(
     'name' => $task_array['title'],
     'description' => $task_array['description'],
@@ -25,6 +25,14 @@ $updated = ClipitTask::set_properties($entity_id, array(
     'end' => get_timestamp_from_string($task_array['end']),
     'quiz' => $task_array['quiz']
 ));
+if($entity->task_type == ClipitTask::TYPE_RESOURCE_DOWNLOAD){
+    $files = array_filter(get_input('attach_files'));
+    ClipitTask::set_files($entity_id, $files);
+    $videos = array_filter(get_input('attach_videos'));
+    ClipitTask::set_videos($entity_id, $videos);
+    $storyboards = array_filter(get_input('attach_storyboards'));
+    ClipitTask::set_storyboards($entity_id, $storyboards);
+}
 if($task['feedback'] && $task['feedback-form']){
     $task_array = $task['feedback-form'];
     $new_task_id = ClipitTask::create(array(

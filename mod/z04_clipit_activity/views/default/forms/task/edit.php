@@ -12,6 +12,8 @@
  */
 $task = elgg_extract('entity', $vars);
 $activity = array_pop(ClipitActivity::get_by_id(array($task->activity)));
+$params = array();
+$id = uniqid();
 $body .= '
 <script>
 $(".datepicker").datepicker({
@@ -32,8 +34,24 @@ if(ClipitTask::get_child($task->id) == 0 && $task->task_type != ClipitTask::TYPE
 }
 if($task->parent_task){
     $task_type = 'feedback';
+}elseif($task->task_type == ClipitTask::TYPE_RESOURCE_DOWNLOAD){
+    $task_type = 'download';
+    $feedback_check = false;
+    $resources = array_merge(
+        ClipitTask::get_videos($task->id),
+        ClipitTask::get_files($task->id),
+        ClipitTask::get_storyboards($task->id),
+        ClipitTask::get_resources($task->id)
+    );
+    $params = array(
+        'attach' => array(
+            'class' => 'show',
+            'selected' => json_encode($resources),
+        )
+    );
 }
-$id = uniqid();
+
+
 //$body .= elgg_view('activity/create/task', array('task_type' => $task_type, 'id' => $id, 'task' => $task));
 switch($task->task_type){
     case ClipitTask::TYPE_STORYBOARD_UPLOAD:
@@ -43,9 +61,17 @@ switch($task->task_type){
         $feedback_option = ClipitTask::TYPE_VIDEO_FEEDBACK;
         break;
 }
+
+$defaults = array(
+    'task_type' => $task_type,
+    'feedback_check' => $feedback_check,
+    'id' => $id,
+    'task' => $task
+);
+$params = array_merge($defaults, $params);
 $body .='
 <li class="list-item col-md-12 task">
-    '.elgg_view('activity/create/task', array('task_type' => $task_type, 'feedback_check' => $feedback_check, 'id' => $id, 'task' => $task));
+    '.elgg_view('activity/create/task', $params);
 if($task_type == 'upload'){
 $body .= '<ul class="feedback_form" style="margin-left: 20px;display: none">
         <li style="padding: 10px;background: #fafafa;" class="col-md-12">

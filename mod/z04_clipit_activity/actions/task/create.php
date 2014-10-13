@@ -13,6 +13,7 @@
 
 $entity_id = get_input('entity-id');
 $tasks = get_input('task');
+
 foreach($tasks as $task){
     $task_id = ClipitTask::create(array(
         'name' => $task['title'],
@@ -23,6 +24,14 @@ foreach($tasks as $task){
         'quiz' => $task['type'] == ClipitTask::TYPE_QUIZ_TAKE ? $task['quiz'] : 0
     ));
     ClipitActivity::add_tasks($entity_id, array($task_id));
+    if($task['type'] == ClipitTask::TYPE_RESOURCE_DOWNLOAD){
+        $files = array_filter(get_input('attach_files'));
+        ClipitTask::add_files($task_id, $files);
+        $videos = array_filter(get_input('attach_videos'));
+        ClipitTask::add_videos($task_id, $videos);
+        $storyboards = array_filter(get_input('attach_storyboards'));
+        ClipitTask::add_storyboards($task_id, $storyboards);
+    }
     if($task['feedback']){
         $feedback = $task['feedback-form'];
         if($feedback['title'] && $feedback['type'] && $feedback['start'] && $feedback['end'] ){

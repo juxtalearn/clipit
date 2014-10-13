@@ -59,10 +59,11 @@ $rating = elgg_extract("rating", $vars);
             $description = substr($description, 0, 280)."...";
         }
         $published = false;
+        $href_video = $href."/view/".$video->id . ($vars['task_id'] ? "?task_id=".$vars['task_id']: "");
         ?>
         <li class="video-item row list-item">
             <div class="col-md-4">
-                <a href="<?php echo elgg_get_site_url()."{$href}/view/{$video->id}"; ?>">
+                <a href="<?php echo elgg_get_site_url().$href_video; ?>">
                     <div class="img-preview">
                         <img src="<?php echo $video->preview;?>">
                     </div>
@@ -91,7 +92,7 @@ $rating = elgg_extract("rating", $vars);
                 <?php endif; ?>
                 <h4 class="text-truncate">
                     <?php echo elgg_view('output/url', array(
-                        'href'  => "{$href}/view/".$video->id,
+                        'href'  => $href_video,
                         'title' => $video->name,
                         'text'  => $video->name));
                     ?>

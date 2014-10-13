@@ -18,20 +18,28 @@ switch($task_type){
     case "upload":
         $task_types = array(
 //            'quiz_take' => elgg_echo('task:quiz_answer'),
-            'video_upload' => elgg_echo('task:video_upload'),
-            'storyboard_upload' => elgg_echo('task:storyboard_upload'),
-            'other' => elgg_echo('task:other')
+            ClipitTask::TYPE_VIDEO_UPLOAD => elgg_echo('task:video_upload'),
+            ClipitTask::TYPE_STORYBOARD_UPLOAD => elgg_echo('task:storyboard_upload'),
+            ClipitTask::TYPE_RESOURCE_DOWNLOAD => elgg_echo('task:resource_download'),
+            ClipitTask::TYPE_OTHER => elgg_echo('task:other')
         );
         $input_array = "[{$id}]";
         $disabled = false;
         break;
     case "feedback":
         $task_types = array(
-            'video_feedback' => elgg_echo('task:video_feedback'),
-            'storyboard_feedback' => elgg_echo('task:storyboard_feedback')
+            ClipitTask::TYPE_VIDEO_FEEDBACK => elgg_echo('task:video_feedback'),
+            ClipitTask::TYPE_STORYBOARD_FEEDBACK => elgg_echo('task:storyboard_feedback')
         );
         $input_array = "[{$id}][feedback-form]";
         $disabled = true;
+        break;
+    case "download":
+        $task_types = array(
+            ClipitTask::TYPE_RESOURCE_DOWNLOAD => elgg_echo('task:resource_download'),
+        );
+        $input_array = "[{$id}]";
+        $disabled = false;
         break;
 }
 $task_types = array_merge(array('' => elgg_echo('task:select:task_type')), $task_types);
@@ -148,3 +156,26 @@ $task_types = array_merge(array('' => elgg_echo('task:select:task_type')), $task
         <?php endif;?>
     </div>
 </div>
+<?php
+if(!$disabled):
+    $attach = $vars['attach'];
+    $attach['id'] = $id;
+?>
+    <?php if($attach['selected']):?>
+        <script>
+            $(function(){
+                $("[data-attach='<?php echo $attach['id'];?>']").attach_multimedia({
+                    default_list: "files",
+                    data:{
+                        list: $(this).data("menu"),
+                        entity_id: "<?php echo $task->activity;?>",
+                        selected: <?php echo $attach['selected'];?>
+                    }
+                }).loadAll();
+            });
+        </script>
+    <?php endif;?>
+
+    <?php echo elgg_view("multimedia/attach/list", $attach);?>
+
+<?php endif;?>

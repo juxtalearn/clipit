@@ -12,6 +12,11 @@
  */
 $entity_id = elgg_extract('entity_id', $vars);
 $list = elgg_extract('list', $vars);
+$class = elgg_extract('class', $vars);
+$id = elgg_extract('id', $vars);
+if(!$id){
+    $id = uniqid();
+}
 ?>
 <style>
 .select-item{
@@ -33,69 +38,48 @@ $list = elgg_extract('list', $vars);
     display: block;
 }
 </style>
-<script>
-$(function(){
-    $("#attach_list .menu-list > li").click(function(){
-        $("#attach_list .menu-list li").removeClass('selected');
-        $(this).toggleClass('selected');
-    });
-    $(document).on("click", "#attach_list .attach-item", function(){
-        $(this).toggleClass('selected');
-        var type = $(this).closest('.multimedia-list > div').data("list");
-        var count = $("#attach_list input[name='attach_"+ type +"[]']:checked").length;
-        console.log(count);
-        if($(this).hasClass('selected')){
-            count++;
-        } else {
-            count--;
-        }
-        $("#"+type+"_count").text(count > 0 ? count : "");
-    });
-});
-</script>
-<div id="attach_list" style="display: none">
-    <ul class="image-block menu-list">
+<style>
+    #attach_list ul.menu-list>li {
+        padding: 5px;
+    }
+</style>
+<div data-attach="<?php echo $id;?>" id="attach_list" class="row attach_list <?php echo $class;?>" style="padding: 10px 0;display: none">
+    <ul class="col-md-2 margin-top-10 menu-list">
         <li class="selected" data-menu="files">
-            <h4>
-            <span class="blue-lighter pull-right" id="files_count"></span>
+            <strong><span class="blue-lighter pull-right" id="files_count"></span></strong>
             <?php echo elgg_view('output/url', array(
                 'href'  => "javascript:;",
                 'title' => elgg_echo('files'),
-                'class' => 'element_attach_menu',
+                'class' => 'element_attach_menu show child-decoration-none',
                 'data-menu' => 'files',
                 'text'  => elgg_echo('files')
             ));
             ?>
-            </h4>
         </li>
         <li data-menu="videos">
-            <h4>
-                <span class="blue-lighter pull-right" id="videos_count"></span>
-                <?php echo elgg_view('output/url', array(
-                    'href'  => "javascript:;",
-                    'title' => elgg_echo('videos'),
-                    'class' => 'element_attach_menu',
-                    'data-menu' => 'videos',
-                    'text'  => elgg_echo('videos')
-                ));
-                ?>
-            </h4>
+            <strong><span class="blue-lighter pull-right" id="videos_count"></span></strong>
+            <?php echo elgg_view('output/url', array(
+                'href'  => "javascript:;",
+                'title' => elgg_echo('videos'),
+                'class' => 'element_attach_menu show child-decoration-none',
+                'data-menu' => 'videos',
+                'text'  => elgg_echo('videos')
+            ));
+            ?>
         </li>
         <li data-menu="storyboards">
-            <h4>
-                <span class="blue-lighter pull-right" id="storyboards_count"></span>
-                <?php echo elgg_view('output/url', array(
-                    'href'  => "javascript:;",
-                    'title' => elgg_echo('storyboards'),
-                    'class' => 'element_attach_menu',
-                    'data-menu' => 'storyboards',
-                    'text'  => elgg_echo('storyboards')
-                ));
-                ?>
-            </h4>
+            <strong><span class="blue-lighter pull-right" id="storyboards_count"></span></strong>
+            <?php echo elgg_view('output/url', array(
+                'href'  => "javascript:;",
+                'title' => elgg_echo('storyboards'),
+                'class' => 'element_attach_menu show child-decoration-none',
+                'data-menu' => 'storyboards',
+                'text'  => elgg_echo('storyboards')
+            ));
+            ?>
         </li>
     </ul>
-    <div class="content-block" style="border-left: 1px solid #bae6f6;padding-left: 10px;">
+    <div class="col-md-10" style="border-left: 1px solid #bae6f6;padding: 0px 10px;">
         <div class="multimedia-list">
             <p id="attach-loading" style="display: none;"><span><i class="fa fa-spinner fa-spin"></i></span></p>
         </div>

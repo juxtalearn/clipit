@@ -60,7 +60,7 @@ $API_METHODS = array();
  *                                  require API authorization? (example: API key)
  * @param bool   $require_user_auth (optional) (default is false) Does this method
  *                                  require user authorization?
- *
+ * @throws InvalidParameterException
  * @return bool
  */
 function expose_function($method, $function, array $parameters = NULL, $description = "",
