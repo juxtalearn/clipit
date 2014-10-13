@@ -46,7 +46,6 @@ class ClipitLA extends UBItem {
         $elgg_object->set("status_code", $this->status_code);
         $elgg_object->set("metric_received", $this->metric_received);
         $elgg_object->set("file_id", $this->file_id);
-
     }
 
     /*
