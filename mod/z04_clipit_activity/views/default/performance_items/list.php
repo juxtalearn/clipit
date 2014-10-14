@@ -1,5 +1,5 @@
 <?php
- /**
+/**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
  * Creation date:   23/05/14
@@ -21,7 +21,7 @@ $activity_id = elgg_extract('activity_id', $vars);
         $group_id = ClipitGroup::get_from_user_activity($entity->owner_id, $activity_id);
         $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
         $performance_average = ClipitPerformanceRating::get_average_user_rating_for_target($entity->owner_id, $entity->target);
-    ?>
+        ?>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <a href="#collapse_<?php echo $entity->id;?>" data-toggle="collapse" data-parent="#accordion" class="child-decoration-none">
@@ -46,9 +46,9 @@ $activity_id = elgg_extract('activity_id', $vars);
                 </a>
             </div>
             <div id="collapse_<?php echo $entity->id;?>" class="panel-collapse collapse" style="height: auto;">
-              <div class="panel-body">
-                <?php echo elgg_view('publications/rating_full',array('entity'  => $entity));?>
-              </div>
+                <div class="panel-body">
+                    <?php echo elgg_view('performance_items/full',array('entity'  => $entity));?>
+                </div>
             </div>
         </div>
     <?php endforeach;?>
