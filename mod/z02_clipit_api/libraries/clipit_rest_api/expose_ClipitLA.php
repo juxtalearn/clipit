@@ -22,8 +22,8 @@ function expose_la_functions() {
     expose_function(
         $api_suffix . "get_metric", $class_suffix . "get_metric", array(
             "metric_id" => array("type" => "int", "required" => true),
-            "context" => array("type" => "string", "required" => true),
-        ), "Get Learning Analytics Metric", "POST", false, true
+            "context" => array("type" => "array", "required" => true),
+        ), "Get Learning Analytics Metric", "GET", false, true
     );
     expose_function(
         $api_suffix . "save_metric", $class_suffix . "save_metric", array(

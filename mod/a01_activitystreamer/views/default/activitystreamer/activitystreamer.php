@@ -9,7 +9,43 @@ elgg_set_page_owner_guid($_SESSION['guid']);
 $ts = time();
 $token = generate_action_token($ts);
 
+//Vars required for configuration
+$entities = elgg_get_entities(array("types" => "object", "subtypes" => "modactivitystreamer", "owner_guids" => '0', "order_by" => "", "limit" => 0));
+if (!isset($entities[0])) {
+    $entity = $entities[0];
+    $workbenchurl = "https://analyticstk.rias-institute.eu:1443/requestAnalysis";
+    $entity = new ElggObject;
+    $entity->subtype = 'modactivitystreamer';
+    $entity->owner_guid = $_SESSION['user']->getGUID();
+    $entity->workbenchurl = $workbenchurl;
+    $entity->access_id = 2;    //Make sure this object is public.
+} else {
+    $entity = $entities[0];
+    $workbenchurl = $entity->workbenchurl;
+}
 ?>
+
+    <form action="<?php echo $vars['url']; ?>action/activitystreamer/modify" method="post">
+        <label>
+            <?php 	echo elgg_echo('activitystreamer:workbenchurl'); ?>
+            <br />
+            <?php	echo elgg_view('input/text',array(
+                'internalname' => 'workbenchurl',
+                'value' => $workbenchurl
+            ));
+            ?>
+        </label>
+        <p>
+            <?php
+            echo elgg_view('input/hidden', array('internalname' => '__elgg_token', 'value' => $token));
+            echo elgg_view('input/hidden', array('internalname' => '__elgg_ts', 'value' => $ts));
+            ?>
+        </p>
+        <p>
+            <input type="submit" value="<?php echo elgg_echo('activitystreamer:submit'); ?>" />
+        </p>
+
+    </form>
 
 <p><?php echo elgg_echo('activitystreamer:warningmessage'); ?></p>
 
@@ -68,3 +104,15 @@ $token = generate_action_token($ts);
 
     ?>
 </p>
+<h1>Available templates:</h1>
+<ul>
+
+<?php
+    $metrics = ActivityStreamer::get_available_metrics();
+    foreach ($metrics as $metric) {
+        echo("<li>");
+        echo($metric['TemplateId'].": ".$metric['Name']." - ".$metric['Description']);
+        echo("</li>");
+    }
+ ?>
+</ul>
