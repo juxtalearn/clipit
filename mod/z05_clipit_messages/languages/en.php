@@ -25,6 +25,7 @@ $english = array(
     // Message
     'message:from'  => "From",
     'message:to'  => "To",
+    'message:to_students' => 'To students from my activity',
     'message:last_reply'  => "Last reply",
     'message:unread'  => "unread",
     'message:notfound' => "Message not found",
