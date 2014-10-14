@@ -103,12 +103,18 @@ class UBSite {
             $user = get_user_by_username($login);
             $query = "select * from {$CONFIG->dbprefix}users_apisessions where user_guid = {$user->guid};";
             $row = get_data_row($query);
-            if(isset($row->token) && ((int)$row->expires - time()) > 0) {
-                $token = $row->token;
+            if(isset($row->token)){
+                $timeout = $timeout * 60 * 1000; // convert mins to ms
+                // if the token expires in less than $timeout, we extend the timeout
+                if(((int)$row->expires - time()) < $timeout) {
+                    $new_expires = time() + $timeout;
+                    $update_timeout_query = "update {$CONFIG->dbprefix}users_apisessions set expires = {$new_expires} where user_guid = {$user->guid};";
+                    update_data($update_timeout_query);
+                }
+                return $row->token;
             } else {
-                $token = create_user_token($login, $timeout);
+                return create_user_token($login, $timeout);
             }
-            return $token;
         }
         throw new SecurityException(elgg_echo('SecurityException:authenticationfailed'));
     }
