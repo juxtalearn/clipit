@@ -232,7 +232,7 @@ class ClipitTask extends UBItem {
      * @return int ID of Child Task
      */
     static function get_child($id){
-        $task_array = static::get_all(0);
+        $task_array = static::get_all();
         foreach($task_array as $task){
             if((int)$task->parent_task == (int)$id){
                 return $task->id;

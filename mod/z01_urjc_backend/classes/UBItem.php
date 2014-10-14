@@ -325,7 +325,7 @@ class UBItem {
      * @return bool Returns true if correct, or false if error
      */
     static function delete_all() {
-        $items = static::get_all(0, true);
+        $items = static::get_all(0, 0, "", true, true);
         if(!empty($items)) {
             static::delete_by_id($items);
         }
