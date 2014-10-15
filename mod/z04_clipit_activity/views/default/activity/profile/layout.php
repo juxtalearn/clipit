@@ -21,7 +21,7 @@ if($access == 'ACCESS_TEACHER'){
 <div class="row">
     <div class="col-md-12" data-shorten="true" style="overflow: hidden;max-height: 160px;">
         <p class="text-justify">
-            <?php echo $activity->description;?>
+            <?php echo nl2br($activity->description);?>
         </p>
     </div>
 </div>
