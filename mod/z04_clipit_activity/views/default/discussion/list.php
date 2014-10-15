@@ -16,7 +16,7 @@ $activity_id = elgg_get_page_owner_guid();
 <div style="margin-bottom: 15px;">
     <?php echo elgg_view_form('discussion/create',
         array('data-validate'=> 'true' ,'class'=> 'fileupload'),
-        array('entity'  => $entity, 'attach_multimedia_group' => $vars['attach_multimedia_group'])
+        array('entity'  => $entity, 'attach_multimedia' => $vars['attach_multimedia'])
     ); ?>
     <button type="button" data-toggle="modal" data-target="#create-new-topic" class="btn btn-default">
         <?php echo elgg_echo('discussion:create'); ?>

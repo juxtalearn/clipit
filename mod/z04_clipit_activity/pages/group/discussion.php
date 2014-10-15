@@ -19,7 +19,7 @@ $content =  elgg_view('discussion/list',
     array(
         'entity' => $group,
         'messages' => $messages,
-        'attach_multimedia_group' => true,
+        'attach_multimedia' => true,
         'href'   => $href,
         'create' => $canCreate
     )

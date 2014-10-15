@@ -15,9 +15,10 @@ $discussion_title = get_input('discussion-title');
 $discussion_text = get_input('discussion-text');
 $entity_class = $object['subtype'];
 // Attach multimedia group
-$attach_file = get_input('attach_files');
-$attach_video = get_input('attach_videos');
-$attach_storyboard = get_input('attach_storyboards');
+$attach_file = array_filter(get_input('attach_files'));
+$attach_video = array_filter(get_input('attach_videos'));
+$attach_storyboard = array_filter(get_input('attach_storyboards'));
+
 $group = false;
 switch($entity_class){
     // Clipit Activity
@@ -45,16 +46,16 @@ if(count($entity)==0 || trim($discussion_title) == ""){
     ));
     if($file_ids){
         ClipitPost::add_files($new_message_id, $file_ids);
-        if($group){
-            ClipitGroup::add_files($entity->id, $file_ids);
-        }
+        //if($group){
+            $entity::add_files($entity->id, $file_ids);
+        //}
     }
     // Attach multimedia
-    if($group){
+//    if($group){
         ClipitPost::add_files($new_message_id, $attach_file);
         ClipitPost::add_videos($new_message_id, $attach_video);
         ClipitPost::add_storyboards($new_message_id, $attach_storyboard);
-    }
+//    }
     // set read status true to the owner's message
     ClipitPost::set_read_status($new_message_id, true, array($user_id));
 

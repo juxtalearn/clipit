@@ -41,12 +41,14 @@ $rating = elgg_extract("rating", $vars);
                 </a>
             </div>
             <div class="col-md-11">
-                <?php echo elgg_view("publications/owner_summary", array(
-                    'entity' => $storyboard,
-                    'class' => 'pull-right',
-                    'entity_class' => 'ClipitStoryboard',
-                    'msg' => elgg_echo('multimedia:uploaded_by')
-                )); ?>
+                <?php if($rating):?>
+                    <?php echo elgg_view("performance_items/summary", array(
+                        'entity' => $storyboard,
+                        'show_check' => true,
+                        'class' => 'pull-right'
+                    ));
+                    ?>
+                <?php endif; ?>
                 <h4 class="text-truncate margin-0">
                     <strong>
                     <?php echo elgg_view('output/url', array(
@@ -56,21 +58,23 @@ $rating = elgg_extract("rating", $vars);
                     ?>
                     </strong>
                 </h4>
-                <?php
-                if($rating):
-                    $rating_average = ClipitPerformanceRating::get_average_target_rating($storyboard->id);
-                    ?>
-                    <div class="pull-right rating ratings readonly" data-score="<?php echo $rating_average;?>">
-                        <?php echo star_rating_view($rating_average);?>
+                <div class="overflow-hidden">
+                    <div class="tags">
+                        <?php echo elgg_view("tricky_topic/tags/view", array('tags' => $tags)); ?>
                     </div>
-                <?php endif; ?>
-                <div class="tags">
-                    <?php echo elgg_view("tricky_topic/tags/view", array('tags' => $tags)); ?>
+                    <p>
+                        <?php echo $description;?>
+                    </p>
                 </div>
                 <small class="show" style="margin: 0">
                     <?php
                     $total_comments = array_pop(ClipitComment::count_by_destination(array($storyboard->id), true));
                     ?>
+                    <?php echo elgg_view("publications/owner_summary", array(
+                        'entity' => $storyboard,
+                        'entity_class' => 'ClipitStoryboard',
+                        'msg' => elgg_echo('multimedia:uploaded_by')
+                    )); ?>
                     <!-- Count total comments -->
                     <strong>
                         <?php echo elgg_view('output/url', array(

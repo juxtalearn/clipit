@@ -18,11 +18,16 @@ $canCreate = false;
 if( ($access == 'ACCESS_TEACHER' || $access == 'ACCESS_MEMBER' || in_array($user_id, $activity->student_array)) && $activity_status != 'closed'){
     $canCreate = true;
 }
+$attach_multimedia = false;
+if($user->role == ClipitUser::ROLE_TEACHER){
+    $attach_multimedia = true;
+}
 $content =  elgg_view('discussion/list',
     array(
         'entity' => $activity,
         'messages' => $messages,
         'href'   => $href,
+        'attach_multimedia' => $attach_multimedia,
         'create' => $canCreate
     ));
 if(!$messages){

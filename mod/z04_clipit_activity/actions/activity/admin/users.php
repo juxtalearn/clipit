@@ -67,8 +67,16 @@ switch($action){
         if(!$activity = array_pop(ClipitActivity::get_by_id(array($activity_id)))){
             register_error(elgg_echo("users:cantget"));
         }
+        switch($role){
+            case ClipitUser::ROLE_TEACHER:
+                $users = ClipitActivity::get_teachers($activity->id);
+                break;
+            case ClipitUser::ROLE_STUDENT:
+                $users = ClipitActivity::get_students($activity->id);
+                break;
+        }
         foreach(array_pop(ClipitUser::get_by_role(array($role))) as $user):
-            if(!in_array($user->id, $activity->student_array)):
+            if(!in_array($user->id, $users)):
         ?>
             <li data-user="<?php echo $user->id;?>" style="padding: 2px;" class="cursor-pointer list-item-5" value="<?php echo $user->id;?>">
                 <?php echo elgg_view('output/img', array(

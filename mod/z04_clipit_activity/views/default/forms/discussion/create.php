@@ -30,15 +30,15 @@ $body .='<div class="form-group">
     )).'
 </div>';
 
-if($vars['attach_multimedia_group']){
+if($vars['attach_multimedia']){
     $body .= '
     <div class="col-md-12">
     '.elgg_view('output/url', array(
         'href'  => "javascript:;",
-        'title' => "Attach group multimedia",
+        'title' => elgg_echo('multimedia:attach'),
         'id' => 'attach_multimedia',
         'class' => 'show',
-        'text'  => "<strong><i class='fa fa-image'></i> ".elgg_echo('multimedia:attach_group')."</strong>")).'
+        'text'  => "<strong><i class='fa fa-image'></i> ".elgg_echo('multimedia:attach')."</strong>")).'
         '.elgg_view("multimedia/attach/list").'
     </div>';
 }
