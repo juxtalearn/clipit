@@ -57,6 +57,10 @@ switch($type){
         $title = elgg_echo('task:other');
         $icon = "question-circle";
         break;
+    case ClipitTask::TYPE_RESOURCE_DOWNLOAD:
+        $title = elgg_echo('task:resource_download');
+        $icon = "eye";
+        break;
 }
 ?>
 <?php if(!$custom):?>

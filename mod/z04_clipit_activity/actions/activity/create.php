@@ -17,7 +17,17 @@ $activity_description = get_input('activity-description');
 $activity_start = get_input('activity-start');
 $activity_end = get_input('activity-end');
 $activity_tt = get_input('activity-tricky-topic');
-
+$new_tt = get_input('new-tricky-topic');
+if($new_tt){
+    $tags =  get_input('tag');
+    // Create new TT
+    $activity_tt = ClipitTrickyTopic::create(array('name' => $new_tt));
+    // Create Stumling blocks
+    foreach($tags as $tag){
+        $tag_ids[] = ClipitTag::create(array('name' => $tag));
+    }
+    ClipitTrickyTopic::add_tags($activity_tt, $tag_ids);
+}
 $activity_id = ClipitActivity::create(array(
     'name' => $activity_name,
     'description' => $activity_description,

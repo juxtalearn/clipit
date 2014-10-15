@@ -18,7 +18,7 @@ foreach($tricky_topics as $tricky_topic){
 ?>
 <script>
 $(function(){
-    $("#tricky_topic_list").change(function(){
+    $("#list-tricky-topic").change(function(){
         var content = $("#tricky_topic_view");
         if($(this).val() == 0){
             content.hide();
@@ -34,8 +34,66 @@ $(function(){
             }
         });
     });
+    $("#add-tricky-topic").click(function(){
+        $("#select-tricky-topic").toggle();
+        $("#form-add-tricky-topic").toggle().find("input:first").focus();
+    });
+    $(document).on("click", "#add-tag", function(){
+        $("#form-add-tags").append(<?php echo json_encode(elgg_view("tricky_topic/add"));?>);
+        $(".input-tag:last").focus().autocomplete(tags_autocomplete);
+    });
+    var tags_autocomplete = {
+        source: function (request, response) {
+            elgg.getJSON(
+                "ajax/view/tricky_topic/tags/search",{
+                    data: {q: request.term},
+                    success: function(data){
+                        response(data);
+                    }
+                }
+            );
+        },
+        select: function( event, ui ) {
+            event.preventDefault();
+            this.value = ui.item.label;
+        },
+        focus: function(event, ui) {
+            event.preventDefault();
+            this.value = ui.item.label;
+        },
+        minLength: 2
+    };
+    $(".input-tag").autocomplete(tags_autocomplete);
 });
 </script>
+<style>
+    ul.ui-menu.ui-autocomplete{
+        background-color: #fff;
+        cursor: default;
+        font-size: 14px;
+        -webkit-box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        padding: 3px;
+        max-width: 350px;
+    }
+    ul.ui-menu.ui-autocomplete li {
+        border-bottom: 1px solid #eee;
+    }
+    ul.ui-menu.ui-autocomplete li:last-child {
+        border-bottom: 0;
+    }
+    ul.ui-menu.ui-autocomplete li > a {
+        display: block;
+        padding: 3px;
+        padding-left: 10px;
+        font-weight: bold;
+    }
+    ul.ui-menu.ui-autocomplete li:hover > a, ul.ui-menu.ui-autocomplete li >a.ui-state-focus{
+        color: #fff;
+        text-decoration: none;
+        background: #32b4e5;
+    }
+</style>
 <script>
     var datepicker_setup = function(){
         var activity_form = $("#activity-create");
@@ -82,26 +140,64 @@ $(function(){
 </script>
 <div id="step_1" class="row step">
     <div class="col-md-6">
-        <div class="form-group">
-            <label for="activity-tricky-topic"><?php echo elgg_echo("activity:select:tricky_topic");?></label>
-            <?php echo elgg_view('input/dropdown', array(
-                'name' => 'activity-tricky-topic',
-                'class' => 'form-control',
-                'required' => true,
-                'style' => 'padding-top: 5px;padding-bottom: 5px;',
-                'id' => 'tricky_topic_list',
-                'options_values' => $tt
-            ));
-            ?>
+        <div id="select-tricky-topic">
+            <div class="form-group">
+                <label for="activity-tricky-topic"><?php echo elgg_echo("activity:select:tricky_topic");?></label>
+                <?php echo elgg_view('input/dropdown', array(
+                    'name' => 'activity-tricky-topic',
+                    'class' => 'form-control',
+                    'required' => true,
+                    'style' => 'padding-top: 5px;padding-bottom: 5px;',
+                    'id' => 'list-tricky-topic',
+                    'options_values' => $tt
+                ));
+                ?>
+            </div>
+            <div class="row margin-0 margin-bottom-10" id="tricky_topic_view" style="display: none;background: #fafafa;padding: 10px;"></div>
         </div>
-        <div class="row margin-0 margin-bottom-10" id="tricky_topic_view" style="display: none;background: #fafafa;padding: 10px;"></div>
-<!--        --><?php //echo elgg_echo('or:create');?>
-<!--        --><?php //echo elgg_view('output/url', array(
-//            'href'  => "http://trickytopic.".ClipitSite::get_domain(),
-//            'title' => elgg_echo('tricky_topic'),
-//            'text'  => elgg_echo('tricky_topic'),
-//        ));
-//        ?>
+        <?php echo elgg_echo('or:create');?>
+        <?php echo elgg_view('output/url', array(
+            'href'  => "javascript:;",
+            'title' => elgg_echo('tricky_topic'),
+            'text'  => elgg_echo('tricky_topic'),
+            'id'    => 'add-tricky-topic'
+        ));
+        ?>
+        <div class="row margin-0 margin-bottom-10" id="form-add-tricky-topic" style="display: none;background: #fafafa;padding: 10px;">
+            <div class="form-group col-md-12 margin-top-10">
+                <?php echo elgg_view("input/text", array(
+                    'name' => 'new-tricky-topic',
+                    'value' => $entity->name,
+                    'class' => 'form-control',
+                    'required' => true,
+                    'placeholder' => elgg_echo('tricky_topic')
+                ));
+                ?>
+                <hr class="margin-0 margin-top-10 margin-bottom-10">
+                <small class="show margin-top-5"><?php echo elgg_echo("tags");?></small>
+            </div>
+            <div id="form-add-tags">
+                <?php echo elgg_view("tricky_topic/add");?>
+            </div>
+            <div class="col-md-12">
+                <?php echo elgg_view('output/url', array(
+                    'href'  => "javascript:;",
+                    'class' => 'btn btn-xs btn-border-blue btn-primary pull-right',
+                    'title' => elgg_echo('cancel'),
+                    'text'  => elgg_echo('cancel'),
+                    'onclick' => '$(\'#add-tricky-topic\').click()',
+                ));
+                ?>
+                <?php echo elgg_view('output/url', array(
+                    'href'  => "javascript:;",
+                    'class' => 'btn btn-xs btn-primary',
+                    'title' => elgg_echo('add'),
+                    'text'  => '<i class="fa fa-plus"></i>' . elgg_echo('add'),
+                    'id'    => 'add-tag'
+                ));
+                ?>
+            </div>
+        </div>
     </div>
     <div class="col-md-6">
         <div class="form-group">

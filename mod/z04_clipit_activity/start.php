@@ -94,6 +94,7 @@ function clipit_activity_init() {
     // Tricky Topic
     elgg_register_ajax_view('modal/tricky_topic/view');
     elgg_register_ajax_view('tricky_topic/list');
+    elgg_register_ajax_view('tricky_topic/tags/search');
     // Multimedia
     /* Videos */
     elgg_register_action("multimedia/videos/add", "{$plugin_dir}/actions/multimedia/videos/add.php");

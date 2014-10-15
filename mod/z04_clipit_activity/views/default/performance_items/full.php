@@ -16,7 +16,7 @@ $tag_ratings = $entity->tag_rating_array;
 $performance_ratings = $entity->performance_rating_array;
 
 $overall_rating = elgg_echo("input:no");
-if($entity->overall_rating){
+if($entity->overall){
     $overall_rating = elgg_echo("input:yes");
 }
 ?>
