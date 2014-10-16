@@ -181,6 +181,8 @@ $spanish = array(
     'tricky_topic:none' => 'Ni hay temas',
     'tricky_topic:tool' => 'Herramienta creación de temas',
     'tricky_topic:select' => 'Seleccionar tema',
+    'tricky_topic:created_by_me' => 'Creados por mi',
+    'tricky_topic:created_by_others' => 'Otros',
     // Publications
     'publish:none' => 'No hay nada publicado',
     'publications:no_evaluated' => 'Sin evaluar',

@@ -11,10 +11,14 @@
  * @package         ClipIt
  */
 $tricky_topics = ClipitTrickyTopic::get_all();
-$tt = array('' => elgg_echo('tricky_topic:select'));
+//$tt = array('' => elgg_echo('tricky_topic:select'));
 foreach($tricky_topics as $tricky_topic){
     $tt[$tricky_topic->id] = $tricky_topic->name;
+    if($tricky_topic->owner_id == elgg_get_logged_in_user_guid()){
+        $owner_tt[$tricky_topic->id] = $tricky_topic->name;
+    }
 }
+$tt = array_diff($tt, $owner_tt);
 ?>
 <script>
 $(function(){
@@ -143,15 +147,30 @@ $(function(){
         <div id="select-tricky-topic">
             <div class="form-group">
                 <label for="activity-tricky-topic"><?php echo elgg_echo("activity:select:tricky_topic");?></label>
-                <?php echo elgg_view('input/dropdown', array(
-                    'name' => 'activity-tricky-topic',
-                    'class' => 'form-control',
-                    'required' => true,
-                    'style' => 'padding-top: 5px;padding-bottom: 5px;',
-                    'id' => 'list-tricky-topic',
-                    'options_values' => $tt
-                ));
-                ?>
+
+                <select required="required" id="list-tricky-topic" class="form-control" name="activity-tricky-topic" style="padding-top: 5px;padding-bottom: 5px;">
+                    <option value="<?php echo $value;?>">
+                        <?php echo elgg_echo('tricky_topic:select');?>
+                    </option>
+                    <?php if(count($owner_tt)>0):?>
+                        <optgroup label="<?php echo elgg_echo('tricky_topic:created_by_me');?>">
+                            <?php foreach($owner_tt as $value => $name):?>
+                                <option value="<?php echo $value;?>">
+                                    <?php echo $name;?>
+                                </option>
+                            <?php endforeach;?>
+                        </optgroup>
+                    <?php endif;?>
+                    <?php if(count($tt)>0):?>
+                    <optgroup label="<?php echo elgg_echo('tricky_topic:created_by_others');?>">
+                        <?php foreach($tt as $value => $name):?>
+                            <option value="<?php echo $value;?>">
+                                <?php echo $name;?>
+                            </option>
+                        <?php endforeach;?>
+                        </optgroup>
+                    <?php endif;?>
+                </select>
             </div>
             <div class="row margin-0 margin-bottom-10" id="tricky_topic_view" style="display: none;background: #fafafa;padding: 10px;"></div>
         </div>

@@ -180,6 +180,8 @@ $english = array(
     'tricky_topic:none' => 'Not tricky Topic',
     'tricky_topic:tool' => 'Tricky Topic tool',
     'tricky_topic:select' => 'Select tricky topic',
+    'tricky_topic:created_by_me' => 'Created by me',
+    'tricky_topic:created_by_others' => 'Others',
     // Publications
     'publish:none' => 'There are no published',
     'publications:no_evaluated' => 'Not evaluated',
