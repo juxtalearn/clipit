@@ -13,15 +13,15 @@ $user_id = elgg_get_logged_in_user_guid();
 $activity_id = elgg_get_page_owner_guid();
 ?>
 <?php if($vars['create']): ?>
-<div style="margin-bottom: 15px;">
-    <?php echo elgg_view_form('discussion/create',
-        array('data-validate'=> 'true' ,'class'=> 'fileupload'),
-        array('entity'  => $entity, 'attach_multimedia' => $vars['attach_multimedia'])
-    ); ?>
-    <button type="button" data-toggle="modal" data-target="#create-new-topic" class="btn btn-default">
-        <?php echo elgg_echo('discussion:create'); ?>
-    </button>
-</div>
+    <div style="margin-bottom: 15px;">
+        <?php echo elgg_view_form('discussion/create',
+            array('data-validate'=> 'true' ,'class'=> 'fileupload'),
+            array('entity'  => $entity, 'attach_multimedia' => $vars['attach_multimedia'])
+        ); ?>
+        <button type="button" data-toggle="modal" data-target="#create-new-topic" class="btn btn-default">
+            <?php echo elgg_echo('discussion:create'); ?>
+        </button>
+    </div>
 <?php endif; ?>
 <?php
 foreach($messages as $message):
@@ -46,7 +46,7 @@ foreach($messages as $message):
                 "data-target" => "#edit-discussion-{$message->id}",
                 "href" => elgg_get_site_url()."ajax/view/modal/discussion/edit?id={$message->id}",
                 "data-toggle" => "modal"
-             ),
+            ),
             'remove' => array("href" => "action/discussion/remove?id={$message->id}"),
         );
 
@@ -59,36 +59,39 @@ foreach($messages as $message):
     $files = ClipitPost::get_files($message->id);
     $storyboards = ClipitPost::get_storyboards($message->id);
     $multimedia = array_merge($videos, $files, $storyboards);
-?>
-<div class="row row-table messages-discussion">
-    <div class="col-md-9">
-        <?php echo $owner_options; ?>
-        <h4>
-            <?php echo elgg_view('output/url', array(
-                'href' => "{$href}/view/{$message->id}",
-                'title' => $message->name,
-                'text' => $message->name,
-                'is_trusted' => true, ));
-            ?>
-        </h4>
-        <?php if(count($multimedia) > 0): ?>
-                <?php if(count($multimedia) > 1):?>
-                <div class="attach-count pull-left text-center">
-                    <h4>
-                        <i class="fa fa-paperclip"></i>
-                        <sub> x<span class="blue"><?php echo count($multimedia);?></span></sub>
-                    </h4>
+    ?>
+    <div class="row row-table messages-discussion">
+        <div class="col-md-9 col-xs-9">
+            <?php echo $owner_options; ?>
+            <h4>
+                <?php echo elgg_view('output/url', array(
+                    'href' => "{$href}/view/{$message->id}",
+                    'title' => $message->name,
+                    'text' => $message->name,
+                    'is_trusted' => true, ));
+                ?>
+            </h4>
+            <div class="overflow-hidden">
+                <?php if(count($multimedia) > 0): ?>
+                    <?php if(count($multimedia) > 1):?>
+                        <div class="attach-count pull-left text-center">
+                            <h4>
+                                <i class="fa fa-paperclip"></i>
+                                <sub> x<span class="blue"><?php echo count($multimedia);?></span></sub>
+                            </h4>
+                        </div>
+                    <?php else: ?>
+                        <div style="margin: 5px 5px 5px 0;" class="pull-left">
+                            <?php echo elgg_view('multimedia/preview', array('entity_id' => array_pop($multimedia)));?>
+                        </div>
+                    <?php endif;?>
+                <?php endif; ?>
+                <div class="content-block">
+                    <p>
+                        <?php echo $message_text; ?>
+                    </p>
                 </div>
-                <?php else: ?>
-                    <div style="margin: 5px 5px 5px 0;" class="pull-left">
-                        <?php echo elgg_view('multimedia/preview', array('entity_id' => array_pop($multimedia)));?>
-                    </div>
-                <?php endif;?>
-        <?php endif; ?>
-        <div class="content-block">
-            <p>
-                <?php echo $message_text; ?>
-            </p>
+            </div>
             <small class="show">
                 <i>
                     <?php echo elgg_echo('discussion:created_by');?>
@@ -99,33 +102,32 @@ foreach($messages as $message):
                 if($total_replies > 0):
                     $last_post = end(array_pop(ClipitPost::get_by_destination(array($message->id))));
                     $author_last_post = array_pop(ClipitUser::get_by_id(array($last_post->owner_id)));
-                ?>
-                <i class="pull-right">
-                    <?php echo elgg_echo('discussion:last_post_by');?>
-                    <?php echo elgg_view('page/elements/user_summary', array('user' => $author_last_post)); ?>
-                    (<?php echo elgg_view('output/friendlytime', array('time' => $last_post->time_created));?>)
-                </i>
+                    ?>
+                    <i class="pull-right">
+                        <?php echo elgg_echo('discussion:last_post_by');?>
+                        <?php echo elgg_view('page/elements/user_summary', array('user' => $author_last_post)); ?>
+                        (<?php echo elgg_view('output/friendlytime', array('time' => $last_post->time_created));?>)
+                    </i>
                 <?php endif; ?>
             </small>
         </div>
-    </div>
-    <div class="col-md-3 text-center">
-        <?php echo elgg_view('output/url', array(
-            'href'  => "{$href}/view/{$message->id}#replies",
-            'title' => elgg_echo("reply:total", array($total_replies)),
-            'text'  => '<i class="fa fa-comment fa-stack-2x"></i>
+        <div class="col-md-3 col-xs-3 text-center">
+            <?php echo elgg_view('output/url', array(
+                'href'  => "{$href}/view/{$message->id}#replies",
+                'title' => elgg_echo("reply:total", array($total_replies)),
+                'text'  => '<i class="fa fa-comment fa-stack-2x"></i>
                         <i class="fa-stack-1x replies-count">'.$total_replies.'</i>',
-            'class' => "fa-stack replies"
-        ));
-        ?>
+                'class' => "fa-stack replies"
+            ));
+            ?>
 
-        <?php echo elgg_view('output/url', array(
-            'href'  => "{$href}/view/{$message->id}#create_reply",
-            'title' => elgg_echo("reply:create"),
-            'text'  => '<i class="fa fa-plus"></i> '.elgg_echo("reply"),
-            'class' => "btn btn-default btn-sm reply-button"
-        ));
-        ?>
+            <?php echo elgg_view('output/url', array(
+                'href'  => "{$href}/view/{$message->id}#create_reply",
+                'title' => elgg_echo("reply:create"),
+                'text'  => '<i class="fa fa-plus"></i> '.elgg_echo("reply"),
+                'class' => "btn btn-default btn-sm reply-button"
+            ));
+            ?>
+        </div>
     </div>
-</div>
 <?php endforeach; ?>

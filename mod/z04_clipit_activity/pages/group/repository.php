@@ -16,6 +16,7 @@ $selected_tab = get_input('filter', 'files');
 $href = "clipit_activity/{$activity->id}/group/{$group->id}/repository";
 $entity_class = "ClipitGroup";
 $entity = $group;
+elgg_set_context("group");
 
 switch ($selected_tab) {
     case 'files':
@@ -69,6 +70,14 @@ switch ($selected_tab) {
         return false;
         break;
 }
+//$params = array(
+//    'entity' => $group,
+//    'can_create' => $canCreate,
+//    'href' => $href
+//);
+//$content = elgg_view('material/group/list', $params);
+//$selected_tab = get_input('filter');
+
 $filter = elgg_view('multimedia/filter', array('selected' => $selected_tab, 'entity' => $group, 'href' => $href));
 
 if($page[4] == 'download' && $page[5]){

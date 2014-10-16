@@ -40,10 +40,12 @@ if($page[2] == 'view' && $page[3]){
     elgg_push_breadcrumb($title, $href);
     elgg_push_breadcrumb($message->name);
     if($message && $message->destination == $activity->id){
+        $href_multimedia = "clipit_activity/{$activity->id}/resources/view";
         $content = elgg_view('discussion/view',
             array(
                 'entity'     => $message,
                 'activity_id'   => $activity->id,
+                'href_multimedia' => $href_multimedia,
                 'show_group' => true,
             ));
     } else {
