@@ -25,6 +25,7 @@ $spanish = array(
     // Message
     'message:from'  => "De",
     'message:to'  => "Para",
+    'message:to_students' => 'Para estudiantes de mi actividad',
     'message:last_reply'  => "Última respuesta",
     'message:unread'  => "no leido",
     'message:notfound' => "Mensaje no encontrado",

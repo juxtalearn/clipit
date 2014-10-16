@@ -66,7 +66,7 @@ $href = elgg_extract('href', $vars);
         <p class="show blue">
             <strong>
                 <?php
-                if($rating->overall_rating){
+                if($rating->overall){
                     echo elgg_echo("input:yes");
                 } else {
                     echo elgg_echo("input:no");

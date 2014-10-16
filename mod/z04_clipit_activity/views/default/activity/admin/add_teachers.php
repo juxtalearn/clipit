@@ -53,7 +53,7 @@ $activity = elgg_extract('entity', $vars);
         <?php
         echo elgg_view('input/button', array(
             'value' => elgg_echo('create'),
-            'class' => "submit-add-teachers btn btn-primary btn-xs pull-right",
+            'class' => "submit-create-teachers btn btn-primary btn-xs pull-right",
         ));
         ?>
         <strong>

@@ -23,6 +23,7 @@ switch($type){
     case ClipitTask::TYPE_VIDEO_FEEDBACK:
     case ClipitTask::TYPE_STORYBOARD_FEEDBACK:
     case ClipitTask::TYPE_RESOURCE_FEEDBACK:
+    case ClipitTask::TYPE_RESOURCE_DOWNLOAD:
         $output = "user";
         $title = "User task";
         break;

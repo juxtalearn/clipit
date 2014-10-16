@@ -21,9 +21,21 @@
 <!--        }-->
 <!--    });-->
 <!--});-->
+
 $(document).on("click", ".submit-add-teachers", function(){
     var form = $(this).closest("form");
     form.append($("<input/>",{"type": "hidden", "name": "act"}).val("to_activity"));
+    $(this).button('loading').data("loading-text", "<?php echo elgg_echo('loading');?>...").button('loading');
+    elgg.action('activity/admin/users', {
+        data: form.serialize(),
+        success: function(){
+            location.reload();
+        }
+    });
+});
+
+$(document).on("click", ".submit-create-teachers", function(){
+    var form = $(this).closest("form");
     $(this).button('loading').data("loading-text", "<?php echo elgg_echo('loading');?>...").button('loading');
     elgg.action('activity/admin/users', {
         data: form.serialize(),

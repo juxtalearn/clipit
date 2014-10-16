@@ -25,6 +25,7 @@ $english = array(
     // Message
     'message:from'  => "From",
     'message:to'  => "To",
+    'message:to_students' => 'To students from my activity',
     'message:last_reply'  => "Last reply",
     'message:unread'  => "unread",
     'message:notfound' => "Message not found",
@@ -35,7 +36,7 @@ $english = array(
     'reply:created' => "Your reply was successfully sent.",
     'reply:cantdelete' => 'Cannot delete message',
     'reply:cantedit' => 'Cannot edit message',
-    'reply:edit' => 'Message edited',
+    'reply:edited' => 'Message edited',
     'message:movetotrash' => "Move to trash",
     'message:movetoinbox' => "Move to inbox",
     'message:markasread' => "Mark as read",

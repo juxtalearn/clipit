@@ -18,11 +18,16 @@ $canCreate = false;
 if( ($access == 'ACCESS_TEACHER' || $access == 'ACCESS_MEMBER' || in_array($user_id, $activity->student_array)) && $activity_status != 'closed'){
     $canCreate = true;
 }
+$attach_multimedia = false;
+if($user->role == ClipitUser::ROLE_TEACHER){
+    $attach_multimedia = true;
+}
 $content =  elgg_view('discussion/list',
     array(
         'entity' => $activity,
         'messages' => $messages,
         'href'   => $href,
+        'attach_multimedia' => $attach_multimedia,
         'create' => $canCreate
     ));
 if(!$messages){
@@ -35,10 +40,12 @@ if($page[2] == 'view' && $page[3]){
     elgg_push_breadcrumb($title, $href);
     elgg_push_breadcrumb($message->name);
     if($message && $message->destination == $activity->id){
+        $href_multimedia = "clipit_activity/{$activity->id}/resources/view";
         $content = elgg_view('discussion/view',
             array(
                 'entity'     => $message,
                 'activity_id'   => $activity->id,
+                'href_multimedia' => $href_multimedia,
                 'show_group' => true,
             ));
     } else {

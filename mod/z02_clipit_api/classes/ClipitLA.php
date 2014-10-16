@@ -21,8 +21,10 @@ class ClipitLA extends UBItem {
      */
     const SUBTYPE = "ClipitLA";
     public $status_code = 0;
-    public $metric_received = false;
+    public $metric_id = 0;
     public $file_id = 0;
+    public $metric_received = false;
+
 
     /**
      * Loads object parameters stored in Elgg
@@ -32,8 +34,9 @@ class ClipitLA extends UBItem {
     protected function copy_from_elgg($elgg_object) {
         parent::copy_from_elgg($elgg_object);
         $this->status_code = (int)$elgg_object->get("status_code");
-        $this->metric_received = (bool)$elgg_object->get("metric_received");
+        $this->metric_id = (int)$elgg_object->get("metric_id");
         $this->file_id = (int)$elgg_object->get("file_id");
+        $this->metric_received = (bool)$elgg_object->get("metric_received");
     }
 
     /**
@@ -43,10 +46,10 @@ class ClipitLA extends UBItem {
      */
     protected function copy_to_elgg($elgg_object) {
         parent::copy_to_elgg($elgg_object);
-        $elgg_object->set("status_code", $this->status_code);
-        $elgg_object->set("metric_received", $this->metric_received);
-        $elgg_object->set("file_id", $this->file_id);
-
+        $elgg_object->set("status_code", (int)$this->status_code);
+        $elgg_object->set("metric_id", (int)$this->metric_id);
+        $elgg_object->set("file_id", (int)$this->file_id);
+        $elgg_object->set("metric_received", (bool)$this->metric_received);
     }
 
     /*
@@ -55,7 +58,8 @@ class ClipitLA extends UBItem {
         if(!$la_metrics_class = elgg_get_config("la_metrics_class")){
             return null;
         }
-        $return_id = new static();
+        $prop_value_array["metric_id"] = $metric_id;
+        $return_id = static::set_properties(null, $prop_value_array);
         $la_metrics_class::get_metric($metric_id, $return_id, $context);
         return $return_id;
     }

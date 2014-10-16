@@ -48,9 +48,10 @@ switch($object['subtype']){
             'entity' => $entity,
             'type' => 'resource',
             'preview' => false,
-            'body' => elgg_view("multimedia/resource/body", array('entity'  => $entity)),
-            'description' => false
+            'body' => elgg_view("multimedia/body", array('entity'  => $entity)),
+            'description' => false,
         ));
+        $content = elgg_view("multimedia/resource", array('entity_id' => $entity_id));
         break;
     // Clipit Storyboard
     case 'ClipitStoryboard':

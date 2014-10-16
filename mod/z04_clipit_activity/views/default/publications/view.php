@@ -133,6 +133,7 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
                         <?php if($me_rating_entity = ClipitRating::get_from_user_for_target($user_loggedin_id, $entity->id)): ?>
                         <li class="list-item my-evaluation">
                             <div class="content-block">
+                                <?php echo elgg_view("page/components/modal_remote", array('id'=> "rating-average-{$me_rating_entity->id}" ));?>
                                 <?php echo elgg_view('output/url', array(
                                     'href'  => "ajax/view/modal/publications/rating?id={$me_rating_entity->id}",
                                     'text'  => elgg_echo("view"),
@@ -141,8 +142,8 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
                                     'data-target'   => '#rating-average-'.$me_rating_entity->id
                                 ));
                                 ?>
-                                <h4><strong>My evaluation</strong></h4>
-                                <?php echo elgg_view("publications/stars_summary", array('entity' => $me_rating_entity, 'class' => ' ')); ?>
+                                <h4><strong><?php echo elgg_echo('publications:rating:my_evaluation');?></strong></h4>
+                                <?php echo elgg_view("performance_items/summary", array('entity' => $me_rating_entity, 'user_rating' => true)); ?>
                             </div>
                         </li>
                         <?php endif; ?>

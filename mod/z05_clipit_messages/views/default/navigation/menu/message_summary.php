@@ -16,12 +16,11 @@ if(!$limit){
     $limit = 3;
 }
 
-$messages = array_pop(ClipitChat::get_by_destination(array($user_id)));
+//$messages = array_pop(ClipitChat::get_by_destination(array($user_id)));
 $messages = ClipitChat::get_inbox($user_id);
 
 
 $messages = array_slice($messages, 0, $limit);
-
 ?>
 <?php if(empty($messages)): ?>
     <li role="presentation" class="message-item" style="margin-bottom: 10px;">
@@ -32,7 +31,8 @@ $messages = array_slice($messages, 0, $limit);
 foreach($messages as $message):
     $message = array_pop($message);
     $user = array_pop(ClipitUser::get_by_id(array($message->owner_id)));
-    $last_message = end(ClipitChat::get_conversation($user_id, $message->owner_id));
+//    $last_message = end(ClipitChat::get_conversation($user_id, $message->owner_id));
+    $last_message = $message;
     $message_text = trim(elgg_strip_tags($last_message->description));
     // Message text truncate max length 50
     $message_text = substr($message_text, 0, 50);

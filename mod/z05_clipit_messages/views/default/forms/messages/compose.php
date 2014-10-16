@@ -14,6 +14,7 @@ $user_to =  elgg_extract('entity', $vars);
 $input_id = "compose";
 $textarea_id = "";
 $remote = false;
+$user_id = elgg_get_logged_in_user_guid();
 if($user_to){
     $send_msg_js = elgg_view("messages/search_to", array('user_id' => $user_to->id));
     $input_id = "compose-to-".$user_to->id;
@@ -25,7 +26,8 @@ if($user_to){
     ));
     $remote = true;
 }
-$body .='<div class="form-group">
+$body .='
+<div class="form-group">
     <label for="discussion-title">'.elgg_echo("message:to").'</label>
     <div>
     '.elgg_view("input/text", array(
@@ -35,7 +37,33 @@ $body .='<div class="form-group">
         'id'    => $input_id
     )).'
     </div>
-</div>
+</div>';
+$user = array_pop(ClipitUser::get_by_id(array($user_id)));
+if($user->role == ClipitUser::ROLE_TEACHER) {
+    $activities = array('' => elgg_echo('activity:select'));
+    foreach(ClipitActivity::get_from_user($user_id) as $activity){
+        $activities[$activity->id] = $activity->name;
+    }
+    $body .= '
+        <div class="form-group">
+            <strong>
+            '.elgg_view('output/url', array(
+                'href'  => "javascript:;",
+                'text'  => elgg_echo("message:to_students"),
+                'onclick'   => '$(\'#select-activities\').toggle()'
+            )).'
+            </strong>
+            <div id="select-activities" class="margin-top-10" style="display: none;">
+            ' . elgg_view("input/dropdown", array(
+                    'name' => 'activity',
+                    'class' => 'form-control',
+                    'style' => 'padding-top: 5px;padding-bottom: 5px;',
+                    'options_values' => $activities
+                )). '
+            </div>
+        </div>';
+}
+$body .= '
 <div class="form-group">
     <label for="discussion-text">'.elgg_echo("message").'</label>
     '.elgg_view("input/plaintext", array(

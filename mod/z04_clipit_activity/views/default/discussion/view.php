@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 $message = elgg_extract("entity", $vars);
+$href_multimedia = elgg_extract('href_multimedia', $vars);
 $owner = array_pop(ClipitUser::get_by_id(array($message->owner_id)));
 $user_loggedin_id = elgg_get_logged_in_user_guid();
 $user_logged = array_pop(ClipitUser::get_by_id(array($user_loggedin_id)));
@@ -76,10 +77,12 @@ if($message->owner_id == elgg_get_logged_in_user_guid()){
     <div class="body-post">
         <?php echo $message->description; ?>
         <!-- Attachs multimedia -->
-        <?php if($files && $vars['show_group']): ?>
-            <?php echo elgg_view("multimedia/attach/summary", array('files' => $files)); ?>
-        <?php elseif(count($multimedia) > 0): ?>
-            <?php echo elgg_view("multimedia/attach/full", array('entities' => $multimedia, 'group' => $vars['group'])); ?>
+        <?php if(count($multimedia) > 0): ?>
+            <?php echo elgg_view("multimedia/attach/full", array(
+                'entities' => $multimedia,
+                'href_multimedia' => $href_multimedia,
+                'group' => $vars['group']
+            )); ?>
         <?php endif; ?>
         <!-- Attachs multimedia end -->
     </div>

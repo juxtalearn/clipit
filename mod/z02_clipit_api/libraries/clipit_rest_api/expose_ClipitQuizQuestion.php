@@ -64,4 +64,29 @@ function expose_quiz_question_functions() {
         $api_suffix . "get_tags", $class_suffix . "get_tags", array("id" => array("type" => "int", "required" => true)),
         "Get Taxonomy Tags from a Quiz", 'GET', false, true
     );
+    expose_function(
+        $api_suffix . "set_type_true_false", $class_suffix . "set_type_true_false", array(
+            "id" => array("type" => "int", "required" => true)
+        ), "Set Type to True or False", 'POST', false, true
+    );
+    expose_function(
+        $api_suffix . "set_type_select_one", $class_suffix . "set_type_select_one", array(
+            "id" => array("type" => "int", "required" => true)
+        ), "Set Type to Select One", 'POST', false, true
+    );
+    expose_function(
+        $api_suffix . "set_type_select_multi", $class_suffix . "set_type_select_multi", array(
+            "id" => array("type" => "int", "required" => true)
+        ), "Set Type to Select Multiple", 'POST', false, true
+    );
+    expose_function(
+        $api_suffix . "set_type_number", $class_suffix . "set_type_number", array(
+            "id" => array("type" => "int", "required" => true)
+        ), "Set Type to input Number", 'POST', false, true
+    );
+    expose_function(
+        $api_suffix . "set_type_string", $class_suffix . "set_type_string", array(
+            "id" => array("type" => "int", "required" => true)
+        ), "Set Type to input String", 'POST', false, true
+    );
 }

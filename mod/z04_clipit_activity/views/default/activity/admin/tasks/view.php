@@ -15,6 +15,7 @@ $tasks = ClipitTask::get_by_id($activity->task_array);
 elgg_load_js("fullcalendar:moment");
 elgg_load_js("fullcalendar");
 elgg_load_css("fullcalendar");
+$id = uniqid();
 ?>
 <script>
     <?php echo elgg_view("js/admin_tasks", array('entity' => $activity, 'tasks' => $tasks));?>
@@ -43,11 +44,25 @@ elgg_load_css("fullcalendar");
 <hr>
 <!-- Calendar view -->
 <div id="full-calendar" class="view-element" data-view="calendar" style="display: nonse;"></div>
+<script>
+    $(function(){
+        $(document).on("change", "select.task-types", function(){
+            if($(this).val() == '<?php echo ClipitTask::TYPE_RESOURCE_DOWNLOAD;?>'){
+                var $attach_list =  $(".attach_list[data-attach='<?php echo $id;?>']");
+                $attach_list.toggle();
+                $attach_list.attach_multimedia({
+                    data: {
+                        list: $(this).data("menu"),
+                        entity_id: "<?php echo $activity->id;?>"
+                    }
+                }).loadBy("files");
+            }
+        });
+    });
+</script>
+<?php echo elgg_view_form('task/create', array('data-validate' => "true" ), array('entity'  => $activity, 'id' => $id)); ?>
 
-<?php echo elgg_view_form('task/create', array('data-validate' => "true" ), array('entity'  => $activity)); ?>
-
-<div class="margin-bottom-20 view-element" data-view="list" style="display: none">
-</div>
+<div class="margin-bottom-20 view-element" data-view="list" style="display: none"></div>
 <ul>
     <?php
     foreach($tasks as $task):
