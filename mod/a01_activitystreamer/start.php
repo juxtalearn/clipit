@@ -7,7 +7,7 @@ function activitystreamer_init()
     global $con;
     global $transaction_stmt;
     global $logging_stmt;
-    elgg_register_page_handler('activitystreamer', 'activitystreamer_page_handler');
+    elgg_register_page_handler('admin', 'activitystreamer_page_handler');
     $_SESSION['logging_table'] = $CONFIG->dbprefix . "extended_log";
     $_SESSION['activity_table'] = $CONFIG->dbprefix . "activitystreams";
     $_SESSION['logged'] = false;
@@ -101,14 +101,14 @@ function activitystreamer_page_handler($page)
     global $CONFIG;
     $title = "ActivityStreamer Administration";
     $params = array(
-        'content' => elgg_view("activitystreamer/activitystreamer"),
+        'content' => elgg_view("admin/admin"),
         'title' => $title,
         'filter' => "",
         'class' => 'default'
     );
     $body = elgg_view_layout('one-column', $params);
     echo elgg_view_page($title, $body);
-//        include($CONFIG->pluginspath . "a01_activitystreamer/views/default/activitystreamer/activitystreamer.php");
+//        include($CONFIG->pluginspath . "a01_activitystreamer/views/default/admin/admin.php");
 }
 
 //Function to add a submenu to the admin panel.
@@ -118,7 +118,7 @@ function activitystreamer_pagesetup()
     if (elgg_is_admin_logged_in() && elgg_get_context('admin')) {
         elgg_register_menu_item('page', array(
             'name' => 'Other',
-            'href' => $CONFIG->wwwroot . 'activitystreamer',
+            'href' => $CONFIG->wwwroot . 'admin',
             'text' => 'ActivityStreamer',
             'context' => 'admin'));
     }
@@ -256,21 +256,23 @@ function extended_log($object, $event)
             $object_content = urlencode($object_content);
         }
         //4 If the table doesn't exist, we need to create it...
-        $logging_stmt->bind_param('iisssssssisisisiiis', $object_id, $object_title, $transaction_id, $object_class, $object_type, $object_subtype, $event, $time, $ip_address, $performed_by,
-            $user_name, $access_id, $enabled, $owner_guid, $object_content, $group_id, $course_id, $activity_id, $role);
-        $logging_stmt->execute();
-        /*            insert_data("INSERT DELAYED INTO `".$_SESSION['logging_table']."` ".
-                                        "(object_id, object_title, transaction_id, object_class, object_type, object_subtype, event, time, ip_address, user_id, user_name, access_id, enabled, owner_guid, content, group_id, course_id, activity_id, role) ".
-                                        "VALUES (".$object_id.", '".$object_title."', '".$transaction_id."', '".$object_class."', '".$object_type."', '".$object_subtype."', '".$event."', '".$time."', '".$ip_address."', '".$performed_by.
-                                        "', '".$user_name."', ".$access_id.", '".$enabled."', ".$owner_guid.", '".$object_content."', ".$group_id.", ".$course_id.", ".$activity_id.", '".$role."');");
+        if (!(is_null($logging_stmt)) && !($logging_stmt = "")) {
+            $logging_stmt->bind_param('iisssssssisisisiiis', $object_id, $object_title, $transaction_id, $object_class, $object_type, $object_subtype, $event, $time, $ip_address, $performed_by,
+                $user_name, $access_id, $enabled, $owner_guid, $object_content, $group_id, $course_id, $activity_id, $role);
+            $logging_stmt->execute();
+            /*            insert_data("INSERT DELAYED INTO `".$_SESSION['logging_table']."` ".
+                                            "(object_id, object_title, transaction_id, object_class, object_type, object_subtype, event, time, ip_address, user_id, user_name, access_id, enabled, owner_guid, content, group_id, course_id, activity_id, role) ".
+                                            "VALUES (".$object_id.", '".$object_title."', '".$transaction_id."', '".$object_class."', '".$object_type."', '".$object_subtype."', '".$event."', '".$time."', '".$ip_address."', '".$performed_by.
+                                            "', '".$user_name."', ".$access_id.", '".$enabled."', ".$owner_guid.", '".$object_content."', ".$group_id.", ".$course_id.", ".$activity_id.", '".$role."');");
 
-        */
-        $_SESSION['transaction_artifact'][] = array('ObjectId' => $object_id, 'ObjectTitle' => $object_title, 'ObjectType' => $object_type, 'ObjectSubtype' => $object_subtype, 'ObjectClass' => $object_class, 'OwnerGUID' => $owner_guid,
-            'GroupId' => $group_id, 'CourseId' => $course_id, 'ActivityId' => $activity_id, 'Event' => $event, 'Content' => $object_content,
-            'Timestamp' => $time, 'UserId' => $performed_by, 'UserName' => $user_name, 'IPAddress' => $ip_address, 'Role' => $role, 'TransactionId' => $transaction_id);
+            */
+            $_SESSION['transaction_artifact'][] = array('ObjectId' => $object_id, 'ObjectTitle' => $object_title, 'ObjectType' => $object_type, 'ObjectSubtype' => $object_subtype, 'ObjectClass' => $object_class, 'OwnerGUID' => $owner_guid,
+                'GroupId' => $group_id, 'CourseId' => $course_id, 'ActivityId' => $activity_id, 'Event' => $event, 'Content' => $object_content,
+                'Timestamp' => $time, 'UserId' => $performed_by, 'UserName' => $user_name, 'IPAddress' => $ip_address, 'Role' => $role, 'TransactionId' => $transaction_id);
 //            $con->close();
-        //If we actually logged something, we need to let the transaction handler know
-        $_SESSION['logged'] = true;
+            //If we actually logged something, we need to let the transaction handler know
+            $_SESSION['logged'] = true;
+        }
     }
 }
 
@@ -353,6 +355,6 @@ elgg_register_event_handler('init', 'system', 'activitystreamer_init');
 elgg_register_event_handler('plugins_boot', 'system', 'init_transaction');
 register_shutdown_function('transaction_handling');
 elgg_register_event_handler('pagesetup', 'system', 'activitystreamer_pagesetup');
-elgg_register_action('activitystreamer/rebuild', elgg_get_plugins_path() . "a01_activitystreamer/actions/rebuild.php");
-elgg_register_action('activitystreamer/modify', elgg_get_plugins_path() . "a01_activitystreamer/actions/modify.php");
-elgg_register_action('activitystreamer/request', elgg_get_plugins_path() . "a01_activitystreamer/actions/request.php");
+elgg_register_action('admin/rebuild', elgg_get_plugins_path() . "a01_activitystreamer/actions/rebuild.php");
+elgg_register_action('admin/modify', elgg_get_plugins_path() . "a01_activitystreamer/actions/modify.php");
+elgg_register_action('admin/request', elgg_get_plugins_path() . "a01_activitystreamer/actions/request.php");
