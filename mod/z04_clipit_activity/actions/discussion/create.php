@@ -30,17 +30,12 @@ if(count($entity)==0 || trim($discussion_title) == ""){
         'destination' => $entity->id,
     ));
     if($file_ids){
-       // ClipitPost::add_files($new_message_id, $file_ids);
-        //if($group){
-            $entity::add_files($entity->id, $file_ids);
-        //}
+        $entity::add_files($entity->id, $file_ids);
     }
     // Attach multimedia
-//    if($group){
         ClipitPost::add_files($new_message_id, $attach_file);
         ClipitPost::add_videos($new_message_id, $attach_video);
         ClipitPost::add_storyboards($new_message_id, $attach_storyboard);
-//    }
     // set read status true to the owner's message
     ClipitPost::set_read_status($new_message_id, true, array($user_id));
 
