@@ -104,9 +104,13 @@ class ActivityStreamer {
         }
         $statement->close();
         $json = json_encode($activities);
+
+        $user = elgg_get_logged_in_user_entity();
+        create_user_token($user->name, 60);
         $token_array = get_user_tokens(elgg_get_logged_in_user_guid(), $CONFIG->site_id);
         $token = $token_array[0];
         $token_string = $token->token;
+
         define('AnalysisData', $json);
         $data = array('AuthToken' => $token_string, 'TemplateId' => $metric_id, 'ReturnId' => $return_id, 'ReturnURL' => $return_url, 'AnalysisData' => base64_encode(AnalysisData));
 // use key 'http' even if you send the request to https://...

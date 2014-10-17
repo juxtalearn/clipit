@@ -7,7 +7,7 @@ function activitystreamer_init()
     global $con;
     global $transaction_stmt;
     global $logging_stmt;
-    elgg_register_page_handler('admin', 'activitystreamer_page_handler');
+    elgg_register_page_handler('activitystreamer', 'activitystreamer_page_handler');
     $_SESSION['logging_table'] = $CONFIG->dbprefix . "extended_log";
     $_SESSION['activity_table'] = $CONFIG->dbprefix . "activitystreams";
     $_SESSION['logged'] = false;
@@ -101,7 +101,7 @@ function activitystreamer_page_handler($page)
     global $CONFIG;
     $title = "ActivityStreamer Administration";
     $params = array(
-        'content' => elgg_view("admin/admin"),
+        'content' => elgg_view("activitystreamer/activitystreamer"),
         'title' => $title,
         'filter' => "",
         'class' => 'default'
@@ -118,7 +118,7 @@ function activitystreamer_pagesetup()
     if (elgg_is_admin_logged_in() && elgg_get_context('admin')) {
         elgg_register_menu_item('page', array(
             'name' => 'Other',
-            'href' => $CONFIG->wwwroot . 'admin',
+            'href' => $CONFIG->wwwroot . 'activitystreamer',
             'text' => 'ActivityStreamer',
             'context' => 'admin'));
     }
@@ -127,6 +127,7 @@ function activitystreamer_pagesetup()
 //Because of PHP constraints, we now implement an indirect approach and use the mysql db as a buffer.
 function extended_log($object, $event)
 {
+    global $con;
     global $logging_stmt;
     if (is_session_started() === FALSE) session_start();
 
@@ -256,7 +257,7 @@ function extended_log($object, $event)
             $object_content = urlencode($object_content);
         }
         //4 If the table doesn't exist, we need to create it...
-        if (!(is_null($logging_stmt)) && !($logging_stmt = "")) {
+        if ($logging_stmt instanceof mysqli_stmt) {
             $logging_stmt->bind_param('iisssssssisisisiiis', $object_id, $object_title, $transaction_id, $object_class, $object_type, $object_subtype, $event, $time, $ip_address, $performed_by,
                 $user_name, $access_id, $enabled, $owner_guid, $object_content, $group_id, $course_id, $activity_id, $role);
             $logging_stmt->execute();
@@ -293,8 +294,6 @@ function transaction_handling()
     //     include_once(elgg_get_plugins_path(). "a01_activitystreamer" . DIRECTORY_SEPARATOR . "lib" . DIRECTORY_SEPARATOR . "logProcessing.php");
     include_once(elgg_get_plugins_path() . "a01_activitystreamer/lib/logProcessing.php");
     global $con;
-    global $transaction_stmt;
-    $act_table = $_SESSION['activity_table'];
     $logged = $_SESSION['logged'];
 
     if ($_SESSION['enabled']) {
@@ -355,6 +354,6 @@ elgg_register_event_handler('init', 'system', 'activitystreamer_init');
 elgg_register_event_handler('plugins_boot', 'system', 'init_transaction');
 register_shutdown_function('transaction_handling');
 elgg_register_event_handler('pagesetup', 'system', 'activitystreamer_pagesetup');
-elgg_register_action('admin/rebuild', elgg_get_plugins_path() . "a01_activitystreamer/actions/rebuild.php");
-elgg_register_action('admin/modify', elgg_get_plugins_path() . "a01_activitystreamer/actions/modify.php");
-elgg_register_action('admin/request', elgg_get_plugins_path() . "a01_activitystreamer/actions/request.php");
+elgg_register_action('activitystreamer/rebuild', elgg_get_plugins_path() . "a01_activitystreamer/actions/rebuild.php");
+elgg_register_action('activitystreamer/modify', elgg_get_plugins_path() . "a01_activitystreamer/actions/modify.php");
+elgg_register_action('activitystreamer/request', elgg_get_plugins_path() . "a01_activitystreamer/actions/request.php");

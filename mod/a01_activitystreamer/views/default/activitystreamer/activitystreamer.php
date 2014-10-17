@@ -25,29 +25,31 @@ if (!isset($entities[0])) {
 }
 ?>
 
-    <form action="<?php echo $vars['url']; ?>action/activitystreamer/modify" method="post">
-        <label>
-            <?php 	echo elgg_echo('activitystreamer:workbenchurl'); ?>
-            <br />
-            <?php	echo elgg_view('input/text',array(
-                'internalname' => 'workbenchurl',
-                'value' => $workbenchurl
-            ));
-            ?>
-        </label>
-        <p>
-            <?php
-            echo elgg_view('input/hidden', array('internalname' => '__elgg_token', 'value' => $token));
-            echo elgg_view('input/hidden', array('internalname' => '__elgg_ts', 'value' => $ts));
-            ?>
-        </p>
-        <p>
-            <input type="submit" value="<?php echo elgg_echo('activitystreamer:submit'); ?>" />
-        </p>
+<form action="<?php echo $vars['url']; ?>action/activitystreamer/modify" method="post">
+    <label>
+        <?php echo elgg_echo('admin:workbenchurl'); ?>
+        <br/>
+        <?php    echo elgg_view('input/text', array(
+            'internalname' => 'workbenchurl',
+            'value' => $workbenchurl
+        ));
+        ?>
+    </label>
 
-    </form>
+    <p>
+        <?php
+        echo elgg_view('input/hidden', array('internalname' => '__elgg_token', 'value' => $token));
+        echo elgg_view('input/hidden', array('internalname' => '__elgg_ts', 'value' => $ts));
+        ?>
+    </p>
 
-<p><?php echo elgg_echo('activitystreamer:warningmessage'); ?></p>
+    <p>
+        <input type="submit" value="<?php echo elgg_echo('activitystreamer:submit'); ?>"/>
+    </p>
+
+</form>
+
+<p><?php echo elgg_echo('admin:warningmessage'); ?></p>
 
 <form action="<?php echo $vars['url']; ?>action/activitystreamer/rebuild" method="post">
     <p>
