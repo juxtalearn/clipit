@@ -7,7 +7,7 @@ function storeJSON($action)
     $action['object']['objectTitle'] = urlencode($action['object']['objectTitle']);
     $activity_json = json_encode($action);
     createActivityTable($con, $_SESSION['activity_table']);
-    if ($transaction_stmt && $action['verb'] != "Ignore") {
+    if ($transaction_stmt instanceof mysqli_stmt && $action['verb'] != "Ignore") {
         $transaction_stmt->bind_param('ssiiiiissi', $action['transactionId'], $activity_json, $action['actor']['actorId'], $action['object']['objectId'], $action['object']['groupId'],
             $action['object']['courseId'], $action['object']['activityId'], $action['verb'], $action['actor']['objectType'], $action['published']);
         $transaction_stmt->execute();

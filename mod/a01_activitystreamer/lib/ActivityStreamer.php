@@ -104,9 +104,13 @@ class ActivityStreamer {
         }
         $statement->close();
         $json = json_encode($activities);
+
+        $user = elgg_get_logged_in_user_entity();
+        create_user_token($user->name, 60);
         $token_array = get_user_tokens(elgg_get_logged_in_user_guid(), $CONFIG->site_id);
         $token = $token_array[0];
         $token_string = $token->token;
+
         define('AnalysisData', $json);
         $data = array('AuthToken' => $token_string, 'TemplateId' => $metric_id, 'ReturnId' => $return_id, 'ReturnURL' => $return_url, 'AnalysisData' => base64_encode(AnalysisData));
 // use key 'http' even if you send the request to https://...
@@ -146,8 +150,18 @@ class ActivityStreamer {
 
 
         $workbenchurl = $workbenchurl."/requestAvailableTemplates";
+
+        $options = array(
+            'http' => array(
+                'method'  => 'GET',
+                'timeout' => 15
+            ),
+        );
+        $request_context  = stream_context_create($options);
+
+
         # retrieve JSON-String
-        $jsonArrayString = file_get_contents($workbenchurl);
+        $jsonArrayString = file_get_contents($workbenchurl, false, $request_context);
         # converst JSON-String to JSON data structure
         $jsonArray = json_decode($jsonArrayString,true);
 

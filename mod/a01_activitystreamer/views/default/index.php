@@ -7,15 +7,15 @@
     elgg_set_page_owner_guid($_SESSION['guid']);
 	
 	
-	$title = elgg_view_title(elgg_echo('activitystreamer'));
+	$title = elgg_view_title(elgg_echo('admin'));
 	
 
     //Vars required for action gatekeeper
 	$ts = time();
 	$token = generate_action_token($ts);
     
-	$body = elgg_view("activitystreamer/activitystreamer", array('token' => $token, 'ts' => $ts));
+	$body = elgg_view("admin/admin", array('token' => $token, 'ts' => $ts));
 	
 	// Display main admin menu
-	elgg_view_page(elgg_echo('activitystreamer'),$body);
+	elgg_view_page(elgg_echo('admin'),$body);
 ?>

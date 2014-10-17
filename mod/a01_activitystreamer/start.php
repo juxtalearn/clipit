@@ -108,7 +108,7 @@ function activitystreamer_page_handler($page)
     );
     $body = elgg_view_layout('one-column', $params);
     echo elgg_view_page($title, $body);
-//        include($CONFIG->pluginspath . "a01_activitystreamer/views/default/activitystreamer/activitystreamer.php");
+//        include($CONFIG->pluginspath . "a01_activitystreamer/views/default/admin/admin.php");
 }
 
 //Function to add a submenu to the admin panel.
@@ -127,6 +127,7 @@ function activitystreamer_pagesetup()
 //Because of PHP constraints, we now implement an indirect approach and use the mysql db as a buffer.
 function extended_log($object, $event)
 {
+    global $con;
     global $logging_stmt;
     if (is_session_started() === FALSE) session_start();
 
@@ -256,21 +257,23 @@ function extended_log($object, $event)
             $object_content = urlencode($object_content);
         }
         //4 If the table doesn't exist, we need to create it...
-        $logging_stmt->bind_param('iisssssssisisisiiis', $object_id, $object_title, $transaction_id, $object_class, $object_type, $object_subtype, $event, $time, $ip_address, $performed_by,
-            $user_name, $access_id, $enabled, $owner_guid, $object_content, $group_id, $course_id, $activity_id, $role);
-        $logging_stmt->execute();
-        /*            insert_data("INSERT DELAYED INTO `".$_SESSION['logging_table']."` ".
-                                        "(object_id, object_title, transaction_id, object_class, object_type, object_subtype, event, time, ip_address, user_id, user_name, access_id, enabled, owner_guid, content, group_id, course_id, activity_id, role) ".
-                                        "VALUES (".$object_id.", '".$object_title."', '".$transaction_id."', '".$object_class."', '".$object_type."', '".$object_subtype."', '".$event."', '".$time."', '".$ip_address."', '".$performed_by.
-                                        "', '".$user_name."', ".$access_id.", '".$enabled."', ".$owner_guid.", '".$object_content."', ".$group_id.", ".$course_id.", ".$activity_id.", '".$role."');");
+        if ($logging_stmt instanceof mysqli_stmt) {
+            $logging_stmt->bind_param('iisssssssisisisiiis', $object_id, $object_title, $transaction_id, $object_class, $object_type, $object_subtype, $event, $time, $ip_address, $performed_by,
+                $user_name, $access_id, $enabled, $owner_guid, $object_content, $group_id, $course_id, $activity_id, $role);
+            $logging_stmt->execute();
+            /*            insert_data("INSERT DELAYED INTO `".$_SESSION['logging_table']."` ".
+                                            "(object_id, object_title, transaction_id, object_class, object_type, object_subtype, event, time, ip_address, user_id, user_name, access_id, enabled, owner_guid, content, group_id, course_id, activity_id, role) ".
+                                            "VALUES (".$object_id.", '".$object_title."', '".$transaction_id."', '".$object_class."', '".$object_type."', '".$object_subtype."', '".$event."', '".$time."', '".$ip_address."', '".$performed_by.
+                                            "', '".$user_name."', ".$access_id.", '".$enabled."', ".$owner_guid.", '".$object_content."', ".$group_id.", ".$course_id.", ".$activity_id.", '".$role."');");
 
-        */
-        $_SESSION['transaction_artifact'][] = array('ObjectId' => $object_id, 'ObjectTitle' => $object_title, 'ObjectType' => $object_type, 'ObjectSubtype' => $object_subtype, 'ObjectClass' => $object_class, 'OwnerGUID' => $owner_guid,
-            'GroupId' => $group_id, 'CourseId' => $course_id, 'ActivityId' => $activity_id, 'Event' => $event, 'Content' => $object_content,
-            'Timestamp' => $time, 'UserId' => $performed_by, 'UserName' => $user_name, 'IPAddress' => $ip_address, 'Role' => $role, 'TransactionId' => $transaction_id);
+            */
+            $_SESSION['transaction_artifact'][] = array('ObjectId' => $object_id, 'ObjectTitle' => $object_title, 'ObjectType' => $object_type, 'ObjectSubtype' => $object_subtype, 'ObjectClass' => $object_class, 'OwnerGUID' => $owner_guid,
+                'GroupId' => $group_id, 'CourseId' => $course_id, 'ActivityId' => $activity_id, 'Event' => $event, 'Content' => $object_content,
+                'Timestamp' => $time, 'UserId' => $performed_by, 'UserName' => $user_name, 'IPAddress' => $ip_address, 'Role' => $role, 'TransactionId' => $transaction_id);
 //            $con->close();
-        //If we actually logged something, we need to let the transaction handler know
-        $_SESSION['logged'] = true;
+            //If we actually logged something, we need to let the transaction handler know
+            $_SESSION['logged'] = true;
+        }
     }
 }
 
@@ -291,8 +294,6 @@ function transaction_handling()
     //     include_once(elgg_get_plugins_path(). "a01_activitystreamer" . DIRECTORY_SEPARATOR . "lib" . DIRECTORY_SEPARATOR . "logProcessing.php");
     include_once(elgg_get_plugins_path() . "a01_activitystreamer/lib/logProcessing.php");
     global $con;
-    global $transaction_stmt;
-    $act_table = $_SESSION['activity_table'];
     $logged = $_SESSION['logged'];
 
     if ($_SESSION['enabled']) {

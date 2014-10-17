@@ -19,4 +19,26 @@ function expose_example_functions() {
     $api_suffix = "clipit.example.";
     $class_suffix = "ClipitExample::";
     expose_common_functions($api_suffix, $class_suffix);
+    expose_function(
+        $api_suffix . "add_tags", $class_suffix . "add_tags", array(
+            "id" => array("type" => "int", "required" => true),
+            "tag_array" => array("type" => "array", "required" => true)
+        ), "Add Tags by Id to an Example", 'POST', false, true
+    );
+    expose_function(
+        $api_suffix . "set_tags", $class_suffix . "set_tags", array(
+            "id" => array("type" => "int", "required" => true),
+            "tag_array" => array("type" => "array", "required" => true)
+        ), "Set Tags by Id to an Example", 'POST', false, true
+    );
+    expose_function(
+        $api_suffix . "remove_tags", $class_suffix . "remove_tags", array(
+            "id" => array("type" => "int", "required" => true),
+            "tag_array" => array("type" => "array", "required" => true)
+        ), "Remove Tags by Id from an Example", 'POST', false, true
+    );
+    expose_function(
+        $api_suffix . "get_tags", $class_suffix . "get_tags", array("id" => array("type" => "int", "required" => true)),
+        "Get Tags from an Example", 'GET', false, true
+    );
 }
