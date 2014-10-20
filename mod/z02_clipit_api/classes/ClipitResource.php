@@ -54,7 +54,7 @@ class ClipitResource extends UBItem {
      */
     protected function copy_to_elgg($elgg_entity) {
         parent::copy_to_elgg($elgg_entity);
-        $elgg_entity->set("read_array", (string)$this->read_array);
+        $elgg_entity->set("read_array", (array)$this->read_array);
     }
 
     /**
