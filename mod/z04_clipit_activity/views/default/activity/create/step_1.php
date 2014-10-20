@@ -11,7 +11,7 @@
  * @package         ClipIt
  */
 $tricky_topics = ClipitTrickyTopic::get_all();
-//$tt = array('' => elgg_echo('tricky_topic:select'));
+$owner_tt = array();
 foreach($tricky_topics as $tricky_topic){
     $tt[$tricky_topic->id] = $tricky_topic->name;
     if($tricky_topic->owner_id == elgg_get_logged_in_user_guid()){
@@ -39,6 +39,7 @@ $(function(){
         });
     });
     $("#add-tricky-topic").click(function(){
+        $(this).parent("div").toggleClass("hide");
         $("#select-tricky-topic").toggle();
         $("#form-add-tricky-topic").toggle().find("input:first").focus();
     });
@@ -174,14 +175,16 @@ $(function(){
             </div>
             <div class="row margin-0 margin-bottom-10" id="tricky_topic_view" style="display: none;background: #fafafa;padding: 10px;"></div>
         </div>
-        <?php echo elgg_echo('or:create');?>
-        <?php echo elgg_view('output/url', array(
-            'href'  => "javascript:;",
-            'title' => elgg_echo('tricky_topic'),
-            'text'  => elgg_echo('tricky_topic'),
-            'id'    => 'add-tricky-topic'
-        ));
-        ?>
+        <div>
+            <?php echo elgg_echo('or:create');?>
+            <?php echo elgg_view('output/url', array(
+                'href'  => "javascript:;",
+                'title' => elgg_echo('tricky_topic'),
+                'text'  => elgg_echo('tricky_topic'),
+                'id'    => 'add-tricky-topic'
+            ));
+            ?>
+        </div>
         <div class="row margin-0 margin-bottom-10" id="form-add-tricky-topic" style="display: none;background: #fafafa;padding: 10px;">
             <div class="form-group col-md-12 margin-top-10">
                 <?php echo elgg_view("input/text", array(
