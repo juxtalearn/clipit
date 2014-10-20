@@ -173,7 +173,7 @@ class ActivityStreamer {
                 $templateId = $entry["TemplateId"]; //String
                 $templateName = $entry["Name"]; //String
                 $templateDescription = $entry["Description"]; //String
-                $metrics[] = ["TemplateId" => $templateId, "Name" => $templateName, "Description" => $templateDescription];
+                $metrics[] = array("TemplateId" => $templateId, "Name" => $templateName, "Description" => $templateDescription);
             }
         }
         return $metrics;
