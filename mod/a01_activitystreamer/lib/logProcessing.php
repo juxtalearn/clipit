@@ -6,7 +6,6 @@ function storeJSON($action)
     $action['object']['content'] = urlencode($action['object']['content']);
     $action['object']['objectTitle'] = urlencode($action['object']['objectTitle']);
     $activity_json = json_encode($action);
-    createActivityTable($con, $_SESSION['activity_table']);
     if ($transaction_stmt instanceof mysqli_stmt && $action['verb'] != "Ignore") {
         $transaction_stmt->bind_param('ssiiiiissi', $action['transactionId'], $activity_json, $action['actor']['actorId'], $action['object']['objectId'], $action['object']['groupId'],
             $action['object']['courseId'], $action['object']['activityId'], $action['verb'], $action['actor']['objectType'], $action['published']);
@@ -14,30 +13,6 @@ function storeJSON($action)
     } else {
         error_log(mysqli_error($con));
     }
-}
-
-function createActivityTable($con, $act_table)
-{
-    mysqli_query($con, "CREATE TABLE IF NOT EXISTS `" . $act_table . "` (" .
-        "`stream_id` int(255) NOT NULL AUTO_INCREMENT," .
-        "`transaction_id` varchar(255) NOT NULL, " .
-        "`json` longtext NOT NULL, " .
-        "`actor_id` int(255) NOT NULL, " .
-        "`object_id` int(255) NOT NULL, " .
-        "`group_id` int(255) NOT NULL, " .
-        "`course_id` int(255) NOT NULL, " .
-        "`activity_id` int(255) NOT NULL, " .
-        "`verb` varchar(255) NOT NULL, " .
-        "`role` varchar(255) NOT NULL, " .
-        "`timestamp` varchar(255) NOT NULL, " .
-        "PRIMARY KEY (`stream_id`), " .
-        "PRIMARY KEY (`stream_id`), " .
-        "KEY `actor_id` (`actor_id`), " .
-        "KEY `object_id` (`object_id`), " .
-        "KEY `group_id` (`group_id`), " .
-        "KEY `activity_id` (`activity_id`), " .
-        "KEY `verb` (`verb`) " .
-        ") ENGINE=MyISAM DEFAULT CHARSET=utf8 DEFAULT COLLATE utf8_general_ci AUTO_INCREMENT=1;");
 }
 
 function processURL($url)
