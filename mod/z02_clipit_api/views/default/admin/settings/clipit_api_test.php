@@ -21,8 +21,6 @@ switch($action) {
     case "export_activities":
         print_r(ClipitActivity::export_data());
         break;
-    case "owncloud":
-        ClipitVideo::upload_to_owncloud();
-        break;
+
 }
 
