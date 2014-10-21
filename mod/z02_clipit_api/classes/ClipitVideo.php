@@ -15,7 +15,8 @@
 /**
  * Contains the final product (video) of a group during an activity.
  */
-class ClipitVideo extends ClipitResource {
+class ClipitVideo extends ClipitResource
+{
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
@@ -35,7 +36,8 @@ class ClipitVideo extends ClipitResource {
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function copy_from_elgg($elgg_entity) {
+    protected function copy_from_elgg($elgg_entity)
+    {
         parent::copy_from_elgg($elgg_entity);
         $this->preview = (string)$elgg_entity->get("preview");
         $this->duration = (int)$elgg_entity->get("duration");
@@ -46,7 +48,8 @@ class ClipitVideo extends ClipitResource {
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function copy_to_elgg($elgg_entity) {
+    protected function copy_to_elgg($elgg_entity)
+    {
         parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("preview", (string)$this->preview);
         $elgg_entity->set("duration", (int)$this->duration);
@@ -56,12 +59,13 @@ class ClipitVideo extends ClipitResource {
      * Uploads to YouTube a video file from a local path in the server.
      *
      * @param string $local_video_path Local server path of the video
-     * @param string $title            Video title
+     * @param string $title Video title
      *
      * @return string YouTube video URL
      */
-    static function upload_to_youtube($local_video_path, $title) {
-        if(!get_config("google_refresh_token")) {
+    static function upload_to_youtube($local_video_path, $title)
+    {
+        if (!get_config("google_refresh_token")) {
             return false;
         }
         set_include_path(
@@ -75,14 +79,14 @@ class ClipitVideo extends ClipitResource {
         $client->setClientSecret(get_config("google_secret"));
         try {
             $client->setAccessToken(get_config("google_token"));
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             error_log($e);
         }
-        if($client->isAccessTokenExpired()) {
+        if ($client->isAccessTokenExpired()) {
             $refresh_token = get_config("google_refresh_token");
             $client->refreshToken($refresh_token);
         }
-        if(!$client->getAccessToken()) {
+        if (!$client->getAccessToken()) {
             return null;
         }
         // Define an object that will be used to make all API requests.
@@ -119,7 +123,7 @@ class ClipitVideo extends ClipitResource {
         // Read the media file and upload it chunk by chunk.
         $status = false;
         $handle = fopen($local_video_path, "rb");
-        while(!$status && !feof($handle)) {
+        while (!$status && !feof($handle)) {
             $chunk = fread($handle, $chunkSizeBytes);
             $status = $media->nextChunk($chunk);
         }
@@ -129,5 +133,9 @@ class ClipitVideo extends ClipitResource {
         $_SESSION['token'] = $client->getAccessToken();
         set_config("google_token", $_SESSION['token']);
         return (string)"http://www.youtube.com/watch?v=" . $status['id'];
+    }
+
+    static function upload_to_owncloud($local_video_path, $title){
+
     }
 }
