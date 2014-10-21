@@ -134,8 +134,4 @@ class ClipitVideo extends ClipitResource
         set_config("google_token", $_SESSION['token']);
         return (string)"http://www.youtube.com/watch?v=" . $status['id'];
     }
-
-    static function upload_to_owncloud($local_video_path, $title){
-
-    }
 }
