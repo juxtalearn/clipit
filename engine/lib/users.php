@@ -238,6 +238,8 @@ function make_user_admin($user_guid) {
 
 			$r = update_data("UPDATE {$CONFIG->dbprefix}users_entity set admin='yes' where guid=$user_guid");
 			_elgg_invalidate_cache_for_entity($user_guid);
+            $user->set("role", "admin");
+            $user->save();
 			return $r;
 		}
 
