@@ -7638,24 +7638,6 @@ li.list-item:last-child {
   width: 250px;
   display: none;
 }
-.add-video .video-info {
-  overflow: hidden;
-}
-.add-video .video-info .icon {
-  position: relative;
-}
-.add-video .video-info .icon span {
-  position: absolute;
-  top: 7px;
-  left: 5px;
-}
-.add-video .video-info .error {
-  margin-top: 5px;
-  /*display: none;*/
-}
-.add-video .video-info .error > small {
-  color: #ff4343;
-}
 #attach-loading {
   display: table;
   width: 100%;
@@ -8232,6 +8214,16 @@ ul.top-account > li ul#menu_activities li.divider:last-child {
 ul.top-account > li ul#menu_activities li .activity-point {
   vertical-align: text-top;
   margin-top: 2px;
+}
+ul.top-account > li.active > a {
+  color: #FFF !important;
+  background: #32b4e5 !important;
+  opacity: 0.7;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+ul.top-account > li.active > a > i {
+  color: #FFF !important;
 }
 ul.top-account > li > a {
   font-family: FuturaBoldRegular, Impact, 'Impact Bold', Helvetica, Arial, sans, sans-serif !important;

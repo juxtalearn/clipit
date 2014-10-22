@@ -202,7 +202,15 @@ ul.top-account{
         }
       }
     }
-
+    &.active > a{
+      color: #FFF !important;
+      background: @blue_clipit !important;
+      opacity: 0.7;
+      .box-shadow(none) !important;
+      > i{
+        color: #FFF !important;
+      }
+    }
     > a{
       font-family: @font-family-futurabold !important;
       text-transform: none !important;

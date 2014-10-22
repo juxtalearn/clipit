@@ -13,7 +13,7 @@
 $user_id = elgg_get_logged_in_user_guid();
 $unread_count = ClipitChat::get_inbox_unread($user_id);
 ?>
-<li>
+<li <?php echo elgg_in_context('messages_page') ? 'class="active"': '';?>>
     <a id="messages" role="button" data-toggle="dropdown" href="javascript:;">
         <?php if($unread_count > 0): ?>
             <span class="badge"><?php echo $unread_count; ?></span>

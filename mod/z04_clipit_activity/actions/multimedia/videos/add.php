@@ -1,5 +1,5 @@
 <?php
- /**
+/**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
  * Creation date:   22/04/14
@@ -15,6 +15,12 @@ $description = get_input("video-description");
 $url = get_input("video-url");
 $file = $_FILES["video-upload"];
 $entity_id = get_input("entity-id");
+$labels = get_input("labels");
+$labels = array_filter(explode(",", $labels));
+$tags = array_filter(get_input("tags", array()));
+if(!$tags){
+    $tags = array();
+}
 
 $object = ClipitSite::lookup($entity_id);
 $user_id = elgg_get_logged_in_user_guid();
@@ -28,7 +34,7 @@ if(count($entity)==0 || trim($title) == "" || trim($description) == ""){
     // Video url (youtube|vimeo)
     if(trim($url) != "" && $video_data = video_url_parser($url)){
         $video_url = $video_data['url'];
-    // Video upload to youtube
+        // Video upload to youtube
     } elseif(!empty($file['tmp_name'])){
         $video_url = ClipitVideo::upload_to_youtube($file['tmp_name'], $title);
         $video_data = video_url_parser($video_url);
@@ -46,6 +52,27 @@ if(count($entity)==0 || trim($title) == "" || trim($description) == ""){
     }
     if($new_video_id){
         $entity_class::add_videos($entity_id, array($new_video_id));
+        if($entity_class == 'ClipitGroup' && (isset($labels) || isset($tags))) {
+            // Labels
+            $total_labels = array();
+            foreach ($labels as $label) {
+                if ($label_exist = array_pop(ClipitLabel::get_from_search($label, true, true))) {
+                    $total_labels[] = $label_exist->id;
+                } else {
+                    $total_labels[] = ClipitLabel::create(array(
+                        'name' => $label,
+                    ));
+                }
+            }
+            ClipitVideo::set_labels($new_video_id, $total_labels);
+            // Tags
+            /* get tags from group */
+            $group_tags = ClipitGroup::get_tags($entity_id);
+            if ($group_tags) {
+                $tags = array_merge($tags, $group_tags);
+            }
+            ClipitVideo::set_tags($new_video_id, $tags);
+        }
     } else {
         register_error(elgg_echo("video:cantadd"));
     }

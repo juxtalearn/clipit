@@ -12,7 +12,7 @@
  */
 $user_id = elgg_get_logged_in_user_guid();
 ?>
-<li>
+<li <?php echo elgg_in_context('my_activities') ? 'class="active"': '';?>>
     <?php echo elgg_view('output/url', array(
         'href'  => "my_activities",
         'title' => elgg_echo('my_activities'),
