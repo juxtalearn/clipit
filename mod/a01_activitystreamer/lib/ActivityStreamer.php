@@ -120,10 +120,7 @@ class ActivityStreamer {
 
             //Get the user auth token
             $user = elgg_get_logged_in_user_entity();
-            create_user_token($user->name, 60);
-            $token_array = get_user_tokens(elgg_get_logged_in_user_guid(), $CONFIG->site_id);
-            $token = $token_array[0];
-            $token_string = $token->token;
+            $token_string = ClipitSite::get_token($user->username);
 
             //Create and make the request to the workbench
             define('AnalysisData', $json);
