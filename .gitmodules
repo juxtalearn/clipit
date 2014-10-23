@@ -4,3 +4,6 @@
 [submodule "mod/z02_clipit_api/libraries/google_api"]
 	path = mod/z02_clipit_api/libraries/google_api
 	url = https://github.com/google/google-api-php-client.git
+[submodule "mod/z02_clipit_api/libraries/vimeo"]
+	path = mod/z02_clipit_api/libraries/vimeo
+	url = https://github.com/vimeo/vimeo.php.git

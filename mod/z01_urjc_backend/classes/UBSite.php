@@ -97,26 +97,28 @@ class UBSite {
      * @return string Authentication Token.
      * @throws SecurityException
      */
-    static function get_token($login, $password, $timeout = 60) {
+    static function get_token($login, $password = "", $timeout = 60) {
         global $CONFIG;
-        if(elgg_authenticate($login, $password) === true) {
-            $user = get_user_by_username($login);
-            $query = "select * from {$CONFIG->dbprefix}users_apisessions where user_guid = {$user->guid};";
-            $row = get_data_row($query);
-            if(isset($row->token)){
-                $timeout = $timeout * 60 * 1000; // convert mins to ms
-                // if the token expires in less than $timeout, we extend the timeout
-                if(((int)$row->expires - time()) < $timeout) {
-                    $new_expires = time() + $timeout;
-                    $update_timeout_query = "update {$CONFIG->dbprefix}users_apisessions set expires = {$new_expires} where user_guid = {$user->guid};";
-                    update_data($update_timeout_query);
-                }
-                return $row->token;
-            } else {
-                return create_user_token($login, $timeout);
+        if(!elgg_get_logged_in_user_guid()){
+            if(elgg_authenticate($login, $password) !== true) {
+                throw new SecurityException(elgg_echo('SecurityException:authenticationfailed'));
             }
         }
-        throw new SecurityException(elgg_echo('SecurityException:authenticationfailed'));
+        $user = get_user_by_username($login);
+        $query = "select * from {$CONFIG->dbprefix}users_apisessions where user_guid = {$user->guid};";
+        $row = get_data_row($query);
+        if(isset($row->token)){
+            $timeout = $timeout * 60 * 1000; // convert mins to ms
+            // if the token expires in less than $timeout, we extend the timeout
+            if(((int)$row->expires - time()) < $timeout) {
+                $new_expires = time() + $timeout;
+                $update_timeout_query = "update {$CONFIG->dbprefix}users_apisessions set expires = {$new_expires} where user_guid = {$user->guid};";
+                update_data($update_timeout_query);
+            }
+            return $row->token;
+        } else {
+            return create_user_token($login, $timeout);
+        }
     }
 
     static function remove_token($token) {

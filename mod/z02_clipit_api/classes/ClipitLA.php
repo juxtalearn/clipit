@@ -55,7 +55,7 @@ class ClipitLA extends UBItem {
     /*
      */
     static function get_metric($metric_id, $context) {
-        if(!$la_metrics_class = elgg_get_config("la_metrics_class")){
+        if(!$la_metrics_class = (string)elgg_get_config("la_metrics_class")){
             return null;
         }
         $prop_value_array["metric_id"] = $metric_id;
