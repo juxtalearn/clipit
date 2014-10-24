@@ -27,7 +27,7 @@ $portuguese = array(
     'message:to'  => "Para",
     'message:last_reply'  => "Ultima resposta",
     'message:unread'  => "por ler",
-    'message:notfound' => "Mensagem nao encontrada",
+    'message:notfound' => "Mensagem não encontrada",
     'message:options'  => "Opcoes",
     'message:created' => "A sua mensagem foi enviada.",
     'message:cantcreate' => "Não foi possible enviar a mensagem",
@@ -41,17 +41,17 @@ $portuguese = array(
     'message:markasread' => "Marcar como lida",
     'message:markasunread' => "Marcar como não lida",
     'messages:read:marked' => "Mensagens marcadas como lidas",
-    'messages:unread:marked' => "Mensagens marcadas como nao lidas",
+    'messages:unread:marked' => "Mensagens marcadas como não lidas",
     'messages:removed' => "Mensagens removidas",
     'messages:inbox:moved' => "Mensagens movidas para a caixa de entrada",
     'messages:error' => 'Ha um problema com a sua mensagem. Por favor, tente outra vez.',
-    'messages:error:messages_not_selected' => 'Nao ha mensagens selecionadas',
-    'messages:unreads' => '%s mensagens nao lidas',
+    'messages:error:messages_not_selected' => 'Não há mensagens selecionadas',
+    'messages:unreads' => '%s mensagens não lidas',
 
     // Error pages: empty folders
-    'messages:inbox:none' => "Nao ha mensagens na caixa de entrada.",
-    'messages:sent:none' => "Nao ha mensagens enviadas.",
-    'messages:trash:none' => "Nao ha mensagens no lixo.",
+    'messages:inbox:none' => "Não há mensagens na caixa de entrada.",
+    'messages:sent:none' => "Não há mensagens enviadas.",
+    'messages:trash:none' => "Não há mensagens no lixo.",
 
 
     // Search

@@ -24,7 +24,7 @@ $portuguese = array(
     'logbrowser:object:guid' => 'GUID do objeto',
     'logbrowser:action' => 'Action',
 
-    'logbrowser:no_result' => 'Nao ha resultados',
+    'logbrowser:no_result' => 'Não ha resultados',
 );
 
 add_translation("pt", $portuguese);
