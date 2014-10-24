@@ -21,5 +21,6 @@ switch($action) {
     case "export_activities":
         print_r(ClipitActivity::export_data());
         break;
+
 }
 

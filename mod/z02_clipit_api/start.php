@@ -25,6 +25,7 @@ function clipit_api_init() {
     require_once("libraries/performance_palette/load_performance_palette.php");
     expose_clipit_api();
     elgg_register_admin_menu_item('configure', 'youtube_auth', 'settings');
+    elgg_register_admin_menu_item('configure', 'vimeo_auth', 'settings');
     elgg_register_admin_menu_item('configure', 'clipit_api_test', 'settings');
     elgg_register_action("useradd", elgg_get_plugins_path(). "z02_clipit_api/actions/useradd.php", 'admin');
 }

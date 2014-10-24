@@ -22,6 +22,7 @@ class ClipitLA extends UBItem {
     const SUBTYPE = "ClipitLA";
     public $status_code = 0;
     public $metric_id = 0;
+    public $context = array();
     public $file_id = 0;
     public $metric_received = false;
 
@@ -52,16 +53,11 @@ class ClipitLA extends UBItem {
         $elgg_object->set("metric_received", (bool)$this->metric_received);
     }
 
-    /*
-     */
     static function get_metric($metric_id, $context) {
-        if(!$la_metrics_class = elgg_get_config("la_metrics_class")){
+        if(!$la_metrics_class = (string)elgg_get_config("la_metrics_class")){
             return null;
         }
-        $prop_value_array["metric_id"] = $metric_id;
-        $return_id = static::set_properties(null, $prop_value_array);
-        $la_metrics_class::get_metric($metric_id, $return_id, $context);
-        return $return_id;
+        return (int)$la_metrics_class::get_metric($metric_id, $context);
     }
 
     static function save_metric($return_id, $data, $status_code) {

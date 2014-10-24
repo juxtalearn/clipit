@@ -45,7 +45,7 @@ class ClipitFile extends UBFile {
      */
     protected function copy_to_elgg($elgg_file) {
         parent::copy_to_elgg($elgg_file);
-        $elgg_file->set("read_array", (string)$this->read_array);
+        $elgg_file->set("read_array", (array)$this->read_array);
     }
 
     /**
