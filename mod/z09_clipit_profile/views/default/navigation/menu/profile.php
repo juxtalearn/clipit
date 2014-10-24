@@ -13,6 +13,7 @@
 $user_id = elgg_get_logged_in_user_guid();
 $user = array_pop(ClipitUser::get_by_id(array($user_id)));
 ?>
+<li class="separator">|</li>
 <li style="margin-left: 10px;">
     <?php echo elgg_view('output/url', array(
         'title' => $user->name,
@@ -44,23 +45,24 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
             ));
             ?>
         </li>
-<!--        <li role="presentation" class="divider"></li>-->
-<!--        <li role="presentation">-->
-<!--            --><?php //echo elgg_view('output/url', array(
-//                'href'  => "stats",
-//                'title' => elgg_echo('profile:stats'),
-//                'text'  => '<i class="fa fa-bar-chart-o"></i> '.elgg_echo('profile:stats'),
-//            ));
-//            ?>
-<!--        </li>-->
+        <li role="presentation" class="divider"></li>
+        <?php if($user->role == ClipitUser::ROLE_TEACHER):?>
+        <li role="presentation">
+            <?php echo elgg_view('output/url', array(
+                'href'  => "stats",
+                'title' => elgg_echo('profile:stats'),
+                'text'  => '<i class="fa fa-bar-chart-o"></i> '.elgg_echo('profile:stats'),
+            ));
+            ?>
+        </li>
+        <?php endif;?>
     </ul>
 </li>
-<li class="separator">|</li>
 <li>
     <?php echo elgg_view('output/url', array(
         'href'  => "action/logout",
         'title' => elgg_echo('user:logout'),
-        'text'  => '<i style="color: #ff4343;" class="fa fa-power-off"></i>'
+        'text'  => '<i style="color: #ff4343;" class="fa fa-sign-out"></i>'
     ));
     ?>
 </li>

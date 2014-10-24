@@ -17,6 +17,12 @@ function clipit_profile_init() {
     elgg_register_page_handler('profile', 'profile_page_handler');
     // Register "/settings" page handler
     elgg_register_page_handler('settings', 'usersettings_clipit_page_handler');
+    // Register "/stats" page handler
+    elgg_register_page_handler('stats', 'userstats_clipit_page_handler');
+    elgg_register_ajax_view('metrics/get_metric');
+    elgg_register_page_handler('metric', 'getmetric_clipit_page_handler');
+    elgg_register_ajax_view('metrics/metric');
+
     // Register library
     elgg_register_library('clipit:profile', elgg_get_plugins_path() . 'z09_clipit_profile/lib/profile/functions.php');
     elgg_load_library('clipit:profile');
@@ -61,7 +67,40 @@ function profile_page_handler($page){
         return false;
     }
 }
-
+function userstats_clipit_page_handler($page){
+    $user_id = elgg_get_logged_in_user_guid();
+    $user = array_pop(ClipitUser::get_by_id(array($user_id)));
+    if($user->role != ClipitUser::ROLE_TEACHER){
+        return false;
+    }
+    $title = "Learning analytics";
+    $metrics = array(1, 2);
+    $metrics = array(
+          array(
+              'metric_id' => 1,
+              'context' => array('activity_id' => 478)
+          ),
+        array(
+            'metric_id' => 2,
+            'context' => array('activity_id' => 717)
+        ),
+    );
+    $params = array(
+        'content' => elgg_view('metrics/view', array('entity' => $user, 'metrics' => $metrics)),
+        'title' => $title,
+        'filter' => '',
+    );
+    $body = elgg_view_layout('one_column', $params);
+    echo elgg_view_page($title, $body);
+}
+function getmetric_clipit_page_handler($page){
+    if(isset($page[0])){
+        $file_dir = elgg_get_plugins_path() . 'z09_clipit_profile/pages';
+        $id = (int)$page[0];
+        set_input("id", $id);
+        include($file_dir . "/metric.php");
+    }
+}
 /**
  * @param $page
  * @return bool
