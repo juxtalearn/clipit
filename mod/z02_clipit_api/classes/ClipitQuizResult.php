@@ -28,6 +28,8 @@ class ClipitQuizResult extends UBItem {
      * @var int Id of User who posted this Quiz Result
      */
     public $user = 0;
+
+    public $answer; //
     /**
      * @var bool Determines if this Result is correct (true) or incorrect (false)
      */

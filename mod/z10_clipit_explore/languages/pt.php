@@ -12,9 +12,9 @@
  */
 $portuguese = array(
     'search:results_for' => 'Resultados para',
-    'search:not_found' => 'Nao foram encontrados resultados',
+    'search:not_found' => 'Não foram encontrados resultados',
     'search:reset' => 'Reiniciar pesquisa',
-    'explore:menu' => 'Publicaçoes',
+    'explore:menu' => 'Publicações',
 );
 
 add_translation('pt', $portuguese);

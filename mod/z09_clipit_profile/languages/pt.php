@@ -8,7 +8,7 @@ $portuguese = array(
     'user:logout' => 'Sair',
     'profile' => 'Perfil',
     'profile:stats' => 'Learning Analytics',
-    'timeline:none' => 'Nao encontrado',
+    'timeline:none' => 'Não encontrado',
     'timeline:public' => 'Public timeline',
     // Settings
     'profile:settings:password' => 'Alterar password',
