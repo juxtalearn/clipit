@@ -29,7 +29,7 @@ class ClipitQuizResult extends UBItem {
      */
     public $user = 0;
 
-    public $answer; //
+    public $answer; // can be different types, depending on the question type
     /**
      * @var bool Determines if this Result is correct (true) or incorrect (false)
      */
