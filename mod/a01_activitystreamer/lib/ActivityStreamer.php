@@ -1,18 +1,20 @@
 <?php
 
 class ActivityStreamer {
-    static function get_metric($metric_id, $return_id, $context)
+
+    static function get_metric($metric_id, $context)
     {
         global $con;
         global $CONFIG;
-        $runId = false;
 
         if (empty($metric_id) && valid_metric_id($metric_id)) {
             error_log("ActivityStreamer couldn't handle the get_metric request due to a missing or invalid metric_id!");
+            return false;
         }
-        elseif (empty($return_id) && valid_return_id($return_id)) {
-            error_log("ActivityStreamer couldn't handle the get_metric request due to a missing or invalid return_id!");
-        }
+//        elseif (empty($return_id) && valid_return_id($return_id)) {
+//            error_log("ActivityStreamer couldn't handle the get_metric request due to a missing or invalid clipit_la object!");
+//            $clipit_la = false;
+//        }
         else {
             //Retrieve the workbenchurl from the configuration
             $entities = elgg_get_entities(array("types" => "object", "subtypes" => "modactivitystreamer", "owner_guids" => '0', "order_by" => "", "limit" => 0));
@@ -118,6 +120,26 @@ class ActivityStreamer {
             $statement->close();
             $json = json_encode($activities);
 
+            $hashed_data = md5($json);
+            $existing_id = check_for_existing_results($metric_id, $hashed_data);
+
+            if ($existing_id > 0) {
+                //if we found an existing result, we will return its id
+                return $existing_id;
+            }
+            else {
+                //else we will create a new object, store this request in our database and return the id of the new object
+                $return_id = ClipitLA::create(array());
+//                $prop_value_array["return_id"] = (int)$return_id;
+                $prop_value_array["metric_id"] = (int)$metric_id;
+                $prop_value_array["context"] = $context;
+                $prop_value_array["metric_received"] = false;
+                ClipitLA::set_properties($return_id, $prop_value_array);
+                $timestamp = time();
+                store_analysis_request($return_id, $metric_id, $hashed_data, $timestamp);
+            }
+
+
             //Get the user auth token
             $user = elgg_get_logged_in_user_entity();
             $token_string = ClipitSite::get_token($user->username);
@@ -138,10 +160,10 @@ class ActivityStreamer {
             //$json_size = strlen($json);
             //error_log($json_size);
             //error_log($return_url);
-            $runId = file_get_contents($workbenchurl, false, $request_context);
+            file_get_contents($workbenchurl, false, $request_context);
 
         }
-        return $runId;
+        return $return_id;
     }
 
     static function valid_metric_id($metric_id) {
@@ -154,6 +176,8 @@ class ActivityStreamer {
         }
         return $valid;
     }
+
+
 
     static function valid_return_id($return_id) {
         $valid = false;
@@ -213,3 +237,36 @@ class ActivityStreamer {
     }
 }
 
+function store_analysis_request($return_id, $metric_id, $hashed_data, $timestamp) {
+    global $con;
+    global $store_analysis_statement;
+    if ($store_analysis_statement instanceof mysqli_stmt) {
+        $store_analysis_statement->bind_param('iisi', $return_id, $metric_id, $hashed_data, $timestamp);
+        $store_analysis_statement->execute();
+    } else {
+        error_log(mysqli_error($con));
+    }
+}
+
+
+function check_for_existing_results($metric_id, $hashed_data) {
+    global $con;
+    $get_analysis_statement = $con->prepare("SELECT return_id FROM `" . $_SESSION['analysis_table'] . "` " .
+        "WHERE metric_id = ? AND hashed_data = ?;");
+    $existing_id = 0;
+    //Check whether there is an existing result matching the request
+    if ($get_analysis_statement instanceof mysqli_stmt) {
+        $get_analysis_statement->bind_param('is', $metric_id, $hashed_data);
+        $get_analysis_statement->execute();
+        $get_analysis_statement->store_result();
+        $get_analysis_statement->bind_result($id_entry);
+
+        //if there is, we simply need the id, otherwise we will return 0
+        if ($get_analysis_statement->fetch()) {
+            $existing_id = $id_entry;
+        }
+    } else {
+        error_log(mysqli_error($con));
+    }
+    return $existing_id;
+}

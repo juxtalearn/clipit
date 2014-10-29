@@ -102,7 +102,17 @@ if (!isset($entities[0])) {
     $con = mysqli_connect($CONFIG->dbhost, $CONFIG->dbuser, $CONFIG->dbpass, $CONFIG->dbname);
     $result = mysqli_query($con, "SELECT * FROM " . $log_table . ";");
     $ext_log_entries = mysqli_num_rows($result);
-    echo("Extended log contains <strong>" . $ext_log_entries . "</strong>.");
+    echo("Extended log contains <strong>" . $ext_log_entries . "</strong> entries.");
+    $activity_table = $_SESSION['activity_table'];
+    $con = mysqli_connect($CONFIG->dbhost, $CONFIG->dbuser, $CONFIG->dbpass, $CONFIG->dbname);
+    $result = mysqli_query($con, "SELECT * FROM " . $activity_table . ";");
+    $act_entries = mysqli_num_rows($result);
+    echo("ActivityStream contains <strong>" . $act_entries . "</strong> entries.");
+    $analysis_table = $_SESSION['analysis_table'];
+    $con = mysqli_connect($CONFIG->dbhost, $CONFIG->dbuser, $CONFIG->dbpass, $CONFIG->dbname);
+    $result = mysqli_query($con, "SELECT * FROM " . $analysis_table . ";");
+    $analysis_entries = mysqli_num_rows($result);
+    echo("Workbench results contains <strong>" . $analysis_entries . "</strong> entries.");
 
     ?>
 </p>
