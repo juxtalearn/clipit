@@ -852,7 +852,13 @@ function determineActivityType($transaction)
             if (findValue($transaction, "create", ClipitVideo::SUBTYPE, "ObjectId", FALSE) > 0) {
                 $type = "VideoUpload";
             } elseif (findValue($transaction, "create", ClipitFile::SUBTYPE, "ObjectId", FALSE) > 0) {
-                $type = "FileUpload";
+                if (findValue($transaction, "create", ClipitLA::SUBTYPE, "ObjectId", FALSE) == 0 &&
+                    findValue($transaction, "update", ClipitLA::SUBTYPE, "ObjectId", FALSE) == 0) {
+                    $type = "FileUpload";
+                }
+                else {
+                    $type = "Ignore";
+                }
             } elseif (findValue($transaction, "create", ClipitUser::SUBTYPE, "ObjectId", FALSE) > 0) {
                 $type = "AccountCreation";
             } elseif ($transaction[0]['ObjectSubtype'] == 'name') {
