@@ -1,11 +1,19 @@
 <?php
 
+//Título de la página
 $title = "Todas las preguntas";
+
+/*
+ * Obtener todas las preguntas existentes y mostrarlas
+ */
+
 $questions = ClipitQuizQuestion::get_all();
 foreach($questions as $quest){
     
+    //Usuario que ha creado la pregunta
     $user = array_pop(ClipitUser::get_by_id(array($quest->owner_id)));
     
+    //Enlaces para vew, editar y eliminar una pregunta
     $view_quest_url = elgg_get_site_url()."questions/view?id_quest={$quest->id}";
     $edit_quest_url = elgg_get_site_url()."questions/edit?id_quest={$quest->id}";
     $remove_quest_url = elgg_get_site_url()."action/questions/remove?id_quest={$quest->id}";

@@ -2,21 +2,24 @@
 
 use ClipitTrickyTopic;
 
+//Obtener el quiz y su ID
 $quiz = elgg_extract('entity', $vars);
 $id = elgg_extract('id', $vars);
-
+ //Obtener el array de preguntas del quiz
 $questions = ClipitQuiz::get_quiz_questions($id);
 
+//Establecer los enlaces para añadir preguntas nuevas o existentes
 $add_quest_url = elgg_get_site_url()."questions/add2quiz?id_quiz={$id}&option=new";
-$add__quest_list_url = elgg_get_site_url()."questions/add2quiz?id_quiz={$id}&option=list";
+$add_quest_from_list_url = elgg_get_site_url()."questions/add2quiz?id_quiz={$id}&option=list";
 
-if ($quiz->view_mode == "list"){
+//Establecer enlaces para la previsualizacion del quiz segun su view_mode
+if ($quiz->view_mode == ClipitQuiz::VIEW_MODE_LIST){
     $preview_url = elgg_get_site_url()."quizzes/preview?id_quiz={$id}&mode=list";
-} elseif ($quiz->view_mode == "paged"){
+} elseif ($quiz->view_mode == ClipitQuiz::VIEW_MODE_PAGED){
     $preview_url = elgg_get_site_url()."quizzes/preview?id_quiz={$id}&mode=paged";
 }
 
-//Obtengo el nombre del TT a partir de su ID
+//Obtener el TrickyTopic asociado al quiz
 $id_tt = $quiz->tricky_topic;
 $tt = ClipitTrickyTopic::get_by_id(array($id_tt));
 ?>
@@ -41,7 +44,7 @@ $tt = ClipitTrickyTopic::get_by_id(array($id_tt));
 
         <p><strong>View mode: </strong>
              <?php 
-             if ( ($quiz->view_mode) == "list" ){
+             if ( ($quiz->view_mode) == ClipitQuiz::VIEW_MODE_LIST ){
                  echo elgg_view('output/text', array('value' => "En una página"));
              } else {
                  echo elgg_view('output/text', array('value' => "En varias páginas"));
@@ -60,14 +63,19 @@ $tt = ClipitTrickyTopic::get_by_id(array($id_tt));
 
     <div class="buttons" style="float: right; margin-top: 10px; margin-right: 20px;">
         <p><a href="<?php echo $add_quest_url; ?>" class='elgg-button'>Add new question</a></p>
-        <p><a href="<?php echo $add__quest_list_url; ?>" class='elgg-button'>Add question from list</a></p>
+        <p><a href="<?php echo $add_quest_from_list_url; ?>" class='elgg-button'>Add question from list</a></p>
         <p><a href="<?php echo $preview_url; ?>" class='elgg-button'>Preview</a></p>
 
         <?php
-        //El examen sólo se puede corregir si tiene preguntas de desarrollo
+        
+        /*
+         * Mostrar el botón para corregir el examen.
+         * El examen sólo se puede corregir si tiene preguntas de desarrollo
+         */
         if (quiz_has_develop_questions($id)){ 
             $correct_answer = elgg_get_site_url()."quizzes/students_list?id_quiz={$id}";
         ?>
+        
             <p><a href="<?php echo $correct_answer; ?>" class='elgg-button'>Corregir</a></p>
         <?php } ?>
     </div>
@@ -77,6 +85,8 @@ $tt = ClipitTrickyTopic::get_by_id(array($id_tt));
 <div class="questions" style="clear: left;">
     
 <?php
+
+//Mostrar la lista de preguntas del quiz
 foreach($questions as $quest):
 
     $q = array_pop(ClipitQuizQuestion::get_by_id(array($quest)));

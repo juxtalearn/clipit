@@ -1,21 +1,27 @@
 <?php
+
+// Obetner la pregunta, su tipo y su array de respuestas 
 $id = get_input('id_quest');
-$id_quiz = get_input('id_quiz');
 $quest = get_entity($id);
 $respuestas = $quest->option_array;    
-$id_type = $quest->option_type;
+$quest_type = $quest->option_type;
 
-$borrar_url = elgg_get_site_url()."action/questions/limpiar?id_quest={$id}";
+// Obtener el ID del quiz
+$id_quiz = get_input('id_quiz');
 
-if (!$id_quiz){ //La pregunta NO se edita desde un quiz
+//La pregunta NO se edita desde la vista de un quiz
+if (!$id_quiz){ 
     $cancel_url = elgg_get_site_url()."questions/all";
     $limpiar_url = elgg_get_site_url()."questions/edit?id_quest={$id}";
-} else { //La pregunta SI se edita desde un quiz
+    
+//La pregunta SI se edita desde la vista de un quiz
+} else { 
     $cancel_url = elgg_get_site_url()."quizzes/view?id_quiz={$id_quiz}";
     $limpiar_url = elgg_get_site_url()."questions/edit?id_quest={$id}&id_quiz={$id_quiz}";
 }
 
 ?>
+
 <div>
 	<label>
 		<?php echo "Tricky topic"; ?>
@@ -25,7 +31,7 @@ if (!$id_quiz){ //La pregunta NO se edita desde un quiz
         $tt_array = ClipitTrickyTopic::get_all();
         foreach($tt_array as $tt){
             $tt_values[$tt->id] = $tt->name;
-            //sacar los tags de un tt
+            //AQUI sacar los tags de un tt
         }
         
         echo
@@ -78,8 +84,7 @@ if (!$id_quiz){ //La pregunta NO se edita desde un quiz
 			'value' => $quest->description,
 			));
 	?>
-        <!-- <textarea rows="10" cols="50" class="elgg-input-longtext"><?php// echo $quest->description ?></textarea> -->
-</textarea>
+        
 </div>
 
 <div>
@@ -94,16 +99,16 @@ if (!$id_quiz){ //La pregunta NO se edita desde un quiz
 
 <div>
 	<label>
-		<?php echo "Tipo de respuesta: " . $id_type ?>
+		<?php echo "Tipo de respuesta: " . $quest_type ?>
 	</label> 
     
 	<?php 
         
-        switch ($id_type) {
+        switch ($quest_type) {
             //******************************************************************
-            case "Desarrollo":
+            case ClipitQuizQuestion::TYPE_STRING:
                 ?>
-            <div class="qqt" id="d">
+            <div class="qqt" id="<?php echo ClipitQuizQuestion::TYPE_STRING;?>">
                 <br>
                 <label>
                     <?php echo "Respuesta" ?>
@@ -116,8 +121,8 @@ if (!$id_quiz){ //La pregunta NO se edita desde un quiz
             </div>
             <?php break;
             //******************************************************************
-            case "Verdadero o falso":?>
-            <div class="qqt" id="vof">
+            case ClipitQuizQuestion::TYPE_TRUE_FALSE:?>
+            <div class="qqt" id="<?php echo ClipitQuizQuestion::TYPE_TRUE_FALSE;?>">
                 <br>
                 <label>
                     <?php echo "Respuesta 1" ?>
@@ -142,8 +147,8 @@ if (!$id_quiz){ //La pregunta NO se edita desde un quiz
                 
             <?php  break;
             //******************************************************************
-            case "One choice":?>
-            <div class="qqt" id="m1">
+            case ClipitQuizQuestion::TYPE_SELECT_ONE:?>
+            <div class="qqt" id="<?php echo ClipitQuizQuestion::TYPE_SELECT_ONE;?>">
                 <br>
                 <label>
                     <?php echo "Respuesta 1" ?>
@@ -206,8 +211,8 @@ if (!$id_quiz){ //La pregunta NO se edita desde un quiz
             </div>
             <?php   break;
             //******************************************************************
-            case "Multiple choice":?>
-            <div class="qqt" id="m">
+            case ClipitQuizQuestion::TYPE_SELECT_MULTI:?>
+            <div class="qqt" id="<?php echo ClipitQuizQuestion::TYPE_SELECT_MULTI;?>">
                 <br>
                 <label>
                     <?php echo "Respuesta 1" ?>
@@ -275,12 +280,13 @@ if (!$id_quiz){ //La pregunta NO se edita desde un quiz
 		elgg_view('input/pulldown', array(
 			'name' => 'empty_ans',
 			'options_values' => array(
-                                'initial' => "Elige el tipo de pregunta",
-				'd' => "Desarrollo",
-                                'vof' => "Verdadero o falso",
-				'm1' => "One choice",
-                                'm' => "Multiple choice",
-                                ),	
+                                'initial' => "Elige el tipo de respuesta",
+                                ClipitQuizQuestion::TYPE_STRING => "Long question",
+                                ClipitQuizQuestion::TYPE_NUMBER => "Numeric question",
+                                ClipitQuizQuestion::TYPE_TRUE_FALSE => "True or false",
+				ClipitQuizQuestion::TYPE_SELECT_ONE => "One choice",
+                                ClipitQuizQuestion::TYPE_SELECT_MULTI => "Multiple choice",
+                          ),	
                         'onchange' => 'javascript:on_change_type(this.value);'
 			));
                 break;
@@ -296,36 +302,35 @@ if (!$id_quiz){ //La pregunta NO se edita desde un quiz
     }
 </script>
 
-<?php if( ($id_type == "") || ($id_type == NULL) ){   
+<?php if( ($quest_type == "") || ($quest_type == NULL) ){   
     /* Considero las preguntas vacias */
     ?>
 
-<div class="qqt" id="d" style="display:none;">
+<div class="qqt" id="<?php echo ClipitQuizQuestion::TYPE_STRING;?>" style="display:none;">
     <br>
     <label>
 	<?php echo "Respuesta" ?>
     </label> <br>
     <?php 
-    
          echo elgg_view('input/longtext',array(
                     'name' => 'd_resp',
                  ));
     ?>
 </div>
 
-<div class="qqt" id="vof" style="display:none;">
+<div class="qqt" id="<?php echo ClipitQuizQuestion::TYPE_TRUE_FALSE;?>" style="display:none;">
     <br>
     <label>
 	<?php echo "Respuesta 1" ?>
     </label> <br>
     <?php
-    
         echo elgg_view('input/text',array(
                     'name' => 'vof_resp1',
                     ));
     ?>
     <input type="radio" name="vof_ca" value="1"> Selecciona la correcta<br>
     <br>
+    
     <label>
 	<?php echo "Respuesta 2" ?>
     </label> <br>
@@ -343,18 +348,18 @@ if (!$id_quiz){ //La pregunta NO se edita desde un quiz
             document.getElementById(r).style.display = 'block';}
     </script>
 
-<div class="qqt" id="m1" style="display:none;">
+<div class="qqt" id="<?php echo ClipitQuizQuestion::TYPE_SELECT_ONE;?>" style="display:none;">
     <br>
     <label>
 	<?php echo "Respuesta 1" ?>
     </label> <br>
     <?php
-    
         echo elgg_view('input/text',array(
                     'name' => 'm1_resp1',
                 ));?>
     <input type="radio" name="m1_ca" value="1"> Selecciona la correcta<br>
     <br>
+    
     <label>
 	<?php echo "Respuesta 2" ?>
     </label> <br>
@@ -363,6 +368,7 @@ if (!$id_quiz){ //La pregunta NO se edita desde un quiz
                     )); ?>
     <input type="radio" name="m1_ca" value="2">Selecciona la correcta<br>
     <br>
+    
     <label>
 	<?php echo "Respuesta 3" ?>
     </label> <br>
@@ -394,18 +400,18 @@ if (!$id_quiz){ //La pregunta NO se edita desde un quiz
     
 </div>
 
-<div class="qqt" id="m" style="display:none;">
+<div class="qqt" id="<?php echo ClipitQuizQuestion::TYPE_SELECT_MULTI;?>" style="display:none;">
     <br>
     <label>
 	<?php echo "Respuesta 1" ?>
     </label> <br>
     <?php
-    
         echo elgg_view('input/text',array(
                     'name' => 'm_resp1',
                 )); ?>
     <input type="checkbox" name="m_ca[]" value="1"> Selecciona la correcta<br>
     <br>
+    
     <label>
 	<?php echo "Respuesta 2" ?>
     </label> <br>
@@ -414,6 +420,7 @@ if (!$id_quiz){ //La pregunta NO se edita desde un quiz
             )); ?>
     <input type="checkbox" name="m_ca[]" value="2">Selecciona la correcta<br>
     <br>
+    
     <label>
 	<?php echo "Respuesta 3" ?>
     </label> <br>
@@ -456,7 +463,7 @@ if (!$id_quiz){ //La pregunta NO se edita desde un quiz
 		));
         echo elgg_view('input/hidden', array(
 			'name' => 'ta',
-                        'value' => $id_type,
+                        'value' => $quest_type,
 		));
         echo elgg_view('input/submit', array(
 			'value' => "Guardar",
