@@ -14,8 +14,8 @@
 <li>
     <?php echo elgg_view('output/url', array(
         'href'  => "admin",
-        'title' => elgg_echo('admin'),
-        'text'  => elgg_echo('admin')
+        'title' => elgg_echo('admin:page'),
+        'text'  => elgg_echo('admin:page')
     ));
     ?>
 </li>

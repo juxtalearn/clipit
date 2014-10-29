@@ -47,7 +47,6 @@ $rating = elgg_extract("rating", $vars);
         <button type="button" data-toggle="modal" data-target="#add-video" class="btn btn-default"><?php echo elgg_echo("video:add");?></button>
     </div>
 <?php endif; ?>
-
 <ul class="video-list">
     <?php
     foreach($entities_ids as $video_id):
