@@ -30,6 +30,9 @@ echo elgg_view("input/hidden", array(
 echo elgg_view("input/hidden", array(
     'name' => 'tags',
 ));
+//
+//elgg_unregister_js("clipit:fileupload");
+//elgg_load_js("jquery:iframe_transport");
 ?>
 <script>
     $(function(){
@@ -38,6 +41,13 @@ echo elgg_view("input/hidden", array(
 //        alert("max");
 //    });
         $(".chosen-select-items").chosen();
+
+        $('form').on('click', 'input[type=submit]', function(evt) {
+            if($(this.form).find(":file").val() != '' ) {
+                $("#uploading").prependTo($(this).closest(".modal-content")).show();
+                $("body").css({"cursor": "progress"});
+            }
+        });
     });
 </script>
 <style>
@@ -45,7 +55,15 @@ echo elgg_view("input/hidden", array(
         width: 100% !important;
     }
 </style>
-<div class="row">
+<div id="uploading" style="display: none;position: absolute;  left: 0;  top: 0;  right: 0;  bottom: 0;  z-index: 999;background: rgba(255,255,255,0.8);">
+    <div style="height: 100%;" class="wrapper separator loading-block">
+        <div>
+            <i class="fa fa-spinner fa-spin blue"></i>
+            <h3 class="blue">Uploading to Youtube...</h3>
+        </div>
+    </div>
+</div>
+<div class="row" style="position: relative;">
     <div class="col-md-12 add-video">
         <div class="video-info">
             <div class="panel-group" id="accordion_add" style="margin-bottom: 10px;">

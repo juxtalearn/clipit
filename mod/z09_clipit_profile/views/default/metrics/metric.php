@@ -28,11 +28,6 @@ $(function(){
                 metric: metric_id
             },
             success: function (data) {
-//                if(data) {
-//                    $content.html(data);
-//                } else {
-//                    setInterval(get_metric, timeout);
-//                }
                 if (data) {
                     clearInterval(refreshAjaxCall);
                     $content.html(data);
@@ -40,12 +35,10 @@ $(function(){
             }
         });
     }
-//    get_metric();
     var refreshAjaxCall = setInterval(get_metric, timeout);
 });
 </script>
-<div class="col-md-6">
-    <?php var_dump($metric_la->id);?>
+<div class="col-md-6__">
     <div class="frame-container metric" id="metric_<?php echo $id;?>" data-metric="<?php echo $metric_la->id;?>">
         <?php echo elgg_view('page/components/loading_block', array('height' => '245px', 'text' => elgg_echo('loading:charts')));?>
     </div>

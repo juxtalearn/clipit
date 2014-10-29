@@ -26,8 +26,8 @@ $object = ClipitSite::lookup($entity_id);
 $user_id = elgg_get_logged_in_user_guid();
 $video_data = video_url_parser($url);
 $entity_class = $object['subtype'];
-
 $entity = array_pop($entity_class::get_by_id(array($entity_id)));
+
 if(count($entity)==0 || trim($title) == "" || trim($description) == ""){
     register_error(elgg_echo("video:cantadd"));
 } else{

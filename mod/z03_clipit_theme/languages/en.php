@@ -5,6 +5,7 @@
  */
 
 $english = array(
+    'admin:page' => 'Administration',
     'clipit:site' => 'ClipIt',
     'loading' => 'loading',
     'loading:content' => 'Loading content',

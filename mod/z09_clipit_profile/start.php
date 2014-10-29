@@ -74,19 +74,8 @@ function userstats_clipit_page_handler($page){
         return false;
     }
     $title = "Learning analytics";
-    $metrics = array(1, 2);
-    $metrics = array(
-          array(
-              'metric_id' => 1,
-              'context' => array('activity_id' => 478)
-          ),
-        array(
-            'metric_id' => 2,
-            'context' => array('activity_id' => 717)
-        ),
-    );
     $params = array(
-        'content' => elgg_view('metrics/view', array('entity' => $user, 'metrics' => $metrics)),
+        'content' => elgg_view('metrics/view', array('entity' => $user)),
         'title' => $title,
         'filter' => '',
     );
