@@ -7,10 +7,9 @@ function quizzes_tool_init() {
     elgg_register_library('questions:functions', elgg_get_plugins_path() . "z11_clipit_quiz/lib/functions.php");
     elgg_load_library('questions:functions');
     
-    //adicionar un item al menu de navegacion
+    //Adicionar items al menu de navegacion
     $item = new ElggMenuItem('quizzes', 'Quizzes', 'quizzes/all');
     elgg_register_menu_item('site', $item);
-    
     
     $item2 = new ElggMenuItem('questions', 'Preguntas', 'questions/all');
     elgg_register_menu_item('site', $item2);
@@ -18,7 +17,7 @@ function quizzes_tool_init() {
     $item3 = new ElggMenuItem('results', 'Estudiante', 'results/all_quizzes');
     elgg_register_menu_item('site', $item3);
     
-    //adicionar un item al menu de navegacion
+    //Adicionar items al menu de navegacion del margen derecho
     elgg_register_menu_item('page', array(
            'name' => 'all',
            'text' => 'Listado Quizzes',
@@ -117,7 +116,6 @@ function questions_page_handler($segments) {
            include elgg_get_plugins_path() . 'z11_clipit_quiz/pages/questions/edit.php';
            break;
     }
-
     return true;
 }
 
@@ -136,7 +134,6 @@ function results_page_handler($segments) {
            include elgg_get_plugins_path() . 'z11_clipit_quiz/pages/results/results.php';
            break;
     }
-
     return true;
 }
 
