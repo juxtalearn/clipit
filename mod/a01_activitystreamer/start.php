@@ -7,14 +7,20 @@ function activitystreamer_init()
     global $con;
     global $transaction_stmt;
     global $logging_stmt;
+    global $store_analysis_statement;
+
     elgg_register_page_handler('activitystreamer', 'activitystreamer_page_handler');
     $_SESSION['logging_table'] = $CONFIG->dbprefix . "extended_log";
     $_SESSION['activity_table'] = $CONFIG->dbprefix . "activitystreams";
+    $_SESSION['analysis_table'] = $CONFIG->dbprefix . "workbench_results";
     $_SESSION['logged'] = false;
     $_SESSION['enabled'] = true;
     $_SESSION['transaction_artifact'] = array();
     $con = mysqli_connect($CONFIG->dbhost, $CONFIG->dbuser, $CONFIG->dbpass, $CONFIG->dbname);
     createTables();
+    $store_analysis_statement = $con->prepare("INSERT DELAYED INTO `" . $_SESSION['analysis_table'] . "` " .
+        "(return_id, metric_id, hashed_data, timestamp) " .
+        "VALUES (?,?,?,?)");
     $transaction_stmt = $con->prepare("INSERT DELAYED INTO `" . $_SESSION['activity_table'] . "` " .
         "(transaction_id, json, actor_id, object_id, group_id, course_id, activity_id, verb, role, timestamp) " .
         "VALUES (?,?,?,?,?,?,?,?,?,?)");
@@ -70,6 +76,15 @@ function createTables()
         "KEY `activity_id` (`activity_id`), " .
         "KEY `verb` (`verb`) " .
         ") ENGINE=MyISAM DEFAULT CHARSET=utf8 DEFAULT COLLATE utf8_general_ci AUTO_INCREMENT=1;");
+    mysqli_query($con, "CREATE TABLE IF NOT EXISTS `" . $_SESSION['analysis_table'] . "` (" .
+        "`return_id` int(255) NOT NULL," .
+        "`metric_id` varchar(255) NOT NULL, " .
+        "`hashed_data` varchar(255) NOT NULL, " .
+        "`timestamp` varchar(255) NOT NULL, " .
+        "PRIMARY KEY (`return_id`), " .
+        "KEY `hashed_data` (`hashed_data`), " .
+        "KEY `metric_id` (`metric_id`)" .
+        ") ENGINE=MyISAM DEFAULT CHARSET=utf8 DEFAULT COLLATE utf8_general_ci;");
 }
 
 function is_session_started()

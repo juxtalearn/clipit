@@ -44,6 +44,7 @@ class ClipitQuiz extends UBItem {
     public $scores_url = "";
     public $author_name = "";
     public $view_mode = "";
+    public $max_time = 0; // Maximum time to perform the quiz since it's opened by a student (0 = unlimited)
 
     /**
      * Loads object parameters stored in Elgg
@@ -60,6 +61,7 @@ class ClipitQuiz extends UBItem {
         $this->scores_url = (string)$elgg_entity->get("scores_url");
         $this->author_name = (string)$elgg_entity->get("author_name");
         $this->view_mode = (string)$elgg_entity->get("view_mode");
+        $this->max_time = (int)$elgg_entity->get("max_time");
     }
 
     /**
@@ -80,6 +82,7 @@ class ClipitQuiz extends UBItem {
         }else{
             $elgg_entity->set("view_mode", (string)$this->view_mode);
         }
+        $elgg_entity->set("max_time", (int)$this->max_time);
     }
 
     /**
