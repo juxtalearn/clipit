@@ -10,7 +10,6 @@ function quizzes_tool_init() {
     //Adicionar items al menu de navegacion
     $item = new ElggMenuItem('quizzes', 'Quizzes', 'quizzes/all');
     elgg_register_menu_item('site', $item);
-    
     $item2 = new ElggMenuItem('questions', 'Preguntas', 'questions/all');
     elgg_register_menu_item('site', $item2);
     
