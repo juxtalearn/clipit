@@ -47,8 +47,8 @@ $id = uniqid();
 <script>
     $(function(){
         $(document).on("change", "select.task-types", function(){
+            var $attach_list =  $(".attach_list[data-attach='<?php echo $id;?>']");
             if($(this).val() == '<?php echo ClipitTask::TYPE_RESOURCE_DOWNLOAD;?>'){
-                var $attach_list =  $(".attach_list[data-attach='<?php echo $id;?>']");
                 $attach_list.toggle();
                 $attach_list.attach_multimedia({
                     data: {
@@ -56,6 +56,8 @@ $id = uniqid();
                         entity_id: "<?php echo $activity->id;?>"
                     }
                 }).loadBy("files");
+            } else {
+                $attach_list.hide();
             }
         });
     });
