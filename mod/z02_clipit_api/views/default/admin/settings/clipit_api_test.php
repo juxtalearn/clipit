@@ -13,6 +13,7 @@ if(isset($_GET["action"])) {
 }
 switch($action) {
     case "git_pull":
+        var_dump("hola");
         $clipit_path = elgg_get_root_path();
         chdir($clipit_path);
         echo exec("git stash save \"auto stash\""),PHP_EOL;
