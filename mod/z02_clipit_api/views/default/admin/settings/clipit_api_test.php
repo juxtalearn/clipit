@@ -19,6 +19,8 @@ switch($action) {
         echo exec("git pull --recurse-submodules");
         echo "<h3 align = center> Succesfully pulled all the files.</h3>";
         break;
+
+
     case "export_users":
         print_r(ClipitUser::export_data());
         break;
