@@ -76,7 +76,7 @@ class ActivityStreamer {
                 $filter = $filter." AND (`verb` = ?)";
             }
             else {
-                $filter = $filter." AND (`verb` = ? OR TRUE)";
+                $filter = $filter." AND (`verb` = ? OR TRUE) AND (`verb` <> 'login') AND (`verb` <> 'logout')";
                 $context['verb'] = "";
             }
             if (isset($context['role']) && ($context['role'] != "")) {
@@ -103,7 +103,14 @@ class ActivityStreamer {
             if ($filter != "") {
                 $sql = $sql." WHERE ". $filter;
             }
-            $sql = $sql." ORDER BY `stream_id`;";
+
+            if (isset($context['debug']) && ($context['debug'] == true)) {
+                $sql = $sql." ORDER BY `stream_id` DESC LIMIT 100;";
+            }
+            else {
+                $sql = $sql." ORDER BY `stream_id`;";
+            }
+
             //error_log($sql);
             $statement = $con->stmt_init();
             $statement->prepare($sql);
