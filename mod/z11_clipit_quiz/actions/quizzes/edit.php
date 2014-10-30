@@ -3,18 +3,11 @@ $id = get_input('id_quiz');
 $title = get_input('title');
 $topic = get_input('topic'); //Coge el ID del TT
 $description = get_input('description');
-$view = get_input('view_mode');
+$view_mode = get_input('view_mode');
 $access = get_input('access');
 $author = get_input('author');
 $owner_id = elgg_get_logged_in_user_guid();
 //$tags = string_to_tag_array(get_input('tags'));
-
-//Establecer el tipo de vista del quiz
-if ($view == 'list'){
-    $view_mode = "list";
-} else {
-    $view_mode = "paged";
-}
 
 //Establecer el tipo de acceso
 if ($access == 'public'){
@@ -44,7 +37,6 @@ if (!$title) {
     ClipitQuiz::set_properties($id, $prop_value_array);
 
     system_message("Quiz modificado correctamente");
-  
     
     $view_quiz_url = elgg_get_site_url()."quizzes/view?id_quiz={$id}";
     forward($view_quiz_url);

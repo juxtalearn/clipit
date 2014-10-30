@@ -1,7 +1,7 @@
 <?php
-$quiz = get_entity(get_input('id_quiz')); //*****
-$id_quiz = get_input("id_quiz");
+$quiz = get_entity(get_input('id_quiz'));
 
+//Título de la página
 $title = $quiz->name;
 
 $params = array(

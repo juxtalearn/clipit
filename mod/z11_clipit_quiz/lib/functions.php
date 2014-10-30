@@ -1,7 +1,11 @@
 <?php
-//Funciones para crear las preguntas con sus respuestas correctas (Profesor)
-//Funcion auxiliar para guardar las respuestas de Desarrollo
-function respuesta_desarrollo(&$option_array, &$val_array){
+
+/*
+* Funciones para crear las preguntas con sus respuestas correctas (Profesor)
+*/
+
+/** Funcion auxiliar para guardar las respuestas de Desarrollo **/
+function save_long_quest(&$option_array, &$val_array){
     $option_array = array(
             "0" => get_input('resp'),
         );
@@ -10,8 +14,8 @@ function respuesta_desarrollo(&$option_array, &$val_array){
         );
 }
 
-//Funcion auxiliar para guardar las respuestas de Verdadero-Falso
-function respuestas_verdadero_falso(&$option_array, &$val_array){
+/** Funcion auxiliar para guardar una pregunta de Verdadero-Falso **/
+function save_true_false(&$option_array, &$val_array){
     $option_array = array(
             "0" => get_input('vof_resp1'),
             "1" => get_input('vof_resp2'),
@@ -29,47 +33,11 @@ function respuestas_verdadero_falso(&$option_array, &$val_array){
 }
 
 
-/* Funcion auxiliar para guardar las respuestas de One Choice.
-** Para pasar parametros por referencia -> & */
-function respuestas_once_choice(&$option_array, &$val_array){
-    //Bucle para guardar las respuestas
-    $i = 1;
-    $index = 0;
-    while ($i <= 5) {
-        if ($i <= 3){ //Las tres primeras resp pueden ser vacias, las guardo siempre
-            $option_array["$index"] =get_input("m1_resp{$i}");
-            //$oa[$index] = get_input("$i");
-        } else if ($i > 3){ //Las resp 4 y 5 opcionales solo las guardo si no son vacias
-            if (get_input("m1_resp{$i}")){
-                $option_array["$index"] = get_input("m1_resp{$i}");
-                 //$oa[$index] = get_input("m1_resp{$i}");
-            } else {  
-                $id_vacia = $i;
-                $index --; //No la guardo, decremento el index
-            }
-        }
-        $i ++;
-        $index ++;   
-    }
-    //Bucle para guardar cuales son correctas/incorrectas
-    $id_resp = get_input('m1_ca');
-    for ($index = 1; $index <= count($option_array); $index++) {
-         //Si habia alguna respuesta vacia (R4 o R5)
-        if ($id_vacia == $index){
-            $id_resp --; //Decremento su ID para cuadrar los arrays paralelos
-        }
-        //Si ha sido seleccionada marco trues
-        $i = $index - 1;
-        if ($id_resp == ($index)) {
-            $val_array["$i"] = "true";
-        } else {
-            $val_array["$i"] = "false";
-        }
-    }
-}
-
-//Guarda todas las respuestas aunque sean campos vacíos
-function r_o_c(&$option_array, &$val_array){
+/*
+ * Funcion auxiliar para guardar las respuestas de One Choice.
+ * Guarda todas las respuestas aunque sean campos vacíos
+ */
+function save_select_one(&$option_array, &$val_array){
     //Bucle para guardar las respuestas
     $i = 1;
     $index = 0;
@@ -91,45 +59,11 @@ function r_o_c(&$option_array, &$val_array){
     }
 }
 
-// Funcion auxiliar para guardar las respuestas de Multi-choice.
-function respuestas_multi_choice (&$option_array, &$val_array){
-    $i = 1;
-    $index = 0;
-    //Bucle para guardar las respuestas
-    while ($i <= 5) {
-        if ($i <= 3){ //Las tres primeras resp pueden ser vacias, las guardo siempre
-            $option_array["$index"] = get_input("m_resp{$i}");
-        } else if ($i > 3){ //Las resp 4 y 5 opcionales solo las guardo si no son vacias
-            if (get_input("m_resp{$i}")){
-                $option_array["$index"] = get_input("m_resp{$i}");
-            } else {  
-                $id_vacia = $i;
-                $index --; //No la guardo, decremento el index
-            }
-        }
-        $i ++;
-        $index ++;   
-    }
-    //Guardar si las respuestas son true o false. Compruebo respuesta a respuesta
-    $checkbox = (array) get_input('m_ca');
-    $j = 0;
-    $z = 1;
-    while ($j < count($option_array)) {
-        if ($id_vacia == $z){
-            $z ++;
-        }
-        if (in_array(($z), $checkbox)) { //La respuesta 1,2,3.. ha sido seleccionada
-            $val_array["$j"] = "true";
-        } else { //No ha sido seleccionada
-            $val_array["$j"] = "false";
-        }
-        $j ++;
-        $z ++;
-    }
-}
-
-//Guarda las vacias tambien
-function r_m_c (&$option_array, &$val_array){
+/*
+ * Funcion auxiliar para guardar las respuestas de Multi-choice.
+ * Guarda todas las respuestas aunque sean campos vacíos
+ */
+function save_select_multi (&$option_array, &$val_array){
     $i = 1;
     $index = 0;
     //Bucle para guardar las respuestas
@@ -153,7 +87,10 @@ function r_m_c (&$option_array, &$val_array){
     }
 }
 
-//Funciones para corregir las respuestas dadas por el estudiante
+
+/*
+ * Funciones para corregir las respuestas dadas por el estudiante
+ */
 function test_vof(&$va, &$select_answer, &$correct){
     if (($select_answer == 1) && ($va[0] === "true")) {
                 $correct = true;

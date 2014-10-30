@@ -1,37 +1,49 @@
 <?php
+
+// Obetner el ID de la pregunta
 $id_quiz = get_input('id_quiz');
 
 /*** Si la pregunta NO esta asociada a un quiz ***/
 if (!$id_quiz){
+    
     $cancel_url = elgg_get_site_url()."questions/all";
     $limpiar_url = elgg_get_site_url()."questions/add";
+    
     //Obtengo todos los TT del sistema
     $tt_array = ClipitTrickyTopic::get_all();
     foreach ($tt_array as $tt) {
         $tt_values[$tt->id] = $tt->name;
     }
+    
     //Obtengo todos los Tags del sistema
     $tag_array = ClipitTag::get_all();
     foreach ($tag_array as $tag) {
         $tag_values[$tag->id] = $tag->name;
     }
-} else { //Si la pregunta esta asociada a un quiz
+    
+/*** Si la pregunta esta asociada a un quiz ***/
+} else { 
+    
     $cancel_url = elgg_get_site_url()."quizzes/view?id_quiz={$id_quiz}";
     $limpiar_url = elgg_get_site_url()."questions/add2quiz?id_quiz={$id_quiz}&option=new";
-    //Obtengo el TT asociado al quiz
+    
+    //Obtengo el quiz
     $quiz = array_pop(ClipitQuiz::get_by_id(array($id_quiz)));
+    
+    //Obtengo el TT asociado al quiz
     $tt_id = $quiz->tricky_topic;
     $tt = array_pop(ClipitTrickyTopic::get_by_id(array($tt_id)));
     
-    //Obtengo los Tags asociados al TT del quiz
+    //Obtengo los Tags asociados al TT
     $tag_array = ClipitTrickyTopic::get_tags($tt_id);
     foreach ($tag_array as $id_tag) {
         $tag = array_pop(ClipitTag::get_by_id(array($id_tag)));
         $tag_values[$id_tag] = $tag->name;
     }
 }   
-var_dump($tag_values);
+
 ?>
+
 <script language="javascript" src="js/jquery-1.2.6.min.js"></script>
 <script language="javascript" type="text/javascript">
 $(document).ready(function(){
@@ -45,39 +57,26 @@ $(document).ready(function(){
    })
 });
 </script>
- <!--                
-<select name="topics" id="topics">
-    <option>- - Seleccionar - -</option>
-    <?php/*
-        foreach ($tt_values as $id => $name){
-            echo '<option value="'.$id.'">'.$name.'</option>';
-        }*/
-    ?>
-</select>
-<a id="prueba"></a>
-<select name="etiquetas" id="etiquetas">
-    <option>- - - - - - -</option>
-</select>
-
-<select name="select3">
-    <option>- - - - - - -</option>
-</select>
--->
 
 <div id="etiquetado" style="display: flex;">
-<div id="topics">
+    
+    <div id="topics">
 	<label>
 		<?php echo "Tricky topic"; ?>
 	</label> <br>
 	
         <?php 
-        if(!$id_quiz){ //Si no esta asociada a un quiz muestro Topics del sistema
+        
+        /** Si la pregunta no esta asociada a un quiz, muestro TT del sistema **/
+        if(!$id_quiz){ 
              echo
 		elgg_view('input/pulldown', array(
 			'name' => 'topic',
                         'options_values' => $tt_values,
                         //'onchange' => 'javascript:slctryole(this, this.form.select2);',
 			));
+             
+        /** Si la pregunta está asociada a un quiz, muestro el TT del quiz **/
         } else {
             echo
                 elgg_view('input/pulldown', array(
@@ -88,22 +87,23 @@ $(document).ready(function(){
                 ));
         }
 	?>
-</div>
+    </div>
 
-<div id="etiquetas" style="margin-left: 50px;">
+    <div id="etiquetas" style="margin-left: 50px;">
 	<label>
 		<?php echo "Etiquetas" ?>
         </label> <br>
         <?php
-        
         echo
 		elgg_view('input/pulldown', array(
 			'name' => 'tags[]',
 			'options_values' => $tag_values,
 			));
 	?>
+    </div>
+    
 </div>
-</div>
+
 <div>
 	<label>
 		<?php echo "Titulo" ?>
@@ -136,11 +136,12 @@ $(document).ready(function(){
 			'name' => 'type_answer',
 			'options_values' => array(
                                 'initial' => "Elige el tipo de respuesta",
-				'd' => "Desarrollo",
-                                'vof' => "Verdadero o falso",
-				'm1' => "One choice",
-                                'm' => "Multiple choice",
-                                ),	
+                                ClipitQuizQuestion::TYPE_STRING => "Long question",
+                                ClipitQuizQuestion::TYPE_NUMBER => "Numeric question",
+                                ClipitQuizQuestion::TYPE_TRUE_FALSE => "True or false",
+				ClipitQuizQuestion::TYPE_SELECT_ONE => "One choice",
+                                ClipitQuizQuestion::TYPE_SELECT_MULTI => "Multiple choice",
+                          ),	
                         'onchange' => 'javascript:on_change_type(this.value);'
 			));
         
@@ -154,14 +155,14 @@ $(document).ready(function(){
     }
 </script>
 
-<div class="qqt" id="d" style="display:none;">
+<div class="qqt" id="<?php echo ClipitQuizQuestion::TYPE_STRING;?>" style="display:none;">
     <label>
 	<?php echo "Respuesta" ?>
     </label> <br>
     <?php echo elgg_view('input/longtext',array('name' => 'd_resp')); ?>
 </div>
 
-<div class="qqt" id="vof" style="display:none;">
+<div class="qqt" id="<?php echo ClipitQuizQuestion::TYPE_TRUE_FALSE;?>" style="display:none;">
     <label>
 	<?php echo "Respuesta 1" ?>
     </label> <br>
@@ -175,14 +176,14 @@ $(document).ready(function(){
     <input type="radio" name="vof_ca" value="2">Selecciona la correcta<br>
 </div>
 
-<!-- Permitir añadir mas respuestas en tipo Once choice y Multiple choice -->
+<!-- Permitir añadir más respuestas en tipo Once choice y Multiple choice -->
     <script type="text/javascript">
         function mostrar(clicked_id, r){
             document.getElementById(clicked_id).style.display = 'none';
             document.getElementById(r).style.display = 'block';}
     </script>
 
-<div class="qqt" id="m1" style="display:none;">
+<div class="qqt" id="<?php echo ClipitQuizQuestion::TYPE_SELECT_ONE;?>" style="display:none;">
     <label>
 	<?php echo "Respuesta 1" ?>
     </label> <br>
@@ -223,7 +224,7 @@ $(document).ready(function(){
     
 </div>
 
-<div class="qqt" id="m" style="display:none;">
+<div class="qqt" id="<?php echo ClipitQuizQuestion::TYPE_SELECT_MULTI;?>" style="display:none;">
     <label>
 	<?php echo "Respuesta 1" ?>
     </label> <br>

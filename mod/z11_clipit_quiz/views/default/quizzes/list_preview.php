@@ -2,15 +2,18 @@
 
 use ClipitTrickyTopic;
 
+//Obtener el quiz, su ID y su array de preguntas
 $quiz = elgg_extract('entity', $vars);
 $id = elgg_extract('id', $vars);
-$view_quiz_url = elgg_get_site_url()."quizzes/view?id_quiz={$id}";
-
 $questions = ClipitQuiz::get_quiz_questions($id);
 
-//Obtengo el nombre del TT a partir de su ID
+//Obtener el TT asociado al quiz
 $id_tt = $quiz->tricky_topic;
 $tt = ClipitTrickyTopic::get_by_id(array($id_tt));
+
+//Link a la vista del quiz
+$view_quiz_url = elgg_get_site_url()."quizzes/view?id_quiz={$id}";
+
 ?>
 
 <div class="quiz">
@@ -25,12 +28,17 @@ $tt = ClipitTrickyTopic::get_by_id(array($id_tt));
 </div>
 
 <?php
-$num = 1;
+
+/*
+ * Mostrar todas las preguntas del quiz
+ */
+
+$num = 1; //Contador para numerar las preguntas
 foreach($questions as $quest):
     $q = array_pop(ClipitQuizQuestion::get_by_id(array($quest))); 
     $type = $q-> option_type; //Guardo el tipo de pregunta
     $oa = $q-> option_array; //Guardo el array de respuestas
-    $va = $q-> validation_array; //Guardo el array de validacion de respuestas
+
 ?>
 
 <div class="questions">
@@ -48,11 +56,11 @@ foreach($questions as $quest):
         
         <?php 
           switch ($type) {
-              case "Desarrollo":
-                  //No mostrar nada ?>
+              case ClipitQuizQuestion::TYPE_STRING:
+                  echo elgg_view('input/longtext'); ?>
                   <?php break;
               //*******************************************************************************************
-              case "Verdadero o falso":?>              
+              case ClipitQuizQuestion::TYPE_TRUE_FALSE:?>              
                      <div class="qqt" id="vof" style="margin-left: 30px;">
                         <br><input type="radio" name="vof_ca" value="1">
                         <?php
@@ -65,7 +73,7 @@ foreach($questions as $quest):
                     </div>
                   <?php break;
               //*******************************************************************************************
-              case "One choice":?>
+              case ClipitQuizQuestion::TYPE_SELECT_ONE:?>
                  <div class="qqt" id="m1" style="margin-left: 30px;">
                         <br><input type="radio" name="m1_ca" value="1">
                         <?php
@@ -94,7 +102,7 @@ foreach($questions as $quest):
                  </div>
                  <?php break;
             //****************************************************************************
-            case "Multiple choice":?>
+            case ClipitQuizQuestion::TYPE_SELECT_MULTI:?>
                  <div class="qqt" id="m" style="margin-left: 30px;">
                         <br><input type="checkbox" name="m_ca[]" value="1">
                         <?php
