@@ -12,8 +12,13 @@ if(isset($_GET["action"])) {
     return;
 }
 switch($action) {
-    case "import_users":
-        print_r(ClipitUser::import_data("/tmp/clipit_users.xlsx"));
+    case "git_pull":
+        $path = "/var/www/repos/$_POST[project]"; 
+        $a='';
+        chdir($path);
+        exec("git add .");  
+        exec("git commit -m'message'");
+        echo "<h3 align = center> Succesfully commited all the files.</h3>";
         break;
     case "export_users":
         print_r(ClipitUser::export_data());
