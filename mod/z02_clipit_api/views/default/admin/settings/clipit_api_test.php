@@ -13,12 +13,14 @@ if(isset($_GET["action"])) {
 }
 switch($action) {
     case "git_pull":
-        var_dump("hola");
         $clipit_path = elgg_get_root_path();
         chdir($clipit_path);
+        echo "<h3>Performing git stash...";
         echo exec("git stash save \"auto stash\"");
+        echo "... done</h2>";
+        echo "<h3>Performing git pull...";
         echo exec("git pull --recurse-submodules");
-        echo "<h3 align = center> Succesfully pulled all the files.</h3>";
+        echo "... done</h3>";
         break;
     case "export_users":
         print_r(ClipitUser::export_data());
