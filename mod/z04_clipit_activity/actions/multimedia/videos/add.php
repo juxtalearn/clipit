@@ -52,7 +52,7 @@ if(count($entity)==0 || trim($title) == "" || trim($description) == ""){
     }
     if($new_video_id){
         $entity_class::add_videos($entity_id, array($new_video_id));
-        if($entity_class == 'ClipitGroup' && (isset($labels) || isset($tags))) {
+        if((isset($labels) || isset($tags))) {
             // Labels
             $total_labels = array();
             foreach ($labels as $label) {

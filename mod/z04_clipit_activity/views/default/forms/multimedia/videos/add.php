@@ -12,12 +12,20 @@
  */
 $entity = elgg_extract('entity', $vars);
 $hasToken = get_config("google_refresh_token");
-$group_id = $entity->id;
-$activity = array_pop(ClipitActivity::get_by_id(array($entity->activity)));
-$group_tags = ClipitGroup::get_tags($group_id);
-$tt = array_pop(ClipitTrickyTopic::get_by_id(array($activity->tricky_topic)));
-$tt_tags = $tt->tag_array;
-$tt_tags = array_diff($tt_tags, $group_tags);
+$object = ClipitSite::lookup($entity->id);
+switch($object['subtype']){
+    case "ClipitGroup":
+        $group_tags = ClipitGroup::get_tags($entity->id);
+        $activity = array_pop(ClipitActivity::get_by_id(array($entity->activity)));
+        $tt = array_pop(ClipitTrickyTopic::get_by_id(array($activity->tricky_topic)));
+        $tt_tags = $tt->tag_array;
+        $tt_tags = array_diff($tt_tags, $group_tags);
+        break;
+    case "ClipitActivity":
+        $tt = array_pop(ClipitTrickyTopic::get_by_id(array($entity->tricky_topic)));
+        $tt_tags = $tt->tag_array;
+        break;
+}
 //load jQuery Chosen
 elgg_load_js("jquery:chosen");
 $performance_items = $activity->performance_item_array;
@@ -47,6 +55,22 @@ echo elgg_view("input/hidden", array(
                 $("#uploading").prependTo($(this).closest(".modal-content")).show();
                 $("body").css({"cursor": "progress"});
             }
+//            var form = $(this.form);
+//            evt.preventDefault();
+//            tinyMCE.triggerSave();
+//            $.ajax(form.prop("action"), {
+//                data: form.serializeArray(),
+//                files: form.find(':file'),
+//                iframe: true,
+//                processData: false
+//            }).always(function() {
+//                form.removeClass('loading');
+//            }).done(function(data) {
+//                console.log(data);
+//                form.find(':file').val('');
+////                form.submit();
+//                location.href = "";
+//            });
         });
     });
 </script>
