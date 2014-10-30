@@ -12,8 +12,15 @@ if(isset($_GET["action"])) {
     return;
 }
 switch($action) {
-    case "import_users":
-        print_r(ClipitUser::import_data("/tmp/clipit_users.xlsx"));
+    case "git_pull":
+        $clipit_path = elgg_get_root_path();
+        chdir($clipit_path);
+        echo "<h3>Performing git stash... ";
+        echo exec("git stash save \"auto stash\"");
+        echo " ... done</h2>";
+        echo "<h3>Performing git pull... ";
+        echo exec("git pull --recurse-submodules");
+        echo " ... done</h3>";
         break;
     case "export_users":
         print_r(ClipitUser::export_data());
@@ -21,6 +28,5 @@ switch($action) {
     case "export_activities":
         print_r(ClipitActivity::export_data());
         break;
-
 }
 

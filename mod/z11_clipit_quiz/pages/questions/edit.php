@@ -1,7 +1,8 @@
 <?php
-$quest = get_entity(get_input('id_quest'));
-$id_quest = get_input("id_quest");
 
+$quest = get_entity(get_input('id_quest'));
+
+// Título de la página
 $title = $quest->name;
 
 $params = array(
@@ -9,6 +10,7 @@ $params = array(
     'filter'    => '',
     'title'     => $title,
 );
+
 $body = elgg_view_layout('content', $params);
 echo elgg_view_page($params['title'], $body);
 

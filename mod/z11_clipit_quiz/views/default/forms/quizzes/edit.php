@@ -58,8 +58,8 @@ $tt_values[$id_tt] = $tt[$id_tt]->name;
 		elgg_view('input/pulldown', array(
 			'name' => 'view_mode',
                         'options_values' => array(
-                            'list' => "En una página",
-                            'paged' => "En varias páginas",
+                            ClipitQuiz::VIEW_MODE_LIST => "En una página",
+                            ClipitQuiz::VIEW_MODE_PAGED => "En varias páginas",
                         )
 			));
 	?>    

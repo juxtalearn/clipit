@@ -1,11 +1,16 @@
 <?php
+
+//Obtener el quiz y su ID
 $id_quiz = get_input('id_quiz');
 $quiz = array_pop(ClipitQuiz::get_by_id(array($id_quiz)));
-$view_quiz_url = elgg_get_site_url()."quizzes/view?id_quiz={$id_quiz}";
 
-//Obtengo el nombre del TT a partir de su ID
+//Obtener el TT asociado al quiz
 $id_tt = $quiz->tricky_topic;
 $tt = ClipitTrickyTopic::get_by_id(array($id_tt));
+
+//Link a la vista del quiz
+$view_quiz_url = elgg_get_site_url()."quizzes/view?id_quiz={$id_quiz}";
+
 ?>
 
 <div class="quiz">
@@ -30,14 +35,18 @@ $tt = ClipitTrickyTopic::get_by_id(array($id_tt));
 </script>
 
 <?php
-$questions_ids = ClipitQuiz::get_quiz_questions($id_quiz);
+/*
+ * Mostrar pregunta a pregunta todas las questions del quiz
+ */
+
+$questions_ids = ClipitQuiz::get_quiz_questions($id_quiz); 
 $questions = ClipitQuizQuestion::get_by_id($questions_ids, true);
 $i = 1;
-//$x = 1;
+
 foreach ($questions as $question) :
+    $id_quest = $question->id;
     $type = $question->option_type;
     $oa = $question->option_array;
-    $id_quest = $question->id;
 
 ?>
 
@@ -56,13 +65,13 @@ foreach ($questions as $question) :
         
         <?php 
           switch ($type) {
-              case "Desarrollo":?>
+              case ClipitQuizQuestion::TYPE_STRING:?>
                     <div class="qqt" id="d">
                         <br><?php echo elgg_view('input/longtext',array('name' => 'd_resp')); ?>
                     </div><br><br>
                   <?php break;
               //*******************************************************************************************
-              case "Verdadero o falso":?>              
+              case ClipitQuizQuestion::TYPE_TRUE_FALSE:?>              
                      <div class="qqt" id="vof" style="margin-left: 30px;">
                         <br><input type="radio" name="<?php echo "vof_{$id_quest}"?>" value="1">
                         <?php
@@ -75,7 +84,7 @@ foreach ($questions as $question) :
                     </div><br><br>
                   <?php break;
               //*******************************************************************************************
-              case "One choice":?>
+              case ClipitQuizQuestion::TYPE_SELECT_ONE:?>
                  <div class="qqt" id="m1" style="margin-left: 30px;">
                         <br><input type="radio" name="<?php echo "m1_{$id_quest}"?>" value="1">
                         <?php
@@ -104,7 +113,7 @@ foreach ($questions as $question) :
                  </div><br><br>
                  <?php break;
             //****************************************************************************
-            case "Multiple choice":?>
+            case ClipitQuizQuestion::TYPE_SELECT_MULTI:?>
                  <div class="qqt" id="m" style="margin-left: 30px;">
                         <br><input type="checkbox" name="<?php echo "m_{$id_quest}[]"?>" value="1">
                         <?php
@@ -141,8 +150,12 @@ foreach ($questions as $question) :
        </div>
     <div class="buttons">
      <?php     
+     
           $x = $i;
-          if($i < count($questions) && $i > 1){ //Si No es ni la primera ni la última pregunta
+          
+          //Si NO es ni la primera ni la última pregunta
+          if($i < count($questions) && $i > 1){ 
+              //Muestro los botones anterior y siguiente 
               echo elgg_view('output/url', array(
                         "href" => "javascript:;", 
                         "class" => "elgg-button step",
@@ -156,14 +169,20 @@ foreach ($questions as $question) :
                         "text" => "Siguiente -->",
                         "data-step" => $x+1,
                 )) . "<br>";
-          } elseif ($i == 1) { //Si es la primera pregunta
+              
+           //Si es la primera pregunta    
+          } elseif ($i == 1) {
+              //Muestro el botón siguiente
               echo elgg_view('output/url', array(
                         "href" => "javascript:;", 
                         "class" => "elgg-button step",
                         "text" => "Siguiente -->",
                         "data-step" => $x+1,
                 )) . "<br>";
-          } else { //Si es la última pregunta
+              
+           //Si es la última pregunta   
+          } else { 
+              //Muestro los botones anterior y terminar
               echo elgg_view('output/url', array(
                             "href" => "javascript:;", 
                             "class" => "elgg-button step",

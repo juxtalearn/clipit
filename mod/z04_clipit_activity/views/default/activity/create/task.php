@@ -43,6 +43,9 @@ switch($task_type){
         break;
 }
 $task_types = array_merge(array('' => elgg_echo('task:select:task_type')), $task_types);
+if($vars['required'] !== false){
+    $required = true;
+}
 ?>
 
 <div class="col-md-12">
@@ -57,7 +60,7 @@ $task_types = array_merge(array('' => elgg_echo('task:select:task_type')), $task
                     'name' => "task{$input_array}[title]",
                     'class' => 'form-control input-task-title',
                     'value' => $task->name,
-                    'required' => true
+                    'required' => $required
                 ));
                 ?>
             </div>
@@ -68,7 +71,7 @@ $task_types = array_merge(array('' => elgg_echo('task:select:task_type')), $task
                 'name' => "task{$input_array}[type]",
                 'class' => 'form-control task-types',
                 'style' => 'padding-top: 5px;padding-bottom: 5px;',
-                'required' => true,
+                'required' => $required,
                 'disabled' => $task->task_type ? true : $disabled,
                 'value' => $vars['default_task'] ? $vars['default_task'] : $task->task_type,
                 'options_values' => $task_types
@@ -89,7 +92,7 @@ $task_types = array_merge(array('' => elgg_echo('task:select:task_type')), $task
                 'name' => "task{$input_array}[start]",
                 'class' => 'form-control datepicker input-task-start',
                 'value' => $task->start ? date("d/m/Y", $task->start) : "",
-                'required' => true
+                'required' => $required
             ));
             ?>
         </div>
@@ -99,7 +102,7 @@ $task_types = array_merge(array('' => elgg_echo('task:select:task_type')), $task
                 'name' => "task{$input_array}[end]",
                 'class' => 'form-control datepicker input-task-end',
                 'value' => $task->end ? date("d/m/Y", $task->end) : "",
-                'required' => true
+                'required' => $required
             ));
             ?>
         </div>
