@@ -97,7 +97,8 @@ function video_url_parser($url){
     $video_patterns = array('#(((http://)?)|(^./))(((www.)?)|(^./))youtube\.com/watch[?]v=([^\[\]()<.,\s\n\t\r]+)#i'
     ,'#(((http://)?)|(^./))(((www.)?)|(^./))youtu\.be/([^\[\]()<.,\s\n\t\r]+)#i'
     ,'/(http:\/\/)(www\.)?(vimeo\.com\/groups)(.*)(\/videos\/)([0-9]*)/'
-    ,'/(http:\/\/)(www\.)?(vimeo.com\/)([0-9]*)/');
+    ,'/(http:\/\/)(www\.)?(vimeo.com\/)([0-9]*)/'
+    ,'/(https:\/\/)(www\.)?(vimeo.com\/)([0-9]*)/');
     $parse_url = parse_url($url);
     $favicon_url_base = "http://www.google.com/s2/favicons?domain=";
     foreach($video_patterns as $video_pattern){
