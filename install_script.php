@@ -1,7 +1,6 @@
 <?php
 
 $git_url = "https://github.com/juxtalearn/clipit.git";
-$git_tag = "stable";
 $mysql_host = $_POST["mysql_host"];
 $mysql_schema = $_POST["mysql_schema"];
 $mysql_user = $_POST["mysql_user"];
