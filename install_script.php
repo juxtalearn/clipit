@@ -1,7 +1,5 @@
 <?php
 
-$install_folder = $_POST["install_folder"];
-$data_folder = $install_folder."_data";
 $git_url = "https://github.com/juxtalearn/clipit.git";
 $git_tag = "stable";
 $mysql_host = $_POST["mysql_host"];
@@ -13,21 +11,20 @@ echo "<html><body><div align=\"center\">";
 echo "<h1>ClipIt Install Script</h1>";
 echo "<h2>Install Progress</h2>";
 
-echo "<p>creating install folder...</p>";
-echo exec("mkdir ".$install_folder." ".$data_folder);
-
 echo "<p>cloning github repository...</p>";
-echo exec("git clone --recursive ".$git_url." ".$install_folder);
-echo exec("cd ".$install_folder." && git checkout ".$git_tag);
+echo exec("git clone -b stable --recursive ".$git_url." git_tmp");
+echo exec("mv git_tmp/* . && mv git/.* .");
+echo exec("rmdir git_tmp");
 
-echo "<p>setting permissions...</p>";
-echo exec("chmod -R 777 ".$install_folder." ".$data_folder);
+echo "<p>configuring data folder and permissions...</p>";
+echo exec("mkdir data");
+echo exec("chmod -R 777 .");
 
 echo "<p>creating database...</p>";
 echo exec("mysql -h".$mysql_host." -u".$mysql_user." -p".$mysql_pass." -e'create database ".$mysql_schema.";'");
 
 echo "<p>creating settings.php file...</p>";
-$file_name = fopen($install_folder."/engine/settings.php", "w") or die("Unable to open file!");
+$file_name = fopen("engine/settings.php", "w") or die("Unable to open file!");
 $file_content = "<?php\n";
 $file_content .= "global \$CONFIG;\n";
 $file_content .= "if (!isset(\$CONFIG)) { \$CONFIG = new stdClass; }\n";
@@ -43,7 +40,7 @@ fwrite($file_name, $file_content);
 fclose($file_name);
 
 echo "<p><b>ClipIt has been installed correctly!</b></p>";
-echo "<form method='GET' action=\"".$install_folder."/install.php\">";
+echo "<form method='GET' action=\"install.php\">";
 echo "<input type=\"hidden\" name=\"step\" value=\"database\">";
 echo "<input type=\"submit\" value=\"Continue...\">";
 echo "</form>";
