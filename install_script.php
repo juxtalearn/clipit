@@ -22,6 +22,23 @@ echo exec("cd ".$install_folder." && git checkout ".$git_tag);
 echo "<p>setting permissions...</p>";
 echo exec("chmod -R 777 ".$install_folder." ".$data_folder);
 
+echo "<p>creating settings.php file...</p>";
+$settings_file = fopen($install_folder."/engine/newfile.txt", "w") or die("Unable to open file!");
+$config = "<?php\n";
+$config = "global $CONFIG;\n";
+$config = "if (!isset($CONFIG)) {\n";
+$config = "$CONFIG = new stdClass;\n";
+$config = "}\n";
+$config = "$CONFIG->dbuser = 'root';\n";
+$config = "$CONFIG->dbpass = '';\n";
+$config = "$CONFIG->dbname = 'pebs_test';\n";
+$config = "$CONFIG->dbhost = 'localhost';\n";
+$config = "$CONFIG->dbprefix = 'clipit_';\n";
+$config = "$CONFIG->broken_mta = FALSE;\n";
+$config = "$CONFIG->db_disable_query_cache = FALSE;\n";
+$config = "$CONFIG->min_password_length = 6;\n";
+fwrite($settings_file, $config);
+fclose($settings_file);
 echo "<p>creating database...</p>";
 echo exec("mysql -u".$mysql_user." -p".$mysql_pass." -e'create database ".$mysql_schema.";'");
 
