@@ -12,7 +12,8 @@ echo "<h2>Install Progress</h2>";
 
 echo "<p>cloning github repository...</p>";
 echo exec("git clone -b stable --recursive ".$git_url." git_tmp");
-echo exec("mv git_tmp/* . && mv git/.* .");
+echo exec("mv git_tmp/*");
+echo exec("mv git/.* .");
 echo exec("rmdir git_tmp");
 
 echo "<p>configuring data folder and permissions...</p>";
