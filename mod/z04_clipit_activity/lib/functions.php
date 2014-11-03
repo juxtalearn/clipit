@@ -91,6 +91,12 @@ function text_reference($text_message){
  * @return array|bool
  */
 function video_url_parser($url){
+    if ( $parse_url = parse_url($url) ) {
+        if ( !isset($parts["scheme"]) )
+        {
+            $url = "http://$url";
+        }
+    }
     if(!isset($url) || !filter_var($url, FILTER_VALIDATE_URL)){
         return false;
     }
@@ -99,8 +105,8 @@ function video_url_parser($url){
     ,'/(http:\/\/)(www\.)?(vimeo\.com\/groups)(.*)(\/videos\/)([0-9]*)/'
     ,'/(http:\/\/)(www\.)?(vimeo.com\/)([0-9]*)/'
     ,'/(https:\/\/)(www\.)?(vimeo.com\/)([0-9]*)/');
-    $parse_url = parse_url($url);
     $favicon_url_base = "http://www.google.com/s2/favicons?domain=";
+
     foreach($video_patterns as $video_pattern){
         if (preg_match($video_pattern, $url) > 0){
             // Youtube

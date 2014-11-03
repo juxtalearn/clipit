@@ -16,7 +16,7 @@ $body .= elgg_view("input/hidden", array(
     'value' => $message->id,
 ));
 
-$body .='<div class="form-group">
+$body .= '<div class="form-group">
     <label for="discussion-title">'.elgg_echo("discussion:title_topic").'</label>
     '.elgg_view("input/text", array(
         'name' => 'discussion-title',
@@ -36,6 +36,13 @@ $body .='<div class="form-group">
         'rows'  => 6,
     )).'
 </div>';
+// Attach multimedia items
+$videos = ClipitPost::get_videos($message->id);
+$files = ClipitPost::get_files($message->id);
+$storyboards = ClipitPost::get_storyboards($message->id);
+$multimedia = array_merge($videos, $files, $storyboards);
+
+$body .= elgg_view("multimedia/attach/list", $attach);
 
 echo elgg_view("page/components/modal",
     array(
@@ -53,3 +60,16 @@ echo elgg_view("page/components/modal",
             ))
     ));
 ?>
+<script>
+    $(function(){
+        $(".attach_list").attach_multimedia({
+            default_list: "files",
+            data:{
+                list: $(this).data("menu"),
+                entity_id: "<?php echo $message->destination;?>",
+                selected: <?php echo json_encode($multimedia);?>
+            }
+        }).loadAll();
+        $(".attach_list").show();
+    });
+</script>
