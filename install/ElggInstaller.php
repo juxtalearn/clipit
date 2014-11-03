@@ -372,8 +372,7 @@ class ElggInstaller {
      */
     protected function settings($submissionVars) {
         global $CONFIG;
-        $data_path = $CONFIG->path;
-        $data_path = rtrim($data_path, '/') . "_data/";
+        $data_path = $CONFIG->path."data/";
         $formVars = array(
             'sitename' => array(
                 'type' => 'text',
@@ -1381,14 +1380,14 @@ class ElggInstaller {
             return FALSE;
         }
 
-        if (!isset($CONFIG->data_dir_override) || !$CONFIG->data_dir_override) {
-            // check that data root is not subdirectory of Elgg root
-            if (stripos($submissionVars['dataroot'], $submissionVars['path']) === 0) {
-                $msg = elgg_echo('install:error:locationdatadirectory', array($submissionVars['dataroot']));
-                register_error($msg);
-                return FALSE;
-            }
-        }
+//        if (!isset($CONFIG->data_dir_override) || !$CONFIG->data_dir_override) {
+//            // check that data root is not subdirectory of Elgg root
+//            if (stripos($submissionVars['dataroot'], $submissionVars['path']) === 0) {
+//                $msg = elgg_echo('install:error:locationdatadirectory', array($submissionVars['dataroot']));
+//                register_error($msg);
+//                return FALSE;
+//            }
+//        }
 
         // check that email address is email address
         if ($submissionVars['siteemail'] && !is_email_address($submissionVars['siteemail'])) {
