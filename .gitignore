@@ -1,4 +1,5 @@
 .idea
+.idea/*
 .DS_Store
 php_errors.log
 nbproject

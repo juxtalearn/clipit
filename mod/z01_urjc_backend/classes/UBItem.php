@@ -233,8 +233,12 @@ class UBItem {
     static function create_clone($id) {
         $prop_value_array = static::get_properties($id);
         $clone_id = static::set_properties(null, $prop_value_array);
-        UBCollection::add_items($id, array($clone_id), static::REL_PARENT_CLONE, true);
+        static::link_parent_clone($id, $clone_id);
         return $clone_id;
+    }
+
+    static function link_parent_clone($id_parent, $id_clone){
+        UBCollection::add_items($id_parent, array($id_clone), static::REL_PARENT_CLONE, true);
     }
 
     /**

@@ -48,6 +48,13 @@ function expose_common_functions($api_suffix, $class_suffix) {
         true
     );
     expose_function(
+        $api_suffix . "link_parent_clone", $class_suffix . "link_parent_clone",
+        array("parent_id" => array("type" => "int", "required" => true),
+            "clone_id" => array("type" => "int", "required" => true)),
+        "Create a clone copy of an instance", 'POST', false,
+        true
+    );
+    expose_function(
         $api_suffix . "get_clones", $class_suffix . "get_clones", array(
             "id" => array("type" => "int", "required" => true),
             "recursive" => array("type" => "bool", "required" => false)
