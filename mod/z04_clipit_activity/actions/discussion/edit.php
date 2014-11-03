@@ -18,7 +18,7 @@ $attach_file = array_filter(get_input('attach_files'));
 $attach_video = array_filter(get_input('attach_videos'));
 $attach_storyboard = array_filter(get_input('attach_storyboards'));
 
-if(!isset($discussion) || $discussion->owner_id != $user_id || trim($discussion_title) == ""){
+if(!isset($discussion) || trim($discussion_title) == ""){
     register_error(elgg_echo("discussion:cantedit"));
 } else{
     ClipitPost::set_properties($discussion->id, array(
