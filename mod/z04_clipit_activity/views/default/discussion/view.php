@@ -29,7 +29,7 @@ if($message->owner_id != $user_loggedin_id && !$user_read_status){
 }
 // Owner options (edit/delete)
 $owner_options = "";
-if($message->owner_id == elgg_get_logged_in_user_guid()){
+if($message->owner_id == $user_loggedin_id || $user_logged->role == ClipitUser::ROLE_TEACHER){
     $options = array(
         'entity' => $message,
         'edit' => array(
@@ -37,9 +37,10 @@ if($message->owner_id == elgg_get_logged_in_user_guid()){
             "href" => elgg_get_site_url()."ajax/view/modal/discussion/edit?id={$message->id}",
             "data-toggle" => "modal"
         ),
-        'remove' => array("href" => "action/discussion/remove?id={$message->id}"),
     );
-
+    if($message->owner_id == $user_loggedin_id){
+        $options['remove'] = array("href" => "action/discussion/remove?id={$message->id}");
+    }
     $owner_options = elgg_view("page/components/options_list", $options);
     // Remote modal, form content
     echo elgg_view("page/components/modal_remote", array('id'=> "edit-discussion-{$message->id}" ));

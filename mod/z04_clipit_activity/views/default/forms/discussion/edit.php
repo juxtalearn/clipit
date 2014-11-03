@@ -41,8 +41,8 @@ $videos = ClipitPost::get_videos($message->id);
 $files = ClipitPost::get_files($message->id);
 $storyboards = ClipitPost::get_storyboards($message->id);
 $multimedia = array_merge($videos, $files, $storyboards);
-
-$body .= elgg_view("multimedia/attach/list", $attach);
+$id = uniqid();
+$body .= elgg_view("multimedia/attach/list", array('id' => $id));
 
 echo elgg_view("page/components/modal",
     array(
@@ -62,7 +62,8 @@ echo elgg_view("page/components/modal",
 ?>
 <script>
     $(function(){
-        $(".attach_list").attach_multimedia({
+        var $attach_list = $("[data-attach=<?php echo $id;?>]");
+        $attach_list.attach_multimedia({
             default_list: "files",
             data:{
                 list: $(this).data("menu"),
@@ -70,6 +71,6 @@ echo elgg_view("page/components/modal",
                 selected: <?php echo json_encode($multimedia);?>
             }
         }).loadAll();
-        $(".attach_list").show();
+        $attach_list.show();
     });
 </script>
