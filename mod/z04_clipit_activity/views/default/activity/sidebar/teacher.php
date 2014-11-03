@@ -16,7 +16,7 @@ $access = elgg_extract("access", $vars);
 $activity_id = elgg_extract("activity_id", $vars);
 
 $body = '
-    <ul style="background: #fff; padding: 10px;">';
+    <ul style="background: #fff; padding: 10px;max-height: 205px;overflow-y: auto;">';
         foreach($teachers as $teacher_id){
             $teacher = array_pop(ClipitUser::get_by_id(array($teacher_id)));
             $body .='<li class="list-item">
