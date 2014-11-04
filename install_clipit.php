@@ -29,7 +29,7 @@ if(!isset($_SESSION["status"])){
     ?>
     <h1>ClipIt Install Script</h1>
     <h2>fill in the form below<br/>(recommended values already added)</h2>
-    <form action="install_clipit.php" method="post">
+    <form action="install_clipit.php" method="post" id="clipit_params">
         <table>
             <tr>
                 <td>
@@ -63,6 +63,12 @@ if(!isset($_SESSION["status"])){
                     <input size=30 type="text" name="mysql_password">
                 </td>
             </tr>
+            <select name="version" form="clipit_params">
+                <option value="2.2">Version 2.2</option>
+                <option value="2.1">Version 2.1</option>
+                <option value="2.0">Version 2.0</option>
+                <option value="master">Master branch</option>
+            </select>
         </table>
         <p><input type="submit"></p>
     </form>
@@ -188,7 +194,7 @@ if(!isset($_SESSION["status"])){
 <?php } else if($_SESSION["status"] == "install") {
     unset($_SESSION["status"]);
     $git_url = "https://github.com/juxtalearn/clipit.git";
-    $clipit_tag ="2.2";
+    $clipit_tag = $_SESSION["version"];
     $mysql_host = $_SESSION["mysql_host"];
     $mysql_schema = $_SESSION["mysql_schema"];
     $mysql_user = $_SESSION["mysql_user"];
