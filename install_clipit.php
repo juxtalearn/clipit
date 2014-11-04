@@ -63,12 +63,19 @@ if(!isset($_SESSION["status"])){
                     <input size=30 type="text" name="mysql_password">
                 </td>
             </tr>
-            <select name="version" form="clipit_params">
-                <option value="2.2">Version 2.2</option>
-                <option value="2.1">Version 2.1</option>
-                <option value="2.0">Version 2.0</option>
-                <option value="master">Master branch</option>
-            </select>
+            <tr>
+                <td>
+                    <b>Version to Install</b>
+                </td>
+                <td>
+                    <select name="version" form="clipit_params">
+                        <option value="2.2">Version 2.2</option>
+                        <option value="2.1">Version 2.1</option>
+                        <option value="2.0">Version 2.0</option>
+                        <option value="master">Master branch</option>
+                    </select>
+                </td>
+            </tr>
         </table>
         <p><input type="submit"></p>
     </form>
