@@ -11,9 +11,12 @@ if (!defined('PHP_SESSION_ACTIVE')) {
     define('PHP_SESSION_ACTIVE', 2);
 }
 if (!function_exists('session_status')) {
-    function session_status(){
-        if(!function_exists('session_id')) return PHP_SESSION_DISABLED;
-        if (session_id() === "") return PHP_SESSION_NONE ;
+    function session_status()
+    {
+        if (!function_exists('session_id'))
+            return PHP_SESSION_DISABLED;
+        if (session_id() === "")
+            return PHP_SESSION_NONE;
         return PHP_SESSION_ACTIVE;
     }
 }
@@ -24,7 +27,7 @@ if (!function_exists('session_status')) {
 <div align="center">
 
 <?php
-if(!isset($_SESSION["status"])){
+if (!isset($_SESSION["status"])){
     $_SESSION["status"] = "wait";
     ?>
     <h1>ClipIt Install Script</h1>
@@ -80,7 +83,8 @@ if(!isset($_SESSION["status"])){
         <p><input type="submit"></p>
     </form>
 
-<?php }else if($_SESSION["status"] == "wait") {
+<?php
+}else if ($_SESSION["status"] == "wait") {
     $_SESSION = $_POST;
     $_SESSION["status"] = "install";
     header("Refresh:0; url=install_clipit.php", true, 303);
@@ -196,64 +200,69 @@ if(!isset($_SESSION["status"])){
     ORGCQxEKIEBYmQyDGpoMXn04oFOnIwwZDghFoyCkSAIHRQTYUNTi0A5YAcDBgHKjBqslOhSFcOVq
     VjgNaHK4WcJnUZ4HsHbQynTjgKUkchZlG/esiAxeZhKYlWps1L5zHzYougHmCMR0CRoYC40E5IJT
     q664TFBsUbyct7nVydOy3MjW9Opka9qvNQSGW4ROtlhnY9mnuY09ADH3Nr2lN/veduDli9klHw9P
-    rtw1cxELsPJ+vsLDmBAAOw==" alt="waiting" /></p>
+    rtw1cxELsPJ+vsLDmBAAOw==" alt="waiting"/></p>
 
-<?php } else if($_SESSION["status"] == "install") {
-    unset($_SESSION["status"]);
-    $git_url = "https://github.com/juxtalearn/clipit.git";
-    $clipit_tag = $_SESSION["version"];
-    $mysql_host = $_SESSION["mysql_host"];
-    $mysql_schema = $_SESSION["mysql_schema"];
-    $mysql_user = $_SESSION["mysql_user"];
-    $mysql_pass = $_SESSION["mysql_password"];
-    ?>
+<?php
+} else if ($_SESSION["status"] == "install") {
+unset($_SESSION["status"]);
+$git_url = "https://github.com/juxtalearn/clipit.git";
+$clipit_tag = $_SESSION["version"];
+$mysql_host = $_SESSION["mysql_host"];
+$mysql_schema = $_SESSION["mysql_schema"];
+$mysql_user = $_SESSION["mysql_user"];
+$mysql_pass = $_SESSION["mysql_password"];
+?>
 
-    <h1>ClipIt Install Script</h1>
-    <h2>Install Summary</h2>
+<h1>ClipIt Install Script</h1>
 
-    <p>cloning github repository...</p>
-    <?php
-    echo exec("git clone -b $clipit_tag --recursive $git_url git_tmp");
-    echo exec("mv -f git_tmp/* .");
-    echo exec("mv -f git_tmp/.* .");
-    echo exec("rmdir git_tmp");
-    ?>
+<h2>Install Summary</h2>
 
-    <p>configuring data folder and permissions...</p>
-    <?php
-    echo exec("mkdir data");
-    echo exec("chmod -R 777 .");
-    ?>
+<p>cloning github repository...</p>
+<?php
+echo exec("git clone -b $clipit_tag --recursive $git_url git_tmp");
+echo exec("mv -f git_tmp/* .");
+echo exec("mv -f git_tmp/.* .");
+echo exec("rmdir git_tmp");
+?>
 
-    <p>creating database...</p>
-    <?php
-    echo exec("mysql -h$mysql_host -u$mysql_user -p$mysql_pass -e'create database $mysql_schema;'");
-    ?>
+<p>configuring data folder and permissions...</p>
+<?php
+echo exec("mkdir data");
+echo exec("chmod -R 777 .");
+?>
 
-    <p>creating settings.php file...</p>
-    <?php
-    $file_name = fopen("engine/settings.php", "w") or die("Unable to open file!");
-    $file_content = "<?php\n";
-    $file_content .= "global \$CONFIG;\n";
-    $file_content .= "if (!isset(\$CONFIG)) { \$CONFIG = new stdClass; }\n";
-    $file_content .= "\$CONFIG->dbhost = '$mysql_host';\n";
-    $file_content .= "\$CONFIG->dbuser = '$mysql_user';\n";
-    $file_content .= "\$CONFIG->dbpass = '$mysql_pass';\n";
-    $file_content .= "\$CONFIG->dbname = '$mysql_schema';\n";
-    $file_content .= "\$CONFIG->dbprefix = 'clipit_';\n";
-    $file_content .= "\$CONFIG->broken_mta = FALSE;\n";
-    $file_content .= "\$CONFIG->db_disable_query_cache = FALSE;\n";
-    $file_content .= "\$CONFIG->min_password_length = 6;\n";
-    fwrite($file_name, $file_content);
-    fclose($file_name);
-    ?>
+<p>creating database...</p>
+<?php
+echo exec("mysql -h$mysql_host -u$mysql_user -p$mysql_pass -e'create database $mysql_schema;'");
+?>
 
-    <p><b>ClipIt has been downloaded correctly!</b></p>
-    <form method='GET' action="install.php">
+<p>creating settings.php file...</p>
+<?php
+$file_name = fopen("engine/settings.php", "w") or die("Unable to open file!");
+$file_content = "<?php\n";
+$file_content .= "global \$CONFIG;\n";
+$file_content .= "if (!isset(\$CONFIG)) { \$CONFIG = new stdClass; }\n";
+$file_content .= "\$CONFIG->dbhost = '$mysql_host';\n";
+$file_content .= "\$CONFIG->dbuser = '$mysql_user';\n";
+$file_content .= "\$CONFIG->dbpass = '$mysql_pass';\n";
+$file_content .= "\$CONFIG->dbname = '$mysql_schema';\n";
+$file_content .= "\$CONFIG->dbprefix = 'clipit_';\n";
+$file_content .= "\$CONFIG->broken_mta = FALSE;\n";
+$file_content .= "\$CONFIG->db_disable_query_cache = FALSE;\n";
+$file_content .= "\$CONFIG->min_password_length = 6;\n";
+fwrite($file_name, $file_content);
+fclose($file_name);
+?>
+
+<p><b>ClipIt has been downloaded correctly!</b></p>
+
+<form method='GET' action="install.php">
     <input type="hidden" name="step" value="database">
     <input type="submit" value="Continue to initial setup...">
-    </form>
-    </div></body></html>
+</form>
+</div>
+</body>
+</html>
 <?php } ?>
 </div>
 </body>
