@@ -5,4 +5,5 @@ echo exec("git stash save \"auto stash\"");
 echo "<h3>Performing main git pull... ";
 echo exec("git pull");
 echo "<h3>Performing submodule update... ";
+echo exec("git submodule init");
 echo exec("git submodule update");
