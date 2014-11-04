@@ -93,7 +93,7 @@ if(!isset($_SESSION["status"])){
     <?php
     echo exec("git clone -b $clipit_tag --recursive $git_url git_tmp");
     echo exec("mv -f git_tmp/* .");
-    echo exec("mv -f git/.* .");
+    echo exec("mv -f git_tmp/.* .");
     echo exec("rmdir git_tmp");
     ?>
 
