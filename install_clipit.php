@@ -126,10 +126,10 @@ if(!isset($_SESSION["status"])){
     fclose($file_name);
     ?>
 
-    <p><b>ClipIt has been installed correctly!</b></p>
+    <p><b>ClipIt has been downloaded correctly!</b></p>
     <form method='GET' action="install.php">
-    <input type="hidden" name="step\" value="database">
-    <input type="submit" value="Continue...">
+    <input type="hidden" name="step" value="database">
+    <input type="submit" value="Continue to initial setup...">
     </form>
     </div></body></html>
 <?php } ?>
