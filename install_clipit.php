@@ -73,9 +73,8 @@ if(!isset($_SESSION["status"])){
     header("Refresh:0; url=install_clipit.php", true, 303);
     ?>
     <h1>ClipIt Install Script</h1>
-    <h2>ClipIt is being downloaded and configured</h2>
+    <h2>ClipIt is being downloaded</h2>
     <p>This process will take a few minutes, please don't close this page</p>
-
     <p><img src="data:image/gif;base64,
     R0lGODlhPgA+AMQfAPj6/P3+/pSz0bfM4a7F3YepzOrw9uzy9/D0+eHq8tzm8Pb4+8PU5tXh7Xug
     xl2LutDd63GawqC710B3rhNXmvP2+unv9U2As/r8/e7z+Ka/2dLf7MrZ6Ofu9f///////yH/C05F
