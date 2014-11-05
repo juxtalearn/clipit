@@ -29,7 +29,8 @@ class ClipitQuizResult extends UBItem {
      */
     public $user = 0;
 
-    public $answer; // can be different types, depending on the question type
+    // can be different types, depending on the question type
+    public $answer;
     /**
      * @var bool Determines if this Result is correct (true) or incorrect (false)
      */
@@ -43,6 +44,7 @@ class ClipitQuizResult extends UBItem {
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
         $this->user = (int)$elgg_entity->get("user");
+        $this->answer = $elgg_entity->get("answer");
         $this->correct = (bool)$elgg_entity->get("correct");
         $this->quiz_question = (int)static::get_quiz_question($this->id);
     }
@@ -54,6 +56,7 @@ class ClipitQuizResult extends UBItem {
      */
     protected function copy_to_elgg($elgg_entity) {
         parent::copy_to_elgg($elgg_entity);
+        $elgg_entity->set("answer", $this->answer);
         $elgg_entity->set("correct", (bool)$this->correct);
         $elgg_entity->set("user", (int)$this->user);
     }

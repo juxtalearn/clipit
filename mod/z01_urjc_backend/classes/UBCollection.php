@@ -148,4 +148,17 @@ abstract class UBCollection {
     static function remove_all_items($id, $rel_name) {
         return remove_entity_relationships($id, $rel_name);
     }
+
+    static function get_timestamp($id1, $id2, $rel_name){
+        $rel_array = get_entity_relationships($id1, $rel_name);
+        if(empty($rel_array)){
+            return null;
+        }
+        foreach($rel_array as $rel){
+            if($rel->guid_two == $id2){
+                return $rel->getTimeCreated();
+            }
+        }
+        return null;
+    }
 }

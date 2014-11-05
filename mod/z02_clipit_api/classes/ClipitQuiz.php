@@ -22,6 +22,7 @@ class ClipitQuiz extends UBItem {
      */
     const SUBTYPE = "ClipitQuiz";
     const REL_QUIZ_QUIZQUESTION = "ClipitQuiz-ClipitQuizQuestion";
+    const REL_QUIZ_USER = "ClipitQuiz-ClipitUser";
     const VIEW_MODE_LIST = "list";
     const VIEW_MODE_PAGED = "paged";
     /**
@@ -121,6 +122,14 @@ class ClipitQuiz extends UBItem {
             }
         }
         return parent::set_properties($id, $new_prop_value_array);
+    }
+
+    static function quiz_start($id, $user_id){
+        return UBCollection::add_items($id, $user_id, static::REL_QUIZ_USER);
+    }
+
+    static function get_quiz_start_time($id, $user_id){
+        return UBCollection::get_timestamp($id, $user_id, static::REL_QUIZ_USER);
     }
 
     /**

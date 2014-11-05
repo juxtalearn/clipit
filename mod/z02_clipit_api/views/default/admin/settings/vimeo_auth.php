@@ -1,10 +1,6 @@
 <?php
-session_start();
 
-set_include_path(
-    get_include_path() . PATH_SEPARATOR . elgg_get_plugins_path() . "z02_clipit_api/libraries/vimeo_api/"
-);
-require_once 'vimeo.php';
+require_once elgg_get_plugins_path() . "z02_clipit_api/libraries/vimeo_api/vimeo.php";
 
 $app_id = get_config("vimeo_app_id");
 $app_secret = get_config("vimeo_app_secret");
