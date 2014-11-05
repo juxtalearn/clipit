@@ -258,7 +258,7 @@ class ClipitTask extends UBItem {
         $task = new static($id);
         switch($task->task_type) {
             case static::TYPE_QUIZ_TAKE:
-                return ClipitQuiz::has_answered_quiz($task->quiz, $entity_id);
+                return ClipitQuiz::has_finished_quiz($task->quiz, $entity_id);
             case static::TYPE_RESOURCE_UPLOAD:
                 foreach($task->resource_array as $resource_id) {
                     if((int)ClipitResource::get_group($resource_id) === (int)$entity_id) {

@@ -150,12 +150,12 @@ abstract class UBCollection {
     }
 
     static function get_timestamp($id1, $id2, $rel_name){
-        $rel_array = get_entity_relationships($id1, $rel_name);
+        $rel_array = get_entity_relationships($id1);
         if(empty($rel_array)){
             return null;
         }
         foreach($rel_array as $rel){
-            if($rel->guid_two == $id2){
+            if($rel->relationship == $rel_name && (int)$rel->guid_two == (int)$id2){
                 return $rel->getTimeCreated();
             }
         }
