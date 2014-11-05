@@ -124,7 +124,7 @@ class ClipitQuiz extends UBItem {
         return parent::set_properties($id, $new_prop_value_array);
     }
 
-    static function quiz_start($id, $user_id){
+    static function set_quiz_start($id, $user_id){
         return UBCollection::add_items($id, $user_id, static::REL_QUIZ_USER);
     }
 
