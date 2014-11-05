@@ -126,4 +126,13 @@ class ClipitQuizResult extends UBItem {
         }
         return $quiz_result_array;
     }
+
+    static function get_from_question_user($quiz_question_id, $user_id){
+        $result_array = static::get_by_owner(array($user_id));
+        foreach($result_array[$user_id] as $quiz_result){
+            if($quiz_result->quiz_question === $quiz_question_id){
+                return $quiz_result;
+            }
+        }
+    }
 }

@@ -128,30 +128,28 @@ class ClipitQuiz extends UBItem {
         return UBCollection::add_items($id, $user_id, static::REL_QUIZ_USER);
     }
 
-    static function get_quiz_start_time($id, $user_id){
+    static function get_quiz_start($id, $user_id){
         return UBCollection::get_timestamp($id, $user_id, static::REL_QUIZ_USER);
     }
 
     /**
-     * Returns whether a user has completely answered a Quiz - this is: all Quiz Questions inside a Quiz
+     * Returns whether a user has finished a Quiz
      *
-     * @param int $quiz_id The Quiz ID
+     * @param int $id The Quiz ID
      * @param int $user_id The User ID
      * @return bool 'true' if yes, 'false' if no
      */
-    static function has_answered_quiz($quiz_id, $user_id){
-        $quiz_questions = ClipitQuiz::get_quiz_questions($quiz_id);
-        $quiz_results = ClipitQuizResult::get_by_owner(array($user_id));
-        $result_questions = array();
-        foreach($quiz_results as $quiz_result){
-            $result_questions[] = $quiz_result->quiz_question;
+    static function has_finished_quiz($id, $user_id){
+        $start_time = (int)static::get_quiz_start($id, $user_id);
+        if(empty($start_time)){
+            return false;
         }
-        foreach($quiz_questions as $quiz_question){
-            if(array_search($quiz_question, $result_questions) === false){
-                return false;
-            }
+        $prop_value_array = (array)static::get_properties($id, array("max_time"));
+        $current_time = (int)time();
+        if($start_time + $prop_value_array["max_time"] <= $current_time){
+            return true;
         }
-        return true;
+        return false;
     }
 
     /**

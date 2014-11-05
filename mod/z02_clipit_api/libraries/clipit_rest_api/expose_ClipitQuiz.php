@@ -41,4 +41,25 @@ function expose_quiz_functions() {
         $api_suffix . "get_quiz_questions", $class_suffix . "get_quiz_questions",
         array("id" => array("type" => "int", "required" => true)), "Get Quiz Questions", 'GET', false, true
     );
+    expose_function(
+        $api_suffix . "set_quiz_start", $class_suffix . "set_quiz_start",
+        array(
+            "id" => array("type" => "int", "required" => true),
+            "user_id" => array("type" => "int", "required" => true)),
+        "Set Quiz Start Time", 'POST', false, true
+    );
+    expose_function(
+        $api_suffix . "get_quiz_start", $class_suffix . "get_quiz_start",
+        array(
+            "id" => array("type" => "int", "required" => true),
+            "user_id" => array("type" => "int", "required" => true)),
+        "Get Quiz Start Time", 'GET', false, true
+    );
+    expose_function(
+        $api_suffix . "has_finished_quiz", $class_suffix . "has_finished_quiz",
+        array(
+            "id" => array("type" => "int", "required" => true),
+            "user_id" => array("type" => "int", "required" => true)),
+        "Returns true if User has finished a quiz, or false ir not", 'GET', false, true
+    );
 }
