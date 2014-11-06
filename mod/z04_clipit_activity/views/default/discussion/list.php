@@ -62,7 +62,7 @@ foreach($messages as $message):
     $storyboards = ClipitPost::get_storyboards($message->id);
     $multimedia = array_merge($videos, $files, $storyboards);
     ?>
-    <div class="row row-table messages-discussion">
+    <div class="row row-flex messages-discussion">
         <div class="col-md-9 col-xs-9">
             <?php echo $owner_options; ?>
             <h4>
