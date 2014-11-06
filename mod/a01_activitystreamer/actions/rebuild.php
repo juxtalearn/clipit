@@ -17,7 +17,6 @@ if (isset($affirmative) && $affirmative) {
     global $con;
     global $transaction_stmt;
     $act_table = $_SESSION['activity_table'];
-    createActivityTable($con, $act_table);
     $log_table = $_SESSION['logging_table'];
     mysqli_query($con, "TRUNCATE ".$act_table.";");
     $result = mysqli_query($con, "SELECT * FROM ".$log_table." ORDER BY log_id;");

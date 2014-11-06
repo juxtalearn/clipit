@@ -2,8 +2,8 @@
 require_once(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))) . "/engine/start.php");
 
 admin_gatekeeper();
-elgg_set_context('admin');
-// Set admin user for user block
+elgg_set_context('activitystreamer');
+// Set activitystreamer user for user block
 elgg_set_page_owner_guid($_SESSION['guid']);
 //Vars required for action gatekeeper
 $ts = time();
@@ -24,107 +24,110 @@ if (!isset($entities[0])) {
     $workbenchurl = $entity->workbenchurl;
 }
 ?>
+<div class="col-md-12">
+    <h1>Admin Settings for Activitystreamer</h1>
+    <form action="<?php echo $vars['url']; ?>action/activitystreamer/modify" method="post">
+        <label>
+            <?php echo elgg_echo('activitystreamer:workbenchurl'); ?>
+            <br/>
+            <?php    echo elgg_view('input/text', array(
+                'internalname' => 'workbenchurl',
+                'value' => $workbenchurl
+            ));
+            ?>
+        </label>
 
-<form action="<?php echo $vars['url']; ?>action/activitystreamer/modify" method="post">
-    <label>
-        <?php echo elgg_echo('admin:workbenchurl'); ?>
-        <br/>
-        <?php    echo elgg_view('input/text', array(
-            'internalname' => 'workbenchurl',
-            'value' => $workbenchurl
-        ));
-        ?>
-    </label>
+        <p>
+            <?php
+            echo elgg_view('input/hidden', array('internalname' => '__elgg_token', 'value' => $token));
+            echo elgg_view('input/hidden', array('internalname' => '__elgg_ts', 'value' => $ts));
+            ?>
+        </p>
 
-    <p>
+        <p>
+            <input type="submit" value="<?php echo elgg_echo('activitystreamer:submit'); ?>"/>
+        </p>
+
+    </form>
+
+    <p><?php echo elgg_echo('activitystreamer:warningmessage'); ?></p>
+
+    <form action="<?php echo $vars['url']; ?>action/activitystreamer/rebuild" method="post">
+        <p>
+            <?php
+            echo elgg_view('input/hidden', array('internalname' => "affirmative", 'value' => true));
+            ?>
+        </p>
+
+        <p>
+            <?php
+            echo elgg_view('input/hidden', array('internalname' => '__elgg_token', 'value' => $token));
+            echo elgg_view('input/hidden', array('internalname' => '__elgg_ts', 'value' => $ts));
+            ?>
+        </p>
+
+        <p>
+            <input type="submit" value="<?php echo elgg_echo('activitystreamer:rebuild'); ?>"/>
+        </p>
+
+
+    </form>
+
+    <form action="<?php echo $vars['url']; ?>action/activitystreamer/request" method="post">
+        <p>
+            <?php
+            echo elgg_view('input/hidden', array('internalname' => "affirmative", 'value' => true));
+            ?>
+        </p>
+
+        <p>
+            <?php
+            echo elgg_view('input/hidden', array('internalname' => '__elgg_token', 'value' => $token));
+            echo elgg_view('input/hidden', array('internalname' => '__elgg_ts', 'value' => $ts));
+            ?>
+        </p>
+
+        <p>
+            <input type="submit" value="<?php echo elgg_echo('activitystreamer:analysis'); ?>"/>
+        </p>
+
+
+    </form>
+
+    <h3>Summary for logging activities:</h3>
+
+    <p><br/>
         <?php
-        echo elgg_view('input/hidden', array('internalname' => '__elgg_token', 'value' => $token));
-        echo elgg_view('input/hidden', array('internalname' => '__elgg_ts', 'value' => $ts));
+        global $CONFIG;
+        $log_table = $_SESSION['logging_table'];
+        $con = mysqli_connect($CONFIG->dbhost, $CONFIG->dbuser, $CONFIG->dbpass, $CONFIG->dbname);
+        $result = mysqli_query($con, "SELECT * FROM " . $log_table . ";");
+        $ext_log_entries = mysqli_num_rows($result);
+        echo("Extended log contains <strong>" . $ext_log_entries . "</strong> entries.");
+        $activity_table = $_SESSION['activity_table'];
+        $con = mysqli_connect($CONFIG->dbhost, $CONFIG->dbuser, $CONFIG->dbpass, $CONFIG->dbname);
+        $result = mysqli_query($con, "SELECT * FROM " . $activity_table . ";");
+        $act_entries = mysqli_num_rows($result);
+        echo("ActivityStream contains <strong>" . $act_entries . "</strong> entries.");
+        $analysis_table = $_SESSION['analysis_table'];
+        $con = mysqli_connect($CONFIG->dbhost, $CONFIG->dbuser, $CONFIG->dbpass, $CONFIG->dbname);
+        $result = mysqli_query($con, "SELECT * FROM " . $analysis_table . ";");
+        $analysis_entries = mysqli_num_rows($result);
+        echo("Workbench results contains <strong>" . $analysis_entries . "</strong> entries.");
+
         ?>
     </p>
 
-    <p>
-        <input type="submit" value="<?php echo elgg_echo('activitystreamer:submit'); ?>"/>
-    </p>
+    <h3>Available templates:</h3>
+    <ul>
 
-</form>
-
-<p><?php echo elgg_echo('admin:warningmessage'); ?></p>
-
-<form action="<?php echo $vars['url']; ?>action/activitystreamer/rebuild" method="post">
-    <p>
         <?php
-        echo elgg_view('input/hidden', array('internalname' => "affirmative", 'value' => true));
+        $metrics = ActivityStreamer::get_available_metrics();
+        foreach ($metrics as $metric) {
+            echo("<li>");
+            echo($metric['TemplateId'] . ": " . $metric['Name'] . " - " . $metric['Description']);
+            echo("</li>");
+        }
         ?>
-    </p>
-
-    <p>
-        <?php
-        echo elgg_view('input/hidden', array('internalname' => '__elgg_token', 'value' => $token));
-        echo elgg_view('input/hidden', array('internalname' => '__elgg_ts', 'value' => $ts));
-        ?>
-    </p>
-
-    <p>
-        <input type="submit" value="<?php echo elgg_echo('activitystreamer:rebuild'); ?>"/>
-    </p>
-
-
-</form>
-
-<form action="<?php echo $vars['url']; ?>action/activitystreamer/request" method="post">
-    <p>
-        <?php
-        echo elgg_view('input/hidden', array('internalname' => "affirmative", 'value' => true));
-        ?>
-    </p>
-
-    <p>
-        <?php
-        echo elgg_view('input/hidden', array('internalname' => '__elgg_token', 'value' => $token));
-        echo elgg_view('input/hidden', array('internalname' => '__elgg_ts', 'value' => $ts));
-        ?>
-    </p>
-
-    <p>
-        <input type="submit" value="<?php echo elgg_echo('activitystreamer:analysis'); ?>"/>
-    </p>
-
-
-</form>
-
-<h1>Summary for logging activities:</h1>
-
-<p><br/>
-    <?php
-    global $CONFIG;
-    $log_table = $_SESSION['logging_table'];
-    $con = mysqli_connect($CONFIG->dbhost, $CONFIG->dbuser, $CONFIG->dbpass, $CONFIG->dbname);
-    $result = mysqli_query($con, "SELECT * FROM " . $log_table . ";");
-    $ext_log_entries = mysqli_num_rows($result);
-    echo("Extended log contains <strong>" . $ext_log_entries . "</strong> entries.");
-    $activity_table = $_SESSION['activity_table'];
-    $con = mysqli_connect($CONFIG->dbhost, $CONFIG->dbuser, $CONFIG->dbpass, $CONFIG->dbname);
-    $result = mysqli_query($con, "SELECT * FROM " . $activity_table . ";");
-    $act_entries = mysqli_num_rows($result);
-    echo("ActivityStream contains <strong>" . $act_entries . "</strong> entries.");
-    $analysis_table = $_SESSION['analysis_table'];
-    $con = mysqli_connect($CONFIG->dbhost, $CONFIG->dbuser, $CONFIG->dbpass, $CONFIG->dbname);
-    $result = mysqli_query($con, "SELECT * FROM " . $analysis_table . ";");
-    $analysis_entries = mysqli_num_rows($result);
-    echo("Workbench results contains <strong>" . $analysis_entries . "</strong> entries.");
-
-    ?>
-</p>
-<h1>Available templates:</h1>
-<ul>
-
-<?php
-    $metrics = ActivityStreamer::get_available_metrics();
-    foreach ($metrics as $metric) {
-        echo("<li>");
-        echo($metric['TemplateId'].": ".$metric['Name']." - ".$metric['Description']);
-        echo("</li>");
-    }
- ?>
-</ul>
+    </ul>
+</div>

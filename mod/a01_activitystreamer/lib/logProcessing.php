@@ -367,7 +367,7 @@ function convertLogTransactionToActivityStream($transaction)
             if ($transaction[0]['Event'] == "create") {
                 $l = 0;
             }
-            $verb = "added";
+            $verb = "add";
             $title = $transaction[$l]['ObjectSubtype'];
             $values = $transaction[$l]['Content'];
             if (!(strpos($title, "-") !== false)) {
@@ -452,7 +452,7 @@ function convertLogTransactionToActivityStream($transaction)
             storeJSON($activity);
             if (!empty($transaction[1]) && $transaction[1]['Event'] == "create") {
                 $l = 1;
-                $verb = "added";
+                $verb = "add";
                 $title = $transaction[$l]['ObjectSubtype'];
                 $values = $transaction[$l]['Content'];
                 if (!(strpos($title, "-") !== false)) {
@@ -586,21 +586,24 @@ function convertLogTransactionToActivityStream($transaction)
             storeJSON($activity);
             break;
         case "Messaging":
-            $verb = "create";
+            $verb = "message";
             $chatline = findValue($transaction, "create", ClipitChat::SUBTYPE, "ObjectId", TRUE);
             $object['objectId'] = $transaction[$chatline]['ObjectId'];
-            $object['objectTitle'] = urlencode($transaction[$chatline]['Content']);
+            $object['objectTitle'] = ClipitChat::SUBTYPE;
             $object['objectType'] = $transaction[$chatline]['ObjectType'];
             $object['objectSubtype'] = $transaction[$chatline]['ObjectSubtype'];
             $object['objectClass'] = $transaction[$chatline]['ObjectClass'];
             $object['ownerGUID'] = $transaction[$chatline]['OwnerGUID'];
-            $object['content'] = $transaction[$chatline]['Content'];
+            $object['content'] = urlencode($transaction[$chatline]['Content']);
 
-            $relationline = findValue($transaction, "create", ClipitChat::SUBTYPE . "-destination", "ObjectId", TRUE);
+            //This has been removed due to reworkings in the activitystream to graph agent...
+            /*
             $temptrans[0] = $transaction[$relationline];
             $activity = convertLogTransactionToActivityStream($temptrans);
             storeJSON($activity);
+            */
 
+            $relationline = findValue($transaction, "create", ClipitChat::SUBTYPE . "-destination", "ObjectId", TRUE);
             $values = $transaction[$relationline]['Content'];
             if (!(strpos($values, "-") !== false)) {
                 $verb = "Unidentified";
@@ -608,9 +611,16 @@ function convertLogTransactionToActivityStream($transaction)
             } else {
                 $ids = preg_split('/[-]/', $values);
             }
-            $object['targetId'] = $ids[1];
+            $user_id = $ids[1];
+            $object['targetId'] = $user_id;
             $object['targetType'] = "user";
-            $object['targetSubtype'] = "ClipitUser";
+            $user_properties = ClipitUser::get_by_id(array($user_id));
+            if (is_not_null($user_properties) && is_not_null($user_properties[$user_id]) && isset($user_properties[$user_id]->role)) {
+                $role = $user_properties[$user_id]->role;
+                $object['targetSubtype'] = $role;
+            } else {
+                $verb = "Ignore";
+            }
             break;
         case "Ignore":
             $verb = "Ignore";
@@ -853,10 +863,10 @@ function determineActivityType($transaction)
                 $type = "VideoUpload";
             } elseif (findValue($transaction, "create", ClipitFile::SUBTYPE, "ObjectId", FALSE) > 0) {
                 if (findValue($transaction, "create", ClipitLA::SUBTYPE, "ObjectId", FALSE) == 0 &&
-                    findValue($transaction, "update", ClipitLA::SUBTYPE, "ObjectId", FALSE) == 0) {
+                    findValue($transaction, "update", ClipitLA::SUBTYPE, "ObjectId", FALSE) == 0
+                ) {
                     $type = "FileUpload";
-                }
-                else {
+                } else {
                     $type = "Ignore";
                 }
             } elseif (findValue($transaction, "create", ClipitUser::SUBTYPE, "ObjectId", FALSE) > 0) {

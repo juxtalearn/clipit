@@ -223,7 +223,6 @@ class ActivityStreamer {
         );
         $request_context  = stream_context_create($options);
 
-
         # retrieve JSON-String
         $jsonArrayString = file_get_contents($workbenchurl, false, $request_context);
         # converst JSON-String to JSON data structure

@@ -119,23 +119,23 @@ function activitystreamer_page_handler($page)
         'content' => elgg_view("activitystreamer/activitystreamer"),
         'title' => $title,
         'filter' => "",
-        'class' => 'default'
+        'class' => 'admin'
     );
     $body = elgg_view_layout('one-column', $params);
     echo elgg_view_page($title, $body);
-//        include($CONFIG->pluginspath . "a01_activitystreamer/views/default/admin/admin.php");
+//        include($CONFIG->pluginspath . "a01_activitystreamer/views/default/activitystreamer/activitystreamer.php");
 }
 
-//Function to add a submenu to the admin panel.
+//Function to add a submenu to the activitystreamer panel.
 function activitystreamer_pagesetup()
 {
     global $CONFIG;
-    if (elgg_is_admin_logged_in() && elgg_get_context('admin')) {
+    if (elgg_is_admin_logged_in() && elgg_get_context('activitystreamer')) {
         elgg_register_menu_item('page', array(
             'name' => 'Other',
             'href' => $CONFIG->wwwroot . 'activitystreamer',
             'text' => 'ActivityStreamer',
-            'context' => 'admin'));
+            'context' => 'activitystreamer'));
     }
 }
 
@@ -244,10 +244,13 @@ function extended_log($object, $event)
 
         $transaction_id = $_SESSION['tid'];
         $role = "";
-        $user_properties = ClipitUser::get_properties($performed_by, array("role"));
-        if (is_not_null($user_properties) && !empty($user_properties['role'])) {
-            $role = $user_properties['role'];
+        $user_properties = ClipitUser::get_by_id(array($performed_by));
+        if (is_not_null($user_properties) && is_not_null($user_properties[$performed_by]) && isset($user_properties[$performed_by]->role)) {
+            $role = $user_properties[$performed_by]->role;
+        } else {
+            $role = "n/a";
         }
+
 //
 //            $result = mysqli_query($con,"SHOW COLUMNS FROM `".$log_table."` LIKE 'user_name';");
 //            if ($result) {
@@ -369,6 +372,6 @@ elgg_register_event_handler('init', 'system', 'activitystreamer_init');
 elgg_register_event_handler('plugins_boot', 'system', 'init_transaction');
 register_shutdown_function('transaction_handling');
 elgg_register_event_handler('pagesetup', 'system', 'activitystreamer_pagesetup');
-elgg_register_action('activitystreamer/rebuild', elgg_get_plugins_path() . "a01_activitystreamer/actions/rebuild.php");
 elgg_register_action('activitystreamer/modify', elgg_get_plugins_path() . "a01_activitystreamer/actions/modify.php");
+elgg_register_action('activitystreamer/rebuild', elgg_get_plugins_path() . "a01_activitystreamer/actions/rebuild.php");
 elgg_register_action('activitystreamer/request', elgg_get_plugins_path() . "a01_activitystreamer/actions/request.php");
