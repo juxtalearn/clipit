@@ -72,7 +72,7 @@ foreach($resources as $resource_id):
         echo elgg_view("page/components/modal_remote", array('id'=> "edit-resource-{$resource->id}" ));
     }
     ?>
-    <div class="row row-table messages-discussion">
+    <div class="row row-flex messages-discussion">
         <div class="col-md-12">
             <?php if($vars['publish']): ?>
                 <?php echo elgg_view('output/url', array(
