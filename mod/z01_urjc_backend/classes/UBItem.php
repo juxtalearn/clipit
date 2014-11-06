@@ -160,7 +160,7 @@ class UBItem {
      * @throws InvalidParameterException
      */
     static function get_properties($id, $prop_array = null) {
-        if(!$item = new static($id)) {
+        if(empty($id) || !$item = new static($id)) {
             return null;
         }
         $value_array = array();
