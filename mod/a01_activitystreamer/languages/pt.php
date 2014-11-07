@@ -1,6 +1,7 @@
 <?php
 
 $portuguese = array(
+    'admin:settings:activitystreamer' => 'ActivityStreamer',
     'activitystreamer' => 'ActivityStreamer',
     'activitystreamer:formenabled' => 'Ativar?',
     'activitystreamer:description' => 'This plugin allows you to setup extended logging and activitystream generation on your Elgg site.',

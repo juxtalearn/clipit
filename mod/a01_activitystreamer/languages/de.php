@@ -1,6 +1,7 @@
 <?php
 
     $german = array(
+        'admin:settings:activitystreamer' => 'ActivityStreamer',
         'activitystreamer' => 'ActivityStreamer',
         'activitystreamer:formenabled' => 'Aktivieren?',
         'activitystreamer:description' => 'Dieses Modul ermöglicht erweitertes logging und activitystream Generierung für Ihre Elgg installation.',
@@ -12,6 +13,7 @@
         'activitystreamer:workbenchurl' => 'URL der Analysis-Workbench',
         'activitystreamer:rebuild' => 'ActivityStream neu aufbauen',
         'activitystreamer:analysis' => 'Beispiel-Analyse beantragen',
+        'activitystreamer:flush' => 'Workbench Ergebnisse vergessen',
         'activitystreamer:warning' => 'Warnung!',
         'activitystreamer:warningmessage' => 'Diese Aktion wird den ActivityStream komplett leeren und neu aufbauen. Abhängig von der Anzahl der Logeinträge kann dies sehr lange dauern. Im Falle eine timeouts, erhöhen Sie bitte das Script-Ausführungslimit von PHP.<br />Wollen Sie wirklich fortfahren?',
         'activitystreamer:failed:noadmin' => 'Sie m&uuml;ssen Administrator sein um dieses Modul zu nutzen.',

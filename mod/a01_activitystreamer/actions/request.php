@@ -20,12 +20,12 @@ if (!empty($metrics) && isset($metrics[0]) && isset($metrics[0]['TemplateId']) &
     $second_return_id = ActivityStreamer::get_metric($metric_id, $context);
 
     if ($first_return_id == $second_return_id) {
-        system_message("<h1>Successfully requested two analysis runs with returnId = ".$first_return_id);
+        system_message("Successfully requested two analysis runs with returnId = ".$first_return_id);
     }
     else {
-        system_message("<h1>Sadly I requested two analysis runs and got two different returnIds: ".$first_return_id." and ".$second_return_id);
+        system_message("Sadly I requested two analysis runs and got two different returnIds: ".$first_return_id." and ".$second_return_id);
     }
 }
 else {
-    system_message("<h1>No metric available for the test run!</h1>");
+    system_message("No metric available for the test run!");
 }
