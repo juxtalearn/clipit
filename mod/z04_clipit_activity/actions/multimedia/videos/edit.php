@@ -17,7 +17,7 @@ $video = array_pop(ClipitVideo::get_by_id(array($id)));
 $video_description = get_input('video-description');
 $video_title = get_input('video-title');
 
-if(!isset($video) || $video->owner_id != $user_id || trim($video_description) == "" || trim($video_title) == ""){
+if(!isset($video) || trim($video_description) == "" || trim($video_title) == ""){
     register_error(elgg_echo("video:cantedit"));
 } else{
     ClipitVideo::set_properties($video->id, array(

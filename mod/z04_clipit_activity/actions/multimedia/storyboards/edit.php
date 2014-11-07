@@ -16,7 +16,7 @@ $storyboard = array_pop(ClipitStoryboard::get_by_id(array($id)));
 
 $sb_description = get_input('sb-description');
 
-if(!isset($storyboard) || $storyboard->owner_id != $user_id || trim($sb_description) == ""){
+if(!isset($storyboard) || trim($sb_description) == ""){
     register_error(elgg_echo("storyboard:cantedit"));
 } else{
     ClipitStoryboard::set_properties($storyboard->id, array(

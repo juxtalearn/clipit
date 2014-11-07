@@ -16,7 +16,7 @@ $file = array_pop(ClipitFile::get_by_id(array($id)));
 
 $file_description = get_input('file-description');
 
-if(!isset($file) || $file->owner_id != $user_id || trim($file_description) == ""){
+if(!isset($file) || trim($file_description) == ""){
     register_error(elgg_echo("file:cantedit"));
 } else{
     ClipitFile::set_properties($file->id, array(
