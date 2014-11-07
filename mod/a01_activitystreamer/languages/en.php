@@ -1,6 +1,7 @@
 <?php
 
 	$english = array(
+        'admin:settings:activitystreamer' => 'ActivityStreamer',
         'activitystreamer' => 'ActivityStreamer',
         'activitystreamer:formenabled' => 'Enable?',
         'activitystreamer:description' => 'This plugin allows you to setup extended logging and activitystream generation on your Elgg site.',
@@ -12,6 +13,7 @@
         'activitystreamer:workbenchurl' => 'URL to Analysis-Workbench',
         'activitystreamer:rebuild' => 'Rebuild ActivityStream',
         'activitystreamer:analysis' => 'Request sample analysis',
+        'activitystreamer:flush' => 'Flush workbench results!',
         'activitystreamer:warning' => 'Warning!',
         'activitystreamer:warningmessage' => 'This will completely flush and rebuild the activitystream and might take a lot of time depending on the amount of log entries. In the event of a timeout, please consider raising the script execution limit inside PHP.ini.<br />Are you sure you wish to proceed?',
         'activitystreamer:failed:noadmin' => 'You must be an administrator to use this feature.',

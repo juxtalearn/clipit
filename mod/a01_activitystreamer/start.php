@@ -373,5 +373,7 @@ elgg_register_event_handler('plugins_boot', 'system', 'init_transaction');
 register_shutdown_function('transaction_handling');
 elgg_register_event_handler('pagesetup', 'system', 'activitystreamer_pagesetup');
 elgg_register_action('activitystreamer/modify', elgg_get_plugins_path() . "a01_activitystreamer/actions/modify.php");
+elgg_register_action('activitystreamer/flush', elgg_get_plugins_path() . "a01_activitystreamer/actions/flush.php");
 elgg_register_action('activitystreamer/rebuild', elgg_get_plugins_path() . "a01_activitystreamer/actions/rebuild.php");
 elgg_register_action('activitystreamer/request', elgg_get_plugins_path() . "a01_activitystreamer/actions/request.php");
+elgg_register_admin_menu_item('configure', 'activitystreamer', 'settings');

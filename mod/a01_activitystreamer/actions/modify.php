@@ -23,14 +23,14 @@ if (isset($workbenchurl)) {
     if ($entity->save()) {
         system_message(elgg_echo('activitystreamer:modify:success'));
         $entity->state = "active";
-        forward('pg/activitystreamer');
+        forward('pg/admin/settings/activitystreamer');
     } else {
         register_error(elgg_echo('activitystreamer:modify:failed'));
-        forward('pg/activitystreamer');
+        forward('pg/admin/settings/activitystreamer');
     }
 } else {
 
     register_error(elgg_echo('activitystreamer:failed:noparams'));
-    forward('pg/activitystreamer');
+    forward('pg/admin/settings/activitystreamer');
 }
 ?>

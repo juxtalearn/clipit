@@ -1,13 +1,14 @@
 <?php
 
-class ActivityStreamer {
+class ActivityStreamer
+{
 
     static function get_metric($metric_id, $context)
     {
         global $con;
         global $CONFIG;
 
-        if (empty($metric_id) && valid_metric_id($metric_id)) {
+        if (empty($metric_id) && ActivityStreamer::valid_metric_id($metric_id)) {
             error_log("ActivityStreamer couldn't handle the get_metric request due to a missing or invalid metric_id!");
             return false;
         }
@@ -31,13 +32,13 @@ class ActivityStreamer {
             }
 
 
-            $workbenchurl = $workbenchurl."/requestAnalysis";
+            $workbenchurl = $workbenchurl . "/requestAnalysis";
             $return_url = elgg_get_site_url() . "services/api/rest/xml/?method=clipit.la.save_metric";
             //$return_url = "http://176.28.14.94/~workbench/jxlDefinitions/clipItDriver.php";
 
 
             //Assemble the sql request based on the given context
-            $sql = "SELECT json FROM ".$CONFIG->dbprefix."activitystreams";
+            $sql = "SELECT json FROM " . $CONFIG->dbprefix . "activitystreams";
             $filter = "";
             $parameter_string = "";
             //If $context is not an array, we will simply initialize an empty array
@@ -45,70 +46,61 @@ class ActivityStreamer {
                 $context = array();
             }
             if (isset($context['actor_id']) && ($context['actor_id'] != 0)) {
-                $filter = $filter."(`actor_id` = ?)";
-            }
-            else {
-                $filter = $filter."(`actor_id` = ? OR TRUE)";
+                $filter = $filter . "(`actor_id` = ?)";
+            } else {
+                $filter = $filter . "(`actor_id` = ? OR TRUE)";
                 $context['actor_id'] = 0;
             }
             if (isset($context['object_id']) && ($context['object_id'] != 0)) {
-                $filter = $filter." AND (`object_id` = ?)";
-            }
-            else {
-                $filter = $filter." AND (`object_id` = ? OR TRUE)";
+                $filter = $filter . " AND (`object_id` = ?)";
+            } else {
+                $filter = $filter . " AND (`object_id` = ? OR TRUE)";
                 $context['object_id'] = 0;
             }
             if (isset($context['group_id']) && ($context['group_id'] != 0)) {
-                $filter = $filter." AND (`group_id` = ?)";
-            }
-            else {
-                $filter = $filter." AND (`group_id` = ? OR TRUE)";
+                $filter = $filter . " AND (`group_id` = ?)";
+            } else {
+                $filter = $filter . " AND (`group_id` = ? OR TRUE)";
                 $context['group_id'] = 0;
             }
             if (isset($context['activity_id']) && ($context['activity_id'] != 0)) {
-                $filter = $filter." AND (`activity_id` = ?)";
-            }
-            else {
-                $filter = $filter." AND (`activity_id` = ? OR TRUE)";
+                $filter = $filter . " AND (`activity_id` = ?)";
+            } else {
+                $filter = $filter . " AND (`activity_id` = ? OR TRUE)";
                 $context['activity_id'] = 0;
             }
             if (isset($context['verb']) && ($context['verb'] != "")) {
-                $filter = $filter." AND (`verb` = ?)";
-            }
-            else {
-                $filter = $filter." AND (`verb` = ? OR TRUE) AND (`verb` <> 'login') AND (`verb` <> 'logout')";
+                $filter = $filter . " AND (`verb` = ?)";
+            } else {
+                $filter = $filter . " AND (`verb` = ? OR TRUE) AND (`verb` <> 'login') AND (`verb` <> 'logout')";
                 $context['verb'] = "";
             }
             if (isset($context['role']) && ($context['role'] != "")) {
-                $filter = $filter." AND (`role` = ?)";
-            }
-            else {
-                $filter = $filter." AND (`role` = ? OR TRUE)";
+                $filter = $filter . " AND (`role` = ?)";
+            } else {
+                $filter = $filter . " AND (`role` = ? OR TRUE)";
                 $context['role'] = "";
             }
             if (isset($context['lowerbound']) && ($context['lowerbound'] != 0)) {
-                $filter = $filter." AND (`timestamp` >= ?)";
-            }
-            else {
-                $filter = $filter." AND (`timestamp` >= ? OR TRUE)";
+                $filter = $filter . " AND (`timestamp` >= ?)";
+            } else {
+                $filter = $filter . " AND (`timestamp` >= ? OR TRUE)";
                 $context['lowerbound'] = 0;
             }
             if (isset($context['upperbound']) && ($context['upperbound'] != 0)) {
-                $filter = $filter." AND (`timestamp` <= ?)";
-            }
-            else {
-                $filter = $filter." AND (`timestamp` <= ? OR TRUE)";
+                $filter = $filter . " AND (`timestamp` <= ?)";
+            } else {
+                $filter = $filter . " AND (`timestamp` <= ? OR TRUE)";
                 $context['upperbound'] = 0;
             }
             if ($filter != "") {
-                $sql = $sql." WHERE ". $filter;
+                $sql = $sql . " WHERE " . $filter;
             }
 
             if (isset($context['debug']) && ($context['debug'] == true)) {
-                $sql = $sql." ORDER BY `stream_id` DESC LIMIT 100;";
-            }
-            else {
-                $sql = $sql." ORDER BY `stream_id`;";
+                $sql = $sql . " ORDER BY `stream_id` DESC LIMIT 100;";
+            } else {
+                $sql = $sql . " ORDER BY `stream_id`;";
             }
 
             //error_log($sql);
@@ -133,8 +125,7 @@ class ActivityStreamer {
             if ($existing_id > 0) {
                 //if we found an existing result, we will return its id
                 return $existing_id;
-            }
-            else {
+            } else {
                 //else we will create a new object, store this request in our database and return the id of the new object
                 $return_id = ClipitLA::create(array());
 //                $prop_value_array["return_id"] = (int)$return_id;
@@ -154,16 +145,16 @@ class ActivityStreamer {
             //Create and make the request to the workbench
             define('AnalysisData', $json);
             $data = array('AuthToken' => $token_string, 'TemplateId' => $metric_id, 'ReturnId' => $return_id, 'ReturnURL' => $return_url, 'AnalysisData' => base64_encode(AnalysisData));
-    // use key 'http' even if you send the request to https://...
+            // use key 'http' even if you send the request to https://...
             $options = array(
                 'http' => array(
-                    'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-                    'method'  => 'POST',
+                    'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+                    'method' => 'POST',
                     'content' => http_build_query($data),
                     'timeout' => 15
                 ),
             );
-            $request_context  = stream_context_create($options);
+            $request_context = stream_context_create($options);
             //$json_size = strlen($json);
             //error_log($json_size);
             //error_log($return_url);
@@ -173,9 +164,10 @@ class ActivityStreamer {
         return $return_id;
     }
 
-    static function valid_metric_id($metric_id) {
+    static function valid_metric_id($metric_id)
+    {
         $valid = false;
-        $metrics = get_available_metrics();
+        $metrics = ActivityStreamer::get_available_metrics();
         foreach ($metrics as $metric) {
             if ($metric["TemplateId"] == $metric_id) {
                 $valid = true;
@@ -185,8 +177,8 @@ class ActivityStreamer {
     }
 
 
-
-    static function valid_return_id($return_id) {
+    static function valid_return_id($return_id)
+    {
         $valid = false;
         $clipit_la = ClipitSite::lookup($return_id);
         if ($clipit_la instanceof ElggObject && $clipit_la->getSubtype() == ClipitLA::SUBTYPE) {
@@ -196,7 +188,8 @@ class ActivityStreamer {
     }
 
 
-    static function get_available_metrics() {
+    static function get_available_metrics()
+    {
         $metrics = array();
         define('ENDPOINT', "requestAvailableTemplates");
         $entities = elgg_get_entities(array("types" => "object", "subtypes" => "modactivitystreamer", "owner_guids" => '0', "order_by" => "", "limit" => 0));
@@ -213,20 +206,20 @@ class ActivityStreamer {
         }
 
 
-        $workbenchurl = $workbenchurl."/requestAvailableTemplates";
+        $workbenchurl = $workbenchurl . "/requestAvailableTemplates";
 
         $options = array(
             'http' => array(
-                'method'  => 'GET',
+                'method' => 'GET',
                 'timeout' => 15
             ),
         );
-        $request_context  = stream_context_create($options);
+        $request_context = stream_context_create($options);
 
         # retrieve JSON-String
         $jsonArrayString = file_get_contents($workbenchurl, false, $request_context);
         # converst JSON-String to JSON data structure
-        $jsonArray = json_decode($jsonArrayString,true);
+        $jsonArray = json_decode($jsonArrayString, true);
 
         #output
         if (empty($jsonArray)) {
@@ -243,7 +236,8 @@ class ActivityStreamer {
     }
 }
 
-function store_analysis_request($return_id, $metric_id, $hashed_data, $timestamp) {
+function store_analysis_request($return_id, $metric_id, $hashed_data, $timestamp)
+{
     global $con;
     global $store_analysis_statement;
     if ($store_analysis_statement instanceof mysqli_stmt) {
@@ -255,7 +249,8 @@ function store_analysis_request($return_id, $metric_id, $hashed_data, $timestamp
 }
 
 
-function check_for_existing_results($metric_id, $hashed_data) {
+function check_for_existing_results($metric_id, $hashed_data)
+{
     global $con;
     $get_analysis_statement = $con->prepare("SELECT return_id FROM `" . $_SESSION['analysis_table'] . "` " .
         "WHERE metric_id = ? AND hashed_data = ?;");
