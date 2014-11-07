@@ -12,9 +12,10 @@
  */
 $id = (int)get_input("id");
 $user_id = elgg_get_logged_in_user_guid();
+$user = array_pop(ClipitUser::get_by_id(array($user_id)));
 $storyboard = array_pop(ClipitStoryboard::get_by_id(array($id)));
 
-if($storyboard && $storyboard->owner_id == $user_id){
+if($storyboard && $storyboard->owner_id == $user_id || $user->role == ClipitUser::ROLE_TEACHER){
     $file = array_pop(ClipitFile::get_by_id(array($storyboard->file)));
     echo elgg_view_form('multimedia/storyboards/edit', array('data-validate'=> "true" ), array(
         'entity'  => $storyboard,

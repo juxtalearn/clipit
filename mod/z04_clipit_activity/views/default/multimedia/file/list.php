@@ -13,6 +13,8 @@
 $files = elgg_extract("files", $vars);
 $entity = elgg_extract('entity', $vars);
 $href = elgg_extract("href", $vars);
+$user_id = elgg_get_logged_in_user_guid();
+$user = array_pop(ClipitUser::get_by_id(array($user_id)));
 
 // if search form is activated
 echo elgg_view("files/search");
@@ -32,17 +34,18 @@ foreach($files as $file_id){
 
     // Owner options (edit/delete)
     $owner_options = "";
-    if($file->owner_id == elgg_get_logged_in_user_guid()){
+    if($file->owner_id == $user_id || $user->role == ClipitUser::ROLE_TEACHER){
         $options = array(
             'entity' => $file,
             'edit' => array(
                 "data-target" => "#edit-file-{$file->id}",
                 "href" => elgg_get_site_url()."ajax/view/modal/multimedia/file/edit?id={$file->id}",
                 "data-toggle" => "modal"
-            ),
-            'remove' => array("href" => "action/multimedia/files/remove?id={$file->id}"),
+            )
         );
-
+        if($file->owner_id == $user_id){
+            $options['remove'] = array("href" => "action/multimedia/files/remove?id={$file->id}");
+        }
         $owner_options = elgg_view("page/components/options_list", $options);
         // Remote modal, form content
         echo elgg_view("page/components/modal_remote", array('id'=> "edit-file-{$file->id}" ));

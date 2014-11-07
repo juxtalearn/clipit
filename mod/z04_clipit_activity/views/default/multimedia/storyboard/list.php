@@ -13,6 +13,9 @@
 $storyboards = elgg_extract("entities", $vars);
 $entity = elgg_extract('entity', $vars);
 $href = elgg_extract("href", $vars);
+$user_id = elgg_get_logged_in_user_guid();
+$user = array_pop(ClipitUser::get_by_id(array($user_id)));
+
 // if search form is activated
 echo elgg_view("storyboards/search");
 
@@ -32,7 +35,7 @@ foreach($storyboards as $sb_id){
     // Owner options (edit/delete)
     $owner_options = "";
     $select = "";
-    if($storyboard->owner_id == elgg_get_logged_in_user_guid()){
+    if($storyboard->owner_id == $user_id || $user->role == ClipitUser::ROLE_TEACHER){
         $options = array(
             'entity' => $storyboard,
             'edit' => array(
@@ -42,6 +45,9 @@ foreach($storyboards as $sb_id){
             ),
             'remove' => array("href" => "action/multimedia/storyboards/remove?id={$storyboard->id}"),
         );
+        if($storyboard->owner_id == $user_id){
+            $options['remove'] = array("href" => "action/multimedia/storyboards/remove?id={$storyboard->id}");
+        }
         if($vars['actions']){
             $owner_options = elgg_view("page/components/options_list", $options);
             $select = '<input type="checkbox" name="check-file[]" value="'.$storyboard->id.'" class="select-simple">';

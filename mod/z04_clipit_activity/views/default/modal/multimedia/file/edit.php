@@ -12,8 +12,9 @@
  */
 $id = (int)get_input("id");
 $user_id = elgg_get_logged_in_user_guid();
+$user = array_pop(ClipitUser::get_by_id(array($user_id)));
 $file = array_pop(ClipitFile::get_by_id(array($id)));
 
-if($file && $file->owner_id == $user_id){
+if($file && $file->owner_id == $user_id || $user->role == ClipitUser::ROLE_TEACHER){
     echo elgg_view_form('multimedia/files/edit', array('data-validate'=> "true" ), array('entity'  => $file));
 }
