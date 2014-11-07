@@ -7,7 +7,7 @@ class ActivityStreamer {
         global $con;
         global $CONFIG;
 
-        if (empty($metric_id) && valid_metric_id($metric_id)) {
+        if (empty($metric_id) && ActivityStreamer::valid_metric_id($metric_id)) {
             error_log("ActivityStreamer couldn't handle the get_metric request due to a missing or invalid metric_id!");
             return false;
         }
@@ -175,7 +175,7 @@ class ActivityStreamer {
 
     static function valid_metric_id($metric_id) {
         $valid = false;
-        $metrics = get_available_metrics();
+        $metrics = ActivityStreamer::get_available_metrics();
         foreach ($metrics as $metric) {
             if ($metric["TemplateId"] == $metric_id) {
                 $valid = true;
