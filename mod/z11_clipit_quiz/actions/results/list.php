@@ -10,13 +10,19 @@ foreach($questions as $quest){
     $q = array_pop(ClipitQuizQuestion::get_by_id(array($quest))); 
     $id_quest = $q->id;
     $type = $q-> option_type; //Obtengo el tipo de pregunta
+    $oa = $q-> option_array;
     $va = $q-> validation_array; //Obtengo el array de validacion
     $quiz_result_array = ClipitQuizQuestion::get_quiz_results($id_quest); //Obtengo el array de respuestas a la pregunta
     
     switch ($type) {
+        case ClipitQuizQuestion::TYPE_NUMBER:
+            $answer = get_input("nr_{$id_quest}");
+            $correct = ($answer == $oa);
+            break;
+        
         case ClipitQuizQuestion::TYPE_TRUE_FALSE:
-            $resp_seleccionada = get_input("vof_{$id_quest}");
-            correct_true_false($va, $resp_seleccionada, $correct);
+            $answer = get_input("vof_{$id_quest}");
+            correct_true_false($answer, $oa, $correct);
             break;
         
         case ClipitQuizQuestion::TYPE_SELECT_ONE:
@@ -27,6 +33,7 @@ foreach($questions as $quest){
         case ClipitQuizQuestion::TYPE_SELECT_MULTI:
             $selects = (array) get_input("m_{$id_quest}");
             correct_select_multi($va, $selects, $correct);
+            $answer = $selects;
             break;
     }
     
@@ -34,8 +41,9 @@ foreach($questions as $quest){
     if ($type == ClipitQuizQuestion::TYPE_STRING){ //Si es de Desarrollo guardo la respuesta para que la corrija el profesor
         $id_result = ClipitQuizResult::create(array(
             'user' => $user,
-            'description' => get_input("resp_{$id_quest}"),
+            'answer' => get_input("dr_{$id_quest}"),
             'quiz_question' => $id_quest,
+            'description' => '',
         ));
     
     /* Si es cualquier otro tipo de pregunta, se ha corregido 'automáticamente' */
@@ -44,6 +52,8 @@ foreach($questions as $quest){
             'user' => $user,
             'correct' => $correct,
             'quiz_question' => $id_quest,
+            'answer' => $answer,
+            'description' => '',
         ));
     }
     

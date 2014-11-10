@@ -87,30 +87,31 @@ function save_select_multi (&$option_array, &$val_array){
  */
 
 /** Corregir respuesta del tipo TRUE-FALSE **/
-function correct_true_false(&$va, &$select_answer, &$correct){
-    if (($select_answer == 1) && ($va[0] === "true")) {
-                $correct = true;
-            } elseif (($select_answer == 2) && ($va[1] === "true")) {
-                $correct = true;
-            } else {
-                $correct = false;
+function correct_true_false(&$answer, &$oa, &$correct){
+    $correct = ($answer == $oa);
+    // Si es verdarera/falsa lo guardo en $answer como propiedad del QuizResult
+    if ($answer == 1){
+        $answer = "True";
+    } else {
+        $answer = "False";
     }
 }
 
 /** Corregir respuesta del tipo SELECT-ONE **/
-function correct_select_one(&$va, &$select_answer, &$correct){
+function correct_select_one(&$oa, &$va, &$answer, &$correct){
     //Busca un valor determinado y devuelve la clave correspondiente en caso de éxito
     $correct_answer = array_search("true", $va);
     $correct_answer = $correct_answer + 1; //El indice de va[] es 0 para la resp 1, 1 para la resp 2, etc
-    if ($select_answer == $correct_answer) {
+    if ($answer == $correct_answer) {
         $correct = true;
     } else {
         $correct = false;
     }
+    $answer = $oa[$answer-1]; //Guardo la respuesta de texto 
 }
 
 /** Corregir respuesta del tipo SELECT-MULTI **/
-function correct_select_multi(&$va, &$selects, &$all_correct){
+function correct_select_multi(&$oa, &$va, &$selects, &$all_correct){
     $corrects = 0; //Contador de respuestas correctas
     $j = 1; //Indice para el array de respuestas seleccionadas
     for ($i=0; $i < count($va); $i++) {
@@ -118,9 +119,17 @@ function correct_select_multi(&$va, &$selects, &$all_correct){
             $corrects ++;}
         $j ++;
     }
+    //Retorna un array asociativo de valores a partir de array como keys y su respectivo recuento como valores
     $aux = (array) array_count_values($va);
-        if ($aux["true"] == $corrects){
-            $all_correct = true;}
+    if ($aux["true"] == $corrects){
+            $all_correct = true;
+    }
+    
+    //Guardar las respuestas selecionadas
+    foreach ($selects as $value) {
+        $answers[] = $oa[$value-1];
+    }
+    $selects = $answers;
 }
 
 /* Funcion para comprobar si una pregunta de desarrollo ha sido corregida

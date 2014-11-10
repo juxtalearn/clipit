@@ -56,20 +56,20 @@ foreach($questions as $quest):
           switch ($type) {
               case ClipitQuizQuestion::TYPE_STRING:?>
                     <div class="qqt" id="d">
-                        <br><?php echo elgg_view('input/longtext',array('name' => "resp_{$id_quest}")); ?>
+                        <br><?php echo elgg_view('input/longtext',array('name' => "dr_{$id_quest}")); ?>
+                    </div>
+                  <?php break;
+              //*******************************************************************************************
+              case ClipitQuizQuestion::TYPE_NUMBER:?>
+                    <div class="qqt" id="n">
+                        <br><?php echo elgg_view('input/text',array('name' => "nr_{$id_quest}")); ?>
                     </div>
                   <?php break;
               //*******************************************************************************************
               case ClipitQuizQuestion::TYPE_TRUE_FALSE:?>              
                      <div class="qqt" id="vof" style="margin-left: 30px;">
                         <br><input type="radio" name="<?php echo "vof_{$id_quest}"?>" value="1">
-                        <?php
-                        echo elgg_view('output/text', array('value' => $oa[0]));
-                        ?>
-                        <br><input type="radio" name="<?php echo "vof_{$id_quest}"?>" value="2">
-                        <?php
-                        echo elgg_view('output/text', array('value' => $oa[1]));
-                        ?>
+                        <input type="radio" name="<?php echo "vof_{$id_quest}"?>" value="2"><br>
                     </div>
                   <?php break;
               //*******************************************************************************************
