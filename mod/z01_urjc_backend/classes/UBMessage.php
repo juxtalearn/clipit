@@ -50,10 +50,12 @@ class UBMessage extends UBItem {
 
     /**
      * Saves this instance to the system.
-     * @param  bool $double_save if $double_save is true, this object is saved twice to ensure that all properties are updated properly. E.g. the time created property can only beset on ElggObjects during an update. Defaults to false!
+     * @param  bool $double_save if $double_save is true, this object is saved twice to ensure that all properties are
+     *     updated properly. E.g. the time created property can only beset on ElggObjects during an update. Defaults to
+     *     false!
      * @return bool|int Returns the Id of the saved instance, or false if error
      */
-    protected function save($double_save=false) {
+    protected function save($double_save = false) {
         parent::save($double_save);
         static::set_destination($this->id, $this->destination);
         static::add_files($this->id, $this->file_array);
@@ -72,7 +74,7 @@ class UBMessage extends UBItem {
      */
     static function get_by_destination($destination_array, $offset = 0, $limit = 0) {
         $message_array = array();
-        foreach($destination_array as $destination_id) {
+        foreach ($destination_array as $destination_id) {
             $item_array = UBCollection::get_items($destination_id, static::REL_MESSAGE_DESTINATION, true);
             $temp_array = array();
             foreach ($item_array as $item_id) {
@@ -83,9 +85,9 @@ class UBMessage extends UBItem {
             } else {
                 $message_array[$destination_id] = $temp_array;
                 usort($message_array[$destination_id], 'UBItem::sort_by_date');
-                if(!empty($limit)) {
+                if (!empty($limit)) {
                     $message_array[$destination_id] = array_splice($message_array[$destination_id], $offset, $limit);
-                } else{
+                } else {
                     $message_array[$destination_id] = array_splice($message_array[$destination_id], $offset);
                 }
             }
@@ -113,7 +115,7 @@ class UBMessage extends UBItem {
      */
     static function get_destination($id) {
         $item_array = UBCollection::get_items($id, static::REL_MESSAGE_DESTINATION);
-        if(empty($item_array)) {
+        if (empty($item_array)) {
             return 0;
         }
         return (int)array_pop($item_array);
@@ -122,13 +124,13 @@ class UBMessage extends UBItem {
     /**
      * Set the Destination of a Message
      *
-     * @param int $id             Id of the Message
+     * @param int $id Id of the Message
      * @param int $destination_id ID of the Destination
      *
      * @return bool True if OK, false if error
      */
     static function set_destination($id, $destination_id) {
-        if($destination_id > 0) {
+        if ($destination_id > 0) {
             UBCollection::remove_all_items($id, static::REL_MESSAGE_DESTINATION);
             return UBCollection::add_items($id, array($destination_id), static::REL_MESSAGE_DESTINATION);
         }
@@ -150,7 +152,7 @@ class UBMessage extends UBItem {
     /**
      * Add Files attached to a Message
      *
-     * @param int   $id         ID of the Message
+     * @param int $id ID of the Message
      * @param array $file_array Array of File IDs
      *
      * @return bool True if OK, false if error
@@ -162,7 +164,7 @@ class UBMessage extends UBItem {
     /**
      * Set Files attached to a Message
      *
-     * @param int   $id         ID of the Message
+     * @param int $id ID of the Message
      * @param array $file_array Array of File IDs
      *
      * @return bool True if OK, false if error
@@ -174,7 +176,7 @@ class UBMessage extends UBItem {
     /**
      * Remove Files attached to a Message
      *
-     * @param int   $id         ID of the Message
+     * @param int $id ID of the Message
      * @param array $file_array Array of File IDs
      *
      * @return bool True if OK, false if error
@@ -197,7 +199,7 @@ class UBMessage extends UBItem {
     /**
      * Get a list of Users who have Read a Message, or optionally whether certain Users have read it
      *
-     * @param int        $id         ID of the Message
+     * @param int $id ID of the Message
      * @param null|array $user_array List of User IDs - optional
      *
      * @return static[] Array with key => value: user_id => read_status, where read_status is bool
@@ -206,12 +208,12 @@ class UBMessage extends UBItem {
         $props = static::get_properties($id, array("read_array", "owner_id"));
         $read_array = $props["read_array"];
         $owner_id = $props["owner_id"];
-        if(!$user_array) {
+        if (!$user_array) {
             return $read_array;
         } else {
             $return_array = array();
-            foreach($user_array as $user_id) {
-                if((int)$user_id == (int)$owner_id || in_array($user_id, $read_array)) {
+            foreach ($user_array as $user_id) {
+                if ((int)$user_id == (int)$owner_id || in_array($user_id, $read_array)) {
                     $return_array[$user_id] = true;
                 } else {
                     $return_array[$user_id] = false;
@@ -224,8 +226,8 @@ class UBMessage extends UBItem {
     /**
      * Set the Read status for a Message
      *
-     * @param int   $id         ID of Message
-     * @param bool  $read_value Read status value: true = read, false = unread
+     * @param int $id ID of Message
+     * @param bool $read_value Read status value: true = read, false = unread
      * @param array $user_array Array of User IDs
      *
      * @return bool|int ID of Message if Ok, false if error
@@ -235,20 +237,22 @@ class UBMessage extends UBItem {
         $read_array = static::get_properties($id, array("read_array"));
         $read_array = array_pop($read_array);
         $update_flag = false;
-        foreach($user_array as $user_id) {
+        foreach ($user_array as $user_id) {
             $index = array_search((int)$user_id, $read_array);
-            if($read_value === true && $index === false) {
+            if ($read_value === true && $index === false) {
                 array_push($read_array, $user_id);
                 $update_flag = true;
-            } else if($read_value === false && $index !== false) {
-                array_splice($read_array, $index, 1);
-                $update_flag = true;
+            } else {
+                if ($read_value === false && $index !== false) {
+                    array_splice($read_array, $index, 1);
+                    $update_flag = true;
+                }
             }
         }
-        if($update_flag){
+        if ($update_flag) {
             $prop_value_array["read_array"] = $read_array;
             return static::set_properties($id, $prop_value_array);
-        }else{
+        } else {
             return $id;
         }
     }
@@ -257,16 +261,17 @@ class UBMessage extends UBItem {
      * Count the number os Messages for each Destination specified
      *
      * @param array $destination_array List of Destination IDs
-     * @param bool  $recursive         Whether to recurse
+     * @param bool $recursive Whether to recurse
      *
      * @return array Returns array of destination => message_count elements.
      */
     static function count_by_destination($destination_array, $recursive = false) {
         $count_array = array();
-        foreach($destination_array as $dest_id) {
-            $count_array[$dest_id] = UBCollection::count_items(
-                $dest_id, static::REL_MESSAGE_DESTINATION, true, $recursive
-            );
+        foreach ($destination_array as $dest_id) {
+            $count_array[$dest_id] = UBCollection::count_items($dest_id,
+                static::REL_MESSAGE_DESTINATION,
+                true,
+                $recursive);
         }
         return $count_array;
     }
@@ -281,7 +286,7 @@ class UBMessage extends UBItem {
     static function count_by_sender($sender_array) {
         $message_array = static::get_by_sender($sender_array);
         $count_array = array();
-        foreach($sender_array as $sender_id) {
+        foreach ($sender_array as $sender_id) {
             $count_array[$sender_id] = count((array)$message_array[$sender_id]);
         }
         return $count_array;
@@ -290,18 +295,18 @@ class UBMessage extends UBItem {
     static function unread_by_destination($destination_array, $user_id, $recursive = false) {
         $destination_messages = static::get_by_destination($destination_array);
         $count_array = array();
-        foreach($destination_array as $destination_id) {
+        foreach ($destination_array as $destination_id) {
             $message_array = $destination_messages[$destination_id];
-            if(!$message_array) {
+            if (!$message_array) {
                 $count_array[$destination_id] = 0;
                 continue;
             }
             $count = 0;
-            foreach($message_array as $message) {
-                if(array_search((int)$user_id, $message->read_array) === false) {
-                    $count ++;
+            foreach ($message_array as $message) {
+                if (array_search((int)$user_id, $message->read_array) === false) {
+                    $count++;
                 }
-                if($recursive) {
+                if ($recursive) {
                     $temp_count = static::unread_by_destination(array((int)$message->id), $user_id, $recursive);
                     $count += $temp_count[$message->id];
                 }
@@ -314,13 +319,13 @@ class UBMessage extends UBItem {
     static function unread_by_sender($sender_array, $user_id) {
         $sender_messages = static::get_by_sender($sender_array);
         $count_array = array();
-        foreach($sender_array as $sender_id) {
+        foreach ($sender_array as $sender_id) {
             $count = 0;
-            if(!empty($sender_messages[$sender_id])) {
+            if (!empty($sender_messages[$sender_id])) {
                 $message_array = $sender_messages[$sender_id];
-                foreach($message_array as $message) {
-                    if(array_search((int)$user_id, $message->read_array) === false) {
-                        $count ++;
+                foreach ($message_array as $message) {
+                    if (array_search((int)$user_id, $message->read_array) === false) {
+                        $count++;
                     }
                 }
             }

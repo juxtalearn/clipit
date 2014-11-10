@@ -33,13 +33,13 @@ function urjc_backend_init() {
  * @return bool True if success.
  */
 function loadFiles($path) {
-    if(!$path) {
+    if (!$path) {
         return false;
     }
     $obj_files = elgg_get_file_list($path, array(), array(), array(".php"));
-    foreach($obj_files as $obj) {
+    foreach ($obj_files as $obj) {
         elgg_log("Loading $obj...");
-        if(!include_once($obj)) {
+        if (!include_once($obj)) {
             $msg = "Could not load $obj";
             throw new InstallationException($msg);
         }
@@ -57,29 +57,29 @@ function loadFiles($path) {
  */
 function clipit_auth_usertoken() {
     global $CONFIG;
-    if(isset($_SERVER["HTTP_AUTH_TOKEN"])) {
+    if (isset($_SERVER["HTTP_AUTH_TOKEN"])) {
         $token = $_SERVER["HTTP_AUTH_TOKEN"];
     }
-    if(!isset($token) || empty($token)) {
+    if (!isset($token) || empty($token)) {
         return false;
     }
     $validated_userid = validate_user_token($token, $CONFIG->site_id);
-    if($validated_userid) {
+    if ($validated_userid) {
         $u = get_entity($validated_userid);
         // Could we get the user?
-        if(!$u) {
+        if (!$u) {
             return false;
         }
         // Not an elgg user
-        if((!$u instanceof ElggUser)) {
+        if ((!$u instanceof ElggUser)) {
             return false;
         }
         // User is banned
-        if($u->isBanned()) {
+        if ($u->isBanned()) {
             return false;
         }
         // Fail if we couldn't log the user in
-        if(!login($u)) {
+        if (!login($u)) {
             return false;
         }
         return true;
