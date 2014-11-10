@@ -202,6 +202,7 @@ $english = array(
     'publications:view_scope' => 'View scope',
     'input:no' => 'No',
     'input:yes' => 'Yes',
+    'input:ok' => 'Ok',
     'publish'   => 'Publish',
     'published'   => 'Published',
     'publish:to_activity'   => 'Publish %s in %s',
@@ -290,6 +291,10 @@ $english = array(
     'clipit:or' => 'or',
     'activity:updated' => 'Activity updated',
     'activity:cantupdate' => 'Cannot update activity',
+
+    // Quiz
+    'quiz:result:send' => '',
+    'difficulty' => 'Difficulty',
 );
 
 add_translation('en', $english);

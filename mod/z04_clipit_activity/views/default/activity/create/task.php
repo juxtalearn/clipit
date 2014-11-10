@@ -17,7 +17,7 @@ $task = elgg_extract('task', $vars); // task data
 switch($task_type){
     case "upload":
         $task_types = array(
-//            'quiz_take' => elgg_echo('task:quiz_answer'),
+            ClipitTask::TYPE_QUIZ_TAKE => elgg_echo('task:quiz_answer'),
             ClipitTask::TYPE_VIDEO_UPLOAD => elgg_echo('task:video_upload'),
             ClipitTask::TYPE_STORYBOARD_UPLOAD => elgg_echo('task:storyboard_upload'),
             ClipitTask::TYPE_RESOURCE_DOWNLOAD => elgg_echo('task:resource_download'),
@@ -49,7 +49,7 @@ if($vars['required'] !== false){
 ?>
 
 <div class="col-md-12">
-    <?php if(!$disabled && !$task):?>
+    <?php if(!$disabled && !$task && $vars['delete_task']!==false):?>
         <i class="delete-task fa fa-times red pull-left margin-top-5" style="cursor: pointer" onclick="javascript:$(this).closest('.task').remove();"></i>
     <?php endif;?>
     <div class="content-block">
@@ -120,7 +120,8 @@ if($vars['required'] !== false){
             </div>
         </div>
         <?php if(!$disabled):?>
-<!--            --><?php
+
+            <!--            --><?php
 //            $quizzes = array('' => 'Select quiz');
 //            foreach(ClipitQuiz::get_all() as $quiz){
 //                $quizzes[$quiz->id] = $quiz->name;
@@ -158,10 +159,26 @@ if($vars['required'] !== false){
             </div>
         <?php endif;?>
     </div>
+    <?php if(!$disabled):?>
+        <div class="clearfix"></div>
+        <div id="task-type-container" class="margin-bottom-10" style="border: 1px solid #bae6f6;border-radius: 3px;padding: 10px;">
+            <?php if($task):
+                switch($task->task_type){
+                    case ClipitTask::TYPE_QUIZ_TAKE:
+                        echo elgg_view('activity/admin/tasks/quiz/quiz', array(
+                            'entity' => array_pop(ClipitQuiz::get_by_id(array($task->quiz))),
+                            'activity_id' => $task->activity
+                        ));
+                        break;
+                }
+            endif;
+            ?>
+        </div>
+    <?php endif;?>
 </div>
 <?php
 if(!$disabled):
-    $attach = $vars['attach'];
+    $attach = $vars['entity'];
     $attach['id'] = $id;
 ?>
     <?php if($attach['selected']):?>

@@ -24,6 +24,60 @@ foreach($tasks as $task){
         'quiz' => $task['type'] == ClipitTask::TYPE_QUIZ_TAKE ? $task['quiz'] : 0
     ));
     ClipitActivity::add_tasks($entity_id, array($task_id));
+    if($task['type'] == ClipitTask::TYPE_QUIZ_TAKE){
+        $quiz = get_input('quiz');
+        // Set questions to Quiz
+        $questions = get_input('question');
+        foreach($questions as $question){
+            $values = array();
+            $validations = array();
+            $tags = array();
+            switch($question['type']){
+                case ClipitQuizQuestion::TYPE_SELECT_MULTI:
+                    foreach($question['select_multi'] as $select){
+                        $values[] = $select['value'];
+                        if(isset($select['correct'])){
+                            $validations[] = true;
+                        } else {
+                            $validations[] = false;
+                        }
+                    }
+                    break;
+                case ClipitQuizQuestion::TYPE_SELECT_ONE:
+                    foreach($question['select_one'] as $select){
+                        $values[] = $select['value'];
+                        if(isset($select['correct'])){
+                            $validations[] = true;
+                        } else {
+                            $validations[] = false;
+                        }
+                    }
+                    break;
+                case ClipitQuizQuestion::TYPE_TRUE_FALSE:
+                    break;
+            }
+            $tags = array_filter($question['tags']);
+            $question_id = ClipitQuizQuestion::create(array(
+                'name' => $question['title'],
+                'description' => $question['description'],
+                'option_type' => $question['type'],
+                'option_array' => $values,
+                'validation_array' => $validations,
+                'tag_array' => $tags
+            ));
+            $questions_id[] = $question_id;
+            if($question['id_parent']){
+                ClipitQuizQuestion::link_parent_clone($question['id_parent'], $question_id);
+            }
+        }
+        $quiz_id = ClipitQuiz::create(array(
+            'name' => $quiz['title'],
+            'description' => $quiz['description'],
+            'view_mode' => $quiz['view'],
+        ));
+        ClipitTask::set_properties($task_id, array('quiz' => $quiz_id));
+        ClipitQuiz::add_quiz_questions($quiz_id, $questions_id);
+    }
     if($task['type'] == ClipitTask::TYPE_RESOURCE_DOWNLOAD){
         $files = array_filter(get_input('attach_files'));
         ClipitTask::add_files($task_id, $files);

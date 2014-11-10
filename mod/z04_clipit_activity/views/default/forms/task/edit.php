@@ -44,13 +44,14 @@ if($task->parent_task){
         ClipitTask::get_resources($task->id)
     );
     $params = array(
-        'attach' => array(
+        'entity' => array(
             'class' => 'show',
             'selected' => json_encode($resources),
         )
     );
-}
+}elseif($task->task_type == ClipitTask::TYPE_QUIZ_TAKE){
 
+}
 
 //$body .= elgg_view('activity/create/task', array('task_type' => $task_type, 'id' => $id, 'task' => $task));
 switch($task->task_type){

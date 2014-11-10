@@ -18,7 +18,7 @@ $body = elgg_view("input/hidden", array(
     'value' => $activity->id,
 ));
 $body .= '<div class="task">';
-$body .= elgg_view('activity/create/task', array('task_type' => 'upload', 'id' => $id));
+$body .= elgg_view('activity/create/task', array('task_type' => 'upload', 'id' => $id, 'delete_task' => false));
 
 $body .='
 <ul class="feedback_form" style="margin-left: 20px;display: none">

@@ -26,8 +26,6 @@ switch($object['subtype']){
         $tt_tags = $tt->tag_array;
         break;
 }
-//load jQuery Chosen
-elgg_load_js("jquery:chosen");
 $performance_items = $activity->performance_item_array;
 $tags = array();
 $labels_value = array();

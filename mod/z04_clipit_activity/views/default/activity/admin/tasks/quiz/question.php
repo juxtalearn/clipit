@@ -42,6 +42,7 @@ if($question){
     $("[data-id='<?php echo $id;?>'] .difficulty-slider").difficulty();
 </script>
 <div class="question row margin-bottom-10" data-id="<?php echo $id;?>">
+    <?php if($num !== false):?>
     <div class="col-xs-1 text-right">
         <h3 class="text-muted margin-0 question-num">
             <?php echo $num;?>.
@@ -56,7 +57,8 @@ if($question){
             ?>
         </div>
     </div>
-    <div class="col-xs-11">
+    <?php endif;?>
+    <div class="<?php echo $num !== false ? "col-xs-11":"" ?>">
         <div style="padding: 10px; background: #fafafa;">
         <?php
         $types = array(
@@ -106,7 +108,7 @@ if($question){
                         <?php endfor;?>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group tags-question-select">
                     <label><?php echo elgg_echo('tags');?></label>
                     <select name="question[<?php echo $id;?>][tags][]" data-placeholder="<?php echo elgg_echo('click_add');?>" style="width:100%;" multiple class="tags-select" tabindex="8">
                         <option value=""></option>

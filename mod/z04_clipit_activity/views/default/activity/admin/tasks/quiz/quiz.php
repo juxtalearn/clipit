@@ -10,7 +10,6 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-
 $activity = elgg_extract('entity', $vars);
 $questions = array(1);
 if($entity = elgg_extract('entity', $vars)){
@@ -68,9 +67,9 @@ $tags = ClipitTrickyTopic::get_tags($activity->tricky_topic);
             <label>Description</label>
             <?php echo elgg_view("input/plaintext", array(
                 'name'  => "quiz[description]",
-                'class' => 'form-control',
+                'class' => 'form-control '.($entity->description ? 'mceEditor' : ''),
                 'value' => $entity->description,
-                'onclick'   => '$(this).addClass(\'mceEditor\');
+                'onclick' => $entity->description ? false : '$(this).addClass(\'mceEditor\');
                                         tinymce_setup();
                                         tinymce.execCommand(\'mceFocus\',false,this.id);',
                 'rows'  => 1,
@@ -84,6 +83,7 @@ $tags = ClipitTrickyTopic::get_tags($activity->tricky_topic);
             <?php echo elgg_view("input/dropdown", array(
                 'name' => 'quiz[view]',
                 'style' => 'padding: 5px;',
+                'value' => $entity->view_mode,
                 'class' => 'form-control',
                 'options_values' => array(
                     ClipitQuiz::VIEW_MODE_LIST => 'En una página',
@@ -99,7 +99,7 @@ $tags = ClipitTrickyTopic::get_tags($activity->tricky_topic);
                 $time = $entity->max_time;
                 $days = range(1, 30);
                 echo elgg_view("input/dropdown", array(
-                    'name' => 'quiz[view]',
+                    'name' => 'quiz[time][d]',
                     'style' => 'width: 30%;display: inline-block;padding:5px;',
                     'class' => 'form-control',
                     'value' => $entity ? floor($time / 86000):'',
@@ -109,7 +109,7 @@ $tags = ClipitTrickyTopic::get_tags($activity->tricky_topic);
                 <?php
                 $hours = range(1, 24);
                 echo elgg_view("input/dropdown", array(
-                    'name' => 'quiz[view]',
+                    'name' => 'quiz[time][h]',
                     'style' => 'width: 30%;display: inline-block;padding:5px;',
                     'class' => 'form-control',
                     'value' => $entity ? floor($time / 3600):'',
@@ -119,7 +119,7 @@ $tags = ClipitTrickyTopic::get_tags($activity->tricky_topic);
                 <?php
                 $minutes = range(1, 60);
                 echo elgg_view("input/dropdown", array(
-                    'name' => 'quiz[view]',
+                    'name' => 'quiz[time][m]',
                     'style' => 'width: 30%;display: inline-block;padding:5px;',
                     'class' => 'form-control',
                     'value' => $entity ? floor(($time / 60) % 60):'',
@@ -137,7 +137,7 @@ $tags = ClipitTrickyTopic::get_tags($activity->tricky_topic);
         foreach($questions as $question_id):
             $question = array_pop(ClipitQuizQuestion::get_by_id(array($question_id)));
         ?>
-            <?php echo elgg_view('activity/admin/tasks/quiz/question', array(
+            <?php echo elgg_view('activity/admin/tasks/quiz/question/list', array(
                 'num' => $i,
                 'tricky-topic' => $activity->tricky_topic,
                 'question' => isset($entity) ? $question : false
@@ -227,5 +227,8 @@ $tags = ClipitTrickyTopic::get_tags($activity->tricky_topic);
     .chosen-container-single .chosen-search input{
         width: 100%;
         border: 1px solid #ccc;
+    }
+    .tags-question-select .chosen-container-multi{
+        width: 100% !important;
     }
 </style>

@@ -12,4 +12,7 @@
  */
 $href = "clipit_activity/{$activity->id}/quizzes";
 $quiz = $task->quiz;
-$body = elgg_view('quizzes/list', array('quiz' => $quiz, 'href' => $href));
+$body = elgg_view_form('quiz/take',
+    array('body' =>
+        elgg_view('quizzes/list', array('quiz' => $quiz, 'href' => $href, 'task_id' => $task->id))
+    ));

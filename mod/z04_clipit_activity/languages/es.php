@@ -203,6 +203,7 @@ $spanish = array(
     'publications:view_scope' => 'Ver en',
     'input:no' => 'No',
     'input:yes' => 'Si',
+    'input:ok' => 'Continuar',
     'publish'   => 'Publicar',
     'published'   => 'Publicado',
     'publish:to_activity'   => 'Publicar %s en %s',
@@ -307,6 +308,10 @@ $spanish = array(
     'task:my_resource' => 'Mi enlace',
     'resource:event:added' => 'Ha añadido un enlace al grupo',
     'resource:added_by' => 'Añadido por',
+
+    // Quiz
+    'quiz:result:send' => 'Las respuestas quedarán guardadas...',
+    'difficulty' => 'Dificultad',
 );
 
 add_translation('es', $spanish);

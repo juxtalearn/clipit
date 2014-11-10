@@ -16,8 +16,6 @@ $tt_tags = elgg_extract('tags', $vars);
 $group_id = $entity::get_group($entity->id);
 $group_tags = ClipitGroup::get_tags($group_id);
 $tt_tags = array_diff($tt_tags, $group_tags);
-//load jQuery Chosen
-elgg_load_js("jquery:chosen");
 
 $performance_items = $entity->performance_item_array;
 $tags = $entity->tag_array;
