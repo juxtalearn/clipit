@@ -5,9 +5,9 @@
 */
 
 /** Funcion auxiliar para guardar las respuestas de Desarrollo **/
-function save_long_quest(&$option_array, &$val_array){
+function save_long_quest(&$respuesta, &$option_array, &$val_array){
     $option_array = array(
-            "0" => get_input('resp'),
+            "0" => $respuesta,
         );
     $val_array = array(
             "0" => "true",
@@ -15,21 +15,15 @@ function save_long_quest(&$option_array, &$val_array){
 }
 
 /** Funcion auxiliar para guardar una pregunta de Verdadero-Falso **/
-function save_true_false(&$option_array, &$val_array){
-    $option_array = array(
-            "0" => get_input('vof_resp1'),
-            "1" => get_input('vof_resp2'),
-        );
+function save_true_false(&$option_array, &$val_array){   
     $id_resp = get_input('vof_ca');
     if ($id_resp == 1) {
-            $val_array = array(
-                  "0" => "true",
-                  "1" => "false");
-    } else {
-            $val_array = array(
-                  "0" => "false",
-                  "1" => "true");
-    }
+            $option_array = array("0" => 1);
+            $val_array = array("0" => "true");
+    } elseif ($id_resp == 2) {
+            $option_array = array("0" => 2);
+            $val_array = array("0" => "false");
+    } 
 }
 
 
@@ -91,28 +85,33 @@ function save_select_multi (&$option_array, &$val_array){
 /*
  * Funciones para corregir las respuestas dadas por el estudiante
  */
-function test_vof(&$va, &$select_answer, &$correct){
-    if (($select_answer == 1) && ($va[0] === "true")) {
-                $correct = true;
-            } elseif (($select_answer == 2) && ($va[1] === "true")) {
-                $correct = true;
-            } else {
-                $correct = false;
+
+/** Corregir respuesta del tipo TRUE-FALSE **/
+function correct_true_false(&$answer, &$oa, &$correct){
+    $correct = ($answer == $oa);
+    // Si es verdarera/falsa lo guardo en $answer como propiedad del QuizResult
+    if ($answer == 1){
+        $answer = "True";
+    } else {
+        $answer = "False";
     }
 }
 
-function test_one_choice(&$va, &$select_answer, &$correct){
+/** Corregir respuesta del tipo SELECT-ONE **/
+function correct_select_one(&$oa, &$va, &$answer, &$correct){
     //Busca un valor determinado y devuelve la clave correspondiente en caso de éxito
     $correct_answer = array_search("true", $va);
     $correct_answer = $correct_answer + 1; //El indice de va[] es 0 para la resp 1, 1 para la resp 2, etc
-    if ($select_answer == $correct_answer) {
+    if ($answer == $correct_answer) {
         $correct = true;
     } else {
         $correct = false;
     }
+    $answer = $oa[$answer-1]; //Guardo la respuesta de texto 
 }
 
-function test_multi_choice(&$va, &$selects, &$all_correct){
+/** Corregir respuesta del tipo SELECT-MULTI **/
+function correct_select_multi(&$oa, &$va, &$selects, &$all_correct){
     $corrects = 0; //Contador de respuestas correctas
     $j = 1; //Indice para el array de respuestas seleccionadas
     for ($i=0; $i < count($va); $i++) {
@@ -120,9 +119,17 @@ function test_multi_choice(&$va, &$selects, &$all_correct){
             $corrects ++;}
         $j ++;
     }
+    //Retorna un array asociativo de valores a partir de array como keys y su respectivo recuento como valores
     $aux = (array) array_count_values($va);
-        if ($aux["true"] == $corrects){
-            $all_correct = true;}
+    if ($aux["true"] == $corrects){
+            $all_correct = true;
+    }
+    
+    //Guardar las respuestas selecionadas
+    foreach ($selects as $value) {
+        $answers[] = $oa[$value-1];
+    }
+    $selects = $answers;
 }
 
 /* Funcion para comprobar si una pregunta de desarrollo ha sido corregida

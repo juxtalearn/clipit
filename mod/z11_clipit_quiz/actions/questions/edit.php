@@ -19,6 +19,8 @@ $type_empty = get_input('empty_ans');
 switch ($type_empty) {
     case ClipitQuizQuestion::TYPE_STRING: $question_type = $type_empty;
         break;
+    case ClipitQuizQuestion::TYPE_NUMBER: $question_type = $type_empty;
+        break;
     case ClipitQuizQuestion::TYPE_TRUE_FALSE: $question_type = $type_empty;
         break;  
     case ClipitQuizQuestion::TYPE_SELECT_ONE: $question_type = $type_empty;
@@ -32,7 +34,13 @@ switch ($type_empty) {
 
 switch ($question_type) {
     case ClipitQuizQuestion::TYPE_STRING:
-        save_long_quest($option_array, $val_array);
+        $respuesta = get_input('dr');
+        save_long_quest($respuesta, $option_array, $val_array);
+        break;
+    
+    case ClipitQuizQuestion::TYPE_NUMBER:
+        $respuesta = get_input('nr');
+        save_long_quest($respuesta, $option_array, $val_array);
         break;
     
     case ClipitQuizQuestion::TYPE_TRUE_FALSE:

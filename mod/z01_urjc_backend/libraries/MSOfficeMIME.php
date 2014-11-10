@@ -1,34 +1,21 @@
 <?php
 
 function getMicrosoftOfficeMimeInfo($file) {
-    $fileInfo = array(
-        'word/' => array(
-            'type' => 'Microsoft Word 2007+',
-            'mime' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'extension' => 'docx'
-        ), 'ppt/' => array(
-            'type' => 'Microsoft PowerPoint 2007+',
-            'mime' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation', 'extension' => 'pptx'
-        ), 'xl/' => array(
-            'type' => 'Microsoft Excel 2007+',
-            'mime' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'extension' => 'xlsx'
-        )
-    );
+    $fileInfo = array('word/' => array('type' => 'Microsoft Word 2007+', 'mime' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'extension' => 'docx'), 'ppt/' => array('type' => 'Microsoft PowerPoint 2007+', 'mime' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation', 'extension' => 'pptx'), 'xl/' => array('type' => 'Microsoft Excel 2007+', 'mime' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'extension' => 'xlsx'));
     $pkEscapeSequence = "PK\x03\x04";
     $file = new BinaryFile($file);
-    if($file->bytesAre($pkEscapeSequence, 0x00)) {
-        if($file->bytesAre('[Content_Types].xml', 0x1E)) {
-            if($file->search($pkEscapeSequence, null, 2000)) {
-                if($file->search($pkEscapeSequence, null, 1000)) {
+    if ($file->bytesAre($pkEscapeSequence, 0x00)) {
+        if ($file->bytesAre('[Content_Types].xml', 0x1E)) {
+            if ($file->search($pkEscapeSequence, null, 2000)) {
+                if ($file->search($pkEscapeSequence, null, 1000)) {
                     $offset = $file->tell() + 26;
-                    foreach($fileInfo as $searchWord => $info) {
+                    foreach ($fileInfo as $searchWord => $info) {
                         $file->seek($offset);
-                        if($file->bytesAre($searchWord)) {
+                        if ($file->bytesAre($searchWord)) {
                             return $fileInfo[$searchWord];
                         }
                     }
-                    return array(
-                        'type' => 'Microsoft OOXML', 'mime' => null, 'extension' => null
-                    );
+                    return array('type' => 'Microsoft OOXML', 'mime' => null, 'extension' => null);
                 }
             }
         }
@@ -50,7 +37,7 @@ class BinaryFile {
 
     public function __construct($file) {
         $this->handle = fopen($file, 'r');
-        if($this->handle === false) {
+        if ($this->handle === false) {
             throw new BinaryFile_Exception('Cannot open file');
         }
     }
@@ -64,11 +51,11 @@ class BinaryFile {
     }
 
     public function seek($offset, $seekMethod = null) {
-        if($offset !== null) {
-            if($seekMethod === null) {
+        if ($offset !== null) {
+            if ($seekMethod === null) {
                 $seekMethod = BinaryFile_Seek_Method::ABSOLUTE;
             }
-            if($seekMethod === BinaryFile_Seek_Method::RELATIVE) {
+            if ($seekMethod === BinaryFile_Seek_Method::RELATIVE) {
                 $offset += $this->tell();
             }
             return fseek($this->handle, $offset);
@@ -82,23 +69,23 @@ class BinaryFile {
     }
 
     public function search($string, $offset = null, $maxLength = null) {
-        if($offset !== null) {
+        if ($offset !== null) {
             $this->seek($offset);
         } else {
             $offset = $this->tell();
         }
         $bytesRead = 0;
         $bufferSize = ($maxLength !== null ? min(self::SEARCH_BUFFER_SIZE, $maxLength) : self::SEARCH_BUFFER_SIZE);
-        while($read = $this->read($bufferSize)) {
+        while ($read = $this->read($bufferSize)) {
             $bytesRead += strlen($read);
             $search = strpos($read, $string);
-            if($search !== false) {
+            if ($search !== false) {
                 $this->seek($offset + $search + strlen($string));
                 return true;
             }
-            if($maxLength !== null) {
+            if ($maxLength !== null) {
                 $bufferSize = min(self::SEARCH_BUFFER_SIZE, $maxLength - $bytesRead);
-                if($bufferSize == 0) {
+                if ($bufferSize == 0) {
                     break;
                 }
             }

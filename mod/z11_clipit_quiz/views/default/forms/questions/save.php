@@ -135,7 +135,7 @@ $(document).ready(function(){
 		elgg_view('input/pulldown', array(
 			'name' => 'type_answer',
 			'options_values' => array(
-                                'initial' => "Elige el tipo de respuesta",
+                                '' => "Elige el tipo de respuesta",
                                 ClipitQuizQuestion::TYPE_STRING => "Long question",
                                 ClipitQuizQuestion::TYPE_NUMBER => "Numeric question",
                                 ClipitQuizQuestion::TYPE_TRUE_FALSE => "True or false",
@@ -160,20 +160,23 @@ $(document).ready(function(){
 	<?php echo "Respuesta" ?>
     </label> <br>
     <?php echo elgg_view('input/longtext',array('name' => 'd_resp')); ?>
+    <br>
+</div>
+
+<div class="qqt" id="<?php echo ClipitQuizQuestion::TYPE_NUMBER;?>" style="display:none;">
+    <label>
+	<?php echo "Respuesta" ?>
+    </label> <br>
+    <?php echo elgg_view('input/text',array('name' => 'n_resp')); ?>
+    <br>
 </div>
 
 <div class="qqt" id="<?php echo ClipitQuizQuestion::TYPE_TRUE_FALSE;?>" style="display:none;">
-    <label>
-	<?php echo "Respuesta 1" ?>
-    </label> <br>
-    <?php echo elgg_view('input/text',array('name' => 'vof_resp1')); ?>
-    <input type="radio" name="vof_ca" value="1"> Selecciona la correcta<br>
-    <br>
-    <label>
-	<?php echo "Respuesta 2" ?>
-    </label> <br>
-    <?php echo elgg_view('input/text',array('name' => 'vof_resp2')); ?>
-    <input type="radio" name="vof_ca" value="2">Selecciona la correcta<br>
+    
+    <input type="radio" name="vof_ca" value="1"> Verdadera
+    <input type="radio" name="vof_ca" value="2"> Falsa
+    <br><br>
+    
 </div>
 
 <!-- Permitir añadir más respuestas en tipo Once choice y Multiple choice -->

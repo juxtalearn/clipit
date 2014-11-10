@@ -1,8 +1,9 @@
 <?php
 
+// Obtengo la pregunta
 $quest = get_entity(get_input('id_quest'));
 
-// Título de la página
+// El título de la página es el nombre de la pregunta
 $title = $quest->name;
 
 $params = array(

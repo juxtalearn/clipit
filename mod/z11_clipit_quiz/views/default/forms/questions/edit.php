@@ -6,7 +6,7 @@ $quest = get_entity($id);
 $respuestas = $quest->option_array;    
 $quest_type = $quest->option_type;
 
-// Obtener el ID del quiz
+// Obtener el ID del quiz asociado (si lo tiene)
 $id_quiz = get_input('id_quiz');
 
 //La pregunta NO se edita desde la vista de un quiz
@@ -115,7 +115,22 @@ if (!$id_quiz){
                 </label> <br>
                 <?php
                 echo elgg_view('input/longtext', array(
-                    'name' => 'resp',
+                    'name' => 'dr',
+                    'value' => $respuestas));
+                ?>
+            </div>
+            <?php break;
+            //******************************************************************
+            case ClipitQuizQuestion::TYPE_NUMBER:
+                ?>
+            <div class="qqt" id="<?php echo ClipitQuizQuestion::TYPE_NUMBER;?>">
+                <br>
+                <label>
+                    <?php echo "Respuesta" ?>
+                </label> <br>
+                <?php
+                echo elgg_view('input/text', array(
+                    'name' => 'nr',
                     'value' => $respuestas));
                 ?>
             </div>
@@ -124,25 +139,9 @@ if (!$id_quiz){
             case ClipitQuizQuestion::TYPE_TRUE_FALSE:?>
             <div class="qqt" id="<?php echo ClipitQuizQuestion::TYPE_TRUE_FALSE;?>">
                 <br>
-                <label>
-                    <?php echo "Respuesta 1" ?>
-                </label> <br>
-                <?php
-                echo elgg_view('input/text', array(
-                    'name' => 'vof_resp1',
-                    'value' => $respuestas[0]));
-                ?>
-                <input type="radio" name="vof_ca" value="1"> Selecciona la correcta<br>
+                <input type="radio" name="vof_ca" value="1"> Verdadera
+                <input type="radio" name="vof_ca" value="2"> Falsa
                 <br>
-                <label>
-                    <?php echo "Respuesta 2" ?>
-                </label> <br>
-                <?php
-                echo elgg_view('input/text', array(
-                    'name' => 'vof_resp2',
-                    'value' => $respuestas[1]));
-                ?>
-                <input type="radio" name="vof_ca" value="2">Selecciona la correcta<br>
             </div>
                 
             <?php  break;
@@ -280,7 +279,7 @@ if (!$id_quiz){
 		elgg_view('input/pulldown', array(
 			'name' => 'empty_ans',
 			'options_values' => array(
-                                'initial' => "Elige el tipo de respuesta",
+                                '' => "Elige el tipo de respuesta",
                                 ClipitQuizQuestion::TYPE_STRING => "Long question",
                                 ClipitQuizQuestion::TYPE_NUMBER => "Numeric question",
                                 ClipitQuizQuestion::TYPE_TRUE_FALSE => "True or false",
@@ -302,8 +301,8 @@ if (!$id_quiz){
     }
 </script>
 
-<?php if( ($quest_type == "") || ($quest_type == NULL) ){   
-    /* Considero las preguntas vacias */
+<?php if($quest_type == ""){   
+    /* Considero que pueda editar una pregunta vacia (no habia selecionado un tipo) */
     ?>
 
 <div class="qqt" id="<?php echo ClipitQuizQuestion::TYPE_STRING;?>" style="display:none;">
@@ -313,32 +312,28 @@ if (!$id_quiz){
     </label> <br>
     <?php 
          echo elgg_view('input/longtext',array(
-                    'name' => 'd_resp',
+                    'name' => 'dr',
+                 ));
+    ?>
+</div>
+
+<div class="qqt" id="<?php echo ClipitQuizQuestion::TYPE_NUMBER;?>" style="display:none;">
+    <br>
+    <label>
+	<?php echo "Respuesta" ?>
+    </label> <br>
+    <?php 
+         echo elgg_view('input/text',array(
+                    'name' => 'nr',
                  ));
     ?>
 </div>
 
 <div class="qqt" id="<?php echo ClipitQuizQuestion::TYPE_TRUE_FALSE;?>" style="display:none;">
     <br>
-    <label>
-	<?php echo "Respuesta 1" ?>
-    </label> <br>
-    <?php
-        echo elgg_view('input/text',array(
-                    'name' => 'vof_resp1',
-                    ));
-    ?>
-    <input type="radio" name="vof_ca" value="1"> Selecciona la correcta<br>
+    <input type="radio" name="vof_ca" value="1"> Verdadera
+    <input type="radio" name="vof_ca" value="2"> Falsa
     <br>
-    
-    <label>
-	<?php echo "Respuesta 2" ?>
-    </label> <br>
-    <?php echo elgg_view('input/text',array(
-                    'name' => 'vof_resp2',
-            ));
-     ?>
-    <input type="radio" name="vof_ca" value="2">Selecciona la correcta<br>
 </div>
 
 <!-- Permitir añadir mas respuestas en tipo Once choice y Multiple choice -->

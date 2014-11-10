@@ -1,4 +1,6 @@
 <?php
+
+// Obtener la pregunta y todas sus propiedades
 $id = get_input('id_quest');
 $quest = array_pop(ClipitQuizQuestion::get_by_id(array($id)));
 $owner_id = elgg_get_logged_in_user_guid();
@@ -6,30 +8,31 @@ $user = array_pop(ClipitUser::get_by_id(array($owner_id)));
 $respuestas = $quest->option_array;
 $correctas = $quest->validation_array;
 $answers = ClipitQuizQuestion::get_quiz_results($id);
+
 ?>
 
 <div class="question">
     
         <div class="content-block">
-            <h4 class="subject">Difficulty:
+            <h4>Difficulty:
                  <?php 
                         echo elgg_view('output/text', array('value' => $quest->difficulty));?>
             </h4>
             <br>   
             
-            <p class="subject"><strong>Question type: </strong>
+            <p><strong>Question type: </strong>
                  <?php echo elgg_view('output/text', array('value' => $quest->option_type)); ?>
             </p>
             
-            <div class="body">
-                <?php 
-                        echo elgg_view('output/text', array('value' => $quest->description));?>
+            <div>
+                <?php echo elgg_view('output/text', array('value' => $quest->description));?>
             </div>
             <br>
             
             <div>
                 <?php 
-                if ($quest->option_type !== "Desarrollo"){
+                // Mostrar las posibles respuestas a elegir
+                if ($quest->option_type !== ClipitQuizQuestion::TYPE_STRING){
                     foreach ($respuestas as $r) {
                          echo elgg_view('output/text', array('value' => $r)) . "<br>";
                     };
@@ -40,7 +43,46 @@ $answers = ClipitQuizQuestion::get_quiz_results($id);
             
             <p>
                 <?php 
-                if ($quest->option_type == "Multiple choice"){
+                
+                switch ($quest->option_type) {
+                    case ClipitQuizQuestion::TYPE_SELECT_MULTI:
+                        echo "Las soluciones correctas son: ";
+                        $i = 0;
+                        while ($i < count($respuestas)) {
+                            if ($correctas[$i] == "true"){
+                                echo  $respuestas[$i] . ", ";
+                            }
+                        $i ++;
+                        }
+                        break;
+
+                    case ClipitQuizQuestion::TYPE_STRING:
+                        echo "Una posible solución correcta es: " .  $respuestas[0] . ".";
+                        break;
+                    
+                    case ClipitQuizQuestion::TYPE_TRUE_FALSE:
+                        if ($respuestas == 1){
+                        $sol = "Verdadera";
+                        } else {
+                            $sol = "Falsa";
+                        }
+                        echo "La respuesta correcta es: " .  $sol;
+                        break;
+                    
+                    default:
+                        echo "La solución correcta es: ";  
+                        $i = 0;
+                        while ($i < count($respuestas)) {
+                            if ($correctas[$i] == "true"){
+                                echo  $respuestas[$i] . ".";
+                            }
+                        $i ++;
+                        }
+                        break;
+                }
+                /*
+                // Mostrar cual/cuales son las soluciones correctas
+                if ($quest->option_type == ClipitQuizQuestion::TYPE_SELECT_MULTI){
                     echo "Las soluciones correctas son: ";
                     $i = 0;
                     while ($i < count($respuestas)) {
@@ -50,8 +92,15 @@ $answers = ClipitQuizQuestion::get_quiz_results($id);
                     $i ++;
                     }
                     
-                } elseif ($quest->option_type == "Desarrollo") {
+                } elseif ($quest->option_type == ClipitQuizQuestion::TYPE_STRING) {
                     echo "Una posible solución correcta es: " .  $respuestas[0];
+                } elseif ($quest->option_type == ClipitQuizQuestion::TYPE_TRUE_FALSE) {
+                    if ($respuestas == 1){
+                        $sol = "Verdadera";
+                    } else {
+                        $sol = "Falsa";
+                    }
+                    echo "La respuesta correcta es: " .  $sol;
                 } else {
                     echo "La solución correcta es: ";  
                     $i = 0;
@@ -61,11 +110,11 @@ $answers = ClipitQuizQuestion::get_quiz_results($id);
                         }
                     $i ++;
                     }
-                }
+                }*/
                 ?>
             </p>
             
-            <small class="show">
+            <small>
                 <i>Creada por <?php echo elgg_view('output/text', array('value' => $user->name)) . " "
                                 . elgg_view('output/friendlytime', array('time' => $quest->time_created));?></i>
             </small>
@@ -80,7 +129,7 @@ $answers = ClipitQuizQuestion::get_quiz_results($id);
 <?php
 if (sizeof($answers) > 0){
 
-    if (($quest->option_type == "Desarrollo")){
+    if (($quest->option_type == ClipitQuizQuestion::TYPE_STRING)){
     $all_checked = have_been_checked($answers, $all_checked);
     if ( !$all_checked ){
         echo elgg_view('output/url', 
@@ -100,8 +149,7 @@ foreach($answers as $ans):
     $view_quest_url = elgg_get_site_url()."questions/view?id_quest={$a->id}";
     $edit_quest_url = elgg_get_site_url()."questions/edit?id_quest={$a->id}";
     $remove_quest_url = elgg_get_site_url()."action/questions/remove?id_quest={$a->id}";
-    
-
+   
    ?>
 
 <div class="answers">
@@ -111,7 +159,7 @@ foreach($answers as $ans):
                 <?php   echo "Identificador respuesta = " . $a->id;
                 ?>
             </p>
-            <h3 class="subject">
+            <h3>
                  <?php echo elgg_view('output/url', array(
                             "href" => $view_quest_url,
                             "is_action" => false,
@@ -120,7 +168,7 @@ foreach($answers as $ans):
                 ?>
             </h3>
 
-            <small class="show">
+            <small>
                 <i>Creada <?php echo elgg_view('output/friendlytime', array('time' => $a->time_created));?></i>
             </small>
         </div>

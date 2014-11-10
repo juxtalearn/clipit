@@ -15,10 +15,13 @@ $question_type = get_input('type_answer');
 
 switch ($question_type) {
     case ClipitQuizQuestion::TYPE_STRING:
-        $option_array = array(
-            0 => get_input('d_resp'));
-        $val_array = array(
-            0 => "true");
+        $respuesta = get_input('d_resp');
+        save_long_quest($respuesta, $option_array, $val_array);
+        break;
+    
+    case ClipitQuizQuestion::TYPE_NUMBER:
+        $respuesta = get_input('n_resp');
+        save_long_quest($respuesta, $option_array, $val_array);
         break;
     
     case ClipitQuizQuestion::TYPE_TRUE_FALSE:

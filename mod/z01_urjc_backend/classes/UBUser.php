@@ -25,14 +25,14 @@ class UBUser extends UBItem {
      */
     const SUBTYPE = "";
     /**
-     * @var string $login       Login name used to authenticate, must be unique
-     * @var string $password    Login password (md5 of password + password_hash)
-     * @var string $hash        Random string to encode password
-     * @var string $email       User email
-     * @var string $role        User role (default: "user")
-     * @var string $language    User interface language
-     * @var int    $last_login  Timestamp from last login
-     * @var int    $avatar_file Id of file containing Avatar
+     * @var string $login Login name used to authenticate, must be unique
+     * @var string $password Login password (md5 of password + password_hash)
+     * @var string $hash Random string to encode password
+     * @var string $email User email
+     * @var string $role User role (default: "user")
+     * @var string $language User interface language
+     * @var int $last_login Timestamp from last login
+     * @var int $avatar_file Id of file containing Avatar
      */
     public $login = "";
     public $password = "";
@@ -52,10 +52,10 @@ class UBUser extends UBItem {
      * @throws APIException
      */
     function __construct($id = null, $elgg_user = null) {
-        if(!empty($id)) {
-            if(empty($elgg_user)){
-                if(!($elgg_user = new ElggUser($id))) {
-                    throw new APIException("ERROR: Failed to load ".get_called_class()." object with ID '" . $id . "'.");
+        if (!empty($id)) {
+            if (empty($elgg_user)) {
+                if (!($elgg_user = new ElggUser($id))) {
+                    throw new APIException("ERROR: Failed to load " . get_called_class() . " object with ID '" . $id . "'.");
                 }
             }
             $this->copy_from_elgg($elgg_user);
@@ -84,10 +84,10 @@ class UBUser extends UBItem {
      * @return bool|int Returns id of saved instance, or false if error.
      */
     protected function save() {
-        if(empty($this->id)) {
+        if (empty($this->id)) {
             $elgg_user = new ElggUser();
             $elgg_user->subtype = (string)static::SUBTYPE;
-        } elseif(!$elgg_user = new ElggUser($this->id)) {
+        } elseif (!$elgg_user = new ElggUser($this->id)) {
             return false;
         }
         $this->copy_to_elgg($elgg_user);
@@ -107,7 +107,7 @@ class UBUser extends UBItem {
         $elgg_user->password = (string)$this->password;
         $elgg_user->salt = (string)$this->hash;
         $elgg_user->set("role", (string)$this->role);
-        if($this->language == "") {
+        if ($this->language == "") {
             $elgg_user->language = get_language();
         } else {
             $elgg_user->language = $this->language;
@@ -125,7 +125,7 @@ class UBUser extends UBItem {
      * @return bool 'true' if success, 'false' if error.
      */
     protected static function create_password($clear_password) {
-        if(!$clear_password) {
+        if (!$clear_password) {
             return false;
         }
         $new_password = array();
@@ -137,33 +137,33 @@ class UBUser extends UBItem {
     /**
      * Sets values to specified properties of a User
      *
-     * @param int   $id               Id of User to set property values
+     * @param int $id Id of User to set property values
      * @param array $prop_value_array Array of property=>value pairs to set into the User
      *
      * @return int|bool Returns Id of User if correct, or false if error
      * @throws InvalidParameterException
      */
     static function set_properties($id, $prop_value_array) {
-        if(!$item = new static($id)) {
+        if (!$item = new static($id)) {
             return false;
         }
-        foreach($prop_value_array as $prop => $value) {
-            if($prop == "id") {
+        foreach ($prop_value_array as $prop => $value) {
+            if ($prop == "id") {
                 throw new InvalidParameterException("ERROR: Cannot modify 'id' of instance.");
             }
-            if($prop == "password") {
+            if ($prop == "password") {
                 $new_password = static::create_password($value);
                 $item->password = $new_password["password"];
                 $item->hash = $new_password["hash"];
                 continue;
             }
-            if($prop == "login") {
+            if ($prop == "login") {
                 $user_array = static::get_by_login(array($value));
-                if(!empty($user_array[$value])) {
+                if (!empty($user_array[$value])) {
                     return $user_array[$value]->id;
                 }
             }
-            if(!array_key_exists($prop, static::list_properties())) {
+            if (!array_key_exists($prop, static::list_properties())) {
                 throw new InvalidParameterException("ERROR: One or more property names do not exist.");
             } else {
                 $item->$prop = $value;
@@ -175,14 +175,14 @@ class UBUser extends UBItem {
     /**
      * Authenticate a user and log him into the system.
      *
-     * @param string $login      User login
-     * @param string $password   User password
-     * @param bool   $persistent Determines whether to make the session persistent
+     * @param string $login User login
+     * @param string $password User password
+     * @param bool $persistent Determines whether to make the session persistent
      *
      * @return bool Returns true if ok, or false if error
      */
     static function login($login, $password, $persistent = false) {
-        if(!elgg_authenticate($login, $password)) {
+        if (!elgg_authenticate($login, $password)) {
             return false;
         }
         $elgg_user = get_user_by_username($login);
@@ -206,9 +206,9 @@ class UBUser extends UBItem {
      */
     static function get_by_login($login_array) {
         $user_array = array();
-        foreach($login_array as $login) {
+        foreach ($login_array as $login) {
             $elgg_user = get_user_by_username($login);
-            if(!$elgg_user) {
+            if (!$elgg_user) {
                 $user_array[$login] = null;
             } else {
                 $user_array[$login] = new static((int)$elgg_user->guid, $elgg_user);
@@ -228,13 +228,13 @@ class UBUser extends UBItem {
      */
     static function get_by_email($email_array) {
         $user_array = array();
-        foreach($email_array as $email) {
+        foreach ($email_array as $email) {
             $elgg_user_array = get_user_by_email($email);
-            if(!$elgg_user_array) {
+            if (!$elgg_user_array) {
                 $user_array[UBSite::normalize_xml_key($email)] = null;
             } else {
                 $temp_array = array();
-                foreach($elgg_user_array as $elgg_user) {
+                foreach ($elgg_user_array as $elgg_user) {
                     $temp_array[] = new static((int)$elgg_user->guid, $elgg_user);
                 }
                 $user_array[UBSite::normalize_xml_key($email)] = $temp_array;
@@ -252,18 +252,13 @@ class UBUser extends UBItem {
      */
     static function get_by_role($role_array) {
         $user_array = array();
-        foreach($role_array as $role) {
-            $elgg_user_array = elgg_get_entities_from_metadata(
-                array(
-                    'type' => static::TYPE, 'subtype' => static::SUBTYPE, 'metadata_names' => array("role"),
-                    'metadata_values' => array($role), 'limit' => 0
-                )
-            );
-            if(!$elgg_user_array) {
+        foreach ($role_array as $role) {
+            $elgg_user_array = elgg_get_entities_from_metadata(array('type' => static::TYPE, 'subtype' => static::SUBTYPE, 'metadata_names' => array("role"), 'metadata_values' => array($role), 'limit' => 0));
+            if (!$elgg_user_array) {
                 $user_array[$role] = null;
             } else {
                 $temp_array = array();
-                foreach($elgg_user_array as $elgg_user) {
+                foreach ($elgg_user_array as $elgg_user) {
                     $temp_array[] = new static($elgg_user->guid, $elgg_user);
                 }
                 $user_array[$role] = $temp_array;
@@ -287,7 +282,7 @@ class UBUser extends UBItem {
     /**
      * Sets the avatar for a User
      *
-     * @param int $id      User ID
+     * @param int $id User ID
      * @param int $file_id Id of the image file containing the User's avatar
      *
      * @return int|false Returns the ID of the User, or false if error.
@@ -301,19 +296,20 @@ class UBUser extends UBItem {
     /**
      * Returns the avatar for a User
      *
-     * @param int    $id   User ID
+     * @param int $id User ID
      * @param string $size Desired size of avatar image: small, medium or large.
      *
-     * @return array|null Returns an array with 2 elements: "url" => <avatar_url> and "path" => <avatar_path>, or null if none.
+     * @return array|null Returns an array with 2 elements: "url" => <avatar_url> and "path" => <avatar_path>, or null
+     *     if none.
      */
     static function get_avatar($id, $size = "medium") {
         $prop_value_array = static::get_properties($id, array("avatar_file"));
         $avatar_file = new ClipitFile((int)$prop_value_array["avatar_file"]);
-        if(empty($avatar_file)) {
+        if (empty($avatar_file)) {
             return null;
         }
         $avatar = null;
-        switch($size) {
+        switch ($size) {
             case "small":
                 $avatar = (array)$avatar_file->thumb_small;
                 break;
@@ -331,9 +327,10 @@ class UBUser extends UBItem {
         // New Excel object
         $php_excel = new PHPExcel();
         // Set document properties
-        $php_excel->getProperties()->setCreator("ClipIt")
-                  ->setTitle("ClipIt User Accounts")
-                  ->setKeywords("clipit user account");
+        $php_excel->getProperties()
+            ->setCreator("ClipIt")
+            ->setTitle("ClipIt User Accounts")
+            ->setKeywords("clipit user account");
         // Add table title and columns
         $active_sheet = $php_excel->setActiveSheetIndex(0);
         $active_sheet->getDefaultColumnDimension()->setWidth(30);
@@ -341,11 +338,11 @@ class UBUser extends UBItem {
         $row = 1;
         $col = 0;
         $values = array("NAME", "LOGIN", "PASSWORD", "EMAIL", "ROLE");
-        foreach($values as $value) {
-            $active_sheet->setCellValueByColumnAndRow($col ++, $row, $value);
+        foreach ($values as $value) {
+            $active_sheet->setCellValueByColumnAndRow($col++, $row, $value);
         }
         // Load ClipIt Users
-        if(!empty($id_array)) {
+        if (!empty($id_array)) {
             $user_array = static::get_by_id($id_array);
         } else {
             $user_array = static::get_all();
@@ -353,15 +350,15 @@ class UBUser extends UBItem {
         // Write Users to spreadsheet
         $row = 2;
         $col = 0;
-        foreach($user_array as $user) {
+        foreach ($user_array as $user) {
             $values = array($user->name, $user->login, "<password>", $user->email, $user->role);
-            foreach($values as $value) {
-                $active_sheet->setCellValueByColumnAndRow($col ++, $row, $value);
+            foreach ($values as $value) {
+                $active_sheet->setCellValueByColumnAndRow($col++, $row, $value);
             }
-            $row ++;
+            $row++;
             $col = 0;
         }
-        switch($format) {
+        switch ($format) {
             case "excel":
                 $objWriter = PHPExcel_IOFactory::createWriter($php_excel, 'Excel2007');
                 $objWriter->save('/tmp/clipit_users.xlsx');
@@ -380,9 +377,9 @@ class UBUser extends UBItem {
         $php_excel = PHPExcel_IOFactory::load($file_path);
         $user_array = array();
         $row_iterator = $php_excel->getSheet()->getRowIterator();
-        while($row_iterator->valid()) {
+        while ($row_iterator->valid()) {
             $row_result = static::parse_excel_row($row_iterator->current());
-            if(!empty($row_result)) {
+            if (!empty($row_result)) {
                 $user_array[] = (int)$row_result;
             }
             $row_iterator->next();
@@ -402,7 +399,7 @@ class UBUser extends UBItem {
         $cell_iterator = $row_iterator->getCellIterator();
         // Check for non-user row
         $value = $cell_iterator->current()->getValue();
-        if(empty($value) || strtolower($value) == "users" || strtolower($value) == "name") {
+        if (empty($value) || strtolower($value) == "users" || strtolower($value) == "name") {
             return null;
         }
         // name
@@ -411,9 +408,9 @@ class UBUser extends UBItem {
         $cell_iterator->next();
         // login
         $login = (string)$cell_iterator->current()->getValue();
-        if(!empty($login)) {
+        if (!empty($login)) {
             $user_array = static::get_by_login(array($login));
-            if(!empty($user_array[$login])) { // user already exists, no need to create it
+            if (!empty($user_array[$login])) { // user already exists, no need to create it
                 return (int)$user_array[$login]->id;
             }
             $prop_value_array["login"] = $login;
@@ -423,7 +420,7 @@ class UBUser extends UBItem {
         $cell_iterator->next();
         // password
         $password = (string)$cell_iterator->current()->getValue();
-        if(!empty($password)) {
+        if (!empty($password)) {
             $prop_value_array["password"] = $password;
         } else {
             return null;
@@ -431,13 +428,13 @@ class UBUser extends UBItem {
         $cell_iterator->next();
         // email
         $email = (string)$cell_iterator->current()->getValue();
-        if(!empty($email)) {
+        if (!empty($email)) {
             $prop_value_array["email"] = $email;
         }
         $cell_iterator->next();
         // role
         $role = (string)$cell_iterator->current()->getValue();
-        if(!empty($role)) {
+        if (!empty($role)) {
             $prop_value_array["role"] = $role;
         }
         return static::create($prop_value_array);

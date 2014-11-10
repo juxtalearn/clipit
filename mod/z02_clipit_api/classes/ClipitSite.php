@@ -20,6 +20,7 @@ class ClipitSite extends UBSite {
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitSite";
+    // SITE SCOPE
     const REL_SITE_FILE = "ClipitSite-ClipitFile";
     const REL_SITE_VIDEO = "ClipitSite-ClipitVideo";
     const REL_SITE_STORYBOARD = "ClipitSite-ClipitStoryboard";
@@ -28,13 +29,25 @@ class ClipitSite extends UBSite {
     public $video_array = array();
     public $storyboard_array = array();
     public $resource_array = array();
+    // PUBLIC SCOPE
+    const REL_PUB_FILE = "ClipitSite-ClipitFile";
+    const REL_PUB_VIDEO = "ClipitSite-ClipitVideo";
+    const REL_PUB_STORYBOARD = "ClipitSite-ClipitStoryboard";
+    const REL_PUB_RESOURCE = "ClipitSite-ClipitResource";
+    public $pub_file_array = array();
+    public $pub_video_array = array();
+    public $pub_storyboard_array = array();
+    public $pub_resource_array = array();
 
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
         $this->file_array = (array)static::get_files();
         $this->video_array = (array)static::get_videos();
         $this->storyboard_array = (array)static::get_storyboards();
-        $this->resource_array = (array)static::get_resources();
+        $this->pub_file_array = (array)static::get_pub_files();
+        $this->pub_video_array = (array)static::get_pub_videos();
+        $this->pub_storyboard_array = (array)static::get_pub_storyboards();
+        $this->pub_resource_array = (array)static::get_pub_resources();
     }
 
     /**
@@ -47,10 +60,16 @@ class ClipitSite extends UBSite {
         static::set_videos($this->video_array);
         static::set_storyboards($this->storyboard_array);
         static::set_resources($this->resource_array);
+        static::set_pub_files($this->pub_file_array);
+        static::set_pub_videos($this->pub_video_array);
+        static::set_pub_storyboards($this->pub_storyboard_array);
+        static::set_pub_resources($this->pub_resource_array);
         return $site_id;
     }
 
-    // FILES
+    // SITE SCOPE //
+
+    // SITE FILES
     static function add_files($file_array) {
         $id = static::get_site_id();
         return UBCollection::add_items($id, $file_array, static::REL_SITE_FILE);
@@ -71,7 +90,7 @@ class ClipitSite extends UBSite {
         return UBCollection::get_items($id, static::REL_SITE_FILE);
     }
 
-    // VIDEOS
+    // SITE VIDEOS
     static function add_videos($video_array) {
         $id = static::get_site_id();
         return UBCollection::add_items($id, $video_array, static::REL_SITE_VIDEO);
@@ -92,7 +111,7 @@ class ClipitSite extends UBSite {
         return UBCollection::get_items($id, static::REL_SITE_VIDEO);
     }
 
-    // STORYBOARDS
+    // SITE STORYBOARDS
     static function add_storyboards($storyboard_array) {
         $id = static::get_site_id();
         return UBCollection::add_items($id, $storyboard_array, static::REL_SITE_STORYBOARD);
@@ -113,7 +132,7 @@ class ClipitSite extends UBSite {
         return UBCollection::get_items($id, static::REL_SITE_STORYBOARD);
     }
 
-    // RESOURCES
+    // SITE RESOURCES
     static function add_resources($resource_array) {
         $id = static::get_site_id();
         return UBCollection::add_items($id, $resource_array, static::REL_SITE_RESOURCE);
@@ -132,5 +151,91 @@ class ClipitSite extends UBSite {
     static function get_resources() {
         $id = static::get_site_id();
         return UBCollection::get_items($id, static::REL_SITE_RESOURCE);
+    }
+
+    // PUBLIC SCOPE //
+
+    // PUBLIC FILES
+    static function add_pub_files($file_array) {
+        $id = static::get_site_id();
+        return UBCollection::add_items($id, $file_array, static::REL_PUB_FILE);
+    }
+
+    static function set_pub_files($file_array) {
+        $id = static::get_site_id();
+        return UBCollection::set_items($id, $file_array, static::REL_PUB_FILE);
+    }
+
+    static function remove_pub_files($file_array) {
+        $id = static::get_site_id();
+        return UBCollection::remove_items($id, $file_array, static::REL_PUB_FILE);
+    }
+
+    static function get_pub_files() {
+        $id = static::get_site_id();
+        return UBCollection::get_items($id, static::REL_PUB_FILE);
+    }
+
+    // PUBLIC VIDEOS
+    static function add_pub_videos($video_array) {
+        $id = static::get_site_id();
+        return UBCollection::add_items($id, $video_array, static::REL_PUB_VIDEO);
+    }
+
+    static function set_pub_videos($video_array) {
+        $id = static::get_site_id();
+        return UBCollection::set_items($id, $video_array, static::REL_PUB_VIDEO);
+    }
+
+    static function remove_pub_videos($video_array) {
+        $id = static::get_site_id();
+        return UBCollection::remove_items($id, $video_array, static::REL_PUB_VIDEO);
+    }
+
+    static function get_pub_videos() {
+        $id = static::get_site_id();
+        return UBCollection::get_items($id, static::REL_PUB_VIDEO);
+    }
+
+    // PUBLIC STORYBOARDS
+    static function add_pub_storyboards($storyboard_array) {
+        $id = static::get_site_id();
+        return UBCollection::add_items($id, $storyboard_array, static::REL_PUB_STORYBOARD);
+    }
+
+    static function set_pub_storyboards($storyboard_array) {
+        $id = static::get_site_id();
+        return UBCollection::set_items($id, $storyboard_array, static::REL_PUB_STORYBOARD);
+    }
+
+    static function remove_pub_storyboards($storyboard_array) {
+        $id = static::get_site_id();
+        return UBCollection::remove_items($id, $storyboard_array, static::REL_PUB_STORYBOARD);
+    }
+
+    static function get_pub_storyboards() {
+        $id = static::get_site_id();
+        return UBCollection::get_items($id, static::REL_PUB_STORYBOARD);
+    }
+
+    // PUBLIC RESOURCES
+    static function add_pub_resources($resource_array) {
+        $id = static::get_site_id();
+        return UBCollection::add_items($id, $resource_array, static::REL_PUB_RESOURCE);
+    }
+
+    static function set_pub_resources($resource_array) {
+        $id = static::get_site_id();
+        return UBCollection::set_items($id, $resource_array, static::REL_PUB_RESOURCE);
+    }
+
+    static function remove_pub_resources($resource_array) {
+        $id = static::get_site_id();
+        return UBCollection::remove_items($id, $resource_array, static::REL_PUB_RESOURCE);
+    }
+
+    static function get_pub_resources() {
+        $id = static::get_site_id();
+        return UBCollection::get_items($id, static::REL_PUB_RESOURCE);
     }
 }
