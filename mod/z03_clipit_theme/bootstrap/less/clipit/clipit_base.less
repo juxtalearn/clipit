@@ -876,3 +876,90 @@ h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
     top: 0 !important;
   }
 }
+//
+// Border colors
+// --------------------------------------------------
+.border-blue{
+  border: 1px solid @blue_clipit;
+}
+.border-blue-lighter{
+  border: 1px solid @blue-lighter;
+}
+.border-green{
+  border: 1px solid @green_clipit;
+}
+.border-yellow{
+  border: 1px solid @yellow_clipit;
+}
+.border-red{
+  border: 1px solid @red_clipit;
+}
+//
+// Difficulty num
+// --------------------------------------------------
+.difficulty-num{
+  border-radius: 100px;
+  width: 35px;
+  height: 35px;
+  margin: 0 auto;
+  background: #fff;
+  h4{
+    margin: 0;
+    vertical-align: middle;
+    height: 100%;
+    line-height: 35px;
+  }
+}
+//
+// jQuery UI - Slider
+// --------------------------------------------------
+.ui-slider-horizontal{
+  position: relative;
+  text-align: left;
+  height: 4px;
+  background: #bae6f6;
+  margin-top: 30px;
+  > span{
+    position: absolute;
+    top: -26px;
+    z-index: 1;
+    font-weight: bold;
+    color: #bbb;
+  }
+  .ui-slider-range{
+    position: absolute;
+    z-index: 1;
+    display: block;
+    top: 0px;
+    height: 100%;
+    &.green{
+      background: @green_clipit;
+    }
+    &.red{
+      background: @red_clipit;
+    }
+    &.yellow{
+      background: @yellow_clipit;
+    }
+  }
+  .ui-slider-handle{
+    position: absolute;
+    z-index: 2;
+    height: 1.2em;
+    cursor: pointer;
+    touch-action: none;
+    top: -6px;
+    color: rgb(85, 85, 85);
+    width: 8px;
+    background: #32b4e5;
+    border-radius: 2px;
+    outline: none !important;
+    opacity: 1 !important;
+    span{
+      position: absolute;
+      top: -20px;
+      color: #32b4e5;
+      font-weight: bold;
+    }
+  }
+}

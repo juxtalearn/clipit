@@ -38,7 +38,7 @@
                 "</div>",
         header:
             "<div class='modal-header'>" +
-                "<h4 class='modal-title'></h4>" +
+                "<h3 class='modal-title'></h3>" +
                 "</div>",
         footer:
             "<div class='modal-footer'></div>",

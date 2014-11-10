@@ -16,3 +16,7 @@
   display: table-cell !important;
   vertical-align: middle;
 }
+.row-flex {
+  display: flex;
+  align-items: center;
+}

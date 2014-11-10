@@ -5,6 +5,9 @@
  */
 
 $spanish = array(
+    'true' => 'Verdadero',
+    'false' => 'Falso',
+    'closed' => 'Cerrado',
     'admin:page' => 'Administración',
     'clipit:site' => 'ClipIt',
     'loading' => 'Cargando',

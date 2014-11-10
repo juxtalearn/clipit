@@ -5,6 +5,9 @@
  */
 
 $english = array(
+    'true' => 'True',
+    'false' => 'False',
+    'closed' => 'Closed',
     'admin:page' => 'Administration',
     'clipit:site' => 'ClipIt',
     'loading' => 'loading',
