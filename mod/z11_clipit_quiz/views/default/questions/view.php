@@ -43,6 +43,44 @@ $answers = ClipitQuizQuestion::get_quiz_results($id);
             
             <p>
                 <?php 
+                
+                switch ($quest->option_type) {
+                    case ClipitQuizQuestion::TYPE_SELECT_MULTI:
+                        echo "Las soluciones correctas son: ";
+                        $i = 0;
+                        while ($i < count($respuestas)) {
+                            if ($correctas[$i] == "true"){
+                                echo  $respuestas[$i] . ", ";
+                            }
+                        $i ++;
+                        }
+                        break;
+
+                    case ClipitQuizQuestion::TYPE_STRING:
+                        echo "Una posible solución correcta es: " .  $respuestas[0] . ".";
+                        break;
+                    
+                    case ClipitQuizQuestion::TYPE_TRUE_FALSE:
+                        if ($respuestas == 1){
+                        $sol = "Verdadera";
+                        } else {
+                            $sol = "Falsa";
+                        }
+                        echo "La respuesta correcta es: " .  $sol;
+                        break;
+                    
+                    default:
+                        echo "La solución correcta es: ";  
+                        $i = 0;
+                        while ($i < count($respuestas)) {
+                            if ($correctas[$i] == "true"){
+                                echo  $respuestas[$i] . ".";
+                            }
+                        $i ++;
+                        }
+                        break;
+                }
+                /*
                 // Mostrar cual/cuales son las soluciones correctas
                 if ($quest->option_type == ClipitQuizQuestion::TYPE_SELECT_MULTI){
                     echo "Las soluciones correctas son: ";
@@ -56,6 +94,13 @@ $answers = ClipitQuizQuestion::get_quiz_results($id);
                     
                 } elseif ($quest->option_type == ClipitQuizQuestion::TYPE_STRING) {
                     echo "Una posible solución correcta es: " .  $respuestas[0];
+                } elseif ($quest->option_type == ClipitQuizQuestion::TYPE_TRUE_FALSE) {
+                    if ($respuestas == 1){
+                        $sol = "Verdadera";
+                    } else {
+                        $sol = "Falsa";
+                    }
+                    echo "La respuesta correcta es: " .  $sol;
                 } else {
                     echo "La solución correcta es: ";  
                     $i = 0;
@@ -65,7 +110,7 @@ $answers = ClipitQuizQuestion::get_quiz_results($id);
                         }
                     $i ++;
                     }
-                }
+                }*/
                 ?>
             </p>
             

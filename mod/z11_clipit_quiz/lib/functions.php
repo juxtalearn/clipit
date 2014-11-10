@@ -5,9 +5,9 @@
 */
 
 /** Funcion auxiliar para guardar las respuestas de Desarrollo **/
-function save_long_quest(&$option_array, &$val_array){
+function save_long_quest(&$respuesta, &$option_array, &$val_array){
     $option_array = array(
-            "0" => get_input('resp'),
+            "0" => $respuesta,
         );
     $val_array = array(
             "0" => "true",
@@ -15,21 +15,15 @@ function save_long_quest(&$option_array, &$val_array){
 }
 
 /** Funcion auxiliar para guardar una pregunta de Verdadero-Falso **/
-function save_true_false(&$option_array, &$val_array){
-    $option_array = array(
-            "0" => get_input('vof_resp1'),
-            "1" => get_input('vof_resp2'),
-        );
+function save_true_false(&$option_array, &$val_array){   
     $id_resp = get_input('vof_ca');
     if ($id_resp == 1) {
-            $val_array = array(
-                  "0" => "true",
-                  "1" => "false");
-    } else {
-            $val_array = array(
-                  "0" => "false",
-                  "1" => "true");
-    }
+            $option_array = array("0" => 1);
+            $val_array = array("0" => "true");
+    } elseif ($id_resp == 2) {
+            $option_array = array("0" => 2);
+            $val_array = array("0" => "false");
+    } 
 }
 
 
