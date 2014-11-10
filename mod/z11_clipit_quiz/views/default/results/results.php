@@ -1,8 +1,8 @@
 <?php
+
 $quiz = elgg_extract('entity', $vars);
 $id_quiz = elgg_extract('id', $vars);
 $user_id = elgg_get_logged_in_user_guid();
-
 $quiz_questions = ClipitQuiz::get_quiz_questions($id_quiz); //Array de preguntas del quiz
 $quiz_results = array_pop(ClipitQuizResult::get_by_owner(array($user_id)));//Array con todas las respuestas de un usuario
 
@@ -16,14 +16,16 @@ foreach($quiz_results as $quiz_result){
 ?>
 
 <div class="quiz">
-    <div class="body">
+    <div>
         <p><strong><?php echo $quiz->description; ?></strong></p>
     </div>
     <br> 
 </div>
 
 <?php
-$num = 1;
+
+$num = 1; // Contador para numerar las preguntas
+
 foreach ($result_questions as $id_resp):
     $result = array_pop(ClipitQuizResult::get_by_id(array($id_resp)));
     $question = array_pop(ClipitQuizQuestion::get_by_id(array($result->quiz_question)));
@@ -34,7 +36,7 @@ foreach ($result_questions as $id_resp):
 <div class="question" style="height: 120px;">
 
     <div class="content-block" style="position: relative;">
-        <div class="info-block" style="position: absolute;">
+        <div style="position: absolute;">
             <h4>
                  <?php echo $num . ". " . $question->name;?>
             </h4>
@@ -47,13 +49,12 @@ foreach ($result_questions as $id_resp):
         
         <?php 
           switch ($type) {
-              case "Desarrollo":
-                  //No mostrar nada
+              case ClipitQuizQuestion::TYPE_STRING:
                   //Comprobar si esta corregida o no, para mostrar bien,mal,pendiente
                   ?>
                   <?php break;
               //*******************************************************************************************
-              case "Verdadero o falso":?>              
+              case ClipitQuizQuestion::TYPE_TRUE_FALSE:?>              
                      <div class="qqt" id="vof" style="margin-left: 30px;">
                         <br><input type="radio" name="vof_ca" value="1">
                         <?php
@@ -66,7 +67,7 @@ foreach ($result_questions as $id_resp):
                     </div>
                   <?php break;
               //*******************************************************************************************
-              case "One choice":?>
+              case ClipitQuizQuestion::TYPE_SELECT_ONE:?>
                  <div class="qqt" id="m1" style="margin-left: 30px;">
                         <br><input type="radio" name="m1_ca" value="1">
                         <?php
@@ -95,7 +96,7 @@ foreach ($result_questions as $id_resp):
                  </div>
                  <?php break;
             //****************************************************************************
-            case "Multiple choice":?>
+            case ClipitQuizQuestion::TYPE_SELECT_MULTI:?>
                  <div class="qqt" id="m" style="margin-left: 30px;">
                         <br><input type="checkbox" name="m_ca[]" value="1">
                         <?php
