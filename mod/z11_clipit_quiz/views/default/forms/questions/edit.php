@@ -6,7 +6,7 @@ $quest = get_entity($id);
 $respuestas = $quest->option_array;    
 $quest_type = $quest->option_type;
 
-// Obtener el ID del quiz
+// Obtener el ID del quiz asociado (si lo tiene)
 $id_quiz = get_input('id_quiz');
 
 //La pregunta NO se edita desde la vista de un quiz

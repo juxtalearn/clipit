@@ -1,14 +1,19 @@
 <?php
-// asegurarse de que sólo los usuarios registrados pueden ver esta página
+
+// Asegurarse de que sólo los usuarios registrados pueden ver esta página
 gatekeeper();
 
-//$quiz = get_entity(get_input('id_quiz'));
 $id_quiz = get_input('id_quiz');
 $quiz = ClipitQuiz::get_by_id(array($id_quiz));
 
+/* 
+ * Obtener el parametro 'option' pasado por la URL
+ * Si option = new , se redirecciona al formulario de crear una nueva pregunta
+ * Si option = list, se redirecciona al formulario con el listado de preguntas existentes
+ */
 $option = get_input('option');
 
-// agregar el formulario correspondiente
+// Agregar el formulario correspondiente
 if ($option == 'new'){
     $title = "Añadir una nueva pregunta";
     $content = elgg_view_form("questions/save", array('entity' => $quiz, 'id_quiz' => $id_quiz));
@@ -19,14 +24,14 @@ if ($option == 'new'){
 
 elgg_push_breadcrumb($title); //Migas de pan
 
-// diseño de la página
+// Diseño de la página
 $body = elgg_view_layout('content', array(
     'filter' =>'',
     'content' => $content,
     'title' => $title,
 ));
 
-// dibujar la página
+// Dibujar la página
 echo elgg_view_page($title, $body);
 
 ?>

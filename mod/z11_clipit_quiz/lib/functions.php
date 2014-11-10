@@ -91,7 +91,9 @@ function save_select_multi (&$option_array, &$val_array){
 /*
  * Funciones para corregir las respuestas dadas por el estudiante
  */
-function test_vof(&$va, &$select_answer, &$correct){
+
+/** Corregir respuesta del tipo TRUE-FALSE **/
+function correct_true_false(&$va, &$select_answer, &$correct){
     if (($select_answer == 1) && ($va[0] === "true")) {
                 $correct = true;
             } elseif (($select_answer == 2) && ($va[1] === "true")) {
@@ -101,7 +103,8 @@ function test_vof(&$va, &$select_answer, &$correct){
     }
 }
 
-function test_one_choice(&$va, &$select_answer, &$correct){
+/** Corregir respuesta del tipo SELECT-ONE **/
+function correct_select_one(&$va, &$select_answer, &$correct){
     //Busca un valor determinado y devuelve la clave correspondiente en caso de éxito
     $correct_answer = array_search("true", $va);
     $correct_answer = $correct_answer + 1; //El indice de va[] es 0 para la resp 1, 1 para la resp 2, etc
@@ -112,7 +115,8 @@ function test_one_choice(&$va, &$select_answer, &$correct){
     }
 }
 
-function test_multi_choice(&$va, &$selects, &$all_correct){
+/** Corregir respuesta del tipo SELECT-MULTI **/
+function correct_select_multi(&$va, &$selects, &$all_correct){
     $corrects = 0; //Contador de respuestas correctas
     $j = 1; //Indice para el array de respuestas seleccionadas
     for ($i=0; $i < count($va); $i++) {

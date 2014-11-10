@@ -1,7 +1,10 @@
 <?php
+
+// Obtengo el ID del quiz
 $id_quiz = get_input('id_quiz');
 $filter = get_input('f');
 
+// Filtrado por TrickyTopic, Quiz o Autor. Se pasa como valor de 'f' en la URL
 switch ($filter){
     case "tt":
         ?>
@@ -32,9 +35,16 @@ switch ($filter){
         break;
 }
 
+// Obtengo todos los quizzes
 $quizzes = ClipitQuiz::get_all();
-unset($quizzes['$id_quiz']); //Borro el quiz actual de la lista de quizzes para no mostrar sus preguntas
 
+/* Borro el quiz actual de la lista de quizzes para no mostrar sus preguntas,
+ * ya que no tendria sentido elegir una pregunta que ya tengo en mi quiz
+ */
+unset($quizzes['$id_quiz']);
+
+
+// Obtengo todas las preguntas de cada quiz y las muestro
 foreach ($quizzes as $quiz) :
     $questions = ClipitQuiz::get_quiz_questions($quiz->id);
     if (count($questions) > 0){
