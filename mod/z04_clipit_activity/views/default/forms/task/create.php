@@ -17,6 +17,11 @@ $body = elgg_view("input/hidden", array(
     'name' => 'entity-id',
     'value' => $activity->id,
 ));
+$body .= elgg_view("input/hidden", array(
+    'name' => 'tricky-topic',
+    'id' => 'tricky-topic',
+    'value' => $activity->tricky_topic,
+));
 $body .= '<div class="task">';
 $body .= elgg_view('activity/create/task', array('task_type' => 'upload', 'id' => $id, 'delete_task' => false));
 

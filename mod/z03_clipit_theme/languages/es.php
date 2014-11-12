@@ -5,6 +5,7 @@
  */
 
 $spanish = array(
+    'or' => 'O',
     'true' => 'Verdadero',
     'false' => 'Falso',
     'closed' => 'Cerrado',

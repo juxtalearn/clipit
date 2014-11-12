@@ -1,0 +1,286 @@
+//
+// Navbar
+// --------------------------------------------------
+.navbar-text{
+  margin: 7px 0px;
+  margin-right: 15px;
+
+  > a{
+    color: @blue-lighter;
+    text-shadow: 1px 1px 0px #0084B4;
+    font-size: @font-size-base;
+    font-family: @font-family-futurabold;
+
+    &:hover,
+    &:focus{
+      text-decoration: none;
+    }
+  }
+  .active{
+    color: #FFFFFF;
+  }
+  > span.divider{
+    margin: 0 5px;
+    background: #bae6f6;
+    width: 2px;
+    height: 12px;
+    display: inline-block;
+    color: transparent;
+    line-height: 12px;
+  }
+}
+
+// Navbar fixed top
+.navbar-fixed-top{
+  border-width: 1px solid transparent;
+  .navbar-collapse{
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+// Default navbar
+.navbar-default {
+  border-radius: 0px;
+  border-right: 0;
+  border-left: 0;
+  background: #FFFFFF;
+  @shadow: inset 0 1px 0 rgba(255,255,255,.15), 0 1px 5px rgba(0,0,0,.075);
+  .box-shadow(@shadow);
+
+  .navbar-nav li > a {
+    text-transform: uppercase;
+    color: @blue_clipit;
+    font-family: @font-family-helvetica;
+    font-size: ceil(@font-size-large * 1.11);
+    &:hover, &:focus{
+      color: @blue_clipit;
+    }
+  }
+  .navbar-nav > .active > a {
+    /*background: @blue-lighter;
+    color: #FFFFFF;
+    .box-shadow(inset 0 3px 9px rgba(0,0,0,.075));*/
+  }
+}
+.navbar-brand {
+  padding: 0px 15px;
+  line-height: 47px;
+  img{
+    max-height: 45px;
+    vertical-align: middle;
+  }
+}
+
+// navbar background blue
+.navbar-blue{
+  background: @blue_clipit;
+  margin-bottom: 0px;
+  min-height: @navbar-blue-height;
+  .pull-right{
+    padding: 0;
+  }
+  // Top navbar form button
+  .navbar-form{
+    padding: 0;
+    margin: 5px 15px 5px 15px !important;
+    border-top: 0;
+    border-bottom: 0;
+    border-bottom: 0;
+
+    .form-control{
+      height: 23px;
+      border-radius: 0px;
+      .box-shadow(none);
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    .input-group-btn button[type=submit]{
+      background: #fff;
+      border-left: 0px;
+      .box-shadow(none);
+      padding: 2px 5px;
+      padding-bottom: 1px;
+      border-radius: 0px;
+    }
+    // icon search
+    i{
+      color: @grey_slow;
+    }
+  }
+  .navbar-nav{
+    > .dropdown > a .caret{
+      border-top-color: #FFFFFF;
+      border-bottom-color: #FFFFFF;
+    }
+    > li > a {
+      color: #FFFFFF;
+      &:hover,
+      &:focus {
+        color: #FFFFFF;
+      }
+    }
+  }
+
+}
+
+//
+// Account Menu navigation
+// --------------------------------------------------
+ul.top-account{
+  .avatar-user{
+    padding: 0;
+    padding: 6px 5px 0 0;
+    max-width: 175px;
+    img{
+      vertical-align: middle;
+      margin: 3px;
+      margin-top: 0;
+    }
+  }
+  > li{
+    &.open > a,
+    &.open > a > i{
+      background: @blue_clipit !important;
+      color: #FFF !important;
+      opacity: 0.7;
+    }
+    &.separator{
+      margin: 15px 10px 0;
+      background: @blue-lighter;
+      width: 2px;
+      height: 20px;
+      display: inline-block;
+      color: transparent;
+      line-height: 20px;
+    }
+    .fa {
+      .pull-left();
+      font-size: 20px;
+      color: #32b4e5;
+      padding-right: 5px;
+      padding-left: 5px;
+      &:hover{
+        opacity: 1;
+      }
+    }
+    > ul.dropdown-menu{
+      > li {
+        width: 300px;
+        > a{
+          padding: 5px 10px;
+          font-size: @font-size-base;
+          letter-spacing: 0;
+          text-transform: none;
+        }
+      }
+    }
+    // Caret Menu
+    ul.caret-menu{
+      > li > a{
+        padding: 5px 10px;
+        font-size: 14px;
+        text-transform: none;
+        letter-spacing: 0;
+        > .fa{
+          opacity: 0.7;
+          font-size: ceil(@font-size-base * 1.07); // ~15px
+          padding-top: 2px;
+        }
+      }
+      .divider{
+        display: block;
+        margin: 0
+      }
+    }
+    // My activities menu
+    ul#menu_activities{
+      li{
+        &.divider{
+          margin: 0;
+          &:last-child{
+            background: none;
+          }
+        }
+        .activity-point{
+          vertical-align: text-top;
+          margin-top: 2px;
+        }
+      }
+    }
+
+    > a{
+      font-family: @font-family-futurabold !important;
+      text-transform: none !important;
+//      font-size: ceil(@font-size-base * 1.21) !important; // ~17px
+      font-size: ceil(@font-size-base * 1.07) !important; // ~15px;
+      letter-spacing: 0.2px;
+      padding-right: 5px;
+      padding-left: 5px;
+      .pull-left();
+      &:hover{
+        > i{
+          color: #FFF !important;
+        }
+      }
+      &.caret-down{
+        padding: 6px 3px 0 3px;
+        line-height: 40px;
+        height: 49px;
+        > .fa{
+          line-height: inherit;
+        }
+      }
+      > span.badge{
+        color: @blue_clipit;
+        position: absolute;
+        right: 0px;
+        top: 2px;
+        font-size: 10px;
+        border-radius: 100px;
+        z-index: 1;
+        padding-top: 5px;
+        border: 1px solid #32b4e5;
+        background: #FFF;
+      }
+    }
+  }
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto;
+  /* Negative indent footer by its height */
+  margin: 0 auto -60px;
+  /* Pad bottom by footer height */
+  padding: 0 0 60px;
+}
+
+//
+// elgg system messages
+// --------------------------------------------------
+
+.elgg-message{
+  background: #fff;
+  padding: 20px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #fff;
+  &.elgg-state-success{
+    background: @green_clipit;
+  }
+  &.elgg-state-error{
+    background: @red_clipit;
+  }
+
+  p{
+    margin: 0;
+    font-weight: bold;
+  }
+}
+// Back button
+.back-top{
+  text-transform: uppercase;
+  font-size: ceil(@font-size-base * 1.14); // ~16px
+}

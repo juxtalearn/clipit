@@ -1,0 +1,1 @@
+.row-table{display:table !important}.row-table>[class*="col-"]{float:none !important;display:table-cell !important;vertical-align:middle}

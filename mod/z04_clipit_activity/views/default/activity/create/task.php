@@ -17,7 +17,6 @@ $task = elgg_extract('task', $vars); // task data
 switch($task_type){
     case "upload":
         $task_types = array(
-            ClipitTask::TYPE_QUIZ_TAKE => elgg_echo('task:quiz_answer'),
             ClipitTask::TYPE_VIDEO_UPLOAD => elgg_echo('task:video_upload'),
             ClipitTask::TYPE_STORYBOARD_UPLOAD => elgg_echo('task:storyboard_upload'),
             ClipitTask::TYPE_RESOURCE_DOWNLOAD => elgg_echo('task:resource_download'),
@@ -48,7 +47,7 @@ if($vars['required'] !== false){
 }
 ?>
 
-<div class="col-md-12">
+<div class="col-mds-12">
     <?php if(!$disabled && !$task && $vars['delete_task']!==false):?>
         <i class="delete-task fa fa-times red pull-left margin-top-5" style="cursor: pointer" onclick="javascript:$(this).closest('.task').remove();"></i>
     <?php endif;?>
@@ -120,35 +119,6 @@ if($vars['required'] !== false){
             </div>
         </div>
         <?php if(!$disabled):?>
-
-            <!--            --><?php
-//            $quizzes = array('' => 'Select quiz');
-//            foreach(ClipitQuiz::get_all() as $quiz){
-//                $quizzes[$quiz->id] = $quiz->name;
-//            }
-//            ?>
-<!--            <div class="col-md-4 quiz-module --><?php //echo $task->task_type == ClipitTask::TYPE_QUIZ_TAKE ? "show":"" ?><!--"-->
-<!--                 style="display: none;padding: 10px;background: #fafafa;">-->
-<!--                <label for="activity-title">--><?php //echo elgg_echo("task:quiz:select");?><!--</label>-->
-<!--                --><?php //echo elgg_view('input/dropdown', array(
-//                    'name' => "task{$input_array}[quiz]",
-//                    'class' => 'form-control',
-//                    'style' => 'padding-top: 5px;padding-bottom: 5px;',
-//                    'required' => true,
-//                    'value' => $task->quiz,
-//                    'options_values' => $quizzes
-//                ));
-//                ?>
-<!--                <div class="margin-top-5">-->
-<!--                    --><?php //echo elgg_echo('or:create');?>
-<!--                    --><?php //echo elgg_view('output/url', array(
-//                        'href'  => "http://trickytopic.".ClipitSite::get_domain(),
-//                        'title' => elgg_echo('quiz'),
-//                        'text'  => elgg_echo('quiz'),
-//                    ));
-//                    ?>
-<!--                </div>-->
-<!--            </div>-->
             <div class="col-md-4 feedback-module" style="<?php echo $vars['feedback_check'] != false ? '' : 'display: none;'; ?>padding: 10px;background: #fafafa;">
                 <label for="activity-title"><?php echo elgg_echo("task:feedback");?></label>
                 <div class="checkbox feedback-check">
@@ -159,22 +129,6 @@ if($vars['required'] !== false){
             </div>
         <?php endif;?>
     </div>
-    <?php if(!$disabled):?>
-        <div class="clearfix"></div>
-        <div id="task-type-container" class="margin-bottom-10" style="border: 1px solid #bae6f6;border-radius: 3px;padding: 10px;">
-            <?php if($task):
-                switch($task->task_type){
-                    case ClipitTask::TYPE_QUIZ_TAKE:
-                        echo elgg_view('activity/admin/tasks/quiz/quiz', array(
-                            'entity' => array_pop(ClipitQuiz::get_by_id(array($task->quiz))),
-                            'activity_id' => $task->activity
-                        ));
-                        break;
-                }
-            endif;
-            ?>
-        </div>
-    <?php endif;?>
 </div>
 <?php
 if(!$disabled):

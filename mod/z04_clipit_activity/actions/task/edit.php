@@ -77,6 +77,9 @@ if($entity->task_type == ClipitTask::TYPE_QUIZ_TAKE){
             case ClipitQuizQuestion::TYPE_NUMBER:
                 $validations[] = $question['number'];
                 break;
+            case ClipitQuizQuestion::TYPE_STRING:
+                $validations[] = $question['string'];
+                break;
         }
         $tags = array_filter($question['tags']);
         if($question['id_parent']){

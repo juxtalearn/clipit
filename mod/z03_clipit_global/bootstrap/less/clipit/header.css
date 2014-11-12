@@ -1,0 +1,5 @@
+NameError: variable @blue-lighter is undefined in D:\ubuntu_compartido\clipit_befe\mod\clipit_theme\bootstrap\less\clipit\header.less on line 11, column 12:
+10   > a{
+11     color: @blue-lighter;
+12     text-shadow: 1px 1px 0px #0084B4;
+

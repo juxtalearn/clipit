@@ -1,0 +1,5 @@
+NameError: .pull-right is undefined in D:\ubuntu_compartido\clipit_befe\mod\clipit_theme\bootstrap\less\clipit\forms.less on line 8, column 5:
+7     color: @red_clipit;
+8     .pull-right();
+9   }
+

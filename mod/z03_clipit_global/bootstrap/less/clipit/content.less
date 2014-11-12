@@ -1,0 +1,308 @@
+//
+// Image block
+// --------------------------------------------------
+.image-block{
+  float: left;
+  margin-right: 10px;
+}
+.content-block{
+  overflow: hidden;
+}
+//
+// iFrame container
+// --------------------------------------------------
+.frame-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 30px; height: 0; overflow: hidden;
+  iframe,
+  object,
+  embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+//
+// Elgg avatar
+// --------------------------------------------------
+.elgg-avatar{
+  position: relative;
+  display: inline-block;
+}
+.elgg-avatar-tiny > a > img{
+  width: 25px;
+  height: 25px;
+  display: block;
+}
+//
+// Breadcrumbs
+// --------------------------------------------------
+.breadcrumb{
+  padding: 2px 0;
+  margin-bottom: 0;
+  margin-top: -15px;
+  background: transparent;
+  border-radius: 0;
+  font-size: 85%;
+  li:first-child{
+    &:before {
+      content: "\f054"; // Unicode space added since inline-block means non-collapsing white-space
+      padding: 0 5px;
+      font-family: FontAwesome;
+      color: @blue_clipit;
+    }
+  }
+}
+
+//
+// Elgg one layout with sidebar and one column
+// --------------------------------------------------
+.elgg-layout-one-sidebar, .elgg-layout-one-column{
+  .make-row();
+
+  // Elgg main
+  .elgg-main{
+
+    // Head
+    h2{
+      margin-top: 0;
+      margin-bottom: 25px;
+      color: @blue_clipit;
+    }
+    .content{
+      background: #FFF;
+      padding: 15px;
+      .elgg-head{
+      h2.elgg-heading-main{
+        color: @blue_clipit;
+        margin-top: 0;
+        .pull-left();
+      }
+      ul.elgg-menu{
+        margin: 0;
+        .pull-right();
+        // Button
+        li.elgg-menu-item-add{
+          .text-right();
+          a{
+            .btn();
+            .btn-default();
+          }
+        }
+      }
+    }
+    }
+    // Tabs
+    .elgg-htabs{
+      .nav();
+      .nav-tabs();
+    }
+
+    // Body content
+    .elgg-content,
+    ul.elgg-list-entity{
+      background: #FFF;
+      clear: both;
+      padding: 15px;
+
+      > li.elgg-item{
+        h3{
+          font-size: 1.2em;
+          margin: 0;
+        }
+        .elgg-image{
+          .pull-left();
+          margin-right: 5px;
+        }
+      }
+    }
+
+  }
+}
+.landing{
+  .content{
+    padding: 0 !important;
+    background: transparent !important;
+    h3{
+      font-family: @font-family-helvetica;
+    }
+  }
+}
+.clipit-home{
+  .content{
+    padding: 0 !important;
+    background: transparent !important;
+  }
+}
+
+//
+// Elgg sidebar
+// --------------------------------------------------
+.elgg-sidebar{
+  .make-md-column(3);
+  margin-top: 17px;
+  // Head
+  .elgg-head{
+    h3{
+      color: @blue_clipit;
+    }
+  }
+  // Button submit
+  input.elgg-button-submit{
+    .btn();
+    .btn-sm();
+    .btn-default();
+    padding: 5px 10px;
+    margin: 0 10px;
+  }
+  // Input texts
+  .elgg-input-text{
+    @shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.25), 0 0 0 2px rgba(225, 235, 240, 0.5);
+    .box-shadow(@shadow);
+    height: 25px;
+    border: 0;
+  }
+  .elgg-module-aside{
+    h4{
+      margin-top: 25px;
+    }
+    &.aside-block .elgg-body{
+      background: #fff;
+      padding: 10px;
+      > ul{
+        margin: 0;
+      }
+    }
+  }
+  // aside navigation
+  .nav > li > a{
+    padding: 5px 10px;
+    font-size: ceil(@font-size-base * 0.92); // ~13px;
+    font-weight: normal;
+  }
+}
+//
+// Aside tree list & collapse
+// --------------------------------------------------
+.aside-tree{
+  .elgg-body ul > ul{
+    margin-left: 25px;
+  }
+  .panel{
+    margin: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+//
+// Sidebar large column
+// --------------------------------------------------
+.sidebar-lg{
+  .elgg-sidebar{
+    .make-md-column-push(8);
+    .make-md-column(4);
+  }
+}
+.main-md{
+  .elgg-main{
+    .make-md-column(8);
+    .make-md-column-pull(4);
+  }
+}
+
+//
+// Table
+// --------------------------------------------------
+.table{
+  td{
+    border-bottom: 1px solid @blue-lighter;
+    border-top: 0 !important;
+  }
+}
+//
+// jQuery Shorten plugin
+// --------------------------------------------------
+.full-content{
+  max-height: 100% !important;
+}
+.read-more, .less{
+  display: block;
+  &:hover,
+  &:focus{
+    text-decoration: none;
+  }
+}
+.container-text{
+  overflow: hidden;
+}
+.shorten{
+  max-height: 100% !important;
+}
+
+//
+// Events timeline
+// --------------------------------------------------
+.events-more-link{
+  visibility: hidden;
+}
+ul.events{
+  position: relative;
+}
+ul.events.events-loading:after{
+  content: "Loading...";
+  color: @blue-lighter;
+  margin-top: 5px;
+  padding-top: 5px;
+  width: 100%;
+  float: left;
+  margin-left: 35px;
+}
+
+.clipit-sections {
+  .content{
+    background: transparent !important;
+  }
+  h2{
+    font-size: ceil(@font-size-base * 2.85); // ~40px
+  }
+}
+//
+// Team
+// --------------------------------------------------
+.clipit-sections.team{
+  h2{
+    margin-left: 50px;
+  }
+  a {
+    text-decoration: none !important;
+  }
+}
+
+.author-text{
+  font-size: 12px;
+  text-transform: uppercase;
+  font-family: @font-family-futurabold;
+  color: inherit;
+  letter-spacing: 1px;
+}
+.author-description{
+  font-size: 20px;
+}
+.twitter-color{
+  color: #33CCFF;
+}
+.linkedin-color{
+  color: #4875B4;
+}
+.youtube-color{
+  color: #FF3333;
+}
+.globe-color{
+  color: #999;
+}

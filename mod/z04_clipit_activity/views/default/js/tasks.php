@@ -31,7 +31,12 @@ $(document).on("click", ".feedback-check",function(){
 $(document).on("change", ".task-types",function(){
     var task_types = ['video_upload', 'storyboard_upload'];
     var content = $(this).closest(".task");
+    var that = $(this);
     content_feedback = content.find(".feedback-module");
+    if($("#tricky-topic").length > 0){
+        var tricky_topic_val = $("#tricky-topic").val();
+    }
+    $(this).closest(".task").find(".task-type-container").html('').hide();
     if($.inArray($(this).val(), task_types) != -1){
         switch($(this).val()){
             case "video_upload":
@@ -50,7 +55,16 @@ $(document).on("change", ".task-types",function(){
     content.find(".quiz-module").hide();
     if($(this).val() == 'quiz_take'){
         content.find(".quiz-module").show();
+        elgg.get('ajax/view/activity/admin/tasks/quiz/quiz', {
+            data: {
+                tricky_topic: tricky_topic_val
+            },
+            success: function (data) {
+                that.closest(".task").find(".task-type-container").html(data).show();
+            }
+        });
     }
+
 });
 $(document).on("click", "#add_task",function(){
     var content = $(".task-list");

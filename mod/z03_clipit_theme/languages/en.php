@@ -5,6 +5,7 @@
  */
 
 $english = array(
+    'or' => 'Or',
     'true' => 'True',
     'false' => 'False',
     'closed' => 'Closed',

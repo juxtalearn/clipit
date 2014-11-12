@@ -1,0 +1,897 @@
+//
+// Load core variables and mixins
+// --------------------------------------------------
+@import "../bootstrap";
+@import "variables_clipit";
+@import "mixins";
+@import "clipit_elgg_mod";
+@import "walled_garden";
+@import "content";
+@import "buttons";
+@import "forms";
+@import "modal";
+@import "lists";
+@import "multimedia";
+@import "widgets";
+@import "header";
+@import "footer";
+@import "activity";
+@import "comments";
+@import "discussion";
+@import "video";
+@import "messages";
+@import "tags";
+@import "landing";
+//@import "elgg_mod.less";
+//
+
+html{
+//  overflow-y: scroll;
+}
+body{
+  background: @bg_body;
+}
+a{
+  color: @blue_clipit;
+  &:hover,
+  &:focus{
+    color: @blue_clipit;
+    opacity: .7;
+    text-decoration: none !important;
+  }
+}
+.blue{
+  color: @blue_clipit;
+}
+.bg-blue{
+  background: @blue_clipit !important;
+}
+.blue-lighter{
+  color: @blue-lighter;
+}
+.bg-blue-lighter{
+  background: @blue-lighter_2 !important;
+}
+.bg-white{
+  background: #FFF !important;
+}
+.text-muted-2{
+  color: @grey_slow_3;
+}
+.green{
+  color: @green_clipit;
+}
+.red{
+  color: @red_clipit;
+}
+.yellow{
+  color: @yellow_clipit;
+}
+.white{
+  color: #FFF;
+}
+.overflow-hidden{
+  overflow: hidden;
+}
+ul, ol {
+  margin-top: 0;
+  margin-bottom: 10px;
+  padding: 0;
+  list-style: none outside none;
+}
+.formated-list{
+  ol, ul{
+    padding-left: 2.5em;
+  }
+  ul{
+    list-style-type: disc;
+  }
+  ol{
+    list-style-type: decimal;
+  }
+  ul ul,
+  ol ul {
+    list-style-type: circle;
+  }
+  ol ol ul,
+  ol ul ul, ul ol ul,
+  ul ul ul {
+    list-style-type: square;
+  }
+}
+.text-truncate{
+  display: block;
+  .text-truncate();
+}
+.text-justify{
+  text-align: justify;
+}
+.child-decoration-none{
+  &:hover, &:focus *{
+    text-decoration: none !important;
+  }
+}
+.cursor-pointer{
+ cursor: pointer;
+}
+.cursor-default{
+  cursor: default;
+}
+.view-all{
+  text-transform: uppercase;
+  font-size: 12px;
+}
+.title-bold{
+  font-family: @font-family-futurabold;
+  color: @blue_clipit;
+}
+.inline-block{
+  display: inline-block;
+}
+.inline{
+  display: inline;
+}
+.block-total{
+  width: 100%;
+  overflow: hidden;
+}
+.title-block{
+  color: @blue_clipit;
+  border-bottom: 6px solid @blue-lighter;
+  padding-bottom: 10px;
+  font-size: 20px;
+}
+.btn-sp{
+  padding: 5px 10px !important;
+  .pull-right();
+}
+small, .small{
+  /*font-size: 75%;*/
+  color: @gray-light;
+}
+.no-transition {
+  .transition(all 0.001s);
+}
+// fontawesome
+.fa:hover{
+  opacity: .7;
+  text-decoration: none;
+}
+// toggle menu
+.toggle-menu{
+  display: none;
+}
+h4.empty{
+  margin-top: 3px;
+  color: @grey_slow_3;
+}
+// Avatar sizes
+// --------------------------------------------------
+.avatar-tiny{
+  width: 25px;
+  height: 25px;
+}
+.avatar-small{
+  width: 40px;
+  height: 40px;
+}
+.avatar-medium{
+  width: 100px;
+  height: 100px;
+}
+// Margins
+// --------------------------------------------------
+.margin-set(@size) {
+  .margin-top-@{size}{
+    margin-top: @size*1px;
+  }
+  .margin-bottom-@{size}{
+    margin-bottom: @size*1px;
+  }
+  .margin-right-@{size}{
+    margin-right: @size*1px;
+  }
+  .margin-left-@{size}{
+    margin-left: @size*1px;
+  }
+}
+.margin-0{
+  margin: 0;
+}
+.margin-set(5);
+.margin-set(10);
+.margin-set(15);
+.margin-set(20);
+// Progress bar
+// --------------------------------------------------
+.progress-bar{
+  background: @blue_clipit;
+  &[value='0']{
+    color: @blue_clipit;
+    margin-left: 10px;
+  }
+}
+
+// Custom Font
+// --------------------------------------------------
+@font-face {
+  font-family: 'Futura';
+  src: url('@{font-path}@{font-name-futura}.eot');
+  src: url('@{font-path}@{font-name-futura}.eot') format('embedded-opentype'),
+  url('@{font-path}@{font-name-futura}.woff') format('woff'),
+  url('@{font-path}@{font-name-futura}.ttf') format('truetype'),
+  url('@{font-path}@{font-name-futura}.svg#FuturaLTRegular') format('svg');
+}
+@font-face {
+  font-family: 'FuturaBoldRegular';
+  src: url('@{font-path}@{font-name-futurabold}.eot');
+  src: url('@{font-path}@{font-name-futurabold}.eot') format('embedded-opentype'),
+  url('@{font-path}@{font-name-futurabold}.woff') format('woff'),
+  url('@{font-path}@{font-name-futurabold}.ttf') format('truetype'),
+  url('@{font-path}@{font-name-futurabold}.svg#FuturaLTBold') format('svg');
+}
+@font-face {
+  font-family: 'FuturaBook';
+  src: url('@{font-path}@{font-name-futurabook}.eot');
+  src: url('@{font-path}@{font-name-futurabook}.eot') format('embedded-opentype'),
+  url('@{font-path}@{font-name-futurabook}.woff') format('woff'),
+  url('@{font-path}@{font-name-futurabook}.ttf') format('truetype'),
+  url('@{font-path}@{font-name-futurabook}.svg#FuturaLTBold') format('svg');
+}
+@font-face {
+  font-family: 'FuturaLight';
+  src: url('@{font-path}@{font-name-futuralight}.eot');
+  src: url('@{font-path}@{font-name-futuralight}.eot') format('embedded-opentype'),
+  url('@{font-path}@{font-name-futuralight}.woff') format('woff'),
+  url('@{font-path}@{font-name-futuralight}.ttf') format('truetype'),
+  url('@{font-path}@{font-name-futuralight}.svg#FuturaLTBold') format('svg');
+}
+// Mixin for generating new styles
+.btn-styles(@btn-color: #555) {
+  border: none;
+  background-color: @btn-color;
+  background-repeat: repeat-x;
+  font-family: @font-family-futurabold;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 7px;
+  letter-spacing: 1px;
+  &:hover,
+  &:focus  {
+    background-color: darken(@btn-color, 8%);
+    background-position: 0 -15px;
+  }
+
+  &:active,
+  &.active {
+    background-color: darken(@btn-color, 12%);
+  }
+}
+// Progress
+// --------------------------------------------------
+.progress{
+  margin-bottom: 0;
+}
+// BG alerts
+// --------------------------------------------------
+.bg-primary {
+  color: #fff;
+  background-color: #428bca;
+  padding: 15px;
+  margin: 0 0 10px;
+}
+
+.bg-success {
+  background-color: #dff0d8;
+  padding: 15px;
+  margin: 0 0 10px;
+}
+.bg-info {
+  background-color: #d9edf7;
+  padding: 15px;
+  margin: 0 0 10px;
+  > i.fa{
+    color: @blue_clipit;
+  }
+}
+.bg-warning {
+  background-color: #fcf8e3;
+  padding: 15px;
+  margin: 0 0 10px;
+}
+.bg-danger {
+  background-color: #f2dede;
+  padding: 15px;
+  margin: 0 0 10px;
+}
+
+//
+// Forms
+// --------------------------------------------------
+.form-control{
+  @shadow_input: inset 0 1px 4px 0 rgba(0, 0, 0, 0.25), 0 0 0 4px rgba(225, 235, 240, 0.5);
+  .box-shadow(@shadow_input);
+  border-radius: 0;
+  border: 0px;
+  //  height: 45px;
+  //  font-size: 18px;
+  height: 35px;
+  font-size: 15px;
+  padding: 10px 16px;
+  line-height: 1.33;
+  &:focus  {
+    .box-shadow(@shadow_input);
+    border-color: none;
+  }
+}
+select.form-control{
+  @shadow_input:  0 0 0 4px rgba(225, 235, 240, 0.5);
+  .box-shadow(@shadow_input) !important;
+  border: 1px solid #EFF4F7;
+}
+
+//
+// Tables
+// --------------------------------------------------
+.table{
+  /*font-size: 13px;*/
+  color: #797979;
+  .smaller{
+    font-size: 11px;
+  }
+  .tags{
+    margin-bottom: 0;
+  }
+}
+.table-advance .label{
+  /*padding: 0.5em 0.8em;*/
+}
+.table-advance button{
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+  padding: 1px 5px;
+}
+//
+// Labels
+// --------------------------------------------------
+.label{
+  background-color: #FFF;
+}
+.label-danger{
+  color: @red_clipit;
+  border: 1px solid @red_clipit;
+}
+.label-success{
+  color: @green_clipit_2;
+  border: 1px solid @green_clipit_2;
+}
+.label-warning{
+  color: @orange_clipit;
+  border: 1px solid @orange_clipit;
+}
+.label-info{
+  color: @yellow_clipit;
+  border: 1px solid @yellow_clipit;
+}
+.label-blue{
+  color: #fff;
+  background: @blue_clipit;
+  border: 1px solid @blue_clipit;
+}
+.label-primary{
+  color: @blue_clipit;
+  border: 1px solid @blue_clipit;
+  &:hover,
+  &:focus{
+    background-color: @blue_clipit !important;
+    color: #fff;
+  }
+}
+
+//
+// Pagination
+// --------------------------------------------------
+.pagination {
+  > li > a{
+    border: 1px solid @blue-lighter;
+  }
+  > .active > a,
+  > .active > span{
+    background-color: @blue_clipit;
+    border: 1px solid @blue_clipit;
+    &:hover,
+    &:focus{
+      color: @blue_clipit;
+      background-color: @blue-lighter;
+      border-color: @blue_clipit;
+    }
+  }
+}
+//
+// Thumbnail
+// --------------------------------------------------
+.thumbnail{
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  &:hover,
+  &:focus{
+    border-color: transparent;
+  }
+}
+//
+// Headings
+// --------------------------------------------------
+h1, h2, h3 {
+  font-family: @font-family-futurabold;
+  color: @blue_clipit;
+}
+h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
+  font-family: @font-family-helvetica;
+  color: @blue_clipit;
+}
+//
+// Dropdown
+// --------------------------------------------------
+.dropdown{
+  [role=button]{
+    border-radius: 0;
+  }
+  > a{
+    font-family: @font-family-futurabold;
+    font-size: 17px;
+    color: @blue_clipit;
+    .transition(all .5s);
+    &:hover,
+    &:focus{
+      color: darken(@blue_clipit, 12%);
+    }
+    b.caret{
+      border-top: 8px solid;
+      border-right: 8px solid transparent;
+      border-left: 8px solid transparent;
+    }
+  }
+}
+// Dropdown menu <ul>
+.dropdown-menu {
+  //  @shadow_input: 0px -2px 12px 0px rgba(0, 0, 0, 0.2), 0px 6px 12px 0px rgba(0, 0, 0, 0.2);
+  @shadow_input: 0 6px 12px rgba(0, 0, 0, 0.2);
+  .box-shadow(@shadow_input);
+  border-radius: 0;
+
+  > li {
+    &.divider{
+      background-color: @blue-lighter;
+    }
+    &:last-child{
+      border: 0;
+    }
+    > a{
+      font-size: @font-size-base;
+      .transition(all .25s);
+      letter-spacing: 1px;
+      color: @blue_clipit;
+      &:hover,
+      &:focus{
+        background-color: #f5f5f5;
+        color: @blue_clipit !important;
+      }
+      &.remove{
+        &:hover,
+        &:focus{
+          color: #fff !important;
+          background-color: @red_clipit;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+//
+// Tabs
+// --------------------------------------------------
+.nav-tabs {
+  border-bottom: 0;
+  > li {
+    outline: 0;
+    &.active > a,
+    &.elgg-state-selected > a{
+      font-family: @font-family-futurabold;
+      color: @blue_clipit;
+      border: 0;
+      border-bottom: 1px solid #FFF;
+      background-color: #FFF;
+      cursor: default;
+      &:hover,
+      &:focus{
+        color: darken(@blue_clipit, 12%);
+        border: 0;
+        border-bottom: 1px solid #FFF;
+      }
+    }
+    > a {
+      font-family: @font-family-helvetica;
+      font-size: 15px;
+      letter-spacing: 1px;
+      color: @grey_text;
+      background-color: #f7f7f7;
+      margin-right: 4px;
+      &:hover,
+      &:focus{
+        color: darken(@grey_text, 12%);
+        border-bottom: 1px solid #FFF;
+      }
+      > .badge{
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border-radius: 10px;
+        vertical-align: text-bottom;
+        color: #FFF;
+        border: 2px solid #FFF;
+      }
+    }
+  }
+}
+//
+// Tooltip
+// --------------------------------------------------
+.tooltip-inner{
+  background-color: #eceded;
+  color: #000;
+  //  @shadow_input: 0 3px 6px rgba(0, 0, 0, 0.2);
+  //  .box-shadow(@shadow_input);
+  border: 1px solid @blue_clipit;
+}
+//
+// PopOver
+// -------------------------------------------------
+.popover{
+  border: 1px solid @blue_clipit;
+  .arrow{
+    border-bottom-color: @blue_clipit !important;
+  }
+}
+
+//
+// Badges Stacked
+// --------------------------------------------------
+.nav-stacked {
+  > li{
+    border-radius: 4px;
+    background: #FFF;
+    margin-bottom: 5px;
+    &:hover,
+    &:focus{
+      background-color: @blue-lighter !important;
+    }
+    > .badge{
+      border: 2px solid #FFF !important;
+      margin: 3px;
+    }
+    &.active {
+      background-color: @blue_clipit !important;
+      > .badge {
+        color: #FFF !important;
+        border: 2px solid #FFF !important;
+        background-color: transparent;
+      }
+    }
+  }
+  a{
+    color: @blue_clipit;
+    letter-spacing: 0px;
+    font-weight: bold;
+    font-size: 15px;
+    border-radius: 0 !important;
+    background-color: transparent !important;
+  }
+}
+// Activity related
+.nav-stacked-activities .badge{
+  width: 20px;
+  height: 20px;
+}
+//
+// Activity circle
+// --------------------------------------------------
+.activity-point{
+  width: 11px;
+  height: 11px;
+  display: inline-block;
+  border-radius: 30px;
+  border: 2px solid #fff;
+  .box-shadow(0px 0px 0px 1px @blue-lighter);
+}
+//
+// Admin owner text style
+// --------------------------------------------------
+.admin-owner{
+  padding: 1px 5px;
+  font-weight: bold;
+  color: @yellow_clipit;
+  background: rgba(216, 186, 5, 0.2);
+}
+
+//
+// Bg icon center transparent
+// --------------------------------------------------
+.bg-center-icon{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  cursor: not-allowed;
+  z-index: 100;
+  > .bg{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    background: #fff;
+  }
+  > .center-icon{
+    display: table;
+    width: 100%;
+    height: 100%;
+    > div{
+      display: table-cell;
+      text-align: center;
+      vertical-align: middle;
+      > span{
+        font-size: 40px;
+      }
+    }
+  }
+}
+//
+// Panel collapse blue
+// --------------------------------------------------
+.panel-blue{
+  border: 0;
+  border-radius: 0 !important;
+  box-shadow: none;
+  > .panel-heading{
+    background: @blue-lighter_2;
+    padding: 15px;
+    border-radius: 0;
+  }
+  .panel-body{
+    border: 0 !important;
+  }
+}
+//
+// Progressbar mini
+// --------------------------------------------------
+.progressbar-mini{
+  width: 90px;
+  height: 10px;
+  background: @bg_body;
+  > div{
+    float: left;
+    width: 5%; // default
+    height: 100%;
+    font-size: 12px;
+    line-height: 20px;
+    color: #ffffff;
+    text-align: center;
+    background-color: @blue_clipit;
+    @shadow_input:  inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    .box-shadow(@shadow_input);
+    .transition(width 0.6s ease);
+    &[data-value='0']{
+      width: 3% !important;
+    }
+    &.yellow{
+      background-color: @yellow_clipit;
+    }
+    &.green{
+      background-color: @green_clipit;
+    }
+  }
+}
+//
+// Custom datepicker
+// --------------------------------------------------
+.ui-datepicker.ui-widget-content{
+  padding: 10px;
+  background: #fff;
+  border-radius: 4px;
+  border: 1px solid #32b4e5;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  display: none;
+}
+.ui-datepicker{
+  th {
+    padding: .7em .3em;
+    text-align: center;
+    font-weight: bold;
+    border: 0;
+    color: #32b4e5;
+  }
+   td {
+    border: 0;
+    padding: 1px;
+     span, a{
+       display: block;
+       padding: 5px 10px;
+       text-align: right;
+       text-decoration: none;
+     }
+     a{
+       background: #d6f0fa;
+       &:hover,
+       &:focus{
+         text-decoration: none;
+       }
+       &.ui-state-active{
+         background: #32b4e5;
+         color: #fff;
+         font-weight: bold;
+       }
+     }
+     span{
+       color: #999;
+       background: #fafafa;
+       opacity: 0.7;
+     }
+  }
+  .ui-datepicker-header {
+    position: relative;
+    padding: .2em 0;
+    border-bottom: 1px solid #d6f0fa;
+  }
+  .ui-datepicker-title{
+    margin: 0 2.3em;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #32b4e5;
+  }
+  .ui-datepicker-prev,
+  .ui-datepicker-next {
+    position: absolute;
+    top: 2px;
+    height: 1.8em;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: @blue_clipit;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: right;
+    font-size: 20px;
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .ui-datepicker-prev {
+    left: 2px;
+  }
+  .ui-datepicker-prev:before {
+    content: "\f0d9";
+  }
+  .ui-datepicker-next {
+    right: 2px;
+  }
+  .ui-datepicker-next:before {
+    content: "\f0da";
+  }
+  .ui-icon{
+    text-align: left;
+    display: block;
+    text-indent: -99999px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+  }
+  .ui-state-disabled {
+    cursor: default !important;
+  }
+}
+//
+// FullCalendar plugin
+// --------------------------------------------------
+.delete-task{
+  display: none;
+}
+.fc-event{
+  background: #32b4e5;
+  border: 1px solid #32b4e5;
+}
+.fc-event-inner{
+  cursor: pointer;
+}
+.fc-event-time{
+  display: none;
+}
+.fc-event-end{
+  padding-left: 10px;
+  .fa{
+    display: none;
+  }
+}
+.fc-event-start{
+  padding-left: 0 !important;
+  .fa{
+    display: inline-block !important;
+  }
+}
+.fc-widget-content{
+  border: 1px solid #fff !important;
+  color: #999;
+  background: #fafafa;
+}
+.fc-ranged{
+  color: #32b4e5;
+  font-weight: bold;
+  background-color: #d6f0fa;
+  cursor: pointer;
+}
+.fc-state-highlight {
+  background: #FFF !important;
+  border: 3px solid #d6f0fa !important;
+}
+.fc-ranged.fc-other-month{
+  background-color: #F2FBFF;
+}
+.fc-grid .fc-other-month .fc-day-number{
+  opacity: .5;
+}
+.task-item{
+  display: none;
+}
+//
+// Nvd3 graph plugin
+// --------------------------------------------------
+.nvtooltip {
+  padding: 5px;
+  margin-top: 30px;
+  top: 100px !important;
+  border: 1px solid #32b4e5;
+  color: #32b4e5;
+  font-weight:bold;
+}
+// Module group activity
+.module-group_activity{
+  svg{
+    height: 200px;
+    .nvd3 .nv-axis line{
+      stroke: #EBEBEB;
+    }
+    text {
+      font: normal 12px Helvetica;
+      fill: #999999;
+    }
+    .nv-x .nv-axis text {
+      fill: #000;
+      font-size: 10px;
+    }
+    .nv-axis path {
+      stroke: #999999;
+    }
+  }
+}
+//
+// Loading block
+// --------------------------------------------------
+.loading-block{
+  display: table;
+  width: 100%;
+  height: auto;
+  > div{
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+  }
+  .fa-spin{
+    font-size: 40px !important;
+    position: initial !important;
+    top: 0 !important;
+  }
+}

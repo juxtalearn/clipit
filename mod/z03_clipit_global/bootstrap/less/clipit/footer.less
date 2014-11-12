@@ -1,0 +1,59 @@
+//
+// Footer
+// --------------------------------------------------
+#footer {
+  height: auto;
+  background-color: @blue_clipit;
+  padding: 20px;
+  margin-top: 30px;
+  // Sponsor Logos
+  .sponsors img{
+    width: 200px;
+    .pull-right();
+  }
+  // Contact
+  .contact{
+    h2{
+      font-family: @font-family-futurabold;
+      color: #FFFFFF;
+      font-size: ceil(@font-size-large * 2.5);
+      margin-top: 10px;
+    }
+    img{
+      width: 75px;
+      height: 75px;
+    }
+  }
+  // Site Map
+  .site-map{
+    h4{
+      font-size: @font-size-large;
+      color: #FFFFFF;
+      font-family: @font-family-helvetica;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    ul{
+      list-style: none;
+      padding: 0px;
+      font-size: ceil(@font-size-base * 1.14); // ~16px;
+      font-family: @font-family-helvetica;
+      > li{
+        margin: 10px 0px;
+        letter-spacing: 1px;
+        > a{
+          color: @blue-lighter;
+          &:hover, &:focus{
+            opacity: 0.5;
+            text-decoration: none;
+          }
+        }
+
+      }
+    }
+  }
+}
+// Team section
+.team-section + #footer{
+  margin: 0;
+}

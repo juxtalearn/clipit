@@ -1,0 +1,5 @@
+NameError: variable @icon-font-path is undefined in D:\ubuntu_compartido\Clipit_api\mod\clipit_theme\bootstrap\less\glyphicons.less on line 15, column 12:
+14   font-family: 'Glyphicons Halflings';
+15   src: url('@{icon-font-path}@{icon-font-name}.eot');
+16   src: url('@{icon-font-path}@{icon-font-name}.eot?#iefix') format('embedded-opentype'),
+

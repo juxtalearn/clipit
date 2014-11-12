@@ -11,7 +11,7 @@
  * @package         ClipIt
  */
 ?>
-<li>
+<li <?php echo elgg_in_context('explore') ? 'class="active"': '';?>>
     <?php echo elgg_view('output/url', array(
         'href'  => "explore",
         'title' => elgg_echo('explore'),

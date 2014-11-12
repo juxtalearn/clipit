@@ -1,0 +1,120 @@
+//
+// General form
+// --------------------------------------------------
+label{
+  display: block;
+  > span.error{
+    color: @red_clipit;
+    .pull-right();
+  }
+  &.error{
+    color: @red_clipit;
+  }
+}
+input.error, textarea.error{
+  .box-shadow(inset 0 1px 4px @red_clipit) !important;
+}
+
+//
+// Form horizontal
+// --------------------------------------------------
+form.form-horizontal{
+  label{
+    color: #797979;
+  }
+  select{
+    height: 30px;
+    padding: 5px 16px;
+  }
+}
+//
+// Input radios
+// --------------------------------------------------
+.input-radios-horizontal{
+  margin-bottom: 0;
+  li{
+    display: inline-block;
+    margin-right: 15px;
+    label{
+      cursor: pointer;
+    }
+    input{
+      vertical-align: sub;
+      margin-right: 5px;
+    }
+  }
+}
+
+//
+// Form modules
+// --------------------------------------------------
+form .elgg-module{
+  background: #FFF;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  border-radius: 3px;
+  overflow: hidden;
+
+  h3{
+    margin-top: 0;
+    color: @blue_clipit;
+  }
+}
+
+//
+// Search box
+// --------------------------------------------------
+.search-box{
+  @shadow_input:  0 0 0 4px rgba(225, 235, 240, 0.5);
+  .box-shadow(@shadow_input);
+  input[type=text]{
+    padding-left: 5px;
+    border: 0;
+    display: inline-block;
+  }
+  .input-group-btn{
+    display: inline-block;
+    span{
+      border-left: 2px solid rgba(225, 235, 240, 0.5);
+      padding-left: 5px;
+    }
+    button{
+      background-color: #fff;
+      border: 0;
+      .fa{
+        color: @blue_clipit;
+        font-size: ceil(@font-size-base * 1.14); // ~ 16px
+      }
+    }
+  }
+}
+//
+// Multiple check (checkbox simulate)
+// --------------------------------------------------
+.multiple-check{
+  margin: 10px 0;
+  height: 300px !important;
+  overflow-y: auto;
+  .check-group{
+    margin: 5px 0 5px 10px;
+    > a{
+      display: block;
+    }
+    h4{
+      margin-top: 10px;
+    }
+    input[type=checkbox]:checked + span{
+      background: #ECF7FB;
+      color: #32b4e5 !important;
+      padding: 3px 5px;
+    }
+    label{
+      font-weight: normal;
+      border-bottom: 1px solid #bae6f6;
+      padding: 3px;
+      span{
+        vertical-align: text-bottom;
+      }
+    }
+  }
+}

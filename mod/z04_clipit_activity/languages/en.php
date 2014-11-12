@@ -229,6 +229,7 @@ $english = array(
     'task:select' => 'Select task',
     'task:select:task_type' => 'Select task type',
     'task:task_type' => 'Task type',
+    'task:resource_download' => 'View/Download resources',
     'task:feedback' => 'Task feedback',
     'task:feedback:linked' => 'Linked feedback task',
     'task:feedback:check' => 'Check to create a feedback task',
@@ -295,6 +296,7 @@ $english = array(
     // Quiz
     'quiz:result:send' => '',
     'difficulty' => 'Difficulty',
+    'quiz:select:from_tag' => 'Add questions related',
 );
 
 add_translation('en', $english);

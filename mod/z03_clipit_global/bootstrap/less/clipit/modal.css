@@ -1,0 +1,5 @@
+NameError: variable @font-family-futurabold is undefined in D:\ubuntu_compartido\clipit_befe\mod\clipit_theme\bootstrap\less\clipit\modal.less on line 11, column 18:
+10   h4{
+11     font-family: @font-family-futurabold;
+12     color: @blue_clipit;
+

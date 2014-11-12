@@ -1,0 +1,148 @@
+//
+// Buttons
+// --------------------------------------------------
+
+.btn-normal {
+  .btn-styles(@btn-default-bg);
+  border: 2px solid #d9dadb;
+  color: #9c9e9f;
+  &:hover,
+  &:focus  {
+    color: #9c9e9f;
+    border: 2px solid #d9dadb;
+    background-color: #f0f1f1;
+  }
+}
+.btn-default, .btn-primary {
+  color: #FFF;
+  .btn-styles(@blue_clipit);
+  &:hover,
+  &:focus  {
+    color: #FFF;
+    opacity: 1;
+  }
+}
+.btn-success { .btn-styles(@green_clipit_2); }
+.btn-warning { .btn-styles(@orange_clipit); }
+.btn-danger  { .btn-styles(@red_clipit); }
+.btn-info    { .btn-styles(@yellow_clipit); }
+.btn-blue-lighter{
+  background: @blue-lighter_2 !important;
+  &:hover, &:focus{
+    opacity: 0.7;
+  }
+}
+.btn-success-o{
+  .btn-styles(@green_clipit_2);
+  color: @green_clipit_2;
+  border: 1px solid @green_clipit_2;
+  background: #fff;
+  &:hover,
+  &focus{
+    color: #fff;
+  }
+}
+
+// Option list
+.btn-options{
+  color: @blue_clipit;
+  border: 1px solid @blue_clipit;
+  font-size: 12px;
+  padding: 1px 5px !important;
+  background: #fff;
+  &:hover,
+  &:focus{
+    color: @blue_clipit;
+    opacity: 0.7;
+  }
+  + .dropdown-menu{
+    min-width: initial;
+    > li{
+      border-bottom: 1px solid @blue-lighter;
+      > a{
+        font-weight: bold;
+        letter-spacing: 0;
+        font-size: @font-size-small;
+        > i.fa{
+          margin-right: 3px;
+        }
+      }
+    }
+  }
+}
+//
+// Color border buttons
+// --------------------------------------------------
+.btn-border-blue{
+  color: @blue_clipit;
+  background: #fff;
+  border: 1px solid @blue_clipit;
+  &:hover,
+  &:focus{
+    background: #fff !important;
+    border: 1px solid @blue_clipit;
+    color: @blue_clipit;
+    opacity: 0.7;
+  }
+}
+.btn-border-yellow{
+  color: @yellow_clipit;
+  background: #fff;
+  border: 1px solid @yellow_clipit;
+  &:hover,
+  &:focus{
+    background: #fff !important;
+    border: 1px solid @yellow_clipit;
+    color: @yellow_clipit;
+    opacity: 0.7;
+  }
+}
+.btn-border-green{
+  color: @green_clipit;
+  background: #fff;
+  border: 1px solid @green_clipit;
+  &:hover,
+  &:focus{
+    background: #fff !important;
+    border: 1px solid @green_clipit;
+    color: @green_clipit;
+    opacity: 0.7;
+  }
+}
+.btn-border-blue-lighter{
+  border: 1px solid @blue_clipit;
+  background: @blue-lighter;
+  color: @blue_clipit;
+}
+.btn-border-red{
+  color: @red_clipit;
+  background: #fff;
+  border: 1px solid @red_clipit;
+  &:hover,
+  &:focus{
+    background: #fff !important;
+    border: 1px solid @red_clipit;
+    color: @red_clipit;
+    opacity: 0.7;
+  }
+}
+//
+// Button sizes
+// --------------------------------------------------
+.btn-sm,
+.btn-xs,
+.btn-icon{
+  border-radius: 3px;
+}
+.btn-xs{
+  padding: 2px 5px;
+}
+.btn-xs-5{
+  padding: 0px 5px !important;
+}
+//
+// Button with fa icon inside
+// --------------------------------------------------
+.btn-icon{
+  padding: 5px 8px;
+}

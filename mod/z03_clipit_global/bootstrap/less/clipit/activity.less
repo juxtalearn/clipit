@@ -1,0 +1,359 @@
+.activity-layout{
+  .elgg-head-layout{
+    padding: 15px;
+    margin-top: -20px;
+    h2{
+      color: #FFF;
+      margin-bottom: 0;
+      margin-top: 30px;
+    }
+    .breadcrumb{
+      > li {
+        color: #fff;
+        a{
+          color: #fff;
+        }
+      }
+      li:first-child:before{
+        color: #fff;
+        .opacity(1);
+      }
+      > li + li:before{
+        color: #fff;
+        .opacity(1);
+      }
+      > .active{
+        color: #fff;
+        .opacity(0.7);
+      }
+    }
+  }
+  // Sidebar
+  .elgg-sidebar{
+    margin-top: 0;
+  }
+}
+//
+// Activity status
+// --------------------------------------------------
+.activity-status{
+  text-transform: uppercase;
+  font-size: 75%;
+  letter-spacing: .5px;
+  &.status-enroll{
+    color: @yellow_clipit;
+  }
+  &.status-active{
+    color: @blue_clipit;
+  }
+  &.status-closed{
+    color: @red_clipit;
+  }
+}
+//
+// Activity profile
+// --------------------------------------------------
+.activity-profile{
+  .elgg-head-layout{
+    h2{
+      .h3();
+      color: #fff;
+    }
+  }
+}
+//
+// Activity section
+// --------------------------------------------------
+.activity-section{
+  .elgg-head-layout{
+    h4{
+      color: #FFF;
+      .opacity(0.7);
+      margin-bottom: 0;
+      margin-top: 20px;
+      letter-spacing: 0.5px;
+    }
+    h2{
+      margin-top: 0;
+    }
+  }
+}
+
+ul.menu-activity-section{
+  a{
+    border-radius: 0;
+  }
+}
+.activity-admin-section{
+  .btn-admin{
+    opacity: 0.7;
+  }
+}
+//
+// Group tools & details
+// --------------------------------------------------
+.join-activity-button{
+  background: @blue-lighter;
+  display: block;
+  text-align: center;
+  border: 1px solid @blue_clipit;
+  border-radius: 10px;
+  font-family: @font-family-futurabold;
+  font-size: 18px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+// Title activity module
+.activity-module-title{
+  font-family: @font-family-futurabold;
+  color: @blue_clipit;
+  border-top: 6px solid @blue-lighter;
+  padding-top: 10px;
+}
+
+// Deadline list
+ul.deadline-list{
+  > li{
+    color: @grey_text;
+    border-bottom: 1px solid @blue-lighter;
+    padding: 10px;
+    padding-top: 0;
+    .date{
+      border-right: 1px solid #ccc;
+      padding-right: 10px;
+    }
+    &.soon{
+      opacity: .5;
+    }
+    .fa-user{
+      font-size: @line-height-computed; // ~20px
+    }
+
+  }
+}
+//
+// Task view
+// --------------------------------------------------
+.task-info{
+  margin-bottom: 15px;
+  h3{
+    margin-top: 0;
+  }
+  .details{
+    border-bottom: 1px solid #bae6f6;
+    padding-bottom: 5px;
+  }
+  .description{
+    color: #666666;
+    margin-top: 10px;
+    background: #fafafa;
+    padding: 10px;
+  }
+}
+
+//
+// Tags block (activiy home)
+// --------------------------------------------------
+.tags-block{
+  background: @blue-lighter_2;
+  margin-top: 20px;
+  h3{
+    padding: 15px 25px;
+    margin: 0 !important;
+    font-family: @font-family-futurabold;
+  }
+  ul.tags-list{
+    max-height: 200px;
+    overflow-y: auto;
+    li{
+      margin: 5px;
+      border-bottom: 1px solid #fff;
+      padding: 3px;
+      padding-left: 20px;
+      &:last-child{
+        border: 0;
+      }
+    }
+  }
+}
+
+//
+// Group block (sidebar)
+// --------------------------------------------------
+.activity-group-block{
+  h3{
+    font-family: @font-family-futurabold;
+    margin-bottom: 5px;
+    margin-top: 0;
+  }
+  .fa.status-deadline{
+    font-size: 15px;
+    vertical-align: text-bottom;
+    &.fa-check-square-o{
+      color: @green_clipit;
+    }
+    &.fa-times{
+      color: @red_clipit;
+    }
+    &.fa-minus-square-o{
+      color: @yellow_clipit;
+    }
+  }
+}
+//
+// jOrgChart (Tricky topic view)
+// --------------------------------------------------
+.jOrgChart{
+  overflow: auto;
+  .line {
+    height : 20px;
+    width : 4px;
+  }
+  .down{
+    background-color: @blue-lighter;
+    margin : 0px auto;
+  }
+  .left {
+    border-right: 2px solid @blue-lighter;
+  }
+  .right {
+    border-left: 2px solid @blue-lighter;
+  }
+  .top {
+    border-top: 3px solid @blue-lighter;
+  }
+  table{
+    width: 100%;
+    td {
+      text-align : center;
+      vertical-align : top;
+      padding : 0;
+    }
+  }
+  .node {
+    background-color: #fff;
+    width: auto;
+    height: auto;
+    color: @blue_clipit;
+    border: 1px solid @blue_clipit;
+    padding: 10px;
+    border-radius: 3px;
+    display: inline-block;
+    margin : 0 2px;
+    z-index : 10;
+  }
+}
+//
+// Multi Select plugin (two-column transfer multi-select)
+// --------------------------------------------------
+.ms-container{
+  position: relative;
+  width: 100%;
+  &:after{
+    content: ".";
+    display: block;
+    height: 0;
+    line-height: 0;
+    font-size: 0;
+    clear: both;
+    min-height: 0;
+    visibility: hidden;
+  }
+  .ms-selectable,
+  .ms-selection{
+    background: #fff;
+    color: #555555;
+    float: left;
+    width: 45%;
+  }
+  .ms-list{
+    border: 2px solid @blue-lighter;
+    position: relative;
+    height: 200px;
+    padding: 0;
+    overflow-y: auto;
+
+    .ms-elem-selection,
+    .ms-elem-selectable{
+      border-bottom: 1px #eee solid;
+      padding: 3px 10px;
+      padding-left: 20px;
+      color: #555;
+      font-size: 14px;
+      cursor: pointer;
+      &:hover,
+      &:focus{
+        cursor: pointer;
+        color: #fff !important;
+        text-decoration: none;
+        background-color: @blue_clipit;
+        &:after{
+          font-family: FontAwesome;
+          color: @blue-lighter;
+          position: absolute;
+        }
+      }
+      &.disabled{
+        background-color: #eee !important;
+        color: #aaa !important;
+        cursor: default !important;
+        border-bottom: 1px #D8D8D8 solid;
+        &:after{
+//          content: "" !important;
+          content: "\f0c0" !important;
+          font-family: FontAwesome;
+          right: 5px;
+          position: absolute;
+          color: @grey_slow_3;
+        }
+      }
+    }
+    // icon arrow left
+    .ms-elem-selection{
+      padding-left: 25px !important;
+      &:hover,
+      &:focus{
+        &:after{
+          content: "\f060";
+          left: 5px;
+        }
+      }
+    }
+    // icon arrow right
+    .ms-elem-selectable{
+      &:hover,
+      &:focus{
+        &:after{
+          content: "\f061";
+          right: 5px;
+        }
+      }
+    }
+  }
+  .ms-optgroup-label{
+    margin: 0;
+    padding: 5px 0px 0px 5px;
+    cursor: pointer;
+    color: #999;
+  }
+  .ms-selectable{
+    margin-right: 10%;
+    &:after{
+      color: #bae6f6;
+      position: absolute;
+      left: 47%;
+      top: 50%;
+      font-family: 'FontAwesome';
+      font-size: 23px;
+      content: "\f060" " \f061";
+    }
+  }
+  ul{
+    margin: 0;
+    list-style-type: none;
+    padding: 0;
+  }
+  .ms-optgroup-container{
+    width: 100%;
+  }
+}

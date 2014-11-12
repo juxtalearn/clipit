@@ -1,0 +1,18 @@
+/*
+  Grid as table (col vertical align)
+
+  Use ".row-table-xs" in ".row" when you need cols in xsmal version (.col-sx-...)
+
+<div class="row row-table row-table-xs">
+  <div class="col-xs-6"> ...  </div>
+  <div class="col-xs-6"> ... </div>
+</div>
+*/
+.row-table {
+  display: table !important;
+}
+.row-table > [class*="col-"] {
+  float: none!important;
+  display: table-cell !important;
+  vertical-align: middle;
+}

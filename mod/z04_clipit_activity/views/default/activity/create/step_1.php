@@ -22,7 +22,7 @@ $tt = array_diff($tt, $owner_tt);
 ?>
 <script>
 $(function(){
-    $("#list-tricky-topic").change(function(){
+    $("#tricky-topic").change(function(){
         var content = $("#tricky_topic_view");
         if($(this).val() == 0){
             content.hide();
@@ -149,7 +149,7 @@ $(function(){
             <div class="form-group">
                 <label for="activity-tricky-topic"><?php echo elgg_echo("activity:select:tricky_topic");?></label>
 
-                <select required="required" id="list-tricky-topic" class="form-control" name="activity-tricky-topic" style="padding-top: 5px;padding-bottom: 5px;">
+                <select required="required" id="tricky-topic" class="form-control" name="activity-tricky-topic" style="padding-top: 5px;padding-bottom: 5px;">
                     <option value="<?php echo $value;?>">
                         <?php echo elgg_echo('tricky_topic:select');?>
                     </option>

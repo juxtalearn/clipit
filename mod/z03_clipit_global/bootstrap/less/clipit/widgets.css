@@ -1,0 +1,5 @@
+NameError: variable @blue_clipit is undefined in D:\ubuntu_compartido\clipit_befe\mod\clipit_theme\bootstrap\less\clipit\widgets.less on line 17, column 12:
+16     padding: 10px;
+17     color: @blue_clipit;
+18     .widget-viewall{
+

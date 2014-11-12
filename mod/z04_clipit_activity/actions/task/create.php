@@ -54,6 +54,13 @@ foreach($tasks as $task){
                     }
                     break;
                 case ClipitQuizQuestion::TYPE_TRUE_FALSE:
+                    $validations[] = $question['true_false'];
+                    break;
+                case ClipitQuizQuestion::TYPE_NUMBER:
+                    $validations[] = $question['number'];
+                    break;
+                case ClipitQuizQuestion::TYPE_STRING:
+                    $validations[] = $question['string'];
                     break;
             }
             $tags = array_filter($question['tags']);

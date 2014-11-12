@@ -1,0 +1,5 @@
+NameError: .text-truncate is undefined in D:\ubuntu_compartido\clipit_befe\mod\clipit_theme\bootstrap\less\clipit\video.less on line 12, column 5:
+11   h4{
+12     .text-truncate();
+13     margin-top: 5px;
+

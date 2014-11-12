@@ -1,0 +1,290 @@
+/*.tag-list{
+  margin: 0;
+  font-size: 11px;
+  color: @blue_clipit;
+  display: block;
+  padding: 5px 0;
+  p{
+    color: @blue_clipit;
+    border: 1px solid @blue_clipit;
+    padding: 2px 4px;
+    border-radius: 3px;
+    margin: 2px;
+    max-width: 70px;
+    .text-truncate();
+    display: inline-block;
+    font-size: inherit;
+    &:first-child{
+      margin-left: 0;
+    }
+  }
+}*/
+.tags{
+  margin: 5px 0;
+    > a.label{
+      .text-truncate();
+      font-size: 11px;
+      display: inline-block;
+      border: 1px solid;
+      padding: .2em .6em .3em !important;
+    }
+}
+.more-tags{
+  display: inline-block;
+  margin: 2px;
+  vertical-align: top;
+//  padding: 3px 4px;
+  color: @blue_clipit;
+  font-size: 14px;
+}
+
+//
+// jQuery Chosen
+// --------------------------------------------------
+.chosen-container{
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: ceil(@font-size-base * 0.92); // ~13px;
+  zoom: 1;
+  .user-select(none);
+  .chosen-choices{
+    .token-input-list();
+    input{
+      outline: 0px;
+    }
+  }
+  .search-choice{
+    .token-input-token();
+    display: block;
+    float: left;
+    .search-choice-close{
+      float: right;
+      margin-left: 5px;
+      margin-top: 1px;
+      color: @blue-lighter;
+      cursor: pointer;
+      // FontAwesome
+      display: inline-block;
+      font-family: FontAwesome;
+      font-style: normal;
+      font-weight: normal;
+      line-height: 1;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      &:before {
+        content: "\f00d";
+      }
+      &:active,
+      &:focus{
+        text-decoration: none;
+      }
+    }
+  }
+  .chosen-drop {
+    position: absolute;
+    top: 100%;
+    left: -9999px;
+    z-index: 1010;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    background: #fff;
+    border-top: 0;
+    font-size: @font-size-base;
+    .box-shadow(0 6px 12px rgba(0, 0, 0, 0.2));
+    padding: 3px;
+    .chosen-results {
+      position: relative;
+      overflow-x: hidden;
+      overflow-y: auto;
+      margin: 0;
+      padding: 0;
+      max-height: 240px;
+      -webkit-overflow-scrolling: touch;
+      li{
+        display: none;
+        margin: 0;
+        padding: 5px 6px;
+        list-style: none;
+        line-height: 15px;
+        -webkit-touch-callout: none;
+        border-bottom: 1px solid #eee;
+        > em {
+          font-style: normal;
+          text-decoration: underline;
+        }
+        &:last-child{
+          border-bottom: 0;
+        }
+        &.active-result{
+          display: list-item;
+          cursor: pointer;
+          color: @blue_clipit;
+          font-weight: bold;
+        }
+        &.group-result {
+          display: list-item;
+          font-weight: bold;
+          cursor: default;
+          border-bottom: 0;
+        }
+        &.result-selected{
+          display: list-item;
+          color: #ccc;
+          cursor: default;
+        }
+        &.no-results {
+          display: list-item;
+          background: #f4f4f4;
+        }
+        &.highlighted{
+          background: @blue_clipit;
+          color: #fff;
+        }
+      }
+    }
+  }
+  &.chosen-with-drop .chosen-drop {
+    left: 0;
+  }
+
+}
+
+.chosen-select-items{
+  + .chosen-container{
+    .chosen-choices li{
+      float: none;
+      font-weight: normal;
+      border: 0;
+      border-bottom: 1px solid #bae6f6;
+      border-radius: 0;
+      &:last-child{
+        border: 0;
+      }
+      &.group-option{
+        font-weight: normal;
+      }
+      input{
+        cursor: default;
+      }
+    }
+  }
+}
+
+//
+// Tag-it
+// --------------------------------------------------
+.ui-helper-hidden-accessible {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.tagit{
+  .token-input-list();
+}
+
+ul.tagit-autocomplete{
+  z-index: 9999;
+  position: absolute;
+  background-color: #fff;
+  overflow: hidden;
+  cursor: default;
+  font-size: @font-size-base;
+  .box-shadow(0 6px 12px rgba(0, 0, 0, 0.2));
+  padding: 3px;
+  li{
+    border-bottom: 1px solid #eee;
+    > a{
+      display: block;
+      padding: 3px;
+      padding-left: 10px;
+      font-weight: bold;
+      &:hover,
+      &:focus, &.ui-state-focus{
+        color: #fff;
+        text-decoration: none;
+        background: @blue_clipit;
+      }
+    }
+    &:last-child{
+      border-bottom: 0;
+    }
+  }
+}
+.tagit-choice{
+  .token-input-token();
+  &.remove,
+  &.selected{
+    color: #fff;
+    text-decoration: none;
+    background: @blue_clipit;
+  }
+  > a:hover, a:focus{
+    color: #FFF;
+  }
+}
+
+ul.tagit li {
+  display: block;
+  float: left;
+}
+ul.tagit li.tagit-choice {
+  position: relative;
+  line-height: inherit;
+}
+input.tagit-hidden-field {
+  display: none;
+}
+ul.tagit li.tagit-choice-read-only {
+  padding: .2em .5em .2em .5em;
+}
+
+
+ul.tagit li.tagit-new {
+  margin: 3px;
+  padding: 2px 5px;
+  height: 25px;
+}
+
+ul.tagit li.tagit-choice a.tagit-label {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+
+/* used for some custom themes that don't need image icons */
+ul.tagit li.tagit-choice .tagit-close .text-icon {
+  float: right;
+  margin-left: 5px;
+  color: @blue-lighter;
+  cursor: pointer;
+}
+
+ul.tagit li.tagit-choice input {
+  display: block;
+  float: left;
+  margin: 2px 5px 2px 0;
+}
+ul.tagit input[type="text"] {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background: #fff;
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: inherit;
+  background-color: inherit;
+  outline: none;
+}

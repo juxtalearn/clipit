@@ -230,6 +230,7 @@ $spanish = array(
     'task:select' => 'Seleccionar tarea',
     'task:select:task_type' => 'Seleccionar tipo de tarea',
     'task:task_type' => 'Tipo de tarea',
+    'task:resource_download' => 'Ver/Descargar materiales',
     'task:feedback' => 'Tarea de feedback',
     'task:feedback:linked' => 'Tarea de feedback vinculada',
     'task:feedback:check' => 'Añadir una tarea de feedback',
@@ -312,6 +313,7 @@ $spanish = array(
     // Quiz
     'quiz:result:send' => 'Las respuestas quedarán guardadas...',
     'difficulty' => 'Dificultad',
+    'quiz:select:from_tag' => 'Añadir preguntas existentes relacionadas',
 );
 
 add_translation('es', $spanish);

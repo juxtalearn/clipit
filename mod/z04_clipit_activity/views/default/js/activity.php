@@ -13,10 +13,12 @@
 ?>
 $(function(){
 <?php
-// Tasks js
+// Tasks
 echo elgg_view('js/tasks');
 // Activity admin
 echo elgg_view('js/admin');
+// Quiz
+echo elgg_view('js/quiz');
 ?>
     $(document).on("click", ".option-select", function(){
         var view = $(this).data("toggle");

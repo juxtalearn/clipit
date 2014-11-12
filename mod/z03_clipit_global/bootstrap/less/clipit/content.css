@@ -1,0 +1,5 @@
+NameError: variable @blue_clipit is undefined in D:\ubuntu_compartido\clipit_befe\mod\clipit_theme\bootstrap\less\clipit\content.less on line 28, column 14:
+27       font-family: FontAwesome;
+28       color: @blue_clipit;
+29     }
+
