@@ -64,22 +64,24 @@ class UBItem {
     /**
      * Constructor
      *
-     * @param int $id If !null, load instance.
+     * @param int                   $id          If !null, load instance.
      * @param ElggObject|ElggEntity $elgg_object Object to load instance from (optional)
      *
      * @throws APIException
      */
     function __construct($id = null, $elgg_object = null) {
-        if (!empty($id)) {
-            if (empty($elgg_object)) {
-                if (!$elgg_object = new ElggObject($id)) {
-                    throw new APIException("ERROR: Failed to load " . get_called_class() . " object with ID '" . $id . "'.");
+        if(!empty($id)) {
+            if(empty($elgg_object)){
+                if(!$elgg_object = new ElggObject($id)) {
+                    throw new APIException("ERROR: Failed to load " . get_called_class() ." object with ID '" . $id . "'.");
                 }
             }
             $elgg_type = $elgg_object->type;
             $elgg_subtype = $elgg_object->getSubtype();
-            if (($elgg_type != static::TYPE) || ($elgg_subtype != static::SUBTYPE)) {
-                throw new APIException("ERROR: ID '" . $id . "' does not correspond to a " . get_called_class() . " object.");
+            if(($elgg_type != static::TYPE) || ($elgg_subtype != static::SUBTYPE)) {
+                throw new APIException(
+                    "ERROR: ID '" . $id . "' does not correspond to a " . get_called_class() . " object."
+                );
             }
             $this->copy_from_elgg($elgg_object);
         }
@@ -88,13 +90,12 @@ class UBItem {
     /**
      * Saves this instance to the system.
      * @param bool $double_save if double_save is true, this object is saved twice to ensure that all properties are
-     * updated properly. E.g. the time_created property can only beset on ElggObjects during an update. Defaults to
-     *     false!
+     * updated properly. E.g. the time_created property can only beset on ElggObjects during an update. Defaults to false!
      * @return bool|int Returns id of saved instance, or false if error.
      */
-    protected function save($double_save = false) {
-        if (!empty($this->id)) {
-            if (!$elgg_object = new ElggObject($this->id)) {
+    protected function save($double_save=false) {
+        if(!empty($this->id)) {
+            if(!$elgg_object = new ElggObject($this->id)) {
                 return false;
             }
         } else {
@@ -135,7 +136,7 @@ class UBItem {
         $elgg_entity->set("name", (string)$this->name);
         $elgg_entity->set("description", (string)$this->description);
         $elgg_entity->set("url", (string)$this->url);
-        $elgg_entity->set("time_created", (int)$this->time_created);
+        $elgg_entity->set("time_created",(int)$this->time_created);
         $elgg_entity->set("access_id", ACCESS_PUBLIC);
 
     }
@@ -152,20 +153,20 @@ class UBItem {
     /**
      * Get specified property values for an Item
      *
-     * @param int $id Id of instance to get properties from
+     * @param int   $id         Id of instance to get properties from
      * @param array $prop_array Array of property names to get values from
      *
      * @return array|bool Returns an array of property=>value pairs, or false if error
      * @throws InvalidParameterException
      */
     static function get_properties($id, $prop_array = null) {
-        if (empty($id) || !$item = new static($id)) {
+        if(!$item = new static($id)) {
             return null;
         }
         $value_array = array();
-        if (!empty($prop_array)) {
-            foreach ($prop_array as $prop) {
-                if (array_key_exists($prop, static::list_properties())) {
+        if(!empty($prop_array)) {
+            foreach($prop_array as $prop) {
+                if(array_key_exists($prop, static::list_properties())) {
                     $value_array[$prop] = $item->$prop;
                 } else {
                     throw new InvalidParameterException("ERROR: One or more property names do not exist.");
@@ -176,7 +177,7 @@ class UBItem {
             do {
                 $prop = key($prop_array);
                 $value_array[$prop] = $item->$prop;
-            } while (next($prop_array) !== false);
+            } while(next($prop_array) !== false);
         }
         return $value_array;
     }
@@ -184,27 +185,27 @@ class UBItem {
     /**
      * Sets values to specified properties of an Item
      *
-     * @param int $id Id of Item to set property values
+     * @param int   $id               Id of Item to set property values
      * @param array $prop_value_array Array of property=>value pairs to set into the Item
      *
      * @return int|bool Returns Id of Item if correct, or false if error
      * @throws InvalidParameterException
      */
     static function set_properties($id, $prop_value_array) {
-        if (!$item = new static($id)) {
+        if(!$item = new static($id)) {
             return false;
         }
-        foreach ($prop_value_array as $prop => $value) {
-            if (!array_key_exists($prop, static::list_properties())) {
+        foreach($prop_value_array as $prop => $value) {
+            if(!array_key_exists($prop, static::list_properties())) {
                 throw new InvalidParameterException("ERROR: One or more property names do not exist.");
             }
-            if ($prop == "id") {
+            if($prop == "id") {
                 continue; // cannot set an item's ID manually.
             }
             $item->$prop = $value;
 
         }
-        if (array_key_exists("time_created", $prop_value_array)) {
+        if (array_key_exists("time_created",$prop_value_array)) {
             return $item->save(true);
         } else {
             return $item->save(false);
@@ -236,7 +237,7 @@ class UBItem {
         return $clone_id;
     }
 
-    static function link_parent_clone($id_parent, $id_clone) {
+    static function link_parent_clone($id_parent, $id_clone){
         UBCollection::add_items($id_parent, array($id_clone), static::REL_PARENT_CLONE, true);
     }
 
@@ -251,12 +252,12 @@ class UBItem {
     static function get_clones($id, $recursive = false) {
         $clone_array = array();
         $item_clones = UBCollection::get_items($id, static::REL_PARENT_CLONE);
-        if ($recursive) {
-            foreach ($item_clones as $clone) {
+        if($recursive) {
+            foreach($item_clones as $clone) {
                 array_push($clone_array, $clone);
                 $clone_array = array_merge($clone_array, static::get_clones($clone, true));
             }
-        } else {
+        }else{
             $clone_array = $item_clones;
         }
         return $clone_array;
@@ -272,12 +273,12 @@ class UBItem {
      */
     static function get_cloned_from($id, $recursive = false) {
         $parent = UBCollection::get_items($id, static::REL_PARENT_CLONE, true);
-        if (empty($parent)) {
+        if(empty($parent)){
             return 0;
         }
-        if ($recursive) {
+        if($recursive){
             $new_parent = $parent;
-            while (!empty($new_parent)) {
+            while(!empty($new_parent)){
                 $parent = $new_parent;
                 $new_parent = UBCollection::get_items(array_pop($parent), static::REL_PARENT_CLONE, true);
             }
@@ -292,12 +293,12 @@ class UBItem {
      * @return int[] Array of item IDs
      * @throws InvalidParameterException
      */
-    static function get_clone_tree($id) {
+    static function get_clone_tree($id){
         // Find top parent in clone tree
         $top_parent = $id;
         $prop_value_array = static::get_properties($top_parent, array("cloned_from"));
         $new_parent = $prop_value_array["cloned_from"];
-        while ($new_parent != 0) {
+        while($new_parent != 0){
             $top_parent = $new_parent;
             $prop_value_array = static::get_properties($top_parent, array("cloned_from"));
             $new_parent = $prop_value_array["cloned_from"];
@@ -315,8 +316,8 @@ class UBItem {
      * @return bool Returns true if correct, or false if error
      */
     static function delete_by_id($id_array) {
-        foreach ($id_array as $id) {
-            if (delete_entity($id) === false) {
+        foreach($id_array as $id) {
+            if(delete_entity($id) === false) {
                 return false;
             }
         }
@@ -329,7 +330,7 @@ class UBItem {
      */
     static function delete_all() {
         $items = static::get_all(0, 0, "", true, true);
-        if (!empty($items)) {
+        if(!empty($items)) {
             static::delete_by_id($items);
         }
         return true;
@@ -338,25 +339,44 @@ class UBItem {
     /**
      * Get all Object instances of this TYPE and SUBTYPE from the system, optionally only a specified property.
      *
-     * @param int $limit Number of results to show, default= 0 [no limit] (optional)
-     * @param int $offset Offset from where to show results, default=0 [from the begining] (optional)
-     * @param string $order_by Default = "" (don't order)
-     * @param bool $ascending Default = true (ascending order)
-     * @param bool $id_only Properties to return (with key = ID). Default = [all] (object instance)
+     * @param int    $limit           Number of results to show, default= 0 [no limit] (optional)
+     * @param int    $offset          Offset from where to show results, default=0 [from the begining] (optional)
+     * @param string $order_by        Default = "" (don't order)
+     * @param bool   $ascending       Default = true (ascending order)
+     * @param bool   $id_only         Properties to return (with key = ID). Default = [all] (object instance)
      *
      * @return static[]|int[] Returns an array of Objects, or Object IDs if id_only = true
      */
     static function get_all($limit = 0, $offset = 0, $order_by = "", $ascending = true, $id_only = false) {
         $return_array = array();
-        if (!empty($order_by)) {
+        if(!empty($order_by)){
             // directly retrieve entities with name = $search_string
-            $elgg_entity_array = elgg_get_entities_from_metadata(array('type' => static::TYPE, 'subtype' => static::SUBTYPE, 'limit' => $limit, 'offset' => $offset, 'order_by_metadata' => array("name" => $order_by, "direction" => ($ascending === true ? "ASC" : "DESC"))));
+            $elgg_entity_array = elgg_get_entities_from_metadata(
+                array(
+                    'type' => static::TYPE,
+                    'subtype' => static::SUBTYPE,
+                    'limit' => $limit,
+                    'offset' => $offset,
+                    'order_by_metadata' => array(
+                        "name" => $order_by,
+                        "direction" => ($ascending === true ? "ASC" : "DESC")
+                    )
+                )
+            );
         } else {
-            $elgg_entity_array = elgg_get_entities(array('type' => static::TYPE, 'subtype' => static::SUBTYPE, 'limit' => $limit, 'offset' => $offset, 'sort_by' => "e.time_created"));
+            $elgg_entity_array = elgg_get_entities(
+                array(
+                    'type' => static::TYPE,
+                    'subtype' => static::SUBTYPE,
+                    'limit' => $limit,
+                    'offset' => $offset,
+                    'sort_by' => "e.time_created"
+                )
+            );
         }
-        if (!empty($elgg_entity_array)) {
-            foreach ($elgg_entity_array as $elgg_entity) {
-                if ($id_only) {
+        if(!empty($elgg_entity_array)) {
+            foreach($elgg_entity_array as $elgg_entity) {
+                if($id_only){
                     $return_array[] = $elgg_entity->guid;
                 } else {
                     $return_array[(int)$elgg_entity->guid] = new static((int)$elgg_entity->guid, $elgg_entity);
@@ -370,20 +390,20 @@ class UBItem {
      * Get Objects with id contained in a given list.
      *
      * @param array $id_array Array of Object Ids
-     * @param bool $order_by_name Default = false (order by date_inv)
+     * @param bool $order_by_name   Default = false (order by date_inv)
      *
      * @return static[] Returns an array of Objects
      */
     static function get_by_id($id_array, $order_by_name = false) {
         $object_array = array();
-        foreach ($id_array as $id) {
-            if (elgg_entity_exists($id)) {
+        foreach($id_array as $id) {
+            if(elgg_entity_exists($id)) {
                 $object_array[(int)$id] = new static((int)$id);
             } else {
                 $object_array[(int)$id] = null;
             }
         }
-        if ($order_by_name) {
+        if($order_by_name){
             usort($object_array, 'static::sort_by_name');
         }
         return $object_array;
@@ -393,26 +413,31 @@ class UBItem {
      * Get Items with Owner Id contained in a given list.
      *
      * @param array $owner_array Array of Owner Ids
-     * @param int $limit Number of Items to return, default 0 = all
+     * @param int   $limit       Number of Items to return, default 0 = all
      *
      * @return static[] Returns an array of Items
      */
     static function get_by_owner($owner_array, $limit = 0) {
         $object_array = array();
-        foreach ($owner_array as $owner_id) {
-            $elgg_object_array = elgg_get_entities(array("type" => static::TYPE, "subtype" => static::SUBTYPE, "owner_guid" => (int)$owner_id, "limit" => $limit));
-            if (!empty($elgg_object_array)) {
+        foreach($owner_array as $owner_id) {
+            $elgg_object_array = elgg_get_entities(
+                array(
+                    "type" => static::TYPE, "subtype" => static::SUBTYPE, "owner_guid" => (int)$owner_id,
+                    "limit" => $limit
+                )
+            );
+            if(!empty($elgg_object_array)) {
                 $temp_array = array();
-                foreach ($elgg_object_array as $elgg_object) {
+                foreach($elgg_object_array as $elgg_object) {
                     $temp_array[(int)$elgg_object->guid] = new static((int)$elgg_object->guid, $elgg_object);
                 }
-                if (!empty($temp_array)) {
+                if(!empty($temp_array)) {
                     $object_array[(int)$owner_id] = $temp_array;
                     usort($object_array[(int)$owner_id], 'static::sort_by_date');
                 } else {
                     $object_array[(int)$owner_id] = null;
                 }
-            } else {
+            } else{
                 $object_array[(int)$owner_id] = null;
             }
         }
@@ -423,12 +448,13 @@ class UBItem {
      * Get all system events filtered by the class TYPE and SUBTYPE.
      *
      * @param int $offset Skip the first $offset events
-     * @param int $limit Return at most $limit events
+     * @param int $limit  Return at most $limit events
      *
      * @return array Array of system events
      */
     static function get_events($offset = 0, $limit = 10) {
-        return get_system_log(null, // $by_user = ""
+        return get_system_log(
+            null, // $by_user = ""
             null, // $event = ""
             null, // $class = ""
             static::TYPE, // $type = ""
@@ -439,50 +465,58 @@ class UBItem {
             null, // $timebefore = 0
             null, // $timeafter = 0
             null, // $object_id = 0
-            null); // $ip_address = ""
+            null
+        ); // $ip_address = ""
     }
 
     /**
      * Get all objects which match a $search_string
      *
      * @param string $search_string String for searching matching objects
-     * @param bool $name_only Whether to look only in the name property, default false.
-     * @param bool $strict Whether to match the $search_string exactly, including case, or only partially.
-     * @param int $offset The offset of the returned array
-     * @param int $limit The limit of the returned array
+     * @param bool   $name_only     Whether to look only in the name property, default false.
+     * @param bool   $strict        Whether to match the $search_string exactly, including case, or only partially.
+     * @param int    $offset        The offset of the returned array
+     * @param int    $limit         The limit of the returned array
      *
      * @return static[] Returns an array of matched objects
      */
     static function get_from_search($search_string, $name_only = false, $strict = false, $offset = 0, $limit = 0) {
         $search_result = array();
-        if (!$strict) {
+        if(!$strict) {
             // get the full array of entities
-            $elgg_object_array = elgg_get_entities(array('type' => static::TYPE, 'subtype' => static::SUBTYPE, 'limit' => 0));
+            $elgg_object_array = elgg_get_entities(
+                array('type' => static::TYPE, 'subtype' => static::SUBTYPE, 'limit' => 0)
+            );
             $search_result = array();
-            foreach ($elgg_object_array as $elgg_object) {
+            foreach($elgg_object_array as $elgg_object) {
                 $search_string = strtolower($search_string);
                 // search for string in name
-                if (strpos(strtolower($elgg_object->name), $search_string) !== false) {
+                if(strpos(strtolower($elgg_object->name), $search_string) !== false) {
                     $search_result[(int)$elgg_object->guid] = new static((int)$elgg_object->guid, $elgg_object);
                     continue;
                 }
                 // if not in name, search in description
-                if ($name_only === false) {
-                    if (strpos(strtolower($elgg_object->description), $search_string) !== false) {
+                if($name_only === false) {
+                    if(strpos(strtolower($elgg_object->description), $search_string) !== false) {
                         $search_result[(int)$elgg_object->guid] = new static((int)$elgg_object->guid, $elgg_object);
                     }
                 }
             }
         } else { // $strict == true
             // directly retrieve entities with name = $search_string
-            $elgg_object_array = elgg_get_entities_from_metadata(array('type' => static::TYPE, 'subtype' => static::SUBTYPE, 'metadata_names' => array("name"), 'metadata_values' => array($search_string), 'limit' => 0));
-            if (!empty($elgg_object_array)) {
-                foreach ($elgg_object_array as $elgg_object) {
+            $elgg_object_array = elgg_get_entities_from_metadata(
+                array(
+                    'type' => static::TYPE, 'subtype' => static::SUBTYPE, 'metadata_names' => array("name"),
+                    'metadata_values' => array($search_string), 'limit' => 0
+                )
+            );
+            if(!empty($elgg_object_array)) {
+                foreach($elgg_object_array as $elgg_object) {
                     $search_result[(int)$elgg_object->guid] = new static((int)$elgg_object->guid, $elgg_object);
                 }
             }
         }
-        if (empty($limit)) {
+        if(empty($limit)){
             return array_splice($search_result, (int)$offset, count($search_result));
         } else {
             return array_splice($search_result, (int)$offset, (int)$limit);
@@ -499,17 +533,17 @@ class UBItem {
      * @return int Returns 0 if equal, -1 if i1 before i2, 1 if i1 after i2.
      */
     static function sort_by_date($i1, $i2) {
-        if (!$i1 && !$i2) {
+        if(!$i1 && !$i2){
             return 0;
-        } elseif (!$i1) {
+        }elseif(!$i1){
             return 1;
-        } elseif (!$i1) {
+        }elseif(!$i1){
             return -1;
         }
-        if ((int)$i1->time_created == (int)$i2->time_created) {
+        if((int)$i1->time_created == (int)$i2->time_created) {
             return 0;
         }
-        return ((int)$i1->time_created < (int)$i2->time_created) ? -1 : 1;
+        return ((int)$i1->time_created < (int)$i2->time_created) ? - 1 : 1;
     }
 
     /**
@@ -521,17 +555,17 @@ class UBItem {
      * @return int Returns 0 if equal, -1 if i1 before i2, 1 if i1 after i2.
      */
     static function sort_by_date_inv($i1, $i2) {
-        if (!$i1 && !$i2) {
+        if(!$i1 && !$i2){
             return 0;
-        } elseif (!$i1) {
+        }elseif(!$i1){
             return 1;
-        } elseif (!$i1) {
+        }elseif(!$i1){
             return -1;
         }
-        if ((int)$i1->time_created == (int)$i2->time_created) {
+        if((int)$i1->time_created == (int)$i2->time_created) {
             return 0;
         }
-        return ((int)$i1->time_created > (int)$i2->time_created) ? -1 : 1;
+        return ((int)$i1->time_created > (int)$i2->time_created) ? - 1 : 1;
     }
 
     /**
@@ -543,11 +577,11 @@ class UBItem {
      * @return int Returns 0 if equal, -1 if i1 before i2, 1 if i1 after i2.
      */
     static function sort_by_name($i1, $i2) {
-        if (!$i1 && !$i2) {
+        if(!$i1 && !$i2){
             return 0;
-        } elseif (!$i1) {
+        }elseif(!$i1){
             return 1;
-        } elseif (!$i1) {
+        }elseif(!$i1){
             return -1;
         }
         return strcmp($i1->name, $i2->name);
@@ -562,11 +596,11 @@ class UBItem {
      * @return int Returns 0 if equal, -1 if i1 before i2, 1 if i1 after i2.
      */
     static function sort_by_name_inv($i1, $i2) {
-        if (!$i1 && !$i2) {
+        if(!$i1 && !$i2){
             return 0;
-        } elseif (!$i1) {
+        }elseif(!$i1){
             return 1;
-        } elseif (!$i1) {
+        }elseif(!$i1){
             return -1;
         }
         return strcmp($i2->name, $i1->name);
@@ -581,17 +615,17 @@ class UBItem {
      * @return int Returns 0 if equal, -1 if i1 before i2, 1 if i1 after i2.
      */
     static function sort_numbers($i1, $i2) {
-        if (!$i1 && !$i2) {
+        if(!$i1 && !$i2){
             return 0;
-        } elseif (!$i1) {
+        }elseif(!$i1){
             return 1;
-        } elseif (!$i1) {
+        }elseif(!$i1){
             return -1;
         }
-        if ((int)$i1 == (int)$i2) {
+        if((int)$i1 == (int)$i2) {
             return 0;
         }
-        return ((int)$i1 < (int)$i2) ? -1 : 1;
+        return ((int)$i1 < (int)$i2) ? - 1 : 1;
     }
 
     /**
@@ -603,27 +637,26 @@ class UBItem {
      * @return int Returns 0 if equal, -1 if i1 before i2, 1 if i1 after i2.
      */
     static function sort_numbers_inv($i1, $i2) {
-        if (!$i1 && !$i2) {
+        if(!$i1 && !$i2){
             return 0;
-        } elseif (!$i1) {
+        }elseif(!$i1){
             return 1;
-        } elseif (!$i1) {
+        }elseif(!$i1){
             return -1;
         }
-        if ((int)$i1 == (int)$i2) {
+        if((int)$i1 == (int)$i2) {
             return 0;
         }
-        return ((int)$i1 > (int)$i2) ? -1 : 1;
+        return ((int)$i1 > (int)$i2) ? - 1 : 1;
     }
 
     static function export_data($id_array = null, $format = "excel") {
         // New Excel object
         $php_excel = new PHPExcel();
         // Set document properties
-        $php_excel->getProperties()
-            ->setCreator("ClipIt")
-            ->setTitle("ClipIt export of " . get_called_class())
-            ->setKeywords("clipit export");
+        $php_excel->getProperties()->setCreator("ClipIt")
+                  ->setTitle("ClipIt export of " . get_called_class())
+                  ->setKeywords("clipit export");
         // Add table title and columns
         $active_sheet = $php_excel->setActiveSheetIndex(0);
         $active_sheet->getDefaultColumnDimension()->setWidth(40);
@@ -631,11 +664,11 @@ class UBItem {
         $row = 1;
         $col = 0;
         $properties = static::list_properties();
-        foreach (array_keys($properties) as $prop_name) {
-            $active_sheet->setCellValueByColumnAndRow($col++, $row, $prop_name);
+        foreach(array_keys($properties) as $prop_name) {
+            $active_sheet->setCellValueByColumnAndRow($col ++, $row, $prop_name);
         }
         // Load Items
-        if (!empty($id_array)) {
+        if(!empty($id_array)) {
             $item_array = static::get_by_id($id_array);
         } else {
             $item_array = static::get_all();
@@ -643,93 +676,92 @@ class UBItem {
         // Write Items to spreadsheet
         $row = 2;
         $col = 0;
-        foreach ($item_array as $item) {
-            foreach (array_keys($properties) as $prop_name) {
+        foreach($item_array as $item) {
+            foreach(array_keys($properties) as $prop_name){
                 $active_sheet->setCellValueByColumnAndRow($col++, $row, $item->$prop_name);
             }
             $row++;
             $col = 0;
         }
-        switch ($format) {
+        switch($format) {
             case "excel":
                 $objWriter = PHPExcel_IOFactory::createWriter($php_excel, 'Excel2007');
-                $objWriter->save("/tmp/export_" . get_called_class() . ".xlsx");
-                break;
+                $objWriter->save("/tmp/export_".get_called_class().".xlsx");
         }
         return true;
     }
 
-    //    /**
-    //     * Add Users from an Excel file, and return an array of User Ids from those created or selected from the file.
-    //     *
-    //     * @param string $file_path Local file path
-    //     *
-    //     * @return array|null Array of User IDs, or null if error.
-    //     */
-    //    static function import_data($file_path) {
-    //        $php_excel = PHPExcel_IOFactory::load($file_path);
-    //        $user_array = array();
-    //        $row_iterator = $php_excel->getSheet()->getRowIterator();
-    //        while($row_iterator->valid()) {
-    //            $row_result = static::parse_excel_row($row_iterator->current());
-    //            if(!empty($row_result)) {
-    //                $user_array[] = (int)$row_result;
-    //            }
-    //            $row_iterator->next();
-    //        }
-    //        return $user_array;
-    //    }
-    //
-    //    /**
-    //     * Parse a single role from an Excel file, containing one user, and add it to ClipIt if new
-    //     *
-    //     * @param PHPExcel_Worksheet_Row $row_iterator
-    //     *
-    //     * @return int|false ID of User contained in row, or false in case of error.
-    //     */
-    //    private function parse_excel_row($row_iterator) {
-    //        $prop_value_array = array();
-    //        $cell_iterator = $row_iterator->getCellIterator();
-    //        // Check for non-user row
-    //        $value = $cell_iterator->current()->getValue();
-    //        if(empty($value) || strtolower($value) == "users" || strtolower($value) == "name") {
-    //            return null;
-    //        }
-    //        // name
-    //        $name = $value;
-    //        $prop_value_array["name"] = (string)$name;
-    //        $cell_iterator->next();
-    //        // login
-    //        $login = (string)$cell_iterator->current()->getValue();
-    //        if(!empty($login)) {
-    //            $user_array = static::get_by_login(array($login));
-    //            if(!empty($user_array[$login])) { // user already exists, no need to create it
-    //                return (int)$user_array[$login]->id;
-    //            }
-    //            $prop_value_array["login"] = $login;
-    //        } else {
-    //            return null;
-    //        }
-    //        $cell_iterator->next();
-    //        // password
-    //        $password = (string)$cell_iterator->current()->getValue();
-    //        if(!empty($password)) {
-    //            $prop_value_array["password"] = $password;
-    //        } else {
-    //            return null;
-    //        }
-    //        $cell_iterator->next();
-    //        // email
-    //        $email = (string)$cell_iterator->current()->getValue();
-    //        if(!empty($email)) {
-    //            $prop_value_array["email"] = $email;
-    //        }
-    //        $cell_iterator->next();
-    //        // role
-    //        $role = (string)$cell_iterator->current()->getValue();
-    //        if(!empty($role)) {
-    //            $prop_value_array["role"] = $role;
-    //        }
-    //        return static::create($prop_value_array);
-    //    }
+//    /**
+//     * Add Users from an Excel file, and return an array of User Ids from those created or selected from the file.
+//     *
+//     * @param string $file_path Local file path
+//     *
+//     * @return array|null Array of User IDs, or null if error.
+//     */
+//    static function import_data($file_path) {
+//        $php_excel = PHPExcel_IOFactory::load($file_path);
+//        $user_array = array();
+//        $row_iterator = $php_excel->getSheet()->getRowIterator();
+//        while($row_iterator->valid()) {
+//            $row_result = static::parse_excel_row($row_iterator->current());
+//            if(!empty($row_result)) {
+//                $user_array[] = (int)$row_result;
+//            }
+//            $row_iterator->next();
+//        }
+//        return $user_array;
+//    }
+//
+//    /**
+//     * Parse a single role from an Excel file, containing one user, and add it to ClipIt if new
+//     *
+//     * @param PHPExcel_Worksheet_Row $row_iterator
+//     *
+//     * @return int|false ID of User contained in row, or false in case of error.
+//     */
+//    private function parse_excel_row($row_iterator) {
+//        $prop_value_array = array();
+//        $cell_iterator = $row_iterator->getCellIterator();
+//        // Check for non-user row
+//        $value = $cell_iterator->current()->getValue();
+//        if(empty($value) || strtolower($value) == "users" || strtolower($value) == "name") {
+//            return null;
+//        }
+//        // name
+//        $name = $value;
+//        $prop_value_array["name"] = (string)$name;
+//        $cell_iterator->next();
+//        // login
+//        $login = (string)$cell_iterator->current()->getValue();
+//        if(!empty($login)) {
+//            $user_array = static::get_by_login(array($login));
+//            if(!empty($user_array[$login])) { // user already exists, no need to create it
+//                return (int)$user_array[$login]->id;
+//            }
+//            $prop_value_array["login"] = $login;
+//        } else {
+//            return null;
+//        }
+//        $cell_iterator->next();
+//        // password
+//        $password = (string)$cell_iterator->current()->getValue();
+//        if(!empty($password)) {
+//            $prop_value_array["password"] = $password;
+//        } else {
+//            return null;
+//        }
+//        $cell_iterator->next();
+//        // email
+//        $email = (string)$cell_iterator->current()->getValue();
+//        if(!empty($email)) {
+//            $prop_value_array["email"] = $email;
+//        }
+//        $cell_iterator->next();
+//        // role
+//        $role = (string)$cell_iterator->current()->getValue();
+//        if(!empty($role)) {
+//            $prop_value_array["role"] = $role;
+//        }
+//        return static::create($prop_value_array);
+//    }
 }
