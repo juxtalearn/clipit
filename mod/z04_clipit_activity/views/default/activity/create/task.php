@@ -17,6 +17,7 @@ $task = elgg_extract('task', $vars); // task data
 switch($task_type){
     case "upload":
         $task_types = array(
+            ClipitTask::TYPE_QUIZ_TAKE => elgg_echo('task:quiz_answer'),
             ClipitTask::TYPE_VIDEO_UPLOAD => elgg_echo('task:video_upload'),
             ClipitTask::TYPE_STORYBOARD_UPLOAD => elgg_echo('task:storyboard_upload'),
             ClipitTask::TYPE_RESOURCE_DOWNLOAD => elgg_echo('task:resource_download'),
@@ -129,6 +130,22 @@ if($vars['required'] !== false){
             </div>
         <?php endif;?>
     </div>
+    <?php if(!$disabled):?>
+        <div class="clearfix"></div>
+        <div class="task-type-container margin-bottom-10" style="<?php echo $task ? '':'display:none;' ;?>border: 1px solid #bae6f6;border-radius: 3px;padding: 10px;">
+            <?php if($task):
+                switch($task->task_type){
+                    case ClipitTask::TYPE_QUIZ_TAKE:
+                        echo elgg_view('activity/admin/tasks/quiz/quiz', array(
+                            'entity' => array_pop(ClipitQuiz::get_by_id(array($task->quiz))),
+                            'activity_id' => $task->activity
+                        ));
+                        break;
+                }
+            endif;
+            ?>
+        </div>
+    <?php endif;?>
 </div>
 <?php
 if(!$disabled):
