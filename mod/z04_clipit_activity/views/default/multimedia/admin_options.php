@@ -48,7 +48,7 @@ endforeach;
 <?php $output .= elgg_view("publications/view_scope", array('entity' => $entity));?>
 
 <?php if($output):?>
-    <div class="bg-blue-lighter" style="padding: 10px;">
+    <div class="bg-blue-lighter_2" style="padding: 10px;">
         <?php echo $output;?>
         <div class="clearfix"></div>
     </div>

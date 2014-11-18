@@ -70,10 +70,12 @@ function clipit_activity_init() {
     elgg_register_action("task/edit", "{$plugin_dir}/actions/task/edit.php");
     elgg_register_action("task/remove", "{$plugin_dir}/actions/task/remove.php");
     elgg_register_action("task/create", "{$plugin_dir}/actions/task/create.php");
-    //TESTING
+
     elgg_register_ajax_view('activity/admin/tasks/quiz/add_type');
     elgg_register_ajax_view('activity/admin/tasks/quiz/quiz');
+    elgg_register_ajax_view('quizzes/admin/results');
     elgg_register_action("quiz/take", "{$plugin_dir}/actions/quiz/take.php");
+    elgg_register_action("quiz/question_annotate", "{$plugin_dir}/actions/quiz/question_annotate.php");
 
     elgg_register_ajax_view('activity/admin/groups/users_list');
     elgg_register_ajax_view('activity/admin/group_info');
@@ -177,6 +179,8 @@ function clipit_activity_init() {
     elgg_register_js("jquery:multiselect", "{$vendors_dir}/jquery.multi-select.js");
     // jQuery QuickSearch
     elgg_register_js("jquery:quicksearch", "{$vendors_dir}/jquery.quicksearch.js");
+    // jQuery QuickSearch
+    elgg_register_js("jquery:dynatable", "{$vendors_dir}/jquery.dynatable.min.js");
     // jQuery Chosen
     elgg_register_js("jquery:chosen", "{$vendors_dir}/jquery.chosen.min.js");
     elgg_load_js("jquery:chosen");

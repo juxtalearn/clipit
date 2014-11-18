@@ -75,8 +75,8 @@ $(function(){
     $(".select-radio").click(function(){
         var input = $(this).find("input[type=radio]");
         input.prop("checked", true);
-        $("#accordion_grouping").find(".panel-heading").removeClass('bg-blue-lighter').addClass('bg-white');
-        $(this).parent(".panel-heading").toggleClass('bg-white bg-blue-lighter');
+        $("#accordion_grouping").find(".panel-heading").removeClass('bg-blue-lighter_2').addClass('bg-white');
+        $(this).parent(".panel-heading").toggleClass('bg-white bg-blue-lighter_2');
     });
     $(document).on("click", "#add_users_button", function(){
         var url_action = $(this).attr("href");

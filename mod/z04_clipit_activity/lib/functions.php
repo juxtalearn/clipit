@@ -163,6 +163,24 @@ function get_format_time($seconds = 0){
     }
     return $time;
 }
+function difficulty_bar($difficulty, $limit=5){
+    $content = "";
+    if($difficulty < 3){
+        $color = "bg-green";
+    }elseif($difficulty >=3 && $difficulty <= 4){
+        $color = "bg-yellow";
+    }else{
+        $color = "bg-red";
+    }
+    for($i=1; $i<=$limit; $i++){
+        if($i > $difficulty){
+            $color = "bg-blue-lighter";
+        }
+        $content .= '<div class="'.$color.'" style="border-radius: 100px;display: inline-block;width: 12px; height: 12px;">&nbsp;</div> ';
+    }
+    $content .= "<span class='hide'>{$difficulty}</span>";
+    return $content;
+}
 
 /**
  * Star rating view

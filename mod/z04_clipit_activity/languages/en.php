@@ -297,6 +297,9 @@ $english = array(
     'quiz:result:send' => '',
     'difficulty' => 'Difficulty',
     'quiz:select:from_tag' => 'Add questions related',
+    'quiz:question' => 'Question',
+    'quiz:not_started' => 'Not started',
+    'quiz:finished' => 'Finished',
 );
 
 add_translation('en', $english);

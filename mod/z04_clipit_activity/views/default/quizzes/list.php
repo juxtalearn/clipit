@@ -12,27 +12,23 @@
  */
 elgg_load_js('fullcalendar:moment');
 $quiz_id = elgg_extract("quiz", $vars);
-$href = elgg_extract("href", $vars);
 $task_id = elgg_extract("task_id", $vars);
+$user_id = elgg_extract("user_id" ,$vars);
+$finished = elgg_extract("finished" ,$vars);
+$finished_task = elgg_extract("finished_task" ,$vars);
+
 $task = array_pop(ClipitTask::get_by_id(array($task_id)));
-$user_id = elgg_get_logged_in_user_guid();
 $quiz = array_pop(ClipitQuiz::get_by_id(array($quiz_id)));
 $questions = ClipitQuizQuestion::get_by_id($quiz->quiz_question_array);
-$quiz_start = ClipitQuiz::get_quiz_start($quiz->id, elgg_get_logged_in_user_guid());
+$quiz_start = ClipitQuiz::get_quiz_start($quiz->id, $user_id);
 if(!$quiz_start){
     ClipitQuiz::set_quiz_start($quiz->id, elgg_get_logged_in_user_guid());
     $quiz_start = ClipitQuiz::get_quiz_start($quiz->id, elgg_get_logged_in_user_guid());
 }
 $date = date("H:s, d/m/Y", $quiz_start + $quiz->max_time);
 
-$finished_task = $task->end <= time() ? true : false;
-$finished = false;
-if(ClipitQuiz::has_finished_quiz($quiz->id, $user_id) || $finished_task){
-    $finished = true;
-}
-
 $count_answer = 0;
-$count_answer = count(array_pop(ClipitQuizResult::get_by_owner(array(elgg_get_logged_in_user_guid()))));
+$count_answer = count(array_pop(ClipitQuizResult::get_by_owner(array($user_id))));
 ?>
 <style>
 <style>
@@ -40,6 +36,7 @@ $count_answer = count(array_pop(ClipitQuizResult::get_by_owner(array(elgg_get_lo
         width: 14px;
     }
 </style>
+<?php if(!$finished):?>
 <script>
     var eventTime= <?php echo $quiz_start + $quiz->max_time?>; // Timestamp - Sun, 21 Apr 2013 13:00:00 GMT
     var currentTime = <?php echo time()?>; // Time()
@@ -137,6 +134,7 @@ $count_answer = count(array_pop(ClipitQuizResult::get_by_owner(array(elgg_get_lo
         });
     });
 </script>
+<?php endif;?>
 <?php if($quiz->view_mode == ClipitQuiz::VIEW_MODE_PAGED):?>
 <script>
 $(function(){
@@ -156,8 +154,12 @@ $(function(){
     </div>
 </div>
 <?php endif;?>
-<h4><?php echo $quiz->name;?></h4>
-<?php echo $quiz->description;?>
+
+<?php if(!$vars['admin']):?>
+    <h4><?php echo $quiz->name;?></h4>
+    <?php echo $quiz->description;?>
+<?php endif;?>
+
 <div class="clearfix"></div>
 <h4 id="questions-result">
     <strong class="text-muted">
@@ -165,7 +167,9 @@ $(function(){
     </strong>
     Preguntas contestadas
 </h4>
-<div class="pull-right"><small style="text-transform: uppercase"><?php echo elgg_echo('difficulty');?></small></div>
+<?php if(!$vars['admin']):?>
+    <div class="pull-right"><small style="text-transform: uppercase"><?php echo elgg_echo('difficulty');?></small></div>
+<?php endif;?>
 <hr>
 <?php if($quiz->view_mode == ClipitQuiz::VIEW_MODE_PAGED):?>
 <div class="margin-bottom-20">
@@ -193,36 +197,16 @@ $(function(){
 <?php endif;?>
 <div class="quiz">
 <?php
-function get_result_from_question($question_id){
-    $user_id = elgg_get_logged_in_user_guid();
-    $results = array_pop(ClipitQuizResult::get_by_owner(array($user_id)));
-    foreach($results as $result){
-        if($result->quiz_question == $question_id){
-            return $result;
-        }
-    }
-    return false;
-}
-?>
-<?php
 $num = 1;
 foreach($questions as $question):
     $result = ClipitQuizResult::get_from_question_user($question->id, $user_id);
-    $difficulty = $question->difficulty;
-    if($difficulty < 5 ){
-        $diff_class = 'green';
-    }elseif($difficulty >= 5 && $difficulty < 8){
-        $diff_class = 'yellow';
-    }elseif($difficulty <= 10 ){
-        $diff_class = 'red';
-    }
 ?>
-    <div class="question form-group" data-question="<?php echo $num;?>">
+    <div class="question form-group border-bottom-blue-lighter" data-question="<?php echo $num;?>">
+        <?php if(!$vars['admin']):?>
         <div class="text-center pull-right">
-            <div class="border-blue-lighter difficulty-num">
-                <h4 class="<?php echo $diff_class;?>"><?php echo $difficulty;?></h4>
-            </div>
+            <?php echo difficulty_bar($question->difficulty);?>
         </div>
+        <?php endif;?>
     <h4>
         <?php if($finished_task && $question->option_type != ClipitQuizQuestion::TYPE_STRING):?>
             <?php if($result->correct):?>
@@ -237,7 +221,7 @@ foreach($questions as $question):
         </strong>
         <?php echo $question->name;?>
     </h4>
-    <div class="margin-left-20 quiz-answer">
+    <div class="margin-left-20 quiz-answer ">
         <?php if($description = $question->description):?>
             <div class="text-muted margin-bottom-10" style="margin-top: -10px;">
                 <?php echo $description;?>
@@ -364,6 +348,19 @@ foreach($questions as $question):
             break;
     endswitch;
     ?>
+        <?php if($result->description && !$vars['admin']):?>
+        <div class="bg-info margin-top-10" style="padding: 10px;">
+            <i class="fa fa-user blue"></i> <small>Teacher's annotate:</small>
+            <div>
+                <?php echo $result->description;?>
+            </div>
+        </div>
+        <?php endif; ?>
+        <?php if($vars['admin'] && $finished_task):?>
+            <?php echo elgg_view_form('quiz/question_annotate', array(
+                'body' => elgg_view('quizzes/admin/annotation', array('result' => $result, 'question' => $question))
+            ));?>
+        <?php endif;?>
     </div>
     </div>
     <div class="clearfix"></div>

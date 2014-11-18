@@ -31,10 +31,17 @@ if($question){
         $("[data-id='<?php echo $id;?>'] textarea").click();
     </script>
     <?php
-    echo elgg_view("input/hidden", array(
-        'name' => 'question['.$id.'][id_parent]',
-        'value' => $question->id,
-    ));
+    if($vars['parent']){
+        echo elgg_view("input/hidden", array(
+            'name' => 'question['.$id.'][id_parent]',
+            'value' => $question->id,
+        ));
+    } else {
+        echo elgg_view("input/hidden", array(
+            'name' => 'question['.$id.'][id]',
+            'value' => $question->id,
+        ));
+    }
 }
 ?>
 
@@ -93,15 +100,21 @@ if($question){
                 </div>
                 <div class="form-group">
                     <label><?php echo elgg_echo('difficulty');?></label>
-                    <div class="difficulty-slider" id="<?php echo mt_rand(0,500);?>">
+                    <div class="difficulty-slider">
                         <?php
                             echo elgg_view("input/hidden", array(
                                 'name' => 'question['.$id.'][difficulty]',
                                 'value' => $question ? $question->difficulty : 1
                             ));
                         ?>
-                        <?php for($i=1;$i<=10;$i++):?>
-                            <span class="cursor-pointer" style="left: <?php echo ( 10 !== 1 ) ? ( $i - 1 ) / ( 10 - 1 ) * 100 : 0;?>%;"><?php echo $i;?></span>
+                        <?php
+                        $limit = 5;
+                        for($i=1;$i<=$limit;$i++):
+                        ?>
+                            <span class="cursor-pointer"
+                                  style="left: <?php echo ( $limit !== 1 ) ? ( $i - 1 ) / ( $limit - 1 ) * 100 : 0;?>%;">
+                                <?php echo $i;?>
+                            </span>
                         <?php endfor;?>
                     </div>
                 </div>
@@ -193,7 +206,7 @@ if($question){
                     <strong>
                         <?php echo elgg_view('output/url', array(
                             'href'  => "javascript:;",
-                            'id' => 'add-result',
+                            'class' => 'add-result',
                             'text'  => '<i class="fa fa-plus"></i> Add Result',
                         ));
                         ?>

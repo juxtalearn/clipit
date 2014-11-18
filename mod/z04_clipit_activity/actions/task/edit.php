@@ -82,9 +82,9 @@ if($entity->task_type == ClipitTask::TYPE_QUIZ_TAKE){
                 break;
         }
         $tags = array_filter($question['tags']);
-        if($question['id_parent']){
-            $questions_id[] = $question['id_parent'];
-            ClipitQuizQuestion::set_properties($question['id_parent'], array(
+        if($question['id']) {
+            $questions_id[] = $question['id'];
+            ClipitQuizQuestion::set_properties($question['id'], array(
                 'name' => $question['title'],
                 'description' => $question['description'],
                 'difficulty' => $question['difficulty'],
@@ -95,7 +95,7 @@ if($entity->task_type == ClipitTask::TYPE_QUIZ_TAKE){
             ));
         } else {
             // new QuizQuestion
-            $questions_id[] = ClipitQuizQuestion::create(array(
+            $question_id = ClipitQuizQuestion::create(array(
                 'name' => $question['title'],
                 'description' => $question['description'],
                 'difficulty' => $question['difficulty'],
@@ -104,6 +104,10 @@ if($entity->task_type == ClipitTask::TYPE_QUIZ_TAKE){
                 'validation_array' => $validations,
                 'tag_array' => $tags
             ));
+            $questions_id[] = $question_id;
+            if($question['id_parent']){
+                ClipitQuizQuestion::link_parent_clone($question['id_parent'], $question_id);
+            }
         }
     }
     $time = $quiz['time'];

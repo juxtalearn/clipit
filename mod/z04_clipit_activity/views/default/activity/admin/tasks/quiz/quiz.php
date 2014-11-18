@@ -10,16 +10,10 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-//if($activity_id = get_input('activity')){
-//    $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
-//}elseif($activity_id = elgg_extract('activity_id', $vars)){
-//    $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
-//}
+
 $tricky_topic = 0;
 $tricky_topic = get_input('tricky_topic');
-//if($tricky_topic = get_input('tricky_topic')){
-//}elseif($tricky_topic = elgg_extract('tricky_topic', $vars)){
-//}
+
 if($activity_id = elgg_extract('activity_id', $vars)){
     $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
     $tricky_topic = $activity->tricky_topic;
@@ -44,7 +38,6 @@ function get_questions_from_tag($tag){
     }
     return $return_array;
 }
-
 $tags = ClipitTrickyTopic::get_tags($tricky_topic);
 $id = uniqid();
 ?>
@@ -160,61 +153,17 @@ $id = uniqid();
 <div>
     <?php echo elgg_view('output/url', array(
         'href'  => "javascript:;",
-        'class' => 'btn btn-primary create-question',
+        'class' => 'btn btn-primary create-question btn-xs',
         'text'  => '<i class="fa fa-plus"></i> Create a question',
     ));
     ?>
     <?php if($tricky_topic):?>
     <?php echo elgg_echo('or');?>
-    <a class="btn btn-warning from-tags">From tags</a>
-    <select name="tags[]" data-placeholder="<?php echo elgg_echo('quiz:select:from_tag');?>" style="width:auto;" class="questions-select" tabindex="-1">
-        <option value=""></option>
-        <?php
-        $tags = ClipitTrickyTopic::get_tags($tricky_topic);
-        foreach($tags as $tag_id):
-            $tag = array_pop(ClipitTag::get_by_id(array($tag_id)));
-            $questions_tag = ClipitQuizQuestion::get_by_id(get_questions_from_tag($tag->id));
-            if($questions_tag):
-        ?>
-        <optgroup label="<?php echo $tag->name;?>">
-            <?php foreach($questions_tag as $question_tag):?>
-                <option value="<?php echo $question_tag->id;?>"><?php echo $question_tag->name;?></option>
-            <?php endforeach;?>
-        </optgroup>
-        <?php endif; endforeach;?>
-    </select>
+    <a class="btn btn-border-blue btn-primary from-tags btn-xs"><?php echo elgg_echo('quiz:select:from_tag');?></a>
+    <div class="dynamic-table margin-top-20" style="display: none;">
+        <i class="fa fa-spinner fa-spin blue fa-lg"></i>
+    </div>
     <?php endif;?>
-    <table class="display table table-striped" style="display: none" cellspacing="0" width="100%">
-        <thead>
-            <tr>
-                <th>Select</th>
-                <th>Question</th>
-                <th>Tag(s)</th>
-                <th>Difficulty</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php
-            $tags = ClipitTrickyTopic::get_tags($tricky_topic);
-            foreach($tags as $tag_id):
-            $tag = array_pop(ClipitTag::get_by_id(array($tag_id)));
-            $questions_tag = ClipitQuizQuestion::get_by_id(get_questions_from_tag($tag->id));
-            foreach($questions_tag as $question_tag):
-        ?>
-            <tr>
-                <td><a class="btn btn-xs btn-primary">Select</a></td>
-                <td>
-                    <?php echo $question_tag->name;?>
-                </td>
-                <td>
-                    <?php echo elgg_view('tricky_topic/tags/view', array('limit' => 2, 'tags' => ClipitQuizQuestion::get_tags($question_tag->id))); ?>
-                </td>
-                <td><?php echo $question_tag->difficulty;?></td>
-            </tr>
-            <?php endforeach;?>
-        <?php endforeach;?>
-        </tbody>
-    </table>
 </div>
 </div>
 <style>

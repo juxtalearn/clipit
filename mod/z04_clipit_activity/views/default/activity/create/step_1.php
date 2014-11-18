@@ -10,6 +10,7 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
+elgg_load_js("jquery:dynatable");
 $tricky_topics = ClipitTrickyTopic::get_all();
 $owner_tt = array();
 foreach($tricky_topics as $tricky_topic){

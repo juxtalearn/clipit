@@ -15,20 +15,19 @@ $tasks = ClipitTask::get_by_id($activity->task_array);
 elgg_load_js("fullcalendar:moment");
 elgg_load_js("fullcalendar");
 elgg_load_css("fullcalendar");
+elgg_load_js("jquery:dynatable");
 $id = uniqid();
 ?>
 <script>
     <?php echo elgg_view("js/admin_tasks", array('entity' => $activity, 'tasks' => $tasks));?>
 </script>
-<script src="http://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" type="text/css"  href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.css">
-<script>
-$(function(){
-    $(document).on("click", ".from-tags", function(){
-        $(this).parent("div").find("table").show().dataTable();
-    });
-});
-</script>
+<style>
+    tr.info td {
+        background-color: #d9edf7 !important;
+        border-bottom: 1px solid #fff;
+    }
+</style>
+
 <div>
     <small class="show"><?php echo elgg_echo('view_as');?></small>
     <?php echo elgg_view('output/url', array(

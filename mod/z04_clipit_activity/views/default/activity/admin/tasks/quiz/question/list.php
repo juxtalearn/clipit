@@ -30,7 +30,7 @@ $tt_tags = ClipitTrickyTopic::get_tags($tricky_topic);
                     'href'  => "javascript:;",
                     'class' => 'btn btn-primary btn-xs',
                     'text'  => elgg_echo('edit'),
-                    'onclick' =>'$(\'#question_'.$question->id.'\').toggle();',
+                    'onclick' =>'$(this).closest(\'.questions\').find(\'#question_'.$question->id.'\').toggle();',
                 ));
                 ?>
                 <?php echo elgg_view('output/url', array(
