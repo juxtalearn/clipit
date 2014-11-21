@@ -25,7 +25,7 @@ foreach($videos as $video_id):
     }
     ?>
     <div class="multimedia-block col-md-4" style="position:relative;border-radius: 4px;margin-bottom: 0;padding: 0;background: transparent;">
-        <label class="select-item attach-item <?php echo  $selected ? 'selected' : false;?>" title="<?php echo $video->name;?>" for="item_<?php echo $video_id;?>"></label>
+        <label class="select-item attach-item" title="<?php echo $video->name;?>" for="item_<?php echo $video_id;?>"></label>
         <input
             type="checkbox"
             <?php echo  $selected ? 'checked' : false;?>
@@ -34,7 +34,7 @@ foreach($videos as $video_id):
             value="<?php echo $video_id;?>"
             id="item_<?php echo $video_id;?>"
             >
-        <div class="attach-block">
+        <div class="attach-block <?php echo  $selected ? 'selected' : false;?>">
             <div class="multimedia-preview" style="margin-right: 0;float: none;display: block;height: 100%;">
                 <img src="<?php echo $video->preview;?>" style="width: 100%;">
             </div>

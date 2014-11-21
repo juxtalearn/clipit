@@ -35,6 +35,21 @@ $count_answer = count(array_pop(ClipitQuizResult::get_by_owner(array($user_id)))
     .quiz-answer .fa-times, .quiz-answer .fa-check{
         width: 14px;
     }
+    .quiz-admin .question-answer{
+        display: none;
+    }
+    .quiz-admin .question{
+        margin: 0 !important;
+        padding-bottom: 0 !important;
+        padding: 1px 10px;
+    }
+    .quiz-admin .question:nth-of-type(even){
+        background: #f9f9f9;
+        color: #000;
+    }
+    .quiz-admin .question h4{
+        font-size: 16px;
+    }
 </style>
 <?php if(!$finished):?>
 <script>
@@ -195,11 +210,17 @@ $(function(){
     </div>
 </div>
 <?php endif;?>
-<div class="quiz">
+<div class="quiz <?php echo $vars['admin']?'quiz-admin':'';?>">
 <?php
 $num = 1;
 foreach($questions as $question):
     $result = ClipitQuizResult::get_from_question_user($question->id, $user_id);
+    $params = array(
+        'finished_task' => $finished_task,
+        'finished' => $finished,
+        'question' => $question,
+        'result' => $result,
+    );
 ?>
     <div class="question form-group border-bottom-blue-lighter" data-question="<?php echo $num;?>">
         <?php if(!$vars['admin']):?>
@@ -207,7 +228,7 @@ foreach($questions as $question):
             <?php echo difficulty_bar($question->difficulty);?>
         </div>
         <?php endif;?>
-    <h4>
+    <h4 class="question-title">
         <?php if($finished_task && $question->option_type != ClipitQuizQuestion::TYPE_STRING):?>
             <?php if($result->correct):?>
                 <i class="fa fa-check green"></i>
@@ -227,8 +248,10 @@ foreach($questions as $question):
                 <?php echo $description;?>
             </div>
         <?php endif;?>
+    <div class="question-answer">
     <?php switch($question->option_type):
         case ClipitQuizQuestion::TYPE_SELECT_MULTI:
+            echo elgg_view('quizzes/types/select_multi', $params);
             $i = 1;
             foreach($question->option_array as $option):
                 $checked = '';
@@ -254,6 +277,7 @@ foreach($questions as $question):
             endforeach;
         break;
         case ClipitQuizQuestion::TYPE_SELECT_ONE:
+            echo elgg_view('quizzes/types/select_one', $params);
             $i = 1;
             foreach($question->option_array as $option):
                 $checked = '';
@@ -348,6 +372,7 @@ foreach($questions as $question):
             break;
     endswitch;
     ?>
+    </div> <!-- .question-answer -->
         <?php if($result->description && !$vars['admin']):?>
         <div class="bg-info margin-top-10" style="padding: 10px;">
             <i class="fa fa-user blue"></i> <small>Teacher's annotate:</small>
@@ -363,7 +388,7 @@ foreach($questions as $question):
         <?php endif;?>
     </div>
     </div>
-    <div class="clearfix"></div>
+<!--    <div class="clearfix"></div>-->
 <?php
 $num++;
 endforeach;
