@@ -29,6 +29,7 @@ $account = elgg_extract('accounts', $vars);
     <div class="text-center">
         <h1><?php echo elgg_echo('clipit:slogan');?></h1>
         <p>
+            <?php if (elgg_get_config('allow_registration')): ?>
             <?php echo elgg_view('output/url', array(
                 'href'  => "register",
                 'role' => 'button',
@@ -36,6 +37,7 @@ $account = elgg_extract('accounts', $vars);
                 'text'  => elgg_echo('user:register')
             ));
             ?>
+            <?php endif;?>
             <?php echo elgg_view('output/url', array(
                 'role' => 'button',
                 'class' => 'btn btn-primary btn-lg',

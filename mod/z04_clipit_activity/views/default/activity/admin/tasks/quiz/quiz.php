@@ -44,7 +44,7 @@ $id = uniqid();
 <script>
     $(function(){
         $(".quiz[data-quiz=<?php echo $id;?>]").quiz({
-            'tricky_topic': <?php echo $tricky_topic;?>
+            'tricky_topic': <?php echo (int)$tricky_topic;?>
         });
     });
 </script>

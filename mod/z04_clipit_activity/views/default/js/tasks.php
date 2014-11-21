@@ -33,8 +33,9 @@ $(document).on("change", ".task-types",function(){
     var content = $(this).closest(".task");
     var that = $(this);
     content_feedback = content.find(".feedback-module");
-    if($("#tricky-topic").length > 0){
-        var tricky_topic_val = $("#tricky-topic").val();
+    var tricky_topic_val = '';
+    if($("#tricky-topic").val()){
+        tricky_topic_val = $("#tricky-topic").val();
     }
     $(this).closest(".task").find(".task-type-container").html('').hide();
     if($.inArray($(this).val(), task_types) != -1){

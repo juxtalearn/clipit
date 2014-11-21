@@ -252,128 +252,23 @@ foreach($questions as $question):
     <?php switch($question->option_type):
         case ClipitQuizQuestion::TYPE_SELECT_MULTI:
             echo elgg_view('quizzes/types/select_multi', $params);
-            $i = 1;
-            foreach($question->option_array as $option):
-                $checked = '';
-                if(in_array(($i-1), $result->answer) && $result){
-                    $checked = 'checked';
-                }
-            ?>
-        <label style="font-weight: normal">
-            <?php if($finished):?>
-                <input type="checkbox" disabled <?php echo in_array(($i-1), $result->answer) ? 'checked' : '';?>/>
-                <?php if($question->validation_array[$i-1] && $finished_task):?>
-                    <strong><?php echo $option;?></strong>
-                <?php else:?>
-                    <?php echo $option;?>
-                <?php endif;?>
-            <?php else:?>
-                <input type="checkbox" value="<?php echo $i;?>" <?php echo $checked;?> name="question[<?php echo $question->id;?>][]" />
-                <?php echo $option;?>
-            <?php endif;?>
-        </label>
-        <?php
-                $i++;
-            endforeach;
         break;
         case ClipitQuizQuestion::TYPE_SELECT_ONE:
             echo elgg_view('quizzes/types/select_one', $params);
-            $i = 1;
-            foreach($question->option_array as $option):
-                $checked = '';
-                if($result->answer == $i-1 && $result){
-                    $checked = 'checked';
-                }
-                ?>
-                <label style="font-weight: normal">
-                    <?php if($finished):?>
-                        <input type="radio" disabled <?php echo $checked;?>/>
-                        <?php if($question->validation_array[$i-1] && $finished_task):?>
-                           <strong><?php echo $option;?></strong>
-                        <?php else: ?>
-                            <?php echo $option;?>
-                        <?php endif;?>
-                    <?php else:?>
-                        <input type="radio" value="<?php echo $i;?>" <?php echo $checked;?> name="question[<?php echo $question->id;?>]" />
-                        <?php echo $option;?>
-                    <?php endif;?>
-                </label>
-            <?php
-            $i++;
-            endforeach;
         break;
         case ClipitQuizQuestion::TYPE_TRUE_FALSE:
-            ?>
-            <div>
-            <?php if($finished):?>
-            <label class="inline-block margin-right-20" style="font-weight: normal">
-                <input type="radio" disabled <?php echo $result->answer == 'true' ? 'checked' : '';?>/>
-                <?php if($question->validation_array[0] == 'true' && $finished_task):?>
-                    <strong><?php echo elgg_echo('true');?></strong>
-                <?php else:?>
-                    <?php echo elgg_echo('true');?>
-                <?php endif;?>
-            </label>
-            <label class="inline-block margin-right-20" style="font-weight: normal">
-                <input type="radio" disabled <?php echo $result->answer == 'false' ? 'checked' : '';?>/>
-                <?php if($question->validation_array[0] == 'false' && $finished_task):?>
-                    <strong><?php echo elgg_echo('false');?></strong>
-                <?php else:?>
-                    <?php echo elgg_echo('false');?>
-                <?php endif;?>
-            </label>
-            <?php else:?>
-                <label class="inline-block margin-right-20" style="font-weight: normal">
-                    <input type="radio" <?php echo $result->answer == 'true' ? 'checked' : '';?> name="question[<?php echo $question->id;?>]" value="true"/>
-                    <?php echo elgg_echo('true');?>
-                </label>
-                <label class="inline-block" style="font-weight: normal">
-                    <input type="radio" <?php echo $result->answer == 'false' ? 'checked' : '';?> name="question[<?php echo $question->id;?>]" value="false"/>
-                    <?php echo elgg_echo('false');?>
-                </label>
-            <?php endif;?>
-            </div>
-            <?php
+            echo elgg_view('quizzes/types/true_false', $params);
         break;
         case ClipitQuizQuestion::TYPE_STRING:
-            ?>
-            <?php if($finished):?>
-                <?php if($result->answer):?>
-                <div style="padding: 10px; background: #fafafa;">
-                    <?php echo nl2br($result->answer);?>
-                </div>
-                <?php endif;?>
-            <?php else:?>
-                <?php echo elgg_view("input/plaintext", array(
-                    'name'  => 'question['.$question->id.']',
-                    'class' => 'form-control',
-                    'value' => $result->answer ? $result->answer : '',
-                    'rows' => 5
-                ));
-                ?>
-            <?php endif;?>
-            <?php
+            echo elgg_view('quizzes/types/string', $params);
         break;
         case ClipitQuizQuestion::TYPE_NUMBER:
-            ?>
-            <?php if($finished):?>
-                <?php if($result->correct && $finished_task):?>
-                    <strong><?php echo $result->answer;?></strong>
-                <?php else:?>
-                    <?php echo $result->answer;?>
-                <?php endif;?>
-                <?php if(!$result->correct && $finished_task):?>
-                    <small class="show">Solución: <strong><?php echo $question->validation_array[0];?></strong></small>
-                <?php endif;?>
-            <?php else:?>
-                <input type="number" value="<?php echo $result->answer;?>" class="form-control" style="width: auto;" name="question[<?php echo $question->id;?>]"/>
-            <?php endif;?>
-            <?php
+            echo elgg_view('quizzes/types/number', $params);
             break;
     endswitch;
     ?>
     </div> <!-- .question-answer -->
-        <?php if($result->description && !$vars['admin']):?>
+        <?php if($result->description):?>
         <div class="bg-info margin-top-10" style="padding: 10px;">
             <i class="fa fa-user blue"></i> <small>Teacher's annotate:</small>
             <div>
@@ -381,11 +276,6 @@ foreach($questions as $question):
             </div>
         </div>
         <?php endif; ?>
-        <?php if($vars['admin'] && $finished_task):?>
-            <?php echo elgg_view_form('quiz/question_annotate', array(
-                'body' => elgg_view('quizzes/admin/annotation', array('result' => $result, 'question' => $question))
-            ));?>
-        <?php endif;?>
     </div>
     </div>
 <!--    <div class="clearfix"></div>-->

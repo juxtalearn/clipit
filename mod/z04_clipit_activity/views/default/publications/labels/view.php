@@ -12,7 +12,7 @@
  */
 $labels = elgg_extract("labels", $vars);
 if(!$labels): ?>
-    <span class="text-muted">no labels added</span>
+    <span class="text-muted"><?php echo elgg_echo('labels:none');?></span>
 <?php endif; ?>
 <?php
 foreach($labels as $label_id):

@@ -5,6 +5,14 @@
  */
 
 $english = array(
+    'show' => 'Show',
+    'showing' => 'Showing',
+    'to' => 'to',
+    'of' => 'of',
+    'select' => 'Select',
+    'pages' => 'Pages',
+    'next' => 'Next',
+    'prev' => 'Prev',
     'or' => 'Or',
     'true' => 'True',
     'false' => 'False',

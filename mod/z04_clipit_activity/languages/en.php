@@ -210,6 +210,7 @@ $english = array(
     // Labels
     'label' => 'Label',
     'labels' => 'Labels',
+    'labels:none' => 'No labels added',
     // Tags
     'tag' => 'Stumbling Block',
     'tags' => 'Stumbling Blocks',

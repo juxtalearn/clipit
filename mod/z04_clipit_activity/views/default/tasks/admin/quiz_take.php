@@ -162,21 +162,22 @@ foreach(ClipitQuizQuestion::get_by_id($quiz->quiz_question_array) as $question):
             <h4 class="panel-title blue" data-toggle="collapse" data-parent="#accordion_users" href="#user_<?php echo $question->id;?>">
                 <div class="pull-right blue">
                     <?php echo difficulty_bar($question->difficulty);?>
+                    <i class="fa fa-angle-down blue margin-left-5"></i>
                 </div>
                 <strong><?php echo $i;?>.</strong>
                 <?php echo $question->name;?>
+                <div class="margin-top-5 margin-left-20 counts">
+                    <small class="margin-right-10">
+                        <i class="fa fa-times red"></i> <strong class="a-error">-</strong>
+                    </small>
+                    <small class="margin-right-10">
+                        <i class="fa fa-check green"></i> <strong class="a-correct">-</strong>
+                    </small>
+                    <small class="margin-right-10">
+                        <i class="fa fa-clock-o yellow"></i> <strong class="a-pending">-</strong>
+                    </small>
+                </div>
             </h4>
-            <div class="margin-top-5 margin-left-20 counts">
-                <small class="margin-right-10">
-                    <i class="fa fa-times red"></i> <strong class="a-error">-</strong>
-                </small>
-                <small class="margin-right-10">
-                    <i class="fa fa-check green"></i> <strong class="a-correct">-</strong>
-                </small>
-                <small class="margin-right-10">
-                    <i class="fa fa-clock-o yellow"></i> <strong class="a-pending">-</strong>
-                </small>
-            </div>
         </div>
         <div id="user_<?php echo $question->id;?>" class="panel-collapse collapse">
             <div class="panel-body panel-main" style="padding: 5px 0;"></div>
