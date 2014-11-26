@@ -15,6 +15,9 @@
 /**
  * A Performance element which can be linked from Resources to denote that it has been applied to them, and allows for
  * richer linkage, searching and context of Resources.
+ *
+ * IMPORTANT: In order to link to material, use the (int)$reference property, so that translations of the items can be
+ * used (references are unique across all languages)
  */
 class ClipitPerformanceItem extends UBItem {
     /**
