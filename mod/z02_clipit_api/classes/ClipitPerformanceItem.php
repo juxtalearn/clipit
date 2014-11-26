@@ -21,7 +21,7 @@ class ClipitPerformanceItem extends UBItem {
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitPerformanceItem";
-    public $item_id = "";
+    public $reference = "";
     public $language = "";
     public $category = "";
     public $category_description = "";
@@ -34,7 +34,7 @@ class ClipitPerformanceItem extends UBItem {
      */
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
-        $this->item_id = (string)$elgg_entity->get("item_id");
+        $this->reference = (string)$elgg_entity->get("reference");
         $this->language = (string)$elgg_entity->get("language");
         $this->category = (string)$elgg_entity->get("category");
         $this->category_description = (string)$elgg_entity->get("category_description");
@@ -48,7 +48,7 @@ class ClipitPerformanceItem extends UBItem {
      */
     protected function copy_to_elgg($elgg_entity) {
         parent::copy_to_elgg($elgg_entity);
-        $elgg_entity->set("item_id", (string)$this->item_id);
+        $elgg_entity->set("reference", (string)$this->reference);
         $elgg_entity->set("language", (string)$this->language);
         $elgg_entity->set("category", (string)$this->category);
         $elgg_entity->set("category_description", (string)$this->category_description);
@@ -65,13 +65,13 @@ class ClipitPerformanceItem extends UBItem {
     static function get_by_category($category = null) {
         $performance_items = static::get_all();
         $category_array = array();
-        if(empty($category)) {
-            foreach($performance_items as $performance_item) {
+        if (empty($category)) {
+            foreach ($performance_items as $performance_item) {
                 $category_array[$performance_item->category][] = $performance_item;
             }
         } else {
-            foreach($performance_items as $performance_item) {
-                if($performance_item->category == $category) {
+            foreach ($performance_items as $performance_item) {
+                if ($performance_item->category == $category) {
                     $category_array[] = $performance_item;
                 }
             }
@@ -79,11 +79,22 @@ class ClipitPerformanceItem extends UBItem {
         return $category_array;
     }
 
+    static function get_by_reference($reference_array){
+        $return_array = array();
+        $all_items = static::get_all();
+        foreach($all_items as $item){
+            if(array_search((string)$item->reference, $reference_array) !== false){
+                $return_array[$item->reference][] = $item;
+            }
+        }
+        return $return_array;
+    }
+
     static function get_for_language($id, $language){
         $initial_item = new static($id);
         $all_items = static::get_all();
         foreach($all_items as $item){
-            if($item->item_id == $initial_item->item_id && $item->language == $language){
+            if($item->reference == $initial_item->reference && $item->language == $language){
                 return $item;
             }
         }

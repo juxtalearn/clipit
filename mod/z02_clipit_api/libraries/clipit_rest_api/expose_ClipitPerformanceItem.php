@@ -25,4 +25,18 @@ function expose_performance_item_functions() {
         "Get items belonging to a certain Category. Leave Category blank for all items, ordered by Category.", 'GET',
         false, true
     );
+    expose_function(
+        $api_suffix . "get_by_reference", $class_suffix . "get_by_reference",
+        array("reference_array" => array("type" => "array", "required" => true)),
+        "Get items sharing the same item_id (unique across all languages.", 'GET',
+        false, true
+    );
+    expose_function(
+        $api_suffix . "get_for_language", $class_suffix . "get_for_language",
+        array(
+            "id" => array("type" => "int", "required" => true),
+            "language" => array("type" => "string", "required" => true)),
+        "Get the corresponding translated item of a given one in the specified language (2-char code).", 'GET',
+        false, true
+    );
 }

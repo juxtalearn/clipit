@@ -20,17 +20,15 @@ const KEY_NAME = "performance_palette";
 // Check if Performance Palette was already loaded.
 if(get_config(KEY_NAME) === true) {
     return;
-} else {
-    set_config(KEY_NAME, true);
 }
 
-ClipitPerformanceItem::delete_all();
+// Load Performance Palette for all languages
+input_performance_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/performance_palette/".FILE_NAME_EN);
+input_performance_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/performance_palette/".FILE_NAME_ES);
+#input_performance_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/performance_palette/".FILE_NAME_DE);
+#input_performance_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/performance_palette/".FILE_NAME_PT);
 
-input_performance_palette_file(FILE_NAME_EN);
-input_performance_palette_file(FILE_NAME_ES);
-#input_performance_palette_file(FILE_NAME_DE);
-#input_performance_palette_file(FILE_NAME_PT);
-
+set_config(KEY_NAME, true);
 
 /**
  * Add Performance Items from an Excel file
@@ -60,21 +58,35 @@ function parse_excel_row($row_iterator) {
     $prop_value_array = array();
     $cell_iterator = $row_iterator->getCellIterator();
 
-    //columns: item_id	language	category	category_description	item_name	item_description	item_example
+    //columns: reference	language	name	description	example category	category_description
 
-    // item_id column (equal across all languages)
+    // reference column (equal across all languages)
     // Check for title or empty rows
     $value = $cell_iterator->current()->getValue();
-    if (empty($value) || strtolower($value) == "item_id") {
+    if (empty($value) || strtolower($value) == "reference") {
         return null;
     }
-    $prop_value_array["item_id"] = (string)$value;
+    $prop_value_array["reference"] = (string)$value;
     $cell_iterator->next();
 
     // language column
     $value = $cell_iterator->current()->getValue();
     $prop_value_array["language"] = (string)$value;
     $cell_iterator->next();
+
+    // name column
+    $value = $cell_iterator->current()->getValue();
+    $prop_value_array["name"] = (string)$value;
+    $cell_iterator->next();
+
+    // description column
+    $value = $cell_iterator->current()->getValue();
+    $prop_value_array["description"] = (string)$value;
+    $cell_iterator->next();
+
+    // example column
+    $value = $cell_iterator->current()->getValue();
+    $prop_value_array["example"] = (string)$value;
 
     // category column
     $value = $cell_iterator->current()->getValue();
@@ -85,20 +97,6 @@ function parse_excel_row($row_iterator) {
     $value = $cell_iterator->current()->getValue();
     $prop_value_array["category_description"] = (string)$value;
     $cell_iterator->next();
-
-    // item_name column
-    $value = $cell_iterator->current()->getValue();
-    $prop_value_array["name"] = (string)$value;
-    $cell_iterator->next();
-
-    // item_description column
-    $value = $cell_iterator->current()->getValue();
-    $prop_value_array["description"] = (string)$value;
-    $cell_iterator->next();
-
-    // item_example column
-    $value = $cell_iterator->current()->getValue();
-    $prop_value_array["example"] = (string)$value;
 
     // Add Performance Item to ClipIt
     ClipitPerformanceItem::create($prop_value_array);
