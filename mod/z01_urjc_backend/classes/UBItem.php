@@ -316,6 +316,9 @@ class UBItem {
      * @return bool Returns true if correct, or false if error
      */
     static function delete_by_id($id_array) {
+        if(empty($id_array)){
+            return true;
+        }
         foreach($id_array as $id) {
             if(delete_entity($id) === false) {
                 return false;
