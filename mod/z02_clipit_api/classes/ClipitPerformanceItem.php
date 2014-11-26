@@ -79,11 +79,15 @@ class ClipitPerformanceItem extends UBItem {
         return $category_array;
     }
 
-    static function get_by_reference($reference_array){
+    static function get_by_reference($reference_array = null){
         $return_array = array();
         $all_items = static::get_all();
         foreach($all_items as $item){
-            if(array_search((string)$item->reference, $reference_array) !== false){
+            if(!empty($reference_array)) {
+                if (array_search((string)$item->reference, $reference_array) !== false) {
+                    $return_array[$item->reference][] = $item;
+                }
+            } else{
                 $return_array[$item->reference][] = $item;
             }
         }
