@@ -21,6 +21,8 @@ class ClipitPerformanceItem extends UBItem {
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitPerformanceItem";
+    public $item_id = "";
+    public $language = "";
     public $category = "";
     public $category_description = "";
     public $example = "";
@@ -32,6 +34,8 @@ class ClipitPerformanceItem extends UBItem {
      */
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
+        $this->item_id = (string)$elgg_entity->get("item_id");
+        $this->language = (string)$elgg_entity->get("language");
         $this->category = (string)$elgg_entity->get("category");
         $this->category_description = (string)$elgg_entity->get("category_description");
         $this->example = (string)$elgg_entity->get("example");
@@ -44,6 +48,8 @@ class ClipitPerformanceItem extends UBItem {
      */
     protected function copy_to_elgg($elgg_entity) {
         parent::copy_to_elgg($elgg_entity);
+        $elgg_entity->set("item_id", (string)$this->item_id);
+        $elgg_entity->set("language", (string)$this->language);
         $elgg_entity->set("category", (string)$this->category);
         $elgg_entity->set("category_description", (string)$this->category_description);
         $elgg_entity->set("example", (string)$this->example);
@@ -71,5 +77,16 @@ class ClipitPerformanceItem extends UBItem {
             }
         }
         return $category_array;
+    }
+
+    static function get_for_language($id, $language){
+        $initial_item = new static($id);
+        $all_items = static::get_all();
+        foreach($all_items as $item){
+            if($item->item_id == $initial_item->item_id && $item->language == $language){
+                return $item;
+            }
+        }
+        return $initial_item;
     }
 }
