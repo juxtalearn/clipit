@@ -132,7 +132,9 @@ if($vars['required'] !== false){
     </div>
     <?php if(!$disabled):?>
         <div class="clearfix"></div>
-        <div class="task-type-container margin-bottom-10" style="<?php echo $task ? '':'display:none;' ;?>border: 1px solid #bae6f6;border-radius: 3px;padding: 10px;">
+        <div class="task-type-container margin-bottom-10"
+             style="<?php echo $task->task_type == ClipitTask::TYPE_QUIZ_TAKE ? '':'display:none;' ;?>
+                 border: 1px solid #bae6f6;border-radius: 3px;padding: 10px;">
             <?php if($task):
                 switch($task->task_type){
                     case ClipitTask::TYPE_QUIZ_TAKE:

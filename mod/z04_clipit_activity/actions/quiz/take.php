@@ -81,4 +81,4 @@ if(ClipitQuiz::has_finished_quiz($quiz_id, $user_id) || $task->end <= time()){
     $by_owner = array_pop(ClipitQuizResult::get_by_owner(array(elgg_get_logged_in_user_guid())));
     echo count($by_owner);
 }
-
+forward("clipit_activity/".$task->activity."/tasks");

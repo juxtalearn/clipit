@@ -47,8 +47,11 @@ a{
 .blue-lighter{
   color: @blue-lighter;
 }
-.bg-blue-lighter{
+.bg-blue-lighter_2{
   background: @blue-lighter_2 !important;
+}
+.bg-blue-lighter_4{
+  background-color: @blue-lighter_4;
 }
 .bg-white{
   background: #FFF !important;
@@ -64,6 +67,21 @@ a{
 }
 .yellow{
   color: @yellow_clipit;
+}
+.bg-green{
+  background-color: @green_clipit;
+}
+.bg-red{
+  background-color: @red_clipit;
+}
+.bg-yellow{
+  background-color: @yellow_clipit;
+}
+.bg-blue{
+  background-color: @blue_clipit;
+}
+.bg-blue-lighter{
+  background-color: @blue-lighter;
 }
 .white{
   color: #FFF;
@@ -894,6 +912,10 @@ h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
 .border-red{
   border: 1px solid @red_clipit;
 }
+.border-bottom-blue-lighter{
+  border-bottom: 1px solid @blue-lighter;
+  padding-bottom: 10px;
+}
 //
 // Difficulty num
 // --------------------------------------------------
@@ -945,21 +967,43 @@ h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
   .ui-slider-handle{
     position: absolute;
     z-index: 2;
-    height: 1.2em;
+    height: 15px;
     cursor: pointer;
     touch-action: none;
     top: -6px;
     color: rgb(85, 85, 85);
-    width: 8px;
-    background: #32b4e5;
-    border-radius: 2px;
+    width: 15px;
+    background: @blue_clipit;
+    border-radius: 100px;
+    margin-left: -3px;
     outline: none !important;
     opacity: 1 !important;
     span{
       position: absolute;
       top: -20px;
-      color: #32b4e5;
+      color: @blue_clipit;
       font-weight: bold;
+      margin-left: 3px;
     }
+  }
+}
+//
+// Dynatable jQuery plugin
+// --------------------------------------------------
+.dynatable-per-page{
+  float: right;
+  margin-right: 10px;
+  font-weight: bold;
+  .dynatable-per-page-label{
+    margin-right: 5px;
+  }
+  select{
+    .form-control();
+    padding: 5px;
+    width: auto;
+    display: inline-block;
+    border: 1px solid #eff4f7;
+    @box-shadow: 0 0 0 4px rgba(225,235,240,0.5);
+    .box-shadow(@box-shadow) !important;
   }
 }

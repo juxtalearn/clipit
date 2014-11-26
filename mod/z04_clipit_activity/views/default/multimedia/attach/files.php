@@ -25,7 +25,7 @@ foreach($files as $file_id):
     }
 ?>
     <div class="multimedia-block col-md-4" style="position:relative;border-radius: 4px;margin-bottom: 0;padding: 0;background: transparent;">
-        <label class="select-item attach-item <?php echo  $selected ? 'selected' : false;?>" title="<?php echo $file->name;?>" for="item_<?php echo $file_id;?>"></label>
+        <label class="select-item attach-item" title="<?php echo $file->name;?>" for="item_<?php echo $file_id;?>"></label>
         <input
             type="checkbox"
             <?php echo  $selected ? 'checked' : false;?>
@@ -34,7 +34,7 @@ foreach($files as $file_id):
             value="<?php echo $file_id;?>"
             id="item_<?php echo $file_id;?>"
             >
-        <div class="attach-block">
+        <div class="attach-block <?php echo  $selected ? 'selected' : false;?>">
             <div class="multimedia-preview" >
                 <?php echo elgg_view("multimedia/file/preview", array('file'  => $file, 'size' => 'medium'));?>
             </div>

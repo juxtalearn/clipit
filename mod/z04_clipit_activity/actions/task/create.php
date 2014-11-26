@@ -67,6 +67,7 @@ foreach($tasks as $task){
             $question_id = ClipitQuizQuestion::create(array(
                 'name' => $question['title'],
                 'description' => $question['description'],
+                'difficulty' => $question['difficulty'],
                 'option_type' => $question['type'],
                 'option_array' => $values,
                 'validation_array' => $validations,
@@ -77,10 +78,13 @@ foreach($tasks as $task){
                 ClipitQuizQuestion::link_parent_clone($question['id_parent'], $question_id);
             }
         }
+        $time = $quiz['time'];
+        $total_time = (int)($time['d']*86400) + ($time['h']*3600) + ($time['m']*60);
         $quiz_id = ClipitQuiz::create(array(
             'name' => $quiz['title'],
             'description' => $quiz['description'],
             'view_mode' => $quiz['view'],
+            'max_time' => $total_time
         ));
         ClipitTask::set_properties($task_id, array('quiz' => $quiz_id));
         ClipitQuiz::add_quiz_questions($quiz_id, $questions_id);

@@ -50,10 +50,10 @@ if($user->role == ClipitUser::ROLE_TEACHER) {
             '.elgg_view('output/url', array(
                 'href'  => "javascript:;",
                 'text'  => elgg_echo("message:to_students"),
-                'onclick'   => '$(\'#select-activities\').toggle()'
+                'onclick'   => '$(this).closest(\'.form-group\').find(\'.select-activities\').toggle()'
             )).'
             </strong>
-            <div id="select-activities" class="margin-top-10" style="display: none;">
+            <div class="select-activities" class="margin-top-10" style="display: none;">
             ' . elgg_view("input/dropdown", array(
                     'name' => 'activity',
                     'class' => 'form-control',

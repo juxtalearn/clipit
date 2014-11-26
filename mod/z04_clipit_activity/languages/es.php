@@ -211,6 +211,7 @@ $spanish = array(
     // Labels
     'label' => 'Etiqueta',
     'labels' => 'Etiquetas',
+    'labels:none' => 'No hay etiquetas añadidas',
     // Tags
     'tag' => 'Concepto',
     'tags' => 'Conceptos',
@@ -314,6 +315,9 @@ $spanish = array(
     'quiz:result:send' => 'Las respuestas quedarán guardadas...',
     'difficulty' => 'Dificultad',
     'quiz:select:from_tag' => 'Añadir preguntas existentes relacionadas',
+    'quiz:question' => 'Pregunta',
+    'quiz:not_started' => 'Sin empezar',
+    'quiz:finished' => 'Terminado',
 );
 
 add_translation('es', $spanish);

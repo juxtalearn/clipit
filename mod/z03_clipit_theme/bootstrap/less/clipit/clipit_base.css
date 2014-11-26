@@ -10187,8 +10187,11 @@ a:focus {
 .blue-lighter {
   color: #bae6f6;
 }
-.bg-blue-lighter {
+.bg-blue-lighter_2 {
   background: #d6f0fa !important;
+}
+.bg-blue-lighter_4 {
+  background-color: #e6f6fd;
 }
 .bg-white {
   background: #FFF !important;
@@ -10204,6 +10207,21 @@ a:focus {
 }
 .yellow {
   color: #d8ba05;
+}
+.bg-green {
+  background-color: #99cb00;
+}
+.bg-red {
+  background-color: #ff4343;
+}
+.bg-yellow {
+  background-color: #d8ba05;
+}
+.bg-blue {
+  background-color: #32b4e5;
+}
+.bg-blue-lighter {
+  background-color: #bae6f6;
 }
 .white {
   color: #FFF;
@@ -10953,6 +10971,10 @@ h6,
 .border-red {
   border: 1px solid #ff4343;
 }
+.border-bottom-blue-lighter {
+  border-bottom: 1px solid #bae6f6;
+  padding-bottom: 10px;
+}
 .difficulty-num {
   border-radius: 100px;
   width: 35px;
@@ -10999,14 +11021,15 @@ h6,
 .ui-slider-horizontal .ui-slider-handle {
   position: absolute;
   z-index: 2;
-  height: 1.2em;
+  height: 15px;
   cursor: pointer;
   touch-action: none;
   top: -6px;
   color: #555555;
-  width: 8px;
+  width: 15px;
   background: #32b4e5;
-  border-radius: 2px;
+  border-radius: 100px;
+  margin-left: -3px;
   outline: none !important;
   opacity: 1 !important;
 }
@@ -11015,4 +11038,78 @@ h6,
   top: -20px;
   color: #32b4e5;
   font-weight: bold;
+  margin-left: 3px;
+}
+.dynatable-per-page {
+  float: right;
+  margin-right: 10px;
+  font-weight: bold;
+}
+.dynatable-per-page .dynatable-per-page-label {
+  margin-right: 5px;
+}
+.dynatable-per-page select {
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.428571429;
+  color: #555555;
+  vertical-align: middle;
+  background-color: #ffffff;
+  background-image: none;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  -webkit-box-shadow: inset 0 1px 4px 0 rgba(0, 0, 0, 0.25), 0 0 0 4px rgba(225, 235, 240, 0.5);
+  box-shadow: inset 0 1px 4px 0 rgba(0, 0, 0, 0.25), 0 0 0 4px rgba(225, 235, 240, 0.5);
+  border-radius: 0;
+  border: 0px;
+  height: 35px;
+  font-size: 15px;
+  padding: 10px 16px;
+  line-height: 1.33;
+  padding: 5px;
+  width: auto;
+  display: inline-block;
+  border: 1px solid #eff4f7;
+  -webkit-box-shadow: 0 0 0 4px rgba(225, 235, 240, 0.5) !important;
+  box-shadow: 0 0 0 4px rgba(225, 235, 240, 0.5) !important;
+}
+.dynatable-per-page select:focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+}
+.dynatable-per-page select:-moz-placeholder {
+  color: #999999;
+}
+.dynatable-per-page select::-moz-placeholder {
+  color: #999999;
+  opacity: 1;
+}
+.dynatable-per-page select:-ms-input-placeholder {
+  color: #999999;
+}
+.dynatable-per-page select::-webkit-input-placeholder {
+  color: #999999;
+}
+.dynatable-per-page select[disabled],
+.dynatable-per-page select[readonly],
+fieldset[disabled] .dynatable-per-page select {
+  cursor: not-allowed;
+  background-color: #eeeeee;
+}
+textarea.dynatable-per-page select {
+  height: auto;
+}
+.dynatable-per-page select:focus {
+  -webkit-box-shadow: inset 0 1px 4px 0 rgba(0, 0, 0, 0.25), 0 0 0 4px rgba(225, 235, 240, 0.5);
+  box-shadow: inset 0 1px 4px 0 rgba(0, 0, 0, 0.25), 0 0 0 4px rgba(225, 235, 240, 0.5);
+  border-color: none;
 }

@@ -31,9 +31,11 @@ $super_title = elgg_extract('super_title', $vars);
             <?php echo elgg_view('output/friendlytime', array('time' => $task->end));?>
         </span>
     </small>
+    <?php if($task->description):?>
     <div class="description">
         <?php echo nl2br($task->description);?>
     </div>
+    <?php endif;?>
 </div>
 
 <div class="task-body">

@@ -18,7 +18,13 @@
         <?php endif; ?>
         <p class="navbar-text navbar-right lang" style="text-transform: uppercase;">
             <?php
-            $installed_langs = get_installed_translations();
+//            $installed_langs = get_installed_translations();
+            $installed_langs = array(
+                'es' => 'Español',
+                'en' => 'English',
+                'de' => 'Deutsch',
+                'pt' => 'Português'
+            );
             foreach($installed_langs as $key => $language):
                 $active = false;
                 if(get_current_language() == $key){

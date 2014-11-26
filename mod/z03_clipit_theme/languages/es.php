@@ -5,6 +5,14 @@
  */
 
 $spanish = array(
+    'show' => 'Mostrar',
+    'showing' => 'Mostrando',
+    'to' => 'a',
+    'of' => 'de',
+    'select' => 'Seleccionar',
+    'pages' => 'Páginas',
+    'next' => 'Siguiente',
+    'prev' => 'Anterior',
     'or' => 'O',
     'true' => 'Verdadero',
     'false' => 'Falso',

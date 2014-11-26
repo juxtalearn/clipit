@@ -76,7 +76,7 @@ $body .='
 if($task_type == 'upload'){
 $body .= '<ul class="feedback_form" style="margin-left: 20px;display: none">
         <li style="padding: 10px;background: #fafafa;" class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-mds-12">
                 <h4>'.elgg_echo('task:feedback').'</h4>
             </div>
             '.elgg_view('activity/create/task', array('task_type' => 'feedback', 'id' => $id, 'default_task' => $feedback_option)).'

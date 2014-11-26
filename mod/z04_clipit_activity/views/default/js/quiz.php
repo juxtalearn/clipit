@@ -51,16 +51,16 @@ $.fn.quiz = function (options) {
                 range: "min",
                 value: $elem.find("input").val(),
                 min: 1,
-                max: 10,
+                max: 5,
                 step: 1,
                 create: function(event, ui){
                     $elem.find("a").append($("<span/>"));
                     var value = $elem.find("input").val();
-                    if(value < 5){
+                    if(value < 3){
                         $elem.find(".ui-slider-range").addClass("green");
-                    }else if(value >= 5 && ui.value < 8){
+                    }else if(value >= 3 && ui.value <= 4){
                         $elem.find(".ui-slider-range").addClass("yellow");
-                    }else if(value >= 8){
+                    }else{
                         $elem.find(".ui-slider-range").addClass("red");
                     }
                 },
@@ -68,11 +68,11 @@ $.fn.quiz = function (options) {
                     $elem.find("a span" ).text( ui.value );
                     $elem.find("input" ).val( ui.value );
                     $elem.find(".ui-slider-range").removeClass().addClass("ui-slider-range");
-                    if(ui.value < 5){
+                    if(ui.value < 3){
                         $elem.find(".ui-slider-range").addClass("green");
-                    }else if(ui.value >= 5 && ui.value < 8){
+                    }else if(ui.value >= 3 && ui.value <= 4){
                         $elem.find(".ui-slider-range").addClass("yellow");
-                    }else if(ui.value >= 8){
+                    }else{
                         $elem.find(".ui-slider-range").addClass("red");
                     }
                 }
@@ -143,10 +143,75 @@ $.fn.quiz = function (options) {
         var q = new Question($(this));
         return q.create();
     });
+    that.on("click", ".get-clones", function(){
+        var tr = $(this).closest("tr")
+        id = $(this).attr("id"),
+            tr_clones = $("[data-clone="+id+"]");
+        if(tr_clones.length > 0){
+            tr_clones.toggle();
+            return false;
+        }
+        elgg.get('ajax/view/activity/admin/tasks/quiz/add_type',{
+            data: {
+                type: "question_list_clone",
+                id: id
+            },
+            success: function(content){
+                tr.after(content);
+            }
+        });
+    });
     // Question select from tag
-    that.find(".questions-select").chosen().change(function(){
+    that.on("click", ".from-tags", function(){
+        var $that = $(this);
+        $quiz.find(".dynamic-table").toggle();
+        if($quiz.find("table.datatable").length > 0){
+            return false;
+        }
+        elgg.get('ajax/view/activity/admin/tasks/quiz/add_type',{
+            data: {
+                type:   'question_list_from_tags',
+                tricky_topic: opt.tricky_topic
+            },
+            success: function(content){
+                $content = $(content);
+                $quiz.find(".dynamic-table").html($content);
+                $content.find("table.datatable").dynatable({
+                    features: {pushState: false},
+                    dataset: {
+                        sorts: { dnumber: 1 },
+                        perPageDefault: 10
+                    },
+                    params: {
+                        records: 'filas'
+                    },
+                    inputs: {
+                        queries: $('.search-difficulty'),
+                        queryEvent: 'blur change keyup',
+                        paginationClass: 'pagination',
+                        paginationLinkClass: 'cursor-pointer',
+                        paginationActiveClass: 'active',
+                        paginationDisabledClass: 'disabled',
+                        pageText: '<?php echo elgg_echo('pages');?>: ',
+                        searchText: '',
+                        perPageText: '<?php echo elgg_echo('show');?>:',
+                        paginationPrev: '<?php echo elgg_echo('prev');?>',
+                        paginationNext: '<?php echo elgg_echo('next');?>',
+                        recordCountText: '<?php echo elgg_echo('showing');?>',
+                        recordCountPageBoundTemplate: '{pageLowerBound} <?php echo elgg_echo('to');?> {pageUpperBound} <?php echo elgg_echo('of');?>',
+                        recordCountPageUnboundedTemplate: '{recordsShown} <?php echo elgg_echo('of');?>',
+                    }
+                });
+                $content.find(".dynatable-search input")
+                    .attr("placeholder", '<?php echo elgg_echo('search');?>')
+                    .addClass('form-control')
+                    .css({"width": "auto", "display": "inline-block"});
+            }
+        });
+    });
+    that.on("click", ".questions-select", function(){
         var q = new Question($(this));
-        q.create(true, $(this).val());
+        q.create(true, $(this).attr("id"));
     });
     return $quiz.find(".question").each(function(){
         var q = new Question();

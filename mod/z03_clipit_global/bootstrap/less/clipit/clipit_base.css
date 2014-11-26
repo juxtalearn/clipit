@@ -10606,7 +10606,22 @@ a:focus {
 .blue-lighter {
   color: #bae6f6;
 }
+.bg-green {
+  background-color: #99cb00;
+}
+.bg-red {
+  background-color: #ff4343;
+}
+.bg-yellow {
+  background-color: #d8ba05;
+}
+.bg-blue {
+  background-color: #32b4e5;
+}
 .bg-blue-lighter {
+  background-color: #bae6f6;
+}
+.bg-blue-lighter_2 {
   background: #d6f0fa !important;
 }
 .bg-white {

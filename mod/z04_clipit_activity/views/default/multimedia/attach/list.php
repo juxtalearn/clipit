@@ -23,16 +23,24 @@ if(!$id){
     position: absolute;
     width: 100%;
     height: 100%;
-    border: 1px solid #32b4e5;
     border-radius: 4px;
     z-index: 10;
     display: none;
     cursor: pointer;
 }
+.attach-block{
+    margin: 2px !important;
+    border: 2px solid transparent;
+}
+.multimedia-block:hover .attach-block{
+    border: 2px solid #32b4e5 !important;
+}
+.multimedia-block:hover .attach-block.selected {
+    border: 2px solid rgba(153, 203, 0, 0.5) !important;
+}
 .multimedia-block .selected{
-    border: 3px solid #99cb00;
+    border: 2px solid #99cb00;
     display: block;
-    opacity: 0.7;
 }
 .multimedia-block:hover .select-item{
     display: block;

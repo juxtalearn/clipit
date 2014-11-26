@@ -210,6 +210,7 @@ $english = array(
     // Labels
     'label' => 'Label',
     'labels' => 'Labels',
+    'labels:none' => 'No labels added',
     // Tags
     'tag' => 'Stumbling Block',
     'tags' => 'Stumbling Blocks',
@@ -297,6 +298,9 @@ $english = array(
     'quiz:result:send' => '',
     'difficulty' => 'Difficulty',
     'quiz:select:from_tag' => 'Add questions related',
+    'quiz:question' => 'Question',
+    'quiz:not_started' => 'Not started',
+    'quiz:finished' => 'Finished',
 );
 
 add_translation('en', $english);

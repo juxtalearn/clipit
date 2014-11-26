@@ -70,7 +70,7 @@ $.fn.attach_multimedia = function (options) {
             }
         },
         count: function($object){
-            return $object.find(".attach-item.selected").length;
+            return $object.find(".attach-block.selected").length;
         },
         setCount: function(){
             var list = $obj.find(".multimedia-list > div");
@@ -91,7 +91,7 @@ $.fn.attach_multimedia = function (options) {
         methods.loadBy(type);
     });
     $obj.on("click", item, function(){
-        $(this).toggleClass('selected');
+        var block = $(this).parent(".multimedia-block").find(".attach-block").toggleClass('selected');
         methods.setCount();
     });
     return methods;

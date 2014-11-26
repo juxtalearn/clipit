@@ -14,11 +14,29 @@ $type = get_input('type');
 $id = get_input('id');
 $num = get_input('num');
 $tt = get_input('tricky_topic');
-
-if($type == 'question'){
-    $question = get_input('question');
-    echo elgg_view('activity/admin/tasks/quiz/question', array('num' => $num, 'question' => $question, 'tricky-topic' => $tt));
-} else {
-    echo elgg_view('activity/admin/tasks/quiz/types/'.$type, array('id' => $id, 'num' => $num));
+switch($type){
+    case 'question':
+        $question = get_input('question');
+        echo elgg_view('activity/admin/tasks/quiz/question', array(
+            'parent' => true,
+            'num' => $num,
+            'question' => $question,
+            'tricky-topic' => $tt
+        ));
+        break;
+    case 'question_list_clone':
+        $question_clones = ClipitQuizQuestion::get_clones($id, true);
+        echo elgg_view('activity/admin/tasks/quiz/question/list_clone', array(
+            'questions' => $question_clones,
+            'id' => $id
+        ));
+        break;
+    case 'question_list_from_tags':
+        echo elgg_view('activity/admin/tasks/quiz/question/list_from_tags', array(
+            'tricky-topic' => $tt
+        ));
+        break;
+    default:
+        echo elgg_view('activity/admin/tasks/quiz/types/'.$type, array('id' => $id, 'num' => $num));
+        break;
 }
-?>
