@@ -15,12 +15,17 @@
 /**
  * A Performance element which can be linked from Resources to denote that it has been applied to them, and allows for
  * richer linkage, searching and context of Resources.
+ *
+ * IMPORTANT: In order to link to material, use the (int)$reference property, so that translations of the items can be
+ * used (references are unique across all languages)
  */
 class ClipitPerformanceItem extends UBItem {
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitPerformanceItem";
+    public $reference = "";
+    public $language = "";
     public $category = "";
     public $category_description = "";
     public $example = "";
@@ -32,6 +37,8 @@ class ClipitPerformanceItem extends UBItem {
      */
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
+        $this->reference = (string)$elgg_entity->get("reference");
+        $this->language = (string)$elgg_entity->get("language");
         $this->category = (string)$elgg_entity->get("category");
         $this->category_description = (string)$elgg_entity->get("category_description");
         $this->example = (string)$elgg_entity->get("example");
@@ -44,6 +51,8 @@ class ClipitPerformanceItem extends UBItem {
      */
     protected function copy_to_elgg($elgg_entity) {
         parent::copy_to_elgg($elgg_entity);
+        $elgg_entity->set("reference", (string)$this->reference);
+        $elgg_entity->set("language", (string)$this->language);
         $elgg_entity->set("category", (string)$this->category);
         $elgg_entity->set("category_description", (string)$this->category_description);
         $elgg_entity->set("example", (string)$this->example);
@@ -59,17 +68,43 @@ class ClipitPerformanceItem extends UBItem {
     static function get_by_category($category = null) {
         $performance_items = static::get_all();
         $category_array = array();
-        if(empty($category)) {
-            foreach($performance_items as $performance_item) {
+        if (empty($category)) {
+            foreach ($performance_items as $performance_item) {
                 $category_array[$performance_item->category][] = $performance_item;
             }
         } else {
-            foreach($performance_items as $performance_item) {
-                if($performance_item->category == $category) {
+            foreach ($performance_items as $performance_item) {
+                if ($performance_item->category == $category) {
                     $category_array[] = $performance_item;
                 }
             }
         }
         return $category_array;
+    }
+
+    static function get_by_reference($reference_array = null){
+        $return_array = array();
+        $all_items = static::get_all();
+        foreach($all_items as $item){
+            if(!empty($reference_array)) {
+                if (array_search((string)$item->reference, $reference_array) !== false) {
+                    $return_array[$item->reference][] = $item;
+                }
+            } else{
+                $return_array[$item->reference][] = $item;
+            }
+        }
+        return $return_array;
+    }
+
+    static function get_for_language($id, $language){
+        $initial_item = new static($id);
+        $all_items = static::get_all();
+        foreach($all_items as $item){
+            if($item->reference == $initial_item->reference && $item->language == $language){
+                return $item;
+            }
+        }
+        return $initial_item;
     }
 }
