@@ -9,4 +9,15 @@
  * @link            http://www.juxtalearn.eu
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
- */ 
+ */
+?>
+<?php echo elgg_view('output/url', array(
+    'href'  => "javascript:;",
+    'class' => 'btn btn-primary',
+    'title' => elgg_echo('create'),
+    'text'  => elgg_echo('create'),
+));
+?>
+<?php
+echo elgg_view('quiz/quiz');
+?>

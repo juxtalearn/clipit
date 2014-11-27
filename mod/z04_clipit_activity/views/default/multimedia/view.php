@@ -12,6 +12,8 @@
  */
 $entity = elgg_extract("entity", $vars);
 $owner_user = array_pop(ClipitUser::get_by_id(array($entity->owner_id)));
+
+$tags = $entity->tag_array;
 ?>
 <!-- Multimedia info + details -->
 <?php echo elgg_view("multimedia/owner_options", array('entity' => $entity, 'type' => $vars['type'])); ?>
@@ -44,7 +46,12 @@ $owner_user = array_pop(ClipitUser::get_by_id(array($entity->owner_id)));
             <div class="multimedia-view">
                 <?php echo $vars['body'];?>
             </div>
+            <?php if(!empty($tags)):?>
+                <small class="show"><?php echo elgg_echo('tags');?></small>
+                <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $tags)); ?>
+            <?php endif;?>
             <?php if($vars['description'] !== false):?>
+            <small class="show"><?php echo elgg_echo('description');?></small>
             <div class="description">
                 <?php echo $entity->description; ?>
             </div>

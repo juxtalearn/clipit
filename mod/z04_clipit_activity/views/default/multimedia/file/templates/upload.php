@@ -12,7 +12,17 @@
  */
 $entity = elgg_extract("entity", $vars);
 $type = elgg_extract("type", $vars);
-$tags = ClipitTrickyTopic::get_tags($entity->tricky_topic);
+$object = ClipitSite::lookup($entity->id);
+switch($object['subtype']){
+    case 'ClipitActivity':
+        $tags = ClipitTrickyTopic::get_tags($entity->tricky_topic);
+        break;
+    case 'ClipitGroup':
+        $activity = array_pop(ClipitActivity::get_by_id(array($entity->activity)));
+        $tags = ClipitTrickyTopic::get_tags($activity->tricky_topic);
+        break;
+}
+
 ?>
 <script>
 $(function(){
