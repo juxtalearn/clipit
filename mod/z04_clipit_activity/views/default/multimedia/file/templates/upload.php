@@ -12,7 +12,17 @@
  */
 $entity = elgg_extract("entity", $vars);
 $type = elgg_extract("type", $vars);
+$tags = ClipitTrickyTopic::get_tags($entity->tricky_topic);
 ?>
+<script>
+$(function(){
+    $(document).on("click", ".add-tag", function(){
+        var content = $(this).parent("div").find("div");
+        content.toggle();
+        content.find('.tag-select').chosen();
+    });
+});
+</script>
 <script id="template-upload" type="text/x-tmpl">
 {% for (var i=0, file; file=o.files[i]; i++) { %}
 <div class="row template-upload fade">
@@ -59,6 +69,20 @@ $type = elgg_extract("type", $vars);
                     'rows'  => 3,
                 ));
             ?>
+        </div>
+        <div style="margin-top: -10px;">
+        <a href="javascript:;" class="add-tag"><strong>+ <?php echo elgg_echo('tags:assign');?></strong></a>
+            <div style="display:none;" class="margin-top-10">
+            <select name="tags[]" data-placeholder="<?php echo elgg_echo('click_add');?>" style="width:100%;" class="tag-select" multiple tabindex="8">
+                <option value=""></option>
+                <?php
+                foreach($tags as $tag_id):
+                    $tag = array_pop(ClipitTag::get_by_id(array($tag_id)));
+                ?>
+                    <option value="<?php echo $tag->id;?>"><?php echo $tag->name;?></option>
+                <?php endforeach;?>
+            </select>
+            </div>
         </div>
     </div>
 </div>

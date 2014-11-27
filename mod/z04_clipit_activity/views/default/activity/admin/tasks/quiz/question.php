@@ -13,6 +13,7 @@
 $id = uniqid('question_');
 $num = elgg_extract('num', $vars);
 $tricky_topic = elgg_extract('tricky-topic', $vars);
+$input_task = elgg_extract('input_task', $vars);
 $question = false;
 $tt_tags = ClipitTrickyTopic::get_tags($tricky_topic);
 
@@ -33,12 +34,12 @@ if($question){
     <?php
     if($vars['parent']){
         echo elgg_view("input/hidden", array(
-            'name' => 'question['.$id.'][id_parent]',
+            'name' => $input_task.'question['.$id.'][id_parent]',
             'value' => $question->id,
         ));
     } else {
         echo elgg_view("input/hidden", array(
-            'name' => 'question['.$id.'][id]',
+            'name' => $input_task.'question['.$id.'][id]',
             'value' => $question->id,
         ));
     }
@@ -78,7 +79,7 @@ if($question){
                 <div class="form-group">
                     <label>Título de la pregunta</label>
                     <?php echo elgg_view("input/text", array(
-                        'name' => 'question['.$id.'][title]',
+                        'name' => $input_task.'question['.$id.'][title]',
                         'class' => 'form-control',
                         'value' => $question->name,
                         'required' => true
@@ -88,7 +89,7 @@ if($question){
                 <div class="form-group">
                     <label>Enunciado</label>
                     <?php echo elgg_view("input/plaintext", array(
-                        'name' => 'question['.$id.'][description]',
+                        'name' => $input_task.'question['.$id.'][description]',
                         'value' => $question->description,
                         'class' => 'form-control',
                         'onclick'   => '$(this).addClass(\'mceEditor\');
@@ -103,7 +104,7 @@ if($question){
                     <div class="difficulty-slider">
                         <?php
                             echo elgg_view("input/hidden", array(
-                                'name' => 'question['.$id.'][difficulty]',
+                                'name' => $input_task.'question['.$id.'][difficulty]',
                                 'value' => $question ? $question->difficulty : 1
                             ));
                         ?>
@@ -121,7 +122,7 @@ if($question){
                 <?php if($tt_tags):?>
                 <div class="form-group tags-question-select">
                     <label><?php echo elgg_echo('tags');?></label>
-                    <select name="question[<?php echo $id;?>][tags][]" data-placeholder="<?php echo elgg_echo('click_add');?>" style="width:100%;" multiple class="tags-select" tabindex="8">
+                    <select name="<?php echo $input_task;?>question[<?php echo $id;?>][tags][]" data-placeholder="<?php echo elgg_echo('click_add');?>" style="width:100%;" multiple class="tags-select" tabindex="8">
                         <option value=""></option>
                         <?php
                         foreach($tt_tags as $tag_id):
@@ -137,7 +138,7 @@ if($question){
                 <div class="form-group">
                     <label>Tipo de pregunta</label>
                     <?php echo elgg_view("input/dropdown", array(
-                        'name' => 'question['.$id.'][type]',
+                        'name' => $input_task.'question['.$id.'][type]',
                         'style' => 'padding: 5px;',
                         'value' => $question ? $question->option_type: false,
                         'class' => 'form-control select-question-type',

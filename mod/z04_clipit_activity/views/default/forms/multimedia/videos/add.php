@@ -43,9 +43,6 @@ echo elgg_view("input/hidden", array(
 <script>
     $(function(){
         $(".chosen-select").chosen({disable_search_threshold: 1});
-//    $(".chosen-select-items").chosen({max_selected_options: 5}).on("chosen:maxselected", function () {
-//        alert("max");
-//    });
         $(".chosen-select-items").chosen();
 
         $('form').on('click', 'input[type=submit]', function(evt) {
@@ -53,22 +50,6 @@ echo elgg_view("input/hidden", array(
                 $("#uploading").prependTo($(this).closest(".modal-content")).show();
                 $("body").css({"cursor": "progress"});
             }
-//            var form = $(this.form);
-//            evt.preventDefault();
-//            tinyMCE.triggerSave();
-//            $.ajax(form.prop("action"), {
-//                data: form.serializeArray(),
-//                files: form.find(':file'),
-//                iframe: true,
-//                processData: false
-//            }).always(function() {
-//                form.removeClass('loading');
-//            }).done(function(data) {
-//                console.log(data);
-//                form.find(':file').val('');
-////                form.submit();
-//                location.href = "";
-//            });
         });
     });
 </script>

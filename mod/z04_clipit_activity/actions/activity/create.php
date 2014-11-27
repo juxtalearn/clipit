@@ -18,6 +18,7 @@ $activity_start = get_input('activity-start');
 $activity_end = get_input('activity-end');
 $activity_tt = get_input('activity-tricky-topic');
 $new_tt = get_input('new-tricky-topic');
+
 if($new_tt){
     $tags =  get_input('tag');
     // Create new TT

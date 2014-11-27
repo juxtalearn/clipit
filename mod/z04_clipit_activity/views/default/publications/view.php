@@ -158,7 +158,7 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
 </div>
 <!-- Multimedia info + details end -->
 <?php if($vars['canEvaluate']):?>
-    <?php echo elgg_view_form("publications/evaluate", array('data-validate' => 'true'),
+    <?php echo elgg_view_form("publications/evaluate", array('data-validate' => 'true', 'style' => 'margin-bottom: 80px'),
         array('entity' => $entity, 'activity' => $activity));
     ?>
 <?php endif; ?>

@@ -28,13 +28,17 @@ $quiz_id = elgg_extract('quiz_id', $vars);
             }
             echo '</small>';
         } else {
-            echo elgg_view('output/url', array(
-                'title' => elgg_echo('view'),
-                'text' => elgg_echo('view'),
-                'class' => 'view-answer btn btn-xs btn-primary',
-                'id' => $user->id,
-                'href' => "javascript:;",
-            ));
+            if($vars['subtype'] === 'not_answered'){
+                echo '<small class="margin-right-10">'.elgg_echo('quiz:question:not_answered').'</small>';
+            } else {
+                echo elgg_view('output/url', array(
+                    'title' => elgg_echo('view'),
+                    'text' => elgg_echo('view'),
+                    'class' => 'view-answer btn btn-xs btn-primary',
+                    'id' => $user->id,
+                    'href' => "javascript:;",
+                ));
+            }
         }
         ?>
     </div>
@@ -50,5 +54,5 @@ $quiz_id = elgg_extract('quiz_id', $vars);
         ));
         ?>
     </strong>
-    <div class="answer" style="display:none;padding: 10px;"></div>
+    <div class="answer" style="display:none;padding: 10px;padding-right: 0;"></div>
 </li>

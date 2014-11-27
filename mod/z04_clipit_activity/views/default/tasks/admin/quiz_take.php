@@ -126,6 +126,7 @@ $users = ClipitUser::get_by_id($users);
             }
         });
         var hash = window.location.hash.replace('#', '');
+        console.log(hash);
         var collapse = $("[href='#user_"+hash+"']");
         if(collapse.length > 0){
             collapse.click();
@@ -158,8 +159,12 @@ foreach(ClipitQuizQuestion::get_by_id($quiz->quiz_question_array) as $question):
 ?>
     <div class="panel panel-blue">
         <a name="<?php echo $question->id;?>"></a>
-        <div class="panel-heading cursor-pointer expand question-results" data-question="<?php echo $question->id;?>" style="padding: 10px;">
-            <h4 class="panel-title blue" data-toggle="collapse" data-parent="#accordion_users" href="#user_<?php echo $question->id;?>">
+        <div class="panel-heading cursor-pointer expand question-results"
+             data-toggle="collapse"
+             data-parent="#accordion_users"
+             href="#user_<?php echo $question->id;?>"
+             data-question="<?php echo $question->id;?>" style="padding: 10px;">
+            <h4 class="panel-title blue" >
                 <div class="pull-right blue">
                     <?php echo difficulty_bar($question->difficulty);?>
                     <i class="fa fa-angle-down blue margin-left-5"></i>

@@ -13,7 +13,7 @@
 
 $tricky_topic = 0;
 $tricky_topic = get_input('tricky_topic');
-
+$input_task = elgg_extract('input_task', $vars);
 if($activity_id = elgg_extract('activity_id', $vars)){
     $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
     $tricky_topic = $activity->tricky_topic;
@@ -63,7 +63,7 @@ $id = uniqid();
         <div class="form-group">
             <label>Description</label>
             <?php echo elgg_view("input/plaintext", array(
-                'name'  => "quiz[description]",
+                'name'  => "{$input_task}quiz[description]",
                 'class' => 'form-control '.($entity->description ? 'mceEditor' : ''),
                 'value' => $entity->description,
                 'onclick' => $entity->description ? false : '$(this).addClass(\'mceEditor\');
@@ -78,7 +78,7 @@ $id = uniqid();
         <div class="form-group">
             <label>Tipo de vista del cuestionario</label>
             <?php echo elgg_view("input/dropdown", array(
-                'name' => 'quiz[view]',
+                'name' => $input_task.'quiz[view]',
                 'style' => 'padding: 5px;',
                 'value' => $entity->view_mode,
                 'class' => 'form-control',
@@ -96,7 +96,7 @@ $id = uniqid();
                 $time = $entity->max_time;
                 $days = range(1, 30);
                 echo elgg_view("input/dropdown", array(
-                    'name' => 'quiz[time][d]',
+                    'name' => $input_task.'quiz[time][d]',
                     'style' => 'width: 30%;display: inline-block;padding:5px;',
                     'class' => 'form-control',
                     'value' => $entity ? floor($time / 86000):'',
@@ -106,7 +106,7 @@ $id = uniqid();
                 <?php
                 $hours = range(1, 24);
                 echo elgg_view("input/dropdown", array(
-                    'name' => 'quiz[time][h]',
+                    'name' => $input_task.'quiz[time][h]',
                     'style' => 'width: 30%;display: inline-block;padding:5px;',
                     'class' => 'form-control',
                     'value' => $entity ? floor($time / 3600):'',
@@ -116,7 +116,7 @@ $id = uniqid();
                 <?php
                 $minutes = range(1, 60);
                 echo elgg_view("input/dropdown", array(
-                    'name' => 'quiz[time][m]',
+                    'name' => $input_task.'quiz[time][m]',
                     'style' => 'width: 30%;display: inline-block;padding:5px;',
                     'class' => 'form-control',
                     'value' => $entity ? floor(($time / 60) % 60):'',

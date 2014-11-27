@@ -214,6 +214,8 @@ $english = array(
     // Tags
     'tag' => 'Stumbling Block',
     'tags' => 'Stumbling Blocks',
+    'tags:add' => 'Add tags',
+    'tags:assign' => 'Assign tags',
     'tags:none' => 'Not Stumbling Blocks',
     'tags:recommended' => 'Related Stumbling Blocks',
     'tags:commas:separated' => 'Separated by commas',
@@ -301,6 +303,9 @@ $english = array(
     'quiz:question' => 'Question',
     'quiz:not_started' => 'Not started',
     'quiz:finished' => 'Finished',
+    'quiz:question:not_answered' => 'Not answered',
+    'quiz:question:annotate' => 'Add annotation',
+    'quiz:question:results' => 'Results',
 );
 
 add_translation('en', $english);

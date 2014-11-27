@@ -215,6 +215,8 @@ $spanish = array(
     // Tags
     'tag' => 'Concepto',
     'tags' => 'Conceptos',
+    'tags:add' => 'Añadir conceptos',
+    'tags:assign' => 'Asignar conceptos',
     'tags:none' => 'No hay conceptos',
     'tags:recommended' => 'Conceptos recomendados',
     'tags:commas:separated' => 'Separado por comas',
@@ -312,12 +314,15 @@ $spanish = array(
     'resource:added_by' => 'Añadido por',
 
     // Quiz
-    'quiz:result:send' => 'Las respuestas quedarán guardadas...',
+    'quiz:result:send' => 'Las respuestas quedarán guardadas, por lo tanto puedes volver a entrar si estás dentro del tiempo para hacer el examen.',
     'difficulty' => 'Dificultad',
     'quiz:select:from_tag' => 'Añadir preguntas existentes relacionadas',
     'quiz:question' => 'Pregunta',
     'quiz:not_started' => 'Sin empezar',
     'quiz:finished' => 'Terminado',
+    'quiz:question:not_answered' => 'No contestado',
+    'quiz:question:annotate' => 'Añadir anotación',
+    'quiz:question:results' => 'Resultados',
 );
 
 add_translation('es', $spanish);

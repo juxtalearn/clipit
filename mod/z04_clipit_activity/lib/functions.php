@@ -46,18 +46,20 @@ function get_text_from_quote($id, $message_destination){
  * @param $text_message
  * @return mixed
  */
-function text_reference($text_message){
+function text_reference($text_message, $id = 0){
     if(preg_match('/(^|[^a-z0-9_])#([0-9_]+)/i', $text_message)){
         $prex = '/#([0-9_]+)/i';
         preg_match_all($prex, $text_message, $string_regex, PREG_PATTERN_ORDER);
         $string_regexs = $string_regex[1];
         foreach($string_regexs as $string){
-            $text_message = preg_replace(
-                "/\#$string\b/",
-                '<strong class="quote-ref" data-quote-ref="'.$string.'">
-                    <a class="btn">#'.$string.'</a>
+            if((int)$string < $id) {
+                $text_message = preg_replace(
+                    "/\#$string\b/",
+                    '<strong class="quote-ref" data-quote-ref="' . $string . '">
+                    <a class="btn">#' . $string . '</a>
                 </strong>',
-                $text_message);
+                    $text_message);
+            }
         }
 
 
@@ -163,7 +165,7 @@ function get_format_time($seconds = 0){
     }
     return $time;
 }
-function difficulty_bar($difficulty, $limit=5){
+function difficulty_bar($difficulty, $limit=5, $colors = false){
     $content = "";
     if($difficulty < 3){
         $color = "bg-green";
@@ -171,6 +173,9 @@ function difficulty_bar($difficulty, $limit=5){
         $color = "bg-yellow";
     }else{
         $color = "bg-red";
+    }
+    if(!$colors) {
+        $color = "bg-blue";
     }
     for($i=1; $i<=$limit; $i++){
         if($i > $difficulty){

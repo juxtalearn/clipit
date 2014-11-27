@@ -48,7 +48,7 @@ $tricky_topic_view = elgg_view("tricky_topic/preview", array('activity' => $acti
 <div class="row" style="background: #f1f2f7;padding: 20px;margin: 10px 0;">
     <div class="col-md-8">
         <label for="overall">
-            <?php echo elgg_echo('publications:question:tricky_topic',array($tricky_topic_view));?>
+            * <?php echo elgg_echo('publications:question:tricky_topic',array($tricky_topic_view));?>
         </label>
         <?php echo elgg_view("input/hidden", array(
             'name' => 'entity-id',
@@ -113,6 +113,7 @@ $tricky_topic_view = elgg_view("tricky_topic/preview", array('activity' => $acti
             <h4>
                 <strong><?php echo elgg_echo('publications:my_rating');?></strong>
             </h4>
+            <small class="margin-bottom-5">Valora de 1 a 5 la realización del video, teniendo en cuenta:</small>
             <ul>
                 <?php
                 $performance_items = $entity->performance_item_array;
@@ -126,6 +127,10 @@ $tricky_topic_view = elgg_view("tricky_topic/preview", array('activity' => $acti
                 <?php endforeach; ?>
             </ul>
         </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="margin-top-10">
+        <small><a>*</a> Campo obligatorio</small>
     </div>
     <div class="margin-top-20 col-md-12 text-right">
         <?php echo elgg_view('input/submit',

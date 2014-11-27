@@ -16,6 +16,10 @@ $object = ClipitSite::lookup($entity_id);
 $file_name = get_input('file-name');
 $file_text = get_input('file-text');
 $entity_class = $object['subtype'];
+$tags = array_filter(get_input("tags", array()));
+if(!$tags){
+    $tags = array();
+}
 
 $entity = array_pop($entity_class::get_by_id(array($entity_id)));
 
@@ -35,6 +39,7 @@ if(count($entity)==0){
             'file' => $new_file_id
         ));
         $entity_class::add_storyboards($entity_id, array($new_sb_id));
+        ClipitStoryboard::add_tags($new_sb_id, $tags);
     } else {
         register_error(elgg_echo("storyboard:cantupload"));
     }

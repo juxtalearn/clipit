@@ -21,21 +21,33 @@ switch($type = get_input('type')){
     case 'correct':
     case 'error':
         $users = array_filter($users);
-        foreach (ClipitUser::get_by_id($users) as $user):
-            echo elgg_view('quizzes/admin/user_results', array('user' => $user, 'type' => $type, 'quiz_id' => $quiz_id));
+        foreach ($users as $key => $user_id):
+            if(is_array($user_id)){
+                $user_id = array_pop($user_id);
+                $key = 'not_answered';
+            }
+            $user = array_pop(ClipitUser::get_by_id(array($user_id)));
+            echo elgg_view('quizzes/admin/user_results', array(
+                'user' => $user,
+                'type' => $type,
+                'quiz_id' => $quiz_id,
+                'subtype' => $key,
+            ));
         endforeach;
         break;
     case 'answer':
         $finished = true;
         $result = ClipitQuizResult::get_from_question_user((int)$question_id, get_input('user'));
         $question = array_pop(ClipitQuizQuestion::get_by_id(array($question_id)));
-        echo elgg_view('output/url', array(
-            'title' => elgg_echo('quiz:question:annotate'),
-            'text' => '<i class="fa fa-edit"></i> <strong>'.elgg_echo('quiz:question:annotate').'</strong>',
-            'href' => 'javascript:;',
-            'class' => 'btn btn-xs btn-border-blue pull-right',
-            'onclick' => '$(this).parent(\'.answer\').find(\'.annotate\').toggle()',
-        ));
+        if($result) {
+            echo elgg_view('output/url', array(
+                'title' => elgg_echo('quiz:question:annotate'),
+                'text' => '<i class="fa fa-edit"></i> <strong>' . elgg_echo('quiz:question:annotate') . '</strong>',
+                'href' => 'javascript:;',
+                'class' => 'btn btn-xs btn-border-blue pull-right',
+                'onclick' => '$(this).parent(\'.answer\').find(\'.annotate\').toggle()',
+            ));
+        }
         echo elgg_view('quizzes/types/'.$question->option_type, array(
             'finished_task' => true,
             'finished' => true,
@@ -52,7 +64,8 @@ switch($type = get_input('type')){
         $quiz = array_pop(ClipitQuiz::get_by_id(array($quiz_id)));
         $entities = ClipitActivity::get_students($task->activity);
         $results = array_pop(ClipitQuizResult::get_by_quiz_question(array($question_id)));
-//    var_dump(ClipitQuizQuestion::get_quiz_results($question->id));
+        $finished_task = $task->end <= time() ? true : false;
+
         $users = array();
         $us = array();
         foreach($results as $result){
@@ -64,8 +77,8 @@ switch($type = get_input('type')){
             $us[] = $result->owner_id;
         }
         foreach(array_diff($entities, $us) as $user_pending){
-            if(ClipitQuiz::has_finished_quiz($quiz->id, $user_pending)){
-                $users['error'][] = $user_pending;
+            if(ClipitQuiz::has_finished_quiz($quiz->id, $user_pending) || $finished_task){
+                $users['error'][]['not_answered'] = $user_pending;
                 $us[] = $user_pending;
             }
         }
@@ -74,7 +87,7 @@ switch($type = get_input('type')){
             echo json_encode(array(
                 'error' => count($users['error']),
                 'correct' => count($users['correct']),
-                'pending' => count($entities) - count($us)
+                'pending' => count($entities) - count($us),
             ));
             die;
         }

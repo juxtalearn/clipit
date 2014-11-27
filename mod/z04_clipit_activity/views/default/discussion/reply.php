@@ -53,7 +53,7 @@ if($message->owner_id != $user_loggedin_id){
         </div>
     </div>
     <div class="body-post">
-        <?php echo text_reference($message->description); ?>
+        <?php echo text_reference($message->description, $auto_id); ?>
         <!-- Attachs files -->
         <?php if($files_id): ?>
             <?php echo elgg_view("multimedia/attach/summary", array('files' => $files_id)); ?>
