@@ -13,22 +13,26 @@
  */
 
 /**
- * A Performance element which can be linked from Resources to denote that it has been applied to them, and allows for
+ * A Performance item which can be linked from Resources to denote that it has been applied to them, and allows for
  * richer linkage, searching and context of Resources.
- *
- * IMPORTANT: In order to link to material, use the (int)$reference property, so that translations of the items can be
- * used (references are unique across all languages)
  */
 class ClipitPerformanceItem extends UBItem {
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
-    const SUBTYPE = "ClipitPerformanceItem";
-    public $reference = "";
-    public $language = "";
-    public $category = "";
-    public $category_description = "";
-    public $example = "";
+    const SUBTYPE = "ClipitPerformanceTranslation";
+
+    /*
+    Properties are disposed in arrays by language, in the following order: [0 => en, 1 => es, 2 => de, 3 => pt]
+    E.g.: to get the Spanish translation of the Item's description: $item->description[1]
+    */
+    public $reference = array();
+    public $item_name = array();
+    public $item_description = array();
+    public $example = array();
+    public $category = array();
+    public $category_description = array();
+
 
     /**
      * Loads object parameters stored in Elgg
@@ -38,10 +42,11 @@ class ClipitPerformanceItem extends UBItem {
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
         $this->reference = (string)$elgg_entity->get("reference");
-        $this->language = (string)$elgg_entity->get("language");
-        $this->category = (string)$elgg_entity->get("category");
-        $this->category_description = (string)$elgg_entity->get("category_description");
-        $this->example = (string)$elgg_entity->get("example");
+        $this->item_name = (array)$elgg_entity->get("item_name");
+        $this->item_description = (array)$elgg_entity->get("item_description");
+        $this->example = (array)$elgg_entity->get("example");
+        $this->category = (array)$elgg_entity->get("category");
+        $this->category_description = (array)$elgg_entity->get("category_description");
     }
 
     /**
@@ -52,10 +57,72 @@ class ClipitPerformanceItem extends UBItem {
     protected function copy_to_elgg($elgg_entity) {
         parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("reference", (string)$this->reference);
-        $elgg_entity->set("language", (string)$this->language);
-        $elgg_entity->set("category", (string)$this->category);
-        $elgg_entity->set("category_description", (string)$this->category_description);
-        $elgg_entity->set("example", (string)$this->example);
+        $elgg_entity->set("item_name", (array)$this->item_name);
+        $elgg_entity->set("item_description", (array)$this->item_description);
+        $elgg_entity->set("example", (array)$this->example);
+        $elgg_entity->set("category", (array)$this->category);
+        $elgg_entity->set("category_description", (array)$this->category_description);
+    }
+
+    static function create($prop_value_array){
+        if(isset($prop_value_array["reference"])){
+            $item = static::get_by_reference($prop_value_array["reference"]);
+            return static::set_properties($item->id, $prop_value_array);
+        }
+        return static::set_properties(null, $prop_value_array);
+    }
+
+    static function set_properties($id, $prop_value_array){
+        if(!$item = new static($id)) {
+            return false;
+        }
+
+        if(!isset($prop_value_array["language"])){
+            $lang_pos = 0;
+        }else{
+            $language = $prop_value_array["language"];
+            switch ($language){
+                case "en":
+                    $lang_pos = 0;
+                    break;
+                case "es":
+                    $lang_pos = 1;
+                    break;
+                case "de":
+                    $lang_pos = 2;
+                    break;
+                case "pt":
+                    $lang_pos = 3;
+                    break;
+                default:
+                    $lang_pos = 0;
+            }
+        }
+
+        unset($prop_value_array["language"]);
+
+        foreach($prop_value_array as $prop => $value) {
+            if(!array_key_exists($prop, static::list_properties()) && $prop != "language") {
+                throw new InvalidParameterException("ERROR: One or more property names do not exist.");
+            }
+            if($prop == "id") {
+                continue; // cannot set an item's ID or language.
+            }
+            // Check for multilanguage properties
+            if(array_search(
+                    $prop,
+                    array("item_name", "item_description", "example", "category", "category_description"))
+                !== false){
+                $item->$prop[$lang_pos] = $value;
+            } else {
+                $item->$prop = $value;
+            }
+        }
+        if (array_key_exists("time_created",$prop_value_array)) {
+            return $item->save(true);
+        } else {
+            return $item->save(false);
+        }
     }
 
     /**
@@ -70,11 +137,11 @@ class ClipitPerformanceItem extends UBItem {
         $category_array = array();
         if (empty($category)) {
             foreach ($performance_items as $performance_item) {
-                $category_array[$performance_item->category][] = $performance_item;
+                $category_array[$performance_item->category[0]][] = $performance_item;
             }
         } else {
             foreach ($performance_items as $performance_item) {
-                if ($performance_item->category == $category) {
+                if ($performance_item->category[0] == $category) {
                     $category_array[] = $performance_item;
                 }
             }
@@ -82,29 +149,17 @@ class ClipitPerformanceItem extends UBItem {
         return $category_array;
     }
 
-    static function get_by_reference($reference_array = null){
-        $return_array = array();
-        $all_items = static::get_all();
-        foreach($all_items as $item){
-            if(!empty($reference_array)) {
-                if (array_search((string)$item->reference, $reference_array) !== false) {
-                    $return_array[$item->reference][] = $item;
-                }
-            } else{
-                $return_array[$item->reference][] = $item;
-            }
-        }
-        return $return_array;
-    }
-
-    static function get_for_language($id, $language){
-        $initial_item = new static($id);
-        $all_items = static::get_all();
-        foreach($all_items as $item){
-            if($item->reference == $initial_item->reference && $item->language == $language){
+    /**
+     * @param $reference
+     * @return static|null
+     */
+    static function get_by_reference($reference){
+        $performance_items = static::get_all();
+        foreach($performance_items as $item){
+            if($item->reference == $reference) {
                 return $item;
             }
         }
-        return $initial_item;
+        return null;
     }
 }

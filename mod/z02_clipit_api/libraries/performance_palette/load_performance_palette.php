@@ -33,13 +33,12 @@ set_config(KEY_NAME, true);
 /**
  * Add Performance Items from an Excel file
  *
- * @param string $file_path Local file path
+ * @param string $file Local file path
  *
  * @return array|null Array of User IDs, or null if error.
  */
-function input_performance_palette_file($file_path) {
-    $php_excel = PHPExcel_IOFactory::load($file_path);
-    $performance_item_array = array();
+function input_performance_palette_file($file){
+    $php_excel = PHPExcel_IOFactory::load($file);
     $row_iterator = $php_excel->getSheet()->getRowIterator();
     while ($row_iterator->valid()) {
         parse_excel_row($row_iterator->current());
@@ -76,12 +75,12 @@ function parse_excel_row($row_iterator) {
 
     // name column
     $value = $cell_iterator->current()->getValue();
-    $prop_value_array["name"] = (string)$value;
+    $prop_value_array["item_name"] = (string)$value;
     $cell_iterator->next();
 
     // description column
     $value = $cell_iterator->current()->getValue();
-    $prop_value_array["description"] = (string)$value;
+    $prop_value_array["item_description"] = (string)$value;
     $cell_iterator->next();
 
     // example column
