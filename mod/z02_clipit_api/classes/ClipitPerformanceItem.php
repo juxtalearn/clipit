@@ -24,12 +24,9 @@ class ClipitPerformanceItem extends UBItem {
 
     /*
     Properties are disposed in arrays by language, in the following order:
-
     [0 => en, 1 => es, 2 => de, 3 => pt]
-
     To get the language index for a language code, use: get_language_index($lang_code);
-
-    E.g.: to get the Spanish translation of the Item's description: $item->description[get_language_index("es")]
+    E.g.: to get the Spanish translation of the Item's name: $item->item_name[get_language_index("es")]
     */
     public $reference = array();
     public $item_name = array();
