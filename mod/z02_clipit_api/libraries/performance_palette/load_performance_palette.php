@@ -22,13 +22,14 @@ if(get_config(KEY_NAME) === true) {
     return;
 }
 
+set_config(KEY_NAME, true);
+
 // Load Performance Palette for all languages
 input_performance_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/performance_palette/".FILE_NAME_EN);
 input_performance_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/performance_palette/".FILE_NAME_ES);
 input_performance_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/performance_palette/".FILE_NAME_DE);
 input_performance_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/performance_palette/".FILE_NAME_PT);
 
-set_config(KEY_NAME, true);
 
 /**
  * Add Performance Items from an Excel file
