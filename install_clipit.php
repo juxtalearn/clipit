@@ -227,7 +227,8 @@ echo exec("rmdir git_tmp");
 
 <p>configuring data folder and permissions...</p>
 <?php
-echo exec("mkdir data");
+// Already part of ClipIt
+#echo exec("mkdir data");
 echo exec("chmod -R 777 .");
 ?>
 
