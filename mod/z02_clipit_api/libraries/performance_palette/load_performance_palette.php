@@ -13,8 +13,8 @@
  */
 const FILE_NAME_EN = "performance_palette_en.xlsx";
 const FILE_NAME_ES = "performance_palette_es.xlsx";
-#const FILE_NAME_DE = "performance_palette_de.xlsx";
-#const FILE_NAME_PT = "performance_palette_pt.xlsx";
+const FILE_NAME_DE = "performance_palette_de.xlsx";
+const FILE_NAME_PT = "performance_palette_pt.xlsx";
 const KEY_NAME = "performance_palette";
 
 // Check if Performance Palette was already loaded.
@@ -25,8 +25,8 @@ if(get_config(KEY_NAME) === true) {
 // Load Performance Palette for all languages
 input_performance_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/performance_palette/".FILE_NAME_EN);
 input_performance_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/performance_palette/".FILE_NAME_ES);
-#input_performance_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/performance_palette/".FILE_NAME_DE);
-#input_performance_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/performance_palette/".FILE_NAME_PT);
+input_performance_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/performance_palette/".FILE_NAME_DE);
+input_performance_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/performance_palette/".FILE_NAME_PT);
 
 set_config(KEY_NAME, true);
 
