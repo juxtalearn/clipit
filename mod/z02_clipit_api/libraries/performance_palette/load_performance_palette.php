@@ -86,6 +86,7 @@ function parse_excel_row($row_iterator) {
     // example column
     $value = $cell_iterator->current()->getValue();
     $prop_value_array["example"] = (string)$value;
+    $cell_iterator->next();
 
     // category column
     $value = $cell_iterator->current()->getValue();
@@ -95,7 +96,6 @@ function parse_excel_row($row_iterator) {
     // category_description
     $value = $cell_iterator->current()->getValue();
     $prop_value_array["category_description"] = (string)$value;
-    $cell_iterator->next();
 
     // Add Performance Item to ClipIt
     ClipitPerformanceItem::create($prop_value_array);

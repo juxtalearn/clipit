@@ -23,8 +23,13 @@ class ClipitPerformanceItem extends UBItem {
     const SUBTYPE = "ClipitPerformanceTranslation";
 
     /*
-    Properties are disposed in arrays by language, in the following order: [0 => en, 1 => es, 2 => de, 3 => pt]
-    E.g.: to get the Spanish translation of the Item's description: $item->description[1]
+    Properties are disposed in arrays by language, in the following order:
+
+    [0 => en, 1 => es, 2 => de, 3 => pt]
+
+    To get the language index for a language code, use: get_language_index($lang_code);
+
+    E.g.: to get the Spanish translation of the Item's description: $item->description[get_language_index("es")]
     */
     public $reference = array();
     public $item_name = array();
@@ -41,7 +46,7 @@ class ClipitPerformanceItem extends UBItem {
      */
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
-        $this->reference = (string)$elgg_entity->get("reference");
+        $this->reference = (int)$elgg_entity->get("reference");
         $this->item_name = (array)$elgg_entity->get("item_name");
         $this->item_description = (array)$elgg_entity->get("item_description");
         $this->example = (array)$elgg_entity->get("example");
@@ -56,7 +61,7 @@ class ClipitPerformanceItem extends UBItem {
      */
     protected function copy_to_elgg($elgg_entity) {
         parent::copy_to_elgg($elgg_entity);
-        $elgg_entity->set("reference", (string)$this->reference);
+        $elgg_entity->set("reference", (int)$this->reference);
         $elgg_entity->set("item_name", (array)$this->item_name);
         $elgg_entity->set("item_description", (array)$this->item_description);
         $elgg_entity->set("example", (array)$this->example);
@@ -66,8 +71,10 @@ class ClipitPerformanceItem extends UBItem {
 
     static function create($prop_value_array){
         if(isset($prop_value_array["reference"])){
-            $item = static::get_by_reference($prop_value_array["reference"]);
-            return static::set_properties($item->id, $prop_value_array);
+            $item = static::get_by_reference((int)$prop_value_array["reference"]);
+            if(!empty($item)) {
+                return static::set_properties($item->id, $prop_value_array);
+            }
         }
         return static::set_properties(null, $prop_value_array);
     }
@@ -78,28 +85,11 @@ class ClipitPerformanceItem extends UBItem {
         }
 
         if(!isset($prop_value_array["language"])){
-            $lang_pos = 0;
+            $lang_index = 0;
         }else{
-            $language = $prop_value_array["language"];
-            switch ($language){
-                case "en":
-                    $lang_pos = 0;
-                    break;
-                case "es":
-                    $lang_pos = 1;
-                    break;
-                case "de":
-                    $lang_pos = 2;
-                    break;
-                case "pt":
-                    $lang_pos = 3;
-                    break;
-                default:
-                    $lang_pos = 0;
-            }
+            $lang_index = static::get_language_index($prop_value_array["language"]);
+            unset($prop_value_array["language"]);
         }
-
-        unset($prop_value_array["language"]);
 
         foreach($prop_value_array as $prop => $value) {
             if(!array_key_exists($prop, static::list_properties()) && $prop != "language") {
@@ -113,7 +103,9 @@ class ClipitPerformanceItem extends UBItem {
                     $prop,
                     array("item_name", "item_description", "example", "category", "category_description"))
                 !== false){
-                $item->$prop[$lang_pos] = $value;
+                $prop_array = (array)$item->$prop;
+                $prop_array[$lang_index] = $value;
+                $item->$prop = (array)$prop_array;
             } else {
                 $item->$prop = $value;
             }
@@ -125,23 +117,45 @@ class ClipitPerformanceItem extends UBItem {
         }
     }
 
+    static function get_language_index($language){
+        switch ($language){
+            case "en":
+                $lang_index = 0;
+                break;
+            case "es":
+                $lang_index = 1;
+                break;
+            case "de":
+                $lang_index = 2;
+                break;
+            case "pt":
+                $lang_index = 3;
+                break;
+            default:
+                $lang_index = 0;
+        }
+        return $lang_index;
+    }
+
     /**
      * Gets all Items by category, or all items grouped by category if no category is specified.
      *
      * @param string $category
+     * @param string $language
      *
      * @return static[] Array of Items for the specified category
      */
-    static function get_by_category($category = null) {
+    static function get_by_category($category = null, $language = "en") {
         $performance_items = static::get_all();
         $category_array = array();
+        $lang_index = static::get_language_index($language);
         if (empty($category)) {
             foreach ($performance_items as $performance_item) {
-                $category_array[$performance_item->category[0]][] = $performance_item;
+                $category_array[$performance_item->category[$lang_index]][] = $performance_item;
             }
         } else {
             foreach ($performance_items as $performance_item) {
-                if ($performance_item->category[0] == $category) {
+                if ($performance_item->category[$lang_index] == $category) {
                     $category_array[] = $performance_item;
                 }
             }
@@ -156,7 +170,7 @@ class ClipitPerformanceItem extends UBItem {
     static function get_by_reference($reference){
         $performance_items = static::get_all();
         foreach($performance_items as $item){
-            if($item->reference == $reference) {
+            if((int)$item->reference == (int)$reference) {
                 return $item;
             }
         }
