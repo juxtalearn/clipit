@@ -21,7 +21,7 @@ function expose_remote_resource_functions() {
     expose_common_functions($api_suffix, $class_suffix);
     expose_function(
         $api_suffix . "delete_from_site", $class_suffix . "delete_from_site",
-        array("remote_site_url" => array("type" => "string", "required" => true)),
+        array("remote_site" => array("type" => "string", "required" => true)),
         "Delete all Remote Resources from a Remote Site", "POST",
         false, true
     );
