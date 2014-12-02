@@ -94,7 +94,7 @@ if (!function_exists('session_status')) {
         <h1>ClipIt Install Script</h1>
         <h2>ClipIt is being downloaded</h2>
         <p>This process will take a few minutes, please don't close this page</p>
-        <p><iframe width="640" height="480" src="//www.youtube.com/embed/8lTAdtT1nFc?list=PLWkekcVMbGl1I5WML5YAHLGrachI1gpGN" frameborder="0" allowfullscreen></iframe></p>
+        <p><iframe width="640" height="480" src="//www.youtube.com/embed/8lTAdtT1nFc" frameborder="0" allowfullscreen></iframe></p>
 
     <?php
     } else {
