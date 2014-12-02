@@ -17,6 +17,27 @@ class ClipitRemoteSite extends UBItem{
     public $storyboard_array = array();
     public $resource_array = array();
 
+    protected function copy_from_elgg($elgg_entity) {
+        parent::copy_from_elgg($elgg_entity);
+        $this->file_array = (array)static::get_files($this->id);
+        $this->video_array = (array)static::get_videos($this->id);
+        $this->storyboard_array = (array)static::get_storyboards($this->id);
+        $this->resource_array = (array)static::get_resources($this->id);
+    }
+
+    /**
+     * Saves Site parameters into Elgg
+     * @return int Site ID
+     */
+    protected function save() {
+        parent::save();
+        static::set_files($this->id, $this->file_array);
+        static::set_videos($this->id, $this->video_array);
+        static::set_storyboards($this->id, $this->storyboard_array);
+        static::set_resources($this->id, $this->resource_array);
+        return $this->id;
+    }
+
     /**
      * @param $url
      * @return static|null
