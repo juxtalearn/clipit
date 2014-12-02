@@ -93,7 +93,7 @@ if (!function_exists('session_status')) {
         ?>
         <h1>ClipIt Install Script</h1>
         <h2>ClipIt is being downloaded</h2>
-        <p>Please enjoy the ClipIt Intro Video while ClipIt is being installed</p>
+        <p>Enjoy the ClipIt Intro Video while ClipIt is being installed :)</p>
         <p><iframe width="640" height="480" src="//www.youtube.com/embed/8lTAdtT1nFc" frameborder="0" allowfullscreen></iframe></p>
         <p>The install process will take a few minutes, <b>please don't close this page</b></p>
 
