@@ -86,7 +86,14 @@ class ClipitRemoteResource extends UBItem {
         return true;
     }
 
-    static function delete_by_remote_type($remote_site_url, $remote_type_array){
-        
+    static function delete_from_site($remote_site_url){
+        $remote_site_id = ClipitRemoteSite::get_from_url($remote_site_url);
+        $resource_array = static::get_all();
+        foreach($resource_array as $resource){
+            if((int)$resource->remote_site == (int)$remote_site_id){
+                $delete_array[] = $resource->id;
+            }
+        }
+        return static::delete_by_id($delete_array);
     }
 }
