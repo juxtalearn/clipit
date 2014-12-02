@@ -31,7 +31,7 @@ class ClipitRemoteResource extends UBItem {
         parent::copy_from_elgg($elgg_entity);
         $this->remote_id = (array)$elgg_entity->get("remote_id");
         $this->remote_type = (array)$elgg_entity->get("remote_type");
-        $this->remote_site = static::get_remote_site($this->id);
+        $this->remote_site = (int)$elgg_entity->get("remote_site");
     }
 
     /**
@@ -43,6 +43,7 @@ class ClipitRemoteResource extends UBItem {
         parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("remote_id", (array)$this->remote_id);
         $elgg_entity->set("remote_type", (array)$this->remote_type);
+        $elgg_entity->set("remote_site", (int)ClipitRemoteSite::get_from_url($this->remote_site)->id);
     }
 
     static function create($remote_site_url, $prop_value_array){

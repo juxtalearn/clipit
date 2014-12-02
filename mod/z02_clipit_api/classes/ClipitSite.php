@@ -293,13 +293,22 @@ class ClipitSite extends UBSite {
     // ClipIt Global (to be called from SITE)
 
     static function rest_api_call($url, $data, $type = "POST"){
-        $data += array("remote_site_url" => elgg_get_site_url());
         $params = array(
             'http'=> array(
                 "method" => $type,
                 "content" => $data));
         $context = stream_context_create($params);
         return file_get_contents($url, false, $context);
+    }
+
+    static function publish_to_global(){
+        $clipit_global_url = get_config("clipit_global");
+        $site = new static();
+        $data = array("method" => "clipit.remote_site.create");
+        $data += array("name" => $site->name);
+        $data += array("description" => $site->description);
+        $data += array("url" => $site->url);
+        static::rest_api_call($clipit_global_url, $data, "POST");
     }
 
     static function add_global_resources($resource_object_array){
@@ -311,6 +320,7 @@ class ClipitSite extends UBSite {
             $data += array("name" => $resource->name);
             $data += array("description" => $resource->description);
             $data += array("url" => $resource->url);
+            $data += array("remote_site" => elgg_get_site_url());
             static::rest_api_call($clipit_global_url, $data, "POST");
         }
         return true;

@@ -17,6 +17,10 @@ class ClipitRemoteSite extends UBItem{
     public $storyboard_array = array();
     public $resource_array = array();
 
+    /**
+     * @param $url
+     * @return static|null
+     */
     static function get_from_url($url){
         $remote_site_array = static::get_all();
         foreach($remote_site_array as $remote_site){
