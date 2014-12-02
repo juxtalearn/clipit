@@ -25,7 +25,7 @@ class ClipitRemoteSite extends UBItem{
         $remote_site_array = static::get_all();
         foreach($remote_site_array as $remote_site){
             if((string)$remote_site->url == (string)$url){
-                return $remote_site->id;
+                return $remote_site;
             }
         }
         return null;

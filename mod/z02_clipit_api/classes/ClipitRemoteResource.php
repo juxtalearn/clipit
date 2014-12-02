@@ -29,8 +29,8 @@ class ClipitRemoteResource extends UBItem {
      */
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
-        $this->remote_id = (array)$elgg_entity->get("remote_id");
-        $this->remote_type = (array)$elgg_entity->get("remote_type");
+        $this->remote_id = (int)$elgg_entity->get("remote_id");
+        $this->remote_type = (string)$elgg_entity->get("remote_type");
         $this->remote_site = (int)$elgg_entity->get("remote_site");
     }
 
@@ -41,14 +41,14 @@ class ClipitRemoteResource extends UBItem {
      */
     protected function copy_to_elgg($elgg_entity) {
         parent::copy_to_elgg($elgg_entity);
-        $elgg_entity->set("remote_id", (array)$this->remote_id);
-        $elgg_entity->set("remote_type", (array)$this->remote_type);
-        $elgg_entity->set("remote_site", (int)ClipitRemoteSite::get_from_url($this->remote_site)->id);
+        $elgg_entity->set("remote_id", (int)$this->remote_id);
+        $elgg_entity->set("remote_type", (string)$this->remote_type);
+        $elgg_entity->set("remote_site", (int)$this->remote_site);
     }
 
     static function create($prop_value_array){
         $remote_site = ClipitRemoteSite::get_from_url($prop_value_array["remote_site"]);
-        $prop_value_array["remote_site"] = (int)$remote_site;
+        $prop_value_array["remote_site"] = (int)$remote_site->id;
         $id = parent::create($prop_value_array);
         switch($prop_value_array["remote_type"]){
             case ClipitFile::SUBTYPE:
