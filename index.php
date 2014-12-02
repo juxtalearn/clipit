@@ -33,7 +33,7 @@ if (!function_exists('session_status')) {
         ?>
         <h1>ClipIt Install Script</h1>
         <h2>fill in the form below<br/>(recommended values already added)</h2>
-        <form action="install_clipit.php" method="post" id="clipit_params">
+        <form action="index.php" method="post" id="clipit_params">
             <table>
                 <tr>
                     <td>
@@ -89,7 +89,7 @@ if (!function_exists('session_status')) {
     if ($_SESSION["status"] == "wait") {
         $_SESSION = $_POST;
         $_SESSION["status"] = "install";
-        header("Refresh:0; url=install_clipit.php", true, 303);
+        header("Refresh:0; url=index.php", true, 303);
         ?>
         <h1>ClipIt Install Script</h1>
         <h2>ClipIt is being downloaded</h2>
@@ -117,8 +117,8 @@ if (!function_exists('session_status')) {
     <p>cloning github repository...</p>
     <?php
     echo exec("git clone -b $clipit_tag --recursive $git_url git_tmp");
-    echo exec("mv -f git_tmp/* .");
     echo exec("mv -f git_tmp/.* .");
+    echo exec("mv -f git_tmp/* .");
     echo exec("rmdir git_tmp");
     ?>
 
