@@ -27,7 +27,8 @@ if(!$storyboards){
     )))));
 }
 // Group id get parameter
-if($group_id = get_input('group_id')){
+if(get_input('group_id')){
+    $group_id = get_input('group_id');
     $object = ClipitSite::lookup($group_id);
     $status = get_task_status($task, $group_id);
     $storyboard = array($status['result']);
@@ -60,7 +61,7 @@ if($status['status'] === true || $task->end <= time()){
             'href'      => "clipit_activity/{$activity->id}/group/{$group_id}/repository",
             'task_id'   => $task->id,
             'rating'    => false,
-            'actions'   => true,
+            'actions'   => false,
             'publish'   => true,
             'total_comments' => false,
         ));

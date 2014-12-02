@@ -20,6 +20,11 @@ elgg_register_menu_item('tricky_topic:menu', array(
     'text' => elgg_echo('tags'),
     'href' => "tricky_topics/stumbling_blocks",
 ));
+elgg_register_menu_item('tricky_topic:menu', array(
+    'name' => 'student_problems',
+    'text' => elgg_echo('student_problems'),
+    'href' => "tricky_topics/student_problems",
+));
 
 echo elgg_view_menu('tricky_topic:menu', array(
     'sort_by' => 'register',

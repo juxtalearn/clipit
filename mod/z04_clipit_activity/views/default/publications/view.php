@@ -16,6 +16,7 @@ $group = elgg_extract("group", $vars);
 $comments = elgg_extract("comments", $vars);
 $user_loggedin_id = elgg_get_logged_in_user_guid();
 $user_logged = array_pop(ClipitUser::get_by_id(array($user_loggedin_id)));
+$language_index = ClipitPerformanceItem::get_language_index(get_current_language());
 
 $tags = $entity->tag_array;
 $performance_average = ClipitPerformanceRating::get_average_target_rating($entity->id);
@@ -46,7 +47,8 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
                                 </div>
                             <?php endif;?>
                             <small class="show">
-                                <strong>Published on</strong> <?php echo htmlspecialchars(date(elgg_echo('friendlytime:date_format'), $entity->time_created));?>
+                                <strong>Published on</strong>
+                                <?php echo htmlspecialchars(date(elgg_echo('friendlytime:date_format'), $entity->time_created));?>
                                 (<?php echo elgg_view('output/friendlytime', array('time' => $entity->time_created));?>)
                             </small>
                         </div>
@@ -106,9 +108,9 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
                                 </div>
                                 <h5 class="text-truncate blue" style="margin: 5px 0;">
                                     <?php echo elgg_view('output/url', array(
-                                        'title' => $performance_item->name,
+                                        'title' => $performance_item->item_name[$language_index],
                                         'href'  => "explore/search?by=performance_item&id=".$performance_item->id,
-                                        'text'  => $performance_item->name,
+                                        'text'  => $performance_item->item_name[$language_index],
                                     ));
                                     ?>
                                 </h5>
