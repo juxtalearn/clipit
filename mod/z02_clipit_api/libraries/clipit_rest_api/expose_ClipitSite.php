@@ -181,7 +181,9 @@ function expose_site_functions() {
         "GET",
         false,
         true);
-
+    expose_function($api_suffix . "publish_to_global",
+        $class_suffix . "publish_to_global",
+        null, "Publish local Site to Global Site", "POST", false, true);
     expose_function($api_suffix . "add_pub_storyboards",
         $class_suffix . "add_pub_storyboards",
         array("storyboard_array" => array("type" => "array", "required" => true)),

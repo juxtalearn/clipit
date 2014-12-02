@@ -308,7 +308,7 @@ class ClipitSite extends UBSite {
         $data += array("name" => $site->name);
         $data += array("description" => $site->description);
         $data += array("url" => $site->url);
-        static::rest_api_call($clipit_global_url, $data, "POST");
+        return static::rest_api_call($clipit_global_url, $data, "POST");
     }
 
     static function add_global_resources($resource_object_array){
