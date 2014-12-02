@@ -47,6 +47,8 @@ class ClipitRemoteResource extends UBItem {
     }
 
     static function create($prop_value_array){
+        var_dump($prop_value_array["remote_site"]);
+
         $remote_site = ClipitRemoteSite::get_from_url($prop_value_array["remote_site"]);
         $prop_value_array["remote_site"] = (int)$remote_site;
         $id = parent::create($prop_value_array);
