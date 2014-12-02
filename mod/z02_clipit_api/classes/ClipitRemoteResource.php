@@ -79,8 +79,8 @@ class ClipitRemoteResource extends UBItem {
     }
 
     static function delete_by_remote_id($remote_site_url, $remote_id_array){
-        $remote_site_id = ClipitRemoteSite::get_from_url($remote_site_url);
-        $remote_resource_array = static::get_by_remote_id($remote_site_id, $remote_id_array);
+        $remote_site = ClipitRemoteSite::get_from_url($remote_site_url);
+        $remote_resource_array = static::get_by_remote_id($remote_site->id, $remote_id_array);
         foreach($remote_id_array as $remote_id){
             static::delete_by_id($remote_resource_array[$remote_id]);
         }
@@ -88,10 +88,11 @@ class ClipitRemoteResource extends UBItem {
     }
 
     static function delete_from_site($remote_site_url){
-        $remote_site_id = ClipitRemoteSite::get_from_url($remote_site_url);
+        $remote_site = ClipitRemoteSite::get_from_url($remote_site_url);
         $resource_array = static::get_all();
+        $delete_array = array();
         foreach($resource_array as $resource){
-            if((int)$resource->remote_site == (int)$remote_site_id){
+            if((int)$resource->remote_site == (int)$remote_site->id){
                 $delete_array[] = $resource->id;
             }
         }
