@@ -254,7 +254,7 @@ class ClipitSite extends UBSite {
 
     // ClipIt Global (to be called from SITE)
 
-    static function global_site_call($data, $type = "POST"){
+    static function global_site_call($data, $type = "GET"){
         $clipit_global_url = get_config("clipit_global_url");
         $clipit_global_user = get_config("clipit_global_login");
         $clipit_global_password = get_config("clipit_global_password");
@@ -292,7 +292,7 @@ class ClipitSite extends UBSite {
     static function update_global_resources(){
         $data = array("method" => "clipit.remote_resource.delete_from_site");
         $data += array("remote_site" => elgg_get_site_url());
-        static::global_site_call($data, "POST");
+        var_dump(static::global_site_call($data, "POST")); die;
         $pub_resource_array = array();
         $pub_resource_array += ClipitVideo::get_by_id(static::get_pub_videos());
         $pub_resource_array += ClipitStoryboard::get_by_id(static::get_pub_storyboards());
@@ -306,7 +306,6 @@ class ClipitSite extends UBSite {
             $data += array("prop_value_array[name]" => $resource_object->name);
             $data += array("prop_value_array[description]" => $resource_object->description);
             $data += array("prop_value_array[url]" => $resource_object->url);
-            var_dump($data); die;
             static::global_site_call($data, "POST");
         }
         return true;
