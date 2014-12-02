@@ -409,6 +409,21 @@ class ElggInstaller {
                 'value' => 'Europe/Madrid',
                 'required' => TRUE,
             ),
+            "clipit_global_url" => array(
+                "type" => "text",
+                "value" => "http://clipit.es/landing/services/api/rest/json/",
+                "required" => TRUE,
+            ),
+            "clipit_global_login" => array(
+                "type" => "text",
+                "value" => "root",
+                "required" => TRUE,
+            ),
+            "clipit_global_password" => array(
+                "type" => "text",
+                "value" => "root1!",
+                "required" => TRUE,
+            ),
             'jxl_secret' => array(
                 'type' => 'text',
                 'value' => '0123456789abcdef0123456789abcdef',
@@ -1452,6 +1467,9 @@ class ElggInstaller {
         set_config('walled_garden', TRUE, $site->getGUID());
         set_config('allow_user_default_access', '', $site->getGUID());
         set_config('timezone', $submissionVars['timezone'], $site->getGUID());
+        set_config('clipit_global_url', $submissionVars['clipit_global_url'], $site->getGUID());
+        set_config('clipit_global_login', $submissionVars['clipit_global_login'], $site->getGUID());
+        set_config('clipit_global_password', $submissionVars['clipit_global_password'], $site->getGUID());
         set_config('jxl_secret', $submissionVars['jxl_secret'], $site->getGUID());
         set_config('la_metrics_class', $submissionVars['la_metrics_class'], $site->getGUID());
         set_config('recommendations_class', $submissionVars['recommendations_class'], $site->getGUID());

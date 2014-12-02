@@ -292,7 +292,7 @@ class ClipitSite extends UBSite {
     static function update_global_resources(){
         $data = array("method" => "clipit.remote_resource.delete_from_site");
         $data += array("remote_site" => elgg_get_site_url());
-        var_dump(static::global_site_call($data, "POST")); die;
+        static::global_site_call($data, "POST");
         $pub_resource_array = array();
         $pub_resource_array += ClipitVideo::get_by_id(static::get_pub_videos());
         $pub_resource_array += ClipitStoryboard::get_by_id(static::get_pub_storyboards());
