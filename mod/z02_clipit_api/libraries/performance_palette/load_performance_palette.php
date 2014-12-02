@@ -13,8 +13,8 @@
  */
 const FILE_NAME_EN = "performance_palette_en.xlsx";
 const FILE_NAME_ES = "performance_palette_es.xlsx";
-#const FILE_NAME_DE = "performance_palette_de.xlsx";
-#const FILE_NAME_PT = "performance_palette_pt.xlsx";
+const FILE_NAME_DE = "performance_palette_de.xlsx";
+const FILE_NAME_PT = "performance_palette_pt.xlsx";
 const KEY_NAME = "performance_palette";
 
 // Check if Performance Palette was already loaded.
@@ -22,13 +22,14 @@ if(get_config(KEY_NAME) === true) {
     return;
 }
 
+set_config(KEY_NAME, true);
+
 // Load Performance Palette for all languages
 input_performance_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/performance_palette/".FILE_NAME_EN);
 input_performance_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/performance_palette/".FILE_NAME_ES);
-#input_performance_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/performance_palette/".FILE_NAME_DE);
-#input_performance_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/performance_palette/".FILE_NAME_PT);
+input_performance_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/performance_palette/".FILE_NAME_DE);
+input_performance_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/performance_palette/".FILE_NAME_PT);
 
-set_config(KEY_NAME, true);
 
 /**
  * Add Performance Items from an Excel file
@@ -86,6 +87,7 @@ function parse_excel_row($row_iterator) {
     // example column
     $value = $cell_iterator->current()->getValue();
     $prop_value_array["example"] = (string)$value;
+    $cell_iterator->next();
 
     // category column
     $value = $cell_iterator->current()->getValue();
@@ -95,7 +97,6 @@ function parse_excel_row($row_iterator) {
     // category_description
     $value = $cell_iterator->current()->getValue();
     $prop_value_array["category_description"] = (string)$value;
-    $cell_iterator->next();
 
     // Add Performance Item to ClipIt
     ClipitPerformanceItem::create($prop_value_array);
