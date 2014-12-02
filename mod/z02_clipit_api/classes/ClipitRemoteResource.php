@@ -46,9 +46,10 @@ class ClipitRemoteResource extends UBItem {
         $elgg_entity->set("remote_site", (int)ClipitRemoteSite::get_from_url($this->remote_site)->id);
     }
 
-    static function create($remote_site_url, $prop_value_array){
+    static function create($prop_value_array){
+        $remote_site = ClipitRemoteSite::get_from_url($prop_value_array["remote_site"]);
+        $prop_value_array["remote_site"] = (int)$remote_site;
         $id = parent::create($prop_value_array);
-        $remote_site = ClipitRemoteSite::get_from_url($remote_site_url, true);
         switch($prop_value_array["remote_type"]){
             case ClipitFile::SUBTYPE:
                 ClipitRemoteSite::add_files($remote_site->id, array($id));
