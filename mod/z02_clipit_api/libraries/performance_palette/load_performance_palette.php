@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
