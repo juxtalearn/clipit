@@ -933,6 +933,37 @@ h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
   }
 }
 //
+// jQuery UI - Autocomplete Tags mod
+// --------------------------------------------------
+ul.tags-autocomplete{
+  display: inline-block;
+  background-color: #fff;
+  overflow: hidden;
+  cursor: default;
+  font-size: 14px;
+  .box-shadow(0 6px 12px rgba(0,0,0,0.2));
+  padding: 3px;
+  width: auto !important;
+  > li{
+    margin: 0;
+    list-style: none;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    > a{
+      display: block;
+      text-decoration: none !important;
+      padding: 3px;
+      padding-left: 10px;
+      font-weight: bold;
+      &:hover,
+      &:focus{
+        background: @blue_clipit;
+        color: #fff;
+      }
+    }
+  }
+}
+//
 // jQuery UI - Slider
 // --------------------------------------------------
 .ui-slider-horizontal{

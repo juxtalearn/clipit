@@ -11,7 +11,7 @@
  * @package         ClipIt
  */
 ?>
-<div class="col-md-6 form-group">
+<div class="col-md-6TEST form-group">
     <?php echo elgg_view('output/url', array(
         'href'  => "javascript:;",
         'title' => elgg_echo('remove'),

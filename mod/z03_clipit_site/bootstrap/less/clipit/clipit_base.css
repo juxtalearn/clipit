@@ -10988,6 +10988,35 @@ h6,
   height: 100%;
   line-height: 35px;
 }
+ul.tags-autocomplete {
+  display: inline-block;
+  background-color: #fff;
+  overflow: hidden;
+  cursor: default;
+  font-size: 14px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  padding: 3px;
+  width: auto !important;
+}
+ul.tags-autocomplete > li {
+  margin: 0;
+  list-style: none;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+ul.tags-autocomplete > li > a {
+  display: block;
+  text-decoration: none !important;
+  padding: 3px;
+  padding-left: 10px;
+  font-weight: bold;
+}
+ul.tags-autocomplete > li > a:hover,
+ul.tags-autocomplete > li > a:focus {
+  background: #32b4e5;
+  color: #fff;
+}
 .ui-slider-horizontal {
   position: relative;
   text-align: left;

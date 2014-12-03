@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 $english = array(
+    'tricky_topic:create' => 'Create Tricky Topic',
     'author' => 'Author',
     'tricky_topics' => 'Tricky Topics',
     'student_problems' => 'Student problems',

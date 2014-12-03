@@ -44,32 +44,7 @@ $(function(){
         $("#select-tricky-topic").toggle();
         $("#form-add-tricky-topic").toggle().find("input:first").focus();
     });
-    $(document).on("click", "#add-tag", function(){
-        $("#form-add-tags").append(<?php echo json_encode(elgg_view("tricky_topic/add"));?>);
-        $(".input-tag:last").focus().autocomplete(tags_autocomplete);
-    });
-    var tags_autocomplete = {
-        source: function (request, response) {
-            elgg.getJSON(
-                "ajax/view/tricky_topic/tags/search",{
-                    data: {q: request.term},
-                    success: function(data){
-                        response(data);
-                    }
-                }
-            );
-        },
-        select: function( event, ui ) {
-            event.preventDefault();
-            this.value = ui.item.label;
-        },
-        focus: function(event, ui) {
-            event.preventDefault();
-            this.value = ui.item.label;
-        },
-        minLength: 2
-    };
-    $(".input-tag").autocomplete(tags_autocomplete);
+
 });
 </script>
 <style>

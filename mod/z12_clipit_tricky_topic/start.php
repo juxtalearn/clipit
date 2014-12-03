@@ -13,6 +13,7 @@
 elgg_register_event_handler('init', 'system', 'clipit_ttt_init');
 
 function clipit_ttt_init() {
+
     // Register "/ttq" page handler
     elgg_register_page_handler('tricky_topics', 'tt_page_handler');
     $plugin_dir = elgg_get_plugins_path() . "z12_clipit_tricky_topic";
@@ -20,6 +21,8 @@ function clipit_ttt_init() {
     elgg_register_ajax_view('examples/list');
 
     elgg_register_action("stumbling_blocks/link", "{$plugin_dir}/actions/stumbling_blocks/link.php");
+
+    elgg_extend_view("js/activity", "js/tricky_topic");
 }
 
 /**
@@ -58,7 +61,9 @@ function tt_page_handler($page){
         case 'create':
             // Create Tricky Topic
             $filter = '';
+            elgg_push_breadcrumb(elgg_echo('tricky_topics'), "tricky_topics");
             $title = elgg_echo('tricky_topic:create');
+            elgg_push_breadcrumb($title);
             $content = elgg_view_form('tricky_topic/create');
             break;
         case 'view':

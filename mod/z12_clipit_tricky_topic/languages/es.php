@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 $spanish = array(
+    'tricky_topic:create' => 'Crear Tema',
     'author' => 'Autor',
     'tricky_topics' => 'Temas',
     'student_problems' => 'Problemas encontrados',
