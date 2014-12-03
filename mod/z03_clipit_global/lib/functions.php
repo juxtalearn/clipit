@@ -7,31 +7,17 @@
  * To change this template use File | Settings | File Templates.
  */
 
-function get_video_thumbnail($url, $size){
-    $data = video_url_parser($url);
-    if($data['provider'] == 'youtube'){
-        switch($size){
-            case 'large':
-                $size = 'maxresdefault';
-                break;
-            case 'normal':
-                $size = 'mqdefault';
-                break;
-            case 'small':
-                $size = 'default';
-                break;
-        }
-        return "http://i1.ytimg.com/vi/".$data['id']."/".$size.".jpg";
+function format_file_size($bytes) {
+    $bytes = (int)$bytes;
+    if ($bytes >= 1000000000) {
+        return round(($bytes / 1000000000), 2) . ' GB';
     }
-}
-function get_acronym($title){
-    $words = explode(" ", $title);
-    $acronym = "";
-    foreach ($words as $w) {
-        $acronym .= $w[0];
+    if ($bytes >= 1000000) {
+        return round(($bytes / 1000000), 2) . ' MB';
     }
-    return $acronym;
+    return round(($bytes / 1000), 2) . ' KB';
 }
+
 /**
  * Obtain friendly time (past|future)
  *
@@ -236,6 +222,6 @@ function clipit_get_pagination($params){
         'offset' => clipit_get_offset(),
         'limit' => clipit_get_limit()
     );
-    $params = array_merge($params, $defaults);
+    $params = array_merge($defaults, $params);
     return elgg_view("navigation/pagination", $params);
 }
