@@ -286,7 +286,7 @@ class ClipitSite extends UBSite {
         $data += array("prop_value_array[description]" => $site->description);
         $data += array("prop_value_array[url]" => $site->url);
         static::global_site_call($data, "POST");
-        static::update_global_resources();
+        return static::update_global_resources();
     }
 
     static function update_global_resources(){
