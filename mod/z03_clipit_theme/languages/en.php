@@ -5,6 +5,7 @@
  */
 
 $english = array(
+    'menu' => 'Menu',
     'show' => 'Show',
     'showing' => 'Showing',
     'to' => 'to',

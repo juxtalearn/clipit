@@ -5,6 +5,7 @@
  */
 
 $spanish = array(
+    'menu' => 'Menú',
     'show' => 'Mostrar',
     'showing' => 'Mostrando',
     'to' => 'a',

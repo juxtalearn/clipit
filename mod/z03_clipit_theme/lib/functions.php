@@ -210,6 +210,6 @@ function clipit_get_pagination($params){
         'offset' => clipit_get_offset(),
         'limit' => clipit_get_limit()
     );
-    $params = array_merge($params, $defaults);
+    $params = array_merge($defaults, $params);
     return elgg_view("navigation/pagination", $params);
 }

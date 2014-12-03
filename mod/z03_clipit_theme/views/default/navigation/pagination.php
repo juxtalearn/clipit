@@ -10,13 +10,11 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-
 $offset = abs((int) elgg_extract('offset', $vars, 0));
 // because you can say $vars['limit'] = 0
-if (!$limit = (int) elgg_extract('limit', $vars, 10)) {
-    $limit = 10;
-}
+$limit = (int)elgg_extract('limit', $vars, 10);
 $count = (int) elgg_extract('count', $vars, 0);
+
 $offset_key = elgg_extract('offset_key', $vars, 'offset');
 // some views pass an empty string for base_url
 if (isset($vars['base_url']) && $vars['base_url']) {
