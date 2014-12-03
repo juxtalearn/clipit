@@ -39,10 +39,7 @@ function loadFiles($path) {
     $obj_files = elgg_get_file_list($path, array(), array(), array(".php"));
     foreach ($obj_files as $obj) {
         elgg_log("Loading $obj...");
-        if (!include_once($obj)) {
-            $msg = "Could not load $obj";
-            throw new InstallationException($msg);
-        }
+        include_once($obj);
     }
     return true;
 }

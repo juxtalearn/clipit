@@ -416,12 +416,12 @@ class ElggInstaller {
             ),
             "clipit_global_login" => array(
                 "type" => "text",
-                "value" => "root",
+                "value" => "admin",
                 "required" => TRUE,
             ),
             "clipit_global_password" => array(
                 "type" => "text",
-                "value" => "root1!",
+                "value" => "admin1!",
                 "required" => TRUE,
             ),
             'jxl_secret' => array(

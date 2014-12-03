@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
@@ -29,7 +30,6 @@ input_performance_palette_file(elgg_get_plugins_path() . "z02_clipit_api/librari
 input_performance_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/performance_palette/".FILE_NAME_ES);
 input_performance_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/performance_palette/".FILE_NAME_DE);
 input_performance_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/performance_palette/".FILE_NAME_PT);
-
 
 /**
  * Add Performance Items from an Excel file
