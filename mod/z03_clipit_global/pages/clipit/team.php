@@ -56,7 +56,7 @@ $english = array(
 );
 add_translation('en', $english);
 
-$images_dir = "mod/z03_clipit_theme_global/graphics/team/";
+$images_dir = "mod/z03_clipit_global/graphics/team/";
 
 $team_members = array(
     'blue' => array(

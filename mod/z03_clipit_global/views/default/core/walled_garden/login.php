@@ -11,9 +11,9 @@ $menu = elgg_view_menu('walled_garden', array(
 	'class' => 'elgg-menu-general elgg-menu-hz',
 ));
 $login_box = elgg_view('core/account/login_box', array('module' => 'walledgarden-login'));
-$plugin = elgg_get_plugin_from_id('z03_clipit_theme');
+$plugin = elgg_get_plugin_from_id('z03_clipit_site');
 $vars = $plugin->getAllSettings();
-$vars['img_path'] = $CONFIG->wwwroot."mod/z03_clipit_theme_global/graphics/";
+$vars['img_path'] = $CONFIG->wwwroot."mod/z03_clipit_global/graphics/";
 $vars['bg_img'] = $vars['img_path']."icons/".$vars['bg_img'];
 $vars['logo_img'] = $vars['img_path']."icons/".$vars['logo_img'];
 ?>

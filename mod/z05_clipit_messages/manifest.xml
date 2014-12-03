@@ -20,5 +20,9 @@
         <type>plugin</type>
         <name>z02_clipit_api</name>
     </requires>
+    <requires>
+        <type>plugin</type>
+        <name>z03_clipit_site</name>
+    </requires>
     <activate_on_install>true</activate_on_install>
 </plugin_manifest>

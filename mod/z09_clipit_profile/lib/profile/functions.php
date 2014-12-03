@@ -14,7 +14,7 @@ function get_avatar($user_entity, $size = 'medium'){
     if($avatar_file = $user_entity->avatar_file){
         return "file/thumbnail/{$size}/{$user_entity->avatar_file}";
     } else {
-        return "mod/z03_clipit_theme/graphics/icons/user/default{$size}.gif";
+        return "mod/z03_clipit_site/graphics/icons/user/default{$size}.gif";
     }
 }
 function get_avatar_url($user_entity, $size = 'medium'){

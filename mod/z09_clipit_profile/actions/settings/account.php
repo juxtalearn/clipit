@@ -15,7 +15,7 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
 // Set language
 set_input('lang', get_input('language'));
 set_input('no_forward', true);
-include(elgg_get_plugins_path() . 'z03_clipit_theme/actions/language/set.php');
+include(elgg_get_plugins_path() . 'z03_clipit_site/actions/language/set.php');
 // Set user properties
 $name = strip_tags(get_input('name'));
 $email = get_input('email');

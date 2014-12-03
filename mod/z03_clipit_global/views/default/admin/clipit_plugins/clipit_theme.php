@@ -1,5 +1,5 @@
 <?php
-$plugin = elgg_get_plugin_from_id('z03_clipit_theme');
+$plugin = elgg_get_plugin_from_id('z03_clipit_site');
 
 
 $form.= "<p><label>Mensaje principal</label>";
@@ -22,7 +22,7 @@ $form.= "<label>Logotipo</label>";
 $form.= '
 <div style="float:right;margin:0px;">
     <label style="color: #CCC;display: block;margin-top: -5px;text-align:right;">Logotipo</label>
-    <img src="'.$CONFIG->wwwroot."mod/z03_clipit_theme/graphics/icons/".$plugin->logo_img.'" style="max-height:50px;max-width:340px;">
+    <img src="'.$CONFIG->wwwroot."mod/z03_clipit_site/graphics/icons/".$plugin->logo_img.'" style="max-height:50px;max-width:340px;">
 </div>
 ';
 $form.= "<p>";
@@ -36,7 +36,7 @@ $form.= '
 <label>Imagen de fondo (subir imagen con desenfoque)</label>
 <a style="float: right;width: 340px;height: 70px;overflow: hidden;position: relative;">
     <label style="display: block;position: absolute;padding: 5px;right: 0;color: #FFF;">Imagen de fondo</label>
-    <img src="'.$CONFIG->wwwroot."mod/z03_clipit_theme/graphics/icons/".$plugin->bg_img.'" style="max-width: 100%;min-height: 100%;">
+    <img src="'.$CONFIG->wwwroot."mod/z03_clipit_site/graphics/icons/".$plugin->bg_img.'" style="max-width: 100%;min-height: 100%;">
 </a>
 ';
 $form.= "<p>";
@@ -118,6 +118,6 @@ $form.= '</div>';
 $form.= '</div>';
 $form .= "<br>" . elgg_view('input/submit', array('value' => elgg_echo("save")));
 
-$action = $vars['url'] . 'action/z03_clipit_theme/settings';
+$action = $vars['url'] . 'action/z03_clipit_site/settings';
 
 echo elgg_view('input/form', array('action' => $action, 'body' => $form, 'enctype' => 'multipart/form-data'));

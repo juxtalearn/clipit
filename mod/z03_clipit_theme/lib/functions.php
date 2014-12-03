@@ -6,6 +6,18 @@
  * Time: 10:44
  * To change this template use File | Settings | File Templates.
  */
+
+function format_file_size($bytes) {
+    $bytes = (int)$bytes;
+    if ($bytes >= 1000000000) {
+        return round(($bytes / 1000000000), 2) . ' GB';
+    }
+    if ($bytes >= 1000000) {
+        return round(($bytes / 1000000), 2) . ' MB';
+    }
+    return round(($bytes / 1000), 2) . ' KB';
+}
+
 /**
  * Obtain friendly time (past|future)
  *

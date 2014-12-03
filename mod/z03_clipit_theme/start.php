@@ -40,7 +40,7 @@ if(!get_config('clipit_global')) {
          * Register menu footer
          */
         setup_footer_menus();
-        $plugin_dir = elgg_get_plugins_path() . "z03_clipit_theme";
+        $plugin_dir = elgg_get_plugins_path() . "z03_clipit_site";
         // Register & load libs
         elgg_register_library('clipit:functions', "{$plugin_dir}/lib/functions.php");
         elgg_load_library('clipit:functions');
@@ -99,7 +99,7 @@ if(!get_config('clipit_global')) {
         elgg_register_page_handler('register', 'home_user_account_page_handler');
         elgg_register_page_handler('login', 'home_user_account_page_handler');
 
-        $plugin_url = elgg_get_site_url() . "mod/z03_clipit_theme";
+        $plugin_url = elgg_get_site_url() . "mod/z03_clipit_site";
         if (elgg_get_context() === "admin") {
             if ($user->role == ClipitUser::ROLE_TEACHER) {
                 elgg_unregister_page_handler('admin');
@@ -173,7 +173,7 @@ if(!get_config('clipit_global')) {
     function home_user_account_page_handler($page_elements, $handler)
     {
 
-        $base_dir = elgg_get_plugins_path() . 'z03_clipit_theme/pages/account';
+        $base_dir = elgg_get_plugins_path() . 'z03_clipit_site/pages/account';
         switch ($handler) {
 
             case 'forgotpassword':
@@ -252,7 +252,7 @@ if(!get_config('clipit_global')) {
 
     function clipit_footer_page($page)
     {
-        $file_dir = elgg_get_plugins_path() . 'z03_clipit_theme/pages/clipit';
+        $file_dir = elgg_get_plugins_path() . 'z03_clipit_site/pages/clipit';
         switch ($page[0]) {
             case "about":
                 return false;

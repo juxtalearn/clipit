@@ -7,9 +7,9 @@
 elgg_unregister_css("twitter-bootstrap"); // Quitamos el bootstrap por defecto y aplicamos el exclusivo del home
 // Set the content type
 header("Content-type: text/html; charset=UTF-8");
-$plugin = elgg_get_plugin_from_id('z03_clipit_theme');
+$plugin = elgg_get_plugin_from_id('z03_clipit_site');
 $vars_plugin = $plugin->getAllSettings();
-$vars_plugin['img_path'] = $CONFIG->wwwroot."mod/z03_clipit_theme/graphics/";
+$vars_plugin['img_path'] = $CONFIG->wwwroot."mod/z03_clipit_site/graphics/";
 $vars_plugin['bg_img'] = $vars_plugin['img_path']."icons/".$vars_plugin['bg_img'];
 $vars_plugin['logo_img'] = $vars_plugin['img_path']."icons/".$vars_plugin['logo_img'];
 $vars = array_merge($vars_plugin, $vars);
@@ -18,7 +18,7 @@ $vars = array_merge($vars_plugin, $vars);
 elgg_unregister_css('elgg.walled_garden');
 elgg_unregister_js('elgg.walled_garden');
 
-$images_dir = elgg_get_site_url() . "mod/z03_clipit_theme/graphics/";
+$images_dir = elgg_get_site_url() . "mod/z03_clipit_site/graphics/";
 $footer = elgg_view('page/elements/footer', $vars);
 $header_top = elgg_view('page/elements/header_top', array('walled_garden' => true));
 $header_account = elgg_view('page/elements/header_account', array('images_dir' => $images_dir));
