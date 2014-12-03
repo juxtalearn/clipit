@@ -25,13 +25,13 @@ if (elgg_get_context() == 'admin') {
 // render content before head so that JavaScript and CSS can be loaded. See #4032
 $plugin = elgg_get_plugin_from_id('z03_clipit_theme');
 $vars_plugin = $plugin->getAllSettings();
-$vars_plugin['img_path'] = $CONFIG->wwwroot."mod/z03_clipit_global/graphics/";
+$vars_plugin['img_path'] = $CONFIG->wwwroot."mod/z03_clipit_theme_global/graphics/";
 $vars_plugin['bg_img'] = $vars_plugin['img_path']."icons/".$vars_plugin['bg_img'];
 $vars_plugin['logo_img'] = $vars_plugin['img_path']."icons/".$vars_plugin['logo_img'];
 $vars = array_merge($vars_plugin, $vars);
 
 $messages = elgg_view('page/elements/messages', array('object' => $vars['sysmessages']));
-$images_dir = elgg_get_site_url() . "mod/z03_clipit_global/graphics/";
+$images_dir = elgg_get_site_url() . "mod/z03_clipit_theme_global/graphics/";
 $header_top = elgg_view('page/elements/header_top', $vars);
 $header_account = elgg_view('page/elements/header_account', array('images_dir' => $images_dir));
 $body = elgg_view('page/elements/body', $vars);

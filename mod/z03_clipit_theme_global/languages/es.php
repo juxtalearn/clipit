@@ -98,9 +98,9 @@ $spanish = array(
     'position:ta' => 'Consultor Técnico',
 
     // Landing page
-    'videos' => 'Videos',
+    'videos' => 'Explorar',
     'connect' => 'Conéctate',
-    'try_out' => 'Prúebalo',
+    'try_out' => 'Demo',
     'latest:videos' => 'Últimos vídeos',
     'published:on' => 'Publicado el',
     'videos:view_all' => 'Ver todos los vídeos',

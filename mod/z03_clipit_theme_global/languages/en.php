@@ -97,9 +97,9 @@ $english = array(
     'position:ra' => 'Research Advisor',
     'position:ta' => 'Technical Advisor',
     // Landing page
-    'videos' => 'Videos',
+    'videos' => 'Explore',
     'connect' => 'Connect',
-    'try_out' => 'Try it out',
+    'try_out' => 'Demo',
     'latest:videos' => 'Latest videos',
     'published:on' => 'Published on',
     'videos:view_all' => 'View all videos',

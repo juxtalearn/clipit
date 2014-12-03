@@ -22,7 +22,7 @@ $site = elgg_get_site_entity();
                         'href' => "mailto:{$site->email}",
                         'title' => elgg_echo('send:email_to_site'),
                         'text' => elgg_view('output/img', array(
-                            'src' => "mod/z03_clipit_global/graphics/mail.png",
+                            'src' => "mod/z03_clipit_theme_global/graphics/mail.png",
                         )),
                         'is_trusted' => true,
                         'target' => '_blank'
@@ -39,7 +39,7 @@ $site = elgg_get_site_entity();
                     'href' => "http://ec.europa.eu/research/fp7/index_en.cfm",
                     'title' => "FP7",
                     'text' => elgg_view('output/img', array(
-                        'src' => "mod/z03_clipit_global/graphics/sponsors.png",
+                        'src' => "mod/z03_clipit_theme_global/graphics/sponsors.png",
                     )),
                     'is_trusted' => true,
                     'target' => '_blank'
@@ -50,7 +50,7 @@ $site = elgg_get_site_entity();
                     'href' => "http://www.juxtalearn.org",
                     'title' => "JuxtaLearn",
                     'text' => elgg_view('output/img', array(
-                        'src' => "mod/z03_clipit_global/graphics/jxl_logo.png",
+                        'src' => "mod/z03_clipit_theme_global/graphics/jxl_logo.png",
                     )),
                     'is_trusted' => true,
                     'target' => '_blank'
