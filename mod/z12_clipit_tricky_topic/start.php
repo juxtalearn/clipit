@@ -42,36 +42,33 @@ function tt_page_handler($page){
             $entities = ClipitTrickyTopic::get_all();
             $count = count($entities);
             $entities = array_slice($entities, clipit_get_offset(), clipit_get_limit(10));
-            $params = array(
-                'entities' => $entities,
-                'count' => $count,
-            );
-            $content_view = 'tricky_topics/list';
+            $content = elgg_view('tricky_topics/list', array('entities' => $entities, 'count' => $count));
             break;
         case 'stumbling_blocks':
             $title = elgg_echo('tags');
             $entities = ClipitTag::get_all();
             $count = count($entities);
             $entities = array_slice($entities, clipit_get_offset(), clipit_get_limit());
-            $params = array(
-                'entities' => $entities,
-                'count' => $count,
-            );
-            $content_view = 'stumbling_blocks/view';
+            $content = elgg_view('stumbling_blocks/view', array('entities' => $entities, 'count' => $count));
             break;
         case 'student_problems':
             $title = elgg_echo('student_problems');
-            $content_view = 'examples/view';
+            $content = elgg_view('examples/view');
+            break;
+        case 'create':
+            // Create Tricky Topic
+            $filter = '';
+            $title = elgg_echo('tricky_topic:create');
+            $content = elgg_view_form('tricky_topic/create');
             break;
         case 'view':
-            // Tricky Topics
+            // View Tricky Topic
             if($id = $page[1]){
                 $filter = '';
                 if($tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($id)))){
                     elgg_push_breadcrumb(elgg_echo('tricky_topics'), "tricky_topics");
                     $title  = $tricky_topic->name;
                     elgg_push_breadcrumb($title);
-                    $content_view = 'tricky_topics/view';
                     $entities = $tricky_topic;
                     $activities = ClipitActivity::get_from_tricky_topic($tricky_topic->id);
                     $multimedia = array(
@@ -84,12 +81,9 @@ function tt_page_handler($page){
                         $multimedia['files'] = array_merge($multimedia['files'], $activity->file_array);
                         $multimedia['storyboards'] = array_merge($multimedia['storyboards'], $activity->storyboard_array);
                     }
-                    $params = array(
-                        'entity' => $tricky_topic,
-                        'multimedia' => $multimedia,
-                    );
                     $sidebar .= elgg_view_module('aside', '<i class="fa fa-clock-o"></i> Revisions',
                         elgg_view('tricky_topics/sidebar/revisions'));
+                    $content = elgg_view('tricky_topics/view', array('entity' => $tricky_topic, 'multimedia' => $multimedia));
                 } else {
                     return false;
                 }
@@ -108,10 +102,11 @@ function tt_page_handler($page){
                 }
             }
             $entities = $owner;
+            $content = elgg_view('stumbling_blocks/view', array('entities' => $entities, 'count' => $count));
             break;
     }
     $params = array(
-        'content' => elgg_view($content_view, $params),
+        'content' => $content,
         'title' => $title,
         'filter' => $filter,
         'sidebar' => $sidebar,

@@ -51,17 +51,18 @@ foreach($files as $file_id){
         echo elgg_view("page/components/modal_remote", array('id'=> "edit-file-{$file->id}" ));
     }
     // Action buttons (Download|Publish)
-    $buttons = '<div style="width: 35px;display: inline-block;float: right;text-align: center;margin-left:10px;">
-                    '.elgg_view('output/url', array(
-                        'href'  => "file/download/".$file->id. ($vars['task_id'] ? "?task_id=".$vars['task_id']: ""),
-                        'title' => $owner->name,
-                        'class' => 'btn btn-default btn-icon',
-                        'text'  => '<i class="fa fa-download"></i>')).'
-                    <small class="show text-truncate" title="'.formatFileSize($file->size).'" style="margin-top: 3px;">
-                        '.formatFileSize($file->size).'
-                    </small>
-                    </div>';
-
+    $buttons = elgg_view('output/url', array(
+                    'href'  => "file/download/".$file->id. ($vars['task_id'] ? "?task_id=".$vars['task_id']: ""),
+                    'title' => $owner->name,
+                    'class' => 'btn btn-default btn-icon',
+                    'text'  => '<i class="fa fa-download"></i>'
+    ));
+    $author = elgg_view('output/url', array(
+        'href'  => "profile/{$user->login}",
+        'title' => $user->name,
+        'class' => 'show',
+        'text'  => '<i class="fa-user fa"></i> '.$user->name,
+    ));
     $row = array(
         array(
             'class' => $vars['create'] ? 'select' : 'hide',
@@ -72,13 +73,30 @@ foreach($files as $file_id){
             'content' => $file_icon
         ),
         array(
-            'class' => 'col-md-9 file-info',
-            'content' => elgg_view("multimedia/file/title_summary", array('entity' => $file, 'href' => $file_url))
+            'class' => 'file-info',
+            'content' => elgg_view('output/url', array(
+                'href'  => $file_url,
+                'title' => $file->name,
+                'text'  => '<strong>'.$file->name.'</strong>'
+            ))
         ),
         array(
-            'class' => 'col-md-3',
+            'content' => elgg_view('tricky_topic/tags/view', array(
+                            'tags' => ClipitFile::get_tags($file->id), 'limit' => 2, 'width' => 100)
+                        )
+        ),
+        array(
+            'content' => '<small>'.
+                        $author.
+                        elgg_view('output/friendlytime', array('time' => $file->time_created))
+                        .'</small>',
+        ),
+        array(
             'style' => 'vertical-align: middle;',
             'content' => $buttons.$owner_options
+        ),
+        array(
+            'content' => formatFileSize($file->size)
         )
     );
     $rows[] = array('content' => $row);

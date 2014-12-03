@@ -67,12 +67,15 @@ $rating = elgg_extract("rating", $vars);
             </a>
         </div>
         <div class="col-md-10">
-            <?php echo elgg_view("publications/owner_summary", array(
-                'entity' => $video,
-                'class' => 'pull-right',
-                'entity_class' => 'ClipitVideo',
-                'msg' => 'Uploaded by'
-            )); ?>
+            <?php if($vars['author_bottom'] !== true):?>
+                <?php echo elgg_view("publications/owner_summary", array(
+                    'entity' => $video,
+                    'class' => 'pull-right',
+                    'entity_class' => 'ClipitVideo',
+                    'msg' => 'Uploaded by'
+                ));
+                ?>
+            <?php endif;?>
             <h4 class="text-truncate">
                 <?php echo elgg_view('output/url', array(
                     'href'  => "{$href}/view/".$video->id,
@@ -92,7 +95,9 @@ $rating = elgg_extract("rating", $vars);
                     <?php echo elgg_view("tricky_topic/tags/view", array('tags' => $tags)); ?>
                 </div>
             </div>
+
             <small class="show" style="margin: 0">
+                <?php if($vars['view_comments'] !== false):?>
                 <?php
                     $total_comments = array_pop(ClipitComment::count_by_destination(array($video->id), true));
                 ?>
@@ -106,6 +111,16 @@ $rating = elgg_extract("rating", $vars);
                         ?>
                     </strong>
                     <!-- Count total comments end-->
+                <?php endif; ?>
+                <?php if($vars['author_bottom']):?>
+                    <?php echo elgg_view("publications/owner_summary", array(
+                        'entity' => $video,
+                        'class' => 'pull-right',
+                        'entity_class' => 'ClipitVideo',
+                        'msg' => 'Uploaded by'
+                    ));
+                    ?>
+                <?php endif;?>
                 <i>
                     <?php echo elgg_view('output/friendlytime', array('time' => $video->time_created));?>
                 </i>

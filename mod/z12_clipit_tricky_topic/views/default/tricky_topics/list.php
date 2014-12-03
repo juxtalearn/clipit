@@ -112,7 +112,7 @@ $count = elgg_extract('count', $vars);
                     </small>
                 </td>
                 <td>
-                    <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $tricky_topic->tag_array)); ?>
+                    <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $tricky_topic->tag_array, 'limit' => 5)); ?>
                 </td>
                 <td>
                     <?php if($user->id == elgg_get_logged_in_user_guid()):?>

@@ -15,6 +15,11 @@
         <type>plugin</type>
         <name>z02_clipit_api</name>
     </requires>
+    <conflicts>
+        <type>plugin</type>
+        <name>z03_clipit_theme</name>
+        <version>1.0</version>
+    </conflicts>
     <category>plugin</category>
     <category>front-end</category>
     <blurb>ClipIt Global plugin</blurb>

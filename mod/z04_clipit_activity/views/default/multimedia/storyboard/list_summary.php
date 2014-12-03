@@ -67,14 +67,15 @@ $rating = elgg_extract("rating", $vars);
                     </p>
                 </div>
                 <small class="show" style="margin: 0">
-                    <?php
-                    $total_comments = array_pop(ClipitComment::count_by_destination(array($storyboard->id), true));
-                    ?>
                     <?php echo elgg_view("publications/owner_summary", array(
                         'entity' => $storyboard,
                         'entity_class' => 'ClipitStoryboard',
                         'msg' => elgg_echo('multimedia:uploaded_by')
                     )); ?>
+                    <?php if($vars['view_comments'] !== false):?>
+                    <?php
+                        $total_comments = array_pop(ClipitComment::count_by_destination(array($storyboard->id), true));
+                    ?>
                     <!-- Count total comments -->
                     <strong>
                         <?php echo elgg_view('output/url', array(
@@ -84,6 +85,7 @@ $rating = elgg_extract("rating", $vars);
                             'text'  => $total_comments. ' <i class="fa fa-comments"></i>'))
                         ?>
                     </strong>
+                    <?php endif; ?>
                     <!-- Count total comments end-->
                     <i>
                         <?php echo elgg_view('output/friendlytime', array('time' => $storyboard->time_created));?>

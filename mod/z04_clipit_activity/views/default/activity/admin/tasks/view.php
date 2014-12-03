@@ -21,12 +21,6 @@ $id = uniqid();
 <script>
     <?php echo elgg_view("js/admin_tasks", array('entity' => $activity, 'tasks' => $tasks));?>
 </script>
-<style>
-    tr.info td {
-        background-color: #d9edf7 !important;
-        border-bottom: 1px solid #fff;
-    }
-</style>
 
 <div>
     <small class="show"><?php echo elgg_echo('view_as');?></small>
