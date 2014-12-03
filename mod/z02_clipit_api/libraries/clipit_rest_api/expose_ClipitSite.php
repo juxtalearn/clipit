@@ -99,7 +99,7 @@ function expose_site_functions() {
         true);
     expose_function($api_suffix . "add_videos",
         $class_suffix . "add_videos",
-        array("id" => array("type" => "int", "required" => true), "video_array" => array("type" => "array", "required" => true)),
+        array("video_array" => array("type" => "array", "required" => true)),
         "Add Videos by Id to the Site",
         "POST",
         false,
@@ -181,7 +181,9 @@ function expose_site_functions() {
         "GET",
         false,
         true);
-
+    expose_function($api_suffix . "publish_to_global",
+        $class_suffix . "publish_to_global",
+        null, "Publish local Site to Global Site", "POST", false, true);
     expose_function($api_suffix . "add_pub_storyboards",
         $class_suffix . "add_pub_storyboards",
         array("storyboard_array" => array("type" => "array", "required" => true)),
@@ -212,7 +214,7 @@ function expose_site_functions() {
         true);
     expose_function($api_suffix . "add_pub_videos",
         $class_suffix . "add_pub_videos",
-        array("id" => array("type" => "int", "required" => true), "video_array" => array("type" => "array", "required" => true)),
+        array("video_array" => array("type" => "array", "required" => true)),
         "Add Videos by Id to the Public Scope",
         "POST",
         false,

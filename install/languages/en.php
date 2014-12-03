@@ -83,6 +83,11 @@ If you are ready to proceed, click the Next button.",
 	'install:settings:label:language' => 'Site Language',
 	'install:settings:label:siteaccess' => 'Default Site Access',
     'install:settings:label:timezone' => 'Site Time Zone',
+
+    'install:settings:label:clipit_global_url' => "ClipIt Global URL",
+    'install:settings:label:clipit_global_login' => "ClipIt Global Login",
+    'install:settings:label:clipit_global_password' => "ClipIt Global Password",
+
     'install:settings:label:jxl_secret' => "JuxtaLearn Secret Key",
     'install:settings:label:la_metrics_class' => "LA Metrics Class",
     'install:settings:label:recommendations_class' => "Recommendations Class",
