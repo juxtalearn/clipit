@@ -266,7 +266,6 @@ class ClipitSite extends UBSite {
         );
         $response = file_get_contents($clipit_global_url.'?'.http_build_query($params));
         $decoded_response = json_decode($response);
-        var_dump($decoded_response);
         if($decoded_response->status != 0){
             return null;
         }
@@ -286,7 +285,9 @@ class ClipitSite extends UBSite {
         $data += array("prop_value_array[name]" => $site->name);
         $data += array("prop_value_array[description]" => $site->description);
         $data += array("prop_value_array[url]" => $site->url);
-        var_dump(static::global_site_call($data, "POST"));
+        if(static::global_site_call($data, "POST") == null){
+            return null;
+        }
         return static::update_global_resources();
     }
 
