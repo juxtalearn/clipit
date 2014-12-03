@@ -153,7 +153,7 @@ if (!function_exists('session_status')) {
 
     <p><b>ClipIt has been downloaded correctly!</b></p>
 
-    <form method='GET' action="index.php">
+    <form method='GET' action="install.php">
         <input type="hidden" name="step" value="database">
         <input type="submit" value="Continue to initial setup...">
     </form>
