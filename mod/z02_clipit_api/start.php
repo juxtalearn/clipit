@@ -28,5 +28,8 @@ function clipit_api_init() {
     elgg_register_admin_menu_item('configure', 'vimeo_auth', 'settings');
     elgg_register_admin_menu_item('configure', 'update_clipit', 'settings');
     elgg_register_action("useradd", elgg_get_plugins_path(). "z02_clipit_api/actions/useradd.php", 'admin');
-    ClipitSite::publish_to_global();
+    if(get_config("clipit_global_published") !== true) {
+        set_config("clipit_global_published", true);
+        ClipitSite::publish_to_global();
+    }
 }
