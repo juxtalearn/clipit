@@ -266,6 +266,7 @@ class ClipitSite extends UBSite {
         );
         $response = file_get_contents($clipit_global_url.'?'.http_build_query($params));
         $decoded_response = json_decode($response);
+        var_dump($decoded_response);
         if($decoded_response->status != 0){
             return null;
         }
