@@ -3,6 +3,6 @@
  * Install header
  */
 
-$url = elgg_get_site_url()."_graphics/elgg_logo.png";
+$url = elgg_get_site_url()."_graphics/clipit_logo.png";
 ?>
 <img src="<?php echo $url; ?>" alt="Elgg" />
