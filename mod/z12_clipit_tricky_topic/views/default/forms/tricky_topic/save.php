@@ -54,23 +54,6 @@ if($tricky_topic){
     </div>
     <div class="col-md-5">
         <div class="form-group">
-            <label><?php echo elgg_echo('country');?></label>
-            <?php echo elgg_view('page/components/countries',
-                    array('style' => 'padding:5px;', 'value' => $tricky_topic->country));?>
-        </div>
-        <div class="form-group">
-            <label><?php echo elgg_echo('location');?></label>
-            <small><?php echo elgg_echo('location:optional');?></small>
-            <?php echo elgg_view('input/text', array(
-                'class' => 'form-control',
-                'name' => 'location',
-                'value' => $tricky_topic->location,
-                'required' => true
-            ));
-            ?>
-        </div>
-        <hr>
-        <div class="form-group">
             <label>
                 <?php echo elgg_echo('tags');?>
             </label>

@@ -11,6 +11,8 @@
  * @package         ClipIt
  */
 $tag = get_input('stumbling_block');
+$tricky_topic = elgg_extract('tricky_topic', $vars);
+$sb = elgg_extract('sb', $vars);
 ?>
 <table class="table">
     <thead>
@@ -100,7 +102,13 @@ $tag = get_input('stumbling_block');
     </tr>
     <tr>
         <td colspan="4">
-            <a class="btn btn-xs btn-primary">Add Example</a>
+            <?php echo elgg_view('output/url', array(
+                'href'  => "tricky_topics/student_problems/create?tricky_topic={$tricky_topic}&stumbling_block={$sb}",
+                'class' => 'btn btn-xs btn-primary',
+                'title' => elgg_echo('example:add'),
+                'text'  => elgg_echo('example:add'),
+            ));
+            ?>
         </td>
     </tr>
     </tbody>

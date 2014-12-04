@@ -15,11 +15,14 @@ $spanish = array(
     'country' => 'País',
     'country:select' => 'Seleccionar país',
     'location' => 'Localización',
+    'examples' => 'Ejemplos',
+    'example:add' => 'Añadir ejemplo',
+    'example:create' => 'Crear ejemplo',
     'tricky_topic:edit' => 'Editar Tema',
     'location:optional' => 'Campo de texto opcional para asociar el tema a una localización',
     'author' => 'Autor',
     'tricky_topics' => 'Temas',
-    'student_problems' => 'Problemas encontrados',
+    'student_problems' => 'Problemas de estudiantes',
 );
 
 add_translation('es', $spanish);

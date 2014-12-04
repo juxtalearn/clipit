@@ -17,7 +17,7 @@ function clipit_ttt_init() {
     // Register "/ttq" page handler
     elgg_register_page_handler('tricky_topics', 'tt_page_handler');
     $plugin_dir = elgg_get_plugins_path() . "z12_clipit_tricky_topic";
-    elgg_register_action("example/create", "{$plugin_dir}/actions/example/create.php");
+    elgg_register_action("example/save", "{$plugin_dir}/actions/example/save.php");
     elgg_register_ajax_view('examples/list');
 
     elgg_register_action("stumbling_blocks/link", "{$plugin_dir}/actions/stumbling_blocks/link.php");
@@ -58,7 +58,33 @@ function tt_page_handler($page){
             break;
         case 'student_problems':
             $title = elgg_echo('student_problems');
-            $content = elgg_view('examples/view');
+            $content = elgg_view('examples/list');
+            switch($page[1]){
+                case 'create':
+                    // Create Tricky Topic
+                    $filter = '';
+                    elgg_push_breadcrumb(elgg_echo('examples'), "tricky_topics/student_problems");
+                    $title = elgg_echo('example:create');
+                    elgg_push_breadcrumb($title);
+                    $content = elgg_view_form('example/save', array('data-validate' => 'true'));
+                    break;
+                case 'edit':
+                    // Edit Example
+                    if(!$id = $page[1]){
+                        return false;
+                    }
+                    $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($id)));
+                    $filter = '';
+                    elgg_push_breadcrumb(elgg_echo('tricky_topics'), "tricky_topics");
+                    elgg_push_breadcrumb($tricky_topic->name, "tricky_topics/view/{$tricky_topic->id}");
+                    $title = elgg_echo('edit');
+                    elgg_push_breadcrumb($title);
+                    $content = elgg_view_form('tricky_topic/save',
+                        array('data-validate' => 'true'),
+                        array('entity' => $tricky_topic
+                        ));
+                    break;
+            }
             break;
         case 'create':
             // Create Tricky Topic
@@ -69,7 +95,7 @@ function tt_page_handler($page){
             $content = elgg_view_form('tricky_topic/save');
             break;
         case 'edit':
-            // Create Tricky Topic
+            // Edit Tricky Topic
             if(!$id = $page[1]){
                 return false;
             }

@@ -10,6 +10,8 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
+var_dump($_POST);
+die;
 $title = get_input('title');
 $description = get_input('description');
 $tags = get_input('tags');

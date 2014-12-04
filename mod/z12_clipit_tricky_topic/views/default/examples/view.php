@@ -12,4 +12,4 @@
  */
 var_dump(ClipitExample::get_all());
 ?>
-<?php echo elgg_view_form('example/create', array('data-validate' => 'true', 'enctype' => 'multipart/form-data'));?>
+<?php echo elgg_view_form('example/save', array('data-validate' => 'true', 'enctype' => 'multipart/form-data'));?>
