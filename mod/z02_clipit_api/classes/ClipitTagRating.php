@@ -13,6 +13,7 @@
  */
 
 /**
+ * TO BE @deprecated by ClipitStumblingBlockRating
  * A rating of whether a Tag has correctly been covered in a Resource. It is contained inside of a ClipitRating instance
  * which points to a specific Resource.
  */
