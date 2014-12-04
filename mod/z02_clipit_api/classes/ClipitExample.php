@@ -21,8 +21,20 @@ class ClipitExample extends UBItem {
      */
     const SUBTYPE = "ClipitExample";
     const REL_EXAMPLE_TAG = "ClipitExample-ClipitTag";
+    const REL_EXAMPLE_RESOURCE = "ClipitExample-ClipitResource";
+    const REL_EXAMPLE_STORYBOARD = "ClipitExample-ClipitStoryboard";
+    const REL_EXAMPLE_VIDEO = "ClipitExample-ClipitVideo";
+    const REL_EXAMPLE_FILE = "ClipitExample-ClipitFile";
     public $tag_array = array();
-    public $resource_url = "";
+    public $subject = "";
+    public $education_level = "";
+    public $country = "";
+    public $location = "";
+    // Example Resources
+    public $resource_array = array();
+    public $storyboard_array = array();
+    public $video_array = array();
+    public $file_array = array();
 
     /**
      * Loads object parameters stored in Elgg
@@ -31,8 +43,15 @@ class ClipitExample extends UBItem {
      */
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
-        $this->resource_url = (string)$elgg_entity->get("resource_url");
         $this->tag_array = (array)static::get_tags($this->id);
+        $this->subject = (string)$elgg_entity->get("subject");
+        $this->education_level = (string)$elgg_entity->get("education_level");
+        $this->country = (string)$elgg_entity->get("country");
+        $this->location = (string)$elgg_entity->get("location");
+        $this->resource_array = static::get_resources($this->id);
+        $this->video_array = static::get_videos($this->id);
+        $this->storyboard_array = static::get_storyboards($this->id);
+        $this->file_array = static::get_files($this->id);
     }
 
     /**
@@ -42,12 +61,19 @@ class ClipitExample extends UBItem {
      */
     protected function copy_to_elgg($elgg_entity) {
         parent::copy_to_elgg($elgg_entity);
-        $elgg_entity->set("resource_url", (string)$this->resource_url);
+        $elgg_entity->set("subject", (string)$this->subject);
+        $elgg_entity->set("education_level", (string)$this->education_level);
+        $elgg_entity->set("country", (string)$this->country);
+        $elgg_entity->set("location", (string)$this->location);
     }
 
     protected function save($double_save=false) {
         parent::save($double_save);
         static::set_tags($this->id, (array)$this->tag_array);
+        static::set_resources($this->id, $this->resource_array);
+        static::set_videos($this->id, $this->video_array);
+        static::set_storyboards($this->id, $this->storyboard_array);
+        static::set_files($this->id, $this->file_array);
         return $this->id;
     }
 
@@ -96,5 +122,73 @@ class ClipitExample extends UBItem {
      */
     static function get_tags($id) {
         return UBCollection::get_items($id, static::REL_EXAMPLE_TAG);
+    }
+
+    // Resources methods
+    static function add_resources($id, $resource_array) {
+        return UBCollection::add_items($id, $resource_array, static::REL_EXAMPLE_RESOURCE);
+    }
+
+    static function set_resources($id, $resource_array) {
+        return UBCollection::set_items($id, $resource_array, static::REL_EXAMPLE_RESOURCE);
+    }
+
+    static function remove_resources($id, $resource_array) {
+        return UBCollection::remove_items($id, $resource_array, static::REL_EXAMPLE_RESOURCE);
+    }
+
+    static function get_resources($id) {
+        return UBCollection::get_items($id, static::REL_EXAMPLE_RESOURCE);
+    }
+
+    // Videos methods
+    static function add_videos($id, $video_array) {
+        return UBCollection::add_items($id, $video_array, static::REL_EXAMPLE_VIDEO);
+    }
+
+    static function set_videos($id, $video_array) {
+        return UBCollection::set_items($id, $video_array, static::REL_EXAMPLE_VIDEO);
+    }
+
+    static function remove_videos($id, $video_array) {
+        return UBCollection::remove_items($id, $video_array, static::REL_EXAMPLE_VIDEO);
+    }
+    
+    static function get_videos($id) {
+        return UBCollection::get_items($id, static::REL_EXAMPLE_VIDEO);
+    }
+
+    // Storyboards methods
+    static function add_storyboards($id, $storyboard_array) {
+        return UBCollection::add_items($id, $storyboard_array, static::REL_EXAMPLE_STORYBOARD);
+    }
+
+    static function set_storyboards($id, $storyboard_array) {
+        return UBCollection::set_items($id, $storyboard_array, static::REL_EXAMPLE_STORYBOARD);
+    }
+
+    static function remove_storyboards($id, $storyboard_array) {
+        return UBCollection::remove_items($id, $storyboard_array, static::REL_EXAMPLE_STORYBOARD);
+    }
+
+    static function get_storyboards($id) {
+        return UBCollection::get_items($id, static::REL_EXAMPLE_STORYBOARD);
+    }
+
+    // Files methods
+    static function add_files($id, $file_array) {
+        return UBCollection::add_items($id, $file_array, static::REL_EXAMPLE_FILE);
+    }
+
+    static function set_files($id, $file_array) {
+        return UBCollection::set_items($id, $file_array, static::REL_EXAMPLE_FILE);
+    }
+
+    static function remove_files($id, $file_array) {
+        return UBCollection::remove_items($id, $file_array, static::REL_EXAMPLE_FILE);
+    }
+    
+    static function get_files($id) {
+        return UBCollection::get_items($id, static::REL_EXAMPLE_FILE);
     }
 }
