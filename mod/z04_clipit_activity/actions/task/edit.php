@@ -38,9 +38,9 @@ if($entity->task_type == ClipitTask::TYPE_RESOURCE_DOWNLOAD){
 
 
 if($entity->task_type == ClipitTask::TYPE_QUIZ_TAKE){
-    $quiz = get_input('quiz');
+    $quiz = $task_array['quiz'];
     // Set questions to Quiz
-    $questions = get_input('question');
+    $questions = $quiz['question'];
 
     foreach($questions as $question){
         $values = array();

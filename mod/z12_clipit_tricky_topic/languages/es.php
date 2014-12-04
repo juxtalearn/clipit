@@ -12,6 +12,11 @@
  */
 $spanish = array(
     'tricky_topic:create' => 'Crear Tema',
+    'country' => 'País',
+    'country:select' => 'Seleccionar país',
+    'location' => 'Localización',
+    'tricky_topic:edit' => 'Editar Tema',
+    'location:optional' => 'Campo de texto opcional para asociar el tema a una localización',
     'author' => 'Autor',
     'tricky_topics' => 'Temas',
     'student_problems' => 'Problemas encontrados',

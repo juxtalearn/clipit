@@ -24,7 +24,7 @@
     ?>
     <?php echo elgg_view("input/text", array(
         'name' => 'tag[]',
-        'value' => $entity->name,
+        'value' => $vars['value'],
         'style' => 'width: 90%;',
         'class' => 'form-control input-tag',
         'required' => true,

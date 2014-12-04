@@ -13,16 +13,22 @@
 
 $tricky_topic = 0;
 $tricky_topic = get_input('tricky_topic');
-$input_task = elgg_extract('input_task', $vars);
+$input_prefix = elgg_extract('input_prefix', $vars);
 if($activity_id = elgg_extract('activity_id', $vars)){
     $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
     $tricky_topic = $activity->tricky_topic;
 }
+if($input_prefix) {
+    $input_prefix = $input_prefix . "[quiz]";
+} else {
+    $input_prefix = 'quiz';
+}
+
 $questions = array(1);
 if($entity = elgg_extract('entity', $vars)){
     $questions = ClipitQuiz::get_quiz_questions($entity->id);
     echo elgg_view("input/hidden", array(
-        'name' => 'quiz[id]',
+        'name' => $input_prefix.'[id]',
         'value' => $entity->id
     ));
 }
@@ -44,7 +50,8 @@ $id = uniqid();
 <script>
     $(function(){
         $(".quiz[data-quiz=<?php echo $id;?>]").quiz({
-            'tricky_topic': <?php echo (int)$tricky_topic;?>
+            'tricky_topic': <?php echo (int)$tricky_topic;?>,
+            'input_prefix': '<?php echo $input_prefix;?>'
         });
     });
 </script>
@@ -54,7 +61,7 @@ $id = uniqid();
         <div class="form-group">
             <label>Title</label>
             <?php echo elgg_view("input/text", array(
-                'name' => 'quiz[title]',
+                'name' => "{$input_prefix}[title]",
                 'class' => 'form-control',
                 'value' => $entity->name
             ));
@@ -63,7 +70,7 @@ $id = uniqid();
         <div class="form-group">
             <label>Description</label>
             <?php echo elgg_view("input/plaintext", array(
-                'name'  => "{$input_task}quiz[description]",
+                'name'  => "{$input_prefix}[description]",
                 'class' => 'form-control '.($entity->description ? 'mceEditor' : ''),
                 'value' => $entity->description,
                 'onclick' => $entity->description ? false : '$(this).addClass(\'mceEditor\');
@@ -78,7 +85,7 @@ $id = uniqid();
         <div class="form-group">
             <label>Tipo de vista del cuestionario</label>
             <?php echo elgg_view("input/dropdown", array(
-                'name' => $input_task.'quiz[view]',
+                'name' => $input_prefix.'[view]',
                 'style' => 'padding: 5px;',
                 'value' => $entity->view_mode,
                 'class' => 'form-control',
@@ -96,7 +103,7 @@ $id = uniqid();
                 $time = $entity->max_time;
                 $days = range(1, 30);
                 echo elgg_view("input/dropdown", array(
-                    'name' => $input_task.'quiz[time][d]',
+                    'name' => $input_prefix.'[time][d]',
                     'style' => 'width: 30%;display: inline-block;padding:5px;',
                     'class' => 'form-control',
                     'value' => $entity ? floor($time / 86000):'',
@@ -106,7 +113,7 @@ $id = uniqid();
                 <?php
                 $hours = range(1, 24);
                 echo elgg_view("input/dropdown", array(
-                    'name' => $input_task.'quiz[time][h]',
+                    'name' => $input_prefix.'[time][h]',
                     'style' => 'width: 30%;display: inline-block;padding:5px;',
                     'class' => 'form-control',
                     'value' => $entity ? floor($time / 3600):'',
@@ -116,7 +123,7 @@ $id = uniqid();
                 <?php
                 $minutes = range(1, 60);
                 echo elgg_view("input/dropdown", array(
-                    'name' => $input_task.'quiz[time][m]',
+                    'name' => $input_prefix.'[time][m]',
                     'style' => 'width: 30%;display: inline-block;padding:5px;',
                     'class' => 'form-control',
                     'value' => $entity ? floor(($time / 60) % 60):'',
@@ -137,7 +144,8 @@ $id = uniqid();
             <?php echo elgg_view('activity/admin/tasks/quiz/question/list', array(
                 'num' => $i,
                 'tricky-topic' => $tricky_topic,
-                'question' => isset($entity) ? $question : false
+                'question' => isset($entity) ? $question : false,
+                'input_prefix' => $input_prefix
             ));?>
         <?php
         $i++;
@@ -146,7 +154,8 @@ $id = uniqid();
     <?php else: ?>
             <?php echo elgg_view('activity/admin/tasks/quiz/question', array(
                 'num' => 1,
-                'tricky-topic' => $tricky_topic
+                'tricky-topic' => $tricky_topic,
+                'input_prefix' => $input_prefix
             ));?>
     <?php endif;?>
 </div>

@@ -89,7 +89,8 @@ $.fn.quiz = function (options) {
                     type: "question",
                     tricky_topic: opt.tricky_topic,
                     question: value,
-                    num: $question.length + 1
+                    num: $question.length + 1,
+                    input_prefix: opt.input_prefix
                 },
                 success: function(content){
                     var $content = $($.parseHTML(content));
@@ -126,7 +127,8 @@ $.fn.quiz = function (options) {
                 data: {
                     type:   self.question_type_selected.data("question"),
                     id:     self.question_type_selected.attr("id"),
-                    num:    self.question_type_selected.find(".result").length + 1
+                    num:    self.question_type_selected.find(".result").length + 1,
+                    input_prefix: opt.input_prefix
                 },
                 success: function(content){
                     self.question_type_selected
@@ -171,7 +173,8 @@ $.fn.quiz = function (options) {
         elgg.get('ajax/view/activity/admin/tasks/quiz/add_type',{
             data: {
                 type:   'question_list_from_tags',
-                tricky_topic: opt.tricky_topic
+                tricky_topic: opt.tricky_topic,
+                input_prefix: opt.input_prefix
             },
             success: function(content){
                 $content = $(content);

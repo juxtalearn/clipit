@@ -12,6 +12,11 @@
  */
 $english = array(
     'tricky_topic:create' => 'Create Tricky Topic',
+    'country' => 'Country',
+    'country:select' => 'Select country',
+    'tricky_topic:edit' => 'Edit Tricky Topic',
+    'location' => 'Location',
+    'location:optional' => 'Optional field to associate tricky topic to a location',
     'author' => 'Author',
     'tricky_topics' => 'Tricky Topics',
     'student_problems' => 'Student problems',

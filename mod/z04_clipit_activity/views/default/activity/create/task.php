@@ -141,7 +141,7 @@ if($vars['required'] !== false){
                         echo elgg_view('activity/admin/tasks/quiz/quiz', array(
                             'entity' => array_pop(ClipitQuiz::get_by_id(array($task->quiz))),
                             'activity_id' => $task->activity,
-                            'input_task' => "task{$input_array}"
+                            'input_prefix' => "task{$input_array}"
                         ));
                         break;
                 }

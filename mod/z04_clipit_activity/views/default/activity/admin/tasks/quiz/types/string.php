@@ -11,9 +11,10 @@
  * @package         ClipIt
  */
 $id = elgg_extract('id', $vars);
+$input_prefix = elgg_extract('input_prefix', $vars);
 ?>
 <?php echo elgg_view("input/plaintext", array(
-    'name'  => 'question['.$id.'][string]',
+    'name'  => $input_prefix.'[question]['.$id.'][string]',
     'class' => 'form-control',
     'value' => $vars['checked'],
     'onclick'   => '$(this).addClass(\'mceEditor\');

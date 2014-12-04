@@ -14,8 +14,8 @@ $id = uniqid('question_');
 $num = elgg_extract('num', $vars);
 $tricky_topic = elgg_extract('tricky-topic', $vars);
 $question = elgg_extract('question', $vars);
+$input_prefix = elgg_extract('input_prefix', $vars);
 $tt_tags = ClipitTrickyTopic::get_tags($tricky_topic);
-
 ?>
 <div class="row margin-bottom-10">
     <div class="col-xs-1 text-right">
@@ -46,7 +46,8 @@ $tt_tags = ClipitTrickyTopic::get_tags($tricky_topic);
                 <?php echo elgg_view('activity/admin/tasks/quiz/question', array(
                     'num' => false,
                     'tricky-topic' => $tricky_topic,
-                    'question' => $question
+                    'question' => $question,
+                    'input_prefix' => $input_prefix
                 ));?>
             </div>
         </div>

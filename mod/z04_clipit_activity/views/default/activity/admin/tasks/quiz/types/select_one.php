@@ -13,10 +13,15 @@
 $id = elgg_extract('id', $vars);
 $num = elgg_extract('num', $vars);
 $id_input = uniqid('input_');
+$input_prefix = elgg_extract('input_prefix', $vars);
 ?>
 <div class="margin-bottom-20 result">
     <label class="inline-block" style="padding-right: 10px;">
-        <input type="radio" <?php echo $vars['checked'] == true ? 'checked' : '';?> name="question[<?php echo $id;?>][select_one][<?php echo $id_input;?>][correct]" value="1" class="inline-block">
+        <input
+            type="radio" <?php echo $vars['checked'] == true ? 'checked' : '';?>
+            name="<?php echo $input_prefix;?>[question][<?php echo $id;?>][select_one][<?php echo $id_input;?>][correct]"
+            value="1"
+            class="inline-block">
     </label>
     <?php echo elgg_view('output/url', array(
         'href'  => "javascript:;",
@@ -26,7 +31,7 @@ $id_input = uniqid('input_');
     ));
     ?>
     <?php echo elgg_view("input/text", array(
-        'name' => 'question['.$id.'][select_one]['.$id_input.'][value]',
+        'name' => $input_prefix.'[question]['.$id.'][select_one]['.$id_input.'][value]',
         'class' => 'form-control inline-block',
         'style' => 'width: 85%',
         'placeholder' => 'Respuesta '.$num,

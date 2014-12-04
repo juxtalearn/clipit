@@ -11,9 +11,13 @@
  * @package         ClipIt
  */
 $id = elgg_extract('id', $vars);
+$input_prefix = elgg_extract('input_prefix', $vars);
 ?>
 <div class="show text-muted margin-bottom-10">
     Write the correct answer
 </div>
 <hr class="margin-0 margin-bottom-20">
-<input type="number" name="question[<?php echo $id;?>][number]" value="<?php echo $vars['checked'];?>" class="form-control">
+<input type="number"
+       name="<?php echo $input_prefix;?>[question][<?php echo $id;?>][number]"
+       value="<?php echo $vars['checked'];?>"
+       class="form-control">

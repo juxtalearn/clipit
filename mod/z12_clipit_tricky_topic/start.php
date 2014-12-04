@@ -22,6 +22,8 @@ function clipit_ttt_init() {
 
     elgg_register_action("stumbling_blocks/link", "{$plugin_dir}/actions/stumbling_blocks/link.php");
 
+    elgg_register_action("tricky_topic/save", "{$plugin_dir}/actions/tricky_topic/save.php");
+
     elgg_extend_view("js/activity", "js/tricky_topic");
 }
 
@@ -64,7 +66,23 @@ function tt_page_handler($page){
             elgg_push_breadcrumb(elgg_echo('tricky_topics'), "tricky_topics");
             $title = elgg_echo('tricky_topic:create');
             elgg_push_breadcrumb($title);
-            $content = elgg_view_form('tricky_topic/create');
+            $content = elgg_view_form('tricky_topic/save');
+            break;
+        case 'edit':
+            // Create Tricky Topic
+            if(!$id = $page[1]){
+                return false;
+            }
+            $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($id)));
+            $filter = '';
+            elgg_push_breadcrumb(elgg_echo('tricky_topics'), "tricky_topics");
+            elgg_push_breadcrumb($tricky_topic->name, "tricky_topics/view/{$tricky_topic->id}");
+            $title = elgg_echo('edit');
+            elgg_push_breadcrumb($title);
+            $content = elgg_view_form('tricky_topic/save',
+                array('data-validate' => 'true'),
+                array('entity' => $tricky_topic
+                ));
             break;
         case 'view':
             // View Tricky Topic

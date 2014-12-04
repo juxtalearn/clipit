@@ -14,6 +14,8 @@ $type = get_input('type');
 $id = get_input('id');
 $num = get_input('num');
 $tt = get_input('tricky_topic');
+$input_prefix = get_input('input_prefix');
+
 switch($type){
     case 'question':
         $question = get_input('question');
@@ -21,7 +23,8 @@ switch($type){
             'parent' => true,
             'num' => $num,
             'question' => $question,
-            'tricky-topic' => $tt
+            'tricky-topic' => $tt,
+            'input_prefix' => $input_prefix
         ));
         break;
     case 'question_list_clone':
@@ -33,10 +36,11 @@ switch($type){
         break;
     case 'question_list_from_tags':
         echo elgg_view('activity/admin/tasks/quiz/question/list_from_tags', array(
-            'tricky-topic' => $tt
+            'tricky-topic' => $tt,
+            'input_prefix' => $input_prefix
         ));
         break;
     default:
-        echo elgg_view('activity/admin/tasks/quiz/types/'.$type, array('id' => $id, 'num' => $num));
+        echo elgg_view('activity/admin/tasks/quiz/types/'.$type, array('id' => $id, 'num' => $num, 'input_prefix' => $input_prefix));
         break;
 }

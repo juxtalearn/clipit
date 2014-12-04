@@ -15,9 +15,22 @@ $multimedia = elgg_extract('multimedia', $vars);
 $user = array_pop(ClipitUser::get_by_id(array($tricky_topic->owner_id)));
 ?>
 <div class="margin-bottom-10">
-    <small class="pull-right">
+    <div class="pull-right">
+    <small class="show">
         <?php echo elgg_view('output/friendlytime', array('time' => $tricky_topic->time_created));?>
     </small>
+    <?php if($user->id == elgg_get_logged_in_user_guid()):?>
+        <div class="margin-top-10">
+            <?php echo elgg_view('output/url', array(
+                'href'  => "tricky_topics/edit/{$tricky_topic->id}",
+                'class' => 'btn btn-xs btn-primary',
+                'title' => elgg_echo('tricky_topic:edit'),
+                'text'  => elgg_echo('tricky_topic:edit'),
+            ));
+            ?>
+        </div>
+    <?php endif;?>
+    </div>
     <small class="show"><?php echo elgg_echo('author');?></small>
     <i class="fa-user fa blue"></i>
     <?php echo elgg_view('output/url', array(

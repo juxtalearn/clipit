@@ -119,6 +119,9 @@ function clipit_final_init()
         elgg_register_simplecache_view('js/clipit');
         elgg_register_js('clipit', $clipit_js);
 
+        // jQuery Wiris TinyMCE integration
+        elgg_register_js("jquery:wiris_tinymce", "{$plugin_url}/vendors/tinymce/plugins/tiny_mce_wiris/integration/WIRISplugins.js");
+
         elgg_load_js("jquery-ui");
         elgg_load_js("jquery:waypoints");
         elgg_load_js("jquery:waypoints:sticker");

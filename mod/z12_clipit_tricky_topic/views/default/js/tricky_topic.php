@@ -46,5 +46,4 @@ $(document).on("click", "#add-tag", function(){
     container.find(".input-tag:last").focus().autocomplete(tags_autocomplete);
 });
 
-
 });

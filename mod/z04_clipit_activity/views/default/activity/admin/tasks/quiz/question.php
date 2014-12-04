@@ -13,7 +13,7 @@
 $id = uniqid('question_');
 $num = elgg_extract('num', $vars);
 $tricky_topic = elgg_extract('tricky-topic', $vars);
-$input_task = elgg_extract('input_task', $vars);
+$input_prefix = elgg_extract('input_prefix', $vars);
 $question = false;
 $tt_tags = ClipitTrickyTopic::get_tags($tricky_topic);
 
@@ -34,12 +34,12 @@ if($question){
     <?php
     if($vars['parent']){
         echo elgg_view("input/hidden", array(
-            'name' => $input_task.'question['.$id.'][id_parent]',
+            'name' => $input_prefix.'[question]['.$id.'][id_parent]',
             'value' => $question->id,
         ));
     } else {
         echo elgg_view("input/hidden", array(
-            'name' => $input_task.'question['.$id.'][id]',
+            'name' => $input_prefix.'[question]['.$id.'][id]',
             'value' => $question->id,
         ));
     }
@@ -79,7 +79,7 @@ if($question){
                 <div class="form-group">
                     <label>Título de la pregunta</label>
                     <?php echo elgg_view("input/text", array(
-                        'name' => $input_task.'question['.$id.'][title]',
+                        'name' => $input_prefix.'[question]['.$id.'][title]',
                         'class' => 'form-control',
                         'value' => $question->name,
                         'required' => true
@@ -89,7 +89,7 @@ if($question){
                 <div class="form-group">
                     <label>Enunciado</label>
                     <?php echo elgg_view("input/plaintext", array(
-                        'name' => $input_task.'question['.$id.'][description]',
+                        'name' => $input_prefix.'[question]['.$id.'][description]',
                         'value' => $question->description,
                         'class' => 'form-control',
                         'onclick'   => '$(this).addClass(\'mceEditor\');
@@ -104,7 +104,7 @@ if($question){
                     <div class="difficulty-slider">
                         <?php
                             echo elgg_view("input/hidden", array(
-                                'name' => $input_task.'question['.$id.'][difficulty]',
+                                'name' => $input_prefix.'[question]['.$id.'][difficulty]',
                                 'value' => $question ? $question->difficulty : 1
                             ));
                         ?>
@@ -122,7 +122,7 @@ if($question){
                 <?php if($tt_tags):?>
                 <div class="form-group tags-question-select">
                     <label><?php echo elgg_echo('tags');?></label>
-                    <select name="<?php echo $input_task;?>question[<?php echo $id;?>][tags][]" data-placeholder="<?php echo elgg_echo('click_add');?>" style="width:100%;" multiple class="tags-select" tabindex="8">
+                    <select name="<?php echo $input_prefix;?>[question][<?php echo $id;?>][tags][]" data-placeholder="<?php echo elgg_echo('click_add');?>" style="width:100%;" multiple class="tags-select" tabindex="8">
                         <option value=""></option>
                         <?php
                         foreach($tt_tags as $tag_id):
@@ -138,7 +138,7 @@ if($question){
                 <div class="form-group">
                     <label>Tipo de pregunta</label>
                     <?php echo elgg_view("input/dropdown", array(
-                        'name' => $input_task.'question['.$id.'][type]',
+                        'name' => $input_prefix.'[question]['.$id.'][type]',
                         'style' => 'padding: 5px;',
                         'value' => $question ? $question->option_type: false,
                         'class' => 'form-control select-question-type',
@@ -155,7 +155,13 @@ if($question){
                     <div class="results">
                         <?php if(!$question):?>
                             <?php for($i = 1; $i <= 3; $i++):?>
-                                <?php echo elgg_view('activity/admin/tasks/quiz/types/select_one', array('id' => $id, 'num' => $i));?>
+                                <?php echo elgg_view('activity/admin/tasks/quiz/types/select_one',
+                                    array(
+                                        'id' => $id,
+                                        'num' => $i,
+                                        'input_prefix' => $input_prefix
+                                    ));
+                                ?>
                             <?php endfor;?>
                         <?php else: ?>
                             <?php
@@ -163,7 +169,14 @@ if($question){
                             if($question->option_type == ClipitQuizQuestion::TYPE_SELECT_ONE):
                                 foreach($options as $key => $value):?>
                                     <?php echo elgg_view('activity/admin/tasks/quiz/types/select_one',
-                                        array('id' => $id, 'num' => $i, 'value' => $value, 'checked' => $question->validation_array[$key]));?>
+                                        array(
+                                            'id' => $id,
+                                            'num' => $i,
+                                            'value' => $value,
+                                            'checked' => $question->validation_array[$key],
+                                            'input_prefix' => $input_prefix
+                                        ));
+                                    ?>
                                     <?php
                                     $i++;
                                 endforeach;
@@ -188,7 +201,12 @@ if($question){
                     <div class="results">
                         <?php if(!$question):?>
                             <?php for($i = 1; $i <= 3; $i++):?>
-                                <?php echo elgg_view('activity/admin/tasks/quiz/types/select_multi', array('id' => $id, 'num' => $i));?>
+                                <?php echo elgg_view('activity/admin/tasks/quiz/types/select_multi',
+                                    array(
+                                        'id' => $id,
+                                        'num' => $i,
+                                        'input_prefix' => $input_prefix
+                                    ));?>
                             <?php endfor;?>
                         <?php else: ?>
                             <?php
@@ -196,7 +214,13 @@ if($question){
                             if($question->option_type == ClipitQuizQuestion::TYPE_SELECT_MULTI):
                                 foreach($options as $key => $value):?>
                                     <?php echo elgg_view('activity/admin/tasks/quiz/types/select_multi',
-                                        array('id' => $id, 'num' => $i, 'value' => $value, 'checked' => $question->validation_array[$key]));?>
+                                        array(
+                                            'id' => $id,
+                                            'num' => $i,
+                                            'value' => $value,
+                                            'checked' => $question->validation_array[$key],
+                                            'input_prefix' => $input_prefix
+                                        ));?>
                             <?php
                                     $i++;
                                 endforeach;
@@ -214,13 +238,31 @@ if($question){
                     </strong>
                 </div>
                 <div class="show-question" id="<?php echo $id;?>" data-question="<?php echo ClipitQuizQuestion::TYPE_STRING;?>" style="display: none;">
-                    <?php echo elgg_view('activity/admin/tasks/quiz/types/string', array('id' => $id, 'checked' => end($question->validation_array)));?>
+                    <?php echo elgg_view('activity/admin/tasks/quiz/types/string',
+                        array(
+                            'id' => $id,
+                            'checked' => end($question->validation_array),
+                            'input_prefix' => $input_prefix
+                        ));
+                    ?>
                 </div>
                 <div class="show-question" id="<?php echo $id;?>" data-question="<?php echo ClipitQuizQuestion::TYPE_NUMBER;?>" style="display: none;">
-                    <?php echo elgg_view('activity/admin/tasks/quiz/types/number', array('id' => $id, 'checked' => end($question->validation_array)));?>
+                    <?php echo elgg_view('activity/admin/tasks/quiz/types/number',
+                        array(
+                            'id' => $id,
+                            'checked' => end($question->validation_array),
+                            'input_prefix' => $input_prefix
+                            ));
+                    ?>
                 </div>
                 <div class="show-question" id="<?php echo $id;?>" data-question="<?php echo ClipitQuizQuestion::TYPE_TRUE_FALSE;?>" style="display: none;">
-                    <?php echo elgg_view('activity/admin/tasks/quiz/types/true_false', array('id' => $id, 'checked' => end($question->validation_array)));?>
+                    <?php echo elgg_view('activity/admin/tasks/quiz/types/true_false',
+                        array(
+                            'id' => $id,
+                            'checked' => end($question->validation_array),
+                            'input_prefix' => $input_prefix
+                        ));
+                    ?>
                 </div>
             </div>
         </div>

@@ -116,7 +116,13 @@ $count = elgg_extract('count', $vars);
                 </td>
                 <td>
                     <?php if($user->id == elgg_get_logged_in_user_guid()):?>
-                        <a class="btn btn-xs btn-primary">Edit</a>
+                        <?php echo elgg_view('output/url', array(
+                            'href'  => "tricky_topics/edit/{$tricky_topic->id}",
+                            'class' => 'btn btn-xs btn-primary',
+                            'title' => elgg_echo('edit'),
+                            'text'  => elgg_echo('edit'),
+                        ));
+                        ?>
                     <?php endif;?>
                 </td>
             </tr>

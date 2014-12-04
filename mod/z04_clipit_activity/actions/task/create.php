@@ -27,7 +27,7 @@ foreach($tasks as $task){
     if($task['type'] == ClipitTask::TYPE_QUIZ_TAKE){
         $quiz = get_input('quiz');
         // Set questions to Quiz
-        $questions = get_input('question');
+        $questions = $quiz['question'];
         foreach($questions as $question){
             $values = array();
             $validations = array();
