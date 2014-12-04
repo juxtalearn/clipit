@@ -23,6 +23,7 @@ class ClipitTrickyTopic extends UBItem {
     const REL_TRICKYTOPIC_TAG = "ClipitTrickyTopic-ClipitTag";
     public $subject = "";
     public $country = "";
+    public $location = "";
     public $tag_array = array();
 
     /**
@@ -34,6 +35,7 @@ class ClipitTrickyTopic extends UBItem {
         parent::copy_from_elgg($elgg_entity);
         $this->subject = (string)$elgg_entity->get("subject");
         $this->country = (string)$elgg_entity->get("country");
+        $this->location = (string)$elgg_entity->get("location");
         $this->tag_array = static::get_tags((int)$this->id);
     }
 
@@ -46,6 +48,7 @@ class ClipitTrickyTopic extends UBItem {
         parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("subject", (string)$this->subject);
         $elgg_entity->set("country", (string)$this->country);
+        $elgg_entity->set("location", (string)$this->location);
     }
 
     /**
