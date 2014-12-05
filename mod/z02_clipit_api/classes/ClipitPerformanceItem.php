@@ -20,7 +20,7 @@ class ClipitPerformanceItem extends UBItem {
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
-    const SUBTYPE = "ClipitPerformanceTranslation";
+    const SUBTYPE = "ClipitPerformanceItem";
 
     /*
     Properties are disposed in arrays by language, in the following order:
