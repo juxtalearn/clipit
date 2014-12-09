@@ -16,8 +16,8 @@
  * Expose class functions for the ClipIt REST API
  */
 function expose_performance_item_functions() {
-    $api_suffix = "clipit.performance_item.";
-    $class_suffix = "ClipitPerformanceItem::";
+    $api_suffix = "clipit.reflection_item.";
+    $class_suffix = "ClipitReflectionItem::";
     expose_common_functions($api_suffix, $class_suffix);
     expose_function(
         $api_suffix . "get_by_category", $class_suffix . "get_by_category",
