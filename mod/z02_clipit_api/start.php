@@ -22,6 +22,7 @@ function clipit_api_init() {
     loadFiles(elgg_get_plugins_path() . "z02_clipit_api/libraries/clipit_rest_api/");
     expose_clipit_api();
     loadFiles(elgg_get_plugins_path() . "z02_clipit_api/libraries/performance_palette/");
+    loadFiles(elgg_get_plugins_path() . "z02_clipit_api/libraries/reflection_palette/");
     loadFiles(elgg_get_plugins_path() . "z02_clipit_api/libraries/juxtalearn-cookie-authentication/");
     elgg_register_action("useradd", elgg_get_plugins_path(). "z02_clipit_api/actions/useradd.php", 'admin');
     elgg_register_admin_menu_item('configure', 'youtube_auth', 'settings');

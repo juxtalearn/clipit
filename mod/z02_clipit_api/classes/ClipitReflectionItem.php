@@ -6,7 +6,7 @@
  * Time: 13:45
  */
 
-class ReflectionItem extends UBItem{
+class ClipitReflectionItem extends UBItem{
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
