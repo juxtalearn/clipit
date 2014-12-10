@@ -22,8 +22,8 @@ const KEY_NAME = "reflection_palette";
 if(get_config(KEY_NAME) === true) {
     return;
 }
-
-set_config(KEY_NAME, true);
+error_log("hola");
+set_config(KEY_NAME, true); die;
 
 // Load Reflection Palette for all languages
 input_reflection_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/reflection_palette/".FILE_NAME_EN);

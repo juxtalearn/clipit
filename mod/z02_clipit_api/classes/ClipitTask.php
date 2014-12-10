@@ -267,17 +267,20 @@ class ClipitTask extends UBItem {
                 }
                 return false;
             case static::TYPE_RESOURCE_FEEDBACK:
-                $user_ratings = ClipitRating::get_by_owner(array($entity_id));
-                $rating_targets = array();
-                foreach($user_ratings[$entity_id] as $user_rating) {
-                    $rating_targets[] = (int)$user_rating->target;
-                }
                 $parent_task = new static($task->parent_task);
                 // If there are no resources to give feedback on, the status is false = uncompleted
                 if(empty($parent_task->resource_array)){
                     return false;
-                } // If the only resource was authored by the user's group
-                elseif(count($parent_task->resource_array) == 1){
+                }
+                $user_ratings = ClipitRating::get_by_owner(array($entity_id));
+                $rating_targets = array();
+                if(!empty($user_ratings[$entity_id])) {
+                    foreach ($user_ratings[$entity_id] as $user_rating) {
+                        $rating_targets[] = (int)$user_rating->target;
+                    }
+                }
+                 // If the only resource was authored by the user's group
+                if(count($parent_task->resource_array) == 1){
                     $resource_id = array_pop($parent_task->resource_array);
                     $resource_group = (int)ClipitResource::get_group($resource_id);
                     $user_group = (int)ClipitGroup::get_from_user_activity($entity_id, $task->activity);
@@ -304,17 +307,20 @@ class ClipitTask extends UBItem {
                 }
                 return false;
             case static::TYPE_STORYBOARD_FEEDBACK:
-                $user_ratings = ClipitRating::get_by_owner(array($entity_id));
-                $rating_targets = array();
-                foreach($user_ratings[$entity_id] as $user_rating) {
-                    $rating_targets[] = (int)$user_rating->target;
-                }
                 $parent_task = new static($task->parent_task);
                 // If there are no storyboards to give feedback on, the status is false = uncompleted
                 if(empty($parent_task->storyboard_array)){
                     return false;
-                }// If the only storyboard was authored by the user's group
-                elseif(count($parent_task->storyboard_array) == 1){
+                }
+                $user_ratings = ClipitRating::get_by_owner(array($entity_id));
+                $rating_targets = array();
+                if(!empty($user_ratings[$entity_id])) {
+                    foreach ($user_ratings[$entity_id] as $user_rating) {
+                        $rating_targets[] = (int)$user_rating->target;
+                    }
+                }
+                // If the only storyboard was authored by the user's group
+                if(count($parent_task->storyboard_array) == 1){
                     $storyboard_id = array_pop($parent_task->storyboard_array);
                     $storyboard_group = (int)ClipitStoryboard::get_group($storyboard_id);
                     $user_group = (int)ClipitGroup::get_from_user_activity($entity_id, $task->activity);
@@ -341,16 +347,20 @@ class ClipitTask extends UBItem {
                 }
                 return false;
             case static::TYPE_VIDEO_FEEDBACK:
-                $user_ratings = ClipitRating::get_by_owner(array($entity_id));
-                $rating_targets = array();
-                foreach($user_ratings[$entity_id] as $user_rating) {
-                    $rating_targets[] = (int)$user_rating->target;
-                }
                 $parent_task = new static($task->parent_task);
                 // If there are no storyboards to give feedback on, the status is false = uncompleted
                 if(empty($parent_task->video_array)){
                     return false;
-                }elseif(count($parent_task->video_array) == 1){ // If the only video was authored by the user's group
+                }
+                $user_ratings = ClipitRating::get_by_owner(array($entity_id));
+                $rating_targets = array();
+                if(!empty($user_ratings[$entity_id])) {
+                    foreach ($user_ratings[$entity_id] as $user_rating) {
+                        $rating_targets[] = (int)$user_rating->target;
+                    }
+                }
+                // If the only video was authored by the user's group
+                if(count($parent_task->video_array) == 1){
                     $video_id = array_pop($parent_task->video_array);
                     $video_group = (int)ClipitVideo::get_group($video_id);
                     $user_group = (int)ClipitGroup::get_from_user_activity($entity_id, $task->activity);

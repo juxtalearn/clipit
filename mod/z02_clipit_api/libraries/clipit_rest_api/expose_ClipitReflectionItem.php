@@ -15,7 +15,7 @@
 /**
  * Expose class functions for the ClipIt REST API
  */
-function expose_performance_item_functions() {
+function expose_reflection_item_functions() {
     $api_suffix = "clipit.reflection_item.";
     $class_suffix = "ClipitReflectionItem::";
     expose_common_functions($api_suffix, $class_suffix);
