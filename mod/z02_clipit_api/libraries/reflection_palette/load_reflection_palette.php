@@ -1,5 +1,7 @@
 <?php
 
+
+
 /**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
@@ -12,24 +14,25 @@
  * @package         ClipIt
  * @subpackage      clipit_api
  */
-const FILE_NAME_EN = "reflection_palette_en.xlsx";
-const FILE_NAME_ES = "reflection_palette_es.xlsx";
-const FILE_NAME_DE = "reflection_palette_de.xlsx";
-const FILE_NAME_PT = "reflection_palette_pt.xlsx";
-const KEY_NAME = "reflection_palette";
+$file_name_en = "reflection_palette_en.xlsx";
+$file_name_es = "reflection_palette_es.xlsx";
+$file_name_de = "reflection_palette_de.xlsx";
+$file_name_pt = "reflection_palette_pt.xlsx";
+$key_name = "reflection_palette";
+
+set_config($key_name, true);
 
 // Check if Reflection Palette was already loaded.
-if(get_config(KEY_NAME) === true) {
+if(get_config($key_name) === true) {
     return;
 }
-error_log("hola");
-set_config(KEY_NAME, true); die;
+
 
 // Load Reflection Palette for all languages
-input_reflection_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/reflection_palette/".FILE_NAME_EN);
-input_reflection_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/reflection_palette/".FILE_NAME_ES);
-input_reflection_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/reflection_palette/".FILE_NAME_DE);
-input_reflection_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/reflection_palette/".FILE_NAME_PT);
+input_reflection_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/reflection_palette/$file_name_en");
+input_reflection_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/reflection_palette/$file_name_es");
+input_reflection_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/reflection_palette/$file_name_de");
+input_reflection_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/reflection_palette/$file_name_pt");
 
 /**
  * Add Reflection Items from an Excel file
