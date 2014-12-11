@@ -134,5 +134,6 @@ class ClipitQuizResult extends UBItem {
                 return $quiz_result;
             }
         }
+        return null;
     }
 }
