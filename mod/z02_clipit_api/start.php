@@ -19,11 +19,12 @@ elgg_register_event_handler('init', 'system', 'clipit_api_init');
  * Initialization method which loads objects, libraries, exposes the REST API, and registers test classes.
  */
 function clipit_api_init() {
-    loadFiles(elgg_get_plugins_path() . "z02_clipit_api/libraries/clipit_rest_api/");
+    $lib_path = elgg_get_plugins_path() . "z02_clipit_api/libraries";
+    loadFiles("$lib_path/clipit_rest_api/");
     expose_clipit_api();
-    loadFiles(elgg_get_plugins_path() . "z02_clipit_api/libraries/performance_palette/");
-    loadFiles(elgg_get_plugins_path() . "z02_clipit_api/libraries/reflection_palette/");
-    loadFiles(elgg_get_plugins_path() . "z02_clipit_api/libraries/juxtalearn-cookie-authentication/");
+    loadFiles("$lib_path/performance_palette/");
+    loadFiles("$lib_path/reflection_palette/");
+    loadFiles("$lib_path/juxtalearn-cookie-authentication/");
     elgg_register_action("useradd", elgg_get_plugins_path(). "z02_clipit_api/actions/useradd.php", 'admin');
     elgg_register_admin_menu_item('configure', 'youtube_auth', 'settings');
     #elgg_register_admin_menu_item('configure', 'vimeo_auth', 'settings');
