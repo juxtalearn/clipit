@@ -24,6 +24,11 @@ class ClipitQuizQuestion extends UBItem {
     const SUBTYPE = "ClipitQuizQuestion";
     const REL_QUIZQUESTION_TAG = "ClipitQuizQuestion-ClipitTag";
     const REL_QUIZQUESTION_QUIZRESULT = "ClipitQuizQuestion-ClipitQuizResult";
+    const TYPE_TRUE_FALSE = "true_false";
+    const TYPE_SELECT_ONE = "select_one";
+    const TYPE_SELECT_MULTI = "select_multi";
+    const TYPE_NUMBER = "number";
+    const TYPE_STRING = "string";
     /**
      * @var array Array of options to chose from as an answer to the question
      */
@@ -182,5 +187,35 @@ class ClipitQuizQuestion extends UBItem {
      */
     static function get_tags($id) {
         return UBCollection::get_items($id, static::REL_QUIZQUESTION_TAG);
+    }
+
+    static function set_type_true_false($id){
+        $prop_value_array = array();
+        $prop_value_array["option_type"] = static::TYPE_TRUE_FALSE;
+        return static::set_properties($id, $prop_value_array);
+    }
+
+    static function set_type_select_one($id){
+        $prop_value_array = array();
+        $prop_value_array["option_type"] = static::TYPE_SELECT_ONE;
+        return static::set_properties($id, $prop_value_array);
+    }
+
+    static function set_type_select_multi($id){
+        $prop_value_array = array();
+        $prop_value_array["option_type"] = static::TYPE_SELECT_MULTI;
+        return static::set_properties($id, $prop_value_array);
+    }
+
+    static function set_type_number($id){
+        $prop_value_array = array();
+        $prop_value_array["option_type"] = static::TYPE_NUMBER;
+        return static::set_properties($id, $prop_value_array);
+    }
+
+    static function set_type_string($id){
+        $prop_value_array = array();
+        $prop_value_array["option_type"] = static::TYPE_STRING;
+        return static::set_properties($id, $prop_value_array);
     }
 }
