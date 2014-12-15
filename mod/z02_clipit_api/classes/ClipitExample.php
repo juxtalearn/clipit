@@ -21,11 +21,13 @@ class ClipitExample extends UBItem {
      */
     const SUBTYPE = "ClipitExample";
     const REL_EXAMPLE_TAG = "ClipitExample-ClipitTag";
+    const REL_EXAMPLE_REFLECTION_ITEM = "ClipitExample-ClipitReflectionItem";
     const REL_EXAMPLE_RESOURCE = "ClipitExample-ClipitResource";
     const REL_EXAMPLE_STORYBOARD = "ClipitExample-ClipitStoryboard";
     const REL_EXAMPLE_VIDEO = "ClipitExample-ClipitVideo";
     const REL_EXAMPLE_FILE = "ClipitExample-ClipitFile";
     public $tag_array = array();
+    public $reflection_item_array = array();
     public $subject = "";
     public $education_level = 0;
     public $country = "";
@@ -44,6 +46,7 @@ class ClipitExample extends UBItem {
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
         $this->tag_array = (array)static::get_tags($this->id);
+        $this->reflection_item_array = (array)static::get_reflection_items($this->id);
         $this->subject = (string)$elgg_entity->get("subject");
         $this->education_level = (int)$elgg_entity->get("education_level");
         $this->country = (string)$elgg_entity->get("country");
@@ -70,6 +73,7 @@ class ClipitExample extends UBItem {
     protected function save($double_save=false) {
         parent::save($double_save);
         static::set_tags($this->id, (array)$this->tag_array);
+        static::set_reflection_items($this->id, (array)$this->reflection_item_array);
         static::set_resources($this->id, $this->resource_array);
         static::set_videos($this->id, $this->video_array);
         static::set_storyboards($this->id, $this->storyboard_array);
@@ -122,6 +126,53 @@ class ClipitExample extends UBItem {
      */
     static function get_tags($id) {
         return UBCollection::get_items($id, static::REL_EXAMPLE_TAG);
+    }
+
+    /**
+     * Adds Reflection Items to an Example, referenced by Id.
+     *
+     * @param int   $id        Id from the Example to add Reflection Items to
+     * @param array $reflection_item_array Array of Reflection Item Ids to be added to the Example
+     *
+     * @return bool Returns true if success, false if error
+     */
+    static function add_reflection_items($id, $reflection_item_array) {
+        return UBCollection::add_items($id, $reflection_item_array, static::REL_EXAMPLE_REFLECTION_ITEM);
+    }
+
+    /**
+     * Sets Reflection Items to an Example, referenced by Id.
+     *
+     * @param int   $id        Id from the Example to set Reflection Items to
+     * @param array $reflection_item_array Array of Reflection Item Ids to be set to the Example
+     *
+     * @return bool Returns true if success, false if error
+     */
+    static function set_reflection_items($id, $reflection_item_array) {
+        return UBCollection::set_items($id, $reflection_item_array, static::REL_EXAMPLE_REFLECTION_ITEM);
+    }
+
+    /**
+     * Remove Reflection Items from an Example.
+     *
+     * @param int   $id        Id from Example to remove Reflection Items from
+     * @param array $reflection_item_array Array of Reflection Item Ids to remove from Example
+     *
+     * @return bool Returns true if success, false if error
+     */
+    static function remove_reflection_items($id, $reflection_item_array) {
+        return UBCollection::remove_items($id, $reflection_item_array, static::REL_EXAMPLE_REFLECTION_ITEM);
+    }
+
+    /**
+     * Get all Reflection Items from an Example
+     *
+     * @param int $id Id of the Example to get Reflection Items from
+     *
+     * @return array|bool Returns an array of Reflection Item IDs, or false if error
+     */
+    static function get_reflection_items($id) {
+        return UBCollection::get_items($id, static::REL_EXAMPLE_REFLECTION_ITEM);
     }
 
     // Resources methods
