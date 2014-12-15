@@ -115,7 +115,7 @@ if (!function_exists('session_status')) {
 
     <p>cloning github repository...</p>
     <?php
-    echo exec("git clone -b $clipit_tag --recursive $git_url git_tmp");
+    echo exec("git clone -b $clipit_tag --depth=1 --recursive $git_url git_tmp");
     echo exec("mv -f git_tmp/.* .");
     echo exec("mv -f git_tmp/* .");
     echo exec("rmdir git_tmp");
