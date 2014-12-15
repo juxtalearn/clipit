@@ -125,7 +125,7 @@ If you are ready to proceed, click the Next button.",
 	'install:admin:password:tooshort' => 'Your password was too short',
 	'install:admin:cannot_create' => 'Unable to create an admin account.',
 
-	'install:complete:instructions' => 'Your ClipIt site is now ready to be used.<p><b>!!! REMEMBER TO ACTIVATE ALL PLUGINS !!!</b><p>Click the button below to be taken to your site.',
+	'install:complete:instructions' => 'Your ClipIt site is now ready to be used. Click the button below to be taken to your site.<p><b>!!! REMEMBER TO ACTIVATE ALL PLUGINS !!!</b>',
 	'install:complete:gotosite' => 'Go to site',
 
 	'InstallationException:UnknownStep' => '%s is an unknown installation step.',
