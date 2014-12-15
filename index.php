@@ -93,8 +93,8 @@ if (!function_exists('session_status')) {
         ?>
         <h1>ClipIt Install Script</h1>
         <h2>ClipIt is being downloaded</h2>
-        <p>Meanwhile you can take a look at the ClipIt Introduction Video<br/>(it will open in a new tab)</p>
-        <p><a target="_blank" href="www.youtube.com/watch?v=8lTAdtT1nFc"><img src="http://img.youtube.com/vi/8lTAdtT1nFc/0.jpg"/></a></p>
+        <p>Meanwhile you can take a look at the ClipIt Introduction Video<br/>(it opens in a new tab)</p>
+        <p><a target="_blank" href="http://www.youtube.com/watch?v=8lTAdtT1nFc"><img src="http://img.youtube.com/vi/8lTAdtT1nFc/0.jpg"/></a></p>
         <p>The install process will take a few minutes, <b>please don't close this page</b></p>
 
     <?php
