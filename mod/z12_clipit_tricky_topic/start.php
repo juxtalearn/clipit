@@ -32,18 +32,20 @@ function clipit_ttt_init() {
  */
 function tt_page_handler($page){
     $sidebar = elgg_view_module('aside', elgg_echo('menu'), elgg_view('tricky_topics/sidebar/menu'),
-        array('class' => 'activity-group-block margin-bottom-10')
+        array('class' => 'activity-group-block margin-bottom-10 aside-tree')
     );
     $selected_tab = get_input('filter', 'all');
     $filter = elgg_view('tricky_topics/filter', array('selected' => $selected_tab, 'href' => $page[0]));
     $count = 0;
     $params = array();
+    $view = $page[0];
     switch($page[0]){
         case '':
             $title = "Tricky Topics";
             if(isset($page[1]) && $page[1] == 'view' && $id = $page[2]){
                 var_dump($page);
             }
+            $view = "tricky_topics";
             $entities = ClipitTrickyTopic::get_all();
             $count = count($entities);
             $entities = array_slice($entities, clipit_get_offset(), clipit_get_limit(10));
@@ -54,14 +56,14 @@ function tt_page_handler($page){
             $entities = ClipitTag::get_all();
             $count = count($entities);
             $entities = array_slice($entities, clipit_get_offset(), clipit_get_limit());
-            $content = elgg_view('stumbling_blocks/view', array('entities' => $entities, 'count' => $count));
+            $content = elgg_view('stumbling_blocks/list', array('entities' => $entities, 'count' => $count));
             break;
         case 'student_problems':
             $title = elgg_echo('student_problems');
             $content = elgg_view('examples/list');
             switch($page[1]){
                 case 'create':
-                    // Create Tricky Topic
+                    // Create Example
                     $filter = '';
                     elgg_push_breadcrumb(elgg_echo('examples'), "tricky_topics/student_problems");
                     $title = elgg_echo('example:create');
@@ -83,6 +85,20 @@ function tt_page_handler($page){
                         array('data-validate' => 'true'),
                         array('entity' => $tricky_topic
                         ));
+                    break;
+                case 'view':
+                    if($id = $page[2]) {
+                        $filter = '';
+                        if ($example = array_pop(ClipitExample::get_by_id(array($id)))) {
+                            elgg_push_breadcrumb(elgg_echo('student_problems'), "tricky_topics/student_problems");
+                            $title = $example->name;
+                            elgg_push_breadcrumb($title);
+                            $entities = $example;
+                            $content = elgg_view('examples/view', array('entity' => $example, 'multimedia' => $multimedia));
+                        } else {
+                            return false;
+                        }
+                    }
                     break;
             }
             break;
@@ -130,8 +146,8 @@ function tt_page_handler($page){
                         $multimedia['files'] = array_merge($multimedia['files'], $activity->file_array);
                         $multimedia['storyboards'] = array_merge($multimedia['storyboards'], $activity->storyboard_array);
                     }
-                    $sidebar .= elgg_view_module('aside', '<i class="fa fa-clock-o"></i> Revisions',
-                        elgg_view('tricky_topics/sidebar/revisions'));
+//                    $sidebar .= elgg_view_module('aside', '<i class="fa fa-clock-o"></i> Revisions',
+//                        elgg_view('tricky_topics/sidebar/revisions'));
                     $content = elgg_view('tricky_topics/view', array('entity' => $tricky_topic, 'multimedia' => $multimedia));
                 } else {
                     return false;
@@ -151,7 +167,7 @@ function tt_page_handler($page){
                 }
             }
             $entities = $owner;
-            $content = elgg_view('stumbling_blocks/view', array('entities' => $entities, 'count' => $count));
+            $content = elgg_view($view.'/list', array('entities' => $entities, 'count' => $count));
             break;
     }
     $params = array(

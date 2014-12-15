@@ -15,9 +15,17 @@ $english = array(
     'country' => 'Country',
     'country:select' => 'Select country',
     'tricky_topic:edit' => 'Edit Tricky Topic',
+    // Examples
     'examples' => 'Ejemplos',
     'example:add' => 'Add example',
     'example:create' => 'Create example',
+    'example:subject' => 'Subject',
+    'example:education_level' => 'Education level',
+    'example:education_level:1' => 'Primary',
+    'example:education_level:2' => 'GCSE',
+    'example:education_level:3' => 'A-Level',
+    'example:education_level:4' => 'University',
+
     'location' => 'Location',
     'location:optional' => 'Optional field to associate tricky topic to a location',
     'author' => 'Author',

@@ -10,22 +10,24 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-var_dump($_POST);
-die;
-$title = get_input('title');
-$description = get_input('description');
-$tags = get_input('tags');
-$url = get_input('url');
-$file = get_input('file');
-$tricky_topic = get_input('tricky-topic');
-$subject = get_input('subject');
-$education_level = get_input('education-level');
-$location = get_input('location');
 
-$example_id = ClipitExample::create(array(
-    'name' => $title,
-    'description' => $description,
-    'resource_url' => $url,
-));
-ClipitExample::add_tags($example_id, $tags);
+$file = get_input('file');
+
+$data = array(
+    'name' => get_input('title'),
+    'description' => get_input('description'),
+    'country' => get_input('country'),
+    'location' => get_input('location'),
+    'education_level' => get_input('education-level'),
+    'subject' => get_input('subject'),
+);
+
+$example_id = ClipitExample::create($data);
+// Create Stumling blocks
+$tags =  get_input('tag');
+$tag_ids = array();
+foreach($tags as $tag){
+    $tag_ids[] = ClipitTag::create(array('name' => $tag));
+}
+ClipitExample::set_tags($example_id, $tag_ids);
 //$file_array

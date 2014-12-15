@@ -14,15 +14,6 @@ $tag = get_input('stumbling_block');
 $tricky_topic = elgg_extract('tricky_topic', $vars);
 $sb = elgg_extract('sb', $vars);
 ?>
-<div class="margin-bottom-20">
-    <?php echo elgg_view('output/url', array(
-        'href'  => "tricky_topics/student_problems/create",
-        'class' => 'btn btn-primary margin-bottom-10',
-        'title' => elgg_echo('create'),
-        'text'  => elgg_echo('create'),
-    ));
-    ?>
-</div>
 <table class="table">
     <thead>
     <tr>

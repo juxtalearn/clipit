@@ -13,66 +13,14 @@
 $tricky_topics = elgg_extract('entities', $vars);
 $count = elgg_extract('count', $vars);
 ?>
-    <script>
-        $(function(){
-            $("#add-tricky-topic").click(function(){
-                $("#form-add-tricky-topic").toggle().find("input:first").focus();
-            });
-        });
-    </script>
     <div class="margin-bottom-20">
         <?php echo elgg_view('output/url', array(
-            'href'  => "javascript:;",
-            'id'    => 'add-tricky-topic',
+            'href'  => "tricky_topics/create",
             'class' => 'btn btn-primary margin-bottom-10',
             'title' => elgg_echo('create'),
             'text'  => elgg_echo('create'),
         ));
         ?>
-        <div class="row margin-0 margin-bottom-10" id="form-add-tricky-topic" style="display: none;background: #fafafa;padding: 10px;">
-            <div class="form-group col-md-12 margin-top-10">
-                <?php echo elgg_view("input/text", array(
-                    'name' => 'new-tricky-topic',
-                    'value' => $entity->name,
-                    'class' => 'form-control',
-                    'required' => true,
-                    'placeholder' => elgg_echo('tricky_topic')
-                ));
-                ?>
-                <hr class="margin-0 margin-top-10 margin-bottom-10">
-                <small class="show margin-top-5"><?php echo elgg_echo("tags");?></small>
-            </div>
-            <div id="form-add-tags">
-                <?php echo elgg_view("tricky_topic/add");?>
-            </div>
-            <div class="col-md-12">
-                <div class="pull-right">
-                    <?php echo elgg_view('output/url', array(
-                        'href'  => "javascript:;",
-                        'class' => 'btn btn-xs btn-border-blue btn-primary margin-right-10',
-                        'title' => elgg_echo('cancel'),
-                        'text'  => elgg_echo('cancel'),
-                        'onclick' => '$(\'#add-tricky-topic\').click()',
-                    ));
-                    ?>
-                    <?php echo elgg_view('output/url', array(
-                        'href'  => "javascript:;",
-                        'class' => 'btn btn-xs btn-primary',
-                        'title' => elgg_echo('create'),
-                        'text'  => elgg_echo('create'),
-                    ));
-                    ?>
-                </div>
-                <?php echo elgg_view('output/url', array(
-                    'href'  => "javascript:;",
-                    'class' => 'btn btn-xs btn-primary',
-                    'title' => elgg_echo('add'),
-                    'text'  => '<i class="fa fa-plus"></i>' . elgg_echo('add'),
-                    'id'    => 'add-tag'
-                ));
-                ?>
-            </div>
-        </div>
     </div>
     <table class="table table-striped">
         <tr>

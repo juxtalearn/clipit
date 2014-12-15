@@ -10,11 +10,10 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
+
 $data = array(
     'name' => get_input('title'),
     'description' => get_input('description'),
-    'country' => get_input('country'),
-    'location' => get_input('location'),
 );
 $url = REFERER;
 $entity_id = get_input('entity-id');

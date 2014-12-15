@@ -41,11 +41,15 @@ $user = array_pop(ClipitUser::get_by_id(array($tricky_topic->owner_id)));
     ?>
 </div>
 <div class="clearfix"></div>
+<?php if($tricky_topic->description):?>
+    <small><?php echo elgg_echo('description');?></small>
+    <p><?php echo $tricky_topic->description;?></p>
+<?php endif;?>
 <small class="show"><?php echo elgg_echo('tags');?></small>
 <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $tricky_topic->tag_array)); ?>
 <div>
     <?php echo elgg_view('page/components/title_block', array('title' => 'Student problems'));?>
-    <?php echo elgg_view('examples/list', array('entity' => $tricky_topic->examples_array, 'tricky_topic' => $tricky_topic->id));?>
+    <?php echo elgg_view('examples/summary', array('entity' => $tricky_topic->examples_array, 'tricky_topic' => $tricky_topic->id));?>
 </div>
 <div>
     <?php echo elgg_view('page/components/title_block', array('title' => 'Teaching Activity'));?>

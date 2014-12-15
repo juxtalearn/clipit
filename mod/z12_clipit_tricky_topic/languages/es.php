@@ -15,14 +15,22 @@ $spanish = array(
     'country' => 'País',
     'country:select' => 'Seleccionar país',
     'location' => 'Localización',
+    // Examples
     'examples' => 'Ejemplos',
     'example:add' => 'Añadir ejemplo',
     'example:create' => 'Crear ejemplo',
+    'example:subject' => 'Asignatura',
+    'example:education_level' => 'Nivel educativo',
+    'example:education_level:1' => 'Primaria',
+    'example:education_level:2' => 'Secundaria',
+    'example:education_level:3' => 'Bachillerato',
+    'example:education_level:4' => 'Universidad',
+
     'tricky_topic:edit' => 'Editar Tema',
     'location:optional' => 'Campo de texto opcional para asociar el tema a una localización',
     'author' => 'Autor',
     'tricky_topics' => 'Temas',
-    'student_problems' => 'Problemas de estudiantes',
+    'student_problems' => 'Ejemplos',
 );
 
 add_translation('es', $spanish);

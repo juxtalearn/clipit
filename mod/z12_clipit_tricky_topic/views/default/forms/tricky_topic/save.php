@@ -12,12 +12,14 @@
  */
 $user = array_pop(ClipitUser::get_by_id(array(elgg_get_logged_in_user_guid())));
 $tricky_topic = elgg_extract('entity', $vars);
+$button_value = elgg_echo('create');
 if($tricky_topic){
     $tags = ClipitTag::get_by_id($tricky_topic->tag_array);
     echo elgg_view('input/hidden', array(
         'name' => 'entity-id',
         'value' => $tricky_topic->id,
     ));
+    $button_value = elgg_echo('save');
 }
 ?>
 <div class="row">
@@ -78,5 +80,5 @@ if($tricky_topic){
     </div>
 </div>
 <div class="text-right">
-    <?php echo elgg_view('input/submit', array('value' => elgg_echo('create'), 'class'=>'btn btn-primary')); ?>
+    <?php echo elgg_view('input/submit', array('value' => $button_value, 'class'=>'btn btn-primary')); ?>
 </div>
