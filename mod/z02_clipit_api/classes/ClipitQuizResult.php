@@ -101,6 +101,40 @@ class ClipitQuizResult extends UBItem {
         return parent::set_properties($id, $new_prop_value_array);
     }
 
+    static function evaluate_result($result_id){
+        if(empty($result_id)){
+            return null;
+        }
+        $result_properties = static::get_properties($result_id, array("answer", "quiz_question"));
+        $answer = $result_properties["answer"];
+        $quiz_question = $result_properties["quiz_question"];
+
+        $question_properties = ClipitQuizQuestion::get_properties($quiz_question, array("option_type", "validation_array"));
+        $option_type = $question_properties["option_type"];
+        $validation_array = $question_properties["validation_array"];
+
+        switch($option_type){
+            case ClipitQuizQuestion::TYPE_SELECT_ONE
+                || ClipitQuizQuestion::TYPE_SELECT_MULTI
+                || ClipitQuizQuestion::TYPE_TRUE_FALSE:
+                if($answer == $validation_array){
+                    $correct = true;
+                } else{
+                    $correct = false;
+                }
+                return static::set_properties($result_id, array("correct" => $correct));
+            case ClipitQuizQuestion::TYPE_NUMBER:
+
+                if((float)$answer == (float)$validation_array[0]){
+                    $correct = true;
+                } else{
+                    $correct = false;
+                }
+            return static::set_properties($result_id, array("correct" => $correct));
+        }
+        return null;
+    }
+
     static function get_quiz_question($id) {
         $rel_array = get_entity_relationships($id, true);
         foreach($rel_array as $rel) {
