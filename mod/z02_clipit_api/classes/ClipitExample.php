@@ -81,6 +81,23 @@ class ClipitExample extends UBItem {
         return $this->id;
     }
 
+    static function get_by_tags($tag_array){
+        $return_examples = array();
+        $example_array = static::get_all(0);
+        if(empty($example_array) || empty($tag_array)){
+            return $return_examples;
+        }
+        foreach($example_array as $example){
+            foreach($example->tag_array as $tag){
+                if(array_search($tag, $tag_array) !== false){
+                    $return_examples[] = $example;
+                    break;
+                }
+            }
+        }
+        return $return_examples;
+    }
+
     /**
      * Adds Tags to an Example, referenced by Id.
      *
