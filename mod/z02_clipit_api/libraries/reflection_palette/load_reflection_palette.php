@@ -20,19 +20,18 @@ $file_name_de = "reflection_palette_de.xlsx";
 $file_name_pt = "reflection_palette_pt.xlsx";
 $key_name = "reflection_palette";
 
-set_config($key_name, true);
-
 // Check if Reflection Palette was already loaded.
 if(get_config($key_name) === true) {
     return;
 }
 
+set_config($key_name, true);
 
 // Load Reflection Palette for all languages
 input_reflection_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/reflection_palette/$file_name_en");
-input_reflection_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/reflection_palette/$file_name_es");
-input_reflection_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/reflection_palette/$file_name_de");
-input_reflection_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/reflection_palette/$file_name_pt");
+#input_reflection_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/reflection_palette/$file_name_es");
+#input_reflection_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/reflection_palette/$file_name_de");
+#input_reflection_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/reflection_palette/$file_name_pt");
 
 /**
  * Add Reflection Items from an Excel file

@@ -32,6 +32,7 @@ function expose_clipit_api() {
     expose_quiz_question_functions();
     expose_quiz_result_functions();
     expose_rating_functions();
+    expose_reflection_item_functions();
     expose_remote_resource_functions();
     expose_remote_site_functions();
     expose_site_functions();
