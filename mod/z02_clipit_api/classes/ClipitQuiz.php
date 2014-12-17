@@ -152,6 +152,25 @@ class ClipitQuiz extends UBItem {
         return false;
     }
 
+    static function questions_answered_by_user($id, $user_id){
+        if(empty($quiz) || empty($user_id)){
+            return null;
+        }
+        $quiz = new static ($id);
+        $answered_questions = (int)0;
+        $user_results = ClipitQuizResult::get_by_owner(array($user_id));
+        $user_results = $user_results[$user_id];
+        if(empty($user_results)){
+            return $answered_questions;
+        }
+        foreach($user_results as $result){
+            if(array_search($result->quiz_question, $quiz->quiz_question_array) !== false){
+                $answered_questions++;
+            }
+        }
+        return $answered_questions;
+    }
+
     /**
      * Adds Quiz Questions to a Quiz.
      *

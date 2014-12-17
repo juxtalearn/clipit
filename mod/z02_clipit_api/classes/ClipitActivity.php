@@ -15,8 +15,10 @@
 /**
  * Contains all elements required to carry out the JuxtaLearn learning method in which Student work in Groups around a
  * selected Tricky Topic.
+ *
  * It contains a list of enrolled/called Students, Groups (that actually participate in the activity), Tasks (set by the
  * teacher/s), support Resources and student Publications.
+ *
  * An Activity can have different statuses: "enroll" state, "active" state and "closed" state, marked by start and
  * end dates which define the current status.
  */
