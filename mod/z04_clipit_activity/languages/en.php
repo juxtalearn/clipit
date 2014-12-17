@@ -162,6 +162,7 @@ $english = array(
     'video:added' => 'Video added',
     'video:add:to_youtube' => 'Upload video to Youtube',
     'video:add:paste_url' => 'Paste URL from YouTube or Vimeo',
+    'video:uploading:youtube' => 'Uploading to Youtube',
     'video:url' => 'Video url',
     'video:upload' => 'Video upload',
     'video:uploaded' => 'Video uploaded',

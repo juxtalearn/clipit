@@ -174,7 +174,7 @@ $(function(){
                 <hr class="margin-0 margin-top-10 margin-bottom-10">
                 <small class="show margin-top-5"><?php echo elgg_echo("tags");?></small>
             </div>
-            <div id="form-add-tags">
+            <div class="form-add-tags">
                 <?php echo elgg_view("tricky_topic/add");?>
             </div>
             <div class="col-md-12">

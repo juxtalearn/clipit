@@ -14,14 +14,13 @@ $result = elgg_extract('result', $vars);
 $finished = elgg_extract('finished', $vars);
 $finished_task = elgg_extract('finished_task', $vars);
 $question = elgg_extract('question', $vars);
-
 $i = 1;
 foreach($question->option_array as $option):
     $checked = '';
-    if($result->answer == $i-1 && $result){
+    if($result->answer[$i-1]){
         $checked = 'checked';
     }
-    ?>
+?>
 <label style="font-weight: normal">
     <?php if($finished):?>
         <input type="radio" disabled <?php echo $checked;?>/>

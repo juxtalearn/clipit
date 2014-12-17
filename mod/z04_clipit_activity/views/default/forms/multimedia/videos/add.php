@@ -46,7 +46,7 @@ echo elgg_view("input/hidden", array(
         $(".chosen-select-items").chosen();
 
         $('form').on('click', 'input[type=submit]', function(evt) {
-            if($(this.form).find(":file").val() != '' ) {
+            if($(this.form).find(":file").val() != '' && $(this.form).find(":file").length > 0) {
                 $("#uploading").prependTo($(this).closest(".modal-content")).show();
                 $("body").css({"cursor": "progress"});
             }
@@ -62,7 +62,7 @@ echo elgg_view("input/hidden", array(
     <div style="height: 100%;" class="wrapper separator loading-block">
         <div>
             <i class="fa fa-spinner fa-spin blue"></i>
-            <h3 class="blue">Uploading to Youtube...</h3>
+            <h3 class="blue"><?php echo elgg_echo('video:uploading:youtube');?>...</h3>
         </div>
     </div>
 </div>

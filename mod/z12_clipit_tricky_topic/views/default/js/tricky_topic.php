@@ -45,5 +45,11 @@ $(document).on("click", "#add-tag", function(){
     container.append(<?php echo json_encode(elgg_view("tricky_topic/add"));?>);
     container.find(".input-tag:last").focus().autocomplete(tags_autocomplete);
 });
-
+$(document).on("keypress", ".form-add-tags input[type=text]", function(e){
+    if(e.keyCode == 13) {
+        e.preventDefault();
+        $("#add-tag").click();
+        return false;
+    }
+});
 });

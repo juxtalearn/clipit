@@ -53,7 +53,7 @@ $spanish = array(
     'activity:group:join' => 'Unirse a un grupo',
     'activity:pending_tasks' => 'Tareas pendientes',
     'activity:next_deadline' => 'Próxima tarea',
-    'activity:quiz' => 'Cuestionario de la actividad',
+    'activity:quiz' => 'Test de la actividad',
     'activity:teachers' => 'Profesores',
     'activity:invited' => 'Ha sido invitado a la actividad',
     // Activity status
@@ -86,7 +86,7 @@ $spanish = array(
     'group:added' => 'Grupo añadido a la actividad',
     'groups:none' => 'No hay grupos',
     // Quizz
-    'quiz' => 'Cuestionario',
+    'quiz' => 'Test',
 
     // Group tools
     'group:menu' => 'Menú del grupo',
@@ -163,6 +163,7 @@ $spanish = array(
     'video:added' => 'Video añadido correctamente',
     'video:add:to_youtube' => 'Subir video a Youtube',
     'video:add:paste_url' => 'Pegar dirección url de Youtube o Vimeo',
+    'video:uploading:youtube' => 'Subiendo a youtube',
     'video:url' => 'Url del video',
     'video:upload' => 'Añadir video',
     'video:uploaded' => 'Video añadido',
@@ -249,7 +250,7 @@ $spanish = array(
     'task:video_upload' => 'Publicar video',
     'task:storyboard_upload' => 'Publicar storyboard',
     'task:storyboard_uploaded' => 'Storyboard subido',
-    'task:quiz_answer' => 'Cuestionario',
+    'task:quiz_answer' => 'Test',
     'task:video_feedback' => 'Feedback sobre video',
     'task:storyboard_feedback' => 'Feedback sobre storyboard',
     'task:other' => 'Otro',

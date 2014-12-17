@@ -23,54 +23,52 @@ foreach($questions as $question_id => $value){
     $correct = false;
     switch($question->option_type){
         case ClipitQuizQuestion::TYPE_NUMBER:
-            $valid = array_pop($question->validation_array);
-            if($valid == $value){
-                $correct = true;
-            }
             break;
         case ClipitQuizQuestion::TYPE_SELECT_ONE:
-            $value = $value - 1;
-            if($question->validation_array[$value]){
-                $correct = true;
-            }
-            break;
-        case ClipitQuizQuestion::TYPE_SELECT_MULTI:
-            $total_validate = count(array_filter($question->validation_array));
-            $validate = 0;
-            $novalidate = 0;
-            for($i = 0; $i<count($question->validation_array); $i++){
-                $value[$i] = $value[$i] - 1;
-                if($question->validation_array[$value[$i]]){
-                    $validate++;
-                } else {
-                    $novalidate++;
+            $p = array_fill(0, count($question->validation_array), 0);
+            for($x = 0; $x < count($value); $x++){
+                if($value[$x]  ){
+                    $s = $value[$x] -1;
+                    $p[$s] = 1;
                 }
             }
-            if($total_validate == $validate && $novalidate == 0){
-                $correct = true;
+            $value = $p;
+            break;
+        case ClipitQuizQuestion::TYPE_SELECT_MULTI:
+            $p = array_fill(0, count($question->validation_array), 0);
+            for($x = 0; $x < count($value); $x++){
+                if($value[$x]  ){
+                    $s = $value[$x] -1;
+                    $p[$s] = 1;
+                }
             }
+            $value = $p;
             break;
         case ClipitQuizQuestion::TYPE_TRUE_FALSE:
-            if($value == array_pop($question->validation_array)){
-                $correct = true;
+            $a = array_fill(0, 2, 0);
+            switch($value){
+                case 'true':
+                    $a[0] = 1;
+                    break;
+                case 'false':
+                    $a[1] = 1;
+                    break;
             }
-            break;
-        case ClipitQuizQuestion::TYPE_STRING:
-            $correct = false;
+            $value = $a;
             break;
     }
 
     if($answered = ClipitQuizResult::get_from_question_user($question_id, $user_id)){
         ClipitQuizResult::set_properties($answered->id, array(
-            'correct' => $correct,
             'answer' => $value,
         ));
+        ClipitQuizResult::evaluate_result($answered->id);
     } else {
         $result_id = ClipitQuizResult::create(array(
-            'correct' => $correct,
             'answer' => $value,
         ));
         ClipitQuizQuestion::add_quiz_results($question_id, array($result_id));
+        ClipitQuizResult::evaluate_result($result_id);
     }
 }
 
@@ -78,7 +76,6 @@ $task = array_pop(ClipitTask::get_by_id(array($task_id)));
 if(ClipitQuiz::has_finished_quiz($quiz_id, $user_id) || $task->end <= time()){
     echo 'finished';
 } else {
-    $by_owner = array_pop(ClipitQuizResult::get_by_owner(array(elgg_get_logged_in_user_guid())));
-    echo count($by_owner);
+    echo ClipitQuiz::questions_answered_by_user($quiz_id, $user_id);
 }
 forward("clipit_activity/".$task->activity."/tasks");

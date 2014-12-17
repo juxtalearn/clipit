@@ -34,12 +34,11 @@ $question = elgg_extract('question', $vars);
     </label>
 <?php else:?>
     <label class="inline-block margin-right-20" style="font-weight: normal">
-        <input type="radio" <?php echo $result->answer == 'true' ? 'checked' : '';?> name="question[<?php echo $question->id;?>]" value="true"/>
+        <input type="radio" <?php echo $result->answer[0] ? 'checked' : '';?> name="question[<?php echo $question->id;?>]" value="true"/>
         <?php echo elgg_echo('true');?>
     </label>
     <label class="inline-block" style="font-weight: normal">
-        <input type="radio" <?php echo $result->answer == 'false' ? 'checked' : '';?> name="question[<?php echo $question->id;?>]" value="false"/>
+        <input type="radio" <?php echo $result->answer[1]? 'checked' : '';?> name="question[<?php echo $question->id;?>]" value="false"/>
         <?php echo elgg_echo('false');?>
     </label>
 <?php endif;?>
-</div>

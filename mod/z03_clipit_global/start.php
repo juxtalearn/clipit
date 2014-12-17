@@ -10,28 +10,26 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-elgg_register_event_handler('init', 'system', 'clipit_global_init');
-elgg_register_event_handler('plugins_boot', 'system', 'language_selector_boot_global');
-function language_selector_boot_global()
-{
-    global $CONFIG;
-    $client_language = $_COOKIE['client_language'];
-    if (!elgg_is_logged_in()) {
-        if (!empty($client_language)) {
-            $CONFIG->language = $client_language;
-        }
-        reload_all_translations();
-    } else {
-        if (!empty($client_language)) {
-            $user_id = elgg_get_logged_in_user_guid();
-            ClipitUser::set_properties($user_id, array('language' => $client_language));
-            setcookie('client_language', '', time() - 60 * 60 * 24 * 30, '/'); // reset cookie
-        }
+
+// Load all translations
+global $CONFIG;
+$client_language = $_COOKIE['client_language'];
+if (!elgg_is_logged_in()) {
+    if (!empty($client_language)) {
+        $CONFIG->language = $client_language;
+    }
+    reload_all_translations();
+} else {
+    if (!empty($client_language)) {
+        $user_id = elgg_get_logged_in_user_guid();
+        ClipitUser::set_properties($user_id, array('language' => $client_language));
+        setcookie('client_language', '', time() - 60 * 60 * 24 * 30, '/'); // reset cookie
     }
 }
 
-function clipit_global_init()
-{
+elgg_register_event_handler('init', 'system', 'clipit_global_init');
+
+function clipit_global_init(){
     global $CONFIG;
     $user_id = elgg_get_logged_in_user_guid();
     $user = array_pop(ClipitUser::get_by_id(array($user_id)));

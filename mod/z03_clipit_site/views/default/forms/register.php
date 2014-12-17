@@ -52,7 +52,6 @@ if (elgg_is_sticky_form('register')) {
             'class' => 'form-control input-lg',
             'placeholder' => 'juangarcia',
             'data-msg-remote' => elgg_echo('registration:userexists'),
-            //'data-rule-remote' => elgg_get_site_url().'action/register'
         ));
         ?>
     </div>

@@ -11,27 +11,8 @@
  * @package         ClipIt
  */
 elgg_register_event_handler('init', 'system', 'clipit_final_init');
-elgg_register_event_handler('plugins_boot', 'system', 'language_selector_boot');
-function language_selector_boot()
-{
-    global $CONFIG;
-    $client_language = $_COOKIE['client_language'];
-    if (!elgg_is_logged_in()) {
-        if (!empty($client_language)) {
-            $CONFIG->language = $client_language;
-        }
-        reload_all_translations();
-    } else {
-        if (!empty($client_language)) {
-            $user_id = elgg_get_logged_in_user_guid();
-            ClipitUser::set_properties($user_id, array('language' => $client_language));
-            setcookie('client_language', '', time() - 60 * 60 * 24 * 30, '/'); // reset cookie
-        }
-    }
-}
 
-function clipit_final_init()
-{
+function clipit_final_init(){
     global $CONFIG;
     $user_id = elgg_get_logged_in_user_guid();
     $user = array_pop(ClipitUser::get_by_id(array($user_id)));
@@ -118,9 +99,6 @@ function clipit_final_init()
         $clipit_js = elgg_get_simplecache_url('js', 'clipit');
         elgg_register_simplecache_view('js/clipit');
         elgg_register_js('clipit', $clipit_js);
-
-        // jQuery Wiris TinyMCE integration
-        elgg_register_js("jquery:wiris_tinymce", "{$plugin_url}/vendors/tinymce/plugins/tiny_mce_wiris/integration/WIRISplugins.js");
 
         elgg_load_js("jquery-ui");
         elgg_load_js("jquery:waypoints");

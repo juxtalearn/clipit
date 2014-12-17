@@ -11,12 +11,16 @@
  * @package         ClipIt
  */
 $english = array(
+    'duplicate' => 'Duplicate',
+    'duplicate:name' => 'Duplicate: %s',
+    'print' => 'Print',
     'tricky_topic:create' => 'Create Tricky Topic',
     'country' => 'Country',
     'country:select' => 'Select country',
     'tricky_topic:edit' => 'Edit Tricky Topic',
     // Examples
-    'examples' => 'Ejemplos',
+    'examples' => 'Examples',
+    'examples:none' => 'No examples',
     'example:add' => 'Add example',
     'example:create' => 'Create example',
     'example:subject' => 'Subject',
@@ -25,6 +29,8 @@ $english = array(
     'example:education_level:2' => 'GCSE',
     'example:education_level:3' => 'A-Level',
     'example:education_level:4' => 'University',
+    'example:create' => 'Create example',
+    'example:edit' => 'Edit example',
 
     'location' => 'Location',
     'location:optional' => 'Optional field to associate tricky topic to a location',

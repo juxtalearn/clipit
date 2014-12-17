@@ -11,12 +11,16 @@
  * @package         ClipIt
  */
 $spanish = array(
+    'duplicate' => 'Duplicar',
+    'duplicate:name' => 'Duplicar: %s',
+    'print' => 'Imprimir',
     'tricky_topic:create' => 'Crear Tema',
     'country' => 'País',
     'country:select' => 'Seleccionar país',
     'location' => 'Localización',
     // Examples
     'examples' => 'Ejemplos',
+    'examples:none' => 'No hay ejemplos',
     'example:add' => 'Añadir ejemplo',
     'example:create' => 'Crear ejemplo',
     'example:subject' => 'Asignatura',
@@ -25,6 +29,8 @@ $spanish = array(
     'example:education_level:2' => 'Secundaria',
     'example:education_level:3' => 'Bachillerato',
     'example:education_level:4' => 'Universidad',
+    'example:create' => 'Crear ejemplo',
+    'example:edit' => 'Editar ejemplo',
 
     'tricky_topic:edit' => 'Editar Tema',
     'location:optional' => 'Campo de texto opcional para asociar el tema a una localización',

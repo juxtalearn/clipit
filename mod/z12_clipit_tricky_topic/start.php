@@ -39,6 +39,7 @@ function tt_page_handler($page){
     $count = 0;
     $params = array();
     $view = $page[0];
+
     switch($page[0]){
         case '':
             $title = "Tricky Topics";
@@ -60,7 +61,10 @@ function tt_page_handler($page){
             break;
         case 'student_problems':
             $title = elgg_echo('student_problems');
-            $content = elgg_view('examples/list');
+            $entities = ClipitExample::get_all();
+            $count = count($entities);
+            $entities = array_slice($entities, clipit_get_offset(), clipit_get_limit(10));
+            $content = elgg_view('examples/list', array('entities' => $entities, 'count' => $count));
             switch($page[1]){
                 case 'create':
                     // Create Example
@@ -108,7 +112,20 @@ function tt_page_handler($page){
             elgg_push_breadcrumb(elgg_echo('tricky_topics'), "tricky_topics");
             $title = elgg_echo('tricky_topic:create');
             elgg_push_breadcrumb($title);
-            $content = elgg_view_form('tricky_topic/save');
+            $content = elgg_view_form('tricky_topic/save', array('data-validate' => 'true', 'submit_value' => elgg_echo('create')));
+            if($id = $page[1]){
+                $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($id)));
+                elgg_pop_breadcrumb($title);
+                $title = elgg_echo('duplicate:name', array($tricky_topic->name));
+                elgg_push_breadcrumb($title);
+                $content = elgg_view_form('tricky_topic/save',
+                    array('data-validate' => 'true'),
+                    array(
+                        'entity' => $tricky_topic,
+                        'clone' => true,
+                        'submit_value' => elgg_echo('create')
+                    ));
+            }
             break;
         case 'edit':
             // Edit Tricky Topic
@@ -123,7 +140,7 @@ function tt_page_handler($page){
             elgg_push_breadcrumb($title);
             $content = elgg_view_form('tricky_topic/save',
                 array('data-validate' => 'true'),
-                array('entity' => $tricky_topic
+                array('entity' => $tricky_topic, 'submit_value' => elgg_echo('save')
                 ));
             break;
         case 'view':
@@ -148,7 +165,13 @@ function tt_page_handler($page){
                     }
 //                    $sidebar .= elgg_view_module('aside', '<i class="fa fa-clock-o"></i> Revisions',
 //                        elgg_view('tricky_topics/sidebar/revisions'));
-                    $content = elgg_view('tricky_topics/view', array('entity' => $tricky_topic, 'multimedia' => $multimedia));
+                    $examples = ClipitExample::get_by_tags($tricky_topic->tag_array);
+                    $content = elgg_view('tricky_topics/view',
+                        array(
+                            'entity' => $tricky_topic,
+                            'multimedia' => $multimedia,
+                            'examples' => $examples
+                        ));
                 } else {
                     return false;
                 }

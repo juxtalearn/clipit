@@ -80,6 +80,7 @@ $english = array(
     'new_user' => 'New user?',
     'user:notfound' => 'Username or email not found.',
     'user:register' => 'Sign up',
+    'user:username:login' => 'Login',
     'user:login' => 'Log in',
     'user:forgotpassword' => 'Forgot your password?',
     'passwordagain' => 'Repeat password please',

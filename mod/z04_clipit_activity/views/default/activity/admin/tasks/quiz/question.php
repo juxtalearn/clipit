@@ -69,7 +69,6 @@ if($question){
             '' => 'Select',
             ClipitQuizQuestion::TYPE_SELECT_MULTI => 'Multiple choice',
             ClipitQuizQuestion::TYPE_SELECT_ONE => 'One choice',
-            ClipitQuizQuestion::TYPE_STRING => 'Long question',
             ClipitQuizQuestion::TYPE_NUMBER => 'Numeric question',
             ClipitQuizQuestion::TYPE_TRUE_FALSE => 'True or false',
         );
@@ -237,15 +236,6 @@ if($question){
                         ?>
                     </strong>
                 </div>
-                <div class="show-question" id="<?php echo $id;?>" data-question="<?php echo ClipitQuizQuestion::TYPE_STRING;?>" style="display: none;">
-                    <?php echo elgg_view('activity/admin/tasks/quiz/types/string',
-                        array(
-                            'id' => $id,
-                            'checked' => end($question->validation_array),
-                            'input_prefix' => $input_prefix
-                        ));
-                    ?>
-                </div>
                 <div class="show-question" id="<?php echo $id;?>" data-question="<?php echo ClipitQuizQuestion::TYPE_NUMBER;?>" style="display: none;">
                     <?php echo elgg_view('activity/admin/tasks/quiz/types/number',
                         array(
@@ -259,7 +249,7 @@ if($question){
                     <?php echo elgg_view('activity/admin/tasks/quiz/types/true_false',
                         array(
                             'id' => $id,
-                            'checked' => end($question->validation_array),
+                            'checked' => $question->validation_array,
                             'input_prefix' => $input_prefix
                         ));
                     ?>

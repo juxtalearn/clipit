@@ -100,16 +100,6 @@ $tricky_topic_view = elgg_view("tricky_topic/preview", array('activity' => $acti
     <div class="col-md-4">
         <div id="my-rating">
 
-            <?php
-            echo elgg_view("page/components/modal_remote", array('id'=> "assessment-rubric" ));
-            echo elgg_view('output/url', array(
-                'href'  => "ajax/view/modal/assessment_rubric/view?id=".$entity->id,
-                'text'  => 'Instrucciones',
-                'title' => 'Instrucciones',
-                'data-toggle'   => 'modal',
-                'data-target'   => '#assessment-rubric'
-            ));
-            ?>
             <h4>
                 <strong><?php echo elgg_echo('publications:my_rating');?></strong>
             </h4>

@@ -53,86 +53,83 @@ $(function(){
     });
 });
 </script>
-<div class="row">
-    <div class="col-md-5">
-        Form
-    </div>
-    <div class="col-md-12">
-        <table class="table table-striped table-condensed">
-            <tr>
-                <th>Name</th>
-                <th>Author/Date</th>
-                <th><i class="fa fa-sitemap"></i> Tricky topics</th>
-                <th>Example</th>
-            </tr>
-            <?php foreach($tags as $tag):
-                $user = array_pop(ClipitUser::get_by_id(array($tag->owner_id)));
+<div class="pull-right margin-bottom-10">
+    <?php echo elgg_view("page/components/print_button");?>
+</div>
+<div class="clearfix"></div>
+<table class="table table-striped table-condensed">
+    <tr>
+        <th>Name</th>
+        <th>Author/Date</th>
+        <th><i class="fa fa-sitemap"></i> Tricky topics</th>
+        <th>Example</th>
+    </tr>
+    <?php foreach($tags as $tag):
+        $user = array_pop(ClipitUser::get_by_id(array($tag->owner_id)));
+        ?>
+        <tr class="list-item">
+            <td>
+                <strong>
+                    <?php echo elgg_view('output/url', array(
+                        'href'  => "explore/search?by=tag&id={$tag->id}",
+                        'title' => $tag->name,
+                        'text'  => $tag->name,
+                    ));
+                    ?>
+                </strong>
+                <div>
+                    <?php echo $tag->description;?>
+                </div>
+            </td>
+            <td>
+                <small>
+                    <div>
+                    <i class="fa-user fa blue"></i>
+                    <?php echo elgg_view('output/url', array(
+                        'href'  => "profile/{$user->login}",
+                        'title' => $user->name,
+                        'text'  => $user->name,
+                    ));
+                    ?>
+                    </div>
+                    <?php echo elgg_view('output/friendlytime', array('time' => $tricky_topic->time_created));?>
+                </small>
+            </td>
+            <td>
+                <ul>
+                <?php foreach(ClipitTag::get_tricky_topics($tag->id) as $tricky_topic_id):
+                    $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($tricky_topic_id)));
                 ?>
-                <tr class="list-item">
-                    <td>
-                        <strong>
-                            <?php echo elgg_view('output/url', array(
-                                'href'  => "explore/search?by=tag&id={$tag->id}",
-                                'title' => $tag->name,
-                                'text'  => $tag->name,
-                            ));
-                            ?>
-                        </strong>
-                        <div>
-                            <?php echo $tag->description;?>
-                        </div>
-                    </td>
-                    <td>
-                        <small>
-                            <div>
-                            <i class="fa-user fa blue"></i>
-                            <?php echo elgg_view('output/url', array(
-                                'href'  => "profile/{$user->login}",
-                                'title' => $user->name,
-                                'text'  => $user->name,
-                            ));
-                            ?>
-                            </div>
-                            <?php echo elgg_view('output/friendlytime', array('time' => $tricky_topic->time_created));?>
-                        </small>
-                    </td>
-                    <td>
-                        <ul>
-                        <?php foreach(ClipitTag::get_tricky_topics($tag->id) as $tricky_topic_id):
-                            $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($tricky_topic_id)));
+                    <li class="margin-left-15" style="list-style-type: square;">
+                        <?php echo elgg_view('output/url', array(
+                            'href'  => "tricky_topics/view/{$tricky_topic->id}",
+                            'title' => $tricky_topic->name,
+                            'text'  => $tricky_topic->name,
+                        ));
                         ?>
-                            <li class="margin-left-15" style="list-style-type: square;">
-                                <?php echo elgg_view('output/url', array(
-                                    'href'  => "tricky_topics/view/{$tricky_topic->id}",
-                                    'title' => $tricky_topic->name,
-                                    'text'  => $tricky_topic->name,
-                                ));
-                                ?>
-                            </li>
-                        <?php endforeach;?>
-                        </ul>
-                        <div class="margin-top-5">
-                        <strong>
-                            <small>
-                                <a href="javascript:;" id="<?php echo $tag->id;?>" class="link-tricky-topic">+ Link Tricky Topic</a>
-                            </small>
+                    </li>
+                <?php endforeach;?>
+                </ul>
+                <div class="margin-top-5">
+                <strong>
+                    <small>
+                        <a href="javascript:;" id="<?php echo $tag->id;?>" class="link-tricky-topic">+ Link Tricky Topic</a>
+                    </small>
 <!--                                <small><a class="btn btn-xs btn-primary"><i class="fa fa-plus"></i> Add</a></small>-->
-                            <div class="list-tricky-topic" style="display: none;"></div>
-                        </strong>
-                    </td>
-                    <td class="text-left">
-                            <a href="javascript:;" class="show-examples" id="<?php echo $tag->id;?>">
-                                10
-                            </a>
+                    <div class="list-tricky-topic" style="display: none;"></div>
+                </strong>
+            </td>
+            <td class="text-left">
+                    <a href="javascript:;" class="show-examples" id="<?php echo $tag->id;?>">
+                        10
+                    </a>
 <!--                        <a class="show">-->
 <!--                            10 Files </i>-->
 <!--                        </a>-->
 <!--                        <a>10 Url</a>-->
 <!--                        <a class="btn btn-xs btn-border-blue">View</a>-->
-                    </td>
-                </tr>
-            <?php endforeach;?>
-        </table>
-    </div>
-</div>
+            </td>
+        </tr>
+    <?php endforeach;?>
+</table>
 <?php echo clipit_get_pagination(array('count' => $count)); ?>

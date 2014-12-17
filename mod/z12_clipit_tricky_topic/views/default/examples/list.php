@@ -10,11 +10,13 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$tag = get_input('stumbling_block');
-$tricky_topic = elgg_extract('tricky_topic', $vars);
-$sb = elgg_extract('sb', $vars);
+$examples = elgg_extract('entities', $vars);
+$count = elgg_extract('count', $vars);
 ?>
 <div class="margin-bottom-20">
+    <div class="pull-right">
+        <?php echo elgg_view("page/components/print_button");?>
+    </div>
     <?php echo elgg_view('output/url', array(
         'href'  => "tricky_topics/student_problems/create",
         'class' => 'btn btn-primary margin-bottom-10',
@@ -26,83 +28,59 @@ $sb = elgg_extract('sb', $vars);
 <table class="table">
     <thead>
     <tr>
-        <th><?php echo elgg_echo('title');?></th>
+        <th><?php echo elgg_echo('title');?>/<?php echo elgg_echo('tags');?></th>
         <th><?php echo elgg_echo('example:education_level');?></th>
-        <th><?php echo elgg_echo('example:location');?></th>
+        <th><i class="fa fa-globe"></i> <?php echo elgg_echo('country');?></th>
+        <th>Author/Date</th>
+        <th>Action</th>
     </tr>
     </thead>
     <tbody>
-    <tr class="info">
-        <td>
-            <strong>
-            <?php echo elgg_view('output/url', array(
-                'href'  => "tricky_topics/view/{$tricky_topic->id}",
-                'title' => $tricky_topic->name,
-                'text'  => 'Application of Equations',
-            ));
-            ?>
-            </strong>
-            <small class="show">
-                Students fail to understand that the motion of the electron is not free.
-                The electron is bound to the atom by the attractive force of the
-            </small>
-        </td>
-        <td>15-16</td>
-        <td>
-            <a href=""><i class="fa fa-globe"></i> Spain</a>
-        </td>
-    </tr>
-    <tr class="info">
-        <td>
-            <strong>
-                <?php echo elgg_view('output/url', array(
-                    'href'  => "tricky_topics/view/{$tricky_topic->id}",
-                    'title' => $tricky_topic->name,
-                    'text'  => 'Application of Equations',
-                ));
-                ?>
-            </strong>
-        </td>
-        <td>15-16</td>
-        <td>
-            <a href=""><i class="fa fa-globe"></i> Spain</a>
-        </td>
-    </tr>
-    <tr class="info">
-        <td>
-            <div>
+    <?php
+    foreach($examples as $example):
+        $user = array_pop(ClipitUser::get_by_id(array($example->owner_id)));
+    ?>
+        <tr>
+            <td>
                 <strong>
                     <?php echo elgg_view('output/url', array(
-                        'href'  => "tricky_topics/view/{$tricky_topic->id}",
-                        'title' => $tricky_topic->name,
-                        'text'  => 'Acceptance of all',
+                        'href'  => "tricky_topics/student_problems/view/{$example->id}",
+                        'title' => $example->name,
+                        'text'  =>  $example->name,
                     ));
                     ?>
                 </strong>
-                <small class="show">
-                    Students fail to understand that the motion of the electron is not free.
-                    The electron is bound to the atom by the attractive force of the
-                    nucleus and consequently quantum mechanics predicts that the total
-                    energy of the electron is quantized. As a result they are not able
-                    to grasp the quantum model of the atom.
+                <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $example->tag_array, 'limit' => 5)); ?>
+            </td>
+            <td><?php echo elgg_echo('example:education_level:'.$example->education_level);?></td>
+            <td><?php echo get_countries_list($example->country);?></td>
+            <td>
+                <small>
+                    <div>
+                        <i class="fa-user fa blue"></i>
+                        <?php echo elgg_view('output/url', array(
+                            'href'  => "profile/{$user->login}",
+                            'title' => $user->name,
+                            'text'  => $user->name,
+                        ));
+                        ?>
+                    </div>
+                    <?php echo elgg_view('output/friendlytime', array('time' => $example->time_created));?>
                 </small>
-            </div>
-        </td>
-        <td>18-24</td>
-        <td>
-            <a href=""><i class="fa fa-globe"></i> Spain</a>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="4">
-            <?php echo elgg_view('output/url', array(
-                'href'  => "tricky_topics/student_problems/create?tricky_topic={$tricky_topic}&stumbling_block={$sb}",
-                'class' => 'btn btn-xs btn-primary',
-                'title' => elgg_echo('example:add'),
-                'text'  => elgg_echo('example:add'),
-            ));
-            ?>
-        </td>
-    </tr>
+            </td>
+            <td>
+                <?php if($user->id == elgg_get_logged_in_user_guid()):?>
+                    <?php echo elgg_view('output/url', array(
+                        'href'  => "tricky_topics/student_problems/edit/{$example->id}",
+                        'class' => 'btn btn-xs btn-primary',
+                        'title' => elgg_echo('edit'),
+                        'text'  => elgg_echo('edit'),
+                    ));
+                    ?>
+                <?php endif;?>
+            </td>
+        </tr>
+    <?php endforeach;?>
     </tbody>
 </table>
+<?php echo clipit_get_pagination(array('count' => $count, 'limit' => 10)); ?>

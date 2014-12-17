@@ -21,8 +21,26 @@
 @import "video";
 @import "messages";
 @import "tags";
-//@import "elgg_mod.less";
-//
+
+
+// Media print
+// --------------------------------------------------
+@media print {
+  .noprint {display:none !important;}
+  a:link:after, a:visited:after {
+    display: none;
+    content: "";
+  }
+  footer{
+    display: none;
+  }
+  .btn-print{
+    display: none;
+  }
+  .elgg-module-aside{
+    display: none;
+  }
+}
 
 html{
 //  overflow-y: scroll;

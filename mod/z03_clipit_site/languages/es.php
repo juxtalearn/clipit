@@ -80,6 +80,7 @@ $spanish = array(
     'new_user' => '¿Nuevo usuario?',
     'user:notfound' => 'Usuario o Correo no encontrado.',
     'user:register' => 'Registrarse',
+    'user:username:login' => 'Usuario',
     'user:login' => 'Entrar',
     'user:forgotpassword' => '¿Olvidó su contraseña?',
     'passwordagain' => 'Por favor, repita la contraseña',

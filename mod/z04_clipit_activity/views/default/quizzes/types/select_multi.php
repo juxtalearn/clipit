@@ -18,7 +18,7 @@ $question = elgg_extract('question', $vars);
 $i = 1;
 foreach($question->option_array as $option):
 $checked = '';
-if(in_array(($i-1), $result->answer) && $result){
+if($result->answer[$i-1]){
     $checked = 'checked';
 }
 ?>

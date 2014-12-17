@@ -12,6 +12,7 @@
  */
 $tricky_topic = elgg_extract('entity', $vars);
 $multimedia = elgg_extract('multimedia', $vars);
+$examples = elgg_extract('examples', $vars);
 $user = array_pop(ClipitUser::get_by_id(array($tricky_topic->owner_id)));
 ?>
 <div class="margin-bottom-10">
@@ -19,8 +20,8 @@ $user = array_pop(ClipitUser::get_by_id(array($tricky_topic->owner_id)));
     <small class="show">
         <?php echo elgg_view('output/friendlytime', array('time' => $tricky_topic->time_created));?>
     </small>
-    <?php if($user->id == elgg_get_logged_in_user_guid()):?>
-        <div class="margin-top-10">
+    <div class="margin-top-10">
+        <?php if($user->id == elgg_get_logged_in_user_guid()):?>
             <?php echo elgg_view('output/url', array(
                 'href'  => "tricky_topics/edit/{$tricky_topic->id}",
                 'class' => 'btn btn-xs btn-primary',
@@ -28,8 +29,9 @@ $user = array_pop(ClipitUser::get_by_id(array($tricky_topic->owner_id)));
                 'text'  => elgg_echo('tricky_topic:edit'),
             ));
             ?>
-        </div>
-    <?php endif;?>
+        <?php endif;?>
+        <?php echo elgg_view("page/components/print_button", array('text' => false));?>
+    </div>
     </div>
     <small class="show"><?php echo elgg_echo('author');?></small>
     <i class="fa-user fa blue"></i>
@@ -49,47 +51,10 @@ $user = array_pop(ClipitUser::get_by_id(array($tricky_topic->owner_id)));
 <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $tricky_topic->tag_array)); ?>
 <div>
     <?php echo elgg_view('page/components/title_block', array('title' => 'Student problems'));?>
-    <?php echo elgg_view('examples/summary', array('entity' => $tricky_topic->examples_array, 'tricky_topic' => $tricky_topic->id));?>
+    <?php echo elgg_view('examples/summary', array('entities' => $examples));?>
 </div>
 <div>
     <?php echo elgg_view('page/components/title_block', array('title' => 'Teaching Activity'));?>
-    <table class="table" style="display: none;">
-        <thead>
-            <tr>
-                <th></th>
-                <th>Title</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <i class="fa fa-youtube-play blue"></i>
-                </td>
-                <td>
-                    <strong><a>Name</a></strong>
-                    <div>
-                        Students fail to understand that the motion
-                        of the electron is not free. The electron is bound to the
-                        atom by the attractive force of the
-                    </div>
-                </td>
-                <td>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <i class="fa fa-youtube-play blue"></i>
-                </td>
-                <td>
-                    <strong><a>Name</a></strong>
-                </td>
-                <td>
-                    <i class="fa fa-download blue"></i>
-                </td>
-            </tr>
-        </tbody>
-    </table>
     <div role="tabpanel">
 
         <!-- Nav tabs -->

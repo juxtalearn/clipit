@@ -11,6 +11,8 @@
  * @package         ClipIt
  */
 $example = elgg_extract('entity', $vars);
+$user_language = get_current_language();
+$language_index = ClipitReflectionItem::get_language_index($user_language);
 ?>
 <div class="margin-bottom-10" id="form-add-tricky-topic">
     <div class="col-md-7">
@@ -208,11 +210,13 @@ $example = elgg_extract('entity', $vars);
     <script>
     $(function(){
         $(".reflection-item label").hover(function(){
-            $(".reflect-description").hide();
-            $("[data-reflect_item="+$(this).attr("id")+"]").show();
+            var container = $(this).closest(".reflection-item");
+            container.find(".reflect-description").hide();
+            container.find("[data-reflect_item="+$(this).attr("id")+"]").show();
         },function(){
-            $(".reflect-description").hide();
-            $(".reflect-description:first").show();
+            var container = $(this).closest(".reflection-item");
+            container.find(".reflect-description").hide();
+            container.find(".reflect-description:first").show();
         });
     });
     </script>
@@ -223,23 +227,73 @@ $example = elgg_extract('entity', $vars);
 
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active">
-                    <a href="#terminology" aria-controls="home" role="tab" data-toggle="tab">Terminology</a>
-                </li>
-                <li role="presentation">
-                    <a href="#incomplete-pre-knowledge" aria-controls="profile" role="tab" data-toggle="tab">Incomplete Pre-Knowledge</a>
-                </li>
-                <li role="presentation">
-                    <a href="#essential-concepts" aria-controls="messages" role="tab" data-toggle="tab">Essential concepts</a>
-                </li>
-                <li role="presentation">
-                    <a href="#intuitive-beliefs" aria-controls="settings" role="tab" data-toggle="tab">Intuitive Beliefs</a>
-                </li>
+                <?php
+                $i = 1;
+                foreach(ClipitReflectionItem::get_by_category(null, $user_language) as $category => $items):
+                    $categories[$category] = $items;
+                ?>
+                    <li role="presentation" class="<?php echo $i==1 ? 'active':'';?>">
+                        <a href="#<?php echo elgg_get_friendly_title($category);?>" aria-controls="home" role="tab" data-toggle="tab">
+                            <?php echo $category;?>
+                        </a>
+                    </li>
+                <?php
+                    $i++;
+                endforeach;
+                ?>
             </ul>
 
             <!-- Tab panes -->
             <div class="tab-content">
-                <div role="tabpanel" class="reflection-item tab-pane active row" id="terminology" style="padding: 10px;">
+                <?php
+                $i = 1;
+                foreach($categories as $category => $items):
+                ?>
+                <div role="tabpanel"
+                     class="reflection-item tab-pane row tab-pane <?php echo $i==1 ? 'active':'';?>"
+                     id="<?php echo elgg_get_friendly_title($category);?>"
+                     style="padding: 10px;">
+
+                    <div class="col-md-5">
+                        <div class="margin-bottom-10">Please tick all that apply:</div>
+                        <?php
+                        $z = 1;
+                        foreach($items as $item):?>
+                            <label id="<?php echo $z;?>">
+                                <input type="checkbox" class="pull-left" style="margin-right: 5px;">
+                                <div class="content-block">
+                                    <?php echo $item->item_name[$language_index]; ?>
+                                </div>
+                            </label>
+                        <?php
+                        $z++;
+                        endforeach;
+                        ?>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="reflect-description" style="padding: 10px;margin: 0px 0px 10px;">
+                            <strong><?php echo $category;?></strong>
+                            <p>
+                               <?php echo $items[0]->category_description[$language_index];?>
+                            </p>
+                        </div>
+                        <?php
+                        $x=1;
+                        foreach($items as $item):?>
+                            <div class="reflect-description bg-info" style="display: none" data-reflect_item="<?php echo $x;?>">
+                                <?php echo $item->item_description[$language_index]; ?>
+                            </div>
+                        <?php
+                            $x++;
+                        endforeach;
+                        ?>
+                    </div>
+                </div>
+                    <?php
+                    $i++;
+                endforeach;
+                ?>
+                <div role="tabpanel" class="reflection-item tab-pane row" id="terminologys" style="padding: 10px;">
                     <div class="col-md-5">
                         <div class="margin-bottom-10">Please tick all that apply:</div>
                         <label id="1">
@@ -276,21 +330,12 @@ $example = elgg_extract('entity', $vars);
                         </div>
                     </div>
                 </div>
-                <div role="tabpanel" class="tab-pane" id="incomplete-pre-knowledge">...</div>
                 <div role="tabpanel" class="tab-pane" id="essential-concepts">...</div>
                 <div role="tabpanel" class="tab-pane" id="essential-concepts">...</div>
             </div>
 
         </div>
         <div class="pull-right">
-            <?php echo elgg_view('output/url', array(
-                'href'  => "javascript:;",
-                'class' => 'btn btn-border-blue btn-primary margin-right-10',
-                'title' => elgg_echo('cancel'),
-                'text'  => elgg_echo('cancel'),
-                'onclick' => '$(\'#add-tricky-topic\').click()',
-            ));
-            ?>
             <?php echo elgg_view('input/submit', array(
                 'class' => 'btn btn-primary',
                 'value'  => elgg_echo('create'),

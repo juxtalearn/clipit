@@ -26,9 +26,7 @@ if(!$quiz_start){
     $quiz_start = ClipitQuiz::get_quiz_start($quiz->id, elgg_get_logged_in_user_guid());
 }
 $date = date("H:s, d/m/Y", $quiz_start + $quiz->max_time);
-
-$count_answer = 0;
-$count_answer = count(array_pop(ClipitQuizResult::get_by_owner(array($user_id))));
+$count_answer = ClipitQuiz::questions_answered_by_user($quiz_id, $user_id);
 ?>
 <style>
 <style>
@@ -228,55 +226,52 @@ foreach($questions as $question):
             <?php echo difficulty_bar($question->difficulty);?>
         </div>
         <?php endif;?>
-    <h4 class="question-title">
-        <?php if($finished_task && $question->option_type != ClipitQuizQuestion::TYPE_STRING):?>
-            <?php if($result->correct):?>
-                <i class="fa fa-check green"></i>
-            <?php else: ?>
-                <i class="fa fa-times red"></i>
+        <h4 class="question-title">
+            <?php if($finished_task):?>
+                <?php if($result->correct):?>
+                    <i class="fa fa-check green"></i>
+                <?php else: ?>
+                    <i class="fa fa-times red"></i>
+                <?php endif;?>
             <?php endif;?>
-        <?php endif;?>
-        <strong class="text-muted inline-block">
-            <span class="num-question"><?php echo $num;?>.</span>
-            <i class="fa fa-spinner fa-spin blue loading-question" style="display: none;"></i>
-        </strong>
-        <?php echo $question->name;?>
-    </h4>
-    <div class="margin-left-20 quiz-answer ">
-        <?php if($description = $question->description):?>
-            <div class="text-muted margin-bottom-10" style="margin-top: -10px;">
-                <?php echo $description;?>
+            <strong class="text-muted inline-block">
+                <span class="num-question"><?php echo $num;?>.</span>
+                <i class="fa fa-spinner fa-spin blue loading-question" style="display: none;"></i>
+            </strong>
+            <?php echo $question->name;?>
+        </h4>
+        <div class="margin-left-20 quiz-answer ">
+            <?php if($description = $question->description):?>
+                <div class="text-muted margin-bottom-10" style="margin-top: -10px;">
+                    <?php echo $description;?>
+                </div>
+            <?php endif;?>
+            <div class="question-answer">
+                <?php switch($question->option_type):
+                    case ClipitQuizQuestion::TYPE_SELECT_MULTI:
+                        echo elgg_view('quizzes/types/select_multi', $params);
+                    break;
+                    case ClipitQuizQuestion::TYPE_SELECT_ONE:
+                        echo elgg_view('quizzes/types/select_one', $params);
+                    break;
+                    case ClipitQuizQuestion::TYPE_TRUE_FALSE:
+                        echo elgg_view('quizzes/types/true_false', $params);
+                    break;
+                    case ClipitQuizQuestion::TYPE_NUMBER:
+                        echo elgg_view('quizzes/types/number', $params);
+                        break;
+                endswitch;
+                ?>
+            </div> <!-- .question-answer -->
+            <?php if($result->description):?>
+            <div class="bg-info margin-top-10" style="padding: 10px;">
+                <i class="fa fa-user blue"></i> <small>Teacher's annotate:</small>
+                <div>
+                    <?php echo $result->description;?>
+                </div>
             </div>
-        <?php endif;?>
-    <div class="question-answer">
-    <?php switch($question->option_type):
-        case ClipitQuizQuestion::TYPE_SELECT_MULTI:
-            echo elgg_view('quizzes/types/select_multi', $params);
-        break;
-        case ClipitQuizQuestion::TYPE_SELECT_ONE:
-            echo elgg_view('quizzes/types/select_one', $params);
-        break;
-        case ClipitQuizQuestion::TYPE_TRUE_FALSE:
-            echo elgg_view('quizzes/types/true_false', $params);
-        break;
-        case ClipitQuizQuestion::TYPE_STRING:
-            echo elgg_view('quizzes/types/string', $params);
-        break;
-        case ClipitQuizQuestion::TYPE_NUMBER:
-            echo elgg_view('quizzes/types/number', $params);
-            break;
-    endswitch;
-    ?>
-    </div> <!-- .question-answer -->
-        <?php if($result->description):?>
-        <div class="bg-info margin-top-10" style="padding: 10px;">
-            <i class="fa fa-user blue"></i> <small>Teacher's annotate:</small>
-            <div>
-                <?php echo $result->description;?>
-            </div>
+            <?php endif; ?>
         </div>
-        <?php endif; ?>
-    </div>
     </div>
 <!--    <div class="clearfix"></div>-->
 <?php

@@ -10167,6 +10167,25 @@ ul.tagit input[type="text"] {
   background-color: inherit;
   outline: none;
 }
+@media print {
+  .noprint {
+    display: none !important;
+  }
+  a:link:after,
+  a:visited:after {
+    display: none;
+    content: "";
+  }
+  footer {
+    display: none;
+  }
+  .btn-print {
+    display: none;
+  }
+  .elgg-module-aside {
+    display: none;
+  }
+}
 body {
   background: #f1f2f7;
 }

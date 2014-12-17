@@ -19,6 +19,9 @@ $url = REFERER;
 $entity_id = get_input('entity-id');
 if($entity_id){
     $tricky_topic_id = $entity_id;
+    if(get_input('clone')){
+        $tricky_topic_id = ClipitTrickyTopic::create_clone($entity_id);
+    }
     ClipitTrickyTopic::set_properties($tricky_topic_id, $data);
 } else {
     $tricky_topic_id = ClipitTrickyTopic::create($data);
@@ -26,6 +29,7 @@ if($entity_id){
 }
 // Create Stumling blocks
 $tags =  get_input('tag');
+$tags = array_filter($tags);
 $tag_ids = array();
 foreach($tags as $tag){
     $tag_ids[] = ClipitTag::create(array('name' => $tag));

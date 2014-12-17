@@ -13,23 +13,25 @@
 $example = elgg_extract('entity', $vars);
 $multimedia = elgg_extract('multimedia', $vars);
 $user = array_pop(ClipitUser::get_by_id(array($example->owner_id)));
+var_dump(ClipitReflectionItem::get_all());
 ?>
 <div class="margin-bottom-10">
     <div class="pull-right">
         <small class="show">
             <?php echo elgg_view('output/friendlytime', array('time' => $example->time_created));?>
         </small>
-        <?php if($user->id == elgg_get_logged_in_user_guid()):?>
             <div class="margin-top-10">
-                <?php echo elgg_view('output/url', array(
-                    'href'  => "tricky_topics/edit/{$example->id}",
-                    'class' => 'btn btn-xs btn-primary',
-                    'title' => elgg_echo('tricky_topic:edit'),
-                    'text'  => elgg_echo('tricky_topic:edit'),
-                ));
-                ?>
+                <?php if($user->id == elgg_get_logged_in_user_guid()):?>
+                    <?php echo elgg_view('output/url', array(
+                        'href'  => "tricky_topics/student_problems/edit/{$example->id}",
+                        'class' => 'btn btn-xs btn-primary',
+                        'title' => elgg_echo('example:edit'),
+                        'text'  => elgg_echo('example:edit'),
+                    ));
+                    ?>
+                <?php endif;?>
+                <?php echo elgg_view("page/components/print_button", array('text' => false));?>
             </div>
-        <?php endif;?>
     </div>
     <small class="show"><?php echo elgg_echo('author');?></small>
     <i class="fa-user fa blue"></i>
@@ -66,6 +68,8 @@ $user = array_pop(ClipitUser::get_by_id(array($example->owner_id)));
         </div>
     </div>
 </div>
+<hr>
+<?php echo elgg_view('examples/reflection_item/list', array('entities' => $example->reflection_item_array));?>
 <div>
     <?php echo elgg_view('page/components/title_block', array('title' => 'Teaching Activity'));?>
     <div role="tabpanel">

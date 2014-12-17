@@ -52,9 +52,9 @@ if($entity->task_type == ClipitTask::TYPE_QUIZ_TAKE){
                     if($select['value']) {
                         $values[] = $select['value'];
                         if (isset($select['correct'])) {
-                            $validations[] = true;
+                            $validations[] = 1;
                         } else {
-                            $validations[] = false;
+                            $validations[] = 0;
                         }
                     }
                 }
@@ -64,21 +64,27 @@ if($entity->task_type == ClipitTask::TYPE_QUIZ_TAKE){
                     if($select['value']){
                         $values[] = $select['value'];
                         if(isset($select['correct'])){
-                            $validations[] = true;
+                            $validations[] = 1;
                         } else {
-                            $validations[] = false;
+                            $validations[] = 0;
                         }
                     }
                 }
                 break;
             case ClipitQuizQuestion::TYPE_TRUE_FALSE:
-                $validations[] = $question['true_false'];
+                $a = array_fill(0, 2, 0);
+                switch($question['true_false']){
+                    case 'true':
+                        $a[0] = 1;
+                        break;
+                    case 'false':
+                        $a[1] = 1;
+                        break;
+                }
+                $validations = $a;
                 break;
             case ClipitQuizQuestion::TYPE_NUMBER:
                 $validations[] = $question['number'];
-                break;
-            case ClipitQuizQuestion::TYPE_STRING:
-                $validations[] = $question['string'];
                 break;
         }
         $tags = array_filter($question['tags']);
