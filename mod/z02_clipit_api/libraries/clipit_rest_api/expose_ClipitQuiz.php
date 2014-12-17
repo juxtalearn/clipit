@@ -62,4 +62,11 @@ function expose_quiz_functions() {
             "user_id" => array("type" => "int", "required" => true)),
         "Returns true if User has finished a quiz, or false ir not", 'GET', false, true
     );
+    expose_function(
+        $api_suffix . "questions_answered_by_user", $class_suffix . "questions_answered_by_user",
+        array(
+            "id" => array("type" => "int", "required" => true),
+            "user_id" => array("type" => "int", "required" => true)),
+        "Returns the number of questions of a quiz answered by a user", 'GET', false, true
+    );
 }
