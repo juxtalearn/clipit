@@ -25,7 +25,7 @@ foreach($tasks as $task){
     ));
     ClipitActivity::add_tasks($entity_id, array($task_id));
     if($task['type'] == ClipitTask::TYPE_QUIZ_TAKE){
-        $quiz = get_input('quiz');
+        $quiz = $task['quiz'];
         // Set questions to Quiz
         $questions = $quiz['question'];
         foreach($questions as $question){

@@ -57,6 +57,9 @@ switch($action){
         break;
     case "to_activity":
         $select_users = get_input('select_users');
+        if($id){
+            $select_users = array($id);
+        }
         switch ($role) {
             case ClipitUser::ROLE_STUDENT:
                 ClipitActivity::add_students($activity_id, $select_users);

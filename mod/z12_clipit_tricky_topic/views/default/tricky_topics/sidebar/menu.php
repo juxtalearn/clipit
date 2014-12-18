@@ -23,7 +23,7 @@ elgg_register_menu_item('tricky_topic:menu', array(
 elgg_register_menu_item('tricky_topic:menu', array(
     'name' => 'student_problems',
     'text' => elgg_echo('examples'),
-    'href' => "tricky_topics/student_problems",
+    'href' => "tricky_topics/examples",
     'item_class' => 'margin-left-20'
 ));
 

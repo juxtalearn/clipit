@@ -64,7 +64,6 @@ $(function () {
         var textarea = data.context.find("textarea");
         textarea.val(tinyMCE.get(textarea.attr("id")).getContent());
         var total = data.context.find(':input, textarea');
-console.log(data.context.closest("form").find(":hidden").serializeArray());
         data.formData = total.serializeArray();
     });
     $('#fileupload').bind('fileuploadstopped', function (e, data) {

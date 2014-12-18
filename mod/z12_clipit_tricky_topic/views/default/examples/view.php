@@ -13,7 +13,6 @@
 $example = elgg_extract('entity', $vars);
 $multimedia = elgg_extract('multimedia', $vars);
 $user = array_pop(ClipitUser::get_by_id(array($example->owner_id)));
-var_dump(ClipitReflectionItem::get_all());
 ?>
 <div class="margin-bottom-10">
     <div class="pull-right">
@@ -23,14 +22,24 @@ var_dump(ClipitReflectionItem::get_all());
             <div class="margin-top-10">
                 <?php if($user->id == elgg_get_logged_in_user_guid()):?>
                     <?php echo elgg_view('output/url', array(
-                        'href'  => "tricky_topics/student_problems/edit/{$example->id}",
+                        'href'  => "tricky_topics/examples/edit/{$example->id}",
                         'class' => 'btn btn-xs btn-primary',
-                        'title' => elgg_echo('example:edit'),
-                        'text'  => elgg_echo('example:edit'),
+                        'title' => elgg_echo('edit'),
+                        'text'  => '<i class="fa fa-edit"></i>',
+                    ));
+                    ?>
+                    <?php echo elgg_view('output/url', array(
+                        'href'  => "action/example/remove?id={$example->id}",
+                        'class' => 'btn btn-xs btn-danger remove-object',
+                        'is_action' => true,
+                        'title' => elgg_echo('delete'),
+                        'text'  => '<i class="fa fa-trash-o"></i>',
                     ));
                     ?>
                 <?php endif;?>
-                <?php echo elgg_view("page/components/print_button", array('text' => false));?>
+                <span class="margin-left-10">
+                    <?php echo elgg_view("page/components/print_button");?>
+                </span>
             </div>
     </div>
     <small class="show"><?php echo elgg_echo('author');?></small>

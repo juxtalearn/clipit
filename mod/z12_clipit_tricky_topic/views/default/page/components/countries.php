@@ -15,9 +15,9 @@ if (isset($vars['class'])) {
     $vars['class'] = "countries form-control";
 }
 $countries = get_countries_list();
-
+$value = $vars['value'];
 $defaults = array(
-    'value' => '',
+    'value' =>  $value ? $value : '',
     'disabled' => false,
     'name' => 'country',
     'options_values' => $countries

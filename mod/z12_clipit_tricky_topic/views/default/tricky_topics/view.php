@@ -25,12 +25,29 @@ $user = array_pop(ClipitUser::get_by_id(array($tricky_topic->owner_id)));
             <?php echo elgg_view('output/url', array(
                 'href'  => "tricky_topics/edit/{$tricky_topic->id}",
                 'class' => 'btn btn-xs btn-primary',
-                'title' => elgg_echo('tricky_topic:edit'),
-                'text'  => elgg_echo('tricky_topic:edit'),
+                'title' => elgg_echo('edit'),
+                'text'  => '<i class="fa fa-edit"></i>',
+            ));
+            ?>
+            <?php echo elgg_view('output/url', array(
+                'href'  => "action/tricky_topic/remove?id={$tricky_topic->id}",
+                'class' => 'btn btn-xs btn-danger remove-object',
+                'is_action' => true,
+                'title' => elgg_echo('delete'),
+                'text'  => '<i class="fa fa-trash-o"></i>',
             ));
             ?>
         <?php endif;?>
-        <?php echo elgg_view("page/components/print_button", array('text' => false));?>
+        <?php echo elgg_view('output/url', array(
+            'href'  => "tricky_topics/create/{$tricky_topic->id}",
+            'class' => 'btn btn-xs btn-primary btn-border-blue',
+            'title' => elgg_echo('duplicate'),
+            'text'  => '<i class="fa fa-copy"></i>',
+        ));
+        ?>
+        <span class="margin-left-10">
+            <?php echo elgg_view("page/components/print_button");?>
+        </span>
     </div>
     </div>
     <small class="show"><?php echo elgg_echo('author');?></small>
@@ -50,7 +67,7 @@ $user = array_pop(ClipitUser::get_by_id(array($tricky_topic->owner_id)));
 <small class="show"><?php echo elgg_echo('tags');?></small>
 <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $tricky_topic->tag_array)); ?>
 <div>
-    <?php echo elgg_view('page/components/title_block', array('title' => 'Student problems'));?>
+    <?php echo elgg_view('page/components/title_block', array('title' => elgg_echo('examples')));?>
     <?php echo elgg_view('examples/summary', array('entities' => $examples));?>
 </div>
 <div>

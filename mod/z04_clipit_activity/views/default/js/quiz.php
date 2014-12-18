@@ -29,9 +29,12 @@ $.fn.quiz = function (options) {
             self.question.find(".remove-question").on("click", function(){
                 return self.delete();
             });
-            self.question.find(".add-result").on("click", function(){
-                self.question_type_selected = $(this).closest(".show-question");
-                return self.addResult();
+            self.question.find(".remove-question").on("click", function(){
+                return self.delete();
+            });
+            self.question.find("input[type=radio]").on("click", function(){
+                self.question.find(".results input[type=radio]").prop('checked', false);
+                $(this).prop('checked', true);
             });
             // Tags chosen
             self.question.find(".tags-select").chosen({disable_search_threshold: 1});

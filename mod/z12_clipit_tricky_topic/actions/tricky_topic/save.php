@@ -10,10 +10,17 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
+$activiy_tricky_topic = get_input('activity-tricky-topic');
+$title = get_input('title');
+$description = get_input('description');
+if($activiy_tricky_topic){
+    $title = get_input('tricky-topic-title');
+    $description = get_input('tricky-topic-description');
+}
 
 $data = array(
-    'name' => get_input('title'),
-    'description' => get_input('description'),
+    'name' => $title,
+    'description' => $description,
 );
 $url = REFERER;
 $entity_id = get_input('entity-id');
@@ -26,6 +33,9 @@ if($entity_id){
 } else {
     $tricky_topic_id = ClipitTrickyTopic::create($data);
     $url = "tricky_topics";
+    if($activiy_tricky_topic){
+        echo json_encode(elgg_view("activity/create/tricky_topics", array('selected' => $tricky_topic_id)));
+    }
 }
 // Create Stumling blocks
 $tags =  get_input('tag');

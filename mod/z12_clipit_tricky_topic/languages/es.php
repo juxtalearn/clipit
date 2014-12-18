@@ -14,7 +14,8 @@ $spanish = array(
     'duplicate' => 'Duplicar',
     'duplicate:name' => 'Duplicar: %s',
     'print' => 'Imprimir',
-    'tricky_topic:create' => 'Crear Tema',
+    'tricky_topic:create' => 'Crear Tema clave',
+    'tricky_topic:link' => 'Enlazar tema clave',
     'country' => 'País',
     'country:select' => 'Seleccionar país',
     'location' => 'Localización',
@@ -31,11 +32,15 @@ $spanish = array(
     'example:education_level:4' => 'Universidad',
     'example:create' => 'Crear ejemplo',
     'example:edit' => 'Editar ejemplo',
+    'example:cantremove' => 'No se ha podido borrar el ejemplo',
+    'example:removed' => 'Ejemplo borrado',
 
-    'tricky_topic:edit' => 'Editar Tema',
+    'tricky_topic:cantremove' => 'No se ha podido borrar el tema clave',
+    'tricky_topic:removed' => 'Tema clave borrado',
+    'tricky_topic:edit' => 'Editar Tema clave',
     'location:optional' => 'Campo de texto opcional para asociar el tema a una localización',
     'author' => 'Autor',
-    'tricky_topics' => 'Temas',
+    'tricky_topics' => 'Temas clave',
     'student_problems' => 'Ejemplos',
 );
 

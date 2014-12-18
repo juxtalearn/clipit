@@ -47,7 +47,6 @@ if($vars['required'] !== false){
     $required = true;
 }
 ?>
-
 <div class="col-mds-12">
     <?php if(!$disabled && !$task && $vars['delete_task']!==false):?>
         <i class="delete-task fa fa-times red pull-left margin-top-5" style="cursor: pointer" onclick="javascript:$(this).closest('.task').remove();"></i>
@@ -131,6 +130,11 @@ if($vars['required'] !== false){
         <?php endif;?>
     </div>
     <?php if(!$disabled):?>
+        <?php echo elgg_view("input/hidden", array(
+            'name' => 'input_prefix',
+            'value' => "task{$input_array}",
+        ));
+        ?>
         <div class="clearfix"></div>
         <div class="task-type-container margin-bottom-10"
              style="<?php echo $task->task_type == ClipitTask::TYPE_QUIZ_TAKE ? '':'display:none;' ;?>

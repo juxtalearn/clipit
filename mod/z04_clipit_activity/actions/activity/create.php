@@ -16,19 +16,8 @@ $activity_name = get_input('activity-title');
 $activity_description = get_input('activity-description');
 $activity_start = get_input('activity-start');
 $activity_end = get_input('activity-end');
-$activity_tt = get_input('activity-tricky-topic');
-$new_tt = get_input('new-tricky-topic');
+$activity_tt = get_input('tricky-topic');
 
-if($new_tt){
-    $tags =  get_input('tag');
-    // Create new TT
-    $activity_tt = ClipitTrickyTopic::create(array('name' => $new_tt));
-    // Create Stumling blocks
-    foreach($tags as $tag){
-        $tag_ids[] = ClipitTag::create(array('name' => $tag));
-    }
-    ClipitTrickyTopic::add_tags($activity_tt, $tag_ids);
-}
 $activity_id = ClipitActivity::create(array(
     'name' => $activity_name,
     'description' => $activity_description,
@@ -61,6 +50,80 @@ foreach($tasks as $task){
             ));
             ClipitActivity::add_tasks($activity_id, array($feedback_task_id));
         }
+    }
+    $quiz = '';
+    $questions = '';
+    if($task['quiz'] && $task['type'] == ClipitTask::TYPE_QUIZ_TAKE){
+        $quiz = $task['quiz'];
+        // Set questions to Quiz
+        $questions = $quiz['question'];
+        $questions_id = array();
+        foreach($questions as $question){
+            $values = array();
+            $validations = array();
+            $tags = array();
+            switch($question['type']){
+                case ClipitQuizQuestion::TYPE_SELECT_MULTI:
+                    foreach($question['select_multi'] as $select){
+                        $values[] = $select['value'];
+                        if(isset($select['correct'])){
+                            $validations[] = 1;
+                        } else {
+                            $validations[] = 0;
+                        }
+                    }
+                    break;
+                case ClipitQuizQuestion::TYPE_SELECT_ONE:
+                    foreach($question['select_one'] as $select){
+                        $values[] = $select['value'];
+                        if(isset($select['correct'])){
+                            $validations[] = 1;
+                        } else {
+                            $validations[] = 0;
+                        }
+                    }
+                    break;
+                case ClipitQuizQuestion::TYPE_TRUE_FALSE:
+                    $a = array_fill(0, 2, 0);
+                    switch($question['true_false']){
+                        case 'true':
+                            $a[0] = 1;
+                            break;
+                        case 'false':
+                            $a[1] = 1;
+                            break;
+                    }
+                    $validations = $a;
+                    break;
+                case ClipitQuizQuestion::TYPE_NUMBER:
+                    $validations[] = $question['number'];
+                    break;
+            }
+            $tags = array_filter($question['tags']);
+            $question_id = ClipitQuizQuestion::create(array(
+                'name' => $question['title'],
+                'description' => $question['description'],
+                'difficulty' => $question['difficulty'],
+                'option_type' => $question['type'],
+                'option_array' => $values,
+                'validation_array' => $validations,
+                'tag_array' => $tags
+            ));
+            $questions_id[] = $question_id;
+            if($question['id_parent']){
+                ClipitQuizQuestion::link_parent_clone($question['id_parent'], $question_id);
+            }
+        }
+        $time = $quiz['time'];
+        $total_time = (int)($time['d']*86400) + ($time['h']*3600) + ($time['m']*60);
+        $quiz_id = ClipitQuiz::create(array(
+            'name' => $quiz['title'],
+            'description' => $quiz['description'],
+            'view_mode' => $quiz['view'],
+            'max_time' => $total_time
+        ));
+        ClipitTask::set_properties($task_id, array('quiz' => $quiz_id));
+        ClipitQuiz::add_quiz_questions($quiz_id, $questions_id);
     }
 }
 // Called users
@@ -130,5 +193,6 @@ ClipitActivity::add_teachers($activity_id, array($user_id));
 
 $object = ClipitSite::lookup($activity_id);
 system_message(elgg_echo("activity:created", array($object['name'])));
-
+print_r($_POST);
+die;
 forward("clipit_activity/{$activity_id}/admin".$filter);

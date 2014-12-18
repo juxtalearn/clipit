@@ -120,7 +120,7 @@ $tricky_topic_view = elgg_view("tricky_topic/preview", array('activity' => $acti
     </div>
     <div class="clearfix"></div>
     <div class="margin-top-10">
-        <small><a>*</a> Campo obligatorio</small>
+        <small><a>*</a> <?php echo elgg_echo('field:required');?></small>
     </div>
     <div class="margin-top-20 col-md-12 text-right">
         <?php echo elgg_view('input/submit',

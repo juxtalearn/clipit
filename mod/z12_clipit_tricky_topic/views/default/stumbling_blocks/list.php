@@ -113,9 +113,10 @@ $(function(){
                 <div class="margin-top-5">
                 <strong>
                     <small>
-                        <a href="javascript:;" id="<?php echo $tag->id;?>" class="link-tricky-topic">+ Link Tricky Topic</a>
+                        <a href="javascript:;" id="<?php echo $tag->id;?>" class="link-tricky-topic">
+                            + <?php echo elgg_echo('tricky_topic:link');?>
+                        </a>
                     </small>
-<!--                                <small><a class="btn btn-xs btn-primary"><i class="fa fa-plus"></i> Add</a></small>-->
                     <div class="list-tricky-topic" style="display: none;"></div>
                 </strong>
             </td>

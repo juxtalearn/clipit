@@ -5,6 +5,8 @@
  */
 
 $spanish = array(
+    'mine' => 'Míos',
+    'field:required' => 'Campo obligatorio',
     'menu' => 'Menú',
     'show' => 'Mostrar',
     'showing' => 'Mostrando',

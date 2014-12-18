@@ -18,7 +18,7 @@ $count = elgg_extract('count', $vars);
         <?php echo elgg_view("page/components/print_button");?>
     </div>
     <?php echo elgg_view('output/url', array(
-        'href'  => "tricky_topics/student_problems/create",
+        'href'  => "tricky_topics/examples/create",
         'class' => 'btn btn-primary margin-bottom-10',
         'title' => elgg_echo('create'),
         'text'  => elgg_echo('create'),
@@ -44,7 +44,7 @@ $count = elgg_extract('count', $vars);
             <td>
                 <strong>
                     <?php echo elgg_view('output/url', array(
-                        'href'  => "tricky_topics/student_problems/view/{$example->id}",
+                        'href'  => "tricky_topics/examples/view/{$example->id}",
                         'title' => $example->name,
                         'text'  =>  $example->name,
                     ));
@@ -71,10 +71,18 @@ $count = elgg_extract('count', $vars);
             <td>
                 <?php if($user->id == elgg_get_logged_in_user_guid()):?>
                     <?php echo elgg_view('output/url', array(
-                        'href'  => "tricky_topics/student_problems/edit/{$example->id}",
+                        'href'  => "tricky_topics/examples/edit/{$example->id}",
                         'class' => 'btn btn-xs btn-primary',
                         'title' => elgg_echo('edit'),
-                        'text'  => elgg_echo('edit'),
+                        'text'  => '<i class="fa fa-edit"></i>',
+                    ));
+                    ?>
+                    <?php echo elgg_view('output/url', array(
+                        'href'  => "action/example/remove?id={$example->id}",
+                        'class' => 'btn btn-xs btn-danger remove-object',
+                        'is_action' => true,
+                        'title' => elgg_echo('delete'),
+                        'text'  => '<i class="fa fa-trash-o"></i>',
                     ));
                     ?>
                 <?php endif;?>

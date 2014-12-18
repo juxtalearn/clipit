@@ -63,20 +63,21 @@ $count = elgg_extract('count', $vars);
             </td>
             <td>
                 <?php if($user->id == elgg_get_logged_in_user_guid()):?>
-<!--                    --><?php //echo elgg_view('output/url', array(
-//                        'href'  => "tricky_topics/edit/{$tricky_topic->id}",
-//                        'class' => 'btn btn-xs btn-primary',
-//                        'title' => elgg_echo('edit'),
-//                        'text'  => '<i class="fa fa-edit"></i>',
-//                    ));
-//                    ?>
-<!--                    --><?php //echo elgg_view('output/url', array(
-//                        'href'  => "tricky_topics/edit/{$tricky_topic->id}",
-//                        'class' => 'btn btn-xs btn-danger',
-//                        'title' => elgg_echo('delete'),
-//                        'text'  => '<i class="fa fa-trash-o"></i>',
-//                    ));
-//                    ?>
+                    <?php echo elgg_view('output/url', array(
+                        'href'  => "tricky_topics/edit/{$tricky_topic->id}",
+                        'class' => 'btn btn-xs btn-primary',
+                        'title' => elgg_echo('edit'),
+                        'text'  => '<i class="fa fa-edit"></i>',
+                    ));
+                    ?>
+                    <?php echo elgg_view('output/url', array(
+                        'href'  => "action/tricky_topic/remove?id={$tricky_topic->id}",
+                        'class' => 'btn btn-xs btn-danger remove-object',
+                        'is_action' => true,
+                        'title' => elgg_echo('delete'),
+                        'text'  => '<i class="fa fa-trash-o"></i>',
+                    ));
+                    ?>
                 <?php endif;?>
                 <?php echo elgg_view('output/url', array(
                     'href'  => "tricky_topics/create/{$tricky_topic->id}",

@@ -27,9 +27,9 @@ $examples = elgg_extract('entities', $vars);
         <td>
             <strong>
             <?php echo elgg_view('output/url', array(
-                'href'  => "tricky_topics/view/{$tricky_topic->id}",
-                'title' => $tricky_topic->name,
-                'text'  => 'Application of Equations',
+                'href'  => "tricky_topics/examples/view/{$example->id}",
+                'title' => $example->name,
+                'text'  => $example->name,
             ));
             ?>
             </strong>

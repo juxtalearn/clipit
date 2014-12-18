@@ -33,9 +33,14 @@ $(document).on("change", ".task-types",function(){
     var content = $(this).closest(".task");
     var that = $(this);
     content_feedback = content.find(".feedback-module");
-    var tricky_topic_val = '';
+    var tricky_topic_val = '',
+        input_prefix_val = '';
     if($("#tricky-topic").val()){
         tricky_topic_val = $("#tricky-topic").val();
+    }
+    var input_prefix = content.find("input[name='input_prefix']");
+    if(input_prefix.length > 0){
+        input_prefix_val = input_prefix.val();
     }
     $(this).closest(".task").find(".task-type-container").html('').hide();
     if($.inArray($(this).val(), task_types) != -1){
@@ -58,7 +63,8 @@ $(document).on("change", ".task-types",function(){
         content.find(".quiz-module").show();
         elgg.get('ajax/view/activity/admin/tasks/quiz/quiz', {
             data: {
-                tricky_topic: tricky_topic_val
+                tricky_topic: tricky_topic_val,
+                input_prefix: input_prefix_val
             },
             success: function (data) {
                 that.closest(".task").find(".task-type-container").html(data).show();

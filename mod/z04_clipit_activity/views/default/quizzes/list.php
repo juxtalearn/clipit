@@ -159,11 +159,11 @@ $(function(){
 <div class="bg-info pull-right">
     <i class="fa fa-clock-o pull-left" style="font-size: 56px;"></i>
     <div class="content-block">
-        <h4 class="margin-0">Tiempo para hacer el examen</h4>
+        <h4 class="margin-0"><?php echo elgg_echo('quiz:time:to_do');?></h4>
         <h3 class="text-muted margin-0 margin-top-10">
             <span class="countdown"><i class="fa fa-spinner fa-spin blue"></i></span>
         </h3>
-        <small>Termina a las <?php echo $date;?></small>
+        <small><?php echo elgg_echo('quiz:time:finish');?> <?php echo $date;?></small>
     </div>
 </div>
 <?php endif;?>

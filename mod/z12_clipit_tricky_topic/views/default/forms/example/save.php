@@ -13,6 +13,13 @@
 $example = elgg_extract('entity', $vars);
 $user_language = get_current_language();
 $language_index = ClipitReflectionItem::get_language_index($user_language);
+if($example) {
+    $tags = ClipitTag::get_by_id($example->tag_array);
+    echo elgg_view('input/hidden', array(
+        'name' => 'entity-id',
+        'value' => $example->id,
+    ));
+}
 ?>
 <div class="margin-bottom-10" id="form-add-tricky-topic">
     <div class="col-md-7">
@@ -22,6 +29,7 @@ $language_index = ClipitReflectionItem::get_language_index($user_language);
                 'name' => 'title',
                 'class' => 'form-control',
                 'required' => true,
+                'value' => $example->name,
                 'placeholder' => elgg_echo('title')
             ));
             ?>
@@ -31,6 +39,7 @@ $language_index = ClipitReflectionItem::get_language_index($user_language);
             <?php
             echo elgg_view('input/plaintext', array(
                 'class' => 'form-control',
+                'value' => $example->description,
                 'name' => 'description',
                 'rows' => 9
             ));
@@ -40,14 +49,14 @@ $language_index = ClipitReflectionItem::get_language_index($user_language);
             <div class="col-md-6">
                 <label><?php echo elgg_echo('country');?></label>
                 <?php echo elgg_view('page/components/countries',
-                    array('style' => 'padding:5px;', 'value' => $tricky_topic->country));?>
+                    array('style' => 'padding:5px;', 'value' => $example->country));?>
             </div>
             <div class="col-md-6">
                 <label><?php echo elgg_echo('location');?></label>
                 <?php echo elgg_view('input/text', array(
                     'class' => 'form-control',
                     'name' => 'location',
-                    'value' => $tricky_topic->location,
+                    'value' => $example->location,
                     'required' => true
                 ));
                 ?>
@@ -173,6 +182,7 @@ $language_index = ClipitReflectionItem::get_language_index($user_language);
             <label><?php echo elgg_echo('example:subject');?></label>
             <?php echo elgg_view("input/text", array(
                 'name' => 'subject',
+                'value' => $example->subject,
                 'class' => 'form-control',
                 'required' => true
             ));
@@ -260,7 +270,11 @@ $language_index = ClipitReflectionItem::get_language_index($user_language);
                         $z = 1;
                         foreach($items as $item):?>
                             <label id="<?php echo $z;?>">
-                                <input type="checkbox" class="pull-left" style="margin-right: 5px;">
+                                <input type="checkbox"
+                                       name="reflections[]"
+                                       value="<?php echo $item->id;?>"
+                                       <?php echo in_array($item->id, $example->reflection_item_array) ? 'checked': '';?>
+                                       class="pull-left" style="margin-right: 5px;">
                                 <div class="content-block">
                                     <?php echo $item->item_name[$language_index]; ?>
                                 </div>
@@ -289,49 +303,11 @@ $language_index = ClipitReflectionItem::get_language_index($user_language);
                         ?>
                     </div>
                 </div>
-                    <?php
+                <?php
                     $i++;
                 endforeach;
                 ?>
-                <div role="tabpanel" class="reflection-item tab-pane row" id="terminologys" style="padding: 10px;">
-                    <div class="col-md-5">
-                        <div class="margin-bottom-10">Please tick all that apply:</div>
-                        <label id="1">
-                            <input type="checkbox"> One term refers to multiple concepts
-                        </label>
-                        <label id="2">
-                            <input type="checkbox"> One concept has many scientific names
-                        </label>
-                        <label id="3">
-                            <input type="checkbox"> Scientific use of everyday language
-                        </label>
-                    </div>
-                    <div class="col-md-7">
-                        <div class="reflect-description" style="padding: 10px;margin: 0px 0px 10px;">
-                            <strong>Terminology</strong>
-                            <p>
-                                Problems with use of language and scientific terms, inconsistent and overlapping terminology.
-                            </p>
-                        </div>
-                        <div class="reflect-description bg-info" style="display: none" data-reflect_item="1">
-                            1_TEST_Different terms are used to refer to the same concept.
-                            e.g. voltage is also referred to as potential difference.
-                            Confusion between voltage and charge.
-                        </div>
-                        <div class="reflect-description bg-info" style="display: none" data-reflect_item="2">
-                            2_TEST_Different terms are used to refer to the same concept.
-                            e.g. voltage is also referred to as potential difference.
-                            Confusion between voltage and charge.
-                        </div>
-                        <div class="reflect-description bg-info" style="display: none" data-reflect_item="3">
-                            3_TEST_Different terms are used to refer to the same concept.
-                            e.g. voltage is also referred to as potential difference.
-                            Confusion between voltage and charge.
-                        </div>
-                    </div>
-                </div>
-                <div role="tabpanel" class="tab-pane" id="essential-concepts">...</div>
-                <div role="tabpanel" class="tab-pane" id="essential-concepts">...</div>
+
             </div>
 
         </div>

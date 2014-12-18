@@ -18,6 +18,7 @@ if($activity_id = elgg_extract('activity_id', $vars)){
     $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
     $tricky_topic = $activity->tricky_topic;
 }
+
 if($input_prefix) {
     $input_prefix = $input_prefix . "[quiz]";
 } else {
@@ -116,7 +117,7 @@ $id = uniqid();
                     'name' => $input_prefix.'[time][h]',
                     'style' => 'width: 30%;display: inline-block;padding:5px;',
                     'class' => 'form-control',
-                    'value' => $entity ? floor($time / 3600):'',
+                    'value' => $entity ? floor($time / 3600):'1',
                     'options_values' => array_merge(array('Hours'), $hours)
                 ));
                 ?>
@@ -127,7 +128,8 @@ $id = uniqid();
                     'style' => 'width: 30%;display: inline-block;padding:5px;',
                     'class' => 'form-control',
                     'value' => $entity ? floor(($time / 60) % 60):'',
-                    'options_values' => array_merge(array('Minutes'), $minutes)
+                    'options_values' => array_merge(array('Minutes'), $minutes),
+                    'required' => true
                 ));
                 ?>
             </div>
@@ -167,11 +169,11 @@ $id = uniqid();
     ));
     ?>
     <?php if($tricky_topic):?>
-    <?php echo elgg_echo('or');?>
-    <a class="btn btn-border-blue btn-primary from-tags btn-xs"><?php echo elgg_echo('quiz:select:from_tag');?></a>
-    <div class="dynamic-table margin-top-20" style="display: none;">
-        <i class="fa fa-spinner fa-spin blue fa-lg"></i>
-    </div>
+        <?php echo elgg_echo('or');?>
+        <a class="btn btn-border-blue btn-primary from-tags btn-xs"><?php echo elgg_echo('quiz:select:from_tag');?></a>
+        <div class="dynamic-table margin-top-20" style="display: none;">
+            <i class="fa fa-spinner fa-spin blue fa-lg"></i>
+        </div>
     <?php endif;?>
 </div>
 </div>
