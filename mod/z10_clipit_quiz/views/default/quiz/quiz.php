@@ -154,7 +154,7 @@ $id = uniqid();
     <?php echo elgg_view('output/url', array(
         'href'  => "javascript:;",
         'class' => 'btn btn-primary create-question btn-xs',
-        'text'  => '<i class="fa fa-plus"></i> Create a question',
+        'text'  => '<i class="fa fa-plus"></i> '.elgg_echo('quiz:question:add'),
     ));
     ?>
     <?php if($tricky_topic):?>

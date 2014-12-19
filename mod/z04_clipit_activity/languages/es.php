@@ -319,6 +319,7 @@ $spanish = array(
     'difficulty' => 'Dificultad',
     'quiz:select:from_tag' => 'Añadir preguntas existentes relacionadas',
     'quiz:question' => 'Pregunta',
+    'quiz:question:add' => 'Crear una pregunta',
     'quiz:not_started' => 'Sin empezar',
     'quiz:finished' => 'Terminado',
     'quiz:time:to_do' => 'Tiempo para hacer el examen',
@@ -326,6 +327,7 @@ $spanish = array(
     'quiz:question:not_answered' => 'No contestado',
     'quiz:question:annotate' => 'Añadir anotación',
     'quiz:question:results' => 'Resultados',
+    'quiz:question:result:add' => 'Añadir respuesta',
 );
 
 add_translation('es', $spanish);

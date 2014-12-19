@@ -302,6 +302,7 @@ $english = array(
     'difficulty' => 'Difficulty',
     'quiz:select:from_tag' => 'Add questions related',
     'quiz:question' => 'Question',
+    'quiz:question:add' => 'Create a question',
     'quiz:not_started' => 'Not started',
     'quiz:finished' => 'Finished',
     'quiz:time:to_do' => 'Time to do the quiz',
@@ -309,6 +310,7 @@ $english = array(
     'quiz:question:not_answered' => 'Not answered',
     'quiz:question:annotate' => 'Add annotation',
     'quiz:question:results' => 'Results',
+    'quiz:question:result:add' => 'Add result',
 );
 
 add_translation('en', $english);

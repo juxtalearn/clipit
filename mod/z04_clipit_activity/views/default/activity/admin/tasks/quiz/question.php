@@ -187,7 +187,7 @@ if($question){
                         <?php echo elgg_view('output/url', array(
                             'href'  => "javascript:;",
                             'class' => 'add-result',
-                            'text'  => '<i class="fa fa-plus"></i> Add Result',
+                            'text'  => '<i class="fa fa-plus"></i> '.elgg_echo('quiz:question:result:add'),
                         ));
                         ?>
                     </strong>

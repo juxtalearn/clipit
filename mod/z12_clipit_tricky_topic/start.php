@@ -19,7 +19,7 @@ function clipit_ttt_init() {
     $plugin_dir = elgg_get_plugins_path() . "z12_clipit_tricky_topic";
     elgg_register_action("example/save", "{$plugin_dir}/actions/example/save.php");
     elgg_register_action("example/remove", "{$plugin_dir}/actions/example/remove.php");
-    elgg_register_ajax_view('examples/list');
+    elgg_register_ajax_view('examples/summary');
 
     elgg_register_action("stumbling_blocks/link", "{$plugin_dir}/actions/stumbling_blocks/link.php");
 

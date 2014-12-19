@@ -14,7 +14,7 @@ elgg_load_js("jquery:dynatable");
 ?>
 <script>
 $(function(){
-    $("#tricky-topic").change(function(){
+    $(document).on("change", "#tricky-topic", function(){
         var content = $("#tricky_topic_view");
         if($(this).val() == 0){
             content.hide();
@@ -38,7 +38,8 @@ $(function(){
         elgg.action('tricky_topic/save', {
             data: form_data,
             success: function(json){
-                container.html(json.output);
+                container.html(json.output)
+                container.find("option:selected").change();
             }
         });
     });

@@ -23,18 +23,18 @@ $(function(){
             tr_example.toggle();
             return false;
         }
-        elgg.get('ajax/view/examples/list',{
+        elgg.get('ajax/view/examples/summary',{
             data: {
                 stumbling_block: id
             },
             success: function(content){
                 var container = $("<tr/>")
                     .attr("data-tag", id)
-                    .html( $('<td/>').attr("colspan", 3).html(content) )
-                    .append('\
-                    <td class="text-center">\
-                        <i class="fa fa-level-down fa-rotate-90" style="font-size: 20px;"></i>\
-                    </td>');
+                    .html( $('<td/>').attr("colspan", 4).html(content).css("padding", "10px") );
+//                    .append('\
+//                    <td class="text-center">\
+//                        <i class="fa fa-level-down fa-rotate-90" style="font-size: 20px;"></i>\
+//                    </td>');
                 tr.after(container);
             }
         });
@@ -59,13 +59,14 @@ $(function(){
 <div class="clearfix"></div>
 <table class="table table-striped table-condensed">
     <tr>
-        <th>Name</th>
+        <th><?php echo elgg_echo('name');?></th>
         <th>Author/Date</th>
-        <th><i class="fa fa-sitemap"></i> Tricky topics</th>
-        <th>Example</th>
+        <th><i class="fa fa-sitemap"></i> <?php echo elgg_echo('tricky_topics');?></th>
+        <th><?php echo elgg_echo('examples');?></th>
     </tr>
     <?php foreach($tags as $tag):
         $user = array_pop(ClipitUser::get_by_id(array($tag->owner_id)));
+        $examples = ClipitExample::get_by_tags(array($tag->id));
         ?>
         <tr class="list-item">
             <td>
@@ -121,14 +122,12 @@ $(function(){
                 </strong>
             </td>
             <td class="text-left">
-                    <a href="javascript:;" class="show-examples" id="<?php echo $tag->id;?>">
-                        10
-                    </a>
-<!--                        <a class="show">-->
-<!--                            10 Files </i>-->
-<!--                        </a>-->
-<!--                        <a>10 Url</a>-->
-<!--                        <a class="btn btn-xs btn-border-blue">View</a>-->
+                <?php if(count($examples)):?>
+                <a href="javascript:;" class="show-examples btn btn-xs btn-border-blue" id="<?php echo $tag->id;?>">
+                    <strong><?php echo count($examples);?></strong>
+                    <i class="margin-left-10 fa fa-th"></i>
+                </a>
+                <?php endif;?>
             </td>
         </tr>
     <?php endforeach;?>
