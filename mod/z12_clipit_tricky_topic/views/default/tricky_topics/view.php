@@ -71,7 +71,7 @@ $user = array_pop(ClipitUser::get_by_id(array($tricky_topic->owner_id)));
     <?php echo elgg_view('examples/summary', array('entities' => $examples));?>
 </div>
 <div>
-    <?php echo elgg_view('page/components/title_block', array('title' => 'Teaching Activity'));?>
+    <?php echo elgg_view('page/components/title_block', array('title' => elgg_echo('activity:stas')));?>
     <div role="tabpanel">
 
         <!-- Nav tabs -->

@@ -173,7 +173,7 @@ if($example) {
                 'href'  => "javascript:;",
                 'class' => 'btn btn-xs btn-primary',
                 'title' => elgg_echo('add'),
-                'text'  => '<i class="fa fa-plus"></i>' . elgg_echo('add'),
+                'text'  => '<i class="fa fa-plus"></i> ' . elgg_echo('add'),
                 'id'    => 'add-tag',
             ));
             ?>

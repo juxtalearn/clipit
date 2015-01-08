@@ -53,6 +53,14 @@ $(function(){
     });
 });
 </script>
+<style>
+    .ln{
+        visibility: hidden;
+    }
+    .table tr:hover .ln{
+        visibility: visible;
+    }
+</style>
 <div class="pull-right margin-bottom-10">
     <?php echo elgg_view("page/components/print_button");?>
 </div>
@@ -60,7 +68,7 @@ $(function(){
 <table class="table table-striped table-condensed">
     <tr>
         <th><?php echo elgg_echo('name');?></th>
-        <th>Author/Date</th>
+        <th><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
         <th><i class="fa fa-sitemap"></i> <?php echo elgg_echo('tricky_topics');?></th>
         <th><?php echo elgg_echo('examples');?></th>
     </tr>
@@ -112,7 +120,7 @@ $(function(){
                 <?php endforeach;?>
                 </ul>
                 <div class="margin-top-5">
-                <strong>
+                <strong class="ln">
                     <small>
                         <a href="javascript:;" id="<?php echo $tag->id;?>" class="link-tricky-topic">
                             + <?php echo elgg_echo('tricky_topic:link');?>
