@@ -195,8 +195,9 @@ class UBItem {
         if(!$item = new static($id)) {
             return false;
         }
+        $class_properties = (array)static::list_properties();
         foreach($prop_value_array as $prop => $value) {
-            if(!array_key_exists($prop, static::list_properties())) {
+            if(!array_key_exists($prop, $class_properties)) {
                 throw new InvalidParameterException("ERROR: One or more property names do not exist.");
             }
             if($prop == "id") {

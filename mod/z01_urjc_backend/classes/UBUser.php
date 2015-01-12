@@ -147,6 +147,7 @@ class UBUser extends UBItem {
         if (!$item = new static($id)) {
             return false;
         }
+        $property_list = (array)static::list_properties();
         foreach ($prop_value_array as $prop => $value) {
             if ($prop == "id") {
                 throw new InvalidParameterException("ERROR: Cannot modify 'id' of instance.");
@@ -163,7 +164,7 @@ class UBUser extends UBItem {
                     return $user_array[$value]->id;
                 }
             }
-            if (!array_key_exists($prop, static::list_properties())) {
+            if (!array_key_exists($prop, $property_list)) {
                 throw new InvalidParameterException("ERROR: One or more property names do not exist.");
             } else {
                 $item->$prop = $value;

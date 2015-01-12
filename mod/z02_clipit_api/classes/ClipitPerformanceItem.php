@@ -87,9 +87,9 @@ class ClipitPerformanceItem extends UBItem {
             $lang_index = static::get_language_index($prop_value_array["language"]);
             unset($prop_value_array["language"]);
         }
-
+        $property_list = (array)static::list_properties();
         foreach($prop_value_array as $prop => $value) {
-            if(!array_key_exists($prop, static::list_properties()) && $prop != "language") {
+            if(!array_key_exists($prop, $property_list) && $prop != "language") {
                 throw new InvalidParameterException("ERROR: One or more property names do not exist.");
             }
             if($prop == "id") {
