@@ -59,6 +59,12 @@ $rating = elgg_extract("rating", $vars);
         $published = false;
     ?>
     <li class="video-item row list-item">
+        <?php
+        if($vars['preview'] !== false):
+            echo elgg_view("page/components/modal_remote", array('id'=> "viewer-id-{$video->id}" ));
+            $href_viewer = "ajax/view/multimedia/viewer?id=".$video->id;
+        endif;
+        ?>
         <div class="col-md-2">
             <a href="<?php echo elgg_get_site_url()."{$href}/view/{$video->id}"; ?>">
                 <div class="img-preview">
@@ -72,16 +78,27 @@ $rating = elgg_extract("rating", $vars);
                     'entity' => $video,
                     'class' => 'pull-right',
                     'entity_class' => 'ClipitVideo',
-                    'msg' => 'Uploaded by'
+                    'msg' => elgg_echo('multimedia:uploaded_by')
                 ));
                 ?>
             <?php endif;?>
             <h4 class="text-truncate">
-                <?php echo elgg_view('output/url', array(
-                    'href'  => "{$href}/view/".$video->id,
-                    'title' => $video->name,
-                    'text'  => $video->name));
-                ?>
+                <?php if($vars['preview'] !== false):?>
+                    <?php echo elgg_view('output/url', array(
+                        'href'  => $href_viewer,
+                        'title' => $video->name,
+                        'data-target' => '#viewer-id-'.$video->id,
+                        'data-toggle' => 'modal',
+                        'text'  => $video->name
+                    ));
+                    ?>
+                <? else:?>
+                    <?php echo elgg_view('output/url', array(
+                        'href'  => "{$href}/view/".$video->id,
+                        'title' => $video->name,
+                        'text'  => $video->name));
+                    ?>
+                <?php endif;?>
             </h4>
             <div class="overflow-hidden">
                 <?php if($rating):?>
@@ -117,7 +134,7 @@ $rating = elgg_extract("rating", $vars);
                         'entity' => $video,
                         'class' => 'pull-right',
                         'entity_class' => 'ClipitVideo',
-                        'msg' => 'Uploaded by'
+                        'msg' => elgg_echo('multimedia:uploaded_by')
                     ));
                     ?>
                 <?php endif;?>

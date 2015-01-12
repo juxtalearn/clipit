@@ -24,13 +24,12 @@ foreach($files as $file_id){
     $file_url = "{$href}/view/{$file->id}". ($vars['task_id'] ? "?task_id=".$vars['task_id']: "");
 
     $select = '<input type="checkbox" name="check-file[]" value="'.$file->id.'" class="select-simple">';
-    $file_icon = '
-        <div class="multimedia-preview">
-            '.elgg_view('output/url', array(
+    $file_icon_preview = elgg_view("multimedia/file/preview", array('file'  => $file));
+    $file_icon = elgg_view('output/url', array(
                 'href'  => $file_url,
                 'title' => $file->name,
-                'text'  => elgg_view("multimedia/file/preview", array('file'  => $file)))).'
-        </div>';
+                'text'  => $file_icon_preview
+            ));
 
     // Owner options (edit/delete)
     $owner_options = "";
@@ -63,6 +62,30 @@ foreach($files as $file_id){
         'class' => 'show',
         'text'  => '<i class="fa-user fa"></i> '.$user->name,
     ));
+    $file_link_text = '<strong>'.$file->name.'</strong>';
+    $file_link = elgg_view('output/url', array(
+        'href'  => $file_url,
+        'title' => $file->name,
+        'text'  => $file_link_text
+    ));
+    if($vars['preview'] !== false) {
+        echo elgg_view("page/components/modal_remote", array('id' => "viewer-id-{$file->id}"));
+        $href_viewer = "ajax/view/multimedia/viewer?id=" . $file->id;
+        $file_link = elgg_view('output/url', array(
+            'href'  => $href_viewer,
+            'title' => $file->name,
+            'data-target' => '#viewer-id-'.$file->id,
+            'data-toggle' => 'modal',
+            'text'  => $file_link_text
+        ));
+        $file_icon = elgg_view('output/url', array(
+            'href'  => $href_viewer,
+            'title' => $file->name,
+            'data-target' => '#viewer-id-'.$file->id,
+            'data-toggle' => 'modal',
+            'text'  => $file_icon_preview
+        ));
+    }
     $row = array(
         array(
             'class' => $vars['create'] ? 'select' : 'hide',
@@ -70,15 +93,11 @@ foreach($files as $file_id){
         ),
         array(
             'class' => 'text-center',
-            'content' => $file_icon
+            'content' => '<div class="multimedia-preview">'.$file_icon.'</div>'
         ),
         array(
             'class' => 'file-info',
-            'content' => elgg_view('output/url', array(
-                'href'  => $file_url,
-                'title' => $file->name,
-                'text'  => '<strong>'.$file->name.'</strong>'
-            ))
+            'content' => $file_link
         ),
         array(
             'content' => elgg_view('tricky_topic/tags/view', array(

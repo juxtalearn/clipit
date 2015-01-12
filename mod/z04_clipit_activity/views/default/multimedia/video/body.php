@@ -14,9 +14,7 @@ $video = elgg_extract("entity", $vars);
 ?>
 <div class="frame-container" style="width: 100%;">
     <?php if(get_video_url_embed($video->url)):?>
-        <?php echo elgg_view('output/iframe', array(
-            'value'  => get_video_url_embed($video->url)));
-        ?>
+        <iframe src="<?php echo get_video_url_embed($video->url); ?>" frameborder="0"></iframe>
     <?php else:?>
         <video width="100%"  controls>
             <source src="<?php echo($video->url); ?>" type='video/webm; codecs="vp8, vorbis"' />

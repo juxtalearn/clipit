@@ -15,7 +15,8 @@ $file = array_pop(ClipitFile::get_by_id(array((int)$id)));
 
 $body = elgg_view("multimedia/file/view", array(
     'file'  => $file,
-    'size'  => 'original' ));
+    'size'  => 'original'
+));
 
 echo elgg_view("page/components/modal",
     array(

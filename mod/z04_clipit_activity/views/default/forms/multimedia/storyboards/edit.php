@@ -23,7 +23,7 @@ $body .= elgg_view("input/hidden", array(
 $body .= elgg_view('multimedia/file/view_summary', array('file' => $file));
 $body .='
 <div class="form-group">
-    <label for="sb-description">'.elgg_echo("multimedia:storyboard:description").'</label>
+    <label for="sb-description">'.elgg_echo("description").'</label>
     '.elgg_view("input/plaintext", array(
         'name'  => 'sb-description',
         'value' => $entity->description,

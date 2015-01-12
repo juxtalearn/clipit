@@ -11,6 +11,8 @@
  * @package         ClipIt
  */
 $example = elgg_extract('entity', $vars);
+$multimedia = elgg_extract('multimedia', $vars);
+$button_value = elgg_extract('submit_value', $vars);
 $user_language = get_current_language();
 $language_index = ClipitReflectionItem::get_language_index($user_language);
 if($example) {
@@ -20,6 +22,11 @@ if($example) {
         'value' => $example->id,
     ));
 }
+//var_dump(ClipitVideo::create(array(
+//    'name' => 'Quiz type',
+//    'url' => 'http://www.youtube.com/watch?v=ZI1GhCaFPFM',
+//    'preview' => 'http://i1.ytimg.com/vi/ZI1GhCaFPFM/mqdefault.jpg'
+//)));
 ?>
 <div class="margin-bottom-10" id="form-add-tricky-topic">
     <div class="col-md-7">
@@ -62,98 +69,7 @@ if($example) {
                 ?>
             </div>
         </div>
-        <div class="form-group">
-            <?php echo elgg_view('output/url', array(
-                'href'  => "javascript:;",
-                'onclick' => '$(this).parent(\'div\').find(\'.information_attach\').toggle()',
-                'text'  => '<strong>+ Student problem information</strong>',
-            ));
-            ?>
-            <div class="information_attach margin-top-10" style="display: none;">
-                <div class="form-group">
-                    <?php echo elgg_view("input/text", array(
-                        'name' => 'url[]',
-                        'class' => 'form-control',
-                        'placeholder' => elgg_echo('example:link_information'),
-                        'required' => true
-                    ));
-                    ?>
-                </div>
-                <div class="form-group">
-                    <label><?php echo elgg_echo('resources');?></label>
-                    <div role="tabpanel">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active">
-                                <a href="#files" aria-controls="files" role="tab" data-toggle="tab">
-                                    <?php echo elgg_echo('files');?>
-                                </a>
-                            </li>
-                            <li role="presentation">
-                                <a href="#videos" aria-controls="videos" role="tab" data-toggle="tab">
-                                    <?php echo elgg_echo('videos');?>
-                                </a>
-                            </li>
-                            <li role="presentation">
-                                <a href="#storyboards" aria-controls="storyboards" role="tab" data-toggle="tab">
-                                    <?php echo elgg_echo('storyboards');?>
-                                </a>
-                            </li>
-                        </ul>
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="files" style="background: #fff;padding: 10px;">
-                                <div class="margin-bottom-20">
-                                    <div>
-                                        <a class="fa fa-times red margin-right-10"></a>
-                                        <?php echo elgg_view("input/file", array(
-                                            'name' => 'file[]',
-                                            'style' => 'display: inline-block;'
-                                        ));
-                                        ?>
-                                    </div>
-                                </div>
-                                <div>
-                                    <?php echo elgg_view('output/url', array(
-                                        'href'  => "javascript:;",
-                                        'class' => 'btn btn-xs btn-primary',
-                                        'title' => elgg_echo('add'),
-                                        'text'  => '<i class="fa fa-plus"></i>' . elgg_echo('add'),
-                                        'id'    => 'add-tag'
-                                    ));
-                                    ?>
-                                </div>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="videos" style="background: #fff;padding: 10px;">
 
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="storyboards" style="background: #fff;padding: 10px;">
-                                <div class="margin-bottom-20">
-                                    <div>
-                                        <a class="fa fa-times red margin-right-10"></a>
-                                        <?php echo elgg_view("input/file", array(
-                                            'name' => 'storyboard[]',
-                                            'style' => 'display: inline-block;'
-                                        ));
-                                        ?>
-                                    </div>
-                                </div>
-                                <div>
-                                    <?php echo elgg_view('output/url', array(
-                                        'href'  => "javascript:;",
-                                        'class' => 'btn btn-xs btn-primary',
-                                        'title' => elgg_echo('add'),
-                                        'text'  => '<i class="fa fa-plus"></i>' . elgg_echo('add'),
-                                        'id'    => 'add-tag'
-                                    ));
-                                    ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     <div class="col-md-5">
         <div class="form-group">
@@ -228,9 +144,149 @@ if($example) {
             container.find(".reflect-description").hide();
             container.find(".reflect-description:first").show();
         });
+        $(document).on("click", ".add-input", function(){
+            console.log($(this).closest(".form-groups").find(".group-input").html());
+            var container = $(this).closest(".form-group").find(".group-input"),
+                input_clone = container.find('.clone-input:last').clone();
+            input_clone.find('input').val('');
+            container.append(input_clone);
+        });
     });
     </script>
     <div class="col-md-12">
+        <div class="form-group">
+            <?php echo elgg_view('output/url', array(
+                'href'  => "javascript:;",
+                'onclick' => '$(this).parent(\'div\').find(\'.information_attach\').toggle()',
+                'text'  => '<strong>+ Student problem information</strong>',
+            ));
+            ?>
+            <div class="information_attach margin-top-10" style="display: none;">
+                <div class="form-group">
+                    <?php echo elgg_view("input/text", array(
+                        'name' => 'url[]',
+                        'class' => 'form-control',
+                        'placeholder' => elgg_echo('example:link_information'),
+                    ));
+                    ?>
+                </div>
+                <div class="form-group">
+                    <label><?php echo elgg_echo('resources');?></label>
+                    <div role="tabpanel">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#files" aria-controls="files" role="tab" data-toggle="tab">
+                                    <?php echo elgg_echo('files');?> (<?php echo count($multimedia['files']);?>)
+                                </a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#videos" aria-controls="videos" role="tab" data-toggle="tab">
+                                    <?php echo elgg_echo('videos');?> (<?php echo count($multimedia['videos']);?>)
+                                </a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#storyboards" aria-controls="storyboards" role="tab" data-toggle="tab">
+                                    <?php echo elgg_echo('storyboards');?> (<?php echo count($multimedia['storyboards']);?>)
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active form-group" id="files" style="background: #fff;padding: 10px;">
+                                <div class="group-input">
+                                    <div class="margin-bottom-20 clone-input">
+                                        <a class="fa fa-times red margin-right-20"></a>
+                                        <?php echo elgg_view("input/file", array(
+                                            'name' => 'file[]',
+                                            'style' => 'display: inline-block;'
+                                        ));
+                                        ?>
+                                    </div>
+                                </div>
+                                <div>
+                                    <?php echo elgg_view('output/url', array(
+                                        'href'  => "javascript:;",
+                                        'class' => 'btn btn-xs btn-primary add-input',
+                                        'title' => elgg_echo('add'),
+                                        'text'  => '<i class="fa fa-plus"></i> ' . elgg_echo('add'),
+                                    ));
+                                    ?>
+                                </div>
+                                <?php if($files = $multimedia['files']): ?>
+                                <hr>
+                                <div class="margin-top-20">
+                                    <?php
+                                    $params = array(
+                                        'files' => $files,
+                                        'href' => $href,
+                                        'view_comments' => false,
+                                        'options' => true,
+                                        'preview' => true
+                                    );
+                                    echo elgg_view('multimedia/file/list_summary', $params);
+                                    ?>
+                                </div>
+                                <?php endif;?>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="videos" style="background: #fff;padding: 10px;">
+                                <?php if($videos = $multimedia['videos']): ?>
+                                    <hr>
+                                    <div class="margin-top-20">
+                                        <?php
+                                        $params = array(
+                                            'videos' => $videos,
+                                            'href' => $href,
+                                            'view_comments' => false,
+                                            'actions' => true,
+                                            'preview' => true
+                                        );
+                                        echo elgg_view('multimedia/video/list_summary', $params);
+                                        ?>
+                                    </div>
+                                <?php endif;?>
+                            </div>
+                            <div role="tabpanel" class="tab-pane form-group" id="storyboards" style="background: #fff;padding: 10px;">
+                                <div class="group-input">
+                                    <div class="margin-bottom-20 clone-input">
+                                        <a class="fa fa-times red margin-right-20"></a>
+                                        <?php echo elgg_view("input/file", array(
+                                            'name' => 'storyboard[]',
+                                            'style' => 'display: inline-block;'
+                                        ));
+                                        ?>
+                                    </div>
+                                </div>
+                                <div>
+                                    <?php echo elgg_view('output/url', array(
+                                        'href'  => "javascript:;",
+                                        'class' => 'btn btn-xs btn-primary add-input',
+                                        'title' => elgg_echo('add'),
+                                        'text'  => '<i class="fa fa-plus"></i> ' . elgg_echo('add'),
+                                    ));
+                                    ?>
+                                </div>
+                                <?php if($storyboards = $multimedia['storyboards']): ?>
+                                    <hr>
+                                    <div class="margin-top-20">
+                                        <?php
+                                        $params = array(
+                                            'entities' => $storyboards,
+                                            'href' => $href,
+                                            'view_comments' => false,
+                                            'actions' => true,
+                                            'preview' => true
+                                        );
+                                        echo elgg_view('multimedia/storyboard/list_summary', $params);
+                                        ?>
+                                    </div>
+                                <?php endif;?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <hr/>
         <h4>Reflection palette: Why do students have this problem? Select all that apply.</h4>
         <div role="tabpanel" class="margin-bottom-20">
@@ -314,7 +370,7 @@ if($example) {
         <div class="pull-right">
             <?php echo elgg_view('input/submit', array(
                 'class' => 'btn btn-primary',
-                'value'  => elgg_echo('create'),
+                'value'  => $button_value,
             ));
             ?>
         </div>

@@ -11,7 +11,7 @@
  * @package         ClipIt
  */
 
-$file = get_input('file');
+
 $entity_id = get_input('entity-id');
 $data = array(
     'name' => get_input('title'),
@@ -33,6 +33,33 @@ if($entity_id){
 }
 // Add reflection items
 ClipitExample::set_reflection_items($example_id, $reflection_items);
+// Files, Storyboards and Videos
+$file = $_FILES['file'];
+$new_file_id = array();
+for($i = 0;$i < count($file['name']);$i++){
+    if($file['name'][$i]){
+        $new_file_id[] = ClipitFile::create(array(
+            'name' => $file['name'][$i],
+            'temp_path'  => $file['tmp_name'][$i]
+        ));
+    }
+}
+ClipitExample::add_files($example_id, $new_file_id);
+$storyboard = $_FILES['storyboard'];
+$new_sb_id = array();
+for($i = 0;$i < count($storyboard['name']);$i++){
+    if($storyboard['name'][$i]){
+        $file_id = ClipitFile::create(array(
+            'name' => $storyboard['name'][$i],
+            'temp_path'  => $storyboard['tmp_name'][$i]
+        ));
+        $new_sb_id[] = ClipitStoryboard::create(array(
+            'name' => $storyboard['name'][$i],
+            'file'  => $file_id
+        ));
+    }
+}
+ClipitExample::add_storyboards($example_id, $new_sb_id);
 // Create Stumling blocks
 $tags =  get_input('tag');
 $tag_ids = array();

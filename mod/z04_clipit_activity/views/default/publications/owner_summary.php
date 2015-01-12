@@ -36,6 +36,10 @@ switch($publish_level){
             $output = elgg_view("group/preview", array('entity' => $group, 'class' => $vars['class']));
         }
         break;
+    default:
+        $output = $msg." ";
+        $output .= elgg_view('page/elements/user_summary', array('user' => $user));
+        break;
 }
 
 

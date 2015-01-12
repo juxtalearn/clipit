@@ -125,6 +125,7 @@ function clipit_activity_init() {
     elgg_register_action("multimedia/resources/remove", "{$plugin_dir}/actions/multimedia/resources/remove.php");
     elgg_register_action("multimedia/resources/edit", "{$plugin_dir}/actions/multimedia/resources/edit.php");
     elgg_register_ajax_view('modal/multimedia/resource/edit');
+    elgg_register_ajax_view('multimedia/viewer');
     /* Storyboards */
     elgg_register_action("storyboards/upload", "{$plugin_dir}/actions/storyboards/upload.php");
     elgg_register_action("multimedia/storyboards/edit", "{$plugin_dir}/actions/multimedia/storyboards/edit.php");

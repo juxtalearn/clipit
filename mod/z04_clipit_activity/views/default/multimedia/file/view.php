@@ -35,6 +35,6 @@ switch($mimetype['short']){
         }
 }
 if($file_view){
-    $output = '<div style="margin-top:10px;">'.$file_view.'</div>';
+    $output = '<div class="margin-top-10">'.$file_view.'</div>';
 }
 echo $output;

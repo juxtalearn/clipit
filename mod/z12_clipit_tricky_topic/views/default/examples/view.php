@@ -80,7 +80,7 @@ $user = array_pop(ClipitUser::get_by_id(array($example->owner_id)));
 <hr>
 <?php echo elgg_view('examples/reflection_item/list', array('entities' => $example->reflection_item_array));?>
 <div>
-    <?php echo elgg_view('page/components/title_block', array('title' => 'Teaching Activity'));?>
+    <?php echo elgg_view('page/components/title_block', array('title' => elgg_echo('activity:stas')));?>
     <div role="tabpanel">
 
         <!-- Nav tabs -->

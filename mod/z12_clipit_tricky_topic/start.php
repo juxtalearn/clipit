@@ -44,7 +44,7 @@ function tt_page_handler($page){
 
     switch($page[0]){
         case '':
-            $title = "Tricky Topics";
+            $title = elgg_echo('tricky_topics');
             if(isset($page[1]) && $page[1] == 'view' && $id = $page[2]){
                 var_dump($page);
             }
@@ -74,7 +74,12 @@ function tt_page_handler($page){
                     elgg_push_breadcrumb(elgg_echo('examples'), "tricky_topics/examples");
                     $title = elgg_echo('example:create');
                     elgg_push_breadcrumb($title);
-                    $content = elgg_view_form('example/save', array('data-validate' => 'true'));
+                    $content = elgg_view_form('example/save',
+                        array(
+                            'enctype' => 'multipart/form-data',
+                            'data-validate' => 'true'
+                        ),
+                        array('submit_value' => elgg_echo('create')));
                     break;
                 case 'edit':
                     // Edit Example
@@ -84,12 +89,26 @@ function tt_page_handler($page){
                     $example = array_pop(ClipitExample::get_by_id(array($id)));
                     $filter = '';
                     elgg_push_breadcrumb(elgg_echo('examples'), "tricky_topics/examples");
-                    elgg_push_breadcrumb($example->name, "tricky_topics/examples/{$example->id}");
+                    elgg_push_breadcrumb($example->name, "tricky_topics/examples/view/{$example->id}");
                     $title = elgg_echo('edit');
                     elgg_push_breadcrumb($title);
+                    $multimedia = array(
+                        'videos' => array(),
+                        'files' => array(),
+                        'storyboards' => array(),
+                    );
+                    $multimedia['videos'] = array_merge($multimedia['videos'], $example->video_array);
+                    $multimedia['files'] = array_merge($multimedia['files'], $example->file_array);
+                    $multimedia['storyboards'] = array_merge($multimedia['storyboards'], $example->storyboard_array);
                     $content = elgg_view_form('example/save',
-                        array('data-validate' => 'true'),
-                        array('entity' => $example
+                        array(
+                            'data-validate' => 'true',
+                            'enctype' => 'multipart/form-data',
+                        ),
+                        array(
+                            'entity' => $example,
+                            'multimedia' => $multimedia,
+                            'submit_value' => elgg_echo('save')
                         ));
                     break;
                 case 'view':
@@ -100,6 +119,14 @@ function tt_page_handler($page){
                             $title = $example->name;
                             elgg_push_breadcrumb($title);
                             $entities = $example;
+                            $multimedia = array(
+                                'videos' => array(),
+                                'files' => array(),
+                                'storyboards' => array(),
+                            );
+                            $multimedia['videos'] = array_merge($multimedia['videos'], $example->video_array);
+                            $multimedia['files'] = array_merge($multimedia['files'], $example->file_array);
+                            $multimedia['storyboards'] = array_merge($multimedia['storyboards'], $example->storyboard_array);
                             $content = elgg_view('examples/view',
                                 array(
                                     'entity' => $example,

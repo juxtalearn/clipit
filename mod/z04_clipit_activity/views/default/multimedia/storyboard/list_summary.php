@@ -14,6 +14,8 @@ $entity = elgg_extract('entity', $vars);
 $storyboard_ids = elgg_extract('entities', $vars);
 $href = elgg_extract("href", $vars);
 $rating = elgg_extract("rating", $vars);
+$user_id = elgg_get_logged_in_user_guid();
+$user = array_pop(ClipitUser::get_by_id(array($user_id)));
 ?>
 <ul>
     <?php
@@ -28,19 +30,61 @@ $rating = elgg_extract("rating", $vars);
         }
         $published = false;
         ?>
+        <?php
+        if($vars['preview'] !== false):
+            echo elgg_view("page/components/modal_remote", array('id'=> "viewer-id-{$storyboard->id}" ));
+            $href_viewer = "ajax/view/multimedia/viewer?id=".$storyboard->id;
+        endif;
+        ?>
         <li class="row list-item">
             <div class="col-md-1 text-right">
                 <a href="<?php echo elgg_get_site_url()."{$href}/view/{$storyboard->id}"; ?>">
                     <div class="multimedia-preview">
-                        <?php echo elgg_view('output/url', array(
-                            'href'  => "{$href}/view/".$storyboard->id,
-                            'title' => $storyboard->name,
-                            'text'  => elgg_view("multimedia/file/preview", array('file'  => $file))));
-                        ?>
+                        <?php if($vars['preview'] !== false):?>
+                            <?php echo elgg_view('output/url', array(
+                                'href'  => $href_viewer,
+                                'title' => $storyboard->name,
+                                'data-target' => '#viewer-id-'.$storyboard->id,
+                                'data-toggle' => 'modal',
+                                'text'  => elgg_view("multimedia/file/preview", array('file'  => $file))
+                            ));
+                            ?>
+                        <? else:?>
+                            <?php echo elgg_view('output/url', array(
+                                'href'  => "{$href}/view/".$storyboard->id,
+                                'title' => $storyboard->name,
+                                'text'  => elgg_view("multimedia/file/preview", array('file'  => $file))
+                            ));
+                            ?>
+                        <?php endif;?>
                     </div>
                 </a>
             </div>
             <div class="col-md-11">
+                <?php
+                $owner_options = '';
+                if($storyboard->owner_id == $user_id || $user->role == ClipitUser::ROLE_TEACHER){
+                    $options = array(
+                        'entity' => $storyboard,
+                        'edit' => array(
+                            "data-target" => "#edit-storyboard-{$storyboard->id}",
+                            "href" => elgg_get_site_url()."ajax/view/modal/multimedia/storyboard/edit?id={$storyboard->id}",
+                            "data-toggle" => "modal"
+                        ),
+                        'remove' => array("href" => "action/multimedia/storyboards/remove?id={$storyboard->id}"),
+                    );
+                    if($storyboard->owner_id == $user_id){
+                        $options['remove'] = array("href" => "action/multimedia/storyboards/remove?id={$storyboard->id}");
+                    }
+                    if($vars['actions']){
+                        $owner_options = elgg_view("page/components/options_list", $options);
+                        $select = '<input type="checkbox" name="check-file[]" value="'.$storyboard->id.'" class="select-simple">';
+                    }
+                    // Remote modal, form content
+                    echo elgg_view("page/components/modal_remote", array('id'=> "edit-storyboard-{$storyboard->id}" ));
+                }
+                ?>
+                <?php echo $owner_options;?>
                 <?php if($rating):?>
                     <?php echo elgg_view("performance_items/summary", array(
                         'entity' => $storyboard,
@@ -51,11 +95,23 @@ $rating = elgg_extract("rating", $vars);
                 <?php endif; ?>
                 <h4 class="text-truncate margin-0">
                     <strong>
-                    <?php echo elgg_view('output/url', array(
-                        'href'  => "{$href}/view/".$storyboard->id,
-                        'title' => $storyboard->name,
-                        'text'  => $storyboard->name));
-                    ?>
+                    <?php if($vars['preview'] !== false):?>
+                        <?php echo elgg_view('output/url', array(
+                            'href'  => $href_viewer,
+                            'title' => $storyboard->name,
+                            'data-target' => '#viewer-id-'.$storyboard->id,
+                            'data-toggle' => 'modal',
+                            'text'  => $storyboard->name
+                        ));
+                        ?>
+                    <? else:?>
+                        <?php echo elgg_view('output/url', array(
+                            'href'  => "{$href}/view/".$storyboard->id,
+                            'title' => $storyboard->name,
+                            'text'  => $storyboard->name
+                        ));
+                        ?>
+                    <?php endif;?>
                     </strong>
                 </h4>
                 <div class="overflow-hidden">
@@ -67,11 +123,13 @@ $rating = elgg_extract("rating", $vars);
                     </p>
                 </div>
                 <small class="show" style="margin: 0">
-                    <?php echo elgg_view("publications/owner_summary", array(
+                    <?php
+                    echo elgg_view("publications/owner_summary", array(
                         'entity' => $storyboard,
                         'entity_class' => 'ClipitStoryboard',
                         'msg' => elgg_echo('multimedia:uploaded_by')
-                    )); ?>
+                    ));
+                    ?>
                     <?php if($vars['view_comments'] !== false):?>
                     <?php
                         $total_comments = array_pop(ClipitComment::count_by_destination(array($storyboard->id), true));

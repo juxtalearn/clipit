@@ -41,7 +41,7 @@ if(mb_strlen($sb_description)>165){
     <?php echo elgg_view("publications/owner_summary", array(
         'entity' => $storyboard,
         'entity_class' => 'ClipitStoryboard',
-        'msg' => 'Uploaded by'
+        'msg' => elgg_echo('multimedia:uploaded_by')
     ));
     ?>
     <i>
