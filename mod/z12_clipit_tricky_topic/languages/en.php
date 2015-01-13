@@ -44,7 +44,8 @@ $english = array(
     'author' => 'Author',
     'tricky_topics' => 'Tricky Topics',
     'student_problems' => 'Student problems',
-    'reflection_palette:question' => 'Reflection palette: Why do students have this problem? Select all that apply.',
+    'reflection_palette' => 'Reflection palette',
+    'reflection_palette:question' => 'Why do students have this problem?',
 );
 
 add_translation('en', $english);

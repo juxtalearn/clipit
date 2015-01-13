@@ -43,7 +43,8 @@ $spanish = array(
     'author' => 'Autor',
     'tricky_topics' => 'Temas clave',
     'student_problems' => 'Ejemplos',
-    'reflection_palette:question' => '¿Por qué los estudiantes tienen este problema? Seleccione donde se aplica.',
+    'reflection_palette' => '',
+    'reflection_palette:question' => '¿Por qué los estudiantes tienen este problema?',
 );
 
 add_translation('es', $spanish);
