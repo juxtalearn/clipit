@@ -60,12 +60,43 @@ for($i = 0;$i < count($storyboard['name']);$i++){
     }
 }
 ClipitExample::add_storyboards($example_id, $new_sb_id);
+$video_title = get_input('video_title');
+$video_file = $_FILES['video'];
+$video_link = get_input('video_url');
+$new_video_id = array();
+for($i = 0;$i < count($video_title);$i++){
+    if(trim($video_title[$i]) != '' ){
+        // Video url (youtube|vimeo)
+        if(trim($video_link[$i]) != "" && $video_data = video_url_parser($video_link[$i])){
+            $video_url = $video_data['url'];
+            // Video upload to youtube
+        } elseif(!empty($video_file['tmp_name'][$i])){
+            $video_url = ClipitVideo::upload_to_youtube($video_file['tmp_name'][$i], $video_title[$i]);
+            $video_data = video_url_parser($video_url);
+        }
+        if(!$video_data){
+            register_error(elgg_echo("video:cantadd"));
+        } else {
+            $new_video_id[] = ClipitVideo::create(array(
+                'name' => $video_title[$i],
+                'url' => $video_url,
+                'preview' => $video_data['preview'],
+                'duration' => $video_data['duration']
+            ));
+        }
+    }
+}
+ClipitExample::add_videos($example_id, $new_video_id);
+
 // Create Stumling blocks
 $tags =  get_input('tag');
+array_filter($tags);
 $tag_ids = array();
 foreach($tags as $tag){
-    $tag_ids[] = ClipitTag::create(array('name' => $tag));
+    if(trim($tag) != '') {
+        $tag_ids[] = ClipitTag::create(array('name' => $tag));
+    }
 }
 ClipitExample::set_tags($example_id, $tag_ids);
-//$file_array
+
 forward("tricky_topics/examples");

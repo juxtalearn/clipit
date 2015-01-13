@@ -108,6 +108,7 @@ $user = array_pop(ClipitUser::get_by_id(array($tricky_topic->owner_id)));
                         'files' => $multimedia['files'],
                         'href' => $href,
                         'options' => false,
+                        'preview' => true
                     );
                     if($multimedia['files']) {
                         echo elgg_view('multimedia/file/list_summary', $params);
@@ -126,6 +127,7 @@ $user = array_pop(ClipitUser::get_by_id(array($tricky_topic->owner_id)));
                         'view_comments' => false,
                         'options' => false,
                         'author_bottom' => true,
+                        'preview' => true
                     );
                     if($multimedia['videos']) {
                         echo elgg_view('multimedia/video/list_summary', $params);
@@ -143,6 +145,7 @@ $user = array_pop(ClipitUser::get_by_id(array($tricky_topic->owner_id)));
                         'href' => $href,
                         'view_comments' => false,
                         'options' => false,
+                        'preview' => true
                     );
                     if($multimedia['storyboards']) {
                         echo elgg_view('multimedia/storyboard/list_summary', $params);

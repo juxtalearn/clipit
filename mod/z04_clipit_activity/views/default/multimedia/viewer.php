@@ -16,15 +16,15 @@ switch($object['subtype']){
     case 'ClipitStoryboard':
         $entity = array_pop(ClipitStoryboard::get_by_id(array((int)$id)));
         $file = array_pop(ClipitFile::get_by_id(array($entity->file)));
-        $body = elgg_view("multimedia/file/view", array(
-            'file'  => $file,
+        $body = elgg_view("multimedia/file/body", array(
+            'entity'  => $file,
             'size'  => 'original'
         ));
         break;
     case 'ClipitFile':
         $entity = array_pop(ClipitFile::get_by_id(array((int)$id)));
-        $body = elgg_view("multimedia/file/view", array(
-            'file'  => $entity,
+        $body = elgg_view("multimedia/file/body", array(
+            'entity'  => $entity,
             'size'  => 'original'
         ));
         break;
@@ -36,7 +36,11 @@ switch($object['subtype']){
         ));
         break;
 }
-
+$body = '
+<div class="multimedia-owner">
+    <div class="multimedia-view">'.$body.'</div>
+</div>
+';
 echo elgg_view("page/components/modal",
     array(
         "dialog_class"     => "modal-lg add-files-list",

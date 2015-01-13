@@ -22,11 +22,6 @@ if($example) {
         'value' => $example->id,
     ));
 }
-//var_dump(ClipitVideo::create(array(
-//    'name' => 'Quiz type',
-//    'url' => 'http://www.youtube.com/watch?v=ZI1GhCaFPFM',
-//    'preview' => 'http://i1.ytimg.com/vi/ZI1GhCaFPFM/mqdefault.jpg'
-//)));
 ?>
 <div class="margin-bottom-10" id="form-add-tricky-topic">
     <div class="col-md-7">
@@ -145,11 +140,29 @@ if($example) {
             container.find(".reflect-description:first").show();
         });
         $(document).on("click", ".add-input", function(){
-            console.log($(this).closest(".form-groups").find(".group-input").html());
             var container = $(this).closest(".form-group").find(".group-input"),
                 input_clone = container.find('.clone-input:last').clone();
             input_clone.find('input').val('');
+            input_clone.find('.remove-input').show();
+
+            if($(this).hasClass('collapse-type')){
+                input_clone.find(".in").removeClass('in').addClass('collapse');
+                $( input_clone.find('[data-toggle="collapse"]') ).each(function(){
+                    var btn_collapse = $(this),
+                        num = (btn_collapse.attr('href').replace('#collapse_', ''));
+                    var container_collapse = input_clone.find('#collapse_'+ num);
+                    container_collapse.attr('id', 'collapse_' + (num+1) );
+                    btn_collapse.attr('href', '#collapse_' + (num+1) );
+                });
+                var num_panel = parseInt(input_clone.find('.panel-group').attr('id').replace('panel_', ''));
+                input_clone.find('.panel-group').attr('id', 'panel_' + (num_panel+1) );
+                input_clone.find('[data-toggle="collapse"]').attr('data-parent', '#panel_' + (num_panel+1) );
+            }
+
             container.append(input_clone);
+        });
+        $(document).on("click", ".remove-input", function(){
+            $(this).closest('.clone-input').remove();
         });
     });
     </script>
@@ -194,9 +207,9 @@ if($example) {
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane active form-group" id="files" style="background: #fff;padding: 10px;">
-                                <div class="group-input">
+                                <div class="group-input margin-top-10">
                                     <div class="margin-bottom-20 clone-input">
-                                        <a class="fa fa-times red margin-right-20"></a>
+                                        <a href="javascript:;" class="fa fa-times red margin-right-10 remove-input" style="display: none;"></a>
                                         <?php echo elgg_view("input/file", array(
                                             'name' => 'file[]',
                                             'style' => 'display: inline-block;'
@@ -229,7 +242,55 @@ if($example) {
                                 </div>
                                 <?php endif;?>
                             </div>
-                            <div role="tabpanel" class="tab-pane" id="videos" style="background: #fff;padding: 10px;">
+                            <div role="tabpanel" class="tab-pane form-group" id="videos" style="background: #fff;padding: 10px;">
+                                <div class="group-input margin-top-10">
+                                    <div class="margin-bottom-20 clone-input">
+                                        <div id="panel_1" class="panel-group">
+                                            <a href="javascript:;" class="fa fa-times red margin-right-10 remove-input image-block" style="display: none;"></a>
+                                            <div class="content-block panel" style="box-shadow: none;">
+                                            <div class="form-group margin-top-5">
+                                                <?php echo elgg_view("input/text", array(
+                                                    'name' => 'video_title[]',
+                                                    'class' => 'form-control',
+                                                    'placeholder' => elgg_echo('video:title'),
+                                                    'required' => true
+                                                ));
+                                                ?>
+                                            </div>
+                                            <a data-parent="#panel_1" class="btn-xs btn btn-primary btn-border-blue margin-right-10" data-toggle="collapse" href="#collapse_1" aria-expanded="false">
+                                                <?php echo elgg_echo('video:add:to_youtube');?>
+                                            </a>
+                                            <a data-parent="#panel_1" class="btn-xs btn btn-primary btn-border-blue margin-right-10" data-toggle="collapse" href="#collapse_2" aria-expanded="false">
+                                                <?php echo elgg_echo('video:add:paste_url');?>
+                                            </a>
+                                            <div class="collapse margin-top-10" id="collapse_1" style="padding: 10px 0;">
+                                                <?php echo elgg_view("input/file", array(
+                                                    'name' => 'video[]',
+                                                    'style' => 'display: inline-block;'
+                                                ));
+                                                ?>
+                                            </div>
+                                            <div class="collapse margin-top-10" id="collapse_2" style="padding: 10px 0;">
+                                                <?php echo elgg_view("input/text", array(
+                                                    'name' => 'video_url[]',
+                                                    'class' => 'form-control',
+                                                    'placeholder' => elgg_echo('example:link_information'),
+                                                ));
+                                                ?>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <?php echo elgg_view('output/url', array(
+                                        'href'  => "javascript:;",
+                                        'class' => 'btn btn-xs btn-primary add-input collapse-type',
+                                        'title' => elgg_echo('add'),
+                                        'text'  => '<i class="fa fa-plus"></i> ' . elgg_echo('add'),
+                                    ));
+                                    ?>
+                                </div>
                                 <?php if($videos = $multimedia['videos']): ?>
                                     <hr>
                                     <div class="margin-top-20">
@@ -239,7 +300,8 @@ if($example) {
                                             'href' => $href,
                                             'view_comments' => false,
                                             'actions' => true,
-                                            'preview' => true
+                                            'preview' => true,
+                                            'author_bottom' => true,
                                         );
                                         echo elgg_view('multimedia/video/list_summary', $params);
                                         ?>
@@ -247,9 +309,9 @@ if($example) {
                                 <?php endif;?>
                             </div>
                             <div role="tabpanel" class="tab-pane form-group" id="storyboards" style="background: #fff;padding: 10px;">
-                                <div class="group-input">
+                                <div class="group-input margin-top-10">
                                     <div class="margin-bottom-20 clone-input">
-                                        <a class="fa fa-times red margin-right-20"></a>
+                                        <a href="javascript:;" class="fa fa-times red margin-right-10 remove-input" style="display: none;"></a>
                                         <?php echo elgg_view("input/file", array(
                                             'name' => 'storyboard[]',
                                             'style' => 'display: inline-block;'

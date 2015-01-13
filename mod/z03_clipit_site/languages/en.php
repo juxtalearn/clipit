@@ -5,6 +5,7 @@
  */
 
 $english = array(
+    'date' => 'Date',
     'mine' => 'Mine',
     'field:required' => 'Field required',
     'menu' => 'Menu',

@@ -14,6 +14,8 @@ $entity = elgg_extract('entity', $vars);
 $video_ids = elgg_extract('videos', $vars);
 $href = elgg_extract("href", $vars);
 $rating = elgg_extract("rating", $vars);
+$user_id = elgg_get_logged_in_user_guid();
+$user = array_pop(ClipitUser::get_by_id(array($user_id)));
 ?>
 <?php if($vars['add_video']):?>
     <?php
@@ -66,13 +68,25 @@ $rating = elgg_extract("rating", $vars);
         endif;
         ?>
         <div class="col-md-2">
-            <a href="<?php echo elgg_get_site_url()."{$href}/view/{$video->id}"; ?>">
-                <div class="img-preview">
-                    <img src="<?php echo $video->preview;?>">
-                </div>
-            </a>
+            <?php if($vars['preview'] !== false):?>
+                <a data-toggle="modal" data-target="#viewer-id-<?php echo $video->id;?>" href="<?php echo elgg_get_site_url()."{$href_viewer}"; ?>">
+                    <div class="img-preview">
+                        <img src="<?php echo $video->preview;?>">
+                    </div>
+                </a>
+            <? else:?>
+                <a href="<?php echo elgg_get_site_url()."{$href}/view/{$video->id}"; ?>">
+                    <div class="img-preview">
+                        <img src="<?php echo $video->preview;?>">
+                    </div>
+                </a>
+            <?php endif;?>
+
         </div>
         <div class="col-md-10">
+            <?php if($vars['actions']): ?>
+                <?php echo elgg_view("multimedia/owner_options", array('entity' => $video, 'type' => 'video')); ?>
+            <?php endif; ?>
             <?php if($vars['author_bottom'] !== true):?>
                 <?php echo elgg_view("publications/owner_summary", array(
                     'entity' => $video,

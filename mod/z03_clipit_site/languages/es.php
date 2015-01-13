@@ -5,6 +5,7 @@
  */
 
 $spanish = array(
+    'date' => 'Fecha',
     'mine' => 'Míos',
     'field:required' => 'Campo obligatorio',
     'menu' => 'Menú',
