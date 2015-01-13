@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 $english = array(
+    'material:attach' => 'Attach materials',
     'duplicate' => 'Duplicate',
     'duplicate:name' => 'Duplicate: %s',
     'print' => 'Print',
@@ -43,6 +44,7 @@ $english = array(
     'author' => 'Author',
     'tricky_topics' => 'Tricky Topics',
     'student_problems' => 'Student problems',
+    'reflection_palette:question' => 'Reflection palette: Why do students have this problem? Select all that apply.',
 );
 
 add_translation('en', $english);

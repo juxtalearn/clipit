@@ -171,7 +171,7 @@ if($example) {
             <?php echo elgg_view('output/url', array(
                 'href'  => "javascript:;",
                 'onclick' => '$(this).parent(\'div\').find(\'.information_attach\').toggle()',
-                'text'  => '<strong>+ Student problem information</strong>',
+                'text'  => '<strong>+ '.elgg_echo('material:attach').'</strong>',
             ));
             ?>
             <div class="information_attach margin-top-10" style="display: none;">
@@ -184,7 +184,7 @@ if($example) {
 //                    ?>
 <!--                </div>-->
                 <div class="form-group">
-                    <label><?php echo elgg_echo('resources');?></label>
+<!--                    <label>--><?php //echo elgg_echo('resources');?><!--</label>-->
                     <div role="tabpanel">
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
@@ -350,7 +350,7 @@ if($example) {
             </div>
         </div>
         <hr/>
-        <h4>Reflection palette: Why do students have this problem? Select all that apply.</h4>
+        <h4><?php echo elgg_echo('reflection_palette:question');?></h4>
         <div role="tabpanel" class="margin-bottom-20">
 
             <!-- Nav tabs -->
