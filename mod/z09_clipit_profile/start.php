@@ -156,13 +156,14 @@ function usersettings_clipit_page_handler($page){
  * @access private
  */
 function usersettings_clipit_pagesetup() {
-    $user_href = '';
-    $user_id = elgg_get_page_owner_guid();
-    if($user_id != elgg_get_logged_in_user_guid()){
-        $user = array_pop(ClipitUser::get_by_id(array($user_id)));
-        $user_href = "/".$user->login;
-    }
-    if ($user_id && elgg_get_context() == "user_settings") {
+
+    if (elgg_get_context() == "user_settings") {
+        $user_href = '';
+        $user_id = elgg_get_page_owner_guid();
+        if($user_id != elgg_get_logged_in_user_guid()){
+            $user = array_pop(ClipitUser::get_by_id(array($user_id)));
+            $user_href = "/".$user->login;
+        }
         $params = array(
             'name' => 'settings_account',
             'text' => elgg_echo('profile:settings:change'),
