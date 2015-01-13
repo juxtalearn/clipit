@@ -175,14 +175,14 @@ if($example) {
             ));
             ?>
             <div class="information_attach margin-top-10" style="display: none;">
-                <div class="form-group">
-                    <?php echo elgg_view("input/text", array(
-                        'name' => 'url[]',
-                        'class' => 'form-control',
-                        'placeholder' => elgg_echo('example:link_information'),
-                    ));
-                    ?>
-                </div>
+<!--                <div class="form-group">-->
+<!--                    --><?php //echo elgg_view("input/text", array(
+//                        'name' => 'url[]',
+//                        'class' => 'form-control',
+//                        'placeholder' => elgg_echo('example:link_information'),
+//                    ));
+//                    ?>
+<!--                </div>-->
                 <div class="form-group">
                     <label><?php echo elgg_echo('resources');?></label>
                     <div role="tabpanel">
