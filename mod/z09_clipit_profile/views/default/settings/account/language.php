@@ -6,7 +6,7 @@
  * @subpackage Core
  */
 
-$user = elgg_get_page_owner_entity();
+$user = elgg_extract('entity', $vars);
 
 if ($user) {
 	$title = elgg_echo('user:set:language');

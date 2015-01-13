@@ -95,7 +95,6 @@ function getmetric_clipit_page_handler($page){
  * @return bool
  */
 function usersettings_clipit_page_handler($page){
-    global $CONFIG;
 
     if (!isset($page[0])) {
         $page[0] = 'user';
@@ -113,6 +112,13 @@ function usersettings_clipit_page_handler($page){
     elgg_push_breadcrumb(elgg_echo('settings'), "settings/user");
     elgg_set_context('user_settings');
 
+    if(isset($page[1])){
+        if($user->role == ClipitUser::ROLE_ADMIN) {
+            $user = array_pop(ClipitUser::get_by_login(array($page[1])));
+        } else {
+            return false;
+        }
+    }
     switch ($page[0]) {
         case 'user':
             $title = elgg_echo("profile:settings:edit");
@@ -122,7 +128,7 @@ function usersettings_clipit_page_handler($page){
             elgg_extend_view('forms/settings/account', 'settings/account/email', 100);
             elgg_extend_view('forms/settings/account', 'settings/account/language', 100);
 
-            $content = elgg_view_form('settings/account', array('class' => 'form-horizontal'));
+            $content = elgg_view_form('settings/account', array('class' => 'form-horizontal'), array('entity' => $user));
             break;
         case 'avatar':
             $title = elgg_echo("profile:settings:edit_avatar");
@@ -133,7 +139,7 @@ function usersettings_clipit_page_handler($page){
             return false;
             break;
     }
-
+    elgg_set_page_owner_guid($user->id);
     elgg_extend_view("page/elements/owner_block", "settings/sidebar/profile");
     $params = array(
         'content' => $content,
@@ -150,19 +156,23 @@ function usersettings_clipit_page_handler($page){
  * @access private
  */
 function usersettings_clipit_pagesetup() {
-    $user_id = elgg_get_logged_in_user_guid();
-
+    $user_href = '';
+    $user_id = elgg_get_page_owner_guid();
+    if($user_id != elgg_get_logged_in_user_guid()){
+        $user = array_pop(ClipitUser::get_by_id(array($user_id)));
+        $user_href = "/".$user->login;
+    }
     if ($user_id && elgg_get_context() == "user_settings") {
         $params = array(
             'name' => 'settings_account',
             'text' => elgg_echo('profile:settings:change'),
-            'href' => "settings/user",
+            'href' => "settings/user".$user_href,
         );
         elgg_register_menu_item('page', $params);
         $params = array(
             'name' => 'settings_avatar',
             'text' => elgg_echo('avatar:edit'),
-            'href' => "settings/avatar",
+            'href' => "settings/avatar".$user_href,
         );
         elgg_register_menu_item('page', $params);
     }

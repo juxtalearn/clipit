@@ -10,7 +10,7 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$user_id = elgg_get_logged_in_user_guid();
+$user_id = get_input('user_id');
 
 $file = $_FILES['avatar'];
 $new_file_id = ClipitFile::create(array(

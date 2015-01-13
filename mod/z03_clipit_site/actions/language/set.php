@@ -12,7 +12,9 @@
  */
 $new_lang_id = get_input("lang");
 $installed = get_installed_translations();
-$user_id = elgg_get_logged_in_user_guid();
+if(!isset($user_id)) {
+    $user_id = elgg_get_logged_in_user_guid();
+}
 if(array_key_exists($new_lang_id, $installed) && !empty($new_lang_id)){
     if(!elgg_is_logged_in()){
         setcookie('client_language', $new_lang_id, time()+60*60*24*30, '/'); // expires: 30 days

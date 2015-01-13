@@ -26,13 +26,16 @@ function clipit_ttt_init() {
     elgg_register_action("tricky_topic/save", "{$plugin_dir}/actions/tricky_topic/save.php");
     elgg_register_action("tricky_topic/remove", "{$plugin_dir}/actions/tricky_topic/remove.php");
 
-    elgg_extend_view("js/activity", "js/tricky_topic");
+    $ttadmin_js = elgg_get_simplecache_url('js', 'tricky_topic');
+    elgg_register_simplecache_view('js/tricky_topic');
+    elgg_register_js('clipit:tricky_topic', $ttadmin_js);
 }
 
 /**
  * @param $page
  */
 function tt_page_handler($page){
+    elgg_load_js('clipit:tricky_topic');
     $sidebar = elgg_view_module('aside', elgg_echo('menu'), elgg_view('tricky_topics/sidebar/menu'),
         array('class' => 'activity-group-block margin-bottom-10 aside-tree')
     );

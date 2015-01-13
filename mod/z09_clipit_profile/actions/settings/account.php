@@ -10,8 +10,16 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$user_id = elgg_get_logged_in_user_guid();
-$user = array_pop(ClipitUser::get_by_id(array($user_id)));
+$user_id = (int)get_input('user_id');
+
+$user = array_pop(ClipitUser::get_by_id(array(elgg_get_logged_in_user_guid())));
+if($user->role != ClipitUser::ROLE_ADMIN && $user_id != $user->id){
+    register_error(elgg_echo('user:edit:no_access'));
+    forward(REFERRER);
+} else {
+    $user = array_pop(ClipitUser::get_by_id(array($user_id)));
+}
+
 // Set language
 set_input('lang', get_input('language'));
 set_input('no_forward', true);
@@ -22,6 +30,7 @@ $email = get_input('email');
 if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
     $email = $user->email;
 }
+
 ClipitUser::set_properties($user_id, array(
     'name' => $name,
     'email' => $email

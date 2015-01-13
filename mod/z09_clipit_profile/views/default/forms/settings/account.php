@@ -10,6 +10,12 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
+$user = elgg_extract('entity', $vars);
+echo elgg_view('input/hidden', array(
+    'name' => 'user_id',
+    'value' => $user->id,
+));
+
 echo elgg_view('input/submit', array(
     'value' => elgg_echo('save'),
     'class' => "btn btn-primary pull-right",

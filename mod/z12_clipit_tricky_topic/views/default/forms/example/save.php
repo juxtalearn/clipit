@@ -129,42 +129,7 @@ if($example) {
         }
     </style>
     <script>
-    $(function(){
-        $(".reflection-item label").hover(function(){
-            var container = $(this).closest(".reflection-item");
-            container.find(".reflect-description").hide();
-            container.find("[data-reflect_item="+$(this).attr("id")+"]").show();
-        },function(){
-            var container = $(this).closest(".reflection-item");
-            container.find(".reflect-description").hide();
-            container.find(".reflect-description:first").show();
-        });
-        $(document).on("click", ".add-input", function(){
-            var container = $(this).closest(".form-group").find(".group-input"),
-                input_clone = container.find('.clone-input:last').clone();
-            input_clone.find('input').val('');
-            input_clone.find('.remove-input').show();
 
-            if($(this).hasClass('collapse-type')){
-                input_clone.find(".in").removeClass('in').addClass('collapse');
-                $( input_clone.find('[data-toggle="collapse"]') ).each(function(){
-                    var btn_collapse = $(this),
-                        num = (btn_collapse.attr('href').replace('#collapse_', ''));
-                    var container_collapse = input_clone.find('#collapse_'+ num);
-                    container_collapse.attr('id', 'collapse_' + (num+1) );
-                    btn_collapse.attr('href', '#collapse_' + (num+1) );
-                });
-                var num_panel = parseInt(input_clone.find('.panel-group').attr('id').replace('panel_', ''));
-                input_clone.find('.panel-group').attr('id', 'panel_' + (num_panel+1) );
-                input_clone.find('[data-toggle="collapse"]').attr('data-parent', '#panel_' + (num_panel+1) );
-            }
-
-            container.append(input_clone);
-        });
-        $(document).on("click", ".remove-input", function(){
-            $(this).closest('.clone-input').remove();
-        });
-    });
     </script>
     <div class="col-md-12">
         <div class="form-group">

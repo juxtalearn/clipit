@@ -12,6 +12,7 @@
  */
 $entity = elgg_extract('entity', $vars);
 ?>
+<?php echo elgg_view("input/hidden", array('name' => 'user_id', 'value' => $entity->id)); ?>
 <p class="bg-info">
     <?php echo elgg_echo('avatar:upload:instructions'); ?>
 </p>

@@ -23,8 +23,17 @@ function clipit_quiz_init() {
 function quiz_page_handler($page){
 
     $title = "Quiz creation";
+    switch($page[0]){
+        case '':
+            $title = elgg_echo('quizzes');
+            $content = elgg_view('quiz/view');
+            break;
+        default:
+            return false;
+            break;
+    }
     $params = array(
-        'content' => elgg_view('quiz/view'),
+        'content' => $content,
         'title' => $title,
         'filter' => "",
     );

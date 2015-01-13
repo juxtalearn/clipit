@@ -10,7 +10,7 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$user_id = elgg_get_logged_in_user_guid();
+$user_id = elgg_get_page_owner_guid();
 $user = array_pop(ClipitUser::get_by_id(array($user_id)));
 $body = elgg_view('output/img', array(
     'src' => get_avatar($user, 'small'),

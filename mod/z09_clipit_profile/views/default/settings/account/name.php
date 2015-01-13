@@ -5,8 +5,7 @@
  * @package Elgg
  * @subpackage Core
  */
-$user_id = elgg_get_logged_in_user_guid();
-$user = array_pop(ClipitUser::get_by_id(array($user_id)));
+$user = elgg_extract('entity', $vars);
 
 if ($user) {
 	$title = elgg_echo('user:name:label');
