@@ -1,4 +1,4 @@
-php_flag short_open_tag on
+#php_flag short_open_tag on
 
 # Elgg htaccess directives
 
