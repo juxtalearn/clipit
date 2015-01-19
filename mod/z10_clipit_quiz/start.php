@@ -15,18 +15,25 @@ elgg_register_event_handler('init', 'system', 'clipit_quiz_init');
 function clipit_quiz_init() {
     // Register "/quizzes" page handler
     elgg_register_page_handler('quizzes', 'quiz_page_handler');
+    // Questions
+    elgg_register_ajax_view('questions/summary');
 }
 
 /**
  * @param $page
  */
 function quiz_page_handler($page){
-
+    $filter = '';
     $title = "Quiz creation";
     switch($page[0]){
         case '':
             $title = elgg_echo('quizzes');
-            $content = elgg_view('quiz/view');
+            $selected_tab = get_input('filter', 'all');
+            $filter = elgg_view('quiz/filter', array('selected' => $selected_tab, 'href' => $page[0]));
+            $entities = ClipitQuiz::get_all();
+            $count = count($entities);
+            $entities = array_slice($entities, clipit_get_offset(), clipit_get_limit(10));
+            $content = elgg_view('quiz/list', array('entities' => $entities, 'count' => $count));
             break;
         default:
             return false;
@@ -35,9 +42,10 @@ function quiz_page_handler($page){
     $params = array(
         'content' => $content,
         'title' => $title,
-        'filter' => "",
+        'filter' => $filter,
+        'sidebar' => '',
     );
-    $body = elgg_view_layout('one_column', $params);
+    $body = elgg_view_layout('one_sidebar', $params);
 
     echo elgg_view_page($title, $body);
 }

@@ -304,6 +304,7 @@ $english = array(
     'difficulty' => 'Difficulty',
     'quiz:select:from_tag' => 'Add questions related',
     'quiz:question' => 'Question',
+    'quiz:questions' => 'Questions',
     'quiz:question:add' => 'Create a question',
     'quiz:not_started' => 'Not started',
     'quiz:finished' => 'Finished',

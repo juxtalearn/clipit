@@ -88,4 +88,36 @@ $(function(){
             $(this).closest('.clone-input').remove();
         });
     });
+    $(document).on("click", ".show-examples", function(){
+        var tr = $(this).closest("tr")
+        id = $(this).attr("id"),
+            tr_example = $("[data-tag="+id+"]");
+        if(tr_example.length > 0){
+            tr_example.toggle();
+            return false;
+        }
+        elgg.get('ajax/view/examples/summary',{
+            data: {
+                stumbling_block: id
+            },
+            success: function(content){
+                var container = $("<tr/>")
+                    .attr("data-tag", id)
+                    .html( $('<td/>').attr("colspan", 4).html(content).css("padding", "10px") );
+                tr.after(container);
+            }
+        });
+    });
+    $(".link-tricky-topic").click(function(){
+        $(this).toggle();
+        var content = <?php echo json_encode(elgg_view_form('stumbling_blocks/link', array('data-validate' => 'true')));?>,
+            container = $(this).closest("td").find(".list-tricky-topic");
+        container.toggle().html(content);
+        container.find("form .input-entity-id").val($(this).attr("id"));
+        container.find('form option').each(function(){
+            var text=$(this).text()
+            if (text.length > 30)
+                $(this).val(text).text(text.substr(0,30)+'…')
+        })
+    });
 });

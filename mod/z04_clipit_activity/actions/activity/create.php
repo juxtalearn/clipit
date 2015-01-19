@@ -193,6 +193,4 @@ ClipitActivity::add_teachers($activity_id, array($user_id));
 
 $object = ClipitSite::lookup($activity_id);
 system_message(elgg_echo("activity:created", array($object['name'])));
-print_r($_POST);
-die;
 forward("clipit_activity/{$activity_id}/admin".$filter);

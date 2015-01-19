@@ -321,6 +321,7 @@ $spanish = array(
     'difficulty' => 'Dificultad',
     'quiz:select:from_tag' => 'Añadir preguntas existentes relacionadas',
     'quiz:question' => 'Pregunta',
+    'quiz:questions' => 'Preguntas',
     'quiz:question:add' => 'Crear una pregunta',
     'quiz:not_started' => 'Sin empezar',
     'quiz:finished' => 'Terminado',

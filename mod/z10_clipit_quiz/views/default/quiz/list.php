@@ -1,5 +1,5 @@
 <?php
- /**
+/**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
  * Creation date:   27/11/2014
@@ -10,39 +10,119 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-//$tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($tricky_topic_id)));
-$tricky_topics = ClipitTrickyTopic::get_all();
+$quizzes = elgg_extract('entities', $vars);
+$count = elgg_extract('count', $vars);
 ?>
-<div class="row">
-<?php foreach($tricky_topics as $tricky_topic):?>
-<div class="col-md-12" style="padding:5px;">
-    <h4>
-        <?php echo elgg_view('output/url', array(
-            'href'  => "explore/search?by=tricky_topic&id={$tricky_topic->id}",
-            'target' => '_blank',
-            'title' => $tricky_topic->name,
-            'text'  => $tricky_topic->name,
-        ));
-        ?>
-    </h4>
-    <hr class="margin-0">
-    <small class="show margin-top-5"><?php echo elgg_echo("tags");?></small>
-    <div style="max-height: 150px;overflow-y: auto;">
-        <?php
-        foreach($tricky_topic->tag_array as $tag_id):
-            $tag = array_pop(ClipitTag::get_by_id(array($tag_id)));
-            ?>
-            <div class="col-md-6 text-truncate" style="padding:5px;">
+<div class="margin-bottom-20">
+    <div class="pull-right">
+        <?php echo elgg_view("page/components/print_button");?>
+    </div>
+    <?php echo elgg_view('output/url', array(
+        'href'  => "quizzes/create",
+        'class' => 'btn btn-primary margin-bottom-10',
+        'title' => elgg_echo('create'),
+        'text'  => elgg_echo('create'),
+    ));
+    ?>
+</div>
+<script>
+$(function(){
+    $(document).on("click", ".show-questions", function(){
+        var tr = $(this).closest("tr")
+            id = $(this).attr("id"),
+            tr_example = $("[data-tag="+id+"]");
+        if(tr_example.length > 0){
+            tr_example.toggle();
+            return false;
+        }
+        elgg.get('ajax/view/questions/summary',{
+            data: {
+                quiz: id
+            },
+            success: function(content){
+                var container = $("<tr/>")
+                    .attr("data-quiz", id)
+                    .html( $('<td/>').attr("colspan", 4).html(content).css("padding", "10px") );
+                tr.after(container);
+            }
+        });
+    });
+});
+</script>
+<table class="table table-striped">
+    <tr>
+        <th><?php echo elgg_echo('title');?>/<?php echo elgg_echo('tags');?></th>
+        <th><?php echo elgg_echo('author');?>/<?php echo elgg_echo('date');?></th>
+        <th style="width: 100px;"><?php echo elgg_echo('options');?></th>
+        <th class="text-right"><?php echo elgg_echo('quiz:questions');?></th>
+    </tr>
+    <?php
+    foreach($quizzes as $quiz):
+        $user = array_pop(ClipitUser::get_by_id(array($quiz->owner_id)));
+        $questions = ClipitQuiz::get_quiz_questions($quiz->id);
+    ?>
+        <tr>
+            <td>
+                <strong>
+                    <?php echo elgg_view('output/url', array(
+                        'href'  => "tricky_topics/view/{$quiz->id}",
+                        'title' => $quiz->name,
+                        'text'  => $quiz->name,
+                    ));
+                    ?>
+                </strong>
+                <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $quiz->tag_array, 'limit' => 5)); ?>
+            </td>
+            <td>
+                <small>
+                    <div>
+                        <i class="fa-user fa blue"></i>
+                        <?php echo elgg_view('output/url', array(
+                            'href'  => "profile/{$user->login}",
+                            'title' => $user->name,
+                            'text'  => $user->name,
+                        ));
+                        ?>
+                    </div>
+                    <?php echo elgg_view('output/friendlytime', array('time' => $quiz->time_created));?>
+                </small>
+            </td>
+            <td>
+                <?php if($user->id == elgg_get_logged_in_user_guid()):?>
+                    <?php echo elgg_view('output/url', array(
+                        'href'  => "tricky_topics/edit/{$quiz->id}",
+                        'class' => 'btn btn-xs btn-primary',
+                        'title' => elgg_echo('edit'),
+                        'text'  => '<i class="fa fa-edit"></i>',
+                    ));
+                    ?>
+                    <?php echo elgg_view('output/url', array(
+                        'href'  => "action/tricky_topic/remove?id={$quiz->id}",
+                        'class' => 'btn btn-xs btn-danger remove-object',
+                        'is_action' => true,
+                        'title' => elgg_echo('delete'),
+                        'text'  => '<i class="fa fa-trash-o"></i>',
+                    ));
+                    ?>
+                <?php endif;?>
                 <?php echo elgg_view('output/url', array(
-                    'href'  => "explore/search?by=tag&id={$tag->id}",
-                    'target' => '_blank',
-                    'title' => $tag->name,
-                    'text'  => $tag->name,
+                    'href'  => "tricky_topics/create/{$quiz->id}",
+                    'class' => 'btn btn-xs btn-primary btn-border-blue',
+                    'title' => elgg_echo('duplicate'),
+                    'text'  => '<i class="fa fa-copy"></i>',
                 ));
                 ?>
-            </div>
-        <?php endforeach;?>
-    </div>
-</div>
-<?php endforeach;?>
-</div>
+            </td>
+            <td class="text-right">
+                <?php echo elgg_view('output/url', array(
+                    'href'  => 'javascript:;',
+                    'class' => 'show-questions btn btn-xs btn-border-blue',
+                    'id' => $quiz->id,
+                    'text'  => '<strong>'.count($questions).'</strong> <i class="margin-left-5 fa fa-comments"></i>',
+                ));
+                ?>
+            </td>
+        </tr>
+    <?php endforeach;?>
+</table>
+<?php echo clipit_get_pagination(array('count' => $count, 'limit' => 10)); ?>
