@@ -19,28 +19,28 @@ $user = array_pop(ClipitUser::get_by_id(array($example->owner_id)));
         <small class="show">
             <?php echo elgg_view('output/friendlytime', array('time' => $example->time_created));?>
         </small>
-            <div class="margin-top-10">
-                <?php if($user->id == elgg_get_logged_in_user_guid()):?>
-                    <?php echo elgg_view('output/url', array(
-                        'href'  => "tricky_topics/examples/edit/{$example->id}",
-                        'class' => 'btn btn-xs btn-primary',
-                        'title' => elgg_echo('edit'),
-                        'text'  => '<i class="fa fa-edit"></i>',
-                    ));
-                    ?>
-                    <?php echo elgg_view('output/url', array(
-                        'href'  => "action/example/remove?id={$example->id}",
-                        'class' => 'btn btn-xs btn-danger remove-object',
-                        'is_action' => true,
-                        'title' => elgg_echo('delete'),
-                        'text'  => '<i class="fa fa-trash-o"></i>',
-                    ));
-                    ?>
-                <?php endif;?>
-                <span class="margin-left-10">
-                    <?php echo elgg_view("page/components/print_button");?>
-                </span>
-            </div>
+        <div class="margin-top-10">
+            <?php if($user->id == elgg_get_logged_in_user_guid()):?>
+                <?php echo elgg_view('output/url', array(
+                    'href'  => "tricky_topics/examples/edit/{$example->id}",
+                    'class' => 'btn btn-xs btn-primary',
+                    'title' => elgg_echo('edit'),
+                    'text'  => '<i class="fa fa-edit"></i>',
+                ));
+                ?>
+                <?php echo elgg_view('output/url', array(
+                    'href'  => "action/example/remove?id={$example->id}",
+                    'class' => 'btn btn-xs btn-danger remove-object',
+                    'is_action' => true,
+                    'title' => elgg_echo('delete'),
+                    'text'  => '<i class="fa fa-trash-o"></i>',
+                ));
+                ?>
+            <?php endif;?>
+            <span class="margin-left-10">
+                <?php echo elgg_view("page/components/print_button");?>
+            </span>
+        </div>
     </div>
     <small class="show"><?php echo elgg_echo('author');?></small>
     <i class="fa-user fa blue"></i>
@@ -63,17 +63,13 @@ $user = array_pop(ClipitUser::get_by_id(array($example->owner_id)));
         <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $example->tag_array)); ?>
     </div>
     <div class="col-md-3">
-        <div class="margin-bottom-5">
-            <small class="show"><?php echo elgg_echo('example:education_level');?></small>
-            <?php echo elgg_echo('example:education_level:'.$example->education_level);?>
-        </div>
-        <div class="margin-bottom-5">
-            <small class="show"><?php echo elgg_echo('example:subject');?></small>
-            <?php echo $example->subject;?>
-        </div>
-        <div class="margin-bottom-5">
+        <div class="margin-bottom-10">
             <small class="show"><?php echo elgg_echo('location');?></small>
             <?php echo $example->location;?>
+        </div>
+        <div class="margin-bottom-10">
+            <small class="show"><?php echo elgg_echo('country');?></small>
+            <?php echo get_countries_list($example->country);?>
         </div>
     </div>
 </div>

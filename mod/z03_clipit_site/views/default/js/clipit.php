@@ -499,7 +499,7 @@ $(function(){
             },
             autocomplete: {
                 delay: 0,
-                source: elgg.config.wwwroot+"ajax/view/publications/tags/search"
+                source: elgg.config.wwwroot+"ajax/view/stumbling_blocks/search"
             },
             placeholderText: "<?php echo elgg_echo("tags:commas:separated");?>",
             singleField: true,

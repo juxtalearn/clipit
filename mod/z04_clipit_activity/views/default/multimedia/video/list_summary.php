@@ -74,7 +74,7 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
                         <img src="<?php echo $video->preview;?>">
                     </div>
                 </a>
-            <? else:?>
+            <?php else:?>
                 <a href="<?php echo elgg_get_site_url()."{$href}/view/{$video->id}"; ?>">
                     <div class="img-preview">
                         <img src="<?php echo $video->preview;?>">
@@ -106,7 +106,7 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
                         'text'  => $video->name
                     ));
                     ?>
-                <? else:?>
+                <?php else:?>
                     <?php echo elgg_view('output/url', array(
                         'href'  => "{$href}/view/".$video->id,
                         'title' => $video->name,

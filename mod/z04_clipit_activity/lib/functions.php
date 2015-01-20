@@ -496,3 +496,21 @@ function split_chunks($l, $n){
     } // foreach
     return $result;
 }
+
+/**
+ * Education level for Tricky Topic
+ *
+ * @param string $level
+ * @return array
+ */
+function get_education_levels($level = ''){
+    $ed_levels = array('' => '');
+    for($i = 1; $i <= 4; $i++){
+        $ed_levels[$i] = elgg_echo('education_level:'.$i);
+    }
+    if($level){
+        return $ed_levels[$i];
+    } else {
+        return $ed_levels;
+    }
+}

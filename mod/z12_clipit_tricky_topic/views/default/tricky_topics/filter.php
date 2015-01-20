@@ -11,15 +11,19 @@
  * @package         ClipIt
  */
 $href = elgg_extract('href', $vars);
+$base_url = elgg_http_remove_url_query_element(current_page_url(), 'offset');
+
 $tabs = array(
     'all' => array(
         'text' => elgg_echo('all'),
-        'href' => "tricky_topics/{$href}",
+//        'href' => "tricky_topics/{$href}",
+        'href' => elgg_http_remove_url_query_element($base_url, 'filter'),
         'priority' => 100,
     ),
     'mine' => array(
         'text' => elgg_echo('mine'),
-        'href' => "tricky_topics/{$href}?filter=mine",
+//        'href' => "tricky_topics/{$href}?filter=mine",
+        'href' => elgg_http_add_url_query_elements($base_url, array('filter' => 'mine')),
         'priority' => 200,
     ),
 );

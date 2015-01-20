@@ -29,10 +29,8 @@ $count = elgg_extract('count', $vars);
     <thead>
     <tr>
         <th><?php echo elgg_echo('title');?>/<?php echo elgg_echo('tags');?></th>
-        <th><?php echo elgg_echo('example:education_level');?></th>
-        <th><i class="fa fa-globe"></i> <?php echo elgg_echo('country');?></th>
-        <th>Author/Date</th>
-        <th>Action</th>
+        <th><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
+        <th><?php echo elgg_echo('options');?></th>
     </tr>
     </thead>
     <tbody>
@@ -52,8 +50,6 @@ $count = elgg_extract('count', $vars);
                 </strong>
                 <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $example->tag_array, 'limit' => 5)); ?>
             </td>
-            <td><?php echo elgg_echo('example:education_level:'.$example->education_level);?></td>
-            <td><?php echo get_countries_list($example->country);?></td>
             <td>
                 <small>
                     <div>

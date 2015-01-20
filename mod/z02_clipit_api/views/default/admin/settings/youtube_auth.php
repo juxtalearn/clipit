@@ -60,8 +60,8 @@ if(get_config("google_refresh_token")) {
 
 <html>
 <body>
-<H3><? echo $html_title ?></H3>
-<? echo $html_body ?>
+<H3><?php echo $html_title ?></H3>
+<?php echo $html_body ?>
 </body>
 </html>
 

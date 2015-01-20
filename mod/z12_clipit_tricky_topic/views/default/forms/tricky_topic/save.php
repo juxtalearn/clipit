@@ -82,8 +82,30 @@ if($tricky_topic){
             ));
             ?>
         </div>
+        <div class="form-group">
+            <label><?php echo elgg_echo('education_level');?></label>
+            <?php echo elgg_view("input/dropdown", array(
+                'name' => 'education_level',
+                'style' => 'padding: 0;height: 25px;',
+                'value' => $tricky_topic->education_level,
+                'class' => 'form-control select-question-type',
+                'options_values' => get_education_levels(),
+            ));
+            ?>
+        </div>
+        <div class="form-group">
+            <label><?php echo elgg_echo('example:subject');?></label>
+            <?php echo elgg_view("input/text", array(
+                'name' => 'subject',
+                'value' => $tricky_topic->subject,
+                'class' => 'form-control',
+                'required' => true
+            ));
+            ?>
+        </div>
     </div>
 </div>
-<div class="text-right">
+
+<div class="text-right margin-top-10">
     <?php echo elgg_view('input/submit', array('value' => $button_value, 'class'=>'btn btn-primary')); ?>
 </div>

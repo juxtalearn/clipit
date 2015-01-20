@@ -5,6 +5,7 @@
  */
 
 $spanish = array(
+    'saved' => 'Guardado',
     'date' => 'Fecha',
     'mine' => 'Míos',
     'field:required' => 'Campo obligatorio',
