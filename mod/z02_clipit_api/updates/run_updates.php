@@ -20,6 +20,7 @@ while(key($update_files) != null){
     if(!empty($value)){
         include_once((string)$value);
     }
+    next($update_files);
 };
 
 set_config("clipit_version", $VERSION);
