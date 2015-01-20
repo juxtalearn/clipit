@@ -20,12 +20,14 @@ class ClipitExample extends UBItem {
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitExample";
+    const REL_EXAMPLE_TRICKYTOPIC = "ClipitExample-ClipitTrickyTopic";
     const REL_EXAMPLE_TAG = "ClipitExample-ClipitTag";
     const REL_EXAMPLE_REFLECTION_ITEM = "ClipitExample-ClipitReflectionItem";
     const REL_EXAMPLE_RESOURCE = "ClipitExample-ClipitResource";
     const REL_EXAMPLE_STORYBOARD = "ClipitExample-ClipitStoryboard";
     const REL_EXAMPLE_VIDEO = "ClipitExample-ClipitVideo";
     const REL_EXAMPLE_FILE = "ClipitExample-ClipitFile";
+    public $tricky_topic = 0;
     public $tag_array = array();
     public $reflection_item_array = array();
     public $country = "";
@@ -43,6 +45,7 @@ class ClipitExample extends UBItem {
      */
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
+        $this->tricky_topic = (int)static::get_tricky_topic($this->id);
         $this->tag_array = (array)static::get_tags($this->id);
         $this->reflection_item_array = (array)static::get_reflection_items($this->id);
         $this->country = (string)$elgg_entity->get("country");
@@ -66,6 +69,7 @@ class ClipitExample extends UBItem {
 
     protected function save($double_save=false) {
         parent::save($double_save);
+        static::set_tricky_topic($this->id, (int)$this->tricky_topic);
         static::set_tags($this->id, (array)$this->tag_array);
         static::set_reflection_items($this->id, (array)$this->reflection_item_array);
         static::set_resources($this->id, $this->resource_array);
@@ -90,6 +94,18 @@ class ClipitExample extends UBItem {
             }
         }
         return $return_examples;
+    }
+
+    static function get_tricky_topic($id) {
+        $ret_array = UBCollection::get_items($id, static::REL_EXAMPLE_TRICKYTOPIC);
+        if(!empty($ret_array)){
+            return array_pop($ret_array);
+        }
+        return 0;
+    }
+
+    static function set_tricky_topic($id, $tricky_topic) {
+        return UBCollection::set_items($id, array($tricky_topic), static::REL_EXAMPLE_TRICKYTOPIC);
     }
 
     /**
