@@ -28,7 +28,9 @@ $count = elgg_extract('count', $vars);
 <table class="table table-striped">
     <tr>
         <th><?php echo elgg_echo('title');?>/<?php echo elgg_echo('tags');?></th>
-        <th>Author/Date</th>
+        <th><?php echo elgg_echo('education_level');?></th>
+        <th><?php echo elgg_echo('subject');?></th>
+        <th><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
         <th style="width: 100px;"><?php echo elgg_echo('options');?></th>
     </tr>
     <?php
@@ -45,7 +47,23 @@ $count = elgg_extract('count', $vars);
                     ));
                     ?>
                 </strong>
-                <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $tricky_topic->tag_array, 'limit' => 5)); ?>
+                <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $tricky_topic->tag_array, 'limit' => 3)); ?>
+            </td>
+            <td>
+                <?php echo elgg_view('output/url', array(
+                    'href'  => "tricky_topics?education_level={$tricky_topic->education_level}",
+                    'title' => elgg_echo('education_level:'.$tricky_topic->education_level),
+                    'text'  => elgg_echo('education_level:'.$tricky_topic->education_level),
+                ));
+                ?>
+            </td>
+            <td>
+                <?php echo elgg_view('output/url', array(
+                    'href'  => "tricky_topics?subject={$tricky_topic->subject}",
+                    'title' => $tricky_topic->subject,
+                    'text'  => $tricky_topic->subject,
+                ));
+                ?>
             </td>
             <td>
                 <small>

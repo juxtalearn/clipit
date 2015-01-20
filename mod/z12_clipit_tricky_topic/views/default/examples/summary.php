@@ -21,7 +21,7 @@ if(!$examples){
     <thead>
     <tr>
         <th><?php echo elgg_echo('title');?></th>
-        <th><?php echo elgg_echo('example:education_level');?></th>
+        <th><?php echo elgg_echo('education_level');?></th>
         <th><i class="fa fa-globe"></i> <?php echo elgg_echo('country');?></th>
     </tr>
     </thead>
@@ -43,7 +43,7 @@ if(!$examples){
             </small>
             <?php endif;?>
         </td>
-        <td><?php echo elgg_echo('example:education_level:'.$example->education_level);?></td>
+        <td><?php echo elgg_echo('education_level:'.$example->education_level);?></td>
         <td><?php echo get_countries_list($example->country);?></td>
     </tr>
     <?php endforeach;?>

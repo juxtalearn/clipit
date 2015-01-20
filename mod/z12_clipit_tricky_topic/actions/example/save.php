@@ -27,9 +27,11 @@ if($entity_id){
     // Update
     $example_id = $entity_id;
     ClipitExample::set_properties($example_id, $data);
+    system_message(elgg_echo('saved'));
 } else {
     // Create
     $example_id = ClipitExample::create($data);
+    system_message(elgg_echo('example:created'));
 }
 // Add reflection items
 ClipitExample::set_reflection_items($example_id, $reflection_items);
@@ -99,4 +101,4 @@ foreach($tags as $tag){
 }
 ClipitExample::set_tags($example_id, $tag_ids);
 
-forward("tricky_topics/examples");
+forward('tricky_topics/examples');

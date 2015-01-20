@@ -6,19 +6,19 @@
             <div class="social-icons">
                 <?php if($vars['account_twitter']): ?>
                 <img src="<?php echo $vars['img_path'];?>social/twitter.png" />
-                <? endif; ?>
+                <?php endif; ?>
                 <?php if($vars['account_facebook']): ?>
                 <img src="<?php echo $vars['img_path'];?>social/facebook.png" />
-                <? endif; ?>
+                <?php endif; ?>
                 <?php if($vars['account_linkedin']): ?>
                 <img src="<?php echo $vars['img_path'];?>social/linkedin.png" />
-                <? endif; ?>
+                <?php endif; ?>
                 <?php if($vars['account_youtube']): ?>
                 <img src="<?php echo $vars['img_path'];?>social/youtube.png" />
-                <? endif; ?>
+                <?php endif; ?>
                 <?php if($vars['account_vimeo']): ?>
                 <img src="<?php echo $vars['img_path'];?>social/vimeo.png" />
-                <? endif; ?>
+                <?php endif; ?>
             </div>
         </div>
     </div><!-- Social end-->

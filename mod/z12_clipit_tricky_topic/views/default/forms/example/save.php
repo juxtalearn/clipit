@@ -47,23 +47,6 @@ if($example) {
             ));
             ?>
         </div>
-        <div class="row form-group">
-            <div class="col-md-6">
-                <label><?php echo elgg_echo('country');?></label>
-                <?php echo elgg_view('page/components/countries',
-                    array('style' => 'padding:5px;', 'value' => $example->country));?>
-            </div>
-            <div class="col-md-6">
-                <label><?php echo elgg_echo('location');?></label>
-                <?php echo elgg_view('input/text', array(
-                    'class' => 'form-control',
-                    'name' => 'location',
-                    'value' => $example->location,
-                    'required' => true
-                ));
-                ?>
-            </div>
-        </div>
 
     </div>
     <div class="col-md-5">
@@ -90,27 +73,18 @@ if($example) {
             ?>
         </div>
         <div class="form-group">
-            <label><?php echo elgg_echo('example:subject');?></label>
-            <?php echo elgg_view("input/text", array(
-                'name' => 'subject',
-                'value' => $example->subject,
-                'class' => 'form-control',
-                'required' => true
-            ));
-            ?>
+            <label><?php echo elgg_echo('country');?></label>
+            <?php echo elgg_view('page/components/countries',
+                array('style' => 'padding:5px;', 'value' => $example->country));?>
         </div>
         <div class="form-group">
-            <label><?php echo elgg_echo('example:education_level');?></label>
-            <?php
-                $ed_levels = array();
-                for($i = 1; $i <= 4; $i++){
-                    $ed_levels[" ".elgg_echo('example:education_level:'.$i)] = $i;
-                }
-                echo elgg_view('input/radio', array(
-                    'name' => "education-level",
-                    'value' => $example ? $example->education_level : 'false',
-                    'options' => $ed_levels,
-                ));
+            <label><?php echo elgg_echo('location');?></label>
+            <?php echo elgg_view('input/text', array(
+                'class' => 'form-control',
+                'name' => 'location',
+                'value' => $example->location,
+                'required' => true
+            ));
             ?>
         </div>
     </div>

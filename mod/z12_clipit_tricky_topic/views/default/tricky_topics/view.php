@@ -58,14 +58,30 @@ $user = array_pop(ClipitUser::get_by_id(array($tricky_topic->owner_id)));
         'text'  => $user->name,
     ));
     ?>
+    <div class="clearfix"></div>
 </div>
-<div class="clearfix"></div>
-<?php if($tricky_topic->description):?>
-    <small><?php echo elgg_echo('description');?></small>
-    <p><?php echo $tricky_topic->description;?></p>
-<?php endif;?>
-<small class="show"><?php echo elgg_echo('tags');?></small>
-<?php echo elgg_view('tricky_topic/tags/view', array('tags' => $tricky_topic->tag_array)); ?>
+
+<div class="row">
+    <div class="col-md-9">
+        <?php if($tricky_topic->description):?>
+            <small><?php echo elgg_echo('description');?></small>
+            <p><?php echo $tricky_topic->description;?></p>
+        <?php endif;?>
+        <small class="show"><?php echo elgg_echo('tags');?></small>
+        <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $tricky_topic->tag_array)); ?>
+    </div>
+    <div class="col-md-3">
+        <div class="margin-bottom-10">
+            <small class="show"><?php echo elgg_echo('education_level');?></small>
+            <?php echo elgg_echo('education_level:'.$tricky_topic->education_level);?>
+        </div>
+        <div class="margin-bottom-10">
+            <small class="show"><?php echo elgg_echo('example:subject');?></small>
+            <?php echo $tricky_topic->subject;?>
+        </div>
+    </div>
+</div>
+
 <div>
     <?php echo elgg_view('page/components/title_block', array('title' => elgg_echo('examples')));?>
     <?php echo elgg_view('examples/summary', array('entities' => $examples));?>

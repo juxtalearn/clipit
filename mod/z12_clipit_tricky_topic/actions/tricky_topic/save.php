@@ -21,8 +21,10 @@ if($activiy_tricky_topic){
 $data = array(
     'name' => $title,
     'description' => $description,
+    'subject' => get_input('subject'),
+    'education_level' => (int)get_input('education_level')
 );
-$url = REFERER;
+
 $entity_id = get_input('entity-id');
 if($entity_id){
     $tricky_topic_id = $entity_id;
@@ -30,12 +32,13 @@ if($entity_id){
         $tricky_topic_id = ClipitTrickyTopic::create_clone($entity_id);
     }
     ClipitTrickyTopic::set_properties($tricky_topic_id, $data);
+    system_message(elgg_echo('saved'));
 } else {
     $tricky_topic_id = ClipitTrickyTopic::create($data);
-    $url = "tricky_topics";
     if($activiy_tricky_topic){
         echo json_encode(elgg_view("activity/create/tricky_topics", array('selected' => $tricky_topic_id)));
     }
+    system_message(elgg_echo('tricky_topic:created'));
 }
 // Create Stumling blocks
 $tags =  get_input('tag');
@@ -46,4 +49,4 @@ foreach($tags as $tag){
 }
 ClipitTrickyTopic::set_tags($tricky_topic_id, $tag_ids);
 
-forward($url);
+forward('tricky_topics');

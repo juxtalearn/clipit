@@ -11,10 +11,10 @@
  * @package         ClipIt
  */
 $german = array(
-    'example:education_level:1' => 'Primarstufe',
-    'example:education_level:2' => 'Sekundarstufe I',
-    'example:education_level:3' => 'Sekundarstufe II',
-    'example:education_level:4' => 'Hochschule',
+    'education_level:1' => 'Primarstufe',
+    'education_level:2' => 'Sekundarstufe I',
+    'education_level:3' => 'Sekundarstufe II',
+    'education_level:4' => 'Hochschule',
 );
 
 add_translation('de', $german);
