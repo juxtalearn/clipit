@@ -1,6 +1,3 @@
-# Server Timezone
-php_value date.timezone Europe/Madrid
-
 # Elgg htaccess directives
 
 <Files "htaccess_dist">
