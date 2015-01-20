@@ -117,7 +117,11 @@ elgg_load_js("jquery:quicksearch");
     <div class="col-md-5">
         <label><?php echo elgg_echo("tricky_topic");?></label>
         <div style="background: #fafafa;padding: 10px;" class="content-block">
-            <?php echo elgg_view('tricky_topic/list', array('tricky_topic' => $activity->tricky_topic));?>
+            <?php echo elgg_view('tricky_topic/list', array(
+                    'tricky_topic' => $activity->tricky_topic,
+                    'show_tags' => 'list'
+                ));
+            ?>
         </div>
         <a name="add_teachers"></a>
         <label class="margin-top-5 margin-bottom-10"><?php echo elgg_echo("activity:teachers");?></label>

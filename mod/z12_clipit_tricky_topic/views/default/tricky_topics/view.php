@@ -73,18 +73,35 @@ $user = array_pop(ClipitUser::get_by_id(array($tricky_topic->owner_id)));
     <div class="col-md-3">
         <div class="margin-bottom-10">
             <small class="show"><?php echo elgg_echo('education_level');?></small>
-            <?php echo elgg_echo('education_level:'.$tricky_topic->education_level);?>
+            <?php echo elgg_view('output/url', array(
+                'href'  => "tricky_topics?education_level={$tricky_topic->education_level}",
+                'title' => elgg_echo('education_level:'.$tricky_topic->education_level),
+                'text'  => elgg_echo('education_level:'.$tricky_topic->education_level),
+            ));
+            ?>
         </div>
         <div class="margin-bottom-10">
-            <small class="show"><?php echo elgg_echo('example:subject');?></small>
-            <?php echo $tricky_topic->subject;?>
+            <small class="show"><?php echo elgg_echo('tricky_topic:subject');?></small>
+            <?php echo elgg_view('output/url', array(
+                'href'  => "tricky_topics?subject={$tricky_topic->subject}",
+                'title' => elgg_echo('tricky_topic:subject'),
+                'text'  => elgg_echo('tricky_topic:subject'),
+            ));
+            ?>
         </div>
     </div>
 </div>
 
-<div>
+<div class="margin-bottom-10">
     <?php echo elgg_view('page/components/title_block', array('title' => elgg_echo('examples')));?>
     <?php echo elgg_view('examples/summary', array('entities' => $examples));?>
+    <?php echo elgg_view('output/url', array(
+        'class' => 'btn btn-xs btn-primary',
+        'href'  => "tricky_topics/examples/create?tricky_topic_id={$tricky_topic->id}",
+        'title'  => elgg_echo('example:create'),
+        'text'  => elgg_echo('example:create'),
+    ));
+    ?>
 </div>
 <div>
     <?php echo elgg_view('page/components/title_block', array('title' => elgg_echo('activity:stas')));?>

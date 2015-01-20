@@ -22,9 +22,9 @@ echo elgg_view("input/hidden", array(
 <div class="form-group">
     <label class="text-muted"><?php echo elgg_echo('example:name');?></label>
     <?php echo elgg_view("input/text", array(
-        'name' => 'tricky_topic',
+        'name' => 'example',
         'class' => 'form-control',
-        'value' => get_input('tricky_topic')
+        'value' => get_input('example')
     ));
     ?>
 </div>

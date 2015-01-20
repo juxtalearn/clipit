@@ -13,6 +13,7 @@
 $example = elgg_extract('entity', $vars);
 $multimedia = elgg_extract('multimedia', $vars);
 $user = array_pop(ClipitUser::get_by_id(array($example->owner_id)));
+$tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($example->tricky_topic)));
 ?>
 <div class="margin-bottom-10">
     <div class="pull-right">
@@ -59,8 +60,19 @@ $user = array_pop(ClipitUser::get_by_id(array($example->owner_id)));
             <small><?php echo elgg_echo('description');?></small>
             <p><?php echo $example->description;?></p>
         <?php endif;?>
-        <small class="show"><?php echo elgg_echo('tags');?></small>
-        <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $example->tag_array)); ?>
+        <div class="margin-bottom-10">
+            <small class="show"><?php echo elgg_echo('tricky_topic');?></small>
+            <?php echo elgg_view('output/url', array(
+                'href'  => "tricky_topics/view/{$example->tricky_topic}",
+                'title' => $tricky_topic->name,
+                'text'  => $tricky_topic->name,
+            ));
+            ?>
+        </div>
+        <div class="margin-bottom-10">
+            <small class="show"><?php echo elgg_echo('tags');?></small>
+            <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $example->tag_array)); ?>
+        </div>
     </div>
     <div class="col-md-3">
         <div class="margin-bottom-10">

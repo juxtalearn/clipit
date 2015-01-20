@@ -11,6 +11,8 @@
  * @package         ClipIt
  */
 $spanish = array(
+    'filter_by' => 'Filtrar por: %s',
+
     'material:attach' => 'Adjuntar materiales',
     'duplicate' => 'Duplicar',
     'duplicate:name' => 'Duplicar: %s',
@@ -26,7 +28,6 @@ $spanish = array(
     'examples:none' => 'No hay ejemplos',
     'example:add' => 'Añadir ejemplo',
     'example:create' => 'Crear ejemplo',
-    'example:subject' => 'Asignatura',
     'education_level' => 'Nivel educativo',
     'education_level:1' => 'Primaria',
     'education_level:2' => 'Secundaria',
@@ -38,6 +39,7 @@ $spanish = array(
     'example:cantremove' => 'No se ha podido borrar el ejemplo',
     'example:removed' => 'Ejemplo borrado',
 
+    'tricky_topic:subject' => 'Asignatura',
     'tricky_topic:cantremove' => 'No se ha podido borrar el tema clave',
     'tricky_topic:created' => 'Tema clave creado',
     'tricky_topic:removed' => 'Tema clave borrado',

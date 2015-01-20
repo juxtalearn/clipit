@@ -53,7 +53,7 @@ $ed_levels = array(
     ?>
 </div>
 <div class="form-group">
-    <label class="text-muted"><?php echo elgg_echo('example:subject');?></label>
+    <label class="text-muted"><?php echo elgg_echo('tricky_topic:subject');?></label>
     <?php echo elgg_view("input/text", array(
         'name' => 'subject',
         'class' => 'form-control',

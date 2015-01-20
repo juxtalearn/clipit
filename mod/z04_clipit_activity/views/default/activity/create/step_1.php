@@ -24,7 +24,10 @@ $(function(){
         $.ajax({
             url: elgg.config.wwwroot+"ajax/view/tricky_topic/list",
             type: "POST",
-            data: { tricky_topic : $(this).val()},
+            data: {
+                tricky_topic : $(this).val(),
+                show_tags: 'list'
+            },
             success: function(html){
                 content.html(html);
             }

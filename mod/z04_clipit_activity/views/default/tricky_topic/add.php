@@ -27,7 +27,7 @@
         'value' => $vars['value'],
         'style' => 'width: 90%;',
         'class' => 'form-control input-tag',
-        'required' => true,
+        'required' => isset($vars['required']) ? $vars['required'] : true,
         'placeholder' => elgg_echo('tag')
     ));
     ?>

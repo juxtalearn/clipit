@@ -12,10 +12,11 @@
  */
 ?>
 $(function(){
+
     var tags_autocomplete = {
     source: function (request, response) {
         elgg.getJSON(
-            "ajax/view/tricky_topic/tags/search",{
+            "ajax/view/tricky_topics/tags/search",{
                 data: {q: request.term},
                 success: function(data){
                     response(data);

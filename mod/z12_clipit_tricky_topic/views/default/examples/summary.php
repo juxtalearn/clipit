@@ -17,12 +17,12 @@ if(!$examples){
 }
 ?>
 <?php if($examples):?>
-<table class="table">
+<table class="table table-striped">
     <thead>
     <tr>
         <th><?php echo elgg_echo('title');?></th>
-        <th><?php echo elgg_echo('education_level');?></th>
-        <th><i class="fa fa-globe"></i> <?php echo elgg_echo('country');?></th>
+        <th><?php echo elgg_echo('location');?></th>
+        <th><?php echo elgg_echo('country');?></th>
     </tr>
     </thead>
     <tbody>
@@ -43,8 +43,22 @@ if(!$examples){
             </small>
             <?php endif;?>
         </td>
-        <td><?php echo elgg_echo('education_level:'.$example->education_level);?></td>
-        <td><?php echo get_countries_list($example->country);?></td>
+        <td>
+            <?php echo elgg_view('output/url', array(
+                'href'  => "tricky_topics/examples?location={$example->location}",
+                'title' => $example->location,
+                'text'  => $example->location,
+            ));
+            ?>
+        </td>
+        <td>
+            <?php echo elgg_view('output/url', array(
+                'href'  => "tricky_topics/examples?country={$example->country}",
+                'title' => get_countries_list($example->country),
+                'text'  => get_countries_list($example->country),
+            ));
+            ?>
+        </td>
     </tr>
     <?php endforeach;?>
     </tbody>

@@ -11,6 +11,8 @@
  * @package         ClipIt
  */
 $english = array(
+    'filter_by' => 'Filter by: %s',
+
     'material:attach' => 'Attach materials',
     'duplicate' => 'Duplicate',
     'duplicate:name' => 'Duplicate: %s',
@@ -26,7 +28,6 @@ $english = array(
     'examples:none' => 'No examples',
     'example:add' => 'Add example',
     'example:create' => 'Create example',
-    'example:subject' => 'Subject',
     'education_level' => 'Education level',
     'education_level:1' => 'Primary',
     'education_level:2' => 'GCSE',
@@ -38,6 +39,7 @@ $english = array(
     'example:cantremove' => 'Can not remove example',
     'example:removed' => 'Example removed',
 
+    'tricky_topic:subject' => 'Subject',
     'tricky_topic:cantremove' => 'Can not remove Tricky Topic',
     'tricky_topic:created' => 'Tricky Topic created',
     'tricky_topic:removed' => 'Tricky Topic removed',

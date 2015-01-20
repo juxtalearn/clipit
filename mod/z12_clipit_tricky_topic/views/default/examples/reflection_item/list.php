@@ -18,7 +18,10 @@ foreach($items as $item) {
     $categories[$item->category[$language_index]] = $item->category_description[$language_index];
 }
 ?>
-<h4>Reflection palette: Why do students have this problem?</h4>
+<h4 class="margin-0"><?php echo elgg_echo('reflection_palette');?></h4>
+<small class="show margin-bottom-10">
+    <?php echo elgg_echo('reflection_palette:question');?>
+</small>
 <div role="tabpanel" class="margin-bottom-20">
 
     <!-- Nav tabs -->

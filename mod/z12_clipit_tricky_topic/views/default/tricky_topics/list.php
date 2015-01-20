@@ -12,6 +12,7 @@
  */
 $tricky_topics = elgg_extract('entities', $vars);
 $count = elgg_extract('count', $vars);
+
 ?>
 <div class="margin-bottom-20">
     <div class="pull-right">
@@ -36,7 +37,7 @@ $count = elgg_extract('count', $vars);
     <?php
     foreach($tricky_topics as $tricky_topic):
         $user = array_pop(ClipitUser::get_by_id(array($tricky_topic->owner_id)));
-        ?>
+    ?>
         <tr>
             <td>
                 <strong>
@@ -52,7 +53,7 @@ $count = elgg_extract('count', $vars);
             <td>
                 <?php echo elgg_view('output/url', array(
                     'href'  => "tricky_topics?education_level={$tricky_topic->education_level}",
-                    'title' => elgg_echo('education_level:'.$tricky_topic->education_level),
+                    'title' => elgg_echo('filter_by', array(elgg_echo('education_level:'.$tricky_topic->education_level))),
                     'text'  => elgg_echo('education_level:'.$tricky_topic->education_level),
                 ));
                 ?>
@@ -67,16 +68,16 @@ $count = elgg_extract('count', $vars);
             </td>
             <td>
                 <small>
-                    <div>
-                        <i class="fa-user fa blue"></i>
-                        <?php echo elgg_view('output/url', array(
-                            'href'  => "profile/{$user->login}",
-                            'title' => $user->name,
-                            'text'  => $user->name,
-                        ));
-                        ?>
-                    </div>
-                    <?php echo elgg_view('output/friendlytime', array('time' => $tricky_topic->time_created));?>
+                <div>
+                    <i class="fa-user fa blue"></i>
+                    <?php echo elgg_view('output/url', array(
+                        'href'  => "profile/{$user->login}",
+                        'title' => $user->name,
+                        'text'  => $user->name,
+                    ));
+                    ?>
+                </div>
+                <?php echo elgg_view('output/friendlytime', array('time' => $tricky_topic->time_created));?>
                 </small>
             </td>
             <td>

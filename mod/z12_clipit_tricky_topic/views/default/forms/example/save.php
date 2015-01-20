@@ -12,7 +12,10 @@
  */
 $example = elgg_extract('entity', $vars);
 $multimedia = elgg_extract('multimedia', $vars);
+$multimedia = array_filter($multimedia);
 $button_value = elgg_extract('submit_value', $vars);
+$tricky_topic_id = elgg_extract('tricky_topic', $vars);
+
 $user_language = get_current_language();
 $language_index = ClipitReflectionItem::get_language_index($user_language);
 if($example) {
@@ -21,6 +24,11 @@ if($example) {
         'name' => 'entity-id',
         'value' => $example->id,
     ));
+
+    $tricky_topic_id = $example->tricky_topic;
+    if($tags){
+        $tags_diff = array_diff(array_keys($tags), ClipitTrickyTopic::get_tags($example->tricky_topic));
+    }
 }
 ?>
 <div class="margin-bottom-10" id="form-add-tricky-topic">
@@ -47,20 +55,42 @@ if($example) {
             ));
             ?>
         </div>
-
+        <div class="row">
+            <div class="col-md-6">
+                <label><?php echo elgg_echo('country');?></label>
+                <?php echo elgg_view('page/components/countries',
+                    array('style' => 'padding:5px;', 'value' => $example->country));?>
+            </div>
+            <div class="col-md-6">
+                <label><?php echo elgg_echo('location');?></label>
+                <?php echo elgg_view('input/text', array(
+                    'class' => 'form-control',
+                    'name' => 'location',
+                    'value' => $example->location,
+                    'required' => true
+                ));
+                ?>
+            </div>
+        </div>
     </div>
     <div class="col-md-5">
+        <div class="form-group">
+            <?php echo elgg_view('examples/tricky_topics', array(
+                'selected' => $tricky_topic_id,
+                'tags' => $example->tag_array
+            ));?>
+        </div>
         <div class="form-group">
             <label>
                 <?php echo elgg_echo('tags');?>
             </label>
             <div class="form-add-tags form-group margin-top-10">
-                <?php if($tags):?>
-                    <?php foreach($tags as $tag):?>
+                <?php if($tags_diff):?>
+                    <?php foreach(ClipitTag::get_by_id($tags_diff) as $tag):?>
                         <?php echo elgg_view("tricky_topic/add", array('value' => $tag->name));?>
                     <?php endforeach;?>
                 <?php else: ?>
-                    <?php echo elgg_view("tricky_topic/add");?>
+                    <?php echo elgg_view("tricky_topic/add", array('required' => false));?>
                 <?php endif;?>
             </div>
             <?php echo elgg_view('output/url', array(
@@ -69,21 +99,6 @@ if($example) {
                 'title' => elgg_echo('add'),
                 'text'  => '<i class="fa fa-plus"></i> ' . elgg_echo('add'),
                 'id'    => 'add-tag',
-            ));
-            ?>
-        </div>
-        <div class="form-group">
-            <label><?php echo elgg_echo('country');?></label>
-            <?php echo elgg_view('page/components/countries',
-                array('style' => 'padding:5px;', 'value' => $example->country));?>
-        </div>
-        <div class="form-group">
-            <label><?php echo elgg_echo('location');?></label>
-            <?php echo elgg_view('input/text', array(
-                'class' => 'form-control',
-                'name' => 'location',
-                'value' => $example->location,
-                'required' => true
             ));
             ?>
         </div>
@@ -102,18 +117,16 @@ if($example) {
             right: -12px;
         }
     </style>
-    <script>
-
-    </script>
-    <div class="col-md-12">
-        <div class="form-group">
+    <div class="clearfix"></div>
+    <div class="col-md-12 margin-top-20">
+        <div class="form-group" style="background: #fafafa;padding: 10px;">
             <?php echo elgg_view('output/url', array(
                 'href'  => "javascript:;",
                 'onclick' => '$(this).parent(\'div\').find(\'.information_attach\').toggle()',
-                'text'  => '<strong>+ '.elgg_echo('material:attach').'</strong>',
+                'text'  => '<strong><i class="fa fa-image"></i> '.elgg_echo('material:attach').'</strong>',
             ));
             ?>
-            <div class="information_attach margin-top-10" style="display: none;">
+            <div class="information_attach margin-top-10" style="display: <?php echo !empty($multimedia) ? 'block': 'none'?>;">
 <!--                <div class="form-group">-->
 <!--                    --><?php //echo elgg_view("input/text", array(
 //                        'name' => 'url[]',

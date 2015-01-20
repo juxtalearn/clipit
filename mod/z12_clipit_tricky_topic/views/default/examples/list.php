@@ -25,10 +25,11 @@ $count = elgg_extract('count', $vars);
     ));
     ?>
 </div>
-<table class="table">
+<table class="table table-striped">
     <thead>
     <tr>
         <th><?php echo elgg_echo('title');?>/<?php echo elgg_echo('tags');?></th>
+        <th><?php echo elgg_echo('tricky_topic');?></th>
         <th><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
         <th><?php echo elgg_echo('options');?></th>
     </tr>
@@ -37,6 +38,7 @@ $count = elgg_extract('count', $vars);
     <?php
     foreach($examples as $example):
         $user = array_pop(ClipitUser::get_by_id(array($example->owner_id)));
+        $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($example->tricky_topic)));
     ?>
         <tr>
             <td>
@@ -49,6 +51,14 @@ $count = elgg_extract('count', $vars);
                     ?>
                 </strong>
                 <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $example->tag_array, 'limit' => 5)); ?>
+            </td>
+            <td>
+                <?php echo elgg_view('output/url', array(
+                    'href'  => "tricky_topics/view/{$tricky_topic->id}",
+                    'title' => $tricky_topic->name,
+                    'text'  =>  $tricky_topic->name,
+                ));
+                ?>
             </td>
             <td>
                 <small>

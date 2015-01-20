@@ -6827,11 +6827,23 @@ fieldset[disabled] .elgg-sidebar input.elgg-button-submit.active {
   color: #FFF;
   opacity: 1;
 }
+.elgg-sidebar label {
+  font-size: 13px;
+  font-weight: normal;
+}
+.elgg-sidebar ul.tagit {
+  padding: 3px 5px;
+}
+.elgg-sidebar ul.tagit li {
+  font-size: 13px;
+  border-radius: 3px;
+}
+.elgg-sidebar ul.tagit li.tagit-new {
+  height: 20px;
+}
 .elgg-sidebar .elgg-input-text {
-  -webkit-box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.25), 0 0 0 2px rgba(225, 235, 240, 0.5);
-  box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.25), 0 0 0 2px rgba(225, 235, 240, 0.5);
-  height: 25px;
-  border: 0;
+  height: 30px;
+  padding: 5px 10px;
 }
 .elgg-sidebar .elgg-module-aside h4 {
   margin-top: 25px;

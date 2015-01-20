@@ -10,17 +10,15 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-
-
 $entity_id = get_input('entity-id');
 $data = array(
     'name' => get_input('title'),
     'description' => get_input('description'),
     'country' => get_input('country'),
     'location' => get_input('location'),
-    'education_level' => get_input('education-level'),
-    'subject' => get_input('subject'),
+    'tricky_topic' => get_input('tricky-topic'),
 );
+
 $reflection_items = get_input('reflections', array());
 $reflection_items = array_filter($reflection_items);
 if($entity_id){
@@ -90,7 +88,7 @@ for($i = 0;$i < count($video_title);$i++){
 }
 ClipitExample::add_videos($example_id, $new_video_id);
 
-// Create Stumling blocks
+// Create/Select Stumling blocks
 $tags =  get_input('tag');
 array_filter($tags);
 $tag_ids = array();
@@ -98,6 +96,10 @@ foreach($tags as $tag){
     if(trim($tag) != '') {
         $tag_ids[] = ClipitTag::create(array('name' => $tag));
     }
+}
+
+if($tags_checked = get_input('tags_checked')){
+    $tag_ids = array_merge($tag_ids, $tags_checked);
 }
 ClipitExample::set_tags($example_id, $tag_ids);
 
