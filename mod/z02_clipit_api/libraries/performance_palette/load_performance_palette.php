@@ -12,10 +12,12 @@
  * @package         ClipIt
  * @subpackage      clipit_api
  */
+$file_path = "z02_clipit_api/libraries/performance_palette/";
 $file_name_en = "performance_palette_en.xlsx";
 $file_name_es = "performance_palette_es.xlsx";
 $file_name_de = "performance_palette_de.xlsx";
 $file_name_pt = "performance_palette_pt.xlsx";
+$file_name_pt = "performance_palette_sv.xlsx";
 $key_name = "performance_palette";
 
 // Check if Performance Palette was already loaded.
@@ -26,10 +28,11 @@ if(get_config($key_name) === true) {
 set_config($key_name, true);
 
 // Load Performance Palette for all languages
-input_performance_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/performance_palette/$file_name_en");
-input_performance_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/performance_palette/$file_name_es");
-input_performance_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/performance_palette/$file_name_de");
-input_performance_palette_file(elgg_get_plugins_path() . "z02_clipit_api/libraries/performance_palette/$file_name_pt");
+input_performance_palette_file(elgg_get_plugins_path() . $file_path . $file_name_en);
+input_performance_palette_file(elgg_get_plugins_path() . $file_path . $file_name_es);
+input_performance_palette_file(elgg_get_plugins_path() . $file_path . $file_name_de);
+input_performance_palette_file(elgg_get_plugins_path() . $file_path . $file_name_pt);
+input_performance_palette_file(elgg_get_plugins_path() . $file_path . $file_name_sv);
 
 /**
  * Add Performance Items from an Excel file

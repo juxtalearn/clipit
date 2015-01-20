@@ -22,6 +22,8 @@ class ClipitTrickyTopic extends UBItem {
     const SUBTYPE = "ClipitTrickyTopic";
     const REL_TRICKYTOPIC_TAG = "ClipitTrickyTopic-ClipitTag";
     public $tag_array = array();
+    public $subject = "";
+    public $education_level = 0;
 
     /**
      * Loads object parameters stored in Elgg
@@ -30,6 +32,8 @@ class ClipitTrickyTopic extends UBItem {
      */
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
+        $this->subject = (string)$elgg_entity->get("subject");
+        $this->education_level = (int)$elgg_entity->get("education_level");
         $this->tag_array = static::get_tags((int)$this->id);
     }
 
@@ -40,6 +44,8 @@ class ClipitTrickyTopic extends UBItem {
      */
     protected function copy_to_elgg($elgg_entity) {
         parent::copy_to_elgg($elgg_entity);
+        $elgg_entity->set("subject", (string)$this->subject);
+        $elgg_entity->set("education_level", (int)$this->education_level);
     }
 
     /**
