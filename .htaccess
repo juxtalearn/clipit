@@ -1,4 +1,5 @@
-#php_flag short_open_tag on
+# Server Timezone
+php_value date.timezone Europe/Madrid
 
 # Elgg htaccess directives
 
