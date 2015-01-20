@@ -28,6 +28,7 @@ class ClipitActivity extends UBItem {
      */
     const SUBTYPE = "ClipitActivity";
     // Relationship names
+    const REL_ACTIVITY_TRICKYTOPIC = "ClipitActivity-ClipitTrickyTopic";
     const REL_ACTIVITY_TEACHER = "ClipitActivity-teacher";
     const REL_ACTIVITY_STUDENT = "ClipitActivity-student";
     const REL_ACTIVITY_GROUP = "ClipitActivity-ClipitGroup";
@@ -70,7 +71,7 @@ class ClipitActivity extends UBItem {
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
         $this->color = (string)$elgg_entity->get("color");
-        $this->tricky_topic = (int)$elgg_entity->get("tricky_topic");
+        $this->tricky_topic = (int)static::get_tricky_topic($this->id);
         $this->start = (int)$elgg_entity->get("start");
         $this->end = (int)$elgg_entity->get("end");
         $this->group_mode = (string)$elgg_entity->get("group_mode");
@@ -118,7 +119,6 @@ class ClipitActivity extends UBItem {
         } else {
             $elgg_entity->set("color", $this->get_rand_color());
         }
-        $elgg_entity->set("tricky_topic", (int)$this->tricky_topic);
         $elgg_entity->set("start", (int)$this->start);
         $elgg_entity->set("end", (int)$this->end);
         $elgg_entity->set("group_mode", (string)$this->group_mode);
@@ -132,6 +132,7 @@ class ClipitActivity extends UBItem {
      */
     protected function save($double_save=false) {
         parent::save($double_save);
+        static::set_tricky_topic($this->id, (int)$this->tricky_topic);
         static::set_teachers($this->id, $this->teacher_array);
         static::set_students($this->id, $this->student_array);
         static::set_groups($this->id, $this->group_array);
@@ -141,6 +142,18 @@ class ClipitActivity extends UBItem {
         static::set_videos($this->id, $this->video_array);
         static::set_files($this->id, $this->file_array);
         return $this->id;
+    }
+
+    static function get_tricky_topic($id) {
+        $ret_array = UBCollection::get_items($id, static::REL_ACTIVITY_TRICKYTOPIC);
+        if(!empty($ret_array)){
+            return array_pop($ret_array);
+        }
+        return 0;
+    }
+
+    static function set_tricky_topic($id, $tricky_topic) {
+        return UBCollection::set_items($id, array($tricky_topic), static::REL_ACTIVITY_TRICKYTOPIC);
     }
 
     /**

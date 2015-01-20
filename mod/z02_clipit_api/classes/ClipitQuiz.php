@@ -21,6 +21,7 @@ class ClipitQuiz extends UBItem {
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitQuiz";
+    const REL_QUIZ_TRICKYTOPIC = "ClipitQuiz-ClipitTrickyTopic";
     const REL_QUIZ_QUIZQUESTION = "ClipitQuiz-ClipitQuizQuestion";
     const REL_QUIZ_USER = "ClipitQuiz-ClipitUser";
     const VIEW_MODE_LIST = "list";
@@ -56,7 +57,7 @@ class ClipitQuiz extends UBItem {
         parent::copy_from_elgg($elgg_entity);
         $this->quiz_question_array = static::get_quiz_questions($this->id);
         $this->public = (bool)$elgg_entity->get("public");
-        $this->tricky_topic = (int)$elgg_entity->get("tricky_topic");
+        $this->tricky_topic = (int)static::get_tricky_topic($this->id);
         $this->target = (string)$elgg_entity->get("target");
         $this->embed_url = (string)$elgg_entity->get("embed_url");
         $this->scores_url = (string)$elgg_entity->get("scores_url");
@@ -73,7 +74,6 @@ class ClipitQuiz extends UBItem {
     protected function copy_to_elgg($elgg_entity) {
         parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("public", (bool)$this->public);
-        $elgg_entity->set("tricky_topic", (int)$this->tricky_topic);
         $elgg_entity->set("target", (string)$this->target);
         $elgg_entity->set("embed_url", (string)$this->embed_url);
         $elgg_entity->set("scores_url", (string)$this->scores_url);
@@ -93,6 +93,7 @@ class ClipitQuiz extends UBItem {
      */
     protected function save($double_save=false) {
         parent::save($double_save);
+        static::set_tricky_topic($this->id, (int)$this->tricky_topic);
         static::set_quiz_questions($this->id, $this->quiz_question_array);
         return $this->id;
     }
@@ -122,6 +123,18 @@ class ClipitQuiz extends UBItem {
             }
         }
         return parent::set_properties($id, $new_prop_value_array);
+    }
+
+    static function get_tricky_topic($id) {
+        $ret_array = UBCollection::get_items($id, static::REL_QUIZ_TRICKYTOPIC);
+        if(!empty($ret_array)){
+            return array_pop($ret_array);
+        }
+        return 0;
+    }
+
+    static function set_tricky_topic($id, $tricky_topic) {
+        return UBCollection::set_items($id, array($tricky_topic), static::REL_QUIZ_TRICKYTOPIC);
     }
 
     static function set_quiz_start($id, $user_id){
