@@ -28,8 +28,6 @@ class ClipitExample extends UBItem {
     const REL_EXAMPLE_FILE = "ClipitExample-ClipitFile";
     public $tag_array = array();
     public $reflection_item_array = array();
-    public $subject = "";
-    public $education_level = 0;
     public $country = "";
     public $location = "";
     // Example Resources
@@ -47,8 +45,6 @@ class ClipitExample extends UBItem {
         parent::copy_from_elgg($elgg_entity);
         $this->tag_array = (array)static::get_tags($this->id);
         $this->reflection_item_array = (array)static::get_reflection_items($this->id);
-        $this->subject = (string)$elgg_entity->get("subject");
-        $this->education_level = (int)$elgg_entity->get("education_level");
         $this->country = (string)$elgg_entity->get("country");
         $this->location = (string)$elgg_entity->get("location");
         $this->resource_array = static::get_resources($this->id);
@@ -64,8 +60,6 @@ class ClipitExample extends UBItem {
      */
     protected function copy_to_elgg($elgg_entity) {
         parent::copy_to_elgg($elgg_entity);
-        $elgg_entity->set("subject", (string)$this->subject);
-        $elgg_entity->set("education_level", (int)$this->education_level);
         $elgg_entity->set("country", (string)$this->country);
         $elgg_entity->set("location", (string)$this->location);
     }
