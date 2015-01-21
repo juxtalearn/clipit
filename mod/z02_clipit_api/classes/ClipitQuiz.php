@@ -137,6 +137,15 @@ class ClipitQuiz extends UBItem {
         return UBCollection::set_items($id, array($tricky_topic), static::REL_QUIZ_TRICKYTOPIC);
     }
 
+    static function get_from_tricky_topic($tricky_topic_id) {
+        $id_array = UBCollection::get_items($tricky_topic_id, static::REL_QUIZ_TRICKYTOPIC, true);
+        $quiz_array = array();
+        foreach($id_array as $quiz_id) {
+            $quiz_array[] = new static($quiz_id);
+        }
+        return $quiz_array;
+    }
+
     static function set_quiz_start($id, $user_id){
         return UBCollection::add_items($id, array($user_id), static::REL_QUIZ_USER);
     }

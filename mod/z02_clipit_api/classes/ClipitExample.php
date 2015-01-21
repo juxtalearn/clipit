@@ -108,6 +108,15 @@ class ClipitExample extends UBItem {
         return UBCollection::set_items($id, array($tricky_topic), static::REL_EXAMPLE_TRICKYTOPIC);
     }
 
+    static function get_from_tricky_topic($tricky_topic_id) {
+        $id_array = UBCollection::get_items($tricky_topic_id, static::REL_EXAMPLE_TRICKYTOPIC, true);
+        $example_array = array();
+        foreach($id_array as $example_id) {
+            $example_array[] = new static($example_id);
+        }
+        return $example_array;
+    }
+
     /**
      * Adds Tags to an Example, referenced by Id.
      *

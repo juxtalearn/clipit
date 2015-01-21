@@ -205,19 +205,10 @@ class ClipitActivity extends UBItem {
     }
 
     static function get_from_tricky_topic($tricky_topic_id) {
-        $elgg_objects = elgg_get_entities_from_metadata(
-            array(
-                'type' => static::TYPE, 'subtype' => static::SUBTYPE, 'metadata_names' => array("tricky_topic"),
-                'metadata_values' => array($tricky_topic_id), 'limit' => 0
-            )
-        );
-        if(!empty($elgg_objects)) {
-            $activity_array = array();
-        } else {
-            return null;
-        }
-        foreach($elgg_objects as $elgg_object) {
-            $activity_array[] = new static($elgg_object->guid, $elgg_object);
+        $id_array = UBCollection::get_items($tricky_topic_id, static::REL_ACTIVITY_TRICKYTOPIC, true);
+        $activity_array = array();
+        foreach($id_array as $activity_id) {
+            $activity_array[] = new static($activity_id);
         }
         return $activity_array;
     }
