@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 $tricky_topic = elgg_extract('entity', $vars);
+$tt_parent = elgg_extract('tricky_topic_parent', $vars);
 $multimedia = elgg_extract('multimedia', $vars);
 $examples = elgg_extract('examples', $vars);
 $user = array_pop(ClipitUser::get_by_id(array($tricky_topic->owner_id)));
@@ -50,45 +51,67 @@ $user = array_pop(ClipitUser::get_by_id(array($tricky_topic->owner_id)));
         </span>
     </div>
     </div>
-    <small class="show"><?php echo elgg_echo('author');?></small>
-    <i class="fa-user fa blue"></i>
-    <?php echo elgg_view('output/url', array(
-        'href'  => "profile/{$user->login}",
-        'title' => $user->name,
-        'text'  => $user->name,
-    ));
+    <div class="inline-block">
+        <small class="show"><?php echo elgg_echo('author');?></small>
+        <i class="fa-user fa blue"></i>
+        <?php echo elgg_view('output/url', array(
+            'href'  => "profile/{$user->login}",
+            'title' => $user->name,
+            'text'  => $user->name,
+        ));
+        ?>
+    </div>
+    <?php
+    if($tt_parent):
+        $tt_parent = array_pop(ClipitTrickyTopic::get_by_id(array($tt_parent)));
     ?>
+    <div class="inline-block margin-left-20">
+        <small class="show">
+            <i class="fa fa-sitemap"></i>
+            <?php echo elgg_echo('tricky_topic:duplicate_from');?>
+        </small>
+        <?php echo elgg_view('output/url', array(
+            'href'  => "tricky_topics/view/{$tt_parent->id}",
+            'title' => $tt_parent->name,
+            'text'  => $tt_parent->name,
+        ));
+        ?>
+    </div>
+    <?php endif;?>
     <div class="clearfix"></div>
 </div>
 
 <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-12">
         <?php if($tricky_topic->description):?>
-            <small><?php echo elgg_echo('description');?></small>
-            <p><?php echo $tricky_topic->description;?></p>
+            <small class="show"><?php echo elgg_echo('description');?></small>
+            <?php echo $tricky_topic->description;?>
         <?php endif;?>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-7">
         <small class="show"><?php echo elgg_echo('tags');?></small>
         <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $tricky_topic->tag_array)); ?>
     </div>
+    <div class="col-md-2">
+        <small class="show"><?php echo elgg_echo('education_level');?></small>
+        <?php echo elgg_view('output/url', array(
+            'href'  => "tricky_topics?education_level={$tricky_topic->education_level}",
+            'title' => elgg_echo('education_level:'.$tricky_topic->education_level),
+            'text'  => elgg_echo('education_level:'.$tricky_topic->education_level),
+        ));
+        ?>
+    </div>
     <div class="col-md-3">
-        <div class="margin-bottom-10">
-            <small class="show"><?php echo elgg_echo('education_level');?></small>
-            <?php echo elgg_view('output/url', array(
-                'href'  => "tricky_topics?education_level={$tricky_topic->education_level}",
-                'title' => elgg_echo('education_level:'.$tricky_topic->education_level),
-                'text'  => elgg_echo('education_level:'.$tricky_topic->education_level),
-            ));
-            ?>
-        </div>
-        <div class="margin-bottom-10">
-            <small class="show"><?php echo elgg_echo('tricky_topic:subject');?></small>
-            <?php echo elgg_view('output/url', array(
-                'href'  => "tricky_topics?subject={$tricky_topic->subject}",
-                'title' => elgg_echo('tricky_topic:subject'),
-                'text'  => elgg_echo('tricky_topic:subject'),
-            ));
-            ?>
-        </div>
+        <small class="show"><?php echo elgg_echo('tricky_topic:subject');?></small>
+        <?php echo elgg_view('output/url', array(
+            'href'  => "tricky_topics?subject={$tricky_topic->subject}",
+            'title' => $tricky_topic->subject,
+            'text'  => $tricky_topic->subject,
+        ));
+        ?>
     </div>
 </div>
 

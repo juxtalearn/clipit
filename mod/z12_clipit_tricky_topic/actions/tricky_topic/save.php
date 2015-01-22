@@ -49,4 +49,4 @@ foreach($tags as $tag){
 }
 ClipitTrickyTopic::set_tags($tricky_topic_id, $tag_ids);
 
-forward('tricky_topics');
+forward('tricky_topics/view/'.$tricky_topic_id);

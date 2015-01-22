@@ -39,6 +39,7 @@ $english = array(
     'example:cantremove' => 'Can not remove example',
     'example:removed' => 'Example removed',
 
+    'tricky_topic:duplicate_from' => 'Tricky Topic duplicated from',
     'tricky_topic:subject' => 'Subject',
     'tricky_topic:cantremove' => 'Can not remove Tricky Topic',
     'tricky_topic:created' => 'Tricky Topic created',
@@ -51,6 +52,7 @@ $english = array(
     'student_problems' => 'Student problems',
     'reflection_palette' => 'Reflection palette',
     'reflection_palette:question' => 'Why do students have this problem?',
+    'reflection_palette:tick' => 'Please tick all that apply',
 );
 
 add_translation('en', $english);

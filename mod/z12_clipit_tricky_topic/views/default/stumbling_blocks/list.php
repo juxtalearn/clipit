@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 $tags = elgg_extract('entities', $vars);
+$table_orders = elgg_extract('table_orders', $vars);
 $count = elgg_extract('count', $vars);
 ?>
 <style>
@@ -25,13 +26,22 @@ $count = elgg_extract('count', $vars);
     <?php echo elgg_view("page/components/print_button");?>
 </div>
 <div class="clearfix"></div>
-<table class="table table-striped table-condensed">
+<table class="table table-striped table-condensed table-order">
+    <thead>
     <tr>
-        <th><?php echo elgg_echo('name');?></th>
+        <?php foreach($table_orders as $data):?>
+            <th>
+                <a href="<?php echo $data['href'];?>">
+                    <i class="fa <?php echo $data['sort_icon'];?> blue margin-right-5" style="position: absolute;left: 0;margin-top: 3px;"></i>
+                    <span class="margin-left-10"><?php echo $data['value'];?></span>
+                </a>
+            </th>
+        <?php endforeach;?>
         <th><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
         <th><i class="fa fa-sitemap"></i> <?php echo elgg_echo('tricky_topics');?></th>
         <th><?php echo elgg_echo('examples');?></th>
     </tr>
+    </thead>
     <?php foreach($tags as $tag):
         $user = array_pop(ClipitUser::get_by_id(array($tag->owner_id)));
         $examples = ClipitExample::get_by_tags(array($tag->id));

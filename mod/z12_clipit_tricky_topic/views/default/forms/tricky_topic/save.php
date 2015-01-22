@@ -67,10 +67,10 @@ if($tricky_topic){
             <div class="form-add-tags form-group margin-top-10">
                 <?php if($tags):?>
                     <?php foreach($tags as $tag):?>
-                        <?php echo elgg_view("tricky_topic/add", array('value' => $tag->name));?>
+                        <?php echo elgg_view("tricky_topics/tags/add", array('value' => $tag->name));?>
                     <?php endforeach;?>
                 <?php else: ?>
-                    <?php echo elgg_view("tricky_topic/add");?>
+                    <?php echo elgg_view("tricky_topics/tags/add");?>
                 <?php endif;?>
             </div>
             <?php echo elgg_view('output/url', array(
@@ -90,6 +90,7 @@ if($tricky_topic){
                 'value' => $tricky_topic->education_level,
                 'class' => 'form-control select-question-type',
                 'options_values' => get_education_levels(),
+                'required' => true
             ));
             ?>
         </div>

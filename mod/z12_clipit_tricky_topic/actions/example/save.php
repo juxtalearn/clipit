@@ -103,4 +103,4 @@ if($tags_checked = get_input('tags_checked')){
 }
 ClipitExample::set_tags($example_id, $tag_ids);
 
-forward('tricky_topics/examples');
+forward('tricky_topics/examples/view/'.$example_id);

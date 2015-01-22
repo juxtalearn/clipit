@@ -17,7 +17,7 @@ if(!$examples){
 }
 ?>
 <?php if($examples):?>
-<table class="table table-striped">
+<table class="table">
     <thead>
     <tr>
         <th><?php echo elgg_echo('title');?></th>
