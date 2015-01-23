@@ -10,11 +10,11 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-elgg_register_event_handler('init', 'system', 'clipit_ttt_init');
+elgg_register_event_handler('init', 'system', 'clipit_tricky_topic_init');
 
-function clipit_ttt_init() {
+function clipit_tricky_topic_init() {
 
-    // Register "/ttq" page handler
+    // Register "/tricky_topics" page handler
     elgg_register_page_handler('tricky_topics', 'tt_page_handler');
     $plugin_dir = elgg_get_plugins_path() . "z12_clipit_tricky_topic";
     elgg_register_action("example/save", "{$plugin_dir}/actions/example/save.php");
@@ -29,6 +29,8 @@ function clipit_ttt_init() {
     elgg_register_ajax_view('tricky_topics/tags/search');
 
     elgg_extend_view('js/activity', 'js/tricky_topic');
+    elgg_register_library('clipit:tricky_topic:functions', "{$plugin_dir}/lib/functions.php");
+    elgg_load_library('clipit:tricky_topic:functions');
 }
 
 /**
@@ -46,6 +48,8 @@ function tt_page_handler($page){
     $view = $page[0];
     $tt_sidebar = false;
 
+    $sort = get_input('sort');
+    $order_by = get_input('order_by');
     switch($page[0]){
         case '':
             $tt_sidebar = true;
@@ -64,7 +68,6 @@ function tt_page_handler($page){
                 }
             }
             if(get_input('tags')) {
-                $tt_ids_search = array();
                 $tags_title = get_input('tags');
                 $tags_title = explode(",", $tags_title);
                 foreach ($tags_title as $tag_title) {
@@ -80,16 +83,42 @@ function tt_page_handler($page){
                 $entities = ClipitTrickyTopic::get_by_id($tt_ids);
             }
             $count = count($entities);
+            if($order_by) {
+                entities_order($entities, $order_by, $sort, ClipitTrickyTopic::list_properties());
+            }
+
             $entities = array_slice($entities, clipit_get_offset(), clipit_get_limit(10));
-            $content = elgg_view('tricky_topics/list', array('entities' => $entities, 'count' => $count));
+
+            $to_order = array(
+                'name' => elgg_echo('title'),
+                'education_level' => elgg_echo('education_level'),
+                'subject' => elgg_echo('tricky_topic:subject'),
+            );
+            $table_orders = table_order($to_order, $order_by, $sort);
+            $content = elgg_view('tricky_topics/list', array(
+                'entities' => $entities,
+                'count' => $count,
+                'table_orders' => $table_orders
+            ));
 
             break;
         case 'stumbling_blocks':
             $title = elgg_echo('tags');
             $entities = ClipitTag::get_all();
             $count = count($entities);
+            if($order_by){
+                entities_order($entities, $order_by, $sort, ClipitTag::list_properties());
+            }
             $entities = array_slice($entities, clipit_get_offset(), clipit_get_limit());
-            $content = elgg_view('stumbling_blocks/list', array('entities' => $entities, 'count' => $count));
+            $to_order = array(
+                'name' => elgg_echo('title'),
+            );
+            $table_orders = table_order($to_order, $order_by, $sort);
+            $content = elgg_view('stumbling_blocks/list', array(
+                'entities' => $entities,
+                'count' => $count,
+                'table_orders' => $table_orders
+            ));
             break;
         case 'examples':
             $title = elgg_echo('student_problems');
@@ -104,17 +133,6 @@ function tt_page_handler($page){
                     $example_ids[] = $example->id;
                 }
             }
-//            if(get_input('tags')) {
-//                $example_ids_search = array();
-//                $tags_title = get_input('tags');
-//                $tags_title = explode(",", $tags_title);
-//                foreach ($tags_title as $tag_title) {
-//                    $tags = ClipitTag::get_from_search($tag_title);
-//                    foreach ($tags as $tag) {
-//                        $example_ids_search = array_merge($example_ids_search, ClipitTag::get_tricky_topics($tag->id));
-//                    }
-//                }
-//            }
 
             if(!empty($example_ids) || !empty($example_ids_search)){
                 $example_ids = array_merge($example_ids, $example_ids_search);
@@ -124,9 +142,20 @@ function tt_page_handler($page){
             }
 
             $count = count($entities);
+            if($order_by){
+                entities_order($entities, $order_by, $sort, ClipitExample::list_properties());
+            }
             $entities = array_slice($entities, clipit_get_offset(), clipit_get_limit(10));
-            $content = elgg_view('examples/list', array('entities' => $entities, 'count' => $count));
-
+            $to_order = array(
+                'name' => elgg_echo('title'),
+                'tricky_topic' => elgg_echo('tricky_topic'),
+            );
+            $table_orders = table_order($to_order, $order_by, $sort);
+            $content = elgg_view('examples/list', array(
+                'entities' => $entities,
+                'count' => $count,
+                'table_orders' => $table_orders
+            ));
             $sidebar .= elgg_view_module('aside', elgg_echo('filter'),
                 elgg_view_form(
                     'tricky_topics/example',
@@ -280,11 +309,12 @@ function tt_page_handler($page){
                     }
 //                    $sidebar .= elgg_view_module('aside', '<i class="fa fa-clock-o"></i> Revisions',
 //                        elgg_view('tricky_topics/sidebar/revisions'));
-                    $examples = ClipitExample::get_by_tags($tricky_topic->tag_array);
-//                    ClipitExample::get_from_ticky_topic($tricky_topic->id);
+                    $tt_parent = ClipitTrickyTopic::get_cloned_from($tricky_topic->id);
+                    $examples = ClipitExample::get_from_tricky_topic($tricky_topic->id);
                     $content = elgg_view('tricky_topics/view',
                         array(
                             'entity' => $tricky_topic,
+                            'tricky_topic_parent' => $tt_parent,
                             'multimedia' => $multimedia,
                             'examples' => $examples
                         ));

@@ -54,12 +54,13 @@ $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($example->tricky_to
     <div class="clearfix"></div>
 </div>
 
+<?php if($example->description):?>
+    <small class="show"><?php echo elgg_echo('description');?></small>
+    <?php echo $example->description;?>
+<?php endif;?>
+
 <div class="row">
     <div class="col-md-9">
-        <?php if($example->description):?>
-            <small><?php echo elgg_echo('description');?></small>
-            <p><?php echo $example->description;?></p>
-        <?php endif;?>
         <div class="margin-bottom-10">
             <small class="show"><?php echo elgg_echo('tricky_topic');?></small>
             <?php echo elgg_view('output/url', array(
@@ -77,11 +78,21 @@ $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($example->tricky_to
     <div class="col-md-3">
         <div class="margin-bottom-10">
             <small class="show"><?php echo elgg_echo('location');?></small>
-            <?php echo $example->location;?>
+            <?php echo elgg_view('output/url', array(
+                'href'  => "tricky_topics/examples?subject={$example->location}",
+                'title' => $example->location,
+                'text'  => $example->location,
+            ));
+            ?>
         </div>
         <div class="margin-bottom-10">
             <small class="show"><?php echo elgg_echo('country');?></small>
-            <?php echo get_countries_list($example->country);?>
+            <?php echo elgg_view('output/url', array(
+                'href'  => "tricky_topics/examples?subject={$example->location}",
+                'title' => get_countries_list($example->country),
+                'text'  => get_countries_list($example->country),
+            ));
+            ?>
         </div>
     </div>
 </div>

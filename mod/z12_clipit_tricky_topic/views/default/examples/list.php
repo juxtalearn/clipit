@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 $examples = elgg_extract('entities', $vars);
+$table_orders = elgg_extract('table_orders', $vars);
 $count = elgg_extract('count', $vars);
 ?>
 <div class="margin-bottom-20">
@@ -25,11 +26,17 @@ $count = elgg_extract('count', $vars);
     ));
     ?>
 </div>
-<table class="table table-striped">
+<table class="table table-striped table-order">
     <thead>
     <tr>
-        <th><?php echo elgg_echo('title');?>/<?php echo elgg_echo('tags');?></th>
-        <th><?php echo elgg_echo('tricky_topic');?></th>
+        <?php foreach($table_orders as $data):?>
+            <th>
+                <a href="<?php echo $data['href'];?>">
+                    <i class="fa <?php echo $data['sort_icon'];?> blue margin-right-5" style="position: absolute;left: 0;margin-top: 3px;"></i>
+                    <span class="margin-left-5"><?php echo $data['value'];?></span>
+                </a>
+            </th>
+        <?php endforeach;?>
         <th><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
         <th><?php echo elgg_echo('options');?></th>
     </tr>

@@ -173,6 +173,7 @@ ul, ol {
   color: @blue_clipit;
   border-bottom: 6px solid @blue-lighter;
   padding-bottom: 10px;
+  font-size: 20px;
 }
 .btn-sp{
   padding: 5px 10px !important;
@@ -368,6 +369,15 @@ select.form-control{
   line-height: 1.5;
   border-radius: 3px;
   padding: 1px 5px;
+}
+.table-order{
+  th {
+    position: relative;
+    vertical-align: text-bottom !important;
+    a {
+      color: #797979;
+    }
+  }
 }
 //
 // Labels
@@ -1062,4 +1072,19 @@ ul.tags-autocomplete{
 tr.info td {
   background-color: @blue-lighter_2 !important;
   border-bottom: 1px solid #fff;
+}
+//
+// Reflection item
+// --------------------------------------------------
+.reflection-item label{
+  position: relative;
+  cursor: pointer;
+  &:hover:after {
+    content: "\f061";
+    font: normal normal normal 22px/1 FontAwesome;
+    position: absolute;
+    color: @blue-lighter;
+    top: 0;
+    right: -15px;
+  }
 }

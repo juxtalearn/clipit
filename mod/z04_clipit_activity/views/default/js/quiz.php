@@ -33,7 +33,8 @@ $.fn.quiz = function (options) {
                 self.question_type_selected = $(this).closest(".show-question");
                 return self.addResult();
             });
-            self.question.find("input[type=radio]").on("click", function(){
+            //self.question.find("input[type=radio]").on("click", function(){
+            $(self.question).on("click", "input[type=radio]", function(){
                 self.question.find(".results input[type=radio]").prop('checked', false);
                 $(this).prop('checked', true);
             });

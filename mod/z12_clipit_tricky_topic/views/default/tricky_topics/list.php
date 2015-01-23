@@ -12,7 +12,7 @@
  */
 $tricky_topics = elgg_extract('entities', $vars);
 $count = elgg_extract('count', $vars);
-
+$table_orders = elgg_extract('table_orders', $vars);
 ?>
 <div class="margin-bottom-20">
     <div class="pull-right">
@@ -26,87 +26,96 @@ $count = elgg_extract('count', $vars);
     ));
     ?>
 </div>
-<table class="table table-striped">
-    <tr>
-        <th><?php echo elgg_echo('title');?>/<?php echo elgg_echo('tags');?></th>
-        <th><?php echo elgg_echo('education_level');?></th>
-        <th><?php echo elgg_echo('subject');?></th>
+<style>
+</style>
+<table class="table table-striped table-order">
+    <thead>
+    <tr class="title_order">
+        <?php foreach($table_orders as $data):?>
+            <th>
+                <a href="<?php echo $data['href'];?>">
+                    <i class="fa <?php echo $data['sort_icon'];?> blue margin-right-5" style="position: absolute;left: 0;margin-top: 3px;"></i>
+                    <span class="margin-left-5"><?php echo $data['value'];?></span>
+                </a>
+            </th>
+        <?php endforeach;?>
         <th><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
         <th style="width: 100px;"><?php echo elgg_echo('options');?></th>
     </tr>
+    </thead>
     <?php
     foreach($tricky_topics as $tricky_topic):
         $user = array_pop(ClipitUser::get_by_id(array($tricky_topic->owner_id)));
     ?>
-        <tr>
-            <td>
-                <strong>
-                    <?php echo elgg_view('output/url', array(
-                        'href'  => "tricky_topics/view/{$tricky_topic->id}",
-                        'title' => $tricky_topic->name,
-                        'text'  => $tricky_topic->name,
-                    ));
-                    ?>
-                </strong>
-                <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $tricky_topic->tag_array, 'limit' => 3)); ?>
-            </td>
-            <td>
+    <tr>
+        <td>
+            <strong>
                 <?php echo elgg_view('output/url', array(
-                    'href'  => "tricky_topics?education_level={$tricky_topic->education_level}",
-                    'title' => elgg_echo('filter_by', array(elgg_echo('education_level:'.$tricky_topic->education_level))),
-                    'text'  => elgg_echo('education_level:'.$tricky_topic->education_level),
+                    'href'  => "tricky_topics/view/{$tricky_topic->id}",
+                    'title' => $tricky_topic->name,
+                    'text'  => $tricky_topic->name,
                 ));
                 ?>
-            </td>
-            <td>
+            </strong>
+            <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $tricky_topic->tag_array, 'limit' => 3)); ?>
+        </td>
+        <td>
+            <?php echo elgg_view('output/url', array(
+                'href'  => "tricky_topics?education_level={$tricky_topic->education_level}",
+                'title' => elgg_echo('filter_by', array(elgg_echo('education_level:'.$tricky_topic->education_level))),
+                'text'  => elgg_echo('education_level:'.$tricky_topic->education_level),
+            ));
+            ?>
+        </td>
+        <td>
+            <?php echo elgg_view('output/url', array(
+                'href'  => "tricky_topics?subject={$tricky_topic->subject}",
+                'title' => $tricky_topic->subject,
+                'text'  => $tricky_topic->subject,
+            ));
+            ?>
+        </td>
+        <td>
+            <small>
+            <div>
+                <i class="fa-user fa blue"></i>
                 <?php echo elgg_view('output/url', array(
-                    'href'  => "tricky_topics?subject={$tricky_topic->subject}",
-                    'title' => $tricky_topic->subject,
-                    'text'  => $tricky_topic->subject,
+                    'href'  => "profile/{$user->login}",
+                    'title' => $user->name,
+                    'text'  => $user->name,
                 ));
                 ?>
-            </td>
-            <td>
-                <small>
-                <div>
-                    <i class="fa-user fa blue"></i>
-                    <?php echo elgg_view('output/url', array(
-                        'href'  => "profile/{$user->login}",
-                        'title' => $user->name,
-                        'text'  => $user->name,
-                    ));
-                    ?>
-                </div>
-                <?php echo elgg_view('output/friendlytime', array('time' => $tricky_topic->time_created));?>
-                </small>
-            </td>
-            <td>
-                <?php if($user->id == elgg_get_logged_in_user_guid()):?>
-                    <?php echo elgg_view('output/url', array(
-                        'href'  => "tricky_topics/edit/{$tricky_topic->id}",
-                        'class' => 'btn btn-xs btn-primary',
-                        'title' => elgg_echo('edit'),
-                        'text'  => '<i class="fa fa-edit"></i>',
-                    ));
-                    ?>
-                    <?php echo elgg_view('output/url', array(
-                        'href'  => "action/tricky_topic/remove?id={$tricky_topic->id}",
-                        'class' => 'btn btn-xs btn-danger remove-object',
-                        'is_action' => true,
-                        'title' => elgg_echo('delete'),
-                        'text'  => '<i class="fa fa-trash-o"></i>',
-                    ));
-                    ?>
-                <?php endif;?>
+            </div>
+            <?php echo elgg_view('output/friendlytime', array('time' => $tricky_topic->time_created));?>
+            </small>
+        </td>
+        <td>
+            <?php if($user->id == elgg_get_logged_in_user_guid()):?>
                 <?php echo elgg_view('output/url', array(
-                    'href'  => "tricky_topics/create/{$tricky_topic->id}",
-                    'class' => 'btn btn-xs btn-primary btn-border-blue',
-                    'title' => elgg_echo('duplicate'),
-                    'text'  => '<i class="fa fa-copy"></i>',
+                    'href'  => "tricky_topics/edit/{$tricky_topic->id}",
+                    'class' => 'btn btn-xs btn-primary',
+                    'title' => elgg_echo('edit'),
+                    'text'  => '<i class="fa fa-edit"></i>',
                 ));
                 ?>
-            </td>
-        </tr>
+                <?php echo elgg_view('output/url', array(
+                    'href'  => "action/tricky_topic/remove?id={$tricky_topic->id}",
+                    'class' => 'btn btn-xs btn-danger remove-object',
+                    'is_action' => true,
+                    'title' => elgg_echo('delete'),
+                    'text'  => '<i class="fa fa-trash-o"></i>',
+                ));
+                ?>
+            <?php endif;?>
+            <?php echo elgg_view('output/url', array(
+                'href'  => "tricky_topics/create/{$tricky_topic->id}",
+                'class' => 'btn btn-xs btn-primary btn-border-blue',
+                'title' => elgg_echo('duplicate'),
+                'text'  => '<i class="fa fa-copy"></i>',
+            ));
+            ?>
+        </td>
+    </tr>
     <?php endforeach;?>
 </table>
 <?php echo clipit_get_pagination(array('count' => $count, 'limit' => 10)); ?>

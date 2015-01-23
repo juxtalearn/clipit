@@ -39,6 +39,7 @@ $spanish = array(
     'example:cantremove' => 'No se ha podido borrar el ejemplo',
     'example:removed' => 'Ejemplo borrado',
 
+    'tricky_topic:duplicate_from' => 'Tema clave duplicado de',
     'tricky_topic:subject' => 'Asignatura',
     'tricky_topic:cantremove' => 'No se ha podido borrar el tema clave',
     'tricky_topic:created' => 'Tema clave creado',
@@ -50,6 +51,7 @@ $spanish = array(
     'student_problems' => 'Ejemplos',
     'reflection_palette' => '',
     'reflection_palette:question' => '¿Por qué los estudiantes tienen este problema?',
+    'reflection_palette:tick' => 'Marque donde se aplique',
 );
 
 add_translation('es', $spanish);

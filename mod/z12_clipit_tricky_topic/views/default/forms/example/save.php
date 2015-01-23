@@ -31,6 +31,7 @@ if($example) {
     }
 }
 ?>
+
 <div class="margin-bottom-10" id="form-add-tricky-topic">
     <div class="col-md-7">
         <div class="form-group">
@@ -48,7 +49,7 @@ if($example) {
             <label><?php echo elgg_echo('description');?></label>
             <?php
             echo elgg_view('input/plaintext', array(
-                'class' => 'form-control',
+                'class' => 'form-control mceEditor',
                 'value' => $example->description,
                 'name' => 'description',
                 'rows' => 9
@@ -56,12 +57,12 @@ if($example) {
             ?>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <label><?php echo elgg_echo('country');?></label>
                 <?php echo elgg_view('page/components/countries',
                     array('style' => 'padding:5px;', 'value' => $example->country));?>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-7">
                 <label><?php echo elgg_echo('location');?></label>
                 <?php echo elgg_view('input/text', array(
                     'class' => 'form-control',
@@ -87,10 +88,10 @@ if($example) {
             <div class="form-add-tags form-group margin-top-10">
                 <?php if($tags_diff):?>
                     <?php foreach(ClipitTag::get_by_id($tags_diff) as $tag):?>
-                        <?php echo elgg_view("tricky_topic/add", array('value' => $tag->name));?>
+                        <?php echo elgg_view("tricky_topics/tags/add", array('value' => $tag->name));?>
                     <?php endforeach;?>
                 <?php else: ?>
-                    <?php echo elgg_view("tricky_topic/add", array('required' => false));?>
+                    <?php echo elgg_view("tricky_topics/tags/add", array('required' => false));?>
                 <?php endif;?>
             </div>
             <?php echo elgg_view('output/url', array(
@@ -103,20 +104,6 @@ if($example) {
             ?>
         </div>
     </div>
-    <style>
-        .reflection-item label{
-            position: relative;
-            margin-bottom: 0;
-        }
-        .reflection-item label:hover:after{
-            content: "\f061";
-            font: normal normal normal 14px/1 FontAwesome;
-            position: absolute;
-            color: #bae6f6;
-            top: 5px;
-            right: -12px;
-        }
-    </style>
     <div class="clearfix"></div>
     <div class="col-md-12 margin-top-20">
         <div class="form-group" style="background: #fafafa;padding: 10px;">
@@ -338,7 +325,9 @@ if($example) {
                      style="padding: 10px;">
 
                     <div class="col-md-5">
-                        <div class="margin-bottom-10">Please tick all that apply:</div>
+                        <div class="margin-bottom-10 text-muted">
+                            <?php echo elgg_echo('reflection_palette:tick');?>:
+                        </div>
                         <?php
                         $z = 1;
                         foreach($items as $item):?>

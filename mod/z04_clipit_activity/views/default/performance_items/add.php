@@ -32,7 +32,6 @@ echo elgg_view("page/components/title_block", array(
                 'href'  => "javascript:;",
                 'title' => elgg_echo('remove'),
                 'text' => '',
-                'id'    => 'add-tricky-topic',
                 'class' => 'fa fa-times red pull-left',
                 'style' => 'margin-right: 10px;',
                 'onclick' => '$(this).parent(\'.form-group\').remove()',

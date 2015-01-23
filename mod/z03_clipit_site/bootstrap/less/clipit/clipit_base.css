@@ -10328,6 +10328,7 @@ ol {
   color: #32b4e5;
   border-bottom: 6px solid #bae6f6;
   padding-bottom: 10px;
+  font-size: 20px;
 }
 .btn-sp {
   padding: 5px 10px !important;
@@ -10503,6 +10504,13 @@ select.form-control {
   line-height: 1.5;
   border-radius: 3px;
   padding: 1px 5px;
+}
+.table-order th {
+  position: relative;
+  vertical-align: text-bottom !important;
+}
+.table-order th a {
+  color: #797979;
 }
 .label {
   background-color: #FFF;
@@ -11176,4 +11184,16 @@ textarea.dynatable-per-page select {
 tr.info td {
   background-color: #d6f0fa !important;
   border-bottom: 1px solid #fff;
+}
+.reflection-item label {
+  position: relative;
+  cursor: pointer;
+}
+.reflection-item label:hover:after {
+  content: "\f061";
+  font: normal normal normal 22px/1 FontAwesome;
+  position: absolute;
+  color: #bae6f6;
+  top: 0;
+  right: -15px;
 }
