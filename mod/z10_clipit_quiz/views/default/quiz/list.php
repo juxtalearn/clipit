@@ -50,12 +50,14 @@ $(function(){
 });
 </script>
 <table class="table table-striped">
+    <thead>
     <tr>
         <th><?php echo elgg_echo('title');?>/<?php echo elgg_echo('tags');?></th>
-        <th><?php echo elgg_echo('author');?>/<?php echo elgg_echo('date');?></th>
+        <th><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
         <th style="width: 100px;"><?php echo elgg_echo('options');?></th>
         <th class="text-right"><?php echo elgg_echo('quiz:questions');?></th>
     </tr>
+    </thead>
     <?php
     foreach($quizzes as $quiz):
         $user = array_pop(ClipitUser::get_by_id(array($quiz->owner_id)));
@@ -65,7 +67,7 @@ $(function(){
             <td>
                 <strong>
                     <?php echo elgg_view('output/url', array(
-                        'href'  => "tricky_topics/view/{$quiz->id}",
+                        'href'  => "quizzes/view/{$quiz->id}",
                         'title' => $quiz->name,
                         'text'  => $quiz->name,
                     ));

@@ -18,7 +18,7 @@ $question = elgg_extract('question', $vars);
 <?php if($finished):?>
     <label class="inline-block margin-right-20" style="font-weight: normal">
         <input type="radio" disabled <?php echo $result->answer == 'true' ? 'checked' : '';?>/>
-        <?php if($question->validation_array[0] == 'true' && $finished_task):?>
+        <?php if($question->validation_array[0] && $finished_task):?>
             <strong><?php echo elgg_echo('true');?></strong>
         <?php else:?>
             <?php echo elgg_echo('true');?>
@@ -26,7 +26,7 @@ $question = elgg_extract('question', $vars);
     </label>
     <label class="inline-block margin-right-20" style="font-weight: normal">
         <input type="radio" disabled <?php echo $result->answer == 'false' ? 'checked' : '';?>/>
-        <?php if($question->validation_array[0] == 'false' && $finished_task):?>
+        <?php if($question->validation_array[1] && $finished_task):?>
             <strong><?php echo elgg_echo('false');?></strong>
         <?php else:?>
             <?php echo elgg_echo('false');?>

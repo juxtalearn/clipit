@@ -15,6 +15,7 @@ $description = get_input("video-description");
 $url = get_input("video-url");
 $file = $_FILES["video-upload"];
 $entity_id = get_input("entity-id");
+$performance_items = get_input("performance_items");
 $labels = get_input("labels");
 $labels = array_filter(explode(",", $labels));
 $tags = array_filter(get_input("tags", array()));
@@ -73,6 +74,8 @@ if(count($entity)==0 || trim($title) == "" || trim($description) == ""){
             }
             ClipitVideo::set_tags($new_video_id, $tags);
         }
+        // Performance items
+        ClipitVideo::add_performance_items($new_video_id, $performance_items);
     } else {
         register_error(elgg_echo("video:cantadd"));
     }

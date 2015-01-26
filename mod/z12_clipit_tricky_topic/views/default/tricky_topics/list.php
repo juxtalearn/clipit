@@ -26,8 +26,6 @@ $table_orders = elgg_extract('table_orders', $vars);
     ));
     ?>
 </div>
-<style>
-</style>
 <table class="table table-striped table-order">
     <thead>
     <tr class="title_order">

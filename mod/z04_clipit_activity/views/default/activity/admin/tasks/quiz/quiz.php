@@ -49,18 +49,18 @@ $tags = ClipitTrickyTopic::get_tags($tricky_topic);
 $id = uniqid();
 ?>
 <script>
-    $(function(){
-        $(".quiz[data-quiz=<?php echo $id;?>]").quiz({
-            'tricky_topic': <?php echo (int)$tricky_topic;?>,
-            'input_prefix': '<?php echo $input_prefix;?>'
-        });
+$(function(){
+    $(".quiz[data-quiz=<?php echo $id;?>]").quiz({
+        'tricky_topic': <?php echo (int)$tricky_topic;?>,
+        'input_prefix': '<?php echo $input_prefix;?>'
     });
+});
 </script>
 <div class="quiz" data-quiz="<?php echo $id;?>">
 <div class="row">
     <div class="col-md-7">
         <div class="form-group">
-            <label>Title</label>
+            <label><?php echo elgg_echo('title');?></label>
             <?php echo elgg_view("input/text", array(
                 'name' => "{$input_prefix}[title]",
                 'class' => 'form-control',

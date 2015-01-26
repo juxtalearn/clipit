@@ -12,6 +12,8 @@
  */
 $english = array(
     'quizzes' => 'Quizzes',
+    'quiz:name' => 'Quiz name',
+    'quiz:create' => 'Create quiz',
 );
 
 add_translation('en', $english);

@@ -14,6 +14,8 @@ $entity = elgg_extract("entity", $vars);
 $owner_user = array_pop(ClipitUser::get_by_id(array($entity->owner_id)));
 
 $tags = $entity->tag_array;
+$labels = $entity->label_array;
+$performance_items = $entity->performance_item_array;
 ?>
 <!-- Multimedia info + details -->
 <?php echo elgg_view("multimedia/owner_options", array('entity' => $entity, 'type' => $vars['type'])); ?>
@@ -46,16 +48,36 @@ $tags = $entity->tag_array;
             <div class="multimedia-view">
                 <?php echo $vars['body'];?>
             </div>
-            <?php if(!empty($tags)):?>
-                <small class="show"><?php echo elgg_echo('tags');?></small>
-                <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $tags)); ?>
-            <?php endif;?>
-            <?php if($vars['description'] !== false):?>
-            <small class="show"><?php echo elgg_echo('description');?></small>
-            <div class="description">
-                <?php echo $entity->description; ?>
+            <div class="row">
+                <div class="col-md-9">
+                <?php if(!empty($tags)):?>
+                    <small class="show"><?php echo elgg_echo('tags');?></small>
+                    <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $tags)); ?>
+                <?php endif;?>
+                <?php if(!empty($labels)):?>
+                    <div class="margin-bottom-10">
+                        <small class="show"><?php echo elgg_echo('labels');?></small>
+                        <small class="blue text-truncate content-block" id="label_list">
+                            <?php echo elgg_view("publications/labels/view", array('labels' => $labels)); ?>
+                        </small>
+                    </div>
+                <?php endif;?>
+                <?php if($vars['description'] !== false):?>
+                    <div class="margin-bottom-10">
+                        <small class="show"><?php echo elgg_echo('description');?></small>
+                        <div class="description">
+                            <?php echo $entity->description; ?>
+                        </div>
+                    </div>
+                <?php endif;?>
+                </div>
+                <div class="col-md-3">
+                    <?php if(!empty($performance_items)):?>
+                        <small class="show"><?php echo elgg_echo('performance_items');?></small>
+                        <?php echo elgg_view('performance_items/view', array('entities' => $performance_items)); ?>
+                    <?php endif;?>
+                </div>
             </div>
-            <?php endif;?>
         </div>
     </div>
 </div>

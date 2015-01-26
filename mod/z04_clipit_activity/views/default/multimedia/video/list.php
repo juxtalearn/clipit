@@ -25,7 +25,7 @@ $rating = elgg_extract("rating", $vars);
             "target"    => "add-video",
             "title"     => elgg_echo("video:add"),
             "form"      => true,
-            "body"      => elgg_view('forms/multimedia/videos/add', array('entity'  => $entity)),
+            "body"      => elgg_view('forms/multimedia/videos/save', array('scope_entity'  => $entity)),
             "cancel_button" => true,
             "ok_button" => elgg_view('input/submit',
                 array(
@@ -36,6 +36,7 @@ $rating = elgg_extract("rating", $vars);
 
     ?>
     <?php echo elgg_view_form('multimedia/videos/add', array(
+            'action' => 'action/multimedia/videos/save',
             'data-validate'=> "true",
             'body' => $modal,
             'enctype' => 'multipart/form-data'

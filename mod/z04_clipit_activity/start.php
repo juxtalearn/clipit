@@ -105,6 +105,7 @@ function clipit_activity_init() {
     elgg_register_action("multimedia/videos/add", "{$plugin_dir}/actions/multimedia/videos/add.php");
     elgg_register_action("multimedia/videos/remove", "{$plugin_dir}/actions/multimedia/videos/remove.php");
     elgg_register_action("multimedia/videos/edit", "{$plugin_dir}/actions/multimedia/videos/edit.php");
+    elgg_register_action("multimedia/videos/save", "{$plugin_dir}/actions/multimedia/videos/save.php");
     elgg_register_action("multimedia/videos/publish", "{$plugin_dir}/actions/multimedia/videos/publish.php");
     elgg_register_ajax_view('modal/multimedia/video/edit');
     elgg_register_ajax_view('modal/multimedia/video/publish');

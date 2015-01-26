@@ -2,8 +2,8 @@
  /**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
- * Creation date:   14/05/14
- * Last update:     14/05/14
+ * Creation date:   26/01/2015
+ * Last update:     26/01/2015
  * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC JuxtaLearn Project
  * @version         $Version$
  * @link            http://www.juxtalearn.eu
@@ -11,22 +11,48 @@
  * @package         ClipIt
  */
 $entity = elgg_extract('entity', $vars);
-$object = ClipitSite::lookup($entity->id);
+$scope_entity = elgg_extract('scope_entity', $vars);
 
-$activity = array_pop(ClipitActivity::get_by_id(array(ClipitVideo::get_activity($entity->id))));
-$tt = array_pop(ClipitTrickyTopic::get_by_id(array($activity->tricky_topic)));
-
-$tt_tags = $tt->tag_array;
-$tags = $entity->tag_array;
-$performance_items = $entity->performance_item_array;
-foreach(ClipitLabel::get_by_id($entity->label_array) as $label){
-    $labels_value[] = $label->name;
+$labels_value = array();
+if($scope_entity){
+    $hasToken = get_config("google_refresh_token");
+    $object = ClipitSite::lookup($scope_entity->id);
+    switch($object['subtype']){
+        case "ClipitGroup":
+            $group_tags = ClipitGroup::get_tags($scope_entity->id);
+            $activity = array_pop(ClipitActivity::get_by_id(array($scope_entity->activity)));
+            $tt = array_pop(ClipitTrickyTopic::get_by_id(array($activity->tricky_topic)));
+            $tt_tags = $tt->tag_array;
+            $tt_tags = array_diff($tt_tags, $group_tags);
+            break;
+        case "ClipitActivity":
+            $tt = array_pop(ClipitTrickyTopic::get_by_id(array($scope_entity->tricky_topic)));
+            $tt_tags = $tt->tag_array;
+            break;
+    }
+    $tags = array();
+    echo elgg_view("input/hidden", array(
+        'name' => 'scope-id',
+        'value' => $scope_entity->id,
+    ));
+} elseif($entity){
+    $activity = array_pop(ClipitActivity::get_by_id(array(ClipitVideo::get_activity($entity->id))));
+    $tt = array_pop(ClipitTrickyTopic::get_by_id(array($activity->tricky_topic)));
+    $tt_tags = $tt->tag_array;
+    if($group_id = ClipitVideo::get_group($entity->id)) {
+        $tt_tags = array_diff($tt->tag_array, ClipitGroup::get_tags($group_id));
+    }
+    $tags = $entity->tag_array;
+    $performance_items = $entity->performance_item_array;
+    foreach(ClipitLabel::get_by_id($entity->label_array) as $label){
+        $labels_value[] = $label->name;
+    }
+    echo elgg_view("input/hidden", array(
+        'name' => 'video-id',
+        'value' => $entity->id,
+    ));
 }
 
-echo elgg_view("input/hidden", array(
-    'name' => 'video-id',
-    'value' => $entity->id,
-));
 echo elgg_view("input/hidden", array(
     'name' => 'tags',
 ));
@@ -79,6 +105,76 @@ $language_index = ClipitPerformanceItem::get_language_index($user_language);
         width: 100% !important;
     }
 </style>
+<?php if($scope_entity):?>
+<!-- Video add -->
+<div id="uploading" style="display: none;position: absolute;  left: 0;  top: 0;  right: 0;  bottom: 0;  z-index: 999;background: rgba(255,255,255,0.8);">
+    <div style="height: 100%;" class="wrapper separator loading-block">
+        <div>
+            <i class="fa fa-spinner fa-spin blue"></i>
+            <h3 class="blue"><?php echo elgg_echo('video:uploading:youtube');?>...</h3>
+        </div>
+    </div>
+</div>
+<div class="panel-group" id="accordion_add" style="margin-bottom: 10px;">
+    <?php if($hasToken):?>
+        <!-- Video upload -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a data-toggle="collapse" data-parent="#accordion_add" href="#collapse_add1">
+                    <h4 class="panel-title">
+                        <strong>
+                            <i class="fa fa-angle-down pull-right"></i>
+                            <?php echo elgg_echo('video:add:to_youtube');?>
+                        </strong>
+                    </h4>
+                </a>
+            </div>
+            <div id="collapse_add1" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="video-upload"><?php echo elgg_echo("video:upload");?></label>
+                        <?php echo elgg_view("input/file", array(
+                            'name' => 'video-upload',
+                            'id' => 'video-upload',
+                            'style' => "width: 100%;"
+                        ));
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Video url -->
+    <?php endif;?>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <a data-toggle="collapse" data-parent="#accordion_add" href="#collapse_add2">
+                <h4 class="panel-title">
+                    <strong>
+                        <i class="fa fa-angle-down pull-right"></i>
+                        <?php echo elgg_echo('video:add:paste_url');?>
+                    </strong>
+                </h4>
+            </a>
+        </div>
+        <div id="collapse_add2" class="panel-collapse collapse">
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="video-url"><?php echo elgg_echo("video:url");?></label>
+                    <div class="icon">
+                        <?php echo elgg_view("input/text", array(
+                            'name' => 'video-url',
+                            'id' => 'video-url',
+                            'class' => 'form-control blue',
+                        ));
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Video add end -->
+<?php endif;?>
 <div class="form-group">
     <label for="video-title"><?php echo elgg_echo("video:title");?></label>
     <?php echo elgg_view("input/text", array(
@@ -103,14 +199,16 @@ $language_index = ClipitPerformanceItem::get_language_index($user_language);
     <div class="col-md-7">
         <div class="form-group">
             <label><?php echo elgg_echo("tags");?></label>
-            <?php echo elgg_view("tricky_topic/tags/view", array('tags' => $group_tags, 'width' => '45%')); ?>
+            <?php if($group_tags):?>
+                <?php echo elgg_view("tricky_topic/tags/view", array('tags' => $group_tags, 'width' => '45%')); ?>
+            <?php endif;?>
             <div>
                 <select name="tags[]" data-placeholder="<?php echo elgg_echo('click_add');?>" style="width:100%;" multiple class="chosen-select" tabindex="8">
                     <option value=""></option>
                     <?php
                     foreach($tt_tags as $tag_id):
                         $tag = array_pop(ClipitTag::get_by_id(array($tag_id)));
-                    ?>
+                        ?>
                         <option <?php echo in_array($tag_id, $tags) ? "selected" : "";?> value="<?php echo $tag->id;?>"><?php echo $tag->name;?></option>
                     <?php endforeach;?>
                 </select>

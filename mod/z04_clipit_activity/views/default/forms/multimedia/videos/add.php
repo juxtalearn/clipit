@@ -36,9 +36,6 @@ echo elgg_view("input/hidden", array(
 echo elgg_view("input/hidden", array(
     'name' => 'tags',
 ));
-//
-//elgg_unregister_js("clipit:fileupload");
-//elgg_load_js("jquery:iframe_transport");
 ?>
 <script>
     $(function(){
@@ -153,24 +150,45 @@ echo elgg_view("input/hidden", array(
                 ));
                 ?>
             </div>
-            <div class="form-group">
-                <label><?php echo elgg_echo("tags");?></label>
-                <?php echo elgg_view("tricky_topic/tags/view", array('tags' => $group_tags, 'width' => '45%')); ?>
+            <div class="row">
+            <div class="col-md-7">
+                <div class="form-group">
+                    <label><?php echo elgg_echo("tags");?></label>
+                    <?php echo elgg_view("tricky_topic/tags/view", array('tags' => $group_tags, 'width' => '45%')); ?>
+                    <div>
+                        <select name="tags[]" data-placeholder="<?php echo elgg_echo('click_add');?>" style="width:100%;" multiple class="chosen-select" tabindex="8">
+                            <option value=""></option>
+                            <?php
+                            foreach($tt_tags as $tag_id):
+                                $tag = array_pop(ClipitTag::get_by_id(array($tag_id)));
+                                ?>
+                                <option <?php echo in_array($tag_id, $tags) ? "selected" : "";?> value="<?php echo $tag->id;?>"><?php echo $tag->name;?></option>
+                            <?php endforeach;?>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="title"><?php echo elgg_echo("labels");?></label>
+                    <ul id="labels"></ul>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <label><?php echo elgg_echo("performance_items");?></label>
                 <div>
-                    <select name="tags[]" data-placeholder="<?php echo elgg_echo('click_add');?>" style="width:100%;" multiple class="chosen-select" tabindex="8">
+                    <select name="performance_items[]" data-placeholder="<?php echo elgg_echo('click_add');?>" style="width:100%;" multiple class="chosen-select-items" tabindex="8">
                         <option value=""></option>
-                        <?php
-                        foreach($tt_tags as $tag_id):
-                            $tag = array_pop(ClipitTag::get_by_id(array($tag_id)));
-                            ?>
-                            <option <?php echo in_array($tag_id, $tags) ? "selected" : "";?> value="<?php echo $tag->id;?>"><?php echo $tag->name;?></option>
-                        <?php endforeach;?>
+                        <?php foreach(ClipitPerformanceItem::get_by_category(null, $user_language) as $category => $items):?>
+                            <optgroup label="<?php echo $category; ?>">
+                                <?php foreach($items as $item): ?>
+                                    <option <?php echo in_array($item->id, $performance_items) ? "selected" : "";?> value="<?php echo $item->id; ?>">
+                                        <?php echo $item->item_name[$language_index]; ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </optgroup>
+                        <?php endforeach; ?>
                     </select>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="title"><?php echo elgg_echo("labels");?></label>
-                <ul id="labels"></ul>
             </div>
         </div>
     </div>

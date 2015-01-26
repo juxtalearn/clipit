@@ -12,6 +12,7 @@
  */
 $user_id = elgg_get_logged_in_user_guid();
 $id = get_input('entity-id');
+$performance_items = get_input("performance_items");
 $video = array_pop(ClipitVideo::get_by_id(array($id)));
 
 $video_description = get_input('video-description');
@@ -24,6 +25,8 @@ if(!isset($video) || trim($video_description) == "" || trim($video_title) == "")
         'name'  => $video_title,
         'description' => $video_description
     ));
+    // Performance items
+    ClipitVideo::set_performance_items($video->id, $performance_items);
     system_message(elgg_echo('video:edited'));
 }
 
