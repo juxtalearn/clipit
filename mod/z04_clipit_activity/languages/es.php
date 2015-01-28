@@ -11,6 +11,12 @@
  * @package         ClipIt
  */
 $spanish = array(
+    'status' => 'Estado',
+    'send:to_site' => 'Enviar a ClipIt',
+    'time:days' => 'Días',
+    'time:hours' => 'Horas',
+    'time:minutes' => 'Minutos',
+
     // Roles
     'teacher' => 'Profesor',
     'student' => 'Estudiante',
@@ -295,6 +301,7 @@ $spanish = array(
     'activity:admin:task_setup' => 'Configuración de tareas',
     'activity:admin:groups' => 'Configuración de grupos',
     'activity:admin:setup' => 'Configuración de la actividad',
+    'activity:admin:videos' => 'Videos',
     'groups:select:move' => 'mover al grupo...',
     'clipit:or' => 'o',
     'activity:updated' => 'Actividad actualizada',

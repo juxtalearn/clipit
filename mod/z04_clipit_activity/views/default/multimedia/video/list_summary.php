@@ -60,6 +60,37 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
         }
         $published = false;
     ?>
+        <?php
+        $modal_publish = elgg_view("page/components/modal",
+            array(
+                "dialog_class"     => "modal-md",
+                "target"    => 'publish-id-'.$video->id,
+                "title"     => 'publish',
+                "form"      => true,
+                "body"      => elgg_view('forms/publications/publish',
+                    array(
+                        'entity'  => $video,
+                        'parent_id' => $group->id,
+                        'activity' => $activity,
+                        'tags' => $tags,
+                        'entity_preview' => $entity_preview
+                    )),
+                "cancel_button" => true,
+                "ok_button" => elgg_view('input/submit',
+                    array(
+                        'value' => elgg_echo('add'),
+                        'class' => "btn btn-primary"
+                    ))
+            ));
+
+        ?>
+        <?php echo elgg_view_form('publications/publish__', array(
+            'data-validate'=> 'true',
+            'body' => $modal_publish,
+        ),
+        array('entity'  => $video)
+    );
+    ?>
     <li class="video-item row list-item">
         <?php
         if($vars['preview'] !== false):
@@ -81,21 +112,41 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
                     </div>
                 </a>
             <?php endif;?>
-
         </div>
         <div class="col-md-10">
             <?php if($vars['actions']): ?>
                 <?php echo elgg_view("multimedia/owner_options", array('entity' => $video, 'type' => 'video')); ?>
             <?php endif; ?>
-            <?php if($vars['author_bottom'] !== true):?>
-                <?php echo elgg_view("publications/owner_summary", array(
-                    'entity' => $video,
-                    'class' => 'pull-right',
-                    'entity_class' => 'ClipitVideo',
-                    'msg' => elgg_echo('multimedia:uploaded_by')
-                ));
-                ?>
-            <?php endif;?>
+            <div class="pull-right text-right">
+                <?php if($vars['author_bottom'] !== true):?>
+                <div class="margin-bottom-5">
+                    <?php echo elgg_view("publications/owner_summary", array(
+                        'entity' => $video,
+                        'entity_class' => 'ClipitVideo',
+                        'msg' => elgg_echo('multimedia:uploaded_by')
+                    ));
+                    ?>
+                </div>
+                <?php endif;?>
+                <?php if($vars['send_site']):?>
+                    <div class="margin-bottom-5">
+                        <?php echo elgg_view('output/url', array(
+//                            'href'  => $vars['href_site'].$video->id,
+                            'data-target' => '#publish-id-'.$video->id,
+                            'data-toggle' => 'modal',
+                            'class' => 'btn btn-xs btn-primary',
+                            'text'  => '<i class="fa fa-globe"></i> '.elgg_echo('send:to_site')
+                        ));
+                        ?>
+                    </div>
+                <?php endif; ?>
+                <?php if($rating):?>
+                    <?php echo elgg_view("performance_items/summary", array(
+                        'entity' => $video,
+                    ));
+                    ?>
+                <?php endif; ?>
+            </div>
             <h4 class="text-truncate">
                 <?php if($vars['preview'] !== false):?>
                     <?php echo elgg_view('output/url', array(
@@ -114,17 +165,8 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
                     ?>
                 <?php endif;?>
             </h4>
-            <div class="overflow-hidden">
-                <?php if($rating):?>
-                    <?php echo elgg_view("performance_items/summary", array(
-                        'entity' => $video,
-                        'class' => 'pull-right'
-                    ));
-                    ?>
-                <?php endif; ?>
-                <div class="tags">
-                    <?php echo elgg_view("tricky_topic/tags/view", array('tags' => $tags)); ?>
-                </div>
+            <div class="tags">
+                <?php echo elgg_view("tricky_topic/tags/view", array('tags' => $tags)); ?>
             </div>
 
             <small class="show" style="margin: 0">
@@ -137,20 +179,21 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
                         <?php echo elgg_view('output/url', array(
                             'href'  => "{$href}/view/{$video->id}#comments",
                             'title' => elgg_echo('comments'),
-                            'class' => 'pull-right btn btn-xs-5 btn-blue-lighter',
+                            'class' => 'pull-right btn btn-xs btn-xs-5 btn-blue-lighter',
                             'text'  => $total_comments. ' <i class="fa fa-comments"></i>'))
                         ?>
                     </strong>
                     <!-- Count total comments end-->
                 <?php endif; ?>
                 <?php if($vars['author_bottom']):?>
+                    <div class="inline-block margin-right-10">
                     <?php echo elgg_view("publications/owner_summary", array(
                         'entity' => $video,
-                        'class' => 'pull-right',
                         'entity_class' => 'ClipitVideo',
                         'msg' => elgg_echo('multimedia:uploaded_by')
                     ));
                     ?>
+                    </div>
                 <?php endif;?>
                 <i>
                     <?php echo elgg_view('output/friendlytime', array('time' => $video->time_created));?>

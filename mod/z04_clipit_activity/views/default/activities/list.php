@@ -1,134 +1,105 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: equipo
- * Date: 14/02/14
- * Time: 10:29
- * To change this template use File | Settings | File Templates.
+ /**
+ * ClipIt - JuxtaLearn Web Space
+ * PHP version:     >= 5.2
+ * Creation date:   28/01/2015
+ * Last update:     28/01/2015
+ * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC JuxtaLearn Project
+ * @version         $Version$
+ * @link            http://www.juxtalearn.eu
+ * @license         GNU Affero General Public License v3
+ * @package         ClipIt
  */
-$items = $vars['items'];
-$offset = elgg_extract('offset', $vars);
-$user_loggedin_id = elgg_get_logged_in_user_guid();
-
-$list_class = 'row';
-if (isset($vars['list_class'])) {
-    $list_class = "$list_class {$vars['list_class']}";
-}
-
-if (is_array($items) && count($items) > 0):
-    echo "<ul class=\"$list_class\">";
-    foreach ($items as $item):
-        if($item):
-            $group_id = ClipitGroup::get_from_user_activity($user_loggedin_id, $item->id);
-            $group_array = ClipitGroup::get_by_id(array($group_id));
-            $group =  array_pop($group_array); // ClipitGroup object
-            $users = ClipitGroup::get_users($group_id);
-            $users = array_slice($users, 0, 10);
-
-            $params_progress = array(
-                'value' => get_group_progress($group->id),
-                'width' => '100%'
-            );
-            $progress_bar = elgg_view("page/components/progressbar", $params_progress);
-
-            $title = elgg_get_friendly_title($item->name);
-            $teachers = ClipitActivity::get_teachers($item->id);
-            $isCalled = in_array($user_loggedin_id, $item->called_users_array);
-            ?>
-            <li class='list-item col-md-12'>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="pull-right">
-                            <small class="activity-status status-<?php echo $item->status;?>">
-                                <strong><?php echo elgg_echo("status:".$item->status);?></strong>
-                            </small>
-                        </div>
-                        <h4 style='margin-top: 0'>
-                            <?php echo elgg_view('output/url', array(
-                                    'href' => "clipit_activity/{$item->id}",
-                                    'text' => $item->name,
-                                    'is_trusted' => true,
-                                    'style' => 'color: #'.$item->color
-                                ));
-                            ?>
-                        </h4>
-                        <div style='color: #999;text-transform: uppercase;'>
-                            <i class='fa fa-calendar'></i>
-                            <?php echo date("d M Y", $item->start);?>
-                            -
-                            <?php echo date("d M Y", $item->end);?>
-                        </div>
-                        <div style='max-height: 40px; overflow: hidden; color: #666666;margin-top: 5px; '>
-                            <?php echo $item->description; ?>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-xs-6" style="border-right: 1px solid #ccc; padding-right: 15px;">
-                                <?php if($item->tricky_topic):?>
-                                <div class="text-truncate margin-bottom-10">
-                                    <small class="show"><?php echo elgg_echo('tricky_topic');?></small>
-                                    <?php echo elgg_view('tricky_topic/preview', array('activity' => $item));?>
-                                </div>
-                                <?php endif; ?>
-                                <?php if($item->status == 'enroll' && $item->group_mode == ClipitActivity::GROUP_MODE_STUDENT && $isCalled): ?>
-                                    <?php echo elgg_view('output/url', array(
-                                        'href'  => "clipit_activity/{$item->id}/join",
-                                        'class' => 'btn btn-xs btn-default btn-border-blue-lighter',
-                                        'title' => elgg_echo('activity:join'),
-                                        'text'  => elgg_echo('activity:join')
-                                    ));
-                                    ?>
-                                <?php endif; ?>
-                                <?php if($group):?>
-                                <div>
-                                    <?php echo $progress_bar; ?>
-                                    <strong>
-                                        <?php echo elgg_view('output/url', array(
-                                            'href'  => "clipit_activity/{$item->id}/group/{$group->id}",
-                                            'title' => $group->name,
-                                            'text'  => $group->name));
-                                        ?>
-                                    </strong>
-                                </div>
-                                <div style='margin-top: 5px;'>
-                                    <?php
-                                    foreach ($users as $user_id):
-                                        $user = array_pop(ClipitUser::get_by_id(array($user_id)));
-                                        $user_avatar = elgg_view('output/img', array(
-                                            'src' => get_avatar($user, 'small'),
-                                            'style' => 'margin: 1px;',
-                                            'class' => 'avatar-tiny'
-                                        ));
-                                    ?>
-                                        <?php echo elgg_view('output/url', array(
-                                            'href'  => "profile/".$user->login,
-                                            'title' => $user->name,
-                                            'text' => $user_avatar
-                                         ));
-                                        ?>
-                                    <?php endforeach; ?>
-                                </div>
-                                <?php endif; ?>
-                            </div>
-                            <div class="col-xs-6">
-                                <small class='show'><?php echo elgg_echo('activity:teachers') ?></small>
-                                <ul style="max-height: 100px; overflow: auto;">
-                                    <?php
-                                    foreach($teachers as $teacher_id):
-                                        $teacher = array_pop(ClipitUser::get_by_id(array($teacher_id)));
-                                    ?>
-                                    <li class="list-item" style="border-bottom: 0;margin-bottom: 0;">
-                                        <?php echo elgg_view("page/elements/user_block", array('entity' => $teacher)); ?>
-                                    </li>
-                                    <?php endforeach; ?>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+$activities = elgg_extract('entities', $vars);
+$count = elgg_extract('count', $vars);
+$table_orders = elgg_extract('table_orders', $vars);
+?>
+<div class="margin-bottom-20">
+    <div class="pull-right">
+        <?php echo elgg_view("page/components/print_button");?>
+    </div>
+    <?php echo elgg_view('output/url', array(
+        'href'  => "tricky_topics/create",
+        'class' => 'btn btn-primary margin-bottom-10',
+        'title' => elgg_echo('create'),
+        'text'  => elgg_echo('create'),
+    ));
+    ?>
+</div>
+<table class="table table-striped table-order">
+    <thead>
+    <tr class="title_order">
+        <?php foreach($table_orders as $data):?>
+            <th>
+                <a href="<?php echo $data['href'];?>">
+                    <i class="fa <?php echo $data['sort_icon'];?> blue margin-right-5" style="position: absolute;left: 0;margin-top: 3px;"></i>
+                    <span class="margin-left-5"><?php echo $data['value'];?></span>
+                </a>
+            </th>
+        <?php endforeach;?>
+        <th><?php echo elgg_echo('activity:teachers');?></th>
+    </tr>
+    </thead>
+    <?php
+    foreach($activities as $activity):
+        $user = array_pop(ClipitUser::get_by_id(array($activity->owner_id)));
+        $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($activity->tricky_topic)));
+    ?>
+        <tr>
+            <td>
+<!--                <i class="activity-point pull-left margin-top-5 margin-right-10" style="background: #--><?php //echo $activity->color;?><!--"></i>-->
+                <div class="content-block">
+                <strong>
+                <?php echo elgg_view('output/url', array(
+                    'href'  => "clipit_activity/{$activity->id}",
+                    'title' => $activity->name,
+                    'text'  => $activity->name,
+                ));
+                ?>
+                </strong>
+                <div class="margin-top-5">
+                <small style='color: #999;text-transform: uppercase;'>
+                    <i class='fa fa-calendar'></i>
+                    <?php echo date("d M Y", $activity->start);?>
+                    -
+                    <?php echo date("d M Y", $activity->end);?>
+                </small>
                 </div>
-            </li>
-        <?php endif; ?>
-    <?php endforeach; ?>
-    </ul>
-<?php endif; ?>
+                </div>
+            </td>
+            <td>
+                <?php echo elgg_view('output/url', array(
+                    'href'  => "tricky_topics/view/{$tricky_topic->id}",
+                    'title' => $tricky_topic->name,
+                    'text'  => $tricky_topic->name,
+                ));
+                ?>
+            </td>
+            <td>
+                <small class="activity-status status-<?php echo $activity->status;?>">
+                    <strong><?php echo elgg_echo("status:".$activity->status);?></strong>
+                </small>
+            </td>
+
+            <td>
+                <ul style="max-height: 100px; overflow: auto;">
+                    <?php
+                    foreach($activity->teacher_array as $teacher_id):
+                        $teacher = array_pop(ClipitUser::get_by_id(array($teacher_id)));
+                    ?>
+                        <li class="list-item" style="border-bottom: 0;margin-bottom: 0;">
+                            <?php echo elgg_view("messages/compose_icon", array('entity' => $teacher));?>
+                            <?php echo elgg_view('output/url', array(
+                                'href'  => "profile/".$user->login,
+                                'title' => $teacher->name,
+                                'text'  => $teacher->name,
+                            ));
+                            ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </td>
+        </tr>
+    <?php endforeach;?>
+</table>
+<?php echo clipit_get_pagination(array('count' => $count, 'limit' => 10)); ?>

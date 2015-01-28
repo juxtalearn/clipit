@@ -24,6 +24,10 @@ $tabs = array(
         'text' => elgg_echo('activity:admin:groups'),
         'href' => "{$href}?filter=groups",
     ),
+    'videos' => array(
+        'text' => elgg_echo('activity:admin:videos'),
+        'href' => "{$href}?filter=videos",
+    ),
 );
 foreach ($tabs as $name => $tab) {
     $tab['name'] = $name;

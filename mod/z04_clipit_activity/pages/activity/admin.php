@@ -29,10 +29,63 @@ switch($selected_tab){
     case 'groups':
         $content = elgg_view('activity/admin/groups/view', array('entity' => $activity));
         break;
+    case 'videos':
+        $content = elgg_view('activity/admin/videos', array('videos' => $videos));
+        $tasks = ClipitTask::get_by_id($activity->task_array);
+        $href = 'clipit_activity/'.$activity->id.'/publications';
+        $content = '';
+//        for($i=0;$i<25; $i++) {
+//            ClipitComment::create(array(
+//                'name' => '',
+//                'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu semper orci. Integer et tortor nunc. Maecenas justo ex, tincidunt non nibh et, sagittis fringilla justo. Etiam ultricies, enim mattis condimentum viverra, diam est dignissim ex, at pretium sapien elit ac ipsum. Sed porta tellus quis sapien imperdiet semper. Vivamus sed mauris id turpis tincidunt pretium. Cras consequat efficitur sem id egestas. ',
+//                'destination' => 579
+//            ));
+//        }
+        foreach($tasks as $task){
+            $videos = array();
+            if($task->task_type == ClipitTask::TYPE_VIDEO_UPLOAD) {
+                $videos = ClipitTask::get_videos($task->id);
+                if($videos) {
+                    $content .= elgg_view('page/components/title_block', array('title' => $task->name));
+//                    $content .= elgg_view('multimedia/video/list', array(
+//                        'entities' => $videos,
+//                        'href' => $href,
+//                        'total_comments' => true,
+//                        'rating'    => true,
+//                        'send_site' => true,
+//                        'href_site' => 'clipit_activity/'.$activity->id.'/admin/publish/'
+//                    ));
+                    $content .= elgg_view('multimedia/video/list_summary', array(
+                        'videos' => $videos,
+                        'href' => $href,
+                        'preview' => false,
+                        'total_comments' => true,
+                        'rating'    => true,
+                        'send_site' => true,
+                        'author_bottom' => true,
+                        'href_site' => 'clipit_activity/'.$activity->id.'/admin/publish/'
+                    ));
+                }
+            }
+        }
+        break;
     case 'rubric':
         $content = elgg_view('activity/admin/assessment_rubric/view', array('entity' => $activity));
         break;
 }
+// Publish to Site
+if($page[2] == 'publish' && $id = $page[3]){
+    $entity = array_pop(ClipitVideo::get_by_id(array($id)));
+    $content = elgg_view_form('publications/publish', array('data-validate'=> "true" ),
+        array(
+            'entity'  => $entity,
+            'parent_id' => $group->id,
+            'activity' => $activity,
+            'tags' => $tags,
+            'entity_preview' => $entity_preview
+        ));
+}
+
 $params = array(
     'content'   => $content,
     'filter'    => $filter,

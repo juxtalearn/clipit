@@ -11,14 +11,10 @@
  * @package         ClipIt
  */
 $step = get_input('step');
-$content = elgg_view("activities/list", $params_list);
 $selected_tab = 'step_1';
 
 $filter = elgg_view('activity/create/filter', array('selected' => $selected_tab, 'step' => $step));
 
-if(!$my_activities){
-    $content = elgg_view('output/empty', array('value' => elgg_echo('activities:none')));
-}
 $params = array(
     'content' => elgg_view_form('activity/create', array('id' => 'activity-create')),
     'title' => elgg_echo("activity:create"),

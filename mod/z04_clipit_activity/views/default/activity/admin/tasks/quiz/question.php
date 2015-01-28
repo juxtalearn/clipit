@@ -118,20 +118,12 @@ if($question){
                         <?php endfor;?>
                     </div>
                 </div>
-                <?php if($tt_tags):?>
-                <div class="form-group tags-question-select">
-                    <label><?php echo elgg_echo('tags');?></label>
-                    <select name="<?php echo $input_prefix;?>[question][<?php echo $id;?>][tags][]" data-placeholder="<?php echo elgg_echo('click_add');?>" style="width:100%;" multiple class="tags-select" tabindex="8">
-                        <option value=""></option>
-                        <?php
-                        foreach($tt_tags as $tag_id):
-                            $tag = array_pop(ClipitTag::get_by_id(array($tag_id)));
-                            ?>
-                            <option <?php echo in_array($tag_id, $tags) ? "selected" : "";?> value="<?php echo $tag->id;?>"><?php echo $tag->name;?></option>
-                        <?php endforeach;?>
-                    </select>
-                </div>
-                <?php endif;?>
+                <?php echo elgg_view('tricky_topic/list', array(
+                    'tricky_topic' => 2868,
+                    'tags' => $tags,
+                    'show_tags' => 'checkbox',
+                ));
+                ?>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
@@ -255,7 +247,115 @@ if($question){
                     ?>
                 </div>
             </div>
+
         </div>
+            <!-- Examples related to Stumbling Blocks -->
+            <table class="table bg-white">
+                <thead>
+                    <tr>
+                        <th>Examples related to Stumbling blocks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr>
+
+                <td style="padding-top: 10px;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <strong>
+                                <a href="http://clipit.es/dev/tricky_topics/examples/view/3075" title="Esto es usable" rel="nofollow">Esto es usable</a>
+                            </strong>
+                            <small class="show">
+                                <p>Concepto de como entienden los usuarios la usabilidad</p>
+                            </small>
+                        </div>
+                        <div class="row col-md-6">
+                            <div class="margin-bottom-10 col-md-7">
+                                <small class="show">Location</small>
+                                <a href="http://clipit.es/dev/tricky_topics/examples?subject=Universidad Autonoma" title="Universidad Autonoma" rel="nofollow">Universidad Autonoma de Madrid</a>        </div>
+                            <div class="margin-bottom-10 col-md-5">
+                                <small class="show">Country</small>
+                                <a href="http://clipit.es/dev/tricky_topics/examples?subject=Universidad Autonoma" title="Spain" rel="nofollow">Spain</a>        </div>
+                        </div>
+                    </div>
+
+                <div style="
+    background: #fff;
+    padding: 5px;
+    display: none;
+" class="col-md-12"><div style="
+    background: #d6f0fa;
+    padding: 10px;
+    margin-bottom: 5px;
+">
+
+                        <div class="row">
+                            <div class="col-md-6"><a style="
+    display: block;
+          ">Flawed causal reasoning </a><a style="
+    display: block;
+">Key characteristic conveys group membership</a><a style="
+    display: block;
+">Weak human-like or world-like analogy</a></div><div class="col-md-6"> <strong class="show">Intuitive Beliefs</strong><div class="content-block"><small>Informal, intuitive ways of thinking about the world. Strongly biased toward causal explanations</small></div></div></div>
+
+
+
+                    </div>
+                    <div class="margin-top-10" style="
+    margin-left: 20px;
+    display: none;
+"><div><strong>
+                                Underpinning understandings
+                            </strong><div class="text-muted margin-bottom-10">
+                                Understanding that the student is expected to know already. e.g. to do the calculations related to Avogadro’s number in Chemistry assumes a math understanding of powers of ten and ratios. Learning about genetic drift assumes an understanding of natural selection.                    </div></div>
+                        <div><strong>
+                                Underpinning understandings
+                            </strong><div class="text-muted margin-bottom-10">
+                                Understanding that the student is expected to know already. e.g. to do the calculations related to Avogadro’s number in Chemistry assumes a math understanding of powers of ten and ratios. Learning about genetic drift assumes an understanding of natural selection.                    </div></div><div><strong>
+                                Underpinning understandings
+                            </strong><div class="text-muted margin-bottom-10">
+                                Understanding that the student is expected to know already. e.g. to do the calculations related to Avogadro’s number in Chemistry assumes a math understanding of powers of ten and ratios. Learning about genetic drift assumes an understanding of natural selection.                    </div></div>
+                    </div>
+                    <div style="
+    background: #d6f0fa;
+    padding: 10px;
+    margin-bottom: 5px;
+">
+
+                        <div class="row">
+                            <div class="col-md-6"><a style="
+    display: block;
+          ">Essential Concepts</a></div><div class="col-md-6"> <strong class="show">Intuitive Beliefs</strong><div class="content-block"><small>Informal, intuitive ways of thinking about the world. Strongly biased toward causal explanations</small></div></div></div>
+
+
+
+                    </div>
+                    <div style="
+    background: #d6f0fa;
+    padding: 10px;
+    margin-bottom: 5px;
+">
+
+                        <div class="row">
+                            <div class="col-md-6"><a style="
+    display: block;
+          ">Underpinning understandings</a><a style="
+    display: block;
+">Understanding of Scientific method, process and practice</a></div><div class="col-md-6"> <strong class="show">Intuitive Beliefs</strong><div class="content-block"><small>Informal, intuitive ways of thinking about the world. Strongly biased toward causal explanations</small></div></div></div>
+
+
+
+                    </div></div>
+
+
+                </td>
+
+
+
+                </tr>
+                </tbody>
+            </table>
+            <!-- Examples related to Stumbling Blocks end -->
         </div>
     </div>
 </div>

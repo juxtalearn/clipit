@@ -24,42 +24,42 @@ foreach($tricky_topics as $tricky_topic){
 $tt = array_diff($tt, $owner_tt);
 ?>
 <div class="row margin-bottom-20">
-<div class="col-md-7">
-    <label><?php echo elgg_echo('author');?></label>
-    <i class="fa fa-user blue"></i>
-    <?php echo elgg_view('output/url', array(
-        'href'  => "profile/{$user->login}",
-        'title' => $user->name,
-        'text'  => $user->name,
-    ));
-    ?>
-</div>
-<div class="col-md-5">
-    <label><?php echo elgg_echo('tricky_topic');?></label>
-    <select required="required" id="tricky-topic" class="form-control" name="tricky-topic" style="padding-top: 5px;padding-bottom: 5px;">
-    <option value="">
-        <?php echo elgg_echo('tricky_topic:select');?>
-    </option>
-    <?php if(count($owner_tt)>0):?>
-        <optgroup label="<?php echo elgg_echo('tricky_topic:created_by_me');?>">
-            <?php foreach($owner_tt as $value => $name):?>
-                <option <?php echo $selected == $value ? 'selected' : '';?> value="<?php echo $value;?>">
-                    <?php echo $name;?>
-                </option>
-            <?php endforeach;?>
-        </optgroup>
-    <?php endif;?>
-    <?php if(count($tt)>0):?>
-        <optgroup label="<?php echo elgg_echo('tricky_topic:created_by_others');?>">
-            <?php foreach($tt as $value => $name):?>
-                <option <?php echo $selected == $value ? 'selected' : '';?> value="<?php echo $value;?>">
-                    <?php echo $name;?>
-                </option>
-            <?php endforeach;?>
-        </optgroup>
-    <?php endif;?>
-</select>
-</div>
+    <div class="col-md-7">
+        <label><?php echo elgg_echo('author');?></label>
+        <i class="fa fa-user blue"></i>
+        <?php echo elgg_view('output/url', array(
+            'href'  => "profile/{$user->login}",
+            'title' => $user->name,
+            'text'  => $user->name,
+        ));
+        ?>
+    </div>
+    <div class="col-md-5">
+        <label><?php echo elgg_echo('tricky_topic');?></label>
+        <select required="required" id="tricky-topic" class="form-control" name="tricky-topic" style="padding-top: 5px;padding-bottom: 5px;">
+        <option value="">
+            <?php echo elgg_echo('tricky_topic:select');?>
+        </option>
+        <?php if(count($owner_tt)>0):?>
+            <optgroup label="<?php echo elgg_echo('tricky_topic:created_by_me');?>">
+                <?php foreach($owner_tt as $value => $name):?>
+                    <option <?php echo $selected == $value ? 'selected' : '';?> value="<?php echo $value;?>">
+                        <?php echo $name;?>
+                    </option>
+                <?php endforeach;?>
+            </optgroup>
+        <?php endif;?>
+        <?php if(count($tt)>0):?>
+            <optgroup label="<?php echo elgg_echo('tricky_topic:created_by_others');?>">
+                <?php foreach($tt as $value => $name):?>
+                    <option <?php echo $selected == $value ? 'selected' : '';?> value="<?php echo $value;?>">
+                        <?php echo $name;?>
+                    </option>
+                <?php endforeach;?>
+            </optgroup>
+        <?php endif;?>
+        </select>
+    </div>
 </div>
 <?php echo elgg_view('activity/admin/tasks/quiz/quiz');?>
 <div class="text-right">

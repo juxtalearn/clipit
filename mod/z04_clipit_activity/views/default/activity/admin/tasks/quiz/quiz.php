@@ -75,8 +75,8 @@ $(function(){
                 'class' => 'form-control '.($entity->description ? 'mceEditor' : ''),
                 'value' => $entity->description,
                 'onclick' => $entity->description ? false : '$(this).addClass(\'mceEditor\');
-                                        tinymce_setup();
-                                        tinymce.execCommand(\'mceFocus\',false,this.id);',
+                                tinymce_setup();
+                                tinymce.execCommand(\'mceFocus\',false,this.id);',
                 'rows'  => 1,
             ));
             ?>
@@ -99,39 +99,48 @@ $(function(){
         </div>
         <div class="form-group">
             <label>Máximo de tiempo para hacer el exámen</label>
-            <div>
+            <div class="row">
+                <div class="col-md-4">
+                    <small><?php echo elgg_echo('time:days');?></small>
                 <?php
-                $time = $entity->max_time;
-                $days = range(1, 30);
-                echo elgg_view("input/dropdown", array(
-                    'name' => $input_prefix.'[time][d]',
-                    'style' => 'width: 30%;display: inline-block;padding:5px;',
-                    'class' => 'form-control',
-                    'value' => $entity ? floor($time / 86000):'',
-                    'options_values' => array_merge(array('Days'), $days)
-                ));
+                    $time = $entity->max_time;
+                    $days = range(0, 30);
+                    echo elgg_view("input/dropdown", array(
+                        'name' => $input_prefix.'[time][d]',
+                        'style' => 'padding:5px;',
+                        'class' => 'form-control margin-top-5',
+                        'value' => $entity ? floor($time / 86000):'',
+                        'options_values' => $days
+                    ));
                 ?>
-                <?php
-                $hours = range(1, 24);
-                echo elgg_view("input/dropdown", array(
-                    'name' => $input_prefix.'[time][h]',
-                    'style' => 'width: 30%;display: inline-block;padding:5px;',
-                    'class' => 'form-control',
-                    'value' => $entity ? floor($time / 3600):'1',
-                    'options_values' => array_merge(array('Hours'), $hours)
-                ));
-                ?>
-                <?php
-                $minutes = range(1, 60);
-                echo elgg_view("input/dropdown", array(
-                    'name' => $input_prefix.'[time][m]',
-                    'style' => 'width: 30%;display: inline-block;padding:5px;',
-                    'class' => 'form-control',
-                    'value' => $entity ? floor(($time / 60) % 60):'',
-                    'options_values' => array_merge(array('Minutes'), $minutes),
-                    'required' => true
-                ));
-                ?>
+                </div>
+                <div class="col-md-4">
+                    <small><?php echo elgg_echo('time:hours');?></small>
+                    <?php
+                    $hours = range(0, 24);
+                    echo elgg_view("input/dropdown", array(
+                        'name' => $input_prefix.'[time][h]',
+                        'style' => 'padding:5px;',
+                        'class' => 'form-control margin-top-5',
+                        'value' => $entity ? floor($time / 3600):'1',
+                        'options_values' => $hours
+                    ));
+                    ?>
+                </div>
+                <div class="col-md-4">
+                    <small><?php echo elgg_echo('time:minutes');?></small>
+                    <?php
+                    $minutes = range(0, 60);
+                    echo elgg_view("input/dropdown", array(
+                        'name' => $input_prefix.'[time][m]',
+                        'style' => 'padding:5px;',
+                        'class' => 'form-control margin-top-5',
+                        'value' => $entity ? floor(($time / 60) % 60):'',
+                        'options_values' => $minutes,
+                        'required' => true
+                    ));
+                    ?>
+                </div>
             </div>
         </div>
     </div>

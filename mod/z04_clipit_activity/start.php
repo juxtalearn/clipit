@@ -39,13 +39,18 @@ function clipit_activity_init() {
         elgg_extend_view("navigation/menu/top", "navigation/menu/create_activity", 50);
         elgg_register_page_handler('create_activity', 'create_activity_page_handler');
     }
-    if($user->role != ClipitUser::ROLE_ADMIN) {
+    if($user->role == ClipitUser::ROLE_STUDENT) {
         // My activities list (top header)
         elgg_extend_view("navigation/menu/top", "navigation/menu/my_activities", 100);
     }
 
     // Register "/my_activities" page handler
     elgg_register_page_handler('my_activities', 'my_activities_page_handler');
+    if($user->role == ClipitUser::ROLE_TEACHER || $user->role == ClipitUser::ROLE_ADMIN) {
+        // Register "/activities" page handler
+        elgg_register_page_handler('activities', 'activities_page_handler');
+        elgg_extend_view("navigation/menu/top", "navigation/menu/activities", 100);
+    }
     // Register "/file" page handler
     elgg_register_page_handler('file', 'file_page_handler');
     // Register "/clipit_activity" page handler
@@ -426,7 +431,7 @@ function file_page_handler($page){
 }
 
 /**
- * My activities page handler
+ * My activities page handler, student view
  *
  * @param array $page Array of URL components for routing
  * @return bool
@@ -449,7 +454,139 @@ function my_activities_page_handler($page) {
     return true;
 
 }
+/**
+ * Activities page handler, only for teacher and admin
+ *
+ * @param array $page Array of URL components for routing
+ * @return bool
+ */
+function activities_page_handler($page) {
+    $title = elgg_echo('activities');
+    $order_by = get_input('order_by');
+    $sort = get_input('sort');
+    $selected_tab = get_input('filter', 'all');
+    $filter = elgg_view('navigation/tabs', array('selected' => $selected_tab, 'href' => $page[0]));
+    $sidebar = elgg_view_module('aside', elgg_echo('filter'),
+        elgg_view_form(
+            'activities/filter',
+            array(
+                'disable_security' => true,
+                'action' => 'activities',
+                'method' => 'GET',
+                'id' => 'add_labels',
+                'style' => 'background: #fff;padding: 15px;',
+                'body' => elgg_view('activities/sidebar/filter')
+            )
+        ), array('style' => 'margin-top: 45px;'));
+    // Filter search
+    $search = false;
+    $activity_ids = array();
+    if($activity_name = get_input('activity')){
+        $search = true;
+        $activities = ClipitActivity::get_from_search($activity_name);
+        foreach ($activities as $activity) {
+            $activity_ids[] = $activity->id;
+        }
+    }
+    if($teacher_id = (int)get_input('teacher')) {
+        $search = true;
+        if(empty($activity_ids)) {
+            $activity_ids = array_merge($activity_ids, ClipitUser::get_activities($teacher_id));
+        } else {
+            $activity_ids = array_intersect($activity_ids, ClipitUser::get_activities($teacher_id));
+        }
+    }
+    if($tricky_topic_name = get_input('tricky_topic')) {
+        $search = true;
+        $activities_search = array();
+        $tricky_topics = ClipitTrickyTopic::get_from_search($tricky_topic_name);
+        foreach ($tricky_topics as $tricky_topic) {
+            foreach(ClipitActivity::get_from_tricky_topic($tricky_topic->id) as $activity){
+                $activities_search[] = $activity->id;
+            }
+        }
+        if(empty($activity_ids)) {
+            $activity_ids = array_merge($activity_ids, $activities_search);
+        } else {
+            $activity_ids = array_intersect($activity_ids, $activities_search);
+        }
+    }
+    if($tags_array = get_input('tags')) {
+        $search = true;
+        $activities_search = array();
+        $tags_array = explode(",", $tags_array);
+        foreach ($tags_array as $tag_name) {
+            $tags = ClipitTag::get_from_search($tag_name);
+            foreach ($tags as $tag) {
+                foreach (ClipitTag::get_tricky_topics($tag->id) as $tricky_topic_id) {
+                    foreach(ClipitActivity::get_from_tricky_topic($tricky_topic_id) as $activity){
+                        $activities_search[] = $activity->id;
+                    }
+                }
+            }
+        }
+        if(empty($activity_ids)) {
+            $activity_ids = array_merge($activity_ids, $activities_search);
+        } else {
+            $activity_ids = array_intersect($activity_ids, $activities_search);
+        }
+    }
+    if($status = get_input('status')) {
+        $search = true;
+        $activities_search = array();
+        $activities = ClipitActivity::get_all();
+        foreach($activities as $activity){
+            if($activity->status == $status){
+                $activities_search[] = $activity->id;
+            }
+        }
+        if(empty($activity_ids)) {
+            $activity_ids = array_merge($activity_ids, $activities_search);
+        } else {
+            $activity_ids = array_intersect($activity_ids, $activities_search);
+        }
+    }
+    if($search){
+        $entities = ClipitActivity::get_by_id($activity_ids);
+    } else {
+        $entities = ClipitActivity::get_all();
+    }
+    if($order_by) {
+        entities_order($entities, $order_by, $sort, ClipitActivity::list_properties());
+    }
+    switch($selected_tab){
+        case 'mine':
+            $entities = ClipitActivity::get_by_id(ClipitUser::get_activities(elgg_get_logged_in_user_guid()));
+            break;
+        default:
+            break;
+    }
+    $count = count($entities);
+    $entities = array_slice($entities, clipit_get_offset(), clipit_get_limit(10));
+    $to_order = array(
+        'name' => elgg_echo('activity:title'),
+        'tricky_topic' => elgg_echo('tricky_topic'),
+        'status' => elgg_echo('status'),
+    );
+    $table_orders = table_order($to_order, $order_by, $sort);
+    $content = elgg_view('activities/list', array(
+        'entities' => $entities,
+        'count' => $count,
+        'table_orders' => $table_orders
+    ));
+    $params = array(
+        'content' => $content,
+        'title' => $title,
+        'filter' => $filter,
+        'sidebar' => $sidebar,
+    );
+    $body = elgg_view_layout('one_sidebar', $params);
 
+    echo elgg_view_page($title, $body);
+
+    return true;
+
+}
 
 /**
  * Get evaluations by filter (no evaluated | evaluated)
