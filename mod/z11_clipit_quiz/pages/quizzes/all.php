@@ -1,6 +1,7 @@
 <?php
 $user_logged = elgg_get_logged_in_user_guid();
-$title = "Todos los examenes";
+//$title = "Todos los examenes";
+$title = "HOLA";
 $quizzes = ClipitQuiz::get_all();
 foreach($quizzes as $quiz){
     
