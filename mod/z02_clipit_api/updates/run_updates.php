@@ -2,6 +2,12 @@
 $VERSION = "2.2.2";
 $old_version = get_config("clipit_version");
 
+// If no clipit_version in config, then it's a new install, set the version and exit.
+if(empty($old_version)){
+    set_config("clipit_version", $VERSION);
+    return;
+}
+
 print_r("<p>Current version: $old_version<br>New version: $VERSION</p>");
 
 if($VERSION === $old_version) return;
