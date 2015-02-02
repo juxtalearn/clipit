@@ -128,6 +128,9 @@ class ClipitPerformanceItem extends UBItem {
             case "pt":
                 $lang_index = 3;
                 break;
+            case "sv":
+                $lang_index = 4;
+                break;
             default:
                 $lang_index = 0;
         }

@@ -102,7 +102,7 @@ class ClipitReflectionItem extends UBItem{
     }
 
     static function get_language_index($language){
-        switch ($language){
+        switch ((string)$language){
             case "en":
                 $lang_index = 0;
                 break;
@@ -114,6 +114,9 @@ class ClipitReflectionItem extends UBItem{
                 break;
             case "pt":
                 $lang_index = 3;
+                break;
+            case "sv":
+                $lang_index = 4;
                 break;
             default:
                 $lang_index = 0;
