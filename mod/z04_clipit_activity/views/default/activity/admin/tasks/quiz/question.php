@@ -83,7 +83,7 @@ if($question){
         <div class="form-group row" style="padding: 10px;">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>Título de la pregunta</label>
+                    <label>Enunciado de la pregunta</label>
                     <?php echo elgg_view("input/text", array(
                         'name' => $input_prefix.'[question]['.$id.'][title]',
                         'class' => 'form-control',
@@ -93,7 +93,7 @@ if($question){
                     ?>
                 </div>
                 <div class="form-group">
-                    <label>Enunciado</label>
+                    <label>Información adicional</label>
                     <?php echo elgg_view("input/plaintext", array(
                         'name' => $input_prefix.'[question]['.$id.'][description]',
                         'value' => $question->description,
@@ -233,7 +233,7 @@ if($question){
                         <?php echo elgg_view('output/url', array(
                             'href'  => "javascript:;",
                             'class' => 'add-result',
-                            'text'  => '<i class="fa fa-plus"></i> Add Result',
+                            'text'  => '<i class="fa fa-plus"></i> '.elgg_echo('quiz:question:result:add'),
                         ));
                         ?>
                     </strong>

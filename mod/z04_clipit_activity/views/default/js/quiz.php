@@ -65,7 +65,9 @@ $.fn.quiz = function (options) {
                 if(!$(this).is(':checked')) {
                     table.find('tr[data-stumbling_block=' + stumbling_block + ']').remove();
                     if(table.find('tr[data-example]').length == 0){
+                        $(this).prop('disabled', true);
                         table.find('.close-table').click();
+                        $(this).prop('disabled', false);
                     }
                 } else {
                     elgg.getJSON('ajax/view/questions/examples', {
