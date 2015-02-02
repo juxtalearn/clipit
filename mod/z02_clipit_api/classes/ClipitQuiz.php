@@ -98,6 +98,21 @@ class ClipitQuiz extends UBItem {
         return $this->id;
     }
 
+    static function create_clone($id){
+        $prop_value_array = static::get_properties($id);
+        $quiz_question_array = $prop_value_array["quiz_question_array"];
+        if(!empty($quiz_question_array)){
+            $new_quiz_question_array = array();
+            foreach($quiz_question_array as $quiz_question_id){
+                $new_quiz_question_array[] = ClipitQuizQuestion::create_clone($quiz_question_id);
+            }
+            $prop_value_array["quiz_question_array"] = $new_quiz_question_array;
+        }
+        $clone_id = static::set_properties(null, $prop_value_array);
+        static::link_parent_clone($id, $clone_id);
+        return $clone_id;
+    }
+
     /**
      * Sets values to specified properties of an Item
      *
