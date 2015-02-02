@@ -98,6 +98,7 @@ $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($example->tricky_to
 </div>
 <hr>
 <?php echo elgg_view('examples/reflection_item/list', array('entities' => $example->reflection_item_array));?>
+<a name="resources"></a>
 <div>
     <?php echo elgg_view('page/components/title_block', array('title' => elgg_echo('activity:stas')));?>
     <div role="tabpanel">

@@ -11,12 +11,19 @@
  * @package         ClipIt
  */
 $example = elgg_extract('entity', $vars);
+$multimedia = array_merge(
+    $example->resource_array,
+    $example->video_array,
+    $example->file_array,
+    $example->storyboard_array
+);
 ?>
 <div class="row">
     <div class="col-md-6">
         <strong>
             <?php echo elgg_view('output/url', array(
                 'href'  => "tricky_topics/examples/view/{$example->id}",
+                'target' => '_blank',
                 'title' => $example->name,
                 'text'  =>  $example->name,
             ));
@@ -34,9 +41,10 @@ $example = elgg_extract('entity', $vars);
             ));
             ?>
             <?php echo elgg_view('output/url', array(
-                'href'  => 'javascript:;',
+                'href'  => "tricky_topics/examples/view/{$example->id}#resources",
+                'target' => '_blank',
                 'title' => 'Resources',
-                'text'  =>  '<i class="fa fa-image"></i> Resources (10)',
+                'text'  =>  '<i class="fa fa-image"></i> '.elgg_echo('activity:stas').' ('.count($multimedia).')',
             ));
             ?>
         </small>
@@ -63,55 +71,4 @@ $example = elgg_extract('entity', $vars);
     </div>
 </div>
 <?php echo elgg_view('examples/reflection_item/summary', array('entities' => $example->reflection_item_array));?>
-<div style="
-    background: #fff;
-    padding: 5px;
-    display: none;
-" class="col-md-12 reflection-list"><div style="
-    background: #f1f2f7;
-    padding: 10px;
-    margin-bottom: 5px;
-">
 
-        <div class="row">
-            <div class="col-md-6"><a class="blue c" style="
-    display: block;
-          ">Flawed causal reasoning </a><a style="
-    display: block;
-">Key characteristic conveys group membership</a><a style="
-    display: block;
-">Weak human-like or world-like analogy</a></div><div class="col-md-6"> <strong class="show">Intuitive Beliefs</strong><div class="content-block"><small>Informal, intuitive ways of thinking about the world. Strongly biased toward causal explanations</small></div></div></div>
-
-
-
-    </div>
-    <div style="
-    background: #f1f2f7;
-    padding: 10px;
-    margin-bottom: 5px;
-">
-
-        <div class="row">
-            <div class="col-md-6"><a style="
-    display: block;
-          ">Essential Concepts</a></div><div class="col-md-6"> <strong class="show">Intuitive Beliefs</strong><div class="content-block"><small>Informal, intuitive ways of thinking about the world. Strongly biased toward causal explanations</small></div></div></div>
-
-
-
-    </div>
-    <div style="
-    background: #f1f2f7;
-    padding: 10px;
-    margin-bottom: 5px;
-">
-
-        <div class="row">
-            <div class="col-md-6"><a style="
-    display: block;
-          ">Underpinning understandings</a><a style="
-    display: block;
-">Understanding of Scientific method, process and practice</a></div><div class="col-md-6"> <strong class="show">Intuitive Beliefs</strong><div class="content-block"><small>Informal, intuitive ways of thinking about the world. Strongly biased toward causal explanations</small></div></div></div>
-
-
-
-    </div></div>

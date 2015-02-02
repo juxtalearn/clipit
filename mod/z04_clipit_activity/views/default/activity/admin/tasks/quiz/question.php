@@ -125,12 +125,15 @@ if($question){
                         <?php endfor;?>
                     </div>
                 </div>
-                <?php echo elgg_view('tricky_topic/list', array(
-                    'tricky_topic' => 2868,
-                    'tags' => $tags,
-                    'show_tags' => 'checkbox',
-                ));
-                ?>
+                <div class="select-tags">
+                    <?php if($tricky_topic):?>
+                        <?php echo elgg_view('tricky_topic/list', array(
+                            'tricky_topic' => $tricky_topic,
+                            'tags' => $tags,
+                            'show_tags' => 'checkbox',
+                        )); ?>
+                    <?php endif; ?>
+                </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
@@ -271,159 +274,8 @@ if($question){
                         </th>
                     </tr>
                 </thead>
-                <tbody>
-                <tr data-example="" style="display: none;">
-                <td style="padding-top: 10px;" colspan="2">
-                    <div class="row">
-                        <div class="col-md-6 text-truncate">
-                            <strong>
-                                <a href="http://clipit.es/dev/tricky_topics/examples/view/3075" title="Esto es usable" rel="nofollow">Esto es usable</a>
-                            </strong>
-                            <small>
-                                <p>Concepto de como entienden los usuarios la usabilidad</p>
-                            </small>
-                        </div>
-                        <div class="row col-md-6">
-                            <div class="margin-bottom-10 col-md-7 text-truncate">
-                                <small class="show">Location</small>
-                                <a href="http://clipit.es/dev/tricky_topics/examples?subject=Universidad Autonoma" title="Universidad Autonoma" rel="nofollow">Universidad Autonoma de Madrid</a>
-                            </div>
-                            <div class="margin-bottom-10 col-md-5 text-truncate">
-                                <small class="show">Country</small>
-                                <a href="http://clipit.es/dev/tricky_topics/examples?subject=Universidad Autonoma" title="Spain" rel="nofollow">Spain</a>
-                            </div>
-                        </div>
-                    </div>
-
-                <div style="
-    background: #fff;
-    padding: 5px;
-    display: none;
-" class="col-md-12"><div style="
-    background: #d6f0fa;
-    padding: 10px;
-    margin-bottom: 5px;
-">
-
-                        <div class="row">
-                            <div class="col-md-6"><a style="
-    display: block;
-          ">Flawed causal reasoning </a><a style="
-    display: block;
-">Key characteristic conveys group membership</a><a style="
-    display: block;
-">Weak human-like or world-like analogy</a></div><div class="col-md-6"> <strong class="show">Intuitive Beliefs</strong><div class="content-block"><small>Informal, intuitive ways of thinking about the world. Strongly biased toward causal explanations</small></div></div></div>
-
-
-
-                    </div>
-                    <div class="margin-top-10" style="
-    margin-left: 20px;
-    display: none;
-"><div><strong>
-                                Underpinning understandings
-                            </strong><div class="text-muted margin-bottom-10">
-                                Understanding that the student is expected to know already. e.g. to do the calculations related to Avogadro’s number in Chemistry assumes a math understanding of powers of ten and ratios. Learning about genetic drift assumes an understanding of natural selection.                    </div></div>
-                        <div><strong>
-                                Underpinning understandings
-                            </strong><div class="text-muted margin-bottom-10">
-                                Understanding that the student is expected to know already. e.g. to do the calculations related to Avogadro’s number in Chemistry assumes a math understanding of powers of ten and ratios. Learning about genetic drift assumes an understanding of natural selection.                    </div></div><div><strong>
-                                Underpinning understandings
-                            </strong><div class="text-muted margin-bottom-10">
-                                Understanding that the student is expected to know already. e.g. to do the calculations related to Avogadro’s number in Chemistry assumes a math understanding of powers of ten and ratios. Learning about genetic drift assumes an understanding of natural selection.                    </div></div>
-                    </div>
-                    <div style="
-    background: #d6f0fa;
-    padding: 10px;
-    margin-bottom: 5px;
-">
-
-                        <div class="row">
-                            <div class="col-md-6"><a style="
-    display: block;
-          ">Essential Concepts</a></div><div class="col-md-6"> <strong class="show">Intuitive Beliefs</strong><div class="content-block"><small>Informal, intuitive ways of thinking about the world. Strongly biased toward causal explanations</small></div></div></div>
-
-
-
-                    </div>
-                    <div style="
-    background: #d6f0fa;
-    padding: 10px;
-    margin-bottom: 5px;
-">
-
-                        <div class="row">
-                            <div class="col-md-6"><a style="
-    display: block;
-          ">Underpinning understandings</a><a style="
-    display: block;
-">Understanding of Scientific method, process and practice</a></div><div class="col-md-6"> <strong class="show">Intuitive Beliefs</strong><div class="content-block"><small>Informal, intuitive ways of thinking about the world. Strongly biased toward causal explanations</small></div></div></div>
-
-
-
-                    </div></div>
-
-
-                </td>
-
-
-
-                </tr>
-                </tbody>
             </table>
             <!-- Examples related to Stumbling Blocks end -->
         </div>
     </div>
 </li>
-
-<script>
-$(function(){
-    $(document).on('click', '.select-all-tags', function(){
-        var container = $(this).parent('div'),
-            isChecked = $(this).prop('checked');
-        container.find('input[type=checkbox]').click();
-        container.find('input[type=checkbox]').prop('checked', isChecked);
-    });
-    $('.question').on('click', '.examples-list .btn-reflection', function(){
-        $(this).closest('td').find('.reflection-list').toggle();
-    });
-    $('.question').on('click', '.close-table', function(){
-        $(this).closest('.examples-list').hide();
-    });
-    $('.question').on('click', '.tags-list input[type=checkbox]', function(){
-        var stumbling_block = $(this).val(),
-            question = $(this).closest('.question'),
-            table = question.find('.examples-list');
-        if(!$(this).is(':checked')) {
-            table.find('tr[data-stumbling_block=' + stumbling_block + ']').remove();
-            if(table.find('tr[data-example]').is(':visible') == 0){
-//            if(table.find('tr[data-example]').length == 0){
-                table.find('.close-table').click();
-            }
-        } else {
-            elgg.getJSON('ajax/view/questions/examples', {
-                data: {
-                    'stumbling_block': stumbling_block
-                },
-                success: function (data) {
-                    if(data.length > 0){
-                        table.fadeIn();
-                    }
-                    $.each(data, function (i, item) {
-                        if (table.find('tr[data-example=' + item.example + ']').length == 0) {
-                            table.append(
-                                $('<tr/>')
-                                    .attr({
-                                        'data-example': item.example,
-                                        'data-stumbling_block': stumbling_block
-                                    })
-                                    .append('<td style="padding-top: 10px;" colspan="2">' + item.content + '</td>')
-                            );
-                        }
-                    });
-                }
-            });
-        }
-    });
-});
-</script>

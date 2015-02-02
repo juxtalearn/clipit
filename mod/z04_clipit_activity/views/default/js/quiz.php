@@ -51,6 +51,54 @@ $.fn.quiz = function (options) {
                     self.question.find(question_type).show();
                 }
             });
+            // Question Stumbling Blocks
+            self.question.find(".select-all-tags").on("click", function(){
+                var container = $(this).parent('div'),
+                    isChecked = $(this).prop('checked');
+                container.find('input[type=checkbox]').click();
+                container.find('input[type=checkbox]').prop('checked', isChecked);
+            });
+            $(self.question).on("click", ".tags-list input[type=checkbox]", function(){
+<!--            self.question.find(".tags-list input[type=checkbox]").on("click", function(){-->
+                var stumbling_block = $(this).val(),
+                    table = self.question.find('.examples-list');
+                if(!$(this).is(':checked')) {
+                    table.find('tr[data-stumbling_block=' + stumbling_block + ']').remove();
+                    if(table.find('tr[data-example]').length == 0){
+                        table.find('.close-table').click();
+                    }
+                } else {
+                    elgg.getJSON('ajax/view/questions/examples', {
+                    data: {
+                        'stumbling_block': stumbling_block
+                    },
+                    success: function (data) {
+                        if(data.length > 0){
+                            table.fadeIn();
+                        }
+                        $.each(data, function (i, item) {
+                            if (table.find('tr[data-example=' + item.example + ']').length == 0) {
+                                table.append(
+                                    $('<tr/>')
+                                        .attr({
+                                            'data-example': item.example,
+                                            'data-stumbling_block': stumbling_block
+                                        })
+                                        .append('<td style="padding-top: 10px;" colspan="2">' + item.content + '</td>')
+                                );
+                            }
+                        });
+                    }
+                    });
+                }
+            });
+            // Examples from Stumbling Blocks
+            $(self.question).on("click", ".examples-list .btn-reflection", function(){
+                $(this).closest('td').find('.reflection-list').toggle();
+            });
+            self.question.find(".close-table").on("click", function(){
+                $(this).closest('.examples-list').hide();
+            });
         };
         this.difficultySlider = function($elem){
             return $elem.slider({
@@ -159,6 +207,51 @@ $.fn.quiz = function (options) {
             });
         }
     };
+    // Select Tricky Topic
+    $quiz.on("change", ".select-tricky_topic", function(){
+        var tricky_topic = $(this).val();
+        $quiz.find(".add-question").hide();
+        if(tricky_topic == ''){
+            return false;
+        }
+        opt.tricky_topic = tricky_topic;
+        $quiz.find(".add-question").show();
+        if($quiz.find(".question").length > 0){
+            var confirmOptions = {
+                title: elgg.echo("question:areyousure"),
+                buttons: {
+                    confirm: {
+                        label: elgg.echo("input:yes")
+                    },
+                    cancel: {
+                        label: elgg.echo("input:no"),
+                        className: "btn-border-blue btn-default"
+                    }
+                },
+                message: "Si cambia de Tema Clave se borrarán las preguntas creadas",
+                callback: function(result) {
+                    if(result) {
+                        $quiz.find(".questions").html("");
+                        $quiz.find(".dynamic-table").html("").hide();
+                    }
+                }
+            };
+            bootbox.confirm(confirmOptions);
+        }
+//        elgg.post("ajax/view/tricky_topic/list", {
+//            data: {
+//                "tricky_topic": tricky_topic,
+//                "show_tags": "checkbox",
+//            },
+//            success: function(data){
+//                $quiz.find(".add-question").show();
+//                $quiz.find(".question").each(function(){
+//                    $(this).find(".select-tags").html(data);
+//                    $(this).find(".examples-list").hide().find("tr[data-example]").remove();
+//                });
+//            }
+//        });
+    });
     // Create a Question button
     that.find(".create-question").bind("click",function() {
         var q = new Question($(this));
@@ -183,7 +276,8 @@ $.fn.quiz = function (options) {
         });
     });
     // Question select from tag
-    that.on("click", ".from-tags", function(){
+    $quiz.on("click", ".from-tags", function(){
+<!--    that.on("click", ".from-tags", function(){-->
         var $that = $(this);
         $quiz.find(".dynamic-table").toggle();
         if($quiz.find("table.datatable").length > 0){

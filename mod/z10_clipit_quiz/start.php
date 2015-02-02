@@ -15,6 +15,9 @@ elgg_register_event_handler('init', 'system', 'clipit_quiz_init');
 function clipit_quiz_init() {
     // Register "/quizzes" page handler
     elgg_register_page_handler('quizzes', 'quiz_page_handler');
+    $plugin_dir = elgg_get_plugins_path() . "z10_clipit_quiz";
+    // Quiz
+    elgg_register_action("quiz/save", "{$plugin_dir}/actions/quiz/save.php");
     // Questions
     elgg_register_ajax_view('questions/summary');
     elgg_register_ajax_view('questions/examples');

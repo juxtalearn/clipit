@@ -54,9 +54,9 @@ endforeach;
                             if($item->category[$language_index] == $category):
                         ?>
                             <div class="margin-bottom-5" data-show="<?php echo $item->id;?>">
-                                <strong class="blue cursor-default">
+                                - <span class="blue cursor-default">
                                     <?php echo $item->item_name[$language_index]; ?>
-                                </strong>
+                                </span>
                             </div>
                         <?php
                             endif;

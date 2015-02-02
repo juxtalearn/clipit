@@ -10,6 +10,7 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
+$tricky_topics = elgg_extract('select_tricky_topic', $vars);
 
 $tricky_topic = 0;
 $tricky_topic = get_input('tricky_topic');
@@ -57,8 +58,47 @@ $(function(){
 });
 </script>
 <div class="quiz" data-quiz="<?php echo $id;?>">
+
 <div class="row">
     <div class="col-md-7">
+        <?php
+        if($tricky_topics):
+            $owner_tt = $tricky_topics['owner'];
+            $tt = $tricky_topics['others'];
+            $selected = $tricky_topics['selected'];
+            ?>
+            <div class="form-group">
+                <label><?php echo elgg_echo('tricky_topic');?></label>
+                <select
+                    required="required"
+                    class="form-control select-tricky_topic"
+                    name="<?php echo $input_prefix;?>[tricky_topic]"
+                    style="padding-top: 5px;padding-bottom: 5px;">
+
+                    <option value="">
+                        <?php echo elgg_echo('tricky_topic:select');?>
+                    </option>
+                    <?php if(count($owner_tt)>0):?>
+                        <optgroup label="<?php echo elgg_echo('tricky_topic:created_by_me');?>">
+                            <?php foreach($owner_tt as $value => $name):?>
+                                <option <?php echo $selected == $value ? 'selected' : '';?> value="<?php echo $value;?>">
+                                    <?php echo $name;?>
+                                </option>
+                            <?php endforeach;?>
+                        </optgroup>
+                    <?php endif;?>
+                    <?php if(count($tt)>0):?>
+                        <optgroup label="<?php echo elgg_echo('tricky_topic:created_by_others');?>">
+                            <?php foreach($tt as $value => $name):?>
+                                <option <?php echo $selected == $value ? 'selected' : '';?> value="<?php echo $value;?>">
+                                    <?php echo $name;?>
+                                </option>
+                            <?php endforeach;?>
+                        </optgroup>
+                    <?php endif;?>
+                </select>
+            </div>
+        <?php endif; ?>
         <div class="form-group">
             <label><?php echo elgg_echo('title');?></label>
             <?php echo elgg_view("input/text", array(
@@ -69,7 +109,7 @@ $(function(){
             ?>
         </div>
         <div class="form-group">
-            <label>Description</label>
+            <label><?php echo elgg_echo('description');?></label>
             <?php echo elgg_view("input/plaintext", array(
                 'name'  => "{$input_prefix}[description]",
                 'class' => 'form-control '.($entity->description ? 'mceEditor' : ''),
@@ -130,7 +170,7 @@ $(function(){
                 <div class="col-md-4">
                     <small><?php echo elgg_echo('time:minutes');?></small>
                     <?php
-                    $minutes = range(0, 60);
+                    $minutes = range(0, 45, 15);
                     echo elgg_view("input/dropdown", array(
                         'name' => $input_prefix.'[time][m]',
                         'style' => 'padding:5px;',
@@ -162,28 +202,28 @@ $(function(){
         $i++;
         endforeach;
         ?>
-    <?php else: ?>
-            <?php echo elgg_view('activity/admin/tasks/quiz/question', array(
-                'num' => 1,
-                'tricky-topic' => $tricky_topic,
-                'input_prefix' => $input_prefix
-            ));?>
+<!--    --><?php //else: ?>
+<!--            --><?php //echo elgg_view('activity/admin/tasks/quiz/question', array(
+//                'num' => 1,
+//                'tricky-topic' => $tricky_topic,
+//                'input_prefix' => $input_prefix
+//            ));?>
     <?php endif;?>
 </ul>
-<div>
+<div class="add-question" style="display: none;">
     <?php echo elgg_view('output/url', array(
         'href'  => "javascript:;",
-        'class' => 'btn btn-primary create-question btn-xs',
+        'class' => 'btn btn-primary create-question btn-sm',
         'text'  => '<i class="fa fa-plus"></i> '.elgg_echo('quiz:question:add'),
     ));
     ?>
-    <?php if($tricky_topic):?>
-        <?php echo elgg_echo('or');?>
-        <a class="btn btn-border-blue btn-primary from-tags btn-xs"><?php echo elgg_echo('quiz:select:from_tag');?></a>
-        <div class="dynamic-table margin-top-20" style="display: none;">
-            <i class="fa fa-spinner fa-spin blue fa-lg"></i>
-        </div>
-    <?php endif;?>
+<!--    --><?php //if($tricky_topic):?>
+    <?php echo elgg_echo('or');?>
+    <a class="btn btn-border-blue btn-primary from-tags btn-xs"><?php echo elgg_echo('quiz:select:from_tag');?></a>
+    <div class="dynamic-table margin-top-20" style="display: none;">
+        <i class="fa fa-spinner fa-spin blue fa-lg"></i>
+    </div>
+<!--    --><?php //endif;?>
 </div>
 </div>
 <style>

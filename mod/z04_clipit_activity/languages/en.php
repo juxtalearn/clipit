@@ -309,7 +309,7 @@ $english = array(
     // Quiz
     'quiz:result:send' => '',
     'difficulty' => 'Difficulty',
-    'quiz:select:from_tag' => 'Add questions related',
+    'quiz:select:from_tag' => 'Add related questions',
     'quiz:question' => 'Question',
     'quiz:questions' => 'Questions',
     'quiz:question:add' => 'Create a question',
