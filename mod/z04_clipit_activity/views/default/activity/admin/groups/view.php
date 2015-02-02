@@ -62,12 +62,6 @@ elgg_load_js("jquery:quicksearch");
         color: #bae6f6;
         top: 8px;
     }
-    .ui-sortable-placeholder{
-        position: relative;
-        background: #d6f0fa;
-        border: 1px solid #bae6f6;
-        visibility: visible !important;
-    }
     .ms-selectable .ms-list{
         height: 250px;
     }

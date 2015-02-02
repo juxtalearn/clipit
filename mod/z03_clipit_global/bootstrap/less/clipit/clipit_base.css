@@ -11378,8 +11378,10 @@ h6,
   vertical-align: middle;
   text-align: center;
 }
-.loading-block .fa-spin {
-  font-size: 40px !important;
+.loading-block .fa {
   position: initial !important;
   top: 0 !important;
+}
+.loading-block .fa-spin {
+  font-size: 40px !important;
 }

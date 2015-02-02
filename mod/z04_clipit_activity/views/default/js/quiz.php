@@ -11,13 +11,14 @@
  * @package         ClipIt
  */
 ?>
+<!--<script>-->
 $.fn.quiz = function (options) {
     var defaults = {};
     var opt =  $.extend({}, defaults, options),
         that = $(this),
         $quiz = $(this),
         $question = that.find('.question');
-    $questions = that.find('.questions');
+        $questions = that.find('.questions');
 
     function Question(object){
         var self = this;
@@ -89,6 +90,7 @@ $.fn.quiz = function (options) {
                 var from_tag = false,
                     value = null;
             }
+
             elgg.get('ajax/view/activity/admin/tasks/quiz/add_type',{
                 data: {
                     type: "question",
@@ -98,6 +100,9 @@ $.fn.quiz = function (options) {
                     input_prefix: opt.input_prefix
                 },
                 success: function(content){
+                    // Reorder questions
+                    self.sortableOrder();
+
                     var $content = $($.parseHTML(content));
                     if($quiz.find(".question").length > 0 ){
                         $quiz.find(".questions").append($content);
@@ -125,6 +130,7 @@ $.fn.quiz = function (options) {
         this.getNum = function(){
             return $quiz.find(".question").each(function(i){
                 $(this).find(".question-num").text((i+1) + ".");
+                $(this).find(".input-order").val(i+1);
             });
         };
         this.addResult = function(){
@@ -144,6 +150,14 @@ $.fn.quiz = function (options) {
                 }
             });
         };
+        this.sortableOrder = function(){
+            return $questions.sortable({
+                dropOnEmpty: true,
+                update: function(event, ui) {
+                    self.getNum();
+                }
+            });
+        }
     };
     // Create a Question button
     that.find(".create-question").bind("click",function() {

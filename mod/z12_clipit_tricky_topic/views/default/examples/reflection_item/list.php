@@ -29,7 +29,6 @@ foreach($items as $item) {
         <?php
         $i = 1;
         foreach($categories as $category => $description):
-//            $categories[$category] = $items;
             ?>
             <li role="presentation" class="<?php echo $i==1 ? 'active':'';?>">
                 <a href="#<?php echo elgg_get_friendly_title($category);?>" aria-controls="home" role="tab" data-toggle="tab">
@@ -76,29 +75,4 @@ foreach($items as $item) {
     $x++;
     endforeach;
     ?>
-    <div role="tabpanel" class="reflection-item tab-pane hide row" id="terminologyss" style="padding: 10px;">
-        <div class="col-md-7">
-            <strong>One term refers to multiple concepts</strong>
-            <div class="text-muted margin-bottom-10">
-                1_TEST_Different terms are used to refer to the same concept.
-                e.g. voltage is also referred to as potential difference.
-                Confusion between voltage and charge.
-            </div>
-            <strong>One term refers to multiple concepts</strong>
-            <div class="text-muted margin-bottom-10">
-                1_TEST_Different terms are used to refer to the same concept.
-                e.g. voltage is also referred to as potential difference.
-                Confusion between voltage and charge.
-            </div>
-        </div>
-        <div class="col-md-5">
-            <div class="reflect-description">
-                <strong>Terminology</strong>
-                <p>
-                    Problems with use of language and scientific terms, inconsistent and overlapping terminology.
-                </p>
-            </div>
-
-        </div>
-    </div>
 </div>

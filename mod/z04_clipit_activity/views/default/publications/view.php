@@ -69,7 +69,7 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
                             'id'    => 'labels_view',
                         ));
                         ?>
-                        <small class="blue text-truncate content-block" id="label_list">
+                        <small class="blue content-block" id="label_list">
                             <?php echo elgg_view("publications/labels/view", array('labels' => $entity->label_array)); ?>
                         </small>
                     </div>

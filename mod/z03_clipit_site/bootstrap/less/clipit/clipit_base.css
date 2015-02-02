@@ -7850,7 +7850,7 @@ li.list-item:last-child {
 }
 .module-activity_status .elgg-body {
   background-color: #bae6f6;
-  background-image: url('http://juxtalearn.org/sandbox/clipit_befe/mod/z03_clipit_site/graphics/bg-bar.png');
+  background-image: url('../../../graphics/bg-bar.png');
   background-position-x: -10px;
 }
 .module-activity_status .elgg-body .wrapper {
@@ -10995,6 +10995,9 @@ h6,
   position: initial !important;
   top: 0 !important;
 }
+.empty-block .fa {
+  font-size: 60px !important;
+}
 .border-blue {
   border: 1px solid #32b4e5;
 }
@@ -11055,6 +11058,12 @@ ul.tags-autocomplete > li > a:hover,
 ul.tags-autocomplete > li > a:focus {
   background: #32b4e5;
   color: #fff;
+}
+.ui-sortable-placeholder {
+  position: relative;
+  background: #d6f0fa;
+  border: 1px solid #bae6f6;
+  visibility: visible !important;
 }
 .ui-slider-horizontal {
   position: relative;

@@ -17,6 +17,7 @@ function clipit_quiz_init() {
     elgg_register_page_handler('quizzes', 'quiz_page_handler');
     // Questions
     elgg_register_ajax_view('questions/summary');
+    elgg_register_ajax_view('questions/examples');
 }
 
 /**

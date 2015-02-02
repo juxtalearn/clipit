@@ -19,7 +19,7 @@ $table_orders = elgg_extract('table_orders', $vars);
         <?php echo elgg_view("page/components/print_button");?>
     </div>
     <?php echo elgg_view('output/url', array(
-        'href'  => "tricky_topics/create",
+        'href'  => "create_activity",
         'class' => 'btn btn-primary margin-bottom-10',
         'title' => elgg_echo('create'),
         'text'  => elgg_echo('create'),

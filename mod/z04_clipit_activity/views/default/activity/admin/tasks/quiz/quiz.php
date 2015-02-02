@@ -145,7 +145,7 @@ $(function(){
         </div>
     </div>
 </div>
-<div class="questions">
+<ul class="questions">
     <?php if($entity):?>
         <?php
         $i = 1;
@@ -169,7 +169,7 @@ $(function(){
                 'input_prefix' => $input_prefix
             ));?>
     <?php endif;?>
-</div>
+</ul>
 <div>
     <?php echo elgg_view('output/url', array(
         'href'  => "javascript:;",

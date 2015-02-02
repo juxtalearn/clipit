@@ -36,7 +36,7 @@ $entity_id = elgg_extract('entity_id', $vars);
     ?>
     <?php echo elgg_view('input/submit',
         array(
-            'value' => elgg_echo('submit'),
+            'value' => elgg_echo('save'),
             'class' => "btn btn-primary"
         ));
     ?>

@@ -46,7 +46,7 @@ if($question){
 }
 ?>
 
-<div class="question row margin-bottom-10" data-id="<?php echo $id;?>">
+<li class="question row margin-bottom-10" data-id="<?php echo $id;?>">
     <?php if($num !== false):?>
     <div class="col-xs-1 text-right">
         <h3 class="text-muted margin-0 question-num">
@@ -61,9 +61,16 @@ if($question){
             ?>
         </div>
     </div>
+    <?php echo elgg_view("input/hidden", array(
+        'name' => $input_prefix.'[question]['.$id.'][order]',
+        'value' => $num,
+        'class' => 'input-order'
+    )); ?>
+
     <?php endif;?>
     <div class="<?php echo $num !== false ? "col-xs-11":"" ?>">
         <div style="padding: 10px; background: #fafafa;">
+        <i class="fa fa-reorder text-muted pull-right"></i>
         <?php
         $types = array(
             '' => 'Select',
@@ -250,32 +257,41 @@ if($question){
 
         </div>
             <!-- Examples related to Stumbling Blocks -->
-            <table class="table bg-white">
+            <table class="table bg-white examples-list" style="display: none;border: 1px solid #bae6f6;">
                 <thead>
                     <tr>
                         <th>Examples related to Stumbling blocks</th>
+                        <th class="text-right">
+                            <?php echo elgg_view('output/url', array(
+                                'href'  => "javascript:;",
+                                'class' => 'fa fa-times close-table red',
+                                'text'  => '',
+                            ));
+                            ?>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
-                <tr>
-
-                <td style="padding-top: 10px;">
+                <tr data-example="" style="display: none;">
+                <td style="padding-top: 10px;" colspan="2">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 text-truncate">
                             <strong>
                                 <a href="http://clipit.es/dev/tricky_topics/examples/view/3075" title="Esto es usable" rel="nofollow">Esto es usable</a>
                             </strong>
-                            <small class="show">
+                            <small>
                                 <p>Concepto de como entienden los usuarios la usabilidad</p>
                             </small>
                         </div>
                         <div class="row col-md-6">
-                            <div class="margin-bottom-10 col-md-7">
+                            <div class="margin-bottom-10 col-md-7 text-truncate">
                                 <small class="show">Location</small>
-                                <a href="http://clipit.es/dev/tricky_topics/examples?subject=Universidad Autonoma" title="Universidad Autonoma" rel="nofollow">Universidad Autonoma de Madrid</a>        </div>
-                            <div class="margin-bottom-10 col-md-5">
+                                <a href="http://clipit.es/dev/tricky_topics/examples?subject=Universidad Autonoma" title="Universidad Autonoma" rel="nofollow">Universidad Autonoma de Madrid</a>
+                            </div>
+                            <div class="margin-bottom-10 col-md-5 text-truncate">
                                 <small class="show">Country</small>
-                                <a href="http://clipit.es/dev/tricky_topics/examples?subject=Universidad Autonoma" title="Spain" rel="nofollow">Spain</a>        </div>
+                                <a href="http://clipit.es/dev/tricky_topics/examples?subject=Universidad Autonoma" title="Spain" rel="nofollow">Spain</a>
+                            </div>
                         </div>
                     </div>
 
@@ -358,4 +374,56 @@ if($question){
             <!-- Examples related to Stumbling Blocks end -->
         </div>
     </div>
-</div>
+</li>
+
+<script>
+$(function(){
+    $(document).on('click', '.select-all-tags', function(){
+        var container = $(this).parent('div'),
+            isChecked = $(this).prop('checked');
+        container.find('input[type=checkbox]').click();
+        container.find('input[type=checkbox]').prop('checked', isChecked);
+    });
+    $('.question').on('click', '.examples-list .btn-reflection', function(){
+        $(this).closest('td').find('.reflection-list').toggle();
+    });
+    $('.question').on('click', '.close-table', function(){
+        $(this).closest('.examples-list').hide();
+    });
+    $('.question').on('click', '.tags-list input[type=checkbox]', function(){
+        var stumbling_block = $(this).val(),
+            question = $(this).closest('.question'),
+            table = question.find('.examples-list');
+        if(!$(this).is(':checked')) {
+            table.find('tr[data-stumbling_block=' + stumbling_block + ']').remove();
+            if(table.find('tr[data-example]').is(':visible') == 0){
+//            if(table.find('tr[data-example]').length == 0){
+                table.find('.close-table').click();
+            }
+        } else {
+            elgg.getJSON('ajax/view/questions/examples', {
+                data: {
+                    'stumbling_block': stumbling_block
+                },
+                success: function (data) {
+                    if(data.length > 0){
+                        table.fadeIn();
+                    }
+                    $.each(data, function (i, item) {
+                        if (table.find('tr[data-example=' + item.example + ']').length == 0) {
+                            table.append(
+                                $('<tr/>')
+                                    .attr({
+                                        'data-example': item.example,
+                                        'data-stumbling_block': stumbling_block
+                                    })
+                                    .append('<td style="padding-top: 10px;" colspan="2">' + item.content + '</td>')
+                            );
+                        }
+                    });
+                }
+            });
+        }
+    });
+});
+</script>

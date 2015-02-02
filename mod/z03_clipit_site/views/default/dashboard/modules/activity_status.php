@@ -10,17 +10,17 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$entities = elgg_extract('entities', $vars);
-$activities = ClipitActivity::get_by_id($entities);
+$activities = elgg_extract('entities', $vars);
 ?>
 <div class="wrapper separator">
 <?php
+$activities_found = false;
 foreach($activities as $activity):
     if($activity->status != 'closed'):
-    $activity_progress = round(((time() - $activity->start)/($activity->end - $activity->start)) * 100);
-    if($activity_progress == 0){
-        $activity_progress = 5;
-    }
+        $activity_progress = round(((time() - $activity->start)/($activity->end - $activity->start)) * 100);
+        if($activity_progress == 0){
+            $activity_progress = 5;
+        }
 ?>
     <div class="bar" style="height: 35px;line-height: 35px;max-width:100%;width:<?php echo $activity_progress;?>%;background: #<?php echo $activity->color;?>;">
         <div>
