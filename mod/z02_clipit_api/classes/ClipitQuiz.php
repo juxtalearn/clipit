@@ -46,8 +46,10 @@ class ClipitQuiz extends UBItem {
     public $scores_url = "";
     public $author_name = "";
     public $view_mode = "";
-    public $max_time = 0; // Maximum time to perform the quiz since it's opened by a student (0 = unlimited)
-
+    /**
+     * @var int $max_time  Maximum time in seconds to perform the quiz since it's opened by a student (0 = unlimited)
+     */
+    public $max_time = 0;
     /**
      * Loads object parameters stored in Elgg
      *
