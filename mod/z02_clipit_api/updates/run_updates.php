@@ -1,5 +1,5 @@
 <?php
-$VERSION = "2.2.1";
+$VERSION = "2.2.2";
 $old_version = get_config("clipit_version");
 
 print_r("<p>Current version: $old_version<br>New version: $VERSION</p>");
@@ -10,6 +10,8 @@ if($VERSION === $old_version) return;
 $update_files = array(
     "2.2.0" => null,
     "2.2.1" => "update_2.2.1.php",
+    "2.2.2" => "update_2.2.2.php",
+    // add here future updates: version => file
 );
 
 if(!empty($old_version)) {
