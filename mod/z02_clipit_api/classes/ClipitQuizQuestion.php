@@ -57,6 +57,10 @@ class ClipitQuizQuestion extends UBItem {
      * @var int Difficulty of the QuizQuestion, in an integer scale from 1 to 10.
      */
     public $difficulty = 0;
+    /**
+     * @var int Order in which this QuizQuestion will be displayed to students
+     */
+    public $order = 0;
 
     /**
      * Loads object parameters stored in Elgg
@@ -72,6 +76,7 @@ class ClipitQuizQuestion extends UBItem {
         $this->option_type = (string)$elgg_entity->get("option_type");
         $this->video = (int)$elgg_entity->get("video");
         $this->difficulty = (int)$elgg_entity->get("difficulty");
+        $this->order = (int)$elgg_entity->get("order");
     }
 
     /**
@@ -86,6 +91,7 @@ class ClipitQuizQuestion extends UBItem {
         $elgg_entity->set("option_type", (string)$this->option_type);
         $elgg_entity->set("video", (int)$this->video);
         $elgg_entity->set("difficulty", (int)$this->difficulty);
+        $elgg_entity->set("order", (int)$this->order);
     }
 
     /**
