@@ -98,6 +98,13 @@ class ClipitQuiz extends UBItem {
         return $this->id;
     }
 
+    /**
+     * Clones a ClipitQuiz, including the contained ClipitQuizQuestions
+     *
+     * @param int $id ID of Quiz to clone
+     * @return bool|int ID of new cloned object
+     * @throws InvalidParameterException if error
+     */
     static function create_clone($id){
         $prop_value_array = static::get_properties($id);
         $quiz_question_array = $prop_value_array["quiz_question_array"];
