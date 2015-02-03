@@ -163,11 +163,11 @@ class UBItem {
         if(!$item = new static($id)) {
             return null;
         }
-        $value_array = array();
+        $prop_value_array = array();
         if(!empty($prop_array)) {
             foreach($prop_array as $prop) {
                 if(array_key_exists($prop, static::list_properties())) {
-                    $value_array[$prop] = $item->$prop;
+                    $prop_value_array[$prop] = $item->$prop;
                 } else {
                     throw new InvalidParameterException("ERROR: One or more property names do not exist.");
                 }
@@ -176,10 +176,11 @@ class UBItem {
             $prop_array = static::list_properties();
             do {
                 $prop = key($prop_array);
-                $value_array[$prop] = $item->$prop;
-            } while(next($prop_array) !== false);
+                $prop_value_array[$prop] = $item->$prop;
+                next($prop_array);
+            } while(key($prop_array) !== null);
         }
-        return $value_array;
+        return $prop_value_array;
     }
 
     /**
