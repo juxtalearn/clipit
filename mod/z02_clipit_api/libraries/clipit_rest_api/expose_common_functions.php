@@ -85,7 +85,13 @@ function expose_common_functions($api_suffix, $class_suffix) {
     );
     expose_function(
         $api_suffix . "get_by_id", $class_suffix . "get_by_id",
-        array("id_array" => array("type" => "array", "required" => true)), "Get instances by Id", 'GET', false, true
+        array(
+            "id_array" => array("type" => "array", "required" => true),
+            "limit" => array("type" => "int", "required" => false),
+            "offset" => array("type" => "int", "required" => false),
+            "order_by" => array("type" => "string", "required" => false),
+            "ascending" => array("type" => "bool", "required" => false)
+        ), "Get instances by Id", 'GET', false, true
     );
     expose_function(
         $api_suffix . "get_events", $class_suffix . "get_events", array(

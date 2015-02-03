@@ -398,19 +398,49 @@ class UBItem {
      *
      * @return static[] Returns an array of Objects
      */
-    static function get_by_id($id_array, $order_by_name = false) {
-        $object_array = array();
-        foreach($id_array as $id) {
-            if(elgg_entity_exists($id)) {
-                $object_array[(int)$id] = new static((int)$id);
-            } else {
-                $object_array[(int)$id] = null;
+    /**
+     * @param array $id_array Array of item IDs to get
+     * @param int $limit (optional) limit of items to get
+     * @param int $offset (optional) offset of items to get
+     * @param string $order_by (optional) order by a certain property
+     * @param bool $ascending (optional) order by ascending (default) or descending
+     * @return array(UBItem) array of UBItems filtered by the parameters given
+     */
+    static function get_by_id($id_array, $limit = 0, $offset = 0, $order_by = "", $ascending = true) {
+        $return_array = array();
+        if(!empty($order_by)){
+            // directly retrieve entities with name = $search_string
+            $elgg_entity_array = elgg_get_entities_from_metadata(
+                array(
+                    'guids' => $id_array,
+                    'type' => static::TYPE,
+                    'subtype' => static::SUBTYPE,
+                    'limit' => $limit,
+                    'offset' => $offset,
+                    'order_by_metadata' => array(
+                        "name" => $order_by,
+                        "direction" => ($ascending === true ? "ASC" : "DESC")
+                    )
+                )
+            );
+        } else {
+            $elgg_entity_array = elgg_get_entities(
+                array(
+                    'guids' => $id_array,
+                    'type' => static::TYPE,
+                    'subtype' => static::SUBTYPE,
+                    'limit' => $limit,
+                    'offset' => $offset,
+                    'sort_by' => "e.time_created"
+                )
+            );
+        }
+        if(!empty($elgg_entity_array)) {
+            foreach($elgg_entity_array as $elgg_entity) {
+                $return_array[(int)$elgg_entity->guid] = new static((int)$elgg_entity->guid, $elgg_entity);
             }
         }
-        if($order_by_name){
-            usort($object_array, 'static::sort_by_name');
-        }
-        return $object_array;
+        return $return_array;
     }
 
     /**
