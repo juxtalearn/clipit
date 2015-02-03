@@ -82,14 +82,25 @@ $rating = elgg_extract("rating", $vars);
                 <?php if($vars['actions']): ?>
                     <?php echo elgg_view("multimedia/owner_options", array('entity' => $video, 'type' => 'video')); ?>
                 <?php endif; ?>
-                <?php if($rating):?>
-                    <?php echo elgg_view("performance_items/summary", array(
-                        'entity' => $video,
-                        'show_check' => true,
-                        'class' => 'pull-right'
-                    ));
-                    ?>
-                <?php endif; ?>
+                <div class="pull-right text-right">
+                    <?php if($vars['send_site']):?>
+                    <div class="margin-bottom-5">
+                        <?php echo elgg_view('output/url', array(
+                            'href'  => $vars['href_site'].$video->id,
+                            'class' => 'btn btn-xs btn-primary',
+                            'text'  => '<i class="fa fa-globe"></i> '.elgg_echo('send:to_site')
+                        ));
+                        ?>
+                    </div>
+                    <?php endif; ?>
+                    <?php if($rating):?>
+                        <?php echo elgg_view("performance_items/summary", array(
+                            'entity' => $video,
+                            'show_check' => true,
+                        ));
+                        ?>
+                    <?php endif; ?>
+                </div>
                 <h4 class="text-truncate">
                     <?php echo elgg_view('output/url', array(
                         'href'  => $href_video,

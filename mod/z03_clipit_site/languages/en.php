@@ -5,6 +5,7 @@
  */
 
 $english = array(
+    'activities:active:none' => 'There are no active activities',
     'saved' => 'Saved',
     'date' => 'Date',
     'mine' => 'Mine',

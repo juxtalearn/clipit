@@ -14,6 +14,15 @@ $user = elgg_extract("entity", $vars);
 elgg_load_js("nvd3:d3_v2");
 elgg_load_js("nvd3");
 elgg_load_css("nvd3:css");
+
+$activities = ClipitUser::get_activities($user->id);
+$activities = ClipitActivity::get_by_id($activities);
+$active_activities = array();
+foreach($activities as $activity){
+    if($activity->status != 'closed'){
+        $active_activities[] = $activity;
+    }
+}
 ?>
 <div class="col-md-4 events-list">
     <?php echo elgg_view('dashboard/module', array(
@@ -30,30 +39,47 @@ elgg_load_css("nvd3:css");
 
 <div class="col-md-8">
     <div class="col-md-6">
-        <?php echo elgg_view('dashboard/module', array(
-            'name'      => 'activity_status',
-            'title'     => elgg_echo('activity:status'),
-            'content'   => elgg_view('dashboard/modules/activity_status', array(
-                'entities' => ClipitUser::get_activities($user->id)
-            )),
-        ));
-        ?>
-        <?php echo elgg_view('dashboard/module', array(
-            'name'      => 'group_activity',
-            'title'     => elgg_echo('group:activity'),
-            'content'   => elgg_view('page/components/loading_block', array('height' => '245px', 'text' => elgg_echo('loading:charts'))),
-        ));
+        <?php if(!empty($active_activities)):?>
+            <?php echo elgg_view('dashboard/module', array(
+                'name'      => 'activity_status',
+                'title'     => elgg_echo('activity:status'),
+                'content'   => elgg_view('dashboard/modules/activity_status', array(
+                    'entities' => $active_activities
+                )),
+            ));
+            ?>
+        <?php endif;?>
+        <?php
+        if(!empty($active_activities)){
+            echo elgg_view('dashboard/module', array(
+                'name'      => 'group_activity',
+                'title'     => elgg_echo('group:activity'),
+                'content'   => elgg_view('page/components/loading_block', array('height' => '245px', 'text' => elgg_echo('loading:charts'))),
+            ));
+        } else {
+            echo elgg_view('dashboard/module', array(
+                'name'      => 'group_activity_none',
+                'title'     => elgg_echo('group:activity'),
+                'content'   => elgg_view('page/components/not_found', array('height' => '245px', 'text' => elgg_echo('activities:active:none'))),
+            ));
+        }
         ?>
     </div>
     <div class="col-md-6">
+        <?php
+        $content = elgg_view('page/components/not_found', array('height' => '245px', 'text' => elgg_echo('activities:active:none')));
+        if(!empty($active_activities)){
+            $content = elgg_view('dashboard/modules/activity_admin',
+                array(
+                    'entities' => $active_activities
+                )
+            );
+        }
+        ?>
         <?php echo elgg_view('dashboard/module', array(
             'name'      => 'activity_admin',
             'title'     => elgg_echo('activity:overview'),
-            'content'   => elgg_view('dashboard/modules/activity_admin',
-                array(
-                    'entities' => ClipitUser::get_activities($user->id)
-                )
-            ),
+            'content'   => $content,
         ));
         ?>
     </div>

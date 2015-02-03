@@ -79,7 +79,7 @@ $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($example->tricky_to
         <div class="margin-bottom-10">
             <small class="show"><?php echo elgg_echo('location');?></small>
             <?php echo elgg_view('output/url', array(
-                'href'  => "tricky_topics/examples?subject={$example->location}",
+                'href'  => "tricky_topics/examples?location={$example->location}",
                 'title' => $example->location,
                 'text'  => $example->location,
             ));
@@ -88,7 +88,7 @@ $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($example->tricky_to
         <div class="margin-bottom-10">
             <small class="show"><?php echo elgg_echo('country');?></small>
             <?php echo elgg_view('output/url', array(
-                'href'  => "tricky_topics/examples?subject={$example->location}",
+                'href'  => "tricky_topics/examples?country={$example->country}",
                 'title' => get_countries_list($example->country),
                 'text'  => get_countries_list($example->country),
             ));
@@ -98,6 +98,7 @@ $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($example->tricky_to
 </div>
 <hr>
 <?php echo elgg_view('examples/reflection_item/list', array('entities' => $example->reflection_item_array));?>
+<a name="resources"></a>
 <div>
     <?php echo elgg_view('page/components/title_block', array('title' => elgg_echo('activity:stas')));?>
     <div role="tabpanel">

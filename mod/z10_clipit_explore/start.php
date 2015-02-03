@@ -72,9 +72,7 @@ function explore_page_handler($page) {
                     $tags = ClipitTag::get_by_id($tricky_topic->tag_array);
                     $tag_cloud = elgg_view("tricky_topic/tags/tag_cloud", array('tags' => $tags));
                     $content .= elgg_view_module('default', '', $tag_cloud, array('class' => 'module-tags'));
-
                     $activities = ClipitActivity::get_from_tricky_topic($tricky_topic->id);
-
 
                     if(!$tricky_topic){
                         $content = elgg_view('output/empty', array('value' => elgg_echo('tricky_topics:none')));

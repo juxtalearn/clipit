@@ -40,7 +40,8 @@ if($scope_entity){
     $tt = array_pop(ClipitTrickyTopic::get_by_id(array($activity->tricky_topic)));
     $tt_tags = $tt->tag_array;
     if($group_id = ClipitVideo::get_group($entity->id)) {
-        $tt_tags = array_diff($tt->tag_array, ClipitGroup::get_tags($group_id));
+        $group_tags = ClipitGroup::get_tags($group_id);
+        $tt_tags = array_diff($tt_tags, $group_tags);
     }
     $tags = $entity->tag_array;
     $performance_items = $entity->performance_item_array;
@@ -66,7 +67,7 @@ $language_index = ClipitPerformanceItem::get_language_index($user_language);
 ?>
 <script>
     $(function(){
-//        Load tinyMCE in textarea
+        // Load tinyMCE in textarea
         tinymce_setup();
         $(".chosen-select").chosen({disable_search_threshold: 1});
         $(".chosen-select-items").chosen();

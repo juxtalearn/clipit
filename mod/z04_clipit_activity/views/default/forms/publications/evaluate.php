@@ -47,13 +47,6 @@ $tricky_topic_view = elgg_view("tricky_topic/preview", array('activity' => $acti
 <h2 class="title-block"><?php echo elgg_echo('publications:evaluate');?></h2>
 <div class="row" style="background: #f1f2f7;padding: 20px;margin: 10px 0;">
     <div class="col-md-8">
-        <label for="overall">
-            * <?php echo elgg_echo('publications:question:tricky_topic',array($tricky_topic_view));?>
-        </label>
-        <?php echo elgg_view("input/hidden", array(
-            'name' => 'entity-id',
-            'value' => $entity->id,
-        )); ?>
         <?php echo elgg_view('input/radio', array(
             'name' => 'overall',
             'options' => array(
@@ -61,7 +54,15 @@ $tricky_topic_view = elgg_view("tricky_topic/preview", array('activity' => $acti
                 elgg_echo("input:no") => 0
             ),
             'required'  => true,
-            'class' => 'input-radios-horizontal blue',
+            'class' => 'input-radios-horizontal blue pull-right',
+        ));
+        ?>
+        <label for="overall content-block">
+            * <?php echo elgg_echo('publications:question:tricky_topic',array($tricky_topic_view));?>
+        </label>
+        <?php echo elgg_view("input/hidden", array(
+            'name' => 'entity-id',
+            'value' => $entity->id,
         )); ?>
         <span class="show" style="margin-bottom: 10px;">
             <?php echo elgg_echo('publications:question:if_covered');?>
@@ -119,10 +120,8 @@ $tricky_topic_view = elgg_view("tricky_topic/preview", array('activity' => $acti
         </div>
     </div>
     <div class="clearfix"></div>
-    <div class="margin-top-10">
-        <small><a>*</a> <?php echo elgg_echo('field:required');?></small>
-    </div>
     <div class="margin-top-20 col-md-12 text-right">
+        <small class="pull-left margin-top-5">* <?php echo elgg_echo('field:required');?></small>
         <?php echo elgg_view('input/submit',
             array(
                 'value' => elgg_echo('submit'),

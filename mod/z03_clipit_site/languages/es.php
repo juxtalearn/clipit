@@ -5,6 +5,7 @@
  */
 
 $spanish = array(
+    'activities:active:none' => 'Actualmente no hay actividades en curso',
     'saved' => 'Guardado',
     'date' => 'Fecha',
     'mine' => 'Míos',

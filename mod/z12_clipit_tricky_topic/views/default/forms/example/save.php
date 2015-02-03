@@ -302,8 +302,12 @@ if($example) {
                 foreach(ClipitReflectionItem::get_by_category(null, $user_language) as $category => $items):
                     $categories[$category] = $items;
                 ?>
-                    <li role="presentation" class="<?php echo $i==1 ? 'active':'';?>">
-                        <a href="#<?php echo elgg_get_friendly_title($category);?>" aria-controls="home" role="tab" data-toggle="tab">
+                    <li role="presentation" style="padding: 0;" class="col-md-3 <?php echo $i==1 ? 'active':'';?>">
+                        <a
+                            title="<?php echo $category;?>"
+                            class="text-truncate"
+                            href="#<?php echo elgg_get_friendly_title($category);?>"
+                            aria-controls="home" role="tab" data-toggle="tab">
                             <?php echo $category;?>
                         </a>
                     </li>
@@ -312,7 +316,6 @@ if($example) {
                 endforeach;
                 ?>
             </ul>
-
             <!-- Tab panes -->
             <div class="tab-content">
                 <?php

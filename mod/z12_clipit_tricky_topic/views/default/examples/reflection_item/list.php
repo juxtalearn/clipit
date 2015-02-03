@@ -18,6 +18,11 @@ foreach($items as $item) {
     $categories[$item->category[$language_index]] = $item->category_description[$language_index];
 }
 ?>
+<script>
+$(function () {
+    $('[data-toggle="popover"][data-trigger="hover"]').popover({trigger: 'hover'});
+});
+</script>
 <h4 class="margin-0"><?php echo elgg_echo('reflection_palette');?></h4>
 <small class="show margin-bottom-10">
     <?php echo elgg_echo('reflection_palette:question');?>
@@ -29,11 +34,14 @@ foreach($items as $item) {
         <?php
         $i = 1;
         foreach($categories as $category => $description):
-//            $categories[$category] = $items;
             ?>
             <li role="presentation" class="<?php echo $i==1 ? 'active':'';?>">
                 <a href="#<?php echo elgg_get_friendly_title($category);?>" aria-controls="home" role="tab" data-toggle="tab">
                     <?php echo $category;?>
+                    <span data-container="body" data-toggle="popover" data-trigger="hover"
+                          data-placement="bottom" data-content="<?php echo $description;?>">
+                        <i class="fa fa-question-circle"></i>
+                    </span>
                 </a>
             </li>
             <?php
@@ -49,7 +57,7 @@ foreach($items as $item) {
         foreach($categories as $category => $description):
         ?>
         <div role="tabpanel" class="<?php echo $x==1 ? 'active':'';?> reflection-item tab-pane row" id="<?php echo elgg_get_friendly_title($category);?>" style="padding: 10px;">
-            <div class="col-md-7">
+            <div class="col-md-12">
                 <?php
                 foreach($items as $item):
                     if($item->category[$language_index] == $category):
@@ -63,42 +71,9 @@ foreach($items as $item) {
                 endforeach;
                 ?>
             </div>
-            <div class="col-md-5">
-                <div class="reflect-description">
-                    <strong><?php echo $category;?></strong>
-                    <p>
-                        <?php echo $description;?>
-                    </p>
-                </div>
-            </div>
         </div>
     <?php
     $x++;
     endforeach;
     ?>
-    <div role="tabpanel" class="reflection-item tab-pane hide row" id="terminologyss" style="padding: 10px;">
-        <div class="col-md-7">
-            <strong>One term refers to multiple concepts</strong>
-            <div class="text-muted margin-bottom-10">
-                1_TEST_Different terms are used to refer to the same concept.
-                e.g. voltage is also referred to as potential difference.
-                Confusion between voltage and charge.
-            </div>
-            <strong>One term refers to multiple concepts</strong>
-            <div class="text-muted margin-bottom-10">
-                1_TEST_Different terms are used to refer to the same concept.
-                e.g. voltage is also referred to as potential difference.
-                Confusion between voltage and charge.
-            </div>
-        </div>
-        <div class="col-md-5">
-            <div class="reflect-description">
-                <strong>Terminology</strong>
-                <p>
-                    Problems with use of language and scientific terms, inconsistent and overlapping terminology.
-                </p>
-            </div>
-
-        </div>
-    </div>
 </div>

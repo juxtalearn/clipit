@@ -10,11 +10,9 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$entities = elgg_extract('entities', $vars);
-$activities = ClipitActivity::get_by_id($entities);
-// debug
-//$activities = ClipitActivity::get_by_id(array(3926));
+$activities = elgg_extract('entities', $vars);
 ?>
+
 <style>
 .panel-blue > .panel-heading{
     background: transparent;
@@ -50,7 +48,6 @@ $(function(){
 <?php
 foreach($activities as $activity):
     if($activity->status != 'closed'):
-
     $tasks = ClipitTask::get_by_id($activity->task_array);
     $activity_progress = round(((time() - $activity->start)/($activity->end - $activity->start)) * 100);
     if($activity_progress == 0){

@@ -30,10 +30,10 @@ $params_list = array(
     'pagination'    => false,
     'list_class'    => 'my-activities',
 );
-$content = elgg_view("activities/list", $params_list);
+$content = elgg_view("my_activities/list", $params_list);
 
 
-$filter = elgg_view('activities/filter', array('selected' => $selected_tab, 'entity' => $activity));
+$filter = elgg_view('my_activities/filter', array('selected' => $selected_tab, 'entity' => $activity));
 
 if(!$my_activities){
     $content = elgg_view('output/empty', array('value' => elgg_echo('activities:none')));

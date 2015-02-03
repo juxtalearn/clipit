@@ -46,7 +46,7 @@ if($question){
 }
 ?>
 
-<div class="question row margin-bottom-10" data-id="<?php echo $id;?>">
+<li class="question row margin-bottom-10" data-id="<?php echo $id;?>">
     <?php if($num !== false):?>
     <div class="col-xs-1 text-right">
         <h3 class="text-muted margin-0 question-num">
@@ -61,9 +61,16 @@ if($question){
             ?>
         </div>
     </div>
+    <?php echo elgg_view("input/hidden", array(
+        'name' => $input_prefix.'[question]['.$id.'][order]',
+        'value' => $num,
+        'class' => 'input-order'
+    )); ?>
+
     <?php endif;?>
     <div class="<?php echo $num !== false ? "col-xs-11":"" ?>">
         <div style="padding: 10px; background: #fafafa;">
+        <i class="fa fa-reorder text-muted pull-right"></i>
         <?php
         $types = array(
             '' => 'Select',
@@ -76,7 +83,7 @@ if($question){
         <div class="form-group row" style="padding: 10px;">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>Título de la pregunta</label>
+                    <label>Enunciado de la pregunta</label>
                     <?php echo elgg_view("input/text", array(
                         'name' => $input_prefix.'[question]['.$id.'][title]',
                         'class' => 'form-control',
@@ -86,7 +93,7 @@ if($question){
                     ?>
                 </div>
                 <div class="form-group">
-                    <label>Enunciado</label>
+                    <label>Información adicional</label>
                     <?php echo elgg_view("input/plaintext", array(
                         'name' => $input_prefix.'[question]['.$id.'][description]',
                         'value' => $question->description,
@@ -118,20 +125,15 @@ if($question){
                         <?php endfor;?>
                     </div>
                 </div>
-                <?php if($tt_tags):?>
-                <div class="form-group tags-question-select">
-                    <label><?php echo elgg_echo('tags');?></label>
-                    <select name="<?php echo $input_prefix;?>[question][<?php echo $id;?>][tags][]" data-placeholder="<?php echo elgg_echo('click_add');?>" style="width:100%;" multiple class="tags-select" tabindex="8">
-                        <option value=""></option>
-                        <?php
-                        foreach($tt_tags as $tag_id):
-                            $tag = array_pop(ClipitTag::get_by_id(array($tag_id)));
-                            ?>
-                            <option <?php echo in_array($tag_id, $tags) ? "selected" : "";?> value="<?php echo $tag->id;?>"><?php echo $tag->name;?></option>
-                        <?php endforeach;?>
-                    </select>
+                <div class="select-tags">
+                    <?php if($tricky_topic):?>
+                        <?php echo elgg_view('tricky_topic/list', array(
+                            'tricky_topic' => $tricky_topic,
+                            'tags' => $tags,
+                            'show_tags' => 'checkbox',
+                        )); ?>
+                    <?php endif; ?>
                 </div>
-                <?php endif;?>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
@@ -231,7 +233,7 @@ if($question){
                         <?php echo elgg_view('output/url', array(
                             'href'  => "javascript:;",
                             'class' => 'add-result',
-                            'text'  => '<i class="fa fa-plus"></i> Add Result',
+                            'text'  => '<i class="fa fa-plus"></i> '.elgg_echo('quiz:question:result:add'),
                         ));
                         ?>
                     </strong>
@@ -255,7 +257,25 @@ if($question){
                     ?>
                 </div>
             </div>
+
         </div>
+            <!-- Examples related to Stumbling Blocks -->
+            <table class="table bg-white examples-list" style="display: none;border: 1px solid #bae6f6;">
+                <thead>
+                    <tr>
+                        <th>Examples related to Stumbling blocks</th>
+                        <th class="text-right">
+                            <?php echo elgg_view('output/url', array(
+                                'href'  => "javascript:;",
+                                'class' => 'fa fa-times close-table red',
+                                'text'  => '',
+                            ));
+                            ?>
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+            <!-- Examples related to Stumbling Blocks end -->
         </div>
     </div>
-</div>
+</li>

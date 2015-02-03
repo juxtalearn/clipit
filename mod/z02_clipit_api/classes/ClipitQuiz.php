@@ -46,8 +46,10 @@ class ClipitQuiz extends UBItem {
     public $scores_url = "";
     public $author_name = "";
     public $view_mode = "";
-    public $max_time = 0; // Maximum time to perform the quiz since it's opened by a student (0 = unlimited)
-
+    /**
+     * @var int $max_time  Maximum time in seconds to perform the quiz since it's opened by a student (0 = unlimited)
+     */
+    public $max_time = 0;
     /**
      * Loads object parameters stored in Elgg
      *
@@ -96,6 +98,28 @@ class ClipitQuiz extends UBItem {
         static::set_tricky_topic($this->id, (int)$this->tricky_topic);
         static::set_quiz_questions($this->id, $this->quiz_question_array);
         return $this->id;
+    }
+
+    /**
+     * Clones a ClipitQuiz, including the contained ClipitQuizQuestions
+     *
+     * @param int $id ID of Quiz to clone
+     * @return bool|int ID of new cloned object
+     * @throws InvalidParameterException if error
+     */
+    static function create_clone($id){
+        $prop_value_array = static::get_properties($id);
+        $quiz_question_array = $prop_value_array["quiz_question_array"];
+        if(!empty($quiz_question_array)){
+            $new_quiz_question_array = array();
+            foreach($quiz_question_array as $quiz_question_id){
+                $new_quiz_question_array[] = ClipitQuizQuestion::create_clone($quiz_question_id);
+            }
+            $prop_value_array["quiz_question_array"] = $new_quiz_question_array;
+        }
+        $clone_id = static::set_properties(null, $prop_value_array);
+        static::link_parent_clone($id, $clone_id);
+        return $clone_id;
     }
 
     /**
