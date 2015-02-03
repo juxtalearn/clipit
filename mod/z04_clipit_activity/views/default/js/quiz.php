@@ -210,12 +210,16 @@ $.fn.quiz = function (options) {
         }
     };
     // Select Tricky Topic
-    $quiz.on("change", ".select-tricky_topic", function(){
-        var tricky_topic = $(this).val();
+    var previous_value = '';
+    $quiz.on("focus", ".select-tricky_topic", function(e){
+         previous_value = $(this).val();
+        }).on("change", function() {
+        var tricky_topic = $quiz.find(".select-tricky_topic option:selected").val();
         $quiz.find(".add-question").hide();
         if(tricky_topic == ''){
             return false;
         }
+
         opt.tricky_topic = tricky_topic;
         $quiz.find(".add-question").show();
         if($quiz.find(".question").length > 0){
@@ -235,24 +239,13 @@ $.fn.quiz = function (options) {
                     if(result) {
                         $quiz.find(".questions").html("");
                         $quiz.find(".dynamic-table").html("").hide();
+                    } else {
+                        $quiz.find(".select-tricky_topic option[value="+previous_value+"]").prop("selected", true);
                     }
                 }
             };
             bootbox.confirm(confirmOptions);
         }
-//        elgg.post("ajax/view/tricky_topic/list", {
-//            data: {
-//                "tricky_topic": tricky_topic,
-//                "show_tags": "checkbox",
-//            },
-//            success: function(data){
-//                $quiz.find(".add-question").show();
-//                $quiz.find(".question").each(function(){
-//                    $(this).find(".select-tags").html(data);
-//                    $(this).find(".examples-list").hide().find("tr[data-example]").remove();
-//                });
-//            }
-//        });
     });
     // Create a Question button
     that.find(".create-question").bind("click",function() {

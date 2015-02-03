@@ -30,9 +30,9 @@ $(function(){
     $(document).on("click", ".show-questions", function(){
         var tr = $(this).closest("tr")
             id = $(this).attr("id"),
-            tr_example = $("[data-tag="+id+"]");
-        if(tr_example.length > 0){
-            tr_example.toggle();
+            tr_quiz = $("[data-quiz="+id+"]");
+        if(tr_quiz.length > 0){
+            tr_quiz.toggle();
             return false;
         }
         elgg.get('ajax/view/questions/summary',{

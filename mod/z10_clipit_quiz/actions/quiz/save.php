@@ -89,10 +89,10 @@ $quiz_data = array(
     'view_mode' => $quiz['view'],
     'max_time' => $total_time
 );
-$href = REFERER;
 if($quiz_id = $quiz['id']){
 //    Save Quiz
     ClipitQuiz::set_properties($quiz_id, $quiz_data);
+    $href = 'quizzes/view/'.$quiz_id;
 } else {
 //    Create Quiz
     $quiz_id = ClipitQuiz::create($quiz_data);

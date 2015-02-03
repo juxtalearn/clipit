@@ -94,6 +94,20 @@ function quiz_page_handler($page){
                 array('data-validate' => 'true'),
                 array('submit_value' => elgg_echo('create'))
             );
+            if($id = $page[1]){
+                $quiz_id = ClipitQuiz::create_clone($id);
+                $quiz = array_pop(ClipitQuiz::get_by_id(array($quiz_id)));
+                elgg_pop_breadcrumb($title);
+                elgg_push_breadcrumb($quiz->name, "quizzes/view/{$quiz->id}");
+                $title = elgg_echo('duplicate');
+                elgg_push_breadcrumb($title);
+                $content = elgg_view_form('quiz/save',
+                    array('data-validate' => 'true'),
+                    array(
+                        'entity' => $quiz,
+                        'submit_value' => elgg_echo('create')
+                    ));
+            }
             break;
         default:
             return false;

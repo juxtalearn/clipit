@@ -37,17 +37,6 @@ if($entity = elgg_extract('entity', $vars)){
     ));
 }
 
-function get_questions_from_tag($tag){
-    $return_array = array();
-    $all_items = ClipitQuizQuestion::get_all(0, 0, "", true, true); // Get all item ids, not objects
-    foreach($all_items as $item_id) {
-        $item_tags = (array)ClipitQuizQuestion::get_tags((int)$item_id);
-        if(array_search($tag, $item_tags) !== false) {
-            $return_array[] = $item_id;
-        }
-    }
-    return $return_array;
-}
 $tags = ClipitTrickyTopic::get_tags($tricky_topic);
 $id = uniqid();
 ?>
@@ -205,12 +194,6 @@ $(function(){
         $i++;
         endforeach;
         ?>
-<!--    --><?php //else: ?>
-<!--            --><?php //echo elgg_view('activity/admin/tasks/quiz/question', array(
-//                'num' => 1,
-//                'tricky-topic' => $tricky_topic,
-//                'input_prefix' => $input_prefix
-//            ));?>
     <?php endif;?>
 </ul>
 <div class="add-question" style="display: <?php echo $entity ? 'block' : 'none'?>;">
