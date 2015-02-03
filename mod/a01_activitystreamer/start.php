@@ -28,7 +28,7 @@ function activitystreamer_init()
         "(object_id, object_title, transaction_id, object_class, object_type, object_subtype, event, time, ip_address, user_id, user_name, access_id, enabled, owner_guid, content, group_id, course_id, activity_id, role) " .
         "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
     include_once(elgg_get_plugins_path() . "a01_activitystreamer/lib/ActivityStreamer.php");
-
+    elgg_register_admin_menu_item('configure', 'activitystreamer', 'settings');
 }
 
 function createTables()
@@ -376,4 +376,4 @@ elgg_register_action('activitystreamer/modify', elgg_get_plugins_path() . "a01_a
 elgg_register_action('activitystreamer/flush', elgg_get_plugins_path() . "a01_activitystreamer/actions/flush.php");
 elgg_register_action('activitystreamer/rebuild', elgg_get_plugins_path() . "a01_activitystreamer/actions/rebuild.php");
 elgg_register_action('activitystreamer/request', elgg_get_plugins_path() . "a01_activitystreamer/actions/request.php");
-elgg_register_admin_menu_item('configure', 'activitystreamer', 'settings');
+elgg_set_config("la_metrics_class", "ActivityStreamer");
