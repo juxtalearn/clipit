@@ -15,10 +15,11 @@ $tricky_topics = elgg_extract('select_tricky_topic', $vars);
 $tricky_topic = 0;
 $tricky_topic = get_input('tricky_topic');
 $input_prefix = elgg_extract('input_prefix', $vars);
-if($activity_id = elgg_extract('activity_id', $vars)){
-    $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
-    $tricky_topic = $activity->tricky_topic;
-}
+//if($activity_id = elgg_extract('activity_id', $vars)){
+//    $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
+//    $tricky_topic = $activity->tricky_topic;
+//}
+
 
 if($input_prefix) {
     $input_prefix = $input_prefix . "[quiz]";
@@ -28,6 +29,7 @@ if($input_prefix) {
 
 $questions = array(1);
 if($entity = elgg_extract('entity', $vars)){
+    $tricky_topic = $entity->tricky_topic;
     $questions = ClipitQuiz::get_quiz_questions($entity->id);
     echo elgg_view("input/hidden", array(
         'name' => $input_prefix.'[id]',
@@ -65,7 +67,7 @@ $(function(){
         if($tricky_topics):
             $owner_tt = $tricky_topics['owner'];
             $tt = $tricky_topics['others'];
-            $selected = $tricky_topics['selected'];
+            $selected = $tricky_topic;
             ?>
             <div class="form-group">
                 <label><?php echo elgg_echo('tricky_topic');?></label>
@@ -170,7 +172,7 @@ $(function(){
                 <div class="col-md-4">
                     <small><?php echo elgg_echo('time:minutes');?></small>
                     <?php
-                    $minutes = range(0, 45, 15);
+                    $minutes = array_combine(range(0, 45, 15), range(0, 45, 15));
                     echo elgg_view("input/dropdown", array(
                         'name' => $input_prefix.'[time][m]',
                         'style' => 'padding:5px;',
@@ -189,8 +191,9 @@ $(function(){
     <?php if($entity):?>
         <?php
         $i = 1;
-        foreach($questions as $question_id):
-            $question = array_pop(ClipitQuizQuestion::get_by_id(array($question_id)));
+        $questions = ClipitQuizQuestion::get_by_id($questions, 0, 0, 'order');
+        foreach($questions as $question):
+            $question = array_pop(ClipitQuizQuestion::get_by_id(array($question->id)));
         ?>
             <?php echo elgg_view('activity/admin/tasks/quiz/question/list', array(
                 'num' => $i,
@@ -210,7 +213,7 @@ $(function(){
 //            ));?>
     <?php endif;?>
 </ul>
-<div class="add-question" style="display: none;">
+<div class="add-question" style="display: <?php echo $entity ? 'block' : 'none'?>;">
     <?php echo elgg_view('output/url', array(
         'href'  => "javascript:;",
         'class' => 'btn btn-primary create-question btn-sm',

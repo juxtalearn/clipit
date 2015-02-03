@@ -14,7 +14,7 @@ $groups = elgg_extract('groups', $vars);
 ?>
 <?php
 foreach($groups as $group):
-    $group_users = ClipitUser::get_by_id($group->user_array, $order_by_name = true);
+    $group_users = ClipitUser::get_by_id($group->user_array, 0, 0, 'name');
     $id = uniqid();
     $tags = array();
     $tags = ClipitGroup::get_tags($group->id);

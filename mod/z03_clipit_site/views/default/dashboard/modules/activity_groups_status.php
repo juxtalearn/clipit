@@ -43,7 +43,7 @@ foreach($activities as $activity):
                         <?php
                         $num_group = 1;
                         $group_ids = ClipitActivity::get_groups($activity->id);
-                        $groups = ClipitGroup::get_by_id($group_ids, $order_by_name = true);
+                        $groups = ClipitGroup::get_by_id($group_ids, 0, 0, 'name');
                         foreach($groups as $group){
                             $value = get_group_progress($group->id);
                             echo "{ 'label': 'G{$num_group}', 'value':{$value}, 'ctext':'{$group->name}'},";

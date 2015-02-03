@@ -92,14 +92,14 @@ $(function(){
             <td>
                 <?php if($user->id == elgg_get_logged_in_user_guid()):?>
                     <?php echo elgg_view('output/url', array(
-                        'href'  => "tricky_topics/edit/{$quiz->id}",
+                        'href'  => "quizzes/edit/{$quiz->id}",
                         'class' => 'btn btn-xs btn-primary',
                         'title' => elgg_echo('edit'),
                         'text'  => '<i class="fa fa-edit"></i>',
                     ));
                     ?>
                     <?php echo elgg_view('output/url', array(
-                        'href'  => "action/tricky_topic/remove?id={$quiz->id}",
+                        'href'  => "action/quiz/remove?id={$quiz->id}",
                         'class' => 'btn btn-xs btn-danger remove-object',
                         'is_action' => true,
                         'title' => elgg_echo('delete'),
@@ -108,7 +108,7 @@ $(function(){
                     ?>
                 <?php endif;?>
                 <?php echo elgg_view('output/url', array(
-                    'href'  => "tricky_topics/create/{$quiz->id}",
+                    'href'  => "quizzes/create/{$quiz->id}",
                     'class' => 'btn btn-xs btn-primary btn-border-blue',
                     'title' => elgg_echo('duplicate'),
                     'text'  => '<i class="fa fa-copy"></i>',

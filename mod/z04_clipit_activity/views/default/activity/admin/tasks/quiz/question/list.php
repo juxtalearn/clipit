@@ -17,7 +17,7 @@ $question = elgg_extract('question', $vars);
 $input_prefix = elgg_extract('input_prefix', $vars);
 $tt_tags = ClipitTrickyTopic::get_tags($tricky_topic);
 ?>
-<div class="row margin-bottom-10">
+<li class="row margin-bottom-10 question" data-id="<?php echo $id;?>">
     <div class="col-xs-1 text-right">
         <h3 class="text-muted margin-0 margin-top-5 question-num">
             <?php echo $num;?>.
@@ -40,6 +40,7 @@ $tt_tags = ClipitTrickyTopic::get_tags($tricky_topic);
                     'onclick' => '$(this).closest(\'.question\').remove();',
                 ));
                 ?>
+                <i class="fa fa-reorder text-muted margin-left-20 reorder-question"></i>
             </div>
             <span><strong><?php echo $question->name;?></strong></span>
             <div id="question_<?php echo $question->id;?>" style="display: none">
@@ -52,4 +53,4 @@ $tt_tags = ClipitTrickyTopic::get_tags($tricky_topic);
             </div>
         </div>
     </div>
-</div>
+</li>

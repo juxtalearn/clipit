@@ -28,7 +28,6 @@ function clipit_quiz_init() {
  */
 function quiz_page_handler($page){
     $filter = '';
-
     switch($page[0]){
         case '':
             $title = elgg_echo('quizzes');
@@ -50,6 +49,22 @@ function quiz_page_handler($page){
             $count = count($entities);
             $entities = array_slice($entities, clipit_get_offset(), clipit_get_limit(10));
             $content = elgg_view('quiz/list', array('entities' => $entities, 'count' => $count));
+            break;
+        case 'edit':
+            // Edit Quiz
+            if(!$id = $page[1]){
+                return false;
+            }
+            $quiz = array_pop(ClipitQuiz::get_by_id(array($id)));
+            $filter = '';
+            elgg_push_breadcrumb(elgg_echo('quizzes'), "quizzes");
+            elgg_push_breadcrumb($quiz->name, "quizzes/view/{$quiz->id}");
+            $title = elgg_echo('edit');
+            elgg_push_breadcrumb($title);
+            $content = elgg_view_form('quiz/save',
+                array('data-validate' => 'true'),
+                array('entity' => $quiz, 'submit_value' => elgg_echo('save')
+                ));
             break;
         case 'questions':
             elgg_push_breadcrumb(elgg_echo('quizzes'), "quizzes");

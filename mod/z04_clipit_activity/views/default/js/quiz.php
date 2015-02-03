@@ -25,6 +25,8 @@ $.fn.quiz = function (options) {
         this.question;
         this.question_type_selected;
         this._init = function(){
+            // Reorder questions
+            self.sortableOrder();
             self.getNum();
             // Trigger events
             self.question.find(".remove-question").on("click", function(){
@@ -55,19 +57,18 @@ $.fn.quiz = function (options) {
             self.question.find(".select-all-tags").on("click", function(){
                 var container = $(this).parent('div'),
                     isChecked = $(this).prop('checked');
+                $(this).prop('disabled', true);
                 container.find('input[type=checkbox]').click();
                 container.find('input[type=checkbox]').prop('checked', isChecked);
+                $(this).prop('disabled', false);
             });
             $(self.question).on("click", ".tags-list input[type=checkbox]", function(){
-<!--            self.question.find(".tags-list input[type=checkbox]").on("click", function(){-->
                 var stumbling_block = $(this).val(),
                     table = self.question.find('.examples-list');
                 if(!$(this).is(':checked')) {
                     table.find('tr[data-stumbling_block=' + stumbling_block + ']').remove();
                     if(table.find('tr[data-example]').length == 0){
-                        $(this).prop('disabled', true);
                         table.find('.close-table').click();
-                        $(this).prop('disabled', false);
                     }
                 } else {
                     elgg.getJSON('ajax/view/questions/examples', {
@@ -150,8 +151,6 @@ $.fn.quiz = function (options) {
                     input_prefix: opt.input_prefix
                 },
                 success: function(content){
-                    // Reorder questions
-                    self.sortableOrder();
 
                     var $content = $($.parseHTML(content));
                     if($quiz.find(".question").length > 0 ){
@@ -203,6 +202,7 @@ $.fn.quiz = function (options) {
         this.sortableOrder = function(){
             return $questions.sortable({
                 dropOnEmpty: true,
+                handle: '.fa-reorder',
                 update: function(event, ui) {
                     self.getNum();
                 }

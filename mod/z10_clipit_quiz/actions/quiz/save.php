@@ -10,5 +10,94 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-print_r($_POST);
-die;
+
+$quiz = get_input('quiz');
+// Set questions to Quiz
+$questions = $quiz['question'];
+$questions_id = array();
+
+foreach($questions as $question){
+    $values = array();
+    $validations = array();
+    $tags = array();
+    switch($question['type']){
+        case ClipitQuizQuestion::TYPE_SELECT_MULTI:
+            foreach($question['select_multi'] as $select){
+                $values[] = $select['value'];
+                if(isset($select['correct'])){
+                    $validations[] = 1;
+                } else {
+                    $validations[] = 0;
+                }
+            }
+            break;
+        case ClipitQuizQuestion::TYPE_SELECT_ONE:
+            foreach($question['select_one'] as $select){
+                $values[] = $select['value'];
+                if(isset($select['correct'])){
+                    $validations[] = 1;
+                } else {
+                    $validations[] = 0;
+                }
+            }
+            break;
+        case ClipitQuizQuestion::TYPE_TRUE_FALSE:
+            $a = array_fill(0, 2, 0);
+            switch($question['true_false']){
+                case 'true':
+                    $a[0] = 1;
+                    break;
+                case 'false':
+                    $a[1] = 1;
+                    break;
+            }
+            $validations = $a;
+            break;
+        case ClipitQuizQuestion::TYPE_NUMBER:
+            $validations[] = $question['number'];
+            break;
+    }
+    $tags = array_filter($question['tags']);
+    $question_data = array(
+        'name' => $question['title'],
+        'description' => $question['description'],
+        'order' => $question['order'],
+        'difficulty' => $question['difficulty'],
+        'option_type' => $question['type'],
+        'option_array' => $values,
+        'validation_array' => $validations,
+        'tag_array' => $tags
+    );
+    if($question['id']) {
+        $questions_id[] = $question['id'];
+        ClipitQuizQuestion::set_properties($question['id'], $question_data);
+    } else {
+        // new QuizQuestion
+        $question_id = ClipitQuizQuestion::create($question_data);
+        $questions_id[] = $question_id;
+        if($question['id_parent']){
+            ClipitQuizQuestion::link_parent_clone($question['id_parent'], $question_id);
+        }
+    }
+}
+$time = $quiz['time'];
+$total_time = (int)($time['d']*86400) + ($time['h']*3600) + ($time['m']*60);
+$quiz_data = array(
+    array(
+        'name' => $quiz['title'],
+        'description' => $quiz['description'],
+        'tricky_topic' => $quiz['tricky_topic'],
+        'view_mode' => $quiz['view'],
+        'max_time' => $total_time
+    )
+);
+if($quiz_id = $quiz['id']){
+//    Save Quiz
+    ClipitQuiz::set_properties($quiz_id, $quiz_data);
+} else {
+//    Create Quiz
+    $quiz_id = ClipitQuiz::create($quiz_data);
+}
+
+ClipitTask::set_properties($task_id, array('quiz' => $quiz_id));
+ClipitQuiz::add_quiz_questions($quiz_id, $questions_id);

@@ -12,6 +12,7 @@
  */
 $user = array_pop(ClipitUser::get_by_id(array(elgg_get_logged_in_user_guid())));
 $button_value = elgg_extract('submit_value', $vars);
+$quiz = elgg_extract('entity', $vars);
 
 $tricky_topics = ClipitTrickyTopic::get_all();
 $owner_tt = array();
@@ -24,9 +25,10 @@ foreach($tricky_topics as $tricky_topic){
 $tt = array_diff($tt, $owner_tt);
 ?>
 <?php echo elgg_view('activity/admin/tasks/quiz/quiz', array(
+    'entity' => $quiz,
     'select_tricky_topic' => array('owner' => $owner_tt, 'others' => $tt)
 ));?>
-<div class="text-right">
+<div class="text-right margin-top-20">
     <?php echo elgg_view('input/submit', array(
         'class' => 'btn btn-primary',
         'value'  => $button_value,

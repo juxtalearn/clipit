@@ -12,7 +12,7 @@
  */
 $activity = elgg_extract('entity', $vars);
 $users = ClipitUser::get_by_id($activity->student_array);
-$groups = ClipitGroup::get_by_id($activity->group_array , $order_by_name = true);
+$groups = ClipitGroup::get_by_id($activity->group_array , 0, 0, 'name');
 elgg_load_js("jquery:multiselect");
 elgg_load_js("jquery:quicksearch");
 ?>

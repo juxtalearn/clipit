@@ -13,11 +13,12 @@
 $tricky_topic_id = get_input('tricky_topic');
 $show_tags = get_input('show_tags');
 $tags = get_input('tags');
-
+$input_name = 'tags_checked[]';
 if($from_view = elgg_extract('tricky_topic', $vars)){
     $tricky_topic_id = $from_view;
     $show_tags = elgg_extract('show_tags', $vars);
     $tags = elgg_extract('tags', $vars);
+    $input_name = elgg_extract('input_name', $vars);
 }
 
 $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($tricky_topic_id)));
@@ -36,7 +37,7 @@ $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($tricky_topic_id)))
             }
         ?>
             <label style="font-weight: normal;">
-                <input type="checkbox" <?php echo $checked;?> name="tags_checked[]" value="<?php echo $tag->id;?>" class="pull-left" style="margin-right: 10px;">
+                <input type="checkbox" <?php echo $checked;?> name="<?php echo $input_name;?>" value="<?php echo $tag->id;?>" class="pull-left" style="margin-right: 10px;">
                 <span class="overflow-hidden"><?php echo $tag->name;?></span>
             </label>
             <div class="clearfix"></div>

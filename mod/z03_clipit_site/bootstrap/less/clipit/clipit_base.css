@@ -10995,6 +10995,9 @@ h6,
   position: initial !important;
   top: 0 !important;
 }
+.fa-reorder {
+  cursor: all-scroll;
+}
 .empty-block .fa {
   font-size: 60px !important;
 }
@@ -11064,6 +11067,10 @@ ul.tags-autocomplete > li > a:focus {
   background: #d6f0fa;
   border: 1px dotted #bae6f6;
   visibility: visible !important;
+}
+.ui-sortable-helper {
+  background: #fff;
+  border: 1px dotted #bae6f6;
 }
 .ui-slider-horizontal {
   position: relative;

@@ -54,15 +54,19 @@ $(function(){
         }
     });
     $(function(){
-        $(".reflection-item label").hover(function(){
-            var container = $(this).closest(".reflection-item");
-            container.find(".reflect-description").hide();
-            container.find("[data-reflect_item="+$(this).attr("id")+"]").show();
-        },function(){
-            var container = $(this).closest(".reflection-item");
-            container.find(".reflect-description").hide();
-            container.find(".reflect-description:first").show();
-        });
+        $(document).on({
+            mouseenter: function () {
+                var container = $(this).closest(".reflection-item");
+                container.find(".reflect-description").hide();
+                container.find("[data-reflect_item="+$(this).attr("id")+"]").show();
+            },
+            mouseleave: function () {
+                var container = $(this).closest(".reflection-item");
+                container.find(".reflect-description").hide();
+                container.find(".reflect-description:first").show();
+            }
+        }, ".reflection-item label");
+
         $(document).on("click", ".add-input", function(){
             var container = $(this).closest(".form-group").find(".group-input"),
                 input_clone = container.find('.clone-input:last').clone();

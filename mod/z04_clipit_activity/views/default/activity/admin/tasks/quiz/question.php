@@ -45,8 +45,9 @@ if($question){
     }
 }
 ?>
-
+<?php if($num !== false):?>
 <li class="question row margin-bottom-10" data-id="<?php echo $id;?>">
+<?php endif; ?>
     <?php if($num !== false):?>
     <div class="col-xs-1 text-right">
         <h3 class="text-muted margin-0 question-num">
@@ -61,16 +62,17 @@ if($question){
             ?>
         </div>
     </div>
+    <?php endif;?>
     <?php echo elgg_view("input/hidden", array(
         'name' => $input_prefix.'[question]['.$id.'][order]',
         'value' => $num,
         'class' => 'input-order'
     )); ?>
-
-    <?php endif;?>
     <div class="<?php echo $num !== false ? "col-xs-11":"" ?>">
         <div style="padding: 10px; background: #fafafa;">
-        <i class="fa fa-reorder text-muted pull-right"></i>
+        <?php if($num !== false):?>
+            <i class="fa fa-reorder text-muted pull-right reorder-question"></i>
+        <?php endif; ?>
         <?php
         $types = array(
             '' => 'Select',
@@ -131,6 +133,7 @@ if($question){
                             'tricky_topic' => $tricky_topic,
                             'tags' => $tags,
                             'show_tags' => 'checkbox',
+                            'input_name' => $input_prefix.'[question]['.$id.'][tags][]'
                         )); ?>
                     <?php endif; ?>
                 </div>
@@ -278,4 +281,6 @@ if($question){
             <!-- Examples related to Stumbling Blocks end -->
         </div>
     </div>
+<?php if($num !== false):?>
 </li>
+<?php endif; ?>

@@ -47,32 +47,34 @@ endforeach;
     margin-bottom: 5px;
 ">
 
-                <div class="row">
+                <div class="row reflection-item">
                     <div class="col-md-6">
                         <?php
                         foreach($items as $item):
                             if($item->category[$language_index] == $category):
                         ?>
-                            <div class="margin-bottom-5" data-show="<?php echo $item->id;?>">
+                            <label class="margin-bottom-5" id="<?php echo $item->id;?>" style="font-weight: normal;">
                                 - <span class="blue cursor-default">
                                     <?php echo $item->item_name[$language_index]; ?>
                                 </span>
-                            </div>
+                            </label>
                         <?php
                             endif;
                         endforeach;
                         ?>
                     </div>
                     <div class="col-md-6">
+                        <div class="reflect-description">
                         <strong class="show"><?php echo $category;?></strong>
                         <div>
                             <small><?php echo $description;?></small>
+                        </div>
                         </div>
                         <?php
                         foreach($items as $item):
                             if($item->category[$language_index] == $category):
                         ?>
-                            <div class="text-muted margin-bottom-10" id="<?php echo $item->id;?>" style="display: none;">
+                            <div class="reflect-description text-muted margin-bottom-10 bg-info" data-reflect_item="<?php echo $item->id;?>" style="display: none;">
                                 <?php echo $item->item_description[$language_index]; ?>
                             </div>
                         <?php
