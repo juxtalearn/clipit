@@ -18,6 +18,7 @@ function clipit_quiz_init() {
     $plugin_dir = elgg_get_plugins_path() . "z10_clipit_quiz";
     // Quiz
     elgg_register_action("quiz/save", "{$plugin_dir}/actions/quiz/save.php");
+    elgg_register_action("quiz/remove", "{$plugin_dir}/actions/quiz/remove.php");
     // Questions
     elgg_register_ajax_view('questions/summary');
     elgg_register_ajax_view('questions/examples');

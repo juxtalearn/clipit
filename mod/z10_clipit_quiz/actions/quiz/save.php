@@ -83,21 +83,23 @@ foreach($questions as $question){
 $time = $quiz['time'];
 $total_time = (int)($time['d']*86400) + ($time['h']*3600) + ($time['m']*60);
 $quiz_data = array(
-    array(
-        'name' => $quiz['title'],
-        'description' => $quiz['description'],
-        'tricky_topic' => $quiz['tricky_topic'],
-        'view_mode' => $quiz['view'],
-        'max_time' => $total_time
-    )
+    'name' => $quiz['title'],
+    'description' => $quiz['description'],
+    'tricky_topic' => $quiz['tricky_topic'],
+    'view_mode' => $quiz['view'],
+    'max_time' => $total_time
 );
+$href = REFERER;
 if($quiz_id = $quiz['id']){
 //    Save Quiz
     ClipitQuiz::set_properties($quiz_id, $quiz_data);
 } else {
 //    Create Quiz
     $quiz_id = ClipitQuiz::create($quiz_data);
+    $href = 'quizzes';
 }
 
-ClipitTask::set_properties($task_id, array('quiz' => $quiz_id));
-ClipitQuiz::add_quiz_questions($quiz_id, $questions_id);
+ClipitQuiz::set_quiz_questions($quiz_id, $questions_id);
+
+system_message(elgg_echo('quiz:created'));
+forward($href);

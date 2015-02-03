@@ -14,6 +14,9 @@ $english = array(
     'quizzes' => 'Quizzes',
     'quiz:name' => 'Quiz name',
     'quiz:create' => 'Create quiz',
+    'quiz:removed' => 'Quiz removed',
+    'quiz:cantremove' => 'Can not remove Quiz',
+    'quiz:created' => 'Quiz created',
 );
 
 add_translation('en', $english);

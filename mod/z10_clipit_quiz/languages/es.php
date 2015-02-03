@@ -14,6 +14,9 @@ $spanish = array(
     'quizzes' => 'Tests',
     'quiz:name' => 'Título del test',
     'quiz:create' => 'Crear test',
+    'quiz:removed' => 'Test eliminado',
+    'quiz:cantremove' => 'No se ha podido eliminar el test',
+    'quiz:created' => 'Test creado',
 );
 
 add_translation('es', $spanish);
