@@ -408,6 +408,9 @@ class UBItem {
      */
     static function get_by_id($id_array, $limit = 0, $offset = 0, $order_by = "", $ascending = true) {
         $return_array = array();
+        if(empty($id_array)){
+            return $return_array;
+        }
         if(!empty($order_by)){
             // directly retrieve entities with name = $search_string
             $elgg_entity_array = elgg_get_entities_from_metadata(
