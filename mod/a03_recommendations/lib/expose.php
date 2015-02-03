@@ -16,7 +16,7 @@ function expose_recommendation_engine()
     expose_function($api_suffix . "get_recommended_lsd_videos", $class_suffix . "get_recommended_lsd_videos", array(
         "users" => array("type" => "array", "required" => true),
         "number_of_items" => array("type" => "int", "required" => false),
-    ), "Get a sorted array of recommended videos ranked by their suitability.", "GET", false, true);
+    ), "Get a sorted array of recommended public videos ranked by their suitability.", "GET", false, true);
 
     expose_function($api_suffix . "get_recommended_videos", $class_suffix . "get_recommended_videos", array(
         "user_id" => array("type" => "int", "required" => true),

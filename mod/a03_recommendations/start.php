@@ -7,6 +7,7 @@ function recommendations_init()
     include_once(elgg_get_plugins_path(). "a03_recommendations/lib/expose.php");
     expose_recommendation_engine();
     elgg_register_page_handler('recommendations', 'recommendations_page_handler');
+    elgg_register_admin_menu_item('configure', 'recommendations', 'settings');
 
 }
 
@@ -48,6 +49,5 @@ function recommendation_shutdown()
 elgg_register_event_handler('init','system','recommendations_init');
 elgg_register_action('recommendations/modify', elgg_get_plugins_path() . "a03_recommendations/actions/modify.php");
 elgg_register_action('recommendations/test', elgg_get_plugins_path() . "a03_recommendations/actions/test.php");
-elgg_register_admin_menu_item('configure', 'recommendations', 'settings');
 elgg_set_config("la_recommendations_class", "RecommendationEngine");
 register_shutdown_function('recommendation_shutdown');
