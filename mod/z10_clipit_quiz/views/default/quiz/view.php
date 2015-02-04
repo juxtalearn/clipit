@@ -48,7 +48,7 @@ $(function() {
         ?>
         <?php if($quiz->description):?>
         <small class="show margin-top-10"><?php echo elgg_echo('description');?></small>
-        <div class="margin-top-1">
+        <div style="max-height: 150px;overflow-y: auto;">
             <?php echo $quiz->description;?>
         </div>
         <?php endif;?>
@@ -88,7 +88,7 @@ $(function() {
         </small>
         <div class="margin-bottom-10">
             <small class="show">Tipo de vista</small>
-            En varias páginas
+            <?php echo elgg_echo('quiz:view_page:'.$quiz->view_mode);?>
         </div>
         <div class="margin-bottom-10">
             <small class="show">Tiempo máximo para hacer el test</small>

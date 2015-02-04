@@ -52,7 +52,7 @@ $(function(){
 <table class="table table-striped">
     <thead>
     <tr>
-        <th><?php echo elgg_echo('title');?>/<?php echo elgg_echo('tags');?></th>
+        <th><?php echo elgg_echo('title');?></th>
         <th><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
         <th><?php echo elgg_echo('tricky_topic');?></th>
         <th style="width: 100px;"><?php echo elgg_echo('options');?></th>
@@ -64,7 +64,6 @@ $(function(){
         $user = array_pop(ClipitUser::get_by_id(array($quiz->owner_id)));
         $questions = ClipitQuiz::get_quiz_questions($quiz->id);
         $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($quiz->tricky_topic)));
-        $clone = ClipitQuiz::get_cloned_from($quiz->id);
     ?>
         <tr>
             <td>
@@ -76,20 +75,6 @@ $(function(){
                     ));
                     ?>
                 </strong>
-                <?php
-                if($clone):
-                    $quiz_clone = array_pop(ClipitQuiz::get_by_id(array($clone)));
-                ?>
-                <small class="show margin-top-5">
-                    <i class="fa fa-copy margin-right-5"></i>
-                    <?php echo elgg_view('output/url', array(
-                        'href'  => "quizzes/view/{$quiz_clone->id}",
-                        'title' => $quiz_clone->name,
-                        'text'  => $quiz_clone->name,
-                    ));
-                    ?>
-                </small>
-                <?php endif;?>
             </td>
             <td>
                 <small>

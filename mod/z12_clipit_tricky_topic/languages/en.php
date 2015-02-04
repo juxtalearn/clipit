@@ -24,7 +24,7 @@ $english = array(
     'tricky_topic:edit' => 'Edit Tricky Topic',
     // Examples
     'example:name' => 'Example name',
-    'examples' => 'Examples',
+    'examples' => 'Problem examples',
     'examples:none' => 'No examples',
     'example:add' => 'Add example',
     'example:create' => 'Create example',

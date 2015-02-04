@@ -18,6 +18,8 @@ $spanish = array(
     'quiz:removed' => 'Test eliminado',
     'quiz:cantremove' => 'No se ha podido eliminar el test',
     'quiz:created' => 'Test creado',
+    'quiz:view_page:list' => 'Una página',
+    'quiz:view_page:paged' => 'Varias páginas',
 );
 
 add_translation('es', $spanish);

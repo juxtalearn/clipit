@@ -10,7 +10,6 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$href = elgg_extract('href', $vars);
 $base_url = elgg_http_remove_url_query_element(current_page_url(), 'offset');
 
 $tabs = array(

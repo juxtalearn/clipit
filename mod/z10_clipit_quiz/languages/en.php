@@ -18,6 +18,8 @@ $english = array(
     'quiz:removed' => 'Quiz removed',
     'quiz:cantremove' => 'Can not remove Quiz',
     'quiz:created' => 'Quiz created',
+    'quiz:view_page:list' => 'One page',
+    'quiz:view_page:paged' => 'Paginated',
 );
 
 add_translation('en', $english);

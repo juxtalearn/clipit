@@ -13,7 +13,7 @@
 
 $quiz = get_input('quiz');
 $question_ids = ClipitQuiz::get_quiz_questions($quiz);
-$questions = ClipitQuizQuestion::get_by_id($question_ids);
+$questions = ClipitQuizQuestion::get_by_id($question_ids, 0, 0, 'order');
 ?>
 <style>
     input[disabled]{

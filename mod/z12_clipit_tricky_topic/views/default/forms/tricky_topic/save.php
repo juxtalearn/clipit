@@ -40,7 +40,7 @@ if($tricky_topic){
             ?>
         </div>
         <div class="form-group">
-            <label><?php echo elgg_echo('title');?></label>
+            <label><?php echo elgg_echo('name');?></label>
             <?php echo elgg_view('input/text', array(
                 'class' => 'form-control',
                 'name' => 'title',

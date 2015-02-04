@@ -24,6 +24,8 @@ function clipit_final_init(){
     // Register & load events lib
     elgg_register_library('clipit:recommended:events', "{$plugin_dir}/lib/recommended/events.php");
     elgg_load_library('clipit:recommended:events');
+    elgg_register_library('clipit:site:functions', "{$plugin_dir}/lib/functions.php");
+    elgg_load_library('clipit:site:functions');
 
     // Activity admin module ajax
     elgg_register_ajax_view('dashboard/modules/activity_admin/task_list');
@@ -32,6 +34,8 @@ function clipit_final_init(){
     elgg_register_action('login', "{$plugin_dir}/actions/login.php", 'public');
     elgg_register_action('logout', "{$plugin_dir}/actions/logout.php");
     elgg_register_action('register', "{$plugin_dir}/actions/register.php", 'public');
+
+    elgg_register_action("filter_search", "{$plugin_dir}/actions/filter_search.php");
 
     elgg_register_action('user/requestnewpassword', "{$plugin_dir}/actions/user/requestnewpassword.php", 'public');
     elgg_register_action('user/passwordreset', "{$plugin_dir}/actions/user/passwordreset.php", 'public');

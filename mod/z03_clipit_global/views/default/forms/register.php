@@ -18,7 +18,7 @@ if (elgg_is_sticky_form('register')) {
 
 ?>
     <div class="mtm">
-        <label for="name"><?php echo elgg_echo('name'); ?></label>
+        <label for="name"><?php echo elgg_echo('user:name'); ?></label>
         <?php
         echo elgg_view('input/text', array(
             'name' => 'name',

@@ -38,7 +38,9 @@ function clipit_tricky_topic_init() {
  */
 function tt_page_handler($page){
     elgg_load_js('clipit:tricky_topic');
-    $sidebar = elgg_view_module('aside', elgg_echo('menu'), elgg_view('tricky_topics/sidebar/menu'),
+    $sidebar = elgg_view_module('aside', elgg_echo('menu'),
+        elgg_view('tricky_topics/sidebar/menu').
+        elgg_view('quiz/sidebar/menu'),
         array('class' => 'activity-group-block margin-bottom-10 aside-tree')
     );
     $selected_tab = get_input('filter', 'all');
@@ -90,7 +92,7 @@ function tt_page_handler($page){
             $entities = array_slice($entities, clipit_get_offset(), clipit_get_limit(10));
 
             $to_order = array(
-                'name' => elgg_echo('title'),
+                'name' => elgg_echo('name'),
                 'education_level' => elgg_echo('education_level'),
                 'subject' => elgg_echo('tricky_topic:subject'),
             );
@@ -111,7 +113,7 @@ function tt_page_handler($page){
             }
             $entities = array_slice($entities, clipit_get_offset(), clipit_get_limit());
             $to_order = array(
-                'name' => elgg_echo('title'),
+                'name' => elgg_echo('name'),
             );
             $table_orders = table_order($to_order, $order_by, $sort);
             $content = elgg_view('stumbling_blocks/list', array(
@@ -147,7 +149,7 @@ function tt_page_handler($page){
             }
             $entities = array_slice($entities, clipit_get_offset(), clipit_get_limit(10));
             $to_order = array(
-                'name' => elgg_echo('title'),
+                'name' => elgg_echo('name'),
                 'tricky_topic' => elgg_echo('tricky_topic'),
             );
             $table_orders = table_order($to_order, $order_by, $sort);

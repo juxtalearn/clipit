@@ -35,7 +35,7 @@ if($example) {
 <div class="margin-bottom-10" id="form-add-tricky-topic">
     <div class="col-md-7">
         <div class="form-group">
-            <label><?php echo elgg_echo('title');?></label>
+            <label><?php echo elgg_echo('name');?></label>
             <?php echo elgg_view("input/text", array(
                 'name' => 'title',
                 'class' => 'form-control',

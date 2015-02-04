@@ -13,9 +13,11 @@
 elgg_register_event_handler('init', 'system', 'clipit_quiz_init');
 
 function clipit_quiz_init() {
+    $plugin_dir = elgg_get_plugins_path() . "z10_clipit_quiz";
+    elgg_register_library('clipit:quiz:functions', "{$plugin_dir}/lib/functions.php");
+    elgg_load_library('clipit:quiz:functions');
     // Register "/quizzes" page handler
     elgg_register_page_handler('quizzes', 'quiz_page_handler');
-    $plugin_dir = elgg_get_plugins_path() . "z10_clipit_quiz";
     // Quiz
     elgg_register_action("quiz/save", "{$plugin_dir}/actions/quiz/save.php");
     elgg_register_action("quiz/remove", "{$plugin_dir}/actions/quiz/remove.php");
@@ -29,13 +31,18 @@ function clipit_quiz_init() {
  */
 function quiz_page_handler($page){
     $filter = '';
-    $sidebar = elgg_view_module('aside', elgg_echo('filter'),
+    $sidebar = elgg_view_module('aside', elgg_echo('menu'),
+        elgg_view('tricky_topics/sidebar/menu').
+        elgg_view('quiz/sidebar/menu'),
+        array('class' => 'activity-group-block margin-bottom-10 aside-tree')
+    );
+    $sidebar .= elgg_view_module('aside', elgg_echo('filter'),
         elgg_view_form(
-            'quizzes',
+            'filter_search',
             array(
-                'disable_security' => true,
-                'action' => 'quizzes',
-                'method' => 'GET',
+//                'disable_security' => true,
+//                'action' => 'quiz/search',
+                'method' => 'POST',
                 'id' => 'add_labels',
                 'style' => 'background: #fff;padding: 15px;',
                 'body' => elgg_view('forms/quiz/filter')
@@ -46,9 +53,16 @@ function quiz_page_handler($page){
             $title = elgg_echo('quizzes');
             $selected_tab = get_input('filter', 'all');
             $filter = elgg_view('quiz/filter', array('selected' => $selected_tab, 'href' => $page[0]));
-            $entities = ClipitQuiz::get_all();
-            $count = count($entities);
-            $entities = array_slice($entities, clipit_get_offset(), clipit_get_limit(10));
+
+            if($search = get_input('s')) {
+                $entities = quiz_filter_search($search);
+                $count = count($entities);
+                $entities = ClipitQuiz::get_by_id($entities, clipit_get_limit(10),clipit_get_offset());
+            } else {
+                $entities = ClipitQuiz::get_all(clipit_get_limit(10), clipit_get_offset());
+                $count = count(ClipitQuiz::get_all(0, 0, "", true, true));
+            }
+
             $content = elgg_view('quiz/list', array('entities' => $entities, 'count' => $count));
             break;
         case 'edit':

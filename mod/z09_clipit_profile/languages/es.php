@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 $spanish = array(
+    'user:name' => 'Nombre completo',
     'user:username' => 'Nombre',
     'user:log_in' => 'Usuario',
     'user:password' => 'Contraseña',

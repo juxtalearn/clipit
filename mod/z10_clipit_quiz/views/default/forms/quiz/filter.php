@@ -10,38 +10,29 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$tags = get_input('tags');
-?>
-<?php
 echo elgg_view("input/hidden", array(
-    'name' => 'tags',
-    'id' => 'input_tags',
-    'value' => $tags
+    'name' => 'page',
+    'value' => 'quizzes'
 ));
 ?>
 <div class="form-group">
     <label class="text-muted"><?php echo elgg_echo('quiz:name');?></label>
     <?php echo elgg_view("input/text", array(
-        'name' => 'quiz',
+        'name' => 'search[name]',
         'class' => 'form-control',
-        'value' => get_input('quiz')
+        'value' => get_search_input('name')
     ));
     ?>
 </div>
 <div class="form-group">
     <label class="text-muted"><?php echo elgg_echo('tricky_topic');?></label>
     <?php echo elgg_view("input/text", array(
-        'name' => 'tricky_topic',
+        'name' => 'search[tricky_topic]',
         'class' => 'form-control',
-        'value' => get_input('tricky_topic')
+        'value' => get_search_input('tricky_topic')
     ));
     ?>
 </div>
-<div class="form-group">
-    <label class="text-muted"><?php echo elgg_echo('tags');?></label>
-    <ul id="tags"></ul>
-</div>
-
 <div class="text-right">
     <?php echo elgg_view('input/submit', array(
         'class' => 'btn btn-primary btn-sm',

@@ -123,8 +123,8 @@ $(function(){
                 'value' => $entity->view_mode,
                 'class' => 'form-control',
                 'options_values' => array(
-                    ClipitQuiz::VIEW_MODE_LIST => 'En una página',
-                    ClipitQuiz::VIEW_MODE_PAGED => 'En varias páginas'
+                    ClipitQuiz::VIEW_MODE_LIST => elgg_echo('quiz:view_page:'.ClipitQuiz::VIEW_MODE_LIST),
+                    ClipitQuiz::VIEW_MODE_PAGED => elgg_echo('quiz:view_page:'.ClipitQuiz::VIEW_MODE_PAGED)
                 )
             ));
             ?>

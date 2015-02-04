@@ -17,7 +17,7 @@ if ($user) {
 		'value' => $user->name,
 	));
     $content = elgg_view("input/form_group", array(
-        'label' => elgg_echo('name').':',
+        'label' => elgg_echo('user:name').':',
         'name'  => $input_name,
         'input' => $input
     ));

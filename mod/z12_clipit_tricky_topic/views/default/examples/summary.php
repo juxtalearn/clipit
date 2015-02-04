@@ -20,7 +20,7 @@ if(!$examples){
 <table class="table">
     <thead>
     <tr>
-        <th><?php echo elgg_echo('title');?></th>
+        <th><?php echo elgg_echo('name');?></th>
         <th><?php echo elgg_echo('location');?></th>
         <th><?php echo elgg_echo('country');?></th>
     </tr>
