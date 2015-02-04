@@ -216,7 +216,8 @@ if($question){
                             <?php
                             $i = 0;
                             if($question->option_type == ClipitQuizQuestion::TYPE_SELECT_MULTI):
-                                foreach($options as $key => $value):?>
+                                foreach($options as $key => $value):
+                            ?>
                                     <?php echo elgg_view('activity/admin/tasks/quiz/types/select_multi',
                                         array(
                                             'id' => $id,

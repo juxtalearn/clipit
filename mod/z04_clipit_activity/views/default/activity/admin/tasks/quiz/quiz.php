@@ -10,6 +10,7 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
+elgg_load_js("jquery:dynatable");
 $tricky_topics = elgg_extract('select_tricky_topic', $vars);
 
 $tricky_topic = 0;

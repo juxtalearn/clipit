@@ -26,7 +26,6 @@ $.fn.quiz = function (options) {
         this.question_type_selected;
         this._init = function(){
             // Reorder questions
-            self.sortableOrder();
             self.getNum();
             // Trigger events
             self.question.find(".remove-question").on("click", function(){
@@ -177,6 +176,7 @@ $.fn.quiz = function (options) {
             return self.getNum();
         };
         this.getNum = function(){
+            self.sortableOrder();
             return $quiz.find(".question").each(function(i){
                 $(this).find(".question-num").text((i+1) + ".");
                 $(this).find(".input-order").val(i+1);
@@ -211,9 +211,10 @@ $.fn.quiz = function (options) {
     };
     // Select Tricky Topic
     var previous_value = '';
-    $quiz.on("focus", ".select-tricky_topic", function(e){
+    $quiz.find(".select-tricky_topic").focus(function() {
+<!--    $quiz.on("focus", ".select-tricky_topic", function(e){-->
          previous_value = $(this).val();
-        }).on("change", function() {
+        }).change(function() {
         var tricky_topic = $quiz.find(".select-tricky_topic option:selected").val();
         $quiz.find(".add-question").hide();
         if(tricky_topic == ''){

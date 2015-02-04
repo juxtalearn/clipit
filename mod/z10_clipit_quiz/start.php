@@ -97,6 +97,9 @@ function quiz_page_handler($page){
             if($id = $page[1]){
                 $quiz_id = ClipitQuiz::create_clone($id);
                 $quiz = array_pop(ClipitQuiz::get_by_id(array($quiz_id)));
+                $new_title = '['.elgg_echo('clone').'] '.$quiz->name;
+                ClipitQuiz::set_properties($quiz->id, array('name' => $new_title, 'time_created' => time()));
+                $quiz = array_pop(ClipitQuiz::get_by_id(array($quiz_id)));
                 elgg_pop_breadcrumb($title);
                 elgg_push_breadcrumb($quiz->name, "quizzes/view/{$quiz->id}");
                 $title = elgg_echo('duplicate');
@@ -105,7 +108,7 @@ function quiz_page_handler($page){
                     array('data-validate' => 'true'),
                     array(
                         'entity' => $quiz,
-                        'submit_value' => elgg_echo('create')
+                        'submit_value' => elgg_echo('save')
                     ));
             }
             break;

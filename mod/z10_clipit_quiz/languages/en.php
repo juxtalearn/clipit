@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 $english = array(
+    'clone' => 'Clone',
     'quizzes' => 'Quizzes',
     'quiz:name' => 'Quiz name',
     'quiz:create' => 'Create quiz',

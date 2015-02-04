@@ -40,7 +40,7 @@ function get_questions_from_tag($tag){
     <table class="datatable display table table-striped margin-top-5" cellspacing="0" width="100%">
         <thead>
         <tr>
-            <th data-dynatable-no-sort="true"></th>
+            <th data-dynatable-no-sort="true" style="width: 60px;"></th>
             <th><?php echo elgg_echo('quiz:question');?></th>
             <th><?php echo elgg_echo('tags');?></th>
             <th style="width: 100px;" data-dynatable-sorts="dnumber"><?php echo elgg_echo('difficulty');?></th>
@@ -58,7 +58,11 @@ function get_questions_from_tag($tag){
                 if(!$question_tag->cloned_from):
                     ?>
                     <tr>
-                        <td><a class="btn btn-xs btn-primary questions-select" id="<?php echo $question_tag->id;?>">Select</a></td>
+                        <td>
+                            <a class="btn btn-xs btn-primary questions-select" id="<?php echo $question_tag->id;?>">
+                                <?php echo elgg_echo('select');?>
+                            </a>
+                        </td>
                         <td>
                             <?php echo $question_tag->name;?>
                             <?php if($clones = ClipitQuizQuestion::get_clones($question_tag->id, true)): ?>

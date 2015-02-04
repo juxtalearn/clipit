@@ -64,15 +64,15 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
             ));
             ?>
         </li>
-<!--        <li role="presentation" class="divider"></li>-->
-<!--        <li role="presentation">-->
-<!--            --><?php //echo elgg_view('output/url', array(
-//                'href'  => "quizzes",
-//                'title' => elgg_echo('quiz:admin'),
-//                'text'  => '<i class="fa fa-check-square-o"></i> '.elgg_echo('quiz:admin'),
-//            ));
-//            ?>
-<!--        </li>-->
+        <li role="presentation" class="divider"></li>
+        <li role="presentation">
+            <?php echo elgg_view('output/url', array(
+                'href'  => "quizzes",
+                'title' => elgg_echo('quizzes'),
+                'text'  => '<i class="fa fa-check-square-o"></i> '.elgg_echo('quizzes'),
+            ));
+            ?>
+        </li>
         <?php endif;?>
     </ul>
 </li>

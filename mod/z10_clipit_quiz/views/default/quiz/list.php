@@ -42,7 +42,7 @@ $(function(){
             success: function(content){
                 var container = $("<tr/>")
                     .attr("data-quiz", id)
-                    .html( $('<td/>').attr("colspan", 4).html(content).css("padding", "10px") );
+                    .html( $('<td/>').attr("colspan", 5).html(content).css("padding", "10px") );
                 tr.after(container);
             }
         });
@@ -54,6 +54,7 @@ $(function(){
     <tr>
         <th><?php echo elgg_echo('title');?>/<?php echo elgg_echo('tags');?></th>
         <th><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
+        <th><?php echo elgg_echo('tricky_topic');?></th>
         <th style="width: 100px;"><?php echo elgg_echo('options');?></th>
         <th class="text-right"><?php echo elgg_echo('quiz:questions');?></th>
     </tr>
@@ -62,6 +63,8 @@ $(function(){
     foreach($quizzes as $quiz):
         $user = array_pop(ClipitUser::get_by_id(array($quiz->owner_id)));
         $questions = ClipitQuiz::get_quiz_questions($quiz->id);
+        $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($quiz->tricky_topic)));
+        $clone = ClipitQuiz::get_cloned_from($quiz->id);
     ?>
         <tr>
             <td>
@@ -73,7 +76,20 @@ $(function(){
                     ));
                     ?>
                 </strong>
-                <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $quiz->tag_array, 'limit' => 5)); ?>
+                <?php
+                if($clone):
+                    $quiz_clone = array_pop(ClipitQuiz::get_by_id(array($clone)));
+                ?>
+                <small class="show margin-top-5">
+                    <i class="fa fa-copy margin-right-5"></i>
+                    <?php echo elgg_view('output/url', array(
+                        'href'  => "quizzes/view/{$quiz_clone->id}",
+                        'title' => $quiz_clone->name,
+                        'text'  => $quiz_clone->name,
+                    ));
+                    ?>
+                </small>
+                <?php endif;?>
             </td>
             <td>
                 <small>
@@ -88,6 +104,16 @@ $(function(){
                     </div>
                     <?php echo elgg_view('output/friendlytime', array('time' => $quiz->time_created));?>
                 </small>
+            </td>
+            <td>
+                <?php if($tricky_topic):?>
+                <?php echo elgg_view('output/url', array(
+                    'href'  => "quizzes/view/{$tricky_topic->id}",
+                    'title' => $tricky_topic->name,
+                    'text'  => $tricky_topic->name,
+                ));
+                ?>
+                <?php endif;?>
             </td>
             <td>
                 <?php if($user->id == elgg_get_logged_in_user_guid()):?>

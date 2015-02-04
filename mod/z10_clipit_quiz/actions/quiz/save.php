@@ -71,14 +71,19 @@ foreach($questions as $question){
     if($question['id']) {
         $questions_id[] = $question['id'];
         ClipitQuizQuestion::set_properties($question['id'], $question_data);
+    } elseif($question['id_parent']){
+//      ClipitQuizQuestion::link_parent_clone($question['id_parent'], $question_id);
+        $question_id = ClipitQuizQuestion::create_clone($question['id_parent']);
+        ClipitQuizQuestion::set_properties($question_id, array_merge(
+            $question_data,
+            array('time_created' => time())
+        ));
+        $questions_id[] = $question_id;
     } else {
         // new QuizQuestion
-        $question_id = ClipitQuizQuestion::create($question_data);
-        $questions_id[] = $question_id;
-        if($question['id_parent']){
-            ClipitQuizQuestion::link_parent_clone($question['id_parent'], $question_id);
-        }
+        $questions_id[] = ClipitQuizQuestion::create($question_data);
     }
+
 }
 $time = $quiz['time'];
 $total_time = (int)($time['d']*86400) + ($time['h']*3600) + ($time['m']*60);
