@@ -18,38 +18,38 @@ $user = array_pop(ClipitUser::get_by_id(array($tricky_topic->owner_id)));
 ?>
 <div class="margin-bottom-10">
     <div class="pull-right">
-    <small class="show">
-        <?php echo elgg_view('output/friendlytime', array('time' => $tricky_topic->time_created));?>
-    </small>
-    <div class="margin-top-10">
-        <?php if($user->id == elgg_get_logged_in_user_guid()):?>
+        <div class="margin-bottom-10">
+            <?php if($user->id == elgg_get_logged_in_user_guid()):?>
+                <?php echo elgg_view('output/url', array(
+                    'href'  => "tricky_topics/edit/{$tricky_topic->id}",
+                    'class' => 'btn btn-xs btn-primary',
+                    'title' => elgg_echo('edit'),
+                    'text'  => '<i class="fa fa-edit"></i>',
+                ));
+                ?>
+                <?php echo elgg_view('output/url', array(
+                    'href'  => "action/tricky_topic/remove?id={$tricky_topic->id}",
+                    'class' => 'btn btn-xs btn-danger remove-object',
+                    'is_action' => true,
+                    'title' => elgg_echo('delete'),
+                    'text'  => '<i class="fa fa-trash-o"></i>',
+                ));
+                ?>
+            <?php endif;?>
             <?php echo elgg_view('output/url', array(
-                'href'  => "tricky_topics/edit/{$tricky_topic->id}",
-                'class' => 'btn btn-xs btn-primary',
-                'title' => elgg_echo('edit'),
-                'text'  => '<i class="fa fa-edit"></i>',
+                'href'  => "tricky_topics/create/{$tricky_topic->id}",
+                'class' => 'btn btn-xs btn-primary btn-border-blue',
+                'title' => elgg_echo('duplicate'),
+                'text'  => '<i class="fa fa-copy"></i>',
             ));
             ?>
-            <?php echo elgg_view('output/url', array(
-                'href'  => "action/tricky_topic/remove?id={$tricky_topic->id}",
-                'class' => 'btn btn-xs btn-danger remove-object',
-                'is_action' => true,
-                'title' => elgg_echo('delete'),
-                'text'  => '<i class="fa fa-trash-o"></i>',
-            ));
-            ?>
-        <?php endif;?>
-        <?php echo elgg_view('output/url', array(
-            'href'  => "tricky_topics/create/{$tricky_topic->id}",
-            'class' => 'btn btn-xs btn-primary btn-border-blue',
-            'title' => elgg_echo('duplicate'),
-            'text'  => '<i class="fa fa-copy"></i>',
-        ));
-        ?>
-        <span class="margin-left-10">
-            <?php echo elgg_view("page/components/print_button");?>
-        </span>
-    </div>
+            <span class="margin-left-10">
+                <?php echo elgg_view("page/components/print_button");?>
+            </span>
+        </div>
+        <small class="show">
+            <?php echo elgg_view('output/friendlytime', array('time' => $tricky_topic->time_created));?>
+        </small>
     </div>
     <div class="inline-block">
         <small class="show"><?php echo elgg_echo('author');?></small>

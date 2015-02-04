@@ -29,23 +29,23 @@ function clipit_quiz_init() {
  */
 function quiz_page_handler($page){
     $filter = '';
+    $sidebar = elgg_view_module('aside', elgg_echo('filter'),
+        elgg_view_form(
+            'quizzes',
+            array(
+                'disable_security' => true,
+                'action' => 'quizzes',
+                'method' => 'GET',
+                'id' => 'add_labels',
+                'style' => 'background: #fff;padding: 15px;',
+                'body' => elgg_view('forms/quiz/filter')
+            )
+        ));
     switch($page[0]){
         case '':
             $title = elgg_echo('quizzes');
             $selected_tab = get_input('filter', 'all');
             $filter = elgg_view('quiz/filter', array('selected' => $selected_tab, 'href' => $page[0]));
-            $sidebar = elgg_view_module('aside', elgg_echo('filter'),
-                elgg_view_form(
-                    'quizzes',
-                    array(
-                        'disable_security' => true,
-                        'action' => 'quizzes',
-                        'method' => 'GET',
-                        'id' => 'add_labels',
-                        'style' => 'background: #fff;padding: 15px;',
-                        'body' => elgg_view('forms/quiz/filter')
-                    )
-                ));
             $entities = ClipitQuiz::get_all();
             $count = count($entities);
             $entities = array_slice($entities, clipit_get_offset(), clipit_get_limit(10));
@@ -111,6 +111,20 @@ function quiz_page_handler($page){
                         'submit_value' => elgg_echo('save')
                     ));
             }
+            break;
+            case 'view':
+                $id = $page[1];
+                if(!$id){
+                    return false;
+                }
+                elgg_push_breadcrumb(elgg_echo('quizzes'), "quizzes");
+                if ($quiz = array_pop(ClipitQuiz::get_by_id(array($id)))) {
+                    $title = $quiz->name;
+                    elgg_push_breadcrumb($title);
+                    $content = elgg_view('quiz/view', array('entity' => $quiz));
+                } else{
+                    return false;
+                }
             break;
         default:
             return false;

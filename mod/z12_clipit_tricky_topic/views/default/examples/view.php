@@ -17,10 +17,7 @@ $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($example->tricky_to
 ?>
 <div class="margin-bottom-10">
     <div class="pull-right">
-        <small class="show">
-            <?php echo elgg_view('output/friendlytime', array('time' => $example->time_created));?>
-        </small>
-        <div class="margin-top-10">
+        <div class="margin-bottom-10">
             <?php if($user->id == elgg_get_logged_in_user_guid()):?>
                 <?php echo elgg_view('output/url', array(
                     'href'  => "tricky_topics/examples/edit/{$example->id}",
@@ -42,6 +39,9 @@ $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($example->tricky_to
                 <?php echo elgg_view("page/components/print_button");?>
             </span>
         </div>
+        <small class="show">
+            <?php echo elgg_view('output/friendlytime', array('time' => $example->time_created));?>
+        </small>
     </div>
     <small class="show"><?php echo elgg_echo('author');?></small>
     <i class="fa-user fa blue"></i>

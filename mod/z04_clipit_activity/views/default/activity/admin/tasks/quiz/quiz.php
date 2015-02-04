@@ -114,9 +114,9 @@ $(function(){
             ?>
         </div>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-4 col-md-offset-1">
         <div class="form-group">
-            <label>Tipo de vista del cuestionario</label>
+            <label>Tipo de vista</label>
             <?php echo elgg_view("input/dropdown", array(
                 'name' => $input_prefix.'[view]',
                 'style' => 'padding: 5px;',
@@ -130,7 +130,7 @@ $(function(){
             ?>
         </div>
         <div class="form-group">
-            <label>Máximo de tiempo para hacer el exámen</label>
+            <label>Tiempo máximo para hacer el test</label>
             <div class="row">
                 <div class="col-md-4">
                     <small><?php echo elgg_echo('time:days');?></small>
@@ -154,7 +154,7 @@ $(function(){
                         'name' => $input_prefix.'[time][h]',
                         'style' => 'padding:5px;',
                         'class' => 'form-control margin-top-5',
-                        'value' => $entity ? floor($time / 3600):'1',
+                        'value' => $entity ? floor(($time / 3600) % 24):'1',
                         'options_values' => $hours
                     ));
                     ?>

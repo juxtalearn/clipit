@@ -87,6 +87,7 @@ foreach($questions as $question){
 }
 $time = $quiz['time'];
 $total_time = (int)($time['d']*86400) + ($time['h']*3600) + ($time['m']*60);
+
 $quiz_data = array(
     'name' => $quiz['title'],
     'description' => $quiz['description'],
