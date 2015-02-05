@@ -24,6 +24,6 @@ $query_search = array_filter(array_merge($search, $tags));
 
 $output = '';
 if(!empty($query_search)){
-    $output = '?s='.json_encode($query_search);
+    $output = set_search_input($page, $query_search);
 }
-forward($page.$output);
+forward($output);

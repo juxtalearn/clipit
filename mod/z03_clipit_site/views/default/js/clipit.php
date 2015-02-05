@@ -201,7 +201,7 @@ $(function(){
      * Right sidebar set active when href found register menu
      */
     var full_url = window.location.href;
-    var urls_type = ['/view/', '?filter=', '/edit/', '/create/'];
+    var urls_type = ['/view/', '?filter=', '/edit/', '/create/', '?s=', '&'];
     for(i in urls_type){
         var path = full_url.split(urls_type[i])
         var menu_item = $(".elgg-sidebar li a[href='"+ path[0] +"']");

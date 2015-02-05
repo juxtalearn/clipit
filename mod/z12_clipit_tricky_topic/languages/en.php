@@ -39,6 +39,8 @@ $english = array(
     'example:cantremove' => 'Can not remove example',
     'example:removed' => 'Example removed',
 
+    'tags:select' => 'Select Stumbling blocks',
+
     'tricky_topic:duplicate_from' => 'Tricky Topic duplicated from',
     'tricky_topic:subject' => 'Subject',
     'tricky_topic:cantremove' => 'Can not remove Tricky Topic',

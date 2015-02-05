@@ -126,31 +126,6 @@ function tt_page_handler($page){
         case 'examples':
             $title = elgg_echo('student_problems');
 
-            // Filter search
-            $example_ids = array();
-            $example_ids_search = array();
-            if(get_input('example')){
-                $example_search = get_input('example');
-                $examples = ClipitExample::get_from_search($example_search);
-                foreach ($examples as $example) {
-                    $example_ids[] = $example->id;
-                }
-            }
-
-            if(!empty($example_ids) || !empty($example_ids_search)){
-                $example_ids = array_merge($example_ids, $example_ids_search);
-                $entities = ClipitExample::get_by_id($example_ids);
-            } else {
-                $entities = ClipitExample::get_all();
-            }
-
-            $count = count($entities);
-            if($order_by){
-                entities_order($entities, $order_by, $sort, ClipitExample::list_properties());
-            }
-            $entities = array_slice($entities, clipit_get_offset(), clipit_get_limit(10));
-
-
             if($search = get_input('s')) {
                 $all_entities = example_filter_search($search);
                 if($order_by){

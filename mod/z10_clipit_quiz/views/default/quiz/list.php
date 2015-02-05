@@ -53,8 +53,8 @@ $(function(){
     <thead>
     <tr>
         <th><?php echo elgg_echo('title');?></th>
-        <th><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
         <th><?php echo elgg_echo('tricky_topic');?></th>
+        <th><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
         <th style="width: 100px;"><?php echo elgg_echo('options');?></th>
         <th class="text-right"><?php echo elgg_echo('quiz:questions');?></th>
     </tr>
@@ -77,6 +77,16 @@ $(function(){
                 </strong>
             </td>
             <td>
+                <?php if($tricky_topic):?>
+                <?php echo elgg_view('output/url', array(
+                    'href'  => "tricky_topics/view/{$tricky_topic->id}",
+                    'title' => $tricky_topic->name,
+                    'text'  => $tricky_topic->name,
+                ));
+                ?>
+                <?php endif;?>
+            </td>
+            <td>
                 <small>
                     <div>
                         <i class="fa-user fa blue"></i>
@@ -89,16 +99,6 @@ $(function(){
                     </div>
                     <?php echo elgg_view('output/friendlytime', array('time' => $quiz->time_created));?>
                 </small>
-            </td>
-            <td>
-                <?php if($tricky_topic):?>
-                <?php echo elgg_view('output/url', array(
-                    'href'  => "quizzes/view/{$tricky_topic->id}",
-                    'title' => $tricky_topic->name,
-                    'text'  => $tricky_topic->name,
-                ));
-                ?>
-                <?php endif;?>
             </td>
             <td>
                 <?php if($user->id == elgg_get_logged_in_user_guid()):?>

@@ -25,7 +25,7 @@ $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($tricky_topic_id)))
 ?>
 <?php if($show_tags == 'checkbox'):?>
     <input type="checkbox" class="select-all-tags" >
-    <small class="margin-left-5">Select Stumbling blocks</small>
+    <small class="margin-left-5"><?php echo elgg_echo('tags:select');?></small>
     <hr class="margin-0 margin-bottom-10">
     <div class="tags-list" style="overflow-y: auto;max-height: 150px;">
         <?php
@@ -63,7 +63,7 @@ $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($tricky_topic_id)))
             ?>
             <div class="col-md-6 text-truncate" style="padding:5px;">
                 <?php echo elgg_view('output/url', array(
-                    'href'  => "explore/search?by=tag&id={$tag->id}",
+                    'href'  => "tricky_topics/view/{$tag->id}",
                     'target' => '_blank',
                     'title' => $tag->name,
                     'text'  => $tag->name,
@@ -71,6 +71,28 @@ $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($tricky_topic_id)))
                 ?>
             </div>
         <?php endforeach;?>
+    </div>
+    <div class="row margin-top-10">
+        <div class="col-md-6">
+            <small class="show"><?php echo elgg_echo('education_level');?></small>
+            <?php echo elgg_view('output/url', array(
+                'href'  => set_search_input('tricky_topics', array('education_level'=>$tricky_topic->education_level)),
+                'target' => '_blank',
+                'title' => elgg_echo('education_level:'.$tricky_topic->education_level),
+                'text'  => elgg_echo('education_level:'.$tricky_topic->education_level),
+            ));
+            ?>
+        </div>
+        <div class="col-md-6">
+            <small class="show"><?php echo elgg_echo('tricky_topic:subject');?></small>
+            <?php echo elgg_view('output/url', array(
+                'href'  => set_search_input('tricky_topics', array('subject'=>$tricky_topic->subject)),
+                'target' => '_blank',
+                'title' => $tricky_topic->subject,
+                'text'  => $tricky_topic->subject,
+            ));
+            ?>
+        </div>
     </div>
 </div>
 <?php endif;?>

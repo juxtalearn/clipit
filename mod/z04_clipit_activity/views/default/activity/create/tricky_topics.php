@@ -80,12 +80,10 @@ $tt = array_diff($tt, $owner_tt);
         ));
         ?>
         <hr class="margin-0 margin-top-10 margin-bottom-10">
-        <small class="show margin-top-5"><?php echo elgg_echo("tags");?></small>
-    </div>
-    <div class="form-add-tags">
-        <?php echo elgg_view("tricky_topic/add");?>
-    </div>
-    <div class="col-md-12">
+        <label class="margin-top-5 margin-bottom-10"><?php echo elgg_echo("tags");?></label>
+        <div class="form-add-tags">
+            <?php echo elgg_view("tricky_topics/tags/add");?>
+        </div>
         <?php echo elgg_view('output/url', array(
             'href'  => "javascript:;",
             'class' => 'btn btn-xs btn-primary',
@@ -94,29 +92,53 @@ $tt = array_diff($tt, $owner_tt);
             'id'    => 'add-tag'
         ));
         ?>
-        <hr>
-        <div class="pull-right">
-            <?php echo elgg_view('output/url', array(
-                'href'  => "javascript:;",
-                'class' => 'btn btn-xs btn-primary',
-                'id' => 'save-tricky-topic',
-                'title' => elgg_echo('save'),
-                'text'  => elgg_echo('save'),
-            ));
-            ?>
-            <?php echo elgg_view('output/url', array(
-                'href'  => "javascript:;",
-                'class' => 'btn btn-xs btn-border-blue btn-primary',
-                'title' => elgg_echo('cancel'),
-                'text'  => elgg_echo('cancel'),
-                'onclick' => '$(\'#add-tricky-topic\').click()',
-            ));
-            ?>
+        <div class="clearfix"></div>
+        <div class="form-group row margin-top-10">
+            <div class="col-md-6">
+                <label class="margin-top-5 margin-bottom-10"><?php echo elgg_echo("education_level");?></label>
+                <?php echo elgg_view("input/dropdown", array(
+                    'name' => 'tricky-topic-education_level',
+                    'style' => 'padding: 5px',
+                    'class' => 'form-control',
+                    'options_values' => get_education_levels(),
+                    'required' => true
+                ));
+                ?>
+            </div>
+            <div class="col-md-6">
+                <label class="margin-top-5 margin-bottom-10"><?php echo elgg_echo("tricky_topic:subject");?></label>
+                <?php echo elgg_view("input/text", array(
+                    'name' => 'tricky-topic-subject',
+                    'class' => 'form-control',
+                    'required' => true,
+                ));
+                ?>
+            </div>
         </div>
-        <?php echo elgg_view("input/hidden", array(
-            'name' => 'activity-tricky-topic',
-            'value' => 'true'
+    </div>
+    <div class="clearfix"></div>
+    <hr>
+    <div class="pull-right">
+        <?php echo elgg_view('output/url', array(
+            'href'  => "javascript:;",
+            'class' => 'btn btn-xs btn-primary margin-right-5',
+            'id' => 'save-tricky-topic',
+            'title' => elgg_echo('save'),
+            'text'  => elgg_echo('save'),
+        ));
+        ?>
+        <?php echo elgg_view('output/url', array(
+            'href'  => "javascript:;",
+            'class' => 'btn btn-xs btn-border-blue btn-primary',
+            'title' => elgg_echo('cancel'),
+            'text'  => elgg_echo('cancel'),
+            'onclick' => '$(\'#add-tricky-topic\').click()',
         ));
         ?>
     </div>
+    <?php echo elgg_view("input/hidden", array(
+        'name' => 'activity-tricky-topic',
+        'value' => 'true'
+    ));
+    ?>
 </div>

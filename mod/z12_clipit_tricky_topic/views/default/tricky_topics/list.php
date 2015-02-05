@@ -13,6 +13,7 @@
 $tricky_topics = elgg_extract('entities', $vars);
 $count = elgg_extract('count', $vars);
 $table_orders = elgg_extract('table_orders', $vars);
+$page = 'tricky_topics';
 ?>
 <div class="margin-bottom-20">
     <div class="pull-right">
@@ -21,7 +22,7 @@ $table_orders = elgg_extract('table_orders', $vars);
     <?php echo elgg_view('output/url', array(
         'href'  => "tricky_topics/create",
         'class' => 'btn btn-primary margin-bottom-10',
-        'title' => elgg_echo('new'),
+        'title' => elgg_echo('create'),
         'text'  => elgg_echo('new'),
     ));
     ?>
@@ -59,7 +60,7 @@ $table_orders = elgg_extract('table_orders', $vars);
         </td>
         <td>
             <?php echo elgg_view('output/url', array(
-                'href'  => "tricky_topics?education_level={$tricky_topic->education_level}",
+                'href'  => set_search_input($page, array('education_level'=>$tricky_topic->education_level)),
                 'title' => elgg_echo('filter_by', array(elgg_echo('education_level:'.$tricky_topic->education_level))),
                 'text'  => elgg_echo('education_level:'.$tricky_topic->education_level),
             ));
@@ -67,7 +68,7 @@ $table_orders = elgg_extract('table_orders', $vars);
         </td>
         <td>
             <?php echo elgg_view('output/url', array(
-                'href'  => "tricky_topics?subject={$tricky_topic->subject}",
+                'href'  => set_search_input($page, array('subject'=>$tricky_topic->subject)),
                 'title' => $tricky_topic->subject,
                 'text'  => $tricky_topic->subject,
             ));

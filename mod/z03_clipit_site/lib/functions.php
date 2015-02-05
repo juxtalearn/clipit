@@ -19,3 +19,8 @@ function get_search_input($get_input){
         return false;
     }
 }
+
+function set_search_input($page, $search_array){
+    $output  = $page."?s=".json_encode($search_array);
+    return $output;
+}

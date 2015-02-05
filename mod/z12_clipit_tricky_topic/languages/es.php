@@ -39,6 +39,8 @@ $spanish = array(
     'example:cantremove' => 'No se ha podido borrar el ejemplo',
     'example:removed' => 'Ejemplo borrado',
 
+    'tags:select' => 'Seleccionar conceptos',
+
     'tricky_topic:duplicate_from' => 'Tema clave duplicado de',
     'tricky_topic:subject' => 'Asignatura',
     'tricky_topic:cantremove' => 'No se ha podido borrar el tema clave',
