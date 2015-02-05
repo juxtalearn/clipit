@@ -99,7 +99,7 @@ if($question){
                     <?php echo elgg_view("input/plaintext", array(
                         'name' => $input_prefix.'[question]['.$id.'][description]',
                         'value' => $question->description,
-                        'class' => 'form-control',
+                        'class' => 'form-control '.($question ? 'mceEditor':''),
                         'onclick'   => '$(this).addClass(\'mceEditor\');
                                         tinymce_setup();
                                         tinymce.execCommand(\'mceFocus\',false,this.id);',

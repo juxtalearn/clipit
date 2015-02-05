@@ -61,10 +61,12 @@ $(document).on("change", ".task-types",function(){
     content.find(".quiz-module").hide();
     if($(this).val() == 'quiz_take'){
         content.find(".quiz-module").show();
-        elgg.get('ajax/view/activity/admin/tasks/quiz/quiz', {
+<!--        elgg.get('ajax/view/activity/admin/tasks/quiz/quiz', {-->
+        elgg.get('ajax/view/quiz/list', {
             data: {
-                tricky_topic: tricky_topic_val,
-                input_prefix: input_prefix_val
+                'activity_create': true,
+                'tricky_topic': tricky_topic_val,
+                'input_prefix': input_prefix_val
             },
             success: function (data) {
                 that.closest(".task").find(".task-type-container").html(data).show();
@@ -72,6 +74,21 @@ $(document).on("change", ".task-types",function(){
         });
     }
 
+});
+
+$(document).on("click", ".quiz-select",function(){
+    var task_container = $(this).closest('.task-type-container'),
+        quiz_id = $(this).closest('tr').attr('id');
+    task_container.find('table tr').not('#'+ quiz_id).fadeOut(300, function(){$(this).remove();});
+<!--    task_container.find('.input-quiz').val(quiz_id);-->
+    // Change button to unselect type
+    $(this).removeClass('quiz-select')
+            .addClass('quiz-unselect btn-border-red')
+            .text('<?php echo elgg_echo('btn:remove');?>');
+});
+$(document).on("click", ".quiz-unselect",function(){
+    var task_container = $(this).closest('.task-type-container');
+    task_container.closest('.task').find('.task-types').trigger('change');
 });
 $(document).on("click", "#add_task",function(){
     var content = $(".task-list");

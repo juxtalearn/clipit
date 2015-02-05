@@ -97,5 +97,5 @@ $questions = ClipitQuizQuestion::get_by_id($question_ids, 0, 0, 'order');
     </tbody>
 </table>
 <?php else: ?>
-    <?php echo elgg_view('output/empty', array('value' => elgg_echo('examples:none')));;?>
+    <?php echo elgg_view('output/empty', array('value' => elgg_echo('quiz:questions:none')));;?>
 <?php endif;?>

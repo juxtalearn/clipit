@@ -21,6 +21,7 @@ function clipit_quiz_init() {
     // Quiz
     elgg_register_action("quiz/save", "{$plugin_dir}/actions/quiz/save.php");
     elgg_register_action("quiz/remove", "{$plugin_dir}/actions/quiz/remove.php");
+    elgg_register_ajax_view('quiz/list');
     // Questions
     elgg_register_ajax_view('questions/summary');
     elgg_register_ajax_view('questions/examples');

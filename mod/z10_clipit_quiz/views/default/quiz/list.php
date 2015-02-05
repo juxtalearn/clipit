@@ -12,6 +12,15 @@
  */
 $quizzes = elgg_extract('entities', $vars);
 $count = elgg_extract('count', $vars);
+$options = true;
+$select = false;
+if(get_input('activity_create')){
+    $input_prefix = get_input('input_prefix');
+    $tricky_topic_id = get_input('tricky_topic');
+    $quizzes = ClipitQuiz::get_from_tricky_topic($tricky_topic_id);
+    $options = false;
+    $select = true;
+}
 ?>
 <div class="margin-bottom-20">
     <div class="pull-right">
@@ -52,10 +61,15 @@ $(function(){
 <table class="table table-striped">
     <thead>
     <tr>
+        <?php if($select):?>
+            <th style="width: 50px;"></th>
+        <?php endif;?>
         <th><?php echo elgg_echo('title');?></th>
         <th><?php echo elgg_echo('tricky_topic');?></th>
         <th><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
-        <th style="width: 100px;"><?php echo elgg_echo('options');?></th>
+        <?php if($options):?>
+            <th style="width: 100px;"><?php echo elgg_echo('options');?></th>
+        <?php endif;?>
         <th class="text-right"><?php echo elgg_echo('quiz:questions');?></th>
     </tr>
     </thead>
@@ -65,7 +79,18 @@ $(function(){
         $questions = ClipitQuiz::get_quiz_questions($quiz->id);
         $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($quiz->tricky_topic)));
     ?>
-        <tr>
+        <tr id="<?php echo $quiz->id;?>">
+        <?php if($select):?>
+            <td>
+                <a class="btn btn-xs btn-primary btn-border-blue quiz-select">
+                    <?php echo elgg_echo('select');?>
+                </a>
+                <?php echo elgg_view('input/hidden', array(
+                    'name' => $input_prefix.'[quiz_id]',
+                    'value' => $quiz->id,
+                )); ?>
+            </td>
+        <?php endif;?>
             <td>
                 <strong>
                     <?php echo elgg_view('output/url', array(
@@ -100,6 +125,7 @@ $(function(){
                     <?php echo elgg_view('output/friendlytime', array('time' => $quiz->time_created));?>
                 </small>
             </td>
+        <?php if($options):?>
             <td>
                 <?php if($user->id == elgg_get_logged_in_user_guid()):?>
                     <?php echo elgg_view('output/url', array(
@@ -126,6 +152,7 @@ $(function(){
                 ));
                 ?>
             </td>
+        <?php endif;?>
             <td class="text-right">
                 <?php echo elgg_view('output/url', array(
                     'href'  => 'javascript:;',

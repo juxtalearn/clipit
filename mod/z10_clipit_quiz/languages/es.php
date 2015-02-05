@@ -12,6 +12,7 @@
  */
 $spanish = array(
     'clone' => 'Clon',
+    'btn:remove' => 'Quitar',
     'quizzes' => 'Tests',
     'quiz:name' => 'Título del test',
     'quiz:create' => 'Crear test',
@@ -20,6 +21,7 @@ $spanish = array(
     'quiz:created' => 'Test creado',
     'quiz:view_page:list' => 'Una página',
     'quiz:view_page:paged' => 'Varias páginas',
+    'quiz:question:none' => 'No hay preguntas',
     'quiz:question:answer:select' => 'Selecciona la respuesta correcta',
     'quiz:question:answer:write' => 'Escribe la respuesta correcta',
     'quiz:question:type:true_false' => 'Verdadero o Falso',

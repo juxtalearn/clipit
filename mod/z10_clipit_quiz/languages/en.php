@@ -12,6 +12,7 @@
  */
 $english = array(
     'clone' => 'Clone',
+    'btn:remove' => 'Remove',
     'quizzes' => 'Quizzes',
     'quiz:name' => 'Quiz name',
     'quiz:create' => 'Create quiz',
@@ -20,6 +21,7 @@ $english = array(
     'quiz:created' => 'Quiz created',
     'quiz:view_page:list' => 'One page',
     'quiz:view_page:paged' => 'Paginated',
+    'quiz:question:none' => 'No questions',
     'quiz:question:answer:select' => 'Select the correct answer',
     'quiz:question:answer:write' => 'Write the correct answer',
     'quiz:question:type:true_false' => 'True or False',

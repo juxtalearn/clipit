@@ -177,6 +177,7 @@ $(function(){
     </div>
 
     <div class="col-md-12 text-right margin-top-20">
+        <hr>
         <?php echo elgg_view('input/button', array(
                 'value' => elgg_echo('next'),
                 'data-step' => 2,

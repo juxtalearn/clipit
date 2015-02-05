@@ -249,6 +249,7 @@ $(function () {
         <?php echo elgg_view('activity/create/groups/grouping_mode');?>
     </div>
     <div class="col-md-12 text-right margin-top-20">
+        <hr>
         <?php echo elgg_view('input/button', array(
             'value' => elgg_echo('back'),
             'data-step' => 2,
