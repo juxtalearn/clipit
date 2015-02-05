@@ -40,7 +40,7 @@ $questions = ClipitQuizQuestion::get_by_id($question_ids, 0, 0, 'order');
             <div class="content-block">
                 <strong>
                 <?php echo elgg_view('output/url', array(
-                    'href'  => "quizzes/questions/view/{$question->id}",
+                    //'href'  => "quizzes/questions/view/{$question->id}",
                     'title' => $question->name,
                     'text'  => $question->name,
                 ));

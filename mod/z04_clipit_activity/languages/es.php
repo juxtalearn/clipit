@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 $spanish = array(
+    'search:btn' => 'Buscar',
     'status' => 'Estado',
     'send:to_site' => 'Enviar a ClipIt',
     'time:days' => 'Días',

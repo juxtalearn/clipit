@@ -20,8 +20,8 @@ $count = elgg_extract('count', $vars);
     <?php echo elgg_view('output/url', array(
         'href'  => "quizzes/create",
         'class' => 'btn btn-primary margin-bottom-10',
-        'title' => elgg_echo('create'),
-        'text'  => elgg_echo('create'),
+        'title' => elgg_echo('new'),
+        'text'  => elgg_echo('new'),
     ));
     ?>
 </div>

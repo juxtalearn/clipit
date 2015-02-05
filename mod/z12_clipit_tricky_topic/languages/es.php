@@ -24,7 +24,7 @@ $spanish = array(
     'location' => 'Localización',
     // Examples
     'example:name' => 'Nombre del ejemplo',
-    'examples' => 'Ejemplos',
+    'examples' => 'Ejemplos de problemas',
     'examples:none' => 'No hay ejemplos',
     'example:add' => 'Añadir ejemplo',
     'example:create' => 'Crear ejemplo',

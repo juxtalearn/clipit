@@ -10,7 +10,11 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$tags = get_input('tags');
+$tags = implode(",", get_search_input('tags'));
+echo elgg_view("input/hidden", array(
+    'name' => 'page',
+    'value' => 'tricky_topics/examples'
+));
 ?>
 <?php
 echo elgg_view("input/hidden", array(
@@ -22,9 +26,18 @@ echo elgg_view("input/hidden", array(
 <div class="form-group">
     <label class="text-muted"><?php echo elgg_echo('example:name');?></label>
     <?php echo elgg_view("input/text", array(
-        'name' => 'example',
+        'name' => 'search[name]',
         'class' => 'form-control',
-        'value' => get_input('example')
+        'value' => get_search_input('name')
+    ));
+    ?>
+</div>
+<div class="form-group">
+    <label class="text-muted"><?php echo elgg_echo('tricky_topic');?></label>
+    <?php echo elgg_view("input/text", array(
+        'name' => 'search[tricky_topic]',
+        'class' => 'form-control',
+        'value' => get_search_input('tricky_topic')
     ));
     ?>
 </div>
@@ -35,18 +48,18 @@ echo elgg_view("input/hidden", array(
 <div class="form-group">
     <label class="text-muted"><?php echo elgg_echo('location');?></label>
     <?php echo elgg_view("input/text", array(
-        'name' => 'location',
+        'name' => 'search[location]',
         'class' => 'form-control',
-        'value' => get_input('location')
+        'value' => get_search_input('location')
     ));
     ?>
 </div>
 <div class="form-group">
     <label class="text-muted"><?php echo elgg_echo('country');?></label>
     <?php echo elgg_view("input/dropdown", array(
-        'name' => 'country',
+        'name' => 'search[country]',
         'style' => 'padding: 0;height: 25px;',
-        'value' => get_input('country'),
+        'value' => get_search_input('country'),
         'class' => 'form-control select-question-type',
         'options_values' => get_countries_list(),
     ));
@@ -55,7 +68,7 @@ echo elgg_view("input/hidden", array(
 <div class="text-right">
     <?php echo elgg_view('input/submit', array(
         'class' => 'btn btn-primary btn-sm',
-        'value'  => elgg_echo('search'),
+        'value'  => elgg_echo('search:btn'),
     ));
     ?>
 </div>

@@ -21,7 +21,7 @@ elgg_register_menu_item('tricky_topic:menu', array(
     'href' => "tricky_topics/stumbling_blocks",
 ));
 elgg_register_menu_item('tricky_topic:menu', array(
-    'name' => 'student_problems',
+    'name' => 'examples',
     'text' => elgg_echo('examples'),
     'href' => "tricky_topics/examples",
     'item_class' => 'margin-left-20'

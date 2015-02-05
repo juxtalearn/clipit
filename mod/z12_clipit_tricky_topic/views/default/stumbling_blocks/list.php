@@ -16,10 +16,10 @@ $count = elgg_extract('count', $vars);
 ?>
 <style>
     .ln{
-        visibility: hidden;
+        opacity: 0.7;
     }
     .table tr:hover .ln{
-        visibility: visible;
+        opacity: 1;
     }
 </style>
 <div class="pull-right margin-bottom-10">
@@ -39,7 +39,7 @@ $count = elgg_extract('count', $vars);
         <?php endforeach;?>
         <th><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
         <th><i class="fa fa-sitemap"></i> <?php echo elgg_echo('tricky_topics');?></th>
-        <th><?php echo elgg_echo('examples');?></th>
+        <th style="width: 50px;"><?php echo elgg_echo('examples');?></th>
     </tr>
     </thead>
     <?php foreach($tags as $tag):

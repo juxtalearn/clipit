@@ -14,7 +14,7 @@ $id = elgg_extract('id', $vars);
 $input_prefix = elgg_extract('input_prefix', $vars);
 ?>
 <div class="show text-muted margin-bottom-10">
-    Write the correct answer
+    <?php echo elgg_echo('quiz:question:answer:write');?>
 </div>
 <hr class="margin-0 margin-bottom-20">
 <input type="number"

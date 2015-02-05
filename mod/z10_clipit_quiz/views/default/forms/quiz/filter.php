@@ -36,7 +36,7 @@ echo elgg_view("input/hidden", array(
 <div class="text-right">
     <?php echo elgg_view('input/submit', array(
         'class' => 'btn btn-primary btn-sm',
-        'value'  => elgg_echo('search'),
+        'value'  => elgg_echo('search:btn'),
     ));
     ?>
 </div>

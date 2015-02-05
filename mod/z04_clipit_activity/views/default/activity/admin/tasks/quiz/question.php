@@ -75,11 +75,11 @@ if($question){
         <?php endif; ?>
         <?php
         $types = array(
-            '' => 'Select',
-            ClipitQuizQuestion::TYPE_SELECT_MULTI => 'Multiple choice',
-            ClipitQuizQuestion::TYPE_SELECT_ONE => 'One choice',
-            ClipitQuizQuestion::TYPE_NUMBER => 'Numeric question',
-            ClipitQuizQuestion::TYPE_TRUE_FALSE => 'True or false',
+            '' => elgg_echo('select'),
+            ClipitQuizQuestion::TYPE_SELECT_MULTI => elgg_echo('quiz:question:type:'.ClipitQuizQuestion::TYPE_SELECT_MULTI),
+            ClipitQuizQuestion::TYPE_SELECT_ONE => elgg_echo('quiz:question:type:'.ClipitQuizQuestion::TYPE_SELECT_ONE),
+            ClipitQuizQuestion::TYPE_NUMBER => elgg_echo('quiz:question:type:'.ClipitQuizQuestion::TYPE_NUMBER),
+            ClipitQuizQuestion::TYPE_TRUE_FALSE => elgg_echo('quiz:question:type:'.ClipitQuizQuestion::TYPE_TRUE_FALSE),
         );
         ?>
         <div class="form-group row" style="padding: 10px;">
@@ -151,9 +151,12 @@ if($question){
                     ));
                     ?>
                 </div>
-                <div class="show-question" id="<?php echo $id;?>" data-question="<?php echo ClipitQuizQuestion::TYPE_SELECT_ONE;?>" style="display: none;">
+                <div class="show-question" id="<?php echo $id;?>"
+                     data-question="<?php echo ClipitQuizQuestion::TYPE_SELECT_ONE;?>"
+                     style="display: <?php echo $question->option_type == ClipitQuizQuestion::TYPE_SELECT_ONE ? 'block':'none';?>;">
                     <div class="show text-muted margin-bottom-10">
-                        <input type="radio" checked disabled style="margin: 0;margin-right: 10px;vertical-align: middle;"> Select the correct answer
+                        <input type="radio" checked disabled style="margin: 0;margin-right: 10px;vertical-align: middle;">
+                        <?php echo elgg_echo('quiz:question:answer:select');?>
                     </div>
                     <hr class="margin-0 margin-bottom-20">
                     <div class="results">
@@ -197,9 +200,12 @@ if($question){
                         ?>
                     </strong>
                 </div>
-                <div class="show-question" id="<?php echo $id;?>" data-question="<?php echo ClipitQuizQuestion::TYPE_SELECT_MULTI;?>" style="display: none;">
+                <div class="show-question" id="<?php echo $id;?>"
+                     data-question="<?php echo ClipitQuizQuestion::TYPE_SELECT_MULTI;?>"
+                     style="display: <?php echo $question->option_type == ClipitQuizQuestion::TYPE_SELECT_MULTI ? 'block':'none';?>">
                     <div class="show text-muted margin-bottom-10">
-                        <input type="checkbox" checked disabled style="margin: 0;margin-right: 10px;vertical-align: middle;"> Select the correct answer
+                        <input type="checkbox" checked disabled style="margin: 0;margin-right: 10px;vertical-align: middle;">
+                        <?php echo elgg_echo('quiz:question:answer:select');?>
                     </div>
                     <hr class="margin-0 margin-bottom-20">
                     <div class="results">
@@ -218,14 +224,14 @@ if($question){
                             if($question->option_type == ClipitQuizQuestion::TYPE_SELECT_MULTI):
                                 foreach($options as $key => $value):
                             ?>
-                                    <?php echo elgg_view('activity/admin/tasks/quiz/types/select_multi',
-                                        array(
-                                            'id' => $id,
-                                            'num' => $i,
-                                            'value' => $value,
-                                            'checked' => $question->validation_array[$key],
-                                            'input_prefix' => $input_prefix
-                                        ));?>
+                                <?php echo elgg_view('activity/admin/tasks/quiz/types/select_multi',
+                                    array(
+                                        'id' => $id,
+                                        'num' => $i,
+                                        'value' => $value,
+                                        'checked' => $question->validation_array[$key],
+                                        'input_prefix' => $input_prefix
+                                    ));?>
                             <?php
                                     $i++;
                                 endforeach;
@@ -242,20 +248,27 @@ if($question){
                         ?>
                     </strong>
                 </div>
-                <div class="show-question" id="<?php echo $id;?>" data-question="<?php echo ClipitQuizQuestion::TYPE_NUMBER;?>" style="display: none;">
+                <div class="show-question" id="<?php echo $id;?>"
+                     data-question="<?php echo ClipitQuizQuestion::TYPE_NUMBER;?>"
+                     style="display: <?php echo $question->option_type == ClipitQuizQuestion::TYPE_NUMBER ? 'block':'none';?>">
                     <?php echo elgg_view('activity/admin/tasks/quiz/types/number',
                         array(
                             'id' => $id,
-                            'checked' => end($question->validation_array),
+                            'checked' => $question->option_type == ClipitQuizQuestion::TYPE_NUMBER ? end($question->validation_array) :'',
                             'input_prefix' => $input_prefix
                             ));
                     ?>
                 </div>
-                <div class="show-question" id="<?php echo $id;?>" data-question="<?php echo ClipitQuizQuestion::TYPE_TRUE_FALSE;?>" style="display: none;">
+                <div class="show-question" id="<?php echo $id;?>"
+                     data-question="<?php echo ClipitQuizQuestion::TYPE_TRUE_FALSE;?>"
+                     style="display: <?php echo $question->option_type == ClipitQuizQuestion::TYPE_TRUE_FALSE ? 'block':'none';?>;">
+                    <div class="show text-muted margin-bottom-10">
+                        <?php echo elgg_echo('quiz:question:answer:select');?>
+                    </div>
                     <?php echo elgg_view('activity/admin/tasks/quiz/types/true_false',
                         array(
                             'id' => $id,
-                            'checked' => $question->validation_array,
+                            'checked' => $question->option_type == ClipitQuizQuestion::TYPE_TRUE_FALSE ? $question->validation_array : '',
                             'input_prefix' => $input_prefix
                         ));
                     ?>

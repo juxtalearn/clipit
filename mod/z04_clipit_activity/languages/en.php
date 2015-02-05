@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 $english = array(
+    'search:btn' => 'Search',
     'status' => 'Status',
     'send:to_site' => 'Publish to ClipIt',
     'time:days' => 'Days',

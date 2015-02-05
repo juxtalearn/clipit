@@ -24,9 +24,9 @@ $(function () {
 });
 </script>
 <h4 class="margin-0"><?php echo elgg_echo('reflection_palette');?></h4>
-<small class="show margin-bottom-10">
+<span class="text-muted show margin-bottom-10">
     <?php echo elgg_echo('reflection_palette:question');?>
-</small>
+</span>
 <div role="tabpanel" class="margin-bottom-20">
 
     <!-- Nav tabs -->

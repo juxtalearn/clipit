@@ -10,9 +10,12 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$tags = get_input('tags');
-?>
-<?php
+echo elgg_view("input/hidden", array(
+    'name' => 'page',
+    'value' => 'tricky_topics'
+));
+
+$tags = implode(",", get_search_input('tags'));
 echo elgg_view("input/hidden", array(
     'name' => 'tags',
     'id' => 'input_tags',
@@ -22,9 +25,9 @@ echo elgg_view("input/hidden", array(
 <div class="form-group">
     <label class="text-muted"><?php echo elgg_echo('tricky_topic');?></label>
     <?php echo elgg_view("input/text", array(
-        'name' => 'tricky_topic',
+        'name' => 'search[name]',
         'class' => 'form-control',
-        'value' => get_input('tricky_topic')
+        'value' => get_search_input('name')
     ));
     ?>
 </div>
@@ -44,9 +47,9 @@ $ed_levels = array(
 <div class="form-group">
     <label class="text-muted"><?php echo elgg_echo('education_level');?></label>
     <?php echo elgg_view("input/dropdown", array(
-        'name' => 'education_level',
+        'name' => 'search[education_level]',
         'style' => 'padding: 0;height: 25px;',
-        'value' => get_input('education_level'),
+        'value' => get_search_input('education_level'),
         'class' => 'form-control select-question-type',
         'options_values' => get_education_levels(),
     ));
@@ -55,16 +58,16 @@ $ed_levels = array(
 <div class="form-group">
     <label class="text-muted"><?php echo elgg_echo('tricky_topic:subject');?></label>
     <?php echo elgg_view("input/text", array(
-        'name' => 'subject',
+        'name' => 'search[subject]',
         'class' => 'form-control',
-        'value' => get_input('subject')
+        'value' => get_search_input('subject')
     ));
     ?>
 </div>
 <div class="text-right">
     <?php echo elgg_view('input/submit', array(
         'class' => 'btn btn-primary btn-sm',
-        'value'  => elgg_echo('search'),
+        'value'  => elgg_echo('search:btn'),
     ));
     ?>
 </div>

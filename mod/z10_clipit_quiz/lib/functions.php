@@ -11,36 +11,32 @@
  * @package         ClipIt
  */
 function quiz_filter_search($query){
-    $quiz_ids = array();
+    $item_ids = array();
     $query_ar = json_decode($query);
     foreach($query_ar as $s => $value){
         switch($s){
             case 'name':
-                $quiz_search = array();
+                $item_search = array();
                 $quizzes = ClipitQuiz::get_from_search($value);
                 foreach ($quizzes as $quiz) {
-                    $quiz_ids[] = $quiz->id;
+                    $item_ids[] = $quiz->id;
                 }
                 break;
             case 'tricky_topic':
-                $quiz_search = array();
+                $item_search = array();
                 $tricky_topics = ClipitTrickyTopic::get_from_search($value);
                 foreach ($tricky_topics as $tricky_topic) {
                     foreach(ClipitQuiz::get_from_tricky_topic($tricky_topic->id) as $quiz){
-                        $quiz_search[] = $quiz->id;
+                        $item_search[] = $quiz->id;
                     }
                 }
-                if(empty($quiz_ids)) {
-                    $quiz_ids = array_merge($quiz_ids, $quiz_search);
+                if(empty($item_ids)) {
+                    $item_ids = array_merge($item_ids, $item_search);
                 } else {
-                    $quiz_ids = array_intersect($quiz_ids, $quiz_search);
+                    $item_ids = array_intersect($item_ids, $item_search);
                 }
                 break;
         }
-        if(empty($quiz_ids)){
-            return ClipitQuiz::get_all(clipit_get_limit(10), clipit_get_offset());
-        }
     }
-    return $quiz_ids;
-    return ClipitQuiz::get_by_id($quiz_ids);
+    return $item_ids;
 }

@@ -40,8 +40,6 @@ function quiz_page_handler($page){
         elgg_view_form(
             'filter_search',
             array(
-//                'disable_security' => true,
-//                'action' => 'quiz/search',
                 'method' => 'POST',
                 'id' => 'add_labels',
                 'style' => 'background: #fff;padding: 15px;',

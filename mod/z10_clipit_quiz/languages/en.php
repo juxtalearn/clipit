@@ -20,6 +20,12 @@ $english = array(
     'quiz:created' => 'Quiz created',
     'quiz:view_page:list' => 'One page',
     'quiz:view_page:paged' => 'Paginated',
+    'quiz:question:answer:select' => 'Select the correct answer',
+    'quiz:question:answer:write' => 'Write the correct answer',
+    'quiz:question:type:true_false' => 'True or False',
+    'quiz:question:type:number' => 'Numeric question',
+    'quiz:question:type:select_multi' => 'Multiple choice',
+    'quiz:question:type:select_one' => 'One choice',
 );
 
 add_translation('en', $english);
