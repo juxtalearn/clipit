@@ -86,9 +86,9 @@ class UBMessage extends UBItem {
                 $message_array[$destination_id] = $temp_array;
                 usort($message_array[$destination_id], 'UBItem::sort_by_date');
                 if (!empty($limit)) {
-                    $message_array[$destination_id] = array_splice($message_array[$destination_id], $offset, $limit);
+                    $message_array[$destination_id] = array_slice($message_array[$destination_id], $offset, $limit);
                 } else {
-                    $message_array[$destination_id] = array_splice($message_array[$destination_id], $offset);
+                    $message_array[$destination_id] = array_slice($message_array[$destination_id], $offset);
                 }
             }
         }

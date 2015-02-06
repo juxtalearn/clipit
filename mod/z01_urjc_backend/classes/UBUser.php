@@ -410,10 +410,6 @@ class UBUser extends UBItem {
         // login
         $login = (string)$cell_iterator->current()->getValue();
         if (!empty($login)) {
-            $user_array = static::get_by_login(array($login));
-            if (!empty($user_array[$login])) { // user already exists, no need to create it
-                return (int)$user_array[$login]->id;
-            }
             $prop_value_array["login"] = $login;
         } else {
             return null;
@@ -438,6 +434,10 @@ class UBUser extends UBItem {
         if (!empty($role)) {
             $prop_value_array["role"] = $role;
         }
-        return static::create($prop_value_array);
+        $user_array = static::get_by_login(array($login));
+        if (!empty($user_array[$login])) { // user already exists, we update it
+            return (int)static::set_properties($user_array[$login]->id, $prop_value_array);
+        }
+        return (int)static::create($prop_value_array);
     }
 }

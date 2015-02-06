@@ -394,12 +394,6 @@ class UBItem {
     /**
      * Get Objects with id contained in a given list.
      *
-     * @param array $id_array Array of Object Ids
-     * @param bool $order_by_name   Default = false (order by date_inv)
-     *
-     * @return static[] Returns an array of Objects
-     */
-    /**
      * @param array $id_array Array of item IDs to get
      * @param int $limit (optional) limit of items to get
      * @param int $offset (optional) offset of items to get
@@ -408,43 +402,46 @@ class UBItem {
      * @return array(UBItem) array of UBItems filtered by the parameters given
      */
     static function get_by_id($id_array, $limit = 0, $offset = 0, $order_by = "", $ascending = true) {
-        $return_array = array();
+        $item_array = array();
         if(empty($id_array)){
-            return $return_array;
+            return $item_array;
+        }
+        foreach($id_array as $id) {
+            $item_array[(int)$id] = new static((int)$id);
         }
         if(!empty($order_by)){
-            // directly retrieve entities with name = $search_string
-            $elgg_entity_array = elgg_get_entities_from_metadata(
-                array(
-                    'guids' => $id_array,
-                    'type' => static::TYPE,
-                    'subtype' => static::SUBTYPE,
-                    'limit' => $limit,
-                    'offset' => $offset,
-                    'order_by_metadata' => array(
-                        "name" => $order_by,
-                        "direction" => ($ascending === true ? "ASC" : "DESC")
-                    )
-                )
-            );
-        } else {
-            $elgg_entity_array = elgg_get_entities(
-                array(
-                    'guids' => $id_array,
-                    'type' => static::TYPE,
-                    'subtype' => static::SUBTYPE,
-                    'limit' => $limit,
-                    'offset' => $offset,
-                    'sort_by' => "e.time_created"
-                )
-            );
+            $args = array("order_by" => $order_by, "ascending" => $ascending);
+            usort($item_array, function($i1, $i2) use($args){
+                if((bool)$args["ascending"]) {
+                    if (!$i1 && !$i2) {
+                        return 0;
+                    }
+                    if (!$i1) {
+                        return 1;
+                    }
+                    if (!$i2) {
+                        return -1;
+                    }
+                    return strcmp($i1->$args["order_by"], $i2->$args["order_by"]);
+                } else {
+                    if (!$i1 && !$i2) {
+                        return 0;
+                    }
+                    if (!$i1) {
+                        return -1;
+                    }
+                    if (!$i2) {
+                        return 1;
+                    }
+                    return strcmp($i2->$args["order_by"], $i1->$args["order_by"]);
+                }
+            });
         }
-        if(!empty($elgg_entity_array)) {
-            foreach($elgg_entity_array as $elgg_entity) {
-                $return_array[(int)$elgg_entity->guid] = new static((int)$elgg_entity->guid, $elgg_entity);
-            }
+        $limit = (int)$limit;
+        if($limit == 0){
+            $limit = null;
         }
-        return $return_array;
+        return array_slice($item_array, (int)$offset, $limit);
     }
 
     /**
@@ -555,9 +552,9 @@ class UBItem {
             }
         }
         if(empty($limit)){
-            return array_splice($search_result, (int)$offset, count($search_result));
+            return array_slice($search_result, (int)$offset, count($search_result));
         } else {
-            return array_splice($search_result, (int)$offset, (int)$limit);
+            return array_slice($search_result, (int)$offset, (int)$limit);
         }
         //return $search_result;
     }
