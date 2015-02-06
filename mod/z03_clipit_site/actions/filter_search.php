@@ -22,7 +22,7 @@ $page = get_input('page');
 $search = get_input('search');
 $query_search = array_filter(array_merge($search, $tags));
 
-$output = '';
+$output = $page;
 if(!empty($query_search)){
     $output = set_search_input($page, $query_search);
 }

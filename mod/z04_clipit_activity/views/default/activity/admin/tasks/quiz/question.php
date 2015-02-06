@@ -83,17 +83,17 @@ if($question){
         );
         ?>
         <div class="form-group row" style="padding: 10px;">
+            <div class="form-group col-md-12">
+                <label>Enunciado de la pregunta</label>
+                <?php echo elgg_view("input/text", array(
+                    'name' => $input_prefix.'[question]['.$id.'][title]',
+                    'class' => 'form-control',
+                    'value' => $question->name,
+                    'required' => true
+                ));
+                ?>
+            </div>
             <div class="col-md-6">
-                <div class="form-group">
-                    <label>Enunciado de la pregunta</label>
-                    <?php echo elgg_view("input/text", array(
-                        'name' => $input_prefix.'[question]['.$id.'][title]',
-                        'class' => 'form-control',
-                        'value' => $question->name,
-                        'required' => true
-                    ));
-                    ?>
-                </div>
                 <div class="form-group">
                     <label>Información adicional</label>
                     <?php echo elgg_view("input/plaintext", array(
@@ -117,7 +117,7 @@ if($question){
                             ));
                         ?>
                         <?php
-                        $limit = 5;
+                        $limit = 6;
                         for($i=1;$i<=$limit;$i++):
                         ?>
                             <span class="cursor-pointer"
@@ -280,17 +280,18 @@ if($question){
             <table class="table bg-white examples-list" style="display: none;border: 1px solid #bae6f6;">
                 <thead>
                     <tr>
-                        <th>Examples related to Stumbling blocks</th>
+                        <th><?php echo elgg_echo('examples:related:stumbling_block');?></th>
                         <th class="text-right">
                             <?php echo elgg_view('output/url', array(
                                 'href'  => "javascript:;",
-                                'class' => 'fa fa-times close-table red',
+                                'class' => 'fa fa-chevron-down close-table blue',
                                 'text'  => '',
                             ));
                             ?>
                         </th>
                     </tr>
                 </thead>
+                <tbody></tbody>
             </table>
             <!-- Examples related to Stumbling Blocks end -->
         </div>

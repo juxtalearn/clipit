@@ -30,14 +30,14 @@ $entity_id = elgg_extract('entity_id', $vars);
     <?php echo elgg_view('input/reset',
         array(
             'value' => elgg_echo('cancel'),
-            'class' => "btn btn-border-blue cancel btn-default",
+            'class' => "btn btn-border-blue cancel btn-default btn-xs",
             'onclick' => 'javascript:$(this).closest(\'form\').hide();'
         ));
     ?>
     <?php echo elgg_view('input/submit',
         array(
             'value' => elgg_echo('save'),
-            'class' => "btn btn-primary"
+            'class' => "btn btn-primary btn-xs"
         ));
     ?>
 </div>

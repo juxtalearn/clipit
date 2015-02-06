@@ -10,7 +10,8 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$tags = get_input('tags');
+$tags = implode(",", get_search_input('tags'));
+
 $teachers = array('' => elgg_echo('all'));
 $teachers_role = array_pop(ClipitUser::get_by_role(array(ClipitUser::ROLE_TEACHER)));
 foreach($teachers_role as $teacher){
@@ -23,6 +24,10 @@ $status_array = array(
     ClipitActivity::STATUS_ENROLL => elgg_echo('status:enroll'),
     ClipitActivity::STATUS_CLOSED => elgg_echo('status:closed'),
 );
+echo elgg_view("input/hidden", array(
+    'name' => 'page',
+    'value' => 'activities'
+));
 ?>
 <?php
 echo elgg_view("input/hidden", array(
@@ -34,18 +39,18 @@ echo elgg_view("input/hidden", array(
 <div class="form-group">
     <label class="text-muted"><?php echo elgg_echo('activity:title');?></label>
     <?php echo elgg_view("input/text", array(
-        'name' => 'activity',
+        'name' => 'search[name]',
         'class' => 'form-control',
-        'value' => get_input('activity')
+        'value' => get_search_input('name')
     ));
     ?>
 </div>
 <div class="form-group">
     <label class="text-muted"><?php echo elgg_echo('tricky_topic');?></label>
     <?php echo elgg_view("input/text", array(
-        'name' => 'tricky_topic',
+        'name' => 'search[tricky_topic]',
         'class' => 'form-control',
-        'value' => get_input('tricky_topic')
+        'value' => get_search_input('tricky_topic')
     ));
     ?>
 </div>
@@ -56,9 +61,9 @@ echo elgg_view("input/hidden", array(
 <div class="form-group">
     <label class="text-muted"><?php echo elgg_echo('teacher');?></label>
     <?php echo elgg_view("input/dropdown", array(
-        'name' => 'teacher',
+        'name' => 'search[teacher]',
         'style' => 'padding: 0;height: 25px;',
-        'value' => get_input('teacher'),
+        'value' => get_search_input('teacher'),
         'class' => 'form-control',
         'options_values' => $teachers,
     ));
@@ -67,9 +72,9 @@ echo elgg_view("input/hidden", array(
 <div class="form-group">
     <label class="text-muted"><?php echo elgg_echo('activity:status');?></label>
     <?php echo elgg_view("input/dropdown", array(
-        'name' => 'status',
+        'name' => 'search[status]',
         'style' => 'padding: 0;height: 25px;',
-        'value' => get_input('status'),
+        'value' => get_search_input('status'),
         'class' => 'form-control',
         'options_values' => $status_array,
     ));
@@ -78,7 +83,7 @@ echo elgg_view("input/hidden", array(
 <div class="text-right">
     <?php echo elgg_view('input/submit', array(
         'class' => 'btn btn-primary btn-sm',
-        'value'  => elgg_echo('search'),
+        'value'  => elgg_echo('search:btn'),
     ));
     ?>
 </div>

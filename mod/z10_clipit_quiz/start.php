@@ -143,6 +143,19 @@ function quiz_page_handler($page){
             return false;
             break;
     }
+    switch($selected_tab){
+        case 'mine':
+            $owner = array();
+            foreach($entities as $entity){
+                if($entity->owner_id == elgg_get_logged_in_user_guid()){
+                    $owner[] = $entity;
+                }
+            }
+            $entities = $owner;
+            $count = count($entities);
+            $content = elgg_view('quiz/list', array('entities' => $entities, 'count' => $count));
+            break;
+    }
     $params = array(
         'content' => $content,
         'title' => $title,

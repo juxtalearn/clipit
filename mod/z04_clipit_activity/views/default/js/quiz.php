@@ -67,7 +67,7 @@ $.fn.quiz = function (options) {
                 if(!$(this).is(':checked')) {
                     table.find('tr[data-stumbling_block=' + stumbling_block + ']').remove();
                     if(table.find('tr[data-example]').length == 0){
-                        table.find('.close-table').click();
+                        table.hide();
                     }
                 } else {
                     elgg.getJSON('ajax/view/questions/examples', {
@@ -80,14 +80,14 @@ $.fn.quiz = function (options) {
                         }
                         $.each(data, function (i, item) {
                             if (table.find('tr[data-example=' + item.example + ']').length == 0) {
-                                table.append(
+                                table.find('tbody').append(
                                     $('<tr/>')
                                         .attr({
                                             'data-example': item.example,
                                             'data-stumbling_block': stumbling_block
                                         })
                                         .append('<td style="padding-top: 10px;" colspan="2">' + item.content + '</td>')
-                                );
+                                ).show();
                             }
                         });
                     }
@@ -99,7 +99,7 @@ $.fn.quiz = function (options) {
                 $(this).closest('td').find('.reflection-list').toggle();
             });
             self.question.find(".close-table").on("click", function(){
-                $(this).closest('.examples-list').hide();
+                $(this).closest('.examples-list').find('tbody').toggle();
             });
         };
         this.difficultySlider = function($elem){
@@ -107,14 +107,14 @@ $.fn.quiz = function (options) {
                 range: "min",
                 value: $elem.find("input").val(),
                 min: 1,
-                max: 5,
+                max: 6,
                 step: 1,
                 create: function(event, ui){
                     $elem.find("a").append($("<span/>"));
                     var value = $elem.find("input").val();
-                    if(value < 3){
+                    if(value < 4){
                         $elem.find(".ui-slider-range").addClass("green");
-                    }else if(value >= 3 && ui.value <= 4){
+                    }else if(value >= 4 && ui.value <= 5){
                         $elem.find(".ui-slider-range").addClass("yellow");
                     }else{
                         $elem.find(".ui-slider-range").addClass("red");

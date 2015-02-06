@@ -27,6 +27,7 @@ if(!$quiz_start){
 }
 $date = date("H:s, d/m/Y", $quiz_start + $quiz->max_time);
 $count_answer = ClipitQuiz::questions_answered_by_user($quiz_id, $user_id);
+
 ?>
 <style>
 <style>
@@ -49,8 +50,9 @@ $count_answer = ClipitQuiz::questions_answered_by_user($quiz_id, $user_id);
         font-size: 16px;
     }
 </style>
-<?php if(!$finished):?>
+
 <script>
+    <?php if(!$finished || $quiz->max_time != 0):?>
     var eventTime= <?php echo $quiz_start + $quiz->max_time?>; // Timestamp - Sun, 21 Apr 2013 13:00:00 GMT
     var currentTime = <?php echo time()?>; // Time()
     var diffTime = eventTime - currentTime;
@@ -67,6 +69,7 @@ $count_answer = ClipitQuiz::questions_answered_by_user($quiz_id, $user_id);
         }
         $('.countdown').text(duration.hours() + "h " + duration.minutes() + "m " + duration.seconds() + "s");
     }, interval);
+    <?php endif;?>
     $(function(){
         $(document).on("click", ".pagination li.page:not('.disabled')", function(){
             $(".question").hide();
@@ -88,7 +91,7 @@ $count_answer = ClipitQuiz::questions_answered_by_user($quiz_id, $user_id);
         $(document).on("click", ".pagination .prev-page, .pagination .next-page", function(){
             $(".pagination li#"+$(this).attr("id")+".page").click();
         });
-
+        <?php if(!$finished ):?>
         var typingTimer;                //timer identifier
         var doneTypingInterval = 500;  //time in ms, 5 second for example
         $(document).on("paste keyup change", ".quiz input[type=number], .quiz textarea", function(event){
@@ -145,9 +148,10 @@ $count_answer = ClipitQuiz::questions_answered_by_user($quiz_id, $user_id);
             };
             bootbox.alert(confirmOptions);
         });
+        <?php endif;?>
     });
 </script>
-<?php endif;?>
+
 <?php if($quiz->view_mode == ClipitQuiz::VIEW_MODE_PAGED):?>
 <script>
 $(function(){
@@ -155,7 +159,8 @@ $(function(){
 });
 </script>
 <?php endif;?>
-<?php if(!$finished):?>
+
+<?php if(!$finished || $quiz->max_time != 0):?>
 <div class="bg-info pull-right">
     <i class="fa fa-clock-o pull-left" style="font-size: 56px;"></i>
     <div class="content-block">
@@ -184,30 +189,7 @@ $(function(){
     <div class="pull-right"><small style="text-transform: uppercase"><?php echo elgg_echo('difficulty');?></small></div>
 <?php endif;?>
 <hr>
-<?php if($quiz->view_mode == ClipitQuiz::VIEW_MODE_PAGED):?>
-<div class="margin-bottom-20">
-    <div class="text-center">
-        <?php if(!$finished && !$finished_task):?>
-            <?php echo elgg_view('input/submit',
-                array(
-                    'value' => elgg_echo('finish'),
-                    'id' => 'finish-quiz',
-                    'class' => "btn btn-primary pull-right"
-                ));
-            ?>
-        <?php endif;?>
-        <ul class="pagination margin-0">
-            <li class="prev-page disabled" id="1"><a href="javascript:;"><i class="fa fa-angle-double-left"></i> Anterior</a></li>
-            <?php for($i=1; $i <= count($questions); $i++):?>
-                <li id="<?php echo $i;?>" class="<?php echo $i==1? 'active':'';?> page">
-                    <a href="javascript:;"><?php echo $i;?></a>
-                </li>
-            <?php endfor;?>
-            <li class="next-page" id="2"><a href="javascript:;">Siguiente <i class="fa fa-angle-double-right"></i></a></li>
-        </ul>
-    </div>
-</div>
-<?php endif;?>
+
 <div class="quiz <?php echo $vars['admin']?'quiz-admin':'';?>">
 <?php
 $num = 1;
@@ -288,6 +270,30 @@ endforeach;
         'value' => $task_id
     ));
 ?>
+    <?php if($quiz->view_mode == ClipitQuiz::VIEW_MODE_PAGED):?>
+        <div class="margin-top-20">
+            <div class="text-center">
+                <?php if(!$finished && !$finished_task):?>
+                    <?php echo elgg_view('input/submit',
+                        array(
+                            'value' => elgg_echo('finish'),
+                            'id' => 'finish-quiz',
+                            'class' => "btn btn-primary pull-right"
+                        ));
+                    ?>
+                <?php endif;?>
+                <ul class="pagination margin-0">
+                    <li class="prev-page disabled" id="1"><a href="javascript:;"><i class="fa fa-angle-double-left"></i> Anterior</a></li>
+                    <?php for($i=1; $i <= count($questions); $i++):?>
+                        <li id="<?php echo $i;?>" class="<?php echo $i==1? 'active':'';?> page">
+                            <a href="javascript:;"><?php echo $i;?></a>
+                        </li>
+                    <?php endfor;?>
+                    <li class="next-page" id="2"><a href="javascript:;">Siguiente <i class="fa fa-angle-double-right"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    <?php endif;?>
     <?php if((!$finished && !$finished_task) && $quiz->view_mode == ClipitQuiz::VIEW_MODE_LIST):?>
     <div class="margin-top-20">
         <?php echo elgg_view('input/submit',

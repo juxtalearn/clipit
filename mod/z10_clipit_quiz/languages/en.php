@@ -28,6 +28,7 @@ $english = array(
     'quiz:question:type:number' => 'Numeric question',
     'quiz:question:type:select_multi' => 'Multiple choice',
     'quiz:question:type:select_one' => 'One choice',
+    'quiz:max_time:none' => 'No limit',
 );
 
 add_translation('en', $english);

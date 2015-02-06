@@ -38,6 +38,7 @@ $spanish = array(
     'example:edit' => 'Editar ejemplo',
     'example:cantremove' => 'No se ha podido borrar el ejemplo',
     'example:removed' => 'Ejemplo borrado',
+    'examples:related:stumbling_block' => 'Ejemplos relacionados',
 
     'tags:select' => 'Seleccionar conceptos',
 

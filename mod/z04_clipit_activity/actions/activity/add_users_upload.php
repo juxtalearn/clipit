@@ -14,12 +14,15 @@ $file = $_FILES['upload-users'];
 $activity_id = get_input('entity-id');
 
 $users = ClipitUser::import_data($file['tmp_name']);
+$output = array();
 foreach($users as $user_id){
     $user = array_pop(ClipitUser::get_by_id(array($user_id)));
-    $output[] = array(
-        'name' => $user->name,
-        'id' => $user->id
-    );
+    if($user->role == ClipitUser::ROLE_STUDENT) {
+        $output[] = array(
+            'name' => $user->name,
+            'id' => $user->id
+        );
+    }
     if($activity_id){
         ClipitActivity::add_students($activity_id, array($user->id));
     }

@@ -38,6 +38,7 @@ $english = array(
     'example:edit' => 'Edit example',
     'example:cantremove' => 'Can not remove example',
     'example:removed' => 'Example removed',
+    'examples:related:stumbling_block' => 'Examples related to Stumbling blocks',
 
     'tags:select' => 'Select Stumbling blocks',
 

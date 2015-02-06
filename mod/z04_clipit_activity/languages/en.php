@@ -221,6 +221,7 @@ $english = array(
     'label' => 'Label',
     'labels' => 'Labels',
     'labels:none' => 'No labels added',
+    'labels:added' => 'Labels added',
     // Tags
     'tag' => 'Stumbling Block',
     'tags' => 'Stumbling Blocks',

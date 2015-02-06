@@ -31,7 +31,59 @@ if($example) {
     }
 }
 ?>
+<style>
+    .tab-set {
+        float: left;
+        /*background-color: #f7f7f7; */
+    }
 
+    .module-controls { width:100% }
+    .module-controls .tab-set {
+        display: table;
+        list-style: none;
+        overflow: hidden;
+        margin: 0 0 0.5em;
+        padding: 0;
+        table-layout: fixed;
+        width: 100%;
+        width: auto;
+    }
+    .module-controls .tab-set li {
+        background-color: #f7f7f7;
+        border-right: 4px solid white;
+        display: table-cell;
+        margin: 0;
+        padding: 0 10px;
+        vertical-align: middle;
+        border-radius: 4px 4px 0 0;
+        position: relative;
+    }
+    .module-controls .tab-set li a .fa-question-circle{
+        position: absolute;
+        right: 2px;
+        top: 10%;
+    }
+    .module-controls .tab-set li.active{
+        background-color: #FFF;
+    }
+    .module-controls .tab-set li.active a{
+        /*font-family: FuturaBoldRegular,Impact,'Impact Bold',Helvetica,Arial,sans,sans-serif;*/
+        font-weight: bold;
+        color: #32b4e5;
+        border: 0;
+        border-bottom: 1px solid #FFF;
+        cursor: default;
+    }
+    .module-controls .tab-set li a {
+        display: block;
+        padding: 10px 0;
+        text-decoration: none;
+        font-family: Helvetica,Arial,sans-serif;
+        font-size: 15px;
+        letter-spacing: 1px;
+        color: #9c9e9f;
+    }
+</style>
 <div class="margin-bottom-10" id="form-add-tricky-topic">
     <div class="col-md-7">
         <div class="form-group">
@@ -294,20 +346,22 @@ if($example) {
             <?php echo elgg_echo('reflection_palette:question');?>
         </span>
         <div role="tabpanel" class="margin-bottom-20">
-
+            <div class="module-controls">
             <!-- Nav tabs -->
-            <ul class="nav nav-tabs" role="tablist">
+            <ul class="navs nav-tab tab-set " role="tablist">
                 <?php
                 $i = 1;
                 foreach(ClipitReflectionItem::get_by_category(null, $user_language) as $category => $items):
                     $categories[$category] = $items;
                 ?>
-                    <li role="presentation" style="padding: 0;" class="col-md-3 <?php echo $i==1 ? 'active':'';?>">
+                    <li role="presentation" class=" <?php echo $i==1 ? 'active':'';?>">
                         <a
                             title="<?php echo $category;?>"
-                            class="text-truncate"
                             href="#<?php echo elgg_get_friendly_title($category);?>"
                             aria-controls="home" role="tab" data-toggle="tab">
+                            <i class="fa fa-question-circle"
+                               data-container="body" data-toggle="popover" data-trigger="hover"
+                               data-placement="bottom" data-content="<?php echo $items[0]->category_description[$language_index];?>"></i>
                             <?php echo $category;?>
                         </a>
                     </li>
@@ -316,6 +370,7 @@ if($example) {
                 endforeach;
                 ?>
             </ul>
+            </div>
             <!-- Tab panes -->
             <div class="tab-content">
                 <?php
@@ -323,11 +378,11 @@ if($example) {
                 foreach($categories as $category => $items):
                 ?>
                 <div role="tabpanel"
-                     class="reflection-item tab-pane row tab-pane <?php echo $i==1 ? 'active':'';?>"
+                     class="row tab-pane <?php echo $i==1 ? 'active':'';?>"
                      id="<?php echo elgg_get_friendly_title($category);?>"
                      style="padding: 10px;">
 
-                    <div class="col-md-5">
+                    <div class="col-md-12">
                         <div class="margin-bottom-10 text-muted">
                             <?php echo elgg_echo('reflection_palette:tick');?>:
                         </div>
@@ -340,8 +395,11 @@ if($example) {
                                        value="<?php echo $item->id;?>"
                                        <?php echo in_array($item->id, $example->reflection_item_array) ? 'checked': '';?>
                                        class="pull-left" style="margin-right: 5px;">
-                                <div class="content-block">
+                                <div class="content-block cursor-pointer">
                                     <?php echo $item->item_name[$language_index]; ?>
+                                    <div class="text-muted" style="font-weight: normal">
+                                        <?php echo $item->item_description[$language_index]; ?>
+                                    </div>
                                 </div>
                             </label>
                         <?php
@@ -349,7 +407,7 @@ if($example) {
                         endforeach;
                         ?>
                     </div>
-                    <div class="col-md-7">
+                    <div class="col-md-7 hide">
                         <div class="reflect-description" style="padding: 10px;margin: 0px 0px 10px;">
                             <strong><?php echo $category;?></strong>
                             <p>

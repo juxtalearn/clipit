@@ -43,7 +43,7 @@ function get_questions_from_tag($tag){
             <th data-dynatable-no-sort="true" style="width: 60px;"></th>
             <th><?php echo elgg_echo('quiz:question');?></th>
             <th><?php echo elgg_echo('tags');?></th>
-            <th style="width: 100px;" data-dynatable-sorts="dnumber"><?php echo elgg_echo('difficulty');?></th>
+            <th style="width: 110px;" data-dynatable-sorts="dnumber"><?php echo elgg_echo('difficulty');?></th>
             <th style="display: none;">Dnumber</th>
         </tr>
         </thead>

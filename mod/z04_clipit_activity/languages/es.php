@@ -222,6 +222,7 @@ $spanish = array(
     'label' => 'Etiqueta',
     'labels' => 'Etiquetas',
     'labels:none' => 'No hay etiquetas añadidas',
+    'labels:added' => 'Etiquetas añadidas',
     // Tags
     'tag' => 'Concepto',
     'tags' => 'Conceptos',

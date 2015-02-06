@@ -12,6 +12,76 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
+function activity_filter_search($query){
+    $item_ids = array();
+    $query_ar = json_decode($query);
+    foreach($query_ar as $s => $value){
+        switch($s){
+            case 'name':
+                $item_search = array();
+                $quizzes = ClipitActivity::get_from_search($value);
+                foreach ($quizzes as $quiz) {
+                    $item_ids[] = $quiz->id;
+                }
+                break;
+            case 'tricky_topic':
+                $item_search = array();
+                $tricky_topics = ClipitTrickyTopic::get_from_search($value);
+                foreach ($tricky_topics as $tricky_topic) {
+                    foreach(ClipitActivity::get_from_tricky_topic($tricky_topic->id) as $activity){
+                        $item_search[] = $activity->id;
+                    }
+                }
+                if(empty($item_ids)) {
+                    $item_ids = array_merge($item_ids, $item_search);
+                } else {
+                    $item_ids = array_intersect($item_ids, $item_search);
+                }
+                break;
+            case 'tags':
+                $item_search = array();
+                foreach ($value as $tag_name) {
+                    $tags = ClipitTag::get_from_search($tag_name);
+                    foreach ($tags as $tag) {
+                        $tricky_topics = ClipitTag::get_tricky_topics($tag->id);
+                        foreach($tricky_topics as $tricky_topic_id){
+                            foreach(ClipitActivity::get_from_tricky_topic($tricky_topic_id) as $activity){
+                                $item_search[] = $activity->id;
+                            }
+                        }
+                    }
+                }
+                if(empty($item_ids)) {
+                    $item_ids = array_merge($item_ids, $item_search);
+                } else {
+                    $item_ids = array_intersect($item_ids, $item_search);
+                }
+                break;
+            case 'teacher':
+                if(empty($item_ids)) {
+                    $item_ids = array_merge($item_ids, ClipitUser::get_activities((int)$value));
+                } else {
+                    $item_ids = array_intersect($item_ids, ClipitUser::get_activities((int)$value));
+                }
+                break;
+            case 'status':
+                $item_search = array();
+                $activities = ClipitActivity::get_all();
+                foreach($activities as $activity){
+                    if($activity->status == $value){
+                        $item_search[] = $activity->id;
+                    }
+                }
+                if(empty($item_ids)) {
+                    $item_ids = array_merge($item_ids, $item_search);
+                } else {
+                    $item_ids = array_intersect($item_ids, $item_search);
+                }
+                break;
+        }
+    }
+    return $item_ids;
+}
 
 function get_timestamp_from_string($string){
     return strtotime(str_replace('/', '-', $string));
@@ -165,7 +235,7 @@ function get_format_time($seconds = 0){
     }
     return $time;
 }
-function difficulty_bar($difficulty, $limit=5, $colors = false){
+function difficulty_bar($difficulty, $limit=6, $colors = false){
     $content = "";
     if($difficulty < 3){
         $color = "bg-green";

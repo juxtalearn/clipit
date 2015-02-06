@@ -24,7 +24,7 @@ $id = elgg_extract('id', $vars);
                 <th>Select</th>
                 <th>Question</th>
                 <th>Created</th>
-                <th style="width: 100px;">Difficulty</th>
+                <th style="width: 110px;">Difficulty</th>
             </tr>
             </thead>
             <tbody>

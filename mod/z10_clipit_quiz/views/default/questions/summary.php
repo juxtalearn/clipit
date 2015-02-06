@@ -26,7 +26,7 @@ $questions = ClipitQuizQuestion::get_by_id($question_ids, 0, 0, 'order');
     <thead>
     <tr>
         <th><?php echo elgg_echo('title');?></th>
-        <th style="width: 100px;"><?php echo elgg_echo('difficulty');?></th>
+        <th style="width: 110px;"><?php echo elgg_echo('difficulty');?></th>
     </tr>
     </thead>
     <tbody>

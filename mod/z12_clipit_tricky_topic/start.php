@@ -48,6 +48,7 @@ function tt_page_handler($page){
     $count = 0;
     $params = array();
     $view = $page[0];
+    $table_orders = array();
     $tt_sidebar = false;
 
     $sort = get_input('sort');
@@ -107,12 +108,12 @@ function tt_page_handler($page){
             break;
         case 'stumbling_blocks':
             $title = elgg_echo('tags');
-            $entities = ClipitTag::get_all();
-            $count = count($entities);
+            $all_entities = ClipitTag::get_all();
+            $count = count($all_entities);
             if($order_by){
-                entities_order($entities, $order_by, $sort, ClipitTag::list_properties());
+                entities_order($all_entities, $order_by, $sort, ClipitTag::list_properties());
             }
-            $entities = array_slice($entities, clipit_get_offset(), clipit_get_limit());
+            $entities = array_slice($all_entities, clipit_get_offset(), clipit_get_limit(10));
             $to_order = array(
                 'name' => elgg_echo('name'),
             );
@@ -351,13 +352,18 @@ function tt_page_handler($page){
     switch($selected_tab){
         case 'mine':
             $owner = array();
-            foreach($entities as $entity){
+            foreach($all_entities as $entity){
                 if($entity->owner_id == elgg_get_logged_in_user_guid()){
                     $owner[] = $entity;
                 }
             }
-            $entities = $owner;
-            $content = elgg_view($view.'/list', array('entities' => $entities, 'count' => $count));
+            $count = count($owner);
+            $entities = array_slice($owner, clipit_get_offset(), clipit_get_limit(10));
+            $content = elgg_view($view.'/list', array(
+                'entities' => $entities,
+                'count' => $count,
+                'table_orders' => $table_orders
+            ));
             break;
     }
     $params = array(

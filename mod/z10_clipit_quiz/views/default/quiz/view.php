@@ -92,17 +92,21 @@ $(function() {
         </div>
         <div class="margin-bottom-10">
             <small class="show">Tiempo máximo para hacer el test</small>
-            <?php if(floor($quiz->max_time / 86000) > 0):?>
-                <?php echo floor($quiz->max_time / 86000);?>
-                <small class="margin-right-10"><?php echo elgg_echo('time:days');?></small>
-            <?php endif;?>
-            <?php if(floor(($quiz->max_time / 3600) % 24) > 0):?>
-                <?php echo floor(($quiz->max_time / 3600) % 24);?>
-                <small class="margin-right-10"><?php echo elgg_echo('time:hours');?></small>
-            <?php endif;?>
-            <?php if(floor(($quiz->max_time / 60) % 60) > 0):?>
-                <?php echo floor(($quiz->max_time / 60) % 60);?>
-                <small class="margin-right-10"><?php echo elgg_echo('time:minutes');?></small>
+            <?php if($quiz->max_time > 0):?>
+                <?php if(floor($quiz->max_time / 86000) > 0):?>
+                    <?php echo floor($quiz->max_time / 86000);?>
+                    <small class="margin-right-10"><?php echo elgg_echo('time:days');?></small>
+                <?php endif;?>
+                <?php if(floor(($quiz->max_time / 3600) % 24) > 0):?>
+                    <?php echo floor(($quiz->max_time / 3600) % 24);?>
+                    <small class="margin-right-10"><?php echo elgg_echo('time:hours');?></small>
+                <?php endif;?>
+                <?php if(floor(($quiz->max_time / 60) % 60) > 0):?>
+                    <?php echo floor(($quiz->max_time / 60) % 60);?>
+                    <small class="margin-right-10"><?php echo elgg_echo('time:minutes');?></small>
+                <?php endif;?>
+            <?php else:?>
+                <?php echo elgg_echo('quiz:max_time:none');?>
             <?php endif;?>
         </div>
     </div>

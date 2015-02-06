@@ -26,8 +26,9 @@ $spanish = array(
     'quiz:question:answer:write' => 'Escribe la respuesta correcta',
     'quiz:question:type:true_false' => 'Verdadero o Falso',
     'quiz:question:type:number' => 'Respuesta numérica',
-    'quiz:question:type:select_multi' => 'Multiples opciones',
-    'quiz:question:type:select_one' => 'Una opción',
+    'quiz:question:type:select_multi' => 'Multiples respuestas',
+    'quiz:question:type:select_one' => 'Única respuesta',
+    'quiz:max_time:none' => 'Sin límite',
 );
 
 add_translation('es', $spanish);

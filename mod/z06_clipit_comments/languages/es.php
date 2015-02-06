@@ -14,6 +14,7 @@ $spanish = array(
     // Comment
     'comments' => 'Comentarios',
     'comment:create' => 'Enviar comentario',
+    'comment:created' => 'Comentario enviado',
     'comment:reply:to' => 'Responder a',
 );
 

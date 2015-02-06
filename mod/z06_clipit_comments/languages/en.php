@@ -14,6 +14,7 @@ $english = array(
     // Comment
     'comments' => 'Comments',
     'comment:create' => 'Create comment',
+    'comment:created' => 'Comment created',
     'comment:reply:to' => 'Reply to',
 );
 

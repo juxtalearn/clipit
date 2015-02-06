@@ -468,91 +468,46 @@ function activities_page_handler($page) {
     $filter = elgg_view('navigation/tabs', array('selected' => $selected_tab, 'href' => $page[0]));
     $sidebar = elgg_view_module('aside', elgg_echo('filter'),
         elgg_view_form(
-            'activities/filter',
+            'filter_search',
             array(
-                'disable_security' => true,
-                'action' => 'activities',
-                'method' => 'GET',
                 'id' => 'add_labels',
                 'style' => 'background: #fff;padding: 15px;',
                 'body' => elgg_view('activities/sidebar/filter')
             )
-        ), array('style' => 'margin-top: 45px;'));
+        ));
     // Filter search
-    $search = false;
-    $activity_ids = array();
-    if($activity_name = get_input('activity')){
-        $search = true;
-        $activities = ClipitActivity::get_from_search($activity_name);
-        foreach ($activities as $activity) {
-            $activity_ids[] = $activity->id;
-        }
-    }
-    if($teacher_id = (int)get_input('teacher')) {
-        $search = true;
-        if(empty($activity_ids)) {
-            $activity_ids = array_merge($activity_ids, ClipitUser::get_activities($teacher_id));
+    if($search = get_input('s')) {
+        $all_entities = activity_filter_search($search);
+        if($order_by){
+            $all_entities = get_entities_order(
+                'ClipitActivity',
+                $all_entities,
+                clipit_get_limit(10),
+                clipit_get_offset(),
+                $order_by,
+                $sort
+            );
         } else {
-            $activity_ids = array_intersect($activity_ids, ClipitUser::get_activities($teacher_id));
+            $all_entities = ClipitActivity::get_by_id($all_entities);
         }
-    }
-    if($tricky_topic_name = get_input('tricky_topic')) {
-        $search = true;
-        $activities_search = array();
-        $tricky_topics = ClipitTrickyTopic::get_from_search($tricky_topic_name);
-        foreach ($tricky_topics as $tricky_topic) {
-            foreach(ClipitActivity::get_from_tricky_topic($tricky_topic->id) as $activity){
-                $activities_search[] = $activity->id;
-            }
-        }
-        if(empty($activity_ids)) {
-            $activity_ids = array_merge($activity_ids, $activities_search);
-        } else {
-            $activity_ids = array_intersect($activity_ids, $activities_search);
-        }
-    }
-    if($tags_array = get_input('tags')) {
-        $search = true;
-        $activities_search = array();
-        $tags_array = explode(",", $tags_array);
-        foreach ($tags_array as $tag_name) {
-            $tags = ClipitTag::get_from_search($tag_name);
-            foreach ($tags as $tag) {
-                foreach (ClipitTag::get_tricky_topics($tag->id) as $tricky_topic_id) {
-                    foreach(ClipitActivity::get_from_tricky_topic($tricky_topic_id) as $activity){
-                        $activities_search[] = $activity->id;
-                    }
-                }
-            }
-        }
-        if(empty($activity_ids)) {
-            $activity_ids = array_merge($activity_ids, $activities_search);
-        } else {
-            $activity_ids = array_intersect($activity_ids, $activities_search);
-        }
-    }
-    if($status = get_input('status')) {
-        $search = true;
-        $activities_search = array();
-        $activities = ClipitActivity::get_all();
-        foreach($activities as $activity){
-            if($activity->status == $status){
-                $activities_search[] = $activity->id;
-            }
-        }
-        if(empty($activity_ids)) {
-            $activity_ids = array_merge($activity_ids, $activities_search);
-        } else {
-            $activity_ids = array_intersect($activity_ids, $activities_search);
-        }
-    }
-    if($search){
-        $entities = ClipitActivity::get_by_id($activity_ids);
+        $count = count($all_entities);
+        $entities = array_slice($all_entities, clipit_get_offset(), clipit_get_limit(10));
     } else {
-        $entities = ClipitActivity::get_all();
-    }
-    if($order_by) {
-        entities_order($entities, $order_by, $sort, ClipitActivity::list_properties());
+        $all_entities = ClipitActivity::get_all(0, 0, '', true, true);
+        if($order_by) {
+            $all_entities = get_entities_order(
+                'ClipitActivity',
+                $all_entities,
+                clipit_get_limit(10),
+                clipit_get_offset(),
+                $order_by,
+                $sort
+            );
+        } else {
+            $all_entities = ClipitActivity::get_by_id($all_entities);
+        }
+        $count = count($all_entities);
+        $entities = array_slice($all_entities, clipit_get_offset(), clipit_get_limit(10));
     }
     switch($selected_tab){
         case 'mine':
@@ -561,8 +516,19 @@ function activities_page_handler($page) {
         default:
             break;
     }
-    $count = count($entities);
-    $entities = array_slice($entities, clipit_get_offset(), clipit_get_limit(10));
+    switch($selected_tab){
+        case 'mine':
+            $owner = array();
+            foreach($entities as $entity){
+                if($entity->owner_id == elgg_get_logged_in_user_guid()){
+                    $owner[] = $entity;
+                }
+            }
+            $entities = $owner;
+            $count = count($entities);
+            break;
+    }
+
     $to_order = array(
         'name' => elgg_echo('activity:title'),
         'tricky_topic' => elgg_echo('tricky_topic'),
