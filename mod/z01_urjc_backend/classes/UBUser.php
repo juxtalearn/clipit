@@ -158,10 +158,11 @@ class UBUser extends UBItem {
                 $item->hash = $new_password["hash"];
                 continue;
             }
-            if ($prop == "login") {
+            if ($prop == "login" && empty($id)) {
                 $user_array = static::get_by_login(array($value));
                 if (!empty($user_array[$value])) {
-                    return $user_array[$value]->id;
+                    $existing_user = $user_array[$value];
+                    return static::set_properties((int)$existing_user->id, (array)$prop_value_array);
                 }
             }
             if (!array_key_exists($prop, $property_list)) {
