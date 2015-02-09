@@ -518,13 +518,13 @@ class UBItem {
     static function get_from_search($search_string, $name_only = false, $strict = false, $offset = 0, $limit = 0) {
         $search_result = array();
         if(!$strict) {
+            $search_string = strtolower($search_string);
             // get the full array of entities
             $elgg_object_array = elgg_get_entities(
                 array('type' => static::TYPE, 'subtype' => static::SUBTYPE, 'limit' => 0)
             );
             $search_result = array();
             foreach($elgg_object_array as $elgg_object) {
-                $search_string = strtolower($search_string);
                 // search for string in name
                 if(strpos(strtolower($elgg_object->name), $search_string) !== false) {
                     $search_result[(int)$elgg_object->guid] = new static((int)$elgg_object->guid, $elgg_object);
