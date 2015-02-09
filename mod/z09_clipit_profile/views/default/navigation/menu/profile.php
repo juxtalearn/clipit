@@ -14,7 +14,7 @@ $user_id = elgg_get_logged_in_user_guid();
 $user = array_pop(ClipitUser::get_by_id(array($user_id)));
 ?>
 <li class="separator">|</li>
-<li style="margin-left: 10px;">
+<li class="margin-left-10 margin-right-10">
     <?php echo elgg_view('output/url', array(
         'title' => $user->name,
         'href'  => "profile/{$user->login}",

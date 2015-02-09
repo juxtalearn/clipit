@@ -12,6 +12,17 @@
  */
 $activity = elgg_extract('activity', $vars);
 ?>
+<script>
+$(function(){
+    $('select[name="group-mode"]').change(function(){
+       if($(this).val() == '<?php echo ClipitActivity::GROUP_MODE_TEACHER;?>'){
+           $('.max-users').hide();
+       } else {
+           $('.max-users').show();
+       }
+    });
+});
+</script>
 <?php echo elgg_view("input/hidden", array(
     'name' => "entity-id",
     'value' => $activity->id,
@@ -20,19 +31,18 @@ $activity = elgg_extract('activity', $vars);
 <div class="bg-info">
     <div class="row">
         <div class="col-xs-9">
-            <?php if($activity->group_mode != ClipitActivity::GROUP_MODE_TEACHER):?>
-                <div class="pull-right">
-                    <small class="show"><?php echo elgg_echo('group:max_size');?></small>
-                    <?php
-                        echo elgg_view("input/text", array(
-                            'name' => 'max-users',
-                            'value' => $activity->max_group_size,
-                            'class' => 'form-control',
-                            'style' => 'width: 50%;'
-                        ));
-                    ?>
-                </div>
-            <?php endif;?>
+            <div class="pull-right max-users"
+                 style="display: <?php echo $activity->group_mode != ClipitActivity::GROUP_MODE_TEACHER ? 'block':'none';?>;">
+                <small class="show"><?php echo elgg_echo('group:max_size');?></small>
+                <?php
+                    echo elgg_view("input/text", array(
+                        'name' => 'max-users',
+                        'value' => $activity->max_group_size,
+                        'class' => 'form-control',
+                        'style' => 'width: 50%;'
+                    ));
+                ?>
+            </div>
             <div class="pull-left">
                 <h3 class="panel-title blue margin-bottom-10"><?php echo elgg_echo('activity:grouping_mode');?></h3>
                 <?php

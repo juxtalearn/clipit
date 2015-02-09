@@ -54,13 +54,13 @@ function quiz_page_handler($page){
             $filter = elgg_view('quiz/filter', array('selected' => $selected_tab, 'href' => $page[0]));
 
             if($search = get_input('s')) {
-                $entities = quiz_filter_search($search);
-                $count = count($entities);
-                $entities = ClipitQuiz::get_by_id($entities, clipit_get_limit(10),clipit_get_offset());
+                $all_entities = quiz_filter_search($search);
+                $all_entities = ClipitExample::get_by_id($all_entities);
             } else {
-                $entities = ClipitQuiz::get_all(clipit_get_limit(10), clipit_get_offset());
-                $count = count(ClipitQuiz::get_all(0, 0, "", true, true));
+                $all_entities = ClipitQuiz::get_all(0, 0);
             }
+            $count = count($all_entities);
+            $entities = array_slice($all_entities, clipit_get_offset(), clipit_get_limit(10));
 
             $content = elgg_view('quiz/list', array('entities' => $entities, 'count' => $count));
             break;
@@ -146,13 +146,13 @@ function quiz_page_handler($page){
     switch($selected_tab){
         case 'mine':
             $owner = array();
-            foreach($entities as $entity){
+            foreach($all_entities as $entity){
                 if($entity->owner_id == elgg_get_logged_in_user_guid()){
                     $owner[] = $entity;
                 }
             }
-            $entities = $owner;
-            $count = count($entities);
+            $count = count($owner);
+            $entities = array_slice($owner, clipit_get_offset(), clipit_get_limit(10));
             $content = elgg_view('quiz/list', array('entities' => $entities, 'count' => $count));
             break;
     }
