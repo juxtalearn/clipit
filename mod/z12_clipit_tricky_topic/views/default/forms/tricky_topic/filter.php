@@ -35,15 +35,6 @@ echo elgg_view("input/hidden", array(
     <label class="text-muted"><?php echo elgg_echo('tags');?></label>
     <ul id="tags"></ul>
 </div>
-<?php
-$ed_levels = array(
-    '' => '',
-    1 => elgg_echo('education_level:1'),
-    2 => elgg_echo('education_level:2'),
-    3 => elgg_echo('education_level:3'),
-    4 => elgg_echo('education_level:4'),
-);
-?>
 <div class="form-group">
     <label class="text-muted"><?php echo elgg_echo('education_level');?></label>
     <?php echo elgg_view("input/dropdown", array(

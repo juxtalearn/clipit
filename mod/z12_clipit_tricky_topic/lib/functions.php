@@ -167,6 +167,34 @@ function trickytopic_filter_search($query){
                     $item_ids = array_intersect($item_ids, $item_search);
                 }
                 break;
+            case 'subject':
+                $item_search = array();
+                $tricky_topics = ClipitTrickyTopic::get_all();
+                foreach($tricky_topics as $tricky_topic){
+                    if(stripos($tricky_topic->subject, $value) !== false){
+                        $item_search[] = $tricky_topic->id;
+                    }
+                }
+                if(empty($item_ids)) {
+                    $item_ids = array_merge($item_ids, $item_search);
+                } else {
+                    $item_ids = array_intersect($item_ids, $item_search);
+                }
+                break;
+            case 'education_level':
+                $item_search = array();
+                $tricky_topics = ClipitTrickyTopic::get_all();
+                foreach($tricky_topics as $tricky_topic){
+                    if(stripos($tricky_topic->education_level, $value) !== false){
+                        $item_search[] = $tricky_topic->id;
+                    }
+                }
+                if(empty($item_ids)) {
+                    $item_ids = array_merge($item_ids, $item_search);
+                } else {
+                    $item_ids = array_intersect($item_ids, $item_search);
+                }
+                break;
         }
     }
     return $item_ids;
@@ -205,6 +233,34 @@ function example_filter_search($query){
                         foreach(ClipitExample::get_by_tags(array($tag->id)) as $example){
                             $item_search[] = $example->id;
                         }
+                    }
+                }
+                if(empty($item_ids)) {
+                    $item_ids = array_merge($item_ids, $item_search);
+                } else {
+                    $item_ids = array_intersect($item_ids, $item_search);
+                }
+                break;
+            case 'country':
+                $item_search = array();
+                $examples = ClipitExample::get_all();
+                foreach($examples as $example){
+                    if($example->country == $value){
+                        $item_search[] = $example->id;
+                    }
+                }
+                if(empty($item_ids)) {
+                    $item_ids = array_merge($item_ids, $item_search);
+                } else {
+                    $item_ids = array_intersect($item_ids, $item_search);
+                }
+                break;
+            case 'location':
+                $item_search = array();
+                $examples = ClipitExample::get_all();
+                foreach($examples as $example){
+                    if($example->location == $value){
+                        $item_search[] = $example->id;
                     }
                 }
                 if(empty($item_ids)) {

@@ -162,7 +162,7 @@ $(function(){
                 <div class="col-md-4">
                     <small><?php echo elgg_echo('time:minutes');?></small>
                     <?php
-                    $minutes = array_combine(range(0, 45, 15), range(0, 45, 15));
+                    $minutes = array_combine(range(0, 55, 5), range(0, 55, 5));
                     echo elgg_view("input/dropdown", array(
                         'name' => $input_prefix.'[time][m]',
                         'style' => 'padding:5px;',

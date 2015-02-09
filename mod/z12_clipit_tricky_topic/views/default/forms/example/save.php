@@ -27,63 +27,10 @@ if($example) {
 
     $tricky_topic_id = $example->tricky_topic;
     if($tags){
-        $tags_diff = array_diff(array_keys($tags), ClipitTrickyTopic::get_tags($example->tricky_topic));
+        $tags_diff = array_diff(($example->tag_array), ClipitTrickyTopic::get_tags($example->tricky_topic));
     }
 }
 ?>
-<style>
-    .tab-set {
-        float: left;
-        /*background-color: #f7f7f7; */
-    }
-
-    .module-controls { width:100% }
-    .module-controls .tab-set {
-        display: table;
-        list-style: none;
-        overflow: hidden;
-        margin: 0 0 0.5em;
-        padding: 0;
-        table-layout: fixed;
-        width: 100%;
-        width: auto;
-    }
-    .module-controls .tab-set li {
-        background-color: #f7f7f7;
-        border-right: 4px solid white;
-        display: table-cell;
-        margin: 0;
-        padding: 0 10px;
-        vertical-align: middle;
-        border-radius: 4px 4px 0 0;
-        position: relative;
-    }
-    .module-controls .tab-set li a .fa-question-circle{
-        position: absolute;
-        right: 2px;
-        top: 10%;
-    }
-    .module-controls .tab-set li.active{
-        background-color: #FFF;
-    }
-    .module-controls .tab-set li.active a{
-        /*font-family: FuturaBoldRegular,Impact,'Impact Bold',Helvetica,Arial,sans,sans-serif;*/
-        font-weight: bold;
-        color: #32b4e5;
-        border: 0;
-        border-bottom: 1px solid #FFF;
-        cursor: default;
-    }
-    .module-controls .tab-set li a {
-        display: block;
-        padding: 10px 0;
-        text-decoration: none;
-        font-family: Helvetica,Arial,sans-serif;
-        font-size: 15px;
-        letter-spacing: 1px;
-        color: #9c9e9f;
-    }
-</style>
 <div class="margin-bottom-10" id="form-add-tricky-topic">
     <div class="col-md-7">
         <div class="form-group">

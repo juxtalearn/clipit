@@ -53,7 +53,7 @@ $multimedia = array_merge(
         <div class="col-md-7 text-truncate">
             <small class="show"><?php echo elgg_echo('location');?></small>
             <?php echo elgg_view('output/url', array(
-                'href'  => "tricky_topics/examples?location={$example->location}",
+                'href'  => set_search_input('tricky_topics/examples', array('location'=>$example->location)),
                 'title' => $example->location,
                 'text'  => $example->location,
             ));
@@ -62,7 +62,7 @@ $multimedia = array_merge(
         <div class="col-md-5 text-truncate">
             <small class="show"><?php echo elgg_echo('country');?></small>
             <?php echo elgg_view('output/url', array(
-                'href'  => "tricky_topics/examples?country={$example->country}",
+                'href'  => set_search_input('tricky_topics/examples', array('country'=>$example->country)),
                 'title' => get_countries_list($example->country),
                 'text'  => get_countries_list($example->country),
             ));

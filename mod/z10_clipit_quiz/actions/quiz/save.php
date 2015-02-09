@@ -23,21 +23,25 @@ foreach($questions as $question){
     switch($question['type']){
         case ClipitQuizQuestion::TYPE_SELECT_MULTI:
             foreach($question['select_multi'] as $select){
-                $values[] = $select['value'];
-                if(isset($select['correct'])){
-                    $validations[] = 1;
-                } else {
-                    $validations[] = 0;
+                if(trim($select['value'])!='') {
+                    $values[] = $select['value'];
+                    if (isset($select['correct'])) {
+                        $validations[] = 1;
+                    } else {
+                        $validations[] = 0;
+                    }
                 }
             }
             break;
         case ClipitQuizQuestion::TYPE_SELECT_ONE:
             foreach($question['select_one'] as $select){
-                $values[] = $select['value'];
-                if(isset($select['correct'])){
-                    $validations[] = 1;
-                } else {
-                    $validations[] = 0;
+                if(trim($select['value'])!=''){
+                    $values[] = $select['value'];
+                    if(isset($select['correct'])){
+                        $validations[] = 1;
+                    } else {
+                        $validations[] = 0;
+                    }
                 }
             }
             break;

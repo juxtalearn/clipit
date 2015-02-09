@@ -1117,3 +1117,53 @@ tr.info td {
     right: -15px;
   }
 }
+//
+// Reflection item tabs
+// --------------------------------------------------
+.module-controls {
+  width: 100%;
+  .tab-set{
+    float: left;
+    display: table;
+    list-style: none;
+    overflow: hidden;
+    margin: 0 0 0.5em;
+    padding: 0;
+    table-layout: fixed;
+    width: auto;
+    li {
+      background-color: #f7f7f7;
+      border-right: 4px solid white;
+      display: table-cell;
+      margin: 0;
+      padding: 0 10px;
+      vertical-align: middle;
+      border-radius: 4px 4px 0 0;
+      position: relative;
+      a {
+        display: block;
+        padding: 10px 0;
+        padding-right: 10px;
+        text-decoration: none;
+        font-size: 15px;
+        letter-spacing: 1px;
+        color: @grey_text;
+        .fa-question-circle {
+          position: absolute;
+          right: 2px;
+          top: 10%;
+        }
+      }
+      &.active{
+        background-color: #FFF;
+        a{
+          font-weight: bold;
+          color: #32b4e5;
+          border: 0;
+          border-bottom: 1px solid #FFF;
+          cursor: default;
+        }
+      }
+    }
+  }
+}

@@ -22,7 +22,7 @@ echo elgg_view("files/search");
 foreach($files as $file_id){
     $file =  array_pop(ClipitFile::get_by_id(array($file_id)));
     $file_url = "{$href}/view/{$file->id}". ($vars['task_id'] ? "?task_id=".$vars['task_id']: "");
-
+    $owner = array_pop(ClipitUser::get_by_id(array($file->owner_id)));
     $select = '<input type="checkbox" name="check-file[]" value="'.$file->id.'" class="select-simple">';
     $file_icon_preview = elgg_view("multimedia/file/preview", array('file'  => $file));
     $file_icon = elgg_view('output/url', array(
@@ -52,15 +52,14 @@ foreach($files as $file_id){
     // Action buttons (Download|Publish)
     $buttons = elgg_view('output/url', array(
                     'href'  => "file/download/".$file->id. ($vars['task_id'] ? "?task_id=".$vars['task_id']: ""),
-                    'title' => $owner->name,
                     'class' => 'btn btn-default btn-icon',
                     'text'  => '<i class="fa fa-download"></i>'
     ));
     $author = elgg_view('output/url', array(
-        'href'  => "profile/{$user->login}",
-        'title' => $user->name,
+        'href'  => "profile/{$owner->login}",
+        'title' => $owner->name,
         'class' => 'show',
-        'text'  => '<i class="fa-user fa"></i> '.$user->name,
+        'text'  => '<i class="fa-user fa"></i> '.$owner->name,
     ));
     $file_link_text = '<strong>'.$file->name.'</strong>';
     $file_link = elgg_view('output/url', array(

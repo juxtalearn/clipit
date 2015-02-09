@@ -71,7 +71,7 @@ $count = elgg_extract('count', $vars);
                     ));
                     ?>
                     </div>
-                    <?php echo elgg_view('output/friendlytime', array('time' => $tricky_topic->time_created));?>
+                    <?php echo elgg_view('output/friendlytime', array('time' => $tag->time_created));?>
                 </small>
             </td>
             <td>

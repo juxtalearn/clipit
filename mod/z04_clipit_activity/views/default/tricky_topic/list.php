@@ -18,7 +18,9 @@ if($from_view = elgg_extract('tricky_topic', $vars)){
     $tricky_topic_id = $from_view;
     $show_tags = elgg_extract('show_tags', $vars);
     $tags = elgg_extract('tags', $vars);
-    $input_name = elgg_extract('input_name', $vars);
+    if(elgg_extract('input_name', $vars)){
+        $input_name = elgg_extract('input_name', $vars);
+    }
 }
 
 $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($tricky_topic_id)));

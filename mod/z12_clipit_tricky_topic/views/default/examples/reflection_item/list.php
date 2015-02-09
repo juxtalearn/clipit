@@ -23,9 +23,9 @@ foreach($items as $item) {
     <?php echo elgg_echo('reflection_palette:question');?>
 </span>
 <div role="tabpanel" class="margin-bottom-20">
-
+    <div class="module-controls">
     <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
+    <ul class="navs nav-tab tab-set" role="tablist">
         <?php
         $i = 1;
         foreach($categories as $category => $description):
@@ -33,10 +33,10 @@ foreach($items as $item) {
             <li role="presentation" class="<?php echo $i==1 ? 'active':'';?>">
                 <a href="#<?php echo elgg_get_friendly_title($category);?>" aria-controls="home" role="tab" data-toggle="tab">
                     <?php echo $category;?>
-                    <span data-container="body" data-toggle="popover" data-trigger="hover"
-                          data-placement="bottom" data-content="<?php echo $description;?>">
-                        <i class="fa fa-question-circle"></i>
-                    </span>
+                    <i class="fa fa-question-circle"
+                       data-container="body" data-toggle="popover" data-trigger="hover"
+                        data-placement="bottom" data-content="<?php echo $description;?>">
+                    </i>
                 </a>
             </li>
             <?php
@@ -44,8 +44,8 @@ foreach($items as $item) {
         endforeach;
         ?>
     </ul>
-
     <!-- Tab panes -->
+    </div>
     <div class="tab-content">
         <?php
         $x=1;
