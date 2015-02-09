@@ -40,7 +40,7 @@ $tt_tags = ClipitTrickyTopic::get_tags($tricky_topic);
                     'onclick' => '$(this).closest(\'.question\').remove();',
                 ));
                 ?>
-                <i class="fa fa-reorder text-muted margin-left-20 reorder-question"></i>
+                <i class="fa fa-arrows-v text-muted margin-left-20 reorder-question"></i>
             </div>
             <span><strong><?php echo $question->name;?></strong></span>
             <div id="question_<?php echo $question->id;?>" style="display: none">

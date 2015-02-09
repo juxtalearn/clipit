@@ -15,6 +15,8 @@ $finished = elgg_extract('finished', $vars);
 $finished_task = elgg_extract('finished_task', $vars);
 $question = elgg_extract('question', $vars);
 $i = 1;
+$opts = $question->option_array;
+
 foreach($question->option_array as $option):
     $checked = '';
     if($result->answer[$i-1]){

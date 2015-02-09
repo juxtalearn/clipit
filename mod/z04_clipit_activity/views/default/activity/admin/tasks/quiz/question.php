@@ -71,7 +71,7 @@ if($question){
     <div class="<?php echo $num !== false ? "col-xs-11":"" ?>">
         <div style="padding: 10px; background: #fafafa;">
         <?php if($num !== false):?>
-            <i class="fa fa-reorder text-muted pull-right reorder-question"></i>
+            <i class="fa fa-arrows-v text-muted pull-right reorder-question"></i>
         <?php endif; ?>
         <?php
         $types = array(

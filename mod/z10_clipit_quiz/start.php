@@ -55,7 +55,7 @@ function quiz_page_handler($page){
 
             if($search = get_input('s')) {
                 $all_entities = quiz_filter_search($search);
-                $all_entities = ClipitExample::get_by_id($all_entities);
+                $all_entities = ClipitQuiz::get_by_id($all_entities);
             } else {
                 $all_entities = ClipitQuiz::get_all(0, 0);
             }

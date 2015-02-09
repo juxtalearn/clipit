@@ -202,7 +202,7 @@ $.fn.quiz = function (options) {
         this.sortableOrder = function(){
             return $questions.sortable({
                 dropOnEmpty: true,
-                handle: '.fa-reorder',
+                handle: '.reorder-question',
                 update: function(event, ui) {
                     self.getNum();
                 }
