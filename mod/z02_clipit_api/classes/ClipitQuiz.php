@@ -191,8 +191,12 @@ class ClipitQuiz extends UBItem {
             return false;
         }
         $prop_value_array = (array)static::get_properties($id, array("max_time"));
+        $max_time = (int)$prop_value_array["max_time"];
+        if($max_time == 0){
+            return false;
+        }
         $current_time = (int)time();
-        if($start_time + $prop_value_array["max_time"] <= $current_time){
+        if($start_time + $max_time <= $current_time){
             return true;
         }
         return false;
