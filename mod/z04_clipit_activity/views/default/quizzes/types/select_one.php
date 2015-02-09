@@ -15,24 +15,25 @@ $finished = elgg_extract('finished', $vars);
 $finished_task = elgg_extract('finished_task', $vars);
 $question = elgg_extract('question', $vars);
 $i = 1;
-$opts = $question->option_array;
+$options = $question->option_array;
+//uksort($options, function() { return rand() > rand(); });
 
-foreach($question->option_array as $option):
+foreach($options as $key => $option):
     $checked = '';
-    if($result->answer[$i-1]){
+    if($result->answer[$key-1]){
         $checked = 'checked';
     }
 ?>
 <label style="font-weight: normal">
     <?php if($finished):?>
         <input type="radio" disabled <?php echo $checked;?>/>
-        <?php if($question->validation_array[$i-1] && $finished_task):?>
+        <?php if($question->validation_array[$key-1] && $finished_task):?>
             <strong><?php echo $option;?></strong>
         <?php else: ?>
             <?php echo $option;?>
         <?php endif;?>
     <?php else:?>
-        <input type="radio" value="<?php echo $i;?>" <?php echo $checked;?> name="question[<?php echo $question->id;?>]" />
+        <input type="radio" value="<?php echo $key;?>" <?php echo $checked;?> name="question[<?php echo $question->id;?>]" />
         <?php echo $option;?>
     <?php endif;?>
 </label>

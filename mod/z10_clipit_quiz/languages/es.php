@@ -11,7 +11,7 @@
  * @package         ClipIt
  */
 $spanish = array(
-    'clone' => 'Clon',
+    'clone' => 'Copia',
     'btn:remove' => 'Quitar',
     'quizzes' => 'Tests',
     'quiz:name' => 'Título del test',

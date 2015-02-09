@@ -26,10 +26,11 @@ if($example) {
     ));
 
     $tricky_topic_id = $example->tricky_topic;
-    if($tags){
+    if($example->tag_array){
         $tags_diff = array_diff(($example->tag_array), ClipitTrickyTopic::get_tags($example->tricky_topic));
     }
 }
+
 ?>
 <div class="margin-bottom-10" id="form-add-tricky-topic">
     <div class="col-md-7">
