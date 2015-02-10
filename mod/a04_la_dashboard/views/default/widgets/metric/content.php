@@ -1,7 +1,7 @@
 <?php
 $widget = $vars['entity'];
 $widget_id = $widget->guid;
-error_log(print_r($widget->metric_id,true));
+
 if ($widget->metric_id == elgg_echo('la_dashboard:select_metric')) {
    echo elgg_echo("la_dashboard:please_config_widget");
 }
