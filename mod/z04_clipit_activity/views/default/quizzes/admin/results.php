@@ -48,6 +48,10 @@ switch($type = get_input('type')){
                 'onclick' => '$(this).parent(\'.answer\').find(\'.annotate\').toggle()',
             ));
         }
+        echo '<div class="clearfix"></div>';
+        echo elgg_view_form('quiz/question_annotate', array(
+            'body' => elgg_view('quizzes/admin/annotation', array('result' => $result, 'question' => $question))
+        ));
         break;
     default:
         $task = array_pop(ClipitTask::get_by_id(array($task_id)));
@@ -144,6 +148,84 @@ switch($type = get_input('type')){
     </div>
     <?php
         break;
+    case 'results':
+        $user_id = get_input('user');
+        $quiz = array_pop(ClipitQuiz::get_by_id(array($quiz_id)));
+    ?>
+        <ul style="background: rgb(236, 247, 252);padding: 10px;margin-left: 35px;">
+            <?php
+            $num = 1;
+            $questions = ClipitQuizQuestion::get_by_id($quiz->quiz_question_array);
+            foreach($questions as $question):
+                $result = ClipitQuizResult::get_from_question_user($question->id, $user_id);
+                $params = array(
+                    'finished_task' => true,
+                    'finished' => true,
+                    'question' => $question,
+                    'result' => $result,
+                );
+                ?>
+                <li class="list-item answer">
+                    <div class="pull-right">
+                        <?php
+                        echo elgg_view('output/url', array(
+                            'title' => elgg_echo('quiz:question:annotate'),
+                            'text' => '',
+                            'href' => 'javascript:;',
+                            'class' => 'fa fa-edit btn btn-xs btn-border-blue btn-icon',
+                            'onclick' => '$(this).closest(\'.answer\').find(\'.annotate\').toggle()',
+                        ));
+                        ?>
+                        <i class="fa fa-angle-down blue margin-left-10"></i>
+                    </div>
+                        <span class="pull-left margin-right-5">
+                            <?php if(!$result):?>
+                                <i class="fa fa-minus yellow"></i>
+                            <?php elseif($result->correct):?>
+                                <i class="fa fa-check green"></i>
+                            <?php else: ?>
+                                <i class="fa fa-times red"></i>
+                            <?php endif;?>
+                            <strong class="text-muted">
+                                <?php echo $num;?>.
+                            </strong>
+                        </span>
+                        <span class="cursor-pointer blue show content-block"
+                              data-target="#question-result-<?php echo $result->id;?>"
+                              data-toggle="collapse">
+                            <?php echo $question->name;?>
+                        </span>
+                    <div class="clearfix"></div>
+                    <div id="question-result-<?php echo $result->id;?>" class="question-result collapse" style="background: #fff;padding: 5px 10px;margin-top: 5px;">
+                        <?php switch($question->option_type):
+                            case ClipitQuizQuestion::TYPE_SELECT_MULTI:
+                                echo elgg_view('quizzes/types/select_multi', $params);
+                                break;
+                            case ClipitQuizQuestion::TYPE_SELECT_ONE:
+                                echo elgg_view('quizzes/types/select_one', $params);
+                                break;
+                            case ClipitQuizQuestion::TYPE_TRUE_FALSE:
+                                echo elgg_view('quizzes/types/true_false', $params);
+                                break;
+                            case ClipitQuizQuestion::TYPE_NUMBER:
+                                echo elgg_view('quizzes/types/number', $params);
+                                break;
+                        endswitch;
+                        ?>
+                    </div>
+
+                    <?php
+                    echo elgg_view_form('quiz/question_annotate', array(
+                        'body' => elgg_view('quizzes/admin/annotation', array('result' => $result, 'question' => $question))
+                    ));
+                    ?>
+                </li>
+            <?php
+                $num++;
+            endforeach;
+            ?>
+        </ul>
+<?php
 }
 //die;
 //echo elgg_view('quizzes/list', array(

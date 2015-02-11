@@ -125,7 +125,7 @@ function tt_page_handler($page){
             ));
             break;
         case 'examples':
-            $title = elgg_echo('student_problems');
+            $title = elgg_echo('examples');
 
             if($search = get_input('s')) {
                 $all_entities = example_filter_search($search);

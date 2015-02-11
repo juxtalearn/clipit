@@ -19,19 +19,8 @@ echo elgg_view('input/hidden', array(
     'value' => $result->id
 ));
 ?>
-<div class="bg-blue-lighter_4 margin-top-10 annotate" style="<?php echo $result->description ? '': 'display:none;';?>padding: 10px;">
-    <?php if($question->option_type == ClipitQuizQuestion::TYPE_STRING && $result):?>
-    <div class="pull-right">
-        <strong>
-            <a href="javascript:;" class="margin-right-10">
-                <i class="fa fa-check green"></i> Correct
-            </a>
-            <a href="javascript:;">
-                <i class="fa fa-times red"></i> Incorrect
-            </a>
-        </strong>
-    </div>
-    <?php endif;?>
+<div class="annotate bg-white" style="<?php echo $result->description ? '': 'display:none;';?>padding: 10px;">
+    <hr class="margin-0 margin-bottom-5">
     <script>
         tinymce_setup();
     </script>

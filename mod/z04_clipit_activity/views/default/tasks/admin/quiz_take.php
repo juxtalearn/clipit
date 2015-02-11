@@ -125,6 +125,24 @@ $users = ClipitUser::get_by_id($users);
                     });
             }
         });
+//        $(".show-questions").on("show.bs.collapse",function() {
+        $(".show-questions").on("click", function() {
+            var that = $(this),
+                user_id = $(this).data('user'),
+                content = that.closest('li').find('.questions');
+            content.html('<i class="fa fa-spinner fa-spin fa-2x blue"></i>');
+            elgg.get("ajax/view/quizzes/admin/results", {
+                data: {
+                    quiz: <?php echo $quiz->id;?>,
+                    type: 'results',
+                    task: <?php echo $task->id;?>,
+                    user: user_id
+                },
+                success: function (data) {
+                    content.html(data);
+                }
+            });
+        });
         var hash = window.location.hash.replace('#', '');
         console.log(hash);
         var collapse = $("[href='#user_"+hash+"']");
@@ -212,7 +230,7 @@ $users = ClipitUser::get_by_id($users);
             $students = ClipitUser::get_by_id($activity->student_array);
             foreach($students as $student):
                 $students_select[$student->id] = $student->name;
-                ?>
+            ?>
                 <li class="list-item">
                     <div class="pull-right">
                         <div class="margin-right-10 inline-block">
@@ -228,30 +246,22 @@ $users = ClipitUser::get_by_id($users);
                         </div>
                         <span class="pull-right">
                             <a href="#user-questions-<?php echo $student->id;?>"
-                               class="btn-primary btn btn-xs btn-icon fa-comments fa"
+                               class="show-questions btn-primary btn btn-xs btn-icon fa-comments fa"
                                data-toggle="collapse"
-                               aria-expanded="false" aria-controls="<?php echo $student->id;?>"></a>
-                            <a class="margin-left-10 btn-icon btn-border-blue btn btn-xs fa fa-bar-chart-o"></a>
+                               data-user="<?php echo $student->id;?>"
+                               ></a>
+                            <a href="#user-chart-<?php echo $student->id;?>"
+                               class="margin-left-10 btn-icon btn-border-blue btn btn-xs fa fa-bar-chart-o"
+                               data-toggle="collapse"
+                               aria-expanded="false" aria-controls="user-chart-<?php echo $student->id;?>"></a>
                         </span>
                     </div>
                     <?php echo elgg_view("page/elements/user_block", array("entity" => $student)); ?>
+                    <div class="clearfix"></div>
                     <div>
-                        <div class="clearfix"></div>
-                        <div class="collapse margin-top-10" id="user-questions-<?php echo $student->id;?>">
-                            <ul>
-                                <?php
-                                $num = 1;
-                                $questions = ClipitQuizQuestion::get_by_id($quiz->quiz_question_array);
-                                foreach($questions as $question):
-                                    ?>
-                                    <li class="list-item">
-                                        <strong class="text-muted"><?php echo $num;?>.</strong> <a><?php echo $question->name;?></a>
-                                    </li>
-                                    <?php
-                                    $num++;
-                                endforeach;
-                                ?>
-                            </ul>
+                        <div class="collapse margin-top-10 questions" id="user-questions-<?php echo $student->id;?>"></div>
+                        <div class="collapse margin-top-10" style="margin-left: 35px;" id="user-chart-<?php echo $student->id;?>">
+                            <canvas class="myChart" style="background: rgb(236, 247, 252);padding: 10px;width: 100% !important;"  width="800" height="500"></canvas>
                         </div>
                     </div>
                 </li>
@@ -323,35 +333,13 @@ $users = ClipitUser::get_by_id($users);
 
 <div class="clearfix"></div>
 <!-- TESTING RADAR CHART -->
-<?php
-$question = array_pop(ClipitQuizQuestion::get_by_id(array(3321)));
-$tags = ClipitTag::get_by_id($question->tag_array);
-foreach($tags as $tag){
-    $tt[] = $tag->name;
-}
-
-$questions = ClipitQuizQuestion::get_by_id($quiz->quiz_question_array);
-foreach($questions as $question) {
-//    print_r($question->tag_array);
-    $results = ClipitQuizResult::get_from_question_user($question->id, 477);
-//    print_r($results);
-    $res = array();
-    foreach($results as $result){
-        if($result->correct){
-            $res['correct'][] = $result->quiz_question;
-        } else {
-            $res['incorrect'][] = $result->quiz_question;
-        }
-    }
-}
-?>
 <canvas style="background: rgb(236, 247, 252);padding: 10px;width: 100% !important;" id="myChart" width="800" height="500"></canvas>
 <!-- TESTING RADAR CHART -->
 <script src="http://www.chartjs.org/assets/Chart.min.js"></script>
 <script>
     var data = {
-        labels: <?php echo json_encode($tt);?>,
-//        labels: ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
+//        labels: <?php //echo json_encode($tt);?>//,
+        labels: ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
         datasets: [
 //            {
 //                label: "My First dataset",
@@ -376,14 +364,18 @@ foreach($questions as $question) {
         ]
     };
     $(function(){
-        var ctx = document.getElementById("myChart").getContext("2d");
-        new Chart(ctx).Radar(data, {
-            pointDot: false
-        });
+        var ctx = document.getElementsByClassName("myChart");
+        for(var i=0;i<ctx.length;i++){
+            cs = ctx[i].getContext("2d");
+            new Chart(cs).Radar(data, {
+                pointDot: false
+            });
+        }
+
     });
 </script>
 <div>
-    <?php echo elgg_view('widgets/quizresult/content');?>
+<!--    --><?php //echo elgg_view('widgets/quizresult/content');?>
 </div>
 <div class="panel-group quiz-questions" id="accordion_users" data-quiz="<?php echo $quiz->id;?>">
     <?php
