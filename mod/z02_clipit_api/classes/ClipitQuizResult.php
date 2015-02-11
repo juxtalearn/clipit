@@ -26,10 +26,6 @@ class ClipitQuizResult extends UBItem {
      * @var int Id of ClipitQuizQuestion this ClipitQuizResult is related to
      */
     public $quiz_question = 0;
-    /**
-     * @var int Id of User who posted this Quiz Result
-     */
-    public $user = 0;
 
     // can be different types, depending on the question type
     public $answer;
@@ -48,7 +44,6 @@ class ClipitQuizResult extends UBItem {
         $this->answer = $elgg_entity->get("answer");
         $this->correct = (bool)$elgg_entity->get("correct");
         $this->quiz_question = (int)static::get_quiz_question($this->id);
-        $this->user = (int)static::get_user($this->id);
     }
 
     /**
@@ -72,7 +67,6 @@ class ClipitQuizResult extends UBItem {
         if($this->quiz_question != 0) {
             ClipitQuizQuestion::add_quiz_results($this->quiz_question, array($this->id));
         }
-        static::set_user($this->id, $this->user);
         return $this->id;
     }
 
@@ -101,18 +95,6 @@ class ClipitQuizResult extends UBItem {
             }
         }
         return parent::set_properties($id, $new_prop_value_array);
-    }
-
-    static function set_user($id, $user_id){
-        UBCollection::set_items($id, array($user_id), static::REL_QUIZRESULT_CLIPITUSER);
-    }
-
-    static function get_user($id){
-        $user_array = UBCollection::get_items($id, static::REL_QUIZRESULT_CLIPITUSER);
-        if(!empty($user_array)){
-            return array_pop($user_array);
-        }
-        return 0;
     }
 
     static function evaluate_result($result_id){
