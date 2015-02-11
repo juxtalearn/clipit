@@ -74,8 +74,8 @@ class ClipitTask extends UBItem {
                 $this->end = $prop_value_array["end"];
             }
         }
-        $this->activity = static::get_activity((int)$this->id);
-        $this->quiz = (int)$elgg_entity->get("quiz");
+        $this->activity = (int)static::get_activity((int)$this->id);
+        $this->quiz = (int)static::get_quiz($this->id);
         $this->resource_array = static::get_resources((int)$this->id);
         $this->storyboard_array = static::get_storyboards((int)$this->id);
         $this->video_array = static::get_videos($this->id);
@@ -94,7 +94,6 @@ class ClipitTask extends UBItem {
         $elgg_entity->set("end", (int)$this->end);
         $elgg_entity->set("parent_task", (int)$this->parent_task);
         $elgg_entity->set("task_count", (int)$this->task_count);
-        $elgg_entity->set("quiz", (int)$this->quiz);
     }
 
     /**
@@ -104,6 +103,7 @@ class ClipitTask extends UBItem {
      */
     protected function save($double_save=false) {
         parent::save($double_save);
+        static::set_quiz($this->id, $this->quiz);
         static::set_activity($this->id, $this->activity);
         static::set_resources($this->id, $this->resource_array);
         static::set_storyboards($this->id, $this->storyboard_array);
@@ -155,6 +155,19 @@ class ClipitTask extends UBItem {
      */
     static function set_activity($id, $activity_id) {
         return UBCollection::add_items($activity_id, array($id), ClipitActivity::REL_ACTIVITY_TASK, true);
+    }
+
+    //QUIZ
+    static function set_quiz($id, $quiz_id) {
+        return UBCollection::set_items((int)$id, array($quiz_id), static::REL_TASK_QUIZ, true);
+    }
+
+    static function get_quiz($id) {
+        $quiz_array =  UBCollection::get_items((int)$id, static::REL_TASK_QUIZ);
+        if(empty($quiz_array)){
+            return 0;
+        }
+        return (int)array_pop($quiz_array);
     }
 
     // RESOURCES
@@ -250,7 +263,7 @@ class ClipitTask extends UBItem {
      */
     static function get_status($id){
         $prop_value_array = static::get_properties($id, array("status"));
-        return $prop_value_array["status"];
+        return (string)$prop_value_array["status"];
     }
 
     // TASK COMPLETION

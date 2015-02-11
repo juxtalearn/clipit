@@ -20,6 +20,11 @@ function expose_quiz_functions() {
     $class_suffix = "ClipitQuiz::";
     expose_common_functions($api_suffix, $class_suffix);
     expose_function(
+        $api_suffix . "get_task", $class_suffix . "get_task", array(
+        "id" => array("type" => "int", "required" => true)
+    ), "Get Task in which Quiz is inside of", 'GET', false, true
+    );
+    expose_function(
         $api_suffix . "add_quiz_questions", $class_suffix . "add_quiz_questions", array(
             "id" => array("type" => "int", "required" => true),
             "quiz_question_array" => array("type" => "array", "required" => true)

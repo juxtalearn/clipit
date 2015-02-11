@@ -149,6 +149,14 @@ class ClipitQuiz extends UBItem {
         return parent::set_properties($id, $new_prop_value_array);
     }
 
+    static function get_task($id){
+        $task_array = UBCollection::get_items((int)$id, ClipitTask::REL_TASK_QUIZ, true);
+        if(empty($task_array)){
+            return 0;
+        }
+        return (int)array_pop($task_array);
+    }
+
     static function get_tricky_topic($id) {
         $ret_array = UBCollection::get_items($id, static::REL_QUIZ_TRICKYTOPIC);
         if(!empty($ret_array)){
@@ -186,9 +194,15 @@ class ClipitQuiz extends UBItem {
      * @return bool 'true' if yes, 'false' if no
      */
     static function has_finished_quiz($id, $user_id){
+        // check if quiz has been started, and if max_time is over
         $start_time = (int)static::get_quiz_start($id, $user_id);
         if(empty($start_time)){
             return false;
+        }
+        // If task has ended, quiz is finished
+        $task_id = static::get_task($id);
+        if(ClipitTask::get_status($task_id) !== ClipitTask::STATUS_ACTIVE){
+            return true;
         }
         $prop_value_array = (array)static::get_properties($id, array("max_time"));
         $max_time = (int)$prop_value_array["max_time"];
@@ -199,6 +213,7 @@ class ClipitQuiz extends UBItem {
         if($start_time + $max_time <= $current_time){
             return true;
         }
+        // else, quiz is still ongoing
         return false;
     }
 
@@ -219,6 +234,125 @@ class ClipitQuiz extends UBItem {
             }
         }
         return $answered_questions;
+    }
+
+    /**
+     * Returns the average results by Tag for a Quiz for a User, normalized from 0 to 1.
+     *
+     * @param int $id Quiz ID
+     * @param int $user_id User ID
+     * @return array Array of tag_id=>$result, where the result is a float from 0 to 1. Empty array if the user has not
+     * finished the Quiz.
+     */
+    static function get_user_results_by_tag($id, $user_id){
+        $result_array = array();
+        if(!static::has_finished_quiz($id, $user_id)){
+            return $result_array;
+        }
+        $tag_count_array = array();
+        $quiz_question_array = static::get_quiz_questions($id);
+        if(empty($quiz_questions)){
+            return $result_array;
+        }
+        foreach($quiz_question_array as $quiz_question_id){
+            $quiz_question = new ClipitQuizQuestion($quiz_question_id);
+            $quiz_result_id = ClipitQuizResult::get_from_question_user($quiz_question_id, $user_id);
+            if(!empty($quiz_result_id)) {
+                $quiz_result = new ClipitQuizResult($quiz_result_id);
+            } else{
+                unset($quiz_result);
+            }
+            foreach($quiz_question->tag_array as $tag_id){
+                if(!isset($tag_count_array[$tag_id])){
+                    $tag_count_array[$tag_id] = (int)1;
+                    $result_array[$tag_id] = (int)0;
+                } else {
+                    $tag_count_array[$tag_id]++;
+                }
+                if(isset($quiz_result)) {
+                    if ($quiz_result->correct) {
+                        $result_array[$tag_id]++;
+                    }
+                }
+            }
+        }
+        // transform to [0..1] scale
+        foreach($result_array as $tag_id=>$correct_answers){
+            $result_array[$tag_id] = (float)$correct_answers/$tag_count_array[$tag_id];
+        }
+        return $result_array;
+    }
+
+    /**
+     * Returns the average results by Tag for a Quiz among a Group. Students who have not finished the Quiz will not
+     * be counted.
+     *
+     * @param int $id Quiz ID
+     * @param int $group_id Group ID
+     *
+     * @return array Array of $tag_id=>$result, where the result is a float from 0 to 1. Empty array if none of the
+     * students in the group have answered the Quiz.
+     */
+    static function get_group_results_by_tag($id, $group_id){
+        $group = new ClipitGroup($group_id);
+        $user_results = array();
+        foreach($group->user_array as $user_id){
+            $user_results[$user_id] = static::get_user_results_by_tag($id, $user_id);
+        }
+        $group_results = array();
+        $user_count = 0;
+        foreach($user_results as $user=>$results){
+            if(empty($results)){
+                continue;
+            }
+            $user_count++;
+            foreach($results as $tag_id=>$result){
+                if(!isset($group_results[$tag_id])){
+                    $group_results[$tag_id] = (float)0.0;
+                }
+                $group_results[$tag_id] += $result;
+            }
+        }
+        foreach($group_results as $tag_id=>$result){
+            $group_results[$tag_id] = (float)$result/$user_count;
+        }
+        return $group_results;
+    }
+
+    /**
+     * Returns the average results by Tag for a Quiz among all the results. Results from students who have not finished
+     * the Quiz will not be counted.
+     *
+     * @param int $id Quiz ID
+     * @return array Array of $tag_id=>$result where the result is a float from 0 to 1. Empty array of there are no
+     * results for the Quiz.
+     */
+    static function get_quiz_results_by_tag($id){
+        $task_id = static::get_task($id);
+        $activity_id = ClipitTask::get_activity($task_id);
+        $user_array = ClipitActivity::get_students($activity_id);
+        $user_results = array();
+        foreach($user_array as $user_id){
+            $user_results[$user_id] = static::get_user_results_by_tag($id, $user_id);
+        }
+        $quiz_results = array();
+        $user_count = 0;
+        foreach($user_results as $user=>$results){
+            if(empty($results)){
+                continue;
+            }
+            $user_count++;
+            foreach($results as $tag_id=>$result){
+                if(!isset($quiz_results[$tag_id])){
+                    $quiz_results[$tag_id] = (float)0.0;
+                }
+                $quiz_results[$tag_id] += $result;
+            }
+        }
+        foreach($quiz_results as $tag_id=>$result){
+            $quiz_results[$tag_id] = (float)$result/$user_count;
+        }
+        return $quiz_results;
     }
 
     /**

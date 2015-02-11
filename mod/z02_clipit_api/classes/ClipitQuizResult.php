@@ -157,6 +157,13 @@ class ClipitQuizResult extends UBItem {
         return $quiz_result_array;
     }
 
+    /**
+     * Returns the ClipitQuizResult ID for a Quiz Question submitted by a User
+     *
+     * @param int $quiz_question_id
+     * @param int $user_id
+     * @return int The Quiz Result ID, or 0 if none found.
+     */
     static function get_from_question_user($quiz_question_id, $user_id){
         $result_array = static::get_by_owner(array($user_id));
         foreach($result_array[$user_id] as $quiz_result){
@@ -164,6 +171,6 @@ class ClipitQuizResult extends UBItem {
                 return $quiz_result;
             }
         }
-        return null;
+        return 0;
     }
 }
