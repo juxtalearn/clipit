@@ -21,10 +21,10 @@ foreach($tasks as $task){
         'task_type' => $task['type'],
         'start' => get_timestamp_from_string($task['start']),
         'end' => get_timestamp_from_string($task['end']),
-        'quiz' => $task['type'] == ClipitTask::TYPE_QUIZ_TAKE ? $task['quiz'] : 0
+        'quiz' => ($task['type']==ClipitTask::TYPE_QUIZ_TAKE && $task['quiz_id']) ? $task['quiz_id'] : 0
     ));
     ClipitActivity::add_tasks($entity_id, array($task_id));
-    if($task['type'] == ClipitTask::TYPE_QUIZ_TAKE){
+    if($task['type'] == ClipitTask::TYPE_QUIZ_TAKE && !$task['quiz_id']){
         $quiz = $task['quiz'];
         // Set questions to Quiz
         $questions = $quiz['question'];

@@ -239,6 +239,7 @@ $english = array(
     'activity:task' => 'Task',
     'task:title' => 'Task title',
     'task:add' => 'Add task',
+    'task:remove' => 'Remove task',
     'task:added' => 'Added task',
     'task:select' => 'Select task',
     'task:select:task_type' => 'Select task type',

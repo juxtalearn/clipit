@@ -84,6 +84,7 @@ $body .= '<ul class="feedback_form" style="margin-left: 20px;display: none">
     </ul>';
 }
 $body .= '</li>';
+
 echo elgg_view("page/components/modal",
     array(
         "dialog_class"     => "modal-lg",
@@ -92,6 +93,13 @@ echo elgg_view("page/components/modal",
         "title"     => elgg_echo("task:edit"),
         "form"      => true,
         "body"      => $body,
+        "footer" =>  elgg_view('output/url', array(
+            'href'  => "action/task/remove?id=".$task->id,
+            'is_action' => true,
+            'class' => 'btn btn-primary btn-danger remove btn-border-red pull-left',
+            'title' => elgg_echo('task:remove'),
+            'text'  => '<i class="fa fa-times"></i> '.elgg_echo('task:remove'),
+        )),
         "cancel_button" => true,
         "ok_button" => elgg_view('input/submit',
             array(

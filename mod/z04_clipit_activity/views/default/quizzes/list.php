@@ -31,7 +31,6 @@ $date = date("H:s, d/m/Y", $quiz_start + $quiz->max_time);
 $count_answer = ClipitQuiz::questions_answered_by_user($quiz_id, $user_id);
 ?>
 <style>
-<style>
     .quiz-answer .fa-times, .quiz-answer .fa-check{
         width: 14px;
     }
@@ -53,13 +52,13 @@ $count_answer = ClipitQuiz::questions_answered_by_user($quiz_id, $user_id);
 </style>
 
 <script>
-    <?php if(!$finished || $quiz->max_time != 0):?>
-    var eventTime= <?php echo $quiz_start + $quiz->max_time?>; // Timestamp - Sun, 21 Apr 2013 13:00:00 GMT
-    var currentTime = <?php echo time()?>; // Time()
-    var diffTime = eventTime - currentTime;
-    var duration = moment.duration(diffTime*1000, 'milliseconds');
-    var interval = 1000;
-
+<?php if(!$finished && $quiz->max_time > 0):?>
+    var eventTime= <?php echo $quiz_start + $quiz->max_time?>, // Timestamp - Sun, 21 Apr 2013 13:00:00 GMT
+        currentTime = <?php echo time()?>, // Time()
+        diffTime = eventTime - currentTime,
+        duration = moment.duration(diffTime*1000, 'milliseconds'),
+        interval = 1000,
+        days = '';
     countdown = setInterval(function(){
         duration = moment.duration(duration - interval, 'milliseconds');
         if(duration - interval <= 0){
@@ -68,9 +67,12 @@ $count_answer = ClipitQuiz::questions_answered_by_user($quiz_id, $user_id);
             clearTimeout(countdown);
             return false;
         }
-        $('.countdown').text(duration.hours() + "h " + duration.minutes() + "m " + duration.seconds() + "s");
+        if(duration.days()){
+            days = duration.days() + "d ";
+        }
+        $('.countdown').text(days + duration.hours() + "h " + duration.minutes() + "m " + duration.seconds() + "s");
     }, interval);
-    <?php endif;?>
+<?php endif;?>
     $(function(){
         $(document).on("click", ".pagination li.page:not('.disabled')", function(){
             $(".question").hide();
@@ -92,7 +94,7 @@ $count_answer = ClipitQuiz::questions_answered_by_user($quiz_id, $user_id);
         $(document).on("click", ".pagination .prev-page, .pagination .next-page", function(){
             $(".pagination li#"+$(this).attr("id")+".page").click();
         });
-        <?php if(!$finished ):?>
+    <?php if(!$finished && $quiz->max_time > 0):?>
         var typingTimer;                //timer identifier
         var doneTypingInterval = 500;  //time in ms, 5 second for example
         $(document).on("paste keyup change", ".quiz input[type=number], .quiz textarea", function(event){
@@ -149,7 +151,7 @@ $count_answer = ClipitQuiz::questions_answered_by_user($quiz_id, $user_id);
             };
             bootbox.alert(confirmOptions);
         });
-        <?php endif;?>
+    <?php endif;?>
     });
 </script>
 
@@ -160,8 +162,7 @@ $(function(){
 });
 </script>
 <?php endif;?>
-
-<?php if(!$finished || $quiz->max_time != 0):?>
+<?php if(!$finished && $quiz->max_time > 0):?>
 <div class="bg-info pull-right">
     <i class="fa fa-clock-o pull-left" style="font-size: 56px;"></i>
     <div class="content-block">

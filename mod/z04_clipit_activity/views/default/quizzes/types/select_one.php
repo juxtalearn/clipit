@@ -19,6 +19,7 @@ $options = $question->option_array;
 //uksort($options, function() { return rand() > rand(); });
 
 foreach($options as $key => $option):
+    $key++;
     $checked = '';
     if($result->answer[$key-1]){
         $checked = 'checked';

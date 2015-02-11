@@ -5483,8 +5483,8 @@ button.close {
   border: 0;
 }
 .hidden {
-  display: none !important;
-  visibility: hidden !important;
+  display: none;
+  visibility: hidden;
 }
 .affix {
   position: fixed;

@@ -240,6 +240,7 @@ $spanish = array(
     'activity:task' => 'Tarea',
     'task:title' => 'Título de la tarea',
     'task:add' => 'Añadir tarea',
+    'task:remove' => 'Eliminar tarea',
     'task:added' => 'Tarea añadida',
     'task:select' => 'Seleccionar tarea',
     'task:select:task_type' => 'Seleccionar tipo de tarea',

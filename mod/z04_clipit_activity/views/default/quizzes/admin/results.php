@@ -48,16 +48,6 @@ switch($type = get_input('type')){
                 'onclick' => '$(this).parent(\'.answer\').find(\'.annotate\').toggle()',
             ));
         }
-        echo elgg_view('quizzes/types/'.$question->option_type, array(
-            'finished_task' => true,
-            'finished' => true,
-            'question' => $question,
-            'result' => $result
-        ));
-        echo '<div class="clearfix"></div>';
-        echo elgg_view_form('quiz/question_annotate', array(
-            'body' => elgg_view('quizzes/admin/annotation', array('result' => $result, 'question' => $question))
-        ));
         break;
     default:
         $task = array_pop(ClipitTask::get_by_id(array($task_id)));
