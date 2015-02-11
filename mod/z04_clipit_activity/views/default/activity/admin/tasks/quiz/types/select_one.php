@@ -25,7 +25,7 @@ $input_prefix = elgg_extract('input_prefix', $vars);
     </label>
     <?php echo elgg_view('output/url', array(
         'href'  => "javascript:;",
-        'class' => 'fa fa-times red pull-right',
+        'class' => 'fa fa-times red pull-right margin-top-10',
         'text'  => '',
         'onclick' => '$(this).parent().remove();',
     ));
