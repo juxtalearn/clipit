@@ -229,13 +229,16 @@ class UBItem {
      * Clone the specified Item, including all of its properties.
      *
      * @param int $id Item id from which to create a clone.
+     * @param bool $linked Selects whether the clone will be linked to the parent object.
      *
      * @return bool|int Id of the new clone Item, false in case of error.
      */
-    static function create_clone($id) {
+    static function create_clone($id, $linked = true) {
         $prop_value_array = static::get_properties($id);
         $clone_id = static::set_properties(null, $prop_value_array);
-        static::link_parent_clone($id, $clone_id);
+        if($linked){
+            static::link_parent_clone($id, $clone_id);
+        }
         return $clone_id;
     }
 
