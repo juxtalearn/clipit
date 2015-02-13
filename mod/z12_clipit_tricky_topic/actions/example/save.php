@@ -88,7 +88,7 @@ for($i = 0;$i < count($video_title);$i++){
 }
 ClipitExample::add_videos($example_id, $new_video_id);
 
-// Create/Select Stumling blocks
+// Create/Select Stumbling blocks
 $tags =  get_input('tag');
 array_filter($tags);
 $tag_ids = array();

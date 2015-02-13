@@ -11,6 +11,8 @@
  * @package         ClipIt
  */
 $english = array(
+    'students' => 'Students',
+    'groups' => 'Groups',
     'search:btn' => 'Search',
     'status' => 'Status',
     'send:to_site' => 'Publish to ClipIt',
@@ -310,7 +312,9 @@ $english = array(
     'activity:cantupdate' => 'Cannot update activity',
 
     // Quiz
+    'quiz:teacher_annotation' => 'Teacher\'s feedback',
     'quiz:result:send' => '',
+    'quiz:data:none' => 'No data',
     'difficulty' => 'Difficulty',
     'quiz:select:from_tag' => 'Add related questions',
     'quiz:question' => 'Question',
@@ -324,6 +328,11 @@ $english = array(
     'quiz:question:annotate' => 'Add annotation',
     'quiz:question:results' => 'Results',
     'quiz:question:result:add' => 'Add result',
+    'quiz:question:answer' => 'Answer',
+    'quiz:question:type' => 'Question type',
+    'quiz:question:statement' => 'Statement question',
+    'quiz:question:additional_info' => 'Additional information',
+    'quiz:questions:answered' => 'Questions answered',
 );
 
 add_translation('en', $english);

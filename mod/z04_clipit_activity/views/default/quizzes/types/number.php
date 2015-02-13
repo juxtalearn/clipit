@@ -25,5 +25,5 @@ if($finished):?>
         <small class="show">Solución: <strong><?php echo $question->validation_array[0];?></strong></small>
     <?php endif;?>
 <?php else:?>
-    <input type="number" value="<?php echo $result->answer;?>" class="form-control" style="width: auto;" name="question[<?php echo $question->id;?>]"/>
+    <input type="text" value="<?php echo $result->answer;?>" class="form-control" style="width: auto;" name="question[<?php echo $question->id;?>]"/>
 <?php endif;?>

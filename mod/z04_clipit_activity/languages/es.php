@@ -11,6 +11,8 @@
  * @package         ClipIt
  */
 $spanish = array(
+    'students' => 'Estudiantes',
+    'groups' => 'Grupos',
     'search:btn' => 'Buscar',
     'status' => 'Estado',
     'send:to_site' => 'Enviar a ClipIt',
@@ -327,7 +329,9 @@ $spanish = array(
     'resource:added_by' => 'Añadido por',
 
     // Quiz
-    'quiz:result:send' => 'Las respuestas quedarán guardadas, por lo tanto puedes volver a entrar si estás dentro del tiempo para hacer el examen.',
+    'quiz:teacher_annotation' => 'Comentario del profesor',
+    'quiz:result:send' => 'Las respuestas del test quedarán guardadas. Mientras que estés dentro del tiempo para hacer el examen puedes modificar tus respuestas.',
+    'quiz:data:none' => 'No hay datos',
     'difficulty' => 'Dificultad',
     'quiz:select:from_tag' => 'Añadir preguntas existentes relacionadas',
     'quiz:question' => 'Pregunta',
@@ -341,6 +345,11 @@ $spanish = array(
     'quiz:question:annotate' => 'Añadir anotación',
     'quiz:question:results' => 'Resultados',
     'quiz:question:result:add' => 'Añadir respuesta',
+    'quiz:question:answer' => 'Respuesta',
+    'quiz:question:type' => 'Tipo de pregunta',
+    'quiz:question:statement' => 'Enunciado de la pregunta',
+    'quiz:question:additional_info' => 'Información adicional',
+    'quiz:questions:answered' => 'Preguntas contestadas',
 );
 
 add_translation('es', $spanish);

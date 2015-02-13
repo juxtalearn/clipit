@@ -11,9 +11,9 @@
  * @package         ClipIt
  */
 $items = elgg_extract('entities', $vars);
-$items = ClipitReflectionItem::get_by_id($items);
+$items = ClipitExampleType::get_by_id($items);
 $user_language = get_current_language();
-$language_index = ClipitReflectionItem::get_language_index($user_language);
+$language_index = ClipitExampleType::get_language_index($user_language);
 foreach($items as $item) {
     $categories[$item->category[$language_index]] = $item->category_description[$language_index];
 }

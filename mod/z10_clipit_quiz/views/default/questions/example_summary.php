@@ -36,8 +36,8 @@ $multimedia = array_merge(
             <?php echo elgg_view('output/url', array(
                 'href'  => 'javascript:;',
                 'class' => 'margin-right-15 btn-reflection',
-                'title' => 'Reflection palette',
-                'text'  =>  '<i class="fa fa-th-list"></i> Reflection palette',
+                'title' => elgg_echo('reflection_palette'),
+                'text'  =>  '<i class="fa fa-th-list"></i> '.elgg_echo('reflection_palette'),
             ));
             ?>
             <?php echo elgg_view('output/url', array(

@@ -58,7 +58,8 @@ $count_answer = ClipitQuiz::questions_answered_by_user($quiz_id, $user_id);
         diffTime = eventTime - currentTime,
         duration = moment.duration(diffTime*1000, 'milliseconds'),
         interval = 1000,
-        days = '';
+        days = '',
+        d;
     countdown = setInterval(function(){
         duration = moment.duration(duration - interval, 'milliseconds');
         if(duration - interval <= 0){
@@ -67,10 +68,11 @@ $count_answer = ClipitQuiz::questions_answered_by_user($quiz_id, $user_id);
             clearTimeout(countdown);
             return false;
         }
+        d = new Date(duration - interval);
         if(duration.days()){
-            days = duration.days() + "d ";
+            days = moment(d).format('DD') + "d ";
         }
-        $('.countdown').text(days + duration.hours() + "h " + duration.minutes() + "m " + duration.seconds() + "s");
+        $('.countdown').text(days + moment(d).format('hh') + "h " + moment(d).format('mm') + "m " + moment(d).format('ss') + "s");
     }, interval);
 <?php endif;?>
     $(function(){
@@ -97,7 +99,7 @@ $count_answer = ClipitQuiz::questions_answered_by_user($quiz_id, $user_id);
     <?php if(!$finished && $quiz->max_time > 0):?>
         var typingTimer;                //timer identifier
         var doneTypingInterval = 500;  //time in ms, 5 second for example
-        $(document).on("paste keyup change", ".quiz input[type=number], .quiz textarea", function(event){
+        $(document).on("paste keyup change", ".quiz input[type=text], .quiz textarea", function(event){
             if(event.type == 'change' && $(this).is("textarea")){
                 return false;
             }
@@ -185,7 +187,7 @@ $(function(){
     <strong class="text-muted">
         <span id="count-result"><?php echo $count_answer;?></span>/<?php echo count($questions);?>
     </strong>
-    Preguntas contestadas
+    <?php echo elgg_echo('quiz:questions:answered');?>
 </h4>
 <?php if(!$vars['admin']):?>
     <div class="pull-right"><small style="text-transform: uppercase"><?php echo elgg_echo('difficulty');?></small></div>
@@ -212,7 +214,9 @@ foreach($questions as $question):
         <?php endif;?>
         <h4 class="question-title">
             <?php if($finished_task):?>
-                <?php if($result->correct):?>
+                <?php if(!$result):?>
+                    <i class="fa fa-minus yellow"></i>
+                <?php elseif($result->correct):?>
                     <i class="fa fa-check green"></i>
                 <?php else: ?>
                     <i class="fa fa-times red"></i>
@@ -248,11 +252,11 @@ foreach($questions as $question):
                 ?>
             </div> <!-- .question-answer -->
             <?php if($result->description):?>
-            <div class="bg-info margin-top-10" style="padding: 10px;">
-                <i class="fa fa-user blue"></i> <small>Teacher's annotate:</small>
-                <div>
-                    <?php echo $result->description;?>
-                </div>
+            <div class="clearfix"></div>
+            <hr class="margin-0 margin-top-10 margin-bottom-10">
+            <i class="fa fa-user blue"></i> <small><?php echo elgg_echo('quiz:teacher_annotation');?>:</small>
+            <div class="bg-blue-lighter_4" style="padding: 10px;">
+                <?php echo $result->description;?>
             </div>
             <?php endif; ?>
         </div>
@@ -272,7 +276,7 @@ endforeach;
         'value' => $task_id
     ));
 ?>
-    <?php if($quiz->view_mode == ClipitQuiz::VIEW_MODE_PAGED):?>
+    <?php if($quiz->view_mode == ClipitQuiz::VIEW_MODE_PAGED && count($questions)>1):?>
         <div class="margin-top-20">
             <div class="text-center">
                 <?php if(!$finished && !$finished_task):?>
@@ -285,13 +289,17 @@ endforeach;
                     ?>
                 <?php endif;?>
                 <ul class="pagination margin-0">
-                    <li class="prev-page disabled" id="1"><a href="javascript:;"><i class="fa fa-angle-double-left"></i> Anterior</a></li>
+                    <li class="prev-page disabled" id="1">
+                        <a href="javascript:;"><i class="fa fa-angle-double-left"></i> <?php echo elgg_echo('prev');?></a>
+                    </li>
                     <?php for($i=1; $i <= count($questions); $i++):?>
                         <li id="<?php echo $i;?>" class="<?php echo $i==1? 'active':'';?> page">
                             <a href="javascript:;"><?php echo $i;?></a>
                         </li>
                     <?php endfor;?>
-                    <li class="next-page" id="2"><a href="javascript:;">Siguiente <i class="fa fa-angle-double-right"></i></a></li>
+                    <li class="next-page" id="2">
+                        <a href="javascript:;"><?php echo elgg_echo('next');?> <i class="fa fa-angle-double-right"></i></a>
+                    </li>
                 </ul>
             </div>
         </div>

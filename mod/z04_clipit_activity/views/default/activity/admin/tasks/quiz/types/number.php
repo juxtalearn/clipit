@@ -17,7 +17,7 @@ $input_prefix = elgg_extract('input_prefix', $vars);
     <?php echo elgg_echo('quiz:question:answer:write');?>
 </div>
 <hr class="margin-0 margin-bottom-20">
-<input type="number"
+<input type="text"
        name="<?php echo $input_prefix;?>[question][<?php echo $id;?>][number]"
        value="<?php echo $vars['checked'];?>"
        class="form-control">
