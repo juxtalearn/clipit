@@ -256,12 +256,7 @@ class ClipitQuiz extends UBItem {
         }
         foreach($quiz_question_array as $quiz_question_id){
             $quiz_question = new ClipitQuizQuestion($quiz_question_id);
-            $quiz_result_id = ClipitQuizResult::get_from_question_user($quiz_question_id, $user_id);
-            if(!empty($quiz_result_id)) {
-                $quiz_result = new ClipitQuizResult($quiz_result_id);
-            } else{
-                unset($quiz_result);
-            }
+            $quiz_result = ClipitQuizResult::get_from_question_user($quiz_question_id, $user_id);
             foreach($quiz_question->tag_array as $tag_id){
                 if(!isset($tag_count_array[$tag_id])){
                     $tag_count_array[$tag_id] = (int)1;
@@ -269,7 +264,7 @@ class ClipitQuiz extends UBItem {
                 } else {
                     $tag_count_array[$tag_id]++;
                 }
-                if(isset($quiz_result)) {
+                if(!empty($quiz_result)) {
                     if ($quiz_result->correct) {
                         $result_array[$tag_id]++;
                     }
