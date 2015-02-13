@@ -1,5 +1,18 @@
 <?php
-$VERSION = "2.2.4";
+// CHANGE FROM HERE ...
+$VERSION = "2.2.5";
+$update_files = array(
+    "2.2.0" => null,
+    "2.2.1" => "update_2.2.1.php",
+    "2.2.2" => "update_2.2.2.php",
+    "2.2.3" => null,
+    "2.2.4" => "update_2.2.4.php",
+    "2.2.5" => "update_2.2.5.php"
+    // add here future updates: version => file
+);
+// ... TO HERE
+
+
 $old_version = get_config("clipit_version");
 
 // If no clipit_version in config, then it's a new install, set the version and exit.
@@ -12,15 +25,7 @@ print_r("<p>Current version: $old_version<br>New version: $VERSION</p>");
 
 if($VERSION === $old_version) return;
 
-// list of update files for each version
-$update_files = array(
-    "2.2.0" => null,
-    "2.2.1" => "update_2.2.1.php",
-    "2.2.2" => "update_2.2.2.php",
-    "2.2.3" => null,
-    "2.2.4" => "update_2.2.4.php"
-    // add here future updates: version => file
-);
+
 
 if(!empty($old_version)) {
     // advance until old version

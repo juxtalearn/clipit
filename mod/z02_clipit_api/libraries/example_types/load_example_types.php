@@ -14,52 +14,52 @@
  * @package         ClipIt
  * @subpackage      clipit_api
  */
-$file_path = "z02_clipit_api/libraries/reflection_palette/";
-$file_name_en = "reflection_palette_en.xlsx";
-$file_name_es = "reflection_palette_es.xlsx";
-$file_name_de = "reflection_palette_de.xlsx";
-$file_name_pt = "reflection_palette_pt.xlsx";
-$file_name_sv = "reflection_palette_sv.xlsx";
-$key_name = "reflection_palette";
+$file_path = "z02_clipit_api/libraries/example_types/";
+$file_name_de = "example_types_de.xlsx";
+$file_name_en = "example_types_en.xlsx";
+$file_name_es = "example_types_es.xlsx";
+$file_name_pt = "example_types_pt.xlsx";
+$file_name_sv = "example_types_sv.xlsx";
+$key_name = "example_types";
 
-// Check if Reflection Palette was already loaded.
+// Check if Example Types were already loaded.
 if(get_config($key_name) === true) {
     return;
 }
 
 set_config($key_name, true);
 
-// Load Reflection Palette for all languages
-input_reflection_palette_file(elgg_get_plugins_path() . $file_path . $file_name_en);
-input_reflection_palette_file(elgg_get_plugins_path() . $file_path . $file_name_es);
-input_reflection_palette_file(elgg_get_plugins_path() . $file_path . $file_name_de);
-input_reflection_palette_file(elgg_get_plugins_path() . $file_path . $file_name_pt);
-input_reflection_palette_file(elgg_get_plugins_path() . $file_path . $file_name_sv);
+// Load Example Types for all languages
+input_example_types_file(elgg_get_plugins_path() . $file_path . $file_name_en);
+input_example_types_file(elgg_get_plugins_path() . $file_path . $file_name_es);
+input_example_types_file(elgg_get_plugins_path() . $file_path . $file_name_de);
+input_example_types_file(elgg_get_plugins_path() . $file_path . $file_name_pt);
+input_example_types_file(elgg_get_plugins_path() . $file_path . $file_name_sv);
 
 /**
- * Add Reflection Items from an Excel file
+ * Add Example Types from an Excel file
  *
  * @param string $file Local file path
  *
  * @return array|null Array of User IDs, or null if error.
  */
-function input_reflection_palette_file($file){
+function input_example_types_file($file){
     $php_excel = PHPExcel_IOFactory::load($file);
     $row_iterator = $php_excel->getSheet()->getRowIterator();
     while ($row_iterator->valid()) {
-        parse_reflection_palette_row($row_iterator->current());
+        parse_example_types_row($row_iterator->current());
         $row_iterator->next();
     }
 }
 
 /**
- * Parse a single role from an Excel file, containing one reflection palette item, and add it to ClipIt
+ * Parse a single role from an Excel file, containing one example type item, and add it to ClipIt
  *
  * @param PHPExcel_Worksheet_Row $row_iterator
  *
  * @return int|false ID of User contained in row, or false in case of error.
  */
-function parse_reflection_palette_row($row_iterator) {
+function parse_example_types_row($row_iterator) {
     $prop_value_array = array();
     $cell_iterator = $row_iterator->getCellIterator();
 
@@ -99,5 +99,5 @@ function parse_reflection_palette_row($row_iterator) {
     $prop_value_array["category_description"] = (string)$value;
 
     // Add Performance Item to ClipIt
-    ClipitReflectionItem::create($prop_value_array);
+    ClipitExampleType::create($prop_value_array);
 }
