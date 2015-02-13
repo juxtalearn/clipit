@@ -314,7 +314,7 @@ $english = array(
 
     // Quiz
     'quiz:teacher_annotation' => 'Teacher\'s feedback',
-    'quiz:result:send' => '',
+    'quiz:result:send' => 'Answers of the Quiz will be saved. While you\'re in the time to do the exam you can change your answers.',
     'quiz:data:none' => 'No data',
     'quiz:tricky_topic:danger' => 'If you change Tricky Topic questions will be deleted',
     'quiz:not_finished' => 'Not finished',
