@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 $english = array(
+    'stats' => 'Stats',
     'students' => 'Students',
     'groups' => 'Groups',
     'search:btn' => 'Search',
@@ -315,6 +316,8 @@ $english = array(
     'quiz:teacher_annotation' => 'Teacher\'s feedback',
     'quiz:result:send' => '',
     'quiz:data:none' => 'No data',
+    'quiz:tricky_topic:danger' => 'If you change Tricky Topic questions will be deleted',
+    'quiz:not_finished' => 'Not finished',
     'difficulty' => 'Difficulty',
     'quiz:select:from_tag' => 'Add related questions',
     'quiz:question' => 'Question',

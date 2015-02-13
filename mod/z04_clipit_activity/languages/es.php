@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 $spanish = array(
+    'stats' => 'Estadísticas',
     'students' => 'Estudiantes',
     'groups' => 'Grupos',
     'search:btn' => 'Buscar',
@@ -332,6 +333,8 @@ $spanish = array(
     'quiz:teacher_annotation' => 'Comentario del profesor',
     'quiz:result:send' => 'Las respuestas del test quedarán guardadas. Mientras que estés dentro del tiempo para hacer el examen puedes modificar tus respuestas.',
     'quiz:data:none' => 'No hay datos',
+    'quiz:not_finished' => 'Sin terminar',
+    'quiz:tricky_topic:danger' => 'Si cambia de Tema Clave se borrarán las preguntas creadas',
     'difficulty' => 'Dificultad',
     'quiz:select:from_tag' => 'Añadir preguntas existentes relacionadas',
     'quiz:question' => 'Pregunta',

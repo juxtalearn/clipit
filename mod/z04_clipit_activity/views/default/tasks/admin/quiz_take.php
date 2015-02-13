@@ -202,9 +202,14 @@ $groups = ClipitActivity::get_groups($activity->id);
                     },
                     success: function (output) {
                         $.each(output, function (i, data) {
-                            container.eq(i).find(".a-error").text(data.error);
-                            container.eq(i).find(".a-correct").text(data.correct);
-                            container.eq(i).find(".a-pending").text(data.pending);
+                            if(data.not_finished) {
+                                container.eq(i).find(".msg-not-finished").text(data.not_finished);
+                            } else {
+                                container.eq(i).find(".counts").show();
+                                container.eq(i).find(".a-error").text(data.error);
+                                container.eq(i).find(".a-correct").text(data.correct);
+                                container.eq(i).find(".a-pending").text(data.pending);
+                            }
                         });
                     }
                 });
@@ -251,19 +256,22 @@ $groups = ClipitActivity::get_groups($activity->id);
                 <li class="list-item" data-entity="<?php echo $student->id;?>">
                     <div class="pull-right">
                         <div class="margin-right-10 inline-block">
-                            <small class="margin-right-10">
-                                <i class="fa fa-times red"></i> <strong class="a-error">-</strong>
-                            </small>
-                            <small class="margin-right-10">
-                                <i class="fa fa-check green"></i> <strong class="a-correct">-</strong>
-                            </small>
-                            <small class="margin-right-10">
-                                <i class="fa fa-minus yellow"></i> <strong class="a-pending">-</strong>
-                            </small>
+                            <small class="msg-not-finished"></small>
+                            <div class="counts" style="display: none;">
+                                <small class="margin-right-10">
+                                    <i class="fa fa-times red"></i> <strong class="a-error">-</strong>
+                                </small>
+                                <small class="margin-right-10">
+                                    <i class="fa fa-check green"></i> <strong class="a-correct">-</strong>
+                                </small>
+                                <small class="margin-right-10">
+                                    <i class="fa fa-minus yellow"></i> <strong class="a-pending">-</strong>
+                                </small>
+                            </div>
                         </div>
                         <span class="pull-right">
                             <a href="#questions-<?php echo $student->id;?>"
-                               class="show-data btn-primary btn btn-xs btn-icon fa-comments fa"
+                               class="show-data btn-primary btn btn-xs btn-icon fa-comments fa btn-border-blue"
                                data-type="student"
                                data-entity-type="questions"
                                data-toggle="collapse"
@@ -294,19 +302,22 @@ $groups = ClipitActivity::get_groups($activity->id);
                 <li class="list-item" data-entity="<?php echo $group->id;?>">
                     <div class="pull-right">
                         <div class="margin-right-10 inline-block">
-                            <small class="margin-right-10">
-                                <i class="fa fa-times red"></i> <strong class="a-error">-</strong>
-                            </small>
-                            <small class="margin-right-10">
-                                <i class="fa fa-check green"></i> <strong class="a-correct">-</strong>
-                            </small>
-                            <small class="margin-right-10">
-                                <i class="fa fa-minus yellow"></i> <strong class="a-pending">-</strong>
-                            </small>
+                            <small class="msg-not-finished"></small>
+                            <div class="counts" style="display: none;">
+                                <small class="margin-right-10">
+                                    <i class="fa fa-times red"></i> <strong class="a-error">-</strong>
+                                </small>
+                                <small class="margin-right-10">
+                                    <i class="fa fa-check green"></i> <strong class="a-correct">-</strong>
+                                </small>
+                                <small class="margin-right-10">
+                                    <i class="fa fa-minus yellow"></i> <strong class="a-pending">-</strong>
+                                </small>
+                            </div>
                         </div>
                         <span class="pull-right">
                             <a href="#questions-<?php echo $group->id;?>"
-                               class="show-data btn-primary btn btn-xs btn-icon fa-comments fa"
+                               class="show-data btn-primary btn btn-xs btn-icon fa-comments fa btn-border-blue"
                                data-type="group"
                                data-entity-type="questions"
                                data-toggle="collapse"
@@ -346,17 +357,17 @@ $groups = ClipitActivity::get_groups($activity->id);
             <ul>
                 <li data-entity="<?php echo $activity->id;?>">
                 <a href="#questions-<?php echo $activity->id;?>"
-                   class="show-data btn-primary btn btn-xs btn-icon fa-comments fa"
+                   class="show-data btn-primary btn btn-xs btn-icon btn-border-blue"
                    data-type="activity"
                    data-entity-type="questions"
                    data-toggle="collapse"
-                    ></a>
+                    ><i class="fa-comments fa"></i> <?php echo elgg_echo('quiz:questions');?></a>
                 <a href="#chart-<?php echo $activity->id;?>"
-                   class="show-data margin-left-10 btn-icon btn-border-blue btn btn-xs fa fa-bar-chart-o"
+                   class="show-data margin-left-10 btn-primary btn btn-xs btn-icon btn-border-blue"
                    data-toggle="collapse"
                    data-type="activity"
                    data-entity-type="chart"
-                   aria-expanded="false"></a>
+                   aria-expanded="false"><i class="fa-bar-chart-o fa"></i> <?php echo elgg_echo('stats');?></a>
                 <div>
                     <div class="collapse margin-top-10 chart" style="margin-left: 35px;" id="chart-<?php echo $activity->id;?>"></div>
                     <div class="collapse margin-top-10 questions" id="questions-<?php echo $activity->id;?>"></div>
