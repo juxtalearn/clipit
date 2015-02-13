@@ -263,13 +263,18 @@ $groups = ClipitActivity::get_groups($activity->id);
                         </div>
                         <span class="pull-right">
                             <a href="#questions-<?php echo $student->id;?>"
-                               class="show-questions btn-primary btn btn-xs btn-icon fa-comments fa"
+                               class="show-data btn-primary btn btn-xs btn-icon fa-comments fa"
+                               data-type="student"
+                               data-entity-type="questions"
                                data-toggle="collapse"
-                               ></a>
+                                ></a>
                             <a href="#chart-<?php echo $student->id;?>"
-                               class="show-chart margin-left-10 btn-icon btn-border-blue btn btn-xs fa fa-bar-chart-o"
+                               class="show-data margin-left-10 btn-icon btn-border-blue btn btn-xs fa fa-bar-chart-o"
                                data-toggle="collapse"
-                               aria-expanded="false" aria-controls="user-chart-<?php echo $student->id;?>"></a>
+                               data-type="student"
+                               data-entity-type="chart"
+                               aria-expanded="false"
+                                ></a>
                         </span>
                     </div>
                     <?php echo elgg_view("page/elements/user_block", array("entity" => $student)); ?>
@@ -337,20 +342,25 @@ $groups = ClipitActivity::get_groups($activity->id);
             </ul>
         </div>
         <?php endif;?>
-        <div role="tabpanel" class="tab-pane margin-top-10" id="activity" style="padding: 10px;"
-            href="#questions-<?php echo $group->id;?>"
-           class="show-data btn-primary btn btn-xs btn-icon fa-comments fa"
-           data-type="group"
-           data-entity-type="questions"
-           data-toggle="collapse"
-
-            >
+        <div role="tabpanel" class="tab-pane margin-top-10" id="activity" style="padding: 10px;">
             <ul>
-                <li class="list-item">
-                    <div>
-                        <div class="collapse margin-top-10 chart" style="margin-left: 35px;" id="chart-<?php echo $activity->id;?>"></div>
-                        <div class="collapse margin-top-10 questions" id="questions-<?php echo $activity->id;?>"></div>
-                    </div>
+                <li data-entity="<?php echo $activity->id;?>">
+                <a href="#questions-<?php echo $activity->id;?>"
+                   class="show-data btn-primary btn btn-xs btn-icon fa-comments fa"
+                   data-type="activity"
+                   data-entity-type="questions"
+                   data-toggle="collapse"
+                    ></a>
+                <a href="#chart-<?php echo $activity->id;?>"
+                   class="show-data margin-left-10 btn-icon btn-border-blue btn btn-xs fa fa-bar-chart-o"
+                   data-toggle="collapse"
+                   data-type="activity"
+                   data-entity-type="chart"
+                   aria-expanded="false"></a>
+                <div>
+                    <div class="collapse margin-top-10 chart" style="margin-left: 35px;" id="chart-<?php echo $activity->id;?>"></div>
+                    <div class="collapse margin-top-10 questions" id="questions-<?php echo $activity->id;?>"></div>
+                </div>
                 </li>
             </ul>
         </div>

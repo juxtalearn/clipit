@@ -70,5 +70,5 @@ $multimedia = array_merge(
         </div>
     </div>
 </div>
-<?php echo elgg_view('examples/reflection_item/summary', array('entities' => $example->reflection_item_array));?>
+<?php echo elgg_view('examples/reflection_item/summary', array('entities' => $example->example_type_array));?>
 

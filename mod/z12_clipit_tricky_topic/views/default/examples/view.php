@@ -98,8 +98,8 @@ $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($example->tricky_to
 </div>
 <hr>
 <?php
-if(!empty($example->reflection_item_array)):
-    echo elgg_view('examples/reflection_item/list', array('entities' => $example->reflection_item_array));
+if(!empty($example->example_type_array)):
+    echo elgg_view('examples/reflection_item/list', array('entities' => $example->example_type_array));
 endif;
 ?>
 <a name="resources"></a>

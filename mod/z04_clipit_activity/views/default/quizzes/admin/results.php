@@ -260,7 +260,7 @@ switch($type = get_input('type')){
         $quiz = array_pop(ClipitQuiz::get_by_id(array($quiz_id)));
         $show_status = false;
         switch(get_input('entity_type')){
-            case 'user':
+            case 'student':
                 $show_status = true;
                 break;
             case 'group':
@@ -286,6 +286,7 @@ switch($type = get_input('type')){
                     'question' => $question,
                 );
                 if($show_status){
+                    $result = ClipitQuizResult::get_from_question_user($question->id, $entity_id);
                     $params['result'] = $result;
                 } else {
                     $params['total_results'] = $total_results;
@@ -370,13 +371,14 @@ switch($type = get_input('type')){
     case 'result_chart':
         $entity_id = get_input('entity');
         switch(get_input('entity_type')){
-            case 'user':
+            case 'student':
                 $data = ClipitQuiz::get_user_results_by_tag($quiz_id, $entity_id);
                 break;
             case 'group':
                 $data = ClipitQuiz::get_group_results_by_tag($quiz_id, $entity_id);
                 break;
             case 'activity':
+                $data = ClipitQuiz::get_quiz_results_by_tag($quiz_id);
                 break;
         }
         if(!$data){

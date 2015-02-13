@@ -341,7 +341,7 @@ if($example) {
                                 <input type="checkbox"
                                        name="reflections[]"
                                        value="<?php echo $item->id;?>"
-                                       <?php echo in_array($item->id, $example->reflection_item_array) ? 'checked': '';?>
+                                       <?php echo in_array($item->id, $example->example_type_array) ? 'checked': '';?>
                                        class="pull-left" style="margin-right: 5px;">
                                 <div class="content-block cursor-pointer">
                                     <?php echo $item->item_name[$language_index]; ?>
