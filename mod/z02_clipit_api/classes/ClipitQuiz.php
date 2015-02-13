@@ -104,10 +104,11 @@ class ClipitQuiz extends UBItem {
      * Clones a ClipitQuiz, including the contained ClipitQuizQuestions
      *
      * @param int $id ID of Quiz to clone
+     * @param bool $linked Whether the clone will be linked to the parent object
      * @return bool|int ID of new cloned object
      * @throws InvalidParameterException if error
      */
-    static function create_clone($id){
+    static function create_clone($id, $linked = true){
         $prop_value_array = static::get_properties($id);
         $quiz_question_array = $prop_value_array["quiz_question_array"];
         if(!empty($quiz_question_array)){
@@ -118,7 +119,9 @@ class ClipitQuiz extends UBItem {
             $prop_value_array["quiz_question_array"] = $new_quiz_question_array;
         }
         $clone_id = static::set_properties(null, $prop_value_array);
-        static::link_parent_clone($id, $clone_id);
+        if($linked) {
+            static::link_parent_clone($id, $clone_id);
+        }
         return $clone_id;
     }
 
