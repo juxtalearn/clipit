@@ -443,6 +443,25 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
                 ), $custom);
 
             break;
+        case ClipitTask::TYPE_QUIZ_TAKE:
+            if(ClipitTask::get_status($task->id) == ClipitTask::STATUS_FINISHED) {
+                $quiz_id = $task->quiz;
+                if (ClipitQuiz::has_finished_quiz($quiz_id, $user_id)) {
+                    $status = array(
+                        'icon' => '<i class="fa fa-check green"></i>',
+                        'text' => elgg_echo('task:completed'),
+                        'color' => 'green',
+                    );
+                } else {
+                    $status = array(
+                        'icon' => '<i class="fa fa-times red"></i>',
+                        'text' => elgg_echo('task:not_completed'),
+                        'color' => 'red',
+                        'status' => true
+                    );
+                }
+            }
+            break;
     }
 
     if($task->end <= time() && $status['status'] === false){

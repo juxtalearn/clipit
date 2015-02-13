@@ -23,7 +23,7 @@ $questions = ClipitQuizQuestion::get_by_id($quiz->quiz_question_array);
 // if teacher set random questions
 shuffle($questions);
 $quiz_start = ClipitQuiz::get_quiz_start($quiz->id, $user_id);
-if(!$quiz_start){
+if(!$quiz_start && !$finished_task){
     ClipitQuiz::set_quiz_start($quiz->id, elgg_get_logged_in_user_guid());
     $quiz_start = ClipitQuiz::get_quiz_start($quiz->id, elgg_get_logged_in_user_guid());
 }
@@ -314,5 +314,19 @@ endforeach;
             ));
         ?>
     </div>
+    <?php endif;?>
+    <?php
+    if($finished_task && $finished):
+        // Show radar chart
+        $data = ClipitQuiz::get_user_results_by_tag($quiz_id, $user_id);
+        $labels = array();
+        foreach($data as $tag_id => $value){
+            $tag = ClipitSite::lookup($tag_id);
+            $labels[] = $tag['name'];
+        }
+    ?>
+        <div>
+        <?php echo elgg_view('quizzes/chart/radar', array('data' => $data, 'labels' => $labels, 'id' => $user_id));?>
+        </div>
     <?php endif;?>
 </div>
