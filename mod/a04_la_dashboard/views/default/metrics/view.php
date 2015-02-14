@@ -5,6 +5,7 @@
  * Creation date:   09/10/2014
  * Last update:     09/10/2014
  * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC JuxtaLearn Project
+   @author          RIAS JuxtaLearn Project
  * @version         $Version$
  * @link            http://www.juxtalearn.eu
  * @license         GNU Affero General Public License v3
@@ -23,7 +24,7 @@ $params = array(
 'filter' => '',
 'num_columns' => 3,
 );
-echo elgg_view_layout('widgets', $params);
+echo elgg_view_layout('la_widgets', $params);
 ?>
 
 
@@ -31,7 +32,6 @@ echo elgg_view_layout('widgets', $params);
 <div class="elgg-col elgg-col-2of3">
     <?php
     echo elgg_view('output/longtext', array(
-       // 'id' => 'dashboard-info',
         'id' => 'learning_analytics_dashboard-info',
         'class' => 'elgg-inner pam mhs mtn',
         'value' => elgg_echo("dashboard:nowidgets"),

@@ -1,10 +1,9 @@
 <?php
  /**
- * ClipIt - JuxtaLearn Web Space
+ * Learning Analytics - JuxtaLearn Web Space
  * PHP version:     >= 5.2
- * Creation date:   20/05/14
- * Last update:     20/05/14
- * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC JuxtaLearn Project
+ *
+ * @author          RIAS JuxtaLearn Project
  * @version         $Version$
  * @link            http://www.juxtalearn.eu
  * @license         GNU Affero General Public License v3
@@ -15,13 +14,19 @@ elgg_register_event_handler('init', 'system', 'learning_analytics_dashboard_init
 function learning_analytics_dashboard_init() {
     elgg_register_page_handler('stats', 'userstats_clipit_page_handler');
     elgg_register_ajax_view('metrics/get_metric');
+    elgg_register_ajax_view('metrics/get_quiztasks');
+    elgg_register_ajax_view('metrics/get_groups');
+    elgg_register_ajax_view('metrics/get_targets');
     elgg_register_page_handler('metric', 'getmetric_clipit_page_handler');
     elgg_register_ajax_view('metrics/metric');
-    elgg_register_widget_type('metric','la_metrics',elgg_echo('la_dashboard:widget:description'),'la_metrics',true);
+    elgg_register_widget_type('metric',elgg_echo('la_dashboard:la_metrics:title'),elgg_echo('la_dashboard:widget:la_metrics:description'),'la_metrics',true);
+    elgg_register_widget_type('quizresult',elgg_echo('la_dashboard:quizresult:title'),elgg_echo('la_dashboard:widget:quizresult:description'),'la_metrics',true);
+    elgg_register_widget_type('quizresultcompare',elgg_echo('la_dashboard:quizresultscompare:title'),elgg_echo('la_dashboard:widget:quizresultcompare:description'),'la_metrics',true);
 //    // Register library
 //    elgg_extend_view("navigation/menu/top", "navigation/menu/profile", 400);
     elgg_register_plugin_hook_handler('get_list', 'default_widgets', 'ladashboard_default_widgets');
     $plugin_url =  '/mod/a04_la_dashboard';
+    elgg_register_js("dojotoolkit","http://ajax.googleapis.com/ajax/libs/dojo/1.10.3/dojo/dojo.js");
 
     elgg_register_css('dashboardcss',"{$plugin_url}/views/default/css/la_dashboard.css",1000);
     elgg_load_css("dashboardcss");
