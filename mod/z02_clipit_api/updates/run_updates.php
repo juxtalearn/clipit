@@ -1,13 +1,14 @@
 <?php
 // CHANGE FROM HERE ...
-$VERSION = "2.2.5";
+$VERSION = "2.3";
 $update_files = array(
     "2.2.0" => null,
     "2.2.1" => "update_2.2.1.php",
     "2.2.2" => "update_2.2.2.php",
     "2.2.3" => null,
     "2.2.4" => "update_2.2.4.php",
-    "2.2.5" => "update_2.2.5.php"
+    "2.2.5" => "update_2.2.5.php",
+    "2.3" => null
     // add here future updates: version => file
 );
 // ... TO HERE
