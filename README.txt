@@ -2,7 +2,7 @@ ClipIt Reference: http://juxtalearn.github.io/clipit/
 
 /**
  * ClipIt - JuxtaLearn Web Space
- * PHP version:     >= 5.4
+ * PHP version:     >= 5.3
  * Creation date:   2013-10-10
  * @author          URJC LITE Team - See CONTRIBUTORS.txt
  * @version         2.3
