@@ -73,10 +73,11 @@ if (!function_exists('session_status')) {
                     </td>
                     <td>
                         <select name="version" form="clipit_params">
+                            <option value="2.3">Version 2.3</option>
                             <option value="2.2">Version 2.2</option>
                             <option value="2.1">Version 2.1</option>
                             <option value="2.0">Version 2.0</option>
-                            <option value="master">Master branch</option>
+                            <option value="master">Master branch (unstable)</option>
                         </select>
                     </td>
                 </tr>
