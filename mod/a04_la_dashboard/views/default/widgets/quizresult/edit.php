@@ -2,7 +2,6 @@
 
 $widget = elgg_extract('entity', $vars);
 $widget_id = $widget->guid;
-$metrics = elgg_extract('metrics', $vars);
 
 $activities = ClipitActivity::get_all();
 $activity_options = array(0 => elgg_echo('la_dashboard:widget:quizresult:selectactivity'));
@@ -81,9 +80,21 @@ $group_dropdown = elgg_view('input/dropdown', $params);
     <?php echo $group_dropdown ?>
 </p>
 <script>
+
+    $('<?php echo "#group_dropdown-$widget_id" ?>').change(function () {
+        $('#' + this.id).parent().parent().find('.elgg-button-submit')[0].disabled = false
+    })
+
+    $('<?php echo "#task_dropdown-$widget_id" ?>').change(function () {
+        $('#' + this.id).parent().parent().find('.elgg-button-submit')[0].disabled = false
+    })
+
+
     $('<?php echo "#activity_dropdown-$widget_id" ?>').change(function () {
+        $('#' + this.id).parent().parent().find('.elgg-button-submit')[0].disabled=false
         var activityId = document.getElementById('<?php echo "activity_dropdown-$widget_id" ?>').selectedOptions[0].value
         document.getElementById('<?php echo "task_dropdown-$widget_id" ?>').disabled = true;
+        $('<?php echo "#task_dropdown-$widget_id" ?> option').remove();
         elgg.get('ajax/view/metrics/get_quiztasks', {
             data: {
                 id: activityId
@@ -91,6 +102,7 @@ $group_dropdown = elgg_view('input/dropdown', $params);
             success: function (data) {
                 var quiz_array = JSON.parse(data);
                 var currentTasks = document.getElementById('<?php echo "task_dropdown-$widget_id" ?>');
+
                 for (i = 0; i < quiz_array.length; i++) {
                     if (quiz_array[i].id == 0) {
                         var newOption = new Option(quiz_array[i].name, quiz_array[i].id, true, true);
@@ -109,9 +121,11 @@ $group_dropdown = elgg_view('input/dropdown', $params);
 
 
     $('#<?php echo "scale_dropdown-$widget_id" ?>').change(function () {
+        $('#' + this.id).parent().parent().find('.elgg-button-submit')[0].disabled=false
         if (document.getElementById('<?php echo "scale_dropdown-$widget_id" ?>').selectedOptions[0].value == "<?php echo ClipitGroup::SUBTYPE?>") {
             var activityId = document.getElementById('<?php echo "activity_dropdown-$widget_id" ?>').selectedOptions[0].value
             document.getElementById('<?php echo "group_dropdown-$widget_id" ?>').disabled = true;
+            $('<?php echo "#group_dropdown-$widget_id" ?> option').remove()
             elgg.get('ajax/view/metrics/get_groups', {
                 data: {
                     id: activityId
@@ -119,6 +133,7 @@ $group_dropdown = elgg_view('input/dropdown', $params);
                 success: function (data) {
                     var quiz_array = JSON.parse(data);
                     var currentGroups = document.getElementById('<?php echo "group_dropdown-$widget_id" ?>');
+
                     for (i = 0; i < quiz_array.length; i++) {
                         if (quiz_array[i].id == 0) {
                            var  newOption = new Option(quiz_array[i].name, quiz_array[i].id, true, true);

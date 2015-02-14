@@ -59,11 +59,11 @@ if (isset($vars['entity']->scale) && $vars['entity']->scale == ClipitGroup::SUBT
     $target_disabled = false;
 
 } else if (isset($vars['entity']->scale) && $vars['entity']->scale == ClipitUser::SUBTYPE) {
-    $target_options = LADashboardHelper::getUserBundle($vars['entity']->activity_id);
+    $target_options = LADashboardHelper::getUserBundlePHP($vars['entity']->activity_id);
     $target_disabled = false;
 } else {
     $target_disabled = true;
-    $target_options = LADashboardHelper::getUserBundle(null);
+    $target_options = LADashboardHelper::getUserBundlePHP(null);
 }
 $params = array(
     'name' => 'params[target_id]',
@@ -103,11 +103,26 @@ $target_dropdown = elgg_view('input/dropdown', $params);
 </p>
 
 <script>
+
+    $('<?php echo "#target_dropdown-$widget_id" ?>').change(function () {
+        $('#' + this.id).parent().parent().find('.elgg-button-submit')[0].disabled = false
+    })
+
+    $('<?php echo "#task_dropdown1-$widget_id" ?>').change(function () {
+        $('#' + this.id).parent().parent().find('.elgg-button-submit')[0].disabled = false
+    })
+    $('<?php echo "#task_dropdown2-$widget_id" ?>').change(function () {
+        $('#' + this.id).parent().parent().find('.elgg-button-submit')[0].disabled = false
+    })
+
+
     $('<?php echo "#activity_dropdown-$widget_id" ?>').change(function () {
+        $('#' + this.id).parent().parent().find('.elgg-button-submit')[0].disabled=false
         var activityId = document.getElementById('<?php echo "activity_dropdown-$widget_id" ?>').selectedOptions[0].value
         document.getElementById('<?php echo "task_dropdown1-$widget_id" ?>').disabled = true;
+        $('<?php echo "#task_dropdown1-$widget_id" ?> option').remove();
         document.getElementById('<?php echo "task_dropdown2-$widget_id" ?>').disabled = true;
-
+        $('<?php echo "#task_dropdown2-$widget_id" ?> option').remove();
 
         elgg.get('ajax/view/metrics/get_quiztasks', {
             data: {
@@ -116,7 +131,9 @@ $target_dropdown = elgg_view('input/dropdown', $params);
             success: function (data) {
                 var quiz_array = JSON.parse(data);
                 var currentTasks1 = document.getElementById('<?php echo "task_dropdown1-$widget_id" ?>');
+
                 var currentTasks2 = document.getElementById('<?php echo "task_dropdown2-$widget_id" ?>');
+
                 for (i = 0; i < quiz_array.length; i++) {
                     if (quiz_array[i].id == 0) {
                         var newOption = new Option(quiz_array[i].name, quiz_array[i].id, true, true);
@@ -140,10 +157,12 @@ $target_dropdown = elgg_view('input/dropdown', $params);
 
 
     $('#<?php echo "scale_dropdown-$widget_id" ?>').change(function () {
+        $('#' + this.id).parent().parent().find('.elgg-button-submit')[0].disabled=false;
         if (document.getElementById('<?php echo "scale_dropdown-$widget_id" ?>').selectedOptions[0].value != "<?php echo ClipitActivity::SUBTYPE?>") {
             var activityId = document.getElementById('<?php echo "activity_dropdown-$widget_id" ?>').selectedOptions[0].value;
             var typeId = document.getElementById('<?php echo "scale_dropdown-$widget_id" ?>').selectedOptions[0].value;
             document.getElementById('<?php echo "target_dropdown-$widget_id" ?>').disabled = true;
+            $('<?php echo "#target_dropdown-$widget_id" ?> option').remove()
             elgg.get('ajax/view/metrics/get_targets', {
                 data: {
                     id: activityId,
@@ -152,6 +171,7 @@ $target_dropdown = elgg_view('input/dropdown', $params);
                 success: function (data) {
                     var quiz_array = JSON.parse(data);
                     var currentTarget = document.getElementById('<?php echo "target_dropdown-$widget_id" ?>');
+
                     for (i = 0; i < quiz_array.length; i++) {
                         if (quiz_array[i].id == 0) {
                             var  newOption = new Option(quiz_array[i].name, quiz_array[i].id, true, true);
