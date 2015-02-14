@@ -2,12 +2,11 @@ ClipIt Reference: http://juxtalearn.github.io/clipit/
 
 /**
  * ClipIt - JuxtaLearn Web Space
- * PHP version:     >= 5.2
+ * PHP version:     >= 5.4
  * Creation date:   2013-10-10
- * Last update:     $Date$
- * @author          URJC JuxtaLearn Team - See CONTRIBUTORS.txt
- * @version         $Version$
- * @link            http://www.juxtalearn.eu
+ * @author          URJC LITE Team - See CONTRIBUTORS.txt
+ * @version         2.3
+ * @link            http://www.clipit.es
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
