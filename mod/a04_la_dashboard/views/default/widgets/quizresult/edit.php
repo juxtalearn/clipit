@@ -18,12 +18,12 @@ $params = array(
 );
 $activity_dropdown = elgg_view('input/dropdown', $params);
 
-$task_options = LADashboardHelper::getQuizTasksPHP($vars['entity']->activity_id);
+$quiz_options = LADashboardHelper::getQuizTasksPHP($vars['entity']->activity_id);
 $params = array(
-    'name' => 'params[task_id]',
+    'name' => 'params[quiz_id]',
     'value' => $vars['entity']->task_id,
-    'options_values' => $task_options,
-    'disabled' => !(count($task_options)>1),
+    'options_values' => $quiz_options,
+    'disabled' => !(count($quiz_options)>1),
     'id' => "task_dropdown-$widget_id",
     'required' => true,
 );

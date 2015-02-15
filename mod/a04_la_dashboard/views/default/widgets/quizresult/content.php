@@ -15,26 +15,23 @@ $chart_identifier = "quiz-widget-$widget_id";
 //First we need to verify the settings for this widget
 $to_be_configured = false;
 if (isset($widget->activity_id) && is_not_null($widget->activity_id)) {
-    $activity = ClipitActivity::get_by_id(array($widget->activity_id))[0];
+    $activity = array_pop(ClipitActivity::get_by_id(array($widget->activity_id)));
 } else {
     $to_be_configured = true;
 }
-if (isset($widget->task_id) && is_not_null($widget->task_id)) {
-    $task = ClipitQuiz::get_by_id(array($widget->task_id))[0];
-    error_log("Task:".print_r($task,true));
+if (isset($widget->quiz_id) && is_not_null($widget->quiz_id)) {
+    $quiz = array_pop(ClipitQuiz::get_by_id(array($widget->quiz_id)));
 } else {
     $to_be_configured = true;
 }
 if (isset($widget->scale) && is_not_null($widget->scale)) {
-    error_log("Scale:".print_r($scale,true));
     $scale = $widget->scale;
 } else {
     $to_be_configured = true;
 }
 
 if (isset($widget->group_id) && is_not_null($widget->group_id)) {
-    $group = ClipitGroup::get_by_id(array($widget->group_id))[0];
-    error_log("Group".print_r($group,true));
+    $group = array_pop(ClipitGroup::get_by_id(array($widget->group_id)));
 } else {
     if  ($to_be_configured === false && $scale != ClipitActivity::SUBTYPE) {
         $to_be_configured = true;
@@ -49,12 +46,15 @@ echo <<< HTML
         </div>
 HTML;
 } else {
-    $quiz_id = $task->guid;
+    $quiz_id = $quiz->id;
+    error_log(print_r($quiz,true));
     $min_values = array();
     $max_values = array();
     $results = array();
     //Als erstes rausfinden welche SBs beteiligt sind
     $sbresults = ClipitQuiz::get_quiz_results_by_tag($quiz_id);
+
+    error_log("Sbresults: ".print_r($sbresults,true));
     foreach ($sbresults as $sb_id => $value) {
         $sb = get_entity($sb_id);
         $sb_name = $sb->name;
@@ -90,6 +90,7 @@ HTML;
         error_log($widget->group->id. "*" . $group->id ."*".print_r($users,true));
         foreach ($users as $number => $user_id) {
             $quiz_results = ClipitQuiz::get_user_results_by_tag($quiz_id, $user_id);
+            error_log(print_r($quiz_results,true));//DEBUG
             $user = get_entity($user_id);
             if (is_not_null($quiz_results) && !empty($quiz_results)) {
                 $data = array();

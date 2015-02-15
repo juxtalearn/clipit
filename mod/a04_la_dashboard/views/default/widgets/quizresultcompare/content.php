@@ -15,17 +15,17 @@ $chart_identifier = "quiz-widget-$widget_id";
 //First we need to verify the settings for this widget
 $to_be_configured = false;
 if (isset($widget->activity_id) && is_not_null($widget->activity_id)) {
-    $activity = ClipitActivity::get_by_id(array($widget->activity_id))[0];
+    $activity = array_pop(ClipitActivity::get_by_id(array($widget->activity_id)));
 } else {
     $to_be_configured = true;
 }
 if (isset($widget->task_id1) && is_not_null($widget->task_id1)) {
-    $task1 = ClipitQuiz::get_by_id(array($widget->task_id1))[0];
+    $task1 = array_pop(ClipitQuiz::get_by_id(array($widget->task_id1)));
 } else {
     $to_be_configured = true;
 }
 if (isset($widget->task_id2) && is_not_null($widget->task_id2)) {
-    $task2 = ClipitQuiz::get_by_id(array($widget->task_id2))[0];
+    $task2 = array_pop(ClipitQuiz::get_by_id(array($widget->task_id2)));
 } else {
     $to_be_configured = true;
 }
