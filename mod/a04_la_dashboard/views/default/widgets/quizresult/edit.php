@@ -60,12 +60,12 @@ $params = array(
 $group_dropdown = elgg_view('input/dropdown', $params);
 
 if ( isset($vars['entity']->question_or_stumblingblock) && empty($vars['entity']->question_or_stumblingblock) ) {
-    $vars['entity']->question_or_stumblingblock = ClipitStumblingBlock::SUBTYPE;
+    $vars['entity']->question_or_stumblingblock = ClipitTag::SUBTYPE;
 }
 $params = array(
     'name' => 'params[question_or_stumblingblock]',
     'value' => $vars['entity']->question_or_stumblingblock,
-    'options_values' => array(ClipitStumblingBlock::SUBTYPE => elgg_echo('stumblingblock'),ClipitQuizQuestion::SUBTYPE => elgg_echo('question')),
+    'options_values' => array(ClipitTag::SUBTYPE => elgg_echo('stumblingblock'),ClipitQuizQuestion::SUBTYPE => elgg_echo('question')),
     'disabled' => false,
     'id' => "question_or_stumblingblock-$widget_id",
     'required' => false,
