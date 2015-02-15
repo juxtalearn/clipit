@@ -28,7 +28,7 @@ if (isset($widget->target_id) && is_not_null($widget->target_id)) {
 if (isset($widget->scale) && is_not_null($widget->scale)) {
     $scale = $widget->scale;
 }
-error_log("Target: ".print_r($target,true)."\nScale: ".$scale);
+//error_log("Target: ".print_r($target,true)."\nScale: ".$scale);
 if (elgg_instanceof($activity,'object', ClipitActivity::SUBTYPE) && elgg_instanceof($task1, 'object', ClipitQuiz::SUBTYPE) && elgg_instanceof($task2, 'object', ClipitQuiz::SUBTYPE) &&
     ((elgg_instanceof($target, 'object', ClipitGroup::SUBTYPE) && $scale == ClipitGroup::SUBTYPE)
         || (elgg_instanceof($target, 'user', ClipitUser::SUBTYPE) && $scale == ClipitUser::SUBTYPE)
