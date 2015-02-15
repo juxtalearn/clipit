@@ -8,8 +8,14 @@ Helper view for showing a dojo spiderweb
 $widget_id = $vars['widget_id'];
 $min_values = $vars['min_values'];
 $max_values = $vars['max_values'];
+$axis = $vars['axis'];
 $results = $vars['results'];
 $chart_identifier = "quiz-widget-$widget_id";
+
+if ( (!isset($axis) || is_null($axis)) && isset($min_values) && is_not_null($min_values)) {
+    $axis = array_keys($min_values);
+}
+
 ?>
 
 <div id="<?php echo $chart_identifier ?>"
@@ -34,14 +40,9 @@ require(["dojox/charting/Chart2D", "dojox/charting/themes/MiamiNice", "dojox/cha
                             precision: 0,
                             spiderType: "polygon"
                         });
-                        /*                    var data = [{"Osmosis": 0, "Diffusion": 0, "Genetic Drift": 0, "Potential": 0, "Voltage": 0},
-                         {"Osmosis": 100, "Diffusion": 100, "Genetic Drift": 100, "Potential": 100, "Voltage": 100},
-                         {"Osmosis": 53, "Diffusion": 26, "Genetic Drift": 25, "Potential": 45, "Voltage": 55},
-                         {"Osmosis": 20, "Diffusion": 100, "Genetic Drift": 45, "Potential": 30, "Voltage": 10}];
-                         */
                         <?php
-                            echo("var minmax = [".json_encode($min_values).",\n");
-                            echo("  ".json_encode($max_values)."];\n");
+//                            echo("var minmax = [".json_encode($min_values).",\n");
+//                            echo("  ".json_encode($max_values)."];\n");
                         foreach ($results as $number=>$series) {
                             if ($number == 0) {
                                 echo("var data = [".$series['data'].",\n");
@@ -57,8 +58,8 @@ require(["dojox/charting/Chart2D", "dojox/charting/themes/MiamiNice", "dojox/cha
                             echo("\t\t\t\t\tchart.addSeries(\"".$series['name']."\", {data: data[$number]}, {fill: \"".$series['color']."\"});\n");
 
                         }
-                        foreach ($min_values as $achsenbeschriftung=>$min_wert_der_achse) {
-                            echo("\t\t\t\t\tchart.addAxis(\"".$achsenbeschriftung."\", {type: \"Base\", min: 0, max: 100 });\n");
+                        foreach ($axis as $label) {
+                            echo("\t\t\t\t\tchart.addAxis(\"".$label."\", {type: \"Base\", min: 0, max: 100 });\n");
                         }
                         ?>
 chart.render();

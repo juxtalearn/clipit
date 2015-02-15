@@ -244,6 +244,75 @@ class ClipitQuiz extends UBItem {
      *
      * @param int $id Quiz ID
      * @param int $user_id User ID
+     * @return array Array of question_id=>$result, where the result is a float from 0 to 1. Empty array if the user has not
+     * finished the Quiz.
+     */
+    static function get_user_results_by_question($id, $user_id){
+        $result_array = array();
+        if(!static::has_finished_quiz($id, $user_id)){
+            return $result_array;
+        }
+        $tag_count_array = array();
+        $quiz_question_array = static::get_quiz_questions($id);
+        if(empty($quiz_question_array)){
+            return $result_array;
+        }
+        foreach($quiz_question_array as $quiz_question_id){
+            $quiz_question = new ClipitQuizQuestion($quiz_question_id);
+            $quiz_result = ClipitQuizResult::get_from_question_user($quiz_question_id, $user_id);
+                if(!empty($quiz_result)) {
+                    if ($quiz_result->correct) {
+                        $result_array[$quiz_question->id]=1;
+                    } else {
+                        $result_array[$quiz_question->id]=1;
+                    }
+                }
+        }
+        return $result_array;
+    }
+
+    /**
+     * Returns the average results by Tag for a Quiz among a Group. Students who have not finished the Quiz will not
+     * be counted.
+     *
+     * @param int $id Quiz ID
+     * @param int $group_id Group ID
+     *
+     * @return array Array of $question_id=>$result, where the result is a float from 0 to 1. Empty array if none of the
+     * students in the group have answered the Quiz.
+     */
+    static function get_group_results_by_question($id, $group_id){
+        $group = new ClipitGroup($group_id);
+        $user_results = array();
+        foreach($group->user_array as $user_id){
+            $user_results[$user_id] = static::get_user_results_by_question($id, $user_id);
+        }
+        $group_results = array();
+        $user_count = 0;
+        foreach($user_results as $user=>$results){
+            if(empty($results)){
+                continue;
+            }
+            $user_count++;
+            foreach($results as $question_id=>$result){
+                if(!isset($group_results[$question_id])){
+                    $group_results[$question_id] = (float)0.0;
+                }
+                $group_results[$question_id] += $result;
+            }
+        }
+        foreach($group_results as $question_id=>$result){
+            $group_results[$question_id] = (float)$result/$user_count;
+        }
+        return $group_results;
+    }
+
+
+    /**
+     * Returns the average results by Tag for a Quiz for a User, normalized from 0 to 1.
+     *
+     * @param int $id Quiz ID
+     * @param int $user_id User ID
      * @return array Array of tag_id=>$result, where the result is a float from 0 to 1. Empty array if the user has not
      * finished the Quiz.
      */

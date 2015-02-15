@@ -2,6 +2,22 @@
 
 class LADashboardHelper
 {
+    public static function getStumblingBlocksFromQuiz($quiz_id) {
+        $stumbling_blocks = array();
+        $questions = ClipitQuiz::get_quiz_questions($quiz_id);
+        foreach ($questions as $question_id) {
+            $sbs_for_question = ClipitQuizQuestion::get_tags($question_id);
+            $stumbling_blocks = array_merge($stumbling_blocks, $sbs_for_question);
+        }
+        $result_array = array();
+        foreach ($stumbling_blocks as $sb_id) {
+            $sb = get_entity($sb_id);
+            $result_array[$sb_id] = $sb->name;
+        }
+//        error_log("HelperResults($quiz_id): ".print_r($result_array, true));
+        return $result_array;
+    }
+
     public static function getGroupBundle($activityId = null)
     {
         $returnValue = array(array('id' => 0, 'name' => elgg_echo("la_dashboard:widget:quizresult:selectgroup")),array('id'=> 'all','name'=>elgg_echo("all")));
@@ -15,6 +31,7 @@ class LADashboardHelper
         }
         return $returnValue;
     }
+
 
     public static function getGroupBundlePHP($activityId = null)
     {

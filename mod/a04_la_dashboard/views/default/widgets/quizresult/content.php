@@ -29,6 +29,11 @@ if (isset($widget->scale) && is_not_null($widget->scale)) {
 } else {
     $to_be_configured = true;
 }
+if (isset($widget->question_or_stumblingblock) && is_not_null($widget->question_or_stumblingblock)) {
+    $question_or_stumblingblock = $widget->question_or_stumblingblock;
+} else {
+    $to_be_configured = true;
+}
 
 if (isset($widget->group_id) && is_not_null($widget->group_id)) {
     if ($widget->group_id != 'all') {
@@ -51,93 +56,16 @@ if ($to_be_configured) {
         </div>
 HTML;
 } else {
-    $quiz_id = $quiz->id;
-    $min_values = array();
-    $max_values = array();
-    $results = array();
-    //Als erstes rausfinden welche SBs beteiligt sind
-    $sbresults = ClipitQuiz::get_quiz_results_by_tag($quiz_id);
-
-    foreach ($sbresults as $sb_id => $value) {
-        $sb = get_entity($sb_id);
-        $sb_name = $sb->name;
-        $min_values[strval($sb_name)] = PHP_INT_MAX;
-        $max_values[strval($sb_name)] = 0;
-
+    $additional_vars = array('activity' => $activity, 'quiz' => $quiz, 'scale' => $scale, 'group' => $group, 'spider_colors'=>$spider_colors);
+    switch ($question_or_stumblingblock) {
+        case ClipitTag::SUBTYPE:
+            echo elgg_view('widgets/quizresult/content_sb', array_merge($vars, $additional_vars));
+            break;
+        case ClipitQuizQuestion::SUBTYPE:
+            echo elgg_view('widgets/quizresult/content_quest', array_merge($vars, $additional_vars));
+            break;
     }
-    if ($scale == ClipitActivity::SUBTYPE) {
-        $groups = $activity->group_array;
-        foreach ($groups as $number => $group_id) {
-            $quiz_results = ClipitQuiz::get_group_results_by_tag($quiz_id, $group_id);
-            $group = get_entity($group_id);
-            $data = array();
-            foreach(array_keys($min_values) as $blockname) {
-                $data[$blockname]=0;
-            }
-            if (is_not_null($quiz_results) && !empty($quiz_results)) {
+}
 
-                foreach ($quiz_results as $sb_id => $value) {
-                    $sb = get_entity($sb_id);
-                    $sb_name = $sb->name;
-                    $value = rand(1, 100);
-                    $data[strval($sb_name)] = floatval($value);
-                    if ($value > $max_values[$sb_name]) {
-                        $max_values[strval($sb_name)] = floatval($value);
-                    }
-                    if ($value < $min_values[$sb_name]) {
-                        $min_values[strval($sb_name)] = floatval($value);
-                    }
-                }
-            }
-            $data = json_encode($data);
-            $results[$number] = array("name" => $group->name, "data" => strval($data), "color" => $spider_colors[$number]);
-        }
-    } elseif ($scale == ClipitGroup::SUBTYPE) {
-        $number = 0;
-        foreach ($group as $current_group) {
-            $users = ClipitGroup::get_users($current_group->id);
-            foreach ($users as $user_id) {
-                $quiz_results = ClipitQuiz::get_user_results_by_tag($quiz_id, $user_id);
-                $user = get_entity($user_id);
-                $data = array();
-                foreach(array_keys($min_values) as $blockname) {
-                    $data[$blockname]=0;
-                }
-                if (is_not_null($quiz_results) && !empty($quiz_results)) {
-                    foreach ($quiz_results as $sb_id => $value) {
-                        $sb = get_entity($sb_id);
-                        $sb_name = $sb->name;
-                        $value = rand(1, 100);
-                        $data[strval($sb_name)] = floatval($value);
-                        if ($value > $max_values[$sb_name]) {
-                            $max_values[strval($sb_name)] = floatval($value);
-                        }
-                        if ($value < $min_values[$sb_name]) {
-                            $min_values[strval($sb_name)] = floatval($value);
-                        }
-                    }
-                }
-//                $data = json_encode($data);
-                $results[$number] = array("name" => $user->name, "data" => strval(json_encode($data)), "color" => $spider_colors[$number]);
-                $number+=1;
-            }
-        }
-    }
-    if (is_not_null($results) && !empty($results)) {
-        echo elgg_view('dojovis/quizspider', array(
-            'widget_id' => $widget_id,
-            'min_values' => $min_values,
-            'max_values' => $max_values,
-            'results' => $results,
-        ))
 
-        ?>
-    <?php } else {
-        $message = elgg_echo("la_dashboard:no_results"); //No results found:
-        echo <<<HTML
-        <div id="<?php echo $chart_identifier ?>">
-           $message
-        </div>
-HTML;
-    }
-} ?>
+?>
