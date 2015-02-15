@@ -32,7 +32,8 @@ class LADashboardHelper
         $returnValue = array(array('id' => 0, 'name' => elgg_echo("la_dashboard:widget:quizresult:selectuser")));
         if (isset($activityId)) {
             $user_ids = ClipitActivity::get_students($activityId);
-             $users = ClipitGroup::get_by_id($user_ids);
+            error_log("UserIds:".print_r($user_ids,true));//DEBUG
+             $users = ClipitUser::get_by_id($user_ids);
             foreach ($users as $user) {
                 $bundle = array('id' => $user->id, 'name' => $user->name);
                 $returnValue[] = $bundle;
