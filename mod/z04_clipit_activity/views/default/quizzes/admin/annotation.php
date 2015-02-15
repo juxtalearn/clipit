@@ -19,17 +19,17 @@ echo elgg_view('input/hidden', array(
     'value' => $result->id
 ));
 ?>
-<div class="annotate bg-white" style="<?php echo $result->description ? '': 'display:none;';?>padding: 10px;">
+<div class="annotate bg-white" style="<?php echo $result->description ? '': 'display:none;';?>padding: 0 20px;">
     <hr class="margin-0 margin-bottom-5">
     <script>
         tinymce_setup();
     </script>
-    <i class="fa fa-user blue"></i> <small>Teacher's annotate:</small>
+    <i class="fa fa-user blue"></i> <small><?php echo elgg_echo('quiz:teacher_annotation');?>:</small>
     <?php echo elgg_view("input/plaintext", array(
         'class' => 'form-control mceEditor',
         'value' => $result->description,
         'name' => 'annotation',
-        'rows' => 5
+        'rows' => 2
     ));
     ?>
     <a class="btn btn-primary btn-xs pull-right save-annotation" style="margin: 10px;"><?php echo elgg_echo('save');?></a>

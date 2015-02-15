@@ -24,7 +24,7 @@ $spanish = array(
     'location' => 'Localización',
     // Examples
     'example:name' => 'Nombre del ejemplo',
-    'examples' => 'Ejemplos de problemas',
+    'examples' => 'Problemas de Aprendizaje',
     'examples:none' => 'No hay ejemplos',
     'example:add' => 'Añadir ejemplo',
     'example:create' => 'Crear ejemplo',
@@ -52,7 +52,7 @@ $spanish = array(
     'author' => 'Autor',
     'tricky_topics' => 'Temas clave',
     'student_problems' => 'Ejemplos de problemas',
-    'reflection_palette' => '',
+    'reflection_palette' => 'Tipos de problema',
     'reflection_palette:question' => '¿Por qué los estudiantes tienen este problema?',
     'reflection_palette:tick' => 'Marque donde se aplique',
 );

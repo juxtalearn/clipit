@@ -5,4 +5,4 @@
  * Date: 20/01/2015
  * Time: 16:55
  */
-set_config("example_types", (bool)0);
+unset_config("reflection_palette");

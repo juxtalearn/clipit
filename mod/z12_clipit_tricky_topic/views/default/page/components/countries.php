@@ -20,7 +20,8 @@ $defaults = array(
     'value' =>  $value ? $value : '',
     'disabled' => false,
     'name' => 'country',
-    'options_values' => $countries
+    'options_values' => $countries,
+    'required' => $vars['required'] ? $vars['required']: false,
 );
 
 $vars = array_merge($defaults, $vars);

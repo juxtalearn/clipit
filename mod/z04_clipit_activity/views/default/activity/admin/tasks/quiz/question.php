@@ -84,7 +84,7 @@ if($question){
         ?>
         <div class="form-group row" style="padding: 10px;">
             <div class="form-group col-md-12">
-                <label>Enunciado de la pregunta</label>
+                <label><?php echo elgg_echo('quiz:question:statement');?></label>
                 <?php echo elgg_view("input/text", array(
                     'name' => $input_prefix.'[question]['.$id.'][title]',
                     'class' => 'form-control',
@@ -95,7 +95,7 @@ if($question){
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>Información adicional</label>
+                    <label><?php echo elgg_echo('quiz:question:additional_info');?></label>
                     <?php echo elgg_view("input/plaintext", array(
                         'name' => $input_prefix.'[question]['.$id.'][description]',
                         'value' => $question->description,
@@ -140,7 +140,7 @@ if($question){
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>Tipo de pregunta</label>
+                    <label><?php echo elgg_echo('quiz:question:type');?></label>
                     <?php echo elgg_view("input/dropdown", array(
                         'name' => $input_prefix.'[question]['.$id.'][type]',
                         'style' => 'padding: 5px;',

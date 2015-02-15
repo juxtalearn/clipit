@@ -17,7 +17,7 @@ $button_value = elgg_extract('submit_value', $vars);
 $tricky_topic_id = elgg_extract('tricky_topic', $vars);
 
 $user_language = get_current_language();
-$language_index = ClipitReflectionItem::get_language_index($user_language);
+$language_index = ClipitExampleType::get_language_index($user_language);
 if($example) {
     $tags = ClipitTag::get_by_id($example->tag_array);
     echo elgg_view('input/hidden', array(
@@ -60,7 +60,7 @@ if($example) {
             <div class="col-md-5">
                 <label><?php echo elgg_echo('country');?></label>
                 <?php echo elgg_view('page/components/countries',
-                    array('style' => 'padding:5px;', 'value' => $example->country));?>
+                    array('style' => 'padding:5px;', 'value' => $example->country, 'required' => true));?>
             </div>
             <div class="col-md-7">
                 <label><?php echo elgg_echo('location');?></label>
@@ -299,7 +299,7 @@ if($example) {
             <ul class="navs nav-tab tab-set " role="tablist">
                 <?php
                 $i = 1;
-                foreach(ClipitReflectionItem::get_by_category(null, $user_language) as $category => $items):
+                foreach(ClipitExampleType::get_by_category(null, $user_language) as $category => $items):
                     $categories[$category] = $items;
                 ?>
                     <li role="presentation" class=" <?php echo $i==1 ? 'active':'';?>">
@@ -341,7 +341,7 @@ if($example) {
                                 <input type="checkbox"
                                        name="reflections[]"
                                        value="<?php echo $item->id;?>"
-                                       <?php echo in_array($item->id, $example->reflection_item_array) ? 'checked': '';?>
+                                       <?php echo in_array($item->id, $example->example_type_array) ? 'checked': '';?>
                                        class="pull-left" style="margin-right: 5px;">
                                 <div class="content-block cursor-pointer">
                                     <?php echo $item->item_name[$language_index]; ?>

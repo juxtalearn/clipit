@@ -6,11 +6,11 @@
  * Time: 13:45
  */
 
-class ClipitReflectionItem extends UBItem{
+class ClipitExampleType extends UBItem{
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
-    const SUBTYPE = "ClipitReflectionItem";
+    const SUBTYPE = "ClipitExampleType";
 
     /*
     Properties are disposed in arrays by language, in the following order:

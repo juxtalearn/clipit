@@ -77,7 +77,7 @@ foreach($questions as $question){
         ClipitQuizQuestion::set_properties($question['id'], $question_data);
     } elseif($question['id_parent']){
 //      ClipitQuizQuestion::link_parent_clone($question['id_parent'], $question_id);
-        $question_id = ClipitQuizQuestion::create_clone($question['id_parent']);
+        $question_id = ClipitQuizQuestion::create_clone($question['id_parent'], false);
         ClipitQuizQuestion::set_properties($question_id, array_merge(
             $question_data,
             array('time_created' => time())

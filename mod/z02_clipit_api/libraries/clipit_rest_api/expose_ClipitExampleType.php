@@ -15,9 +15,9 @@
 /**
  * Expose class functions for the ClipIt REST API
  */
-function expose_reflection_item_functions() {
-    $api_suffix = "clipit.reflection_item.";
-    $class_suffix = "ClipitReflectionItem::";
+function expose_example_type_functions() {
+    $api_suffix = "clipit.example_type.";
+    $class_suffix = "ClipitExampleType::";
     expose_common_functions($api_suffix, $class_suffix);
     expose_function(
         $api_suffix . "get_by_category", $class_suffix . "get_by_category",

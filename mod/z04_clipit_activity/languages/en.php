@@ -11,6 +11,9 @@
  * @package         ClipIt
  */
 $english = array(
+    'stats' => 'Stats',
+    'students' => 'Students',
+    'groups' => 'Groups',
     'search:btn' => 'Search',
     'status' => 'Status',
     'send:to_site' => 'Publish to ClipIt',
@@ -241,6 +244,8 @@ $english = array(
     'task:add' => 'Add task',
     'task:remove' => 'Remove task',
     'task:added' => 'Added task',
+    'task:updated' => 'Updated task',
+    'task:cantupdate' => 'You can not update task',
     'task:select' => 'Select task',
     'task:select:task_type' => 'Select task type',
     'task:task_type' => 'Task type',
@@ -260,7 +265,7 @@ $english = array(
     'task:video_upload' => 'Video create',
     'task:storyboard_upload' => 'Storyboard create',
     'task:storyboard_uploaded' => 'Storyboard uploaded',
-    'task:quiz_answer' => 'Quiz answer',
+    'task:quiz_answer' => 'Take quiz',
     'task:video_feedback' => 'Video feedback',
     'task:storyboard_feedback' => 'Storyboard feedback',
     'task:other' => 'Other',
@@ -310,7 +315,11 @@ $english = array(
     'activity:cantupdate' => 'Cannot update activity',
 
     // Quiz
-    'quiz:result:send' => '',
+    'quiz:teacher_annotation' => 'Teacher\'s feedback',
+    'quiz:result:send' => 'Answers of the Quiz will be saved. While you\'re in the time to do the exam you can change your answers.',
+    'quiz:data:none' => 'No data',
+    'quiz:tricky_topic:danger' => 'If you change Tricky Topic questions will be deleted',
+    'quiz:not_finished' => 'Not finished',
     'difficulty' => 'Difficulty',
     'quiz:select:from_tag' => 'Add related questions',
     'quiz:question' => 'Question',
@@ -324,6 +333,11 @@ $english = array(
     'quiz:question:annotate' => 'Add annotation',
     'quiz:question:results' => 'Results',
     'quiz:question:result:add' => 'Add result',
+    'quiz:question:answer' => 'Answer',
+    'quiz:question:type' => 'Question type',
+    'quiz:question:statement' => 'Statement question',
+    'quiz:question:additional_info' => 'Additional information',
+    'quiz:questions:answered' => 'Questions answered',
 );
 
 add_translation('en', $english);

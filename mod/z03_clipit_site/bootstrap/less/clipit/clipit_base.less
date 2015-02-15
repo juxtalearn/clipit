@@ -342,9 +342,9 @@ h4.empty{
     border-color: none;
   }
 }
-select.form-control{
+select.form-control, select.form-control:focus{
   @shadow_input:  0 0 0 4px rgba(225, 235, 240, 0.5);
-  .box-shadow(@shadow_input) !important;
+  .box-shadow(@shadow_input);
   border: 1px solid #EFF4F7;
 }
 
@@ -1130,7 +1130,8 @@ tr.info td {
     margin: 0 0 0.5em;
     padding: 0;
     table-layout: fixed;
-    width: auto;
+//    width: auto;
+    width: 100%;
     li {
       background-color: #f7f7f7;
       border-right: 4px solid white;

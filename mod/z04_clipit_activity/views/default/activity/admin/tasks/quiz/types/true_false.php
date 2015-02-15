@@ -14,14 +14,14 @@ $id = elgg_extract('id', $vars);
 $input_prefix = elgg_extract('input_prefix', $vars);
 ?>
 <div>
-    <label class="inline-block margin-right-10">
+    <label>
         <input type="radio"
                name="<?php echo $input_prefix;?>[question][<?php echo $id;?>][true_false]"
                 <?php echo $vars['checked'][0] ? 'checked' : '';?>
                value="true"/>
         <?php echo elgg_echo('true');?>
     </label>
-    <label class="inline-block">
+    <label>
         <input type="radio"
                name="<?php echo $input_prefix;?>[question][<?php echo $id;?>][true_false]"
                 <?php echo $vars['checked'][1] ? 'checked' : '';?>

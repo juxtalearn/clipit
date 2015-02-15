@@ -75,6 +75,9 @@ $(function(){
     </thead>
     <?php
     foreach($quizzes as $quiz):
+        if($quiz->cloned_from != 0) {
+            continue;
+        }
         $user = array_pop(ClipitUser::get_by_id(array($quiz->owner_id)));
         $questions = ClipitQuiz::get_quiz_questions($quiz->id);
         $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($quiz->tricky_topic)));

@@ -11,8 +11,13 @@ label{
     color: @red_clipit;
   }
 }
-input.error, textarea.error{
-  .box-shadow(inset 0 1px 4px @red_clipit) !important;
+input,
+textarea,
+select{
+  &.error{
+    @shadow_input: inset 0 0 0 1px @red_clipit, 0 0 0 4px rgba(225, 235, 240, 0.5);
+    .box-shadow(@shadow_input) !important;
+  }
 }
 
 //

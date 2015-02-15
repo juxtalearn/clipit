@@ -194,6 +194,8 @@ function clipit_activity_init() {
     elgg_register_js("fullcalendar:moment", "{$vendors_dir}/fullcalendar/moment.min.js");
     elgg_register_js("fullcalendar", "{$vendors_dir}/fullcalendar/fullcalendar.min.js");
     elgg_register_css("fullcalendar", "{$vendors_dir}/fullcalendar/fullcalendar.css");
+    // ChartJS
+    elgg_register_js("jquery:chartjs", "{$vendors_dir}/chartjs.min.js");
 }
 function activity_setup_sidebar_menus(){
     $activity_id =  elgg_get_page_owner_guid();

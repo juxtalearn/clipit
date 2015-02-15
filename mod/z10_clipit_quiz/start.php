@@ -52,16 +52,19 @@ function quiz_page_handler($page){
             $title = elgg_echo('quizzes');
             $selected_tab = get_input('filter', 'all');
             $filter = elgg_view('quiz/filter', array('selected' => $selected_tab, 'href' => $page[0]));
-
             if($search = get_input('s')) {
-                $all_entities = quiz_filter_search($search);
-                $all_entities = ClipitQuiz::get_by_id($all_entities);
+                $entities = quiz_filter_search($search);
+                $entities = ClipitQuiz::get_by_id($entities);
             } else {
-                $all_entities = ClipitQuiz::get_all(0, 0);
+                $entities = ClipitQuiz::get_all(0, 0);
+            }
+            foreach($entities as $entity){
+                if($entity->cloned_from == 0) {
+                    $all_entities[] = $entity;
+                }
             }
             $count = count($all_entities);
             $entities = array_slice($all_entities, clipit_get_offset(), clipit_get_limit(10));
-
             $content = elgg_view('quiz/list', array('entities' => $entities, 'count' => $count));
             break;
         case 'edit':
@@ -108,10 +111,11 @@ function quiz_page_handler($page){
                 array('submit_value' => elgg_echo('create'))
             );
             if($id = $page[1]){
-                $quiz_id = ClipitQuiz::create_clone($id);
+                $quiz_id = ClipitQuiz::create_clone($id, false);
                 $quiz = array_pop(ClipitQuiz::get_by_id(array($quiz_id)));
                 $new_title = '['.elgg_echo('clone').'] '.$quiz->name;
                 ClipitQuiz::set_properties($quiz->id, array('name' => $new_title, 'time_created' => time()));
+
                 $quiz = array_pop(ClipitQuiz::get_by_id(array($quiz_id)));
                 elgg_pop_breadcrumb($title);
                 elgg_push_breadcrumb($quiz->name, "quizzes/view/{$quiz->id}");

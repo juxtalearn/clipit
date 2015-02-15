@@ -32,7 +32,7 @@ if($entity_id){
     system_message(elgg_echo('example:created'));
 }
 // Add reflection items
-ClipitExample::set_reflection_items($example_id, $reflection_items);
+ClipitExample::set_example_types($example_id, $reflection_items);
 // Files, Storyboards and Videos
 $file = $_FILES['file'];
 $new_file_id = array();
@@ -88,7 +88,7 @@ for($i = 0;$i < count($video_title);$i++){
 }
 ClipitExample::add_videos($example_id, $new_video_id);
 
-// Create/Select Stumling blocks
+// Create/Select Stumbling blocks
 $tags =  get_input('tag');
 array_filter($tags);
 $tag_ids = array();

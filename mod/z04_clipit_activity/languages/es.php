@@ -11,6 +11,9 @@
  * @package         ClipIt
  */
 $spanish = array(
+    'stats' => 'Estadísticas',
+    'students' => 'Estudiantes',
+    'groups' => 'Grupos',
     'search:btn' => 'Buscar',
     'status' => 'Estado',
     'send:to_site' => 'Enviar a ClipIt',
@@ -242,6 +245,8 @@ $spanish = array(
     'task:add' => 'Añadir tarea',
     'task:remove' => 'Eliminar tarea',
     'task:added' => 'Tarea añadida',
+    'task:updated' => 'Tarea actualizada',
+    'task:cantupdate' => 'No se ha podido actualizar la tarea',
     'task:select' => 'Seleccionar tarea',
     'task:select:task_type' => 'Seleccionar tipo de tarea',
     'task:task_type' => 'Tipo de tarea',
@@ -327,7 +332,11 @@ $spanish = array(
     'resource:added_by' => 'Añadido por',
 
     // Quiz
-    'quiz:result:send' => 'Las respuestas quedarán guardadas, por lo tanto puedes volver a entrar si estás dentro del tiempo para hacer el examen.',
+    'quiz:teacher_annotation' => 'Comentario del profesor',
+    'quiz:result:send' => 'Las respuestas del test quedarán guardadas. Mientras que estés dentro del tiempo para hacer el examen puedes modificar tus respuestas.',
+    'quiz:data:none' => 'No hay datos',
+    'quiz:not_finished' => 'Sin terminar',
+    'quiz:tricky_topic:danger' => 'Si cambia de Tema Clave se borrarán las preguntas creadas',
     'difficulty' => 'Dificultad',
     'quiz:select:from_tag' => 'Añadir preguntas existentes relacionadas',
     'quiz:question' => 'Pregunta',
@@ -341,6 +350,11 @@ $spanish = array(
     'quiz:question:annotate' => 'Añadir anotación',
     'quiz:question:results' => 'Resultados',
     'quiz:question:result:add' => 'Añadir respuesta',
+    'quiz:question:answer' => 'Respuesta',
+    'quiz:question:type' => 'Tipo de pregunta',
+    'quiz:question:statement' => 'Enunciado de la pregunta',
+    'quiz:question:additional_info' => 'Información adicional',
+    'quiz:questions:answered' => 'Preguntas contestadas',
 );
 
 add_translation('es', $spanish);

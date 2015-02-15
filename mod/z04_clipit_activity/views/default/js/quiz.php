@@ -235,7 +235,7 @@ $.fn.quiz = function (options) {
                         className: "btn-border-blue btn-default"
                     }
                 },
-                message: "Si cambia de Tema Clave se borrarán las preguntas creadas",
+                message: "<?php echo elgg_echo('quiz:tricky_topic:danger');?>",
                 callback: function(result) {
                     if(result) {
                         $quiz.find(".questions").html("");

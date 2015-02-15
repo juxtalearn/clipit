@@ -28,13 +28,16 @@ $activity_id = ClipitActivity::create(array(
 // Tasks
 $tasks = get_input('task');
 foreach($tasks as $task){
+    if($quiz_id = $task['quiz_id']){
+        $quiz_id = ClipitQuiz::create_clone($task['quiz_id']);
+    }
     $task_id = ClipitTask::create(array(
         'name' => $task['title'],
         'description' => $task['description'],
         'task_type' => $task['type'],
         'start' => get_timestamp_from_string($task['start']),
         'end' => get_timestamp_from_string($task['end']),
-        'quiz' => $task['type'] == ClipitTask::TYPE_QUIZ_TAKE ? $task['quiz_id'] : 0
+        'quiz' => $task['type'] == ClipitTask::TYPE_QUIZ_TAKE ? $quiz_id : 0
     ));
 
     ClipitActivity::add_tasks($activity_id, array($task_id));

@@ -53,7 +53,7 @@ $english = array(
     'author' => 'Author',
     'tricky_topics' => 'Tricky Topics',
     'student_problems' => 'Student problems',
-    'reflection_palette' => 'Reflection palette',
+    'reflection_palette' => 'Problem Distiller',
     'reflection_palette:question' => 'Why do students have this problem?',
     'reflection_palette:tick' => 'Please tick all that apply',
 );
