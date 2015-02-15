@@ -31,30 +31,33 @@ if (isset($widget->scale) && is_not_null($widget->scale)) {
 }
 
 if (isset($widget->group_id) && is_not_null($widget->group_id)) {
-    $group = array_pop(ClipitGroup::get_by_id(array($widget->group_id)));
+    if ($widget->group_id != 'all') {
+        $group = ClipitGroup::get_by_id(array($widget->group_id));
+    } else {
+        $group_ids = ClipitActivity::get_groups($activity->id);
+        $group = ClipitGroup::get_by_id($group_ids);
+    }
 } else {
-    if  ($to_be_configured === false && $scale != ClipitActivity::SUBTYPE) {
+    if ($to_be_configured === false && $scale != ClipitActivity::SUBTYPE) {
         $to_be_configured = true;
     }
 }
 
 if ($to_be_configured) {
     $message = elgg_echo("la_dashboard:please_config_widget");
-echo <<< HTML
+    echo <<< HTML
     <div id="widget_not_configured">
            $message
         </div>
 HTML;
 } else {
     $quiz_id = $quiz->id;
-    error_log(print_r($quiz,true));
     $min_values = array();
     $max_values = array();
     $results = array();
     //Als erstes rausfinden welche SBs beteiligt sind
     $sbresults = ClipitQuiz::get_quiz_results_by_tag($quiz_id);
 
-    error_log("Sbresults: ".print_r($sbresults,true));
     foreach ($sbresults as $sb_id => $value) {
         $sb = get_entity($sb_id);
         $sb_name = $sb->name;
@@ -63,12 +66,16 @@ HTML;
 
     }
     if ($scale == ClipitActivity::SUBTYPE) {
-        $groups = ClipitActivity::get_groups($activity->guid);
+        $groups = $activity->group_array;
         foreach ($groups as $number => $group_id) {
             $quiz_results = ClipitQuiz::get_group_results_by_tag($quiz_id, $group_id);
             $group = get_entity($group_id);
+            $data = array();
+            foreach(array_keys($min_values) as $blockname) {
+                $data[$blockname]=0;
+            }
             if (is_not_null($quiz_results) && !empty($quiz_results)) {
-                $data = array();
+
                 foreach ($quiz_results as $sb_id => $value) {
                     $sb = get_entity($sb_id);
                     $sb_name = $sb->name;
@@ -86,29 +93,34 @@ HTML;
             $results[$number] = array("name" => $group->name, "data" => strval($data), "color" => $spider_colors[$number]);
         }
     } elseif ($scale == ClipitGroup::SUBTYPE) {
-        $users = ClipitGroup::get_users($group->id);
-        error_log($widget->group->id. "*" . $group->id ."*".print_r($users,true));
-        foreach ($users as $number => $user_id) {
-            $quiz_results = ClipitQuiz::get_user_results_by_tag($quiz_id, $user_id);
-            error_log(print_r($quiz_results,true));//DEBUG
-            $user = get_entity($user_id);
-            if (is_not_null($quiz_results) && !empty($quiz_results)) {
+        $number = 0;
+        foreach ($group as $current_group) {
+            $users = ClipitGroup::get_users($current_group->id);
+            foreach ($users as $user_id) {
+                $quiz_results = ClipitQuiz::get_user_results_by_tag($quiz_id, $user_id);
+                $user = get_entity($user_id);
                 $data = array();
-                foreach ($quiz_results as $sb_id => $value) {
-                    $sb = get_entity($sb_id);
-                    $sb_name = $sb->name;
-                    $value = rand(1, 100);
-                    $data[strval($sb_name)] = floatval($value);
-                    if ($value > $max_values[$sb_name]) {
-                        $max_values[strval($sb_name)] = floatval($value);
-                    }
-                    if ($value < $min_values[$sb_name]) {
-                        $min_values[strval($sb_name)] = floatval($value);
+                foreach(array_keys($min_values) as $blockname) {
+                    $data[$blockname]=0;
+                }
+                if (is_not_null($quiz_results) && !empty($quiz_results)) {
+                    foreach ($quiz_results as $sb_id => $value) {
+                        $sb = get_entity($sb_id);
+                        $sb_name = $sb->name;
+                        $value = rand(1, 100);
+                        $data[strval($sb_name)] = floatval($value);
+                        if ($value > $max_values[$sb_name]) {
+                            $max_values[strval($sb_name)] = floatval($value);
+                        }
+                        if ($value < $min_values[$sb_name]) {
+                            $min_values[strval($sb_name)] = floatval($value);
+                        }
                     }
                 }
+//                $data = json_encode($data);
+                $results[$number] = array("name" => $user->name, "data" => strval(json_encode($data)), "color" => $spider_colors[$number]);
+                $number+=1;
             }
-            $data = json_encode($data);
-            $results[$number] = array("name" => $user->name, "data" => strval($data), "color" => $spider_colors[$number]);
         }
     }
     if (is_not_null($results) && !empty($results)) {
@@ -122,7 +134,7 @@ HTML;
         ?>
     <?php } else {
         $message = elgg_echo("la_dashboard:no_results"); //No results found:
-echo <<<HTML
+        echo <<<HTML
         <div id="<?php echo $chart_identifier ?>">
            $message
         </div>

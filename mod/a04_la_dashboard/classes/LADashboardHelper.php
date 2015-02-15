@@ -4,7 +4,7 @@ class LADashboardHelper
 {
     public static function getGroupBundle($activityId = null)
     {
-        $returnValue = array(array('id' => 0, 'name' => elgg_echo("la_dashboard:widget:quizresult:selectgroup")));
+        $returnValue = array(array('id' => 0, 'name' => elgg_echo("la_dashboard:widget:quizresult:selectgroup")),array('id'=> 'all','name'=>elgg_echo("all")));
         if (isset($activityId)) {
             $group_ids = ClipitActivity::get_groups($activityId);
             $groups = ClipitGroup::get_by_id($group_ids);

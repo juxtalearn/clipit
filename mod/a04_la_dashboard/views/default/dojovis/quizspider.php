@@ -1,5 +1,6 @@
 
 <?php
+//elgg_load_css('dojotoolkitcss');
 /*
 Helper view for showing a dojo spiderweb
 */
@@ -11,10 +12,9 @@ $results = $vars['results'];
 $chart_identifier = "quiz-widget-$widget_id";
 ?>
 
-
 <div id="<?php echo $chart_identifier ?>"
-             style="width: 320px; height: 320px; margin: 0px auto 0px auto;"></div>
-        <div id="legendNode-<?php echo $chart_identifier ?>"></div>
+     style="width: 320px; height: 320px; margin: 0px auto 0px auto;"></div>
+    <div id="legendNode-<?php echo $chart_identifier ?>"></div>
         <script>
 
 require(["dojox/charting/Chart2D", "dojox/charting/themes/MiamiNice", "dojox/charting/axis2d/Default",
@@ -62,7 +62,7 @@ require(["dojox/charting/Chart2D", "dojox/charting/themes/MiamiNice", "dojox/cha
                         }
                         ?>
 chart.render();
-new SelectableLegend({chart: chart}, 'legendNode-<?php echo $chart_identifier?>');
+new SelectableLegend({chart: chart,horizontal:false,style:"width: 300px; height: 100px; margin: 0px auto 0px auto; overflow:scroll;"}, 'legendNode-<?php echo $chart_identifier?>');
 // new Tooltip({chart:chart}, 'default');
 });
 }

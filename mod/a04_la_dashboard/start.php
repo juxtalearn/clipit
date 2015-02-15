@@ -27,7 +27,7 @@ function learning_analytics_dashboard_init() {
     elgg_register_plugin_hook_handler('get_list', 'default_widgets', 'ladashboard_default_widgets');
     $plugin_url =  '/mod/a04_la_dashboard';
     elgg_register_js("dojotoolkit","http://ajax.googleapis.com/ajax/libs/dojo/1.10.3/dojo/dojo.js");
-
+    elgg_register_css("dojotoolkitcss","http://ajax.googleapis.com/ajax/libs/dojo/1.10.3/dojo/resources/dojo.css");
     elgg_register_css('dashboardcss',"{$plugin_url}/views/default/css/la_dashboard.css",1000);
     elgg_load_css("dashboardcss");
 
