@@ -23,7 +23,7 @@ $params = array(
     'name' => 'params[task_id]',
     'value' => $vars['entity']->task_id,
     'options_values' => $task_options,
-    'disabled' => 'true',
+    'disabled' => !(count($task_options)>1),
     'id' => "task_dropdown-$widget_id",
     'required' => true,
 );
@@ -34,7 +34,7 @@ $params = array(
     'name' => 'params[scale]',
     'value' => $vars['entity']->scale,
     'options_values' => array(ClipitActivity::SUBTYPE => elgg_echo('activity'),ClipitGroup::SUBTYPE => elgg_echo('group')),
-    'disabled' => 'false',
+    'disabled' => false,
     'id' => "scale_dropdown-$widget_id",
     'required' => true,
 );
@@ -59,10 +59,29 @@ $params = array(
 
 $group_dropdown = elgg_view('input/dropdown', $params);
 
+if ( isset($vars['entity']->question_or_stumblingblock) && empty($vars['entity']->question_or_stumblingblock) ) {
+    $vars['entity']->question_or_stumblingblock = ClipitStumblingBlock::SUBTYPE;
+}
+$params = array(
+    'name' => 'params[question_or_stumblingblock]',
+    'value' => $vars['entity']->question_or_stumblingblock,
+    'options_values' => array(ClipitStumblingBlock::SUBTYPE => elgg_echo('stumblingblock'),ClipitQuizQuestion::SUBTYPE => elgg_echo('question')),
+    'disabled' => false,
+    'id' => "question_or_stumblingblock-$widget_id",
+    'required' => false,
+);
+
+$question_or_stumblingblock = elgg_view('input/dropdown', $params);
+
 ?>
 <p>
     <?php echo elgg_echo('activity'); ?>:
     <?php echo $activity_dropdown ?>
+</p>
+
+<p>
+    <?php echo elgg_echo('quizorquestion'); ?>:
+    <?php echo $question_or_stumblingblock ?>
 </p>
 
 <p>

@@ -23,7 +23,7 @@ $params = array(
     'name' => 'params[task_id1]',
     'value' => $vars['entity']->task_id1,
     'options_values' => $task_options,
-    'disabled' => 'true',
+    'disabled' => !(count($task_options)>1),
     'id' => "task_dropdown1-$widget_id",
     'required' => true,
 );
@@ -35,7 +35,7 @@ $params = array(
     'name' => 'params[task_id2]',
     'value' => $vars['entity']->task_id2,
     'options_values' => $task_options,
-    'disabled' => 'true',
+    'disabled' => !(count($task_options)>1),
     'id' => "task_dropdown2-$widget_id",
     'required' => true,
 );
@@ -47,7 +47,7 @@ $params = array(
     'name' => 'params[scale]',
     'value' => $vars['entity']->scale,
     'options_values' => array(ClipitActivity::SUBTYPE => elgg_echo('activity'), ClipitGroup::SUBTYPE => elgg_echo('group'), ClipitUser::SUBTYPE => elgg_echo('student')),
-    'disabled' => 'false',
+    'disabled' => false,
     'id' => "scale_dropdown-$widget_id",
     'required' => true,
 );
