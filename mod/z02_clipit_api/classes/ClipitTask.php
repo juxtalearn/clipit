@@ -268,7 +268,7 @@ class ClipitTask extends UBItem {
 
     // TASK COMPLETION
     static function get_completed_status($id, $entity_id) {
-        $task = new static($id);
+        $task = new static((int)$id);
         switch($task->task_type) {
             case static::TYPE_QUIZ_TAKE:
                 return ClipitQuiz::has_finished_quiz($task->quiz, $entity_id);
@@ -309,6 +309,30 @@ class ClipitTask extends UBItem {
                             // at least one of the targets was not rated
                             return false;
                         } // else the user is part of the group who published the storyboard, so no feedback required
+                    }
+                }
+                return true;
+            case static::TYPE_RESOURCE_DOWNLOAD:
+                $activity = (int)$task->activity;
+                $teacher_files = ClipitActivity::get_files($activity);
+                foreach($teacher_files as $file_id){
+                    $read_status = ClipitFile::get_read_status($file_id, array($entity_id));
+                    if((bool)$read_status[$entity_id] !== true){
+                        return false;
+                    }
+                }
+                $teacher_videos = Clipitactivity::get_videos($activity);
+                foreach($teacher_videos as $video_id){
+                    $read_status = ClipitVideo::get_read_status($video_id, array($entity_id));
+                    if((bool)$read_status[$entity_id] !== true){
+                        return false;
+                    }
+                }
+                $teacher_storyboards = ClipitActivity::get_storyboards($activity);
+                foreach($teacher_storyboards as $storyboard_id){
+                    $read_status = ClipitStoryboard::get_read_status($storyboard_id, array($entity_id));
+                    if((bool)$read_status[$entity_id] !== true){
+                        return false;
                     }
                 }
                 return true;

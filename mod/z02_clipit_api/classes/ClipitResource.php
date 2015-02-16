@@ -316,7 +316,7 @@ class ClipitResource extends UBItem {
      * @return static[] Array with key => value: user_id => read_status, where read_status is bool
      */
     static function get_read_status($id, $user_array = null) {
-        $props = static::get_properties($id, array("read_array", "owner_id"));
+        $props = static::get_properties($id, array("read_array"));
         $read_array = $props["read_array"];
         if(!$user_array) {
             return $read_array;
