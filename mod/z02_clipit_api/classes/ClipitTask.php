@@ -324,7 +324,6 @@ class ClipitTask extends UBItem {
                 foreach($task_videos as $video_id){
                     $read_status = ClipitVideo::get_read_status($video_id, array($entity_id));
                     if((bool)$read_status[$entity_id] !== true){
-                        var_dump("video $video_id");
                         return false;
                     }
                 }
@@ -332,7 +331,6 @@ class ClipitTask extends UBItem {
                 foreach($task_storyboards as $storyboard_id){
                     $read_status = ClipitStoryboard::get_read_status($storyboard_id, array($entity_id));
                     if((bool)$read_status[$entity_id] !== true){
-                        var_dump("storyboard $storyboard_id");
                         return false;
                     }
                 }

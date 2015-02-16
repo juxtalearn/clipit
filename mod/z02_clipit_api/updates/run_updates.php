@@ -17,10 +17,9 @@ $update_files = array(
 
 $old_version = get_config("clipit_version");
 
-// If no clipit_version in config, then it's a new install, set the version and exit.
+// If no clipit_version in config, then treat it as oldest version possible.
 if(empty($old_version)){
-    set_config("clipit_version", $VERSION);
-    return;
+    $old_version = "2.2.0";
 }
 
 print_r("<p>Current version: $old_version<br>New version: $VERSION</p>");
