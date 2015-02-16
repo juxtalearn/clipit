@@ -462,6 +462,33 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
                 }
             }
             break;
+        case ClipitTask::TYPE_RESOURCE_DOWNLOAD:
+            switch(ClipitTask::get_status($task->id)){
+                case ClipitTask::STATUS_FINISHED:
+                case ClipitTask::STATUS_ACTIVE:
+                    if(ClipitTask::get_completed_status($task->id, $user_id)){
+                        $status = array(
+                            'icon' => '<i class="fa fa-check green"></i>',
+                            'text' => elgg_echo('task:completed'),
+                            'color' => 'green',
+                        );
+                    } elseif(ClipitTask::get_status($task->id) == ClipitTask::STATUS_ACTIVE) {
+                        $status = array(
+                            'icon' => '<i class="fa fa-minus yellow"></i>',
+                            'text' => elgg_echo('task:pending'),
+                            'color' => 'yellow',
+                        );
+                    } else {
+                        $status = array(
+                            'icon' => '<i class="fa fa-times red"></i>',
+                            'text' => elgg_echo('task:not_completed'),
+                            'color' => 'red',
+                            'status' => true
+                        );
+                    }
+                    break;
+            }
+            break;
     }
 
     if($task->end <= time() && $status['status'] === false){

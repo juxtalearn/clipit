@@ -65,7 +65,7 @@ function clipit_final_init(){
     elgg_load_js("jquery");
     elgg_load_js("jquery-migrate");
 
-    if (elgg_get_context() === "admin") {
+    if (elgg_get_context() == "admin") {
         if ($user->role == ClipitUser::ROLE_TEACHER) {
             elgg_unregister_page_handler('admin');
             return false;
@@ -75,6 +75,9 @@ function clipit_final_init(){
         elgg_unregister_css("clipit");
         elgg_unregister_js("twitter-bootstrap");
     } else {
+        if (elgg_get_context() == "activity" && $user->role == ClipitUser::ROLE_ADMIN) {
+            forward('admin');
+        }
         elgg_register_css("ui-lightness", "{$plugin_url}/vendors/jquery-ui-1.10.2.custom/css/ui-lightness/jquery-ui-1.10.2.custom.min.css");
         elgg_register_js("jquery-ui", "{$plugin_url}/vendors/jquery-ui-1.10.2.custom/js/jquery-ui-1.10.2.custom.min.js", "head", 2);
         // Waypoints

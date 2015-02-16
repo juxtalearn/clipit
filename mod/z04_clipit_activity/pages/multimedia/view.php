@@ -14,6 +14,9 @@ elgg_pop_breadcrumb($title);
 elgg_push_breadcrumb($title, $href);
 $object = ClipitSite::lookup($entity_id);
 $filter = "";
+if($task_id = get_input('task_id')){
+    $object['subtype']::set_read_status($entity_id, true, array(elgg_get_logged_in_user_guid()));
+}
 switch($object['subtype']){
     // Clipit File
     case 'ClipitFile':
@@ -70,4 +73,5 @@ switch($object['subtype']){
         return false;
         break;
 }
+
 elgg_push_breadcrumb($entity->name);

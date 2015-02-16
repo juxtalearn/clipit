@@ -14,6 +14,7 @@ $entity = elgg_extract('entity', $vars);
 $entities_ids = elgg_extract('entities', $vars);
 $href = elgg_extract("href", $vars);
 $rating = elgg_extract("rating", $vars);
+$user_id = elgg_get_logged_in_user_guid();
 ?>
 <?php echo elgg_view("videos/search"); ?>
 
@@ -70,6 +71,17 @@ $rating = elgg_extract("rating", $vars);
                 </a>
             </div>
             <div class="col-md-8">
+                <?php
+                if($vars['task_id']):
+                    if(array_pop(ClipitVideo::get_read_status($video->id, array($user_id)))):
+                ?>
+                <div class="pull-right margin-right-20 margin-top-5">
+                    <i class="fa fa-eye blue" style="font-size: 16px;"></i>
+                </div>
+                <?php
+                    endif;
+                    endif;
+                ?>
                 <?php if($vars['publish']): ?>
                     <?php echo elgg_view('output/url', array(
                         'href'  => "{$href}/publish/{$video->id}".($vars['task_id'] ? "?task_id=".$vars['task_id']: ""),

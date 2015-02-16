@@ -338,6 +338,7 @@ $english = array(
     'quiz:question:statement' => 'Statement question',
     'quiz:question:additional_info' => 'Additional information',
     'quiz:questions:answered' => 'Questions answered',
+    'quiz:answer:solution' => 'Solution',
 );
 
 add_translation('en', $english);

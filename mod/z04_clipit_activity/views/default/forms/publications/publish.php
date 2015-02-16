@@ -1,5 +1,5 @@
 <?php
- /**
+/**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
  * Creation date:   28/05/14
@@ -48,37 +48,37 @@ $labels_value = implode(", ", $label_value);
     'value' => $labels_value
 ));?>
 <script>
-$(function(){
-    $(".chosen-select").chosen({disable_search_threshold: 1});
-    $(".chosen-select-items").chosen();
-});
+    $(function(){
+        $(".chosen-select").chosen({disable_search_threshold: 1});
+        $(".chosen-select-items").chosen();
+    });
 </script>
 <?php
 if($task_id = get_input('task_id')):
     $task = array_pop(ClipitTask::get_by_id(array($task_id)));
-?>
-<div class="bg-warning">
-    <small><?php echo elgg_echo('activity:task');?>:</small>
-    <h4 style="margin: 0">
-        <?php echo elgg_view('output/url', array(
-            'href'  => "clipit_activity/{$task->activity}/tasks/view/{$task->id}",
-            'title' => $task->name,
-            'text'  => $task->name,
+    ?>
+    <div class="bg-warning">
+        <small><?php echo elgg_echo('activity:task');?>:</small>
+        <h4 style="margin: 0">
+            <?php echo elgg_view('output/url', array(
+                'href'  => "clipit_activity/{$task->activity}/tasks/view/{$task->id}",
+                'title' => $task->name,
+                'text'  => $task->name,
             ));
-        ?>
-    </h4>
-    <div><?php echo $task->description;?></div>
-</div>
+            ?>
+        </h4>
+        <div><?php echo $task->description;?></div>
+    </div>
 <?php endif; ?>
 
 <div class="row">
     <div class="col-md-<?php echo ($vars['entity_preview'] ? 8 : 12);?>">
         <?php if($entity->url):?>
-        <div class="form-group">
-            <label for="title"><?php echo elgg_echo("url");?></label>
-            <a href="<?php echo $entity->url;?>" target="_blank"><?php echo $entity->url;?></a>
-            <hr style="margin: 10px 0;">
-        </div>
+            <div class="form-group">
+                <label for="title"><?php echo elgg_echo("url");?></label>
+                <a href="<?php echo $entity->url;?>" target="_blank"><?php echo $entity->url;?></a>
+                <hr style="margin: 10px 0;">
+            </div>
         <?php endif;?>
         <div class="form-group">
             <label for="title"><?php echo elgg_echo("title");?></label>
@@ -98,7 +98,7 @@ if($task_id = get_input('task_id')):
                     <?php
                     foreach($tt_tags as $tag_id):
                         $tag = array_pop(ClipitTag::get_by_id(array($tag_id)));
-                    ?>
+                        ?>
                         <option <?php echo in_array($tag_id, $tags) ? "selected" : "";?> value="<?php echo $tag->id;?>"><?php echo $tag->name;?></option>
                     <?php endforeach;?>
                 </select>
@@ -131,13 +131,13 @@ if($task_id = get_input('task_id')):
             <select name="performance_items[]" data-placeholder="<?php echo elgg_echo('click_add');?>" style="width:100%;" multiple class="chosen-select-items" tabindex="8">
                 <option value=""></option>
                 <?php foreach(ClipitPerformanceItem::get_by_category(null, $user_language) as $category => $items):?>
-                <optgroup label="<?php echo $category; ?>">
-                    <?php foreach($items as $item): ?>
-                        <option <?php echo in_array($item->id, $performance_items) ? "selected" : "";?> value="<?php echo $item->id; ?>">
-                            <?php echo $item->item_name[$language_index]; ?>
-                        </option>
-                    <?php endforeach; ?>
-                </optgroup>
+                    <optgroup label="<?php echo $category; ?>">
+                        <?php foreach($items as $item): ?>
+                            <option <?php echo in_array($item->id, $performance_items) ? "selected" : "";?> value="<?php echo $item->id; ?>">
+                                <?php echo $item->item_name[$language_index]; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </optgroup>
                 <?php endforeach; ?>
             </select>
         </div>

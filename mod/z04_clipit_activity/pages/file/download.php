@@ -12,7 +12,13 @@
  */
 // Get the guid
 $file_id = get_input("id");
-
+if($task_id = get_input('task_id')){
+    if($storyboard_id = get_input('storyboard')){
+        ClipitStoryboard::set_read_status($storyboard_id, true, array(elgg_get_logged_in_user_guid()));
+    } else {
+        ClipitFile::set_read_status($file_id, true, array(elgg_get_logged_in_user_guid()));
+    }
+}
 // Get the file
 $file = array_pop(ClipitFile::get_by_id(array($file_id)));
 header("Pragma: public");

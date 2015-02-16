@@ -137,10 +137,13 @@ function clipit_activity_init() {
     elgg_register_action("multimedia/storyboards/set_options", "{$plugin_dir}/actions/multimedia/storyboards/set_options.php");
     elgg_register_action("multimedia/storyboards/remove", "{$plugin_dir}/actions/multimedia/storyboards/remove.php");
     elgg_register_ajax_view('modal/multimedia/storyboard/edit');
+
     // Publications
     elgg_register_action("publications/evaluate", "{$plugin_dir}/actions/publications/evaluate.php");
     elgg_register_action("publications/publish", "{$plugin_dir}/actions/publications/publish.php");
+    elgg_register_action("publications/publish/site", "{$plugin_dir}/actions/publications/publish.php");
     elgg_register_action("publications/labels/add", "{$plugin_dir}/actions/publications/labels/add.php");
+    elgg_register_ajax_view('modal/publications/publish');
     elgg_register_ajax_view('modal/publications/rating');
     elgg_register_ajax_view('publications/labels/search');
     // Discussion

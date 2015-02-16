@@ -22,7 +22,6 @@ $parent_id = get_input("parent-id");
 
 $object = ClipitSite::lookup($entity_id);
 $entity_class = $object['subtype'];
-$group_tags = ClipitGroup::get_tags($entity_class::get_group($entity_id));
 
 $parent_object = ClipitSite::lookup($parent_id);
 $parent_entity_class = $parent_object['subtype'];
@@ -31,13 +30,19 @@ switch($parent_entity_class){
     // Clipit Activity
     case 'ClipitActivity':
         $entity_level_class = "ClipitActivity";
-        $parent_id = array_pop(ClipitActivity::get_by_id(array($parent_id)));
-        $href = "clipit_activity/{$parent_id}/publications";
+        $scope_entity = 'ClipitSite';
+        $href = "clipit_activity/{$parent_id}/admin?filter=videos";
         break;
     // Clipit Group
     case 'ClipitGroup':
         $entity_level_class = "ClipitActivity";
         $parent_id = ClipitGroup::get_activity($parent_id);
+        $scope_entity = 'ClipitTask';
+        /* get tags from group */
+        $group_tags = ClipitGroup::get_tags($entity_class::get_group($entity_id));
+        if($group_tags){
+            $tags = array_merge($tags, $group_tags);
+        }
         $href = "clipit_activity/{$parent_id}/tasks/view/{$task_id}";
         break;
     default:
@@ -48,6 +53,7 @@ switch($parent_entity_class){
 $entity = array_pop($entity_class::get_by_id(array($entity_id)));
 if(count($entity)==0 || trim($title) == "" || trim($description) == ""){
     register_error(elgg_echo("cantpublish"));
+    die;
 } else{
     // Clone
     $new_entity_id = $entity_class::create_clone($entity_id);
@@ -69,12 +75,7 @@ if(count($entity)==0 || trim($title) == "" || trim($description) == ""){
     }
     $entity_class::set_labels($new_entity_id, $total_labels);
     // Tags
-    /* get tags from group */
-    $group_tags = ClipitGroup::get_tags($entity_class::get_group($entity_id));
-    if($group_tags){
-        $tags = array_merge($tags, $group_tags);
-    }
-    $entity_class::set_tags($new_entity_id, $tags);
+        $entity_class::set_tags($new_entity_id, $tags);
     // Performance items
     $entity_class::add_performance_items($new_entity_id, $performance_items);
 
@@ -82,10 +83,10 @@ if(count($entity)==0 || trim($title) == "" || trim($description) == ""){
     if($new_entity_id){
         switch($entity_class){
             case "ClipitVideo":
-                ClipitTask::add_videos($task_id, array($new_entity_id));
+                $scope_entity::add_videos($task_id, array($new_entity_id));
                 break;
             case "ClipitStoryboard":
-                ClipitTask::add_storyboards($task_id, array($new_entity_id));
+                $scope_entity::add_storyboards($task_id, array($new_entity_id));
                 break;
             default:
                 register_error(elgg_echo("cantpublish"));

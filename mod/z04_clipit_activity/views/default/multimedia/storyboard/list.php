@@ -58,7 +58,8 @@ foreach($storyboards as $sb_id){
     // Action buttons (Download|Publish)
     $buttons = '<div style="width: 35px;display: inline-block;float: right;text-align: center;margin-left:10px;">
                     '.elgg_view('output/url', array(
-                        'href'  => "file/download/".$file->id,
+                        'href'  => "file/download/".
+                            $file->id. ($vars['task_id'] ? "?task_id=".$vars['task_id']."&storyboard=".$storyboard->id: ""),
                         'title' => $owner->name,
                         'class' => 'btn btn-default btn-icon',
                         'text'  => '<i class="fa fa-download"></i>'
@@ -67,6 +68,13 @@ foreach($storyboards as $sb_id){
                         '.formatFileSize($file->size).'
                     </small>
                     </div>';
+    if($vars['task_id']){
+        if(array_pop(ClipitStoryboard::get_read_status($storyboard->id, array($user_id)))) {
+            $buttons .= '<div class="pull-right margin-right-5 margin-top-5">
+                        <i class="fa fa-eye blue" style="font-size: 16px;"></i>
+                    </div>';
+        }
+    }
     if($vars['publish']){
         $buttons .= elgg_view('output/url', array(
             'href'  => "{$href}/publish/{$storyboard->id}".($vars['task_id'] ? "?task_id=".$vars['task_id']: ""),

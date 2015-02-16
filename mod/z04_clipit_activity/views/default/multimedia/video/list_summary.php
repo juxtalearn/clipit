@@ -61,35 +61,7 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
         $published = false;
     ?>
         <?php
-        $modal_publish = elgg_view("page/components/modal",
-            array(
-                "dialog_class"     => "modal-md",
-                "target"    => 'publish-id-'.$video->id,
-                "title"     => 'publish',
-                "form"      => true,
-                "body"      => elgg_view('forms/publications/publish',
-                    array(
-                        'entity'  => $video,
-                        'parent_id' => $group->id,
-                        'activity' => $activity,
-                        'tags' => $tags,
-                        'entity_preview' => $entity_preview
-                    )),
-                "cancel_button" => true,
-                "ok_button" => elgg_view('input/submit',
-                    array(
-                        'value' => elgg_echo('add'),
-                        'class' => "btn btn-primary"
-                    ))
-            ));
-
-        ?>
-        <?php echo elgg_view_form('publications/publish__', array(
-            'data-validate'=> 'true',
-            'body' => $modal_publish,
-        ),
-        array('entity'  => $video)
-    );
+        echo elgg_view("page/components/modal_remote", array('id'=> "publish-{$video->id}" ));
     ?>
     <li class="video-item row list-item">
         <?php
@@ -130,12 +102,13 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
                 <?php endif;?>
                 <?php if($vars['send_site']):?>
                     <div class="margin-bottom-5">
-                        <?php echo elgg_view('output/url', array(
-//                            'href'  => $vars['href_site'].$video->id,
-                            'data-target' => '#publish-id-'.$video->id,
-                            'data-toggle' => 'modal',
+                        <?php
+                        echo elgg_view('output/url', array(
+                            'href'  => "ajax/view/modal/publications/publish?id={$video->id}",
+                            'text'  => '<i class="fa fa-globe"></i> '.elgg_echo('send:to_site'),
                             'class' => 'btn btn-xs btn-primary',
-                            'text'  => '<i class="fa fa-globe"></i> '.elgg_echo('send:to_site')
+                            'data-toggle'   => 'modal',
+                            'data-target' => '#publish-'.$video->id,
                         ));
                         ?>
                     </div>

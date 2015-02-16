@@ -34,24 +34,6 @@ $groups = ClipitActivity::get_groups($activity->id);
 </style>
 <script>
     $(function(){
-//        $(".question-results").each(function() {
-//            var counts = $(this).find('.counts');
-//            elgg.get("ajax/view/quizzes/admin/results", {
-//                dataType: "json",
-//                data: {
-//                    quiz: <?php //echo $quiz->id;?>//,
-//                    count: true,
-//                    question: $(this).data('question'),
-//                    task: <?php //echo $task->id;?>
-//                },
-//                success: function (output) {
-//                    counts.find(".a-error").text(output.error);
-//                    counts.find(".a-correct").text(output.correct);
-//                    counts.find(".a-pending").text(output.pending);
-//                }
-//            });
-//        });
-
         $(document).on("click", ".save-annotation", function(){
             var container = $(this).parent(".annotate"),
                 form = $(this).closest("form");
@@ -63,76 +45,8 @@ $groups = ClipitActivity::get_groups($activity->id);
                 }
             });
         });
-        $(document).on("click", ".results-filter", function(){
-            var content = $(this).parent(".panel").find(".panel-body");
-            if(content.is(':empty')) {
-                content.html('<i class="fa fa-spinner fa-spin fa-2x blue"></i>');
-                elgg.get("ajax/view/quizzes/admin/results", {
-                    data: {
-                        users: $(this).data("users"),
-                        type: $(this).data("type"),
-                        quiz: $(this).closest(".quiz-questions").data("quiz")
-                    },
-                    success: function (data) {
-                        content.html(data);
-                    }
-                });
-            }
-        });
-        $(document).on("click", ".view-answer", function(){
-            var content = $(this).closest("li").find(".answer"),
-                question_id = $(this).closest(".panel-results").data("question");
-            content.toggle();
-            if(content.is(':empty')) {
-                content.html('<i class="fa fa-spinner fa-spin fa-2x blue"></i>');
-                elgg.get("ajax/view/quizzes/admin/results", {
-                    data: {
-                        user: $(this).attr("id"),
-                        type: 'answer',
-                        question: question_id
-                    },
-                    success: function (data) {
-                        content.html(data);
-                    }
-                });
-            }
-        });
-        $(document).on("click", "#panel-expand-all",function(){
-            $(".expand").parent(".panel").find(".panel-collapse").collapse('show');
-            $(".question-results").click();
-        });
-        $(document).on("click", "#panel-collapse-all",function(){
-            $(".expand").parent(".panel").find(".panel-collapse").collapse('hide');
-        });
-        $(document).on("click", ".question-results",function(){
-            var content = $(this).parent(".panel").find(".panel-main");
-            var question_id = $(this).data("question");
-            if(content.is(':empty')){
-                content.html('<i class="fa fa-spinner fa-spin fa-2x blue"></i>');
-                $.get( elgg.config.wwwroot+"ajax/view/quizzes/admin/results", {
-                        quiz: <?php echo $quiz->id;?>,
-                        question: question_id,
-                        task: <?php echo $task->id;?>
-                    },
-                    function( data ) {
-                        content.html(data);
-                        var error_filter = content.find(".results-filter[data-type='error']"),
-                            pending_filter = content.find(".results-filter[data-type='pending']");
-                        if(parseInt(error_filter.find('.count').text()) > 0){
-                            error_filter.click();
-                            error_filter.parent(".panel").find(".collapse").collapse('show');
-                        } else if(parseInt(error_filter.find('.count').text()) == 0){
-                            pending_filter.click();
-                            pending_filter.parent(".panel").find(".collapse").collapse('show');
-                        }
-                    });
-            }
-        });
-//
-//
 //
 
-//        $(".show-questions").on("show.bs.collapse",function() {
         $(".show-questions").on("click", function() {
             var that = $(this),
                 user_id = that.closest('li').data('entity'),
@@ -217,13 +131,6 @@ $groups = ClipitActivity::get_groups($activity->id);
         });
         // Start first tab
         $('a[data-toggle="tab"]:first').tab('show');
-
-        var hash = window.location.hash.replace('#', '');
-        console.log(hash);
-        var collapse = $("[href='#user_"+hash+"']");
-        if(collapse.length > 0){
-            collapse.click();
-        }
 
     });
 </script>
