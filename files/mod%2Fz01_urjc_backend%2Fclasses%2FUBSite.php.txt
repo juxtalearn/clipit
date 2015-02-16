@@ -90,27 +90,27 @@ class UBSite {
      * Get authentication token, required for all other REST API calls. The token must be set as the value for the
      * "auth_token" key in each REST API call.
      *
-     * @param string $login    User login
+     * @param string $login User login
      * @param string $password User password
-     * @param int    $timeout  Session timeout in minutes
+     * @param int $timeout Session timeout in minutes
      *
      * @return string Authentication Token.
      * @throws SecurityException
      */
     static function get_token($login, $password = "", $timeout = 60) {
         global $CONFIG;
-        if(!elgg_get_logged_in_user_guid()){
-            if(elgg_authenticate($login, $password) !== true) {
+        if (!elgg_get_logged_in_user_guid()) {
+            if (elgg_authenticate($login, $password) !== true) {
                 throw new SecurityException(elgg_echo('SecurityException:authenticationfailed'));
             }
         }
         $user = get_user_by_username($login);
         $query = "select * from {$CONFIG->dbprefix}users_apisessions where user_guid = {$user->guid};";
         $row = get_data_row($query);
-        if(isset($row->token)){
+        if (isset($row->token)) {
             $timeout = $timeout * 60 * 1000; // convert mins to ms
             // if the token expires in less than $timeout, we extend the timeout
-            if(((int)$row->expires - time()) < $timeout) {
+            if (((int)$row->expires - time()) < $timeout) {
                 $new_expires = time() + $timeout;
                 $update_timeout_query = "update {$CONFIG->dbprefix}users_apisessions set expires = {$new_expires} where user_guid = {$user->guid};";
                 update_data($update_timeout_query);
@@ -134,13 +134,13 @@ class UBSite {
             $object['description'] = (string)$elgg_object->description;
             //$object['class'] = get_class_from_subtype($object['subtype']);
             return $object;
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             try {
                 $elgg_user = new ElggUser((int)$id);
                 $object['type'] = (string)$elgg_user->type;
                 $object['subtype'] = (string)get_subtype_from_id($elgg_user->subtype);
                 return $object;
-            } catch(Exception $e) {
+            } catch (Exception $e) {
                 throw new APIException("ERROR: Unidentified ID provided.");
             }
         }
@@ -155,10 +155,8 @@ class UBSite {
     }
 
 
-    static function normalize_xml_key($key){
-        return str_replace(
-            array('!','"','#','$','%','&','(',')','*','+',',','/',';','<','=',
-                '>','?','@','\\','[',']','^','`','{','}','|','~'),
+    static function normalize_xml_key($key) {
+        return str_replace(array('!', '"', '#', '$', '%', '&', '(', ')', '*', '+', ',', '/', ';', '<', '=', '>', '?', '@', '\\', '[', ']', '^', '`', '{', '}', '|', '~'),
             '_',
             $key);
     }

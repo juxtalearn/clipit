@@ -24,10 +24,12 @@ class ClipitResource extends UBItem {
     const REL_RESOURCE_TAG = "ClipitResource-ClipitTag";
     const REL_RESOURCE_LABEL = "ClipitResource-ClipitLabel";
     const REL_RESOURCE_PERFORMANCE = "ClipitResource-ClipitPerformanceItem";
-    const REL_GROUP_RESOURCE = "ClipitGroup-ClipitResource";
-    const REL_ACTIVITY_RESOURCE = "ClipitActivity-ClipitResource";
-    const REL_SITE_RESOURCE = "ClipitSite-ClipitResource";
-    const REL_TASK_RESOURCE = "ClipitTask-ClipitResource";
+    // Resource Container relationships
+    const REL_SITE_RESOURCE = ClipitSite::REL_SITE_RESOURCE;
+    const REL_EXAMPLE_RESOURCE = ClipitExample::REL_EXAMPLE_RESOURCE;
+    const REL_ACTIVITY_RESOURCE = ClipitActivity::REL_ACTIVITY_RESOURCE;
+    const REL_TASK_RESOURCE = ClipitTask::REL_TASK_RESOURCE;
+    const REL_GROUP_RESOURCE = ClipitGroup::REL_GROUP_RESOURCE;
 
     public $tag_array = array();
     public $label_array = array();
@@ -120,6 +122,10 @@ class ClipitResource extends UBItem {
         if(!empty($site)) {
             return "site";
         }
+        $example = static::get_example($id);
+        if(!empty($example)){
+            return "example";
+        }
         $task = static::get_task($id);
         if(!empty($task)) {
             return "task";
@@ -173,6 +179,14 @@ class ClipitResource extends UBItem {
             }
             return array_pop($activity);
         }
+    }
+
+    static function get_example($id){
+        $example = UBCollection::get_items($id, static::REL_EXAMPLE_RESOURCE, true);
+        if(empty($example)){
+            return null;
+        }
+        return array_pop($example);
     }
 
     static function get_site($id) {

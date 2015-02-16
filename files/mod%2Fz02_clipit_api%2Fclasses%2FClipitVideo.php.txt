@@ -15,8 +15,7 @@
 /**
  * Contains the final product (video) of a group during an activity.
  */
-class ClipitVideo extends ClipitResource
-{
+class ClipitVideo extends ClipitResource{
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
@@ -24,6 +23,7 @@ class ClipitVideo extends ClipitResource
     const REL_RESOURCE_TAG = "ClipitVideo-ClipitTag";
     const REL_RESOURCE_LABEL = "ClipitVideo-ClipitLabel";
     const REL_RESOURCE_PERFORMANCE = "ClipitVideo-ClipitPerformance";
+    const REL_EXAMPLE_RESOURCE = ClipitExample::REL_EXAMPLE_VIDEO;
     const REL_GROUP_RESOURCE = ClipitGroup::REL_GROUP_VIDEO;
     const REL_TASK_RESOURCE = ClipitTask::REL_TASK_VIDEO;
     const REL_ACTIVITY_RESOURCE = ClipitActivity::REL_ACTIVITY_VIDEO;
