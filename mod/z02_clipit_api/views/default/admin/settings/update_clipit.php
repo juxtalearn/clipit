@@ -3,9 +3,11 @@
 chdir(elgg_get_root_path());
 echo "<h3>Performing local git stash... ";
 echo exec("git stash save \"auto stash\"");
-echo "<h3>Performing main git pull... ";
-echo exec("git pull");
-echo "<h3>Performing submodule update... ";
+echo "Fetching latest repository info... ";
+echo exec("git fetch");
+echo "Checking-out latest tag";
+echo exec("git checkout `git tag | tail -1`");
+echo "Performing submodule update... ";
 echo exec("git submodule init");
 echo exec("git submodule update");
 
