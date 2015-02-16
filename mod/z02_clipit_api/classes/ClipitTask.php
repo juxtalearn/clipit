@@ -313,25 +313,26 @@ class ClipitTask extends UBItem {
                 }
                 return true;
             case static::TYPE_RESOURCE_DOWNLOAD:
-                $activity = (int)$task->activity;
-                $teacher_files = ClipitActivity::get_files($activity);
-                foreach($teacher_files as $file_id){
+                $task_files = $task->file_array;
+                foreach($task_files as $file_id){
                     $read_status = ClipitFile::get_read_status($file_id, array($entity_id));
                     if((bool)$read_status[$entity_id] !== true){
                         return false;
                     }
                 }
-                $teacher_videos = Clipitactivity::get_videos($activity);
-                foreach($teacher_videos as $video_id){
+                $task_videos = $task->video_array;
+                foreach($task_videos as $video_id){
                     $read_status = ClipitVideo::get_read_status($video_id, array($entity_id));
                     if((bool)$read_status[$entity_id] !== true){
+                        var_dump("video $video_id");
                         return false;
                     }
                 }
-                $teacher_storyboards = ClipitActivity::get_storyboards($activity);
-                foreach($teacher_storyboards as $storyboard_id){
+                $task_storyboards = $task->storyboard_array;
+                foreach($task_storyboards as $storyboard_id){
                     $read_status = ClipitStoryboard::get_read_status($storyboard_id, array($entity_id));
                     if((bool)$read_status[$entity_id] !== true){
+                        var_dump("storyboard $storyboard_id");
                         return false;
                     }
                 }
