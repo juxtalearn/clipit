@@ -200,6 +200,7 @@ function clipit_activity_init() {
     // ChartJS
     elgg_register_js("jquery:chartjs", "{$vendors_dir}/chartjs.min.js");
 }
+
 function activity_setup_sidebar_menus(){
     $activity_id =  elgg_get_page_owner_guid();
     $user_id = elgg_get_logged_in_user_guid();

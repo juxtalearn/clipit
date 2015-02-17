@@ -26,11 +26,18 @@ $tags = ClipitTag::get_all(10);
 $tag_cloud = elgg_view("tricky_topic/tags/tag_cloud", array('tags' => $tags));
 $sidebar .= elgg_view_module('aside', elgg_echo('tags:recommended'), $tag_cloud, array('class' => 'module-tags'));
 
+$comments = array_pop(ClipitComment::get_by_destination(
+    array($entity->id),
+    clipit_get_offset(),
+    clipit_get_limit()
+));
 $body = elgg_view("multimedia/video/body", array('entity'  => $entity));
 $params = array(
     'content' => elgg_view('publications/view', array(
         'title' => false,
         'entity' => $entity,
+        'comments' => $comments,
+        'admin_options' => false,
         'rating' => false,
         'body' => $body
     )),

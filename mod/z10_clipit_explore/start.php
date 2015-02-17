@@ -126,7 +126,7 @@ function explore_page_handler($page) {
         case '': // explore (filter tab: all)
             $title = "";
             $searching = false;
-            $video_ids = ClipitSite::get_videos();
+            $video_ids = ClipitSite::get_pub_videos();
             $videos = array_slice(ClipitVideo::get_by_id($video_ids), 0, 6);
             $href = "explore";
             $storyboard_ids = ClipitSite::get_storyboards();
@@ -211,12 +211,13 @@ function explore_page_handler($page) {
             if(!$entity_id = (int)$page[1]){
                 return false;
             }
+            $entity_id = (int)$page[1];
             $file_dir = elgg_get_plugins_path() . 'z10_clipit_explore/pages/explore';
             $object = ClipitSite::lookup($entity_id);
-            $publish_level = $object['subtype']::get_resource_scope($entity_id);
-            if($publish_level != 'site'){
-                return false;
-            }
+//            $publish_level = $object['subtype']::get_resource_scope($entity_id);
+//            if($publish_level != 'site'){
+//                return false;
+//            }
             switch ($object['subtype']) {
                 case 'ClipitVideo':
                     set_input('entity_id', $entity_id);

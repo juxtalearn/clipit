@@ -83,10 +83,18 @@ if(count($entity)==0 || trim($title) == "" || trim($description) == ""){
     if($new_entity_id){
         switch($entity_class){
             case "ClipitVideo":
-                $scope_entity::add_videos($task_id, array($new_entity_id));
+                if($scope_entity == 'ClipitTask') {
+                    $scope_entity::add_videos($task_id, array($new_entity_id));
+                } else {
+                    $scope_entity::add_pub_videos(array($new_entity_id));
+                }
                 break;
             case "ClipitStoryboard":
-                $scope_entity::add_storyboards($task_id, array($new_entity_id));
+                if($scope_entity == 'ClipitTask') {
+                    $scope_entity::add_storyboards($task_id, array($new_entity_id));
+                } else {
+                    $scope_entity::add_pub_storyboards(array($new_entity_id));
+                }
                 break;
             default:
                 register_error(elgg_echo("cantpublish"));

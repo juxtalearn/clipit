@@ -59,6 +59,10 @@ if($scope_entity){
             'name' => 'parent-id',
             'value' => $parent_id,
         ));
+        echo elgg_view("input/hidden", array(
+            'name' => 'task-id',
+            'value' => $vars['task'],
+        ));
     }
 }
 

@@ -31,7 +31,9 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
             </div>
         <?php endif;?>
         <div class="multimedia-body">
-            <?php echo elgg_view('multimedia/admin_options', array('entity' => $entity));?>
+            <?php if($vars['admin_options'] !== false):?>
+                <?php echo elgg_view('multimedia/admin_options', array('entity' => $entity));?>
+            <?php endif;?>
             <div class="multimedia-view">
                 <?php echo $vars['body'];?>
             </div>

@@ -29,7 +29,6 @@ if($video && $video->owner_id == $user_id || $user->role == ClipitUser::ROLE_TEA
                 array(
                     'send_site' => true,
                     'entity'  => $video,
-//                    'scope_entity' => $activity,
                     'publish' => true,
                     'tags' => $video->tag_array,
                     'parent_id' => $activity_id,
