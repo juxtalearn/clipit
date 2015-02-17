@@ -12,9 +12,9 @@
  */
 $title = elgg_echo("activity:tasks");
 elgg_push_breadcrumb($title);
-$tasks = ClipitActivity::get_tasks($activity->id);
 $href = "clipit_activity/{$activity->id}/tasks";
 $group_id = ClipitGroup::get_from_user_activity($user_id, $activity->id);
+$tasks = ClipitTask::get_by_id($activity->task_array, 0, 0, 'start', true);
 $content = elgg_view('tasks/list', array('tasks' => $tasks, 'href' => $href));
 
 if($page[2] == 'view' && $page[3]){

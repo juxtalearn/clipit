@@ -15,7 +15,7 @@ $href = elgg_extract('href', $vars);
 if(!$tasks){
     echo elgg_view('output/empty', array('value' => elgg_echo('tasks:none')));
 }
-$tasks = ClipitTask::get_by_id($tasks, 0, 0, 'start', true);
+
 $user_id = elgg_get_logged_in_user_guid();
 $user = array_pop(ClipitUser::get_by_id(array($user_id)));
 ?>

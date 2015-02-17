@@ -12,7 +12,7 @@ $user_id = elgg_get_logged_in_user_guid();
 $user_inActivity = ClipitGroup::get_from_user_activity($user_id, $activity->id);
 $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($activity->tricky_topic)));
 $tags = $tricky_topic->tag_array;
-$tasks = array_slice($activity->task_array, 0, 4);
+$tasks = ClipitTask::get_by_id($activity->task_array, 4, 0, 'start', true);
 
 if($access == 'ACCESS_TEACHER'){
     $groups = ClipitGroup::get_by_id($activity->group_array, 0, 0, 'name');
