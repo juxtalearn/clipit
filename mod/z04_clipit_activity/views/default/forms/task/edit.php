@@ -17,6 +17,7 @@ $id = uniqid();
 $body .= '
 <script>
 $(".datepicker").datepicker({
+    "firstDay": 1,
     minDate: "'.date("d/m/Y", $activity->start).'",
     maxDate: "'.date("d/m/Y", $activity->end).'"
 });
@@ -97,8 +98,8 @@ echo elgg_view("page/components/modal",
             'href'  => "action/task/remove?id=".$task->id,
             'is_action' => true,
             'class' => 'btn btn-primary btn-danger remove btn-border-red pull-left',
-            'title' => elgg_echo('task:remove'),
-            'text'  => '<i class="fa fa-times"></i> '.elgg_echo('task:remove'),
+            'title' => elgg_echo('delete'),
+            'text'  => '<i class="fa fa-times"></i> '.elgg_echo('delete'),
         )),
         "cancel_button" => true,
         "ok_button" => elgg_view('input/submit',

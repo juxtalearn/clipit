@@ -90,6 +90,7 @@ $(function(){
     var datepicker_setup = function(){
         var activity_form = $("#activity-create");
         $(".datepicker").datepicker({
+            firstDay: 1,
             minDate: activity_form.find("input[name=activity-start]").val(),
             maxDate: activity_form.find("input[name=activity-end]").val(),
             onClose: function (text, inst) {
