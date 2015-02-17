@@ -26,6 +26,8 @@ class ClipitQuiz extends UBItem {
     const REL_QUIZ_USER = "ClipitQuiz-ClipitUser";
     const VIEW_MODE_LIST = "list";
     const VIEW_MODE_PAGED = "paged";
+    const TARGET_CLIPIT = "clipit";
+    const TARGET_LARGEDISPLAY = "large_display";
     /**
      * @var string Target interface for Quiz display (e.g.: "web space", "large display"...)
      */
