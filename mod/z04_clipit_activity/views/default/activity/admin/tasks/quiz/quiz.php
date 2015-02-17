@@ -178,7 +178,6 @@ $(function(){
         <div class="form-group">
             <label><?php echo elgg_echo('quiz:target');?></label>
             <label style="font-weight: normal;">
-
                 <input type="radio"
                        name="<?php echo $input_prefix;?>[target]"
                         <?php echo ($entity->target == ClipitQuiz::TARGET_CLIPIT || !$entity_target) ? 'checked':'';?>

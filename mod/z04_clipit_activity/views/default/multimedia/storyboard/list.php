@@ -68,7 +68,7 @@ foreach($storyboards as $sb_id){
                         '.formatFileSize($file->size).'
                     </small>
                     </div>';
-    if($vars['task_id']){
+    if($vars['task_id'] && !$vars['publish']){
         if(array_pop(ClipitStoryboard::get_read_status($storyboard->id, array($user_id)))) {
             $buttons .= '<div class="pull-right margin-right-5 margin-top-5">
                         <i class="fa fa-eye blue" style="font-size: 16px;"></i>

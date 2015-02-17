@@ -15,6 +15,9 @@ $english = array(
     'search:not_found' => 'No results',
     'search:reset' => 'Reset search',
     'explore:menu' => 'Publications',
+    'explore:scope' => 'Explore scope',
+    'explore:tags' => 'Explore by Stumbling Block',
+    'explore:public' => 'Public',
 );
 
 add_translation('en', $english);

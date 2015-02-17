@@ -29,7 +29,7 @@ $data = array(
     'description' => $description,
 );
 
-if(trim($title) == "" || trim($description) == ""){
+if(trim($title) == ""){
     register_error(elgg_echo("video:cantadd"));
 } else {
     // New video

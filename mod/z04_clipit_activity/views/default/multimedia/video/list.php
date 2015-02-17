@@ -72,7 +72,7 @@ $user_id = elgg_get_logged_in_user_guid();
             </div>
             <div class="col-md-8">
                 <?php
-                if($vars['task_id']):
+                if($vars['task_id'] && !$vars['publish']):
                     if(array_pop(ClipitVideo::get_read_status($video->id, array($user_id)))):
                 ?>
                 <div class="pull-right margin-right-20 margin-top-5">
