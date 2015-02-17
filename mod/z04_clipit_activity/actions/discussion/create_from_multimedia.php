@@ -37,4 +37,8 @@ if(!$entity){
     system_message(elgg_echo('discussion:created'));
     ClipitPost::set_read_status($new_message_id, true, array($user_id));
 }
-forward("/clipit_activity/{$entity::get_activity($entity_id)}/group/{$entity::get_group($entity_id)}/discussion/view/{$new_message_id}");
+forward("/clipit_activity/
+        {$entity::get_activity($entity_id)}
+        /group/{$entity::get_group($entity_id)}
+        /discussion/view/{$new_message_id}"
+);
