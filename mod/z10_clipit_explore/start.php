@@ -41,7 +41,7 @@ function explore_page_handler($page) {
     $vars = array();
     $vars['page'] = $page[0];
 //    if($page[0]){
-        elgg_push_breadcrumb(elgg_echo('explore:public'), 'explore');
+        elgg_push_breadcrumb(elgg_echo('explore'), 'explore');
 //    }
     $selected_tab = get_input('filter', 'all');
     $searching = true;
