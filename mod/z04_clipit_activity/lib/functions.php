@@ -341,13 +341,17 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
     if(!$group_id){
         $group_id = ClipitGroup::get_from_user_activity($user_id, $task->activity);
     }
+    $role = array_pop(ClipitUser::get_properties($user_id, array('role')));
     $status = array(
         'icon' => '<i class="fa fa-minus yellow"></i>',
         'text' => elgg_echo('task:pending'),
         'color' => 'yellow',
         'status' => false
     );
-    if(time() < $task->start && $task->task_type != ClipitTask::TYPE_OTHER){
+    if($role == ClipitUser::ROLE_TEACHER){
+        $status['text'] = false;
+    }
+    if(time() < $task->start &&  $task->task_type != ClipitTask::TYPE_OTHER){
         return $status;
     }
     switch($task->task_type){
@@ -441,7 +445,6 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
                     'count' => $text,
                     'status' => ClipitTask::get_completed_status($task->id, $user_id)
                 ), $custom);
-
             break;
         case ClipitTask::TYPE_QUIZ_TAKE:
             if(ClipitTask::get_status($task->id) == ClipitTask::STATUS_FINISHED) {
@@ -500,8 +503,7 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
             'status' => false
         );
     }
-    $role = array_pop(ClipitUser::get_properties($user_id, array('role')));
-    if($role == 'teacher'){
+    if($role == ClipitUser::ROLE_TEACHER){
 //        $status['count'] = false;
         $status['text'] = false;
     }
