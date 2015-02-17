@@ -59,17 +59,8 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
         <li role="presentation">
             <?php echo elgg_view('output/url', array(
                 'href'  => "tricky_topics",
-                'title' => elgg_echo('tricky_topics'),
-                'text'  => '<i class="fa fa-list-alt"></i> '.elgg_echo('tricky_topics'),
-            ));
-            ?>
-        </li>
-        <li role="presentation" class="divider"></li>
-        <li role="presentation">
-            <?php echo elgg_view('output/url', array(
-                'href'  => "quizzes",
-                'title' => elgg_echo('quizzes'),
-                'text'  => '<i class="fa fa-check-square-o"></i> '.elgg_echo('quizzes'),
+                'title' => elgg_echo('teacher:tools'),
+                'text'  => '<i class="fa fa-list-alt"></i> '.elgg_echo('teacher:tools'),
             ));
             ?>
         </li>

@@ -76,15 +76,15 @@ $id = uniqid();
     </div>
     <div class="col-md-5">
         <div class="form-group">
-            <label>Tipo de vista del cuestionario</label>
+            <label><?php echo elgg_echo('quiz:view_mode');?></label>
             <?php echo elgg_view("input/dropdown", array(
                 'name' => $input_task.'quiz[view]',
                 'style' => 'padding: 5px;',
                 'value' => $entity->view_mode,
                 'class' => 'form-control',
                 'options_values' => array(
-                    ClipitQuiz::VIEW_MODE_LIST => 'En una página',
-                    ClipitQuiz::VIEW_MODE_PAGED => 'En varias páginas'
+                    ClipitQuiz::VIEW_MODE_LIST => elgg_echo('quiz:view_page:'.ClipitQuiz::VIEW_MODE_LIST),
+                    ClipitQuiz::VIEW_MODE_PAGED => elgg_echo('quiz:view_page:'.ClipitQuiz::VIEW_MODE_PAGED)
                 )
             ));
             ?>

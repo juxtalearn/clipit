@@ -87,11 +87,11 @@ $(function() {
             <?php echo elgg_view('output/friendlytime', array('time' => $quiz->time_created));?>
         </small>
         <div class="margin-bottom-10">
-            <small class="show">Tipo de vista</small>
+            <small class="show"><?php echo elgg_echo('quiz:view_mode');?></small>
             <?php echo elgg_echo('quiz:view_page:'.$quiz->view_mode);?>
         </div>
         <div class="margin-bottom-10">
-            <small class="show">Tiempo máximo para hacer el test</small>
+            <small class="show"><?php echo elgg_echo('quiz:max_time');?></small>
             <?php if($quiz->max_time > 0):?>
                 <?php if(floor($quiz->max_time / 86000) > 0):?>
                     <?php echo floor($quiz->max_time / 86000);?>

@@ -19,6 +19,7 @@ $spanish = array(
     'user:add' => 'Añadir usuario',
     'user:logout' => 'Cerrar sesión',
     'profile' => 'Perfil',
+    'teacher:tools' => 'Autoría de Temas Clave y Tests',
     'profile:stats' => 'Learning Analytics',
     'timeline:none' => 'No se ha encontrado',
     'timeline:public' => 'Crónologia pública',

@@ -29,6 +29,11 @@ $spanish = array(
     'quiz:question:type:select_multi' => 'Multiples respuestas',
     'quiz:question:type:select_one' => 'Única respuesta',
     'quiz:max_time:none' => 'Sin límite',
+    'quiz:view_mode' => 'Tipo de vista',
+    'quiz:max_time' => 'Tiempo máximo para hacer el test',
+    'quiz:target' => 'Este Test será utilizado en',
+    'quiz:target:clipit' => 'Actividades de ClipIt',
+    'quiz:target:large_display' => 'Large Display',
 );
 
 add_translation('es', $spanish);

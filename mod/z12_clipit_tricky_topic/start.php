@@ -38,7 +38,7 @@ function clipit_tricky_topic_init() {
  */
 function tt_page_handler($page){
     elgg_load_js('clipit:tricky_topic');
-    $sidebar = elgg_view_module('aside', elgg_echo('menu'),
+    $sidebar = elgg_view_module('aside', elgg_echo('tools'),
         elgg_view('tricky_topics/sidebar/menu').
         elgg_view('quiz/sidebar/menu'),
         array('class' => 'activity-group-block margin-bottom-10 aside-tree')

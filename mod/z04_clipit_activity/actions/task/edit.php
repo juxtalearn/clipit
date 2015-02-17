@@ -122,7 +122,8 @@ if($entity->task_type == ClipitTask::TYPE_QUIZ_TAKE){
         'name' => $quiz['title'],
         'description' => $quiz['description'],
         'view_mode' => $quiz['view'],
-        'max_time' => $total_time
+        'max_time' => $total_time,
+        'target' => $quiz['target']
     ));
     ClipitQuiz::set_quiz_questions($quiz['id'], $questions_id);
 }

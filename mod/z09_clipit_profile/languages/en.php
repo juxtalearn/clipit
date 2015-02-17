@@ -18,6 +18,7 @@ $english = array(
     'user:add' => 'Add user',
     'user:logout' => 'Logout',
     'profile' => 'Profile',
+    'teacher:tools' => 'Tricky Topic and Quiz Authoring',
     'profile:stats' => 'Learning Analytics',
     'timeline:none' => 'Not found',
     'timeline:public' => 'Public timeline',
@@ -28,6 +29,7 @@ $english = array(
     'profile:settings:edit_profile' => 'Edit profile',
     'profile:settings:edit_avatar' => 'Edit avatar',
     'profile:settings:edit' => 'Your settings',
+
 );
 
 add_translation('en', $english);

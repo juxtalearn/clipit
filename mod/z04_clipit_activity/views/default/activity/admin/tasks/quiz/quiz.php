@@ -116,7 +116,7 @@ $(function(){
     </div>
     <div class="col-md-4 col-md-offset-1">
         <div class="form-group">
-            <label>Tipo de vista</label>
+            <label><?php echo elgg_echo('quiz:view_mode');?></label>
             <?php echo elgg_view("input/dropdown", array(
                 'name' => $input_prefix.'[view]',
                 'style' => 'padding: 5px;',
@@ -130,7 +130,7 @@ $(function(){
             ?>
         </div>
         <div class="form-group">
-            <label>Tiempo máximo para hacer el test</label>
+            <label><?php echo elgg_echo('quiz:max_time');?></label>
             <div class="row">
                 <div class="col-md-4">
                     <small><?php echo elgg_echo('time:days');?></small>
@@ -174,6 +174,23 @@ $(function(){
                     ?>
                 </div>
             </div>
+        </div>
+        <div class="form-group">
+            <label><?php echo elgg_echo('quiz:target');?></label>
+            <label style="font-weight: normal;">
+                <input type="radio"
+                       name="<?php echo $input_prefix;?>[target]"
+                        <?php echo ($entity->target == ClipitQuiz::TARGET_CLIPIT || !$entity_target) ? 'checked':'';?>
+                       value="<?php echo ClipitQuiz::TARGET_CLIPIT;?>">
+                <?php echo elgg_echo('quiz:target:clipit');?>
+            </label>
+            <label style="font-weight: normal;">
+                <input type="radio"
+                       name="<?php echo $input_prefix;?>[target]"
+                        <?php echo $entity->target == ClipitQuiz::TARGET_LARGEDISPLAY ? 'checked':'';?>
+                       value="<?php echo ClipitQuiz::TARGET_LARGEDISPLAY;?>">
+                <?php echo elgg_echo('quiz:target:large_display');?>
+            </label>
         </div>
     </div>
 </div>

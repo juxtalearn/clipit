@@ -29,6 +29,11 @@ $english = array(
     'quiz:question:type:select_multi' => 'Multiple choice',
     'quiz:question:type:select_one' => 'One choice',
     'quiz:max_time:none' => 'No limit',
+    'quiz:view_mode' => 'View mode',
+    'quiz:max_time' => 'Max time',
+    'quiz:target' => 'This Quiz is to be used in',
+    'quiz:target:clipit' => 'ClipIt Activities',
+    'quiz:target:large_display' => 'Large Display',
 );
 
 add_translation('en', $english);

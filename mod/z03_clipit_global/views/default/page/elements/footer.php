@@ -47,7 +47,7 @@ $site = elgg_get_site_entity();
                 ?>
                 <?php
                 echo elgg_view('output/url', array(
-                    'href' => "http://www.juxtalearn.org",
+                    'href' => "http://www.juxtalearn.eu",
                     'title' => "JuxtaLearn",
                     'text' => elgg_view('output/img', array(
                         'src' => "mod/z03_clipit_global/graphics/jxl_logo.png",
