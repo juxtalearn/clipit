@@ -11,6 +11,8 @@
  * @package         ClipIt
  */
 $spanish = array(
+    'check:all_none'=> 'Seleccionar todos/ninguno',
+    'select:type'=> 'Select type',
     'stats' => 'Estadísticas',
     'students' => 'Estudiantes',
     'groups' => 'Grupos',
@@ -175,6 +177,7 @@ $spanish = array(
     'video:cantadd' => 'No se ha podido añadir el video',
     'video:add:to_youtube' => 'Subir video a Youtube',
     'video:add:paste_url' => 'Pegar dirección url de Youtube o Vimeo',
+    'video:link:youtube_vimeo' => 'Dirección url de Youtube o Vimeo',
     'video:uploading:youtube' => 'Subiendo a youtube',
     'video:url' => 'Url del video',
     'video:upload' => 'Añadir video',
@@ -214,6 +217,7 @@ $spanish = array(
     'publications:question:sb' => '¿Por qué este concepto está/no está correctamente explicado?',
     'publications:question:if_covered' => '¿Se han explicado los siguientes conceptos correctamente? (explica por qué)',
     'publications:view_scope' => 'Ver en',
+    'ratings:none' => 'No hay feedback',
     'input:no' => 'No',
     'input:yes' => 'Si',
     'input:ok' => 'Continuar',

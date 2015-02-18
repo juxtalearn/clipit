@@ -12,7 +12,7 @@
  */
 $english = array(
     'filter_by' => 'Filter by: %s',
-
+    'teacher:authoring_tools' => 'Authoring tools',
     'material:attach' => 'Attach materials',
     'duplicate' => 'Duplicate',
     'duplicate:name' => 'Duplicate: %s',
@@ -40,7 +40,8 @@ $english = array(
     'example:removed' => 'Example removed',
     'examples:related:stumbling_block' => 'Examples related to Stumbling blocks',
 
-    'tags:select' => 'Select Stumbling blocks',
+    'tags:select' => 'Select Stumbling Blocks',
+    'tags:related' => 'Related Stumbling Blocks',
 
     'tricky_topic:duplicate_from' => 'Tricky Topic duplicated from',
     'tricky_topic:subject' => 'Subject',

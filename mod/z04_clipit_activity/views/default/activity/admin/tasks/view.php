@@ -46,24 +46,7 @@ $id = uniqid();
 <hr>
 <!-- Calendar view -->
 <div id="full-calendar" class="view-element" data-view="calendar"></div>
-<script>
-    $(function(){
-        $(document).on("change", "select.task-types", function(){
-            var $attach_list =  $(".attach_list[data-attach='<?php echo $id;?>']");
-            if($(this).val() == '<?php echo ClipitTask::TYPE_RESOURCE_DOWNLOAD;?>'){
-                $attach_list.toggle();
-                $attach_list.attach_multimedia({
-                    data: {
-                        list: $(this).data("menu"),
-                        entity_id: "<?php echo $activity->id;?>"
-                    }
-                }).loadBy("files");
-            } else {
-                $attach_list.hide();
-            }
-        });
-    });
-</script>
+
 <?php echo elgg_view_form('task/create', array('data-validate' => "true" ), array('entity'  => $activity, 'id' => $id)); ?>
 
 <div class="margin-bottom-20 view-element" data-view="list" style="display: none"></div>

@@ -31,6 +31,7 @@ foreach($tasks as $task){
     if($quiz_id = $task['quiz_id']){
         $quiz_id = ClipitQuiz::create_clone($task['quiz_id']);
     }
+
     $task_id = ClipitTask::create(array(
         'name' => $task['title'],
         'description' => $task['description'],
@@ -41,6 +42,34 @@ foreach($tasks as $task){
     ));
 
     ClipitActivity::add_tasks($activity_id, array($task_id));
+    if($task['type'] == ClipitTask::TYPE_RESOURCE_DOWNLOAD){
+        $files = array();
+        $files = array_filter($task['attach_files']);
+        $new_files_id = array();
+        foreach($files as $file_id){
+            $new_files_id[] = ClipitFile::create_clone($file_id);
+        }
+        ClipitActivity::add_files($activity_id, $new_files_id);
+        ClipitTask::add_files($task_id, $new_files_id);
+
+        $videos = array();
+        $videos = array_filter($task['attach_videos']);
+        $new_videos_id = array();
+        foreach($videos as $video_id){
+            $new_videos_id[] = ClipitVideo::create_clone($video_id);
+        }
+        ClipitActivity::add_videos($activity_id, $new_videos_id);
+        ClipitTask::add_videos($task_id, $new_videos_id);
+
+        $storyboards = array();
+        $storyboards = array_filter($task['attach_storyboards']);
+        $new_storyboards_id = array();
+        foreach($storyboards as $storyboard_id){
+            $new_storyboards_id[] = ClipitStoryboard::create_clone($storyboard_id);
+        }
+        ClipitActivity::add_storyboards($activity_id, $new_storyboards_id);
+        ClipitTask::add_storyboards($task_id, $new_storyboards_id);
+    }
     if($task['feedback']){
         $feedback = $task['feedback-form'];
         if($feedback['title'] && $feedback['type'] && $feedback['start'] && $feedback['end'] ){

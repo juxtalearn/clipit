@@ -33,7 +33,7 @@ $spanish = array(
     'quiz:max_time' => 'Tiempo máximo para hacer el test',
     'quiz:target' => 'Este Test será utilizado en',
     'quiz:target:clipit' => 'Actividades de ClipIt',
-    'quiz:target:large_display' => 'Large Display',
+    'quiz:target:large_display' => 'Large Displays',
 );
 
 add_translation('es', $spanish);

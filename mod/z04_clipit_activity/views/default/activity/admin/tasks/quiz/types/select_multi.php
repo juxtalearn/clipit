@@ -34,7 +34,7 @@ $input_prefix = elgg_extract('input_prefix', $vars);
         'name' => $input_prefix.'[question]['.$id.'][select_multi]['.$id_input.'][value]',
         'class' => 'form-control inline-block',
         'style' => 'width: 85%',
-        'placeholder' => 'Respuesta '.$num,
+        'placeholder' => elgg_echo('quiz:question:answer').' '.$num,
         'value' => $vars['value'],
     ));
     ?>

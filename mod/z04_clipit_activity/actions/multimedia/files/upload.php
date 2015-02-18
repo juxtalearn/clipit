@@ -22,6 +22,7 @@ if(!$tags){
 }
 
 $entity = array_pop($entity_class::get_by_id(array($entity_id)));
+
 if(count($entity)==0){
     register_error(elgg_echo("file:cantupload"));
 } else{
@@ -34,6 +35,11 @@ if(count($entity)==0){
     ));
 
     if($new_file_id){
+        if($entity_class == 'ClipitActivity') {
+            // add file into Tricky Topic
+            ClipitTrickyTopic::add_files($entity_id, array($new_file_id));
+            $new_file_id = ClipitFile::create_clone($new_file_id);
+        }
         $entity_class::add_files($entity_id, array($new_file_id));
         ClipitFile::add_tags($new_file_id, $tags);
     } else {

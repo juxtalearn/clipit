@@ -24,10 +24,16 @@ if($from_view = elgg_extract('tricky_topic', $vars)){
 }
 
 $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($tricky_topic_id)));
+$multimedia = array_merge(
+    $tricky_topic->video_array,
+    $tricky_topic->file_array,
+    $tricky_topic->storyboard_array
+);
+$examples = ClipitExample::get_from_tricky_topic($tricky_topic->id);
 ?>
 <?php if($show_tags == 'checkbox'):?>
     <input type="checkbox" class="select-all-tags" >
-    <small class="margin-left-5"><?php echo elgg_echo('tags:select');?></small>
+    <small class="margin-left-5"><?php echo elgg_echo('check:all_none');?></small>
     <hr class="margin-0 margin-bottom-10">
     <div class="tags-list" style="overflow-y: auto;max-height: 150px;">
         <?php
@@ -94,6 +100,28 @@ $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($tricky_topic_id)))
                 'text'  => $tricky_topic->subject,
             ));
             ?>
+        </div>
+    </div>
+    <hr>
+    <div class="margin-top-20 row">
+        <div class="col-md-6">
+        <?php echo elgg_view('output/url', array(
+            'href'  => "tricky_topics/view/{$tricky_topic->id}#examples",
+            'target' => '_blank',
+            'class' => 'margin-right-15',
+            'title' => elgg_echo('examples'),
+            'text'  =>  '<i class="fa fa-th-list"></i> '.elgg_echo('examples').' <strong>('.count($examples).')</strong>',
+        ));
+        ?>
+        </div>
+        <div class="col-md-6">
+        <?php echo elgg_view('output/url', array(
+            'href'  => "tricky_topics/view/{$tricky_topic->id}#resources",
+            'target' => '_blank',
+            'title' => elgg_echo('activity:stas'),
+            'text'  =>  '<i class="fa fa-image"></i> '.elgg_echo('activity:stas').' <strong>('.count($multimedia).')</strong>',
+        ));
+        ?>
         </div>
     </div>
 </div>

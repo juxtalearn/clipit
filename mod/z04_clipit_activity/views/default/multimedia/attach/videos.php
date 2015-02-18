@@ -12,6 +12,12 @@
  */
 $selected_videos = elgg_extract('selected', $vars);
 $entity_id = elgg_extract('entity_id', $vars);
+$input_prefix = elgg_extract('input_prefix', $vars);
+if($input_prefix) {
+    $input_prefix = $input_prefix . "[attach_videos][]";
+} else {
+    $input_prefix = 'attach_videos[]';
+}
 $object = ClipitSite::lookup($entity_id);
 $videos = $object['subtype']::get_videos($entity_id);
 ?>
@@ -30,7 +36,7 @@ foreach($videos as $video_id):
             type="checkbox"
             <?php echo  $selected ? 'checked' : false;?>
             style="display: none"
-            name="attach_videos[]"
+            name="<?php echo $input_prefix;?>"
             value="<?php echo $video_id;?>"
             id="item_<?php echo $video_id;?>"
             >

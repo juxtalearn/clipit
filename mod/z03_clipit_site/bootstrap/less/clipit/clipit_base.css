@@ -10418,6 +10418,9 @@ h4.empty {
 .margin-left-20 {
   margin-left: 20px;
 }
+.margin-left-20_important {
+  margin-left: 20px !important;
+}
 .progress-bar {
   background: #32b4e5;
 }
@@ -11261,4 +11264,8 @@ tr.info td {
   border: 0;
   border-bottom: 1px solid #FFF;
   cursor: default;
+}
+.gray-block {
+  background: #fafafa;
+  padding: 10px;
 }

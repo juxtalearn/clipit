@@ -17,21 +17,8 @@ $entities_ids = array_keys($entities);
 $users = elgg_extract('entities', $vars);
 $users = ClipitUser::get_by_id($users);
 $groups = ClipitActivity::get_groups($activity->id);
+elgg_load_js('jquery:chartjs');
 ?>
-<script src="http://www.chartjs.org/assets/Chart.min.js"></script>
-
-<style>
-    .multimedia-preview .img-preview{
-        width: 65px;
-        max-height: 65px;
-    }
-    .multimedia-preview img {
-        width: 100%;
-    }
-    .task-status{
-        display: none;
-    }
-</style>
 <script>
     $(function(){
         $(document).on("click", ".save-annotation", function(){
@@ -155,10 +142,8 @@ $groups = ClipitActivity::get_groups($activity->id);
         <div role="tabpanel" class="tab-pane margin-top-10 active" id="students" style="padding: 10px;">
             <ul>
             <?php
-            $students_select = array('' => 'All students');
             $students = ClipitUser::get_by_id($activity->student_array);
             foreach($students as $student):
-                $students_select[$student->id] = $student->name;
             ?>
                 <li class="list-item" data-entity="<?php echo $student->id;?>">
                     <div class="pull-right">

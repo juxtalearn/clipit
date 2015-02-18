@@ -12,6 +12,12 @@
  */
 $selected_sbs = elgg_extract('selected', $vars);
 $entity_id = elgg_extract('entity_id', $vars);
+$input_prefix = elgg_extract('input_prefix', $vars);
+if($input_prefix) {
+    $input_prefix = $input_prefix . "[attach_storyboards][]";
+} else {
+    $input_prefix = 'attach_storyboards[]';
+}
 $object = ClipitSite::lookup($entity_id);
 $storyboards = $object['subtype']::get_storyboards($entity_id);
 ?>
@@ -31,7 +37,7 @@ foreach($storyboards as $sb_id):
             type="checkbox"
             <?php echo  $selected ? 'checked' : false;?>
             style="display: none"
-            name="attach_storyboards[]"
+            name="<?php echo $input_prefix;?>"
             value="<?php echo $sb_id;?>"
             id="item_<?php echo $sb_id;?>"
             >

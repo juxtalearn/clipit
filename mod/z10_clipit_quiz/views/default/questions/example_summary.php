@@ -43,7 +43,7 @@ $multimedia = array_merge(
             <?php echo elgg_view('output/url', array(
                 'href'  => "tricky_topics/examples/view/{$example->id}#resources",
                 'target' => '_blank',
-                'title' => 'Resources',
+                'title' => elgg_echo('activity:stas'),
                 'text'  =>  '<i class="fa fa-image"></i> '.elgg_echo('activity:stas').' ('.count($multimedia).')',
             ));
             ?>

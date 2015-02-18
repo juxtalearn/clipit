@@ -43,7 +43,7 @@ if($page[2] == 'view' && $page[3]){
     $owner_group_id = $entity->get_group($entity->id);
     $my_group = ClipitGroup::get_from_user_activity($user_id, $activity->id);
     $canEvaluate = false;
-    if(!$hasRating && ($my_group != $owner_group_id)){
+    if(!$hasRating && ($my_group != $owner_group_id) && $user->role == ClipitUser::ROLE_STUDENT){
         $canEvaluate = true;
     }
 

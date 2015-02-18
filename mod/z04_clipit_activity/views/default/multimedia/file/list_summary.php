@@ -52,7 +52,7 @@ foreach($files as $file_id){
     // Action buttons (Download|Publish)
     $buttons = elgg_view('output/url', array(
                     'href'  => "file/download/".$file->id. ($vars['task_id'] ? "?task_id=".$vars['task_id']: ""),
-                    'class' => 'btn btn-default btn-icon',
+                    'class' => 'btn btn-default btn-icon margin-left-10 pull-right',
                     'text'  => '<i class="fa fa-download"></i>'
     ));
     $author = elgg_view('output/url', array(

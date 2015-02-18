@@ -22,10 +22,11 @@ $english = array(
     'quiz:view_page:list' => 'One page',
     'quiz:view_page:paged' => 'Paginated',
     'quiz:question:none' => 'No questions',
-    'quiz:question:answer:select' => 'Select the correct answer',
+    'quiz:question:answers:select' => 'Check correct answers',
+    'quiz:question:answer:select' => 'Check correct answer',
     'quiz:question:answer:write' => 'Write the correct answer',
     'quiz:question:type:true_false' => 'True or False',
-    'quiz:question:type:number' => 'Numeric question',
+    'quiz:question:type:number' => 'Numeric',
     'quiz:question:type:select_multi' => 'Multiple choice',
     'quiz:question:type:select_one' => 'One choice',
     'quiz:max_time:none' => 'No limit',
@@ -33,7 +34,7 @@ $english = array(
     'quiz:max_time' => 'Max time',
     'quiz:target' => 'This Quiz is to be used in',
     'quiz:target:clipit' => 'ClipIt Activities',
-    'quiz:target:large_display' => 'Large Display',
+    'quiz:target:large_display' => 'Large Displays',
 );
 
 add_translation('en', $english);

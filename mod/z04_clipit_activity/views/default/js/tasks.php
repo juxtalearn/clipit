@@ -27,7 +27,6 @@ $(document).on("click", ".feedback-check",function(){
         feedback_content.hide();
     }
 });
-
 $(document).on("change", ".task-types",function(){
     var task_types = ['video_upload', 'storyboard_upload'];
     var content = $(this).closest(".task");
@@ -57,6 +56,23 @@ $(document).on("change", ".task-types",function(){
         content_feedback.hide();
         content.find('.feedback_form').hide();
         content_feedback.find("input[type=checkbox]").prop('checked', false);
+    }
+    var $attach_list =  that.closest(".task").find(".attach_list");
+    if($(this).val() == '<?php echo ClipitTask::TYPE_RESOURCE_DOWNLOAD;?>'){
+        var entity_id = tricky_topic_val;
+        if(that.closest("form").find("input[name='entity-id']").length > 0){
+            var entity_id = that.closest("form").find("input[name='entity-id']").val();
+            input_prefix_val = '';
+        }
+        $attach_list.toggle();
+        $attach_list.attach_multimedia({
+            data: {
+                'entity_id': entity_id,
+                'input_prefix': input_prefix_val
+            }
+        }).loadBy("files");
+    } else {
+        $attach_list.hide();
     }
     content.find(".quiz-module").hide();
     if($(this).val() == 'quiz_take'){

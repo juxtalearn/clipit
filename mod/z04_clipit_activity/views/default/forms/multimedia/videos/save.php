@@ -208,8 +208,10 @@ $language_index = ClipitPerformanceItem::get_language_index($user_language);
         'rows'  => 6,
     ));?>
 </div>
+
 <div class="row">
     <div class="col-md-7">
+        <?php if(!empty($tt_tags)):?>
         <div class="form-group">
             <label><?php echo elgg_echo("tags");?></label>
             <?php if($group_tags):?>
@@ -227,6 +229,7 @@ $language_index = ClipitPerformanceItem::get_language_index($user_language);
                 </select>
             </div>
         </div>
+        <?php endif;?>
         <div class="form-group">
             <label for="title"><?php echo elgg_echo("labels");?></label>
             <ul id="labels"></ul>

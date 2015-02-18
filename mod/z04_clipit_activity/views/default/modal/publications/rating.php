@@ -13,10 +13,11 @@
 $id = (int)get_input("id");
 $by_target_id = (int)get_input("by_target");
 
-if($rating = array_pop(ClipitRating::get_by_id(array($id)))){
+if($id){
+    $rating = array_pop(ClipitRating::get_by_id(array($id)));
     $group_id = (int)get_input("group_id");
-    $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
-    if($group){
+    if($group_id){
+        $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
         $body = '<div style="margin-bottom: 10px;">
                     <span class="label label-blue"><i class="fa fa-users"></i> '.$group->name.'</span>
                  </div>';
@@ -34,7 +35,8 @@ if($rating = array_pop(ClipitRating::get_by_id(array($id)))){
             "footer"    => false
         ));
 
-} elseif($rating_target = array_pop(ClipitRating::get_by_target(array($by_target_id))) ){
+} elseif($by_target_id){
+    $rating_target = array_pop(ClipitRating::get_by_target(array($by_target_id)));
     $activity_id = (int)get_input("activiy_id");
     $body = elgg_view('performance_items/list', array('entity'  => $rating_target, 'activity_id' => $activity_id));
     echo elgg_view("page/components/modal",

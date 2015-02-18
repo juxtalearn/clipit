@@ -26,7 +26,10 @@ function clipit_tricky_topic_init() {
 
     elgg_register_action("tricky_topic/save", "{$plugin_dir}/actions/tricky_topic/save.php");
     elgg_register_action("tricky_topic/remove", "{$plugin_dir}/actions/tricky_topic/remove.php");
+    elgg_register_action("tricky_topic/resources", "{$plugin_dir}/actions/tricky_topic/resources.php");
     elgg_register_ajax_view('tricky_topics/tags/search');
+
+
 
     elgg_extend_view('js/activity', 'js/tricky_topic');
     elgg_register_library('clipit:tricky_topic:functions', "{$plugin_dir}/lib/functions.php");
@@ -38,7 +41,7 @@ function clipit_tricky_topic_init() {
  */
 function tt_page_handler($page){
     elgg_load_js('clipit:tricky_topic');
-    $sidebar = elgg_view_module('aside', elgg_echo('tools'),
+    $sidebar = elgg_view_module('aside', elgg_echo('teacher:authoring_tools'),
         elgg_view('tricky_topics/sidebar/menu').
         elgg_view('quiz/sidebar/menu'),
         array('class' => 'activity-group-block margin-bottom-10 aside-tree')
@@ -308,18 +311,11 @@ function tt_page_handler($page){
                     $title  = $tricky_topic->name;
                     elgg_push_breadcrumb($title);
                     $entities = $tricky_topic;
-                    $activities = ClipitActivity::get_from_tricky_topic($tricky_topic->id);
                     $multimedia = array(
-                        'videos' => array(),
-                        'files' => array(),
-                        'storyboards' => array(),
+                        'videos' => ClipitTrickyTopic::get_videos($tricky_topic->id),
+                        'files' => ClipitTrickyTopic::get_files($tricky_topic->id),
+                        'storyboards' => ClipitTrickyTopic::get_storyboards($tricky_topic->id),
                     );
-                    foreach($activities as $activity){
-                        $multimedia['videos'] = array_merge($multimedia['videos'], $activity->video_array);
-                        $multimedia['files'] = array_merge($multimedia['files'], $activity->file_array);
-                        $multimedia['storyboards'] = array_merge($multimedia['storyboards'], $activity->storyboard_array);
-                    }
-
                     $tt_parent = ClipitTrickyTopic::get_cloned_from($tricky_topic->id);
                     $examples = ClipitExample::get_from_tricky_topic($tricky_topic->id);
                     $content = elgg_view('tricky_topics/view',

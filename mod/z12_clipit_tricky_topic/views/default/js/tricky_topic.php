@@ -71,7 +71,8 @@ $(function(){
             var container = $(this).closest(".form-group").find(".group-input"),
                 input_clone = container.find('.clone-input:last').clone();
             input_clone.find('input').val('');
-            input_clone.find('.remove-input').show();
+            input_clone.find('.correct').hide();
+            input_clone.find('.remove-input').css('visibility', 'visible');
 
             if($(this).hasClass('collapse-type')){
                 input_clone.find(".in").removeClass('in').addClass('collapse');
@@ -91,6 +92,14 @@ $(function(){
         });
         $(document).on("click", ".remove-input", function(){
             $(this).closest('.clone-input').remove();
+        });
+        $(document).on("change", ".clone-input input:file", function(){
+            var check = $(this).closest('.clone-input').find('.correct');
+            if($(this).val() != ''){
+                check.show();
+            } else {
+                check.hide();
+            }
         });
     });
     $(document).on("click", ".show-examples", function(){

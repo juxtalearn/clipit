@@ -71,3 +71,17 @@ if($resources) {
     );
     $body .= elgg_view('multimedia/resource/list', $params);
 }
+
+// Teacher view
+if($user->role == ClipitUser::ROLE_TEACHER){
+    $users = ClipitUser::get_by_id($activity->student_array, 0, 0, 'name');
+    if($users){
+        $body = elgg_view('tasks/admin/resource_download', array(
+            'activity' => $activity,
+            'entities'    => $users,
+            'task' => $task,
+        ));
+    } else {
+        $body = elgg_view('output/empty', array('value' => elgg_echo('users:none')));
+    }
+}

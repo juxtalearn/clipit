@@ -87,7 +87,10 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
         </div>
         <div class="col-md-10">
             <?php if($vars['actions']): ?>
-                <?php echo elgg_view("multimedia/owner_options", array('entity' => $video, 'type' => 'video')); ?>
+                <?php echo elgg_view("multimedia/owner_options", array(
+                    'entity' => $video,
+                    'type' => 'video'
+                )); ?>
             <?php endif; ?>
             <div class="pull-right text-right">
                 <?php if($vars['author_bottom'] !== true):?>
@@ -121,7 +124,7 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
                 <?php endif; ?>
             </div>
             <h4 class="text-truncate">
-                <?php if($vars['preview'] !== false):?>
+                <?php if($vars['preview']):?>
                     <?php echo elgg_view('output/url', array(
                         'href'  => $href_viewer,
                         'title' => $video->name,

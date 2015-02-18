@@ -15,6 +15,8 @@ $entity = elgg_extract("entity", $vars);
 $activity = elgg_extract("activity", $vars);
 $tags = $entity->tag_array;
 $tricky_topic_view = elgg_view("tricky_topic/preview", array('activity' => $activity));
+$user_language = get_current_language();
+$language_index = ClipitPerformanceItem::get_language_index($user_language);
 ?>
 <script>
     $(function(){
@@ -100,7 +102,6 @@ $tricky_topic_view = elgg_view("tricky_topic/preview", array('activity' => $acti
     </div>
     <div class="col-md-4">
         <div id="my-rating">
-
             <h4>
                 <strong><?php echo elgg_echo('publications:my_rating');?></strong>
             </h4>
@@ -113,7 +114,9 @@ $tricky_topic_view = elgg_view("tricky_topic/preview", array('activity' => $acti
                     ?>
                     <li class="list-item">
                         <div class="rating" data-performance-id="<?php echo $performance_item->id;?>" style="color: #e7d333;float: right;font-size: 18px;margin: 0 10px;"></div>
-                        <label class="blue" for="performance_rating[<?php echo $performance_item->id;?>]" style="font-weight: normal;padding-top: 2px;margin: 0;"><?php echo $performance_item->name;?></label>
+                        <label class="blue" for="performance_rating[<?php echo $performance_item->id;?>]" style="font-weight: normal;padding-top: 2px;margin: 0;">
+                            <?php echo $performance_item->item_name[$language_index]; ?>
+                        </label>
                     </li>
                 <?php endforeach; ?>
             </ul>
