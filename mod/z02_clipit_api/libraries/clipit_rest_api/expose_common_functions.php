@@ -46,9 +46,9 @@ function expose_common_functions($api_suffix, $class_suffix) {
         $api_suffix . "create_clone", $class_suffix . "create_clone",
         array(
             "id" => array("type" => "int", "required" => true),
-            "linked" => array("type" => "bool", "required" => false
-            )
-        ), "Create a clone copy of an instance, may be linked or not to parent (default: linked)", 'POST', false,true
+            "linked" => array("type" => "bool", "required" => false),
+            "keep_owner" => array("type" => "bool", "required" => false)),
+        "Create a clone copy of an instance, may be linked or not to parent (default: linked)", 'POST', false,true
     );
     expose_function(
         $api_suffix . "link_parent_clone", $class_suffix . "link_parent_clone",

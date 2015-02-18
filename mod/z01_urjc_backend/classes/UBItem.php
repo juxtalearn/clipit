@@ -106,7 +106,9 @@ class UBItem {
         $this->copy_to_elgg($elgg_object);
         $elgg_object->save();
         if ($double_save) {
-            $elgg_object->save(); // Only updates are saving time_created, thus first save for creation, second save for updating to proper creation time if given
+            // Only updates are saving time_created, thus first save for creation, second save for updating to
+            // proper creation time if given
+            $elgg_object->save(false);
         }
         return $this->id = $elgg_object->get("guid");
     }
@@ -136,6 +138,9 @@ class UBItem {
         $elgg_entity->set("name", (string)$this->name);
         $elgg_entity->set("description", (string)$this->description);
         $elgg_entity->set("url", (string)$this->url);
+        if(!empty($this->owner_id)) {
+            $elgg_entity->set("owner_guid", (int)$this->owner_id);
+        }
         $elgg_entity->set("time_created",(int)$this->time_created);
         $elgg_entity->set("access_id", ACCESS_PUBLIC);
 
@@ -207,7 +212,7 @@ class UBItem {
             $item->$prop = $value;
 
         }
-        if (array_key_exists("time_created",$prop_value_array)) {
+        if (array_key_exists("time_created", $prop_value_array)){
             return $item->save(true);
         } else {
             return $item->save(false);
@@ -230,11 +235,15 @@ class UBItem {
      *
      * @param int $id Item id from which to create a clone.
      * @param bool $linked Selects whether the clone will be linked to the parent object.
+     * @param bool $keep_owner Selects whether the clone will keep the parent item's owner (default: no)
      *
      * @return bool|int Id of the new clone Item, false in case of error.
      */
-    static function create_clone($id, $linked = true) {
+    static function create_clone($id, $linked = true, $keep_owner = false) {
         $prop_value_array = static::get_properties($id);
+        if(!$keep_owner){
+            $prop_value_array["owner_id"] = elgg_get_logged_in_user_guid();
+        }
         $clone_id = static::set_properties(null, $prop_value_array);
         if($linked){
             static::link_parent_clone($id, $clone_id);

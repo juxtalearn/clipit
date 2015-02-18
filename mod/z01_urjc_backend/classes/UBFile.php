@@ -102,6 +102,9 @@ class UBFile extends UBItem {
         }
         $elgg_file->set("name", (string)$this->name);
         $elgg_file->description = (string)$this->description;
+        if(!empty($this->owner_id)) {
+            $elgg_file->set("owner_guid", (int)$this->owner_id);
+        }
         $elgg_file->access_id = ACCESS_PUBLIC;
         if (!empty($this->data)) { // new file or new data
             $elgg_file->open("write");
@@ -144,9 +147,6 @@ class UBFile extends UBItem {
      * @return bool|int Returns id of saved instance, or false if error.
      */
     protected function save($double_save = false) {
-        if ($double_save !== false) { //just to ensure that everybody knows about useless usage of parameters
-            error_log("WARNING: double_save parameter has been used on UBFile. Please note this has currently no effect!!");
-        }
         if (!empty($this->id)) {
             if (!$elgg_file = new ElggFile($this->id)) {
                 return false;
@@ -158,6 +158,11 @@ class UBFile extends UBItem {
         }
         $this->copy_to_elgg($elgg_file);
         $elgg_file->save();
+        if ($double_save) {
+            // Only updates are saving time_created, thus first save for creation, second save for updating to
+            //proper creation time if given.
+            $elgg_file->save(false);
+        }
         return $this->id = $elgg_file->guid;
     }
 
@@ -166,15 +171,18 @@ class UBFile extends UBItem {
      *
      * @param int $id File id from which to create a clone.
      * @param bool $linked Selects whether the clone will be linked to the parent object.
+     * @param bool $keep_owner Selects whether the clone will keep the parent file's owner (default: no)
      *
      * @return bool|int Id of the new clone Item, false in case of error.
      */
-    static function create_clone($id, $linked = true) {
+    static function create_clone($id, $linked = true, $keep_owner = false) {
         $elgg_file = new ElggFile($id);
         $elgg_file_clone = clone $elgg_file;
         $elgg_file_clone->save();
-
         $prop_value_array = static::get_properties($id);
+        if($keep_owner === false){
+            $prop_value_array["owner_id"] = elgg_get_logged_in_user_guid();
+        }
         $clone_id = static::set_properties($elgg_file_clone->getGUID(), $prop_value_array);
         if($linked){
             static::link_parent_clone($id, $clone_id);

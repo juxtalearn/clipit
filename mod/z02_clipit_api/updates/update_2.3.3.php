@@ -8,6 +8,14 @@
 datalist_set('simplecache_enabled', 0);
 datalist_set('system_cache_enabled', 0);
 
+$tt_array = ClipitTrickyTopic::get_all();
+foreach($tt_array as $tt){
+    ClipitFile::delete_by_id($tt->file_array);
+    ClipitStoryboard::delete_by_id($tt->storyboard_array);
+    ClipitVideo::delete_by_id($tt->video_array);
+}
+
+
 // Move activity teacher resources to corresponding TT, and make clones to add to activity
 $activity_array = ClipitActivity::get_all();
 foreach($activity_array as $activity){
@@ -18,7 +26,7 @@ foreach($activity_array as $activity){
     // FILES
     $file_clones = array();
     foreach($activity->file_array as $file_id){
-        $file_clone = ClipitFile::create_clone($file_id, false);
+        $file_clone = ClipitFile::create_clone($file_id, false, true);
         // reverse link to make the clone be the parent
         ClipitFile::link_parent_clone($file_clone, $file_id);
         $file_clones[] = $file_clone;
@@ -27,7 +35,7 @@ foreach($activity_array as $activity){
     // STORYBOARDS
     $storyboard_clones = array();
     foreach($activity->storyboard_array as $storyboard_id){
-        $storyboard_clone = ClipitStoryboard::create_clone($storyboard_id, false);
+        $storyboard_clone = ClipitStoryboard::create_clone($storyboard_id, false, true);
         // reverse link to make the clone be the parent
         ClipitStoryboard::link_parent_clone($storyboard_clone, $storyboard_id);
         $storyboard_clones[] = $storyboard_clone;
@@ -36,7 +44,7 @@ foreach($activity_array as $activity){
     // VIDEOS
     $video_clones = array();
     foreach($activity->video_array as $video_id){
-        $video_clone = ClipitVideo::create_clone($video_id, false);
+        $video_clone = ClipitVideo::create_clone($video_id, false, true);
         // reverse link to make the clone be the parent
         ClipitVideo::link_parent_clone($video_clone, $video_id);
         $video_clones[] = $video_clone;
