@@ -21,9 +21,16 @@ class ClipitTrickyTopic extends UBItem {
      */
     const SUBTYPE = "ClipitTrickyTopic";
     const REL_TRICKYTOPIC_TAG = "ClipitTrickyTopic-ClipitTag";
+    const REL_TRICKYTOPIC_FILE = "ClipitTrickyTopic-ClipitFile";
+    const REL_TRICKYTOPIC_STORYBOARD = "ClipitTrickyTopic-ClipitStoryboard";
+    const REL_TRICKYTOPIC_VIDEO = "ClipitTrickyTopic-ClipitVideo";
     public $tag_array = array();
     public $subject = "";
     public $education_level = 0;
+    // Linked Teacher Resources
+    public $storyboard_array = array();
+    public $video_array = array();
+    public $file_array = array();
 
     /**
      * Loads object parameters stored in Elgg
@@ -34,7 +41,10 @@ class ClipitTrickyTopic extends UBItem {
         parent::copy_from_elgg($elgg_entity);
         $this->subject = (string)$elgg_entity->get("subject");
         $this->education_level = (int)$elgg_entity->get("education_level");
-        $this->tag_array = static::get_tags((int)$this->id);
+        $this->tag_array = (array)static::get_tags((int)$this->id);
+        $this->file_array = (array)static::get_files((int)$this->id);
+        $this->storyboard_array = (array)static::get_storyboards((int)$this->id);
+        $this->video_array = (array)static::get_videos((int)$this->id);
     }
 
     /**
@@ -56,6 +66,9 @@ class ClipitTrickyTopic extends UBItem {
     protected function save($double_save=false) {
         parent::save($double_save);
         static::set_tags((int)$this->id, (array)$this->tag_array);
+        static::set_files((int)$this->id, (array)$this->file_array);
+        static::set_storyboards((int)$this->id, (array)$this->storyboard_array);
+        static::set_videos((int)$this->id, (array)$this->video_array);
         return (int)$this->id;
     }
 
@@ -104,5 +117,56 @@ class ClipitTrickyTopic extends UBItem {
      */
     static function get_tags($id) {
         return UBCollection::get_items($id, static::REL_TRICKYTOPIC_TAG);
+    }
+
+    // TEACHER RESOURCES: STORYBOARDS
+    static function add_storyboards($id, $storyboard_array) {
+        return UBCollection::add_items($id, $storyboard_array, static::REL_TRICKYTOPIC_STORYBOARD);
+    }
+
+    static function set_storyboards($id, $storyboard_array) {
+        return UBCollection::set_items($id, $storyboard_array, static::REL_TRICKYTOPIC_STORYBOARD);
+    }
+
+    static function remove_storyboards($id, $storyboard_array) {
+        return UBCollection::remove_items($id, $storyboard_array, static::REL_TRICKYTOPIC_STORYBOARD);
+    }
+
+    static function get_storyboards($id) {
+        return UBCollection::get_items($id, static::REL_TRICKYTOPIC_STORYBOARD);
+    }
+
+    // TEACHER RESOURCES: VIDEOS
+    static function add_videos($id, $video_array) {
+        return UBCollection::add_items($id, $video_array, static::REL_TRICKYTOPIC_VIDEO);
+    }
+
+    static function set_videos($id, $video_array) {
+        return UBCollection::set_items($id, $video_array, static::REL_TRICKYTOPIC_VIDEO);
+    }
+
+    static function remove_videos($id, $video_array) {
+        return UBCollection::remove_items($id, $video_array, static::REL_TRICKYTOPIC_VIDEO);
+    }
+
+    static function get_videos($id) {
+        return UBCollection::get_items($id, static::REL_TRICKYTOPIC_VIDEO);
+    }
+
+    // TEACHER RESOURCES: FILES
+    static function add_files($id, $file_array) {
+        return UBCollection::add_items($id, $file_array, static::REL_TRICKYTOPIC_FILE);
+    }
+
+    static function set_files($id, $file_array) {
+        return UBCollection::set_items($id, $file_array, static::REL_TRICKYTOPIC_FILE);
+    }
+
+    static function remove_files($id, $file_array) {
+        return UBCollection::remove_items($id, $file_array, static::REL_TRICKYTOPIC_FILE);
+    }
+
+    static function get_files($id) {
+        return UBCollection::get_items($id, static::REL_TRICKYTOPIC_FILE);
     }
 }
