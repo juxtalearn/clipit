@@ -241,7 +241,7 @@ class UBItem {
      */
     static function create_clone($id, $linked = true, $keep_owner = false) {
         $prop_value_array = static::get_properties($id);
-        if(!$keep_owner){
+        if($keep_owner === false){
             $prop_value_array["owner_id"] = elgg_get_logged_in_user_guid();
         }
         $clone_id = static::set_properties(null, $prop_value_array);
