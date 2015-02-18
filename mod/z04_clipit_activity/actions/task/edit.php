@@ -95,6 +95,7 @@ if($entity->task_type == ClipitTask::TYPE_QUIZ_TAKE){
                 'description' => $question['description'],
                 'difficulty' => $question['difficulty'],
                 'option_type' => $question['type'],
+                'order' => $question['order'],
                 'option_array' => $values,
                 'validation_array' => $validations,
                 'tag_array' => $tags
@@ -106,9 +107,10 @@ if($entity->task_type == ClipitTask::TYPE_QUIZ_TAKE){
                 'description' => $question['description'],
                 'difficulty' => $question['difficulty'],
                 'option_type' => $question['type'],
+                'order' => $question['order'],
                 'option_array' => $values,
                 'validation_array' => $validations,
-                'tag_array' => $tags
+                'tag_array' => $tags,
             ));
             $questions_id[] = $question_id;
             if($question['id_parent']){
@@ -123,7 +125,7 @@ if($entity->task_type == ClipitTask::TYPE_QUIZ_TAKE){
         'description' => $quiz['description'],
         'view_mode' => $quiz['view'],
         'max_time' => $total_time,
-        'target' => $quiz['target']
+        'target' => $quiz['target'],
     ));
     ClipitQuiz::set_quiz_questions($quiz['id'], $questions_id);
 }

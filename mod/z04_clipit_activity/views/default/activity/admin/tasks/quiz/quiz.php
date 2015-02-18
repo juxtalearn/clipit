@@ -200,7 +200,6 @@ $(function(){
         $i = 1;
         $questions = ClipitQuizQuestion::get_by_id($questions, 0, 0, 'order');
         foreach($questions as $question):
-            $question = array_pop(ClipitQuizQuestion::get_by_id(array($question->id)));
         ?>
             <?php echo elgg_view('activity/admin/tasks/quiz/question/list', array(
                 'num' => $i,

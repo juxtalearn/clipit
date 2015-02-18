@@ -62,7 +62,7 @@ $performance_items = $entity->performance_item_array;
                         </small>
                     </div>
                 <?php endif;?>
-                <?php if($vars['description'] !== false):?>
+                <?php if($vars['description'] !== false && $entity->description):?>
                     <div class="margin-bottom-10">
                         <small class="show"><?php echo elgg_echo('description');?></small>
                         <div class="description">

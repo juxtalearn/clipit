@@ -19,9 +19,9 @@ $finished_task = elgg_extract("finished_task" ,$vars);
 
 $task = array_pop(ClipitTask::get_by_id(array($task_id)));
 $quiz = array_pop(ClipitQuiz::get_by_id(array($quiz_id)));
-$questions = ClipitQuizQuestion::get_by_id($quiz->quiz_question_array);
+$questions = ClipitQuizQuestion::get_by_id($quiz->quiz_question_array, 0, 0, 'order');
 // if teacher set random questions
-shuffle($questions);
+// shuffle($questions);
 $quiz_start = ClipitQuiz::get_quiz_start($quiz->id, $user_id);
 if(!$quiz_start && !$finished_task){
     ClipitQuiz::set_quiz_start($quiz->id, elgg_get_logged_in_user_guid());
