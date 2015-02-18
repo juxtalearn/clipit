@@ -87,6 +87,8 @@ class UBFile extends UBItem {
             $this->mime_type["full"] = $elgg_file->mime_type[0];
             $this->mime_type["short"] = $elgg_file->mime_type[1];
         }
+        $this->cloned_from = (int)static::get_cloned_from($this->id);
+        $this->clone_array = (array)static::get_clones($this->id);
     }
 
     /**
