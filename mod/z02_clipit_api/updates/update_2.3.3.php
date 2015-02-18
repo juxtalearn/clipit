@@ -8,14 +8,6 @@
 datalist_set('simplecache_enabled', 0);
 datalist_set('system_cache_enabled', 0);
 
-$tt_array = ClipitTrickyTopic::get_all();
-foreach($tt_array as $tt){
-    ClipitFile::delete_by_id($tt->file_array);
-    ClipitStoryboard::delete_by_id($tt->storyboard_array);
-    ClipitVideo::delete_by_id($tt->video_array);
-}
-
-
 // Move activity teacher resources to corresponding TT, and make clones to add to activity
 $activity_array = ClipitActivity::get_all();
 foreach($activity_array as $activity){
