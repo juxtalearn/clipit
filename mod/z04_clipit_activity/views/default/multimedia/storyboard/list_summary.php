@@ -31,7 +31,7 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
         $published = false;
         ?>
         <?php
-        if($vars['preview'] !== false):
+        if($vars['preview']):
             echo elgg_view("page/components/modal_remote", array('id'=> "viewer-id-{$storyboard->id}" ));
             $href_viewer = "ajax/view/multimedia/viewer?id=".$storyboard->id;
         endif;
@@ -95,7 +95,7 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
                 <?php endif; ?>
                 <h4 class="text-truncate margin-0">
                     <strong>
-                    <?php if($vars['preview'] !== false):?>
+                    <?php if($vars['preview']):?>
                         <?php echo elgg_view('output/url', array(
                             'href'  => $href_viewer,
                             'title' => $storyboard->name,

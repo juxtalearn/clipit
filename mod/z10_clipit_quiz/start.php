@@ -32,7 +32,7 @@ function clipit_quiz_init() {
  */
 function quiz_page_handler($page){
     $filter = '';
-    $sidebar = elgg_view_module('aside', elgg_echo('menu'),
+    $sidebar = elgg_view_module('aside', elgg_echo('teacher:authoring_tools'),
         elgg_view('tricky_topics/sidebar/menu').
         elgg_view('quiz/sidebar/menu'),
         array('class' => 'activity-group-block margin-bottom-10 aside-tree')

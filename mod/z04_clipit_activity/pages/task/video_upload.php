@@ -96,6 +96,7 @@ if($user->role == ClipitUser::ROLE_TEACHER){
         'entities'    => $videos,
         'activity'      => $activity,
         'task'      => $task,
+        'entity_type'      => 'videos',
         'list_view' => 'multimedia/video/list'
     ));
 }

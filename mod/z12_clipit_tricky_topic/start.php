@@ -13,21 +13,25 @@
 elgg_register_event_handler('init', 'system', 'clipit_tricky_topic_init');
 
 function clipit_tricky_topic_init() {
-
-    // Register "/tricky_topics" page handler
-    elgg_register_page_handler('tricky_topics', 'tt_page_handler');
     $plugin_dir = elgg_get_plugins_path() . "z12_clipit_tricky_topic";
-    elgg_register_action("example/save", "{$plugin_dir}/actions/example/save.php");
-    elgg_register_action("example/remove", "{$plugin_dir}/actions/example/remove.php");
-    elgg_register_ajax_view('examples/summary');
+    $user = array_pop(ClipitUser::get_by_id(array(elgg_get_logged_in_user_guid())));
+    if($user->role == ClipitUser::ROLE_TEACHER || $user->role == ClipitUser::ROLE_ADMIN) {
+        elgg_extend_view("navigation/menu/top", "navigation/menu/authoring", 250);
 
-    elgg_register_action("stumbling_blocks/link", "{$plugin_dir}/actions/stumbling_blocks/link.php");
-    elgg_register_ajax_view('stumbling_blocks/search');
+        // Register "/tricky_topics" page handler
+        elgg_register_page_handler('tricky_topics', 'tt_page_handler');
+        elgg_register_action("example/save", "{$plugin_dir}/actions/example/save.php");
+        elgg_register_action("example/remove", "{$plugin_dir}/actions/example/remove.php");
+        elgg_register_ajax_view('examples/summary');
 
-    elgg_register_action("tricky_topic/save", "{$plugin_dir}/actions/tricky_topic/save.php");
-    elgg_register_action("tricky_topic/remove", "{$plugin_dir}/actions/tricky_topic/remove.php");
-    elgg_register_action("tricky_topic/resources", "{$plugin_dir}/actions/tricky_topic/resources.php");
-    elgg_register_ajax_view('tricky_topics/tags/search');
+        elgg_register_action("stumbling_blocks/link", "{$plugin_dir}/actions/stumbling_blocks/link.php");
+        elgg_register_ajax_view('stumbling_blocks/search');
+
+        elgg_register_action("tricky_topic/save", "{$plugin_dir}/actions/tricky_topic/save.php");
+        elgg_register_action("tricky_topic/remove", "{$plugin_dir}/actions/tricky_topic/remove.php");
+        elgg_register_action("tricky_topic/resources", "{$plugin_dir}/actions/tricky_topic/resources.php");
+        elgg_register_ajax_view('tricky_topics/tags/search');
+    }
 
 
 

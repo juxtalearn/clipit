@@ -12,12 +12,14 @@
  */
 $tricky_topic_id = get_input('tricky_topic');
 $show_tags = get_input('show_tags');
+$tag_label = get_input('tag_label');
 $tags = get_input('tags');
 $input_name = 'tags_checked[]';
 if($from_view = elgg_extract('tricky_topic', $vars)){
     $tricky_topic_id = $from_view;
     $show_tags = elgg_extract('show_tags', $vars);
     $tags = elgg_extract('tags', $vars);
+    $tag_label = elgg_extract('tag_label', $vars);
     if(elgg_extract('input_name', $vars)){
         $input_name = elgg_extract('input_name', $vars);
     }
@@ -32,6 +34,9 @@ $multimedia = array_merge(
 $examples = ClipitExample::get_from_tricky_topic($tricky_topic->id);
 ?>
 <?php if($show_tags == 'checkbox'):?>
+    <?php if($tag_label):?>
+        <label><?php echo $tag_label;?></label>
+    <?php endif;?>
     <input type="checkbox" class="select-all-tags" >
     <small class="margin-left-5"><?php echo elgg_echo('check:all_none');?></small>
     <hr class="margin-0 margin-bottom-10">
@@ -63,7 +68,7 @@ $examples = ClipitExample::get_from_tricky_topic($tricky_topic->id);
         ?>
     </h4>
     <hr class="margin-0">
-    <small class="show margin-top-5"><?php echo elgg_echo("tags");?></small>
+    <small class="show margin-top-5"><?php echo elgg_echo("add:more");?></small>
     <div style="max-height: 150px;overflow-y: auto;">
         <?php
         foreach($tricky_topic->tag_array as $tag_id):

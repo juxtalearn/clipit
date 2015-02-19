@@ -86,14 +86,11 @@ if($status['status'] === true || $task->end <= time()){
 // Teacher view
 if($user->role == ClipitUser::ROLE_TEACHER){
     $storyboards = ClipitStoryboard::get_by_id($task->storyboard_array);
-    if($storyboards){
-        $body = elgg_view('tasks/admin/task_upload', array(
-            'entities'    => $storyboards,
-            'activity'      => $activity,
-            'task'      => $task,
-            'list_view' => 'multimedia/storyboard/list'
-        ));
-    } else {
-        $body = elgg_view('output/empty', array('value' => elgg_echo('storyboards:none')));
-    }
+    $body = elgg_view('tasks/admin/task_upload', array(
+        'entities'    => $storyboards,
+        'activity'      => $activity,
+        'task'      => $task,
+        'entity_type'      => 'storyboards',
+        'list_view' => 'multimedia/storyboard/list'
+    ));
 }

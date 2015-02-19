@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 $english = array(
+    'add:more' => 'Add more',
     'check:all_none'=> 'Select all/none',
     'select:type'=> 'Select type',
     'stats' => 'Stats',
@@ -50,6 +51,7 @@ $english = array(
     'activity:overview' => 'Activity overview',
     'activity:admin' => 'Activity admin',
     'my_activities' => 'My activities',
+    'my_activities:active' => 'Ongoing activities',
     'my_activities:none' => 'No active activities',
     'activities' => 'Activities',
     'activities:none' => 'There are no activities...',
@@ -206,7 +208,7 @@ $english = array(
     'publications:evaluated' => 'Evaluated',
     'publications:rating' => 'Rating',
     'publications:rating:name' => '%s\'s Rating',
-    'publications:rating:list' => 'All evaluations',
+    'publications:rating:list' => 'All feedback',
     'publications:rating:votes' => 'VOTES',
     'publications:rating:my_evaluation' => 'My evaluation',
     'publications:rating:stars' => 'Please score the video between 1 and 5 for performance',

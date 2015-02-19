@@ -81,28 +81,6 @@ if($example) {
                 'tags' => $example->tag_array
             ));?>
         </div>
-        <div class="form-group">
-            <label>
-                <?php echo elgg_echo('tags');?>
-            </label>
-            <div class="form-add-tags form-group margin-top-10">
-                <?php if($tags_diff):?>
-                    <?php foreach(ClipitTag::get_by_id($tags_diff) as $tag):?>
-                        <?php echo elgg_view("tricky_topics/tags/add", array('value' => $tag->name));?>
-                    <?php endforeach;?>
-                <?php else: ?>
-                    <?php echo elgg_view("tricky_topics/tags/add", array('required' => false));?>
-                <?php endif;?>
-            </div>
-            <?php echo elgg_view('output/url', array(
-                'href'  => "javascript:;",
-                'class' => 'btn btn-xs btn-primary',
-                'title' => elgg_echo('add'),
-                'text'  => '<i class="fa fa-plus"></i> ' . elgg_echo('add'),
-                'id'    => 'add-tag',
-            ));
-            ?>
-        </div>
     </div>
     <div class="clearfix"></div>
     <div class="col-md-12 margin-top-20">

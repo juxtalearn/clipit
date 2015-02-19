@@ -8166,6 +8166,43 @@ li.list-item:last-child {
 .navbar-blue .navbar-nav > li > a:focus {
   color: #FFFFFF;
 }
+.navbar-nav li.options {
+  background: #f5f5f5;
+  padding: 10px;
+  margin-top: -8px;
+  margin-bottom: -5px;
+}
+.navbar-nav li.options a {
+  display: inline-block;
+  font-size: 14px;
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: bold;
+  padding: 0 !important;
+}
+.navbar-nav li.options a:hover,
+.navbar-nav li.options a:focus {
+  color: #32b4e5;
+}
+.navbar-nav li.options a > .fa {
+  font-size: 14px;
+  float: none !important;
+}
+.navbar-nav li.options .btn {
+  color: #fff;
+  font-size: 12px;
+  display: inline-block;
+  font-weight: bold;
+  letter-spacing: 0;
+  padding: 5px 10px !important;
+  text-transform: none;
+  font-family: Helvetica;
+}
+.navbar-nav li.options .btn:hover,
+.navbar-nav li.options .btn:focus {
+  background-color: #1ba1d3;
+  color: #fff !important;
+}
 ul.top-account .avatar-user {
   padding: 0;
   padding: 6px 5px 0 0;

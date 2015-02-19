@@ -13,6 +13,7 @@
 $entities = elgg_extract('entities', $vars);
 $activity = elgg_extract('activity', $vars);
 $task = elgg_extract('task', $vars);
+$entity_type = elgg_extract('entity_type', $vars);
 $list_view = elgg_extract('list_view', $vars);
 $entities_ids = array();
 foreach($entities as $entity_object) {
@@ -57,7 +58,10 @@ $groups = ClipitGroup::get_by_id($activity->group_array);
             <a href="#groups" aria-controls="groups" role="tab" data-toggle="tab"><?php echo elgg_echo('groups');?></a>
         </li>
         <li role="presentation">
-            <a href="#videos" aria-controls="videos" role="tab" data-toggle="tab"><?php echo elgg_echo('videos');?></a>
+            <a href="#items" role="tab" data-toggle="tab">
+                <?php echo elgg_echo($entity_type);?>
+                (<?php echo count($entities);?>)
+            </a>
         </li>
     </ul>
 </div>
@@ -91,7 +95,7 @@ $groups = ClipitGroup::get_by_id($activity->group_array);
                 <div data-toggle="collapse" data-parent="#accordion_groups" href="#group_<?php echo $group->id;?>" class="panel-heading cursor-pointer expand" data-group="<?php echo $group->id;?>" style="padding: 0;background: none;">
                     <div class="pull-right">
                         <?php if($entities_ids[$group->id]):?>
-                            <a class="btn btn-icon btn-border-blue fa fa-play margin-right-10"></a>
+                            <a class="btn btn-border-blue margin-right-10 btn-xs btn-primary"><?php echo elgg_echo('view');?></a>
                         <?php endif;?>
                         <span class="blue">
                             <?php echo elgg_view('tasks/icon_entity_status', array('status' => $status));?>
@@ -129,12 +133,11 @@ $groups = ClipitGroup::get_by_id($activity->group_array);
         <?php endforeach;?>
     </ul>
     </div>
-    <div role="tabpanel" class="tab-pane margin-top-10" id="videos" style="padding: 10px;">
+    <div role="tabpanel" class="tab-pane margin-top-10" id="items" style="padding: 10px;">
         <?php
         echo elgg_view($list_view, array(
             'entities'    => $entities_ids,
             'href'      => "clipit_activity/{$activity->id}/publications",
-            'task_id'   => $task->id,
         ));
         ?>
     </div>

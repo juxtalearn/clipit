@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 $spanish = array(
+    'add:more' => 'Añadir más',
     'check:all_none'=> 'Seleccionar todos/ninguno',
     'select:type'=> 'Select type',
     'stats' => 'Estadísticas',
@@ -50,6 +51,7 @@ $spanish = array(
     'activity:overview' => 'Visión general',
     'activity:admin' => 'Administración',
     'my_activities' => 'Mis actividades',
+    'my_activities:active' => 'Mis actividades en curso',
     'my_activities:none' => 'Actualmente no hay actividades activas',
     'activities' => 'Actividades',
     'activities:none' => 'No se han encontrado actividades',

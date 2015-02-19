@@ -18,7 +18,7 @@ function clipit_explore_init() {
     elgg_register_library('clipit:explore', elgg_get_plugins_path() . 'z10_clipit_explore/lib/explore/functions.php');
     elgg_load_library('clipit:explore');
     // "Explore" Nav menu top
-    elgg_extend_view("navigation/menu/top", "navigation/menu/explore", 200);
+    elgg_extend_view("navigation/menu/top", "navigation/menu/explore", 50);
 }
 
 /**

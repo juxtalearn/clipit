@@ -34,11 +34,7 @@ function clipit_activity_init() {
     elgg_load_library('clipit:activity:multimedia');
 
     // Special views for role = teacher
-    if($user->role == ClipitUser::ROLE_TEACHER){
-        // Create activity
-        elgg_extend_view("navigation/menu/top", "navigation/menu/create_activity", 50);
-        elgg_register_page_handler('create_activity', 'create_activity_page_handler');
-    }
+
     if($user->role == ClipitUser::ROLE_STUDENT) {
         // My activities list (top header)
         elgg_extend_view("navigation/menu/top", "navigation/menu/my_activities", 100);
@@ -47,9 +43,11 @@ function clipit_activity_init() {
     // Register "/my_activities" page handler
     elgg_register_page_handler('my_activities', 'my_activities_page_handler');
     if($user->role == ClipitUser::ROLE_TEACHER || $user->role == ClipitUser::ROLE_ADMIN) {
+        // Register "/create_activity" page handler
+        elgg_register_page_handler('create_activity', 'create_activity_page_handler');
         // Register "/activities" page handler
         elgg_register_page_handler('activities', 'activities_page_handler');
-        elgg_extend_view("navigation/menu/top", "navigation/menu/activities", 100);
+        elgg_extend_view("navigation/menu/top", "navigation/menu/activities", 200);
     }
     // Register "/file" page handler
     elgg_register_page_handler('file', 'file_page_handler');
@@ -75,6 +73,7 @@ function clipit_activity_init() {
     elgg_register_action("task/edit", "{$plugin_dir}/actions/task/edit.php");
     elgg_register_action("task/remove", "{$plugin_dir}/actions/task/remove.php");
     elgg_register_action("task/create", "{$plugin_dir}/actions/task/create.php");
+    elgg_register_ajax_view('tasks/admin/feedback_data');
 
     elgg_register_ajax_view('activity/admin/tasks/quiz/add_type');
     elgg_register_ajax_view('activity/admin/tasks/quiz/quiz');

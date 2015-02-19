@@ -93,7 +93,7 @@ elgg_load_js('jquery:chartjs');
         $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
             var id = $(this).attr('href'),
                 container = $(id).find('li');
-            if(container.find('.a-error').text().indexOf('-') >= 0) {
+            if(container.find('.status').is(':hidden')) {
                 elgg.get("ajax/view/quizzes/admin/results", {
                     dataType: "json",
                     data: {
@@ -147,7 +147,7 @@ elgg_load_js('jquery:chartjs');
             ?>
                 <li class="list-item" data-entity="<?php echo $student->id;?>">
                     <div class="pull-right">
-                        <div class="margin-right-10 inline-block">
+                        <div class="margin-right-10 inline-block status">
                             <small class="msg-not-finished"></small>
                             <div class="counts" style="display: none;">
                                 <small class="margin-right-10">
@@ -193,7 +193,7 @@ elgg_load_js('jquery:chartjs');
                 <?php foreach(ClipitGroup::get_by_id($groups) as $group):?>
                 <li class="list-item" data-entity="<?php echo $group->id;?>">
                     <div class="pull-right">
-                        <div class="margin-right-10 inline-block">
+                        <div class="margin-right-10 inline-block status">
                             <small class="msg-not-finished"></small>
                             <div class="counts" style="display: none;">
                                 <small class="margin-right-10">

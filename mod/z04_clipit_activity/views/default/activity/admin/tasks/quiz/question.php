@@ -129,10 +129,10 @@ if($question){
                 </div>
                 <div class="select-tags">
                     <?php if($tricky_topic):?>
-                        <label><?php echo elgg_echo('tags:related');?></label>
                         <?php echo elgg_view('tricky_topic/list', array(
                             'tricky_topic' => $tricky_topic,
                             'tags' => $tags,
+                            'tag_label' => elgg_echo('tags:related'),
                             'show_tags' => 'checkbox',
                             'input_name' => $input_prefix.'[question]['.$id.'][tags][]'
                         )); ?>

@@ -44,17 +44,16 @@ if(count($evaluation_list["evaluated"]) > 0){
 if (!$entities) {
     $body = elgg_view('output/empty', array('value' => elgg_echo('storyboards:none')));
 }
+
 // Teacher view
 if($user->role == ClipitUser::ROLE_TEACHER){
     $task_parent = array_pop(ClipitTask::get_by_id(array($task->parent_task)));
     $storyboards = ClipitStoryboard::get_by_id($task_parent->storyboard_array);
-    if($storyboards){
         $body = elgg_view('tasks/admin/task_feedback', array(
             'entities'    => $storyboards,
             'activity'      => $activity,
             'task'      => $task,
+            'entity_type' => 'storyboards',
+            'list_view' => 'multimedia/storyboard/list'
         ));
-    } else {
-        $body = elgg_view('output/empty', array('value' => elgg_echo('storyboards:none')));
-    }
 }
