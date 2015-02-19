@@ -47,6 +47,9 @@ $(function(){
         'tricky_topic': <?php echo (int)$tricky_topic;?>,
         'input_prefix': '<?php echo $input_prefix;?>'
     });
+    <?php if($entity->description):?>
+        tinymce_setup();
+    <?php endif;?>
 });
 </script>
 <div class="quiz" data-quiz="<?php echo $id;?>">
@@ -106,7 +109,7 @@ $(function(){
                 'name'  => "{$input_prefix}[description]",
                 'class' => 'form-control '.($entity->description ? 'mceEditor' : ''),
                 'value' => $entity->description,
-                'onclick' => $entity->description ? false : '$(this).addClass(\'mceEditor\');
+                'onfocus' => $entity->description ? false : '$(this).addClass(\'mceEditor\');
                                 tinymce_setup();
                                 tinymce.execCommand(\'mceFocus\',false,this.id);',
                 'rows'  => 1,

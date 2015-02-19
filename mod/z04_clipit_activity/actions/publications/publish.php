@@ -53,7 +53,6 @@ switch($parent_entity_class){
 $entity = array_pop($entity_class::get_by_id(array($entity_id)));
 if(count($entity)==0 || trim($title) == "" || trim($description) == ""){
     register_error(elgg_echo("cantpublish"));
-    die;
 } else{
     // Clone
     $new_entity_id = $entity_class::create_clone($entity_id);

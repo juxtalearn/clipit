@@ -100,7 +100,7 @@ if($question){
                         'name' => $input_prefix.'[question]['.$id.'][description]',
                         'value' => $question->description,
                         'class' => 'form-control '.($question ? 'mceEditor':''),
-                        'onclick'   => '$(this).addClass(\'mceEditor\');
+                        'onfocus'   => '$(this).addClass(\'mceEditor\');
                                         tinymce_setup();
                                         tinymce.execCommand(\'mceFocus\',false,this.id);',
                         'rows'  => 1,

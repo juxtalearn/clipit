@@ -59,6 +59,7 @@ $count_answer = ClipitQuiz::questions_answered_by_user($quiz_id, $user_id);
         duration = moment.duration(diffTime*1000, 'milliseconds'),
         interval = 1000,
         days = '',
+        hours = '',
         d;
     countdown = setInterval(function(){
         duration = moment.duration(duration - interval, 'milliseconds');
@@ -68,11 +69,13 @@ $count_answer = ClipitQuiz::questions_answered_by_user($quiz_id, $user_id);
             clearTimeout(countdown);
             return false;
         }
-        d = new Date(duration - interval);
+        d = new Date(duration-interval);
         if(duration.days()){
             days = moment(d).format('DD') + "d ";
+        } else if(duration.hours()){
+            hours = moment.utc(d).format('HH') + "h ";
         }
-        $('.countdown').text(days + moment(d).format('hh') + "h " + moment(d).format('mm') + "m " + moment(d).format('ss') + "s");
+        $('.countdown').text(days + hours + moment.utc(d).format('mm') + "m " + moment.utc(d).format('ss') + "s");
     }, interval);
 <?php endif;?>
     $(function(){

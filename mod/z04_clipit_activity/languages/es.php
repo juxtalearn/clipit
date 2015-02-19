@@ -208,6 +208,7 @@ $spanish = array(
     'publications:rating:list' => 'Todas las evaluaciones',
     'publications:rating:votes' => 'VOTOS',
     'publications:rating:my_evaluation' => 'Mi valoración',
+    'publications:rating:stars' => 'Valora de 1 a 5 la realización del video, teniendo en cuenta',
     'publications:starsrequired' => 'Las estrellas de puntuación son obligatorias',
     'publications:cantrating' => 'No has podido puntuar',
     'publications:rated' => 'Evaluado correctamente',

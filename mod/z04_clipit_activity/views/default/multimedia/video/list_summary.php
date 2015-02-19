@@ -71,7 +71,7 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
         endif;
         ?>
         <div class="col-md-2">
-            <?php if($vars['preview'] !== false):?>
+            <?php if($vars['preview']):?>
                 <a data-toggle="modal" data-target="#viewer-id-<?php echo $video->id;?>" href="<?php echo elgg_get_site_url()."{$href_viewer}"; ?>">
                     <div class="img-preview">
                         <img src="<?php echo $video->preview;?>">

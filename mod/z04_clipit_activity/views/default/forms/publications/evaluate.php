@@ -60,7 +60,7 @@ $language_index = ClipitPerformanceItem::get_language_index($user_language);
         ));
         ?>
         <label for="overall content-block">
-            * <?php echo elgg_echo('publications:question:tricky_topic',array($tricky_topic_view));?>
+            <span class="text-muted">*</span> <?php echo elgg_echo('publications:question:tricky_topic',array($tricky_topic_view));?>
         </label>
         <?php echo elgg_view("input/hidden", array(
             'name' => 'entity-id',
@@ -103,9 +103,9 @@ $language_index = ClipitPerformanceItem::get_language_index($user_language);
     <div class="col-md-4">
         <div id="my-rating">
             <h4>
-                <strong><?php echo elgg_echo('publications:my_rating');?></strong>
+                <span class="text-muted">*</span> <strong><?php echo elgg_echo('publications:my_rating');?></strong>
             </h4>
-            <small class="margin-bottom-5">Valora de 1 a 5 la realización del video, teniendo en cuenta:</small>
+            <small class="margin-bottom-5"><?php echo elgg_echo('publications:rating:stars');?>:</small>
             <ul>
                 <?php
                 $performance_items = $entity->performance_item_array;
@@ -124,7 +124,7 @@ $language_index = ClipitPerformanceItem::get_language_index($user_language);
     </div>
     <div class="clearfix"></div>
     <div class="margin-top-20 col-md-12 text-right">
-        <small class="pull-left margin-top-5">* <?php echo elgg_echo('field:required');?></small>
+        <span class="pull-left margin-top-5 text-muted">* <?php echo elgg_echo('field:required');?></span>
         <?php echo elgg_view('input/submit',
             array(
                 'value' => elgg_echo('submit'),
