@@ -63,7 +63,9 @@ $(function(){
             $selected = $tricky_topic;
             ?>
             <div class="form-group">
-                <label><?php echo elgg_echo('tricky_topic');?></label>
+                <label for="<?php echo "{$input_prefix}[tricky_topic]";?>">
+                    <?php echo elgg_echo('tricky_topic');?>
+                </label>
                 <select
                     required="required"
                     class="form-control select-tricky_topic"
@@ -95,11 +97,12 @@ $(function(){
             </div>
         <?php endif; ?>
         <div class="form-group">
-            <label><?php echo elgg_echo('title');?></label>
+            <label for="<?php echo "{$input_prefix}[title]";?>"><?php echo elgg_echo('title');?></label>
             <?php echo elgg_view("input/text", array(
                 'name' => "{$input_prefix}[title]",
                 'class' => 'form-control',
-                'value' => $entity->name
+                'value' => $entity->name,
+                'required' => true,
             ));
             ?>
         </div>
@@ -119,7 +122,10 @@ $(function(){
     </div>
     <div class="col-md-4 col-md-offset-1">
         <div class="form-group">
-            <label><?php echo elgg_echo('quiz:view_mode');?></label>
+            <label>
+                <?php echo elgg_view('page/components/tooltip', array('text' => elgg_echo('quiz:view_mode:tooltip')));?>
+                <?php echo elgg_echo('quiz:view_mode');?>
+            </label>
             <?php echo elgg_view("input/dropdown", array(
                 'name' => $input_prefix.'[view]',
                 'style' => 'padding: 5px;',
@@ -133,7 +139,10 @@ $(function(){
             ?>
         </div>
         <div class="form-group">
-            <label><?php echo elgg_echo('quiz:max_time');?></label>
+            <label>
+                <?php echo elgg_view('page/components/tooltip', array('text' => elgg_echo('quiz:max_time:tooltip')));?>
+                <?php echo elgg_echo('quiz:max_time');?>
+            </label>
             <div class="row">
                 <div class="col-md-4">
                     <small><?php echo elgg_echo('time:days');?></small>

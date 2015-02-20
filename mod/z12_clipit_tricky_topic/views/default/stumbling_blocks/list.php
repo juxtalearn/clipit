@@ -37,9 +37,10 @@ $count = elgg_extract('count', $vars);
                 </a>
             </th>
         <?php endforeach;?>
-        <th><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
         <th><i class="fa fa-sitemap"></i> <?php echo elgg_echo('tricky_topics');?></th>
+        <th><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
         <th style="width: 50px;"><?php echo elgg_echo('examples');?></th>
+        <th style="width: 100px;"></th>
     </tr>
     </thead>
     <?php foreach($tags as $tag):
@@ -50,7 +51,7 @@ $count = elgg_extract('count', $vars);
             <td>
                 <strong>
                     <?php echo elgg_view('output/url', array(
-                        'href'  => "explore/search?by=tag&id={$tag->id}",
+                        'href'  => "tricky_topics/stumbling_blocks/view/{$tag->id}",
                         'title' => $tag->name,
                         'text'  => $tag->name,
                     ));
@@ -59,20 +60,6 @@ $count = elgg_extract('count', $vars);
                 <div>
                     <?php echo $tag->description;?>
                 </div>
-            </td>
-            <td>
-                <small>
-                    <div>
-                    <i class="fa-user fa blue"></i>
-                    <?php echo elgg_view('output/url', array(
-                        'href'  => "profile/{$user->login}",
-                        'title' => $user->name,
-                        'text'  => $user->name,
-                    ));
-                    ?>
-                    </div>
-                    <?php echo elgg_view('output/friendlytime', array('time' => $tag->time_created));?>
-                </small>
             </td>
             <td>
                 <ul>
@@ -99,13 +86,35 @@ $count = elgg_extract('count', $vars);
                     <div class="list-tricky-topic" style="display: none;"></div>
                 </strong>
             </td>
+            <td>
+                <small>
+                    <div>
+                        <i class="fa-user fa blue"></i>
+                        <?php echo elgg_view('output/url', array(
+                            'href'  => "profile/{$user->login}",
+                            'title' => $user->name,
+                            'text'  => $user->name,
+                        ));
+                        ?>
+                    </div>
+                    <?php echo elgg_view('output/friendlytime', array('time' => $tag->time_created));?>
+                </small>
+            </td>
             <td class="text-left">
                 <?php if(count($examples)):?>
                 <a href="javascript:;" class="show-examples btn btn-xs btn-border-blue" id="<?php echo $tag->id;?>">
                     <strong><?php echo count($examples);?></strong>
-                    <i class="margin-left-5 fa fa-th"></i>
+                    <i class="margin-left-5 fa fa-list"></i>
                 </a>
                 <?php endif;?>
+            </td>
+            <td>
+                <?php echo elgg_view('page/components/admin_options', array(
+                    'entity' => $tag,
+                    'user' => $user,
+                    'is_linked' => $is_linked,
+                ));
+                ?>
             </td>
         </tr>
     <?php endforeach;?>

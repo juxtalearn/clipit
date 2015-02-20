@@ -38,7 +38,7 @@ $count = elgg_extract('count', $vars);
             </th>
         <?php endforeach;?>
         <th><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
-        <th><?php echo elgg_echo('options');?></th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -82,23 +82,11 @@ $count = elgg_extract('count', $vars);
                 </small>
             </td>
             <td>
-                <?php if($user->id == elgg_get_logged_in_user_guid()):?>
-                    <?php echo elgg_view('output/url', array(
-                        'href'  => "tricky_topics/examples/edit/{$example->id}",
-                        'class' => 'btn btn-xs btn-primary',
-                        'title' => elgg_echo('edit'),
-                        'text'  => '<i class="fa fa-edit"></i>',
-                    ));
-                    ?>
-                    <?php echo elgg_view('output/url', array(
-                        'href'  => "action/example/remove?id={$example->id}",
-                        'class' => 'btn btn-xs btn-danger remove-object',
-                        'is_action' => true,
-                        'title' => elgg_echo('delete'),
-                        'text'  => '<i class="fa fa-trash-o"></i>',
-                    ));
-                    ?>
-                <?php endif;?>
+                <?php echo elgg_view('page/components/admin_options', array(
+                    'entity' => $example,
+                    'user' => $user,
+                ));
+                ?>
             </td>
         </tr>
     <?php endforeach;?>

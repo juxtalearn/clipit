@@ -18,23 +18,13 @@ $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($example->tricky_to
 <div class="margin-bottom-10">
     <div class="pull-right">
         <div class="margin-bottom-10">
-            <?php if($user->id == elgg_get_logged_in_user_guid()):?>
-                <?php echo elgg_view('output/url', array(
-                    'href'  => "tricky_topics/examples/edit/{$example->id}",
-                    'class' => 'btn btn-xs btn-primary',
-                    'title' => elgg_echo('edit'),
-                    'text'  => '<i class="fa fa-edit"></i>',
+            <div class="inline-block">
+                <?php echo elgg_view('page/components/admin_options', array(
+                    'entity' => $example,
+                    'user' => $user,
                 ));
                 ?>
-                <?php echo elgg_view('output/url', array(
-                    'href'  => "action/example/remove?id={$example->id}",
-                    'class' => 'btn btn-xs btn-danger remove-object',
-                    'is_action' => true,
-                    'title' => elgg_echo('delete'),
-                    'text'  => '<i class="fa fa-trash-o"></i>',
-                ));
-                ?>
-            <?php endif;?>
+            </div>
             <span class="margin-left-10">
                 <?php echo elgg_view("page/components/print_button");?>
             </span>

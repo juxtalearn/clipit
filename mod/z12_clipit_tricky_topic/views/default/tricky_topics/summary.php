@@ -15,31 +15,14 @@ $count = elgg_extract('count', $vars);
 $table_orders = elgg_extract('table_orders', $vars);
 $page = 'tricky_topics';
 ?>
-<div class="margin-bottom-20">
-    <div class="pull-right">
-        <?php echo elgg_view("page/components/print_button");?>
-    </div>
-    <?php echo elgg_view('output/url', array(
-        'href'  => "tricky_topics/create",
-        'class' => 'btn btn-primary margin-bottom-10',
-        'title' => elgg_echo('create'),
-        'text'  => elgg_echo('new'),
-    ));
-    ?>
-</div>
+<?php if($tricky_topics):?>
 <table class="table table-striped table-order">
     <thead>
     <tr class="title_order">
-        <?php foreach($table_orders as $data):?>
-            <th>
-                <a href="<?php echo $data['href'];?>">
-                    <i class="fa <?php echo $data['sort_icon'];?> blue margin-right-5" style="position: absolute;left: 0;margin-top: 3px;"></i>
-                    <span class="margin-left-5"><?php echo $data['value'];?></span>
-                </a>
-            </th>
-        <?php endforeach;?>
+        <th><?php echo elgg_echo('name');?></th>
+        <th><?php echo elgg_echo('education_level');?></th>
+        <th><?php echo elgg_echo('tricky_topic:subject');?></th>
         <th><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
-        <th style="width: 100px;"></th>
     </tr>
     </thead>
     <?php
@@ -94,14 +77,9 @@ $page = 'tricky_topics';
             <?php echo elgg_view('output/friendlytime', array('time' => $tricky_topic->time_created));?>
             </small>
         </td>
-        <td>
-            <?php echo elgg_view('page/components/admin_options', array(
-                'entity' => $tricky_topic,
-                'user' => $user,
-                'is_linked' => $is_linked,
-            ));?>
-        </td>
     </tr>
     <?php endforeach;?>
 </table>
-<?php echo clipit_get_pagination(array('count' => $count, 'limit' => 10)); ?>
+<?php else: ?>
+    <?php echo elgg_view('output/empty', array('value' => elgg_echo('tricky_topics:none')));;?>
+<?php endif;?>

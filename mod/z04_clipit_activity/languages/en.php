@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 $english = array(
+    'review' => 'Review',
     'add:more' => 'Add more',
     'check:all_none'=> 'Select all/none',
     'select:type'=> 'Select type',
@@ -221,6 +222,8 @@ $english = array(
     'publications:question:sb' => 'Why is/isn\'t this Stumbling Block correctly covered?',
     'publications:question:if_covered' => 'Check if each Stumbling Block was correcty covered in this publication, and explain why:',
     'publications:view_scope' => 'View scope',
+    'publications:review:info' => 'Review your work and click on Select',
+    'publications:select:tooltip' => 'Click to review your work and selecting for the task',
     'ratings:none' => 'No feedback',
     'input:no' => 'No',
     'input:yes' => 'Yes',
@@ -314,6 +317,8 @@ $english = array(
     'activity:created' => 'Activity %s created',
     'search:filter' => 'Filter',
     // Activity admin
+    'activity:deleted' => 'Activity deleted',
+    'activity:cantdelete' => 'Activity can not remove',
     'activity:admin:task_setup' => 'Tasks setup',
     'activity:admin:groups' => 'Groups setup',
     'activity:admin:setup' => 'Activity setup',

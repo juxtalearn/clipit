@@ -11,12 +11,13 @@
  * @package         ClipIt
  */
 $entity_id = get_input('entity-id');
+$tricky_topic_id = get_input('tricky-topic');
 $data = array(
     'name' => get_input('title'),
     'description' => get_input('description'),
     'country' => get_input('country'),
     'location' => get_input('location'),
-    'tricky_topic' => get_input('tricky-topic'),
+    'tricky_topic' => $tricky_topic_id,
 );
 
 $reflection_items = get_input('reflections', array());
@@ -89,6 +90,7 @@ for($i = 0;$i < count($video_title);$i++){
 ClipitExample::add_videos($example_id, $new_video_id);
 
 // Create/Select Stumbling blocks
+$tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($tricky_topic_id)));
 $tags =  get_input('tag');
 array_filter($tags);
 $tag_ids = array();
@@ -96,6 +98,9 @@ foreach($tags as $tag){
     if(trim($tag) != '') {
         $tag_ids[] = ClipitTag::create(array('name' => $tag));
     }
+}
+if($tricky_topic->owner_id == elgg_get_logged_in_user_guid()){
+    ClipitTrickyTopic::add_tags($tricky_topic_id, $tag_ids);
 }
 
 if($tags_checked = get_input('tags_checked')){

@@ -38,6 +38,7 @@ $table_orders = elgg_extract('table_orders', $vars);
             </th>
         <?php endforeach;?>
         <th><?php echo elgg_echo('activity:teachers');?></th>
+        <th></th>
     </tr>
     </thead>
     <?php
@@ -98,6 +99,13 @@ $table_orders = elgg_extract('table_orders', $vars);
                         </li>
                     <?php endforeach; ?>
                 </ul>
+            </td>
+            <td>
+                <?php echo elgg_view('page/components/admin_options', array(
+                    'entity' => $activity,
+                    'user' => $user,
+                ));
+                ?>
             </td>
         </tr>
     <?php endforeach;?>

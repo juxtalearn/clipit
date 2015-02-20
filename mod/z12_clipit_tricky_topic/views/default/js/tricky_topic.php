@@ -117,7 +117,7 @@ $(function(){
             success: function(content){
                 var container = $("<tr/>")
                     .attr("data-tag", id)
-                    .html( $('<td/>').attr("colspan", 4).html(content).css("padding", "10px") );
+                    .html( $('<td/>').attr("colspan", 5).html(content).css("padding", "10px") );
                 tr.after(container);
             }
         });

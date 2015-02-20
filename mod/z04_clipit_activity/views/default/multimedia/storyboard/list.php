@@ -78,11 +78,12 @@ foreach($storyboards as $sb_id){
     if($vars['publish']){
         $buttons .= elgg_view('output/url', array(
             'href'  => "{$href}/publish/{$storyboard->id}".($vars['task_id'] ? "?task_id=".$vars['task_id']: ""),
-            'title' => elgg_echo('publish'),
-            'style' => 'padding: 1px 5px;  background: #47a447;color: #fff;font-weight: bold;margin-left:10px;',
-            'class' => 'btn-xs btn pull-right',
-            'text'  => '<i class="fa fa-arrow-circle-up"></i> '.elgg_echo('publish')
+            'title' => elgg_echo('review'),
+            'style' => 'background: #47a447;color: #fff;font-weight: bold;margin-left:10px;',
+            'class' => 'btn-sm btn pull-right btn-primary',
+            'text'  => elgg_echo('review').'...'
         ));
+
     }
 
     $row = array(

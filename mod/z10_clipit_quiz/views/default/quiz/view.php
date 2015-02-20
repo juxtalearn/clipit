@@ -28,7 +28,7 @@ $(function() {
 });
 </script>
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-9">
         <div>
             <small class="show"><?php echo elgg_echo('author');?></small>
             <i class="fa-user fa blue"></i>
@@ -53,32 +53,15 @@ $(function() {
         </div>
         <?php endif;?>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="margin-bottom-10">
-            <?php if($user->id == elgg_get_logged_in_user_guid()):?>
-                <?php echo elgg_view('output/url', array(
-                    'href'  => "quizzes/edit/{$quiz->id}",
-                    'class' => 'btn btn-xs btn-primary',
-                    'title' => elgg_echo('edit'),
-                    'text'  => '<i class="fa fa-edit"></i>',
+            <div class="inline-block">
+                <?php echo elgg_view('page/components/admin_options', array(
+                    'entity' => $quiz,
+                    'user' => $user,
                 ));
                 ?>
-                <?php echo elgg_view('output/url', array(
-                    'href'  => "action/quiz/remove?id={$quiz->id}",
-                    'class' => 'btn btn-xs btn-danger remove-object',
-                    'is_action' => true,
-                    'title' => elgg_echo('delete'),
-                    'text'  => '<i class="fa fa-trash-o"></i>',
-                ));
-                ?>
-            <?php endif;?>
-            <?php echo elgg_view('output/url', array(
-                'href'  => "quizzes/create/{$quiz->id}",
-                'class' => 'btn btn-xs btn-primary btn-border-blue',
-                'title' => elgg_echo('duplicate'),
-                'text'  => '<i class="fa fa-copy"></i>',
-            ));
-            ?>
+            </div>
             <span class="margin-left-10">
                 <?php echo elgg_view("page/components/print_button");?>
             </span>

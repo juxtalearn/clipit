@@ -42,7 +42,10 @@ $english = array(
 
     'tags:select' => 'Select Stumbling Blocks',
     'tags:related' => 'Related Stumbling Blocks',
+    'tag:cantremove' => 'Can not remove Tag',
+    'tag:removed' => 'Tag removed',
 
+    'tricky_topics:none' => 'No Tricky Topics',
     'tricky_topic:duplicate_from' => 'Tricky Topic duplicated from',
     'tricky_topic:subject' => 'Subject',
     'tricky_topic:cantremove' => 'Can not remove Tricky Topic',

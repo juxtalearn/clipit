@@ -33,7 +33,7 @@ if($entity_id){
 <div class="margin-left-20">
     <?php echo elgg_view('output/url', array(
         'href'  => "javascript:;",
-        'class' => 'btn btn-sm btn-border-blue add-input',
+        'class' => 'btn btn-sm btn-border-blue add-input btn-primary',
         'title' => elgg_echo('add'),
         'text'  => '<i class="fa fa-plus"></i> ' . elgg_echo('add'),
     ));

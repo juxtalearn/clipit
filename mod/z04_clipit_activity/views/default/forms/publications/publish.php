@@ -57,7 +57,9 @@ $labels_value = implode(", ", $label_value);
 if($task_id = get_input('task_id')):
     $task = array_pop(ClipitTask::get_by_id(array($task_id)));
     ?>
+    <label><?php echo elgg_echo('publications:review:info');?></label>
     <div class="bg-warning">
+        <?php echo elgg_view('input/submit', array('value' => elgg_echo('select'), 'class' => 'pull-right elgg-button btn btn-primary'));?>
         <small><?php echo elgg_echo('activity:task');?>:</small>
         <h4 style="margin: 0">
             <?php echo elgg_view('output/url', array(
@@ -144,5 +146,5 @@ if($task_id = get_input('task_id')):
     </div>
 </div>
 <p class="text-right">
-    <?php echo elgg_view('input/submit', array('value' => elgg_echo('publish'), 'class' => 'elgg-button btn btn-primary'));?>
+    <?php echo elgg_view('input/submit', array('value' => elgg_echo('select'), 'class' => 'elgg-button btn btn-primary'));?>
 </p>

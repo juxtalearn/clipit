@@ -49,7 +49,7 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
                                 </div>
                             <?php endif;?>
                             <small class="show">
-                                <strong>Published on</strong>
+                                <strong><?php echo elgg_echo('published:on');?></strong>
                                 <?php echo htmlspecialchars(date(elgg_echo('friendlytime:date_format'), $entity->time_created));?>
                                 (<?php echo elgg_view('output/friendlytime', array('time' => $entity->time_created));?>)
                             </small>

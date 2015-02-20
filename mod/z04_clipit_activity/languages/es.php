@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 $spanish = array(
+    'review' => 'Revisión',
     'add:more' => 'Añadir más',
     'check:all_none'=> 'Seleccionar todos/ninguno',
     'select:type'=> 'Select type',
@@ -220,6 +221,8 @@ $spanish = array(
     'publications:question:sb' => '¿Por qué este concepto está/no está correctamente explicado?',
     'publications:question:if_covered' => '¿Se han explicado los siguientes conceptos correctamente? (explica por qué)',
     'publications:view_scope' => 'Ver en',
+    'publications:review:info' => 'Revisa el contenido y haz click en Seleccionar',
+    'publications:select:tooltip' => 'Haz click para revisar el contenido y seleccionarlo para la tarea',
     'ratings:none' => 'No hay feedback',
     'input:no' => 'No',
     'input:yes' => 'Si',

@@ -59,6 +59,7 @@ function clipit_activity_init() {
     // Create Activity
     elgg_register_action("activity/create/add_users", "{$plugin_dir}/actions/activity/add_users.php");
     elgg_register_action("activity/create/add_users_upload", "{$plugin_dir}/actions/activity/add_users_upload.php");
+    elgg_register_action("activity/remove", "{$plugin_dir}/actions/activity/remove.php");
     elgg_register_action("activity/create", "{$plugin_dir}/actions/activity/create.php");
     elgg_register_ajax_view('activity/create/task_list');
     elgg_register_ajax_view('activity/create/groups/create');
