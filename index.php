@@ -32,7 +32,7 @@ if (!function_exists('session_status')) {
         $_SESSION["status"] = "wait";
         ?>
         <h1>ClipIt Install Script</h1>
-        <h2>fill in the form below<br/>(recommended values already added)</h2>
+        <h3>fill in the form below<br/>(typical values filled-in)</h3>
         <form action="index.php" method="post" id="clipit_params">
             <table>
                 <tr>
@@ -101,10 +101,13 @@ if (!function_exists('session_status')) {
 
     <p>cloning github repository...</p>
     <?php
+    exec("mkdir git_tmp && cd git_tmp");
     exec("git init");
     exec("git remote add origin $git_url");
     exec("git fetch --tags");
     exec("git checkout `git tag | tail -1`");
+    exec("cd .. && mv -f git_tmp/* . && mv -f git_tmp/.* .");
+    exec("rm -rf git_tmp");
     ?>
 
     <p>configuring data folder and permissions...</p>
