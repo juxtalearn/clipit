@@ -101,16 +101,18 @@ if (!function_exists('session_status')) {
 
     <p>cloning github repository...</p>
     <?php
+    $base_path = getcwd();
     exec("mkdir git_tmp");
+    chdir("$base_path/git_tmp");
     exec("cd git_tmp");
     exec("git init");
     exec("git remote add origin $git_url");
     exec("git fetch --tags");
     exec("git checkout `git tag | tail -1`");
-    exec("cd .. ");
+    exec(chdir($base_path));
     exec("mv -f git_tmp/* .");
     exec("mv -f git_tmp/.* .");
-    //exec("rm -rf git_tmp");
+    exec("rm -rf git_tmp");
     ?>
 
     <p>configuring data folder and permissions...</p>
