@@ -1,6 +1,6 @@
 <?php
 // CHANGE FROM HERE ...
-$VERSION = "2.3.3"; // new versions must be inserted in to $update_files array, even if null
+$VERSION = "2.3.4"; // new versions must be inserted in to $update_files array, even if null
 $update_files = array(
     "2.2.0" => null,
     "2.2.1" => "update_2.2.1.php",
@@ -11,7 +11,8 @@ $update_files = array(
     "2.3" => null,
     "2.3.1" => null,
     "2.3.2" => null,
-    "2.3.3" => "update_2.3.3.php"
+    "2.3.3" => "update_2.3.3.php",
+    "2.3.4" => "update_2.3.4.php",
     // add here future updates: version => file
 );
 // ... TO HERE
