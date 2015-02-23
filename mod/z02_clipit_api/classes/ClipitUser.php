@@ -61,12 +61,12 @@ class ClipitUser extends UBUser {
         if(!parent::login($login, $password, $persistent)) {
             return false;
         }
-        static::create_cookies($login, $password);
+        //static::create_cookies($login, $password);
         return true;
     }
 
     static function logout() {
-        static::delete_cookies();
+        //static::delete_cookies();
         return parent::logout();
     }
 

@@ -91,7 +91,9 @@ If you are ready to proceed, click the Next button.",
     'install:settings:label:jxl_secret' => "JuxtaLearn Secret Key",
     'install:settings:label:la_metrics_class' => "LA Metrics Class",
     'install:settings:label:recommendations_class' => "Recommendations Class",
-	'install:label:combo:dataroot' => 'ClipIt creates data directory',
+    'install:settings:label:clipit_site_type' => "ClipIt Site Type (site, demo or global)",
+
+    'install:label:combo:dataroot' => 'ClipIt creates data directory',
 
 	'install:settings:help:sitename' => 'The name of your new ClipIt site',
 	'install:settings:help:siteemail' => 'Email address used by ClipIt for communication with users',
