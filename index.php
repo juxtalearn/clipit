@@ -67,20 +67,6 @@ if (!function_exists('session_status')) {
                         <input size=30 type="text" name="mysql_password">
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        <b>Version to Install</b>
-                    </td>
-                    <td>
-                        <select name="version" form="clipit_params">
-                            <option value="2.3">Version 2.3</option>
-                            <option value="2.2">Version 2.2</option>
-                            <option value="2.1">Version 2.1</option>
-                            <option value="2.0">Version 2.0</option>
-                            <option value="master">Master branch (unstable)</option>
-                        </select>
-                    </td>
-                </tr>
             </table>
             <p><input type="submit"></p>
         </form>
@@ -103,7 +89,6 @@ if (!function_exists('session_status')) {
     if ($_SESSION["status"] == "install") {
     unset($_SESSION["status"]);
     $git_url = "https://github.com/juxtalearn/clipit.git";
-    $clipit_tag = $_SESSION["version"];
     $mysql_host = $_SESSION["mysql_host"];
     $mysql_schema = $_SESSION["mysql_schema"];
     $mysql_user = $_SESSION["mysql_user"];
@@ -116,16 +101,15 @@ if (!function_exists('session_status')) {
 
     <p>cloning github repository...</p>
     <?php
-    exec("git clone -b $clipit_tag --depth=1 --recursive $git_url git_tmp");
-    exec("mv -f git_tmp/.* .");
-    exec("mv -f git_tmp/* .");
-    exec("rmdir git_tmp");
+    exec("git init");
+    exec("git remote add origin $git_url");
+    exec("git fetch --tags");
+    exec("git checkout `git tag | tail -1`");
     ?>
 
     <p>configuring data folder and permissions...</p>
     <?php
     // Already part of ClipIt
-    #echo exec("mkdir data");
     echo exec("chmod -R 777 .");
     ?>
 
