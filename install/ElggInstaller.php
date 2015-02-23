@@ -1481,8 +1481,6 @@ class ElggInstaller {
         set_config('recommendations_class', $submissionVars['recommendations_class'], $site->getGUID());
         set_config('clipit_site_type', strtolower($submissionVars['clipit_site_type']), $site->getGUID());
         $this->enablePlugins();
-        $this->enablePlugins();
-        $this->enablePlugins();
         return TRUE;
     }
 
