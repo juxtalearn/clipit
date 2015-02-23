@@ -101,12 +101,15 @@ if (!function_exists('session_status')) {
 
     <p>cloning github repository...</p>
     <?php
-    exec("mkdir git_tmp && cd git_tmp");
+    exec("mkdir git_tmp");
+    exec("cd git_tmp");
     exec("git init");
     exec("git remote add origin $git_url");
     exec("git fetch --tags");
     exec("git checkout `git tag | tail -1`");
-    exec("cd .. && mv -f git_tmp/* . && mv -f git_tmp/.* .");
+    exec("cd .. ");
+    exec("mv -f git_tmp/* .");
+    exec("mv -f git_tmp/.* .");
     exec("rm -rf git_tmp");
     ?>
 
