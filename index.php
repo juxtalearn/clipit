@@ -56,7 +56,7 @@ if (!function_exists('session_status')) {
                         <b>MySQL User</b>
                     </td>
                     <td>
-                        <input size=30 type="text" name="mysql_user">
+                        <input size=30 type="text" name="mysql_user" value="root">
                     </td>
                 </tr>
                 <tr>
