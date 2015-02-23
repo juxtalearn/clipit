@@ -81,18 +81,7 @@ foreach($activities as $activity):
     <ul class="panel-group" id="accordion_<?php echo $activity->id;?>">
     <?php
     foreach($tasks as $task):
-        $current_task = false;
-        if($task->start <= time() && $task->end >= time()){
-           $current_task = true;
-        }
     ?>
-    <?php if($current_task):?>
-        <script>
-        $(function(){
-            $("[data-task='<?php echo $task->id;?>']").click();
-        });
-        </script>
-    <?php endif;?>
         <li class="panel panel-blue list-item">
             <div class="panel-heading task-view" data-task="<?php echo $task->id;?>" style="cursor: pointer" data-toggle="collapse" data-parent="#accordion_<?php echo $activity->id;?>" href="#collapse_<?php echo $task->id;?>">
                 <div class="pull-right margin-top-5">

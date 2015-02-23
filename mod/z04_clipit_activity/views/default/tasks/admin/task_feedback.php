@@ -125,14 +125,6 @@ $(function(){
             <div class="panel-heading expand" style="padding: 0px;background: none;">
                 <div class="pull-right blue">
                     <span class="text-muted margin-right-10 count">-/-</span>
-<!--                    <div class="progressbar-mini progressbar-blue inline-block" style="-->
-<!--    background: rgb(236, 247, 252);-->
-<!--">-->
-<!--                        <div data-value="9" style="width: 9%"></div>-->
-<!--                    </div>-->
-<!--                    --><?php //if($status):?>
-
-<!--                    --><?php //endif;?>
                     <span style="width: 14px;" class="inline-block">
                         <?php echo elgg_view('tasks/icon_entity_status', array('status' => $status));?>
                     </span>

@@ -92,10 +92,18 @@ $groups = ClipitGroup::get_by_id($activity->group_array);
             ?>
             <li class="panel panel-blue list-item">
                 <a name="<?php echo $group->id;?>"></a>
-                <div data-toggle="collapse" data-parent="#accordion_groups" href="#group_<?php echo $group->id;?>" class="panel-heading cursor-pointer expand" data-group="<?php echo $group->id;?>" style="padding: 0;background: none;">
+                <div style="padding: 0;background: none;">
                     <div class="pull-right">
                         <?php if($entities_ids[$group->id]):?>
-                            <a class="btn btn-border-blue margin-right-10 btn-xs btn-primary"><?php echo elgg_echo('view');?></a>
+                            <a
+                                data-toggle="collapse"
+                                data-parent="#accordion_groups"
+                                href="#group_<?php echo $group->id;?>"
+                                data-group="<?php echo $group->id;?>"
+                                class="btn btn-border-blue margin-right-10 btn-xs btn-primary expand"
+                                >
+                                <?php echo elgg_echo('view');?>
+                            </a>
                         <?php endif;?>
                         <span class="blue">
                             <?php echo elgg_view('tasks/icon_entity_status', array('status' => $status));?>

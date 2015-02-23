@@ -11,7 +11,7 @@
  * @package         ClipIt
  */
 ?>
-<li <?php echo elgg_in_context('explore') ? 'class="active"': '';?>>
+<li <?php echo elgg_in_context('authoring') ? 'class="active"': '';?>>
     <?php echo elgg_view('output/url', array(
         'href'  => "#",
         'data-toggle' => 'dropdown',

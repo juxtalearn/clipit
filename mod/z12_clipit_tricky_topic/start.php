@@ -46,6 +46,7 @@ function clipit_tricky_topic_init() {
  */
 function tt_page_handler($page){
     elgg_load_js('clipit:tricky_topic');
+    elgg_set_context('authoring');
     $menu = elgg_view_module('aside', elgg_echo('teacher:authoring_tools'),
         elgg_view('tricky_topics/sidebar/menu').
         elgg_view('quiz/sidebar/menu'),

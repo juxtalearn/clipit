@@ -1,5 +1,5 @@
 <?php
- /**
+/**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
  * Creation date:   23/07/14
@@ -27,7 +27,7 @@ foreach($activities as $activity){
 <div class="col-md-4 events-list">
     <?php echo elgg_view('dashboard/module', array(
         'name'      => 'events',
-        'title'     => '',
+        'title'     => elgg_echo('event:timeline'),
         'content'   => elgg_view('dashboard/modules/events',
             array(
                 'entity' => $user
@@ -39,16 +39,22 @@ foreach($activities as $activity){
 
 <div class="col-md-8">
     <div class="col-md-6">
-        <?php if(!empty($active_activities)):?>
-            <?php echo elgg_view('dashboard/module', array(
-                'name'      => 'activity_status',
-                'title'     => elgg_echo('activity:status'),
-                'content'   => elgg_view('dashboard/modules/activity_status', array(
-                    'entities' => $active_activities
-                )),
+        <?php
+        $content = elgg_view('page/components/not_found', array('height' => '245px', 'text' => elgg_echo('activities:active:none')));
+        if(!empty($active_activities)){
+            $content = elgg_view('dashboard/modules/activity_status_progress', array(
+                'entities' => $active_activities
             ));
-            ?>
-        <?php endif;?>
+        }
+        ?>
+        <?php echo elgg_view('dashboard/module', array(
+            'name'      => 'activity_status',
+            'title'     => elgg_echo('activity:status'),
+            'content'   => $content,
+        ));
+        ?>
+    </div>
+    <div class="col-md-6">
         <?php
         if(!empty($active_activities)){
             echo elgg_view('dashboard/module', array(
@@ -63,24 +69,6 @@ foreach($activities as $activity){
                 'content'   => elgg_view('page/components/not_found', array('height' => '245px', 'text' => elgg_echo('activities:active:none'))),
             ));
         }
-        ?>
-    </div>
-    <div class="col-md-6">
-        <?php
-        $content = elgg_view('page/components/not_found', array('height' => '245px', 'text' => elgg_echo('activities:active:none')));
-        if(!empty($active_activities)){
-            $content = elgg_view('dashboard/modules/activity_admin',
-                array(
-                    'entities' => $active_activities
-                )
-            );
-        }
-        ?>
-        <?php echo elgg_view('dashboard/module', array(
-            'name'      => 'activity_admin',
-            'title'     => elgg_echo('activity:overview'),
-            'content'   => $content,
-        ));
         ?>
     </div>
 </div>

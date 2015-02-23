@@ -7839,28 +7839,25 @@ li.list-item:last-child {
 .module-pending small {
   margin-top: 3px;
 }
-.module-activity_status .elgg-head {
-  background: #32b4e5;
-  color: #FFF;
-}
-.module-activity_status .elgg-head a {
-  color: #FFF;
-}
-.module-activity_status .elgg-head h3 {
-  color: #FFF;
-}
-.module-activity_status .elgg-body {
-  background-color: #bae6f6;
-  background-image: url('../../../graphics/bg-bar.png');
-  background-position-x: -10px;
-}
 .module-activity_status .elgg-body .wrapper {
   position: relative;
 }
+.module-activity_status .elgg-body .wrapper > div {
+  margin-bottom: 5px;
+  border-bottom: 1px solid #bae6f6;
+  padding-bottom: 10px;
+}
+.module-activity_status .elgg-body .wrapper > div:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
 .module-activity_status .elgg-body .bar {
-  height: 50px;
-  line-height: 50px;
-  margin-bottom: 10px;
+  height: 20px;
+  line-height: 20px;
+  background: #32b4e5;
+  min-width: 15%;
+  max-width: 100%;
+  margin-top: 5px;
 }
 .module-activity_status .elgg-body .bar > div {
   padding-left: 10px;
@@ -7869,11 +7866,13 @@ li.list-item:last-child {
   line-height: inherit;
   width: 100%;
   margin: 0;
-  font-size: 18px;
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.module-activity_status .elgg-body .bar > div span {
+  color: #fff;
 }
 .module-activity_status .elgg-body .bar > div h4 a {
   color: #FFF;
@@ -7953,10 +7952,14 @@ li.list-item:last-child {
   position: relative;
   background: transparent;
 }
-.module-events .elgg-head {
+.module-events .elgg-head h3 {
+  padding-left: 25px;
+}
+.module-events .elgg-head .collapse {
   display: none;
 }
 .module-events .margin-bar {
+  top: 35px;
   height: 100%;
   position: absolute;
   background: #CACCCE;

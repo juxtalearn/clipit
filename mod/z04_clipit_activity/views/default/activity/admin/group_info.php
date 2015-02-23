@@ -80,8 +80,10 @@ $tasks = ClipitActivity::get_tasks($group->activity);
             'users' => $users,
             'href' => "clipit_activity/{$group->activity}/tasks"
         ));?>
-        <h4 class="margin-top-20"><?php echo elgg_echo('group:graph');?></h4>
-        <hr class="margin-0 margin-bottom-10">
-        <?php echo elgg_view('group/graph');?>
+        <div style="display: none;">
+            <h4 class="margin-top-20"><?php echo elgg_echo('group:graph');?></h4>
+            <hr class="margin-0 margin-bottom-10">
+            <?php echo elgg_view('group/graph');?>
+        </div>
     </div>
 </div>

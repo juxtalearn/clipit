@@ -31,6 +31,7 @@ function clipit_quiz_init() {
  * @param $page
  */
 function quiz_page_handler($page){
+    elgg_set_context('authoring');
     $filter = '';
     $sidebar = elgg_view_module('aside', elgg_echo('teacher:authoring_tools'),
         elgg_view('tricky_topics/sidebar/menu').

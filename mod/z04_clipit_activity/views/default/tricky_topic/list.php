@@ -60,7 +60,7 @@ $examples = ClipitExample::get_from_tricky_topic($tricky_topic->id);
 <div class="col-md-12" style="padding:5px;">
     <h4>
         <?php echo elgg_view('output/url', array(
-            'href'  => "explore/search?by=tricky_topic&id={$tricky_topic->id}",
+            'href'  => "tricky_topics/view/{$tricky_topic->id}",
             'target' => '_blank',
             'title' => $tricky_topic->name,
             'text'  => $tricky_topic->name,
@@ -68,7 +68,6 @@ $examples = ClipitExample::get_from_tricky_topic($tricky_topic->id);
         ?>
     </h4>
     <hr class="margin-0">
-    <small class="show margin-top-5"><?php echo elgg_echo("add:more");?></small>
     <div style="max-height: 150px;overflow-y: auto;">
         <?php
         foreach($tricky_topic->tag_array as $tag_id):
@@ -76,7 +75,7 @@ $examples = ClipitExample::get_from_tricky_topic($tricky_topic->id);
             ?>
             <div class="col-md-6 text-truncate" style="padding:5px;">
                 <?php echo elgg_view('output/url', array(
-                    'href'  => "tricky_topics/view/{$tag->id}",
+                    'href'  => "explore/search?by=tag&id={$tag->id}",
                     'target' => '_blank',
                     'title' => $tag->name,
                     'text'  => $tag->name,

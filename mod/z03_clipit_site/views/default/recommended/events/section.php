@@ -17,7 +17,9 @@ $author = elgg_extract('author', $vars);
     <?php echo elgg_view('output/url', array(
         'href'  => "clipit_activity/".$activity->id,
         'title' => $activity->name,
-        'text'  => '<div class="circle-activity" style="background: #'.$activity->color.'"></div>',
+        'style' => 'background: #'.$activity->color,
+        'class' => 'circle-activity',
+        'text' => '',
     ));
     ?>
     <div class="event-section">

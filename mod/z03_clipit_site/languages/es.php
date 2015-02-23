@@ -5,6 +5,7 @@
  */
 
 $spanish = array(
+    'event:timeline' => 'Timeline',
     'name' => 'Nombre',
     'activities:active:none' => 'Actualmente no hay actividades en curso',
     'saved' => 'Guardado',
