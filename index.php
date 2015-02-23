@@ -110,18 +110,17 @@ if (!function_exists('session_status')) {
     exec("cd .. ");
     exec("mv -f git_tmp/* .");
     exec("mv -f git_tmp/.* .");
-    exec("rm -rf git_tmp");
+    //exec("rm -rf git_tmp");
     ?>
 
     <p>configuring data folder and permissions...</p>
     <?php
-    // Already part of ClipIt
-    echo exec("chmod -R 777 .");
+    exec("chmod -R 777 .");
     ?>
 
     <p>creating database...</p>
     <?php
-    echo exec("mysql -h$mysql_host -u$mysql_user -p$mysql_pass -e'create database $mysql_schema;'");
+    exec("mysql -h$mysql_host -u$mysql_user -p$mysql_pass -e'create database $mysql_schema;'");
     ?>
 
     <p>creating settings.php file...</p>
