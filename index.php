@@ -32,7 +32,8 @@ if (!function_exists('session_status')) {
         $_SESSION["status"] = "wait";
         ?>
         <h1>ClipIt Install Script</h1>
-        <h3>fill in the form below<br/>(typical values filled-in)</h3>
+        <h2>fill in the form below</h2>
+        <h3>typical values filled-in</h3>
         <form action="index.php" method="post" id="clipit_params">
             <table>
                 <tr>
