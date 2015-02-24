@@ -66,24 +66,7 @@ class ClipitUser extends UBUser {
     }
 
     static function logout() {
-        //static::delete_cookies();
         return parent::logout();
-    }
-
-    static function create_cookies($login, $password) {
-        $user = static::get_by_login(array($login));
-        $user = $user[$login];
-        $token = UBSite::get_token($login, $password, static::COOKIE_TOKEN_DURATION);
-        $jxl_cookie_auth = new JuxtaLearn_Cookie_Authentication(get_config("jxl_secret"), ClipitSite::get_domain());
-        $jxl_cookie_auth->set_required_cookie($user->login, $user->role, $user->id);
-        $jxl_cookie_auth->set_name_cookie($user->name);
-        $jxl_cookie_auth->set_token_cookie($token);
-        $jxl_cookie_auth->set_mail_cookie($user->email);
-    }
-
-    static function delete_cookies() {
-        $jxl_cookie_auth = new JuxtaLearn_Cookie_Authentication(get_config("jxl_secret"), ClipitSite::get_domain());
-        $jxl_cookie_auth->delete_cookies();
     }
 
     /**
