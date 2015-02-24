@@ -25,6 +25,22 @@ function expose_quiz_functions() {
         ), "Get Task in which Quiz is inside of", 'GET', false, true
     );
     expose_function(
+        $api_suffix . "get_tricky_topic", $class_suffix . "get_tricky_topic", array(
+            "id" => array("type" => "int", "required" => true)
+        ), "Get the Tricky Topic a Quiz is related to", "GET", false, true
+    );
+    expose_function(
+        $api_suffix . "set_tricky_topic", $class_suffix . "set_tricky_topic", array(
+            "id" => array("type" => "int", "required" => true),
+            "tricky_topic_id" => array("type" => "int", "required" => true)
+        ), "Set Tricky Topic for a Quiz", "POST", false, true
+    );
+    expose_function(
+        $api_suffix . "get_from_tricky_topic", $class_suffix . "get_from_tricky_topic", array(
+            "tricky_topic_id" => array("type" => "int", "required" => true)
+        ), "Get Quizzes related to a Tricky Topic", "GET", false, true
+    );
+    expose_function(
         $api_suffix . "add_quiz_questions", $class_suffix . "add_quiz_questions", array(
             "id" => array("type" => "int", "required" => true),
             "quiz_question_array" => array("type" => "array", "required" => true)
@@ -73,5 +89,39 @@ function expose_quiz_functions() {
             "id" => array("type" => "int", "required" => true),
             "user_id" => array("type" => "int", "required" => true)),
         "Returns the number of questions of a quiz answered by a user", 'GET', false, true
+    );
+    expose_function(
+        $api_suffix . "get_user_results_by_question", $class_suffix . "get_user_results_by_question",
+        array(
+            "id" => array("type" => "int", "required" => true),
+            "user_id" => array("type" => "int", "required" => true)),
+        "Returns an array with normalized results by question for a user", 'GET', false, true
+    );
+    expose_function(
+        $api_suffix . "get_group_results_by_question", $class_suffix . "get_group_results_by_question",
+        array(
+            "id" => array("type" => "int", "required" => true),
+            "group_id" => array("type" => "int", "required" => true)),
+        "Returns an array with normalized results by question for a group", 'GET', false, true
+    );
+    expose_function(
+        $api_suffix . "get_user_results_by_tag", $class_suffix . "get_user_results_by_tag",
+        array(
+            "id" => array("type" => "int", "required" => true),
+            "user_id" => array("type" => "int", "required" => true)),
+        "Returns an array with normalized results by tag for a user", 'GET', false, true
+    );
+    expose_function(
+        $api_suffix . "get_group_results_by_tag", $class_suffix . "get_group_results_by_tag",
+        array(
+            "id" => array("type" => "int", "required" => true),
+            "group_id" => array("type" => "int", "required" => true)),
+        "Returns an array with normalized results by tag for a group", 'GET', false, true
+    );
+    expose_function(
+        $api_suffix . "get_group_results_by_tag", $class_suffix . "get_group_results_by_tag",
+        array(
+            "id" => array("type" => "int", "required" => true)),
+        "Returns an array with normalized results by tag for the whole quiz", 'GET', false, true
     );
 }

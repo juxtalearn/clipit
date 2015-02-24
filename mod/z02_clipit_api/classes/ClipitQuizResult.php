@@ -120,7 +120,6 @@ class ClipitQuizResult extends UBItem {
                 }
                 return static::set_properties($result_id, array("correct" => $correct));
             case ClipitQuizQuestion::TYPE_NUMBER:
-
                 if((float)$answer == (float)$validation_array[0]){
                     $correct = true;
                 } else{

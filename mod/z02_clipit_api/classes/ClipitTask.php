@@ -419,6 +419,12 @@ class ClipitTask extends UBItem {
                     }
                 }
                 return true;
+            case static::TYPE_OTHER:
+                if(static::get_status($id) !== static::STATUS_FINISHED){
+                    return false;
+                } else{
+                    return true;
+                }
             default:
                 return false;
         }
