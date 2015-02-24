@@ -106,13 +106,13 @@ class ClipitQuizResult extends UBItem {
         $quiz_question = $result_properties["quiz_question"];
 
         $question_properties = ClipitQuizQuestion::get_properties($quiz_question, array("option_type", "validation_array"));
-        $option_type = $question_properties["option_type"];
+        $option_type = (string)$question_properties["option_type"];
         $validation_array = $question_properties["validation_array"];
 
         switch($option_type){
-            case ClipitQuizQuestion::TYPE_SELECT_ONE
-                || ClipitQuizQuestion::TYPE_SELECT_MULTI
-                || ClipitQuizQuestion::TYPE_TRUE_FALSE:
+            case ClipitQuizQuestion::TYPE_SELECT_ONE:
+            case ClipitQuizQuestion::TYPE_SELECT_MULTI:
+            case ClipitQuizQuestion::TYPE_TRUE_FALSE:
                 if($answer == $validation_array){
                     $correct = true;
                 } else{
