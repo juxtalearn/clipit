@@ -223,7 +223,7 @@ $english = array(
     'publications:question:if_covered' => 'Check if each Stumbling Block was correcty covered in this publication, and explain why:',
     'publications:view_scope' => 'View scope',
     'publications:review:info' => 'Review your work and click on Select',
-    'publications:select:tooltip' => 'Click to review your work and selecting for the task',
+    'publications:select:tooltip' => 'Click to review your work and select it for the task',
     'ratings:none' => 'No feedback',
     'input:no' => 'No',
     'input:yes' => 'Yes',
@@ -263,7 +263,7 @@ $english = array(
     'task:task_type' => 'Task type',
     'task:resource_download' => 'View Teacher Resources',
     'task:feedback' => 'Task feedback',
-    'task:feedback:linked' => 'Linked feedback task',
+    'task:feedback:linked' => 'Link to',
     'task:feedback:check' => 'Check to create a feedback task',
     'tasks:none' => 'No tasks',
     'task:completed' => 'Completed',
@@ -330,7 +330,7 @@ $english = array(
 
     // Quiz
     'quiz:teacher_annotation' => 'Teacher\'s feedback',
-    'quiz:result:send' => 'Answers of the Quiz will be saved. While you\'re in the time to do the exam you can change your answers.',
+    'quiz:result:send' => 'Your answers have been saved. While there is time left to do the quiz, you can review and change your answers if you want to.',
     'quiz:data:none' => 'No data',
     'quiz:tricky_topic:danger' => 'If you change Tricky Topic questions will be deleted',
     'quiz:not_finished' => 'Not finished',
@@ -352,7 +352,10 @@ $english = array(
     'quiz:question:statement' => 'Question',
     'quiz:question:additional_info' => 'Additional information',
     'quiz:questions:answered' => 'Questions answered',
+    'quiz:questions:answers:correct' => 'correct answers',
     'quiz:answer:solution' => 'Solution',
+    'quiz:results:stumbling_block' => 'Results by Stumbling Block',
+    'quiz:out_of' => 'out of',
 );
 
 add_translation('en', $english);

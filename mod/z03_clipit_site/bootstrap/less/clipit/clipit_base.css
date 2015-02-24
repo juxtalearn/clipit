@@ -8228,6 +8228,11 @@ ul.top-account > li.separator {
   font-size: 20px;
   padding: 10px 5px 0;
 }
+@media (max-width: 991px) {
+  ul.top-account > li.separator {
+    display: none;
+  }
+}
 ul.top-account > li .fa {
   float: left !important;
   font-size: 20px;
@@ -10475,13 +10480,13 @@ h4.empty {
 }
 @font-face {
   font-family: 'Futura';
-  src: url('../../fonts/futuralt.eot');
-  src: url('../../fonts/futuralt.eot') format('embedded-opentype'), url('../../fonts/futuralt.woff') format('woff'), url('../../fonts/futuralt.ttf') format('truetype'), url('../../fonts/futuralt.svg#FuturaLTRegular') format('svg');
+  src: url('../mod/z03_clipit_site/bootstrap/fonts/futuralt.eot');
+  src: url('../mod/z03_clipit_site/bootstrap/fonts/futuralt.eot') format('embedded-opentype'), url('../mod/z03_clipit_site/bootstrap/fonts/futuralt.woff') format('woff'), url('../mod/z03_clipit_site/bootstrap/fonts/futuralt.ttf') format('truetype'), url('../mod/z03_clipit_site/bootstrap/fonts/futuralt.svg#FuturaLTRegular') format('svg');
 }
 @font-face {
   font-family: 'FuturaBoldRegular';
-  src: url('../../fonts/futuralt-bold.eot');
-  src: url('../../fonts/futuralt-bold.eot') format('embedded-opentype'), url('../../fonts/futuralt-bold.woff') format('woff'), url('../../fonts/futuralt-bold.ttf') format('truetype'), url('../../fonts/futuralt-bold.svg#FuturaLTBold') format('svg');
+  src: url('../mod/z03_clipit_site/bootstrap/fonts/futuralt-bold.eot');
+  src: url('../mod/z03_clipit_site/bootstrap/fonts/futuralt-bold.eot') format('embedded-opentype'), url('../mod/z03_clipit_site/bootstrap/fonts/futuralt-bold.woff') format('woff'), url('../mod/z03_clipit_site/bootstrap/fonts/futuralt-bold.ttf') format('truetype'), url('../mod/z03_clipit_site/bootstrap/fonts/futuralt-bold.svg#FuturaLTBold') format('svg');
 }
 .progress {
   margin-bottom: 0;

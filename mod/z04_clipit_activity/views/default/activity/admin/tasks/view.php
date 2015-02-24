@@ -11,7 +11,7 @@
  * @package         ClipIt
  */
 $activity = elgg_extract('entity', $vars);
-$tasks = ClipitTask::get_by_id($activity->task_array);
+$tasks = ClipitTask::get_by_id($activity->task_array, 0, 0, 'start');
 elgg_load_js("fullcalendar:moment");
 elgg_load_js("fullcalendar");
 elgg_load_css("fullcalendar");
@@ -55,15 +55,7 @@ $id = uniqid();
     foreach($tasks as $task):
         // Task edit (modal remote)
         echo '<li>'.elgg_view("page/components/modal_remote", array('id'=> "edit-task-{$task->id}" )).'</li>';
-        if(!$task->parent_task):
     ?>
-            <?php echo elgg_view('activity/admin/tasks/list', array('task' => $task));?>
-            <?php
-            if($task_id = ClipitTask::get_child($task->id)):
-                $task = array_pop(ClipitTask::get_by_id(array($task_id)));
-            ?>
-                <?php echo elgg_view('activity/admin/tasks/list', array('task' => $task, 'feedback_task' => true));?>
-            <?php endif; ?>
-        <?php endif; ?>
+        <?php echo elgg_view('activity/admin/tasks/list', array('task' => $task));?>
     <?php endforeach;?>
 </ul>

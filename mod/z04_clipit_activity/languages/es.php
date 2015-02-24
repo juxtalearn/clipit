@@ -365,7 +365,10 @@ $spanish = array(
     'quiz:question:statement' => 'Enunciado de la pregunta',
     'quiz:question:additional_info' => 'Información adicional',
     'quiz:questions:answered' => 'Preguntas contestadas',
+    'quiz:questions:answers:correct' => 'preguntas correctas',
     'quiz:answer:solution' => 'Solución',
+    'quiz:results:stumbling_block' => 'Resultados por Conceptos',
+    'quiz:out_of' => 'de',
 );
 
 add_translation('es', $spanish);

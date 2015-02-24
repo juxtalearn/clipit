@@ -356,10 +356,15 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
     }
     switch($task->task_type){
         case ClipitTask::TYPE_OTHER:
-            $status = array(
-                'status' => false
-            );
-            return $status;
+            if(ClipitTask::get_completed_status($task->id, $user_id)){
+                $status = array(
+                    'icon' => '<i class="fa fa-check green"></i>',
+                    'text' => elgg_echo('task:completed'),
+                    'color' => 'green',
+                    'status' => ClipitTask::get_completed_status($task->id, $group_id),
+                );
+            }
+//            return $status;
             break;
         case ClipitTask::TYPE_VIDEO_UPLOAD:
             foreach($task->video_array as $video_id){

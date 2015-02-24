@@ -184,6 +184,11 @@ ul.top-account{
       font-size: ceil(@font-size-base * 1.42); // ~20px
       padding: 10px 5px 0;
     }
+    @media (max-width: @screen-sm-max) {
+      &.separator{
+        display: none;
+      }
+    }
     .fa {
       .pull-left();
       font-size: 20px;
