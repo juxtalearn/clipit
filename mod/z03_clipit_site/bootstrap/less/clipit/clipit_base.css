@@ -7851,6 +7851,9 @@ li.list-item:last-child {
   border-bottom: 0;
   padding-bottom: 0;
 }
+.module-activity_status .elgg-body .bg-bar {
+  background-color: #f5f5f5;
+}
 .module-activity_status .elgg-body .bar {
   height: 20px;
   line-height: 20px;
@@ -7858,6 +7861,7 @@ li.list-item:last-child {
   min-width: 15%;
   max-width: 100%;
   margin-top: 5px;
+  border-radius: 4px;
 }
 .module-activity_status .elgg-body .bar > div {
   padding-left: 10px;

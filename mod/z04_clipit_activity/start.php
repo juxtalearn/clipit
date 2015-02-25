@@ -170,9 +170,10 @@ function clipit_activity_init() {
     elgg_register_js('jquery:tag_it', "{$vendors_dir}/jquery.tag-it.min.js");
     elgg_load_js("jquery:tag_it");
     // Activity javascript libraries
-    $activity_js = elgg_get_simplecache_url('js', 'activity');
-    elgg_register_simplecache_view('js/activity');
-    elgg_register_js('clipit:activity', $activity_js);
+//    $activity_js = elgg_get_simplecache_url('js', 'activity');
+//    elgg_register_simplecache_view('js/activity');
+//    elgg_register_js('clipit:activity', $activity_js);
+    elgg_register_js('clipit:activity', elgg_get_site_url()."js/activity.js");
     elgg_load_js('clipit:activity');
     // Attach files
     $files_attach_js = elgg_get_simplecache_url('js', 'attach');

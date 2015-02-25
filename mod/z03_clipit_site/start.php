@@ -105,9 +105,9 @@ function clipit_final_init(){
         // FontAwesome
         elgg_register_css("fontawesome", "{$plugin_url}/vendors/fontawesome/fontawesome.min.css");
 
-        $clipit_js = elgg_get_simplecache_url('js', 'clipit');
-        elgg_register_simplecache_view('js/clipit');
-        elgg_register_js('clipit', $clipit_js);
+//        $clipit_js = elgg_get_simplecache_url('js', 'clipit');
+//        elgg_register_simplecache_view('js/clipit');
+        elgg_register_js('clipit', elgg_get_site_url()."js/clipit.js");
 
         elgg_load_js("jquery-ui");
         elgg_load_js("jquery:waypoints");

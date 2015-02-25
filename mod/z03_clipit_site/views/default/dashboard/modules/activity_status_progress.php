@@ -79,9 +79,11 @@ foreach($activities as $activity):
         ));
         ?>
         </strong>
-        <div class="bar" style="width: <?php echo $activity_progress;?>%;">
-            <div>
-                <span><?php echo $activity_progress;?>%</span>
+        <div class="bg-bar">
+            <div class="bar" style="width: <?php echo $activity_progress;?>%;">
+                <div>
+                    <span><?php echo $activity_progress;?>%</span>
+                </div>
             </div>
         </div>
         <ul class="panel-group margin-top-10 collapse" id="accordion_<?php echo $activity->id;?>">

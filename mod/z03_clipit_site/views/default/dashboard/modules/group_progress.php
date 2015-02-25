@@ -55,9 +55,11 @@ $user_id = elgg_get_logged_in_user_guid();
                     ));
                     ?>
                 </strong>
-                <div class="bar" style="width: <?php echo $progress;?>%;">
-                    <div>
-                        <span><?php echo $progress;?>%</span>
+                <div class="bg-bar">
+                    <div class="bar" style="width: <?php echo $progress;?>%;">
+                        <div>
+                            <span><?php echo $progress;?>%</span>
+                        </div>
                     </div>
                 </div>
             </div>

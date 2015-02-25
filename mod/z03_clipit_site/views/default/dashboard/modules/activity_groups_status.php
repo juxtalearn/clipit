@@ -17,7 +17,7 @@ $activities = ClipitActivity::get_by_id($entities);
 <script>
 <?php
 foreach($activities as $activity):
-    if($activity->status != 'closed'):
+    if($activity->status != ClipitActivity::STATUS_CLOSED):
 ?>
     nv.addGraph(function() {
         var chart = nv.models.discreteBarChart()
