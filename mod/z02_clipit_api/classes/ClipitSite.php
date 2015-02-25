@@ -301,6 +301,11 @@ class ClipitSite extends UBSite {
         $pub_resource_array += ClipitFile::get_by_id(static::get_pub_files());
         $pub_resource_array += ClipitResource::get_by_id(static::get_pub_resources());
         foreach($pub_resource_array as $resource_object) {
+            $tag_name_array = array();
+            $tag_array = ClipitTag::get_by_id($resource_object->tag_array);
+            foreach($tag_array as $tag){
+                $tag_name_array[] = $tag->name;
+            }
             $data = array("method" => "clipit.remote_resource.create");
             $data += array("prop_value_array[remote_site]" => elgg_get_site_url());
             $data += array("prop_value_array[remote_id]" => $resource_object->id);
@@ -308,6 +313,7 @@ class ClipitSite extends UBSite {
             $data += array("prop_value_array[name]" => $resource_object->name);
             $data += array("prop_value_array[description]" => $resource_object->description);
             $data += array("prop_value_array[url]" => $resource_object->url);
+            $data += array("prop_value_array[tag_array]" => $tag_name_array);
             static::global_site_call($data, "POST");
         }
         return true;

@@ -430,7 +430,7 @@ class UBItem {
      * @param int $offset (optional) offset of items to get
      * @param string $order_by (optional) order by a certain property
      * @param bool $ascending (optional) order by ascending (default) or descending
-     * @return array(UBItem) array of UBItems filtered by the parameters given
+     * @return static[] array of UBItems filtered by the parameters given
      */
     static function get_by_id($id_array, $limit = 0, $offset = 0, $order_by = "", $ascending = true) {
         $item_array = array();
