@@ -70,9 +70,10 @@ elgg_load_js("jquery:quicksearch");
                     'title' => elgg_echo('change_to') .": ". $status['change_to'],
                     'text' => $status['btn_change_to'],
                     'data-toggle' => "popover",
+                    'tabindex' => "0",
                     'style' => "display:block;",
                     'rel' => "popover",
-                    'data-placement' => "bottom",
+                    'data-placement' => "left",
                     'data-content' => $status['text_tooltip']
                 ));
                 ?>
