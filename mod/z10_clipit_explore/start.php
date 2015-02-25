@@ -129,7 +129,7 @@ function explore_page_handler($page) {
             $title = elgg_echo('videos');
             $public_content = true;
             $searching = false;
-            $video_ids = ClipitSite::get_pub_videos();
+            $video_ids = ClipitSite::get_videos();
             $videos = ClipitVideo::get_by_id($video_ids);
             $href = "explore";
             $storyboard_ids = ClipitSite::get_storyboards();

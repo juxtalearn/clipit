@@ -85,6 +85,7 @@ if(count($entity)==0 || trim($title) == "" || trim($description) == ""){
                 if($scope_entity == 'ClipitTask') {
                     $scope_entity::add_videos($task_id, array($new_entity_id));
                 } else {
+                    $scope_entity::add_videos(array($new_entity_id));
                     $scope_entity::add_pub_videos(array($new_entity_id));
                 }
                 break;
