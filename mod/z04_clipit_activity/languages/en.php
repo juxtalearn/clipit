@@ -75,6 +75,8 @@ $english = array(
     'status:enroll' => 'Enrolling',
     'status:active' => 'Active',
     'status:closed' => 'Finished',
+    'status:change_to:active:tooltip' => 'The start date will be set as today. Set the desired end date manually. Click Save to accept changes.',
+    'status:change_to:closed:tooltip' => 'The end date will be set as today. Click Save to accept changes.',
 
     'group' => 'Group',
     'my_group:progress' => 'My group progress',

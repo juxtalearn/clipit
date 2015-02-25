@@ -75,6 +75,8 @@ $spanish = array(
     'status:enroll' => 'Incripción',
     'status:active' => 'En curso',
     'status:closed' => 'Cerrada',
+    'status:change_to:active:tooltip' => 'La fecha de inicio se establecerá como hoy. Ajuste la fecha de finalización manualmente. Haga click en Guardar para aceptar los cambios.',
+    'status:change_to:closed:tooltip' => 'La fecha de finalización se establecerá como hoy. Haga clic en Guardar para aceptar los cambios.',
 
     'group' => 'Grupo',
     'my_group:progress' => 'Progreso de mis grupos',

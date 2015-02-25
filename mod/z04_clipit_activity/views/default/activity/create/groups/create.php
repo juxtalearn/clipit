@@ -105,7 +105,7 @@ $(function(){
             <?php echo elgg_echo('create');?>
         </button>
         <button id="update" type="button" style="display: none;" class="btn btn-primary pull-right margin-top-20">
-            <?php echo elgg_echo('update');?>
+            <?php echo elgg_echo('save');?>
         </button>
         <button id="cancel" type="button" style="display: none;" class="margin-right-10 btn btn-primary btn-border-blue pull-right margin-top-20">
             <?php echo elgg_echo('cancel');?>

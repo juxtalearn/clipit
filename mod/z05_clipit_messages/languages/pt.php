@@ -13,7 +13,7 @@
 $portuguese = array(
     'message' => 'Mensagem',
     'messages' => 'Mensagens',
-    'messages:compose' => 'Compose a message',
+    'messages:compose' => 'Compor mensagem',
     'messages:subject' => 'Assunto',
     'message:send' => 'Enviar uma mensagem',
 

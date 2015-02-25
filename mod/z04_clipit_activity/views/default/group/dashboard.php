@@ -25,14 +25,18 @@ $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
             ));
             ?>
         </div>
-        <?php if($group->tag_array):?>
-        <div class="tags-list margin-top-10">
-            <small><?php echo elgg_echo('tags');?></small>
-            <?php echo elgg_view("tricky_topic/tags/view", array('tags' => $group->tag_array, 'limit' => 4, 'width' => '22%')); ?>
+        <div class="row margin-top-10">
+            <div class="col-md-6">
+                <small class="show" style="margin: 5px 0"><?php echo elgg_echo('activity:pending_tasks');?></small>
+                <?php echo elgg_view("page/components/pending_tasks", array('entity' => $activity)); ?>
+            </div>
+            <?php if($group->tag_array):?>
+            <div class="tags-list col-md-6">
+                <small><?php echo elgg_echo('tags');?></small>
+                <?php echo elgg_view("tricky_topic/tags/view", array('tags' => $group->tag_array, 'limit' => 4, 'width' => '22%')); ?>
+            </div>
+            <?php endif;?>
         </div>
-        <?php endif;?>
-        <small class="show" style="margin: 5px 0"><?php echo elgg_echo('activity:pending_tasks');?></small>
-        <?php echo elgg_view("page/components/pending_tasks", array('entity' => $activity)); ?>
     </div>
 </div>
 <div class="row">

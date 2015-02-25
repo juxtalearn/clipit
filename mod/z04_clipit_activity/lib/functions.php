@@ -578,6 +578,7 @@ function get_activity_status($status){
                 'icon' => 'play',
                 'color' => 'green',
                 'text' => elgg_echo('status:active'),
+                'text_tooltip' => elgg_echo('status:change_to:closed:tooltip'),
                 'change_to' => elgg_echo('status:closed'),
                 'btn_change_to' => '<span class="change-status btn btn-border-red btn-xs" data-status="closed"><strong><i class="fa fa-stop red"></i> '.elgg_echo('status:closed').'</strong></span>'
             );
@@ -587,6 +588,7 @@ function get_activity_status($status){
                 'icon' => 'stop',
                 'color' => 'red',
                 'text' => elgg_echo('status:closed'),
+                'text_tooltip' => elgg_echo('status:change_to:active:tooltip'),
                 'change_to' => elgg_echo('status:active'),
                 'btn_change_to' => '<span class="change-status btn btn-border-green btn-xs" data-status="active"><strong><i class="fa fa-play green"></i> '.elgg_echo('status:active').'</strong></span>'
             );

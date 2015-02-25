@@ -27,7 +27,7 @@ if($video && $video->owner_id == $user_id || $user->role == ClipitUser::ROLE_TEA
             "cancel_button" => true,
             "ok_button" => elgg_view('input/submit',
                 array(
-                    'value' => elgg_echo('update'),
+                    'value' => elgg_echo('save'),
                     'class' => "btn btn-primary"
                 ))
         ));

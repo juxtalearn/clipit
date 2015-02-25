@@ -23,7 +23,7 @@ if($group = array_pop(ClipitGroup::get_by_id(array($id)))) {
             "cancel_button" => true,
             "ok_button" => elgg_view('input/submit',
                 array(
-                    'value' => elgg_echo('update'),
+                    'value' => elgg_echo('save'),
                     'class' => "btn btn-primary"
                 ))
         ));
