@@ -10478,16 +10478,6 @@ h4.empty {
   color: #32b4e5;
   margin-left: 10px;
 }
-@font-face {
-  font-family: 'Futura';
-  src: url('../mod/z03_clipit_site/bootstrap/fonts/futuralt.eot');
-  src: url('../mod/z03_clipit_site/bootstrap/fonts/futuralt.eot') format('embedded-opentype'), url('../mod/z03_clipit_site/bootstrap/fonts/futuralt.woff') format('woff'), url('../mod/z03_clipit_site/bootstrap/fonts/futuralt.ttf') format('truetype'), url('../mod/z03_clipit_site/bootstrap/fonts/futuralt.svg#FuturaLTRegular') format('svg');
-}
-@font-face {
-  font-family: 'FuturaBoldRegular';
-  src: url('../mod/z03_clipit_site/bootstrap/fonts/futuralt-bold.eot');
-  src: url('../mod/z03_clipit_site/bootstrap/fonts/futuralt-bold.eot') format('embedded-opentype'), url('../mod/z03_clipit_site/bootstrap/fonts/futuralt-bold.woff') format('woff'), url('../mod/z03_clipit_site/bootstrap/fonts/futuralt-bold.ttf') format('truetype'), url('../mod/z03_clipit_site/bootstrap/fonts/futuralt-bold.svg#FuturaLTBold') format('svg');
-}
 .progress {
   margin-bottom: 0;
 }

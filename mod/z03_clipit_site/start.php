@@ -99,10 +99,9 @@ function clipit_final_init(){
         elgg_register_js("nvd3", "{$plugin_url}/vendors/nvd3/nv.d3.js");
         elgg_register_css("nvd3:css", "{$plugin_url}/vendors/nvd3/nv.d3.css");
         // ClipIt
-//        $clipit_css = elgg_get_simplecache_url('css', 'clipit');
-//        elgg_register_simplecache_view('css/clipit');
-//        elgg_register_css("clipit", $clipit_css);
-        elgg_register_css("clipit", "{$plugin_url}/bootstrap/less/clipit/clipit_base.min.css");
+        $clipit_css = elgg_get_simplecache_url('css', 'clipit');
+        elgg_register_simplecache_view('css/clipit');
+        elgg_register_css("clipit", $clipit_css);
         // FontAwesome
         elgg_register_css("fontawesome", "{$plugin_url}/vendors/fontawesome/fontawesome.min.css");
 
