@@ -54,10 +54,10 @@ class ClipitRemoteResource extends UBItem {
         $remote_site = ClipitRemoteSite::get_from_url($prop_value_array["remote_site"]);
         $prop_value_array["remote_site"] = (int)$remote_site->id;
         // convert tag_array from array of names to array of local IDs
-        $tag_name_array = $prop_value_array["tag_array"];
+        $tag_name_array = json_decode(base64_decode($prop_value_array["tag_array"]));
         $tag_array = array();
         foreach($tag_name_array as $tag_name){
-            $tag_array[] = ClipitTag::create(array("name" => $tag_name));
+            $tag_array[] = (int)ClipitTag::create(array("name" => $tag_name));
         }
         $prop_value_array["tag_array"] = (array)$tag_array;
         $id = parent::create($prop_value_array);

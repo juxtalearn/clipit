@@ -313,7 +313,7 @@ class ClipitSite extends UBSite {
             $data += array("prop_value_array[name]" => $resource_object->name);
             $data += array("prop_value_array[description]" => $resource_object->description);
             $data += array("prop_value_array[url]" => $resource_object->url);
-            $data += array("prop_value_array[tag_array]" => $tag_name_array);
+            $data += array("prop_value_array[tag_array]" => base64_encode(json_encode($tag_name_array)));
             static::global_site_call($data, "POST");
         }
         return true;

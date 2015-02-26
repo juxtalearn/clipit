@@ -251,8 +251,37 @@ class UBItem {
         return $clone_id;
     }
 
+    /**
+     * Links two entities as parent and clone
+     *
+     * @param int $id_parent ID of parent entity
+     * @param int $id_clone IF of clone entity
+     * @return bool true if OK
+     */
     static function link_parent_clone($id_parent, $id_clone){
-        UBCollection::add_items($id_parent, array($id_clone), static::REL_PARENT_CLONE, true);
+        return UBCollection::add_items($id_parent, array($id_clone), static::REL_PARENT_CLONE, true);
+    }
+
+    /**
+     * Unlinks an entity from its parent
+     *
+     * @param int $id ID of entity
+     * @return bool returns true if OK
+     */
+    static function unlink_from_parent($id){
+        $parent = static::get_cloned_from($id);
+        return UBCollection::remove_items($parent, array($id), static::REL_PARENT_CLONE);
+    }
+
+    /**
+     * Unlinks an entity from its clones
+     *
+     * @param int $id ID of entity
+     * @return bool returns true if OK]
+     */
+    static function unlink_from_clones($id){
+        $clones = static::get_clones($id);
+        return UBCollection::remove_items($id, $clones, static::REL_PARENT_CLONE);
     }
 
     /**
@@ -283,7 +312,7 @@ class UBItem {
      * @param int $id Item from which to return parent
      * @param bool $recursive Whether to look for parent recursively
      *
-     * @return int[] Array of Item IDs
+     * @return int Array of Item IDs
      */
     static function get_cloned_from($id, $recursive = false) {
         $parent = UBCollection::get_items($id, static::REL_PARENT_CLONE, true);
@@ -297,7 +326,7 @@ class UBItem {
                 $new_parent = UBCollection::get_items(array_pop($parent), static::REL_PARENT_CLONE, true);
             }
         }
-        return $parent = array_pop($parent);
+        return $parent = (int)array_pop($parent);
     }
 
     /**
