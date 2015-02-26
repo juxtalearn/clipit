@@ -254,7 +254,6 @@ class ClipitQuiz extends UBItem {
         if(!static::has_finished_quiz($id, $user_id)){
             return $result_array;
         }
-        $tag_count_array = array();
         $quiz_question_array = static::get_quiz_questions($id);
         if(empty($quiz_question_array)){
             return $result_array;

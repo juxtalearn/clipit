@@ -26,7 +26,6 @@ function clipit_api_init() {
     loadFiles("$lib_path/example_types/");
     elgg_register_action("useradd", elgg_get_plugins_path(). "z02_clipit_api/actions/useradd.php", 'admin');
     elgg_register_admin_menu_item('configure', 'youtube_auth', 'settings');
-    #elgg_register_admin_menu_item('configure', 'vimeo_auth', 'settings');
     elgg_register_admin_menu_item('configure', 'update_clipit', 'settings');
     if(get_config("clipit_global_published") !== true) {
         set_config("clipit_global_published", true);

@@ -161,7 +161,7 @@ class ClipitQuizResult extends UBItem {
      *
      * @param int $quiz_question_id
      * @param int $user_id
-     * @return int The Quiz Result ID, or 0 if none found.
+     * @return static The Quiz Result, or 0 if none found.
      */
     static function get_from_question_user($quiz_question_id, $user_id){
         $result_array = static::get_by_owner(array($user_id));
