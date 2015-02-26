@@ -23,7 +23,6 @@ class ClipitExample extends UBItem {
     const REL_EXAMPLE_TRICKYTOPIC = "ClipitExample-ClipitTrickyTopic";
     const REL_EXAMPLE_TAG = "ClipitExample-ClipitTag";
     const REL_EXAMPLE_EXAMPLETYPE = "ClipitExample-ClipitExampleType";
-    const REL_EXAMPLE_RESOURCE = "ClipitExample-ClipitResource";
     const REL_EXAMPLE_STORYBOARD = "ClipitExample-ClipitStoryboard";
     const REL_EXAMPLE_VIDEO = "ClipitExample-ClipitVideo";
     const REL_EXAMPLE_FILE = "ClipitExample-ClipitFile";
@@ -33,7 +32,6 @@ class ClipitExample extends UBItem {
     public $country = "";
     public $location = "";
     // Example Resources
-    public $resource_array = array();
     public $storyboard_array = array();
     public $video_array = array();
     public $file_array = array();
@@ -50,7 +48,6 @@ class ClipitExample extends UBItem {
         $this->example_type_array = (array)static::get_example_types($this->id);
         $this->country = (string)$elgg_entity->get("country");
         $this->location = (string)$elgg_entity->get("location");
-        $this->resource_array = static::get_resources($this->id);
         $this->video_array = static::get_videos($this->id);
         $this->storyboard_array = static::get_storyboards($this->id);
         $this->file_array = static::get_files($this->id);
@@ -72,7 +69,6 @@ class ClipitExample extends UBItem {
         static::set_tricky_topic($this->id, (int)$this->tricky_topic);
         static::set_tags($this->id, (array)$this->tag_array);
         static::set_example_types($this->id, (array)$this->example_type_array);
-        static::set_resources($this->id, $this->resource_array);
         static::set_videos($this->id, $this->video_array);
         static::set_storyboards($this->id, $this->storyboard_array);
         static::set_files($this->id, $this->file_array);
@@ -209,23 +205,6 @@ class ClipitExample extends UBItem {
      */
     static function get_example_types($id) {
         return UBCollection::get_items($id, static::REL_EXAMPLE_EXAMPLETYPE);
-    }
-
-    // Resources methods
-    static function add_resources($id, $resource_array) {
-        return UBCollection::add_items($id, $resource_array, static::REL_EXAMPLE_RESOURCE);
-    }
-
-    static function set_resources($id, $resource_array) {
-        return UBCollection::set_items($id, $resource_array, static::REL_EXAMPLE_RESOURCE);
-    }
-
-    static function remove_resources($id, $resource_array) {
-        return UBCollection::remove_items($id, $resource_array, static::REL_EXAMPLE_RESOURCE);
-    }
-
-    static function get_resources($id) {
-        return UBCollection::get_items($id, static::REL_EXAMPLE_RESOURCE);
     }
 
     // Videos methods

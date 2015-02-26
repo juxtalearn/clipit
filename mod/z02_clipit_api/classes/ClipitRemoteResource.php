@@ -71,9 +71,6 @@ class ClipitRemoteResource extends UBItem {
             case ClipitStoryboard::SUBTYPE:
                 ClipitRemoteSite::add_storyboards($remote_site->id, array($id));
                 break;
-            case ClipitResource::SUBTYPE:
-                ClipitRemoteSite::add_resources($remote_site->id, array($id));
-                break;
         }
         return $id;
     }
@@ -100,17 +97,35 @@ class ClipitRemoteResource extends UBItem {
         return $remote_resource_array;
     }
 
-    static function delete_by_remote_id($remote_site_url, $remote_id_array){
-        $remote_site = ClipitRemoteSite::get_from_url($remote_site_url);
+    static function delete_by_remote_id($remote_site, $remote_id_array){
+        $remote_site = ClipitRemoteSite::get_from_url($remote_site);
         $remote_resource_array = static::get_by_remote_id($remote_site->id, $remote_id_array);
-        foreach($remote_id_array as $remote_id){
-            static::delete_by_id($remote_resource_array[$remote_id]);
+        $remote_resource_id_array = array();
+        foreach($remote_resource_array as $resource){
+            $remote_resource_id_array[] = $resource->id;
         }
+        static::delete_by_id($remote_resource_id_array);
         return true;
     }
 
-    static function delete_from_site($remote_site_url){
-        $remote_site = ClipitRemoteSite::get_from_url($remote_site_url);
+    static function get_from_site($remote_site, $remote_ids_only = false){
+        $remote_site = ClipitRemoteSite::get_from_url($remote_site);
+        $resource_array = static::get_all();
+        $return_array = array();
+        foreach($resource_array as $resource){
+            if((int)$resource->remote_site == (int)$remote_site->id) {
+                if($remote_ids_only) {
+                    $return_array[] = $resource->remote_id;
+                } else{
+                    $return_array[] = $resource;
+                }
+            }
+        }
+        return $return_array;
+    }
+
+    static function delete_from_site($remote_site){
+        $remote_site = ClipitRemoteSite::get_from_url($remote_site);
         $resource_array = static::get_all();
         $delete_array = array();
         foreach($resource_array as $resource){

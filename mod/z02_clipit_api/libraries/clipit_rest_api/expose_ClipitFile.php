@@ -30,7 +30,7 @@ function expose_file_functions() {
         "Get the Files containing at least one of the specified tags", 'GET', false, true
     );
     expose_function(
-        $api_suffix . "get_resource_scope", $class_suffix . "get_resource_scope",
+        $api_suffix . "get_scope", $class_suffix . "get_scope",
         array("id" => array("type" => "int", "required" => true)),
         "Get Resource scope for a File ('group', 'activity', 'task' or 'site')", 'GET', false, true
     );

@@ -22,8 +22,6 @@ class ClipitTask extends UBItem {
     const SUBTYPE = "ClipitTask";
     // Task types
     const TYPE_QUIZ_TAKE = "quiz_take";
-    const TYPE_RESOURCE_UPLOAD = "resource_upload";
-    const TYPE_RESOURCE_FEEDBACK = "resource_feedback";
     const TYPE_RESOURCE_DOWNLOAD = "resource_download";
     const TYPE_STORYBOARD_UPLOAD = "storyboard_upload";
     const TYPE_STORYBOARD_FEEDBACK = "storyboard_feedback";
@@ -31,7 +29,6 @@ class ClipitTask extends UBItem {
     const TYPE_VIDEO_FEEDBACK = "video_feedback";
     const TYPE_OTHER = "other";
     // Relationship names
-    const REL_TASK_RESOURCE = "ClipitTask-ClipitResource";
     const REL_TASK_STORYBOARD = "ClipitTask-ClipitStoryboard";
     const REL_TASK_VIDEO = "ClipitTask-ClipitVideo";
     const REL_TASK_FILE = "ClipitTask-ClipitFile";
@@ -49,7 +46,6 @@ class ClipitTask extends UBItem {
     public $task_count = 0;
     public $activity = 0;
     public $quiz = 0; // in case of TYPE_QUIZ_TAKE
-    public $resource_array = array();
     public $storyboard_array = array();
     public $video_array = array();
     public $file_array = array();
@@ -76,7 +72,6 @@ class ClipitTask extends UBItem {
         }
         $this->activity = (int)static::get_activity((int)$this->id);
         $this->quiz = (int)static::get_quiz($this->id);
-        $this->resource_array = static::get_resources((int)$this->id);
         $this->storyboard_array = static::get_storyboards((int)$this->id);
         $this->video_array = static::get_videos($this->id);
         $this->file_array = static::get_files($this->id);
@@ -105,7 +100,6 @@ class ClipitTask extends UBItem {
         parent::save($double_save);
         static::set_quiz($this->id, $this->quiz);
         static::set_activity($this->id, $this->activity);
-        static::set_resources($this->id, $this->resource_array);
         static::set_storyboards($this->id, $this->storyboard_array);
         static::set_videos($this->id, $this->video_array);
         static::set_files($this->id, $this->file_array);
@@ -168,23 +162,6 @@ class ClipitTask extends UBItem {
             return 0;
         }
         return (int)array_pop($quiz_array);
-    }
-
-    // RESOURCES
-    static function add_resources($id, $resource_array) {
-        return UBCollection::add_items($id, $resource_array, static::REL_TASK_RESOURCE);
-    }
-
-    static function set_resources($id, $resource_array) {
-        return UBCollection::set_items($id, $resource_array, static::REL_TASK_RESOURCE);
-    }
-
-    static function remove_resources($id, $resource_array) {
-        return UBCollection::remove_items($id, $resource_array, static::REL_TASK_RESOURCE);
-    }
-
-    static function get_resources($id) {
-        return UBCollection::get_items($id, static::REL_TASK_RESOURCE);
     }
 
     // STORYBOARDS
@@ -272,46 +249,6 @@ class ClipitTask extends UBItem {
         switch($task->task_type) {
             case static::TYPE_QUIZ_TAKE:
                 return ClipitQuiz::has_finished_quiz($task->quiz, $entity_id);
-            case static::TYPE_RESOURCE_UPLOAD:
-                foreach($task->resource_array as $resource_id) {
-                    if((int)ClipitResource::get_group($resource_id) === (int)$entity_id) {
-                        return true;
-                    }
-                }
-                return false;
-            case static::TYPE_RESOURCE_FEEDBACK:
-                $parent_task = new static($task->parent_task);
-                // If there are no resources to give feedback on, the status is false = uncompleted
-                if(empty($parent_task->resource_array)){
-                    return false;
-                }
-                $user_ratings = ClipitRating::get_by_owner(array($entity_id));
-                $rating_targets = array();
-                if(!empty($user_ratings[$entity_id])) {
-                    foreach ($user_ratings[$entity_id] as $user_rating) {
-                        $rating_targets[] = (int)$user_rating->target;
-                    }
-                }
-                 // If the only resource was authored by the user's group
-                if(count($parent_task->resource_array) == 1){
-                    $resource_id = array_pop($parent_task->resource_array);
-                    $resource_group = (int)ClipitResource::get_group($resource_id);
-                    $user_group = (int)ClipitGroup::get_from_user_activity($entity_id, $task->activity);
-                    if($resource_group === $user_group){
-                        return false;
-                    }
-                }
-                foreach($parent_task->resource_array as $resource_id) {
-                    if(array_search((int)$resource_id, $rating_targets) === false) {
-                        $resource_group = (int)ClipitResource::get_group((int)$resource_id);
-                        $user_group = (int)ClipitGroup::get_from_user_activity($entity_id, $task->activity);
-                        if($resource_group !== $user_group) {
-                            // at least one of the targets was not rated
-                            return false;
-                        } // else the user is part of the group who published the storyboard, so no feedback required
-                    }
-                }
-                return true;
             case static::TYPE_RESOURCE_DOWNLOAD:
                 $task_files = $task->file_array;
                 foreach($task_files as $file_id){

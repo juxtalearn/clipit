@@ -11,18 +11,15 @@ class ClipitRemoteSite extends UBItem{
     const REL_REMOTESITE_FILE = "ClipitRemoteSite-ClipitFile";
     const REL_REMOTESITE_VIDEO = "ClipitRemoteSite-ClipitVideo";
     const REL_REMOTESITE_STORYBOARD = "ClipitRemoteSite-ClipitStoryboard";
-    const REL_REMOTESITE_RESOURCE = "ClipitRemoteSite-ClipitResource";
     public $file_array = array();
     public $video_array = array();
     public $storyboard_array = array();
-    public $resource_array = array();
 
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
         $this->file_array = (array)static::get_files($this->id);
         $this->video_array = (array)static::get_videos($this->id);
         $this->storyboard_array = (array)static::get_storyboards($this->id);
-        $this->resource_array = (array)static::get_resources($this->id);
     }
 
     /**
@@ -34,7 +31,6 @@ class ClipitRemoteSite extends UBItem{
         static::set_files($this->id, $this->file_array);
         static::set_videos($this->id, $this->video_array);
         static::set_storyboards($this->id, $this->storyboard_array);
-        static::set_resources($this->id, $this->resource_array);
         return $this->id;
     }
 
@@ -90,18 +86,5 @@ class ClipitRemoteSite extends UBItem{
     }
     static function get_storyboards($id) {
         return UBCollection::get_items($id, static::REL_REMOTESITE_STORYBOARD);
-    }
-    // REMOTE RESOURCES
-    static function add_resources($id, $resource_array) {
-        return UBCollection::add_items($id, $resource_array, static::REL_REMOTESITE_RESOURCE);
-    }
-    static function set_resources($id, $resource_array) {
-        return UBCollection::set_items($id, $resource_array, static::REL_REMOTESITE_RESOURCE);
-    }
-    static function remove_resources($id, $resource_array) {
-        return UBCollection::remove_items($id, $resource_array, static::REL_REMOTESITE_RESOURCE);
-    }
-    static function get_resources($id) {
-        return UBCollection::get_items($id, static::REL_REMOTESITE_RESOURCE);
     }
 } 

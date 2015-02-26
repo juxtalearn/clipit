@@ -92,7 +92,7 @@ class ClipitFile extends UBFile {
         return $return_array;
     }
 
-    static function get_resource_scope($id) {
+    static function get_scope($id) {
         $site = static::get_site($id);
         if(!empty($site)) {
             return "site";
