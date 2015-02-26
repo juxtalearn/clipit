@@ -13,9 +13,7 @@
 $task = elgg_extract('task', $vars);
 $quiz = array_pop(ClipitQuiz::get_by_id(array($task->quiz)));
 $i=1;
-?>
-<?php echo $quiz->name;?>
-<?php
+
 foreach(ClipitQuizQuestion::get_by_id($quiz->quiz_question_array) as $question):
     $entities = ClipitActivity::get_students($task->activity);
     $results = array_pop(ClipitQuizResult::get_by_quiz_question(array($question->id)));

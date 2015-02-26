@@ -311,6 +311,16 @@ function get_task_completed_count(ClipitTask $task){
             $text = $completed."/".count($activity->student_array);
             $count  = ($completed/count($activity->student_array)) * 100;
             break;
+        case ClipitTask::TYPE_RESOURCE_DOWNLOAD:
+            $completed = 0;
+            foreach($activity->student_array as $user_id){
+                if(ClipitTask::get_completed_status($task->id, $user_id)){
+                    $completed++;
+                }
+            }
+            $text = $completed."/".count($activity->student_array);
+            $count  = ($completed/count($activity->student_array)) * 100;
+            break;
         case ClipitTask::TYPE_QUIZ_TAKE:
             $completed = 0;
             foreach($activity->student_array as $user_id){

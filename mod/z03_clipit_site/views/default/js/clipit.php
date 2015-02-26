@@ -336,7 +336,7 @@ $(function(){
                 error.appendTo($("label[for='"+element.attr('name')+"']"));
             },
             //ignore: [], // DEBUG
-            ignore: "",
+            ignore: ":hidden:not(.mceEditor)",
             focusInvalid: true,
             onkeyup: false,
             onblur: false,
