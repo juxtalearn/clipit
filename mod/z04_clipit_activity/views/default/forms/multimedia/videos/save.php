@@ -231,7 +231,7 @@ $language_index = ClipitPerformanceItem::get_language_index($user_language);
         </div>
         <?php endif;?>
         <div class="form-group">
-            <label for="title"><?php echo elgg_echo("labels");?></label>
+            <label for="labels"><?php echo elgg_echo("labels");?></label>
             <ul id="labels"></ul>
         </div>
     </div>

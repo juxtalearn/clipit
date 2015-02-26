@@ -31,7 +31,7 @@ switch($parent_entity_class){
     case 'ClipitActivity':
         $entity_level_class = "ClipitActivity";
         $scope_entity = 'ClipitSite';
-        $href = "clipit_activity/{$parent_id}/admin?filter=videos";
+        $href = REFERER;
         break;
     // Clipit Group
     case 'ClipitGroup':

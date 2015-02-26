@@ -23,16 +23,20 @@ function publications_get_page_content_list($task_type, $tasks, $href){
     $last_task_id = reset($task_entity);
     $get_task = get_input('task_id', $last_task_id);
     $task = array_pop(ClipitTask::get_by_id(array($get_task)));
+    $user = array_pop(ClipitUser::get_by_id(array(elgg_get_logged_in_user_guid())));
+    $send_to_site = false;
+    $unlink = false;
+    if($task->status == ClipitTask::STATUS_ACTIVE){
+        $unlink = true;
+    }
     switch($task_type){
         case "video_upload":
             $view = 'multimedia/video/list';
             $entities = $task->video_array;
             $none_msg = elgg_echo('videos:none');
-            break;
-        case ClipitTask::TYPE_RESOURCE_UPLOAD:
-            $view = 'multimedia/resource/list';
-            $entities = $task->resource_array;
-            $none_msg = elgg_echo('resources:none');
+            if($user->role == ClipitUser::ROLE_TEACHER){
+                $send_to_site = true;
+            }
             break;
         case "storyboard_upload":
             $view = 'multimedia/storyboard/list_summary';
@@ -47,7 +51,9 @@ function publications_get_page_content_list($task_type, $tasks, $href){
         'entities'    => $entities,
         'href'      => $href,
         'rating'    => true,
+        'send_site' => $send_to_site,
         'actions'   => false,
+        'unlink' => $unlink,
         'total_comments' => true,
     ));
     if (!$entities) {

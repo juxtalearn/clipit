@@ -70,14 +70,6 @@ switch ($selected_tab) {
         return false;
         break;
 }
-//$params = array(
-//    'entity' => $group,
-//    'can_create' => $canCreate,
-//    'href' => $href
-//);
-//$content = elgg_view('material/group/list', $params);
-//$selected_tab = get_input('filter');
-
 $filter = elgg_view('multimedia/filter', array('selected' => $selected_tab, 'entity' => $group, 'href' => $href));
 
 if($page[4] == 'download' && $page[5]){

@@ -79,6 +79,14 @@ foreach($activities as $activity):
         ));
         ?>
         </strong>
+        <small class="show margin-top-5">
+            <strong><?php echo elgg_echo('start');?>: </strong>
+            <?php echo elgg_view('output/friendlytime', array('time' => $activity->start));?>
+            <span class="pull-right">
+                <strong><?php echo elgg_echo('end');?>: </strong>
+                    <?php echo elgg_view('output/friendlytime', array('time' => $activity->end));?>
+            </span>
+        </small>
         <div class="bg-bar">
             <div class="bar" style="width: <?php echo $activity_progress;?>%;">
                 <div>

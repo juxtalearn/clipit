@@ -71,24 +71,6 @@ if($page[2] == 'view' && $page[3]){
                 'comments' => $comments
             ));
             break;
-        // Clipit Resource publication
-        case 'ClipitResource':
-            $task_id = ClipitResource::get_task($entity_id);
-            $resources = ClipitTask::get_resources($task_id);
-            if(!$entity || !in_array($entity_id, $resources)){
-                return false;
-            }
-            $body = elgg_view("multimedia/resource/body", array('entity'  => $entity));
-            $content = elgg_view('publications/view', array(
-                'entity' => $entity,
-                'body' => $body,
-                'canEvaluate' => $canEvaluate,
-                'activity' => $activity,
-                'group' => $owner_group,
-                'comments' => $comments,
-                'description' => false
-            ));
-            break;
         // Clipit Storyboard publication
         case 'ClipitStoryboard':
             $task_id = ClipitStoryboard::get_task($entity_id);

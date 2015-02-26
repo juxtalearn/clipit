@@ -13,7 +13,7 @@
 $entity = elgg_extract('entity', $vars);
 $object = ClipitSite::lookup($entity->id);
 $entity_class = $object['subtype'];
-$scope = $entity_class::get_resource_scope($entity->id);
+$scope = $entity_class::get_scope($entity->id);
 ?>
 <?php
 if($scope == 'group'):

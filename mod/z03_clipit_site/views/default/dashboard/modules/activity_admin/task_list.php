@@ -71,6 +71,13 @@ switch($task->task_type):
                 'task' => $task
             ));
         break;
+    case ClipitTask::TYPE_RESOURCE_DOWNLOAD:
+        echo elgg_view('dashboard/modules/activity_admin/resource_download',
+            array(
+                'users' => $activity->student_array,
+                'task' => $task
+            ));
+        break;
     case ClipitTask::TYPE_QUIZ_TAKE:
         echo elgg_view('dashboard/modules/activity_admin/quiz_take',
             array(

@@ -13,13 +13,18 @@
 $id = (int)get_input('id');
 $user_id = elgg_get_logged_in_user_guid();
 $video = array_pop(ClipitVideo::get_by_id(array($id)));
+$unlink = get_input('unlink');
 
-if(count($video)==0 || $video->owner_id != $user_id){
+if(count($video)==0){
     register_error(elgg_echo("video:cantdelete"));
-} else{
+} elseif(!$unlink && $video->owner_id == $user_id){
     ClipitVideo::delete_by_id(array($id));
     system_message(elgg_echo('video:deleted'));
     forward(custom_forward_referer("/view/", "?filter=videos"));
+} elseif($unlink) {
+    ClipitVideo::unlink_from_parent($id);
+    ClipitTask::remove_videos(ClipitVideo::get_task($id), array($id));
+    system_message(elgg_echo('video:deleted'));
 }
 
 forward(REFERER);

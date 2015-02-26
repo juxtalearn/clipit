@@ -29,14 +29,6 @@ switch($type){
               </span>';
         $custom = true;
         break;
-    case ClipitTask::TYPE_RESOURCE_UPLOAD:
-        $title = elgg_echo('task:resource_upload');
-        echo '<span class="fa-stack fa-lg blue " title="'.$title.'" style="font-size: 50%;">
-                  <i class="fa fa-file-o fa-stack-2x"></i>
-                  <i class="fa fa-plus fa-stack-1x" style="top:2px;"></i>
-              </span>';
-        $custom = true;
-        break;
     case ClipitTask::TYPE_QUIZ_TAKE:
         $title = elgg_echo('task:quiz_answer');
         $icon = "pencil-square-o";
@@ -47,10 +39,6 @@ switch($type){
         break;
     case ClipitTask::TYPE_STORYBOARD_FEEDBACK:
         $title = elgg_echo('task:storyboard_feedback');
-        $icon = "comment";
-        break;
-    case ClipitTask::TYPE_RESOURCE_FEEDBACK:
-        $title = elgg_echo('task:resource_feedback');
         $icon = "comment";
         break;
     case ClipitTask::TYPE_OTHER:

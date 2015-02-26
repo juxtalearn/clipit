@@ -33,9 +33,6 @@ if($page[2] == 'view' && $page[3]){
             case ClipitTask::TYPE_VIDEO_UPLOAD:
                 require($task_dir. "/video_upload.php");
                 break;
-            case ClipitTask::TYPE_RESOURCE_UPLOAD:
-                require($task_dir. "/resource_upload.php");
-                break;
             case ClipitTask::TYPE_STORYBOARD_UPLOAD:
                 require($task_dir. "/storyboard_upload.php");
                 break;
@@ -44,9 +41,6 @@ if($page[2] == 'view' && $page[3]){
                 break;
             case ClipitTask::TYPE_VIDEO_FEEDBACK:
                 require($task_dir. "/video_feedback.php");
-                break;
-            case ClipitTask::TYPE_RESOURCE_FEEDBACK:
-                require($task_dir. "/resource_feedback.php");
                 break;
             case ClipitTask::TYPE_STORYBOARD_FEEDBACK:
                 require($task_dir. "/storyboard_feedback.php");

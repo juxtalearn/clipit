@@ -40,6 +40,12 @@ function tinymce_setup(specific_id){
             $(".mce-i-italic").addClass("fa-italic");
             $(".mce-i-bold").addClass("fa-bold");
         });
+        ed.on('change', function(e) {
+        tinyMCE.triggerSave();
+        //$("#" + ed.id).valid();
+<!--        console.log(tinyMCE.get(ed.id).getContent());-->
+<!--console.log($("#" + ed.id).val().trim());-->
+        });
     },
     convert_urls: true,
     mode : "specific_textareas",
@@ -281,6 +287,7 @@ $(function(){
         },
         "Use a valid username."
     );
+
     $(".elgg-form-register").validate({
         errorElement: "span",
         errorPlacement: function(error, element) {
@@ -315,10 +322,12 @@ $(function(){
                 form.submit();
         }
     });
+
     /**
      * Form general validation
      */
     $("body").on("click", "form[data-validate=true]", function (e) {
+        tinyMCE.triggerSave();
         //$("form[data-validate=true]").each(function(){
         var form_to = $(this);
         $(this).validate({
@@ -327,6 +336,8 @@ $(function(){
                 error.appendTo($("label[for='"+element.attr('name')+"']"));
             },
             //ignore: [], // DEBUG
+            ignore: "",
+            focusInvalid: true,
             onkeyup: false,
             onblur: false,
             submitHandler: function(form) {
@@ -337,7 +348,22 @@ $(function(){
                 else
                     button_submit.data("loading-text", "<?php echo elgg_echo('loading');?>...").button('loading');
             }
-        });
+        }).focusInvalid = function() {
+            // put focus on tinymce on submit validation
+            if (this.settings.focusInvalid) {
+                try {
+                    var toFocus = $(this.findLastActive() || this.errorList.length && this.errorList[0].element || []);
+
+                    if (toFocus.is("textarea")) {
+                        tinyMCE.get(toFocus.attr("id")).focus();
+                    } else {
+                        toFocus.filter(":visible").focus();
+                    }
+                } catch (e) {
+                    // ignore IE throwing errors when focusing hidden elements
+                }
+            }
+        };
     });
     /**
      * wysihtml5 editor default options

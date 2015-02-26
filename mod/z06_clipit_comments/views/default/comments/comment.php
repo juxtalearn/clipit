@@ -17,7 +17,7 @@ $owner_user = array_pop(ClipitUser::get_by_id(array($comment->owner_id)));
 $user_loggedin = array_pop(ClipitUser::get_by_id(array(elgg_get_logged_in_user_guid())));;
 $files_id = $comment->get_files($comment->id);
 $group = "";
-if($activity_id){
+if($activity_id && $owner_user->role == ClipitUser::ROLE_STUDENT){
     $group_id = ClipitGroup::get_from_user_activity($comment->owner_id, $activity_id);
     $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
 }
@@ -75,7 +75,7 @@ if($activity_id){
     <?php if(!$vars['reply']): ?>
     <div style="margin-top: 10px;text-align: right">
         <button id="<?php echo $comment->id; ?>" class="reply-to btn btn-default btn-sm reply-button">
-            <i class="fa fa-reply"></i> Reply
+            <i class="fa fa-reply"></i> <?php echo elgg_echo('reply');?>
         </button>
     </div>
     <!-- Reply form -->
@@ -88,7 +88,7 @@ if($activity_id){
         </div>
         <div class="content-block">
             <small class="block">
-                <i class="fa fa-reply"></i> Reply to:
+                <i class="fa fa-reply"></i> <?php echo elgg_echo('comment:reply:to');?>:
                 <?php echo elgg_view('output/url', array(
                     'href'  => "profile/".$user_loggedin->login,
                     'title' => $user_loggedin->name,

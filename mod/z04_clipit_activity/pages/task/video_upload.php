@@ -56,10 +56,15 @@ if($status['status'] === true || $task->end <= time()){
     ));
     // Task is completed, show my video
     if($status['status'] === true){
+        $unlink = false;
+        if($task->status == ClipitTask::STATUS_ACTIVE){
+            $unlink = true;
+        }
         $body .= elgg_view('multimedia/video/list', array(
             'entities'    => $video,
             'href'      => $href_publications,
             'task_id'   => $task->id,
+            'unlink' => $unlink
         ));
     } else {
         $body = elgg_view('multimedia/video/list', array(

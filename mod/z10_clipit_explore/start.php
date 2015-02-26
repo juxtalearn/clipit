@@ -208,10 +208,7 @@ function explore_page_handler($page) {
             $entity_id = (int)$page[1];
             $file_dir = elgg_get_plugins_path() . 'z10_clipit_explore/pages/explore';
             $object = ClipitSite::lookup($entity_id);
-//            $publish_level = $object['subtype']::get_resource_scope($entity_id);
-//            if($publish_level != 'site'){
-//                return false;
-//            }
+
             switch ($object['subtype']) {
                 case 'ClipitVideo':
                     set_input('entity_id', $entity_id);

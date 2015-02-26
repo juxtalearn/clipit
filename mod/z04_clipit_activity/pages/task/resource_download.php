@@ -57,20 +57,6 @@ if($storyboards) {
     );
     $body .= elgg_view('multimedia/storyboard/list', $params);
 }
-$resources = ClipitTask::get_resources($task->id);
-if($resources) {
-    $body .= elgg_view("page/components/title_block", array(
-        'title' => elgg_echo("resources"),
-    ));
-    $params = array(
-        'entity' => $activity,
-        'create' => false,
-        'entities' => $resources,
-        'href' => $href,
-        'task_id' => $task->id
-    );
-    $body .= elgg_view('multimedia/resource/list', $params);
-}
 
 // Teacher view
 if($user->role == ClipitUser::ROLE_TEACHER){

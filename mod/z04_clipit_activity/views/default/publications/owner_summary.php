@@ -14,7 +14,7 @@ $entity = elgg_extract("entity", $vars);
 $msg = elgg_extract("msg", $vars);
 $object = ClipitSite::lookup($entity->id);
 $entity_class = $object['subtype'];
-$publish_level = $entity_class::get_resource_scope($entity->id);
+$publish_level = $entity_class::get_scope($entity->id);
 
 $user = array_pop(ClipitUser::get_by_id(array($entity->owner_id)));
 switch($publish_level){
