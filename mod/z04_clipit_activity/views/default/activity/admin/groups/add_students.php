@@ -57,7 +57,7 @@ $activity = elgg_extract('entity', $vars);
         <?php
         echo elgg_view('input/button', array(
             'value' => elgg_echo('create'),
-            'class' => "submit-add-students btn btn-primary btn-xs pull-right",
+            'class' => "submit-add-students btn btn-primary btn-sm pull-right",
         ));
         ?>
         <strong>
@@ -85,7 +85,7 @@ $activity = elgg_extract('entity', $vars);
         <i class="fa fa-file-excel-o green"></i>
         <strong><?php echo elgg_echo('called:students:excel_template');?></strong>
     </a>
-    <div class="blue fileinput-button inline-block" id="insert-site">
+    <div class="btn btn-sm btn-primary fileinput-button inline-block" id="insert-site">
         <i class="fa fa-upload"></i>
         <?php echo elgg_echo('upload');?>
         <?php echo elgg_view("input/file", array(

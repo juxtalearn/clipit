@@ -12,6 +12,8 @@
  */
 $entity = elgg_extract('entity', $vars);
 $entities_ids = elgg_extract('entities', $vars);
+$videos = ClipitVideo::get_by_id($entities_ids);
+
 $href = elgg_extract("href", $vars);
 $rating = elgg_extract("rating", $vars);
 $task_id = elgg_extract("task_id", $vars);
@@ -57,17 +59,16 @@ if($unlink){
 <?php endif; ?>
 <ul class="video-list">
     <?php
-    foreach($entities_ids as $video_id):
-        $video = array_pop(ClipitVideo::get_by_id(array($video_id)));
+    foreach($videos as $video):
         $tags = ClipitVideo::get_tags($video->id);
         $description = trim(elgg_strip_tags($video->description));
         // Description truncate max length 280
-        if(mb_strlen($description)>280){
+        if(strlen($description)>280){
             $description = substr($description, 0, 280)."...";
         }
         $published = false;
         $unlinked = false;
-        if($unlink && in_array(ClipitVideo::get_group($video_id), $user_groups)){
+        if($unlink && in_array(ClipitVideo::get_group($video->id), $user_groups)){
             $unlinked = true;
         }
         $href_video = $href."/view/".$video->id . ($task_id ? "?task_id=".$task_id: "");
@@ -85,7 +86,7 @@ if($unlink){
             </div>
             <div class="col-md-8">
                 <?php
-                if($task_id && !$vars['publish']):
+                if($task_id && $vars['task_type'] == ClipitTask::TYPE_RESOURCE_DOWNLOAD):
                     if(array_pop(ClipitVideo::get_read_status($video->id, array($user_id)))):
                 ?>
                 <div class="pull-right margin-right-20 margin-top-5">

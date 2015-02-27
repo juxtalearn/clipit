@@ -21,9 +21,6 @@ $user_id = elgg_get_logged_in_user_guid();
         $group_id = ClipitGroup::get_from_user_activity($user_id, $activity->id);
         $group_object = ClipitSite::lookup($group_id);
         $progress = get_group_progress($group_id);
-        if($progress == 0){
-            $progress = 5;
-        }
         ?>
             <div>
 <!--                <a class="text-muted pull-right">-->

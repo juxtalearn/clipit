@@ -10,9 +10,20 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$group_id = get_input('group_id');
-$group = array_pop(ClipitGroup::get_by_id(array($group_id)));
-$tasks = ClipitActivity::get_tasks($group->activity);
+$entity_id = get_input('entity');
+$entities_id = get_input('entities');
+?>
+<?php
+if($entities_id):
+    $groups_progress = array();
+    foreach($entities_id as $group_id){
+        $groups_progress[$group_id] = get_group_progress($group_id);
+    }
+    echo json_encode($groups_progress);
+    die;
+elseif($entity_id):
+    $group = array_pop(ClipitGroup::get_by_id(array($entity_id)));
+    $tasks = ClipitActivity::get_tasks($group->activity);
 ?>
 <div class="row">
     <div class="col-md-6">
@@ -87,3 +98,4 @@ $tasks = ClipitActivity::get_tasks($group->activity);
         </div>
     </div>
 </div>
+<?php endif;?>

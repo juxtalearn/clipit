@@ -489,17 +489,17 @@ $(function(){
                 if(parseInt(container_height) < parseInt(element_height)){
                     return false;
                 }
-                var readmore_link = $("<a href='javascript:;' class='read-more'>Read more<strong>...</strong></a>");
+                var readmore_link = $("<a href='javascript:;' class='read-more'><?php echo elgg_echo('read_more');?><strong>...</strong></a>");
                 element_shorten.append(readmore_link);
                 container.css("max-height",element_height);
                 readmore_link.on("click", function(){
                     if (container.hasClass('full-content')) {
                         container.removeClass('full-content');
                         container.addClass('less-content');
-                        $(this).text("Read more...");
+                        $(this).text("<?php echo elgg_echo('read_more');?>...");
                     } else {
                         container.addClass('full-content');
-                        $(this).text("Less");
+                        $(this).text("<?php echo elgg_echo('read_less');?>");
                     }
                 });
             });

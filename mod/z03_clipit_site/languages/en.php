@@ -5,6 +5,8 @@
  */
 
 $english = array(
+    'read_more' => 'Read more',
+    'read_less' => 'Less',
     'event:timeline' => 'Event timeline',
     'name' => 'Name',
     'activities:active:none' => 'There are no active activities',

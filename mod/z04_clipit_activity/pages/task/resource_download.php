@@ -23,7 +23,8 @@ if($videos) {
         'create' => false,
         'entities' => $videos,
         'href' => $href,
-        'task_id' => $task->id
+        'task_id' => $task->id,
+        'task_type' => $task->task_type
     );
     $body .= elgg_view('multimedia/video/list', $params);
 }
@@ -53,7 +54,8 @@ if($storyboards) {
         'create' => false,
         'entities' => $storyboards,
         'href' => $href,
-        'task_id' => $task->id
+        'task_id' => $task->id,
+        'task_type' => $task->task_type
     );
     $body .= elgg_view('multimedia/storyboard/list', $params);
 }

@@ -7475,8 +7475,7 @@ li.list-item:last-child {
 }
 .multimedia-owner .multimedia-view {
   background: #fafafa;
-  padding: 20px;
-  margin: 10px 0;
+  margin: 10px 0 20px 0;
 }
 .multimedia-owner .multimedia-view .btn {
   padding: 5px 10px;
@@ -9008,7 +9007,7 @@ ul.deadline-list > li .fa-user {
 .video-list .video-item p {
   color: #666666;
   margin: 0;
-  height: 63px;
+  min-height: 63px;
   overflow: hidden;
 }
 .video-list .video-item small {

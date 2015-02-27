@@ -86,7 +86,6 @@ function explore_page_handler($page) {
                     elgg_push_breadcrumb($tag->name);
                     $videos = ClipitVideo::get_by_tags(array($tag->id));
                     $storyboards = ClipitStoryboard::get_by_tags(array($tag->id));
-                    $files = ClipitFile::get_by_tags(array($tag->id));
                     break;
                 case 'label':
                     $label = array_pop(ClipitLabel::get_by_id(array($id)));
@@ -95,7 +94,6 @@ function explore_page_handler($page) {
                     elgg_push_breadcrumb($label->name);
                     $videos = ClipitVideo::get_by_labels(array($label->id));
                     $storyboards = ClipitStoryboard::get_by_labels(array($label->id));
-                    $files = ClipitFile::get_by_labels(array($label->id));
                     break;
                 case 'performance_item':
                     $performance_item = array_pop(ClipitPerformanceItem::get_by_id(array($id)));

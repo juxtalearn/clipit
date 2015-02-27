@@ -26,17 +26,36 @@ $groups = elgg_extract('entities', $vars);
             var gr_id = $(this).data("group");
             if(content.is(':empty')){
                 content.html('<i class="fa fa-spinner fa-spin fa-2x blue"></i>');
-                elgg.get( "ajax/view/activity/admin/group_info",{
-                    data: {group_id: gr_id},
+                elgg.get( "ajax/view/activity/admin/groups/info",{
+                    data: {
+                        'entity': gr_id
+                    },
                     success: function( data ) {
                         content.html(data);
                     }
                 });
             }
         });
+        var container = $('.groups-admin .group');
+        elgg.get("ajax/view/activity/admin/groups/info", {
+            dataType: "json",
+            data: {
+                'entities': <?php echo json_encode($groups);?>
+            },
+            success: function (output) {
+                $.each(output, function (group, data) {
+                    container.find('[data-group="'+group+'"] .progressbar-mini div').css('width', data + '%')
+                    container.find('[data-group="'+group+'"] .progress-count').text(data + '%');
+                });
+            }
+        });
     });
 </script>
-<?php if($groups):?>
+<div class="groups-admin">
+<?php
+$groups = ClipitGroup::get_by_id($groups, 0, 0, 'name');
+if($groups):
+?>
     <p>
         <?php echo elgg_view('output/url', array(
             'title' => elgg_echo('expand:all'),
@@ -55,17 +74,16 @@ $groups = elgg_extract('entities', $vars);
         ?>
     </p>
     <div class="panel-group" id="gr_accordion">
-        <?php
-        foreach($groups as $group):
-            $group_progress = get_group_progress($group->id);
-            ?>
-            <div class="panel panel-blue">
+        <?php foreach($groups as $group):?>
+            <div class="panel panel-blue group">
                 <div class="panel-heading expand group-info" data-group="<?php echo $group->id;?>">
                     <small class="pull-right">
                         <div class="progressbar-mini progressbar-blue inline-block">
-                            <div data-value="<?php echo $group_progress;?>" style="width: <?php echo $group_progress;?>%"></div>
+                            <div data-value=""></div>
                         </div>
-                        <strong class="inline-block blue margin-left-5"><?php echo $group_progress;?>%</strong>
+                        <strong class="inline-block blue margin-left-5 progress-count">
+                            <i class="fa fa-spinner fa-spin"></i>
+                        </strong>
                     </small>
                     <h4 class="margin-0">
                         <a data-toggle="collapse" class="show" data-parent="#gr_accordion" href="#gr_<?php echo $group->id;?>">
@@ -82,3 +100,4 @@ $groups = elgg_extract('entities', $vars);
 <?php else:?>
     <?php echo elgg_view('output/empty', array('value' => elgg_echo('groups:none')));?>
 <?php endif;?>
+</div>

@@ -83,7 +83,7 @@ function clipit_activity_init() {
     elgg_register_action("quiz/question_annotate", "{$plugin_dir}/actions/quiz/question_annotate.php");
 
     elgg_register_ajax_view('activity/admin/groups/users_list');
-    elgg_register_ajax_view('activity/admin/group_info');
+    elgg_register_ajax_view('activity/admin/groups/info');
     elgg_register_ajax_view('publications/admin/user_ratings');
     elgg_register_ajax_view('modal/activity/admin/user_stats');
     elgg_register_ajax_view('modal/activity/admin/users_task');
@@ -97,6 +97,7 @@ function clipit_activity_init() {
     elgg_register_action("group/create", "{$plugin_dir}/actions/group/create.php");
     elgg_register_action("group/remove_member", "{$plugin_dir}/actions/group/remove_member.php");
     elgg_register_ajax_view('modal/group/view');
+
     elgg_register_ajax_view('multimedia/attach/videos');
     elgg_register_ajax_view('multimedia/attach/storyboards');
     elgg_register_ajax_view('multimedia/attach/files');
