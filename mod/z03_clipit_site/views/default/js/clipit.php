@@ -42,13 +42,13 @@ function tinymce_setup(specific_id){
         });
         ed.on('change', function(e) {
         tinyMCE.triggerSave();
-        //$("#" + ed.id).valid();
-<!--        console.log(tinyMCE.get(ed.id).getContent());-->
-<!--console.log($("#" + ed.id).val().trim());-->
         });
     },
     convert_urls: true,
     mode : "specific_textareas",
+    formats : {
+        underline : {inline : 'u', exact : true}
+    },
     editor_selector : /(mceEditor|wysihtml5|"+specific_id+")/,
     force_br_newlines : true,
     force_p_newlines : false,
@@ -67,33 +67,33 @@ function tinymce_setup(specific_id){
     invalid_elements: 'img,h1,h2',
     autoresize_min_height: 150,
     mentions: {
-    delay: 0,
-            source: function (query, process, delimiter) {
-        // Do your ajax call
-        // When using multiple delimiters you can alter the query depending on the delimiter used
-        if (delimiter === '@') {
-            $.getJSON(elgg.config.wwwroot+"ajax/view/messages/search_to?q="+query, function (data) {
-                //call process to show the result
-                if(data){
-                    process(data);
-                }
-            });
-        }
-    },
-            delimiter: '@',
-            queryBy: 'first_name',
-            render: function(item) {
-        var img = "<img class='img' src='" + item.avatar + "' title='" + item.first_name + "' height='25px' width='25px' />";
-        return "<li class='text-truncate'>" + img + "<div class='block'><div class='title'>" + item.first_name + "</div><div class='sub-title'>" + item.username + "</div></div></li>";
-    },
-            renderDropdown: function() {
-        //add twitter bootstrap dropdown-menu class
-        return '<ul class="rte-autocomplete dropdown-menu mention-autocomplete"><li class="loading"><i class="fa fa-spinner fa-spin"></i></li></ul>';
-    },
+        delay: 0,
+        source: function (query, process, delimiter) {
+            // Do your ajax call
+            // When using multiple delimiters you can alter the query depending on the delimiter used
+            if (delimiter === '@') {
+                $.getJSON(elgg.config.wwwroot+"ajax/view/messages/search_to?q="+query, function (data) {
+                    //call process to show the result
+                    if(data){
+                        process(data);
+                    }
+                });
+            }
+        },
+        delimiter: '@',
+        queryBy: 'first_name',
+        render: function(item) {
+            var img = "<img class='img' src='" + item.avatar + "' title='" + item.first_name + "' height='25px' width='25px' />";
+            return "<li class='text-truncate'>" + img + "<div class='block'><div class='title'>" + item.first_name + "</div><div class='sub-title'>" + item.username + "</div></div></li>";
+        },
+        renderDropdown: function() {
+            //add twitter bootstrap dropdown-menu class
+            return '<ul class="rte-autocomplete dropdown-menu mention-autocomplete"><li class="loading"><i class="fa fa-spinner fa-spin"></i></li></ul>';
+        },
 
-            insert: function(item) {
-        return item.username;
-    }
+        insert: function(item) {
+            return item.username;
+        }
     },
     menubar: false,
     statusbar: false,
