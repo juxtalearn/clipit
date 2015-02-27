@@ -72,7 +72,7 @@ if($unlink){
             $unlinked = true;
         }
         $href_video = $href."/view/".$video->id . ($task_id ? "?task_id=".$task_id: "");
-        ?>
+    ?>
         <li class="video-item row list-item">
             <?php if($vars['send_site']):?>
                 <?php echo elgg_view("page/components/modal_remote", array('id'=> "publish-{$video->id}" ));?>

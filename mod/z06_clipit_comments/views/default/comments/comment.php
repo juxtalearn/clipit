@@ -90,9 +90,9 @@ if($activity_id && $owner_user->role == ClipitUser::ROLE_STUDENT){
             <small class="block">
                 <i class="fa fa-reply"></i> <?php echo elgg_echo('comment:reply:to');?>:
                 <?php echo elgg_view('output/url', array(
-                    'href'  => "profile/".$user_loggedin->login,
-                    'title' => $user_loggedin->name,
-                    'text'  => $user_loggedin->name));
+                    'href'  => "profile/".$owner_user->login,
+                    'title' => $owner_user->name,
+                    'text'  => $owner_user->name));
                 ?>
                 <a href="javascript:;" id="<?php echo $comment->id; ?>" class="close-reply-to" >&times;</a>
             </small>
