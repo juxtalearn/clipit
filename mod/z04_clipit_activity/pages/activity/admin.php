@@ -33,18 +33,6 @@ switch($selected_tab){
         $content = elgg_view('activity/admin/assessment_rubric/view', array('entity' => $activity));
         break;
 }
-// Publish to Site
-if($page[2] == 'publish' && $id = $page[3]){
-    $entity = array_pop(ClipitVideo::get_by_id(array($id)));
-    $content = elgg_view_form('publications/publish', array('data-validate'=> "true" ),
-        array(
-            'entity'  => $entity,
-            'parent_id' => $group->id,
-            'activity' => $activity,
-            'tags' => $tags,
-            'entity_preview' => $entity_preview
-        ));
-}
 
 $params = array(
     'content'   => $content,

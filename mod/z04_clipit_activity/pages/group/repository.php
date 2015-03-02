@@ -17,58 +17,59 @@ $href = "clipit_activity/{$activity->id}/group/{$group->id}/repository";
 $entity_class = "ClipitGroup";
 $entity = $group;
 elgg_set_context("group");
-
-switch ($selected_tab) {
-    case 'files':
-        $files = ClipitGroup::get_files($group->id);
-        $params = array(
-            'entity' => $group,
-            'add_files' => true,
-            'files' => $files,
-            'href' => $href,
-            'create' => $canCreate
-        );
-        $content = files_get_page_content_list($params);
-        break;
-    case 'videos':
-        $videos = ClipitGroup::get_videos($group->id);
-        $params = array(
-            'entity' => $group,
-            'add_video' => true,
-            'entities' => $videos,
-            'actions'   => true,
-            'href' => $href,
-            'create' => $canCreate
-        );
-        $content = videos_get_page_content_list($params);
-        break;
-    case 'resources':
-        $resources = ClipitGroup::get_resources($group->id);
-        $params = array(
-            'entity' => $group,
-            'add_resource' => true,
-            'entities' => $resources,
-            'actions'   => true,
-            'href' => $href,
-            'create' => $canCreate
-        );
-        $content = resources_get_page_content_list($params);
-        break;
-    case 'storyboards':
-        $sbs = ClipitGroup::get_storyboards($group->id);
-        $params = array(
-            'entity' => $group,
-            'add_sb' => true,
-            'entities' => $sbs,
-            'href' => $href,
-            'create' => $canCreate,
-            'actions' => true
-        );
-        $content = storyboards_get_page_content_list($params);
-        break;
-    default:
-        return false;
-        break;
+if(!$page[4]) {
+    switch ($selected_tab) {
+        case 'files':
+            $files = ClipitGroup::get_files($group->id);
+            $params = array(
+                'entity' => $group,
+                'add_files' => true,
+                'files' => $files,
+                'href' => $href,
+                'create' => $canCreate
+            );
+            $content = files_get_page_content_list($params);
+            break;
+        case 'videos':
+            $videos = ClipitGroup::get_videos($group->id);
+            $params = array(
+                'entity' => $group,
+                'add_video' => true,
+                'entities' => $videos,
+                'actions' => true,
+                'href' => $href,
+                'create' => $canCreate
+            );
+            $content = videos_get_page_content_list($params);
+            break;
+        case 'resources':
+            $resources = ClipitGroup::get_resources($group->id);
+            $params = array(
+                'entity' => $group,
+                'add_resource' => true,
+                'entities' => $resources,
+                'actions' => true,
+                'href' => $href,
+                'create' => $canCreate
+            );
+            $content = resources_get_page_content_list($params);
+            break;
+        case 'storyboards':
+            $sbs = ClipitGroup::get_storyboards($group->id);
+            $params = array(
+                'entity' => $group,
+                'add_sb' => true,
+                'entities' => $sbs,
+                'href' => $href,
+                'create' => $canCreate,
+                'actions' => true
+            );
+            $content = storyboards_get_page_content_list($params);
+            break;
+        default:
+            return false;
+            break;
+    }
 }
 $filter = elgg_view('multimedia/filter', array('selected' => $selected_tab, 'entity' => $group, 'href' => $href));
 
