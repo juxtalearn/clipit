@@ -69,13 +69,18 @@ class UBMessage extends UBItem {
      * @param array $destination_array Array of Destination IDs
      * @param int $offset (default = 0 : begining)
      * @param int $limit (default = 0 : none)
+     * @param bool $count_only (default = false : no)
      *
      * @return static[] Array of Messages
      */
-    static function get_by_destination($destination_array, $offset = 0, $limit = 0) {
+    static function get_by_destination($destination_array, $offset = 0, $limit = 0, $count_only = false) {
         $message_array = array();
         foreach ($destination_array as $destination_id) {
             $item_array = UBCollection::get_items($destination_id, static::REL_MESSAGE_DESTINATION, true);
+            if($count_only) {
+                $message_array[$destination_id] = count($item_array);
+                continue;
+            }
             $temp_array = array();
             foreach ($item_array as $item_id) {
                 $temp_array[$item_id] = new static((int)$item_id);

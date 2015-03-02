@@ -1,6 +1,6 @@
 <?php
 class RecommendationEngine {
-    public static function get_recommended_items($entity_id, $item_types = ["video", "file", "storyboard", "resource"], $number_of_items = 5) {
+    public static function get_recommended_items($entity_id, $item_types = ["video", "file", "storyboard"], $number_of_items = 5) {
         $items = array();
         foreach ($item_types as $type) {
             $new_items = RecommendationEngine::calculate_recommendations($entity_id, $type, $number_of_items);
@@ -33,10 +33,6 @@ class RecommendationEngine {
         $item_types = ["storyboard"];
         return RecommendationEngine::get_recommended_items($entity_id, $item_types, $number_of_items);
     }
-    public static function get_recommended_resources($entity_id, $number_of_items = 5) {
-        $item_types = ["resource"];
-        return RecommendationEngine::get_recommended_items($entity_id, $item_types, $number_of_items);
-    }
     public static function get_recommended_users($entity_id, $number_of_items = 5) {
         $item_types = ["user"];
         return RecommendationEngine::get_recommended_items($entity_id, $item_types, $number_of_items);
@@ -65,10 +61,6 @@ class RecommendationEngine {
             case "storyboard":
                 $global_items = ClipitSite::get_pub_storyboards();
                 $public_items = ClipitSite::get_storyboards();
-                break;
-            case "resource":
-                $global_items = ClipitSite::get_pub_resources();
-                $public_items = ClipitSite::get_resources();
                 break;
             case "user":
                 $public_items = ClipitUser::get_all();

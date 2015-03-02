@@ -33,11 +33,6 @@ function expose_recommendation_engine()
         "number_of_items" => array("type" => "int", "required" => false),
     ), "Get a sorted array of recommended storyboards ranked by their suitability.", "GET", false, true);
 
-    expose_function($api_suffix . "get_recommended_resources", $class_suffix . "get_recommended_resources", array(
-        "user_id" => array("type" => "int", "required" => true),
-        "number_of_items" => array("type" => "int", "required" => false),
-    ), "Get a sorted array of recommended resources ranked by their suitability.", "GET", false, true);
-
     expose_function($api_suffix . "get_recommended_users", $class_suffix . "get_recommended_users", array(
         "user_id" => array("type" => "int", "required" => true),
         "number_of_items" => array("type" => "int", "required" => false),

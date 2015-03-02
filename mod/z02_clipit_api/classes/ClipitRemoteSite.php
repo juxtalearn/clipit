@@ -35,6 +35,38 @@ class ClipitRemoteSite extends UBItem{
     }
 
     /**
+     * Sets values to specified properties of a RemoteSite
+     *
+     * @param int $id Id of User to set property values
+     * @param array $prop_value_array Array of property=>value pairs to set into the RemoteSite
+     *
+     * @return int|bool Returns Id of User if correct, or false if error
+     * @throws InvalidParameterException
+     */
+    static function set_properties($id, $prop_value_array) {
+        if (!$item = new static($id)) {
+            return false;
+        }
+        $property_list = (array)static::list_properties();
+        foreach ($prop_value_array as $prop => $value) {
+            if (!array_key_exists($prop, $property_list)) {
+                throw new InvalidParameterException("ERROR: One or more property names do not exist.");
+            }
+            if ($prop == "id") {
+                throw new InvalidParameterException("ERROR: Cannot modify 'id' of instance.");
+            }
+            if ($prop == "url" && empty($id)) {
+                $remote_site = static::get_from_url($value);
+                if (!empty($remote_site)) {
+                    return false;
+                }
+            }
+            $item->$prop = $value;
+        }
+        return $item->save();
+    }
+
+    /**
      * @param $url
      * @return static|null
      */

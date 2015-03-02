@@ -34,12 +34,10 @@ $token = generate_action_token($ts);
             $videos = ClipitSite::get_videos();
             $files = ClipitSite::get_files();
             $storyboards = ClipitSite::get_storyboards();
-            $resources = ClipitSite::get_resources();
             $users = ClipitUser::get_all();
             echo(elgg_echo('recommendations:installation')."<br/><strong>" . count($videos) . "</strong> ".elgg_echo('recommendations:public_videos')."<br />");
             echo("<strong>" . count($files) . "</strong> ".elgg_echo('recommendations:public_files')."<br />");
             echo("<strong>" . count($storyboards) . "</strong> ".elgg_echo('recommendations:public_storyboards')."<br />");
-            echo("<strong>" . count($resources) . "</strong> ".elgg_echo('recommendations:public_resources')."<br />");
             echo("<strong>" . count($users) . "</strong> ".elgg_echo('recommendations:users')."<br />");
             ?>
         </p>

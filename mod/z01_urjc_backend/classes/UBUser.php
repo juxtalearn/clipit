@@ -149,6 +149,9 @@ class UBUser extends UBItem {
         }
         $property_list = (array)static::list_properties();
         foreach ($prop_value_array as $prop => $value) {
+            if (!array_key_exists($prop, $property_list)) {
+                throw new InvalidParameterException("ERROR: One or more property names do not exist.");
+            }
             if ($prop == "id") {
                 throw new InvalidParameterException("ERROR: Cannot modify 'id' of instance.");
             }
@@ -161,15 +164,10 @@ class UBUser extends UBItem {
             if ($prop == "login" && empty($id)) {
                 $user_array = static::get_by_login(array($value));
                 if (!empty($user_array[$value])) {
-                    $existing_user = $user_array[$value];
-                    return static::set_properties((int)$existing_user->id, (array)$prop_value_array);
+                    return false;
                 }
             }
-            if (!array_key_exists($prop, $property_list)) {
-                throw new InvalidParameterException("ERROR: One or more property names do not exist.");
-            } else {
-                $item->$prop = $value;
-            }
+            $item->$prop = $value;
         }
         return $item->save();
     }
@@ -434,10 +432,6 @@ class UBUser extends UBItem {
         $role = (string)$cell_iterator->current()->getValue();
         if (!empty($role)) {
             $prop_value_array["role"] = $role;
-        }
-        $user_array = static::get_by_login(array($login));
-        if (!empty($user_array[$login])) { // user already exists, we update it
-            return (int)static::set_properties($user_array[$login]->id, $prop_value_array);
         }
         return (int)static::create($prop_value_array);
     }
