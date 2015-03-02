@@ -12,8 +12,40 @@ $spanish = array(
     'follow_us' => 'Síguenos',
     'clipit:slogan' => 'Crea, aprende y comparte',
     'clipit:slogan:create' => 'Crea',
+    'clipit:slogan:create_rest' => 'un vídeo con tus compañeros apoyándote en Clipit.',
     'clipit:slogan:learn' => 'Aprende',
+    'clipit:slogan:learn_rest' => 'con los vídeos de otros grupos y de sus comentarios.',
     'clipit:slogan:share' => 'Comparte',
+    'clipit:slogan:share_rest' => 'tus vídeos con el resto de compañeros de tu centro educativo.',
+    'clipit:slogan:description' => 'ClipIt ofrece un entorno colaborativo para aprender enseñando
+                donde los estudiantes aprenden creando videos y evaluando el resultado
+                de sus compañeros. Los mejores vídeos pueden pasar a formar parte de los recursos
+                educativos de ClipIt.',
+    'clipit:carrousel:define' => 'Define',
+    'clipit:carrousel:define_rest' => 'El profesor define el tema y los conceptos clave sobre los que trabajan los estudiantes.
+        También puede compartir con los alumnos material de apoyo que sirva de referencia y de guía.',
+    'clipit:carrousel:collaborate' => 'Colabora',
+    'clipit:carrousel:collaborate_rest' => 'Los estudiantes se organizan en grupos para crear vídeos y materiales
+        educativos que se suben a Clipit. Cada grupo dispone de
+        herramientas que ofrecen un entorno de trabajo seguro:
+        un espacio para compartir ficheros, un sistema de mensajería ,
+        y un foro de discusión para facilitar la creación colaborativa de materiales.',
+    'clipit:carrousel:evaluate' => 'Evalúa',
+    'clipit:carrousel:evaluate_rest' => 'Los estudiantes revisan, discuten y valoran los videos creados
+        por sus compañeros aportando ideas que mejoren los materiales creados.
+        En este proceso se guía al estudiante mediante plantillas que guían
+        la evaluación de la parte educativa y la creativa.',
+    'clipit:carrousel:progress' => 'Progresa',
+    'clipit:carrousel:progress_rest' => 'ClipIt muestra al estudiante un resumen con el progreso de
+        los grupos donde participa, así como la evolución de cada una de las
+        actividades en las que está involucrado. Dispone, además, de analíticas de
+        aprendizaje personalizadas a disposición de los estudiantes y del profesor',
+    'clipit:carrousel:explore' => 'Explora',
+    'clipit:carrousel:explore_rest' => 'Navegar por los videos compartidos es fácil ya que se
+        categorizan por conceptos clave y por actividades
+        donde fueron creados. Además, los estudiantes
+        pueden navegar a través de las etiquetas asignadas a los videos, o siguiendo las
+        recomendaciones personalizadas.',
 
     // ERROR
     'error:404' => "Esta funcionalidad aún no está operativa.",
