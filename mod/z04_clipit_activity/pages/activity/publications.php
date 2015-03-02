@@ -16,20 +16,6 @@ elgg_push_breadcrumb($title);
 $href = "clipit_activity/{$activity->id}/publications";
 $filter = elgg_view('publications/filter', array('selected' => $selected_tab, 'entity' => $activity, 'href' => $href));
 $tasks = ClipitActivity::get_tasks($activity->id);
-switch($selected_tab){
-    case 'videos':
-        // Get last task [type: video_upload]
-        $content = publications_get_page_content_list('video_upload', $tasks, $href);
-        break;
-    case 'resources':
-        // Get last task [type: storyboard_upload]
-        $content = publications_get_page_content_list('resource_upload', $tasks, $href);
-        break;
-    case 'storyboards':
-        // Get last task [type: storyboard_upload]
-        $content = publications_get_page_content_list('storyboard_upload', $tasks, $href);
-        break;
-}
 
 if($page[2] == 'view' && $page[3]){
     $entity_id = (int)$page[3];
@@ -96,6 +82,21 @@ if($page[2] == 'view' && $page[3]){
             break;
         default:
             return false;
+            break;
+    }
+} else {
+    switch($selected_tab){
+        case 'videos':
+            // Get last task [type: video_upload]
+            $content = publications_get_page_content_list('video_upload', $tasks, $href);
+            break;
+        case 'resources':
+            // Get last task [type: storyboard_upload]
+            $content = publications_get_page_content_list('resource_upload', $tasks, $href);
+            break;
+        case 'storyboards':
+            // Get last task [type: storyboard_upload]
+            $content = publications_get_page_content_list('storyboard_upload', $tasks, $href);
             break;
     }
 }

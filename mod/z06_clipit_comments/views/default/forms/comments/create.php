@@ -33,5 +33,5 @@ echo elgg_view('input/submit', array(
     'style' => "margin-top: 20px;"
 ));
 
-// Attach system
+// Attach files
 echo elgg_view("multimedia/file/attach", array('entity' => $entity));
