@@ -144,7 +144,7 @@ $account = elgg_extract('accounts', $vars);
 </style>
 <div class="clipit-videos">
     <div class="container">
-        <h2 class="text-center">Videos <span>recomendados</span></h2>
+        <h2 class="text-center"><?php echo elgg_echo('clipit:global:recommended');?></h2>
         <div class="videos row">
             <div class="main-video col-md-9 margin-bottom-10">
                 <div>

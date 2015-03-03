@@ -164,7 +164,7 @@ class UBUser extends UBItem {
             if ($prop == "login" && empty($id)) {
                 $user_array = static::get_by_login(array($value));
                 if (!empty($user_array[$value])) {
-                    return false;
+                    return (int)$user_array[$value]->id;
                 }
             }
             $item->$prop = $value;
@@ -378,9 +378,13 @@ class UBUser extends UBItem {
         $user_array = array();
         $row_iterator = $php_excel->getSheet()->getRowIterator();
         while ($row_iterator->valid()) {
-            $row_result = static::parse_excel_row($row_iterator->current());
+            $row_result = (array)static::parse_excel_row($row_iterator->current());
             if (!empty($row_result)) {
-                $user_array[] = (int)$row_result;
+                if(!empty($row_result["group"])){
+                    $user_array[$row_result["group"]][] = (int)$row_result["user_id"];
+                } else{
+                    $user_array[0][] = (int)$row_result["user_id"];
+                }
             }
             $row_iterator->next();
         }
@@ -392,15 +396,16 @@ class UBUser extends UBItem {
      *
      * @param PHPExcel_Worksheet_Row $row_iterator
      *
-     * @return int|false ID of User contained in row, or false in case of error.
+     * @return array|false ID of User contained in row, or false in case of error.
      */
     private function parse_excel_row($row_iterator) {
+        $row_result = array();
         $prop_value_array = array();
         $cell_iterator = $row_iterator->getCellIterator();
         // Check for non-user row
         $value = $cell_iterator->current()->getValue();
         if (empty($value) || strtolower($value) == "users" || strtolower($value) == "name") {
-            return null;
+            return $row_result;
         }
         // name
         $name = $value;
@@ -411,7 +416,7 @@ class UBUser extends UBItem {
         if (!empty($login)) {
             $prop_value_array["login"] = $login;
         } else {
-            return null;
+            return $row_result;
         }
         $cell_iterator->next();
         // password
@@ -419,7 +424,7 @@ class UBUser extends UBItem {
         if (!empty($password)) {
             $prop_value_array["password"] = $password;
         } else {
-            return null;
+            return $row_result;
         }
         $cell_iterator->next();
         // email
@@ -433,6 +438,15 @@ class UBUser extends UBItem {
         if (!empty($role)) {
             $prop_value_array["role"] = $role;
         }
-        return (int)static::create($prop_value_array);
+        $cell_iterator->next();
+        $row_result["user_id"] = (int)static::create($prop_value_array);
+        // group
+        $group = (string)$cell_iterator->current()->getValue();
+        if(!empty($group)){
+            $row_result["group"] = $group;
+        } else{
+            $row_result["group"] = null;
+        }
+        return $row_result;
     }
 }

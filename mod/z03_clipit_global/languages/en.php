@@ -40,6 +40,7 @@ $english = array(
     'clipit:carrousel:explore_rest' => 'Navigate through public videos is easy using Stumbling Blocks tags and
         originating activity. Also, students can use free labels to tag and filter, and can follow recommended
         videos based on their activity and interests.',
+    'clipit:global:recommended' => 'Recommended <span>videos</span>',
 
     // ERROR
     'error:404' => "Sorry. We could not find the page that you requested.",
