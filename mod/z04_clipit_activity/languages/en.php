@@ -212,6 +212,7 @@ $english = array(
     'publications:rating' => 'Rating',
     'publications:rating:name' => '%s\'s Rating',
     'publications:rating:list' => 'All feedback',
+    'publications:rating:edit' => 'Edit feedback',
     'publications:rating:votes' => 'VOTES',
     'publications:rating:my_evaluation' => 'My evaluation',
     'publications:rating:stars' => 'Please score the video between 1 and 5 for performance',

@@ -55,13 +55,13 @@ if($entity->overall){
             <h4>
                 <strong><?php echo elgg_echo('publications:rating');?></strong>
             </h4>
-            <ul>
+            <ul class="margin-top-10">
                 <?php
                 foreach($performance_ratings as $performance_rating_id):
                     $performance_rating = array_pop(ClipitPerformanceRating::get_by_id(array($performance_rating_id)));
                     $performance_item = array_pop(ClipitPerformanceItem::get_by_id(array($performance_rating->performance_item)));
                 ?>
-                    <li class="list-item" style="margin: 10px 0;">
+                    <li class="list-item-5">
                         <div class="rating readonly pull-right" data-score="<?php echo $performance_rating->star_rating;?>" style="margin: 0 10px;">
                         <?php echo star_rating_view($performance_rating->star_rating);?>
                         </div>

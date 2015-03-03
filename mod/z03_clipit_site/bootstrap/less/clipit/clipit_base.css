@@ -8673,6 +8673,7 @@ ul.deadline-list > li .fa-user {
   color: #aaa !important;
   cursor: default !important;
   border-bottom: 1px #D8D8D8 solid;
+  display: none;
 }
 .ms-container .ms-list .ms-elem-selection.disabled:after,
 .ms-container .ms-list .ms-elem-selectable.disabled:after {

@@ -51,11 +51,11 @@ $(function(){
     <?php
     foreach($users as $user):
         if(!ClipitGroup::get_from_user_activity($user->id, $activity->id)):
-            ?>
+    ?>
             <option class="activity_users" value="<?php echo $user->id;?>">
                 <?php echo $user->name;?>
             </option>
-        <?php else:
+    <?php else:
             $group_students[] = $user;
         endif;
     endforeach;

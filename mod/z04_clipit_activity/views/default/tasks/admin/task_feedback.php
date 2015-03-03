@@ -47,8 +47,14 @@ $(function(){
         var us_id = $(this).data("user");
         if(content.is(':empty')){
             content.html('<i class="fa fa-spinner fa-spin fa-2x blue"></i>');
-            $.get( elgg.config.wwwroot+"ajax/view/publications/admin/user_ratings", {entities_ids: <?php echo json_encode($entities_ids);?>, user_id: us_id}, function( data ) {
-                content.html(data);
+            elgg.get("ajax/view/publications/admin/user_ratings", {
+                data: {
+                    entities_ids: <?php echo json_encode($entities_ids);?>,
+                    user_id: us_id
+                },
+                success: function (data) {
+                    content.html(data);
+                }
             });
         }
     });

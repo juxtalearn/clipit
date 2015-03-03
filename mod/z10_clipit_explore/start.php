@@ -162,6 +162,9 @@ function explore_page_handler($page) {
 
         $href = "explore";
     }
+    if($page[0]){
+        $selected_tab = false;
+    }
     switch($selected_tab){
         case 'videos':
             elgg_push_breadcrumb(elgg_echo("videos"));
