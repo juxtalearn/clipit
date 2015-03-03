@@ -22,7 +22,7 @@ $site = elgg_get_site_entity();
                     <h2>Hola!</h2>
                     <?php
                     echo elgg_view('output/url', array(
-                        'href' => "mailto:{$site->email}",
+                        'href' => "mailto:{$site->email}?subject=feedback from: {$site->name}",
                         'title' => elgg_echo('send:email_to_site'),
                         'text' => elgg_view('output/img', array(
                             'src' => "mod/z03_clipit_site/graphics/mail.png",
