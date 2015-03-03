@@ -9,7 +9,7 @@ $spanish = array(
     'read_less' => 'Menos',
     'event:timeline' => 'Timeline',
     'name' => 'Nombre',
-    'activities:active:none' => 'Actualmente no hay actividades en curso',
+    'activities:active:none' => 'No hay actividades en curso',
     'saved' => 'Guardado',
     'date' => 'Fecha',
     'mine' => 'Míos',
@@ -40,7 +40,7 @@ $spanish = array(
 
     // ERROR
     'error:404' => "Esta funcionalidad aún no está operativa.",
-    'view_all' => 'Ver todos',
+    'view_all' => 'Ver todo',
     'view_as' => 'Ver como',
     'me'    => "yo",
     'options' => 'Opciones',

@@ -13,7 +13,7 @@
 ?>
 <div style="height: <?php echo $vars['height'];?>" class="wrapper separator blue-lighter loading-block empty-block">
     <div>
-        <i class="fa fa-frown-o"></i>
+        <i class="fa fa-calendar"></i>
         <h4 class="blue-lighter"><?php echo $vars['text'];?></h4>
     </div>
 </div>
