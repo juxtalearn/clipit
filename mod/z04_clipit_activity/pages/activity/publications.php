@@ -29,8 +29,16 @@ if($page[2] == 'view' && $page[3]){
     $owner_group_id = $entity->get_group($entity->id);
     $my_group = ClipitGroup::get_from_user_activity($user_id, $activity->id);
     $canEvaluate = false;
-    if(!$hasRating && ($my_group != $owner_group_id) && $user->role == ClipitUser::ROLE_STUDENT){
-        $canEvaluate = true;
+    $feedback_task = ClipitTask::get_child($entity::get_task($entity->id));
+    if(
+        !$hasRating
+        && $feedback_task
+        && $my_group != $owner_group_id
+        && $user->role == ClipitUser::ROLE_STUDENT
+        && ClipitTask::get_status($feedback_task) == ClipitTask::STATUS_ACTIVE
+    ){
+            $canEvaluate = ClipitTask::get_completed_status($feedback_task, $user_id) ? false:$feedback_task;
+
     }
 
     $owner_group = array_pop(ClipitGroup::get_by_id(array($owner_group_id)));
@@ -52,6 +60,7 @@ if($page[2] == 'view' && $page[3]){
                 'entity' => $entity,
                 'body' => $body,
                 'canEvaluate' => $canEvaluate,
+                'feedback_task' => $feedback_task,
                 'activity' => $activity,
                 'group' => $owner_group,
                 'comments' => $comments
@@ -75,6 +84,7 @@ if($page[2] == 'view' && $page[3]){
                 'type' => 'storyboard',
                 'body' => $body,
                 'canEvaluate' => $canEvaluate,
+                'feedback_task' => $feedback_task,
                 'activity' => $activity,
                 'comments' => $comments,
                 'group' => $owner_group

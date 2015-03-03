@@ -72,7 +72,7 @@ $spanish = array(
     'activity:teachers' => 'Profesores',
     'activity:invited' => 'Ha sido invitado a la actividad',
     // Activity status
-    'status:enroll' => 'Incripción',
+    'status:enroll' => 'Inscripción',
     'status:active' => 'En curso',
     'status:closed' => 'Cerrada',
     'status:change_to:active:tooltip' => 'La fecha de inicio se establecerá como hoy. Ajuste la fecha de finalización manualmente. Haga click en Guardar para aceptar los cambios.',
@@ -211,6 +211,7 @@ $spanish = array(
     'publications:rating' => 'Puntuación',
     'publications:rating:name' => 'Puntuación de %s',
     'publications:rating:list' => 'Todas las evaluaciones',
+    'publications:rating:edit' => 'Editar feedback',
     'publications:rating:votes' => 'VOTOS',
     'publications:rating:my_evaluation' => 'Mi valoración',
     'publications:rating:stars' => 'Valora de 1 a 5 la realización del video, teniendo en cuenta',

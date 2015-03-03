@@ -17,6 +17,7 @@ $evaluation_list = get_filter_evaluations($entities, $activity->id);
 $list_no_evaluated = elgg_view('multimedia/video/list_summary', array(
     'videos'    => $evaluation_list["no_evaluated"],
     'href'      => $href,
+    'task_id'      => $task->id,
     'rating'    => true,
     'total_comments' => true,
 ));

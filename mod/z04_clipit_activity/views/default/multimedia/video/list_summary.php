@@ -14,6 +14,7 @@ $entity = elgg_extract('entity', $vars);
 $video_ids = elgg_extract('videos', $vars);
 $href = elgg_extract("href", $vars);
 $rating = elgg_extract("rating", $vars);
+$task_id = elgg_extract("task_id", $vars);
 $user_id = elgg_get_logged_in_user_guid();
 $user = array_pop(ClipitUser::get_by_id(array($user_id)));
 ?>
@@ -59,9 +60,10 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
             $description = substr($description, 0, 280)."...";
         }
         $published = false;
-    ?>
-        <?php
-        echo elgg_view("page/components/modal_remote", array('id'=> "publish-{$video->id}" ));
+        if($vars['send_site']) {
+            echo elgg_view("page/components/modal_remote", array('id' => "publish-{$video->id}"));
+        }
+        $href_video = $href."/view/".$video->id . ($task_id ? "?task_id=".$task_id."#evaluate": "");
     ?>
     <li class="video-item row list-item">
         <?php
@@ -78,7 +80,7 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
                     </div>
                 </a>
             <?php else:?>
-                <a href="<?php echo elgg_get_site_url()."{$href}/view/{$video->id}"; ?>">
+                <a href="<?php echo elgg_get_site_url().$href_video; ?>">
                     <div class="img-preview">
                         <img src="<?php echo $video->preview;?>">
                     </div>
@@ -135,7 +137,7 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
                     ?>
                 <?php else:?>
                     <?php echo elgg_view('output/url', array(
-                        'href'  => "{$href}/view/".$video->id,
+                        'href'  => $href_video,
                         'title' => $video->name,
                         'text'  => $video->name));
                     ?>
@@ -153,7 +155,7 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
                     <!-- Count total comments -->
                     <strong>
                         <?php echo elgg_view('output/url', array(
-                            'href'  => "{$href}/view/{$video->id}#comments",
+                            'href'  => $href_video."#comments",
                             'title' => elgg_echo('comments'),
                             'class' => 'pull-right btn btn-xs btn-xs-5 btn-blue-lighter',
                             'text'  => $total_comments. ' <i class="fa fa-comments"></i>'))

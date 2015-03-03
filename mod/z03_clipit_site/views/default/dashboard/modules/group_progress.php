@@ -23,9 +23,6 @@ $user_id = elgg_get_logged_in_user_guid();
         $progress = get_group_progress($group_id);
         ?>
             <div>
-<!--                <a class="text-muted pull-right">-->
-<!--                    --><?php //echo $group_object['name'];?>
-<!--                </a>-->
                 <?php echo elgg_view('output/url', array(
                     'href' => "clipit_activity/{$activity->id}/group/{$group_id}",
                     'class' => 'pull-right',

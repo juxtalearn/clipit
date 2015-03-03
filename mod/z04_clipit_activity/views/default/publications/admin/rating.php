@@ -66,10 +66,9 @@ $language_index = ClipitPerformanceItem::get_language_index($user_language);
                     'text'  => $entity->name));
                 ?>
             </strong>
-            <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $entity->tag_array, 'width' => 105, 'limit' => 2));?>
         </div>
-        <hr class="margin-bottom-5 margin-top-10">
         <div class="block-total">
+            <hr class="margin-bottom-5 margin-top-10">
             <div>
                 <ul>
                     <?php

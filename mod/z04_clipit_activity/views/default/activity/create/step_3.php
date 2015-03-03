@@ -124,7 +124,13 @@ $(function () {
         }
     }).on('fileuploaddone', function (e, data) {
         var parent_id = $(this).parent("a").attr("id");
-        $.each(data.result, function(index, user) {
+        $.each(data.result, function(i, user) {
+            if(user.group != 0){
+                if($("#called_users optgroup[label='"+user.group+"']").length == 0){
+                    $("#called_users").prepend("<optgroup label='"+user.group+"'/>");
+                }
+                $("#called_users option[value='"+user.id+"']").appendTo("#called_users optgroup[label='"+user.group+"']");
+            }
             $('#called_users').multiSelect('addOption',
                 { value: user.id, text: user.name, index: 0}
             );
@@ -136,6 +142,12 @@ $(function () {
     });
 });
 </script>
+<style>
+    .ms-optgroup{
+        background: #fafafa;
+        margin-bottom: 10px !important;
+    }
+</style>
 <div id="step_3" class="row step" style="display: none;">
     <div class="col-md-8">
         <div>
