@@ -257,6 +257,7 @@ $english = array(
     'task:title' => 'Task title',
     'task:add' => 'Add task',
     'task:remove' => 'Remove task',
+    'task:remove_video' => 'Remove video',
     'task:added' => 'Added task',
     'task:updated' => 'Updated task',
     'task:cantupdate' => 'You can not update task',

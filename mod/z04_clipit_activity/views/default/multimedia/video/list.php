@@ -134,8 +134,8 @@ if($unlink){
                             'href'  => 'action/multimedia/videos/remove?id='.$video->id.'&unlink=true',
                             'is_action' => true,
                             'class'  => 'btn btn-xs btn-border-red btn-primary margin-bottom-10',
-                            'title' => elgg_echo('delete'),
-                            'text'  => '<i class="fa fa-trash-o"></i> '.elgg_echo('delete')
+                            'title' => elgg_echo('task:remove_video'),
+                            'text'  => '<i class="fa fa-trash-o"></i> '.elgg_echo('task:remove_video')
                         ));
                         ?>
                     <?php endif; ?>

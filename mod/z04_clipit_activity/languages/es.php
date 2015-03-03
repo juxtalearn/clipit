@@ -256,6 +256,7 @@ $spanish = array(
     'task:title' => 'Título de la tarea',
     'task:add' => 'Añadir tarea',
     'task:remove' => 'Eliminar tarea',
+    'task:remove_video' => 'Quitar video',
     'task:added' => 'Tarea añadida',
     'task:updated' => 'Tarea actualizada',
     'task:cantupdate' => 'No se ha podido actualizar la tarea',
