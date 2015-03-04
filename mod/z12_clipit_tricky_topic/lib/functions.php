@@ -185,7 +185,7 @@ function trickytopic_filter_search($query){
                 $item_search = array();
                 $tricky_topics = ClipitTrickyTopic::get_all();
                 foreach($tricky_topics as $tricky_topic){
-                    if(stripos($tricky_topic->education_level, $value) !== false){
+                    if($tricky_topic->education_level == $value){
                         $item_search[] = $tricky_topic->id;
                     }
                 }

@@ -7475,8 +7475,7 @@ li.list-item:last-child {
 }
 .multimedia-owner .multimedia-view {
   background: #fafafa;
-  padding: 20px;
-  margin: 10px 0;
+  margin: 10px 0 20px 0;
 }
 .multimedia-owner .multimedia-view .btn {
   padding: 5px 10px;
@@ -7839,28 +7838,29 @@ li.list-item:last-child {
 .module-pending small {
   margin-top: 3px;
 }
-.module-activity_status .elgg-head {
-  background: #32b4e5;
-  color: #FFF;
-}
-.module-activity_status .elgg-head a {
-  color: #FFF;
-}
-.module-activity_status .elgg-head h3 {
-  color: #FFF;
-}
-.module-activity_status .elgg-body {
-  background-color: #bae6f6;
-  background-image: url('../../../graphics/bg-bar.png');
-  background-position-x: -10px;
-}
 .module-activity_status .elgg-body .wrapper {
   position: relative;
 }
+.module-activity_status .elgg-body .wrapper > div {
+  margin-bottom: 5px;
+  border-bottom: 1px solid #bae6f6;
+  padding-bottom: 10px;
+}
+.module-activity_status .elgg-body .wrapper > div:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.module-activity_status .elgg-body .bg-bar {
+  background-color: #f5f5f5;
+}
 .module-activity_status .elgg-body .bar {
-  height: 50px;
-  line-height: 50px;
-  margin-bottom: 10px;
+  height: 20px;
+  line-height: 20px;
+  background: #32b4e5;
+  min-width: 15%;
+  max-width: 100%;
+  margin-top: 5px;
+  border-radius: 4px;
 }
 .module-activity_status .elgg-body .bar > div {
   padding-left: 10px;
@@ -7869,11 +7869,13 @@ li.list-item:last-child {
   line-height: inherit;
   width: 100%;
   margin: 0;
-  font-size: 18px;
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.module-activity_status .elgg-body .bar > div span {
+  color: #fff;
 }
 .module-activity_status .elgg-body .bar > div h4 a {
   color: #FFF;
@@ -7953,10 +7955,14 @@ li.list-item:last-child {
   position: relative;
   background: transparent;
 }
-.module-events .elgg-head {
+.module-events .elgg-head h3 {
+  padding-left: 25px;
+}
+.module-events .elgg-head .collapse {
   display: none;
 }
 .module-events .margin-bar {
+  top: 35px;
   height: 100%;
   position: absolute;
   background: #CACCCE;
@@ -8166,6 +8172,43 @@ li.list-item:last-child {
 .navbar-blue .navbar-nav > li > a:focus {
   color: #FFFFFF;
 }
+.navbar-nav li.options {
+  background: #f5f5f5;
+  padding: 10px;
+  margin-top: -8px;
+  margin-bottom: -5px;
+}
+.navbar-nav li.options a {
+  display: inline-block;
+  font-size: 14px;
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: bold;
+  padding: 0 !important;
+}
+.navbar-nav li.options a:hover,
+.navbar-nav li.options a:focus {
+  color: #32b4e5;
+}
+.navbar-nav li.options a > .fa {
+  font-size: 14px;
+  float: none !important;
+}
+.navbar-nav li.options .btn {
+  color: #fff;
+  font-size: 12px;
+  display: inline-block;
+  font-weight: bold;
+  letter-spacing: 0;
+  padding: 5px 10px !important;
+  text-transform: none;
+  font-family: Helvetica;
+}
+.navbar-nav li.options .btn:hover,
+.navbar-nav li.options .btn:focus {
+  background-color: #1ba1d3;
+  color: #fff !important;
+}
 ul.top-account .avatar-user {
   padding: 0;
   padding: 6px 5px 0 0;
@@ -8187,6 +8230,11 @@ ul.top-account > li.separator {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 20px;
   padding: 10px 5px 0;
+}
+@media (max-width: 991px) {
+  ul.top-account > li.separator {
+    display: none;
+  }
 }
 ul.top-account > li .fa {
   float: left !important;
@@ -8625,6 +8673,7 @@ ul.deadline-list > li .fa-user {
   color: #aaa !important;
   cursor: default !important;
   border-bottom: 1px #D8D8D8 solid;
+  display: none;
 }
 .ms-container .ms-list .ms-elem-selection.disabled:after,
 .ms-container .ms-list .ms-elem-selectable.disabled:after {
@@ -8959,7 +9008,7 @@ ul.deadline-list > li .fa-user {
 .video-list .video-item p {
   color: #666666;
   margin: 0;
-  height: 63px;
+  min-height: 63px;
   overflow: hidden;
 }
 .video-list .video-item small {
@@ -10335,6 +10384,11 @@ ol {
   padding: 5px 10px !important;
   float: right !important;
 }
+.btn .help-tooltip {
+  color: #fff;
+  margin-right: 5px;
+  margin-left: -10px;
+}
 small,
 .small {
   /*font-size: 75%;*/
@@ -10418,22 +10472,15 @@ h4.empty {
 .margin-left-20 {
   margin-left: 20px;
 }
+.margin-left-20_important {
+  margin-left: 20px !important;
+}
 .progress-bar {
   background: #32b4e5;
 }
 .progress-bar[value='0'] {
   color: #32b4e5;
   margin-left: 10px;
-}
-@font-face {
-  font-family: 'Futura';
-  src: url('../../fonts/futuralt.eot');
-  src: url('../../fonts/futuralt.eot') format('embedded-opentype'), url('../../fonts/futuralt.woff') format('woff'), url('../../fonts/futuralt.ttf') format('truetype'), url('../../fonts/futuralt.svg#FuturaLTRegular') format('svg');
-}
-@font-face {
-  font-family: 'FuturaBoldRegular';
-  src: url('../../fonts/futuralt-bold.eot');
-  src: url('../../fonts/futuralt-bold.eot') format('embedded-opentype'), url('../../fonts/futuralt-bold.woff') format('woff'), url('../../fonts/futuralt-bold.ttf') format('truetype'), url('../../fonts/futuralt-bold.svg#FuturaLTBold') format('svg');
 }
 .progress {
   margin-bottom: 0;
@@ -11261,4 +11308,8 @@ tr.info td {
   border: 0;
   border-bottom: 1px solid #FFF;
   cursor: default;
+}
+.gray-block {
+  background: #fafafa;
+  padding: 10px;
 }

@@ -11,18 +11,15 @@ class ClipitRemoteSite extends UBItem{
     const REL_REMOTESITE_FILE = "ClipitRemoteSite-ClipitFile";
     const REL_REMOTESITE_VIDEO = "ClipitRemoteSite-ClipitVideo";
     const REL_REMOTESITE_STORYBOARD = "ClipitRemoteSite-ClipitStoryboard";
-    const REL_REMOTESITE_RESOURCE = "ClipitRemoteSite-ClipitResource";
     public $file_array = array();
     public $video_array = array();
     public $storyboard_array = array();
-    public $resource_array = array();
 
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
         $this->file_array = (array)static::get_files($this->id);
         $this->video_array = (array)static::get_videos($this->id);
         $this->storyboard_array = (array)static::get_storyboards($this->id);
-        $this->resource_array = (array)static::get_resources($this->id);
     }
 
     /**
@@ -34,8 +31,39 @@ class ClipitRemoteSite extends UBItem{
         static::set_files($this->id, $this->file_array);
         static::set_videos($this->id, $this->video_array);
         static::set_storyboards($this->id, $this->storyboard_array);
-        static::set_resources($this->id, $this->resource_array);
         return $this->id;
+    }
+
+    /**
+     * Sets values to specified properties of a RemoteSite
+     *
+     * @param int $id Id of User to set property values
+     * @param array $prop_value_array Array of property=>value pairs to set into the RemoteSite
+     *
+     * @return int|bool Returns Id of User if correct, or false if error
+     * @throws InvalidParameterException
+     */
+    static function set_properties($id, $prop_value_array) {
+        if (!$item = new static($id)) {
+            return false;
+        }
+        $property_list = (array)static::list_properties();
+        foreach ($prop_value_array as $prop => $value) {
+            if (!array_key_exists($prop, $property_list)) {
+                throw new InvalidParameterException("ERROR: One or more property names do not exist.");
+            }
+            if ($prop == "id") {
+                throw new InvalidParameterException("ERROR: Cannot modify 'id' of instance.");
+            }
+            if ($prop == "url" && empty($id)) {
+                $remote_site = static::get_from_url($value);
+                if (!empty($remote_site)) {
+                    return false;
+                }
+            }
+            $item->$prop = $value;
+        }
+        return $item->save();
     }
 
     /**
@@ -90,18 +118,5 @@ class ClipitRemoteSite extends UBItem{
     }
     static function get_storyboards($id) {
         return UBCollection::get_items($id, static::REL_REMOTESITE_STORYBOARD);
-    }
-    // REMOTE RESOURCES
-    static function add_resources($id, $resource_array) {
-        return UBCollection::add_items($id, $resource_array, static::REL_REMOTESITE_RESOURCE);
-    }
-    static function set_resources($id, $resource_array) {
-        return UBCollection::set_items($id, $resource_array, static::REL_REMOTESITE_RESOURCE);
-    }
-    static function remove_resources($id, $resource_array) {
-        return UBCollection::remove_items($id, $resource_array, static::REL_REMOTESITE_RESOURCE);
-    }
-    static function get_resources($id) {
-        return UBCollection::get_items($id, static::REL_REMOTESITE_RESOURCE);
     }
 } 

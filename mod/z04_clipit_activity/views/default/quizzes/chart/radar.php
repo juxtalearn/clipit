@@ -40,6 +40,8 @@ elgg_load_js('jquery:chartjs');
             pointDotStrokeWidth : 2,
             responsive: true,
             scaleOverride: true,
+            datasetStrokeWidth : 5,
+            tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= Math.round((value*100)) %>%",
 
             // ** Required if scaleOverride is true **
             scaleSteps: 1,

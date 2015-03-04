@@ -21,11 +21,43 @@ $user_id = elgg_get_logged_in_user_guid();
         $group_id = ClipitGroup::get_from_user_activity($user_id, $activity->id);
         $group_object = ClipitSite::lookup($group_id);
         $progress = get_group_progress($group_id);
-        if($progress == 0){
-            $progress = 5;
-        }
         ?>
-        <div class="bar" style="max-width:100%;width:<?php echo $progress;?>%;background: #<?php echo $activity->color;?>;">
+            <div>
+                <?php echo elgg_view('output/url', array(
+                    'href' => "clipit_activity/{$activity->id}/group/{$group_id}",
+                    'class' => 'pull-right',
+                    'text' => $group_object['name'],
+                    'title' => $group_object['name'],
+                    'is_trusted' => true,
+                ));
+                ?>
+                <?php echo elgg_view('output/url', array(
+                    'href' => "clipit_activity/{$activity->id}",
+                    'class' => 'activity-point',
+                    'style' => "background: #$activity->color;",
+                    'text' => '',
+                    'title' => $activity->name,
+                    'is_trusted' => true,
+                ));
+                ?>
+                <strong>
+                    <?php echo elgg_view('output/url', array(
+                        'href' => "clipit_activity/{$activity->id}",
+                        'text' => $activity->name,
+                        'title' => $activity->name,
+                        'is_trusted' => true,
+                    ));
+                    ?>
+                </strong>
+                <div class="bg-bar">
+                    <div class="bar" style="width: <?php echo $progress;?>%;">
+                        <div>
+                            <span><?php echo $progress;?>%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="bar" style="display:none;max-width:100%;width:<?php echo $progress;?>%;background: #<?php echo $activity->color;?>;">
             <div>
                 <h4>
                     <?php echo elgg_view('output/url', array(

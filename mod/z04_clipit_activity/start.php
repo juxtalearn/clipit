@@ -34,11 +34,7 @@ function clipit_activity_init() {
     elgg_load_library('clipit:activity:multimedia');
 
     // Special views for role = teacher
-    if($user->role == ClipitUser::ROLE_TEACHER){
-        // Create activity
-        elgg_extend_view("navigation/menu/top", "navigation/menu/create_activity", 50);
-        elgg_register_page_handler('create_activity', 'create_activity_page_handler');
-    }
+
     if($user->role == ClipitUser::ROLE_STUDENT) {
         // My activities list (top header)
         elgg_extend_view("navigation/menu/top", "navigation/menu/my_activities", 100);
@@ -47,9 +43,11 @@ function clipit_activity_init() {
     // Register "/my_activities" page handler
     elgg_register_page_handler('my_activities', 'my_activities_page_handler');
     if($user->role == ClipitUser::ROLE_TEACHER || $user->role == ClipitUser::ROLE_ADMIN) {
+        // Register "/create_activity" page handler
+        elgg_register_page_handler('create_activity', 'create_activity_page_handler');
         // Register "/activities" page handler
         elgg_register_page_handler('activities', 'activities_page_handler');
-        elgg_extend_view("navigation/menu/top", "navigation/menu/activities", 100);
+        elgg_extend_view("navigation/menu/top", "navigation/menu/activities", 200);
     }
     // Register "/file" page handler
     elgg_register_page_handler('file', 'file_page_handler');
@@ -61,6 +59,7 @@ function clipit_activity_init() {
     // Create Activity
     elgg_register_action("activity/create/add_users", "{$plugin_dir}/actions/activity/add_users.php");
     elgg_register_action("activity/create/add_users_upload", "{$plugin_dir}/actions/activity/add_users_upload.php");
+    elgg_register_action("activity/remove", "{$plugin_dir}/actions/activity/remove.php");
     elgg_register_action("activity/create", "{$plugin_dir}/actions/activity/create.php");
     elgg_register_ajax_view('activity/create/task_list');
     elgg_register_ajax_view('activity/create/groups/create');
@@ -75,6 +74,7 @@ function clipit_activity_init() {
     elgg_register_action("task/edit", "{$plugin_dir}/actions/task/edit.php");
     elgg_register_action("task/remove", "{$plugin_dir}/actions/task/remove.php");
     elgg_register_action("task/create", "{$plugin_dir}/actions/task/create.php");
+    elgg_register_ajax_view('tasks/admin/feedback_data');
 
     elgg_register_ajax_view('activity/admin/tasks/quiz/add_type');
     elgg_register_ajax_view('activity/admin/tasks/quiz/quiz');
@@ -83,7 +83,7 @@ function clipit_activity_init() {
     elgg_register_action("quiz/question_annotate", "{$plugin_dir}/actions/quiz/question_annotate.php");
 
     elgg_register_ajax_view('activity/admin/groups/users_list');
-    elgg_register_ajax_view('activity/admin/group_info');
+    elgg_register_ajax_view('activity/admin/groups/info');
     elgg_register_ajax_view('publications/admin/user_ratings');
     elgg_register_ajax_view('modal/activity/admin/user_stats');
     elgg_register_ajax_view('modal/activity/admin/users_task');
@@ -97,6 +97,7 @@ function clipit_activity_init() {
     elgg_register_action("group/create", "{$plugin_dir}/actions/group/create.php");
     elgg_register_action("group/remove_member", "{$plugin_dir}/actions/group/remove_member.php");
     elgg_register_ajax_view('modal/group/view');
+
     elgg_register_ajax_view('multimedia/attach/videos');
     elgg_register_ajax_view('multimedia/attach/storyboards');
     elgg_register_ajax_view('multimedia/attach/files');
@@ -137,10 +138,13 @@ function clipit_activity_init() {
     elgg_register_action("multimedia/storyboards/set_options", "{$plugin_dir}/actions/multimedia/storyboards/set_options.php");
     elgg_register_action("multimedia/storyboards/remove", "{$plugin_dir}/actions/multimedia/storyboards/remove.php");
     elgg_register_ajax_view('modal/multimedia/storyboard/edit');
+
     // Publications
     elgg_register_action("publications/evaluate", "{$plugin_dir}/actions/publications/evaluate.php");
     elgg_register_action("publications/publish", "{$plugin_dir}/actions/publications/publish.php");
+    elgg_register_action("publications/publish/site", "{$plugin_dir}/actions/publications/publish.php");
     elgg_register_action("publications/labels/add", "{$plugin_dir}/actions/publications/labels/add.php");
+    elgg_register_ajax_view('modal/publications/publish');
     elgg_register_ajax_view('modal/publications/rating');
     elgg_register_ajax_view('publications/labels/search');
     // Discussion
@@ -167,9 +171,10 @@ function clipit_activity_init() {
     elgg_register_js('jquery:tag_it', "{$vendors_dir}/jquery.tag-it.min.js");
     elgg_load_js("jquery:tag_it");
     // Activity javascript libraries
-    $activity_js = elgg_get_simplecache_url('js', 'activity');
-    elgg_register_simplecache_view('js/activity');
-    elgg_register_js('clipit:activity', $activity_js);
+//    $activity_js = elgg_get_simplecache_url('js', 'activity');
+//    elgg_register_simplecache_view('js/activity');
+//    elgg_register_js('clipit:activity', $activity_js);
+    elgg_register_js('clipit:activity', elgg_get_site_url()."js/activity.js");
     elgg_load_js('clipit:activity');
     // Attach files
     $files_attach_js = elgg_get_simplecache_url('js', 'attach');
@@ -197,6 +202,7 @@ function clipit_activity_init() {
     // ChartJS
     elgg_register_js("jquery:chartjs", "{$vendors_dir}/chartjs.min.js");
 }
+
 function activity_setup_sidebar_menus(){
     $activity_id =  elgg_get_page_owner_guid();
     $user_id = elgg_get_logged_in_user_guid();

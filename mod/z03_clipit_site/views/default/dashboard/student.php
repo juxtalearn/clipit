@@ -23,7 +23,7 @@ $(function(){
 <div class="col-md-4 events-list">
     <?php echo elgg_view('dashboard/module', array(
         'name'      => 'events',
-        'title'     => '',
+        'title'     => elgg_echo('event:timeline'),
         'content'   => elgg_view('dashboard/modules/events'),
     ));
     ?>

@@ -15,6 +15,9 @@ $spanish = array(
     'search:not_found' => 'No se han encontrado resultados',
     'search:reset' => 'Restablecer busqueda',
     'explore:menu' => 'Publicaciones',
+    'explore:scope' => 'Explorar por ámbito',
+    'explore:tags' => 'Explorar por Concepto',
+    'explore:public' => 'Público',
 );
 
 add_translation('es', $spanish);

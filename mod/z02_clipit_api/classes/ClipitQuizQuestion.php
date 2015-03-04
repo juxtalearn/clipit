@@ -220,9 +220,4 @@ class ClipitQuizQuestion extends UBItem {
         return static::set_properties($id, $prop_value_array);
     }
 
-    static function set_type_string($id){
-        $prop_value_array = array();
-        $prop_value_array["option_type"] = static::TYPE_STRING;
-        return static::set_properties($id, $prop_value_array);
-    }
 }

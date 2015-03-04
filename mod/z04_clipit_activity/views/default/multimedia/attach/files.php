@@ -12,6 +12,12 @@
  */
 $selected_files = elgg_extract('selected', $vars);
 $entity_id = elgg_extract('entity_id', $vars);
+$input_prefix = elgg_extract('input_prefix', $vars);
+if($input_prefix) {
+    $input_prefix = $input_prefix . "[attach_files][]";
+} else {
+    $input_prefix = 'attach_files[]';
+}
 $object = ClipitSite::lookup($entity_id);
 $files = $object['subtype']::get_files($entity_id);
 ?>
@@ -30,7 +36,7 @@ foreach($files as $file_id):
             type="checkbox"
             <?php echo  $selected ? 'checked' : false;?>
             style="display: none"
-            name="attach_files[]"
+            name="<?php echo $input_prefix;?>"
             value="<?php echo $file_id;?>"
             id="item_<?php echo $file_id;?>"
             >

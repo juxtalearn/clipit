@@ -14,18 +14,11 @@ $user_id = elgg_get_logged_in_user_guid();
 ?>
 <li <?php echo elgg_in_context('activities') ? 'class="active"': '';?>>
     <?php echo elgg_view('output/url', array(
-        'href'  => "activities",
-        'title' => elgg_echo('activities'),
-        'text'  => elgg_echo('activities')
-    ));
-    ?>
-    <?php echo elgg_view('output/url', array(
         'href'  => "#",
         'data-toggle' => 'dropdown',
-        'class' => 'caret-down',
-        'style' => 'height: 50px;',
         'id' => 'activities',
-        'text'  => '<i class="fa fa-caret-down"></i>'
+        'title' => elgg_echo('activities'),
+        'text'  => '<i class="fa fa-caret-down pull-right" style="float: right !important;"></i>'.elgg_echo('activities')
     ));
     ?>
     <!-- My activities dropdown menu -->
@@ -37,7 +30,7 @@ $user_id = elgg_get_logged_in_user_guid();
             <li>
                 <a style="border-bottom: 1px solid #EFEFEF;">
                     <small class="show">
-                        <?php echo elgg_echo('my_activities');?>
+                        <?php echo elgg_echo('my_activities:active');?>
                     </small>
                 </a>
             </li>
@@ -46,8 +39,6 @@ $user_id = elgg_get_logged_in_user_guid();
                 $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
                 if($activity->status != ClipitActivity::STATUS_CLOSED):
                     $activities_found = true;
-                    $group_id = ClipitGroup::get_from_user_activity($user_id, $activity_id);
-                    $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
                     ?>
                     <li role="presentation">
                         <a role="menuitem" tabindex="-1" href="<?php echo elgg_get_site_url();?>clipit_activity/<?php echo $activity_id;?>">
@@ -58,9 +49,9 @@ $user_id = elgg_get_logged_in_user_guid();
                                 <div class="text-truncate blue">
                                     <span><?php echo $activity->name; ?></span>
                                 </div>
-                                <?php if($group_id): ?>
-                                    <small class="show"><?php echo $group->name; ?></small>
-                                <?php endif; ?>
+                                <small class="show">
+                                    <?php echo count($activity->student_array); ?> <?php echo elgg_echo('students');?>
+                                </small>
                             </div>
                         </a>
                     </li>
@@ -74,7 +65,24 @@ $user_id = elgg_get_logged_in_user_guid();
                     <small class="show"><?php echo elgg_echo('my_activities:none');?></small>
                 </a>
             </li>
+            <li role="presentation" class="divider"></li>
         <?php endif;?>
+        <li class="options" style="margin-top:0;">
+            <?php echo elgg_view('output/url', array(
+                'href'  => "create_activity",
+                'class' => 'btn btn-primary btn-sm',
+                'title' => elgg_echo('activity:create'),
+                'text'  => elgg_echo('activity:create'),
+            ));
+            ?>
+            <?php echo elgg_view('output/url', array(
+                'href'  => "activities",
+                'class' => 'pull-right margin-top-5',
+                'title' => elgg_echo('view_all'),
+                'text'  => elgg_echo('view_all'),
+            ));
+            ?>
+        </li>
     </ul>
 </li>
 <li class="separator">|</li>

@@ -15,12 +15,12 @@ $href = elgg_extract('href', $vars);
 if(!$tasks){
     echo elgg_view('output/empty', array('value' => elgg_echo('tasks:none')));
 }
+
 $user_id = elgg_get_logged_in_user_guid();
 $user = array_pop(ClipitUser::get_by_id(array($user_id)));
 ?>
 <ul class="deadline-list">
-    <?php foreach($tasks as $task_id):
-    $task = array_pop(ClipitTask::get_by_id(array($task_id)));
+    <?php foreach($tasks as $task):
     $status = get_task_status($task);
     ?>
     <li class="overflow-hidden list-item-5 <?php echo (time() < $task->start && $user->role == ClipitUser::ROLE_STUDENT) ? "soon" : ""; ?>">

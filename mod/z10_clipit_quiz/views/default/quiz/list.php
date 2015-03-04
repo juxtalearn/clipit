@@ -67,10 +67,10 @@ $(function(){
         <th><?php echo elgg_echo('title');?></th>
         <th><?php echo elgg_echo('tricky_topic');?></th>
         <th><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
-        <?php if($options):?>
-            <th style="width: 100px;"><?php echo elgg_echo('options');?></th>
-        <?php endif;?>
         <th class="text-right"><?php echo elgg_echo('quiz:questions');?></th>
+        <?php if($options):?>
+            <th style="width: 100px;"></th>
+        <?php endif;?>
     </tr>
     </thead>
     <?php
@@ -128,34 +128,6 @@ $(function(){
                     <?php echo elgg_view('output/friendlytime', array('time' => $quiz->time_created));?>
                 </small>
             </td>
-        <?php if($options):?>
-            <td>
-                <?php if($user->id == elgg_get_logged_in_user_guid()):?>
-                    <?php echo elgg_view('output/url', array(
-                        'href'  => "quizzes/edit/{$quiz->id}",
-                        'class' => 'btn btn-xs btn-primary',
-                        'title' => elgg_echo('edit'),
-                        'text'  => '<i class="fa fa-edit"></i>',
-                    ));
-                    ?>
-                    <?php echo elgg_view('output/url', array(
-                        'href'  => "action/quiz/remove?id={$quiz->id}",
-                        'class' => 'btn btn-xs btn-danger remove-object',
-                        'is_action' => true,
-                        'title' => elgg_echo('delete'),
-                        'text'  => '<i class="fa fa-trash-o"></i>',
-                    ));
-                    ?>
-                <?php endif;?>
-                <?php echo elgg_view('output/url', array(
-                    'href'  => "quizzes/create/{$quiz->id}",
-                    'class' => 'btn btn-xs btn-primary btn-border-blue',
-                    'title' => elgg_echo('duplicate'),
-                    'text'  => '<i class="fa fa-copy"></i>',
-                ));
-                ?>
-            </td>
-        <?php endif;?>
             <td class="text-right">
                 <?php echo elgg_view('output/url', array(
                     'href'  => 'javascript:;',
@@ -165,6 +137,15 @@ $(function(){
                 ));
                 ?>
             </td>
+            <?php if($options):?>
+                <td>
+                    <?php echo elgg_view('page/components/admin_options', array(
+                        'entity' => $quiz,
+                        'user' => $user,
+                    ));
+                    ?>
+                </td>
+            <?php endif;?>
         </tr>
     <?php endforeach;?>
 </table>

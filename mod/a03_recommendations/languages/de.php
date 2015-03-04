@@ -16,7 +16,6 @@
         'recommendations:public_videos' => 'öffentliche Videos',
         'recommendations:public_files' => 'öffentliche Dateien',
         'recommendations:public_storyboards' => 'öffentliche Storyboards',
-        'recommendations:public_resources' => 'öffentliche Ressourcen',
         'recommendations:users' => 'Benutzeraccounts',
         'recommendations:warning' => 'Warnung!',
         'recommendations:failed:noadmin' => 'Sie m&uuml;ssen Administrator sein um dieses Modul zu nutzen.',

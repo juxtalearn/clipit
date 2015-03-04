@@ -12,21 +12,20 @@
  */
 elgg_register_menu_item('tricky_topic:menu', array(
     'name' => 'tricky_topics',
-    'text' => elgg_echo('tricky_topics'),
+    'text' => '<i class="pull-right fa fa-caret-down"></i>'.elgg_echo('tricky_topics'),
     'href' => "tricky_topics",
 ));
 elgg_register_menu_item('tricky_topic:menu', array(
     'name' => 'stumbling_blocks',
     'text' => elgg_echo('tags'),
     'href' => "tricky_topics/stumbling_blocks",
+    'item_class' => 'margin-left-20_important'
 ));
 elgg_register_menu_item('tricky_topic:menu', array(
     'name' => 'examples',
     'text' => elgg_echo('examples'),
     'href' => "tricky_topics/examples",
-    'item_class' => 'margin-left-20'
 ));
-
 echo elgg_view_menu('tricky_topic:menu', array(
     'sort_by' => 'register',
 ));

@@ -16,7 +16,7 @@
  * An extensible class which holds common functionality and properties for Resource objects such as Videos or
  * Storyboards.
  */
-class ClipitResource extends UBItem {
+abstract class ClipitResource extends UBItem {
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
@@ -25,11 +25,11 @@ class ClipitResource extends UBItem {
     const REL_RESOURCE_LABEL = "ClipitResource-ClipitLabel";
     const REL_RESOURCE_PERFORMANCE = "ClipitResource-ClipitPerformanceItem";
     // Resource Container relationships
-    const REL_SITE_RESOURCE = ClipitSite::REL_SITE_RESOURCE;
-    const REL_EXAMPLE_RESOURCE = ClipitExample::REL_EXAMPLE_RESOURCE;
-    const REL_ACTIVITY_RESOURCE = ClipitActivity::REL_ACTIVITY_RESOURCE;
-    const REL_TASK_RESOURCE = ClipitTask::REL_TASK_RESOURCE;
-    const REL_GROUP_RESOURCE = ClipitGroup::REL_GROUP_RESOURCE;
+    const REL_SITE_RESOURCE = "";
+    const REL_EXAMPLE_RESOURCE = "";
+    const REL_ACTIVITY_RESOURCE = "";
+    const REL_TASK_RESOURCE = "";
+    const REL_GROUP_RESOURCE = "";
 
     public $tag_array = array();
     public $label_array = array();
@@ -117,7 +117,7 @@ class ClipitResource extends UBItem {
         return $return_array;
     }
 
-    static function get_resource_scope($id) {
+    static function get_scope($id) {
         $site = static::get_site($id);
         if(!empty($site)) {
             return "site";
@@ -316,7 +316,7 @@ class ClipitResource extends UBItem {
      * @return static[] Array with key => value: user_id => read_status, where read_status is bool
      */
     static function get_read_status($id, $user_array = null) {
-        $props = static::get_properties($id, array("read_array", "owner_id"));
+        $props = static::get_properties($id, array("read_array"));
         $read_array = $props["read_array"];
         if(!$user_array) {
             return $read_array;

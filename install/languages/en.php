@@ -91,7 +91,9 @@ If you are ready to proceed, click the Next button.",
     'install:settings:label:jxl_secret' => "JuxtaLearn Secret Key",
     'install:settings:label:la_metrics_class' => "LA Metrics Class",
     'install:settings:label:recommendations_class' => "Recommendations Class",
-	'install:label:combo:dataroot' => 'ClipIt creates data directory',
+    'install:settings:label:clipit_site_type' => "ClipIt Site Type (site, demo or global)",
+
+    'install:label:combo:dataroot' => 'ClipIt creates data directory',
 
 	'install:settings:help:sitename' => 'The name of your new ClipIt site',
 	'install:settings:help:siteemail' => 'Email address used by ClipIt for communication with users',
@@ -105,6 +107,7 @@ If you are ready to proceed, click the Next button.",
     'install:settings:help:jxl_secret' => 'The JuxtaLearn secret key for interoperability between components.',
     'install:settings:help:la_metrics_class' => 'Name of the Learning Analytics metrics class',
     'install:settings:help:recommendations_class' => 'Name of the Recommendations class',
+    'install:settings:help:clipit_site_type' => "Define whether this will be a normal site, a demo site, or a global site",
 
 	'install:admin:instructions' => "It is now time to create an administrator's account.",
 

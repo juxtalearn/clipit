@@ -12,6 +12,7 @@
  */
 $entity = elgg_extract('entity', $vars);
 $scope_entity = elgg_extract('scope_entity', $vars);
+$parent_id = elgg_extract('parent_id', $vars);
 
 $labels_value = array();
 if($scope_entity){
@@ -39,7 +40,8 @@ if($scope_entity){
     $activity = array_pop(ClipitActivity::get_by_id(array(ClipitVideo::get_activity($entity->id))));
     $tt = array_pop(ClipitTrickyTopic::get_by_id(array($activity->tricky_topic)));
     $tt_tags = $tt->tag_array;
-    if($group_id = ClipitVideo::get_group($entity->id)) {
+    $group_tags = array();
+    if($group_id = ClipitVideo::get_group($entity->id) && !$vars['publish']) {
         $group_tags = ClipitGroup::get_tags($group_id);
         $tt_tags = array_diff($tt_tags, $group_tags);
     }
@@ -49,9 +51,19 @@ if($scope_entity){
         $labels_value[] = $label->name;
     }
     echo elgg_view("input/hidden", array(
-        'name' => 'video-id',
+        'name' => 'entity-id',
         'value' => $entity->id,
     ));
+    if($parent_id) {
+        echo elgg_view("input/hidden", array(
+            'name' => 'parent-id',
+            'value' => $parent_id,
+        ));
+        echo elgg_view("input/hidden", array(
+            'name' => 'task-id',
+            'value' => $vars['task'],
+        ));
+    }
 }
 
 echo elgg_view("input/hidden", array(
@@ -160,11 +172,11 @@ $language_index = ClipitPerformanceItem::get_language_index($user_language);
         <div id="collapse_add2" class="panel-collapse collapse">
             <div class="panel-body">
                 <div class="form-group">
-                    <label for="video-url"><?php echo elgg_echo("video:url");?></label>
+                    <label for="url"><?php echo elgg_echo("video:url");?></label>
                     <div class="icon">
                         <?php echo elgg_view("input/text", array(
-                            'name' => 'video-url',
-                            'id' => 'video-url',
+                            'name' => 'url',
+                            'id' => 'url',
                             'class' => 'form-control blue',
                         ));
                         ?>
@@ -177,18 +189,18 @@ $language_index = ClipitPerformanceItem::get_language_index($user_language);
 <!-- Video add end -->
 <?php endif;?>
 <div class="form-group">
-    <label for="video-title"><?php echo elgg_echo("video:title");?></label>
+    <label for="title"><?php echo elgg_echo("video:title");?></label>
     <?php echo elgg_view("input/text", array(
-        'name' => 'video-title',
+        'name' => 'title',
         'value' => $entity->name,
         'class' => 'form-control',
         'required' => true
     ));?>
 </div>
 <div class="form-group">
-    <label for="video-description"><?php echo elgg_echo("video:description");?></label>
+    <label for="description"><?php echo elgg_echo("video:description");?></label>
     <?php echo elgg_view("input/plaintext", array(
-        'name'  => 'video-description',
+        'name'  => 'description',
         'value' => $entity->description,
         'id'    => 'edit-'.$entity->id,
         'class' => 'form-control mceEditor',
@@ -196,8 +208,10 @@ $language_index = ClipitPerformanceItem::get_language_index($user_language);
         'rows'  => 6,
     ));?>
 </div>
+
 <div class="row">
     <div class="col-md-7">
+        <?php if(!empty($tt_tags)):?>
         <div class="form-group">
             <label><?php echo elgg_echo("tags");?></label>
             <?php if($group_tags):?>
@@ -215,8 +229,9 @@ $language_index = ClipitPerformanceItem::get_language_index($user_language);
                 </select>
             </div>
         </div>
+        <?php endif;?>
         <div class="form-group">
-            <label for="title"><?php echo elgg_echo("labels");?></label>
+            <label for="labels"><?php echo elgg_echo("labels");?></label>
             <ul id="labels"></ul>
         </div>
     </div>

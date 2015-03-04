@@ -47,6 +47,9 @@ $(function(){
         'tricky_topic': <?php echo (int)$tricky_topic;?>,
         'input_prefix': '<?php echo $input_prefix;?>'
     });
+    <?php if($entity->description):?>
+        tinymce_setup();
+    <?php endif;?>
 });
 </script>
 <div class="quiz" data-quiz="<?php echo $id;?>">
@@ -60,7 +63,9 @@ $(function(){
             $selected = $tricky_topic;
             ?>
             <div class="form-group">
-                <label><?php echo elgg_echo('tricky_topic');?></label>
+                <label for="<?php echo "{$input_prefix}[tricky_topic]";?>">
+                    <?php echo elgg_echo('tricky_topic');?>
+                </label>
                 <select
                     required="required"
                     class="form-control select-tricky_topic"
@@ -92,11 +97,12 @@ $(function(){
             </div>
         <?php endif; ?>
         <div class="form-group">
-            <label><?php echo elgg_echo('title');?></label>
+            <label for="<?php echo "{$input_prefix}[title]";?>"><?php echo elgg_echo('title');?></label>
             <?php echo elgg_view("input/text", array(
                 'name' => "{$input_prefix}[title]",
                 'class' => 'form-control',
-                'value' => $entity->name
+                'value' => $entity->name,
+                'required' => true,
             ));
             ?>
         </div>
@@ -106,7 +112,7 @@ $(function(){
                 'name'  => "{$input_prefix}[description]",
                 'class' => 'form-control '.($entity->description ? 'mceEditor' : ''),
                 'value' => $entity->description,
-                'onclick' => $entity->description ? false : '$(this).addClass(\'mceEditor\');
+                'onfocus' => $entity->description ? false : '$(this).addClass(\'mceEditor\');
                                 tinymce_setup();
                                 tinymce.execCommand(\'mceFocus\',false,this.id);',
                 'rows'  => 1,
@@ -116,7 +122,10 @@ $(function(){
     </div>
     <div class="col-md-4 col-md-offset-1">
         <div class="form-group">
-            <label>Tipo de vista</label>
+            <label>
+                <?php echo elgg_view('page/components/tooltip', array('text' => elgg_echo('quiz:view_mode:tooltip')));?>
+                <?php echo elgg_echo('quiz:view_mode');?>
+            </label>
             <?php echo elgg_view("input/dropdown", array(
                 'name' => $input_prefix.'[view]',
                 'style' => 'padding: 5px;',
@@ -130,7 +139,10 @@ $(function(){
             ?>
         </div>
         <div class="form-group">
-            <label>Tiempo máximo para hacer el test</label>
+            <label>
+                <?php echo elgg_view('page/components/tooltip', array('text' => elgg_echo('quiz:max_time:tooltip')));?>
+                <?php echo elgg_echo('quiz:max_time');?>
+            </label>
             <div class="row">
                 <div class="col-md-4">
                     <small><?php echo elgg_echo('time:days');?></small>
@@ -175,6 +187,23 @@ $(function(){
                 </div>
             </div>
         </div>
+        <div class="form-group">
+            <label><?php echo elgg_echo('quiz:target');?></label>
+            <label style="font-weight: normal;">
+                <input type="radio"
+                       name="<?php echo $input_prefix;?>[target]"
+                        <?php echo ($entity->target == ClipitQuiz::TARGET_CLIPIT || !$entity_target) ? 'checked':'';?>
+                       value="<?php echo ClipitQuiz::TARGET_CLIPIT;?>">
+                <?php echo elgg_echo('quiz:target:clipit');?>
+            </label>
+            <label style="font-weight: normal;">
+                <input type="radio"
+                       name="<?php echo $input_prefix;?>[target]"
+                        <?php echo $entity->target == ClipitQuiz::TARGET_LARGEDISPLAY ? 'checked':'';?>
+                       value="<?php echo ClipitQuiz::TARGET_LARGEDISPLAY;?>">
+                <?php echo elgg_echo('quiz:target:large_display');?>
+            </label>
+        </div>
     </div>
 </div>
 <ul class="questions">
@@ -183,7 +212,6 @@ $(function(){
         $i = 1;
         $questions = ClipitQuizQuestion::get_by_id($questions, 0, 0, 'order');
         foreach($questions as $question):
-            $question = array_pop(ClipitQuizQuestion::get_by_id(array($question->id)));
         ?>
             <?php echo elgg_view('activity/admin/tasks/quiz/question/list', array(
                 'num' => $i,

@@ -2,21 +2,19 @@
  /**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
- * Creation date:   7/07/14
- * Last update:     7/07/14
+ * Creation date:   18/12/2014
+ * Last update:     18/12/2014
  * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC JuxtaLearn Project
  * @version         $Version$
  * @link            http://www.juxtalearn.eu
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-?>
-<li>
-    <?php echo elgg_view('output/url', array(
-        'href'  => "create_activity",
-        'title' => elgg_echo('activity:create'),
-        'text'  => elgg_echo('activity:create')
-    ));
-    ?>
-</li>
-<li class="separator">|</li>
+$id = get_input('id');
+
+if(ClipitTag::delete_by_id(array($id))){
+    system_message(elgg_echo('tag:removed'));
+} else {
+    register_error(elgg_echo("tag:cantremove"));
+}
+forward("tricky_topics/stumbling_blocks");

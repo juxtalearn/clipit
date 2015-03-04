@@ -26,6 +26,8 @@ class ClipitQuiz extends UBItem {
     const REL_QUIZ_USER = "ClipitQuiz-ClipitUser";
     const VIEW_MODE_LIST = "list";
     const VIEW_MODE_PAGED = "paged";
+    const TARGET_CLIPIT = "clipit";
+    const TARGET_LARGEDISPLAY = "large_display";
     /**
      * @var string Target interface for Quiz display (e.g.: "web space", "large display"...)
      */
@@ -240,7 +242,7 @@ class ClipitQuiz extends UBItem {
     }
 
     /**
-     * Returns the average results by Tag for a Quiz for a User, normalized from 0 to 1.
+     * Returns the average results by Question for a Quiz for a User, normalized from 0 to 1.
      *
      * @param int $id Quiz ID
      * @param int $user_id User ID
@@ -252,7 +254,6 @@ class ClipitQuiz extends UBItem {
         if(!static::has_finished_quiz($id, $user_id)){
             return $result_array;
         }
-        $tag_count_array = array();
         $quiz_question_array = static::get_quiz_questions($id);
         if(empty($quiz_question_array)){
             return $result_array;
@@ -264,7 +265,7 @@ class ClipitQuiz extends UBItem {
                     if ($quiz_result->correct) {
                         $result_array[$quiz_question->id]=1;
                     } else {
-                        $result_array[$quiz_question->id]=1;
+                        $result_array[$quiz_question->id]=0;
                     }
                 }
         }
@@ -272,7 +273,7 @@ class ClipitQuiz extends UBItem {
     }
 
     /**
-     * Returns the average results by Tag for a Quiz among a Group. Students who have not finished the Quiz will not
+     * Returns the average results by Question for a Quiz among a Group. Students who have not finished the Quiz will not
      * be counted.
      *
      * @param int $id Quiz ID

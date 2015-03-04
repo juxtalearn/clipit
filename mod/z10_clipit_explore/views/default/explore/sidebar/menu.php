@@ -32,7 +32,7 @@ $icon = '
     </div>';
 elgg_register_menu_item('explore:menu', array(
     'name' => 'explore_site',
-    'text' => $icon.elgg_echo('clipit:site'),
+    'text' => $icon.elgg_echo('explore:public'),
     'style' => 'margin-bottom: 20px',
     'href' => "explore{$href}site=true",
     'selected' => $activity_get ? false : true

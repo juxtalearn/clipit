@@ -24,6 +24,7 @@ echo elgg_view("input/plaintext", array(
     'class' => 'form-control '.$wysiwyg,
     'id'    => uniqid(),
     'rows'  => 6,
+    'required' => true,
     'style' => "width: 100%;"
 ));
 echo elgg_view('input/submit', array(
@@ -32,5 +33,5 @@ echo elgg_view('input/submit', array(
     'style' => "margin-top: 20px;"
 ));
 
-// Attach system
+// Attach files
 echo elgg_view("multimedia/file/attach", array('entity' => $entity));

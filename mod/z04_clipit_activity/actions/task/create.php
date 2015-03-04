@@ -93,7 +93,8 @@ foreach($tasks as $task){
             'name' => $quiz['title'],
             'description' => $quiz['description'],
             'view_mode' => $quiz['view'],
-            'max_time' => $total_time
+            'max_time' => $total_time,
+            'target' => $quiz['target']
         ));
         ClipitTask::set_properties($task_id, array('quiz' => $quiz_id));
         ClipitQuiz::add_quiz_questions($quiz_id, $questions_id);

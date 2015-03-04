@@ -94,27 +94,31 @@
 
 // Activity status
 .module-activity_status{
-  .elgg-head{
-    background: @blue_clipit;
-    color: #FFF;
-    a{
-      color: #FFF;
-    }
-    h3{
-      color: #FFF;
-    }
-  }
+
   .elgg-body{
-    background-color: @blue-lighter;
-    background-image: url('../../../graphics/bg-bar.png');
-    background-position-x: -10px;
     .wrapper{
       position: relative;
+      > div{
+        margin-bottom: 5px;
+        border-bottom: 1px solid @blue-lighter;
+        padding-bottom: 10px;
+        &:last-child{
+          border-bottom: 0;
+          padding-bottom: 0;
+        }
+      }
+    }
+    .bg-bar{
+      background-color: #f5f5f5;
     }
     .bar{
-      height: 50px;
-      line-height: 50px;
-      margin-bottom: 10px;
+      height: 20px;
+      line-height: 20px;
+      background: @blue_clipit;
+      min-width: 15%;
+      max-width: 100%;
+      margin-top: 5px;
+      border-radius: 4px;
       > div{
         padding-left: 10px;
         text-transform: uppercase;
@@ -122,8 +126,10 @@
         line-height: inherit;
         width: 100%;
         margin: 0;
-        font-size: @font-size-large;
         .text-truncate();
+        span{
+          color: #fff;
+        }
         h4{
           a{
             color: #FFF;
@@ -221,9 +227,16 @@
   background: transparent;
 
   .elgg-head{
-    display: none;
+//    display: none;
+    h3{
+      padding-left: 25px;
+    }
+    .collapse{
+      display: none;
+    }
   }
   .margin-bar{
+    top: 35px;
     height: 100%;
     position: absolute;
     background: #CACCCE;

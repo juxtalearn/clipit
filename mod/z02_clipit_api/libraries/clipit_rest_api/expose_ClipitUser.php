@@ -71,4 +71,9 @@ function expose_user_functions() {
             "id" => array("type" => "int", "required" => true), "size" => array("type" => "string", "required" => false)
         ), "Get Avatar for a User.", 'GET', false, true
     );
+    expose_function(
+        $api_suffix . "import_data", $class_suffix . "import_data", array(
+            "file_path" => array("type" => "string", "required" => true)
+        ), "Import data from local Excel file", "POST", false, true
+    );
 }

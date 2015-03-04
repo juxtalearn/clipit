@@ -10,13 +10,13 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$url = get_input("video-url");
-$title = get_input("video-title");
-$description = get_input("video-description");
+$url = get_input("url");
+$title = get_input("title");
+$description = get_input("description");
 $performance_items = get_input("performance_items");
 $file = $_FILES["video-upload"];
 $entity_id = get_input("scope-id"); // {Activity, Group} id
-$video_id = get_input("video-id");
+$video_id = get_input("entity-id");
 $labels = get_input("labels");
 $labels = array_filter(explode(",", $labels));
 $tags = array_filter(get_input("tags", array()));
@@ -29,7 +29,7 @@ $data = array(
     'description' => $description,
 );
 
-if(trim($title) == "" || trim($description) == ""){
+if(trim($title) == ""){
     register_error(elgg_echo("video:cantadd"));
 } else {
     // New video

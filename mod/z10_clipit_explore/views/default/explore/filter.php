@@ -38,11 +38,11 @@ $tabs = array(
         'href' => "explore{$href}filter=videos{$href_activity}",
         'priority' => 200,
     ),
-//    'storyboards' => array(
-//        'text' => elgg_echo('storyboards') ."{$sb_count}",
-//        'href' => "explore{$href}filter=storyboards{$href_activity}",
-//        'priority' => 300,
-//    ),
+    'storyboards' => array(
+        'text' => elgg_echo('storyboards') ."{$sb_count}",
+        'href' => "explore{$href}filter=storyboards{$href_activity}",
+        'priority' => 300,
+    ),
     /*'files' => array(
         'text' => elgg_echo('files') ."{$files_count}",
         'href' => "explore{$href}filter=files{$href_activity}",

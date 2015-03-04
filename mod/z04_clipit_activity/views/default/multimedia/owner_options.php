@@ -25,7 +25,7 @@ if($entity->owner_id == $user_id || $user->role == ClipitUser::ROLE_TEACHER){
             "data-toggle" => "modal"
         ),
     );
-    if($entity->owner_id == $user_id){
+    if($entity->owner_id == $user_id && $vars['remove'] !== false){
         $options['remove'] = array("href" => "action/multimedia/{$type}s/remove?id={$entity->id}");
     }
     $owner_options = elgg_view("page/components/options_list", $options);

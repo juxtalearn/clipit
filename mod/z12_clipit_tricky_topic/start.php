@@ -13,20 +13,28 @@
 elgg_register_event_handler('init', 'system', 'clipit_tricky_topic_init');
 
 function clipit_tricky_topic_init() {
-
-    // Register "/tricky_topics" page handler
-    elgg_register_page_handler('tricky_topics', 'tt_page_handler');
     $plugin_dir = elgg_get_plugins_path() . "z12_clipit_tricky_topic";
-    elgg_register_action("example/save", "{$plugin_dir}/actions/example/save.php");
-    elgg_register_action("example/remove", "{$plugin_dir}/actions/example/remove.php");
-    elgg_register_ajax_view('examples/summary');
+    $user = array_pop(ClipitUser::get_by_id(array(elgg_get_logged_in_user_guid())));
+    if($user->role == ClipitUser::ROLE_TEACHER || $user->role == ClipitUser::ROLE_ADMIN) {
+        elgg_extend_view("navigation/menu/top", "navigation/menu/authoring", 250);
 
-    elgg_register_action("stumbling_blocks/link", "{$plugin_dir}/actions/stumbling_blocks/link.php");
-    elgg_register_ajax_view('stumbling_blocks/search');
+        // Register "/tricky_topics" page handler
+        elgg_register_page_handler('tricky_topics', 'tt_page_handler');
+        elgg_register_action("example/save", "{$plugin_dir}/actions/example/save.php");
+        elgg_register_action("example/remove", "{$plugin_dir}/actions/example/remove.php");
+        elgg_register_ajax_view('examples/summary');
 
-    elgg_register_action("tricky_topic/save", "{$plugin_dir}/actions/tricky_topic/save.php");
-    elgg_register_action("tricky_topic/remove", "{$plugin_dir}/actions/tricky_topic/remove.php");
-    elgg_register_ajax_view('tricky_topics/tags/search');
+        elgg_register_action("stumbling_blocks/link", "{$plugin_dir}/actions/stumbling_blocks/link.php");
+        elgg_register_action("stumbling_blocks/remove", "{$plugin_dir}/actions/stumbling_blocks/remove.php");
+        elgg_register_ajax_view('stumbling_blocks/search');
+
+        elgg_register_action("tricky_topic/save", "{$plugin_dir}/actions/tricky_topic/save.php");
+        elgg_register_action("tricky_topic/remove", "{$plugin_dir}/actions/tricky_topic/remove.php");
+        elgg_register_action("tricky_topic/resources", "{$plugin_dir}/actions/tricky_topic/resources.php");
+        elgg_register_ajax_view('tricky_topics/tags/search');
+    }
+
+
 
     elgg_extend_view('js/activity', 'js/tricky_topic');
     elgg_register_library('clipit:tricky_topic:functions', "{$plugin_dir}/lib/functions.php");
@@ -38,7 +46,8 @@ function clipit_tricky_topic_init() {
  */
 function tt_page_handler($page){
     elgg_load_js('clipit:tricky_topic');
-    $sidebar = elgg_view_module('aside', elgg_echo('menu'),
+    elgg_set_context('authoring');
+    $menu = elgg_view_module('aside', elgg_echo('teacher:authoring_tools'),
         elgg_view('tricky_topics/sidebar/menu').
         elgg_view('quiz/sidebar/menu'),
         array('class' => 'activity-group-block margin-bottom-10 aside-tree')
@@ -104,7 +113,15 @@ function tt_page_handler($page){
                 'count' => $count,
                 'table_orders' => $table_orders
             ));
-
+            $search_menu = elgg_view_module('aside', elgg_echo('filter'),
+            elgg_view_form(
+                'filter_search',
+                array(
+                    'id' => 'add_labels',
+                    'style' => 'background: #fff;padding: 15px;',
+                    'body' => elgg_view('forms/tricky_topic/filter')
+                )
+            ));
             break;
         case 'stumbling_blocks':
             $title = elgg_echo('tags');
@@ -123,6 +140,30 @@ function tt_page_handler($page){
                 'count' => $count,
                 'table_orders' => $table_orders
             ));
+            switch($page[1]){
+                case 'view':
+                    // View Stumbling block
+                    if($id = $page[2]) {
+                        $filter = '';
+                        if ($tag = array_pop(ClipitTag::get_by_id(array($id)))) {
+                            elgg_push_breadcrumb(elgg_echo('tags'), "tricky_topics/stumbling_blocks");
+                            $title = $tag->name;
+                            elgg_push_breadcrumb($title);
+                            $entities = $tag;
+                            $examples = ClipitExample::get_by_tags(array($tag->id));
+                            $tricky_topics = ClipitTrickyTopic::get_by_id(ClipitTag::get_tricky_topics($tag->id));
+                            $content = elgg_view('stumbling_blocks/view',
+                                array(
+                                    'entity' => $tag,
+                                    'tricky_topics' => $tricky_topics,
+                                    'examples' => $examples,
+                                ));
+                        } else {
+                            return false;
+                        }
+                    }
+                    break;
+            }
             break;
         case 'examples':
             $title = elgg_echo('examples');
@@ -171,7 +212,7 @@ function tt_page_handler($page){
                 'count' => $count,
                 'table_orders' => $table_orders
             ));
-            $sidebar .= elgg_view_module('aside', elgg_echo('filter'),
+            $search_menu = elgg_view_module('aside', elgg_echo('filter'),
                 elgg_view_form(
                     'filter_search',
                     array(
@@ -180,6 +221,9 @@ function tt_page_handler($page){
                         'body' => elgg_view('forms/example/filter')
                     )
                 ));
+            if($page[1]){
+                $search_menu = false;
+            }
             switch($page[1]){
                 case 'create':
                     // Create Example
@@ -282,7 +326,6 @@ function tt_page_handler($page){
             }
             break;
         case 'edit':
-            $tt_sidebar = true;
             // Edit Tricky Topic
             if(!$id = $page[1]){
                 return false;
@@ -299,7 +342,6 @@ function tt_page_handler($page){
                 ));
             break;
         case 'view':
-            $tt_sidebar = true;
             // View Tricky Topic
             if($id = $page[1]){
                 $filter = '';
@@ -308,18 +350,11 @@ function tt_page_handler($page){
                     $title  = $tricky_topic->name;
                     elgg_push_breadcrumb($title);
                     $entities = $tricky_topic;
-                    $activities = ClipitActivity::get_from_tricky_topic($tricky_topic->id);
                     $multimedia = array(
-                        'videos' => array(),
-                        'files' => array(),
-                        'storyboards' => array(),
+                        'videos' => ClipitTrickyTopic::get_videos($tricky_topic->id),
+                        'files' => ClipitTrickyTopic::get_files($tricky_topic->id),
+                        'storyboards' => ClipitTrickyTopic::get_storyboards($tricky_topic->id),
                     );
-                    foreach($activities as $activity){
-                        $multimedia['videos'] = array_merge($multimedia['videos'], $activity->video_array);
-                        $multimedia['files'] = array_merge($multimedia['files'], $activity->file_array);
-                        $multimedia['storyboards'] = array_merge($multimedia['storyboards'], $activity->storyboard_array);
-                    }
-
                     $tt_parent = ClipitTrickyTopic::get_cloned_from($tricky_topic->id);
                     $examples = ClipitExample::get_from_tricky_topic($tricky_topic->id);
                     $content = elgg_view('tricky_topics/view',
@@ -338,17 +373,7 @@ function tt_page_handler($page){
             return false;
             break;
     }
-    if($tt_sidebar){
-        $sidebar .= elgg_view_module('aside', elgg_echo('filter'),
-            elgg_view_form(
-                'filter_search',
-                array(
-                    'id' => 'add_labels',
-                    'style' => 'background: #fff;padding: 15px;',
-                    'body' => elgg_view('forms/tricky_topic/filter')
-                )
-            ));
-    }
+
     switch($selected_tab){
         case 'mine':
             $owner = array();
@@ -370,7 +395,7 @@ function tt_page_handler($page){
         'content' => $content,
         'title' => $title,
         'filter' => $filter,
-        'sidebar' => $sidebar,
+        'sidebar' => $menu.$search_menu,
     );
     $body = elgg_view_layout('one_sidebar', $params);
 

@@ -179,6 +179,12 @@ ul, ol {
   padding: 5px 10px !important;
   .pull-right();
 }
+// Tooltip question icon in button
+.btn .help-tooltip{
+  color: #fff;
+  margin-right: 5px;
+  margin-left: -10px;
+}
 small, .small{
   /*font-size: 75%;*/
   color: @gray-light;
@@ -236,6 +242,9 @@ h4.empty{
 .margin-set(10);
 .margin-set(15);
 .margin-set(20);
+.margin-left-20_important{
+  margin-left: 20px !important;
+}
 // Progress bar
 // --------------------------------------------------
 .progress-bar{
@@ -248,22 +257,7 @@ h4.empty{
 
 // Custom Font
 // --------------------------------------------------
-@font-face {
-  font-family: 'Futura';
-  src: url('@{font-path}@{font-name-futura}.eot');
-  src: url('@{font-path}@{font-name-futura}.eot') format('embedded-opentype'),
-  url('@{font-path}@{font-name-futura}.woff') format('woff'),
-  url('@{font-path}@{font-name-futura}.ttf') format('truetype'),
-  url('@{font-path}@{font-name-futura}.svg#FuturaLTRegular') format('svg');
-}
-@font-face {
-  font-family: 'FuturaBoldRegular';
-  src: url('@{font-path}@{font-name-futurabold}.eot');
-  src: url('@{font-path}@{font-name-futurabold}.eot') format('embedded-opentype'),
-  url('@{font-path}@{font-name-futurabold}.woff') format('woff'),
-  url('@{font-path}@{font-name-futurabold}.ttf') format('truetype'),
-  url('@{font-path}@{font-name-futurabold}.svg#FuturaLTBold') format('svg');
-}
+
 // Mixin for generating new styles
 .btn-styles(@btn-color: #555) {
   border: none;
@@ -1167,4 +1161,12 @@ tr.info td {
       }
     }
   }
+}
+
+//
+// Block content background gray
+// --------------------------------------------------
+.gray-block{
+  background: #fafafa;
+  padding: 10px;
 }

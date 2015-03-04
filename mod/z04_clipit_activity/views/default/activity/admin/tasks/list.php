@@ -11,13 +11,12 @@
  * @package         ClipIt
  */
 $task = elgg_extract('task', $vars);
-$feedback_task = elgg_extract('feedback_task', $vars);
-$task_type = 'upload';
-if($feedback_task){
-    $task_type = 'feedback';
+$feedback_task_id = ClipitTask::get_child($task->id);
+if($feedback_task_id){
+    $feedback_task = array_pop(ClipitTask::get_by_id(array($feedback_task_id)));
 }
 ?>
-<li data-view="list" style="display: none;" class="view-element list-item <?php echo $feedback_task ? 'margin-left-10' : '';?>">
+<li data-view="list" style="display: none;" class="view-element list-item">
     <div class="pull-right">
         <?php echo elgg_view('output/url', array(
             'href'  => "action/task/remove?id={$task->id}",
@@ -29,10 +28,6 @@ if($feedback_task){
         ?>
     </div>
     <div>
-        <?php if($feedback_task): ?>
-            <i class="fa fa-level-up text-muted-2 fa-rotate-90 margin-right-10 pull-left" style="font-size: 21px;margin-right: 10px;"></i>
-            <small class="show"><?php echo elgg_echo('task:feedback:linked');?></small>
-        <?php endif; ?>
         <div class="image-block fa-2x">
             <?php echo elgg_view("tasks/icon_task_type", array('type' => $task->task_type, 'size' => false)); ?>
         </div>
@@ -56,6 +51,21 @@ if($feedback_task){
                 <strong><?php echo elgg_echo('end');?>: </strong>
                 <?php echo elgg_view('output/friendlytime', array('time' => $task->end));?>
             </small>
+            <?php if($feedback_task_id): ?>
+                <div class="margin-top-10">
+                    <i class="fa fa-level-up text-muted-2 fa-rotate-90 margin-right-10 pull-left" style="font-size: 21px;margin-right: 10px;"></i>
+                    <span class="text-muted show"><?php echo elgg_echo('task:feedback:linked');?>:
+                        <?php echo elgg_view('output/url', array(
+                            'text' => $feedback_task->name,
+                            'href'  => "ajax/view/modal/task/edit?id={$feedback_task->id}",
+                            'title' => elgg_echo('edit'),
+                            'data-toggle'   => 'modal',
+                            'data-target'   => '#edit-task-'.$feedback_task->id
+                        ));
+                        ?>
+                    </span>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 </li>

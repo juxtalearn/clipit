@@ -22,7 +22,7 @@ if($finished):?>
         <?php echo $result->answer;?>
     <?php endif;?>
     <?php if(!$result->correct && $finished_task):?>
-        <small class="show">Solución: <strong><?php echo $question->validation_array[0];?></strong></small>
+        <small class="show"><?php echo elgg_echo('quiz:answer:solution');?>: <strong><?php echo $question->validation_array[0];?></strong></small>
     <?php endif;?>
 <?php else:?>
     <input

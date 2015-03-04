@@ -14,6 +14,7 @@ $entity = elgg_extract('entity', $vars);
 $video_ids = elgg_extract('videos', $vars);
 $href = elgg_extract("href", $vars);
 $rating = elgg_extract("rating", $vars);
+$task_id = elgg_extract("task_id", $vars);
 $user_id = elgg_get_logged_in_user_guid();
 $user = array_pop(ClipitUser::get_by_id(array($user_id)));
 ?>
@@ -59,37 +60,10 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
             $description = substr($description, 0, 280)."...";
         }
         $published = false;
-    ?>
-        <?php
-        $modal_publish = elgg_view("page/components/modal",
-            array(
-                "dialog_class"     => "modal-md",
-                "target"    => 'publish-id-'.$video->id,
-                "title"     => 'publish',
-                "form"      => true,
-                "body"      => elgg_view('forms/publications/publish',
-                    array(
-                        'entity'  => $video,
-                        'parent_id' => $group->id,
-                        'activity' => $activity,
-                        'tags' => $tags,
-                        'entity_preview' => $entity_preview
-                    )),
-                "cancel_button" => true,
-                "ok_button" => elgg_view('input/submit',
-                    array(
-                        'value' => elgg_echo('add'),
-                        'class' => "btn btn-primary"
-                    ))
-            ));
-
-        ?>
-        <?php echo elgg_view_form('publications/publish__', array(
-            'data-validate'=> 'true',
-            'body' => $modal_publish,
-        ),
-        array('entity'  => $video)
-    );
+        if($vars['send_site']) {
+            echo elgg_view("page/components/modal_remote", array('id' => "publish-{$video->id}"));
+        }
+        $href_video = $href."/view/".$video->id . ($task_id ? "?task_id=".$task_id."#evaluate": "");
     ?>
     <li class="video-item row list-item">
         <?php
@@ -99,14 +73,14 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
         endif;
         ?>
         <div class="col-md-2">
-            <?php if($vars['preview'] !== false):?>
+            <?php if($vars['preview']):?>
                 <a data-toggle="modal" data-target="#viewer-id-<?php echo $video->id;?>" href="<?php echo elgg_get_site_url()."{$href_viewer}"; ?>">
                     <div class="img-preview">
                         <img src="<?php echo $video->preview;?>">
                     </div>
                 </a>
             <?php else:?>
-                <a href="<?php echo elgg_get_site_url()."{$href}/view/{$video->id}"; ?>">
+                <a href="<?php echo elgg_get_site_url().$href_video; ?>">
                     <div class="img-preview">
                         <img src="<?php echo $video->preview;?>">
                     </div>
@@ -115,7 +89,10 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
         </div>
         <div class="col-md-10">
             <?php if($vars['actions']): ?>
-                <?php echo elgg_view("multimedia/owner_options", array('entity' => $video, 'type' => 'video')); ?>
+                <?php echo elgg_view("multimedia/owner_options", array(
+                    'entity' => $video,
+                    'type' => 'video'
+                )); ?>
             <?php endif; ?>
             <div class="pull-right text-right">
                 <?php if($vars['author_bottom'] !== true):?>
@@ -130,12 +107,13 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
                 <?php endif;?>
                 <?php if($vars['send_site']):?>
                     <div class="margin-bottom-5">
-                        <?php echo elgg_view('output/url', array(
-//                            'href'  => $vars['href_site'].$video->id,
-                            'data-target' => '#publish-id-'.$video->id,
-                            'data-toggle' => 'modal',
+                        <?php
+                        echo elgg_view('output/url', array(
+                            'href'  => "ajax/view/modal/publications/publish?id={$video->id}",
+                            'text'  => '<i class="fa fa-globe"></i> '.elgg_echo('send:to_site'),
                             'class' => 'btn btn-xs btn-primary',
-                            'text'  => '<i class="fa fa-globe"></i> '.elgg_echo('send:to_site')
+                            'data-toggle'   => 'modal',
+                            'data-target' => '#publish-'.$video->id,
                         ));
                         ?>
                     </div>
@@ -148,7 +126,7 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
                 <?php endif; ?>
             </div>
             <h4 class="text-truncate">
-                <?php if($vars['preview'] !== false):?>
+                <?php if($vars['preview']):?>
                     <?php echo elgg_view('output/url', array(
                         'href'  => $href_viewer,
                         'title' => $video->name,
@@ -159,7 +137,7 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
                     ?>
                 <?php else:?>
                     <?php echo elgg_view('output/url', array(
-                        'href'  => "{$href}/view/".$video->id,
+                        'href'  => $href_video,
                         'title' => $video->name,
                         'text'  => $video->name));
                     ?>
@@ -177,7 +155,7 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
                     <!-- Count total comments -->
                     <strong>
                         <?php echo elgg_view('output/url', array(
-                            'href'  => "{$href}/view/{$video->id}#comments",
+                            'href'  => $href_video."#comments",
                             'title' => elgg_echo('comments'),
                             'class' => 'pull-right btn btn-xs btn-xs-5 btn-blue-lighter',
                             'text'  => $total_comments. ' <i class="fa fa-comments"></i>'))

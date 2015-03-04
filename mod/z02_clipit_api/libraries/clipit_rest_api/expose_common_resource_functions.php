@@ -32,7 +32,7 @@ function expose_common_resource_functions($api_suffix, $class_suffix) {
         "Get the Resources containing at least one of the specified tags", 'GET', false, true
     );
     expose_function(
-        $api_suffix . "get_resource_scope", $class_suffix . "get_resource_scope",
+        $api_suffix . "get_scope", $class_suffix . "get_scope",
         array("id" => array("type" => "int", "required" => true)),
         "Get Resource scope for a Resource ('group', 'activity', 'task' or 'site')", 'GET', false, true
     );

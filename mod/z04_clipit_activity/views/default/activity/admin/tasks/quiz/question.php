@@ -75,7 +75,7 @@ if($question){
         <?php endif; ?>
         <?php
         $types = array(
-            '' => elgg_echo('select'),
+            '' => elgg_echo('select:type'),
             ClipitQuizQuestion::TYPE_SELECT_MULTI => elgg_echo('quiz:question:type:'.ClipitQuizQuestion::TYPE_SELECT_MULTI),
             ClipitQuizQuestion::TYPE_SELECT_ONE => elgg_echo('quiz:question:type:'.ClipitQuizQuestion::TYPE_SELECT_ONE),
             ClipitQuizQuestion::TYPE_NUMBER => elgg_echo('quiz:question:type:'.ClipitQuizQuestion::TYPE_NUMBER),
@@ -84,7 +84,9 @@ if($question){
         ?>
         <div class="form-group row" style="padding: 10px;">
             <div class="form-group col-md-12">
-                <label><?php echo elgg_echo('quiz:question:statement');?></label>
+                <label for="<?php echo $input_prefix.'[question]['.$id.'][title]';?>">
+                    <?php echo elgg_echo('quiz:question:statement');?>
+                </label>
                 <?php echo elgg_view("input/text", array(
                     'name' => $input_prefix.'[question]['.$id.'][title]',
                     'class' => 'form-control',
@@ -100,7 +102,7 @@ if($question){
                         'name' => $input_prefix.'[question]['.$id.'][description]',
                         'value' => $question->description,
                         'class' => 'form-control '.($question ? 'mceEditor':''),
-                        'onclick'   => '$(this).addClass(\'mceEditor\');
+                        'onfocus'   => '$(this).addClass(\'mceEditor\');
                                         tinymce_setup();
                                         tinymce.execCommand(\'mceFocus\',false,this.id);',
                         'rows'  => 1,
@@ -132,6 +134,7 @@ if($question){
                         <?php echo elgg_view('tricky_topic/list', array(
                             'tricky_topic' => $tricky_topic,
                             'tags' => $tags,
+                            'tag_label' => elgg_echo('tags:related'),
                             'show_tags' => 'checkbox',
                             'input_name' => $input_prefix.'[question]['.$id.'][tags][]'
                         )); ?>
@@ -140,7 +143,9 @@ if($question){
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label><?php echo elgg_echo('quiz:question:type');?></label>
+                    <label for="<?php echo $input_prefix.'[question]['.$id.'][type]';?>">
+                        <?php echo elgg_echo('quiz:question:type');?>
+                    </label>
                     <?php echo elgg_view("input/dropdown", array(
                         'name' => $input_prefix.'[question]['.$id.'][type]',
                         'style' => 'padding: 5px;',
@@ -205,7 +210,7 @@ if($question){
                      style="display: <?php echo $question->option_type == ClipitQuizQuestion::TYPE_SELECT_MULTI ? 'block':'none';?>">
                     <div class="show text-muted margin-bottom-10">
                         <input type="checkbox" checked disabled style="margin: 0;margin-right: 10px;vertical-align: middle;">
-                        <?php echo elgg_echo('quiz:question:answer:select');?>
+                        <?php echo elgg_echo('quiz:question:answers:select');?>
                     </div>
                     <hr class="margin-0 margin-bottom-20">
                     <div class="results">

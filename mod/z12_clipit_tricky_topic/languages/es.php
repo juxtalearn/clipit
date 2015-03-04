@@ -12,7 +12,7 @@
  */
 $spanish = array(
     'filter_by' => 'Filtrar por: %s',
-
+    'teacher:authoring_tools' => 'Herramientas de autoría',
     'material:attach' => 'Adjuntar materiales',
     'duplicate' => 'Duplicar',
     'duplicate:name' => 'Duplicar: %s',
@@ -41,6 +41,9 @@ $spanish = array(
     'examples:related:stumbling_block' => 'Ejemplos relacionados',
 
     'tags:select' => 'Seleccionar conceptos',
+    'tags:related' => 'Conceptos relacionados',
+    'tag:cantremove' => 'No se ha podido eliminar el Concepto',
+    'tag:removed' => 'Concepto eliminado',
 
     'tricky_topic:duplicate_from' => 'Tema clave duplicado de',
     'tricky_topic:subject' => 'Asignatura',

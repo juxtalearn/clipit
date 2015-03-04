@@ -8,7 +8,10 @@
  *
  */
 
-$footer_menu = elgg_view_menu('footer_clipit', array('sort_by' => 'priority', 'class' => 'pull-right site-map col-sm-9 col-xs-12 col-md-7 col-lg-6'));
+$footer_menu = elgg_view_menu('footer_clipit', array(
+    'sort_by' => 'priority',
+    'class' => 'pull-right site-map col-sm-9 col-xs-12 col-md-7 col-lg-6'
+));
 $site = elgg_get_site_entity();
 ?>
 <footer id="footer">
@@ -19,7 +22,7 @@ $site = elgg_get_site_entity();
                     <h2>Hola!</h2>
                     <?php
                     echo elgg_view('output/url', array(
-                        'href' => "mailto:{$site->email}",
+                        'href' => "mailto:{$site->email}?subject=site name: {$site->name}",
                         'title' => elgg_echo('send:email_to_site'),
                         'text' => elgg_view('output/img', array(
                             'src' => "mod/z03_clipit_site/graphics/mail.png",
@@ -47,7 +50,7 @@ $site = elgg_get_site_entity();
                 ?>
                 <?php
                 echo elgg_view('output/url', array(
-                    'href' => "http://www.juxtalearn.org",
+                    'href' => "http://www.juxtalearn.eu",
                     'title' => "JuxtaLearn",
                     'text' => elgg_view('output/img', array(
                         'src' => "mod/z03_clipit_site/graphics/jxl_logo.png",

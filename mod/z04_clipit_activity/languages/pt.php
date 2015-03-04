@@ -11,6 +11,9 @@
  * @package         ClipIt
  */
 $portuguese = array(
+    'status' => 'Estado',
+    'search:btn' => 'Pesquisa',
+
     // Roles
     'teacher' => 'Professor',
     'student' => 'Aluno',
@@ -30,7 +33,7 @@ $portuguese = array(
     // Activity
     'activity' => 'Atividade',
     'activity:status' => 'Estado da atividade',
-    'activity:title' => 'Activity name',
+    'activity:title' => 'Nome da Atividade',
     'activity:description' => 'Descricao da atividade',
     'activity:start' => 'Inicio da atividade',
     'activity:end' => 'Final da atividade',
@@ -184,11 +187,11 @@ $portuguese = array(
     'publish:none' => 'Não há nada publicado',
     'publications:no_evaluated' => 'Sem avaliacao',
     'publications:evaluated' => 'Avaliado',
-    'publications:rating' => 'Pontuacao',
-    'publications:rating:name' => '%s\'s Pontuacao',
+    'publications:rating' => 'Pontuação',
+    'publications:rating:name' => '%s\'s Pontuação',
     'publications:rating:list' => 'Todas as avaliacoes',
     'publications:rating:votes' => 'VOTOS',
-    'publications:starsrequired' => 'As estrelas de pontuacao sao obrigatorias',
+    'publications:starsrequired' => 'As estrelas de pontuação sao obrigatorias',
     'publications:cantrating' => 'Não podes pontuar',
     'publications:rated' => 'Avaliado corretamente',
     'publications:my_rating' => 'As minhas pontuacoes',
@@ -207,7 +210,7 @@ $portuguese = array(
     'label' => 'Etiqueta',
     'labels' => 'Etiquetas',
     // Tags
-    'tag' => 'Obstaclo (Stumbling block)',
+    'tag' => 'Conceito',
     'tags' => 'Obstáculos (stumbling blocks)',
     'tags:none' => 'Não há obstáculos (stumbling blocks)',
     'tags:recommended' => 'Obstáculos (stumbling blocks) recomendados',
@@ -220,7 +223,7 @@ $portuguese = array(
     'activity:tasks' => 'Tarefas',
     'activity:task' => 'Tarefa',
     'task:title' => 'Titulo da tarefa',
-    'task:add' => 'Add task',
+    'task:add' => 'Adicionar tarefa',
     'task:added' => 'Anexar tarefa',
     'task:select' => 'Selecionar tarefa',
     'task:select:task_type' => 'Selecionar o tipo de tarefa',
@@ -253,7 +256,7 @@ $portuguese = array(
     'task:locked' => 'Tarefa fechada',
     'task:active' => 'Tarefa aberta',
     'task:finished' => 'Tarefa terminada',
-    'rating:none' => 'Não há pontuacao',
+    'rating:none' => 'Não há pontuação',
     // Create activity
     'or:create' => 'ou cria um',
     'activity:site:students' => 'Estudantes de CLipIt',

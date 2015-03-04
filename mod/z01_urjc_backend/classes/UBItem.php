@@ -106,7 +106,9 @@ class UBItem {
         $this->copy_to_elgg($elgg_object);
         $elgg_object->save();
         if ($double_save) {
-            $elgg_object->save(); // Only updates are saving time_created, thus first save for creation, second save for updating to proper creation time if given
+            // Only updates are saving time_created, thus first save for creation, second save for updating to
+            // proper creation time if given
+            $elgg_object->save(false);
         }
         return $this->id = $elgg_object->get("guid");
     }
@@ -136,6 +138,9 @@ class UBItem {
         $elgg_entity->set("name", (string)$this->name);
         $elgg_entity->set("description", (string)$this->description);
         $elgg_entity->set("url", (string)$this->url);
+        if(!empty($this->owner_id)) {
+            $elgg_entity->set("owner_guid", (int)$this->owner_id);
+        }
         $elgg_entity->set("time_created",(int)$this->time_created);
         $elgg_entity->set("access_id", ACCESS_PUBLIC);
 
@@ -207,7 +212,7 @@ class UBItem {
             $item->$prop = $value;
 
         }
-        if (array_key_exists("time_created",$prop_value_array)) {
+        if (array_key_exists("time_created", $prop_value_array)){
             return $item->save(true);
         } else {
             return $item->save(false);
@@ -230,11 +235,15 @@ class UBItem {
      *
      * @param int $id Item id from which to create a clone.
      * @param bool $linked Selects whether the clone will be linked to the parent object.
+     * @param bool $keep_owner Selects whether the clone will keep the parent item's owner (default: no)
      *
      * @return bool|int Id of the new clone Item, false in case of error.
      */
-    static function create_clone($id, $linked = true) {
+    static function create_clone($id, $linked = true, $keep_owner = false) {
         $prop_value_array = static::get_properties($id);
+        if($keep_owner === false){
+            $prop_value_array["owner_id"] = elgg_get_logged_in_user_guid();
+        }
         $clone_id = static::set_properties(null, $prop_value_array);
         if($linked){
             static::link_parent_clone($id, $clone_id);
@@ -242,8 +251,37 @@ class UBItem {
         return $clone_id;
     }
 
+    /**
+     * Links two entities as parent and clone
+     *
+     * @param int $id_parent ID of parent entity
+     * @param int $id_clone IF of clone entity
+     * @return bool true if OK
+     */
     static function link_parent_clone($id_parent, $id_clone){
-        UBCollection::add_items($id_parent, array($id_clone), static::REL_PARENT_CLONE, true);
+        return UBCollection::add_items($id_parent, array($id_clone), static::REL_PARENT_CLONE, true);
+    }
+
+    /**
+     * Unlinks an entity from its parent
+     *
+     * @param int $id ID of entity
+     * @return bool returns true if OK
+     */
+    static function unlink_from_parent($id){
+        $parent = static::get_cloned_from($id);
+        return UBCollection::remove_items($parent, array($id), static::REL_PARENT_CLONE);
+    }
+
+    /**
+     * Unlinks an entity from its clones
+     *
+     * @param int $id ID of entity
+     * @return bool returns true if OK]
+     */
+    static function unlink_from_clones($id){
+        $clones = static::get_clones($id);
+        return UBCollection::remove_items($id, $clones, static::REL_PARENT_CLONE);
     }
 
     /**
@@ -274,7 +312,7 @@ class UBItem {
      * @param int $id Item from which to return parent
      * @param bool $recursive Whether to look for parent recursively
      *
-     * @return int[] Array of Item IDs
+     * @return int Array of Item IDs
      */
     static function get_cloned_from($id, $recursive = false) {
         $parent = UBCollection::get_items($id, static::REL_PARENT_CLONE, true);
@@ -288,7 +326,7 @@ class UBItem {
                 $new_parent = UBCollection::get_items(array_pop($parent), static::REL_PARENT_CLONE, true);
             }
         }
-        return $parent = array_pop($parent);
+        return $parent = (int)array_pop($parent);
     }
 
     /**
@@ -421,7 +459,7 @@ class UBItem {
      * @param int $offset (optional) offset of items to get
      * @param string $order_by (optional) order by a certain property
      * @param bool $ascending (optional) order by ascending (default) or descending
-     * @return array(UBItem) array of UBItems filtered by the parameters given
+     * @return static[] array of UBItems filtered by the parameters given
      */
     static function get_by_id($id_array, $limit = 0, $offset = 0, $order_by = "", $ascending = true) {
         $item_array = array();

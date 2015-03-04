@@ -23,7 +23,8 @@ if($videos) {
         'create' => false,
         'entities' => $videos,
         'href' => $href,
-        'task_id' => $task->id
+        'task_id' => $task->id,
+        'task_type' => $task->task_type
     );
     $body .= elgg_view('multimedia/video/list', $params);
 }
@@ -53,21 +54,22 @@ if($storyboards) {
         'create' => false,
         'entities' => $storyboards,
         'href' => $href,
-        'task_id' => $task->id
+        'task_id' => $task->id,
+        'task_type' => $task->task_type
     );
     $body .= elgg_view('multimedia/storyboard/list', $params);
 }
-$resources = ClipitTask::get_resources($task->id);
-if($resources) {
-    $body .= elgg_view("page/components/title_block", array(
-        'title' => elgg_echo("resources"),
-    ));
-    $params = array(
-        'entity' => $activity,
-        'create' => false,
-        'entities' => $resources,
-        'href' => $href,
-        'task_id' => $task->id
-    );
-    $body .= elgg_view('multimedia/resource/list', $params);
+
+// Teacher view
+if($user->role == ClipitUser::ROLE_TEACHER){
+    $users = ClipitUser::get_by_id($activity->student_array, 0, 0, 'name');
+    if($users){
+        $body = elgg_view('tasks/admin/resource_download', array(
+            'activity' => $activity,
+            'entities'    => $users,
+            'task' => $task,
+        ));
+    } else {
+        $body = elgg_view('output/empty', array('value' => elgg_echo('users:none')));
+    }
 }

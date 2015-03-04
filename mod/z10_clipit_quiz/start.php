@@ -31,13 +31,14 @@ function clipit_quiz_init() {
  * @param $page
  */
 function quiz_page_handler($page){
+    elgg_set_context('authoring');
     $filter = '';
-    $sidebar = elgg_view_module('aside', elgg_echo('menu'),
+    $sidebar = elgg_view_module('aside', elgg_echo('teacher:authoring_tools'),
         elgg_view('tricky_topics/sidebar/menu').
         elgg_view('quiz/sidebar/menu'),
         array('class' => 'activity-group-block margin-bottom-10 aside-tree')
     );
-    $sidebar .= elgg_view_module('aside', elgg_echo('filter'),
+    $search_menu = elgg_view_module('aside', elgg_echo('filter'),
         elgg_view_form(
             'filter_search',
             array(
@@ -47,6 +48,9 @@ function quiz_page_handler($page){
                 'body' => elgg_view('forms/quiz/filter')
             )
         ));
+    if($page[0]){
+        $search_menu = false;
+    }
     switch($page[0]){
         case '':
             $title = elgg_echo('quizzes');
@@ -164,7 +168,7 @@ function quiz_page_handler($page){
         'content' => $content,
         'title' => $title,
         'filter' => $filter,
-        'sidebar' => $sidebar,
+        'sidebar' => $sidebar.$search_menu,
     );
     $body = elgg_view_layout('one_sidebar', $params);
 

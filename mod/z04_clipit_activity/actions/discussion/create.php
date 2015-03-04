@@ -19,8 +19,8 @@ $attach_file = array_filter(get_input('attach_files'));
 $attach_video = array_filter(get_input('attach_videos'));
 $attach_storyboard = array_filter(get_input('attach_storyboards'));
 
-
 $entity = array_pop($entity_class::get_by_id(array($entity_id)));
+
 if(count($entity)==0 || trim($discussion_title) == ""){
     register_error(elgg_echo("discussion:cantcreate"));
 } else{
@@ -31,6 +31,7 @@ if(count($entity)==0 || trim($discussion_title) == ""){
     ));
     if($file_ids){
         $entity::add_files($entity->id, $file_ids);
+        ClipitPost::add_files($new_message_id, $file_ids);
     }
     // Attach multimedia
         ClipitPost::add_files($new_message_id, $attach_file);

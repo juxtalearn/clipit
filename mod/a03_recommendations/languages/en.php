@@ -16,7 +16,6 @@ $english = array(
     'recommendations:public_videos' => 'public videos',
     'recommendations:public_files' => 'public files',
     'recommendations:public_storyboards' => 'public storyboards',
-    'recommendations:public_resources' => 'public resources',
     'recommendations:users' => 'user accounts',
     'recommendations:warning' => 'Warning!',
     'recommendations:failed:noadmin' => 'You must be an administrator to use this feature.',

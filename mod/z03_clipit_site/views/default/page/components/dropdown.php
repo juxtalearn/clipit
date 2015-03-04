@@ -21,7 +21,7 @@ if(isset($vars['style'])){
     <?php echo $vars['button']; ?>
     <ul class="dropdown-menu" role="menu">
         <?php foreach ($vars['options'] as $option): ?>
-        <li role="presentation">
+        <li role="presentation" <?php echo $option['item_class']?" class='".$option['item_class']."'":"";?>>
             <a <?php echo elgg_format_attributes($option['attr']);?> role="menuitem" tabindex="-1">
             <?php if($option['icon']): ?>
                 <i class="fa fa-<?php echo $option['icon'];?>"></i>

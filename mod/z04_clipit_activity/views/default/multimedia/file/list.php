@@ -61,6 +61,13 @@ foreach($files as $file_id){
                         '.formatFileSize($file->size).'
                     </small>
                     </div>';
+    if($vars['task_id']){
+        if(array_pop(ClipitFile::get_read_status($file_id, array($user_id)))) {
+            $buttons .= '<div class="pull-right margin-right-5 margin-top-5">
+                        <i class="fa fa-eye blue" style="font-size: 16px;"></i>
+                    </div>';
+        }
+    }
 
     $row = array(
         array(

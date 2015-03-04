@@ -97,7 +97,8 @@ $quiz_data = array(
     'description' => $quiz['description'],
     'tricky_topic' => $quiz['tricky_topic'],
     'view_mode' => $quiz['view'],
-    'max_time' => $total_time
+    'max_time' => $total_time,
+    'target' => $quiz['target']
 );
 if($quiz_id = $quiz['id']){
 //    Save Quiz

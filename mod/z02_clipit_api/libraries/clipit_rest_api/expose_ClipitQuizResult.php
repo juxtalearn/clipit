@@ -29,4 +29,9 @@ function expose_quiz_result_functions() {
         array("quiz_question_array" => array("type" => "array", "required" => true)),
         "Get Quiz Results by Quiz Question Id", 'GET', false, true
     );
+    expose_function(
+        $api_suffix . "evaluate_result", $class_suffix . "evaluate_result",
+        array("id" => array("type" => "int", "required" => true)),
+        "Evaluate a Quiz Result, and update the 'correct' property", 'POST', false, true
+    );
 }

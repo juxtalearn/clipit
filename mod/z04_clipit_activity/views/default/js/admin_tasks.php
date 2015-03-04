@@ -25,11 +25,13 @@ $(function() {
     });
     $(".datepicker").each(function(){
         $(this).datepicker({
+            firstDay: 1,
             minDate: "<?php echo date("d/m/Y", $activity->start);?>",
             maxDate: "<?php echo date("d/m/Y", $activity->end);?>"
         });
     });
     $('#full-calendar').fullCalendar({
+        firstDay: 1,
         header: {
             left: 'prev,next today',
             center: 'title',
@@ -52,7 +54,7 @@ $(function() {
             {
                 id: "<?php echo $task->id;?>",
                 title: "<?php echo $task->name;?>",
-                start: "<?php echo date("Y-m-d",$task->start);?>",
+                start: "<?php echo date("Y-m-d",$task->start);?>T10:00:00",
                 end: "<?php echo date("Y-m-d",$task->end);?>T10:00:00",
                 icon: <?php echo json_encode(elgg_view("tasks/icon_task_type", array('type' => $task->task_type))); ?>
             },
@@ -73,7 +75,7 @@ $(function() {
         },
         dayClick: function(date, jsEvent, view) {
 //            var date_formated = date.format("X");
-            var date_formated = date.add(-2, 'hours').format("X"); // Added -2hours T00:00:00
+            var date_formated = date.add(+2, 'hours').format("X"); // Added -2hours T00:00:00
             if(date_formated >= <?php echo $activity->start;?> && date_formated <= <?php echo $activity->end;?> ){
                 $("#create-new-task").modal('show').find(".input-task-start").val(date.format('DD/MM/YYYY'));
             } else {

@@ -17,6 +17,7 @@ $evaluation_list = get_filter_evaluations($entities, $activity->id);
 $list_no_evaluated = elgg_view('multimedia/video/list_summary', array(
     'videos'    => $evaluation_list["no_evaluated"],
     'href'      => $href,
+    'task_id'      => $task->id,
     'rating'    => true,
     'total_comments' => true,
 ));
@@ -54,6 +55,8 @@ if($user->role == ClipitUser::ROLE_TEACHER){
             'entities'    => $videos,
             'activity'      => $activity,
             'task'      => $task,
+            'entity_type'      => 'videos',
+            'list_view' => 'multimedia/video/list'
         ));
     } else {
         $body = elgg_view('output/empty', array('value' => elgg_echo('videos:none')));

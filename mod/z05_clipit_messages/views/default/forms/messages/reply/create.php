@@ -18,8 +18,9 @@ echo elgg_view("input/hidden", array(
 ));
 echo elgg_view("input/plaintext", array(
     'name' => 'message-reply',
-    'class' => 'form-control wysihtml5',
+    'class' => 'form-control mceEditor',
     'rows'  => 5,
+    'required' => true,
     'style' => "width: 100%;"
 ));
 echo elgg_view('input/submit', array(

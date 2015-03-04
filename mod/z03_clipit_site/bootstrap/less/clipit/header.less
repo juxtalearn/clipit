@@ -120,7 +120,43 @@
   }
 
 }
-
+.navbar-nav li.options{
+  background: #f5f5f5;
+  padding: 10px;
+  margin-top: -8px;
+  margin-bottom: -5px;
+  a{
+    display: inline-block;
+    font-size: @font-size-base;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: bold;
+    padding: 0 !important;
+    &:hover,
+    &:focus{
+      color: @blue_clipit;
+    }
+    > .fa{
+      font-size: @font-size-base;
+      float: none !important;
+    }
+  }
+  .btn{
+    color: #fff;
+    font-size: 12px;
+    display: inline-block;
+    font-weight: bold;
+    letter-spacing: 0;
+    padding: 5px 10px !important;
+    text-transform: none;
+    font-family: @font-family-base;
+    &:hover,
+    &:focus{
+      background-color: #1ba1d3;
+      color: #fff !important;
+    }
+  }
+}
 //
 // Account Menu navigation
 // --------------------------------------------------
@@ -147,6 +183,11 @@ ul.top-account{
       font-family: @font-family-helvetica;
       font-size: ceil(@font-size-base * 1.42); // ~20px
       padding: 10px 5px 0;
+    }
+    @media (max-width: @screen-sm-max) {
+      &.separator{
+        display: none;
+      }
     }
     .fa {
       .pull-left();

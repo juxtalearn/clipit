@@ -14,48 +14,10 @@ $rating = elgg_extract('rating', $vars);
 $entity = elgg_extract('entity', $vars);
 $entity_preview = elgg_extract('entity_preview', $vars);
 $href = elgg_extract('href', $vars);
+$user_language = get_current_language();
+$language_index = ClipitPerformanceItem::get_language_index($user_language);
 ?>
 <li class="row list-item">
-    <div class="col-md-4">
-        <div class="multimedia-preview image-block">
-            <?php echo $entity_preview;?>
-        </div>
-        <div class="content-block">
-            <strong>
-                <?php echo elgg_view('output/url', array(
-                    'href'  => "{$href}/view/".$entity->id,
-                    'title' => $entity->name,
-                    'text'  => $entity->name));
-                ?>
-            </strong>
-            <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $entity->tag_array, 'width' => 105, 'limit' => 2));?>
-        </div>
-        <hr class="margin-bottom-5">
-        <div class="block-total">
-            <div>
-                <ul>
-                    <?php
-                    $performance_ratings = $rating->performance_rating_array;
-                    foreach($performance_ratings as $performance_rating_id):
-                        $performance_rating = array_pop(ClipitPerformanceRating::get_by_id(array($performance_rating_id)));
-                        $performance_item = array_pop(ClipitPerformanceItem::get_by_id(array($performance_rating->performance_item)));
-                        ?>
-                        <li class="list-item-5">
-                            <div class="rating readonly pull-right" data-score="<?php echo $performance_rating->star_rating;?>" style="margin: 0 10px;">
-                                <?php echo star_rating_view($performance_rating->star_rating);?>
-                            </div>
-                            <?php echo elgg_view('output/url', array(
-                                'title' => $performance_item->name,
-                                'href'  => "explore/search?by=performance_item&id=".$performance_item->id,
-                                'text'  => $performance_item->name,
-                            ));
-                            ?>
-                        </li>
-                    <?php endforeach;?>
-                </ul>
-            </div>
-        </div>
-    </div>
     <div class="col-md-8">
         <small class="pull-right">
             <?php echo elgg_view('output/friendlytime', array('time' => $rating->time_created));?>
@@ -91,5 +53,44 @@ $href = elgg_extract('href', $vars);
                 <div><?php echo $tag_rating->description;?></div>
             </div>
         <?php endforeach;?>
+    </div>
+    <div class="col-md-4">
+        <div class="multimedia-preview image-block">
+            <?php echo $entity_preview;?>
+        </div>
+        <div class="content-block">
+            <strong>
+                <?php echo elgg_view('output/url', array(
+                    'href'  => "{$href}/view/".$entity->id,
+                    'title' => $entity->name,
+                    'text'  => $entity->name));
+                ?>
+            </strong>
+        </div>
+        <div class="block-total">
+            <hr class="margin-bottom-5 margin-top-10">
+            <div>
+                <ul>
+                    <?php
+                    $performance_ratings = $rating->performance_rating_array;
+                    foreach($performance_ratings as $performance_rating_id):
+                        $performance_rating = array_pop(ClipitPerformanceRating::get_by_id(array($performance_rating_id)));
+                        $performance_item = array_pop(ClipitPerformanceItem::get_by_id(array($performance_rating->performance_item)));
+                        ?>
+                        <li class="list-item-5">
+                            <div class="rating readonly pull-right" data-score="<?php echo $performance_rating->star_rating;?>" style="margin: 0 10px;">
+                                <?php echo star_rating_view($performance_rating->star_rating);?>
+                            </div>
+                            <?php echo elgg_view('output/url', array(
+                                'title' => $performance_item->item_name[$language_index],
+                                'href'  => "explore/search?by=performance_item&id=".$performance_item->id,
+                                'text'  => $performance_item->item_name[$language_index],
+                            ));
+                            ?>
+                        </li>
+                    <?php endforeach;?>
+                </ul>
+            </div>
+        </div>
     </div>
 </li>

@@ -20,6 +20,7 @@ echo elgg_view("input/plaintext", array(
     'class' => 'form-control mceEditor',
     'id'    => 'mceEditor',
     'rows'  => 6,
+    'required'  => true,
     'style' => "width: 100%;"
 ));
 echo elgg_view('input/submit', array(

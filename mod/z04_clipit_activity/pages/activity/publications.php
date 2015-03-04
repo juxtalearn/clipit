@@ -16,20 +16,6 @@ elgg_push_breadcrumb($title);
 $href = "clipit_activity/{$activity->id}/publications";
 $filter = elgg_view('publications/filter', array('selected' => $selected_tab, 'entity' => $activity, 'href' => $href));
 $tasks = ClipitActivity::get_tasks($activity->id);
-switch($selected_tab){
-    case 'videos':
-        // Get last task [type: video_upload]
-        $content = publications_get_page_content_list('video_upload', $tasks, $href);
-        break;
-    case 'resources':
-        // Get last task [type: storyboard_upload]
-        $content = publications_get_page_content_list('resource_upload', $tasks, $href);
-        break;
-    case 'storyboards':
-        // Get last task [type: storyboard_upload]
-        $content = publications_get_page_content_list('storyboard_upload', $tasks, $href);
-        break;
-}
 
 if($page[2] == 'view' && $page[3]){
     $entity_id = (int)$page[3];
@@ -43,8 +29,16 @@ if($page[2] == 'view' && $page[3]){
     $owner_group_id = $entity->get_group($entity->id);
     $my_group = ClipitGroup::get_from_user_activity($user_id, $activity->id);
     $canEvaluate = false;
-    if(!$hasRating && ($my_group != $owner_group_id)){
-        $canEvaluate = true;
+    $feedback_task = ClipitTask::get_child($entity::get_task($entity->id));
+    if(
+        !$hasRating
+        && $feedback_task
+        && $my_group != $owner_group_id
+        && $user->role == ClipitUser::ROLE_STUDENT
+        && ClipitTask::get_status($feedback_task) == ClipitTask::STATUS_ACTIVE
+    ){
+            $canEvaluate = ClipitTask::get_completed_status($feedback_task, $user_id) ? false:$feedback_task;
+
     }
 
     $owner_group = array_pop(ClipitGroup::get_by_id(array($owner_group_id)));
@@ -66,27 +60,10 @@ if($page[2] == 'view' && $page[3]){
                 'entity' => $entity,
                 'body' => $body,
                 'canEvaluate' => $canEvaluate,
+                'feedback_task' => $feedback_task,
                 'activity' => $activity,
                 'group' => $owner_group,
                 'comments' => $comments
-            ));
-            break;
-        // Clipit Resource publication
-        case 'ClipitResource':
-            $task_id = ClipitResource::get_task($entity_id);
-            $resources = ClipitTask::get_resources($task_id);
-            if(!$entity || !in_array($entity_id, $resources)){
-                return false;
-            }
-            $body = elgg_view("multimedia/resource/body", array('entity'  => $entity));
-            $content = elgg_view('publications/view', array(
-                'entity' => $entity,
-                'body' => $body,
-                'canEvaluate' => $canEvaluate,
-                'activity' => $activity,
-                'group' => $owner_group,
-                'comments' => $comments,
-                'description' => false
             ));
             break;
         // Clipit Storyboard publication
@@ -107,6 +84,7 @@ if($page[2] == 'view' && $page[3]){
                 'type' => 'storyboard',
                 'body' => $body,
                 'canEvaluate' => $canEvaluate,
+                'feedback_task' => $feedback_task,
                 'activity' => $activity,
                 'comments' => $comments,
                 'group' => $owner_group
@@ -114,6 +92,21 @@ if($page[2] == 'view' && $page[3]){
             break;
         default:
             return false;
+            break;
+    }
+} else {
+    switch($selected_tab){
+        case 'videos':
+            // Get last task [type: video_upload]
+            $content = publications_get_page_content_list('video_upload', $tasks, $href);
+            break;
+        case 'resources':
+            // Get last task [type: storyboard_upload]
+            $content = publications_get_page_content_list('resource_upload', $tasks, $href);
+            break;
+        case 'storyboards':
+            // Get last task [type: storyboard_upload]
+            $content = publications_get_page_content_list('storyboard_upload', $tasks, $href);
             break;
     }
 }

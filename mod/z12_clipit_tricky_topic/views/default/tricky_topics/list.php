@@ -39,12 +39,18 @@ $page = 'tricky_topics';
             </th>
         <?php endforeach;?>
         <th><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
-        <th style="width: 100px;"><?php echo elgg_echo('options');?></th>
+        <th style="width: 100px;"></th>
     </tr>
     </thead>
     <?php
     foreach($tricky_topics as $tricky_topic):
         $user = array_pop(ClipitUser::get_by_id(array($tricky_topic->owner_id)));
+        $is_linked = false;
+        $quizzes = ClipitQuiz::get_from_tricky_topic($tricky_topic->id);
+        $activities = ClipitActivity::get_from_tricky_topic($tricky_topic->id);
+        if(!empty($activities) || !empty($quizzes) ){
+            $is_linked = true;
+        }
     ?>
     <tr>
         <td>
@@ -89,30 +95,11 @@ $page = 'tricky_topics';
             </small>
         </td>
         <td>
-            <?php if($user->id == elgg_get_logged_in_user_guid()):?>
-                <?php echo elgg_view('output/url', array(
-                    'href'  => "tricky_topics/edit/{$tricky_topic->id}",
-                    'class' => 'btn btn-xs btn-primary',
-                    'title' => elgg_echo('edit'),
-                    'text'  => '<i class="fa fa-edit"></i>',
-                ));
-                ?>
-                <?php echo elgg_view('output/url', array(
-                    'href'  => "action/tricky_topic/remove?id={$tricky_topic->id}",
-                    'class' => 'btn btn-xs btn-danger remove-object',
-                    'is_action' => true,
-                    'title' => elgg_echo('delete'),
-                    'text'  => '<i class="fa fa-trash-o"></i>',
-                ));
-                ?>
-            <?php endif;?>
-            <?php echo elgg_view('output/url', array(
-                'href'  => "tricky_topics/create/{$tricky_topic->id}",
-                'class' => 'btn btn-xs btn-primary btn-border-blue',
-                'title' => elgg_echo('duplicate'),
-                'text'  => '<i class="fa fa-copy"></i>',
-            ));
-            ?>
+            <?php echo elgg_view('page/components/admin_options', array(
+                'entity' => $tricky_topic,
+                'user' => $user,
+                'is_linked' => $is_linked,
+            ));?>
         </td>
     </tr>
     <?php endforeach;?>

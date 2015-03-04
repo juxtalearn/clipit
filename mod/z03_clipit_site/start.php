@@ -65,7 +65,7 @@ function clipit_final_init(){
     elgg_load_js("jquery");
     elgg_load_js("jquery-migrate");
 
-    if (elgg_get_context() === "admin") {
+    if (elgg_get_context() == "admin") {
         if ($user->role == ClipitUser::ROLE_TEACHER) {
             elgg_unregister_page_handler('admin');
             return false;
@@ -75,6 +75,9 @@ function clipit_final_init(){
         elgg_unregister_css("clipit");
         elgg_unregister_js("twitter-bootstrap");
     } else {
+        if (elgg_get_context() == "activity" && $user->role == ClipitUser::ROLE_ADMIN) {
+            forward('admin');
+        }
         elgg_register_css("ui-lightness", "{$plugin_url}/vendors/jquery-ui-1.10.2.custom/css/ui-lightness/jquery-ui-1.10.2.custom.min.css");
         elgg_register_js("jquery-ui", "{$plugin_url}/vendors/jquery-ui-1.10.2.custom/js/jquery-ui-1.10.2.custom.min.js", "head", 2);
         // Waypoints
@@ -96,13 +99,15 @@ function clipit_final_init(){
         elgg_register_js("nvd3", "{$plugin_url}/vendors/nvd3/nv.d3.js");
         elgg_register_css("nvd3:css", "{$plugin_url}/vendors/nvd3/nv.d3.css");
         // ClipIt
-        elgg_register_css("clipit", "{$plugin_url}/bootstrap/less/clipit/clipit_base.min.css");
+        $clipit_css = elgg_get_simplecache_url('css', 'clipit');
+        elgg_register_simplecache_view('css/clipit');
+        elgg_register_css("clipit", $clipit_css);
         // FontAwesome
         elgg_register_css("fontawesome", "{$plugin_url}/vendors/fontawesome/fontawesome.min.css");
 
-        $clipit_js = elgg_get_simplecache_url('js', 'clipit');
-        elgg_register_simplecache_view('js/clipit');
-        elgg_register_js('clipit', $clipit_js);
+//        $clipit_js = elgg_get_simplecache_url('js', 'clipit');
+//        elgg_register_simplecache_view('js/clipit');
+        elgg_register_js('clipit', elgg_get_site_url()."js/clipit.js");
 
         elgg_load_js("jquery-ui");
         elgg_load_js("jquery:waypoints");

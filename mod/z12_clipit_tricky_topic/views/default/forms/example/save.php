@@ -81,28 +81,6 @@ if($example) {
                 'tags' => $example->tag_array
             ));?>
         </div>
-        <div class="form-group">
-            <label>
-                <?php echo elgg_echo('tags');?>
-            </label>
-            <div class="form-add-tags form-group margin-top-10">
-                <?php if($tags_diff):?>
-                    <?php foreach(ClipitTag::get_by_id($tags_diff) as $tag):?>
-                        <?php echo elgg_view("tricky_topics/tags/add", array('value' => $tag->name));?>
-                    <?php endforeach;?>
-                <?php else: ?>
-                    <?php echo elgg_view("tricky_topics/tags/add", array('required' => false));?>
-                <?php endif;?>
-            </div>
-            <?php echo elgg_view('output/url', array(
-                'href'  => "javascript:;",
-                'class' => 'btn btn-xs btn-primary',
-                'title' => elgg_echo('add'),
-                'text'  => '<i class="fa fa-plus"></i> ' . elgg_echo('add'),
-                'id'    => 'add-tag',
-            ));
-            ?>
-        </div>
     </div>
     <div class="clearfix"></div>
     <div class="col-md-12 margin-top-20">
@@ -148,18 +126,19 @@ if($example) {
                             <div role="tabpanel" class="tab-pane active form-group" id="files" style="background: #fff;padding: 10px;">
                                 <div class="group-input margin-top-10">
                                     <div class="margin-bottom-20 clone-input">
-                                        <a href="javascript:;" class="fa fa-times red margin-right-10 remove-input" style="display: none;"></a>
+                                        <a href="javascript:;" class="fa fa-trash-o red margin-right-10 remove-input" style="visibility: hidden;"></a>
                                         <?php echo elgg_view("input/file", array(
                                             'name' => 'file[]',
                                             'style' => 'display: inline-block;'
                                         ));
                                         ?>
+                                        <i class="fa fa-check green correct" style="display: none;"></i>
                                     </div>
                                 </div>
-                                <div>
+                                <div class="margin-left-20">
                                     <?php echo elgg_view('output/url', array(
                                         'href'  => "javascript:;",
-                                        'class' => 'btn btn-xs btn-primary add-input',
+                                        'class' => 'btn btn-sm btn-primary add-input',
                                         'title' => elgg_echo('add'),
                                         'text'  => '<i class="fa fa-plus"></i> ' . elgg_echo('add'),
                                     ));
@@ -185,7 +164,7 @@ if($example) {
                                 <div class="group-input margin-top-10">
                                     <div class="margin-bottom-20 clone-input">
                                         <div id="panel_1" class="panel-group">
-                                            <a href="javascript:;" class="fa fa-times red margin-right-10 remove-input image-block" style="display: none;"></a>
+                                            <a href="javascript:;" class="fa fa-trash-o red margin-right-10 remove-input image-block"  style="visibility: hidden;"></a>
                                             <div class="content-block panel" style="box-shadow: none;">
                                             <div class="form-group margin-top-5">
                                                 <?php echo elgg_view("input/text", array(
@@ -196,10 +175,10 @@ if($example) {
                                                 ));
                                                 ?>
                                             </div>
-                                            <a data-parent="#panel_1" class="btn-xs btn btn-primary btn-border-blue margin-right-10" data-toggle="collapse" href="#collapse_1" aria-expanded="false">
+                                            <a data-parent="#panel_1" class="btn-sm btn btn-primary btn-border-blue margin-right-10" data-toggle="collapse" href="#collapse_1" aria-expanded="false">
                                                 <?php echo elgg_echo('video:add:to_youtube');?>
                                             </a>
-                                            <a data-parent="#panel_1" class="btn-xs btn btn-primary btn-border-blue margin-right-10" data-toggle="collapse" href="#collapse_2" aria-expanded="false">
+                                            <a data-parent="#panel_1" class="btn-sm btn btn-primary btn-border-blue margin-right-10" data-toggle="collapse" href="#collapse_2" aria-expanded="false">
                                                 <?php echo elgg_echo('video:add:paste_url');?>
                                             </a>
                                             <div class="collapse margin-top-10" id="collapse_1" style="padding: 10px 0;">
@@ -208,12 +187,12 @@ if($example) {
                                                     'style' => 'display: inline-block;'
                                                 ));
                                                 ?>
+                                                <i class="fa fa-check green correct" style="display: none;"></i>
                                             </div>
                                             <div class="collapse margin-top-10" id="collapse_2" style="padding: 10px 0;">
                                                 <?php echo elgg_view("input/text", array(
                                                     'name' => 'video_url[]',
                                                     'class' => 'form-control',
-                                                    'placeholder' => elgg_echo('example:link_information'),
                                                 ));
                                                 ?>
                                             </div>
@@ -221,10 +200,10 @@ if($example) {
                                         </div>
                                     </div>
                                 </div>
-                                <div>
+                                <div class="margin-left-20">
                                     <?php echo elgg_view('output/url', array(
                                         'href'  => "javascript:;",
-                                        'class' => 'btn btn-xs btn-primary add-input collapse-type',
+                                        'class' => 'btn btn-sm btn-primary add-input collapse-type',
                                         'title' => elgg_echo('add'),
                                         'text'  => '<i class="fa fa-plus"></i> ' . elgg_echo('add'),
                                     ));
@@ -250,18 +229,19 @@ if($example) {
                             <div role="tabpanel" class="tab-pane form-group" id="storyboards" style="background: #fff;padding: 10px;">
                                 <div class="group-input margin-top-10">
                                     <div class="margin-bottom-20 clone-input">
-                                        <a href="javascript:;" class="fa fa-times red margin-right-10 remove-input" style="display: none;"></a>
+                                        <a href="javascript:;" class="fa fa-trash-o red margin-right-10 remove-input"  style="visibility: hidden;"></a>
                                         <?php echo elgg_view("input/file", array(
                                             'name' => 'storyboard[]',
                                             'style' => 'display: inline-block;'
                                         ));
                                         ?>
+                                        <i class="fa fa-check green correct" style="display: none;"></i>
                                     </div>
                                 </div>
-                                <div>
+                                <div class="margin-left-20">
                                     <?php echo elgg_view('output/url', array(
                                         'href'  => "javascript:;",
-                                        'class' => 'btn btn-xs btn-primary add-input',
+                                        'class' => 'btn btn-sm btn-primary add-input',
                                         'title' => elgg_echo('add'),
                                         'text'  => '<i class="fa fa-plus"></i> ' . elgg_echo('add'),
                                     ));

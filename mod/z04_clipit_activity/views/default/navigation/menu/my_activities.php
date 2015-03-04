@@ -14,18 +14,11 @@ $user_id = elgg_get_logged_in_user_guid();
 ?>
 <li <?php echo elgg_in_context('my_activities') ? 'class="active"': '';?>>
     <?php echo elgg_view('output/url', array(
-        'href'  => "my_activities",
-        'title' => elgg_echo('my_activities'),
-        'text'  => elgg_echo('my_activities')
-    ));
-    ?>
-    <?php echo elgg_view('output/url', array(
         'href'  => "#",
         'data-toggle' => 'dropdown',
-        'class' => 'caret-down',
-        'style' => 'height: 50px;',
         'id' => 'activities',
-        'text'  => '<i class="fa fa-caret-down"></i>'
+        'title' => elgg_echo('my_activities'),
+        'text'  => '<i class="fa fa-caret-down pull-right" style="float: right !important;"></i>'.elgg_echo('my_activities')
     ));
     ?>
     <!-- My activities dropdown menu -->
@@ -33,7 +26,20 @@ $user_id = elgg_get_logged_in_user_guid();
     <?php
     $activities_found = false;
     if($my_activities = ClipitUser::get_activities($user_id)):
-    foreach($my_activities as $activity_id):
+    ?>
+        <li style="border-bottom: 1px solid #EFEFEF;padding: 5px 10px;">
+            <small>
+                <?php echo elgg_view('output/url', array(
+                    'href'  => "my_activities",
+                    'class'  => 'pull-right',
+                    'title' => elgg_echo('view_all'),
+                    'text'  => elgg_echo('view_all'),
+                ));
+                ?>
+                <?php echo elgg_echo('my_activities:active');?>
+            </small>
+        </li>
+    <?php foreach($my_activities as $activity_id):
         $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
         if($activity->status != 'closed'):
             $activities_found = true;
@@ -60,9 +66,17 @@ $user_id = elgg_get_logged_in_user_guid();
     <?php endforeach; ?>
     <?php endif; ?>
     <?php if(!$activities_found): ?>
-        <li role="presentation"><a>
-            <small class="show"><?php echo elgg_echo('my_activities:none');?></small>
-            </a>
+        <li style="padding: 5px 10px;">
+            <small>
+                <?php echo elgg_view('output/url', array(
+                    'href'  => "my_activities",
+                    'class'  => 'pull-right',
+                    'title' => elgg_echo('view_all'),
+                    'text'  => elgg_echo('view_all'),
+                ));
+                ?>
+                <?php echo elgg_echo('my_activities:none');?>
+            </small>
         </li>
     <?php endif;?>
     </ul>

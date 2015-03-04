@@ -40,9 +40,15 @@ function tinymce_setup(specific_id){
             $(".mce-i-italic").addClass("fa-italic");
             $(".mce-i-bold").addClass("fa-bold");
         });
+        ed.on('change', function(e) {
+        tinyMCE.triggerSave();
+        });
     },
     convert_urls: true,
     mode : "specific_textareas",
+    formats : {
+        underline : {inline : 'u', exact : true}
+    },
     editor_selector : /(mceEditor|wysihtml5|"+specific_id+")/,
     force_br_newlines : true,
     force_p_newlines : false,
@@ -61,33 +67,33 @@ function tinymce_setup(specific_id){
     invalid_elements: 'img,h1,h2',
     autoresize_min_height: 150,
     mentions: {
-    delay: 0,
-            source: function (query, process, delimiter) {
-        // Do your ajax call
-        // When using multiple delimiters you can alter the query depending on the delimiter used
-        if (delimiter === '@') {
-            $.getJSON(elgg.config.wwwroot+"ajax/view/messages/search_to?q="+query, function (data) {
-                //call process to show the result
-                if(data){
-                    process(data);
-                }
-            });
-        }
-    },
-            delimiter: '@',
-            queryBy: 'first_name',
-            render: function(item) {
-        var img = "<img class='img' src='" + item.avatar + "' title='" + item.first_name + "' height='25px' width='25px' />";
-        return "<li class='text-truncate'>" + img + "<div class='block'><div class='title'>" + item.first_name + "</div><div class='sub-title'>" + item.username + "</div></div></li>";
-    },
-            renderDropdown: function() {
-        //add twitter bootstrap dropdown-menu class
-        return '<ul class="rte-autocomplete dropdown-menu mention-autocomplete"><li class="loading"><i class="fa fa-spinner fa-spin"></i></li></ul>';
-    },
+        delay: 0,
+        source: function (query, process, delimiter) {
+            // Do your ajax call
+            // When using multiple delimiters you can alter the query depending on the delimiter used
+            if (delimiter === '@') {
+                $.getJSON(elgg.config.wwwroot+"ajax/view/messages/search_to?q="+query, function (data) {
+                    //call process to show the result
+                    if(data){
+                        process(data);
+                    }
+                });
+            }
+        },
+        delimiter: '@',
+        queryBy: 'first_name',
+        render: function(item) {
+            var img = "<img class='img' src='" + item.avatar + "' title='" + item.first_name + "' height='25px' width='25px' />";
+            return "<li class='text-truncate'>" + img + "<div class='block'><div class='title'>" + item.first_name + "</div><div class='sub-title'>" + item.username + "</div></div></li>";
+        },
+        renderDropdown: function() {
+            //add twitter bootstrap dropdown-menu class
+            return '<ul class="rte-autocomplete dropdown-menu mention-autocomplete"><li class="loading"><i class="fa fa-spinner fa-spin"></i></li></ul>';
+        },
 
-            insert: function(item) {
-        return item.username;
-    }
+        insert: function(item) {
+            return item.username;
+        }
     },
     menubar: false,
     statusbar: false,
@@ -281,6 +287,7 @@ $(function(){
         },
         "Use a valid username."
     );
+
     $(".elgg-form-register").validate({
         errorElement: "span",
         errorPlacement: function(error, element) {
@@ -315,10 +322,12 @@ $(function(){
                 form.submit();
         }
     });
+
     /**
      * Form general validation
      */
     $("body").on("click", "form[data-validate=true]", function (e) {
+        tinyMCE.triggerSave();
         //$("form[data-validate=true]").each(function(){
         var form_to = $(this);
         $(this).validate({
@@ -327,6 +336,8 @@ $(function(){
                 error.appendTo($("label[for='"+element.attr('name')+"']"));
             },
             //ignore: [], // DEBUG
+            ignore: ":hidden:not(.mceEditor)",
+            focusInvalid: true,
             onkeyup: false,
             onblur: false,
             submitHandler: function(form) {
@@ -337,7 +348,22 @@ $(function(){
                 else
                     button_submit.data("loading-text", "<?php echo elgg_echo('loading');?>...").button('loading');
             }
-        });
+        }).focusInvalid = function() {
+            // put focus on tinymce on submit validation
+            if (this.settings.focusInvalid) {
+                try {
+                    var toFocus = $(this.findLastActive() || this.errorList.length && this.errorList[0].element || []);
+
+                    if (toFocus.is("textarea")) {
+                        tinyMCE.get(toFocus.attr("id")).focus();
+                    } else {
+                        toFocus.filter(":visible").focus();
+                    }
+                } catch (e) {
+                    // ignore IE throwing errors when focusing hidden elements
+                }
+            }
+        };
     });
     /**
      * wysihtml5 editor default options
@@ -463,17 +489,17 @@ $(function(){
                 if(parseInt(container_height) < parseInt(element_height)){
                     return false;
                 }
-                var readmore_link = $("<a href='javascript:;' class='read-more'>Read more<strong>...</strong></a>");
+                var readmore_link = $("<a href='javascript:;' class='read-more'><?php echo elgg_echo('read_more');?><strong>...</strong></a>");
                 element_shorten.append(readmore_link);
                 container.css("max-height",element_height);
                 readmore_link.on("click", function(){
                     if (container.hasClass('full-content')) {
                         container.removeClass('full-content');
                         container.addClass('less-content');
-                        $(this).text("Read more...");
+                        $(this).text("<?php echo elgg_echo('read_more');?>...");
                     } else {
                         container.addClass('full-content');
-                        $(this).text("Less");
+                        $(this).text("<?php echo elgg_echo('read_less');?>");
                     }
                 });
             });
@@ -585,6 +611,7 @@ $(function(){
         if ($(e.target).data('toggle') !== 'popover'
             && $(e.target).parents('.popover.in').length === 0) {
             $('[data-toggle="popover"]').popover('hide');
+            $('.popover').hide();
         }
     });
     $('[rel=popover]').popover({

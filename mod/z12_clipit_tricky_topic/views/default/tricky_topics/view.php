@@ -15,34 +15,23 @@ $tt_parent = elgg_extract('tricky_topic_parent', $vars);
 $multimedia = elgg_extract('multimedia', $vars);
 $examples = elgg_extract('examples', $vars);
 $user = array_pop(ClipitUser::get_by_id(array($tricky_topic->owner_id)));
+$is_linked = false;
+$quizzes = ClipitQuiz::get_from_tricky_topic($tricky_topic->id);
+$activities = ClipitActivity::get_from_tricky_topic($tricky_topic->id);
+if(!empty($activities) || !empty($quizzes) ){
+    $is_linked = true;
+}
 ?>
 <div class="margin-bottom-10">
     <div class="pull-right">
         <div class="margin-bottom-10">
-            <?php if($user->id == elgg_get_logged_in_user_guid()):?>
-                <?php echo elgg_view('output/url', array(
-                    'href'  => "tricky_topics/edit/{$tricky_topic->id}",
-                    'class' => 'btn btn-xs btn-primary',
-                    'title' => elgg_echo('edit'),
-                    'text'  => '<i class="fa fa-edit"></i>',
-                ));
-                ?>
-                <?php echo elgg_view('output/url', array(
-                    'href'  => "action/tricky_topic/remove?id={$tricky_topic->id}",
-                    'class' => 'btn btn-xs btn-danger remove-object',
-                    'is_action' => true,
-                    'title' => elgg_echo('delete'),
-                    'text'  => '<i class="fa fa-trash-o"></i>',
-                ));
-                ?>
-            <?php endif;?>
-            <?php echo elgg_view('output/url', array(
-                'href'  => "tricky_topics/create/{$tricky_topic->id}",
-                'class' => 'btn btn-xs btn-primary btn-border-blue',
-                'title' => elgg_echo('duplicate'),
-                'text'  => '<i class="fa fa-copy"></i>',
-            ));
-            ?>
+            <div class="inline-block">
+                <?php echo elgg_view('page/components/admin_options', array(
+                    'entity' => $tricky_topic,
+                    'user' => $user,
+                    'is_linked' => $is_linked,
+                ));?>
+            </div>
             <span class="margin-left-10">
                 <?php echo elgg_view("page/components/print_button");?>
             </span>
@@ -98,7 +87,7 @@ $user = array_pop(ClipitUser::get_by_id(array($tricky_topic->owner_id)));
     <div class="col-md-2">
         <small class="show"><?php echo elgg_echo('education_level');?></small>
         <?php echo elgg_view('output/url', array(
-            'href'  => "tricky_topics?education_level={$tricky_topic->education_level}",
+            'href'  => set_search_input('tricky_topics', array('education_level'=>$tricky_topic->education_level)),
             'title' => elgg_echo('education_level:'.$tricky_topic->education_level),
             'text'  => elgg_echo('education_level:'.$tricky_topic->education_level),
         ));
@@ -107,14 +96,14 @@ $user = array_pop(ClipitUser::get_by_id(array($tricky_topic->owner_id)));
     <div class="col-md-3">
         <small class="show"><?php echo elgg_echo('tricky_topic:subject');?></small>
         <?php echo elgg_view('output/url', array(
-            'href'  => "tricky_topics?subject={$tricky_topic->subject}",
+            'href'  => set_search_input('tricky_topics', array('subject'=>$tricky_topic->subject)),
             'title' => $tricky_topic->subject,
             'text'  => $tricky_topic->subject,
         ));
         ?>
     </div>
 </div>
-
+<a name="examples"></a>
 <div class="margin-bottom-10">
     <?php echo elgg_view('page/components/title_block', array('title' => elgg_echo('examples')));?>
     <?php echo elgg_view('examples/summary', array('entities' => $examples));?>
@@ -126,6 +115,7 @@ $user = array_pop(ClipitUser::get_by_id(array($tricky_topic->owner_id)));
     ));
     ?>
 </div>
+<a name="resources"></a>
 <div>
     <?php echo elgg_view('page/components/title_block', array('title' => elgg_echo('activity:stas')));?>
     <div role="tabpanel">
@@ -154,64 +144,91 @@ $user = array_pop(ClipitUser::get_by_id(array($tricky_topic->owner_id)));
         display: inline-block;
     }
 </style>
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="files">
-                <div class="margin-top-20">
-                    <?php
-                    $params = array(
-                        'add_files' => false,
-                        'files' => $multimedia['files'],
-                        'href' => $href,
-                        'options' => false,
-                        'preview' => true
-                    );
-                    if($multimedia['files']) {
-                        echo elgg_view('multimedia/file/list_summary', $params);
-                    } else {
-                        echo elgg_view('output/empty', array('value' => elgg_echo('file:none')));
-                    }
-                    ?>
-                </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="videos">
-                <div class="margin-top-20">
-                    <?php
-                    $params = array(
-                        'videos' => $multimedia['videos'],
-                        'href' => $href,
-                        'view_comments' => false,
-                        'options' => false,
-                        'author_bottom' => true,
-                        'preview' => true
-                    );
-                    if($multimedia['videos']) {
-                        echo elgg_view('multimedia/video/list_summary', $params);
-                    } else {
-                        echo elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
-                    }
-                    ?>
-                </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="storyboards">
-                <div class="margin-top-20">
-                    <?php
-                    $params = array(
-                        'entities' => $multimedia['storyboards'],
-                        'href' => $href,
-                        'view_comments' => false,
-                        'options' => false,
-                        'preview' => true
-                    );
-                    if($multimedia['storyboards']) {
-                        echo elgg_view('multimedia/storyboard/list_summary', $params);
-                    } else {
-                        echo elgg_view('output/empty', array('value' => elgg_echo('storyboards:none')));
-                    }
-                    ?>
-                </div>
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active form-group" id="files">
+            <div class="margin-top-20">
+                <?php
+                echo elgg_view_form('tricky_topic/resources', array(
+                    'body' => elgg_view('forms/attachments/files',
+                        array('submit' => true, 'entity_id' => $tricky_topic->id)),
+                    'class' => 'gray-block',
+                    'enctype' => 'multipart/form-data'
+                ));
+                ?>
+                <hr>
+                <?php
+                $params = array(
+                    'add_files' => false,
+                    'files' => $multimedia['files'],
+                    'href' => $href,
+                    'options' => true,
+                    'preview' => true
+                );
+                if($multimedia['files']) {
+                    echo elgg_view('multimedia/file/list_summary', $params);
+                } else {
+                    echo elgg_view('output/empty', array('value' => elgg_echo('file:none')));
+                }
+                ?>
             </div>
         </div>
-
+        <div role="tabpanel" class="tab-pane form-group" id="videos">
+            <div class="margin-top-20">
+                <?php
+                echo elgg_view_form('tricky_topic/resources', array(
+                    'body' => elgg_view('forms/attachments/videos',
+                        array('submit' => true, 'entity_id' => $tricky_topic->id)),
+                    'class' => 'gray-block',
+                    'enctype' => 'multipart/form-data'
+                ));
+                ?>
+                <hr>
+                <?php
+                $params = array(
+                    'videos' => $multimedia['videos'],
+                    'href' => $href,
+                    'view_comments' => false,
+                    'actions' => true,
+                    'options' => false,
+                    'author_bottom' => true,
+                    'preview' => true
+                );
+                if($multimedia['videos']) {
+                    echo elgg_view('multimedia/video/list_summary', $params);
+                } else {
+                    echo elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
+                }
+                ?>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane form-group" id="storyboards">
+            <div class="margin-top-20">
+                <?php
+                echo elgg_view_form('tricky_topic/resources', array(
+                    'body' => elgg_view('forms/attachments/storyboards',
+                        array('submit' => true, 'entity_id' => $tricky_topic->id)),
+                    'class' => 'gray-block',
+                    'enctype' => 'multipart/form-data'
+                ));
+                ?>
+                <hr>
+                <?php
+                $params = array(
+                    'entities' => $multimedia['storyboards'],
+                    'href' => $href,
+                    'view_comments' => false,
+                    'actions' => true,
+                    'preview' => true
+                );
+                if($multimedia['storyboards']) {
+                    echo elgg_view('multimedia/storyboard/list_summary', $params);
+                } else {
+                    echo elgg_view('output/empty', array('value' => elgg_echo('storyboards:none')));
+                }
+                ?>
+            </div>
+        </div>
+    </div>
     </div>
 </div>

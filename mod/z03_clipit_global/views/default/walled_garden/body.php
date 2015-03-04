@@ -21,12 +21,7 @@ $account = elgg_extract('accounts', $vars);
         </div>
         <div class="clipit-message">
             <h1><?php echo elgg_echo('clipit:slogan');?></h1>
-            <h4>
-                ClipIt ofrece un entorno colaborativo para aprender enseñando
-                donde los estudiantes aprenden creando videos y evaluando el resultado
-                de sus compañeros. Los mejores vídeos pueden pasar a formar parte de los recursos
-                educativos de ClipIt
-            </h4>
+            <h4><?php echo elgg_echo('clipit:slogan:description');?></h4>
             <div class="btns">
                 <?php echo elgg_view('output/url', array(
                     'href'  => "http://clipit.es/demo",
@@ -56,10 +51,8 @@ $account = elgg_extract('accounts', $vars);
                     <div class="bar bar-right" style="background: #FF2D00;"></div>
                     <div class="icon-circle" style="background-color: #FF2D00;background-image: url('<?php echo $images_dir;?>/landing/create.png');"></div>
                 </div>
-                <h3 class="blue-dark margin-bottom-15 margin-top-10">Crea</h3>
-                <p class="blue-dark text-lg">
-                    un vídeo con tus compañeros apoyándote en Clipit.
-                </p>
+                <h3 class="blue-dark margin-bottom-15 margin-top-10"><?php echo elgg_echo('clipit:slogan:create');?></h3>
+                <p class="blue-dark text-lg"><?php echo elgg_echo('clipit:slogan:create_rest');?></p>
             </div>
             <div class="col-md-4 text-center">
                 <div class="clipit-slogan-icon animate fadeIn" data-delay="500" data-icon="2">
@@ -67,20 +60,16 @@ $account = elgg_extract('accounts', $vars);
                     <div class="bar bar-right" style="background: #D8BA0B;"></div>
                     <div class="icon-circle" style="background-color: #D8BA0B;background-image: url('<?php echo $images_dir;?>/landing/learn.png');"></div>
                 </div>
-                <h3 class="blue-dark margin-bottom-15 margin-top-10">Aprende</h3>
-                <p class="blue-dark text-lg">
-                    con los vídeos de otros grupos y de sus comentarios.
-                </p>
+                <h3 class="blue-dark margin-bottom-15 margin-top-10"><?php echo elgg_echo('clipit:slogan:learn');?></h3>
+                <p class="blue-dark text-lg"><?php echo elgg_echo('clipit:slogan:learn_rest');?></p>
             </div>
             <div class="col-md-4 text-center">
                 <div class="clipit-slogan-icon animate fadeIn" data-delay="1500" data-icon="3">
                     <div class="bar bar-left" style="background: #0999CD;"></div>
                     <div class="icon-circle" style="background-color: #0999CD;background-image: url('<?php echo $images_dir;?>/landing/share.png');"></div>
                 </div>
-                <h3 class="blue-dark margin-bottom-15 margin-top-10">Comparte</h3>
-                <p class="blue-dark text-lg">
-                    tus vídeos con el resto de compañeros de tu centro educativo.
-                </p>
+                <h3 class="blue-dark margin-bottom-15 margin-top-10"><?php echo elgg_echo('clipit:slogan:share');?></h3>
+                <p class="blue-dark text-lg"><?php echo elgg_echo('clipit:slogan:share_rest');?></p>
             </div>
         </div>
     </div>
@@ -112,61 +101,36 @@ $account = elgg_extract('accounts', $vars);
             <div class="slide-content" data-cycle-pager-template="<a href=#><img src='<?php echo $images_dir;?>/landing/section_5.png'></a> ">
                 <img src="<?php echo $images_dir;?>/landing/section_5.png">
                 <div>
-                    <h3><span>Define<i></i></span></h3>
-                    <p class="blue text-lg">
-                        El profesor define el tema y los conceptos clave sobre los que trabajan los estudiantes.
-                        También puede compartir con los alumnos material de apoyo que sirva de referencia y de guía.
-                    </p>
+                    <h3><span><?php echo elgg_echo('clipit:carrousel:define');?><i></i></span></h3>
+                    <p class="blue text-lg"><?php echo elgg_echo('clipit:carrousel:define_rest');?></p>
                 </div>
             </div>
             <div class="slide-content" data-cycle-pager-template="<a href=#><img src='<?php echo $images_dir;?>/landing/section_2.png'></a> ">
                 <img src="<?php echo $images_dir;?>/landing/section_2.png">
                 <div>
-                    <h3><span>Colabora<i></i></span></h3>
-                    <p class="blue text-lg">
-                        Los estudiantes se organizan en grupos para crear vídeos y materiales
-                        educativos que se suben a Clipit. Cada grupo dispone de
-                        herramientas que ofrecen un entorno de trabajo seguro:
-                        un espacio para compartir ficheros, un sistema de mensajería ,
-                        y un foro de discusión para facilitar la creación colaborativa de materiales.
-                    </p>
+                    <h3><span><?php echo elgg_echo('clipit:carrousel:collaborate');?><i></i></span></h3>
+                    <p class="blue text-lg"><?php echo elgg_echo('clipit:carrousel:collaborate_rest');?></p>
                 </div>
             </div>
             <div class="slide-content" data-cycle-pager-template="<a href=#><img src='<?php echo $images_dir;?>/landing/section_4.png'></a> ">
                 <img src="<?php echo $images_dir;?>/landing/section_4.png">
                 <div>
-                    <h3><span>Evalúa<i></i></span></h3>
-                    <p class="blue text-lg">
-                        Los estudiantes revisan, discuten y valoran los videos creados
-                        por sus compañeros aportando ideas que mejoren los materiales creados.
-                        En este proceso se guía al estudiante mediante plantillas que guían
-                        la evaluación de la parte educativa y la creativa.
-                    </p>
+                    <h3><span><?php echo elgg_echo('clipit:carrousel:evaluate');?><i></i></span></h3>
+                    <p class="blue text-lg"><?php echo elgg_echo('clipit:carrousel:evaluate_rest');?></p>
                 </div>
             </div>
             <div class="slide-content" data-cycle-pager-template="<a href=#><img src='<?php echo $images_dir;?>/landing/section_1.png'></a> ">
                 <img src="<?php echo $images_dir;?>/landing/section_1.png">
                 <div>
-                    <h3><span>Seguimiento del aprendizaje<i></i></span></h3>
-                    <p class="blue text-lg">
-                        ClipIt muestra al estudiante un resumen con el progreso de
-                        los grupos donde participa, así como la evolución de cada una de las
-                        actividades en las que está involucrado. Dispone, además, de analíticas de
-                        aprendizaje personalizadas a disposición de los estudiantes y del profesor
-                    </p>
+                    <h3><span><?php echo elgg_echo('clipit:carrousel:progress');?><i></i></span></h3>
+                    <p class="blue text-lg"><?php echo elgg_echo('clipit:carrousel:progress_rest');?></p>
                 </div>
             </div>
             <div class="slide-content" data-cycle-pager-template="<a href=#><img src='<?php echo $images_dir;?>/landing/section_3.png'></a> ">
                 <img src="<?php echo $images_dir;?>/landing/section_3.png">
                 <div>
-                    <h3><span>Explora<i></i></span></h3>
-                    <p class="blue text-lg">
-                        Navegar por el videos compartidos es fácil ya que se
-                        categorizan por conceptos clave y por actividades
-                        donde fueron creados. Además, los estudiantes
-                        pueden navegar a través de las etiquetas asignadas a los videos, o siguiendo las
-                        recomendaciones personalizadas.
-                    </p>
+                    <h3><span><?php echo elgg_echo('clipit:carrousel:explore');?><i></i></span></h3>
+                    <p class="blue text-lg"><?php echo elgg_echo('clipit:carrousel:explore_rest');?></p>
                 </div>
             </div>
         </div>
@@ -180,7 +144,7 @@ $account = elgg_extract('accounts', $vars);
 </style>
 <div class="clipit-videos">
     <div class="container">
-        <h2 class="text-center">Videos <span>recomendados</span></h2>
+        <h2 class="text-center"><?php echo elgg_echo('clipit:global:recommended');?></h2>
         <div class="videos row">
             <div class="main-video col-md-9 margin-bottom-10">
                 <div>

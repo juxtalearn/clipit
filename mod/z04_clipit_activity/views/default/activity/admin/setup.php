@@ -70,10 +70,11 @@ elgg_load_js("jquery:quicksearch");
                     'title' => elgg_echo('change_to') .": ". $status['change_to'],
                     'text' => $status['btn_change_to'],
                     'data-toggle' => "popover",
+                    'tabindex' => "0",
                     'style' => "display:block;",
                     'rel' => "popover",
-                    'data-placement' => "bottom",
-                    'data-content' => "Lorem ipsum bla bla bla"
+                    'data-placement' => "left",
+                    'data-content' => $status['text_tooltip']
                 ));
                 ?>
             </div>
@@ -164,7 +165,7 @@ elgg_load_js("jquery:quicksearch");
         <hr>
         <?php
         echo elgg_view('input/submit', array(
-            'value' => elgg_echo('update'),
+            'value' => elgg_echo('save'),
             'class' => "btn btn-primary pull-right",
         ));
         ?>

@@ -19,9 +19,9 @@ $finished_task = elgg_extract("finished_task" ,$vars);
 
 $task = array_pop(ClipitTask::get_by_id(array($task_id)));
 $quiz = array_pop(ClipitQuiz::get_by_id(array($quiz_id)));
-$questions = ClipitQuizQuestion::get_by_id($quiz->quiz_question_array);
+$questions = ClipitQuizQuestion::get_by_id($quiz->quiz_question_array, 0, 0, 'order');
 // if teacher set random questions
-shuffle($questions);
+// shuffle($questions);
 $quiz_start = ClipitQuiz::get_quiz_start($quiz->id, $user_id);
 if(!$quiz_start && !$finished_task){
     ClipitQuiz::set_quiz_start($quiz->id, elgg_get_logged_in_user_guid());
@@ -59,6 +59,7 @@ $count_answer = ClipitQuiz::questions_answered_by_user($quiz_id, $user_id);
         duration = moment.duration(diffTime*1000, 'milliseconds'),
         interval = 1000,
         days = '',
+        hours = '',
         d;
     countdown = setInterval(function(){
         duration = moment.duration(duration - interval, 'milliseconds');
@@ -68,11 +69,13 @@ $count_answer = ClipitQuiz::questions_answered_by_user($quiz_id, $user_id);
             clearTimeout(countdown);
             return false;
         }
-        d = new Date(duration - interval);
+        d = new Date(duration-interval);
         if(duration.days()){
             days = moment(d).format('DD') + "d ";
+        } else if(duration.hours()){
+            hours = moment.utc(d).format('HH') + "h ";
         }
-        $('.countdown').text(days + moment(d).format('hh') + "h " + moment(d).format('mm') + "m " + moment(d).format('ss') + "s");
+        $('.countdown').text(days + hours + moment.utc(d).format('mm') + "m " + moment.utc(d).format('ss') + "s");
     }, interval);
 <?php endif;?>
     $(function(){
@@ -184,10 +187,30 @@ $(function(){
 
 <div class="clearfix"></div>
 <h4 id="questions-result">
-    <strong class="text-muted">
-        <span id="count-result"><?php echo $count_answer;?></span>/<?php echo count($questions);?>
-    </strong>
-    <?php echo elgg_echo('quiz:questions:answered');?>
+    <?php if($finished_task && $finished):?>
+        <span>
+        <?php
+            $correct = count(array_filter(ClipitQuiz::get_user_results_by_question($quiz_id, $user_id)));
+            $total_correct = ($correct/count($questions))*100;
+            echo round($total_correct)."%";
+        ?>
+            <?php echo elgg_echo('quiz:questions:answers:correct');?>
+        </span>
+        <span class="text-muted margin-left-5">
+            (<strong><span id="count-result"><?php echo $count_answer;?></span>
+                <?php echo elgg_echo('quiz:out_of');?>
+                <?php echo count($questions);?>
+            </strong>
+            <?php echo elgg_echo('quiz:questions:answered');?>)
+        </span>
+    <?php else:?>
+        <strong class="text-muted">
+            <span id="count-result"><?php echo $count_answer;?></span>
+            <?php echo elgg_echo('quiz:out_of');?>
+            <?php echo count($questions);?>
+        </strong>
+        <?php echo elgg_echo('quiz:questions:answered');?>
+    <?php endif;?>
 </h4>
 <?php if(!$vars['admin']):?>
     <div class="pull-right"><small style="text-transform: uppercase"><?php echo elgg_echo('difficulty');?></small></div>
@@ -197,6 +220,7 @@ $(function(){
 <div class="quiz <?php echo $vars['admin']?'quiz-admin':'';?>">
 <?php
 $num = 1;
+
 foreach($questions as $question):
     $result = ClipitQuizResult::get_from_question_user($question->id, $user_id);
     $params = array(
@@ -326,7 +350,8 @@ endforeach;
         }
     ?>
         <div>
-        <?php echo elgg_view('quizzes/chart/radar', array('data' => $data, 'labels' => $labels, 'id' => $user_id));?>
+            <h4><?php echo elgg_echo('quiz:results:stumbling_block');?></h4>
+            <?php echo elgg_view('quizzes/chart/radar', array('data' => $data, 'labels' => $labels, 'id' => $user_id));?>
         </div>
     <?php endif;?>
 </div>

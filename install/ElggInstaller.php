@@ -424,11 +424,11 @@ class ElggInstaller {
                 "value" => "admin1!",
                 "required" => TRUE,
             ),
-            'jxl_secret' => array(
-                'type' => 'text',
-                'value' => '0123456789abcdef0123456789abcdef',
-                'required' => TRUE,
-            ),
+//            'jxl_secret' => array(
+//                'type' => 'text',
+//                'value' => '0123456789abcdef0123456789abcdef',
+//                'required' => TRUE,
+//            ),
             'la_metrics_class' => array(
                 'type' => 'text',
                 'value' => 'ActivityStreamer',
@@ -436,7 +436,13 @@ class ElggInstaller {
             ),
             'recommendations_class' => array(
                 'type' => 'text',
-                'value' => 'RecommendationEngine'
+                'value' => 'RecommendationEngine',
+                'required' => TRUE,
+            ),
+            'clipit_site_type' => array(
+                'type' => 'text',
+                'value' => 'site',
+                'required' => TRUE
             )
         );
 
@@ -1463,16 +1469,17 @@ class ElggInstaller {
         set_config('view', 'default', $site->getGUID());
         set_config('language', 'en', $site->getGUID());
         set_config('default_access', $submissionVars['siteaccess'], $site->getGUID());
-        set_config('allow_registration', TRUE, $site->getGUID());
+        set_config('allow_registration', FALSE, $site->getGUID());
         set_config('walled_garden', TRUE, $site->getGUID());
         set_config('allow_user_default_access', '', $site->getGUID());
         set_config('timezone', $submissionVars['timezone'], $site->getGUID());
         set_config('clipit_global_url', $submissionVars['clipit_global_url'], $site->getGUID());
         set_config('clipit_global_login', $submissionVars['clipit_global_login'], $site->getGUID());
         set_config('clipit_global_password', $submissionVars['clipit_global_password'], $site->getGUID());
-        set_config('jxl_secret', $submissionVars['jxl_secret'], $site->getGUID());
+//        set_config('jxl_secret', $submissionVars['jxl_secret'], $site->getGUID());
         set_config('la_metrics_class', $submissionVars['la_metrics_class'], $site->getGUID());
         set_config('recommendations_class', $submissionVars['recommendations_class'], $site->getGUID());
+        set_config('clipit_site_type', strtolower($submissionVars['clipit_site_type']), $site->getGUID());
         $this->enablePlugins();
         return TRUE;
     }

@@ -33,19 +33,21 @@ $(function(){
     $('.trick-topic-tags-check').on('change', '#tricky-topic', function(){
         var container = $(this).closest('.trick-topic-tags-check'),
             content = container.find('.tags-list'),
-            tags = container.data('tags');
+            tags = container.data('tags'),
+            more_tags = $(this).closest('.trick-topic-tags-check').find('.add-more-tags');
 
         if($(this).val() == 0){
             content.hide();
+            more_tags.hide();
             return false;
         }
+        more_tags.show();
         content.show().html('<i class="fa fa-spinner fa-spin blue"></i>');
-        $.ajax({
-            url: elgg.config.wwwroot+"ajax/view/tricky_topic/list",
-            type: "POST",
+        elgg.post("ajax/view/tricky_topic/list",{
             data: {
                 'tricky_topic' : $(this).val(),
                 'show_tags': 'checkbox',
+                'tag_label' : '<?php echo elgg_echo('tags');?>',
                 'tags': tags
             },
             success: function(html){
@@ -87,9 +89,32 @@ $(function(){
             <?php echo elgg_view('tricky_topic/list', array(
                 'tricky_topic' => $selected,
                 'tags' => $tags,
+                'tag_label' => elgg_echo('tags'),
                 'show_tags' => 'checkbox',
             ));
             ?>
         <?php endif;?>
+    </div>
+    <div class="form-group margin-top-10 add-more-tags" style="display: <?php echo $selected ? 'block' : 'none'?>;">
+        <small class="show">
+            <?php echo elgg_echo('add:more');?>
+        </small>
+        <div class="form-add-tags form-group margin-top-10">
+            <?php if($tags_diff):?>
+                <?php foreach(ClipitTag::get_by_id($tags_diff) as $tag):?>
+                    <?php echo elgg_view("tricky_topics/tags/add", array('value' => $tag->name));?>
+                <?php endforeach;?>
+            <?php else: ?>
+                <?php echo elgg_view("tricky_topics/tags/add", array('required' => false));?>
+            <?php endif;?>
+        </div>
+        <?php echo elgg_view('output/url', array(
+            'href'  => "javascript:;",
+            'class' => 'btn btn-xs btn-primary',
+            'title' => elgg_echo('add'),
+            'text'  => '<i class="fa fa-plus"></i> ' . elgg_echo('add'),
+            'id'    => 'add-tag',
+        ));
+        ?>
     </div>
 </div>

@@ -311,6 +311,16 @@ function get_task_completed_count(ClipitTask $task){
             $text = $completed."/".count($activity->student_array);
             $count  = ($completed/count($activity->student_array)) * 100;
             break;
+        case ClipitTask::TYPE_RESOURCE_DOWNLOAD:
+            $completed = 0;
+            foreach($activity->student_array as $user_id){
+                if(ClipitTask::get_completed_status($task->id, $user_id)){
+                    $completed++;
+                }
+            }
+            $text = $completed."/".count($activity->student_array);
+            $count  = ($completed/count($activity->student_array)) * 100;
+            break;
         case ClipitTask::TYPE_QUIZ_TAKE:
             $completed = 0;
             foreach($activity->student_array as $user_id){
@@ -341,21 +351,30 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
     if(!$group_id){
         $group_id = ClipitGroup::get_from_user_activity($user_id, $task->activity);
     }
+    $role = array_pop(ClipitUser::get_properties($user_id, array('role')));
     $status = array(
         'icon' => '<i class="fa fa-minus yellow"></i>',
         'text' => elgg_echo('task:pending'),
         'color' => 'yellow',
         'status' => false
     );
-    if(time() < $task->start && $task->task_type != ClipitTask::TYPE_OTHER){
+    if($role == ClipitUser::ROLE_TEACHER){
+        $status['text'] = false;
+    }
+    if(time() < $task->start &&  $task->task_type != ClipitTask::TYPE_OTHER){
         return $status;
     }
     switch($task->task_type){
         case ClipitTask::TYPE_OTHER:
-            $status = array(
-                'status' => false
-            );
-            return $status;
+            if(ClipitTask::get_completed_status($task->id, $user_id)){
+                $status = array(
+                    'icon' => '<i class="fa fa-check green"></i>',
+                    'text' => elgg_echo('task:completed'),
+                    'color' => 'green',
+                    'status' => ClipitTask::get_completed_status($task->id, $group_id),
+                );
+            }
+//            return $status;
             break;
         case ClipitTask::TYPE_VIDEO_UPLOAD:
             foreach($task->video_array as $video_id){
@@ -441,7 +460,6 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
                     'count' => $text,
                     'status' => ClipitTask::get_completed_status($task->id, $user_id)
                 ), $custom);
-
             break;
         case ClipitTask::TYPE_QUIZ_TAKE:
             if(ClipitTask::get_status($task->id) == ClipitTask::STATUS_FINISHED) {
@@ -462,6 +480,34 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
                 }
             }
             break;
+        case ClipitTask::TYPE_RESOURCE_DOWNLOAD:
+            switch(ClipitTask::get_status($task->id)){
+                case ClipitTask::STATUS_FINISHED:
+                case ClipitTask::STATUS_ACTIVE:
+                    if(ClipitTask::get_completed_status($task->id, $user_id)){
+                        $status = array(
+                            'icon' => '<i class="fa fa-check green"></i>',
+                            'text' => elgg_echo('task:completed'),
+                            'color' => 'green',
+                        );
+                    } elseif(ClipitTask::get_status($task->id) == ClipitTask::STATUS_ACTIVE) {
+                        $status = array(
+                            'icon' => '<i class="fa fa-minus yellow"></i>',
+                            'text' => elgg_echo('task:pending'),
+                            'color' => 'yellow',
+                            'status' => false
+                        );
+                    } else {
+                        $status = array(
+                            'icon' => '<i class="fa fa-times red"></i>',
+                            'text' => elgg_echo('task:not_completed'),
+                            'color' => 'red',
+                            'status' => true
+                        );
+                    }
+                    break;
+            }
+            break;
     }
 
     if($task->end <= time() && $status['status'] === false){
@@ -473,8 +519,7 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
             'status' => false
         );
     }
-    $role = array_pop(ClipitUser::get_properties($user_id, array('role')));
-    if($role == 'teacher'){
+    if($role == ClipitUser::ROLE_TEACHER){
 //        $status['count'] = false;
         $status['text'] = false;
     }
@@ -544,6 +589,7 @@ function get_activity_status($status){
                 'icon' => 'play',
                 'color' => 'green',
                 'text' => elgg_echo('status:active'),
+                'text_tooltip' => elgg_echo('status:change_to:closed:tooltip'),
                 'change_to' => elgg_echo('status:closed'),
                 'btn_change_to' => '<span class="change-status btn btn-border-red btn-xs" data-status="closed"><strong><i class="fa fa-stop red"></i> '.elgg_echo('status:closed').'</strong></span>'
             );
@@ -553,6 +599,7 @@ function get_activity_status($status){
                 'icon' => 'stop',
                 'color' => 'red',
                 'text' => elgg_echo('status:closed'),
+                'text_tooltip' => elgg_echo('status:change_to:active:tooltip'),
                 'change_to' => elgg_echo('status:active'),
                 'btn_change_to' => '<span class="change-status btn btn-border-green btn-xs" data-status="active"><strong><i class="fa fa-play green"></i> '.elgg_echo('status:active').'</strong></span>'
             );
