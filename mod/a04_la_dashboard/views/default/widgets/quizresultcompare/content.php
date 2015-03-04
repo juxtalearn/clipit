@@ -20,12 +20,24 @@ if (isset($widget->activity_id) && is_not_null($widget->activity_id)) {
     $to_be_configured = true;
 }
 if (isset($widget->task_id1) && is_not_null($widget->task_id1)) {
-    $quiz1 = array_pop(ClipitQuiz::get_by_id(array($widget->task_id1)));
+    try {
+        $quiz1 = array_pop(ClipitQuiz::get_by_id(array($widget->task_id1)));
+    } catch (Exception $e) {
+        $widget->quiz_id=null;
+        $to_be_configured=true;
+    }
+
 } else {
     $to_be_configured = true;
 }
 if (isset($widget->task_id2) && is_not_null($widget->task_id2)) {
-    $quiz2 = array_pop(ClipitQuiz::get_by_id(array($widget->task_id2)));
+    try {
+        $quiz2 = array_pop(ClipitQuiz::get_by_id(array($widget->task_id2)));
+    } catch (Exception $e) {
+        $widget->quiz_id=null;
+        $to_be_configured=true;
+    }
+
 } else {
     $to_be_configured = true;
 }
