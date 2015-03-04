@@ -37,11 +37,13 @@ $(function(){
         }
     }).on('fileuploaddone', function (e, data) {
         var parent_id = $(this).parent("a").attr("id");
-        $.each(data.result, function(index, user) {
-            $('#called_users').multiSelect('addOption',
-                { value: user.id, text: user.name, index: 0}
-            );
-            $('#called_users').multiSelect('refresh');
+        $.each(data.result, function(group, users) {
+            $.each(users, function (i, user) {
+                $('#called_users').multiSelect('addOption',
+                    {value: user.id, text: user.name, index: 0}
+                );
+                $('#called_users').multiSelect('refresh');
+            });
         });
     });
 });

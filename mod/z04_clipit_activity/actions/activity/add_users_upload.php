@@ -30,18 +30,6 @@ foreach($groups as $group_name => $users){
         }
     }
 }
-//foreach($users as $user_id){
-//    $user = array_pop(ClipitUser::get_by_id(array($user_id)));
-//    if($user->role == ClipitUser::ROLE_STUDENT) {
-//        $output[] = array(
-//            'name' => $user->name,
-//            'id' => $user->id
-//        );
-//    }
-//    if($activity_id){
-//        ClipitActivity::add_students($activity_id, array($user->id));
-//    }
-//}
 
 echo json_encode($output);
 die();

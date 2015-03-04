@@ -338,6 +338,41 @@ ul.deadline-list{
     cursor: pointer;
     color: #999;
   }
+  .ms-optgroup{
+    margin-bottom: 10px !important;
+    position: relative;
+    li.ms-optgroup-label{
+      color: @blue_clipit;
+      &:before {
+        content: "";
+        display: block;
+        width: 0;
+        position: absolute;
+        top: 25px;
+        bottom: 12px;
+        left: 10px;
+        border-left: 2px solid @blue_clipit;
+        z-index: 2;
+      }
+      &:hover:before{
+        z-index: 1;
+      }
+    }
+    li:not(.ms-optgroup-label){
+      position: relative;
+      &:before {
+        content: "";
+        display: block;
+        width: 10px;
+        height: 0;
+        border-top: 2px solid @blue_clipit;
+        margin-top: -1px;
+        position: absolute;
+        top: 1em;
+        left: 10px;
+      }
+    }
+  }
   .ms-selectable{
     margin-right: 10%;
     &:after{

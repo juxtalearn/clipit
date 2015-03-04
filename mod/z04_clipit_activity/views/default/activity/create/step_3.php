@@ -160,41 +160,6 @@ $(function () {
     .ms-selection .ms-list {
         height: 235px;
     }
-    .ms-optgroup{
-        margin-bottom: 10px !important;
-        position: relative;
-    }
-    .ms-optgroup li.ms-optgroup-label{
-        color: #32b4e5;
-    }
-    .ms-optgroup li.ms-optgroup-label:before {
-        content: "";
-        display: block;
-        width: 0;
-        position: absolute;
-        top: 25px;
-        bottom: 12px;
-        left: 10px;
-        border-left: 2px solid #32b4e5;
-        z-index: 2;
-    }
-    .ms-optgroup li.ms-optgroup-label:hover:before{
-        z-index: 1;
-    }
-    .ms-optgroup li:not(.ms-optgroup-label){
-        position: relative;
-    }
-    .ms-optgroup li:not(.ms-optgroup-label):before {
-        content: "";
-        display: block;
-        width: 10px;
-        height: 0;
-        border-top: 2px solid #32b4e5;
-        margin-top: -1px;
-        position: absolute;
-        top: 1em;
-        left: 10px;
-    }
 </style>
 <div id="step_3" class="row step" style="display: none;">
     <div class="col-md-8">
