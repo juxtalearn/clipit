@@ -97,8 +97,28 @@ $max_users = get_input('max-users');
 switch($groups_creation){
     // Teacher make groups
     case 1:
-        $groups = get_input('group');
+        $groups = array();
         $group_mode = ClipitActivity::GROUP_MODE_TEACHER;
+
+        $group_array = json_decode(get_input('groups_default'));
+        if(!empty($group_array)) {
+            $i = 0;
+            foreach ($group_array as $group_name => $users) {
+                if ($group_name != "0") {
+                    $groups[$i] = array(
+                        'name' => $group_name,
+                    );
+                    $users_array = array();
+                    foreach ($users as $user) {
+                        if (in_array($user->id, $called_users)) {
+                            $users_array[] = $user->id;
+                        }
+                    }
+                    $groups[$i]['users'] = implode(",", $users_array);
+                }
+                $i++;
+            }
+        }
         $filter = "?filter=groups";
         break;
     // Student makes groups

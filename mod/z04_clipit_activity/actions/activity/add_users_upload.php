@@ -12,48 +12,17 @@
  */
 $file = $_FILES['upload-users'];
 $activity_id = get_input('entity-id');
-$output = array();
 
-$outputSSSSSSSS = array(
-    array(
-        'id' => 4306, 'name' => 'Miguel', 'group' => 'Los chungitos'
-    ),
-    array(
-        'id' => 30046, 'name' => 'Miguel 2', 'group' => 'Los chungitos'
-    ),
-    array(
-        'id' => 30050, 'name' => 'Miguel 3', 'group' => 'Los manolos'
-    ),
-    array(
-        'id' => 40044, 'name' => 'Miguel 4', 'group' => 'Los manolos'
-    ),
-    array(
-        'id' => 55007, 'name' => 'Miguel 5', 'group' => 'Los gutierrez'
-    ),
-    array(
-        'id' => 55006, 'name' => 'Miguel 6', 'group' => 'Los gutierrez'
-    ),
-    array(
-        'id' => 44007, 'name' => 'Miguel 7', 'group' => 'Los martinez'
-    ),
-    array(
-        'id' => 47006, 'name' => 'Miguel 8', 'group' => 'Los martinez'
-    )
-);
-
-//echo json_encode(array(array('name'=>'JOSE', 'id' => 4077), array('name'=>'MANUEL', 'id' => 4508)));
-//echo json_encode($output);
-//die;
 $groups = ClipitUser::import_data($file['tmp_name']);
 $output = array();
 foreach($groups as $group_name => $users){
+    $output[$group_name] = array();
     foreach($users as $user_id){
         $user = array_pop(ClipitUser::get_by_id(array($user_id)));
         if($user->role == ClipitUser::ROLE_STUDENT) {
-            $output[] = array(
+            $output[$group_name][] = array(
                 'name' => $user->name,
                 'id' => $user->id,
-                'group' => $group_name
             );
         }
         if($activity_id){

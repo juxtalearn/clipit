@@ -81,7 +81,7 @@ if(!$tasks){
                 <?php echo elgg_view('output/url', array(
                     'href' => "{$href}/view/{$task->id}#{$group_id}",
                     'title' => $task->name,
-                    'text' => $status['count']." ".$task->name,
+                    'text' => $task->name,
                     'is_trusted' => true,
                 ));
                 ?>

@@ -8690,6 +8690,7 @@ ul.deadline-list > li .fa-user {
 .ms-container .ms-list .ms-elem-selection:focus:after {
   content: "\f060";
   left: 5px;
+  z-index: 5;
 }
 .ms-container .ms-list .ms-elem-selectable:hover:after,
 .ms-container .ms-list .ms-elem-selectable:focus:after {

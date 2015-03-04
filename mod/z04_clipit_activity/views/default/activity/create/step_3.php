@@ -110,10 +110,10 @@ $(function () {
         autoUpload: true,
         previewCrop: false
     }).on('fileuploadadd', function (e, data) {
-        $(".upload-messages").show().html($("<span id='loading-file'><i class='fa fa-spinner fa-spin'/> loading</span>"));
+        $(".upload-messages").show().html($("<span id='loading-file'><i class='fa fa-spinner fa-spin'/> <?php echo elgg_echo('loading');?></span>"));
     }).on('fileuploadstop', function (e, data) {
-        $(".upload-messages").html("<strong>Uploaded</strong>").fadeOut(4000);
-
+        $(".upload-messages").html("<strong><?php echo elgg_echo('file:uploaded');?></strong>").fadeOut(4000);
+        $("#collapse_upload").collapse('hide');
     }).on('fileuploadprocessalways', function (e, data) {
         var messages_content = $(".upload-messages");
         var index = data.index,
@@ -124,28 +124,76 @@ $(function () {
         }
     }).on('fileuploaddone', function (e, data) {
         var parent_id = $(this).parent("a").attr("id");
-        $.each(data.result, function(i, user) {
-            if(user.group != 0){
-                if($("#called_users optgroup[label='"+user.group+"']").length == 0){
-                    $("#called_users").prepend("<optgroup label='"+user.group+"'/>");
+        $("#groups_default").val(JSON.stringify(data.result) );
+        var group_mode_teacher = false;
+        $.each(data.result, function(group, users) {
+            if(group != 0) {
+                if ($("#called_users optgroup[label='" + group + "']").length == 0) {
+                    $("#called_users").prepend("<optgroup label='" + group + "'/>");
                 }
-                $("#called_users option[value='"+user.id+"']").appendTo("#called_users optgroup[label='"+user.group+"']");
+                group_mode_teacher = true;
             }
-            $('#called_users').multiSelect('addOption',
-                { value: user.id, text: user.name, index: 0}
-            );
-            if(parent_id == 'insert-activity'){
-                $('#called_users').multiSelect('select', [""+user.id+""]);
-            }
-            $('#called_users').multiSelect('refresh');
+            $.each(users, function(i, user) {
+                $('#called_users').multiSelect('addOption',
+                    { value: user.id, text: user.name, index: 0}
+                );
+                if(group != 0){
+                    $("#called_users option[value='"+user.id+"']").appendTo("#called_users optgroup[label='"+group+"']");
+                }
+
+                if(parent_id == 'insert-activity'){
+                    $('#called_users').multiSelect('select', [""+user.id+""]);
+                }
+                $('#called_users').multiSelect('refresh');
+            });
         });
+        // Teacher make groups
+        if(group_mode_teacher){
+            $(".select-radio:first").click();
+        }
     });
 });
 </script>
+
 <style>
+    .ms-selectable .ms-list,
+    .ms-selection .ms-list {
+        height: 235px;
+    }
     .ms-optgroup{
-        background: #fafafa;
         margin-bottom: 10px !important;
+        position: relative;
+    }
+    .ms-optgroup li.ms-optgroup-label{
+        color: #32b4e5;
+    }
+    .ms-optgroup li.ms-optgroup-label:before {
+        content: "";
+        display: block;
+        width: 0;
+        position: absolute;
+        top: 25px;
+        bottom: 12px;
+        left: 10px;
+        border-left: 2px solid #32b4e5;
+        z-index: 2;
+    }
+    .ms-optgroup li.ms-optgroup-label:hover:before{
+        z-index: 1;
+    }
+    .ms-optgroup li:not(.ms-optgroup-label){
+        position: relative;
+    }
+    .ms-optgroup li:not(.ms-optgroup-label):before {
+        content: "";
+        display: block;
+        width: 10px;
+        height: 0;
+        border-top: 2px solid #32b4e5;
+        margin-top: -1px;
+        position: absolute;
+        top: 1em;
+        left: 10px;
     }
 </style>
 <div id="step_3" class="row step" style="display: none;">
@@ -241,6 +289,7 @@ $(function () {
                                 <div>
                                     <a class="upload-messages"></a>
                                 </div>
+                                <textarea id="groups_default" style="display: none;" name="groups_default"></textarea>
                                 <hr>
                                 <?php echo elgg_view('output/url', array(
                                     'href'  => "mod/z04_clipit_activity/vendors/templates/clipit_users.xlsx",

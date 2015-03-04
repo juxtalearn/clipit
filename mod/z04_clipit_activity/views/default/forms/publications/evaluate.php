@@ -15,6 +15,7 @@ $entity = elgg_extract("entity", $vars);
 $rating = elgg_extract("rating", $vars);
 $activity = elgg_extract("activity", $vars);
 $tags = $entity->tag_array;
+$performance_items = $entity->performance_item_array;
 $tricky_topic_view = elgg_view("tricky_topic/preview", array('activity' => $activity));
 $user_language = get_current_language();
 $language_index = ClipitPerformanceItem::get_language_index($user_language);
@@ -89,6 +90,7 @@ if($rating){
             'name' => 'entity-id',
             'value' => $entity->id,
         )); ?>
+        <?php if($tags):?>
         <span class="show" style="margin-bottom: 10px;">
             <?php echo elgg_echo('publications:question:if_covered');?>
         </span>
@@ -129,8 +131,10 @@ if($rating){
                 ?>
             </div>
         <?php endforeach; ?>
+        <?php endif;?>
     </div>
     <div class="col-md-4">
+        <?php if($performance_items):?>
         <div id="my-rating">
             <h4 class="margin-0">
                 <span class="text-muted">*</span> <strong><?php echo elgg_echo('publications:my_rating');?></strong>
@@ -140,7 +144,6 @@ if($rating){
             </div>
             <ul>
                 <?php
-                $performance_items = $entity->performance_item_array;
                 foreach($performance_items as $performance_item_id):
                     $performance_item = array_pop(ClipitPerformanceItem::get_by_id(array($performance_item_id)));
                     if($rating) {
@@ -163,6 +166,7 @@ if($rating){
                 <?php endforeach; ?>
             </ul>
         </div>
+        <?php endif;?>
     </div>
     <div class="clearfix"></div>
     <div class="margin-top-20 col-md-12 text-right">

@@ -23,10 +23,6 @@ $user_id = elgg_get_logged_in_user_guid();
     ?>
     <!-- My activities dropdown menu -->
     <ul id="menu_activities" class="dropdown-menu" role="menu" aria-labelledby="activities">
-    <?php
-    $activities_found = false;
-    if($my_activities = ClipitUser::get_activities($user_id)):
-    ?>
         <li style="border-bottom: 1px solid #EFEFEF;padding: 5px 10px;">
             <small>
                 <?php echo elgg_view('output/url', array(
@@ -39,7 +35,10 @@ $user_id = elgg_get_logged_in_user_guid();
                 <?php echo elgg_echo('my_activities:active');?>
             </small>
         </li>
-    <?php foreach($my_activities as $activity_id):
+    <?php
+    $activities_found = false;
+    if($my_activities = ClipitUser::get_activities($user_id)):
+        foreach($my_activities as $activity_id):
         $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
         if($activity->status != 'closed'):
             $activities_found = true;
@@ -68,14 +67,7 @@ $user_id = elgg_get_logged_in_user_guid();
     <?php if(!$activities_found): ?>
         <li style="padding: 5px 10px;">
             <small>
-                <?php echo elgg_view('output/url', array(
-                    'href'  => "my_activities",
-                    'class'  => 'pull-right',
-                    'title' => elgg_echo('view_all'),
-                    'text'  => elgg_echo('view_all'),
-                ));
-                ?>
-                <?php echo elgg_echo('my_activities:none');?>
+                <strong><?php echo elgg_echo('my_activities:none');?></strong>
             </small>
         </li>
     <?php endif;?>
