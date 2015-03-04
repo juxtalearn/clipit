@@ -13,6 +13,7 @@ $token = generate_action_token($ts);
 $entities = elgg_get_entities(array("types" => "object", "subtypes" => "modactivitystreamer", "owner_guids" => '0', "order_by" => "", "limit" => 0));
 if (!isset($entities[0])) {
     $entity = $entities[0];
+    error_log(print_r($entity, true));
     $workbenchurl = "https://analyticstk.rias-institute.eu:1443/requestAnalysis";
     $entity = new ElggObject;
     $entity->subtype = 'modactivitystreamer';
@@ -31,7 +32,7 @@ if (!isset($entities[0])) {
             <br/>
 
             <?php    echo elgg_view('input/text', array('style' => 'width:30em',
-                'internalname' => 'workbenchurl',
+                'name' => 'workbenchurl',
                 'value' => $workbenchurl
             ));
             ?>
@@ -39,8 +40,8 @@ if (!isset($entities[0])) {
 
         <p>
             <?php
-            echo elgg_view('input/hidden', array('internalname' => '__elgg_token', 'value' => $token));
-            echo elgg_view('input/hidden', array('internalname' => '__elgg_ts', 'value' => $ts));
+            echo elgg_view('input/hidden', array('name' => '__elgg_token', 'value' => $token));
+            echo elgg_view('input/hidden', array('name' => '__elgg_ts', 'value' => $ts));
             ?>
         </p>
 
@@ -55,14 +56,14 @@ if (!isset($entities[0])) {
     <form action="<?php echo $vars['url']; ?>action/activitystreamer/rebuild" method="post">
         <p>
             <?php
-            echo elgg_view('input/hidden', array('internalname' => "affirmative", 'value' => true));
+            echo elgg_view('input/hidden', array('name' => "affirmative", 'value' => true));
             ?>
         </p>
 
         <p>
             <?php
-            echo elgg_view('input/hidden', array('internalname' => '__elgg_token', 'value' => $token));
-            echo elgg_view('input/hidden', array('internalname' => '__elgg_ts', 'value' => $ts));
+            echo elgg_view('input/hidden', array('name' => '__elgg_token', 'value' => $token));
+            echo elgg_view('input/hidden', array('name' => '__elgg_ts', 'value' => $ts));
             ?>
         </p>
 
@@ -76,14 +77,14 @@ if (!isset($entities[0])) {
     <form action="<?php echo $vars['url']; ?>action/activitystreamer/request" method="post">
         <p>
             <?php
-            echo elgg_view('input/hidden', array('internalname' => "affirmative", 'value' => true));
+            echo elgg_view('input/hidden', array('name' => "affirmative", 'value' => true));
             ?>
         </p>
 
         <p>
             <?php
-            echo elgg_view('input/hidden', array('internalname' => '__elgg_token', 'value' => $token));
-            echo elgg_view('input/hidden', array('internalname' => '__elgg_ts', 'value' => $ts));
+            echo elgg_view('input/hidden', array('name' => '__elgg_token', 'value' => $token));
+            echo elgg_view('input/hidden', array('name' => '__elgg_ts', 'value' => $ts));
             ?>
         </p>
 
@@ -97,14 +98,14 @@ if (!isset($entities[0])) {
     <form action="<?php echo $vars['url']; ?>action/activitystreamer/flush" method="post">
         <p>
             <?php
-            echo elgg_view('input/hidden', array('internalname' => "affirmative", 'value' => true));
+            echo elgg_view('input/hidden', array('name' => "affirmative", 'value' => true));
             ?>
         </p>
 
         <p>
             <?php
-            echo elgg_view('input/hidden', array('internalname' => '__elgg_token', 'value' => $token));
-            echo elgg_view('input/hidden', array('internalname' => '__elgg_ts', 'value' => $ts));
+            echo elgg_view('input/hidden', array('name' => '__elgg_token', 'value' => $token));
+            echo elgg_view('input/hidden', array('name' => '__elgg_ts', 'value' => $ts));
             ?>
         </p>
 
@@ -141,7 +142,6 @@ if (!isset($entities[0])) {
 
     <h2>Available templates:</h2>
     <ul>
-
         <?php
         $metrics = ActivityStreamer::get_available_metrics();
         foreach ($metrics as $metric) {

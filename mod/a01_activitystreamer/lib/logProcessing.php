@@ -3,8 +3,10 @@ function storeJSON($action)
 {
     global $con;
     global $transaction_stmt;
-    $action['object']['content'] = urlencode($action['object']['content']);
-    $action['object']['objectTitle'] = urlencode($action['object']['objectTitle']);
+    $action['object']['content'] = urldecode($action['object']['content']);
+    $action['object']['content'] = strip_tags($action['object']['content']);
+    $action['object']['objectTitle'] = urldecode($action['object']['objectTitle']);
+    $action['object']['objectTitle'] = strip_tags($action['object']['objectTitle']);
     $activity_json = json_encode($action);
     if ($transaction_stmt instanceof mysqli_stmt && $action['verb'] != "Ignore") {
         $transaction_stmt->bind_param('ssiiiiissi', $action['transactionId'], $activity_json, $action['actor']['actorId'], $action['object']['objectId'], $action['object']['groupId'],
@@ -317,7 +319,8 @@ function convertLogTransactionToActivityStream($transaction)
         case "CreateActivity":
             $verb = "create";
             $l = findValue($transaction, "create", ClipitActivity::SUBTYPE, "ObjectId", TRUE);
-            $object['objectTitle'] = $transaction[$l]['Content'];
+            $title = getObjectTitle($transaction[$l]['ObjectId']);
+            $object['objectTitle'] = $title;
             $object['objectId'] = $transaction[$l]['ObjectId'];
             $object['objectType'] = $transaction[$l]['ObjectType'];
             $object['objectSubtype'] = $transaction[$l]['ObjectSubtype'];
