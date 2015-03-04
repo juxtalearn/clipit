@@ -48,25 +48,28 @@ class RecommendationEngine {
         $public_items = array();
         $private_items = array();
         //The first step is retrieving the user profile
-        $entity_profile = KnowledgeRepresentationComponent::get_user_profile($entity_id);
+        $entity_profile = KnowledgeRepresentationComponent::get_item_profile($entity_id);
 
         //The next step is to collect all public items
         switch ($type) {
             case "video":
-                $private_items = array();
+                $private_items = KnowledgeRepresentationComponent::collectPrivateItems($entity_id, "video");
             case "public_video":
                 $global_items = ClipitSite::get_pub_videos();
                 $public_items = ClipitSite::get_videos();
                 break;
             case "file":
+                $private_items = KnowledgeRepresentationComponent::collectPrivateItems($entity_id, "file");
                 $global_items = ClipitSite::get_pub_files();
                 $public_items = ClipitSite::get_files();
                 break;
             case "storyboard":
+                $private_items = KnowledgeRepresentationComponent::collectPrivateItems($entity_id, "storyboard");
                 $global_items = ClipitSite::get_pub_storyboards();
                 $public_items = ClipitSite::get_storyboards();
                 break;
             case "resource":
+                $private_items = KnowledgeRepresentationComponent::collectPrivateItems($entity_id, "resource");
                 $global_items = ClipitSite::get_pub_resources();
                 $public_items = ClipitSite::get_resources();
                 break;
@@ -85,14 +88,32 @@ class RecommendationEngine {
         return $results;
     }
 
-    public static function calculate_similarity($user_profile, $item_profile) {
+    public static function collectPrivateItems($entity_id, $type) {
+        $items = array();
+        //TODO: Collecting items from all tasks, groups and activities
+        switch ($type) {
+            case "video":
+                break;
+            case "file":
+                break;
+            case "storyboard":
+                break;
+            case "resource":
+                break;
+        }
+        return $items;
+    }
+
+    public static function calculate_similarity($entity_profile, $item_profile) {
         $common_profile_value = 0;
-        $length_user_profile = count($user_profile);
+        $item1 = $entity_profile->getList();
+        $item2 = $item_profile->getList();
+        $length_entity_profile = count($entity_profile);
         //$length_item_profile = count($item_profile);
         $common_profile = array();
-        if (!empty($item_profile)) {
-            foreach ($user_profile as $key => $value) {
-                if (array_key_exists($item_profile, $key)) {
+        if (!empty($item1)) {
+            foreach ($item1 as $key => $value) {
+                if (array_key_exists($item2, $key)) {
                     $common_profile[] = array($key => $value);
 
                     /*  $common_profile_value is the aggregated value of all common items, valued by the stored expertise
@@ -104,13 +125,12 @@ class RecommendationEngine {
             }
         }
         $common_profile_length = count($common_profile);
-        if ($length_user_profile != 0) {
-            $similarity = $common_profile_value * ($common_profile_length / $length_user_profile);
+        if ($length_entity_profile != 0) {
+            $similarity = $common_profile_value * ($common_profile_length / $length_entity_profile);
         }
         else {
             $similarity = 0;
         }
-        $similarity = 10 / rand(10,20);
         return $similarity;
     }
 
@@ -136,8 +156,18 @@ class RecommendationEngine {
 
     public static function remove_duplicates($results) {
         $item_ids = array();
+        //First remove duplicates with the same id:
         foreach ($results as $index => $item) {
             if (in_array($item['entity_id'], $item_ids)) {
+                unset($results[$index]);
+            }
+            else {
+                $item_ids[] = $item['entity_id'];
+            }
+        }
+        //Then remove duplicates based on cloned_from:
+        foreach ($results as $index => $item) {
+            if (in_array($item['cloned_from'], $item_ids)) {
                 unset($results[$index]);
             }
             else {
