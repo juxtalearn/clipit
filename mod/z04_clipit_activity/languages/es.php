@@ -74,13 +74,13 @@ $spanish = array(
     // Activity status
     'status:enroll' => 'Inscripción',
     'status:active' => 'En curso',
-    'status:closed' => 'Cerrada',
+    'status:closed' => 'Finalizada',
     'status:change_to:active:tooltip' => 'La fecha de inicio se establecerá como hoy. Ajuste la fecha de finalización manualmente. Haga click en Guardar para aceptar los cambios.',
     'status:change_to:closed:tooltip' => 'La fecha de finalización se establecerá como hoy. Haga clic en Guardar para aceptar los cambios.',
 
     'group' => 'Grupo',
     'my_group:progress' => 'Progreso de mis grupos',
-    'group:free_slot' => 'Queda <strong><u>%s</u></strong> huecos libres',
+    'group:free_slot' => 'Quedan <strong><u>%s</u></strong> huecos libres',
     'group:assign_sb' => 'Asignar conceptos',
     'group:graph' => 'Gráfica del grupo',
     'group:max_size' => 'Máximo de estudiantes por grupo',

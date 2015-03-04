@@ -20,7 +20,12 @@ if (isset($widget->activity_id) && is_not_null($widget->activity_id)) {
     $to_be_configured = true;
 }
 if (isset($widget->quiz_id) && is_not_null($widget->quiz_id)) {
-    $quiz = array_pop(ClipitQuiz::get_by_id(array($widget->quiz_id)));
+    try {
+        $quiz = array_pop(ClipitQuiz::get_by_id(array($widget->quiz_id)));
+    } catch (Exception $e) {
+        $widget->quiz_id=null;
+        $to_be_configured=true;
+    }
 } else {
     $to_be_configured = true;
 }
