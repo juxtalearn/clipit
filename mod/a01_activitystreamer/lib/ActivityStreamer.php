@@ -114,6 +114,10 @@ class ActivityStreamer
             $statement->bind_result($json_entry);
             $activities = "";
             while ($statement->fetch()) {
+/*                $json_array = json_decode($json_entry);
+                if (strlen($json_array['object']['content']) > 20) {
+                    $json_array['object']['content'] = substr($json_array['object']['content'], 0, 19);
+                }*/
                 $activities[] = $json_entry;
             }
             $statement->close();
@@ -121,7 +125,7 @@ class ActivityStreamer
 
             $hashed_data = md5($json);
             $existing_id = check_for_existing_results($metric_id, $hashed_data);
-
+            //TODO Check for missing return data
             if ($existing_id > 0) {
                 //if we found an existing result, we will return its id
                 return $existing_id;
@@ -151,7 +155,7 @@ class ActivityStreamer
                     'header' => "Content-type: application/x-www-form-urlencoded\r\n",
                     'method' => 'POST',
                     'content' => http_build_query($data),
-                    'timeout' => 15
+                    'timeout' => 10,
                 ),
             );
             $request_context = stream_context_create($options);
@@ -207,11 +211,10 @@ class ActivityStreamer
 
 
         $workbenchurl = $workbenchurl . "/requestAvailableTemplates";
-
         $options = array(
             'http' => array(
                 'method' => 'GET',
-                'timeout' => 15
+                'timeout' => 10,
             ),
         );
         $request_context = stream_context_create($options);
@@ -220,7 +223,6 @@ class ActivityStreamer
         $jsonArrayString = file_get_contents($workbenchurl, false, $request_context);
         # converst JSON-String to JSON data structure
         $jsonArray = json_decode($jsonArrayString, true);
-
         #output
         if (empty($jsonArray)) {
             echo "No Templates found! Please ensure that you have saved some in the Workbench!";
