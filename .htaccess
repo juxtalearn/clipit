@@ -1,5 +1,14 @@
 # Elgg htaccess directives
+<IfModule mod_headers.c>
+  Header set Access-Control-Allow-Origin "*"
+  Header set Access-Control-Allow-Credentials: "true"
+</IfModule>
 
+<FilesMatch "\.(ttf|otf|woff)$">
+    <IfModule mod_headers.c>
+        Header set Access-Control-Allow-Origin "*"
+    </IfModule>
+</FilesMatch>
 <Files "htaccess_dist">
 	order allow,deny
 	deny from all
