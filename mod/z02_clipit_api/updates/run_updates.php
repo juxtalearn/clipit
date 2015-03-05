@@ -1,23 +1,24 @@
 <?php
-// UPDATE FROM HERE ...
-$VERSION = "2.3.6"; // new versions must be inserted in to $update_files array, even if null
-$update_files = array(
-    "2.2.0" => null,
-    "2.2.1" => "update_2.2.1.php",
-    "2.2.2" => "update_2.2.2.php",
-    "2.2.3" => null,
-    "2.2.4" => "update_2.2.4.php",
-    "2.2.5" => "update_2.2.5.php",
-    "2.3" => null,
-    "2.3.1" => null,
-    "2.3.2" => null,
-    "2.3.3" => "update_2.3.3.php",
-    "2.3.4" => "update_2.3.4.php",
-    "2.3.5" => "update_2.3.5.php",
-    "2.3.6" => "update_2.3.6.php",
-    // add here future updates: version => file
-);
-// ... TO HERE
+// UPDATE FROM HERE {
+    $VERSION = "2.3.6";
+    $update_files = array(
+        // new versions must be inserted in to $update_files array, even if null
+        "2.2.0" => null,
+        "2.2.1" => "update_2.2.1.php",
+        "2.2.2" => "update_2.2.2.php",
+        "2.2.3" => null,
+        "2.2.4" => "update_2.2.4.php",
+        "2.2.5" => "update_2.2.5.php",
+        "2.3" => null,
+        "2.3.1" => null,
+        "2.3.2" => null,
+        "2.3.3" => "update_2.3.3.php",
+        "2.3.4" => "update_2.3.4.php",
+        "2.3.5" => "update_2.3.5.php",
+        "2.3.6" => "update_2.3.6.php",
+        // add here future updates: version => file
+    );
+// } TO HERE
 
 $old_version = get_config("clipit_version");
 

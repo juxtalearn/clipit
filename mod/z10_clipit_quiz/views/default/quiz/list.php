@@ -133,7 +133,7 @@ $(function(){
                     'href'  => 'javascript:;',
                     'class' => 'show-questions btn btn-xs btn-border-blue',
                     'id' => $quiz->id,
-                    'text'  => '<strong>'.count($questions).'</strong> <i class="margin-left-5 fa fa-comments"></i>',
+                    'text'  => '<strong>'.count($questions).'</strong>x<i class="margin-left-5 fa fa-list"></i>',
                 ));
                 ?>
             </td>
