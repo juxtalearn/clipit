@@ -44,7 +44,7 @@
             <?php echo elgg_view('output/url', array(
                 'href'  => "quizzes",
                 'title' => elgg_echo('quizzes'),
-                'text'  => '<i class="fa fa-comments"></i> '.elgg_echo('quizzes'),
+                'text'  => '<i class="fa fa-pencil-square-o"></i> '.elgg_echo('quizzes'),
             ));
             ?>
         </li>

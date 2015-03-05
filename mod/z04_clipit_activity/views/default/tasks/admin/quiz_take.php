@@ -163,7 +163,7 @@ elgg_load_js('jquery:chartjs');
                         </div>
                         <span class="pull-right">
                             <a href="#questions-<?php echo $student->id;?>"
-                               class="show-data btn-primary btn btn-xs btn-icon fa-comments fa btn-border-blue"
+                               class="show-data btn-primary btn btn-xs btn-icon fa-list fa btn-border-blue"
                                data-type="student"
                                data-entity-type="questions"
                                data-toggle="collapse"
@@ -209,7 +209,7 @@ elgg_load_js('jquery:chartjs');
                         </div>
                         <span class="pull-right">
                             <a href="#questions-<?php echo $group->id;?>"
-                               class="show-data btn-primary btn btn-xs btn-icon fa-comments fa btn-border-blue"
+                               class="show-data btn-primary btn btn-xs btn-icon fa-list fa btn-border-blue"
                                data-type="group"
                                data-entity-type="questions"
                                data-toggle="collapse"
@@ -253,7 +253,7 @@ elgg_load_js('jquery:chartjs');
                    data-type="activity"
                    data-entity-type="questions"
                    data-toggle="collapse"
-                    ><i class="fa-comments fa"></i> <?php echo elgg_echo('quiz:questions');?></a>
+                    ><i class="fa-list fa"></i> <?php echo elgg_echo('quiz:questions');?></a>
                 <a href="#chart-<?php echo $activity->id;?>"
                    class="show-data margin-left-10 btn-primary btn btn-xs btn-icon btn-border-blue"
                    data-toggle="collapse"
