@@ -4,8 +4,9 @@ if($_POST["update_clipit"] == "YES") {
     // Pull latest version from GitHub
     chdir(elgg_get_root_path());
     echo "<h2>Updating ClipIt to latest release";
-    echo "<h3>Performing local git stash... ";
+    echo "<h3>Performing local git stash and drop... ";
     echo exec("git stash save \"auto stash\"");
+    echo exec("git stash drop");
     echo "<h3>Fetching latest tag info... ";
     echo exec("git fetch --tags");
     echo "<h3>Checking-out latest tag";
