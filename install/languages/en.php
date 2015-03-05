@@ -104,6 +104,11 @@ If you are ready to proceed, click the Next button.",
 	'install:settings:help:language' => 'The default language for the site.',
 	'install:settings:help:siteaccess' => 'The default access level for new user created content.',
     'install:settings:help:timezone' => 'The Time Zone for the site (see: <a href="http://www.php.net/manual/en/timezones.php" target="_blank">PHP Time Zones</a>).',
+
+    'install:settings:help:clipit_global_url' => "The URL of the ClipIt Global Site (clear to avoid global publishing)",
+    'install:settings:help:clipit_global_login' => "Login name to access ClipIt Global Site",
+    'install:settings:help:clipit_global_password' => "Password to access ClipIt Global Site",
+
     'install:settings:help:jxl_secret' => 'The JuxtaLearn secret key for interoperability between components.',
     'install:settings:help:la_metrics_class' => 'Name of the Learning Analytics metrics class',
     'install:settings:help:recommendations_class' => 'Name of the Recommendations class',
