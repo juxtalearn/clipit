@@ -107,6 +107,7 @@ if (!function_exists('session_status')) {
     chdir("$base_path/git_tmp");
     exec("cd git_tmp");
     exec("git init");
+    exec("git branch local");
     exec("git remote add origin $git_url");
     exec("git fetch --tags");
     exec("git checkout `git tag | tail -1`");
