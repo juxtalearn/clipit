@@ -28,7 +28,7 @@ $(function() {
 });
 </script>
 <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-8">
         <div>
             <small class="show"><?php echo elgg_echo('author');?></small>
             <i class="fa-user fa blue"></i>
@@ -53,7 +53,7 @@ $(function() {
         </div>
         <?php endif;?>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
         <div class="margin-bottom-10">
             <div class="inline-block">
                 <?php echo elgg_view('page/components/admin_options', array(
