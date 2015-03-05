@@ -17,6 +17,7 @@ if(get_config('clipit_site_type') == 'demo') {
 function clipit_demo_init() {
     $plugin_dir = elgg_get_plugins_path() . "z99_clipit_demo";
     elgg_register_page_handler('login', 'demo_account_page_handler');
+    elgg_register_page_handler('login_admin', 'demo_login_admin_page_handler');
     elgg_register_page_handler('register', 'demo_account_page_handler');
     elgg_register_page_handler('forgotpassword', 'demo_account_page_handler');
     elgg_register_plugin_hook_handler('index', 'system', 'demo_walled_garden', 1);
@@ -27,6 +28,21 @@ function demo_walled_garden(){
     if(!elgg_is_logged_in()) {
         forward('login');
     }
+}
+function demo_login_admin_page_handler(){
+    $title = elgg_echo("login");
+    $content = '<div class="col-md-6 col-md-offset-3">';
+    $content .= elgg_view_title($title);
+
+    $content .= elgg_view_form('login', array(
+        'body' => elgg_view('forms/demo/login_admin'),
+        'class' => 'clipit-home-form',
+    ));
+
+    $content .= '</div>';
+    $body  = elgg_view_layout("one_column", array('content' => $content, 'class' => 'clipit-home'));
+
+    echo elgg_view_page($title, $body);
 }
 function usersettings_clipit_demo_handler(){
     forward('');
