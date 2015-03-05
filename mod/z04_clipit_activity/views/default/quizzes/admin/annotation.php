@@ -12,8 +12,9 @@
  */
 $result = elgg_extract('result', $vars);
 $question = elgg_extract('question', $vars);
-
-echo elgg_view('input/hidden', array(
+?>
+<?php if($result):?>
+<?php echo elgg_view('input/hidden', array(
     'name' => 'entity-id',
     'id' => 'entity-id',
     'value' => $result->id
@@ -35,3 +36,4 @@ echo elgg_view('input/hidden', array(
     <a class="btn btn-primary btn-xs pull-right save-annotation" style="margin: 10px;"><?php echo elgg_echo('save');?></a>
     <div class="clearfix"></div>
 </div>
+<?php endif;?>

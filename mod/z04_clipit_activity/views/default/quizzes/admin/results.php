@@ -38,17 +38,11 @@ switch($type = get_input('type')){
                     }
                 }
             }
-            if(ClipitQuiz::has_finished_quiz($quiz_id, $user_id)) {
-                $output[] = array(
-                    'correct' => $correct,
-                    'error' => $error,
-                    'pending' => $pending,
-                );
-            } else {
-                $output[] = array(
-                    'not_finished' => elgg_echo('quiz:not_finished')
-                );
-            }
+            $output[] = array(
+                'correct' => $correct,
+                'error' => $error,
+                'pending' => $pending,
+            );
         }
         echo json_encode($output);
         die;
@@ -127,7 +121,7 @@ switch($type = get_input('type')){
                 <li class="list-item answer">
                     <div class="pull-right">
                         <?php
-                        if($show_status):
+                        if($show_status && $result):
                             echo elgg_view('output/url', array(
                                 'title' => elgg_echo('quiz:teacher_annotation'),
                                 'text' => '',
