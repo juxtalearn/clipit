@@ -57,6 +57,8 @@ foreach($entities as $entity){
     elgg_register_menu_item('explore:menu', array(
         'name' => 'explore_'.$entity->id,
         'text' => $icon.$entity->name,
+        'title' => $entity->name,
+        'class' => 'text-truncate',
         'href' => "explore{$href}activity={$entity->id}",
         'selected' => $selected,
         'badge' => $total_items_found > 0 ? $total_items_found : false,
