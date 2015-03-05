@@ -10,7 +10,6 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-elgg_load_js("jquery:dynatable");
 ?>
 <style>
     .step-point{

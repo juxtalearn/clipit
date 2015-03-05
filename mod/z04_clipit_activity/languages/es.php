@@ -57,6 +57,7 @@ $spanish = array(
     'activities' => 'Actividades',
     'activities:none' => 'No se han encontrado actividades',
     'explore' => 'Explorar',
+    'activity:delete' => 'Eliminar actividad',
     'activity:create' => 'Crear actividad',
     'activity:create:info:title' => 'Al crear una actividad, es necesario especificar',
     'activity:create:info:step:1' => 'El Tema Clave asociado (uno por actividad)',

@@ -31,6 +31,7 @@ $tabs = array(
         'href' => "javascript:;",
         'id' => 'nav-step-2',
         'data-step' => 2,
+        'item_class' => 'disabled',
         'priority' => 200,
     ),
     'step_3' => array(
@@ -38,6 +39,7 @@ $tabs = array(
         'href' => "javascript:;",
         'id' => 'nav-step-3',
         'data-step' => 3,
+        'item_class' => 'disabled',
         'priority' => 300,
     ),
 );

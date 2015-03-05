@@ -105,6 +105,12 @@ $(function(){
     }
 $(function(){
     datepicker_setup();
+    $(".nav-steps li").on("click", function(e) {
+        if ($(this).hasClass("disabled")) {
+            e.preventDefault();
+            return false;
+        }
+    });
     $(document).on("click", ".button_step, .nav-steps a",function(){
         // Step 4 (Make groups) empty
         $("#nav-step-4").hide();
@@ -116,6 +122,11 @@ $(function(){
             if(!$(".elgg-form-activity-create").valid()){
                 return false;
             }
+        }
+        if(step > 0){
+            $(".nav-steps li").removeClass('disabled');
+        } else {
+            $(".nav-steps li").slice(2,4).addClass('disabled');
         }
         $(".nav-steps li").removeClass("active");
         $("#nav-step-"+ step).parent("li").addClass("active");

@@ -57,7 +57,7 @@ $isCalled = in_array($user_id, $activity->student_array);
                 <?php echo $optButton;?>
                 <h3 class="margin-bottom-5"><?php echo $group->name; ?></h3>
                 <div class="group-details">
-                    <?php if($optGroup == 'join'):?>
+                    <?php if($optGroup == 'join' && $rest > 0):?>
                         <small class="show">
                             <?php echo elgg_echo('group:free_slot', array($rest));?>
                         </small>

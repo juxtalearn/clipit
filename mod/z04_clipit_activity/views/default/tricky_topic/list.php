@@ -32,6 +32,7 @@ $multimedia = array_merge(
     $tricky_topic->storyboard_array
 );
 $examples = ClipitExample::get_from_tricky_topic($tricky_topic->id);
+$quizzes = ClipitQuiz::get_from_tricky_topic($tricky_topic->id);
 ?>
 <?php if($show_tags == 'checkbox'):?>
     <?php if($tag_label):?>
@@ -117,6 +118,23 @@ $examples = ClipitExample::get_from_tricky_topic($tricky_topic->id);
             'text'  =>  '<i class="fa fa-th-list"></i> '.elgg_echo('examples').' <strong>('.count($examples).')</strong>',
         ));
         ?>
+        <?php
+        $total_quizzes = 0;
+            foreach($quizzes as $quiz){
+                if($quiz->cloned_from == 0) {
+                    $total_quizzes++;
+                }
+            }
+        ?>
+        <p class="margin-top-10">
+            <?php echo elgg_view('output/url', array(
+                'href'  => set_search_input('quizzes', array('tricky_topic'=>$tricky_topic->name)),
+                'target' => '_blank',
+                'title' => elgg_echo('quizzes'),
+                'text'  =>  '<i class="fa fa-pencil-square-o"></i> '.elgg_echo('quizzes').' <strong>('.$total_quizzes.')</strong>',
+            ));
+            ?>
+        </p>
         </div>
         <div class="col-md-6">
         <?php echo elgg_view('output/url', array(

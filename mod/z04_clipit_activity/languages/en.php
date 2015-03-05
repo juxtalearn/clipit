@@ -57,6 +57,7 @@ $english = array(
     'activities' => 'Activities',
     'activities:none' => 'There are no activities...',
     'explore' => 'Explore',
+    'activity:delete' => 'Remove activity',
     'activity:create' => 'Create activity',
     'activity:create:info:title' => 'To create an activity you will need to specify',
     'activity:create:info:step:1' => 'Related Tricky Topic (one per activity)',

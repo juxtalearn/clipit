@@ -21,4 +21,4 @@ if(count($activity)==0 || in_array($activity, $video->teacher_array)){
     system_message(elgg_echo('activity:deleted'));
 }
 
-forward(REFERER);
+forward("activities");
