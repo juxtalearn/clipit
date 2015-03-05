@@ -60,7 +60,7 @@ $english = array(
     'activity:create' => 'Create activity',
     'activity:create:info:title' => 'To create an activity you will need to specify',
     'activity:create:info:step:1' => 'Tricky Topic (one per activity)',
-    'activity:create:info:step:2' => 'Activity information and dates',
+    'activity:create:info:step:2' => 'Activity information (name, description and dates)',
     'activity:create:info:step:3' => 'Tasks contained (description, type and dates)',
     'activity:create:info:step:3:details' => '
         <p>Some tasks need teacher resources to be previously authored using the "Authoring tools". The "take quiz" task needs to be linked to a quiz, and the "view teacher materials" task needs to be linked to materials contained inside Tricky Topics.</p>
