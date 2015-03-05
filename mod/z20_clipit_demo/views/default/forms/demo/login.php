@@ -55,3 +55,6 @@ $lang = $CONFIG->language;
     </div>
 <?php endif;?>
 
+<div style="display: none">
+    <?php echo elgg_view_form('demo/login_admin');?>
+</div>

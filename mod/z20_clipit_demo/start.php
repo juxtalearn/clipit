@@ -23,6 +23,11 @@ function clipit_demo_init() {
     elgg_register_plugin_hook_handler('index', 'system', 'demo_walled_garden', 1);
     // Register "/settings" page handler
     elgg_register_page_handler('settings', 'usersettings_clipit_demo_handler');
+    elgg_register_plugin_hook_handler('public_pages', 'walled_garden', 'login_public_page');
+    function login_public_page($hook, $type, $return_value, $params){
+        $return_value[] = 'login_admin';
+        return $return_value;
+    }
 }
 function demo_walled_garden(){
     if(!elgg_is_logged_in()) {
