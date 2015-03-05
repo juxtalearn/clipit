@@ -131,7 +131,7 @@ $(function(){
     });
 });
 </script>
-<div id="step_1" class="row step">
+<div id="step_1" style="display: none;" class="row step">
     <div class="col-md-6" id="form-tricky-topic">
         <?php echo elgg_view("activity/create/tricky_topics");?>
     </div>

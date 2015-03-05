@@ -14,6 +14,14 @@ $tags = elgg_extract('entities', $vars);
 $table_orders = elgg_extract('table_orders', $vars);
 $count = elgg_extract('count', $vars);
 ?>
+<script>
+    $(function() {
+        $(".link-tricky-topic").click(
+            {content: <?php echo json_encode(elgg_view_form('stumbling_blocks/link', array('data-validate' => 'true')));?>},
+            clipit.tricky_topic.link
+        );
+    });
+</script>
 <style>
     .ln{
         opacity: 0.7;

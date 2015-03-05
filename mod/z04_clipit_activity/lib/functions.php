@@ -563,6 +563,7 @@ function get_group_progress($group_id){
         //}
         $total++;
     }
+    $total = $total == 0 ? 1 : $total;
     $val = count($completed)/($total);
     return round($val*100);
 }

@@ -11,6 +11,14 @@
  * @package         ClipIt
  */
 ?>
+//<script>
+elgg.provide('clipit.tricky_topic');
+
+clipit.tricky_topic.init = function() {
+
+};
+elgg.register_hook_handler('init', 'system', clipit.tricky_topic.init);
+
 $(function(){
 
     var tags_autocomplete = {
@@ -122,16 +130,16 @@ $(function(){
             }
         });
     });
-    $(".link-tricky-topic").click(function(){
+    clipit.tricky_topic.link = function(e) {
         $(this).toggle();
-        var content = <?php echo json_encode(elgg_view_form('stumbling_blocks/link', array('data-validate' => 'true')));?>,
+        var content = e.data.content,
             container = $(this).closest("td").find(".list-tricky-topic");
         container.toggle().html(content);
         container.find("form .input-entity-id").val($(this).attr("id"));
         container.find('form option').each(function(){
-            var text=$(this).text()
+            var text = $(this).text()
             if (text.length > 30)
                 $(this).val(text).text(text.substr(0,30)+'…')
-        })
-    });
+        });
+    };
 });

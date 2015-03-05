@@ -255,6 +255,7 @@ function create_activity_page_handler($page) {
     $vars = array();
     $vars['page'] = $page[0];
     set_input('step', $page);
+    elgg_extend_view('forms/activity/create', 'activity/create/step_info', 100);
     elgg_extend_view('forms/activity/create', 'activity/create/step_1', 100);
     elgg_extend_view('forms/activity/create', 'activity/create/step_2', 100);
     elgg_extend_view('forms/activity/create', 'activity/create/step_3', 100);

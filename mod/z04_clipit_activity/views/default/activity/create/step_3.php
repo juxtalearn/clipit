@@ -125,13 +125,11 @@ $(function () {
     }).on('fileuploaddone', function (e, data) {
         var parent_id = $(this).parent("a").attr("id");
         $("#groups_default").val(JSON.stringify(data.result) );
-        var group_mode_teacher = false;
         $.each(data.result, function(group, users) {
             if(group != 0) {
                 if ($("#called_users optgroup[label='" + group + "']").length == 0) {
                     $("#called_users").prepend("<optgroup label='" + group + "'/>");
                 }
-                group_mode_teacher = true;
             }
             $.each(users, function(i, user) {
                 $('#called_users').multiSelect('addOption',
@@ -147,10 +145,6 @@ $(function () {
                 $('#called_users').multiSelect('refresh');
             });
         });
-        // Teacher make groups
-        if(group_mode_teacher){
-            $(".select-radio:first").click();
-        }
     });
 });
 </script>

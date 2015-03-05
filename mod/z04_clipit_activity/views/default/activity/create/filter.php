@@ -12,6 +12,13 @@
  */
 
 $tabs = array(
+    'step_info' => array(
+        'text' => '<i class="fa fa-info-circle"></i> '.elgg_echo('activity:admin:info'),
+        'href' => "javascript:;",
+        'id' => 'nav-step-0',
+        'data-step' => 0,
+        'priority' => 50,
+    ),
     'step_1' => array(
         'text' => elgg_echo('activity:admin:setup'),
         'href' => "javascript:;",

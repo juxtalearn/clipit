@@ -11,7 +11,7 @@
  * @package         ClipIt
  */
 $step = get_input('step');
-$selected_tab = 'step_1';
+$selected_tab = 'step_info';
 
 $filter = elgg_view('activity/create/filter', array('selected' => $selected_tab, 'step' => $step));
 

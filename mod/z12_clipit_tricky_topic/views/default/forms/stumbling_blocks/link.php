@@ -12,8 +12,10 @@
  */
 $owner_tts = array_pop(ClipitTrickyTopic::get_by_owner(array(elgg_get_logged_in_user_guid())));
 $options = array('' => elgg_echo('tricky_topic:select'));
-foreach($owner_tts as $tricky_topic){
-    $options[$tricky_topic->id] = $tricky_topic->name;
+if(is_array($owner_tts)) {
+    foreach ($owner_tts as $tricky_topic) {
+        $options[$tricky_topic->id] = $tricky_topic->name;
+    }
 }
 echo elgg_view('input/hidden', array(
     'class' => 'input-entity-id',

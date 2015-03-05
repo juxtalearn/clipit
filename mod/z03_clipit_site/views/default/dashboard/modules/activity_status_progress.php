@@ -49,6 +49,11 @@ $activities_found = false;
 foreach($activities as $activity):
     if($activity->status != 'closed'):
         $activity_progress = round(((time() - $activity->start)/($activity->end - $activity->start)) * 100);
+        if($activity_progress > 100){
+            $activity_progress = 100;
+        }elseif($activity_progress < 0){
+            $activity_progress = 0;
+        }
         $tasks = ClipitTask::get_by_id($activity->task_array);
 ?>
     <div>

@@ -31,6 +31,16 @@ $(function() {
         });
     });
     $('#full-calendar').fullCalendar({
+        monthNames: <?php echo elgg_echo('calendar:month_names');?>,
+        monthNamesShort: <?php echo elgg_echo('calendar:month_names_short');?>,
+        dayNames: <?php echo elgg_echo('calendar:day_names');?>,
+        dayNamesShort: <?php echo elgg_echo('calendar:day_names_short');?>,
+        buttonText: {
+                month: "<?php echo elgg_echo('calendar:month');?>",
+                week: "<?php echo elgg_echo('calendar:week');?>",
+                day: "<?php echo elgg_echo('calendar:day');?>",
+                list: "<?php echo elgg_echo('calendar:agenda');?>"
+        },
         firstDay: 1,
         header: {
             left: 'prev,next today',

@@ -58,6 +58,17 @@ $spanish = array(
     'activities:none' => 'No se han encontrado actividades',
     'explore' => 'Explorar',
     'activity:create' => 'Crear actividad',
+    'activity:create:info:title' => 'Al crear una actividad, es necesario especificar',
+    'activity:create:info:step:1' => 'El Tema Clave asociado (uno por actividad)',
+    'activity:create:info:step:2' => 'Información general y fechas de la actividad',
+    'activity:create:info:step:3' => 'Tareas incluidas en la actividad (descripción, tipo y fechas)',
+    'activity:create:info:step:3:details' => '
+        <p>Algunas tareas usan recursos de profesor previamente creado desde el menú "Herramientas de autoría". La tarea de tipo "Test" debe estar enlazada a un test, y la de tipo "Ver materiales del profesor" debe estar enlazada con materiales del Tema Clave.</p>
+        <p>Por favor, entra en las "Herramientas de autoría" y asegúrate de haber creado todos los recursos del profesor necesarios antes de crear estas tareas.</p>
+        <p>También puedes crear una actividad sin estas tareas, y añadirlas más tarde, después de haber añadido recursos usando las "Herramientas de autoría".</p>
+    ',
+    'activity:create:info:step:4' => '4.	Estudiantes que participarán y como se juntarán en grupos',
+
     'activity:profile' => 'Inicio',
     'activity:progress' => 'Progreso de la actividad',
     'activity:groups' => 'Grupos',
@@ -66,6 +77,7 @@ $spanish = array(
     'activity:publications' => 'Publicaciones',
     'activity:join' => 'Entrar en la actividad',
     'activity:group:join' => 'Unirse a un grupo',
+    'activity:upcoming_tasks' => 'Próximas tareas',
     'activity:pending_tasks' => 'Tareas pendientes',
     'activity:next_deadline' => 'Próxima tarea',
     'activity:quiz' => 'Test de la actividad',
@@ -264,7 +276,7 @@ $spanish = array(
     'task:select' => 'Seleccionar tarea',
     'task:select:task_type' => 'Seleccionar tipo de tarea',
     'task:task_type' => 'Tipo de tarea',
-    'task:resource_download' => 'Ver materiales del profesor',
+    'task:resource_download' => 'Ver/Descargar materiales',
     'task:feedback' => 'Tarea de feedback',
     'task:feedback:linked' => 'Tarea de feedback vinculada',
     'task:feedback:check' => 'Añadir una tarea de feedback',
@@ -320,6 +332,9 @@ $spanish = array(
     'activity:created' => 'La actividad %s ha sido creada',
     'search:filter' => 'Filtrar',
     // Activity admin
+    'activity:deleted' => 'Actividad eliminada',
+    'activity:cantdelete' => 'No se ha podido eliminar la actividad',
+    'activity:admin:info' => 'Información',
     'activity:admin:task_setup' => 'Configuración de tareas',
     'activity:admin:groups' => 'Configuración de grupos',
     'activity:admin:setup' => 'Configuración de la actividad',
@@ -373,6 +388,14 @@ $spanish = array(
     'quiz:answer:solution' => 'Solución',
     'quiz:results:stumbling_block' => 'Resultados por Conceptos',
     'quiz:out_of' => 'de',
+    'calendar:month_names'=> json_encode(array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre')),
+    'calendar:month_names_short'=> json_encode(array('Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic')),
+    'calendar:day_names'=> json_encode(array('Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado')),
+    'calendar:day_names_short'=> json_encode(array('Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb')),
+    'calendar:month' => 'Mes',
+    'calendar:day' => 'Día',
+    'calendar:week' => 'Semana',
+    'calendar:list' => 'Agenda',
 );
 
 add_translation('es', $spanish);

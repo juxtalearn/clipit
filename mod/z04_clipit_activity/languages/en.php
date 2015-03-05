@@ -58,14 +58,26 @@ $english = array(
     'activities:none' => 'There are no activities...',
     'explore' => 'Explore',
     'activity:create' => 'Create activity',
+    'activity:create:info:title' => 'To create an activity you will need to specify',
+    'activity:create:info:step:1' => 'Related Tricky Topic (one per activity)',
+    'activity:create:info:step:2' => 'General activity information and dates',
+    'activity:create:info:step:3' => 'Tasks included (description, type and dates)',
+    'activity:create:info:step:3:details' => '
+        <p>Some tasks need teacher resources to be previously authored using the "Authoring tools". The "take quiz" task needs to be linked to a quiz, and the "view teacher materials" task needs to be linked to materials contained inside Tricky Topics.</p>
+        <p>Please open the "Authoring tools" to make sure you have authored all necessary teacher resources before creating these tasks.</p>
+        <p>You can also create an activity without these tasks, and add them later on, when the linked resources have been created using the "Authoring tools".</p>
+    ',
+    'activity:create:info:step:4' => 'Students who will participate and how they will group',
+
     'activity:profile' => 'Activity home',
     'activity:progress' => 'Activity progress',
     'activity:groups' => 'Groups',
     'activity:discussion' => 'Discussion',
-    'activity:stas' => 'Teacher resources',
+    'activity:stas' => 'Teacher materials',
     'activity:publications' => 'Publications',
     'activity:join' => 'Join activity',
     'activity:group:join' => 'Join group',
+    'activity:upcoming_tasks' => 'Upcoming tasks',
     'activity:pending_tasks' => 'Pending tasks',
     'activity:next_deadline' => 'Next task',
     'activity:quiz' => 'Activity Quiz',
@@ -265,7 +277,7 @@ $english = array(
     'task:select' => 'Select task',
     'task:select:task_type' => 'Select task type',
     'task:task_type' => 'Task type',
-    'task:resource_download' => 'View teacher resources',
+    'task:resource_download' => 'View teacher materials',
     'task:feedback' => 'Task feedback',
     'task:feedback:linked' => 'Link to',
     'task:feedback:check' => 'Check to create a feedback task',
@@ -323,6 +335,7 @@ $english = array(
     // Activity admin
     'activity:deleted' => 'Activity deleted',
     'activity:cantdelete' => 'Activity can not remove',
+    'activity:admin:info' => 'Information',
     'activity:admin:task_setup' => 'Tasks setup',
     'activity:admin:groups' => 'Groups setup',
     'activity:admin:setup' => 'Activity setup',
@@ -360,6 +373,14 @@ $english = array(
     'quiz:answer:solution' => 'Solution',
     'quiz:results:stumbling_block' => 'Results by Stumbling Block',
     'quiz:out_of' => 'out of',
+    'calendar:month_names'=> json_encode(array("January","February","March","April","May","June","July","August","September","October","November","December")),
+    'calendar:month_names_short'=> json_encode(array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")),
+    'calendar:day_names'=> json_encode(array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday")),
+    'calendar:day_names_short'=> json_encode(array("Sun","Mon","Tue","Wed","Thu","Fri","Sat")),
+    'calendar:month' => 'Mes',
+    'calendar:day' => 'Día',
+    'calendar:week' => 'Semana',
+    'calendar:list' => 'Agenda',
 );
 
 add_translation('en', $english);

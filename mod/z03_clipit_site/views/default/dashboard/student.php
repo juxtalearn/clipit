@@ -33,7 +33,7 @@ $(function(){
     <div class="col-md-6">
         <?php echo elgg_view('dashboard/module', array(
             'name'      => 'pending',
-            'title'     => elgg_echo('activity:pending_tasks'),
+            'title'     => elgg_echo('activity:upcoming_tasks'),
             'content'   => elgg_view('dashboard/modules/pending'),
         ));
         ?>

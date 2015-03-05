@@ -1,5 +1,5 @@
 <?php
- /**
+/**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
  * Creation date:   16/07/14
@@ -18,6 +18,7 @@ $activity_start = get_input('activity-start');
 $activity_end = get_input('activity-end');
 $activity_tt = get_input('tricky-topic');
 
+
 $activity_id = ClipitActivity::create(array(
     'name' => $activity_name,
     'description' => $activity_description,
@@ -31,44 +32,46 @@ foreach($tasks as $task){
     if($quiz_id = $task['quiz_id']){
         $quiz_id = ClipitQuiz::create_clone($task['quiz_id']);
     }
+    if($task['title']) {
+        // Task exist
+        $task_id = ClipitTask::create(array(
+            'name' => $task['title'],
+            'description' => $task['description'],
+            'task_type' => $task['type'],
+            'start' => get_timestamp_from_string($task['start']),
+            'end' => get_timestamp_from_string($task['end']),
+            'quiz' => $task['type'] == ClipitTask::TYPE_QUIZ_TAKE ? $quiz_id : 0
+        ));
 
-    $task_id = ClipitTask::create(array(
-        'name' => $task['title'],
-        'description' => $task['description'],
-        'task_type' => $task['type'],
-        'start' => get_timestamp_from_string($task['start']),
-        'end' => get_timestamp_from_string($task['end']),
-        'quiz' => $task['type'] == ClipitTask::TYPE_QUIZ_TAKE ? $quiz_id : 0
-    ));
+        ClipitActivity::add_tasks($activity_id, array($task_id));
+        if ($task['type'] == ClipitTask::TYPE_RESOURCE_DOWNLOAD) {
+            $files = array();
+            $files = array_filter($task['attach_files']);
+            $new_files_id = array();
+            foreach ($files as $file_id) {
+                $new_files_id[] = ClipitFile::create_clone($file_id);
+            }
+            ClipitActivity::add_files($activity_id, $new_files_id);
+            ClipitTask::add_files($task_id, $new_files_id);
 
-    ClipitActivity::add_tasks($activity_id, array($task_id));
-    if($task['type'] == ClipitTask::TYPE_RESOURCE_DOWNLOAD){
-        $files = array();
-        $files = array_filter($task['attach_files']);
-        $new_files_id = array();
-        foreach($files as $file_id){
-            $new_files_id[] = ClipitFile::create_clone($file_id);
+            $videos = array();
+            $videos = array_filter($task['attach_videos']);
+            $new_videos_id = array();
+            foreach ($videos as $video_id) {
+                $new_videos_id[] = ClipitVideo::create_clone($video_id);
+            }
+            ClipitActivity::add_videos($activity_id, $new_videos_id);
+            ClipitTask::add_videos($task_id, $new_videos_id);
+
+            $storyboards = array();
+            $storyboards = array_filter($task['attach_storyboards']);
+            $new_storyboards_id = array();
+            foreach ($storyboards as $storyboard_id) {
+                $new_storyboards_id[] = ClipitStoryboard::create_clone($storyboard_id);
+            }
+            ClipitActivity::add_storyboards($activity_id, $new_storyboards_id);
+            ClipitTask::add_storyboards($task_id, $new_storyboards_id);
         }
-        ClipitActivity::add_files($activity_id, $new_files_id);
-        ClipitTask::add_files($task_id, $new_files_id);
-
-        $videos = array();
-        $videos = array_filter($task['attach_videos']);
-        $new_videos_id = array();
-        foreach($videos as $video_id){
-            $new_videos_id[] = ClipitVideo::create_clone($video_id);
-        }
-        ClipitActivity::add_videos($activity_id, $new_videos_id);
-        ClipitTask::add_videos($task_id, $new_videos_id);
-
-        $storyboards = array();
-        $storyboards = array_filter($task['attach_storyboards']);
-        $new_storyboards_id = array();
-        foreach($storyboards as $storyboard_id){
-            $new_storyboards_id[] = ClipitStoryboard::create_clone($storyboard_id);
-        }
-        ClipitActivity::add_storyboards($activity_id, $new_storyboards_id);
-        ClipitTask::add_storyboards($task_id, $new_storyboards_id);
     }
     if($task['feedback']){
         $feedback = $task['feedback-form'];
@@ -94,31 +97,36 @@ ClipitActivity::add_students($activity_id, $called_users);
 $filter = false;
 $groups_creation = get_input('groups_creation');
 $max_users = get_input('max-users');
+
+$groups = array();
+$group_array = json_decode(get_input('groups_default'));
+if(!empty($group_array)) {
+    $users_loaded = array();
+    $i = 0;
+    foreach ($group_array as $group_name => $users) {
+        if ($group_name != "0") {
+            $groups[$group_name] = array(
+                'name' => $group_name,
+            );
+            $users_array = array();
+            foreach ($users as $user) {
+                if (in_array($user->id, $called_users)) {
+                    $users_array[] = $user->id;
+                    $users_loaded[] = $user->id;
+                }
+            }
+            $groups[$group_name]['users'] = implode(",", $users_array);
+        }
+        $i++;
+    }
+    $called_users = array_diff($called_users, $users_loaded);
+}
+
 switch($groups_creation){
     // Teacher make groups
     case 1:
-        $groups = array();
         $group_mode = ClipitActivity::GROUP_MODE_TEACHER;
 
-        $group_array = json_decode(get_input('groups_default'));
-        if(!empty($group_array)) {
-            $i = 0;
-            foreach ($group_array as $group_name => $users) {
-                if ($group_name != "0") {
-                    $groups[$i] = array(
-                        'name' => $group_name,
-                    );
-                    $users_array = array();
-                    foreach ($users as $user) {
-                        if (in_array($user->id, $called_users)) {
-                            $users_array[] = $user->id;
-                        }
-                    }
-                    $groups[$i]['users'] = implode(",", $users_array);
-                }
-                $i++;
-            }
-        }
         $filter = "?filter=groups";
         break;
     // Student makes groups

@@ -17,7 +17,7 @@ $activity = elgg_extract('entity', $vars);
 $task_found = false;
 foreach(ClipitTask::get_by_id($activity->task_array) as $task):
     $status = get_task_status($task);
-    if($task->start <= time() && $task->end >= time() && $status['status'] === false):
+    if($task->status == ClipitTask::STATUS_ACTIVE && $status['status'] === false):
         $task_found = true;
         ?>
         <li class="list-item">
