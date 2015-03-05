@@ -15,7 +15,7 @@ if(get_config('clipit_site_type') == 'demo') {
 }
 
 function clipit_demo_init() {
-    $plugin_dir = elgg_get_plugins_path() . "z99_clipit_demo";
+    $plugin_dir = elgg_get_plugins_path() . "z20_clipit_demo";
     elgg_register_page_handler('login', 'demo_account_page_handler');
     elgg_register_page_handler('login_admin', 'demo_login_admin_page_handler');
     elgg_register_page_handler('register', 'demo_account_page_handler');
@@ -48,7 +48,7 @@ function usersettings_clipit_demo_handler(){
     forward('');
 }
 function demo_account_page_handler($page_elements, $handler) {
-    $base_dir = elgg_get_plugins_path() . 'z99_clipit_demo/pages/account';
+    $base_dir = elgg_get_plugins_path() . 'z20_clipit_demo/pages/account';
     switch ($handler) {
         case 'forgotpassword':
             return false;
