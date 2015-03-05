@@ -412,17 +412,17 @@ class ElggInstaller {
             "clipit_global_url" => array(
                 "type" => "text",
                 "value" => "http://clipit.es/landing/services/api/rest/json/",
-                "required" => TRUE,
+                "required" => FALSE,
             ),
             "clipit_global_login" => array(
                 "type" => "text",
                 "value" => "admin",
-                "required" => TRUE,
+                "required" => FALSE,
             ),
             "clipit_global_password" => array(
                 "type" => "text",
                 "value" => "admin1!",
-                "required" => TRUE,
+                "required" => FALSE,
             ),
 //            'jxl_secret' => array(
 //                'type' => 'text',
