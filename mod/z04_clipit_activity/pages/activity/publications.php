@@ -25,7 +25,7 @@ if($page[2] == 'view' && $page[3]){
     $object = ClipitSite::lookup($entity_id);
     $entity = array_pop($object['subtype']::get_by_id(array($entity_id)));
     // Check if user can evaluate own group video
-    $hasRating = ClipitRating::get_from_user_for_target($user_id, $entity_id);
+    $hasRating = ClipitRating::get_user_rating_for_target($user_id, $entity_id);
     $owner_group_id = $entity->get_group($entity->id);
     $my_group = ClipitGroup::get_from_user_activity($user_id, $activity->id);
     $canEvaluate = false;

@@ -28,7 +28,7 @@ $(function () {
     // Initialize the jQuery File Upload widget:
     $('#fileupload').fileupload({
         maxFileSize: 1073741824, // 1 GB
-        url: '<?php echo elgg_get_site_url()."ajax/view/multimedia/file/upload";?>',
+        url: elgg.config.wwwroot+'ajax/view/multimedia/file/upload',
         previewMaxWidth: 140,
         previewMaxHeight: 140,
         disableImageResize: /Android(?!.*Chrome)|Opera/

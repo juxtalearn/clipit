@@ -19,7 +19,7 @@ $entity = elgg_extract('entity', $vars);
             <div class="img-preview" style="margin-top: 10px;">
                 <?php
                 if($vars['rating']):
-                    $rating_average = ClipitPerformanceRating::get_average_target_rating($entity->id);
+                    $rating_average = $entity->performance_rating_average;
                 ?>
                     <div class="pull-right rating ratings readonly white-star" data-score="<?php echo $rating_average;?>">
                         <?php echo star_rating_view($rating_average);?>

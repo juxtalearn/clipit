@@ -579,7 +579,7 @@ function get_filter_evaluations($entities, $activity_id, $user_id = null){
         $object = ClipitSite::lookup($entity_id);
         $entity_class = $object['subtype'];
         $entity = array_pop($entity_class::get_by_id(array($entity_id)));
-        $rating = ClipitRating::get_from_user_for_target($user_id, $entity->id);
+        $rating = ClipitRating::get_user_rating_for_target($user_id, $entity->id);
         if($group_id != $entity_class::get_group($entity->id)){
             if(!$rating){
                 $output["no_evaluated"][] = $entity->id;

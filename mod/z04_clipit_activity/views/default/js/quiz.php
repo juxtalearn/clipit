@@ -11,11 +11,19 @@
  * @package         ClipIt
  */
 ?>
-$.fn.quiz = function (options) {
+//<script>
+elgg.provide('clipit.quiz');
+
+clipit.quiz.init = function() {
+
+};
+elgg.register_hook_handler('init', 'system', clipit.quiz.init);
+
+clipit.quiz.create = function(options){
     var defaults = {};
     var opt =  $.extend({}, defaults, options),
-        that = $(this),
-        $quiz = $(this),
+        that = $(opt.quiz),
+        $quiz = $(opt.quiz),
         $question = that.find('.question');
     $questions = that.find('.questions');
 

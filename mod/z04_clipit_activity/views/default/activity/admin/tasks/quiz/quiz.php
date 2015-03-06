@@ -43,7 +43,8 @@ $id = uniqid();
 ?>
 <script>
 $(function(){
-    $(".quiz[data-quiz=<?php echo $id;?>]").quiz({
+    clipit.quiz.create({
+        'quiz': '.quiz[data-quiz=<?php echo $id;?>]',
         'tricky_topic': <?php echo (int)$tricky_topic;?>,
         'input_prefix': '<?php echo $input_prefix;?>'
     });

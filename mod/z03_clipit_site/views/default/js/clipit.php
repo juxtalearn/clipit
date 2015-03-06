@@ -120,73 +120,6 @@ clipit.tinymce.init = function(id){
     };
 }
 
-function get_tinymce_init(){
-    return {
-    script_url: elgg.config.wwwroot+"mod/z03_clipit_site/vendors/tinymce/tinymce.min.js",
-    setup : function(ed) {
-        ed.on("init",function() {
-            $(".mce-ico").addClass("fa");
-            // mce icons
-            $(".mce-i-bullist").addClass("fa-list-ul");
-            $(".mce-i-numlist").addClass("fa-list-ol");
-            $(".mce-i-outdent").addClass("fa-outdent");
-            $(".mce-i-indent").addClass("fa-indent");
-            $(".mce-i-underline").addClass("fa-underline");
-            $(".mce-i-italic").addClass("fa-italic");
-            $(".mce-i-bold").addClass("fa-bold");
-        });
-    },
-    convert_urls: true,
-    mode : "specific_textareas",
-    force_br_newlines : true,
-    force_p_newlines : false,
-    plugins: ["mention, autoresize, paste, autolink"],
-    content_css : elgg.config.wwwroot+"mod/z03_clipit_site/vendors/tinymce/content.css",
-    valid_styles : 'text-align',
-    paste_remove_spans: true,
-    verify_html: true,
-    paste_text_sticky : true,
-    paste_retain_style_properties : 'none',
-    inline_styles : false,
-    paste_remove_styles: true,
-    paste_auto_cleanup_on_paste: true,
-    paste_strip_class_attributes: true,
-    paste_remove_styles_if_webkit: true,
-    invalid_elements: 'img,h1,h2',
-    autoresize_min_height: 150,
-    mentions: {
-        delay: 0,
-        source: function (query, process, delimiter) {
-            // Do your ajax call
-            // When using multiple delimiters you can alter the query depending on the delimiter used
-            if (delimiter === '@') {
-                $.getJSON(elgg.config.wwwroot+"ajax/view/messages/search_to?q="+query, function (data) {
-                    //call process to show the result
-                    if(data){
-                        process(data);
-                    }
-                });
-            }
-        },
-        delimiter: '@',
-        queryBy: 'first_name',
-        render: function(item) {
-            var img = "<img class='img' src='" + item.avatar + "' title='" + item.first_name + "' height='25px' width='25px' />";
-            return "<li class='text-truncate'>" + img + "<div class='block'><div class='title'>" + item.first_name + "</div><div class='sub-title'>" + item.username + "</div></div></li>";
-        },
-        renderDropdown: function() {
-            //add twitter bootstrap dropdown-menu class
-            return '<ul class="rte-autocomplete dropdown-menu mention-autocomplete"><li class="loading"><i class="fa fa-spinner fa-spin"></i></li></ul>';
-        },
-        insert: function(item) {
-            return item.username;
-        }
-    },
-    menubar: false,
-    statusbar: false,
-    toolbar: "bold italic underline | bullist numlist | outdent indent"
-    }
-}
 $(function(){
     /**
      * Collapse function
@@ -264,7 +197,7 @@ $(function(){
         rules: {
         email: {
             remote: {
-                url: "<?php echo elgg_get_site_url()?>action/user/check",
+                url: elgg.config.wwwroot+"action/user/check",
                     type: "POST",
                     data: {
                     email: function() {
@@ -287,7 +220,7 @@ $(function(){
                 $(form).find("input[type=submit]")
                 .after(
                     "<p class='text-info'>" +
-                    "<img src='<?php echo elgg_get_site_url()?>mod/z03_clipit_site/graphics/ok.png'/>" +
+                    "<img src='"+elgg.config.wwwroot+"mod/z03_clipit_site/graphics/ok.png'/>" +
                     " <strong><?php echo elgg_echo("user:forgotpassword:ok");?></strong></p>")
                         .remove();
                 });

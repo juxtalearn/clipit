@@ -30,7 +30,7 @@ $(function () {
                 // Uncomment the following to send cross-domain cookies:
                 //xhrFields: {withCredentials: true},
                 maxFileSize: 500000000, // 500 MB
-                url: '<?php echo elgg_get_site_url()."ajax/view/multimedia/file/attach_action";?>',
+                url: elgg.config.wwwroot+'ajax/view/multimedia/file/attach_action',
                 autoUpload: false,
                 previewMaxWidth: 60,
                 previewMaxHeight: 40,

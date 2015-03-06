@@ -21,7 +21,7 @@ $user_logged = array_pop(ClipitUser::get_by_id(array($user_loggedin_id)));
 $language_index = ClipitPerformanceItem::get_language_index(get_current_language());
 
 $tags = $entity->tag_array;
-$performance_average = ClipitPerformanceRating::get_average_target_rating($entity->id);
+$performance_average = $entity->performance_rating_average;
 $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->id))));
 ?>
 <!-- Multimedia info + details -->
@@ -104,7 +104,7 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
                         $performance_items = $entity->performance_item_array;
                         foreach($performance_items as $performance_item_id):
                             $performance_item = array_pop(ClipitPerformanceItem::get_by_id(array($performance_item_id)));
-                            $average_for_item = ClipitPerformanceRating::get_average_item_rating_for_target($performance_item_id, $entity->id);
+                            $average_for_item = $entity->performance_item_rating_average[$performance_item_id];
                         ?>
                             <div style="border-bottom: 1px solid #bae6f6;">
                                 <div class="pull-right rating readonly" style="margin-right: 10px;margin-top: -3px;" data-score="<?php echo $average_for_item;?>">
@@ -137,7 +137,7 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
                             <h4><strong><?php echo elgg_echo('publications:rating:list');?></strong></h4>
                         </li>
                         <?php
-                            if($me_rating_entity = ClipitRating::get_from_user_for_target($user_loggedin_id, $entity->id)):
+                            if($me_rating_entity = ClipitRating::get_user_rating_for_target($user_loggedin_id, $entity->id)):
                                 $can_evaluate_edit = ($feedback_task && ClipitTask::get_status($feedback_task) == ClipitTask::STATUS_ACTIVE) ? true:false;
                         ?>
                         <li class="list-item my-evaluation">
