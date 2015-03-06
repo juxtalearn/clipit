@@ -22,13 +22,11 @@ class ClipitGroup extends UBItem {
     const SUBTYPE = "ClipitGroup";
     const REL_GROUP_USER = "ClipitGroup-ClipitUser";
     const REL_GROUP_FILE = "ClipitGroup-ClipitFile";
-    const REL_GROUP_RESOURCE = "ClipitGroup-ClipitResource";
     const REL_GROUP_STORYBOARD = "ClipitGroup-ClipitStoryboard";
     const REL_GROUP_VIDEO = "ClipitGroup-ClipitVideo";
     const REL_GROUP_TAG = "ClipitGroup-ClipitTag";
     public $user_array = array();
     public $file_array = array();
-    public $resource_array = array();
     public $storyboard_array = array();
     public $video_array = array();
     public $tag_array = array();
@@ -43,7 +41,6 @@ class ClipitGroup extends UBItem {
         parent::copy_from_elgg($elgg_entity);
         $this->user_array = static::get_users($this->id);
         $this->file_array = static::get_files($this->id);
-        $this->resource_array = static::get_resources($this->id);
         $this->storyboard_array = static::get_storyboards($this->id);
         $this->video_array = static::get_videos($this->id);
         $this->tag_array = static::get_tags($this->id);
@@ -61,7 +58,6 @@ class ClipitGroup extends UBItem {
         static::set_files($this->id, $this->file_array);
         static::set_videos($this->id, $this->video_array);
         static::set_storyboards($this->id, $this->storyboard_array);
-        static::set_resources($this->id, $this->resource_array);
         static::set_tags($this->id, $this->tag_array);
         if($this->activity != 0) {
             ClipitActivity::add_groups($this->activity, array($this->id));
@@ -183,30 +179,6 @@ class ClipitGroup extends UBItem {
      */
     static function get_files($id) {
         return UBCollection::get_items($id, static::REL_GROUP_FILE);
-    }
-
-    /**
-     * Add Resources to a Group.
-     *
-     * @param int   $id               Id of the Group to add Resources to.
-     * @param array $resource_array Array of Resource Ids to add to the Group.
-     *
-     * @return bool Returns true if added correctly, or false if error.
-     */
-    static function add_resources($id, $resource_array) {
-        return UBCollection::add_items($id, $resource_array, static::REL_GROUP_RESOURCE);
-    }
-
-    static function set_resources($id, $resource_array) {
-        return UBCollection::set_items($id, $resource_array, static::REL_GROUP_RESOURCE);
-    }
-
-    static function remove_resources($id, $resource_array) {
-        return UBCollection::remove_items($id, $resource_array, static::REL_GROUP_RESOURCE);
-    }
-
-    static function get_resources($id) {
-        return UBCollection::get_items($id, static::REL_GROUP_RESOURCE);
     }
 
     /**

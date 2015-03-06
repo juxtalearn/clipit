@@ -106,13 +106,13 @@ class ClipitQuizResult extends UBItem {
         $quiz_question = $result_properties["quiz_question"];
 
         $question_properties = ClipitQuizQuestion::get_properties($quiz_question, array("option_type", "validation_array"));
-        $option_type = $question_properties["option_type"];
+        $option_type = (string)$question_properties["option_type"];
         $validation_array = $question_properties["validation_array"];
 
         switch($option_type){
-            case ClipitQuizQuestion::TYPE_SELECT_ONE
-                || ClipitQuizQuestion::TYPE_SELECT_MULTI
-                || ClipitQuizQuestion::TYPE_TRUE_FALSE:
+            case ClipitQuizQuestion::TYPE_SELECT_ONE:
+            case ClipitQuizQuestion::TYPE_SELECT_MULTI:
+            case ClipitQuizQuestion::TYPE_TRUE_FALSE:
                 if($answer == $validation_array){
                     $correct = true;
                 } else{
@@ -120,7 +120,6 @@ class ClipitQuizResult extends UBItem {
                 }
                 return static::set_properties($result_id, array("correct" => $correct));
             case ClipitQuizQuestion::TYPE_NUMBER:
-
                 if((float)$answer == (float)$validation_array[0]){
                     $correct = true;
                 } else{
@@ -162,13 +161,15 @@ class ClipitQuizResult extends UBItem {
      *
      * @param int $quiz_question_id
      * @param int $user_id
-     * @return int The Quiz Result ID, or 0 if none found.
+     * @return static The Quiz Result, or 0 if none found.
      */
     static function get_from_question_user($quiz_question_id, $user_id){
         $result_array = static::get_by_owner(array($user_id));
-        foreach($result_array[$user_id] as $quiz_result){
-            if($quiz_result->quiz_question === $quiz_question_id){
-                return $quiz_result;
+        if(!empty($result_array)) {
+            foreach ($result_array[$user_id] as $quiz_result) {
+                if ($quiz_result->quiz_question === $quiz_question_id) {
+                    return $quiz_result;
+                }
             }
         }
         return 0;

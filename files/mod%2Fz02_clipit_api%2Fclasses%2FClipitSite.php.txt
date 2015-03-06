@@ -23,32 +23,26 @@ class ClipitSite extends UBSite {
     const REL_SITE_FILE = "ClipitSite-ClipitFile";
     const REL_SITE_VIDEO = "ClipitSite-ClipitVideo";
     const REL_SITE_STORYBOARD = "ClipitSite-ClipitStoryboard";
-    const REL_SITE_RESOURCE = "ClipitSite-ClipitResource";
     public $file_array = array();
     public $video_array = array();
     public $storyboard_array = array();
-    public $resource_array = array();
 
     // PUBLIC SCOPE
     const REL_SITE_PUB_FILE = "ClipitSite-PUB-ClipitFile";
     const REL_SITE_PUB_VIDEO = "ClipitSite-PUB-ClipitVideo";
     const REL_SITE_PUB_STORYBOARD = "ClipitSite-PUB-ClipitStoryboard";
-    const REL_SITE_PUB_RESOURCE = "ClipitSite-PUB-ClipitResource";
     public $pub_file_array = array();
     public $pub_video_array = array();
     public $pub_storyboard_array = array();
-    public $pub_resource_array = array();
 
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
         $this->file_array = (array)static::get_files();
         $this->video_array = (array)static::get_videos();
         $this->storyboard_array = (array)static::get_storyboards();
-        $this->resource_array = (array)static::get_resources();
         $this->pub_file_array = (array)static::get_pub_files();
         $this->pub_video_array = (array)static::get_pub_videos();
         $this->pub_storyboard_array = (array)static::get_pub_storyboards();
-        $this->pub_resource_array = (array)static::get_pub_resources();
     }
 
     /**
@@ -60,11 +54,9 @@ class ClipitSite extends UBSite {
         static::set_files($this->file_array);
         static::set_videos($this->video_array);
         static::set_storyboards($this->storyboard_array);
-        static::set_resources($this->resource_array);
         static::set_pub_files($this->pub_file_array);
         static::set_pub_videos($this->pub_video_array);
         static::set_pub_storyboards($this->pub_storyboard_array);
-        static::set_pub_resources($this->pub_resource_array);
         return $site_id;
     }
 
@@ -131,27 +123,6 @@ class ClipitSite extends UBSite {
     static function get_storyboards() {
         $id = static::get_site_id();
         return UBCollection::get_items($id, static::REL_SITE_STORYBOARD);
-    }
-
-    // SITE RESOURCES
-    static function add_resources($resource_array) {
-        $id = static::get_site_id();
-        return UBCollection::add_items($id, $resource_array, static::REL_SITE_RESOURCE);
-    }
-
-    static function set_resources($resource_array) {
-        $id = static::get_site_id();
-        return UBCollection::set_items($id, $resource_array, static::REL_SITE_RESOURCE);
-    }
-
-    static function remove_resources($resource_array) {
-        $id = static::get_site_id();
-        return UBCollection::remove_items($id, $resource_array, static::REL_SITE_RESOURCE);
-    }
-
-    static function get_resources() {
-        $id = static::get_site_id();
-        return UBCollection::get_items($id, static::REL_SITE_RESOURCE);
     }
 
     // PUBLIC SCOPE //
@@ -228,30 +199,6 @@ class ClipitSite extends UBSite {
         return UBCollection::get_items($id, static::REL_SITE_PUB_STORYBOARD);
     }
 
-    // PUBLIC RESOURCES
-    static function add_pub_resources($resource_array) {
-        $id = static::get_site_id();
-        UBCollection::add_items($id, $resource_array, static::REL_SITE_PUB_RESOURCE);
-        return static::update_global_resources();
-    }
-
-    static function set_pub_resources($resource_array) {
-        $id = static::get_site_id();
-        UBCollection::set_items($id, $resource_array, static::REL_SITE_PUB_RESOURCE);
-        return static::update_global_resources();
-    }
-
-    static function remove_pub_resources($resource_array) {
-        $id = static::get_site_id();
-        UBCollection::remove_items($id, $resource_array, static::REL_SITE_PUB_RESOURCE);
-        return static::update_global_resources();
-    }
-
-    static function get_pub_resources() {
-        $id = static::get_site_id();
-        return UBCollection::get_items($id, static::REL_SITE_PUB_RESOURCE);
-    }
-
     // ClipIt Global (to be called from SITE)
 
     static function global_site_call($data, $type = "GET"){
@@ -276,7 +223,13 @@ class ClipitSite extends UBSite {
             'http'=> array(
                 "method" => $type));
         $context = stream_context_create($params);
-        return file_get_contents($clipit_global_url.'?'.http_build_query($data), false, $context);
+        $json_response = file_get_contents($clipit_global_url.'?'.http_build_query($data), false, $context);
+        $response = json_decode($json_response);
+        if($response->status != 0){
+            return null;
+        } else{
+            return $response->result;
+        }
     }
 
     static function publish_to_global(){
@@ -292,24 +245,61 @@ class ClipitSite extends UBSite {
     }
 
     static function update_global_resources(){
-        $data = array("method" => "clipit.remote_resource.delete_from_site");
+        // Get current remote resources for this site and current local public resources
+        $data = array("method" => "clipit.remote_resource.get_from_site");
         $data += array("remote_site" => elgg_get_site_url());
-        static::global_site_call($data, "POST");
-        $pub_resource_array = array();
-        $pub_resource_array += ClipitVideo::get_by_id(static::get_pub_videos());
-        $pub_resource_array += ClipitStoryboard::get_by_id(static::get_pub_storyboards());
-        $pub_resource_array += ClipitFile::get_by_id(static::get_pub_files());
-        $pub_resource_array += ClipitResource::get_by_id(static::get_pub_resources());
-        foreach($pub_resource_array as $resource_object) {
+        $data += array("remote_ids_only" => true);
+        $remote_resources = static::global_site_call($data, "GET");
+        $pub_storyboards = static::get_pub_storyboards();
+        $pub_videos = static::get_pub_videos();
+        $pub_files = static::get_pub_files();
+        // Figure out what to add
+        $add_array = array();
+        foreach($pub_storyboards as $pub_storyboard_id){
+            if(array_search($pub_storyboard_id, $remote_resources) === false){
+                $add_array = array_merge($add_array, ClipitStoryboard::get_by_id(array($pub_storyboard_id)));
+            }
+        }
+        foreach($pub_videos as $pub_video_id){
+            if(array_search($pub_video_id, $remote_resources) === false){
+                $add_array = array_merge($add_array, ClipitVideo::get_by_id(array($pub_video_id)));
+            }
+        }
+        foreach($pub_files as $pub_file_id){
+            if(array_search($pub_file_id, $remote_resources) === false){
+                $add_array = array_merge($add_array, ClipitFile::get_by_id(array($pub_file_id)));
+            }
+        }
+        foreach($add_array as $object) {
+            $tag_name_array = array();
+            $tag_array = ClipitTag::get_by_id($object->tag_array);
+            foreach($tag_array as $tag){
+                $tag_name_array[] = $tag->name;
+            }
             $data = array("method" => "clipit.remote_resource.create");
             $data += array("prop_value_array[remote_site]" => elgg_get_site_url());
-            $data += array("prop_value_array[remote_id]" => $resource_object->id);
-            $data += array("prop_value_array[remote_type]" => $resource_object::SUBTYPE);
-            $data += array("prop_value_array[name]" => $resource_object->name);
-            $data += array("prop_value_array[description]" => $resource_object->description);
-            $data += array("prop_value_array[url]" => $resource_object->url);
+            $data += array("prop_value_array[remote_id]" => $object->id);
+            $data += array("prop_value_array[remote_type]" => $object::SUBTYPE);
+            $data += array("prop_value_array[name]" => $object->name);
+            $data += array("prop_value_array[description]" => $object->description);
+            $data += array("prop_value_array[url]" => $object->url);
+            $data += array("prop_value_array[tag_array]" => base64_encode(json_encode($tag_name_array)));
             static::global_site_call($data, "POST");
         }
+        // Figure out what to remove
+        $remove_array = array();
+        $all_pub_resources = array_merge($pub_storyboards, $pub_videos, $pub_files);
+        foreach($remote_resources as $remote_resource_id){
+            if(array_search($remote_resource_id, $all_pub_resources) === false){
+                $remove_array[] = $remote_resource_id;
+            }
+        }
+        $data = array("method" => "clipit.remote_resource.delete_by_remote_id");
+        $data += array("remote_site" => elgg_get_site_url());
+        foreach($remove_array as $remove_id){
+            $data += array("remote_id_array[]" => $remove_id);
+        }
+        static::global_site_call($data, "POST");
         return true;
     }
 }
