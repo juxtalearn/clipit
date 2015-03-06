@@ -103,7 +103,7 @@ if($question){
                         'value' => $question->description,
                         'class' => 'form-control '.($question ? 'mceEditor':''),
                         'onfocus'   => '$(this).addClass(\'mceEditor\');
-                                        tinymce_setup();
+                                        clipit.tinymce();
                                         tinymce.execCommand(\'mceFocus\',false,this.id);',
                         'rows'  => 1,
                     ));

@@ -24,9 +24,9 @@ if ($entity->avatar_file) {
     ));
 }
 
-$form_params = array('enctype' => 'multipart/form-data');
+$form_params = array('enctype' => 'multipart/form-data', 'data-validate'=> "true");
 ?>
-<div class="image-block">
+<div class="image-block text-center">
     <?php echo elgg_view('output/img', array(
             'src' => get_avatar($entity),
             'alt' => elgg_echo('avatar'),

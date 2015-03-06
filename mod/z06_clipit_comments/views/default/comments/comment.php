@@ -11,10 +11,10 @@
  * @package         ClipIt
  */
 $comment = elgg_extract('entity', $vars);
+$user = elgg_extract('user', $vars);
 $target_id = elgg_extract('target_id', $vars);
 $activity_id = elgg_extract('activity_id', $vars);
 $owner_user = array_pop(ClipitUser::get_by_id(array($comment->owner_id)));
-$user_loggedin = array_pop(ClipitUser::get_by_id(array(elgg_get_logged_in_user_guid())));;
 $files_id = $comment->get_files($comment->id);
 $group = "";
 if($activity_id && $owner_user->role == ClipitUser::ROLE_STUDENT){
@@ -73,7 +73,7 @@ if($activity_id && $owner_user->role == ClipitUser::ROLE_STUDENT){
         </div>
         <?php endif; ?>
     <?php if(!$vars['reply']): ?>
-    <div style="margin-top: 10px;text-align: right">
+    <div class="margin-top-10 text-right">
         <button id="<?php echo $comment->id; ?>" class="reply-to btn btn-default btn-sm reply-button">
             <i class="fa fa-reply"></i> <?php echo elgg_echo('reply');?>
         </button>
@@ -82,7 +82,7 @@ if($activity_id && $owner_user->role == ClipitUser::ROLE_STUDENT){
     <div class="form-block message" id="form-<?php echo $comment->id; ?>">
         <div class="image-block">
             <?php echo elgg_view('output/img', array(
-                'src' => get_avatar($user_loggedin, 'small'),
+                'src' => get_avatar($user, 'small'),
                 'class' => 'avatar-small'
             ));?>
         </div>

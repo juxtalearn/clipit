@@ -167,17 +167,23 @@ $(function(){
 });
 </script>
 <?php endif;?>
-<?php if(!$finished && $quiz->max_time > 0):?>
-<div class="bg-info pull-right">
-    <i class="fa fa-clock-o pull-left" style="font-size: 56px;"></i>
-    <div class="content-block">
-        <h4 class="margin-0"><?php echo elgg_echo('quiz:time:to_do');?></h4>
-        <h3 class="text-muted margin-0 margin-top-10">
-            <span class="countdown"><i class="fa fa-spinner fa-spin blue"></i></span>
-        </h3>
-        <small><?php echo elgg_echo('quiz:time:finish');?> <?php echo $date;?></small>
+<?php
+    if(!$finished_task && $quiz->max_time > 0):
+        $text_time = '<i class="fa fa-spinner fa-spin blue"></i>';
+        if($finished){
+            $text_time = elgg_echo('closed');
+        }
+?>
+    <div class="bg-info pull-right">
+        <i class="fa fa-clock-o pull-left" style="font-size: 56px;"></i>
+        <div class="content-block">
+            <h4 class="margin-0"><?php echo elgg_echo('quiz:time:to_do');?></h4>
+            <h3 class="text-muted margin-0 margin-top-10">
+                <span class="countdown"><?php echo $text_time;?></span>
+            </h3>
+            <small><?php echo elgg_echo('quiz:time:finish');?> <?php echo $date;?></small>
+        </div>
     </div>
-</div>
 <?php endif;?>
 
 <?php if(!$vars['admin']):?>

@@ -22,14 +22,14 @@ $spanish = array(
     'teacher:tools' => 'Autoría de Temas Clave y Tests',
     'profile:stats' => 'Learning Analytics',
     'timeline:none' => 'No se ha encontrado',
-    'timeline:public' => 'Crónologia pública',
+    'timeline:public' => 'Cronología pública',
     // Settings
     'profile:edit' => 'Ver perfil',
     'profile:settings:password' => 'Cambiar contraseña',
     'profile:settings:change' => 'Editar configuración',
     'profile:settings:edit_profile' => 'Editar perfil',
     'profile:settings:edit_avatar' => 'Editar imagen de perfil',
-    'profile:settings:edit' => 'Tu cofiguración',
+    'profile:settings:edit' => 'Configuración de la cuenta',
 );
 
 add_translation('es', $spanish);

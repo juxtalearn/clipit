@@ -13,16 +13,14 @@
 $group = elgg_extract('entity', $vars);
 $activity = array_pop(ClipitActivity::get_by_id(array($group->activity)));
 $tags = ClipitTrickyTopic::get_tags($activity->tricky_topic);
-$group_tags = $group->tag_array;
+$tags = ClipitTag::get_by_id($tags, 0, 0, 'name');
+$group_tags = ClipitTag::get_by_id($group->tag_array, 0, 0, 'name');
 ?>
 <style>
-    .btn-border-blue.selected{
-        background: #C5C5C5 !important;
-        color: #fff;
-        border: 0;
-    }
-    .assign-sb-group{
-        margin: 5px;
+    .selected{
+        /*background: #C5C5C5 !important;*/
+        color: #999;
+        /*border: 0;*/
     }
 </style>
 <script>
@@ -47,34 +45,33 @@ echo elgg_view("input/hidden", array(
     'value' => $group->id,
 ));
 ?>
-<div class="tags-list">
-    <h4>Selected</h4>
-    <div class="assigned-list" style="min-height: 50px;">
+<div class="row tags-list">
+    <div class="col-md-6">
+        <h3 class="title-block margin-top-0"><?php echo elgg_echo('unselected');?></h3>
+        <ul class="not-assigned-list" style="min-height: 50px;">
         <?php
-        foreach($group_tags as $tag_id):
-            $tag = array_pop(ClipitTag::get_by_id(array($tag_id)));
-            ?>
-            <a class="assign-sb-group btn btn-border-blue selected" data-tag="<?php echo $tag->id;?>">
-                <?php echo $tag->name;?>
-                <?php echo elgg_view('input/hidden', array(
-                    'name' => 'tag[]',
-                    'value' => $tag->id
-                )); ?>
-            </a>
-        <?php endforeach;?>
-    </div>
-    <hr>
-    <h4>Not Selected</h4>
-    <div class="not-assigned-list" style="min-height: 50px;">
-        <?php
-        foreach($tags as $tag_id):
-            if(!in_array($tag_id, $group_tags)):
-            $tag = array_pop(ClipitTag::get_by_id(array($tag_id)));
-        ?>
-            <a class="assign-sb-group btn btn-border-blue" data-tag="<?php echo $tag->id;?>">
-                <?php echo $tag->name;?>
-            </a>
+        foreach($tags as $tag):
+            if(!in_array($tag->id, $group_tags)):
+                ?>
+                <li class="assign-sb-group list-item-5 blue cursor-pointer" data-tag="<?php echo $tag->id;?>">
+                    <?php echo $tag->name;?>
+                </li>
             <?php endif;?>
         <?php endforeach;?>
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <h3 class="title-block margin-top-0"><?php echo elgg_echo('selected');?></h3>
+        <ul class="assigned-list" style="min-height: 50px;">
+            <?php foreach($group_tags as $tag):?>
+                <li class="assign-sb-group list-item-5 selected blue" data-tag="<?php echo $tag->id;?>">
+                    <?php echo $tag->name;?>
+                    <?php echo elgg_view('input/hidden', array(
+                        'name' => 'tag[]',
+                        'value' => $tag->id
+                    )); ?>
+                </li>
+            <?php endforeach;?>
+        </ul>
     </div>
 </div>

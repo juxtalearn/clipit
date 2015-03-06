@@ -67,7 +67,7 @@ $id = uniqid();
                 'class' => 'form-control '.($entity->description ? 'mceEditor' : ''),
                 'value' => $entity->description,
                 'onclick' => $entity->description ? false : '$(this).addClass(\'mceEditor\');
-                                        tinymce_setup();
+                                        clipit.tinymce();
                                         tinymce.execCommand(\'mceFocus\',false,this.id);',
                 'rows'  => 1,
             ));

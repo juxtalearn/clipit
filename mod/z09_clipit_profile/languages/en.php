@@ -28,7 +28,7 @@ $english = array(
     'profile:settings:change' => 'Change your settings',
     'profile:settings:edit_profile' => 'Edit profile',
     'profile:settings:edit_avatar' => 'Edit avatar',
-    'profile:settings:edit' => 'Your settings',
+    'profile:settings:edit' => 'Settings',
 
 );
 

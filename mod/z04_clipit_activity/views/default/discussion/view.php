@@ -94,6 +94,7 @@ $auto_id = 1;
 foreach(array_pop(ClipitPost::get_by_destination(array($message->id))) as $reply_msg){
     echo elgg_view("discussion/reply",
             array(
+                'user_id' => $user_loggedin_id,
                 'entity' => $reply_msg,
                 'auto_id' => $auto_id,
                 'activity_id' => $vars['activity_id'],

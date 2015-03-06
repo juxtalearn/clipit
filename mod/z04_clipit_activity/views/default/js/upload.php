@@ -15,7 +15,7 @@ $(function () {
     'use strict';
     $.blueimp.fileupload.prototype._renderPreviews = function (data) {
         // exec tinymce
-        tinymce_setup();
+        clipit.tinymce();
         data.context.find('.preview').each(function (index, elm) {
             var preview = data.files[index].preview;
                 if(preview){
@@ -37,7 +37,7 @@ $(function () {
     }).on('fileuploadadd', function (e, data) {
         $('#add-file').modal('show');
         // exec tinymce
-        tinymce_setup();
+        clipit.tinymce();
     }).on('fileuploadstop', function (e, data) {
         $("#add-file .modal-body").html('<i class="fa fa-spinner fa-spin" style="font-size: 40px;color: #bae6f6"></i>');
         $("#add-file .modal-footer").html("");

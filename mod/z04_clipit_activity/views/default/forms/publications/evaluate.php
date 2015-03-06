@@ -123,7 +123,7 @@ if($rating){
                     'style' => $rating?'':'display:none;',
                     'placeholder' => elgg_echo('publications:question:sb'),
                     'onclick'   => !$rating ? '$(this).addClass(\'mceEditor\');
-                                    tinymce_setup();
+                                    clipit.tinymce();
                                     tinymce.execCommand(\'mceFocus\',false,this.id);': '',
                     'value' => $rating_tag[$tag->id]->description,
                     'rows'  => 1,

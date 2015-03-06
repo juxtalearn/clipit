@@ -10,9 +10,7 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$entities = elgg_extract('entities', $vars);
-$entities = get_input("entities");
-$activities = ClipitActivity::get_by_id($entities);
+$activities = ClipitActivity::get_by_id(ClipitUser::get_activities(elgg_get_logged_in_user_guid()));
 ?>
 <script>
 <?php

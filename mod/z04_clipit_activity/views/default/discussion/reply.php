@@ -11,17 +11,20 @@
  * @package         ClipIt
  */
 $message = elgg_extract('entity', $vars);
+$user_id = elgg_extract('user_id', $vars);
 $auto_id = elgg_extract('auto_id', $vars);
-$user_loggedin_id = elgg_get_logged_in_user_guid();
+$activity_id = elgg_extract('activity_id', $vars);
 $user_reply = array_pop(ClipitUser::get_by_id(array($message->owner_id)));
 $files_id = $message->get_files($message->id);
 // activity discussion, get group data
-if($activity_id = $vars['activity_id']){
-    $group_id = ClipitGroup::get_from_user_activity($user_reply->id, $activity_id);
+$group = "";
+if($activity_id && $user_reply->role == ClipitUser::ROLE_STUDENT){
+    $group_id = ClipitGroup::get_from_user_activity($user_reply->owner_id, $activity_id);
+    $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
 }
 // set read status
-if($message->owner_id != $user_loggedin_id){
-    ClipitPost::set_read_status($message->id, true, array($user_loggedin_id));
+if($message->owner_id != $user_id){
+    ClipitPost::set_read_status($message->id, true, array($user_id));
 }
 ?>
 <a name="reply_<?php echo $message->id; ?>"></a>
@@ -44,7 +47,7 @@ if($message->owner_id != $user_loggedin_id){
                 <?php echo elgg_view('page/elements/user_summary', array('user' => $user_reply)); ?>
             </strong>
             <small class="show">
-                <?php if($vars['show_group'] && $group = array_pop(ClipitGroup::get_by_id(array($group_id)))):?>
+                <?php if($vars['show_group'] && $group):?>
                     <?php echo elgg_view("group/preview", array('entity' => $group, 'class' => 'text-truncate inline'));?>
                 <?php endif; ?>
 

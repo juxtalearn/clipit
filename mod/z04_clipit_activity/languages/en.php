@@ -11,6 +11,8 @@
  * @package         ClipIt
  */
 $english = array(
+    'selected' => 'Selected',
+    'unselected' => 'Not selected',
     'review' => 'Review',
     'add:more' => 'Add more',
     'check:all_none'=> 'Select all/none',
@@ -378,6 +380,7 @@ $english = array(
     'calendar:month_names_short'=> json_encode(array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")),
     'calendar:day_names'=> json_encode(array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday")),
     'calendar:day_names_short'=> json_encode(array("Sun","Mon","Tue","Wed","Thu","Fri","Sat")),
+    'calendar:day_names_min'=> json_encode(array("Su","Mo","Tu","We","Th","Fr","Sa")),
     'calendar:month' => 'Mes',
     'calendar:day' => 'Día',
     'calendar:week' => 'Semana',

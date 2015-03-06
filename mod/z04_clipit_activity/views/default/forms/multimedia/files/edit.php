@@ -13,7 +13,7 @@
 $entity = elgg_extract('entity', $vars);
 
 // Load tinyMCE in textarea
-$body = "<script>$(function(){tinymce_setup();});</script>";
+$body = "<script>$(function(){clipit.tinymce();});</script>";
 
 $body .= elgg_view("input/hidden", array(
     'name' => 'entity-id',

@@ -80,7 +80,7 @@ $language_index = ClipitPerformanceItem::get_language_index($user_language);
 <script>
     $(function(){
         // Load tinyMCE in textarea
-        tinymce_setup();
+        clipit.tinymce();
         $(".chosen-select").chosen({disable_search_threshold: 1});
         $(".chosen-select-items").chosen();
 

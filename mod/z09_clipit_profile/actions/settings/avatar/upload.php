@@ -20,6 +20,6 @@ $new_file_id = ClipitFile::create(array(
 if($new_file_id){
     ClipitUser::set_avatar($user_id, $new_file_id);
 } else {
-    register_error(elgg_echo("avatar:cantupload"));
+    register_error(elgg_echo("avatar:upload:fail"));
 }
-system_message(elgg_echo('avatar:uploaded'));
+system_message(elgg_echo('avatar:upload:success'));

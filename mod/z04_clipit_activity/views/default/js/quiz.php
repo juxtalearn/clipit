@@ -11,14 +11,13 @@
  * @package         ClipIt
  */
 ?>
-<!--<script>-->
 $.fn.quiz = function (options) {
     var defaults = {};
     var opt =  $.extend({}, defaults, options),
         that = $(this),
         $quiz = $(this),
         $question = that.find('.question');
-        $questions = that.find('.questions');
+    $questions = that.find('.questions');
 
     function Question(object){
         var self = this;
@@ -71,26 +70,26 @@ $.fn.quiz = function (options) {
                     }
                 } else {
                     elgg.getJSON('ajax/view/questions/examples', {
-                    data: {
-                        'stumbling_block': stumbling_block
-                    },
-                    success: function (data) {
-                        if(data.length > 0){
-                            table.fadeIn();
-                        }
-                        $.each(data, function (i, item) {
-                            if (table.find('tr[data-example=' + item.example + ']').length == 0) {
-                                table.find('tbody').append(
-                                    $('<tr/>')
-                                        .attr({
-                                            'data-example': item.example,
-                                            'data-stumbling_block': stumbling_block
-                                        })
-                                        .append('<td style="padding-top: 10px;" colspan="2">' + item.content + '</td>')
-                                ).show();
+                        data: {
+                            'stumbling_block': stumbling_block
+                        },
+                        success: function (data) {
+                            if(data.length > 0){
+                                table.fadeIn();
                             }
-                        });
-                    }
+                            $.each(data, function (i, item) {
+                                if (table.find('tr[data-example=' + item.example + ']').length == 0) {
+                                    table.find('tbody').append(
+                                        $('<tr/>')
+                                            .attr({
+                                                'data-example': item.example,
+                                                'data-stumbling_block': stumbling_block
+                                            })
+                                            .append('<td style="padding-top: 10px;" colspan="2">' + item.content + '</td>')
+                                    ).show();
+                                }
+                            });
+                        }
                     });
                 }
             });
@@ -212,9 +211,9 @@ $.fn.quiz = function (options) {
     // Select Tricky Topic
     var previous_value = '';
     $quiz.find(".select-tricky_topic").focus(function() {
-<!--    $quiz.on("focus", ".select-tricky_topic", function(e){-->
-         previous_value = $(this).val();
-        }).change(function() {
+        <!--    $quiz.on("focus", ".select-tricky_topic", function(e){-->
+        previous_value = $(this).val();
+    }).change(function() {
         var tricky_topic = $quiz.find(".select-tricky_topic option:selected").val();
         $quiz.find(".add-question").hide();
         if(tricky_topic == ''){
@@ -273,7 +272,7 @@ $.fn.quiz = function (options) {
     });
     // Question select from tag
     $quiz.on("click", ".from-tags", function(){
-<!--    that.on("click", ".from-tags", function(){-->
+        <!--    that.on("click", ".from-tags", function(){-->
         var $that = $(this);
         $quiz.find(".dynamic-table").toggle();
         if($quiz.find("table.datatable").length > 0){
@@ -308,7 +307,7 @@ $.fn.quiz = function (options) {
                         searchText: '',
                         perPageText: '<?php echo elgg_echo('show');?>:',
                         paginationPrev: '<?php echo elgg_echo('prev');?>',
-                        paginationNext: '<?php echo elgg_echo('next');?>',
+                        paginationNext: elgg.echo('next'),
                         recordCountText: '<?php echo elgg_echo('showing');?>',
                         recordCountPageBoundTemplate: '{pageLowerBound} <?php echo elgg_echo('to');?> {pageUpperBound} <?php echo elgg_echo('of');?>',
                         recordCountPageUnboundedTemplate: '{recordsShown} <?php echo elgg_echo('of');?>',

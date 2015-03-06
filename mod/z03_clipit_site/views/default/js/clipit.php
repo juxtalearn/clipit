@@ -24,84 +24,100 @@ clipit.init = function() {
         max: jQuery.validator.format(elgg.echo('validation:max')),
         min: jQuery.validator.format(elgg.echo('validation:min'))
     });
+    $.datepicker.regional = {
+        monthNames: JSON.parse(elgg.echo('calendar:month_names')),
+        monthNamesShort: JSON.parse(elgg.echo('calendar:month_names_short')),
+        dayNames: JSON.parse(elgg.echo('calendar:day_names')),
+        dayNamesShort: JSON.parse(elgg.echo('calendar:day_names_short')),
+        dayNamesMin: JSON.parse(elgg.echo('calendar:day_names_min')),
+        weekHeader: 'Sm'
+    };
+    $.datepicker.setDefaults($.datepicker.regional);
+
+    // TinyMCE init by default
+    clipit.tinymce();
 };
 elgg.register_hook_handler('init', 'system', clipit.init);
 /**
  * TinyMce default configuration
  */
-function tinymce_setup(specific_id){
-    tinymce.init({
+
+clipit.tinymce = function(id){
+    tinymce.init(clipit.tinymce.init(id));
+};
+clipit.tinymce.init = function(id){
+    return {
         setup : function(ed) {
-        ed.on("init",function() {
-            $(".mce-ico").addClass("fa");
-            // mce icons
-            $(".mce-i-bullist").addClass("fa-list-ul");
-            $(".mce-i-numlist").addClass("fa-list-ol");
-            $(".mce-i-outdent").addClass("fa-outdent");
-            $(".mce-i-indent").addClass("fa-indent");
-            $(".mce-i-underline").addClass("fa-underline");
-            $(".mce-i-italic").addClass("fa-italic");
-            $(".mce-i-bold").addClass("fa-bold");
-        });
-        ed.on('change', function(e) {
-        tinyMCE.triggerSave();
-        });
-    },
-    convert_urls: true,
-    mode : "specific_textareas",
-    formats : {
-        underline : {inline : 'u', exact : true}
-    },
-    editor_selector : /(mceEditor|wysihtml5|"+specific_id+")/,
-    force_br_newlines : true,
-    force_p_newlines : false,
-    plugins: ["mention, autoresize, paste, autolink"],
-    content_css : elgg.config.wwwroot+"mod/z03_clipit_site/vendors/tinymce/content.css",
-    valid_styles : 'text-align',
-    paste_remove_spans: true,
-    verify_html: true,
-    paste_text_sticky : true,
-    paste_retain_style_properties : 'none',
-    inline_styles : false,
-    paste_remove_styles: true,
-    paste_auto_cleanup_on_paste: true,
-    paste_strip_class_attributes: true,
-    paste_remove_styles_if_webkit: true,
-    invalid_elements: 'img,h1,h2',
-    autoresize_min_height: 150,
-    mentions: {
-        delay: 0,
-        source: function (query, process, delimiter) {
-            // Do your ajax call
-            // When using multiple delimiters you can alter the query depending on the delimiter used
-            if (delimiter === '@') {
-                $.getJSON(elgg.config.wwwroot+"ajax/view/messages/search_to?q="+query, function (data) {
-                    //call process to show the result
-                    if(data){
-                        process(data);
-                    }
-                });
+            ed.on("init",function() {
+                $(".mce-ico").addClass("fa");
+                // mce icons
+                $(".mce-i-bullist").addClass("fa-list-ul");
+                $(".mce-i-numlist").addClass("fa-list-ol");
+                $(".mce-i-outdent").addClass("fa-outdent");
+                $(".mce-i-indent").addClass("fa-indent");
+                $(".mce-i-underline").addClass("fa-underline");
+                $(".mce-i-italic").addClass("fa-italic");
+                $(".mce-i-bold").addClass("fa-bold");
+            });
+            ed.on('change', function(e) {
+                tinyMCE.triggerSave();
+            });
+        },
+        convert_urls: true,
+        mode : "specific_textareas",
+        formats : {
+            underline : {inline : 'u', exact : true}
+        },
+        editor_selector : /(mceEditor|wysihtml5|"+id+")/,
+        force_br_newlines : true,
+        force_p_newlines : false,
+        plugins: ["mention, autoresize, paste, autolink"],
+        content_css : elgg.config.wwwroot+"mod/z03_clipit_site/vendors/tinymce/content.css",
+        valid_styles : 'text-align',
+        paste_remove_spans: true,
+        verify_html: true,
+        paste_text_sticky : true,
+        paste_retain_style_properties : 'none',
+        inline_styles : false,
+        paste_remove_styles: true,
+        paste_auto_cleanup_on_paste: true,
+        paste_strip_class_attributes: true,
+        paste_remove_styles_if_webkit: true,
+        invalid_elements: 'img,h1,h2',
+        autoresize_min_height: 150,
+        mentions: {
+            delay: 0,
+            source: function (query, process, delimiter) {
+                // Do your ajax call
+                // When using multiple delimiters you can alter the query depending on the delimiter used
+                if (delimiter === '@') {
+                    $.getJSON(elgg.config.wwwroot+"ajax/view/messages/search_to?q="+query, function (data) {
+                        //call process to show the result
+                        if(data){
+                            process(data);
+                        }
+                    });
+                }
+            },
+            delimiter: '@',
+            queryBy: 'first_name',
+            render: function(item) {
+                var img = "<img class='img' src='" + item.avatar + "' title='" + item.first_name + "' height='25px' width='25px' />";
+                return "<li class='text-truncate'>" + img + "<div class='block'><div class='title'>" + item.first_name + "</div><div class='sub-title'>" + item.username + "</div></div></li>";
+            },
+            renderDropdown: function() {
+                //add twitter bootstrap dropdown-menu class
+                return '<ul class="rte-autocomplete dropdown-menu mention-autocomplete"><li class="loading"><i class="fa fa-spinner fa-spin"></i></li></ul>';
+            },
+
+            insert: function(item) {
+                return item.username;
             }
         },
-        delimiter: '@',
-        queryBy: 'first_name',
-        render: function(item) {
-            var img = "<img class='img' src='" + item.avatar + "' title='" + item.first_name + "' height='25px' width='25px' />";
-            return "<li class='text-truncate'>" + img + "<div class='block'><div class='title'>" + item.first_name + "</div><div class='sub-title'>" + item.username + "</div></div></li>";
-        },
-        renderDropdown: function() {
-            //add twitter bootstrap dropdown-menu class
-            return '<ul class="rte-autocomplete dropdown-menu mention-autocomplete"><li class="loading"><i class="fa fa-spinner fa-spin"></i></li></ul>';
-        },
-
-        insert: function(item) {
-            return item.username;
-        }
-    },
-    menubar: false,
-    statusbar: false,
-    toolbar: "bold italic underline | bullist numlist | outdent indent"
-    });
+        menubar: false,
+        statusbar: false,
+        toolbar: "bold italic underline | bullist numlist | outdent indent"
+    };
 }
 
 function get_tinymce_init(){
@@ -408,7 +424,7 @@ $(function(){
         var reply_to_id = $(this).attr("id");
         var form_id = "#form-"+reply_to_id;
         var message = $(this).closest(".message");
-        message.find("textarea").tinymce(get_tinymce_init());
+        message.find("textarea").tinymce(clipit.tinymce.init());
         $(form_id).toggle("fast", function(){
             if($(form_id).is(':visible')){
                 var offset = parseInt($(form_id).offset().top) - 50;
@@ -432,9 +448,6 @@ $(function(){
     });
     if( $(".module-group_activity").length > 0) {
         elgg.get('ajax/view/dashboard/modules/activity_groups_status', {
-            data: {
-                entities: <?php echo json_encode(ClipitUser::get_activities(elgg_get_logged_in_user_guid()));?>
-            },
             success: function (content) {
                 $(".module-group_activity .elgg-body").html(content);
             }
@@ -592,7 +605,6 @@ $(function(){
         });
     });
     ///
-    tinymce_setup();
     /*
      * #int comment reference
      */

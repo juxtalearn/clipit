@@ -226,6 +226,7 @@ if($comments):
     foreach($comments as $comment){
         echo elgg_view("comments/comment",
             array(
+                'user' => $user_logged,
                 'entity' => $comment,
                 'target_id' => $entity->id,
                 'activity_id' => $activity->id

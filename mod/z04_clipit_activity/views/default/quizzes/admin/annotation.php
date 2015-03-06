@@ -23,7 +23,7 @@ $question = elgg_extract('question', $vars);
 <div class="annotate bg-white" style="<?php echo $result->description ? '': 'display:none;';?>padding: 0 20px;">
     <hr class="margin-0 margin-bottom-5">
     <script>
-        tinymce_setup();
+        clipit.tinymce();
     </script>
     <i class="fa fa-user blue"></i> <small><?php echo elgg_echo('quiz:teacher_annotation');?>:</small>
     <?php echo elgg_view("input/plaintext", array(

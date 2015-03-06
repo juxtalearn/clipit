@@ -19,7 +19,7 @@ if($user_to){
     $send_msg_js = elgg_view("messages/search_to", array('user_id' => $user_to->id));
     $input_id = "compose-to-".$user_to->id;
     $textarea_id = "send-".$user_to->id;
-    $body = "<script>tinymce_setup(); $('input#compose-to-".$user_to->id."').send_msg(".$send_msg_js.");</script>";
+    $body = "<script>clipit.tinymce(); $('input#compose-to-".$user_to->id."').send_msg(".$send_msg_js.");</script>";
     $body .= elgg_view("input/hidden", array(
         'name' => 'user-id',
         'value' => $user_to->id,

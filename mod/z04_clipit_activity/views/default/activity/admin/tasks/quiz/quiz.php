@@ -48,7 +48,7 @@ $(function(){
         'input_prefix': '<?php echo $input_prefix;?>'
     });
     <?php if($entity->description):?>
-        tinymce_setup();
+        clipit.tinymce();
     <?php endif;?>
 });
 </script>
@@ -113,14 +113,14 @@ $(function(){
                 'class' => 'form-control '.($entity->description ? 'mceEditor' : ''),
                 'value' => $entity->description,
                 'onfocus' => $entity->description ? false : '$(this).addClass(\'mceEditor\');
-                                tinymce_setup();
+                                clipit.tinymce();
                                 tinymce.execCommand(\'mceFocus\',false,this.id);',
                 'rows'  => 1,
             ));
             ?>
         </div>
     </div>
-    <div class="col-md-4 col-md-offset-1">
+    <div class="col-md-5">
         <div class="form-group">
             <label>
                 <?php echo elgg_view('page/components/tooltip', array('text' => elgg_echo('quiz:view_mode:tooltip')));?>
