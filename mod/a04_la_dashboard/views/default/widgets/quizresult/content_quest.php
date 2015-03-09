@@ -4,8 +4,10 @@ $quiz = $vars['quiz'];
 $scale = $vars['scale'];
 $group = $vars['group'];
 $spider_colors = $vars['spider_colors'];
+$taskname = $vars['taskname'];
+$widget_id= $vars['widget_id'];
 
-
+echo '<span class="activity_quiz_headline">'.$activity->name .' - '.$taskname.'</span>';
 $quiz_id = $quiz->id;
 $results = array();
 //Als erstes rausfinden welche SBs beteiligt sind sb_id => sb_name
@@ -30,8 +32,7 @@ if ($scale == ClipitActivity::SUBTYPE) {
             foreach ($quiz_results as $sb_id => $value) {
                 $sb = get_entity($sb_id);
                 $sb_name = $sb->name;
-                $value = rand(1, 100);
-                $data[strval($sb_name)] = floatval($value);
+                $data[strval($sb_name)] = intval($value)*100;
             }
         }
         $data = json_encode($data);
@@ -47,15 +48,14 @@ if ($scale == ClipitActivity::SUBTYPE) {
             $quiz_results = ClipitQuiz::get_user_results_by_question($quiz_id, $user_id);
             $user = get_entity($user_id);
             $data = array();
-            foreach (array_keys($min_values) as $blockname) {
-                $data[$blockname] = 0;
-            }
+//            foreach (array_keys($min_values) as $blockname) {
+//                $data[$blockname] = 0;
+//            }
             if (is_not_null($quiz_results) && !empty($quiz_results)) {
                 foreach ($quiz_results as $sb_id => $value) {
                     $sb = get_entity($sb_id);
                     $sb_name = $sb->name;
-                    $value = rand(0, 100);
-                    $data[strval($sb_name)] = floatval($value);
+                    $data[strval($sb_name)] = floatval($value)*100;
                 }
             }
 //                $data = json_encode($data);

@@ -1,6 +1,8 @@
 <?php
 elgg_load_js("dojotoolkit");
 
+
+
 $spider_colors = array("FF0000", "00FF00", "0000FF", "FFFF00", "FF00FF", "00FFFF", "000000",
     "800000", "008000", "000080", "808000", "800080", "008080", "808080",
     "C00000", "00C000", "0000C0", "C0C000", "C000C0", "00C0C0", "C0C0C0",
@@ -88,7 +90,9 @@ HTML;
         $task2 = array_pop($task2_array);
         $task_names[$quiz2->id] = $task2->name;
 
-        error_log("TaskNames: ".print_r($task_names,true));
+
+        echo '<span class="activity_quiz_headline">'.$activity->name .' - '.$task1->name.' / '.$task2->name. ' </span>';
+
         foreach ($sbresults as $key => $sb_name) {
             $min_values[strval($sb_name)] = PHP_INT_MAX;
             $max_values[strval($sb_name)] = 0;
@@ -114,7 +118,7 @@ HTML;
                         foreach ($quiz_results as $sb_id => $value) {
                             $sb = get_entity($sb_id);
                             $sb_name = $sb->name;
-                            $data[$sb_name] = $data[$sb_name] + ($value / $anzahl);
+                            $data[$sb_name] = $data[$sb_name] + (floatval($value) / $anzahl *100);
                         }
                         if ($data[$sb_name] > $max_values[$group->name]) {
                             $max_values[strval($sb_name)] = floatval($data[$sb_name]);
@@ -145,7 +149,7 @@ HTML;
                         foreach ($quiz_results as $sb_id => $value) {
                             $sb = get_entity($sb_id);
                             $sb_name = $sb->name;
-                            $data[$sb_name] = $data[$sb_name] + ($value / $anzahl);
+                            $data[$sb_name] = $data[$sb_name] + (floatval($value) / $anzahl *100);
                         }
                         if ($data[$sb_name] > $max_values[$group->name]) {
                             $max_values[strval($sb_name)] = floatval($data[$sb_name]);

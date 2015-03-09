@@ -61,7 +61,11 @@ if ($to_be_configured) {
         </div>
 HTML;
 } else {
-    $additional_vars = array('activity' => $activity, 'quiz' => $quiz, 'scale' => $scale, 'group' => $group, 'spider_colors'=>$spider_colors);
+
+    $task_id = ClipitQuiz::get_task($quiz_id);
+    $task = array_pop(ClipitTask::get_by_id(array($task_id)));
+
+    $additional_vars = array('activity' => $activity, 'quiz' => $quiz, 'scale' => $scale, 'group' => $group, 'spider_colors'=>$spider_colors, 'taskname'=>$task->name, 'widget_id'=>$widget_id);
     switch ($question_or_stumblingblock) {
         case ClipitTag::SUBTYPE:
             echo elgg_view('widgets/quizresult/content_sb', array_merge($vars, $additional_vars));

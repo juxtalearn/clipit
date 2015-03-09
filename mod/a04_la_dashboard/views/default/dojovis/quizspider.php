@@ -29,6 +29,10 @@ require(["dojox/charting/Chart2D", "dojox/charting/themes/MiamiNice", "dojox/cha
     "dojox/charting/action2d/Tooltip", "dojo/ready"],
                 function (Chart, Theme, Default, Default, Spider, Base, SelectableLegend, Tooltip, ready) {
                     ready(function () {
+//                        if (legend_<?php //echo $chart_identifier?>// != undefined) {
+//                            legend_<?php //echo $chart_identifier?>//.destroyRecursive(true);
+//                        }
+
                         var chart = new dojox.charting.Chart("<?php echo $chart_identifier?>");
 
                         chart.setTheme(Theme);
@@ -63,7 +67,8 @@ require(["dojox/charting/Chart2D", "dojox/charting/themes/MiamiNice", "dojox/cha
                         }
                         ?>
 chart.render();
-new SelectableLegend({chart: chart,horizontal:false,style:"width: 300px; height: 100px; margin: 0px auto 0px auto; overflow:scroll;"}, 'legendNode-<?php echo $chart_identifier?>');
+
+var legend =  new SelectableLegend({chart: chart,horizontal:false,style:"width: 300px; height: 100px; margin: 0px auto 0px auto; overflow:scroll;"}, 'legendNode-<?php echo $chart_identifier?>');
 // new Tooltip({chart:chart}, 'default');
 });
 }
