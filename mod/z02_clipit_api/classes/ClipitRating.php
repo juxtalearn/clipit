@@ -147,9 +147,8 @@ class ClipitRating extends UBItem {
         ));
         if(empty($rating)){
             return null;
-        } else{
-            $rating_id = array_pop($rating)->guid;
         }
+        $rating_id = array_pop($rating)->guid;
         return new static($rating_id);
     }
 
@@ -167,11 +166,10 @@ class ClipitRating extends UBItem {
                 $count++;
             }
         }
-        if(!empty($count)) {
-            return $average_rating = $average_rating / $count;
-        } else {
+        if(empty($count)) {
             return null;
         }
+        return $average_rating = $average_rating / $count;
     }
 
     static function add_tag_ratings($rating_id, $tag_rating_array) {
