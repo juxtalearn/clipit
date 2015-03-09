@@ -145,8 +145,7 @@ class ClipitRating extends UBItem {
             'metadata_values' => array($target_id),
             'owner_guid' => $user_id
         ));
-        // Should only return one entity
-        if(empty($rating) || count($rating) != 1){
+        if(empty($rating)){
             return null;
         } else{
             $rating_id = array_pop($rating)->guid;
