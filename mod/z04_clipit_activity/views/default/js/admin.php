@@ -11,40 +11,38 @@
  * @package         ClipIt
  */
 ?>
-<!--$(document).on("click", ".submit-add-teachers", function(){-->
-<!--    var form = $(this).closest("form");-->
-<!--    $(this).button('loading').data("loading-text", "--><?php //echo elgg_echo('loading');?><!--...").button('loading');-->
-<!--    elgg.action('activity/admin/teachers', {-->
-<!--        data: form.serialize(),-->
-<!--        success: function(){-->
-<!--            location.reload();-->
-<!--        }-->
-<!--    });-->
-<!--});-->
+//<script>
+elgg.provide('clipit.admin');
 
-$(document).on("click", ".submit-add-teachers", function(){
+clipit.admin.init = function() {
+    $(document).on("click", ".submit-add-teachers", clipit.admin.addTeachers);
+    $(document).on("click", ".submit-create-teachers", clipit.admin.createTeachers);
+    $("#get-users").click(clipit.admin.getUsers);
+};
+elgg.register_hook_handler('init', 'system', clipit.admin.init);
+
+clipit.admin.addTeachers = function(){
     var form = $(this).closest("form");
     form.append($("<input/>",{"type": "hidden", "name": "act"}).val("to_activity"));
-    $(this).button('loading').data("loading-text", "<?php echo elgg_echo('loading');?>...").button('loading');
+    $(this).button('loading').data("loading-text", elgg.echo('loading')+ "...").button('loading');
     elgg.action('activity/admin/users', {
         data: form.serialize(),
         success: function(){
             location.reload();
         }
     });
-});
-
-$(document).on("click", ".submit-create-teachers", function(){
+};
+clipit.admin.createTeachers = function() {
     var form = $(this).closest("form");
-    $(this).button('loading').data("loading-text", "<?php echo elgg_echo('loading');?>...").button('loading');
+    $(this).button('loading').data("loading-text", elgg.echo('loading')+ "...").button('loading');
     elgg.action('activity/admin/users', {
         data: form.serialize(),
         success: function(){
             location.reload();
         }
     });
-});
-$("#get-users").click(function(){
+};
+clipit.admin.getUsers = function(){
     var data_role = $(this).data("role"),
         data_activity = $(this).data("activity"),
         container = $("#site ul") || $("#site select");
@@ -65,18 +63,18 @@ $("#get-users").click(function(){
                 switch(data_role){
                     case "student":
                         var content = $("<li/>",{
-                                    "data-user": user.id,
-                                    "style": "padding: 2px;",
-                                    "class": "cursor-pointer list-item-5 searchable",
-                                    })
-                                    .html(user.avatar + " " + user.name);
+                            "data-user": user.id,
+                            "style": "padding: 2px;",
+                            "class": "cursor-pointer list-item-5 searchable",
+                        })
+                            .html(user.avatar + " " + user.name);
                         break;
                     case "teacher":
                         var content = $("<option/>",{
-                                    "value": user.id,
-                                    "class": "searchable"
-                                    })
-                                    .text(user.name);
+                            "value": user.id,
+                            "class": "searchable"
+                        })
+                            .text(user.name);
                         break;
                 }
                 container.append(content);
@@ -85,4 +83,4 @@ $("#get-users").click(function(){
             $('input#search-users').quicksearch(container.find(".searchable"));
         }
     });
-});
+};

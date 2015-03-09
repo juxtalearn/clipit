@@ -38,36 +38,36 @@ foreach($messages as $message):
     $message_text = substr($message_text, 0, 50);
     // unread count messages
     $unread_count = ClipitChat::get_conversation_unread($user_id, $message->owner_id);
-?>
-<li role="presentation" class="message-item">
-    <a
-        role="menuitem"
-        tabindex="-1"
-        href="<?php echo elgg_get_site_url(); ?>messages/view/<?php echo $user->login; ?>#reply_<?php echo $message->id; ?>">
+    ?>
+    <li role="presentation" class="message-item">
+        <a
+            role="menuitem"
+            tabindex="-1"
+            href="<?php echo elgg_get_site_url(); ?>messages/view/<?php echo $user->login; ?>#reply_<?php echo $message->id; ?>">
 
-        <?php echo elgg_view('output/img', array(
-            'src' => get_avatar($user, 'small'),
-            'class' => 'user-avatar avatar-small'
-        ));?>
-        <div class="text-truncate" style=" font-size: 13px; text-transform: none; overflow: hidden; letter-spacing: 0;">
-            <?php if($unread_count > 0): ?>
-                <span class="label label-primary pull-right">
+            <?php echo elgg_view('output/img', array(
+                'src' => get_avatar($user, 'small'),
+                'class' => 'user-avatar avatar-small'
+            ));?>
+            <div class="text-truncate" style=" font-size: 13px; text-transform: none; overflow: hidden; letter-spacing: 0;">
+                <?php if($unread_count > 0): ?>
+                    <span class="label label-primary pull-right">
                     <?php echo $unread_count; ?>
                     <?php echo elgg_echo("message:unread");?>
                 </span>
-            <?php endif; ?>
-            <span><?php echo $user->name;?></span>
-            <small class="show"><?php echo elgg_view('output/friendlytime', array('time' => $message->time_created));?></small>
-            <div style="color: #333;" class="text-truncate">
-                <?php if($last_message->owner_id == $user_id): ?>
-                    <small class="fa fa-mail-reply" style="font-size: 85% !important;color: #999;float: none !important;padding: 0;"></small>
                 <?php endif; ?>
-                <?php echo $message_text; ?>
+                <span><?php echo $user->name;?></span>
+                <small class="show"><?php echo elgg_view('output/friendlytime', array('time' => $message->time_created));?></small>
+                <div style="color: #333;" class="text-truncate">
+                    <?php if($last_message->owner_id == $user_id): ?>
+                        <small class="fa fa-mail-reply" style="font-size: 85% !important;color: #999;float: none !important;padding: 0;"></small>
+                    <?php endif; ?>
+                    <?php echo $message_text; ?>
+                </div>
             </div>
-        </div>
-    </a>
-</li>
-<li role="presentation" class="divider"></li>
+        </a>
+    </li>
+    <li role="presentation" class="divider"></li>
 <?php endforeach; ?>
 <li class="message-options">
     <button type="button" class="btn btn-primary btn-compose" data-toggle="modal" data-target="#compose-msg">

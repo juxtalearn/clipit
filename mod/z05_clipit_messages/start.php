@@ -27,10 +27,12 @@ function clipit_messages_init() {
 
     // Ajax views
     elgg_register_ajax_view("messages/search_to");
+    elgg_register_ajax_view("messages/inbox_summary");
     elgg_register_ajax_view('modal/messages/send');
     elgg_register_ajax_view('modal/messages/edit');
     elgg_register_ajax_view('modal/messages/reply/edit');
 
+    elgg_extend_view("js/clipit", "js/message", 300);
     // "Messages" Nav menu top
     elgg_extend_view("navigation/menu/top", "navigation/menu/messages", 300);
 

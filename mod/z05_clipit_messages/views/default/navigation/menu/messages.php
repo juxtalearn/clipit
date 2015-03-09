@@ -14,13 +14,15 @@ $user_id = elgg_get_logged_in_user_guid();
 $unread_count = ClipitChat::get_inbox_unread($user_id);
 ?>
 <li <?php echo elgg_in_context('messages_page') ? 'class="active"': '';?>>
-    <a id="messages" role="button" data-toggle="dropdown" href="javascript:;">
+    <a id="messages" class="inbox-summary" role="button" data-toggle="dropdown" href="javascript:;">
         <?php if($unread_count > 0): ?>
             <span class="badge"><?php echo $unread_count; ?></span>
         <?php endif; ?>
         <i class="fa fa-envelope"></i>
     </a>
     <ul id="menu_messages" class="dropdown-menu" role="menu" aria-labelledby="messages">
-        <?php echo elgg_view('navigation/menu/message_summary'); ?>
+        <li class="loading">
+            <a><i class="fa fa-spinner fa-spin"></i> <?php echo elgg_echo('loading');?></a>
+        </li>
     </ul>
 </li>

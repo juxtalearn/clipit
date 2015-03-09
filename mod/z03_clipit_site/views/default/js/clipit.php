@@ -36,6 +36,22 @@ clipit.init = function() {
 
     // TinyMCE init by default
     clipit.tinymce();
+    // Validation request new password
+    $(".elgg-form-user-requestnewpassword").validate(clipit.requestPassword());
+
+    $("body").on("click", "input[type=submit]", clipit.submitLoading);
+    // discussion reply button
+    $(".reply-to, .close-reply-to").click(clipit.replyTo);
+    // Read more/less shorten plugin
+    $("[data-shorten=true]").shorten();
+    // Form validation
+    $("body").on("click", "form[data-validate=true]", clipit.formValidation);
+    // Remove object confirmation
+    $(".remove-object").click(clipit.removeObject);
+    // Tags from list
+    $('ul#tags').each(clipit.tagList);
+    // Labels from list
+    $('ul#labels').each(clipit.labelList);
 };
 elgg.register_hook_handler('init', 'system', clipit.init);
 /**
@@ -187,46 +203,48 @@ $(function(){
     /**
     * Forgotpassword form validation
     */
-    $(".elgg-form-user-requestnewpassword").validate({
-        errorElement: "span",
-        errorPlacement: function(error, element) {
-        error.appendTo($("label[for="+element.attr('name')+"]"));
-    },
-        onkeyup: false,
-        onblur: false,
-        rules: {
-        email: {
-            remote: {
-                url: elgg.config.wwwroot+"action/user/check",
-                    type: "POST",
-                    data: {
-                    email: function() {
-                        return $( "input[name='email']" ).val();
-                    },
-                    __elgg_token: function() {
-                        return $( "input[name='__elgg_token']" ).val();
-                    },
-                    __elgg_ts: function() {
-                        return $( "input[name='__elgg_ts']" ).val();
+    clipit.requestPassword = function(e) {
+        return {
+            errorElement: "span",
+            errorPlacement: function (error, element) {
+                error.appendTo($("label[for=" + element.attr('name') + "]"));
+            },
+            onkeyup: false,
+            onblur: false,
+            rules: {
+                email: {
+                    remote: {
+                        url: elgg.config.wwwroot + "action/user/check",
+                        type: "POST",
+                        data: {
+                            email: function () {
+                                return $("input[name='email']").val();
+                            },
+                            __elgg_token: function () {
+                                return $("input[name='__elgg_token']").val();
+                            },
+                            __elgg_ts: function () {
+                                return $("input[name='__elgg_ts']").val();
+                            }
+                        }
                     }
                 }
+            },
+            submitHandler: function (form) {
+                if ($(form).valid()) {
+                    $.post("" + $(form).attr('action') + "", $(form).serialize(), function () {
+                        $(form).find("input[name=email]").prop("disabled", true);
+                        $(form).find("input[type=submit]")
+                            .after(
+                            "<p class='text-info'>" +
+                            "<img src='" + elgg.config.wwwroot + "mod/z03_clipit_site/graphics/ok.png'/>" +
+                            " <strong>"+elgg.echo("user:forgotpassword:ok")+"</strong></p>")
+                            .remove();
+                    });
                 }
+            }
         }
-    },
-        submitHandler: function(form) {
-        if ($(form).valid()){
-            $.post( ""+$(form).attr('action')+"", $(form).serialize(), function(){
-                $(form).find("input[name=email]").prop("disabled",true);
-                $(form).find("input[type=submit]")
-                .after(
-                    "<p class='text-info'>" +
-                    "<img src='"+elgg.config.wwwroot+"mod/z03_clipit_site/graphics/ok.png'/>" +
-                    " <strong><?php echo elgg_echo("user:forgotpassword:ok");?></strong></p>")
-                        .remove();
-                });
-        }
-    }
-    });
+    };
     /**
      * Register form validation
      */
@@ -278,29 +296,29 @@ $(function(){
     /**
      * Form general validation
      */
-    $("body").on("click", "form[data-validate=true]", function (e) {
+    clipit.formValidation = function() {
         tinyMCE.triggerSave();
         //$("form[data-validate=true]").each(function(){
         var form_to = $(this);
         $(this).validate({
             errorElement: "span",
-            errorPlacement: function(error, element) {
-                error.appendTo($("label[for='"+element.attr('name')+"']"));
+            errorPlacement: function (error, element) {
+                error.appendTo($("label[for='" + element.attr('name') + "']"));
             },
             //ignore: [], // DEBUG
             ignore: ":hidden:not(.mceEditor)",
             focusInvalid: true,
             onkeyup: false,
             onblur: false,
-            submitHandler: function(form) {
+            submitHandler: function (form) {
                 var button_submit = form_to.find("input[type=submit]");
-                button_submit.data("loading-text", "<?php echo elgg_echo('loading');?>...").button('loading');
+                button_submit.data("loading-text", elgg.echo('loading')+"...").button('loading');
                 if ($(form).valid())
                     form.submit();
                 else
-                    button_submit.data("loading-text", "<?php echo elgg_echo('loading');?>...").button('loading');
+                    button_submit.data("loading-text", elgg.echo('loading')+"...").button('loading');
             }
-        }).focusInvalid = function() {
+        }).focusInvalid = function () {
             // put focus on tinymce on submit validation
             if (this.settings.focusInvalid) {
                 try {
@@ -316,7 +334,7 @@ $(function(){
                 }
             }
         };
-    });
+    };
     /**
      * wysihtml5 editor default options
      */
@@ -326,7 +344,7 @@ $(function(){
     /**
      * Default confirm dialog to remove objects
      */
-    $(".remove-object").click(function(e){
+    clipit.removeObject = function(e){
         e.preventDefault();
         var link = $(this).attr("href");
         var confirmOptions = {
@@ -348,12 +366,12 @@ $(function(){
             }
         };
         bootbox.confirm(confirmOptions);
-    });
+    };
     /**
      * Reply to user
      * check if form exists
      */
-    $(".reply-to, .close-reply-to").click(function(){
+    clipit.replyTo = function(){
         var reply_to_id = $(this).attr("id");
         var form_id = "#form-"+reply_to_id;
         var message = $(this).closest(".message");
@@ -365,20 +383,20 @@ $(function(){
                     scrollTop: offset}, 'slow');
             }
         });
-    });
+    };
     /**
      * Button loading state
      * (input submit only)
      */
-
-    $("body").on("click", "input[type=submit]", function(){
+    clipit.submitLoading = function(e){
         // Check if form is validated
         var form = $(this).closest("form");
         var btn = $(this);
         if(!form.data("validate")){
-            btn.data("loading-text", "<?php echo elgg_echo('loading');?>...").button('loading');
+            btn.data("loading-text", elgg.echo('loading')+"...").button('loading');
         }
-    });
+    };
+
     if( $(".module-group_activity").length > 0) {
         elgg.get('ajax/view/dashboard/modules/activity_groups_status', {
             success: function (content) {
@@ -386,41 +404,6 @@ $(function(){
             }
         });
     }
-    /**
-     * jQuery send_msg function
-     * Autocomplete user info
-     * @param user    set default username value
-     *
-     */
-    $.fn.extend({
-        send_msg: function(username_data){
-            if(!username_data){
-                username_data = [];
-            }
-            $(this).tokenInput(elgg.config.wwwroot+"ajax/view/messages/search_to",
-                {
-                    hintText: "<?php echo elgg_echo("autocomplete:hint");?>",
-                    noResultsText: "<?php echo elgg_echo("autocomplete:noresults");?>",
-                    searchingText: "<?php echo elgg_echo("autocomplete:searching");?>",
-                    zindex: 1052,
-                    searchDelay: 0,
-                    preventDuplicates: true,
-                    animateDropdown: false,
-                    propertyToSearch: "first_name",
-                    prePopulate: username_data,
-                    resultsFormatter: function(item){
-                        var img = "<img class='img' src='" + item.avatar + "' title='" + item.first_name + "' height='25px' width='25px' />";
-                        if(item.icon){
-                            img = "<i class='img fa fa-"+ item.icon +"'></i>";
-                        }
-                        return "<li>" + img + "<div style='display: inline-block; padding-left: 10px;'><div class='title'>" + item.first_name + "</div><div class='sub-title'>" + item.username + "</div></div></li>" },
-                    tokenFormatter: function(item) { return "<li>" + item.first_name + "</li>" }
-                }
-            );
-        }
-    });
-    // default execute send_msg function
-    $("input#compose").send_msg();
 
     /*
      * jQuery Shorten plugin
@@ -438,29 +421,28 @@ $(function(){
                 if(parseInt(container_height) < parseInt(element_height)){
                     return false;
                 }
-                var readmore_link = $("<a href='javascript:;' class='read-more'><?php echo elgg_echo('read_more');?><strong>...</strong></a>");
+                var readmore_link = $("<a href='javascript:;' class='read-more'>"+elgg.echo('read_more')+"<strong>...</strong></a>");
                 element_shorten.append(readmore_link);
                 container.css("max-height",element_height);
                 readmore_link.on("click", function(){
                     if (container.hasClass('full-content')) {
                         container.removeClass('full-content');
                         container.addClass('less-content');
-                        $(this).text("<?php echo elgg_echo('read_more');?>...");
+                        $(this).text(elgg.echo('read_more')+"...");
                     } else {
                         container.addClass('full-content');
-                        $(this).text("<?php echo elgg_echo('read_less');?>");
+                        $(this).text(elgg.echo('read_less'));
                     }
                 });
             });
         }
     })(jQuery);
     ///
-    $("[data-shorten=true]").shorten();
     /**
      * Tag-it for performance items
      *
      */
-    $('ul#tags').each(function(){
+    clipit.tagList = function(e){
         that = $(this);
         $(this).tagit({
             allowSpaces: true,
@@ -476,11 +458,11 @@ $(function(){
                 delay: 0,
                 source: elgg.config.wwwroot+"ajax/view/stumbling_blocks/search"
             },
-            placeholderText: "<?php echo elgg_echo("tags:commas:separated");?>",
+            placeholderText: elgg.echo("tags:commas:separated"),
             singleField: true,
             singleFieldNode: that.closest("form").find("input[name=tags]")
         });
-    });
+    };
     /**
      * Quote reference for discussion posts
      */
@@ -516,7 +498,8 @@ $(function(){
         $(this).children(".fa").toggleClass("fa-minus");
         $('#label_list').toggleClass('text-truncate');
     });
-    $('ul#labels').each(function(){
+
+    clipit.labelList = function(e){
         that = $(this);
         $(this).tagit({
             allowSpaces: true,
@@ -532,11 +515,11 @@ $(function(){
             delay: 0,
                 source: elgg.config.wwwroot+"ajax/view/publications/labels/search"
             },
-            placeholderText: "<?php echo elgg_echo("tags:commas:separated");?>",
+            placeholderText: elgg.echo("tags:commas:separated"),
             singleField: true,
             singleFieldNode: that.closest("form").find("input[name=labels]")
         });
-    });
+    };
     ///
     /*
      * #int comment reference

@@ -27,10 +27,14 @@ $output = array();
 foreach($activity->student_array as $entity_id){
     $evaluation_list = get_filter_evaluations($items, $task->activity, $entity_id);
     $total = (count($evaluation_list["evaluated"]) + count($evaluation_list["no_evaluated"]));
+    $status = ClipitTask::get_completed_status($task->id, $entity_id);
+    $content = '<span class="text-muted margin-right-10 count">'.count($evaluation_list["evaluated"]).'/'.$total.'</span>
+                <span style="width: 14px;" class="inline-block">
+                    '.elgg_view("tasks/icon_entity_status", array("status" => $status)).'
+                </span>';
     $output[] = array(
         'entity'=> $entity_id,
-        'count' => count($evaluation_list["evaluated"]).'/'.$total,
-//        'status' => count($evaluation_list["evaluated"]).'/'.count($task_parent->video_array),
+        'status' => $content,
     );
 }
 echo json_encode($output);

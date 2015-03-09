@@ -578,13 +578,13 @@ function get_filter_evaluations($entities, $activity_id, $user_id = null){
     foreach($entities as $entity_id){
         $object = ClipitSite::lookup($entity_id);
         $entity_class = $object['subtype'];
-        $entity = array_pop($entity_class::get_by_id(array($entity_id)));
-        $rating = ClipitRating::get_user_rating_for_target($user_id, $entity->id);
-        if($group_id != $entity_class::get_group($entity->id)){
+        //$entity = array_pop($entity_class::get_by_id(array($entity_id)));
+        $rating = ClipitRating::get_user_rating_for_target($user_id, $entity_id);
+        if($group_id != $entity_class::get_group($entity_id)){
             if(!$rating){
-                $output["no_evaluated"][] = $entity->id;
+                $output["no_evaluated"][] = $entity_id;
             } else {
-                $output["evaluated"][] = $entity->id;
+                $output["evaluated"][] = $entity_id;
             }
         }
     }

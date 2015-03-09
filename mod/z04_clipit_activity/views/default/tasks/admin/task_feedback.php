@@ -1,5 +1,5 @@
 <?php
- /**
+/**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
  * Creation date:   24/07/14
@@ -22,63 +22,63 @@ foreach($entities as $entity_object) {
 $groups = ClipitGroup::get_by_id($activity->group_array, 0, 0, 'name');
 ?>
 <style>
-.multimedia-preview .img-preview{
-    width: 65px;
-    max-height: 65px;
-}
-.multimedia-preview img {
-    width: 100%;
-}
-.task-status{
-    display: none;
-}
+    .multimedia-preview .img-preview{
+        width: 65px;
+        max-height: 65px;
+    }
+    .multimedia-preview img {
+        width: 100%;
+    }
+    .task-status{
+        display: none;
+    }
 </style>
 <script>
-$(function(){
-    $(document).on("click", "#panel-expand-all",function(){
-        $(".expand").parent(".panel").find(".panel-collapse").collapse('show');
-        $(".user-rating").click();
-    });
-    $(document).on("click", "#panel-collapse-all",function(){
-        $(".expand").parent(".panel").find(".panel-collapse").collapse('hide');
-    });
-    $(document).on("click", ".user-rating",function(){
-        var content = $(this).closest(".panel").find(".panel-body");
-        var us_id = $(this).data("user");
-        if(content.is(':empty')){
-            content.html('<i class="fa fa-spinner fa-spin fa-2x blue"></i>');
-            elgg.get("ajax/view/publications/admin/user_ratings", {
-                data: {
-                    entities_ids: <?php echo json_encode($entities_ids);?>,
-                    user_id: us_id
-                },
-                success: function (data) {
-                    content.html(data);
-                }
-            });
+    $(function(){
+        $(document).on("click", "#panel-expand-all",function(){
+            $(".expand").parent(".panel").find(".panel-collapse").collapse('show');
+            $(".user-rating").click();
+        });
+        $(document).on("click", "#panel-collapse-all",function(){
+            $(".expand").parent(".panel").find(".panel-collapse").collapse('hide');
+        });
+        $(document).on("click", ".user-rating",function(){
+            var content = $(this).closest(".panel").find(".panel-body");
+            var us_id = $(this).data("user");
+            if(content.is(':empty')){
+                content.html('<i class="fa fa-spinner fa-spin fa-2x blue"></i>');
+                elgg.get("ajax/view/publications/admin/user_ratings", {
+                    data: {
+                        entities_ids: <?php echo json_encode($entities_ids);?>,
+                        user_id: us_id
+                    },
+                    success: function (data) {
+                        content.html(data);
+                    }
+                });
+            }
+        });
+        var container = $("#students");
+        elgg.get("ajax/view/tasks/admin/feedback_data", {
+            dataType: "json",
+            data: {
+                type: '<?php echo $entity_type;?>',
+                task: <?php echo $task->id;?>,
+                activity: <?php echo $activity->id;?>,
+            },
+            success: function (output) {
+                $.each(output, function (i, data) {
+                    container.find("[data-entity="+data.entity+"] .status").html(data.status);
+                });
+            }
+        });
+        var hash = window.location.hash.replace('#', '');
+        var collapse = $("[href='#user_"+hash+"']");
+        if(collapse.length > 0){
+            collapse.click();
         }
-    });
-    var container = $("#students");
-    elgg.get("ajax/view/tasks/admin/feedback_data", {
-        dataType: "json",
-        data: {
-            type: '<?php echo $entity_type;?>',
-            task: <?php echo $task->id;?>,
-            activity: <?php echo $activity->id;?>,
-        },
-        success: function (output) {
-            $.each(output, function (i, data) {
-                container.find("[data-entity="+data.entity+"] .count").text(data.count);
-            });
-        }
-    });
-    var hash = window.location.hash.replace('#', '');
-    var collapse = $("[href='#user_"+hash+"']");
-    if(collapse.length > 0){
-        collapse.click();
-    }
 
-});
+    });
 </script>
 <div role="tabpanel">
     <!-- Nav tabs -->
@@ -97,61 +97,60 @@ $(function(){
 <!-- Tab panes -->
 <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="students" style="padding: 10px;">
-    <p>
-        <?php echo elgg_view('output/url', array(
-            'title' => elgg_echo('expand:all'),
-            'text' => elgg_echo('expand:all'),
-            'href' => "javascript:;",
-            'id' => 'panel-expand-all',
-        ));
-        ?>
-        <span class="text-muted">|</span>
-        <?php echo elgg_view('output/url', array(
-            'title' => elgg_echo('collapse:all'),
-            'text' => elgg_echo('collapse:all'),
-            'href' => "javascript:;",
-            'id' => 'panel-collapse-all',
-        ));
-        ?>
-    </p>
-    <?php
+        <p>
+            <?php echo elgg_view('output/url', array(
+                'title' => elgg_echo('expand:all'),
+                'text' => elgg_echo('expand:all'),
+                'href' => "javascript:;",
+                'id' => 'panel-expand-all',
+            ));
+            ?>
+            <span class="text-muted">|</span>
+            <?php echo elgg_view('output/url', array(
+                'title' => elgg_echo('collapse:all'),
+                'text' => elgg_echo('collapse:all'),
+                'href' => "javascript:;",
+                'id' => 'panel-collapse-all',
+            ));
+            ?>
+        </p>
+        <?php
         foreach($groups as $group):
             $users = ClipitUser::get_by_id($group->user_array, 0, 0, 'name');
-    ?>
-    <h3 class="title-block">
-        <?php echo $group->name;?>
-    </h3>
-    <ul class="panel-group" id="accordion_users">
-        <?php
-        foreach($users as $user):
-            $status = ClipitTask::get_completed_status($task->id, $user->id);
-        ?>
-        <li class="panel panel-blue list-item" data-entity="<?php echo $user->id;?>">
-            <a name="<?php echo $user->id;?>"></a>
-            <div class="panel-heading expand" style="padding: 0px;background: none;">
-                <div class="pull-right blue">
-                    <span class="text-muted margin-right-10 count">-/-</span>
-                    <span style="width: 14px;" class="inline-block">
-                        <?php echo elgg_view('tasks/icon_entity_status', array('status' => $status));?>
-                    </span>
-                    <a data-toggle="collapse"
-                       data-parent="#accordion_users"
-                       href="#user_<?php echo $user->id;?>"
-                       class="btn btn-border-blue margin-left-10 btn-xs btn-primary user-rating"
-                       data-user="<?php echo $user->id;?>"
-                        >
-                        <?php echo elgg_echo('view');?>
-                    </a>
-                </div>
-                <?php echo elgg_view("page/elements/user_block", array("entity" => $user)); ?>
-            </div>
-            <div class="clearfix"></div>
-            <div id="user_<?php echo $user->id;?>" class="panel-collapse collapse">
-                <div class="panel-body"></div>
-            </div>
-        </li>
-        <?php endforeach;?>
-    </ul>
+            ?>
+            <h3 class="title-block">
+                <?php echo $group->name;?>
+            </h3>
+            <ul class="panel-group" id="accordion_users">
+                <?php
+                foreach($users as $user):
+                    //$status = ClipitTask::get_completed_status($task->id, $user->id);
+                    ?>
+                    <li class="panel panel-blue list-item" data-entity="<?php echo $user->id;?>">
+                        <a name="<?php echo $user->id;?>"></a>
+                        <div class="panel-heading expand" style="padding: 0px;background: none;">
+                            <div class="pull-right blue">
+                                <div class="status inline-block">
+                                    <i class="fa fa-spinner fa-spin"></i>
+                                </div>
+                                <a data-toggle="collapse"
+                                   data-parent="#accordion_users"
+                                   href="#user_<?php echo $user->id;?>"
+                                   class="btn btn-border-blue margin-left-10 btn-xs btn-primary user-rating"
+                                   data-user="<?php echo $user->id;?>"
+                                    >
+                                    <?php echo elgg_echo('view');?>
+                                </a>
+                            </div>
+                            <?php echo elgg_view("page/elements/user_block", array("entity" => $user)); ?>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div id="user_<?php echo $user->id;?>" class="panel-collapse collapse">
+                            <div class="panel-body"></div>
+                        </div>
+                    </li>
+                <?php endforeach;?>
+            </ul>
         <?php endforeach;?>
     </div>
     <div role="tabpanel" class="tab-pane margin-top-10" id="items" style="padding: 10px;">

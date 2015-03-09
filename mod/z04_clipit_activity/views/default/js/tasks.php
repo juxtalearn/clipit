@@ -11,7 +11,19 @@
  * @package         ClipIt
  */
 ?>
-$(document).on("click", ".feedback-check",function(){
+//<script>
+elgg.provide('clipit.task');
+
+clipit.task.init = function() {
+    $(document).on("click", ".feedback-check", clipit.task.feedbackCheck);
+    $(document).on("click", ".quiz-select", clipit.task.quizSelect);
+    $(document).on("click", ".quiz-unselect", clipit.task.quizUnselect);
+    $(document).on("click", "#add_task", clipit.task.addTask);
+    $(document).on("change", ".task-types", clipit.task.types);
+};
+elgg.register_hook_handler('init', 'system', clipit.task.init);
+
+clipit.task.feedbackCheck = function(){
     var parent = $(this).closest(".task");
     var feedback_content = parent.find(".feedback_form");
     if($(this).find("input").is(':checked')){
@@ -20,14 +32,14 @@ $(document).on("click", ".feedback-check",function(){
             feedback_content.find(".input-task-start").val(task_end);
         }
         feedback_content
-        .show()
-        .find(".input-task-title")
-        .focus();
+            .show()
+            .find(".input-task-title")
+            .focus();
     } else {
         feedback_content.hide();
     }
-});
-$(document).on("change", ".task-types",function(){
+};
+clipit.task.types = function(){
     var task_types = ['video_upload', 'storyboard_upload'];
     var content = $(this).closest(".task");
     var that = $(this);
@@ -90,25 +102,24 @@ $(document).on("change", ".task-types",function(){
         });
     }
 
-});
+};
 
-$(document).on("click", ".quiz-select",function(){
+clipit.task.quizSelect = function(){
     var task_container = $(this).closest('.task-type-container'),
         quiz_id = $(this).closest('tr').attr('id');
     task_container.find('table tr').not('#'+ quiz_id).fadeOut(300, function(){$(this).remove();});
-<!--    task_container.find('.input-quiz').val(quiz_id);-->
     // Change button to unselect type
     $(this).removeClass('quiz-select')
-            .addClass('quiz-unselect btn-border-red')
-            .text('<?php echo elgg_echo('btn:remove');?>');
-});
-$(document).on("click", ".quiz-unselect",function(){
+        .addClass('quiz-unselect btn-border-red')
+        .text(elgg.echo('btn:remove'));
+};
+clipit.task.quizUnselect = function(){
     var task_container = $(this).closest('.task-type-container');
     task_container.closest('.task').find('.task-types').trigger('change');
-});
-$(document).on("click", "#add_task",function(){
+};
+clipit.task.addTask = function(){
     var content = $(".task-list");
     $.get( "ajax/view/activity/create/task_list", function( data ) {
         content.append(data);
     });
-});
+};

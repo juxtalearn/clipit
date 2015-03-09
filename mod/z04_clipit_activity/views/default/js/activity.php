@@ -20,18 +20,28 @@ echo elgg_view('js/admin');
 // Quiz
 echo elgg_view('js/quiz');
 ?>
-    $(document).on("click", ".option-select", function(){
-        var view = $(this).data("toggle");
-        $(".option-content").hide();
-        $("#"+ view).show();
-    });
-    $(document).on("click", "#add_user",function(){
-        var content = $(".add-user-list");
-        elgg.get( "ajax/view/user/add", function( data ) {
-            content.append(data).find(".focus-in").focus();
-        });
-    });
 });
+//<script>
+elgg.provide('clipit.activity');
+
+clipit.activity.init = function() {
+    $(document).on("click", ".option-select", clipit.activity.addUserToggleOptions);
+    $(document).on("click", "#add_user", clipit.activity.addFormUser);
+};
+elgg.register_hook_handler('init', 'system', clipit.activity.init);
+
+clipit.activity.addUserToggleOptions = function() {
+    var view = $(this).data("toggle");
+    $(".option-content").hide();
+    $("#"+ view).show();
+};
+clipit.activity.addFormUser = function() {
+    var content = $(".add-user-list");
+    elgg.get( "ajax/view/user/add", function( data ) {
+        content.append(data).find(".focus-in").focus();
+    });
+};
+
 function selected_count(){
     var count_selected = $("#called_users option:selected").length;
     $(".ms-selection h4").find("span").text(count_selected);

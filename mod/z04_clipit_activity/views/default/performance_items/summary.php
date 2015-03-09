@@ -14,7 +14,6 @@ $entity = elgg_extract('entity', $vars);
 if($vars['user_rating']){
     $rating_average = ClipitPerformanceRating::get_average_user_rating_for_target($entity->owner_id, $entity->target);
 } else {
-    //$rating_average = ClipitPerformanceRating::get_average_target_rating($entity->id);
     $rating_average = $entity->performance_rating_average;
 }
 
@@ -23,7 +22,7 @@ if($vars['class']){
     $class = $class . " " .$vars['class'];
 }
 if($vars['show_check'] ) {
-    //$me_rating = ClipitRating::get_from_user_for_target(elgg_get_logged_in_user_guid(), $entity->id);
+    $me_rating = ClipitRating::get_user_rating_for_target(elgg_get_logged_in_user_guid(), $entity->id);
     echo elgg_view("page/components/modal_remote", array('id'=> "rating-average-{$me_rating->id}" ));
 }
 
