@@ -22,6 +22,11 @@
  */
 function expose_common_resource_functions($api_suffix, $class_suffix) {
     expose_function(
+        $api_suffix . "update_average_ratings", $class_suffix . "update_average_ratings",
+        array("id" => array("type" => "int", "required" => true)),
+        "Update all the average ratings for this resource", 'POST', false, true
+    );
+    expose_function(
         $api_suffix . "get_by_labels", $class_suffix . "get_by_labels",
         array("label_array" => array("type" => "array", "required" => true)),
         "Get the Resources containing at least one of the specified labels", 'GET', false, true

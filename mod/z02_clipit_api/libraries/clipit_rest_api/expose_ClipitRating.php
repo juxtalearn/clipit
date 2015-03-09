@@ -20,18 +20,23 @@ function expose_rating_functions() {
     $class_suffix = "ClipitRating::";
     expose_common_functions($api_suffix, $class_suffix);
     expose_function(
+        $api_suffix . "get_target", $class_suffix . "get_target",
+        array("id" => array("type" => "int", "required" => true)), "Get Rating Target", "GET",
+        false, true
+    );
+    expose_function(
         $api_suffix . "get_by_target", $class_suffix . "get_by_target",
         array("target_array" => array("type" => "array", "required" => true)), "Get all Ratings by Target", "GET",
         false, true
     );
     expose_function(
-        $api_suffix . "get_from_user_for_target", $class_suffix . "get_from_user_for_target", array(
+        $api_suffix . "get_user_rating_for_target", $class_suffix . "get_user_rating_for_target", array(
             "user_id" => array("type" => "int", "required" => true),
             "target_id" => array("type" => "int", "required" => true)
         ), "Return the rating made by a user upon a target", 'GET', false, true
     );
     expose_function(
-        $api_suffix . "get_average_target_rating", $class_suffix . "get_average_target_rating", array(
+        $api_suffix . "get_average_rating_for_target", $class_suffix . "get_average_rating_for_target", array(
             "target_id" => array("type" => "int", "required" => true)
         ),"Return the average rating for a target", "GET", false, true);
     expose_function(
