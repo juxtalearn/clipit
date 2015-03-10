@@ -28,7 +28,11 @@ if(empty($old_version)){
 }
 print_r("<p>Current version: $old_version<br>New version: $VERSION</p>");
 
+// If already up-to-date, exit.
 if($VERSION === $old_version) return;
+
+// set the new version to avoid overlapping updates
+set_config("clipit_version", $VERSION);
 
 // advance until old version
 while (key($update_files) != $old_version) {
@@ -53,7 +57,6 @@ elgg_reset_system_cache();
 print_r("done</p>");
 
 // Update ClipIt version
-set_config("clipit_version", $VERSION);
 print_r("<p>Updated to version: $VERSION</p>");
 
 
