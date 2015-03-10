@@ -409,12 +409,12 @@ class UBUser extends UBItem {
         }
         // name
         $name = $value;
-        $prop_value_array["name"] = (string)$name;
+        $prop_value_array["name"] = trim($name);
         $cell_iterator->next();
         // login
         $login = (string)$cell_iterator->current()->getValue();
         if (!empty($login)) {
-            $prop_value_array["login"] = $login;
+            $prop_value_array["login"] = trim($login);
         } else {
             return $row_result;
         }
@@ -422,7 +422,7 @@ class UBUser extends UBItem {
         // password
         $password = (string)$cell_iterator->current()->getValue();
         if (!empty($password)) {
-            $prop_value_array["password"] = $password;
+            $prop_value_array["password"] = trim($password);
         } else {
             return $row_result;
         }
@@ -430,20 +430,20 @@ class UBUser extends UBItem {
         // email
         $email = (string)$cell_iterator->current()->getValue();
         if (!empty($email)) {
-            $prop_value_array["email"] = $email;
+            $prop_value_array["email"] = trim($email);
         }
         $cell_iterator->next();
         // role
         $role = (string)$cell_iterator->current()->getValue();
         if (!empty($role)) {
-            $prop_value_array["role"] = $role;
+            $prop_value_array["role"] = trim($role);
         }
         $cell_iterator->next();
         $row_result["user_id"] = (int)static::create($prop_value_array);
         // group
         $group = (string)$cell_iterator->current()->getValue();
         if(!empty($group)){
-            $row_result["group"] = $group;
+            $row_result["group"] = trim($group);
         } else{
             $row_result["group"] = null;
         }
