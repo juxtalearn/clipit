@@ -71,6 +71,7 @@ $spanish = array(
 <small style="color: #fff;font-size: 68%;">
 '.(get_config('clipit_version')?'v':'').''.get_config('clipit_version').'</small>',
     'menu:footer_clipit:header:help' => 'Ayuda',
+    'menu:footer_clipit:header:tutorials' => 'Manuales',
     'menu:footer_clipit:header:legal' => 'Legal',
     'send:email_to_site' => 'Enviar email al sitio web',
 

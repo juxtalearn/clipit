@@ -1,10 +1,10 @@
 //<script>
 elgg.provide('clipit');
 
-/**
- * jQuery validator int messages
- */
 clipit.init = function() {
+    /**
+     * jQuery validator int messages
+     */
     jQuery.extend(jQuery.validator.messages, {
         required: elgg.echo('validation:required'),
         remote: elgg.echo('validation:remote'),
@@ -134,8 +134,52 @@ clipit.tinymce.init = function(id){
         statusbar: false,
         toolbar: "bold italic underline | bullist numlist | outdent indent"
     };
-}
-
+};
+/**
+ * Forgotpassword form validation
+ */
+clipit.requestPassword = function(e) {
+    return {
+        errorElement: "span",
+        errorPlacement: function (error, element) {
+            error.appendTo($("label[for=" + element.attr('name') + "]"));
+        },
+        onkeyup: false,
+        onblur: false,
+        rules: {
+            email: {
+                remote: {
+                    url: elgg.config.wwwroot + "action/user/check",
+                    type: "POST",
+                    data: {
+                        email: function () {
+                            return $("input[name='email']").val();
+                        },
+                        __elgg_token: function () {
+                            return $("input[name='__elgg_token']").val();
+                        },
+                        __elgg_ts: function () {
+                            return $("input[name='__elgg_ts']").val();
+                        }
+                    }
+                }
+            }
+        },
+        submitHandler: function (form) {
+            if ($(form).valid()) {
+                $.post("" + $(form).attr('action') + "", $(form).serialize(), function () {
+                    $(form).find("input[name=email]").prop("disabled", true);
+                    $(form).find("input[type=submit]")
+                        .after(
+                        "<p class='text-info'>" +
+                        "<img src='" + elgg.config.wwwroot + "mod/z03_clipit_site/graphics/ok.png'/>" +
+                        " <strong>"+elgg.echo("user:forgotpassword:ok")+"</strong></p>")
+                        .remove();
+                });
+            }
+        }
+    }
+};
 $(function(){
     /**
      * Collapse function
@@ -200,51 +244,7 @@ $(function(){
         id_menu.replace("/[^a-z0-9\-]/i", "-");
         $("ul.elgg-menu-"+id_menu).toggle("fast");
     });
-    /**
-    * Forgotpassword form validation
-    */
-    clipit.requestPassword = function(e) {
-        return {
-            errorElement: "span",
-            errorPlacement: function (error, element) {
-                error.appendTo($("label[for=" + element.attr('name') + "]"));
-            },
-            onkeyup: false,
-            onblur: false,
-            rules: {
-                email: {
-                    remote: {
-                        url: elgg.config.wwwroot + "action/user/check",
-                        type: "POST",
-                        data: {
-                            email: function () {
-                                return $("input[name='email']").val();
-                            },
-                            __elgg_token: function () {
-                                return $("input[name='__elgg_token']").val();
-                            },
-                            __elgg_ts: function () {
-                                return $("input[name='__elgg_ts']").val();
-                            }
-                        }
-                    }
-                }
-            },
-            submitHandler: function (form) {
-                if ($(form).valid()) {
-                    $.post("" + $(form).attr('action') + "", $(form).serialize(), function () {
-                        $(form).find("input[name=email]").prop("disabled", true);
-                        $(form).find("input[type=submit]")
-                            .after(
-                            "<p class='text-info'>" +
-                            "<img src='" + elgg.config.wwwroot + "mod/z03_clipit_site/graphics/ok.png'/>" +
-                            " <strong>"+elgg.echo("user:forgotpassword:ok")+"</strong></p>")
-                            .remove();
-                    });
-                }
-            }
-        }
-    };
+
     /**
      * Register form validation
      */

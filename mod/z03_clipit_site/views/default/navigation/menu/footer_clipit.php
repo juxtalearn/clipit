@@ -13,6 +13,7 @@ $class = elgg_extract('class', $vars, false);
     foreach ($vars['menu'] as $section => $menu_items):
 
         if($section == 'clipit') $class = "col-sm-4 col-xs-4 col-md-offset-3";
+        if($section == 'tutorials') $class = "col-sm-4 col-xs-4";
         if($section == 'legal') $class = "col-sm-5 col-xs-5";
         if($section == 'help') $class = "col-sm-4 col-xs-4";
     ?>

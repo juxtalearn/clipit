@@ -107,9 +107,8 @@ elgg_load_js('jquery:chartjs');
                                 container.eq(i).find(".msg-not-finished").text(data.not_finished);
                             } else {
                                 container.eq(i).find(".counts").show();
-                                container.eq(i).find(".a-error").text(data.error);
                                 container.eq(i).find(".a-correct").text(data.correct);
-                                container.eq(i).find(".a-pending").text(data.pending);
+                                container.eq(i).find(".answered").text(data.answered);
                             }
                         });
                     }
@@ -142,23 +141,16 @@ elgg_load_js('jquery:chartjs');
         <div role="tabpanel" class="tab-pane margin-top-10 active" id="students" style="padding: 10px;">
             <ul>
             <?php
-            $students = ClipitUser::get_by_id($activity->student_array);
-            foreach($students as $student):
+                $students = ClipitUser::get_by_id($activity->student_array);
+                foreach($students as $student):
             ?>
                 <li class="list-item" data-entity="<?php echo $student->id;?>">
                     <div class="pull-right">
-                        <div class="margin-right-10 inline-block status">
+                        <div class="margin-right-10 inline-block status text-muted">
                             <small class="msg-not-finished"></small>
-                            <div class="counts" style="display: none;">
-                                <small class="margin-right-10">
-                                    <i class="fa fa-times red"></i> <strong class="a-error">-</strong>
-                                </small>
-                                <small class="margin-right-10">
-                                    <i class="fa fa-check green"></i> <strong class="a-correct">-</strong>
-                                </small>
-                                <small class="margin-right-10">
-                                    <i class="fa fa-minus yellow"></i> <strong class="a-pending">-</strong>
-                                </small>
+                            <div class="counts " style="display: none;">
+                                <span class="answered"></span> -
+                                <i class="fa fa-check green"></i> <strong class="a-correct">-</strong>
                             </div>
                         </div>
                         <span class="pull-right">
@@ -193,18 +185,11 @@ elgg_load_js('jquery:chartjs');
                 <?php foreach(ClipitGroup::get_by_id($groups) as $group):?>
                 <li class="list-item" data-entity="<?php echo $group->id;?>">
                     <div class="pull-right">
-                        <div class="margin-right-10 inline-block status">
+                        <div class="margin-right-10 inline-block status text-muted">
                             <small class="msg-not-finished"></small>
-                            <div class="counts" style="display: none;">
-                                <small class="margin-right-10">
-                                    <i class="fa fa-times red"></i> <strong class="a-error">-</strong>
-                                </small>
-                                <small class="margin-right-10">
-                                    <i class="fa fa-check green"></i> <strong class="a-correct">-</strong>
-                                </small>
-                                <small class="margin-right-10">
-                                    <i class="fa fa-minus yellow"></i> <strong class="a-pending">-</strong>
-                                </small>
+                            <div class="counts " style="display: none;">
+                                <span class="answered"></span> -
+                                <i class="fa fa-check green"></i> <strong class="a-correct">-</strong>
                             </div>
                         </div>
                         <span class="pull-right">

@@ -22,13 +22,18 @@ switch($type = get_input('type')){
         $task = array_pop(ClipitTask::get_by_id(array(ClipitQuiz::get_task($quiz->id))));
         $groups = ClipitActivity::get_groups($task->activity);
         $output = array();
+        $questions = $quiz->quiz_question_array;
         foreach(ClipitGroup::get_by_id($groups) as $group){
+            $answered = 0;
             $correct = 0;
             $error = 0;
             $pending = 0;
             foreach($group->user_array as $user_id) {
-                foreach ($quiz->quiz_question_array as $question_id) {
+                foreach ($questions as $question_id) {
                     $result = ClipitQuizResult::get_from_question_user($question_id, $user_id);
+                    if($result){
+                        $answered++;
+                    }
                     if (!$result) {
                         $pending++;
                     } elseif ($result->correct) {
@@ -38,10 +43,16 @@ switch($type = get_input('type')){
                     }
                 }
             }
+
+            $total = $correct+$error+$pending;
+//            $output[] = array(
+//                'correct' => round(($correct*100)/$total)."%",
+//                'error' => round(($error*100)/$total)."%",
+//                'pending' => round(($pending*100)/$total)."%",
+//            );
             $output[] = array(
-                'correct' => $correct,
-                'error' => $error,
-                'pending' => $pending,
+                'correct' => round(($correct*100)/$total)."%",
+                'answered' => $answered." ".elgg_echo('quiz:out_of')." ".count($questions)*count($group->user_array)
             );
         }
         echo json_encode($output);
@@ -52,11 +63,12 @@ switch($type = get_input('type')){
         $task = array_pop(ClipitTask::get_by_id(array(ClipitQuiz::get_task($quiz->id))));
         $users = ClipitActivity::get_students($task->activity);
         $output = array();
+        $questions = $quiz->quiz_question_array;
         foreach($users as $user_id){
             $correct = 0;
             $error = 0;
             $pending = 0;
-            foreach($quiz->quiz_question_array as $question_id) {
+            foreach($questions as $question_id) {
                 $result = ClipitQuizResult::get_from_question_user($question_id, $user_id);
                 if(!$result) {
                     $pending++;
@@ -66,15 +78,16 @@ switch($type = get_input('type')){
                     $error++;
                 }
             }
+
             if(ClipitQuiz::has_finished_quiz($quiz_id, $user_id)) {
+                $total = $correct+$error+$pending;
                 $output[] = array(
-                    'correct' => $correct,
-                    'error' => $error,
-                    'pending' => $pending,
+                    'correct' => round(($correct*100)/$total)."%",
+                    'answered' => $total." ".elgg_echo('quiz:out_of')." ".count($questions)
                 );
             } else {
                 $output[] = array(
-                    'not_finished' => elgg_echo('quiz:not_finished')
+                    'not_finished' => "0 ".elgg_echo('quiz:out_of')." ".count($questions)." - ".elgg_echo('quiz:not_finished')
                 );
             }
         }
@@ -215,7 +228,6 @@ switch($type = get_input('type')){
             $tag = ClipitSite::lookup($tag_id);
             $output[] = $tag['name'];
         }
-
         echo elgg_view('quizzes/chart/radar', array('data' => $data, 'labels' => $output, 'id' => $entity_id));
 
         break;
