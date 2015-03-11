@@ -25,6 +25,8 @@ if($data_type == 'group_status'){
 }
 $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
 ?>
+
+<?php if($data_type == 'activity_group_status'):?>
 <svg></svg>
 <script>
     nv.addGraph(function() {
@@ -73,3 +75,4 @@ $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
         return chart;
     });
 </script>
+<?php endif;?>

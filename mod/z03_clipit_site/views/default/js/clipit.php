@@ -52,6 +52,7 @@ clipit.init = function() {
     $('ul#tags').each(clipit.tagList);
     // Labels from list
     $('ul#labels').each(clipit.labelList);
+
 };
 elgg.register_hook_handler('init', 'system', clipit.init);
 /**
@@ -180,7 +181,155 @@ clipit.requestPassword = function(e) {
         }
     }
 };
+/**
+ * Form general validation
+ */
+clipit.formValidation = function() {
+    tinyMCE.triggerSave();
+    //$("form[data-validate=true]").each(function(){
+    var form_to = $(this);
+    $(this).validate({
+        errorElement: "span",
+        errorPlacement: function (error, element) {
+            error.appendTo($("label[for='" + element.attr('name') + "']"));
+        },
+        //ignore: [], // DEBUG
+        ignore: ":hidden:not(.mceEditor)",
+        focusInvalid: true,
+        onkeyup: false,
+        onblur: false,
+        submitHandler: function (form) {
+            var button_submit = form_to.find("input[type=submit]");
+            button_submit.data("loading-text", elgg.echo('loading')+"...").button('loading');
+            if ($(form).valid())
+                form.submit();
+            else
+                button_submit.data("loading-text", elgg.echo('loading')+"...").button('loading');
+        }
+    }).focusInvalid = function () {
+        // put focus on tinymce on submit validation
+        if (this.settings.focusInvalid) {
+            try {
+                var toFocus = $(this.findLastActive() || this.errorList.length && this.errorList[0].element || []);
 
+                if (toFocus.is("textarea")) {
+                    tinyMCE.get(toFocus.attr("id")).focus();
+                } else {
+                    toFocus.filter(":visible").focus();
+                }
+            } catch (e) {
+                // ignore IE throwing errors when focusing hidden elements
+            }
+        }
+    };
+};
+/**
+ * wysihtml5 editor default options
+ */
+// Load wysi each textarea
+//$('.wysihtml5').wysihtml5();
+
+/**
+ * Default confirm dialog to remove objects
+ */
+clipit.removeObject = function(e){
+    e.preventDefault();
+    var link = $(this).attr("href");
+    var confirmOptions = {
+        title: elgg.echo("question:areyousure"),
+        buttons: {
+            confirm: {
+                label: elgg.echo("input:yes")
+            },
+            cancel: {
+                label: elgg.echo("input:no"),
+                className: "btn-border-blue btn-default"
+            }
+        },
+        message: elgg.echo("deleteconfirm"),
+        callback: function(result) {
+            if (result) {
+                document.location.href = link;  // if result, "set" the document location
+            }
+        }
+    };
+    bootbox.confirm(confirmOptions);
+};
+/**
+ * Reply to user
+ * check if form exists
+ */
+clipit.replyTo = function(){
+    var reply_to_id = $(this).attr("id");
+    var form_id = "#form-"+reply_to_id;
+    var message = $(this).closest(".message");
+    message.find("textarea").tinymce(clipit.tinymce.init());
+    $(form_id).toggle("fast", function(){
+        if($(form_id).is(':visible')){
+            var offset = parseInt($(form_id).offset().top) - 50;
+            $('html,body').animate({
+                scrollTop: offset}, 'slow');
+        }
+    });
+};
+/**
+ * Button loading state
+ * (input submit only)
+ */
+clipit.submitLoading = function(e){
+    // Check if form is validated
+    var form = $(this).closest("form");
+    var btn = $(this);
+    if(!form.data("validate")){
+        btn.data("loading-text", elgg.echo('loading')+"...").button('loading');
+    }
+};
+clipit.loadActivityGroupStatus = function(entity){
+    var content = $('[data-entity="'+entity+'"]').find('.chart-js');
+    elgg.get('ajax/view/dashboard/modules/group_status_data', {
+        data: {'entity': entity, 'type': 'activity_group_status'},
+        success: function (data) {
+            content.html(data);
+        }
+    });
+};
+clipit.loadActivityGroupStatusData = function(){
+    var content = $(this).find('.chart-js');
+    if($(this).find('svg').length == 0) {
+        elgg.get('ajax/view/dashboard/modules/group_status_data', {
+            data: {entity: $(this).data('entity'), type: 'activity_group_status'},
+            success: function (data) {
+                content.html(data);
+            }
+        });
+    }
+};
+///
+/**
+ * Tag-it for performance items
+ *
+ */
+clipit.tagList = function(e){
+    that = $(this);
+    $(this).tagit({
+        allowSpaces: true,
+        removeConfirmation: true,
+        onTagExists: function(event, ui){
+            $(ui.existingTag).fadeIn("slow", function() {
+                $(this).addClass("selected");
+            }).fadeOut("slow", function() {
+                $(this).removeClass("selected");
+            });
+        },
+        autocomplete: {
+            delay: 0,
+            source: elgg.config.wwwroot+"ajax/view/stumbling_blocks/search"
+        },
+        placeholderText: elgg.echo("tags:commas:separated"),
+        singleField: true,
+        singleFieldNode: that.closest("form").find("input[name=tags]")
+    });
+};
 /*
  * jQuery Shorten plugin
  *
@@ -327,145 +476,7 @@ $(function(){
         }
     });
 
-    /**
-     * Form general validation
-     */
-    clipit.formValidation = function() {
-        tinyMCE.triggerSave();
-        //$("form[data-validate=true]").each(function(){
-        var form_to = $(this);
-        $(this).validate({
-            errorElement: "span",
-            errorPlacement: function (error, element) {
-                error.appendTo($("label[for='" + element.attr('name') + "']"));
-            },
-            //ignore: [], // DEBUG
-            ignore: ":hidden:not(.mceEditor)",
-            focusInvalid: true,
-            onkeyup: false,
-            onblur: false,
-            submitHandler: function (form) {
-                var button_submit = form_to.find("input[type=submit]");
-                button_submit.data("loading-text", elgg.echo('loading')+"...").button('loading');
-                if ($(form).valid())
-                    form.submit();
-                else
-                    button_submit.data("loading-text", elgg.echo('loading')+"...").button('loading');
-            }
-        }).focusInvalid = function () {
-            // put focus on tinymce on submit validation
-            if (this.settings.focusInvalid) {
-                try {
-                    var toFocus = $(this.findLastActive() || this.errorList.length && this.errorList[0].element || []);
 
-                    if (toFocus.is("textarea")) {
-                        tinyMCE.get(toFocus.attr("id")).focus();
-                    } else {
-                        toFocus.filter(":visible").focus();
-                    }
-                } catch (e) {
-                    // ignore IE throwing errors when focusing hidden elements
-                }
-            }
-        };
-    };
-    /**
-     * wysihtml5 editor default options
-     */
-        // Load wysi each textarea
-    //$('.wysihtml5').wysihtml5();
-
-    /**
-     * Default confirm dialog to remove objects
-     */
-    clipit.removeObject = function(e){
-        e.preventDefault();
-        var link = $(this).attr("href");
-        var confirmOptions = {
-            title: elgg.echo("question:areyousure"),
-            buttons: {
-                confirm: {
-                    label: elgg.echo("input:yes")
-                },
-                cancel: {
-                    label: elgg.echo("input:no"),
-                    className: "btn-border-blue btn-default"
-                }
-            },
-            message: elgg.echo("deleteconfirm"),
-            callback: function(result) {
-                if (result) {
-                    document.location.href = link;  // if result, "set" the document location
-                }
-            }
-        };
-        bootbox.confirm(confirmOptions);
-    };
-    /**
-     * Reply to user
-     * check if form exists
-     */
-    clipit.replyTo = function(){
-        var reply_to_id = $(this).attr("id");
-        var form_id = "#form-"+reply_to_id;
-        var message = $(this).closest(".message");
-        message.find("textarea").tinymce(clipit.tinymce.init());
-        $(form_id).toggle("fast", function(){
-            if($(form_id).is(':visible')){
-                var offset = parseInt($(form_id).offset().top) - 50;
-                $('html,body').animate({
-                    scrollTop: offset}, 'slow');
-            }
-        });
-    };
-    /**
-     * Button loading state
-     * (input submit only)
-     */
-    clipit.submitLoading = function(e){
-        // Check if form is validated
-        var form = $(this).closest("form");
-        var btn = $(this);
-        if(!form.data("validate")){
-            btn.data("loading-text", elgg.echo('loading')+"...").button('loading');
-        }
-    };
-
-    if( $(".module-group_activity").length > 0) {
-        elgg.get('ajax/view/dashboard/modules/activity_groups_status', {
-            success: function (content) {
-                $(".module-group_activity .elgg-body").html(content);
-            }
-        });
-    }
-
-
-    ///
-    /**
-     * Tag-it for performance items
-     *
-     */
-    clipit.tagList = function(e){
-        that = $(this);
-        $(this).tagit({
-            allowSpaces: true,
-            removeConfirmation: true,
-            onTagExists: function(event, ui){
-                $(ui.existingTag).fadeIn("slow", function() {
-                    $(this).addClass("selected");
-                }).fadeOut("slow", function() {
-                    $(this).removeClass("selected");
-                });
-            },
-            autocomplete: {
-                delay: 0,
-                source: elgg.config.wwwroot+"ajax/view/stumbling_blocks/search"
-            },
-            placeholderText: elgg.echo("tags:commas:separated"),
-            singleField: true,
-            singleFieldNode: that.closest("form").find("input[name=tags]")
-        });
-    };
     /**
      * Quote reference for discussion posts
      */

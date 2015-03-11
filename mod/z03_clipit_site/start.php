@@ -164,13 +164,19 @@ function user_landing_page($page)
 {
     $user_id = elgg_get_logged_in_user_guid();
     $user = array_pop(ClipitUser::get_by_id(array($user_id)));
+    $all_activities = ClipitUser::get_activities($user->id);
+    $all_activities = ClipitActivity::get_by_id($all_activities);
+    $activities = array();
+    foreach($all_activities as $my_activity){
+        if($my_activity->status != ClipitActivity::STATUS_CLOSED){
+            $activities[$my_activity->id] = $my_activity;
+        }
+    }
     switch ($user->role) {
         case ClipitUser::ROLE_TEACHER:
-            $content = elgg_view('dashboard/teacher', array('entity' => $user));
+            $content = elgg_view('dashboard/teacher', array('entity' => $user, 'activities' => $activities));
             break;
         case ClipitUser::ROLE_STUDENT:
-            $activities = ClipitUser::get_activities($user->id);
-            $activities = ClipitActivity::get_by_id($activities);
             $content = elgg_view('dashboard/student', array('activities' => $activities));
             break;
         case ClipitUser::ROLE_ADMIN:

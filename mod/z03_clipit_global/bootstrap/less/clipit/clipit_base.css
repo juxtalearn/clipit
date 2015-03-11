@@ -7882,7 +7882,7 @@ li.list-item:last-child {
   margin-left: 10px;
   margin-bottom: 0;
 }
-.module-group_activity .elgg-body .fa {
+.module-group_activity .elgg-body .fa-spin {
   position: absolute;
   top: 50%;
   color: #32b4e5;

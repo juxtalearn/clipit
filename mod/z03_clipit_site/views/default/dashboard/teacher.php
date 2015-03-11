@@ -11,19 +11,17 @@
  * @package         ClipIt
  */
 $user = elgg_extract("entity", $vars);
+$activities = elgg_extract("activities", $vars);
 elgg_load_js("nvd3:d3_v2");
 elgg_load_js("nvd3");
 elgg_load_css("nvd3:css");
-
-$activities = ClipitUser::get_activities($user->id);
-$activities = ClipitActivity::get_by_id($activities);
-$active_activities = array();
-foreach($activities as $activity){
-    if($activity->status != 'closed'){
-        $active_activities[] = $activity;
-    }
-}
 ?>
+<?php if(!empty($activities)):?>
+    <script>
+        // Dashboard, load group status by activity
+        clipit.loadActivityGroupStatus();
+    </script>
+<?php endif;?>
 <div class="col-md-4 events-list">
     <?php echo elgg_view('dashboard/module', array(
         'name'      => 'events',
@@ -41,9 +39,9 @@ foreach($activities as $activity){
     <div class="col-md-6">
         <?php
         $content = elgg_view('page/components/not_found', array('height' => '245px', 'text' => elgg_echo('activities:active:none')));
-        if(!empty($active_activities)){
+        if(!empty($activities)){
             $content = elgg_view('dashboard/modules/activity_status_progress', array(
-                'entities' => $active_activities
+                'entities' => $activities
             ));
         }
         ?>
@@ -56,7 +54,7 @@ foreach($activities as $activity){
     </div>
     <div class="col-md-6">
         <?php
-        if(!empty($active_activities)){
+        if(!empty($activities)){
             echo elgg_view('dashboard/module', array(
                 'name'      => 'group_activity',
                 'title'     => elgg_echo('group:activity'),
