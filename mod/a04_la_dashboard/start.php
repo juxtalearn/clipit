@@ -94,7 +94,7 @@ function la_widget_permissions_hook($hook, $type, $returnvalue, $params)
         switch ($params['entity']->handler) {
             case 'quizresult':
                 if (elgg_in_context('activity_page')) {
-                  //  return false;
+                    return false;
                 }
 
         }
