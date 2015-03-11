@@ -38,8 +38,8 @@ if (isset($widget->quiz_id) && is_not_null($widget->quiz_id)) {
         $tmpTask = array_pop(ClipitTask::get_by_id(array($task_id)));
         $widget->quiz_id= $tmpTask->quiz;
         $widget->save();
-
         $quiz_id=$widget->quiz_id;
+        $quiz = array_pop(ClipitQuiz::get_by_id(array($widget->quiz_id)));
     } else {
         $to_be_configured = true;
     }

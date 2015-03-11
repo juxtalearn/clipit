@@ -142,12 +142,11 @@ elgg_load_js('jquery:chartjs');
           <?php
           elgg_push_context('quizstudents');
             $params = array(
-            'title' => "hallo",
             'filter' => '',
             'num_columns' => 1,
             );
             echo "<div class=\"learning_analytics_dashboard\">";
-            echo elgg_view_layout('la_widgets', $params);
+            echo elgg_view_layout('la_widgets_quizresults', $params);
             echo "</div>";
             elgg_pop_context();
             ?>
@@ -196,12 +195,11 @@ elgg_load_js('jquery:chartjs');
             <?php
             elgg_push_context('quizgroups');
             $params = array(
-                'title' => "hallo",
                 'filter' => '',
                 'num_columns' => 1,
             );
             echo "<div class=\"learning_analytics_dashboard\">";
-            echo elgg_view_layout('la_widgets', $params);
+            echo elgg_view_layout('la_widgets_quizresults', $params);
             echo "</div>";
             elgg_pop_context();
             ?>
@@ -259,10 +257,10 @@ elgg_load_js('jquery:chartjs');
             elgg_push_context('quizactivity');
             $params = array(
                 'filter' => '',
-                'num_columns' => 1,
+                'num_columns' => 1, 
             );
             echo "<div class=\"learning_analytics_dashboard\">";
-            echo elgg_view_layout('la_widgets', $params);
+            echo elgg_view_layout('la_widgets_quizresults', $params);
             echo "</div>";
             elgg_pop_context();
             ?>
