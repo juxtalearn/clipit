@@ -268,8 +268,7 @@ function login_user_account_page_handler($page_elements, $handler)
     return true;
 }
 
-function setup_footer_menus()
-{
+function setup_footer_menus(){
     /*elgg_register_menu_item(
         'footer_clipit',
         array(
@@ -299,6 +298,29 @@ function setup_footer_menus()
             'priority' => 460,
             'target' => true,
             'section' => 'clipit',
+        )
+    );
+    // Tutorials section
+    elgg_register_menu_item(
+        'footer_clipit',
+        array(
+            'name' => 'student',
+            'href' => 'http://clipit.es/tutorials/student_'.get_current_language().'.pdf',
+            'text' => elgg_echo('student'),
+            'target' => '_blank',
+            'priority' => 460,
+            'section' => 'tutorials',
+        )
+    );
+    elgg_register_menu_item(
+        'footer_clipit',
+        array(
+            'name' => 'teacher',
+            'href' => 'http://clipit.es/tutorials/teacher_'.get_current_language().'.pdf',
+            'text' => elgg_echo('teacher'),
+            'target' => '_blank',
+            'priority' => 465,
+            'section' => 'tutorials',
         )
     );
     // Legal section

@@ -217,7 +217,7 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
 
 <?php
 if($comments):
-    $total_comments = array_pop(ClipitComment::count_by_destination(array($entity->id), true));
+    $total_comments = array_pop(ClipitComment::count_by_destination(array($entity->id), false));
 ?>
     <a name="comments"></a>
     <h3 class="activity-module-title"><?php echo elgg_echo("comments"); ?> <span class="blue-lighter">(<?php echo $total_comments;?>)</span></h3>

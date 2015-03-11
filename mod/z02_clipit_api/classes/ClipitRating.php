@@ -28,7 +28,7 @@ class ClipitRating extends UBItem {
      */
     public $target = 0;
     /**
-     * @var int Overall rating opinionfrom 0 to 10
+     * @var int Overall rating opinion (YES = true, NO = false=
      */
     public $overall = false;
     /**

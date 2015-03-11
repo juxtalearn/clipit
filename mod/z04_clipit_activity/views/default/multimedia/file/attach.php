@@ -11,7 +11,7 @@
  * @package         ClipIt
  */
 $entity = elgg_extract('entity', $vars);
-$col_class = $vars['class'] ?  $vars['class'] : "col-md-10" ;
+$col_class = $vars['class'] ?  $vars['class'] : "col-md-9" ;
 elgg_load_js("file:attach");
 echo elgg_view("multimedia/file/templates/attach", array('entity' => $entity));
 ?>

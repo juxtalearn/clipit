@@ -17,7 +17,7 @@ $user_id = elgg_get_logged_in_user_guid();
 <div class="wrapper separator">
     <?php
     foreach($activities as $activity):
-        if($activity->status != 'closed'):
+        if($activity->status != ClipitActivity::STATUS_CLOSED):
         $group_id = ClipitGroup::get_from_user_activity($user_id, $activity->id);
         $group_object = ClipitSite::lookup($group_id);
         $progress = get_group_progress($group_id);

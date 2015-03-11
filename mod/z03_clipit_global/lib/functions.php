@@ -203,6 +203,11 @@ function clipit_get_offset(){
 function clipit_get_limit($limit = 15){
     return get_input("limit", $limit);
 }
+function clipit_get_offset_last($entities_count, $limit = 15){
+    $total = ceil($entities_count / $limit);
+    return ($total-1)*$limit;
+}
+
 function clipit_get_pagination($params){
     $defaults = array(
         'offset' => clipit_get_offset(),
