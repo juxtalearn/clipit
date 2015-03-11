@@ -113,8 +113,8 @@ function expose_common_functions($api_suffix, $class_suffix) {
             "search_string" => array("type" => "string", "required" => true),
             "name_only" => array("type" => "bool", "required" => false),
             "strict" => array("type" => "bool", "required" => false),
-            "offset" => array("type" => "int", "required" => false),
             "limit" => array("type" => "int", "required" => false),
+            "offset" => array("type" => "int", "required" => false),
         ), "Get instances from searching inside the object name and description for a string", 'GET', false, true
     );
 }

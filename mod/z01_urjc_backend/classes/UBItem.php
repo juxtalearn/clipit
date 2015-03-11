@@ -575,7 +575,7 @@ class UBItem {
      *
      * @return static[] Returns an array of matched objects
      */
-    static function get_from_search($search_string, $name_only = false, $strict = false, $offset = 0, $limit = 0) {
+    static function get_from_search($search_string, $name_only = false, $strict = false, $limit = 0, $offset = 0) {
         $search_result = array();
         if(!$strict) {
             $search_string = strtolower($search_string);

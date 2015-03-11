@@ -43,9 +43,11 @@ function expose_common_message_functions($api_suffix, $class_suffix) {
     expose_function(
         $api_suffix . "get_by_destination", $class_suffix . "get_by_destination", array(
             "destination_array" => array("type" => "array", "required" => true),
-            "offset" => array("type" => "int", "required" => false),
             "limit" => array("type" => "int", "required" => false),
-            "count_only" => array("type" => "bool", "required" => false)
+            "offset" => array("type" => "int", "required" => false),
+            "count_only" => array("type" => "bool", "required" => false),
+            "order_by" => array("type" => "string", "required" => false),
+            "ascending" => array("type" => "bool", "required" => false)
         ), "Get Messages by Destination", 'GET', false, true
     );
     expose_function(
