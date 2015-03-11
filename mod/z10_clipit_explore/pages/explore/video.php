@@ -28,8 +28,8 @@ $sidebar .= elgg_view_module('aside', elgg_echo('tags:recommended'), $tag_cloud,
 
 $comments = array_pop(ClipitComment::get_by_destination(
     array($entity->id),
-    clipit_get_offset(),
-    clipit_get_limit()
+    clipit_get_limit(),
+    clipit_get_offset()
 ));
 $body = elgg_view("multimedia/video/body", array('entity'  => $entity));
 $params = array(

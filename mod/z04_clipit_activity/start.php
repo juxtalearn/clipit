@@ -26,9 +26,6 @@ function clipit_activity_init() {
     // Publications
     elgg_register_library('clipit:activity:publications', "{$plugin_dir}/lib/publications.php");
     elgg_load_library('clipit:activity:publications');
-    // Discussions
-    elgg_register_library('clipit:activity:discussions', "{$plugin_dir}/lib/discussions.php");
-    elgg_load_library('clipit:activity:discussions');
     // Multimedia
     elgg_register_library('clipit:activity:multimedia', "{$plugin_dir}/lib/multimedia.php");
     elgg_load_library('clipit:activity:multimedia');
