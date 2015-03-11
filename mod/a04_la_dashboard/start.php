@@ -24,7 +24,7 @@ function learning_analytics_dashboard_init()
     elgg_register_page_handler('metric', 'getmetric_clipit_page_handler');
     elgg_register_ajax_view('metrics/metric');
     elgg_register_widget_type('metric', elgg_echo('la_dashboard:la_metrics:title'), elgg_echo('la_dashboard:widget:la_metrics:description'), 'la_metrics', true);
-    elgg_register_widget_type('quizresult', elgg_echo('la_dashboard:quizresult:title'), elgg_echo('la_dashboard:widget:quizresult:description'), 'la_metrics', true);
+    elgg_register_widget_type('quizresult', elgg_echo('la_dashboard:quizresult:title'), elgg_echo('la_dashboard:widget:quizresult:description'), 'la_metrics,quizstudents,quizgroups,quizactivity', true);
     elgg_register_widget_type('quizresultcompare', elgg_echo('la_dashboard:quizresultscompare:title'), elgg_echo('la_dashboard:widget:quizresultcompare:description'), 'la_metrics', true);
 //    // Register library
 //    elgg_extend_view("navigation/menu/top", "navigation/menu/profile", 400);
@@ -91,6 +91,12 @@ function la_widget_permissions_hook($hook, $type, $returnvalue, $params)
 {
     if (elgg_instanceof($params['entity'], "object", "widget")) {
         $user = $params['user'];
+        switch ($params['entity']->handler) {
+            case 'quizresult':
+                if (elgg_in_context('activity_page')) {
+                    return false;
+                }
+        }
         $clipit_user = array_pop(ClipitUser::get_by_id(array($user->guid)));
         if ($clipit_user->role == ClipitUser::ROLE_STUDENT) {
             return false;
@@ -103,11 +109,17 @@ function la_widget_permissions_hook($hook, $type, $returnvalue, $params)
 function la_widget_layout_permissions_hook($hook, $type, $returnvalue, $params)
 {
     if (isset($params['context']) && isset($params['user']) && isset($params['page_owner'])) {
-        $user = $params['user'];
-        $context = $params['context'];
-        $clipit_user = array_pop(ClipitUser::get_by_id(array($user->guid)));
-        if ($context == 'la_metrics' && $clipit_user->role == ClipitUser::ROLE_STUDENT ) {
-            return false;
+        switch ($params['context']) {
+            case 'quizstudents':
+            case 'quizgroups':
+            case 'quizactivity':
+                return false;
+            case 'la_metrics':
+                $user = $params['user'];
+                $clipit_user = array_pop(ClipitUser::get_by_id(array($user->guid)));
+                if ($clipit_user->role == ClipitUser::ROLE_STUDENT) {
+                    return false;
+                }
         }
     }
 }

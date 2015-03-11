@@ -56,6 +56,17 @@ elgg_load_js('jquery:chartjs');
     <!-- Tab panes -->
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane margin-top-10 active" id="students" style="padding: 10px;">
+          <?php
+          elgg_push_context('quizstudents');
+            $params = array(
+            'filter' => '',
+            'num_columns' => 1,
+            );
+            echo "<div class=\"learning_analytics_dashboard\">";
+            echo elgg_view_layout('la_widgets_quizresults', $params);
+            echo "</div>";
+            elgg_pop_context();
+            ?>
             <ul>
             <?php
                 $students = ClipitUser::get_by_id($activity->student_array);
@@ -72,7 +83,7 @@ elgg_load_js('jquery:chartjs');
                         </div>
                         <span class="pull-right">
                             <a href="#questions-<?php echo $student->id;?>"
-                               class="show-data btn-primary btn btn-xs btn-icon fa-list fa btn-border-blue"
+                               class="show-data btn-primary btn btn-xs btn-icon fa-comments fa btn-border-blue"
                                data-type="student"
                                data-entity-type="questions"
                                data-toggle="collapse"
@@ -98,6 +109,17 @@ elgg_load_js('jquery:chartjs');
         </div>
         <?php if($groups):?>
         <div role="tabpanel" class="tab-pane margin-top-10" id="groups" style="padding: 10px;">
+            <?php
+            elgg_push_context('quizgroups');
+            $params = array(
+                'filter' => '',
+                'num_columns' => 1,
+            );
+            echo "<div class=\"learning_analytics_dashboard\">";
+            echo elgg_view_layout('la_widgets_quizresults', $params);
+            echo "</div>";
+            elgg_pop_context();
+            ?>
             <ul>
                 <?php foreach(ClipitGroup::get_by_id($groups) as $group):?>
                 <li class="list-item" data-entity="<?php echo $group->id;?>">
@@ -111,7 +133,7 @@ elgg_load_js('jquery:chartjs');
                         </div>
                         <span class="pull-right">
                             <a href="#questions-<?php echo $group->id;?>"
-                               class="show-data btn-primary btn btn-xs btn-icon fa-list fa btn-border-blue"
+                               class="show-data btn-primary btn btn-xs btn-icon fa-comments fa btn-border-blue"
                                data-type="group"
                                data-entity-type="questions"
                                data-toggle="collapse"
@@ -148,6 +170,17 @@ elgg_load_js('jquery:chartjs');
         </div>
         <?php endif;?>
         <div role="tabpanel" class="tab-pane margin-top-10" id="activity" style="padding: 10px;">
+            <?php
+            elgg_push_context('quizactivity');
+            $params = array(
+                'filter' => '',
+                'num_columns' => 1, 
+            );
+            echo "<div class=\"learning_analytics_dashboard\">";
+            echo elgg_view_layout('la_widgets_quizresults', $params);
+            echo "</div>";
+            elgg_pop_context();
+            ?>
             <ul>
                 <li data-entity="<?php echo $activity->id;?>">
                 <a href="#questions-<?php echo $activity->id;?>"
@@ -155,7 +188,7 @@ elgg_load_js('jquery:chartjs');
                    data-type="activity"
                    data-entity-type="questions"
                    data-toggle="collapse"
-                    ><i class="fa-list fa"></i> <?php echo elgg_echo('quiz:questions');?></a>
+                    ><i class="fa-comments fa"></i> <?php echo elgg_echo('quiz:questions');?></a>
                 <a href="#chart-<?php echo $activity->id;?>"
                    class="show-data margin-left-10 btn-primary btn btn-xs btn-icon btn-border-blue"
                    data-toggle="collapse"

@@ -42,17 +42,20 @@ if ($scale == ClipitActivity::SUBTYPE) {
         $users = ClipitGroup::get_users($current_group->id);
         foreach ($users as $user_id) {
             $quiz_results = ClipitQuiz::get_user_results_by_tag($quiz_id, $user_id);
-            error_log(print_r($quiz_results,true));
             $user = get_entity($user_id);
             $data = array();
+
             if (is_not_null($quiz_results) && !empty($quiz_results)) {
                 foreach ($quiz_results as $sb_id => $value) {
                     $sb = get_entity($sb_id);
                     $sb_name = $sb->name;
                     $data[strval($sb_name)] = floatval($value)*100;
                 }
+            } else {
+                foreach ($sbresults as $blockname) {
+                    $data[$blockname] = 0;
+                }
             }
-//                $data = json_encode($data);
             $results[$number] = array("name" => $user->name, "data" => strval(json_encode($data)), "color" => $spider_colors[$number]);
             $number += 1;
         }

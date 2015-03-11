@@ -45,8 +45,6 @@ require(["dojox/charting/Chart2D", "dojox/charting/themes/MiamiNice", "dojox/cha
                             spiderType: "polygon"
                         });
                         <?php
-//                            echo("var minmax = [".json_encode($min_values).",\n");
-//                            echo("  ".json_encode($max_values)."];\n");
                         foreach ($results as $number=>$series) {
                             if ($number == 0) {
                                 echo("var data = [".$series['data'].",\n");
