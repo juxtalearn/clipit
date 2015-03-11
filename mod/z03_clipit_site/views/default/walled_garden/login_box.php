@@ -18,6 +18,11 @@ if (elgg_get_config('https_login')) {
 $params = array(
     'target' => 'modal-login',
     'title' => elgg_echo('login'),
-    'body' => elgg_view_form('login_modal', array('action' => "{$login_url}action/login", 'role' => 'form', 'class' => ''))
+    'body' => elgg_view_form('login_modal', array(
+        'action' => "{$login_url}action/login",
+        'role' => 'form',
+        'class' => '',
+        'data-validate' => 'true'
+    ))
 );
 echo elgg_view("page/components/modal", $params);

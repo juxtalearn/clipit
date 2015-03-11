@@ -13,7 +13,7 @@
 ?>
 //<script>
 elgg.provide('clipit.task');
-
+elgg.provide('clipit.task.admin');
 clipit.task.init = function() {
     $(document).on("click", ".feedback-check", clipit.task.feedbackCheck);
     $(document).on("click", ".quiz-select", clipit.task.quizSelect);

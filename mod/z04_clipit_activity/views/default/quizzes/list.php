@@ -53,6 +53,7 @@ $count_answer = ClipitQuiz::questions_answered_by_user($quiz_id, $user_id);
 
 <script>
 <?php if(!$finished && $quiz->max_time > 0):?>
+
     var eventTime= <?php echo $quiz_start + $quiz->max_time?>, // Timestamp - Sun, 21 Apr 2013 13:00:00 GMT
         currentTime = <?php echo time()?>, // Time()
         diffTime = eventTime - currentTime,
@@ -77,6 +78,7 @@ $count_answer = ClipitQuiz::questions_answered_by_user($quiz_id, $user_id);
         }
         $('.countdown').text(days + hours + moment.utc(d).format('mm') + "m " + moment.utc(d).format('ss') + "s");
     }, interval);
+
 <?php endif;?>
     $(function(){
         $(document).on("click", ".pagination li.page:not('.disabled')", function(){
@@ -108,54 +110,12 @@ $count_answer = ClipitQuiz::questions_answered_by_user($quiz_id, $user_id);
             }
             clearTimeout(typingTimer);
             var $obj = $(this);
-            typingTimer = setTimeout(function(){ $obj.saveQuestion()}, doneTypingInterval);
+            typingTimer = setTimeout(clipit.quiz.saveQuestion, doneTypingInterval, {'object': $obj});
         });
         $(document).on("keydown", ".quiz input, .quiz textarea", function(){
             clearTimeout(typingTimer);
         });
-        $(document).on("click", ".quiz input[type=checkbox], .quiz input[type=radio]", function(){
-            return $(this).saveQuestion();
-        });
-        $.fn.saveQuestion = function() {
-            var $element = $(this);
-            if($(this).attr("type") == 'checkbox'){
-                var $element = $(".quiz input[type=checkbox]");
-            }
-            var form = $(this).closest("form").find($element.add("input:hidden"));
-            var $container = $(this).closest(".question");
-            $container.find(".loading-question").show()
-            $container.find(".num-question").hide();
-            elgg.action('quiz/take',{
-                data: form.serialize(),
-                success: function(json) {
-                    $container.find(".loading-question").hide()
-                    $container.find(".num-question").show();
-                    $("#count-result").text(json.output);
-                    // if finished
-                    if (json.output == 'finished'){
-                        window.location.href = '';
-                    }
-                }
-            });
-        };
-
-        $("#finish-quiz").click(function(e){
-            e.preventDefault();
-            var that = $(this);
-            var confirmOptions = {
-                title: $("#questions-result").text(),
-                buttons: {
-                    ok: {
-                        label: elgg.echo("input:ok")
-                    }
-                },
-                message: elgg.echo("quiz:result:send"),
-                callback: function(result) {
-                    that.closest('form').submit();
-                }
-            };
-            bootbox.alert(confirmOptions);
-        });
+        $(document).on("click", ".quiz input[type=checkbox], .quiz input[type=radio]", clipit.quiz.saveQuestion);
     <?php endif;?>
     });
 </script>

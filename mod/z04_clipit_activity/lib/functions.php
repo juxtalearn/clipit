@@ -541,30 +541,27 @@ function get_group_progress($group_id){
         ClipitTask::TYPE_QUIZ_TAKE,
         ClipitTask::TYPE_RESOURCE_DOWNLOAD
     );
-    $completed = array();
     $total = 0;
+    $completed = 0;
     $group_users = ClipitGroup::get_users($group_id);
-    foreach($activity->task_array as $task_id){
-        $task = array_pop(ClipitTask::get_by_id(array($task_id)));
-        //if(time() > $task->start) {
-            if (in_array($task->task_type, $individual_tasks)) {
-                foreach ($group_users as $user_id) {
-                    if (ClipitTask::get_completed_status($task_id, $user_id)) {
-                        $completed[] = true;
-                    }
-                    $total++;
+    $tasks = ClipitTask::get_by_id($activity->task_array);
+    foreach($tasks as $task){
+        if (in_array($task->task_type, $individual_tasks)) {
+            foreach ($group_users as $user_id) {
+                if (ClipitTask::get_completed_status($task->id, $user_id)) {
+                    $completed++;
                 }
-            } else {
-                //$total++;
-                if (ClipitTask::get_completed_status($task_id, $group_id)) {
-                    $completed[] = true;
-                }
+                $total++;
             }
-        //}
-        $total++;
+        } else {
+            if (ClipitTask::get_completed_status($task->id, $group_id)) {
+                $completed++;
+            }
+            $total++;
+        }
     }
     $total = $total == 0 ? 1 : $total;
-    $val = count($completed)/($total);
+    $val = $completed/$total;
     return round($val*100);
 }
 

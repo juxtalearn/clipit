@@ -180,6 +180,40 @@ clipit.requestPassword = function(e) {
         }
     }
 };
+
+/*
+ * jQuery Shorten plugin
+ *
+ */
+(function($) {
+    $.fn.shorten = function () {
+        return this.each(function () {
+            var element_shorten = $(this);
+            var element_height = element_shorten.css("max-height");
+            element_shorten.addClass("shorten");
+            element_shorten.wrapInner("<div class='container-text'/>");
+            var container = element_shorten.find('.container-text');
+            var container_height = container.css("height");
+            if(parseInt(container_height) < parseInt(element_height)){
+                return false;
+            }
+            var readmore_link = $("<a href='javascript:;' class='read-more'>"+elgg.echo('read_more')+"<strong>...</strong></a>");
+            element_shorten.append(readmore_link);
+            container.css("max-height",element_height);
+            readmore_link.on("click", function(){
+                if (container.hasClass('full-content')) {
+                    container.removeClass('full-content');
+                    container.addClass('less-content');
+                    $(this).text(elgg.echo('read_more')+"...");
+                } else {
+                    container.addClass('full-content');
+                    $(this).text(elgg.echo('read_less'));
+                }
+            });
+        });
+    }
+})(jQuery);
+
 $(function(){
     /**
      * Collapse function
@@ -405,38 +439,7 @@ $(function(){
         });
     }
 
-    /*
-     * jQuery Shorten plugin
-     *
-     */
-    (function($) {
-        $.fn.shorten = function () {
-            return this.each(function () {
-                var element_shorten = $(this);
-                var element_height = element_shorten.css("max-height");
-                element_shorten.addClass("shorten");
-                element_shorten.wrapInner("<div class='container-text'/>");
-                var container = element_shorten.find('.container-text');
-                var container_height = container.css("height");
-                if(parseInt(container_height) < parseInt(element_height)){
-                    return false;
-                }
-                var readmore_link = $("<a href='javascript:;' class='read-more'>"+elgg.echo('read_more')+"<strong>...</strong></a>");
-                element_shorten.append(readmore_link);
-                container.css("max-height",element_height);
-                readmore_link.on("click", function(){
-                    if (container.hasClass('full-content')) {
-                        container.removeClass('full-content');
-                        container.addClass('less-content');
-                        $(this).text(elgg.echo('read_more')+"...");
-                    } else {
-                        container.addClass('full-content');
-                        $(this).text(elgg.echo('read_less'));
-                    }
-                });
-            });
-        }
-    })(jQuery);
+
     ///
     /**
      * Tag-it for performance items

@@ -20,7 +20,7 @@ $file = elgg_extract('entity', $vars);
         'text'  => elgg_view("multimedia/file/preview", array('file'  => $file))));?>
     </div>
 <?php endif;?>
-<div>
+<div style="padding: 15px;">
     <?php echo elgg_view('output/url', array(
         'href'  => "file/download/".$file->id,
         'title' => elgg_echo('download'),

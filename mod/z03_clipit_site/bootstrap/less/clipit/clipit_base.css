@@ -8451,6 +8451,9 @@ ul.top-account > li > a > span.badge {
 .activity-status.status-closed {
   color: #ff4343;
 }
+.nav-steps > li > a {
+  cursor: default;
+}
 .activity-profile .elgg-head-layout h2 {
   font-family: Helvetica;
   font-weight: 500;

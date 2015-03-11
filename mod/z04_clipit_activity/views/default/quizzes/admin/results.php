@@ -45,11 +45,6 @@ switch($type = get_input('type')){
             }
 
             $total = $correct+$error+$pending;
-//            $output[] = array(
-//                'correct' => round(($correct*100)/$total)."%",
-//                'error' => round(($error*100)/$total)."%",
-//                'pending' => round(($pending*100)/$total)."%",
-//            );
             $output[] = array(
                 'correct' => round(($correct*100)/$total)."%",
                 'answered' => $answered." ".elgg_echo('quiz:out_of')." ".count($questions)*count($group->user_array)
@@ -83,7 +78,7 @@ switch($type = get_input('type')){
                 $total = $correct+$error+$pending;
                 $output[] = array(
                     'correct' => round(($correct*100)/$total)."%",
-                    'answered' => $total." ".elgg_echo('quiz:out_of')." ".count($questions)
+                    'answered' => ($total-$pending)." ".elgg_echo('quiz:out_of')." ".count($questions)
                 );
             } else {
                 $output[] = array(
