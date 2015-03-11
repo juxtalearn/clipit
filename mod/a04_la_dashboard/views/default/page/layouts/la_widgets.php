@@ -8,6 +8,8 @@
  * @uses $vars['exact_match']      Widgets must match the current context (false)
  * @uses $vars['show_access']      Show the access control (true)
  */
+
+elgg_load_css('dashboardcss');
 $num_columns = elgg_extract('num_columns', $vars, 3);
 $show_add_widgets = elgg_extract('show_add_widgets', $vars, true);
 $exact_match = elgg_extract('exact_match', $vars, false);
@@ -19,11 +21,10 @@ $widget_types = elgg_get_widget_types();
 
 $context = elgg_get_context();
 elgg_push_context('widgets');
-
 $widgets = elgg_get_widgets($owner->guid, $context);
 if (elgg_can_edit_widget_layout($context)) {
     if ($show_add_widgets) {
-        echo elgg_view('page/layouts/widgets/add_button');
+        echo elgg_view('page/layouts/widgets/add_button', array('panel_id'=>$context));
     }
     $params = array(
         'widgets' => $widgets,

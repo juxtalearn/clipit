@@ -22,12 +22,27 @@ if (isset($widget->activity_id) && is_not_null($widget->activity_id)) {
 if (isset($widget->quiz_id) && is_not_null($widget->quiz_id)) {
     try {
         $quiz = array_pop(ClipitQuiz::get_by_id(array($widget->quiz_id)));
+        $quiz_id=$widget->quiz_id;
+
     } catch (Exception $e) {
         $widget->quiz_id=null;
         $to_be_configured=true;
     }
 } else {
-    $to_be_configured = true;
+
+    if  (elgg_in_context('activity_page')) {
+        $page = get_input('page');
+        $re = "/tasks\\/view\\/(.*)/";
+        preg_match($re, $page, $matches);
+        $task_id = $matches[1];
+        $tmpTask = array_pop(ClipitTask::get_by_id(array($task_id)));
+        $widget->quiz_id= $tmpTask->quiz;
+        $widget->save();
+
+        $quiz_id=$widget->quiz_id;
+    } else {
+        $to_be_configured = true;
+    }
 }
 if (isset($widget->scale) && is_not_null($widget->scale)) {
     $scale = $widget->scale;
@@ -61,7 +76,6 @@ if ($to_be_configured) {
         </div>
 HTML;
 } else {
-
     $task_id = ClipitQuiz::get_task($quiz_id);
     $task = array_pop(ClipitTask::get_by_id(array($task_id)));
 

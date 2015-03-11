@@ -24,7 +24,7 @@ function learning_analytics_dashboard_init()
     elgg_register_page_handler('metric', 'getmetric_clipit_page_handler');
     elgg_register_ajax_view('metrics/metric');
     elgg_register_widget_type('metric', elgg_echo('la_dashboard:la_metrics:title'), elgg_echo('la_dashboard:widget:la_metrics:description'), 'la_metrics', true);
-    elgg_register_widget_type('quizresult', elgg_echo('la_dashboard:quizresult:title'), elgg_echo('la_dashboard:widget:quizresult:description'), 'la_metrics', true);
+    elgg_register_widget_type('quizresult', elgg_echo('la_dashboard:quizresult:title'), elgg_echo('la_dashboard:widget:quizresult:description'), 'la_metrics,quizstudents,quizgroups,quizactivity', true);
     elgg_register_widget_type('quizresultcompare', elgg_echo('la_dashboard:quizresultscompare:title'), elgg_echo('la_dashboard:widget:quizresultcompare:description'), 'la_metrics', true);
 //    // Register library
 //    elgg_extend_view("navigation/menu/top", "navigation/menu/profile", 400);
@@ -91,6 +91,13 @@ function la_widget_permissions_hook($hook, $type, $returnvalue, $params)
 {
     if (elgg_instanceof($params['entity'], "object", "widget")) {
         $user = $params['user'];
+        switch ($params['entity']->handler) {
+            case 'quizresult':
+                if (elgg_in_context('activity_page')) {
+                  //  return false;
+                }
+
+        }
         $clipit_user = array_pop(ClipitUser::get_by_id(array($user->guid)));
         if ($clipit_user->role == ClipitUser::ROLE_STUDENT) {
             return false;
@@ -105,9 +112,65 @@ function la_widget_layout_permissions_hook($hook, $type, $returnvalue, $params)
     if (isset($params['context']) && isset($params['user']) && isset($params['page_owner'])) {
         $user = $params['user'];
         $context = $params['context'];
+        $pageowner = $params['page_owner'];
         $clipit_user = array_pop(ClipitUser::get_by_id(array($user->guid)));
-        if ($context == 'la_metrics' && $clipit_user->role == ClipitUser::ROLE_STUDENT ) {
-            return false;
+        switch ($context) {
+            case 'quizstudents':
+                $widgets_columns = elgg_get_widgets($pageowner->getGUID(), $context);
+                $found = false;
+                foreach ($widgets_columns as $widgets) {
+                    foreach ($widgets as $widget) {
+                        if ($widget->handler == 'quizresult') {
+                            $found = true;
+                            break 2;
+                        }
+                    }
+                }
+                if (!$found) {
+                    $widgetguid = elgg_create_widget($pageowner->getGUID(), 'quizresult', $context);
+                    if ($widgetguid) {
+                        $widget = get_entity($widgetguid);
+                        $widget->activity_id = $pageowner->getGUID();
+                        $widget->question_or_stumblingblock=ClipitTag::SUBTYPE;
+                        $widget->scale=ClipitGroup::SUBTYPE;
+                        $widget->group_id='all';
+                        // position the widget
+                        $widget->move(1, 0);
+                        $widget->save();
+                    }
+                }
+                return false;
+            case 'quizgroups':
+                $widgets_columns = elgg_get_widgets($pageowner->getGUID(), $context);
+                $found = false;
+                foreach ($widgets_columns as $widgets) {
+                    foreach ($widgets as $widget) {
+                        if ($widget->handler == 'quizresult') {
+                            $found = true;
+                            break 2;
+                        }
+                    }
+                }
+                if (!$found) {
+                    $widgetguid = elgg_create_widget($pageowner->getGUID(), 'quizresult', $context);
+                    if ($widgetguid) {
+                        $widget = get_entity($widgetguid);
+                        $widget->activity_id = $pageowner->getGUID();
+                        $widget->question_or_stumblingblock=ClipitTag::SUBTYPE;
+                        $widget->scale=ClipitActivity::SUBTYPE;
+                        $widget->group_id='all';
+                        // position the widget
+                        $widget->move(1, 0);
+                        $widget->save();
+                    }
+                }
+                return false;
+            case 'quizactivity':
+                return false;
+            case 'la_metrics':
+                if ($context == 'la_metrics' && $clipit_user->role == ClipitUser::ROLE_STUDENT) {
+                    return false;
+                }
         }
     }
 }

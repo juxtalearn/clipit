@@ -15,11 +15,11 @@
 ?>
 
 
-<div id="learning_analytics_dashboard">
+<div class="learning_analytics_dashboard">
 <?php
 
 $params = array(
-'content' => $orig_urjc_content,
+//'content' => "",#$orig_urjc_content,
 'title' => $title,
 'filter' => '',
 'num_columns' => 3,

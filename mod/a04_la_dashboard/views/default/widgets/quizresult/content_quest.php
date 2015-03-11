@@ -24,15 +24,16 @@ if ($scale == ClipitActivity::SUBTYPE) {
         $quiz_results = ClipitQuiz::get_group_results_by_question($quiz_id, $group_id);
         $group = get_entity($group_id);
         $data = array();
-        foreach ($sbresults as $blockname) {
-            $data[$blockname] = 0;
-        }
         if (is_not_null($quiz_results) && !empty($quiz_results)) {
 
             foreach ($quiz_results as $sb_id => $value) {
                 $sb = get_entity($sb_id);
                 $sb_name = $sb->name;
                 $data[strval($sb_name)] = intval($value)*100;
+            }
+        } else {
+            foreach ($sbresults as $blockname) {
+                $data[$blockname] = 0;
             }
         }
         $data = json_encode($data);
@@ -48,14 +49,15 @@ if ($scale == ClipitActivity::SUBTYPE) {
             $quiz_results = ClipitQuiz::get_user_results_by_question($quiz_id, $user_id);
             $user = get_entity($user_id);
             $data = array();
-//            foreach (array_keys($min_values) as $blockname) {
-//                $data[$blockname] = 0;
-//            }
             if (is_not_null($quiz_results) && !empty($quiz_results)) {
                 foreach ($quiz_results as $sb_id => $value) {
                     $sb = get_entity($sb_id);
                     $sb_name = $sb->name;
                     $data[strval($sb_name)] = floatval($value)*100;
+                }
+            } else {
+                foreach ($sbresults as $blockname) {
+                    $data[$blockname] = 0;
                 }
             }
 //                $data = json_encode($data);
@@ -67,7 +69,7 @@ if ($scale == ClipitActivity::SUBTYPE) {
 if (is_not_null($results) && !empty($results)) {
     echo elgg_view('dojovis/quizspider', array(
         'widget_id' => $widget_id,
-        'axis' => $question_names,
+        'axis' => $sbresults,
         'results' => $results,
     ))
 
