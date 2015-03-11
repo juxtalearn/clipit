@@ -19,7 +19,7 @@ $question = elgg_extract('question', $vars);
 $i = 1;
 foreach($question->option_array as $option):
     $checked = '';
-    if($result->answer[$i-1]){
+    if ($result->answer[$i - 1]) {
         $checked = 'checked';
     }
     $total_results_text = '';
@@ -37,7 +37,7 @@ foreach($question->option_array as $option):
 ?>
 <label style="font-weight: normal">
     <?php if($finished):?>
-        <input type="checkbox" disabled <?php echo in_array(($i-1), $result->answer) ? 'checked' : '';?>/>
+        <input type="checkbox" disabled <?php echo $checked;?>/>
         <?php if($question->validation_array[$i-1] && $finished_task):?>
             <strong><?php echo $option;?></strong>
         <?php else:?>

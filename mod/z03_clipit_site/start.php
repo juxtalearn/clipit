@@ -30,6 +30,8 @@ function clipit_final_init(){
     // Activity admin module ajax
     elgg_register_ajax_view('dashboard/modules/activity_admin/task_list');
 
+    elgg_register_ajax_view('dashboard/modules/group_status_data');
+
     elgg_register_action("clipit_theme/settings", "{$plugin_dir}/actions/settings.php", 'admin');
     elgg_register_action('login', "{$plugin_dir}/actions/login.php", 'public');
     elgg_register_action('logout', "{$plugin_dir}/actions/logout.php");
@@ -167,7 +169,9 @@ function user_landing_page($page)
             $content = elgg_view('dashboard/teacher', array('entity' => $user));
             break;
         case ClipitUser::ROLE_STUDENT:
-            $content = elgg_view('dashboard/student', array('entity' => $user));
+            $activities = ClipitUser::get_activities($user->id);
+            $activities = ClipitActivity::get_by_id($activities);
+            $content = elgg_view('dashboard/student', array('activities' => $activities));
             break;
         case ClipitUser::ROLE_ADMIN:
             $content = elgg_view('dashboard/admin', array('entity' => $user));

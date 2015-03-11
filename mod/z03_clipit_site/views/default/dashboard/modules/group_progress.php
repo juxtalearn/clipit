@@ -10,22 +10,39 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$entities = elgg_extract('entities', $vars);
-$activities = ClipitActivity::get_by_id($entities);
+$activities = elgg_extract('entities', $vars);
 $user_id = elgg_get_logged_in_user_guid();
 ?>
+<script>
+$(function(){
+    var container = $('.module-activity_status');
+    elgg.get('ajax/view/dashboard/modules/group_status_data', {
+        data: {entities: <?php echo json_encode(array_keys($activities));?>, type: 'group_status'},
+        dataType: 'json',
+        success: function (data) {
+            $.each(data, function(group, progress){
+                $('[data-group-id='+group+']').css('width', progress + '%').find('span').html(progress + '%');
+            });
+        }
+    });
+});
+</script>
+<style>
+    .module-activity_status .elgg-body .bar{
+        transition: all 1s;
+    }
+</style>
 <div class="wrapper separator">
     <?php
     foreach($activities as $activity):
         if($activity->status != ClipitActivity::STATUS_CLOSED):
         $group_id = ClipitGroup::get_from_user_activity($user_id, $activity->id);
         $group_object = ClipitSite::lookup($group_id);
-        $progress = get_group_progress($group_id);
-        ?>
+    ?>
             <div>
                 <?php echo elgg_view('output/url', array(
                     'href' => "clipit_activity/{$activity->id}/group/{$group_id}",
-                    'class' => 'pull-right',
+                    'class' => 'pull-right margin-left-5',
                     'text' => $group_object['name'],
                     'title' => $group_object['name'],
                     'is_trusted' => true,
@@ -50,27 +67,13 @@ $user_id = elgg_get_logged_in_user_guid();
                     ?>
                 </strong>
                 <div class="bg-bar">
-                    <div class="bar" style="width: <?php echo $progress;?>%;">
+                    <div class="bar" data-group-id="<?php echo $group_id;?>" style="width: 0%;">
                         <div>
-                            <span><?php echo $progress;?>%</span>
+                            <span><i class="fa fa-spinner fa-spin"></i></span>
                         </div>
                     </div>
                 </div>
             </div>
-        <div class="bar" style="display:none;max-width:100%;width:<?php echo $progress;?>%;background: #<?php echo $activity->color;?>;">
-            <div>
-                <h4>
-                    <?php echo elgg_view('output/url', array(
-                        'href' => "clipit_activity/{$activity->id}",
-                        'text' => $activity->name,
-                        'title' => $activity->title,
-                        'is_trusted' => true,
-                    ));
-                    ?>
-                    <small class="show"><?php echo $group_object['name'];?></small>
-                </h4>
-            </div>
-        </div>
         <?php endif;?>
     <?php endforeach;?>
 </div>

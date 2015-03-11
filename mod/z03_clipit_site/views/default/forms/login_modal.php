@@ -1,12 +1,12 @@
 <?php echo elgg_view('login/extend', $vars); ?>
 
     <div class="form-group">
-        <label for="exampleInputEmail1"><?php echo elgg_echo('user:username:login'); ?></label>
-        <input type="text" class="form-control" name="username" id="inputUsername" placeholder="<?php echo elgg_echo('loginusername'); ?>" required>
+        <label for="username"><?php echo elgg_echo('user:username:login'); ?></label>
+        <input type="text" class="form-control" name="username" id="input-login" placeholder="<?php echo elgg_echo('loginusername'); ?>" required>
     </div>
     <div class="form-group">
-        <label for="exampleInputPassword1"><?php echo elgg_echo('password'); ?></label>
-        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="<?php echo elgg_echo('password'); ?>" required>
+        <label for="password"><?php echo elgg_echo('password'); ?></label>
+        <input type="password" name="password" id="input-password" class="form-control" placeholder="<?php echo elgg_echo('password'); ?>" required>
     </div>
     <div class="form-group">
         <label style="font-weight: normal;">

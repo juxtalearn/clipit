@@ -20,7 +20,7 @@ $account = elgg_extract('accounts', $vars);
     $(function(){
         // Auto focus, username input
         $('#modal-login').on('shown.bs.modal', function () {
-            $('#inputUsername').focus();
+            $('#input-login').focus();
         });
     });
 </script>

@@ -39,7 +39,15 @@ if(!$entity || trim($comment_text) == ""){
         $entities_count = array_pop(ClipitComment::count_by_destination(array($entity->id)));
         $offset = "?offset=" . clipit_get_offset_last($entities_count);
     }
-    $href = 'clipit_activity/'.$entity::get_activity($entity->id).'/publications/view/'.$entity->id.$offset.'#comment_'.$new_comment_id;
+    switch($entity::get_scope($entity->id)){
+        case 'site':
+            $page = 'explore/';
+            break;
+        case 'task':
+            $page = 'clipit_activity/'.$entity::get_activity($entity->id).'/publications/';
+            break;
+    }
+    $href = $page.'view/'.$entity->id.$offset.'#comment_'.$new_comment_id;
 }
 
 forward($href);

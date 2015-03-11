@@ -10,12 +10,17 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$activities = ClipitActivity::get_by_id(ClipitUser::get_activities(elgg_get_logged_in_user_guid()));
+$all_activities = ClipitActivity::get_by_id(ClipitUser::get_activities(elgg_get_logged_in_user_guid()));
+foreach($all_activities as $my_activity){
+    if($my_activity->status != ClipitActivity::STATUS_CLOSED){
+        $activities[$my_activity->id] = $my_activity;
+    }
+}
+$activity = reset($activities);
 ?>
 <script>
 <?php
-foreach($activities as $activity):
-    if($activity->status != ClipitActivity::STATUS_CLOSED):
+    if($activity):
 ?>
     nv.addGraph(function() {
         var chart = nv.models.discreteBarChart()
@@ -59,13 +64,23 @@ foreach($activities as $activity):
         return chart;
     });
     <?php endif;?>
-<?php endforeach;?>
+    activity_group_status_data = function(){
+        var content = $(this).find('.chart-js');
+        if($(this).find('svg').length == 0) {
+            elgg.get('ajax/view/dashboard/modules/group_status_data', {
+                data: {entity: $(this).data('entity')},
+                success: function (data) {
+                    content.html(data);
+                }
+            });
+        }
+    };
     $(document).ready(function(){
 
-        $("#next").click(function(){
-            if ($(".charts .group_activities:visible").next().length != 0)
-                $(".charts .group_activities:visible").next().show().prev().hide();
-            else {
+        $("#next").click(function() {
+            if ($(".charts .group_activities:visible").next().length != 0){
+                $(".charts .group_activities:visible").next().fadeIn(activity_group_status_data).prev().hide();
+            } else {
                 $(".charts .group_activities:visible").hide();
                 $(".charts .group_activities:first").show();
             }
@@ -75,17 +90,16 @@ foreach($activities as $activity):
 
         $("#prev").click(function(){
             if ($(".charts .group_activities:visible").prev().length != 0)
-                $(".charts .group_activities:visible").prev().show().next().hide();
+                $(".charts .group_activities:visible").prev().fadeIn(activity_group_status_data).next().hide();
             else {
                 $(".charts .group_activities:visible").hide();
-                $(".charts .group_activities:last").show();
+                $(".charts .group_activities:last").fadeIn(activity_group_status_data);
             }
             $(window).trigger('resize');
             return false;
         });
     });
 </script>
-
 <?php if(count($activities) > 1):?>
     <a href="javascript:;" class="fa fa-chevron-right" id="next"></a>
     <a href="javascript:;" class="fa fa-chevron-left" id="prev"></a>
@@ -95,19 +109,28 @@ foreach($activities as $activity):
 <?php
 $count = 0;
 foreach($activities as $activity):
-    if($activity->status != 'closed'):
-        $show = "block";
-        if($count > 0){
-            $show = "none";
-        }
-?>
-    <div id="chart_bar_<?php echo $activity->id;?>" class="group_activities separator" style="display: <?php echo $show;?>">
+    $show = "block";
+    if($count > 0){
+        $show = "none";
+    }
+    ?>
+    <div data-entity="<?php echo $activity->id;?>" id="chart_bar_<?php echo $activity->id;?>" class="group_activities separator" style="display: <?php echo $show;?>">
         <h3 style="color: #<?php echo $activity->color;?>;"><?php echo $activity->name;?></h3>
-        <svg></svg>
+        <div class="chart-js">
+        <?php if($count > 0):?>
+            <?php echo elgg_view('page/components/loading_block', array('height' => '200px', 'text' => elgg_echo('loading:charts')));?>
+        <?php else:?>
+            <svg></svg>
+        <?php endif;?>
+        </div>
     </div>
-<?php
+    <?php
     $count++;
-    endif;
 endforeach;
 ?>
 </div>
+<style>
+.chart-js .separator{
+    border: 0;
+}
+</style>

@@ -106,10 +106,9 @@ $(function(){
 $(function(){
     datepicker_setup();
     $(".nav-steps li").on("click", function(e) {
-        if ($(this).hasClass("disabled")) {
             e.preventDefault();
             return false;
-        }
+
     });
     $(document).on("click", ".button_step, .nav-steps a",function(){
         // Step 4 (Make groups) empty
@@ -190,6 +189,13 @@ $(function(){
 
     <div class="col-md-12 text-right margin-top-20">
         <hr>
+        <?php echo elgg_view('input/button', array(
+            'value' => elgg_echo('back'),
+            'data-step' => 0,
+            'id' => 'back_step',
+            'class' => "btn btn-primary btn-border-blue pull-left button_step",
+        ));
+        ?>
         <?php echo elgg_view('input/button', array(
                 'value' => elgg_echo('next'),
                 'data-step' => 2,

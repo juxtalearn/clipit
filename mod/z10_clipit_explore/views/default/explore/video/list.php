@@ -16,9 +16,6 @@ $href = elgg_extract('href', $vars);
 <div class="row">
     <?php
     foreach($videos as $video):
-        $activity_id = ClipitVideo::get_activity($video->id);
-        $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
-        $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($activity->tricky_topic)));
     ?>
     <div class="col-md-5 col-lg-4">
         <div class="video_prev">

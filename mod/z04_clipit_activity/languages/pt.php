@@ -259,7 +259,7 @@ $portuguese = array(
     'rating:none' => 'Não há pontuação',
     // Create activity
     'or:create' => 'ou cria um',
-    'activity:site:students' => 'Estudantes de CLipIt',
+    'activity:site:students' => 'Estudantes de ClipIt',
     'activity:students' => 'Activity students',
     'finish' => 'Terminar',
     'teachers:add' => 'Anexar professores',

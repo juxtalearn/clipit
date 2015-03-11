@@ -10,16 +10,11 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$user = elgg_extract("entity", $vars);
+$activities = elgg_extract("activities", $vars);
 elgg_load_js("nvd3:d3_v2");
 elgg_load_js("nvd3");
 elgg_load_css("nvd3:css");
 ?>
-<script>
-$(function(){
-
-});
-</script>
 <div class="col-md-4 events-list">
     <?php echo elgg_view('dashboard/module', array(
         'name'      => 'events',
@@ -41,7 +36,7 @@ $(function(){
             'name'      => 'activity_status',
             'title'     => elgg_echo('my_group:progress'),
             'content'   => elgg_view('dashboard/modules/group_progress', array(
-                'entities' => ClipitUser::get_activities($user->id)
+                'entities' => $activities
             )),
         ));
         ?>

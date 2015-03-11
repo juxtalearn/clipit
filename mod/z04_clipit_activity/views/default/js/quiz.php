@@ -15,10 +15,52 @@
 elgg.provide('clipit.quiz');
 
 clipit.quiz.init = function() {
-
+    $("#finish-quiz").click(clipit.quiz.finishConfirmation);
 };
 elgg.register_hook_handler('init', 'system', clipit.quiz.init);
 
+clipit.quiz.saveQuestion = function(e){
+    var $element = $(this);
+    if(arguments[0].object){
+       $element = arguments[0].object;
+    }
+    if($element.attr("type") == 'checkbox'){
+        var $element = $(".quiz input[type=checkbox]");
+    }
+    var form = $element.closest("form").find($element.add("input:hidden"));
+    var $container = $element.closest(".question");
+    $container.find(".loading-question").show()
+    $container.find(".num-question").hide();
+    elgg.action('quiz/take',{
+        data: form.serialize(),
+        success: function(json) {
+            $container.find(".loading-question").hide()
+            $container.find(".num-question").show();
+            $("#count-result").text(json.output);
+            // if finished
+            if (json.output == 'finished'){
+                window.location.href = '';
+            }
+        }
+    });
+};
+clipit.quiz.finishConfirmation = function(e){
+    e.preventDefault();
+    var that = $(this);
+    var confirmOptions = {
+        title: $("#questions-result").text(),
+        buttons: {
+            ok: {
+                label: elgg.echo("input:ok")
+            }
+        },
+        message: elgg.echo("quiz:result:send"),
+        callback: function(result) {
+            that.closest('form').submit();
+        }
+    };
+    bootbox.alert(confirmOptions);
+};
 clipit.quiz.create = function(options){
     var defaults = {};
     var opt =  $.extend({}, defaults, options),
@@ -336,5 +378,89 @@ clipit.quiz.create = function(options){
         var q = new Question();
         q.question = $(this);
         q._init();
+    });
+};
+
+/**
+ * Clipit Quiz admin task
+ */
+elgg.provide('clipit.task.admin.quiz');
+clipit.task.admin.quiz.init = function() {
+    $(document).on("click", ".save-annotation", clipit.task.admin.quiz.saveAnnotation);
+};
+elgg.register_hook_handler('init', 'system', clipit.task.admin.quiz.init);
+
+clipit.task.admin.quiz.showChart = function(e){
+    var that = $(this),
+        user_id = that.closest('li').data('entity'),
+        content = that.closest('li').find('.chart');
+    if(content.is(':empty')) {
+        content.html('<i class="fa fa-spinner fa-spin fa-2x blue"></i>');
+        elgg.get("ajax/view/quizzes/admin/results", {
+            data: {
+                quiz: e.data.quiz,
+                type: 'chart',
+                user: user_id
+            },
+            success: function (data) {
+                content.html(data);
+            }
+        });
+    }
+};
+clipit.task.admin.quiz.showData = function(e){
+    var that = $(this),
+        id = that.attr('href'),
+        entity_id = that.closest('li').data('entity'),
+        content = $(id);
+    if(content.is(':empty')) {
+        content.html('<i class="fa fa-spinner fa-spin fa-2x blue"></i>');
+        elgg.get("ajax/view/quizzes/admin/results", {
+            data: {
+                quiz: e.data.quiz,
+                type: 'result_'+ that.data('entity-type'),
+                entity: entity_id,
+                entity_type: that.data('type')
+            },
+            success: function (data) {
+                content.html(data);
+            }
+        });
+    }
+};
+clipit.task.admin.quiz.onShowTab = function(e){
+    var id = $(this).attr('href'),
+        container = $(id).find('li');
+    if(container.find('.status').is(':hidden')) {
+        elgg.get("ajax/view/quizzes/admin/results", {
+            dataType: "json",
+            data: {
+                quiz: e.data.quiz,
+                count: true,
+                type: id.replace('#', '')
+            },
+            success: function (output) {
+                $.each(output, function (i, data) {
+                    if(data.not_finished) {
+                        container.eq(i).find(".msg-not-finished").text(data.not_finished);
+                    } else {
+                        container.eq(i).find(".counts").show();
+                        container.eq(i).find(".a-correct").text(data.correct);
+                        container.eq(i).find(".answered").text(data.answered);
+                    }
+                });
+            }
+        });
+    }
+};
+clipit.task.admin.quiz.saveAnnotation = function(){
+    var container = $(this).parent(".annotate"),
+        form = $(this).closest("form");
+    tinymce.triggerSave();
+    elgg.action(form.attr("action"), {
+        data: form.serialize(),
+        success: function(){
+            container.slideToggle();
+        }
     });
 };
