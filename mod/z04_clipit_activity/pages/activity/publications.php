@@ -44,8 +44,8 @@ if($page[2] == 'view' && $page[3]){
     $owner_group = array_pop(ClipitGroup::get_by_id(array($owner_group_id)));
     $comments = array_pop(ClipitComment::get_by_destination(
         array($entity->id),
-        clipit_get_offset(),
-        clipit_get_limit()
+        clipit_get_limit(),
+        clipit_get_offset()
     ));
     switch($object['subtype']){
         // Clipit Video publication

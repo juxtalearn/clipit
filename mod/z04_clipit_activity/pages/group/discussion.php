@@ -13,7 +13,7 @@
 $title = elgg_echo("group:discussion");
 $href = "clipit_activity/{$activity->id}/group/{$group->id}/discussion";
 elgg_push_breadcrumb($title);
-$messages = array_pop(ClipitPost::get_by_destination(array($group->id)));
+$messages = array_pop(ClipitPost::get_by_destination(array($group->id), 0, 0, false, '', false));
 
 $content =  elgg_view('discussion/list',
     array(
