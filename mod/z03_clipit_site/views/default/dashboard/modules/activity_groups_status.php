@@ -18,14 +18,14 @@ $(function(){
     // Dashboard, load group status by activity
     clipit.loadActivityGroupStatus(<?php echo $activity->id;?>);
 });
-activity_group_status_data = function(){
-
-};
 $(document).ready(function(){
 
     $("#next").click(function() {
         if ($(".charts .group_activities:visible").next().length != 0){
-            $(".charts .group_activities:visible").next().fadeIn(clipit.loadActivityGroupStatusData).prev().hide();
+            $(".charts .group_activities:visible").next().fadeIn(
+                function(){
+                    clipit.loadActivityGroupStatus($(this).data('entity'));
+                }).prev().hide();
         } else {
             $(".charts .group_activities:visible").hide();
             $(".charts .group_activities:first").show();
@@ -36,10 +36,16 @@ $(document).ready(function(){
 
     $("#prev").click(function(){
         if ($(".charts .group_activities:visible").prev().length != 0)
-            $(".charts .group_activities:visible").prev().fadeIn(clipit.loadActivityGroupStatusData).next().hide();
+            $(".charts .group_activities:visible").prev().fadeIn(
+                function(){
+                    clipit.loadActivityGroupStatus($(this).data('entity'));
+                }).next().hide();
         else {
             $(".charts .group_activities:visible").hide();
-            $(".charts .group_activities:last").fadeIn(clipit.loadActivityGroupStatusData);
+            $(".charts .group_activities:last").fadeIn(clipit.loadActivityGroupStatus(
+                function(){
+                    clipit.loadActivityGroupStatus($(this).data('entity'));
+                }));
         }
         $(window).trigger('resize');
         return false;

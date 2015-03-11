@@ -15,16 +15,7 @@ $user_id = elgg_get_logged_in_user_guid();
 ?>
 <script>
 $(function(){
-    var container = $('.module-activity_status');
-    elgg.get('ajax/view/dashboard/modules/group_status_data', {
-        data: {entities: <?php echo json_encode(array_keys($activities));?>, type: 'group_status'},
-        dataType: 'json',
-        success: function (data) {
-            $.each(data, function(group, progress){
-                $('[data-group-id='+group+']').css('width', progress + '%').find('span').html(progress + '%');
-            });
-        }
-    });
+    clipit.loadGroupStatus(<?php echo json_encode(array_keys($activities));?>);
 });
 </script>
 <style>

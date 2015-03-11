@@ -286,24 +286,27 @@ clipit.submitLoading = function(e){
 };
 clipit.loadActivityGroupStatus = function(entity){
     var content = $('[data-entity="'+entity+'"]').find('.chart-js');
-    elgg.get('ajax/view/dashboard/modules/group_status_data', {
-        data: {'entity': entity, 'type': 'activity_group_status'},
-        success: function (data) {
-            content.html(data);
-        }
-    });
-};
-clipit.loadActivityGroupStatusData = function(){
-    var content = $(this).find('.chart-js');
-    if($(this).find('svg').length == 0) {
+    if(content.find('svg').length == 0) {
         elgg.get('ajax/view/dashboard/modules/group_status_data', {
-            data: {entity: $(this).data('entity'), type: 'activity_group_status'},
+            data: {'entity': entity, 'type': 'activity_group_status'},
             success: function (data) {
                 content.html(data);
             }
         });
     }
 };
+clipit.loadGroupStatus = function(entities){
+    var container = $('.module-activity_status');
+    elgg.get('ajax/view/dashboard/modules/group_status_data', {
+        data: {'entities': entities, 'type': 'group_status'},
+        dataType: 'json',
+        success: function (data) {
+            $.each(data, function(group, progress){
+                $('[data-group-id='+group+']').css('width', progress + '%').find('span').html(progress + '%');
+            });
+        }
+    });
+}
 ///
 /**
  * Tag-it for performance items

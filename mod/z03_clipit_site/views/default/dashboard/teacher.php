@@ -16,12 +16,6 @@ elgg_load_js("nvd3:d3_v2");
 elgg_load_js("nvd3");
 elgg_load_css("nvd3:css");
 ?>
-<?php if(!empty($activities)):?>
-    <script>
-        // Dashboard, load group status by activity
-        clipit.loadActivityGroupStatus();
-    </script>
-<?php endif;?>
 <div class="col-md-4 events-list">
     <?php echo elgg_view('dashboard/module', array(
         'name'      => 'events',
@@ -58,7 +52,9 @@ elgg_load_css("nvd3:css");
             echo elgg_view('dashboard/module', array(
                 'name'      => 'group_activity',
                 'title'     => elgg_echo('group:activity'),
-                'content'   => elgg_view('page/components/loading_block', array('height' => '245px', 'text' => elgg_echo('loading:charts'))),
+                'content'   => $content = elgg_view('dashboard/modules/activity_groups_status', array(
+                    'entities' => $activities
+                )),
             ));
         } else {
             echo elgg_view('dashboard/module', array(
