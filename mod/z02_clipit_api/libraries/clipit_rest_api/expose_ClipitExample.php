@@ -19,6 +19,7 @@ function expose_example_functions() {
     $api_suffix = "clipit.example.";
     $class_suffix = "ClipitExample::";
     expose_common_functions($api_suffix, $class_suffix);
+
     expose_function(
         $api_suffix . "add_tags", $class_suffix . "add_tags", array(
             "id" => array("type" => "int", "required" => true),

@@ -20,7 +20,6 @@ class ClipitExample extends UBItem {
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitExample";
-    const REL_EXAMPLE_TRICKYTOPIC = "ClipitExample-ClipitTrickyTopic";
     const REL_EXAMPLE_TAG = "ClipitExample-ClipitTag";
     const REL_EXAMPLE_EXAMPLETYPE = "ClipitExample-ClipitExampleType";
     const REL_EXAMPLE_STORYBOARD = "ClipitExample-ClipitStoryboard";
@@ -93,24 +92,19 @@ class ClipitExample extends UBItem {
     }
 
     static function get_tricky_topic($id) {
-        $ret_array = UBCollection::get_items($id, static::REL_EXAMPLE_TRICKYTOPIC);
+        $ret_array = UBCollection::get_items($id, ClipitTrickyTopic::REL_TRICKYTOPIC_EXAMPLE, true);
         if(!empty($ret_array)){
             return array_pop($ret_array);
         }
         return 0;
     }
 
-    static function set_tricky_topic($id, $tricky_topic) {
-        return UBCollection::set_items($id, array($tricky_topic), static::REL_EXAMPLE_TRICKYTOPIC);
+    static function set_tricky_topic($id, $tricky_topic_id) {
+        return ClipitTrickyTopic::add_examples($tricky_topic_id, array($id));
     }
 
     static function get_from_tricky_topic($tricky_topic_id) {
-        $id_array = UBCollection::get_items($tricky_topic_id, static::REL_EXAMPLE_TRICKYTOPIC, true);
-        $example_array = array();
-        foreach($id_array as $example_id) {
-            $example_array[] = new static($example_id);
-        }
-        return $example_array;
+        return ClipitExample::get_by_id(ClipitTrickyTopic::get_examples($tricky_topic_id));
     }
 
     /**
