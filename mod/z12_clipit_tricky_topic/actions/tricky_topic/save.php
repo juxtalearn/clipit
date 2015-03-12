@@ -14,11 +14,11 @@ $activiy_tricky_topic = get_input('activity-tricky-topic');
 $title = get_input('title');
 $description = get_input('description');
 $subject = get_input('subject');
-$education_level = (int)get_input('education_level');
+$education_level = get_input('education_level');
 if($activiy_tricky_topic){
     $title = get_input('tricky-topic-title');
     $description = get_input('tricky-topic-description');
-    $education_level = (int)get_input('tricky-topic-education_level');
+    $education_level = get_input('tricky-topic-education_level');
     $subject = get_input('tricky-topic-subject');
 }
 

@@ -23,7 +23,7 @@ foreach($my_activities_ids as $activity_id){
     }
 }
 
-$my_activities = ClipitActivity::get_by_id($id_activities_array[$selected_tab]);
+$my_activities = ClipitActivity::get_by_id($id_activities_array[$selected_tab], 0, 0, 'end', false);
 
 $params_list = array(
     'items'         => $my_activities,

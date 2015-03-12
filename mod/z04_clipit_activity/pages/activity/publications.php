@@ -15,7 +15,6 @@ $title = elgg_echo("activity:publications");
 elgg_push_breadcrumb($title);
 $href = "clipit_activity/{$activity->id}/publications";
 $filter = elgg_view('publications/filter', array('selected' => $selected_tab, 'entity' => $activity, 'href' => $href));
-$tasks = ClipitActivity::get_tasks($activity->id);
 
 if($page[2] == 'view' && $page[3]){
     $entity_id = (int)$page[3];
@@ -95,6 +94,7 @@ if($page[2] == 'view' && $page[3]){
             break;
     }
 } else {
+    $tasks = ClipitActivity::get_tasks($activity->id);
     switch($selected_tab){
         case 'videos':
             // Get last task [type: video_upload]

@@ -287,6 +287,7 @@ $english = array(
     'tasks:none' => 'No tasks',
     'task:completed' => 'Completed',
     'task:not_completed' => 'Not completed',
+    'task:next' => 'Upcoming tasks',
     'task:pending' => 'Pending',
     'task:my_video' => 'My video',
     'task:other_videos' => 'Other videos',

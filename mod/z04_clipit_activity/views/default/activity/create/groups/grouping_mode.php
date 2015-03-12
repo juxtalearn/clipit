@@ -11,7 +11,9 @@
  * @package         ClipIt
  */
 ?>
-<h3 class="title-block"><?php echo elgg_echo('activity:grouping_mode');?></h3>
+<?php echo elgg_view("page/components/title_block", array(
+    'title' => elgg_echo('activity:grouping_mode'),
+));?>
 <div class="panel-group" id="accordion_grouping">
     <div class="panel panel-default">
         <div class="panel-heading bg-white cursor-pointer">

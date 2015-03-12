@@ -93,9 +93,9 @@ $activities = ClipitActivity::get_by_id($activities);
                 </div>
             <?php endforeach;?>
         </div>
-        <h3 class="title-block">
-            <?php echo elgg_echo('timeline:public');?>
-        </h3>
+        <?php echo elgg_view("page/components/title_block", array(
+            'title' => elgg_echo('timeline:public'),
+        ));?>
         <ul>
             <?php
             $limit = 100;

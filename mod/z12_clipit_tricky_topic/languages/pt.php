@@ -12,10 +12,10 @@
  */
 $portuguese = array(
     'education_level' => 'Nível de Escolaridade',
-    'education_level:1' => 'Primeiro ciclo',
-    'education_level:2' => 'Segundo e terceiros ciclos',
-    'education_level:3' => 'Secundário',
-    'education_level:4' => 'Ensino Superior',
+    'education_level:primary' => 'Primeiro ciclo',
+    'education_level:gcse' => 'Segundo e terceiros ciclos',
+    'education_level:alevel' => 'Secundário',
+    'education_level:university' => 'Ensino Superior',
 
     'tricky_topic:subject' => 'Assunto',
 );

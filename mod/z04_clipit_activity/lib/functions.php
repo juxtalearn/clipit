@@ -638,12 +638,18 @@ function split_chunks($l, $n){
  * @return array
  */
 function get_education_levels($level = ''){
+    $default_ed_levels = array(
+        ClipitTrickyTopic::EDUCATION_LEVEL_PRIMARY,
+        ClipitTrickyTopic::EDUCATION_LEVEL_GCSE,
+        ClipitTrickyTopic::EDUCATION_LEVEL_ALEVEL,
+        ClipitTrickyTopic::EDUCATION_LEVEL_UNIVERSITY,
+    );
     $ed_levels = array('' => '');
-    for($i = 1; $i <= 4; $i++){
-        $ed_levels[$i] = elgg_echo('education_level:'.$i);
+    foreach($default_ed_levels as $ed_level){
+        $ed_levels[$ed_level] = elgg_echo('education_level:'.$ed_level);
     }
     if($level){
-        return $ed_levels[$i];
+        return $ed_levels[$level];
     } else {
         return $ed_levels;
     }

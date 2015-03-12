@@ -118,9 +118,9 @@ $groups = ClipitGroup::get_by_id($activity->group_array, 0, 0, 'name');
         foreach($groups as $group):
             $users = ClipitUser::get_by_id($group->user_array, 0, 0, 'name');
             ?>
-            <h3 class="title-block">
-                <?php echo $group->name;?>
-            </h3>
+            <?php echo elgg_view("page/components/title_block", array(
+                'title' => $group->name,
+            ));?>
             <ul class="panel-group" id="accordion_users">
                 <?php
                 foreach($users as $user):

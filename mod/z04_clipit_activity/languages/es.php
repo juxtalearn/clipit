@@ -286,6 +286,7 @@ $spanish = array(
     'tasks:none' => 'No hay tareas',
     'task:completed' => 'Completada',
     'task:not_completed' => 'Sin completar',
+    'task:next' => 'Próximas tareas',
     'task:pending' => 'Pendiente',
     'task:my_video' => 'Video de mi grupo',
     'task:other_videos' => 'Videos de otros grupos',

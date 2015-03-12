@@ -23,11 +23,8 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
     <?php foreach($tasks as $task):
     $status = get_task_status($task);
     ?>
-    <li class="overflow-hidden list-item-5 <?php echo (time() < $task->start && $user->role == ClipitUser::ROLE_STUDENT) ? "soon" : ""; ?>">
+    <li class="overflow-hidden list-item <?php echo (time() < $task->start && $user->role == ClipitUser::ROLE_STUDENT) ? "soon" : ""; ?>">
         <div class="image-block">
-            <small class="date show" style="text-transform: uppercase">
-                <span><?php echo date("d M Y", $task->start);?></span>
-            </small>
             <small class="date show" style="text-transform: uppercase">
                 <span><?php echo date("d M Y", $task->end);?></span>
             </small>

@@ -13,11 +13,9 @@
 $title = elgg_echo("activity:tasks");
 elgg_push_breadcrumb($title);
 $href = "clipit_activity/{$activity->id}/tasks";
-$group_id = ClipitGroup::get_from_user_activity($user_id, $activity->id);
-$tasks = ClipitTask::get_by_id($activity->task_array, 0, 0, 'start', true);
-$content = elgg_view('tasks/list', array('tasks' => $tasks, 'href' => $href));
 
 if($page[2] == 'view' && $page[3]){
+    $group_id = ClipitGroup::get_from_user_activity($user_id, $activity->id);
     $entity_id = (int)$page[3];
     $task = array_pop(ClipitTask::get_by_id(array($entity_id)));
     $super_title = false;
@@ -61,6 +59,46 @@ if($page[2] == 'view' && $page[3]){
             'super_title' => $super_title,
             'status' => $status
         ));
+    }
+} else {
+    $tasks = ClipitTask::get_by_id($activity->task_array, 0, 0, 'start', true);
+    if($user->role == ClipitUser::ROLE_STUDENT) {
+        $content = '';
+        foreach ($tasks as $task) {
+            $status = get_task_status($task);
+            if (time() < $task->start) {
+                $tasks_filtered['closed'][] = $task;
+            } else {
+                $tasks_filtered[$status['color']][] = $task;
+            }
+        }
+        foreach ($tasks_filtered as $color => $task_filtered) {
+            switch ($color) {
+                case 'yellow':
+                    $content .= elgg_view("page/components/title_block", array(
+                        'title' => elgg_echo("task:pending"),
+                    ));
+                    break;
+                case 'green':
+                    $content .= elgg_view("page/components/title_block", array(
+                        'title' => elgg_echo("task:completed"),
+                    ));
+                    break;
+                case 'red':
+                    $content .= elgg_view("page/components/title_block", array(
+                        'title' => elgg_echo("task:not_completed"),
+                    ));
+                    break;
+                case 'closed':
+                    $content .= elgg_view("page/components/title_block", array(
+                        'title' => elgg_echo("task:next"),
+                    ));
+                    break;
+            }
+            $content .= elgg_view('tasks/list', array('tasks' => $task_filtered, 'href' => $href));
+        }
+    } else { // Role {Teacher, Admin}
+        $content = elgg_view('tasks/list', array('tasks' => $tasks, 'href' => $href));
     }
 }
 $params = array(
