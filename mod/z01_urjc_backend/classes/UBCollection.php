@@ -53,6 +53,9 @@ abstract class UBCollection {
      */
     static function set_items($id, $item_array, $rel_name, $exclusive = false) {
         static::remove_all_items($id, $rel_name);
+        if(empty($item_array)){
+            return true;
+        }
         foreach ($item_array as $item_id) {
             if ($exclusive) {
                 $rel_array = get_entity_relationships($item_id, true);
