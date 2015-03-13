@@ -1,6 +1,5 @@
 //<script>
 elgg.provide('clipit');
-
 clipit.init = function() {
     /**
      * jQuery validator int messages
@@ -306,7 +305,7 @@ clipit.loadGroupStatus = function(entities){
             });
         }
     });
-}
+};
 ///
 /**
  * Tag-it for performance items

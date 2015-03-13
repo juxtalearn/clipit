@@ -19,7 +19,51 @@ elgg_load_js("jquery:dynatable");
 $id = uniqid();
 ?>
 <script>
-    <?php echo elgg_view("js/admin_tasks", array('entity' => $activity, 'tasks' => $tasks));?>
+    $(function() {
+        // Task views
+        $(".button-view-as").click(function(){
+            $(".view-element").hide();
+            $(".view-element[data-view="+$(this).attr('id')+"]").show();
+            $(this).toggleClass(function(){
+                $(this).parent('div').find('a').removeClass('active');
+                return 'active';
+            });
+        });
+        $(".datepicker").each(function(){
+            $(this).datepicker({
+                firstDay: 1,
+                minDate: "<?php echo date("d/m/Y", $activity->start);?>",
+                maxDate: "<?php echo date("d/m/Y", $activity->end);?>"
+            });
+        });
+        $('#full-calendar').fullCalendar(clipit.task.admin.fullCalendar({
+            messages: {
+                monthNames: <?php echo elgg_echo('calendar:month_names');?>,
+                monthNamesShort: <?php echo elgg_echo('calendar:month_names_short');?>,
+                dayNames: <?php echo elgg_echo('calendar:day_names');?>,
+                dayNamesShort: <?php echo elgg_echo('calendar:day_names_short');?>,
+                buttonText: {
+                    month: "<?php echo elgg_echo('calendar:month');?>",
+                    week: "<?php echo elgg_echo('calendar:week');?>",
+                    day: "<?php echo elgg_echo('calendar:day');?>",
+                    list: "<?php echo elgg_echo('calendar:agenda');?>"
+                }
+            },
+            events: [
+                <?php foreach($tasks as $task):?>
+                {
+                    id: "<?php echo $task->id;?>",
+                    title: "<?php echo $task->name;?>",
+                    start: "<?php echo date("Y-m-d",$task->start);?>T10:00:00",
+                    end: "<?php echo date("Y-m-d",$task->end);?>T10:00:00",
+                    icon: <?php echo json_encode(elgg_view("tasks/icon_task_type", array('type' => $task->task_type))); ?>
+                },
+                <?php endforeach;?>
+            ],
+            start: <?php echo $activity->start;?>,
+            end: <?php echo $activity->end;?>,
+        }));
+    });
 </script>
 
 <div>

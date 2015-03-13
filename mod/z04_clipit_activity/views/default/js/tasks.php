@@ -22,6 +22,26 @@ clipit.task.init = function() {
     $(document).on("change", ".task-types", clipit.task.types);
 };
 elgg.register_hook_handler('init', 'system', clipit.task.init);
+clipit.task.admin.init = function() {
+};
+elgg.register_hook_handler('init', 'system', clipit.task.admin.init);
+
+
+clipit.task.admin.fullCalendarSetDefault = function(){
+    return  {
+        monthNames: JSON.parse(elgg.echo('calendar:month_names')),
+        monthNamesShort: JSON.parse(elgg.echo('calendar:month_names_short')),
+        dayNames: JSON.parse(elgg.echo('calendar:day_names')),
+        dayNamesShort: JSON.parse(elgg.echo('calendar:day_names_short')),
+        dayNamesMin: JSON.parse(elgg.echo('calendar:day_names_min')),
+        buttonText: {
+            month: elgg.echo('calendar:month'),
+            week: elgg.echo('calendar:week'),
+            day: elgg.echo('calendar:day'),
+            list: elgg.echo('calendar:agenda')
+        }
+    };
+};
 
 clipit.task.feedbackCheck = function(){
     var parent = $(this).closest(".task");
@@ -89,7 +109,6 @@ clipit.task.types = function(){
     content.find(".quiz-module").hide();
     if($(this).val() == 'quiz_take'){
         content.find(".quiz-module").show();
-<!--        elgg.get('ajax/view/activity/admin/tasks/quiz/quiz', {-->
         elgg.get('ajax/view/quiz/list', {
             data: {
                 'activity_create': true,
@@ -121,5 +140,50 @@ clipit.task.addTask = function(){
     var content = $(".task-list");
     $.get( "ajax/view/activity/create/task_list", function( data ) {
         content.append(data);
+    });
+};
+
+// Admin task functions
+clipit.task.admin.fullCalendar = function(data){
+    return $.extend(data.messages, {
+        firstDay: 1,
+            header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+        },
+        eventAfterAllRender: function(){
+            var content = $(".fc-header-left, .fc-header-right");
+            content.find('.fc-header-space').remove();
+            content.removeClass().addClass("btn-group btn-group-sm")
+                .find('.fc-button').removeClass()
+                .addClass("btn btn-default btn-border-blue");
+            content.find('.fc-icon-right-single-arrow').removeClass().addClass("fa fa-caret-right")
+            content.find('.fc-icon-left-single-arrow').removeClass().addClass("fa fa-caret-left");
+            $(".fc-header td:eq(0)").addClass('pull-left');
+            $(".fc-header td:eq(2)").addClass('pull-right');
+        },
+        editable: false,
+        events: data.events,
+        eventRender: function(event, element) {
+            $(element).find(".fc-event-inner").prepend($(event.icon).removeClass('blue').addClass('margin-right-10 margin-left-5'));
+        },
+        eventClick: function(event, calEvent, jsEvent, view, element) {
+            $("[data-target='#edit-task-"+event.id+"']").click();
+        },
+        dayRender: function(date, cell) {
+            var date_formated = date.add(-2, 'hours').format("X"); // Added -2hours T00:00:00
+            if(date_formated >= data.start && date_formated <= data.end ){
+                $(cell).addClass('fc-ranged');
+            }
+        },
+        dayClick: function(date, jsEvent, view) {
+            var date_formated = date.add(+2, 'hours').format("X"); // Added -2hours T00:00:00
+            if(date_formated >= data.start && date_formated <= data.end ){
+                $("#create-new-task").modal('show').find(".input-task-start").val(date.format('DD/MM/YYYY'));
+            } else {
+                return false;
+            }
+        }
     });
 };
