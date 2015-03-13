@@ -38,12 +38,16 @@ switch($parent_entity_class){
         $entity_level_class = "ClipitActivity";
         $parent_id = ClipitGroup::get_activity($parent_id);
         $scope_entity = 'ClipitTask';
+        $group_id = $entity_class::get_group($entity_id);
         /* get tags from group */
-        $group_tags = ClipitGroup::get_tags($entity_class::get_group($entity_id));
+        $group_tags = ClipitGroup::get_tags($group_id);
         if($group_tags){
             $tags = array_merge($tags, $group_tags);
         }
         $href = "clipit_activity/{$parent_id}/tasks/view/{$task_id}";
+        if(ClipitTask::get_completed_status($task_id, $group_id)){
+            forward("clipit_activity/{$parent_id}/tasks/view/{$task_id}");
+        }
         break;
     default:
         register_error(elgg_echo("video:cantadd"));

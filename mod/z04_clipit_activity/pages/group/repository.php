@@ -85,7 +85,13 @@ if($page[4]){
             include elgg_get_plugins_path() . 'z04_clipit_activity/pages/multimedia/view.php';
             break;
         case "publish":
-            include elgg_get_plugins_path() . 'z04_clipit_activity/pages/multimedia/publish.php';
+            if($task_id = get_input('task_id')){
+                if(ClipitTask::get_completed_status($task_id, $group->id)){
+                    forward("clipit_activity/{$activity->id}/tasks/view/{$task_id}");
+                } else {
+                    include elgg_get_plugins_path() . 'z04_clipit_activity/pages/multimedia/publish.php';
+                }
+            }
             break;
     }
 }
