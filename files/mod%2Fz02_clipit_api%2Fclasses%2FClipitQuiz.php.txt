@@ -120,7 +120,7 @@ class ClipitQuiz extends UBItem {
             }
             $prop_value_array["quiz_question_array"] = $new_quiz_question_array;
         }
-        $clone_id = static::set_properties(null, $prop_value_array);
+        $clone_id = static::create($prop_value_array);
         if($linked) {
             static::link_parent_clone($id, $clone_id);
         }
@@ -432,7 +432,7 @@ class ClipitQuiz extends UBItem {
      * @return bool Returns true if success, false if error
      */
     static function add_quiz_questions($id, $question_array) {
-        return UBCollection::add_items($id, $question_array, static::REL_QUIZ_QUIZQUESTION);
+        return UBCollection::add_items($id, $question_array, static::REL_QUIZ_QUIZQUESTION, true);
     }
 
     /**
@@ -444,7 +444,7 @@ class ClipitQuiz extends UBItem {
      * @return bool Returns true if success, false if error
      */
     static function set_quiz_questions($id, $question_array) {
-        return UBCollection::set_items($id, $question_array, static::REL_QUIZ_QUIZQUESTION);
+        return UBCollection::set_items($id, $question_array, static::REL_QUIZ_QUIZQUESTION, true);
     }
 
     /**

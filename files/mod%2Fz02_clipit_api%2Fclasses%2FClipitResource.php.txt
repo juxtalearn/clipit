@@ -36,6 +36,12 @@ abstract class ClipitResource extends UBItem {
     public $performance_item_array = array();
     public $read_array = array();
 
+    public $overall_rating_average = 0.0;
+    public $tag_rating_average = 0.0;
+    #public $tag_item_rating_average = array();
+    public $performance_rating_average = 0.0;
+    #public $performance_item_rating_average = array();
+
     /**
      * Loads object parameters stored in Elgg
      *
@@ -47,6 +53,12 @@ abstract class ClipitResource extends UBItem {
         $this->label_array = (array)static::get_labels($this->id);
         $this->performance_item_array = (array)static::get_performance_items($this->id);
         $this->read_array = (array)$elgg_entity->get("read_array");
+        $this->overall_rating_average = (float)$elgg_entity->get("overall_rating_average");
+        $this->tag_rating_average = (float)$elgg_entity->get("tag_rating_average");
+        #$this->tag_item_rating_average = (array)$elgg_entity->get("tag_item_rating_average");
+        $this->performance_rating_average = (float)$elgg_entity->get("performance_rating_average");
+        #$this->performance_item_rating_average = (array)$elgg_entity->get("performance_item_rating_average");
+
     }
 
     /**
@@ -57,6 +69,11 @@ abstract class ClipitResource extends UBItem {
     protected function copy_to_elgg($elgg_entity) {
         parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("read_array", (array)$this->read_array);
+        $elgg_entity->set("overall_rating_average", (float)$this->overall_rating_average);
+        $elgg_entity->set("tag_rating_average", (float)$this->tag_rating_average);
+        #$elgg_entity->set("tag_item_rating_average", (array)$this->tag_item_rating_average);
+        $elgg_entity->set("performance_rating_average", (float)$this->performance_rating_average);
+        #$elgg_entity->set("performance_item_rating_average", (array)$this->performance_item_rating_average);
     }
 
     /**
@@ -70,6 +87,15 @@ abstract class ClipitResource extends UBItem {
         static::set_labels($this->id, (array)$this->label_array);
         static::set_performance_items($this->id, (array)$this->performance_item_array);
         return $this->id;
+    }
+
+    static function update_average_ratings($id){
+        $prop_value_array["overall_rating_average"] = (float)ClipitRating::get_average_rating_for_target($id);
+        $prop_value_array["tag_rating_average"] = (float)ClipitTagRating::get_average_rating_for_target($id);
+        #$prop_value_array["tag_item_rating_average"] = (array)ClipitTagRating::get_item_average_rating_for_target($id);
+        $prop_value_array["performance_rating_average"] = (float)ClipitPerformanceRating::get_average_rating_for_target($id);
+        #$prop_value_array["performance_item_rating_average"] = (array)ClipitPerformanceRating::get_item_average_rating_for_target($id);
+        return static::set_properties($id, $prop_value_array);
     }
 
     static function get_by_tags($tag_array) {

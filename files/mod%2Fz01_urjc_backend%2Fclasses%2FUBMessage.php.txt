@@ -70,10 +70,12 @@ class UBMessage extends UBItem {
      * @param int $offset (default = 0 : begining)
      * @param int $limit (default = 0 : none)
      * @param bool $count_only (default = false : no)
+     * @param string $order_by property to order results by
+     * @param bool $ascending Whether to order ascending (true) or descending (false)
      *
      * @return static[] Array of Messages
      */
-    static function get_by_destination($destination_array, $offset = 0, $limit = 0, $count_only = false) {
+    static function get_by_destination($destination_array, $limit = 0, $offset = 0, $count_only = false, $order_by = "", $ascending = true) {
         $message_array = array();
         foreach ($destination_array as $destination_id) {
             $item_array = UBCollection::get_items($destination_id, static::REL_MESSAGE_DESTINATION, true);
@@ -88,8 +90,35 @@ class UBMessage extends UBItem {
             if (empty($temp_array)) {
                 $message_array[$destination_id] = null;
             } else {
+                if(!empty($order_by)) {
+                    $args = array("order_by" => $order_by, "ascending" => $ascending);
+                    usort($temp_array, function ($i1, $i2) use ($args) {
+                        if (!$i1 && !$i2) {
+                            return 0;
+                        }
+                        if ($i1->$args["order_by"] == $i2->$args["order_by"]) {
+                            return 0;
+                        }
+                        if ((bool)$args["ascending"]) {
+                            if (!$i1) {
+                                return 1;
+                            }
+                            if (!$i2) {
+                                return -1;
+                            }
+                            return (strtolower($i1->$args["order_by"]) < strtolower($i2->$args["order_by"]) ? -1 : 1);
+                        } else {
+                            if (!$i1) {
+                                return -1;
+                            }
+                            if (!$i2) {
+                                return 1;
+                            }
+                            return (strtolower($i2->$args["order_by"]) < strtolower($i1->$args["order_by"]) ? -1 : 1);
+                        }
+                    });
+                }
                 $message_array[$destination_id] = $temp_array;
-                usort($message_array[$destination_id], 'UBItem::sort_by_date');
                 if (!empty($limit)) {
                     $message_array[$destination_id] = array_slice($message_array[$destination_id], $offset, $limit);
                 } else {

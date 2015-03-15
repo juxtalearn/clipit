@@ -24,13 +24,20 @@ class ClipitTrickyTopic extends UBItem {
     const REL_TRICKYTOPIC_FILE = "ClipitTrickyTopic-ClipitFile";
     const REL_TRICKYTOPIC_STORYBOARD = "ClipitTrickyTopic-ClipitStoryboard";
     const REL_TRICKYTOPIC_VIDEO = "ClipitTrickyTopic-ClipitVideo";
+    const REL_TRICKYTOPIC_EXAMPLE = "ClipitTrickyTopic-ClipitExample";
+    const EDUCATION_LEVEL_PRIMARY = "primary";
+    const EDUCATION_LEVEL_GCSE = "gcse";
+    const EDUCATION_LEVEL_ALEVEL = "alevel";
+    const EDUCATION_LEVEL_UNIVERSITY = "university";
     public $tag_array = array();
     public $subject = "";
-    public $education_level = 0;
-    // Linked Teacher Resources
+    public $education_level = ""; // one of the EDUCATION_LEVEL_* constants
+    // Linked Teacher Material
     public $storyboard_array = array();
     public $video_array = array();
     public $file_array = array();
+    // Linked Student Problem Examples
+    public $example_array = array();
 
     /**
      * Loads object parameters stored in Elgg
@@ -40,11 +47,12 @@ class ClipitTrickyTopic extends UBItem {
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
         $this->subject = (string)$elgg_entity->get("subject");
-        $this->education_level = (int)$elgg_entity->get("education_level");
+        $this->education_level = (string)$elgg_entity->get("education_level");
         $this->tag_array = (array)static::get_tags((int)$this->id);
         $this->file_array = (array)static::get_files((int)$this->id);
         $this->storyboard_array = (array)static::get_storyboards((int)$this->id);
         $this->video_array = (array)static::get_videos((int)$this->id);
+        $this->example_array = (array)static::get_examples((int)$this->id);
     }
 
     /**
@@ -55,7 +63,7 @@ class ClipitTrickyTopic extends UBItem {
     protected function copy_to_elgg($elgg_entity) {
         parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("subject", (string)$this->subject);
-        $elgg_entity->set("education_level", (int)$this->education_level);
+        $elgg_entity->set("education_level", (string)$this->education_level);
     }
 
     /**
@@ -69,7 +77,33 @@ class ClipitTrickyTopic extends UBItem {
         static::set_files((int)$this->id, (array)$this->file_array);
         static::set_storyboards((int)$this->id, (array)$this->storyboard_array);
         static::set_videos((int)$this->id, (array)$this->video_array);
+        static::set_examples((int)$this->id, (array)$this->example_array);
         return (int)$this->id;
+    }
+
+    /**
+     * Clones a Tricky Topic, including the contained Stumbling Blocks, teacher Material and Examples
+     *
+     * @param int $id ID of Tricky Topic to clone
+     * @param bool $linked Whether the clone will be linked to the parent object
+     * @return bool|int ID of new cloned object
+     * @throws InvalidParameterException if error
+     */
+    static function create_clone($id, $linked = true){
+        $prop_value_array = static::get_properties($id);
+        $example_array = $prop_value_array["example_array"];
+        if(!empty($example_array)){
+            $new_example_array = array();
+            foreach($example_array as $example_id){
+                $new_example_array[] = ClipitExample::create_clone($example_id);
+            }
+            $prop_value_array["example_array"] = $new_example_array;
+        }
+        $clone_id = static::create($prop_value_array);
+        if($linked) {
+            static::link_parent_clone($id, $clone_id);
+        }
+        return $clone_id;
     }
 
     /**
@@ -168,5 +202,22 @@ class ClipitTrickyTopic extends UBItem {
 
     static function get_files($id) {
         return UBCollection::get_items($id, static::REL_TRICKYTOPIC_FILE);
+    }
+
+    // Student Problem Examples
+    static function add_examples($id, $example_array) {
+        return UBCollection::add_items($id, $example_array, static::REL_TRICKYTOPIC_EXAMPLE, true);
+    }
+
+    static function set_examples($id, $example_array) {
+        return UBCollection::set_items($id, $example_array, static::REL_TRICKYTOPIC_EXAMPLE, true);
+    }
+
+    static function remove_examples($id, $example_array) {
+        return UBCollection::remove_items($id, $example_array, static::REL_TRICKYTOPIC_EXAMPLE);
+    }
+
+    static function get_examples($id) {
+        return UBCollection::get_items($id, static::REL_TRICKYTOPIC_EXAMPLE);
     }
 }

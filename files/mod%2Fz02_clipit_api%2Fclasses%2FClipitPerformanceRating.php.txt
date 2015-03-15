@@ -67,7 +67,14 @@ class ClipitPerformanceRating extends UBItem {
         return $performance_rating_array;
     }
 
-    static function get_average_target_rating($target_id) {
+    /**
+     * Get the average Performance Rating for a Target
+     *
+     * @param int $target_id IF of Target with Performance Ratings
+     * @return float|null The Average Performance star rating [0.0 - 5.0]
+     * @throws InvalidParameterException
+     */
+    static function get_average_rating_for_target($target_id) {
         $rating_array = ClipitRating::get_by_target(array($target_id));
         $rating_array = $rating_array[$target_id];
         $average_rating = 0;
@@ -88,41 +95,57 @@ class ClipitPerformanceRating extends UBItem {
         }
     }
 
+    /**
+     * Get the average Performance Rating of each Performance Item for a Target
+     *
+     * @param int $target_id ID of Target with Performance Ratings
+     * @return array Array of [(int)performance_item_id] => (float[0.0 - 5.0])item_average_rating
+     * @throws InvalidParameterException
+     */
+    static function get_item_average_rating_for_target($target_id) {
+        $rating_array = ClipitRating::get_by_target(array($target_id));
+        $rating_array = $rating_array[$target_id];
+        $average_rating = array();
+        $count = array();
+        if(!empty($rating_array)) {
+            foreach($rating_array as $rating) {
+                foreach($rating->performance_rating_array as $performance_rating_id) {
+                    $prop_value_array = static::get_properties($performance_rating_id, array("performance_item", "star_rating"));
+                    $performance_item = $prop_value_array["performance_item"];
+                    $star_rating = $prop_value_array["star_rating"];
+                    if(!isset($average_rating[$performance_item])){
+                        $average_rating[$performance_item] = (int)$star_rating;
+                        $count[$performance_item] = 1;
+                    } else{
+                        $average_rating[$performance_item] += (int)$star_rating;
+                        $count[$performance_item]++;
+                    }
+                }
+            }
+            if(!empty($count)) {
+                foreach($count as $performance_item => $total) {
+                    $average_rating[$performance_item] = $average_rating[$performance_item] / $total;
+                }
+            }
+        }
+        return $average_rating;
+    }
+
     static function get_average_user_rating_for_target($user_id, $target_id) {
-        $rating = ClipitRating::get_from_user_for_target($user_id, $target_id);
+        $rating = ClipitRating::get_user_rating_for_target($user_id, $target_id);
         $average_rating = 0;
         $count = 0;
-        foreach($rating->performance_rating_array as $performance_rating_id) {
-            $prop_value_array = static::get_properties($performance_rating_id, array("star_rating"));
-            $average_rating += (int)$prop_value_array["star_rating"];
-            $count ++;
+        if(!empty($rating)) {
+            foreach ($rating->performance_rating_array as $performance_rating_id) {
+                $prop_value_array = static::get_properties($performance_rating_id, array("star_rating"));
+                $average_rating += (int)$prop_value_array["star_rating"];
+                $count++;
+            }
         }
         if(!empty($count)) {
             return $average_rating = $average_rating / $count;
         } else {
             return null;
         }
-    }
-
-    static function get_average_item_rating_for_target($performance_item_id, $target_id) {
-        $rating_array = ClipitRating::get_by_target(array($target_id));
-        $rating_array = $rating_array[$target_id];
-        $average_rating = 0;
-        $count = 0;
-        if(!empty($rating_array)) {
-            foreach($rating_array as $rating) {
-                foreach($rating->performance_rating_array as $performance_rating_id) {
-                    $prop_value_array = static::get_properties($performance_rating_id, array("performance_item", "star_rating"));
-                    if((int)$prop_value_array["performance_item"] == (int)$performance_item_id) {
-                        $average_rating += (int)$prop_value_array["star_rating"];
-                        $count ++;
-                    }
-                }
-            }
-            if(!empty($count)) {
-                $average_rating = $average_rating / $count;
-            }
-        }
-        return $average_rating;
     }
 }

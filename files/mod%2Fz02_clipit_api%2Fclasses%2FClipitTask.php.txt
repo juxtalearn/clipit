@@ -321,7 +321,7 @@ class ClipitTask extends UBItem {
                 return false;
             case static::TYPE_VIDEO_FEEDBACK:
                 $parent_task = new static($task->parent_task);
-                // If there are no storyboards to give feedback on, the status is false = uncompleted
+                // If there are no videos to give feedback on, the status is false = uncompleted
                 if(empty($parent_task->video_array)){
                     return false;
                 }
