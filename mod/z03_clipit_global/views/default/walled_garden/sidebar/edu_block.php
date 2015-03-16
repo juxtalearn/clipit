@@ -11,14 +11,8 @@
  * @package         ClipIt
  */
 $entity = elgg_extract('entity', $vars);
-$file = array_pop(ClipitFile::get_by_id(array(array_pop($entity->file_array))));
 ?>
 <div style="margin-bottom: 60px">
-    <?php echo elgg_view('output/img',array(
-        'src' => $file->thumb_small['url'],
-        'class' => 'image-block',
-        'style' => 'width: 45px;',
-    ));?>
     <div class="content-block">
         <h3 class="margin-0">
             <?php
@@ -33,7 +27,8 @@ $file = array_pop(ClipitFile::get_by_id(array(array_pop($entity->file_array))));
             <?php
             echo elgg_view('output/url', array(
                 'href' => $entity->url,
-                'text'  => $entity->url,
+                'class' => 'btn btn-sm btn-primary',
+                'text'  => elgg_echo('connect'),
                 'target' => '_blank',
                 'title' => $entity->name,
             ));

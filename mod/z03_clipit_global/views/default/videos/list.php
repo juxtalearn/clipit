@@ -1,411 +1,224 @@
 <?php
-//elgg_load_js('jquery:isotope');
+/**
+ * ClipIt - JuxtaLearn Web Space
+ * PHP version:     >= 5.2
+ * Creation date:   23/02/2015
+ * Last update:     23/02/2015
+ * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC JuxtaLearn Project
+ * @version         $Version$
+ * @link            http://www.juxtalearn.eu
+ * @license         GNU Affero General Public License v3
+ * @package         ClipIt
+ */
 $videos = elgg_extract('entities', $vars);
 ?>
-<script src="http://masonry.desandro.com/js/masonry-docs.min.js"></script>
+<div class="row" style="display: none;">
+    <div class="col-md-8">
+        <div class="row hm">
+            <?php for($i=0; $i<15; $i++):?>
+                <div class="col-md-12 margin-bottom-10 xs">
+                    <div style="background: #ccc;height: 390px;"></div>
+                </div>
+                <div class="col-md-6">
+                    <div style="background: #ccc;height: 325px;"></div>
+                </div>
+                <div class="col-md-6">
+                    <div style="background: #ccc;height: 325px;"></div>
+                </div>
+                <div class="col-md-12 margin-top-10">
+                    <div style="background: #ccc;height: 139px;"></div>
+                </div>
+            <?php endfor;?>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="row sec">
+            <?php for($i=0; $i<15; $i++):?>
+                <div class="col-md-12 margin-bottom-10">
+                    <div style="background: #ccc;height: 257px;"></div>
+                </div>
+                <div class="col-md-12 margin-bottom-10">
+                    <div style="background: #ccc;height: 257px;"></div>
+                </div>
+                <div class="col-md-12 margin-bottom-10">
+                    <div style="background: #ccc;height: 257px;"></div>
+                </div>
+                <div class="col-md-12 margin-bottom-10">
+                    <div style="background: #ccc;height: 257px;"></div>
+                </div>
+            <?php endfor;?>
+        </div>
+    </div>
+</div>
 <script>
-    $( function() {
-        // init Isotope
-       $('#isotope-demo').masonry({
-            columnWidth: 10,
-            itemSelector: '.element-item',
+    $(function(){
+        $('.structure').each(function(){
+            num = $(this).data('num');
+            $element = $(this);
+            $col_main = $element.closest('.video-list').find('.col-main .row');
+            $col_secondary = $element.closest('.video-list').find('.col-secondary .row');
+            switch(num){
+                case 1:
+                    if($element.hasClass('first')) {
+                        $element.wrap('<div class="col-md-8 col-main"><div class="row"></div></div>');
+                        $element.addClass('col-md-12 margin-bottom-10');
+                    } else {
+                        $col_main.append(
+                            $element.addClass('col-md-12 margin-bottom-10')
+                        );
+                    }
+                    break;
+                case 2:
+                    if($element.hasClass('first')) {
+                        $element.wrap('<div class="col-md-4 col-secondary"><div class="row"></div></div>');
+                        $element.addClass('col-md-12 margin-bottom-10');
+                    } else {
+                        $col_secondary.append(
+                            $element.addClass('col-md-12 margin-bottom-10')
+                        );
+                    }
+                    break;
+                case 3:
+                case 4:
+                    $col_main.append(
+                        $element.addClass('col-md-6 margin-bottom-10')
+                    );
+                    break;
+                case 5:
+                case 6:
+                    $col_secondary.append(
+                        $element.addClass('col-md-12 margin-bottom-10')
+                    );
+                    break;
+                case 7:
+                    $col_main.append(
+                        $element.addClass('col-md-12 margin-bottom-10')
+                    );
+                    break;
+                case 8:
+                    $col_secondary.append(
+                        $element.addClass('col-md-12 margin-bottom-10')
+                    );
+                    break;
+                default:
+                    $element.hide();
+            }
         });
     });
 </script>
-<style>
-
-    /* ---- isotope ---- */
-
-    /* clear fix */
-    .isotope:after {
-        content: '';
-        display: block;
-        clear: both;
-    }
-
-    /* ---- .element-item ---- */
-
-    .element-item {
-        position: relative;
-        float: left;
-        width: 100px;
-        /*height: 100px;*/
-        height: auto;
-        margin: 5px;
-        color: #262524;
-    }
-    .element-item { width: 35%; }
-    .element-item.width2 { width: 60% !important; }
-    /*.element-item.height2 { height: 210px; }*/
-    .element-item.width3{width: 29%}
-    /* Image size */
-    .element-item.width3 > a{height: 133px;}
-    .element-item.width2 > a{height: 276px;}
-    .element-item.height2 > a{height: 160px;}
-    .element-item.horizontal-view > a{height: 137px;}
-    .element-item.width3 p{
-        height: 110px;
-    }
-    .element-item > * {
-        margin: 0;
-        padding: 0;
-        background: #fff;
-    }
-
-    .element-item .symbol {
-        position: absolute;
-        left: 10px;
-        top: 0px;
-        font-size: 42px;
-        font-weight: bold;
-        color: white;
-    }
-    .element-item h3{
-        font-size: 16px;
-        letter-spacing: 0.5px;
-    }
-    .element-item > div{
-        padding: 10px;
-        border: 1px solid #E6E6E6;
-    }
-    .element-item p{
-        font-size: 12px;
-        color: #666;
-        letter-spacing: 0.5px;
-        line-height: 18px;
-    }
-    .main-video p{
-        color: #ffffff;
-    }
-</style>
-<style>
-    .container .content{
-        background: transparent !important;
-    }
-    .main-video .tags{
-        margin-top: 20px;
-    }
-    .main-video .tags a{
-        background: transparent;
-        border: 1px solid #fff;
-        color: white;
-    }
-    .main-video h2{
-        margin-bottom: 5px !important;
-        color: white !important;
-        letter-spacing: 1px;
-    }
-    .main-video .bg-play .fa-play-circle-o {
-        font-size: 80px !important;
-    }
-    .main-video > div{
-        background: #ff4343;
-    }
-    .main-video .bg-play>div {
-        background: rgba(255, 67, 67, 0.5);
-    }
-    .main-video .date,
-    .yellow-view .date{
-        color: #E8E8E8;
-    }
-    .horizontal-view{
-        padding: 0 !important;
-        overflow: hidden;
-    }
-    .horizontal-view .thumb-video{
-        float: left;
-        width: 50%;
-    }
-    .horizontal-view > div{
-        padding: 0;
-        overflow: hidden;
-    }
-    .horizontal-view > div > div{
-          padding: 10px;
-          overflow: hidden;
-    }
-    .yellow-view > div{
-        background: #d8ba05;
-    }
-    .yellow-view h3,
-    .yellow-view p{
-        color: white;
-    }
-    .yellow-view .tags a{
-        background: transparent;
-        border: 1px solid #fff;
-        color: white;
-    }
-    .yellow-view .bg-play>div {
-        background: rgba(216, 186, 5, 0.5);
-    }
-    .date{
-        color: #9E9E9E;
-    }
-</style>
-<div id="isotope-demo" class="isotope rainbowed">
+<div class="row video-list">
     <?php
     $count = 1;
+    $restart_count = false;
     foreach($videos as $video):
-        $video_url = "video/".$video->id."/".elgg_get_friendly_title($video->name);
+        $video_url = "video/".elgg_get_friendly_title($video->name)."/".$video->id;
         $date = date("M d, Y H:i", $video->time_created);
         $class = "element-item height2";
         $text_color = "";
         $image = get_video_thumbnail($video->url, 'normal');
         $description = $video->description;
+        if(strlen($description)>350){
+            $description = substr($description, 0, 350)."...";
+        }
+        $title = '<h3 class="margin-0 margin-bottom-5 text-truncate">
+                '.elgg_view('output/url', array(
+                'href' => $video_url,
+                'style' => 'color:inherit;',
+                'text'  => $video->name,
+                'title' => $video->name
+            )).'
+            </h3>';
+        $limit = 2;
         switch($count){
             case 1:
+                $limit = 3;
+                $class = "bg-color";
                 $image = get_video_thumbnail($video->url, 'large');
-                break;
-            case 3:
-                $description = false;
-                break;
-            case 4:
-            case 5:
-                $class = "element-item width3";
-                break;
-            case 6:
-                $class = "element-item width2 horizontal-view";
-                $description = false;
-                break;
-            case 7:
-                $class = "element-item height2 yellow-view";
-                $count = 0;
-                $restart_count++;
-                break;
-        }
-//        if($count%1 == 1 || $count%8 == 1){
-//            $image = get_video_thumbnail($video->url, 'large');
-//        }
-//        if($count%2 == 1){
-//            $class = "element-item height2";
-//        }
-//        if($count%3 == 1){
-//            $description = false;
-//        }
-//        if($count%4 == 1){
-//            $class = "element-item width3";
-//        }
-//        if($count%5 == 1){
-//            $class = "element-item width3";
-//        }
-//        if($count%6 == 1){
-//            $class = "element-item width2 horizontal-view";
-//            $description = false;
-//        }
-//        if($count%7 == 1){
-//            $class = "element-item height2 yellow-view";
-//        }
-        $video_thumb = elgg_view('output/url', array(
-            'href' => $video_url,
-            'class' => 'thumb-video',
-            'text'  => '<div class="bg-play"><div><i class="fa fa-play-circle-o"></i></div></div>'.
-                elgg_view('output/img',array('src' => $image, 'style' => 'width:100%;')),
-            'title' => $video->name
-        ));
-    ?>
-    <?php if($count == 1):?>
-    <div class="main-video element-item width2">
-        <?php echo $video_thumb;?>
-        <div class="white">
-                <h2 class="text-truncate margin-0 margin-bottom-10">
-                    <?php
-                    echo elgg_view('output/url', array(
+                $title = '<h2 class="text-truncate margin-0 margin-bottom-10">
+                        '.elgg_view('output/url', array(
                         'href' => $video_url,
                         'style' => 'color:white;',
                         'text'  => $video->name,
                         'title' => $video->name
-                    ));
-                    ?>
-                </h2>
-                <small class="date"><i><?php echo $date;?></i></small>
-                <p class="margin-top-5"><?php echo $description;?></p>
-                <div class="tags">
-                    <a href="http://www.clipit.es/trials/dcm/explore/search?by=tag&amp;id=79" class="label label-primary" title="Learning Analytics">Learning Analytics</a>
-                    <a href="http://www.clipit.es/trials/dcm/explore/search?by=tag&amp;id=79" class="label label-primary" title="Learning Analytics">Moocs</a>
-                </div>
-            </div>
-        </div>
-        <?php else:?>
-        <div class="<?php echo $class;?>">
-            <?php if($count == 6):?>
-                <div>
-            <?php endif;?>
-            <?php echo $video_thumb;?>
-            <div>
-                <h3 class="margin-0 margin-bottom-5 text-truncate">
-                    <?php
-                    echo elgg_view('output/url', array(
+                    )).'
+                    </h2>';
+                break;
+            case 2:
+
+                break;
+            case 3:
+            case 4:
+                if(strlen($description)>150){
+                    $description = substr($description, 0, 150)."...";
+                }
+                break;
+            case 5:
+                $class = "element-item width2 horizontal-view";
+//            $description = false;
+                $bg_img = elgg_view('output/img', array('src' =>  $image, 'style' => 'width: 100%'));
+                break;
+            case 6:
+                $class = "bg-color";
+                break;
+            case 7:
+                break;
+            case 8:
+//            $description = false;
+                break;
+            case 9:
+                $limit = 3;
+                $class = "bg-color";
+                $image = get_video_thumbnail($video->url, 'large');
+                $title = '<h2 class="text-truncate margin-0 margin-bottom-10">
+                        '.elgg_view('output/url', array(
                         'href' => $video_url,
+                        'style' => 'color:white;',
                         'text'  => $video->name,
-                        'style' => 'color: inherit;',
                         'title' => $video->name
-                    ));
-                    ?>
-                </h3>
-                <small class="date">
-                    <i><?php echo $date;?></i>
-                </small>
-                <?php if($description):?>
-                    <p class="margin-top-5">
-                        <?php echo $description;?>
-                    </p>
-                <?php endif;?>
-                <div class="tags">
-                    <a href="http://www.clipit.es/trials/dcm/explore/search?by=tag&amp;id=79" class="label label-primary" title="Learning Analytics">Learning Analytics</a>
-                    <a href="http://www.clipit.es/trials/dcm/explore/search?by=tag&amp;id=79" class="label label-primary" title="Learning Analytics">Moocs</a>
+                    )).'
+                    </h2>';
+                $count = 1;
+                $restart_count = true;
+                break;
+        }
+        $bg_img = '<div class="bg-thumb" style="background-image: url(\''.$image.'\')"></div>';
+        $video_thumb = elgg_view('output/url', array(
+            'href' => $video_url,
+            'class' => 'thumb-video',
+            'text'  => '<div class="bg-play"><div><i class="fa fa-play-circle-o"></i></div></div>'.$bg_img,
+            'title' => $video->name
+        ));
+        ?>
+        <div data-num="<?php echo $count;?>" class="structure <?php echo $restart_count ? '':'first';?>">
+            <div class="video-wrapper <?php echo $class;?>">
+                <div class="video-block">
+                    <div class="video-preview" style="background-image: url('<?php echo $image;?>');">
+                        <?php echo $video_thumb;?>
+                    </div>
+                </div>
+                <div class="video-details">
+                    <?php echo $title;?>
+                    <small class="date">
+                        <i><?php echo $date;?></i>
+                    </small>
+                    <?php if($description):?>
+                        <p class="margin-top-5">
+                            <?php echo elgg_strip_tags($description);?>
+                        </p>
+                    <?php endif;?>
+                    <?php echo elgg_view("global/tags/view", array('tags' => $video->tag_array, 'limit' => $limit)); ?>
                 </div>
             </div>
-            <?php if($count == 6):?>
-                </div>
-            <?php endif;?>
         </div>
-        <?php endif;?>
-    <?php
+
+        <?php
         $count++;
     endforeach;
+
     ?>
-<!--    <div class="element-item height2">-->
-<!--        <a class="thumb-video" href="javascript:;">-->
-<!--            <div class="bg-play">-->
-<!--                <div>-->
-<!--                    <i class="fa fa-play-circle-o"></i>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <img src="http://img.youtube.com/vi/1aIpoLfotCE/mqdefault.jpg" style="width: 100%;">-->
-<!--        </a>-->
-<!--        <div>-->
-<!--            <h3 class="margin-0 margin-bottom-5 text-truncate">Lorem ipsum dolor sit amet, consectetur adipiscin</h3>-->
-<!--            <small class="date">-->
-<!--                <i>Nov 18, 2014 12:00</i>-->
-<!--            </small>-->
-<!--            <p class="margin-top-5">-->
-<!--                Lorem ipsum dolor sit amet, consectetur adipiscing elit.-->
-<!--                Vivamus ut tortor id leo porttitor aliquam eget at diam. Duis consequat-->
-<!--                malesuada orci, eget convallis augue bibendum at.-->
-<!--            </p>-->
-<!--            <div class="tags">-->
-<!--                <a href="http://www.clipit.es/trials/dcm/explore/search?by=tag&amp;id=79" class="label label-primary" title="Learning Analytics">Learning Analytics</a>-->
-<!--                <a href="http://www.clipit.es/trials/dcm/explore/search?by=tag&amp;id=79" class="label label-primary" title="Learning Analytics">Moocs</a>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <div class="element-item height2">-->
-<!--        <a class="thumb-video" href="javascript:;">-->
-<!--            <div class="bg-play">-->
-<!--                <div>-->
-<!--                    <i class="fa fa-play-circle-o"></i>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <img src="http://img.youtube.com/vi/OZod4BGHKv0/mqdefault.jpg" style="width: 100%;">-->
-<!--        </a>-->
-<!--        <div style="padding: 10px;">-->
-<!--            <h3 class="margin-0 margin-bottom-5 text-truncate">Lorem ipsum dolor sit amet, consectetur adipiscin</h3>-->
-<!--            <small class="date">-->
-<!--                <i>Nov 18, 2014 12:00</i>-->
-<!--            </small>-->
-<!--            <div class="tags">-->
-<!--                <a href="http://www.clipit.es/trials/dcm/explore/search?by=tag&amp;id=79" class="label label-primary" title="Learning Analytics">Learning Analytics</a>-->
-<!--                <a href="http://www.clipit.es/trials/dcm/explore/search?by=tag&amp;id=79" class="label label-primary" title="Learning Analytics">Moocs</a>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <div class="element-item height2" style="width: 29%;">-->
-<!--        <a class="thumb-video" href="javascript:;">-->
-<!--            <div class="bg-play">-->
-<!--                <div>-->
-<!--                    <i class="fa fa-play-circle-o"></i>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <img src="http://img.youtube.com/vi/PjCs6ncn9-M/mqdefault.jpg" style="width: 100%;">-->
-<!--        </a>-->
-<!--        <div>-->
-<!--            <h3 class="margin-0 margin-bottom-5 text-truncate">Lorem ipsum dolor sit amet, consectetur adipiscin</h3>-->
-<!--            <small class="date">-->
-<!--                <i>Nov 18, 2014 12:00</i>-->
-<!--            </small>-->
-<!--            <p class="margin-top-5">-->
-<!--                Lorem ipsum dolor sit amet, consectetur adipiscing elit.-->
-<!--                Vivamus ut tortor id leo porttitor aliquam eget at diam. Duis consequat-->
-<!--                malesuada orci, eget convallis augue bibendum at.-->
-<!--            </p>-->
-<!--            <div class="tags">-->
-<!--                <a href="http://www.clipit.es/trials/dcm/explore/search?by=tag&amp;id=79" class="label label-primary" title="Learning Analytics">Learning Analytics</a>-->
-<!--                <a href="http://www.clipit.es/trials/dcm/explore/search?by=tag&amp;id=79" class="label label-primary" title="Learning Analytics">Moocs</a>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <div class="element-item height2" style="width: 29%;">-->
-<!--        <a class="thumb-video" href="javascript:;">-->
-<!--            <div class="bg-play">-->
-<!--                <div>-->
-<!--                    <i class="fa fa-play-circle-o"></i>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <img src="http://img.youtube.com/vi/93S1p4hXzow/mqdefault.jpg" style="width: 100%;">-->
-<!--        </a>-->
-<!--        <div>-->
-<!--            <h3 class="margin-0 margin-bottom-5 text-truncate">Lorem ipsum dolor sit amet, consectetur adipiscin</h3>-->
-<!--            <small class="date">-->
-<!--                <i>Nov 18, 2014 12:00</i>-->
-<!--            </small>-->
-<!--            <p class="margin-top-5">-->
-<!--                Lorem ipsum dolor sit amet, consectetur adipiscing elit.-->
-<!--                Vivamus ut tortor id leo porttitor aliquam eget at diam. Duis consequat-->
-<!--                malesuada orci, eget convallis augue bibendum at.-->
-<!--            </p>-->
-<!--            <div class="tags">-->
-<!--                <a href="http://www.clipit.es/trials/dcm/explore/search?by=tag&amp;id=79" class="label label-primary" title="Learning Analytics">Learning Analytics</a>-->
-<!--                <a href="http://www.clipit.es/trials/dcm/explore/search?by=tag&amp;id=79" class="label label-primary" title="Learning Analytics">Moocs</a>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <div class="element-item height2 yellow-view">-->
-<!--        <a class="thumb-video" href="javascript:;">-->
-<!--            <div class="bg-play">-->
-<!--                <div>-->
-<!--                    <i class="fa fa-play-circle-o"></i>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <img src="http://img.youtube.com/vi/WzPCLQauVyY/mqdefault.jpg" style="width: 100%;">-->
-<!--        </a>-->
-<!--        <div>-->
-<!--            <h3 class="margin-0 margin-bottom-5 text-truncate">Lorem ipsum dolor sit amet, consectetur adipiscin</h3>-->
-<!--            <small class="date">-->
-<!--                <i>Nov 18, 2014 12:00</i>-->
-<!--            </small>-->
-<!--            <p class="margin-top-5">-->
-<!--                Lorem ipsum dolor sit amet, consectetur adipiscing elit.-->
-<!--                Vivamus ut tortor id leo porttitor aliquam eget at diam. Duis consequat-->
-<!--                malesuada orci, eget convallis augue bibendum at.-->
-<!--            </p>-->
-<!--            <div class="tags">-->
-<!--                <a href="http://www.clipit.es/trials/dcm/explore/search?by=tag&amp;id=79" class="label label-primary" title="Learning Analytics">Learning Analytics</a>-->
-<!--                <a href="http://www.clipit.es/trials/dcm/explore/search?by=tag&amp;id=79" class="label label-primary" title="Learning Analytics">Moocs</a>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <div class="element-item width2">-->
-<!--        <div class="horizontal-view">-->
-<!---->
-<!--            <a class="thumb-video" href="javascript:;" style="float: left;width: 50%;">-->
-<!--                <div class="bg-play">-->
-<!--                    <div>-->
-<!--                        <i class="fa fa-play-circle-o"></i>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <img src="http://img.youtube.com/vi/61qqwT1Bk7M/maxresdefault.jpg" style="width: 100%;">-->
-<!--            </a>-->
-<!--            <div style="padding: 10px;overflow: hidden;">-->
-<!--                <h3 class="margin-0 margin-bottom-5 text-truncate">Lorem ipsum dolor sit amet, consectetur adipiscin</h3>-->
-<!--                <small class="date">-->
-<!--                    <i>Nov 18, 2014 12:00</i>-->
-<!--                </small>-->
-<!--                <div class="tags">-->
-<!--                    <a href="http://www.clipit.es/trials/dcm/explore/search?by=tag&amp;id=79" class="label label-primary" title="Learning Analytics">Learning Analytics</a>-->
-<!--                    <a href="http://www.clipit.es/trials/dcm/explore/search?by=tag&amp;id=79" class="label label-primary" title="Learning Analytics">Moocs</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
 </div>
+<style>
+    .tags{
+        display: block;
+    }
+</style>

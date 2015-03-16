@@ -10,7 +10,6 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-
 // Load all translations
 global $CONFIG;
 $client_language = $_COOKIE['client_language'];
@@ -31,6 +30,7 @@ elgg_register_event_handler('init', 'system', 'clipit_global_init');
 
 function clipit_global_init(){
     global $CONFIG;
+//    $CONFIG->walled_garden = false;
     $user_id = elgg_get_logged_in_user_guid();
     $user = array_pop(ClipitUser::get_by_id(array($user_id)));
     /**
@@ -78,7 +78,11 @@ function clipit_global_init(){
         $return_value[] = 'legal/community_guidelines';
         // Landing sections
         $return_value[] = 'videos';
-        $return_value[] = 'connect';
+        $return_value[] = 'videos/.*';
+        $return_value[] = 'video';
+        $return_value[] = 'video/.*';
+        $return_value[] = 'test';
+        $return_value[] = 'sites';
         return $return_value;
     }
 
@@ -89,7 +93,7 @@ function clipit_global_init(){
 
     elgg_register_page_handler('videos', 'videos_section');
     elgg_register_page_handler('video', 'video_view');
-    elgg_register_page_handler('connect', 'connect_section');
+    elgg_register_page_handler('sites', 'connect_section');
     elgg_register_page_handler('login', 'login_user_account_page_handler');
 
     $plugin_url = elgg_get_site_url() . "mod/z03_clipit_global";
@@ -176,10 +180,27 @@ function clipit_global_init(){
     }
 }
 
+function test(){
+    $sidebar = elgg_view_module('aside', elgg_echo('educational:centers'), elgg_view('walled_garden/sidebar/edu_list'));
+    $videos = ClipitRemoteResource::get_all();
+    // $videos = ClipitRemoteResource::get_from_remote_type(ClipitVideo::SUBTYPE);
+    $sidebar .= elgg_view_module('aside',
+        false,
+        elgg_view('walled_garden/sidebar/videos',
+            array('videos' => array_slice($videos, 0, 5))
+        )
+    );
+    $params = array(
+        'content' => elgg_view('videos/test', array('entities' => $videos)),
+        'filter' => '',
+        'sidebar' => $sidebar,
+    );
+    $body = elgg_view_layout('content', $params);
+    echo elgg_view_page('', $body);
+}
 function connect_section($page)
 {
-    $edu_centers = ClipitActivity::get_all();
-    $edu_centers = ClipitActivity::get_by_id(array(63));
+    $edu_centers = ClipitRemoteSite::get_all();
     $params = array(
         'content' => elgg_view('connect/view', array('entities' => $edu_centers)),
         'filter' => '',
@@ -189,17 +210,23 @@ function connect_section($page)
     echo elgg_view_page('', $body);
 }
 
-function video_view($page)
-{
-    if ($id = $page[0]) {
-        $video = array_pop(ClipitVideo::get_by_id(array((int)$id)));
-        $activity = array_pop(ClipitActivity::get_by_id(array(ClipitVideo::get_activity($video->id))));
-        $sidebar = elgg_view_module('aside', false, elgg_view('walled_garden/sidebar/edu_block', array('entity' => $activity)));
-        $sidebar .= elgg_view_module('aside', false, elgg_view('walled_garden/sidebar/videos', array('videos' => ClipitVideo::get_all(5))));
+function video_view($page){
+    if ($id = $page[1]) {
+//        $video = array_pop(ClipitVideo::get_by_id(array((int)$id)));
+        $video = array_pop(ClipitRemoteResource::get_by_id(array((int)$id)));
+        $site = array_pop(ClipitRemoteSite::get_by_id(array($video->remote_site)));
+        elgg_push_breadcrumb(elgg_echo('videos'), "videos");
+        elgg_push_breadcrumb($site->name, "videos/".elgg_get_friendly_title($site->name)."/".$site->id);
+        elgg_push_breadcrumb($video->name);
+
+        $videos = ClipitRemoteResource::get_all(5);
+        $sidebar = elgg_view_module('aside', false, elgg_view('walled_garden/sidebar/videos', array('videos' => $videos)));
+
         $params = array(
-            'content' => elgg_view('videos/view', array('entity' => $video)),
+            'content' => elgg_view('videos/view', array('entity' => $video, 'site' => $site)),
             'filter' => '',
             'sidebar' => $sidebar,
+            'title' => $video->name
         );
         $body = elgg_view_layout('content', $params);
         echo elgg_view_page('', $body);
@@ -208,43 +235,27 @@ function video_view($page)
     return false;
 }
 
-function videos_section($page)
-{
+function videos_section($page){
     $sidebar = elgg_view_module('aside', elgg_echo('educational:centers'), elgg_view('walled_garden/sidebar/edu_list'));
-    $edu = $page[0];
+    $edu = (int)$page[1];
     if ($edu) {
-        if ($entity = array_pop(ClipitActivity::get_from_search($edu, false))) {
-            $videos = ClipitActivity::get_videos($entity->id);
-            $videos = ClipitVideo::get_by_id($videos);
+        if ($entity = array_pop(ClipitRemoteSite::get_by_id(array($edu))) ) {
+            $videos = ClipitRemoteResource::get_by_id($entity->video_array);
             $sidebar = elgg_view_module('aside', false, elgg_view('walled_garden/sidebar/edu_block', array('entity' => $entity)));
 
         }
+    } elseif($page[0] == 'search') {
+        $videos = ClipitRemoteResource::get_all();
     } else {
-        $videos = ClipitVideo::get_all();
+        $videos = ClipitRemoteResource::get_all();
     }
-    $sidebar .= elgg_view_module('aside', false, elgg_view('walled_garden/sidebar/videos', array('videos' => ClipitVideo::get_all(5))));
-//    ClipitActivity::set_properties(63, array('description' => 'urjc'));
-//    ClipitActivity::set_properties(64, array('description' => 'esas'));
+    $sidebar .= elgg_view_module('aside',
+        false,
+        elgg_view('walled_garden/sidebar/videos',
+            array('videos' => array_slice($videos, 0, 5))
+        )
+    );
 
-//    var_dump(ClipitActivity::get_all());
-//    ClipitActivity::create(array(
-//        'name' => 'Universidad Rey Juan Carlos',
-//        'url' => 'http://www.urjc.es/',
-//    ));
-//    ClipitActivity::create(array(
-//        'name' => 'Escola Secundária Alberto Sampaio',
-//        'url' => 'http://www.esas.pt/',
-//    ));
-//var_dump(ClipitVideo::create(array(
-//    'name' => "Uma Bala No Preconceito",
-//    'url' => 'https://www.youtube.com/watch?v=61qqwT1Bk7M',
-//    'description' => 'Vídeo realizado no âmbito do I FESTIVAL DO VÍDEO EDUCATIVO ESAS.',
-//)));
-
-// Centros = Actividades
-    // Logo = file array
-    // url =  $activity->url
-// Videos pertenecen a actividad
     $params = array(
         'content' => elgg_view('videos/list', array('entities' => $videos)),
         'filter' => '',
@@ -268,7 +279,8 @@ function login_user_account_page_handler($page_elements, $handler)
     return true;
 }
 
-function setup_footer_menus(){
+function setup_footer_menus()
+{
     /*elgg_register_menu_item(
         'footer_clipit',
         array(
@@ -305,7 +317,7 @@ function setup_footer_menus(){
         'footer_clipit',
         array(
             'name' => 'student',
-            'href' => 'http://clipit.es/tutorials/student_en.pdf',
+            'href' => 'http://clipit.es/tutorials/student_'.get_current_language().'.pdf',
             'text' => elgg_echo('student'),
             'target' => '_blank',
             'priority' => 460,
@@ -316,7 +328,7 @@ function setup_footer_menus(){
         'footer_clipit',
         array(
             'name' => 'teacher',
-            'href' => 'http://clipit.es/tutorials/teacher_en.pdf',
+            'href' => 'http://clipit.es/tutorials/teacher_'.get_current_language().'.pdf',
             'text' => elgg_echo('teacher'),
             'target' => '_blank',
             'priority' => 465,

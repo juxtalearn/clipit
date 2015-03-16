@@ -78,6 +78,7 @@ $spanish = array(
 
     // Menu footer
     'menu:footer_clipit:header:clipit' => 'Clipit',
+    'menu:footer_clipit:header:tutorials' => 'Manuales',
     'menu:footer_clipit:header:help' => 'Ayuda',
     'menu:footer_clipit:header:legal' => 'Legal',
     'send:email_to_site' => 'Enviar email al sitio web',
@@ -131,8 +132,10 @@ $spanish = array(
     'position:ta' => 'Consultor Técnico',
 
     // Landing page
+    'sites' => 'Sitios',
     'videos' => 'Explorar',
     'connect' => 'Conéctate',
+    'sites' => 'Sitios',
     'try_out' => 'Demo',
     'latest:videos' => 'Últimos vídeos',
     'published:on' => 'Publicado el',

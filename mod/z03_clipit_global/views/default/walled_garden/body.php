@@ -17,7 +17,12 @@ $account = elgg_extract('accounts', $vars);
 <div class="jumbotron clipit-landing">
     <div class="container">
         <div class="pull-right clipit-img">
-            <img id="animated_banner" src="<?php echo $images_dir;?>/landing/graphic.gif">
+            <?php echo elgg_view('output/img', array(
+                'id' => 'animated_banner',
+                'src' => $images_dir . "/landing/graphic.gif",
+                'alt' => elgg_echo('clipit:slogan')
+            ));
+            ?>
         </div>
         <div class="clipit-message">
             <h1><?php echo elgg_echo('clipit:slogan');?></h1>
@@ -27,15 +32,13 @@ $account = elgg_extract('accounts', $vars);
                     'href'  => "http://clipit.es/demo",
                     'class' => 'btn clipit-btn',
                     'target' => '_blank',
-                    'title' => elgg_echo('try_out'),
                     'text'  => elgg_echo('try_out'),
                 ));
                 ?>
                 <?php echo elgg_view('output/url', array(
-                    'href'  => "connect",
+                    'href'  => "sites",
                     'class' => 'btn clipit-btn',
-                    'title' => elgg_echo('connect'),
-                    'text'  => elgg_echo('connect'),
+                    'text'  => elgg_echo('sites'),
                 ));
                 ?>
             </div>
@@ -64,7 +67,7 @@ $account = elgg_extract('accounts', $vars);
                 <p class="blue-dark text-lg"><?php echo elgg_echo('clipit:slogan:learn_rest');?></p>
             </div>
             <div class="col-md-4 text-center">
-                <div class="clipit-slogan-icon animate fadeIn" data-delay="1500" data-icon="3">
+                <div class="clipit-slogan-icon animate fadeIn" data-delay="1000" data-icon="3">
                     <div class="bar bar-left" style="background: #0999CD;"></div>
                     <div class="icon-circle" style="background-color: #0999CD;background-image: url('<?php echo $images_dir;?>/landing/share.png');"></div>
                 </div>
@@ -99,35 +102,55 @@ $account = elgg_extract('accounts', $vars);
                 </div>
             </div>
             <div class="slide-content" data-cycle-pager-template="<a href=#><img src='<?php echo $images_dir;?>/landing/section_5.png'></a> ">
-                <img src="<?php echo $images_dir;?>/landing/section_5.png">
+                <?php echo elgg_view('output/img', array(
+                    'src' => $images_dir . "/landing/section_5.png",
+                    'alt' => elgg_echo('clipit:carrousel:define')
+                ));
+                ?>
                 <div>
                     <h3><span><?php echo elgg_echo('clipit:carrousel:define');?><i></i></span></h3>
                     <p class="blue text-lg"><?php echo elgg_echo('clipit:carrousel:define_rest');?></p>
                 </div>
             </div>
             <div class="slide-content" data-cycle-pager-template="<a href=#><img src='<?php echo $images_dir;?>/landing/section_2.png'></a> ">
-                <img src="<?php echo $images_dir;?>/landing/section_2.png">
+                <?php echo elgg_view('output/img', array(
+                        'src' => $images_dir . "/landing/section_2.png",
+                        'alt' => elgg_echo('clipit:carrousel:collaborate')
+                    ));
+                ?>
                 <div>
                     <h3><span><?php echo elgg_echo('clipit:carrousel:collaborate');?><i></i></span></h3>
                     <p class="blue text-lg"><?php echo elgg_echo('clipit:carrousel:collaborate_rest');?></p>
                 </div>
             </div>
             <div class="slide-content" data-cycle-pager-template="<a href=#><img src='<?php echo $images_dir;?>/landing/section_4.png'></a> ">
-                <img src="<?php echo $images_dir;?>/landing/section_4.png">
+                <?php echo elgg_view('output/img', array(
+                    'src' => $images_dir . "/landing/section_4.png",
+                    'alt' => elgg_echo('clipit:carrousel:evaluate')
+                ));
+                ?>
                 <div>
                     <h3><span><?php echo elgg_echo('clipit:carrousel:evaluate');?><i></i></span></h3>
                     <p class="blue text-lg"><?php echo elgg_echo('clipit:carrousel:evaluate_rest');?></p>
                 </div>
             </div>
             <div class="slide-content" data-cycle-pager-template="<a href=#><img src='<?php echo $images_dir;?>/landing/section_1.png'></a> ">
-                <img src="<?php echo $images_dir;?>/landing/section_1.png">
+                <?php echo elgg_view('output/img', array(
+                    'src' => $images_dir . "/landing/section_1.png",
+                    'alt' => elgg_echo('clipit:carrousel:progress')
+                ));
+                ?>
                 <div>
                     <h3><span><?php echo elgg_echo('clipit:carrousel:progress');?><i></i></span></h3>
                     <p class="blue text-lg"><?php echo elgg_echo('clipit:carrousel:progress_rest');?></p>
                 </div>
             </div>
             <div class="slide-content" data-cycle-pager-template="<a href=#><img src='<?php echo $images_dir;?>/landing/section_3.png'></a> ">
-                <img src="<?php echo $images_dir;?>/landing/section_3.png">
+                <?php echo elgg_view('output/img', array(
+                    'src' => $images_dir . "/landing/section_3.png",
+                    'alt' => elgg_echo('clipit:carrousel:explore')
+                ));
+                ?>
                 <div>
                     <h3><span><?php echo elgg_echo('clipit:carrousel:explore');?><i></i></span></h3>
                     <p class="blue text-lg"><?php echo elgg_echo('clipit:carrousel:explore_rest');?></p>
@@ -145,77 +168,7 @@ $account = elgg_extract('accounts', $vars);
 <div class="clipit-videos">
     <div class="container">
         <h2 class="text-center"><?php echo elgg_echo('clipit:global:recommended');?></h2>
-        <div class="videos row">
-            <div class="main-video col-md-9 margin-bottom-10">
-                <div>
-                    <a class="cancel-video-view" style="display: none;" href="javascript:;">
-                        <i class="fa fa-times"></i>
-                    </a>
-                    <div id="show-video" class="frame-container" style="display: none;"></div>
-                    <div class="preview-video">
-                        <div class="details-video">
-                            <h3 class="margin-0">Clipit - Learning by teaching</h3>
-                            <h4>
-                                <a href="http://clipit.es">Create, learn, share</a>
-                            </h4>
-                        </div>
-                        <div class="cursor-pointer play-video" data-video="https://www.youtube.com/watch?v=8lTAdtT1nFc">
-                            <div>
-                                <div>
-                                    <a class="play-button" href="javascript:;">
-                                        <i class="fa fa-play"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <img src="http://img.youtube.com/vi/8lTAdtT1nFc/maxresdefault.jpg" class="bg-video">
-                    </div>
-                    </div>
-            </div>
-            <div class="col-md-3 row more-videos">
-                <div class="col-md-12 col-xs-4 margin-bottom-10" data-video="https://www.youtube.com/watch?v=o5ySYGOo5AI">
-                    <a class="thumb-video" href="javascript:;">
-                        <div class="bg-play">
-                            <div>
-                                <i class="fa fa-play-circle-o"></i>
-                            </div>
-                        </div>
-                        <img src="http://img.youtube.com/vi/o5ySYGOo5AI/mqdefault.jpg" style="width: 100%;height: 100%;">
-                    </a>
-                </div>
-                <div class="col-md-12 col-xs-4 margin-bottom-10" data-video="https://www.youtube.com/watch?v=FFZhCcTDMMY">
-                    <a class="thumb-video" href="javascript:;">
-                        <div class="bg-play">
-                            <div>
-                                <i class="fa fa-play-circle-o"></i>
-                            </div>
-                        </div>
-                        <img src="http://img.youtube.com/vi/FFZhCcTDMMY/mqdefault.jpg" style="width: 100%;">
-                    </a>
-                </div>
-                <div class="col-md-12 col-xs-4 margin-bottom-10" data-video="https://www.youtube.com/watch?v=Zk9J5xnTVMA">
-                    <a class="thumb-video" href="javascript:;">
-                        <div class="bg-play">
-                            <div>
-                                <i class="fa fa-play-circle-o"></i>
-                            </div>
-                        </div>
-                        <img src="http://img.youtube.com/vi/Zk9J5xnTVMA/mqdefault.jpg" style="width: 100%;">
-                    </a>
-                </div>
-                <div class="col-md-12 text-center overflow-hidden">
-                    <div class="margin-top-10">
-                        <?php echo elgg_view('output/url', array(
-                            'href' => 'videos',
-                            'class' => 'view-more-videos btn',
-                            'text'  => 'Ver más videos',
-                            'title' => 'Ver más videos'
-                        ));
-                        ?>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php echo elgg_view('videos/recommended_videos');?>
     </div>
 </div>
 <!--Recommended videos-->
@@ -233,7 +186,8 @@ $account = elgg_extract('accounts', $vars);
                         'href' => $account['twitter'],
                         'target' => '_blank',
                         'text'  => elgg_view('output/img', array(
-                            'src' => $images_dir . "/social/twitter.png"
+                            'src' => $images_dir . "/social/twitter.png",
+                            'alt' => 'Twitter logo'
                         ))
                     ));
                     ?>
@@ -241,7 +195,8 @@ $account = elgg_extract('accounts', $vars);
                         'href' => $account['facebook'],
                         'target' => '_blank',
                         'text'  => elgg_view('output/img', array(
-                            'src' => $images_dir . "/social/facebook.png"
+                            'src' => $images_dir . "/social/facebook.png",
+                            'alt' => 'Facebook logo'
                         ))
                     ));
                     ?>
@@ -249,7 +204,8 @@ $account = elgg_extract('accounts', $vars);
                         'href' => $account['linkedin'],
                         'target' => '_blank',
                         'text'  => elgg_view('output/img', array(
-                            'src' => $images_dir . "/social/linkedin.png"
+                            'src' => $images_dir . "/social/linkedin.png",
+                            'alt' => 'Linkedin logo'
                         ))
                     ));
                     ?>
@@ -257,7 +213,8 @@ $account = elgg_extract('accounts', $vars);
                         'href' => $account['youtube'],
                         'target' => '_blank',
                         'text'  => elgg_view('output/img', array(
-                            'src' => $images_dir . "/social/youtube.png"
+                            'src' => $images_dir . "/social/youtube.png",
+                            'alt' => 'Youtube logo'
                         ))
                     ));
                     ?>
@@ -265,7 +222,8 @@ $account = elgg_extract('accounts', $vars);
                         'href' => $account['vimeo'],
                         'target' => '_blank',
                         'text'  => elgg_view('output/img', array(
-                            'src' => $images_dir . "/social/vimeo.png"
+                            'src' => $images_dir . "/social/vimeo.png",
+                            'alt' => 'Vimeo logo'
                         ))
                     ));
                     ?>

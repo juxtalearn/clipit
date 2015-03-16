@@ -14,16 +14,14 @@
 <li class="btn-landing">
     <?php echo elgg_view('output/url', array(
         'href'  => "http://clipit.es/demo",
-        'title' => elgg_echo('try_out'),
         'text'  => elgg_echo('try_out')
     ));
     ?>
 </li>
 <li class="btn-landing">
     <?php echo elgg_view('output/url', array(
-        'href'  => "connect",
-        'title' => elgg_echo('connect'),
-        'text'  => elgg_echo('connect')
+        'href'  => "sites",
+        'text'  => elgg_echo('sites')
     ));
     ?>
 </li>
@@ -31,7 +29,6 @@
 <li>
     <?php echo elgg_view('output/url', array(
         'href'  => "videos",
-        'title' => elgg_echo('videos'),
         'text'  => elgg_echo('videos')
     ));
     ?>

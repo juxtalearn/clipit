@@ -82,7 +82,44 @@ function get_friendly_time($time){
         }
     }
 }
-
+function get_video_thumbnail($url, $size){
+    if (strpos($url, 'youtube.com') != false || strpos($url, 'youtu.be') != false) {
+        preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $url, $matches);
+        $id = $matches[0];
+        $href_img = 'http://img.youtube.com/vi/'.$id.'/';
+        switch($size){
+            case 'large':
+//                $href_img .= 'maxresdefault.jpg';
+                $href_img .= 'hqdefault.jpg';
+                break;
+            case 'normal':
+                $href_img .= 'mqdefault.jpg';
+                break;
+            case 'small':
+                $href_img .= 'default.jpg';
+                break;
+        }
+    } else if (strpos($url, 'vimeo.com') != false) {
+        preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=vimeo.com/)[^&\n]+#", $url, $matches);
+        $id = $matches[0];
+        $data = file_get_contents("http://vimeo.com/api/v2/video/$id.json");
+        $data = array_pop(json_decode($data));
+        switch($size){
+            case 'large':
+                $href_img = $data->thumbnail_large;
+                break;
+            case 'normal':
+                $href_img = $data->thumbnail_medium;
+                break;
+            case 'small':
+                $href_img = $data->thumbnail_small;
+                break;
+        }
+    } else {
+        return false;
+    }
+    return $href_img;
+}
 /**
  * Convert Hex Color to RGB
  *

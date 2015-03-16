@@ -11,13 +11,15 @@
  * @package         ClipIt
  */
 
-$edu_list = ClipitActivity::get_all($limit = 0, $offset = 0, $order_by = "name", $ascending = false);
+//$edu_list = ClipitActivity::get_all($limit = 0, $offset = 0, $order_by = "name", $ascending = false);
+$edu_list = ClipitRemoteSite::get_all(0, 0, 'name');
+
 foreach($edu_list as $edu){
-    $name = strtolower(get_acronym($edu->name));
+    $name = "videos/".elgg_get_friendly_title($edu->name)."/".$edu->id;
     elgg_register_menu_item('sidebar:videos', array(
-        'name' => $name,
+        'name' => $edu->name,
         'text' => $edu->name,
-        'href' => "videos/".$name,
+        'href' => $name,
         'selected' => false
     ));
 }

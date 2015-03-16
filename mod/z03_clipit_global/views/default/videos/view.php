@@ -12,16 +12,15 @@
  */
 $video = elgg_extract('entity', $vars);
 $date = date("M d, Y H:i", $video->time_created);
-$edu = array_pop(ClipitActivity::get_by_id(array(ClipitVideo::get_activity($video->id))));
-$edu_file = array_pop(ClipitFile::get_by_id(array(array_pop($edu->file_array))));
+$edu = elgg_extract('site', $vars);
 ?>
 <style>
     .container .content{
         background: transparent !important;
+        padding: 0 !important;
     }
 </style>
 <div class="multimedia-pub">
-    <h3 class="margin-0 margin-bottom-20"><?php echo $video->name;?></h3>
     <div class="frame-container">
         <iframe src="<?php echo get_video_url_embed($video->url, true);?>" frameborder="0" allowfullscreen="true"></iframe>
     </div>
@@ -38,32 +37,26 @@ $edu_file = array_pop(ClipitFile::get_by_id(array(array_pop($edu->file_array))))
                         <?php echo $video->description; ?>
                     </p>
                 <?php endif;?>
-                <?php if($tags):?>
-                <small class="show"><strong><?php echo elgg_echo('tags');?></strong></small>
-                <div class="tags">
-                    <a href="http://www.clipit.es/trials/dcm/explore/search?by=tag&amp;id=79" class="label label-primary" title="Learning Analytics">Learning Analytics</a>
-                    <a href="http://www.clipit.es/trials/dcm/explore/search?by=tag&amp;id=79" class="label label-primary" title="Learning Analytics">Moocs</a>
-                </div>
+                <?php if(!empty($video->tag_array)):?>
+                <h4><?php echo elgg_echo('tags');?></h4>
+                    <?php echo elgg_view("tricky_topic/tags/view", array('tags' => $video->tag_array)); ?>
                 <?php endif;?>
             </div>
             <div class="col-md-5">
-                <?php echo elgg_view('output/img',array(
-                    'src' => $edu_file->thumb_small['url'],
-                    'class' => 'image-block',
-                    'style' => 'width: 40px;',
-                ));?>
                 <div class="content-block">
-                    <strong>
-                        <?php echo elgg_view('output/url', array(
-                            'href' => "http://www.clipit.es/".$edu->description,
-                            'text'  => $edu->name,
-                            'title' => $edu->name
-                        ));
-                        ?>
-                    </strong>
+                    <small><strong><?php echo elgg_echo('educational:centers');?></strong></small>
                     <div>
                         <?php echo elgg_view('output/url', array(
-                            'href' => "videos/".$edu->description,
+                            'href' => $edu->url,
+                            'class' => 'pull-right btn btn-xs btn-primary',
+                            'text'  => elgg_echo('connect'),
+                            'title' => elgg_echo('connect')
+                        ));
+                        ?>
+                        <?php echo $edu->name;?>
+                        <div class="clearfix"></div>
+                        <?php echo elgg_view('output/url', array(
+                            'href' => "videos/".elgg_get_friendly_title($edu->name)."/".$edu->id,
                             'text'  => '<i class="fa fa-youtube-play"></i> '.elgg_echo('videos:view_all'),
                             'title' => elgg_echo('videos:view_all')
                         ));

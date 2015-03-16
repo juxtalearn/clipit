@@ -72,6 +72,8 @@ $english = array(
 
     // Menu footer
     'menu:footer_clipit:header:clipit' => 'Clipit',
+    'menu:footer_clipit:header:tutorials' => 'Tutorials',
+    'menu:footer_clipit:header:tutorials' => 'Tutorials',
     'menu:footer_clipit:header:help' => 'Help',
     'menu:footer_clipit:header:legal' => 'Legal',
     'send:email_to_site' => 'Send email to site',
@@ -124,8 +126,10 @@ $english = array(
     'position:ra' => 'Research Advisor',
     'position:ta' => 'Technical Advisor',
     // Landing page
+    'sites' => 'Sites',
     'videos' => 'Explore',
     'connect' => 'Connect',
+    'sites' => 'Sites',
     'try_out' => 'Demo',
     'latest:videos' => 'Latest videos',
     'published:on' => 'Published on',
