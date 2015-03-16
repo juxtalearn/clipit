@@ -37,14 +37,12 @@ clipit.init = function() {
     // TinyMCE init by default
     clipit.tinymce();
     // Validation request new password
-    $(".elgg-form-user-requestnewpassword").validate(clipit.requestPassword());
-
+    $(".elgg-form-user-requestnewpassword").validate(clipit.formForgotpasswordValidation());
+    $(".elgg-form-register").validate(clipit.formRegisterValidation());
     $("body").on("click", "input[type=submit]", clipit.submitLoading);
     // discussion reply button
     $(".reply-to, .close-reply-to").click(clipit.replyTo);
     // Read more/less shorten plugin
-//    $("[data-shorten=true]").shorten();
-//    $("[data-shorten=true]").();
     clipit.shorten('[data-shorten=true]');
     // Form validation
     $("body").on("click", "form[data-validate=true]", clipit.formValidation);
@@ -141,7 +139,7 @@ clipit.tinymce.init = function(id){
 /**
  * Forgotpassword form validation
  */
-clipit.requestPassword = function(e) {
+clipit.formForgotpasswordValidation = function(e) {
     return {
         errorElement: "span",
         errorPlacement: function (error, element) {
@@ -182,6 +180,42 @@ clipit.requestPassword = function(e) {
             }
         }
     }
+};
+clipit.formRegisterValidation = function(e){
+  return {
+      errorElement: "span",
+      errorPlacement: function (error, element) {
+          error.appendTo($("label[for=" + element.attr('name') + "]"));
+      },
+      onkeyup: false,
+      onblur: false,
+      rules: {
+          username: {
+              required: true,
+              minlength: 1,
+              login_normalize: true,
+              remote: {
+                  url: elgg.config.wwwroot + "action/user/check",
+                  type: "POST",
+                  data: {
+                      username: function () {
+                          return $("input[name='username']").val();
+                      },
+                      __elgg_token: function () {
+                          return $("input[name='__elgg_token']").val();
+                      },
+                      __elgg_ts: function () {
+                          return $("input[name='__elgg_ts']").val();
+                      }
+                  }
+              }
+          }
+      },
+      submitHandler: function (form) {
+          if ($(form).valid())
+              form.submit();
+      }
+  };
 };
 /**
  * Form general validation
@@ -403,34 +437,6 @@ clipit.shorten = function(element){
         });
     });
 };
-(function($) {
-    $.fn.shorten = function () {
-        return this.each(function () {
-            var element_shorten = $(this);
-            var element_height = element_shorten.css("max-height");
-            element_shorten.addClass("shorten");
-            element_shorten.wrapInner("<div class='container-text'/>");
-            var container = element_shorten.find('.container-text');
-            var container_height = container.css("height");
-            if(parseInt(container_height) < parseInt(element_height)){
-                return false;
-            }
-            var readmore_link = $("<a href='javascript:;' class='read-more'>"+elgg.echo('read_more')+"<strong>...</strong></a>");
-            element_shorten.append(readmore_link);
-            container.css("max-height",element_height);
-            readmore_link.on("click", function(){
-                if (container.hasClass('full-content')) {
-                    container.removeClass('full-content');
-                    container.addClass('less-content');
-                    $(this).text(elgg.echo('read_more')+"...");
-                } else {
-                    container.addClass('full-content');
-                    $(this).text(elgg.echo('read_less'));
-                }
-            });
-        });
-    }
-})(jQuery);
 
 $(function(){
     /**
@@ -497,41 +503,6 @@ $(function(){
         },
         "Use a valid username."
     );
-
-    $(".elgg-form-register").validate({
-        errorElement: "span",
-        errorPlacement: function(error, element) {
-            error.appendTo($("label[for="+element.attr('name')+"]"));
-        },
-        onkeyup: false,
-        onblur: false,
-        rules: {
-            username: {
-                required: true,
-                minlength: 1,
-                login_normalize: true,
-                remote: {
-                    url: elgg.config.wwwroot+"action/user/check",
-                    type: "POST",
-                    data: {
-                        username: function() {
-                            return $( "input[name='username']" ).val();
-                        },
-                        __elgg_token: function() {
-                            return $( "input[name='__elgg_token']" ).val();
-                        },
-                        __elgg_ts: function() {
-                            return $( "input[name='__elgg_ts']" ).val();
-                        }
-                    }
-                }
-            }
-        },
-        submitHandler: function(form) {
-            if ($(form).valid())
-                form.submit();
-        }
-    });
 
     /*
      * Labels complete view  & labels form to create
