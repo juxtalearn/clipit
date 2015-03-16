@@ -13,20 +13,7 @@
 $title = elgg_echo("group:discussion");
 $href = "clipit_activity/{$activity->id}/group/{$group->id}/discussion";
 elgg_push_breadcrumb($title);
-$messages = array_pop(ClipitPost::get_by_destination(array($group->id), 0, 0, false, '', false));
 
-$content =  elgg_view('discussion/list',
-    array(
-        'entity' => $group,
-        'messages' => $messages,
-        'attach_multimedia' => true,
-        'href'   => $href,
-        'create' => $canCreate
-    )
-);
-if(!$messages){
-    $content .= elgg_view('output/empty', array('value' => elgg_echo('discussions:none')));
-}
 if($page[4] == 'view' && $page[5]){
     $message_id = (int)$page[5];
     $message = array_pop(ClipitPost::get_by_id(array($message_id)));
@@ -43,6 +30,21 @@ if($page[4] == 'view' && $page[5]){
         ));
     } else {
         return false;
+    }
+} else {
+    $messages = array_pop(ClipitPost::get_by_destination(array($group->id), 0, 0, false, '', false));
+
+    $content =  elgg_view('discussion/list',
+        array(
+            'entity' => $group,
+            'messages' => $messages,
+            'attach_multimedia' => true,
+            'href'   => $href,
+            'create' => $canCreate
+        )
+    );
+    if(!$messages){
+        $content .= elgg_view('output/empty', array('value' => elgg_echo('discussions:none')));
     }
 }
 $params = array(

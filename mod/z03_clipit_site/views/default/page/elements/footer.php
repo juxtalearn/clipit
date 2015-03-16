@@ -13,7 +13,12 @@ $footer_menu = elgg_view_menu('footer_clipit', array(
     'class' => 'pull-right site-map col-sm-9 col-xs-12 col-md-7 col-lg-6'
 ));
 $site = elgg_get_site_entity();
+$js = elgg_get_loaded_js('footer');
 ?>
+<?php foreach ($js as $script): ?>
+<script type="text/javascript" src="<?php echo $script; ?>"></script>
+<?php endforeach;?>
+
 <footer id="footer">
     <div class="container">
         <div class="row">

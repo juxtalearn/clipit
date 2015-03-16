@@ -32,7 +32,8 @@ clipit.init = function() {
         weekHeader: 'Sm'
     };
     $.datepicker.setDefaults($.datepicker.regional);
-
+    // set active to registered menu
+    clipit.isActiveMenu();
     // TinyMCE init by default
     clipit.tinymce();
     // Validation request new password
@@ -42,7 +43,9 @@ clipit.init = function() {
     // discussion reply button
     $(".reply-to, .close-reply-to").click(clipit.replyTo);
     // Read more/less shorten plugin
-    $("[data-shorten=true]").shorten();
+//    $("[data-shorten=true]").shorten();
+//    $("[data-shorten=true]").();
+    clipit.shorten('[data-shorten=true]');
     // Form validation
     $("body").on("click", "form[data-validate=true]", clipit.formValidation);
     // Remove object confirmation
@@ -332,10 +335,74 @@ clipit.tagList = function(e){
         singleFieldNode: that.closest("form").find("input[name=tags]")
     });
 };
+/**
+ * Menu builder tracking
+ * Right sidebar set active when href found is registered in ElggMenu
+ */
+clipit.isActiveMenu = function() {
+    var full_url = window.location.href;
+    var urls_type = ['/view/', '?filter=', '/edit/', '/create/', '?s=', '&'];
+    for (i in urls_type) {
+        var path = full_url.split(urls_type[i])
+        var menu_item = $(".elgg-sidebar li a[href='" + path[0] + "']");
+        if (menu_item.length > 0) {
+            menu_item.parent("li").addClass("active");
+        }
+    }
+};
+
+clipit.labelList = function(e){
+    that = $(this);
+    $(this).tagit({
+        allowSpaces: true,
+        removeConfirmation: true,
+        onTagExists: function(event, ui){
+            $(ui.existingTag).fadeIn("slow", function() {
+                $(this).addClass("selected");
+            }).fadeOut("slow", function() {
+                $(this).removeClass("selected");
+            });
+        },
+        autocomplete: {
+            delay: 0,
+            source: elgg.config.wwwroot+"ajax/view/publications/labels/search"
+        },
+        placeholderText: elgg.echo("tags:commas:separated"),
+        singleField: true,
+        singleFieldNode: that.closest("form").find("input[name=labels]")
+    });
+};
+
 /*
  * jQuery Shorten plugin
  *
  */
+clipit.shorten = function(element){
+    return $(element).each(function () {
+        var element_shorten = $(this);
+        var element_height = element_shorten.css("max-height");
+        element_shorten.addClass("shorten");
+        element_shorten.wrapInner("<div class='container-text'/>");
+        var container = element_shorten.find('.container-text');
+        var container_height = container.css("height");
+        if(parseInt(container_height) < parseInt(element_height)){
+            return false;
+        }
+        var readmore_link = $("<a href='javascript:;' class='read-more'>"+elgg.echo('read_more')+"<strong>...</strong></a>");
+        element_shorten.append(readmore_link);
+        container.css("max-height",element_height);
+        readmore_link.on("click", function(){
+            if (container.hasClass('full-content')) {
+                container.removeClass('full-content');
+                container.addClass('less-content');
+                $(this).text(elgg.echo('read_more')+"...");
+            } else {
+                container.addClass('full-content');
+                $(this).text(elgg.echo('read_less'));
+            }
+        });
+    });
+};
 (function($) {
     $.fn.shorten = function () {
         return this.each(function () {
@@ -399,19 +466,7 @@ $(function(){
             $(".events-more-link").attr("href", hrefString.replace("offset=" + offset, "offset=" + totalEvents));
         }
     });
-    /**
-     * Menu builder tracking
-     * Right sidebar set active when href found register menu
-     */
-    var full_url = window.location.href;
-    var urls_type = ['/view/', '?filter=', '/edit/', '/create/', '?s=', '&'];
-    for(i in urls_type){
-        var path = full_url.split(urls_type[i])
-        var menu_item = $(".elgg-sidebar li a[href='"+ path[0] +"']");
-        if(menu_item.length > 0){
-            menu_item.parent("li").addClass("active");
-        }
-    }
+
     /**
      * Collapse in tree menu
      */
@@ -478,34 +533,6 @@ $(function(){
         }
     });
 
-
-    /**
-     * Quote reference for discussion posts
-     */
-    $(document).on("click", ".quote-ref", function(){
-        var quote_id = $(this).data("quote-ref");
-        var parent = $(this).closest("div");
-        var $obj = $(this);
-        var quote_content = parent.find(".quote-content[data-quote-id="+quote_id+"]");
-
-        if(quote_content.length == 0){
-            $(this).addClass("active");
-            $(this).after("<div class='quote-content' data-quote-id='"+quote_id+"'></div>");
-            var quote_content = parent.find(".quote-content[data-quote-id="+quote_id+"]");
-            quote_content.html("<a class='loading'><i class='fa fa-spinner fa-spin'></i> loading...</a>");
-            var message_id = $(this).closest(".discussion-reply-msg").data("message-destination");
-            elgg.get("ajax/view/discussion/quote", {
-                data: { quote_id : quote_id, message_destination_id : message_id},
-                success: function(data){
-                quote_content.html(data);
-            }
-            });
-        } else {
-            parent.find(".quote-content[data-quote-id="+quote_id+"]").toggle(1,function(){
-                $obj.toggleClass("active");
-            });
-        }
-    });
     /*
      * Labels complete view  & labels form to create
      */
@@ -515,40 +542,7 @@ $(function(){
         $('#label_list').toggleClass('text-truncate');
     });
 
-    clipit.labelList = function(e){
-        that = $(this);
-        $(this).tagit({
-            allowSpaces: true,
-            removeConfirmation: true,
-            onTagExists: function(event, ui){
-            $(ui.existingTag).fadeIn("slow", function() {
-                $(this).addClass("selected");
-            }).fadeOut("slow", function() {
-                $(this).removeClass("selected");
-            });
-        },
-            autocomplete: {
-            delay: 0,
-                source: elgg.config.wwwroot+"ajax/view/publications/labels/search"
-            },
-            placeholderText: elgg.echo("tags:commas:separated"),
-            singleField: true,
-            singleFieldNode: that.closest("form").find("input[name=labels]")
-        });
-    };
-    ///
-    /*
-     * #int comment reference
-     */
-    $(".msg-quote").click(function (){
-    var editor = tinyMCE.editors['mceEditor'];
-    editor.execCommand('mceInsertContent', false, this.innerText+' ');
-    var form = editor.formElement;
 
-    $('html, body').animate({
-        scrollTop: $(form).offset().top
-        }, 50);
-    });
     /**
      * Popover set default settings
      */

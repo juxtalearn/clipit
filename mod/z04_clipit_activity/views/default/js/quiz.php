@@ -18,7 +18,9 @@ clipit.quiz.init = function() {
     $("#finish-quiz").click(clipit.quiz.finishConfirmation);
 };
 elgg.register_hook_handler('init', 'system', clipit.quiz.init);
-
+clipit.quiz.translated = function(){
+    return elgg.echo();
+};
 clipit.quiz.saveQuestion = function(e){
     var $element = $(this);
     if(arguments[0].object){
@@ -284,7 +286,7 @@ clipit.quiz.create = function(options){
                         className: "btn-border-blue btn-default"
                     }
                 },
-                message: "<?php echo elgg_echo('quiz:tricky_topic:danger');?>",
+                message: elgg.echo('quiz:tricky_topic:danger'),
                 callback: function(result) {
                     if(result) {
                         $quiz.find(".questions").html("");
@@ -353,18 +355,18 @@ clipit.quiz.create = function(options){
                         paginationLinkClass: 'cursor-pointer',
                         paginationActiveClass: 'active',
                         paginationDisabledClass: 'disabled',
-                        pageText: '<?php echo elgg_echo('pages');?>: ',
+                        pageText: elgg.echo('pages')+': ',
                         searchText: '',
-                        perPageText: '<?php echo elgg_echo('show');?>:',
-                        paginationPrev: '<?php echo elgg_echo('prev');?>',
+                        perPageText: elgg.echo('show')+':',
+                        paginationPrev: elgg.echo('prev'),
                         paginationNext: elgg.echo('next'),
-                        recordCountText: '<?php echo elgg_echo('showing');?>',
-                        recordCountPageBoundTemplate: '{pageLowerBound} <?php echo elgg_echo('to');?> {pageUpperBound} <?php echo elgg_echo('of');?>',
-                        recordCountPageUnboundedTemplate: '{recordsShown} <?php echo elgg_echo('of');?>',
+                        recordCountText: elgg.echo('showing'),
+                        recordCountPageBoundTemplate: '{pageLowerBound} '+elgg.echo('to')+' {pageUpperBound} '+elgg.echo('of'),
+                        recordCountPageUnboundedTemplate: '{recordsShown} '+elgg.echo('of')
                     }
                 });
                 $content.find(".dynatable-search input")
-                    .attr("placeholder", '<?php echo elgg_echo('search');?>')
+                    .attr("placeholder", elgg.echo('search'))
                     .addClass('form-control')
                     .css({"width": "auto", "display": "inline-block"});
             }

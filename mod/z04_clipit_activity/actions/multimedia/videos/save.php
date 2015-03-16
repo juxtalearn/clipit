@@ -39,7 +39,7 @@ if(trim($title) == ""){
         $entity_class = $object['subtype'];
         $entity = array_pop($entity_class::get_by_id(array($entity_id)));
         // Video url (youtube|vimeo)
-        if(trim($url) != "" && $video_data = video_url_parser($url)){
+        if(trim($url) != "" && $video_data){
             $video_url = $video_data['url'];
             // Video upload to youtube
         } elseif(!empty($file['tmp_name'])){

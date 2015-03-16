@@ -16,14 +16,14 @@ switch($type){
     case ClipitTask::TYPE_VIDEO_UPLOAD:
     case ClipitTask::TYPE_STORYBOARD_UPLOAD:
            $output = "users";
-            $title = "Group task";
+            $title = elgg_echo('task:group');
         break;
     case ClipitTask::TYPE_QUIZ_TAKE:
     case ClipitTask::TYPE_VIDEO_FEEDBACK:
     case ClipitTask::TYPE_STORYBOARD_FEEDBACK:
     case ClipitTask::TYPE_RESOURCE_DOWNLOAD:
         $output = "user";
-        $title = "User task";
+        $title = elgg_echo('task:user');
         break;
 }
 ?>

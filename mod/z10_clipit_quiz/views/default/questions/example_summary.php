@@ -33,13 +33,15 @@ $multimedia = array_merge(
             <div><?php echo $example->description;?></div>
         </small>
         <small>
+        <?php if(!empty($example->example_type_array)):?>
             <?php echo elgg_view('output/url', array(
                 'href'  => 'javascript:;',
                 'class' => 'margin-right-15 btn-reflection',
                 'title' => elgg_echo('reflection_palette'),
-                'text'  =>  '<i class="fa fa-th-list"></i> '.elgg_echo('reflection_palette'),
+                'text'  =>  '<i class="fa fa-th-list"></i> '.elgg_echo('reflection_palette').' ('.count($example->example_type_array).')',
             ));
             ?>
+        <?php endif;?>
             <?php echo elgg_view('output/url', array(
                 'href'  => "tricky_topics/examples/view/{$example->id}#resources",
                 'target' => '_blank',
@@ -70,5 +72,6 @@ $multimedia = array_merge(
         </div>
     </div>
 </div>
-<?php echo elgg_view('examples/reflection_item/summary', array('entities' => $example->example_type_array));?>
-
+<?php if(!empty($example->example_type_array)):?>
+    <?php echo elgg_view('examples/reflection_item/summary', array('entities' => $example->example_type_array));?>
+<?php endif;?>

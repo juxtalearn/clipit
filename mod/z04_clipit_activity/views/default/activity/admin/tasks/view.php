@@ -66,20 +66,20 @@ $id = uniqid();
     });
 </script>
 
-<div>
+<div class="pull-right">
     <small class="show"><?php echo elgg_echo('view_as');?></small>
     <?php echo elgg_view('output/url', array(
         'href'  => "javascript:;",
         'id' => 'calendar',
         'class' => 'btn btn-xs btn-border-blue active button-view-as',
-        'text'  => '<i class="fa fa-calendar"></i> Calendar',
+        'text'  => '<i class="fa fa-calendar"></i> '.elgg_echo('calendar'),
     ));
     ?>
     <?php echo elgg_view('output/url', array(
         'href'  => "javascript:;",
         'id' => 'list',
         'class' => 'btn btn-xs btn-border-blue button-view-as',
-        'text'  => '<i class="fa fa-th-list"></i> List',
+        'text'  => '<i class="fa fa-th-list"></i> '.elgg_echo('list'),
     ));
     ?>
 </div>

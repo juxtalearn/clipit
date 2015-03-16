@@ -16,6 +16,7 @@ $input_prefix = elgg_extract('input_prefix', $vars);
 <div class="show text-muted margin-bottom-10">
     <?php echo elgg_echo('quiz:question:answer:write');?>
 </div>
+<label for="<?php echo $input_prefix;?>[question][<?php echo $id;?>][number]"></label>
 <hr class="margin-0 margin-bottom-20">
 <input type="text"
        name="<?php echo $input_prefix;?>[question][<?php echo $id;?>][number]"

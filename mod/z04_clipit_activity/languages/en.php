@@ -11,6 +11,9 @@
  * @package         ClipIt
  */
 $english = array(
+    'created' => 'Created',
+    'calendar' => 'Calendar',
+    'list' => 'List',
     'selected' => 'Selected',
     'unselected' => 'Not selected',
     'review' => 'Review',
@@ -277,6 +280,8 @@ $english = array(
     'task:added' => 'Added task',
     'task:updated' => 'Updated task',
     'task:cantupdate' => 'You can not update task',
+    'task:user' => 'Individual task',
+    'task:group' => 'Group task',
     'task:select' => 'Select task',
     'task:select:task_type' => 'Select task type',
     'task:task_type' => 'Task type',

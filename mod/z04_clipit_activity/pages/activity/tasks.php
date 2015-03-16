@@ -61,8 +61,8 @@ if($page[2] == 'view' && $page[3]){
         ));
     }
 } else {
-    $tasks = ClipitTask::get_by_id($activity->task_array, 0, 0, 'start', true);
     if($user->role == ClipitUser::ROLE_STUDENT) {
+        $tasks = ClipitTask::get_by_id($activity->task_array, 0, 0, 'end', false);
         $content = '';
         foreach ($tasks as $task) {
             $status = get_task_status($task);
@@ -98,6 +98,7 @@ if($page[2] == 'view' && $page[3]){
             $content .= elgg_view('tasks/list', array('tasks' => $task_filtered, 'href' => $href));
         }
     } else { // Role {Teacher, Admin}
+        $tasks = ClipitTask::get_by_id($activity->task_array, 0, 0, 'start', true);
         $content = elgg_view('tasks/list', array('tasks' => $tasks, 'href' => $href));
     }
 }

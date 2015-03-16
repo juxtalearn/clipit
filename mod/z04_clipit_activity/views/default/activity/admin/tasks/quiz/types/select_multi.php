@@ -36,6 +36,7 @@ $input_prefix = elgg_extract('input_prefix', $vars);
         'style' => 'width: 85%',
         'placeholder' => elgg_echo('quiz:question:answer').' '.$num,
         'value' => $vars['value'],
+        'required' => true
     ));
     ?>
 </div>

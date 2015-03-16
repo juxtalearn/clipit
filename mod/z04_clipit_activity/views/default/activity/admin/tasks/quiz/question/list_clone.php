@@ -21,10 +21,10 @@ $id = elgg_extract('id', $vars);
         <table class="table">
             <thead>
             <tr class="info">
-                <th>Select</th>
-                <th>Question</th>
-                <th>Created</th>
-                <th style="width: 110px;">Difficulty</th>
+                <th><?php echo elgg_echo('select');?></th>
+                <th><?php echo elgg_echo('quiz:question');?></th>
+                <th><?php echo elgg_echo('created');?></th>
+                <th style="width: 110px;"><?php echo elgg_echo('difficulty');?></th>
             </tr>
             </thead>
             <tbody>

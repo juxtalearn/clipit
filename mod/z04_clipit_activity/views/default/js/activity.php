@@ -11,15 +11,18 @@
  * @package         ClipIt
  */
 ?>
-$(function(){
+
 <?php
-// Tasks
+// Tasks (admin, student)
 echo elgg_view('js/tasks');
 // Activity admin
 echo elgg_view('js/admin');
-// Quiz
+// Quiz (admin, student)
 echo elgg_view('js/quiz');
+// Discussion
+echo elgg_view('js/discussion');
 ?>
+$(function(){
 });
 //<script>
 elgg.provide('clipit.activity');

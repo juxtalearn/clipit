@@ -11,6 +11,9 @@
  * @package         ClipIt
  */
 $spanish = array(
+    'created' => 'Creado',
+    'calendar' => 'Calendario',
+    'list' => 'Lista',
     'selected' => 'Seleccionado',
     'unselected' => 'Sin seleccionar',
     'review' => 'Revisión',
@@ -140,7 +143,7 @@ $spanish = array(
     'discussion:deleted' => 'Discusión eliminada',
     'discussion:cantdelete' => 'La discusión no se puede borrar',
     'discussion:cantcreate' => 'No se ha podido crear la discusión',
-    'discussion:edit' => 'Editar tema clave',
+    'discussion:edit' => 'Editar tema',
     'discussion:title_topic' => 'Título',
     'discussion:text_topic' => 'Texto',
     'discussion:last_post_by' => 'Último mensaje por',
@@ -276,6 +279,8 @@ $spanish = array(
     'task:added' => 'Tarea añadida',
     'task:updated' => 'Tarea actualizada',
     'task:cantupdate' => 'No se ha podido actualizar la tarea',
+    'task:user' => 'Tarea invidual',
+    'task:group' => 'Tarea grupal',
     'task:select' => 'Seleccionar tarea',
     'task:select:task_type' => 'Seleccionar tipo de tarea',
     'task:task_type' => 'Tipo de tarea',

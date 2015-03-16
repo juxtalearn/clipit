@@ -59,3 +59,4 @@ if ($user->language) {
 }
 
 system_message($message);
+forward($forward_url);

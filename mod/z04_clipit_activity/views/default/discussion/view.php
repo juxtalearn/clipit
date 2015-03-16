@@ -91,7 +91,8 @@ if($message->owner_id == $user_loggedin_id || $user_logged->role == ClipitUser::
 <a name="replies"></a>
 <?php
 $auto_id = 1;
-foreach(array_pop(ClipitPost::get_by_destination(array($message->id))) as $reply_msg){
+$replies = array_pop(ClipitPost::get_by_destination(array($message->id), 0, 0, false, '', true));
+foreach($replies as $reply_msg){
     echo elgg_view("discussion/reply",
             array(
                 'user_id' => $user_loggedin_id,
