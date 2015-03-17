@@ -125,6 +125,7 @@ if($question){
                             'name' => $input_prefix.'[question]['.$id.'][video]',
                             'class' => 'form-control',
                             'value' => $question->video,
+                            'placeholder' => 'Video URL',
                             'required' => true,
                             'data-rule-url' => 'true'
                         ));

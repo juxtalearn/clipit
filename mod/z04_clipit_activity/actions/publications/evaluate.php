@@ -66,6 +66,7 @@ if($object){
         } else {
             ClipitRating::add_tag_ratings($new_tag_rating_id, $tags_rating);
             ClipitRating::add_performance_ratings($new_tag_rating_id, $performance_ratings);
+            $object['subtype']::update_average_ratings($entity_id);
             system_message(elgg_echo('publications:rated'));
         }
     }
