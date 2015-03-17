@@ -50,9 +50,9 @@ class ClipitQuizQuestion extends UBItem {
      */
     public $quiz_result_array = array();
     /**
-     * @var int ID of ClipitVideo refered to by this question (optional)
+     * @var string URL of ClipitVideo refered to by this question (optional)
      */
-    public $video = 0;
+    public $video = "";
     /**
      * @var int Difficulty of the QuizQuestion, in an integer scale from 1 to 10.
      */
@@ -74,7 +74,7 @@ class ClipitQuizQuestion extends UBItem {
         $this->option_array = (array)$elgg_entity->get("option_array");
         $this->validation_array = (array)$elgg_entity->get("validation_array");
         $this->option_type = (string)$elgg_entity->get("option_type");
-        $this->video = (int)$elgg_entity->get("video");
+        $this->video = (string)$elgg_entity->get("video");
         $this->difficulty = (int)$elgg_entity->get("difficulty");
         $this->order = (int)$elgg_entity->get("order");
     }
@@ -89,7 +89,7 @@ class ClipitQuizQuestion extends UBItem {
         $elgg_entity->set("option_array", (array)$this->option_array);
         $elgg_entity->set("validation_array", (array)$this->validation_array);
         $elgg_entity->set("option_type", (string)$this->option_type);
-        $elgg_entity->set("video", (int)$this->video);
+        $elgg_entity->set("video", (string)$this->video);
         $elgg_entity->set("difficulty", (int)$this->difficulty);
         $elgg_entity->set("order", (int)$this->order);
     }
