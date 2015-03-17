@@ -218,7 +218,8 @@ foreach($questions as $question):
             </strong>
             <?php echo $question->name;?>
         </h4>
-        <div class="margin-left-20 quiz-answer ">
+        <div class="margin-left-20 quiz-answer <?php echo $question->video?'row':'';?>">
+            <div class="<?php echo $question->video?'col-md-5':'';?>">
             <?php if($description = $question->description):?>
                 <div class="text-muted margin-bottom-10" style="margin-top: -10px;">
                     <?php echo $description;?>
@@ -241,15 +242,31 @@ foreach($questions as $question):
                 endswitch;
                 ?>
             </div> <!-- .question-answer -->
-            <?php if($result->description):?>
-            <div class="clearfix"></div>
-            <hr class="margin-0 margin-top-10 margin-bottom-10">
-            <i class="fa fa-user blue"></i> <small><?php echo elgg_echo('quiz:teacher_annotation');?>:</small>
-            <div class="bg-blue-lighter_4" style="padding: 10px;">
-                <?php echo $result->description;?>
             </div>
+            <?php if($question->video):?>
+                <div class="col-md-7">
+                    <div class="frame-container">
+                        <?php if(get_video_url_embed($question->video)):?>
+                            <iframe src="<?php echo get_video_url_embed($question->video); ?>" frameborder="0"></iframe>
+                        <?php else:?>
+                            <video width="100%"  controls>
+                                <source src="<?php echo($question->video); ?>" type='video/webm; codecs="vp8, vorbis"' />
+                                Your browser does not support the video tag.
+                            </video>
+                        <?php endif;?>
+                    </div>
+                </div>
+            <?php endif;?>
+            <?php if($result->description):?>
+                <div class="clearfix"></div>
+                <hr class="margin-0 margin-top-10 margin-bottom-10">
+                <i class="fa fa-user blue"></i> <small><?php echo elgg_echo('quiz:teacher_annotation');?>:</small>
+                <div class="bg-blue-lighter_4" style="padding: 10px;">
+                    <?php echo $result->description;?>
+                </div>
             <?php endif; ?>
         </div>
+
     </div>
 <!--    <div class="clearfix"></div>-->
 <?php

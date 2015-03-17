@@ -377,6 +377,7 @@ $english = array(
     'quiz:question:type' => 'Possible answers',
     'quiz:question:statement' => 'Question',
     'quiz:question:additional_info' => 'Additional information',
+    'quiz:question:add_video' => 'Add link to video',
     'quiz:questions:answered' => 'Questions answered',
     'quiz:questions:answers:correct' => 'correct answers',
     'quiz:answer:solution' => 'Solution',

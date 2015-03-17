@@ -61,6 +61,10 @@ foreach($questions as $question){
             $validations[] = $question['number'];
             break;
     }
+    $video = $question['video'];
+    if (filter_var($video, FILTER_VALIDATE_URL) === false){
+        $video = false;
+    }
     $tags = array_filter($question['tags']);
     $question_data = array(
         'name' => $question['title'],
@@ -70,13 +74,13 @@ foreach($questions as $question){
         'option_type' => $question['type'],
         'option_array' => $values,
         'validation_array' => $validations,
+        'video' => $video,
         'tag_array' => $tags
     );
     if($question['id']) {
         $questions_id[] = $question['id'];
         ClipitQuizQuestion::set_properties($question['id'], $question_data);
     } elseif($question['id_parent']){
-//      ClipitQuizQuestion::link_parent_clone($question['id_parent'], $question_id);
         $question_id = ClipitQuizQuestion::create_clone($question['id_parent'], false);
         ClipitQuizQuestion::set_properties($question_id, array_merge(
             $question_data,
@@ -101,7 +105,7 @@ $quiz_data = array(
     'target' => $quiz['target']
 );
 if($quiz_id = $quiz['id']){
-//    Save Quiz
+//    Edit Quiz properties
     ClipitQuiz::set_properties($quiz_id, $quiz_data);
     $href = 'quizzes/view/'.$quiz_id;
 } else {

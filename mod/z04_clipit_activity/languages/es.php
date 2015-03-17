@@ -392,6 +392,7 @@ $spanish = array(
     'quiz:question:type' => 'Tipo de pregunta',
     'quiz:question:statement' => 'Enunciado de la pregunta',
     'quiz:question:additional_info' => 'Información adicional',
+    'quiz:question:add_video' => 'Añadir enlace a video',
     'quiz:questions:answered' => 'Preguntas contestadas',
     'quiz:questions:answers:correct' => 'preguntas correctas',
     'quiz:answer:solution' => 'Solución',

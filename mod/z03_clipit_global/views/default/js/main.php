@@ -1,16 +1,16 @@
 var icons_appear = function() {
     $("[data-icon=1] .bar").animate({
         width: "50%"
-    }, 1500, function () {
+    }, 1000, function () {
         $("[data-icon=2] .bar-left").animate({
             width: "50%"
-        }, 1000, function () {
+        }, 700, function () {
             $("[data-icon=2] .bar-right").animate({
                 width: "50%"
-            }, 1000, function () {
+            }, 700, function () {
                 $("[data-icon=3] .bar").animate({
                     width: "50%"
-                }, 1000);
+                }, 700);
             });
         });
     });

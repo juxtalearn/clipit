@@ -88,30 +88,27 @@ if($entity->task_type == ClipitTask::TYPE_QUIZ_TAKE){
                 break;
         }
         $tags = array_filter($question['tags']);
+        $video = $question['video'];
+        if (filter_var($video, FILTER_VALIDATE_URL) === false){
+            $video = false;
+        }
+        $question_data = array(
+            'name' => $question['title'],
+            'description' => $question['description'],
+            'order' => $question['order'],
+            'difficulty' => $question['difficulty'],
+            'option_type' => $question['type'],
+            'option_array' => $values,
+            'validation_array' => $validations,
+            'video' => $video,
+            'tag_array' => $tags
+        );
         if($question['id']) {
             $questions_id[] = $question['id'];
-            ClipitQuizQuestion::set_properties($question['id'], array(
-                'name' => $question['title'],
-                'description' => $question['description'],
-                'difficulty' => $question['difficulty'],
-                'option_type' => $question['type'],
-                'order' => $question['order'],
-                'option_array' => $values,
-                'validation_array' => $validations,
-                'tag_array' => $tags
-            ));
+            ClipitQuizQuestion::set_properties($question['id'], $question_data);
         } else {
             // new QuizQuestion
-            $question_id = ClipitQuizQuestion::create(array(
-                'name' => $question['title'],
-                'description' => $question['description'],
-                'difficulty' => $question['difficulty'],
-                'option_type' => $question['type'],
-                'order' => $question['order'],
-                'option_array' => $values,
-                'validation_array' => $validations,
-                'tag_array' => $tags,
-            ));
+            $question_id = ClipitQuizQuestion::create($question_data);
             $questions_id[] = $question_id;
             if($question['id_parent']){
                 ClipitQuizQuestion::link_parent_clone($question['id_parent'], $question_id);

@@ -109,6 +109,28 @@ if($question){
                     ));
                     ?>
                 </div>
+                <div class="margin-bottom-10">
+                    <label for="<?php echo $input_prefix.'[question]['.$id.'][video]';?>">
+                        <?php echo elgg_view('output/url', array(
+                            'href'  => "javascript:;",
+                            'class' => 'add-result',
+                            'data-toggle' => 'collapse',
+                            'data-target' => '#video_'.$id,
+                            'text'  => '<i class="fa fa-youtube-play"></i> '.elgg_echo('quiz:question:add_video'),
+                        ));
+                        ?>
+                    </label>
+                    <div class="<?php echo $question->video ? 'in':'collapse';?>" id="video_<?php echo $id;?>">
+                        <?php echo elgg_view("input/text", array(
+                            'name' => $input_prefix.'[question]['.$id.'][video]',
+                            'class' => 'form-control',
+                            'value' => $question->video,
+                            'required' => true,
+                            'data-rule-url' => 'true'
+                        ));
+                        ?>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label><?php echo elgg_echo('difficulty');?></label>
                     <div class="difficulty-slider">
