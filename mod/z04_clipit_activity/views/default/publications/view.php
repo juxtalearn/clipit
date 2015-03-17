@@ -101,13 +101,14 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
                             </small>
                         </h4>
                         <?php
-                        $performance_items = ClipitPerformanceRating::get_item_average_rating_for_target($entity->id);
-                        foreach($performance_items as $performance_item_id => $average):
+                        $performance_items_average = ClipitPerformanceRating::get_item_average_rating_for_target($entity->id);
+                        $performance_items = $entity->performance_item_array;
+                        foreach($performance_items as $performance_item_id):
                             $performance_item = array_pop(ClipitPerformanceItem::get_by_id(array($performance_item_id)));
                         ?>
                             <div style="border-bottom: 1px solid #bae6f6;">
-                                <div class="pull-right rating readonly" style="margin-right: 10px;margin-top: -3px;" data-score="<?php echo $average;?>">
-                                    <?php echo star_rating_view($average); ?>
+                                <div class="pull-right rating readonly" style="margin-right: 10px;margin-top: -3px;" data-score="<?php echo $performance_items_average[$performance_item->id];?>">
+                                    <?php echo star_rating_view($performance_items_average[$performance_item->id]); ?>
                                 </div>
                                 <h5 class="text-truncate blue" style="margin: 5px 0;">
                                     <?php echo elgg_view('output/url', array(
