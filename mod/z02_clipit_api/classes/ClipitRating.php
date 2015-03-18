@@ -77,8 +77,6 @@ class ClipitRating extends UBItem {
             (array)$this->performance_rating_array,
             static::REL_RATING_PERFORMANCERATING
         );
-        // changes may have altered average ratings -> update
-        static::update_target_average_ratings($this->target);
         return $this->id;
     }
 
@@ -89,16 +87,7 @@ class ClipitRating extends UBItem {
         }
         return (int)$prop_value_array["target"];
     }
-    
-    protected function update_target_average_ratings($target_id){
-        $lookup = ClipitSite::lookup($target_id);
-        if(!empty($lookup)) {
-            $target_class = $lookup["subtype"];
-            if($target_class == "ClipitVideo" || $target_class == "ClipitStoryboard") {
-                $target_class::update_average_ratings($target_id);
-            }
-        }
-    }
+
 
     /**
      * Get Ratings by Target
@@ -152,7 +141,13 @@ class ClipitRating extends UBItem {
         return new static($rating_id);
     }
 
-    // Average overall rating (float)[0-1]
+    /**
+     * Get the average overall rating
+     *
+     * @param int $target_id ID of target to return overall rating from
+     *
+     * @return float Average overall rating [0.0-1.0]
+     */
     static function get_average_rating_for_target($target_id) {
         $rating_array = static::get_by_target(array($target_id));
         $rating_array = $rating_array[$target_id];
@@ -173,20 +168,14 @@ class ClipitRating extends UBItem {
     }
 
     static function add_tag_ratings($rating_id, $tag_rating_array) {
-        // changes may have altered average ratings -> update
-        static::update_target_average_ratings(static::get_target($rating_id));
         return UBCollection::add_items($rating_id, $tag_rating_array, static::REL_RATING_TAGRATING);
     }
 
     static function set_tag_ratings($rating_id, $tag_rating_array) {
-        // changes may have altered average ratings -> update
-        static::update_target_average_ratings(static::get_target($rating_id));
         return UBCollection::set_items($rating_id, $tag_rating_array, static::REL_RATING_TAGRATING);
     }
 
     static function remove_tag_ratings($rating_id, $tag_rating_array) {
-        // changes may have altered average ratings -> update
-        static::update_target_average_ratings(static::get_target($rating_id));
         return UBCollection::remove_items($rating_id, $tag_rating_array, static::REL_RATING_TAGRATING);
     }
 
@@ -195,20 +184,15 @@ class ClipitRating extends UBItem {
     }
 
     static function add_performance_ratings($rating_id, $performance_rating_array) {
-        // changes may have altered average ratings -> update
-        static::update_target_average_ratings(static::get_target($rating_id));
         return UBCollection::add_items($rating_id, $performance_rating_array, static::REL_RATING_PERFORMANCERATING);
     }
 
     static function set_performance_ratings($rating_id, $performance_rating_array) {
-        // changes may have altered average ratings -> update
-        static::update_target_average_ratings(static::get_target($rating_id));
         return UBCollection::set_items($rating_id, $performance_rating_array, static::REL_RATING_PERFORMANCERATING);
     }
 
     static function remove_performance_ratings($rating_id, $performance_rating_array) {
-        // changes may have altered average ratings -> update
-        static::update_target_average_ratings(static::get_target($rating_id));
+
         return UBCollection::remove_items($rating_id, $performance_rating_array, static::REL_RATING_PERFORMANCERATING);
     }
 
