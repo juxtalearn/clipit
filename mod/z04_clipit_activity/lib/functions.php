@@ -484,7 +484,7 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
                     'icon' => '<i class="fa fa-minus yellow"></i>',
                     'text' => $text.' '.elgg_echo('task:pending'),
                     'color' => 'yellow',
-                    'status' => true
+                    'status' => false
                 );
             }
             break;
