@@ -478,6 +478,14 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
                         'status' => true
                     );
                 }
+            } else {
+                $text = ClipitQuiz::questions_answered_by_user($task->quiz, $user_id).'/'.count(ClipitQuiz::get_quiz_questions($task->quiz));
+                $status = array(
+                    'icon' => '<i class="fa fa-minus yellow"></i>',
+                    'text' => $text.' '.elgg_echo('task:pending'),
+                    'color' => 'yellow',
+                    'status' => true
+                );
             }
             break;
         case ClipitTask::TYPE_RESOURCE_DOWNLOAD:

@@ -73,16 +73,16 @@ switch($type = get_input('type')){
                     $error++;
                 }
             }
-
+            $answered = ClipitQuiz::questions_answered_by_user($quiz_id, $user_id);
             if(ClipitQuiz::has_finished_quiz($quiz_id, $user_id)) {
                 $total = $correct+$error+$pending;
                 $output[] = array(
                     'correct' => round(($correct*100)/$total)."%",
-                    'answered' => ($total-$pending)." ".elgg_echo('quiz:out_of')." ".count($questions)
+                    'answered' => $answered." ".elgg_echo('quiz:out_of')." ".count($questions)
                 );
             } else {
                 $output[] = array(
-                    'not_finished' => "0 ".elgg_echo('quiz:out_of')." ".count($questions)." - ".elgg_echo('quiz:not_finished')
+                    'not_finished' => $answered." ".elgg_echo('quiz:out_of')." ".count($questions)." - ".elgg_echo('quiz:not_finished')
                 );
             }
         }
@@ -98,9 +98,11 @@ switch($type = get_input('type')){
                 $show_status = true;
                 break;
             case 'group':
+                $total_answered = true;
                 $users = ClipitGroup::get_users($entity_id);
                 break;
             case 'activity':
+                $total_answered = true;
                 $users = ClipitActivity::get_students($entity_id);
                 break;
         }
@@ -141,6 +143,9 @@ switch($type = get_input('type')){
                             ));
                         endif;
                         ?>
+                        <?php if($total_answered):?>
+                            <small><?php echo count(array_filter($total_results))." ".elgg_echo('quiz:out_of')." ".count($users)*count($questions);?></small>
+                        <?php endif;?>
                         <i class="btn fa fa-angle-down blue btn-icon"
                            data-target="#question-result-<?php echo $question->id;?>-<?php echo $entity_id;?>"
                            data-toggle="collapse"></i>
