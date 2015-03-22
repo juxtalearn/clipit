@@ -29,7 +29,7 @@ class ClipitQuiz extends UBItem {
     const TARGET_CLIPIT = "clipit";
     const TARGET_LARGEDISPLAY = "large_display";
     /**
-     * @var string Target interface for Quiz display (e.g.: "web space", "large display"...)
+     * @var string Target interface for Quiz display (e.g.: "clipit", "large display"...)
      */
     public $target = "";
     /**
@@ -41,12 +41,12 @@ class ClipitQuiz extends UBItem {
      */
     public $quiz_question_array = array();
     /**
-     * @var int Id of Taxonomy used as topic for this Quiz (optional)
+     * @var int Id of tricky topic used for this Quiz (optional)
      */
     public $tricky_topic = 0;
-    public $embed_url = "";
-    public $scores_url = "";
-    public $author_name = "";
+    /**
+     * @var string
+     */
     public $view_mode = "";
     /**
      * @var int $max_time  Maximum time in seconds to perform the quiz since it's opened by a student (0 = unlimited)
@@ -63,9 +63,6 @@ class ClipitQuiz extends UBItem {
         $this->public = (bool)$elgg_entity->get("public");
         $this->tricky_topic = (int)static::get_tricky_topic($this->id);
         $this->target = (string)$elgg_entity->get("target");
-        $this->embed_url = (string)$elgg_entity->get("embed_url");
-        $this->scores_url = (string)$elgg_entity->get("scores_url");
-        $this->author_name = (string)$elgg_entity->get("author_name");
         $this->view_mode = (string)$elgg_entity->get("view_mode");
         $this->max_time = (int)$elgg_entity->get("max_time");
     }
@@ -79,9 +76,6 @@ class ClipitQuiz extends UBItem {
         parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("public", (bool)$this->public);
         $elgg_entity->set("target", (string)$this->target);
-        $elgg_entity->set("embed_url", (string)$this->embed_url);
-        $elgg_entity->set("scores_url", (string)$this->scores_url);
-        $elgg_entity->set("author_name", (string)$this->author_name);
         if((string)$this->view_mode == ""){
             $elgg_entity->set("view_mode", static::VIEW_MODE_LIST);
         }else{
