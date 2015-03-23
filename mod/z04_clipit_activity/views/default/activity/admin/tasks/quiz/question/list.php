@@ -26,9 +26,15 @@ $tt_tags = ClipitTrickyTopic::get_tags($tricky_topic);
     <div class="col-xs-11">
         <div style="padding: 10px; background: #fafafa;">
             <div class="pull-right">
+                <?php if($question->video): ?>
+                    <i class="fa fa-youtube-play blue btn-xs" style="font-size: 14px;"></i>
+                <?php endif;?>
+                <?php if($question->image): ?>
+                    <i class="fa fa-image blue btn-xs" style="font-size: 14px;"></i>
+                <?php endif;?>
                 <?php echo elgg_view('output/url', array(
                     'href'  => "javascript:;",
-                    'class' => 'btn btn-primary btn-xs',
+                    'class' => 'btn btn-primary btn-xs margin-left-10',
                     'text'  => elgg_echo('edit'),
                     'onclick' =>'$(this).closest(\'.questions\').find(\'#question_'.$question->id.'\').toggle();',
                 ));

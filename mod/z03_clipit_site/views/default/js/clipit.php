@@ -21,8 +21,11 @@ clipit.init = function() {
         rangelength: jQuery.validator.format(elgg.echo('validation:rangelength')),
         range: jQuery.validator.format(elgg.echo('validation:range')),
         max: jQuery.validator.format(elgg.echo('validation:max')),
-        min: jQuery.validator.format(elgg.echo('validation:min'))
+        min: jQuery.validator.format(elgg.echo('validation:min')),
+        extension: elgg.echo('validation:creditcard'),
     });
+    clipit.validationCustomMethods();
+
     $.datepicker.regional = {
         monthNames: JSON.parse(elgg.echo('calendar:month_names')),
         monthNamesShort: JSON.parse(elgg.echo('calendar:month_names_short')),
@@ -216,6 +219,21 @@ clipit.formRegisterValidation = function(e){
               form.submit();
       }
   };
+};
+clipit.validationCustomMethods = function(){
+    $.validator.addMethod(
+        "login_normalize",
+        function(value, element) {
+            var re = new RegExp(/^[a-zA-Z0-9_.]*$/);
+            re.test( element.value );
+            return this.optional(element) || re.test(value);
+        },
+        elgg.echo('validation:login_normalize')
+    );
+    $.validator.addMethod("extension", function(value, element, param) {
+        param = typeof param === "string" ? param.replace(/,/g, "|") : "png|jpe?g|gif";
+        return this.optional(element) || value.match(new RegExp(".(" + param + ")$", "i"));
+    }, $.validator.format(elgg.echo('validation:extension')));
 };
 /**
  * Form general validation
@@ -491,18 +509,6 @@ $(function(){
         $("ul.elgg-menu-"+id_menu).toggle("fast");
     });
 
-    /**
-     * Register form validation
-     */
-    $.validator.addMethod(
-        "login_normalize",
-        function(value, element) {
-            var re = new RegExp(/^[a-zA-Z0-9_.]*$/);
-            re.test( element.value );
-            return this.optional(element) || re.test(value);
-        },
-        "Use a valid username."
-    );
 
     /*
      * Labels complete view  & labels form to create

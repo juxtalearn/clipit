@@ -196,56 +196,85 @@ foreach($questions as $question):
         'result' => $result,
     );
 ?>
-    <div class="question form-group border-bottom-blue-lighter" data-question="<?php echo $num;?>">
-        <?php if(!$vars['admin']):?>
-        <div class="text-center pull-right">
-            <?php echo difficulty_bar($question->difficulty);?>
-        </div>
+<div class="question form-group border-bottom-blue-lighter" data-question="<?php echo $num;?>">
+    <?php if(!$vars['admin']):?>
+    <div class="text-center pull-right">
+        <?php echo difficulty_bar($question->difficulty);?>
+    </div>
+    <?php endif;?>
+    <h4 class="question-title">
+        <?php if($finished_task):?>
+            <?php if(!$result):?>
+                <i class="fa fa-minus yellow"></i>
+            <?php elseif($result->correct):?>
+                <i class="fa fa-check green"></i>
+            <?php else: ?>
+                <i class="fa fa-times red"></i>
+            <?php endif;?>
         <?php endif;?>
-        <h4 class="question-title">
-            <?php if($finished_task):?>
-                <?php if(!$result):?>
-                    <i class="fa fa-minus yellow"></i>
-                <?php elseif($result->correct):?>
-                    <i class="fa fa-check green"></i>
-                <?php else: ?>
-                    <i class="fa fa-times red"></i>
-                <?php endif;?>
-            <?php endif;?>
-            <strong class="text-muted inline-block">
-                <span class="num-question"><?php echo $num;?>.</span>
-                <i class="fa fa-spinner fa-spin blue loading-question" style="display: none;"></i>
-            </strong>
-            <?php echo $question->name;?>
-        </h4>
-        <div class="margin-left-20 quiz-answer <?php echo $question->video?'row':'';?>">
-            <div class="<?php echo $question->video?'col-md-5':'';?>">
-            <?php if($description = $question->description):?>
-                <div class="text-muted margin-bottom-10" style="margin-top: -10px;">
-                    <?php echo $description;?>
-                </div>
-            <?php endif;?>
-            <div class="question-answer">
-                <?php switch($question->option_type):
-                    case ClipitQuizQuestion::TYPE_SELECT_MULTI:
-                        echo elgg_view('quizzes/types/select_multi', $params);
-                    break;
-                    case ClipitQuizQuestion::TYPE_SELECT_ONE:
-                        echo elgg_view('quizzes/types/select_one', $params);
-                    break;
-                    case ClipitQuizQuestion::TYPE_TRUE_FALSE:
-                        echo elgg_view('quizzes/types/true_false', $params);
-                    break;
-                    case ClipitQuizQuestion::TYPE_NUMBER:
-                        echo elgg_view('quizzes/types/number', $params);
-                        break;
-                endswitch;
-                ?>
-            </div> <!-- .question-answer -->
+        <strong class="text-muted inline-block">
+            <span class="num-question"><?php echo $num;?>.</span>
+            <i class="fa fa-spinner fa-spin blue loading-question" style="display: none;"></i>
+        </strong>
+        <?php echo $question->name;?>
+    </h4>
+    <div class="margin-left-20 quiz-answer <?php echo $question->video || $question->image ?'row':'';?>">
+        <div class="<?php echo $question->video ?'col-md-5':'';?> <?php echo $question->image ?'col-md-7':'';?>">
+        <?php if($description = $question->description):?>
+            <div class="text-muted margin-bottom-10" style="margin-top: -10px;">
+                <?php echo $description;?>
             </div>
-            <?php if($question->video):?>
-                <div class="col-md-7">
-                    <div class="frame-container">
+        <?php endif;?>
+        <div class="question-answer">
+            <?php switch($question->option_type):
+                case ClipitQuizQuestion::TYPE_SELECT_MULTI:
+                    echo elgg_view('quizzes/types/select_multi', $params);
+                break;
+                case ClipitQuizQuestion::TYPE_SELECT_ONE:
+                    echo elgg_view('quizzes/types/select_one', $params);
+                break;
+                case ClipitQuizQuestion::TYPE_TRUE_FALSE:
+                    echo elgg_view('quizzes/types/true_false', $params);
+                break;
+                case ClipitQuizQuestion::TYPE_NUMBER:
+                    echo elgg_view('quizzes/types/number', $params);
+                    break;
+            endswitch;
+            ?>
+        </div> <!-- .question-answer -->
+        </div>
+        <?php if($question->video || $question->image):?>
+            <div class="<?php echo $question->video ?'col-md-7':'col-md-5';?>">
+                <div class="frame-container">
+                    <?php
+                    if($question->image):
+                        $image = array_pop(ClipitFile::get_by_id(array($question->image)));
+                        echo elgg_view("page/components/modal_remote", array('id'=> "viewer-id-{$image->id}" ));
+                        $href_viewer = "ajax/view/multimedia/viewer?id=".$image->id;
+                    ?>
+                    <style>
+                        .multimedia-preview{
+                            position: static;
+                        }
+                        .multimedia-preview .img-preview{
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                        }
+                    </style>
+                    <div class="multimedia-preview">
+                        <?php echo elgg_view('output/url', array(
+                            'href'  => $href_viewer,
+                            'title' => $image->name,
+                            'data-target' => '#viewer-id-'.$image->id,
+                            'data-toggle' => 'modal',
+                            'text'  => elgg_view("multimedia/file/preview", array('file'  => $image, 'size' => 'original'))
+                            ));
+                        ?>
+                    </div>
+                    <?php else: ?>
                         <?php if(get_video_url_embed($question->video)):?>
                             <iframe src="<?php echo get_video_url_embed($question->video); ?>" frameborder="0"></iframe>
                         <?php else:?>
@@ -254,20 +283,21 @@ foreach($questions as $question):
                                 Your browser does not support the video tag.
                             </video>
                         <?php endif;?>
-                    </div>
+                    <?php endif;?>
                 </div>
-            <?php endif;?>
-            <?php if($result->description):?>
-                <div class="clearfix"></div>
-                <hr class="margin-0 margin-top-10 margin-bottom-10">
-                <i class="fa fa-user blue"></i> <small><?php echo elgg_echo('quiz:teacher_annotation');?>:</small>
-                <div class="bg-blue-lighter_4" style="padding: 10px;">
-                    <?php echo $result->description;?>
-                </div>
-            <?php endif; ?>
-        </div>
-
+            </div>
+        <?php endif;?>
+        <?php if($result->description):?>
+            <div class="clearfix"></div>
+            <hr class="margin-0 margin-top-10 margin-bottom-10">
+            <i class="fa fa-user blue"></i> <small><?php echo elgg_echo('quiz:teacher_annotation');?>:</small>
+            <div class="bg-blue-lighter_4" style="padding: 10px;">
+                <?php echo $result->description;?>
+            </div>
+        <?php endif; ?>
     </div>
+
+</div>
 <!--    <div class="clearfix"></div>-->
 <?php
 $num++;

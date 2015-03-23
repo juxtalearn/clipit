@@ -110,28 +110,82 @@ if($question){
                     ?>
                 </div>
                 <div class="margin-bottom-10">
-                    <label for="<?php echo $input_prefix.'[question]['.$id.'][video]';?>">
+                    <label class="pull-right">
                         <?php echo elgg_view('output/url', array(
                             'href'  => "javascript:;",
                             'class' => 'add-result',
+                            'data-toggle' => 'collapse',
+                            'data-target' => '#image_'.$id,
+                            'text'  => '<i class="fa fa-image"></i> '.elgg_echo('quiz:question:add_image'),
+                        ));
+                        ?>
+                    </label>
+                    <label class="inline">
+                        <?php echo elgg_view('output/url', array(
+                            'href'  => "javascript:;",
+                            'class' => 'add-result text-truncate',
                             'data-toggle' => 'collapse',
                             'data-target' => '#video_'.$id,
                             'text'  => '<i class="fa fa-youtube-play"></i> '.elgg_echo('quiz:question:add_video'),
                         ));
                         ?>
                     </label>
-                    <div class="<?php echo $question->video ? 'in':'collapse';?>" id="video_<?php echo $id;?>">
+                    <?php
+                    if($question->image):
+                    $image = array_pop(ClipitFile::get_by_id(array($question->image)));
+                    ?>
+                    <div class="margin-top-10 margin-bottom-10 overflow-hidden question-image">
+                    <div class="multimedia-preview image-block">
+                        <?php echo elgg_view('output/url', array(
+                            'href'  => $image->url,
+                            'title' => $image->name,
+                            'text'  => elgg_view("multimedia/file/preview", array('file'  => $image))
+                        ));
+                        ?>
+                    </div>
+                    <div class="content-block">
+                        <?php echo elgg_view('output/url', array(
+                            'href'  => 'javascript:;',
+                            'class'  => 'btn btn-xs btn-border-red',
+                            'data-toggle' => 'collapse',
+                            'data-target' => '#image_'.$id,
+                            'onclick' => '$(this).closest(\'.question-image\').remove();',
+                            'title' => elgg_echo('quiz:question:remove_image'),
+                            'text'  => elgg_echo('quiz:question:remove_image')
+                        ));
+                        ?>
+                    </div>
+                    <?php echo elgg_view("input/hidden", array(
+                        'name' => $input_prefix.'[question]['.$id.'][image][url]',
+                        'value' => $question->image,
+                    ));
+                    ?>
+                    </div>
+                    <?php endif;?>
+                    <div class="collapse margin-bottom-20" id="image_<?php echo $id;?>">
+                        <div class="clearfix"></div>
+                        <small class="show"><?php echo elgg_echo('quiz:question:add_image:valid_extension');?>: jpg, jpeg, gif, png</small>
+                        <label for="<?php echo $input_prefix.'[question]['.$id.'][image]';?>"></label>
+                        <?php echo elgg_view("input/file", array(
+                            'name' => $input_prefix.'[question]['.$id.'][image]',
+                            'data-rule-extension' => 'png|jpe?g|gif',
+                        ));
+                        ?>
+                    </div>
+                    <div class="<?php echo $question->video ? 'in':'collapse';?> margin-bottom-10" id="video_<?php echo $id;?>">
+                        <label for="<?php echo $input_prefix.'[question]['.$id.'][video]';?>"></label>
                         <?php echo elgg_view("input/text", array(
                             'name' => $input_prefix.'[question]['.$id.'][video]',
                             'class' => 'form-control',
                             'value' => $question->video,
                             'placeholder' => 'Video URL',
-                            'required' => true,
                             'data-rule-url' => 'true'
                         ));
                         ?>
                     </div>
                 </div>
+                <div class="clearfix"></div>
+                <hr class="margin-0 margin-bottom-5">
                 <div class="form-group">
                     <label><?php echo elgg_echo('difficulty');?></label>
                     <div class="difficulty-slider">

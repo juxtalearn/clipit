@@ -41,8 +41,9 @@ if($entity->task_type == ClipitTask::TYPE_QUIZ_TAKE){
     $quiz = $task_array['quiz'];
     // Set questions to Quiz
     $questions = $quiz['question'];
-
-    foreach($questions as $question){
+    $images_tmp = array_pop($_FILES['task']['tmp_name']);
+    $images_name = array_pop($_FILES['task']['name']);
+    foreach($questions as $input_id => $question){
         $values = array();
         $validations = array();
         $tags = array();
@@ -88,6 +89,18 @@ if($entity->task_type == ClipitTask::TYPE_QUIZ_TAKE){
                 break;
         }
         $tags = array_filter($question['tags']);
+        $image_tmp = $images_tmp['quiz']['question'][$input_id]['image'];
+        $image_name = $images_name['quiz']['question'][$input_id]['image'];
+        if($image_name && $image_tmp) {
+            $image = ClipitFile::create(array(
+                'name' => $image_name,
+                'temp_path' => $image_tmp
+            ));
+        } elseif($question['image']['url']){
+            $image = $question['image']['url'];
+        } else {
+            $image = false;
+        }
         $video = $question['video'];
         if (filter_var($video, FILTER_VALIDATE_URL) === false){
             $video = false;
@@ -101,6 +114,7 @@ if($entity->task_type == ClipitTask::TYPE_QUIZ_TAKE){
             'option_array' => $values,
             'validation_array' => $validations,
             'video' => $video,
+            'image' => $image,
             'tag_array' => $tags
         );
         if($question['id']) {

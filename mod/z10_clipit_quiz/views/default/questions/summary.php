@@ -38,6 +38,33 @@ $questions = ClipitQuizQuestion::get_by_id($question_ids, 0, 0, 'order');
         <td>
             <strong class="margin-right-10 pull-left"><?php echo $i;?>.</strong>
             <div class="content-block">
+                <?php if($question->video || $question->image):?>
+                <div class="pull-right">
+                    <?php if($question->video): ?>
+                        <?php echo elgg_view('output/url', array(
+                            'href'  => $question->video,
+                            'class' => 'btn btn-xs btn-border-blue btn-sm',
+                            'target' => '_blank',
+                            'text'  => '<i class="fa fa-youtube-play"></i> '.elgg_echo('file:video')
+                        ));
+                        ?>
+                    <?php endif;?>
+                    <?php
+                    if($question->image):
+                        echo elgg_view("page/components/modal_remote", array('id'=> "viewer-id-{$question->image}" ));
+                        $href_viewer = "ajax/view/multimedia/viewer?id=".$question->image;
+                    ?>
+                        <?php echo elgg_view('output/url', array(
+                            'href'  => $href_viewer,
+                            'data-target' => '#viewer-id-'.$question->image,
+                            'data-toggle' => 'modal',
+                            'class' => 'btn btn-xs btn-border-blue btn-sm',
+                            'text'  => '<i class="fa fa-image"></i> '.elgg_echo('file:image')
+                        ));
+                        ?>
+                    <?php endif;?>
+                </div>
+                <?php endif;?>
                 <strong>
                 <?php echo elgg_view('output/url', array(
                     //'href'  => "quizzes/questions/view/{$question->id}",

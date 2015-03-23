@@ -65,6 +65,8 @@ $english = array(
     'validation:range' =>  "Please enter a value between {0} and {1}.",
     'validation:max' =>  "Please enter a value less than or equal to {0}.",
     'validation:min' =>  "Please enter a value greater than or equal to {0}.",
+    'validation:login_normalize' =>  "Use a valid username.",
+    'validation:extension' =>  "Extension invalid.",
 
     // Menu footer
     'menu:footer_clipit:header:clipit' => 'Clipit

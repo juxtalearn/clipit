@@ -65,6 +65,8 @@ $spanish = array(
     'validation:range' =>  "Por favor inserte un valor entre {0} y {1}.",
     'validation:max' =>  "Por favor inserte un valor menor o igual que {0}.",
     'validation:min' =>  "Por favor inserte un valor mayor o igual que {0}.",
+    'validation:login_normalize' =>  "Debes usar un nombre de usuario válido.",
+    'validation:extension' =>  "Extensión no válida.",
 
     // Menu footer
     'menu:footer_clipit:header:clipit' => 'Clipit

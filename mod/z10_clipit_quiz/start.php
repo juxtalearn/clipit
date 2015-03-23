@@ -83,7 +83,7 @@ function quiz_page_handler($page){
             $title = elgg_echo('edit');
             elgg_push_breadcrumb($title);
             $content = elgg_view_form('quiz/save',
-                array('data-validate' => 'true'),
+                array('data-validate' => 'true', 'enctype' => 'multipart/form-data'),
                 array('entity' => $quiz, 'submit_value' => elgg_echo('save')
                 ));
             break;
@@ -111,7 +111,7 @@ function quiz_page_handler($page){
             elgg_push_breadcrumb(elgg_echo('quizzes'), "quizzes");
             elgg_push_breadcrumb($title);
             $content = elgg_view_form('quiz/save',
-                array('data-validate' => 'true'),
+                array('data-validate' => 'true', 'enctype' => 'multipart/form-data'),
                 array('submit_value' => elgg_echo('create'))
             );
             if($id = $page[1]){
@@ -126,7 +126,7 @@ function quiz_page_handler($page){
                 $title = elgg_echo('duplicate');
                 elgg_push_breadcrumb($title);
                 $content = elgg_view_form('quiz/save',
-                    array('data-validate' => 'true'),
+                    array('data-validate' => 'true', 'enctype' => 'multipart/form-data'),
                     array(
                         'entity' => $quiz,
                         'submit_value' => elgg_echo('save')

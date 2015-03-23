@@ -16,7 +16,9 @@ $quiz = get_input('quiz');
 $questions = $quiz['question'];
 $questions_id = array();
 
-foreach($questions as $question){
+$images_tmp = array_pop($_FILES['quiz']['tmp_name']);
+$images_name = array_pop($_FILES['quiz']['name']);
+foreach($questions as $input_id => $question){
     $values = array();
     $validations = array();
     $tags = array();
@@ -61,6 +63,18 @@ foreach($questions as $question){
             $validations[] = $question['number'];
             break;
     }
+    $image_tmp = $images_tmp[$input_id]['image'];
+    $image_name = $images_name[$input_id]['image'];
+    if($image_name && $image_tmp) {
+        $image = ClipitFile::create(array(
+            'name' => $image_name,
+            'temp_path' => $image_tmp
+        ));
+    } elseif($question['image']['url']){
+        $image = $question['image']['url'];
+    } else {
+        $image = false;
+    }
     $video = $question['video'];
     if (filter_var($video, FILTER_VALIDATE_URL) === false){
         $video = false;
@@ -75,6 +89,7 @@ foreach($questions as $question){
         'option_array' => $values,
         'validation_array' => $validations,
         'video' => $video,
+        'image' => $image,
         'tag_array' => $tags
     );
     if($question['id']) {

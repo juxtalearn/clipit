@@ -22,4 +22,5 @@ $input_prefix = elgg_extract('input_prefix', $vars);
        name="<?php echo $input_prefix;?>[question][<?php echo $id;?>][number]"
        value="<?php echo $vars['checked'];?>"
        data-rule-number="true"
+       required="true"
        class="form-control">
