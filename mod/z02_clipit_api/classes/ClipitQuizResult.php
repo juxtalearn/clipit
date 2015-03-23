@@ -30,7 +30,7 @@ class ClipitQuizResult extends UBItem {
     // can be different types, depending on the question type
     public $answer;
     /**
-     * @var bool Determines if this Result is correct (true) or incorrect (false)
+     * @var bool Determines if this Result is correct (true) or incorrect (false) - computed by "evaluate_result"
      */
     public $correct = false;
 
@@ -73,7 +73,7 @@ class ClipitQuizResult extends UBItem {
     /**
      * Sets values to specified properties of an Item
      *
-     * @param int   $id               Id of Item to set property values
+     * @param int   $id Id of Item to set property values
      * @param array $prop_value_array Array of property=>value pairs to set into the Item
      *
      * @return int|bool Returns Id of Item if correct, or false if error
