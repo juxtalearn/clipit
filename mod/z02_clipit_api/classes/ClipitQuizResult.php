@@ -90,6 +90,8 @@ class ClipitQuizResult extends UBItem {
                 } else {
                     $new_prop_value_array["correct"] = (bool)$value;
                 }
+            } if(($prop == "answer") && (!is_array($value))){
+                $new_prop_value_array["answer"] = json_decode($value);
             } else {
                 $new_prop_value_array[$prop] = $value;
             }
@@ -113,10 +115,20 @@ class ClipitQuizResult extends UBItem {
             case ClipitQuizQuestion::TYPE_SELECT_ONE:
             case ClipitQuizQuestion::TYPE_SELECT_MULTI:
             case ClipitQuizQuestion::TYPE_TRUE_FALSE:
-                if($answer == $validation_array){
-                    $correct = true;
-                } else{
+                // answer is correct until proven wrong
+                $correct = true;
+                if(!is_array($answer) || count($answer) != count($validation_array)){
                     $correct = false;
+                } else{
+                    $pos = 0;
+                    while($pos < count($answer)){
+                        if((bool)$answer[$pos] != (bool)$validation_array[$pos]){
+                            $correct = false;
+                            break;
+                        } else{
+                            $pos++;
+                        }
+                    }
                 }
                 return static::set_properties($result_id, array("correct" => $correct));
             case ClipitQuizQuestion::TYPE_NUMBER:
