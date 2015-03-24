@@ -183,8 +183,8 @@ class ClipitRating extends UBItem {
         return UBCollection::get_items($id, static::REL_RATING_TAGRATING);
     }
 
-    static function add_performance_ratings($rating_id, $performance_rating_array) {
-        return UBCollection::add_items($rating_id, $performance_rating_array, static::REL_RATING_PERFORMANCERATING);
+    static function add_performance_ratings($id, $performance_rating_array) {
+        return UBCollection::add_items($id, $performance_rating_array, static::REL_RATING_PERFORMANCERATING);
     }
 
     static function set_performance_ratings($id, $performance_rating_array) {
