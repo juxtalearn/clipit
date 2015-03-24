@@ -210,7 +210,6 @@ class UBItem {
                 continue; // cannot set an item's ID manually.
             }
             $item->$prop = $value;
-
         }
         if (array_key_exists("time_created", $prop_value_array)){
             return $item->save(true);

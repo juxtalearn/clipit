@@ -24,6 +24,7 @@ class ClipitQuizQuestion extends UBItem {
     const SUBTYPE = "ClipitQuizQuestion";
     const REL_QUIZQUESTION_TAG = "ClipitQuizQuestion-ClipitTag";
     const REL_QUIZQUESTION_QUIZRESULT = "ClipitQuizQuestion-ClipitQuizResult";
+    const REL_QUIZQUESTION_IMAGE = "ClipitQuizQuestion-ClipitFile";
     const TYPE_TRUE_FALSE = "true_false";
     const TYPE_SELECT_ONE = "select_one";
     const TYPE_SELECT_MULTI = "select_multi";
@@ -54,6 +55,10 @@ class ClipitQuizQuestion extends UBItem {
      */
     public $video = "";
     /**
+     * @var int ID of image file (ClipitFile) to show next to the Quiz Question (optional)
+     */
+    public $image = 0;
+    /**
      * @var int Difficulty of the QuizQuestion, in an integer scale from 1 to 10.
      */
     public $difficulty = 0;
@@ -75,6 +80,7 @@ class ClipitQuizQuestion extends UBItem {
         $this->validation_array = (array)$elgg_entity->get("validation_array");
         $this->option_type = (string)$elgg_entity->get("option_type");
         $this->video = (string)$elgg_entity->get("video");
+        $this->image = static::get_image((int)$this->id);
         $this->difficulty = (int)$elgg_entity->get("difficulty");
         $this->order = (int)$elgg_entity->get("order");
     }
@@ -104,7 +110,33 @@ class ClipitQuizQuestion extends UBItem {
         parent::save($double_save);
         static::set_tags($this->id, $this->tag_array);
         static::set_quiz_results($this->id, $this->quiz_result_array);
+        static::set_image($this->id, $this->image);
         return $this->id;
+    }
+
+    /**
+     * Get the image ID (ClipitFile) linked to a Quiz Question
+     *
+     * @param int $id ID of the ClipitQuizQuestion
+     * @return int|null ID of linked image file (ClipitFile)
+     */
+    static function get_image($id){
+        $temp = UBCollection::get_items($id, static::REL_QUIZQUESTION_IMAGE);
+        if(!empty($temp)){
+            return (int)array_pop($temp);
+        }
+        return null;
+    }
+
+    /**
+     * Set the image (ClipitFile) linked to a Quiz Question
+     *
+     * @param int $id ID of Quiz Question
+     * @param int $image_id ID of image file (ClipitFile)
+     * @return bool True if ok, False if error.
+     */
+    static function set_image($id, $image_id){
+        return UBCollection::set_items($id, array($image_id), static::REL_QUIZQUESTION_IMAGE);
     }
 
     /**
@@ -144,8 +176,7 @@ class ClipitQuizQuestion extends UBItem {
      *
      * @return array|bool Array of Quiz Result IDs, or false if error
      */
-    static function get_quiz_results($id)
-    {
+    static function get_quiz_results($id) {
         return UBCollection::get_items($id, static::REL_QUIZQUESTION_QUIZRESULT);
     }
 
@@ -196,25 +227,25 @@ class ClipitQuizQuestion extends UBItem {
         return UBCollection::get_items($id, static::REL_QUIZQUESTION_TAG);
     }
 
-    static function set_type_true_false($id){
+    static function set_type_true_false($id) {
         $prop_value_array = array();
         $prop_value_array["option_type"] = static::TYPE_TRUE_FALSE;
         return static::set_properties($id, $prop_value_array);
     }
 
-    static function set_type_select_one($id){
+    static function set_type_select_one($id) {
         $prop_value_array = array();
         $prop_value_array["option_type"] = static::TYPE_SELECT_ONE;
         return static::set_properties($id, $prop_value_array);
     }
 
-    static function set_type_select_multi($id){
+    static function set_type_select_multi($id) {
         $prop_value_array = array();
         $prop_value_array["option_type"] = static::TYPE_SELECT_MULTI;
         return static::set_properties($id, $prop_value_array);
     }
 
-    static function set_type_number($id){
+    static function set_type_number($id) {
         $prop_value_array = array();
         $prop_value_array["option_type"] = static::TYPE_NUMBER;
         return static::set_properties($id, $prop_value_array);
