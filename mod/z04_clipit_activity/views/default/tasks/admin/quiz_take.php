@@ -37,6 +37,11 @@ elgg_load_js('jquery:chartjs');
         $('a[data-toggle="tab"]:first').tab('show');
     });
 </script>
+<div>
+    <small><?php echo elgg_echo('quiz:name');?></small>
+    <h4 style="margin-top: 0;"><?php echo $quiz->name;?></h4>
+</div>
+<hr>
 <div role="tabpanel">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
