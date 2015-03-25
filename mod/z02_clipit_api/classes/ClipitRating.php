@@ -167,37 +167,37 @@ class ClipitRating extends UBItem {
         return $average_rating = $average_rating / $count;
     }
 
-    static function add_tag_ratings($rating_id, $tag_rating_array) {
-        return UBCollection::add_items($rating_id, $tag_rating_array, static::REL_RATING_TAGRATING);
+    static function add_tag_ratings($id, $tag_rating_array) {
+        return UBCollection::add_items($id, $tag_rating_array, static::REL_RATING_TAGRATING);
     }
 
-    static function set_tag_ratings($rating_id, $tag_rating_array) {
-        return UBCollection::set_items($rating_id, $tag_rating_array, static::REL_RATING_TAGRATING);
+    static function set_tag_ratings($id, $tag_rating_array) {
+        return UBCollection::set_items($id, $tag_rating_array, static::REL_RATING_TAGRATING);
     }
 
-    static function remove_tag_ratings($rating_id, $tag_rating_array) {
-        return UBCollection::remove_items($rating_id, $tag_rating_array, static::REL_RATING_TAGRATING);
+    static function remove_tag_ratings($id, $tag_rating_array) {
+        return UBCollection::remove_items($id, $tag_rating_array, static::REL_RATING_TAGRATING);
     }
 
-    static function get_tag_ratings($rating_id) {
-        return UBCollection::get_items($rating_id, static::REL_RATING_TAGRATING);
+    static function get_tag_ratings($id) {
+        return UBCollection::get_items($id, static::REL_RATING_TAGRATING);
     }
 
-    static function add_performance_ratings($rating_id, $performance_rating_array) {
-        return UBCollection::add_items($rating_id, $performance_rating_array, static::REL_RATING_PERFORMANCERATING);
+    static function add_performance_ratings($id, $performance_rating_array) {
+        return UBCollection::add_items($id, $performance_rating_array, static::REL_RATING_PERFORMANCERATING);
     }
 
-    static function set_performance_ratings($rating_id, $performance_rating_array) {
-        return UBCollection::set_items($rating_id, $performance_rating_array, static::REL_RATING_PERFORMANCERATING);
+    static function set_performance_ratings($id, $performance_rating_array) {
+        return UBCollection::set_items($id, $performance_rating_array, static::REL_RATING_PERFORMANCERATING);
     }
 
-    static function remove_performance_ratings($rating_id, $performance_rating_array) {
+    static function remove_performance_ratings($id, $performance_rating_array) {
 
-        return UBCollection::remove_items($rating_id, $performance_rating_array, static::REL_RATING_PERFORMANCERATING);
+        return UBCollection::remove_items($id, $performance_rating_array, static::REL_RATING_PERFORMANCERATING);
     }
 
-    static function get_performance_ratings($rating_id) {
-        return UBCollection::get_items($rating_id, static::REL_RATING_PERFORMANCERATING);
+    static function get_performance_ratings($id) {
+        return UBCollection::get_items($id, static::REL_RATING_PERFORMANCERATING);
     }
 }
 

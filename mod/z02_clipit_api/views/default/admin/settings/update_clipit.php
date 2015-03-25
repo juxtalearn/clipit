@@ -10,7 +10,7 @@ if($_POST["update_clipit"] == "YES") {
     echo "<h3>Fetching latest tag info... ";
     echo exec("git fetch --tags");
     echo "<h3>Checking-out latest tag";
-    echo exec("git checkout `git tag | tail -1`");
+    echo exec("git checkout `git for-each-ref --sort=committerdate --format='%(refname:short)' refs/tags | tail -1`");
     echo "<h3>Performing submodule update... ";
     echo exec("git submodule init");
     echo exec("git submodule update");
