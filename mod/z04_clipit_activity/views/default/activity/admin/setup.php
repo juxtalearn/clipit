@@ -168,7 +168,7 @@ elgg_load_js("jquery:quicksearch");
             'is_action' => true,
             'text' => elgg_echo('activity:delete'),
             'href' => "action/activity/remove?id=".$activity->id,
-            'class' => 'btn btn-primary btn-danger'
+            'class' => 'btn btn-primary btn-danger remove-object'
         ));
         ?>
         <?php

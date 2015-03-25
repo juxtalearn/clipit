@@ -200,7 +200,7 @@ $(function(){
     $(document).on("click", ".submit-add-students", function(){
         var that = $(this);
         var content = $(".add-user-list").find(".add-user");
-        if(content.length == 0){
+        if(content.length == 0 || !content.find(':input').valid()){
             return false;
         }
         that.button('loading').data("loading-text", "<?php echo elgg_echo('loading');?>...").button('loading');
@@ -209,9 +209,9 @@ $(function(){
             data: form.serialize(),
             success: function(data){
                 var $data = data.output;
-                $.each($data, function(i, user) {
+                $.each($data, function (i, user) {
                     $('#called_users').multiSelect('addOption',
-                        { value: user.id, text: user.name, index: 0}
+                        {value: user.id, text: user.name, index: 0}
                     );
                 });
                 content.remove();

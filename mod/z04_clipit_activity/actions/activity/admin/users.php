@@ -22,14 +22,13 @@ switch($action){
             if(
                 trim($user['login']) != "" &&
                 trim($user['password']) != "" &&
-                trim($user['name']) != "" &&
-                filter_var($user['email'], FILTER_VALIDATE_EMAIL)
+                trim($user['name']) != ""
             ) {
                 $user_id = ClipitUser::create(array(
                     'login'     => $user['login'],
                     'password'  => $user['password'],
                     'name'      => $user['name'],
-                    'email'     => $user['email'],
+                    'email'     => filter_var($user['email'], FILTER_VALIDATE_EMAIL),
                     'role'      => $role
                 ));
                 $output[] = array(
