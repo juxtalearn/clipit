@@ -40,7 +40,7 @@ if($tricky_topic){
             ?>
         </div>
         <div class="form-group">
-            <label><?php echo elgg_echo('name');?></label>
+            <label for="title"><?php echo elgg_echo('name');?></label>
             <?php echo elgg_view('input/text', array(
                 'class' => 'form-control',
                 'name' => 'title',
@@ -61,9 +61,7 @@ if($tricky_topic){
     </div>
     <div class="col-md-5">
         <div class="form-group">
-            <label>
-                <?php echo elgg_echo('tags');?>
-            </label>
+            <label for="tag[]"><?php echo elgg_echo('tags');?></label>
             <div class="form-add-tags form-group margin-top-10">
                 <?php if($tags):?>
                     <?php foreach($tags as $tag):?>
@@ -83,19 +81,19 @@ if($tricky_topic){
             ?>
         </div>
         <div class="form-group">
-            <label><?php echo elgg_echo('education_level');?></label>
+            <label for="education_level"><?php echo elgg_echo('education_level');?></label>
             <?php echo elgg_view("input/dropdown", array(
                 'name' => 'education_level',
                 'style' => 'padding: 5px',
                 'value' => $tricky_topic->education_level,
-                'class' => 'form-control select-question-type',
+                'class' => 'form-control',
                 'options_values' => get_education_levels(),
                 'required' => true
             ));
             ?>
         </div>
         <div class="form-group">
-            <label><?php echo elgg_echo('tricky_topic:subject');?></label>
+            <label for="subject"><?php echo elgg_echo('tricky_topic:subject');?></label>
             <?php echo elgg_view("input/text", array(
                 'name' => 'subject',
                 'value' => $tricky_topic->subject,

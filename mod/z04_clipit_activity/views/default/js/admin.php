@@ -45,7 +45,7 @@ clipit.admin.createTeachers = function() {
 clipit.admin.getUsers = function(){
     var data_role = $(this).data("role"),
         data_activity = $(this).data("activity"),
-        container = $("#site ul") || $("#site select");
+        container = $("#shite ul") || $("#site select");
     switch(data_role){
         case "student":
             var container = $("#site ul");

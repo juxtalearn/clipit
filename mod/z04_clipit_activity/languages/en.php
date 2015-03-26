@@ -339,6 +339,7 @@ $english = array(
     'called:students:excel_template' => 'Excel template',
     'called:students:add_from_site' => 'Add from site',
     'called:students:add_from_excel' => 'Add from Excel file',
+    'called:students:add_from_excel:waiting' => 'Please wait while students are uploading to the system',
     'activity:created' => 'Activity %s created',
     'search:filter' => 'Filter',
     // Activity admin

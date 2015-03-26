@@ -18,26 +18,29 @@ $id = uniqid();
     </div>
     <div class="col-md-12">
         <div class="col-md-12 form-group">
-            <label for="activity-title"><?php echo elgg_echo("user:username");?></label>
+            <label><?php echo elgg_echo("user:username");?></label>
             <?php echo elgg_view("input/text", array(
                 'name' => 'user['.$id.'][name]',
                 'class' => 'form-control focus-in',
+                'required' => true
             ));
             ?>
         </div>
         <div class="form-group col-md-6">
-            <label for="activity-title"><?php echo elgg_echo("user:log_in");?></label>
+            <label><?php echo elgg_echo("user:log_in");?></label>
             <?php echo elgg_view("input/text", array(
                 'name' => 'user['.$id.'][login]',
                 'class' => 'form-control',
+                'required' => true
             ));
             ?>
         </div>
         <div class="form-group col-md-6">
-            <label for="activity-title"><?php echo elgg_echo("user:password");?></label>
+            <label><?php echo elgg_echo("user:password");?></label>
             <?php echo elgg_view("input/password", array(
                 'name' => 'user['.$id.'][password]',
                 'class' => 'form-control',
+                'required' => true
             ));
             ?>
         </div>

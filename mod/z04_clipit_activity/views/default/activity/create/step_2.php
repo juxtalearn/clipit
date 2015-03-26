@@ -20,6 +20,7 @@
         <?php echo elgg_view('output/url', array(
             'href'  => "javascript:;",
             'id' => 'add_task',
+            'class' => 'btn btn-xs btn-primary',
             'title' => elgg_echo('task:add'),
             'text'  => '<i class="fa fa-plus"></i> '.elgg_echo('task:add'),
         ));

@@ -110,9 +110,18 @@ $(function () {
         autoUpload: true,
         previewCrop: false
     }).on('fileuploadadd', function (e, data) {
-        $(".upload-messages").show().html($("<span id='loading-file'><i class='fa fa-spinner fa-spin'/> <?php echo elgg_echo('loading');?></span>"));
+        var alertOptions = {
+            title: elgg.echo(elgg.echo('loading')+"..."),
+            buttons: {
+                ok: {
+                    className: "hide"
+                }
+            },
+            message: elgg.echo('called:students:add_from_excel:waiting')
+        };
+        bootbox.alert(alertOptions);
     }).on('fileuploadstop', function (e, data) {
-        $(".upload-messages").html("<strong><?php echo elgg_echo('file:uploaded');?></strong>").fadeOut(4000);
+        $('.bootbox').modal('hide');
         $("#collapse_upload").collapse('hide');
     }).on('fileuploadprocessalways', function (e, data) {
         var messages_content = $(".upload-messages");

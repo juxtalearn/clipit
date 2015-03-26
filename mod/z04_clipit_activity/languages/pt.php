@@ -282,9 +282,9 @@ $portuguese = array(
     'activity:created' => 'A atividade %s foi criada',
     'search:filter' => 'Filtrar',
     // Activity admin
-    'activity:admin:task_setup' => 'Configuracao das tarefas',
-    'activity:admin:groups' => 'Configuracao dos grupos',
-    'activity:admin:setup' => 'Configuracao das atividades',
+    'activity:admin:task_setup' => 'Configuração das tarefas',
+    'activity:admin:groups' => 'Configuração dos grupos',
+    'activity:admin:setup' => 'Configuração das atividades',
     'groups:select:move' => 'mover para o grupo...',
     'clipit:or' => 'ou',
     'activity:updated' => 'Atividade atualizada',

@@ -338,6 +338,7 @@ $spanish = array(
     'called:students:excel_template' => 'Plantilla Excel',
     'called:students:add_from_site' => 'Añadir desde ClipIt',
     'called:students:add_from_excel' => 'Añadir desde un archivo Excel',
+    'called:students:add_from_excel:waiting' => 'Espere mientras se está subiendo los estudiantes al sistema',
     'activity:created' => 'La actividad %s ha sido creada',
     'search:filter' => 'Filtrar',
     // Activity admin

@@ -6985,6 +6985,46 @@ ul.events.events-loading:after {
 .globe-color {
   color: #999;
 }
+.table-responsive-list table {
+  table-layout: fixed;
+}
+@media only screen and (max-width: 767px) {
+  .table-responsive-list table,
+  .table-responsive-list thead,
+  .table-responsive-list tbody,
+  .table-responsive-list th {
+    display: block;
+  }
+  .table-responsive-list td {
+    display: block;
+    border: none;
+    border-bottom: 1px solid #eeeeee;
+    position: relative;
+    padding-left: 40% !important;
+    white-space: normal;
+    text-align: left;
+  }
+  .table-responsive-list td:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: bold;
+    content: attr(data-title);
+  }
+  .table-responsive-list tr {
+    display: block;
+    border-bottom: 1px solid #bae6f6;
+  }
+  .table-responsive-list thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+}
 .btn-normal {
   border: none;
   background-color: #ffffff;

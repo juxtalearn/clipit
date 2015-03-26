@@ -30,12 +30,11 @@ if($example) {
         $tags_diff = array_diff(($example->tag_array), ClipitTrickyTopic::get_tags($example->tricky_topic));
     }
 }
-
 ?>
 <div class="margin-bottom-10" id="form-add-tricky-topic">
     <div class="col-md-7">
         <div class="form-group">
-            <label><?php echo elgg_echo('name');?></label>
+            <label for="title"><?php echo elgg_echo('name');?></label>
             <?php echo elgg_view("input/text", array(
                 'name' => 'title',
                 'class' => 'form-control',
@@ -58,17 +57,16 @@ if($example) {
         </div>
         <div class="row">
             <div class="col-md-5">
-                <label><?php echo elgg_echo('country');?></label>
+                <label for="country"><?php echo elgg_echo('country');?></label>
                 <?php echo elgg_view('page/components/countries',
                     array('style' => 'padding:5px;', 'value' => $example->country, 'required' => true));?>
             </div>
             <div class="col-md-7">
-                <label><?php echo elgg_echo('location');?></label>
+                <label for="location"><?php echo elgg_echo('location');?></label>
                 <?php echo elgg_view('input/text', array(
                     'class' => 'form-control',
                     'name' => 'location',
                     'value' => $example->location,
-                    'required' => true
                 ));
                 ?>
             </div>
@@ -78,7 +76,8 @@ if($example) {
         <div class="form-group">
             <?php echo elgg_view('examples/tricky_topics', array(
                 'selected' => $tricky_topic_id,
-                'tags' => $example->tag_array
+                'tags' => $example->tag_array,
+                'required' => false
             ));?>
         </div>
     </div>

@@ -60,7 +60,7 @@ $(function(){
 <div style="background: #fafafa;padding: 10px;" class="trick-topic-tags-check" data-tags="<?php echo json_encode($tags);?>">
     <div class="form-group">
         <label for="tricky-topic"><?php echo elgg_echo("activity:select:tricky_topic");?></label>
-        <select required="required" id="tricky-topic" class="form-control" name="tricky-topic" style="padding-top: 5px;padding-bottom: 5px;">
+        <select <?php echo $vars['required']!==false ?'required':'';?> id="tricky-topic" class="form-control" name="tricky-topic" style="padding-top: 5px;padding-bottom: 5px;">
             <option value="">
                 <?php echo elgg_echo('tricky_topic:select');?>
             </option>

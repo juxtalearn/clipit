@@ -163,6 +163,7 @@ endif;
                     <?php
                     $params = array(
                         'entities' => $multimedia['storyboards'],
+                        'preview' => true,
                         'href' => $href,
                         'view_comments' => false,
                         'options' => false,

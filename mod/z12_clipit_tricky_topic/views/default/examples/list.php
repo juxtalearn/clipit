@@ -26,19 +26,26 @@ $count = elgg_extract('count', $vars);
     ));
     ?>
 </div>
+<div class="table-responsive-list">
 <table class="table table-striped table-order">
     <thead>
     <tr>
-        <?php foreach($table_orders as $data):?>
-            <th>
+        <?php
+        foreach($table_orders as $title => $data):
+            switch($title){
+                case 'name': $class = 'col-md-5 col-xs-6'; break;
+                case 'tricky_topic': $class = 'col-md-3 col-xs-3'; break;
+            }
+        ?>
+            <th class="<?php echo $class;?>">
                 <a href="<?php echo $data['href'];?>">
                     <i class="fa <?php echo $data['sort_icon'];?> blue margin-right-5" style="position: absolute;left: 0;margin-top: 3px;"></i>
                     <span class="margin-left-5"><?php echo $data['value'];?></span>
                 </a>
             </th>
         <?php endforeach;?>
-        <th><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
-        <th></th>
+        <th class="col-md-2"><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
+        <th class="col-md-2 hidden-xs"></th>
     </tr>
     </thead>
     <tbody>
@@ -48,7 +55,7 @@ $count = elgg_extract('count', $vars);
         $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($example->tricky_topic)));
     ?>
         <tr>
-            <td>
+            <td data-title="<?php echo elgg_echo('name');?>">
                 <strong>
                     <?php echo elgg_view('output/url', array(
                         'href'  => "tricky_topics/examples/view/{$example->id}",
@@ -57,9 +64,11 @@ $count = elgg_extract('count', $vars);
                     ));
                     ?>
                 </strong>
-                <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $example->tag_array, 'limit' => 5)); ?>
+                <div class="hidden-xs">
+                    <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $example->tag_array, 'limit' => 2, 'width' => '100%')); ?>
+                </div>
             </td>
-            <td>
+            <td data-title="<?php echo elgg_echo('tricky_topic');?>">
                 <?php echo elgg_view('output/url', array(
                     'href'  => "tricky_topics/view/{$tricky_topic->id}",
                     'title' => $tricky_topic->name,
@@ -67,7 +76,7 @@ $count = elgg_extract('count', $vars);
                 ));
                 ?>
             </td>
-            <td>
+            <td data-title="<?php echo elgg_echo('author');?>">
                 <small>
                     <div>
                         <i class="fa-user fa blue"></i>
@@ -81,7 +90,7 @@ $count = elgg_extract('count', $vars);
                     <?php echo elgg_view('output/friendlytime', array('time' => $example->time_created));?>
                 </small>
             </td>
-            <td>
+            <td data-title="<?php echo elgg_echo('options');?>" class="hidden-xs">
                 <?php echo elgg_view('page/components/admin_options', array(
                     'entity' => $example,
                     'user' => $user,
@@ -92,4 +101,5 @@ $count = elgg_extract('count', $vars);
     <?php endforeach;?>
     </tbody>
 </table>
+</div>
 <?php echo clipit_get_pagination(array('count' => $count, 'limit' => 10)); ?>

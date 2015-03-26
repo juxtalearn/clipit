@@ -15,7 +15,7 @@ $portuguese = array(
     'profile:settings:change' => 'Alterar configuracoes',
     'profile:settings:edit_profile' => 'Editar perfil',
     'profile:settings:edit_avatar' => 'Editar imagem perfil',
-    'profile:settings:edit' => 'A tua configuracao',
+    'profile:settings:edit' => 'A tua Configuração',
 );
 
 add_translation('pt', $portuguese);

@@ -37,6 +37,9 @@ $(function(){
         var container  = $("#form-tricky-topic"),
             form = container.find("#form-add-tricky-topic"),
             form_data = elgg.security.addToken($.param(form.find(":input").serializeArray())).replace("?", "&");
+        if(!form.find(':input').valid()){
+            return false;
+        }
         container.html($("<i class='fa fa-spinner fa-2x fa-spin blue'/>"));
         elgg.action('tricky_topic/save', {
             data: form_data,
@@ -52,8 +55,9 @@ $(function(){
         $("#form-add-tricky-topic").toggle().find("input:first").focus();
     });
     $(document).on("click", "#next_step", function(){
-        if($("#form-add-tricky-topic").is(":visible")){
-            $("#save-tricky-topic").click();
+        var form = $("#form-tricky-topic");
+        if(form.is(":visible")){
+            form.find("#save-tricky-topic").click();
         }
     });
 });
