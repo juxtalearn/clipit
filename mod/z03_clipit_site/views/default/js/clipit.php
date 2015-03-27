@@ -139,6 +139,29 @@ clipit.tinymce.init = function(id){
         toolbar: "bold italic underline | bullist numlist | outdent indent"
     };
 };
+clipit.autosize = function(element){
+    this.element = element;
+    this.$element = $(element);
+    var height = this.$element.outerHeight();
+    var diff = parseInt(this.$element.css('paddingBottom')) +
+        parseInt(this.$element.css('paddingTop'));
+
+    if (this.$element.val().replace(/\s/g, '').length > 0) {
+        this.$element.height(this.element.scrollHeight - diff);
+    }
+
+    // keyup is required for IE to properly reset height when deleting text
+    this.$element.on('input keyup', function(event) {
+        var $window = $(window);
+        var currentScrollPosition = $window.scrollTop();
+
+        $(this)
+            .height(0)
+            .height(this.scrollHeight - diff);
+
+        $window.scrollTop(currentScrollPosition);
+    });
+};
 /**
  * Forgotpassword form validation
  */

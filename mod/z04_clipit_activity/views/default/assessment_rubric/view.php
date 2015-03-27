@@ -1,5 +1,5 @@
 <?php
- /**
+/**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
  * Creation date:   16/09/14
@@ -72,153 +72,153 @@ add_translation('en', $spanish);
 <ul class="nav nav-tabs" role="tablist">
     <li class="active"><a href="#concept" role="tab" data-toggle="tab">Concepto</a></li>
     <?php if($entity_class == 'ClipitVideo'):?>
-    <li><a href="#audiovisual" role="tab" data-toggle="tab">Audiovisual</a></li>
+        <li><a href="#audiovisual" role="tab" data-toggle="tab">Audiovisual</a></li>
     <?php endif;?>
 </ul>
 <div class="tab-content">
 
-<div class="tab-pane active table-responsive" id="concept">
-<table class="table margin-top-15">
-    <tr class="active">
-        <th>
-        </th>
-        <th>
-            Nulo
-            <div class="rating ratings readonly" data-score="1">
-                <?php echo star_rating_view(1);?>
-            </div>
-        </th>
-        <th>
-            Pobre
-            <div class="rating ratings readonly" data-score="2">
-                <?php echo star_rating_view(2);?>
-            </div>
-        </th>
-        <th>
-            Razonable
-            <div class="rating ratings readonly" data-score="3">
-                <?php echo star_rating_view(3);?>
-            </div>
-        </th>
-        <th>
-            Bueno
-            <div class="rating ratings readonly" data-score="4">
-                <?php echo star_rating_view(4);?>
-            </div>
-        </th>
-        <th>
-            Excelente
-            <div class="rating ratings readonly" data-score="5">
-                <?php echo star_rating_view(5);?>
-            </div>
-        </th>
-    </tr>
-    <tr>
-        <td><strong><?php echo elgg_echo('focus');?></strong></td>
-        <td><?php echo elgg_echo('focus:1');?></td>
-        <td><?php echo elgg_echo('focus:2');?></td>
-        <td><?php echo elgg_echo('focus:3');?></td>
-        <td><?php echo elgg_echo('focus:4');?></td>
-        <td><?php echo elgg_echo('focus:5');?></td>
-    </tr>
-    <tr>
-        <td><strong><?php echo elgg_echo('relevance');?></strong></td>
-        <td><?php echo elgg_echo('relevance:1');?></td>
-        <td><?php echo elgg_echo('relevance:2');?></td>
-        <td><?php echo elgg_echo('relevance:3');?></td>
-        <td><?php echo elgg_echo('relevance:4');?></td>
-        <td><?php echo elgg_echo('relevance:5');?></td>
-    </tr>
-    <tr>
-        <td><strong><?php echo elgg_echo('accuracy');?></strong></td>
-        <td><?php echo elgg_echo('accuracy:1');?></td>
-        <td><?php echo elgg_echo('accuracy:2');?></td>
-        <td><?php echo elgg_echo('accuracy:3');?></td>
-        <td><?php echo elgg_echo('accuracy:4');?></td>
-        <td><?php echo elgg_echo('accuracy:5');?></td>
-    </tr>
-    <tr>
-        <td><strong><?php echo elgg_echo('understandable');?></strong></td>
-        <td><?php echo elgg_echo('understandable:1');?></td>
-        <td><?php echo elgg_echo('understandable:2');?></td>
-        <td><?php echo elgg_echo('understandable:3');?></td>
-        <td><?php echo elgg_echo('understandable:4');?></td>
-        <td><?php echo elgg_echo('understandable:5');?></td>
-    </tr>
-</table>
-</div>
-<?php if($entity_class == 'ClipitVideo'):?>
-<div class="tab-pane table-responsive" id="audiovisual">
-<table class="table margin-top-15">
-    <tr class="active">
-        <th>
-        </th>
-        <th>
-            Nulo
-            <div class="rating ratings readonly" data-score="1">
-                <?php echo star_rating_view(1);?>
-            </div>
-        </th>
-        <th>
-            Pobre
-            <div class="rating ratings readonly" data-score="2">
-                <?php echo star_rating_view(2);?>
-            </div>
-        </th>
-        <th>
-            Razonable
-            <div class="rating ratings readonly" data-score="3">
-                <?php echo star_rating_view(3);?>
-            </div>
-        </th>
-        <th>
-            Bueno
-            <div class="rating ratings readonly" data-score="4">
-                <?php echo star_rating_view(4);?>
-            </div>
-        </th>
-        <th>
-            Excelente
-            <div class="rating ratings readonly" data-score="5">
-                <?php echo star_rating_view(5);?>
-            </div>
-        </th>
-    </tr>
-    <tr>
-        <td><strong><?php echo elgg_echo('prepro');?></strong></td>
-        <td><?php echo elgg_echo('prepro:1');?></td>
-        <td><?php echo elgg_echo('prepro:2');?></td>
-        <td><?php echo elgg_echo('prepro:3');?></td>
-        <td><?php echo elgg_echo('prepro:4');?></td>
-        <td><?php echo elgg_echo('prepro:5');?></td>
-    </tr>
-    <tr>
-        <td><strong><?php echo elgg_echo('image');?></strong></td>
-        <td><?php echo elgg_echo('image:1');?></td>
-        <td><?php echo elgg_echo('image:2');?></td>
-        <td><?php echo elgg_echo('image:3');?></td>
-        <td><?php echo elgg_echo('image:4');?></td>
-        <td><?php echo elgg_echo('image:5');?></td>
-    </tr>
-    <tr>
-        <td><strong><?php echo elgg_echo('sound');?></strong></td>
-        <td><?php echo elgg_echo('sound:1');?></td>
-        <td><?php echo elgg_echo('sound:2');?></td>
-        <td><?php echo elgg_echo('sound:3');?></td>
-        <td><?php echo elgg_echo('sound:4');?></td>
-        <td><?php echo elgg_echo('sound:5');?></td>
-    </tr>
-    <tr>
-        <td><strong><?php echo elgg_echo('edition');?></strong></td>
-        <td><?php echo elgg_echo('edition:1');?></td>
-        <td><?php echo elgg_echo('edition:2');?></td>
-        <td><?php echo elgg_echo('edition:3');?></td>
-        <td><?php echo elgg_echo('edition:4');?></td>
-        <td><?php echo elgg_echo('edition:5');?></td>
-    </tr>
-</table>
-</div>
-<?php endif;?>
+    <div class="tab-pane active table-responsive" id="concept">
+        <table class="table margin-top-15">
+            <tr class="active">
+                <th class="col-md-2">
+                </th>
+                <th class="col-md-2">
+                    Nulo
+                    <div class="rating ratings readonly" data-score="1">
+                        <?php echo star_rating_view(1);?>
+                    </div>
+                </th>
+                <th class="col-md-2">
+                    Pobre
+                    <div class="rating ratings readonly" data-score="2">
+                        <?php echo star_rating_view(2);?>
+                    </div>
+                </th>
+                <th class="col-md-2">
+                    Razonable
+                    <div class="rating ratings readonly" data-score="3">
+                        <?php echo star_rating_view(3);?>
+                    </div>
+                </th>
+                <th class="col-md-2">
+                    Bueno
+                    <div class="rating ratings readonly" data-score="4">
+                        <?php echo star_rating_view(4);?>
+                    </div>
+                </th>
+                <th class="col-md-2">
+                    Excelente
+                    <div class="rating ratings readonly" data-score="5">
+                        <?php echo star_rating_view(5);?>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <td><strong><?php echo elgg_echo('focus');?></strong></td>
+                <td><?php echo elgg_echo('focus:1');?></td>
+                <td><?php echo elgg_echo('focus:2');?></td>
+                <td><?php echo elgg_echo('focus:3');?></td>
+                <td><?php echo elgg_echo('focus:4');?></td>
+                <td><?php echo elgg_echo('focus:5');?></td>
+            </tr>
+            <tr>
+                <td><strong><?php echo elgg_echo('relevance');?></strong></td>
+                <td><?php echo elgg_echo('relevance:1');?></td>
+                <td><?php echo elgg_echo('relevance:2');?></td>
+                <td><?php echo elgg_echo('relevance:3');?></td>
+                <td><?php echo elgg_echo('relevance:4');?></td>
+                <td><?php echo elgg_echo('relevance:5');?></td>
+            </tr>
+            <tr>
+                <td><strong><?php echo elgg_echo('accuracy');?></strong></td>
+                <td><?php echo elgg_echo('accuracy:1');?></td>
+                <td><?php echo elgg_echo('accuracy:2');?></td>
+                <td><?php echo elgg_echo('accuracy:3');?></td>
+                <td><?php echo elgg_echo('accuracy:4');?></td>
+                <td><?php echo elgg_echo('accuracy:5');?></td>
+            </tr>
+            <tr>
+                <td><strong><?php echo elgg_echo('understandable');?></strong></td>
+                <td><?php echo elgg_echo('understandable:1');?></td>
+                <td><?php echo elgg_echo('understandable:2');?></td>
+                <td><?php echo elgg_echo('understandable:3');?></td>
+                <td><?php echo elgg_echo('understandable:4');?></td>
+                <td><?php echo elgg_echo('understandable:5');?></td>
+            </tr>
+        </table>
+    </div>
+    <?php if($entity_class == 'ClipitVideo'):?>
+        <div class="tab-pane table-responsive" id="audiovisual">
+            <table class="table margin-top-15">
+                <tr class="active">
+                    <th>
+                    </th>
+                    <th>
+                        Nulo
+                        <div class="rating ratings readonly" data-score="1">
+                            <?php echo star_rating_view(1);?>
+                        </div>
+                    </th>
+                    <th>
+                        Pobre
+                        <div class="rating ratings readonly" data-score="2">
+                            <?php echo star_rating_view(2);?>
+                        </div>
+                    </th>
+                    <th>
+                        Razonable
+                        <div class="rating ratings readonly" data-score="3">
+                            <?php echo star_rating_view(3);?>
+                        </div>
+                    </th>
+                    <th>
+                        Bueno
+                        <div class="rating ratings readonly" data-score="4">
+                            <?php echo star_rating_view(4);?>
+                        </div>
+                    </th>
+                    <th>
+                        Excelente
+                        <div class="rating ratings readonly" data-score="5">
+                            <?php echo star_rating_view(5);?>
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <td><strong><?php echo elgg_echo('prepro');?></strong></td>
+                    <td><?php echo elgg_echo('prepro:1');?></td>
+                    <td><?php echo elgg_echo('prepro:2');?></td>
+                    <td><?php echo elgg_echo('prepro:3');?></td>
+                    <td><?php echo elgg_echo('prepro:4');?></td>
+                    <td><?php echo elgg_echo('prepro:5');?></td>
+                </tr>
+                <tr>
+                    <td><strong><?php echo elgg_echo('image');?></strong></td>
+                    <td><?php echo elgg_echo('image:1');?></td>
+                    <td><?php echo elgg_echo('image:2');?></td>
+                    <td><?php echo elgg_echo('image:3');?></td>
+                    <td><?php echo elgg_echo('image:4');?></td>
+                    <td><?php echo elgg_echo('image:5');?></td>
+                </tr>
+                <tr>
+                    <td><strong><?php echo elgg_echo('sound');?></strong></td>
+                    <td><?php echo elgg_echo('sound:1');?></td>
+                    <td><?php echo elgg_echo('sound:2');?></td>
+                    <td><?php echo elgg_echo('sound:3');?></td>
+                    <td><?php echo elgg_echo('sound:4');?></td>
+                    <td><?php echo elgg_echo('sound:5');?></td>
+                </tr>
+                <tr>
+                    <td><strong><?php echo elgg_echo('edition');?></strong></td>
+                    <td><?php echo elgg_echo('edition:1');?></td>
+                    <td><?php echo elgg_echo('edition:2');?></td>
+                    <td><?php echo elgg_echo('edition:3');?></td>
+                    <td><?php echo elgg_echo('edition:4');?></td>
+                    <td><?php echo elgg_echo('edition:5');?></td>
+                </tr>
+            </table>
+        </div>
+    <?php endif;?>
 
 
 </div> <!-- Tab content end-->

@@ -27,10 +27,29 @@ $isCalled = in_array($user_id, $activity->student_array);
         margin: 0;
     }
 </style>
+<h3 class="margin-bottom-20">Sin agrupar</h3>
+<div style="border-bottom: 6px solid #bae6f6;max-height:400px;overflow-y:auto;overflow-x:hidden;padding-bottom: 15px;">
+    <ul class="row">
+        <?php
+        foreach($activity->student_array as $student_id):
+            if(!ClipitGroup::get_from_user_activity($student_id, $activity->id)):
+                $student = array_pop(ClipitUser::get_by_id(array($student_id)));
+                ?>
+                <li class="list-item col-md-3">
+                    <?php echo elgg_view("page/elements/user_block", array("entity" => $student)); ?>
+                </li>
+            <?php
+            endif;
+        endforeach;
+        ?>
+    </ul>
+</div>
 <div class="row">
     <?php
+    $group_students = array();
     foreach($groups as $group):
         $students_id = ClipitGroup::get_users($group->id);
+        $group_students[] = array_merge($group_students, $students_id);
         $rest = $activity->max_group_size - count(ClipitGroup::get_users($group->id));
         if(($user->role == ClipitUser::ROLE_STUDENT || $user->role == ClipitUser::ROLE_ADMIN)
             && $isCalled
