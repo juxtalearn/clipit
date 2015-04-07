@@ -134,11 +134,15 @@ $(function () {
     }).on('fileuploaddone', function (e, data) {
         var parent_id = $(this).parent("a").attr("id");
         $("#groups_default").val(JSON.stringify(data.result) );
+        var count = 0,
+            result_count = Object.keys(data.result).length,
+            group_mode_teacher = false;
         $.each(data.result, function(group, users) {
             if(group != 0) {
                 if ($("#called_users optgroup[label='" + group + "']").length == 0) {
                     $("#called_users").prepend("<optgroup label='" + group + "'/>");
                 }
+                group_mode_teacher = true;
             }
             $.each(users, function(i, user) {
                 $('#called_users').multiSelect('addOption',
@@ -151,8 +155,15 @@ $(function () {
                 if(parent_id == 'insert-activity'){
                     $('#called_users').multiSelect('select', [""+user.id+""]);
                 }
-                $('#called_users').multiSelect('refresh');
             });
+            count++;
+            if(count == result_count) {
+                $('#called_users').multiSelect('refresh');
+            }
+            // Teacher make groups selecting by default
+            if(group_mode_teacher){
+                $("#accordion_grouping .select-radio:first").click();
+            }
         });
     });
 });

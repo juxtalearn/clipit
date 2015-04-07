@@ -13,6 +13,7 @@
 $groups = elgg_extract('groups', $vars);
 $activity = elgg_extract('activity', $vars);
 ?>
+<textarea id="groups_default" style="display: none;" name="groups_default"></textarea>
 <?php echo elgg_view("input/hidden", array(
     'name' => 'entity-id',
     'value' => $activity->id,

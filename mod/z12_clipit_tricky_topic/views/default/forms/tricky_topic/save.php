@@ -14,7 +14,7 @@ $user = array_pop(ClipitUser::get_by_id(array(elgg_get_logged_in_user_guid())));
 $tricky_topic = elgg_extract('entity', $vars);
 $button_value = elgg_extract('submit_value', $vars);
 if($tricky_topic){
-    $tags = ClipitTag::get_by_id($tricky_topic->tag_array);
+    $tags = ClipitTag::get_by_id($tricky_topic->tag_array, 0, 0, 'name');
     echo elgg_view('input/hidden', array(
         'name' => 'entity-id',
         'value' => $tricky_topic->id,

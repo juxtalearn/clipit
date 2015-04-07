@@ -23,10 +23,18 @@ $(function(){
         autoUpload: true,
         previewCrop: false
     }).on('fileuploadadd', function (e, data) {
-        $(".upload-messages").show().html($("<span id='loading-file'><i class='fa fa-spinner fa-spin'/> loading</span>"));
+        var alertOptions = {
+            title: elgg.echo(elgg.echo('loading')+"..."),
+            buttons: {
+                ok: {
+                    className: "hide"
+                }
+            },
+            message: elgg.echo('called:students:add_from_excel:waiting')
+        };
+        bootbox.alert(alertOptions);
     }).on('fileuploadstop', function (e, data) {
-        $(".upload-messages").html("<strong>Uploaded</strong>").fadeOut(4000);
-
+//        $('.bootbox').modal('hide');
     }).on('fileuploadprocessalways', function (e, data) {
         var messages_content = $(".upload-messages");
         var index = data.index,
@@ -36,14 +44,29 @@ $(function(){
             node.html($('<span class="text-danger"/>').text(file.error));
         }
     }).on('fileuploaddone', function (e, data) {
-        var parent_id = $(this).parent("a").attr("id");
+        var parent_id = $(this).parent("a").attr("id"),
+            has_group = false,
+            count = 0,
+            result_count = Object.keys(data.result).length;
         $.each(data.result, function(group, users) {
+            if(group != 0) {
+                has_group = true;
+            }
             $.each(users, function (i, user) {
                 $('#called_users').multiSelect('addOption',
                     {value: user.id, text: user.name, index: 0}
                 );
-                $('#called_users').multiSelect('refresh');
             });
+            count++;
+            if(count == result_count) {
+                $('#called_users').multiSelect('refresh');
+                if (has_group) {
+                    $("#groups_default").val(JSON.stringify(data.result));
+                    $("#save-groups").click();
+                } else{
+                    $('.bootbox').modal('hide');
+                }
+            }
         });
     });
 });

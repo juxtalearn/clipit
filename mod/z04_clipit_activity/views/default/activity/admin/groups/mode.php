@@ -64,7 +64,7 @@ $(function(){
         <div class="col-xs-3 text-right">
             <?php echo elgg_view('input/submit',
                 array(
-                    'value' => elgg_echo('save'),
+                    'value' => elgg_echo('change'),
                     'class' => "btn btn-primary margin-top-15"
                 ));
             ?>

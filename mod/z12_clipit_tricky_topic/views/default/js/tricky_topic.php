@@ -72,7 +72,8 @@ clipit.tricky_topic.addTag = function(){
     container.find(".input-tag:last").focus().autocomplete(clipit.tricky_topic.tagsAutocomplete());
 };
 clipit.tricky_topic.onKeypressTag = function(e){
-    if(e.keyCode == 13) {
+    var last_char = String.fromCharCode(e.which);
+    if(e.keyCode == 13 || last_char == ',') {
         e.preventDefault();
         $(this).closest('form').find('#add-tag').click();
         return false;

@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 $spanish = array(
+    'change' => 'Cambiar',
     'created' => 'Creado',
     'calendar' => 'Calendario',
     'list' => 'Lista',
