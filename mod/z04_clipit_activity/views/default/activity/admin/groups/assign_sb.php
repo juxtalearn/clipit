@@ -51,7 +51,7 @@ echo elgg_view("input/hidden", array(
         <ul class="not-assigned-list" style="min-height: 50px;">
         <?php
         foreach($tags as $tag):
-            if(!in_array($tag->id, $group_tags)):
+            if(!in_array($tag->id, $group->tag_array)):
                 ?>
                 <li class="assign-sb-group list-item-5 blue cursor-pointer" data-tag="<?php echo $tag->id;?>">
                     <?php echo $tag->name;?>

@@ -35,10 +35,10 @@ $isCalled = in_array($user_id, $activity->student_array);
             if(!ClipitGroup::get_from_user_activity($student_id, $activity->id)):
                 $student = array_pop(ClipitUser::get_by_id(array($student_id)));
         ?>
-                <li class="list-item col-md-3">
-                    <?php echo elgg_view("page/elements/user_block", array("entity" => $student)); ?>
-                </li>
-            <?php
+            <li class="list-item col-md-3">
+                <?php echo elgg_view("page/elements/user_block", array("entity" => $student)); ?>
+            </li>
+        <?php
             endif;
         endforeach;
         ?>
