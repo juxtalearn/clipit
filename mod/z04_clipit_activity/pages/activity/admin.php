@@ -24,7 +24,7 @@ switch($selected_tab){
         break;
     case 'setup':
         $setup_view = elgg_view('activity/admin/setup', array('entity' => $activity));
-        $content = elgg_view_form('activity/admin/setup', array('body' => $setup_view));
+        $content = elgg_view_form('activity/admin/setup', array('body' => $setup_view, 'data-validate' => 'true'));
         break;
     case 'groups':
         $content = elgg_view('activity/admin/groups/view', array('entity' => $activity));

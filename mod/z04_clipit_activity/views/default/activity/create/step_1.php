@@ -100,7 +100,12 @@ $(function(){
             onClose: function (text, inst) {
                 $(activity_form
                     .find(".input-task-start, .input-task-end, input[name='activity-end']"))
-                        .datepicker( "option", "minDate", activity_form.find("input[name=activity-start]").val() );
+                    .datepicker( "option", "minDate", activity_form.find("input[name=activity-start]").val());
+                if($(this).hasClass('input-task-start')){
+                    var $task_end = $(this).closest('.task').find('.input-task-end'),
+                        task_start_val = $(this).val();
+                    $task_end.datepicker( "option", "minDate", task_start_val);
+                }
                 $(activity_form
                     .find(".input-task-start, .input-task-end, input[name='activity-start']"))
                         .datepicker( "option", "maxDate", activity_form.find("input[name=activity-end]").val() );
