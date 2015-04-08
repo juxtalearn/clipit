@@ -175,9 +175,6 @@ clipit.task.admin.fullCalendar = function(data){
             var date_formated = date.add(-2, 'hours').format("X"); // Added -2hours T00:00:00
             var data_start = data.start-(60*60*4);
             if(date_formated >= data_start && date_formated <= data.end ){
-                console.log(date_formated);
-                console.log(data_start);
-                console.log("-------");
                 $(cell).addClass('fc-ranged');
             }
         },
