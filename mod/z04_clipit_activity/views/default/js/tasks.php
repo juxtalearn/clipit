@@ -173,13 +173,18 @@ clipit.task.admin.fullCalendar = function(data){
         },
         dayRender: function(date, cell) {
             var date_formated = date.add(-2, 'hours').format("X"); // Added -2hours T00:00:00
-            if(date_formated >= data.start && date_formated <= data.end ){
+            var data_start = data.start-(60*60*4);
+            if(date_formated >= data_start && date_formated <= data.end ){
+                console.log(date_formated);
+                console.log(data_start);
+                console.log("-------");
                 $(cell).addClass('fc-ranged');
             }
         },
         dayClick: function(date, jsEvent, view) {
             var date_formated = date.add(+2, 'hours').format("X"); // Added +2hours T00:00:00
-            if(date_formated >= data.start && date_formated <= data.end ){
+            var data_end = data.end+(60*60*4);
+            if(date_formated >= data.start && date_formated <= data_end ){
                 $("#create-new-task").modal('show').find(".input-task-start").val(date.format('DD/MM/YYYY'));
             } else {
                 return false;
