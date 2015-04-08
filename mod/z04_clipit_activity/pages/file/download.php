@@ -22,6 +22,7 @@ if($task_id = get_input('task_id')){
 // Get the file
 $file = array_pop(ClipitFile::get_by_id(array($file_id)));
 header("Pragma: public");
+header("Content-Type: application/download");
 header("Content-Disposition: attachment; filename=\"$file->name\"");
 ob_clean();
 flush();

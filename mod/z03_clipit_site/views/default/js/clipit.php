@@ -1,5 +1,8 @@
 //<script>
 elgg.provide('clipit');
+// Mute jQuery migrate logging
+jQuery.migrateMute = true;
+
 clipit.init = function() {
     /**
      * jQuery validator int messages

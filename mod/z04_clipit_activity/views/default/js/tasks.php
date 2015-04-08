@@ -178,7 +178,7 @@ clipit.task.admin.fullCalendar = function(data){
             }
         },
         dayClick: function(date, jsEvent, view) {
-            var date_formated = date.add(+2, 'hours').format("X"); // Added -2hours T00:00:00
+            var date_formated = date.add(+2, 'hours').format("X"); // Added +2hours T00:00:00
             if(date_formated >= data.start && date_formated <= data.end ){
                 $("#create-new-task").modal('show').find(".input-task-start").val(date.format('DD/MM/YYYY'));
             } else {
