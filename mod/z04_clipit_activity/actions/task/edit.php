@@ -23,8 +23,8 @@ if($task['feedback-form'] && $task['title'] == "") {
 $updated = ClipitTask::set_properties($entity_id, array(
     'name' => $task_array['title'],
     'description' => $task_array['description'],
-    'start' => get_timestamp_from_string($task_array['start']),
-    'end' => get_timestamp_from_string($task_array['end']),
+    'start' => get_timestamp_from_string($task_array['start'])+(60*1),
+    'end' => get_timestamp_from_string($task_array['end'])+(60*60*24)-(60*1),
 //    'quiz' => $task_array['quiz']
 ));
 if($entity->task_type == ClipitTask::TYPE_RESOURCE_DOWNLOAD){
@@ -146,8 +146,9 @@ if($task['feedback'] && $task['feedback-form']){
         'name' => $task_array['title'],
         'description' => $task_array['description'],
         'task_type' => $task_array['type'],
-        'start' => get_timestamp_from_string($task_array['start']),
-        'end' => get_timestamp_from_string($task_array['end']),
+        'start' => get_timestamp_from_string($task_array['start'])+(60*1),
+        'end' => get_timestamp_from_string($task_array['end'])+(60*60*24)-(60*1),
+
         'parent_task' => $entity_id,
         'quiz' => $task_array['type'] == ClipitTask::TYPE_QUIZ_TAKE ? $task_array['quiz'] : 0
     ));

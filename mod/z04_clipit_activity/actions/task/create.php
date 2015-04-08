@@ -22,8 +22,8 @@ foreach($tasks as $task){
         'name' => $task['title'],
         'description' => $task['description'],
         'task_type' => $task['type'],
-        'start' => get_timestamp_from_string($task['start']),
-        'end' => get_timestamp_from_string($task['end']),
+        'start' => get_timestamp_from_string($task['start'])+(60*1),
+        'end' => get_timestamp_from_string($task['end'])+(60*60*24)-(60*1),
         'quiz' => ($task['type']==ClipitTask::TYPE_QUIZ_TAKE && $task['quiz_id']) ? $quiz_id : 0
     ));
     ClipitActivity::add_tasks($entity_id, array($task_id));
@@ -114,8 +114,8 @@ foreach($tasks as $task){
                 'name' => $feedback['title'],
                 'description' => $feedback['description'],
                 'task_type' => $feedback['type'],
-                'start' => get_timestamp_from_string($feedback['start']),
-                'end' => get_timestamp_from_string($feedback['end']),
+                'start' => get_timestamp_from_string($feedback['start'])+(60*1),
+                'end' => get_timestamp_from_string($feedback['end'])+(60*60*24)-(60*1),
                 'parent_task' => $task_id
             ));
             ClipitActivity::add_tasks($entity_id, array($feedback_task_id));

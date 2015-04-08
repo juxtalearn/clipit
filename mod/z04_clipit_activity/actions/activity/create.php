@@ -22,8 +22,8 @@ $activity_tt = get_input('tricky-topic');
 $activity_id = ClipitActivity::create(array(
     'name' => $activity_name,
     'description' => $activity_description,
-    'start' => get_timestamp_from_string($activity_start),
-    'end' => get_timestamp_from_string($activity_end),
+    'start' => get_timestamp_from_string($activity_start)+(60*1),
+    'end' => get_timestamp_from_string($activity_end)+(60*60*24)-(60*1),
     'tricky_topic' => $activity_tt
 ));
 // Tasks
@@ -38,8 +38,8 @@ foreach($tasks as $task){
             'name' => $task['title'],
             'description' => $task['description'],
             'task_type' => $task['type'],
-            'start' => get_timestamp_from_string($task['start']),
-            'end' => get_timestamp_from_string($task['end']),
+            'start' => get_timestamp_from_string($task['start'])+(60*1),
+            'end' => get_timestamp_from_string($task['end'])+(60*60*24)-(60*1),
             'quiz' => $task['type'] == ClipitTask::TYPE_QUIZ_TAKE ? $quiz_id : 0
         ));
 
@@ -80,8 +80,8 @@ foreach($tasks as $task){
                 'name' => $feedback['title'],
                 'description' => $feedback['description'],
                 'task_type' => $feedback['type'],
-                'start' => get_timestamp_from_string($feedback['start']),
-                'end' => get_timestamp_from_string($feedback['end']),
+                'start' => get_timestamp_from_string($feedback['start'])+(60*1),
+                'end' => get_timestamp_from_string($feedback['end'])+(60*60*24)-(60*1),
                 'parent_task' => $task_id
             ));
             ClipitActivity::add_tasks($activity_id, array($feedback_task_id));

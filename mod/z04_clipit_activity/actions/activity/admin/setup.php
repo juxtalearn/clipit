@@ -16,8 +16,8 @@ $activity_description = get_input('activity-description');
 $only_calendar = get_input('calendar');
 $start = get_input('activity-start');
 $end = get_input('activity-end');
-$start = get_timestamp_from_string($start);
-$end = get_timestamp_from_string($end);
+$start = get_timestamp_from_string($start)+(60*1);
+$end = get_timestamp_from_string($end)+(60*60*24)-(60*1);
 
 if($only_calendar){
     $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
