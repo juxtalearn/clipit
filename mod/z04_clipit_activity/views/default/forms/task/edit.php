@@ -24,7 +24,7 @@ $(".datepicker").datepicker({
 </script>
 ';
 $body .= elgg_view("input/hidden", array(
-    'name' => 'entity-id',
+    'name' => 'task-id',
     'value' => $task->id,
 ));
 $task_type = 'upload';

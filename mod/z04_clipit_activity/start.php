@@ -71,6 +71,7 @@ function clipit_activity_init() {
     elgg_register_action("task/edit", "{$plugin_dir}/actions/task/edit.php");
     elgg_register_action("task/remove", "{$plugin_dir}/actions/task/remove.php");
     elgg_register_action("task/create", "{$plugin_dir}/actions/task/create.php");
+    elgg_register_action("task/save", "{$plugin_dir}/actions/task/save.php");
     elgg_register_ajax_view('tasks/admin/feedback_data');
 
     elgg_register_ajax_view('activity/admin/tasks/quiz/add_type');

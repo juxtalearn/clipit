@@ -91,8 +91,13 @@ $id = uniqid();
 <!-- Calendar view -->
 <div id="full-calendar" class="view-element" data-view="calendar"></div>
 
-<?php echo elgg_view_form('task/create', array('data-validate' => "true" ), array('entity'  => $activity, 'id' => $id)); ?>
-
+<?php
+echo elgg_view_form('task/save', array(
+    'body' => elgg_view('forms/task/create', array('entity'  => $activity, 'id' => $id)),
+    'data-validate'=> "true",
+    'enctype' => 'multipart/form-data'
+));
+?>
 <div class="margin-bottom-20 view-element" data-view="list" style="display: none"></div>
 <ul>
     <?php

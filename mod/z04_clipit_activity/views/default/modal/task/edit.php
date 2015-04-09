@@ -14,5 +14,9 @@ $task_id = (int)get_input("id");
 $task = array_pop(ClipitTask::get_by_id(array($task_id)));
 
 if($task){
-    echo elgg_view_form('task/edit', array('data-validate'=> "true", 'enctype' => 'multipart/form-data'), array('entity'  => $task));
+    echo elgg_view_form('task/save', array(
+            'body' => elgg_view('forms/task/edit', array('entity'  => $task)),
+            'data-validate'=> "true",
+            'enctype' => 'multipart/form-data'
+        ));
 }
