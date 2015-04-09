@@ -19,6 +19,11 @@ class ClipitSite extends UBSite {
 
     const SUBTYPE = "ClipitSite";
 
+    // ClipIt Site Types
+    const TYPE_SITE = "site";
+    const TYPE_GLOBAL = "global";
+    const TYPE_DEMO = "demo";
+
     // SITE SCOPE
     const REL_SITE_FILE = "ClipitSite-ClipitFile";
     const REL_SITE_VIDEO = "ClipitSite-ClipitVideo";

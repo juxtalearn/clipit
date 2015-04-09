@@ -4,8 +4,8 @@
 
  */
 $portuguese = array(
-    "admin:settings:youtube_auth" => "Configuracao do YouTube",
-    "admin:settings:vimeo_auth" => "Configuracao do Vimeo",
+    "admin:settings:youtube_auth" => "Configuraçao do YouTube",
+    "admin:settings:clipit_options" => "Configuraçao do ClipIt",
     "admin:settings:update_clipit" => "Update ClipIt",
     "student_option" => "Fazer deste utilizador um estudante?",
     "teacher_option" => "Fazer deste utilizador um professor?",

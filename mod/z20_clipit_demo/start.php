@@ -10,7 +10,7 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-if(get_config('clipit_site_type') == 'demo') {
+if(get_config('clipit_site_type') == ClipitSite::TYPE_DEMO) {
     elgg_register_event_handler('init', 'system', 'clipit_demo_init');
 }
 

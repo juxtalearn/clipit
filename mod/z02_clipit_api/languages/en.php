@@ -5,7 +5,7 @@
  */
 $english = array(
     "admin:settings:youtube_auth" => "YouTube Setup",
-    "admin:settings:vimeo_auth" => "Vimeo Setup",
+    "admin:settings:clipit_options" => "ClipIt Options",
     "admin:settings:update_clipit" => "Update ClipIt",
     "student_option" => "Make this user a student?",
     "teacher_option" => "Make this user a teacher?",
