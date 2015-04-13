@@ -101,11 +101,15 @@ class ClipitQuiz extends UBItem {
      *
      * @param int $id ID of Quiz to clone
      * @param bool $linked Whether the clone will be linked to the parent object
+     * @param bool $keep_owner Selects whether the clone will keep the parent item's owner (default: no)
      * @return bool|int ID of new cloned object
      * @throws InvalidParameterException if error
      */
-    static function create_clone($id, $linked = true){
+    static function create_clone($id, $linked = true, $keep_owner = false) {
         $prop_value_array = static::get_properties($id);
+        if($keep_owner === false){
+            $prop_value_array["owner_id"] = elgg_get_logged_in_user_guid();
+        }
         $quiz_question_array = $prop_value_array["quiz_question_array"];
         if(!empty($quiz_question_array)){
             $new_quiz_question_array = array();

@@ -86,11 +86,15 @@ class ClipitTrickyTopic extends UBItem {
      *
      * @param int $id ID of Tricky Topic to clone
      * @param bool $linked Whether the clone will be linked to the parent object
+     * @param bool $keep_owner Selects whether the clone will keep the parent item's owner (default: no)
      * @return bool|int ID of new cloned object
      * @throws InvalidParameterException if error
      */
-    static function create_clone($id, $linked = true){
+    static function create_clone($id, $linked = true, $keep_owner = false) {
         $prop_value_array = static::get_properties($id);
+        if($keep_owner === false){
+            $prop_value_array["owner_id"] = elgg_get_logged_in_user_guid();
+        }
         $example_array = $prop_value_array["example_array"];
         if(!empty($example_array)){
             $new_example_array = array();
