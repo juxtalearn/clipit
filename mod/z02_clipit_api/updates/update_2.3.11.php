@@ -6,7 +6,7 @@
  * Time: 17:27
  */
 
-// Update all activity and task end times adding 23h 45 mins = 85500 secs so they cover the whole end day
+// Update all activity and task end times adding 23h 45 mins = 85500 secs so they cover (almost) the whole end day
 $offset = 85500;
 $activity_array = ClipitActivity::get_all();
 foreach($activity_array as $activity){
