@@ -1,0 +1,626 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class ElggExtender</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class ElggExtender</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+							<a href="#sec-descendents">Descendents</a>
+			|											<a href="#sec-vars">Vars</a>
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The base class for ElggEntity extenders.</p>
+<p class="description"><p>Extenders allow you to attach extended information to an  ElggEntity.  Core supports two: ElggAnnotation and ElggMetadata.</p><p>Saving the extender data to database is handled by the child class.</p></p>
+	<ul class="tags">
+				<li><span class="field">property:</span> string $type: annotation or metadata (read-only after save)</li>
+				<li><span class="field">property:</span> int $id: The unique identifier (read-only)</li>
+				<li><span class="field">property:</span> int $entity_guid: The GUID of the entity that this extender describes</li>
+				<li><span class="field">property:</span> int $access_id: Specifies the visibility level of this extender</li>
+				<li><span class="field">property:</span> string $name: The name of this extender</li>
+				<li><span class="field">property:</span> mixed $value: The value of the extender (int or string)</li>
+				<li><span class="field">property:</span> int $time_created: A UNIX timestamp of when the extender was created (read-only, set on first save)</li>
+				<li><span class="field">see:</span> <a href="../../Elgg-Core/Metadata/ElggMetadata.html">ElggMetadata</a></li>
+				<li><span class="field">see:</span> <a href="../../Elgg-Core/DataModel-Annotations/ElggAnnotation.html">ElggAnnotation</a></li>
+				<li><span class="field">link:</span> <a href="http://docs.elgg.org/DataModel/Extenders">http://docs.elgg.org/DataModel/Extenders</a></li>
+				<li><span class="field">abstract:</span> </li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_engine---classes---ElggExtender.php.html">/engine/classes/ElggExtender.php</a> (line <span class="field">27</span>)
+		</p>
+		
+				
+		<pre><a href="../../Elgg-Core/DataModel/ElggData.html">ElggData</a>
+   |
+   --ElggExtender</pre>
+	
+			</div>
+</div>
+
+	<a name="sec-descendents"></a>
+	<div class="info-box">
+		<div class="info-box-title">Direct descendents</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+			<span class="disabled">Descendents</span>
+			|												<a href="#sec-vars">Vars</a>
+								|															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<table cellpadding="2" cellspacing="0" class="class-table">
+				<tr>
+					<th class="class-table-header">Class</th>
+					<th class="class-table-header">Description</th>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../Elgg-Core/DataModel-Annotations/ElggAnnotation.html">ElggAnnotation</a></td>
+					<td>
+											Elgg Annotations
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../Elgg-Core/Metadata/ElggMetadata.html">ElggMetadata</a></td>
+					<td>
+											ElggMetadata  This class describes metadata that can be attached to ElggEntities.
+										</td>
+				</tr>
+							</table>
+		</div>
+	</div>
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+																		<a href="#sec-vars">Vars</a>
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																												
+												<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#canEdit" title="details" class="method-name">canEdit</a>
+											([<span class="var-type">int</span>&nbsp;<span class="var-name">$user_guid</span> = <span class="var-default">0</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#export" title="details" class="method-name">export</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">mixed</span>
+										<a href="#get" title="details" class="method-name">get</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html">ElggEntity</a></span>
+										<a href="#getEntity" title="details" class="method-name">getEntity</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#getExportableValues" title="details" class="method-name">getExportableValues</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">int</span>
+										<a href="#getOwner" title="details" class="method-name">getOwner</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html">ElggEntity</a></span>
+										<a href="#getOwnerEntity" title="details" class="method-name">getOwnerEntity</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">int</span>
+										<a href="#getOwnerGUID" title="details" class="method-name">getOwnerGUID</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getSubtype" title="details" class="method-name">getSubtype</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">int</span>
+										<a href="#getSystemLogID" title="details" class="method-name">getSystemLogID</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getType" title="details" class="method-name">getType</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#initializeAttributes" title="details" class="method-name">initializeAttributes</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#set" title="details" class="method-name">set</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$value_type</span> = <span class="var-default">&quot;&quot;</span>])
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+										<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../../Elgg-Core/DataModel/ElggData.html">ElggData</a></span></p>
+					<blockquote>
+													<span class="var-title">
+								<span class="var-name"><a href="../../Elgg-Core/DataModel/ElggData.html#var$attributes">ElggData::$attributes</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../Elgg-Core/DataModel/ElggData.html#var$valid">ElggData::$valid</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+															<a href="#sec-vars">Vars</a>
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="methodcanEdit" id="canEdit"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">canEdit</span> (line <span class="line-number">141</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns if a user can edit this extended data.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			canEdit
+		</span>
+					([<span class="var-type">int</span>&nbsp;<span class="var-name">$user_guid</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$user_guid</span><span class="var-description">: The GUID of the user (defaults to currently logged in user)</span>			</li>
+				</ul>
+		
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../Elgg-Core/Metadata/ElggMetadata.html#methodcanEdit">ElggMetadata::canEdit()</a>
+								: Determines whether or not the user can edit this piece of metadata
+							</li>
+				</ul>
+	</div>
+<a name="methodexport" id="export"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">export</span> (line <span class="line-number">171</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Export this object</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			export
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodget" id="get"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">get</span> (line <span class="line-number">49</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns an attribute</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			get
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: Name</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../Elgg-Core/DataModel/ElggData.html#methodget">ElggData::get()</a></dt>
+						<dd>Fetch the specified attribute</dd>
+					</dl>
+			
+	</div>
+<a name="methodgetEntity" id="getEntity"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getEntity</span> (line <span class="line-number">130</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the entity this describes.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> The entity</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html">ElggEntity</a></span>
+		<span class="method-name">
+			getEntity
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetExportableValues" id="getExportableValues"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getExportableValues</span> (line <span class="line-number">154</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return an array of fields which can be exported.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			getExportableValues
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetOwner" id="getOwner"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getOwner</span> (line <span class="line-number">111</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the guid of the entity's owner.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> The owner GUID</li>
+				<li><span class="field">deprecated:</span> 1.8 Use getOwnerGUID</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">int</span>
+		<span class="method-name">
+			getOwner
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetOwnerEntity" id="getOwnerEntity"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getOwnerEntity</span> (line <span class="line-number">121</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the entity that owns this extender</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html">ElggEntity</a></span>
+		<span class="method-name">
+			getOwnerEntity
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetOwnerGUID" id="getOwnerGUID"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getOwnerGUID</span> (line <span class="line-number">101</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the GUID of the extender's owner entity.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> The owner GUID</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">int</span>
+		<span class="method-name">
+			getOwnerGUID
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetSubtype" id="getSubtype"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getSubtype</span> (line <span class="line-number">210</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return a subtype. For metadata &amp; annotations this is the 'name' and  for relationship this is the relationship type.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getSubtype
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetSystemLogID" id="getSystemLogID"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getSystemLogID</span> (line <span class="line-number">191</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return an identification for the object for storage in the system log.</p>
+<p class="description"><p>This id must be an integer.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">int</span>
+		<span class="method-name">
+			getSystemLogID
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetType" id="getType"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getType</span> (line <span class="line-number">200</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return a type of extension.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getType
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodinitializeAttributes" id="initializeAttributes"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">initializeAttributes</span> (line <span class="line-number">36</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">(non-PHPdoc)</p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../Elgg-Core/DataModel/ElggData.html#methodinitializeAttributes">ElggData::initializeAttributes()</a></li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			initializeAttributes
+		</span>
+				()
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../Elgg-Core/DataModel/ElggData.html#methodinitializeAttributes">ElggData::initializeAttributes()</a></dt>
+						<dd>Initialize the attributes array.</dd>
+					</dl>
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../Elgg-Core/DataModel-Annotations/ElggAnnotation.html#methodinitializeAttributes">ElggAnnotation::initializeAttributes()</a>
+								: (non-PHPdoc)
+							</li>
+					<li>
+				<a href="../../Elgg-Core/Metadata/ElggMetadata.html#methodinitializeAttributes">ElggMetadata::initializeAttributes()</a>
+								: (non-PHPdoc)
+							</li>
+				</ul>
+	</div>
+<a name="methodset" id="set"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">set</span> (line <span class="line-number">87</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set an attribute</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			set
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$value_type</span> = <span class="var-default">&quot;&quot;</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: Name</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$value</span><span class="var-description">: Value</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$value_type</span><span class="var-description">: Value type</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../Elgg-Core/DataModel/ElggData.html#methodset">ElggData::set()</a></dt>
+						<dd>Set the specified attribute</dd>
+					</dl>
+			
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../../Elgg-Core/DataModel/ElggData.html">ElggData</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodcurrent">ElggData::current()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methoddelete">ElggData::delete()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodget">ElggData::get()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodgetClassName">ElggData::getClassName()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodgetObjectOwnerGUID">ElggData::getObjectOwnerGUID()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodgetTimeCreated">ElggData::getTimeCreated()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodgetURL">ElggData::getURL()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodinitialise_attributes">ElggData::initialise_attributes()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodinitializeAttributes">ElggData::initializeAttributes()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodkey">ElggData::key()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodnext">ElggData::next()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodoffsetExists">ElggData::offsetExists()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodoffsetGet">ElggData::offsetGet()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodoffsetSet">ElggData::offsetSet()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodoffsetUnset">ElggData::offsetUnset()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodrewind">ElggData::rewind()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodsave">ElggData::save()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodset">ElggData::set()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodvalid">ElggData::valid()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#method__get">ElggData::__get()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#method__isset">ElggData::__isset()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#method__set">ElggData::__set()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Tue, 14 Apr 2015 13:59:10 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
+	</p>
+	</div></body>
+</html>

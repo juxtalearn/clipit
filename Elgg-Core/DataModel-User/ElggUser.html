@@ -1,0 +1,1508 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class ElggUser</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class ElggUser</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-vars">Vars</a>
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+                <p class="implements">
+            Implements interfaces:
+            <ul>
+                <li><a href="../../Elgg-Core/SocialModel-Friendable/Friendable.html">Friendable</a></li>            </ul>
+        </p>
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">ElggUser</p>
+<p class="description"><p>Representation of a &quot;user&quot; in the system.</p></p>
+	<ul class="tags">
+				<li><span class="field">property:</span> string $name: The display name that the user will be known by in the network</li>
+				<li><span class="field">property:</span> string $username: The short, reference name for the user in the network</li>
+				<li><span class="field">property:</span> string $email: The email address to which Elgg will send email notifications</li>
+				<li><span class="field">property:</span> string $language: The language preference of the user (ISO 639-1 formatted)</li>
+				<li><span class="field">property:</span> string $banned: 'yes' if the user is banned from the network, 'no' otherwise</li>
+				<li><span class="field">property:</span> string $admin: 'yes' if the user is an administrator of the network, 'no' otherwise</li>
+				<li><span class="field">property:</span> string $password: The hashed password of the user</li>
+				<li><span class="field">property:</span> string $salt: The salt used to secure the password before hashing</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_engine---classes---ElggUser.php.html">/engine/classes/ElggUser.php</a> (line <span class="field">19</span>)
+		</p>
+		
+				
+		<pre><a href="../../Elgg-Core/DataModel/ElggData.html">ElggData</a>
+   |
+   --<a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html">ElggEntity</a>
+      |
+      --ElggUser</pre>
+	
+			</div>
+</div>
+
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-vars">Vars</a>
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																																																																																																																																																																																																				
+												<div class="method-definition">
+											<span class="method-result">ElggUser</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											([<span class="var-type">mixed</span>&nbsp;<span class="var-name">$guid</span> = <span class="var-default">null</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#addFriend" title="details" class="method-name">addFriend</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$friend_guid</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#addToSite" title="details" class="method-name">addToSite</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$site_guid</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#ban" title="details" class="method-name">ban</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$reason</span> = <span class="var-default">&quot;&quot;</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#canComment" title="details" class="method-name">canComment</a>
+											([<span class="var-type">int</span>&nbsp;<span class="var-name">$user_guid</span> = <span class="var-default">0</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">int</span>
+										<a href="#countObjects" title="details" class="method-name">countObjects</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$subtype</span> = <span class="var-default">&quot;&quot;</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#delete" title="details" class="method-name">delete</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array|false</span>
+										<a href="#getCollections" title="details" class="method-name">getCollections</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$subtype</span> = <span class="var-default">&quot;&quot;</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">10</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$offset</span> = <span class="var-default">0</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#getExportableValues" title="details" class="method-name">getExportableValues</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array|false</span>
+										<a href="#getFriends" title="details" class="method-name">getFriends</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$subtype</span> = <span class="var-default">&quot;&quot;</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">10</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$offset</span> = <span class="var-default">0</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array|false</span>
+										<a href="#getFriendsObjects" title="details" class="method-name">getFriendsObjects</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$subtype</span> = <span class="var-default">&quot;&quot;</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">10</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$offset</span> = <span class="var-default">0</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array|false</span>
+										<a href="#getFriendsOf" title="details" class="method-name">getFriendsOf</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$subtype</span> = <span class="var-default">&quot;&quot;</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">10</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$offset</span> = <span class="var-default">0</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array|false</span>
+										<a href="#getGroups" title="details" class="method-name">getGroups</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$subtype</span> = <span class="var-default">&quot;&quot;</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">10</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$offset</span> = <span class="var-default">0</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array|false</span>
+										<a href="#getObjects" title="details" class="method-name">getObjects</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$subtype</span> = <span class="var-default">&quot;&quot;</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">10</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$offset</span> = <span class="var-default">0</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">int</span>
+										<a href="#getOwner" title="details" class="method-name">getOwner</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">int</span>
+										<a href="#getOwnerGUID" title="details" class="method-name">getOwnerGUID</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#getSites" title="details" class="method-name">getSites</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$subtype</span> = <span class="var-default">&quot;&quot;</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">10</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$offset</span> = <span class="var-default">0</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#initializeAttributes" title="details" class="method-name">initializeAttributes</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#isAdmin" title="details" class="method-name">isAdmin</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#isBanned" title="details" class="method-name">isBanned</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#isFriend" title="details" class="method-name">isFriend</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#isFriendOf" title="details" class="method-name">isFriendOf</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$user_guid</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#isFriendsWith" title="details" class="method-name">isFriendsWith</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$user_guid</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#listFriends" title="details" class="method-name">listFriends</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$subtype</span> = <span class="var-default">&quot;&quot;</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">10</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$vars</span> = <span class="var-default">array()</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#listGroups" title="details" class="method-name">listGroups</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$subtype</span> = <span class="var-default">&quot;&quot;</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">10</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$offset</span> = <span class="var-default">0</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#load" title="details" class="method-name">load</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$guid</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#makeAdmin" title="details" class="method-name">makeAdmin</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#removeAdmin" title="details" class="method-name">removeAdmin</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#removeFriend" title="details" class="method-name">removeFriend</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$friend_guid</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#removeFromSite" title="details" class="method-name">removeFromSite</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$site_guid</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#save" title="details" class="method-name">save</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#unban" title="details" class="method-name">unban</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#__get" title="details" class="method-name">__get</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#__set" title="details" class="method-name">__set</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+										<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html">ElggEntity</a></span></p>
+					<blockquote>
+													<span class="var-title">
+								<span class="var-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#var$icon_override">ElggEntity::$icon_override</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#var$temp_annotations">ElggEntity::$temp_annotations</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#var$temp_metadata">ElggEntity::$temp_metadata</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#var$temp_private_settings">ElggEntity::$temp_private_settings</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#var$url_override">ElggEntity::$url_override</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#var$volatile">ElggEntity::$volatile</a></span><br>
+							</span>
+											</blockquote> 
+									<p>Inherited from <span class="classname"><a href="../../Elgg-Core/DataModel/ElggData.html">ElggData</a></span></p>
+					<blockquote>
+													<span class="var-title">
+								<span class="var-name"><a href="../../Elgg-Core/DataModel/ElggData.html#var$attributes">ElggData::$attributes</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../Elgg-Core/DataModel/ElggData.html#var$valid">ElggData::$valid</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-vars">Vars</a>
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">57</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Construct a new user entity, optionally from a given id value.</p>
+	<ul class="tags">
+				<li><span class="field">throws:</span> Exception if there was a problem creating the user.</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">ElggUser</span>
+		<span class="method-name">
+			__construct
+		</span>
+					([<span class="var-type">mixed</span>&nbsp;<span class="var-name">$guid</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$guid</span><span class="var-description">: If an int, load that GUID.      If an entity table db row then will load the rest of the data.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodaddFriend" id="addFriend"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">addFriend</span> (line <span class="line-number">285</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Adds a user as a friend</p>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			addFriend
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$friend_guid</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$friend_guid</span><span class="var-description">: The GUID of the user to add</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../../Elgg-Core/SocialModel-Friendable/Friendable.html#methodaddFriend">Friendable::addFriend()</a></dt>
+						<dd>Adds a user as a friend</dd>
+					</dl>
+			
+	</div>
+<a name="methodaddToSite" id="addToSite"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">addToSite</span> (line <span class="line-number">263</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Add this user to a particular site</p>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			addToSite
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$site_guid</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$site_guid</span><span class="var-description">: The guid of the site to add it to</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodban" id="ban"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">ban</span> (line <span class="line-number">173</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Ban this user.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			ban
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$reason</span> = <span class="var-default">&quot;&quot;</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$reason</span><span class="var-description">: Optional reason</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodcanComment" id="canComment"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">canComment</span> (line <span class="line-number">581</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Can a user comment on this user?</p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodcanComment">ElggEntity::canComment()</a></li>
+				<li><span class="field">since:</span> 1.8.0</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			canComment
+		</span>
+					([<span class="var-type">int</span>&nbsp;<span class="var-name">$user_guid</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$user_guid</span><span class="var-description">: User guid (default is logged in user)</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodcanComment">ElggEntity::canComment()</a></dt>
+						<dd>Can a user comment on an entity?</dd>
+					</dl>
+			
+	</div>
+<a name="methodcountObjects" id="countObjects"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">countObjects</span> (line <span class="line-number">476</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Counts the number of ElggObjects owned by this user</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> The number of ElggObjects</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">int</span>
+		<span class="method-name">
+			countObjects
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$subtype</span> = <span class="var-default">&quot;&quot;</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$subtype</span><span class="var-description">: The subtypes of the objects, if any</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../../Elgg-Core/SocialModel-Friendable/Friendable.html#methodcountObjects">Friendable::countObjects()</a></dt>
+						<dd>Returns the number of object entities in this entity's container</dd>
+					</dl>
+			
+	</div>
+<a name="methoddelete" id="delete"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">delete</span> (line <span class="line-number">149</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">User specific override of the entity delete method.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			delete
+		</span>
+				()
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methoddelete">ElggEntity::delete()</a></dt>
+						<dd>Delete this entity.</dd>
+					</dl>
+			
+	</div>
+<a name="methodgetCollections" id="getCollections"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getCollections</span> (line <span class="line-number">489</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the collections associated with a user.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array|false</span>
+		<span class="method-name">
+			getCollections
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$subtype</span> = <span class="var-default">&quot;&quot;</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">10</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$offset</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$subtype</span><span class="var-description">: Optionally, the subtype of result we want to limit to</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$limit</span><span class="var-description">: The number of results to return</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$offset</span><span class="var-description">: Any indexing offset</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetExportableValues" id="getExportableValues"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getExportableValues</span> (line <span class="line-number">527</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return an array of fields which can be exported.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			getExportableValues
+		</span>
+				()
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetExportableValues">ElggEntity::getExportableValues()</a></dt>
+						<dd>Returns an array of fields which can be exported.</dd>
+					</dl>
+			
+	</div>
+<a name="methodgetFriends" id="getFriends"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getFriends</span> (line <span class="line-number">340</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Gets this user's friends</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Array of ElggUser, or false, depending on success</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array|false</span>
+		<span class="method-name">
+			getFriends
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$subtype</span> = <span class="var-default">&quot;&quot;</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">10</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$offset</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$subtype</span><span class="var-description">: Optionally, the user subtype (leave blank for all)</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$limit</span><span class="var-description">: The number of users to retrieve</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$offset</span><span class="var-description">: Indexing offset, if any</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../../Elgg-Core/SocialModel-Friendable/Friendable.html#methodgetFriends">Friendable::getFriends()</a></dt>
+						<dd>Returns this entity's friends</dd>
+					</dl>
+			
+	</div>
+<a name="methodgetFriendsObjects" id="getFriendsObjects"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getFriendsObjects</span> (line <span class="line-number">465</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get an array of ElggObjects owned by this user's friends.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array|false</span>
+		<span class="method-name">
+			getFriendsObjects
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$subtype</span> = <span class="var-default">&quot;&quot;</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">10</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$offset</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$subtype</span><span class="var-description">: The subtype of the objects, if any</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$limit</span><span class="var-description">: Number of results to return</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$offset</span><span class="var-description">: Any indexing offset</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../../Elgg-Core/SocialModel-Friendable/Friendable.html#methodgetFriendsObjects">Friendable::getFriendsObjects()</a></dt>
+						<dd>Returns objects in the containers of this entity's friends</dd>
+					</dl>
+			
+	</div>
+<a name="methodgetFriendsOf" id="getFriendsOf"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getFriendsOf</span> (line <span class="line-number">353</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Gets users who have made this user a friend</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Array of ElggUser, or false, depending on success</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array|false</span>
+		<span class="method-name">
+			getFriendsOf
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$subtype</span> = <span class="var-default">&quot;&quot;</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">10</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$offset</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$subtype</span><span class="var-description">: Optionally, the user subtype (leave blank for all)</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$limit</span><span class="var-description">: The number of users to retrieve</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$offset</span><span class="var-description">: Indexing offset, if any</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../../Elgg-Core/SocialModel-Friendable/Friendable.html#methodgetFriendsOf">Friendable::getFriendsOf()</a></dt>
+						<dd>Returns entities that have made this entity a friend</dd>
+					</dl>
+			
+	</div>
+<a name="methodgetGroups" id="getGroups"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getGroups</span> (line <span class="line-number">394</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Gets the user's groups</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Array of ElggGroup, or false, depending on success</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array|false</span>
+		<span class="method-name">
+			getGroups
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$subtype</span> = <span class="var-default">&quot;&quot;</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">10</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$offset</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$subtype</span><span class="var-description">: Optionally, the subtype of user to filter to (leave blank for all)</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$limit</span><span class="var-description">: The number of groups to retrieve</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$offset</span><span class="var-description">: Indexing offset, if any</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetObjects" id="getObjects"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getObjects</span> (line <span class="line-number">445</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get an array of ElggObject owned by this user.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array|false</span>
+		<span class="method-name">
+			getObjects
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$subtype</span> = <span class="var-default">&quot;&quot;</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">10</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$offset</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$subtype</span><span class="var-description">: The subtype of the objects, if any</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$limit</span><span class="var-description">: Number of results to return</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$offset</span><span class="var-description">: Any indexing offset</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../../Elgg-Core/SocialModel-Friendable/Friendable.html#methodgetObjects">Friendable::getObjects()</a></dt>
+						<dd>Returns objects in this entity's container</dd>
+					</dl>
+			
+	</div>
+<a name="methodgetOwner" id="getOwner"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getOwner</span> (line <span class="line-number">515</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">If a user's owner is blank, return its own GUID as the owner</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> User GUID</li>
+				<li><span class="field">deprecated:</span> 1.8 Use getOwnerGUID()</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">int</span>
+		<span class="method-name">
+			getOwner
+		</span>
+				()
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetOwner">ElggEntity::getOwner()</a></dt>
+						<dd>Return the guid of the entity's owner.</dd>
+					</dl>
+			
+	</div>
+<a name="methodgetOwnerGUID" id="getOwnerGUID"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getOwnerGUID</span> (line <span class="line-number">501</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get a user's owner GUID</p>
+<p class="description"><p>Returns it's own GUID if the user is not owned.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">int</span>
+		<span class="method-name">
+			getOwnerGUID
+		</span>
+				()
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetOwnerGUID">ElggEntity::getOwnerGUID()</a></dt>
+						<dd>Get the guid of the entity's owner.</dd>
+					</dl>
+			
+	</div>
+<a name="methodgetSites" id="getSites"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getSites</span> (line <span class="line-number">252</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get sites that this user is a member of</p>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			getSites
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$subtype</span> = <span class="var-default">&quot;&quot;</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">10</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$offset</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$subtype</span><span class="var-description">: Optionally, the subtype of result we want to limit to</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$limit</span><span class="var-description">: The number of results to return</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$offset</span><span class="var-description">: Any indexing offset</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodinitializeAttributes" id="initializeAttributes"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">initializeAttributes</span> (line <span class="line-number">30</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Initialise the attributes array.</p>
+<p class="description"><p>This is vital to distinguish between metadata and base parameters.</p><p>Place your base parameters here.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			initializeAttributes
+		</span>
+				()
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodinitializeAttributes">ElggEntity::initializeAttributes()</a></dt>
+						<dd>Initialize the attributes array.</dd>
+					</dl>
+			
+	</div>
+<a name="methodisAdmin" id="isAdmin"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">isAdmin</span> (line <span class="line-number">200</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Is this user admin?</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			isAdmin
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodisBanned" id="isBanned"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">isBanned</span> (line <span class="line-number">191</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Is this user banned or not?</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			isBanned
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodisFriend" id="isFriend"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">isFriend</span> (line <span class="line-number">305</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Determines whether or not this user is a friend of the currently logged in user</p>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			isFriend
+		</span>
+				()
+			</div>
+	
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../../Elgg-Core/SocialModel-Friendable/Friendable.html#methodisFriend">Friendable::isFriend()</a></dt>
+						<dd>Determines whether or not the current user is a friend of this entity</dd>
+					</dl>
+			
+	</div>
+<a name="methodisFriendOf" id="isFriendOf"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">isFriendOf</span> (line <span class="line-number">327</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Determines whether or not this user is another user's friend</p>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			isFriendOf
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$user_guid</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$user_guid</span><span class="var-description">: The GUID of the user to check against</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../../Elgg-Core/SocialModel-Friendable/Friendable.html#methodisFriendOf">Friendable::isFriendOf()</a></dt>
+						<dd>Determines whether or not a foreign entity has made this one a friend</dd>
+					</dl>
+			
+	</div>
+<a name="methodisFriendsWith" id="isFriendsWith"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">isFriendsWith</span> (line <span class="line-number">316</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Determines whether this user is friends with another user</p>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			isFriendsWith
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$user_guid</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$user_guid</span><span class="var-description">: The GUID of the user to check against</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../../Elgg-Core/SocialModel-Friendable/Friendable.html#methodisFriendsWith">Friendable::isFriendsWith()</a></dt>
+						<dd>Determines whether or not this entity is friends with a particular entity</dd>
+					</dl>
+			
+	</div>
+<a name="methodlistFriends" id="listFriends"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">listFriends</span> (line <span class="line-number">367</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Lists the user's friends</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Rendered list of friends</li>
+				<li><span class="field">since:</span> 1.8.0</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			listFriends
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$subtype</span> = <span class="var-default">&quot;&quot;</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">10</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$vars</span> = <span class="var-default">array()</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$subtype</span><span class="var-description">: Optionally, the user subtype (leave blank for all)</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$limit</span><span class="var-description">: The number of users to retrieve</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$vars</span><span class="var-description">: Display variables for the user view</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodlistGroups" id="listGroups"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">listGroups</span> (line <span class="line-number">419</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Lists the user's groups</p>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			listGroups
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$subtype</span> = <span class="var-default">&quot;&quot;</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$limit</span> = <span class="var-default">10</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$offset</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$subtype</span><span class="var-description">: Optionally, the user subtype (leave blank for all)</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$limit</span><span class="var-description">: The number of users to retrieve</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$offset</span><span class="var-description">: Indexing offset, if any</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodload" id="load"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">load</span> (line <span class="line-number">107</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Load the ElggUser data from the database</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			load
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$guid</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$guid</span><span class="var-description">: ElggUser GUID or stdClass database row from entity table</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodload">ElggEntity::load()</a></dt>
+						<dd>Loads attributes from the entities table into the object.</dd>
+					</dl>
+			
+	</div>
+<a name="methodmakeAdmin" id="makeAdmin"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">makeAdmin</span> (line <span class="line-number">214</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Make the user an admin</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			makeAdmin
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodremoveAdmin" id="removeAdmin"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">removeAdmin</span> (line <span class="line-number">231</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Remove the admin flag for user</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			removeAdmin
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodremoveFriend" id="removeFriend"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">removeFriend</span> (line <span class="line-number">296</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Removes a user as a friend</p>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			removeFriend
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$friend_guid</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$friend_guid</span><span class="var-description">: The GUID of the user to remove</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../../Elgg-Core/SocialModel-Friendable/Friendable.html#methodremoveFriend">Friendable::removeFriend()</a></dt>
+						<dd>Removes a user as a friend</dd>
+					</dl>
+			
+	</div>
+<a name="methodremoveFromSite" id="removeFromSite"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">removeFromSite</span> (line <span class="line-number">274</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Remove this user from a particular site</p>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			removeFromSite
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$site_guid</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$site_guid</span><span class="var-description">: The guid of the site to remove it from</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsave" id="save"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">save</span> (line <span class="line-number">128</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Saves this user to the database.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			save
+		</span>
+				()
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodsave">ElggEntity::save()</a></dt>
+						<dd>Save an entity.</dd>
+					</dl>
+			
+	</div>
+<a name="methodunban" id="unban"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">unban</span> (line <span class="line-number">182</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Unban this user.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			unban
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="method__get" id="__get"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">__get</span> (line <span class="line-number">563</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Need to catch attempts to test user for admin.  Remove for 1.9</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			__get
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: Name</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../Elgg-Core/DataModel/ElggData.html#method__get">ElggData::__get()</a></dt>
+						<dd>Return an attribute or a piece of metadata.</dd>
+					</dl>
+			
+	</div>
+<a name="method__set" id="__set"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">__set</span> (line <span class="line-number">543</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Need to catch attempts to make a user an admin.  Remove for 1.9</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			__set
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: Name</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$value</span><span class="var-description">: Value</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../Elgg-Core/DataModel/ElggData.html#method__set">ElggData::__set()</a></dt>
+						<dd>Set an attribute or a piece of metadata.</dd>
+					</dl>
+			
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html">ElggEntity</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodaddRelationship">ElggEntity::addRelationship()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodannotate">ElggEntity::annotate()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodcanAnnotate">ElggEntity::canAnnotate()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodcanComment">ElggEntity::canComment()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodcanEdit">ElggEntity::canEdit()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodcanEditMetadata">ElggEntity::canEditMetadata()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodcanWriteToContainer">ElggEntity::canWriteToContainer()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodclearAnnotations">ElggEntity::clearAnnotations()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodclearMetaData">ElggEntity::clearMetaData()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodclearRelationships">ElggEntity::clearRelationships()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodcountAnnotations">ElggEntity::countAnnotations()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodcountComments">ElggEntity::countComments()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodcountEntitiesFromRelationship">ElggEntity::countEntitiesFromRelationship()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methoddelete">ElggEntity::delete()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methoddeleteAnnotations">ElggEntity::deleteAnnotations()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methoddeleteMetadata">ElggEntity::deleteMetadata()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methoddeleteOwnedAnnotations">ElggEntity::deleteOwnedAnnotations()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methoddeleteOwnedMetadata">ElggEntity::deleteOwnedMetadata()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methoddeleteRelationships">ElggEntity::deleteRelationships()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methoddisable">ElggEntity::disable()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methoddisableAnnotations">ElggEntity::disableAnnotations()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methoddisableMetadata">ElggEntity::disableMetadata()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodenable">ElggEntity::enable()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodenableAnnotations">ElggEntity::enableAnnotations()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodenableMetadata">ElggEntity::enableMetadata()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodexport">ElggEntity::export()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodget">ElggEntity::get()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetAccessID">ElggEntity::getAccessID()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetAnnotations">ElggEntity::getAnnotations()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetAnnotationsAvg">ElggEntity::getAnnotationsAvg()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetAnnotationsMax">ElggEntity::getAnnotationsMax()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetAnnotationsMin">ElggEntity::getAnnotationsMin()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetAnnotationsSum">ElggEntity::getAnnotationsSum()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetCalendarEndTime">ElggEntity::getCalendarEndTime()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetCalendarStartTime">ElggEntity::getCalendarStartTime()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetContainer">ElggEntity::getContainer()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetContainerEntity">ElggEntity::getContainerEntity()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetContainerGUID">ElggEntity::getContainerGUID()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetEntitiesFromRelationship">ElggEntity::getEntitiesFromRelationship()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetExportableValues">ElggEntity::getExportableValues()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetGUID">ElggEntity::getGUID()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetIcon">ElggEntity::getIcon()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetIconURL">ElggEntity::getIconURL()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetLatitude">ElggEntity::getLatitude()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetLocation">ElggEntity::getLocation()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetLongitude">ElggEntity::getLongitude()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetMetaData">ElggEntity::getMetaData()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetObjectFromID">ElggEntity::getObjectFromID()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetOwner">ElggEntity::getOwner()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetOwnerEntity">ElggEntity::getOwnerEntity()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetOwnerGUID">ElggEntity::getOwnerGUID()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetPrivateSetting">ElggEntity::getPrivateSetting()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetSubtype">ElggEntity::getSubtype()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetSystemLogID">ElggEntity::getSystemLogID()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetTags">ElggEntity::getTags()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetTimeUpdated">ElggEntity::getTimeUpdated()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetType">ElggEntity::getType()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetURL">ElggEntity::getURL()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetVolatileData">ElggEntity::getVolatileData()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodimport">ElggEntity::import()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodinitializeAttributes">ElggEntity::initializeAttributes()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodisEnabled">ElggEntity::isEnabled()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodisFullyLoaded">ElggEntity::isFullyLoaded()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodload">ElggEntity::load()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodremovePrivateSetting">ElggEntity::removePrivateSetting()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodremoveRelationship">ElggEntity::removeRelationship()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodsave">ElggEntity::save()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodset">ElggEntity::set()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodsetCalendarTimeAndDuration">ElggEntity::setCalendarTimeAndDuration()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodsetContainer">ElggEntity::setContainer()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodsetContainerGUID">ElggEntity::setContainerGUID()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodsetIcon">ElggEntity::setIcon()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodsetLatLong">ElggEntity::setLatLong()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodsetLocation">ElggEntity::setLocation()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodsetMetaData">ElggEntity::setMetaData()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodsetPrivateSetting">ElggEntity::setPrivateSetting()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodsetURL">ElggEntity::setURL()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodsetVolatileData">ElggEntity::setVolatileData()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#method__clone">ElggEntity::__clone()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#method__unset">ElggEntity::__unset()</a></span><br>
+											</blockquote>
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../../Elgg-Core/DataModel/ElggData.html">ElggData</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodcurrent">ElggData::current()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methoddelete">ElggData::delete()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodget">ElggData::get()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodgetClassName">ElggData::getClassName()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodgetObjectOwnerGUID">ElggData::getObjectOwnerGUID()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodgetTimeCreated">ElggData::getTimeCreated()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodgetURL">ElggData::getURL()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodinitialise_attributes">ElggData::initialise_attributes()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodinitializeAttributes">ElggData::initializeAttributes()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodkey">ElggData::key()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodnext">ElggData::next()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodoffsetExists">ElggData::offsetExists()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodoffsetGet">ElggData::offsetGet()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodoffsetSet">ElggData::offsetSet()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodoffsetUnset">ElggData::offsetUnset()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodrewind">ElggData::rewind()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodsave">ElggData::save()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodset">ElggData::set()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#methodvalid">ElggData::valid()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#method__get">ElggData::__get()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#method__isset">ElggData::__isset()</a></span><br>
+													<span class="method-name"><a href="../../Elgg-Core/DataModel/ElggData.html#method__set">ElggData::__set()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Tue, 14 Apr 2015 13:59:23 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
+	</p>
+	</div></body>
+</html>

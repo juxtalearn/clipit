@@ -1,0 +1,803 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>phpDocumentor Parser Errors and Warnings</title>
+			<link rel="stylesheet" href="media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+						<a href="#Post-parsing">Post-parsing</a><br>
+<a href="#CallException.php">CallException.php</a><br>
+<a href="#ClassException.php">ClassException.php</a><br>
+<a href="#ClassNotFoundException.php">ClassNotFoundException.php</a><br>
+<a href="#ClipitActivity.php">ClipitActivity.php</a><br>
+<a href="#ClipitChat.php">ClipitChat.php</a><br>
+<a href="#ClipitComment.php">ClipitComment.php</a><br>
+<a href="#ClipitEvent.php">ClipitEvent.php</a><br>
+<a href="#ClipitExample.php">ClipitExample.php</a><br>
+<a href="#ClipitExampleType.php">ClipitExampleType.php</a><br>
+<a href="#ClipitFile.php">ClipitFile.php</a><br>
+<a href="#ClipitGroup.php">ClipitGroup.php</a><br>
+<a href="#ClipitLA.php">ClipitLA.php</a><br>
+<a href="#ClipitLabel.php">ClipitLabel.php</a><br>
+<a href="#ClipitPerformanceItem.php">ClipitPerformanceItem.php</a><br>
+<a href="#ClipitPerformanceRating.php">ClipitPerformanceRating.php</a><br>
+<a href="#ClipitPost.php">ClipitPost.php</a><br>
+<a href="#ClipitQuiz.php">ClipitQuiz.php</a><br>
+<a href="#ClipitQuizQuestion.php">ClipitQuizQuestion.php</a><br>
+<a href="#ClipitQuizResult.php">ClipitQuizResult.php</a><br>
+<a href="#ClipitRating.php">ClipitRating.php</a><br>
+<a href="#ClipitRemoteResource.php">ClipitRemoteResource.php</a><br>
+<a href="#ClipitRemoteSite.php">ClipitRemoteSite.php</a><br>
+<a href="#ClipitResource.php">ClipitResource.php</a><br>
+<a href="#ClipitSite.php">ClipitSite.php</a><br>
+<a href="#ClipitStoryboard.php">ClipitStoryboard.php</a><br>
+<a href="#ClipitTag.php">ClipitTag.php</a><br>
+<a href="#ClipitTagRating.php">ClipitTagRating.php</a><br>
+<a href="#ClipitTask.php">ClipitTask.php</a><br>
+<a href="#ClipitTrickyTopic.php">ClipitTrickyTopic.php</a><br>
+<a href="#ClipitUser.php">ClipitUser.php</a><br>
+<a href="#ClipitVideo.php">ClipitVideo.php</a><br>
+<a href="#ConfigurationException.php">ConfigurationException.php</a><br>
+<a href="#CronException.php">CronException.php</a><br>
+<a href="#DatabaseException.php">DatabaseException.php</a><br>
+<a href="#DataFormatException.php">DataFormatException.php</a><br>
+<a href="#ElggAccess.php">ElggAccess.php</a><br>
+<a href="#ElggAnnotation.php">ElggAnnotation.php</a><br>
+<a href="#ElggAttributeLoader.php">ElggAttributeLoader.php</a><br>
+<a href="#ElggAutoP.php">ElggAutoP.php</a><br>
+<a href="#ElggBatch.php">ElggBatch.php</a><br>
+<a href="#ElggCache.php">ElggCache.php</a><br>
+<a href="#ElggData.php">ElggData.php</a><br>
+<a href="#ElggDiskFilestore.php">ElggDiskFilestore.php</a><br>
+<a href="#ElggEntity.php">ElggEntity.php</a><br>
+<a href="#ElggExtender.php">ElggExtender.php</a><br>
+<a href="#ElggFile.php">ElggFile.php</a><br>
+<a href="#ElggFileCache.php">ElggFileCache.php</a><br>
+<a href="#ElggFilestore.php">ElggFilestore.php</a><br>
+<a href="#ElggGroup.php">ElggGroup.php</a><br>
+<a href="#ElggGroupItemVisibility.php">ElggGroupItemVisibility.php</a><br>
+<a href="#ElggHMACCache.php">ElggHMACCache.php</a><br>
+<a href="#ElggLRUCache.php">ElggLRUCache.php</a><br>
+<a href="#ElggMemcache.php">ElggMemcache.php</a><br>
+<a href="#ElggMenuBuilder.php">ElggMenuBuilder.php</a><br>
+<a href="#ElggMenuItem.php">ElggMenuItem.php</a><br>
+<a href="#ElggMetadata.php">ElggMetadata.php</a><br>
+<a href="#ElggObject.php">ElggObject.php</a><br>
+<a href="#ElggPAM.php">ElggPAM.php</a><br>
+<a href="#ElggPlugin.php">ElggPlugin.php</a><br>
+<a href="#ElggPluginManifest.php">ElggPluginManifest.php</a><br>
+<a href="#ElggPluginManifestParser.php">ElggPluginManifestParser.php</a><br>
+<a href="#ElggPluginManifestParser17.php">ElggPluginManifestParser17.php</a><br>
+<a href="#ElggPluginManifestParser18.php">ElggPluginManifestParser18.php</a><br>
+<a href="#ElggPluginPackage.php">ElggPluginPackage.php</a><br>
+<a href="#ElggPriorityList.php">ElggPriorityList.php</a><br>
+<a href="#ElggRelationship.php">ElggRelationship.php</a><br>
+<a href="#ElggRiverItem.php">ElggRiverItem.php</a><br>
+<a href="#ElggSession.php">ElggSession.php</a><br>
+<a href="#ElggSharedMemoryCache.php">ElggSharedMemoryCache.php</a><br>
+<a href="#ElggSite.php">ElggSite.php</a><br>
+<a href="#ElggStaticVariableCache.php">ElggStaticVariableCache.php</a><br>
+<a href="#ElggTranslit.php">ElggTranslit.php</a><br>
+<a href="#ElggUser.php">ElggUser.php</a><br>
+<a href="#ElggVolatileMetadataCache.php">ElggVolatileMetadataCache.php</a><br>
+<a href="#ElggWidget.php">ElggWidget.php</a><br>
+<a href="#ElggXMLElement.php">ElggXMLElement.php</a><br>
+<a href="#ErrorResult.php">ErrorResult.php</a><br>
+<a href="#Exportable.php">Exportable.php</a><br>
+<a href="#ExportException.php">ExportException.php</a><br>
+<a href="#Friendable.php">Friendable.php</a><br>
+<a href="#GenericResult.php">GenericResult.php</a><br>
+<a href="#Importable.php">Importable.php</a><br>
+<a href="#ImportException.php">ImportException.php</a><br>
+<a href="#IncompleteEntityException.php">IncompleteEntityException.php</a><br>
+<a href="#InstallationException.php">InstallationException.php</a><br>
+<a href="#InvalidClassException.php">InvalidClassException.php</a><br>
+<a href="#InvalidParameterException.php">InvalidParameterException.php</a><br>
+<a href="#IOException.php">IOException.php</a><br>
+<a href="#Locatable.php">Locatable.php</a><br>
+<a href="#Loggable.php">Loggable.php</a><br>
+<a href="#LoginException.php">LoginException.php</a><br>
+<a href="#Notable.php">Notable.php</a><br>
+<a href="#NotificationException.php">NotificationException.php</a><br>
+<a href="#NotImplementedException.php">NotImplementedException.php</a><br>
+<a href="#ODD.php">ODD.php</a><br>
+<a href="#ODDDocument.php">ODDDocument.php</a><br>
+<a href="#ODDEntity.php">ODDEntity.php</a><br>
+<a href="#ODDMetaData.php">ODDMetaData.php</a><br>
+<a href="#ODDRelationship.php">ODDRelationship.php</a><br>
+<a href="#PluginException.php">PluginException.php</a><br>
+<a href="#RegistrationException.php">RegistrationException.php</a><br>
+<a href="#SecurityException.php">SecurityException.php</a><br>
+<a href="#SuccessResult.php">SuccessResult.php</a><br>
+<a href="#UBCollection.php">UBCollection.php</a><br>
+<a href="#UBEvent.php">UBEvent.php</a><br>
+<a href="#UBFile.php">UBFile.php</a><br>
+<a href="#UBItem.php">UBItem.php</a><br>
+<a href="#UBMessage.php">UBMessage.php</a><br>
+<a href="#UBSite.php">UBSite.php</a><br>
+<a href="#UBUser.php">UBUser.php</a><br>
+<a href="#XmlElement.php">XmlElement.php</a><br>
+<a href="#XMLRPCArrayParameter.php">XMLRPCArrayParameter.php</a><br>
+<a href="#XMLRPCBase64Parameter.php">XMLRPCBase64Parameter.php</a><br>
+<a href="#XMLRPCBoolParameter.php">XMLRPCBoolParameter.php</a><br>
+<a href="#XMLRPCCall.php">XMLRPCCall.php</a><br>
+<a href="#XMLRPCDateParameter.php">XMLRPCDateParameter.php</a><br>
+<a href="#XMLRPCDoubleParameter.php">XMLRPCDoubleParameter.php</a><br>
+<a href="#XMLRPCErrorResponse.php">XMLRPCErrorResponse.php</a><br>
+<a href="#XMLRPCIntParameter.php">XMLRPCIntParameter.php</a><br>
+<a href="#XMLRPCParameter.php">XMLRPCParameter.php</a><br>
+<a href="#XMLRPCResponse.php">XMLRPCResponse.php</a><br>
+<a href="#XMLRPCStringParameter.php">XMLRPCStringParameter.php</a><br>
+<a href="#XMLRPCStructParameter.php">XMLRPCStructParameter.php</a><br>
+<a href="#XMLRPCSuccessResponse.php">XMLRPCSuccessResponse.php</a><br>
+<a name="Post-parsing"></a>
+<h1>Post-parsing</h1>
+<h2>Warnings:</h2><br>
+<b>Warning</b> - 
+duplicate function element "copy_from_elgg" in file /root/clipit_latest/mod/z01_urjc_backend/classes/UBItem.php will be ignored.
+Use an @ignore tag on the original if you want this case to be documented.<br>
+<b>Warning</b> - 
+duplicate function element "copy_to_elgg" in file /root/clipit_latest/mod/z01_urjc_backend/classes/UBItem.php will be ignored.
+Use an @ignore tag on the original if you want this case to be documented.<br>
+<b>Warning</b> - 
+duplicate function element "save" in file /root/clipit_latest/mod/z01_urjc_backend/classes/UBItem.php will be ignored.
+Use an @ignore tag on the original if you want this case to be documented.<br>
+<b>Warning</b> - 
+duplicate function element "create_clone" in file /root/clipit_latest/mod/z01_urjc_backend/classes/UBItem.php will be ignored.
+Use an @ignore tag on the original if you want this case to be documented.<br>
+<b>Warning</b> - 
+duplicate function element "export_data" in file /root/clipit_latest/mod/z01_urjc_backend/classes/UBUser.php will be ignored.
+Use an @ignore tag on the original if you want this case to be documented.<br>
+<a name="APIException.php"></a>
+<h1>APIException.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 10</b> - DocBlock would be page-level, but precedes class "APIException", use another DocBlock to document the file<br>
+<a name="CallException.php"></a>
+<h1>CallException.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 9</b> - DocBlock would be page-level, but precedes class "CallException", use another DocBlock to document the file<br>
+<a name="ClassException.php"></a>
+<h1>ClassException.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 9</b> - DocBlock would be page-level, but precedes class "ClassException", use another DocBlock to document the file<br>
+<a name="ClassNotFoundException.php"></a>
+<h1>ClassNotFoundException.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 9</b> - DocBlock would be page-level, but precedes class "ClassNotFoundException", use another DocBlock to document the file<br>
+<a name="ClipitActivity.php"></a>
+<h1>ClipitActivity.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 24</b> - no @package tag was used in a DocBlock for class ClipitActivity<br>
+<b>Warning on line 28</b> - Unknown tag "@const" used<br>
+<a name="ClipitChat.php"></a>
+<h1>ClipitChat.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 17</b> - no @package tag was used in a DocBlock for class ClipitChat<br>
+<b>Warning on line 21</b> - Unknown tag "@const" used<br>
+<a name="ClipitComment.php"></a>
+<h1>ClipitComment.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 18</b> - no @package tag was used in a DocBlock for class ClipitComment<br>
+<b>Warning on line 22</b> - Unknown tag "@const" used<br>
+<a name="ClipitEvent.php"></a>
+<h1>ClipitEvent.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 17</b> - no @package tag was used in a DocBlock for class ClipitEvent<br>
+<a name="ClipitExample.php"></a>
+<h1>ClipitExample.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 17</b> - no @package tag was used in a DocBlock for class ClipitExample<br>
+<b>Warning on line 21</b> - Unknown tag "@const" used<br>
+<a name="ClipitExampleType.php"></a>
+<h1>ClipitExampleType.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 8</b> - no @package tag was used in a DocBlock for class ClipitExampleType<br>
+<b>Warning on line 12</b> - Unknown tag "@const" used<br>
+<b>Warning on line 70</b> - no @package tag was used in a DocBlock for class ClipitExampleType<br>
+<b>Warning on line 70</b> - 
+duplicate class element "ClipitExampleType" in file /root/clipit_latest/mod/z02_clipit_api/classes/ClipitExampleType.php will be ignored.
+Use an @ignore tag on the original if you want this case to be documented.<br>
+<b>Warning on line 165</b> - File "/root/clipit_latest/mod/z02_clipit_api/classes/ClipitExampleType.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="ClipitFile.php"></a>
+<h1>ClipitFile.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 17</b> - no @package tag was used in a DocBlock for class ClipitFile<br>
+<b>Warning on line 21</b> - Unknown tag "@const" used<br>
+<a name="ClipitGroup.php"></a>
+<h1>ClipitGroup.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 17</b> - no @package tag was used in a DocBlock for class ClipitGroup<br>
+<b>Warning on line 21</b> - Unknown tag "@const" used<br>
+<a name="ClipitLA.php"></a>
+<h1>ClipitLA.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 17</b> - no @package tag was used in a DocBlock for class ClipitLA<br>
+<b>Warning on line 21</b> - Unknown tag "@const" used<br>
+<a name="ClipitLabel.php"></a>
+<h1>ClipitLabel.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 17</b> - no @package tag was used in a DocBlock for class ClipitLabel<br>
+<b>Warning on line 21</b> - Unknown tag "@const" used<br>
+<a name="ClipitPerformanceItem.php"></a>
+<h1>ClipitPerformanceItem.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 18</b> - no @package tag was used in a DocBlock for class ClipitPerformanceItem<br>
+<b>Warning on line 22</b> - Unknown tag "@const" used<br>
+<b>Warning on line 83</b> - 
+duplicate class element "ClipitPerformanceItem" in file /root/clipit_latest/mod/z02_clipit_api/classes/ClipitPerformanceItem.php will be ignored.
+Use an @ignore tag on the original if you want this case to be documented.<br>
+<b>Warning on line 83</b> - no @package tag was used in a DocBlock for class ClipitPerformanceItem<br>
+<a name="ClipitPerformanceRating.php"></a>
+<h1>ClipitPerformanceRating.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 17</b> - no @package tag was used in a DocBlock for class ClipitPerformanceRating<br>
+<b>Warning on line 21</b> - Unknown tag "@const" used<br>
+<a name="ClipitPost.php"></a>
+<h1>ClipitPost.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 19</b> - no @package tag was used in a DocBlock for class ClipitPost<br>
+<b>Warning on line 23</b> - Unknown tag "@const" used<br>
+<a name="ClipitQuiz.php"></a>
+<h1>ClipitQuiz.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 18</b> - no @package tag was used in a DocBlock for class ClipitQuiz<br>
+<b>Warning on line 22</b> - Unknown tag "@const" used<br>
+<b>Warning on line 251</b> - no @package tag was used in a DocBlock for class ClipitQuiz<br>
+<b>Warning on line 251</b> - 
+duplicate class element "ClipitQuiz" in file /root/clipit_latest/mod/z02_clipit_api/classes/ClipitQuiz.php will be ignored.
+Use an @ignore tag on the original if you want this case to be documented.<br>
+<a name="ClipitQuizQuestion.php"></a>
+<h1>ClipitQuizQuestion.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 19</b> - no @package tag was used in a DocBlock for class ClipitQuizQuestion<br>
+<b>Warning on line 23</b> - Unknown tag "@const" used<br>
+<a name="ClipitQuizResult.php"></a>
+<h1>ClipitQuizResult.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 17</b> - no @package tag was used in a DocBlock for class ClipitQuizResult<br>
+<b>Warning on line 21</b> - Unknown tag "@const" used<br>
+<a name="ClipitRating.php"></a>
+<h1>ClipitRating.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 18</b> - no @package tag was used in a DocBlock for class ClipitRating<br>
+<b>Warning on line 22</b> - Unknown tag "@const" used<br>
+<a name="ClipitRemoteResource.php"></a>
+<h1>ClipitRemoteResource.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 17</b> - no @package tag was used in a DocBlock for class ClipitRemoteResource<br>
+<a name="ClipitRemoteSite.php"></a>
+<h1>ClipitRemoteSite.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 8</b> - no @package tag was used in a DocBlock for class ClipitRemoteSite<br>
+<b>Warning on line 50</b> - 
+duplicate class element "ClipitRemoteSite" in file /root/clipit_latest/mod/z02_clipit_api/classes/ClipitRemoteSite.php will be ignored.
+Use an @ignore tag on the original if you want this case to be documented.<br>
+<b>Warning on line 50</b> - no @package tag was used in a DocBlock for class ClipitRemoteSite<br>
+<b>Warning on line 51</b> - 
+duplicate class element "ClipitRemoteSite" in file /root/clipit_latest/mod/z02_clipit_api/classes/ClipitRemoteSite.php will be ignored.
+Use an @ignore tag on the original if you want this case to be documented.<br>
+<b>Warning on line 51</b> - no @package tag was used in a DocBlock for class ClipitRemoteSite<br>
+<b>Warning on line 121</b> - File "/root/clipit_latest/mod/z02_clipit_api/classes/ClipitRemoteSite.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="ClipitResource.php"></a>
+<h1>ClipitResource.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 18</b> - no @package tag was used in a DocBlock for class ClipitResource<br>
+<b>Warning on line 22</b> - Unknown tag "@const" used<br>
+<a name="ClipitSite.php"></a>
+<h1>ClipitSite.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 17</b> - no @package tag was used in a DocBlock for class ClipitSite<br>
+<a name="ClipitStoryboard.php"></a>
+<h1>ClipitStoryboard.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 17</b> - no @package tag was used in a DocBlock for class ClipitStoryboard<br>
+<b>Warning on line 21</b> - Unknown tag "@const" used<br>
+<a name="ClipitTag.php"></a>
+<h1>ClipitTag.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 18</b> - no @package tag was used in a DocBlock for class ClipitTag<br>
+<b>Warning on line 22</b> - Unknown tag "@const" used<br>
+<a name="ClipitTagRating.php"></a>
+<h1>ClipitTagRating.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 18</b> - no @package tag was used in a DocBlock for class ClipitTagRating<br>
+<b>Warning on line 22</b> - Unknown tag "@const" used<br>
+<a name="ClipitTask.php"></a>
+<h1>ClipitTask.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 17</b> - no @package tag was used in a DocBlock for class ClipitTask<br>
+<b>Warning on line 21</b> - Unknown tag "@const" used<br>
+<b>Warning on line 284</b> - 
+duplicate class element "ClipitTask" in file /root/clipit_latest/mod/z02_clipit_api/classes/ClipitTask.php will be ignored.
+Use an @ignore tag on the original if you want this case to be documented.<br>
+<b>Warning on line 284</b> - no @package tag was used in a DocBlock for class ClipitTask<br>
+<a name="ClipitTrickyTopic.php"></a>
+<h1>ClipitTrickyTopic.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 17</b> - no @package tag was used in a DocBlock for class ClipitTrickyTopic<br>
+<b>Warning on line 21</b> - Unknown tag "@const" used<br>
+<a name="ClipitUser.php"></a>
+<h1>ClipitUser.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 17</b> - no @package tag was used in a DocBlock for class ClipitUser<br>
+<b>Warning on line 21</b> - Unknown tag "@const" used<br>
+<b>Warning on line 25</b> - Unknown tag "@const" used<br>
+<b>Warning on line 29</b> - Unknown tag "@const" used<br>
+<b>Warning on line 33</b> - Unknown tag "@const" used<br>
+<b>Warning on line 37</b> - Unknown tag "@const" used<br>
+<a name="ClipitVideo.php"></a>
+<h1>ClipitVideo.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 17</b> - no @package tag was used in a DocBlock for class ClipitVideo<br>
+<b>Warning on line 21</b> - Unknown tag "@const" used<br>
+<a name="ConfigurationException.php"></a>
+<h1>ConfigurationException.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 9</b> - DocBlock would be page-level, but precedes class "ConfigurationException", use another DocBlock to document the file<br>
+<a name="CronException.php"></a>
+<h1>CronException.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 9</b> - DocBlock would be page-level, but precedes class "CronException", use another DocBlock to document the file<br>
+<a name="DatabaseException.php"></a>
+<h1>DatabaseException.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 9</b> - DocBlock would be page-level, but precedes class "DatabaseException", use another DocBlock to document the file<br>
+<a name="DataFormatException.php"></a>
+<h1>DataFormatException.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 8</b> - DocBlock would be page-level, but precedes class "DataFormatException", use another DocBlock to document the file<br>
+<a name="ElggAccess.php"></a>
+<h1>ElggAccess.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 11</b> - DocBlock would be page-level, but precedes class "ElggAccess", use another DocBlock to document the file<br>
+<a name="ElggAnnotation.php"></a>
+<h1>ElggAnnotation.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 17</b> - DocBlock would be page-level, but precedes class "ElggAnnotation", use another DocBlock to document the file<br>
+<a name="ElggAttributeLoader.php"></a>
+<h1>ElggAttributeLoader.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 10</b> - DocBlock would be page-level, but precedes class "ElggAttributeLoader", use another DocBlock to document the file<br>
+<a name="ElggAutoP.php"></a>
+<h1>ElggAutoP.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 13</b> - DocBlock would be page-level, but precedes class "ElggAutoP", use another DocBlock to document the file<br>
+<a name="ElggBatch.php"></a>
+<h1>ElggBatch.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 57</b> - Unknown tag "@warning" used<br>
+<b>Warning on line 57</b> - example file "<code>
+ // using foreach
+ $batch = new ElggBatch('elgg_get_entities', array());
+ $batch->setIncrementOffset(false);
+
+ foreach ($batch as $entity) {
+     $entity->disable();
+ }
+
+ // using both a callback
+ $callback = function($result, $getter, $options) {
+     var_dump("Looking at annotation id: $result->id");
+  return true;
+ }
+
+ $batch = new ElggBatch('elgg_get_annotations', array('guid' => 2), $callback);
+ </code>" does not exist<br>
+<b>Warning on line 58</b> - DocBlock would be page-level, but precedes class "ElggBatch", use another DocBlock to document the file<br>
+<a name="ElggCache.php"></a>
+<h1>ElggCache.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 8</b> - DocBlock would be page-level, but precedes class "ElggCache", use another DocBlock to document the file<br>
+<a name="ElggData.php"></a>
+<h1>ElggData.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 16</b> - DocBlock would be page-level, but precedes class "ElggData", use another DocBlock to document the file<br>
+<b>Warning on line 97</b> - Unknown tag "@tip" used<br>
+<a name="ElggDiskFilestore.php"></a>
+<h1>ElggDiskFilestore.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 11</b> - Unknown tag "@warning" used<br>
+<b>Warning on line 11</b> - DocBlock would be page-level, but precedes class "ElggDiskFilestore", use another DocBlock to document the file<br>
+<b>Warning on line 51</b> - Unknown tag "@note" used<br>
+<b>Warning on line 51</b> - Unknown tag "@warning" used<br>
+<a name="ElggEntity.php"></a>
+<h1>ElggEntity.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 38</b> - Unknown tag "@tip" used<br>
+<b>Warning on line 42</b> - DocBlock would be page-level, but precedes class "ElggEntity", use another DocBlock to document the file<br>
+<b>Warning on line 134</b> - Unknown tag "@note" used<br>
+<b>Warning on line 187</b> - Unknown tag "@warning" used<br>
+<b>Warning on line 223</b> - Unknown tag "@warning" used<br>
+<b>Warning on line 223</b> - Unknown tag "@warning" used<br>
+<b>Warning on line 309</b> - Unknown tag "@warning" used<br>
+<b>Warning on line 334</b> - Unknown tag "@warning" used<br>
+<b>Warning on line 403</b> - Unknown tag "@warning" used<br>
+<b>Warning on line 454</b> - Unknown tag "@warning" used<br>
+<b>Warning on line 487</b> - Unknown tag "@warning" used<br>
+<b>Warning on line 573</b> - Unknown tag "@tip" used<br>
+<b>Warning on line 650</b> - Unknown tag "@warning" used<br>
+<b>Warning on line 715</b> - Unknown tag "@warning" used<br>
+<b>Warning on line 760</b> - Unknown tag "@warning" used<br>
+<b>Warning on line 760</b> - Unknown tag "@warning" used<br>
+<b>Warning on line 811</b> - Unknown tag "@warning" used<br>
+<b>Warning on line 971</b> - Unknown tag "@tip" used<br>
+<b>Warning on line 997</b> - Unknown tag "@tip" used<br>
+<b>Warning on line 997</b> - Unknown tag "@tip" used<br>
+<b>Warning on line 1050</b> - Unknown tag "@note" used<br>
+<b>Warning on line 1178</b> - Unknown tag "@warning" used<br>
+<b>Warning on line 1240</b> - Unknown tag "@warning" used<br>
+<b>Warning on line 1417</b> - Unknown tag "@warning" used<br>
+<b>Warning on line 1743</b> - Unknown tag "@warning" used<br>
+<a name="ElggExtender.php"></a>
+<h1>ElggExtender.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 26</b> - DocBlock would be page-level, but precedes class "ElggExtender", use another DocBlock to document the file<br>
+<b>Warning on line 26</b> - Unknown tag "@tip" used<br>
+<a name="ElggFile.php"></a>
+<h1>ElggFile.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 22</b> - DocBlock would be page-level, but precedes class "ElggFile", use another DocBlock to document the file<br>
+<b>Warning on line 22</b> - Unknown tag "@class" used<br>
+<b>Warning on line 134</b> - Unknown tag "@note" used<br>
+<a name="ElggFileCache.php"></a>
+<h1>ElggFileCache.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 8</b> - DocBlock would be page-level, but precedes class "ElggFileCache", use another DocBlock to document the file<br>
+<a name="ElggFilestore.php"></a>
+<h1>ElggFilestore.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 8</b> - Unknown tag "@class" used<br>
+<b>Warning on line 8</b> - DocBlock would be page-level, but precedes class "ElggFilestore", use another DocBlock to document the file<br>
+<a name="ElggGroup.php"></a>
+<h1>ElggGroup.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 12</b> - DocBlock would be page-level, but precedes class "ElggGroup", use another DocBlock to document the file<br>
+<a name="ElggGroupItemVisibility.php"></a>
+<h1>ElggGroupItemVisibility.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 12</b> - Unknown tag "@class" used<br>
+<b>Warning on line 12</b> - DocBlock would be page-level, but precedes class "ElggGroupItemVisibility", use another DocBlock to document the file<br>
+<a name="ElggHMACCache.php"></a>
+<h1>ElggHMACCache.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 8</b> - DocBlock would be page-level, but precedes class "ElggHMACCache", use another DocBlock to document the file<br>
+<a name="ElggLRUCache.php"></a>
+<h1>ElggLRUCache.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 15</b> - DocBlock would be page-level, but precedes class "ElggLRUCache", use another DocBlock to document the file<br>
+<a name="ElggMemcache.php"></a>
+<h1>ElggMemcache.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 7</b> - DocBlock would be page-level, but precedes class "ElggMemcache", use another DocBlock to document the file<br>
+<a name="ElggMenuBuilder.php"></a>
+<h1>ElggMenuBuilder.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 8</b> - DocBlock would be page-level, but precedes class "ElggMenuBuilder", use another DocBlock to document the file<br>
+<a name="ElggMenuItem.php"></a>
+<h1>ElggMenuItem.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 10</b> - DocBlock would be page-level, but precedes class "ElggMenuItem", use another DocBlock to document the file<br>
+<a name="ElggMetadata.php"></a>
+<h1>ElggMetadata.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 13</b> - DocBlock would be page-level, but precedes class "ElggMetadata", use another DocBlock to document the file<br>
+<a name="ElggObject.php"></a>
+<h1>ElggObject.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 21</b> - DocBlock would be page-level, but precedes class "ElggObject", use another DocBlock to document the file<br>
+<a name="ElggPAM.php"></a>
+<h1>ElggPAM.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 7</b> - DocBlock would be page-level, but precedes class "ElggPAM", use another DocBlock to document the file<br>
+<a name="ElggPlugin.php"></a>
+<h1>ElggPlugin.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 10</b> - DocBlock would be page-level, but precedes class "ElggPlugin", use another DocBlock to document the file<br>
+<b>Warning on line 42</b> - Unknown tag "@warning" used<br>
+<b>Warning on line 283</b> - Unknown tag "@note" used<br>
+<b>Warning on line 397</b> - Unknown tag "@note" used<br>
+<a name="ElggPluginManifest.php"></a>
+<h1>ElggPluginManifest.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 17</b> - DocBlock would be page-level, but precedes class "ElggPluginManifest", use another DocBlock to document the file<br>
+<a name="ElggPluginManifestParser.php"></a>
+<h1>ElggPluginManifestParser.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 23</b> - DocBlock would be page-level, but precedes class "ElggPluginManifestParser", use another DocBlock to document the file<br>
+<a name="ElggPluginManifestParser17.php"></a>
+<h1>ElggPluginManifestParser17.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 8</b> - DocBlock would be page-level, but precedes class "ElggPluginManifestParser17", use another DocBlock to document the file<br>
+<a name="ElggPluginManifestParser18.php"></a>
+<h1>ElggPluginManifestParser18.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 8</b> - DocBlock would be page-level, but precedes class "ElggPluginManifestParser18", use another DocBlock to document the file<br>
+<a name="ElggPluginPackage.php"></a>
+<h1>ElggPluginPackage.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 18</b> - DocBlock would be page-level, but precedes class "ElggPluginPackage", use another DocBlock to document the file<br>
+<b>Warning on line 162</b> - Unknown tag "@note" used<br>
+<b>Warning on line 208</b> - Unknown tag "@note" used<br>
+<a name="ElggPriorityList.php"></a>
+<h1>ElggPriorityList.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 95</b> - DocBlock would be page-level, but precedes class "ElggPriorityList", use another DocBlock to document the file<br>
+<b>Warning on line 132</b> - Unknown tag "@warning" used<br>
+<b>Warning on line 154</b> - Unknown tag "@warning" used<br>
+<b>Warning on line 266</b> - Unknown tag "@warning" used<br>
+<a name="ElggRelationship.php"></a>
+<h1>ElggRelationship.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 15</b> - DocBlock would be page-level, but precedes class "ElggRelationship", use another DocBlock to document the file<br>
+<a name="ElggRiverItem.php"></a>
+<h1>ElggRiverItem.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 18</b> - DocBlock would be page-level, but precedes class "ElggRiverItem", use another DocBlock to document the file<br>
+<a name="ElggSession.php"></a>
+<h1>ElggSession.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 21</b> - DocBlock would be page-level, but precedes class "ElggSession", use another DocBlock to document the file<br>
+<a name="ElggSharedMemoryCache.php"></a>
+<h1>ElggSharedMemoryCache.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 9</b> - DocBlock would be page-level, but precedes class "ElggSharedMemoryCache", use another DocBlock to document the file<br>
+<a name="ElggSite.php"></a>
+<h1>ElggSite.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 28</b> - Unknown tag "@warning" used<br>
+<b>Warning on line 28</b> - DocBlock would be page-level, but precedes class "ElggSite", use another DocBlock to document the file<br>
+<b>Warning on line 166</b> - Unknown tag "@note" used<br>
+<b>Warning on line 186</b> - Unknown tag "@note" used<br>
+<b>Warning on line 289</b> - Unknown tag "@warning" used<br>
+<a name="ElggStaticVariableCache.php"></a>
+<h1>ElggStaticVariableCache.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 9</b> - DocBlock would be page-level, but precedes class "ElggStaticVariableCache", use another DocBlock to document the file<br>
+<b>Warning on line 26</b> - Unknown tag "@warning" used<br>
+<a name="ElggTranslit.php"></a>
+<h1>ElggTranslit.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 29</b> - DocBlock would be page-level, but precedes class "ElggTranslit", use another DocBlock to document the file<br>
+<h2>Errors:</h2><br>
+<b>Error on line 29</b> - @access was passed neither "public" nor "private."  Was passed: "private plugin authors should not use this directly"<br>
+<a name="ElggUser.php"></a>
+<h1>ElggUser.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 19</b> - DocBlock would be page-level, but precedes class "ElggUser", use another DocBlock to document the file<br>
+<a name="ElggVolatileMetadataCache.php"></a>
+<h1>ElggVolatileMetadataCache.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 10</b> - DocBlock would be page-level, but precedes class "ElggVolatileMetadataCache", use another DocBlock to document the file<br>
+<a name="ElggWidget.php"></a>
+<h1>ElggWidget.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 15</b> - DocBlock would be page-level, but precedes class "ElggWidget", use another DocBlock to document the file<br>
+<b>Warning on line 210</b> - Unknown tag "@warning" used<br>
+<a name="ElggXMLElement.php"></a>
+<h1>ElggXMLElement.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 7</b> - DocBlock would be page-level, but precedes class "ElggXMLElement", use another DocBlock to document the file<br>
+<a name="ErrorResult.php"></a>
+<h1>ErrorResult.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 8</b> - DocBlock would be page-level, but precedes class "ErrorResult", use another DocBlock to document the file<br>
+<a name="Exportable.php"></a>
+<h1>Exportable.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 7</b> - DocBlock would be page-level, but precedes class "Exportable", use another DocBlock to document the file<br>
+<a name="ExportException.php"></a>
+<h1>ExportException.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 8</b> - DocBlock would be page-level, but precedes class "ExportException", use another DocBlock to document the file<br>
+<a name="Friendable.php"></a>
+<h1>Friendable.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 7</b> - DocBlock would be page-level, but precedes class "Friendable", use another DocBlock to document the file<br>
+<a name="GenericResult.php"></a>
+<h1>GenericResult.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 7</b> - DocBlock would be page-level, but precedes class "GenericResult", use another DocBlock to document the file<br>
+<a name="Importable.php"></a>
+<h1>Importable.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 7</b> - DocBlock would be page-level, but precedes class "Importable", use another DocBlock to document the file<br>
+<a name="ImportException.php"></a>
+<h1>ImportException.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 7</b> - DocBlock would be page-level, but precedes class "ImportException", use another DocBlock to document the file<br>
+<a name="IncompleteEntityException.php"></a>
+<h1>IncompleteEntityException.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 9</b> - DocBlock would be page-level, but precedes class "IncompleteEntityException", use another DocBlock to document the file<br>
+<a name="InstallationException.php"></a>
+<h1>InstallationException.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 8</b> - DocBlock would be page-level, but precedes class "InstallationException", use another DocBlock to document the file<br>
+<a name="InvalidClassException.php"></a>
+<h1>InvalidClassException.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 8</b> - DocBlock would be page-level, but precedes class "InvalidClassException", use another DocBlock to document the file<br>
+<a name="InvalidParameterException.php"></a>
+<h1>InvalidParameterException.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 8</b> - DocBlock would be page-level, but precedes class "InvalidParameterException", use another DocBlock to document the file<br>
+<a name="IOException.php"></a>
+<h1>IOException.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 8</b> - DocBlock would be page-level, but precedes class "IOException", use another DocBlock to document the file<br>
+<a name="Locatable.php"></a>
+<h1>Locatable.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 8</b> - DocBlock would be page-level, but precedes class "Locatable", use another DocBlock to document the file<br>
+<a name="Loggable.php"></a>
+<h1>Loggable.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 14</b> - DocBlock would be page-level, but precedes class "Loggable", use another DocBlock to document the file<br>
+<a name="LoginException.php"></a>
+<h1>LoginException.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 9</b> - DocBlock would be page-level, but precedes class "LoginException", use another DocBlock to document the file<br>
+<a name="Notable.php"></a>
+<h1>Notable.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 9</b> - DocBlock would be page-level, but precedes class "Notable", use another DocBlock to document the file<br>
+<a name="NotificationException.php"></a>
+<h1>NotificationException.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 7</b> - DocBlock would be page-level, but precedes class "NotificationException", use another DocBlock to document the file<br>
+<a name="NotImplementedException.php"></a>
+<h1>NotImplementedException.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 9</b> - DocBlock would be page-level, but precedes class "NotImplementedException", use another DocBlock to document the file<br>
+<a name="ODD.php"></a>
+<h1>ODD.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 7</b> - DocBlock would be page-level, but precedes class "ODD", use another DocBlock to document the file<br>
+<a name="ODDDocument.php"></a>
+<h1>ODDDocument.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 7</b> - DocBlock would be page-level, but precedes class "ODDDocument", use another DocBlock to document the file<br>
+<a name="ODDEntity.php"></a>
+<h1>ODDEntity.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 8</b> - DocBlock would be page-level, but precedes class "ODDEntity", use another DocBlock to document the file<br>
+<a name="ODDMetaData.php"></a>
+<h1>ODDMetaData.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 7</b> - DocBlock would be page-level, but precedes class "ODDMetaData", use another DocBlock to document the file<br>
+<a name="ODDRelationship.php"></a>
+<h1>ODDRelationship.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 7</b> - DocBlock would be page-level, but precedes class "ODDRelationship", use another DocBlock to document the file<br>
+<a name="PluginException.php"></a>
+<h1>PluginException.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 10</b> - DocBlock would be page-level, but precedes class "PluginException", use another DocBlock to document the file<br>
+<a name="RegistrationException.php"></a>
+<h1>RegistrationException.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 8</b> - DocBlock would be page-level, but precedes class "RegistrationException", use another DocBlock to document the file<br>
+<a name="SecurityException.php"></a>
+<h1>SecurityException.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 9</b> - DocBlock would be page-level, but precedes class "SecurityException", use another DocBlock to document the file<br>
+<a name="SuccessResult.php"></a>
+<h1>SuccessResult.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 8</b> - DocBlock would be page-level, but precedes class "SuccessResult", use another DocBlock to document the file<br>
+<a name="UBCollection.php"></a>
+<h1>UBCollection.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 17</b> - no @package tag was used in a DocBlock for class UBCollection<br>
+<a name="UBEvent.php"></a>
+<h1>UBEvent.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 17</b> - no @package tag was used in a DocBlock for class UBEvent<br>
+<a name="UBFile.php"></a>
+<h1>UBFile.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 17</b> - no @package tag was used in a DocBlock for class UBFile<br>
+<b>Warning on line 21</b> - Unknown tag "@const" used<br>
+<a name="UBItem.php"></a>
+<h1>UBItem.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 17</b> - no @package tag was used in a DocBlock for class UBItem<br>
+<b>Warning on line 21</b> - Unknown tag "@const" used<br>
+<b>Warning on line 25</b> - Unknown tag "@const" used<br>
+<b>Warning on line 29</b> - Unknown tag "@const" used<br>
+<a name="UBMessage.php"></a>
+<h1>UBMessage.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 17</b> - no @package tag was used in a DocBlock for class UBMessage<br>
+<b>Warning on line 21</b> - Unknown tag "@const" used<br>
+<a name="UBSite.php"></a>
+<h1>UBSite.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 17</b> - no @package tag was used in a DocBlock for class UBSite<br>
+<b>Warning on line 21</b> - Unknown tag "@const" used<br>
+<a name="UBUser.php"></a>
+<h1>UBUser.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 17</b> - no @package tag was used in a DocBlock for class UBUser<br>
+<b>Warning on line 21</b> - Unknown tag "@const" used<br>
+<b>Warning on line 25</b> - Unknown tag "@const" used<br>
+<b>Warning on line 150</b> - 
+duplicate class element "UBUser" in file /root/clipit_latest/mod/z01_urjc_backend/classes/UBUser.php will be ignored.
+Use an @ignore tag on the original if you want this case to be documented.<br>
+<b>Warning on line 150</b> - no @package tag was used in a DocBlock for class UBUser<br>
+<b>Warning on line 151</b> - no @package tag was used in a DocBlock for class UBUser<br>
+<b>Warning on line 151</b> - 
+duplicate class element "UBUser" in file /root/clipit_latest/mod/z01_urjc_backend/classes/UBUser.php will be ignored.
+Use an @ignore tag on the original if you want this case to be documented.<br>
+<h2>Errors:</h2><br>
+<b>Error on line 36</b> - DocBlock has multiple @var tags, illegal. ignoring additional tag "@var int Timestamp from last login"<br>
+<b>Error on line 36</b> - DocBlock has multiple @var tags, illegal. ignoring additional tag "@var int Id of file containing Avatar"<br>
+<b>Error on line 36</b> - DocBlock has multiple @var tags, illegal. ignoring additional tag "@var string User interface language"<br>
+<b>Error on line 36</b> - DocBlock has multiple @var tags, illegal. ignoring additional tag "@var string User email"<br>
+<b>Error on line 36</b> - DocBlock has multiple @var tags, illegal. ignoring additional tag "@var string Login password (md5 of password + password_hash)"<br>
+<b>Error on line 36</b> - DocBlock has multiple @var tags, illegal. ignoring additional tag "@var string Random string to encode password"<br>
+<b>Error on line 36</b> - DocBlock has multiple @var tags, illegal. ignoring additional tag "@var string User role (default: "user")"<br>
+<a name="XmlElement.php"></a>
+<h1>XmlElement.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 7</b> - DocBlock would be page-level, but precedes class "XmlElement", use another DocBlock to document the file<br>
+<a name="XMLRPCArrayParameter.php"></a>
+<h1>XMLRPCArrayParameter.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 10</b> - DocBlock would be page-level, but precedes class "XMLRPCArrayParameter", use another DocBlock to document the file<br>
+<a name="XMLRPCBase64Parameter.php"></a>
+<h1>XMLRPCBase64Parameter.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 7</b> - DocBlock would be page-level, but precedes class "XMLRPCBase64Parameter", use another DocBlock to document the file<br>
+<a name="XMLRPCBoolParameter.php"></a>
+<h1>XMLRPCBoolParameter.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 7</b> - DocBlock would be page-level, but precedes class "XMLRPCBoolParameter", use another DocBlock to document the file<br>
+<a name="XMLRPCCall.php"></a>
+<h1>XMLRPCCall.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 7</b> - DocBlock would be page-level, but precedes class "XMLRPCCall", use another DocBlock to document the file<br>
+<a name="XMLRPCDateParameter.php"></a>
+<h1>XMLRPCDateParameter.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 7</b> - DocBlock would be page-level, but precedes class "XMLRPCDateParameter", use another DocBlock to document the file<br>
+<a name="XMLRPCDoubleParameter.php"></a>
+<h1>XMLRPCDoubleParameter.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 7</b> - DocBlock would be page-level, but precedes class "XMLRPCDoubleParameter", use another DocBlock to document the file<br>
+<a name="XMLRPCErrorResponse.php"></a>
+<h1>XMLRPCErrorResponse.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 8</b> - DocBlock would be page-level, but precedes class "XMLRPCErrorResponse", use another DocBlock to document the file<br>
+<a name="XMLRPCIntParameter.php"></a>
+<h1>XMLRPCIntParameter.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 7</b> - DocBlock would be page-level, but precedes class "XMLRPCIntParameter", use another DocBlock to document the file<br>
+<a name="XMLRPCParameter.php"></a>
+<h1>XMLRPCParameter.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 7</b> - DocBlock would be page-level, but precedes class "XMLRPCParameter", use another DocBlock to document the file<br>
+<a name="XMLRPCResponse.php"></a>
+<h1>XMLRPCResponse.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 8</b> - DocBlock would be page-level, but precedes class "XMLRPCResponse", use another DocBlock to document the file<br>
+<a name="XMLRPCStringParameter.php"></a>
+<h1>XMLRPCStringParameter.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 7</b> - DocBlock would be page-level, but precedes class "XMLRPCStringParameter", use another DocBlock to document the file<br>
+<a name="XMLRPCStructParameter.php"></a>
+<h1>XMLRPCStructParameter.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 8</b> - DocBlock would be page-level, but precedes class "XMLRPCStructParameter", use another DocBlock to document the file<br>
+<a name="XMLRPCSuccessResponse.php"></a>
+<h1>XMLRPCSuccessResponse.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 7</b> - DocBlock would be page-level, but precedes class "XMLRPCSuccessResponse", use another DocBlock to document the file<br>
+	<p class="notes" id="credit">
+		Documentation generated on Tue, 14 Apr 2015 13:59:32 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
+	</p>
+	</body>
+</html>

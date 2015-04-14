@@ -1,0 +1,1511 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class ClipitTask</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class ClipitTask</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+											<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+						
+			</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">&lt;Class Description&gt;</p>
+		<p class="notes">
+			Located in <a class="field" href="_mod---z02_clipit_api---classes---ClipitTask.php.html">/mod/z02_clipit_api/classes/ClipitTask.php</a> (line <span class="field">18</span>)
+		</p>
+		
+				
+		<pre><a href="../../ClipIt/urjc_backend/UBItem.html">UBItem</a>
+   |
+   --ClipitTask</pre>
+	
+			</div>
+</div>
+
+
+	<a name="sec-const-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constant Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Constants</span> (<a href="#sec-consts">details</a>)
+												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="const-summary">
+								<div class="const-title">
+					<a href="#REL_TASK_FILE" title="details" class="const-name">REL_TASK_FILE</a> = 					<span class="var-type"> &quot;ClipitTask-ClipitFile&quot;</span>
+
+				</div>
+								<div class="const-title">
+					<a href="#REL_TASK_QUIZ" title="details" class="const-name">REL_TASK_QUIZ</a> = 					<span class="var-type"> &quot;ClipitTask-ClipitQuiz&quot;</span>
+
+				</div>
+								<div class="const-title">
+					<a href="#REL_TASK_STORYBOARD" title="details" class="const-name">REL_TASK_STORYBOARD</a> = 					<span class="var-type"> &quot;ClipitTask-ClipitStoryboard&quot;</span>
+
+				</div>
+								<div class="const-title">
+					<a href="#REL_TASK_VIDEO" title="details" class="const-name">REL_TASK_VIDEO</a> = 					<span class="var-type"> &quot;ClipitTask-ClipitVideo&quot;</span>
+
+				</div>
+								<div class="const-title">
+					<a href="#STATUS_ACTIVE" title="details" class="const-name">STATUS_ACTIVE</a> = 					<span class="var-type"> &quot;active&quot;</span>
+
+				</div>
+								<div class="const-title">
+					<a href="#STATUS_FINISHED" title="details" class="const-name">STATUS_FINISHED</a> = 					<span class="var-type"> &quot;finished&quot;</span>
+
+				</div>
+								<div class="const-title">
+					<a href="#STATUS_LOCKED" title="details" class="const-name">STATUS_LOCKED</a> = 					<span class="var-type"> &quot;locked&quot;</span>
+
+				</div>
+								<div class="const-title">
+					<a href="#SUBTYPE" title="details" class="const-name">SUBTYPE</a> = 					<span class="var-type"> &quot;ClipitTask&quot;</span>
+
+				</div>
+								<div class="const-title">
+					<a href="#TYPE_OTHER" title="details" class="const-name">TYPE_OTHER</a> = 					<span class="var-type"> &quot;other&quot;</span>
+
+				</div>
+								<div class="const-title">
+					<a href="#TYPE_QUIZ_TAKE" title="details" class="const-name">TYPE_QUIZ_TAKE</a> = 					<span class="var-type"> &quot;quiz_take&quot;</span>
+
+				</div>
+								<div class="const-title">
+					<a href="#TYPE_RESOURCE_DOWNLOAD" title="details" class="const-name">TYPE_RESOURCE_DOWNLOAD</a> = 					<span class="var-type"> &quot;resource_download&quot;</span>
+
+				</div>
+								<div class="const-title">
+					<a href="#TYPE_STORYBOARD_FEEDBACK" title="details" class="const-name">TYPE_STORYBOARD_FEEDBACK</a> = 					<span class="var-type"> &quot;storyboard_feedback&quot;</span>
+
+				</div>
+								<div class="const-title">
+					<a href="#TYPE_STORYBOARD_UPLOAD" title="details" class="const-name">TYPE_STORYBOARD_UPLOAD</a> = 					<span class="var-type"> &quot;storyboard_upload&quot;</span>
+
+				</div>
+								<div class="const-title">
+					<a href="#TYPE_VIDEO_FEEDBACK" title="details" class="const-name">TYPE_VIDEO_FEEDBACK</a> = 					<span class="var-type"> &quot;video_feedback&quot;</span>
+
+				</div>
+								<div class="const-title">
+					<a href="#TYPE_VIDEO_UPLOAD" title="details" class="const-name">TYPE_VIDEO_UPLOAD</a> = 					<span class="var-type"> &quot;video_upload&quot;</span>
+
+				</div>
+							</div>
+		</div>
+	</div>
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																																																																																								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$activity" title="details" class="var-name">$activity</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$end" title="details" class="var-name">$end</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$file_array" title="details" class="var-name">$file_array</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$parent_task" title="details" class="var-name">$parent_task</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$quiz" title="details" class="var-name">$quiz</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$start" title="details" class="var-name">$start</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$status" title="details" class="var-name">$status</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$storyboard_array" title="details" class="var-name">$storyboard_array</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$task_count" title="details" class="var-name">$task_count</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$task_type" title="details" class="var-name">$task_type</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$video_array" title="details" class="var-name">$video_array</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+												<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#add_files" title="details" class="method-name">add_files</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$file_array</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#add_storyboards" title="details" class="method-name">add_storyboards</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$storyboard_array</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#add_videos" title="details" class="method-name">add_videos</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$video_array</span>)
+									</div>
+																																<div class="method-definition">
+					static 						<span class="method-result">int</span>
+										<a href="#get_activity" title="details" class="method-name">get_activity</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">int</span>
+										<a href="#get_child" title="details" class="method-name">get_child</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#get_completed_status" title="details" class="method-name">get_completed_status</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$entity_id</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#get_files" title="details" class="method-name">get_files</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#get_quiz" title="details" class="method-name">get_quiz</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">string</span>
+										<a href="#get_status" title="details" class="method-name">get_status</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#get_storyboards" title="details" class="method-name">get_storyboards</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#get_videos" title="details" class="method-name">get_videos</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#remove_files" title="details" class="method-name">remove_files</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$file_array</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#remove_storyboards" title="details" class="method-name">remove_storyboards</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$storyboard_array</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#remove_videos" title="details" class="method-name">remove_videos</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$video_array</span>)
+									</div>
+																								<div class="method-definition">
+					static 						<span class="method-result">bool</span>
+										<a href="#set_activity" title="details" class="method-name">set_activity</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$activity_id</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#set_files" title="details" class="method-name">set_files</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$file_array</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#set_quiz" title="details" class="method-name">set_quiz</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$quiz_id</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#set_storyboards" title="details" class="method-name">set_storyboards</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$storyboard_array</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#set_videos" title="details" class="method-name">set_videos</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$video_array</span>)
+									</div>
+								
+																																				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#copy_from_elgg" title="details" class="method-name">copy_from_elgg</a>
+											(<span class="var-type"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html">ElggEntity</a></span>&nbsp;<span class="var-name">$elgg_entity</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#copy_to_elgg" title="details" class="method-name">copy_to_elgg</a>
+											(<span class="var-type"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html">ElggEntity</a></span>&nbsp;<span class="var-name">$elgg_entity</span>)
+									</div>
+																																																																																																								<div class="method-definition">
+											<span class="method-result">bool|int</span>
+										<a href="#save" title="details" class="method-name">save</a>
+											([<span class="var-type">bool</span>&nbsp;<span class="var-name">$double_save</span> = <span class="var-default">false</span>])
+									</div>
+																																																</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$activity" id="$activity"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$activity</span>
+			 = <span class="var-default"> 0</span>			(line <span class="line-number">47</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$end" id="$end"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$end</span>
+			 = <span class="var-default"> 0</span>			(line <span class="line-number">43</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$file_array" id="$file_array"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$file_array</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number">51</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$parent_task" id="$parent_task"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$parent_task</span>
+			 = <span class="var-default"> 0</span>			(line <span class="line-number">45</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$quiz" id="$quiz"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$quiz</span>
+			 = <span class="var-default"> 0</span>			(line <span class="line-number">48</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$start" id="$start"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$start</span>
+			 = <span class="var-default"> 0</span>			(line <span class="line-number">42</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$status" id="$status"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$status</span>
+			 = <span class="var-default"> &quot;&quot;</span>			(line <span class="line-number">44</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$storyboard_array" id="$storyboard_array"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$storyboard_array</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number">49</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$task_count" id="$task_count"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$task_count</span>
+			 = <span class="var-default"> 0</span>			(line <span class="line-number">46</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$task_type" id="$task_type"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$task_type</span>
+			 = <span class="var-default"> &quot;&quot;</span>			(line <span class="line-number">41</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$video_array" id="$video_array"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$video_array</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number">50</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+							<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../../ClipIt/urjc_backend/UBItem.html">UBItem</a></span></p>
+					<blockquote>
+													<span class="var-title">
+								<span class="var-name"><a href="../../ClipIt/urjc_backend/UBItem.html#var$cloned_from">UBItem::$cloned_from</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../ClipIt/urjc_backend/UBItem.html#var$clone_array">UBItem::$clone_array</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../ClipIt/urjc_backend/UBItem.html#var$description">UBItem::$description</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../ClipIt/urjc_backend/UBItem.html#var$id">UBItem::$id</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../ClipIt/urjc_backend/UBItem.html#var$name">UBItem::$name</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../ClipIt/urjc_backend/UBItem.html#var$owner_id">UBItem::$owner_id</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../ClipIt/urjc_backend/UBItem.html#var$time_created">UBItem::$time_created</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../ClipIt/urjc_backend/UBItem.html#var$url">UBItem::$url</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																			<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+										<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodadd_files" id="add_files"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method add_files</span> (line <span class="line-number">202</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			add_files
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$file_array</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$id</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$file_array</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodadd_storyboards" id="add_storyboards"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method add_storyboards</span> (line <span class="line-number">168</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			add_storyboards
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$storyboard_array</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$id</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$storyboard_array</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodadd_videos" id="add_videos"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method add_videos</span> (line <span class="line-number">185</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			add_videos
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$video_array</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$id</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$video_array</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_activity" id="get_activity"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method get_activity</span> (line <span class="line-number">137</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the Activity in which a Task is contained.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Returns an the Activity Id for the Task.</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">int</span>
+		<span class="method-name">
+			get_activity
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$id</span><span class="var-description">: Id of the Task.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_child" id="get_child"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method get_child</span> (line <span class="line-number">224</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the Child Task (if any)</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> ID of Child Task</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">int</span>
+		<span class="method-name">
+			get_child
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$id</span><span class="var-description">: ID of Task</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_completed_status" id="get_completed_status"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method get_completed_status</span> (line <span class="line-number">247</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			get_completed_status
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$entity_id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$id</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$entity_id</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_files" id="get_files"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method get_files</span> (line <span class="line-number">214</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			get_files
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$id</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_quiz" id="get_quiz"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method get_quiz</span> (line <span class="line-number">159</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			get_quiz
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$id</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_status" id="get_status"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method get_status</span> (line <span class="line-number">241</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the Status for a Task</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Status</li>
+				<li><span class="field">throws:</span> InvalidParameterException</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">string</span>
+		<span class="method-name">
+			get_status
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$id</span><span class="var-description">: ID of Task</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_storyboards" id="get_storyboards"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method get_storyboards</span> (line <span class="line-number">180</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			get_storyboards
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$id</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_videos" id="get_videos"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method get_videos</span> (line <span class="line-number">197</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			get_videos
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$id</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodremove_files" id="remove_files"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method remove_files</span> (line <span class="line-number">210</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			remove_files
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$file_array</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$id</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$file_array</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodremove_storyboards" id="remove_storyboards"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method remove_storyboards</span> (line <span class="line-number">176</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			remove_storyboards
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$storyboard_array</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$id</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$storyboard_array</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodremove_videos" id="remove_videos"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method remove_videos</span> (line <span class="line-number">193</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			remove_videos
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$video_array</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$id</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$video_array</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_activity" id="set_activity"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method set_activity</span> (line <span class="line-number">150</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the Activity in which a Task is contained.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Returns true if OK, or false if error.</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			set_activity
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">int</span>&nbsp;<span class="var-name">$activity_id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$id</span><span class="var-description">: Id of the Task.</span>			</li>
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$activity_id</span><span class="var-description">: ID of the Activity.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_files" id="set_files"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method set_files</span> (line <span class="line-number">206</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			set_files
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$file_array</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$id</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$file_array</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_quiz" id="set_quiz"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method set_quiz</span> (line <span class="line-number">155</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			set_quiz
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$quiz_id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$id</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$quiz_id</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_storyboards" id="set_storyboards"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method set_storyboards</span> (line <span class="line-number">172</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			set_storyboards
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$storyboard_array</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$id</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$storyboard_array</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_videos" id="set_videos"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method set_videos</span> (line <span class="line-number">189</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			set_videos
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$video_array</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$id</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$video_array</span>			</li>
+				</ul>
+		
+			
+	</div>
+
+<a name="methodcopy_from_elgg" id="copy_from_elgg"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">copy_from_elgg</span> (line <span class="line-number">58</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Loads object parameters stored in Elgg</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			copy_from_elgg
+		</span>
+					(<span class="var-type"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html">ElggEntity</a></span>&nbsp;<span class="var-name">$elgg_entity</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html">ElggEntity</a></span>
+				<span class="var-name">$elgg_entity</span><span class="var-description">: Elgg Object to load parameters from.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodcopy_to_elgg" id="copy_to_elgg"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">copy_to_elgg</span> (line <span class="line-number">85</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Copy $this object parameters into an Elgg entity.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			copy_to_elgg
+		</span>
+					(<span class="var-type"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html">ElggEntity</a></span>&nbsp;<span class="var-name">$elgg_entity</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html">ElggEntity</a></span>
+				<span class="var-name">$elgg_entity</span><span class="var-description">: Elgg object instance to save $this to</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsave" id="save"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">save</span> (line <span class="line-number">99</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Saves this instance to the system.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Returns the Id of the saved instance, or false if error</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool|int</span>
+		<span class="method-name">
+			save
+		</span>
+					([<span class="var-type">bool</span>&nbsp;<span class="var-name">$double_save</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">bool</span>
+				<span class="var-name">$double_save</span><span class="var-description">: if $double_save is true, this object is saved twice to ensure that all properties are updated properly. E.g. the time created property can only beset on ElggObjects during an update. Defaults to false!</span>			</li>
+				</ul>
+		
+			
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../../ClipIt/urjc_backend/UBItem.html">UBItem</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../../ClipIt/urjc_backend/UBItem.html#method__construct">UBItem::__construct()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+	<a name="sec-consts"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constants</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+														| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="constREL_TASK_FILE" id="REL_TASK_FILE"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<span class="const-title">
+			<span class="const-name">REL_TASK_FILE</span>
+			 = <span class="const-default"> &quot;ClipitTask-ClipitFile&quot;</span>
+			(line <span class="line-number">34</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constREL_TASK_QUIZ" id="REL_TASK_QUIZ"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<span class="const-title">
+			<span class="const-name">REL_TASK_QUIZ</span>
+			 = <span class="const-default"> &quot;ClipitTask-ClipitQuiz&quot;</span>
+			(line <span class="line-number">35</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constREL_TASK_STORYBOARD" id="REL_TASK_STORYBOARD"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<span class="const-title">
+			<span class="const-name">REL_TASK_STORYBOARD</span>
+			 = <span class="const-default"> &quot;ClipitTask-ClipitStoryboard&quot;</span>
+			(line <span class="line-number">32</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constREL_TASK_VIDEO" id="REL_TASK_VIDEO"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<span class="const-title">
+			<span class="const-name">REL_TASK_VIDEO</span>
+			 = <span class="const-default"> &quot;ClipitTask-ClipitVideo&quot;</span>
+			(line <span class="line-number">33</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constSTATUS_ACTIVE" id="STATUS_ACTIVE"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<span class="const-title">
+			<span class="const-name">STATUS_ACTIVE</span>
+			 = <span class="const-default"> &quot;active&quot;</span>
+			(line <span class="line-number">38</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constSTATUS_FINISHED" id="STATUS_FINISHED"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<span class="const-title">
+			<span class="const-name">STATUS_FINISHED</span>
+			 = <span class="const-default"> &quot;finished&quot;</span>
+			(line <span class="line-number">39</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constSTATUS_LOCKED" id="STATUS_LOCKED"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<span class="const-title">
+			<span class="const-name">STATUS_LOCKED</span>
+			 = <span class="const-default"> &quot;locked&quot;</span>
+			(line <span class="line-number">37</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constSUBTYPE" id="SUBTYPE"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<span class="const-title">
+			<span class="const-name">SUBTYPE</span>
+			 = <span class="const-default"> &quot;ClipitTask&quot;</span>
+			(line <span class="line-number">22</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constTYPE_OTHER" id="TYPE_OTHER"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<span class="const-title">
+			<span class="const-name">TYPE_OTHER</span>
+			 = <span class="const-default"> &quot;other&quot;</span>
+			(line <span class="line-number">30</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constTYPE_QUIZ_TAKE" id="TYPE_QUIZ_TAKE"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<span class="const-title">
+			<span class="const-name">TYPE_QUIZ_TAKE</span>
+			 = <span class="const-default"> &quot;quiz_take&quot;</span>
+			(line <span class="line-number">24</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constTYPE_RESOURCE_DOWNLOAD" id="TYPE_RESOURCE_DOWNLOAD"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<span class="const-title">
+			<span class="const-name">TYPE_RESOURCE_DOWNLOAD</span>
+			 = <span class="const-default"> &quot;resource_download&quot;</span>
+			(line <span class="line-number">25</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constTYPE_STORYBOARD_FEEDBACK" id="TYPE_STORYBOARD_FEEDBACK"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<span class="const-title">
+			<span class="const-name">TYPE_STORYBOARD_FEEDBACK</span>
+			 = <span class="const-default"> &quot;storyboard_feedback&quot;</span>
+			(line <span class="line-number">27</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constTYPE_STORYBOARD_UPLOAD" id="TYPE_STORYBOARD_UPLOAD"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<span class="const-title">
+			<span class="const-name">TYPE_STORYBOARD_UPLOAD</span>
+			 = <span class="const-default"> &quot;storyboard_upload&quot;</span>
+			(line <span class="line-number">26</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constTYPE_VIDEO_FEEDBACK" id="TYPE_VIDEO_FEEDBACK"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<span class="const-title">
+			<span class="const-name">TYPE_VIDEO_FEEDBACK</span>
+			 = <span class="const-default"> &quot;video_feedback&quot;</span>
+			(line <span class="line-number">29</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constTYPE_VIDEO_UPLOAD" id="TYPE_VIDEO_UPLOAD"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<span class="const-title">
+			<span class="const-name">TYPE_VIDEO_UPLOAD</span>
+			 = <span class="const-default"> &quot;video_upload&quot;</span>
+			(line <span class="line-number">28</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+							<h4>Inherited Constants</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../../ClipIt/urjc_backend/UBItem.html">UBItem</a></span></p>
+					<blockquote>
+													<span class="const-title">
+								<span class="const-name"><a href="../../ClipIt/urjc_backend/UBItem.html#constREL_PARENT_CLONE">UBItem::REL_PARENT_CLONE</a></span><br>
+							</span>
+													<span class="const-title">
+								<span class="const-name"><a href="../../ClipIt/urjc_backend/UBItem.html#constSUBTYPE">UBItem::SUBTYPE</a></span><br>
+							</span>
+													<span class="const-title">
+								<span class="const-name"><a href="../../ClipIt/urjc_backend/UBItem.html#constTYPE">UBItem::TYPE</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
+
+	<p class="notes" id="credit">
+		Documentation generated on Tue, 14 Apr 2015 13:59:05 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
+	</p>
+	</div></body>
+</html>
