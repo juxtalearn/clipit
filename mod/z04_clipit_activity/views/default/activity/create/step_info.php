@@ -35,7 +35,7 @@
         <ul class="step-list">
             <li class="list-item"><span class="step-point">1</span> <?php echo elgg_echo('activity:create:info:step:1');?></li>
             <li class="list-item"><span class="step-point">2</span> <?php echo elgg_echo('activity:create:info:step:2');?></li>
-            <li class="list-item"><span class="step-point">3</span> (*) <?php echo elgg_echo('activity:create:info:step:3');?></li>
+            <li class="list-item"><span class="step-point">3</span> <?php echo elgg_echo('activity:create:info:step:3');?> (*)</li>
             <li class="list-item"><span class="step-point">4</span> <?php echo elgg_echo('activity:create:info:step:4');?></li>
         </ul>
     </div>

@@ -66,15 +66,15 @@ $english = array(
     'activity:delete' => 'Remove activity',
     'activity:create' => 'Create activity',
     'activity:create:info:title' => 'To create an activity you will need to specify',
-    'activity:create:info:step:1' => 'Tricky Topic (one per activity)',
-    'activity:create:info:step:2' => 'Activity information (name, description and dates)',
-    'activity:create:info:step:3' => 'Tasks contained (description, type and dates)',
+    'activity:create:info:step:1' => '<b>Tricky Topic</b>: one per activity',
+    'activity:create:info:step:2' => '<b>Activity information</b>: name, description and dates',
+    'activity:create:info:step:3' => '<b>Tasks</b> contained: description, type and dates',
     'activity:create:info:step:3:details' => '
-        <p>Some tasks need teacher resources to be previously authored using the "Authoring tools". The "take quiz" task needs to be linked to a quiz, and the "view teacher materials" task needs to be linked to materials contained inside Tricky Topics.</p>
+        <p>Some tasks require previously authored resources using the "Authoring tools", e.g.: "quiz" tasks need to be linked to a quiz, and "view teacher materials" tasks need the activity Tricky Topic to contain teaching materials.</p>
         <p>Please open the "Authoring tools" to make sure you have authored all necessary teacher resources before creating these tasks.</p>
-        <p>You can also create an activity without these tasks, and add them later on, when the linked resources have been created using the "Authoring tools".</p>
+        <p>You can also create an activity without some tasks, and add them later on, when the linked resources have been created using the "Authoring tools".</p>
     ',
-    'activity:create:info:step:4' => 'Students who will participate and how they will group',
+    'activity:create:info:step:4' => '<b>Students</b> participating and how they will group',
 
     'activity:profile' => 'Activity home',
     'activity:progress' => 'Activity progress',

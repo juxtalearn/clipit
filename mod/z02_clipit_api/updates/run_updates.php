@@ -21,6 +21,7 @@
         "2.3.9" => "update_2.3.9.php",
         "2.3.9.1" => null,
         "2.3.10" => null,
+        "2.3.11" => "update_2.3.11.php",
         // add here future updates: version => file
     );
 // } TO HERE
