@@ -16,6 +16,7 @@ elgg.provide('clipit.task');
 elgg.provide('clipit.task.admin');
 clipit.task.init = function() {
     $(document).on("click", ".feedback-check", clipit.task.feedbackCheck);
+    $(document).on("click", ".quiz-refresh", clipit.task.quizRefreshList);
     $(document).on("click", ".quiz-select", clipit.task.quizSelect);
     $(document).on("click", ".quiz-unselect", clipit.task.quizUnselect);
     $(document).on("click", "#add_task", clipit.task.addTask);
@@ -122,11 +123,14 @@ clipit.task.types = function(){
     }
 
 };
-
+clipit.task.quizRefreshList = function(){
+    $(this).closest('.task').find('.task-types').trigger('change');
+};
 clipit.task.quizSelect = function(){
     var task_container = $(this).closest('.task-type-container'),
         quiz_id = $(this).closest('tr').attr('id');
     task_container.find('table tr').not('#'+ quiz_id).fadeOut(300, function(){$(this).remove();});
+    $(this).closest('tr#'+quiz_id).find('input').val(quiz_id);
     // Change button to unselect type
     $(this).removeClass('quiz-select')
         .addClass('quiz-unselect btn-border-red')
@@ -182,7 +186,11 @@ clipit.task.admin.fullCalendar = function(data){
             var date_formated = date.add(+2, 'hours').format("X"); // Added +2hours T00:00:00
             var data_end = data.end+(60*60*4);
             if(date_formated >= data.start && date_formated <= data_end ){
-                $("#create-new-task").modal('show').find(".input-task-start").val(date.format('DD/MM/YYYY'));
+                date.hour(0).minute(0);
+                var new_task_modal = $("#create-new-task");
+                new_task_modal.modal('show')
+                new_task_modal.find(".input-task-start").val(date.format('DD/MM/YY HH:mm'))
+                new_task_modal.find(".input-task-end").val('');
             } else {
                 return false;
             }

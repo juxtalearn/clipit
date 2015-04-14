@@ -10,11 +10,11 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
+elgg_load_js("jquery:timepicker");
+elgg_load_js("fullcalendar:moment");
 ?>
 <div style="display: none;" id="step_2" class="row step">
-    <ul class="task-list">
-        <?php echo elgg_view('activity/create/task_list');?>
-    </ul>
+    <ul class="task-list"></ul>
     <div class="col-md-12 margin-top-5 margin-bottom-5">
         <strong>
         <?php echo elgg_view('output/url', array(

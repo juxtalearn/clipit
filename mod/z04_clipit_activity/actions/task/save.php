@@ -16,7 +16,6 @@ $tasks = get_input('task');
 $quiz = get_input('quiz');
 
 foreach ($tasks as $task) {
-
     $is_correct = false;
     if($task['feedback-form'] && $task['title'] == "") {
         $task = $task['feedback-form'];
@@ -24,8 +23,8 @@ foreach ($tasks as $task) {
     $task_properties = array(
         'name' => $task['title'],
         'description' => $task['description'],
-        'start' => get_timestamp_from_string($task['start']) + (60 * 1),
-        'end' => get_timestamp_from_string($task['end']) + (60 * 60 * 24) - (60 * 1),
+        'start' => date_create_from_format('d/m/y H:i', $task['start'])->getTimestamp(),
+        'end' => date_create_from_format('d/m/y H:i', $task['end'])->getTimestamp(),
     );
     if ($task_id = get_input('task-id')) {
         $entity_id = $task_id;

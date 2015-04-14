@@ -12,6 +12,7 @@
  */
 $activity = elgg_extract('entity', $vars);
 $tasks = ClipitTask::get_by_id($activity->task_array, 0, 0, 'start');
+elgg_load_js("jquery:timepicker");
 elgg_load_js("fullcalendar:moment");
 elgg_load_js("fullcalendar");
 elgg_load_css("fullcalendar");
@@ -29,12 +30,19 @@ $id = uniqid();
                 return 'active';
             });
         });
-        $(".datepicker").each(function(){
-            $(this).datepicker({
-                firstDay: 1,
-                minDate: "<?php echo date("d/m/Y", $activity->start);?>",
-                maxDate: "<?php echo date("d/m/Y", $activity->end);?>"
-            });
+        $(".datepicker").each(function() {
+            var defaults = {hour: 0, minute: 0};
+            if($(this).hasClass('input-task-end')){
+                defaults = {hour: 23, minute: 45};
+            }
+            $(this).datetimepicker(clipit.datetimepickerDefault(
+                $.extend(defaults, {
+                    minDate: "<?php echo date("d/m/y", $activity->start);?>",
+                    maxDate: "<?php echo date("d/m/y", $activity->end);?>",
+                    timeText: "<?php echo elgg_echo('time');?>",
+                    closeText: "<?php echo elgg_echo('accept');?>"
+                })
+            ));
         });
         $('#full-calendar').fullCalendar(clipit.task.admin.fullCalendar({
             messages: {
@@ -65,7 +73,6 @@ $id = uniqid();
         }));
     });
 </script>
-
 <div class="pull-right">
     <small class="show"><?php echo elgg_echo('view_as');?></small>
     <?php echo elgg_view('output/url', array(

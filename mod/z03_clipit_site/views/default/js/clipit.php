@@ -35,7 +35,8 @@ clipit.init = function() {
         dayNames: JSON.parse(elgg.echo('calendar:day_names')),
         dayNamesShort: JSON.parse(elgg.echo('calendar:day_names_short')),
         dayNamesMin: JSON.parse(elgg.echo('calendar:day_names_min')),
-        weekHeader: 'Sm'
+        weekHeader: 'Sm',
+        firstDay: 1 // Monday
     };
     $.datepicker.setDefaults($.datepicker.regional);
     // set active to registered menu
@@ -165,6 +166,65 @@ clipit.autosize = function(element){
         $window.scrollTop(currentScrollPosition);
     });
 };
+// mock Globalize numberFormat for mins and secs using jQuery spinner ...
+if (!window.Globalize) window.Globalize = {
+    format: function(number, format) {
+        number = String(this.parseFloat(number, 10) * 1);
+        format = (m = String(format).match(/^[nd](\d+)$/)) ? m[1] : 2;
+        for (i = 0; i < format - number.length; i++)
+            number = '0'+number;
+        return number;
+    },
+    parseFloat: function(number, radix) {
+        return parseFloat(number, radix || 10);
+    }
+};
+clipit.datetimepickerDefaultControlType = {
+    create: function (tp_inst, obj, unit, val, min, max, step) {
+        $('<input class=\"ui-timepicker-input form-control\" value=\"' + val + '\">')
+            .appendTo(obj)
+            .spinner({
+                min: min,
+                max: max,
+                step: step,
+                numberFormat: 'd2',
+                change: function (e, ui) { // key events
+                    // don't call if api was used and not key press
+                    if (e.originalEvent !== undefined)
+                        tp_inst._onTimeChange();
+                    tp_inst._onSelectHandler();
+                },
+                spin: function (e, ui) { // spin events
+                    tp_inst.control.value(tp_inst, obj, unit, ui.value);
+                    tp_inst._onTimeChange();
+                    tp_inst._onSelectHandler();
+                }
+            });
+
+        return obj;
+    },
+    options: function(tp_inst, obj, unit, opts, val){
+        if(typeof(opts) == 'string' && val !== undefined)
+            return obj.find('.ui-timepicker-input').spinner(opts, val);
+        return obj.find('.ui-timepicker-input').spinner(opts);
+    },
+    value: function (tp_inst, obj, unit, val) {
+        if (val !== undefined)
+            return obj.find('.ui-timepicker-input').spinner('value', val);
+        return obj.find('.ui-timepicker-input').spinner('value');
+    }
+};
+clipit.datetimepickerDefault = function(data) {
+    return $.extend({
+        controlType: clipit.datetimepickerDefaultControlType,
+        dateFormat: 'dd/mm/y',
+        timeFormat: 'HH:mm',
+        stepMinute: 15,
+        minuteMin: 0,
+        timeText: elgg.echo('time'),
+        closeText: elgg.echo('accept')
+    }, data);
+};
 /**
  * Forgotpassword form validation
  */
@@ -274,7 +334,7 @@ clipit.formValidation = function() {
             error.appendTo($("label[for='" + element.attr('name') + "']"));
         },
         //ignore: [], // DEBUG
-        ignore: ":hidden:not(.mceEditor)",
+        ignore: ":hidden:not(.mceEditor, .hidden-validate)",
         focusInvalid: true,
         onkeyup: false,
         onblur: false,

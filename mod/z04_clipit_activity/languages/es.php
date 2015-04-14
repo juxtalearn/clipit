@@ -11,6 +11,9 @@
  * @package         ClipIt
  */
 $spanish = array(
+    'refresh' => 'Actualizar',
+    'ok' => 'Ok',
+    'done' => 'Hecho',
     'change' => 'Cambiar',
     'created' => 'Creado',
     'calendar' => 'Calendario',
@@ -28,6 +31,7 @@ $spanish = array(
     'status' => 'Estado',
     'send:to_site' => 'Publicar al sitio',
     'time:days' => 'Días',
+    'time' => 'Hora',
     'time:hours' => 'Horas',
     'time:minutes' => 'Minutos',
 

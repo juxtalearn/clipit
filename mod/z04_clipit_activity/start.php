@@ -197,6 +197,8 @@ function clipit_activity_init() {
     elgg_register_js("fullcalendar:moment", "{$vendors_dir}/fullcalendar/moment.min.js");
     elgg_register_js("fullcalendar", "{$vendors_dir}/fullcalendar/fullcalendar.min.js");
     elgg_register_css("fullcalendar", "{$vendors_dir}/fullcalendar/fullcalendar.css");
+    // Timepicker
+    elgg_register_js("jquery:timepicker", "{$vendors_dir}/jquery.timepicker.min.js");
     // ChartJS
     elgg_register_js("jquery:chartjs", "{$vendors_dir}/chartjs.min.js");
 }

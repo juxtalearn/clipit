@@ -816,6 +816,127 @@ h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
   }
 }
 //
+// Custom timepicker
+// --------------------------------------------------
+.ui-timepicker-div{
+  position:relative;
+  dl dd{
+    width: 48%;
+    text-align: center;
+  }
+  dl{
+    margin-bottom: 40px;
+    dt{
+      display: none;
+    }
+  }
+  .ui_tpicker_time{
+    display: none;
+  }
+  .ui_tpicker_time_label{
+    color: @blue_clipit;
+    float: none !important;
+    display: block !important;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    padding: 0 !important;
+  }
+  dd.ui_tpicker_hour{
+    float:left;
+    position: relative;
+    .ui_tpicker_hour_slider,
+    .ui_tpicker_minute_slider{
+      > span {
+        float: left;
+        &:before {
+          display: block;
+          color: #999;
+          font-size: 85%;
+        }
+      }
+    }
+  }
+  dd.ui_tpicker_minute{
+    display: inline-block;
+    position: relative;
+  }
+  .ui_tpicker_hour_slider input,
+  .ui_tpicker_minute_slider input{
+    width: 55% !important;
+    display: inline-block;
+    padding: 5px 10px;
+    text-align: center;
+    font-size: 18px;
+    box-shadow: none;
+    border: 0;
+    height: 20px;
+    padding: 0;
+    font-weight: bold;
+  }
+  .ui-spinner-button{
+    position: absolute;
+    left: 55px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none !important;
+    &.ui-spinner-up{
+      top: -25px;
+    }
+    &.ui-spinner-down{
+      bottom: -25px;
+    }
+    .ui-icon{
+      font-size: 0;
+      &:after{
+        font: normal normal normal 16px/1 FontAwesome;
+        display: block;
+        text-indent: 1px;
+      }
+      &.ui-icon-triangle-1-n:after{
+        content: '\f077';
+      }
+      &.ui-icon-triangle-1-s:after{
+        content: '\f078';
+      }
+    }
+  }
+}
+.ui-datepicker-buttonpane {
+  text-align: right;
+}
+.ui-datepicker-buttonpane .ui-datepicker-current {
+  display: none;
+}
+.ui-datepicker-buttonpane .ui-datepicker-close{
+  /* .btn-sm(); .btn-primary();*/
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+  color: #FFF;
+  border: 0;
+  background-color: #32b4e5;
+  background-repeat: repeat-x;
+  font-family: FuturaBoldRegular,Impact,'Impact Bold',Helvetica,Arial,sans,sans-serif;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 7px;
+  letter-spacing: 1px;
+}
+.ui-timepicker-div dl:before {
+  content: ':';
+  position: absolute;
+  left: 45%;
+  top: 50%;
+  font-weight: bold;
+  font-size: 30px;
+}
+.input-task-start, .input-task-end{
+  padding: 5px 10px;
+  font-size: 13px;
+}
+
+//
 // FullCalendar plugin
 // --------------------------------------------------
 .delete-task{

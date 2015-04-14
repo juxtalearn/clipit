@@ -11,6 +11,8 @@
  * @package         ClipIt
  */
 $english = array(
+    'refresh' => 'Refresh',
+    'ok' => 'Ok',
     'change' => 'Change',
     'created' => 'Created',
     'calendar' => 'Calendar',
@@ -27,6 +29,7 @@ $english = array(
     'search:btn' => 'Search',
     'status' => 'Status',
     'send:to_site' => 'Publish to Site',
+    'time' => 'Time',
     'time:days' => 'Days',
     'time:hours' => 'Hours',
     'time:minutes' => 'Minutes',
@@ -400,9 +403,9 @@ $english = array(
     'calendar:day_names'=> json_encode(array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday")),
     'calendar:day_names_short'=> json_encode(array("Sun","Mon","Tue","Wed","Thu","Fri","Sat")),
     'calendar:day_names_min'=> json_encode(array("Su","Mo","Tu","We","Th","Fr","Sa")),
-    'calendar:month' => 'Mes',
-    'calendar:day' => 'Día',
-    'calendar:week' => 'Semana',
+    'calendar:month' => 'Month',
+    'calendar:day' => 'Day',
+    'calendar:week' => 'Week',
     'calendar:list' => 'Agenda',
 );
 

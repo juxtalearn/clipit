@@ -70,6 +70,14 @@ switch($object['subtype']){
         }
         $href['duplicate'] = 'quizzes/create/'.$entity->id;
         break;
+    case 'ClipitPerformanceItem':
+        $duplicate = false;
+        $owner_options = true;
+        $href = array(
+            'edit' => 'rubrics/edit/'.$entity->id,
+            'remove' => elgg_add_action_tokens_to_url(elgg_normalize_url('action/rubric/remove?id='.$entity->id), true),
+        );
+        break;
     case 'ClipitActivity':
         $duplicate = false;
         if($user->id == elgg_get_logged_in_user_guid()){

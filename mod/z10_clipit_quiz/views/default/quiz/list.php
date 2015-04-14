@@ -28,11 +28,21 @@ if(get_input('activity_create')){
     </div>
     <?php echo elgg_view('output/url', array(
         'href'  => "quizzes/create",
-        'class' => 'btn btn-primary margin-bottom-10',
+        'class' => 'btn btn-primary',
+        'target' => $select?'_blank':'',
         'title' => elgg_echo('new'),
         'text'  => elgg_echo('new'),
     ));
     ?>
+    <?php if($select):?>
+    <?php echo elgg_view('output/url', array(
+        'href'  => 'javascript:;',
+        'class' => 'btn quiz-refresh',
+        'title' => elgg_echo('refresh'),
+        'text'  => '<i class="fa fa-refresh"></i> '.elgg_echo('refresh'),
+    ));
+    ?>
+    <?php endif;?>
 </div>
 <script>
 $(function(){
@@ -58,7 +68,7 @@ $(function(){
     });
 });
 </script>
-<table class="table table-striped">
+<table class="table table-striped margin-top-10">
     <thead>
     <tr>
         <?php if($select):?>
@@ -90,7 +100,8 @@ $(function(){
                 </a>
                 <?php echo elgg_view('input/hidden', array(
                     'name' => $input_prefix.'[quiz_id]',
-                    'value' => $quiz->id,
+                    'class' => 'hidden-validate',
+                    'required' => true,
                 )); ?>
             </td>
         <?php endif;?>

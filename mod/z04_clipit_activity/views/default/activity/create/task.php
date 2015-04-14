@@ -90,8 +90,9 @@ if($vars['required'] !== false){
             <?php echo elgg_view("input/text", array(
                 'name' => "task{$input_array}[start]",
                 'class' => 'form-control datepicker input-task-start',
-                'value' => $task->start ? date("d/m/Y", $task->start) : "",
-                'required' => $required
+                'value' => $task->start ? date("d/m/y H:i", $task->start) : "",
+                'required' => $required,
+                'readonly' => true
             ));
             ?>
         </div>
@@ -100,8 +101,9 @@ if($vars['required'] !== false){
             <?php echo elgg_view("input/text", array(
                 'name' => "task{$input_array}[end]",
                 'class' => 'form-control datepicker input-task-end',
-                'value' => $task->end ? date("d/m/Y", $task->end) : "",
-                'required' => $required
+                'value' => $task->end ? date("d/m/y H:i", $task->end) : "",
+                'required' => $required,
+                'readonly' => true
             ));
             ?>
         </div>

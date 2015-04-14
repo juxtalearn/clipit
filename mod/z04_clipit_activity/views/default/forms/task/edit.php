@@ -14,15 +14,14 @@ $task = elgg_extract('entity', $vars);
 $activity = array_pop(ClipitActivity::get_by_id(array($task->activity)));
 $params = array();
 $id = uniqid();
-$body .= '
+$body = "
 <script>
-$(".datepicker").datepicker({
-    "firstDay": 1,
-    minDate: "'.date("d/m/Y", $activity->start).'",
-    maxDate: "'.date("d/m/Y", $activity->end).'"
-});
+$('.datepicker').datetimepicker(clipit.datetimepickerDefault({
+    minDate: '".date("d/m/y", $activity->start)."',
+    maxDate: '".date("d/m/y", $activity->end)."'
+}));
 </script>
-';
+";
 $body .= elgg_view("input/hidden", array(
     'name' => 'task-id',
     'value' => $task->id,

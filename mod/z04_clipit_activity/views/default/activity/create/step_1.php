@@ -93,7 +93,7 @@ $(function(){
 <script>
     var datepicker_setup = function(){
         var activity_form = $("#activity-create");
-        $(".datepicker").datepicker({
+        $(".activity-date").datepicker({
             firstDay: 1,
             minDate: activity_form.find("input[name=activity-start]").val(),
             maxDate: activity_form.find("input[name=activity-end]").val(),
@@ -133,6 +133,9 @@ $(function(){
         }
         if(step > 0){
             $(".nav-steps li").removeClass('disabled');
+            if(step == 2 && $('.task-list').is(':empty')){
+                $("#add_task").click();
+            }
         } else {
             $(".nav-steps li").slice(2,4).addClass('disabled');
         }
@@ -169,7 +172,7 @@ $(function(){
                 <label for="activity-start"><?php echo elgg_echo("activity:start");?></label>
                 <?php echo elgg_view("input/text", array(
                     'name' => 'activity-start',
-                    'class' => 'form-control datepicker',
+                    'class' => 'form-control datepicker activity-date',
                     'required' => true
                 ));
                 ?>
@@ -178,7 +181,7 @@ $(function(){
                 <label for="task-end"><?php echo elgg_echo("activity:end");?></label>
                 <?php echo elgg_view("input/text", array(
                     'name' => 'activity-end',
-                    'class' => 'form-control datepicker',
+                    'class' => 'form-control datepicker activity-date',
                     'required' => true
                 ));
                 ?>

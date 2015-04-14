@@ -22,6 +22,7 @@ $body .= elgg_view("input/hidden", array(
     'id' => 'tricky-topic',
     'value' => $activity->tricky_topic,
 ));
+
 $body .= '<div class="task">';
 $body .= elgg_view('activity/create/task', array('task_type' => 'upload', 'id' => $id, 'delete_task' => false));
 
@@ -29,13 +30,14 @@ $body .='
 <ul class="feedback_form" style="margin-left: 20px;display: none">
     <li style="padding: 10px;background: #fafafa;" class="col-md-12">
         <div class="col-mds-12">
-            <h4>Feedback task</h4>
+            <h4>'.elgg_echo('task:feedback').'</h4>
         </div>
         '.elgg_view('activity/create/task', array('task_type' => 'feedback', 'id' => $id)).'
     </li>
 </ul>
 ';
 $body .= '</div>';
+
 echo elgg_view("page/components/modal",
     array(
         "dialog_class"     => "modal-lg",

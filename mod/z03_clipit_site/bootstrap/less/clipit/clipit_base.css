@@ -7384,6 +7384,10 @@ form .elgg-module h3 {
 .multiple-check .check-group label span {
   vertical-align: text-bottom;
 }
+.form-control[readonly] {
+  background: none;
+  cursor: default;
+}
 .modal-header {
   border-bottom: 0px;
   padding-bottom: 0px;
@@ -11035,6 +11039,123 @@ h6,
 }
 .ui-datepicker .ui-state-disabled {
   cursor: default !important;
+}
+.ui-timepicker-div {
+  position: relative;
+}
+.ui-timepicker-div dl dd {
+  width: 48%;
+  text-align: center;
+}
+.ui-timepicker-div dl {
+  margin-bottom: 40px;
+}
+.ui-timepicker-div dl dt {
+  display: none;
+}
+.ui-timepicker-div .ui_tpicker_time {
+  display: none;
+}
+.ui-timepicker-div .ui_tpicker_time_label {
+  color: #32b4e5;
+  float: none !important;
+  display: block !important;
+  margin-bottom: 30px;
+  margin-top: 10px;
+  padding: 0 !important;
+}
+.ui-timepicker-div dd.ui_tpicker_hour {
+  float: left;
+  position: relative;
+}
+.ui-timepicker-div dd.ui_tpicker_hour .ui_tpicker_hour_slider > span,
+.ui-timepicker-div dd.ui_tpicker_hour .ui_tpicker_minute_slider > span {
+  float: left;
+}
+.ui-timepicker-div dd.ui_tpicker_hour .ui_tpicker_hour_slider > span:before,
+.ui-timepicker-div dd.ui_tpicker_hour .ui_tpicker_minute_slider > span:before {
+  display: block;
+  color: #999;
+  font-size: 85%;
+}
+.ui-timepicker-div dd.ui_tpicker_minute {
+  display: inline-block;
+  position: relative;
+}
+.ui-timepicker-div .ui_tpicker_hour_slider input,
+.ui-timepicker-div .ui_tpicker_minute_slider input {
+  width: 55% !important;
+  display: inline-block;
+  padding: 5px 10px;
+  text-align: center;
+  font-size: 18px;
+  box-shadow: none;
+  border: 0;
+  height: 20px;
+  padding: 0;
+  font-weight: bold;
+}
+.ui-timepicker-div .ui-spinner-button {
+  position: absolute;
+  left: 55px;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none !important;
+}
+.ui-timepicker-div .ui-spinner-button.ui-spinner-up {
+  top: -25px;
+}
+.ui-timepicker-div .ui-spinner-button.ui-spinner-down {
+  bottom: -25px;
+}
+.ui-timepicker-div .ui-spinner-button .ui-icon {
+  font-size: 0;
+}
+.ui-timepicker-div .ui-spinner-button .ui-icon:after {
+  font: normal normal normal 16px/1 FontAwesome;
+  display: block;
+  text-indent: 1px;
+}
+.ui-timepicker-div .ui-spinner-button .ui-icon.ui-icon-triangle-1-n:after {
+  content: '\f077';
+}
+.ui-timepicker-div .ui-spinner-button .ui-icon.ui-icon-triangle-1-s:after {
+  content: '\f078';
+}
+.ui-datepicker-buttonpane {
+  text-align: right;
+}
+.ui-datepicker-buttonpane .ui-datepicker-current {
+  display: none;
+}
+.ui-datepicker-buttonpane .ui-datepicker-close {
+  /* .btn-sm(); .btn-primary();*/
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+  color: #FFF;
+  border: 0;
+  background-color: #32b4e5;
+  background-repeat: repeat-x;
+  font-family: FuturaBoldRegular, Impact, 'Impact Bold', Helvetica, Arial, sans, sans-serif;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 7px;
+  letter-spacing: 1px;
+}
+.ui-timepicker-div dl:before {
+  content: ':';
+  position: absolute;
+  left: 45%;
+  top: 50%;
+  font-weight: bold;
+  font-size: 30px;
+}
+.input-task-start,
+.input-task-end {
+  padding: 5px 10px;
+  font-size: 13px;
 }
 .delete-task {
   display: none;
