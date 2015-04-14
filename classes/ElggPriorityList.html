@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1709640497"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-371301188"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1709640497" class="accordion-body collapse in">
+            <div id="namespace-371301188" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -286,71 +286,71 @@
                     <h1><small>\</small>ElggPriorityList</h1>
                     <p><em>Iterate over elements in a specific priority.</em></p>
                     <p>$pl = new ElggPriorityList();
-$pl->add('Element 0');
-$pl->add('Element 10', 10);
-$pl->add('Element -10', -10);</p>
-<p>foreach ($pl as $priority => $element) {
-var_dump("$priority => $element");
+$pl-&gt;add('Element 0');
+$pl-&gt;add('Element 10', 10);
+$pl-&gt;add('Element -10', -10);</p>
+<p>foreach ($pl as $priority =&gt; $element) {
+var_dump(&quot;$priority =&gt; $element&quot;);
 }</p>
 <p>Yields:
--10 => Element -10
-0 => Element 0
-10 => Element 10</p>
+-10 =&gt; Element -10
+0 =&gt; Element 0
+10 =&gt; Element 10</p>
 <p>Collisions on priority are handled by inserting the element at or as close to the
 requested priority as possible:</p>
 <p>$pl = new ElggPriorityList();
-$pl->add('Element 5', 5);
-$pl->add('Colliding element 5', 5);
-$pl->add('Another colliding element 5', 5);</p>
-<p>foreach ($pl as $priority => $element) {
-var_dump("$priority => $element");
+$pl-&gt;add('Element 5', 5);
+$pl-&gt;add('Colliding element 5', 5);
+$pl-&gt;add('Another colliding element 5', 5);</p>
+<p>foreach ($pl as $priority =&gt; $element) {
+var_dump(&quot;$priority =&gt; $element&quot;);
 }</p>
 <p>Yields:
-5 => 'Element 5',
-6 => 'Colliding element 5',
-7 => 'Another colliding element 5'</p>
+5 =&gt; 'Element 5',
+6 =&gt; 'Colliding element 5',
+7 =&gt; 'Another colliding element 5'</p>
 <p>You can do priority lookups by element:</p>
 <p>$pl = new ElggPriorityList();
-$pl->add('Element 0');
-$pl->add('Element -5', -5);
-$pl->add('Element 10', 10);
-$pl->add('Element -10', -10);</p>
-<p>$priority = $pl->getPriority('Element -5');</p>
+$pl-&gt;add('Element 0');
+$pl-&gt;add('Element -5', -5);
+$pl-&gt;add('Element 10', 10);
+$pl-&gt;add('Element -10', -10);</p>
+<p>$priority = $pl-&gt;getPriority('Element -5');</p>
 <p>Or element lookups by priority.
-$element = $pl->getElement(-5);</p>
+$element = $pl-&gt;getElement(-5);</p>
 <p>To remove elements, pass the element.
-$pl->remove('Element -10');</p>
+$pl-&gt;remove('Element -10');</p>
 <p>To check if an element exists:
-$pl->contains('Element -5');</p>
+$pl-&gt;contains('Element -5');</p>
 <p>To move an element:
-$pl->move('Element -5', -3);</p>
+$pl-&gt;move('Element -5', -3);</p>
 <p>ElggPriorityList only tracks priority. No checking is done in ElggPriorityList for duplicates or
 updating. If you need to track this use objects and an external map:</p>
 <p>function elgg_register_something($id, $display_name, $location, $priority = 500) {
-// $id => $element.
+// $id =&gt; $element.
 static $map = array();
 static $list;</p>
-<p>if (!$list) {</p>
-<pre><code>$list = new ElggPriorityList();</code></pre>
-<p>}</p>
+<p>if (!$list) {
+$list = new ElggPriorityList();
+}</p>
 <p>// update if already registered.
-if (isset($map[$id])) {</p>
-<pre><code>$element = $map[$id];
+if (isset($map[$id])) {
+$element = $map[$id];
 // move it first because we have to pass the original element.
 if (!$list-&gt;move($element, $priority)) {
-    return false;
+return false;
 }
 $element-&gt;display_name = $display_name;
-$element-&gt;location = $location;</code></pre>
-<p>} else {</p>
-<pre><code>$element = new stdClass();
+$element-&gt;location = $location;
+} else {
+$element = new stdClass();
 $element-&gt;display_name = $display_name;
 $element-&gt;location = $location;
 if (!$list-&gt;add($element, $priority)) {
-    return false;
+return false;
 }
-$map[$id] = $element;</code></pre>
-<p>}</p>
+$map[$id] = $element;
+}</p>
 <p>return true;
 }</p>
                     
@@ -501,7 +501,7 @@ $map[$id] = $element;</code></pre>
                                                     <tr>
                                 <td>array</td>
                                 <td>$elements </td>
-                                <td><p>An optional array of priorities => element</p></td>
+                                <td><p>An optional array of priorities =&gt; element</p></td>
                             </tr>
                                             </table>
                 
@@ -540,10 +540,10 @@ $map[$id] = $element;</code></pre>
                                                     <tr>
                                 <td>mixed</td>
                                 <td>$priority </td>
-                                <td><p>Priority to add the element. In priority collisions, the original element</p>
-<pre><code>                   maintains its priority and the new element is to the next available
-                   slot, taking into consideration all previously registered elements.
-                   Negative elements are accepted.</code></pre></td>
+                                <td><p>Priority to add the element. In priority collisions, the original element
+maintains its priority and the new element is to the next available
+slot, taking into consideration all previously registered elements.
+Negative elements are accepted.</p></td>
                             </tr>
                                                     <tr>
                                 <td>boolean</td>
@@ -570,8 +570,8 @@ $map[$id] = $element;</code></pre>
                             warning
                         </th>
                         <td>
-                                                                                            <p>This returns the priority at which the element was added, which can be 0. Use</p>
-<pre><code>     !== false to check for success.</code></pre>
+                                                                                            <p>This returns the priority at which the element was added, which can be 0. Use
+!== false to check for success.</p>
                                                     </td>
                     </tr>
                                     <tr>
@@ -627,8 +627,8 @@ $map[$id] = $element;</code></pre>
                             warning
                         </th>
                         <td>
-                                                                                            <p>The element must have the same attributes / values. If using $strict, it must have</p>
-<pre><code>     the same types. array(10) will fail in strict against array('10') (str vs int).</code></pre>
+                                                                                            <p>The element must have the same attributes / values. If using $strict, it must have
+the same types. array(10) will fail in strict against array('10') (str vs int).</p>
                                                     </td>
                     </tr>
                             </table>
@@ -1166,7 +1166,7 @@ argument and should return a sorted array.</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on April 12th, 2015 at 22:00.
+                    on April 14th, 2015 at 13:19.
                 </section>
             </section>
         </section>
