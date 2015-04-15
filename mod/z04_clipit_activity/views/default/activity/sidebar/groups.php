@@ -13,28 +13,29 @@
 $groups = elgg_extract('entities', $vars);
 $activity_id = elgg_extract('activity_id', $vars);
 $user_id = elgg_get_logged_in_user_guid();
+$groups = ClipitGroup::get_by_id($groups);
+natural_sort_properties($groups, 'name');
 
-foreach($groups as $group_id){
-    $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
-    $total_unread_posts = array_pop(ClipitPost::unread_by_destination(array($group_id), $user_id, true));
+foreach($groups as $group){
+    $total_unread_posts = array_pop(ClipitPost::unread_by_destination(array($group->id), $user_id, true));
 
-    elgg_register_menu_item('groups:admin_'.$group_id, array(
+    elgg_register_menu_item('groups:admin_'.$group->id, array(
         'name' => 'group_dashboard',
         'text' => elgg_echo('group:home'),
-        'href' => "clipit_activity/{$activity_id}/group/{$group_id}",
+        'href' => "clipit_activity/{$activity_id}/group/{$group->id}",
         'priority' => 100,
     ));
-    elgg_register_menu_item('groups:admin_'.$group_id, array(
+    elgg_register_menu_item('groups:admin_'.$group->id, array(
         'name' => 'group_discussion',
         'text' => elgg_echo('group:discussion'),
-        'href' => "clipit_activity/{$activity_id}/group/{$group_id}/discussion",
+        'href' => "clipit_activity/{$activity_id}/group/{$group->id}/discussion",
         'badge' => $total_unread_posts > 0 ? $total_unread_posts : "",
         'priority' => 200,
     ));
-    elgg_register_menu_item('groups:admin_'.$group_id, array(
+    elgg_register_menu_item('groups:admin_'.$group->id, array(
         'name' => 'group_files',
         'text' => elgg_echo('group:files'),
-        'href' => "clipit_activity/{$activity_id}/group/{$group_id}/repository",
+        'href' => "clipit_activity/{$activity_id}/group/{$group->id}/repository",
         'priority' => 300,
     ));
     $body .= '<ul class="nav nav-pills nav-stacked panel">';
@@ -47,7 +48,7 @@ foreach($groups as $group_id){
         'data-parent' => '#accordion'
     ));
     $body .= '</li>';
-    $body .= elgg_view_menu('groups:admin_'.$group_id, array(
+    $body .= elgg_view_menu('groups:admin_'.$group->id, array(
         'sort_by' => 'priority',
         'id' => 'collapse_'.$group->id,
         'class' => 'collapse'

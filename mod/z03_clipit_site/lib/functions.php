@@ -24,3 +24,8 @@ function set_search_input($page, $search_array){
     $output  = $page."?s=".json_encode($search_array);
     return $output;
 }
+function natural_sort_properties(&$objects, $property = 'name'){
+    usort($objects, function ($a, $b) use ($property) {
+        return strnatcmp($a->$property, $b->$property);
+    });
+}

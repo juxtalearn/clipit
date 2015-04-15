@@ -24,6 +24,7 @@ foreach($tricky_topics as $tricky_topic){
 }
 $tt = array_diff($tt, $owner_tt);
 ?>
+
 <?php echo elgg_view('activity/admin/tasks/quiz/quiz', array(
     'entity' => $quiz,
     'select_tricky_topic' => array('owner' => $owner_tt, 'others' => $tt)
@@ -35,3 +36,11 @@ $tt = array_diff($tt, $owner_tt);
     ));
     ?>
 </div>
+
+<?php if(!$quiz): // Creating mode ?>
+    <script>
+        $(function(){
+            $('.select-tricky_topic').trigger('change');
+        });
+    </script>
+<?php endif; ?>

@@ -222,7 +222,14 @@ clipit.datetimepickerDefault = function(data) {
         stepMinute: 15,
         minuteMin: 0,
         timeText: elgg.echo('time'),
-        closeText: elgg.echo('accept')
+        closeText: elgg.echo('accept'),
+        onClose: function (text, inst) {
+            if($(this).hasClass('input-task-start')){
+                var $task_end = $(this).closest('.task').find('.input-task-end'),
+                    task_start_val = $(this).val();
+                $task_end.datepicker( "option", "minDate", task_start_val);
+            }
+        }
     }, data);
 };
 /**
@@ -315,6 +322,14 @@ clipit.validationCustomMethods = function(){
             return this.optional(element) || re.test(value);
         },
         elgg.echo('validation:login_normalize')
+    );
+    $.validator.addMethod(
+        "regex",
+        function(value, element, regexp) {
+            var re = new RegExp(regexp);
+            return this.optional(element) || re.test(value);
+        },
+        "Please check your input."
     );
     $.validator.addMethod("extension", function(value, element, param) {
         param = typeof param === "string" ? param.replace(/,/g, "|") : "png|jpe?g|gif";

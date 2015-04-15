@@ -27,7 +27,7 @@ if(get_input('activity_create')){
         <?php echo elgg_view("page/components/print_button");?>
     </div>
     <?php echo elgg_view('output/url', array(
-        'href'  => "quizzes/create",
+        'href'  => "quizzes/create".($select ? '?tricky_topic='.$tricky_topic_id:''),
         'class' => 'btn btn-primary',
         'target' => $select?'_blank':'',
         'title' => elgg_echo('new'),
@@ -35,13 +35,21 @@ if(get_input('activity_create')){
     ));
     ?>
     <?php if($select):?>
-    <?php echo elgg_view('output/url', array(
-        'href'  => 'javascript:;',
-        'class' => 'btn quiz-refresh',
-        'title' => elgg_echo('refresh'),
-        'text'  => '<i class="fa fa-refresh"></i> '.elgg_echo('refresh'),
-    ));
-    ?>
+        <?php echo elgg_view('output/url', array(
+            'href'  => 'javascript:;',
+            'class' => 'btn quiz-refresh',
+            'title' => elgg_echo('refresh'),
+            'text'  => '<i class="fa fa-refresh"></i> '.elgg_echo('refresh'),
+        ));
+        ?>
+        <label for="<?php echo $input_prefix;?>[quiz_id]"></label>
+        <?php echo elgg_view('input/hidden', array(
+            'name' => $input_prefix.'[quiz_id]',
+            'class' => 'hidden-validate input-quiz-id',
+            'required' => true,
+            'data-msg-required' => elgg_echo('task:quiz_take:select')
+        ));
+        ?>
     <?php endif;?>
 </div>
 <script>
@@ -98,11 +106,6 @@ $(function(){
                 <a class="btn btn-xs btn-primary btn-border-blue quiz-select">
                     <?php echo elgg_echo('select');?>
                 </a>
-                <?php echo elgg_view('input/hidden', array(
-                    'name' => $input_prefix.'[quiz_id]',
-                    'class' => 'hidden-validate',
-                    'required' => true,
-                )); ?>
             </td>
         <?php endif;?>
             <td>

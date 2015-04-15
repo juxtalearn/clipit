@@ -54,6 +54,7 @@ $groups = elgg_extract('entities', $vars);
 <div class="groups-admin">
 <?php
 $groups = ClipitGroup::get_by_id($groups, 0, 0, 'name');
+natural_sort_properties($groups, 'name');
 if($groups):
 ?>
     <p>

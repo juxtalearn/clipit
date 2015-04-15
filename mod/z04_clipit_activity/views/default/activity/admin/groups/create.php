@@ -13,6 +13,7 @@
 $users = elgg_extract('users', $vars);
 $activity = elgg_extract('activity', $vars);
 $groups = ClipitGroup::get_by_id($activity->group_array);
+natural_sort_properties($groups, 'name');
 ?>
 <script>
 $(function(){

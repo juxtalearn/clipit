@@ -16,6 +16,7 @@ $tasks = ClipitTask::get_by_id($activity->task_array, 4, 0, 'start', true);
 
 if($access == 'ACCESS_TEACHER'){
     $groups = ClipitGroup::get_by_id($activity->group_array, 0, 0, 'name');
+    natural_sort_properties($groups, 'name');
 }
 ?>
 <div class="row">

@@ -16,7 +16,7 @@ $selected_tab = 'step_info';
 $filter = elgg_view('activity/create/filter', array('selected' => $selected_tab, 'step' => $step));
 
 $params = array(
-    'content' => elgg_view_form('activity/create', array('id' => 'activity-create')),
+    'content' => elgg_view_form('activity/create', array('id' => 'activity-create', 'data-validate' => 'true')),
     'title' => elgg_echo("activity:create"),
     'filter' => $filter,
 );

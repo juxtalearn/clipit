@@ -23,7 +23,9 @@ switch($type = get_input('type')){
         $groups = ClipitActivity::get_groups($task->activity);
         $output = array();
         $questions = $quiz->quiz_question_array;
-        foreach(ClipitGroup::get_by_id($groups) as $group){
+        $groups = ClipitGroup::get_by_id($groups);
+        natural_sort_properties($groups, 'name');
+        foreach($groups as $group){
             $answered = 0;
             $correct = 0;
             $error = 0;

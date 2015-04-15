@@ -12,6 +12,7 @@
  */
 $groups = elgg_extract('groups', $vars);
 $groups = ClipitGroup::get_by_id($groups);
+natural_sort_properties($groups, 'name');
 $task = elgg_extract('task', $vars);
 ?>
 <?php

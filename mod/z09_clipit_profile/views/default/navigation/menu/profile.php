@@ -45,17 +45,18 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
             ));
             ?>
         </li>
-        <?php if($user->role == ClipitUser::ROLE_TEACHER):?>
-            <li role="presentation" class="divider"></li>
-            <li role="presentation">
-                <?php echo elgg_view('output/url', array(
-                    'href'  => "stats",
-                    'title' => elgg_echo('profile:stats'),
-                    'text'  => '<i class="fa fa-bar-chart-o"></i> '.elgg_echo('profile:stats'),
-                ));
-                ?>
-            </li>
-        <?php endif;?>
+        <!--  Currently off      -->
+        <?php //if($user->role == ClipitUser::ROLE_TEACHER):?>
+<!--            <li role="presentation" class="divider"></li>-->
+<!--            <li role="presentation">-->
+<!--                --><?php //echo elgg_view('output/url', array(
+//                    'href'  => "stats",
+//                    'title' => elgg_echo('profile:stats'),
+//                    'text'  => '<i class="fa fa-bar-chart-o"></i> '.elgg_echo('profile:stats'),
+//                ));
+//                ?>
+<!--            </li>-->
+<!--        --><?php //endif;?>
     </ul>
 </li>
 <li>

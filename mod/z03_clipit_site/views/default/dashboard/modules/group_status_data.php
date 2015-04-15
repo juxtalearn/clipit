@@ -59,6 +59,7 @@ $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
                     $num_group = 1;
                     $group_ids = ClipitActivity::get_groups($activity->id);
                     $groups = ClipitGroup::get_by_id($group_ids, 0, 0, 'name');
+                    natural_sort_properties($groups, 'name');
                     foreach($groups as $group){
                         $value = get_group_progress($group->id);
                         echo "{ 'label': 'G{$num_group}', 'value':{$value}, 'ctext':'{$group->name}'},";

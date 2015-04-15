@@ -127,14 +127,26 @@ $(function(){
         var current_step = parseInt($(".step:visible").attr("id").replace("step_", ""));
         // is validated
         if($(this).attr("id") == 'next_step' || step > current_step){
-            if(!$(".elgg-form-activity-create").valid()){
+            if(!$("#activity-create").valid()){
                 return false;
             }
         }
         if(step > 0){
             $(".nav-steps li").removeClass('disabled');
-            if(step == 2 && $('.task-list').is(':empty')){
-                $("#add_task").click();
+//            if(step == 2 && $('.task-list').is(':empty')){
+//                $("#add_task").click();
+//            }
+            switch (step){
+                case 2:
+//                    if($('.task-list').is(':empty')){
+//                        $("#add_task").click();
+//                    }
+                    break;
+                case 3:
+//                    $('.task-list .task input:not([type="checkbox"], [type="radio"])').each(function(){
+//                        $(this).prop('required',true);
+//                    });
+                    break;
             }
         } else {
             $(".nav-steps li").slice(2,4).addClass('disabled');
@@ -173,16 +185,20 @@ $(function(){
                 <?php echo elgg_view("input/text", array(
                     'name' => 'activity-start',
                     'class' => 'form-control datepicker activity-date',
-                    'required' => true
+                    'required' => true,
+                    'data-rule-regex' => '(.{2})\/(.{2})\/(.{4})$',
+                    'data-msg-regex' => 'dd/mm/yyyy',
                 ));
                 ?>
             </div>
             <div class="col-md-4">
-                <label for="task-end"><?php echo elgg_echo("activity:end");?></label>
+                <label for="activity-end"><?php echo elgg_echo("activity:end");?></label>
                 <?php echo elgg_view("input/text", array(
                     'name' => 'activity-end',
                     'class' => 'form-control datepicker activity-date',
-                    'required' => true
+                    'required' => true,
+                    'data-rule-regex' => '(\w{2})\/(\w{2})\/(\w{4})$',
+                    'data-msg-regex' => 'dd/mm/yyyy',
                 ));
                 ?>
             </div>

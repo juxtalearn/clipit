@@ -126,7 +126,11 @@ elgg_load_js('jquery:chartjs');
             elgg_pop_context();
             ?>
             <ul>
-                <?php foreach(ClipitGroup::get_by_id($groups) as $group):?>
+                <?php
+                $groups = ClipitGroup::get_by_id($groups);
+                natural_sort_properties($groups, 'name');
+                foreach($groups as $group):
+                ?>
                 <li class="list-item" data-entity="<?php echo $group->id;?>">
                     <div class="pull-right">
                         <div class="margin-right-10 inline-block status text-muted">

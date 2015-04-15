@@ -20,6 +20,7 @@ foreach($entities as $entity_object) {
     $entities_ids[] = $entity_object->id;
 }
 $groups = ClipitGroup::get_by_id($activity->group_array, 0, 0, 'name');
+natural_sort_properties($groups, 'name');
 ?>
 <style>
     .multimedia-preview .img-preview{

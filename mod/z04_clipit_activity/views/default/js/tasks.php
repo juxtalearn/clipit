@@ -50,6 +50,7 @@ clipit.task.feedbackCheck = function(){
     if($(this).find("input").is(':checked')){
         var task_end = parent.find(".input-task-end").val();
         if(task_end.length > 0){
+            task_end = moment(task_end, 'DD/MM/YY').hour(0).minute(0).format('DD/MM/YY HH:mm');
             feedback_content.find(".input-task-start").val(task_end);
         }
         feedback_content
@@ -130,7 +131,7 @@ clipit.task.quizSelect = function(){
     var task_container = $(this).closest('.task-type-container'),
         quiz_id = $(this).closest('tr').attr('id');
     task_container.find('table tr').not('#'+ quiz_id).fadeOut(300, function(){$(this).remove();});
-    $(this).closest('tr#'+quiz_id).find('input').val(quiz_id);
+    task_container.find('.input-quiz-id').val(quiz_id);
     // Change button to unselect type
     $(this).removeClass('quiz-select')
         .addClass('quiz-unselect btn-border-red')
@@ -188,8 +189,8 @@ clipit.task.admin.fullCalendar = function(data){
             if(date_formated >= data.start && date_formated <= data_end ){
                 date.hour(0).minute(0);
                 var new_task_modal = $("#create-new-task");
-                new_task_modal.modal('show')
-                new_task_modal.find(".input-task-start").val(date.format('DD/MM/YY HH:mm'))
+                new_task_modal.modal('show');
+                new_task_modal.find(".input-task-start").val(date.format('DD/MM/YY HH:mm'));
                 new_task_modal.find(".input-task-end").val('');
             } else {
                 return false;

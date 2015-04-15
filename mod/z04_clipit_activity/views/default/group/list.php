@@ -14,6 +14,7 @@ $activity = elgg_extract('entity', $vars);
 
 $groups_id = ClipitActivity::get_groups($activity->id);
 $groups = ClipitGroup::get_by_id($groups_id, 0, 0, 'name');
+natural_sort_properties($groups, 'name');
 $user_id = elgg_get_logged_in_user_guid();
 $user_group = ClipitGroup::get_from_user_activity($user_id, $activity->id);
 $user = array_pop(ClipitUser::get_by_id(array($user_id)));
