@@ -28,7 +28,7 @@ $isCalled = in_array($user_id, $activity->student_array);
         margin: 0;
     }
 </style>
-<h3 class="margin-bottom-20">Sin agrupar</h3>
+<h3 class="margin-bottom-20"><?php echo elgg_echo('group:ungrouped');?></h3>
 <div style="border-bottom: 6px solid #bae6f6;max-height:400px;overflow-y:auto;overflow-x:hidden;padding-bottom: 15px;">
     <ul class="row">
         <?php

@@ -106,6 +106,7 @@ $english = array(
     'group:assign_sb' => 'Assign Stumbling Blocks',
     'group:graph' => 'Group graph',
     'group:max_size' => 'Max students per group',
+    'group:ungrouped' => 'Ungrouped',
     'group:activity' => 'Group effort',
     'group:name' => 'Group name',
     'group:create' => 'Group create',

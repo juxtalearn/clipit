@@ -107,6 +107,7 @@ $spanish = array(
     'group:assign_sb' => 'Asignar conceptos',
     'group:graph' => 'Gráfica del grupo',
     'group:max_size' => 'Máximo de estudiantes por grupo',
+    'group:ungrouped' => 'Sin agrupar',
     'group:activity' => 'Progreso de los grupos',
     'group:name' => 'Nombre del grupo',
     'group:create' => 'Crear grupo',
