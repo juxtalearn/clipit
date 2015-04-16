@@ -28,6 +28,7 @@ function clipit_api_init() {
     elgg_register_admin_menu_item('configure', 'youtube_auth', 'settings');
     elgg_register_admin_menu_item('configure', 'update_clipit', 'settings');
     elgg_register_admin_menu_item('configure', 'clipit_options', 'settings');
+    elgg_register_action("clipit_options/save", elgg_get_plugins_path()."z02_clipit_api/actions/clipit_options/save.php");
     if(get_config("clipit_global_published") !== true) {
         set_config("clipit_global_published", true);
         ClipitSite::publish_to_global();

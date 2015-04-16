@@ -1,20 +1,4 @@
 <?php
-session_start();
-
-// Save posted options
-if(isset($_POST["submit_options"])) {
-    set_config("allow_registration", (bool)$_POST["allow_registration"]);
-    set_config("timezone", (string)$_POST["timezone"]);
-    set_config("clipit_site_type", (string)$_POST["clipit_site_type"]);
-    set_config("clipit_global_url", (string)$_POST["clipit_global_url"]);
-    set_config("clipit_global_login", (string)$_POST["clipit_global_login"]);
-    set_config("clipit_global_password", (string)$_POST["clipit_global_password"]);
-    set_config("clipit_global_published", (bool)$_POST["clipit_global_published"]);
-    set_config("performance_palette", (bool)$_POST["performance_palette"]);
-    set_config("example_types", (bool)$_POST["example_types"]);
-    set_config("fixed_performance_rating", (bool)$_POST["fixed_performance_rating"]);
-    system_message("The options have been saved correctly");
-}
 
 // Fetch current options
 $allow_registration = (bool)get_config("allow_registration");
@@ -29,7 +13,9 @@ $example_types = (bool)get_config("example_types");
 $fixed_performance_rating = (bool)get_config("fixed_performance_rating");
 
 // Main options form
-echo "<form action='clipit_options' method='post'>";
+echo "<form action='".elgg_get_site_url()."action/clipit_options/save' method='post'>";
+
+echo elgg_view('input/securitytoken');
 
 echo "<h3>General Options</h3><br>";
 
@@ -76,12 +62,12 @@ echo "<h3>Authoring Tool Options</h3><br>";
 
 echo "<div style='margin-left:20px;text-indent:-10px'>";
 
-echo "<p><strong>Reload performance palette?</strong><br>";
+echo "<p><strong>Reload performance items palette?</strong><br>";
 echo "<input name='performance_palette' value='0' type='radio'> yes<br>";
 echo "<input name='performance_palette' value='1' type='radio' checked> no";
 echo "</p>";
 
-echo "<p><strong>Reload problem example palette?</strong><br>";
+echo "<p><strong>Reload problem example types palette?</strong><br>";
 echo "<input name='example_types' value='0' type='radio'> yes<br>";
 echo "<input name='example_types' value='1' type='radio' checked> no";
 echo "</p>";

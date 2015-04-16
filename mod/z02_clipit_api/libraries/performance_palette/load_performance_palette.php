@@ -23,9 +23,9 @@ $key_name = "performance_palette";
 // Check if Performance Palette was already loaded.
 if(get_config($key_name) === true) {
     return;
+} else{
+    set_config($key_name, true);
 }
-
-set_config($key_name, true);
 
 // Load Performance Palette for all languages
 input_performance_palette_file(elgg_get_plugins_path() . $file_path . $file_name_en);

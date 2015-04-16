@@ -28,7 +28,7 @@ class ClipitPerformanceItem extends UBItem {
     To get the language index for a language code, use: get_language_index($lang_code);
     E.g.: to get the Spanish translation of the Item's name: $item->item_name[get_language_index("es")]
     */
-    public $reference = array();
+    public $reference = 0;
     public $item_name = array();
     public $item_description = array();
     public $example = array();
@@ -73,6 +73,8 @@ class ClipitPerformanceItem extends UBItem {
                 return static::set_properties($item->id, $prop_value_array);
             }
         }
+        // Reference is missing or invalid, clear to create new reference
+        unset($prop_value_array["reference"]);
         return static::set_properties(null, $prop_value_array);
     }
 
@@ -86,6 +88,9 @@ class ClipitPerformanceItem extends UBItem {
         }else{
             $lang_index = static::get_language_index($prop_value_array["language"]);
             unset($prop_value_array["language"]);
+        }
+        if(!isset($prop_value_array["reference"])){
+            $prop_value_array["reference"] = static::get_next_reference();
         }
         $property_list = (array)static::list_properties();
         foreach($prop_value_array as $prop => $value) {
@@ -135,6 +140,34 @@ class ClipitPerformanceItem extends UBItem {
                 $lang_index = 0;
         }
         return $lang_index;
+    }
+
+    static function get_index_language($index){
+        switch($index) {
+            case 0:
+                $lang = "en";
+                break;
+            case 1:
+                $lang = "es";
+                break;
+            case 2:
+                $lang = "de";
+                break;
+            case 3:
+                $lang = "pt";
+                break;
+            case 4:
+                $lang = "sv";
+                break;
+            default:
+                $lang = "en";
+        }
+        return $lang;
+    }
+
+    static function get_next_reference(){
+        $all_items = static::get_all(0,0,"reference",false);
+        return (int)$all_items[0]->reference+1;
     }
 
     /**

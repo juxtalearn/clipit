@@ -75,9 +75,9 @@ $english = array(
     'activity:create:info:step:3:details' => '
         <p>Some tasks require previously authored resources using the "Authoring tools", e.g.: "quiz" tasks need to be linked to a quiz, and "view teacher materials" tasks need the activity Tricky Topic to contain teaching materials.</p>
         <p>Please open the "Authoring tools" to make sure you have authored all necessary teacher resources before creating these tasks.</p>
-        <p>You can also create an activity without some tasks, and add them later on, when the linked resources have been created using the "Authoring tools".</p>
+        <p>You can also create an activity without some tasks, and add them later on, when the necessary resources have been created using the "Authoring tools".</p>
     ',
-    'activity:create:info:step:4' => '<b>Students</b> participating and how they will group',
+    'activity:create:info:step:4' => '<b>Students</b> participating: accounts and how they will group',
 
     'activity:profile' => 'Activity home',
     'activity:progress' => 'Activity progress',

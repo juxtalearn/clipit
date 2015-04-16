@@ -70,15 +70,15 @@ $spanish = array(
     'activity:delete' => 'Eliminar actividad',
     'activity:create' => 'Crear actividad',
     'activity:create:info:title' => 'Al crear una actividad, es necesario especificar',
-    'activity:create:info:step:1' => 'El Tema Clave asociado (uno por actividad)',
-    'activity:create:info:step:2' => 'Información general y fechas de la actividad',
-    'activity:create:info:step:3' => 'Tareas incluidas en la actividad (descripción, tipo y fechas)',
+    'activity:create:info:step:1' => 'El <b>Tema Clave</b> asociado: uno por actividad',
+    'activity:create:info:step:2' => '<b>Información sobre la Actividad</b>: nombre, descripción y fechas',
+    'activity:create:info:step:3' => '<b>Tareas</b> incluidas: descripción, tipo y fechas',
     'activity:create:info:step:3:details' => '
-        <p>Algunas tareas usan recursos de profesor previamente creado desde el menú "Herramientas de autoría". La tarea de tipo "Test" debe estar enlazada a un test, y la de tipo "Ver materiales del profesor" debe estar enlazada con materiales del Tema Clave.</p>
+        <p>Algunas tareas usan recursos de profesor previamente creado desde el menú "Herramientas de autoría", p.ej.: las tareas de tipo "Test" deben estar enlazadas a un test, y las de tipo "Ver materiales del profesor" requieren que el Tema Clave contenga materiales docentes.</p>
         <p>Por favor, entra en las "Herramientas de autoría" y asegúrate de haber creado todos los recursos del profesor necesarios antes de crear estas tareas.</p>
-        <p>También puedes crear una actividad sin estas tareas, y añadirlas más tarde, después de haber añadido recursos usando las "Herramientas de autoría".</p>
+        <p>También puedes crear una actividad sin algunas tareas, y añadirlas más tarde, después de haber añadido recursos necesarios usando las "Herramientas de autoría".</p>
     ',
-    'activity:create:info:step:4' => '4.	Estudiantes que participarán y como se juntarán en grupos',
+    'activity:create:info:step:4' => '<b>Estudiantes</b> que participarán: cuentas y cómo se agruparán',
 
     'activity:profile' => 'Inicio',
     'activity:progress' => 'Progreso de la actividad',
