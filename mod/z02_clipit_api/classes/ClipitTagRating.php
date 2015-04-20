@@ -52,6 +52,28 @@ class ClipitTagRating extends UBItem {
         $elgg_entity->set("is_used", (bool)$this->is_used);
     }
 
+    static function get_by_tag($tag_array) {
+        $tag_rating_array = array();
+        foreach($tag_array as $tag_id) {
+            $elgg_objects = elgg_get_entities_from_metadata(
+                array(
+                    'type' => static::TYPE, 'subtype' => static::SUBTYPE, 'metadata_names' => array("tag_id"),
+                    'metadata_values' => array($tag_id), 'limit' => 0
+                )
+            );
+            if(!empty($elgg_objects)) {
+                $temp_array = array();
+                foreach($elgg_objects as $elgg_object) {
+                    $temp_array[] = new static($elgg_object->guid, $elgg_object);
+                }
+                $tag_rating_array[tag_id] = $temp_array;
+            } else {
+                $tag_rating_array[$tag_id] = null;
+            }
+        }
+        return $tag_rating_array;
+    }
+
     static function get_average_rating_for_target($target_id) {
         $rating_array = ClipitRating::get_by_target(array($target_id));
         $rating_array = $rating_array[$target_id];

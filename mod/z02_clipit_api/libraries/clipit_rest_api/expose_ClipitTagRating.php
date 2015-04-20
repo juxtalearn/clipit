@@ -20,6 +20,11 @@ function expose_tag_rating_functions() {
     $class_suffix = "ClipitTagRating::";
     expose_common_functions($api_suffix, $class_suffix);
     expose_function(
+        $api_suffix . "get_by_tag", $class_suffix . "get_by_tag",
+        array("tag_array" => array("type" => "array", "required" => true)),
+        "Get Tag Ratings by Tag", "GET", false, true
+    );
+    expose_function(
         $api_suffix . "get_average_rating_for_target", $class_suffix . "get_average_rating_for_target",
         array("target_id" => array("type" => "int", "required" => true)),
         "Get the average tag rating for a target", 'GET', false, true
