@@ -21,10 +21,24 @@ class ClipitPerformanceItem extends UBItem {
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitPerformanceItem";
+    // Language codes and indices
+    const EN_CODE = "en";
+    const EN_INDEX = 0;
 
+    const ES_CODE = "es";
+    const ES_INDEX = 1;
+
+    const DE_CODE = "de";
+    const DE_INDEX = 2;
+
+    const PT_CODE = "pt";
+    const PT_INDEX = 3;
+
+    const SV_CODE = "sv";
+    const SV_INDEX = 4;
     /*
     Properties are disposed in arrays by language, in the following order:
-    [0 => en, 1 => es, 2 => de, 3 => pt]
+    [0 => en_value, 1 => es_value, 2 => de_value, 3 => pt_value, ...]
     To get the language index for a language code, use: get_language_index($lang_code);
     E.g.: to get the Spanish translation of the Item's name: $item->item_name[get_language_index("es")]
     */
@@ -35,6 +49,15 @@ class ClipitPerformanceItem extends UBItem {
     public $category = array();
     public $category_description = array();
 
+    function __construct($id = null, $elgg_object = null) {
+        $empty_string = "-EMPTY-";
+        $this->item_name = array_fill(0, 10, $empty_string);
+        $this->item_description = array_fill(0, 9, $empty_string);
+        $this->example = array_fill(0, 10, $empty_string);
+        $this->category = array_fill(0, 10, $empty_string);
+        $this->category_description = array_fill(0, 10, $empty_string);
+        parent::__construct($id, $elgg_object);
+    }
 
     /**
      * Loads object parameters stored in Elgg
@@ -82,7 +105,6 @@ class ClipitPerformanceItem extends UBItem {
         if(!$item = new static($id)) {
             return false;
         }
-
         if(!isset($prop_value_array["language"])){
             $lang_index = 0;
         }else{
@@ -121,48 +143,36 @@ class ClipitPerformanceItem extends UBItem {
 
     static function get_language_index($language){
         switch ($language){
-            case "en":
-                $lang_index = 0;
-                break;
-            case "es":
-                $lang_index = 1;
-                break;
-            case "de":
-                $lang_index = 2;
-                break;
-            case "pt":
-                $lang_index = 3;
-                break;
-            case "sv":
-                $lang_index = 4;
-                break;
+            case static::EN_CODE:
+                return static::EN_INDEX;
+            case static::ES_CODE:
+                return static::ES_INDEX;
+            case static::DE_CODE:
+                return static::DE_INDEX;
+            case static::PT_CODE:
+                return static::PT_INDEX;
+            case static::SV_CODE:
+                return static::SV_INDEX;
             default:
-                $lang_index = 0;
+                return static::EN_INDEX;
         }
-        return $lang_index;
     }
 
     static function get_index_language($index){
         switch($index) {
-            case 0:
-                $lang = "en";
-                break;
-            case 1:
-                $lang = "es";
-                break;
-            case 2:
-                $lang = "de";
-                break;
-            case 3:
-                $lang = "pt";
-                break;
-            case 4:
-                $lang = "sv";
-                break;
+            case static::EN_INDEX:
+                return static::EN_CODE;
+            case static::ES_INDEX:
+                return static::ES_CODE;
+            case static::DE_INDEX:
+                return static::DE_CODE;
+            case static::PT_INDEX:
+                return static::PT_CODE;
+            case static::SV_INDEX:
+                return static::SV_CODE;
             default:
-                $lang = "en";
+                return static::EN_CODE;
         }
-        return $lang;
     }
 
     static function get_next_reference(){
@@ -197,8 +207,10 @@ class ClipitPerformanceItem extends UBItem {
     }
 
     /**
-     * @param $reference
-     * @return static|null
+     * Gets an item by reference
+     *
+     * @param int $reference Item reference number
+     * @return static|null Returns the referenced item, or null if not found.
      */
     static function get_by_reference($reference){
         $performance_items = static::get_all();
