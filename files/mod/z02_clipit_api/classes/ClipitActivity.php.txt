@@ -40,11 +40,11 @@ class ClipitActivity extends UBItem {
     const STATUS_ENROLL = "enroll";
     const STATUS_ACTIVE = "active";
     const STATUS_CLOSED = "closed";
-    // Grouping Modes
+    // Grouping modes
     const GROUP_MODE_TEACHER = "teacher";
     const GROUP_MODE_SYSTEM = "system";
     const GROUP_MODE_STUDENT = "student";
-    // Class variables
+    // Activity properties
     public $color = "";
     public $status = "";
     public $tricky_topic = 0;

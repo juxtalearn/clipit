@@ -33,6 +33,7 @@ class ClipitTask extends UBItem {
     const REL_TASK_VIDEO = "ClipitTask-ClipitVideo";
     const REL_TASK_FILE = "ClipitTask-ClipitFile";
     const REL_TASK_QUIZ = "ClipitTask-ClipitQuiz";
+    const REL_TASK_PERFORMANCE = "ClipitTask-ClipitPerformanceItem";
     // Status values
     const STATUS_LOCKED = "locked";
     const STATUS_ACTIVE = "active";
@@ -49,6 +50,7 @@ class ClipitTask extends UBItem {
     public $storyboard_array = array();
     public $video_array = array();
     public $file_array = array();
+    public $performance_item_array = array();
 
     /**
      * Loads object parameters stored in Elgg
@@ -75,6 +77,7 @@ class ClipitTask extends UBItem {
         $this->storyboard_array = static::get_storyboards((int)$this->id);
         $this->video_array = static::get_videos($this->id);
         $this->file_array = static::get_files($this->id);
+        $this->performance_item_array = (array)static::get_performance_items($this->id);
     }
 
     /**
@@ -103,6 +106,7 @@ class ClipitTask extends UBItem {
         static::set_storyboards($this->id, $this->storyboard_array);
         static::set_videos($this->id, $this->video_array);
         static::set_files($this->id, $this->file_array);
+        static::set_performance_items($this->id, (array)$this->performance_item_array);
         return $this->id;
     }
 
@@ -214,6 +218,24 @@ class ClipitTask extends UBItem {
     static function get_files($id) {
         return UBCollection::get_items($id, static::REL_TASK_FILE);
     }
+
+    // Performance Items
+    static function add_performance_items($id, $performance_item_array) {
+        return UBCollection::add_items($id, $performance_item_array, static::REL_TASK_PERFORMANCE);
+    }
+
+    static function set_performance_items($id, $performance_item_array) {
+        return UBCollection::set_items($id, $performance_item_array, static::REL_TASK_PERFORMANCE);
+    }
+
+    static function remove_performance_items($id, $performance_item_array) {
+        return UBCollection::remove_items($id, $performance_item_array, static::REL_TASK_PERFORMANCE);
+    }
+
+    static function get_performance_items($id) {
+        return UBCollection::get_items($id, static::REL_TASK_PERFORMANCE);
+    }
+
 
     // OTHER
     /**
