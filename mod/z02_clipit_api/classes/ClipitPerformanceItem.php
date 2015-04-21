@@ -116,7 +116,7 @@ class ClipitPerformanceItem extends UBItem {
         }
         $property_list = (array)static::list_properties();
         foreach($prop_value_array as $prop => $value) {
-            if(!array_key_exists($prop, $property_list) && $prop != "language") {
+            if(!array_key_exists($prop, $property_list)) {
                 throw new InvalidParameterException("ERROR: One or more property names do not exist.");
             }
             if($prop == "id") {
@@ -127,6 +127,9 @@ class ClipitPerformanceItem extends UBItem {
                     $prop,
                     array("item_name", "item_description", "example", "category", "category_description"))
                 !== false){
+                if(empty($value)){
+                    continue; // multilanguage fields cannot be empty
+                }
                 $prop_array = (array)$item->$prop;
                 $prop_array[$lang_index] = $value;
                 $item->$prop = (array)$prop_array;
