@@ -28,7 +28,7 @@ function expose_performance_item_functions() {
     expose_function(
         $api_suffix . "get_by_reference", $class_suffix . "get_by_reference",
         array("reference_array" => array("type" => "array", "required" => false)),
-        "Get items sharing the same item_id (unique across all languages.", 'GET',
+        "Get items by reference number", 'GET',
         false, true
     );
 }

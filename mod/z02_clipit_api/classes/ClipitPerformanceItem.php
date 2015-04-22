@@ -212,16 +212,17 @@ class ClipitPerformanceItem extends UBItem {
     /**
      * Gets an item by reference
      *
-     * @param int $reference Item reference number
+     * @param int $reference_array List of reference numbers
      * @return static|null Returns the referenced item, or null if not found.
      */
-    static function get_by_reference($reference){
+    static function get_by_reference($reference_array){
         $performance_items = static::get_all();
+        $return_array = array();
         foreach($performance_items as $item){
-            if((int)$item->reference == (int)$reference) {
-                return $item;
+            if(array_search((int)$item->reference, (array)$reference_array) !== false) {
+                $return_array[(int)$item->reference] = $item;
             }
         }
-        return null;
+        return $return_array;
     }
 }
