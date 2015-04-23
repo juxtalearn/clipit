@@ -18,8 +18,9 @@ $finished = false;
 if(ClipitQuiz::has_finished_quiz($quiz, $user_id) || $finished_task){
     $finished = true;
 }
-
-
+if(!get_config('quiz_results_after_task_end') && $finished) {
+    $finished_task = true;
+}
 $body = elgg_view_form('quiz/take',
     array('body' =>
         elgg_view('quizzes/list', array(
