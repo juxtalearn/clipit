@@ -143,6 +143,11 @@ if (!function_exists('session_status')) {
     $file_content .= "\$CONFIG->broken_mta = FALSE;\n";
     $file_content .= "\$CONFIG->db_disable_query_cache = FALSE;\n";
     $file_content .= "\$CONFIG->min_password_length = 6;\n";
+    // PHP MEMCACHE
+    $file_content .= "\$CONFIG->memcache = true;\n";
+    $file_content .= "\$CONFIG->memcache_servers = array (\n";
+    $file_content .= "    array('127.0.0.1', 11211)\n";
+    $file_content .= ");\n";
     fwrite($file_name, $file_content);
     fclose($file_name);
     ?>
