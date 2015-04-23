@@ -109,7 +109,7 @@ if (!function_exists('session_status')) {
     exec("git init");
     exec("git remote add origin $git_url");
     exec("git fetch --tags");
-    exec("git checkout `git tag | tail -1`");
+    exec("git checkout `git for-each-ref --sort=committerdate --format='%(refname:short)' refs/tags | tail -1`");
     exec("mkdir .git/logs");
     exec("mkdir .git/logs/refs");
     exec("touch .git/logs/refs/stash");
