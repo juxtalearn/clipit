@@ -121,7 +121,7 @@ if (!function_exists('session_status')) {
 
     <p>configuring data folder and permissions...</p>
     <?php
-    exec("chmod -R 777 .");
+    exec("chmod -R 770 .");
     ?>
 
     <p>creating database...</p>
