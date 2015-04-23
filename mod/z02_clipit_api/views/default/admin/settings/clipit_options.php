@@ -11,6 +11,7 @@ $clipit_global_published = (bool)get_config("clipit_global_published");
 $performance_palette = (bool)get_config("performance_palette");
 $example_types = (bool)get_config("example_types");
 $fixed_performance_rating = (bool)get_config("fixed_performance_rating");
+$quiz_results_after_task_end = (bool)get_config("quiz_results_after_task_end");
 
 // Main options form
 echo "<form action='".elgg_get_site_url()."action/clipit_options/save' method='post'>";
@@ -95,6 +96,16 @@ if($fixed_performance_rating) {
 } else{
     echo "<input name='fixed_performance_rating' value='1' type='radio'> yes<br>";
     echo "<input name='fixed_performance_rating' value='0' type='radio' checked> no";
+}
+echo "</p>";
+
+echo "<p><strong>Wait until end of task to show quiz results?</strong><br>";
+if($quiz_results_after_task_end){
+    echo "<input name='quiz_results_after_task_end' value='1' type='radio' checked> yes<br>";
+    echo "<input name='quiz_results_after_task_end' value='0' type='radio'> no";
+} else{
+    echo "<input name='quiz_results_after_task_end' value='1' type='radio'> yes<br>";
+    echo "<input name='quiz_results_after_task_end' value='0' type='radio' checked> no";
 }
 echo "</p>";
 
