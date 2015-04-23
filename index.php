@@ -119,11 +119,6 @@ if (!function_exists('session_status')) {
     exec("rm -rf git_tmp");
     ?>
 
-    <p>configuring data folder and permissions...</p>
-    <?php
-    exec("chmod -R 770 .");
-    ?>
-
     <p>creating database...</p>
     <?php
     exec("mysql -h$mysql_host -u$mysql_user -p$mysql_pass -e'create database $mysql_schema;'");
@@ -150,6 +145,11 @@ if (!function_exists('session_status')) {
     $file_content .= ");\n";
     fwrite($file_name, $file_content);
     fclose($file_name);
+    ?>
+
+    <p>configuring data folder and permissions...</p>
+    <?php
+    exec("chmod -R 770 .");
     ?>
 
     <p><b>ClipIt has been downloaded correctly!</b></p>
