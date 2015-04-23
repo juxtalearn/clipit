@@ -20,15 +20,17 @@ function expose_performance_item_functions() {
     $class_suffix = "ClipitPerformanceItem::";
     expose_common_functions($api_suffix, $class_suffix);
     expose_function(
-        $api_suffix . "get_by_category", $class_suffix . "get_by_category",
-        array("category" => array("type" => "string", "required" => false)),
-        "Get items belonging to a certain Category. Leave Category blank for all items, ordered by Category.", 'GET',
+        $api_suffix . "get_from_category", $class_suffix . "get_from_category",
+        array(
+            "category" => array("type" => "string", "required" => false),
+            "language" => array("type" => "string", "required" => false)),
+        "Get items from a category. Leave  blank for all items, ordered by Category.", 'GET',
         false, true
     );
     expose_function(
         $api_suffix . "get_by_reference", $class_suffix . "get_by_reference",
         array("reference_array" => array("type" => "array", "required" => false)),
-        "Get items sharing the same item_id (unique across all languages.", 'GET',
+        "Get items by reference number", 'GET',
         false, true
     );
 }
