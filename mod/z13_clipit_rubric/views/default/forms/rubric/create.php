@@ -41,7 +41,7 @@ $(function(){
     <div class="tab-content">
         <?php
         foreach(performance_items_available_languages() as $i => $language):
-            $categories = ClipitPerformanceItem::get_by_category(null, $i);
+            $categories = ClipitPerformanceItem::get_from_category(null, $i);
             foreach($categories as $category => $items){
                 $item = array_pop($items);
                 $categories_data[$item->category[$i]] = array('name'=> $item->category[$i], 'description' =>$item->category_description[$i]);

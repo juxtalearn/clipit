@@ -56,7 +56,7 @@ function rubric_page_handler($page){
                 $entities = quiz_filter_search($search);
                 $entities = ClipitQuiz::get_by_id($entities);
             } else {
-//                $entities = ClipitPerformanceItem::get_by_category(null, $language_index);
+//                $entities = ClipitPerformanceItem::get_from_category(null, $language_index);
                 $all_entities = ClipitPerformanceItem::get_all(0, 0, 'name');
             }
             $count = count($all_entities);
