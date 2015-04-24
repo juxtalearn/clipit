@@ -6,7 +6,7 @@ set_include_path(
 );
 require_once 'Google/Client.php';
 require_once 'Google/Service/YouTube.php';
-$REDIRECT = elgg_get_site_url() . "admin/settings/youtube_auth";
+$REDIRECT = elgg_get_site_url() . "admin/clipit/youtube_auth";
 $APP_NAME = elgg_get_site_entity()->name;
 $SCOPE = "https://www.googleapis.com/auth/youtube";
 
@@ -50,7 +50,7 @@ if(get_config("google_refresh_token")) {
 } else {
     $html_title = "Enter Google Account Information";
     $html_body .= "<form action='" . $REDIRECT . "'>
-            <p/><font size=-1>(from <a href='https://console.developers.google.com'>Google Developers Console</a> -> APIs & auth -> Credentials)</font>
+            <p/><font size=-1>(go to: <u><a href='https://console.developers.google.com'>Google Developers Console</a></u> -> (project name) -> APIs & auth -> Credentials)</font>
             <p/>Google API Client ID<br><input type='text' name='google_id' style='width:50%;'><br>
             <p/>Google API Client Secret<br><input type='text' name='google_secret' style='width:50%;'><br>
             <p/><input type='submit' value='Submit'>

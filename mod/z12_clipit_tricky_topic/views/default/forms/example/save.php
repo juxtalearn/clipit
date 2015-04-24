@@ -278,7 +278,7 @@ if($example) {
             <ul class="navs nav-tab tab-set " role="tablist">
                 <?php
                 $i = 1;
-                foreach(ClipitExampleType::get_by_category(null, $user_language) as $category => $items):
+                foreach(ClipitExampleType::get_from_category(null, $user_language) as $category => $items):
                     $categories[$category] = $items;
                 ?>
                     <li role="presentation" class=" <?php echo $i==1 ? 'active':'';?>">

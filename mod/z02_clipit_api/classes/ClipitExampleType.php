@@ -132,7 +132,7 @@ class ClipitExampleType extends UBItem{
      *
      * @return static[] Array of Items for the specified category
      */
-    static function get_by_category($category = null, $language = "en") {
+    static function get_from_category($category = null, $language = "en") {
         $performance_items = static::get_all();
         $category_array = array();
         $lang_index = static::get_language_index($language);
