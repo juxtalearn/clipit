@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 $message = elgg_extract("entity", $vars);
+$reply = elgg_extract('reply', $vars);
 $href_multimedia = elgg_extract('href_multimedia', $vars);
 $owner = array_pop(ClipitUser::get_by_id(array($message->owner_id)));
 $user_loggedin_id = elgg_get_logged_in_user_guid();
@@ -104,7 +105,7 @@ foreach($replies as $reply_msg){
     $auto_id++;
 }
 ?>
-
+<?php if($reply !== false): ?>
 <!-- Reply form -->
 <a name="create_reply"></a>
 <h3 class="activity-module-title"><?php echo elgg_echo("reply:create"); ?></h3>
@@ -120,3 +121,4 @@ foreach($replies as $reply_msg){
     </div>
 </div>
 <!-- Reply form end-->
+<?php endif;?>

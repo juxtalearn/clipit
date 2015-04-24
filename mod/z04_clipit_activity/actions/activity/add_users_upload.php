@@ -24,9 +24,9 @@ foreach($groups as $group_name => $users){
                 'name' => $user->name,
                 'id' => $user->id,
             );
-        }
-        if($activity_id){
-            ClipitActivity::add_students($activity_id, array($user->id));
+            if($activity_id){
+                ClipitActivity::add_students($activity_id, array($user->id));
+            }
         }
     }
 }

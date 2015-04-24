@@ -57,9 +57,7 @@ $labels_value = implode(", ", $label_value);
 if($task_id = get_input('task_id')):
     $task = array_pop(ClipitTask::get_by_id(array($task_id)));
     ?>
-    <label><?php echo elgg_echo('publications:review:info');?></label>
     <div class="bg-warning">
-        <?php echo elgg_view('input/submit', array('value' => elgg_echo('select'), 'class' => 'pull-right elgg-button btn btn-primary'));?>
         <small><?php echo elgg_echo('activity:task');?>:</small>
         <h4 style="margin: 0">
             <?php echo elgg_view('output/url', array(
@@ -71,6 +69,9 @@ if($task_id = get_input('task_id')):
         </h4>
         <div><?php echo $task->description;?></div>
     </div>
+    <?php echo elgg_view('input/submit', array('value' => elgg_echo('select'), 'class' => 'pull-right elgg-button btn btn-primary'));?>
+    <label><?php echo elgg_echo('publications:review:info');?></label>
+    <hr>
 <?php endif; ?>
 
 <div class="row">
@@ -128,11 +129,12 @@ if($task_id = get_input('task_id')):
         <?php echo $vars['entity_preview'];?>
         <!-- Entity preview end -->
         <br>
+        <?php if(!get_config('fixed_performance_rating')):?>
         <label><?php echo elgg_echo("performance_items");?></label>
         <div>
             <select name="performance_items[]" data-placeholder="<?php echo elgg_echo('click_add');?>" style="width:100%;" multiple class="chosen-select-items" tabindex="8">
                 <option value=""></option>
-                <?php foreach(ClipitPerformanceItem::get_by_category(null, $user_language) as $category => $items):?>
+                <?php foreach(ClipitPerformanceItem::get_from_category(null, $user_language) as $category => $items):?>
                     <optgroup label="<?php echo $category; ?>">
                         <?php foreach($items as $item): ?>
                             <option <?php echo in_array($item->id, $performance_items) ? "selected" : "";?> value="<?php echo $item->id; ?>">
@@ -143,6 +145,7 @@ if($task_id = get_input('task_id')):
                 <?php endforeach; ?>
             </select>
         </div>
+        <?php endif;?>
     </div>
 </div>
 <p class="text-right">

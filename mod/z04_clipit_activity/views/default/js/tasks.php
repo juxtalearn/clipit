@@ -99,6 +99,43 @@ clipit.task.types = function(){
             input_prefix_val = '';
         }
         $attach_list.toggle();
+        /*content.find('ul.nav').show();
+        var attach_container = content.find('.attach-multimedia'),
+            $attach_tricky_topic = attach_container.find('.multimedia-tt');
+        content.find('a[href="#tricky-topic-multimedia"]').on('click', function () {
+            $attach_tricky_topic.attach_multimedia({
+                data: {
+                    'entity_id': tricky_topic_val,
+                    'input_prefix': input_prefix_val
+                }
+            }).loadBy("files");
+        });
+        */
+//        if(content.find('ul.nav').length == 0) {
+//            var tabs = $('<ul/>').addClass('nav nav-tabs margin-bottom-5 margin-top-10');
+//            tabObj = {
+//                'activity': 'Materiales de la actividad',
+//                'tricky-topic': 'Materiales del tema clave'
+//            };
+//            var i = 0;
+//            $.each(tabObj, function (id, value) {
+//                tabs.append($('<li/>').addClass(i == 0 ? 'active' : '').html(
+//                    $('<a/>')
+//                        .attr({'href': '#' + id, 'data-toggle': 'tab'})
+//                        .text(value)
+//                        .on('click', function () {
+//                            $(this).attach_multimedia({
+//                                data: {
+//                                    'entity_id': tricky_topic_val,
+//                                    'input_prefix': input_prefix_val
+//                                }
+//                            }).loadBy("files");
+//                        })
+//                ));
+//                i++;
+//            });
+//            attach_container.prepend(tabs);
+//        }
         $attach_list.attach_multimedia({
             data: {
                 'entity_id': entity_id,
@@ -142,8 +179,10 @@ clipit.task.quizUnselect = function(){
     task_container.closest('.task').find('.task-types').trigger('change');
 };
 clipit.task.addTask = function(){
-    var content = $(".task-list");
+    var content = $(".task-list"),
+        loading = $('<i class="fa fa-spinner fa-spin fa-2x blue-lighter" style="padding:15px;"/>').appendTo(content);
     $.get( "ajax/view/activity/create/task_list", function( data ) {
+        loading.remove();
         content.append(data);
     });
 };

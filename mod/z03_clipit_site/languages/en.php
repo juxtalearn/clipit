@@ -89,10 +89,10 @@ $english = array(
     'community_guidelines' => 'Community Guidelines',
 
     // Form no login
-    'loginusername' => 'Username or email you signed up with',
+    'loginusername' => 'Username you signed up with',
     'user:password:lost' => 'Forgot password',
     'new_user' => 'New user?',
-    'user:notfound' => 'Username or email not found.',
+    'user:notfound' => 'Username not found.',
     'user:register' => 'Sign up',
     'user:username:login' => 'Login',
     'user:login' => 'Log in',

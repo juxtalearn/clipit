@@ -19,8 +19,9 @@ $input_prefix = elgg_extract('input_prefix', $vars);
     <label class="inline-block" style="padding-right: 10px;">
         <input
             type="checkbox" <?php echo $vars['checked'] == true ? 'checked' : '';?>
-            name="<?php echo $input_prefix;?>[question][<?php echo $id;?>][select_multi][<?php echo $id_input;?>][correct]"
-            value="1"
+            name="<?php echo $input_prefix;?>[question][<?php echo $id;?>][select_multi][correct][]"
+            value="<?php echo $num;?>"
+            required="true"
             class="inline-block">
     </label>
     <?php echo elgg_view('output/url', array(

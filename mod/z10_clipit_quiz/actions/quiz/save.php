@@ -18,32 +18,37 @@ $questions_id = array();
 
 $images_tmp = array_pop($_FILES['quiz']['tmp_name']);
 $images_name = array_pop($_FILES['quiz']['name']);
+
 foreach($questions as $input_id => $question){
     $values = array();
     $validations = array();
     $tags = array();
     switch($question['type']){
         case ClipitQuizQuestion::TYPE_SELECT_MULTI:
-            foreach($question['select_multi'] as $select){
-                if(trim($select['value'])!='') {
+            $num = 1;
+            foreach ($question['select_multi'] as $select) {
+                if (trim($select['value'])!='' && is_array($select)) {
                     $values[] = $select['value'];
-                    if (isset($select['correct'])) {
+                    if (in_array($num, $question['select_multi']['correct'])) {
                         $validations[] = 1;
                     } else {
                         $validations[] = 0;
                     }
+                    $num++;
                 }
             }
             break;
         case ClipitQuizQuestion::TYPE_SELECT_ONE:
-            foreach($question['select_one'] as $select){
-                if(trim($select['value'])!=''){
+            $num = 1;
+            foreach ($question['select_one'] as $select) {
+                if (trim($select['value'])!='' && is_array($select)) {
                     $values[] = $select['value'];
-                    if(isset($select['correct'])){
+                    if ($question['select_one']['correct'] == $num) {
                         $validations[] = 1;
                     } else {
                         $validations[] = 0;
                     }
+                    $num++;
                 }
             }
             break;

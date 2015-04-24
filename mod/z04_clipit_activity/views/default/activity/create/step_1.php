@@ -161,6 +161,9 @@ $(function(){
         return '<?php echo elgg_echo('exit:page:confirmation');?>';
     });
     $(document).on("click", '#finish_setup', function(e){
+        if(!$("#activity-create").valid()){
+            return false;
+        }
         $(window).unbind('beforeunload');
     });
 });

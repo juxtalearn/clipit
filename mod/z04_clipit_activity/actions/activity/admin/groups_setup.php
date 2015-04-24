@@ -25,7 +25,6 @@ if(!empty($group_array)) {
             );
             $users_array = array();
             foreach ($users as $user) {
-//                if (in_array($user->id, $called_users)) {
                 if (!ClipitGroup::get_from_user_activity($user->id, $activity_id)) {
                     $users_array[] = $user->id;
                     $users_loaded[] = $user->id;
@@ -42,14 +41,18 @@ if(!empty($group_array)) {
 
 foreach($groups as $group){
     $group_id = $group['id'];
-    if(!$group_id){
+    // check if group exists from excel file load
+    if($groups[$group['name']] && $group_id){
+        $group['users'] = $group['users'].",".$groups[$group['name']]['users'];
+        unset($groups[$group['name']]);
+    }elseif($groups[$group['name']] && !$group_id){
         $group_id = ClipitGroup::create(array(
             'name' => $group['name'],
         ));
     }
     if($group['remove']){
         ClipitGroup::delete_by_id(array($group_id));
-    } else {
+    } elseif($group_id) {
         $groups_ids[] = $group_id;
         $users = explode(",", $group['users']);
         $users = array_filter($users);

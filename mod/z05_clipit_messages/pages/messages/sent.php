@@ -77,7 +77,7 @@ foreach($messages as $message){
 
 $content = elgg_view("search/search");
 $content .= elgg_view("page/elements/list/options", array('options' => $list_options));
-$content .= elgg_view("page/elements/list/table", array('rows' => $rows, 'class' => 'messages-table'));
+$content .= elgg_view("page/elements/list/table", array('rows' => $rows, 'class' => 'messages-table', 'responsive' => true));
 
 
 $params = array(

@@ -14,6 +14,8 @@
 <?php echo elgg_view("page/components/title_block", array(
     'title' => elgg_echo('activity:grouping_mode'),
 ));?>
+<label for="groups_creation"></label>
+<div class="clearfix"></div>
 <div class="panel-group" id="accordion_grouping">
     <div class="panel panel-default">
         <div class="panel-heading bg-white cursor-pointer">

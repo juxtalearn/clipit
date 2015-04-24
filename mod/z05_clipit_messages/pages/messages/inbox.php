@@ -116,7 +116,7 @@ $list_options = array(
 );
 // set content
 $content_list .= elgg_view("page/elements/list/options", array('options' => $list_options));
-$content_list .= elgg_view("page/elements/list/table", array('rows' => $rows, 'class' => 'messages-table'));
+$content_list .= elgg_view("page/elements/list/table", array('rows' => $rows, 'class' => 'messages-table', 'responsive' => true));
 
 $content = elgg_view("search/search");
 $content .= elgg_view_form("messages/set_options", array('body' => $content_list, 'class' => 'block-total'));

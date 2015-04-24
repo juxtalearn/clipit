@@ -13,6 +13,7 @@
 $task_type = elgg_extract('task_type', $vars);
 $id = elgg_extract('id', $vars);
 $task = elgg_extract('task', $vars); // task data
+$show_performance_items = false;
 
 switch($task_type){
     case "upload":
@@ -33,6 +34,9 @@ switch($task_type){
         );
         $input_array = "[{$id}][feedback-form]";
         $disabled = true;
+        if(get_config('fixed_performance_rating')){
+            $show_performance_items = true;
+        }
         break;
     case "download":
         $task_types = array(
@@ -51,7 +55,8 @@ if($vars['required'] !== false){
     <?php if(!$disabled && !$task && $vars['delete_task']!==false):?>
         <i class="delete-task fa fa-times red pull-left margin-top-5" style="cursor: pointer" onclick="javascript:$(this).closest('.task').remove();"></i>
     <?php endif;?>
-    <div class="content-block">
+<!--    <div class="content-block">-->
+    <div class="pull-left">
         <div class="col-md-5">
             <div class="form-group">
                 <label for="task-title"><?php echo elgg_echo("task:title");?></label>
@@ -120,6 +125,48 @@ if($vars['required'] !== false){
                 ?>
             </div>
         </div>
+        <?php
+            if($show_performance_items  ||
+                ($task
+                && ($task->task_type == ClipitTask::TYPE_STORYBOARD_FEEDBACK || $task->task_type == ClipitTask::TYPE_VIDEO_FEEDBACK)
+                && get_config('fixed_performance_rating'))
+            ):
+            $performance_items = array();
+            if($task){
+                $performance_items = $task->performance_item_array;
+            }
+//
+//            if($task &&
+//                ($task->task_type == ClipitTask::TYPE_STORYBOARD_FEEDBACK ||
+//                $task->task_type == ClipitTask::TYPE_VIDEO_FEEDBACK)
+//                && get_config('fixed_performance_rating')
+//            ):
+            $user_language = get_current_language();
+            $language_index = ClipitPerformanceItem::get_language_index($user_language);
+        ?>
+            <script>$(function(){$(".chosen-select-items").chosen();});</script>
+            <style>
+                .chosen-container{width: 100% !important;}
+                /*.chosen-container .chosen-drop{position: relative;display: none;}*/
+                /*.chosen-with-drop .chosen-drop{display: block;}*/
+            </style>
+            <div class="col-md-4" style="margin-bottom: 50px;">
+                <label><?php echo elgg_echo("performance_items");?></label>
+                <select name="<?php echo "task{$input_array}[performance_items][]";?>" data-placeholder="<?php echo elgg_echo('click_add');?>" style="width:100%;" multiple class="chosen-select-items" tabindex="8">
+                    <option value=""></option>
+                    <?php foreach(ClipitPerformanceItem::get_from_category(null, $user_language) as $category => $items):?>
+                        <optgroup label="<?php echo $category; ?>">
+                            <?php foreach($items as $item): ?>
+                                <option <?php echo in_array($item->id, $performance_items) ? "selected" : "";?> value="<?php echo $item->id; ?>">
+                                    <?php echo $item->item_name[$language_index]; ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </optgroup>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        <?php endif;?>
+
         <?php if(!$disabled):?>
             <div class="col-md-4 feedback-module" style="<?php echo $vars['feedback_check'] != false ? '' : 'display: none;'; ?>padding: 10px;background: #fafafa;">
                 <label for="activity-title"><?php echo elgg_echo("task:feedback");?></label>
@@ -177,5 +224,18 @@ if(!$disabled):
     <?php endif;?>
 
     <?php echo elgg_view("multimedia/attach/list", $attach);?>
+
+<!--    <ul class="nav nav-tabs margin-bottom-5 margin-top-10" style="display: none;">-->
+<!--        <li class="active"><a href="#activity-multimedia" data-toggle="tab">Materiales de la actividad</a></li>-->
+<!--        <li><a href="#tricky-topic-multimedia" data-toggle="tab">Materiales del tema clave</a></li>-->
+<!--    </ul>-->
+<!--    <div class="attach-multimedia tab-content">-->
+<!--        <div id="activity-multimedia" class="tab-pane active">-->
+<!--            --><?php //echo elgg_view("multimedia/attach/list", array_merge($attach, array('class' => 'multimedia-activity')));?>
+<!--        </div>-->
+<!--        <div id="tricky-topic-multimedia" class="tab-pane">-->
+<!--            --><?php //echo elgg_view("multimedia/attach/list", array('id' => $id.time(), 'class' => 'multimedia-tt'));?>
+<!--        </div>-->
+<!--    </div>-->
 
 <?php endif;?>

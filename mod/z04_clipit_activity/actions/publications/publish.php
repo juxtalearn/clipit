@@ -78,10 +78,14 @@ if(count($entity)==0 || trim($title) == "" || trim($description) == ""){
     }
     $entity_class::set_labels($new_entity_id, $total_labels);
     // Tags
-        $entity_class::set_tags($new_entity_id, $tags);
+    $entity_class::set_tags($new_entity_id, $tags);
+    /* Get performance items from task */
+    if(get_config('fixed_performance_rating') && $task_feedback_id = ClipitTask::get_child($task_id)){
+        $task_feedback = array_pop(ClipitTask::get_by_id(array($task_feedback_id)));
+        $performance_items = $task_feedback->performance_item_array;
+    }
     // Performance items
     $entity_class::add_performance_items($new_entity_id, $performance_items);
-
 
     if($new_entity_id){
         switch($entity_class){

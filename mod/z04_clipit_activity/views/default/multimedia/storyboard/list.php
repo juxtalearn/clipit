@@ -63,11 +63,11 @@ foreach($storyboards as $sb_id){
                         'title' => $owner->name,
                         'class' => 'btn btn-default btn-icon',
                         'text'  => '<i class="fa fa-download"></i>'
-                    )).'
-                    <small class="show text-truncate smaller" title="'.formatFileSize($file->size).'" style="margin-top: 3px;">
-                        '.formatFileSize($file->size).'
-                    </small>
-                    </div>';
+                )).'
+                <small class="show text-truncate smaller" title="'.formatFileSize($file->size).'" style="margin-top: 3px;">
+                    '.formatFileSize($file->size).'
+                </small>
+                </div>';
     if($vars['task_id'] && !$vars['publish']){
         if(array_pop(ClipitStoryboard::get_read_status($storyboard->id, array($user_id)))) {
             $buttons .= '<div class="pull-right margin-right-5 margin-top-5">
@@ -76,12 +76,13 @@ foreach($storyboards as $sb_id){
         }
     }
     if($vars['publish']){
-        $buttons .= elgg_view('output/url', array(
+        $buttons = elgg_view('output/url', array(
             'href'  => "{$href}/publish/{$storyboard->id}".($vars['task_id'] ? "?task_id=".$vars['task_id']: ""),
             'title' => elgg_echo('review'),
             'style' => 'background: #47a447;color: #fff;font-weight: bold;margin-left:10px;',
             'class' => 'btn-sm btn pull-right btn-primary',
-            'text'  => elgg_echo('review').'...'
+            'text'  => elgg_view('page/components/tooltip', array('text' => elgg_echo('publications:select:tooltip')))
+                .elgg_echo('select').'...'
         ));
 
     }

@@ -25,6 +25,8 @@ function clipit_quiz_init() {
     // Questions
     elgg_register_ajax_view('questions/summary');
     elgg_register_ajax_view('questions/examples');
+    // Sidebar menu
+    elgg_extend_view('authoring_tools/sidebar/menu', 'quiz/sidebar/menu', 200);
 }
 
 /**
@@ -34,8 +36,7 @@ function quiz_page_handler($page){
     elgg_set_context('authoring');
     $filter = '';
     $sidebar = elgg_view_module('aside', elgg_echo('teacher:authoring_tools'),
-        elgg_view('tricky_topics/sidebar/menu').
-        elgg_view('quiz/sidebar/menu'),
+        elgg_view('authoring_tools/sidebar/menu'),
         array('class' => 'activity-group-block margin-bottom-10 aside-tree')
     );
     $search_menu = elgg_view_module('aside', elgg_echo('filter'),

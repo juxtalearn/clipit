@@ -25,7 +25,7 @@ clipit.init = function() {
         range: jQuery.validator.format(elgg.echo('validation:range')),
         max: jQuery.validator.format(elgg.echo('validation:max')),
         min: jQuery.validator.format(elgg.echo('validation:min')),
-        extension: elgg.echo('validation:creditcard'),
+        extension: elgg.echo('validation:creditcard')
     });
     clipit.validationCustomMethods();
 
@@ -222,12 +222,15 @@ clipit.datetimepickerDefault = function(data) {
         stepMinute: 15,
         minuteMin: 0,
         timeText: elgg.echo('time'),
-        closeText: elgg.echo('accept'),
+        closeText: elgg.echo('ok'),
         onClose: function (text, inst) {
+            var that = $(this);
             if($(this).hasClass('input-task-start')){
                 var $task_end = $(this).closest('.task').find('.input-task-end'),
                     task_start_val = $(this).val();
-                $task_end.datepicker( "option", "minDate", task_start_val);
+                $task_end.datetimepicker( "option", "minDate", that.datetimepicker('getDate'));
+                $task_end.datetimepicker( "option", "minDateTime", that.datetimepicker('getDate'));
+                $task_end.val($task_end.val());
             }
         }
     }, data);

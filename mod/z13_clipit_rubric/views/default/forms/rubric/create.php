@@ -13,16 +13,42 @@
 $rubric = elgg_extract('entity', $vars);
 $button_value = elgg_extract('submit_value', $vars);
 $language_index = ClipitPerformanceItem::get_language_index(get_current_language());
+//print_r(ClipitPerformanceItem::get_all(15));
 ?>
 <script>
 $(function(){
     $(document).on('change', '.load-categories', function(){
-        var container = $(this).closest('.performance_item'),
-            data = container.find('.categories-data').val(),
-            value = $(this).find('option:selected').text();
-        data = JSON.parse(data);
-        container.find('.input-category-name').val(data[value].name);
-        container.find('.input-category-description').val(data[value].description);
+        var that = $(this);
+        $('.performance_item.tab-pane').each(function() {
+            var container = $(this),
+                data = container.find('.categories-data').val(),
+                value = that.find('option:selected').text();
+            data = JSON.parse(data);
+            container.find('.load-categories option[value='+that.val()+']').prop('selected', true);
+            container.find('.input-category-name').val(data[value].name);
+            container.find('.input-category-description').val(data[value].description);
+        });
+    });
+    $(document).on('click', '.add-rubric', function(){
+//        var container = $(this).parent('.group-input'),
+//            count = container.find('.clone-input').length;
+
+//        var performance = $(this).closest('.performance_item'),
+//            lang_id = $(this).closest('.performance_item').attr('id');
+        $('.performance_item.tab-pane').each(function(){
+            var lang_id = $(this).closest('.performance_item').attr('id'),
+                container = $(this).find('.group-input'),
+                clone = container.find('.clone-input:last').clone();
+            clone.find('input, textarea').each(function(i, v){
+                $(this).val('');
+                var parts = $(this).attr('name').match(/([\w])+/g);
+                if(parts) {
+                    var new_name = parts[0] + '[' + lang_id + '][' + (parseInt(parts[2])+(1)) + '][' + parts[3] + ']';
+                    $(this).attr('name', new_name);
+                }
+            });
+            container.find('.clone-input:last').after(clone);
+        });
     });
 });
 </script>
@@ -41,11 +67,18 @@ $(function(){
     <div class="tab-content">
         <?php
         foreach(performance_items_available_languages() as $i => $language):
-            $categories = ClipitPerformanceItem::get_by_category(null, $i);
+            $count = 0;
+            $input_prefix = 'item['.$i.']['.$count.']';
+            $lang_code = ClipitPerformanceItem::get_index_language($i);
+            $categories = ClipitPerformanceItem::get_from_category(null, $lang_code);
             foreach($categories as $category => $items){
                 $item = array_pop($items);
                 $categories_data[$item->category[$i]] = array('name'=> $item->category[$i], 'description' =>$item->category_description[$i]);
             }
+            echo elgg_view("input/hidden", array(
+                'name' => 'item['.$i.'][language]',
+                'value' => $lang_code,
+            ));
         ?>
             <div role="tabpanel" class="row performance_item tab-pane <?php echo $language_index == $i ? 'active':'';?>" id="<?php echo $i;?>" style="padding: 20px;">
                 <div class="col-md-7"><h4 class="margin-0 margin-bottom-15"><?php echo elgg_echo('performance_item');?></h4></div>
@@ -56,12 +89,13 @@ $(function(){
                     'class' => 'form-control hide categories-data',
                 ));
                 ?>
-                <div class="col-md-7">
-                    <div class="form-group">
-                        <label for="item-name[<?php echo $i;?>]"><?php echo elgg_echo('title');?></label>
+                <div class="col-md-7 group-input" style="border-right: 1px solid #eee;">
+                    <div class="form-group clone-input" style="background: #fafafa;padding: 10px;">
                         <?php echo elgg_view("input/text", array(
-                            'name' => 'item-name['.$i.']',
+                            'name' => $input_prefix.'[item_name]',
                             'class' => 'form-control',
+                            'required' => true,
+                            'placeholder' => elgg_echo('name', $lang_code),
                         ));
                         ?>
                         <div class="margin-top-10">
@@ -75,7 +109,7 @@ $(function(){
                         <div class="collapse form-group" id="item_category_desc_<?php echo $i;?>">
                             <label for="item-description[<?php echo $i;?>]"><?php echo elgg_echo('description');?></label>
                             <?php echo elgg_view("input/plaintext", array(
-                                'name' => 'item-description['.$i.']',
+                                'name' => $input_prefix.'[item_description]',
                                 'class' => 'form-control margin-top-20',
                                 'style' => 'overflow-y: auto;resize: none;',
                                 'rows' => 3,
@@ -85,19 +119,25 @@ $(function(){
                         <div class="collapse form-group" id="item_example<?php echo $i;?>">
                             <label for="item-example[<?php echo $i;?>]"><?php echo elgg_echo('performance_item:example');?></label>
                             <?php echo elgg_view("input/text", array(
-                                'name' => 'item-example['.$i.']',
+                                'name' => $input_prefix.'[example]',
                                 'class' => 'form-control',
                             ));
                             ?>
                         </div>
                     </div>
+                    <div class="clearfix"></div>
+                    <?php echo elgg_view('output/url', array(
+                        'class' => 'btn btn-xs btn-primary btn-border-blue add-rubric add-input',
+                        'text'  => elgg_echo('rubric:add'),
+                    ));
+                    ?>
                 </div>
                 <div class="col-md-5">
-                    <div class="form-group" style="background: #fafafa;padding: 10px;">
+                    <div class="form-group">
                         <div class="form-group">
                         <small class="show margin-bottom-10">Cargar categoría existente</small>
                         <?php echo elgg_view('input/dropdown', array(
-                            'name' => 'group-mode',
+//                            'name' => 'item['.$i.']['.$count.'][category]',
                             'class' => 'form-control load-categories',
                             'style' => 'padding: 2px;',
                             'options_values' => array_merge(array(''), array_keys($categories_data))
@@ -106,7 +146,7 @@ $(function(){
                         </div>
                         <label for="category-name[<?php echo $i;?>]"><?php echo elgg_echo('title');?></label>
                         <?php echo elgg_view("input/text", array(
-                            'name' => 'category-name['.$i.']',
+                            'name' => 'item['.$i.'][category]',
                             'class' => 'form-control input-category-name',
                             'required' => true,
                             'value' => $rubric->category[$i],
@@ -121,7 +161,7 @@ $(function(){
                             <label for="category-description[<?php echo $i;?>]"><?php echo elgg_echo('description');?></label>
                             <?php
                             echo elgg_view('input/plaintext', array(
-                                'name' => 'category-description['.$i.']',
+                                'name' => 'item['.$i.'][category_description]',
                                 'class' => 'form-control input-category-description',
                                 'rows' => 7
                             ));
@@ -129,16 +169,11 @@ $(function(){
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
-                    <hr>
-                    <?php echo elgg_view('output/url', array(
-                        'class' => 'btn btn-xs btn-primary add-rubric',
-                        'text'  => elgg_echo('rubric:add'),
-                    ));
-                    ?>
-                </div>
             </div>
-        <?php endforeach;?>
+        <?php
+            $count++;
+        endforeach;
+        ?>
     </div>
 
 </div>

@@ -11,9 +11,7 @@
  * @package         ClipIt
  */
 $english = array(
-//    'rubric' => 'Rubric',
-//    'rubric:create' => 'Create rubric',
-//    'rubrics' => 'Rubrics',
+    'last_added' => 'Last added',
     'rubric' => 'Performance Palette',
     'rubric:create' => 'Create performance palette',
     'rubrics' => 'Performance Pallets',

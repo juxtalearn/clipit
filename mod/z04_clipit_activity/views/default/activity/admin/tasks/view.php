@@ -40,7 +40,7 @@ $id = uniqid();
                     minDate: "<?php echo date("d/m/y", $activity->start);?>",
                     maxDate: "<?php echo date("d/m/y", $activity->end);?>",
                     timeText: "<?php echo elgg_echo('time');?>",
-                    closeText: "<?php echo elgg_echo('accept');?>"
+                    closeText: "<?php echo elgg_echo('ok');?>"
                 })
             ));
         });

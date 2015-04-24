@@ -21,6 +21,8 @@ $locked = false;
 $duplicate = true;
 $dropdown = true;
 $edit = true;
+$remove = true;
+
 switch($object['subtype']){
     case 'ClipitTrickyTopic':
         if($user->id == elgg_get_logged_in_user_guid()){
@@ -72,10 +74,10 @@ switch($object['subtype']){
         break;
     case 'ClipitPerformanceItem':
         $duplicate = false;
+        $remove = false;
         $owner_options = true;
         $href = array(
-            'edit' => 'rubrics/edit/'.$entity->id,
-            'remove' => elgg_add_action_tokens_to_url(elgg_normalize_url('action/rubric/remove?id='.$entity->id), true),
+            'edit' => 'rubrics/edit/?name='.json_encode($entity->category[ClipitPerformanceItem::get_language_index(get_current_language())]),
         );
         break;
     case 'ClipitActivity':
@@ -115,12 +117,14 @@ if($owner_options){
             'icon' => $edit_icon,
         );
     }
-    $options_list[] =  array(
-        'attr' => array('href' => $href['remove'], 'class' => $remove_class),
-        'text' => elgg_echo('remove'),
-        'icon' => $remove_icon,
-        'item_class' => $item_class
-    );
+    if($remove) {
+        $options_list[] = array(
+            'attr' => array('href' => $href['remove'], 'class' => $remove_class),
+            'text' => elgg_echo('remove'),
+            'icon' => $remove_icon,
+            'item_class' => $item_class
+        );
+    }
 }
 
 if($dropdown) {

@@ -34,7 +34,8 @@ function clipit_tricky_topic_init() {
         elgg_register_ajax_view('tricky_topics/tags/search');
     }
 
-
+    // Sidebar menu
+    elgg_extend_view('authoring_tools/sidebar/menu', 'tricky_topics/sidebar/menu', 100);
 
     elgg_extend_view('js/activity', 'js/tricky_topic');
     elgg_register_library('clipit:tricky_topic:functions', "{$plugin_dir}/lib/functions.php");
@@ -48,8 +49,7 @@ function tt_page_handler($page){
     elgg_load_js('clipit:tricky_topic');
     elgg_set_context('authoring');
     $menu = elgg_view_module('aside', elgg_echo('teacher:authoring_tools'),
-        elgg_view('tricky_topics/sidebar/menu').
-        elgg_view('quiz/sidebar/menu'),
+        elgg_view('authoring_tools/sidebar/menu'),
         array('class' => 'activity-group-block margin-bottom-10 aside-tree')
     );
     $selected_tab = get_input('filter', 'all');

@@ -16,13 +16,6 @@ $count = elgg_extract('count', $vars);
 $language_index = ClipitPerformanceItem::get_language_index(get_current_language());
 $options = true;
 $select = false;
-if(get_input('activity_create')){
-    $input_prefix = get_input('input_prefix');
-    $tricky_topic_id = get_input('tricky_topic');
-    $rubriczes = ClipitQuiz::get_from_tricky_topic($tricky_topic_id);
-    $options = false;
-    $select = true;
-}
 ?>
 <div class="margin-bottom-20">
     <div class="pull-right">
@@ -70,62 +63,48 @@ $(function(){
             <th style="width: 50px;"></th>
         <?php endif;?>
         <th><?php echo elgg_echo('title');?></th>
-        <th><?php echo elgg_echo('category');?></th>
-        <th><?php echo elgg_echo('languages');?></th>
+        <th><?php echo elgg_echo('last_added');?></th>
+        <th></th>
         <th></th>
     </tr>
     </thead>
     <?php
-    foreach($rubrics as $rubric):
+    foreach($rubrics as $category => $items):
+//        foreach($categories as $category => $items){
+//            $item = array_pop($items);
+//            $categories_data[$item->category[$i]] = array('name'=> $item->category[$i], 'description' =>$item->category_description[$i]);
+//        }
         $user = array_pop(ClipitUser::get_by_id(array($rubric->owner_id)));
-        $questions = ClipitQuiz::get_quiz_questions($rubric->id);
-        $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($rubric->tricky_topic)));
     ?>
-        <tr id="<?php echo $rubric->id;?>">
-        <?php if($select):?>
-            <td>
-                <a class="btn btn-xs btn-primary btn-border-blue quiz-select">
-                    <?php echo elgg_echo('select');?>
-                </a>
-                <?php echo elgg_view('input/hidden', array(
-                    'name' => $input_prefix.'[quiz_id]',
-                    'value' => $rubric->id,
-                )); ?>
-            </td>
-        <?php endif;?>
+        <tr id="<?php echo json_encode($category);?>">
             <td>
                 <strong>
                     <?php echo elgg_view('output/url', array(
-                        'href'  => "rubrics/view/{$rubric->id}",
-                        'title' => $rubric->item_name[$language_index],
-                        'text'  => $rubric->item_name[$language_index],
+                        'href'  => "rubrics/view/?name=".json_encode(($category)),
+                        'title' => $category,
+                        'text'  => $category,
                     ));
                     ?>
                 </strong>
             </td>
             <td>
+                <small>
+                    <i class="fa fa-clock-o"></i>
+                    <?php echo elgg_view('output/friendlytime', array('time' => $items[0]->time_created));?>
+                </small>
+            </td>
+            <td class="text-right">
                 <?php echo elgg_view('output/url', array(
-                    'href'  => set_search_input('rubrics', array('category'=>$rubric->category[$language_index])),
-                    'title' => $rubric->category[$language_index],
-                    'text'  => $rubric->category[$language_index],
+                    'href'  => 'javascript:;',
+                    'class' => 'show-questions btn btn-xs btn-border-blue',
+                    'id' => $quiz->id,
+                    'text'  => '<strong>'.count($items).'</strong>x<i class="margin-left-5 fa fa-list"></i>',
                 ));
                 ?>
             </td>
             <td>
-                <small>
-                    <?php
-                    $i = 1;
-                    $count_items = count($rubric->item_name);
-                    foreach(performance_items_available_languages($rubric->item_name) as $language):
-                        $comma = $i < $count_items ? ',':'';
-                    ?>
-                        <span><?php echo $language;?><?php echo $comma;?></span>
-                    <?php $i++; endforeach;?>
-                </small>
-            </td>
-            <td>
                 <?php echo elgg_view('page/components/admin_options', array(
-                    'entity' => $rubric,
+                    'entity' => $items[0],
                 ));?>
             </td>
         </tr>

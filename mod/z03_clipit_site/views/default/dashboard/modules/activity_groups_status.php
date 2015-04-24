@@ -35,17 +35,17 @@ $(document).ready(function(){
     });
 
     $("#prev").click(function(){
-        if ($(".charts .group_activities:visible").prev().length != 0)
+        if ($(".charts .group_activities:visible").prev().length != 0) {
             $(".charts .group_activities:visible").prev().fadeIn(
-                function(){
+                function () {
                     clipit.loadActivityGroupStatus($(this).data('entity'));
                 }).next().hide();
-        else {
+        } else {
             $(".charts .group_activities:visible").hide();
-            $(".charts .group_activities:last").fadeIn(clipit.loadActivityGroupStatus(
+            $(".charts .group_activities:last").fadeIn(
                 function(){
                     clipit.loadActivityGroupStatus($(this).data('entity'));
-                }));
+                });
         }
         $(window).trigger('resize');
         return false;

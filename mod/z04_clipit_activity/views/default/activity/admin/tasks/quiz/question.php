@@ -254,7 +254,7 @@ if($question){
                             <?php endfor;?>
                         <?php else: ?>
                             <?php
-                            $i = 0;
+                            $i = 1;
                             if($question->option_type == ClipitQuizQuestion::TYPE_SELECT_ONE):
                                 foreach($options as $key => $value):?>
                                     <?php echo elgg_view('activity/admin/tasks/quiz/types/select_one',
@@ -302,7 +302,7 @@ if($question){
                             <?php endfor;?>
                         <?php else: ?>
                             <?php
-                            $i = 0;
+                            $i = 1;
                             if($question->option_type == ClipitQuizQuestion::TYPE_SELECT_MULTI):
                                 foreach($options as $key => $value):
                             ?>

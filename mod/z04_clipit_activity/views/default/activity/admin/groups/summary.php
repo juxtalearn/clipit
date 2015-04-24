@@ -53,7 +53,7 @@ foreach($groups as $group):
                         'class' => 'image-block avatar-tiny'
                     ));
                     ?>
-                    <span class="text-truncate" title="<?php echo $group_user->name;?>">
+                    <span class="text-truncate" title="<?php echo $group_user->name;?> (<?php echo $group_user->login;?>)">
                         <?php echo $group_user->name;?>
                     </span>
                 </li>

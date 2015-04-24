@@ -10314,6 +10314,166 @@ ul.tagit input[type="text"] {
   background-color: inherit;
   outline: none;
 }
+@media (max-width: 767px) {
+  .events-list {
+    display: block !important;
+  }
+  table.events-list {
+    display: table;
+  }
+  tr.events-list {
+    display: table-row !important;
+  }
+  th.events-list,
+  td.events-list {
+    display: table-cell !important;
+  }
+  .module-group_activity {
+    display: block !important;
+  }
+  table.module-group_activity {
+    display: table;
+  }
+  tr.module-group_activity {
+    display: table-row !important;
+  }
+  th.module-group_activity,
+  td.module-group_activity {
+    display: table-cell !important;
+  }
+  .navbar-text {
+    float: right;
+  }
+  .separator {
+    display: block !important;
+  }
+  table.separator {
+    display: table;
+  }
+  tr.separator {
+    display: table-row !important;
+  }
+  th.separator,
+  td.separator {
+    display: table-cell !important;
+  }
+  .navbar-brand {
+    width: auto;
+    float: left !important;
+  }
+  ul.top-account li a .fa {
+    font-size: 25px;
+  }
+  ul.top-account li a img.avatar-small {
+    width: 30px;
+    height: 30px;
+  }
+  .col-md-offset-3 {
+    float: left;
+  }
+  .contact {
+    float: left;
+  }
+  .footer.col-sm-2 {
+    float: left;
+  }
+}
+@media (max-width: 767px) and (max-width: 767px) {
+  .events-list,
+  tr.events-list,
+  th.events-list,
+  td.events-list {
+    display: none !important;
+  }
+}
+@media (max-width: 767px) and (min-width: 768px) and (max-width: 991px) {
+  .events-list.hidden-sm,
+  tr.events-list.hidden-sm,
+  th.events-list.hidden-sm,
+  td.events-list.hidden-sm {
+    display: none !important;
+  }
+}
+@media (max-width: 767px) and (min-width: 992px) and (max-width: 1199px) {
+  .events-list.hidden-md,
+  tr.events-list.hidden-md,
+  th.events-list.hidden-md,
+  td.events-list.hidden-md {
+    display: none !important;
+  }
+}
+@media (max-width: 767px) and (min-width: 1200px) {
+  .events-list.hidden-lg,
+  tr.events-list.hidden-lg,
+  th.events-list.hidden-lg,
+  td.events-list.hidden-lg {
+    display: none !important;
+  }
+}
+@media (max-width: 767px) and (max-width: 767px) {
+  .module-group_activity,
+  tr.module-group_activity,
+  th.module-group_activity,
+  td.module-group_activity {
+    display: none !important;
+  }
+}
+@media (max-width: 767px) and (min-width: 768px) and (max-width: 991px) {
+  .module-group_activity.hidden-sm,
+  tr.module-group_activity.hidden-sm,
+  th.module-group_activity.hidden-sm,
+  td.module-group_activity.hidden-sm {
+    display: none !important;
+  }
+}
+@media (max-width: 767px) and (min-width: 992px) and (max-width: 1199px) {
+  .module-group_activity.hidden-md,
+  tr.module-group_activity.hidden-md,
+  th.module-group_activity.hidden-md,
+  td.module-group_activity.hidden-md {
+    display: none !important;
+  }
+}
+@media (max-width: 767px) and (min-width: 1200px) {
+  .module-group_activity.hidden-lg,
+  tr.module-group_activity.hidden-lg,
+  th.module-group_activity.hidden-lg,
+  td.module-group_activity.hidden-lg {
+    display: none !important;
+  }
+}
+@media (max-width: 767px) and (max-width: 767px) {
+  .separator,
+  tr.separator,
+  th.separator,
+  td.separator {
+    display: none !important;
+  }
+}
+@media (max-width: 767px) and (min-width: 768px) and (max-width: 991px) {
+  .separator.hidden-sm,
+  tr.separator.hidden-sm,
+  th.separator.hidden-sm,
+  td.separator.hidden-sm {
+    display: none !important;
+  }
+}
+@media (max-width: 767px) and (min-width: 992px) and (max-width: 1199px) {
+  .separator.hidden-md,
+  tr.separator.hidden-md,
+  th.separator.hidden-md,
+  td.separator.hidden-md {
+    display: none !important;
+  }
+}
+@media (max-width: 767px) and (min-width: 1200px) {
+  .separator.hidden-lg,
+  tr.separator.hidden-lg,
+  th.separator.hidden-lg,
+  td.separator.hidden-lg {
+    display: none !important;
+  }
+}
 @media print {
   .noprint {
     display: none !important;
@@ -11050,6 +11210,14 @@ h6,
 .ui-timepicker-div dl {
   margin-bottom: 40px;
 }
+.ui-timepicker-div dl:before {
+  content: ':';
+  position: absolute;
+  left: 45%;
+  top: 50%;
+  font-weight: bold;
+  font-size: 30px;
+}
 .ui-timepicker-div dl dt {
   display: none;
 }
@@ -11129,13 +11297,33 @@ h6,
   display: none;
 }
 .ui-datepicker-buttonpane .ui-datepicker-close {
-  /* .btn-sm(); .btn-primary();*/
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.428571429;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
   padding: 5px 10px;
   font-size: 12px;
   line-height: 1.5;
   border-radius: 3px;
+  color: #ffffff;
+  background-color: #428bca;
+  border-color: #357ebd;
   color: #FFF;
-  border: 0;
+  border: none;
   background-color: #32b4e5;
   background-repeat: repeat-x;
   font-family: FuturaBoldRegular, Impact, 'Impact Bold', Helvetica, Arial, sans, sans-serif;
@@ -11144,13 +11332,82 @@ h6,
   border-radius: 7px;
   letter-spacing: 1px;
 }
-.ui-timepicker-div dl:before {
-  content: ':';
-  position: absolute;
-  left: 45%;
-  top: 50%;
-  font-weight: bold;
-  font-size: 30px;
+.ui-datepicker-buttonpane .ui-datepicker-close:focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.ui-datepicker-buttonpane .ui-datepicker-close:hover,
+.ui-datepicker-buttonpane .ui-datepicker-close:focus {
+  color: #333333;
+  text-decoration: none;
+}
+.ui-datepicker-buttonpane .ui-datepicker-close:active,
+.ui-datepicker-buttonpane .ui-datepicker-close.active {
+  outline: 0;
+  background-image: none;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+.ui-datepicker-buttonpane .ui-datepicker-close.disabled,
+.ui-datepicker-buttonpane .ui-datepicker-close[disabled],
+fieldset[disabled] .ui-datepicker-buttonpane .ui-datepicker-close {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.65;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.ui-datepicker-buttonpane .ui-datepicker-close:hover,
+.ui-datepicker-buttonpane .ui-datepicker-close:focus,
+.ui-datepicker-buttonpane .ui-datepicker-close:active,
+.ui-datepicker-buttonpane .ui-datepicker-close.active,
+.open .dropdown-toggle.ui-datepicker-buttonpane .ui-datepicker-close {
+  color: #ffffff;
+  background-color: #3276b1;
+  border-color: #285e8e;
+}
+.ui-datepicker-buttonpane .ui-datepicker-close:active,
+.ui-datepicker-buttonpane .ui-datepicker-close.active,
+.open .dropdown-toggle.ui-datepicker-buttonpane .ui-datepicker-close {
+  background-image: none;
+}
+.ui-datepicker-buttonpane .ui-datepicker-close.disabled,
+.ui-datepicker-buttonpane .ui-datepicker-close[disabled],
+fieldset[disabled] .ui-datepicker-buttonpane .ui-datepicker-close,
+.ui-datepicker-buttonpane .ui-datepicker-close.disabled:hover,
+.ui-datepicker-buttonpane .ui-datepicker-close[disabled]:hover,
+fieldset[disabled] .ui-datepicker-buttonpane .ui-datepicker-close:hover,
+.ui-datepicker-buttonpane .ui-datepicker-close.disabled:focus,
+.ui-datepicker-buttonpane .ui-datepicker-close[disabled]:focus,
+fieldset[disabled] .ui-datepicker-buttonpane .ui-datepicker-close:focus,
+.ui-datepicker-buttonpane .ui-datepicker-close.disabled:active,
+.ui-datepicker-buttonpane .ui-datepicker-close[disabled]:active,
+fieldset[disabled] .ui-datepicker-buttonpane .ui-datepicker-close:active,
+.ui-datepicker-buttonpane .ui-datepicker-close.disabled.active,
+.ui-datepicker-buttonpane .ui-datepicker-close[disabled].active,
+fieldset[disabled] .ui-datepicker-buttonpane .ui-datepicker-close.active {
+  background-color: #428bca;
+  border-color: #357ebd;
+}
+.ui-datepicker-buttonpane .ui-datepicker-close .badge {
+  color: #428bca;
+  background-color: #fff;
+}
+.ui-datepicker-buttonpane .ui-datepicker-close:hover,
+.ui-datepicker-buttonpane .ui-datepicker-close:focus {
+  background-color: #1ba1d3;
+  background-position: 0 -15px;
+}
+.ui-datepicker-buttonpane .ui-datepicker-close:active,
+.ui-datepicker-buttonpane .ui-datepicker-close.active {
+  background-color: #1993c1;
+}
+.ui-datepicker-buttonpane .ui-datepicker-close:hover,
+.ui-datepicker-buttonpane .ui-datepicker-close:focus {
+  color: #FFF;
+  opacity: 1;
 }
 .input-task-start,
 .input-task-end {

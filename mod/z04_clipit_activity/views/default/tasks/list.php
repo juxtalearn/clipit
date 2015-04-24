@@ -26,11 +26,22 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
     <li class="overflow-hidden list-item <?php echo (time() < $task->start && $user->role == ClipitUser::ROLE_STUDENT) ? "soon" : ""; ?>">
         <div class="image-block">
             <small class="date show" style="text-transform: uppercase">
+                <?php if($user->role == ClipitUser::ROLE_TEACHER):?>
+                    <span><?php echo date("d M Y", $task->start);?></span><br>
+                <?php endif;?>
                 <span><?php echo date("d M Y", $task->end);?></span>
             </small>
         </div>
         <div class="content-block">
             <?php echo elgg_view("tasks/icon_task_type", array('type' => $task->task_type)); ?>
+            <div class="pull-right">
+                <span class="margin-right-10">
+                    <?php echo elgg_view("tasks/icon_task_status", array('status' => $task->status)); ?>
+                </span>
+                <span class="blue-lighter">
+                    <?php echo elgg_view("tasks/icon_user_type", array('type' => $task->task_type)); ?>
+                </span>
+            </div>
             <strong>
             <?php if(time() > $task->start || $user->role == ClipitUser::ROLE_TEACHER): ?>
                 <?php echo elgg_view('output/url', array(
@@ -44,14 +55,6 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
                 <span><?php echo $task->name; ?></span>
             <?php endif; ?>
             </strong>
-            <div class="pull-right">
-                <span class="margin-right-10">
-                    <?php echo elgg_view("tasks/icon_task_status", array('status' => $task->status)); ?>
-                </span>
-                <span class="blue-lighter">
-                    <?php echo elgg_view("tasks/icon_user_type", array('type' => $task->task_type)); ?>
-                </span>
-            </div>
             <small class="show <?php echo $status['color']; ?>">
                 <?php echo $status['text']; ?>
             </small>

@@ -89,10 +89,10 @@ $spanish = array(
     'community_guidelines' => 'directrices comunitarias',
 
     // Form no login
-    'loginusername' => 'Usuario o correo para identificarse',
+    'loginusername' => 'Usuario para identificarse',
     'user:password:lost' => 'Contraseña olvidada',
     'new_user' => '¿Nuevo usuario?',
-    'user:notfound' => 'Usuario o Correo no encontrado.',
+    'user:notfound' => 'Usuario no encontrado.',
     'user:register' => 'Registrarse',
     'user:username:login' => 'Usuario',
     'user:login' => 'Entrar',

@@ -462,8 +462,8 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
                 ), $custom);
             break;
         case ClipitTask::TYPE_QUIZ_TAKE:
-            if(ClipitTask::get_status($task->id) == ClipitTask::STATUS_FINISHED) {
-                $quiz_id = $task->quiz;
+            $quiz_id = $task->quiz;
+            if($task->status == ClipitTask::STATUS_FINISHED) {
                 if (ClipitQuiz::has_finished_quiz($quiz_id, $user_id)) {
                     $status = array(
                         'icon' => '<i class="fa fa-check green"></i>',
@@ -486,6 +486,13 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
                     'color' => 'yellow',
                     'status' => false
                 );
+                if(!get_config('quiz_results_after_task_end') && ClipitQuiz::has_finished_quiz($quiz_id, $user_id)){
+                    $status = array(
+                        'icon' => '<i class="fa fa-check green"></i>',
+                        'text' => elgg_echo('task:completed'),
+                        'color' => 'green',
+                    );
+                }
             }
             break;
         case ClipitTask::TYPE_RESOURCE_DOWNLOAD:
@@ -549,28 +556,47 @@ function get_group_progress($group_id){
         ClipitTask::TYPE_QUIZ_TAKE,
         ClipitTask::TYPE_RESOURCE_DOWNLOAD
     );
+    //
+    $p = round(100/(count($tasks)));
+    $completed = 0;
+    foreach($tasks as $type){
+        if($type == 'grupal'){
+            // 33%
+            if($group_result === true){
+                $completed+= $p;
+            }
+        } else {
+            // 33%
+            $us = $p/(count($users));
+            //$t = 0;
+            foreach($users as $user_com){
+                if($user_com === true){
+                    $completed+=$us;
+                }
+            }
+        }
+    }
+    //
     $total = 0;
     $completed = 0;
     $group_users = ClipitGroup::get_users($group_id);
     $tasks = ClipitTask::get_by_id($activity->task_array);
+    $each = round(100/(count($activity->task_array)));
     foreach($tasks as $task){
         if (in_array($task->task_type, $individual_tasks)) {
+            $each_part = $each/(count($group_users));
             foreach ($group_users as $user_id) {
                 if (ClipitTask::get_completed_status($task->id, $user_id)) {
-                    $completed++;
+                    $completed += $each_part;
                 }
-                $total++;
             }
         } else {
             if (ClipitTask::get_completed_status($task->id, $group_id)) {
-                $completed++;
+                $completed += $each;
             }
-            $total++;
         }
     }
-    $total = $total == 0 ? 1 : $total;
-    $val = $completed/$total;
-    return round($val*100);
+    return round($completed);
 }
 
 /**

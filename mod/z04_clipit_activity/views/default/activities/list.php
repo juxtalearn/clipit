@@ -26,6 +26,7 @@ $table_orders = elgg_extract('table_orders', $vars);
     ));
     ?>
 </div>
+<div class="table-responsive">
 <table class="table table-striped table-order">
     <thead>
     <tr class="title_order">
@@ -110,4 +111,5 @@ $table_orders = elgg_extract('table_orders', $vars);
         </tr>
     <?php endforeach;?>
 </table>
+</div>
 <?php echo clipit_get_pagination(array('count' => $count, 'limit' => 10)); ?>

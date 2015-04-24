@@ -23,9 +23,14 @@ if($page[4] == 'view' && $page[5]){
     $content = false;
     if($message && $message->destination == $group->id){
         $href_multimedia = "clipit_activity/{$activity->id}/group/{$group->id}/repository/view";
+        $reply = true;
+        if($activity->status == ClipitActivity::STATUS_CLOSED){
+            $reply = false;
+        }
         $content = elgg_view('discussion/view', array(
             'entity' => $message,
             'group' => $group,
+            'reply' => $reply,
             'href_multimedia' => $href_multimedia,
         ));
     } else {

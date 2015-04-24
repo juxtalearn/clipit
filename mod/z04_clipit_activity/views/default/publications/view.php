@@ -235,6 +235,7 @@ if($comments):
 endif;
 ?>
 <?php echo clipit_get_pagination(array('count' => $total_comments)); ?>
+<?php if($activity->status != ClipitActivity::STATUS_CLOSED):?>
 <!-- Comment form -->
 <a name="create_reply"></a>
 <h3 class="activity-module-title"><?php echo elgg_echo("comment:create"); ?></h3>
@@ -250,3 +251,4 @@ endif;
     </div>
 </div>
 <!-- Comment form end-->
+<?php endif;?>

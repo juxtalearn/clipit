@@ -49,7 +49,7 @@ echo elgg_view('input/dropdown', array(
             $i = 0;
             $x = 0;
             $language = ClipitPerformanceItem::get_language_index($current_language);
-            $categories = ClipitPerformanceItem::get_by_category(null, $current_language);
+            $categories = ClipitPerformanceItem::get_from_category(null, $current_language);
                 foreach($categories as $category => $items):
             ?>
             <li class="list-item row margin-top-20">

@@ -22,6 +22,8 @@
 @import "messages";
 @import "tags";
 @import "landing";
+//@import "../../../../z22_clipit_mobile/css/mobile.less";
+@import "mobile";
 
 // Media print
 // --------------------------------------------------
@@ -826,6 +828,14 @@ h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
   }
   dl{
     margin-bottom: 40px;
+    &:before {
+      content: ':';
+      position: absolute;
+      left: 45%;
+      top: 50%;
+      font-weight: bold;
+      font-size: 30px;
+    }
     dt{
       display: none;
     }
@@ -901,36 +911,18 @@ h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
     }
   }
 }
-.ui-datepicker-buttonpane {
+.ui-datepicker-buttonpane{
   text-align: right;
+  .ui-datepicker-current {
+    display: none;
+  }
+  .ui-datepicker-close{
+    .btn();
+    .btn-sm();
+    .btn-primary();
+  }
 }
-.ui-datepicker-buttonpane .ui-datepicker-current {
-  display: none;
-}
-.ui-datepicker-buttonpane .ui-datepicker-close{
-  /* .btn-sm(); .btn-primary();*/
-  padding: 5px 10px;
-  font-size: 12px;
-  line-height: 1.5;
-  border-radius: 3px;
-  color: #FFF;
-  border: 0;
-  background-color: #32b4e5;
-  background-repeat: repeat-x;
-  font-family: FuturaBoldRegular,Impact,'Impact Bold',Helvetica,Arial,sans,sans-serif;
-  padding-left: 20px;
-  padding-right: 20px;
-  border-radius: 7px;
-  letter-spacing: 1px;
-}
-.ui-timepicker-div dl:before {
-  content: ':';
-  position: absolute;
-  left: 45%;
-  top: 50%;
-  font-weight: bold;
-  font-size: 30px;
-}
+
 .input-task-start, .input-task-end{
   padding: 5px 10px;
   font-size: 13px;

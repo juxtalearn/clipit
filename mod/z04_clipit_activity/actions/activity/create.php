@@ -40,6 +40,7 @@ foreach($tasks as $task){
             'task_type' => $task['type'],
             'start' => date_create_from_format('d/m/y H:i', $task['start'])->getTimestamp(),
             'end' => date_create_from_format('d/m/y H:i', $task['end'])->getTimestamp(),
+            'performance_item_array' => $task['performance_items'],
             'quiz' => $task['type'] == ClipitTask::TYPE_QUIZ_TAKE ? $quiz_id : 0
         ));
 
@@ -82,7 +83,8 @@ foreach($tasks as $task){
                 'task_type' => $feedback['type'],
                 'start' => date_create_from_format('d/m/y H:i', $feedback['start'])->getTimestamp(),
                 'end' => date_create_from_format('d/m/y H:i', $feedback['end'])->getTimestamp(),
-                'parent_task' => $task_id
+                'parent_task' => $task_id,
+                'performance_item_array' => $feedback['performance_items']
             ));
             ClipitActivity::add_tasks($activity_id, array($feedback_task_id));
         }

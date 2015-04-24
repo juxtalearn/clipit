@@ -16,6 +16,7 @@ if($vars['class']){
     $table_class = "$table_class ".$vars['class'];
 }
 ?>
+<?php echo $vars['responsive']?'<div class="table-responsive">':'';?>
 <table class="<?php echo $table_class; ?>">
     <?php
         foreach($rows as $row):
@@ -35,3 +36,4 @@ if($vars['class']){
         </tr>
     <?php endforeach; ?>
 </table>
+<?php echo $vars['responsive']?'</div>':'';?>

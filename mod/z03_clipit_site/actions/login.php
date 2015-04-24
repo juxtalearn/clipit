@@ -26,10 +26,6 @@ if (empty($username) || empty($password)) {
     forward();
 }
 
-// check if logging in with email address
-if (strpos($username, '@') !== false && ($users = get_user_by_email($username))) {
-    $username = $users[0]->username;
-}
 
 $result = elgg_authenticate($username, $password);
 if ($result !== true) {

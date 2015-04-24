@@ -204,13 +204,12 @@ $language_index = ClipitPerformanceItem::get_language_index($user_language);
         'value' => $entity->description,
         'id'    => 'edit-'.$entity->id,
         'class' => 'form-control mceEditor',
-        'required' => true,
         'rows'  => 6,
     ));?>
 </div>
 
 <div class="row">
-    <div class="col-md-7">
+    <div class="col-md-<?php echo get_config('fixed_performance_rating')?'12':'7'?>">
         <?php if(!empty($tt_tags)):?>
         <div class="form-group">
             <label><?php echo elgg_echo("tags");?></label>
@@ -235,12 +234,13 @@ $language_index = ClipitPerformanceItem::get_language_index($user_language);
             <ul id="labels"></ul>
         </div>
     </div>
+    <?php if(!get_config('fixed_performance_rating')):?>
     <div class="col-md-5">
         <label><?php echo elgg_echo("performance_items");?></label>
         <div>
             <select name="performance_items[]" data-placeholder="<?php echo elgg_echo('click_add');?>" style="width:100%;" multiple class="chosen-select-items" tabindex="8">
                 <option value=""></option>
-                <?php foreach(ClipitPerformanceItem::get_by_category(null, $user_language) as $category => $items):?>
+                <?php foreach(ClipitPerformanceItem::get_from_category(null, $user_language) as $category => $items):?>
                     <optgroup label="<?php echo $category; ?>">
                         <?php foreach($items as $item): ?>
                             <option <?php echo in_array($item->id, $performance_items) ? "selected" : "";?> value="<?php echo $item->id; ?>">
@@ -252,4 +252,5 @@ $language_index = ClipitPerformanceItem::get_language_index($user_language);
             </select>
         </div>
     </div>
+    <?php endif;?>
 </div>

@@ -48,6 +48,15 @@
             ));
             ?>
         </li>
+<!--        <li role="presentation" class="divider"></li>-->
+<!--        <li role="presentation">-->
+<!--            --><?php //echo elgg_view('output/url', array(
+//                'href'  => "rubrics",
+//                'title' => elgg_echo('rubrics'),
+//                'text'  => '<i class="fa fa-star"></i> '.elgg_echo('rubrics'),
+//            ));
+//            ?>
+<!--        </li>-->
     </ul>
 </li>
 <li class="separator">|</li>

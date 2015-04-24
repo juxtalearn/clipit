@@ -11,9 +11,7 @@
  * @package         ClipIt
  */
 $spanish = array(
-//    'rubric' => 'Rúbrica',
-//    'rubric:create' => 'Crear rúbrica',
-//    'rubrics' => 'Rúbricas',
+    'last_added' => 'Último añadido',
     'rubric' => 'Criterio de evaluación',
     'rubric:create' => 'Crear criterio de evaluación',
     'rubrics' => 'Criterios de evaluación',

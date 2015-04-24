@@ -72,7 +72,7 @@ $params = array_merge($defaults, $params);
 $body .='
 <li class="list-item col-md-12 task">
     '.elgg_view('activity/create/task', $params);
-if($task_type == 'upload'){
+if($task_type == 'upload' && $feedback_check){
 $body .= '<ul class="feedback_form" style="margin-left: 20px;display: none">
         <li style="padding: 10px;background: #fafafa;" class="col-md-12">
             <div class="col-mds-12">
