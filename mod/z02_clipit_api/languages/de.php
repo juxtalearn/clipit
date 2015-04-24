@@ -4,9 +4,10 @@
 
  */
 $german = array(
-    "admin:settings:youtube_auth" => "YouTube Konfiguration",
-    "admin:settings:clipit_options" => "ClipIt Konfiguration",
-    "admin:settings:update_clipit" => "Update ClipIt",
+    "admin:clipit" => "Clipit Settings",
+    "admin:clipit:youtube_auth" => "YouTube Setup",
+    "admin:clipit:clipit_options" => "ClipIt Options",
+    "admin:clipit:update_clipit" => "Update ClipIt",
     "student_option" => "machen diesen Benutzer ein Student?",
     "teacher_option" => "machen diesen Benutzer ein Lehrer?",
     "metric:1" => "Test Metric",

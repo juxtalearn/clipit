@@ -36,6 +36,8 @@ class ClipitPerformanceItem extends UBItem {
 
     const SV_CODE = "sv";
     const SV_INDEX = 4;
+
+    const EMPTY_STRING = "-EMPTY-";
     /*
     Properties are disposed in arrays by language, in the following order:
     [0 => en_value, 1 => es_value, 2 => de_value, 3 => pt_value, ...]
@@ -50,12 +52,11 @@ class ClipitPerformanceItem extends UBItem {
     public $category_description = array();
 
     function __construct($id = null, $elgg_object = null) {
-        $empty_string = "-EMPTY-";
-        $this->item_name = array_fill(0, 10, $empty_string);
-        $this->item_description = array_fill(0, 9, $empty_string);
-        $this->example = array_fill(0, 10, $empty_string);
-        $this->category = array_fill(0, 10, $empty_string);
-        $this->category_description = array_fill(0, 10, $empty_string);
+        $this->item_name = array_fill(0, 10, static::EMPTY_STRING);
+        $this->item_description = array_fill(0, 9, static::EMPTY_STRING);
+        $this->example = array_fill(0, 10, static::EMPTY_STRING);
+        $this->category = array_fill(0, 10, static::EMPTY_STRING);
+        $this->category_description = array_fill(0, 10, static::EMPTY_STRING);
         parent::__construct($id, $elgg_object);
     }
 
