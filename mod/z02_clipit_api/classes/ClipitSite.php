@@ -30,8 +30,8 @@ class ClipitSite extends UBSite {
     // SITE SCOPE (Public for users of the site)
     const REL_SITE_TRICKY_TOPIC = "ClipitSite-ClipitTrickyTopic";
     const REL_SITE_VIDEO = "ClipitSite-ClipitVideo";
-//    const REL_SITE_FILE = "ClipitSite-ClipitFile";
-//    const REL_SITE_STORYBOARD = "ClipitSite-ClipitStoryboard";
+    const REL_SITE_FILE = "ClipitSite-ClipitFile";
+    const REL_SITE_STORYBOARD = "ClipitSite-ClipitStoryboard";
     public $tricky_topic_array = array();
     public $video_array = array();
 //    public $file_array = array();
@@ -40,8 +40,8 @@ class ClipitSite extends UBSite {
     // PUBLIC SCOPE (Public for everyone on the Global ClipIt Site)
     const REL_SITE_PUB_TRICKYTOPIC = "ClipitSite-PUB-ClipitTrickyTopic";
     const REL_SITE_PUB_VIDEO = "ClipitSite-PUB-ClipitVideo";
-//    const REL_SITE_PUB_FILE = "ClipitSite-PUB-ClipitFile";
-//    const REL_SITE_PUB_STORYBOARD = "ClipitSite-PUB-ClipitStoryboard";
+    const REL_SITE_PUB_FILE = "ClipitSite-PUB-ClipitFile";
+    const REL_SITE_PUB_STORYBOARD = "ClipitSite-PUB-ClipitStoryboard";
     public $pub_tricky_topic_array = array();
     public $pub_video_array = array();
 //    public $pub_file_array = array();
