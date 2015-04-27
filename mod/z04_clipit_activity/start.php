@@ -163,8 +163,7 @@ function clipit_activity_init() {
     elgg_register_simplecache_view('js/upload');
     elgg_register_js('file:upload', $files_upload_js);
     // Raty js modified by clipit
-    elgg_register_js('jquery:raty', "{$vendors_dir}/jquery.raty.js");
-    elgg_load_js("jquery:raty");
+    elgg_register_js('jquery:raty', "{$vendors_dir}/jquery.raty.js", "footer");
     // Tag-it
     elgg_register_js('jquery:tag_it', "{$vendors_dir}/jquery.tag-it.min.js");
     elgg_load_js("jquery:tag_it");

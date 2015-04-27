@@ -15,6 +15,7 @@ echo elgg_view("input/hidden", array(
     'name' => 'message-id',
     'value' => $message->id,
 ));
+echo '<label for="message-reply"></label>';
 echo elgg_view("input/plaintext", array(
     'name' => 'message-reply',
     'class' => 'form-control mceEditor',

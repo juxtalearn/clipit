@@ -84,22 +84,22 @@ function clipit_final_init(){
         elgg_register_css("ui-lightness", "{$plugin_url}/vendors/jquery-ui-1.10.2.custom/css/ui-lightness/jquery-ui-1.10.2.custom.min.css");
         elgg_register_js("jquery-ui", "{$plugin_url}/vendors/jquery-ui-1.10.2.custom/js/jquery-ui-1.10.2.custom.min.js", "head", 2);
         // Waypoints
-        elgg_register_js("jquery:waypoints", "{$plugin_url}/vendors/waypoints/waypoints.min.js");
-        elgg_register_js("jquery:waypoints:sticker", "{$plugin_url}/vendors/waypoints/waypoints-sticky.min.js");
-        elgg_register_js("jquery:waypoints:infinite", "{$plugin_url}/vendors/waypoints/waypoints-infinite.min.js");
+        elgg_register_js("jquery:waypoints", "{$plugin_url}/vendors/waypoints/waypoints.min.js", "footer");
+        elgg_register_js("jquery:waypoints:sticker", "{$plugin_url}/vendors/waypoints/waypoints-sticky.min.js", "footer");
+        elgg_register_js("jquery:waypoints:infinite", "{$plugin_url}/vendors/waypoints/waypoints-infinite.min.js", "footer");
         // TinyMCE
-        elgg_register_js("jquery:tinymce", "{$plugin_url}/vendors/tinymce/jquery.tinymce.min.js");
-        elgg_register_js("tinymce", "{$plugin_url}/vendors/tinymce/tinymce.min.js");
+        elgg_register_js("jquery:tinymce", "{$plugin_url}/vendors/tinymce/jquery.tinymce.min.js", "footer");
+        elgg_register_js("tinymce", "{$plugin_url}/vendors/tinymce/tinymce.min.js", "footer");
 
         // Bootbox
-        elgg_register_js("jquery:bootbox", "{$plugin_url}/vendors/bootbox.js");
+        elgg_register_js("jquery:bootbox", "{$plugin_url}/vendors/bootbox.js", "footer");
         // jQuery validate
         elgg_register_js("jquery:validate", "{$plugin_url}/vendors/jquery.validate.js");
         // jquery tokeninput (automcomplete)
-        elgg_register_js("jquery:tokeninput", "{$plugin_url}/vendors/tokeninput.js");
+        elgg_register_js("jquery:tokeninput", "{$plugin_url}/vendors/tokeninput.js", "footer");
         // NVD3 chart
-        elgg_register_js("nvd3:d3_v2", "{$plugin_url}/vendors/nvd3/d3.v2.js");
-        elgg_register_js("nvd3", "{$plugin_url}/vendors/nvd3/nv.d3.js");
+        elgg_register_js("nvd3:d3_v2", "{$plugin_url}/vendors/nvd3/d3.v2.js", "footer");
+        elgg_register_js("nvd3", "{$plugin_url}/vendors/nvd3/nv.d3.js", "footer");
         elgg_register_css("nvd3:css", "{$plugin_url}/vendors/nvd3/nv.d3.css");
         // ClipIt
         $clipit_css = elgg_get_simplecache_url('css', 'clipit');

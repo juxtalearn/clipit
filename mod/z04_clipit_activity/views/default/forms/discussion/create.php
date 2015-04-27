@@ -62,10 +62,6 @@ echo elgg_view("page/components/modal",
 ?>
 <script>
 $(function(){
-//    $("#attach_multimedia").click(function(){
-//        $("#attach_list").toggle();
-//        $("#attach_list ul.menu-list > li[data-menu=files]").click();
-//    });
     $("#attach_multimedia").click(function() {
         $("#attach_list").toggle();
         $("#attach_list").attach_multimedia({
@@ -75,31 +71,5 @@ $(function(){
             }
         }).loadBy("files");
     });
-//    $(document).on("click", "#attach_list ul.menu-list > li", function(){
-//        var attach_list = $("#attach_list");
-//        $("#attach_list .multimedia-list > div").hide();
-//        var type = $(this).data('menu');
-//        var content = $("#attach_list .multimedia-list");
-//        var list = $("[data-list="+ type +"]");
-//        if(list.length == 0){
-//            $("#attach_list #attach-loading").show();
-//            $.ajax({
-//                type: "GET",
-//                url: '<?php //echo elgg_get_site_url()."ajax/view/multimedia/attach/";?>//' + type,
-//                data: { list: type, entity_id: "<?php //echo $entity->id;?>//" },
-//                success: function(data){
-//                    content.append(data);
-//                    $("#attach_list #attach-loading").hide();
-//                }
-//            });
-//        } else {
-//            list.show();
-//        }
-//    });
 });
-</script>
-<script>
-    ///$(function(){
-
-
 </script>

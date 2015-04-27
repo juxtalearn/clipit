@@ -19,6 +19,7 @@ echo elgg_view("input/hidden", array(
     'name' => 'entity-id',
     'value' => $entity->id,
 ));
+echo '<label for="comment-text"></label>';
 echo elgg_view("input/plaintext", array(
     'name' => 'comment-text',
     'class' => 'form-control '.$wysiwyg,

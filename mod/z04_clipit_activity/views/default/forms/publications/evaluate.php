@@ -10,6 +10,7 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
+elgg_load_js("jquery:raty");
 
 $entity = elgg_extract("entity", $vars);
 $rating = elgg_extract("rating", $vars);

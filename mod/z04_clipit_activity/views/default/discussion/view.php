@@ -92,7 +92,7 @@ if($message->owner_id == $user_loggedin_id || $user_logged->role == ClipitUser::
 <a name="replies"></a>
 <?php
 $auto_id = 1;
-$replies = array_pop(ClipitPost::get_by_destination(array($message->id), 0, 0, false, '', true));
+$replies = array_pop(ClipitPost::get_by_destination(array($message->id), 0, 0, false, 'time_created', true));
 foreach($replies as $reply_msg){
     echo elgg_view("discussion/reply",
             array(
