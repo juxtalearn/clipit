@@ -40,5 +40,5 @@ if($video && $video->owner_id == $user_id || $user->role == ClipitUser::ROLE_TEA
                     'class' => "btn btn-primary"
                 ))
         ));
-    echo elgg_view_form('multimedia/videos/edit', array('action' => 'action/publications/publish', 'body' => $body, 'data-validate'=> "true"));
+    echo elgg_view_form('', array('action' => 'action/publications/publish', 'body' => $body, 'data-validate'=> "true"));
 }

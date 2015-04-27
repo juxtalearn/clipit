@@ -57,6 +57,7 @@ $(function(){
                     ));
                     ?>
                 </strong>
+                <?php if($group_id):?>
                 <div class="bg-bar">
                     <div class="bar" data-group-id="<?php echo $group_id;?>" style="width: 0%;">
                         <div>
@@ -64,6 +65,11 @@ $(function(){
                         </div>
                     </div>
                 </div>
+                <?php else:?>
+                    <div>
+                        <small><?php echo elgg_echo('my_group:none');?></small>
+                    </div>
+                <?php endif;?>
             </div>
         <?php endif;?>
     <?php endforeach;?>

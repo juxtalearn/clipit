@@ -30,6 +30,7 @@ $spanish = array(
     'search:btn' => 'Buscar',
     'status' => 'Estado',
     'send:to_site' => 'Publicar al sitio',
+    'send:to_global' => 'Publicar al sitio Global',
     'time:days' => 'Días',
     'time' => 'Hora',
     'time:hours' => 'Horas',
@@ -103,6 +104,7 @@ $spanish = array(
 
     'group' => 'Grupo',
     'my_group:progress' => 'Progreso de mis grupos',
+    'my_group:none' => 'No estás en ningún grupo de la actividad.',
     'group:free_slot' => 'Quedan <strong><u>%s</u></strong> huecos libres',
     'group:assign_sb' => 'Asignar conceptos',
     'group:graph' => 'Gráfica del grupo',

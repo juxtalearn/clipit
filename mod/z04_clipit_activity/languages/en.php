@@ -29,6 +29,7 @@ $english = array(
     'search:btn' => 'Search',
     'status' => 'Status',
     'send:to_site' => 'Publish to Site',
+    'send:to_global' => 'Publish to Global site',
     'time' => 'Time',
     'time:days' => 'Days',
     'time:hours' => 'Hours',
@@ -102,6 +103,7 @@ $english = array(
 
     'group' => 'Group',
     'my_group:progress' => 'My group progress',
+    'my_group:none' => 'You are not in a group from activity.',
     'group:free_slot' => '<strong><u>%s</u></strong> free slot',
     'group:assign_sb' => 'Assign Stumbling Blocks',
     'group:graph' => 'Group graph',

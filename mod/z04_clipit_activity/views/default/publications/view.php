@@ -215,13 +215,79 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
         array('entity' => $entity, 'activity' => $activity));
     ?>
 <?php endif; ?>
+<?php
+$total_comments = array_pop(ClipitComment::count_by_destination(array($entity->id), false));
+?>
+<hr>
+<div role="tabpanel">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs margin-bottom-20" role="tablist">
+        <li role="presentation" class="active">
+            <a href="#comments" aria-controls="comments" role="tab" data-toggle="tab">
+                <?php echo elgg_echo('comments');?> <span class="text-muted">(<?php echo $total_comments;?>)</span>
+            </a>
+        </li>
+        <li role="presentation">
+            <a href="#ratings" aria-controls="ratings" role="tab" data-toggle="tab">
+                <?php echo elgg_echo('publications:rating');?> <span class="text-muted">(<?php echo $total_evaluations;?>)</span>
+            </a>
+        </li>
+    </ul>
 
+<!-- Tab panes -->
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane" id="ratings">
+        <?php
+        $ratings = array_pop(ClipitRating::get_by_target(array($entity->id)));
+        foreach($ratings as $rating){
+//            $user = array_pop(ClipitUser::get_by_id(array($entity->owner_id)));
+            $group_id = ClipitGroup::get_from_user_activity($rating->owner_id, $activity->id);
+            $rating_groups[$group_id][$rating->owner_id] = $rating;
+        }
+        foreach($rating_groups as $group_id => $user_ratings):
+            $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
+        ?>
+            <?php echo elgg_view("page/components/title_block", array(
+                'title' => $group->name,
+            ));?>
+            <ul class="panel-group" id="accordion_users">
+                <?php
+                foreach($user_ratings as $user_id => $rating):
+                    $user = array_pop(ClipitUser::get_by_id(array($user_id)));
+                    $performance_average = ClipitPerformanceRating::get_average_user_rating_for_target($user_id, $rating->target);
+                ?>
+                    <li class="panel panel-blue list-item" data-entity="<?php echo $user->id;?>">
+                        <a name="<?php echo $user->id;?>"></a>
+                        <div class="panel-heading expand" style="padding: 0px;background: none;">
+                            <div class="pull-right text-right" style="margin-right: 10px;">
+                                <div class="rating readonly inline-block"><?php echo star_rating_view($performance_average);?></div>
+                                <a data-toggle="collapse"
+                                   data-parent="#accordion_users"
+                                   href="#user_<?php echo $user->id;?>"
+                                   class="btn btn-border-blue margin-left-10 btn-xs btn-primary user-rating"
+                                   data-user="<?php echo $user->id;?>"
+                                    >
+                                    <?php echo elgg_echo('view');?>
+                                </a>
+                            </div>
+                            <?php echo elgg_view("page/elements/user_block", array("entity" => $user)); ?>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div id="user_<?php echo $user->id;?>" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <?php echo elgg_view('performance_items/full', array('entity' => $rating));?>
+                            </div>
+                        </div>
+                    </li>
+                <?php endforeach;?>
+            </ul>
+        <?php endforeach;?>
+    </div>
+    <div role="tabpanel" class="tab-pane active" id="comments">
 <?php
 if($comments):
-    $total_comments = array_pop(ClipitComment::count_by_destination(array($entity->id), false));
 ?>
     <a name="comments"></a>
-    <h3 class="activity-module-title"><?php echo elgg_echo("comments"); ?> <span class="blue-lighter">(<?php echo $total_comments;?>)</span></h3>
     <?php
     foreach($comments as $comment){
         echo elgg_view("comments/comment",
@@ -252,3 +318,6 @@ endif;
 </div>
 <!-- Comment form end-->
 <?php endif;?>
+        </div> <!-- !Comments -->
+    </div>
+</div>

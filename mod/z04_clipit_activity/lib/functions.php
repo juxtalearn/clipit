@@ -556,27 +556,6 @@ function get_group_progress($group_id){
         ClipitTask::TYPE_QUIZ_TAKE,
         ClipitTask::TYPE_RESOURCE_DOWNLOAD
     );
-    //
-    $p = round(100/(count($tasks)));
-    $completed = 0;
-    foreach($tasks as $type){
-        if($type == 'grupal'){
-            // 33%
-            if($group_result === true){
-                $completed+= $p;
-            }
-        } else {
-            // 33%
-            $us = $p/(count($users));
-            //$t = 0;
-            foreach($users as $user_com){
-                if($user_com === true){
-                    $completed+=$us;
-                }
-            }
-        }
-    }
-    //
     $total = 0;
     $completed = 0;
     $group_users = ClipitGroup::get_users($group_id);
