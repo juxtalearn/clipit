@@ -93,16 +93,16 @@ class ClipitUser extends UBUser {
         $user_role = $prop_value_array["role"];
         switch($user_role) {
             case static::ROLE_STUDENT:
-                if($joined_only) {
+                if((bool)$joined_only) {
                     $group_ids = static::get_groups($user_id);
                     if(empty($group_ids)) {
-                        return false;
+                        return null;
                     }
                     foreach($group_ids as $group_id) {
                         $activity_array[] = ClipitGroup::get_activity($group_id);
                     }
                     if(!isset($activity_array)) {
-                        return false;
+                        return null;
                     }
                     return $activity_array;
                 } else {
