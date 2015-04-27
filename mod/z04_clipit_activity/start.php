@@ -297,7 +297,8 @@ function activity_page_handler($page) {
      * Set access
      * ACCESS_PUBLIC, ACCESS_TEACHER, ACCESS_MEMBER
      */
-    if($hasGroup = ClipitGroup::get_from_user_activity($user_id, $activity->id) || in_array($user_id, $activity->student_array)){
+    $hasGroup = ClipitGroup::get_from_user_activity($user_id, $activity->id);
+    if($hasGroup || in_array($user_id, $activity->student_array)){
         $access = 'ACCESS_MEMBER';
     }
     elseif(in_array($user_id, $activity->teacher_array)){
