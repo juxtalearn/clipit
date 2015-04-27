@@ -19,6 +19,13 @@ $user_id = elgg_get_logged_in_user_guid();
 $user_group = ClipitGroup::get_from_user_activity($user_id, $activity->id);
 $user = array_pop(ClipitUser::get_by_id(array($user_id)));
 $isCalled = in_array($user_id, $activity->student_array);
+// Get ungrouped students
+$ungruped_students = array();
+foreach($activity->student_array as $student_id){
+    if(!ClipitGroup::get_from_user_activity($student_id, $activity->id)){
+        $ungrouped_students[] = array_pop(ClipitUser::get_by_id(array($student_id)));
+    }
+}
 ?>
 <style>
     .group-details .tags-list{
@@ -28,23 +35,20 @@ $isCalled = in_array($user_id, $activity->student_array);
         margin: 0;
     }
 </style>
+
+<?php if(count($ungrouped_students) > 0):?>
 <h3 class="margin-bottom-20"><?php echo elgg_echo('group:ungrouped');?></h3>
 <div style="border-bottom: 6px solid #bae6f6;max-height:400px;overflow-y:auto;overflow-x:hidden;padding-bottom: 15px;">
     <ul class="row">
-        <?php
-        foreach($activity->student_array as $student_id):
-            if(!ClipitGroup::get_from_user_activity($student_id, $activity->id)):
-                $student = array_pop(ClipitUser::get_by_id(array($student_id)));
-        ?>
+        <?php foreach($ungrouped_students as $ungrouped_student):?>
             <li class="list-item col-md-3">
-                <?php echo elgg_view("page/elements/user_block", array("entity" => $student)); ?>
+                <?php echo elgg_view("page/elements/user_block", array("entity" => $ungrouped_student)); ?>
             </li>
-        <?php
-            endif;
-        endforeach;
-        ?>
+        <?php endforeach;?>
     </ul>
 </div>
+<?php endif;?>
+
 <div class="row">
     <?php
     $group_students = array();
