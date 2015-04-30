@@ -130,8 +130,6 @@ function explore_page_handler($page) {
             $video_ids = ClipitSite::get_videos();
             $videos = ClipitVideo::get_by_id($video_ids);
             $href = "explore";
-            $storyboard_ids = ClipitSite::get_storyboards();
-            $storyboards = array_slice(ClipitStoryboard::get_by_id($storyboard_ids), 0, 6);
             break;
     }
     // Get publications items
