@@ -152,11 +152,10 @@ function explore_page_handler($page) {
         $href = "clipit_activity/{$activity_id}/publications";
     } elseif($by){
         $visible_videos = get_visible_items_by_site($videos, 'videos');
-        $visible_storyboards = get_visible_items_by_site($storyboards, 'storyboards');
         // Videos
         $videos = ClipitVideo::get_by_id($visible_videos);
         // Storyboards
-        $storyboards = ClipitStoryboard::get_by_id($visible_storyboards);
+        $storyboards = array();
 
         $href = "explore";
     }
