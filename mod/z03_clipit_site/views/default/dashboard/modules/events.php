@@ -33,10 +33,10 @@ $recommended_events = ClipitEvent::get_recommended_events($user_id, 0, $limit);
         <?php echo view_recommended_event($event_log);?>
     <?php endforeach;?>
 </ul>
-<div>
+<div style="position: relative; z-index: 100; margin-left: 35px;">
     <?php echo elgg_view('output/url', array(
         'href'  => 'ajax/view/navigation/pagination_timeline?view=full&type=user&offset='.$limit,
-        'text'  => 'More',
+        'text'  => elgg_echo('view_more'),
         'class' => 'events-more-link'
     ));
     ?>

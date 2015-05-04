@@ -60,6 +60,7 @@ $english = array(
     'activity:end' => 'Activity end',
     'activity:select:tricky_topic' => 'Tricky topic',
     'activity:overview' => 'Activity overview',
+    'activity:edit' => 'Edit Activity',
     'activity:admin' => 'Activity admin',
     'my_activities' => 'My activities',
     'my_activities:active' => 'Ongoing activities',

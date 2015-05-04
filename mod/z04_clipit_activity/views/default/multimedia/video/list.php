@@ -42,7 +42,7 @@ if($unlink){
         ));
 
     ?>
-    <?php echo elgg_view_form('multimedia/videos/add', array(
+    <?php echo elgg_view_form('', array(
             'action' => 'action/multimedia/videos/save',
             'data-validate'=> "true",
             'body' => $modal,

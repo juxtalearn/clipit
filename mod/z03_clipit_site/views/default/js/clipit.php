@@ -587,11 +587,50 @@ $(function(){
         more: '.events-more-link',
         loadingClass: 'events-loading',
         onAfterPageLoad:function(){
-            var hrefString = $(".events-more-link").attr("href");
-            var hrefArray  = hrefString.split("offset=");
-            var offset = hrefArray[1];
-            var totalEvents = $("ul.events > li.event").length;
-            $(".events-more-link").attr("href", hrefString.replace("offset=" + offset, "offset=" + totalEvents));
+            var $button = $('.events-more-link'),
+                hrefString = $button.attr("href"),
+                hrefArray  = hrefString.split("offset="),
+                offset = hrefArray[1],
+                totalEvents = $("ul.events > li.event").length;
+            $button.attr("href", hrefString.replace("offset=" + offset, "offset=" + totalEvents));
+            if(totalEvents > 10){
+                $button
+                    .css({
+                        textTransform: 'uppercase'
+                    })
+                    .addClass('view-more-events show btn btn-primary btn-sm btn-border-blue')
+                    .removeClass('events-more-link')
+                    .on('click', function(e){
+                        e.preventDefault();
+                        var that = $(this),
+                            href = that.attr('href');
+                        that.css('backgroundColor','transparent');
+                        var loading = $('<i/>')
+                            .css({
+                                position: 'absolute',
+                                padding: '5px',
+                                fontSize: '20px',
+                                marginLeft: '10px',
+                                zIndex: '2'
+                            })
+                            .addClass('loading fa fa-spinner fa-spin blue');
+                        that.before(loading);
+                        elgg.get(href, {
+                            success: function(data){
+                                $button.css('backgroundColor','white');
+                                loading.remove();
+                                $('ul.events').append($(data).html());
+                                var hrefArray  = href.split("offset="),
+                                    offset = hrefArray[1],
+                                    totalEvents = $("ul.events > li.event").length;
+                                that.attr("href", href.replace("offset=" + offset, "offset=" + totalEvents));
+                                if($(data).find('.event').length == 0){
+                                    $button.remove();
+                                }
+                            }
+                        });
+                    });
+            }
         }
     });
 

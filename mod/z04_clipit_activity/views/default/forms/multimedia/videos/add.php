@@ -26,6 +26,7 @@ switch($object['subtype']){
         $tt_tags = $tt->tag_array;
         break;
 }
+$performance_items = array();
 $performance_items = $activity->performance_item_array;
 $tags = array();
 $labels_value = array();

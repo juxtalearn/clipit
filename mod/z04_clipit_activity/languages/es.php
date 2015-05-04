@@ -61,6 +61,7 @@ $spanish = array(
     'activity:end' => 'Final',
     'activity:select:tricky_topic' => 'Tema clave',
     'activity:overview' => 'Visión general',
+    'activity:edit' => 'Editar Actividad',
     'activity:admin' => 'Administración',
     'my_activities' => 'Mis actividades',
     'my_activities:active' => 'Mis actividades en curso',

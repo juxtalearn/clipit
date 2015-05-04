@@ -31,12 +31,19 @@ if($user->role == 'teacher'){
     <?php echo view_recommended_event($event_log, $view_type); ?>
 <?php endforeach; ?>
 </ul>
-<?php if($recommended_events): ?>
-    <div class="timeline-more">
-        <?php echo elgg_view('output/url', array(
-            'href'  => 'ajax/view/navigation/pagination_timeline?view='.$view_type.'&type='.$type.'&id='.$id.'&offset='.$offset,
-            'text'  => 'More',
-            'class' => 'events-more-link'
-        )); ?>
-    </div>
-<?php endif; ?>
+<div class="timeline-more">
+<?php if($recommended_events && $offset < 4): ?>
+    <?php echo elgg_view('output/url', array(
+        'href'  => 'ajax/view/navigation/pagination_timeline?view='.$view_type.'&type='.$type.'&id='.$id.'&offset='.$offset,
+        'text'  => elgg_echo('view_more'),
+        'class' => 'events-more-link'
+    ));
+    ?>
+<?php elseif($offset > 4): ?>
+    <?php echo elgg_view('output/url', array(
+        'href'  => 'ajax/view/navigation/pagination_timeline?view='.$view_type.'&type='.$type.'&id='.$id.'&offset='.$offset,
+        'text'  => elgg_echo('view_more'),
+    ));
+    ?>
+<?php endif;?>
+</div>

@@ -41,6 +41,7 @@ $spanish = array(
     // ERROR
     'error:404' => "Esta funcionalidad aún no está operativa.",
     'view_all' => 'Ver todo',
+    'view_more' => 'Ver más',
     'view_as' => 'Ver como',
     'me'    => "yo",
     'options' => 'Opciones',

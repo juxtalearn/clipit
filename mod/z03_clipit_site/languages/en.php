@@ -41,6 +41,7 @@ $english = array(
     // ERROR
     'error:404' => "Sorry. We could not find the page that you requested.",
     'view_all' => 'View all',
+    'view_more' => 'View more',
     'view_as' => 'View as',
     'me'    => "Me",
     'options' => 'Options',
