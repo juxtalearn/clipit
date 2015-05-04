@@ -560,7 +560,8 @@ function get_group_progress($group_id){
     $completed = 0;
     $group_users = ClipitGroup::get_users($group_id);
     $tasks = ClipitTask::get_by_id($activity->task_array);
-    $each = round(100/(count($activity->task_array)));
+    $count = count($activity->task_array) == 0 ? 1 :count($activity->task_array);
+    $each = round(100/$count);
     foreach($tasks as $task){
         if (in_array($task->task_type, $individual_tasks)) {
             $each_part = $each/(count($group_users));

@@ -28,7 +28,7 @@ $data = array(
     'name' => $title,
     'description' => $description,
 );
-
+$href = REFERER;
 if(trim($title) == ""){
     register_error(elgg_echo("video:cantadd"));
 } else {
@@ -90,4 +90,9 @@ if(trim($title) == ""){
     }
     system_message(elgg_echo('video:added'));
 }
-forward(REFERER);
+// forward to task directly
+if(get_input('select-task')){
+    $href = 'clipit_activity/'.ClipitVideo::get_activity($video_id).'/group/'.$entity_id.'/repository/publish/'.$video_id.'?task_id='.get_input('select-task');
+}
+
+forward($href);

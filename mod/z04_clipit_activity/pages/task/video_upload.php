@@ -15,6 +15,12 @@ $videos = ClipitGroup::get_videos($group_id);
 $href_publications = "clipit_activity/{$activity->id}/publications";
 $body = elgg_view('multimedia/video/list', array(
     'entities'    => $videos,
+    'entity' => array_pop(ClipitGroup::get_by_id(array($group_id))),
+    'create'    => true,
+    'create_form' => elgg_view('input/hidden', array(
+        'name' => 'select-task',
+        'value' => $task->id
+    )),
     'href'      => "clipit_activity/{$activity->id}/group/{$group_id}/repository",
     'task_id'   => $task->id,
     'rating'    => false,
@@ -23,12 +29,7 @@ $body = elgg_view('multimedia/video/list', array(
     'total_comments' => false,
 ));
 if(!$videos){
-    $body = elgg_view('output/empty', array('value' => elgg_echo('task:videos:none', array(elgg_view('output/url',
-        array(
-            'href'=> "clipit_activity/{$activity->id}/group/{$group_id}/repository?filter=videos",
-            'text' => elgg_echo('repository:group')
-        )
-    )))));
+    $body .= elgg_view('output/empty', array('value' => elgg_echo('task:videos:none')));
 }
 // Group id get parameter
 if( get_input('group_id')){
@@ -69,6 +70,12 @@ if($status['status'] === true || $task->end <= time()){
     } else {
         $body = elgg_view('multimedia/video/list', array(
             'entities'    => $videos,
+            'entity' => array_pop(ClipitGroup::get_by_id(array($group_id))),
+            'create'    => true,
+            'create_form' => elgg_view('input/hidden', array(
+                'name' => 'select-task',
+                'value' => $task->id
+            )),
             'href'      => "clipit_activity/{$activity->id}/group/{$group_id}/repository",
             'task_id'   => $task->id,
             'rating'    => false,

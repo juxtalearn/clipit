@@ -40,7 +40,8 @@ if($unlink){
                     'class' => "btn btn-primary"
                 ))
         ));
-
+    // if create var contains additional data
+    $modal .= $vars['create_form'];
     ?>
     <?php echo elgg_view_form('', array(
             'action' => 'action/multimedia/videos/save',

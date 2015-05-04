@@ -10328,6 +10328,12 @@ ul.tagit input[type="text"] {
   td.events-list {
     display: table-cell !important;
   }
+  .discussion-reply-msg {
+    padding: 0px;
+  }
+  .btn-primary {
+    margin-right: 20px;
+  }
   .module-group_activity {
     display: block !important;
   }
@@ -10340,9 +10346,6 @@ ul.tagit input[type="text"] {
   th.module-group_activity,
   td.module-group_activity {
     display: table-cell !important;
-  }
-  .navbar-text {
-    float: right;
   }
   .separator {
     display: block !important;
@@ -10374,8 +10377,48 @@ ul.tagit input[type="text"] {
   .contact {
     float: left;
   }
-  .footer.col-sm-2 {
+  #footer .col-sm-2 {
     float: left;
+  }
+  .container .navbar-header {
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+  .bg-blue-lighter_2 {
+    padding: 0px;
+  }
+  .discussion-reply-msg > .user-reply {
+    display: none;
+  }
+  h3,
+  h2 {
+    font-size: 18px;
+  }
+  .activity-profile .elgg-head-layout h2 {
+    margin: 0px;
+  }
+  .activity-layout .content h4 {
+    font-size: 14px;
+  }
+  .activity-layout ol.breadcrumb li + li {
+    display: none;
+  }
+  .activity-layout .elgg-head-layout h4 {
+    display: none;
+  }
+  .elgg-sidebar {
+    display: none;
+  }
+  .messages-discussion .reply-button {
+    display: none;
+  }
+  .discussion .body-post {
+    padding: 5px;
+    margin-left: 0px;
+  }
+  .elgg-module-widget ul.wrapper-list.separator,
+  .elgg-module-widget .wrapper.separator {
+    display: block !important;
   }
 }
 @media (max-width: 767px) and (max-width: 767px) {

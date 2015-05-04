@@ -33,7 +33,7 @@ if (is_array($items) && count($items) > 0):
 
             $title = elgg_get_friendly_title($item->name);
             $teachers = ClipitActivity::get_teachers($item->id);
-            $isCalled = in_array($user_loggedin_id, $item->called_users_array);
+            $isCalled = in_array($user_loggedin_id, (array)$item->called_users_array);
             ?>
             <li class='list-item col-md-12'>
                 <div class="row">
