@@ -22,6 +22,7 @@ echo elgg_view("multimedia/file/templates/upload", array('entity' => $entity, 't
 </div>
 <?php
 $body .= '<div class="files"></div>';
+$body .= $vars['create_form'];
 $footer = '
 <div class="fileupload-buttonbar row">
         <div class="col-md-6">

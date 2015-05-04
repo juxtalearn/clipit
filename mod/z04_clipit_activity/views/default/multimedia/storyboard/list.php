@@ -118,12 +118,14 @@ if($vars['create']){
     echo elgg_view_form('multimedia/storyboards/upload', array(
         'id' => 'fileupload',
         'enctype' => 'multipart/form-data',
-    ), array('entity'  => $entity));
-    // File options
-    $list_options['options_values'] = array(
-        ''          => '['.elgg_echo('options').']',
-        'remove'      => elgg_echo('file:delete'),
-    );
+    ), array('entity'  => $entity, 'create_form' => $vars['create_form']));
+    if(!empty($storyboards)) {
+        // File options
+        $list_options['options_values'] = array(
+            '' => '[' . elgg_echo('options') . ']',
+            'remove' => elgg_echo('file:delete'),
+        );
+    }
 }
 
 // set content

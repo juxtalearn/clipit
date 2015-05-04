@@ -14,17 +14,18 @@ $storyboards = ClipitGroup::get_storyboards($group_id);
 $href_publications = "clipit_activity/{$activity->id}/publications";
 $body = elgg_view('multimedia/storyboard/list', array(
     'entities'    => $storyboards,
+    'entity' => array_pop(ClipitGroup::get_by_id(array($group_id))),
+    'create'    => true,
+    'create_form' => elgg_view('input/hidden', array(
+        'name' => 'select-task',
+        'value' => $task->id
+    )),
     'href'      => "clipit_activity/{$activity->id}/group/{$group_id}/repository",
     'task_id'   => $task->id,
     'publish'   => true,
 ));
 if(!$storyboards){
-    $body = elgg_view('output/empty', array('value' => elgg_echo('task:storyboards:none', array(elgg_view('output/url',
-        array(
-            'href'=> "clipit_activity/{$activity->id}/group/{$group_id}/repository?filter=storyboards",
-            'text' => elgg_echo('repository:group')
-        )
-    )))));
+    $body .= elgg_view('output/empty', array('value' => elgg_echo('task:storyboards:none')));
 }
 // Group id get parameter
 if(get_input('group_id')){
@@ -58,6 +59,12 @@ if($status['status'] === true || $task->end <= time()){
     } else {
         $body = elgg_view('multimedia/storyboard/list', array(
             'entities'    => $storyboards,
+            'entity' => array_pop(ClipitGroup::get_by_id(array($group_id))),
+            'create'    => true,
+            'create_form' => elgg_view('input/hidden', array(
+                'name' => 'select-task',
+                'value' => $task->id
+            )),
             'href'      => "clipit_activity/{$activity->id}/group/{$group_id}/repository",
             'task_id'   => $task->id,
             'rating'    => false,
