@@ -24,7 +24,7 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
     $status = get_task_status($task);
     ?>
     <li class="overflow-hidden list-item <?php echo (time() < $task->start && $user->role == ClipitUser::ROLE_STUDENT) ? "soon" : ""; ?>">
-        <div class="image-block">
+        <div class="image-block hidden-xs">
             <small class="date show" style="text-transform: uppercase">
                 <?php if($user->role == ClipitUser::ROLE_TEACHER):?>
                     <span><?php echo date("d M Y", $task->start);?></span><br>
@@ -34,7 +34,7 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
         </div>
         <div class="content-block">
             <?php echo elgg_view("tasks/icon_task_type", array('type' => $task->task_type)); ?>
-            <div class="pull-right">
+            <div class="pull-right hidden-xs">
                 <span class="margin-right-10">
                     <?php echo elgg_view("tasks/icon_task_status", array('status' => $task->status)); ?>
                 </span>

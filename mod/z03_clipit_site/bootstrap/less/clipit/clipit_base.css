@@ -9048,6 +9048,12 @@ ul.deadline-list > li .fa-user {
   color: #32b4e5;
   font-size: 14px;
 }
+@media (max-width: 767px) {
+  .video-list .video-item .col-md-4 {
+    padding: 0;
+    margin-bottom: 10px;
+  }
+}
 .video-list .video-item .img-preview {
   position: relative;
 }
@@ -10329,7 +10335,7 @@ ul.tagit input[type="text"] {
     display: table-cell !important;
   }
   .discussion-reply-msg {
-    padding: 0px;
+    padding: 10px;
   }
   .btn-primary {
     margin-right: 20px;
@@ -10367,7 +10373,7 @@ ul.tagit input[type="text"] {
   ul.top-account li a .fa {
     font-size: 25px;
   }
-  ul.top-account li a img.avatar-small {
+  img.avatar-small {
     width: 30px;
     height: 30px;
   }

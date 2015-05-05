@@ -162,7 +162,7 @@ function text_reference($text_message, $id = 0){
  * @param $url
  * @return array|bool
  */
-function video_url_parser($url){
+function is_video_provider($url){
     if ( $parse_url = parse_url($url) ) {
         if ( !isset($parts["scheme"]) )
         {
@@ -184,31 +184,15 @@ function video_url_parser($url){
             // Youtube
             if (strpos($url, 'youtube.com') != false || strpos($url, 'youtu.be') != false) {
                 preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $url, $matches);
-                $output = array(
-                    'id' => $matches[0],
-                    'url'   => 'http://www.youtube.com/watch?v='.$matches[0],
-                    'preview' => "http://i1.ytimg.com/vi/{$matches[0]}/mqdefault.jpg",
-                    'favicon'   => $favicon_url_base.$parse_url['host']
-                );
+                return 'http://www.youtube.com/watch?v='.$matches[0];
                 // Vimeo
             } else if (strpos($url, 'vimeo.com') != false) {
                 preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=vimeo.com/)[^&\n]+#", $url, $matches);
-                $data = file_get_contents("http://vimeo.com/api/v2/video/$matches[0].json");
-                $data = array_pop(json_decode($data));
-                $output = array(
-                    'id' => $matches[0],
-                    'url'   => "http://vimeo.com/{$matches[0]}",
-                    'preview' => $data->thumbnail_large,
-                    'favicon'   => $favicon_url_base.$parse_url['host']
-                );
+                return "http://vimeo.com/{$matches[0]}";
             }
         }
     }
-    if(!$output['id']){
         return false;
-    }
-    // Video Data output
-    return $output;
 }
 function get_video_url_embed($url){
     if (strpos($url, 'youtube.com') != false || strpos($url, 'youtu.be') != false) {

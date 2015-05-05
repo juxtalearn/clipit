@@ -58,13 +58,13 @@ if (is_array($items) && count($items) > 0):
                             -
                             <?php echo date("d M Y", $item->end);?>
                         </div>
-                        <div style='max-height: 40px; overflow: hidden; color: #666666;margin-top: 5px; '>
+                        <div class="hidden-xs" style='max-height: 40px; overflow: hidden; color: #666666;margin-top: 5px; '>
                             <?php echo $item->description; ?>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="row">
-                            <div class="col-xs-6" style="border-right: 1px solid #ccc; padding-right: 15px;">
+                            <div class="col-md-6" style="border-right: 1px solid #ccc; padding-right: 15px;">
                                 <?php if($item->tricky_topic):?>
                                 <div class="text-truncate margin-bottom-10">
                                     <small class="show"><?php echo elgg_echo('tricky_topic');?></small>
@@ -111,7 +111,7 @@ if (is_array($items) && count($items) > 0):
                                 </div>
                                 <?php endif; ?>
                             </div>
-                            <div class="col-xs-6">
+                            <div class="col-md-6 hidden-xs">
                                 <small class='show'><?php echo elgg_echo('activity:teachers') ?></small>
                                 <ul style="max-height: 100px; overflow: auto;">
                                     <?php

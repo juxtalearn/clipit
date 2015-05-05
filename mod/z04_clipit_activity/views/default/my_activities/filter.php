@@ -14,22 +14,22 @@ $activity = elgg_extract('entity', $vars);
 
 $tabs = array(
     'all' => array(
-        'text' => elgg_echo('all'),
+        'text' => '<span>'.elgg_echo('all').'<span>',
         'href' => "my_activities",
         'priority' => 200,
     ),
     'enroll' => array(
-        'text' => elgg_echo('status:enroll'),
+        'text' => '<span>'.elgg_echo('status:enroll').'<span>',
         'href' => "my_activities?filter=enroll",
         'priority' => 300,
     ),
     'active' => array(
-        'text' => elgg_echo('status:active'),
+        'text' => '<span>'.elgg_echo('status:active').'<span>',
         'href' => "my_activities?filter=active",
         'priority' => 400,
     ),
     'past' => array(
-        'text' => elgg_echo('status:closed'),
+        'text' => '<span>'.elgg_echo('status:closed').'<span>',
         'href' => "my_activities?filter=closed",
         'priority' => 500,
     ),

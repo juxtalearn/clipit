@@ -58,7 +58,7 @@ foreach($messages as $message){
             'content' => $check_msg
         ),
         array(
-            'class' => 'user-avatar',
+            'class' => 'user-avatar hidden-xs',
             'content' => $user_avatar
         ),
         array(

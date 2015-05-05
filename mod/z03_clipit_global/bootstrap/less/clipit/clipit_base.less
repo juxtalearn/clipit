@@ -21,7 +21,6 @@
 @import "video";
 @import "messages";
 @import "tags";
-@import "landing";
 //@import "elgg_mod.less";
 //
 
@@ -37,7 +36,6 @@ a{
   &:focus{
     color: @blue_clipit;
     opacity: .7;
-    text-decoration: none !important;
   }
 }
 .blue{
@@ -49,22 +47,7 @@ a{
 .blue-lighter{
   color: @blue-lighter;
 }
-.bg-green {
-  background-color: #99cb00;
-}
-.bg-red {
-  background-color: #ff4343;
-}
-.bg-yellow {
-  background-color: #d8ba05;
-}
-.bg-blue {
-  background-color: #32b4e5;
-}
-.bg-blue-lighter {
-  background-color: #bae6f6;
-}
-.bg-blue-lighter_2{
+.bg-blue-lighter{
   background: @blue-lighter_2 !important;
 }
 .bg-white{
@@ -154,7 +137,6 @@ ul, ol {
   color: @blue_clipit;
   border-bottom: 6px solid @blue-lighter;
   padding-bottom: 10px;
-  font-size: 20px;
 }
 .btn-sp{
   padding: 5px 10px !important;
@@ -244,22 +226,6 @@ h4.empty{
   url('@{font-path}@{font-name-futurabold}.woff') format('woff'),
   url('@{font-path}@{font-name-futurabold}.ttf') format('truetype'),
   url('@{font-path}@{font-name-futurabold}.svg#FuturaLTBold') format('svg');
-}
-@font-face {
-  font-family: 'FuturaBook';
-  src: url('@{font-path}@{font-name-futurabook}.eot');
-  src: url('@{font-path}@{font-name-futurabook}.eot') format('embedded-opentype'),
-  url('@{font-path}@{font-name-futurabook}.woff') format('woff'),
-  url('@{font-path}@{font-name-futurabook}.ttf') format('truetype'),
-  url('@{font-path}@{font-name-futurabook}.svg#FuturaLTBold') format('svg');
-}
-@font-face {
-  font-family: 'FuturaLight';
-  src: url('@{font-path}@{font-name-futuralight}.eot');
-  src: url('@{font-path}@{font-name-futuralight}.eot') format('embedded-opentype'),
-  url('@{font-path}@{font-name-futuralight}.woff') format('woff'),
-  url('@{font-path}@{font-name-futuralight}.ttf') format('truetype'),
-  url('@{font-path}@{font-name-futuralight}.svg#FuturaLTBold') format('svg');
 }
 // Mixin for generating new styles
 .btn-styles(@btn-color: #555) {
@@ -409,22 +375,22 @@ select.form-control{
 // --------------------------------------------------
 .pagination {
   > li > a{
-    border: 1px solid @blue-lighter;
+    border: 1px solid @grey_border;
+    color: #9c9e9f;
+    font-family: @font-family-futurabold;
   }
-  > .active > a,
-  > .active > span{
+  > .active > a{
     background-color: @blue_clipit;
-    border: 1px solid @blue_clipit;
     &:hover,
     &:focus{
-      color: @blue_clipit;
-      background-color: @blue-lighter;
-      border-color: @blue_clipit;
+      color: #9c9e9f;
+      background-color: #d6f0f9;
+      border-color: #9c9e9f;
     }
   }
 }
 //
-// Thumbnail
+// Pagination
 // --------------------------------------------------
 .thumbnail{
   padding: 0;
@@ -812,103 +778,3 @@ h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
 //
 // FullCalendar plugin
 // --------------------------------------------------
-.delete-task{
-  display: none;
-}
-.fc-event{
-  background: #32b4e5;
-  border: 1px solid #32b4e5;
-}
-.fc-event-inner{
-  cursor: pointer;
-}
-.fc-event-time{
-  display: none;
-}
-.fc-event-end{
-  padding-left: 10px;
-  .fa{
-    display: none;
-  }
-}
-.fc-event-start{
-  padding-left: 0 !important;
-  .fa{
-    display: inline-block !important;
-  }
-}
-.fc-widget-content{
-  border: 1px solid #fff !important;
-  color: #999;
-  background: #fafafa;
-}
-.fc-ranged{
-  color: #32b4e5;
-  font-weight: bold;
-  background-color: #d6f0fa;
-  cursor: pointer;
-}
-.fc-state-highlight {
-  background: #FFF !important;
-  border: 3px solid #d6f0fa !important;
-}
-.fc-ranged.fc-other-month{
-  background-color: #F2FBFF;
-}
-.fc-grid .fc-other-month .fc-day-number{
-  opacity: .5;
-}
-.task-item{
-  display: none;
-}
-//
-// Nvd3 graph plugin
-// --------------------------------------------------
-.nvtooltip {
-  padding: 5px;
-  margin-top: 30px;
-  top: 100px !important;
-  border: 1px solid #32b4e5;
-  color: #32b4e5;
-  font-weight:bold;
-}
-// Module group activity
-.module-group_activity{
-  svg{
-    height: 200px;
-    .nvd3 .nv-axis line{
-      stroke: #EBEBEB;
-    }
-    text {
-      font: normal 12px Helvetica;
-      fill: #999999;
-    }
-    .nv-x .nv-axis text {
-      fill: #000;
-      font-size: 10px;
-    }
-    .nv-axis path {
-      stroke: #999999;
-    }
-  }
-}
-//
-// Loading block
-// --------------------------------------------------
-.loading-block{
-  display: table;
-  width: 100%;
-  height: auto;
-  > div{
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-  }
-  .fa{
-    position: initial !important;
-    top: 0 !important;
-  }
-  .fa-spin{
-    font-size: 40px !important;
-  }
-}

@@ -156,7 +156,7 @@ if($unlink){
                     ?>
                 </h4>
                 <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $tags)); ?>
-                <p>
+                <p class="hidden-xs">
                     <?php echo $description;?>
                 </p>
                 <small class="show">

@@ -103,9 +103,9 @@ if($current_page > 1 && $total_pages > 1){
 
 if ($pages->prev['href']) {
     $link = elgg_view('output/url', $pages->prev);
-    echo "<li>$link</li>";
+    echo "<li class='hidden-xs'>$link</li>";
 } else {
-    echo "<li class=\"disabled\"><span>{$pages->prev['text']}</span></li>";
+    echo "<li class=\"hidden-xs disabled\"><span>{$pages->prev['text']}</span></li>";
 }
 
 foreach ($pages->items as $page) {
@@ -125,9 +125,9 @@ foreach ($pages->items as $page) {
 
 if ($pages->next['href']) {
     $link = elgg_view('output/url', $pages->next);
-    echo "<li>$link</li>";
+    echo "<li class='hidden-xs'>$link</li>";
 } else {
-    echo "<li class=\"disabled\"><span>{$pages->next['text']}</span></li>";
+    echo "<li class=\"hidden-xs disabled\"><span>{$pages->next['text']}</span></li>";
 }
 $end = false;
 if($current_page < $total_pages && $total_pages > 1){

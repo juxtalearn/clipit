@@ -35,24 +35,18 @@ if(trim($title) == ""){
     // New video
     if($entity_id){
         $object = ClipitSite::lookup($entity_id);
-        $video_data = video_url_parser($url);
+        $video_url = is_video_provider($url);
         $entity_class = $object['subtype'];
         $entity = array_pop($entity_class::get_by_id(array($entity_id)));
         // Video url (youtube|vimeo)
-        if(trim($url) != "" && $video_data){
-            $video_url = $video_data['url'];
-            // Video upload to youtube
-        } elseif(!empty($file['tmp_name'])){
+        if(!empty($file['tmp_name'])){
             $video_url = ClipitVideo::upload_to_youtube($file['tmp_name'], $title);
-            $video_data = video_url_parser($video_url);
         }
-        if(!$video_data){
+        if(!$video_url){
             register_error(elgg_echo("video:cantadd"));
         } else {
             $video_id = ClipitVideo::create(array(
                 'url'  => $video_url,
-                'preview' => $video_data['preview'],
-                'duration' => $video_data['duration']
             ));
             $entity_class::add_videos($entity_id, array($video_id));
         }

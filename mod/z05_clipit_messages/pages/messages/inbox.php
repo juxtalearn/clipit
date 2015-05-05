@@ -45,7 +45,7 @@ foreach($messages as $message){
     $buttons = elgg_view('output/url', array(
             'href'  => "messages/view/{$user->login}#create_reply",
             'title' => elgg_echo("reply:create"),
-            'class' => 'btn btn-default btn-xs reply-button',
+            'class' => 'btn btn-default btn-xs reply-button hidden-xs',
             'text'  => '<i class="fa fa-plus"></i> '.elgg_echo("reply"),
         ));
     $remove_msg_url = "action/messages/set_options?set-option=remove&check-msg[]={$message->owner_id}";
@@ -84,7 +84,7 @@ foreach($messages as $message){
             'content' => $check_msg
         ),
         array(
-            'class' => 'user-avatar',
+            'class' => 'user-avatar hidden-xs',
             'content' => $user_avatar
         ),
         array(
@@ -119,7 +119,7 @@ $content_list .= elgg_view("page/elements/list/options", array('options' => $lis
 $content_list .= elgg_view("page/elements/list/table", array('rows' => $rows, 'class' => 'messages-table', 'responsive' => true));
 
 $content = elgg_view("search/search");
-$content .= elgg_view_form("messages/set_options", array('body' => $content_list, 'class' => 'block-total'));
+$content .= elgg_view_form("messages/set_options", array('body' => $content_list, 'style' => 'overflow-x: auto;', 'class' => 'block-total'));
 
 if (!$messages) {
     $content = elgg_echo("messages:inbox:none");

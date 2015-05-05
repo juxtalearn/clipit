@@ -46,14 +46,14 @@ if($activity_id && $owner_user->role == ClipitUser::ROLE_STUDENT){
             <?php endif;?>
             <?php echo elgg_view('output/friendlytime', array('time' => $comment->time_created));?>
         </small>
-        <div class="body">
-            <?php echo text_reference($comment->description); ?>
-            <!-- Attachs files -->
-            <?php if($files_id): ?>
-                <?php echo elgg_view("multimedia/attach/summary", array('files' => $files_id)); ?>
-            <?php endif; ?>
-            <!-- Attachs files end-->
-        </div>
+    </div>
+    <div class="body">
+        <?php echo text_reference($comment->description); ?>
+        <!-- Attachs files -->
+        <?php if($files_id): ?>
+            <?php echo elgg_view("multimedia/attach/summary", array('files' => $files_id)); ?>
+        <?php endif; ?>
+        <!-- Attachs files end-->
     </div>
         <?php
         $replies = array_pop(ClipitComment::get_by_destination(array($comment->id)));

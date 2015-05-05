@@ -21,7 +21,7 @@ $performance_items = $entity->performance_item_array;
 <?php echo elgg_view("multimedia/owner_options", array('entity' => $entity, 'type' => $vars['type'])); ?>
 <div class="clearfix"></div>
 <div class="multimedia-owner">
-    <div class="multimedia-preview">
+    <div class="multimedia-preview hidden-xs">
         <?php echo $vars['preview'];?>
     </div>
     <div class="block">
