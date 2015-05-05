@@ -51,8 +51,62 @@ class ClipitVideo extends ClipitResource{
     protected function copy_to_elgg($elgg_entity)
     {
         parent::copy_to_elgg($elgg_entity);
+        if(empty($this->preview)){
+            $video_metadata = static::video_url_parser($this->url);
+            $this->preview = (string)$video_metadata[preview];
+        }
         $elgg_entity->set("preview", (string)$this->preview);
         $elgg_entity->set("duration", (int)$this->duration);
+    }
+
+    static function video_url_parser($url){
+        if ( $parse_url = parse_url($url) ) {
+            if ( !isset($parts["scheme"]) )
+            {
+                $url = "http://$url";
+            }
+        }
+        if(!isset($url) || !filter_var($url, FILTER_VALIDATE_URL)){
+            return false;
+        }
+        $video_patterns = array('#(((http://)?)|(^./))(((www.)?)|(^./))youtube\.com/watch[?]v=([^\[\]()<.,\s\n\t\r]+)#i'
+        ,'#(((http://)?)|(^./))(((www.)?)|(^./))youtu\.be/([^\[\]()<.,\s\n\t\r]+)#i'
+        ,'/(http:\/\/)(www\.)?(vimeo\.com\/groups)(.*)(\/videos\/)([0-9]*)/'
+        ,'/(http:\/\/)(www\.)?(vimeo.com\/)([0-9]*)/'
+        ,'/(https:\/\/)(www\.)?(vimeo.com\/)([0-9]*)/');
+        $favicon_url_base = "http://www.google.com/s2/favicons?domain=";
+
+        $output = array();
+        foreach($video_patterns as $video_pattern){
+            if (preg_match($video_pattern, $url) > 0){
+                // Youtube
+                if (strpos($url, 'youtube.com') != false || strpos($url, 'youtu.be') != false) {
+                    preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $url, $matches);
+                    $output = array(
+                        'id' => $matches[0],
+                        'url'   => 'http://www.youtube.com/watch?v='.$matches[0],
+                        'preview' => "http://i1.ytimg.com/vi/{$matches[0]}/mqdefault.jpg",
+                        'favicon'   => $favicon_url_base.$parse_url['host']
+                    );
+                    // Vimeo
+                } else if (strpos($url, 'vimeo.com') != false) {
+                    preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=vimeo.com/)[^&\n]+#", $url, $matches);
+                    $data = file_get_contents("http://vimeo.com/api/v2/video/$matches[0].json");
+                    $data = array_pop(json_decode($data));
+                    $output = array(
+                        'id' => $matches[0],
+                        'url'   => "http://vimeo.com/{$matches[0]}",
+                        'preview' => $data->thumbnail_large,
+                        'favicon'   => $favicon_url_base.$parse_url['host']
+                    );
+                }
+            }
+        }
+        if(!$output['id']){
+            return false;
+        }
+        // Video Data output
+        return $output;
     }
 
     /**
