@@ -16,6 +16,11 @@ function clipit_final_init(){
     global $CONFIG;
     $user_id = elgg_get_logged_in_user_guid();
     $user = array_pop(ClipitUser::get_by_id(array($user_id)));
+    if(get_config('clipit_site_type') == ClipitSite::TYPE_SITE) {
+        elgg_extend_view('walled_garden/body', 'site/body');
+        elgg_extend_view('page/walled_garden', 'site/walled_garden');
+        elgg_extend_view('page/default', 'site/default');
+    }
     /**
      * Register menu footer
      */
@@ -26,7 +31,6 @@ function clipit_final_init(){
     elgg_load_library('clipit:recommended:events');
     elgg_register_library('clipit:site:functions', "{$plugin_dir}/lib/functions.php");
     elgg_load_library('clipit:site:functions');
-
     // Activity admin module ajax
     elgg_register_ajax_view('dashboard/modules/activity_admin/task_list');
 

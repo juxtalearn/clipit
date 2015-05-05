@@ -41,6 +41,7 @@ $english = array(
         originating activity. Also, students can use free labels to tag and filter, and can follow recommended
         videos based on their activity and interests.',
     'clipit:global:recommended' => 'Recommended <span>videos</span>',
+    'clipit:view:more_videos' => 'View more videos',
 
     // ERROR
     'error:404' => "Sorry. We could not find the page that you requested.",
@@ -72,8 +73,7 @@ $english = array(
 
     // Menu footer
     'menu:footer_clipit:header:clipit' => 'Clipit',
-    'menu:footer_clipit:header:tutorials' => 'Tutorials',
-    'menu:footer_clipit:header:tutorials' => 'Tutorials',
+    'menu:footer_clipit:header:tutorials' => 'User guides',
     'menu:footer_clipit:header:help' => 'Help',
     'menu:footer_clipit:header:legal' => 'Legal',
     'send:email_to_site' => 'Send email to site',

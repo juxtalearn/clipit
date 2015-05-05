@@ -10,10 +10,20 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$plugin_dir = elgg_get_plugins_path().'z03_clipit_site';
+switch(get_config('clipit_site_type')){
+    case ClipitSite::TYPE_SITE:
+        $plugin_dir = elgg_get_plugins_path().'z03_clipit_site';
+        break;
+    case ClipitSite::TYPE_GLOBAL:
+        $plugin_dir = elgg_get_plugins_path().'z03_clipit_global';
+        break;
+}
+
 $plugin_url = elgg_get_site_url().'mod/z03_clipit_site';
 $futurabold = 'futuralt-bold';
 $futuralt = 'futuralt';
+$futurabook = 'FuturaLT-Book';
+$futuralight = 'FuturaLT-Light';
 ?>
     @font-face {
     font-family: 'Futura';
@@ -31,5 +41,23 @@ $futuralt = 'futuralt';
     url('<?php echo $plugin_url.'/bootstrap/fonts/'.$futurabold;?>.ttf') format('truetype'),
     url('<?php echo $plugin_url.'/bootstrap/fonts/'.$futurabold;?>.svg#FuturaLTBold') format('svg');
     }
+    <?php if(get_config('clipit_site_type') == ClipitSite::TYPE_GLOBAL):?>
+    @font-face {
+    font-family: 'FuturaBook';
+    src: url('<?php echo $plugin_url.'/bootstrap/fonts/'.$futurabook;?>.eot');
+    src: url('<?php echo $plugin_url.'/bootstrap/fonts/'.$futurabook;?>.eot') format('embedded-opentype'),
+    url('<?php echo $plugin_url.'/bootstrap/fonts/'.$futurabook;?>.woff') format('woff'),
+    url('<?php echo $plugin_url.'/bootstrap/fonts/'.$futurabook;?>.ttf') format('truetype'),
+    url('<?php echo $plugin_url.'/bootstrap/fonts/'.$futurabook;?>.svg#FuturaLTBold') format('svg');
+    }
+    @font-face {
+    font-family: 'FuturaLight';
+    src: url('<?php echo $plugin_url.'/bootstrap/fonts/'.$futuralight;?>.eot');
+    src: url('<?php echo $plugin_url.'/bootstrap/fonts/'.$futuralight;?>.eot') format('embedded-opentype'),
+    url('<?php echo $plugin_url.'/bootstrap/fonts/'.$futuralight;?>.woff') format('woff'),
+    url('<?php echo $plugin_url.'/bootstrap/fonts/'.$futuralight;?>.ttf') format('truetype'),
+    url('<?php echo $plugin_url.'/bootstrap/fonts/'.$futuralight;?>.svg#FuturaLTBold') format('svg');
+    }
+    <?php endif;?>
 <?php
 require($plugin_dir . '/bootstrap/less/clipit/clipit_base.min.css');

@@ -33,6 +33,11 @@ function clipit_global_init(){
 //    $CONFIG->walled_garden = false;
     $user_id = elgg_get_logged_in_user_guid();
     $user = array_pop(ClipitUser::get_by_id(array($user_id)));
+    if(get_config('clipit_site_type') == ClipitSite::TYPE_GLOBAL) {
+        elgg_extend_view('walled_garden/body', 'global/body');
+        elgg_extend_view('page/walled_garden', 'global/walled_garden');
+        elgg_extend_view('page/default', 'global/default');
+    }
     /**
      * Register menu footer
      */
@@ -131,7 +136,6 @@ function clipit_global_init(){
         elgg_register_js("nvd3", "{$plugin_url}/vendors/nvd3/nv.d3.js");
         elgg_register_css("nvd3:css", "{$plugin_url}/vendors/nvd3/nv.d3.css");
         // ClipIt
-        elgg_register_css("clipit", "{$plugin_url}/bootstrap/less/clipit/clipit_base.min.css");
         // FontAwesome
         elgg_register_css("fontawesome", "{$plugin_url}/vendors/fontawesome/fontawesome.min.css");
         // jQuery cycle2
@@ -171,7 +175,6 @@ function clipit_global_init(){
         elgg_load_css("twitter-bootstrap");
         elgg_unregister_js("twitter-bootstrap");
         elgg_load_css("fontawesome");
-        elgg_load_css("clipit");
         elgg_unregister_css("elgg");
         elgg_unregister_css("elgg.walled_garden");
         elgg_register_js("clipit_theme_bootstrap", "{$plugin_url}/bootstrap/dist/js/bootstrap.js");

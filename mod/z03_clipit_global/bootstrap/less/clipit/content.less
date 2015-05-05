@@ -138,12 +138,16 @@
     background: transparent !important;
   }
 }
-
+.col-md-pull-3.col-md-9{
+  .make-md-column-pull(4);
+  .make-md-column(8);
+}
 //
 // Elgg sidebar
 // --------------------------------------------------
 .elgg-sidebar{
-  .make-md-column(3);
+    .make-md-column-push(8);
+    .make-md-column(4);
   margin-top: 17px;
   // Head
   .elgg-head{

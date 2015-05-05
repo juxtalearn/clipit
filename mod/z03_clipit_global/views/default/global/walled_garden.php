@@ -25,9 +25,8 @@ elgg_load_js('main');
 
 $images_dir = elgg_get_site_url() . "mod/z03_clipit_global/graphics";
 $footer = elgg_view('page/elements/footer', $vars);
-$header_top = elgg_view('page/elements/header_top', array('walled_garden' => true));
-$header_account = elgg_view('page/elements/header_account', array('images_dir' => $images_dir));
-
+$header_top = elgg_view('global/header_top', array('walled_garden' => true));
+$header_account = elgg_view('global/header_account', array('images_dir' => $images_dir));
 $accounts = array(
     'facebook'  => 'https://www.facebook.com/jxl.juxtalearn',
     'twitter'   => 'https://twitter.com/juxtalearn_eu',
@@ -53,7 +52,7 @@ $accounts = array(
             <?php echo $header_account; ?>
         </header>
         <div id="wrap">
-            <?php echo elgg_view("walled_garden/body", array('accounts' => $accounts, 'images_dir' => $images_dir));?>
+            <?php echo elgg_view("global/body", array('accounts' => $accounts, 'images_dir' => $images_dir));?>
         </div>
     </div>
     <?php echo elgg_view('page/elements/footer'); ?>
