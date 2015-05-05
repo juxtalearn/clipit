@@ -156,7 +156,7 @@ class UBUser extends UBItem {
                 throw new InvalidParameterException("ERROR: Cannot modify 'id' of instance.");
             }
             // remove unwanted spaces from beginning and end of value
-            $value = trim($value, " \t\n\r\0\x0B\160");
+            $value = trim($value, " \t\n\r\0\x0B".chr(194).chr(160));
             if ($prop == "password") {
                 $new_password = static::create_password($value);
                 $item->password = $new_password["password"];
@@ -411,12 +411,12 @@ class UBUser extends UBItem {
         }
         // name
         $name = $value;
-        $prop_value_array["name"] = trim($name, " \t\n\r\0\x0B\160");
+        $prop_value_array["name"] = trim($name, " \t\n\r\0\x0B".chr(194).chr(160));
         $cell_iterator->next();
         // login
         $login = (string)$cell_iterator->current()->getValue();
         if (!empty($login)) {
-            $prop_value_array["login"] = trim($login, " \t\n\r\0\x0B\160");
+            $prop_value_array["login"] = trim($login, " \t\n\r\0\x0B".chr(194).chr(160));
         } else {
             return $row_result;
         }
@@ -424,7 +424,7 @@ class UBUser extends UBItem {
         // password
         $password = (string)$cell_iterator->current()->getValue();
         if (!empty($password)) {
-            $prop_value_array["password"] = trim($password, " \t\n\r\0\x0B\160");
+            $prop_value_array["password"] = trim($password, " \t\n\r\0\x0B".chr(194).chr(160));
         } else {
             return $row_result;
         }
@@ -432,20 +432,20 @@ class UBUser extends UBItem {
         // email
         $email = (string)$cell_iterator->current()->getValue();
         if (!empty($email)) {
-            $prop_value_array["email"] = trim($email, " \t\n\r\0\x0B\160");
+            $prop_value_array["email"] = trim($email, " \t\n\r\0\x0B".chr(194).chr(160));
         }
         $cell_iterator->next();
         // role
         $role = (string)$cell_iterator->current()->getValue();
         if (!empty($role)) {
-            $prop_value_array["role"] = trim($role, " \t\n\r\0\x0B\160");
+            $prop_value_array["role"] = trim($role, " \t\n\r\0\x0B".chr(194).chr(160));
         }
         $cell_iterator->next();
         $row_result["user_id"] = (int)static::create($prop_value_array);
         // group
         $group = (string)$cell_iterator->current()->getValue();
         if(!empty($group)){
-            $row_result["group"] = trim($group, " \t\n\r\0\x0B\160");
+            $row_result["group"] = trim($group, " \t\n\r\0\x0B".chr(194).chr(160));
         } else{
             $row_result["group"] = null;
         }

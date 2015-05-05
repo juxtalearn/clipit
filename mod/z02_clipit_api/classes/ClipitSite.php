@@ -364,7 +364,7 @@ class ClipitSite extends UBSite {
         $data = array("method" => "clipit.remote_resource.delete_by_remote_id");
         $data += array("remote_site" => elgg_get_site_url());
         foreach($remove_array as $remove_id){
-            $data += array("remote_id_array[]" => $remove_id);
+            $data += array("remote_id_array[$remove_id]" => $remove_id);
         }
         static::global_site_call($data, "POST");
         return true;
