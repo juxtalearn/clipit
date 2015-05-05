@@ -21,16 +21,8 @@ function expose_performance_item_functions() {
     expose_common_functions($api_suffix, $class_suffix);
     expose_function(
         $api_suffix . "get_from_category", $class_suffix . "get_from_category",
-        array(
-            "category" => array("type" => "string", "required" => false),
-            "language" => array("type" => "string", "required" => false)),
+        array("category" => array("type" => "string", "required" => false)),
         "Get items from a category. Leave  blank for all items, ordered by Category.", 'GET',
-        false, true
-    );
-    expose_function(
-        $api_suffix . "get_by_reference", $class_suffix . "get_by_reference",
-        array("reference_array" => array("type" => "array", "required" => false)),
-        "Get items by reference number", 'GET',
         false, true
     );
 }

@@ -27,12 +27,24 @@ if(get_config($key_name) === true) {
     set_config($key_name, true);
 }
 
-// Load Performance Palette for all languages
-input_performance_palette_file(elgg_get_plugins_path() . $file_path . $file_name_en);
-input_performance_palette_file(elgg_get_plugins_path() . $file_path . $file_name_es);
-input_performance_palette_file(elgg_get_plugins_path() . $file_path . $file_name_de);
-input_performance_palette_file(elgg_get_plugins_path() . $file_path . $file_name_pt);
-input_performance_palette_file(elgg_get_plugins_path() . $file_path . $file_name_sv);
+// Load Performance Palette for site language
+switch(get_config("language")){
+    case "en":
+        input_performance_palette_file(elgg_get_plugins_path() . $file_path . $file_name_en);
+        break;
+    case "es":
+        input_performance_palette_file(elgg_get_plugins_path() . $file_path . $file_name_es);
+        break;
+    case "de":
+        input_performance_palette_file(elgg_get_plugins_path() . $file_path . $file_name_de);
+        break;
+    case "pt":
+        input_performance_palette_file(elgg_get_plugins_path() . $file_path . $file_name_pt);
+        break;
+    case "sv":
+        input_performance_palette_file(elgg_get_plugins_path() . $file_path . $file_name_sv);
+        break;
+}
 
 /**
  * Add Performance Items from an Excel file
@@ -69,13 +81,6 @@ function parse_performance_palette_row($row_iterator) {
     if (empty($value) || strtolower($value) == "reference") {
         return null;
     }
-    $prop_value_array["reference"] = (string)$value;
-    $cell_iterator->next();
-
-    // language column
-    $value = $cell_iterator->current()->getValue();
-    $prop_value_array["language"] = (string)$value;
-    $cell_iterator->next();
 
     // name column
     $value = $cell_iterator->current()->getValue();
