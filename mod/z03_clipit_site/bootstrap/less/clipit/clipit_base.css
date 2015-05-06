@@ -9976,6 +9976,7 @@ textarea.chosen-container .chosen-choices {
 }
 .chosen-container .chosen-choices input {
   outline: 0px;
+  width: 80% !important;
 }
 .chosen-container .search-choice {
   overflow: hidden;
@@ -11820,4 +11821,9 @@ tr.info td {
 .gray-block {
   background: #fafafa;
   padding: 10px;
+}
+@media (min-width: 767px) {
+  .hidden-xs {
+    display: initial !important;
+  }
 }

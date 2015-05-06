@@ -11,6 +11,8 @@
  * @package         ClipIt
  */
 $entities = elgg_extract('entities', $vars);
+$storyboards = array();
+$videos = array();
 $videos = elgg_extract('videos', $vars);
 $storyboards = elgg_extract('storyboards', $vars);
 
@@ -38,11 +40,14 @@ elgg_register_menu_item('explore:menu', array(
     'selected' => $activity_get ? false : true
 ));
 function activity_total_found($activity_id, $videos, $storyboards){
+    $t_videos = array();
     $t_videos = get_visible_items_by_activity($activity_id, $videos, 'videos');
     $t_storyboards = array();
     return count(array_merge($t_videos, $t_storyboards));
 }
 foreach($entities as $entity){
+    $visible_storyboards = array();
+    $visible_videos = array();
     $visible_videos = get_visible_items_by_activity($entity->id, $videos, 'videos');
     $visible_storyboards = get_visible_items_by_activity($entity->id, $storyboards, 'storyboards');
     $total_items_found = count(array_merge($visible_videos, $visible_storyboards));
