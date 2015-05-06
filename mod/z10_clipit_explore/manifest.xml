@@ -7,7 +7,7 @@
     <blurb>ClipIt Explore plugin</blurb>
     <description>ClipIt Explore page</description>
     <website>http://www.juxtalearn.eu</website>
-    <license>GNU General Public License version 2</license>
+    <license>GNU General Public License version 3</license>
     <requires>
         <type>elgg_release</type>
         <version>1.8</version>
