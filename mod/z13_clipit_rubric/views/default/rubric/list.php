@@ -13,7 +13,6 @@
 $rubrics = elgg_extract('entities', $vars);
 $count = elgg_extract('count', $vars);
 
-$language_index = ClipitPerformanceItem::get_language_index(get_current_language());
 $options = true;
 $select = false;
 ?>

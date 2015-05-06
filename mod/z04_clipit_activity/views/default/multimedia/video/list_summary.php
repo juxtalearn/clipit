@@ -26,7 +26,7 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
             "target"    => "add-video",
             "title"     => elgg_echo("video:add"),
             "form"      => true,
-            "body"      => elgg_view('forms/multimedia/videos/add', array('entity'  => $entity)),
+            "body"      => elgg_view('forms/multimedia/videos/save', array('entity'  => $entity)),
             "cancel_button" => true,
             "ok_button" => elgg_view('input/submit',
                 array(
@@ -36,7 +36,7 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
         ));
 
     ?>
-    <?php echo elgg_view_form('multimedia/videos/add', array(
+    <?php echo elgg_view_form('', array(
             'data-validate'=> "true",
             'body' => $modal,
             'enctype' => 'multipart/form-data'

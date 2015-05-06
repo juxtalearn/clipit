@@ -12,7 +12,6 @@
  */
 $performance_items = elgg_extract('entities', $vars);
 $user_logged = array_pop(ClipitUser::get_by_id(array($user_loggedin_id)));
-$language_index = ClipitPerformanceItem::get_language_index(get_current_language());
 
 foreach($performance_items as $performance_item_id):
     $performance_item = array_pop(ClipitPerformanceItem::get_by_id(array($performance_item_id)));
@@ -20,9 +19,9 @@ foreach($performance_items as $performance_item_id):
     <div style="border-bottom: 1px solid #bae6f6;">
         <h5 class="text-truncate blue" style="margin: 5px 0;">
             <?php echo elgg_view('output/url', array(
-                'title' => $performance_item->item_name[$language_index],
+                'title' => $performance_item->name,
                 'href'  => "explore/search?by=performance_item&id=".$performance_item->id,
-                'text'  => $performance_item->item_name[$language_index],
+                'text'  => $performance_item->name,
             ));
             ?>
         </h5>

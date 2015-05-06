@@ -18,7 +18,6 @@ $feedback_task = elgg_extract("feedback_task", $vars);
 $comments = elgg_extract("comments", $vars);
 $user_loggedin_id = elgg_get_logged_in_user_guid();
 $user_logged = array_pop(ClipitUser::get_by_id(array($user_loggedin_id)));
-$language_index = ClipitPerformanceItem::get_language_index(get_current_language());
 
 $tags = $entity->tag_array;
 $performance_average = $entity->performance_rating_average;
@@ -112,9 +111,9 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
                                         </div>
                                         <h5 class="text-truncate blue" style="margin: 5px 0;">
                                             <?php echo elgg_view('output/url', array(
-                                                'title' => $performance_item->item_name[$language_index],
+                                                'title' => $performance_item->name,
                                                 'href'  => "explore/search?by=performance_item&id=".$performance_item->id,
-                                                'text'  => $performance_item->item_name[$language_index],
+                                                'text'  => $performance_item->name,
                                             ));
                                             ?>
                                         </h5>

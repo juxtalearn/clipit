@@ -22,9 +22,15 @@ $images_dir = elgg_extract('images_dir', $vars);
                 'href' => "/",
                 'class' => 'navbar-brand',
                 'title' => 'ClipIt'. elgg_echo("home"),
-                'text'  => elgg_view('output/img', array(
-                    'src' => $images_dir . "icons/clipit_logo.png"
-                ))
+                'text'  =>
+                    elgg_view('output/img', array(
+                        'src' => $images_dir . "icons/clipit_logo.png",
+                        'class' => 'hidden-xs'
+                    )).
+                    elgg_view('output/img', array(
+                        'src' => $images_dir . "icons/clipit_logo_white.png",
+                        'class' => 'visible-xs'
+                    ))
             ));
             ?>
         </div>

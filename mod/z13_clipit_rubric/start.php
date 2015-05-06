@@ -36,7 +36,6 @@ function rubric_page_handler($page){
         array('class' => 'activity-group-block margin-bottom-10 aside-tree')
     );
 
-    $language_index = ClipitPerformanceItem::get_language_index(get_current_language());
     switch($page[0]){
         case '':
             $title = elgg_echo('rubrics');

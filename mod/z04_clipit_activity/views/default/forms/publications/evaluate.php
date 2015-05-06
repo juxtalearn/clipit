@@ -18,8 +18,6 @@ $activity = elgg_extract("activity", $vars);
 $tags = $entity->tag_array;
 $performance_items = $entity->performance_item_array;
 $tricky_topic_view = elgg_view("tricky_topic/preview", array('activity' => $activity));
-$user_language = get_current_language();
-$language_index = ClipitPerformanceItem::get_language_index($user_language);
 if($rating){
     echo elgg_view("input/hidden", array(
         'name' => 'rating-id',
@@ -161,7 +159,7 @@ if($rating){
                              style="color: #e7d333;float: right;font-size: 18px;margin: 0 10px;">
                              </div>
                         <label class="blue" for="performance_rating[<?php echo $performance_item->id;?>]" style="font-weight: normal;padding-top: 2px;margin: 0;">
-                            <?php echo $performance_item->item_name[$language_index]; ?>
+                            <?php echo $performance_item->name; ?>
                         </label>
                     </li>
                 <?php endforeach; ?>

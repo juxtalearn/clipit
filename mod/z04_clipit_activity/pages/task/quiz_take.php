@@ -10,28 +10,7 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$href = "clipit_activity/{$activity->id}/quizzes";
 $quiz = $task->quiz;
-
-$finished_task = $task->end <= time() ? true : false;
-$finished = false;
-if(ClipitQuiz::has_finished_quiz($quiz, $user_id) || $finished_task){
-    $finished = true;
-}
-if(!get_config('quiz_results_after_task_end') && $finished) {
-    $finished_task = true;
-}
-$body = elgg_view_form('quiz/take',
-    array('body' =>
-        elgg_view('quizzes/list', array(
-            'quiz' => $quiz,
-            'href' => $href,
-            'task_id' => $task->id,
-            'user_id' => elgg_get_logged_in_user_guid(),
-            'finished_task' => $finished_task,
-            'finished' => $finished
-        ))
-    ));
 
 // Teacher view
 if($user->role == ClipitUser::ROLE_TEACHER){
@@ -46,4 +25,26 @@ if($user->role == ClipitUser::ROLE_TEACHER){
     } else {
         $body = elgg_view('output/empty', array('value' => elgg_echo('users:none')));
     }
+} elseif($user->role == ClipitUser::ROLE_STUDENT) {
+    $href = "clipit_activity/{$activity->id}/quizzes";
+
+    $finished_task = $task->end <= time() ? true : false;
+    $finished = false;
+    if (ClipitQuiz::has_finished_quiz($quiz, $user_id) || $finished_task) {
+        $finished = true;
+    }
+    if (!get_config('quiz_results_after_task_end') && $finished) {
+        $finished_task = true;
+    }
+    $body = elgg_view_form('quiz/take',
+        array('body' =>
+            elgg_view('quizzes/list', array(
+                'quiz' => $quiz,
+                'href' => $href,
+                'task_id' => $task->id,
+                'user_id' => elgg_get_logged_in_user_guid(),
+                'finished_task' => $finished_task,
+                'finished' => $finished
+            ))
+        ));
 }

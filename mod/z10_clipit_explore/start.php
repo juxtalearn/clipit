@@ -97,8 +97,7 @@ function explore_page_handler($page) {
                     break;
                 case 'performance_item':
                     $performance_item = array_pop(ClipitPerformanceItem::get_by_id(array($id)));
-                    $language_index = ClipitPerformanceItem::get_language_index(get_current_language());
-                    $title = $performance_item->item_name[$language_index];
+                    $title = $performance_item->name;
                     elgg_push_breadcrumb(elgg_echo('performance_item'));
                     elgg_push_breadcrumb($performance_item->name);
                     $videos = ClipitVideo::get_by_performance_items(array($performance_item->id));

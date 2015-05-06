@@ -12,7 +12,6 @@
  */
 $rubric = elgg_extract('entity', $vars);
 $button_value = elgg_extract('submit_value', $vars);
-$language_index = ClipitPerformanceItem::get_language_index(get_current_language());
 //print_r(ClipitPerformanceItem::get_all(15));
 ?>
 <script>
@@ -70,7 +69,7 @@ $(function(){
             $count = 0;
             $input_prefix = 'item['.$i.']['.$count.']';
             $lang_code = ClipitPerformanceItem::get_index_language($i);
-            $categories = ClipitPerformanceItem::get_from_category(null, $lang_code);
+            $categories = ClipitPerformanceItem::get_from_category(null);
             foreach($categories as $category => $items){
                 $item = array_pop($items);
                 $categories_data[$item->category[$i]] = array('name'=> $item->category[$i], 'description' =>$item->category_description[$i]);
