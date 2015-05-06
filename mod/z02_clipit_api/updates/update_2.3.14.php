@@ -1,6 +1,5 @@
 <?php
-
-$perf_items = ClipitPerformanceItem::get_all();
+// Adapt Performance Items to new format
 switch(get_config("language")){
     case "en":
         $pos = 0;
@@ -20,6 +19,8 @@ switch(get_config("language")){
     default:
         $pos = 0;
 }
+
+$perf_items = ClipitPerformanceItem::get_all();
 
 foreach($perf_items as $perf_item){
     $elgg_object = new ElggObject($perf_item->id);
