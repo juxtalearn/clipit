@@ -59,7 +59,7 @@ $rubrics = array_merge($rubrics, array('to_clone'));
         <?php
         foreach(performance_items_available_languages() as $i => $language):
             $lang_code = ClipitPerformanceItem::get_index_language($i);
-            $categories = ClipitPerformanceItem::get_from_category(null, $lang_code);
+            $categories = ClipitPerformanceItem::get_from_category(null);
             foreach($categories as $category => $items){
                 $item = array_pop($items);
                 $categories_data[$item->category[$i]] = array('name'=> $item->category[$i], 'description' =>$item->category_description[$i]);

@@ -77,7 +77,7 @@ switch($object['subtype']){
         $remove = false;
         $owner_options = true;
         $href = array(
-            'edit' => 'rubrics/edit/?name='.json_encode($entity->category[ClipitPerformanceItem::get_language_index(get_current_language())]),
+            'edit' => 'rubrics/edit/?name='.json_encode($entity->category),
         );
         break;
     case 'ClipitActivity':

@@ -16,8 +16,6 @@ $tt_tags = elgg_extract('tags', $vars);
 $group_id = $entity::get_group($entity->id);
 $group_tags = ClipitGroup::get_tags($group_id);
 $tt_tags = array_diff($tt_tags, $group_tags);
-$user_language = get_current_language();
-$language_index = ClipitPerformanceItem::get_language_index($user_language);
 
 $performance_items = $entity->performance_item_array;
 $tags = $entity->tag_array;
@@ -134,11 +132,11 @@ if($task_id = get_input('task_id')):
         <div>
             <select name="performance_items[]" data-placeholder="<?php echo elgg_echo('click_add');?>" style="width:100%;" multiple class="chosen-select-items" tabindex="8">
                 <option value=""></option>
-                <?php foreach(ClipitPerformanceItem::get_from_category(null, $user_language) as $category => $items):?>
+                <?php foreach(ClipitPerformanceItem::get_from_category(null) as $category => $items):?>
                     <optgroup label="<?php echo $category; ?>">
                         <?php foreach($items as $item): ?>
                             <option <?php echo in_array($item->id, $performance_items) ? "selected" : "";?> value="<?php echo $item->id; ?>">
-                                <?php echo $item->item_name[$language_index]; ?>
+                                <?php echo $item->name; ?>
                             </option>
                         <?php endforeach; ?>
                     </optgroup>

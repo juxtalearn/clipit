@@ -11,7 +11,6 @@
  * @package         ClipIt
  */
 $rubrics = elgg_extract('entities', $vars);
-$language_index = ClipitPerformanceItem::get_language_index(get_current_language());
 ?>
 <div class="pull-right">
     <div class="inline-block">

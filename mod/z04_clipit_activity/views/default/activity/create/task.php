@@ -141,8 +141,6 @@ if($vars['required'] !== false){
 //                $task->task_type == ClipitTask::TYPE_VIDEO_FEEDBACK)
 //                && get_config('fixed_performance_rating')
 //            ):
-            $user_language = get_current_language();
-            $language_index = ClipitPerformanceItem::get_language_index($user_language);
         ?>
             <script>$(function(){$(".chosen-select-items").chosen();});</script>
             <style>
@@ -154,11 +152,11 @@ if($vars['required'] !== false){
                 <label><?php echo elgg_echo("performance_items");?></label>
                 <select name="<?php echo "task{$input_array}[performance_items][]";?>" data-placeholder="<?php echo elgg_echo('click_add');?>" style="width:100%;" multiple class="chosen-select-items" tabindex="8">
                     <option value=""></option>
-                    <?php foreach(ClipitPerformanceItem::get_from_category(null, $user_language) as $category => $items):?>
+                    <?php foreach(ClipitPerformanceItem::get_from_category(null) as $category => $items):?>
                         <optgroup label="<?php echo $category; ?>">
                             <?php foreach($items as $item): ?>
                                 <option <?php echo in_array($item->id, $performance_items) ? "selected" : "";?> value="<?php echo $item->id; ?>">
-                                    <?php echo $item->item_name[$language_index]; ?>
+                                    <?php echo $item->name; ?>
                                 </option>
                             <?php endforeach; ?>
                         </optgroup>

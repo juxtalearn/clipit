@@ -15,8 +15,6 @@ $user = array_pop(ClipitUser::get_by_id(array($entity->owner_id)));
 
 $tag_ratings = $entity->tag_rating_array;
 $performance_ratings = $entity->performance_rating_array;
-$user_language = get_current_language();
-$language_index = ClipitPerformanceItem::get_language_index($user_language);
 $overall_rating = elgg_echo("input:no");
 if($entity->overall){
     $overall_rating = elgg_echo("input:yes");
@@ -65,7 +63,7 @@ if($entity->overall){
                         <div class="rating readonly pull-right" data-score="<?php echo $performance_rating->star_rating;?>" style="margin: 0 10px;">
                         <?php echo star_rating_view($performance_rating->star_rating);?>
                         </div>
-                        <span class="blue" style="padding-top: 2px;"><?php echo $performance_item->item_name[$language_index];?></span>
+                        <span class="blue" style="padding-top: 2px;"><?php echo $performance_item->name;?></span>
                     </li>
                 <?php endforeach;?>
             </ul>

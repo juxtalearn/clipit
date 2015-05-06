@@ -14,8 +14,6 @@ $rating = elgg_extract('rating', $vars);
 $entity = elgg_extract('entity', $vars);
 $entity_preview = elgg_extract('entity_preview', $vars);
 $href = elgg_extract('href', $vars);
-$user_language = get_current_language();
-$language_index = ClipitPerformanceItem::get_language_index($user_language);
 ?>
 <li class="row list-item">
     <div class="col-md-8">
@@ -82,9 +80,9 @@ $language_index = ClipitPerformanceItem::get_language_index($user_language);
                                 <?php echo star_rating_view($performance_rating->star_rating);?>
                             </div>
                             <?php echo elgg_view('output/url', array(
-                                'title' => $performance_item->item_name[$language_index],
+                                'title' => $performance_item->name,
                                 'href'  => "explore/search?by=performance_item&id=".$performance_item->id,
-                                'text'  => $performance_item->item_name[$language_index],
+                                'text'  => $performance_item->name,
                             ));
                             ?>
                         </li>

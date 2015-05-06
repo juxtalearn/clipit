@@ -74,8 +74,6 @@ echo elgg_view("input/hidden", array(
     'id' => 'input_labels',
     'value' => implode(",", $labels_value)
 ));
-$user_language = get_current_language();
-$language_index = ClipitPerformanceItem::get_language_index($user_language);
 ?>
     <script>
         $(function(){
@@ -240,11 +238,11 @@ $language_index = ClipitPerformanceItem::get_language_index($user_language);
                 <div>
                     <select name="performance_items[]" data-placeholder="<?php echo elgg_echo('click_add');?>" style="width:100%;" multiple class="chosen-select-items" tabindex="8">
                         <option value=""></option>
-                        <?php foreach(ClipitPerformanceItem::get_from_category(null, $user_language) as $category => $items):?>
+                        <?php foreach(ClipitPerformanceItem::get_from_category(null) as $category => $items):?>
                             <optgroup label="<?php echo $category; ?>">
                                 <?php foreach($items as $item): ?>
                                     <option <?php echo in_array($item->id, $performance_items) ? "selected" : "";?> value="<?php echo $item->id; ?>">
-                                        <?php echo $item->item_name[$language_index]; ?>
+                                        <?php echo $item->name; ?>
                                     </option>
                                 <?php endforeach; ?>
                             </optgroup>
