@@ -133,20 +133,8 @@ $(function(){
         }
         if(step > 0){
             $(".nav-steps li").removeClass('disabled');
-//            if(step == 2 && $('.task-list').is(':empty')){
-//                $("#add_task").click();
-//            }
-            switch (step){
-                case 2:
-//                    if($('.task-list').is(':empty')){
-//                        $("#add_task").click();
-//                    }
-                    break;
-                case 3:
-//                    $('.task-list .task input:not([type="checkbox"], [type="radio"])').each(function(){
-//                        $(this).prop('required',true);
-//                    });
-                    break;
+            if(step == 2 && $('.task-list li').length == 0){
+                $("#add_task").click();
             }
         } else {
             $(".nav-steps li").slice(2,4).addClass('disabled');
