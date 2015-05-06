@@ -78,18 +78,18 @@ function parse_performance_palette_row($row_iterator) {
     // reference column (equal across all languages)
     // Check for title or empty rows
     $value = $cell_iterator->current()->getValue();
-    if (empty($value) || strtolower($value) == "reference") {
+    if (empty($value) || strtolower($value) == "name") {
         return null;
     }
 
     // name column
     $value = $cell_iterator->current()->getValue();
-    $prop_value_array["item_name"] = (string)$value;
+    $prop_value_array["name"] = (string)$value;
     $cell_iterator->next();
 
     // description column
     $value = $cell_iterator->current()->getValue();
-    $prop_value_array["item_description"] = (string)$value;
+    $prop_value_array["description"] = (string)$value;
     $cell_iterator->next();
 
     // example column

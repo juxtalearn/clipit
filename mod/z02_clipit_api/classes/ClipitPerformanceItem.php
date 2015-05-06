@@ -22,15 +22,9 @@ class ClipitPerformanceItem extends UBItem {
      */
     const SUBTYPE = "ClipitPerformanceItem";
 
-    public $item_name = "";
-    public $item_description = "";
     public $example = "";
     public $category = "";
     public $category_description = "";
-
-    function __construct($id = null, $elgg_object = null) {
-        parent::__construct($id, $elgg_object);
-    }
 
     /**
      * Loads object parameters stored in Elgg
@@ -39,8 +33,6 @@ class ClipitPerformanceItem extends UBItem {
      */
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
-        $this->item_name = (string)$elgg_entity->get("item_name");
-        $this->item_description = (string)$elgg_entity->get("item_description");
         $this->example = (string)$elgg_entity->get("example");
         $this->category = (string)$elgg_entity->get("category");
         $this->category_description = (string)$elgg_entity->get("category_description");
@@ -53,8 +45,6 @@ class ClipitPerformanceItem extends UBItem {
      */
     protected function copy_to_elgg($elgg_entity) {
         parent::copy_to_elgg($elgg_entity);
-        $elgg_entity->set("item_name", (string)$this->item_name);
-        $elgg_entity->set("item_description", (string)$this->item_description);
         $elgg_entity->set("example", (string)$this->example);
         $elgg_entity->set("category", (string)$this->category);
         $elgg_entity->set("category_description", (string)$this->category_description);

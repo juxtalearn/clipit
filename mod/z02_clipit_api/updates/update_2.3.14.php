@@ -20,10 +20,11 @@ switch(get_config("language")){
     default:
         $pos = 0;
 }
+
 foreach($perf_items as $perf_item){
     $elgg_object = new ElggObject($perf_item->id);
-    $elgg_object->item_name = (string)$elgg_object->item_name[$pos];
-    $elgg_object->item_description = (string)$elgg_object->item_description[$pos];
+    $elgg_object->name = (string)$elgg_object->item_name[$pos];
+    $elgg_object->description = (string)$elgg_object->item_description[$pos];
     $elgg_object->example = (string)$elgg_object->example[$pos];
     $elgg_object->category = (string)$elgg_object->category[$pos];
     $elgg_object->category_description = (string)$elgg_object->category_description[$pos];
