@@ -109,6 +109,7 @@ function clipit_final_init(){
         $clipit_css = elgg_get_simplecache_url('css', 'clipit');
         elgg_register_simplecache_view('css/clipit');
         elgg_register_css("clipit", $clipit_css);
+        elgg_extend_view('js/clipit', 'js/mobile');
         // FontAwesome
         elgg_register_css("fontawesome", "{$plugin_url}/vendors/fontawesome/fontawesome.min.css");
 

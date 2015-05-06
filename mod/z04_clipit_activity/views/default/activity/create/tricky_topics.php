@@ -63,19 +63,19 @@ $tt = array_diff($tt, $owner_tt);
 <div class="row margin-0 margin-bottom-10" id="form-add-tricky-topic" style="display: none;background: #fafafa;padding: 10px;">
     <div class="form-group col-md-12 margin-top-10">
         <div class="form-group">
+            <label for="tricky-topic-title"><?php echo elgg_echo('tricky_topic');?></label>
             <?php echo elgg_view("input/text", array(
                 'name' => 'tricky-topic-title',
                 'class' => 'form-control',
                 'required' => true,
-                'placeholder' => elgg_echo('tricky_topic')
             ));
             ?>
         </div>
+        <label for="tricky-topic-description"><?php echo elgg_echo('description');?></label>
         <?php echo elgg_view("input/plaintext", array(
             'name' => 'tricky-topic-description',
             'class' => 'form-control',
             'rows' => 1,
-            'placeholder' => elgg_echo('description'),
             'onclick' => 'javascript:this.rows=5;'
         ));
         ?>
