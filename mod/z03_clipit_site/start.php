@@ -16,7 +16,7 @@ function clipit_final_init(){
     global $CONFIG;
     $user_id = elgg_get_logged_in_user_guid();
     $user = array_pop(ClipitUser::get_by_id(array($user_id)));
-    if(get_config('clipit_site_type') == ClipitSite::TYPE_SITE) {
+    if(get_config('clipit_site_type') == ClipitSite::TYPE_SITE || get_config('clipit_site_type') == ClipitSite::TYPE_DEMO) {
         elgg_extend_view('walled_garden/body', 'site/body');
         elgg_extend_view('page/walled_garden', 'site/walled_garden');
         elgg_extend_view('page/default', 'site/default');

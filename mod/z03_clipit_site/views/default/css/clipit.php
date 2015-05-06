@@ -12,6 +12,7 @@
  */
 switch(get_config('clipit_site_type')){
     case ClipitSite::TYPE_SITE:
+    case ClipitSite::TYPE_DEMO:
         $plugin_dir = elgg_get_plugins_path().'z03_clipit_site';
         break;
     case ClipitSite::TYPE_GLOBAL:

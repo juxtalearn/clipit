@@ -13,7 +13,6 @@
 $rubrics = array();
 $rubrics = elgg_extract('entities', $vars);
 $button_value = elgg_extract('submit_value', $vars);
-$language_index = ClipitPerformanceItem::get_language_index(get_current_language());
 $rubrics = array_merge($rubrics, array('to_clone'));
 ?>
 <script>
@@ -45,20 +44,9 @@ $rubrics = array_merge($rubrics, array('to_clone'));
 </script>
 <div role="tabpanel">
 
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
-        <?php foreach(performance_items_available_languages() as $i => $language):?>
-            <li role="presentation" class="<?php echo $language_index == $i ? 'active':'';?>">
-                <a href="#<?php echo $i;?>" aria-controls="<?php echo $i;?>" role="tab" data-toggle="tab"><?php echo $language;?></a>
-            </li>
-        <?php endforeach;?>
-    </ul>
-
     <!-- Tab panes -->
     <div class="tab-content">
         <?php
-        foreach(performance_items_available_languages() as $i => $language):
-            $lang_code = ClipitPerformanceItem::get_index_language($i);
             $categories = ClipitPerformanceItem::get_from_category(null);
             foreach($categories as $category => $items){
                 $item = array_pop($items);
@@ -105,7 +93,7 @@ $rubrics = array_merge($rubrics, array('to_clone'));
                             'name' => $input_prefix.'[item_name]',
                             'class' => 'form-control',
                             'required' => true,
-                            'value' => $rubric->item_name[$i] !='-EMPTY-'?$rubric->item_name[$i]:'',
+                            'value' => $rubric->name,
                             'readonly' => $readonly,
                             'disabled' => $disabled,
                             'placeholder' => elgg_echo('name', $lang_code),
@@ -135,7 +123,7 @@ $rubrics = array_merge($rubrics, array('to_clone'));
                             <label for="item-description[<?php echo $i;?>]"><?php echo elgg_echo('description');?></label>
                             <?php echo elgg_view("input/plaintext", array(
                                 'name' => $input_prefix.'[item_description]',
-                                'value' => $rubric->item_description[$i] !='-EMPTY-'?$rubric->item_description[$i]:'',
+                                'value' => $rubric->description,
                                 'readonly' => $readonly,
                                 'disabled' => $disabled,
                                 'class' => 'form-control margin-top-20',
@@ -148,7 +136,7 @@ $rubrics = array_merge($rubrics, array('to_clone'));
                             <label for="item-example[<?php echo $i;?>]"><?php echo elgg_echo('performance_item:example');?></label>
                             <?php echo elgg_view("input/text", array(
                                 'name' => $input_prefix.'[example]',
-                                'value' => $rubric->example[$i] !='-EMPTY-'?$rubric->example[$i]:'',
+                                'value' => $rubric->example,
                                 'readonly' => $readonly,
                                 'disabled' => $disabled,
                                 'class' => 'form-control',
@@ -212,7 +200,6 @@ $rubrics = array_merge($rubrics, array('to_clone'));
 <!--                    --><?php //endif;?>
                 </div>
             </div>
-            <?php endforeach;?>
     </div>
 
 </div>
