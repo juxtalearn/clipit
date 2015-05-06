@@ -17,7 +17,7 @@ $file_name_en = "performance_palette_en.xlsx";
 $file_name_es = "performance_palette_es.xlsx";
 $file_name_de = "performance_palette_de.xlsx";
 $file_name_pt = "performance_palette_pt.xlsx";
-$file_name_pt = "performance_palette_sv.xlsx";
+$file_name_sv = "performance_palette_sv.xlsx";
 $key_name = "performance_palette";
 
 // Check if Performance Palette was already loaded.

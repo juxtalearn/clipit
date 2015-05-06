@@ -31,6 +31,3 @@ foreach($perf_items as $perf_item){
     $elgg_object->category_description = (string)$elgg_object->category_description[$pos];
     $elgg_object->save();
 }
-
-
-
