@@ -41,8 +41,6 @@ if($rating){
             width: "",
             scoreName: function(){
                 var performance_id = $(this).data("performance-id");
-                var input = $(this).find("input");
-                input.prop({"required": true, "type": "text"});
                 return "performance_rating["+performance_id+"][star]";
             },
             score: function() {
@@ -61,7 +59,10 @@ if($rating){
             if($(this).closest(".checking").find("iframe").length == 0){
                 text.show().click();
             }
-
+        });
+        $('#my-rating .rating').each(function(){
+            var input = $(this).find("input");
+            input.attr({"required": true, 'data-msg-required': '*'}).addClass('hidden-validate');
         });
     });
 </script>
@@ -110,6 +111,7 @@ if($rating){
                         elgg_echo("input:yes") => 1,
                         elgg_echo("input:no") => 0
                     ),
+                    'required' => true,
                     'value' => $rating ? ($rating_tag[$tag->id]->is_used ? '1':'0'):'',
                     'class' => 'input-radios-horizontal enable-comment blue pull-right',
                 )); ?>
@@ -158,7 +160,7 @@ if($rating){
                              data-performance-id="<?php echo $performance_item->id;?>"
                              style="color: #e7d333;float: right;font-size: 18px;margin: 0 10px;">
                              </div>
-                        <label class="blue" for="performance_rating[<?php echo $performance_item->id;?>]" style="font-weight: normal;padding-top: 2px;margin: 0;">
+                        <label class="blue" for="performance_rating[<?php echo $performance_item->id;?>][star]" style="font-weight: normal;padding-top: 2px;margin: 0;">
                             <?php echo $performance_item->name; ?>
                         </label>
                     </li>

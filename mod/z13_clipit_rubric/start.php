@@ -49,6 +49,10 @@ function rubric_page_handler($page){
         case 'edit':
             // Edit Rubric
             $category_name = json_decode(get_input('name'));
+            $title = elgg_echo('edit');
+            elgg_push_breadcrumb(elgg_echo('rubrics'), "rubrics");
+            elgg_push_breadcrumb($category_name, 'rubrics/view?name='.json_encode($category_name));
+            elgg_push_breadcrumb($title);
             $entities = ClipitPerformanceItem::get_from_category($category_name, get_current_language());
             $content = elgg_view_form('rubric/save',
                 array('data-validate' => 'true'),
@@ -59,7 +63,11 @@ function rubric_page_handler($page){
             $title = elgg_echo('rubric:create');
             elgg_push_breadcrumb(elgg_echo('rubrics'), "rubrics");
             elgg_push_breadcrumb($title);
-            $content = elgg_view_form('rubric/create',
+//            $content = elgg_view_form('rubric/create',
+//                array('data-validate' => 'true'),
+//                array('submit_value' => elgg_echo('create'))
+//            );
+            $content = elgg_view_form('rubric/save',
                 array('data-validate' => 'true'),
                 array('submit_value' => elgg_echo('create'))
             );

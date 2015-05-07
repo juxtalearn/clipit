@@ -109,6 +109,7 @@ clipit.tinymce.init = function(id){
         paste_remove_styles_if_webkit: true,
         invalid_elements: 'img,h1,h2',
         autoresize_min_height: 150,
+        autoresize_max_height: 400,
         mentions: {
             delay: 0,
             source: function (query, process, delimiter) {

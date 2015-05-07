@@ -63,7 +63,7 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
         if($vars['send_site']) {
             echo elgg_view("page/components/modal_remote", array('id' => "publish-{$video->id}"));
         }
-        $href_video = $href."/view/".$video->id . ($task_id ? "?task_id=".$task_id."#evaluate": "");
+        $href_video = $href."/view/".$video->id . ($task_id ? "?task_id=".$task_id: "");
     ?>
     <li class="video-item row list-item">
         <?php

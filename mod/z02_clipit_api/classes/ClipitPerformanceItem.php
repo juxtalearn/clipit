@@ -68,7 +68,7 @@ class ClipitPerformanceItem extends UBItem {
             $return_array = array();
             foreach ($performance_items as $performance_item) {
                 if ($performance_item->category == $category) {
-                    $return_array[$category] = $performance_item;
+                    $return_array[$category][] = $performance_item;
                 }
             }
         }
