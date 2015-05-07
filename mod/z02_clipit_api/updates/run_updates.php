@@ -25,6 +25,7 @@
         "2.3.12" => "update_2.3.12.php",
         "2.3.13" => null,
         "2.3.14" => "update_2.3.14.php",
+        "2.3.15" => "update_2.3.15.php",
         // add here future updates: version => file
     );
 // } TO HERE
@@ -50,7 +51,7 @@ while (key($update_files) != $old_version) {
 // skip old version's update file
 next($update_files);
 // apply all updates from there onwards
-while(key($update_files) != null){
+while((key($update_files) != $VERSION) && (key($update_files) != null)){
     $value = current($update_files);
     if(!empty($value)){
         include_once((string)$value);

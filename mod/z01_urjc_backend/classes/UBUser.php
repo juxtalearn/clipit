@@ -435,12 +435,7 @@ class UBUser extends UBItem {
             $prop_value_array["email"] = trim($email, " \t\n\r\0\x0B".chr(194).chr(160));
         }
         $cell_iterator->next();
-        // role
-        $role = (string)$cell_iterator->current()->getValue();
-        if (!empty($role)) {
-            $prop_value_array["role"] = trim($role, " \t\n\r\0\x0B".chr(194).chr(160));
-        }
-        $cell_iterator->next();
+        // create user object
         $row_result["user_id"] = (int)static::create($prop_value_array);
         // group
         $group = (string)$cell_iterator->current()->getValue();
