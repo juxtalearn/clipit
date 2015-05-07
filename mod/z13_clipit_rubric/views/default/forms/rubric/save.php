@@ -14,6 +14,9 @@ $rubrics = array();
 $rubrics = array_pop(elgg_extract('entities', $vars));
 $button_value = elgg_extract('submit_value', $vars);
 $id = uniqid('rubric_');
+//foreach(ClipitPerformanceItem::get_all(5) as $i){
+//    ClipitPerformanceItem::delete_by_id(array($i));
+//}
 ?>
 <script>
 $(function(){
@@ -43,7 +46,7 @@ $(function(){
                 foreach($rubrics as $rubric):
                     $input_prefix = 'item['.$count.']';
                     $disabled = false;
-                    if(isset($rubric)){
+                    if(isset($rubric->id)){
                         $id = $rubric->id;
                         $entity_input =  elgg_view('input/hidden', array(
                             'name' => $input_prefix.'[id]',
@@ -56,13 +59,13 @@ $(function(){
                         }
                         echo $entity_input;
                     }
-                echo elgg_view('forms/rubric/save_inputs', array(
-                    'entity' => $rubric,
-                    'owner' => $user,
-                    'disabled' => $disabled,
-                    'input_prefix' => $input_prefix,
-                    'id' => $id
-                ));
+                    echo elgg_view('forms/rubric/save_inputs', array(
+                        'entity' => $rubric,
+                        'owner' => $user,
+                        'disabled' => $disabled,
+                        'input_prefix' => $input_prefix,
+                        'id' => $id
+                    ));
                     $count++;
                 endforeach;
                 ?>
@@ -77,20 +80,20 @@ $(function(){
             <div class="col-md-5">
                 <?php if($category_name):?>
                     <p><strong><?php echo $category_name;?></strong></p>
+                    <?php echo elgg_view("input/hidden", array(
+                        'name' => 'category',
+                        'value' => $category_name,
+                    ));
+                    ?>
                     <?php if($category_description):?>
                         <small class="show"><?php echo elgg_echo('description');?></small>
                         <p><?php echo $category_description;?></p>
                         <?php echo elgg_view("input/hidden", array(
-                            'name' => 'category',
-                            'value' => $category_name,
+                            'name' => 'category_description',
+                            'value' => $category_description,
                         ));
                         ?>
                     <?php endif;?>
-                    <?php echo elgg_view("input/hidden", array(
-                        'name' => 'category_description',
-                        'value' => $category_description,
-                    ));
-                    ?>
                 <?php else:?>
                     <div class="form-group">
                         <label for="category-name[<?php echo $i;?>]"><?php echo elgg_echo('title');?></label>

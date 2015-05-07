@@ -11,21 +11,23 @@
  * @package         ClipIt
  */
 $performance_items = get_input('item');
+$category_name = get_input('category');
+$category_description = get_input('category_description');
+
 foreach($performance_items as $item){
     $item_data = array(
         'name' => $item['name'],
         'description' => $item['description'],
         'example' => $item['example'],
-        'category' => get_input('category'),
-        'category_description' => get_input('category_description')
+        'category' => $category_name,
+        'category_description' => $category_description
     );
     if($item['id'] && trim($item['name'])!=''){
         // Edit performance properties
         ClipitPerformanceItem::set_properties($item['id'], $item_data);
     } else {
         // Create new performance item
-        print_r($item_data);
         ClipitPerformanceItem::create($item_data);
     }
 }
-forward(REFERER);
+forward('/rubrics/view/?name='.json_encode($category_name));

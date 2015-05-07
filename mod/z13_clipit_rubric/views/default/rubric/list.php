@@ -30,28 +30,10 @@ $select = false;
 </div>
 <script>
 $(function(){
-    $(document).on("click", "#create-rubric", function(){
+    $(document).on("click", ".show-items", function(){
+        var tr = $(this).closest("tr");
+        tr.next('tr').toggle();
 
-    });
-    $(document).on("click", ".show-questions", function(){
-        var tr = $(this).closest("tr")
-            id = $(this).attr("id"),
-            tr_quiz = $("[data-quiz="+id+"]");
-        if(tr_quiz.length > 0){
-            tr_quiz.toggle();
-            return false;
-        }
-        elgg.get('ajax/view/questions/summary',{
-            data: {
-                quiz: id
-            },
-            success: function(content){
-                var container = $("<tr/>")
-                    .attr("data-quiz", id)
-                    .html( $('<td/>').attr("colspan", 5).html(content).css("padding", "10px") );
-                tr.after(container);
-            }
-        });
     });
 });
 </script>
@@ -67,15 +49,8 @@ $(function(){
         <th></th>
     </tr>
     </thead>
-    <?php
-    foreach($rubrics as $category => $items):
-//        foreach($categories as $category => $items){
-//            $item = array_pop($items);
-//            $categories_data[$item->category[$i]] = array('name'=> $item->category[$i], 'description' =>$item->category_description[$i]);
-//        }
-        $user = array_pop(ClipitUser::get_by_id(array($rubric->owner_id)));
-    ?>
-        <tr id="<?php echo json_encode($category);?>">
+    <?php foreach($rubrics as $category => $items):?>
+        <tr>
             <td>
                 <strong>
                     <?php echo elgg_view('output/url', array(
@@ -95,7 +70,7 @@ $(function(){
             <td class="text-right">
                 <?php echo elgg_view('output/url', array(
                     'href'  => 'javascript:;',
-                    'class' => 'show-questions btn btn-xs btn-border-blue',
+                    'class' => 'show-items btn btn-xs btn-border-blue',
                     'id' => $quiz->id,
                     'text'  => '<strong>'.count($items).'</strong>x<i class="margin-left-5 fa fa-list"></i>',
                 ));
@@ -105,6 +80,17 @@ $(function(){
                 <?php echo elgg_view('page/components/admin_options', array(
                     'entity' => $items[0],
                 ));?>
+            </td>
+        </tr>
+        <tr style="display: none;">
+            <td colspan="4">
+                <div class="row">
+                    <?php foreach($items as $item):?>
+                        <div class="col-md-3 margin-bottom-15 text-truncate">
+                            <span title="<?php echo $item->name;?>"><?php echo $item->name;?></span>
+                        </div>
+                    <?php endforeach;?>
+                </div>
             </td>
         </tr>
     <?php endforeach;?>
