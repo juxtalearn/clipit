@@ -4,3 +4,6 @@
 [submodule "mod/z02_clipit_api/libraries/vimeo_api"]
 	path = mod/z02_clipit_api/libraries/vimeo_api
 	url = https://github.com/vimeo/vimeo.php
+[submodule "mod/z01_urjc_backend/libraries/PHPExcel"]
+	path = mod/z01_urjc_backend/libraries/PHPExcel
+	url = https://github.com/PHPOffice/PHPExcel
