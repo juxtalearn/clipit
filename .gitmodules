@@ -4,3 +4,4 @@
 [submodule "mod/z02_clipit_api/libraries/vimeo_api"]
 	path = mod/z02_clipit_api/libraries/vimeo_api
 	url = https://github.com/vimeo/vimeo.php
+
