@@ -171,6 +171,9 @@ class UBUser extends UBItem {
             }
             $item->$prop = $value;
         }
+        if(empty($item->name)){
+            $item->name = $item->login;
+        }
         return $item->save();
     }
 
