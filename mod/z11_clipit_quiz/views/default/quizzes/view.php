@@ -1,10 +1,10 @@
 <?php
-
-use ClipitTrickyTopic;
+$owner_id = elgg_get_logged_in_user_guid();
 
 //Obtener el quiz y su ID
 $quiz = elgg_extract('entity', $vars);
 $id = elgg_extract('id', $vars);
+
  //Obtener el array de preguntas del quiz
 $questions = ClipitQuiz::get_quiz_questions($id);
 
@@ -24,15 +24,13 @@ $id_tt = $quiz->tricky_topic;
 $tt = ClipitTrickyTopic::get_by_id(array($id_tt));
 ?>
 
-<div class="quiz">
-    <div class="info-block" style="float: left; margin-left: 10px;">
-        <p><?php echo $quiz->description;?></p><br>        
-
-        <p><strong>Tricky topic: </strong>
+<div id="quiz" class="row">
+    <div class="info-block col-xs-12 col-md-8">
+        <p id="quiz-description"><?php echo $quiz->description;?></p>      
+        <p id="quiz-tt"><strong>Tricky Topic: </strong>
              <?php echo elgg_view('output/text', array('value' => $tt[$id_tt]->name));?>
         </p>
-
-        <p><strong>Type of access: </strong>
+        <p id="quiz-access"><strong>Acceso: </strong>
              <?php 
              if ($quiz->public){
                  echo elgg_view('output/text', array('value' => "Publico"));
@@ -41,8 +39,7 @@ $tt = ClipitTrickyTopic::get_by_id(array($id_tt));
              }
               ?>
         </p>
-
-        <p><strong>View mode: </strong>
+        <p id="quiz-view-mode"><strong>Visualización: </strong>
              <?php 
              if ( ($quiz->view_mode) == ClipitQuiz::VIEW_MODE_LIST ){
                  echo elgg_view('output/text', array('value' => "En una página"));
@@ -51,107 +48,99 @@ $tt = ClipitTrickyTopic::get_by_id(array($id_tt));
              }
               ?>
         </p>
-
-        <small>
-            <i>Creado por <?php echo elgg_view('output/text', array('value' => $quiz->author_name)) . " "
-                             . elgg_view('output/friendlytime', array('time' => $quiz->time_created));?>
-            </i>
-        </small>
-        <br><br>
-        
+        <?php 
+        //Autor y tiempo
+        $time_created = elgg_view("output/friendlytime", array('time' => $quiz->time_created));
+        echo '<small class="show">Creado por ';
+        echo '<span title="Profesor: '.$quiz->author_name.'" class="admin-owner" rel="nofollow"><i class="fa fa-fw fa-user"></i>'.$quiz->author_name.'</span>';
+        echo ' '.$time_created.'</small>';
+        ?>
     </div>
 
-    <div class="buttons" style="float: right; margin-top: 10px; margin-right: 20px;">
-        <p><a href="<?php echo $add_quest_url; ?>" class='elgg-button'>Add new question</a></p>
-        <p><a href="<?php echo $add_quest_from_list_url; ?>" class='elgg-button'>Add question from list</a></p>
-        <p><a href="<?php echo $preview_url; ?>" class='elgg-button'>Preview</a></p>
+    <div id="buttons" class="col-xs-12 col-md-4" style="text-align: right;">
+        <p><a href="<?php echo $add_quest_url; ?>" class='btn btn-primary btn-sm'>Añadir pregunta nueva</a></p>
+        <p><a href="<?php echo $add_quest_from_list_url; ?>" class='btn btn-primary btn-sm'>Añadir pregunta existente</a></p>
+        <p><a href="<?php echo $preview_url; ?>" class='btn btn-success btn-sm'>Previsualizar</a></p>
 
         <?php
-        
         /*
          * Mostrar el botón para corregir el examen.
          * El examen sólo se puede corregir si tiene preguntas de desarrollo
          */
-        if (quiz_has_develop_questions($id)){ 
+         if (quiz_has_develop_questions($id)){ 
             $correct_answer = elgg_get_site_url()."quizzes/students_list?id_quiz={$id}";
         ?>
-        
-            <p><a href="<?php echo $correct_answer; ?>" class='elgg-button'>Corregir</a></p>
+            <p><a href="<?php echo $correct_answer; ?>" class='btn btn-info btn-sm'>Corregir</a></p>
         <?php } ?>
     </div>
 
 </div>
 
-<div class="questions" style="clear: left;">
-    
-<?php
-
-//Mostrar la lista de preguntas del quiz
-foreach($questions as $quest):
-
-    $q = array_pop(ClipitQuizQuestion::get_by_id(array($quest)));
-
-    $view_quest_url = elgg_get_site_url()."questions/view?id_quest={$q->id}";
-    $edit_quest_url = elgg_get_site_url()."questions/edit?id_quest={$q->id}&id_quiz={$id}";
-    $remove_quest_url = elgg_get_site_url()."action/questions/remove?id_quest={$q->id}&id_quiz={$id}";
-
-?>
-
-    <div class="question">
-        <h3><?php echo elgg_view('output/url', array(
-                        "href" => $view_quest_url,
-                        "is_action" => false,
-                        "text" => $q->name,
-                    ));
-            ?>
-        </h3>
-
-        <small>
-            <i>Creada <?php echo elgg_view('output/friendlytime', array('time' => $q->time_created));?></i>
-        </small>
-
-      <div class="options-buttons">
-        <?php
-            echo elgg_view('output/url', 
-                   array(
-                        "href" => $edit_quest_url, 
-                        "is_action" => false,
-                        "class" => "elgg-button",
-                        "text" => "<img src='". elgg_get_site_url() . "mod/z11_clipit_quiz/graphics/edit.png' title='Editar'>",
-                       ));
-            echo elgg_view('output/url', 
+<div id="quiz-questions" class="row" style="clear: left; margin-bottom: 15px;">
+    <h3 class="page-header text-center">Preguntas del quiz</h3>
+    <div id="questions-list" class="col-xs-12 col-md-12">
+        
+    <?php
+    //Mostrar la lista de preguntas del quiz
+    $num = 1;
+    foreach($questions as $quest):
+        $q = array_pop(ClipitQuizQuestion::get_by_id(array($quest)));
+        $view_quest_url = elgg_get_site_url()."questions/view?id_quest={$q->id}";
+        $edit_quest_url = elgg_get_site_url()."questions/edit?id_quest={$q->id}&id_quiz={$id}";
+        $remove_quest_url = elgg_get_site_url()."action/questions/remove?id_quest={$q->id}&id_quiz={$id}";
+        $time_created = elgg_view("output/friendlytime", array('time' => $q->time_created));
+        
+        //Titulo de la pregunta
+        echo '<div id="question" class="row" style="margin-bottom: 10px;">';
+        echo '<div id="quest-title" class="col-xs-6 col-md-6">';
+        echo '<h4><a href="'.$view_quest_url.'" is_action="false">'.$num.') '.$q->name.'</a></h4>';
+        echo '</div>';
+        
+        //Botones para editarla o eliminarla del quiz
+        echo '<div id="options-buttons" class="col-xs-6 col-md-6" style="margin-top: 5px;">';
+        if ($owner_id === $q->owner_id) {
+            echo '<div id="edit-button" class="col-xs-2 col-md-2">';
+            echo '<a type="button" class="btn btn-primary btn-xs" href="'.$edit_quest_url.'" is_action="false" title="Editar">
+                        <i class="fa fa-fw fa-pencil fa-lg" aria-hidden="true"></i>
+                    </a>';
+            echo '</div>';
+            echo '<div id="delete-button" class="col-xs-2 col-md-2">';
+            echo elgg_view("output/url", 
                     array(
+                        "type" => "button",
                         "href" => $remove_quest_url, 
                         "is_action" => true,
-                        "class" => "elgg-button",
-                        "text" => "<img src='". elgg_get_site_url() . "mod/z11_clipit_quiz/graphics/eliminar.png' title='Eliminar'></a>",
-                        "onclick" => 'javascript:return confirmar("¿Está seguro que desea eliminar la pregunta");',
+                        "class" => "btn btn-primary btn-xs",
+                        "title" => "Eliminar",
+                        "text" => '<i class="fa fa-fw fa-trash-o fa-lg" aria-hidden="true"></i>',
+                        "onclick" => 'javascript:return confirmar("¿Está seguro de que desea eliminar esta pregunta del quiz?");',
                         ));
-
-            //Muestro un mensaje si no ha sido coregida alguna respuesta de una pregunta de desarrollo
-            if ($q->option_type == "Desarrollo"){
-                $all_checked = have_been_checked($q->quiz_result_array, $all_checked);
-                if ( !$all_checked ){
-                    echo elgg_view('output/url', 
-                       array(
-                            "href" => "#", 
-                            "is_action" => false,
-                            "text" => "Hay respuestas sin corregir",
-                           ));
-                }
+            echo '</div>';
+        }
+        //Muestro un mensaje si no ha sido coregida alguna respuesta de una pregunta de desarrollo
+        if ($q->option_type == ClipitQuizQuestion::TYPE_STRING){    //Si es de desarrollo
+            if (!have_been_checked($q->quiz_result_array)){        //Comprobar si todas las respuestas se han corregido
+                echo '<div class="col-xs-8 col-md-8 alert alert-info text-center" style="padding-top: 1px; padding-bottom: 0px;">';
+                echo '<span>Hay respuestas sin corregir</span>';
+                echo '</div>';
             }
-        ?>  
-        <br><br>
-      </div>
-    </div>
-
-<?php endforeach ?>
-
-</div>    
+        }
+        echo '</div>';  //Cerrar grupo de botones
+        
+        echo '<div id="quest-author" class="col-xs-12 col-md-12" style="margin-top: -10px;">';
+        echo '<small class="show">Creado por ';
+        echo '<span title="Profesor: '.$q->author_name.'" class="admin-owner" rel="nofollow"><i class="fa fa-fw fa-user"></i>'.$quiz->author_name.'</span>';
+        echo ' '.$time_created.'</small></div>';
+        echo '</div>'; //Cerrar #question
+        $num ++;    //Incrementar contador preguntas
+endforeach ?>
+        
+</div>  <!-- ./questions-list -->
+</div>    <!-- ./quiz-questions -->
     
 <script language="JavaScript">
-function confirmar (mensaje) {
-    return confirm(mensaje);
-} 
+    function confirmar (mensaje) {
+        return confirm(mensaje);
+    } 
 </script>
 

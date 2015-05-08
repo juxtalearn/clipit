@@ -17,23 +17,23 @@ foreach($questions as $quest){
     switch ($type) {
         case ClipitQuizQuestion::TYPE_NUMBER:
             $answer = get_input("nr_{$id_quest}");
-            $correct = ($answer == $oa);
+            $correct = ($answer == $oa[0]);
             break;
         
         case ClipitQuizQuestion::TYPE_TRUE_FALSE:
             $answer = get_input("vof_{$id_quest}");
-            correct_true_false($answer, $oa, $correct);
+            $correct = (((int)$answer) == $oa[0]);
+            //$correct = correct_true_false($answer,$va);
             break;
         
         case ClipitQuizQuestion::TYPE_SELECT_ONE:
-            $resp_seleccionada = get_input("m1_{$id_quest}");
-            correct_select_one($va, $resp_seleccionada, $correct);
+            $answer = get_input("m1_{$id_quest}");
+            $correct = correct_select_one($answer, $va);
             break;
         
         case ClipitQuizQuestion::TYPE_SELECT_MULTI:
-            $selects = (array) get_input("m_{$id_quest}");
-            correct_select_multi($va, $selects, $correct);
-            $answer = $selects;
+            $answer = (array) get_input("m_{$id_quest}");
+            $correct = correct_select_multi($answer, $va);
             break;
     }
     

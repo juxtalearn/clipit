@@ -1,7 +1,4 @@
 <?php
-
-use ClipitTrickyTopic;
-
 // Obtengo el quiz y su ID
 $quiz = elgg_extract('entity', $vars);
 $id = elgg_extract('id', $vars);
@@ -20,41 +17,24 @@ $id_tt = $quiz->tricky_topic;
 $tt = ClipitTrickyTopic::get_by_id(array($id_tt));
 ?>
 
-<div class="quiz">
+<div id="quiz" class="row">
+    <div class="info-block col-xs-12 col-md-12">
+        <p id="quiz-tt"><strong>Tricky Topic: </strong>
+             <?php echo elgg_view('output/text', array('value' => $tt[$id_tt]->name));?>
+        </p>
+        <p id="quiz-description"><?php echo $quiz->description;?></p>
+        <?php 
+        //Autor y tiempo
+        $time_created = elgg_view("output/friendlytime", array('time' => $quiz->time_created));
+        echo '<small class="show">Creado por ';
+        echo '<span title="Profesor: '.$quiz->author_name.'" class="admin-owner" rel="nofollow"><i class="fa fa-fw fa-user"></i>'.$quiz->author_name.'</span>';
+        echo ' '.$time_created.'</small>';
+        ?>
+    </div>
     
-        <div class="content-block">
-
-            <div>
-                <p><strong>Tricky topic: </strong>
-                    <?php 
-                        echo elgg_view('output/text', array('value' => $tt[$id_tt]->name));?>
-                </p>
-                <p><?php echo $quiz->description;?></p>
-            </div>
-            <br>        
-
-            <small>
-                <i>Creado por <?php echo elgg_view('output/text', array('value' => $quiz->author_name)) . " "
-                                 . elgg_view('output/friendlytime', array('time' => $quiz->time_created));?>
-                </i>
-            </small>
-            <br><br>
-            <p>
-                <?php
-            echo "<a href='$do_quiz_url' class='elgg-button'>
-                Do quiz
-            </a>";
-                    ?>
-            </p>
-
-            <p>
-                <?php
-            echo "<a href='$results_url' class='elgg-button'>
-                View results
-            </a>";
-                    ?>
-            </p>
-            
-            <br>
-        </div>
+    <div id="buttons" class="col-xs-12 col-md-12" style="margin-top: 30px;">
+        <p><a href="<?php echo $do_quiz_url; ?>" class='btn btn-primary'>Realizar quiz</a></p>
+        <p><a href="<?php echo $results_url; ?>" class='btn btn-info'>Ver resultados</a></p>
+    </div>
+    
 </div>

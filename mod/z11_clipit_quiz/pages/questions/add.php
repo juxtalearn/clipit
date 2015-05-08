@@ -5,9 +5,7 @@ gatekeeper();
 
 // Establecer el título 
 $title = "Crear una nueva pregunta";
-
-// Migas de pan
-elgg_push_breadcrumb($title);
+elgg_push_breadcrumb($title);   //Inlcuir migas de pan
 
 // Agregar el formulario en esta sección
 $content = elgg_view_form('questions/save');

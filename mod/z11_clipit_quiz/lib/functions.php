@@ -26,7 +26,6 @@ function save_true_false(&$option_array, &$val_array){
     } 
 }
 
-
 /*
  * Funcion auxiliar para guardar las respuestas de One Choice.
  * Guarda todas las respuestas aunque sean campos vacíos
@@ -87,31 +86,23 @@ function save_select_multi (&$option_array, &$val_array){
  */
 
 /** Corregir respuesta del tipo TRUE-FALSE **/
-function correct_true_false(&$answer, &$oa, &$correct){
-    $correct = ($answer == $oa);
-    // Si es verdarera/falsa lo guardo en $answer como propiedad del QuizResult
-    if ($answer == 1){
-        $answer = "True";
-    } else {
-        $answer = "False";
-    }
+function correct_true_false($answer, $oa){
+    $correct = (((int)$answer) == $oa[0]);
+    return $correct;
 }
 
 /** Corregir respuesta del tipo SELECT-ONE **/
-function correct_select_one(&$oa, &$va, &$answer, &$correct){
+function correct_select_one($answer, $va){
+    //COmo solo hay una respuesta correcta
     //Busca un valor determinado y devuelve la clave correspondiente en caso de éxito
-    $correct_answer = array_search("true", $va);
-    $correct_answer = $correct_answer + 1; //El indice de va[] es 0 para la resp 1, 1 para la resp 2, etc
-    if ($answer == $correct_answer) {
-        $correct = true;
-    } else {
-        $correct = false;
-    }
-    $answer = $oa[$answer-1]; //Guardo la respuesta de texto 
+    $index_correct_answer = (array_search("true", $va))+1;
+    //El indice de va[] es 0 para la resp 1, 1 para la resp 2, etc
+    return ($answer == $index_correct_answer);
 }
 
 /** Corregir respuesta del tipo SELECT-MULTI **/
-function correct_select_multi(&$oa, &$va, &$selects, &$all_correct){
+function correct_select_multi($selects, $va){
+    $all_correct = false;
     $corrects = 0; //Contador de respuestas correctas
     $j = 1; //Indice para el array de respuestas seleccionadas
     for ($i=0; $i < count($va); $i++) {
@@ -121,28 +112,25 @@ function correct_select_multi(&$oa, &$va, &$selects, &$all_correct){
     }
     //Retorna un array asociativo de valores a partir de array como keys y su respectivo recuento como valores
     $aux = (array) array_count_values($va);
-    if ($aux["true"] == $corrects){
-            $all_correct = true;
-    }
-    
-    //Guardar las respuestas selecionadas
-    foreach ($selects as $value) {
-        $answers[] = $oa[$value-1];
-    }
-    $selects = $answers;
+    if (($aux["true"] == $corrects) && (count($selects) == $aux["true"])){ //Todas las seleccionadas deben ser correctas
+        $all_correct = true;}
+    return $all_correct;
 }
 
 /* Funcion para comprobar si una pregunta de desarrollo ha sido corregida
- * No ha sido corregida si tiene 'correct'=false y 'description'=texto
- * SI ha sido corregida si tiene 'correct'=true/false y 'description'=" " */
-function have_been_checked ($quest_results, $all_cheked){ //me pasan el array de resultados de una pregunta
-    $all_checked = true; //inicialmente todas están corregidas
-    foreach ($quest_results as $id_result) { //Compruebo respuesta a respuesta
-        $result = array_pop(ClipitQuizResult::get_by_id(array($id_result)));
-        if (strlen($result->description) > 0){ //Si tiene el campo description con texto, NO ha sido corregida
-            $all_checked = false;
+ * No ha sido corregida si tiene 'correct'=false y 'description'=""
+ * SI ha sido corregida si tiene 'correct'=true/false y 'description'=texto */
+function have_been_checked ($quest_results){ //me pasan el array de resultados de una pregunta
+    $all_checked = true;
+    if (count($quest_results)>0){
+        foreach ($quest_results as $id_result) { //Compruebo respuesta a respuesta
+            $result = array_pop(ClipitQuizResult::get_by_id(array($id_result)));
+            if ((strlen($result->description) == 0) && ($result->correct == FALSE)){ //Si tiene el campo description vacio, NO ha sido corregida
+                $all_checked = false;
+            }
         }
     }
+    return $all_checked;
 }
 
 //Funcion que devuelve TRUE si un quiz tiene preguntas de desarrollo
@@ -150,8 +138,8 @@ function quiz_has_develop_questions($id_quiz){
     $has_develop_questions = false;
     $quiz_questions = ClipitQuiz::get_quiz_questions($id_quiz);
     foreach ($quiz_questions as $id_question) {
-        $question = array_pop(ClipitQuizQuestion::get_by_id($quiz_questions));
-        if ($question->option_type == "Desarrollo"){
+        $question = array_pop(ClipitQuizQuestion::get_by_id(array($id_question)));
+        if ($question->option_type == ClipitQuizQuestion::TYPE_STRING){
             $has_develop_questions = true;
         }
     }

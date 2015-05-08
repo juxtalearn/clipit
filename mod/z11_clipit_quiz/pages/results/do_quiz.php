@@ -1,5 +1,4 @@
 <?php
-
 // Asegurarse de que sólo los usuarios registrados pueden ver esta página
 gatekeeper();
 
@@ -22,7 +21,6 @@ if ($option == ClipitQuiz::VIEW_MODE_LIST){
 
 // Establecer el título de la página
 $title = $quiz->name;
-
 elgg_push_breadcrumb($title); //Migas de pan
 
 // Diseño de la página

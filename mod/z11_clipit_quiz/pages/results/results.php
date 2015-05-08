@@ -1,5 +1,4 @@
 <?php
-
 // Asegurarse de que sólo los usuarios registrados pueden ver esta página
 gatekeeper();
 
@@ -9,6 +8,7 @@ $quiz = array_pop(ClipitQuiz::get_by_id(array($id_quiz)));
 
 // Establezco el título de la página
 $title = "Resultados de " . $quiz->name;
+elgg_push_breadcrumb($title);
 
 $params = array(
     'content'   => elgg_view("results/results", array('entity' => $quiz, 'id' => $id_quiz)),
