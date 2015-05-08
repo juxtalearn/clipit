@@ -35,12 +35,14 @@ $tt = ClipitTrickyTopic::get_by_id(array($id_tt));
     
     <div id="buttons" class="col-xs-12 col-md-12" style="margin-top: 30px;">
         <?php
-                //var_dump(get_user_results_by_question($id, $user));
-        /*if (intentos_realizados($id, $user) <= 0){
-            echo'<p><a href="'.$do_quiz_url.'>" class="btn btn-primary">Realizar quiz</a></p>';
-        }*/
+            $intentos_realizados = ClipitQuiz::questions_answered_by_user($id, $user);
+            //Si aun no ha realizado el examen, opcion de realizarlo
+            if ($intentos_realizados < 1){
+                echo'<p><a href="'.$do_quiz_url.'>" class="btn btn-primary">Realizar quiz</a></p>';
+            } else { //Si lo ha realizado, opcion de ver resultados
+                echo '<p><a href="'.$results_url.'" class="btn btn-info">Ver resultados</a></p>';
+            }
         ?>
-        <p><a href="<?php echo $results_url; ?>" class='btn btn-info'>Ver resultados</a></p>
     </div>
     
 </div>

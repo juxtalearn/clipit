@@ -29,6 +29,7 @@ class ClipitQuizQuestion extends UBItem {
     const TYPE_SELECT_ONE = "select_one";
     const TYPE_SELECT_MULTI = "select_multi";
     const TYPE_NUMBER = "number";
+    const TYPE_STRING = "string";
 
     /**
      * @var array Array of options to chose from as an answer to the question
