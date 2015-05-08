@@ -20,19 +20,17 @@ class ClipitQuizResult extends UBItem {
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitQuizResult";
+    const REL_QUIZRESULT_CLIPITUSER = "ClipitQuizResult-ClipitUser";
+    const REL_QUIZRESULT_QUIZQUESTION = "ClipitQuizResult-ClipitQuizQuestion";
     /**
      * @var int Id of ClipitQuizQuestion this ClipitQuizResult is related to
      */
     public $quiz_question = 0;
-    /**
-     * @var int Id of User who posted this Quiz Result
-     */
-    public $user = 0;
 
     // can be different types, depending on the question type
     public $answer;
     /**
-     * @var bool Determines if this Result is correct (true) or incorrect (false)
+     * @var bool Determines if this Result is correct (true) or incorrect (false) - computed by "evaluate_result"
      */
     public $correct = false;
 
@@ -43,7 +41,6 @@ class ClipitQuizResult extends UBItem {
      */
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
-        $this->user = (int)$elgg_entity->get("user");
         $this->answer = $elgg_entity->get("answer");
         $this->correct = (bool)$elgg_entity->get("correct");
         $this->quiz_question = (int)static::get_quiz_question($this->id);
@@ -58,7 +55,6 @@ class ClipitQuizResult extends UBItem {
         parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("answer", $this->answer);
         $elgg_entity->set("correct", (bool)$this->correct);
-        $elgg_entity->set("user", (int)$this->user);
     }
 
     /**
@@ -77,7 +73,7 @@ class ClipitQuizResult extends UBItem {
     /**
      * Sets values to specified properties of an Item
      *
-     * @param int   $id               Id of Item to set property values
+     * @param int   $id Id of Item to set property values
      * @param array $prop_value_array Array of property=>value pairs to set into the Item
      *
      * @return int|bool Returns Id of Item if correct, or false if error
@@ -94,11 +90,56 @@ class ClipitQuizResult extends UBItem {
                 } else {
                     $new_prop_value_array["correct"] = (bool)$value;
                 }
+            } if(($prop == "answer") && (!is_array($value))){
+                $new_prop_value_array["answer"] = json_decode($value);
             } else {
                 $new_prop_value_array[$prop] = $value;
             }
         }
         return parent::set_properties($id, $new_prop_value_array);
+    }
+
+    static function evaluate_result($result_id){
+        if(empty($result_id)){
+            return null;
+        }
+        $result_properties = static::get_properties($result_id, array("answer", "quiz_question"));
+        $answer = $result_properties["answer"];
+        $quiz_question = $result_properties["quiz_question"];
+
+        $question_properties = ClipitQuizQuestion::get_properties($quiz_question, array("option_type", "validation_array"));
+        $option_type = (string)$question_properties["option_type"];
+        $validation_array = $question_properties["validation_array"];
+
+        switch($option_type){
+            case ClipitQuizQuestion::TYPE_SELECT_ONE:
+            case ClipitQuizQuestion::TYPE_SELECT_MULTI:
+            case ClipitQuizQuestion::TYPE_TRUE_FALSE:
+                // answer is correct until proven wrong
+                $correct = true;
+                if(!is_array($answer) || count($answer) != count($validation_array)){
+                    $correct = false;
+                } else{
+                    $pos = 0;
+                    while($pos < count($answer)){
+                        if((bool)$answer[$pos] != (bool)$validation_array[$pos]){
+                            $correct = false;
+                            break;
+                        } else{
+                            $pos++;
+                        }
+                    }
+                }
+                return static::set_properties($result_id, array("correct" => $correct));
+            case ClipitQuizQuestion::TYPE_NUMBER:
+                if((float)$answer == (float)$validation_array[0]){
+                    $correct = true;
+                } else{
+                    $correct = false;
+                }
+            return static::set_properties($result_id, array("correct" => $correct));
+        }
+        return null;
     }
 
     static function get_quiz_question($id) {
@@ -127,12 +168,22 @@ class ClipitQuizResult extends UBItem {
         return $quiz_result_array;
     }
 
+    /**
+     * Returns the ClipitQuizResult ID for a Quiz Question submitted by a User
+     *
+     * @param int $quiz_question_id
+     * @param int $user_id
+     * @return static The Quiz Result, or 0 if none found.
+     */
     static function get_from_question_user($quiz_question_id, $user_id){
         $result_array = static::get_by_owner(array($user_id));
-        foreach($result_array[$user_id] as $quiz_result){
-            if($quiz_result->quiz_question === $quiz_question_id){
-                return $quiz_result;
+        if(!empty($result_array)&& !empty($result_array[$user_id])) {
+            foreach ($result_array[$user_id] as $quiz_result) {
+                if ($quiz_result->quiz_question === $quiz_question_id) {
+                    return $quiz_result;
+                }
             }
         }
+        return 0;
     }
 }

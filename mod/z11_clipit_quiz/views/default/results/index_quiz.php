@@ -2,6 +2,7 @@
 // Obtengo el quiz y su ID
 $quiz = elgg_extract('entity', $vars);
 $id = elgg_extract('id', $vars);
+$user = elgg_get_logged_in_user_guid();
 
 // Establezco la URL para realizar el quiz según su modo de visualización
 $do_quiz_url = elgg_get_site_url()."results/do_quiz?id_quiz={$id}&option=list";
@@ -33,7 +34,12 @@ $tt = ClipitTrickyTopic::get_by_id(array($id_tt));
     </div>
     
     <div id="buttons" class="col-xs-12 col-md-12" style="margin-top: 30px;">
-        <p><a href="<?php echo $do_quiz_url; ?>" class='btn btn-primary'>Realizar quiz</a></p>
+        <?php
+                //var_dump(get_user_results_by_question($id, $user));
+        /*if (intentos_realizados($id, $user) <= 0){
+            echo'<p><a href="'.$do_quiz_url.'>" class="btn btn-primary">Realizar quiz</a></p>';
+        }*/
+        ?>
         <p><a href="<?php echo $results_url; ?>" class='btn btn-info'>Ver resultados</a></p>
     </div>
     
