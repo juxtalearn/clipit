@@ -92,7 +92,7 @@ abstract class ClipitResource extends UBItem {
 
     static function get_by_tags($tag_array) {
         $return_array = array();
-        $all_items = static::get_all(0, 0, "", true, true); // Get all item ids, not objects
+        $all_items = static::get_all(0, 0, "", true, true); // Get only item ids, not objects
         foreach($all_items as $item_id) {
             $item_tags = (array)static::get_tags((int)$item_id);
             foreach($tag_array as $search_tag) {

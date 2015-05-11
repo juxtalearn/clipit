@@ -24,30 +24,39 @@ class ClipitSite extends UBSite {
     const TYPE_GLOBAL = "global";
     const TYPE_DEMO = "demo";
 
-    // SITE SCOPE
-    const REL_SITE_FILE = "ClipitSite-ClipitFile";
-    const REL_SITE_VIDEO = "ClipitSite-ClipitVideo";
-    const REL_SITE_STORYBOARD = "ClipitSite-ClipitStoryboard";
-    public $file_array = array();
-    public $video_array = array();
-    public $storyboard_array = array();
+    // The SITE SCOPE and PUBLIC SCOPE below represent materials published publicly on the LOCAL SITE and/or the
+    // PUBLIC GLOBAL SITE respectively. Only Tricky Topics and Videos are capable of being published.
 
-    // PUBLIC SCOPE
-    const REL_SITE_PUB_FILE = "ClipitSite-PUB-ClipitFile";
+    // SITE SCOPE (Public for users of the site)
+    const REL_SITE_TRICKY_TOPIC = "ClipitSite-ClipitTrickyTopic";
+    const REL_SITE_VIDEO = "ClipitSite-ClipitVideo";
+    const REL_SITE_FILE = "ClipitSite-ClipitFile";
+    const REL_SITE_STORYBOARD = "ClipitSite-ClipitStoryboard";
+    public $tricky_topic_array = array();
+    public $video_array = array();
+//    public $file_array = array();
+//    public $storyboard_array = array();
+
+    // PUBLIC SCOPE (Public for everyone on the Global ClipIt Site)
+    const REL_SITE_PUB_TRICKYTOPIC = "ClipitSite-PUB-ClipitTrickyTopic";
     const REL_SITE_PUB_VIDEO = "ClipitSite-PUB-ClipitVideo";
+    const REL_SITE_PUB_FILE = "ClipitSite-PUB-ClipitFile";
     const REL_SITE_PUB_STORYBOARD = "ClipitSite-PUB-ClipitStoryboard";
-    public $pub_file_array = array();
+    public $pub_tricky_topic_array = array();
     public $pub_video_array = array();
-    public $pub_storyboard_array = array();
+//    public $pub_file_array = array();
+//    public $pub_storyboard_array = array();
 
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
-        $this->file_array = (array)static::get_files();
+        $this->tricky_topic_array = (array)static::get_tricky_topics();
         $this->video_array = (array)static::get_videos();
-        $this->storyboard_array = (array)static::get_storyboards();
-        $this->pub_file_array = (array)static::get_pub_files();
+//        $this->file_array = (array)static::get_files();
+//        $this->storyboard_array = (array)static::get_storyboards();
+        $this->pub_tricky_topic_array = (array)static::get_pub_tricky_topics();
         $this->pub_video_array = (array)static::get_pub_videos();
-        $this->pub_storyboard_array = (array)static::get_pub_storyboards();
+//        $this->pub_file_array = (array)static::get_pub_files();
+//        $this->pub_storyboard_array = (array)static::get_pub_storyboards();
     }
 
     /**
@@ -56,36 +65,38 @@ class ClipitSite extends UBSite {
      */
     protected function save() {
         $site_id = parent::save();
-        static::set_files($this->file_array);
+        static::set_tricky_topics($this->tricky_topic_array);
         static::set_videos($this->video_array);
-        static::set_storyboards($this->storyboard_array);
-        static::set_pub_files($this->pub_file_array);
+//        static::set_files($this->file_array);
+//        static::set_storyboards($this->storyboard_array);
+        static::set_pub_tricky_topics($this->pub_tricky_topic_array);
         static::set_pub_videos($this->pub_video_array);
-        static::set_pub_storyboards($this->pub_storyboard_array);
+//        static::set_pub_files($this->pub_file_array);
+//        static::set_pub_storyboards($this->pub_storyboard_array);
         return $site_id;
     }
 
     // SITE SCOPE //
 
-    // SITE FILES
-    static function add_files($file_array) {
+    // SITE TRICKY TOPICS
+    static function add_tricky_topics($tricky_topic_array) {
         $id = static::get_site_id();
-        return UBCollection::add_items($id, $file_array, static::REL_SITE_FILE);
+        return UBCollection::add_items($id, $tricky_topic_array, static::REL_SITE_TRICKY_TOPIC);
     }
 
-    static function set_files($file_array) {
+    static function set_tricky_topics($tricky_topic_array) {
         $id = static::get_site_id();
-        return UBCollection::set_items($id, $file_array, static::REL_SITE_FILE);
+        return UBCollection::set_items($id, $tricky_topic_array, static::REL_SITE_TRICKY_TOPIC);
     }
 
-    static function remove_files($file_array) {
+    static function remove_tricky_topics($tricky_topic_array) {
         $id = static::get_site_id();
-        return UBCollection::remove_items($id, $file_array, static::REL_SITE_FILE);
+        return UBCollection::remove_items($id, $tricky_topic_array, static::REL_SITE_TRICKY_TOPIC);
     }
 
-    static function get_files() {
+    static function get_tricky_topics() {
         $id = static::get_site_id();
-        return UBCollection::get_items($id, static::REL_SITE_FILE);
+        return UBCollection::get_items($id, static::REL_SITE_TRICKY_TOPIC);
     }
 
     // SITE VIDEOS
@@ -109,51 +120,72 @@ class ClipitSite extends UBSite {
         return UBCollection::get_items($id, static::REL_SITE_VIDEO);
     }
 
-    // SITE STORYBOARDS
-    static function add_storyboards($storyboard_array) {
-        $id = static::get_site_id();
-        return UBCollection::add_items($id, $storyboard_array, static::REL_SITE_STORYBOARD);
-    }
-
-    static function set_storyboards($storyboard_array) {
-        $id = static::get_site_id();
-        return UBCollection::set_items($id, $storyboard_array, static::REL_SITE_STORYBOARD);
-    }
-
-    static function remove_storyboards($storyboard_array) {
-        $id = static::get_site_id();
-        return UBCollection::remove_items($id, $storyboard_array, static::REL_SITE_STORYBOARD);
-    }
-
-    static function get_storyboards() {
-        $id = static::get_site_id();
-        return UBCollection::get_items($id, static::REL_SITE_STORYBOARD);
-    }
+//    // SITE FILES
+//    static function add_files($file_array) {
+//        $id = static::get_site_id();
+//        return UBCollection::add_items($id, $file_array, static::REL_SITE_FILE);
+//    }
+//
+//    static function set_files($file_array) {
+//        $id = static::get_site_id();
+//        return UBCollection::set_items($id, $file_array, static::REL_SITE_FILE);
+//    }
+//
+//    static function remove_files($file_array) {
+//        $id = static::get_site_id();
+//        return UBCollection::remove_items($id, $file_array, static::REL_SITE_FILE);
+//    }
+//
+//    static function get_files() {
+//        $id = static::get_site_id();
+//        return UBCollection::get_items($id, static::REL_SITE_FILE);
+//    }
+//
+//    // SITE STORYBOARDS
+//    static function add_storyboards($storyboard_array) {
+//        $id = static::get_site_id();
+//        return UBCollection::add_items($id, $storyboard_array, static::REL_SITE_STORYBOARD);
+//    }
+//
+//    static function set_storyboards($storyboard_array) {
+//        $id = static::get_site_id();
+//        return UBCollection::set_items($id, $storyboard_array, static::REL_SITE_STORYBOARD);
+//    }
+//
+//    static function remove_storyboards($storyboard_array) {
+//        $id = static::get_site_id();
+//        return UBCollection::remove_items($id, $storyboard_array, static::REL_SITE_STORYBOARD);
+//    }
+//
+//    static function get_storyboards() {
+//        $id = static::get_site_id();
+//        return UBCollection::get_items($id, static::REL_SITE_STORYBOARD);
+//    }
 
     // PUBLIC SCOPE //
 
-    // PUBLIC FILES
-    static function add_pub_files($file_array) {
+    // PUBLIC TRICKY TOPICS
+    static function add_pub_tricky_topics($tricky_topic_array) {
         $id = static::get_site_id();
-        UBCollection::add_items($id, $file_array, static::REL_SITE_PUB_FILE);
+        UBCollection::add_items($id, $tricky_topic_array, static::REL_SITE_PUB_TRICKYTOPIC);
         return static::update_global_resources();
     }
 
-    static function set_pub_files($file_array) {
+    static function set_pub_tricky_topics($tricky_topic_array) {
         $id = static::get_site_id();
-        UBCollection::set_items($id, $file_array, static::REL_SITE_PUB_FILE);
+        UBCollection::set_items($id, $tricky_topic_array, static::REL_SITE_PUB_TRICKYTOPIC);
         return static::update_global_resources();
     }
 
-    static function remove_pub_files($file_array) {
+    static function remove_pub_tricky_topics($tricky_topic_array) {
         $id = static::get_site_id();
-        UBCollection::remove_items($id, $file_array, static::REL_SITE_PUB_FILE);
+        UBCollection::remove_items($id, $tricky_topic_array, static::REL_SITE_PUB_TRICKYTOPIC);
         return static::update_global_resources();
     }
 
-    static function get_pub_files() {
+    static function get_pub_tricky_topics() {
         $id = static::get_site_id();
-        return UBCollection::get_items($id, static::REL_SITE_PUB_FILE);
+        return UBCollection::get_items($id, static::REL_SITE_PUB_TRICKYTOPIC);
     }
 
     // PUBLIC VIDEOS
@@ -180,29 +212,53 @@ class ClipitSite extends UBSite {
         return UBCollection::get_items($id, static::REL_SITE_PUB_VIDEO);
     }
 
-    // PUBLIC STORYBOARDS
-    static function add_pub_storyboards($storyboard_array) {
-        $id = static::get_site_id();
-        UBCollection::add_items($id, $storyboard_array, static::REL_SITE_PUB_STORYBOARD);
-        return static::update_global_resources();
-    }
-
-    static function set_pub_storyboards($storyboard_array) {
-        $id = static::get_site_id();
-        UBCollection::set_items($id, $storyboard_array, static::REL_SITE_PUB_STORYBOARD);
-        return static::update_global_resources();
-    }
-
-    static function remove_pub_storyboards($storyboard_array) {
-        $id = static::get_site_id();
-        UBCollection::remove_items($id, $storyboard_array, static::REL_SITE_PUB_STORYBOARD);
-        return static::update_global_resources();
-    }
-
-    static function get_pub_storyboards() {
-        $id = static::get_site_id();
-        return UBCollection::get_items($id, static::REL_SITE_PUB_STORYBOARD);
-    }
+//    // PUBLIC FILES
+//    static function add_pub_files($file_array) {
+//        $id = static::get_site_id();
+//        UBCollection::add_items($id, $file_array, static::REL_SITE_PUB_FILE);
+//        return static::update_global_resources();
+//    }
+//
+//    static function set_pub_files($file_array) {
+//        $id = static::get_site_id();
+//        UBCollection::set_items($id, $file_array, static::REL_SITE_PUB_FILE);
+//        return static::update_global_resources();
+//    }
+//
+//    static function remove_pub_files($file_array) {
+//        $id = static::get_site_id();
+//        UBCollection::remove_items($id, $file_array, static::REL_SITE_PUB_FILE);
+//        return static::update_global_resources();
+//    }
+//
+//    static function get_pub_files() {
+//        $id = static::get_site_id();
+//        return UBCollection::get_items($id, static::REL_SITE_PUB_FILE);
+//    }
+//
+//    // PUBLIC STORYBOARDS
+//    static function add_pub_storyboards($storyboard_array) {
+//        $id = static::get_site_id();
+//        UBCollection::add_items($id, $storyboard_array, static::REL_SITE_PUB_STORYBOARD);
+//        return static::update_global_resources();
+//    }
+//
+//    static function set_pub_storyboards($storyboard_array) {
+//        $id = static::get_site_id();
+//        UBCollection::set_items($id, $storyboard_array, static::REL_SITE_PUB_STORYBOARD);
+//        return static::update_global_resources();
+//    }
+//
+//    static function remove_pub_storyboards($storyboard_array) {
+//        $id = static::get_site_id();
+//        UBCollection::remove_items($id, $storyboard_array, static::REL_SITE_PUB_STORYBOARD);
+//        return static::update_global_resources();
+//    }
+//
+//    static function get_pub_storyboards() {
+//        $id = static::get_site_id();
+//        return UBCollection::get_items($id, static::REL_SITE_PUB_STORYBOARD);
+//    }
 
     // ClipIt Global (to be called from SITE)
 
@@ -255,14 +311,15 @@ class ClipitSite extends UBSite {
         $data += array("remote_site" => elgg_get_site_url());
         $data += array("remote_ids_only" => true);
         $remote_resources = static::global_site_call($data, "GET");
-        $pub_storyboards = static::get_pub_storyboards();
+        $pub_tricky_topics = static::get_pub_tricky_topics();
         $pub_videos = static::get_pub_videos();
-        $pub_files = static::get_pub_files();
+//        $pub_storyboards = static::get_pub_storyboards();
+//        $pub_files = static::get_pub_files();
         // Figure out what to add
         $add_array = array();
-        foreach($pub_storyboards as $pub_storyboard_id){
-            if(array_search($pub_storyboard_id, $remote_resources) === false){
-                $add_array = array_merge($add_array, ClipitStoryboard::get_by_id(array($pub_storyboard_id)));
+        foreach($pub_tricky_topics as $pub_tricky_topic_id){
+            if(array_search($pub_tricky_topic_id, $remote_resources) === false){
+                $add_array = array_merge($add_array, ClipitTrickyTopic::get_by_id(array($pub_tricky_topic_id)));
             }
         }
         foreach($pub_videos as $pub_video_id){
@@ -270,11 +327,16 @@ class ClipitSite extends UBSite {
                 $add_array = array_merge($add_array, ClipitVideo::get_by_id(array($pub_video_id)));
             }
         }
-        foreach($pub_files as $pub_file_id){
-            if(array_search($pub_file_id, $remote_resources) === false){
-                $add_array = array_merge($add_array, ClipitFile::get_by_id(array($pub_file_id)));
-            }
-        }
+//        foreach($pub_storyboards as $pub_storyboard_id){
+//            if(array_search($pub_storyboard_id, $remote_resources) === false){
+//                $add_array = array_merge($add_array, ClipitStoryboard::get_by_id(array($pub_storyboard_id)));
+//            }
+//        }
+//        foreach($pub_files as $pub_file_id){
+//            if(array_search($pub_file_id, $remote_resources) === false){
+//                $add_array = array_merge($add_array, ClipitFile::get_by_id(array($pub_file_id)));
+//            }
+//        }
         foreach($add_array as $object) {
             $tag_name_array = array();
             $tag_array = ClipitTag::get_by_id($object->tag_array);
@@ -293,7 +355,7 @@ class ClipitSite extends UBSite {
         }
         // Figure out what to remove
         $remove_array = array();
-        $all_pub_resources = array_merge($pub_storyboards, $pub_videos, $pub_files);
+        $all_pub_resources = array_merge($pub_tricky_topics, $pub_videos); //$pub_storyboards, $pub_files);
         foreach($remote_resources as $remote_resource_id){
             if(array_search($remote_resource_id, $all_pub_resources) === false){
                 $remove_array[] = $remote_resource_id;
@@ -302,7 +364,7 @@ class ClipitSite extends UBSite {
         $data = array("method" => "clipit.remote_resource.delete_by_remote_id");
         $data += array("remote_site" => elgg_get_site_url());
         foreach($remove_array as $remove_id){
-            $data += array("remote_id_array[]" => $remove_id);
+            $data += array("remote_id_array[$remove_id]" => $remove_id);
         }
         static::global_site_call($data, "POST");
         return true;
