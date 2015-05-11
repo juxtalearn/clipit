@@ -23,7 +23,8 @@
                 'es' => 'Español',
                 'en' => 'English',
                 'de' => 'Deutsch',
-                'pt' => 'Português'
+                'pt' => 'Português',
+                'sv' => 'Svenska'
             );
             foreach($installed_langs as $key => $language):
                 $active = false;
