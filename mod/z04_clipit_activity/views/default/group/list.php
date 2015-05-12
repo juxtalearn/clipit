@@ -49,11 +49,12 @@ foreach($activity->student_array as $student_id){
 </div>
 <?php endif;?>
 
-<div class="row">
+<div class="row groups-list">
     <?php
     $group_students = array();
     foreach($groups as $group):
         $students_id = ClipitGroup::get_users($group->id);
+        $students = ClipitUser::get_by_id($students_id, 0, 0, 'name');
         $group_students[] = array_merge($group_students, $students_id);
         $rest = $activity->max_group_size - count(ClipitGroup::get_users($group->id));
         if(($user->role == ClipitUser::ROLE_STUDENT || $user->role == ClipitUser::ROLE_ADMIN)
@@ -79,6 +80,13 @@ foreach($activity->student_array as $student_id){
         <div class="col-md-6">
             <div style="border-bottom: 6px solid #bae6f6; padding-bottom: 15px;">
                 <?php echo $optButton;?>
+                <?php echo elgg_view('output/url', array(
+                    'text'  => '',
+                    'data-toggle' => 'collapse',
+                    'href' => '#group_'.$group->id,
+                    'class' => 'fa fa-angle-down pull-right fa-2x visible-xs',
+                ));
+                ?>
                 <h3 class="margin-bottom-5"><?php echo $group->name; ?></h3>
                 <div class="group-details">
                     <?php if($optGroup == 'join' && $rest > 0):?>
@@ -90,11 +98,8 @@ foreach($activity->student_array as $student_id){
                         <?php echo elgg_view("tricky_topic/tags/view", array('tags' => $group->tag_array, 'limit' => 4, 'width' => '22%')); ?>
                     </div>
                 </div>
-                <ul style="height: 250px;overflow-y: auto;">
-                    <?php
-                    foreach($students_id as $student_id):
-                        $student = array_pop(ClipitUser::get_by_id(array($student_id)));
-                        ?>
+                <ul class="group-students" style="height: 250px !important;overflow-y: auto;" id="group_<?php echo $group->id; ?>">
+                    <?php foreach($students as $student):?>
                         <li class="list-item">
                             <?php echo elgg_view("page/elements/user_block", array("entity" => $student)); ?>
                         </li>

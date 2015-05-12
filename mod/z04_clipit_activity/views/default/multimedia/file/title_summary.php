@@ -33,16 +33,18 @@ if(mb_strlen($file_description)>165){
     <strong><?php echo elgg_echo("file:" . $file->mime_type['short']);?></strong>
 </small>
 <?php echo elgg_view('tricky_topic/tags/view', array('tags' => ClipitFile::get_tags($file->id))); ?>
-<p class="hidden-xs">
-    <?php echo $file_description; ?>
-</p>
-<small class="show hidden-xs">
-    <?php echo elgg_view("publications/owner_summary", array(
-        'entity' => $file,
-        'msg' => elgg_echo('multimedia:uploaded_by')
-    ));
-    ?>
-    <i>
-        <?php echo elgg_view('output/friendlytime', array('time' => $file->time_created));?>
-    </i>
-</small>
+<div class="hidden-xs">
+    <p>
+        <?php echo $file_description; ?>
+    </p>
+    <small class="show hidden-xs">
+        <?php echo elgg_view("publications/owner_summary", array(
+            'entity' => $file,
+            'msg' => elgg_echo('multimedia:uploaded_by')
+        ));
+        ?>
+        <i>
+            <?php echo elgg_view('output/friendlytime', array('time' => $file->time_created));?>
+        </i>
+    </small>
+</div>

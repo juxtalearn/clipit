@@ -15,10 +15,6 @@ $footer_menu = elgg_view_menu('footer_clipit', array(
 $site = elgg_get_site_entity();
 $js = elgg_get_loaded_js('footer');
 ?>
-<?php foreach ($js as $script): ?>
-<script type="text/javascript" src="<?php echo $script; ?>"></script>
-<?php endforeach;?>
-
 <footer id="footer">
     <div class="container">
         <div class="row">
@@ -68,3 +64,11 @@ $js = elgg_get_loaded_js('footer');
         </div>
     </div>
 </footer>
+<?php if (elgg_is_logged_in()) : ?>
+    <!-- Messages modal -->
+    <?php echo elgg_view_form('messages/compose', array('data-validate'=> 'true')); ?>
+    <!-- Messages modal end -->
+<?php endif; ?>
+<?php foreach ($js as $script): ?>
+    <script type="text/javascript" src="<?php echo $script; ?>"></script>
+<?php endforeach;?>

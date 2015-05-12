@@ -13,7 +13,7 @@
 $accepted_inputs = array('filter', 'task_id');
 $search_term = get_input("search");
 ?>
-<form class="pull-right">
+<form class="pull-right hidden-xs">
     <div class="search-box">
         <?php foreach(array_intersect($accepted_inputs, array_keys($_REQUEST)) as $request_input):?>
             <input type="hidden" value="<?php echo get_input($request_input);?>" name="<?php echo $request_input;?>">

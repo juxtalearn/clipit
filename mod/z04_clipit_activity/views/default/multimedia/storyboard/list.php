@@ -35,26 +35,19 @@ foreach($storyboards as $sb_id){
     // Owner options (edit/delete)
     $owner_options = "";
     $select = "";
-    if($storyboard->owner_id == $user_id || $user->role == ClipitUser::ROLE_TEACHER){
-        $options = array(
+    if ($vars['actions']) {
+        $owner_options = elgg_view("multimedia/owner_options", array(
             'entity' => $storyboard,
-            'edit' => array(
-                "data-target" => "#edit-storyboard-{$storyboard->id}",
-                "href" => elgg_get_site_url()."ajax/view/modal/multimedia/storyboard/edit?id={$storyboard->id}",
-                "data-toggle" => "modal"
-            ),
-            'remove' => array("href" => "action/multimedia/storyboards/remove?id={$storyboard->id}"),
-        );
-        if($storyboard->owner_id == $user_id){
-            $options['remove'] = array("href" => "action/multimedia/storyboards/remove?id={$storyboard->id}");
-        }
-        if($vars['actions']){
-            $owner_options = elgg_view("page/components/options_list", $options);
-            $select = '<input type="checkbox" name="check-file[]" value="'.$storyboard->id.'" class="select-simple">';
-        }
+            'type' => 'storyboard',
+            'modal' => false
+        ));
         // Remote modal, form content
         echo elgg_view("page/components/modal_remote", array('id'=> "edit-storyboard-{$storyboard->id}" ));
+        $select = '<input type="checkbox" '.(($storyboard->owner_id == $user_id || $user->role == ClipitUser::ROLE_TEACHER)?'':'disabled').'
+                    name="check-file[]" value="' . $storyboard->id . '" class="select-simple">';
     }
+
+
     // Action buttons (Download|Publish)
     $buttons = '<div style="width: 35px;display: inline-block;float: right;text-align: center;margin-left:10px;">
                     '.elgg_view('output/url', array(

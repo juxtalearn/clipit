@@ -186,6 +186,7 @@ $spanish = array(
     'file:removed' => 'El archivo %s ha sido borrado',
     'file:cantremove' => 'No se puede borrar el archivo',
     'file:edit' => 'Editar archivo',
+    'file:edited' => 'Archivo editado',
     'file:none' => "No hay archivos",
     /* File types */
     'file:general' => 'Archivo',
@@ -203,6 +204,7 @@ $spanish = array(
     'videos:none' => 'No hay videos',
     'video:url:error' => 'Incorrect url or video not found',
     'video:edit' => 'Editar video',
+    'video:edited' => 'Video editado',
     'video:add' => 'Añadir video',
     'video:added' => 'Video añadido correctamente',
     'video:deleted' => 'Video eliminado',
@@ -224,6 +226,8 @@ $spanish = array(
     'storyboards:recommended:none' => 'No se han encontrado storyboards recomendados',
     'storyboards:none' => 'No hay storyboards',
     'multimedia:storyboards:add' => 'Añadir storyboard',
+    'storyboard:edit' => 'Editar Storyboard',
+    'storyboard:edited' => 'Storyboard editado',
     // Tricky Topic
     'tricky_topic' => 'Tema clave',
     'tricky_topic:none' => 'No hay temas clave',

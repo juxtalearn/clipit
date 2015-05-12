@@ -192,7 +192,8 @@ function user_landing_page($page)
     $params = array(
         'content' => $content,
         'filter' => '',
-        'class' => 'landing row'
+        'class' => 'landing',
+        'body_class' => ''
     );
     $body = elgg_view_layout('one_column', $params);
     echo elgg_view_page('', $body);

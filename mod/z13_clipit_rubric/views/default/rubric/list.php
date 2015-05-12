@@ -37,6 +37,7 @@ $(function(){
     });
 });
 </script>
+<div class="table-responsive">
 <table class="table table-striped">
     <thead>
     <tr>
@@ -46,9 +47,10 @@ $(function(){
         <th><?php echo elgg_echo('title');?></th>
         <th><?php echo elgg_echo('last_added');?></th>
         <th></th>
-        <th></th>
+        <th style="width: 100px;"></th>
     </tr>
     </thead>
+    <tr></tr>
     <?php foreach($rubrics as $category => $items):?>
         <tr>
             <td>
@@ -71,15 +73,17 @@ $(function(){
                 <?php echo elgg_view('output/url', array(
                     'href'  => 'javascript:;',
                     'class' => 'show-items btn btn-xs btn-border-blue',
-                    'id' => $quiz->id,
                     'text'  => '<strong>'.count($items).'</strong>x<i class="margin-left-5 fa fa-list"></i>',
                 ));
                 ?>
             </td>
-            <td>
-                <?php echo elgg_view('page/components/admin_options', array(
-                    'entity' => $items[0],
-                ));?>
+            <td class="text-right">
+                <?php echo elgg_view('output/url', array(
+                    'href'  => 'rubrics/edit?name='.json_encode($category),
+                    'class' => 'btn btn-xs btn-primary btn-border-blue',
+                    'text'  => elgg_echo('edit'),
+                ));
+                ?>
             </td>
         </tr>
         <tr style="display: none;">
@@ -95,4 +99,5 @@ $(function(){
         </tr>
     <?php endforeach;?>
 </table>
+</div>
 <?php echo clipit_get_pagination(array('count' => $count, 'limit' => 10)); ?>

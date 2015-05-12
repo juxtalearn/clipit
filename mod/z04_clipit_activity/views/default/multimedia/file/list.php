@@ -50,6 +50,20 @@ foreach($files as $file_id){
         // Remote modal, form content
         echo elgg_view("page/components/modal_remote", array('id'=> "edit-file-{$file->id}" ));
     }
+    // Owner options (edit/delete)
+    $owner_options = "";
+    $select = "";
+    if ($vars['options'] !== false) {
+        $owner_options = elgg_view("multimedia/owner_options", array(
+            'entity' => $file,
+            'type' => 'file',
+            'modal' => false
+        ));
+        // Remote modal, form content
+        echo elgg_view("page/components/modal_remote", array('id'=> "edit-file-{$file->id}" ));
+        $select = '<input type="checkbox" '.(($file->owner_id == $user_id || $user->role == ClipitUser::ROLE_TEACHER)?'':'disabled').'
+                    name="check-file[]" value="' . $file->id . '" class="select-simple">';
+    }
     // Action buttons (Download|Publish)
     $buttons = '<div style="width: 35px;display: inline-block;float: right;text-align: center;margin-left:10px;">
                     '.elgg_view('output/url', array(

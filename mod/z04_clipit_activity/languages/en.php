@@ -186,6 +186,7 @@ $english = array(
     'file:removed' => 'File %s removed',
     'file:cantremove' => 'Can not remove file',
     'file:edit' => 'Edit file',
+    'file:edited' => 'File edited',
     'file:none' => "No files",
     /* File types */
     'file:general' => 'File',
@@ -203,6 +204,7 @@ $english = array(
     'videos:none' => 'No videos',
     'video:url:error' => 'Incorrect url or video not found',
     'video:edit' => 'Edit video',
+    'video:edited' => 'Video edited',
     'video:add' => 'Add video',
     'video:added' => 'Video added',
     'video:deleted' => 'Video deleted',
@@ -224,6 +226,8 @@ $english = array(
     'storyboards:recommended:none' => 'There are no recommended storyboards',
     'storyboards:none' => 'No storyboards',
     'multimedia:storyboards:add' => 'Add storyboards',
+    'storyboard:edit' => 'Edit Storyboard',
+    'storyboard:edited' => 'Storyboard edited',
     // Tricky Topic
     'tricky_topic' => 'Tricky Topic',
     'tricky_topic:none' => 'Not tricky Topic',

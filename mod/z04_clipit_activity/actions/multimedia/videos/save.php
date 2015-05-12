@@ -50,6 +50,7 @@ if(trim($title) == ""){
             ));
             $entity_class::add_videos($entity_id, array($video_id));
         }
+        $successful_message = elgg_echo('video:added');
     }
 
     if($video_id){
@@ -79,10 +80,11 @@ if(trim($title) == ""){
         ClipitVideo::set_performance_items($video_id, $performance_items);
         // Set properties
         ClipitVideo::set_properties($video_id, $data);
+        $successful_message = elgg_echo('video:edited');
     } else {
         register_error(elgg_echo("video:cantadd"));
     }
-    system_message(elgg_echo('video:added'));
+    system_message($successful_message);
 }
 // forward to task directly
 if(get_input('select-task')){

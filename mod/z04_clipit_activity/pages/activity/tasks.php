@@ -62,34 +62,40 @@ if($page[2] == 'view' && $page[3]){
     }
 } else {
     if($user->role == ClipitUser::ROLE_STUDENT) {
-        $tasks = ClipitTask::get_by_id($activity->task_array, 0, 0, 'end', false);
+        $tasks = ClipitTask::get_by_id($activity->task_array, 0, 0, 'end', true);
         $content = '';
         foreach ($tasks as $task) {
             $status = get_task_status($task);
             if (time() < $task->start) {
-                $tasks_filtered['closed'][] = $task;
+                $num = 4;
             } else {
-                $tasks_filtered[$status['color']][] = $task;
+                switch($status['color']){
+                    case 'yellow':  $num = 1; break;
+                    case 'green':   $num = 2; break;
+                    case 'red':     $num = 3; break;
+                }
             }
+            $tasks_filtered[$num][] = $task;
         }
+        ksort($tasks_filtered);
         foreach ($tasks_filtered as $color => $task_filtered) {
             switch ($color) {
-                case 'yellow':
+                case 1:
                     $content .= elgg_view("page/components/title_block", array(
                         'title' => elgg_echo("task:pending"),
                     ));
                     break;
-                case 'green':
+                case 2:
                     $content .= elgg_view("page/components/title_block", array(
                         'title' => elgg_echo("task:completed"),
                     ));
                     break;
-                case 'red':
+                case 3:
                     $content .= elgg_view("page/components/title_block", array(
                         'title' => elgg_echo("task:not_completed"),
                     ));
                     break;
-                case 'closed':
+                case 4:
                     $content .= elgg_view("page/components/title_block", array(
                         'title' => elgg_echo("task:next"),
                     ));

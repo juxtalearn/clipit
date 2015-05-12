@@ -50,4 +50,4 @@ foreach ($tabs as $name => $tab) {
 
     elgg_register_menu_item('filter', $tab);
 }
-echo elgg_view_menu('filter', array('sort_by' => 'priority', 'class' => 'nav nav-tabs nav-steps'));
+echo elgg_view_menu('filter', array('sort_by' => 'priority', 'class' => 'nav nav-tabs nav-steps hidden-xs'));

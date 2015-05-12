@@ -14,9 +14,6 @@ $rubrics = array();
 $rubrics = array_pop(elgg_extract('entities', $vars));
 $button_value = elgg_extract('submit_value', $vars);
 $id = uniqid('rubric_');
-//foreach(ClipitPerformanceItem::get_all(5) as $i){
-//    ClipitPerformanceItem::delete_by_id(array($i));
-//}
 ?>
 <script>
 $(function(){
