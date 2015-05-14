@@ -151,26 +151,30 @@ class ClipitChat extends UBMessage {
     }
 
     static function get_conversation($user1_id, $user2_id) {
+        $conversation = array();
         // user1 --> user2
         $sender_messages = static::get_by_sender(array($user1_id));
         $sender_messages = $sender_messages[$user1_id];
-        $conversation = array();
-        foreach($sender_messages as $message) {
-            if($message->destination == (int)$user2_id) {
-                $archived = static::get_archived_status($message->id, array($user1_id));
-                if(!$archived[$user1_id]) {
-                    $conversation[$message->id] = $message;
+        if(!empty($sender_messages)) {
+            foreach ($sender_messages as $message) {
+                if ($message->destination == (int)$user2_id) {
+                    $archived = static::get_archived_status($message->id, array($user1_id));
+                    if (!$archived[$user1_id]) {
+                        $conversation[$message->id] = $message;
+                    }
                 }
             }
         }
         // user2 --> user1
         $sender_messages = static::get_by_sender(array($user2_id));
         $sender_messages = $sender_messages[$user2_id];
-        foreach($sender_messages as $message) {
-            if($message->destination == (int)$user1_id) {
-                $archived = static::get_archived_status($message->id, array($user1_id));
-                if(!$archived[$user1_id]) {
-                    $conversation[$message->id] = $message;
+        if(!empty($sender_messages)) {
+            foreach ($sender_messages as $message) {
+                if ($message->destination == (int)$user1_id) {
+                    $archived = static::get_archived_status($message->id, array($user1_id));
+                    if (!$archived[$user1_id]) {
+                        $conversation[$message->id] = $message;
+                    }
                 }
             }
         }
