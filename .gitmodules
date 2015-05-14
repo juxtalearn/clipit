@@ -7,6 +7,3 @@
 [submodule "mod/z01_urjc_backend/libraries/php_excel"]
 	path = mod/z01_urjc_backend/libraries/php_excel
 	url = https://github.com/PHPOffice/PHPExcel
-[submodule "PHPExcel"]
-	path = PHPExcel
-	url = https://github.com/PHPOffice/PHPExcel
