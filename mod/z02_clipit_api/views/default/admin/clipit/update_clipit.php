@@ -18,6 +18,7 @@ if($_POST["update_clipit"] == "YES") {
     // Run updates
     include_once(elgg_get_plugins_path() . "z02_clipit_api/updates/run_updates.php");
 }else{
-    echo "<h2>The update procedure will checkout the latest ClipIt version and apply all necessary updates.</h2>";
-    echo "<br/><form action='update_clipit' method='post'><h3>Are you sure you want to proceed? <input name='update_clipit' value='YES' type='submit'></h3></form>";
+    echo "<h2>This will check-out the latest ClipIt stable version and apply all necessary updates</h2>";
+    echo "<h3>Current version: ".get_config("clipit_version")."</h3>";
+    echo "<br><form action='update_clipit' method='post'>Are you sure you want to proceed? <input style='class=.elgg-button-action' name='update_clipit' value='YES' type='submit'></form>";
 }
