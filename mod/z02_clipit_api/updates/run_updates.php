@@ -39,7 +39,9 @@ if(empty($old_version)){
 print_r("<p>Current version: $old_version<br>New version: $VERSION</p>");
 
 // If already up-to-date, exit.
-if($VERSION === $old_version) return;
+if($VERSION === $old_version){
+    return;
+}
 
 // set the new version to avoid overlapping updates
 set_config("clipit_version", $VERSION);
