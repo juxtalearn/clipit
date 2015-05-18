@@ -1,42 +1,41 @@
 <?php
 // UPDATE FROM HERE {
-    $VERSION = "2.3.15";
-    $update_files = array(
-        // new versions must be inserted in to $update_files array, even if null
-        "2.2.0" => null,
-        "2.2.1" => "update_2.2.1.php",
-        "2.2.2" => "update_2.2.2.php",
-        "2.2.3" => null,
-        "2.2.4" => "update_2.2.4.php",
-        "2.2.5" => "update_2.2.5.php",
-        "2.3" => null,
-        "2.3.1" => null,
-        "2.3.2" => null,
-        "2.3.3" => "update_2.3.3.php",
-        "2.3.4" => "update_2.3.4.php",
-        "2.3.5" => "update_2.3.5.php",
-        "2.3.6" => "update_2.3.6.php",
-        "2.3.7" => "update_2.3.7.php",
-        "2.3.8" => "update_2.3.8.php",
-        "2.3.9" => "update_2.3.9.php",
-        "2.3.9.1" => null,
-        "2.3.10" => null,
-        "2.3.11" => "update_2.3.11.php",
-        "2.3.12" => "update_2.3.12.php",
-        "2.3.13" => null,
-        "2.3.14" => "update_2.3.14.php",
-        "2.3.15" => "update_2.3.15.php",
-        // add here future updates: version => file
-    );
+$VERSION = "2.3.15";
+$update_files = array(
+    // new versions must be inserted in to $update_files array, even if null
+    "2.2.0" => null,
+    "2.2.1" => "update_2.2.1.php",
+    "2.2.2" => "update_2.2.2.php",
+    "2.2.3" => null,
+    "2.2.4" => "update_2.2.4.php",
+    "2.2.5" => "update_2.2.5.php",
+    "2.3" => null,
+    "2.3.1" => null,
+    "2.3.2" => null,
+    "2.3.3" => "update_2.3.3.php",
+    "2.3.4" => "update_2.3.4.php",
+    "2.3.5" => "update_2.3.5.php",
+    "2.3.6" => "update_2.3.6.php",
+    "2.3.7" => "update_2.3.7.php",
+    "2.3.8" => "update_2.3.8.php",
+    "2.3.9" => "update_2.3.9.php",
+    "2.3.9.1" => null,
+    "2.3.10" => null,
+    "2.3.11" => "update_2.3.11.php",
+    "2.3.12" => "update_2.3.12.php",
+    "2.3.13" => null,
+    "2.3.14" => "update_2.3.14.php",
+    "2.3.15" => "update_2.3.15.php",
+    // add here future updates: version => file
+);
 // } TO HERE
 
 $old_version = get_config("clipit_version");
 
 // If no clipit_version in config, then treat it as oldest version possible.
-if(empty($old_version)){
+if(empty($old_version)) {
     $old_version = "2.2.0";
 }
-print_r("<p>Current version: $old_version<br>New version: $VERSION</p>");
 
 // If already up-to-date, exit.
 if($VERSION === $old_version){
@@ -45,6 +44,8 @@ if($VERSION === $old_version){
 
 // set the new version to avoid overlapping updates
 set_config("clipit_version", $VERSION);
+
+print_r("<p>Current version: $old_version<br>New version: $VERSION</p>");
 
 // advance until old version
 while (key($update_files) != $old_version) {
@@ -70,5 +71,3 @@ print_r("done</p>");
 
 // Update ClipIt version
 print_r("<p>Updated to version: $VERSION</p>");
-
-
