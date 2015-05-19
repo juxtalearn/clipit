@@ -26,7 +26,7 @@ $update_files = array(
     "2.3.13" => null,
     "2.3.14" => "update_2.3.14.php",
     "2.3.15" => "update_2.3.15.php",
-    // add here future updates: version => file
+    // add here future updates: "version_number" => "file_name"
 );
 // } TO HERE
 

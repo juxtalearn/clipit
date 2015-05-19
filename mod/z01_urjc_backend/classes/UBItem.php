@@ -423,7 +423,7 @@ class UBItem {
         }
         if(!empty($order_by)) {
             $args = array("order_by" => $order_by, "ascending" => $ascending);
-            usort($return_array,
+            uasort($return_array,
                 function ($i1, $i2) use ($args) {
                     if (!$i1 && !$i2) {
                         return 0;
@@ -475,7 +475,7 @@ class UBItem {
         }
         if(!empty($order_by)){
             $args = array("order_by" => $order_by, "ascending" => $ascending);
-            usort($item_array, function($i1, $i2) use($args){
+            uasort($item_array, function($i1, $i2) use($args){
                 if (!$i1 && !$i2) {
                     return 0;
                 }
@@ -505,7 +505,7 @@ class UBItem {
         if($limit == 0){
             $limit = null;
         }
-        return array_slice($item_array, (int)$offset, $limit);
+        return array_slice($item_array, (int)$offset, $limit, true);
     }
 
     /**
@@ -532,7 +532,7 @@ class UBItem {
                 }
                 if(!empty($temp_array)) {
                     $object_array[(int)$owner_id] = $temp_array;
-                    usort($object_array[(int)$owner_id], 'static::sort_by_date');
+                    uasort($object_array[(int)$owner_id], 'static::sort_by_date');
                 } else {
                     $object_array[(int)$owner_id] = null;
                 }
@@ -616,9 +616,9 @@ class UBItem {
             }
         }
         if(empty($limit)){
-            return array_slice($search_result, (int)$offset, count($search_result));
+            return array_slice($search_result, (int)$offset, count($search_result), true);
         } else {
-            return array_slice($search_result, (int)$offset, (int)$limit);
+            return array_slice($search_result, (int)$offset, (int)$limit, true);
         }
         //return $search_result;
     }

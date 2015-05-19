@@ -92,7 +92,7 @@ class UBMessage extends UBItem {
             } else {
                 if(!empty($order_by)) {
                     $args = array("order_by" => $order_by, "ascending" => $ascending);
-                    usort($temp_array, function ($i1, $i2) use ($args) {
+                    uasort($temp_array, function ($i1, $i2) use ($args) {
                         if (!$i1 && !$i2) {
                             return 0;
                         }
@@ -120,9 +120,9 @@ class UBMessage extends UBItem {
                 }
                 $message_array[$destination_id] = $temp_array;
                 if (!empty($limit)) {
-                    $message_array[$destination_id] = array_slice($message_array[$destination_id], $offset, $limit);
+                    $message_array[$destination_id] = array_slice($message_array[$destination_id], $offset, $limit, true);
                 } else {
-                    $message_array[$destination_id] = array_slice($message_array[$destination_id], $offset);
+                    $message_array[$destination_id] = array_slice($message_array[$destination_id], $offset, true);
                 }
             }
         }
