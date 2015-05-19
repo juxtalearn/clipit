@@ -534,10 +534,15 @@ clipit.labelList = function(e){
  * jQuery Shorten plugin
  *
  */
-clipit.shorten = function(element){
+clipit.shorten = function(element, height){
     return $(element).each(function () {
         var element_shorten = $(this);
-        var element_height = element_shorten.css("max-height");
+        if(!height){
+            var element_height = element_shorten.css("max-height");
+        } else {
+            var element_height = height;
+        }
+//        var element_height = element_shorten.css("max-height");
         element_shorten.addClass("shorten");
         element_shorten.wrapInner("<div class='container-text'/>");
         var container = element_shorten.find('.container-text');

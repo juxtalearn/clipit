@@ -1,30 +1,39 @@
 // <script>
+
+elgg.provide('clipit.mobile');
+clipit.mobile.init = function() {
+    if (screen.width < 768 ) {
+        clipit.shorten('.task-info .description', 100);
+    }
+}
+elgg.register_hook_handler('init', 'system', clipit.mobile.init);
 $(document).ready(function() {
 
     var logoimagen = $('.navbar-brand');
     var espacioazul = $('.navbar-static-top');
-    if (screen.width < 768) {
+    if (screen.width < 768 ) {
 
-        espacioazul.append(logoimagen);
         logoimagen.find('img').css({
             "width": "90%",
             "height": "90%",
             "max-width": "150px",
-            "position": "relative",
-            "top": "8px"
+            "position": "relative"
         });
+
         $('.navbar-brand').addClass('col-xs-6');
-        $('.navbar-blue .container').addClass('col-xs-6');
-        espacioazul.find($('.container')).css({"max-width": "50%", "float": "right"});
-        $('p.navbar-text').append('<i class="fa fa-search white"></i>');
+        $('.navbar-blue .container').addClass('col-xs-6 text-right');
+        $('.navbar-brand').css({"height":"auto"});
+        $('.navbar-blue .col-xs-6.text-right').removeClass('container');
         $('#activities').empty();
         $('#activities').append('<i class="fa fa-list-alt"></i>');
-        $('.col-md-3 > .search-form').css({"top":"20","right":"-25px"});
+        $('.col-md-3 > .search-form').css({"top":"20"});
         $('.top-account li:first a').remove();
         $('ul.top-account li:first').append('<a href="' + elgg.config.wwwroot + 'explore" title="Explorar" rel="nofollow" id="globo"><i class="fa fa-globe"></i></a>');
         var avatar_user = $('ul.top-account li a.avatar-user'),
             avatar_user_img = avatar_user.find('img');
         avatar_user.html(avatar_user_img);
+
+
         if (!$('.sticky-wrapper').find("img").hasClass('avatar-small')) {
             $('.sticky-wrapper').css({"display": "none"});
             $('.fa-search').css({"display": "none"});
@@ -37,7 +46,7 @@ $(document).ready(function() {
         $('li > #authoring').remove();
         var hrefmensajes = elgg.get_site_url() + 'messages/inbox';
         $('.navbar-nav .message-options .fa-inbox').parent('a').attr("href", hrefmensajes);
-        $('.navbar-nav').css({"margin": "7px 15px"});
+        $('.navbar-nav').addClass('col-xs-9');
         $('a.inbox-summary').attr({'href': hrefmensajes});
         $('a.inbox-summary').attr({'data-toggle': empty});
 
@@ -48,17 +57,9 @@ $(document).ready(function() {
 
         var headercontent = $('#bs-navbar-collapse').html();
         $('#bs-navbar-collapse').remove();
+        $('.navbar-header').addClass('row');
         $('.navbar-header').append(headercontent);
-        $('.col-sm-4:eq(1)').css({"float": "right"});
-        $('.search-form').css({
-            "visibility": "hidden",
-            "position": "absolute",
-            "z-index": "-1",
-            "right": "15px",
-            "width": "140px"
-        });
-
-        $(".fa-search").click(function () {
+        $(".navbar-blue .text-right.col-xs-6 .fa-search").click(function (){
             if ($('.search-form').css("visibility") == "visible") {
                 $('.search-form').css({"visibility": "hidden", "z-index": "-1"});
                 $('.fa-times')[0].className = 'fa fa-search white';
@@ -68,7 +69,6 @@ $(document).ready(function() {
                 $('.fa-search')[1].className = 'fa fa-times white ';
             }
         });
-
         if ($('.elgg-sidebar').length != 0) {
             $(".navbar-toggle").css({"visibility": "visible"});
         }
@@ -87,7 +87,7 @@ $(document).ready(function() {
             "z-index": "1039", "position": "absolute", "bottom": "0px",
             "background-color": "#FFFFFF", "right": "-999px", "float": "right",
             "paddingBottom": "30px", "top": "-12px", "overflow-y": "scroll",
-            "paddingTop": "10px", "width": "95%","height":alto
+            "paddingTop": "10px", "width": "75%","height":alto
         });
 
         $('.navbar-blue').css({"z-index": "1039"})
@@ -102,7 +102,7 @@ $(document).ready(function() {
         $('.elgg-sidebar > .fa-times').css({"left": "88%", "position": "relative"});
         $('.elgg-sidebar > .fa-times').click(function () {
             closeSidebar();});
-        
+
         $(".navbar-toggle").click(function(){
                     openSidebar();});
 
@@ -152,5 +152,14 @@ $(document).ready(function() {
             if(icon)
                 $(this).find('span').html($('<i/>').addClass( icon + ' fa margin-right-5'));
         });
+        $('.tags').each(function(){
+            $(this).find('a').css('maxWidth','50%');
+            $(this).find('a:gt(1)').hide();
+        });
+        if($('.groups-list').length >0 ){
+            $('.groups-list .group-students').addClass('collapse');
+        }
+
     }//Fin del IF
+
 });//Fin Function
