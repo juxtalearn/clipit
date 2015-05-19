@@ -1466,20 +1466,23 @@ class ElggInstaller {
         $upgrades = elgg_get_upgrade_files($submissionVars['path'] . 'engine/lib/upgrades/');
         datalist_set('processed_upgrades', serialize($upgrades));
 
-        set_config('view', 'default', $site->getGUID());
-        set_config('language', 'en', $site->getGUID());
-        set_config('default_access', $submissionVars['siteaccess'], $site->getGUID());
-        set_config('allow_registration', FALSE, $site->getGUID());
-        set_config('walled_garden', TRUE, $site->getGUID());
-        set_config('allow_user_default_access', '', $site->getGUID());
-        set_config('timezone', $submissionVars['timezone'], $site->getGUID());
-        set_config('clipit_global_url', $submissionVars['clipit_global_url'], $site->getGUID());
-        set_config('clipit_global_login', $submissionVars['clipit_global_login'], $site->getGUID());
-        set_config('clipit_global_password', $submissionVars['clipit_global_password'], $site->getGUID());
-//        set_config('jxl_secret', $submissionVars['jxl_secret'], $site->getGUID());
-        set_config('la_metrics_class', $submissionVars['la_metrics_class'], $site->getGUID());
-        set_config('recommendations_class', $submissionVars['recommendations_class'], $site->getGUID());
-        set_config('clipit_site_type', strtolower($submissionVars['clipit_site_type']), $site->getGUID());
+        set_config('view', 'default', $guid);
+        set_config('language', 'en', $guid);
+        set_config('default_access', $submissionVars['siteaccess'], $guid);
+        set_config('allow_registration', FALSE, $guid);
+        set_config('walled_garden', TRUE, $guid);
+        set_config('allow_user_default_access', '', $guid);
+        set_config('timezone', $submissionVars['timezone'], $guid);
+        set_config('clipit_global_url', $submissionVars['clipit_global_url'], $guid);
+        set_config('clipit_global_login', $submissionVars['clipit_global_login'], $guid);
+        set_config('clipit_global_password', $submissionVars['clipit_global_password'], $guid);
+//      set_config('jxl_secret', $submissionVars['jxl_secret'], $guid);
+        set_config('la_metrics_class', $submissionVars['la_metrics_class'], $guid);
+        set_config('recommendations_class', $submissionVars['recommendations_class'], $guid);
+        set_config('clipit_site_type', strtolower($submissionVars['clipit_site_type']), $guid);
+        // Set current ClipIt version
+        $clipit_version = exec("git name-rev --tags --name-only $(git rev-parse HEAD)");
+        set_config("clipit_version", (string)$clipit_version, $guid);
         $this->enablePlugins();
         return TRUE;
     }
