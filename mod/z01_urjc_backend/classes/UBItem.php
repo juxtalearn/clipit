@@ -471,6 +471,9 @@ class UBItem {
             return $item_array;
         }
         foreach($id_array as $id) {
+            if(empty($id)){
+                continue;
+            }
             $item_array[(int)$id] = new static((int)$id);
         }
         if(!empty($order_by)){
