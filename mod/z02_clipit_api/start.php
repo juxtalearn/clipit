@@ -21,19 +21,20 @@ elgg_register_event_handler('init', 'system', 'clipit_api_init');
 function clipit_api_init() {
     // Load libraries
     $lib_path = elgg_get_plugins_path() . "z02_clipit_api/libraries";
+    // Expose REST API
     loadFiles("$lib_path/clipit_rest_api/");
+    include_once("expose_clipit_api.php");
+    // Load palettes
     loadFiles("$lib_path/performance_palette/");
     loadFiles("$lib_path/example_types/");
-    // Expose REST API
-    expose_clipit_api();
     // Register actions
     elgg_register_action("useradd", elgg_get_plugins_path(). "z02_clipit_api/actions/useradd.php", 'admin');
     elgg_register_action("clipit_options/save", elgg_get_plugins_path()."z02_clipit_api/actions/clipit_options/save.php");
     // Register Admin Menus
-    elgg_register_admin_menu_item('configure', 'clipit_options', 'clipit');
-    elgg_register_admin_menu_item('configure', 'youtube_auth', 'clipit');
-    elgg_register_admin_menu_item('configure', 'update_clipit', 'clipit');
-    // Publish Site to Global
+    elgg_register_admin_menu_item('configure', 'clipit_options', 'clipit', 1);
+    elgg_register_admin_menu_item('configure', 'youtube_auth', 'clipit', 2);
+    elgg_register_admin_menu_item('configure', 'update_clipit', 'clipit', 3);
+    // Publish Site to Global (if not done already)
     if(get_config("clipit_global_published") !== true) {
         set_config("clipit_global_published", true);
         ClipitSite::publish_to_global();

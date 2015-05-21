@@ -18,4 +18,4 @@ set_config("performance_palette", (bool)get_input("performance_palette"));
 set_config("example_types", (bool)get_input("example_types"));
 set_config("fixed_performance_rating", (bool)get_input("fixed_performance_rating"));
 set_config("quiz_results_after_task_end", (bool)get_input("quiz_results_after_task_end"));
-system_message("The options have been saved correctly");
+system_message("Options correctly saved");

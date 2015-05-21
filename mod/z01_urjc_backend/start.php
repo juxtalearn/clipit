@@ -22,11 +22,11 @@ function urjc_backend_init() {
     loadFiles(elgg_get_plugins_path() . "z01_urjc_backend/libraries/");
     loadFiles(elgg_get_plugins_path() . "z01_urjc_backend/libraries/php_excel/Classes/");
     date_default_timezone_set(get_config("timezone"));
-    register_pam_handler('clipit_auth_usertoken');
+    register_pam_handler('check_http_auth_token');
 }
 
 /**
- * Loads PHP files.
+ * Loads PHP files from a specified path
  *
  * @param string $path Path to load php files from
  *
@@ -46,14 +46,14 @@ function loadFiles($path) {
 }
 
 /**
- * Check the user token
+ * Check the user token sent through HTTP
  * This examines whether an authentication token is present and returns true if
  * it is present and is valid. The user gets logged in so with the current
  * session code of Elgg, that user will be logged out of all other sessions.
  * @return bool
  * @access private
  */
-function clipit_auth_usertoken() {
+function check_http_auth_token() {
     global $CONFIG;
     if (isset($_SERVER["HTTP_AUTH_TOKEN"])) {
         $token = $_SERVER["HTTP_AUTH_TOKEN"];
