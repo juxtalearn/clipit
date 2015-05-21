@@ -7,6 +7,5 @@ engine/handlers/php_errors.log
 php_errorlog
 mod_unused
 .project
-*.sublime-*
-error_log.txt
-mod/z30_Adrian
+error_log
+mod/z30*
