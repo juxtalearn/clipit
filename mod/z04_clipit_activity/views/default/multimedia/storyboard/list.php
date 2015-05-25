@@ -18,7 +18,7 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
 
 // if search form is activated
 echo elgg_view("storyboards/search");
-
+echo '<div class="clearfix"></div>';
 foreach($storyboards as $sb_id){
     $storyboard =  array_pop(ClipitStoryboard::get_by_id(array($sb_id)));
     $file =  array_pop(ClipitFile::get_by_id(array($storyboard->file)));

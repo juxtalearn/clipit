@@ -15,7 +15,9 @@
     <?php echo elgg_view('output/url', array(
         'href'  => "explore",
         'title' => elgg_echo('explore'),
-        'text'  => elgg_echo('explore')
+        'id' => 'explore',
+        'text'  => '<i class="fa fa-globe visible-xs visible-sm"></i>
+                    <span class="hidden-xs hidden-sm">'.elgg_echo('explore'). '</span>'
     ));
     ?>
 </li>

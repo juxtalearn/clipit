@@ -11,9 +11,10 @@
  * @package         ClipIt
  */
 elgg_register_event_handler('init', 'system', 'clipit_final_init');
-
 function clipit_final_init(){
     global $CONFIG;
+    setlocale(LC_TIME, elgg_echo('locale'));
+
     $user_id = elgg_get_logged_in_user_guid();
     $user = array_pop(ClipitUser::get_by_id(array($user_id)));
     if(get_config('clipit_site_type') == ClipitSite::TYPE_SITE || get_config('clipit_site_type') == ClipitSite::TYPE_DEMO) {
@@ -110,9 +111,10 @@ function clipit_final_init(){
         elgg_register_simplecache_view('css/clipit');
         elgg_register_css("clipit", $clipit_css);
         elgg_extend_view('js/clipit', 'js/mobile');
-        // FontAwesome
+        // jQuery ui touch fixed for mobile & tablets devices
+        elgg_register_js('jquery:ui:touch', "{$plugin_url}/vendors/jquery-ui.touch.min.js", 'footer');
+        elgg_load_js('jquery:ui:touch');
         elgg_register_css("fontawesome", "{$plugin_url}/vendors/fontawesome/fontawesome.min.css");
-
         $clipit_js = elgg_get_simplecache_url('js', 'clipit');
         elgg_register_simplecache_view('js/clipit');
         elgg_register_js('clipit', $clipit_js);
@@ -138,13 +140,21 @@ function clipit_final_init(){
         elgg_unregister_css("elgg");
         elgg_unregister_css("elgg.walled_garden");
         elgg_register_js("clipit_theme_bootstrap", "{$plugin_url}/bootstrap/dist/js/bootstrap.js");
-        elgg_register_js("elgg.walled_gaarden", "{$plugin_url}/bootstrap/dist/js/adadadaotstrap.js");
         elgg_load_js("clipit_theme_bootstrap");
+    }
+    elgg_register_plugin_hook_handler("action", "publications/publish", "publish_site_tricky_topics");
+}
+
+function publish_site_tricky_topics($hook, $entity_type, $returnvalue, $params){
+    $entity_id = get_input('id');
+    $object = ClipitSite::lookup($entity_id);
+    if($object['subtype'] == 'ClipitTrickyTopic') {
+        ClipitSite::add_pub_tricky_topics(array($entity_id));
+        forward(REFERER);
     }
 }
 
-function home_user_account_page_handler($page_elements, $handler)
-{
+function home_user_account_page_handler($page_elements, $handler){
 
     $base_dir = elgg_get_plugins_path() . 'z03_clipit_site/pages/account';
     switch ($handler) {

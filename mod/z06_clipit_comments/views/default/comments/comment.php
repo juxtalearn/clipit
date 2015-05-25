@@ -74,7 +74,7 @@ if($activity_id && $owner_user->role == ClipitUser::ROLE_STUDENT){
         <?php endif; ?>
     <?php if(!$vars['reply']): ?>
     <div class="margin-top-10 text-right">
-        <button id="<?php echo $comment->id; ?>" class="reply-to btn btn-default btn-sm reply-button">
+        <button id="<?php echo $comment->id; ?>" class="reply-to btn btn-default btn-sm reply-button" title="<?php echo elgg_echo('reply');?>">
             <i class="fa fa-reply"></i> <?php echo elgg_echo('reply');?>
         </button>
     </div>

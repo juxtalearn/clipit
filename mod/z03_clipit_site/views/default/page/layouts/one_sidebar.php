@@ -32,6 +32,10 @@ if($vars['sub-title']){
 
 <div class="<?php echo $class; ?>">
 	<div class="elgg-sidebar col-md-push-9">
+        <div class="visible-xs visible-sm text-right">
+            <i class="fa fa-times btn text-muted" id="close-sidebar"></i>
+            <hr style="margin: 10px 0;">
+        </div>
 		<?php
 			echo elgg_view('page/elements/sidebar', $vars);
 		?>

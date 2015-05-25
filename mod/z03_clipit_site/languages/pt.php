@@ -5,6 +5,8 @@
  */
 
 $portuguese = array(
+    'locale' => 'pt_PT',
+
     'clipit:site' => 'ClipIt',
     'loading' => 'Carregando',
     'loading:content' => 'Carregando o conteudo',

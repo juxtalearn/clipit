@@ -19,7 +19,7 @@ $mime_type = $file->mime_type;
 $file = array_pop(ClipitFile::get_by_id(array($file_id)));
 header("Pragma: public");
 header("Content-type: {$mime_type['full']}");
-header("Content-Disposition: inline; filename='{$file->name}'");
+header("Content-Disposition: inline; filename=\"{$file->name}\"");
 header("Cache-Control: public", true);
 header('Expires: ' . date('r', time() + 864000));
 

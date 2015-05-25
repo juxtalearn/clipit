@@ -11,7 +11,7 @@
  * @package         ClipIt
  */
 $spanish = array(
-    'search:results_for' => 'Results for',
+    'search:results_for' => 'Resultados para',
     'search:not_found' => 'No se han encontrado resultados',
     'search:reset' => 'Restablecer busqueda',
     'explore:menu' => 'Publicaciones',

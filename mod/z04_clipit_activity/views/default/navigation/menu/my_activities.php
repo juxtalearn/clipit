@@ -16,9 +16,11 @@ $user_id = elgg_get_logged_in_user_guid();
     <?php echo elgg_view('output/url', array(
         'href'  => "#",
         'data-toggle' => 'dropdown',
-        'id' => 'activities',
+        'id' => 'my_activities',
         'title' => elgg_echo('my_activities'),
-        'text'  => '<i class="fa fa-caret-down pull-right" style="float: right !important;"></i>'.elgg_echo('my_activities')
+        'text'  => '<i class="fa fa-list-alt visible-xs visible-sm"></i>
+                    <i class="fa fa-caret-down pull-right hidden-xs hidden-sm" style="float: right !important;"></i>
+                    <span class="hidden-xs hidden-sm">'.elgg_echo('my_activities'). '</span>'
     ));
     ?>
     <!-- My activities dropdown menu -->

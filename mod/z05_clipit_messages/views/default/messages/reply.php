@@ -47,7 +47,7 @@ if($vars['second_reply']){
                 'class' => 'user-avatar avatar-small'
             ));?>
             <?php if(!$second_reply && isset($vars['discussion'])): ?>
-                <button id="<?php echo $reply_msg->id; ?>" class="reply-to btn btn-default btn-sm reply-button">Reply</button>
+                <button id="<?php echo $reply_msg->id; ?>" class="reply-to btn btn-default btn-sm reply-button"><?php echo elgg_echo('reply');?></button>
             <?php endif; ?>
         </div>
         <div class="block">

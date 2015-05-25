@@ -1,0 +1,256 @@
+//@import "../../z03_clipit_global/bootstrap/less/bootstrap";
+//@import "../../z03_clipit_global/bootstrap/less/clipit/variables_clipit";
+//@import "../../z03_clipit_global/bootstrap/less/clipit/mixins";
+//@import "../../z03_clipit_global/bootstrap/less/clipit/clipit_base";
+.events-list,
+.navbar-nav .separator{
+  .hidden-xs();
+}
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max){
+.navbar-brand img{
+    max-height: 25px;
+  height: auto !important;
+  width: 90%;
+  max-width: 150px;
+  position: relative;
+  }
+}
+@media (max-width:@screen-sm-min){
+  // Walled garden, user not logged in
+  .elgg-page-walledgarden #navbar-sticky{
+    display: none;
+  }
+
+  .pending-fixed{
+    position:relative !important;
+    width: 100% !important;
+    top: 0 !important;
+  }
+  .discussion-reply-msg {
+    padding: 10px;
+  }
+  .btn-primary{
+    margin-right: 20px;
+  }
+
+  .navbar-nav{
+    margin: 0px;
+    float:left;
+  }
+  .navbar-blue{
+    padding-top: 4px;
+  }
+
+  .navbar-brand img{
+    max-height: 25px;
+    height: auto !important;
+    width: 90%;
+    max-width: 150px;
+    position: relative;
+  }
+
+  .navbar-brand {
+    line-height: 25px;
+    height: auto;
+  }
+  div p.navbar-text{
+    margin:0px;
+  }
+
+
+
+ img.avatar-small {
+    width: 35px;
+    height: 35px;
+  }
+  .col-md-offset-3 {
+    float: left;
+  }
+  .navbar-nav >.nav>li{
+    display:inline-block;
+  }
+  .contact {
+    float: left;
+  }
+
+  #footer .col-sm-2 {
+    float: left;
+  }
+  .bg-blue-lighter_2{
+    padding: 0px;
+  }
+  .discussion-reply-msg>.user-reply{
+    display:none;
+  }
+  h3,h2
+  {
+    font-size:18px;
+  }
+  .activity-profile .elgg-head-layout h2
+  {
+    margin:0px;
+  }
+  .activity-layout{
+    .content h4{
+      font-size: 14px;
+    }
+    ol.breadcrumb li+li {
+      display: none;
+    }
+    .elgg-head-layout h4 {
+      display: none;
+    }
+  }
+  .elgg-sidebar{
+  display: none;
+  z-index: 1039;
+  position: fixed;
+  bottom: 0px;
+  background-color: #FFFFFF;
+  right:-999px;
+  float: right;
+  padding-bottom:30px;
+  top:-12px;
+  overflow-y: scroll;
+  padding-top: 10px;
+  width: 75%;
+  }
+  .messages-discussion .reply-button {
+    display:none;
+  }
+  .discussion .body-post{
+    padding: 5px;
+    margin-left: 0px;
+  }
+  .elgg-module-widget {
+    ul.wrapper-list.separator,
+    .wrapper.separator {
+      display: block !important;
+    }
+  }
+  .navbar-form {
+    visibility: hidden;
+    position: absolute;
+    z-index: -1;
+    right: 20px;
+    width: 140px;
+    margin: 0px !important;
+  }
+  #navbar-sticky{
+    min-height: 25px;
+  }
+  .navbar-toggle{
+    float:none;
+  }
+  .navbar-text.lang{
+    display:inline-block;
+    margin: 0px;
+  }
+  .fa-search{
+    font-size: 18px;
+  }
+  .navbar-brand,
+  .navbar-blue .container{
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 50%;
+
+  }
+  .navbar-blue .container {
+    text-align: right;
+    float: right !important;
+  }
+  .modal-backdrop{
+  opacity:0.6;
+  z-index:1029;
+  position:fixed;
+  top:0px;
+  bottom:0px;
+  left:0px;
+  right:0px;
+  }
+  // Sign out button
+  .fa-sign-out{
+    font-size: 20px;
+    margin-left: 20px;
+    color: @blue-lighter;
+    padding-top: 0px;
+    vertical-align: sub;
+  }
+
+  .navbar-default{
+    z-index: 1029;
+    &.navbar-blue{
+      box-shadow: none;
+      border-bottom: 0;
+    }
+    ul.top-account li{
+      padding-top: 5px;
+      display: inline-block;
+      &.active{
+       a {
+         background: none !important;
+         .fa {
+           color: @blue_clipit_primary !important;
+         }
+       }
+      }
+      a {
+        padding-bottom: 5px;
+        padding-top: 5px;
+        &:hover,
+        &:focus{
+          background: none !important;
+          .fa{
+            color: @blue_clipit_primary !important;
+          }
+        }
+        .fa {
+          font-size: 25px;
+          color: @blue-lighter;
+        }
+      }
+      &.user-profile {
+        padding-top: 0;
+        float: left;
+        margin-left: 0;
+        margin-right: 5px;
+        .avatar-user {
+          padding-bottom: 7px;
+          > img {
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+  .nav-stacked > li{
+    background: #ECF7FC !important;
+  }
+  .elgg-sidebar .nav>li>a {
+    font-size: 15px;
+  }
+  .elgg-sidebar .fa-times{
+  font-size: 18px;
+}
+  .form-control{
+    -webkit-appearance: none;
+  }
+  .elgg-message{
+    padding: 10px;
+    margin-top: 25% !important;
+  }
+  .btn-xs {
+    font-size: 14px;
+  }
+  .btn-primary{
+    margin-right: 0px;
+  }
+}
+@media(max-width: 335px){
+  ul.top-account li a .fa{
+    font-size: 20px;
+  }
+}

@@ -37,11 +37,13 @@ $activity_id = elgg_extract('activity_id', $vars);
                             <div class="rating readonly"><?php echo star_rating_view($performance_average);?></div>
                         </div>
                         <span class="blue"><?php echo $user->name;?></span>
+                        <?php if($group):?>
                         <div>
                             <span class="label label-primary " style="background: #32b4e5;color: #fff;vertical-align: middle;display: inline-block;">
                                 <?php echo $group->name;?>
                             </span>
                         </div>
+                        <?php endif;?>
                     </div>
                 </a>
             </div>

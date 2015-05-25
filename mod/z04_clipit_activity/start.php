@@ -367,16 +367,17 @@ function activity_page_handler($page) {
         $activity_menu_sidebar = elgg_view_module('aside', elgg_echo('activity'), $activity_menu);
     }
     // Group sidebar components (group block info + group tools)
-    if($hasGroup && ($activity_status == 'active' || $activity_status == 'closed')){
+    if($isCalled && ($activity_status == 'active' || $activity_status == 'closed')){
         $pending_tasks = elgg_view("page/components/pending_tasks", array('entity' => $activity));
         $pending_tasks_sidebar = elgg_view_module('aside', elgg_echo('activity:pending_tasks'), $pending_tasks, array('class' => 'aside-block'));
-        elgg_extend_view("page/elements/owner_block", "page/elements/group_block");
-        $group_menu_sidebar = elgg_view('group/sidebar/group_menu', array('entity' => $activity));
+        if($hasGroup) {
+            elgg_extend_view("page/elements/owner_block", "page/elements/group_block");
+            $group_menu_sidebar = elgg_view('group/sidebar/group_menu', array('entity' => $activity));
+        }
     }
     if($activity_status == 'enroll' && $hasGroup){
         elgg_extend_view("page/elements/owner_block", "page/elements/group_block");
     }
-//    ClipitActivity::set_properties($activity->id, array('group_mode' => ClipitActivity::GROUP_MODE_STUDENT));
     if(!$hasGroup && $isCalled && $activity->group_mode == ClipitActivity::GROUP_MODE_STUDENT && $activity_status != ClipitActivity::STATUS_CLOSED) {
         // Join to activity button
         elgg_extend_view("page/elements/owner_block", "page/components/button_join_group");

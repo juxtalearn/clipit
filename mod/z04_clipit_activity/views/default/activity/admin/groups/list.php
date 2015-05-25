@@ -10,6 +10,7 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
+$users = elgg_extract('users', $vars);
 $groups = elgg_extract('groups', $vars);
 $activity = elgg_extract('activity', $vars);
 ?>
@@ -35,7 +36,7 @@ $activity = elgg_extract('activity', $vars);
 }
 </style>
 <div id="groups" class="row">
-    <?php echo elgg_view('activity/admin/groups/summary', array('groups' => $groups));?>
+    <?php echo elgg_view('activity/admin/groups/summary', array('users' => $users, 'groups' => $groups));?>
     <div class="col-md-4 margin-bottom-10" style="position: relative;">
         <a href="#create-group">
         <div class="bg-center-icon" style="cursor: pointer;">

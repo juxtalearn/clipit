@@ -5,6 +5,8 @@
  */
 
 $spanish = array(
+    'locale' => 'es_ES',
+
     'read_more' => 'Leer más',
     'read_less' => 'Menos',
     'event:timeline' => 'Timeline',
@@ -126,6 +128,12 @@ $spanish = array(
     'position:gd' => 'Diseñadora Gráfica',
     'position:ra' => 'Consultor de Investigación',
     'position:ta' => 'Consultor Técnico',
+
+    // jQuery fileupload
+    'fileupload:maxnumber' => 'Se ha superado el número máximo de archivos',
+    'fileupload:acceptfiles' => 'Tipo de archivo no válido',
+    'fileupload:maxfile' => 'Archivo demasiado grande',
+    'fileupload:minfile' => 'Archivo muy pequeño',
 );
 
 add_translation('es', $spanish);

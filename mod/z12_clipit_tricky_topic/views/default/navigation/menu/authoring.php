@@ -17,7 +17,10 @@
         'data-toggle' => 'dropdown',
         'id' => 'authoring',
         'title' => elgg_echo('teacher:authoring_tools'),
-        'text'  => '<i class="fa fa-caret-down pull-right" style="float: right !important;"></i>'.elgg_echo('teacher:authoring_tools')
+        'text'  => '<i class="fa fa-caret-down pull-right hidden-xs hidden-sm" style="float: right !important;"></i>'.elgg_echo('teacher:authoring_tools'),
+        'text' => '<i class="fa fa-cogs visible-xs visible-sm"></i>
+                    <i class="fa fa-caret-down pull-right hidden-xs hidden-sm" style="float: right !important;"></i>
+                    <span class="hidden-xs hidden-sm">'.elgg_echo('teacher:authoring_tools'). '</span>'
     ));
     ?>
     <!-- Auhtoring menu -->

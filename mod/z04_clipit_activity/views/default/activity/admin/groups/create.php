@@ -12,8 +12,7 @@
  */
 $users = elgg_extract('users', $vars);
 $activity = elgg_extract('activity', $vars);
-$groups = ClipitGroup::get_by_id($activity->group_array);
-natural_sort_properties($groups, 'name');
+$groups = elgg_extract('groups', $vars);
 ?>
 <script>
 $(function(){
@@ -107,7 +106,7 @@ $(function(){
     <div class="col-md-6 text-right">
         <i class="fa fa-spinner fa-spin blue margin-right-10" id="move-loading" style="display: none;"></i>
         <select class="form-control" id="move-group" style="display: inline-block;width: auto;padding: 2px;">
-            <option value=""><?php echo elgg_echo('groups:select_move');?></option>
+            <option value=""><?php echo elgg_echo('groups:select:move');?></option>
             <?php foreach($groups as $group):?>
                 <option value="<?php echo $group->id;?>">
                     <?php echo $group->name;?>

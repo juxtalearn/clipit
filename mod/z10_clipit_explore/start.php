@@ -238,9 +238,6 @@ function explore_page_handler($page) {
     $tags = ClipitTag::get_all(10);
     $tag_cloud = elgg_view("tricky_topic/tags/tag_cloud", array('tags' => $tags));
     $sidebar .= elgg_view_module('aside', elgg_echo('explore:tags'), $tag_cloud, array('class' => 'module-tags'));
-    // Search
-    $search_box = elgg_view("search/sidebar/search_box");
-    $sidebar .= elgg_view_module('aside', elgg_echo('search'), $search_box, array('class' => 'module-search'));
     /**
      * Filter
      */
@@ -258,6 +255,7 @@ function explore_page_handler($page) {
             'class' => 'blue-lighter'
         )) . " " . $title;
     }
+
     $params = array(
         'content' => $content,
         'title' => $title,

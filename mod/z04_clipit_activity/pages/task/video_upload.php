@@ -76,7 +76,8 @@ if($user->role == ClipitUser::ROLE_TEACHER){
                 'entities' => $video,
                 'href' => $href_publications,
                 'task_id' => $task->id,
-                'unlink' => $unlink
+                'unlink' => $unlink,
+                'total_comments' => true,
             ));
         } else {
             $body = elgg_view('multimedia/video/list', array(
@@ -92,7 +93,7 @@ if($user->role == ClipitUser::ROLE_TEACHER){
                 'rating' => false,
                 'actions' => false,
                 'publish' => true,
-                'total_comments' => false,
+                'total_comments' => true,
             ));
         }
         // View other videos

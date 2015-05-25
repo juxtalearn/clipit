@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default navbar-static-top navbar-blue" role="navigation">
     <?php echo elgg_view('output/url', array(
         'href' => "/",
-        'class' => 'navbar-brand visible-xs col-xs-6',
+        'class' => 'navbar-brand visible-xs visible-sm col-xs-6',
         'title' => 'ClipIt'. elgg_echo("home"),
         'text'  =>
             elgg_view('output/img', array(
@@ -13,7 +13,7 @@
     <div class="container">
         <?php
         if (elgg_is_logged_in()): ?>
-        <div class="col-sm-3 col-md-3 pull-right">
+        <div class="col-md-3 pull-right">
             <?php echo elgg_view('search/search_box', array('class' => 'navbar-form navbar-right search-form')); ?>
         </div>
         <?php elseif(!$vars['walled_garden']): ?>
@@ -37,7 +37,7 @@
         );
         ?>
         <div class="navbar-text navbar-right lang" style="text-transform: uppercase;">
-            <div class="visible-xs text-right">
+            <div class="visible-xs visible-sm text-right">
                 <div class="dropdown inline-block margin-right-10">
                     <button class="btn btn-xs btn-primary margin-right-5" style="text-transform:uppercase;box-shadow: none;background-color: #1ba1d3;" id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <?php echo get_current_language();?>
@@ -64,9 +64,18 @@
                         ?>
                     </ul>
                 </div>
-                <i class="fa fa-search white"></i>
+                <?php if(elgg_is_logged_in()):?>
+                    <i class="fa fa-search white"></i>
+                    <?php echo elgg_view('output/url', array(
+                        'href'  => 'action/logout',
+                        'title' => elgg_echo('user:logout'),
+                        'class' => 'fa fa-sign-out',
+                        'text' => ''
+                    ));
+                    ?>
+                <?php endif;?>
             </div>
-            <div class="hidden-xs lang-horizontal">
+            <div class="hidden-xs hidden-sm lang-horizontal">
             <?php
 //            $installed_langs = get_installed_translations();
             $installed_langs = array(

@@ -275,6 +275,8 @@ $english = array(
     'labels' => 'Labels',
     'labels:none' => 'No labels added',
     'labels:added' => 'Labels added',
+    'labels:cantadd' => 'You can not add label/s',
+    'labels:cantadd:empty' => 'You can not add an empty label',
     // Tags
     'tag' => 'Stumbling Block',
     'tags' => 'Stumbling Blocks',
@@ -331,6 +333,7 @@ $english = array(
     'repository:group' => 'group repository',
     'task:create' => 'Create new task',
     'task:edit' => 'Edit task',
+    'task:group:needed' => 'You need to join in a group to do the task, please contact your teacher/s',
     /// Task status
     'task:locked' => 'Task locked',
     'task:active' => 'Task open',

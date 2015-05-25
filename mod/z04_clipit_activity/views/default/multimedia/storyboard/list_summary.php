@@ -17,6 +17,8 @@ $rating = elgg_extract("rating", $vars);
 $user_id = elgg_get_logged_in_user_guid();
 $user = array_pop(ClipitUser::get_by_id(array($user_id)));
 ?>
+<?php echo elgg_view("storyboards/search");?>
+<div class="clearfix"></div>
 <ul>
     <?php
     foreach($storyboard_ids as $storyboard_id):

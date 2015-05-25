@@ -18,6 +18,7 @@ function files_get_page_content_list($params = array()){
         $files = array_uintersect($items_search, $files, "strcasecmp");
     }
     elgg_extend_view("files/search", "search/search");
+    $params['files'] = $files;
 
     $content = elgg_view('multimedia/file/list', $params);
     if (!$files) {
@@ -34,6 +35,7 @@ function videos_get_page_content_list($params = array()){
         $videos = array_uintersect($items_search, $videos, "strcasecmp");
     }
     elgg_extend_view("videos/search", "search/search");
+    $params['entities'] = $videos;
 
     $content = elgg_view('multimedia/video/list', $params);
     if (!$videos) {
@@ -49,6 +51,7 @@ function resources_get_page_content_list($params = array()){
         $resources = array_uintersect($items_search, $resources, "strcasecmp");
     }
     elgg_extend_view("resources/search", "search/search");
+    $params['entities'] = $resources;
 
     $content = elgg_view('multimedia/resource/list', $params);
     if (!$resources) {
@@ -64,6 +67,7 @@ function storyboards_get_page_content_list($params = array()){
         $sbs = array_uintersect($items_search, $sbs, "strcasecmp");
     }
     elgg_extend_view("storyboards/search", "search/search");
+    $params['entities'] = $sbs;
 
     $content = elgg_view('multimedia/storyboard/list', $params);
     if (!$sbs) {

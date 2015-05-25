@@ -428,6 +428,7 @@ clipit.replyTo = function(){
             var offset = parseInt($(form_id).offset().top) - 50;
             $('html,body').animate({
                 scrollTop: offset}, 'slow');
+            tinyMCE.activeEditor.focus();
         }
     });
 };
@@ -567,6 +568,14 @@ clipit.shorten = function(element, height){
 };
 
 $(function(){
+    // jQuery fileupload widget
+    $.blueimp.fileupload.prototype.options.messages = {
+        maxNumberOfFiles: elgg.echo('fileupload:maxnumber'),
+        acceptFileTypes: elgg.echo('fileupload:acceptfiles'),
+        maxFileSize: elgg.echo('fileupload:maxfile'),
+        minFileSize: elgg.echo('fileupload:minfile')
+    };
+
     /**
      * Collapse function
      */

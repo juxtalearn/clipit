@@ -21,7 +21,7 @@ if($filter = get_input("filter")){
     <?php echo elgg_view('input/dropdown', array(
         'name' => 'task_id',
         'id' => 'task_id',
-        'class' => 'form-control margin-bottom-20',
+        'class' => 'form-control margin-bottom-20 pull-left',
         'style' => 'height: auto;width: auto;padding: 0;font-weight: bold;',
         'value' => get_input('task_id'),
         'onchange' => "location.href='?task_id='+this.value".$filter,

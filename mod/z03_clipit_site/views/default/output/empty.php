@@ -10,5 +10,16 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
+if($vars['type']):
+    switch($vars['type']){
+        case 'error':
+            $class = 'bg-danger';
+            break;
+    }
+    echo '<div class="'.$class.'">
+        '.$vars['value'].'
+        </div>';
+else:
 ?>
 <h4 class="empty"><?php echo $vars['value'];?></h4>
+<?php endif;?>

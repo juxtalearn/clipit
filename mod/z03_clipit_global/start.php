@@ -135,9 +135,6 @@ function clipit_global_init(){
         elgg_register_js("nvd3:d3_v2", "{$plugin_url}/vendors/nvd3/d3.v2.js");
         elgg_register_js("nvd3", "{$plugin_url}/vendors/nvd3/nv.d3.js");
         elgg_register_css("nvd3:css", "{$plugin_url}/vendors/nvd3/nv.d3.css");
-        // ClipIt
-        // FontAwesome
-        elgg_register_css("fontawesome", "{$plugin_url}/vendors/fontawesome/fontawesome.min.css");
         // jQuery cycle2
         elgg_register_js("jquery:cycle2", "{$plugin_url}/vendors/jquery.cycle2.js");
         // jQuery appear

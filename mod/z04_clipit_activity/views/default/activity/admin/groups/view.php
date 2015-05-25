@@ -12,7 +12,7 @@
  */
 $activity = elgg_extract('entity', $vars);
 $users = ClipitUser::get_by_id($activity->student_array, 0, 0, 'name');
-$groups = ClipitGroup::get_by_id($activity->group_array , 0, 0, 'name');
+$groups = ClipitGroup::get_by_id($activity->group_array, 0, 0, 'name');
 natural_sort_properties($groups, 'name');
 
 elgg_load_js("jquery:multiselect");
@@ -333,7 +333,7 @@ function get_default_group_name(){
 <?php echo elgg_view_form('activity/admin/groups_create',
     array(
         'body' => elgg_view('activity/admin/groups/create',
-            array('users' => $users, 'activity' => $activity)
+            array('users' => $users, 'groups' => $groups, 'activity' => $activity)
         ))
 );
 ?>
@@ -343,7 +343,7 @@ function get_default_group_name(){
     array(
         'class' => 'groups-form',
         'body' => elgg_view('activity/admin/groups/list',
-            array('groups' => $groups, 'activity' => $activity)
+            array('users' => $users, 'groups' => $groups, 'activity' => $activity)
         ))
     );
 ?>

@@ -22,7 +22,6 @@ $duplicate = true;
 $dropdown = true;
 $edit = true;
 $remove = true;
-
 switch($object['subtype']){
     case 'ClipitTrickyTopic':
         if($user->id == elgg_get_logged_in_user_guid()){
@@ -34,6 +33,12 @@ switch($object['subtype']){
             if($is_linked){
                 $locked = true;
                 $href['remove'] = false;
+            }
+            if(!in_array($entity->id, ClipitSite::get_pub_tricky_topics())) {
+                $href['publish'] = elgg_add_action_tokens_to_url(elgg_normalize_url('action/publications/publish/?id=' . $entity->id), true);
+            } else {
+                $href['publish'] = true;
+                $locked = true;
             }
         }
         $href['duplicate'] = 'tricky_topics/create/'.$entity->id;
@@ -115,6 +120,14 @@ if($owner_options){
             'attr' => array('href' => elgg_normalize_url($href['edit'])),
             'text' => elgg_echo('edit'),
             'icon' => $edit_icon,
+        );
+    }
+    if($href['publish']) {
+        $options_list[] = array(
+            'attr' => array('href' => $href['publish'] === true ? false : $href['publish']),
+            'text' => elgg_echo('send:to_site'),
+            'icon' => 'globe',
+            'item_class' => $item_class
         );
     }
     if($remove) {

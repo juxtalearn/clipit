@@ -14,7 +14,7 @@ $user_id = elgg_get_logged_in_user_guid();
 $user = array_pop(ClipitUser::get_by_id(array($user_id)));
 ?>
 <li class="separator">|</li>
-<li class="margin-left-10 margin-right-10">
+<li class="margin-left-10 margin-right-10 user-profile">
     <?php echo elgg_view('output/url', array(
         'title' => $user->name,
         'href'  => "profile/{$user->login}",
@@ -24,13 +24,13 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
                 'alt' => $user->name,
                 'title' => elgg_echo('profile'),
                 'class' => 'elgg-border-plain elgg-transition avatar-small',
-            ))."  ". $user->name
+            ))."<span class='hidden-xs hidden-sm'> ".$user->name."</span>"
     ));
     ?>
     <?php echo elgg_view('output/url', array(
         'href'  => "#",
         'data-toggle' => 'dropdown',
-        'class' => 'caret-down',
+        'class' => 'caret-down hidden-xs hidden-sm',
         'id' => 'settings',
         'text'  => '<i class="fa fa-caret-down"></i>'
     ));
@@ -42,6 +42,15 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
                 'href'  => "settings/user",
                 'title' => elgg_echo('profile:settings:edit_profile'),
                 'text'  => '<i class="fa fa-cog"></i> '.elgg_echo('profile:settings:edit_profile'),
+            ));
+            ?>
+        </li>
+        <li role="presentation" class="divider"></li>
+        <li role="presentation">
+            <?php echo elgg_view('output/url', array(
+                'href'  => "settings/avatar",
+                'title' => elgg_echo('avatar:edit'),
+                'text'  => '<i class="fa fa-picture-o"></i> '.elgg_echo('avatar:edit'),
             ));
             ?>
         </li>
@@ -62,6 +71,7 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
 <li>
     <?php echo elgg_view('output/url', array(
         'href'  => "action/logout",
+        'class' => 'hidden-xs hidden-sm',
         'title' => elgg_echo('user:logout'),
         'text'  => '<i style="color: #ff4343;" class="fa fa-sign-out"></i>'
     ));

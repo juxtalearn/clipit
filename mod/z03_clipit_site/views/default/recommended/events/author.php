@@ -19,7 +19,7 @@ switch($object['subtype']){
         $hasGroup = ClipitGroup::get_from_user_activity(elgg_get_logged_in_user_guid(), $activity->id);
         if($hasGroup == $author_id){
             echo elgg_view('output/url', array(
-                'href'  => "clipit_activity/".$activity->id."/group",
+                'href'  => "clipit_activity/".$activity->id."/group/".$hasGroup,
                 'title' => $object['name'],
                 'class' => 'show text-truncate',
                 'text'  => $object['name'],

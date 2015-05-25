@@ -26,6 +26,7 @@ $futuralt = 'futuralt';
 $futurabook = 'FuturaLT-Book';
 $futuralight = 'FuturaLT-Light';
 ?>
+    /* FontAwesome library load */
     @font-face {
     font-family: 'Futura';
     src: url('<?php echo $plugin_url.'/bootstrap/fonts/'.$futuralt;?>.eot');

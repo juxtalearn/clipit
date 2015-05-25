@@ -5,6 +5,8 @@
  */
 
 $english = array(
+    'locale' => 'en_GB',
+
     'read_more' => 'Read more',
     'read_less' => 'Less',
     'event:timeline' => 'Event timeline',
@@ -126,6 +128,12 @@ $english = array(
     'position:gd' => 'Graphic Designer',
     'position:ra' => 'Research Advisor',
     'position:ta' => 'Technical Advisor',
+
+    // jQuery fileupload
+    'fileupload:maxnumber' => 'Maximum number of files exceeded',
+    'fileupload:acceptfiles' => 'File type not allowed',
+    'fileupload:maxfile' => 'File is too large',
+    'fileupload:minfile' => 'File is too small',
 );
 
 add_translation('en', $english);

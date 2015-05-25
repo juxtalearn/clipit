@@ -5,6 +5,8 @@
  */
 
 $swedish = array(
+    'locale' => 'sv_SE',
+
     'read_more' => 'Läs mer',
     'read_less' => 'Mindre',
     'event:timeline' => 'Tidslinje för händelse',

@@ -31,7 +31,10 @@ if(empty($users) || trim($group_name) == ""){
     //system_message(elgg_echo('group:created'));
 
     $result["status"] = true;
-    $html = elgg_view("activity/admin/groups/summary", array('groups' => ClipitGroup::get_by_id(array($group_id))));
+    $html = elgg_view("activity/admin/groups/summary", array(
+        'groups' => ClipitGroup::get_by_id(array($group_id)),
+        'users' => ClipitUser::get_by_id($users, 0, 0, 'name')
+    ));
     $result["text"] = $html;
     echo json_encode($result);
     die();

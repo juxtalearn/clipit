@@ -58,6 +58,7 @@ if($unlink){
         </button>
     </div>
 <?php endif; ?>
+<div class="clearfix"></div>
 <ul class="video-list">
     <?php
     foreach($videos as $video):
@@ -162,7 +163,7 @@ if($unlink){
                 <small class="show">
                     <?php
                     if($vars['total_comments']):
-                        $total_comments = array_pop(ClipitComment::count_by_destination(array($video->id), true));
+                        $total_comments = array_pop(ClipitComment::count_by_destination(array($video->id), false));
                     ?>
                         <!-- Count total comments -->
                         <strong>

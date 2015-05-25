@@ -7,6 +7,5 @@
  */
 
 $friendly_time = get_friendly_time($vars['time']);
-$timestamp = htmlspecialchars(date(elgg_echo('friendlytime:date_format'), $vars['time']));
-
+$timestamp = (ucwords(strftime("%d %B %Y @ %H:%M", $vars['time'])));
 echo "<abbr title=\"{$timestamp}\">{$friendly_time}</abbr>";

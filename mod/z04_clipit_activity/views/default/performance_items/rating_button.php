@@ -21,6 +21,7 @@ echo elgg_view("page/components/modal_remote", array('id'=> "rating-average-{$ra
 echo elgg_view('output/url', array(
     'href'  => "ajax/view/modal/publications/rating?id={$rating->id}&group_id={$group_id}",
     'class' => 'btn btn-default btn-xs pull-right btn-border-yellow hidden-xs',
+    'title' => elgg_echo("publications:rating"),
     'text'  => '<i class="fa fa-star"></i> '.elgg_echo("publications:rating"),
     'data-toggle'   => 'modal',
     'data-target'   => '#rating-average-'.$rating->id

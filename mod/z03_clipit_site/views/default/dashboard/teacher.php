@@ -16,7 +16,7 @@ elgg_load_js("nvd3:d3_v2");
 elgg_load_js("nvd3");
 elgg_load_css("nvd3:css");
 ?>
-<div class="col-md-4 events-list" style="padding-right: 15px;">
+<div class="col-md-4 events-list hidden-xs hidden-sm" style="padding-right: 15px;">
     <?php echo elgg_view('dashboard/module', array(
         'name'      => 'events',
         'title'     => elgg_echo('event:timeline'),
@@ -31,7 +31,7 @@ elgg_load_css("nvd3:css");
 
 <div class="col-md-8">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <?php
             $content = elgg_view('page/components/not_found', array('height' => '245px', 'text' => elgg_echo('activities:active:none')));
             if(!empty($activities)){
@@ -47,7 +47,7 @@ elgg_load_css("nvd3:css");
             ));
             ?>
         </div>
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <?php
             if(!empty($activities)){
                 echo elgg_view('dashboard/module', array(

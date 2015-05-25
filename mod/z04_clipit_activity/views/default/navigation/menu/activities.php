@@ -18,7 +18,9 @@ $user_id = elgg_get_logged_in_user_guid();
         'data-toggle' => 'dropdown',
         'id' => 'activities',
         'title' => elgg_echo('activities'),
-        'text'  => '<i class="fa fa-caret-down pull-right" style="float: right !important;"></i>'.elgg_echo('activities')
+        'text'  => '<i class="fa fa-list-alt visible-xs visible-sm"></i>
+                    <i class="fa fa-caret-down pull-right hidden-xs hidden-sm" style="float: right !important;"></i>
+                    <span class="hidden-xs hidden-sm">'.elgg_echo('activities'). '</span>'
     ));
     ?>
     <!-- My activities dropdown menu -->
@@ -26,7 +28,7 @@ $user_id = elgg_get_logged_in_user_guid();
         <?php
         $activities_found = false;
         if($my_activities = ClipitUser::get_activities($user_id)):
-        ?>
+            ?>
             <li>
                 <a style="border-bottom: 1px solid #EFEFEF;">
                     <small class="show">

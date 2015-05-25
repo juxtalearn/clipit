@@ -5,6 +5,8 @@
  */
 
 $german = array(
+    'locale' => 'de_DE',
+
     // ERROR
     'error:404' => "Die Datei konnte leider nicht gefunden werden",
     'view_all' => 'Alles anzeigen',

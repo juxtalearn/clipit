@@ -76,91 +76,93 @@ $(function(){
     });
 });
 </script>
-<table class="table table-striped margin-top-10">
-    <thead>
-    <tr>
-        <?php if($select):?>
-            <th style="width: 50px;"></th>
-        <?php endif;?>
-        <th><?php echo elgg_echo('title');?></th>
-        <th><?php echo elgg_echo('tricky_topic');?></th>
-        <th><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
-        <th class="text-right"><?php echo elgg_echo('quiz:questions');?></th>
-        <?php if($options):?>
-            <th style="width: 100px;"></th>
-        <?php endif;?>
-    </tr>
-    </thead>
-    <?php
-    foreach($quizzes as $quiz):
-        if($quiz->cloned_from != 0) {
-            continue;
-        }
-        $user = array_pop(ClipitUser::get_by_id(array($quiz->owner_id)));
-        $questions = ClipitQuiz::get_quiz_questions($quiz->id);
-        $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($quiz->tricky_topic)));
-    ?>
-        <tr id="<?php echo $quiz->id;?>">
-        <?php if($select):?>
-            <td>
-                <a class="btn btn-xs btn-primary btn-border-blue quiz-select">
-                    <?php echo elgg_echo('select');?>
-                </a>
-            </td>
-        <?php endif;?>
-            <td>
-                <strong>
-                    <?php echo elgg_view('output/url', array(
-                        'href'  => "quizzes/view/{$quiz->id}",
-                        'title' => $quiz->name,
-                        'text'  => $quiz->name,
-                    ));
-                    ?>
-                </strong>
-            </td>
-            <td>
-                <?php if($tricky_topic):?>
-                <?php echo elgg_view('output/url', array(
-                    'href'  => "tricky_topics/view/{$tricky_topic->id}",
-                    'title' => $tricky_topic->name,
-                    'text'  => $tricky_topic->name,
-                ));
-                ?>
-                <?php endif;?>
-            </td>
-            <td>
-                <small>
-                    <div>
-                        <i class="fa-user fa blue"></i>
+<div class="table-responsive">
+    <table class="table table-striped margin-top-10">
+        <thead>
+        <tr>
+            <?php if($select):?>
+                <th style="width: 50px;"></th>
+            <?php endif;?>
+            <th><?php echo elgg_echo('title');?></th>
+            <th><?php echo elgg_echo('tricky_topic');?></th>
+            <th><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
+            <th class="text-right"><?php echo elgg_echo('quiz:questions');?></th>
+            <?php if($options):?>
+                <th style="width: 100px;"></th>
+            <?php endif;?>
+        </tr>
+        </thead>
+        <?php
+        foreach($quizzes as $quiz):
+            if($quiz->cloned_from != 0) {
+                continue;
+            }
+            $user = array_pop(ClipitUser::get_by_id(array($quiz->owner_id)));
+            $questions = ClipitQuiz::get_quiz_questions($quiz->id);
+            $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($quiz->tricky_topic)));
+        ?>
+            <tr id="<?php echo $quiz->id;?>">
+            <?php if($select):?>
+                <td>
+                    <a class="btn btn-xs btn-primary btn-border-blue quiz-select">
+                        <?php echo elgg_echo('select');?>
+                    </a>
+                </td>
+            <?php endif;?>
+                <td>
+                    <strong>
                         <?php echo elgg_view('output/url', array(
-                            'href'  => "profile/{$user->login}",
-                            'title' => $user->name,
-                            'text'  => $user->name,
+                            'href'  => "quizzes/view/{$quiz->id}",
+                            'title' => $quiz->name,
+                            'text'  => $quiz->name,
                         ));
                         ?>
-                    </div>
-                    <?php echo elgg_view('output/friendlytime', array('time' => $quiz->time_created));?>
-                </small>
-            </td>
-            <td class="text-right">
-                <?php echo elgg_view('output/url', array(
-                    'href'  => 'javascript:;',
-                    'class' => 'show-questions btn btn-xs btn-border-blue',
-                    'id' => $quiz->id,
-                    'text'  => '<strong>'.count($questions).'</strong>x<i class="margin-left-5 fa fa-list"></i>',
-                ));
-                ?>
-            </td>
-            <?php if($options):?>
+                    </strong>
+                </td>
                 <td>
-                    <?php echo elgg_view('page/components/admin_options', array(
-                        'entity' => $quiz,
-                        'user' => $user,
+                    <?php if($tricky_topic):?>
+                    <?php echo elgg_view('output/url', array(
+                        'href'  => "tricky_topics/view/{$tricky_topic->id}",
+                        'title' => $tricky_topic->name,
+                        'text'  => $tricky_topic->name,
+                    ));
+                    ?>
+                    <?php endif;?>
+                </td>
+                <td>
+                    <small>
+                        <div>
+                            <i class="fa-user fa blue"></i>
+                            <?php echo elgg_view('output/url', array(
+                                'href'  => "profile/{$user->login}",
+                                'title' => $user->name,
+                                'text'  => $user->name,
+                            ));
+                            ?>
+                        </div>
+                        <?php echo elgg_view('output/friendlytime', array('time' => $quiz->time_created));?>
+                    </small>
+                </td>
+                <td class="text-right">
+                    <?php echo elgg_view('output/url', array(
+                        'href'  => 'javascript:;',
+                        'class' => 'show-questions btn btn-xs btn-border-blue',
+                        'id' => $quiz->id,
+                        'text'  => '<strong>'.count($questions).'</strong>x<i class="margin-left-5 fa fa-list"></i>',
                     ));
                     ?>
                 </td>
-            <?php endif;?>
-        </tr>
-    <?php endforeach;?>
-</table>
+                <?php if($options):?>
+                    <td>
+                        <?php echo elgg_view('page/components/admin_options', array(
+                            'entity' => $quiz,
+                            'user' => $user,
+                        ));
+                        ?>
+                    </td>
+                <?php endif;?>
+            </tr>
+        <?php endforeach;?>
+    </table>
+</div>
 <?php echo clipit_get_pagination(array('count' => $count, 'limit' => 10)); ?>

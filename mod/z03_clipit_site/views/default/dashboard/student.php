@@ -15,7 +15,7 @@ elgg_load_js("nvd3:d3_v2");
 elgg_load_js("nvd3");
 elgg_load_css("nvd3:css");
 ?>
-<div class="col-md-4 events-list">
+<div class="col-md-4 events-list hidden-xs hidden-sm">
     <?php echo elgg_view('dashboard/module', array(
         'name'      => 'events',
         'title'     => elgg_echo('event:timeline'),

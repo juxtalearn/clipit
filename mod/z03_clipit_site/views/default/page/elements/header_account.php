@@ -7,7 +7,7 @@ $context = elgg_get_context();
         <div class="navbar-header">
             <?php echo elgg_view('output/url', array(
                 'href' => "/",
-                'class' => 'navbar-brand hidden-xs',
+                'class' => 'navbar-brand hidden-xs hidden-sm',
                 'title' => 'ClipIt'. elgg_echo("home"),
                 'text'  =>
                     elgg_view('output/img', array(
@@ -18,16 +18,16 @@ $context = elgg_get_context();
         </div>
         <?php if (elgg_is_logged_in()) { ?>
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-navbar-collapse">
-            <?php echo elgg_view_menu('top_account', array('sort_by' => 'priority', 'class' => 'nav navbar-nav navbar-right top-account')); ?>
-            <div class="col-xs-3 text-right">
-                <button type="button" class="navbar-toggle margin-0 margin-top-5 margin-bottom-5" data-toggle="collapse" data-target="#bs-navbar-collapse">
+        <div class="navbar-collapse">
+            <div class="pull-right">
+                <button type="button" class="navbar-toggle margin-0 margin-top-5 margin-bottom-5">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
             </div>
+            <?php echo elgg_view_menu('top_account', array('sort_by' => 'priority', 'class' => 'nav navbar-nav navbar-right top-account')); ?>
             <?php echo elgg_view_menu('top_menu', array('sort_by' => 'priority', 'class' => 'top-menu')); ?>
             <!--
             <ul class="nav navbar-nav navbar-right" style="margin-right: 0px;">

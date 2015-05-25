@@ -18,12 +18,16 @@ if($object && !empty($labels)){
     echo $object['subtype'];
     $total_labels = array();
     foreach($labels as $label){
-        if($label_exist = array_pop(ClipitLabel::get_from_search($label, true, true))){
-            $total_labels[] = $label_exist->id;
+        if(trim($label) != '') {
+            if ($label_exist = array_pop(ClipitLabel::get_from_search($label, true, true))) {
+                $total_labels[] = $label_exist->id;
+            } else {
+                $total_labels[] = ClipitLabel::create(array(
+                    'name' => $label,
+                ));
+            }
         } else {
-            $total_labels[] = ClipitLabel::create(array(
-                'name'    => $label,
-            ));
+            register_error(elgg_echo("labels:cantadd:empty"));
         }
     }
     $entity_class = $object['subtype'];
