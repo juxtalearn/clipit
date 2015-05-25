@@ -362,7 +362,12 @@ class UBItem {
             return true;
         }
         foreach($id_array as $id) {
-            if(delete_entity($id) === false) {
+            // Don't allow to delete the Site ID
+            $site = elgg_get_site_entity();
+            if($id == $site->guid){
+                continue;
+            }
+            if(delete_entity((int)$id) === false) {
                 return false;
             }
         }

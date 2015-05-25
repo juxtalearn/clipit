@@ -42,6 +42,10 @@ class ClipitUser extends UBUser {
      * @return bool|int Returns id of saved instance, or false if error.
      */
     protected function save() {
+        // If no role set, use "student" as default
+        if(array_search($this->role, array(static::ROLE_STUDENT, static::ROLE_TEACHER, static::ROLE_ADMIN)) === false){
+            $this->role = static::ROLE_STUDENT;
+        }
         $id = parent::save();
         switch(strtolower($this->role)) {
             case static::ROLE_STUDENT:
