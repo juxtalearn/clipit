@@ -122,7 +122,7 @@ class UBMessage extends UBItem {
                 if (!empty($limit)) {
                     $message_array[$destination_id] = array_slice($message_array[$destination_id], $offset, $limit, true);
                 } else {
-                    $message_array[$destination_id] = array_slice($message_array[$destination_id], $offset, true);
+                    $message_array[$destination_id] = array_slice($message_array[$destination_id], $offset, null, true);
                 }
             }
         }
