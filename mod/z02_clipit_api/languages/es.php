@@ -13,5 +13,4 @@ $spanish = array(
     // LA metrics names
     "metric:1" => "Métrica de Prueba",
 );
-
 add_translation('es', $spanish);
