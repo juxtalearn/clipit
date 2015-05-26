@@ -7,7 +7,7 @@
  */
 
 $spanish = array(
-	'logrotate:period' => '¿Con qué frecuencia desea archivar los registros?',
+	'logrotate:period' => 'Â¿Con quÃ© frecuencia desea archivar los registros?',
 
 	'logrotate:weekly' => 'Semanal',
 	'logrotate:monthly' => 'Mensual',
@@ -16,11 +16,11 @@ $spanish = array(
 	'logrotate:logrotated' => "Registro archivado\n",
 	'logrotate:lognotrotated' => "Error al archivar los registros\n",
 	
-	'logrotate:delete' => 'Borrar los registros archivados hace más de',
+	'logrotate:delete' => 'Borrar los registros archivados hace mÃ¡s de',
 
 	'logrotate:week' => 'una semana',
 	'logrotate:month' => 'un mes',
-	'logrotate:year' => 'un año',
+	'logrotate:year' => 'un aÃ±o',
 		
 	'logrotate:logdeleted' => "Registro borrado\n",
 	'logrotate:lognotdeleted' => "Error al borrar los registros\n",
