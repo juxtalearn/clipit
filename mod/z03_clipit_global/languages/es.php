@@ -136,7 +136,6 @@ $spanish = array(
     'sites' => 'Sitios',
     'videos' => 'Explorar',
     'connect' => 'Conéctate',
-    'sites' => 'Sitios',
     'try_out' => 'Demo',
     'latest:videos' => 'Últimos vídeos',
     'published:on' => 'Publicado el',
