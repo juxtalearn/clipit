@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin_manifest xmlns="http://www.elgg.org/plugin_manifest/1.8">
-    <name>ClipIt Data Export</name>
+    <name>ClipIt Administration</name>
     <author>Pablo Llinás Arnaiz</author>
     <version>1.0</version>
     <description>This plugin provides Export functionality for ClipIt Data</description>
@@ -13,6 +13,6 @@
     </requires>
     <category>back-end</category>
     <category>plugin</category>
-    <blurb>ClipIt Data Export Plugin</blurb>
+    <blurb>ClipIt administration plugin</blurb>
     <activate_on_install>false</activate_on_install>
 </plugin_manifest>

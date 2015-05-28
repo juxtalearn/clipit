@@ -23,7 +23,7 @@ echo "<h3>General Options</h3><br>";
 echo "<div style='margin-left:20px;text-indent:-10px'>";
 
 echo "<p><strong>Site time zone (see <a href='http://www.php.net/manual/en/timezones.php' target='_blank'>PHP Time Zones</a>)</strong><br>";
-echo "<input name='timezone' value=$timezone type='text' size='60'>";
+echo "<input name='timezone' value=$timezone type='text' size='60'/>";
 echo "</p>";
 
 echo "<p><strong>Site type</strong><br>";
@@ -47,9 +47,9 @@ switch($clipit_site_type){
 echo "</p>";
 
 echo "<p><strong>Global site setup</strong><br>";
-echo "URL:<br><input name='clipit_global_url' value=$clipit_global_url type='text' size='60'><br>";
-echo "Login:<br><input name='clipit_global_login' value=$clipit_global_login type='text' size='60'><br>";
-echo "Password:<br><input name='clipit_global_password' value=$clipit_global_password type='text' size='60'>";
+echo "URL:<br><input name='clipit_global_url' value=$clipit_global_url type='text' size='60'/><br>";
+echo "Login:<br><input name='clipit_global_login' value=$clipit_global_login type='text' size='60'/><br>";
+echo "Password:<br><input name='clipit_global_password' value=$clipit_global_password type='text' size='60'/>";
 echo "</p>";
 
 echo "<p><strong>Republish this site to global site?</strong><br>";
@@ -108,10 +108,8 @@ if($quiz_results_after_task_end){
     echo "<input name='quiz_results_after_task_end' value='0' type='radio' checked> no";
 }
 echo "</p>";
-
 echo "</div>";
 
 echo "<input name='submit_options' type='submit' value='Save'>";
 
 echo "</form>";
-
