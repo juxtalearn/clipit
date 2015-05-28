@@ -31,7 +31,7 @@ class UBItem {
     /**
      * @var int Unique Id of this instance
      */
-    public $id = null;
+    public $id = 0;
     /**
      * @var string Name of this instance
      */
@@ -751,119 +751,4 @@ class UBItem {
         }
         return ((int)$i1 > (int)$i2) ? - 1 : 1;
     }
-
-    static function export_data($id_array = null, $format = "excel") {
-        // New Excel object
-        $php_excel = new PHPExcel();
-        // Set document properties
-        $php_excel->getProperties()->setCreator("ClipIt")
-                  ->setTitle("ClipIt export of " . get_called_class())
-                  ->setKeywords("clipit export");
-        // Add table title and columns
-        $active_sheet = $php_excel->setActiveSheetIndex(0);
-        $active_sheet->getDefaultColumnDimension()->setWidth(40);
-        $active_sheet->getStyle(1)->getFont()->setBold(true);
-        $row = 1;
-        $col = 0;
-        $properties = static::list_properties();
-        foreach(array_keys($properties) as $prop_name) {
-            $active_sheet->setCellValueByColumnAndRow($col ++, $row, $prop_name);
-        }
-        // Load Items
-        if(!empty($id_array)) {
-            $item_array = static::get_by_id($id_array);
-        } else {
-            $item_array = static::get_all();
-        }
-        // Write Items to spreadsheet
-        $row = 2;
-        $col = 0;
-        foreach($item_array as $item) {
-            foreach(array_keys($properties) as $prop_name){
-                $active_sheet->setCellValueByColumnAndRow($col++, $row, $item->$prop_name);
-            }
-            $row++;
-            $col = 0;
-        }
-        switch($format) {
-            case "excel":
-                $objWriter = PHPExcel_IOFactory::createWriter($php_excel, 'Excel2007');
-                $objWriter->save("/tmp/export_".get_called_class().".xlsx");
-        }
-        return true;
-    }
-
-//    /**
-//     * Add Users from an Excel file, and return an array of User Ids from those created or selected from the file.
-//     *
-//     * @param string $file_path Local file path
-//     *
-//     * @return array|null Array of User IDs, or null if error.
-//     */
-//    static function import_data($file_path) {
-//        $php_excel = PHPExcel_IOFactory::load($file_path);
-//        $user_array = array();
-//        $row_iterator = $php_excel->getSheet()->getRowIterator();
-//        while($row_iterator->valid()) {
-//            $row_result = static::parse_excel_row($row_iterator->current());
-//            if(!empty($row_result)) {
-//                $user_array[] = (int)$row_result;
-//            }
-//            $row_iterator->next();
-//        }
-//        return $user_array;
-//    }
-//
-//    /**
-//     * Parse a single role from an Excel file, containing one user, and add it to ClipIt if new
-//     *
-//     * @param PHPExcel_Worksheet_Row $row_iterator
-//     *
-//     * @return int|false ID of User contained in row, or false in case of error.
-//     */
-//    private function parse_excel_row($row_iterator) {
-//        $prop_value_array = array();
-//        $cell_iterator = $row_iterator->getCellIterator();
-//        // Check for non-user row
-//        $value = $cell_iterator->current()->getValue();
-//        if(empty($value) || strtolower($value) == "users" || strtolower($value) == "name") {
-//            return null;
-//        }
-//        // name
-//        $name = $value;
-//        $prop_value_array["name"] = (string)$name;
-//        $cell_iterator->next();
-//        // login
-//        $login = (string)$cell_iterator->current()->getValue();
-//        if(!empty($login)) {
-//            $user_array = static::get_by_login(array($login));
-//            if(!empty($user_array[$login])) { // user already exists, no need to create it
-//                return (int)$user_array[$login]->id;
-//            }
-//            $prop_value_array["login"] = $login;
-//        } else {
-//            return null;
-//        }
-//        $cell_iterator->next();
-//        // password
-//        $password = (string)$cell_iterator->current()->getValue();
-//        if(!empty($password)) {
-//            $prop_value_array["password"] = $password;
-//        } else {
-//            return null;
-//        }
-//        $cell_iterator->next();
-//        // email
-//        $email = (string)$cell_iterator->current()->getValue();
-//        if(!empty($email)) {
-//            $prop_value_array["email"] = $email;
-//        }
-//        $cell_iterator->next();
-//        // role
-//        $role = (string)$cell_iterator->current()->getValue();
-//        if(!empty($role)) {
-//            $prop_value_array["role"] = $role;
-//        }
-//        return static::create($prop_value_array);
-//    }
 }
