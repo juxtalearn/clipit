@@ -24,18 +24,18 @@ echo "</p>";
 echo "</div>";
 echo "</form>";
 
-// IMPORT
+// @todo IMPORT
 
-echo "<form action='".elgg_get_site_url()."action/import_export/import' method='post'>";
-
-echo elgg_view('input/securitytoken');
-
-echo "<div style='margin-left:20px;text-indent:-10px'>";
-
-echo "<p><strong>Import object data from file:</strong><br>";
-echo "<input name='import_path' value='/tmp/clipit_export/backup.xlsx' type='text' size='50'> ";
-echo "<input name='import_options' type='submit' value='Import from file'>";
-echo "</p>";
-echo "</div>";
-echo "</form>";
+//echo "<form action='".elgg_get_site_url()."action/import_export/import' method='post'>";
+//
+//echo elgg_view('input/securitytoken');
+//
+//echo "<div style='margin-left:20px;text-indent:-10px'>";
+//
+//echo "<p><strong>Import object data from file:</strong><br>";
+//echo "<input name='import_path' value='/tmp/clipit_export/backup.xlsx' type='text' size='50'> ";
+//echo "<input name='import_options' type='submit' value='Import from file'>";
+//echo "</p>";
+//echo "</div>";
+//echo "</form>";
 
