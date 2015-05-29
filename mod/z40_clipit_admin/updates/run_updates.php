@@ -1,4 +1,5 @@
 <?php
+
 // UPDATE FROM HERE {
 $VERSION = "2.3.16";
 $update_files = array(
@@ -38,15 +39,16 @@ if(empty($old_version)) {
     $old_version = "2.2.0";
 }
 
+system_message("<p>Current version: $old_version<br>New version: $VERSION</p>");
+
 // If already up-to-date, exit.
 if($VERSION === $old_version){
+    system_message("No updates to apply");
     return;
 }
 
 // set the new version to avoid overlapping updates
 set_config("clipit_version", $VERSION);
-
-print_r("<p>Current version: $old_version<br>New version: $VERSION</p>");
 
 // advance until old version
 while (key($update_files) != $old_version) {
@@ -59,16 +61,15 @@ while((key($update_files) != $VERSION) && (key($update_files) != null)){
     $value = current($update_files);
     if(!empty($value)){
         include_once((string)$value);
-        print_r("<p>Applied patch: $value</p>");
+        system_message("Applied update: $value");
     }
     next($update_files);
 }
 
 // Flush cache
-print_r("<p>Flushing caches...");
+system_message("<p>Flushing caches...");
 elgg_invalidate_simplecache();
 elgg_reset_system_cache();
-print_r("done</p>");
 
 // Update ClipIt version
-print_r("<p>Updated to version: $VERSION</p>");
+system_message("<p>Updated to version: $VERSION</p>");

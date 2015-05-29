@@ -6,7 +6,6 @@
  * Time: 17:12
  */
 
-
 echo "<h3>Import / Export options</h3><br>";
 
 // EXPORT
@@ -18,8 +17,10 @@ echo elgg_view('input/securitytoken');
 echo "<div style='margin-left:20px;text-indent:-10px'>";
 
 echo "<p><strong>Export all object data to ZIP file:</strong><br>";
-echo "<input name='filename' value='clipit_export.zip' type='text' size='50'> ";
-echo "<input name='export_options' type='submit' value='Export all'>";
+$site = ClipitSite::get_site();
+$site_name = sanitise_string($site->name);
+echo "<input name='filename' value='".$site_name."_export.zip' type='text' size='50'> ";
+echo "<input type='submit' value='Export all'>";
 echo "</p>";
 echo "</div>";
 echo "</form>";

@@ -12,49 +12,96 @@ class ClipitDataExport{
     const EXPORT_PATH = "/tmp/clipit_export/";
 
     static function export_all($filename = ""){
+        // remove possible temp files
+        exec("rm -rf ".static::EXPORT_PATH);
+        // create temp export path
+        exec("mkdir -p ".static::EXPORT_PATH);
+        // generate export files
+        $file_array = array();
+        $file_array[] = static::export_class_to_excel("ClipitActivity");
+        $file_array[] = static::export_class_to_excel("ClipitChat");
+        $file_array[] = static::export_class_to_excel("ClipitComment");
+        $file_array[] = static::export_class_to_excel("ClipitExample");
+        $file_array[] = static::export_class_to_excel("ClipitExampleType");
+        $file_array[] = static::export_class_to_excel("ClipitFile");
+        $file_array[] = static::export_class_to_excel("ClipitGroup");
+        $file_array[] = static::export_class_to_excel("ClipitLabel");
+        $file_array[] = static::export_class_to_excel("ClipitPerformanceItem");
+        $file_array[] = static::export_class_to_excel("ClipitPerformanceRating");
+        $file_array[] = static::export_class_to_excel("ClipitPost");
+        $file_array[] = static::export_class_to_excel("ClipitQuiz");
+        $file_array[] = static::export_class_to_excel("ClipitQuizQuestion");
+        $file_array[] = static::export_class_to_excel("ClipitQuizResult");
+        $file_array[] = static::export_class_to_excel("ClipitRating");
+        $file_array[] = static::export_class_to_excel("ClipitRemoteResource");
+        $file_array[] = static::export_class_to_excel("ClipitRemoteSite");
+        $file_array[] = static::export_class_to_excel("ClipitSite");
+        $file_array[] = static::export_class_to_excel("ClipitStoryboard");
+        $file_array[] = static::export_class_to_excel("ClipitTag");
+        $file_array[] = static::export_class_to_excel("ClipitTagRating");
+        $file_array[] = static::export_class_to_excel("ClipitTask");
+        $file_array[] = static::export_class_to_excel("ClipitTrickyTopic");
+        $file_array[] = static::export_class_to_excel("ClipitUser");
+        $file_array[] = static::export_class_to_excel("ClipitVideo");
+        $file_array[] = static::export_relationships_to_excel();
+        // make zip file of EXPORT_PATH
         if(empty($filename)){
             $date_obj = new DateTime();
             $filename = $date_obj->getTimestamp();
+        } else{
+            $filename = sanitize_string($filename);
         }
-        exec("mkdir -p ".static::EXPORT_PATH);
-        $file_array = array();
-        $file_array[] = static::export_class_data("ClipitActivity");
-        $file_array[] = static::export_class_data("ClipitChat");
-        $file_array[] = static::export_class_data("ClipitComment");
-        $file_array[] = static::export_class_data("ClipitExample");
-        $file_array[] = static::export_class_data("ClipitExampleType");
-        $file_array[] = static::export_class_data("ClipitFile");
-        $file_array[] = static::export_class_data("ClipitGroup");
-        $file_array[] = static::export_class_data("ClipitLabel");
-        $file_array[] = static::export_class_data("ClipitPerformanceItem");
-        $file_array[] = static::export_class_data("ClipitPerformanceRating");
-        $file_array[] = static::export_class_data("ClipitPost");
-        $file_array[] = static::export_class_data("ClipitQuiz");
-        $file_array[] = static::export_class_data("ClipitQuizQuestion");
-        $file_array[] = static::export_class_data("ClipitQuizResult");
-        $file_array[] = static::export_class_data("ClipitRating");
-        $file_array[] = static::export_class_data("ClipitRemoteResource");
-        $file_array[] = static::export_class_data("ClipitRemoteSite");
-        $file_array[] = static::export_class_data("ClipitSite");
-        $file_array[] = static::export_class_data("ClipitStoryboard");
-        $file_array[] = static::export_class_data("ClipitTag");
-        $file_array[] = static::export_class_data("ClipitTagRating");
-        $file_array[] = static::export_class_data("ClipitTask");
-        $file_array[] = static::export_class_data("ClipitTrickyTopic");
-        $file_array[] = static::export_class_data("ClipitUser");
-        $file_array[] = static::export_class_data("ClipitVideo");
-        $exec_cmd = "zip -jr /tmp/".$filename." ".static::EXPORT_PATH;
-        exec($exec_cmd);
+        exec("zip -jr \"/tmp/".$filename."\" ".static::EXPORT_PATH);
+        // remove temp files
+        exec("rm -rf ".static::EXPORT_PATH);
         return true;
     }
-    
-    static function export_class_data($class_name, $format = "excel") {
+
+    static function export_relationships_to_excel(){
+        global $CONFIG;
+
         // New Excel object
         $php_excel = new PHPExcel();
         // Set document properties
         $php_excel->getProperties()->setCreator("ClipIt")
-            ->setTitle("ClipIt export of " . get_called_class())
-            ->setKeywords("clipit export");
+            ->setTitle("ClipIt export of Relationships")
+            ->setKeywords("clipit export relationships");
+
+        // Add table title and columns
+        $properties = array("id" => 0, "guid_one" => 0, "guid_two" => 0, "relationship" => "", "time_created" => 0);
+        $active_sheet = $php_excel->setActiveSheetIndex(0);
+        $active_sheet->getDefaultColumnDimension()->setWidth(40);
+        $active_sheet->getStyle(1)->getFont()->setBold(true);
+        $row = 1;
+        $col = 0;
+        foreach(array_keys($properties) as $prop_name){
+            $active_sheet->setCellValueByColumnAndRow($col ++, $row, $prop_name." (".gettype($properties[$prop_name]).")");
+        }
+        // Write Items to spreadsheet
+        $row = 2;
+        $col = 0;
+        $query = "select * from ".$CONFIG->dbprefix."entity_relationships;";
+        $relationship_array = get_data($query);
+        foreach($relationship_array as $relationship){
+            foreach(array_keys($properties) as $prop_name){
+                $active_sheet->setCellValueByColumnAndRow($col++, $row, $relationship->$prop_name);
+            }
+            $row++;
+            $col = 0;
+        }
+        $objWriter = PHPExcel_IOFactory::createWriter($php_excel, 'Excel2007');
+        $filename = (string)static::EXPORT_PATH."object_relationships.xlsx";
+        $objWriter->save($filename);
+        return $filename;
+    }
+    
+    static function export_class_to_excel($class_name) {
+        // New Excel object
+        $php_excel = new PHPExcel();
+        // Set document properties
+        $php_excel->getProperties()->setCreator("ClipIt")
+            ->setTitle("ClipIt export of " . $class_name)
+            ->setKeywords("clipit export class");
         // Add table title and columns
         $active_sheet = $php_excel->setActiveSheetIndex(0);
         $active_sheet->getDefaultColumnDimension()->setWidth(40);
@@ -82,14 +129,11 @@ class ClipitDataExport{
             $row++;
             $col = 0;
         }
-        switch($format) {
-            case "excel":
-                $objWriter = PHPExcel_IOFactory::createWriter($php_excel, 'Excel2007');
-                $filename = (string)static::EXPORT_PATH.$class_name.".xlsx";
-                $objWriter->save($filename);
-                return $filename;
-        }
-        return null;
+        // Write Excel file
+        $objWriter = PHPExcel_IOFactory::createWriter($php_excel, 'Excel2007');
+        $filename = (string)static::EXPORT_PATH.$class_name.".xlsx";
+        $objWriter->save($filename);
+        return $filename;
     }
 
 //    /**

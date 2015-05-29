@@ -1,4 +1,10 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Pablo Llinás
+ * Date: 29/05/2015
+ * Time: 12:35
+ */
 
 // clean users with incorrect role
 $users = ClipitUser::get_all();
@@ -13,3 +19,4 @@ foreach($users as $user){
 }
 
 ClipitUser::delete_by_id($remove_array);
+system_message("Accounts cleaned correctly");

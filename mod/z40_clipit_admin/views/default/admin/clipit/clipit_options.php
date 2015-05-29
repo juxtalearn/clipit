@@ -113,3 +113,19 @@ echo "</div>";
 echo "<input name='submit_options' type='submit' value='Save'>";
 
 echo "</form>";
+
+echo "<p/>";
+
+echo "<h3>Other Options</h3><br>";
+
+echo "<form action='".elgg_get_site_url()."action/clipit_options/clean_accounts' method='post'>";
+
+echo elgg_view('input/securitytoken');
+
+echo "<div style='margin-left:20px;text-indent:-10px'>";
+
+echo "<p><strong>Clean malformed user accounts: </strong>(removes accounts with no role) ";
+echo "<input name='clean_accounts' type='submit' value='Clean accounts'>";
+echo "</p>";
+echo "</div>";
+echo "</form>";
