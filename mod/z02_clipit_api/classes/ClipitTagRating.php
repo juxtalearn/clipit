@@ -28,7 +28,7 @@ class ClipitTagRating extends UBItem {
     /**
      * @var bool Defines whether the linked Tag has been correctly covered or not.
      */
-    public $is_used = null;
+    public $is_used = false;
 
     /**
      * Loads object parameters stored in Elgg
