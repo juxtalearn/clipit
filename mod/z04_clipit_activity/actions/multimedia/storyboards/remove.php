@@ -13,14 +13,23 @@
 $id = get_input('id');
 $user_id = elgg_get_logged_in_user_guid();
 $ids = is_array($id) ? $id : array($id);
+$unlink = get_input('unlink');
 
-foreach($ids as $sb_id){
-    $storyboard = array_pop(ClipitStoryboard::get_by_id(array((int)$sb_id)));
-    if($storyboard &&  $storyboard->owner_id == $user_id){
-        ClipitStoryboard::delete_by_id(array($storyboard->id));
-        system_message(elgg_echo("storyboard:removed", array($storyboard->name)));
-    } else{
-        register_error(elgg_echo("storyboard:cantremove"));
+if(!$unlink){
+    foreach($ids as $sb_id){
+        $storyboard = array_pop(ClipitStoryboard::get_by_id(array((int)$sb_id)));
+        if($storyboard &&  $storyboard->owner_id == $user_id){
+            ClipitStoryboard::delete_by_id(array($storyboard->id));
+            system_message(elgg_echo("storyboard:removed", array($storyboard->name)));
+        } else{
+            register_error(elgg_echo("storyboard:cantremove"));
+        }
     }
+    forward(custom_forward_referer("/view/", "?filter=storyboards"));
+} else {
+    ClipitStoryboard::unlink_from_parent($id);
+    ClipitTask::remove_storyboards(ClipitStoryboard::get_task($id), array($id));
+    system_message(elgg_echo('storyboard:removed', array($storyboard->name)));
 }
-forward(custom_forward_referer("/view/", "?filter=storyboards"));
+
+

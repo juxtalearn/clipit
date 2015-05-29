@@ -46,11 +46,11 @@ $lang = get_current_language();
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $lang; ?>" lang="<?php echo $lang; ?>">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="<?php echo isset($_COOKIE['desktop'])? 'width=1200, initial-scale=1': 'width=device-width, initial-scale=1';?>">
     <?php echo elgg_view('page/elements/head', $vars); ?>
 </head>
 <body>
-<div id="wrap"  <?php if (!elgg_is_logged_in()) echo 'class="bg-grey"'; ?>>
+<div id="wrap" <?php if (!elgg_is_logged_in()) echo 'class="bg-grey"'; ?>>
     <div class="elgg-page-messages">
         <?php echo $messages; ?>
     </div>

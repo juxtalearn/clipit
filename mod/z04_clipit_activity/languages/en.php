@@ -228,6 +228,8 @@ $english = array(
     'multimedia:storyboards:add' => 'Add storyboards',
     'storyboard:edit' => 'Edit Storyboard',
     'storyboard:edited' => 'Storyboard edited',
+    'storyboard:removed' => 'Storyboard %s removed',
+    'storyboard:cantremove' => 'Can not remove storyboard',
     // Tricky Topic
     'tricky_topic' => 'Tricky Topic',
     'tricky_topic:none' => 'Not tricky Topic',
@@ -296,6 +298,7 @@ $english = array(
     'task:add' => 'Add task',
     'task:remove' => 'Remove task',
     'task:remove_video' => 'Remove video',
+    'task:remove_storyboard' => 'Remove storyboard',
     'task:added' => 'Added task',
     'task:updated' => 'Updated task',
     'task:created' => 'Task created',

@@ -15,6 +15,10 @@ $storyboard_ids = elgg_extract('entities', $vars);
 $href = elgg_extract("href", $vars);
 $rating = elgg_extract("rating", $vars);
 $user_id = elgg_get_logged_in_user_guid();
+$unlink = elgg_extract("unlink", $vars);
+if($unlink){
+    $user_groups = ClipitUser::get_groups($user_id);
+}
 $user = array_pop(ClipitUser::get_by_id(array($user_id)));
 ?>
 <?php echo elgg_view("storyboards/search");?>
@@ -29,6 +33,10 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
         // Description truncate max length 280
         if(mb_strlen($description)>280){
             $description = substr($description, 0, 280)."...";
+        }
+        $unlinked = false;
+        if($unlink && in_array(ClipitStoryboard::get_group($storyboard->id), $user_groups)){
+            $unlinked = true;
         }
         $published = false;
         ?>
@@ -51,7 +59,7 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
                                 'text'  => elgg_view("multimedia/file/preview", array('file'  => $file))
                             ));
                             ?>
-                        <? else:?>
+                        <?php else:?>
                             <?php echo elgg_view('output/url', array(
                                 'href'  => "{$href}/view/".$storyboard->id,
                                 'title' => $storyboard->name,
@@ -87,14 +95,25 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
                 }
                 ?>
                 <?php echo $owner_options;?>
-                <?php if($rating):?>
-                    <?php echo elgg_view("performance_items/summary", array(
-                        'entity' => $storyboard,
-                        'show_check' => true,
-                        'class' => 'pull-right'
-                    ));
-                    ?>
-                <?php endif; ?>
+                <div class="pull-right text-right">
+                    <?php if($unlinked):?>
+                        <?php echo elgg_view('output/url', array(
+                            'href'  => 'action/multimedia/storyboards/remove?id='.$storyboard->id.'&unlink=true',
+                            'is_action' => true,
+                            'class'  => 'btn btn-xs btn-border-red btn-primary margin-bottom-10',
+                            'title' => elgg_echo('task:remove_storyboard'),
+                            'text'  => '<i class="fa fa-trash-o"></i> '.elgg_echo('task:remove_storyboard')
+                        ));
+                        ?>
+                    <?php endif; ?>
+                    <?php if($rating):?>
+                        <?php echo elgg_view("performance_items/summary", array(
+                            'entity' => $storyboard,
+                            'show_check' => true,
+                        ));
+                        ?>
+                    <?php endif; ?>
+                </div>
                 <h4 class="text-truncate margin-0">
                     <strong>
                     <?php if($vars['preview']):?>
@@ -106,7 +125,7 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
                             'text'  => $storyboard->name
                         ));
                         ?>
-                    <? else:?>
+                    <?php else:?>
                         <?php echo elgg_view('output/url', array(
                             'href'  => "{$href}/view/".$storyboard->id,
                             'title' => $storyboard->name,

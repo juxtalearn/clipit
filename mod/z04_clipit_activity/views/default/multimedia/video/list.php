@@ -160,6 +160,7 @@ if($unlink){
                 <p class="hidden-xs">
                     <?php echo $description;?>
                 </p>
+                <div class="clearfix"></div>
                 <small class="show">
                     <?php
                     if($vars['total_comments']):

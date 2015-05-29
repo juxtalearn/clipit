@@ -6,7 +6,16 @@
 .navbar-nav .separator{
   .hidden-xs();
 }
+
+@media (min-width: 991px){
+  .navbar-toggle {
+    display: none !important;
+  }
+}
 @media (min-width: @screen-md-min) and (max-width: @screen-md-max){
+  header{
+    position:relative;
+  }
 .navbar-brand img{
     max-height: 25px;
   height: auto !important;
@@ -17,6 +26,9 @@
 }
 @media (max-width:@screen-sm-min){
   // Walled garden, user not logged in
+  header{
+    position:relative;
+  }
   .elgg-page-walledgarden #navbar-sticky{
     display: none;
   }
@@ -35,7 +47,7 @@
 
   .navbar-nav{
     margin: 0px;
-    float:left;
+   display:inline-block;
   }
   .navbar-blue{
     padding-top: 4px;
@@ -56,8 +68,6 @@
   div p.navbar-text{
     margin:0px;
   }
-
-
 
  img.avatar-small {
     width: 35px;
@@ -102,18 +112,18 @@
     }
   }
   .elgg-sidebar{
-  display: none;
-  z-index: 1039;
-  position: fixed;
-  bottom: 0px;
-  background-color: #FFFFFF;
-  right:-999px;
-  float: right;
-  padding-bottom:30px;
-  top:-12px;
-  overflow-y: scroll;
-  padding-top: 10px;
-  width: 75%;
+    display: none;
+    z-index: 1039;
+    position: fixed;
+    bottom: 0px;
+    background-color: #FFFFFF;
+    right:-999px;
+    float: right;
+    padding-bottom:30px;
+    overflow-y: scroll;
+    padding-top: 10px;
+    width: 75%;
+    height: 100%;
   }
   .messages-discussion .reply-button {
     display:none;
@@ -132,7 +142,7 @@
     visibility: hidden;
     position: absolute;
     z-index: -1;
-    right: 20px;
+    right: 60px;
     width: 140px;
     margin: 0px !important;
   }
@@ -141,10 +151,14 @@
   }
   .navbar-toggle{
     float:none;
+    display: none;
   }
   .navbar-text.lang{
     display:inline-block;
     margin: 0px;
+  }
+  .navbar-text .fa-times{
+    font-size: 16px;
   }
   .fa-search{
     font-size: 18px;
@@ -162,14 +176,8 @@
     text-align: right;
     float: right !important;
   }
-  .modal-backdrop{
-  opacity:0.6;
-  z-index:1029;
-  position:fixed;
-  top:0px;
-  bottom:0px;
-  left:0px;
-  right:0px;
+    .message .body{
+    margin-left: 0;
   }
   // Sign out button
   .fa-sign-out{
@@ -214,7 +222,7 @@
       }
       &.user-profile {
         padding-top: 0;
-        float: left;
+        float: left !important;
         margin-left: 0;
         margin-right: 5px;
         .avatar-user {
@@ -248,9 +256,36 @@
   .btn-primary{
     margin-right: 0px;
   }
+
+  // jQuery tabs responsive
+  .nav.nav-tabs {
+    width: 100%;
+    float: left;
+    > li {
+      width: auto !important;
+      min-width: initial !important;
+      display: block;
+      + li {
+        display: none;
+      }
+    }
+  }
 }
 @media(max-width: 335px){
   ul.top-account li a .fa{
     font-size: 20px;
+  }
+}
+.navbar-default .navbar-toggle{
+  border: none;
+  .icon-bar{
+    width: 25px;
+    height: 3px;
+    background-color: @blue_clipit;
+  }
+  &:hover,
+  &:focus{
+    background-color: @blue-lighter_4;
+    outline: 0;
   }
 }

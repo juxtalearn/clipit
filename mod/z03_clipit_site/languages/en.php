@@ -7,6 +7,7 @@
 $english = array(
     'locale' => 'en_GB',
 
+    'link:view:less' => 'View less',
     'read_more' => 'Read more',
     'read_less' => 'Less',
     'event:timeline' => 'Event timeline',
@@ -134,6 +135,9 @@ $english = array(
     'fileupload:acceptfiles' => 'File type not allowed',
     'fileupload:maxfile' => 'File is too large',
     'fileupload:minfile' => 'File is too small',
+
+    'responsive:desktop' => 'Desktop version',
+    'responsive:mobile' => 'Mobile version',
 );
 
 add_translation('en', $english);

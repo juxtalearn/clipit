@@ -20,9 +20,13 @@ foreach($labels as $label_id):
     ?>
     <?php echo elgg_view('output/url', array(
     'href'  => "explore/search?by=label&id=".$label->id,
+    'class' => 'text-truncate',
     'title' => $label->name,
     'text'  => $label->name,
-    'style' => 'border-bottom: 1px dotted #32b4e5;margin-right: 5px;',
+    'style' => 'border-bottom: 1px dotted #32b4e5;margin-right: 5px;display:inline-block;max-width: 100px;',
 ));
     ?>
 <?php endforeach; ?>
+<script>
+    clipit.shorten('#label_list', 45, '<?php echo elgg_echo('link:view:all');?>', '<?php echo elgg_echo('link:view:less');?>');
+</script>

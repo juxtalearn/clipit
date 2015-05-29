@@ -15,6 +15,7 @@ $spanish = array(
     'comments' => 'Comentarios',
     'comment:create' => 'Enviar comentario',
     'comment:created' => 'Comentario enviado',
+    'comment:cantcreate' => 'No se ha podido crear el comentario',
     'comment:reply:to' => 'Responder a',
 );
 

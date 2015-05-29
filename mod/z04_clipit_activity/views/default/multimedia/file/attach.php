@@ -16,7 +16,7 @@ elgg_load_js("file:attach");
 echo elgg_view("multimedia/file/templates/attach", array('entity' => $entity));
 ?>
 <div class="upload-files <?php echo $col_class; ?>">
-    <a style="position: relative;overflow: hidden">
+    <a style="position: relative;overflow: hidden;" href="javascript:;">
         <strong>
             <i class="fa fa-paperclip"></i> <?php echo elgg_echo('multimedia:attach_files');?>
             <input type="file" multiple name="files">

@@ -7,6 +7,7 @@
 $spanish = array(
     'locale' => 'es_ES',
 
+    'link:view:less' => 'Ver menos',
     'read_more' => 'Leer más',
     'read_less' => 'Menos',
     'event:timeline' => 'Timeline',
@@ -134,6 +135,9 @@ $spanish = array(
     'fileupload:acceptfiles' => 'Tipo de archivo no válido',
     'fileupload:maxfile' => 'Archivo demasiado grande',
     'fileupload:minfile' => 'Archivo muy pequeño',
+
+    'responsive:desktop' => 'Versión escritorio',
+    'responsive:mobile' => 'Versión móvil',
 );
 
 add_translation('es', $spanish);

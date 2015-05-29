@@ -21,7 +21,7 @@ $task = elgg_extract('task', $vars);
                 <i class="fa fa-check green" title="<?php echo elgg_echo('task:completed');?>"></i>
             <?php elseif($task->status == ClipitTask::STATUS_ACTIVE):?>
                 <i class="fa fa-minus yellow" title="<?php echo elgg_echo('task:pending');?>"></i>
-            <? else: ?>
+            <?php else: ?>
                 <i class="fa fa-times red"></i>
             <?php endif;?>
         </div>

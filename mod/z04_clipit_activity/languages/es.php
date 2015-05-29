@@ -229,6 +229,8 @@ $spanish = array(
     'multimedia:storyboards:add' => 'Añadir storyboard',
     'storyboard:edit' => 'Editar Storyboard',
     'storyboard:edited' => 'Storyboard editado',
+    'storyboard:removed' => 'Storyboard %s eliminado',
+    'storyboard:cantremove' => 'No se ha podido eliminar el storyboard',
     // Tricky Topic
     'tricky_topic' => 'Tema clave',
     'tricky_topic:none' => 'No hay temas clave',
@@ -297,6 +299,7 @@ $spanish = array(
     'task:add' => 'Añadir tarea',
     'task:remove' => 'Eliminar tarea',
     'task:remove_video' => 'Quitar video',
+    'task:remove_storyboard' => 'Quitar storyboard',
     'task:added' => 'Tarea añadida',
     'task:updated' => 'Tarea actualizada',
     'task:created' => 'Tarea creada',

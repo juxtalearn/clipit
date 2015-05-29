@@ -57,7 +57,7 @@ if($page[2] == 'view' && $page[3]){
             ClipitTask::TYPE_VIDEO_UPLOAD,
             ClipitTask::TYPE_STORYBOARD_UPLOAD
         );
-        if(!$hasGroup && in_array($task->task_type, $tasks_group)) {
+        if($user->role == ClipitUser::ROLE_STUDENT && !$hasGroup && in_array($task->task_type, $tasks_group)) {
             $body = elgg_view('output/empty', array('type' => 'error', 'value' => elgg_echo('task:group:needed')));;
         }
         $content = elgg_view('tasks/view', array(

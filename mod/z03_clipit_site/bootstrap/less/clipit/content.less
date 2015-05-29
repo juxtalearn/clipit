@@ -249,6 +249,11 @@
     border-top: 0 !important;
   }
 }
+.shorten#label_list .read-more{
+  border-top: 1px solid #eee;
+  margin-top: 5px;
+  padding-top: 5px;
+}
 //
 // jQuery Shorten plugin
 // --------------------------------------------------
@@ -372,6 +377,65 @@ ul.events.events-loading:after{
       position:absolute;
       top:-9999px;
       left:-9999px;
+    }
+  }
+}
+.responsive-tabs-container{
+  .nav-tabs {
+    width: 100%;
+    float: left;
+    > li {
+      width: auto !important;
+      min-width: initial !important;
+      display: block;
+      + li {
+        display: none;
+      }
+    }
+    &.responsive-tabs {
+      padding-right: 50px;
+      li {
+        &.js-tab {
+          display: block;
+        }
+        &.hidden {
+          display: none;
+        }
+      }
+    }
+  }
+  position: relative;
+
+  .tabs-dropdown {
+    position: absolute;
+    right: 0;
+    text-align:center;
+    font-family: Helvetica,Arial,sans-serif;
+    font-size: 15px;
+    letter-spacing: 1px;
+    color: #9c9e9f;
+    background-color: #f7f7f7;
+    margin: 0 !important;
+    .dropdown-toggle {
+      width: 50px;
+      position: relative;
+      display: block;
+      padding: 9px 15px;
+      margin-right: 4px;
+      .count {
+        margin-right: 5px;
+      }
+      .caret {
+        border-top: 4px solid transparent;
+        border-bottom: 4px solid transparent;
+        border-left: 6px solid;
+        margin-left: 0;
+        vertical-align: initial;
+      }
+    }
+    .dropdown-menu{
+      right: 0;
+      left: auto;
     }
   }
 }

@@ -28,11 +28,11 @@ if($user_to){
 }
 $body .='
 <div class="form-group">
-    <label for="discussion-title">'.elgg_echo("message:to").'</label>
+    <label for="message-to">'.elgg_echo("message:to").'</label>
     <div>
     '.elgg_view("input/text", array(
         'name' => 'message-to',
-        'class' => 'form-control',
+        'class' => 'form-control hidden-validate',
         'required' => true,
         'id'    => $input_id
     )).'
@@ -65,10 +65,10 @@ if($user->role == ClipitUser::ROLE_TEACHER) {
 }
 $body .= '
 <div class="form-group">
-    <label for="discussion-text">'.elgg_echo("message").'</label>
+    <label for="message-text">'.elgg_echo("message").'</label>
     '.elgg_view("input/plaintext", array(
         'name' => 'message-text',
-        'class' => 'form-control wysihtml5',
+        'class' => 'form-control mceEditor',
         'id'    => $textarea_id,
         'required' => true,
         'rows'  => 5,

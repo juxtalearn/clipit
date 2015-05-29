@@ -17,30 +17,31 @@ $size = get_input("size");
 // Get the file
 $mime_type = $file->mime_type;
 $file = array_pop(ClipitFile::get_by_id(array($file_id)));
+$etag = $file_id;
 header("Pragma: public");
 header("Content-type: {$mime_type['full']}");
 header("Content-Disposition: inline; filename=\"{$file->name}\"");
 header("Cache-Control: public", true);
-header('Expires: ' . date('r', time() + 864000));
+header('Expires: ' . gmdate('D, d M Y H:i:s \G\M\T', strtotime("+6 months")), true);
+header("ETag: \"$etag\"");
 
 switch ($size) {
     case "small":
-        $thumbdata = file_get_contents($file->thumb_small['path']);
+        $thumbdata = $file->thumb_small['path'];
         break;
     case "medium":
-        $thumbdata = file_get_contents($file->thumb_medium['path']);
+        $thumbdata = $file->thumb_medium['path'];
         break;
     case "large":
-        $thumbdata = file_get_contents($file->thumb_large['path']);
+        $thumbdata = $file->thumb_large['path'];
         break;
     default:
-        $thumbdata = file_get_contents($file->file_path);
+        $thumbdata = $file->file_path;
         break;
 }
-$content_length = strlen($thumbdata);
+$content_length = @filesize($thumbdata);
 header("Content-Length: $content_length");
 
-ob_clean();
-flush();
-echo $thumbdata;
+readfile($thumbdata);
+
 exit;

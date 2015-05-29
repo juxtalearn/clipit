@@ -15,6 +15,7 @@ $english = array(
     'comments' => 'Comments',
     'comment:create' => 'Create comment',
     'comment:created' => 'Comment created',
+    'comment:cantcreate' => 'You cant not create a comment',
     'comment:reply:to' => 'Reply to',
 );
 

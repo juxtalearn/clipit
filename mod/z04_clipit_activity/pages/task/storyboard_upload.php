@@ -62,8 +62,9 @@ if($user->role == ClipitUser::ROLE_TEACHER){
         ));
         // Task is completed, show my sb
         if ($status['status'] === true) {
-            $body .= elgg_view('multimedia/storyboard/list', array(
+            $body .= elgg_view('multimedia/storyboard/list_summary', array(
                 'entities' => $storyboard,
+                'unlink' => true,
                 'href' => $href_publications,
                 'task_id' => $task->id,
             ));

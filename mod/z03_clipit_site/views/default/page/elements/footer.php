@@ -67,6 +67,14 @@ $js = elgg_get_loaded_js('footer');
             </div>
         </div>
     </div>
+    <div id="responsive-mode" class="col-xs-12 text-center white margin-top-10" style="background-color: #71D3F7;padding: 10px;display: none;">
+        <span class="responsive-mobile" style="display: <?php echo isset($_COOKIE['desktop']) ? 'block': 'none';?>">
+            <?php echo elgg_echo('responsive:mobile');?> <i class="fa fa-mobile margin-left-10 fa-2x" style="vertical-align: middle"></i>
+        </span>
+        <span class="responsive-desktop" style="display: <?php echo isset($_COOKIE['desktop']) ? 'none': 'block';?>">
+            <?php echo elgg_echo('responsive:desktop');?> <i class="fa fa-desktop margin-left-10 fa-2x" style="vertical-align: middle"></i>
+        </span>
+    </div>
 </footer>
 <?php if (elgg_is_logged_in()) : ?>
     <!-- Messages modal -->

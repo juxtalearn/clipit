@@ -49,6 +49,7 @@ $.fn.extend({
                 searchingText: elgg.echo("autocomplete:searching"),
                 zindex: 1052,
                 searchDelay: 0,
+                allowTabOut: true,
                 preventDuplicates: true,
                 animateDropdown: false,
                 propertyToSearch: "first_name",

@@ -67,6 +67,7 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
                         <div class="margin-bottom-10">
                             <?php echo elgg_view('output/url', array(
                                 'href'  => "javascript:;",
+                                'title' => elgg_echo('add'),
                                 'text'  => '<i class="fa fa-plus"></i>',
                                 'class' => 'image-block',
                                 'id'    => 'labels_view',
