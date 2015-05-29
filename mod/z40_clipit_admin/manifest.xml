@@ -14,5 +14,5 @@
     <category>back-end</category>
     <category>plugin</category>
     <blurb>ClipIt administration plugin</blurb>
-    <activate_on_install>false</activate_on_install>
+    <activate_on_install>true</activate_on_install>
 </plugin_manifest>
