@@ -15,7 +15,15 @@ chdir(elgg_get_root_path());
 exec("git stash save");
 exec("git stash drop");
 exec("git fetch --tags");
-exec("git checkout `git for-each-ref --sort=committerdate --format='%(refname:short)' refs/tags | tail -1`");
+$tag_branch = get_config("clipit_tag_branch");
+if(!empty($tag_branch)){
+    $latest_tag =
+        exec("git for-each-ref --sort=committerdate --format='%(refname:short)' refs/tags | grep $tag_branch | tail -1");
+} else{
+    $latest_tag =
+        exec("git for-each-ref --sort=committerdate --format='%(refname:short)' refs/tags | tail -1");
+}
+exec("git checkout $latest_tag");
 exec("git submodule init");
 exec("git submodule update");
 // Run updates

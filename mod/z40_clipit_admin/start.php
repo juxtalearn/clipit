@@ -22,10 +22,8 @@ function clipit_admin_init() {
     // Register actions
     elgg_register_action("update_clipit",
         elgg_get_plugins_path().$plugin_name."/actions/update_clipit/update.php");
-    elgg_register_action("clipit_options/save",
-        elgg_get_plugins_path().$plugin_name."/actions/clipit_options/save.php");
-    elgg_register_action("clipit_options/clean_accounts",
-        elgg_get_plugins_path().$plugin_name."/actions/clipit_options/clean_accounts.php");
+    elgg_register_action("clipit_options/apply",
+        elgg_get_plugins_path().$plugin_name."/actions/clipit_options/apply.php");
     elgg_register_action("import_export/import",
         elgg_get_plugins_path().$plugin_name."/actions/import_export/import.php");
     elgg_register_action("import_export/export",

@@ -17,124 +17,219 @@ $clipit_global_url = (string)get_config("clipit_global_url");
 $clipit_global_login = (string)get_config("clipit_global_login");
 $clipit_global_password = (string)get_config("clipit_global_password");
 $clipit_global_published = (bool)get_config("clipit_global_published");
+$rubric_tool = (bool)get_config("rubric_tool");
 $performance_palette = (bool)get_config("performance_palette");
 $example_types = (bool)get_config("example_types");
 $fixed_performance_rating = (bool)get_config("fixed_performance_rating");
 $quiz_results_after_task_end = (bool)get_config("quiz_results_after_task_end");
 
+// Structure
+echo "<table>";
 // Main options form
-echo "<form action='".elgg_get_site_url()."action/clipit_options/save' method='post'>";
-
+echo "<form action='".elgg_get_site_url()."action/clipit_options/apply' method='post'>";
 echo elgg_view('input/securitytoken');
+echo "<tr height='40'>";
+echo "<td>";
+echo "<h3>General Options</h3>";
+echo "</td>";
+echo "</tr>";
 
-echo "<h3>General Options</h3><br>";
+echo "<tr height='40'>";
+echo "<td width='300'>";
+echo "<strong>Site time zone:</strong>";
+echo "<br>(see <u><a href='http://www.php.net/manual/en/timezones.php' target='_blank'>PHP Time Zones</a></u>)";
+echo "</td>";
+echo "<td>";
+echo "<input name='timezone' value=$timezone type='text' size='40'/>";
+echo "</td>";
+echo "</tr>";
 
-echo "<div style='margin-left:20px;text-indent:-10px'>";
-
-echo "<p><strong>Site time zone (see <a href='http://www.php.net/manual/en/timezones.php' target='_blank'>PHP Time Zones</a>)</strong><br>";
-echo "<input name='timezone' value=$timezone type='text' size='60'/>";
-echo "</p>";
-
-echo "<p><strong>Site type</strong><br>";
+echo "<tr height='40'>";
+echo "<td>";
+echo "<strong>Site type:</strong> ";
+echo "</td>";
+echo "<td>";
 switch($clipit_site_type){
     case ClipitSite::TYPE_SITE:
-        echo "<input name='clipit_site_type' value=".ClipitSite::TYPE_SITE." type='radio' checked>".ClipitSite::TYPE_SITE."<br>";
-        echo "<input name='clipit_site_type' value=".ClipitSite::TYPE_GLOBAL." type='radio'>".ClipitSite::TYPE_GLOBAL."<br>";
-        echo "<input name='clipit_site_type' value=".ClipitSite::TYPE_DEMO." type='radio'>".ClipitSite::TYPE_DEMO;
+        echo "<input name='clipit_site_type' value=".ClipitSite::TYPE_SITE." type='radio' checked> ".strtoupper(ClipitSite::TYPE_SITE)." ";
+        echo "<input name='clipit_site_type' value=".ClipitSite::TYPE_GLOBAL." type='radio'> ".strtoupper(ClipitSite::TYPE_GLOBAL)." ";
+        echo "<input name='clipit_site_type' value=".ClipitSite::TYPE_DEMO." type='radio'> ".strtoupper(ClipitSite::TYPE_DEMO)." ";
         break;
     case ClipitSite::TYPE_GLOBAL:
-        echo "<input name='clipit_site_type' value=".ClipitSite::TYPE_SITE." type='radio'>".ClipitSite::TYPE_SITE."<br>";
-        echo "<input name='clipit_site_type' value=".ClipitSite::TYPE_GLOBAL." type='radio' checked>".ClipitSite::TYPE_GLOBAL."<br>";
-        echo "<input name='clipit_site_type' value=".ClipitSite::TYPE_DEMO." type='radio'>".ClipitSite::TYPE_DEMO;
+        echo "<input name='clipit_site_type' value=".ClipitSite::TYPE_SITE." type='radio'> ".strtoupper(ClipitSite::TYPE_SITE)." ";
+        echo "<input name='clipit_site_type' value=".ClipitSite::TYPE_GLOBAL." type='radio' checked> ".strtoupper(ClipitSite::TYPE_GLOBAL)." ";
+        echo "<input name='clipit_site_type' value=".ClipitSite::TYPE_DEMO." type='radio'> ".strtoupper(ClipitSite::TYPE_DEMO)." ";
         break;
     case ClipitSite::TYPE_DEMO:
-        echo "<input name='clipit_site_type' value=".ClipitSite::TYPE_SITE." type='radio'>".ClipitSite::TYPE_SITE."<br>";
-        echo "<input name='clipit_site_type' value=".ClipitSite::TYPE_GLOBAL." type='radio'>".ClipitSite::TYPE_GLOBAL."<br>";
-        echo "<input name='clipit_site_type' value=".ClipitSite::TYPE_DEMO." type='radio' checked>".ClipitSite::TYPE_DEMO;
+        echo "<input name='clipit_site_type' value=".ClipitSite::TYPE_SITE." type='radio'> ".strtoupper(ClipitSite::TYPE_SITE)." ";
+        echo "<input name='clipit_site_type' value=".ClipitSite::TYPE_GLOBAL." type='radio'> ".strtoupper(ClipitSite::TYPE_GLOBAL)." ";
+        echo "<input name='clipit_site_type' value=".ClipitSite::TYPE_DEMO." type='radio' checked> ".strtoupper(ClipitSite::TYPE_DEMO)." ";
         break;
 }
-echo "</p>";
+echo "</td>";
+echo "</tr>";
 
-echo "<p><strong>Global site setup</strong><br>";
-echo "URL:<br><input name='clipit_global_url' value=$clipit_global_url type='text' size='60'/><br>";
-echo "Login:<br><input name='clipit_global_login' value=$clipit_global_login type='text' size='60'/><br>";
-echo "Password:<br><input name='clipit_global_password' value=$clipit_global_password type='text' size='60'/>";
-echo "</p>";
+echo "<tr height='40'>";
+echo "<td>";
+echo "<h3>Global site setup</h3>";
+echo "</td>";
+echo "</tr>";
 
-echo "<p><strong>Republish this site to global site?</strong><br>";
-echo "<input name='clipit_global_published' value='0' type='radio'> yes<br>";
-echo "<input name='clipit_global_published' value='1' type='radio' checked> no";
-echo "</p>";
 
-echo "</div>";
+echo "<tr height='40'>";
+echo "<td>";
+echo "<strong>Global site URL:</strong>";
+echo "</td>";
+echo "<td>";
+echo "<input name='clipit_global_url' value=$clipit_global_url type='text' size='40'/>";
+echo "</td>";
+echo "</tr>";
 
+echo "<tr height='40'>";
+echo "<td>";
+echo "<strong>Administrator login:</strong>";
+echo "</td>";
+echo "<td>";
+echo "<input name='clipit_global_login' value=$clipit_global_login type='text' size='40'/><br>";
+echo "</td>";
+echo "</tr>";
+
+echo "<tr height='40'>";
+echo "<td>";
+echo "<strong>Administrator password:</strong>";
+echo "</td>";
+echo "<td>";
+echo "<input name='clipit_global_password' value=$clipit_global_password type='text' size='40'/>";
+echo "</td>";
+echo "</tr>";
+
+echo "<tr height='40'>";
+echo "<td>";
+echo "<strong>Republish this site to global site?</strong> ";
+echo "</td>";
+echo "<td>";
+echo "<input name='clipit_global_published' value='1' type='radio' checked> NO ";
+echo "<input name='clipit_global_published' value='0' type='radio'> YES ";
+echo "</td>";
+echo "</tr>";
+
+echo "<tr height='40'>";
+echo "<td>";
 echo "<h3>Authoring Tool Options</h3><br>";
+echo "</td>";
+echo "</tr>";
 
-echo "<div style='margin-left:20px;text-indent:-10px'>";
+echo "<tr height='40'>";
+echo "<td>";
+echo "<strong>Enable rubric authoring tool?</strong> ";
+echo "</td>";
+echo "<td>";
+if($rubric_tool) {
+    echo "<input name='rubric_tool' value='0' type='radio'> NO ";
+    echo "<input name='rubric_tool' value='1' type='radio' checked> YES ";
+} else{
+    echo "<input name='rubric_tool' value='0' type='radio' checked> NO ";
+    echo "<input name='rubric_tool' value='1' type='radio'> YES ";
+}
+echo "</td>";
+echo "</tr>";
 
-echo "<p><strong>Reload performance items palette?</strong><br>";
-echo "<input name='performance_palette' value='0' type='radio'> yes<br>";
-echo "<input name='performance_palette' value='1' type='radio' checked> no";
-echo "</p>";
+echo "<tr height='40'>";
+echo "<td>";
+echo "<strong>Load performance items palette?</strong> ";
+echo "<br>(may duplicate existing items) ";
+echo "</td>";
+echo "<td>";
+echo "<input name='performance_palette' value='1' type='radio' checked> NO ";
+echo "<input name='performance_palette' value='0' type='radio'> YES ";
+echo "</td>";
+echo "</tr>";
 
-echo "<p><strong>Reload problem example types palette?</strong><br>";
-echo "<input name='example_types' value='0' type='radio'> yes<br>";
-echo "<input name='example_types' value='1' type='radio' checked> no";
-echo "</p>";
+echo "<tr height='40'>";
+echo "<td>";
+echo "<strong>Reload problem example types palette?</strong> ";
+echo "</td>";
+echo "<td>";
+echo "<input name='example_types' value='1' type='radio' checked> NO ";
+echo "<input name='example_types' value='0' type='radio'> YES ";
+echo "</td>";
+echo "</tr>";
 
-echo "</div>";
-
+echo "<tr height='40'>";
+echo "<td>";
 echo "<h3>Activity Options</h3><br>";
+echo "</td>";
+echo "</tr>";
 
-echo "<div style='margin-left:20px;text-indent:-10px'>";
-
-echo "<p><strong>Allow students to create an account in ClipIt?</strong><br>";
+echo "<tr height='40'>";
+echo "<td>";
+echo "<strong>Allow students to register in ClipIt?</strong> ";
+echo "</td>";
+echo "<td>";
 if($allow_registration){
-    echo "<input name='allow_registration' value='1' type='radio' checked> yes<br>";
-    echo "<input name='allow_registration' value='0' type='radio'> no";
+    echo "<input name='allow_registration' value='0' type='radio'> NO ";
+    echo "<input name='allow_registration' value='1' type='radio' checked> YES ";
 } else{
-    echo "<input name='allow_registration' value='1' type='radio'> yes<br>";
-    echo "<input name='allow_registration' value='0' type='radio' checked> no";
+    echo "<input name='allow_registration' value='0' type='radio' checked> NO ";
+    echo "<input name='allow_registration' value='1' type='radio'> YES ";
 }
-echo "</p>";
+echo "</td>";
+echo "</tr>";
 
-echo "<p><strong>Teachers select performance items for feedback tasks?</strong><br>";
+echo "<tr height='40'>";
+echo "<td>";
+echo "<strong>Teachers select rubric items to use?</strong> ";
+echo "</td>";
+echo "<td>";
 if($fixed_performance_rating) {
-    echo "<input name='fixed_performance_rating' value='1' type='radio' checked> yes<br>";
-    echo "<input name='fixed_performance_rating' value='0' type='radio'> no";
+    echo "<input name='fixed_performance_rating' value='0' type='radio'> NO ";
+    echo "<input name='fixed_performance_rating' value='1' type='radio' checked> YES ";
 } else{
-    echo "<input name='fixed_performance_rating' value='1' type='radio'> yes<br>";
-    echo "<input name='fixed_performance_rating' value='0' type='radio' checked> no";
+    echo "<input name='fixed_performance_rating' value='0' type='radio' checked> NO ";
+    echo "<input name='fixed_performance_rating' value='1' type='radio'> YES ";
 }
-echo "</p>";
+echo "</td>";
+echo "</tr>";
 
-echo "<p><strong>Wait until end of task to show quiz results?</strong><br>";
+echo "<tr height='40'>";
+echo "<td>";
+echo "<strong>Wait until end of quiz tasks to show results?</strong> ";
+echo "</td>";
+echo "<td>";
 if($quiz_results_after_task_end){
-    echo "<input name='quiz_results_after_task_end' value='1' type='radio' checked> yes<br>";
-    echo "<input name='quiz_results_after_task_end' value='0' type='radio'> no";
+    echo "<input name='quiz_results_after_task_end' value='0' type='radio'> NO ";
+    echo "<input name='quiz_results_after_task_end' value='1' type='radio' checked> YES ";
 } else{
-    echo "<input name='quiz_results_after_task_end' value='1' type='radio'> yes<br>";
-    echo "<input name='quiz_results_after_task_end' value='0' type='radio' checked> no";
+    echo "<input name='quiz_results_after_task_end' value='0' type='radio' checked> NO ";
+    echo "<input name='quiz_results_after_task_end' value='1' type='radio'> YES ";
 }
-echo "</p>";
-echo "</div>";
+echo "</td>";
+echo "</tr>";
 
-echo "<input name='submit_options' type='submit' value='Save'>";
-
-echo "</form>";
-
-echo "<br/>";
-
+echo "<tr height='40'>";
+echo "<td>";
 echo "<h3>Other Options</h3><br>";
+echo "</td>";
+echo "</tr>";
 
-echo "<form action='".elgg_get_site_url()."action/clipit_options/clean_accounts' method='post'>";
+echo "<tr height='40'>";
+echo "<td>";
+echo "<strong>Clean malformed user accounts:</strong> ";
+echo "<br>(removes accounts with no role)";
+echo "</td>";
+echo "<td>";
+echo "<input name='clean_accounts' type='radio' value='no' checked> NO ";
+echo "<input name='clean_accounts' type='radio' value='yes'> YES ";
+echo "</td>";
+echo "</tr>";
 
-echo elgg_view('input/securitytoken');
+echo "<tr height='40'>";
+echo "<td></td>";
+echo "<td>";
+echo "<input name='submit_options' type='submit' value='Apply'>";
+echo "</td>";
+echo "</tr>";
 
-echo "<div style='margin-left:20px;text-indent:-10px'>";
-
-echo "<p><strong>Clean malformed user accounts: </strong>(removes accounts with no role) ";
-echo "<input name='clean_accounts' type='submit' value='Clean accounts'>";
-echo "</p>";
-echo "</div>";
 echo "</form>";
+
+echo "</table>";
