@@ -25,16 +25,16 @@ if(get_config($key_name) === true) {
 }
 
 // Load Performance Palette for site language
-input_performance_palette_file(elgg_get_plugins_path().$file_path.$file_prefix.get_config("language").$file_suffix);
+load_performance_palette_file(elgg_get_plugins_path().$file_path.$file_prefix.get_config("language").$file_suffix);
 
 /**
- * Add Performance Items from an Excel file
+ * Load Performance Items from an Excel file
  *
  * @param string $file Local file path
  *
  * @return array|null Array of User IDs, or null if error.
  */
-function input_performance_palette_file($file){
+function load_performance_palette_file($file){
     $php_excel = PHPExcel_IOFactory::load($file);
     $row_iterator = $php_excel->getSheet()->getRowIterator();
     while ($row_iterator->valid()) {
