@@ -266,7 +266,7 @@ class ClipitSite extends UBSite {
         $clipit_global_url = get_config("clipit_global_url");
         $clipit_global_user = get_config("clipit_global_login");
         $clipit_global_password = get_config("clipit_global_password");
-        // Authentication token
+        // Get authentication token
         $params = array(
             "method" => "clipit.site.get_token",
             "login" => $clipit_global_user,
@@ -278,7 +278,7 @@ class ClipitSite extends UBSite {
             return null;
         }
         $auth_token = $decoded_response->result;
-        // Final call
+        // Make call
         $data += array("auth_token" => $auth_token);
         $params = array(
             'http'=> array(

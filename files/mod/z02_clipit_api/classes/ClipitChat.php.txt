@@ -178,7 +178,7 @@ class ClipitChat extends UBMessage {
                 }
             }
         }
-        usort($conversation, 'UBItem::sort_by_date');
+        uasort($conversation, 'UBItem::sort_by_date');
         return $conversation;
     }
 

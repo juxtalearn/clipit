@@ -30,6 +30,7 @@ class ClipitVideo extends ClipitResource{
     const REL_SITE_RESOURCE = ClipitSite::REL_SITE_VIDEO;
     public $preview = "";
     public $duration = 0;
+    public $overlay_metadata = "";
 
     /**
      * Loads object parameters stored in Elgg
@@ -41,6 +42,7 @@ class ClipitVideo extends ClipitResource{
         parent::copy_from_elgg($elgg_entity);
         $this->preview = (string)$elgg_entity->get("preview");
         $this->duration = (int)$elgg_entity->get("duration");
+        $this->overlay_metadata = (string)$elgg_entity->get("overlay_metadata");
     }
 
     /**
@@ -57,6 +59,7 @@ class ClipitVideo extends ClipitResource{
         }
         $elgg_entity->set("preview", (string)$this->preview);
         $elgg_entity->set("duration", (int)$this->duration);
+        $elgg_entity->set("overlay_metadata", (string)$this->overlay_metadata);
     }
 
     static function video_url_parser($url){

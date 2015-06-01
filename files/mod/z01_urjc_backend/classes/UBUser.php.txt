@@ -328,48 +328,48 @@ class UBUser extends UBItem {
         return $avatar;
     }
 
-    static function export_data($id_array = null, $format = "excel") {
-        // New Excel object
-        $php_excel = new PHPExcel();
-        // Set document properties
-        $php_excel->getProperties()
-            ->setCreator("ClipIt")
-            ->setTitle("ClipIt User Accounts")
-            ->setKeywords("clipit user account");
-        // Add table title and columns
-        $active_sheet = $php_excel->setActiveSheetIndex(0);
-        $active_sheet->getDefaultColumnDimension()->setWidth(30);
-        $active_sheet->getStyle(1)->getFont()->setBold(true);
-        $row = 1;
-        $col = 0;
-        $values = array("NAME", "LOGIN", "PASSWORD", "EMAIL", "ROLE");
-        foreach ($values as $value) {
-            $active_sheet->setCellValueByColumnAndRow($col++, $row, $value);
-        }
-        // Load ClipIt Users
-        if (!empty($id_array)) {
-            $user_array = static::get_by_id($id_array);
-        } else {
-            $user_array = static::get_all();
-        }
-        // Write Users to spreadsheet
-        $row = 2;
-        $col = 0;
-        foreach ($user_array as $user) {
-            $values = array($user->name, $user->login, "<password>", $user->email, $user->role);
-            foreach ($values as $value) {
-                $active_sheet->setCellValueByColumnAndRow($col++, $row, $value);
-            }
-            $row++;
-            $col = 0;
-        }
-        switch ($format) {
-            case "excel":
-                $objWriter = PHPExcel_IOFactory::createWriter($php_excel, 'Excel2007');
-                $objWriter->save('/tmp/clipit_users.xlsx');
-        }
-        return true;
-    }
+//    static function export_data($id_array = null, $format = "excel") {
+//        // New Excel object
+//        $php_excel = new PHPExcel();
+//        // Set document properties
+//        $php_excel->getProperties()
+//            ->setCreator("ClipIt")
+//            ->setTitle("ClipIt User Accounts")
+//            ->setKeywords("clipit user account");
+//        // Add table title and columns
+//        $active_sheet = $php_excel->setActiveSheetIndex(0);
+//        $active_sheet->getDefaultColumnDimension()->setWidth(30);
+//        $active_sheet->getStyle(1)->getFont()->setBold(true);
+//        $row = 1;
+//        $col = 0;
+//        $values = array("NAME", "LOGIN", "PASSWORD", "EMAIL", "ROLE");
+//        foreach ($values as $value) {
+//            $active_sheet->setCellValueByColumnAndRow($col++, $row, $value);
+//        }
+//        // Load ClipIt Users
+//        if (!empty($id_array)) {
+//            $user_array = static::get_by_id($id_array);
+//        } else {
+//            $user_array = static::get_all();
+//        }
+//        // Write Users to spreadsheet
+//        $row = 2;
+//        $col = 0;
+//        foreach ($user_array as $user) {
+//            $values = array($user->name, $user->login, "<password>", $user->email, $user->role);
+//            foreach ($values as $value) {
+//                $active_sheet->setCellValueByColumnAndRow($col++, $row, $value);
+//            }
+//            $row++;
+//            $col = 0;
+//        }
+//        switch ($format) {
+//            case "excel":
+//                $objWriter = PHPExcel_IOFactory::createWriter($php_excel, 'Excel2007');
+//                $objWriter->save('/tmp/clipit_users.xlsx');
+//        }
+//        return true;
+//    }
 
     /**
      * Add Users from an Excel file, and return an array of User Ids from those created or selected from the file.
