@@ -105,7 +105,7 @@ $page = 'tricky_topics';
                     <?php echo elgg_view('output/friendlytime', array('time' => $tricky_topic->time_created));?>
                 </small>
             </td>
-            <td data-title="<?php echo elgg_echo('options');?>" class="hidden-xs">
+            <td data-title="<?php echo elgg_echo('options');?>" class="hidden-xs hidden-sm">
                 <?php echo elgg_view('page/components/admin_options', array(
                     'entity' => $tricky_topic,
                     'user' => $user,

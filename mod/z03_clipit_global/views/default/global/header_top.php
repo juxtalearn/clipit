@@ -22,7 +22,9 @@
             $installed_langs = array(
                 'es' => 'Español',
                 'en' => 'English',
-                'de' => 'Deutsch'
+                'de' => 'Deutsch',
+                'pt' => 'Português',
+                'sv' => 'Svenska'
             );
             foreach($installed_langs as $key => $language):
                 echo elgg_view('output/url', array(

@@ -21,8 +21,10 @@ function clipit_rubric_init() {
     elgg_register_action("rubric/save", "{$plugin_dir}/actions/rubric/save.php");
     elgg_register_action("rubric/create", "{$plugin_dir}/actions/rubric/create.php");
 
-    // Sidebar menu
-    //elgg_extend_view('authoring_tools/sidebar/menu', 'rubric/sidebar/menu', 300);
+    if(get_config("rubric_tool")) {
+        // Sidebar menu
+        elgg_extend_view('authoring_tools/sidebar/menu', 'rubric/sidebar/menu', 300);
+    }
 }
 
 /**

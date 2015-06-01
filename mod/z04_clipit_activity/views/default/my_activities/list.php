@@ -24,7 +24,10 @@ if (is_array($items) && count($items) > 0):
             $group =  array_pop($group_array); // ClipitGroup object
             $users = ClipitGroup::get_users($group_id);
             $users = array_slice($users, 0, 10);
-
+            $description = $item->description;
+            if(mb_strlen($description)>165){
+                $description = substr($description, 0, 165)."...";
+            }
             $params_progress = array(
                 'value' => get_group_progress($group->id),
                 'width' => '100%'
@@ -58,8 +61,8 @@ if (is_array($items) && count($items) > 0):
                             -
                             <?php echo date("d M Y", $item->end);?>
                         </div>
-                        <div class="hidden-xs" style='max-height: 40px; overflow: hidden; color: #666666;margin-top: 5px; '>
-                            <?php echo $item->description; ?>
+                        <div class="hidden-xs hidden-sm" style='max-height: 40px; overflow: hidden; color: #666666;margin-top: 5px; '>
+                            <?php echo $description; ?>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -111,7 +114,7 @@ if (is_array($items) && count($items) > 0):
                                 </div>
                                 <?php endif; ?>
                             </div>
-                            <div class="col-md-6 hidden-xs">
+                            <div class="col-md-6 hidden-xs hidden-sm">
                                 <small class='show'><?php echo elgg_echo('activity:teachers') ?></small>
                                 <ul style="max-height: 100px; overflow: auto;">
                                     <?php

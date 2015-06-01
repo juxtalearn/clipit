@@ -6995,7 +6995,7 @@ ul.events.events-loading:after {
 .table-responsive-list table {
   table-layout: fixed;
 }
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 991px) {
   .table-responsive-list table,
   .table-responsive-list thead,
   .table-responsive-list tbody,
@@ -8442,10 +8442,8 @@ ul.top-account > li > a > span.badge {
 #wrap {
   min-height: 100%;
   height: auto;
-  /* Negative indent footer by its height */
-  margin: 0 auto -60px;
-  /* Pad bottom by footer height */
-  padding: 0 0 60px;
+  margin: 0 auto -150px;
+  padding: 0 0 150px;
 }
 .elgg-message {
   background: #fff;
@@ -10453,6 +10451,12 @@ td.navbar-nav .separator {
   td.events-list.hidden-lg,
   td.navbar-nav .separator.hidden-lg {
     display: none !important;
+  }
+}
+@media (min-width: 992px) {
+  .elgg-sidebar {
+    display: block !important;
+    right: 0px !important;
   }
 }
 @media (min-width: 991px) {

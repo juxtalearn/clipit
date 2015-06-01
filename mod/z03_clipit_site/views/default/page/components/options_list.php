@@ -32,7 +32,10 @@ if(isset($vars['remove'])){
 
 $options = array(
     'style' => 'float:right;',
-    'button' => '<button data-toggle="dropdown" class="btn-options btn btn-xs"><b>'.elgg_echo("options").'</b> <b class="caret"></b></button>',
+    'button' => '<button data-toggle="dropdown" class="btn-options btn btn-xs">
+                    <span class="visible-xs visible-sm"><i class="fa fa-cog"></i> <b class="caret"></b></span>
+                    <span class="hidden-xs hidden-sm"><b>'.elgg_echo("options").'</b> <b class="caret"></b></span>
+                </button>',
     'options' => $options_list,
 );
 

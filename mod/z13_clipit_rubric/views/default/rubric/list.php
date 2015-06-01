@@ -44,7 +44,7 @@ $(function(){
         <?php if($select):?>
             <th style="width: 50px;"></th>
         <?php endif;?>
-        <th><?php echo elgg_echo('title');?></th>
+        <th><?php echo elgg_echo('category');?></th>
         <th><?php echo elgg_echo('last_added');?></th>
         <th></th>
         <th style="width: 100px;"></th>

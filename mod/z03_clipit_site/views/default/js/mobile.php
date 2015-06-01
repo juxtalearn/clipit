@@ -16,6 +16,7 @@ window.addEventListener("orientationchange", function() {   // Announce the new 
     }
     else{
         $('.modal-backdrop').hide();
+        closeSidebar();
         if($('body').hasClass('modal-open')){
         $('body').removeClass('modal-open');
         }

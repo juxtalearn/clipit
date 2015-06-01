@@ -50,6 +50,7 @@ if($user->role == ClipitUser::ROLE_TEACHER){
         $params = array(
             'entity' => $activity,
             'create' => false,
+            'options' => false,
             'files' => $files,
             'href' => $href,
             'task_id' => $task->id

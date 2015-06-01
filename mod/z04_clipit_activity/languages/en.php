@@ -226,6 +226,7 @@ $english = array(
     'storyboards:recommended:none' => 'There are no recommended storyboards',
     'storyboards:none' => 'No storyboards',
     'multimedia:storyboards:add' => 'Add storyboards',
+    'storyboard:uploaded' => 'Storyboard uploaded',
     'storyboard:edit' => 'Edit Storyboard',
     'storyboard:edited' => 'Storyboard edited',
     'storyboard:removed' => 'Storyboard %s removed',

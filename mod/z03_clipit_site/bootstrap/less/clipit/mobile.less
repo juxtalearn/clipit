@@ -6,7 +6,12 @@
 .navbar-nav .separator{
   .hidden-xs();
 }
-
+@media(min-width: @screen-md-min){
+  .elgg-sidebar{
+    display: block !important;
+    right: 0px !important;
+  }
+}
 @media (min-width: 991px){
   .navbar-toggle {
     display: none !important;

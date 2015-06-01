@@ -32,6 +32,7 @@ DirectoryIndex index.php
 <IfModule mod_expires.c>
 	ExpiresActive On
 	ExpiresDefault "access plus 1 year"
+	Header set Cache-Control "public"
 </IfModule>
 
 # Conditional requests are controlled through Last-Modified and ETag headers.

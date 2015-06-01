@@ -1,5 +1,5 @@
 <?php
- /**
+/**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
  * Creation date:   9/05/14
@@ -27,9 +27,9 @@ foreach($files as $file_id){
     $file_icon = '
         <div class="multimedia-preview">
             '.elgg_view('output/url', array(
-                'href'  => $file_url,
-                'title' => $file->name,
-                'text'  => elgg_view("multimedia/file/preview", array('file'  => $file)))).'
+            'href'  => $file_url,
+            'title' => $file->name,
+            'text'  => elgg_view("multimedia/file/preview", array('file'  => $file)))).'
         </div>';
 
     // Owner options (edit/delete)
@@ -67,10 +67,10 @@ foreach($files as $file_id){
     // Action buttons (Download|Publish)
     $buttons = '<div style="width: 35px;display: inline-block;float: right;text-align: center;margin-left:10px;">
                     '.elgg_view('output/url', array(
-                        'href'  => "file/download/".$file->id. ($vars['task_id'] ? "?task_id=".$vars['task_id']: ""),
-                        'title' => $owner->name,
-                        'class' => 'btn btn-default btn-icon',
-                        'text'  => '<i class="fa fa-download"></i>')).'
+            'href'  => "file/download/".$file->id. ($vars['task_id'] ? "?task_id=".$vars['task_id']: ""),
+            'title' => $owner->name,
+            'class' => 'btn btn-default btn-icon',
+            'text'  => '<i class="fa fa-download"></i>')).'
                     <small class="show text-truncate" title="'.formatFileSize($file->size).'" style="margin-top: 3px;">
                         '.formatFileSize($file->size).'
                     </small>
@@ -109,10 +109,12 @@ if($vars['create']){
     // Add files button
     echo elgg_view_form('multimedia/files/upload', array('id' => 'fileupload', 'enctype' => 'multipart/form-data'), array('entity'  => $entity));
     // File options
-    $list_options['options_values'] = array(
-        ''          => elgg_echo('bulk_actions'),
-        'remove'      => elgg_echo('file:delete'),
-    );
+    if(!empty($files)) {
+        $list_options['options_values'] = array(
+            '' => elgg_echo('bulk_actions'),
+            'remove' => elgg_echo('file:delete'),
+        );
+    }
 }
 
 // set content

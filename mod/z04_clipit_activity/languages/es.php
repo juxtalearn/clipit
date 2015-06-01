@@ -227,6 +227,7 @@ $spanish = array(
     'storyboards:recommended:none' => 'No se han encontrado storyboards recomendados',
     'storyboards:none' => 'No hay storyboards',
     'multimedia:storyboards:add' => 'Añadir storyboard',
+    'storyboard:uploaded' => 'Storyboard subido',
     'storyboard:edit' => 'Editar Storyboard',
     'storyboard:edited' => 'Storyboard editado',
     'storyboard:removed' => 'Storyboard %s eliminado',
