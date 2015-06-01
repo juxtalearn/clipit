@@ -1,9 +1,12 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Pablo Llinás
- * Date: 28/05/2015
- * Time: 17:12
+ * ClipIt - JuxtaLearn Web Space
+ * PHP version:     >= 5.2
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC JuxtaLearn Team
+ * @link            http://www.juxtalearn.eu
+ * @license         GNU Affero General Public License v3
+ * @package         ClipIt
+ * @subpackage      clipit_admin
  */
 
 echo "<h3>Import / Export options</h3><br>";
@@ -18,8 +21,10 @@ echo "<div style='margin-left:20px;text-indent:-10px'>";
 
 echo "<p><strong>Export all object data to ZIP file:</strong><br>";
 $site = ClipitSite::get_site();
-$site_name = sanitise_string($site->name);
-echo "<input name='filename' value='".$site_name."_export.zip' type='text' size='50'> ";
+$site_name = str_replace(" ", "_", sanitise_string($site->name));
+$date_obj = new DateTime();
+$date = date("Ymd");
+echo "<input name='filename' value='$date-$site_name.zip' type='text' size='50'> ";
 echo "<input type='submit' value='Export all'>";
 echo "</p>";
 echo "</div>";

@@ -22,9 +22,10 @@ function clipit_api_init() {
     $plugin_name = "z02_clipit_api";
     // Load libraries
     $lib_path = elgg_get_plugins_path().$plugin_name."/libraries";
-    // Expose REST API
+    // Load REST API Expose functions
     loadFiles("$lib_path/clipit_rest_api/");
-    include_once("expose_clipit_api.php");
+    // Expose REST API
+    include_once("$lib_path/expose_clipit_api.php");
     // Load palettes
     loadFiles("$lib_path/performance_palette/");
     loadFiles("$lib_path/example_types/");

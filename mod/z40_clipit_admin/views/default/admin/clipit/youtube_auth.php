@@ -1,4 +1,14 @@
 <?php
+/**
+ * ClipIt - JuxtaLearn Web Space
+ * PHP version:     >= 5.2
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC JuxtaLearn Team
+ * @link            http://www.juxtalearn.eu
+ * @license         GNU Affero General Public License v3
+ * @package         ClipIt
+ * @subpackage      clipit_admin
+ */
+
 session_start();
 
 set_include_path(
@@ -56,12 +66,6 @@ if(get_config("google_refresh_token")) {
             <p/><input type='submit' value='Submit'>
         </form>";
 }
-?>
 
-<html>
-<body>
-<H3><?php echo $html_title ?></H3>
-<?php echo $html_body ?>
-</body>
-</html>
-
+echo "<H3>$html_title</H3>";
+echo "<br/><p>$html_body</p>";
