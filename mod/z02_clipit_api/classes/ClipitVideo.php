@@ -128,8 +128,9 @@ class ClipitVideo extends ClipitResource{
         set_include_path(
             get_include_path() . PATH_SEPARATOR . elgg_get_plugins_path() . "z02_clipit_api/libraries/google_api/src/"
         );
-        require_once elgg_get_plugins_path() . "z02_clipit_api/libraries/google_api/src/Google/Client.php";
-        require_once elgg_get_plugins_path() . "z02_clipit_api/libraries/google_api/src/Google/Service/YouTube.php";
+        $lib_path = elgg_get_plugins_path()."z02_clipit_api/libraries/";
+        require_once($lib_path."google_api/src/Google/Client.php");
+        require_once($lib_path."google_api/src/Google/Service/YouTube.php");
 
         $client = new Google_Client();
         $client->setClientId(get_config("google_id"));
