@@ -16,11 +16,12 @@
  */
 elgg_register_event_handler('init', 'system', 'urjc_backend_init');
 /**
- * Initialization method which loads objects, libraries, exposes the REST API, and registers test classes.
+ * Initialization method which loads libraries and configures some options and handlers.
  */
 function urjc_backend_init() {
-    loadFiles(elgg_get_plugins_path() . "z01_urjc_backend/libraries/");
-    loadFiles(elgg_get_plugins_path() . "z01_urjc_backend/libraries/php_excel/Classes/");
+    $lib_path = elgg_get_plugins_path() . "z01_urjc_backend/libraries/";
+    loadFiles("$lib_path/MIME_types");
+    loadFiles("$lib_path/php_excel/Classes/");
     date_default_timezone_set(get_config("timezone"));
     register_pam_handler('check_http_auth_token');
 }

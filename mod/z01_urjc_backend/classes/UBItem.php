@@ -108,7 +108,7 @@ class UBItem {
         if ($double_save) {
             // Only updates are saving time_created, thus first save for creation, second save for updating to
             // proper creation time if given
-            $elgg_object->save(false);
+            $elgg_object->save();
         }
         return $this->id = $elgg_object->get("guid");
     }

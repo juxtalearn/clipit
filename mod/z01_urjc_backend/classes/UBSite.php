@@ -188,47 +188,4 @@ class UBSite {
         return get_class_vars(get_called_class());
     }
 
-    static function export_data($path = null, $format = "excel") {
-        // New Excel object
-        $php_excel = new PHPExcel();
-        // Set document properties
-        $php_excel->getProperties()->setCreator("ClipIt")
-            ->setTitle("ClipIt export of " . get_called_class())
-            ->setKeywords("clipit export");
-        // Add table title and columns
-        $active_sheet = $php_excel->setActiveSheetIndex(0);
-        $active_sheet->getDefaultColumnDimension()->setWidth(40);
-        $active_sheet->getStyle(1)->getFont()->setBold(true);
-        $row = 1;
-        $col = 0;
-        $properties = static::list_properties();
-        foreach(array_keys($properties) as $prop_name) {
-            $active_sheet->setCellValueByColumnAndRow($col ++, $row, $prop_name." (".gettype($properties[$prop_name]).")");
-        }
-        $site = static::get_site();
-        // Write Items to spreadsheet
-        $row = 2;
-        $col = 0;
-        foreach(array_keys($properties) as $prop_name){
-            if(is_array($site->$prop_name)){
-                $serialized_value = implode(";",$site->$prop_name);
-                $active_sheet->setCellValueByColumnAndRow($col++, $row, $serialized_value);
-            } else {
-                $active_sheet->setCellValueByColumnAndRow($col++, $row, $site->$prop_name);
-            }
-        }
-        $row++;
-        $col = 0;
-        switch($format) {
-            case "excel":
-                if(empty($path)){
-                    $date_obj = new DateTime();
-                    $path = $date_obj->getTimestamp();
-                }
-                $objWriter = PHPExcel_IOFactory::createWriter($php_excel, 'Excel2007');
-                exec("mkdir -p /tmp/clipit_export/".$path);
-                $objWriter->save("/tmp/clipit_export/".$path."/".get_called_class().".xlsx");
-        }
-        return true;
-    }
 }
