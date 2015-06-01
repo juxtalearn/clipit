@@ -55,13 +55,17 @@ class ClipitVideo extends ClipitResource{
         parent::copy_to_elgg($elgg_entity);
         if(empty($this->preview)){
             $video_metadata = static::video_url_parser($this->url);
-            $this->preview = (string)$video_metadata[preview];
+            $this->preview = (string)$video_metadata["preview"];
         }
         $elgg_entity->set("preview", (string)$this->preview);
         $elgg_entity->set("duration", (int)$this->duration);
         $elgg_entity->set("overlay_metadata", (string)$this->overlay_metadata);
     }
 
+    /**
+     * @param $url
+     * @return array|bool
+     */
     static function video_url_parser($url){
         if ( $parse_url = parse_url($url) ) {
             if ( !isset($parts["scheme"]) )

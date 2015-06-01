@@ -123,7 +123,7 @@ echo "<input name='submit_options' type='submit' value='Save'>";
 
 echo "</form>";
 
-echo "<p/>";
+echo "<br/>";
 
 echo "<h3>Other Options</h3><br>";
 

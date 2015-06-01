@@ -9,22 +9,24 @@
  * @subpackage      clipit_admin
  */
 
+
+if(get_config("google_refresh_token")) {
+    echo "<H3>SUCCESS!</H3>";
+    echo "<br/><p>ClipIt is now authenticated with YouTube</p>";
+    return;
+}
+
 session_start();
 
-set_include_path(
-    get_include_path() . PATH_SEPARATOR . elgg_get_plugins_path() . "z02_clipit_api/libraries/google_api/src/"
-);
-require_once 'Google/Client.php';
-require_once 'Google/Service/YouTube.php';
+$google_lib_path = elgg_get_plugins_path()."z02_clipit_api/libraries/google_api/src";
+require_once($google_lib_path."/Google/Client.php");
+require_once($google_lib_path."/Google/Service/YouTube.php");
 $REDIRECT = elgg_get_site_url() . "admin/clipit/youtube_auth";
 $APP_NAME = elgg_get_site_entity()->name;
 $SCOPE = "https://www.googleapis.com/auth/youtube";
-
 $html_body = "";
-if(get_config("google_refresh_token")) {
-    $html_title = "SUCCESS!";
-    $html_body .= "ClipIt is now authenticated with YouTube";
-} elseif($_GET['code']) {
+
+if($_GET['code']) {
     $client = new Google_Client();
     $client->setAccessType('offline');
     $client->setApplicationName($APP_NAME);
