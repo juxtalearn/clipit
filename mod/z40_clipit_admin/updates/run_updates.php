@@ -1,7 +1,16 @@
 <?php
+/**
+ * ClipIt - JuxtaLearn Web Space
+ * PHP version:     >= 5.2
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC JuxtaLearn Team
+ * @link            http://www.juxtalearn.eu
+ * @license         GNU Affero General Public License v3
+ * @package         ClipIt
+ * @subpackage      clipit_admin
+ */
 
 // UPDATE FROM HERE {
-$VERSION = "2.3.16";
+$VERSION = "2.3.17";
 $update_files = array(
     // new versions must be inserted in to $update_files array, even if null
     "2.2.0" => null,
@@ -28,6 +37,7 @@ $update_files = array(
     "2.3.14" => "update_2.3.14.php",
     "2.3.15" => "update_2.3.15.php",
     "2.3.16" => null,
+    "2.3.17" => null,
     // add here future updates: "version_number" => "file_name"
 );
 // } TO HERE

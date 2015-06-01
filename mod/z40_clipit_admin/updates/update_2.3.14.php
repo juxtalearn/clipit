@@ -24,10 +24,10 @@ $perf_items = ClipitPerformanceItem::get_all();
 
 foreach($perf_items as $perf_item){
     $elgg_object = new ElggObject($perf_item->id);
-    $elgg_object->name = (string)$elgg_object->item_name[$pos];
-    $elgg_object->description = (string)$elgg_object->item_description[$pos];
-    $elgg_object->example = (string)$elgg_object->example[$pos];
-    $elgg_object->category = (string)$elgg_object->category[$pos];
-    $elgg_object->category_description = (string)$elgg_object->category_description[$pos];
+    $elgg_object->set("name", (string)$elgg_object->item_name[$pos]);
+    $elgg_object->set("description", (string)$elgg_object->item_description[$pos]);
+    $elgg_object->set("example", (string)$elgg_object->example[$pos]);
+    $elgg_object->set("category", (string)$elgg_object->category[$pos]);
+    $elgg_object->set("category_description", (string)$elgg_object->category_description[$pos]);
     $elgg_object->save();
 }

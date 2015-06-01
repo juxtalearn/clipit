@@ -1,7 +1,4 @@
 <?php
-
-
-
 /**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
@@ -14,20 +11,22 @@
  * @package         ClipIt
  * @subpackage      clipit_api
  */
+
+$key_name = "example_types";
+
+// Check if Example Types were already loaded.
+if(get_config($key_name) === true) {
+    return;
+} else{
+    set_config($key_name, true);
+}
+
 $file_path = "z02_clipit_api/libraries/example_types/";
 $file_name_de = "example_types_de.xlsx";
 $file_name_en = "example_types_en.xlsx";
 $file_name_es = "example_types_es.xlsx";
 $file_name_pt = "example_types_pt.xlsx";
 $file_name_sv = "example_types_sv.xlsx";
-$key_name = "example_types";
-
-// Check if Example Types were already loaded.
-if(get_config($key_name) === true) {
-    return;
-}
-
-set_config($key_name, true);
 
 // Load Example Types for all languages
 input_example_types_file(elgg_get_plugins_path() . $file_path . $file_name_en);

@@ -71,12 +71,8 @@ class ClipitRating extends UBItem {
      */
     protected function save($double_save=false) {
         parent::save($double_save);
-        static::set_tag_ratings($this->id, (array)$this->tag_rating_array, static::REL_RATING_TAGRATING);
-        static::set_performance_ratings(
-            $this->id,
-            (array)$this->performance_rating_array,
-            static::REL_RATING_PERFORMANCERATING
-        );
+        static::set_tag_ratings($this->id, (array)$this->tag_rating_array);
+        static::set_performance_ratings($this->id, (array)$this->performance_rating_array);
         return $this->id;
     }
 

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
@@ -12,9 +11,7 @@
  * @package         ClipIt
  * @subpackage      clipit_api
  */
-$file_path = "z02_clipit_api/libraries/performance_palette/";
-$file_prefix = "performance_palette_";
-$file_suffix = ".xlsx";
+
 $key_name = "performance_palette";
 
 // Check if Performance Palette was already loaded.
@@ -24,17 +21,22 @@ if(get_config($key_name) === true) {
     set_config($key_name, true);
 }
 
+$file_path = "z02_clipit_api/libraries/performance_palette/";
+$file_prefix = "performance_palette_";
+$file_suffix = ".xlsx";
+
 // Load Performance Palette for site language
-input_performance_palette_file(elgg_get_plugins_path().$file_path.$file_prefix.get_config("language").$file_suffix);
+load_performance_palette_file(
+    elgg_get_plugins_path().$file_path.$file_prefix.get_config("language").$file_suffix);
 
 /**
- * Add Performance Items from an Excel file
+ * Load Performance Items from an Excel file
  *
  * @param string $file Local file path
  *
  * @return array|null Array of User IDs, or null if error.
  */
-function input_performance_palette_file($file){
+function load_performance_palette_file($file){
     $php_excel = PHPExcel_IOFactory::load($file);
     $row_iterator = $php_excel->getSheet()->getRowIterator();
     while ($row_iterator->valid()) {
@@ -44,7 +46,8 @@ function input_performance_palette_file($file){
 }
 
 /**
- * Parse a single role from an Excel file, containing one performance palette item, and add it to ClipIt
+ * Parse a single role from an Excel file, containing one performance palette item,
+ * and add it to ClipIt
  *
  * @param PHPExcel_Worksheet_Row $row_iterator
  *
@@ -54,9 +57,8 @@ function parse_performance_palette_row($row_iterator) {
     $prop_value_array = array();
     $cell_iterator = $row_iterator->getCellIterator();
 
-    //columns: reference	language	name	description	example category	category_description
+    //columns: name description example category category_description
 
-    // reference column (equal across all languages)
     // Check for title or empty rows
     $value = $cell_iterator->current()->getValue();
     if (empty($value) || strtolower($value) == "name") {

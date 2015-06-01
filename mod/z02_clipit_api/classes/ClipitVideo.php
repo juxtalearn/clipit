@@ -30,6 +30,7 @@ class ClipitVideo extends ClipitResource{
     const REL_SITE_RESOURCE = ClipitSite::REL_SITE_VIDEO;
     public $preview = "";
     public $duration = 0;
+    public $overlay_metadata = "";
 
     /**
      * Loads object parameters stored in Elgg
@@ -41,6 +42,7 @@ class ClipitVideo extends ClipitResource{
         parent::copy_from_elgg($elgg_entity);
         $this->preview = (string)$elgg_entity->get("preview");
         $this->duration = (int)$elgg_entity->get("duration");
+        $this->overlay_metadata = (string)$elgg_entity->get("overlay_metadata");
     }
 
     /**
@@ -53,12 +55,17 @@ class ClipitVideo extends ClipitResource{
         parent::copy_to_elgg($elgg_entity);
         if(empty($this->preview)){
             $video_metadata = static::video_url_parser($this->url);
-            $this->preview = (string)$video_metadata[preview];
+            $this->preview = (string)$video_metadata["preview"];
         }
         $elgg_entity->set("preview", (string)$this->preview);
         $elgg_entity->set("duration", (int)$this->duration);
+        $elgg_entity->set("overlay_metadata", (string)$this->overlay_metadata);
     }
 
+    /**
+     * @param $url
+     * @return array|bool
+     */
     static function video_url_parser($url){
         if ( $parse_url = parse_url($url) ) {
             if ( !isset($parts["scheme"]) )
@@ -125,8 +132,9 @@ class ClipitVideo extends ClipitResource{
         set_include_path(
             get_include_path() . PATH_SEPARATOR . elgg_get_plugins_path() . "z02_clipit_api/libraries/google_api/src/"
         );
-        require_once elgg_get_plugins_path() . "z02_clipit_api/libraries/google_api/src/Google/Client.php";
-        require_once elgg_get_plugins_path() . "z02_clipit_api/libraries/google_api/src/Google/Service/YouTube.php";
+        $lib_path = elgg_get_plugins_path()."z02_clipit_api/libraries/";
+        require_once($lib_path."google_api/src/Google/Client.php");
+        require_once($lib_path."google_api/src/Google/Service/YouTube.php");
 
         $client = new Google_Client();
         $client->setClientId(get_config("google_id"));

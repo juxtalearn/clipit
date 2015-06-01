@@ -21,7 +21,7 @@ class ClipitPerformanceRating extends UBItem {
      */
     const SUBTYPE = "ClipitPerformanceRating";
     public $performance_item = 0;
-    public $star_rating = null;
+    public $star_rating = 0;
 
     /**
      * Loads object parameters stored in Elgg

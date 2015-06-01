@@ -16,26 +16,30 @@
  */
 elgg_register_event_handler('init', 'system', 'clipit_api_init');
 /**
- * Initialization method which loads objects, libraries, exposes the REST API, and registers test classes.
+ * Initialization method which loads objects, libraries, exposes the REST API,
+ * and registers test classes.
  */
 function clipit_api_init() {
     $plugin_name = "z02_clipit_api";
     // Load libraries
     $lib_path = elgg_get_plugins_path().$plugin_name."/libraries";
-    // Expose REST API
+    // Load REST API Expose functions
     loadFiles("$lib_path/clipit_rest_api/");
-    include_once("expose_clipit_api.php");
+    // Expose REST API
+    include_once("$lib_path/expose_clipit_api.php");
     // Load palettes
     loadFiles("$lib_path/performance_palette/");
     loadFiles("$lib_path/example_types/");
-    elgg_register_action("useradd", elgg_get_plugins_path().$plugin_name."/actions/useradd.php", 'admin');
+    elgg_register_action("useradd",
+        elgg_get_plugins_path().$plugin_name."/actions/useradd.php", 'admin');
     // Publish Site to Global (if not done already)
     if(get_config("clipit_global_published") !== true) {
         set_config("clipit_global_published", true);
         ClipitSite::publish_to_global();
     }
     // Add aditional plugin hook handler for permissions_check
-    elgg_register_plugin_hook_handler('permissions_check', 'all', 'clipit_override_permissions',600);
+    elgg_register_plugin_hook_handler('permissions_check',
+        'all', 'clipit_override_permissions',600);
 }
 
 function clipit_override_permissions($hook, $type, $value, $params){
