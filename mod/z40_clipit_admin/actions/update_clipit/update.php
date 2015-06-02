@@ -10,7 +10,6 @@
  */
 
 // Pull latest version from GitHub
-
 chdir(elgg_get_root_path());
 exec("git stash save");
 exec("git stash drop");
