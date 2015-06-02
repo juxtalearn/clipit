@@ -10,7 +10,7 @@
  */
 
 // UPDATE FROM HERE {
-$VERSION = "2.3.18";
+$VERSION = "2.4.1";
 $update_files = array(
     // new versions must be inserted in to $update_files array, even if null
     "2.2.0" => null,
@@ -39,6 +39,7 @@ $update_files = array(
     "2.3.16" => null,
     "2.3.17" => null,
     "2.3.18" => "update_2.3.18.php",
+    "2.4.1" => null,
     // add here future updates: "version_number" => "file_name"
 );
 // } TO HERE
@@ -69,7 +70,7 @@ while (key($update_files) != $old_version) {
 next($update_files);
 // apply all updates from there onwards
 while(key($update_files) != null){
-    var_dump($value = current($update_files));
+    $value = current($update_files);
     if(!empty($value)){
         include_once(elgg_get_plugins_path()."z40_clipit_admin/updates/$value");
         system_message("Applied update: $value");
