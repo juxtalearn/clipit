@@ -10,6 +10,10 @@
  */
 
 // Save posted options
+$clipit_tag_branch = (string)get_input("clipit_tag_branch");
+if(!empty($clipit_tag_branch)){
+    set_config("clipit_tag_branch", $clipit_tag_branch);
+}
 set_config("allow_registration", (bool)get_input("allow_registration"));
 set_config("timezone", (string)get_input("timezone"));
 set_config("clipit_site_type", (string)get_input("clipit_site_type"));

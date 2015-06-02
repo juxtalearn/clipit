@@ -12,6 +12,7 @@
 // Fetch current options
 $allow_registration = (bool)get_config("allow_registration");
 $timezone = (string)get_config("timezone");
+$clipit_tag_branch = (string)get_config("clipit_tag_branch");
 $clipit_site_type = (string)get_config("clipit_site_type");
 $clipit_global_url = (string)get_config("clipit_global_url");
 $clipit_global_login = (string)get_config("clipit_global_login");
@@ -31,6 +32,15 @@ echo elgg_view('input/securitytoken');
 echo "<tr height='40'>";
 echo "<td>";
 echo "<h3>General Options</h3>";
+echo "</td>";
+echo "</tr>";
+
+echo "<tr height='40'>";
+echo "<td width='300'>";
+echo "<strong>ClipIt Tag Branch:</strong>";
+echo "</td>";
+echo "<td>";
+echo "<input name='clipit_tag_branch' value=$clipit_tag_branch type='text' size='40'/>";
 echo "</td>";
 echo "</tr>";
 

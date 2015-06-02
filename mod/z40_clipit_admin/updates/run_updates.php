@@ -68,10 +68,10 @@ while (key($update_files) != $old_version) {
 // skip old version's update file
 next($update_files);
 // apply all updates from there onwards
-while((key($update_files) != $VERSION) && (key($update_files) != null)){
-    $value = current($update_files);
+while(key($update_files) != null){
+    var_dump($value = current($update_files));
     if(!empty($value)){
-        include_once((string)$value);
+        include_once(elgg_get_plugins_path()."z40_clipit_admin/updates/$value");
         system_message("Applied update: $value");
     }
     next($update_files);
