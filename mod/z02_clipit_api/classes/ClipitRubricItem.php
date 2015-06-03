@@ -31,7 +31,9 @@ class ClipitRubricItem extends UBItem{
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
         $this->level_array = (array)$elgg_entity->get("level_array");
-        $this->level_increment = 1.0 / count($this->level_array);
+        if (!empty($this->level_array)) {
+            $this->level_increment = 1.0 / count($this->level_array);
+        }
     }
 
     /**
