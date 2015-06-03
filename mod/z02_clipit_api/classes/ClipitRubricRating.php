@@ -17,6 +17,7 @@ class ClipitRubricRating extends UBItem{
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitRubricRating";
+    const REL_RUBRICRATING_RUBRICITEM = "ClipitRubricRating-ClipitRubricItem";
 
     public $rubric_item = 0;
     public $rubric_level = 0;
@@ -28,8 +29,13 @@ class ClipitRubricRating extends UBItem{
      */
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
-        $this->rubric_item = (array)$elgg_entity->get("rubric_item");
-        $this->rubric_level = (array)$elgg_entity->get("rubric_level");
+        $this->rubric_item = (int)static::get_rubric_item($this->id);
+        $this->rubric_level = (int)$elgg_entity->get("rubric_level");
+    }
+
+    static function get_rubric_item($id)
+    {
+        return array_pop(UBCollection::get_items($id, static::REL_RUBRICRATING_RUBRICITEM));
     }
 
     /**
@@ -39,8 +45,27 @@ class ClipitRubricRating extends UBItem{
      */
     protected function copy_to_elgg($elgg_entity) {
         parent::copy_to_elgg($elgg_entity);
-        $elgg_entity->set("rubric_item", (array)$this->rubric_item);
-        $elgg_entity->set("rubric_level", (array)$this->rubric_level);
+        $elgg_entity->set("rubric_level", (int)$this->rubric_level);
+    }
+
+    /**
+     * Saves this instance to the system.
+     *
+     * @param  bool $double_save if $double_save is true, this object is saved twice to ensure
+     * that all properties are updated properly. E.g. the time created property can only be set
+     * on ElggObjects during an update. Defaults to false.
+     * @return bool|int Returns the Id of the saved instance, or false if error
+     */
+    protected function save($double_save = false)
+    {
+        parent::save($double_save);
+        static::set_rubric_item($this->id, $this->rubric_item);
+        return $this->id;
+    }
+
+    static function set_rubric_item($id, $rubric_id)
+    {
+        return UBCollection::set_items($id, array($rubric_id), static::REL_RUBRICRATING_RUBRICITEM);
     }
 
 }
