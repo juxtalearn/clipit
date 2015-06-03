@@ -24,7 +24,7 @@ $example_types = (bool)get_config("example_types");
 $fixed_performance_rating = (bool)get_config("fixed_performance_rating");
 $quiz_results_after_task_end = (bool)get_config("quiz_results_after_task_end");
 
-// Structure
+// Table structure
 echo "<table>";
 // Main options form
 echo "<form action='".elgg_get_site_url()."action/clipit_options/apply' method='post'>";
