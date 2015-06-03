@@ -639,7 +639,7 @@ class UBItem {
             return 0;
         }elseif(!$i1){
             return 1;
-        }elseif(!$i1){
+        }elseif(!$i2){
             return -1;
         }
         if((int)$i1->time_created == (int)$i2->time_created) {
@@ -661,7 +661,7 @@ class UBItem {
             return 0;
         }elseif(!$i1){
             return 1;
-        }elseif(!$i1){
+        }elseif(!$i2){
             return -1;
         }
         if((int)$i1->time_created == (int)$i2->time_created) {
@@ -683,7 +683,7 @@ class UBItem {
             return 0;
         }elseif(!$i1){
             return 1;
-        }elseif(!$i1){
+        }elseif(!$i2){
             return -1;
         }
         return strcmp($i1->name, $i2->name);
@@ -702,7 +702,7 @@ class UBItem {
             return 0;
         }elseif(!$i1){
             return 1;
-        }elseif(!$i1){
+        }elseif(!$i2){
             return -1;
         }
         return strcmp($i2->name, $i1->name);
@@ -721,7 +721,7 @@ class UBItem {
             return 0;
         }elseif(!$i1){
             return 1;
-        }elseif(!$i1){
+        }elseif(!$i2){
             return -1;
         }
         if((int)$i1 == (int)$i2) {
@@ -743,7 +743,7 @@ class UBItem {
             return 0;
         }elseif(!$i1){
             return 1;
-        }elseif(!$i1){
+        }elseif(!$i2){
             return -1;
         }
         if((int)$i1 == (int)$i2) {
