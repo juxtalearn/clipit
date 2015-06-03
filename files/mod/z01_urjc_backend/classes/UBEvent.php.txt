@@ -36,8 +36,7 @@ class UBEvent {
             null, // $timebefore
             null, // $timeafter
             null, // $object_id
-            null, // $ip_address
-            null // $owner
+            null // $ip_address
         );
     }
 

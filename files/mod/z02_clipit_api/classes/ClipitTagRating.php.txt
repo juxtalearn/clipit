@@ -28,7 +28,7 @@ class ClipitTagRating extends UBItem {
     /**
      * @var bool Defines whether the linked Tag has been correctly covered or not.
      */
-    public $is_used = null;
+    public $is_used = false;
 
     /**
      * Loads object parameters stored in Elgg
@@ -66,7 +66,7 @@ class ClipitTagRating extends UBItem {
                 foreach($elgg_objects as $elgg_object) {
                     $temp_array[] = new static($elgg_object->guid, $elgg_object);
                 }
-                $tag_rating_array[tag_id] = $temp_array;
+                $tag_rating_array[$tag_id] = $temp_array;
             } else {
                 $tag_rating_array[$tag_id] = null;
             }
