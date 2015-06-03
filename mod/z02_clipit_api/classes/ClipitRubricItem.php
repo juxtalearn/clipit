@@ -18,8 +18,10 @@ class ClipitRubricItem extends UBItem{
      */
     const SUBTYPE = "ClipitRubric";
 
+    // Rubric levels, from less to most score
     public $level_array = array();
-    public $level_score = 0.0;
+    // Score for the first level, and increment to apply on each following level
+    public $level_increment = 0.0;
 
     /**
      * Loads object parameters stored in Elgg
@@ -29,7 +31,7 @@ class ClipitRubricItem extends UBItem{
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
         $this->level_array = (array)$elgg_entity->get("level_array");
-        $this->level_score = 10.0 / count($this->level_array);
+        $this->level_increment = 1.0 / count($this->level_array);
     }
 
     /**

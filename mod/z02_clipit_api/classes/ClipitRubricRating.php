@@ -20,7 +20,8 @@ class ClipitRubricRating extends UBItem{
     const REL_RUBRICRATING_RUBRICITEM = "ClipitRubricRating-ClipitRubricItem";
 
     public $rubric_item = 0;
-    public $rubric_level = 0;
+    public $level = 0;
+    public $score = 0.0;
 
     /**
      * Loads object parameters stored in Elgg
@@ -30,7 +31,11 @@ class ClipitRubricRating extends UBItem{
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
         $this->rubric_item = (int)static::get_rubric_item($this->id);
-        $this->rubric_level = (int)$elgg_entity->get("rubric_level");
+        $this->level = (int)$elgg_entity->get("level");
+        if (!empty($this->rubric_item)) {
+            $rubric_item = array_pop(ClipitRubricItem::get_by_id(array($this->rubric_item)));
+            $this->score = (float)$rubric_item->level_increment * $this->level;
+        }
     }
 
     static function get_rubric_item($id)
@@ -45,7 +50,7 @@ class ClipitRubricRating extends UBItem{
      */
     protected function copy_to_elgg($elgg_entity) {
         parent::copy_to_elgg($elgg_entity);
-        $elgg_entity->set("rubric_level", (int)$this->rubric_level);
+        $elgg_entity->set("level", (int)$this->level);
     }
 
     /**
