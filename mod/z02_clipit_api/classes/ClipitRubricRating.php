@@ -19,8 +19,11 @@ class ClipitRubricRating extends UBItem{
     const SUBTYPE = "ClipitRubricRating";
     const REL_RUBRICRATING_RUBRICITEM = "ClipitRubricRating-ClipitRubricItem";
 
+    // ID of the rated Rubric Item
     public $rubric_item = 0;
+    // Rubric level selected
     public $level = 0;
+    // Score for the level selected
     public $score = 0.0;
 
     /**
