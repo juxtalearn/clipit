@@ -24,6 +24,8 @@ $example_types = (bool)get_config("example_types");
 $fixed_performance_rating = (bool)get_config("fixed_performance_rating");
 $quiz_results_after_task_end = (bool)get_config("quiz_results_after_task_end");
 
+echo "<p><strong>*** WARNING *** </strong> These options can break ClipIt, be careful!</p>";
+
 // Table structure
 echo "<table>";
 // Main options form

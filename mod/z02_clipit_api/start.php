@@ -28,7 +28,7 @@ function clipit_api_init() {
     // Expose REST API
     include_once("$lib_path/expose_clipit_api.php");
     // Load palettes
-    loadFiles("$lib_path/performance_palette/");
+    // @deprecated loadFiles("$lib_path/performance_palette/");
     loadFiles("$lib_path/example_types/");
     elgg_register_action("useradd",
         elgg_get_plugins_path().$plugin_name."/actions/useradd.php", 'admin');
