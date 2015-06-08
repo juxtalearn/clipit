@@ -88,14 +88,133 @@ class UBItem {
     }
 
     /**
+     * Loads object parameters stored in Elgg
+     *
+     * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
+     */
+    protected function copy_from_elgg($elgg_entity)
+    {
+        $this->id = (int)$elgg_entity->get("guid");
+        $this->name = (string)$elgg_entity->get("name");
+        $this->description = (string)$elgg_entity->get("description");
+        $this->url = (string)$elgg_entity->get("url");
+        $this->owner_id = (int)$elgg_entity->getOwnerGUID();
+        $this->time_created = (int)$elgg_entity->getTimeCreated();
+        $this->cloned_from = (int)static::get_cloned_from($this->id);
+        $this->clone_array = (array)static::get_clones($this->id);
+    }
+
+    /**
+     * Get the parent Item ID for an Item.
+     *
+     * @param int $id Item from which to return parent
+     * @param bool $recursive Whether to look for parent recursively
+     *
+     * @return int Array of Item IDs
+     */
+    static function get_cloned_from($id, $recursive = false)
+    {
+        $parent = UBCollection::get_items($id, static::REL_PARENT_CLONE, true);
+        if (empty($parent)) {
+            return 0;
+        }
+        if ($recursive) {
+            $new_parent = $parent;
+            while (!empty($new_parent)) {
+                $parent = $new_parent;
+                $new_parent = UBCollection::get_items(array_pop($parent), static::REL_PARENT_CLONE, true);
+            }
+        }
+        return $parent = (int)array_pop($parent);
+    }
+
+    /**
+     * Get an ID array of all cloned Items from a specified one.
+     *
+     * @param int $id Item from which to return clones
+     * @param bool $recursive Whether to look for clones recursively
+     *
+     * @return int[] Array of Item IDs
+     */
+    static function get_clones($id, $recursive = false)
+    {
+        $clone_array = array();
+        $item_clones = UBCollection::get_items($id, static::REL_PARENT_CLONE);
+        if ($recursive) {
+            foreach ($item_clones as $clone) {
+                array_push($clone_array, $clone);
+                $clone_array = array_merge($clone_array, static::get_clones($clone, true));
+            }
+        } else {
+            $clone_array = $item_clones;
+        }
+        return $clone_array;
+    }
+
+    /* Static Functions */
+
+    /**
+     * Create a new instance of this class, and assign values to its properties.
+     *
+     * @param array $prop_value_array Array of [property]=>value pairs to set into the new instance
+     *
+     * @return int|bool Returns instance Id if correct, or false if error
+     */
+    static function create($prop_value_array)
+    {
+        return static::set_properties(null, $prop_value_array);
+    }
+
+    /**
+     * Sets values to specified properties of an Item
+     *
+     * @param int $id Id of Item to set property values
+     * @param array $prop_value_array Array of property=>value pairs to set into the Item
+     *
+     * @return int|bool Returns Id of Item if correct, or false if error
+     * @throws InvalidParameterException
+     */
+    static function set_properties($id, $prop_value_array)
+    {
+        if(!$item = new static($id)) {
+            return false;
+        }
+        $class_properties = (array)static::list_properties();
+        foreach ($prop_value_array as $prop => $value) {
+            if (!array_key_exists($prop, $class_properties)) {
+                throw new InvalidParameterException("ERROR: One or more property names do not exist.");
+            }
+            if ($prop == "id") {
+                continue; // cannot set an item's ID manually.
+            }
+            $item->$prop = $value;
+        }
+        if (array_key_exists("time_created", $prop_value_array)) {
+            return $item->save(true);
+        } else {
+            return $item->save(false);
+        }
+    }
+
+    /**
+     * Lists the properties contained in this object
+     * @return array Array of properties with type and default value
+     */
+    static function list_properties()
+    {
+        return get_class_vars(get_called_class());
+    }
+
+    /**
      * Saves this instance to the system.
      * @param bool $double_save if double_save is true, this object is saved twice to ensure that all properties are
      * updated properly. E.g. the time_created property can only beset on ElggObjects during an update. Defaults to false!
      * @return bool|int Returns id of saved instance, or false if error.
      */
-    protected function save($double_save=false) {
-        if(!empty($this->id)) {
-            if(!$elgg_object = new ElggObject($this->id)) {
+    protected function save($double_save = false)
+    {
+        if (!empty($this->id)) {
+            if (!$elgg_object = new ElggObject($this->id)) {
                 return false;
             }
         } else {
@@ -114,119 +233,21 @@ class UBItem {
     }
 
     /**
-     * Loads object parameters stored in Elgg
-     *
-     * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
-     */
-    protected function copy_from_elgg($elgg_entity) {
-        $this->id = (int)$elgg_entity->get("guid");
-        $this->name = (string)$elgg_entity->get("name");
-        $this->description = (string)$elgg_entity->get("description");
-        $this->url = (string)$elgg_entity->get("url");
-        $this->owner_id = (int)$elgg_entity->getOwnerGUID();
-        $this->time_created = (int)$elgg_entity->getTimeCreated();
-        $this->cloned_from = (int)static::get_cloned_from($this->id);
-        $this->clone_array = (array)static::get_clones($this->id);
-    }
-
-    /**
      * Copy $this object parameters into an Elgg entity.
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function copy_to_elgg($elgg_entity) {
+    protected function copy_to_elgg($elgg_entity)
+    {
         $elgg_entity->set("name", (string)$this->name);
         $elgg_entity->set("description", (string)$this->description);
         $elgg_entity->set("url", (string)$this->url);
-        if(!empty($this->owner_id)) {
+        if (!empty($this->owner_id)) {
             $elgg_entity->set("owner_guid", (int)$this->owner_id);
         }
-        $elgg_entity->set("time_created",(int)$this->time_created);
+        $elgg_entity->set("time_created", (int)$this->time_created);
         $elgg_entity->set("access_id", ACCESS_PUBLIC);
 
-    }
-
-    /* Static Functions */
-    /**
-     * Lists the properties contained in this object
-     * @return array Array of properties with type and default value
-     */
-    static function list_properties() {
-        return get_class_vars(get_called_class());
-    }
-
-    /**
-     * Get specified property values for an Item
-     *
-     * @param int   $id         Id of instance to get properties from
-     * @param array $prop_array Array of property names to get values from
-     *
-     * @return array|bool Returns an array of property=>value pairs, or false if error
-     * @throws InvalidParameterException
-     */
-    static function get_properties($id, $prop_array = null) {
-        if(!$item = new static($id)) {
-            return null;
-        }
-        $prop_value_array = array();
-        if(!empty($prop_array)) {
-            foreach($prop_array as $prop) {
-                if(array_key_exists($prop, static::list_properties())) {
-                    $prop_value_array[$prop] = $item->$prop;
-                } else {
-                    throw new InvalidParameterException("ERROR: One or more property names do not exist.");
-                }
-            }
-        } else {
-            $prop_array = static::list_properties();
-            do {
-                $prop = key($prop_array);
-                $prop_value_array[$prop] = $item->$prop;
-                next($prop_array);
-            } while(key($prop_array) !== null);
-        }
-        return $prop_value_array;
-    }
-
-    /**
-     * Sets values to specified properties of an Item
-     *
-     * @param int   $id               Id of Item to set property values
-     * @param array $prop_value_array Array of property=>value pairs to set into the Item
-     *
-     * @return int|bool Returns Id of Item if correct, or false if error
-     * @throws InvalidParameterException
-     */
-    static function set_properties($id, $prop_value_array) {
-        if(!$item = new static($id)) {
-            return false;
-        }
-        $class_properties = (array)static::list_properties();
-        foreach($prop_value_array as $prop => $value) {
-            if(!array_key_exists($prop, $class_properties)) {
-                throw new InvalidParameterException("ERROR: One or more property names do not exist.");
-            }
-            if($prop == "id") {
-                continue; // cannot set an item's ID manually.
-            }
-            $item->$prop = $value;
-        }
-        if (array_key_exists("time_created", $prop_value_array)){
-            return $item->save(true);
-        } else {
-            return $item->save(false);
-        }
-    }
-
-    /**
-     * Create a new instance of this class, and assign values to its properties.
-     *
-     * @param array $prop_value_array Array of [property]=>value pairs to set into the new instance
-     *
-     * @return int|bool Returns instance Id if correct, or false if error
-     */
-    static function create($prop_value_array) {
-        return static::set_properties(null, $prop_value_array);
     }
 
     /**
@@ -251,13 +272,48 @@ class UBItem {
     }
 
     /**
+     * Get specified property values for an Item
+     *
+     * @param int $id Id of instance to get properties from
+     * @param array $prop_array Array of property names to get values from
+     *
+     * @return array|bool Returns an array of property=>value pairs, or false if error
+     * @throws InvalidParameterException
+     */
+    static function get_properties($id, $prop_array = null)
+    {
+        if (!$item = new static($id)) {
+            return null;
+        }
+        $prop_value_array = array();
+        if (!empty($prop_array)) {
+            foreach ($prop_array as $prop) {
+                if (array_key_exists($prop, static::list_properties())) {
+                    $prop_value_array[$prop] = $item->$prop;
+                } else {
+                    throw new InvalidParameterException("ERROR: One or more property names do not exist.");
+                }
+            }
+        } else {
+            $prop_array = static::list_properties();
+            do {
+                $prop = key($prop_array);
+                $prop_value_array[$prop] = $item->$prop;
+                next($prop_array);
+            } while (key($prop_array) !== null);
+        }
+        return $prop_value_array;
+    }
+
+    /**
      * Links two entities as parent and clone
      *
      * @param int $id_parent ID of parent entity
      * @param int $id_clone IF of clone entity
      * @return bool true if OK
      */
-    static function link_parent_clone($id_parent, $id_clone){
+    static function link_parent_clone($id_parent, $id_clone)
+    {
         return UBCollection::add_items($id_parent, array($id_clone), static::REL_PARENT_CLONE, true);
     }
 
@@ -267,7 +323,8 @@ class UBItem {
      * @param int $id ID of entity
      * @return bool returns true if OK
      */
-    static function unlink_from_parent($id){
+    static function unlink_from_parent($id)
+    {
         $parent = static::get_cloned_from($id);
         return UBCollection::remove_items($parent, array($id), static::REL_PARENT_CLONE);
     }
@@ -278,54 +335,10 @@ class UBItem {
      * @param int $id ID of entity
      * @return bool returns true if OK]
      */
-    static function unlink_from_clones($id){
+    static function unlink_from_clones($id)
+    {
         $clones = static::get_clones($id);
         return UBCollection::remove_items($id, $clones, static::REL_PARENT_CLONE);
-    }
-
-    /**
-     * Get an ID array of all cloned Items from a specified one.
-     *
-     * @param int $id Item from which to return clones
-     * @param bool $recursive Whether to look for clones recursively
-     *
-     * @return int[] Array of Item IDs
-     */
-    static function get_clones($id, $recursive = false) {
-        $clone_array = array();
-        $item_clones = UBCollection::get_items($id, static::REL_PARENT_CLONE);
-        if($recursive) {
-            foreach($item_clones as $clone) {
-                array_push($clone_array, $clone);
-                $clone_array = array_merge($clone_array, static::get_clones($clone, true));
-            }
-        }else{
-            $clone_array = $item_clones;
-        }
-        return $clone_array;
-    }
-
-    /**
-     * Get the parent Item ID for an Item.
-     *
-     * @param int $id Item from which to return parent
-     * @param bool $recursive Whether to look for parent recursively
-     *
-     * @return int Array of Item IDs
-     */
-    static function get_cloned_from($id, $recursive = false) {
-        $parent = UBCollection::get_items($id, static::REL_PARENT_CLONE, true);
-        if(empty($parent)){
-            return 0;
-        }
-        if($recursive){
-            $new_parent = $parent;
-            while(!empty($new_parent)){
-                $parent = $new_parent;
-                $new_parent = UBCollection::get_items(array_pop($parent), static::REL_PARENT_CLONE, true);
-            }
-        }
-        return $parent = (int)array_pop($parent);
     }
 
     /**
@@ -351,36 +364,13 @@ class UBItem {
     }
 
     /**
-     * Delete Items given their Id.
-     *
-     * @param array $id_array List of Item Ids to delete
-     *
-     * @return bool Returns true if correct, or false if error
-     */
-    static function delete_by_id($id_array) {
-        if(empty($id_array)){
-            return true;
-        }
-        foreach($id_array as $id) {
-            // Don't allow to delete the Site ID
-            $site = elgg_get_site_entity();
-            if($id == $site->guid){
-                continue;
-            }
-            if(delete_entity((int)$id) === false) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
      * Delete All Items for this class.
      * @return bool Returns true if correct, or false if error
      */
-    static function delete_all() {
+    static function delete_all()
+    {
         $items = static::get_all(0, 0, "", true, true);
-        if(!empty($items)) {
+        if (!empty($items)) {
             static::delete_by_id($items);
         }
         return true;
@@ -389,16 +379,17 @@ class UBItem {
     /**
      * Get all Object instances of this TYPE and SUBTYPE from the system, optionally only a specified property.
      *
-     * @param int    $limit           Number of results to show, default= 0 [no limit] (optional)
-     * @param int    $offset          Offset from where to show results, default=0 [from the begining] (optional)
-     * @param string $order_by        Default = "" (don't order)
-     * @param bool   $ascending       Default = true (ascending order)
-     * @param bool   $id_only         Whether to only return IDs, or return whole objects (default: false) No ordering
+     * @param int $limit Number of results to show, default= 0 [no limit] (optional)
+     * @param int $offset Offset from where to show results, default=0 [from the begining] (optional)
+     * @param string $order_by Default = "" (don't order)
+     * @param bool $ascending Default = true (ascending order)
+     * @param bool $id_only Whether to only return IDs, or return whole objects (default: false) No ordering
      * will be done if it is set to true.
      *
      * @return static[]|int[] Returns an array of Objects, or Object IDs if id_only = true
      */
-    static function get_all($limit = 0, $offset = 0, $order_by = "", $ascending = true, $id_only = false) {
+    static function get_all($limit = 0, $offset = 0, $order_by = "", $ascending = true, $id_only = false)
+    {
         $return_array = array();
         $elgg_entity_array = elgg_get_entities(
             array(
@@ -409,10 +400,10 @@ class UBItem {
                 'sort_by' => "e.time_created"
             )
         );
-        if(!$elgg_entity_array){
+        if (!$elgg_entity_array) {
             return $return_array;
         }
-        if($id_only) {
+        if ($id_only) {
             foreach ($elgg_entity_array as $elgg_entity) {
                 $return_array[] = $elgg_entity->guid;
             }
@@ -421,14 +412,14 @@ class UBItem {
         foreach ($elgg_entity_array as $elgg_entity) {
             $return_array[(int)$elgg_entity->guid] = new static((int)$elgg_entity->guid, $elgg_entity);
         }
-        if(!empty($order_by)) {
+        if (!empty($order_by)) {
             $args = array("order_by" => $order_by, "ascending" => $ascending);
             uasort($return_array,
                 function ($i1, $i2) use ($args) {
                     if (!$i1 && !$i2) {
                         return 0;
                     }
-                    if($i1->$args["order_by"] == $i2->$args["order_by"]){
+                    if ($i1->$args["order_by"] == $i2->$args["order_by"]) {
                         return 0;
                     }
                     if ((bool)$args["ascending"]) {
@@ -453,6 +444,31 @@ class UBItem {
                 });
         }
         return $return_array;
+    }
+
+    /**
+     * Delete Items given their Id.
+     *
+     * @param array $id_array List of Item Ids to delete
+     *
+     * @return bool Returns true if correct, or false if error
+     */
+    static function delete_by_id($id_array)
+    {
+        if (empty($id_array)) {
+            return true;
+        }
+        foreach ($id_array as $id) {
+            // Don't allow to delete the Site ID
+            $site = elgg_get_site_entity();
+            if ($id == $site->guid) {
+                continue;
+            }
+            if (delete_entity((int)$id) === false) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -519,8 +535,24 @@ class UBItem {
      *
      * @return static[] Returns an array of Items
      */
-    static function get_by_owner($owner_array, $limit = 0) {
+    static function get_by_owner($owner_array = null, $limit = 0)
+    {
         $object_array = array();
+        if (empty($owner_array)) {
+            $item_array = static::get_all();
+            $return_array = array();
+            foreach ($item_array as $item) {
+                if (!isset($return_array[$item->owner_id])) {
+                    $return_array[$item->owner_id] = array();
+                }
+                $return_array[$item->owner_id][] = $item;
+            }
+            foreach ($return_array as $owner_items) {
+                uasort($owner_items, 'static::sort_by_date');
+            }
+            return $return_array;
+        }
+        // else if !empty($owner_array)
         foreach($owner_array as $owner_id) {
             $elgg_object_array = elgg_get_entities(
                 array(
