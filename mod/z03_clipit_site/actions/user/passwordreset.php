@@ -16,13 +16,11 @@ function execute_new_password($user_guid, $conf_code, $password) {
         $saved_code = $user->getPrivateSetting('passwd_conf_code');
 
         if ($saved_code && $saved_code == $conf_code && $password) {
-
-            if (force_user_password_reset($user_guid, $password)) {
+            if (ClipitUser::set_properties($user_guid, array('password' => $password))) {
                 remove_private_setting($user_guid, 'passwd_conf_code');
                 // clean the logins failures
                 reset_login_failure_count($user_guid);
-
-                login($user);
+                ClipitUser::login($user->username, $password);
                 return true;
                /* return notify_user($user->guid, $CONFIG->site->guid,
                     elgg_echo('email:resetpassword:subject'), $email, array(), 'email');*/
@@ -47,7 +45,7 @@ try{
         throw new RegistrationException(elgg_echo('RegistrationException:PasswordMismatch'));
     }
     if (execute_new_password($user_guid, $code, $password)) {
-        throw new RegistrationException(elgg_echo('user:password:success'));
+        system_message(elgg_echo('user:password:success'));
     } else {
         throw new RegistrationException(elgg_echo('user:password:fail'));
     }
