@@ -45,7 +45,7 @@ if(trim($current_password) != "" && ($password === $password2)){
         'username' => $user->login,
         'password' => $current_password
     );
-    if(validate_password($password2) && pam_auth_userpass($credentials)){
+    if(pam_auth_userpass($credentials)){
         ClipitUser::set_properties($user_id, array(
             'password' => $password2,
         ));
