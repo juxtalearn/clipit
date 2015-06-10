@@ -17,7 +17,7 @@ if(ClipitDataExport::export_all(get_input("filename"))){
     header("Content-Type: application/download");
     header("Content-Disposition: attachment; filename='".get_input("filename")."'");
     readfile($filepath);
+    exit();
 } else{
     register_error("Error while exporting data");
 }
-exit();
