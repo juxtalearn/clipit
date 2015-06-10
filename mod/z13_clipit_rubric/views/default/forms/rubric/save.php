@@ -11,117 +11,133 @@
  * @package         ClipIt
  */
 $rubrics = array();
-$rubrics = array_pop(elgg_extract('entities', $vars));
+$rubrics = elgg_extract('entities', $vars);
 $button_value = elgg_extract('submit_value', $vars);
-$id = uniqid('rubric_');
 ?>
-<script>
-$(function(){
-    $(document).on('click', '.add-rubric', function(){
-        var container = $(this).closest('.group-input'),
-            clone = <?php echo json_encode(elgg_view('forms/rubric/save_inputs', array('id' => $id, 'input_prefix' => 'item['.$id.']')));?>,
-            clone = clone.split('<?php echo $id;?>').join(Date.now()),
-            $clone = $(clone);
-        container.find('.performance-items').append($clone);
-        $clone.find('.remove-p').show();
-        $clone.find('input[type=text]:first').focus();
-    });
-});
-</script>
-<div role="tabpanel">
-    <!-- Tab panes -->
-    <div class="tab-content">
-        <div class="row performance_item" id="<?php echo $i;?>" style="padding: 20px;">
-            <div class="col-md-7"><h4 class="margin-0 margin-bottom-15"><?php echo elgg_echo('performance_item');?></h4></div>
-            <div class="col-md-5"><h4 class="margin-0 margin-bottom-15"><?php echo elgg_echo('category');?></h4></div>
-            <div class="col-md-7 group-input" style="border-right: 1px solid #eee;">
-                <div class="performance-items">
-                <?php
-                $count = 0;
-                $category_name = $rubrics[0]->category;
-                $category_description = $rubrics[0]->category_description;
-                foreach($rubrics as $rubric):
-                    $input_prefix = 'item['.$count.']';
-                    $disabled = false;
-                    if(isset($rubric->id)){
-                        $id = $rubric->id;
-                        $entity_input =  elgg_view('input/hidden', array(
-                            'name' => $input_prefix.'[id]',
-                            'value' => $rubric->id
-                        ));
-                        if($rubric->owner_id != elgg_get_logged_in_user_guid()){
-                            $user = array_pop(ClipitUser::get_by_id(array($rubric->owner_id)));
-                            $disabled = true;
-                            $entity_input = false;
-                        }
-                        echo $entity_input;
-                    }
-                    echo elgg_view('forms/rubric/save_inputs', array(
-                        'entity' => $rubric,
-                        'owner' => $user,
-                        'disabled' => $disabled,
-                        'input_prefix' => $input_prefix,
-                        'id' => $id
-                    ));
-                    $count++;
-                endforeach;
-                ?>
-                </div>
-                <div class="clearfix"></div>
-                <?php echo elgg_view('output/url', array(
-                    'class' => 'btn btn-xs btn-primary btn-border-blue add-rubric add-input',
-                    'text'  => elgg_echo('add'),
-                ));
-                ?>
-            </div>
-            <div class="col-md-5">
-                <?php if($category_name):?>
-                    <p><strong><?php echo $category_name;?></strong></p>
-                    <?php echo elgg_view("input/hidden", array(
-                        'name' => 'category',
-                        'value' => $category_name,
-                    ));
-                    ?>
-                    <?php if($category_description):?>
-                        <small class="show"><?php echo elgg_echo('description');?></small>
-                        <p><?php echo $category_description;?></p>
-                        <?php echo elgg_view("input/hidden", array(
-                            'name' => 'category_description',
-                            'value' => $category_description,
-                        ));
-                        ?>
-                    <?php endif;?>
-                <?php else:?>
-                    <div class="form-group">
-                        <label for="category-name[<?php echo $i;?>]"><?php echo elgg_echo('title');?></label>
-                        <?php echo elgg_view("input/text", array(
-                            'name' => 'category',
-                            'class' => 'form-control input-category-name',
-                            'required' => true,
-                            'value' => $category_name,
-                        ));
-                        ?>
-                        <div class="margin-top-10">
-                            <a data-toggle="collapse" href="#category_desc_<?php echo $i; ?>" aria-expanded="false" class="margin-right-10">
-                                <strong>+ <?php echo elgg_echo('description'); ?></strong>
-                            </a>
-                        </div>
-                        <div class="form-group collapse margin-top-10" id="category_desc_<?php echo $i;?>">
-                            <?php
-                            echo elgg_view('input/plaintext', array(
-                                'name' => 'category_description',
-                                'class' => 'form-control input-category-description',
-                                'rows' => 7,
-                                'value' => $category_description
-                            ));
-                            ?>
-                        </div>
-                    </div>
-                <?php endif;?>
+<link rel="stylesheet" href="http://rawgithub.com/FluidApps/bootstrap-horizon/master/bootstrap-horizon.css">
+<style>
+    fieldset{
+        min-width: 0;
+    }
+    .row-horizon{
+        padding-bottom: 5px;
+    }
+    .row-horizon > .col-md-3 {
+        padding: 0 5px;
+        width: 19.95%;
+    }
+    .rubric-item .rating{
+        background-color: #d9edf7;
+        font-size: 85%;
+        padding: 2px 5px;
+        color: #32b4e5;
+        margin-top: 5px;
+    }
+</style>
+<?php if(count($rubric) > 1): ?>
+    <?php echo elgg_view('input/hidden', array(
+        'name' => 'input-remove',
+        'id' => 'input-remove',
+    ));
+    ?>
+<?php endif;?>
+<div class="row">
+    <div class="col-md-2">
+        <label><?php echo elgg_echo('name');?></label>
+    </div>
+    <div class="col-md-10">
+        <label><?php echo elgg_echo('rubric:items');?></label>
+    </div>
+</div>
+<hr class="margin-top-5">
+<ul class="rubrics">
+<?php foreach($rubrics as $rubric):
+    $id = uniqid('rubric_');
+    $items = $rubric;
+    if($rubric->id){
+        $items = $rubric->level_array;
+    }
+?>
+<li class="row list-item rubric">
+    <div class="col-md-2">
+        <?php
+        if($rubric->id) {
+            echo elgg_view('input/hidden', array(
+                'class' => 'rubric-remove',
+                'name' => 'rubric[' . $id . '][remove]',
+                'value' => 0
+            ));
+            echo elgg_view('input/hidden', array(
+                'class' => 'rubric-id',
+                'name' => 'rubric[' . $id . '][id]',
+                'value' => $rubric->id
+            ));
+        }
+        ?>
+        <?php echo elgg_view('input/plaintext', array(
+            'style' => 'padding: 5px;font-size:13px;width: 100%;resize: vertical;',
+            'class' => 'form-control',
+            'rows' => 2,
+            'name' => 'rubric['.$id.'][name]',
+            'value' => $rubric->name
+        ));
+        ?>
+        <?php echo elgg_view('output/url', array(
+            'href'  => 'javascript:;',
+            'class' => 'add-rubric-item btn btn-xs btn-primary margin-top-10 btn-border-blue',
+            'text'  => 'Añadir criterio'
+        ));
+        ?>
+        <?php echo elgg_view('output/url', array(
+            'href'  => 'javascript:;',
+            'class' => 'remove-rubric btn btn-xs btn-primary margin-top-10 btn-border-red',
+            'text'  => elgg_echo('remove')
+        ));
+        ?>
+    </div>
+    <div class="col-md-10 row-horizon row" style="overflow-x: auto;">
+        <?php
+        $total = count($items);
+        foreach($items as $i => $rubric_item):
+            if($rubric->id){
+                $rating = round(($rubric->level_increment*($i+1))*10);
+            } else {
+                $rating = round(($i + 1) * (1 / $total) * 10 * 10, 1) / 10;
+            }
+        ?>
+        <div class="col-md-3 col-xs-6 rubric-item">
+            <?php echo elgg_view('input/plaintext', array(
+                'style' => 'padding: 5px;font-size:13px;width: 100%;border-radius: 4px;border: 1px solid #ccc;resize:vertical;',
+                'rows' => 6,
+                'name' => 'rubric['.$id.'][item][]',
+                'value' => $rubric_item
+            ));
+            ?>
+            <div style="background: #f4f4f4;padding: 0 5px;">
+                <a href="javascript:;" class="fa fa-trash-o red remove-rubric-item"></a>
+                <span class="pull-right">
+                    <small>Puntuación: </small><strong class="blue rubric-rating"><?php echo $rating;?></strong>
+                </span>
             </div>
         </div>
+        <?php endforeach;?>
+        <div class="col-md-3" style="display: none">
+            <a class="add-rubric-item bg-info cursor-pointer" href="javascript:;">
+                <div>
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-circle fa-stack-2x blue"></i>
+                        <i class="fa fa-plus fa-stack-1x fa-inverse"></i>
+                    </span>
+                </div>
+            </a>
+        </div>
     </div>
-
+</li>
+<?php endforeach;?>
+</ul>
+<hr>
+<div>
+    <a class="btn btn-sm btn-primary" id="add-rubric"><i class="fa fa-plus"></i> Añadir rúbrica</a>
 </div>
 <div class="text-right">
     <?php echo elgg_view('input/submit', array(

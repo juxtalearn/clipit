@@ -15,6 +15,7 @@ $english = array(
     'rubric' => 'Performance Palette',
     'rubric:create' => 'Create performance palette',
     'rubrics' => 'Performance Pallets',
+    'rubric:items' => 'Rubrics',
     'category' => 'Category',
     'performance_item:example' => 'Example',
 );

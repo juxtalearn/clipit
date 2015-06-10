@@ -44,30 +44,41 @@ $(function(){
         <?php if($select):?>
             <th style="width: 50px;"></th>
         <?php endif;?>
-        <th><?php echo elgg_echo('category');?></th>
+        <th><?php echo elgg_echo('author');?></th>
         <th><?php echo elgg_echo('last_added');?></th>
         <th></th>
         <th style="width: 100px;"></th>
     </tr>
     </thead>
     <tr></tr>
-    <?php foreach($rubrics as $category => $items):?>
+    <?php foreach($rubrics as $owner_id => $items):
+        $owner_user = array_pop(ClipitUser::get_by_id(array($owner_id)));
+    ?>
         <tr>
             <td>
-                <strong>
-                    <?php echo elgg_view('output/url', array(
-                        'href'  => "rubrics/view/?name=".json_encode(($category)),
-                        'title' => $category,
-                        'text'  => $category,
-                    ));
-                    ?>
-                </strong>
+                <?php echo elgg_view('output/url', array(
+                    'href'  => "profile/".$owner_user->login,
+                    'title' => $owner_user->name,
+                    'text'  => '<i class="fa fa-user"></i> '.$owner_user->name,
+                ));
+                ?>
             </td>
             <td>
                 <small>
                     <i class="fa fa-clock-o"></i>
                     <?php echo elgg_view('output/friendlytime', array('time' => $items[0]->time_created));?>
                 </small>
+            </td>
+            <td>
+                <?php if($owner_id == elgg_get_logged_in_user_guid()):?>
+                    <?php echo elgg_view('output/url', array(
+                        'href'  => "rubrics/edit/".$owner_id,
+                        'title' => $owner_user->name,
+                        'class' => 'btn btn-xs btn-primary btn-border-blue',
+                        'text'  => elgg_echo('edit'),
+                    ));
+                    ?>
+                <?php endif;?>
             </td>
             <td class="text-right">
                 <?php echo elgg_view('output/url', array(
@@ -77,23 +88,11 @@ $(function(){
                 ));
                 ?>
             </td>
-            <td class="text-right">
-                <?php echo elgg_view('output/url', array(
-                    'href'  => 'rubrics/edit?name='.json_encode($category),
-                    'class' => 'btn btn-xs btn-primary btn-border-blue',
-                    'text'  => elgg_echo('edit'),
-                ));
-                ?>
-            </td>
         </tr>
         <tr style="display: none;">
-            <td colspan="4">
-                <div class="row">
-                    <?php foreach($items as $item):?>
-                        <div class="col-md-3 margin-bottom-15 text-truncate">
-                            <span title="<?php echo $item->name;?>"><?php echo $item->name;?></span>
-                        </div>
-                    <?php endforeach;?>
+            <td colspan="4" class="bg-white">
+                <div style="overflow-y: auto;overflow-x: hidden;max-height: 450px;">
+                    <?php echo elgg_view('rubric/items', array('entities' => $items));?>
                 </div>
             </td>
         </tr>
