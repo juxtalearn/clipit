@@ -10,24 +10,20 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$performance_items = get_input('item');
-$category_name = get_input('category');
-$category_description = get_input('category_description');
-
-foreach($performance_items as $item){
-    $item_data = array(
-        'name' => $item['name'],
-        'description' => $item['description'],
-        'example' => $item['example'],
-        'category' => $category_name,
-        'category_description' => $category_description
+$rubrics = get_input('rubric');
+foreach($rubrics as $rubric){
+    $data = array(
+        'name' => $rubric['name'],
+        'level_array' => $rubric['item']
     );
-    if($item['id'] && trim($item['name'])!=''){
-        // Edit performance properties
-        ClipitPerformanceItem::set_properties($item['id'], $item_data);
+    if($rubric['id']){
+        if($rubric['remove'] == 1){
+            ClipitRubricItem::delete_by_id(array($rubric['id']));
+        } else {
+            ClipitRubricItem::set_properties($rubric['id'], $data);
+        }
     } else {
-        // Create new performance item
-        ClipitPerformanceItem::create($item_data);
+        ClipitRubricItem::create($data);
     }
 }
-forward('/rubrics/view/?name='.json_encode($category_name));
+forward('rubrics/edit/'.elgg_get_logged_in_user_guid());

@@ -15,6 +15,7 @@ $spanish = array(
     'rubric' => 'Criterio de evaluación',
     'rubric:create' => 'Crear criterio de evaluación',
     'rubrics' => 'Criterios de evaluación',
+    'rubric:items' => 'Criterios',
     'category' => 'Categoría',
     'performance_item:example' => 'Ejemplo',
 );

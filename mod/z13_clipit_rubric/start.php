@@ -14,17 +14,16 @@ elgg_register_event_handler('init', 'system', 'clipit_rubric_init');
 
 function clipit_rubric_init() {
     $plugin_dir = elgg_get_plugins_path() . "z13_clipit_rubric";
-    elgg_register_library('clipit:rubric:functions', "{$plugin_dir}/lib/functions.php");
-    elgg_load_library('clipit:rubric:functions');
     // Register "/rubrics" page handler
     elgg_register_page_handler('rubrics', 'rubric_page_handler');
     elgg_register_action("rubric/save", "{$plugin_dir}/actions/rubric/save.php");
-    elgg_register_action("rubric/create", "{$plugin_dir}/actions/rubric/create.php");
 
     if(get_config("rubric_tool")) {
         // Sidebar menu
         elgg_extend_view('authoring_tools/sidebar/menu', 'rubric/sidebar/menu', 300);
     }
+    elgg_register_ajax_view('rubric/items');
+    elgg_extend_view('js/clipit', 'js/rubric');
 }
 
 /**
@@ -42,19 +41,17 @@ function rubric_page_handler($page){
         case '':
             $title = elgg_echo('rubrics');
             $filter = '';
-            $all_entities = ClipitPerformanceItem::get_from_category(null);
+            $all_entities = ClipitRubricItem::get_by_owner();
             $count = count($all_entities);
-            $entities = array_slice($all_entities, clipit_get_offset(), clipit_get_limit(10));
+            $entities = array_slice($all_entities, clipit_get_offset(), clipit_get_limit(10), true);
             $content = elgg_view('rubric/list', array('entities' => $entities, 'count' => $count));
             break;
         case 'edit':
             // Edit Rubric
-            $category_name = json_decode(get_input('name'));
             $title = elgg_echo('edit');
             elgg_push_breadcrumb(elgg_echo('rubrics'), "rubrics");
-            elgg_push_breadcrumb($category_name, 'rubrics/view?name='.json_encode($category_name));
             elgg_push_breadcrumb($title);
-            $entities = ClipitPerformanceItem::get_from_category($category_name, get_current_language());
+            $entities = array_pop(ClipitRubricItem::get_by_owner(array(elgg_get_logged_in_user_guid()), 0, 0, 'time_created', false));
             $content = elgg_view_form('rubric/save',
                 array('data-validate' => 'true'),
                 array('entities' => $entities, 'submit_value' => elgg_echo('save')
@@ -64,9 +61,10 @@ function rubric_page_handler($page){
             $title = elgg_echo('rubric:create');
             elgg_push_breadcrumb(elgg_echo('rubrics'), "rubrics");
             elgg_push_breadcrumb($title);
+            $entities = array('' => array_fill(0, 5, ''));
             $content = elgg_view_form('rubric/save',
                 array('data-validate' => 'true'),
-                array('submit_value' => elgg_echo('create'), 'entities' => array(array('')))
+                array('submit_value' => elgg_echo('create'), 'entities' => $entities)
             );
             break;
             case 'view':
