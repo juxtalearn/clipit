@@ -39,14 +39,14 @@ abstract class ClipitResource extends UBItem {
     const SCOPE_EXAMPLE = "example";
     const SCOPE_TRICKYTOPIC = "tricky_topic";
     const SCOPE_TASK = "task";
-
+    // Tagging
     public $tag_array = array();
     public $label_array = array();
     /* @deprecated */
     public $performance_item_array = array();
     public $rubric_item_array = array();
     public $read_array = array();
-
+    // Rating averages
     public $overall_rating_average = 0.0;
     public $tag_rating_average = 0.0;
     /* @deprecated */
