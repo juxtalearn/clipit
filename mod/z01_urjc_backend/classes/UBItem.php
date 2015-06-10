@@ -138,17 +138,16 @@ class UBItem {
      */
     static function get_clones($id, $recursive = false)
     {
-        $clone_array = array();
         $item_clones = UBCollection::get_items($id, static::REL_PARENT_CLONE);
         if ($recursive) {
+            $clone_array = array();
             foreach ($item_clones as $clone) {
                 array_push($clone_array, $clone);
                 $clone_array = array_merge($clone_array, static::get_clones($clone, true));
             }
-        } else {
-            $clone_array = $item_clones;
+            return $clone_array;
         }
-        return $clone_array;
+        return $item_clones;
     }
 
     /* Static Functions */
@@ -535,7 +534,7 @@ class UBItem {
      *
      * @return static[] Returns an array of Items
      */
-    static function get_by_owner($owner_array = null, $limit = 0)
+    static function get_by_owner($owner_array = null, $limit = 0, $offset = 0, $order_by = "", $ascending = true)
     {
         $object_array = array();
         if (empty($owner_array)) {
@@ -547,8 +546,38 @@ class UBItem {
                 }
                 $return_array[$item->owner_id][] = $item;
             }
-            foreach ($return_array as $owner_items) {
-                uasort($owner_items, 'static::sort_by_date');
+            if (!empty($order_by)) {
+                foreach ($return_array as $owner_items) {
+                    $args = array("order_by" => $order_by, "ascending" => $ascending);
+                    uasort($owner_items,
+                        function ($i1, $i2) use ($args) {
+                            if (!$i1 && !$i2) {
+                                return 0;
+                            }
+                            if ($i1->$args["order_by"] == $i2->$args["order_by"]) {
+                                return 0;
+                            }
+                            if ((bool)$args["ascending"]) {
+                                if (!$i1) {
+                                    return 1;
+                                }
+                                if (!$i2) {
+                                    return -1;
+                                }
+                                return (strtolower($i1->$args["order_by"]) < strtolower($i2->$args["order_by"]) ? -1 : 1);
+                                //return strcmp($i1->$args["order_by"], $i2->$args["order_by"]);
+                            } else {
+                                if (!$i1) {
+                                    return -1;
+                                }
+                                if (!$i2) {
+                                    return 1;
+                                }
+                                return (strtolower($i2->$args["order_by"]) < strtolower($i1->$args["order_by"]) ? -1 : 1);
+                                //return strcmp($i2->$args["order_by"], $i1->$args["order_by"]);
+                            }
+                        });
+                }
             }
             return $return_array;
         }
@@ -556,8 +585,12 @@ class UBItem {
         foreach($owner_array as $owner_id) {
             $elgg_object_array = elgg_get_entities(
                 array(
-                    "type" => static::TYPE, "subtype" => static::SUBTYPE, "owner_guid" => (int)$owner_id,
-                    "limit" => $limit
+                    "type" => static::TYPE,
+                    "subtype" => static::SUBTYPE,
+                    "owner_guid" => (int)$owner_id,
+                    "limit" => $limit,
+                    "offset" => $offset,
+                    "sort_by" => "e.time_created"
                 )
             );
             if(!empty($elgg_object_array)) {
@@ -566,8 +599,38 @@ class UBItem {
                     $temp_array[(int)$elgg_object->guid] = new static((int)$elgg_object->guid, $elgg_object);
                 }
                 if(!empty($temp_array)) {
+                    if (!empty($order_by)) {
+                        $args = array("order_by" => $order_by, "ascending" => $ascending);
+                        uasort($temp_array,
+                            function ($i1, $i2) use ($args) {
+                                if (!$i1 && !$i2) {
+                                    return 0;
+                                }
+                                if ($i1->$args["order_by"] == $i2->$args["order_by"]) {
+                                    return 0;
+                                }
+                                if ((bool)$args["ascending"]) {
+                                    if (!$i1) {
+                                        return 1;
+                                    }
+                                    if (!$i2) {
+                                        return -1;
+                                    }
+                                    return (strtolower($i1->$args["order_by"]) < strtolower($i2->$args["order_by"]) ? -1 : 1);
+                                    //return strcmp($i1->$args["order_by"], $i2->$args["order_by"]);
+                                } else {
+                                    if (!$i1) {
+                                        return -1;
+                                    }
+                                    if (!$i2) {
+                                        return 1;
+                                    }
+                                    return (strtolower($i2->$args["order_by"]) < strtolower($i1->$args["order_by"]) ? -1 : 1);
+                                    //return strcmp($i2->$args["order_by"], $i1->$args["order_by"]);
+                                }
+                            });
+                    }
                     $object_array[(int)$owner_id] = $temp_array;
-                    uasort($object_array[(int)$owner_id], 'static::sort_by_date');
                 } else {
                     $object_array[(int)$owner_id] = null;
                 }
