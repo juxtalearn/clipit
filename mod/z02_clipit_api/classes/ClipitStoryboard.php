@@ -27,6 +27,7 @@ class ClipitStoryboard extends ClipitResource {
     const REL_GROUP_RESOURCE = ClipitGroup::REL_GROUP_STORYBOARD;
     const REL_TASK_RESOURCE = ClipitTask::REL_TASK_STORYBOARD;
     const REL_ACTIVITY_RESOURCE = ClipitActivity::REL_ACTIVITY_STORYBOARD;
+    const REL_TRICKYTOPIC_RESOURCE = ClipitTrickyTopic::REL_TRICKYTOPIC_STORYBOARD;
     const REL_SITE_RESOURCE = ClipitSite::REL_SITE_STORYBOARD;
     public $file = 0;
 

@@ -29,8 +29,16 @@ abstract class ClipitResource extends UBItem {
     const REL_SITE_RESOURCE = "";
     const REL_EXAMPLE_RESOURCE = "";
     const REL_ACTIVITY_RESOURCE = "";
+    const REL_TRICKYTOPIC_RESOURCE = "";
     const REL_TASK_RESOURCE = "";
     const REL_GROUP_RESOURCE = "";
+    // Scopes
+    const SCOPE_GROUP = "group";
+    const SCOPE_ACTIVITY = "activity";
+    const SCOPE_SITE = "site";
+    const SCOPE_EXAMPLE = "example";
+    const SCOPE_TRICKYTOPIC = "tricky_topic";
+    const SCOPE_TASK = "task";
 
     public $tag_array = array();
     public $label_array = array();
@@ -154,36 +162,49 @@ abstract class ClipitResource extends UBItem {
 
     static function get_scope($id)
     {
-        $site = static::get_site($id);
+        $site = static::get_site($id, false);
         if (!empty($site)) {
-            return "site";
+            return static::SCOPE_SITE;
         }
         $example = static::get_example($id);
         if (!empty($example)) {
-            return "example";
+            return static::SCOPE_EXAMPLE;
         }
         $task = static::get_task($id);
         if (!empty($task)) {
-            return "task";
+            return static::SCOPE_TASK;
         }
         $group = static::get_group($id);
         if (!empty($group)) {
-            return "group";
+            return static::SCOPE_GROUP;
         }
         $activity = static::get_activity($id);
         if (!empty($activity)) {
-            return "activity";
+            return static::SCOPE_ACTIVITY;
+        }
+        $tricky_topic = static::get_tricky_topic($id);
+        if (!empty($tricky_topic)) {
+            return static::SCOPE_TRICKYTOPIC;
         }
         return null;
     }
 
-    static function get_site($id)
+    static function get_site($id, $recursive = false)
     {
-        $site = UBCollection::get_items($id, static::REL_SITE_RESOURCE, true);
-        if (empty($site)) {
-            return null;
+        $site_array = UBCollection::get_items($id, static::REL_SITE_RESOURCE, true);
+        if (!empty($site_array)) {
+            return array_pop($site_array);
         }
-        return array_pop($site);
+        if ($recursive) {
+            $clone_array = static::get_clones($id, true);
+            foreach ($clone_array as $clone_id) {
+                $site_array = UBCollection::get_items($clone_id, static::REL_SITE_RESOURCE, true);
+                if (!empty($site_array)) {
+                    return array_pop($site_array);
+                }
+            }
+        }
+        return null;
     }
 
     static function get_example($id)
@@ -234,6 +255,15 @@ abstract class ClipitResource extends UBItem {
             }
             return array_pop($activity);
         }
+    }
+
+    static function get_tricky_topic($id)
+    {
+        $activity_array = UBCollection::get_items($id, static::REL_TRICKYTOPIC_RESOURCE, true);
+        if (empty($activity_array)) {
+            return null;
+        }
+        return array_pop($activity_array);
     }
 
     /**

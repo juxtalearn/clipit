@@ -138,17 +138,16 @@ class UBItem {
      */
     static function get_clones($id, $recursive = false)
     {
-        $clone_array = array();
         $item_clones = UBCollection::get_items($id, static::REL_PARENT_CLONE);
         if ($recursive) {
+            $clone_array = array();
             foreach ($item_clones as $clone) {
                 array_push($clone_array, $clone);
                 $clone_array = array_merge($clone_array, static::get_clones($clone, true));
             }
-        } else {
-            $clone_array = $item_clones;
+            return $clone_array;
         }
-        return $clone_array;
+        return $item_clones;
     }
 
     /* Static Functions */
