@@ -105,7 +105,10 @@ function expose_common_functions($api_suffix, $class_suffix) {
     expose_function(
         $api_suffix . "get_by_owner", $class_suffix . "get_by_owner", array(
         "owner_array" => array("type" => "array", "required" => false),
-            "limit" => array("type" => "int", "required" => false)
+        "limit" => array("type" => "int", "required" => false),
+        "offset" => array("type" => "int", "required" => false),
+        "order_by" => array("type" => "string", "required" => false),
+        "ascending" => array("type" => "bool", "required" => false)
         ), "Get instances from an Owner", 'GET', false, true
     );
     expose_function(

@@ -34,6 +34,8 @@ expose_quiz_result_functions();
 expose_rating_functions();
 expose_remote_resource_functions();
 expose_remote_site_functions();
+expose_rubric_item_functions();
+expose_rubric_rating_functions();
 expose_site_functions();
 expose_storyboard_functions();
 expose_tag_functions();
