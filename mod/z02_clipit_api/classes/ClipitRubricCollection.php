@@ -51,6 +51,35 @@ class ClipitRubricCollection extends UBItem{
         return $this->id;
     }
 
+    /**
+     * Clones a Rubric Collection, including the contained Rubric Items
+     *
+     * @param int $id ID of Rubric Collection to clone
+     * @param bool $linked Whether the clone will be linked to the parent object
+     * @param bool $keep_owner Selects whether the clone will keep the parent item's owner (default: no)
+     * @return bool|int ID of new cloned object
+     * @throws InvalidParameterException if error
+     */
+    static function create_clone($id, $linked = true, $keep_owner = false) {
+        $prop_value_array = static::get_properties($id);
+        if($keep_owner === false){
+            $prop_value_array["owner_id"] = elgg_get_logged_in_user_guid();
+        }
+        $rubric_item_array = $prop_value_array["rubric_item_array"];
+        if(!empty($rubric_item_array)){
+            $new_rubric_item_array = array();
+            foreach($rubric_item_array as $rubric_item_id){
+                $new_rubric_item_array[] = ClipitRubricItem::create_clone($rubric_item_id);
+            }
+            $prop_value_array["rubric_item_array"] = $new_rubric_item_array;
+        }
+        $clone_id = static::create($prop_value_array);
+        if($linked) {
+            static::link_parent_clone($id, $clone_id);
+        }
+        return $clone_id;
+    }
+
     static function get_rubric_items($id){
         return UBCollection::get_items($id, static::REL_RUBRICCOLLECTION_RUBRICITEM);
     }
