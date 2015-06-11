@@ -18,8 +18,8 @@ $("[data-task='<?php echo $id;?>'] .datepicker").each(function() {
     if($(this).hasClass('input-task-end')){
         defaults = {hour: 23, minute: 45};
     }
-    var activity_start = moment($('input[name="activity-start"').val(), 'DD/MM/YYYY').format('DD/MM/YY'),
-        activity_end = moment($('input[name="activity-end"').val(), 'DD/MM/YYYY').format('DD/MM/YY');
+    var activity_start = moment($('input[name="activity-start"]').val(), 'DD/MM/YYYY').format('DD/MM/YY'),
+        activity_end = moment($('input[name="activity-end"]').val(), 'DD/MM/YYYY').format('DD/MM/YY');
     $(this).datetimepicker(clipit.datetimepickerDefault(
         $.extend(defaults, {
             minDate: activity_start ,
