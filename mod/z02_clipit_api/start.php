@@ -23,13 +23,11 @@ function clipit_api_init() {
     $plugin_name = "z02_clipit_api";
     // Load libraries
     $lib_path = elgg_get_plugins_path().$plugin_name."/libraries";
-    // Load REST API Expose functions
+    // Load REST API
     loadFiles("$lib_path/clipit_rest_api/");
-    // Expose REST API
-    include_once("$lib_path/expose_clipit_api.php");
     // Load palettes
     // @deprecated loadFiles("$lib_path/performance_palette/");
-    loadFiles("$lib_path/example_types/");
+    loadFiles($lib_path."/example_types/");
     elgg_register_action("useradd",
         elgg_get_plugins_path().$plugin_name."/actions/useradd.php", 'admin');
     // Publish Site to Global (if not done already)
