@@ -16,22 +16,13 @@ $quiz_id = get_input('entity-id');
 $user_id = elgg_get_logged_in_user_guid();
 
 foreach($questions as $question_id => $value){
-//    if((is_array($value) && (empty($value) || empty($value[1]))) || trim($value) == ''){
-//       continue;
-//    }
     $question = array_pop(ClipitQuizQuestion::get_by_id(array($question_id)));
-    $correct = false;
     switch($question->option_type){
         case ClipitQuizQuestion::TYPE_NUMBER:
             break;
         case ClipitQuizQuestion::TYPE_SELECT_ONE:
             $p = array_fill(0, count($question->validation_array), 0);
-            for($x = 0; $x < count($value); $x++){
-                if($value[$x]  ){
-                    $s = $value[$x] -1;
-                    $p[$s] = 1;
-                }
-            }
+            $p[$value-1] = 1;
             $value = $p;
             break;
         case ClipitQuizQuestion::TYPE_SELECT_MULTI:
@@ -65,9 +56,9 @@ foreach($questions as $question_id => $value){
         ClipitQuizResult::evaluate_result($answered->id);
     } else {
         $result_id = ClipitQuizResult::create(array(
+            'quiz_question' => $question_id,
             'answer' => $value,
         ));
-        ClipitQuizQuestion::add_quiz_results($question_id, array($result_id));
         ClipitQuizResult::evaluate_result($result_id);
     }
 }
