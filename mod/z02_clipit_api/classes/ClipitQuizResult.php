@@ -137,7 +137,7 @@ class ClipitQuizResult extends UBItem {
                 } else{
                     $correct = false;
                 }
-            return static::set_properties($result_id, array("correct" => $correct));
+                return static::set_properties($result_id, array("correct" => $correct));
         }
         return null;
     }

@@ -124,4 +124,10 @@ function expose_quiz_functions() {
             "id" => array("type" => "int", "required" => true)),
         "Returns an array with normalized results by tag for the whole quiz", 'GET', false, true
     );
+    expose_function(
+        $api_suffix . "export_to_excel", $class_suffix . "export_to_excel",
+        array(
+            "id" => array("type" => "int", "required" => true)),
+        "Exports a whole Quiz to Excel format", 'GET', false, true
+    );
 }
