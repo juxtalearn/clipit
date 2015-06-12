@@ -15,6 +15,8 @@
 /**
  * Expose all functions for the ClipIt REST API
  */
+// Load and call REST API Expose functions
+loadFiles(elgg_get_plugins_path()."z02_clipit_api/libraries/clipit_rest_api/expose_functions/");
 expose_activity_functions();
 expose_chat_functions();
 expose_comment_functions();

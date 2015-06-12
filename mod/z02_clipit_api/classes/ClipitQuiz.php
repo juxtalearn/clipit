@@ -467,4 +467,83 @@ class ClipitQuiz extends UBItem {
     static function get_quiz_questions($id) {
         return UBCollection::get_items($id, static::REL_QUIZ_QUIZQUESTION);
     }
+
+    static function export_to_excel($id){
+        $quiz = static::get_by_id(array($id));
+        if(empty($quiz)){
+            return null;
+        }
+        $quiz = array_pop($quiz);
+        // New Excel object
+        $php_excel = new PHPExcel();
+        // Set document properties
+        $php_excel->getProperties()->setCreator("ClipIt")
+            ->setTitle("ClipIt export of Quiz " . $quiz->name)
+            ->setKeywords("clipit export quiz");
+        // Add table title and columns
+        $active_sheet = $php_excel->setActiveSheetIndex(0);
+        $active_sheet->getDefaultColumnDimension()->setWidth(30);
+        $align_right = array("alignment" => array("horizontal" => PHPExcel_Style_Alignment::HORIZONTAL_RIGHT));
+        $active_sheet->getDefaultStyle()->applyFromArray($align_right);
+
+        // Quiz title row
+        $row = 1;
+        $col = 0;
+        $active_sheet->getStyle($row)->getFont()->setBold(true);
+        $active_sheet->setCellValueByColumnAndRow($col++, $row, "ID");
+        $active_sheet->setCellValueByColumnAndRow($col++, $row, "QUIZ NAME");
+        $active_sheet->setCellValueByColumnAndRow($col++, $row, "TRICKY TOPIC");
+        $active_sheet->setCellValueByColumnAndRow($col++, $row, "MAX TIME (mins)");
+        $row++;$col=0;
+
+        // Quiz info row
+        $active_sheet->setCellValueByColumnAndRow($col++, $row, $quiz->id);
+        $active_sheet->setCellValueByColumnAndRow($col++, $row, $quiz->name);
+        $tricky_topic = ClipitTrickyTopic::get_by_id(array($quiz->tricky_topic));
+        if(!empty($tricky_topic)) {
+            $tricky_topic = array_pop($tricky_topic);
+            $active_sheet->setCellValueByColumnAndRow($col++, $row, $tricky_topic->name);
+        } else{
+            $col++;
+        }
+        $active_sheet->setCellValueByColumnAndRow($col++, $row, ((int)$quiz->max_time)/60);
+        $row++; $row++; $col=0;
+
+        // Quiz Student Results title row
+        $active_sheet->getStyle($row)->getFont()->setBold(true);
+        $active_sheet->setCellValueByColumnAndRow($col++, $row, "ID");
+        $active_sheet->setCellValueByColumnAndRow($col++, $row, "STUDENT NAME");
+//        foreach($quiz->quiz_question_array as $quiz_question_id) {
+//            $active_sheet->setCellValueByColumnAndRow($col++, $row, "QUESTION $quiz_question_id");
+//        }
+        $active_sheet->setCellValueByColumnAndRow($col++, $row, "CORRECT ANSWERS");
+        $active_sheet->setCellValueByColumnAndRow($col++, $row, "SCORE");
+        $row++; $col=0;
+
+        // Quiz Student Results row
+        $task_id = ClipitQuiz::get_task($id);
+        $activity_id = ClipitTask::get_activity($task_id);
+        $student_ids = ClipitActivity::get_students($activity_id);
+        foreach($student_ids as $student_id){
+            $active_sheet->setCellValueByColumnAndRow($col++, $row, $student_id);
+            $pv_array = ClipitUser::get_properties($student_id, array("name"));
+            $active_sheet->setCellValueByColumnAndRow($col++, $row, $pv_array["name"]);
+            $results_by_question = ClipitQuiz::get_user_results_by_question($id, $student_id);
+            $total_correct = 0;
+            foreach($results_by_question as $result){
+                $total_correct += (int)$result;
+            }
+            $active_sheet->setCellValueByColumnAndRow($col++, $row, $total_correct." out of ".count($quiz->quiz_question_array));
+            $active_sheet->setCellValueByColumnAndRow($col++, $row, (float)($total_correct / count($quiz->quiz_question_array) * 100.0)."%");
+            $row++; $col=0;
+        }
+
+        // Write to file
+        $date_obj = new DateTime();
+        $timestamp = $date_obj->getTimestamp();
+        $objWriter = PHPExcel_IOFactory::createWriter($php_excel, 'Excel2007');
+        $filename = (string)"/tmp/".$timestamp."_quiz_export.xlsx";
+        $objWriter->save($filename);
+        return $filename;
+    }
 }
