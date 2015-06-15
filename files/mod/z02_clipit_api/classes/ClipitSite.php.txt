@@ -299,6 +299,7 @@ class ClipitSite extends UBSite {
         $data += array("prop_value_array[name]" => $site->name);
         $data += array("prop_value_array[description]" => $site->description);
         $data += array("prop_value_array[url]" => $site->url);
+        $data += array("prop_value_array[timezone]" => (string)get_config("timezone"));
         if(static::global_site_call($data, "POST") == null){
             return null;
         }

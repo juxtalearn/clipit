@@ -11,15 +11,27 @@ class ClipitRemoteSite extends UBItem{
     const REL_REMOTESITE_FILE = "ClipitRemoteSite-ClipitFile";
     const REL_REMOTESITE_VIDEO = "ClipitRemoteSite-ClipitVideo";
     const REL_REMOTESITE_STORYBOARD = "ClipitRemoteSite-ClipitStoryboard";
+    public $timezone = "";
     public $file_array = array();
     public $video_array = array();
     public $storyboard_array = array();
 
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
+        $this->timezone = (string)$elgg_entity->get("timezone");
         $this->file_array = (array)static::get_files($this->id);
         $this->video_array = (array)static::get_videos($this->id);
         $this->storyboard_array = (array)static::get_storyboards($this->id);
+    }
+
+    /**
+     * Copy $this object parameters into an Elgg entity.
+     *
+     * @param ElggEntity $elgg_entity Elgg object instance to save $this to
+     */
+    protected function copy_to_elgg($elgg_entity) {
+        parent::copy_to_elgg($elgg_entity);
+        $elgg_entity->set("timezone", (array)$this->timezone);
     }
 
     /**
@@ -44,22 +56,24 @@ class ClipitRemoteSite extends UBItem{
      * @throws InvalidParameterException
      */
     static function set_properties($id, $prop_value_array) {
-        if (!$item = new static($id)) {
-            return false;
+        $item = null;
+        // If no ID specified, try loading remote site from URL
+        if(empty($id) && array_key_exists("url", $prop_value_array)){
+            $item = static::get_from_url($prop_value_array["url"]);
+        }
+        if(empty($item)){
+            if (!$item = new static($id)) {
+                return false;
+            }
         }
         $property_list = (array)static::list_properties();
+
         foreach ($prop_value_array as $prop => $value) {
             if (!array_key_exists($prop, $property_list)) {
                 throw new InvalidParameterException("ERROR: One or more property names do not exist.");
             }
             if ($prop == "id") {
                 throw new InvalidParameterException("ERROR: Cannot modify 'id' of instance.");
-            }
-            if ($prop == "url" && empty($id)) {
-                $remote_site = static::get_from_url($value);
-                if (!empty($remote_site)) {
-                    return false;
-                }
             }
             $item->$prop = $value;
         }
