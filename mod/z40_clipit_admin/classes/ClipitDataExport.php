@@ -49,14 +49,15 @@ class ClipitDataExport{
         // make zip file of EXPORT_PATH
         if(empty($filename)){
             $date_obj = new DateTime();
-            $filename = $date_obj->getTimestamp();
+            $filename = $date_obj->getTimestamp().".zip";
         } else{
             $filename = sanitize_string($filename);
         }
-        exec("zip -jr \"/tmp/".$filename."\" ".static::EXPORT_PATH);
+        $zip_file = "/tmp/".$filename;
+        exec("zip -jr \"".$zip_file."\" ".static::EXPORT_PATH);
         // remove temp files
         exec("rm -rf ".static::EXPORT_PATH);
-        return true;
+        return $zip_file;
     }
 
     static function export_relationships_to_excel(){

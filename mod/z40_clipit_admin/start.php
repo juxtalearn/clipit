@@ -31,6 +31,26 @@ function clipit_admin_init() {
     // Register Admin Menus
     elgg_register_admin_menu_item('configure', 'clipit_options', 'clipit', 1);
     elgg_register_admin_menu_item('configure', 'youtube_auth', 'clipit', 2);
-    elgg_register_admin_menu_item('configure', 'update_clipit', 'clipit', 3);
-    elgg_register_admin_menu_item('configure', 'import_export', 'clipit', 4);
+    elgg_register_admin_menu_item('configure', 'import_export', 'clipit', 3);
+    elgg_register_admin_menu_item('configure', 'update_clipit', 'clipit', 4);
+
+    expose_function(
+        "clipit.admin.export_all",
+        "ClipitDataExport::export_all",
+        null,
+        "Export all ClipIt classes and relationships in Excel format for download",
+        "GET",
+        false,
+        true
+        );
+
+    expose_function(
+        "clipit.admin.update_clipit",
+        "ClipitUpdate::update_clipit",
+        null,
+        "Update ClipIt to latest tag released",
+        "POST",
+        false,
+        true
+    );
 }

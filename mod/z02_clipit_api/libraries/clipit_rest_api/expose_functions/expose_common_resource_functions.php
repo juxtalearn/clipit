@@ -104,26 +104,26 @@ function expose_common_resource_functions($api_suffix, $class_suffix) {
         array("id" => array("type" => "int", "required" => true)), "Get Labels from a Resource", 'GET', false, true
     );
     expose_function(
-        $api_suffix . "add_performance_items", $class_suffix . "add_performance_items", array(
+        $api_suffix . "add_rubric_items", $class_suffix . "add_rubric_items", array(
             "id" => array("type" => "int", "required" => true),
-            "performance_item_array" => array("type" => "array", "required" => true)
-        ), "Add Performance Items by Id to a Resource", 'POST', false, true
+            "rubric_item_array" => array("type" => "array", "required" => true)
+        ), "Add rubric Items by Id to a Resource", 'POST', false, true
     );
     expose_function(
-        $api_suffix . "set_performance_items", $class_suffix . "set_performance_items", array(
+        $api_suffix . "set_rubric_items", $class_suffix . "set_rubric_items", array(
             "id" => array("type" => "int", "required" => true),
-            "performance_item_array" => array("type" => "array", "required" => true)
-        ), "Set Performance Items by Id to a Resource", 'POST', false, true
+            "rubric_item_array" => array("type" => "array", "required" => true)
+        ), "Set rubric Items by Id to a Resource", 'POST', false, true
     );
     expose_function(
-        $api_suffix . "remove_performance_items", $class_suffix . "remove_performance_items", array(
+        $api_suffix . "remove_rubric_items", $class_suffix . "remove_rubric_items", array(
             "id" => array("type" => "int", "required" => true),
-            "performance_item_array" => array("type" => "array", "required" => true)
-        ), "Remove Performance Items by Id from a Resource", 'POST', false, true
+            "rubric_item_array" => array("type" => "array", "required" => true)
+        ), "Remove rubric Items by Id from a Resource", 'POST', false, true
     );
     expose_function(
-        $api_suffix . "get_performance_items", $class_suffix . "get_performance_items",
-        array("id" => array("type" => "int", "required" => true)), "Get Performance Items from a Resource", 'GET',
+        $api_suffix . "get_rubric_items", $class_suffix . "get_rubric_items",
+        array("id" => array("type" => "int", "required" => true)), "Get rubric Items from a Resource", 'GET',
         false, true
     );
 }

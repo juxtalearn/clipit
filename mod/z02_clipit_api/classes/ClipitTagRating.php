@@ -127,8 +127,8 @@ class ClipitTagRating extends UBItem {
                 }
             }
             if(!empty($count)) {
-                foreach($count as $performance_item => $total) {
-                    $average_rating[$performance_item] = $average_rating[$performance_item] / $total;
+                foreach($count as $tag_id => $total) {
+                    $average_rating[$tag_id] = $average_rating[$tag_id] / $total;
                 }
             }
         }

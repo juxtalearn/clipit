@@ -22,7 +22,6 @@ class ClipitVideo extends ClipitResource{
     const SUBTYPE = "ClipitVideo";
     const REL_RESOURCE_TAG = "ClipitVideo-ClipitTag";
     const REL_RESOURCE_LABEL = "ClipitVideo-ClipitLabel";
-    const REL_RESOURCE_PERFORMANCE = "ClipitVideo-ClipitPerformance";
     const REL_EXAMPLE_RESOURCE = ClipitExample::REL_EXAMPLE_VIDEO;
     const REL_GROUP_RESOURCE = ClipitGroup::REL_GROUP_VIDEO;
     const REL_TASK_RESOURCE = ClipitTask::REL_TASK_VIDEO;

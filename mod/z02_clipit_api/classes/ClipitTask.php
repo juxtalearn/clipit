@@ -33,7 +33,6 @@ class ClipitTask extends UBItem {
     const REL_TASK_VIDEO = "ClipitTask-ClipitVideo";
     const REL_TASK_FILE = "ClipitTask-ClipitFile";
     const REL_TASK_QUIZ = "ClipitTask-ClipitQuiz";
-    const REL_TASK_PERFORMANCE = "ClipitTask-ClipitPerformanceItem";
     const REL_TASK_RUBRIC = "ClipitTask-ClipitRubricItem";
     // Status values
     const STATUS_LOCKED = "locked";
@@ -47,68 +46,71 @@ class ClipitTask extends UBItem {
     public $parent_task = 0;
     public $task_count = 0;
     public $activity = 0;
-    public $quiz = 0; // in case of TYPE_QUIZ_TAKE
+    public $quiz = 0;
     public $storyboard_array = array();
     public $video_array = array();
     public $file_array = array();
-    /* @deprecated */
-    public $performance_item_array = array();
     public $rubric_item_array = array();
 
-    static function add_storyboards($id, $storyboard_array)
+    /**
+     * Loads object parameters stored in Elgg
+     *
+     * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
+     */
+    protected function copy_from_elgg($elgg_entity)
     {
-        return UBCollection::add_items($id, $storyboard_array, static::REL_TASK_STORYBOARD);
+        parent::copy_from_elgg($elgg_entity);
+        $this->task_type = (string)$elgg_entity->get("task_type");
+        $this->start = (int)$elgg_entity->get("start");
+        $this->end = (int)$elgg_entity->get("end");
+        $this->status = (string)static::calc_status($this->start, $this->end);
+        $this->parent_task = (int)$elgg_entity->get("parent_task");
+        $this->task_count = (int)$elgg_entity->get("task_count");
+        if ($this->end == 0) {
+            $activity_id = static::get_activity($this->id);
+            if (!empty($activity_id)) {
+                $prop_value_array = (int)ClipitActivity::get_properties($activity_id, array("end"));
+                $this->end = $prop_value_array["end"];
+            }
+        }
+        $this->activity = (int)static::get_activity((int)$this->id);
+        $this->quiz = (int)static::get_quiz($this->id);
+        $this->storyboard_array = static::get_storyboards((int)$this->id);
+        $this->video_array = static::get_videos($this->id);
+        $this->file_array = static::get_files($this->id);
+        $this->rubric_item_array = (array)static::get_rubric_items($this->id);
     }
 
-    static function remove_storyboards($id, $storyboard_array)
+    /**
+     * Copy $this object parameters into an Elgg entity.
+     *
+     * @param ElggEntity $elgg_entity Elgg object instance to save $this to
+     */
+    protected function copy_to_elgg($elgg_entity)
     {
-        return UBCollection::remove_items($id, $storyboard_array, static::REL_TASK_STORYBOARD);
+        parent::copy_to_elgg($elgg_entity);
+        $elgg_entity->set("task_type", (string)$this->task_type);
+        $elgg_entity->set("start", (int)$this->start);
+        $elgg_entity->set("end", (int)$this->end);
+        $elgg_entity->set("parent_task", (int)$this->parent_task);
+        $elgg_entity->set("task_count", (int)$this->task_count);
     }
 
-    static function add_videos($id, $video_array)
+    /**
+     * Saves this instance to the system.
+     * @param  bool $double_save if $double_save is true, this object is saved twice to ensure that all properties are updated properly. E.g. the time created property can only beset on ElggObjects during an update. Defaults to false!
+     * @return bool|int Returns the Id of the saved instance, or false if error
+     */
+    protected function save($double_save = false)
     {
-        return UBCollection::add_items($id, $video_array, static::REL_TASK_VIDEO);
-    }
-
-    static function remove_videos($id, $video_array)
-    {
-        return UBCollection::remove_items($id, $video_array, static::REL_TASK_VIDEO);
-    }
-
-    // ACTIVITY
-
-    static function add_files($id, $file_array)
-    {
-        return UBCollection::add_items($id, $file_array, static::REL_TASK_FILE);
-    }
-
-    static function remove_files($id, $file_array)
-    {
-        return UBCollection::remove_items($id, $file_array, static::REL_TASK_FILE);
-    }
-
-    //QUIZ
-
-    static function add_performance_items($id, $performance_item_array)
-    {
-        return UBCollection::add_items($id, $performance_item_array, static::REL_TASK_PERFORMANCE);
-    }
-
-    static function remove_performance_items($id, $performance_item_array)
-    {
-        return UBCollection::remove_items($id, $performance_item_array, static::REL_TASK_PERFORMANCE);
-    }
-
-    // STORYBOARDS
-
-    static function add_rubric_items($id, $rubric_item_array)
-    {
-        return UBCollection::add_items($id, $rubric_item_array, static::REL_TASK_RUBRIC);
-    }
-
-    static function remove_rubric_items($id, $rubric_item_array)
-    {
-        return UBCollection::remove_items($id, $rubric_item_array, static::REL_TASK_RUBRIC);
+        parent::save($double_save);
+        static::set_quiz($this->id, $this->quiz);
+        static::set_activity($this->id, $this->activity);
+        static::set_storyboards($this->id, $this->storyboard_array);
+        static::set_videos($this->id, $this->video_array);
+        static::set_files($this->id, $this->file_array);
+        static::set_rubric_items($this->id, (array)$this->rubric_item_array);
+        return $this->id;
     }
 
     /**
@@ -125,6 +127,40 @@ class ClipitTask extends UBItem {
             }
         }
         return 0;
+    }
+
+    /**
+     * Get the Status for a Task
+     * @param int $id ID of Task
+     *
+     * @return string Status
+     * @throws InvalidParameterException
+     */
+    static function get_status($id)
+    {
+        $prop_value_array = static::get_properties($id, array("status"));
+        return (string)$prop_value_array["status"];
+    }
+
+    /**
+     * Calculate the Status depending on the current date, and the Start and End of the Task.
+     *
+     * @param int $start Task Start timestamp
+     * @param int $end Task End timestamp
+     *
+     * @return string The status of the task: STATUS_LOCKED, STATUS_ACTIVE or STATUS_FINISHED
+     */
+    private function calc_status($start, $end)
+    {
+        $date = new DateTime();
+        $now = (int)$date->getTimestamp();
+        if ($now < $start) {
+            return static::STATUS_LOCKED;
+        } elseif ($now >= $start && $now <= $end) {
+            return static::STATUS_ACTIVE;
+        } else {
+            return static::STATUS_FINISHED;
+        }
     }
 
     static function get_completed_status($id, $entity_id)
@@ -252,72 +288,6 @@ class ClipitTask extends UBItem {
         }
     }
 
-    // VIDEOS
-
-    /**
-     * Get the Status for a Task
-     * @param int $id ID of Task
-     *
-     * @return string Status
-     * @throws InvalidParameterException
-     */
-    static function get_status($id)
-    {
-        $prop_value_array = static::get_properties($id, array("status"));
-        return (string)$prop_value_array["status"];
-    }
-
-    /**
-     * Loads object parameters stored in Elgg
-     *
-     * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
-     */
-    protected function copy_from_elgg($elgg_entity)
-    {
-        parent::copy_from_elgg($elgg_entity);
-        $this->task_type = (string)$elgg_entity->get("task_type");
-        $this->start = (int)$elgg_entity->get("start");
-        $this->end = (int)$elgg_entity->get("end");
-        $this->status = (string)static::calc_status($this->start, $this->end);
-        $this->parent_task = (int)$elgg_entity->get("parent_task");
-        $this->task_count = (int)$elgg_entity->get("task_count");
-        if ($this->end == 0) {
-            $activity_id = static::get_activity($this->id);
-            if (!empty($activity_id)) {
-                $prop_value_array = (int)ClipitActivity::get_properties($activity_id, array("end"));
-                $this->end = $prop_value_array["end"];
-            }
-        }
-        $this->activity = (int)static::get_activity((int)$this->id);
-        $this->quiz = (int)static::get_quiz($this->id);
-        $this->storyboard_array = static::get_storyboards((int)$this->id);
-        $this->video_array = static::get_videos($this->id);
-        $this->file_array = static::get_files($this->id);
-        $this->performance_item_array = (array)static::get_performance_items($this->id);
-        $this->rubric_item_array = (array)static::get_rubric_items($this->id);
-    }
-
-    /**
-     * Calculate the Status depending on the current date, and the Start and End of the Task.
-     *
-     * @param int $start Task Start timestamp
-     * @param int $end Task End timestamp
-     *
-     * @return string The status of the task: STATUS_LOCKED, STATUS_ACTIVE or STATUS_FINISHED
-     */
-    private function calc_status($start, $end)
-    {
-        $date = new DateTime();
-        $now = (int)$date->getTimestamp();
-        if ($now < $start) {
-            return static::STATUS_LOCKED;
-        } elseif ($now >= $start && $now <= $end) {
-            return static::STATUS_ACTIVE;
-        } else {
-            return static::STATUS_FINISHED;
-        }
-    }
-
     /**
      * Get the Activity in which a Task is contained.
      *
@@ -330,84 +300,6 @@ class ClipitTask extends UBItem {
         $activity = UBCollection::get_items($id, ClipitActivity::REL_ACTIVITY_TASK, true);
         return array_pop($activity);
     }
-
-    // FILES
-
-    static function get_quiz($id)
-    {
-        $quiz_array = UBCollection::get_items((int)$id, static::REL_TASK_QUIZ);
-        if (empty($quiz_array)) {
-            return 0;
-        }
-        return (int)array_pop($quiz_array);
-    }
-
-    static function get_storyboards($id)
-    {
-        return UBCollection::get_items($id, static::REL_TASK_STORYBOARD);
-    }
-
-    static function get_videos($id)
-    {
-        return UBCollection::get_items($id, static::REL_TASK_VIDEO);
-    }
-
-    static function get_files($id) {
-        return UBCollection::get_items($id, static::REL_TASK_FILE);
-    }
-
-    // Performance Items
-
-    static function get_performance_items($id)
-    {
-        return UBCollection::get_items($id, static::REL_TASK_PERFORMANCE);
-    }
-
-    static function get_rubric_items($id)
-    {
-        return UBCollection::get_items($id, static::REL_TASK_RUBRIC);
-    }
-
-    /**
-     * Copy $this object parameters into an Elgg entity.
-     *
-     * @param ElggEntity $elgg_entity Elgg object instance to save $this to
-     */
-    protected function copy_to_elgg($elgg_entity)
-    {
-        parent::copy_to_elgg($elgg_entity);
-        $elgg_entity->set("task_type", (string)$this->task_type);
-        $elgg_entity->set("start", (int)$this->start);
-        $elgg_entity->set("end", (int)$this->end);
-        $elgg_entity->set("parent_task", (int)$this->parent_task);
-        $elgg_entity->set("task_count", (int)$this->task_count);
-    }
-
-    /**
-     * Saves this instance to the system.
-     * @param  bool $double_save if $double_save is true, this object is saved twice to ensure that all properties are updated properly. E.g. the time created property can only beset on ElggObjects during an update. Defaults to false!
-     * @return bool|int Returns the Id of the saved instance, or false if error
-     */
-    protected function save($double_save = false)
-    {
-        parent::save($double_save);
-        static::set_quiz($this->id, $this->quiz);
-        static::set_activity($this->id, $this->activity);
-        static::set_storyboards($this->id, $this->storyboard_array);
-        static::set_videos($this->id, $this->video_array);
-        static::set_files($this->id, $this->file_array);
-        static::set_performance_items($this->id, (array)$this->performance_item_array);
-        static::set_rubric_items($this->id, (array)$this->rubric_item_array);
-        return $this->id;
-    }
-
-    // Rubric Items
-
-    static function set_quiz($id, $quiz_id)
-    {
-        return UBCollection::set_items((int)$id, array($quiz_id), static::REL_TASK_QUIZ, true);
-    }
-
     /**
      * Set the Activity in which a Task is contained.
      *
@@ -421,33 +313,85 @@ class ClipitTask extends UBItem {
         return UBCollection::add_items($activity_id, array($id), ClipitActivity::REL_ACTIVITY_TASK, true);
     }
 
+    // STORYBOARDS
+    static function add_storyboards($id, $storyboard_array)
+    {
+        return UBCollection::add_items($id, $storyboard_array, static::REL_TASK_STORYBOARD);
+    }
+    static function remove_storyboards($id, $storyboard_array)
+    {
+        return UBCollection::remove_items($id, $storyboard_array, static::REL_TASK_STORYBOARD);
+    }
+    static function get_storyboards($id)
+    {
+        return UBCollection::get_items($id, static::REL_TASK_STORYBOARD);
+    }
     static function set_storyboards($id, $storyboard_array)
     {
         return UBCollection::set_items($id, $storyboard_array, static::REL_TASK_STORYBOARD);
     }
-
+    // VIDEOS
+    static function add_videos($id, $video_array)
+    {
+        return UBCollection::add_items($id, $video_array, static::REL_TASK_VIDEO);
+    }
+    static function remove_videos($id, $video_array)
+    {
+        return UBCollection::remove_items($id, $video_array, static::REL_TASK_VIDEO);
+    }
+    static function get_videos($id)
+    {
+        return UBCollection::get_items($id, static::REL_TASK_VIDEO);
+    }
     static function set_videos($id, $video_array)
     {
         return UBCollection::set_items($id, $video_array, static::REL_TASK_VIDEO);
     }
+    // FILES
+    static function add_files($id, $file_array)
+    {
+        return UBCollection::add_items($id, $file_array, static::REL_TASK_FILE);
+    }
 
-
-    // OTHER
-
+    static function remove_files($id, $file_array)
+    {
+        return UBCollection::remove_items($id, $file_array, static::REL_TASK_FILE);
+    }
     static function set_files($id, $file_array)
     {
         return UBCollection::set_items($id, $file_array, static::REL_TASK_FILE);
     }
-
-    static function set_performance_items($id, $performance_item_array)
-    {
-        return UBCollection::set_items($id, $performance_item_array, static::REL_TASK_PERFORMANCE);
+    static function get_files($id) {
+        return UBCollection::get_items($id, static::REL_TASK_FILE);
     }
-
-    // TASK COMPLETION
-
+    // RUBRIC ITEMS
+    static function add_rubric_items($id, $rubric_item_array)
+    {
+        return UBCollection::add_items($id, $rubric_item_array, static::REL_TASK_RUBRIC);
+    }
+    static function remove_rubric_items($id, $rubric_item_array)
+    {
+        return UBCollection::remove_items($id, $rubric_item_array, static::REL_TASK_RUBRIC);
+    }
+    static function get_rubric_items($id)
+    {
+        return UBCollection::get_items($id, static::REL_TASK_RUBRIC);
+    }
     static function set_rubric_items($id, $rubric_item_array)
     {
         return UBCollection::set_items($id, $rubric_item_array, static::REL_TASK_RUBRIC);
+    }
+    // QUIZZES
+    static function set_quiz($id, $quiz_id)
+    {
+        return UBCollection::set_items((int)$id, array($quiz_id), static::REL_TASK_QUIZ, true);
+    }
+    static function get_quiz($id)
+    {
+        $quiz_array = UBCollection::get_items((int)$id, static::REL_TASK_QUIZ);
+        if (empty($quiz_array)) {
+            return 0;
+        }
+        return (int)array_pop($quiz_array);
     }
 } 

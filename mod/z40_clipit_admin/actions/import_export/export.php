@@ -8,14 +8,14 @@
  * @package         ClipIt
  * @subpackage      clipit_admin
  */
-
-if(ClipitDataExport::export_all(get_input("filename"))){
+$filename = get_input("filename");
+$filepath = ClipitDataExport::export_all($filename);
+if(!empty($filepath)){
     system_message("Object data correctly exported");
     // Send for download
-    $filepath = "/tmp/".get_input("filename");
     header("Pragma: public");
     header("Content-Type: application/download");
-    header("Content-Disposition: attachment; filename='".get_input("filename")."'");
+    header("Content-Disposition: attachment; filename='".$filename."'");
     readfile($filepath);
     exit();
 } else{

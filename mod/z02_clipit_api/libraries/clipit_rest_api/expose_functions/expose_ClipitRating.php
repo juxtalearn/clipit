@@ -62,26 +62,26 @@ function expose_rating_functions() {
         array("id" => array("type" => "int", "required" => true)), "Get Tag Ratings from a Rating.", 'GET', false, true
     );
     expose_function(
-        $api_suffix . "add_performance_ratings", $class_suffix . "add_performance_ratings", array(
+        $api_suffix . "add_rubric_ratings", $class_suffix . "add_rubric_ratings", array(
             "id" => array("type" => "int", "required" => true),
-            "performance_rating_array" => array("type" => "array", "required" => true)
-        ), "Add Performance Ratings to a Rating.", 'POST', false, true
+            "rubric_rating_array" => array("type" => "array", "required" => true)
+        ), "Add rubric Ratings to a Rating.", 'POST', false, true
     );
     expose_function(
-        $api_suffix . "set_performance_ratings", $class_suffix . "set_performance_ratings", array(
+        $api_suffix . "set_rubric_ratings", $class_suffix . "set_rubric_ratings", array(
             "id" => array("type" => "int", "required" => true),
-            "performance_rating_array" => array("type" => "array", "required" => true)
-        ), "Set Performance Ratings to a Rating.", 'POST', false, true
+            "rubric_rating_array" => array("type" => "array", "required" => true)
+        ), "Set rubric Ratings to a Rating.", 'POST', false, true
     );
     expose_function(
-        $api_suffix . "remove_performance_ratings", $class_suffix . "remove_performance_ratings", array(
+        $api_suffix . "remove_rubric_ratings", $class_suffix . "remove_rubric_ratings", array(
             "id" => array("type" => "int", "required" => true),
-            "performance_rating_array" => array("type" => "array", "required" => true)
-        ), "Remove Performance Ratings from a Rating.", 'POST', false, true
+            "rubric_rating_array" => array("type" => "array", "required" => true)
+        ), "Remove rubric Ratings from a Rating.", 'POST', false, true
     );
     expose_function(
-        $api_suffix . "get_performance_ratings", $class_suffix . "get_performance_ratings",
-        array("id" => array("type" => "int", "required" => true)), "Get Performance Ratings from a Rating.", 'GET',
+        $api_suffix . "get_rubric_ratings", $class_suffix . "get_rubric_ratings",
+        array("id" => array("type" => "int", "required" => true)), "Get rubric Ratings from a Rating.", 'GET',
         false, true
     );
 }
