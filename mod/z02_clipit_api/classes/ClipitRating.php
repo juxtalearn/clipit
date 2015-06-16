@@ -13,8 +13,7 @@
  */
 
 /**
- * A complete User Rating linked to a published Resource, containing an Overall boolean rating, links to Tag Ratings and
- * Performance item Ratings.
+ * A complete User Rating linked to a published Resource.
  */
 class ClipitRating extends UBItem {
     /**
@@ -22,7 +21,6 @@ class ClipitRating extends UBItem {
      */
     const SUBTYPE = "ClipitRating";
     const REL_RATING_TAGRATING = "ClipitRating-ClipitTagRating";
-    const REL_RATING_PERFORMANCERATING = "ClipitRating-ClipitPerformanceRating";
     const REL_RATING_RUBRICRATING = "ClipitRating-ClipitRubricRating";
     /**
      * @var int Rating target (ClipitVideo or ClipitStoryboard)
@@ -36,11 +34,6 @@ class ClipitRating extends UBItem {
      * @var array Ratings about Tags used
      */
     public $tag_rating_array = array();
-    /**
-     * @deprecated
-     * @var array Ratings for Performance tips used
-     */
-    public $performance_rating_array = array();
     /**
      * @var array Ratings based on Rubric Items
      */
@@ -145,17 +138,6 @@ class ClipitRating extends UBItem {
         return UBCollection::remove_items($id, $tag_rating_array, static::REL_RATING_TAGRATING);
     }
 
-    static function add_performance_ratings($id, $performance_rating_array)
-    {
-        return UBCollection::add_items($id, $performance_rating_array, static::REL_RATING_PERFORMANCERATING);
-    }
-
-    static function remove_performance_ratings($id, $performance_rating_array)
-    {
-
-        return UBCollection::remove_items($id, $performance_rating_array, static::REL_RATING_PERFORMANCERATING);
-    }
-
     static function add_rubric_ratings($id, $rubric_rating_array)
     {
         return UBCollection::add_items($id, $rubric_rating_array, static::REL_RATING_RUBRICRATING);
@@ -178,17 +160,11 @@ class ClipitRating extends UBItem {
         $this->target = (int)$elgg_entity->get("target");
         $this->overall = (bool)$elgg_entity->get("overall");
         $this->tag_rating_array = (array)static::get_tag_ratings($this->id);
-        $this->performance_rating_array = (array)static::get_performance_ratings($this->id);
         $this->rubric_rating_array = (array)static::get_rubric_ratings($this->id);
     }
 
     static function get_tag_ratings($id) {
         return UBCollection::get_items($id, static::REL_RATING_TAGRATING);
-    }
-
-    static function get_performance_ratings($id)
-    {
-        return UBCollection::get_items($id, static::REL_RATING_RUBRICRATING);
     }
 
     static function get_rubric_ratings($id)
@@ -217,7 +193,6 @@ class ClipitRating extends UBItem {
     {
         parent::save($double_save);
         static::set_tag_ratings($this->id, (array)$this->tag_rating_array);
-        static::set_performance_ratings($this->id, (array)$this->performance_rating_array);
         static::set_rubric_ratings($this->id, (array)$this->rubric_rating_array);
         return $this->id;
     }
@@ -225,11 +200,6 @@ class ClipitRating extends UBItem {
     static function set_tag_ratings($id, $tag_rating_array)
     {
         return UBCollection::set_items($id, $tag_rating_array, static::REL_RATING_TAGRATING);
-    }
-
-    static function set_performance_ratings($id, $performance_rating_array)
-    {
-        return UBCollection::set_items($id, $performance_rating_array, static::REL_RATING_PERFORMANCERATING);
     }
 
     static function set_rubric_ratings($id, $rubric_rating_array)

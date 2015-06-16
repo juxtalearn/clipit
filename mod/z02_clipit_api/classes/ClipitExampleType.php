@@ -133,17 +133,17 @@ class ClipitExampleType extends UBItem{
      * @return static[] Array of Items for the specified category
      */
     static function get_from_category($category = null, $language = "en") {
-        $performance_items = static::get_all();
+        $example_type_array = static::get_all();
         $category_array = array();
         $lang_index = static::get_language_index($language);
         if (empty($category)) {
-            foreach ($performance_items as $performance_item) {
-                $category_array[$performance_item->category[$lang_index]][] = $performance_item;
+            foreach ($example_type_array as $example_type) {
+                $category_array[$example_type->category[$lang_index]][] = $example_type;
             }
         } else {
-            foreach ($performance_items as $performance_item) {
-                if ($performance_item->category[$lang_index] == $category) {
-                    $category_array[] = $performance_item;
+            foreach ($example_type_array as $example_type) {
+                if ($example_type->category[$lang_index] == $category) {
+                    $category_array[] = $example_type;
                 }
             }
         }
@@ -155,8 +155,8 @@ class ClipitExampleType extends UBItem{
      * @return static|null
      */
     static function get_by_reference($reference){
-        $performance_items = static::get_all();
-        foreach($performance_items as $item){
+        $example_type_array = static::get_all();
+        foreach($example_type_array as $item){
             if((int)$item->reference == (int)$reference) {
                 return $item;
             }

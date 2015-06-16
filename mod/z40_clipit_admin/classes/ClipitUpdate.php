@@ -43,12 +43,12 @@ class ClipitUpdate
         $update_scripts = (array)$versions_obj->update_scripts;
         $old_version = get_config("clipit_version");
 
-        // If no clipit_version in config, then treat it as oldest version possible.
+        // If no clipit_version in config, then treat it as oldest version possible (2.2.0)
         if(empty($old_version)) {
             $old_version = "2.2.0";
         }
 
-        // If already up-to-date, exit.
+        // If already up-to-date, exit
         if($new_version === $old_version){
             return true;
         }
