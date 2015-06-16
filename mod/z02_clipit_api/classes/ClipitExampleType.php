@@ -156,9 +156,9 @@ class ClipitExampleType extends UBItem{
      */
     static function get_by_reference($reference){
         $example_type_array = static::get_all();
-        foreach($example_type_array as $item){
-            if((int)$item->reference == (int)$reference) {
-                return $item;
+        foreach($example_type_array as $example_type){
+            if((int)$example_type->reference == (int)$reference) {
+                return $example_type;
             }
         }
         return null;

@@ -97,6 +97,6 @@ function parse_example_types_row($row_iterator) {
     $value = $cell_iterator->current()->getValue();
     $prop_value_array["category_description"] = (string)$value;
 
-    // Add Example Type item  to ClipIt
+    // Add Example Type Item to ClipIt
     ClipitExampleType::create($prop_value_array);
 }
