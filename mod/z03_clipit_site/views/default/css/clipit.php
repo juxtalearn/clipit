@@ -62,4 +62,7 @@ $futuralight = 'FuturaLT-Light';
     }
     <?php endif;?>
 <?php
-require($plugin_dir . '/bootstrap/less/clipit/clipit_base.min.css');
+require(elgg_get_plugins_path().'z03_clipit_site' . '/bootstrap/less/clipit/clipit_base.min.css');
+if(get_config('clipit_site_type') == ClipitSite::TYPE_GLOBAL){
+    require(elgg_get_plugins_path().'z03_clipit_site' . '/bootstrap/less/clipit/landing.min.css');
+}
