@@ -1,0 +1,32 @@
+{
+  "version": "2.4.1",
+  "update_scripts": {
+    "2.2.0": null,
+    "2.2.1": "update_2.2.1.php",
+    "2.2.2": "update_2.2.2.php",
+    "2.2.3": null,
+    "2.2.4": "update_2.2.4.php",
+    "2.2.5": "update_2.2.5.php",
+    "2.3": null,
+    "2.3.1": null,
+    "2.3.2": null,
+    "2.3.3": "update_2.3.3.php",
+    "2.3.4": "update_2.3.4.php",
+    "2.3.5": "update_2.3.5.php",
+    "2.3.6": "update_2.3.6.php",
+    "2.3.7": "update_2.3.7.php",
+    "2.3.8": "update_2.3.8.php",
+    "2.3.9": "update_2.3.9.php",
+    "2.3.9.1": null,
+    "2.3.10": null,
+    "2.3.11": "update_2.3.11.php",
+    "2.3.12": "update_2.3.12.php",
+    "2.3.13": null,
+    "2.3.14": "update_2.3.14.php",
+    "2.3.15": "update_2.3.15.php",
+    "2.3.16": null,
+    "2.3.17": null,
+    "2.3.18": "update_2.3.18.php",
+    "2.4.1": "update_2.4.1.php"
+  }
+}
