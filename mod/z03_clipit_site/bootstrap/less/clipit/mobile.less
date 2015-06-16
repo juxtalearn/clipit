@@ -2,10 +2,14 @@
 //@import "../../z03_clipit_global/bootstrap/less/clipit/variables_clipit";
 //@import "../../z03_clipit_global/bootstrap/less/clipit/mixins";
 //@import "../../z03_clipit_global/bootstrap/less/clipit/clipit_base";
+
+
+//All devices
 .events-list,
 .navbar-nav .separator{
   .hidden-xs();
 }
+
 @media(min-width: @screen-md-min){
   .elgg-sidebar{
     display: block !important;
@@ -17,6 +21,21 @@
     display: none !important;
   }
 }
+.navbar-default .navbar-toggle{
+  border: none;
+  .icon-bar{
+    width: 25px;
+    height: 3px;
+    background-color: @blue_clipit;
+  }
+  &:hover,
+  &:focus{
+    background-color: @blue-lighter_4;
+    outline: 0;
+  }
+}
+
+// Big screen device
 @media (min-width: @screen-md-min) and (max-width: @screen-md-max){
   header{
     position:relative;
@@ -29,7 +48,31 @@
   position: relative;
   }
 }
-@media (max-width:@screen-sm-min){
+// Tablet device
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max){
+  .navbar-default .navbar-toggle .icon-bar{
+    width: 28px !important;
+    height: 4px !important;
+  }
+  .navbar-default ul.top-account li{
+    margin-left: 15px;
+    a {
+      .fa {
+        font-size: 32px !important;
+        &.fa-list-alt {
+          line-height: 28px;
+        }
+      }
+      &.avatar-user > img{
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
+}
+//Mobile and tablet device
+
+@media (max-width:@screen-sm-max){
   // Walled garden, user not logged in
   header{
     position:relative;
@@ -52,10 +95,7 @@
 
   .navbar-nav{
     margin: 0px;
-   display:inline-block;
-  }
-  .navbar-blue{
-    padding-top: 4px;
+    display:inline-block;
   }
 
   .navbar-brand img{
@@ -69,12 +109,14 @@
   .navbar-brand {
     line-height: 25px;
     height: auto;
+    text-align: left;
+    padding: 0;
   }
   div p.navbar-text{
     margin:0px;
   }
 
- img.avatar-small {
+  img.avatar-small {
     width: 35px;
     height: 35px;
   }
@@ -153,6 +195,7 @@
   }
   #navbar-sticky{
     min-height: 25px;
+    z-index: 1025;
   }
   .navbar-toggle{
     float:none;
@@ -169,19 +212,16 @@
     font-size: 18px;
   }
   .navbar-brand,
-  .navbar-blue .container{
-    position: relative;
-    min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
-    width: 50%;
-
+  .navbar-blue {
+    .container {
+      position: relative;
+      min-height: 1px;
+    }
   }
   .navbar-blue .container {
     text-align: right;
-    float: right !important;
   }
-    .message .body{
+  .message .body{
     margin-left: 0;
   }
   // Sign out button
@@ -194,21 +234,22 @@
   }
 
   .navbar-default{
-    z-index: 1029;
     &.navbar-blue{
       box-shadow: none;
       border-bottom: 0;
+      z-index: 1026;
+      padding-top: 4px;
     }
     ul.top-account li{
       padding-top: 5px;
       display: inline-block;
       &.active{
-       a {
-         background: none !important;
-         .fa {
-           color: @blue_clipit_primary !important;
-         }
-       }
+        a {
+          background: none !important;
+          .fa {
+            color: @blue_clipit_primary !important;
+          }
+        }
       }
       a {
         padding-bottom: 5px;
@@ -246,8 +287,8 @@
     font-size: 15px;
   }
   .elgg-sidebar .fa-times{
-  font-size: 18px;
-}
+    font-size: 18px;
+  }
   .form-control{
     -webkit-appearance: none;
   }
@@ -276,21 +317,27 @@
     }
   }
 }
-@media(max-width: 335px){
-  ul.top-account li a .fa{
-    font-size: 20px;
+// Mobile devices
+@media (max-width:@screen-xs-max){
+  .navbar-default ul.top-account li{
+    margin-left: 5px;
+    a .fa{
+      &.fa-list-alt{
+        line-height: 21px;
+      }
+      &.fa-globe{
+        line-height: 22px;
+      }
+    }
   }
 }
-.navbar-default .navbar-toggle{
-  border: none;
-  .icon-bar{
-    width: 25px;
-    height: 3px;
-    background-color: @blue_clipit;
-  }
-  &:hover,
-  &:focus{
-    background-color: @blue-lighter_4;
-    outline: 0;
+
+// Small mobile devices
+@media(max-width: 340px){
+  ul.top-account li {
+    margin-left: 0 !important;
+    a .fa {
+      font-size: 20px;
+    }
   }
 }
