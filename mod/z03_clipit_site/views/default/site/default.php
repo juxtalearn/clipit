@@ -54,7 +54,7 @@ $lang = get_current_language();
     <div class="elgg-page-messages">
         <?php echo $messages; ?>
     </div>
-    <header>
+    <header<?php echo !elgg_is_logged_in()? ' class="not-logged-in"':''?>>
         <?php echo $header_top; ?>
         <?php echo $header_account; ?>
     </header>

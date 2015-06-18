@@ -10697,6 +10697,12 @@ td.navbar-nav .separator {
   header {
     position: relative;
   }
+  header .back-top {
+    display: none;
+  }
+  header.not-logged-in #navbar-sticky {
+    display: none;
+  }
   .elgg-page-walledgarden #navbar-sticky {
     display: none;
   }
