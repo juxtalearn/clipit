@@ -48,6 +48,52 @@ abstract class ClipitResource extends UBItem {
     public $tag_rating_average = 0.0;
     public $rubric_rating_average = 0.0;
 
+    /**
+     * Loads object parameters stored in Elgg
+     *
+     * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
+     */
+    protected function copy_from_elgg($elgg_entity)
+    {
+        parent::copy_from_elgg($elgg_entity);
+        $this->tag_array = (array)static::get_tags($this->id);
+        $this->label_array = (array)static::get_labels($this->id);
+        $this->rubric_item_array = (array)static::get_rubric_items($this->id);
+        $this->read_array = (array)$elgg_entity->get("read_array");
+        $this->overall_rating_average = (float)$elgg_entity->get("overall_rating_average");
+        $this->tag_rating_average = (float)$elgg_entity->get("tag_rating_average");
+        $this->rubric_rating_average = (float)$elgg_entity->get("rubric_rating_average");
+
+    }
+
+    /**
+     * Copy $this object parameters into an Elgg entity.
+     *
+     * @param ElggEntity $elgg_entity Elgg object instance to save $this to
+     */
+    protected function copy_to_elgg($elgg_entity)
+    {
+        parent::copy_to_elgg($elgg_entity);
+        $elgg_entity->set("read_array", (array)$this->read_array);
+        $elgg_entity->set("overall_rating_average", (float)$this->overall_rating_average);
+        $elgg_entity->set("tag_rating_average", (float)$this->tag_rating_average);
+        $elgg_entity->set("rubric_rating_average", (float)$this->rubric_rating_average);
+    }
+
+    /**
+     * Saves this instance to the system.
+     * @param  bool $double_save if $double_save is true, this object is saved twice to ensure that all properties are updated properly. E.g. the time created property can only beset on ElggObjects during an update. Defaults to false!
+     * @return bool|int Returns the Id of the saved instance, or false if error
+     */
+    protected function save($double_save = false)
+    {
+        parent::save($double_save);
+        static::set_tags($this->id, (array)$this->tag_array);
+        static::set_labels($this->id, (array)$this->label_array);
+        static::set_rubric_items($this->id, (array)$this->rubric_item_array);
+        return $this->id;
+    }
+
     static function update_average_ratings($id)
     {
         $prop_value_array["overall_rating_average"] = (float)ClipitRating::get_average_rating_for_target($id);
@@ -358,51 +404,7 @@ abstract class ClipitResource extends UBItem {
         return static::set_properties($id, $prop_value_array);
     }
 
-    /**
-     * Loads object parameters stored in Elgg
-     *
-     * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
-     */
-    protected function copy_from_elgg($elgg_entity)
-    {
-        parent::copy_from_elgg($elgg_entity);
-        $this->tag_array = (array)static::get_tags($this->id);
-        $this->label_array = (array)static::get_labels($this->id);
-        $this->rubric_item_array = (array)static::get_rubric_items($this->id);
-        $this->read_array = (array)$elgg_entity->get("read_array");
-        $this->overall_rating_average = (float)$elgg_entity->get("overall_rating_average");
-        $this->tag_rating_average = (float)$elgg_entity->get("tag_rating_average");
-        $this->rubric_rating_average = (float)$elgg_entity->get("rubric_rating_average");
 
-    }
-
-    /**
-     * Copy $this object parameters into an Elgg entity.
-     *
-     * @param ElggEntity $elgg_entity Elgg object instance to save $this to
-     */
-    protected function copy_to_elgg($elgg_entity)
-    {
-        parent::copy_to_elgg($elgg_entity);
-        $elgg_entity->set("read_array", (array)$this->read_array);
-        $elgg_entity->set("overall_rating_average", (float)$this->overall_rating_average);
-        $elgg_entity->set("tag_rating_average", (float)$this->tag_rating_average);
-        $elgg_entity->set("rubric_rating_average", (float)$this->rubric_rating_average);
-    }
-
-    /**
-     * Saves this instance to the system.
-     * @param  bool $double_save if $double_save is true, this object is saved twice to ensure that all properties are updated properly. E.g. the time created property can only beset on ElggObjects during an update. Defaults to false!
-     * @return bool|int Returns the Id of the saved instance, or false if error
-     */
-    protected function save($double_save = false)
-    {
-        parent::save($double_save);
-        static::set_tags($this->id, (array)$this->tag_array);
-        static::set_labels($this->id, (array)$this->label_array);
-        static::set_rubric_items($this->id, (array)$this->rubric_item_array);
-        return $this->id;
-    }
 
     /**
      * Sets Tags to a Resource, referenced by Id.

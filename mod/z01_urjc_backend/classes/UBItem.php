@@ -458,6 +458,11 @@ class UBItem {
             return true;
         }
         foreach ($id_array as $id) {
+            // Check if ID is of same subtype as class
+            $lookup_array = ClipitSite::lookup($id);
+            if($lookup_array["subtype"] != static::SUBTYPE){
+                continue;
+            }
             // Don't allow to delete the Site ID
             $site = elgg_get_site_entity();
             if ($id == $site->guid) {
