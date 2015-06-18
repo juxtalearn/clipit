@@ -74,8 +74,17 @@
 
 @media (max-width:@screen-sm-max){
   // Walled garden, user not logged in
+
   header{
     position:relative;
+    .back-top{
+      display: none;
+    }
+    &.not-logged-in{
+      #navbar-sticky{
+        display: none;
+      }
+    }
   }
   .elgg-page-walledgarden #navbar-sticky{
     display: none;
