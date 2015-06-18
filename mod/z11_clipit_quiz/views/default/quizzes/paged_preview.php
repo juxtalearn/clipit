@@ -38,11 +38,11 @@ $view_quiz_url = elgg_get_site_url()."quizzes/view?id_quiz={$id_quiz}";
     /* Mostrar pregunta a pregunta todas las questions del quiz */
 
     $questions_ids = ClipitQuiz::get_quiz_questions($id_quiz); 
-    $questions = ClipitQuizQuestion::get_by_id($questions_ids, true);
+    //$questions = ClipitQuizQuestion::get_by_id($questions_ids, true);
     $i = 1;
-    
-    foreach ($questions as $question) :
-        $id_quest = $question->id;
+
+    foreach ($questions_ids as $id_quest) :
+        $question = array_pop(ClipitQuizQuestion::get_by_id(array($id_quest)));
         $type = $question->option_type;
         $oa = $question->option_array;
         $display = null;
@@ -79,13 +79,13 @@ $view_quiz_url = elgg_get_site_url()."quizzes/view?id_quiz={$id_quiz}";
               case ClipitQuizQuestion::TYPE_TRUE_FALSE:
                     echo '<div class="qqt" id="vof" style="margin-left: 30px;">';
                     echo '<div class="radio"><label>';
-                        echo '<input type="radio" name="vof_'.$id_quest.'" value="1">';
-                        echo elgg_view('output/text', array('value' => $oa[0]));
+                        echo '<input type="radio" name="vof_'.$id_quest.'" value="1">Verdadera';
+                        //echo elgg_view('output/text', array('value' => $oa[0]));
                     echo '</label></div>';
                     echo '<div class="radio"><label>';
-                        echo '<input type="radio" name="vof_'.$id_quest.'" value="2">';
-                        echo elgg_view('output/text', array('value' => $oa[1]));
-                    echo '</label></div>';
+                        echo '<input type="radio" name="vof_'.$id_quest.'" value="2">Falsa';
+                        //echo elgg_view('output/text', array('value' => $oa[1]));
+                    echo '</label></div></div>';
                     break;
               //****************************************************************************
               case ClipitQuizQuestion::TYPE_SELECT_ONE:
@@ -156,7 +156,7 @@ $view_quiz_url = elgg_get_site_url()."quizzes/view?id_quiz={$id_quiz}";
     echo '<div id="buttons">';  
         $x = $i;
         //Si NO es ni la primera ni la última pregunta
-        if($i < count($questions) && $i > 1){ 
+        if($i < count($questions_ids) && $i > 1){ 
             //Muestro los botones anterior y siguiente 
             echo '<div class="col-xs-6 col-md-3" style="margin-top: 15px;">'; 
             echo elgg_view('output/url', array(

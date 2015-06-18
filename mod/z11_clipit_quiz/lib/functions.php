@@ -154,7 +154,7 @@ function students_list ($id_quiz){
         $questions_results = ClipitQuizQuestion::get_quiz_results($id_question); //Obtengo todos sus resultados
         foreach ($questions_results as $id_result) {
             $result = array_pop(ClipitQuizResult::get_by_id($questions_results));
-            $students_array[] = $result->user;
+            $students_array[] = $result->owner_id;
         }
     }
     $students_array = array_unique($students_array); //Elimina los valores duplicados del array

@@ -8,14 +8,16 @@ $id_quiz = get_input('id_quiz');
 /** Eliminar una pregunta que esta asociada a un quiz **/
 if ($id_quiz > 0){
     //Obtengo el array de questions del quiz
-    $quest_array = ClipitQuiz::get_quiz_questions($id_quiz);
+    /*$quest_array = ClipitQuiz::get_quiz_questions($id_quiz);
     //Obtengo el indice donde está guardado el id de la pregunta
     $clave = array_search('$id_quest', $quest_array);
     //Elimino el elemento que está en ese índice
     unset($quest_array[$clave]);
     //Modifico el array de preguntas del quiz
-    $prop_value_array['quiz_question_array'] = $quest_array;
-    ClipitQuiz::set_properties($id_quiz, $prop_value_array);
+    $prop_value_array['quiz_question_array'] = $quest_array;*/
+    
+    ClipitQuiz::remove_quiz_questions($id_quiz, array($id_quest));
+    //ClipitQuiz::set_properties($id_quiz, $prop_value_array);
     forward(REFERER);
     
 /** Eliminar una pregunta que NO esta asociada a un quiz **/    

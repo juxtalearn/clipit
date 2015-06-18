@@ -9,6 +9,7 @@ $questions = ClipitQuiz::get_quiz_questions($id_quiz);
 foreach($questions as $quest){
     $q = array_pop(ClipitQuizQuestion::get_by_id(array($quest))); 
     $id_quest = $q->id;
+    
     $type = $q-> option_type; //Obtengo el tipo de pregunta
     $oa = $q-> option_array;
     $va = $q-> validation_array; //Obtengo el array de validacion
@@ -39,21 +40,20 @@ foreach($questions as $quest){
     
     //Crear objeto QuizQuestionResult y guardarlo en el quiz_result_array de cada pregunta(QuizQuestion)
     if ($type == ClipitQuizQuestion::TYPE_STRING){ //Si es de Desarrollo guardo la respuesta para que la corrija el profesor
+        $x = get_input("dr_{$id_quest}");
         $id_result = ClipitQuizResult::create(array(
-            'user' => $user,
-            'answer' => get_input("dr_{$id_quest}"),
+            'answer' => $x,
             'quiz_question' => $id_quest,
-            'description' => '',
+            'description' => ''
         ));
     
     /* Si es cualquier otro tipo de pregunta, se ha corregido 'automáticamente' */
     } else {
         $id_result = ClipitQuizResult::create(array(
-            'user' => $user,
             'correct' => $correct,
             'quiz_question' => $id_quest,
             'answer' => $answer,
-            'description' => '',
+            'description' => ''
         ));
     }
     

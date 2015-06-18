@@ -61,12 +61,12 @@ $view_quiz_url = elgg_get_site_url()."quizzes/view?id_quiz={$id}";
               case ClipitQuizQuestion::TYPE_TRUE_FALSE:
                     echo '<div class="qqt" id="vof" style="margin-left: 30px;">';
                     echo '<div class="radio"><label>';
-                        echo '<input type="radio" name="vof_ca" value="1">';
-                        echo elgg_view('output/text', array('value' => $oa[0]));
+                        echo '<input type="radio" name="vof_ca" value="1">Verdadera';
+                        //echo elgg_view('output/text', array('value' => $oa[0]));
                     echo '</label></div>';
                     echo '<div class="radio"><label>';
-                        echo '<input type="radio" name="vof_ca" value="2">';
-                        echo elgg_view('output/text', array('value' => $oa[1]));
+                        echo '<input type="radio" name="vof_ca" value="2">Falsa';
+                        //echo elgg_view('output/text', array('value' => $oa[1]));
                     echo '</label></div>';
                     break;
               //****************************************************************************

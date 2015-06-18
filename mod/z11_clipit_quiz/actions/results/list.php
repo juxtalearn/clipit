@@ -40,7 +40,6 @@ foreach($questions as $quest){
     //Crear objeto QuizQuestionResult y guardarlo en el quiz_result_array de cada pregunta(QuizQuestion)
     if ($type == ClipitQuizQuestion::TYPE_STRING){ //Si es de Desarrollo guardo la respuesta para que la corrija el profesor
         $id_result = ClipitQuizResult::create(array(
-            'user' => $user,
             'answer' => get_input("dr_{$id_quest}"),
             'quiz_question' => $id_quest,
             'description' => '',
@@ -49,7 +48,6 @@ foreach($questions as $quest){
     /* Si es cualquier otro tipo de pregunta, se ha corregido 'automáticamente' */
     } else {
         $id_result = ClipitQuizResult::create(array(
-            'user' => $user,
             'correct' => $correct,
             'quiz_question' => $id_quest,
             'answer' => $answer,

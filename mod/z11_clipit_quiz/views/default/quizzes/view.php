@@ -2,8 +2,8 @@
 $owner_id = elgg_get_logged_in_user_guid();
 
 //Obtener el quiz y su ID
-$quiz = elgg_extract('entity', $vars);
 $id = elgg_extract('id', $vars);
+$quiz= array_pop(ClipitQuiz::get_by_id(array($id)));
 
  //Obtener el array de preguntas del quiz
 $questions = ClipitQuiz::get_quiz_questions($id);

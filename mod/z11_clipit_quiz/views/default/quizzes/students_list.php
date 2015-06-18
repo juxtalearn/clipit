@@ -14,6 +14,7 @@ foreach ($students_list as $id_student) :
     //Comprobar si tiene todas las respuestas corregidas
     $all_checked = true;
     if (count($student_results)>0){
+        
         foreach ($student_results as $result) { //Compruebo respuesta a respuesta
             //Obtener la pregunta 
             $q = array_pop(ClipitQuizQuestion::get_by_id(array($result->quiz_question)));

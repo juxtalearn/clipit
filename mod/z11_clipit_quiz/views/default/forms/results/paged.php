@@ -34,12 +34,13 @@ $tt = ClipitTrickyTopic::get_by_id(array($id_tt));
 
     <?php
     /* Mostrar pregunta a pregunta todas las questions del quiz */
-    $questions_ids = ClipitQuiz::get_quiz_questions($id_quiz);
-    $questions = ClipitQuizQuestion::get_by_id($questions_ids, true);
+
+    $questions_ids = ClipitQuiz::get_quiz_questions($id_quiz); 
+    //$questions = ClipitQuizQuestion::get_by_id($questions_ids, true);
     $i = 1;
-    
-    foreach ($questions as $question) :
-        $id_quest = $question->id;
+
+    foreach ($questions_ids as $id_quest) :
+        $question = array_pop(ClipitQuizQuestion::get_by_id(array($id_quest)));
         $type = $question->option_type;
         $oa = $question->option_array;
         $display = null;
@@ -88,7 +89,7 @@ $tt = ClipitTrickyTopic::get_by_id(array($id_tt));
                     echo '<div class="radio"><label>';
                         echo '<input type="radio" class="vof" name="vof_'.$id_quest.'" value="2"> Falso';
                         //echo elgg_view('output/text', array('value' => $oa[1]));
-                    echo '</label></div>';
+                    echo '</label></div></div>';
                     break;
               //****************************************************************************
               case ClipitQuizQuestion::TYPE_SELECT_ONE:
@@ -159,7 +160,7 @@ $tt = ClipitTrickyTopic::get_by_id(array($id_tt));
     echo '<div id="buttons">';  
         $x = $i;
         //Si NO es ni la primera ni la última pregunta
-        if($i < count($questions) && $i > 1){ 
+        if($i < count($questions_ids) && $i > 1){ 
             //Muestro los botones anterior y siguiente 
             echo '<div class="col-xs-6 col-md-3" style="margin-top: 15px;">'; 
             echo elgg_view('output/url', array(
@@ -263,6 +264,6 @@ $tt = ClipitTrickyTopic::get_by_id(array($id_tt));
             return false;
         }
         //enviar formulario
-        $("form").submit();
+        $(".elgg-form-results-paged").submit();
     }
 </script>

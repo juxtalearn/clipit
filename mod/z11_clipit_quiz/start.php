@@ -16,32 +16,34 @@ function quizzes_tool_init() {
     $item3 = new ElggMenuItem('results', 'Estudiante', 'results/all_quizzes');
     elgg_register_menu_item('site', $item3);
     
+    elgg_extend_view("navigation/menu/top", "navigation/menu/quizzes", 10);
+    
     //Adicionar items al menu de navegacion del margen derecho
     elgg_register_menu_item('page', array(
-           'name' => 'all',
+           'name' => 'all_quizzes',
            'text' => 'Listado Quizzes',
            'href' => 'quizzes/all',
-           'contexts' => array('quizzes'),
+           'contexts' => array('quizzes','questions'),
          ));     
     elgg_register_menu_item('page', array(
-           'name' => 'add',
+           'name' => 'add_quizzes',
            'text' => 'Crear Quiz',
            'href' => 'quizzes/add',
-           'contexts' => array('quizzes'),
+           'contexts' => array('quizzes','questions'),
          ));
     
     elgg_register_menu_item('page', array(
-        'name' => 'all',
+        'name' => 'all_questions',
         'text' => 'Listado Preguntas',
         'href' => 'questions/all',
-        'contexts' => array('questions'),
+        'contexts' => array('quizzes','questions'),
     ));
 
     elgg_register_menu_item('page', array(
-        'name' => 'add',
+        'name' => 'add_questions',
         'text' => 'Crear Pregunta',
         'href' => 'questions/add',
-        'contexts' => array('questions'),
+        'contexts' => array('quizzes','questions'),
     ));
          
     //Registro de acciones

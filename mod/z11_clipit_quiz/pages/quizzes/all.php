@@ -1,5 +1,4 @@
 <?php
-
 $user_logged = elgg_get_logged_in_user_guid();
 $title = "Todos los Quizzes";
 elgg_push_breadcrumb($title);   //Inlcuir migas de pan

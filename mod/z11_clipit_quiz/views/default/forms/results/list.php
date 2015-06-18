@@ -45,6 +45,7 @@ $tt = ClipitTrickyTopic::get_by_id(array($id_tt));
         
         //Respuestas
         echo '<div id="answers-block" class="col-xs-12 col-md-12">';
+        var_dump($type);
             switch ($type) {
                 case ClipitQuizQuestion::TYPE_STRING:
                     echo '<div class="d" id="'.$i.'">';
@@ -204,6 +205,6 @@ $tt = ClipitTrickyTopic::get_by_id(array($id_tt));
             return false;
         }
         //enviar formulario
-        $("form").submit();
+        $(".elgg-form-results-paged").submit();
     }
 </script>
