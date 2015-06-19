@@ -10,21 +10,33 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$rubrics = array();
-$rubrics = elgg_extract('entities', $vars);
+$rubric = elgg_extract('entity', $vars);
 $button_value = elgg_extract('submit_value', $vars);
+if($rubric){
+    $rubric_items = ClipitRubricItem::get_by_id($rubric->rubric_item_array, 0, 0, 'time_created', false);
+    echo elgg_view('input/hidden', array(
+        'name' => 'rubric[id]',
+        'value' => $rubric->id,
+    ));
+}
+$input_prefix = elgg_extract('input_prefix', $vars);
+if($rubric_id = get_input('entity_id')){
+    $rubric = array_pop(ClipitRubric::get_by_id(array($rubric_id)));
+    $rubric_items = ClipitRubricItem::get_by_id($rubric->rubric_item_array);
+    $select = true;
+    $selected_array = get_input('selected');
+    $input_prefix = get_input('input_prefix');
+}
+if($vars['create']){
+    $rubric_items = array('' => array_fill(0, 5, ''));
+}
 ?>
-<link rel="stylesheet" href="http://rawgithub.com/FluidApps/bootstrap-horizon/master/bootstrap-horizon.css">
 <style>
     fieldset{
         min-width: 0;
     }
-    .row-horizon{
-        padding-bottom: 5px;
-    }
     .row-horizon > .col-md-3 {
         padding: 0 5px;
-        width: 19.95%;
     }
     .rubric-item .rating{
         background-color: #d9edf7;
@@ -33,7 +45,22 @@ $button_value = elgg_extract('submit_value', $vars);
         color: #32b4e5;
         margin-top: 5px;
     }
+    .rubric-item .rubric-details{
+        background: #f4f4f4;
+        padding: 0 5px;
+        cursor: e-resize;
+    }
 </style>
+<script>
+$(function(){
+    $( ".rubric .row-horizon").sortable({
+        containment: "parent",
+        update: function(event, ui) {
+            clipit.rubric.rating_calculate($(ui.item).closest('.rubric'));
+        }
+    });
+});
+</script>
 <?php if(count($rubric) > 1): ?>
     <?php echo elgg_view('input/hidden', array(
         'name' => 'input-remove',
@@ -42,35 +69,47 @@ $button_value = elgg_extract('submit_value', $vars);
     ?>
 <?php endif;?>
 <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-4 form-group">
         <label><?php echo elgg_echo('name');?></label>
+        <?php echo elgg_view('input/text', array(
+            'class' => 'form-control',
+            'name' => 'rubric[name]',
+            'value' => $rubric->name,
+            'required' => true
+        ));
+        ?>
+    </div>
+    <div class="clearfix"></div>
+    <div class="col-md-2">
+        <label><?php echo elgg_echo('rubric:item');?></label>
     </div>
     <div class="col-md-10">
-        <label><?php echo elgg_echo('rubric:items');?></label>
+        <label><?php echo elgg_echo('rubric:levels');?></label>
     </div>
 </div>
 <hr class="margin-top-5">
+
 <ul class="rubrics">
-<?php foreach($rubrics as $rubric):
+<?php foreach($rubric_items as $rubric_item):
     $id = uniqid('rubric_');
-    $items = $rubric;
-    if($rubric->id){
-        $items = $rubric->level_array;
+    $levels = $rubric_item;
+    if($rubric_item->id){
+        $levels = $rubric_item->level_array;
     }
 ?>
 <li class="row list-item rubric">
     <div class="col-md-2">
         <?php
-        if($rubric->id) {
+        if($rubric_item->id) {
             echo elgg_view('input/hidden', array(
                 'class' => 'rubric-remove',
-                'name' => 'rubric[' . $id . '][remove]',
+                'name' => 'rubric[item][' . $id . '][remove]',
                 'value' => 0
             ));
             echo elgg_view('input/hidden', array(
                 'class' => 'rubric-id',
-                'name' => 'rubric[' . $id . '][id]',
-                'value' => $rubric->id
+                'name' => 'rubric[item][' . $id . '][id]',
+                'value' => $rubric_item->id
             ));
         }
         ?>
@@ -78,47 +117,50 @@ $button_value = elgg_extract('submit_value', $vars);
             'style' => 'padding: 5px;font-size:13px;width: 100%;resize: vertical;',
             'class' => 'form-control',
             'rows' => 2,
-            'name' => 'rubric['.$id.'][name]',
-            'value' => $rubric->name
+            'name' => 'rubric[item]['.$id.'][name]',
+            'placeholder' => elgg_echo('rubric:item:name'),
+            'value' => $rubric_item->name
         ));
         ?>
         <?php echo elgg_view('output/url', array(
             'href'  => 'javascript:;',
-            'class' => 'add-rubric-item btn btn-xs btn-primary margin-top-10 btn-border-blue',
-            'text'  => 'Añadir criterio'
+            'class' => 'add-rubric-item btn btn-xs btn-primary margin-top-10 btn-border-blue show',
+            'text'  => elgg_echo('rubric:add_item')
         ));
         ?>
         <?php echo elgg_view('output/url', array(
             'href'  => 'javascript:;',
-            'class' => 'remove-rubric btn btn-xs btn-primary margin-top-10 btn-border-red',
+            'class' => 'remove-rubric btn btn-xs btn-primary margin-top-10 btn-border-red show',
             'text'  => elgg_echo('remove')
         ));
         ?>
     </div>
     <div class="col-md-10 row-horizon row" style="overflow-x: auto;">
         <?php
-        $total = count($items);
-        foreach($items as $i => $rubric_item):
-            if($rubric->id){
-                $rating = round(($rubric->level_increment*($i+1))*10);
+        $total = count($levels);
+        foreach($levels as $i => $level):
+            if($rubric_item->id){
+                $rating = round(($rubric_item->level_increment*($i+1))*10, 1);
             } else {
                 $rating = round(($i + 1) * (1 / $total) * 10 * 10, 1) / 10;
             }
         ?>
         <div class="col-md-3 col-xs-6 rubric-item">
-            <?php echo elgg_view('input/plaintext', array(
-                'style' => 'padding: 5px;font-size:13px;width: 100%;border-radius: 4px;border: 1px solid #ccc;resize:vertical;',
-                'rows' => 6,
-                'name' => 'rubric['.$id.'][item][]',
-                'value' => $rubric_item
-            ));
-            ?>
-            <div style="background: #f4f4f4;padding: 0 5px;">
+            <div class="rubric-details" style="border: 1px solid #ccc;border-bottom: 1px solid #eee;border-radius: 4px 4px 0 0;">
                 <a href="javascript:;" class="fa fa-trash-o red remove-rubric-item"></a>
                 <span class="pull-right">
-                    <small>Puntuación: </small><strong class="blue rubric-rating"><?php echo $rating;?></strong>
+                    <small><?php echo elgg_echo('rubric:score');?>: </small>
+                    <strong class="blue rubric-rating-value"><?php echo $rating;?></strong>
                 </span>
             </div>
+            <?php echo elgg_view('input/plaintext', array(
+                'style' => 'padding: 5px;font-size:13px;width: 100%;border-radius: 0 0 4px 4px;border: 1px solid #ccc;border-top: 0;resize:vertical;',
+                'rows' => 6,
+                'name' => 'rubric[item]['.$id.'][level][]',
+                'placeholder' => elgg_echo('rubric:item:level:description'),
+                'value' => $level
+            ));
+            ?>
         </div>
         <?php endforeach;?>
         <div class="col-md-3" style="display: none">
@@ -137,7 +179,7 @@ $button_value = elgg_extract('submit_value', $vars);
 </ul>
 <hr>
 <div>
-    <a class="btn btn-sm btn-primary" id="add-rubric"><i class="fa fa-plus"></i> Añadir rúbrica</a>
+    <a class="btn btn-sm btn-primary" id="add-rubric"><i class="fa fa-plus"></i> <?php echo elgg_echo('rubric:add');?></a>
 </div>
 <div class="text-right">
     <?php echo elgg_view('input/submit', array(

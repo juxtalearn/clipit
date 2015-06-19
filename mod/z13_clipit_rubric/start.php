@@ -17,6 +17,7 @@ function clipit_rubric_init() {
     // Register "/rubrics" page handler
     elgg_register_page_handler('rubrics', 'rubric_page_handler');
     elgg_register_action("rubric/save", "{$plugin_dir}/actions/rubric/save.php");
+    elgg_register_action("rubric/remove", "{$plugin_dir}/actions/rubric/remove.php");
 
     if(get_config("rubric_tool")) {
         // Sidebar menu
@@ -41,7 +42,7 @@ function rubric_page_handler($page){
         case '':
             $title = elgg_echo('rubrics');
             $filter = '';
-            $all_entities = ClipitRubricItem::get_by_owner();
+            $all_entities = ClipitRubric::get_all();
             $count = count($all_entities);
             $entities = array_slice($all_entities, clipit_get_offset(), clipit_get_limit(10), true);
             $content = elgg_view('rubric/list', array('entities' => $entities, 'count' => $count));
@@ -49,32 +50,46 @@ function rubric_page_handler($page){
         case 'edit':
             // Edit Rubric
             $title = elgg_echo('edit');
+            $entity_id = $page[1];
             elgg_push_breadcrumb(elgg_echo('rubrics'), "rubrics");
             elgg_push_breadcrumb($title);
-            $entities = array_pop(ClipitRubricItem::get_by_owner(array(elgg_get_logged_in_user_guid()), 0, 0, 'time_created', false));
+            $entity = array_pop(ClipitRubric::get_by_id(array($entity_id)));
+
             $content = elgg_view_form('rubric/save',
                 array('data-validate' => 'true'),
-                array('entities' => $entities, 'submit_value' => elgg_echo('save')
+                array('entity' => $entity, 'submit_value' => elgg_echo('save')
                 ));
             break;
         case 'create':
-            $title = elgg_echo('rubric:create');
             elgg_push_breadcrumb(elgg_echo('rubrics'), "rubrics");
+            if($id = $page[1]){
+                $rubric_id = ClipitRubric::create_clone($id, false);
+                $rubric = array_pop(ClipitRubric::get_by_id(array($rubric_id)));
+                $title = '['.elgg_echo('clone').'] '.$rubric->name;
+                ClipitRubric::set_properties($rubric->id, array('name' => $title, 'time_created' => time()));
+
+                $rubric = array_pop(ClipitRubric::get_by_id(array($rubric->id)));
+                elgg_push_breadcrumb($rubric->name, "rubrics/view/".$rubric->id);
+                $content = elgg_view_form('rubric/save',
+                    array('data-validate' => 'true'),
+                    array('entity' => $rubric, 'submit_value' => elgg_echo('save'))
+                );
+            } else {
+                $title = elgg_echo('rubric:create');
+                $content = elgg_view_form('rubric/save',
+                    array('data-validate' => 'true'),
+                    array('submit_value' => elgg_echo('create'), 'create' => true)
+                );
+            }
             elgg_push_breadcrumb($title);
-            $entities = array('' => array_fill(0, 5, ''));
-            $content = elgg_view_form('rubric/save',
-                array('data-validate' => 'true'),
-                array('submit_value' => elgg_echo('create'), 'entities' => $entities)
-            );
             break;
             case 'view':
-                $category_name = json_decode(get_input('name'));
-                $entities = ClipitPerformanceItem::get_from_category($category_name, get_current_language());
+                $rubric_id = $page[1];
+                $entity = array_pop(ClipitRubric::get_by_id(array($rubric_id)));
                 elgg_push_breadcrumb(elgg_echo('rubrics'), "rubrics");
-                    $title = $category_name;
-                    elgg_push_breadcrumb($title);
-                    $content = elgg_view('rubric/view', array('entities' => $entities));
-
+                $title = $entity->name;
+                elgg_push_breadcrumb($title);
+                $content = elgg_view('rubric/view', array('entity' => $entity));
             break;
         default:
             return false;

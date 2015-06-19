@@ -21,6 +21,8 @@ clipit.rubric.init = function() {
     $(document).on('click', '.remove-rubric-item', clipit.rubric.remove_item);
     $(document).on('click', '.rubric-select', clipit.rubric.select_item);
     $(document).on('click', '.rubric-unselect', clipit.rubric.unselect_item);
+    // Click item for rating
+    $(document).on('click', '.rubrics-rating .rubric-item', clipit.rubric.set_rating);
     // Select rubric by owner from drop-down
     $(document).on('change', '.rubric-owner', clipit.rubric.get_by_owner);
 };
@@ -69,16 +71,16 @@ clipit.rubric.rating_calculate = function(list){
         count = items.length;
     items.each(function(i){
         var rating = ( Math.round( (i + 1) * (1 / items.length)*10*10 )/10 );
-        $(this).find('.rubric-rating').text(rating);
+        $(this).find('.rubric-rating-value').text(rating);
     });
 };
 
 clipit.rubric.get_by_owner = function(){
-    var user_id = $(this).val(),
+    var id = $(this).val(),
         container = $(this).data('container'),
         selected_list = $(container).find('.rubrics-selected'),
         unselected_list = $(container).find('.rubrics-unselected');
-    if(user_id != '') {
+    if(id != '') {
         $(container).show();
         selected = [];
         selected_list.find('.rubric').each(function(){
@@ -88,8 +90,7 @@ clipit.rubric.get_by_owner = function(){
         elgg.get('ajax/view/rubric/items', {
             data: {
                 'input_prefix': $(this).data('input-prefix'),
-                'by_owner': user_id,
-                'selected': selected
+                'entity_id': id,
             },
             success: function (data) {
                 unselected_list.html(data);
@@ -117,4 +118,23 @@ clipit.rubric.unselect_item = function() {
         container.hide();
     }
     $rubric.remove();
+};
+
+clipit.rubric.set_rating = function() {
+    var container = $(this).closest('.rubric'),
+        value = parseInt($(this).find('.rubric-rating-value').text());
+    container.find('.rubric-item').removeClass('rubric-rated');
+    $(this).addClass('rubric-rated');
+    $('#'+ container.data('rubric')+ ".text-rating-value").text(value).hide().fadeIn('fast');
+    container.find('.input-rating-value').val( $(this).index() + 1 );
+    // Update average rating
+    clipit.rubric.get_rating_avg(container.closest('.rubrics'));
+};
+clipit.rubric.get_rating_avg = function($list) {
+    var total_count = $list.find('.rubric').length,
+        value = 0;
+    $list.find('.rubric .rubric-rated').each(function(){
+        value += parseInt($(this).find('.rubric-rating-value').text());
+    });
+    $('#rubric-rating-avg').text((value/total_count).toFixed(1)).hide().fadeIn('fast');
 };

@@ -10,20 +10,35 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$rubrics = get_input('rubric');
-foreach($rubrics as $rubric){
+$rubric = get_input('rubric');
+$rubric_items = $rubric['item'];
+
+$rubric_item_array = array();
+foreach ($rubric_items as $rubric_item) {
     $data = array(
-        'name' => $rubric['name'],
-        'level_array' => $rubric['item']
+        'name' => $rubric_item['name'],
+        'level_array' => $rubric_item['level']
     );
-    if($rubric['id']){
-        if($rubric['remove'] == 1){
-            ClipitRubricItem::delete_by_id(array($rubric['id']));
+
+    if ($rubric_item['id']) {
+        if ($rubric_item['remove'] == 1) {
+            ClipitRubricItem::delete_by_id(array($rubric_item['id']));
         } else {
-            ClipitRubricItem::set_properties($rubric['id'], $data);
+            $rubric_item_array[] = $rubric_item['id'];
+            ClipitRubricItem::set_properties($rubric_item['id'], $data);
         }
     } else {
-        ClipitRubricItem::create($data);
+        $rubric_item_array[] = ClipitRubricItem::create($data);
     }
 }
-forward('rubrics/edit/'.elgg_get_logged_in_user_guid());
+
+if($rubric_id = $rubric['id']){ // edit rubric data
+    ClipitRubric::set_properties($rubric_id, array('name' => $rubric['name']));
+    $href = 'rubrics/edit/'.$rubric_id;
+} else { // create a new rubric
+    $rubric_id = ClipitRubric::create(array('name' => $rubric['name']));
+    $href = 'rubrics/view/'.$rubric_id;
+}
+ClipitRubric::set_rubric_items($rubric_id, $rubric_item_array);
+
+forward($href);

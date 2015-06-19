@@ -12,10 +12,19 @@
  */
 $english = array(
     'last_added' => 'Last added',
-    'rubric' => 'Performance Palette',
-    'rubric:create' => 'Create performance palette',
-    'rubrics' => 'Performance Pallets',
-    'rubric:items' => 'Rubrics',
+    'rubric' => 'Rubric',
+    'rubric:select' => 'Select rubric',
+    'rubric:removed' => 'Rubric removed',
+    'rubric:item:name' => 'Criteria name',
+    'rubric:item:level:description' => 'Level description',
+    'rubric:score' => 'Score',
+    'rubric:create' => 'Create rubric',
+    'rubric:add' => 'Add criteria',
+    'rubric:add_item' => 'Add item',
+    'rubrics' => 'Rubrics',
+    'rubric:levels' => 'Levels',
+    'rubric:item' => 'Criteria',
+    'rubric:items' => 'Criteria',
     'category' => 'Category',
     'performance_item:example' => 'Example',
 );
