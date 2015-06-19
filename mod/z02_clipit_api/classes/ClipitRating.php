@@ -130,7 +130,7 @@ class ClipitRating extends UBItem {
 
     static function add_tag_ratings($id, $tag_rating_array)
     {
-        return UBCollection::add_items($id, $tag_rating_array, static::REL_RATING_TAGRATING);
+        return UBCollection::add_items($id, $tag_rating_array, static::REL_RATING_TAGRATING, true);
     }
 
     static function remove_tag_ratings($id, $tag_rating_array)
@@ -140,7 +140,7 @@ class ClipitRating extends UBItem {
 
     static function add_rubric_ratings($id, $rubric_rating_array)
     {
-        return UBCollection::add_items($id, $rubric_rating_array, static::REL_RATING_RUBRICRATING);
+        return UBCollection::add_items($id, $rubric_rating_array, static::REL_RATING_RUBRICRATING, true);
     }
 
     static function remove_rubric_ratings($id, $rubric_rating_array)

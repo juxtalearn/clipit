@@ -47,10 +47,11 @@ class ClipitTask extends UBItem {
     public $task_count = 0;
     public $activity = 0;
     public $quiz = 0;
+    public $rubric = 0;
+    // Linked materials
     public $storyboard_array = array();
     public $video_array = array();
     public $file_array = array();
-    public $rubric_item_array = array();
 
     /**
      * Loads object parameters stored in Elgg
@@ -78,7 +79,7 @@ class ClipitTask extends UBItem {
         $this->storyboard_array = static::get_storyboards((int)$this->id);
         $this->video_array = static::get_videos($this->id);
         $this->file_array = static::get_files($this->id);
-        $this->rubric_item_array = (array)static::get_rubric_items($this->id);
+        $this->rubric = (int)static::get_rubric($this->id);
     }
 
     /**
@@ -109,7 +110,7 @@ class ClipitTask extends UBItem {
         static::set_storyboards($this->id, $this->storyboard_array);
         static::set_videos($this->id, $this->video_array);
         static::set_files($this->id, $this->file_array);
-        static::set_rubric_items($this->id, (array)$this->rubric_item_array);
+        static::set_rubric($this->id, (int)$this->rubric);
         return $this->id;
     }
 
@@ -364,32 +365,25 @@ class ClipitTask extends UBItem {
     static function get_files($id) {
         return UBCollection::get_items($id, static::REL_TASK_FILE);
     }
-    // RUBRIC ITEMS
-    static function add_rubric_items($id, $rubric_item_array)
-    {
-        return UBCollection::add_items($id, $rubric_item_array, static::REL_TASK_RUBRIC);
+    // RUBRIC
+    static function get_rubric($id){
+        $item_array =  UBCollection::get_items($id, static::REL_TASK_RUBRIC);
+        if(empty($item_array)){
+            return 0;
+        }
+        return (int)array_pop($item_array);
     }
-    static function remove_rubric_items($id, $rubric_item_array)
-    {
-        return UBCollection::remove_items($id, $rubric_item_array, static::REL_TASK_RUBRIC);
-    }
-    static function get_rubric_items($id)
-    {
-        return UBCollection::get_items($id, static::REL_TASK_RUBRIC);
-    }
-    static function set_rubric_items($id, $rubric_item_array)
-    {
-        return UBCollection::set_items($id, $rubric_item_array, static::REL_TASK_RUBRIC);
+    static function set_rubric($id, $rubric){
+        return UBCollection::set_items($id, array($rubric), static::REL_TASK_RUBRIC);
     }
     // QUIZZES
-    static function set_quiz($id, $quiz_id)
-    {
+    static function set_quiz($id, $quiz_id){
         return UBCollection::set_items((int)$id, array($quiz_id), static::REL_TASK_QUIZ, true);
     }
-    static function get_quiz($id)
-    {
+
+    static function get_quiz($id){
         $quiz_array = UBCollection::get_items((int)$id, static::REL_TASK_QUIZ);
-        if (empty($quiz_array)) {
+        if(empty($quiz_array)) {
             return 0;
         }
         return (int)array_pop($quiz_array);

@@ -21,6 +21,9 @@ class ClipitTagRating extends UBItem {
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "ClipitTagRating";
+
+    // ClipitRating where this Tag Rating is included in
+    public $rating = 0;
     /**
      * @var int ID of the Tag that this rating refers to.
      */
@@ -39,6 +42,10 @@ class ClipitTagRating extends UBItem {
         parent::copy_from_elgg($elgg_entity);
         $this->tag_id = (int)$elgg_entity->get("tag_id");
         $this->is_used = (bool)$elgg_entity->get("is_used");
+        $rating_array = UBCollection::get_items($this->id, ClipitRating::REL_RATING_TAGRATING, true);
+        if(!empty($rating_array)) {
+            $this->rating = (int)array_pop($rating_array);
+        }
     }
 
     /**

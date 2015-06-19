@@ -19,6 +19,8 @@ class ClipitRubricRating extends UBItem{
     const SUBTYPE = "ClipitRubricRating";
     const REL_RUBRICRATING_RUBRICITEM = "ClipitRubricRating-ClipitRubricItem";
 
+    // ID of ClipitRating this rubric rating is included in
+    public $rating = 0;
     // ID of the rated Rubric Item
     public $rubric_item = 0;
     // Rubric level selected (0 = unselected, 1+ = selected rubric level)
@@ -46,6 +48,11 @@ class ClipitRubricRating extends UBItem{
         return UBCollection::set_items($id, array($rubric_id), static::REL_RUBRICRATING_RUBRICITEM);
     }
 
+    static function get_rubric_item($id)
+    {
+        return (int)array_pop(UBCollection::get_items($id, static::REL_RUBRICRATING_RUBRICITEM));
+    }
+
     /**
      * Loads object parameters stored in Elgg
      *
@@ -60,6 +67,10 @@ class ClipitRubricRating extends UBItem{
             $rubric_item = array_pop(ClipitRubricItem::get_by_id(array($this->rubric_item)));
             $this->score = (float)$rubric_item->level_increment * $this->level;
         }
+        $rating_array = UBCollection::get_items($this->id, ClipitRating::REL_RATING_RUBRICRATING, true);
+        if(!empty($rating_array)){
+            $this->rating = (int)array_pop($rating_array);
+        }
     }
 
     /**
@@ -71,11 +82,6 @@ class ClipitRubricRating extends UBItem{
     {
         parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("level", (int)$this->level);
-    }
-
-    static function get_rubric_item($id)
-    {
-        return array_pop(UBCollection::get_items($id, static::REL_RUBRICRATING_RUBRICITEM));
     }
 
     static function get_by_item($item_array)

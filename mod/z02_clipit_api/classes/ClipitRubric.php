@@ -12,12 +12,12 @@
  * @subpackage      clipit_api
  */
 
-class ClipitRubricCollection extends UBItem{
+class ClipitRubric extends UBItem{
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
-    const SUBTYPE = "ClipitRubricCollection";
-    const REL_RUBRICCOLLECTION_RUBRICITEM = "ClipitRubricCollection-ClipitRubricItem";
+    const SUBTYPE = "ClipitRubric";
+    const REL_RUBRIC_RUBRICITEM = "ClipitRubric-ClipitRubricItem";
     // Contained Rubric Items
     public $rubric_item_array = array();
 
@@ -81,19 +81,19 @@ class ClipitRubricCollection extends UBItem{
     }
 
     static function get_rubric_items($id){
-        return UBCollection::get_items($id, static::REL_RUBRICCOLLECTION_RUBRICITEM);
+        return UBCollection::get_items($id, static::REL_RUBRIC_RUBRICITEM);
     }
 
     static function add_rubric_items($id, $rubric_item_array){
-        return UBCollection::add_items($id, $rubric_item_array, static::REL_RUBRICCOLLECTION_RUBRICITEM);
+        return UBCollection::add_items($id, $rubric_item_array, static::REL_RUBRIC_RUBRICITEM);
     }
 
     static function remove_rubric_items($id, $rubric_item_array){
-        return UBCollection::remove_items($id, $rubric_item_array, static::REL_RUBRICCOLLECTION_RUBRICITEM);
+        return UBCollection::remove_items($id, $rubric_item_array, static::REL_RUBRIC_RUBRICITEM);
     }
 
     static function set_rubric_items($id, $rubric_item_array){
-        return UBCollection::set_items($id, $rubric_item_array, static::REL_RUBRICCOLLECTION_RUBRICITEM);
+        return UBCollection::set_items($id, $rubric_item_array, static::REL_RUBRIC_RUBRICITEM);
     }
 
 }
