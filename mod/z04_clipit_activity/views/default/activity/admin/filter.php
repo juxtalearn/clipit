@@ -13,21 +13,17 @@
 $href = elgg_extract('href', $vars);
 $tabs = array(
     'setup' => array(
-        'text' => elgg_echo('activity:admin:setup'),
+        'text' => elgg_view('output/filter_responsive', array('text' => elgg_echo('activity:admin:setup'), 'icon' => 'fa-cog')),
         'href' => "{$href}?filter=setup",
     ),
     'tasks' => array(
-        'text' => elgg_echo('activity:admin:task_setup'),
+        'text' => elgg_view('output/filter_responsive', array('text' => elgg_echo('activity:admin:task_setup'), 'icon' => 'fa-tasks')),
         'href' => "{$href}?filter=tasks",
     ),
     'groups' => array(
-        'text' => elgg_echo('activity:admin:groups'),
+        'text' => elgg_view('output/filter_responsive', array('text' => elgg_echo('activity:admin:groups'), 'icon' => 'fa-users')),
         'href' => "{$href}?filter=groups",
     ),
-//    'videos' => array(
-//        'text' => elgg_echo('activity:admin:videos'),
-//        'href' => "{$href}?filter=videos",
-//    ),
 );
 foreach ($tabs as $name => $tab) {
     $tab['name'] = $name;

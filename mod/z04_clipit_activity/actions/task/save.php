@@ -26,7 +26,7 @@ foreach ($tasks as $task) {
         'description' => $task['description'],
         'start' => date_create_from_format('d/m/y H:i', $task['start'])->getTimestamp(),
         'end' => date_create_from_format('d/m/y H:i', $task['end'])->getTimestamp(),
-        'performance_item_array' => $task['performance_items']
+        'rubric' => ($task['rubric'])
     );
     if ($task_id = get_input('task-id')) {
         $entity_id = $task_id;
@@ -85,7 +85,7 @@ foreach ($tasks as $task) {
                         'start' => date_create_from_format('d/m/y H:i', $feedback['start'])->getTimestamp(),
                         'end' => date_create_from_format('d/m/y H:i', $feedback['end'])->getTimestamp(),
                         'parent_task' => $task_id,
-                        'performance_item_array' => $feedback['performance_items']
+                        'rubric' => ($feedback['rubric'])
                     ));
                     ClipitActivity::add_tasks($activity_id, array($feedback_task_id));
                 }

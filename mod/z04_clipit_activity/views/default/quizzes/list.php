@@ -186,7 +186,6 @@ $(function(){
 <div class="quiz <?php echo $vars['admin']?'quiz-admin':'';?>">
 <?php
 $num = 1;
-
 foreach($questions as $question):
     $result = ClipitQuizResult::get_from_question_user($question->id, $user_id);
     $params = array(

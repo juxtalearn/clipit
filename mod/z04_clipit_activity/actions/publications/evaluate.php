@@ -14,13 +14,13 @@ $entity_id = get_input("entity-id");
 $rating_id = get_input("rating-id");
 $overall = get_input("overall");
 $tags = get_input("tag_rating");
-$performance_rating = get_input("performance_rating");
+$rubric_rating = get_input("rubric_rating");
 $object = ClipitSite::lookup($entity_id);
 
 if($object){
     $rating_data = array(
         'target'    => $entity_id,
-        'overall'    => $overall, // Yes
+        'overall'    => $overall, // Yes, No
     );
     if($rating_id) {
         $rating = array_pop(ClipitRating::get_by_id(array($rating_id)));
@@ -45,27 +45,22 @@ if($object){
                 ));
             }
         }
-        foreach($performance_rating as $performance_id => $star_value){
-            if($star_value){
+        foreach($rubric_rating as $rubric_id => $rating){
+            if($rating['level']){
+                $rubric_rating_data = array(
+                    'rubric_item' => $rubric_id,
+                    'level' => $rating['level'],
+                );
                 if($rating_id) {
-                    $performance_ratings[] = ClipitPerformanceRating::set_properties($star_value['id'], array(
-                        'performance_item' => $performance_id,
-                        'star_rating'   => $star_value['star']
-                    ));
+                    $rubrics_ratings[] = ClipitRubricRating::set_properties($rating['id'], $rubric_rating_data);
                 } else {
-                    $performance_ratings[] = ClipitPerformanceRating::create(array(
-                        'performance_item' => $performance_id,
-                        'star_rating'   => $star_value['star']
-                    ));
+                    $rubrics_ratings[] = ClipitRubricRating::create($rubric_rating_data);
                 }
             }
         }
-        if(count($performance_ratings) != count($performance_rating)){
-            ClipitRating::delete_by_id(array($new_tag_rating_id));
-            register_error(elgg_echo("publications:starsrequired"));
-        } else {
+        if($rubric_rating){
             ClipitRating::add_tag_ratings($new_tag_rating_id, $tags_rating);
-            ClipitRating::add_performance_ratings($new_tag_rating_id, $performance_ratings);
+            ClipitRating::add_rubric_ratings($new_tag_rating_id, $rubrics_ratings);
             $object['subtype']::update_average_ratings($entity_id);
             system_message(elgg_echo('publications:rated'));
         }

@@ -19,17 +19,17 @@ $tabs = array(
         'priority' => 200,
     ),
     'enroll' => array(
-        'text' => '<span>'.elgg_echo('status:enroll').'<span>',
+        'text' => elgg_view('output/filter_responsive', array('text' => elgg_echo('status:enroll'), 'icon' => 'fa-clock-o')),
         'href' => "my_activities?filter=enroll",
         'priority' => 300,
     ),
     'active' => array(
-        'text' => '<span>'.elgg_echo('status:active').'<span>',
+        'text' => elgg_view('output/filter_responsive', array('text' => elgg_echo('status:active'), 'icon' => 'fa-play')),
         'href' => "my_activities?filter=active",
         'priority' => 400,
     ),
     'past' => array(
-        'text' => '<span>'.elgg_echo('status:closed').'<span>',
+        'text' => elgg_view('output/filter_responsive', array('text' => elgg_echo('status:closed'), 'icon' => 'fa-stop')),
         'href' => "my_activities?filter=closed",
         'priority' => 500,
     ),

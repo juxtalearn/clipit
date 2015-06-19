@@ -36,9 +36,22 @@ if($id){
         ));
 
 } elseif($by_target_id){
-    $rating_target = array_pop(ClipitRating::get_by_target(array($by_target_id)));
+    $ratings = array_pop(ClipitRating::get_by_target(array($by_target_id)));
     $activity_id = (int)get_input("activiy_id");
-    $body = elgg_view('performance_items/list', array('entity'  => $rating_target, 'activity_id' => $activity_id));
+    $i = 0;
+    foreach($ratings as $rating) {
+        if($i%2 == 0) {
+            $rubric_list_1 .= elgg_view('performance_items/list', array('entity' => $rating, 'activity_id' => $activity_id));
+        } else {
+            $rubric_list_2 .= elgg_view('performance_items/list', array('entity' => $rating, 'activity_id' => $activity_id));
+        }
+        $i++;
+    }
+        $body =
+        '<div class="panel-group row" id="accordion">
+            <div class="col-md-6">'.$rubric_list_1.'</div>
+            <div class="col-md-6">'.$rubric_list_2.'</div>
+        </div>';
     echo elgg_view("page/components/modal",
         array(
             "dialog_class"     => "modal-lg",

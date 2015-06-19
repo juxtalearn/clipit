@@ -121,14 +121,20 @@ if($unlink){
                 <div class="pull-right text-right">
                     <?php if($vars['send_site']):?>
                     <div class="margin-bottom-5">
-                        <?php echo elgg_view('output/url', array(
-                            'href'  => "ajax/view/modal/publications/publish?id={$video->id}",
-                            'class' => 'btn btn-xs btn-primary',
-                            'text'  => '<i class="fa fa-globe"></i> '.elgg_echo('send:to_site'),
-                            'data-toggle'   => 'modal',
-                            'data-target' => '#publish-'.$video->id,
-                        ));
-                        ?>
+                        <?php if(ClipitVideo::get_site($video->id, true)):?>
+                            <strong class="green">
+                                <i class="fa fa-check "></i> <?php echo elgg_echo('published');?>
+                            </strong>
+                        <?php else:?>
+                            <?php echo elgg_view('output/url', array(
+                                'href'  => "ajax/view/modal/publications/publish?id={$video->id}",
+                                'class' => 'btn btn-xs btn-primary',
+                                'text'  => '<i class="fa fa-globe"></i> '.elgg_echo('send:to_site'),
+                                'data-toggle'   => 'modal',
+                                'data-target' => '#publish-'.$video->id,
+                            ));
+                            ?>
+                        <?php endif;?>
                     </div>
                     <?php endif; ?>
                     <?php if($unlinked):?>

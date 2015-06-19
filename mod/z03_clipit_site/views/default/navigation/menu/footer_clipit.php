@@ -11,8 +11,8 @@ $class = elgg_extract('class', $vars, false);
     <div class="row">
     <?php
     foreach ($vars['menu'] as $section => $menu_items):
-        if($section == 'clipit') $class = "col-sm-4 col-xs-6 col-md-6 col-md-offset-1";
-        if($section == 'tutorials') $class = "col-sm-4 col-xs-6 col-md-5";
+        if($section == 'clipit') $class = "col-sm-4 col-xs-6 col-md-6 col-md-offset-1 col-sm-offset-3";
+        if($section == 'tutorials') $class = "col-sm-4 col-xs-6 col-md-5 col-sm-offset-1 col-md-offset-0";
         if($section == 'legal') $class = "col-sm-5 col-xs-5";
         if($section == 'help') $class = "col-sm-4 col-xs-4";
     ?>

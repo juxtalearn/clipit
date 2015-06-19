@@ -1,23 +1,24 @@
 <nav class="navbar navbar-default navbar-static-top navbar-blue" role="navigation">
-    <?php echo elgg_view('output/url', array(
-        'href' => "/",
-        'class' => 'navbar-brand visible-xs visible-sm col-xs-6',
-        'title' => 'ClipIt'. elgg_echo("home"),
-        'text'  =>
-            elgg_view('output/img', array(
-                'src' => "mod/z03_clipit_site/graphics/icons/clipit_logo_white.png",
-                'style' => 'height: auto !important;'
-            ))
-    ));
-    ?>
     <div class="container">
+        <?php echo elgg_view('output/url', array(
+            'href' => "/",
+            'class' => 'navbar-brand visible-xs visible-sm',
+            'title' => 'ClipIt'. elgg_echo("home"),
+            'text'  =>
+                elgg_view('output/img', array(
+                    'src' => "mod/z03_clipit_site/graphics/icons/clipit_logo_white.png",
+                    'style' => 'height: auto !important;'
+                ))
+        ));
+        ?>
         <?php
         if (elgg_is_logged_in()): ?>
         <div class="col-md-3 pull-right">
             <?php echo elgg_view('search/search_box', array('class' => 'navbar-form navbar-right search-form')); ?>
         </div>
         <?php elseif(!$vars['walled_garden']): ?>
-        <p class="navbar-text navbar-left">
+        <div class="navbar-text navbar-left lang">
+            <div class="lang-horizontal">
             <?php echo elgg_view('output/url', array(
                 'href'  => "/",
                 'title' => elgg_echo('back'),
@@ -25,7 +26,8 @@
                 'class' => 'active back-top',
             ));
             ?>
-        </p>
+            </div>
+        </div>
         <?php endif; ?>
         <?php
         $installed_langs = array(

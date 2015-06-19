@@ -14,14 +14,38 @@ $entity = elgg_extract('entity', $vars);
 $user = array_pop(ClipitUser::get_by_id(array($entity->owner_id)));
 
 $tag_ratings = $entity->tag_rating_array;
-$performance_ratings = $entity->performance_rating_array;
+$rubric_ratings = ClipitRubricRating::get_by_id($entity->rubric_rating_array);
 $overall_rating = elgg_echo("input:no");
 if($entity->overall){
     $overall_rating = elgg_echo("input:yes");
 }
 ?>
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
+        <div>
+            <ul class="margin-top-10">
+                <?php
+                foreach($rubric_ratings as $rubric_rating):
+                    $rubric_item = array_pop(ClipitRubricItem::get_by_id(array($rubric_rating->rubric_item)));
+                    ?>
+                    <li class="list-item-5">
+                        <div data-toggle="popover"
+                             data-trigger="hover"
+                             data-content="<?php echo $rubric_item->level_array[ ($rubric_rating->level) - 1];?>">
+                            <strong class="pull-right blue">
+                                <?php echo $rubric_rating->score ? floor($rubric_rating->score * 100)/10 : '-';?>
+                            </strong>
+                        <span>
+                            <?php echo $rubric_item->name;?>
+                        </span>
+                        </div>
+                    </li>
+                <?php endforeach;?>
+            </ul>
+        </div>
+        <hr>
+    </div>
+    <div class="col-md-12">
         <label for="tricky-understand">
             <?php echo elgg_echo('publications:question:tricky_topic',array(''));?>
         </label>
@@ -47,26 +71,5 @@ if($entity->overall){
                 <div><?php echo $tag_rating->description;?></div>
             </div>
         <?php endforeach;?>
-    </div>
-    <div class="col-md-4">
-        <div>
-            <h4>
-                <strong><?php echo elgg_echo('publications:rating');?></strong>
-            </h4>
-            <ul class="margin-top-10">
-                <?php
-                foreach($performance_ratings as $performance_rating_id):
-                    $performance_rating = array_pop(ClipitPerformanceRating::get_by_id(array($performance_rating_id)));
-                    $performance_item = array_pop(ClipitPerformanceItem::get_by_id(array($performance_rating->performance_item)));
-                ?>
-                    <li class="list-item-5">
-                        <div class="rating readonly pull-right" data-score="<?php echo $performance_rating->star_rating;?>" style="margin: 0 10px;">
-                        <?php echo star_rating_view($performance_rating->star_rating);?>
-                        </div>
-                        <span class="blue" style="padding-top: 2px;"><?php echo $performance_item->name;?></span>
-                    </li>
-                <?php endforeach;?>
-            </ul>
-        </div>
     </div>
 </div>

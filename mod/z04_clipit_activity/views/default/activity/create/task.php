@@ -126,42 +126,76 @@ if($vars['required'] !== false){
             </div>
         </div>
         <?php
-            if($show_performance_items  ||
+            if($show_performance_items ||
                 ($task
                 && ($task->task_type == ClipitTask::TYPE_STORYBOARD_FEEDBACK || $task->task_type == ClipitTask::TYPE_VIDEO_FEEDBACK)
                 && get_config('fixed_performance_rating'))
             ):
-            $performance_items = array();
-            if($task){
-                $performance_items = $task->performance_item_array;
+            $rubric_id = uniqid('rubric_');
+
+            $rubrics = ClipitRubric::get_all();
+            $owner_rubrics = array();
+            foreach($rubrics as $rubric){
+                $other_rubrics[$rubric->id] = $rubric->name;
+                if($rubric->owner_id == elgg_get_logged_in_user_guid()){
+                    $owner_rubrics[$rubric->id] = $rubric->name;
+                }
             }
-//
-//            if($task &&
-//                ($task->task_type == ClipitTask::TYPE_STORYBOARD_FEEDBACK ||
-//                $task->task_type == ClipitTask::TYPE_VIDEO_FEEDBACK)
-//                && get_config('fixed_performance_rating')
-//            ):
+            $other_rubrics = array_diff($other_rubrics, $owner_rubrics);
         ?>
-            <script>$(function(){$(".chosen-select-items").chosen();});</script>
-            <style>
-                .chosen-container{width: 100% !important;}
-                /*.chosen-container .chosen-drop{position: relative;display: none;}*/
-                /*.chosen-with-drop .chosen-drop{display: block;}*/
-            </style>
-            <div class="col-md-4" style="margin-bottom: 50px;">
-                <label><?php echo elgg_echo("performance_items");?></label>
-                <select name="<?php echo "task{$input_array}[performance_items][]";?>" data-placeholder="<?php echo elgg_echo('click_add');?>" style="width:100%;" multiple class="chosen-select-items" tabindex="8">
-                    <option value=""></option>
-                    <?php foreach(ClipitPerformanceItem::get_from_category(null) as $category => $items):?>
-                        <optgroup label="<?php echo $category; ?>">
-                            <?php foreach($items as $item): ?>
-                                <option <?php echo in_array($item->id, $performance_items) ? "selected" : "";?> value="<?php echo $item->id; ?>">
-                                    <?php echo $item->name; ?>
+            <div class="col-md-4">
+                <label><?php echo elgg_echo("rubrics");?></label>
+                <select style="width:100%;padding:5px;"
+                        class="rubric-owner form-control"
+                        data-container="#<?php echo $rubric_id;?>"
+                        data-input-prefix="task<?php echo $input_array;?>"
+                        name="task<?php echo $input_array;?>[rubric]"
+                    >
+                    <option value="">
+                        <?php echo elgg_echo('rubric:select');?>
+                    </option>
+                    <?php if(count($owner_rubrics)>0):?>
+                        <optgroup label="<?php echo elgg_echo('tricky_topic:created_by_me');?>">
+                            <?php foreach($owner_rubrics as $value => $name):?>
+                                <option <?php echo $selected == $value ? 'selected' : '';?> value="<?php echo $value;?>">
+                                    <?php echo $name;?>
                                 </option>
-                            <?php endforeach; ?>
+                            <?php endforeach;?>
                         </optgroup>
-                    <?php endforeach; ?>
+                    <?php endif;?>
+                    <?php if(count($other_rubrics)>0):?>
+                        <optgroup label="<?php echo elgg_echo('tricky_topic:created_by_others');?>">
+                            <?php foreach($other_rubrics as $value => $name):?>
+                                <option <?php echo $selected == $value ? 'selected' : '';?> value="<?php echo $value;?>">
+                                    <?php echo $name;?>
+                                </option>
+                            <?php endforeach;?>
+                        </optgroup>
+                    <?php endif;?>
                 </select>
+            </div>
+            <div id="<?php echo $rubric_id;?>" class="rubric-select-list" style="<?php echo count($task->rubric)>0 ? '':'display:none;';?>">
+                <div class="col-md-12 rubrics-selected bg-white"
+                     style="<?php echo count($task->rubric)>0 ? '':'display:none;';?>padding-top: 20px;padding-bottom: 20px;border: 1px solid #bae6f6;border-radius: 4px;">
+                    <?php
+                    if($task->rubric):
+                        $rubric = ClipitRubric::get_by_id(array($task->rubric));
+                    ?>
+                        <?php echo elgg_view('forms/rubric/save', array(
+                            'entity' => array_pop(ClipitRubric::get_by_id(array($task->rubric))),
+                            'input_prefix' => 'task'.$input_array,
+                            'select' => true,
+                            'pre_populate' => true,
+                            'unselected' => true
+                        ));?>
+                    <?php else:?>
+                        <ul class="rubrics"></ul>
+                    <?php endif;?>
+                </div>
+                <div class="clearfix"></div>
+                <hr>
+                <div class="col-md-12 rubrics-unselected margin-bottom-20" style="overflow-y: auto;overflow-x: hidden;max-height: 450px;"></div>
+                <div class="clearfix"></div>
             </div>
         <?php endif;?>
 

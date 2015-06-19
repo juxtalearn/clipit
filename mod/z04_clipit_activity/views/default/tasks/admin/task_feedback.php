@@ -93,6 +93,11 @@ natural_sort_properties($groups, 'name');
                 (<?php echo count($entities);?>)
             </a>
         </li>
+        <?php if($task->rubric_item_array):?>
+        <li role="presentation">
+            <a href="#rubric" aria-controls="rubric" role="tab" data-toggle="tab"><?php echo elgg_echo('rubric');?></a>
+        </li>
+        <?php endif;?>
     </ul>
 </div>
 <!-- Tab panes -->
@@ -162,4 +167,13 @@ natural_sort_properties($groups, 'name');
         ));
         ?>
     </div>
+    <?php if($task->rubric_item_array):?>
+    <div role="tabpanel" class="tab-pane margin-top-10" id="rubric" style="padding: 10px;">
+        <?php
+        echo elgg_view('rubric/items', array(
+            'entities'    => ClipitRubricItem::get_by_id($task->rubric_item_array, 0, 0, 'time_created', false),
+        ));
+        ?>
+    </div>
+    <?php endif;?>
 </div>

@@ -13,7 +13,6 @@
 $url = get_input("url");
 $title = get_input("title");
 $description = get_input("description");
-$performance_items = get_input("performance_items");
 $file = $_FILES["video-upload"];
 $entity_id = get_input("scope-id"); // {Activity, Group} id
 $video_id = get_input("entity-id");
@@ -45,9 +44,7 @@ if(trim($title) == ""){
         if(!$video_url){
             register_error(elgg_echo("video:cantadd"));
         } else {
-            $video_id = ClipitVideo::create(array(
-                'url'  => $video_url,
-            ));
+            $video_id = ClipitVideo::create( array_merge($data, array('url'  => $video_url)) );
             $entity_class::add_videos($entity_id, array($video_id));
         }
         $successful_message = elgg_echo('video:added');
@@ -76,8 +73,6 @@ if(trim($title) == ""){
             ClipitVideo::set_labels($video_id, $total_labels);
             ClipitVideo::set_tags($video_id, $tags);
         }
-        // Performance items
-        ClipitVideo::set_performance_items($video_id, $performance_items);
         // Set properties
         ClipitVideo::set_properties($video_id, $data);
         $successful_message = elgg_echo('video:edited');

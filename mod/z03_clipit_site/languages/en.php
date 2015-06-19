@@ -93,7 +93,7 @@ $english = array(
     'community_guidelines' => 'Community Guidelines',
 
     // Form no login
-    'loginusername' => 'Username you signed up with',
+    'loginusername' => 'Login you signed up with',
     'user:password:lost' => 'Forgot password',
     'new_user' => 'New user?',
     'user:notfound' => 'Username not found.',

@@ -11,6 +11,8 @@
  * @package         ClipIt
  */
 $tags = elgg_extract('tags', $vars);
+$tags_rating = elgg_extract('tags_rating', $vars);
+
 $limit = $vars['limit'] ? $vars['limit'] : count($tags);
 $width = elgg_extract('width', $vars);
 $width = is_integer($width) ? $width."px" : $width;

@@ -11,20 +11,34 @@
  * @package         ClipIt
  */
 // Get the guid
-$file_id = get_input("id");
-if($task_id = get_input('task_id')){
-    if($storyboard_id = get_input('storyboard')){
-        ClipitStoryboard::set_read_status($storyboard_id, true, array(elgg_get_logged_in_user_guid()));
-    } else {
-        ClipitFile::set_read_status($file_id, true, array(elgg_get_logged_in_user_guid()));
+
+if($file_id = get_input("id")) {
+    if ($task_id = get_input('task_id')) {
+        if ($storyboard_id = get_input('storyboard')) {
+            ClipitStoryboard::set_read_status($storyboard_id, true, array(elgg_get_logged_in_user_guid()));
+        } else {
+            ClipitFile::set_read_status($file_id, true, array(elgg_get_logged_in_user_guid()));
+        }
+    }
+    $file = array_pop(ClipitFile::get_by_id(array($file_id)));
+    $file_name = $file->name;
+    $file_path = $file->file_path;
+} elseif($entity_id = get_input('entity_id')){
+    $object = ClipitSite::lookup($entity_id);
+    switch($object['subtype']){
+        case 'ClipitQuiz':
+            $file_path = ClipitQuiz::export_to_excel($entity_id);
+            $file_name = end(explode("/", $file_path));
+            break;
     }
 }
-// Get the file
-$file = array_pop(ClipitFile::get_by_id(array($file_id)));
-header("Pragma: public");
-header("Content-Type: application/download");
-header("Content-Disposition: attachment; filename=\"$file->name\"");
-ob_clean();
-flush();
-readfile($file->file_path);
-exit;
+
+if($file_path) {
+    header("Pragma: public");
+    header("Content-Type: application/download");
+    header("Content-Disposition: attachment; filename=\"$file_name\"");
+    ob_clean();
+    flush();
+    readfile($file_path);
+    exit;
+}

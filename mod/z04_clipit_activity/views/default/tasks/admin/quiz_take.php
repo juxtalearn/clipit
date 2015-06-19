@@ -42,6 +42,15 @@ elgg_load_js('jquery:chartjs');
     <h4 style="margin-top: 0;"><?php echo $quiz->name;?></h4>
 </div>
 <hr>
+<div class="text-right">
+    <?php echo elgg_view('output/url', array(
+        'class' => 'btn btn-xs btn-primary btn-border-blue',
+        'href'  => 'file/download/export?entity_id='.$quiz->id,
+        'target' => '_blank',
+        'text'  => '<i class="fa fa-file-excel-o"></i> '.elgg_echo('export'),
+    ));
+    ?>
+</div>
 <div role="tabpanel">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">

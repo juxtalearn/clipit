@@ -14,17 +14,12 @@ $href = elgg_extract('href', $vars);
 
 $tabs = array(
     'videos' => array(
-        'text' => '<span>'.elgg_echo('multimedia:videos').'</span>',
+        'text' => elgg_view('output/filter_responsive', array('text' => elgg_echo('multimedia:videos'), 'icon' => 'fa-video-camera')),
         'href' => "{$href}?filter=videos",
         'priority' => 200,
     ),
-    /*'resources' => array(
-        'text' => elgg_echo('resources'),
-        'href' => "{$href}?filter=resources",
-        'priority' => 200,
-    ),*/
     'storyboards' => array(
-        'text' => '<span>'.elgg_echo('multimedia:storyboards').'</span>',
+        'text' => elgg_view('output/filter_responsive', array('text' => elgg_echo('multimedia:storyboards'), 'icon' => 'fa-picture-o')),
         'href' => "{$href}?filter=storyboards",
         'priority' => 300,
     ),

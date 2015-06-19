@@ -77,13 +77,19 @@ switch($object['subtype']){
         }
         $href['duplicate'] = 'quizzes/create/'.$entity->id;
         break;
-    case 'ClipitPerformanceItem':
-        $duplicate = false;
-        $remove = false;
+    case 'ClipitRubric':
         $owner_options = true;
-        $href = array(
-            'edit' => 'rubrics/edit/?name='.json_encode($entity->category),
-        );
+        if($user->id == elgg_get_logged_in_user_guid()){
+            $owner_options = true;
+            $href = array(
+                'edit' => 'rubrics/edit/'.$entity->id,
+                'remove' => elgg_add_action_tokens_to_url(elgg_normalize_url('action/rubric/remove?id='.$entity->id), true),
+            );
+        } else {
+            $edit = false;
+            $remove = false;
+        }
+        $href['duplicate'] = 'rubrics/create/'.$entity->id;
         break;
     case 'ClipitActivity':
         $duplicate = false;

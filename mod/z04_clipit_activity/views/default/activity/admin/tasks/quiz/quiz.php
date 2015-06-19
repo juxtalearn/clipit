@@ -16,11 +16,6 @@ $tricky_topics = elgg_extract('select_tricky_topic', $vars);
 $tricky_topic = 0;
 $tricky_topic = get_input('tricky_topic');
 $input_prefix = elgg_extract('input_prefix', $vars);
-//if($activity_id = elgg_extract('activity_id', $vars)){
-//    $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
-//    $tricky_topic = $activity->tricky_topic;
-//}
-
 
 if($input_prefix) {
     $input_prefix = $input_prefix . "[quiz]";

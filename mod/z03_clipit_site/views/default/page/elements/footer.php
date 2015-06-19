@@ -10,7 +10,7 @@
 
 $footer_menu = elgg_view_menu('footer_clipit', array(
     'sort_by' => 'priority',
-    'class' => 'pull-right site-map col-sm-9 col-xs-12 col-md-5'
+    'class' => 'pull-right site-map col-sm-8 col-xs-12 col-md-5'
 ));
 $site = elgg_get_site_entity();
 $js = elgg_get_loaded_js('footer');
@@ -18,7 +18,7 @@ $js = elgg_get_loaded_js('footer');
 <footer id="footer">
     <div class="container">
         <div class="row">
-            <div class="col-sm-2 col-xs-4 hidden-xs">
+            <div class="col-sm-4 col-xs-4 hidden-xs">
                 <div class="contact">
                     <h2>Hola!</h2>
                     <?php
@@ -37,7 +37,7 @@ $js = elgg_get_loaded_js('footer');
             <?php echo $footer_menu; ?>
         </div>
         <div class="row sponsors">
-            <div class="col-sm-5 pull-right">
+            <div class="col-sm-6 col-md-5 pull-right">
                 <div class="row">
                 <?php
                 echo elgg_view('output/url', array(

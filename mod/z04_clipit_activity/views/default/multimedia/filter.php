@@ -19,17 +19,17 @@ $resources_count = count($entity->resource_array) > 0 ? "(".count($entity->resou
 
 $tabs = array(
     'files' => array(
-        'text' => '<span>'.elgg_echo('multimedia:files').'</span> '.$files_count,
+        'text' => elgg_view('output/filter_responsive', array('text' => elgg_echo('multimedia:files'), 'badge' => $files_count, 'icon' => 'fa-file-text-o')),
         'href' => "{$href}?filter=files",
         'priority' => 200,
     ),
     'videos' => array(
-        'text' => '<span>'.elgg_echo('multimedia:videos').'</span> '.$videos_count,
+        'text' => elgg_view('output/filter_responsive', array('text' => elgg_echo('multimedia:videos'), 'badge' => $videos_count, 'icon' => 'fa-video-camera')),
         'href' => "{$href}?filter=videos",
         'priority' => 300,
     ),
     'storyboards' => array(
-        'text' => '<span>'.elgg_echo('multimedia:storyboards').'</span> '.$sb_count,
+        'text' => elgg_view('output/filter_responsive', array('text' => elgg_echo('multimedia:storyboards'), 'badge' => $sb_count, 'icon' => 'fa-picture-o')),
         'href' => "{$href}?filter=storyboards",
         'priority' => 300,
     ),

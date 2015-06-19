@@ -92,7 +92,7 @@ $table_orders = elgg_extract('table_orders', $vars);
                         <li class="list-item" style="border-bottom: 0;margin-bottom: 0;">
                             <?php echo elgg_view("messages/compose_icon", array('entity' => $teacher));?>
                             <?php echo elgg_view('output/url', array(
-                                'href'  => "profile/".$user->login,
+                                'href'  => "profile/".$teacher->login,
                                 'title' => $teacher->name,
                                 'text'  => $teacher->name,
                             ));

@@ -21,5 +21,6 @@ if($vars['type']):
         </div>';
 else:
 ?>
+<div class="clearfix"></div>
 <h4 class="empty"><?php echo $vars['value'];?></h4>
 <?php endif;?>

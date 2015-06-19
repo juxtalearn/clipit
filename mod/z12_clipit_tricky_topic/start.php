@@ -16,7 +16,7 @@ function clipit_tricky_topic_init() {
     $plugin_dir = elgg_get_plugins_path() . "z12_clipit_tricky_topic";
     $user = array_pop(ClipitUser::get_by_id(array(elgg_get_logged_in_user_guid())));
     if($user->role == ClipitUser::ROLE_TEACHER || $user->role == ClipitUser::ROLE_ADMIN) {
-        elgg_extend_view("navigation/menu/top", "navigation/menu/authoring", 250);
+        elgg_extend_view("navigation/menu/top", "navigation/menu/authoring", 100);
 
         // Register "/tricky_topics" page handler
         elgg_register_page_handler('tricky_topics', 'tt_page_handler');
