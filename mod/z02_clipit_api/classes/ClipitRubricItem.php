@@ -16,7 +16,7 @@ class ClipitRubricItem extends UBItem{
     /**
      * @const string Elgg entity SUBTYPE for this class
      */
-    const SUBTYPE = "ClipitRubric";
+    const SUBTYPE = "ClipitRubricItem";
 
     // Rubric levels, from less to most score
     public $level_array = array();
