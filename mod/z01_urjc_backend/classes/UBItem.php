@@ -382,7 +382,7 @@ class UBItem {
      * @param int $offset Offset from where to show results, default=0 [from the begining] (optional)
      * @param string $order_by Default = "" (don't order)
      * @param bool $ascending Default = true (ascending order)
-     * @param bool $id_only Whether to only return IDs, or return whole objects (default: false) No ordering
+     * @param bool $id_only Whether to only return IDs, or return whole objects (default: false)
      * will be done if it is set to true.
      *
      * @return static[]|int[] Returns an array of Objects, or Object IDs if id_only = true
@@ -390,15 +390,26 @@ class UBItem {
     static function get_all($limit = 0, $offset = 0, $order_by = "", $ascending = true, $id_only = false)
     {
         $return_array = array();
-        $elgg_entity_array = elgg_get_entities(
-            array(
+        if(!empty($order_by)){
+            $options = array(
+                'type' => static::TYPE,
+                'subtype' => static::SUBTYPE,
+                'limit' => $limit,
+                'offset' => $offset,
+                'order_by_metadata' =>
+                    array("name" => $order_by ,
+                        "direction" => ($ascending ? "ASC":"DESC"))
+            );
+        }else{
+            $options = array(
                 'type' => static::TYPE,
                 'subtype' => static::SUBTYPE,
                 'limit' => $limit,
                 'offset' => $offset,
                 'sort_by' => "e.time_created"
-            )
-        );
+            );
+        }
+        $elgg_entity_array = elgg_get_entities_from_metadata($options);
         if (!$elgg_entity_array) {
             return $return_array;
         }
@@ -411,37 +422,37 @@ class UBItem {
         foreach ($elgg_entity_array as $elgg_entity) {
             $return_array[(int)$elgg_entity->guid] = new static((int)$elgg_entity->guid, $elgg_entity);
         }
-        if (!empty($order_by)) {
-            $args = array("order_by" => $order_by, "ascending" => $ascending);
-            uasort($return_array,
-                function ($i1, $i2) use ($args) {
-                    if (!$i1 && !$i2) {
-                        return 0;
-                    }
-                    if ($i1->$args["order_by"] == $i2->$args["order_by"]) {
-                        return 0;
-                    }
-                    if ((bool)$args["ascending"]) {
-                        if (!$i1) {
-                            return 1;
-                        }
-                        if (!$i2) {
-                            return -1;
-                        }
-                        return (strtolower($i1->$args["order_by"]) < strtolower($i2->$args["order_by"]) ? -1 : 1);
-                        //return strcmp($i1->$args["order_by"], $i2->$args["order_by"]);
-                    } else {
-                        if (!$i1) {
-                            return -1;
-                        }
-                        if (!$i2) {
-                            return 1;
-                        }
-                        return (strtolower($i2->$args["order_by"]) < strtolower($i1->$args["order_by"]) ? -1 : 1);
-                        //return strcmp($i2->$args["order_by"], $i1->$args["order_by"]);
-                    }
-                });
-        }
+//        if (!empty($order_by)) {
+//            $args = array("order_by" => $order_by, "ascending" => $ascending);
+//            uasort($return_array,
+//                function ($i1, $i2) use ($args) {
+//                    if (!$i1 && !$i2) {
+//                        return 0;
+//                    }
+//                    if ($i1->$args["order_by"] == $i2->$args["order_by"]) {
+//                        return 0;
+//                    }
+//                    if ((bool)$args["ascending"]) {
+//                        if (!$i1) {
+//                            return 1;
+//                        }
+//                        if (!$i2) {
+//                            return -1;
+//                        }
+//                        return (strtolower($i1->$args["order_by"]) < strtolower($i2->$args["order_by"]) ? -1 : 1);
+//                        //return strcmp($i1->$args["order_by"], $i2->$args["order_by"]);
+//                    } else {
+//                        if (!$i1) {
+//                            return -1;
+//                        }
+//                        if (!$i2) {
+//                            return 1;
+//                        }
+//                        return (strtolower($i2->$args["order_by"]) < strtolower($i1->$args["order_by"]) ? -1 : 1);
+//                        //return strcmp($i2->$args["order_by"], $i1->$args["order_by"]);
+//                    }
+//                });
+//        }
         return $return_array;
     }
 
@@ -535,7 +546,10 @@ class UBItem {
      * Get Items with Owner Id contained in a given list.
      *
      * @param array $owner_array Array of Owner Ids
-     * @param int   $limit       Number of Items to return, default 0 = all
+     * @param int $limit (optional)      Number of Items to return, default 0 = all
+     * @param int $offset (optional) offset of items to get
+     * @param string $order_by (optional) order by a certain property
+     * @param bool $ascending (optional) order by ascending (default) or descending
      *
      * @return static[] Returns an array of Items
      */
@@ -708,8 +722,11 @@ class UBItem {
             // directly retrieve entities with name = $search_string
             $elgg_object_array = elgg_get_entities_from_metadata(
                 array(
-                    'type' => static::TYPE, 'subtype' => static::SUBTYPE, 'metadata_names' => array("name"),
-                    'metadata_values' => array($search_string), 'limit' => 0
+                    'type' => static::TYPE,
+                    'subtype' => static::SUBTYPE,
+                    'metadata_names' => array("name"),
+                    'metadata_values' => array($search_string),
+                    'limit' => 0
                 )
             );
             if(!empty($elgg_object_array)) {
