@@ -35,8 +35,9 @@ clipit.rubric.add = function(){
         count = $list.find('.rubric').length;
     clone.appendTo($list);
     clone.find('.rubric-id, .rubric-remove').remove();
+    var pattern = Date.now();
     clone.find('input[type="text"], textarea').attr('name', function(i, val){
-        return val.replace(/(rubric_)\w+/g, 'rubric_'+Date.now())
+        return val.replace(/(rubric_)\w+/g, 'rubric_' + pattern);
     });
     clone.fadeIn('fast').find('textarea').val('');
     clone.find('textarea:first').focus();
@@ -44,11 +45,15 @@ clipit.rubric.add = function(){
 };
 clipit.rubric.remove = function(){
     var $list = $(this).closest('.rubric');
-    if($list.find('.rubric-id').length > 0){
-        $list.hide();
-        $list.find('.rubric-remove').val('1');
+    if($list.parent().find('.rubric').length > 1) {
+        if ($list.find('.rubric-id').length > 1) {
+            $list.hide();
+            $list.find('.rubric-remove').val('1');
+        } else {
+            $list.remove();
+        }
     } else {
-        $list.remove();
+        elgg.register_error(elgg.echo('rubric:rubric:item:cantremove'));
     }
 };
 clipit.rubric.add_item = function(){

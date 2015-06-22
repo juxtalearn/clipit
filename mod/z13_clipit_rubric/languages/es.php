@@ -18,6 +18,7 @@ $spanish = array(
     'rubric:score' => 'Puntuación',
     'rubric:item:name' => 'Nombre del criterio',
     'rubric:item:level:description' => 'Descripción del nivel',
+    'rubric:item:cantremove' => 'No se puede eliminar el criterio',
     'rubric:create' => 'Crear rúbrica',
     'rubric:add' => 'Añadir criterio',
     'rubric:add_item' => 'Añadir nivel',

@@ -18,6 +18,7 @@ $english = array(
     'rubric:item:name' => 'Criteria name',
     'rubric:item:level:description' => 'Level description',
     'rubric:score' => 'Score',
+    'rubric:item:cantremove' => 'You can not remove the criteria',
     'rubric:create' => 'Create rubric',
     'rubric:add' => 'Add criteria',
     'rubric:add_item' => 'Add item',
@@ -28,7 +29,6 @@ $english = array(
     'rubric:item' => 'Criteria',
     'rubric:items' => 'Criteria',
     'category' => 'Category',
-    'performance_item:example' => 'Example',
 );
 
 add_translation('en', $english);
