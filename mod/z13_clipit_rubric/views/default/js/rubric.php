@@ -59,11 +59,16 @@ clipit.rubric.add_item = function(){
     clipit.rubric.rating_calculate($(this).closest('.row.list-item'));
 };
 clipit.rubric.remove_item = function(){
-    var $list = $(this).closest('.row.list-item');
-    $(this).closest('.rubric-item').fadeOut('fast', function(){
-        $(this).remove();
-        clipit.rubric.rating_calculate($list);
-    });
+    var $list = $(this).closest('.row.list-item'),
+        level = $(this).closest('.rubric-item');
+    if(level.parent().find('.rubric-item').length > 1) {
+        level.fadeOut('fast', function () {
+            $(this).remove();
+            clipit.rubric.rating_calculate($list);
+        });
+    } else {
+        elgg.register_error(elgg.echo('rubric:level:cantremove'));
+    }
 };
 
 clipit.rubric.rating_calculate = function(list){

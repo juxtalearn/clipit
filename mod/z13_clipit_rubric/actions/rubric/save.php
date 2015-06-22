@@ -34,11 +34,9 @@ foreach ($rubric_items as $rubric_item) {
 
 if($rubric_id = $rubric['id']){ // edit rubric data
     ClipitRubric::set_properties($rubric_id, array('name' => $rubric['name']));
-    $href = 'rubrics/edit/'.$rubric_id;
 } else { // create a new rubric
     $rubric_id = ClipitRubric::create(array('name' => $rubric['name']));
-    $href = 'rubrics/view/'.$rubric_id;
 }
 ClipitRubric::set_rubric_items($rubric_id, $rubric_item_array);
 
-forward($href);
+forward('rubrics/view/'.$rubric_id);

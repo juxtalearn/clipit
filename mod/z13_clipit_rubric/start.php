@@ -41,10 +41,17 @@ function rubric_page_handler($page){
     switch($page[0]){
         case '':
             $title = elgg_echo('rubrics');
-            $filter = '';
-            $all_entities = ClipitRubric::get_all();
-            $count = count($all_entities);
-            $entities = array_slice($all_entities, clipit_get_offset(), clipit_get_limit(10), true);
+            $selected_tab = get_input('filter', 'all');
+            $filter = elgg_view('navigation/tabs', array('selected' => $selected_tab, 'href' => $page[0]));
+            if($selected_tab == 'mine'){
+                $all_entities = array_pop(ClipitRubric::get_by_owner(array(elgg_get_logged_in_user_guid())));
+                $count = count($all_entities);
+                $entities = array_slice($all_entities, clipit_get_offset(), clipit_get_limit(10), true);
+            } else {
+                $all_entities = ClipitRubric::get_all();
+                $count = count($all_entities);
+                $entities = array_slice($all_entities, clipit_get_offset(), clipit_get_limit(10), true);
+            }
             $content = elgg_view('rubric/list', array('entities' => $entities, 'count' => $count));
             break;
         case 'edit':

@@ -119,7 +119,8 @@ $(function(){
             'rows' => 2,
             'name' => 'rubric[item]['.$id.'][name]',
             'placeholder' => elgg_echo('rubric:item:name'),
-            'value' => $rubric_item->name
+            'value' => $rubric_item->name,
+            'required' => true
         ));
         ?>
         <?php echo elgg_view('output/url', array(
@@ -131,7 +132,7 @@ $(function(){
         <?php echo elgg_view('output/url', array(
             'href'  => 'javascript:;',
             'class' => 'remove-rubric btn btn-xs btn-primary margin-top-10 btn-border-red show',
-            'text'  => elgg_echo('remove')
+            'text'  => elgg_echo('rubric:level:remove')
         ));
         ?>
     </div>
@@ -158,7 +159,8 @@ $(function(){
                 'rows' => 6,
                 'name' => 'rubric[item]['.$id.'][level][]',
                 'placeholder' => elgg_echo('rubric:item:level:description'),
-                'value' => $level
+                'value' => $level,
+                'required' => true
             ));
             ?>
         </div>
