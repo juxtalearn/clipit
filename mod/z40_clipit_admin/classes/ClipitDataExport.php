@@ -28,8 +28,6 @@ class ClipitDataExport{
         $file_array[] = static::export_class_to_excel("ClipitFile");
         $file_array[] = static::export_class_to_excel("ClipitGroup");
         $file_array[] = static::export_class_to_excel("ClipitLabel");
-        $file_array[] = static::export_class_to_excel("ClipitPerformanceItem");
-        $file_array[] = static::export_class_to_excel("ClipitPerformanceRating");
         $file_array[] = static::export_class_to_excel("ClipitPost");
         $file_array[] = static::export_class_to_excel("ClipitQuiz");
         $file_array[] = static::export_class_to_excel("ClipitQuizQuestion");
@@ -37,6 +35,9 @@ class ClipitDataExport{
         $file_array[] = static::export_class_to_excel("ClipitRating");
         $file_array[] = static::export_class_to_excel("ClipitRemoteResource");
         $file_array[] = static::export_class_to_excel("ClipitRemoteSite");
+        $file_array[] = static::export_class_to_excel("ClipitRubric");
+        $file_array[] = static::export_class_to_excel("ClipitRubricItem");
+        $file_array[] = static::export_class_to_excel("ClipitRubricRating");
         $file_array[] = static::export_class_to_excel("ClipitSite");
         $file_array[] = static::export_class_to_excel("ClipitStoryboard");
         $file_array[] = static::export_class_to_excel("ClipitTag");
