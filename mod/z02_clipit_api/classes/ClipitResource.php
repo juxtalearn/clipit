@@ -41,7 +41,6 @@ abstract class ClipitResource extends UBItem {
     // Tagging
     public $tag_array = array();
     public $label_array = array();
-    public $rubric_item_array = array();
     public $read_array = array();
     // Rating averages
     public $overall_rating_average = 0.0;
@@ -58,7 +57,6 @@ abstract class ClipitResource extends UBItem {
         parent::copy_from_elgg($elgg_entity);
         $this->tag_array = (array)static::get_tags($this->id);
         $this->label_array = (array)static::get_labels($this->id);
-        $this->rubric_item_array = (array)static::get_rubric_items($this->id);
         $this->read_array = (array)$elgg_entity->get("read_array");
         $this->overall_rating_average = (float)$elgg_entity->get("overall_rating_average");
         $this->tag_rating_average = (float)$elgg_entity->get("tag_rating_average");
@@ -90,7 +88,6 @@ abstract class ClipitResource extends UBItem {
         parent::save($double_save);
         static::set_tags($this->id, (array)$this->tag_array);
         static::set_labels($this->id, (array)$this->label_array);
-        static::set_rubric_items($this->id, (array)$this->rubric_item_array);
         return $this->id;
     }
 
