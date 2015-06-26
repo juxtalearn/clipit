@@ -69,12 +69,14 @@ $count = elgg_extract('count', $vars);
                 </div>
             </td>
             <td data-title="<?php echo elgg_echo('tricky_topic');?>">
-                <?php echo elgg_view('output/url', array(
-                    'href'  => "tricky_topics/view/{$tricky_topic->id}",
-                    'title' => $tricky_topic->name,
-                    'text'  =>  $tricky_topic->name,
-                ));
-                ?>
+                <?php if($tricky_topic):?>
+                    <?php echo elgg_view('output/url', array(
+                        'href'  => "tricky_topics/view/{$tricky_topic->id}",
+                        'title' => $tricky_topic->name,
+                        'text'  =>  $tricky_topic->name,
+                    ));
+                    ?>
+                <?php endif;?>
             </td>
             <td data-title="<?php echo elgg_echo('author');?>">
                 <small>

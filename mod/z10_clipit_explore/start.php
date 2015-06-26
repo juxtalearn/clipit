@@ -136,6 +136,7 @@ function explore_page_handler($page) {
     $searched_storyboards= $storyboards;
     if($activity_id){
         $public_content = false;
+        $title = $activity_object['name'];
         if($by){
             $visible_videos = get_visible_items_by_activity($activity_id, $videos, 'videos');
             $visible_storyboards = get_visible_items_by_activity($activity_id, $storyboards, 'storyboards');
