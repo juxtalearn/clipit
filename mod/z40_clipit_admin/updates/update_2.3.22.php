@@ -14,7 +14,7 @@ foreach($chat_array as $chat_id){
     $read_array = (array)$elgg_obj->get("read_array");
     if(!empty($read_array)) {
         ClipitChat::set_read_array((int)$chat_id, $read_array);
-        $elgg_obj->set("read_array", null);
+//        $elgg_obj->set("read_array", null);
     }
 }
 $comment_array = ClipitComment::get_all(0, 0, "", true, true);
@@ -23,7 +23,7 @@ foreach($comment_array as $comment_id){
     $read_array = (array)$elgg_obj->get("read_array");
     if(!empty($read_array)) {
         ClipitComment::set_read_array((int)$comment_id, $read_array);
-        $elgg_obj->set("read_array", null);
+//        $elgg_obj->set("read_array", null);
     }
 }
 $post_array = ClipitPost::get_all(0, 0, "", true, true);
@@ -32,7 +32,7 @@ foreach($post_array as $post_id){
     $read_array = (array)$elgg_obj->get("read_array");
     if(!empty($read_array)) {
         ClipitPost::set_read_array((int)$post_id, $read_array);
-        $elgg_obj->set("read_array", null);
+//        $elgg_obj->set("read_array", null);
     }
 }
 $file_array = ClipitFile::get_all(0, 0, "", true, true);
@@ -41,7 +41,7 @@ foreach($file_array as $file_id){
     $read_array = (array)$elgg_obj->get("read_array");
     if(!empty($read_array)) {
         ClipitFile::set_read_array((int)$file_id, $read_array);
-        $elgg_obj->set("read_array", null);
+//        $elgg_obj->set("read_array", null);
     }
 }
 $video_array = ClipitVideo::get_all(0, 0, "", true, true);
@@ -50,7 +50,7 @@ foreach($video_array as $video_id){
     $read_array = (array)$elgg_obj->get("read_array");
     if(!empty($read_array)) {
         ClipitVideo::set_read_array((int)$video_id, $read_array);
-        $elgg_obj->set("read_array", null);
+//        $elgg_obj->set("read_array", null);
     }
 }
 $stbd_array = ClipitStoryboard::get_all(0, 0, "", true, true);
@@ -59,6 +59,6 @@ foreach($stbd_array as $stbd_id){
     $read_array = (array)$elgg_obj->get("read_array");
     if(!empty($read_array)) {
         ClipitStoryboard::set_read_array((int)$stbd_id, $read_array);
-        $elgg_obj->set("read_array", null);
+//        $elgg_obj->set("read_array", null);
     }
 }

@@ -1,5 +1,5 @@
 {
-  "version": "2.3.21",
+  "version": "2.3.22",
   "update_scripts": {
     "2.2.0": null,
     "2.2.1": "update_2.2.1.php",
