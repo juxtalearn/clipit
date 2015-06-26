@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 $groups = elgg_extract('entities', $vars);
+$activity = elgg_extract('activity', $vars);
 ?>
 <script>
     $(function(){
@@ -58,6 +59,12 @@ natural_sort_properties($groups, 'name');
 if($groups):
 ?>
     <p>
+        <span class="pull-right text-muted">
+            <?php echo elgg_echo('activity:students');?>:
+            <strong><?php echo count($activity->student_array);?></strong>,
+            <?php echo elgg_echo('groups');?>:
+            <strong><?php echo count($groups);?></strong><br>
+        </span>
         <?php echo elgg_view('output/url', array(
             'title' => elgg_echo('expand:all'),
             'text' => elgg_echo('expand:all'),
@@ -74,6 +81,7 @@ if($groups):
         ));
         ?>
     </p>
+    <div class="clearfix"></div>
     <div class="panel-group" id="gr_accordion">
         <?php foreach($groups as $group):?>
             <div class="panel panel-blue group">

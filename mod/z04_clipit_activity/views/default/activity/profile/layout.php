@@ -68,6 +68,7 @@ if($access == 'ACCESS_TEACHER'){
     <?php
         echo elgg_view('activity/profile/admin/groups', array(
             'entities' => $activity->group_array,
+            'activity' => $activity,
         ));
     ?>
 <?php endif;?>

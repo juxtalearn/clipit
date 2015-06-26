@@ -17,7 +17,8 @@ $task = elgg_extract('task', $vars);
     <?php foreach($students as $student):?>
     <li class="list-item col-md-6" data-entity="<?php echo $student->id;?>">
         <div class="pull-right">
-            <?php if(ClipitTask::get_completed_status($task->id, $student->id)):?>
+            <?php if($time_updated = ClipitTask::get_completed_status($task->id, $student->id)):?>
+                <small class="margin-right-10"><?php echo elgg_view('output/friendlytime', array('time' => $time_updated));?></small>
                 <i class="fa fa-check green" title="<?php echo elgg_echo('task:completed');?>"></i>
             <?php elseif($task->status == ClipitTask::STATUS_ACTIVE):?>
                 <i class="fa fa-minus yellow" title="<?php echo elgg_echo('task:pending');?>"></i>
