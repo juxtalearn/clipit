@@ -204,6 +204,7 @@ echo "</tr>";
 echo "<tr height='40'>";
 echo "<td>";
 echo "<strong>Wait until end of quiz tasks to show results?</strong> ";
+echo "<br>(else show results to each student as they finish)";
 echo "</td>";
 echo "<td>";
 if($quiz_results_after_task_end){
