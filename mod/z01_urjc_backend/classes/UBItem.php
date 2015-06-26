@@ -246,7 +246,6 @@ class UBItem {
         }
         $elgg_entity->set("time_created", (int)$this->time_created);
         $elgg_entity->set("access_id", ACCESS_PUBLIC);
-
     }
 
     /**

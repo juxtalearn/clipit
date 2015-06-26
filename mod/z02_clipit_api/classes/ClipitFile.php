@@ -22,6 +22,7 @@ class ClipitFile extends UBFile {
     const SUBTYPE = "ClipitFile";
     const REL_FILE_TAG = "ClipitFile-ClipitTag";
     const REL_FILE_LABEL = "ClipitFile-ClipitLabel";
+    const REL_FILE_USER = "ClipitFile-ClipitUser";
     const SCOPE_GROUP = "group";
     const SCOPE_ACTIVITY = "activity";
     const SCOPE_SITE = "site";
@@ -32,6 +33,47 @@ class ClipitFile extends UBFile {
     public $tag_array = array();
     public $label_array = array();
     public $read_array = array();
+
+    /**
+     * Loads object parameters stored in Elgg
+     *
+     * @param ElggFile $elgg_file Elgg Object to load parameters from.
+     */
+    protected function copy_from_elgg($elgg_file)
+    {
+        parent::copy_from_elgg($elgg_file);
+        $this->tag_array = (array)static::get_tags($this->id);
+        $this->label_array = (array)static::get_labels($this->id);
+        $this->read_array = (array)static::get_read_array($this->id);
+    }
+
+    /**
+     * Copy $this object parameters into an Elgg file.
+     *
+     * @param ElggFile $elgg_file Elgg file instance to save $this to
+     */
+    protected function copy_to_elgg($elgg_file)
+    {
+        parent::copy_to_elgg($elgg_file);
+        //$elgg_file->set("read_array", (array)$this->read_array);
+    }
+
+    /**
+     * Saves this instance to the system.
+     *
+     * @param bool $double_save Specifies whether to save file twice (necessary for file_creation_date edit)
+     *
+     * @return bool|int Returns id of saved instance, or false if error.
+     */
+    protected function save($double_save = false)
+    {
+        parent::save($double_save);
+        static::set_tags($this->id, $this->tag_array);
+        static::set_labels($this->id, $this->label_array);
+        static::set_read_array($this->id, $this->read_array);
+        return $this->id;
+    }
+
 
     static function get_by_tags($tag_array)
     {
@@ -225,6 +267,54 @@ class ClipitFile extends UBFile {
     }
 
     /**
+     * Add Read Array for a File
+     *
+     * @param int $id ID of the File
+     * @param array $read_array Array of User IDs who have read the File
+     *
+     * @return bool True if OK, false if error
+     */
+    static function add_read_array($id, $read_array) {
+        return UBCollection::add_items($id, $read_array, static::REL_FILE_USER);
+    }
+
+    /**
+     * Set Read Array for a File
+     *
+     * @param int $id ID of the File
+     * @param array $read_array Array of User IDs who have read the File
+     *
+     * @return bool True if OK, false if error
+     */
+    static function set_read_array($id, $read_array) {
+        return UBCollection::set_items($id, $read_array, static::REL_FILE_USER);
+    }
+
+    /**
+     * Remove Read Array for a File
+     *
+     * @param int $id ID of the File
+     * @param array $read_array Array of User IDs who have read the File
+     *
+     * @return bool True if OK, false if error
+     */
+    static function remove_read_array($id, $read_array) {
+        return UBCollection::remove_items($id, $read_array, static::REL_FILE_USER);
+    }
+
+    /**
+     * Get Read Array for a File
+     *
+     * @param int $id ID of the File
+     *
+     * @return static[] Array of File IDs
+     */
+    static function get_read_array($id) {
+        return UBCollection::get_items($id, static::REL_FILE_USER);
+    }
+
+
+    /**
      * Get a list of Users who have read a File, or optionally whether certain Users have read it
      *
      * @param int $id ID of the File
@@ -232,16 +322,16 @@ class ClipitFile extends UBFile {
      *
      * @return static[] Array with key => value: user_id => read_status, where read_status is bool
      */
-    static function get_read_status($id, $user_array = null)
-    {
+    static function get_read_status($id, $user_array = null) {
         $props = static::get_properties($id, array("read_array", "owner_id"));
         $read_array = $props["read_array"];
+        $owner_id = $props["owner_id"];
         if (!$user_array) {
             return $read_array;
         } else {
             $return_array = array();
             foreach ($user_array as $user_id) {
-                if (in_array($user_id, $read_array)) {
+                if ((int)$user_id == (int)$owner_id || in_array($user_id, $read_array)) {
                     $return_array[$user_id] = true;
                 } else {
                     $return_array[$user_id] = false;
@@ -261,38 +351,27 @@ class ClipitFile extends UBFile {
      * @return bool|int ID of File if Ok, false if error
      * @throws InvalidParameterException
      */
-    static function set_read_status($id, $read_value, $user_array)
-    {
-        $read_array = static::get_properties($id, array("read_array"));
-        $read_array = array_pop($read_array);
+    static function set_read_status($id, $read_value, $user_array) {
+        $read_array = static::get_read_array($id);
+        $update_flag = false;
         foreach ($user_array as $user_id) {
-            if ($read_value == true) {
-                if (!in_array($user_id, $read_array)) {
-                    array_push($read_array, $user_id);
-                }
-            } else if ($read_value == false) {
-                $index = array_search((int)$user_id, $read_array);
-                if (isset($index) && $index !== false) {
-                    array_splice($read_array, $index, 1);
-                }
+            $index = array_search((int)$user_id, $read_array);
+            if ($read_value === true && $index === false) {
+                array_push($read_array, $user_id);
+                $update_flag = true;
+            } elseif ($read_value === false && $index !== false) {
+                array_splice($read_array, $index, 1);
+                $update_flag = true;
             }
         }
-        $prop_value_array["read_array"] = $read_array;
-        return static::set_properties($id, $prop_value_array);
+        if ($update_flag) {
+            return static::set_read_array($id, $read_array);
+        } else {
+            return $id;
+        }
     }
 
-    /**
-     * Loads object parameters stored in Elgg
-     *
-     * @param ElggFile $elgg_file Elgg Object to load parameters from.
-     */
-    protected function copy_from_elgg($elgg_file)
-    {
-        parent::copy_from_elgg($elgg_file);
-        $this->tag_array = static::get_tags($this->id);
-        $this->label_array = static::get_labels($this->id);
-        $this->read_array = (array)$elgg_file->get("read_array");
-    }
+
 
     /**
      * Get Tag Ids from a File.
@@ -316,32 +395,6 @@ class ClipitFile extends UBFile {
     static function get_labels($id)
     {
         return UBCollection::get_items($id, static::REL_FILE_LABEL);
-    }
-
-    /**
-     * Copy $this object parameters into an Elgg file.
-     *
-     * @param ElggFile $elgg_file Elgg file instance to save $this to
-     */
-    protected function copy_to_elgg($elgg_file)
-    {
-        parent::copy_to_elgg($elgg_file);
-        $elgg_file->set("read_array", (array)$this->read_array);
-    }
-
-    /**
-     * Saves this instance to the system.
-     *
-     * @param bool $double_save Specifies whether to save file twice (necessary for file_creation_date edit)
-     *
-     * @return bool|int Returns id of saved instance, or false if error.
-     */
-    protected function save($double_save = false)
-    {
-        parent::save($double_save);
-        static::set_tags($this->id, $this->tag_array);
-        static::set_labels($this->id, $this->label_array);
-        return $this->id;
     }
 
     /**

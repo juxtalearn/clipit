@@ -24,6 +24,7 @@ abstract class ClipitResource extends UBItem {
     const REL_RESOURCE_TAG = "ClipitResource-ClipitTag";
     const REL_RESOURCE_LABEL = "ClipitResource-ClipitLabel";
     const REL_RESOURCE_RUBRIC = "ClipitResource-ClipitRubricItem";
+    const REL_RESOURCE_USER = "ClipitResource-ClipitUser";
     // Resource Container relationships
     const REL_SITE_RESOURCE = "";
     const REL_EXAMPLE_RESOURCE = "";
@@ -57,7 +58,7 @@ abstract class ClipitResource extends UBItem {
         parent::copy_from_elgg($elgg_entity);
         $this->tag_array = (array)static::get_tags($this->id);
         $this->label_array = (array)static::get_labels($this->id);
-        $this->read_array = (array)$elgg_entity->get("read_array");
+        $this->read_array = (array)static::get_read_array($this->id);
         $this->overall_rating_average = (float)$elgg_entity->get("overall_rating_average");
         $this->tag_rating_average = (float)$elgg_entity->get("tag_rating_average");
         $this->rubric_rating_average = (float)$elgg_entity->get("rubric_rating_average");
@@ -72,7 +73,7 @@ abstract class ClipitResource extends UBItem {
     protected function copy_to_elgg($elgg_entity)
     {
         parent::copy_to_elgg($elgg_entity);
-        $elgg_entity->set("read_array", (array)$this->read_array);
+        //$elgg_entity->set("read_array", (array)$this->read_array);
         $elgg_entity->set("overall_rating_average", (float)$this->overall_rating_average);
         $elgg_entity->set("tag_rating_average", (float)$this->tag_rating_average);
         $elgg_entity->set("rubric_rating_average", (float)$this->rubric_rating_average);
@@ -88,7 +89,55 @@ abstract class ClipitResource extends UBItem {
         parent::save($double_save);
         static::set_tags($this->id, (array)$this->tag_array);
         static::set_labels($this->id, (array)$this->label_array);
+        static::set_read_array($this->id, $this->read_array);
         return $this->id;
+    }
+
+    /**
+     * Add Read Array for a Resource
+     *
+     * @param int $id ID of the Resource
+     * @param array $read_array Array of User IDs who have read the Resource
+     *
+     * @return bool True if OK, false if error
+     */
+    static function add_read_array($id, $read_array) {
+        return UBCollection::add_items($id, $read_array, static::REL_RESOURCE_USER);
+    }
+
+    /**
+     * Set Read Array for a Resource
+     *
+     * @param int $id ID of the Resource
+     * @param array $read_array Array of User IDs who have read the Resource
+     *
+     * @return bool True if OK, false if error
+     */
+    static function set_read_array($id, $read_array) {
+        return UBCollection::set_items($id, $read_array, static::REL_RESOURCE_USER);
+    }
+
+    /**
+     * Remove Read Array for a Resource
+     *
+     * @param int $id ID of the Resource
+     * @param array $read_array Array of User IDs who have read the Resource
+     *
+     * @return bool True if OK, false if error
+     */
+    static function remove_read_array($id, $read_array) {
+        return UBCollection::remove_items($id, $read_array, static::REL_RESOURCE_USER);
+    }
+
+    /**
+     * Get Read Array for a Resource
+     *
+     * @param int $id ID of the Resource
+     *
+     * @return static[] Array of Resource IDs
+     */
+    static function get_read_array($id) {
+        return UBCollection::get_items($id, static::REL_RESOURCE_USER);
     }
 
     static function update_average_ratings($id)
@@ -350,18 +399,19 @@ abstract class ClipitResource extends UBItem {
      * @param int $id ID of the Resource
      * @param null|array $user_array List of User IDs - optional
      *
-     * @return static[] Array with key => value: user_id => read_status, where read_status is bool
+     * @return array[bool] Array with key => value: (int)user_id => (bool)read_status
      */
     static function get_read_status($id, $user_array = null)
     {
-        $props = static::get_properties($id, array("read_array"));
+        $props = static::get_properties($id, array("read_array", "owner_id"));
         $read_array = $props["read_array"];
+        $owner_id = $props["owner_id"];
         if (!$user_array) {
             return $read_array;
         } else {
             $return_array = array();
             foreach ($user_array as $user_id) {
-                if (in_array($user_id, $read_array)) {
+                if ((int)$user_id == (int)$owner_id || in_array($user_id, $read_array)) {
                     $return_array[$user_id] = true;
                 } else {
                     $return_array[$user_id] = false;
@@ -383,22 +433,23 @@ abstract class ClipitResource extends UBItem {
      */
     static function set_read_status($id, $read_value, $user_array)
     {
-        $read_array = static::get_properties($id, array("read_array"));
-        $read_array = array_pop($read_array);
+        $read_array = static::get_read_array($id);
+        $update_flag = false;
         foreach ($user_array as $user_id) {
-            if ($read_value == true) {
-                if (!in_array($user_id, $read_array)) {
-                    array_push($read_array, $user_id);
-                }
-            } else if ($read_value == false) {
-                $index = array_search((int)$user_id, $read_array);
-                if (isset($index) && $index !== false) {
-                    array_splice($read_array, $index, 1);
-                }
+            $index = array_search((int)$user_id, $read_array);
+            if ($read_value === true && $index === false) {
+                array_push($read_array, $user_id);
+                $update_flag = true;
+            } elseif ($read_value === false && $index !== false) {
+                array_splice($read_array, $index, 1);
+                $update_flag = true;
             }
         }
-        $prop_value_array["read_array"] = $read_array;
-        return static::set_properties($id, $prop_value_array);
+        if ($update_flag) {
+            return static::set_read_array($id, $read_array);
+        } else {
+            return $id;
+        }
     }
 
 

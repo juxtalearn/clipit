@@ -22,6 +22,8 @@ class ClipitChat extends UBMessage {
     const SUBTYPE = "ClipitChat";
     const REL_MESSAGE_DESTINATION = "ClipitChat-destination";
     const REL_MESSAGE_FILE = "ClipitChat-ClipitFile";
+    const REL_MESSAGE_USER = "ClipitChat-ClipitUser";
+
     public $archived_array = array();
 
     /**

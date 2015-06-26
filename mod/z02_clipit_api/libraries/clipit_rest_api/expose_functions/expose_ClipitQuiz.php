@@ -77,6 +77,13 @@ function expose_quiz_functions() {
         "Get Quiz Start Time", 'GET', false, true
     );
     expose_function(
+        $api_suffix . "set_quiz_as_finished", $class_suffix . "set_quiz_as_finished",
+        array(
+            "id" => array("type" => "int", "required" => true),
+            "user_id" => array("type" => "int", "required" => true)),
+        "Mark a Quiz as finished for a user", 'POST', false, true
+    );
+    expose_function(
         $api_suffix . "has_finished_quiz", $class_suffix . "has_finished_quiz",
         array(
             "id" => array("type" => "int", "required" => true),

@@ -23,4 +23,6 @@ class ClipitComment extends UBMessage {
     const SUBTYPE = "ClipitComment";
     const REL_MESSAGE_DESTINATION = "ClipitComment-destination";
     const REL_MESSAGE_FILE = "ClipitComment-ClipitFile";
+    const REL_MESSAGE_USER = "ClipitComment-ClipitUser";
+
 }
