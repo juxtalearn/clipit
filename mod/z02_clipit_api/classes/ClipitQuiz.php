@@ -181,10 +181,26 @@ class ClipitQuiz extends UBItem {
         return $quiz_array;
     }
 
+    static function set_quiz_as_finished($id, $user_id){
+        $start_timestamp = (int)static::get_quiz_start($id, $user_id);
+        if(empty($start_timestamp)) {
+            return null;
+        }
+        $prop_value_array = static::get_properties($id, array("max_time"));
+        $max_time = (int)$prop_value_array["max_time"];
+        $new_start_timestamp = (int)$start_timestamp - $max_time;
+        return UBCollection::set_timestamp($id, $user_id, static::REL_QUIZ_USER, $new_start_timestamp);
+    }
+
     static function set_quiz_start($id, $user_id){
         return UBCollection::add_items($id, array($user_id), static::REL_QUIZ_USER);
     }
 
+    /**
+     * @param $id
+     * @param $user_id
+     * @return int|null
+     */
     static function get_quiz_start($id, $user_id){
         return UBCollection::get_timestamp($id, $user_id, static::REL_QUIZ_USER);
     }

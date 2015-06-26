@@ -152,6 +152,20 @@ abstract class UBCollection {
         return remove_entity_relationships($id, $rel_name);
     }
 
+    static function set_timestamp($id1, $id2, $rel_name, $timestamp){
+        $rel_array = get_entity_relationships($id1);
+        if(empty($rel_array)){
+            return null;
+        }
+        foreach($rel_array as $rel){
+            if($rel->relationship == $rel_name && (int)$rel->guid_two == (int)$id2){
+                $rel->time_created = $timestamp;
+                return $rel->save();
+            }
+        }
+        return null;
+    }
+
     static function get_timestamp($id1, $id2, $rel_name) {
         $rel_array = get_entity_relationships($id1);
         if (empty($rel_array)) {

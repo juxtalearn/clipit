@@ -22,9 +22,11 @@ class UBMessage extends UBItem {
     const SUBTYPE = "UBMessage";
     const REL_MESSAGE_DESTINATION = "UBMessage-destination";
     const REL_MESSAGE_FILE = "UBMessage-UBFile";
-    public $read_array = array();
+    const REL_MESSAGE_USER = "UBMessage-UBUser";
+
     public $destination = 0;
     public $file_array = array();
+    public $read_array = array();
 
     /**
      * Loads object parameters stored in Elgg
@@ -33,7 +35,8 @@ class UBMessage extends UBItem {
      */
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
-        $this->read_array = (array)$elgg_entity->get("read_array");
+        //$this->read_array = (array)$elgg_entity->get("read_array");
+        $this->read_array = (array)static::get_read_array($this->id);
         $this->destination = (int)static::get_destination($this->id);
         $this->file_array = (array)static::get_files($this->id);
     }
@@ -45,7 +48,7 @@ class UBMessage extends UBItem {
      */
     protected function copy_to_elgg($elgg_entity) {
         parent::copy_to_elgg($elgg_entity);
-        $elgg_entity->set("read_array", (array)$this->read_array);
+        //$elgg_entity->set("read_array", (array)$this->read_array);
     }
 
     /**
@@ -59,6 +62,7 @@ class UBMessage extends UBItem {
         parent::save($double_save);
         static::set_destination($this->id, $this->destination);
         static::add_files($this->id, $this->file_array);
+        static::set_read_array($this->id, $this->read_array);
         return $this->id;
     }
 
@@ -231,6 +235,53 @@ class UBMessage extends UBItem {
     }
 
     /**
+     * Add Read Array for a Message
+     *
+     * @param int $id ID of the Message
+     * @param array $read_array Array of User IDs who have read the Message
+     *
+     * @return bool True if OK, false if error
+     */
+    static function add_read_array($id, $read_array) {
+        return UBCollection::add_items($id, $read_array, static::REL_MESSAGE_USER);
+    }
+
+    /**
+     * Set Read Array for a Message
+     *
+     * @param int $id ID of the Message
+     * @param array $read_array Array of User IDs who have read the Message
+     *
+     * @return bool True if OK, false if error
+     */
+    static function set_read_array($id, $read_array) {
+        return UBCollection::set_items($id, $read_array, static::REL_MESSAGE_USER);
+    }
+
+    /**
+     * Remove Read Array for a Message
+     *
+     * @param int $id ID of the Message
+     * @param array $read_array Array of User IDs who have read the Message
+     *
+     * @return bool True if OK, false if error
+     */
+    static function remove_read_array($id, $read_array) {
+        return UBCollection::remove_items($id, $read_array, static::REL_MESSAGE_USER);
+    }
+
+    /**
+     * Get Read Array for a Message
+     *
+     * @param int $id ID of the Message
+     *
+     * @return static[] Array of File IDs
+     */
+    static function get_read_array($id) {
+        return UBCollection::get_items($id, static::REL_MESSAGE_USER);
+    }
+
+    /**
      * Get a list of Users who have Read a Message, or optionally whether certain Users have read it
      *
      * @param int $id ID of the Message
@@ -268,24 +319,20 @@ class UBMessage extends UBItem {
      * @throws InvalidParameterException
      */
     static function set_read_status($id, $read_value, $user_array) {
-        $read_array = static::get_properties($id, array("read_array"));
-        $read_array = array_pop($read_array);
+        $read_array = static::get_read_array($id);
         $update_flag = false;
         foreach ($user_array as $user_id) {
             $index = array_search((int)$user_id, $read_array);
             if ($read_value === true && $index === false) {
                 array_push($read_array, $user_id);
                 $update_flag = true;
-            } else {
-                if ($read_value === false && $index !== false) {
-                    array_splice($read_array, $index, 1);
-                    $update_flag = true;
-                }
+            } elseif ($read_value === false && $index !== false) {
+                array_splice($read_array, $index, 1);
+                $update_flag = true;
             }
         }
         if ($update_flag) {
-            $prop_value_array["read_array"] = $read_array;
-            return static::set_properties($id, $prop_value_array);
+            return static::set_read_array($id, $read_array);
         } else {
             return $id;
         }

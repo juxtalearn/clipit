@@ -23,8 +23,8 @@ abstract class ClipitResource extends UBItem {
     const SUBTYPE = "ClipitResource";
     const REL_RESOURCE_TAG = "ClipitResource-ClipitTag";
     const REL_RESOURCE_LABEL = "ClipitResource-ClipitLabel";
-    const REL_RESOURCE_PERFORMANCE = "ClipitResource-ClipitPerformanceItem";
     const REL_RESOURCE_RUBRIC = "ClipitResource-ClipitRubricItem";
+    const REL_RESOURCE_USER = "ClipitResource-ClipitUser";
     // Resource Container relationships
     const REL_SITE_RESOURCE = "";
     const REL_EXAMPLE_RESOURCE = "";
@@ -39,25 +39,111 @@ abstract class ClipitResource extends UBItem {
     const SCOPE_EXAMPLE = "example";
     const SCOPE_TRICKYTOPIC = "tricky_topic";
     const SCOPE_TASK = "task";
-
+    // Tagging
     public $tag_array = array();
     public $label_array = array();
-    /* @deprecated */
-    public $performance_item_array = array();
-    public $rubric_item_array = array();
     public $read_array = array();
-
+    // Rating averages
     public $overall_rating_average = 0.0;
     public $tag_rating_average = 0.0;
-    /* @deprecated */
-    public $performance_rating_average = 0.0;
     public $rubric_rating_average = 0.0;
+
+    /**
+     * Loads object parameters stored in Elgg
+     *
+     * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
+     */
+    protected function copy_from_elgg($elgg_entity)
+    {
+        parent::copy_from_elgg($elgg_entity);
+        $this->tag_array = (array)static::get_tags($this->id);
+        $this->label_array = (array)static::get_labels($this->id);
+        $this->read_array = (array)static::get_read_array($this->id);
+        $this->overall_rating_average = (float)$elgg_entity->get("overall_rating_average");
+        $this->tag_rating_average = (float)$elgg_entity->get("tag_rating_average");
+        $this->rubric_rating_average = (float)$elgg_entity->get("rubric_rating_average");
+
+    }
+
+    /**
+     * Copy $this object parameters into an Elgg entity.
+     *
+     * @param ElggEntity $elgg_entity Elgg object instance to save $this to
+     */
+    protected function copy_to_elgg($elgg_entity)
+    {
+        parent::copy_to_elgg($elgg_entity);
+        //$elgg_entity->set("read_array", (array)$this->read_array);
+        $elgg_entity->set("overall_rating_average", (float)$this->overall_rating_average);
+        $elgg_entity->set("tag_rating_average", (float)$this->tag_rating_average);
+        $elgg_entity->set("rubric_rating_average", (float)$this->rubric_rating_average);
+    }
+
+    /**
+     * Saves this instance to the system.
+     * @param  bool $double_save if $double_save is true, this object is saved twice to ensure that all properties are updated properly. E.g. the time created property can only beset on ElggObjects during an update. Defaults to false!
+     * @return bool|int Returns the Id of the saved instance, or false if error
+     */
+    protected function save($double_save = false)
+    {
+        parent::save($double_save);
+        static::set_tags($this->id, (array)$this->tag_array);
+        static::set_labels($this->id, (array)$this->label_array);
+        static::set_read_array($this->id, $this->read_array);
+        return $this->id;
+    }
+
+    /**
+     * Add Read Array for a Resource
+     *
+     * @param int $id ID of the Resource
+     * @param array $read_array Array of User IDs who have read the Resource
+     *
+     * @return bool True if OK, false if error
+     */
+    static function add_read_array($id, $read_array) {
+        return UBCollection::add_items($id, $read_array, static::REL_RESOURCE_USER);
+    }
+
+    /**
+     * Set Read Array for a Resource
+     *
+     * @param int $id ID of the Resource
+     * @param array $read_array Array of User IDs who have read the Resource
+     *
+     * @return bool True if OK, false if error
+     */
+    static function set_read_array($id, $read_array) {
+        return UBCollection::set_items($id, $read_array, static::REL_RESOURCE_USER);
+    }
+
+    /**
+     * Remove Read Array for a Resource
+     *
+     * @param int $id ID of the Resource
+     * @param array $read_array Array of User IDs who have read the Resource
+     *
+     * @return bool True if OK, false if error
+     */
+    static function remove_read_array($id, $read_array) {
+        return UBCollection::remove_items($id, $read_array, static::REL_RESOURCE_USER);
+    }
+
+    /**
+     * Get Read Array for a Resource
+     *
+     * @param int $id ID of the Resource
+     *
+     * @return static[] Array of Resource IDs
+     */
+    static function get_read_array($id) {
+        return UBCollection::get_items($id, static::REL_RESOURCE_USER);
+    }
 
     static function update_average_ratings($id)
     {
         $prop_value_array["overall_rating_average"] = (float)ClipitRating::get_average_rating_for_target($id);
         $prop_value_array["tag_rating_average"] = (float)ClipitTagRating::get_average_rating_for_target($id);
-        $prop_value_array["performance_rating_average"] = (float)ClipitPerformanceRating::get_average_rating_for_target($id);
         $prop_value_array["rubric_rating_average"] = (float)ClipitRubricRating::get_average_rating_for_target($id);
         return static::set_properties($id, $prop_value_array);
     }
@@ -116,27 +202,6 @@ abstract class ClipitResource extends UBItem {
     static function get_labels($id)
     {
         return UBCollection::get_items($id, static::REL_RESOURCE_LABEL);
-    }
-
-    static function get_by_performance_items($performance_item_array)
-    {
-        $return_array = array();
-        $all_items = static::get_all(0, 0, "", true, true); // Get all item ids, not objects
-        foreach($all_items as $item_id) {
-            $item_performance_items = static::get_performance_items((int)$item_id);
-            foreach ($performance_item_array as $search_tag) {
-                if (array_search($search_tag, $item_performance_items) !== false) {
-                    $return_array[(int)$item_id] = new static((int)$item_id);
-                    break;
-                }
-            }
-        }
-        return $return_array;
-    }
-
-    static function get_performance_items($id)
-    {
-        return UBCollection::get_items($id, static::REL_RESOURCE_PERFORMANCE);
     }
 
     static function get_by_rubric_items($rubric_item_array)
@@ -318,16 +383,6 @@ abstract class ClipitResource extends UBItem {
         return UBCollection::remove_items($id, $label_array, static::REL_RESOURCE_LABEL);
     }
 
-    static function add_performance_items($id, $performance_item_array)
-    {
-        return UBCollection::add_items($id, $performance_item_array, static::REL_RESOURCE_PERFORMANCE);
-    }
-
-    static function remove_performance_items($id, $performance_item_array)
-    {
-        return UBCollection::remove_items($id, $performance_item_array, static::REL_RESOURCE_PERFORMANCE);
-    }
-
     static function add_rubric_items($id, $rubric_item_array)
     {
         return UBCollection::add_items($id, $rubric_item_array, static::REL_RESOURCE_RUBRIC);
@@ -344,18 +399,19 @@ abstract class ClipitResource extends UBItem {
      * @param int $id ID of the Resource
      * @param null|array $user_array List of User IDs - optional
      *
-     * @return static[] Array with key => value: user_id => read_status, where read_status is bool
+     * @return array[bool] Array with key => value: (int)user_id => (bool)read_status
      */
     static function get_read_status($id, $user_array = null)
     {
-        $props = static::get_properties($id, array("read_array"));
+        $props = static::get_properties($id, array("read_array", "owner_id"));
         $read_array = $props["read_array"];
+        $owner_id = $props["owner_id"];
         if (!$user_array) {
             return $read_array;
         } else {
             $return_array = array();
             foreach ($user_array as $user_id) {
-                if (in_array($user_id, $read_array)) {
+                if ((int)$user_id == (int)$owner_id || in_array($user_id, $read_array)) {
                     $return_array[$user_id] = true;
                 } else {
                     $return_array[$user_id] = false;
@@ -377,73 +433,26 @@ abstract class ClipitResource extends UBItem {
      */
     static function set_read_status($id, $read_value, $user_array)
     {
-        $read_array = static::get_properties($id, array("read_array"));
-        $read_array = array_pop($read_array);
+        $read_array = static::get_read_array($id);
+        $update_flag = false;
         foreach ($user_array as $user_id) {
-            if ($read_value == true) {
-                if (!in_array($user_id, $read_array)) {
-                    array_push($read_array, $user_id);
-                }
-            } else if ($read_value == false) {
-                $index = array_search((int)$user_id, $read_array);
-                if (isset($index) && $index !== false) {
-                    array_splice($read_array, $index, 1);
-                }
+            $index = array_search((int)$user_id, $read_array);
+            if ($read_value === true && $index === false) {
+                array_push($read_array, $user_id);
+                $update_flag = true;
+            } elseif ($read_value === false && $index !== false) {
+                array_splice($read_array, $index, 1);
+                $update_flag = true;
             }
         }
-        $prop_value_array["read_array"] = $read_array;
-        return static::set_properties($id, $prop_value_array);
+        if ($update_flag) {
+            return static::set_read_array($id, $read_array);
+        } else {
+            return $id;
+        }
     }
 
-    /**
-     * Loads object parameters stored in Elgg
-     *
-     * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
-     */
-    protected function copy_from_elgg($elgg_entity)
-    {
-        parent::copy_from_elgg($elgg_entity);
-        $this->tag_array = (array)static::get_tags($this->id);
-        $this->label_array = (array)static::get_labels($this->id);
-        $this->performance_item_array = (array)static::get_performance_items($this->id);
-        $this->rubric_item_array = (array)static::get_rubric_items($this->id);
-        $this->read_array = (array)$elgg_entity->get("read_array");
-        $this->overall_rating_average = (float)$elgg_entity->get("overall_rating_average");
-        $this->tag_rating_average = (float)$elgg_entity->get("tag_rating_average");
-        $this->performance_rating_average = (float)$elgg_entity->get("performance_rating_average");
-        $this->rubric_rating_average = (float)$elgg_entity->get("rubric_rating_average");
 
-    }
-
-    /**
-     * Copy $this object parameters into an Elgg entity.
-     *
-     * @param ElggEntity $elgg_entity Elgg object instance to save $this to
-     */
-    protected function copy_to_elgg($elgg_entity)
-    {
-        parent::copy_to_elgg($elgg_entity);
-        $elgg_entity->set("read_array", (array)$this->read_array);
-        $elgg_entity->set("overall_rating_average", (float)$this->overall_rating_average);
-        $elgg_entity->set("tag_rating_average", (float)$this->tag_rating_average);
-        $elgg_entity->set("performance_rating_average", (float)$this->performance_rating_average);
-        $elgg_entity->set("rubric_rating_average", (float)$this->rubric_rating_average);
-    }
-
-    /**
-     * Saves this instance to the system.
-     * @param  bool $double_save if $double_save is true, this object is saved twice to ensure that all properties are updated properly. E.g. the time created property can only beset on ElggObjects during an update. Defaults to false!
-     * @return bool|int Returns the Id of the saved instance, or false if error
-     */
-    protected function save($double_save = false)
-    {
-        parent::save($double_save);
-        static::set_tags($this->id, (array)$this->tag_array);
-        static::set_labels($this->id, (array)$this->label_array);
-        static::set_performance_items($this->id, (array)$this->performance_item_array);
-        static::set_rubric_items($this->id, (array)$this->rubric_item_array);
-        return $this->id;
-    }
 
     /**
      * Sets Tags to a Resource, referenced by Id.
@@ -469,11 +478,6 @@ abstract class ClipitResource extends UBItem {
     static function set_labels($id, $label_array)
     {
         return UBCollection::set_items($id, $label_array, static::REL_RESOURCE_LABEL);
-    }
-
-    static function set_performance_items($id, $performance_item_array)
-    {
-        return UBCollection::set_items($id, $performance_item_array, static::REL_RESOURCE_PERFORMANCE);
     }
 
     static function set_rubric_items($id, $rubric_item_array)
