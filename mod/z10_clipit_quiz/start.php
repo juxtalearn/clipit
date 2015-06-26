@@ -39,19 +39,7 @@ function quiz_page_handler($page){
         elgg_view('authoring_tools/sidebar/menu'),
         array('class' => 'activity-group-block margin-bottom-10 aside-tree')
     );
-    $search_menu = elgg_view_module('aside', elgg_echo('filter'),
-        elgg_view_form(
-            'filter_search',
-            array(
-                'method' => 'POST',
-                'id' => 'add_labels',
-                'style' => 'background: #fff;padding: 15px;',
-                'body' => elgg_view('forms/quiz/filter')
-            )
-        ));
-    if($page[0]){
-        $search_menu = false;
-    }
+
     switch($page[0]){
         case '':
             $title = elgg_echo('quizzes');
@@ -71,6 +59,17 @@ function quiz_page_handler($page){
             $count = count($all_entities);
             $entities = array_slice($all_entities, clipit_get_offset(), clipit_get_limit(10));
             $content = elgg_view('quiz/list', array('entities' => $entities, 'count' => $count));
+            // Filter form in sidebar
+            $sidebar .= elgg_view_module('aside', elgg_echo('filter'),
+                elgg_view_form(
+                    'filter_search',
+                    array(
+                        'method' => 'POST',
+                        'id' => 'add_labels',
+                        'style' => 'background: #fff;padding: 15px;',
+                        'body' => elgg_view('forms/quiz/filter')
+                    )
+                ));
             break;
         case 'edit':
             // Edit Quiz
@@ -169,7 +168,7 @@ function quiz_page_handler($page){
         'content' => $content,
         'title' => $title,
         'filter' => $filter,
-        'sidebar' => $sidebar.$search_menu,
+        'sidebar' => $sidebar,
     );
     $body = elgg_view_layout('one_sidebar', $params);
 

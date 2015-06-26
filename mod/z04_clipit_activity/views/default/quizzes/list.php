@@ -319,7 +319,7 @@ endforeach;
                 <?php if(!$finished && !$finished_task):?>
                     <?php echo elgg_view('input/submit',
                         array(
-                            'value' => elgg_echo('finish'),
+                            'value' => elgg_echo('save'),
                             'id' => 'finish-quiz',
                             'class' => "btn btn-primary pull-right"
                         ));
@@ -343,11 +343,13 @@ endforeach;
     <?php endif;?>
     <?php if((!$finished && !$finished_task) && $quiz->view_mode == ClipitQuiz::VIEW_MODE_LIST):?>
     <div class="margin-top-20">
-        <?php echo elgg_view('input/submit',
+        <?php echo elgg_view('modal/quiz/confirmation');?>
+        <?php echo elgg_view('input/button',
             array(
-                'value' => elgg_echo('finish'),
-                'id' => 'finish-quiz',
-                'class' => "btn btn-primary pull-right"
+                'value' => elgg_echo('save'),
+                'data-target' => '#save-quiz',
+                'data-toggle' => 'modal',
+                'class' => "btn btn-primary pull-right finish-quiz"
             ));
         ?>
     </div>
