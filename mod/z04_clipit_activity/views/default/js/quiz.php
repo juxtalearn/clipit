@@ -15,7 +15,7 @@
 elgg.provide('clipit.quiz');
 
 clipit.quiz.init = function() {
-    $("#finish-quiz").click(clipit.quiz.finishConfirmation);
+    $(".finish-quiz").click(clipit.quiz.finishConfirmation);
 };
 elgg.register_hook_handler('init', 'system', clipit.quiz.init);
 clipit.quiz.translated = function(){
@@ -48,20 +48,33 @@ clipit.quiz.saveQuestion = function(e){
 };
 clipit.quiz.finishConfirmation = function(e){
     e.preventDefault();
-    var that = $(this);
-    var confirmOptions = {
-        title: $("#questions-result").text(),
-        buttons: {
-            ok: {
-                label: elgg.echo("input:ok")
-            }
-        },
-        message: elgg.echo("quiz:result:send"),
-        callback: function(result) {
-            that.closest('form').submit();
+    var that = $(this),
+        type = $(this).data('type'),
+        $modal = $( $(this).data('target') );
+        $modal.find('.modal-title').text($("#questions-result").text());
+    if(type) {
+        switch (type) {
+            case 'finish':
+                that.after('<input type="hidden" name="finish" value="true" />');
+                break;
+            case 'save':
+                break;
         }
-    };
-    bootbox.alert(confirmOptions);
+        that.closest('form').submit();
+    }
+//    var confirmOptions = {
+//        title: $("#questions-result").text(),
+//        buttons: {
+//            ok: {
+//                label: elgg.echo("input:ok")
+//            }
+//        },
+//        message: elgg.echo("quiz:result:send"),
+//        callback: function(result) {
+//            that.closest('form').submit();
+//        }
+//    };
+//    bootbox.alert(confirmOptions);
 };
 clipit.quiz.create = function(options){
     var defaults = {};

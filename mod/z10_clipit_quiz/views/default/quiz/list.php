@@ -62,15 +62,19 @@ $(function(){
             tr_quiz.toggle();
             return false;
         }
+        var container =
+            $("<tr/>").attr("data-quiz", id).html(
+                $('<td/>').attr("colspan", 5)
+                    .html('<i class="fa fa-spinner fa-spin fa-2x blue"/>')
+                    .css("padding", "10px")
+            );
+        tr.after(container);
         elgg.get('ajax/view/questions/summary',{
             data: {
-                quiz: id
+                'quiz': id
             },
             success: function(content){
-                var container = $("<tr/>")
-                    .attr("data-quiz", id)
-                    .html( $('<td/>').attr("colspan", 5).html(content).css("padding", "10px") );
-                tr.after(container);
+                container.find('td').html(content);
             }
         });
     });
