@@ -52,6 +52,7 @@ foreach($activity->student_array as $student_id){
 <div class="row groups-list">
     <?php
     $group_students = array();
+    $total_groups = count($groups);
     foreach($groups as $group):
         $students_id = ClipitGroup::get_users($group->id);
         $students = ClipitUser::get_by_id($students_id, 0, 0, 'name');
@@ -77,7 +78,7 @@ foreach($activity->student_array as $student_id){
             }
         }
         ?>
-        <div class="col-md-6">
+        <div class="<?php echo $total_groups > 6 ? 'col-md-4':'col-md-6';?>">
             <div style="border-bottom: 6px solid #bae6f6; padding-bottom: 15px;">
                 <?php echo $optButton;?>
                 <?php echo elgg_view('output/url', array(
