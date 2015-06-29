@@ -37,13 +37,6 @@ natural_sort_properties($groups, 'name');
 </style>
 <script>
     $(function(){
-        $(document).on("click", "#panel-expand-all",function(){
-            $(".expand").parent(".panel").find(".panel-collapse").collapse('show');
-        });
-        $(document).on("click", "#panel-collapse-all",function(){
-            $(".expand").parent(".panel").find(".panel-collapse").collapse('hide');
-        });
-
         var hash = window.location.hash.replace('#', '');
         var collapse = $("[href='#group_"+hash+"']");
         if(collapse.length > 0){
@@ -74,7 +67,7 @@ natural_sort_properties($groups, 'name');
                 'title' => elgg_echo('expand:all'),
                 'text' => elgg_echo('expand:all'),
                 'href' => "javascript:;",
-                'id' => 'panel-expand-all',
+                'class' => 'panel-expand-all',
             ));
             ?>
             <span class="text-muted">|</span>
@@ -82,7 +75,7 @@ natural_sort_properties($groups, 'name');
                 'title' => elgg_echo('collapse:all'),
                 'text' => elgg_echo('collapse:all'),
                 'href' => "javascript:;",
-                'id' => 'panel-collapse-all',
+                'class' => 'panel-collapse-all',
             ));
             ?>
         </p>

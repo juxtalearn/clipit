@@ -581,7 +581,15 @@ $(function(){
         maxFileSize: elgg.echo('fileupload:maxfile'),
         minFileSize: elgg.echo('fileupload:minfile')
     };
-
+    /**
+     * Panel expand/collapse all function
+     */
+    $(document).on("click", ".panel-expand-all",function(){
+        $(this).closest('.tab-pane').find(".panel-collapse").collapse('show');
+    });
+    $(document).on("click", ".panel-collapse-all",function(){
+        $(this).closest('.tab-pane').find(".panel-collapse").collapse('hide');
+    });
     /**
      * Collapse function
      */
