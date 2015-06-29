@@ -374,6 +374,10 @@ class UBItem {
         return true;
     }
 
+    static function count_all(){
+        return elgg_get_entities(array("limit" => 0, "count" => true));
+    }
+
     /**
      * Get all Object instances of this TYPE and SUBTYPE from the system, optionally only a specified property.
      *
