@@ -76,6 +76,10 @@ function expose_common_functions($api_suffix, $class_suffix) {
         $api_suffix . "delete_all", $class_suffix . "delete_all", null, "Delete all instances of this class", 'POST',
         false, true
     );
+    expose_function(
+        $api_suffix . "count_all", $class_suffix . "count_all", null, "Count all instances of this class", 'GET',
+        false, true
+    );
     //get_all($limit = 0, $offset = 0, $order_by = "", $ascending = true, $id_only = false) {
     expose_function(
         $api_suffix . "get_all", $class_suffix . "get_all", array(
