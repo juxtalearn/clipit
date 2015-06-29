@@ -585,10 +585,10 @@ $(function(){
      * Panel expand/collapse all function
      */
     $(document).on("click", ".panel-expand-all",function(){
-        $(this).closest('.tab-pane').find(".panel-collapse").collapse('show');
+        $(this).closest('.tab-pane, .panel-group').find(".panel-collapse").collapse('show');
     });
     $(document).on("click", ".panel-collapse-all",function(){
-        $(this).closest('.tab-pane').find(".panel-collapse").collapse('hide');
+        $(this).closest('.tab-pane, .panel-group').find(".panel-collapse").collapse('hide');
     });
     /**
      * Collapse function
