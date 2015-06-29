@@ -59,6 +59,8 @@ function expose_common_functions($api_suffix, $class_suffix) {
     );
     expose_function(
         $api_suffix . "get_all_parents", $class_suffix . "get_all_parents", array(
+            "order_by" => array("type" => "string", "required" => false),
+            "ascending" => array("type" => "bool", "required" => false),
             "id_only" => array("type" => "bool", "required" => false)
         ),"Get all Item IDs which were cloned from the one given", "GET", false, true
     );
