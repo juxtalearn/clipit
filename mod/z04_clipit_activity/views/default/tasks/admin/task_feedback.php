@@ -36,14 +36,7 @@ natural_sort_properties($groups, 'name');
 </style>
 <script>
     $(function(){
-        $(document).on("click", "#panel-expand-all",function(){
-            $(".expand").parent(".panel").find(".panel-collapse").collapse('show');
-            $(".user-rating").click();
-        });
-        $(document).on("click", "#panel-collapse-all",function(){
-            $(".expand").parent(".panel").find(".panel-collapse").collapse('hide');
-        });
-        $(document).on("click", ".user-rating",function(){
+        $(".panel-collapse.feedback-load").on("show.bs.collapse",function(){
             var content = $(this).closest(".panel").find(".panel-body");
             var us_id = $(this).data("user");
             if(content.is(':empty')){
@@ -108,7 +101,7 @@ natural_sort_properties($groups, 'name');
                 'title' => elgg_echo('expand:all'),
                 'text' => elgg_echo('expand:all'),
                 'href' => "javascript:;",
-                'id' => 'panel-expand-all',
+                'class' => 'panel-expand-all',
             ));
             ?>
             <span class="text-muted">|</span>
@@ -116,7 +109,7 @@ natural_sort_properties($groups, 'name');
                 'title' => elgg_echo('collapse:all'),
                 'text' => elgg_echo('collapse:all'),
                 'href' => "javascript:;",
-                'id' => 'panel-collapse-all',
+                'class' => 'panel-collapse-all',
             ));
             ?>
         </p>
@@ -128,10 +121,7 @@ natural_sort_properties($groups, 'name');
                 'title' => $group->name,
             ));?>
             <ul class="panel-group" id="accordion_users">
-                <?php
-                foreach($users as $user):
-                    //$status = ClipitTask::get_completed_status($task->id, $user->id);
-                    ?>
+                <?php foreach($users as $user):?>
                     <li class="panel panel-blue list-item" data-entity="<?php echo $user->id;?>">
                         <a name="<?php echo $user->id;?>"></a>
                         <div class="panel-heading expand" style="padding: 0px;background: none;">
@@ -143,7 +133,6 @@ natural_sort_properties($groups, 'name');
                                    data-parent="#accordion_users"
                                    href="#user_<?php echo $user->id;?>"
                                    class="btn btn-border-blue margin-left-10 btn-xs btn-primary user-rating"
-                                   data-user="<?php echo $user->id;?>"
                                     >
                                     <?php echo elgg_echo('view');?>
                                 </a>
@@ -151,7 +140,10 @@ natural_sort_properties($groups, 'name');
                             <?php echo elgg_view("page/elements/user_block", array("entity" => $user)); ?>
                         </div>
                         <div class="clearfix"></div>
-                        <div id="user_<?php echo $user->id;?>" class="panel-collapse collapse">
+                        <div id="user_<?php echo $user->id;?>"
+                             class="panel-collapse collapse feedback-load"
+                             data-user="<?php echo $user->id;?>"
+                            >
                             <div class="panel-body"></div>
                         </div>
                     </li>
