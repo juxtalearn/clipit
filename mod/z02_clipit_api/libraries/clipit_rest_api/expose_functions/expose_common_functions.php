@@ -58,6 +58,11 @@ function expose_common_functions($api_suffix, $class_suffix) {
         true
     );
     expose_function(
+        $api_suffix . "get_all_parents", $class_suffix . "get_all_parents", array(
+            "id_only" => array("type" => "bool", "required" => false)
+        ),"Get all Item IDs which were cloned from the one given", "GET", false, true
+    );
+    expose_function(
         $api_suffix . "get_clones", $class_suffix . "get_clones", array(
             "id" => array("type" => "int", "required" => true),
             "recursive" => array("type" => "bool", "required" => false)
@@ -65,7 +70,7 @@ function expose_common_functions($api_suffix, $class_suffix) {
     );
     expose_function(
         $api_suffix . "get_clone_tree", $class_suffix . "get_clone_tree", array(
-            "id" => array("type" => "int", "required" => true)
+            "id" => array("type" => "int", "required" => false)
         ), "Get the complete clone tree from any given item contained", "GET", false, true
     );
     expose_function(
@@ -74,6 +79,10 @@ function expose_common_functions($api_suffix, $class_suffix) {
     );
     expose_function(
         $api_suffix . "delete_all", $class_suffix . "delete_all", null, "Delete all instances of this class", 'POST',
+        false, true
+    );
+    expose_function(
+        $api_suffix . "count_all", $class_suffix . "count_all", null, "Count all instances of this class", 'GET',
         false, true
     );
     //get_all($limit = 0, $offset = 0, $order_by = "", $ascending = true, $id_only = false) {

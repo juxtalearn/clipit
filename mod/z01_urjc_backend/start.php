@@ -26,6 +26,19 @@ function urjc_backend_init() {
     register_pam_handler('check_http_auth_token');
 }
 
+// Flatten a multidimensional array
+function array_flatten($array) {
+    $return = array();
+    foreach ($array as $key => $value) {
+        if (is_array($value)){
+            $return = array_merge($return, array_flatten($value));
+        } else {
+            $return[$key] = $value;
+        }
+    }
+    return $return;
+}
+
 /**
  * Loads PHP files from a specified path
  *

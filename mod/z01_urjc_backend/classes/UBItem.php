@@ -110,7 +110,7 @@ class UBItem {
      * @param int $id Item from which to return parent
      * @param bool $recursive Whether to look for parent recursively
      *
-     * @return int Array of Item IDs
+     * @return int Parent ID
      */
     static function get_cloned_from($id, $recursive = false)
     {
@@ -118,14 +118,31 @@ class UBItem {
         if (empty($parent)) {
             return 0;
         }
+        $parent = (int)array_pop($parent);
         if ($recursive) {
-            $new_parent = $parent;
-            while (!empty($new_parent)) {
+            $new_parent = static::get_cloned_from($parent, true);
+            while(!empty($new_parent)){
                 $parent = $new_parent;
-                $new_parent = UBCollection::get_items(array_pop($parent), static::REL_PARENT_CLONE, true);
+                $new_parent = static::get_cloned_from($parent, true);
             }
         }
-        return $parent = (int)array_pop($parent);
+        return $parent;
+    }
+
+    /**
+     * @param bool|false $id_only Whether to return only IDs
+     * @return array[static]|array[int] Array of parent objects from class
+     */
+    static function get_all_parents($id_only = false){
+        $all_items = static::get_all(0, 0, "", true, $id_only);
+        $parent_array = array();
+        foreach($all_items as $item){
+            $cloned_from = static::get_cloned_from($id_only ? $item : $item->id);
+            if(empty($cloned_from)){
+                $parent_array[] = $item;
+            }
+        }
+        return $parent_array;
     }
 
     /**
@@ -138,12 +155,15 @@ class UBItem {
      */
     static function get_clones($id, $recursive = false)
     {
-        $item_clones = UBCollection::get_items($id, static::REL_PARENT_CLONE);
+        $item_clones = array_reverse(UBCollection::get_items($id, static::REL_PARENT_CLONE));
         if ($recursive) {
             $clone_array = array();
             foreach ($item_clones as $clone) {
-                array_push($clone_array, $clone);
-                $clone_array = array_merge($clone_array, static::get_clones($clone, true));
+                $clone_array[] = $clone;
+                $clone_children = static::get_clones($clone, true);
+                if(!empty($clone_children)){
+                    $clone_array[] = $clone_children;
+                }
             }
             return $clone_array;
         }
@@ -246,7 +266,6 @@ class UBItem {
         }
         $elgg_entity->set("time_created", (int)$this->time_created);
         $elgg_entity->set("access_id", ACCESS_PUBLIC);
-
     }
 
     /**
@@ -342,23 +361,33 @@ class UBItem {
 
     /**
      * Get an array with the full clone list of the clone tree an item belongs to
-     * @param int $id ID of Item
+     * @param int|null $id ID of Item (if non set, return all trees)
      *
      * @return int[] Array of item IDs
      * @throws InvalidParameterException
      */
-    static function get_clone_tree($id){
-        // Find top parent in clone tree
-        $top_parent = $id;
-        $prop_value_array = static::get_properties($top_parent, array("cloned_from"));
-        $new_parent = $prop_value_array["cloned_from"];
-        while($new_parent != 0){
-            $top_parent = $new_parent;
-            $prop_value_array = static::get_properties($top_parent, array("cloned_from"));
-            $new_parent = $prop_value_array["cloned_from"];
+    static function get_clone_tree($id = null){
+        if(empty($id)){
+            $all_items = array_reverse(static::get_all(0, 0, "", true, false));
+            $clone_tree = array();
+            foreach($all_items as $item_id){
+                if(array_search($item_id, array_flatten($clone_tree)) === false){
+                    $clone_tree[] = static::get_clone_tree($item_id);
+                }
+            }
+        } else {
+            // Find top parent in clone tree
+            $top_parent =  static::get_cloned_from($id, true);
+            if(empty($top_parent)){
+                $top_parent = $id;
+            }
+            $clone_tree = array();
+            $clone_tree[] = $top_parent;
+            $clones = static::get_clones($top_parent, true);
+            if(!empty($clones)){
+                $clone_tree[] = $clones;
+            }
         }
-        $clone_tree = static::get_clones($top_parent, true);
-        array_push($clone_tree, $top_parent);
         return $clone_tree;
     }
 
@@ -375,12 +404,16 @@ class UBItem {
         return true;
     }
 
+    static function count_all(){
+        return elgg_get_entities(array("limit" => 0, "count" => true));
+    }
+
     /**
      * Get all Object instances of this TYPE and SUBTYPE from the system, optionally only a specified property.
      *
      * @param int $limit Number of results to show, default= 0 [no limit] (optional)
      * @param int $offset Offset from where to show results, default=0 [from the begining] (optional)
-     * @param string $order_by Default = "" (don't order)
+     * @param string $order_by Default = "" == time_created desc (newest first)
      * @param bool $ascending Default = true (ascending order)
      * @param bool $id_only Whether to only return IDs, or return whole objects (default: false)
      * will be done if it is set to true.
@@ -406,7 +439,7 @@ class UBItem {
                 'subtype' => static::SUBTYPE,
                 'limit' => $limit,
                 'offset' => $offset,
-                'sort_by' => "e.time_created"
+                'sort_by' => "e.time_created desc"
             );
         }
         $elgg_entity_array = elgg_get_entities_from_metadata($options);
