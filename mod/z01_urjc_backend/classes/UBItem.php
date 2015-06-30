@@ -130,11 +130,13 @@ class UBItem {
     }
 
     /**
+     * @param string $order_by forwarded to get_all (see get_all)
+     * @param bool $ascending forwarded to get_all (see get_all)
      * @param bool|false $id_only Whether to return only IDs
      * @return array[static]|array[int] Array of parent objects from class
      */
-    static function get_all_parents($id_only = false){
-        $all_items = static::get_all(0, 0, "", true, $id_only);
+    static function get_all_parents($order_by = "", $ascending = true, $id_only = false){
+        $all_items = static::get_all(0, 0, $order_by, $ascending, $id_only);
         $parent_array = array();
         foreach($all_items as $item){
             $cloned_from = static::get_cloned_from($id_only ? $item : $item->id);
