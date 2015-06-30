@@ -13,8 +13,19 @@
 $task = elgg_extract('entity', $vars);
 $status = elgg_extract('status', $vars);
 $super_title = elgg_extract('super_title', $vars);
+$user = array_pop(ClipitUser::get_by_id(array(elgg_get_logged_in_user_guid())));
 ?>
 <div class="task-info">
+    <?php if($user->role == ClipitUser::ROLE_TEACHER):?>
+        <?php echo elgg_view('output/url', array(
+            'href' => "clipit_activity/$task->activity/admin?filter=tasks#edit-task-{$task->id}",
+            'title' => elgg_echo('task:edit'),
+            'text' => elgg_echo('task:edit'),
+            'class' => 'pull-right btn btn-xs btn-border-blue btn-default',
+            'target' => '_blank',
+        ));
+        ?>
+    <?php endif;?>
     <h3>
         <span class="task-status <?php echo $status['color'];?> pull-right"><?php echo $status['text'];?></span>
         <?php if($super_title):?>
