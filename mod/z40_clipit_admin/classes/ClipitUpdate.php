@@ -10,7 +10,7 @@ class ClipitUpdate
 {
     const VERSIONS_FILE = "versions.json";
 
-    static function update_clipit($run_update_scripts = true, $flush_caches = true){
+    static function update_clipit(){
         // Pull latest version from GitHub
         chdir(elgg_get_root_path());
         exec("git stash save");
@@ -27,13 +27,6 @@ class ClipitUpdate
         exec("git checkout $latest_tag");
         exec("git submodule init");
         exec("git submodule update");
-        // Run updates
-        if($run_update_scripts) {
-            static::run_update_scripts();
-        }
-        if($flush_caches){
-            static::flush_caches();
-        }
         return $latest_tag;
     }
 

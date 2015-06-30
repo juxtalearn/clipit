@@ -10,7 +10,7 @@
  */
 
 $old_version = get_config("clipit_version");
-$new_version = ClipitUpdate::update_clipit(false, false);
+$new_version = ClipitUpdate::update_clipit();
 system_message("<p>Current version: $old_version<br>New version: $new_version</p>");
 system_message("<p>Running update scripts...");
 ClipitUpdate::run_update_scripts();
