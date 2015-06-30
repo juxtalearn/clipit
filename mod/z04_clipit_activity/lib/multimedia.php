@@ -57,22 +57,7 @@ function videos_get_page_content_list($params = array()){
     }
     return $content;
 }
-function resources_get_page_content_list($params = array()){
-    $resources = $params['entities'];
-    // Search items
-    if($search_term = stripslashes(get_input("search"))){
-        $items_search = array_keys(ClipitResource::get_from_search($search_term));
-        $resources = array_uintersect($items_search, $resources, "strcasecmp");
-    }
-    elgg_extend_view("resources/search", "search/search");
-    $params['entities'] = $resources;
 
-    $content = elgg_view('multimedia/resource/list', $params);
-    if (!$resources) {
-        $content .= elgg_view('output/empty', array('value' => elgg_echo('resources:none')));
-    }
-    return $content;
-}
 function storyboards_get_page_content_list($params = array()){
     $sbs = $params['entities'];
     // Search items

@@ -20,8 +20,8 @@ $user_loggedin_id = elgg_get_logged_in_user_guid();
 $user_logged = array_pop(ClipitUser::get_by_id(array($user_loggedin_id)));
 
 $tags = $entity->tag_array;
-$performance_average = $entity->performance_rating_average;
 $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->id))));
+$rubrics = get_rubric_items_from_resource($entity->id);
 ?>
 <!-- Multimedia info + details -->
 <div class="multimedia-owner multimedia-pub">
@@ -109,23 +109,25 @@ $total_evaluations = count(array_pop(ClipitRating::get_by_target(array($entity->
                     <!-- Star rating -->
                     <div class="col-md-4">
                         <div>
+                            <?php if($rubrics):?>
                             <div class="pull-right readonly">
                                 <div style="
 background-color: #fafafa;
 padding: 5px;
 border-radius: 100px;
-width: 80px;
-height: 80px;
-line-height: 70px;
+width: 70px;
+height: 70px;
+line-height: 60px;
 text-align: center;
 margin-top: -10px;
 ">
-                                    <span style="color: rgb(50, 180, 229); font-weight: bold; font-size: 30px; font-family: FuturaBoldRegular, Impact, 'Impact Bold', Helvetica, Arial, sans, sans-serif; display: inline;">
-                                        <?php echo $entity->rubric_rating_average ? floor($entity->rubric_rating_average * 100)/10 : '-';?>
+                                    <span style="color: rgb(50, 180, 229); font-weight: bold; font-size: 27px; font-family: FuturaBoldRegular, Impact, 'Impact Bold', Helvetica, Arial, sans, sans-serif; display: inline;">
+                                        <?php echo rubric_rating_value($entity->rubric_rating_average);?>
                                     </span>
 
                                 </div>
                             </div>
+                            <?php endif;?>
                             <h4 class="inline-block">
                                 <strong><?php echo elgg_echo('publications:rating');?></strong>
                                 <small style="margin-top: 5px;" class="show">
@@ -136,8 +138,8 @@ margin-top: -10px;
                             <div class="clearfix"></div>
                             <ul>
                             <?php
+                            if($rubrics):
                             $rubric_items_average = ClipitRubricRating::get_item_average_rating_for_target($entity->id);
-                            $rubrics = ClipitRubricItem::get_by_id($entity->rubric_item_array);
                             foreach($rubrics as $rubric):
                             ?>
                                 <li class="list-item-5">
@@ -148,7 +150,10 @@ margin-top: -10px;
                                         <?php echo $rubric->name;?>
                                     </span>
                                 </li>
-                            <?php endforeach; ?>
+                            <?php
+                            endforeach;
+                                endif;
+                            ?>
                             </ul>
                         </div>
                         <?php if($total_evaluations > 0): ?>
@@ -194,7 +199,8 @@ margin-top: -10px;
                                                 ));
 
                                             ?>
-                                            <?php echo elgg_view_form('publications/evaluate', array(
+                                            <?php echo elgg_view_form('', array(
+                                                    'action' => 'action/publications/evaluate',
                                                     'data-validate'=> "true",
                                                     'body' => $modal,
                                                     'enctype' => 'multipart/form-data'

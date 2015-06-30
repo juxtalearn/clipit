@@ -94,7 +94,9 @@ $page = 'tricky_topics';
             <td data-title="<?php echo elgg_echo('author');?>">
                 <small>
                     <div>
-                        <i class="fa-user fa blue"></i>
+                        <?php if($user->id == elgg_get_logged_in_user_guid()):?>
+                            <i class="fa-user fa blue"></i>
+                        <?php endif;?>
                         <?php echo elgg_view('output/url', array(
                             'href'  => "profile/{$user->login}",
                             'title' => $user->name,

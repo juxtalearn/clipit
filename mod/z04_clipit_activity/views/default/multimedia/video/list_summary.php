@@ -146,7 +146,7 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
             <div class="tags">
                 <?php echo elgg_view("tricky_topic/tags/view", array('tags' => $tags)); ?>
             </div>
-
+            <div class="clearfix"></div>
             <small class="show" style="margin: 0">
                 <?php if($vars['view_comments'] !== false):?>
                 <?php

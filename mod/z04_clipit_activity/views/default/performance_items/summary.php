@@ -12,9 +12,9 @@
  */
 $entity = elgg_extract('entity', $vars);
 if($vars['user_rating']){
-    $rating_average = ClipitPerformanceRating::get_average_user_rating_for_target($entity->owner_id, $entity->target);
+    $rating_average = ClipitRubricRating::get_average_user_rating_for_target($entity->owner_id, $entity->target);
 } else {
-    $rating_average = $entity->performance_rating_average;
+    $rating_average = $entity->rubric_rating_average;
 }
 
 $class = 'rating';
@@ -25,16 +25,19 @@ if($vars['show_check'] ) {
     $me_rating = ClipitRating::get_user_rating_for_target(elgg_get_logged_in_user_guid(), $entity->id);
     echo elgg_view("page/components/modal_remote", array('id'=> "rating-average-{$me_rating->id}" ));
 }
-
 ?>
-<div class="<?php echo $class;?> readonly" data-score="<?php echo $rating_average;?>">
-    <?php echo star_rating_view($rating_average);?>
+<div class="pull-right">
+    <div class="margin-bottom-15">
+        <span class="blue pull-right rating-summary"><?php echo rubric_rating_value($rating_average);?></span>
+        <small class="margin-right-15"><?php echo elgg_echo('publications:rating');?></small>
+    </div>
     <?php if($me_rating):?>
         <div class="text-right">
             <?php echo elgg_view('output/url', array(
                     'href'  => "ajax/view/modal/publications/rating?id={$me_rating->id}",
-                    'text'  => '<i class="fa fa-check btn btn-xs btn-primary"></i>',
+                    'text'  => elgg_echo('publications:rating:my_evaluation'),
                     'title' => elgg_echo('publications:rating:my_evaluation'),
+                    'class' => 'btn btn-xs btn-default btn-border-blue show',
                     'data-toggle'   => 'modal',
                     'data-target'   => '#rating-average-'.$me_rating->id
                 ));

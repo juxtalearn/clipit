@@ -30,6 +30,7 @@ $id = uniqid();
                 return 'active';
             });
         });
+
         $(".datepicker").each(function() {
             var defaults = {hour: 0, minute: 0};
             if($(this).hasClass('input-task-end')){
@@ -44,6 +45,7 @@ $id = uniqid();
                 })
             ));
         });
+        // Set calendar params
         $('#full-calendar').fullCalendar(clipit.task.admin.fullCalendar({
             messages: {
                 monthNames: <?php echo elgg_echo('calendar:month_names');?>,
@@ -71,6 +73,9 @@ $id = uniqid();
             start: <?php echo $activity->start;?>,
             end: <?php echo $activity->end;?>,
         }));
+        if(hash = elgg.getSelectorFromUrlFragment(window.location.href)){
+            $('[data-target='+ hash +']').trigger('click');
+        }
     });
 </script>
 <div class="pull-right">

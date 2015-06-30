@@ -27,6 +27,42 @@ function clipit_quiz_init() {
     elgg_register_ajax_view('questions/examples');
     // Sidebar menu
     elgg_extend_view('authoring_tools/sidebar/menu', 'quiz/sidebar/menu', 200);
+
+    // hook: action save. Quiz task type
+    elgg_register_plugin_hook_handler("task:save", "task", "task_quiz_save");
+}
+
+function task_quiz_save($hook, $entity_type, $returnvalue, $params){
+    $activity_id = $params['activity_id'];
+    $task = $params['task'];
+
+    if($task['type'] == ClipitTask::TYPE_QUIZ_TAKE && $task['quiz_id']) {
+        // New task, create quiz clone and set to task
+        $quiz_id = ClipitQuiz::create_clone($task['quiz_id']);
+        $task_properties = array_merge(get_task_properties_action($task), array(
+            'quiz' => $quiz_id,
+            'task_type' => $task['type'],
+        ));
+        $task_id = ClipitTask::create($task_properties);
+        // Add to activity
+        ClipitActivity::add_tasks($activity_id, array($task_id));
+    } elseif(
+        $task['quiz'] &&
+        get_input('task-id') &&
+        $task['entity_type'] == ClipitTask::TYPE_QUIZ_TAKE
+    ){
+        $task_id = get_input('task-id');
+        $quiz = $task['quiz'];
+        // Set and save quiz
+        quiz_save(
+            $task['quiz'],
+            $quiz['question'],
+            array_pop($_FILES['task']['tmp_name']),
+            array_pop($_FILES['task']['name'])
+        );
+        // Save task
+        ClipitTask::set_properties($task_id, get_task_properties_action($task));
+    }
 }
 
 /**
@@ -48,14 +84,15 @@ function quiz_page_handler($page){
             if($search = get_input('s')) {
                 $entities = quiz_filter_search($search);
                 $entities = ClipitQuiz::get_by_id($entities);
-            } else {
-                $entities = ClipitQuiz::get_all(0, 0);
-            }
-            foreach($entities as $entity){
-                if($entity->cloned_from == 0) {
-                    $all_entities[] = $entity;
+                foreach($entities as $entity){
+                    if($entity->cloned_from == 0) {
+                        $all_entities[] = $entity;
+                    }
                 }
+            } else {
+                $all_entities = ClipitQuiz::get_all_parents();
             }
+
             $count = count($all_entities);
             $entities = array_slice($all_entities, clipit_get_offset(), clipit_get_limit(10));
             $content = elgg_view('quiz/list', array('entities' => $entities, 'count' => $count));

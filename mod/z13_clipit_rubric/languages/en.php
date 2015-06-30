@@ -13,9 +13,11 @@
 $english = array(
     'last_added' => 'Last added',
     'rubric' => 'Rubric',
+    'rubric:name' => 'Rubric name',
     'rubric:select' => 'Select rubric',
     'rubric:removed' => 'Rubric removed',
     'rubric:item:name' => 'Criteria name',
+    'rubric:item:remove' => 'Remove criteria',
     'rubric:item:level:description' => 'Level description',
     'rubric:score' => 'Score',
     'rubric:item:cantremove' => 'You can not remove the criteria',
@@ -29,6 +31,7 @@ $english = array(
     'rubric:item' => 'Criteria',
     'rubric:items' => 'Criteria',
     'category' => 'Category',
+    'task:rubric:select:required' => 'You must select a Rubric. <br>(If there are no rubrics, you must add one first)',
 );
 
 add_translation('en', $english);

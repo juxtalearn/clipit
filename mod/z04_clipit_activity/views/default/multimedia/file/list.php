@@ -127,7 +127,8 @@ if(!empty($files)) {
                         <?php echo formatFileSize($file->size);?>
                     </small>
                 </div>
-                <?php if($vars['task_id']):
+                <?php
+                if($vars['task_id']):
                     if(array_pop(ClipitFile::get_read_status($file->id, array($user_id)))): ?>
                         <div class="pull-right margin-right-5 margin-top-5">
                             <i class="fa fa-eye blue" style="font-size: 16px;"></i>

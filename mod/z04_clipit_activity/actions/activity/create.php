@@ -40,7 +40,6 @@ foreach($tasks as $task){
             'task_type' => $task['type'],
             'start' => date_create_from_format('d/m/y H:i', $task['start'])->getTimestamp(),
             'end' => date_create_from_format('d/m/y H:i', $task['end'])->getTimestamp(),
-            'rubric_item_array' => array_filter($task['rubric']),
             'quiz' => $task['type'] == ClipitTask::TYPE_QUIZ_TAKE ? $quiz_id : 0
         ));
 
@@ -77,6 +76,9 @@ foreach($tasks as $task){
     if($task['feedback']){
         $feedback = $task['feedback-form'];
         if($feedback['title'] && $feedback['type'] && $feedback['start'] && $feedback['end'] ){
+            if($feedback['rubric']){
+                $rubric_id = ClipitRubric::create_clone($feedback['rubric']);
+            }
             $feedback_task_id = ClipitTask::create(array(
                 'name' => $feedback['title'],
                 'description' => $feedback['description'],
@@ -84,7 +86,7 @@ foreach($tasks as $task){
                 'start' => date_create_from_format('d/m/y H:i', $feedback['start'])->getTimestamp(),
                 'end' => date_create_from_format('d/m/y H:i', $feedback['end'])->getTimestamp(),
                 'parent_task' => $task_id,
-                'rubric_item_array' => array_filter($feedback['rubric'])
+                'rubric' => $rubric_id
             ));
             ClipitActivity::add_tasks($activity_id, array($feedback_task_id));
         }

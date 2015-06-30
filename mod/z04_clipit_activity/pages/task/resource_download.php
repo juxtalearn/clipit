@@ -23,54 +23,5 @@ if($user->role == ClipitUser::ROLE_TEACHER){
         $body = elgg_view('output/empty', array('value' => elgg_echo('users:none')));
     }
 } elseif($user->role == ClipitUser::ROLE_STUDENT) {
-    $body = "";
-    $href = "clipit_activity/{$activity->id}/resources";
-
-    $videos = ClipitTask::get_videos($task->id);
-    if ($videos) {
-        $body .= elgg_view("page/components/title_block", array(
-            'title' => elgg_echo("videos"),
-        ));
-        $params = array(
-            'entity' => $activity,
-            'create' => false,
-            'entities' => $videos,
-            'href' => $href,
-            'task_id' => $task->id,
-            'task_type' => $task->task_type
-        );
-        $body .= elgg_view('multimedia/video/list', $params);
-    }
-
-    $files = ClipitTask::get_files($task->id);
-    if ($files) {
-        $body .= elgg_view("page/components/title_block", array(
-            'title' => elgg_echo("files"),
-        ));
-        $params = array(
-            'entity' => $activity,
-            'create' => false,
-            'options' => false,
-            'files' => $files,
-            'href' => $href,
-            'task_id' => $task->id
-        );
-        $body .= elgg_view('multimedia/file/list', $params);
-    }
-
-    $storyboards = ClipitTask::get_storyboards($task->id);
-    if ($storyboards) {
-        $body .= elgg_view("page/components/title_block", array(
-            'title' => elgg_echo("storyboards"),
-        ));
-        $params = array(
-            'entity' => $activity,
-            'create' => false,
-            'entities' => $storyboards,
-            'href' => $href,
-            'task_id' => $task->id,
-            'task_type' => $task->task_type
-        );
-        $body .= elgg_view('multimedia/storyboard/list', $params);
-    }
+    $body = clipit_task_resource_view($task, 'all', ClipitUser::ROLE_STUDENT);
 }

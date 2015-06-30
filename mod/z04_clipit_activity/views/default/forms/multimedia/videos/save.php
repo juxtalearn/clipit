@@ -207,7 +207,7 @@ echo elgg_view("input/hidden", array(
     </div>
 
     <div class="row">
-        <div class="col-md-<?php echo get_config('fixed_performance_rating')?'12':'7'?>">
+        <div class="col-md-12">
             <?php if(!empty($tt_tags)):?>
                 <div class="form-group">
                     <label><?php echo elgg_echo("tags");?></label>

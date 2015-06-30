@@ -15,6 +15,8 @@ $by_target_id = (int)get_input("by_target");
 
 if($id){
     $rating = array_pop(ClipitRating::get_by_id(array($id)));
+    $object_entity = ClipitSite::lookup($rating->target);
+    $entity = array_pop($object_entity['subtype']::get_by_id(array($rating->target)));
     $group_id = (int)get_input("group_id");
     if($group_id){
         $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
@@ -22,7 +24,7 @@ if($id){
                     <span class="label label-blue"><i class="fa fa-users"></i> '.$group->name.'</span>
                  </div>';
     }
-    $body .= elgg_view('performance_items/full', array('entity'  => $rating));
+    $body .= elgg_view('publications/admin/rating', array('rating'  => $rating, 'entity' => $entity));
     $user = array_pop(ClipitUser::get_by_id(array($rating->owner_id)));
     echo elgg_view("page/components/modal",
         array(

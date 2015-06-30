@@ -456,6 +456,7 @@ clipit.task.admin.quiz.onShowTab = function(e){
             },
             success: function (output) {
                 $.each(output, function (i, data) {
+                    container.eq(i).find('.loading').remove();
                     if(data.not_finished) {
                         container.eq(i).find(".msg-not-finished").text(data.not_finished);
                     } else {

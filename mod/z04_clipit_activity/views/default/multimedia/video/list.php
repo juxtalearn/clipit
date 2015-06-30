@@ -64,10 +64,7 @@ if($unlink){
     foreach($videos as $video):
         $tags = ClipitVideo::get_tags($video->id);
         $description = trim(elgg_strip_tags($video->description));
-        // Description truncate max length 280
-        if(strlen($description)>280){
-            $description = substr($description, 0, 280)."...";
-        }
+        $description = elgg_get_excerpt($description, 150);
         $published = false;
         $unlinked = false;
         if($unlink && in_array(ClipitVideo::get_group($video->id), $user_groups)){
@@ -162,7 +159,7 @@ if($unlink){
                         'text'  => $video->name));
                     ?>
                 </h4>
-                <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $tags)); ?>
+                <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $tags, 'limit' => 3)); ?>
                 <p class="hidden-xs">
                     <?php echo $description;?>
                 </p>

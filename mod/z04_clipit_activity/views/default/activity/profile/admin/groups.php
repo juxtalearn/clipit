@@ -15,15 +15,9 @@ $activity = elgg_extract('activity', $vars);
 ?>
 <script>
     $(function(){
-        $(document).on("click", "#panel-expand-all",function(){
-            $(".expand").parent(".panel").find(".panel-collapse").collapse('show');
-            $(".group-info").click();
-        });
-        $(document).on("click", "#panel-collapse-all",function(){
-            $(".expand").parent(".panel").find(".panel-collapse").collapse('hide');
-        });
-        $(document).on("click", ".group-info",function(){
-            var content = $(this).parent(".panel").find(".group-content");
+        $(".panel.group").on("show.bs.collapse",function(){
+//        $(document).on("click", ".group-info",function(){
+            var content = $(this).find(".group-content");
             var gr_id = $(this).data("group");
             if(content.is(':empty')){
                 content.html('<i class="fa fa-spinner fa-spin fa-2x blue"></i>');
@@ -45,8 +39,8 @@ $activity = elgg_extract('activity', $vars);
             },
             success: function (output) {
                 $.each(output, function (group, data) {
-                    container.find('[data-group="'+group+'"] .progressbar-mini div').css('width', data + '%')
-                    container.find('[data-group="'+group+'"] .progress-count').text(data + '%');
+                    container.siblings('[data-group="'+group+'"]').find('.progressbar-mini div').css('width', data + '%')
+                    container.siblings('[data-group="'+group+'"]').find('.progress-count').text(data + '%');
                 });
             }
         });
@@ -58,34 +52,34 @@ $groups = ClipitGroup::get_by_id($groups, 0, 0, 'name');
 natural_sort_properties($groups, 'name');
 if($groups):
 ?>
-    <p>
+    <div class="clearfix"></div>
+    <div class="panel-group" id="gr_accordion">
+        <p>
         <span class="pull-right text-muted">
             <?php echo elgg_echo('activity:students');?>:
             <strong><?php echo count($activity->student_array);?></strong>,
             <?php echo elgg_echo('groups');?>:
             <strong><?php echo count($groups);?></strong><br>
         </span>
-        <?php echo elgg_view('output/url', array(
-            'title' => elgg_echo('expand:all'),
-            'text' => elgg_echo('expand:all'),
-            'href' => "javascript:;",
-            'id' => 'panel-expand-all',
-        ));
-        ?>
-        <span class="text-muted">|</span>
-        <?php echo elgg_view('output/url', array(
-            'title' => elgg_echo('collapse:all'),
-            'text' => elgg_echo('collapse:all'),
-            'href' => "javascript:;",
-            'id' => 'panel-collapse-all',
-        ));
-        ?>
-    </p>
-    <div class="clearfix"></div>
-    <div class="panel-group" id="gr_accordion">
+            <?php echo elgg_view('output/url', array(
+                'title' => elgg_echo('expand:all'),
+                'text' => elgg_echo('expand:all'),
+                'href' => "javascript:;",
+                'class' => 'panel-expand-all',
+            ));
+            ?>
+            <span class="text-muted">|</span>
+            <?php echo elgg_view('output/url', array(
+                'title' => elgg_echo('collapse:all'),
+                'text' => elgg_echo('collapse:all'),
+                'href' => "javascript:;",
+                'class' => 'panel-collapse-all',
+            ));
+            ?>
+        </p>
         <?php foreach($groups as $group):?>
-            <div class="panel panel-blue group">
-                <div class="panel-heading expand group-info" data-group="<?php echo $group->id;?>">
+            <div class="panel panel-blue group" data-group="<?php echo $group->id;?>">
+                <div class="panel-heading expand group-info">
                     <small class="pull-right">
                         <div class="progressbar-mini progressbar-blue inline-block">
                             <div data-value=""></div>

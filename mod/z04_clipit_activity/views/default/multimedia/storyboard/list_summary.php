@@ -143,6 +143,7 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
                         <?php echo $description;?>
                     </p>
                 </div>
+                <div class="clearfix"></div>
                 <small class="show" style="margin: 0">
                     <?php
                     echo elgg_view("publications/owner_summary", array(

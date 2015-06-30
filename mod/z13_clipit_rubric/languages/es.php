@@ -13,10 +13,12 @@
 $spanish = array(
     'last_added' => 'Último añadido',
     'rubric' => 'Rúbrica',
+    'rubric:name' => 'Nombre de la rúbrica',
     'rubric:select' => 'Seleccionar rúbrica',
     'rubric:removed' => 'Rúbrica eliminada',
     'rubric:score' => 'Puntuación',
     'rubric:item:name' => 'Nombre del criterio',
+    'rubric:item:remove' => 'Eliminar criterio',
     'rubric:item:level:description' => 'Descripción del nivel',
     'rubric:item:cantremove' => 'No se puede eliminar el criterio',
     'rubric:create' => 'Crear rúbrica',
@@ -30,6 +32,7 @@ $spanish = array(
     'rubric:items' => 'Criterios',
     'category' => 'Categoría',
     'performance_item:example' => 'Ejemplo',
+    'task:rubric:select:required' => 'Debes seleccionar una rúbrica de la lista. <br>(Si no hay rubricas debes crear una)',
 );
 
 add_translation('es', $spanish);

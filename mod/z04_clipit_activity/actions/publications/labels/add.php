@@ -14,18 +14,14 @@ $entity_id = get_input("entity-id");
 $labels = get_input("labels");
 $labels = explode(",", $labels);
 $object = ClipitSite::lookup($entity_id);
+
 if($object && !empty($labels)){
-    echo $object['subtype'];
     $total_labels = array();
     foreach($labels as $label){
         if(trim($label) != '') {
-            if ($label_exist = array_pop(ClipitLabel::get_from_search($label, true, true))) {
-                $total_labels[] = $label_exist->id;
-            } else {
-                $total_labels[] = ClipitLabel::create(array(
-                    'name' => $label,
-                ));
-            }
+            $total_labels[] = ClipitLabel::create(array(
+                'name' => $label,
+            ));
         } else {
             register_error(elgg_echo("labels:cantadd:empty"));
         }

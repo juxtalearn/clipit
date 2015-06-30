@@ -40,7 +40,20 @@ function clipit_tricky_topic_init() {
     elgg_extend_view('js/activity', 'js/tricky_topic');
     elgg_register_library('clipit:tricky_topic:functions', "{$plugin_dir}/lib/functions.php");
     elgg_load_library('clipit:tricky_topic:functions');
+
+    // hook: Publish a tricky topic
+    elgg_register_plugin_hook_handler("action", "publications/publish", "publish_site_tricky_topics");
 }
+
+function publish_site_tricky_topics($hook, $entity_type, $returnvalue, $params){
+    $entity_id = get_input('id');
+    $object = ClipitSite::lookup($entity_id);
+    if($object['subtype'] == 'ClipitTrickyTopic') {
+        ClipitSite::add_pub_tricky_topics(array($entity_id));
+        forward(REFERER);
+    }
+}
+
 
 /**
  * @param $page

@@ -31,6 +31,7 @@ if($entity->overall){
                     <li class="list-item-5">
                         <div data-toggle="popover"
                              data-trigger="hover"
+                             data-placement="bottom"
                              data-content="<?php echo $rubric_item->level_array[ ($rubric_rating->level) - 1];?>">
                             <strong class="pull-right blue">
                                 <?php echo $rubric_rating->score ? floor($rubric_rating->score * 100)/10 : '-';?>

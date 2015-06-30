@@ -71,15 +71,15 @@ elgg_load_js('jquery:chartjs');
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane margin-top-10 active" id="students" style="padding: 10px;">
           <?php
-          elgg_push_context('quizstudents');
-            $params = array(
-            'filter' => '',
-            'num_columns' => 1,
-            );
-            echo "<div class=\"learning_analytics_dashboard\">";
-            echo elgg_view_layout('la_widgets_quizresults', $params);
-            echo "</div>";
-            elgg_pop_context();
+              elgg_push_context('quizstudents');
+                $params = array(
+                'filter' => '',
+                'num_columns' => 1,
+                );
+                echo "<div class=\"learning_analytics_dashboard\">";
+                echo elgg_view_layout('la_widgets_quizresults', $params);
+                echo "</div>";
+                elgg_pop_context();
             ?>
             <ul>
             <?php
@@ -88,6 +88,7 @@ elgg_load_js('jquery:chartjs');
             ?>
                 <li class="list-item" data-entity="<?php echo $student->id;?>">
                     <div class="pull-right">
+                        <i class="fa fa-spinner fa-spin blue loading"></i>
                         <div class="margin-right-10 inline-block status text-muted">
                             <small class="msg-not-finished hidden-xs"></small>
                             <div class="counts " style="display: none;">
@@ -142,6 +143,7 @@ elgg_load_js('jquery:chartjs');
                 ?>
                 <li class="list-item" data-entity="<?php echo $group->id;?>">
                     <div class="pull-right">
+                        <i class="fa fa-spinner fa-spin blue loading"></i>
                         <div class="margin-right-10 inline-block status text-muted">
                             <small class="msg-not-finished hidden-xs"></small>
                             <div class="counts " style="display: none;">

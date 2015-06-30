@@ -51,7 +51,6 @@
             ));
             ?>
         </li>
-        <?php if(get_config("rubric_tool")):?>
         <li role="presentation" class="divider"></li>
         <li role="presentation">
             <?php echo elgg_view('output/url', array(
@@ -61,7 +60,6 @@
             ));
             ?>
         </li>
-        <?php endif;?>
     </ul>
 </li>
 <li class="separator">|</li>

@@ -16,7 +16,7 @@ $entity = elgg_extract("entity", $vars);
 $rating = elgg_extract("rating", $vars);
 $activity = elgg_extract("activity", $vars);
 $tags = $entity->tag_array;
-$rubrics = ClipitRubricItem::get_by_id($entity->rubric_item_array, 0, 0, 'time_created', false);
+$rubrics = get_rubric_items_from_resource($entity->id);
 $tricky_topic_view = elgg_view("tricky_topic/preview", array('activity' => $activity));
 if($rating){
     echo elgg_view("input/hidden", array(
@@ -74,7 +74,7 @@ $(function(){
     </li>
     <?php if($rubrics):?>
         <li role="presentation">
-            <a href="#rubrics" role="tab" data-toggle="tab"><?php echo elgg_echo('rubrics');?></a>
+            <a href="#rubrics" role="tab" data-toggle="tab"><?php echo elgg_echo('rubric');?></a>
         </li>
     <?php endif;?>
 </ul>

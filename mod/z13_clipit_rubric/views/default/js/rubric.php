@@ -23,14 +23,12 @@ clipit.rubric.init = function() {
     $(document).on('click', '.rubric-unselect', clipit.rubric.unselect_item);
     // Click item for rating
     $(document).on('click', '.rubrics-rating .rubric-item', clipit.rubric.set_rating);
-    // Select rubric by owner from drop-down
-    $(document).on('change', '.rubric-owner', clipit.rubric.get_by_owner);
 };
 elgg.register_hook_handler('init', 'system', clipit.rubric.init);
 
 clipit.rubric.add = function(){
     var $list = $('.rubrics'),
-        element = $list.find('.rubric:last'),
+        element = $list.find('.rubric:last:visible'),
         clone = element.clone().hide(),
         count = $list.find('.rubric').length;
     clone.appendTo($list);
@@ -50,17 +48,39 @@ clipit.rubric.remove = function(){
             $list.hide();
             $list.find('.rubric-remove').val('1');
         } else {
-            $list.remove();
+            var elements = $list.find('*:visible').hide(),
+                buttons = $('#add-rubric, input[type=submit]');
+            $list.find('*:visible').not('.undo-item').hide();
+            buttons.prop('disabled', true).addClass('disabled');
+            var timer = setTimeout(function(){
+                $list.fadeOut('fast', function(){ $(this).remove(); })
+                buttons.prop('disabled', false).removeClass('disabled');
+            }, 1500);
+            $list.prepend(
+                $('<a style="margin: 0 15px;display: none;" class="undo-item bg-info text-muted show" href="javascript:;"><strong class="blue"><i class="fa fa-undo"></i> Deshacer</strong> - Eliminado</a>')
+                .click({'hiddenElements': elements, 'timer': timer, 'buttons': buttons}, clipit.rubric.undo
+                ).fadeIn('fast'));
         }
     } else {
-        elgg.register_error(elgg.echo('rubric:rubric:item:cantremove'));
+        elgg.register_error(elgg.echo('rubric:item:cantremove'));
     }
+};
+clipit.rubric.undo = function(event){
+    clearTimeout(event.data.timer);
+    event.data.buttons.prop('disabled', false).removeClass('disabled');
+    event.data.hiddenElements.fadeIn('fast');
+    // Remove undo link
+    event.target.remove();
 };
 clipit.rubric.add_item = function(){
     var element = $(this).closest('.row.list-item').find('.rubric-item:last'),
-        clone = element.clone().hide();
+        clone = element.clone().hide(),
+        that = $(this);
     element.after(clone);
     clone.fadeIn('fast').find('textarea').val('').focus();
+    $(this).closest('.row-horizon').animate({
+        scrollLeft: that.offset().left
+    }, 500);
     clipit.rubric.rating_calculate($(this).closest('.row.list-item'));
 };
 clipit.rubric.remove_item = function(){
@@ -132,7 +152,7 @@ clipit.rubric.unselect_item = function() {
 
 clipit.rubric.set_rating = function() {
     var container = $(this).closest('.rubric'),
-        value = parseInt($(this).find('.rubric-rating-value').text());
+        value = $(this).find('.rubric-rating-value').text();
     container.find('.rubric-item').removeClass('rubric-rated');
     $(this).addClass('rubric-rated');
     $('#'+ container.data('rubric')+ ".text-rating-value").text(value).hide().fadeIn('fast');
@@ -144,7 +164,7 @@ clipit.rubric.get_rating_avg = function($list) {
     var total_count = $list.find('.rubric').length,
         value = 0;
     $list.find('.rubric .rubric-rated').each(function(){
-        value += parseInt($(this).find('.rubric-rating-value').text());
+        value += parseFloat($(this).find('.rubric-rating-value').text());
     });
     $('#rubric-rating-avg').text((value/total_count).toFixed(1)).hide().fadeIn('fast');
 };

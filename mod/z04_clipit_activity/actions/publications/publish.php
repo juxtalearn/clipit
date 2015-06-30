@@ -78,14 +78,14 @@ if(count($entity)==0 || trim($title) == "" || trim($description) == ""){
     $entity_class::set_labels($new_entity_id, $total_labels);
     // Tags
     $entity_class::set_tags($new_entity_id, $tags);
-    /* Get rubric items from task */
-    $task_feedback_id = ClipitTask::get_child($task_id);
-    $task_feedback = array_pop(ClipitTask::get_by_id(array($task_feedback_id)));
-    if(count($task_feedback->rubric_item_array) > 0) {
-        $rubric_items = $task_feedback->rubric_item_array;
-    }
-    // Rubric items
-    $entity_class::add_rubric_items($new_entity_id, $rubric_items);
+//    /* Get rubric items from task */
+//    $task_feedback_id = ClipitTask::get_child($task_id);
+//    $task_feedback = array_pop(ClipitTask::get_by_id(array($task_feedback_id)));
+//    if(count($task_feedback->rubric_item_array) > 0) {
+//        $rubric_items = $task_feedback->rubric_item_array;
+//    }
+//    // Rubric items
+//    $entity_class::add_rubric_items($new_entity_id, $rubric_items);
 
     if($new_entity_id){
         switch($entity_class){

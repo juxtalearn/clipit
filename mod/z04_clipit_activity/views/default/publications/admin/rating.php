@@ -15,7 +15,16 @@ $entity = elgg_extract('entity', $vars);
 $entity_preview = elgg_extract('entity_preview', $vars);
 $href = elgg_extract('href', $vars);
 ?>
-<li class="row list-item">
+<style>
+.user-rating-view .image-background{
+    width: 100%;
+    height: 70px;
+    max-height: 100px;
+    background-size: cover;
+    background-position: 50% 30%;
+}
+</style>
+<li class="row list-item user-rating-view">
     <div class="col-md-8">
         <small class="pull-right">
             <?php echo elgg_view('output/friendlytime', array('time' => $rating->time_created));?>
@@ -53,38 +62,34 @@ $href = elgg_extract('href', $vars);
         <?php endforeach;?>
     </div>
     <div class="col-md-4">
-        <div class="multimedia-preview image-block">
-            <?php echo $entity_preview;?>
+        <strong class="show margin-bottom-10">
+            <?php echo elgg_view('output/url', array(
+                'href'  => "{$href}/view/".$entity->id,
+                'title' => $entity->name,
+                'class' => 'text-truncate',
+                'text'  => $entity->name));
+            ?>
+        </strong>
+        <a style="position: relative" href="<?php echo elgg_get_site_url()."{$href}/view/".$entity->id;?>">
+            <div class="image-background" style="background-image: url('<?php echo $entity->preview;?>');"></div>
+        </a>
+        <div class="margin-top-10">
+            <strong class="pull-right blue" style="font-size: 18px;line-height: 20px;"><?php echo round($entity->rubric_rating_average*10,1);?></strong>
+            <small><?php echo elgg_echo('publications:rating');?></small>
         </div>
-        <div class="content-block">
-            <strong>
-                <?php echo elgg_view('output/url', array(
-                    'href'  => "{$href}/view/".$entity->id,
-                    'title' => $entity->name,
-                    'text'  => $entity->name));
-                ?>
-            </strong>
-        </div>
-        <div class="block-total">
-            <hr class="margin-bottom-5 margin-top-10">
+        <div class="clearfix"></div>
+        <div>
+            <hr class="margin-bottom-5 margin-top-5">
             <div>
-                <ul>
+                <ul class="margin-top-10">
                     <?php
-                    $performance_ratings = $rating->performance_rating_array;
-                    foreach($performance_ratings as $performance_rating_id):
-                        $performance_rating = array_pop(ClipitPerformanceRating::get_by_id(array($performance_rating_id)));
-                        $performance_item = array_pop(ClipitPerformanceItem::get_by_id(array($performance_rating->performance_item)));
-                        ?>
-                        <li class="list-item-5">
-                            <div class="rating readonly pull-right" data-score="<?php echo $performance_rating->star_rating;?>" style="margin: 0 10px;">
-                                <?php echo star_rating_view($performance_rating->star_rating);?>
-                            </div>
-                            <?php echo elgg_view('output/url', array(
-                                'title' => $performance_item->name,
-                                'href'  => "explore/search?by=performance_item&id=".$performance_item->id,
-                                'text'  => $performance_item->name,
-                            ));
-                            ?>
+                    $rubric_ratings = ClipitRubricRating::get_by_id($rating->rubric_rating_array);
+                    foreach($rubric_ratings as $rubric_rating):
+                        $rubric_item = array_pop(ClipitRubricItem::get_by_id(array($rubric_rating->rubric_item)));
+                    ?>
+                        <li class="list-item-5 text-muted">
+                            <strong class="pull-right"><?php echo round($rubric_rating->score*10, 1);?></strong>
+                            <?php echo $rubric_item->name;?>
                         </li>
                     <?php endforeach;?>
                 </ul>

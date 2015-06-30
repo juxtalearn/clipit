@@ -12,11 +12,11 @@
  */
 echo elgg_view("input/hidden", array(
     'name' => 'page',
-    'value' => 'quizzes'
+    'value' => 'rubrics'
 ));
 ?>
 <div class="form-group">
-    <label class="text-muted"><?php echo elgg_echo('quiz:name');?></label>
+    <label class="text-muted"><?php echo elgg_echo('rubric:name');?></label>
     <?php echo elgg_view("input/text", array(
         'name' => 'search[name]',
         'class' => 'form-control',
@@ -25,11 +25,11 @@ echo elgg_view("input/hidden", array(
     ?>
 </div>
 <div class="form-group">
-    <label class="text-muted"><?php echo elgg_echo('tricky_topic');?></label>
+    <label class="text-muted"><?php echo elgg_echo('author');?></label>
     <?php echo elgg_view("input/text", array(
-        'name' => 'search[tricky_topic]',
+        'name' => 'search[author]',
         'class' => 'form-control',
-        'value' => get_search_input('tricky_topic')
+        'value' => get_search_input('author')
     ));
     ?>
 </div>

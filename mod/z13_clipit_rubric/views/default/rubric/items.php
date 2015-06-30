@@ -31,6 +31,9 @@ if($by_owner = get_input('by_owner')){
     fieldset {
         min-width: 0;
     }
+    .row-horizon>.col-md-3 {
+        width: 25%;
+    }
     .row-horizon > .rubric-item {
         padding: 0 5px;
     }
@@ -73,8 +76,8 @@ if($by_owner = get_input('by_owner')){
             data-rubric="<?php echo $rubric->id;?>"
             <?php echo in_array($rubric->id, $selected_array) ? 'style="display:none;"':''?>>
 
-            <div class="col-md-2">
-                <strong style="font-size: 13px;" class="show"><?php echo $rubric->name;?></strong>
+            <div class="col-md-3">
+                <p><strong style="font-size: 13px;" class="show"><?php echo $rubric->name;?></strong></p>
                 <?php if($rating):?>
                     <label for="rubric_rating[<?php echo $rubric->id;?>][level]"></label>
                     <?php echo elgg_view('input/text', array(
@@ -108,7 +111,7 @@ if($by_owner = get_input('by_owner')){
                     </a>
                 <?php endif;?>
             </div>
-            <div class="col-md-10 row-horizon row" style="overflow-x: auto;">
+            <div class="col-md-9 row-horizon row" style="overflow-x: auto;">
                 <?php
                 foreach($rubric->level_array as $i => $rubric_item):
                     if($rubric->id){
@@ -128,7 +131,7 @@ if($by_owner = get_input('by_owner')){
                             <strong class="blue rubric-rating-value pull-right"><?php echo $default_rating;?></strong>
                             <small><?php echo elgg_echo('rubric:score');?> </small>
                         </div>
-                        <div style="padding: 5px;font-size:13px;"><?php echo $rubric_item;?></div>
+                        <p style="padding: 5px;font-size:13px;"><?php echo $rubric_item;?></p>
                     </div>
                 <?php endforeach;?>
             </div>
@@ -150,7 +153,7 @@ if($by_owner = get_input('by_owner')){
                 <div style="border-bottom: 1px solid #bae6f6;padding-bottom: 5px;margin-bottom: 5px;">
                     <strong>
                         <a id="<?php echo $rubric->id;?>" class="pull-right text-rating-value">
-                            <?php echo $rating_selected ? ($rating_selected[$rubric->id]->score*100)/10 : '-';?>
+                            <?php echo $rating_selected ? round($rating_selected[$rubric->id]->score*100)/10 : '-';?>
                         </a>
                         <span style="font-size: 13px;" class="show text-truncate"><?php echo $rubric->name;?></span>
                     </strong>

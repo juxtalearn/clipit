@@ -240,7 +240,13 @@ function difficulty_bar($difficulty, $limit=6, $colors = false){
     $content .= "<span class='hide'>{$difficulty}</span>";
     return $content;
 }
-
+function rubric_rating_value($value = 0){
+    if($value == 0 || !$value){
+        return '-';
+    } else {
+        return floor($value*100)/10;
+    }
+}
 /**
  * Star rating view
  *
@@ -651,4 +657,24 @@ function get_education_levels($level = ''){
     } else {
         return $ed_levels;
     }
+}
+
+function get_rubric_items_from_resource($resource_id){
+    $object = ClipitSite::lookup($resource_id);
+    $task_id = $object['subtype']::get_task($resource_id);
+    $task_feedback = array_pop(ClipitTask::get_by_id(array( ClipitTask::get_child($task_id) )));
+    $rubric = array_pop(ClipitRubric::get_by_id(array($task_feedback->rubric)));
+    if(count($rubric->rubric_item_array) > 0) {
+        return ClipitRubricItem::get_by_id($rubric->rubric_item_array, 0, 0, 'time_created', false);
+    }
+    return false;
+}
+
+function get_task_properties_action($task){
+    return array(
+        'name' => $task['title'],
+        'description' => $task['description'],
+        'start' => date_create_from_format('d/m/y H:i', $task['start'])->getTimestamp(),
+        'end' => date_create_from_format('d/m/y H:i', $task['end'])->getTimestamp(),
+    );
 }

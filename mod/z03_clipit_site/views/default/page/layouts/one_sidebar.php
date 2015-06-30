@@ -48,7 +48,7 @@ if($vars['sub-title']){
                         {$nav}
                         {$vars['special_header_content']}
                         {$subtitle}
-                        ".elgg_view_title($vars['title'])."
+                        ".elgg_view_title($vars['title'], array('class' => 'text-truncate', 'title' => $vars['title']))."
                        </div>";
             }
         ?>

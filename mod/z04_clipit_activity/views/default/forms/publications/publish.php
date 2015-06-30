@@ -127,23 +127,6 @@ if($task_id = get_input('task_id')):
         <?php echo $vars['entity_preview'];?>
         <!-- Entity preview end -->
         <br>
-        <?php if(!get_config('fixed_performance_rating')):?>
-        <label><?php echo elgg_echo("performance_items");?></label>
-        <div>
-            <select name="performance_items[]" data-placeholder="<?php echo elgg_echo('click_add');?>" style="width:100%;" multiple class="chosen-select-items" tabindex="8">
-                <option value=""></option>
-                <?php foreach(ClipitPerformanceItem::get_from_category(null) as $category => $items):?>
-                    <optgroup label="<?php echo $category; ?>">
-                        <?php foreach($items as $item): ?>
-                            <option <?php echo in_array($item->id, $performance_items) ? "selected" : "";?> value="<?php echo $item->id; ?>">
-                                <?php echo $item->name; ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </optgroup>
-                <?php endforeach; ?>
-            </select>
-        </div>
-        <?php endif;?>
     </div>
 </div>
 <p class="text-right">
