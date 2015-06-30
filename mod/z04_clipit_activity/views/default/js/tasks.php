@@ -16,11 +16,16 @@ elgg.provide('clipit.task');
 elgg.provide('clipit.task.admin');
 clipit.task.init = function() {
     $(document).on("click", ".feedback-check", clipit.task.feedbackCheck);
+    $(document).on("click", "#add_task", clipit.task.addTask);
+    $(document).on("change", ".task-types", clipit.task.types);
+    // Rubric task
+    $(document).on("click", ".rubric-refresh", clipit.task.rubricRefreshList);
+    $(document).on("click", ".rubric-select", clipit.task.rubricSelect);
+    $(document).on("click", ".rubric-unselect", clipit.task.rubricUnselect);
+    // Quiz task
     $(document).on("click", ".quiz-refresh", clipit.task.quizRefreshList);
     $(document).on("click", ".quiz-select", clipit.task.quizSelect);
     $(document).on("click", ".quiz-unselect", clipit.task.quizUnselect);
-    $(document).on("click", "#add_task", clipit.task.addTask);
-    $(document).on("change", ".task-types", clipit.task.types);
 };
 elgg.register_hook_handler('init', 'system', clipit.task.init);
 clipit.task.admin.init = function() {
@@ -45,8 +50,9 @@ clipit.task.admin.fullCalendarSetDefault = function(){
 };
 
 clipit.task.feedbackCheck = function(){
-    var parent = $(this).closest(".task");
-    var feedback_content = parent.find(".feedback_form");
+    var parent = $(this).closest(".task"),
+        feedback_content = parent.find(".feedback_form"),
+        that = $(this);
     if($(this).find("input").is(':checked')){
         var task_end = parent.find(".input-task-end").val();
         if(task_end.length > 0){
@@ -57,10 +63,48 @@ clipit.task.feedbackCheck = function(){
             .show()
             .find(".input-task-title")
             .focus();
+        // Show rubric list
+        clipit.task.rubricList(parent);
     } else {
         feedback_content.hide();
     }
 };
+
+clipit.task.rubricList = function($task){
+    var container = $task.find(".rubric-select-list"),
+        input_prefix = $task.find("input[name='input_prefix']"),
+        input_prefix_val = '';
+    if(input_prefix.length > 0){
+        input_prefix_val = input_prefix.val()+'[feedback-form]';
+    }
+    container.html('<i class="fa fa-spinner fa-spin fa-2x blue"></i>').fadeIn('fast');
+    elgg.get('ajax/view/rubric/list', {
+        data: {
+            'select': true,
+            'input_prefix': input_prefix_val
+        },
+        success: function (data) {
+            container.html(data);
+        }
+    });
+};
+clipit.task.rubricRefreshList = function(){
+    clipit.task.rubricList($(this).closest('.task'));
+};
+clipit.task.rubricSelect = function(){
+    var task_container = $(this).closest('.rubric-select-list'),
+        rubric_id = $(this).closest('tr').attr('id');
+    task_container.find('table tr').not('#'+ rubric_id).fadeOut(300, function(){$(this).remove();});
+    task_container.find('.input-rubric-id').val(rubric_id);
+    // Change button to unselect type
+    $(this).removeClass('rubric-select')
+        .addClass('rubric-unselect btn-border-red')
+        .text(elgg.echo('btn:remove'));
+};
+clipit.task.rubricUnselect = function(){
+    clipit.task.rubricList($(this).closest('.task'));
+};
+
 clipit.task.types = function(){
     var task_types = ['video_upload', 'storyboard_upload'];
     var content = $(this).closest(".task");
@@ -75,7 +119,7 @@ clipit.task.types = function(){
     if(input_prefix.length > 0){
         input_prefix_val = input_prefix.val();
     }
-    $(this).closest(".task").find(".task-type-container").html('').hide();
+    content.find(".task-type-container").html('').hide();
     if($.inArray($(this).val(), task_types) != -1){
         switch($(this).val()){
             case "video_upload":
@@ -99,43 +143,6 @@ clipit.task.types = function(){
             input_prefix_val = '';
         }
         $attach_list.toggle();
-        /*content.find('ul.nav').show();
-        var attach_container = content.find('.attach-multimedia'),
-            $attach_tricky_topic = attach_container.find('.multimedia-tt');
-        content.find('a[href="#tricky-topic-multimedia"]').on('click', function () {
-            $attach_tricky_topic.attach_multimedia({
-                data: {
-                    'entity_id': tricky_topic_val,
-                    'input_prefix': input_prefix_val
-                }
-            }).loadBy("files");
-        });
-        */
-//        if(content.find('ul.nav').length == 0) {
-//            var tabs = $('<ul/>').addClass('nav nav-tabs margin-bottom-5 margin-top-10');
-//            tabObj = {
-//                'activity': 'Materiales de la actividad',
-//                'tricky-topic': 'Materiales del tema clave'
-//            };
-//            var i = 0;
-//            $.each(tabObj, function (id, value) {
-//                tabs.append($('<li/>').addClass(i == 0 ? 'active' : '').html(
-//                    $('<a/>')
-//                        .attr({'href': '#' + id, 'data-toggle': 'tab'})
-//                        .text(value)
-//                        .on('click', function () {
-//                            $(this).attach_multimedia({
-//                                data: {
-//                                    'entity_id': tricky_topic_val,
-//                                    'input_prefix': input_prefix_val
-//                                }
-//                            }).loadBy("files");
-//                        })
-//                ));
-//                i++;
-//            });
-//            attach_container.prepend(tabs);
-//        }
         $attach_list.attach_multimedia({
             data: {
                 'entity_id': entity_id,
@@ -148,6 +155,7 @@ clipit.task.types = function(){
     content.find(".quiz-module").hide();
     if($(this).val() == 'quiz_take'){
         content.find(".quiz-module").show();
+        content.find(".task-type-container").fadeIn('fast').html('<i class="fa fa-spinner fa-spin fa-2x blue"></i>');
         elgg.get('ajax/view/quiz/list', {
             data: {
                 'activity_create': true,
@@ -155,7 +163,7 @@ clipit.task.types = function(){
                 'input_prefix': input_prefix_val
             },
             success: function (data) {
-                that.closest(".task").find(".task-type-container").html(data).show();
+                content.find(".task-type-container").html(data).show();
             }
         });
     }
@@ -164,6 +172,7 @@ clipit.task.types = function(){
 clipit.task.quizRefreshList = function(){
     $(this).closest('.task').find('.task-types').trigger('change');
 };
+
 clipit.task.quizSelect = function(){
     var task_container = $(this).closest('.task-type-container'),
         quiz_id = $(this).closest('tr').attr('id');

@@ -43,11 +43,21 @@ $individual_tasks = array(
         <div class="content-block">
             <?php echo elgg_view("tasks/icon_task_type", array('type' => $task->task_type)); ?>
             <div class="pull-right hidden-xs">
-                <span class="margin-right-10">
-                    <?php echo elgg_view("tasks/icon_task_status", array('status' => $task->status)); ?>
-                </span>
-                <span class="blue-lighter">
+                <?php if($user->role == ClipitUser::ROLE_TEACHER):?>
+                    <?php echo elgg_view('output/url', array(
+                        'href' => "clipit_activity/$task->activity/admin?filter=tasks#edit-task-{$task->id}",
+                        'title' => elgg_echo('task:edit'),
+                        'text' => elgg_echo('task:edit'),
+                        'class' => 'btn btn-xs btn-border-blue btn-default margin-right-10',
+                        'target' => '_blank',
+                    ));
+                    ?>
+                <?php endif;?>
+                <span class="blue-lighter margin-right-10">
                     <?php echo elgg_view("tasks/icon_user_type", array('type' => $task->task_type)); ?>
+                </span>
+                <span>
+                    <?php echo elgg_view("tasks/icon_task_status", array('status' => $task->status)); ?>
                 </span>
             </div>
             <strong>
