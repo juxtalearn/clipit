@@ -10,6 +10,10 @@ class ClipitUpdate
 {
     const VERSIONS_FILE = "versions.json";
 
+    static function set_clipit_version($clipit_version){
+        return set_config("clipit_version", (string)$clipit_version);
+    }
+
     static function update_clipit(){
         // Pull latest version from GitHub
         chdir(elgg_get_root_path());

@@ -43,6 +43,15 @@ function clipit_admin_init() {
         false,
         true
     );
+    expose_function(
+        "clipit.admin.set_clipit_version",
+        "ClipitUpdate::set_clipit_version",
+        array("clipit_version" => array("type" => "string", "required" => true)),
+        "Sets forcefully the current ClipIt version",
+        "POST",
+        false,
+        true
+    );
     // UPDATE REST API CALLS
     expose_function(
         "clipit.admin.update_clipit",
