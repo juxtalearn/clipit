@@ -40,7 +40,7 @@ echo "<td width='300'>";
 echo "<strong>ClipIt Tag Branch:</strong>";
 echo "</td>";
 echo "<td>";
-echo "<input name='clipit_tag_branch' value=$clipit_tag_branch type='text' size='40'/>";
+echo "<input name='clipit_tag_branch' value='$clipit_tag_branch' type='text' size='40'/>";
 echo "</td>";
 echo "</tr>";
 
@@ -50,7 +50,7 @@ echo "<strong>Site time zone:</strong>";
 echo "<br>(see <u><a href='http://www.php.net/manual/en/timezones.php' target='_blank'>PHP Time Zones</a></u>)";
 echo "</td>";
 echo "<td>";
-echo "<input name='timezone' value=$timezone type='text' size='40'/>";
+echo "<input name='timezone' value='$timezone' type='text' size='40'/>";
 echo "</td>";
 echo "</tr>";
 
@@ -91,7 +91,7 @@ echo "<td>";
 echo "<strong>Global site URL:</strong>";
 echo "</td>";
 echo "<td>";
-echo "<input name='clipit_global_url' value=$clipit_global_url type='text' size='40'/>";
+echo "<input name='clipit_global_url' value='$clipit_global_url' type='text' size='40'/>";
 echo "</td>";
 echo "</tr>";
 
@@ -100,7 +100,7 @@ echo "<td>";
 echo "<strong>Administrator login:</strong>";
 echo "</td>";
 echo "<td>";
-echo "<input name='clipit_global_login' value=$clipit_global_login type='text' size='40'/><br>";
+echo "<input name='clipit_global_login' value='$clipit_global_login' type='text' size='40'/><br>";
 echo "</td>";
 echo "</tr>";
 
@@ -109,7 +109,7 @@ echo "<td>";
 echo "<strong>Administrator password:</strong>";
 echo "</td>";
 echo "<td>";
-echo "<input name='clipit_global_password' value=$clipit_global_password type='text' size='40'/>";
+echo "<input name='clipit_global_password' value='$clipit_global_password' type='text' size='40'/>";
 echo "</td>";
 echo "</tr>";
 
