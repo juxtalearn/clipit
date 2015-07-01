@@ -32,7 +32,7 @@ class ClipitLabel extends UBItem {
         if(!isset($prop_value_array["name"])){
             return null;
         }
-        $id_array = static::get_from_search($prop_value_array["name"], true);
+        $id_array = static::get_from_search($prop_value_array["name"], true, true);
         if(!empty($id_array)){
             return array_pop($id_array)->id;
         }
