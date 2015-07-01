@@ -42,13 +42,40 @@ function clipit_admin_init() {
         "GET",
         false,
         true
-        );
-
+    );
+    expose_function(
+        "clipit.admin.set_clipit_version",
+        "ClipitUpdate::set_clipit_version",
+        array("clipit_version" => array("type" => "string", "required" => true)),
+        "Sets forcefully the current ClipIt version",
+        "POST",
+        false,
+        true
+    );
+    // UPDATE REST API CALLS
     expose_function(
         "clipit.admin.update_clipit",
         "ClipitUpdate::update_clipit",
         null,
         "Update ClipIt to latest tag released",
+        "POST",
+        false,
+        true
+    );
+    expose_function(
+        "clipit.admin.run_update_scripts",
+        "ClipitUpdate::run_update_scripts",
+        null,
+        "",
+        "POST",
+        false,
+        true
+    );
+    expose_function(
+        "clipit.admin.flush_caches",
+        "ClipitUpdate::flush_caches",
+        null,
+        "",
         "POST",
         false,
         true
