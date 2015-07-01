@@ -49,18 +49,11 @@ foreach($questions as $question_id => $value){
             break;
     }
 
-    if($answered = ClipitQuizResult::get_from_question_user($question_id, $user_id)){
-        ClipitQuizResult::set_properties($answered->id, array(
-            'answer' => $value,
-        ));
-        ClipitQuizResult::evaluate_result($answered->id);
-    } else {
-        $result_id = ClipitQuizResult::create(array(
-            'quiz_question' => $question_id,
-            'answer' => $value,
-        ));
-        ClipitQuizResult::evaluate_result($result_id);
-    }
+    $result_id = ClipitQuizResult::create(array(
+        'quiz_question' => $question_id,
+        'answer' => $value,
+    ));
+    ClipitQuizResult::evaluate_result($result_id);
 }
 
 $task = array_pop(ClipitTask::get_by_id(array($task_id)));

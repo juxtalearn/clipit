@@ -31,11 +31,13 @@ clipit.quiz.saveQuestion = function(e){
     }
     var form = $element.closest("form").find($element.add("input:hidden"));
     var $container = $element.closest(".question");
-    $container.find(".loading-question").show()
+    $container.find(".loading-question").show();
     $container.find(".num-question").hide();
+    $element.prop('disabled', true);
     elgg.action('quiz/take',{
         data: form.serialize(),
         success: function(json) {
+            $element.prop('disabled', false);
             $container.find(".loading-question").hide()
             $container.find(".num-question").show();
             $("#count-result").text(json.output);
