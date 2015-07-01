@@ -27,16 +27,14 @@ function clipit_api_init() {
     loadFiles("$lib_path/clipit_rest_api/");
     // Load palettes
     loadFiles($lib_path."/example_types/");
-    elgg_register_action("useradd",
-        elgg_get_plugins_path().$plugin_name."/actions/useradd.php", 'admin');
+    elgg_register_action("useradd", elgg_get_plugins_path().$plugin_name."/actions/useradd.php", 'admin');
     // Publish Site to Global (if not done already)
     if(get_config("clipit_global_published") !== true) {
         set_config("clipit_global_published", true);
         ClipitSite::publish_to_global();
     }
     // Add aditional plugin hook handler for permissions_check
-    elgg_register_plugin_hook_handler('permissions_check',
-        'all', 'clipit_override_permissions',600);
+    elgg_register_plugin_hook_handler('permissions_check', 'all', 'clipit_override_permissions',600);
 }
 
 function clipit_override_permissions($hook, $type, $value, $params){
