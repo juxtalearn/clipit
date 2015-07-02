@@ -21,7 +21,8 @@ $group_id = $entity_class::get_group($entity->id);
 if(!in_array($group_id, ClipitUser::get_groups($user_id))){
     return false;
 }
-$clone_ids = $entity_class::get_clone_tree($entity->id);
+$clone_ids = array_flatten($entity_class::get_clone_tree($entity->id));
+
 foreach($clone_ids as $clone_id){
     switch($entity_class::get_scope($clone_id)){
         case 'site':
