@@ -542,7 +542,7 @@ class UBItem {
             }
             $item_array[(int)$id] = new static((int)$id);
         }
-        if(!empty($order_by)){
+        if(!empty($item_array) && !empty($order_by)){
             $args = array("order_by" => $order_by, "ascending" => $ascending);
             uasort($item_array, function($i1, $i2) use($args){
                 if (!$i1 && !$i2) {
@@ -570,8 +570,7 @@ class UBItem {
                 }
             });
         }
-        $limit = (int)$limit;
-        if($limit == 0){
+        if(empty($limit)){
             $limit = null;
         }
         return array_slice($item_array, (int)$offset, $limit, true);
