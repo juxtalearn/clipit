@@ -79,8 +79,28 @@ $rubrics = get_rubric_items_from_resource($entity->id);
                         <?php endif;?>
                     </div>
                     <h4><strong><?php echo elgg_echo("tags"); ?></strong></h4>
-                    <div class="tags">
-                        <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $tags, 'tags_rating' => ClipitTagRating::get_item_average_rating_for_target($entity->id))); ?>
+                    <?php
+                    $i = 1;
+                    $tag_average = ClipitTagRating::get_item_average_rating_for_target($entity->id);
+                    $tags = ClipitTag::get_by_id($tags);
+                    foreach($tags as $tag):
+                        if($i%2 != 0){
+                            $view_tags_1 .= elgg_view('tricky_topic/tags/rating', array(
+                                'tag' => $tag,
+                                'rating_tag' => $tag_average[$tag->id]
+                            ));
+                        } else {
+                            $view_tags_2 .= elgg_view('tricky_topic/tags/rating', array(
+                                'tag' => $tag,
+                                'rating_tag' => $tag_average[$tag->id]
+                            ));
+                        }
+                        $i++;
+                    endforeach;
+                    ?>
+                    <div class="row">
+                        <div class="col-md-6"><?php echo $view_tags_1;?></div>
+                        <div class="col-md-6"><?php echo $view_tags_2;?></div>
                     </div>
                     <h4><strong><?php echo elgg_echo("labels"); ?></strong></h4>
                     <div class="margin-bottom-10">
