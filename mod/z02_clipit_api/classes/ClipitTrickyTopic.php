@@ -24,6 +24,7 @@ class ClipitTrickyTopic extends UBItem {
     const REL_TRICKYTOPIC_FILE = "ClipitTrickyTopic-ClipitFile";
     const REL_TRICKYTOPIC_STORYBOARD = "ClipitTrickyTopic-ClipitStoryboard";
     const REL_TRICKYTOPIC_VIDEO = "ClipitTrickyTopic-ClipitVideo";
+    const REL_TRICKYTOPIC_DOCUMENT = "ClipitTrickyTopic-ClipitDocument";
     const REL_TRICKYTOPIC_EXAMPLE = "ClipitTrickyTopic-ClipitExample";
     const EDUCATION_LEVEL_PRIMARY = "primary";
     const EDUCATION_LEVEL_GCSE = "gcse";
@@ -36,6 +37,7 @@ class ClipitTrickyTopic extends UBItem {
     public $storyboard_array = array();
     public $video_array = array();
     public $file_array = array();
+    public $document_array = array();
     // Linked Student Problem Examples
     public $example_array = array();
 
@@ -52,6 +54,7 @@ class ClipitTrickyTopic extends UBItem {
         $this->file_array = (array)static::get_files((int)$this->id);
         $this->storyboard_array = (array)static::get_storyboards((int)$this->id);
         $this->video_array = (array)static::get_videos((int)$this->id);
+        $this->document_array = (array)static::get_documents((int)$this->id);
         $this->example_array = (array)static::get_examples((int)$this->id);
     }
 
@@ -77,6 +80,7 @@ class ClipitTrickyTopic extends UBItem {
         static::set_files((int)$this->id, (array)$this->file_array);
         static::set_storyboards((int)$this->id, (array)$this->storyboard_array);
         static::set_videos((int)$this->id, (array)$this->video_array);
+        static::set_documents((int)$this->id, (array)$this->document_array);
         static::set_examples((int)$this->id, (array)$this->example_array);
         return (int)$this->id;
     }
@@ -206,6 +210,23 @@ class ClipitTrickyTopic extends UBItem {
 
     static function get_files($id) {
         return UBCollection::get_items($id, static::REL_TRICKYTOPIC_FILE);
+    }
+
+    // TEACHER RESOURCES: DOCUMENTS
+    static function add_documents($id, $document_array) {
+        return UBCollection::add_items($id, $document_array, static::REL_TRICKYTOPIC_DOCUMENT);
+    }
+
+    static function set_documents($id, $document_array) {
+        return UBCollection::set_items($id, $document_array, static::REL_TRICKYTOPIC_DOCUMENT);
+    }
+
+    static function remove_documents($id, $document_array) {
+        return UBCollection::remove_items($id, $document_array, static::REL_TRICKYTOPIC_DOCUMENT);
+    }
+
+    static function get_documents($id) {
+        return UBCollection::get_items($id, static::REL_TRICKYTOPIC_DOCUMENT);
     }
 
     // Student Problem Examples

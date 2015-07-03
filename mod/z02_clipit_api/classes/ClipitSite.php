@@ -32,6 +32,7 @@ class ClipitSite extends UBSite {
     const REL_SITE_VIDEO = "ClipitSite-ClipitVideo";
     const REL_SITE_FILE = "ClipitSite-ClipitFile";
     const REL_SITE_STORYBOARD = "ClipitSite-ClipitStoryboard";
+    const REL_SITE_DOCUMENT = "ClipitSite-ClipitDocument";
     public $tricky_topic_array = array();
     public $video_array = array();
 //    public $file_array = array();

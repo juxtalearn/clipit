@@ -25,6 +25,7 @@ class ClipitExample extends UBItem {
     const REL_EXAMPLE_STORYBOARD = "ClipitExample-ClipitStoryboard";
     const REL_EXAMPLE_VIDEO = "ClipitExample-ClipitVideo";
     const REL_EXAMPLE_FILE = "ClipitExample-ClipitFile";
+    const REL_EXAMPLE_DOCUMENT = "ClipitExample-ClipitDocument";
     public $tricky_topic = 0;
     public $tag_array = array();
     public $example_type_array = array();
@@ -34,6 +35,7 @@ class ClipitExample extends UBItem {
     public $storyboard_array = array();
     public $video_array = array();
     public $file_array = array();
+    public $document_array = array();
 
     /**
      * Loads object parameters stored in Elgg
@@ -50,6 +52,7 @@ class ClipitExample extends UBItem {
         $this->video_array = static::get_videos($this->id);
         $this->storyboard_array = static::get_storyboards($this->id);
         $this->file_array = static::get_files($this->id);
+        $this->document_array = static::get_documents($this->id);
     }
 
     /**
@@ -71,6 +74,7 @@ class ClipitExample extends UBItem {
         static::set_videos($this->id, $this->video_array);
         static::set_storyboards($this->id, $this->storyboard_array);
         static::set_files($this->id, $this->file_array);
+        static::set_documents($this->id, $this->document_array);
         return $this->id;
     }
 
@@ -250,5 +254,22 @@ class ClipitExample extends UBItem {
     
     static function get_files($id) {
         return UBCollection::get_items($id, static::REL_EXAMPLE_FILE);
+    }
+
+    // Documents methods
+    static function add_documents($id, $document_array) {
+        return UBCollection::add_items($id, $document_array, static::REL_EXAMPLE_DOCUMENT);
+    }
+
+    static function set_documents($id, $document_array) {
+        return UBCollection::set_items($id, $document_array, static::REL_EXAMPLE_DOCUMENT);
+    }
+
+    static function remove_documents($id, $document_array) {
+        return UBCollection::remove_items($id, $document_array, static::REL_EXAMPLE_DOCUMENT);
+    }
+
+    static function get_documents($id) {
+        return UBCollection::get_items($id, static::REL_EXAMPLE_DOCUMENT);
     }
 }
