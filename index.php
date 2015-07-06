@@ -41,16 +41,18 @@ if (!function_exists('session_status')) {
                         <b>ClipIt Tag Branch</b>
                     </td>
                     <td>
-                        <tr>
-                            <td>
-                                <input size="30" type="radio" name="clipit_tag_branch" value="2.3" checked>Branch 2.3 (JuxtaLearn)
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input size="30" type="radio" name="clipit_tag_branch" value="2.4">Branch 2.4 (URJC)
-                            </td>
-                        </tr>
+                        <table>
+                            <tr>
+                                <td>
+                                    <input size="30" type="radio" name="clipit_tag_branch" value="2.3" checked>Branch 2.3 (JuxtaLearn)</input>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input size="30" type="radio" name="clipit_tag_branch" value="2.4">Branch 2.4 (URJC)</input>
+                                </td>
+                            </tr>
+                        </table>
                     </td>
                 </tr>
                 <tr>
