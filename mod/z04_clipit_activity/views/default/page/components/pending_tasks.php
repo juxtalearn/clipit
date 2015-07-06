@@ -15,7 +15,7 @@ $activity = elgg_extract('entity', $vars);
 <ul>
 <?php
 $task_found = false;
-foreach(ClipitTask::get_by_id($activity->task_array) as $task):
+foreach(ClipitTask::get_by_id($activity->task_array, 0, 0, 'end') as $task):
     $status = get_task_status($task);
     if($task->status == ClipitTask::STATUS_ACTIVE && $status['status'] === false):
         $task_found = true;
