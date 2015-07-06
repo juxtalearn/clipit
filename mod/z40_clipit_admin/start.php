@@ -32,7 +32,8 @@ function clipit_admin_init() {
     // Set tag branch and version (if unset - first run only)
     $clipit_tag_branch = get_config("clipit_tag_branch");
     if(empty($clipit_tag_branch)){
-        $versions = json_decode(elgg_get_plugins_path().$plugin_name."/updates/versions.json");
+        $versions_file = file_get_contents(elgg_get_plugins_path().$plugin_name."/updates/versions.json");
+        $versions = json_decode($versions_file);
         set_config("clipit_tag_branch", $versions->clipit_tag_branch);
         set_config("clipit_version", $versions->clipit_version);
     }
