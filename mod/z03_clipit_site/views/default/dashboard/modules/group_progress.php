@@ -31,14 +31,16 @@ $(function(){
         $group_object = ClipitSite::lookup($group_id);
     ?>
             <div>
-                <?php echo elgg_view('output/url', array(
-                    'href' => "clipit_activity/{$activity->id}/group/{$group_id}",
-                    'class' => 'pull-right margin-left-5',
-                    'text' => $group_object['name'],
-                    'title' => $group_object['name'],
-                    'is_trusted' => true,
-                ));
-                ?>
+                <?php if($group_id):?>
+                    <?php echo elgg_view('output/url', array(
+                        'href' => "clipit_activity/{$activity->id}/group/{$group_id}",
+                        'class' => 'pull-right margin-left-5',
+                        'text' => $group_object['name'],
+                        'title' => $group_object['name'],
+                        'is_trusted' => true,
+                    ));
+                    ?>
+                <?php endif;?>
                 <?php echo elgg_view('output/url', array(
                     'href' => "clipit_activity/{$activity->id}",
                     'class' => 'activity-point',
