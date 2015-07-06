@@ -29,16 +29,19 @@ clipit.quiz.saveQuestion = function(e){
     if($element.attr("type") == 'checkbox'){
         var $element = $(".quiz input[type=checkbox]");
     }
-    var form = $element.closest("form").find($element.add("input:hidden"));
+    var form = $element.closest("form");
+    var form_data = form.find($element.add("input:hidden")).serialize();
     var $container = $element.closest(".question");
     $container.find(".loading-question").show();
     $container.find(".num-question").hide();
+    form.find('.finish-quiz').prop('disabled', true);
     $element.prop('disabled', true);
     elgg.action('quiz/take',{
-        data: form.serialize(),
+        data: form_data,
         success: function(json) {
+            form.find('.finish-quiz').prop('disabled', false);
             $element.prop('disabled', false);
-            $container.find(".loading-question").hide()
+            $container.find(".loading-question").hide();
             $container.find(".num-question").show();
             $("#count-result").text(json.output);
             // if finished
@@ -64,19 +67,6 @@ clipit.quiz.finishConfirmation = function(e){
         }
         that.closest('form').submit();
     }
-//    var confirmOptions = {
-//        title: $("#questions-result").text(),
-//        buttons: {
-//            ok: {
-//                label: elgg.echo("input:ok")
-//            }
-//        },
-//        message: elgg.echo("quiz:result:send"),
-//        callback: function(result) {
-//            that.closest('form').submit();
-//        }
-//    };
-//    bootbox.alert(confirmOptions);
 };
 clipit.quiz.create = function(options){
     var defaults = {};
