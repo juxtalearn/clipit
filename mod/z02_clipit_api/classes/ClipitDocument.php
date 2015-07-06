@@ -14,6 +14,7 @@
 
 /**
  * A Storyboard object linking to a binary file to use with external authoring component.
+ * @todo: rest api calls
  */
 class ClipitDocument extends ClipitResource {
     /**
