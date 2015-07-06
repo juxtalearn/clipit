@@ -33,9 +33,20 @@ if (!function_exists('session_status')) {
         ?>
         <h1>ClipIt Install Script</h1>
         <h2>Please fill in the form below:</h2>
-        <h3>(typical values filled in)</h3>
+        <h3>(typical values pre-filled)</h3>
         <form action="index.php" method="post" id="clipit_params">
             <table>
+                <tr>
+                    <td>
+                        <b>ClipIt Tag Branch</b>
+                    </td>
+                    <td>
+                        <input size="30" type="radio" name="clipit_tag_branch" value="2.3" checked>Branch 2.3 (JuxtaLearn)
+                    </td>
+                    <td>
+                        <input size="30" type="radio" name="clipit_tag_branch" value="2.4">Branch 2.4 (URJC)
+                    </td>
+                </tr>
                 <tr>
                     <td>
                         <b>MySQL Host</b>
@@ -90,6 +101,7 @@ if (!function_exists('session_status')) {
     if ($_SESSION["status"] == "install") {
     unset($_SESSION["status"]);
     $git_url = "https://github.com/juxtalearn/clipit.git";
+    $clipit_tag_branch = $_SESSION["clipit_tag_branch"];
     $mysql_host = $_SESSION["mysql_host"];
     $mysql_schema = $_SESSION["mysql_schema"];
     $mysql_user = $_SESSION["mysql_user"];
@@ -109,7 +121,7 @@ if (!function_exists('session_status')) {
     exec("git init");
     exec("git remote add origin $git_url");
     exec("git fetch --tags");
-    exec("git checkout `git for-each-ref --sort=committerdate --format='%(refname:short)' refs/tags | tail -1`");
+    exec("git checkout `git for-each-ref --sort=committerdate --format='%(refname:short)' refs/tags | grep $clipit_tag_branch | tail -1`");
     exec("git submodule init");
     exec("git submodule update");
     exec("mkdir .git/logs");
