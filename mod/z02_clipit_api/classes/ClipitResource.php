@@ -23,7 +23,7 @@ abstract class ClipitResource extends UBItem {
     const SUBTYPE = "ClipitResource";
     const REL_RESOURCE_TAG = "ClipitResource-ClipitTag";
     const REL_RESOURCE_LABEL = "ClipitResource-ClipitLabel";
-    const REL_RESOURCE_RUBRIC = "ClipitResource-ClipitRubricItem";
+    const REL_RESOURCE_PERFORMANCE = "ClipitResource-ClipitPerformanceItem";
     const REL_RESOURCE_USER = "ClipitResource-ClipitUser";
     // Resource Container relationships
     const REL_SITE_RESOURCE = "";
@@ -41,12 +41,13 @@ abstract class ClipitResource extends UBItem {
     const SCOPE_TASK = "task";
     // Tagging
     public $tag_array = array();
+    public $performance_item_array = array();
     public $label_array = array();
     public $read_array = array();
     // Rating averages
     public $overall_rating_average = 0.0;
     public $tag_rating_average = 0.0;
-    public $rubric_rating_average = 0.0;
+    public $performance_rating_average = 0.0;
 
     /**
      * Loads object parameters stored in Elgg
@@ -57,12 +58,12 @@ abstract class ClipitResource extends UBItem {
     {
         parent::copy_from_elgg($elgg_entity);
         $this->tag_array = (array)static::get_tags($this->id);
+        $this->performance_item_array = (array)static::get_performance_items($this->id);
         $this->label_array = (array)static::get_labels($this->id);
         $this->read_array = (array)static::get_read_array($this->id);
         $this->overall_rating_average = (float)$elgg_entity->get("overall_rating_average");
         $this->tag_rating_average = (float)$elgg_entity->get("tag_rating_average");
-        $this->rubric_rating_average = (float)$elgg_entity->get("rubric_rating_average");
-
+        $this->performance_rating_average = (float)$elgg_entity->get("performance_rating_average");
     }
 
     /**
@@ -73,10 +74,9 @@ abstract class ClipitResource extends UBItem {
     protected function copy_to_elgg($elgg_entity)
     {
         parent::copy_to_elgg($elgg_entity);
-        //$elgg_entity->set("read_array", (array)$this->read_array);
         $elgg_entity->set("overall_rating_average", (float)$this->overall_rating_average);
         $elgg_entity->set("tag_rating_average", (float)$this->tag_rating_average);
-        $elgg_entity->set("rubric_rating_average", (float)$this->rubric_rating_average);
+        $elgg_entity->set("performance_rating_average", (float)$this->performance_rating_average);
     }
 
     /**
@@ -88,6 +88,7 @@ abstract class ClipitResource extends UBItem {
     {
         parent::save($double_save);
         static::set_tags($this->id, (array)$this->tag_array);
+        static::set_performance_items($this->id, (array)$this->performance_item_array);
         static::set_labels($this->id, (array)$this->label_array);
         static::set_read_array($this->id, $this->read_array);
         return $this->id;
@@ -144,7 +145,7 @@ abstract class ClipitResource extends UBItem {
     {
         $prop_value_array["overall_rating_average"] = (float)ClipitRating::get_average_rating_for_target($id);
         $prop_value_array["tag_rating_average"] = (float)ClipitTagRating::get_average_rating_for_target($id);
-        $prop_value_array["rubric_rating_average"] = (float)ClipitRubricRating::get_average_rating_for_target($id);
+        $prop_value_array["performance_rating_average"] = (float)ClipitPerformanceRating::get_average_rating_for_target($id);
         return static::set_properties($id, $prop_value_array);
     }
 
@@ -176,6 +177,19 @@ abstract class ClipitResource extends UBItem {
         return UBCollection::get_items($id, static::REL_RESOURCE_TAG);
     }
 
+    static function add_performance_items($id, $performance_item_array) {
+        return UBCollection::add_items($id, $performance_item_array, static::REL_RESOURCE_PERFORMANCE);
+    }
+    static function set_performance_items($id, $performance_item_array) {
+        return UBCollection::set_items($id, $performance_item_array, static::REL_RESOURCE_PERFORMANCE);
+    }
+    static function remove_performance_items($id, $performance_item_array) {
+        return UBCollection::remove_items($id, $performance_item_array, static::REL_RESOURCE_PERFORMANCE);
+    }
+    static function get_performance_items($id) {
+        return UBCollection::get_items($id, static::REL_RESOURCE_PERFORMANCE);
+    }
+
     static function get_by_labels($label_array)
     {
         $return_array = array();
@@ -204,25 +218,43 @@ abstract class ClipitResource extends UBItem {
         return UBCollection::get_items($id, static::REL_RESOURCE_LABEL);
     }
 
-    static function get_by_rubric_items($rubric_item_array)
+    /**
+     * Add Labels to a Resource.
+     *
+     * @param int $id Id of the Resource to add Labels to.
+     * @param array $label_array Array of Label Ids to add to the Resource.
+     *
+     * @return bool Returns true if added correctly, or false if error.
+     */
+    static function add_labels($id, $label_array)
     {
-        $return_array = array();
-        $all_items = static::get_all(0, 0, "", true, true); // Get all item ids, not objects
-        foreach ($all_items as $item_id) {
-            $item_rubric_items = static::get_rubric_items((int)$item_id);
-            foreach ($rubric_item_array as $search_tag) {
-                if (array_search($search_tag, $item_rubric_items) !== false) {
-                    $return_array[(int)$item_id] = new static((int)$item_id);
-                    break;
-                }
-            }
-        }
-        return $return_array;
+        return UBCollection::add_items($id, $label_array, static::REL_RESOURCE_LABEL);
     }
 
-    static function get_rubric_items($id)
+    /**
+     * Remove Labels from a Resource.
+     *
+     * @param int $id Id of the Resource to remove Labels from.
+     * @param array $label_array Array of Label Ids to remove from the Resource.
+     *
+     * @return bool Returns true if removed correctly, or false if error.
+     */
+    static function remove_labels($id, $label_array)
     {
-        return UBCollection::get_items($id, static::REL_RESOURCE_RUBRIC);
+        return UBCollection::remove_items($id, $label_array, static::REL_RESOURCE_LABEL);
+    }
+
+    /**
+     * Set Labels to a Resource.
+     *
+     * @param int $id Id of the Resource to set Labels to.
+     * @param array $label_array Array of Label Ids to set to the Resource.
+     *
+     * @return bool Returns true if added correctly, or false if error.
+     */
+    static function set_labels($id, $label_array)
+    {
+        return UBCollection::set_items($id, $label_array, static::REL_RESOURCE_LABEL);
     }
 
     static function get_scope($id)
@@ -357,41 +389,6 @@ abstract class ClipitResource extends UBItem {
         return UBCollection::remove_items($id, $tag_array, static::REL_RESOURCE_TAG);
     }
 
-    /**
-     * Add Labels to a Resource.
-     *
-     * @param int $id Id of the Resource to add Labels to.
-     * @param array $label_array Array of Label Ids to add to the Resource.
-     *
-     * @return bool Returns true if added correctly, or false if error.
-     */
-    static function add_labels($id, $label_array)
-    {
-        return UBCollection::add_items($id, $label_array, static::REL_RESOURCE_LABEL);
-    }
-
-    /**
-     * Remove Labels from a Resource.
-     *
-     * @param int $id Id of the Resource to remove Labels from.
-     * @param array $label_array Array of Label Ids to remove from the Resource.
-     *
-     * @return bool Returns true if removed correctly, or false if error.
-     */
-    static function remove_labels($id, $label_array)
-    {
-        return UBCollection::remove_items($id, $label_array, static::REL_RESOURCE_LABEL);
-    }
-
-    static function add_rubric_items($id, $rubric_item_array)
-    {
-        return UBCollection::add_items($id, $rubric_item_array, static::REL_RESOURCE_RUBRIC);
-    }
-
-    static function remove_rubric_items($id, $rubric_item_array)
-    {
-        return UBCollection::remove_items($id, $rubric_item_array, static::REL_RESOURCE_RUBRIC);
-    }
 
     /**
      * Get a list of Users who have Read a Resource, or optionally whether certain Users have read it
@@ -467,21 +464,4 @@ abstract class ClipitResource extends UBItem {
         return UBCollection::set_items($id, $tag_array, static::REL_RESOURCE_TAG);
     }
 
-    /**
-     * Set Labels to a Resource.
-     *
-     * @param int $id Id of the Resource to set Labels to.
-     * @param array $label_array Array of Label Ids to set to the Resource.
-     *
-     * @return bool Returns true if added correctly, or false if error.
-     */
-    static function set_labels($id, $label_array)
-    {
-        return UBCollection::set_items($id, $label_array, static::REL_RESOURCE_LABEL);
-    }
-
-    static function set_rubric_items($id, $rubric_item_array)
-    {
-        return UBCollection::set_items($id, $rubric_item_array, static::REL_RESOURCE_RUBRIC);
-    }
 }

@@ -21,6 +21,7 @@ class ClipitStoryboard extends ClipitResource {
      */
     const SUBTYPE = "ClipitStoryboard";
     const REL_RESOURCE_TAG = "ClipitStoryboard-ClipitTag";
+    const REL_RESOURCE_PERFORMANCE = "ClipitStoryboard-ClipitPerformanceItem";
     const REL_RESOURCE_LABEL = "ClipitStoryboard-ClipitLabel";
     const REL_RESOURCE_USER = "ClipitStoryboard-ClipitUser";
     const REL_EXAMPLE_RESOURCE = ClipitExample::REL_EXAMPLE_STORYBOARD;
