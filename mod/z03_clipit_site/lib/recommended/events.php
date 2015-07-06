@@ -220,11 +220,12 @@ function view_recommended_event($event, $view_type = 'full'){
             $group_id = ClipitVideo::get_group($relationship->guid_two);
             $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
             $entity = array_pop(ClipitVideo::get_by_id(array($relationship->guid_two)));
-            $href = "clipit_activity/{$activity->id}/publications";
+            $href = "clipit_activity/{$activity->id}/publications/view/{$entity->id}";
+            $href = "clipit_activity/{$activity->id}/publications/view/{$entity->id}";
             $params = array(
                 'title' => elgg_echo ('video:uploaded'), //Added new video to group',
                 'icon' => 'fa-video-camera',
-                'author' => $group->id,
+                'author' => $entity->owner_id,
                 'body' => elgg_view("recommended/events/video", array('entity' => $entity, 'href' => $href, 'rating' => false))
             );
             break;
