@@ -12,8 +12,8 @@
  */
 
 $user_id = elgg_get_logged_in_user_guid();
+$limit = 3;
 $recommended_events = elgg_extract('events', $vars);
-
 ?>
 <div class="margin-bar"></div>
 <ul class="events">
