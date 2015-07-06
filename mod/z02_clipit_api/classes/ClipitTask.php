@@ -243,11 +243,17 @@ class ClipitTask extends UBItem {
                     if ($storyboard_group === $user_group) {
                         return false;
                     }
+                    if (array_search((int)$storyboard_id, $rating_targets) === false) {
+                        return false;
+                    }
+                    return true;
                 }
                 foreach ($parent_task->storyboard_array as $storyboard_id) {
                     if (array_search((int)$storyboard_id, $rating_targets) === false) {
                         $storyboard_group = (int)ClipitStoryboard::get_group((int)$storyboard_id);
                         $user_group = (int)ClipitGroup::get_from_user_activity($entity_id, $task->activity);
+//                        var_dump($storyboard_group);
+//                        var_dump($user_group);
                         if ($storyboard_group !== $user_group) {
                             // at least one of the targets was not rated
                             return false;
