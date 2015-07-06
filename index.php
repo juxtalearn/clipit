@@ -37,7 +37,7 @@ if (!function_exists('session_status')) {
         <form action="index.php" method="post" id="clipit_params">
             <table>
                 <tr>
-                    <td>
+                    <td valign="top">
                         <b>ClipIt Tag Branch</b>
                     </td>
                     <td>
