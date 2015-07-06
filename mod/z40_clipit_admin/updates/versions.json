@@ -1,6 +1,6 @@
 {
   "clipit_tag_branch": "2.3",
-  "clipit_version": "2.3.22",
+  "clipit_version": "2.3.23",
   "update_scripts": {
     "2.2.0": null,
     "2.2.1": "update_2.2.1.php",
@@ -31,6 +31,7 @@
     "2.3.19": null,
     "2.3.20": null,
     "2.3.21": null,
-    "2.3.22": "update_2.3.22.php"
+    "2.3.22": "update_2.3.22.php",
+    "2.3.23": null
   }
 }
