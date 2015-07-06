@@ -28,8 +28,10 @@ function clipit_admin_init() {
         elgg_get_plugins_path().$plugin_name."/actions/import_export/import.php");
     elgg_register_action("import_export/export",
         elgg_get_plugins_path().$plugin_name."/actions/import_export/export.php");
+
     // Set tag branch and version (if unset - first run only)
-    if(empty(get_config("clipit_tag_branch"))){
+    $clipit_tag_branch = get_config("clipit_tag_branch");
+    if(empty($clipit_tag_branch)){
         $versions = json_decode(elgg_get_plugins_path().$plugin_name."/updates/versions.json");
         set_config("clipit_tag_branch", $versions->clipit_tag_branch);
         set_config("clipit_version", $versions->clipit_version);
