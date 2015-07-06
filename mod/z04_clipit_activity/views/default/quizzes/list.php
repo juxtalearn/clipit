@@ -316,11 +316,13 @@ endforeach;
         <div class="margin-top-20">
             <div class="text-center">
                 <?php if(!$finished && !$finished_task):?>
-                    <?php echo elgg_view('input/submit',
+                    <?php echo elgg_view('modal/quiz/confirmation');?>
+                    <?php echo elgg_view('input/button',
                         array(
                             'value' => elgg_echo('save'),
-                            'id' => 'finish-quiz',
-                            'class' => "btn btn-primary pull-right"
+                            'data-target' => '#save-quiz',
+                            'data-toggle' => 'modal',
+                            'class' => "btn btn-primary pull-right finish-quiz"
                         ));
                     ?>
                 <?php endif;?>
