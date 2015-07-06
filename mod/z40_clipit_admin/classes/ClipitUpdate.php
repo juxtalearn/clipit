@@ -21,13 +21,7 @@ class ClipitUpdate
         exec("git stash drop");
         exec("git fetch --tags");
         $clipit_tag_branch = get_config("clipit_tag_branch");
-        if(!empty($clipit_tag_branch)){
-            $latest_tag =
-                exec("git for-each-ref --sort=committerdate --format='%(refname:short)' refs/tags | grep $clipit_tag_branch | tail -1");
-        } else{
-            $latest_tag =
-                exec("git for-each-ref --sort=committerdate --format='%(refname:short)' refs/tags | tail -1");
-        }
+        $latest_tag = exec("git for-each-ref --sort=committerdate --format='%(refname:short)' refs/tags | grep $clipit_tag_branch | tail -1");
         exec("git checkout $latest_tag");
         exec("git submodule init");
         exec("git submodule update");
@@ -37,7 +31,7 @@ class ClipitUpdate
     static function run_update_scripts(){
         $versions_obj = json_decode(
             file_get_contents(elgg_get_plugins_path()."z40_clipit_admin/updates/".static::VERSIONS_FILE));
-        $new_version = (string)$versions_obj->version;
+        $new_version = (string)$versions_obj->clipit_version;
         $update_scripts = (array)$versions_obj->update_scripts;
         $old_version = get_config("clipit_version");
 
