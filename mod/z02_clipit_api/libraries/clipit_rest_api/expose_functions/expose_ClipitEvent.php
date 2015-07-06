@@ -45,4 +45,10 @@ function expose_event_functions() {
             "limit" => array("type" => "int", "required" => true)
         ), "Get events which may interest a User.", 'GET', false, true
     );
+    expose_function(
+        $api_suffix . "get_all_events", $class_suffix . "get_all_events", array(
+            "offset" => array("type" => "int", "required" => true),
+            "limit" => array("type" => "int", "required" => true)
+        ), "Get all events (merge of activity, group and task events).", 'GET', false, true
+    );
 }
