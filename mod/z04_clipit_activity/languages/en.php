@@ -283,8 +283,8 @@ $english = array(
     // Tags
     'tag' => 'Stumbling Block',
     'tags' => 'Stumbling Blocks',
-    'tags:add' => 'Add tags',
-    'tags:assign' => 'Assign tags',
+    'tags:add' => 'Add stumbling blocks',
+    'tags:assign' => 'Assign stumbling blocks',
     'tags:none' => 'Not Stumbling Blocks',
     'tags:recommended' => 'Related Stumbling Blocks',
     'tags:commas:separated' => 'Separated by commas',
