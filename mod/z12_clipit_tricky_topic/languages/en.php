@@ -38,7 +38,7 @@ $english = array(
     'example:edit' => 'Edit example',
     'example:cantremove' => 'Can not remove example',
     'example:removed' => 'Example removed',
-    'examples:related:stumbling_block' => 'Examples related to Stumbling blocks',
+    'examples:related:stumbling_block' => 'Examples related to stumbling blocks (click to open in new tab)',
 
     'tags:select' => 'Select Stumbling Blocks',
     'tags:related' => 'Related Stumbling Blocks',
