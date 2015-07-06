@@ -104,7 +104,7 @@ $english = array(
 
     'group' => 'Group',
     'my_group:progress' => 'My group progress',
-    'my_group:none' => 'You are not in a group from activity.',
+    'my_group:none' => 'You are not in any group.',
     'group:free_slot' => '<strong><u>%s</u></strong> free slot',
     'group:assign_sb' => 'Assign Stumbling Blocks',
     'group:graph' => 'Group graph',
