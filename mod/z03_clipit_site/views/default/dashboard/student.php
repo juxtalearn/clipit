@@ -19,7 +19,10 @@ elgg_load_css("nvd3:css");
     <?php echo elgg_view('dashboard/module', array(
         'name'      => 'events',
         'title'     => elgg_echo('event:timeline'),
-        'content'   => elgg_view('dashboard/modules/events'),
+        'content'   => elgg_view('dashboard/modules/events',
+            array(
+                'events' => ClipitEvent::get_recommended_events(elgg_get_logged_in_user_guid(), 0, 3)
+            )),
     ));
     ?>
 </div>

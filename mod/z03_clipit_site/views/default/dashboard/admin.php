@@ -22,7 +22,7 @@ elgg_load_css("nvd3:css");
         'title'     => elgg_echo('event:timeline'),
         'content'   => elgg_view('dashboard/modules/events',
             array(
-                'entity' => $user
+                'events' => ClipitEvent::get_all_events(0, 3)
             )
         ),
     ));
