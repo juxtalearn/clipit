@@ -11,9 +11,13 @@
  * @package         ClipIt
  */
 $entity = elgg_extract('entity', $vars);
-$user = elgg_extract('user', $vars);
+$user_owner = elgg_extract('user', $vars);
+$user_loggedin = elgg_extract('user_loggedin', $vars);
 $is_linked = elgg_extract('is_linked', $vars);
+
 $object = ClipitSite::lookup($entity->id);
+$cache = elgg_get_metadata_cache();
+$is_owner = ($user->id == elgg_get_logged_in_user_guid() || $cache->load(elgg_get_logged_in_user_guid(), 'role') == ClipitUser::ROLE_ADMIN) ? true:false;
 
 $options_list = array();
 $owner_options = false;
@@ -24,7 +28,7 @@ $edit = true;
 $remove = true;
 switch($object['subtype']){
     case 'ClipitTrickyTopic':
-        if($user->id == elgg_get_logged_in_user_guid()){
+        if($is_owner){
             $owner_options = true;
             $href = array(
                 'edit' => 'tricky_topics/edit/'.$entity->id,
@@ -34,10 +38,11 @@ switch($object['subtype']){
                 $locked = true;
                 $href['remove'] = false;
             }
+            $href['publish'] = false;
             if(!in_array($entity->id, ClipitSite::get_pub_tricky_topics())) {
-                $href['publish'] = elgg_add_action_tokens_to_url(elgg_normalize_url('action/publications/publish/?id=' . $entity->id), true);
+                $href['publish'] = elgg_add_action_tokens_to_url(elgg_normalize_url('action/publications/publish?id=' . $entity->id), true);
+                $locked = false;
             } else {
-                $href['publish'] = true;
                 $locked = true;
             }
         }
@@ -46,7 +51,7 @@ switch($object['subtype']){
     case 'ClipitTag':
         $duplicate = false;
         $edit = false;
-        if($user->id == elgg_get_logged_in_user_guid()){
+        if($is_owner){
             $owner_options = true;
             $href = array(
                 'remove' => elgg_add_action_tokens_to_url(elgg_normalize_url('action/stumbling_blocks/remove?id='.$entity->id), true),
@@ -57,7 +62,7 @@ switch($object['subtype']){
         break;
     case 'ClipitExample':
         $duplicate = false;
-        if($user->id == elgg_get_logged_in_user_guid()){
+        if($is_owner){
             $owner_options = true;
             $href = array(
                 'edit' => 'tricky_topics/examples/edit/'.$entity->id,
@@ -68,7 +73,7 @@ switch($object['subtype']){
         }
         break;
     case 'ClipitQuiz':
-        if($user->id == elgg_get_logged_in_user_guid()){
+        if($is_owner){
             $owner_options = true;
             $href = array(
                 'edit' => 'quizzes/edit/'.$entity->id,
@@ -79,7 +84,7 @@ switch($object['subtype']){
         break;
     case 'ClipitRubric':
         $owner_options = true;
-        if($user->id == elgg_get_logged_in_user_guid()){
+        if($is_owner){
             $owner_options = true;
             $href = array(
                 'edit' => 'rubrics/edit/'.$entity->id,
@@ -93,7 +98,7 @@ switch($object['subtype']){
         break;
     case 'ClipitActivity':
         $duplicate = false;
-        if($user->id == elgg_get_logged_in_user_guid()){
+        if($is_owner){
             $owner_options = true;
             $href = array(
                 'edit' => 'clipit_activity/'.$entity->id.'/admin',
@@ -130,7 +135,7 @@ if($owner_options){
     }
     if($href['publish']) {
         $options_list[] = array(
-            'attr' => array('href' => $href['publish'] === true ? false : $href['publish']),
+            'attr' => array('href' => $href['publish'] ),
             'text' => elgg_echo('send:to_site'),
             'icon' => 'globe',
             'item_class' => $item_class
