@@ -24,23 +24,22 @@ class UBUser extends UBItem {
      * @const string Elgg entity SUBTYPE for this class
      */
     const SUBTYPE = "";
-    /**
-     * @var string $login Login name used to authenticate, must be unique
-     * @var string $password Login password (md5 of password + password_hash)
-     * @var string $hash Random string to encode password
-     * @var string $email User email
-     * @var string $role User role (default: "user")
-     * @var string $language User interface language
-     * @var int $last_login Timestamp from last login
-     * @var int $avatar_file Id of file containing Avatar
-     */
+
+    // @var string $login Login name used to authenticate, must be unique
     public $login = "";
+    // @var string $password Login password (md5 of password + password_hash)
     public $password = "";
+    // @var string $email User email
     public $email = "";
+    // @var string $role User role (default: "user")
     public $role = "user";
+    // @var string $language User interface language
     public $language = "";
+    // @var int $last_login Timestamp from last login
     public $last_login = 0;
+    // @var int $avatar_file Id of file containing Avatar
     public $avatar_file = 0;
+    // @var string $hash Random string to encode password
     private $hash = "";
 
     /**

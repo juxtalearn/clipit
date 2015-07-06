@@ -144,6 +144,9 @@ class UBSite {
     }
 
     static function lookup($id) {
+        if(empty($id)){
+            return null;
+        }
         try {
             $elgg_object = new ElggObject((int)$id);
             $object['type'] = (string)$elgg_object->type;

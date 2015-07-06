@@ -24,8 +24,10 @@ class ClipitPost extends UBMessage {
     const SUBTYPE = "ClipitPost";
     const REL_MESSAGE_DESTINATION = "ClipitPost-destination";
     const REL_MESSAGE_FILE = "ClipitPost-ClipitFile";
+    const REL_MESSAGE_USER = "ClipitPost-ClipitUser";
     const REL_POST_STORYBOARD = "ClipitPost-ClipitStoryboard";
     const REL_POST_VIDEO = "ClipitPost-ClipitVideo";
+
     public $topic_id = 0;
     public $storyboard_array = array();
     public $video_array = array();

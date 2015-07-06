@@ -272,12 +272,15 @@ class ClipitTask extends UBItem {
             case static::TYPE_QUIZ_TAKE:
                 return ClipitQuiz::has_finished_quiz($task->quiz, $entity_id);
             case static::TYPE_RESOURCE_DOWNLOAD:
+                $latest_timestamp = 0;
                 $task_files = $task->file_array;
                 foreach($task_files as $file_id){
                     $read_status = ClipitFile::get_read_status($file_id, array($entity_id));
                     if((bool)$read_status[$entity_id] !== true){
                         return false;
                     }
+                    $timestamp = UBCollection::get_timestamp($file_id, $entity_id, ClipitFile::REL_FILE_USER);
+                    $latest_timestamp = ($timestamp > $latest_timestamp ? $timestamp : $latest_timestamp);
                 }
                 $task_videos = $task->video_array;
                 foreach($task_videos as $video_id){
@@ -285,6 +288,8 @@ class ClipitTask extends UBItem {
                     if((bool)$read_status[$entity_id] !== true){
                         return false;
                     }
+                    $timestamp = UBCollection::get_timestamp($video_id, $entity_id, ClipitVideo::REL_RESOURCE_USER);
+                    $latest_timestamp = ($timestamp > $latest_timestamp ? $timestamp : $latest_timestamp);
                 }
                 $task_storyboards = $task->storyboard_array;
                 foreach($task_storyboards as $storyboard_id){
@@ -292,8 +297,10 @@ class ClipitTask extends UBItem {
                     if((bool)$read_status[$entity_id] !== true){
                         return false;
                     }
+                    $timestamp = UBCollection::get_timestamp($storyboard_id, $entity_id, ClipitStoryboard::REL_RESOURCE_USER);
+                    $latest_timestamp = ($timestamp > $latest_timestamp ? $timestamp : $latest_timestamp);
                 }
-                return true;
+                return $latest_timestamp;
             case static::TYPE_STORYBOARD_UPLOAD:
                 foreach($task->storyboard_array as $storyboard_id) {
                     if((int)ClipitStoryboard::get_group($storyboard_id) === (int)$entity_id) {

@@ -74,15 +74,28 @@ class ElggRelationship extends ElggData implements
 	 * @throws IOException
 	 */
 	public function save() {
+		global $CONFIG;
+		$guid_one = (int)$this->guid_one;
+		$relationship = sanitise_string($this->relationship);
+		$guid_two = (int)$this->guid_two;
+		$timestamp = $this->time_created;
 		if ($this->id > 0) {
-			delete_relationship($this->id);
+			$result = update_data(
+				"UPDATE ".$CONFIG->dbprefix."entity_relationships
+				SET guid_one = $guid_one,
+					relationship = '$relationship',
+					guid_two = $guid_two,
+					time_created = $timestamp
+				WHERE id = $this->id");
+			if(empty($result)){
+				return null;
+			}
+		} else{
+			$this->id = add_entity_relationship($this->guid_one, $this->relationship, $this->guid_two);
+			if (!$this->id) {
+				throw new IOException(elgg_echo('IOException:UnableToSaveNew', array(get_class())));
+			}
 		}
-
-		$this->id = add_entity_relationship($this->guid_one, $this->relationship, $this->guid_two);
-		if (!$this->id) {
-			throw new IOException(elgg_echo('IOException:UnableToSaveNew', array(get_class())));
-		}
-
 		return $this->id;
 	}
 
