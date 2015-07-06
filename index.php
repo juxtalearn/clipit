@@ -42,7 +42,7 @@ if (!function_exists('session_status')) {
                     </td>
                     <td>
                         <input size="30" type="radio" name="clipit_tag_branch" value="2.3" checked>Branch 2.3 (JuxtaLearn)
-                    </td>
+                    </td><br>
                     <td>
                         <input size="30" type="radio" name="clipit_tag_branch" value="2.4">Branch 2.4 (URJC)
                     </td>
