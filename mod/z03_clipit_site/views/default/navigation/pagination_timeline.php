@@ -6,8 +6,6 @@
  * Time: 12:03
  * To change this template use File | Settings | File Templates.
  */
-$user_id = elgg_get_logged_in_user_guid();
-$user = array_pop(ClipitUser::get_by_id(array($user_id)));
 $offset = (int)get_input('offset');
 $view_type = get_input('view');
 $type = get_input('type');
@@ -18,12 +16,14 @@ switch($type){
         $recommended_events = ClipitEvent::get_by_object(array($id), $offset, 5);
         break;
     default:
-        $recommended_events = ClipitEvent::get_recommended_events($user_id, $offset, 5);
+        $user_id = elgg_get_logged_in_user_guid();
+        $user = array_pop(ClipitUser::get_by_id(array($user_id)));
+        if($user->role == ClipitUser::ROLE_ADMIN){
+            $recommended_events = ClipitEvent::get_all_events($offset, 5);
+        } else {
+            $recommended_events = ClipitEvent::get_recommended_events($user_id, $offset, 5);
+        }
         break;
-}
-if($user->role == 'teacher'){
-    $activities = ClipitUser::get_activities($user_id);
-    $recommended_events = ClipitEvent::get_by_object($activities, $offset, 5);
 }
 ?>
 <ul class="events">

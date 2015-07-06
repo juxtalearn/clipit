@@ -13,19 +13,7 @@
 
 $user_id = elgg_get_logged_in_user_guid();
 $limit = 3;
-
-//DEBUG
-$activities = ClipitUser::get_activities($user_id);
-$groups = ClipitUser::get_groups($user_id);
-$tasks = array();
-foreach($activities as $activity_id){
-    $tasks = array_merge($tasks, ClipitActivity::get_tasks($activity_id));
-}
-$object_array = array_merge($groups, $activities, $tasks);
-
-$recommended_events = ClipitEvent::get_by_object($object_array, 0, $limit);
-
-$recommended_events = ClipitEvent::get_recommended_events($user_id, 0, $limit);
+$recommended_events = elgg_extract('events', $vars);
 ?>
 <div class="margin-bar"></div>
 <ul class="events">

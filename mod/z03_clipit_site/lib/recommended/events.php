@@ -214,6 +214,20 @@ function view_recommended_event($event, $view_type = 'full'){
                     )))
             );
             break;
+        case ClipitTask::REL_TASK_VIDEO:
+            $activity_id = ClipitVideo::get_activity($relationship->guid_two);
+            $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
+            $group_id = ClipitVideo::get_group($relationship->guid_two);
+            $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
+            $entity = array_pop(ClipitVideo::get_by_id(array($relationship->guid_two)));
+            $href = "clipit_activity/{$activity->id}/publications";
+            $params = array(
+                'title' => elgg_echo ('video:uploaded'), //Added new video to group',
+                'icon' => 'fa-video-camera',
+                'author' => $group->id,
+                'body' => elgg_view("recommended/events/video", array('entity' => $entity, 'href' => $href, 'rating' => false))
+            );
+            break;
     }
     // Output
     if($entity && $activity){
