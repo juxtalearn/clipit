@@ -29,7 +29,7 @@ class ClipitEvent extends UBEvent {
 
     static function get_all_events($offset = 0, $limit = 10){
         $all_groups = ClipitGroup::get_all(0, 0, "", true, true);
-        $all_activities = Clipitactivity::get_all(0, 0, "", true, true);
+        $all_activities = ClipitActivity::get_all(0, 0, "", true, true);
         $all_tasks = ClipitTask::get_all(0, 0, "", true, true);
         $all_objects = array_merge($all_groups, $all_activities, $all_tasks);
         return static::get_by_object($all_objects, $offset, $limit);
