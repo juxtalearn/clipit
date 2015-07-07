@@ -139,17 +139,8 @@ function clipit_final_init(){
         elgg_register_js("clipit_theme_bootstrap", "{$plugin_url}/bootstrap/dist/js/bootstrap.js");
         elgg_load_js("clipit_theme_bootstrap");
     }
-    elgg_register_plugin_hook_handler("action", "publications/publish", "publish_site_tricky_topics");
 }
 
-function publish_site_tricky_topics($hook, $entity_type, $returnvalue, $params){
-    $entity_id = get_input('id');
-    $object = ClipitSite::lookup($entity_id);
-    if($object['subtype'] == 'ClipitTrickyTopic') {
-        ClipitSite::add_pub_tricky_topics(array($entity_id));
-        forward(REFERER);
-    }
-}
 
 function home_user_account_page_handler($page_elements, $handler){
 
