@@ -34,7 +34,7 @@ function publications_get_page_content_list($task_type, $tasks, $href){
             $view = 'multimedia/video/list';
             $entities = $task->video_array;
             $none_msg = elgg_echo('videos:none');
-            if($user->role == ClipitUser::ROLE_TEACHER){
+            if(hasTeacherAccess($user->role)){
                 $send_to_site = true;
             }
             // Search items

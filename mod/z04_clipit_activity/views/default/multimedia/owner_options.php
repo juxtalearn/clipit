@@ -19,7 +19,7 @@ $member_group = false;
 if(in_array($entity::get_group($entity->id), ClipitUser::get_groups($user_id))){
     $member_group = true;
 }
-if($entity->owner_id == $user_id || $user->role == ClipitUser::ROLE_TEACHER || ($member_group && $user->role == ClipitUser::ROLE_STUDENT)){
+if($entity->owner_id == $user_id || hasTeacherAccess($user->role) || ($member_group && $user->role == ClipitUser::ROLE_STUDENT)){
     $options = array(
         'entity' => $entity,
         'edit' => array(

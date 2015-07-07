@@ -15,8 +15,8 @@ elgg_register_event_handler('init', 'system', 'clipit_tricky_topic_init');
 function clipit_tricky_topic_init() {
     $plugin_dir = elgg_get_plugins_path() . "z12_clipit_tricky_topic";
     $user = array_pop(ClipitUser::get_by_id(array(elgg_get_logged_in_user_guid())));
-    if($user->role == ClipitUser::ROLE_TEACHER || $user->role == ClipitUser::ROLE_ADMIN) {
-        elgg_extend_view("navigation/menu/top", "navigation/menu/authoring", 250);
+    if(hasTeacherAccess($user->role)) {
+        elgg_extend_view("navigation/menu/top", "navigation/menu/authoring", 100);
 
         // Register "/tricky_topics" page handler
         elgg_register_page_handler('tricky_topics', 'tt_page_handler');
@@ -40,7 +40,20 @@ function clipit_tricky_topic_init() {
     elgg_extend_view('js/activity', 'js/tricky_topic');
     elgg_register_library('clipit:tricky_topic:functions', "{$plugin_dir}/lib/functions.php");
     elgg_load_library('clipit:tricky_topic:functions');
+
+    // hook: Publish a tricky topic
+    elgg_register_plugin_hook_handler("action", "publications/publish", "publish_site_tricky_topics");
 }
+
+function publish_site_tricky_topics($hook, $entity_type, $returnvalue, $params){
+    $entity_id = get_input('id');
+    $object = ClipitSite::lookup($entity_id);
+    if($object['subtype'] == 'ClipitTrickyTopic') {
+        ClipitSite::add_pub_tricky_topics(array($entity_id));
+        forward(REFERER);
+    }
+}
+
 
 /**
  * @param $page

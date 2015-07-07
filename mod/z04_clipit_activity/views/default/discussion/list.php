@@ -40,7 +40,7 @@ foreach($messages as $message):
     $owner = array_pop(ClipitUser::get_by_id(array($message->owner_id)));
     // Owner options (edit/delete)
     $owner_options = "";
-    if($message->owner_id == elgg_get_logged_in_user_guid() || $user->role == ClipitUser::ROLE_TEACHER){
+    if($message->owner_id == elgg_get_logged_in_user_guid() || hasTeacherAccess($user->role)){
         $options = array(
             'entity' => $message,
             'edit' => array(

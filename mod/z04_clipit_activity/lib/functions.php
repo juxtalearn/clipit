@@ -652,3 +652,23 @@ function get_education_levels($level = ''){
         return $ed_levels;
     }
 }
+
+function get_task_properties_action($task){
+    return array(
+        'name' => $task['title'],
+        'description' => $task['description'],
+        'start' => date_create_from_format('d/m/Y H:i', $task['start'])->getTimestamp(),
+        'end' => date_create_from_format('d/m/Y H:i', $task['end'])->getTimestamp(),
+    );
+}
+
+function hasTeacherAccess($role){
+    if(!$role){
+        $user = array_pop(ClipitUser::get_by_id(array(elgg_get_logged_in_user_guid())));
+        $role = $user->role;
+    }
+    if($role == ClipitUser::ROLE_TEACHER || $role == ClipitUser::ROLE_ADMIN){
+        return true;
+    }
+    return false;
+}

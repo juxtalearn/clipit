@@ -13,15 +13,18 @@
 $user_id = elgg_get_logged_in_user_guid();
 $my_group = ClipitGroup::get_from_user_activity($user_id, $activity->id);
 $isTeacher = ($access == 'ACCESS_TEACHER' ? true: false);
+
 $group_id = get_input('group_id');
 $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
 if($activity->status == 'enroll' && !$isTeacher ){
     return false;
 }
+
 $canCreate = false;
 if(($my_group == $group_id && $activity->status == 'active') || $isTeacher){
     $canCreate = true;
 }
+
 if($group &&
     ((!$isTeacher && $my_group == $group_id) // I am group member
         ||
@@ -29,9 +32,11 @@ if($group &&
 ){
     $access_group = true;
 }
+
 if(!$access_group){
     return false;
 }
+
 elgg_push_breadcrumb($group->name, "clipit_activity/{$activity->id}/group/{$group->id}");
 // set group icon status from activity status
 $activity_status = $activity->status;

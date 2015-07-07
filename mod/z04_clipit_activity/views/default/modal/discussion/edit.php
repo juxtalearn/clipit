@@ -15,6 +15,6 @@ $user_id = elgg_get_logged_in_user_guid();
 $user = array_pop(ClipitUser::get_by_id(array($user_id)));
 $discussion = array_pop(ClipitPost::get_by_id(array($discussion_id)));
 
-if($discussion && $discussion->owner_id == $user_id || $user->role == ClipitUser::ROLE_TEACHER){
+if($discussion && $discussion->owner_id == $user_id || hasTeacherAccess($user->role)){
     echo elgg_view_form('discussion/edit', array('data-validate'=> "true" ), array('entity'  => $discussion));
 }

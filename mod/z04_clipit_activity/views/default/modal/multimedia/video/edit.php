@@ -21,7 +21,7 @@ if(in_array(ClipitVideo::get_group($video->id), ClipitUser::get_groups($user_id)
 }
 if($video &&
     $video->owner_id == $user_id ||
-    $user->role == ClipitUser::ROLE_TEACHER ||
+    hasTeacherAccess($user->role) ||
     ($member_group && $user->role == ClipitUser::ROLE_STUDENT)
 ){
     $body = elgg_view("page/components/modal",

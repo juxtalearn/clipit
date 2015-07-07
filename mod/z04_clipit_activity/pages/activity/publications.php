@@ -53,10 +53,15 @@ if($page[2] == 'view' && $page[3]){
             if(!$entity || !in_array($entity_id, $videos)){
                 return false;
             }
+            $send_to_site = false;
+            if(hasTeacherAccess($user->role)){
+                $send_to_site = true;
+            }
             $body = elgg_view("multimedia/video/body", array('entity'  => $entity));
             $content = elgg_view('publications/view', array(
                 'entity' => $entity,
                 'body' => $body,
+                'send_site' => $send_to_site,
                 'canEvaluate' => $canEvaluate,
                 'feedback_task' => $feedback_task,
                 'activity' => $activity,

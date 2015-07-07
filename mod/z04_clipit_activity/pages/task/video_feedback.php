@@ -11,7 +11,7 @@
  * @package         ClipIt
  */
 // Teacher view
-if($user->role == ClipitUser::ROLE_TEACHER){
+if(hasTeacherAccess($user->role)){
     $task_parent = array_pop(ClipitTask::get_by_id(array($task->parent_task)));
     $videos = ClipitVideo::get_by_id($task_parent->video_array);
     if($videos){

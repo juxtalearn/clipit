@@ -33,7 +33,7 @@ foreach($files as $file_id){
 
     // Owner options (edit/delete)
     $owner_options = "";
-    if(($file->owner_id == $user_id || $user->role == ClipitUser::ROLE_TEACHER) && $vars['options'] !== false){
+    if(($file->owner_id == $user_id || hasTeacherAccess($user->role)) && $vars['options'] !== false){
         $options = array(
             'entity' => $file,
             'edit' => array(

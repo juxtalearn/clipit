@@ -13,7 +13,7 @@
 $user = elgg_extract('user', $vars);
 
 $admin = array();
-if($user->role == ClipitUser::ROLE_TEACHER){
+if(hasTeacherAccess($user->role)){
     $admin = array(
         'class' => 'admin-owner',
         'icon' => '<i class="fa fa-user"></i> ',
