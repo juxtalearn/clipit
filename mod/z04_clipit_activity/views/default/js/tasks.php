@@ -18,10 +18,6 @@ clipit.task.init = function() {
     $(document).on("click", ".feedback-check", clipit.task.feedbackCheck);
     $(document).on("click", "#add_task", clipit.task.addTask);
     $(document).on("change", ".task-types", clipit.task.types);
-    // Rubric task
-    $(document).on("click", ".rubric-refresh", clipit.task.rubricRefreshList);
-    $(document).on("click", ".rubric-select", clipit.task.rubricSelect);
-    $(document).on("click", ".rubric-unselect", clipit.task.rubricUnselect);
     // Quiz task
     $(document).on("click", ".quiz-refresh", clipit.task.quizRefreshList);
     $(document).on("click", ".quiz-select", clipit.task.quizSelect);
@@ -63,46 +59,9 @@ clipit.task.feedbackCheck = function(){
             .show()
             .find(".input-task-title")
             .focus();
-        // Show rubric list
-        clipit.task.rubricList(parent);
     } else {
         feedback_content.hide();
     }
-};
-
-clipit.task.rubricList = function($task){
-    var container = $task.find(".rubric-select-list"),
-        input_prefix = $task.find("input[name='input_prefix']"),
-        input_prefix_val = '';
-    if(input_prefix.length > 0){
-        input_prefix_val = input_prefix.val()+'[feedback-form]';
-    }
-    container.html('<i class="fa fa-spinner fa-spin fa-2x blue"></i>').fadeIn('fast');
-    elgg.get('ajax/view/rubric/list', {
-        data: {
-            'select': true,
-            'input_prefix': input_prefix_val
-        },
-        success: function (data) {
-            container.html(data);
-        }
-    });
-};
-clipit.task.rubricRefreshList = function(){
-    clipit.task.rubricList($(this).closest('.task'));
-};
-clipit.task.rubricSelect = function(){
-    var task_container = $(this).closest('.rubric-select-list'),
-        rubric_id = $(this).closest('tr').attr('id');
-    task_container.find('table tr').not('#'+ rubric_id).fadeOut(300, function(){$(this).remove();});
-    task_container.find('.input-rubric-id').val(rubric_id);
-    // Change button to unselect type
-    $(this).removeClass('rubric-select')
-        .addClass('rubric-unselect btn-border-red')
-        .text(elgg.echo('btn:remove'));
-};
-clipit.task.rubricUnselect = function(){
-    clipit.task.rubricList($(this).closest('.task'));
 };
 
 clipit.task.types = function(){

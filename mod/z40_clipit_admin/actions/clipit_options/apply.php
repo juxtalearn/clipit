@@ -21,7 +21,6 @@ set_config("clipit_global_url", (string)get_input("clipit_global_url"));
 set_config("clipit_global_login", (string)get_input("clipit_global_login"));
 set_config("clipit_global_password", (string)get_input("clipit_global_password"));
 set_config("clipit_global_published", (bool)get_input("clipit_global_published"));
-set_config("rubric_tool", (bool)get_input("rubric_tool"));
 set_config("performance_palette", (bool)get_input("performance_palette"));
 set_config("example_types", (bool)get_input("example_types"));
 set_config("fixed_performance_rating", (bool)get_input("fixed_performance_rating"));

@@ -18,7 +18,6 @@ $clipit_global_url = (string)get_config("clipit_global_url");
 $clipit_global_login = (string)get_config("clipit_global_login");
 $clipit_global_password = (string)get_config("clipit_global_password");
 $clipit_global_published = (bool)get_config("clipit_global_published");
-$rubric_tool = (bool)get_config("rubric_tool");
 $performance_palette = (bool)get_config("performance_palette");
 $example_types = (bool)get_config("example_types");
 $fixed_performance_rating = (bool)get_config("fixed_performance_rating");
@@ -131,21 +130,6 @@ echo "</tr>";
 
 echo "<tr height='40'>";
 echo "<td>";
-echo "<strong>Enable rubric authoring tool?</strong> ";
-echo "</td>";
-echo "<td>";
-if($rubric_tool) {
-    echo "<input name='rubric_tool' value='0' type='radio'> NO ";
-    echo "<input name='rubric_tool' value='1' type='radio' checked> YES ";
-} else{
-    echo "<input name='rubric_tool' value='0' type='radio' checked> NO ";
-    echo "<input name='rubric_tool' value='1' type='radio'> YES ";
-}
-echo "</td>";
-echo "</tr>";
-
-echo "<tr height='40'>";
-echo "<td>";
 echo "<strong>Load performance items palette?</strong> ";
 echo "<br>(may duplicate existing items) ";
 echo "</td>";
@@ -188,7 +172,7 @@ echo "</tr>";
 
 echo "<tr height='40'>";
 echo "<td>";
-echo "<strong>Teachers select rubric items to use?</strong> ";
+echo "<strong>Teachers select performance items to use?</strong> ";
 echo "</td>";
 echo "<td>";
 if($fixed_performance_rating) {

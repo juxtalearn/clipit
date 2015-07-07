@@ -99,8 +99,6 @@ function clipit_activity_init() {
     elgg_register_ajax_view('multimedia/attach/videos');
     elgg_register_ajax_view('multimedia/attach/storyboards');
     elgg_register_ajax_view('multimedia/attach/files');
-    // Assessment rubric
-    elgg_register_ajax_view('modal/assessment_rubric/view');
     // Tricky Topic
     elgg_register_ajax_view('modal/tricky_topic/view');
     elgg_register_ajax_view('tricky_topic/list');
