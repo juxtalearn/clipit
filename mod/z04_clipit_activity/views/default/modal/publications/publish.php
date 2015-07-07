@@ -15,7 +15,7 @@ $user_id = elgg_get_logged_in_user_guid();
 $user = array_pop(ClipitUser::get_by_id(array($user_id)));
 $video = array_pop(ClipitVideo::get_by_id(array($id)));
 
-if($video && $video->owner_id == $user_id || $user->role == ClipitUser::ROLE_TEACHER){
+if($video && $video->owner_id == $user_id || hasTeacherAccess($user->role)){
     $activity_id = ClipitVideo::get_activity($video->id);
     $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
     $body = elgg_view("page/components/modal",

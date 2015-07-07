@@ -11,7 +11,7 @@
  * @package         ClipIt
  */
 // Teacher view
-if($user->role == ClipitUser::ROLE_TEACHER){
+if(hasTeacherAccess($user->role)){
     $task_parent = array_pop(ClipitTask::get_by_id(array($task->parent_task)));
     $storyboards = ClipitStoryboard::get_by_id($task_parent->storyboard_array);
     $body = elgg_view('tasks/admin/task_feedback', array(

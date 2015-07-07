@@ -21,7 +21,7 @@ if(in_array(ClipitFile::get_group($file->id), ClipitUser::get_groups($user_id)))
 }
 if($file &&
     $file->owner_id == $user_id ||
-    $user->role == ClipitUser::ROLE_TEACHER ||
+    hasTeacherAccess($user->role) ||
     ($member_group && $user->role == ClipitUser::ROLE_STUDENT)
 ){
     echo elgg_view_form('multimedia/files/edit', array('data-validate'=> "true" ), array('entity'  => $file));

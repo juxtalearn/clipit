@@ -47,7 +47,7 @@ if($page[2] == 'view' && $page[3]){
         $canCreate = true;
     }
     $attach_multimedia = false;
-    if($user->role == ClipitUser::ROLE_TEACHER){
+    if(hasTeacherAccess($user->role)){
         $attach_multimedia = true;
     }
     $content =  elgg_view('discussion/list',

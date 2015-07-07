@@ -13,7 +13,7 @@
 $quiz = $task->quiz;
 
 // Teacher view
-if($user->role == ClipitUser::ROLE_TEACHER){
+if(hasTeacherAccess($user->role)){
     $users = ClipitActivity::get_students($activity->id);
     if($users){
         $body = elgg_view('tasks/admin/quiz_take', array(

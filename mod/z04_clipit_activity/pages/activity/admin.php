@@ -29,9 +29,6 @@ switch($selected_tab){
     case 'groups':
         $content = elgg_view('activity/admin/groups/view', array('entity' => $activity));
         break;
-    case 'rubric':
-        $content = elgg_view('activity/admin/assessment_rubric/view', array('entity' => $activity));
-        break;
 }
 
 $params = array(

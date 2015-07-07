@@ -16,7 +16,7 @@ $super_title = elgg_extract('super_title', $vars);
 $user = array_pop(ClipitUser::get_by_id(array(elgg_get_logged_in_user_guid())));
 ?>
 <div class="task-info">
-    <?php if($user->role == ClipitUser::ROLE_TEACHER):?>
+    <?php if(hasTeacherAccess($user->role)):?>
         <?php echo elgg_view('output/url', array(
             'href' => "clipit_activity/$task->activity/admin?filter=tasks#edit-task-{$task->id}",
             'title' => elgg_echo('task:edit'),

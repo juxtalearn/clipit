@@ -73,7 +73,7 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
             <div class="col-md-11">
                 <?php
                 $owner_options = '';
-                if($storyboard->owner_id == $user_id || $user->role == ClipitUser::ROLE_TEACHER && $vars['actions']){
+                if($storyboard->owner_id == $user_id || hasTeacherAccess($user->role) && $vars['actions']){
                     $options = array(
                         'entity' => $storyboard,
                         'edit' => array(

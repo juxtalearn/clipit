@@ -43,7 +43,7 @@ $individual_tasks = array(
         <div class="content-block">
             <?php echo elgg_view("tasks/icon_task_type", array('type' => $task->task_type)); ?>
             <div class="pull-right hidden-xs">
-                <?php if($user->role == ClipitUser::ROLE_TEACHER):?>
+                <?php if(hasTeacherAccess($user->role)):?>
                     <?php echo elgg_view('output/url', array(
                         'href' => "clipit_activity/$task->activity/admin?filter=tasks#edit-task-{$task->id}",
                         'title' => elgg_echo('task:edit'),

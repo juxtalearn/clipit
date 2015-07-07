@@ -28,6 +28,9 @@ function clipit_quiz_init() {
     // Sidebar menu
     elgg_extend_view('authoring_tools/sidebar/menu', 'quiz/sidebar/menu', 200);
 
+    // Load Task javascript templates
+    elgg_extend_view('js/task_templates', 'js/task_templates/quizzes');
+
     // hook: action save. Quiz task type
     elgg_register_plugin_hook_handler("task:save", "task", "task_quiz_save");
 }

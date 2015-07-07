@@ -11,7 +11,7 @@
  * @package         ClipIt
  */
 // Teacher view
-if($user->role == ClipitUser::ROLE_TEACHER){
+if(hasTeacherAccess($user->role)){
     $storyboards = ClipitStoryboard::get_by_id($task->storyboard_array);
     $body = elgg_view('tasks/admin/task_upload', array(
         'entities'    => $storyboards,

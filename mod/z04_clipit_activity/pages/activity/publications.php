@@ -54,7 +54,7 @@ if($page[2] == 'view' && $page[3]){
                 return false;
             }
             $send_to_site = false;
-            if($user->role == ClipitUser::ROLE_TEACHER){
+            if(hasTeacherAccess($user->role)){
                 $send_to_site = true;
             }
             $body = elgg_view("multimedia/video/body", array('entity'  => $entity));

@@ -43,7 +43,7 @@ foreach($storyboards as $sb_id){
         ));
         // Remote modal, form content
         echo elgg_view("page/components/modal_remote", array('id'=> "edit-storyboard-{$storyboard->id}" ));
-        $select = '<input type="checkbox" '.(($storyboard->owner_id == $user_id || $user->role == ClipitUser::ROLE_TEACHER)?'':'disabled').'
+        $select = '<input type="checkbox" '.(($storyboard->owner_id == $user_id || hasTeacherAccess($user->role))?'':'disabled').'
                     name="check-file[]" value="' . $storyboard->id . '" class="select-simple">';
     }
 

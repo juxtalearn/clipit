@@ -662,10 +662,12 @@ function get_education_levels($level = ''){
 function get_rubric_items_from_resource($resource_id){
     $object = ClipitSite::lookup($resource_id);
     $task_id = $object['subtype']::get_task($resource_id);
-    $task_feedback = array_pop(ClipitTask::get_by_id(array( ClipitTask::get_child($task_id) )));
-    $rubric = array_pop(ClipitRubric::get_by_id(array($task_feedback->rubric)));
-    if(count($rubric->rubric_item_array) > 0) {
-        return ClipitRubricItem::get_by_id($rubric->rubric_item_array, 0, 0, 'time_created', false);
+    if($task_child_id = ClipitTask::get_child($task_id)) {
+        $task_feedback = array_pop(ClipitTask::get_by_id(array(ClipitTask::get_child($task_id))));
+        $rubric = array_pop(ClipitRubric::get_by_id(array($task_feedback->rubric)));
+        if (count($rubric->rubric_item_array) > 0) {
+            return ClipitRubricItem::get_by_id($rubric->rubric_item_array, 0, 0, 'time_created', false);
+        }
     }
     return false;
 }
@@ -674,7 +676,18 @@ function get_task_properties_action($task){
     return array(
         'name' => $task['title'],
         'description' => $task['description'],
-        'start' => date_create_from_format('d/m/y H:i', $task['start'])->getTimestamp(),
-        'end' => date_create_from_format('d/m/y H:i', $task['end'])->getTimestamp(),
+        'start' => date_create_from_format('d/m/Y H:i', $task['start'])->getTimestamp(),
+        'end' => date_create_from_format('d/m/Y H:i', $task['end'])->getTimestamp(),
     );
+}
+
+function hasTeacherAccess($role){
+    if(!$role){
+        $user = array_pop(ClipitUser::get_by_id(array(elgg_get_logged_in_user_guid())));
+        $role = $user->role;
+    }
+    if($role == ClipitUser::ROLE_TEACHER || $role == ClipitUser::ROLE_ADMIN){
+        return true;
+    }
+    return false;
 }

@@ -21,7 +21,7 @@ if(in_array(ClipitStoryboard::get_group($storyboard->id), ClipitUser::get_groups
 }
 if($storyboard &&
     $storyboard->owner_id == $user_id ||
-    $user->role == ClipitUser::ROLE_TEACHER ||
+    hasTeacherAccess($user->role) ||
     ($member_group && $user->role == ClipitUser::ROLE_STUDENT)
 ){
     $file = array_pop(ClipitFile::get_by_id(array($storyboard->file)));
