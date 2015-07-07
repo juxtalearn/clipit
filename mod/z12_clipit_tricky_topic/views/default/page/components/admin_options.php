@@ -17,7 +17,7 @@ $is_linked = elgg_extract('is_linked', $vars);
 
 $object = ClipitSite::lookup($entity->id);
 $cache = elgg_get_metadata_cache();
-$is_owner = ($user->id == elgg_get_logged_in_user_guid() || $cache->load(elgg_get_logged_in_user_guid(), 'role') == ClipitUser::ROLE_ADMIN) ? true:false;
+$is_owner = ($user_owner->id == elgg_get_logged_in_user_guid() || $cache->load(elgg_get_logged_in_user_guid(), 'role') == ClipitUser::ROLE_ADMIN) ? true:false;
 
 $options_list = array();
 $owner_options = false;
