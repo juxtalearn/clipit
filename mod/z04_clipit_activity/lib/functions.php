@@ -518,8 +518,8 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
             'status' => false
         );
     }
-    if($role == ClipitUser::ROLE_TEACHER){
-//        $status['count'] = false;
+    if(hasTeacherAccess($role)){
+    //  $status['count'] = false;
         $status['text'] = false;
     }
     return $status;
