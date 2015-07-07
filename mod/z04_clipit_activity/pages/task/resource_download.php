@@ -11,7 +11,7 @@
  * @package         ClipIt
  */
 // Teacher view
-if($user->role == ClipitUser::ROLE_TEACHER){
+if(hasTeacherAccess($user->role)){
     $users = ClipitUser::get_by_id($activity->student_array, 0, 0, 'name');
     if($users){
         $body = elgg_view('tasks/admin/resource_download', array(
