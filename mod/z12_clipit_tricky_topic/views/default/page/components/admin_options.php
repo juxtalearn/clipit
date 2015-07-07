@@ -82,6 +82,14 @@ switch($object['subtype']){
         }
         $href['duplicate'] = 'quizzes/create/'.$entity->id;
         break;
+    case 'ClipitPerformanceItem':
+        $duplicate = false;
+        $remove = false;
+        $owner_options = true;
+        $href = array(
+            'edit' => 'rubrics/edit/?name='.json_encode($entity->category),
+        );
+        break;
     case 'ClipitRubric':
         $owner_options = true;
         if($is_owner){
