@@ -20,7 +20,20 @@ function files_get_page_content_list($params = array()){
     elgg_extend_view("files/search", "search/search");
     $params['files'] = $files;
 
-    $content = elgg_view('multimedia/file/list', $params);
+    $content = elgg_view("files/search");
+    $list_options = array();
+    // File options
+    if(!empty($files)) {
+        $list_options['options_values'] = array(
+            '' => elgg_echo('bulk_actions'),
+            'remove' => elgg_echo('file:delete'),
+        );
+    }
+    if($params['create']) {
+        $content .= elgg_view_form('multimedia/files/upload', array('id' => 'fileupload', 'enctype' => 'multipart/form-data'), array('entity' => $params['entity']));
+    }
+    $content .= elgg_view_form("multimedia/files/set_options",
+        array('body' => elgg_view('multimedia/file/list', $params), 'class' => 'files-table'));
     if (!$files) {
         $content .= elgg_view('output/empty', array('value' => elgg_echo('file:none')));
     }
