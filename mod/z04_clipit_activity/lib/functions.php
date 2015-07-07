@@ -348,7 +348,7 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
         'color' => 'yellow',
         'status' => false
     );
-    if($role == ClipitUser::ROLE_TEACHER){
+    if(hasTeacherAccess($role)){
         $status['text'] = false;
     }
     if(time() < $task->start &&  $task->task_type != ClipitTask::TYPE_OTHER){
