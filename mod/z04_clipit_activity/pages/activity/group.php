@@ -12,7 +12,7 @@
  */
 $user_id = elgg_get_logged_in_user_guid();
 $my_group = ClipitGroup::get_from_user_activity($user_id, $activity->id);
-$isTeacher = in_array($user_id, $activity->teacher_array);
+$isTeacher = ($access == 'ACCESS_TEACHER' ? true: false);
 $group_id = get_input('group_id');
 $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
 if($activity->status == 'enroll' && !$isTeacher ){

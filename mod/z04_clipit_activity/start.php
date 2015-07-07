@@ -200,6 +200,147 @@ function clipit_activity_init() {
     elgg_register_js("jquery:timepicker", "{$vendors_dir}/jquery.timepicker.min.js");
     // ChartJS
     elgg_register_js("jquery:chartjs", "{$vendors_dir}/chartjs.min.js");
+
+    elgg_register_plugin_hook_handler("clipit:view:task:resource", "all", "clipit_task_view_videos", 1);
+    elgg_register_plugin_hook_handler("clipit:view:task:resource", "all", "clipit_task_view_files", 200);
+    elgg_register_plugin_hook_handler("clipit:view:task:resource", "all", "clipit_task_view_storyboards", 300);
+
+    // hook action: Task type resource download
+//    elgg_register_plugin_hook_handler("action", "task/save", "task_resources_save");
+    elgg_register_plugin_hook_handler("task:save", "task", "task_resources_save");
+    // hook action: Task type video/storyboard upload
+//    elgg_register_plugin_hook_handler("action", "task/save", "task_upload_save", 100);
+    elgg_register_plugin_hook_handler("task:save", "task", "task_upload_save");
+    elgg_register_plugin_hook_handler("task:save", "task", "task_resources_save");
+}
+
+function task_resources_save($hook, $entity_type, $returnvalue, $params){
+    $tasks = get_input('task');
+
+    foreach ($tasks as $task) {
+        $files = get_input('attach_files');
+        $videos = get_input('attach_videos');
+        $storyboards = get_input('attach_storyboards');
+
+        if($task['type'] == ClipitTask::TYPE_RESOURCE_DOWNLOAD) {
+            $activity_id = get_input('entity-id');
+            // New task, attach resources
+            $task_properties = array_merge(get_task_properties_action($task), array(
+                'task_type' => $task['type'],
+            ));
+            $task_id = ClipitTask::create($task_properties);
+
+            ClipitTask::set_files($task_id, array_filter($files));
+            ClipitTask::set_videos($task_id, array_filter($videos));
+            ClipitTask::set_storyboards($task_id, array_filter($storyboards));
+            // Add task to activity
+            ClipitActivity::add_tasks($activity_id, array($task_id));
+        } elseif($task_id = get_input('task-id') && $task['entity_type'] == ClipitTask::TYPE_RESOURCE_DOWNLOAD){
+            // Set resources
+            ClipitTask::set_files($task_id, array_filter($files));
+            ClipitTask::set_videos($task_id, array_filter($videos));
+            ClipitTask::set_storyboards($task_id, array_filter($storyboards));
+            // Save task
+            ClipitTask::set_properties($task_id, get_task_properties_action($task));
+        }
+    }
+}
+function task_upload_save($hook, $entity_type, $returnvalue, $params){
+    $activity_id = $params['activity_id'];
+    $task = $params['task'];
+    if($task['type'] == ClipitTask::TYPE_VIDEO_UPLOAD ||
+        $task['type'] == ClipitTask::TYPE_STORYBOARD_UPLOAD
+    ) {
+        $task_properties = array_merge(get_task_properties_action($task), array(
+            'task_type' => $task['type'],
+        ));
+        $task_id = ClipitTask::create($task_properties);
+        // Add task to activity
+        ClipitActivity::add_tasks($activity_id, array($task_id));
+        if($task['feedback']){
+            $task_entity = array_pop(ClipitTask::get_by_id(array($task_id)));
+            // Trigger tasks which parent is a upload task
+            elgg_trigger_plugin_hook('task:save:upload', 'feedback',
+                array(
+                    'parent_id' => $task_id,
+                    'activity_id' => $task_entity->activity,
+                    'feedback_form' => $task['feedback-form']
+                ), null);
+        }
+    }
+}
+
+function clipit_task_resource_view($task, $view_type, $role){
+    $activity = array_pop(ClipitActivity::get_by_id(array($task->activity)));
+    $href = "clipit_activity/{$activity->id}/resources";
+    return elgg_trigger_plugin_hook('clipit:view:task:resource', $view_type,
+        array(
+            'task' => $task,
+            'activity' => $activity,
+            'role' => $role,
+            'href' => $href
+        ), null);
+}
+function clipit_task_view_files($hook, $view_type, $returnvalue, $params){
+    $task = $params['task'];
+    $files = ClipitTask::get_files($task->id);
+    if ($files) {
+        $returnvalue .= elgg_view("page/components/title_block", array(
+            'title' => elgg_echo("files"),
+        ));
+        $options = array(
+            'entity' => $params['activity'],
+            'create' => false,
+            'options' => false,
+            'files' => $files,
+            'href' => $params['href'],
+            'task_id' => $params['role'] == ClipitUser::ROLE_STUDENT ? $task->id : false
+        );
+        $returnvalue .= elgg_view('multimedia/file/list', $options);
+    }
+
+    return $returnvalue;
+}
+function clipit_task_view_videos($hook, $view_type, $returnvalue, $params){
+    $task = $params['task'];
+    $videos = ClipitTask::get_videos($task->id);
+    if ($videos) {
+        $returnvalue .= elgg_view("page/components/title_block", array(
+            'title' => elgg_echo("videos"),
+        ));
+        $options = array(
+            'entity' => $params['activity'],
+            'create' => false,
+            'options' => false,
+            'entities' => $videos,
+            'href' => $params['href'],
+            'task_id' => $params['role'] == ClipitUser::ROLE_STUDENT ? $task->id : false,
+            'task_type' => $task->task_type
+        );
+        $returnvalue .= elgg_view('multimedia/video/list', $options);
+    }
+
+    return $returnvalue;
+}
+function clipit_task_view_storyboards($hook, $view_type, $returnvalue, $params){
+    $task = $params['task'];
+    $storyboards = ClipitTask::get_storyboards($task->id);
+    if ($storyboards) {
+        $returnvalue .= elgg_view("page/components/title_block", array(
+            'title' => elgg_echo("storyboards"),
+        ));
+        $options = array(
+            'entity' => $params['activity'],
+            'create' => false,
+            'entities' => $storyboards,
+            'href' => $params['href'],
+            'task_id' => $params['role'] == ClipitUser::ROLE_STUDENT ? $task->id : false,
+            'task_type' => $task->task_type
+        );
+        $returnvalue .= elgg_view('multimedia/storyboard/list', $options);
+    }
+
+    return $returnvalue;
 }
 
 function activity_setup_sidebar_menus(){
@@ -297,11 +438,12 @@ function activity_page_handler($page) {
      * Set access
      * ACCESS_PUBLIC, ACCESS_TEACHER, ACCESS_MEMBER
      */
+    $cache = elgg_get_metadata_cache();
     $hasGroup = ClipitGroup::get_from_user_activity($user_id, $activity->id);
     if($hasGroup || in_array($user_id, $activity->student_array)){
         $access = 'ACCESS_MEMBER';
     }
-    elseif(in_array($user_id, $activity->teacher_array)){
+    elseif(in_array($user_id, $activity->teacher_array) || $cache->load(elgg_get_logged_in_user_guid(), 'role') == ClipitUser::ROLE_ADMIN){
         $access = 'ACCESS_TEACHER';
     } else{
         $access = 'ACCESS_PUBLIC';
@@ -317,7 +459,7 @@ function activity_page_handler($page) {
             'class'     => 'activity-profile activity-layout'
         );
     } else {
-    // Sections
+        // Sections
         if(isset($page[1])){
             elgg_push_breadcrumb($activity->name, "clipit_activity/".$activity->id);
             $activity_dir = elgg_get_plugins_path() . 'z04_clipit_activity/pages/activity';
@@ -386,7 +528,7 @@ function activity_page_handler($page) {
     $teacher_sidebar = "";
     if(!empty($teachers)){
         // Teacher admin
-        if($isTeacher = in_array($user_id, $teachers)){
+        if($access == 'ACCESS_TEACHER'){
             elgg_extend_view("page/elements/owner_block", "activity/admin/button");
             $groups = ClipitActivity::get_groups($activity->id);
             $teacher_sidebar = elgg_view('activity/sidebar/groups', array(
@@ -404,7 +546,7 @@ function activity_page_handler($page) {
         $params['class'] = "activity-section activity-layout";
     }
     if($activity_status != 'enrol'){
-    $params['special_header_content'] = elgg_view('activity/status', array('entity' => $activity));
+        $params['special_header_content'] = elgg_view('activity/status', array('entity' => $activity));
     }
     $body = elgg_view_layout('one_sidebar', $params);
     echo elgg_view_page($params['title'], $body);
@@ -457,7 +599,7 @@ function my_activities_page_handler($page) {
 
     $base_dir = elgg_get_plugins_path() . 'z04_clipit_activity/pages/activity';
     $vars = array();
-	$vars['page'] = $page[0];
+    $vars['page'] = $page[0];
 
     require_once "$base_dir/my_activities.php";
 
@@ -503,42 +645,30 @@ function activities_page_handler($page) {
         $count = count($all_entities);
         $entities = array_slice($all_entities, clipit_get_offset(), clipit_get_limit(10));
     } else {
-        $all_entities = ClipitActivity::get_all(0, 0, '', true, true);
-        if($order_by) {
-            $all_entities = get_entities_order(
-                'ClipitActivity',
-                $all_entities,
-                clipit_get_limit(10),
-                clipit_get_offset(),
-                $order_by,
-                $sort
-            );
-        } else {
-            $all_entities = ClipitActivity::get_by_id($all_entities);
+        switch($selected_tab){
+            case 'mine':
+                $all_entities = ClipitActivity::get_by_id(ClipitUser::get_activities(elgg_get_logged_in_user_guid()));
+                break;
+            default:
+                $all_entities = ClipitActivity::get_all(0, 0, '', true, true);
+                if($order_by) {
+                    $all_entities = get_entities_order(
+                        'ClipitActivity',
+                        $all_entities,
+                        clipit_get_limit(10),
+                        clipit_get_offset(),
+                        $order_by,
+                        $sort
+                    );
+                } else {
+                    $all_entities = ClipitActivity::get_by_id($all_entities);
+                }
+
+                break;
         }
         $count = count($all_entities);
         $entities = array_slice($all_entities, clipit_get_offset(), clipit_get_limit(10));
     }
-    switch($selected_tab){
-        case 'mine':
-            $entities = ClipitActivity::get_by_id(ClipitUser::get_activities(elgg_get_logged_in_user_guid()));
-            break;
-        default:
-            break;
-    }
-    switch($selected_tab){
-        case 'mine':
-            $owner = array();
-            foreach($entities as $entity){
-                if($entity->owner_id == elgg_get_logged_in_user_guid()){
-                    $owner[] = $entity;
-                }
-            }
-            $entities = $owner;
-            $count = count($entities);
-            break;
-    }
-
     $to_order = array(
         'name' => elgg_echo('activity:title'),
         'tricky_topic' => elgg_echo('tricky_topic'),
