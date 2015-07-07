@@ -1,5 +1,5 @@
 <?php
- /**
+/**
  * ClipIt - JuxtaLearn Web Space
  * PHP version:     >= 5.2
  * Creation date:   18/07/14
@@ -30,6 +30,7 @@ $id = uniqid();
                 return 'active';
             });
         });
+
         $(".datepicker").each(function() {
             var defaults = {hour: 0, minute: 0};
             if($(this).hasClass('input-task-end')){
@@ -44,6 +45,7 @@ $id = uniqid();
                 })
             ));
         });
+        // Set calendar params
         $('#full-calendar').fullCalendar(clipit.task.admin.fullCalendar({
             messages: {
                 monthNames: <?php echo elgg_echo('calendar:month_names');?>,
@@ -71,6 +73,9 @@ $id = uniqid();
             start: <?php echo $activity->start;?>,
             end: <?php echo $activity->end;?>,
         }));
+        if(hash = elgg.getSelectorFromUrlFragment(window.location.href)){
+            $('[data-target='+ hash +']').trigger('click');
+        }
     });
 </script>
 <div class="pull-right">
@@ -111,7 +116,7 @@ echo elgg_view_form('task/save', array(
     foreach($tasks as $task):
         // Task edit (modal remote)
         echo '<li>'.elgg_view("page/components/modal_remote", array('id'=> "edit-task-{$task->id}" )).'</li>';
-    ?>
+        ?>
         <?php echo elgg_view('activity/admin/tasks/list', array('task' => $task));?>
     <?php endforeach;?>
 </ul>
