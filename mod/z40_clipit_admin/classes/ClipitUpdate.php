@@ -18,7 +18,7 @@ class ClipitUpdate
         // Pull latest version from GitHub
         chdir(elgg_get_root_path());
         exec("git stash save");
-        exec("git stash drop");
+        exec("git clean -f");
         exec("git fetch --tags");
         $clipit_tag_branch = get_config("clipit_tag_branch");
         $latest_tag = exec("git for-each-ref --sort=committerdate --format='%(refname:short)' refs/tags | grep $clipit_tag_branch | tail -1");
