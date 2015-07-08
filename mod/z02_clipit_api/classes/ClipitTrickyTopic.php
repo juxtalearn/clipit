@@ -22,9 +22,7 @@ class ClipitTrickyTopic extends UBItem {
     const SUBTYPE = "ClipitTrickyTopic";
     const REL_TRICKYTOPIC_TAG = "ClipitTrickyTopic-ClipitTag";
     const REL_TRICKYTOPIC_FILE = "ClipitTrickyTopic-ClipitFile";
-    const REL_TRICKYTOPIC_STORYBOARD = "ClipitTrickyTopic-ClipitStoryboard";
     const REL_TRICKYTOPIC_VIDEO = "ClipitTrickyTopic-ClipitVideo";
-    const REL_TRICKYTOPIC_DOCUMENT = "ClipitTrickyTopic-ClipitDocument";
     const REL_TRICKYTOPIC_EXAMPLE = "ClipitTrickyTopic-ClipitExample";
     const EDUCATION_LEVEL_PRIMARY = "primary";
     const EDUCATION_LEVEL_GCSE = "gcse";
@@ -34,10 +32,8 @@ class ClipitTrickyTopic extends UBItem {
     public $subject = "";
     public $education_level = ""; // one of the EDUCATION_LEVEL_* constants
     // Linked Teacher Material
-    public $storyboard_array = array();
     public $video_array = array();
     public $file_array = array();
-    public $document_array = array();
     // Linked Student Problem Examples
     public $example_array = array();
 
@@ -52,9 +48,7 @@ class ClipitTrickyTopic extends UBItem {
         $this->education_level = (string)$elgg_entity->get("education_level");
         $this->tag_array = (array)static::get_tags((int)$this->id);
         $this->file_array = (array)static::get_files((int)$this->id);
-        $this->storyboard_array = (array)static::get_storyboards((int)$this->id);
         $this->video_array = (array)static::get_videos((int)$this->id);
-        $this->document_array = (array)static::get_documents((int)$this->id);
         $this->example_array = (array)static::get_examples((int)$this->id);
     }
 
@@ -78,9 +72,7 @@ class ClipitTrickyTopic extends UBItem {
         parent::save($double_save);
         static::set_tags((int)$this->id, (array)$this->tag_array);
         static::set_files((int)$this->id, (array)$this->file_array);
-        static::set_storyboards((int)$this->id, (array)$this->storyboard_array);
         static::set_videos((int)$this->id, (array)$this->video_array);
-        static::set_documents((int)$this->id, (array)$this->document_array);
         static::set_examples((int)$this->id, (array)$this->example_array);
         return (int)$this->id;
     }
@@ -161,23 +153,6 @@ class ClipitTrickyTopic extends UBItem {
         return UBCollection::get_items($id, static::REL_TRICKYTOPIC_TAG);
     }
 
-    // TEACHER RESOURCES: STORYBOARDS
-    static function add_storyboards($id, $storyboard_array) {
-        return UBCollection::add_items($id, $storyboard_array, static::REL_TRICKYTOPIC_STORYBOARD);
-    }
-
-    static function set_storyboards($id, $storyboard_array) {
-        return UBCollection::set_items($id, $storyboard_array, static::REL_TRICKYTOPIC_STORYBOARD);
-    }
-
-    static function remove_storyboards($id, $storyboard_array) {
-        return UBCollection::remove_items($id, $storyboard_array, static::REL_TRICKYTOPIC_STORYBOARD);
-    }
-
-    static function get_storyboards($id) {
-        return UBCollection::get_items($id, static::REL_TRICKYTOPIC_STORYBOARD);
-    }
-
     // TEACHER RESOURCES: VIDEOS
     static function add_videos($id, $video_array) {
         return UBCollection::add_items($id, $video_array, static::REL_TRICKYTOPIC_VIDEO);
@@ -210,23 +185,6 @@ class ClipitTrickyTopic extends UBItem {
 
     static function get_files($id) {
         return UBCollection::get_items($id, static::REL_TRICKYTOPIC_FILE);
-    }
-
-    // TEACHER RESOURCES: DOCUMENTS
-    static function add_documents($id, $document_array) {
-        return UBCollection::add_items($id, $document_array, static::REL_TRICKYTOPIC_DOCUMENT);
-    }
-
-    static function set_documents($id, $document_array) {
-        return UBCollection::set_items($id, $document_array, static::REL_TRICKYTOPIC_DOCUMENT);
-    }
-
-    static function remove_documents($id, $document_array) {
-        return UBCollection::remove_items($id, $document_array, static::REL_TRICKYTOPIC_DOCUMENT);
-    }
-
-    static function get_documents($id) {
-        return UBCollection::get_items($id, static::REL_TRICKYTOPIC_DOCUMENT);
     }
 
     // Student Problem Examples

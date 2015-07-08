@@ -68,9 +68,6 @@ class ClipitRemoteResource extends UBItem {
             case ClipitVideo::SUBTYPE:
                 ClipitRemoteSite::add_videos($remote_site->id, array($id));
                 break;
-            case ClipitStoryboard::SUBTYPE:
-                ClipitRemoteSite::add_storyboards($remote_site->id, array($id));
-                break;
         }
         return $id;
     }

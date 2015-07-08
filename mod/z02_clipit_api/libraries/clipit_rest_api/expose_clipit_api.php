@@ -37,7 +37,6 @@ expose_remote_site_functions();
 expose_rubric_item_functions();
 expose_rubric_rating_functions();
 expose_site_functions();
-expose_storyboard_functions();
 expose_tag_functions();
 expose_tag_rating_functions();
 expose_task_functions();

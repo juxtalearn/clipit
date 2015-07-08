@@ -23,18 +23,14 @@ class ClipitTask extends UBItem {
     // Task types
     const TYPE_QUIZ_TAKE = "quiz_take";
     const TYPE_RESOURCE_DOWNLOAD = "resource_download";
-    const TYPE_STORYBOARD_UPLOAD = "storyboard_upload";
-    const TYPE_STORYBOARD_FEEDBACK = "storyboard_feedback";
+    const TYPE_FILE_UPLOAD = "file_upload";
+    const TYPE_FILE_FEEDBACK = "file_feedback";
     const TYPE_VIDEO_UPLOAD = "video_upload";
     const TYPE_VIDEO_FEEDBACK = "video_feedback";
-    const TYPE_DOCUMENT_UPLOAD = "document_upload";
-    const TYPE_DOCUMENT_FEEDBACK = "document_feedback";
     const TYPE_OTHER = "other";
     // Relationship names
-    const REL_TASK_STORYBOARD = "ClipitTask-ClipitStoryboard";
     const REL_TASK_VIDEO = "ClipitTask-ClipitVideo";
     const REL_TASK_FILE = "ClipitTask-ClipitFile";
-    const REL_TASK_DOCUMENT= "ClipitTask-ClipitDocument";
     const REL_TASK_QUIZ = "ClipitTask-ClipitQuiz";
     const REL_TASK_RUBRIC = "ClipitTask-ClipitRubricItem";
     // Status values
@@ -52,10 +48,8 @@ class ClipitTask extends UBItem {
     public $quiz = 0;
     public $rubric = 0;
     // Linked materials
-    public $storyboard_array = array();
     public $video_array = array();
     public $file_array = array();
-    public $document_array = array();
 
     /**
      * Loads object parameters stored in Elgg
@@ -80,10 +74,8 @@ class ClipitTask extends UBItem {
         }
         $this->activity = (int)static::get_activity((int)$this->id);
         $this->quiz = (int)static::get_quiz($this->id);
-        $this->storyboard_array = static::get_storyboards((int)$this->id);
         $this->video_array = static::get_videos($this->id);
         $this->file_array = static::get_files($this->id);
-        $this->document_array = static::get_documents($this->id);
         $this->rubric = (int)static::get_rubric($this->id);
     }
 
@@ -112,10 +104,8 @@ class ClipitTask extends UBItem {
         parent::save($double_save);
         static::set_quiz($this->id, $this->quiz);
         static::set_activity($this->id, $this->activity);
-        static::set_storyboards($this->id, $this->storyboard_array);
         static::set_videos($this->id, $this->video_array);
         static::set_files($this->id, $this->file_array);
-        static::set_documents($this->id, $this->document_array);
         static::set_rubric($this->id, (int)$this->rubric);
         return $this->id;
     }
@@ -196,36 +186,18 @@ class ClipitTask extends UBItem {
                     $timestamp = UBCollection::get_timestamp($video_id, $entity_id, ClipitVideo::REL_RESOURCE_USER);
                     $latest_timestamp = ($timestamp > $latest_timestamp ? $timestamp : $latest_timestamp);
                 }
-                $task_storyboards = $task->storyboard_array;
-                foreach ($task_storyboards as $storyboard_id) {
-                    $read_status = ClipitStoryboard::get_read_status($storyboard_id, array($entity_id));
-                    if ((bool)$read_status[$entity_id] !== true) {
-                        return false;
-                    }
-                    $timestamp = UBCollection::get_timestamp($storyboard_id, $entity_id, ClipitStoryboard::REL_RESOURCE_USER);
-                    $latest_timestamp = ($timestamp > $latest_timestamp ? $timestamp : $latest_timestamp);
-                }
-                $task_documents = $task->document_array;
-                foreach ($task_documents as $document_id) {
-                    $read_status = ClipitDocument::get_read_status($document_id, array($entity_id));
-                    if ((bool)$read_status[$entity_id] !== true) {
-                        return false;
-                    }
-                    $timestamp = UBCollection::get_timestamp($document_id, $entity_id, ClipitDocument::REL_RESOURCE_USER);
-                    $latest_timestamp = ($timestamp > $latest_timestamp ? $timestamp : $latest_timestamp);
-                }
                 return $latest_timestamp;
-            case static::TYPE_STORYBOARD_UPLOAD:
-                foreach ($task->storyboard_array as $storyboard_id) {
-                    if ((int)ClipitStoryboard::get_group($storyboard_id) === (int)$entity_id) {
+            case static::TYPE_FILE_UPLOAD:
+                foreach ($task->file_array as $file_id) {
+                    if ((int)ClipitFile::get_group($file_id) === (int)$entity_id) {
                         return true;
                     }
                 }
                 return false;
-            case static::TYPE_STORYBOARD_FEEDBACK:
+            case static::TYPE_FILE_FEEDBACK:
                 $parent_task = new static($task->parent_task);
-                // If there are no storyboards to give feedback on, the status is false = uncompleted
-                if (empty($parent_task->storyboard_array)) {
+                // If there are no files to give feedback on, the status is false = uncompleted
+                if (empty($parent_task->file_array)) {
                     return false;
                 }
                 $user_ratings = ClipitRating::get_by_owner(array($entity_id));
@@ -235,29 +207,27 @@ class ClipitTask extends UBItem {
                         $rating_targets[] = (int)$user_rating->target;
                     }
                 }
-                // If the only storyboard was authored by the user's group
-                if (count($parent_task->storyboard_array) == 1) {
-                    $storyboard_id = array_pop($parent_task->storyboard_array);
-                    $storyboard_group = (int)ClipitStoryboard::get_group($storyboard_id);
+                // If the only file was authored by the user's group
+                if (count($parent_task->file_array) == 1) {
+                    $file_id = array_pop($parent_task->file_array);
+                    $file_group = (int)ClipitFile::get_group($file_id);
                     $user_group = (int)ClipitGroup::get_from_user_activity($entity_id, $task->activity);
-                    if ($storyboard_group === $user_group) {
+                    if ($file_group === $user_group) {
                         return false;
                     }
-                    if (array_search((int)$storyboard_id, $rating_targets) === false) {
+                    if (array_search((int)$file_id, $rating_targets) === false) {
                         return false;
                     }
                     return true;
                 }
-                foreach ($parent_task->storyboard_array as $storyboard_id) {
-                    if (array_search((int)$storyboard_id, $rating_targets) === false) {
-                        $storyboard_group = (int)ClipitStoryboard::get_group((int)$storyboard_id);
+                foreach ($parent_task->file_array as $file_id) {
+                    if (array_search((int)$file_id, $rating_targets) === false) {
+                        $file_group = (int)ClipitFile::get_group((int)$file_id);
                         $user_group = (int)ClipitGroup::get_from_user_activity($entity_id, $task->activity);
-//                        var_dump($storyboard_group);
-//                        var_dump($user_group);
-                        if ($storyboard_group !== $user_group) {
+                        if ($file_group !== $user_group) {
                             // at least one of the targets was not rated
                             return false;
-                        } // else the user is part of the group who published the storyboard, so no feedback required
+                        } // else the user is part of the group who published the file, so no feedback required
                     }
                 }
                 return true;
@@ -306,46 +276,6 @@ class ClipitTask extends UBItem {
                     }
                 }
                 return true;
-            case static::TYPE_DOCUMENT_UPLOAD:
-                foreach ($task->document_array as $document_id) {
-                    if ((int)ClipitDocument::get_group($document_id) === (int)$entity_id) {
-                        return true;
-                    }
-                }
-                return false;
-            case static::TYPE_DOCUMENT_FEEDBACK:
-                $parent_task = new static($task->parent_task);
-                // If there are no documents to give feedback on, the status is false = uncompleted
-                if (empty($parent_task->document_array)) {
-                    return false;
-                }
-                $user_ratings = ClipitRating::get_by_owner(array($entity_id));
-                $rating_targets = array();
-                if (!empty($user_ratings[$entity_id])) {
-                    foreach ($user_ratings[$entity_id] as $user_rating) {
-                        $rating_targets[] = (int)$user_rating->target;
-                    }
-                }
-                // If the only document was authored by the user's group
-                if (count($parent_task->document_array) == 1) {
-                    $document_id = array_pop($parent_task->document_array);
-                    $document_group = (int)ClipitDocument::get_group($document_id);
-                    $user_group = (int)ClipitGroup::get_from_user_activity($entity_id, $task->activity);
-                    if ($document_group === $user_group) {
-                        return false;
-                    }
-                }
-                foreach ($parent_task->document_array as $document_id) {
-                    if (array_search((int)$document_id, $rating_targets) === false) {
-                        $document_group = (int)ClipitDocument::get_group((int)$document_id);
-                        $user_group = (int)ClipitGroup::get_from_user_activity($entity_id, $task->activity);
-                        if ($document_group !== $user_group) {
-                            // at least one of the targets was not rated
-                            return false;
-                        } // else the user is part of the group who published the document, so no feedback required
-                    }
-                }
-                return true;
             case static::TYPE_OTHER:
                 if (static::get_status($id) !== static::STATUS_FINISHED) {
                     return false;
@@ -382,24 +312,6 @@ class ClipitTask extends UBItem {
         return UBCollection::add_items($activity_id, array($id), ClipitActivity::REL_ACTIVITY_TASK, true);
     }
 
-    // STORYBOARDS
-    static function add_storyboards($id, $storyboard_array)
-    {
-        return UBCollection::add_items($id, $storyboard_array, static::REL_TASK_STORYBOARD);
-    }
-    static function remove_storyboards($id, $storyboard_array)
-    {
-        return UBCollection::remove_items($id, $storyboard_array, static::REL_TASK_STORYBOARD);
-    }
-    static function get_storyboards($id)
-    {
-        return UBCollection::get_items($id, static::REL_TASK_STORYBOARD);
-    }
-    static function set_storyboards($id, $storyboard_array)
-    {
-        return UBCollection::set_items($id, $storyboard_array, static::REL_TASK_STORYBOARD);
-    }
-
     // VIDEOS
     static function add_videos($id, $video_array)
     {
@@ -433,23 +345,6 @@ class ClipitTask extends UBItem {
     }
     static function get_files($id) {
         return UBCollection::get_items($id, static::REL_TASK_FILE);
-    }
-
-    // DOCUMENTS
-    static function add_documents($id, $document_array)
-    {
-        return UBCollection::add_items($id, $document_array, static::REL_TASK_DOCUMENT);
-    }
-    static function remove_documents($id, $document_array)
-    {
-        return UBCollection::remove_items($id, $document_array, static::REL_TASK_DOCUMENT);
-    }
-    static function set_documents($id, $document_array)
-    {
-        return UBCollection::set_items($id, $document_array, static::REL_TASK_DOCUMENT);
-    }
-    static function get_documents($id) {
-        return UBCollection::get_items($id, static::REL_TASK_DOCUMENT);
     }
 
     // RUBRIC

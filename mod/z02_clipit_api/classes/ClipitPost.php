@@ -25,12 +25,12 @@ class ClipitPost extends UBMessage {
     const REL_MESSAGE_DESTINATION = "ClipitPost-destination";
     const REL_MESSAGE_FILE = "ClipitPost-ClipitFile";
     const REL_MESSAGE_USER = "ClipitPost-ClipitUser";
-    const REL_POST_STORYBOARD = "ClipitPost-ClipitStoryboard";
     const REL_POST_VIDEO = "ClipitPost-ClipitVideo";
+    const REL_POST_FILE = "ClipitPost-ClipitFile";
 
     public $topic_id = 0;
-    public $storyboard_array = array();
     public $video_array = array();
+    public $file_array = array();
 
     /**
      * Loads object parameters stored in Elgg
@@ -40,7 +40,7 @@ class ClipitPost extends UBMessage {
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
         $this->topic_id = (int)$elgg_entity->get("topic_id");
-        $this->storyboard_array = (array)static::get_storyboards((int)$this->id);
+        $this->file_array = (array)static::get_files((int)$this->id);
         $this->video_array = (array)static::get_videos((int)$this->id);
     }
 
@@ -61,26 +61,9 @@ class ClipitPost extends UBMessage {
      */
     protected function save($double_save=false) {
         parent::save($double_save);
-        static::set_storyboards($this->id, $this->storyboard_array);
+        static::set_files($this->id, $this->file_array);
         static::set_videos($this->id, $this->video_array);
         return $this->id;
-    }
-
-    // STORYBOARDS
-    static function add_storyboards($id, $storyboard_array) {
-        return UBCollection::add_items($id, $storyboard_array, static::REL_POST_STORYBOARD);
-    }
-
-    static function set_storyboards($id, $storyboard_array) {
-        return UBCollection::set_items($id, $storyboard_array, static::REL_POST_STORYBOARD);
-    }
-
-    static function remove_storyboards($id, $storyboard_array) {
-        return UBCollection::remove_items($id, $storyboard_array, static::REL_POST_STORYBOARD);
-    }
-
-    static function get_storyboards($id) {
-        return UBCollection::get_items($id, static::REL_POST_STORYBOARD);
     }
 
     // VIDEOS
@@ -98,5 +81,22 @@ class ClipitPost extends UBMessage {
 
     static function get_videos($id) {
         return UBCollection::get_items($id, static::REL_POST_VIDEO);
+    }
+
+    // FILES
+    static function add_files($id, $file_array) {
+        return UBCollection::add_items($id, $file_array, static::REL_POST_FILE);
+    }
+
+    static function set_files($id, $file_array) {
+        return UBCollection::set_items($id, $file_array, static::REL_POST_FILE);
+    }
+
+    static function remove_files($id, $file_array) {
+        return UBCollection::remove_items($id, $file_array, static::REL_POST_FILE);
+    }
+
+    static function get_files($id) {
+        return UBCollection::get_items($id, static::REL_POST_FILE);
     }
 }

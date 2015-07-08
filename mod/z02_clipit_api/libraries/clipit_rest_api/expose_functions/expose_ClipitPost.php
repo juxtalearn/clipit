@@ -21,26 +21,26 @@ function expose_post_functions() {
     expose_common_functions($api_suffix, $class_suffix);
     expose_common_message_functions($api_suffix, $class_suffix);
     expose_function(
-        $api_suffix . "add_storyboards", $class_suffix . "add_storyboards", array(
+        $api_suffix . "add_files", $class_suffix . "add_files", array(
             "id" => array("type" => "int", "required" => true),
-            "storyboard_array" => array("type" => "array", "required" => true)
-        ), "Add Storyboards by Id to a Post", "POST", false, true
+            "file_array" => array("type" => "array", "required" => true)
+        ), "Add Files by Id to a Post", "POST", false, true
     );
     expose_function(
-        $api_suffix . "set_storyboards", $class_suffix . "set_storyboards", array(
+        $api_suffix . "set_files", $class_suffix . "set_files", array(
             "id" => array("type" => "int", "required" => true),
-            "storyboard_array" => array("type" => "array", "required" => true)
-        ), "Set Storyboards by Id to a Post", "POST", false, true
+            "file_array" => array("type" => "array", "required" => true)
+        ), "Set Files by Id to a Post", "POST", false, true
     );
     expose_function(
-        $api_suffix . "remove_storyboards", $class_suffix . "remove_storyboards", array(
+        $api_suffix . "remove_files", $class_suffix . "remove_files", array(
             "id" => array("type" => "int", "required" => true),
-            "storyboard_array" => array("type" => "array", "required" => true)
-        ), "Removes Storyboards by Id from a Post", "POST", false, true
+            "file_array" => array("type" => "array", "required" => true)
+        ), "Removes Files by Id from a Post", "POST", false, true
     );
     expose_function(
-        $api_suffix . "get_storyboards", $class_suffix . "get_storyboards",
-        array("id" => array("type" => "int", "required" => true)), "Gets Storyboards from a Post", "GET", false, true
+        $api_suffix . "get_files", $class_suffix . "get_files",
+        array("id" => array("type" => "int", "required" => true)), "Gets Files from a Post", "GET", false, true
     );
     expose_function(
         $api_suffix . "add_videos", $class_suffix . "add_videos", array(

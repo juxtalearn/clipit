@@ -10,18 +10,15 @@ class ClipitRemoteSite extends UBItem{
     // REMOTE SCOPE
     const REL_REMOTESITE_FILE = "ClipitRemoteSite-ClipitFile";
     const REL_REMOTESITE_VIDEO = "ClipitRemoteSite-ClipitVideo";
-    const REL_REMOTESITE_STORYBOARD = "ClipitRemoteSite-ClipitStoryboard";
     public $timezone = "";
     public $file_array = array();
     public $video_array = array();
-    public $storyboard_array = array();
 
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
         $this->timezone = (string)$elgg_entity->get("timezone");
         $this->file_array = (array)static::get_files($this->id);
         $this->video_array = (array)static::get_videos($this->id);
-        $this->storyboard_array = (array)static::get_storyboards($this->id);
     }
 
     /**
@@ -42,7 +39,6 @@ class ClipitRemoteSite extends UBItem{
         parent::save();
         static::set_files($this->id, $this->file_array);
         static::set_videos($this->id, $this->video_array);
-        static::set_storyboards($this->id, $this->storyboard_array);
         return $this->id;
     }
 
@@ -119,18 +115,5 @@ class ClipitRemoteSite extends UBItem{
     }
     static function get_videos($id) {
         return UBCollection::get_items($id, static::REL_REMOTESITE_VIDEO);
-    }
-    // REMOTE STORYBOARDS
-    static function add_storyboards($id, $storyboard_array) {
-        return UBCollection::add_items($id, $storyboard_array, static::REL_REMOTESITE_STORYBOARD);
-    }
-    static function set_storyboards($id, $storyboard_array) {
-        return UBCollection::set_items($id, $storyboard_array, static::REL_REMOTESITE_STORYBOARD);
-    }
-    static function remove_storyboards($id, $storyboard_array) {
-        return UBCollection::remove_items($id, $storyboard_array, static::REL_REMOTESITE_STORYBOARD);
-    }
-    static function get_storyboards($id) {
-        return UBCollection::get_items($id, static::REL_REMOTESITE_STORYBOARD);
     }
 } 

@@ -42,29 +42,6 @@ function expose_tricky_topic_functions() {
         "Get Tags from a Tricky Topic", 'GET', false, true
     );
     expose_function(
-        $api_suffix . "add_storyboards", $class_suffix . "add_storyboards", array(
-        "id" => array("type" => "int", "required" => true),
-        "storyboard_array" => array("type" => "array", "required" => true)
-    ), "Add Storyboards by ID array to a TT", "POST", false, true
-    );
-    expose_function(
-        $api_suffix . "set_storyboards", $class_suffix . "set_storyboards", array(
-        "id" => array("type" => "int", "required" => true),
-        "storyboard_array" => array("type" => "array", "required" => true)
-    ), "Set Storyboards by ID array to a TT", "POST", false, true
-    );
-    expose_function(
-        $api_suffix . "remove_storyboards", $class_suffix . "remove_storyboards", array(
-        "id" => array("type" => "int", "required" => true),
-        "storyboard_array" => array("type" => "array", "required" => true)
-    ), "Removes Storyboards by ID array to a TT", "POST", false, true
-    );
-    expose_function(
-        $api_suffix . "get_storyboards", $class_suffix . "get_storyboards",
-        array("id" => array("type" => "int", "required" => true)), "Gets Storyboards from a TT", "GET", false,
-        true
-    );
-    expose_function(
         $api_suffix . "add_videos", $class_suffix . "add_videos", array(
         "id" => array("type" => "int", "required" => true),
         "video_array" => array("type" => "array", "required" => true)

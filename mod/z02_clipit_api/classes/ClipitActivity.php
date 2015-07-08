@@ -33,10 +33,8 @@ class ClipitActivity extends UBItem {
     const REL_ACTIVITY_STUDENT = "ClipitActivity-student";
     const REL_ACTIVITY_GROUP = "ClipitActivity-ClipitGroup";
     const REL_ACTIVITY_TASK = "ClipitActivity-ClipitTask";
-    const REL_ACTIVITY_STORYBOARD = "ClipitActivity-ClipitStoryboard";
     const REL_ACTIVITY_VIDEO = "ClipitActivity-ClipitVideo";
     const REL_ACTIVITY_FILE = "ClipitActivity-ClipitFile";
-    const REL_ACTIVITY_DOCUMENT = "ClipitActivity-ClipitDocument";
     // Status values
     const STATUS_ENROLL = "enroll";
     const STATUS_ACTIVE = "active";
@@ -58,10 +56,8 @@ class ClipitActivity extends UBItem {
     public $group_array = array();
     public $task_array = array();
     // Activity Teacher Resources (cloned from TT Teacher Resources)
-    public $storyboard_array = array();
     public $video_array = array();
     public $file_array = array();
-    public $document_array = array();
 
     /**
      * Loads object parameters stored in Elgg
@@ -81,10 +77,8 @@ class ClipitActivity extends UBItem {
         $this->student_array = static::get_students($this->id);
         $this->group_array = static::get_groups($this->id);
         $this->task_array = static::get_tasks($this->id);
-        $this->storyboard_array = static::get_storyboards($this->id);
         $this->video_array = static::get_videos($this->id);
         $this->file_array = static::get_files($this->id);
-        $this->document_array = static::get_documents($this->id);
     }
 
     /**
@@ -137,10 +131,8 @@ class ClipitActivity extends UBItem {
         static::set_students($this->id, $this->student_array);
         static::set_groups($this->id, $this->group_array);
         static::set_tasks($this->id, $this->task_array);
-        static::set_storyboards($this->id, $this->storyboard_array);
         static::set_videos($this->id, $this->video_array);
         static::set_files($this->id, $this->file_array);
-        static::set_documents($this->id, $this->document_array);
         return $this->id;
     }
 
@@ -281,24 +273,6 @@ class ClipitActivity extends UBItem {
         return UBCollection::get_items($id, static::REL_ACTIVITY_TASK);
     }
 
-
-    // TEACHER RESOURCE STORYBOARDS
-    static function add_storyboards($id, $storyboard_array) {
-        return UBCollection::add_items($id, $storyboard_array, static::REL_ACTIVITY_STORYBOARD);
-    }
-
-    static function set_storyboards($id, $storyboard_array) {
-        return UBCollection::set_items($id, $storyboard_array, static::REL_ACTIVITY_STORYBOARD);
-    }
-
-    static function remove_storyboards($id, $storyboard_array) {
-        return UBCollection::remove_items($id, $storyboard_array, static::REL_ACTIVITY_STORYBOARD);
-    }
-
-    static function get_storyboards($id) {
-        return UBCollection::get_items($id, static::REL_ACTIVITY_STORYBOARD);
-    }
-
     // TEACHER RESOURCE VIDEOS
     static function add_videos($id, $video_array) {
         return UBCollection::add_items($id, $video_array, static::REL_ACTIVITY_VIDEO);
@@ -333,37 +307,20 @@ class ClipitActivity extends UBItem {
         return UBCollection::get_items($id, static::REL_ACTIVITY_FILE);
     }
 
-    // TEACHER RESOURCE DOCUMENTS
-    static function add_documents($id, $document_array) {
-        return UBCollection::add_items($id, $document_array, static::REL_ACTIVITY_DOCUMENT);
-    }
-
-    static function set_documents($id, $document_array) {
-        return UBCollection::set_items($id, $document_array, static::REL_ACTIVITY_DOCUMENT);
-    }
-
-    static function remove_documents($id, $document_array) {
-        return UBCollection::remove_items($id, $document_array, static::REL_ACTIVITY_DOCUMENT);
-    }
-
-    static function get_documents($id) {
-        return UBCollection::get_items($id, static::REL_ACTIVITY_DOCUMENT);
-    }
-
     /**
-     * Gets all published Storyboards from the Tasks contained inside an Activity
+     * Gets all published files from the Tasks contained inside an Activity
      *
      * @param int $id Activity ID
      *
-     * @return ClipitStoryboard[] Array of Storyboards
+     * @return ClipitFile[] Array of file objects
      */
-    static function get_published_storyboards($id) {
+    static function get_published_files($id) {
         $tasks = static::get_tasks($id);
-        $storyboard_array = array();
+        $file_array = array();
         foreach($tasks as $task_id) {
-            $storyboard_array = array_merge($storyboard_array, ClipitTask::get_storyboards($task_id));
+            $file_array = array_merge($file_array, ClipitTask::get_files($task_id));
         }
-        return $storyboard_array;
+        return $file_array;
     }
 
     /**
@@ -380,21 +337,5 @@ class ClipitActivity extends UBItem {
             $video_array = array_merge($video_array, ClipitTask::get_videos($task_id));
         }
         return $video_array;
-    }
-
-    /**
-     * Gets all published Documents from the Tasks contained inside an Activity
-     *
-     * @param int $id Activity ID
-     *
-     * @return ClipitDocument[] Array of Documents
-     */
-    static function get_published_documents($id) {
-        $tasks = static::get_tasks($id);
-        $document_array = array();
-        foreach($tasks as $task_id) {
-            $document_array = array_merge($document_array, ClipitTask::get_documents($task_id));
-        }
-        return $document_array;
     }
 }

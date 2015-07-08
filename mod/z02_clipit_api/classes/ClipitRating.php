@@ -23,7 +23,7 @@ class ClipitRating extends UBItem {
     const REL_RATING_TAGRATING = "ClipitRating-ClipitTagRating";
     const REL_RATING_RUBRICRATING = "ClipitRating-ClipitRubricRating";
     /**
-     * @var int Rating target (ClipitVideo or ClipitStoryboard)
+     * @var int Rating target (ClipitVideo or ClipitFile)
      */
     public $target = 0;
     /**

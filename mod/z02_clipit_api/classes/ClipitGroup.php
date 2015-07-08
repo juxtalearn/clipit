@@ -22,15 +22,11 @@ class ClipitGroup extends UBItem {
     const SUBTYPE = "ClipitGroup";
     const REL_GROUP_USER = "ClipitGroup-ClipitUser";
     const REL_GROUP_FILE = "ClipitGroup-ClipitFile";
-    const REL_GROUP_STORYBOARD = "ClipitGroup-ClipitStoryboard";
     const REL_GROUP_VIDEO = "ClipitGroup-ClipitVideo";
-    const REL_GROUP_DOCUMENT = "ClipitGroup-ClipitDocument";
     const REL_GROUP_TAG = "ClipitGroup-ClipitTag";
     public $user_array = array();
     public $file_array = array();
-    public $storyboard_array = array();
     public $video_array = array();
-    public $document_array = array();
     public $tag_array = array();
     public $activity = 0;
 
@@ -43,9 +39,7 @@ class ClipitGroup extends UBItem {
         parent::copy_from_elgg($elgg_entity);
         $this->user_array = static::get_users($this->id);
         $this->file_array = static::get_files($this->id);
-        $this->storyboard_array = static::get_storyboards($this->id);
         $this->video_array = static::get_videos($this->id);
-        $this->document_array = static::get_documents($this->id);
         $this->tag_array = static::get_tags($this->id);
         $this->activity = static::get_activity($this->id);
     }
@@ -60,8 +54,6 @@ class ClipitGroup extends UBItem {
         static::set_users($this->id, $this->user_array);
         static::set_files($this->id, $this->file_array);
         static::set_videos($this->id, $this->video_array);
-        static::set_storyboards($this->id, $this->storyboard_array);
-        static::set_documents($this->id, $this->document_array);
         static::set_tags($this->id, $this->tag_array);
         if($this->activity != 0) {
             ClipitActivity::add_groups($this->activity, array($this->id));
@@ -186,30 +178,6 @@ class ClipitGroup extends UBItem {
     }
 
     /**
-     * Add Storyboards to a Group.
-     *
-     * @param int   $id               Id of the Group to add Storyboards to.
-     * @param array $storyboard_array Array of Storyboard Ids to add to the Group.
-     *
-     * @return bool Returns true if added correctly, or false if error.
-     */
-    static function add_storyboards($id, $storyboard_array) {
-        return UBCollection::add_items($id, $storyboard_array, static::REL_GROUP_STORYBOARD);
-    }
-
-    static function set_storyboards($id, $storyboard_array) {
-        return UBCollection::set_items($id, $storyboard_array, static::REL_GROUP_STORYBOARD);
-    }
-
-    static function remove_storyboards($id, $storyboard_array) {
-        return UBCollection::remove_items($id, $storyboard_array, static::REL_GROUP_STORYBOARD);
-    }
-
-    static function get_storyboards($id) {
-        return UBCollection::get_items($id, static::REL_GROUP_STORYBOARD);
-    }
-
-    /**
      * Add Videos to a Group.
      *
      * @param int   $id          Id of the Group to add Videos to.
@@ -270,22 +238,5 @@ class ClipitGroup extends UBItem {
 
     static function get_tags($id) {
         return UBCollection::get_items($id, static::REL_GROUP_TAG);
-    }
-
-    // DOCUMENTS
-    static function add_documents($id, $document_array) {
-        return UBCollection::add_items($id, $document_array, static::REL_GROUP_DOCUMENT);
-    }
-
-    static function set_documents($id, $document_array) {
-        return UBCollection::set_items($id, $document_array, static::REL_GROUP_DOCUMENT);
-    }
-
-    static function remove_documents($id, $document_array) {
-        return UBCollection::remove_items($id, $document_array, static::REL_GROUP_DOCUMENT);
-    }
-
-    static function get_documents($id) {
-        return UBCollection::get_items($id, static::REL_GROUP_DOCUMENT);
     }
 }
