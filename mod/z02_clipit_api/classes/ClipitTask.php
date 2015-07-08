@@ -183,7 +183,7 @@ class ClipitTask extends UBItem {
                     if ((bool)$read_status[$entity_id] !== true) {
                         return false;
                     }
-                    $timestamp = UBCollection::get_timestamp($video_id, $entity_id, ClipitVideo::REL_RESOURCE_USER);
+                    $timestamp = UBCollection::get_timestamp($video_id, $entity_id, ClipitVideo::REL_VIDEO_USER);
                     $latest_timestamp = ($timestamp > $latest_timestamp ? $timestamp : $latest_timestamp);
                 }
                 return $latest_timestamp;
