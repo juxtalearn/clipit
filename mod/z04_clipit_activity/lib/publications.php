@@ -30,7 +30,7 @@ function publications_get_page_content_list($task_type, $tasks, $href){
         $unlink = true;
     }
     switch($task_type){
-        case "video_upload":
+        case ClipitTask::TYPE_VIDEO_UPLOAD:
             $view = 'multimedia/video/list';
             $entities = $task->video_array;
             $none_msg = elgg_echo('videos:none');
@@ -44,7 +44,7 @@ function publications_get_page_content_list($task_type, $tasks, $href){
             }
             elgg_extend_view("videos/search", "search/search");
             break;
-        case "storyboard_upload":
+        case ClipitTask::TYPE_FILE_UPLOAD:
             $view = 'multimedia/storyboard/list_summary';
             $entities = $task->storyboard_array;
             $none_msg = elgg_echo('storyboards:none');

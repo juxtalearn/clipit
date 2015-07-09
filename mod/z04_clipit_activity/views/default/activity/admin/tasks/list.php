@@ -11,7 +11,7 @@
  * @package         ClipIt
  */
 $task = elgg_extract('task', $vars);
-$feedback_task_id = ClipitTask::get_child($task->id);
+$feedback_task_id = ClipitTask::get_child_task($task->id);
 if($feedback_task_id){
     $feedback_task = array_pop(ClipitTask::get_by_id(array($feedback_task_id)));
 }

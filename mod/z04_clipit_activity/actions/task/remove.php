@@ -12,7 +12,7 @@
  */
 $id = (int)get_input('id');
 // Delete child ids
-if($child_id = ClipitTask::get_child($id)){
+if($child_id = ClipitTask::get_child_task($id)){
     ClipitTask::delete_by_id(array($child_id));
 }
 if(ClipitTask::delete_by_id(array($id))){

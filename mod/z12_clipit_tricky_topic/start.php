@@ -366,7 +366,6 @@ function tt_page_handler($page){
                     $multimedia = array(
                         'videos' => ClipitTrickyTopic::get_videos($tricky_topic->id),
                         'files' => ClipitTrickyTopic::get_files($tricky_topic->id),
-                        'storyboards' => ClipitTrickyTopic::get_storyboards($tricky_topic->id),
                     );
                     $tt_parent = ClipitTrickyTopic::get_cloned_from($tricky_topic->id);
                     $examples = ClipitExample::get_from_tricky_topic($tricky_topic->id);

@@ -34,7 +34,7 @@ if($entity_id){
 }
 // Add reflection items
 ClipitExample::set_example_types($example_id, $reflection_items);
-// Files, Storyboards and Videos
+// Files and Videos
 $file = $_FILES['file'];
 $new_file_id = array();
 for($i = 0;$i < count($file['name']);$i++){
@@ -46,21 +46,7 @@ for($i = 0;$i < count($file['name']);$i++){
     }
 }
 ClipitExample::add_files($example_id, $new_file_id);
-$storyboard = $_FILES['storyboard'];
-$new_sb_id = array();
-for($i = 0;$i < count($storyboard['name']);$i++){
-    if($storyboard['name'][$i]){
-        $file_id = ClipitFile::create(array(
-            'name' => $storyboard['name'][$i],
-            'temp_path'  => $storyboard['tmp_name'][$i]
-        ));
-        $new_sb_id[] = ClipitStoryboard::create(array(
-            'name' => $storyboard['name'][$i],
-            'file'  => $file_id
-        ));
-    }
-}
-ClipitExample::add_storyboards($example_id, $new_sb_id);
+
 $video_title = get_input('video_title');
 $video_file = $_FILES['video'];
 $video_link = get_input('video_url');

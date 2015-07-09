@@ -13,7 +13,19 @@
 elgg_load_js("jquery:timepicker");
 elgg_load_js("fullcalendar:moment");
 ?>
+<script>
+    <?php echo elgg_view('js/task_templates');?>
+</script>
+
 <div style="display: none;" id="step_2" class="row step">
+    <div class="col-md-12">
+        <div class="bg-info" style="background: #f4f4f4">
+            <?php echo elgg_echo('task:template:title');?>:
+            <select id="select-task-template" class="form-control margin-top-10" style="padding: 5px;width: auto;">
+                <option value="" selected><?php echo elgg_echo('task:template:select');?></option>
+            </select>
+        </div>
+    </div>
     <ul class="task-list"></ul>
     <div class="col-md-12 margin-top-5 margin-bottom-5">
         <strong>
@@ -45,3 +57,6 @@ elgg_load_js("fullcalendar:moment");
         ?>
     </div>
 </div>
+<script>
+    clipit.task.getTemplates();
+</script>

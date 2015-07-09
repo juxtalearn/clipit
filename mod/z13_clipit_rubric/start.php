@@ -30,6 +30,8 @@ function clipit_rubric_init() {
     // hook action: Task type rubric
     elgg_register_plugin_hook_handler("task:save:upload", "feedback", "task_rubric_create");
     elgg_register_plugin_hook_handler("task:save", "task", "task_rubric_save");
+
+    elgg_extend_view('tasks/container', 'tasks/container/feedback_rubric');
 }
 function task_rubric_create($hook, $entity_type, $returnvalue, $params){
     $feedback = $params['feedback_form'];
@@ -57,36 +59,49 @@ function task_rubric_save($hook, $entity_type, $returnvalue, $params){
     if($task['feedback-form'] && $task['title'] == "") {
         $task = $task['feedback-form'];
     }
+
     if(
         ( $task['entity_type'] == ClipitTask::TYPE_VIDEO_FEEDBACK ||
-        $task['entity_type'] == ClipitTask::TYPE_STORYBOARD_FEEDBACK )
-        && $rubric = $task['rubric']
+        $task['entity_type'] == ClipitTask::TYPE_FILE_FEEDBACK )
     ){
+        $properties = get_task_properties_action($task);
         // Edit task
         $task_id = get_input('task-id');
-        $rubric_items = $rubric['item'];
-        $rubric_item_array = array();
-        foreach ($rubric_items as $rubric_item) {
-            $data = array(
-                'name' => $rubric_item['name'],
-                'level_array' => $rubric_item['level']
-            );
 
-            if ($rubric_item['id']) {
-                if ($rubric_item['remove'] == 1) {
-                    ClipitRubricItem::delete_by_id(array($rubric_item['id']));
-                } else {
-                    $rubric_item_array[] = $rubric_item['id'];
-                    ClipitRubricItem::set_properties($rubric_item['id'], $data);
+        if($rubric = $task['rubric']) {
+            if(is_array($rubric)) {
+                // Edit/add rubric items
+                $rubric_items = $rubric['item'];
+                $rubric_item_array = array();
+                foreach ($rubric_items as $rubric_item) {
+                    $data = array(
+                        'name' => $rubric_item['name'],
+                        'level_array' => $rubric_item['level']
+                    );
+
+                    if ($rubric_item['id']) {
+                        if ($rubric_item['remove'] == 1) {
+                            ClipitRubricItem::delete_by_id(array($rubric_item['id']));
+                        } else {
+                            $rubric_item_array[] = $rubric_item['id'];
+                            ClipitRubricItem::set_properties($rubric_item['id'], $data);
+                        }
+                    } else {
+                        $rubric_item_array[] = ClipitRubricItem::create($data);
+                    }
                 }
+                ClipitRubric::set_rubric_items($rubric['id'], $rubric_item_array);
+                ClipitRubric::set_properties($rubric['id'], array('name' => $rubric['name']));
             } else {
-                $rubric_item_array[] = ClipitRubricItem::create($data);
+                // New rubric selected
+                $properties = array_merge($properties, array(
+                    'rubric' => ClipitRubric::create_clone($rubric)
+                ));
             }
         }
-        ClipitRubric::set_rubric_items($rubric['id'], $rubric_item_array);
-        ClipitRubric::set_properties($rubric['id'], array('name' => $rubric['name']));
+
         // Save task
-        ClipitTask::set_properties($task_id, get_task_properties_action($task));
+        ClipitTask::set_properties($task_id, $properties);
     }
 }
 

@@ -14,8 +14,7 @@ $entity = elgg_extract('entity', $vars);
 $object = ClipitSite::lookup($entity->id);
 $entity_class = $object['subtype'];
 $scope = $entity_class::get_scope($entity->id);
-?>
-<?php
+
 if($scope == 'group'):
     $group = $entity_class::get_group($entity->id);
     $related_discussion = false;

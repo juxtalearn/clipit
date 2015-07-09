@@ -29,7 +29,7 @@ $body .= elgg_view("input/hidden", array(
 $task_type = 'upload';
 
 $feedback_check = false;
-if(ClipitTask::get_child($task->id) == 0 && $task->task_type != ClipitTask::TYPE_QUIZ_TAKE && $task->task_type != ClipitTask::TYPE_OTHER){
+if(ClipitTask::get_child_task($task->id) == 0 && $task->task_type != ClipitTask::TYPE_QUIZ_TAKE && $task->task_type != ClipitTask::TYPE_OTHER){
     $feedback_check = true;
 }
 if($task->parent_task){
@@ -39,8 +39,7 @@ if($task->parent_task){
     $feedback_check = false;
     $resources = array_merge(
         ClipitTask::get_videos($task->id),
-        ClipitTask::get_files($task->id),
-        ClipitTask::get_storyboards($task->id)
+        ClipitTask::get_files($task->id)
     );
     $params = array(
         'entity' => array(
@@ -54,8 +53,8 @@ if($task->parent_task){
 
 //$body .= elgg_view('activity/create/task', array('task_type' => $task_type, 'id' => $id, 'task' => $task));
 switch($task->task_type){
-    case ClipitTask::TYPE_STORYBOARD_UPLOAD:
-        $feedback_option = ClipitTask::TYPE_STORYBOARD_FEEDBACK;
+    case ClipitTask::TYPE_FILE_UPLOAD:
+        $feedback_option = ClipitTask::TYPE_FILE_FEEDBACK;
         break;
     case ClipitTask::TYPE_VIDEO_UPLOAD:
         $feedback_option = ClipitTask::TYPE_VIDEO_FEEDBACK;

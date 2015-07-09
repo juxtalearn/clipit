@@ -29,67 +29,13 @@ $activity_id = ClipitActivity::create(array(
 // Tasks
 $tasks = get_input('task');
 foreach($tasks as $task){
-    if($quiz_id = $task['quiz_id']){
-        $quiz_id = ClipitQuiz::create_clone($task['quiz_id']);
-    }
+
     if($task['title']) {
-        // Task exist
-        $task_id = ClipitTask::create(array(
-            'name' => $task['title'],
-            'description' => $task['description'],
-            'task_type' => $task['type'],
-            'start' => date_create_from_format('d/m/y H:i', $task['start'])->getTimestamp(),
-            'end' => date_create_from_format('d/m/y H:i', $task['end'])->getTimestamp(),
-            'quiz' => $task['type'] == ClipitTask::TYPE_QUIZ_TAKE ? $quiz_id : 0
-        ));
-
-        ClipitActivity::add_tasks($activity_id, array($task_id));
-        if ($task['type'] == ClipitTask::TYPE_RESOURCE_DOWNLOAD) {
-            $files = array();
-            $files = array_filter($task['attach_files']);
-            $new_files_id = array();
-            foreach ($files as $file_id) {
-                $new_files_id[] = ClipitFile::create_clone($file_id);
-            }
-            ClipitActivity::add_files($activity_id, $new_files_id);
-            ClipitTask::add_files($task_id, $new_files_id);
-
-            $videos = array();
-            $videos = array_filter($task['attach_videos']);
-            $new_videos_id = array();
-            foreach ($videos as $video_id) {
-                $new_videos_id[] = ClipitVideo::create_clone($video_id);
-            }
-            ClipitActivity::add_videos($activity_id, $new_videos_id);
-            ClipitTask::add_videos($task_id, $new_videos_id);
-
-            $storyboards = array();
-            $storyboards = array_filter($task['attach_storyboards']);
-            $new_storyboards_id = array();
-            foreach ($storyboards as $storyboard_id) {
-                $new_storyboards_id[] = ClipitStoryboard::create_clone($storyboard_id);
-            }
-            ClipitActivity::add_storyboards($activity_id, $new_storyboards_id);
-            ClipitTask::add_storyboards($task_id, $new_storyboards_id);
-        }
-    }
-    if($task['feedback']){
-        $feedback = $task['feedback-form'];
-        if($feedback['title'] && $feedback['type'] && $feedback['start'] && $feedback['end'] ){
-            if($feedback['rubric']){
-                $rubric_id = ClipitRubric::create_clone($feedback['rubric']);
-            }
-            $feedback_task_id = ClipitTask::create(array(
-                'name' => $feedback['title'],
-                'description' => $feedback['description'],
-                'task_type' => $feedback['type'],
-                'start' => date_create_from_format('d/m/y H:i', $feedback['start'])->getTimestamp(),
-                'end' => date_create_from_format('d/m/y H:i', $feedback['end'])->getTimestamp(),
-                'parent_task' => $task_id,
-                'rubric' => $rubric_id
-            ));
-            ClipitActivity::add_tasks($activity_id, array($feedback_task_id));
-        }
+        elgg_trigger_plugin_hook('task:save', 'task', array(
+            'task' => $task,
+            'activity_id' => $activity_id,
+            'activity_create' => true
+        ), true);
     }
 }
 // Called users

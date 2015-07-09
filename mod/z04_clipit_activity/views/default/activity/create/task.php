@@ -19,7 +19,7 @@ switch($task_type){
         $task_types = array(
             ClipitTask::TYPE_QUIZ_TAKE => elgg_echo('task:quiz_answer'),
             ClipitTask::TYPE_VIDEO_UPLOAD => elgg_echo('task:video_upload'),
-            ClipitTask::TYPE_STORYBOARD_UPLOAD => elgg_echo('task:storyboard_upload'),
+            ClipitTask::TYPE_FILE_UPLOAD => elgg_echo('task:file_upload'),
             ClipitTask::TYPE_RESOURCE_DOWNLOAD => elgg_echo('task:resource_download'),
             ClipitTask::TYPE_OTHER => elgg_echo('task:other')
         );
@@ -29,7 +29,7 @@ switch($task_type){
     case "feedback":
         $task_types = array(
             ClipitTask::TYPE_VIDEO_FEEDBACK => elgg_echo('task:video_feedback'),
-            ClipitTask::TYPE_STORYBOARD_FEEDBACK => elgg_echo('task:storyboard_feedback')
+            ClipitTask::TYPE_FILE_FEEDBACK => elgg_echo('task:storyboard_feedback')
         );
         $input_array = "[{$id}][feedback-form]";
         $disabled = true;
@@ -53,7 +53,92 @@ if($task){
     ));
 }
 ?>
-<div class="col-mds-12">
+<style>
+    .dummy {
+        padding-top: 100%;
+    }
+    .btns-task-select label{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+    }
+    .thumbnail {
+        position: relative;
+        border: 1px solid #ddd !important;
+        border-radius: 4px;
+        padding: 4px;
+        margin-bottom: 0;
+        height: 50px;
+    }
+    .btns-task-select .thumbnail.active,
+    .thumbnail:hover{
+        border: 1px solid #32b4e5 !important;
+
+    }
+    .btns-task-select .thumbnail.active{
+        background: rgb(236, 247, 252);
+    }
+    .btns-task-select .thumbnail.active .task-icon,
+    .thumbnail:hover .task-icon{
+        color: #32b4e5;
+    }
+    .btns-task-select li{
+         float: left;
+     }
+    .btns-task-select li:hover{
+        background: none !important;
+    }
+    .btns-task-select li a{
+        position: initial;
+        padding: 0;
+        opacity: 1 !important;
+    }
+    .btns-task-select .task-title{
+        overflow: hidden;
+        text-align: left;
+        font-weight: bold;
+        font-size: 85%;
+        position: relative;
+        top: 50%;
+        -ms-transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+    .btns-task-select .task-icon{
+        float: left;
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+        transition: all .2s ease-in-out;
+    }
+    .btns-task-select .task-icon .fa-circle{
+        font-size: 40px;
+    }
+    .btns-task-select .task-icon .fa-inverse{
+        font-size: 20px;
+        line-height: 40px;
+    }
+    .task-type-container{
+        border: 1px solid rgb(186, 230, 246);
+        border-radius: 3px;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+    .task-type-container #attach_list{
+        background: none;
+        margin: 0 -15px;
+        border: 0;
+        border-radius: 3px;
+        overflow: hidden;
+        padding: 0 !important;
+    }
+    .label-task-type span.error{
+        float: none !important;
+        margin-left: 10px;
+    }
+</style>
+<div class="col-mds-12 <?php echo $disabled ? 'feedback_task' : 'main_task';?>">
     <?php if(!$disabled && !$task && $vars['delete_task']!==false):?>
         <div class="margin-left-10 pull-left margin-top-10 margin-right-10">
         <a class="btn btn-border-red btn-default btn-icon show" onclick="javascript:$(this).closest('.task').remove();">
@@ -61,10 +146,8 @@ if($task){
         </a>
         </div>
     <?php endif;?>
-<!--    <div class="content-block">-->
-<!--    <div class="pull-left">-->
     <div class="row <?php echo (!$disabled && !$task &&$vars['delete_task']!==false) ? 'col-md-11':'';?>">
-        <div class="col-md-5">
+        <div class="col-md-8">
             <div class="form-group">
                 <label for="task-title"><?php echo elgg_echo("task:title");?></label>
                 <?php echo elgg_view("input/text", array(
@@ -76,27 +159,14 @@ if($task){
                 ?>
             </div>
         </div>
-        <div class="col-md-3">
-            <label for="task-type"><?php echo elgg_echo("task:task_type");?></label>
-            <?php echo elgg_view('input/dropdown', array(
-                'name' => "task{$input_array}[type]",
-                'class' => 'form-control task-types',
-                'style' => 'padding-top: 5px;padding-bottom: 5px;',
-                'required' => $required,
-                'disabled' => $task->task_type ? true : $disabled,
-                'value' => $vars['default_task'] ? $vars['default_task'] : $task->task_type,
-                'options_values' => $task_types
-            ));
-            ?>
             <?php if($disabled):?>
                 <?php echo elgg_view("input/hidden", array(
                     'name' => "task{$input_array}[type]",
-                    'class' => 'form-control task-types',
+                    'class' => 'feedback-task-type',
                     'value' => $vars['default_task'] ? $vars['default_task'] : false,
                 ));
                 ?>
             <?php endif;?>
-        </div>
         <div class="col-md-2">
             <label for="task-start"><?php echo elgg_echo("start");?></label>
             <?php echo elgg_view("input/text", array(
@@ -119,12 +189,24 @@ if($task){
             ));
             ?>
         </div>
+        <?php if(!$disabled):?>
+            <div class="col-md-12 margin-bottom-10">
+                <label class="label-task-type" for="task<?php echo $input_array;?>[type]"><?php echo elgg_echo("task:task_type");?></label>
+                <div class="row btns-task-select">
+                <?php echo elgg_view('tasks/menu', array(
+                        'input_array' => $input_array,
+                        'entity' => $task
+                    ));
+                ?>
+                </div>
+            </div>
+        <?php endif;?>
         <div class="col-md-8">
             <div class="form-group">
                 <label for="task-description"><?php echo elgg_echo("description");?></label>
                 <?php echo elgg_view("input/plaintext", array(
                     'name' => "task{$input_array}[description]",
-                    'class' => 'form-control',
+                    'class' => 'form-control input-task-description',
                     'value' => $task->description,
                     'rows' => $task->description ? 5:1,
                     'onclick' => 'javascript:this.rows=5;'
@@ -132,35 +214,13 @@ if($task){
                 ?>
             </div>
         </div>
-        <?php
-            if($task
-                && ($task->task_type == ClipitTask::TYPE_STORYBOARD_FEEDBACK || $task->task_type == ClipitTask::TYPE_VIDEO_FEEDBACK)
-                || $disabled
-            ):
-            $rubric_id = uniqid('rubric_');
-        ?>
-
-            <div id="<?php echo $rubric_id;?>" class="rubric-select-list col-md-12 bg-white"
-                 style="<?php echo $task->rubric!=0 ? '':'display:none;';?> border: 1px solid rgb(186, 230, 246);border-radius: 3px;padding-top: 15px;padding-bottom: 15px;">
-                <?php
-                    if($task->rubric):
-                        $rubric = ClipitRubric::get_by_id(array($task->rubric));
-                    ?>
-                        <?php echo elgg_view('forms/rubric/save', array(
-                            'entity' => array_pop(ClipitRubric::get_by_id(array($task->rubric))),
-                            'input_prefix' => 'task'.$input_array,
-                            'select' => true,
-                            'pre_populate' => true,
-                            'unselected' => true
-                        ));?>
-                    <?php else:?>
-                        <ul class="rubrics"></ul>
-                    <?php endif;?>
-                <div class="clearfix"></div>
-            </div>
-        <?php endif;?>
 
         <?php if(!$disabled):?>
+            <?php echo elgg_view("input/hidden", array(
+                'name' => 'input_prefix',
+                'value' => "task{$input_array}",
+            ));
+            ?>
             <div class="col-md-4 feedback-module" style="<?php echo $vars['feedback_check'] != false ? '' : 'display: none;'; ?>padding: 10px;background: #fafafa;">
                 <label for="activity-title"><?php echo elgg_echo("task:feedback");?></label>
                 <div class="checkbox feedback-check">
@@ -170,65 +230,49 @@ if($task){
                 </div>
             </div>
         <?php endif;?>
+        <?php
+        $feedback_id = false;
+        if($task->task_type == ClipitTask::TYPE_VIDEO_UPLOAD || $task->task_type == ClipitTask::TYPE_FILE_UPLOAD):
+            if($feedback_id = ClipitTask::get_child_task($task->id)):
+                $feedback_task = array_pop(ClipitTask::get_by_id(array($feedback_id)));
+        ?>
+            <div class="col-md-4" style="padding: 10px;background: #fafafa;">
+                <label><?php echo elgg_echo("task:feedback");?></label>
+                <strong>
+                <?php echo elgg_view('output/url', array(
+                    'href'  => '#edit-task-'.$feedback_task->id,
+                    'target' => '_blank',
+                    'title' => $feedback_task->name,
+                    'text'  => elgg_view("tasks/icon_task_type", array('type' => $feedback_task->task_type)) . ' '.$feedback_task->name
+                ));
+                ?>
+                </strong>
+                <small class="show margin-top-5">
+                    <strong><?php echo elgg_echo('start');?>: </strong>
+                    <?php echo elgg_view('output/friendlytime', array('time' => $feedback_task->start));?>,
+                    <strong><?php echo elgg_echo('end');?>: </strong>
+                    <?php echo elgg_view('output/friendlytime', array('time' => $feedback_task->end));?>
+                </small>
+            </div>
+            <?php endif;?>
+        <?php endif;?>
     </div>
-    <?php if(!$disabled):?>
+<!--    --><?php //if(!$disabled):?>
         <?php echo elgg_view("input/hidden", array(
             'name' => 'input_prefix',
             'value' => "task{$input_array}",
         ));
         ?>
         <div class="clearfix"></div>
-        <div class="task-type-container margin-bottom-10"
-             style="<?php echo $task->task_type == ClipitTask::TYPE_QUIZ_TAKE ? '':'display:none;' ;?>
-                 border: 1px solid #bae6f6;border-radius: 3px;padding: 10px;">
-            <?php if($task):
-                switch($task->task_type){
-                    case ClipitTask::TYPE_QUIZ_TAKE:
-                        echo elgg_view('activity/admin/tasks/quiz/quiz', array(
-                            'entity' => array_pop(ClipitQuiz::get_by_id(array($task->quiz))),
-                            'activity_id' => $task->activity,
-                            'input_prefix' => "task{$input_array}"
-                        ));
-                        break;
-                }
-            endif;
-            ?>
-        </div>
-    <?php endif;?>
+        <?php if(!$feedback_id):?>
+            <div class="task-type-container bg-white" style="display: <?php echo $task ? 'block':'none';?>">
+                <?php echo elgg_view('tasks/container', array(
+                    'input_array' => $input_array,
+                    'entity' => $task,
+                    'params' => $vars['entity'],
+                    'id' => $id
+                ));?>
+            </div>
+        <?php endif;?>
+<!--    --><?php //endif;?>
 </div>
-<?php
-if(!$disabled):
-    $attach = $vars['entity'];
-    $attach['id'] = $id;
-?>
-    <?php if($attach['selected']):?>
-        <script>
-            $(function(){
-                $("[data-attach='<?php echo $attach['id'];?>']").attach_multimedia({
-                    default_list: "files",
-                    data:{
-                        list: $(this).data("menu"),
-                        entity_id: "<?php echo $task->activity;?>",
-                        selected: <?php echo $attach['selected'];?>
-                    }
-                }).loadAll();
-            });
-        </script>
-    <?php endif;?>
-
-    <?php echo elgg_view("multimedia/attach/list", $attach);?>
-
-<!--    <ul class="nav nav-tabs margin-bottom-5 margin-top-10" style="display: none;">-->
-<!--        <li class="active"><a href="#activity-multimedia" data-toggle="tab">Materiales de la actividad</a></li>-->
-<!--        <li><a href="#tricky-topic-multimedia" data-toggle="tab">Materiales del tema clave</a></li>-->
-<!--    </ul>-->
-<!--    <div class="attach-multimedia tab-content">-->
-<!--        <div id="activity-multimedia" class="tab-pane active">-->
-<!--            --><?php //echo elgg_view("multimedia/attach/list", array_merge($attach, array('class' => 'multimedia-activity')));?>
-<!--        </div>-->
-<!--        <div id="tricky-topic-multimedia" class="tab-pane">-->
-<!--            --><?php //echo elgg_view("multimedia/attach/list", array('id' => $id.time(), 'class' => 'multimedia-tt'));?>
-<!--        </div>-->
-<!--    </div>-->
-
-<?php endif;?>

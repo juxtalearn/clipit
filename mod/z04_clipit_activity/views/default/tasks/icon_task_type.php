@@ -21,8 +21,8 @@ switch($type){
               </span>';
         $custom = true;
         break;
-    case ClipitTask::TYPE_STORYBOARD_UPLOAD:
-        $title = elgg_echo('task:storyboard_upload');
+    case ClipitTask::TYPE_FILE_UPLOAD:
+        $title = elgg_echo('task:file_upload');
         echo '<span class="fa-stack fa-lg blue " title="'.$title.'" style="font-size: 50%;">
                   <i class="fa fa-file-o fa-stack-2x"></i>
                   <i class="fa fa-plus fa-stack-1x" style="top:2px;"></i>
@@ -37,8 +37,8 @@ switch($type){
         $title = elgg_echo('task:video_feedback');
         $icon = "comment";
         break;
-    case ClipitTask::TYPE_STORYBOARD_FEEDBACK:
-        $title = elgg_echo('task:storyboard_feedback');
+    case ClipitTask::TYPE_FILE_FEEDBACK:
+        $title = elgg_echo('task:file_feedback');
         $icon = "comment";
         break;
     case ClipitTask::TYPE_OTHER:

@@ -50,14 +50,14 @@ switch($task->task_type):
                 'task' => $task
             ));
         break;
-    case ClipitTask::TYPE_STORYBOARD_UPLOAD:
-        echo elgg_view('dashboard/modules/activity_admin/storyboard_upload',
+    case ClipitTask::TYPE_FILE_UPLOAD:
+        echo elgg_view('dashboard/modules/activity_admin/file_upload',
             array(
                 'groups' => $activity->group_array,
                 'task' => $task
             ));
         break;
-    case ClipitTask::TYPE_STORYBOARD_FEEDBACK:
+    case ClipitTask::TYPE_FILE_FEEDBACK:
         echo elgg_view('dashboard/modules/activity_admin/storyboard_feedback',
             array(
                 'users' => $activity->student_array,

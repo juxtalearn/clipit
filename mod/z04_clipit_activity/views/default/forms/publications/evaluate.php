@@ -127,9 +127,7 @@ $(function(){
                 'rating_tag' => $rating_tag
             ));
         }
-    ?>
-    <?php
-        $i++;
+    $i++;
     endforeach;
     ?>
     <div class="col-md-6"><?php echo $view_tags_1;?></div>

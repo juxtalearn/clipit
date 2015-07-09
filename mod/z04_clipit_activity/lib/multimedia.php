@@ -34,7 +34,6 @@ function files_get_page_content_list($params = array()){
     }
     $content .= elgg_view_form("multimedia/files/set_options",
         array('body' => elgg_view('multimedia/file/list', $params), 'class' => 'files-table'));
-//    $content = elgg_view('multimedia/file/list', $params);
     if (!$files) {
         $content .= elgg_view('output/empty', array('value' => elgg_echo('file:none')));
     }
@@ -54,23 +53,6 @@ function videos_get_page_content_list($params = array()){
     $content = elgg_view('multimedia/video/list', $params);
     if (!$videos) {
         $content .= elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
-    }
-    return $content;
-}
-
-function storyboards_get_page_content_list($params = array()){
-    $sbs = $params['entities'];
-    // Search items
-    if($search_term = stripslashes(get_input("search"))){
-        $items_search = array_keys(ClipitStoryboard::get_from_search($search_term));
-        $sbs = array_uintersect($items_search, $sbs, "strcasecmp");
-    }
-    elgg_extend_view("storyboards/search", "search/search");
-    $params['entities'] = $sbs;
-
-    $content = elgg_view('multimedia/storyboard/list', $params);
-    if (!$sbs) {
-        $content .= elgg_view('output/empty', array('value' => elgg_echo('storyboards:none')));
     }
     return $content;
 }

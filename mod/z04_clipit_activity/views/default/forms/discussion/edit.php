@@ -39,8 +39,7 @@ $body .= '<div class="form-group">
 // Attach multimedia items
 $videos = ClipitPost::get_videos($message->id);
 $files = ClipitPost::get_files($message->id);
-$storyboards = ClipitPost::get_storyboards($message->id);
-$multimedia = array_merge($videos, $files, $storyboards);
+$multimedia = array_merge($videos, $files);
 $id = uniqid();
 $body .= elgg_view("multimedia/attach/list", array('id' => $id));
 

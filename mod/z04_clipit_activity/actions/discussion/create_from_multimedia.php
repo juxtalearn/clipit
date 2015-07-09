@@ -30,9 +30,6 @@ if(!$entity){
         case "ClipitFile":
             ClipitPost::add_files($new_message_id, array($entity_id));
             break;
-        case "ClipitStoryboard":
-            ClipitPost::add_storyboards($new_message_id, array($entity_id));
-            break;
     }
     system_message(elgg_echo('discussion:created'));
     ClipitPost::set_read_status($new_message_id, true, array($user_id));

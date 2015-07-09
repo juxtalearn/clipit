@@ -39,22 +39,6 @@ function view_recommended_event($event, $view_type = 'full'){
                     )))
             );
             break;
-        case ClipitActivity::REL_ACTIVITY_STORYBOARD:
-            $activity = array_pop(ClipitActivity::get_by_id(array($relationship->guid_one)));
-            $entity = array_pop(ClipitStoryboard::get_by_id(array($relationship->guid_two)));
-            $file = array_pop(ClipitFile::get_by_id(array($entity->file)));
-            $href = "clipit_activity/{$activity->id}/resources/view/{$entity->id}";
-            $params = array(
-                'title' => elgg_echo('teacher:addedresource') /*'Teacher added new storyboard to resources'*/,
-                'icon' => 'fa-file',
-                'author' => $entity->owner_id,
-                'body' => elgg_view("recommended/events/file", array(
-                    'entity' => $entity,
-                    'href' => $href,
-                    'image' => elgg_view("multimedia/file/preview", array('file'  => $file)
-                    )))
-            );
-            break;
         case ClipitActivity::REL_ACTIVITY_STUDENT:
             $activity = array_pop(ClipitActivity::get_by_id(array($relationship->guid_one)));
             $entity = array_pop(ClipitUser::get_by_id(array($relationship->guid_two)));
@@ -129,23 +113,7 @@ function view_recommended_event($event, $view_type = 'full'){
                     )))
             );
             break;
-        case ClipitGroup::REL_GROUP_STORYBOARD:
-            $activity_id = ClipitGroup::get_activity($relationship->guid_one);
-            $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
-            $entity = array_pop(ClipitStoryboard::get_by_id(array($relationship->guid_two)));
-            $file = array_pop(ClipitFile::get_by_id(array($entity->file)));
-            $href = "clipit_activity/{$activity->id}/group/{$relationship->guid_one}/repository/view/{$entity->id}";
-            $params = array(
-                'title' => elgg_echo('task:storyboard_uploaded'), //'Added new storyboard to group',
-                'icon' => 'fa-file',
-                'author' => $entity->owner_id,
-                'body' => elgg_view("recommended/events/file", array(
-                    'entity' => $entity,
-                    'href' => $href,
-                    'image' => elgg_view("multimedia/file/preview", array('file'  => $file)
-                    )))
-            );
-            break;
+
         case ClipitPost::REL_MESSAGE_DESTINATION:
             // Message from group|activity
             $object = ClipitSite::lookup($relationship->guid_two);
@@ -190,7 +158,7 @@ function view_recommended_event($event, $view_type = 'full'){
             );
             break;
         // Tasks
-        case ClipitTask::REL_TASK_STORYBOARD:
+        case ClipitTask::REL_TASK_FILE:
             $activity_id = ClipitStoryboard::get_activity($relationship->guid_two);
             $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
             $group_id = ClipitStoryboard::get_group($relationship->guid_two);
@@ -204,7 +172,7 @@ function view_recommended_event($event, $view_type = 'full'){
                 'text'  => $entity->name,
             ));
             $params = array(
-                'title' => elgg_echo('task:storyboard_upload') .' '.$storyboard_info,
+                'title' => elgg_echo('task:file_upload') .' '.$storyboard_info,
                 'icon' => 'fa-file',
                 'author' => $group->id,
                 'body' => elgg_view("recommended/events/file", array(

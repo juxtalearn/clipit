@@ -12,7 +12,7 @@
  */
 // Teacher view
 if(hasTeacherAccess($user->role)){
-    $storyboards = ClipitStoryboard::get_by_id($task->storyboard_array);
+    $storyboards = ClipitFile::get_by_id($task->storyboard_array);
     $body = elgg_view('tasks/admin/task_upload', array(
         'entities'    => $storyboards,
         'activity'      => $activity,
@@ -21,7 +21,7 @@ if(hasTeacherAccess($user->role)){
         'list_view' => 'multimedia/storyboard/list'
     ));
 } elseif($user->role == ClipitUser::ROLE_STUDENT) {
-    $storyboards = ClipitGroup::get_storyboards($group_id);
+    $storyboards = ClipitGroup::get_files($group_id);
     $href_publications = "clipit_activity/{$activity->id}/publications";
     $body = elgg_view('multimedia/storyboard/list', array(
         'entities' => $storyboards,

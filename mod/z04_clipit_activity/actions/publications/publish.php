@@ -78,14 +78,6 @@ if(count($entity)==0 || trim($title) == "" || trim($description) == ""){
     $entity_class::set_labels($new_entity_id, $total_labels);
     // Tags
     $entity_class::set_tags($new_entity_id, $tags);
-//    /* Get rubric items from task */
-//    $task_feedback_id = ClipitTask::get_child($task_id);
-//    $task_feedback = array_pop(ClipitTask::get_by_id(array($task_feedback_id)));
-//    if(count($task_feedback->rubric_item_array) > 0) {
-//        $rubric_items = $task_feedback->rubric_item_array;
-//    }
-//    // Rubric items
-//    $entity_class::add_rubric_items($new_entity_id, $rubric_items);
 
     if($new_entity_id){
         switch($entity_class){
@@ -99,11 +91,11 @@ if(count($entity)==0 || trim($title) == "" || trim($description) == ""){
                     }
                 }
                 break;
-            case "ClipitStoryboard":
+            case "ClipitFile":
                 if($scope_entity == 'ClipitTask') {
-                    $scope_entity::add_storyboards($task_id, array($new_entity_id));
+                    $scope_entity::add_files($task_id, array($new_entity_id));
                 } else {
-                    $scope_entity::add_pub_storyboards(array($new_entity_id));
+                    $scope_entity::add_pub_files(array($new_entity_id));
                 }
                 break;
             default:

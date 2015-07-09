@@ -14,13 +14,13 @@ $type = elgg_extract('type', $vars);
 
 switch($type){
     case ClipitTask::TYPE_VIDEO_UPLOAD:
-    case ClipitTask::TYPE_STORYBOARD_UPLOAD:
+    case ClipitTask::TYPE_FILE_UPLOAD:
            $output = "users";
             $title = elgg_echo('task:group');
         break;
     case ClipitTask::TYPE_QUIZ_TAKE:
     case ClipitTask::TYPE_VIDEO_FEEDBACK:
-    case ClipitTask::TYPE_STORYBOARD_FEEDBACK:
+    case ClipitTask::TYPE_FILE_FEEDBACK:
     case ClipitTask::TYPE_RESOURCE_DOWNLOAD:
         $output = "user";
         $title = elgg_echo('task:user');
