@@ -51,7 +51,7 @@ switch($task->task_type):
             ));
         break;
     case ClipitTask::TYPE_FILE_UPLOAD:
-        echo elgg_view('dashboard/modules/activity_admin/storyboard_upload',
+        echo elgg_view('dashboard/modules/activity_admin/file_upload',
             array(
                 'groups' => $activity->group_array,
                 'task' => $task

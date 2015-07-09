@@ -39,8 +39,7 @@ if($task->parent_task){
     $feedback_check = false;
     $resources = array_merge(
         ClipitTask::get_videos($task->id),
-        ClipitTask::get_files($task->id),
-        ClipitTask::get_storyboards($task->id)
+        ClipitTask::get_files($task->id)
     );
     $params = array(
         'entity' => array(

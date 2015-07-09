@@ -75,17 +75,6 @@ if(!$id){
             ));
             ?>
         </li>
-        <li data-menu="storyboards">
-            <strong><span class="blue-lighter pull-right" id="storyboards_count"></span></strong>
-            <?php echo elgg_view('output/url', array(
-                'href'  => "javascript:;",
-                'title' => elgg_echo('storyboards'),
-                'class' => 'element_attach_menu show child-decoration-none',
-                'data-menu' => 'storyboards',
-                'text'  => elgg_echo('storyboards')
-            ));
-            ?>
-        </li>
     </ul>
     <div class="col-md-10" style="border-left: 1px solid #bae6f6;padding: 0px 10px;">
         <div class="multimedia-list">

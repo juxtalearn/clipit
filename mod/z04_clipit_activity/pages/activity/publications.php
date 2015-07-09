@@ -70,13 +70,13 @@ if($page[2] == 'view' && $page[3]){
             ));
             break;
         // Clipit Storyboard publication
-        case 'ClipitStoryboard':
-            $task_id = ClipitStoryboard::get_task($entity_id);
-            $sbs = ClipitTask::get_storyboards($task_id);
+        case 'ClipitFile':
+            $task_id = ClipitFile::get_task($entity_id);
+            $files = ClipitTask::get_files($task_id);
             if(!$entity || !in_array($entity_id, $sbs)){
                 return false;
             }
-            $file = array_pop(ClipitFile::get_by_id(array($entity->file)));
+            $file = array_pop(ClipitFile::get_by_id(array($entity->id)));
             $body = elgg_view("multimedia/storyboard/body", array(
                 'entity' => $entity,
                 'file'  => $file,
@@ -103,15 +103,11 @@ if($page[2] == 'view' && $page[3]){
     switch($selected_tab){
         case 'videos':
             // Get last task [type: video_upload]
-            $content = publications_get_page_content_list('video_upload', $tasks, $href);
+            $content = publications_get_page_content_list(ClipitTask::TYPE_VIDEO_UPLOAD, $tasks, $href);
             break;
-        case 'resources':
+        case 'files':
             // Get last task [type: storyboard_upload]
-            $content = publications_get_page_content_list('resource_upload', $tasks, $href);
-            break;
-        case 'storyboards':
-            // Get last task [type: storyboard_upload]
-            $content = publications_get_page_content_list('storyboard_upload', $tasks, $href);
+            $content = publications_get_page_content_list(ClipitTask::TYPE_FILE_UPLOAD, $tasks, $href);
             break;
     }
 }

@@ -41,17 +41,7 @@ if(!$page[2]) {
             );
             $content = videos_get_page_content_list($params);
             break;
-        case 'storyboards':
-            $sbs = ClipitActivity::get_storyboards($activity->id);
-            $params = array(
-                'entity' => $activity,
-                'create' => $canCreate,
-                'entities' => $sbs,
-                'actions' => true,
-                'href' => $href
-            );
-            $content = storyboards_get_page_content_list($params);
-            break;
+
         default:
             return false;
             break;

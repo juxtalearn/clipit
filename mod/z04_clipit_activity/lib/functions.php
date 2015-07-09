@@ -381,7 +381,7 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
             }
             break;
         case ClipitTask::TYPE_FILE_UPLOAD:
-            foreach($task->storyboard_array as $storyboard_id){
+            foreach($task->file_array as $storyboard_id){
                 $group_sb = ClipitStoryboard::get_group($storyboard_id);
                 if($group_id == $group_sb){
                     $status = array(
@@ -396,7 +396,7 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
             break;
         case ClipitTask::TYPE_FILE_FEEDBACK:
 
-            $entities = ClipitTask::get_storyboards($task->parent_task);
+            $entities = ClipitTask::get_files($task->parent_task);
             $evaluation_list = get_filter_evaluations($entities, $task->activity, $user_id);
             $total = count($evaluation_list["evaluated"]) + count($evaluation_list["no_evaluated"]);
             $total_evaluated = count($evaluation_list["evaluated"]);

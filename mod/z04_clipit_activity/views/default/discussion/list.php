@@ -59,8 +59,7 @@ foreach($messages as $message):
     // Attach multimedia items
     $videos = ClipitPost::get_videos($message->id);
     $files = ClipitPost::get_files($message->id);
-    $storyboards = ClipitPost::get_storyboards($message->id);
-    $multimedia = array_merge($videos, $files, $storyboards);
+    $multimedia = array_merge($videos, $files);
     ?>
     <div class="row row-flex messages-discussion">
         <div class="col-md-9 col-xs-9">

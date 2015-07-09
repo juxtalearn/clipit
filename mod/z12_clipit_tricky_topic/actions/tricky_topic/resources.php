@@ -23,21 +23,6 @@ for($i = 0;$i < count($file['name']);$i++){
     }
 }
 ClipitTrickyTopic::add_files($entity_id, $new_file_id);
-$storyboard = $_FILES['storyboard'];
-$new_sb_id = array();
-for($i = 0;$i < count($storyboard['name']);$i++){
-    if($storyboard['name'][$i]){
-        $file_id = ClipitFile::create(array(
-            'name' => $storyboard['name'][$i],
-            'temp_path'  => $storyboard['tmp_name'][$i]
-        ));
-        $new_sb_id[] = ClipitStoryboard::create(array(
-            'name' => $storyboard['name'][$i],
-            'file'  => $file_id
-        ));
-    }
-}
-ClipitTrickyTopic::add_storyboards($entity_id, $new_sb_id);
 
 $video_title = get_input('video_title');
 $video_file = $_FILES['video'];

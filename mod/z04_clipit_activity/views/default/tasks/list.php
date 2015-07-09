@@ -18,7 +18,7 @@ if(!$tasks){
 $user_id = elgg_get_logged_in_user_guid();
 $user = array_pop(ClipitUser::get_by_id(array($user_id)));
 $individual_tasks = array(
-    ClipitTask::TYPE_STORYBOARD_FEEDBACK,
+    ClipitTask::TYPE_FILE_FEEDBACK,
     ClipitTask::TYPE_VIDEO_FEEDBACK,
     ClipitTask::TYPE_RESOURCE_DOWNLOAD,
     ClipitTask::TYPE_QUIZ_TAKE

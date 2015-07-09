@@ -20,8 +20,7 @@ $total_replies = array_pop(ClipitPost::count_by_destination(array($message->id))
 // Attach multimedia items
 $videos = ClipitPost::get_videos($message->id);
 $files = ClipitPost::get_files($message->id);
-$storyboards = ClipitPost::get_storyboards($message->id);
-$multimedia = array_merge($videos, $files, $storyboards);
+$multimedia = array_merge($videos, $files);
 
 $user_read_status = array_pop(ClipitPost::get_read_status($message->id, array($user_loggedin_id)));
 // set read status

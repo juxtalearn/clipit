@@ -24,28 +24,11 @@ $tabs = array(
         'priority' => 200,
     ),
     'videos' => array(
-        'text' => elgg_view('output/filter_responsive', array('text' => elgg_echo('multimedia:videos'), 'badge' => $videos_count, 'icon' => 'fa-video-camera')),
+        'text' => elgg_view('output/filter_responsive', array('text' => elgg_echo('multimedia:videos'), 'badge' => $videos_count, 'icon' => 'fa-files-o')),
         'href' => "{$href}?filter=videos",
         'priority' => 300,
     ),
-    'storyboards' => array(
-        'text' => elgg_view('output/filter_responsive', array('text' => elgg_echo('multimedia:storyboards'), 'badge' => $sb_count, 'icon' => 'fa-picture-o')),
-        'href' => "{$href}?filter=storyboards",
-        'priority' => 300,
-    ),
 );
-//if($vars['tab_videos']){
-//   $tabs = array_merge($tabs, array('videos' => array(
-//        'text' => elgg_echo('multimedia:videos').' '.$videos_count,
-//        'href' => "{$href}?filter=videos",
-//        'priority' => 300,
-//    )));
-//    $tabs = array_merge($tabs, array('files' => array(
-//        'text' => elgg_echo('multimedia:files').' '.$videos_count,
-//        'href' => "{$href}?filter=files",
-//        'priority' => 200,
-//    )));
-//}
 foreach ($tabs as $name => $tab) {
     $tab['name'] = $name;
 

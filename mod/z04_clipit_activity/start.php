@@ -210,7 +210,6 @@ function clipit_activity_init() {
 
     elgg_register_plugin_hook_handler("clipit:view:task:resource", "all", "clipit_task_view_videos", 1);
     elgg_register_plugin_hook_handler("clipit:view:task:resource", "all", "clipit_task_view_files", 200);
-    elgg_register_plugin_hook_handler("clipit:view:task:resource", "all", "clipit_task_view_storyboards", 300);
 
     // hook action: Task type resource download
     elgg_register_plugin_hook_handler("task:save", "task", "task_upload_save");
@@ -361,26 +360,6 @@ function clipit_task_view_videos($hook, $view_type, $returnvalue, $params){
             'task_type' => $task->task_type
         );
         $returnvalue .= elgg_view('multimedia/video/list', $options);
-    }
-
-    return $returnvalue;
-}
-function clipit_task_view_storyboards($hook, $view_type, $returnvalue, $params){
-    $task = $params['task'];
-    $storyboards = ClipitTask::get_storyboards($task->id);
-    if ($storyboards) {
-        $returnvalue .= elgg_view("page/components/title_block", array(
-            'title' => elgg_echo("storyboards"),
-        ));
-        $options = array(
-            'entity' => $params['activity'],
-            'create' => false,
-            'entities' => $storyboards,
-            'href' => $params['href'],
-            'task_id' => $params['role'] == ClipitUser::ROLE_STUDENT ? $task->id : false,
-            'task_type' => $task->task_type
-        );
-        $returnvalue .= elgg_view('multimedia/storyboard/list', $options);
     }
 
     return $returnvalue;

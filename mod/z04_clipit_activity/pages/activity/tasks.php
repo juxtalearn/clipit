@@ -32,7 +32,7 @@ if($page[2] == 'view' && $page[3]){
                 require($task_dir. "/video_upload.php");
                 break;
             case ClipitTask::TYPE_FILE_UPLOAD:
-                require($task_dir. "/storyboard_upload.php");
+                require($task_dir. "/file_upload.php");
                 break;
             case ClipitTask::TYPE_QUIZ_TAKE:
                 require($task_dir. "/quiz_take.php");
@@ -41,7 +41,7 @@ if($page[2] == 'view' && $page[3]){
                 require($task_dir. "/video_feedback.php");
                 break;
             case ClipitTask::TYPE_FILE_FEEDBACK:
-                require($task_dir. "/storyboard_feedback.php");
+                require($task_dir. "/file_feedback.php");
                 break;
             case ClipitTask::TYPE_RESOURCE_DOWNLOAD:
                 require($task_dir. "/resource_download.php");

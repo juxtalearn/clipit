@@ -18,9 +18,9 @@ $tabs = array(
         'href' => "{$href}?filter=videos",
         'priority' => 200,
     ),
-    'storyboards' => array(
-        'text' => elgg_view('output/filter_responsive', array('text' => elgg_echo('multimedia:storyboards'), 'icon' => 'fa-picture-o')),
-        'href' => "{$href}?filter=storyboards",
+    'files' => array(
+        'text' => elgg_view('output/filter_responsive', array('text' => elgg_echo('multimedia:files'), 'icon' => 'fa-files-o')),
+        'href' => "{$href}?filter=files",
         'priority' => 300,
     ),
 );
