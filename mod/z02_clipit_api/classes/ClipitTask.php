@@ -33,6 +33,7 @@ class ClipitTask extends UBItem {
     const REL_TASK_FILE = "ClipitTask-ClipitFile";
     const REL_TASK_QUIZ = "ClipitTask-ClipitQuiz";
     const REL_TASK_RUBRIC = "ClipitTask-ClipitRubricItem";
+    const REL_PARENTTASK_CHILDTASK = "ClipitTask-ClipitTask";
     // Status values
     const STATUS_LOCKED = "locked";
     const STATUS_ACTIVE = "active";
@@ -42,6 +43,7 @@ class ClipitTask extends UBItem {
     public $start = 0;
     public $end = 0;
     public $status = "";
+    public $child_task = 0;
     public $parent_task = 0;
     public $task_count = 0;
     public $activity = 0;
@@ -63,7 +65,6 @@ class ClipitTask extends UBItem {
         $this->start = (int)$elgg_entity->get("start");
         $this->end = (int)$elgg_entity->get("end");
         $this->status = (string)static::calc_status($this->start, $this->end);
-        $this->parent_task = (int)$elgg_entity->get("parent_task");
         $this->task_count = (int)$elgg_entity->get("task_count");
         if ($this->end == 0) {
             $activity_id = static::get_activity($this->id);
@@ -72,6 +73,8 @@ class ClipitTask extends UBItem {
                 $this->end = $prop_value_array["end"];
             }
         }
+        $this->parent_task = (int)static::get_parent_task("parent_task");
+        $this->child_task = (int)static::get_child_task("child_task");
         $this->activity = (int)static::get_activity((int)$this->id);
         $this->quiz = (int)static::get_quiz($this->id);
         $this->video_array = static::get_videos($this->id);
@@ -102,6 +105,8 @@ class ClipitTask extends UBItem {
     protected function save($double_save = false)
     {
         parent::save($double_save);
+        static::set_parent_task($this->id, $this->parent_task);
+        static::set_child_task($this->id, $this->child_task);
         static::set_quiz($this->id, $this->quiz);
         static::set_activity($this->id, $this->activity);
         static::set_videos($this->id, $this->video_array);
@@ -112,18 +117,42 @@ class ClipitTask extends UBItem {
 
     /**
      * Get the Child Task (if any)
-     * @param int $id ID of Task
-     * @return int ID of Child Task
+     * @param int $id ID of parent task
+     * @return int ID of child task
      */
-    static function get_child($id)
-    {
-        $task_array = static::get_all();
-        foreach ($task_array as $task) {
-            if ((int)$task->parent_task == (int)$id) {
-                return $task->id;
-            }
-        }
-        return 0;
+    static function get_child_task($id){
+        $task_array = UBCollection::get_items($id, static::REL_PARENTTASK_CHILDTASK);
+        return (int)array_pop($task_array);
+    }
+
+    /**
+     * Set the Child Task
+     * @param int $id ID of parent task
+     * @param int $child_task ID of child task
+     * @return bool Returns true if success, false if error
+     */
+    static function set_child_task($id, $child_task){
+        return UBCollection::set_items($id, array($child_task), static::REL_PARENTTASK_CHILDTASK, true);
+    }
+
+    /**
+     * Get the Parent Task (if any)
+     * @param int $id ID of child task
+     * @return int ID of parent task
+     */
+    static function get_parent_task($id){
+        $task_array = UBCollection::get_items($id, static::REL_PARENTTASK_CHILDTASK, true);
+        return (int)array_pop($task_array);
+    }
+
+    /**
+     * Set the Parent Task
+     * @param int $id ID of child task
+     * @param int $parent_task ID of parent task
+     * @return bool Returns true if success, false if error
+     */
+    static function set_parent_task($id, $parent_task){
+        return static::set_child_task($parent_task, $id);
     }
 
     /**

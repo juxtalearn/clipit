@@ -74,8 +74,28 @@ function expose_task_functions() {
         array("id" => array("type" => "int", "required" => true)), "Gets Files from an Activity", "GET", false, true
     );
     expose_function(
-        $api_suffix . "get_child", $class_suffix . "get_child",
-        array("id" => array("type" => "int", "required" => true)), "Get the Child Task (if any)", "GET", false, true
+        $api_suffix . "get_child_task", $class_suffix . "get_child_task",
+        array("id" => array("type" => "int", "required" => true)),
+        "Get the Child Task (if any)", "GET", false, true
+    );
+    expose_function(
+        $api_suffix . "set_child_task", $class_suffix . "set_child_task",
+        array(
+            "id" => array("type" => "int", "required" => true),
+            "child_task" => array("type" => "int", "required" => true)),
+        "Set the Child Task", "POST", false, true
+    );
+    expose_function(
+        $api_suffix . "get_parent_task", $class_suffix . "get_parent_task",
+        array("id" => array("type" => "int", "required" => true)),
+        "Get the Parent Task (if any)", "GET", false, true
+    );
+    expose_function(
+        $api_suffix . "set_parent_task", $class_suffix . "set_parent_task",
+        array(
+            "id" => array("type" => "int", "required" => true),
+            "parent_task" => array("type" => "int", "required" => true)),
+        "Set the Parent Task", "POST", false, true
     );
     expose_function(
         $api_suffix . "get_status", $class_suffix . "get_status",
