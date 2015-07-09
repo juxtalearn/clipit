@@ -56,13 +56,14 @@ foreach($video_array as $video_id){
         $elgg_obj->set("read_array", null);
     }
 }
-$stbd_array = ClipitStoryboard::get_all(0, 0, "", true, true);
-foreach($stbd_array as $stbd_id){
-    $elgg_obj = new ElggObject((int)$stbd_id);
-    $read_array = (array)$elgg_obj->get("read_array");
-    if(!empty($read_array)) {
-        ClipitStoryboard::set_read_array((int)$stbd_id, $read_array);
-        $elgg_obj->set("read_array", null);
+
+$task_array = ClipitTask::get_all(0, 0, "", true, true);
+foreach($task_array as $task_id){
+    $elgg_obj = new ElggObject((int)$task_id);
+    $parent_task = (int)$elgg_obj->get("parent_task");
+    if(!empty($parent_task)){
+        ClipitTask::set_parent_task((int)$task_id, $parent_task);
+        $elgg_obj->set("parent_task", null);
     }
 }
 
