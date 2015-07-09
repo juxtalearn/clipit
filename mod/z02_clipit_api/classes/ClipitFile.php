@@ -63,7 +63,6 @@ class ClipitFile extends UBFile {
     protected function copy_to_elgg($elgg_file)
     {
         parent::copy_to_elgg($elgg_file);
-        //$elgg_file->set("read_array", (array)$this->read_array);
         $elgg_file->set("overall_rating_average", (float)$this->overall_rating_average);
         $elgg_file->set("tag_rating_average", (float)$this->tag_rating_average);
         $elgg_file->set("rubric_rating_average", (float)$this->rubric_rating_average);
