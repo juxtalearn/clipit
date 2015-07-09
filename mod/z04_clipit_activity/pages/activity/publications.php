@@ -27,7 +27,7 @@ if($page[2] == 'view' && $page[3]){
     $owner_group_id = $entity->get_group($entity->id);
     $my_group = ClipitGroup::get_from_user_activity($user_id, $activity->id);
     $canEvaluate = false;
-    $feedback_task = ClipitTask::get_child($entity::get_task($entity->id));
+    $feedback_task = ClipitTask::get_child_task($entity::get_task($entity->id));
     if(
         !$hasRating
         && $feedback_task

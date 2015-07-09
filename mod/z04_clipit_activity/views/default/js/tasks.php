@@ -18,6 +18,9 @@ clipit.task.init = function() {
     $(document).on("click", ".feedback-check", clipit.task.feedbackCheck);
     $(document).on("click", "#add_task", clipit.task.addTask);
     $(document).on("change", ".task-types", clipit.task.types);
+    // Task templates
+    $(document).on("change", "#select-task-template", clipit.task.loadTemplate);
+
     // Rubric task
     $(document).on("click", ".rubric-refresh", clipit.task.rubricRefreshList);
     $(document).on("click", ".rubric-select", clipit.task.rubricSelect);
@@ -26,6 +29,9 @@ clipit.task.init = function() {
     $(document).on("click", ".quiz-refresh", clipit.task.quizRefreshList);
     $(document).on("click", ".quiz-select", clipit.task.quizSelect);
     $(document).on("click", ".quiz-unselect", clipit.task.quizUnselect);
+
+
+    $(document).on("click", ".btns-task-select .thumbnail", clipit.task.onSelect);
 };
 elgg.register_hook_handler('init', 'system', clipit.task.init);
 clipit.task.admin.init = function() {
@@ -59,12 +65,13 @@ clipit.task.feedbackCheck = function(){
             task_end = moment(task_end, 'DD/MM/YY').hour(0).minute(0).format('DD/MM/YY HH:mm');
             feedback_content.find(".input-task-start").val(task_end);
         }
-        feedback_content
-            .show()
-            .find(".input-task-title")
-            .focus();
+        feedback_content.show().find('.task-type-container').fadeIn('fast');
+//        feedback_content
+//            .show()
+//            .find(".input-task-title")
+//            .focus();
         // Show rubric list
-        clipit.task.rubricList(parent);
+        clipit.task.rubricList(feedback_content);
     } else {
         feedback_content.hide();
     }
@@ -75,7 +82,8 @@ clipit.task.rubricList = function($task){
         input_prefix = $task.find("input[name='input_prefix']"),
         input_prefix_val = '';
     if(input_prefix.length > 0){
-        input_prefix_val = input_prefix.val()+'[feedback-form]';
+//        input_prefix_val = input_prefix.val()+'[feedback-form]';
+        input_prefix_val = input_prefix.val();
     }
     container.html('<i class="fa fa-spinner fa-spin fa-2x blue"></i>').fadeIn('fast');
     elgg.get('ajax/view/rubric/list', {
@@ -106,7 +114,7 @@ clipit.task.rubricUnselect = function(){
 };
 
 clipit.task.types = function(){
-    var task_types = ['video_upload', 'storyboard_upload'];
+    var task_types = ['<?php echo ClipitTask::TYPE_VIDEO_UPLOAD;?>', '<?php echo ClipitTask::TYPE_FILE_UPLOAD;?>'];
     var content = $(this).closest(".task");
     var that = $(this);
     content_feedback = content.find(".feedback-module");
@@ -140,7 +148,7 @@ clipit.task.types = function(){
         var entity_id = tricky_topic_val;
         if(that.closest("form").find("input[name='entity-id']").length > 0){
             var entity_id = that.closest("form").find("input[name='entity-id']").val();
-            input_prefix_val = '';
+//            input_prefix_val = '';
         }
         $attach_list.toggle();
         $attach_list.attach_multimedia({
@@ -170,7 +178,8 @@ clipit.task.types = function(){
 
 };
 clipit.task.quizRefreshList = function(){
-    $(this).closest('.task').find('.task-types').trigger('change');
+    clipit.task.refresh($(this).closest('.task'));
+//    $(this).closest('.task').find('.task-types').trigger('change');
 };
 
 clipit.task.quizSelect = function(){
@@ -195,7 +204,6 @@ clipit.task.addTask = function(){
         content.append(data);
     });
 };
-
 // Admin task functions
 clipit.task.admin.fullCalendar = function(data){
     return $.extend(data.messages, {
@@ -244,5 +252,207 @@ clipit.task.admin.fullCalendar = function(data){
                 return false;
             }
         }
+    });
+};
+clipit.task.selectTest = function(hook, type, params, value){
+    if(params.type == '<?php echo ClipitTask::TYPE_QUIZ_TAKE;?>'){
+        var $task = params.element,
+            $container = params.container;
+
+        elgg.get('ajax/view/quiz/list', {
+            data: {
+                'activity_create': true,
+                'tricky_topic': params.tricky_topic,
+                'input_prefix': params.input_prefix
+            },
+            success: function (data) {
+                $container.html(data).show();
+            }
+        });
+    }
+    return value;
+};
+elgg.register_hook_handler('clipit:task:type', 'system', clipit.task.selectTest);
+
+clipit.task.selectResource_download = function(hook, type, params, value){
+    if(params.type == '<?php echo ClipitTask::TYPE_RESOURCE_DOWNLOAD;?>'){
+        var $task = params.element,
+            $container = params.container;
+        elgg.get('ajax/view/multimedia/attach/list', {
+            success: function (data) {
+                $container.html(data).show();
+                var $attach_list = $container.find('.attach_list');
+                $attach_list.show();
+                $attach_list.attach_multimedia({
+                    data: {
+                        'entity_id': (params.entity_id ? params.entity_id : params.tricky_topic),
+                        'input_prefix': params.input_prefix
+                    }
+                }).loadBy("files");
+            }
+        });
+
+    }
+    return value;
+};
+elgg.register_hook_handler('clipit:task:type', 'system', clipit.task.selectResource_download);
+
+clipit.task.selectOther = function(hook, type, params, value){
+    if(params.type == '<?php echo ClipitTask::TYPE_OTHER;?>'){
+        var $task = params.element,
+            $container = params.container;
+        $container.html('').hide();
+    }
+    return value;
+};
+elgg.register_hook_handler('clipit:task:type', 'system', clipit.task.selectOther);
+
+clipit.task.selectVideo_upload = function(hook, type, params, value){
+    if(params.type == '<?php echo ClipitTask::TYPE_VIDEO_UPLOAD;?>'){
+        var $task = params.element,
+            $container = params.container,
+            $feedback_task = $task.find('.feedback_task');
+        $container.hide();
+        $task.find('.feedback-module').fadeIn('fast');
+        $feedback_task.find('.feedback-task-type').val('<?php echo ClipitTask::TYPE_VIDEO_FEEDBACK;?>');
+    }
+    return value;
+};
+elgg.register_hook_handler('clipit:task:type', 'system', clipit.task.selectVideo_upload);
+
+clipit.task.selectFile_upload = function(hook, type, params, value){
+    if(params.type == '<?php echo ClipitTask::TYPE_FILE_UPLOAD;?>'){
+        var $task = params.element,
+            $container = params.container,
+            $feedback_task = $task.find('.feedback_task');
+        $container.hide();
+        $task.find('.feedback-module').fadeIn('fast');
+        $feedback_task.find('.feedback-task-type').val('<?php echo ClipitTask::TYPE_FILE_FEEDBACK;?>');
+    }
+    return value;
+};
+elgg.register_hook_handler('clipit:task:type', 'system', clipit.task.selectFile_upload);
+
+clipit.task.onSelect = function(e){
+    e.preventDefault();
+    var task_type = $(this).data('task-type'),
+        $form = $(this).closest('form'),
+        $task = $(this).closest('.task'),
+        $container = $task.find(".main_task .task-type-container"),
+        defaults = {
+            'id': $(this).data('task-type').replace('#', ''),
+            'element': $task,
+            'type': task_type,
+            'container': $container
+        },
+        data = {};
+    // default settings
+    $container.hide().html('');
+    if(task_type != '<?php echo ClipitTask::TYPE_VIDEO_UPLOAD;?>' && task_type != '<?php echo ClipitTask::TYPE_FILE_UPLOAD;?>') {
+        $task.find('.feedback-module').hide();
+        $task.find('.feedback-module').find('input').prop('checked', false);
+        $task.find('.feedback_form').hide();
+    }
+
+    $(this).find('input[type="radio"]').prop('checked', true);
+
+    if($("#tricky-topic").val() != ''){
+        data.tricky_topic = $("#tricky-topic").val();
+    }
+    if($task.find("input[name='input_prefix']").length > 0){
+        data.input_prefix = $task.find("input[name='input_prefix']").val();
+    }
+    if($form.find("input[name='entity-id']").length > 0){
+        data.entity_id = $form.find("input[name='entity-id']").val();
+    }
+
+    var params = $.extend({}, defaults, data);
+    $(this).closest('.btns-task-select').find('.thumbnail.active').removeClass('active');
+    $(this).addClass('active');
+    $container.fadeIn('fast').html('<i class="fa fa-spinner fa-spin fa-2x blue"></i>');
+
+    elgg.trigger_hook('clipit:task:type', 'system', params, "");
+};
+clipit.task.refresh = function($task){
+    $task.find('.btns-task-select .active').click();
+};
+
+var task_template = [];
+clipit.task.getTemplates = function(){
+    task_template = elgg.trigger_hook('clipit:task:template', 'system');
+    for(name in task_template){
+        $('#select-task-template').append('<option value="'+ name +'">'+ task_template[name].name[elgg.get_language()] +'</option>');
+    }
+};
+clipit.task.echoTemplate = function(message){
+    var language = elgg.get_language(),
+        default_language = 'en';
+    if(message[language] == undefined){
+        return message[default_language];
+    }
+    return message[language];
+};
+clipit.task.countTemplateTasks = function(json){
+    var count = 0;
+    for (i in json.tasks){
+        count++;
+        if(json.tasks[i].feedback != undefined) {
+            count++;
+        }
+    }
+    return count;
+};
+clipit.task.setTemplateDates = function(date, $element_start, $element_end){
+    var start_minutes = Math.floor(moment.unix(date.start).minute()/15)*15,
+        end_minutes = Math.floor(moment.unix(date.end).minute()/15)*15;
+    $element_start.val(moment.unix(date.start).minute(start_minutes).format('DD/MM/YYYY HH:mm'))
+    $element_end.val(moment.unix(date.end).minute(end_minutes).format('DD/MM/YYYY HH:mm'));
+};
+
+clipit.task.loadTemplate = function(){
+    var name = $(this).val();
+    var content = $(".task-list"),
+        total_tasks = clipit.task.countTemplateTasks(task_template[name]),
+        start = $('input[name="activity-start"]').val(),
+        end = $('input[name="activity-end"]').val(),
+        diff = (moment(end, 'DD/MM/YYYY').hour(23).minute(59).unix() - moment(start, 'DD/MM/YYYY').minute(15).unix())/total_tasks;
+
+    content.html('');
+    var task_start = moment(start, 'DD/MM/YYYY').minute(15).unix();
+
+    $.each(task_template[name].tasks, function (key, data) {
+        var loading = $('<li class="list-item"><i class="fa fa-spinner fa-spin fa-2x blue-lighter" style="padding:15px;"/></li>').appendTo(content);
+        $.get( "ajax/view/activity/create/task_list", function( result ) {
+            loading.remove();
+            var $task = $(result).appendTo(content),
+                $main_task = $task.find('.main_task')
+                date = {};
+            $main_task.find('.input-task-title').val(clipit.task.echoTemplate(data.name));
+            $main_task.find('.input-task-description').val(data.description.es);
+            $main_task.find('[data-task-type="'+ data.task_type +'"]').trigger('click');
+
+            date.start = task_start,
+            date.end = task_start + diff,
+            task_start = date.end;
+            clipit.task.setTemplateDates(date, $main_task.find('.input-task-start'), $main_task.find('.input-task-end'));
+
+            // If feedback exists
+            if(data.feedback != undefined){
+                $task.find('.feedback-check input')
+                    .prop('checked', true)
+                    .closest('.feedback-check').trigger('click');
+                var data_feedback = data.feedback,
+                    $feedback_task = $task.find('.feedback_task');
+                $feedback_task.find('.input-task-title').val(data_feedback.name.es);
+                $feedback_task.find('.input-task-description').val(data_feedback.description.es);
+                $feedback_task.find('[data-task-type="'+ data_feedback.task_type +'"]').trigger('click');
+                date.start = task_start,
+                date.end = task_start + diff,
+                task_start = date.end;
+                clipit.task.setTemplateDates(date, $feedback_task.find('.input-task-start'), $feedback_task.find('.input-task-end'));
+//                $feedback_task.find('.task-types').trigger('change');
+            }
+
+        });
     });
 };

@@ -88,6 +88,10 @@ function clipit_activity_init() {
     elgg_register_ajax_view('modal/group/assign_sb');
     elgg_register_ajax_view('modal/task/edit');
     elgg_register_ajax_view('user/add');
+    // Load Task javascript templates
+    elgg_extend_view('js/task_templates', 'js/task_templates/complete');
+    elgg_extend_view('js/task_templates', 'js/task_templates/videos');
+    elgg_extend_view('js/task_templates', 'js/task_templates/storyboards');
 
     // Group
     elgg_register_action("group/join", "{$plugin_dir}/actions/group/join.php");
@@ -130,6 +134,8 @@ function clipit_activity_init() {
     elgg_register_action("multimedia/resources/edit", "{$plugin_dir}/actions/multimedia/resources/edit.php");
     elgg_register_ajax_view('modal/multimedia/resource/edit');
     elgg_register_ajax_view('multimedia/viewer');
+    elgg_register_ajax_view('multimedia/attach/list');
+
     /* Storyboards */
     elgg_register_action("storyboards/upload", "{$plugin_dir}/actions/storyboards/upload.php");
     elgg_register_action("multimedia/storyboards/edit", "{$plugin_dir}/actions/multimedia/storyboards/edit.php");
@@ -156,6 +162,7 @@ function clipit_activity_init() {
     elgg_register_action("discussion/reply/edit", "{$plugin_dir}/actions/discussion/reply/edit.php");
     elgg_register_ajax_view('modal/discussion/reply/edit');
     elgg_register_ajax_view('discussion/quote');
+
 
     // Register javascript files
     $vendors_dir = elgg_get_site_url() . "mod/z04_clipit_activity/vendors";
@@ -206,50 +213,64 @@ function clipit_activity_init() {
     elgg_register_plugin_hook_handler("clipit:view:task:resource", "all", "clipit_task_view_storyboards", 300);
 
     // hook action: Task type resource download
-//    elgg_register_plugin_hook_handler("action", "task/save", "task_resources_save");
-    elgg_register_plugin_hook_handler("task:save", "task", "task_resources_save");
-    // hook action: Task type video/storyboard upload
-//    elgg_register_plugin_hook_handler("action", "task/save", "task_upload_save", 100);
     elgg_register_plugin_hook_handler("task:save", "task", "task_upload_save");
     elgg_register_plugin_hook_handler("task:save", "task", "task_resources_save");
+    elgg_register_plugin_hook_handler("task:save", "task", "task_other_save");
+    // Task extends type Quiz
+    elgg_extend_view('tasks/menu', 'tasks/menu/video_upload', 1);
+    elgg_extend_view('tasks/menu', 'tasks/menu/file_upload', 2);
+    elgg_extend_view('tasks/menu', 'tasks/menu/resource_download', 50);
+    elgg_extend_view('tasks/menu', 'tasks/menu/other', 100);
+    elgg_extend_view('tasks/container', 'tasks/container/resource_download');
 }
 
 function task_resources_save($hook, $entity_type, $returnvalue, $params){
-    $tasks = get_input('task');
+    $activity_id = $params['activity_id'];
+    $task = $params['task'];
+    $files = array_filter($task['attach_files']);
+    $videos = array_filter($task['attach_videos']);
 
-    foreach ($tasks as $task) {
-        $files = get_input('attach_files');
-        $videos = get_input('attach_videos');
-        $storyboards = get_input('attach_storyboards');
+    if($task['type'] == ClipitTask::TYPE_RESOURCE_DOWNLOAD) {
+        // New task, attach resources
+        $task_properties = array_merge(get_task_properties_action($task), array(
+            'task_type' => $task['type'],
+        ));
+        $task_id = ClipitTask::create($task_properties);
+        if($params['activity_create']) {
+            $new_files_id = array();
+            foreach ($files as $file_id) {
+                $new_files_id[] = ClipitFile::create_clone($file_id);
+            }
+            $files = $new_files_id;
+            ClipitActivity::add_files($activity_id, $new_files_id);
 
-        if($task['type'] == ClipitTask::TYPE_RESOURCE_DOWNLOAD) {
-            $activity_id = get_input('entity-id');
-            // New task, attach resources
-            $task_properties = array_merge(get_task_properties_action($task), array(
-                'task_type' => $task['type'],
-            ));
-            $task_id = ClipitTask::create($task_properties);
-
-            ClipitTask::set_files($task_id, array_filter($files));
-            ClipitTask::set_videos($task_id, array_filter($videos));
-            ClipitTask::set_storyboards($task_id, array_filter($storyboards));
-            // Add task to activity
-            ClipitActivity::add_tasks($activity_id, array($task_id));
-        } elseif($task_id = get_input('task-id') && $task['entity_type'] == ClipitTask::TYPE_RESOURCE_DOWNLOAD){
-            // Set resources
-            ClipitTask::set_files($task_id, array_filter($files));
-            ClipitTask::set_videos($task_id, array_filter($videos));
-            ClipitTask::set_storyboards($task_id, array_filter($storyboards));
-            // Save task
-            ClipitTask::set_properties($task_id, get_task_properties_action($task));
+            $new_videos_id = array();
+            foreach ($videos as $video_id) {
+                $new_videos_id[] = ClipitVideo::create_clone($video_id);
+            }
+            $videos = $new_videos_id;
+            ClipitActivity::add_videos($activity_id, $new_videos_id);
         }
+        ClipitTask::set_files($task_id, $files);
+        ClipitTask::set_videos($task_id, $videos);
+        // Add task to activity
+        ClipitActivity::add_tasks($activity_id, array($task_id));
+
+    } elseif(get_input('task-id') && $task['entity_type'] == ClipitTask::TYPE_RESOURCE_DOWNLOAD){
+        $task_id = get_input('task-id');
+        // Set resources
+        ClipitTask::set_files($task_id, array_filter($files));
+        ClipitTask::set_videos($task_id, array_filter($videos));
+        // Save task
+        ClipitTask::set_properties($task_id, get_task_properties_action($task));
     }
 }
 function task_upload_save($hook, $entity_type, $returnvalue, $params){
     $activity_id = $params['activity_id'];
     $task = $params['task'];
+
     if($task['type'] == ClipitTask::TYPE_VIDEO_UPLOAD ||
-        $task['type'] == ClipitTask::TYPE_STORYBOARD_UPLOAD
+        $task['type'] == ClipitTask::TYPE_FILE_UPLOAD
     ) {
         $task_properties = array_merge(get_task_properties_action($task), array(
             'task_type' => $task['type'],
@@ -257,16 +278,38 @@ function task_upload_save($hook, $entity_type, $returnvalue, $params){
         $task_id = ClipitTask::create($task_properties);
         // Add task to activity
         ClipitActivity::add_tasks($activity_id, array($task_id));
-        if($task['feedback']){
-            $task_entity = array_pop(ClipitTask::get_by_id(array($task_id)));
-            // Trigger tasks which parent is a upload task
-            elgg_trigger_plugin_hook('task:save:upload', 'feedback',
-                array(
-                    'parent_id' => $task_id,
-                    'activity_id' => $task_entity->activity,
-                    'feedback_form' => $task['feedback-form']
-                ), null);
-        }
+    } elseif(get_input('task-id') &&
+        ($task['entity_type'] == ClipitTask::TYPE_VIDEO_UPLOAD ||  $task['entity_type'] == ClipitTask::TYPE_FILE_UPLOAD) ){
+        $task_id = get_input('task-id');
+        // Save task
+        ClipitTask::set_properties($task_id, get_task_properties_action($task));
+    }
+    if($task['feedback']){
+        $task_entity = array_pop(ClipitTask::get_by_id(array($task_id)));
+        // Trigger tasks which parent is a upload task
+        elgg_trigger_plugin_hook('task:save:upload', 'feedback',
+            array(
+                'parent_id' => $task_id,
+                'activity_id' => $task_entity->activity,
+                'feedback_form' => $task['feedback-form']
+            ), null);
+    }
+}
+function task_other_save($hook, $entity_type, $returnvalue, $params){
+    $task = $params['task'];
+    $activity_id = $params['activity_id'];
+
+    if($task['type'] == ClipitTask::TYPE_OTHER){
+        $task_properties = array_merge(get_task_properties_action($task), array(
+            'task_type' => $task['type'],
+        ));
+        $task_id = ClipitTask::create($task_properties);
+        // Add task to activity
+        ClipitActivity::add_tasks($activity_id, array($task_id));
+    } elseif(get_input('task-id') && $task['entity_type'] == ClipitTask::TYPE_OTHER){
+        $task_id = get_input('task-id');
+        // Save task
+        ClipitTask::set_properties($task_id, get_task_properties_action($task));
     }
 }
 
@@ -422,6 +465,7 @@ function activity_page_handler($page) {
     $base_dir = elgg_get_plugins_path() . 'z04_clipit_activity/pages/activity';
     elgg_load_library('clipit:activities');
     elgg_set_context("activity_page");
+
     $activity = array_pop(ClipitActivity::get_by_id(array($page[0])));
     $user_id = elgg_get_logged_in_user_guid();
     $user = array_pop(ClipitUser::get_by_id(array($user_id)));
@@ -438,11 +482,12 @@ function activity_page_handler($page) {
      * Set access
      * ACCESS_PUBLIC, ACCESS_TEACHER, ACCESS_MEMBER
      */
+    $cache = elgg_get_metadata_cache();
     $hasGroup = ClipitGroup::get_from_user_activity($user_id, $activity->id);
     if($hasGroup || in_array($user_id, $activity->student_array)){
         $access = 'ACCESS_MEMBER';
     }
-    elseif(in_array($user_id, $activity->teacher_array)){
+    elseif(in_array($user_id, $activity->teacher_array) || $cache->load(elgg_get_logged_in_user_guid(), 'role') == ClipitUser::ROLE_ADMIN){
         $access = 'ACCESS_TEACHER';
     } else{
         $access = 'ACCESS_PUBLIC';
@@ -527,7 +572,7 @@ function activity_page_handler($page) {
     $teacher_sidebar = "";
     if(!empty($teachers)){
         // Teacher admin
-        if($isTeacher = in_array($user_id, $teachers)){
+        if($access == 'ACCESS_TEACHER'){
             elgg_extend_view("page/elements/owner_block", "activity/admin/button");
             $groups = ClipitActivity::get_groups($activity->id);
             $teacher_sidebar = elgg_view('activity/sidebar/groups', array(
@@ -644,42 +689,30 @@ function activities_page_handler($page) {
         $count = count($all_entities);
         $entities = array_slice($all_entities, clipit_get_offset(), clipit_get_limit(10));
     } else {
-        $all_entities = ClipitActivity::get_all(0, 0, '', true, true);
-        if($order_by) {
-            $all_entities = get_entities_order(
-                'ClipitActivity',
-                $all_entities,
-                clipit_get_limit(10),
-                clipit_get_offset(),
-                $order_by,
-                $sort
-            );
-        } else {
-            $all_entities = ClipitActivity::get_by_id($all_entities);
+        switch($selected_tab){
+            case 'mine':
+                $all_entities = ClipitActivity::get_by_id(ClipitUser::get_activities(elgg_get_logged_in_user_guid()));
+                break;
+            default:
+                $all_entities = ClipitActivity::get_all(0, 0, '', true, true);
+                if($order_by) {
+                    $all_entities = get_entities_order(
+                        'ClipitActivity',
+                        $all_entities,
+                        clipit_get_limit(10),
+                        clipit_get_offset(),
+                        $order_by,
+                        $sort
+                    );
+                } else {
+                    $all_entities = ClipitActivity::get_by_id($all_entities);
+                }
+
+                break;
         }
         $count = count($all_entities);
         $entities = array_slice($all_entities, clipit_get_offset(), clipit_get_limit(10));
     }
-    switch($selected_tab){
-        case 'mine':
-            $entities = ClipitActivity::get_by_id(ClipitUser::get_activities(elgg_get_logged_in_user_guid()));
-            break;
-        default:
-            break;
-    }
-    switch($selected_tab){
-        case 'mine':
-            $owner = array();
-            foreach($entities as $entity){
-                if($entity->owner_id == elgg_get_logged_in_user_guid()){
-                    $owner[] = $entity;
-                }
-            }
-            $entities = $owner;
-            $count = count($entities);
-            break;
-    }
-
     $to_order = array(
         'name' => elgg_echo('activity:title'),
         'tricky_topic' => elgg_echo('tricky_topic'),

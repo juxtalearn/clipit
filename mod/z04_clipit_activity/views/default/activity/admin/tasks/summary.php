@@ -25,7 +25,7 @@ if(!$tasks){
         $status = get_task_status($task, $group_id);
         $user_tasks = array(
             ClipitTask::TYPE_VIDEO_FEEDBACK,
-            ClipitTask::TYPE_STORYBOARD_FEEDBACK,
+            ClipitTask::TYPE_FILE_FEEDBACK,
             ClipitTask::TYPE_QUIZ_TAKE,
             ClipitTask::TYPE_RESOURCE_DOWNLOAD
         );

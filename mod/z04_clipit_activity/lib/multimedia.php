@@ -34,7 +34,6 @@ function files_get_page_content_list($params = array()){
     }
     $content .= elgg_view_form("multimedia/files/set_options",
         array('body' => elgg_view('multimedia/file/list', $params), 'class' => 'files-table'));
-//    $content = elgg_view('multimedia/file/list', $params);
     if (!$files) {
         $content .= elgg_view('output/empty', array('value' => elgg_echo('file:none')));
     }

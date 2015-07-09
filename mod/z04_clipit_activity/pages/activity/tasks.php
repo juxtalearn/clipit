@@ -31,7 +31,7 @@ if($page[2] == 'view' && $page[3]){
             case ClipitTask::TYPE_VIDEO_UPLOAD:
                 require($task_dir. "/video_upload.php");
                 break;
-            case ClipitTask::TYPE_STORYBOARD_UPLOAD:
+            case ClipitTask::TYPE_FILE_UPLOAD:
                 require($task_dir. "/storyboard_upload.php");
                 break;
             case ClipitTask::TYPE_QUIZ_TAKE:
@@ -40,7 +40,7 @@ if($page[2] == 'view' && $page[3]){
             case ClipitTask::TYPE_VIDEO_FEEDBACK:
                 require($task_dir. "/video_feedback.php");
                 break;
-            case ClipitTask::TYPE_STORYBOARD_FEEDBACK:
+            case ClipitTask::TYPE_FILE_FEEDBACK:
                 require($task_dir. "/storyboard_feedback.php");
                 break;
             case ClipitTask::TYPE_RESOURCE_DOWNLOAD:
@@ -55,7 +55,7 @@ if($page[2] == 'view' && $page[3]){
         }
         $tasks_group = array(
             ClipitTask::TYPE_VIDEO_UPLOAD,
-            ClipitTask::TYPE_STORYBOARD_UPLOAD
+            ClipitTask::TYPE_FILE_UPLOAD
         );
         if($user->role == ClipitUser::ROLE_STUDENT && !$hasGroup && in_array($task->task_type, $tasks_group)) {
             $body = elgg_view('output/empty', array('type' => 'error', 'value' => elgg_echo('task:group:needed')));;

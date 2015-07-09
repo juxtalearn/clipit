@@ -27,10 +27,12 @@ if($vars['show_check'] ) {
 }
 ?>
 <div class="pull-right">
+    <?php if($rating_average):?>
     <div class="margin-bottom-15">
         <span class="blue pull-right rating-summary"><?php echo rubric_rating_value($rating_average);?></span>
         <small class="margin-right-15"><?php echo elgg_echo('publications:rating');?></small>
     </div>
+    <?php endif;?>
     <?php if($me_rating):?>
         <div class="text-right">
             <?php echo elgg_view('output/url', array(

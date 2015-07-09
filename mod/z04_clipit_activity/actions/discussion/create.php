@@ -17,7 +17,6 @@ $entity_class = $object['subtype'];
 // Attach multimedia group
 $attach_file = array_filter(get_input('attach_files'));
 $attach_video = array_filter(get_input('attach_videos'));
-$attach_storyboard = array_filter(get_input('attach_storyboards'));
 
 $entity = array_pop($entity_class::get_by_id(array($entity_id)));
 
@@ -36,7 +35,6 @@ if(count($entity)==0 || trim($discussion_title) == ""){
     // Attach multimedia
         ClipitPost::add_files($new_message_id, $attach_file);
         ClipitPost::add_videos($new_message_id, $attach_video);
-        ClipitPost::add_storyboards($new_message_id, $attach_storyboard);
     // set read status true to the owner's message
     ClipitPost::set_read_status($new_message_id, true, array($user_id));
 

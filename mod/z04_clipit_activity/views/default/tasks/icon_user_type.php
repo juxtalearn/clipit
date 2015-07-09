@@ -14,7 +14,7 @@ $type = elgg_extract('type', $vars);
 
 switch($type){
     case ClipitTask::TYPE_VIDEO_UPLOAD:
-    case ClipitTask::TYPE_STORYBOARD_UPLOAD:
+    case ClipitTask::TYPE_FILE_UPLOAD:
            $output = "users";
             $title = elgg_echo('task:group');
         break;

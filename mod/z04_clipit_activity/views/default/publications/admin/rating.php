@@ -73,6 +73,7 @@ $href = elgg_extract('href', $vars);
         <a style="position: relative" href="<?php echo elgg_get_site_url()."{$href}/view/".$entity->id;?>">
             <div class="image-background" style="background-image: url('<?php echo $entity->preview;?>');"></div>
         </a>
+        <?php if($rating->rubric_rating_array):?>
         <div class="margin-top-10">
             <strong class="pull-right blue" style="font-size: 18px;line-height: 20px;"><?php echo round($entity->rubric_rating_average*10,1);?></strong>
             <small><?php echo elgg_echo('publications:rating');?></small>
@@ -95,5 +96,6 @@ $href = elgg_extract('href', $vars);
                 </ul>
             </div>
         </div>
+        <?php endif;?>
     </div>
 </li>

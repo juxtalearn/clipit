@@ -283,12 +283,12 @@ function get_task_completed_count(ClipitTask $task){
             $text = count($task->video_array)."/".count($activity->group_array);
             $count  = (count($task->video_array)/count($activity->group_array)) * 100;
             break;
-        case ClipitTask::TYPE_STORYBOARD_UPLOAD:
+        case ClipitTask::TYPE_FILE_UPLOAD:
             $text = count($task->storyboard_array)."/".count($activity->group_array);
             $count  = (count($task->storyboard_array)/count($activity->group_array)) * 100;
             break;
         case ClipitTask::TYPE_VIDEO_FEEDBACK:
-        case ClipitTask::TYPE_STORYBOARD_FEEDBACK:
+        case ClipitTask::TYPE_FILE_FEEDBACK:
             $completed = 0;
             foreach($activity->student_array as $user_id){
 //                if(ClipitTask::get_completed_status($task->id, $user_id)
@@ -380,7 +380,7 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
                 }
             }
             break;
-        case ClipitTask::TYPE_STORYBOARD_UPLOAD:
+        case ClipitTask::TYPE_FILE_UPLOAD:
             foreach($task->storyboard_array as $storyboard_id){
                 $group_sb = ClipitStoryboard::get_group($storyboard_id);
                 if($group_id == $group_sb){
@@ -394,7 +394,7 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
                 }
             }
             break;
-        case ClipitTask::TYPE_STORYBOARD_FEEDBACK:
+        case ClipitTask::TYPE_FILE_FEEDBACK:
 
             $entities = ClipitTask::get_storyboards($task->parent_task);
             $evaluation_list = get_filter_evaluations($entities, $task->activity, $user_id);
@@ -524,8 +524,7 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
             'status' => false
         );
     }
-    if($role == ClipitUser::ROLE_TEACHER){
-//        $status['count'] = false;
+    if(hasTeacherAccess($role)){
         $status['text'] = false;
     }
     return $status;
@@ -542,7 +541,7 @@ function get_group_progress($group_id){
     $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
     $individual_tasks = array(
         ClipitTask::TYPE_VIDEO_FEEDBACK,
-        ClipitTask::TYPE_STORYBOARD_FEEDBACK,
+        ClipitTask::TYPE_FILE_FEEDBACK,
         ClipitTask::TYPE_QUIZ_TAKE,
         ClipitTask::TYPE_RESOURCE_DOWNLOAD
     );
@@ -662,8 +661,8 @@ function get_education_levels($level = ''){
 function get_rubric_items_from_resource($resource_id){
     $object = ClipitSite::lookup($resource_id);
     $task_id = $object['subtype']::get_task($resource_id);
-    if($task_child_id = ClipitTask::get_child($task_id)) {
-        $task_feedback = array_pop(ClipitTask::get_by_id(array(ClipitTask::get_child($task_id))));
+    if($task_child_id = ClipitTask::get_child_task($task_id)) {
+        $task_feedback = array_pop(ClipitTask::get_by_id(array(ClipitTask::get_child_task($task_id))));
         $rubric = array_pop(ClipitRubric::get_by_id(array($task_feedback->rubric)));
         if (count($rubric->rubric_item_array) > 0) {
             return ClipitRubricItem::get_by_id($rubric->rubric_item_array, 0, 0, 'time_created', false);
@@ -673,11 +672,15 @@ function get_rubric_items_from_resource($resource_id){
 }
 
 function get_task_properties_action($task){
+    $date_format = 'd/m/y H:i';
+    if(preg_match("/(\w{2})\/(\w{2})\/(\w{4})/", $task['start'])){ // dd/mm/yyyy
+        $date_format = 'd/m/Y H:i';
+    }
     return array(
         'name' => $task['title'],
         'description' => $task['description'],
-        'start' => date_create_from_format('d/m/Y H:i', $task['start'])->getTimestamp(),
-        'end' => date_create_from_format('d/m/Y H:i', $task['end'])->getTimestamp(),
+        'start' => date_create_from_format($date_format, $task['start'])->getTimestamp(),
+        'end' => date_create_from_format($date_format, $task['end'])->getTimestamp(),
     );
 }
 
