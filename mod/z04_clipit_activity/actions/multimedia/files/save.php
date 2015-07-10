@@ -15,6 +15,9 @@ $entity_id = get_input('entity-id');
 $file_name = get_input('file-name');
 $file_text = get_input('file-text');
 $tags = array_filter(get_input("tags", array()));
+$labels = get_input("labels");
+$labels = array_filter(explode(",", $labels));
+
 if(!$tags){
     $tags = array();
 }
@@ -37,24 +40,32 @@ if(trim($file_name) == ""){
     if($entity_id) {
         // ClipitFile exists
         $file = array_pop(ClipitFile::get_by_id(array($entity_id)));
-        // Edit file properties
-        ClipitFile::set_properties($entity_id, array(
-            'description' => $file_description
-        ));
+        system_message(elgg_echo('file:edited'));
     } else {
         // Create file
         $files = $_FILES['files'];
-        $new_file_id = ClipitFile::create(array_merge(array(
-            'temp_path'  => $files['tmp_name']
-        ), $data));
+        $entity_id = ClipitFile::create(array(
+            'temp_path'  => $files['tmp_name'],
+            'name' => get_input('original_name'),
+            'description' => $file_text,
+        ));
         if($scope_id) {
-            $entity_class::add_files($scope_id, array($new_file_id));
+            $entity_class::add_files($scope_id, array($entity_id));
         }
-        ClipitFile::add_tags($new_file_id, $tags);
+        system_message(elgg_echo('file:added'));
     }
-
-    system_message(elgg_echo('file:edited'));
+    ClipitFile::set_properties($entity_id, $data);
+    // Set labels
+    $total_labels = array();
+    if(!empty($labels)){
+        foreach ($labels as $label) {
+            $total_labels[] = ClipitLabel::create(array(
+                'name' => $label,
+            ));
+        }
+    }
+    ClipitFile::set_tags($entity_id, $tags);
+    ClipitFile::set_labels($entity_id, $total_labels);
 }
-
 
 forward(REFERER);

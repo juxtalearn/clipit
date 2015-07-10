@@ -24,7 +24,6 @@ if($entity){
     }
 
     $tags = $entity->tag_array;
-    $performance_items = $entity->performance_item_array;
     foreach(ClipitLabel::get_by_id($entity->label_array) as $label){
         $labels_value[] = $label->name;
     }
@@ -46,6 +45,7 @@ if($entity){
 echo elgg_view("input/hidden", array(
     'name' => 'tags',
 ));
+
 echo elgg_view("input/hidden", array(
     'name' => 'labels',
     'id' => 'input_labels',
@@ -53,12 +53,10 @@ echo elgg_view("input/hidden", array(
 ));
 ?>
 <script>
-$(function() {
     // Load tinyMCE in textarea
     clipit.tinymce();
     $(".chosen-select").chosen({disable_search_threshold: 1});
     $('ul#labels').each(clipit.labelList);
-});
 </script>
 <div>
     <?php echo elgg_view('multimedia/file/view_summary', array('file' => $entity));?>
@@ -89,6 +87,13 @@ $(function() {
                 <label><?php echo elgg_echo("tags");?></label>
                 <?php if($group_tags):?>
                     <?php echo elgg_view("tricky_topic/tags/view", array('tags' => $group_tags, 'width' => '45%')); ?>
+                    <?php foreach($group_tags as $group_tag):?>
+                        <?php echo elgg_view("input/hidden", array(
+                            'name' => 'tags[]',
+                            'value' => $group_tag
+                        ));
+                        ?>
+                    <?php endforeach;?>
                 <?php endif;?>
                 <div>
                     <select name="tags[]" data-placeholder="<?php echo elgg_echo('click_add');?>" style="width:100%;" multiple class="chosen-select" tabindex="8">

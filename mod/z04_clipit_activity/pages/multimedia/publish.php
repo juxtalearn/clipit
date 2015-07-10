@@ -14,6 +14,7 @@ $entity_id = (int)$page[5];
 $filter = "";
 elgg_pop_breadcrumb($entity->name);
 $object = ClipitSite::lookup($entity_id);
+
 switch($object['subtype']){
     // Clipit Video
     case 'ClipitVideo':
@@ -22,19 +23,13 @@ switch($object['subtype']){
         $entity = array_pop(ClipitVideo::get_by_id(array($entity_id)));
         $entity_preview = '<img src="'.$entity->preview.'" class="img-responsive">';
         break;
-    // Clipit Video
-    case 'ClipitResource':
-        $subtitle = elgg_echo("resource");
-        elgg_push_breadcrumb(elgg_echo("resources"), $href."?filter=resources");
-        $entity = array_pop(ClipitResource::get_by_id(array($entity_id)));
-        break;
-    // Clipit StoryBoard
-    case 'ClipitStoryboard':
-        $subtitle = elgg_echo("storyboard");
-        elgg_push_breadcrumb(elgg_echo("storyboards"), $href."?filter=storyboards");
-        $entity = array_pop(ClipitStoryboard::get_by_id(array($entity_id)));
+    // Clipit File
+    case 'ClipitFile':
+        $subtitle = elgg_echo("file");
+        elgg_push_breadcrumb(elgg_echo("files"), $href."?filter=files");
+        $entity = array_pop(ClipitFile::get_by_id(array($entity_id)));
         $entity_preview = elgg_view("multimedia/file/view_summary", array(
-            'file' => array_pop(ClipitFile::get_by_id(array($entity->file))),
+            'file' => array_pop(ClipitFile::get_by_id(array($entity->id))),
             'title' => false
         ));
         break;

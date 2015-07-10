@@ -69,11 +69,11 @@ if($page[2] == 'view' && $page[3]){
                 'comments' => $comments
             ));
             break;
-        // Clipit Storyboard publication
+        // Clipit File publication
         case 'ClipitFile':
             $task_id = ClipitFile::get_task($entity_id);
             $files = ClipitTask::get_files($task_id);
-            if(!$entity || !in_array($entity_id, $sbs)){
+            if(!$entity || !in_array($entity_id, $files)){
                 return false;
             }
             $file = array_pop(ClipitFile::get_by_id(array($entity->id)));

@@ -45,7 +45,7 @@ $(function () {
     }).on('fileuploadstop', function (e, data) {
         $("#add-file .modal-body").html('<i class="fa fa-spinner fa-spin" style="font-size: 40px;color: #bae6f6"></i>');
         $("#add-file .modal-footer").html("");
-//        window.location.reload(false);
+        window.location.reload(false);
     });
 
     // Enable iframe cross-domain access via redirect option:

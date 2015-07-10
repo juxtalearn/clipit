@@ -25,7 +25,7 @@ if(!$page[2]) {
             $params = array(
                 'entity' => $activity,
                 'create' => $canCreate,
-                'files' => $files,
+                'entities' => $files,
                 'href' => $href
             );
             $content = files_get_page_content_list($params);

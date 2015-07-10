@@ -20,9 +20,13 @@ switch($object['subtype']){
     case 'ClipitGroup':
         $activity = array_pop(ClipitActivity::get_by_id(array($entity->activity)));
         $tags = ClipitTrickyTopic::get_tags($activity->tricky_topic);
+        $group_tags = array();
+        if(!$vars['publish']) {
+            $group_tags = ClipitGroup::get_tags($entity->id);
+            $tags = array_diff($tags, $group_tags);
+        }
         break;
 }
-
 ?>
 <script>
 $(function(){
@@ -46,6 +50,7 @@ $(function(){
         'value' => $type,
     ));
     ?>
+    <input type="hidden" name="original_name" value="{%=file.name%}"/>
     <div class="col-md-2">
         <div class="file-info">
             <div class="img-prev"><div class="preview"></div></div>
@@ -55,9 +60,9 @@ $(function(){
             <strong class="error text-danger"></strong>
             <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
             <a class="cancel btn btn-border-red btn-xs margin-top-10 show" style="text-transform: uppercase;">
-                    <i class="fa fa-trash-o"></i>
-                    <span><?php echo elgg_echo('multimedia:delete');?></span>
-                </a>
+                <i class="fa fa-trash-o"></i>
+                <span><?php echo elgg_echo('multimedia:delete');?></span>
+            </a>
         </div>
     </div>
     <button class="btn btn-primary start" style="display:none;" disabled>
@@ -77,7 +82,17 @@ $(function(){
                 ));
             ?>
         </div>
-        <div style="margin-top: -10px;">
+        <div>
+        <?php if($group_tags):?>
+            <?php echo elgg_view("tricky_topic/tags/view", array('tags' => $group_tags, 'width' => '45%')); ?>
+            <?php foreach($group_tags as $group_tag):?>
+                <?php echo elgg_view("input/hidden", array(
+                    'name' => 'tags[]',
+                    'value' => $group_tag
+                ));
+                ?>
+            <?php endforeach;?>
+        <?php endif;?>
         <a href="javascript:;" class="add-tag"><strong>+ <?php echo elgg_echo('tags:assign');?></strong></a>
             <div style="display:none;" class="margin-top-10">
             <select name="tags[]" data-placeholder="<?php echo elgg_echo('click_add');?>" style="width:100%;" class="tag-select" multiple tabindex="8">

@@ -186,6 +186,7 @@ $english = array(
     'file:cantremove' => 'Can not remove file',
     'file:edit' => 'Edit file',
     'file:edited' => 'File edited',
+    'file:added' => 'File added',
     'file:none' => "No files",
     /* File types */
     'file:general' => 'File',

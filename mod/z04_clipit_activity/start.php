@@ -334,9 +334,10 @@ function clipit_task_view_files($hook, $view_type, $returnvalue, $params){
             'entity' => $params['activity'],
             'create' => false,
             'options' => false,
-            'files' => $files,
+            'entities' => $files,
             'href' => $params['href'],
-            'task_id' => $params['role'] == ClipitUser::ROLE_STUDENT ? $task->id : false
+            'task_id' => $params['role'] == ClipitUser::ROLE_STUDENT ? $task->id : false,
+            'task_type' => $task->task_type
         );
         $returnvalue .= elgg_view('multimedia/file/list', $options);
     }
