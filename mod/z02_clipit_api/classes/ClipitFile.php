@@ -482,7 +482,7 @@ class ClipitFile extends UBFile {
      * @param string $title File title
      * @param string $mime_type File MIME type
      *
-     * @return string File video URL
+     * @return string Google Drive File ID
      */
     static function upload_to_gdrive($file_path, $title, $mime_type)
     {
