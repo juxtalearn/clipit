@@ -96,4 +96,13 @@ function expose_file_functions() {
         $api_suffix . "get_labels", $class_suffix . "get_labels",
         array("id" => array("type" => "int", "required" => true)), "Get Labels from a File", 'GET', false, true
     );
+    //upload_to_gdrive($file_path, $title)
+    expose_function(
+        $api_suffix . "upload_to_gdrive", $class_suffix . "upload_to_gdrive",
+        array(
+            "file_path" => array("type" => "string", "required" => true),
+            "title" => array("type" => "string", "required" => true),
+            "mime_type" => array("type" => "string", "required" => true)
+        ), "Upload a Clipit File to Google Drive", "POST", false, true
+    );
 }

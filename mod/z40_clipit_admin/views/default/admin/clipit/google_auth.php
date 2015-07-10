@@ -12,7 +12,7 @@
 
 if(get_config("google_refresh_token")) {
     echo "<H3>SUCCESS!</H3>";
-    echo "<br/><p>ClipIt is now authenticated with YouTube</p>";
+    echo "<br/><p>ClipIt is now authenticated with Google</p>";
     return;
 }
 
@@ -20,10 +20,11 @@ session_start();
 
 $google_lib_path = elgg_get_plugins_path()."z02_clipit_api/libraries/google_api/src";
 require_once($google_lib_path."/Google/Client.php");
-require_once($google_lib_path."/Google/Service/YouTube.php");
-$REDIRECT = elgg_get_site_url() . "admin/clipit/youtube_auth";
+$REDIRECT = elgg_get_site_url() . "admin/clipit/google_auth";
 $APP_NAME = elgg_get_site_entity()->name;
-$SCOPE = "https://www.googleapis.com/auth/youtube";
+$SCOPE = array();
+$SCOPE[] = "https://www.googleapis.com/auth/youtube";
+$SCOPE[] = "https://www.googleapis.com/auth/drive";
 $html_body = "";
 
 if($_GET['code']) {
@@ -43,7 +44,7 @@ if($_GET['code']) {
     set_config("google_token", $token_obj->access_token);
     set_config("google_refresh_token", $token_obj->refresh_token);
     $html_title = "SUCCESS!";
-    $html_body .= "ClipIt is now authenticated with YouTube";
+    $html_body .= "ClipIt is now authenticated with Google";
 } elseif($_GET['google_id'] && $_GET['google_secret']) {
     set_config("google_id", $_GET['google_id']);
     set_config("google_secret", $_GET['google_secret']);
