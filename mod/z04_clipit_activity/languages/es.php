@@ -187,6 +187,7 @@ $spanish = array(
     'file:cantremove' => 'No se puede borrar el archivo',
     'file:edit' => 'Editar archivo',
     'file:edited' => 'Archivo editado',
+    'file:added' => 'Archivo añadido',
     'file:none' => "No hay archivos",
     /* File types */
     'file:general' => 'Archivo',

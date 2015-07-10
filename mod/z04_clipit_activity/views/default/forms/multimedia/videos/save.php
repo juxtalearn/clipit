@@ -88,8 +88,8 @@ echo elgg_view("input/hidden", array(
                     $("body").css({"cursor": "progress"});
                 }
             });
-            $('ul#labels').each(clipit.labelList);
         });
+        $('ul#labels').each(clipit.labelList);
     </script>
     <style>
         .chosen-container{

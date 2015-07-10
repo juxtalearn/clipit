@@ -11,14 +11,14 @@
  * @package         ClipIt
  */
 function files_get_page_content_list($params = array()){
-    $files = $params['files'];
+    $files = $params['entities'];
     // Search items
     if($search_term = stripslashes(get_input("search"))){
         $items_search = array_keys(ClipitFile::get_from_search($search_term));
         $files = array_uintersect($items_search, $files, "strcasecmp");
     }
     elgg_extend_view("files/search", "search/search");
-    $params['files'] = $files;
+    $params['entities'] = $files;
 
     $content = elgg_view("files/search");
     $list_options = array();

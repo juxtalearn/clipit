@@ -24,7 +24,7 @@ if(!$page[4]) {
             $params = array(
                 'entity' => $group,
                 'add_files' => true,
-                'files' => $files,
+                'entities' => $files,
                 'href' => $href,
                 'create' => $canCreate
             );

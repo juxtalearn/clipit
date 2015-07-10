@@ -32,7 +32,8 @@ $feedback_check = false;
 if(ClipitTask::get_child_task($task->id) == 0 && $task->task_type != ClipitTask::TYPE_QUIZ_TAKE && $task->task_type != ClipitTask::TYPE_OTHER){
     $feedback_check = true;
 }
-if($task->parent_task){
+
+if($task->parent_task){ // Feedback task
     $task_type = 'feedback';
 }elseif($task->task_type == ClipitTask::TYPE_RESOURCE_DOWNLOAD){
     $task_type = 'download';

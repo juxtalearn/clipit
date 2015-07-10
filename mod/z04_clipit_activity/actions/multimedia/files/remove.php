@@ -16,7 +16,7 @@ $ids = is_array($id) ? $id : array($id);
 
 foreach($ids as $file_id){
     $file = array_pop(ClipitFile::get_by_id(array((int)$file_id)));
-    if($file &&  $file->owner_id == $user_id){
+    if($file){
         ClipitFile::delete_by_id(array($file->id));
         system_message(elgg_echo("file:removed", array($file->name)));
     } else{

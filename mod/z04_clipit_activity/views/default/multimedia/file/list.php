@@ -10,11 +10,12 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$files = elgg_extract("files", $vars);
+$files = elgg_extract("entities", $vars);
 $files = ClipitFile::get_by_id($files);
 
 $entity = elgg_extract('entity', $vars);
 $href = elgg_extract("href", $vars);
+$task_id = elgg_extract("task_id", $vars);
 
 $user_id = elgg_get_logged_in_user_guid();
 $user = array_pop(ClipitUser::get_by_id(array($user_id)));
@@ -41,7 +42,6 @@ if(!empty($files)) {
     .elements-list > li{
         padding: 10px 0;
         margin-bottom: 0;
-        overflow: hidden;
     }
     .elements-list > li:hover{
         background-color: #f5f5f5;
@@ -61,7 +61,7 @@ if(!empty($files)) {
         vertical-align: top
     }
 </style>
-<?php if($vars['create']):?>
+<?php if($vars['options'] !== false && $vars['create']):?>
     <?php echo elgg_view("page/elements/list/options", array('options' => $list_options));?>
     <hr>
 <?php endif;?>
@@ -69,7 +69,7 @@ if(!empty($files)) {
 <?php if(!empty($files)):?>
 <ul class="elements-list margin-top-10">
     <?php foreach($files as $file):
-        $file_url = "{$href}/view/{$file->id}". ($vars['task_id'] ? "?task_id=".$vars['task_id']: "");
+        $file_url = "{$href}/view/{$file->id}". ($task_id ? "?task_id=".$task_id: "");
     ?>
         <li class="list-item col-md-12">
             <?php
@@ -84,6 +84,7 @@ if(!empty($files)) {
                         "data-toggle" => "modal"
                     )
                 );
+
                 if($file->owner_id == $user_id){
                     $options['remove'] = array("href" => "action/multimedia/files/remove?id={$file->id}");
                 }
@@ -116,19 +117,31 @@ if(!empty($files)) {
                 </div>
             </div>
             <div class="col-xs-3" style="vertical-align: middle">
-                <div style="width: 45px;display: inline-block;float: right;text-align: center;margin-left:10px;">
+                <?php if($vars['publish']):?>
                     <?php echo elgg_view('output/url', array(
-                        'href'  => "file/download/".$file->id. ($vars['task_id'] ? "?task_id=".$vars['task_id']: ""),
-                        'title' => $owner->name,
-                        'class' => 'btn btn-default btn-icon',
-                        'text'  => '<i class="fa fa-download"></i>'));
+                        'href'  => "{$href}/publish/{$file->id}".($task_id ? "?task_id=".$task_id: ""),
+                        'title' => elgg_echo('review'),
+                        'style' => 'background: #47a447;color: #fff;font-weight: bold;margin-left:10px;',
+                        'class' => 'btn-sm btn pull-right btn-primary',
+                        'text'  => elgg_view('page/components/tooltip', array('text' => elgg_echo('publications:select:tooltip')))
+                            .elgg_echo('select').'...'
+                    ));
                     ?>
-                    <small class="show text-truncate" title="<?php echo formatFileSize($file->size);?>" style="margin-top: 3px;">
-                        <?php echo formatFileSize($file->size);?>
-                    </small>
-                </div>
+                <?php else:?>
+                    <div style="width: 45px;display: inline-block;float: right;text-align: center;margin-left:10px;">
+                        <?php echo elgg_view('output/url', array(
+                            'href'  => "file/download/".$file->id. ($task_id ? "?task_id=".$task_id: ""),
+                            'title' => $owner->name,
+                            'class' => 'btn btn-default btn-icon',
+                            'text'  => '<i class="fa fa-download"></i>'));
+                        ?>
+                        <small class="show text-truncate" title="<?php echo formatFileSize($file->size);?>" style="margin-top: 3px;">
+                            <?php echo formatFileSize($file->size);?>
+                        </small>
+                    </div>
+                <?php endif;?>
                 <?php
-                if($vars['task_id']):
+                if($task_id && $vars['task_type'] == ClipitTask::TYPE_RESOURCE_DOWNLOAD):
                     if(array_pop(ClipitFile::get_read_status($file->id, array($user_id)))): ?>
                         <div class="pull-right margin-right-5 margin-top-5">
                             <i class="fa fa-eye blue" style="font-size: 16px;"></i>
@@ -137,8 +150,16 @@ if(!empty($files)) {
                     endif;
                 endif;
                 ?>
-                <?php echo $owner_options;?>
+                <?php if($vars['options'] !== false):?>
+                    <?php echo elgg_view("multimedia/owner_options", array(
+                        'entity' => $file,
+                        'type' => 'file',
+                        'remove' => count(ClipitFile::get_clones($file->id)) > 0 ? false:true,
+                    ));
+                    ?>
+                <?php endif;?>
             </div>
+            <div class="clearfix"></div>
         </li>
     <?php endforeach;?>
 </ul>
