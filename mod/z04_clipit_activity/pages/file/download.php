@@ -14,14 +14,15 @@
 
 if($file_id = get_input("id")) {
     if ($task_id = get_input('task_id')) {
-        if ($storyboard_id = get_input('storyboard')) {
-            ClipitStoryboard::set_read_status($storyboard_id, true, array(elgg_get_logged_in_user_guid()));
-        } else {
-            ClipitFile::set_read_status($file_id, true, array(elgg_get_logged_in_user_guid()));
-        }
+        ClipitFile::set_read_status($file_id, true, array(elgg_get_logged_in_user_guid()));
     }
     $file = array_pop(ClipitFile::get_by_id(array($file_id)));
     $file_name = $file->name;
+    $file_name = ClipitFile::sanitize_filename($file->name);
+
+    if(!empty($file->mime_type['ext'])){
+        $file_name .= '.' . $file->mime_type['ext'];
+    }
     $file_path = $file->file_path;
 } elseif($entity_id = get_input('entity_id')){
     $object = ClipitSite::lookup($entity_id);
