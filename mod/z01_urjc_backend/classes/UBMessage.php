@@ -35,7 +35,6 @@ class UBMessage extends UBItem {
      */
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
-        //$this->read_array = (array)$elgg_entity->get("read_array");
         $this->read_array = (array)static::get_read_array($this->id);
         $this->destination = (int)static::get_destination($this->id);
         $this->file_array = (array)static::get_files($this->id);
@@ -48,7 +47,6 @@ class UBMessage extends UBItem {
      */
     protected function copy_to_elgg($elgg_entity) {
         parent::copy_to_elgg($elgg_entity);
-        //$elgg_entity->set("read_array", (array)$this->read_array);
     }
 
     /**
@@ -153,9 +151,6 @@ class UBMessage extends UBItem {
      */
     static function get_destination($id) {
         $item_array = UBCollection::get_items($id, static::REL_MESSAGE_DESTINATION);
-        if (empty($item_array)) {
-            return 0;
-        }
         return (int)array_pop($item_array);
     }
 
@@ -168,11 +163,7 @@ class UBMessage extends UBItem {
      * @return bool True if OK, false if error
      */
     static function set_destination($id, $destination_id) {
-        if ($destination_id > 0) {
-            UBCollection::remove_all_items($id, static::REL_MESSAGE_DESTINATION);
-            return UBCollection::add_items($id, array($destination_id), static::REL_MESSAGE_DESTINATION);
-        }
-        return false;
+        return UBCollection::set_items($id, array($destination_id), static::REL_MESSAGE_DESTINATION);
     }
 
     /**
