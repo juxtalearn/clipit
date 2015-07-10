@@ -516,14 +516,6 @@ class ClipitFile extends UBFile {
 
         $drive_file = new Google_Service_Drive_DriveFile();
         $drive_file->setTitle($title);
-//        $file_data  = file_get_contents($file_path);
-//        $created_file = $drive_svc->files->insert(
-//            $drive_file,
-//            array(
-//                "data" => $file_data,
-//                "mimeType" => "",
-//                "uploadType" => "media")
-//        );
         $chunkSizeBytes = 1 * 1024 * 1024;
         $client->setDefer(true);
         $request = $drive_svc->files->insert($drive_file);

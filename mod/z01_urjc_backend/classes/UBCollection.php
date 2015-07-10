@@ -27,7 +27,13 @@ abstract class UBCollection {
      * @return bool Returns true if success, false if error
      */
     static function add_items($id, $item_array, $rel_name, $exclusive = false) {
+        if(empty($id)){
+            return false;
+        }
         foreach ($item_array as $item_id) {
+            if(empty($item_id)){
+                continue;
+            }
             if ($exclusive) {
                 $rel_array = get_entity_relationships($item_id, true);
                 foreach ($rel_array as $rel) {
@@ -52,11 +58,17 @@ abstract class UBCollection {
      * @return bool Returns true if success, false if error
      */
     static function set_items($id, $item_array, $rel_name, $exclusive = false) {
+        if(empty($id)){
+            return false;
+        }
         static::remove_all_items($id, $rel_name);
         if(empty($item_array)){
             return true;
         }
         foreach ($item_array as $item_id) {
+            if(empty($item_id)){
+                continue;
+            }
             if ($exclusive) {
                 $rel_array = get_entity_relationships($item_id, true);
                 foreach ($rel_array as $rel) {

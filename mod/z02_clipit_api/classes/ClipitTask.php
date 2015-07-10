@@ -73,9 +73,9 @@ class ClipitTask extends UBItem {
                 $this->end = $prop_value_array["end"];
             }
         }
-        $this->parent_task = (int)static::get_parent_task("parent_task");
-        $this->child_task = (int)static::get_child_task("child_task");
-        $this->activity = (int)static::get_activity((int)$this->id);
+        $this->parent_task = (int)static::get_parent_task($this->id);
+        $this->child_task = (int)static::get_child_task($this->id);
+        $this->activity = (int)static::get_activity($this->id);
         $this->quiz = (int)static::get_quiz($this->id);
         $this->video_array = static::get_videos($this->id);
         $this->file_array = static::get_files($this->id);
@@ -93,7 +93,6 @@ class ClipitTask extends UBItem {
         $elgg_entity->set("task_type", (string)$this->task_type);
         $elgg_entity->set("start", (int)$this->start);
         $elgg_entity->set("end", (int)$this->end);
-        $elgg_entity->set("parent_task", (int)$this->parent_task);
         $elgg_entity->set("task_count", (int)$this->task_count);
     }
 
