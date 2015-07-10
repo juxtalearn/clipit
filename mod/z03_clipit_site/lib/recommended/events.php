@@ -159,26 +159,25 @@ function view_recommended_event($event, $view_type = 'full'){
             break;
         // Tasks
         case ClipitTask::REL_TASK_FILE:
-            $activity_id = ClipitStoryboard::get_activity($relationship->guid_two);
+            $activity_id = ClipitFile::get_activity($relationship->guid_two);
             $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
-            $group_id = ClipitStoryboard::get_group($relationship->guid_two);
+            $group_id = ClipitFile::get_group($relationship->guid_two);
             $group = array_pop(ClipitGroup::get_by_id(array($group_id)));
-            $entity = array_pop(ClipitStoryboard::get_by_id(array($relationship->guid_two)));
-            $file = array_pop(ClipitFile::get_by_id(array($entity->file)));
+            $entity = array_pop(ClipitFile::get_by_id(array($relationship->guid_two)));
             $href = "clipit_activity/{$activity->id}/publications/view/{$entity->id}";
-            $storyboard_info = elgg_view('output/url', array(
+            $file_info = elgg_view('output/url', array(
                 'href'  => "clipit_activity/{$activity->id}/tasks/view/{$relationship->guid_one}",
                 'title' => $entity->name,
                 'text'  => $entity->name,
             ));
             $params = array(
-                'title' => elgg_echo('task:file_upload') .' '.$storyboard_info,
+                'title' => elgg_echo('task:file_upload') .' '.$file_info,
                 'icon' => 'fa-file',
                 'author' => $group->id,
                 'body' => elgg_view("recommended/events/file", array(
                     'entity' => $entity,
                     'href' => $href,
-                    'image' => elgg_view("multimedia/file/preview", array('file'  => $file)
+                    'image' => elgg_view("multimedia/file/preview", array('file'  => $entity)
                     )))
             );
             break;

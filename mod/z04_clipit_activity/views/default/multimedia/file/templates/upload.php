@@ -37,7 +37,7 @@ $(function(){
 {% for (var i=0, file; file=o.files[i]; i++) { %}
 <div class="row template-upload fade">
     <?php echo elgg_view("input/hidden", array(
-        'name' => 'entity-id',
+        'name' => 'scope-id',
         'value' => $entity->id,
     ));
     ?>
@@ -46,23 +46,16 @@ $(function(){
         'value' => $type,
     ));
     ?>
-    <div class="col-md-3">
+    <div class="col-md-2">
         <div class="file-info">
             <div class="img-prev"><div class="preview"></div></div>
-            <div class="text-truncate">
-                <small class="size pull-right"><?php echo elgg_echo('multimedia:processing');?>...</small>
-                <div class="text-truncate"><a title="{%=file.name%}">{%=file.name%}</a></div>
+            <div class="text-truncate text-center">
+                <small class="size"><?php echo elgg_echo('multimedia:processing');?>...</small>
             </div>
             <strong class="error text-danger"></strong>
             <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
-            <a class="cancel btn" style="
-    color: #ff1a1a;
-    margin-top: 5px;
-    display: block;
-    text-transform: uppercase;
-    border: 1px solid #ff1a1a;
-">
-                    <i class="fa fa-ban"></i>
+            <a class="cancel btn btn-border-red btn-xs margin-top-10 show" style="text-transform: uppercase;">
+                    <i class="fa fa-trash-o"></i>
                     <span><?php echo elgg_echo('multimedia:delete');?></span>
                 </a>
         </div>
@@ -70,13 +63,17 @@ $(function(){
     <button class="btn btn-primary start" style="display:none;" disabled>
         <span>Start</span>
     </button>
-    <div class="col-md-8">
+    <div class="col-md-10">
         <div class="form-group">
-            <label for="file-name"><?php echo elgg_echo("multimedia:file:description");?></label>
+            <label for="file-name"><?php echo elgg_echo("name");?></label>
+            <input type="text" name="file-name" class="form-control" placeholder="{%=file.name%}" required="true" value="{%=file.name%}" onfocus="if(this.value == '{%=file.name%}') { this.value = ''; }">
+        </div>
+        <div class="form-group">
+            <label for="file-text"><?php echo elgg_echo("multimedia:file:description");?></label>
             <?php echo elgg_view("input/plaintext", array(
                     'name' => 'file-text',
                     'class' => 'form-control mceEditor',
-                    'rows'  => 3,
+                    'rows'  => 3
                 ));
             ?>
         </div>

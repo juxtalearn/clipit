@@ -24,5 +24,24 @@ if($file &&
     hasTeacherAccess($user->role) ||
     ($member_group && $user->role == ClipitUser::ROLE_STUDENT)
 ){
-    echo elgg_view_form('multimedia/files/edit', array('data-validate'=> "true" ), array('entity'  => $file));
+    $body = elgg_view("page/components/modal",
+        array(
+            "dialog_class" => "modal-md",
+            "remote" => true,
+            "target" => "edit-file-{$file->id}",
+            "title" => elgg_echo("file:edit"),
+            "form" => true,
+            "body" => elgg_view('forms/multimedia/files/save', array('entity' => $file)),
+            "cancel_button" => true,
+            "ok_button" => elgg_view('input/submit',
+                array(
+                    'value' => elgg_echo('save'),
+                    'class' => "btn btn-primary"
+                ))
+        ));
+    echo elgg_view_form('', array(
+        'action' => 'action/multimedia/files/save',
+        'body' => $body,
+        'data-validate'=> "true"
+    ));
 }

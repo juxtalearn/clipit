@@ -15,7 +15,4 @@ switch($type){
     case "file":
         include(elgg_get_plugins_path() . 'z04_clipit_activity/actions/multimedia/files/upload.php');
         break;
-    case "storyboard":
-        include(elgg_get_plugins_path() . 'z04_clipit_activity/actions/multimedia/storyboards/upload.php');
-        break;
 }

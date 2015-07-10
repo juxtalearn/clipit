@@ -21,6 +21,42 @@ include("{$vendors_dir}fileupload-image.js");
 include("{$vendors_dir}fileupload-validate.js");
 include("{$vendors_dir}fileupload-ui.js");
 ?>
+//<script>
+elgg.provide('clipit.file');
+
+clipit.file.getIcon = function(file_type, $icon){
+    switch(file_type){
+        case "application/pdf":
+            $icon.css({'color': '#E20000'}).addClass('fa-file-pdf-o');
+            break;
+        // Microsoft Word
+        case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+            $icon.css({'color': '#26468F'}).addClass('fa-file-word-o');
+            break;
+        // Microsoft Excel
+        case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+            $icon.css({'color': '#008D33'}).addClass('fa-file-excel-o');
+            break;
+        // Microsoft PowerPoint
+        case "application/vnd.openxmlformats-officedocument.presentationml.presentation":
+            $icon.css({'color': '#DA4C13'}).addClass('fa-file-powerpoint-o');
+            break;
+        case "application/x-rar":
+        case "application/zip":
+            $icon.css({'color': '#EBAB3E'}).addClass('file-zip-o');
+            break;
+        default:
+            $icon.css({'color': '#C9C9C9'}).addClass('fa-file-o');
+            break;
+    }
+    // Other file types
+    if(/video/.test(file_type)){
+        $icon.css({'color': '#bae6f6'}).addClass('fa-file-video-o');
+    } else if(/audio/.test(file_type)){
+        $icon.css({'color': '#bae6f6'}).addClass('file-audio-o');
+    }
+    return $icon;
+}
 $.fn.attach_multimedia = function (options) {
     var defaults = {
         url: 'ajax/view/multimedia/attach/'

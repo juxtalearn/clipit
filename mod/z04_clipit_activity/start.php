@@ -119,8 +119,8 @@ function clipit_activity_init() {
     elgg_register_ajax_view('modal/multimedia/video/publish');
     /* Files */
     elgg_register_action("multimedia/files/upload", "{$plugin_dir}/actions/multimedia/files/upload.php");
+    elgg_register_action("multimedia/files/save", "{$plugin_dir}/actions/multimedia/files/save.php");
     elgg_register_action("multimedia/files/remove", "{$plugin_dir}/actions/multimedia/files/remove.php");
-    elgg_register_action("multimedia/files/edit", "{$plugin_dir}/actions/multimedia/files/edit.php");
     elgg_register_action("multimedia/files/set_options", "{$plugin_dir}/actions/multimedia/files/set_options.php");
     elgg_register_ajax_view('modal/multimedia/file/edit');
     elgg_register_ajax_view('multimedia/file/viewer');

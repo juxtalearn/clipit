@@ -55,13 +55,9 @@ if(trim($title) == ""){
             // Labels
             $total_labels = array();
             foreach ($labels as $label) {
-                if ($label_exist = array_pop(ClipitLabel::get_from_search($label, true, true))) {
-                    $total_labels[] = $label_exist->id;
-                } else {
-                    $total_labels[] = ClipitLabel::create(array(
-                        'name' => $label,
-                    ));
-                }
+                $total_labels[] = ClipitLabel::create(array(
+                    'name' => $label,
+                ));
             }
             if($group_id = ClipitVideo::get_group($video_id)){
                 /* Get tags from group */
@@ -77,8 +73,8 @@ if(trim($title) == ""){
         ClipitVideo::set_properties($video_id, $data);
         $successful_message = elgg_echo('video:edited');
     } else {
-        register_error(elgg_echo("video:cantadd"));
-    }
+    register_error(elgg_echo("video:cantadd"));
+}
     system_message($successful_message);
 }
 // forward to task directly

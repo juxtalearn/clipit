@@ -30,7 +30,12 @@ function files_get_page_content_list($params = array()){
         );
     }
     if($params['create']) {
-        $content .= elgg_view_form('multimedia/files/upload', array('id' => 'fileupload', 'enctype' => 'multipart/form-data'), array('entity' => $params['entity']));
+        $content .= elgg_view_form('multimedia/files/upload', array(
+            'action' => 'action/multimedia/files/save',
+            'id' => 'fileupload',
+            'enctype' => 'multipart/form-data',
+            'data-validate' => 'true'
+        ), array('entity' => $params['entity']));
     }
     $content .= elgg_view_form("multimedia/files/set_options",
         array('body' => elgg_view('multimedia/file/list', $params), 'class' => 'files-table'));

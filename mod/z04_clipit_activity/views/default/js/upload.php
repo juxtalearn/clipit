@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 ?>
+//<script>
 $(function () {
     'use strict';
     $.blueimp.fileupload.prototype._renderPreviews = function (data) {
@@ -21,14 +22,17 @@ $(function () {
                 if(preview){
                     $(elm).append(preview);
                 } else {
-                    $(elm).append('<i class="icon fa fa-file-o" style="color: #C9C9C9;font-size: 50px;"></i>');
+                    var $icon = $('<i class="icon fa" style="font-size: 50px;"/>');
+                        $icon = clipit.file.getIcon(data.files[index].type, $icon);
+                    $(elm).append($icon);
                 }
             });
     },
     // Initialize the jQuery File Upload widget:
     $('#fileupload').fileupload({
         maxFileSize: 1073741824, // 1 GB
-        url: elgg.config.wwwroot+'ajax/view/multimedia/file/upload',
+//        url: elgg.config.wwwroot+'ajax/view/multimedia/file/upload',
+        url: elgg.security.addToken($('#fileupload').attr('action')),
         previewMaxWidth: 140,
         previewMaxHeight: 140,
         disableImageResize: /Android(?!.*Chrome)|Opera/
@@ -41,7 +45,7 @@ $(function () {
     }).on('fileuploadstop', function (e, data) {
         $("#add-file .modal-body").html('<i class="fa fa-spinner fa-spin" style="font-size: 40px;color: #bae6f6"></i>');
         $("#add-file .modal-footer").html("");
-        window.location.reload(false);
+//        window.location.reload(false);
     });
 
     // Enable iframe cross-domain access via redirect option:

@@ -88,27 +88,7 @@ echo elgg_view("input/hidden", array(
                     $("body").css({"cursor": "progress"});
                 }
             });
-            $('ul#labels').each(function(){
-                that = $(this);
-                $(this).tagit({
-                    allowSpaces: true,
-                    removeConfirmation: true,
-                    onTagExists: function(event, ui){
-                        $(ui.existingTag).fadeIn("slow", function() {
-                            $(this).addClass("selected");
-                        }).fadeOut("slow", function() {
-                            $(this).removeClass("selected");
-                        });
-                    },
-                    autocomplete: {
-                        delay: 0,
-                        source: elgg.config.wwwroot+"ajax/view/publications/labels/search"
-                    },
-                    placeholderText: "<?php echo elgg_echo("tags:commas:separated");?>",
-                    singleField: true,
-                    singleFieldNode: that.closest("form").find("input[name=labels]")
-                });
-            });
+            $('ul#labels').each(clipit.labelList);
         });
     </script>
     <style>
@@ -232,25 +212,6 @@ echo elgg_view("input/hidden", array(
                 <ul id="labels"></ul>
             </div>
         </div>
-        <?php if(!get_config('fixed_performance_rating')):?>
-            <div class="col-md-5">
-                <label><?php echo elgg_echo("performance_items");?></label>
-                <div>
-                    <select name="performance_items[]" data-placeholder="<?php echo elgg_echo('click_add');?>" style="width:100%;" multiple class="chosen-select-items" tabindex="8">
-                        <option value=""></option>
-                        <?php foreach(ClipitPerformanceItem::get_from_category(null) as $category => $items):?>
-                            <optgroup label="<?php echo $category; ?>">
-                                <?php foreach($items as $item): ?>
-                                    <option <?php echo in_array($item->id, $performance_items) ? "selected" : "";?> value="<?php echo $item->id; ?>">
-                                        <?php echo $item->name; ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </optgroup>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-            </div>
-        <?php endif;?>
     </div>
 <?php if($vars['publish']):?>
     <div class="margin-bottom-10 margin-top-5">

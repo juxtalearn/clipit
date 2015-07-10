@@ -7576,7 +7576,6 @@ li.list-item:last-child {
   margin-left: 10px;
 }
 .files-list .file-info > .img-prev {
-  background: #f1f2f7;
   display: table;
   width: 100%;
   height: 100%;
@@ -7586,6 +7585,9 @@ li.list-item:last-child {
   display: table-cell;
   vertical-align: middle;
   text-align: center;
+}
+.files-list .file-info .progress {
+  background: #32b4e5 !important;
 }
 .files-list .files .template-upload {
   border-bottom: 1px solid #bae6f6;

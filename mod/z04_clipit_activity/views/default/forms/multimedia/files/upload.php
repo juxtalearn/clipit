@@ -11,8 +11,8 @@
  * @package         ClipIt
  */
 $entity = elgg_extract('entity', $vars);
-elgg_load_js("file:upload");
 
+elgg_load_js("file:upload");
 echo elgg_view("multimedia/file/templates/upload", array('entity' => $entity, 'type' => 'file'));
 ?>
 
@@ -26,29 +26,29 @@ echo elgg_view("multimedia/file/templates/upload", array('entity' => $entity, 't
 $body .= '<div class="files"></div>';
 $footer = '
 <div class="fileupload-buttonbar row">
-        <div class="col-md-6">
-            <!-- The global file processing state -->
-            <span class="fileupload-process"></span>
-            <!-- The global progress state -->
-            <div class="fileupload-progress fade">
-                <!-- The global progress bar -->
-                <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                    <div class="progress-bar progress-bar-success" style="width:0%;"></div>
-                </div>
-                <!-- The extended global progress state -->
-                <div class="progress-extended">&nbsp;</div>
+    <div class="col-md-6">
+        <!-- The global file processing state -->
+        <span class="fileupload-process"></span>
+        <!-- The global progress state -->
+        <div class="fileupload-progress fade">
+            <!-- The global progress bar -->
+            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar progress-bar-success" style="width:0%;"></div>
             </div>
+            <!-- The extended global progress state -->
+            <div class="progress-extended">&nbsp;</div>
         </div>
-        <div class="col-md-6">
-            <span class="btn btn-success fileinput-button">
-                <i class="fa fa-plus"></i>
-                <span>'.elgg_echo('multimedia:files:add').'...</span>
-                <input type="file" name="files" multiple>
-            </span>
-            <button type="submit" class="btn btn-primary start">
-                <span>'.elgg_echo("send").'</span>
-            </button>
-        </div>
+    </div>
+    <div class="col-md-6">
+        <span class="btn btn-success fileinput-button">
+            <i class="fa fa-plus"></i>
+            <span>'.elgg_echo('multimedia:files:add').'...</span>
+            <input type="file" name="files" multiple>
+        </span>
+        <button type="submit" class="btn btn-primary start">
+            <span>'.elgg_echo("send").'</span>
+        </button>
+    </div>
 </div>';
 echo elgg_view("page/components/modal",
     array(

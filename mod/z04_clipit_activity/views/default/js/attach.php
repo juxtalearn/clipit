@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 ?>
+//<script>
 $(function () {
     'use strict';
     $.blueimp.fileupload.prototype._renderPreviews = function (data) {
@@ -19,7 +20,10 @@ $(function () {
                 if(preview){
                     $(elm).append(preview);
                 } else {
-                    $(elm).append('<i class="icon fa fa-file-o" style="color: #C9C9C9;font-size: 50px;"></i>');
+                    var icon = '';
+                    var $icon = $('<i class="icon fa" style="font-size: 50px;"/>');
+                        $icon = clipit.file.getIcon(data.files[index].type, $icon);
+                    $(elm).append($icon);
                 }
             });
     };
