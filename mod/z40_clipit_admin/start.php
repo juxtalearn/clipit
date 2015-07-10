@@ -40,7 +40,7 @@ function clipit_admin_init() {
 
     // Register Admin Menus
     elgg_register_admin_menu_item('configure', 'clipit_options', 'clipit', 1);
-    elgg_register_admin_menu_item('configure', 'youtube_auth', 'clipit', 2);
+    elgg_register_admin_menu_item('configure', 'google_auth', 'clipit', 2);
     elgg_register_admin_menu_item('configure', 'import_export', 'clipit', 3);
     elgg_register_admin_menu_item('configure', 'update_clipit', 'clipit', 4);
 

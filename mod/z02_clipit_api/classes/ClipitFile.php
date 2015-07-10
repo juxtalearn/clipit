@@ -475,6 +475,82 @@ class ClipitFile extends UBFile {
         return array_pop($activity_array);
     }
 
+    /**
+     * Uploads to Google Drive a file from a local path in the server
+     *
+     * @param string $file_path Local file path
+     * @param string $title File title
+     * @param string $mime_type File MIME type
+     *
+     * @return string Google Drive File ID
+     */
+    static function upload_to_gdrive($file_path, $title, $mime_type)
+    {
+        if (!get_config("google_refresh_token")) {
+            return false;
+        }
+        set_include_path(
+            get_include_path() . PATH_SEPARATOR . elgg_get_plugins_path() . "z02_clipit_api/libraries/google_api/src/"
+        );
+        $lib_path = elgg_get_plugins_path() . "z02_clipit_api/libraries/";
+        require_once($lib_path . "google_api/src/Google/Client.php");
+        require_once($lib_path . "google_api/src/Google/Service/Drive.php");
 
+        $client = new Google_Client();
+        $client->setClientId(get_config("google_id"));
+        $client->setClientSecret(get_config("google_secret"));
+        try {
+            $client->setAccessToken(get_config("google_token"));
+        } catch (Exception $e) {
+            error_log($e);
+        }
+        if ($client->isAccessTokenExpired()) {
+            $refresh_token = get_config("google_refresh_token");
+            $client->refreshToken($refresh_token);
+        }
+        if (!$client->getAccessToken()) {
+            return null;
+        }
+        // Define an object that will be used to make all API requests.
+        $drive_svc = new Google_Service_Drive($client);
+
+        $drive_file = new Google_Service_Drive_DriveFile();
+        $drive_file->setTitle($title);
+//        $file_data  = file_get_contents($file_path);
+//        $created_file = $drive_svc->files->insert(
+//            $drive_file,
+//            array(
+//                "data" => $file_data,
+//                "mimeType" => "",
+//                "uploadType" => "media")
+//        );
+        $chunkSizeBytes = 1 * 1024 * 1024;
+        $client->setDefer(true);
+        $request = $drive_svc->files->insert($drive_file);
+        $media = new Google_Http_MediaFileUpload(
+            $client,
+            $request,
+            $mime_type,
+            null,
+            true,
+            $chunkSizeBytes
+        );
+        $media->setFileSize(filesize($file_path));
+        $status = false;
+        $handle = fopen($file_path, "rb");
+        while(!$status && !feof($handle)) {
+            $chunk = fread($handle, $chunkSizeBytes);
+            $status = $media->nextChunk($chunk);
+        }
+        fclose($handle);
+        $client->setDefer(false);
+        $file_perms = new Google_Service_Drive_Permission();
+        $file_perms->setType("anyone");
+        $file_perms->setRole("reader");
+        $file_perms->setValue("");
+        $file_perms->setWithLink(true);
+        $drive_svc->permissions->insert($status->getId(), $file_perms);
+        return (string)$status->id;
+    }
 
 }
