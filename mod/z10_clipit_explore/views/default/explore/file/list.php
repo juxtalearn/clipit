@@ -47,7 +47,7 @@ $href = elgg_extract('href', $vars);
                         )); ?>
                     </strong>
                     <small class="show">
-                        <strong><?php echo elgg_echo("file:" . $file->mime_type['short']);?></strong>
+                        <strong><?php echo elgg_echo("file:" . $file->mime_short);?></strong>
                     </small>
                     <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $file->tag_array, 'width' => 100, 'limit' => 2)); ?>
                     <div class="clearfix"></div>

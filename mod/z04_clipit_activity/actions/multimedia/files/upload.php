@@ -33,7 +33,6 @@ if(count($entity)==0){
         'description' => $file_text,
         'temp_path'  => $files['tmp_name']
     ));
-
     if($new_file_id){
         if($entity_class == 'ClipitActivity') {
             // add file into Tricky Topic

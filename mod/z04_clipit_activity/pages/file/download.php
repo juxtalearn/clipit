@@ -20,8 +20,8 @@ if($file_id = get_input("id")) {
     $file_name = $file->name;
     $file_name = ClipitFile::sanitize_filename($file->name);
 
-    if(!empty($file->mime_type['ext'])){
-        $file_name .= '.' . $file->mime_type['ext'];
+    if(!empty($file->mime_ext)){
+        $file_name .= '.' . $file->mime_ext;
     }
     $file_path = $file->file_path;
 } elseif($entity_id = get_input('entity_id')){

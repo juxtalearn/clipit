@@ -291,9 +291,6 @@ function get_task_completed_count(ClipitTask $task){
         case ClipitTask::TYPE_FILE_FEEDBACK:
             $completed = 0;
             foreach($activity->student_array as $user_id){
-//                if(ClipitTask::get_completed_status($task->id, $user_id)
-//                    && (count(ClipitTask::get_storyboards($task->parent_task)) > 0
-//                        || count(ClipitTask::get_videos($task->parent_task)) > 0)){
                 if(ClipitTask::get_completed_status($task->id, $user_id)){
                     $completed++;
                 }

@@ -56,19 +56,6 @@ switch($object['subtype']){
         ));
         $content = elgg_view("multimedia/resource", array('entity_id' => $entity_id));
         break;
-    // Clipit Storyboard
-    case 'ClipitStoryboard':
-        elgg_push_breadcrumb(elgg_echo("storyboards"), $href."?filter=storyboards");
-        $title = elgg_echo("storyboard");
-        $entity = array_pop(ClipitStoryboard::get_by_id(array($entity_id)));
-        $file = array_pop(ClipitFile::get_by_id(array($entity->file)));
-        $content = elgg_view('multimedia/view', array(
-            'entity' => $entity,
-            'type' => 'storyboard',
-            'preview' => elgg_view("multimedia/file/preview", array('file'  => $file)),
-            'body' => elgg_view("multimedia/storyboard/body", array('entity'  => $entity, 'file' => $file))
-        ));
-        break;
     default:
         return false;
         break;

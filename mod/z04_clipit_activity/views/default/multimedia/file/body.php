@@ -29,7 +29,7 @@ $file = elgg_extract('entity', $vars);
         'text'  => '<i class="fa fa-download"></i> '.elgg_echo('file:download')));
     ?>
     <div class="file-info">
-        <strong class="show"><?php echo elgg_echo("file:" . $file->mime_type['short']);?></strong>
+        <strong class="show"><?php echo elgg_echo("file:" . $file->mime_short);?></strong>
         <?php echo formatFileSize($file->size);?>
     </div>
 </div>

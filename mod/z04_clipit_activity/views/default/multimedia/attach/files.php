@@ -48,7 +48,7 @@ foreach($files as $file_id):
                 <div class="blue text-truncate">
                     <a class="item-info"><?php echo $file->name;?></a>
                 </div>
-                <small class="show"><strong><?php echo elgg_echo("file:" . $file->mime_type['short']);?></strong></small>
+                <small class="show"><strong><?php echo elgg_echo("file:" . $file->mime_short);?></strong></small>
             </div>
         </div>
     </div>

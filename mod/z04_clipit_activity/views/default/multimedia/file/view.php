@@ -15,10 +15,9 @@ $size = elgg_extract('size', $vars);
 if(!$size){
     $size = "small";
 }
-$mimetype = $file->mime_type;
 $file_view = "";
 
-switch($mimetype['short']){
+switch($file->mime_short){
     case "image":
         $file_view = elgg_view('output/img', array(
             'src'  => "file/thumbnail/{$size}/{$file->id}",
@@ -26,7 +25,13 @@ switch($mimetype['short']){
             'class' => 'img-responsive'));
         break;
     case "document":
-        if($mimetype['full'] == "application/pdf"){
+        if($file->gdrive_id) {
+            $file_view = '<div class="frame-container ratio4-3">';
+            $file_view .= elgg_view('output/iframe', array(
+                'value' => 'https://drive.google.com/file/d/' . $file->gdrive_id . '/preview?embedded=true',
+                'title' => $file->name,));
+            $file_view .= '</div>';
+        } elseif($file->mime_full == "application/pdf"){
             $file_view = '<div class="frame-container">';
             $file_view .= elgg_view('output/iframe', array(
                 'value'  => elgg_normalize_url(elgg_format_url("file/thumbnail/{$size}/{$file->id}")),

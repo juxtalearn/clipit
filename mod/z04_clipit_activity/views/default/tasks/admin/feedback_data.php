@@ -19,8 +19,8 @@ switch($type){
     case 'videos':
         $items = $task_parent->video_array;
         break;
-    case 'storyboards':
-        $items = $task_parent->storyboard_array;
+    case 'files':
+        $items = $task_parent->file_array;
         break;
 }
 $output = array();

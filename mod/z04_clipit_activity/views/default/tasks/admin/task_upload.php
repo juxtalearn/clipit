@@ -123,6 +123,7 @@ natural_sort_properties($groups, 'name');
                             <?php
                             echo elgg_view($list_view, array(
                                 'entities'    => array($entities_ids[$group->id]),
+                                'options' => false,
                                 'href'      => "clipit_activity/{$activity->id}/publications",
                                 'task_id'   => $task->id,
                             )); ?>
@@ -138,6 +139,8 @@ natural_sort_properties($groups, 'name');
     <div role="tabpanel" class="tab-pane margin-top-10" id="items" style="padding: 10px;">
         <?php
         echo elgg_view($list_view, array(
+            'options' => false,
+            'actions' => false,
             'entities'    => $entities_ids,
             'href'      => "clipit_activity/{$activity->id}/publications",
         ));

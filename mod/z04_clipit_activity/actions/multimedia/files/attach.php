@@ -23,6 +23,9 @@ if(isset($files)){
         'temp_path'  => $files['tmp_name']
     ));
     if($new_file_id){
+        // Upload to GDrive
+        ClipitFile::upload_to_gdrive($new_file_id);
+
         $file = array_pop(ClipitFile::get_by_id(array($new_file_id)));
         $output = array(
             'files' => array(

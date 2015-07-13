@@ -63,7 +63,7 @@ $file = elgg_extract('file', $vars);
             <small class="show" style="margin: 5px 0;">
                 <strong>
                 <?php if($file):?>
-                    <?php echo elgg_echo("file:" . $file->mime_type['short']);?>
+                    <?php echo elgg_echo("file:" . $file->mime_short);?>
                 <?php else: ?>
                     <?php echo elgg_echo('video');?>
                 <?php endif; ?>

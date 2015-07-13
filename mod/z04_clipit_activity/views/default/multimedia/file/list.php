@@ -155,7 +155,7 @@ if(!empty($files)) {
                     endif;
                 endif;
                 ?>
-                <?php if($vars['options'] !== false):?>
+                <?php if($vars['options'] !== false || $vars['actions']):?>
                     <?php echo elgg_view("multimedia/owner_options", array(
                         'entity' => $file,
                         'type' => 'file',

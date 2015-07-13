@@ -41,6 +41,7 @@ if(trim($file_name) == ""){
         // ClipitFile exists
         $file = array_pop(ClipitFile::get_by_id(array($entity_id)));
         system_message(elgg_echo('file:edited'));
+        ClipitFile::set_properties($entity_id, $data);
     } else {
         // Create file
         $files = $_FILES['files'];
@@ -49,12 +50,20 @@ if(trim($file_name) == ""){
             'name' => get_input('original_name'),
             'description' => $file_text,
         ));
+
         if($scope_id) {
             $entity_class::add_files($scope_id, array($entity_id));
         }
+        // Upload to GDrive
+        ClipitFile::upload_to_gdrive($entity_id);
+        // Check if original name is different to input name
+        if(get_input('original_name') != $data['name']) {
+            ClipitFile::set_properties($entity_id, $data);
+        }
+
         system_message(elgg_echo('file:added'));
     }
-    ClipitFile::set_properties($entity_id, $data);
+
     // Set labels
     $total_labels = array();
     if(!empty($labels)){

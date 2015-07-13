@@ -31,7 +31,7 @@ if(mb_strlen($sb_description)>165){
     </strong>
 </h4>
 <small class="show smaller">
-    <strong><?php echo elgg_echo("file:" . $file->mime_type['short']);?></strong>
+    <strong><?php echo elgg_echo("file:" . $file->mime_short);?></strong>
 </small>
 <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $storyboard->tag_array)); ?>
 <p>

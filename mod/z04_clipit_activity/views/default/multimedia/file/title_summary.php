@@ -30,7 +30,7 @@ if(mb_strlen($file_description)>165){
     </strong>
 </h4>
 <small class="show hidden-xs">
-    <strong><?php echo elgg_echo("file:" . $file->mime_type['short']);?></strong>
+    <strong><?php echo elgg_echo("file:" . $file->mime_short);?></strong>
 </small>
 <?php echo elgg_view('tricky_topic/tags/view', array('tags' => ClipitFile::get_tags($file->id))); ?>
 <div class="hidden-xs">

@@ -20,6 +20,8 @@ for($i = 0;$i < count($file['name']);$i++){
             'name' => $file['name'][$i],
             'temp_path'  => $file['tmp_name'][$i]
         ));
+        // Upload to GDrive
+        ClipitFile::upload_to_gdrive($new_file_id);
     }
 }
 ClipitTrickyTopic::add_files($entity_id, $new_file_id);

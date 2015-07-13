@@ -13,30 +13,32 @@
 // Teacher view
 if(hasTeacherAccess($user->role)){
     $task_parent = array_pop(ClipitTask::get_by_id(array($task->parent_task)));
-    $storyboards = ClipitStoryboard::get_by_id($task_parent->storyboard_array);
+    $files = ClipitFile::get_by_id($task_parent->file_array);
     $body = elgg_view('tasks/admin/task_feedback', array(
-        'entities'    => $storyboards,
+        'entities'    => $files,
         'activity'      => $activity,
         'task'      => $task,
-        'entity_type' => 'storyboards',
-        'list_view' => 'multimedia/storyboard/list'
+        'entity_type' => 'files',
+        'list_view' => 'multimedia/file/list'
     ));
 } elseif($user->role == ClipitUser::ROLE_STUDENT) {
     $href = "clipit_activity/{$activity->id}/publications";
     $body = "";
-    $entities = ClipitTask::get_storyboards($task->parent_task);
+    $entities = ClipitTask::get_files($task->parent_task);
     $evaluation_list = get_filter_evaluations($entities, $activity->id);
-    $list_no_evaluated = elgg_view('multimedia/storyboard/list_summary', array(
+    $list_no_evaluated = elgg_view('multimedia/file/list_summary', array(
         'entities' => $evaluation_list["no_evaluated"],
         'href' => $href,
         'rating' => true,
+        'preview' => false,
         'total_comments' => true,
     ));
-    $list_evaluated = elgg_view('multimedia/storyboard/list_summary', array(
+    $list_evaluated = elgg_view('multimedia/file/list_summary', array(
         'entities' => $evaluation_list["evaluated"],
         'href' => $href,
+        'preview' => false,
         'rating' => true,
-        'actions' => false,
+        'options' => false,
         'total_comments' => true,
     ));
 // No Evaluated section
@@ -54,6 +56,6 @@ if(hasTeacherAccess($user->role)){
         $body .= $title_block_evaluated . $list_evaluated;
     }
     if (!$entities) {
-        $body = elgg_view('output/empty', array('value' => elgg_echo('storyboards:none')));
+        $body = elgg_view('output/empty', array('value' => elgg_echo('files:none')));
     }
 }

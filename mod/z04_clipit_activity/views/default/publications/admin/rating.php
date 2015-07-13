@@ -12,7 +12,6 @@
  */
 $rating = elgg_extract('rating', $vars);
 $entity = elgg_extract('entity', $vars);
-$entity_preview = elgg_extract('entity_preview', $vars);
 $href = elgg_extract('href', $vars);
 ?>
 <style>
@@ -70,9 +69,7 @@ $href = elgg_extract('href', $vars);
                 'text'  => $entity->name));
             ?>
         </strong>
-        <a style="position: relative" href="<?php echo elgg_get_site_url()."{$href}/view/".$entity->id;?>">
-            <div class="image-background" style="background-image: url('<?php echo $entity->preview;?>');"></div>
-        </a>
+        <?php echo elgg_view('publications/admin/item_preview', array('entity' => $entity, 'href' => $href));?>
         <?php if($rating->rubric_rating_array):?>
         <div class="margin-top-10">
             <strong class="pull-right blue" style="font-size: 18px;line-height: 20px;"><?php echo round($entity->rubric_rating_average*10,1);?></strong>

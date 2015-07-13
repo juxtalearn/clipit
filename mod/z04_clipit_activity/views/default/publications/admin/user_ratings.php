@@ -19,15 +19,6 @@ $user_rating = false;
 foreach($entities_ids as $entity_id):
     $object = ClipitSite::lookup($entity_id);
     $entity = array_pop($object['subtype']::get_by_id(array($entity_id)));
-    switch($object['subtype']){
-        case "ClipitStoryboard":
-            $file = array_pop(ClipitFile::get_by_id(array($entity->file)));
-            $entity_preview = elgg_view("multimedia/file/preview", array('file'  => $file));
-            break;
-        case "ClipitVideo":
-            $entity_preview = '<div class="img-preview"><img src="'.$entity->preview.'"></div>';
-            break;
-    }
     $activity_id = $entity::get_activity($entity->id);
 
     $rating = ClipitRating::get_user_rating_for_target($user_id, $entity_id);

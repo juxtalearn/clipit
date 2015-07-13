@@ -6213,6 +6213,9 @@ td.visible-print {
   height: 0;
   overflow: hidden;
 }
+.frame-container.ratio4-3 {
+  padding-bottom: 75%;
+}
 .frame-container iframe,
 .frame-container object,
 .frame-container embed {

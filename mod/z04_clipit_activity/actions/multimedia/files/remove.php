@@ -22,7 +22,6 @@ foreach($ids as $file_id){
     } elseif(!$unlink){
         ClipitFile::delete_by_id(array($file->id));
         system_message(elgg_echo('file:removed', array($file->name)));
-        forward(custom_forward_referer("/view/", "?filter=files"));
     } elseif($unlink) {
         ClipitFile::unlink_from_parent($file->id);
         ClipitTask::remove_files(ClipitFile::get_task($file->id), array($file->id));

@@ -11,22 +11,24 @@
  * @package         ClipIt
  */
 $file = elgg_extract('file', $vars);
-$mime_type = $file->mime_type;
 
-switch($mime_type['full']){
+switch($file->mime_full){
     case "application/pdf":
         $file_view = '<i style="color: #E20000;" class="fa fa-file-pdf-o file-icon"></i>';
         break;
     // Microsoft Word
     case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+    case "application/msword":
         $file_view = '<i style="color: #26468F;" class="fa fa-file-word-o file-icon"></i>';
         break;
     // Microsoft Excel
     case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+    case "application/vnd.ms-excel":
         $file_view = '<i style="color: #008D33;" class="fa fa-file-excel-o file-icon"></i>';
         break;
     // Microsoft PowerPoint
     case "application/vnd.openxmlformats-officedocument.presentationml.presentation":
+    case "application/vnd.ms-powerpoint":
         $file_view = '<i style="color: #DA4C13;" class="fa fa-file-powerpoint-o file-icon"></i>';
         break;
     case "application/x-rar":
@@ -41,7 +43,7 @@ $size = elgg_extract('size', $vars);
 if(!$size){
     $size = 'small';
 }
-switch ($mime_type['short']){
+switch ($file->mime_short){
     case "image":
         $file_view = '<div class="img-preview">
                     <div style="background-image: url(\''.elgg_normalize_url(elgg_format_url("file/thumbnail/{$size}/$file->id")).'\');"></div>

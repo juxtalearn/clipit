@@ -31,14 +31,17 @@ clipit.file.getIcon = function(file_type, $icon){
             break;
         // Microsoft Word
         case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+        case "application/msword":
             $icon.css({'color': '#26468F'}).addClass('fa-file-word-o');
             break;
         // Microsoft Excel
         case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+        case "application/vnd.ms-excel":
             $icon.css({'color': '#008D33'}).addClass('fa-file-excel-o');
             break;
         // Microsoft PowerPoint
         case "application/vnd.openxmlformats-officedocument.presentationml.presentation":
+        case "application/vnd.ms-powerpoint":
             $icon.css({'color': '#DA4C13'}).addClass('fa-file-powerpoint-o');
             break;
         case "application/x-rar":

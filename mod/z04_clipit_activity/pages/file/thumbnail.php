@@ -15,11 +15,10 @@ $file_id = (int)get_input("id");
 $size = get_input("size");
 
 // Get the file
-$mime_type = $file->mime_type;
 $file = array_pop(ClipitFile::get_by_id(array($file_id)));
 $etag = $file_id;
 header("Pragma: public");
-header("Content-type: {$mime_type['full']}");
+header("Content-type: {$file->mime_full}");
 header("Content-Disposition: inline; filename=\"{$file->name}\"");
 header("Cache-Control: public", true);
 header('Expires: ' . gmdate('D, d M Y H:i:s \G\M\T', strtotime("+6 months")), true);
