@@ -329,6 +329,10 @@ class ClipitTask extends UBItem {
                     if($storyboard_group === $user_group){
                         return false;
                     }
+                    if(array_search((int)$storyboard_id, $rating_targets) === false){
+                        return false;
+                    }
+                    return true;
                 }
                 foreach($parent_task->storyboard_array as $storyboard_id) {
                     if(array_search((int)$storyboard_id, $rating_targets) === false) {
@@ -371,7 +375,8 @@ class ClipitTask extends UBItem {
                     }
                     if(array_search((int)$video_id, $rating_targets) === false){
                         return false;
-                    } return true;
+                    }
+                    return true;
                 }
                 foreach($parent_task->video_array as $video_id) {
                     if(array_search((int)$video_id, $rating_targets) === false) {

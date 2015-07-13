@@ -63,11 +63,26 @@ class ClipitQuizResult extends UBItem {
      * @return bool|int Returns the Id of the saved instance, or false if error
      */
     protected function save($double_save=false) {
-        parent::save($double_save);
-        if($this->quiz_question != 0) {
-            ClipitQuizQuestion::add_quiz_results($this->quiz_question, array($this->id));
+        // no quiz question specified: just save object and exit.
+        if(empty($this->quiz_question)) {
+            return parent::save($double_save);
         }
-        return $this->id;
+        // get possible previous result for this user and for target question.
+        $prev_result = static::get_from_question_user($this->quiz_question, elgg_get_logged_in_user_guid());
+        // if no previous result, save new object, add relationship and exit.
+        if(empty($prev_result)){
+            parent::save($double_save);
+            ClipitQuizQuestion::add_quiz_results($this->quiz_question, array($this->id));
+            return $this->id;
+        }
+        // if there is a previous result with different id than this->id (which may be empty yet),
+        // we take the existing result->id as this->id, and save the current properties onto that id.
+        if(!empty($prev_result) && $prev_result->id !== $this->id){
+            $this->id = $prev_result->id;
+        }
+        // else if a previous result exists but has the same id as $this (older version of us),
+        // then update with current properties and exit.
+        return parent::save($double_save);
     }
 
     /**
@@ -83,9 +98,9 @@ class ClipitQuizResult extends UBItem {
         $new_prop_value_array = array();
         foreach($prop_value_array as $prop => $value) {
             if($prop == "correct") {
-                if($value == "true") {
+                if(strtolower($value) == "true") {
                     $new_prop_value_array["correct"] = true;
-                } elseif($value == "false") {
+                } elseif(strtolower($value) == "false") {
                     $new_prop_value_array["correct"] = false;
                 } else {
                     $new_prop_value_array["correct"] = (bool)$value;

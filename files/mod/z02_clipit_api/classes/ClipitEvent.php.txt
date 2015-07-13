@@ -19,7 +19,19 @@ class ClipitEvent extends UBEvent {
     static function get_recommended_events($user_id, $offset = 0, $limit = 10) {
         $user_groups = ClipitUser::get_groups($user_id);
         $user_activities = ClipitUser::get_activities($user_id);
-        $object_array = array_merge($user_groups, $user_activities);
+        $user_tasks = array();
+        foreach($user_activities as $activity_id){
+            $user_tasks = array_merge($user_tasks, ClipitActivity::get_tasks($activity_id));
+        }
+        $object_array = array_merge($user_groups, $user_activities, $user_tasks);
         return static::get_by_object($object_array, $offset, $limit);
+    }
+
+    static function get_all_events($offset = 0, $limit = 10){
+        $all_groups = ClipitGroup::get_all(0, 0, "", true, true);
+        $all_activities = ClipitActivity::get_all(0, 0, "", true, true);
+        $all_tasks = ClipitTask::get_all(0, 0, "", true, true);
+        $all_objects = array_merge($all_groups, $all_activities, $all_tasks);
+        return static::get_by_object($all_objects, $offset, $limit);
     }
 }
