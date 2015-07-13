@@ -315,10 +315,13 @@ class ClipitActivity extends UBItem {
      * @return ClipitFile[] Array of file objects
      */
     static function get_published_files($id) {
-        $tasks = static::get_tasks($id);
+        $task_ids = static::get_tasks($id);
+        $tasks = ClipitTask::get_by_id($task_ids);
         $file_array = array();
-        foreach($tasks as $task_id) {
-            $file_array = array_merge($file_array, ClipitTask::get_files($task_id));
+        foreach($tasks as $task) {
+            if($task->task_type == ClipitTask::TYPE_FILE_UPLOAD) {
+                $file_array = array_merge($file_array, $task->file_array);
+            }
         }
         return $file_array;
     }
@@ -331,10 +334,13 @@ class ClipitActivity extends UBItem {
      * @return ClipitVideo[] Array of Videos
      */
     static function get_published_videos($id) {
-        $tasks = static::get_tasks($id);
+        $task_ids = static::get_tasks($id);
+        $tasks = ClipitTask::get_by_id($task_ids);
         $video_array = array();
-        foreach($tasks as $task_id) {
-            $video_array = array_merge($video_array, ClipitTask::get_videos($task_id));
+        foreach($tasks as $task) {
+            if($task->task_type == ClipitTask::TYPE_VIDEO_UPLOAD) {
+                $video_array = array_merge($video_array, $task->video_array);
+            }
         }
         return $video_array;
     }
