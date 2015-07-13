@@ -10,7 +10,8 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$files = elgg_extract("files", $vars);
+$files = elgg_extract("entities", $vars);
+$files = ClipitFile::get_by_id($files);
 $entity = elgg_extract('entity', $vars);
 $href = elgg_extract("href", $vars);
 $user_id = elgg_get_logged_in_user_guid();
@@ -19,8 +20,7 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
 // if search form is activated
 echo elgg_view("files/search");
 
-foreach($files as $file_id){
-    $file =  array_pop(ClipitFile::get_by_id(array($file_id)));
+foreach($files as $file){
     $file_url = "{$href}/view/{$file->id}". ($vars['task_id'] ? "?task_id=".$vars['task_id']: "");
     $owner = array_pop(ClipitUser::get_by_id(array($file->owner_id)));
     $select = '<input type="checkbox" name="check-file[]" value="'.$file->id.'" class="select-simple">';

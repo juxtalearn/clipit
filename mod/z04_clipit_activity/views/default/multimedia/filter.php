@@ -14,8 +14,6 @@ $entity = elgg_extract('entity', $vars);
 $href = elgg_extract('href', $vars);
 $files_count = count($entity->file_array) > 0 ? "(".count($entity->file_array).")" : "(0)";
 $videos_count = count($entity->video_array) > 0 ? "(".count($entity->video_array).")" : "(0)";
-$sb_count = count($entity->storyboard_array) > 0 ? "(".count($entity->storyboard_array).")" : "(0)";
-$resources_count = count($entity->resource_array) > 0 ? "(".count($entity->resource_array).")" : "(0)";
 
 $tabs = array(
     'files' => array(

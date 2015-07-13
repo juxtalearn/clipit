@@ -132,11 +132,6 @@ if(!empty($activities) || !empty($quizzes) ){
                     <?php echo elgg_echo('videos');?> (<?php echo count($multimedia['videos']);?>)
                 </a>
             </li>
-            <li role="presentation">
-                <a href="#storyboards" aria-controls="storyboards" role="tab" data-toggle="tab">
-                    <?php echo elgg_echo('storyboards');?> (<?php echo count($multimedia['storyboards']);?>)
-                </a>
-            </li>
         </ul>
 <style>
     .filter-by-tags > a{
@@ -160,7 +155,7 @@ if(!empty($activities) || !empty($quizzes) ){
                 <?php
                 $params = array(
                     'add_files' => false,
-                    'files' => $multimedia['files'],
+                    'entities' => $multimedia['files'],
                     'href' => $href,
                     'options' => true,
                     'preview' => true
@@ -198,33 +193,6 @@ if(!empty($activities) || !empty($quizzes) ){
                     echo elgg_view('multimedia/video/list_summary', $params);
                 } else {
                     echo elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
-                }
-                ?>
-            </div>
-        </div>
-        <div role="tabpanel" class="tab-pane form-group" id="storyboards">
-            <div class="margin-top-20">
-                <?php
-                echo elgg_view_form('tricky_topic/resources', array(
-                    'body' => elgg_view('forms/attachments/storyboards',
-                        array('submit' => true, 'entity_id' => $tricky_topic->id)),
-                    'class' => 'gray-block',
-                    'enctype' => 'multipart/form-data'
-                ));
-                ?>
-                <hr>
-                <?php
-                $params = array(
-                    'entities' => $multimedia['storyboards'],
-                    'href' => $href,
-                    'view_comments' => false,
-                    'actions' => true,
-                    'preview' => true
-                );
-                if($multimedia['storyboards']) {
-                    echo elgg_view('multimedia/storyboard/list_summary', $params);
-                } else {
-                    echo elgg_view('output/empty', array('value' => elgg_echo('storyboards:none')));
                 }
                 ?>
             </div>

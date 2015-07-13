@@ -11,10 +11,10 @@
  * @package         ClipIt
  */
 $entities = elgg_extract('entities', $vars);
-$storyboards = array();
+$files = array();
 $videos = array();
 $videos = elgg_extract('videos', $vars);
-$storyboards = elgg_extract('storyboards', $vars);
+$files = elgg_extract('files', $vars);
 
 $href = http_build_query(array(
     'by' => get_input('by'),
@@ -39,18 +39,18 @@ elgg_register_menu_item('explore:menu', array(
     'href' => "explore{$href}site=true",
     'selected' => $activity_get ? false : true
 ));
-function activity_total_found($activity_id, $videos, $storyboards){
+function activity_total_found($activity_id, $videos, $files){
     $t_videos = array();
     $t_videos = get_visible_items_by_activity($activity_id, $videos, 'videos');
-    $t_storyboards = array();
-    return count(array_merge($t_videos, $t_storyboards));
+    $t_files = array();
+    return count(array_merge($t_videos, $t_files));
 }
 foreach($entities as $entity){
-    $visible_storyboards = array();
+    $visible_files = array();
     $visible_videos = array();
     $visible_videos = get_visible_items_by_activity($entity->id, $videos, 'videos');
-    $visible_storyboards = get_visible_items_by_activity($entity->id, $storyboards, 'storyboards');
-    $total_items_found = count(array_merge($visible_videos, $visible_storyboards));
+    $visible_files = get_visible_items_by_activity($entity->id, $files, 'files');
+    $total_items_found = count(array_merge($visible_videos, $visible_files));
     $selected = false;
     if($activity_get == $entity->id){
         $selected = true;

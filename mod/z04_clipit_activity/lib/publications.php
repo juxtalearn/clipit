@@ -45,16 +45,16 @@ function publications_get_page_content_list($task_type, $tasks, $href){
             elgg_extend_view("videos/search", "search/search");
             break;
         case ClipitTask::TYPE_FILE_UPLOAD:
-            $view = 'multimedia/storyboard/list_summary';
-            $entities = $task->storyboard_array;
-            $none_msg = elgg_echo('storyboards:none');
+            $view = 'multimedia/file/list_summary';
+            $entities = $task->file_array;
+            $none_msg = elgg_echo('files:none');
 
             // Search items
             if($search_term = stripslashes(get_input("search"))){
-                $items_search = array_keys(ClipitStoryboard::get_from_search($search_term));
+                $items_search = array_keys(ClipitFile::get_from_search($search_term));
                 $entities = array_uintersect($items_search, $entities, "strcasecmp");
             }
-            elgg_extend_view("storyboards/search", "search/search");
+            elgg_extend_view("files/search", "search/search");
             break;
     }
 
@@ -64,6 +64,7 @@ function publications_get_page_content_list($task_type, $tasks, $href){
         'entities'    => $entities,
         'href'      => $href,
         'rating'    => true,
+        'preview' => false,
         'send_site' => $send_to_site,
         'actions'   => false,
         'unlink' => $unlink,

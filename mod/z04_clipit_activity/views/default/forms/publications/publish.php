@@ -92,7 +92,16 @@ if($task_id = get_input('task_id')):
         </div>
         <div class="form-group">
             <label><?php echo elgg_echo("tags");?></label>
-            <?php echo elgg_view("tricky_topic/tags/view", array('tags' => $group_tags, 'width' => '45%')); ?>
+            <?php if($group_tags):?>
+                <?php echo elgg_view("tricky_topic/tags/view", array('tags' => $group_tags, 'width' => '45%')); ?>
+                <?php foreach($group_tags as $group_tag):?>
+                    <?php echo elgg_view("input/hidden", array(
+                        'name' => 'tags[]',
+                        'value' => $group_tag
+                    ));
+                    ?>
+                <?php endforeach;?>
+            <?php endif;?>
             <div>
                 <select name="tags[]" data-placeholder="<?php echo elgg_echo('click_add');?>" style="width:100%;" multiple class="chosen-select" tabindex="8">
                     <option value=""></option>

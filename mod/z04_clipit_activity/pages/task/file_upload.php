@@ -23,7 +23,15 @@ if(hasTeacherAccess($user->role)){
 } elseif($user->role == ClipitUser::ROLE_STUDENT) {
     $files = ClipitGroup::get_files($group_id);
     $href_publications = "clipit_activity/{$activity->id}/publications";
-    $body = elgg_view('multimedia/file/list', array(
+    // Add files button
+    $body = elgg_view_form('multimedia/files/upload', array(
+        'action' => 'action/multimedia/files/save',
+        'id' => 'fileupload',
+        'enctype' => 'multipart/form-data',
+        'data-validate' => 'true'
+    ), array('entity' => array_pop(ClipitGroup::get_by_id(array($group_id)))));
+
+    $body .= elgg_view('multimedia/file/list', array(
         'entities' => $files,
         'entity' => array_pop(ClipitGroup::get_by_id(array($group_id))),
         'create' => true,
@@ -36,6 +44,7 @@ if(hasTeacherAccess($user->role)){
         'task_id' => $task->id,
         'publish' => true,
     ));
+
     if (!$files) {
         $body .= elgg_view('output/empty', array('value' => elgg_echo('task:files:none')));
     }
@@ -64,7 +73,7 @@ if(hasTeacherAccess($user->role)){
 
         // Task is completed, show my file
         if ($status['status'] === true) {
-            $body .= elgg_view('multimedia/file/list_summary', array(
+            $body .= elgg_view('multimedia/file/list', array(
                 'entities' => $file,
                 'unlink' => true,
                 'href' => $href_publications,
@@ -100,6 +109,7 @@ if(hasTeacherAccess($user->role)){
                 'entities' => $task->file_array,
                 'href' => $href_publications,
                 'task_id' => $task->id,
+                'preview' => false
             ));
         } else {
             $body .= elgg_view('output/empty', array('value' => elgg_echo('files:none')));

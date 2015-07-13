@@ -188,6 +188,7 @@ $english = array(
     'file:edited' => 'File edited',
     'file:added' => 'File added',
     'file:none' => "No files",
+    'files:none' => "No files",
     /* File types */
     'file:general' => 'File',
     'file:document' => 'Document',

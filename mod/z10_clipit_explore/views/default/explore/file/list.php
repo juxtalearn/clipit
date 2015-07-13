@@ -10,21 +10,18 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$storyboards = elgg_extract('storyboards', $vars);
+$files = elgg_extract('files', $vars);
 $href = elgg_extract('href', $vars);
 ?>
 <div class="row">
-    <?php
-    foreach($storyboards as $storyboard):
-        $file = array_pop(ClipitFile::get_by_id(array($storyboard->file)));
-    ?>
+    <?php foreach($files as $file): ?>
     <div class="col-md-6">
         <div class="storyboard-list">
             <div class="image-block">
                 <div class="multimedia-preview">
                     <?php echo elgg_view('output/url', array(
-                        'href'  => "{$href}/view/{$storyboard->id}",
-                        'title' => $storyboard->name,
+                        'href'  => "{$href}/view/{$file->id}",
+                        'title' => $file->name,
                         'text'  => elgg_view("multimedia/file/preview", array('file'  => $file))
                     )); ?>
                 </div>
@@ -44,29 +41,30 @@ $href = elgg_extract('href', $vars);
                 <div>
                     <strong>
                         <?php echo elgg_view('output/url', array(
-                            'href'  => "{$href}/view/{$storyboard->id}",
-                            'title' => $storyboard->name,
-                            'text'  => $storyboard->name
+                            'href'  => "{$href}/view/{$file->id}",
+                            'title' => $file->name,
+                            'text'  => $file->name
                         )); ?>
                     </strong>
                     <small class="show">
                         <strong><?php echo elgg_echo("file:" . $file->mime_type['short']);?></strong>
                     </small>
-                    <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $storyboard->tag_array, 'width' => 100, 'limit' => 2)); ?>
-                    <small class="show" style="margin-top: -5px;">
+                    <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $file->tag_array, 'width' => 100, 'limit' => 2)); ?>
+                    <div class="clearfix"></div>
+                    <small class="show">
                         <?php
-                        $total_comments = array_pop(ClipitComment::count_by_destination(array($storyboard->id), true));
+                        $total_comments = array_pop(ClipitComment::count_by_destination(array($file->id)));
                         ?>
                         <!-- Count total comments -->
                         <strong>
                             <?php echo elgg_view('output/url', array(
-                                'href'  => "{$href}/view/{$storyboard->id}#comments",
+                                'href'  => "{$href}/view/{$file->id}#comments",
                                 'title' => elgg_echo('comments'),
                                 'class' => 'pull-right btn btn-xs btn-xs-5 btn-blue-lighter',
                                 'text'  => $total_comments. ' <i class="fa fa-comments"></i>'))
                             ?>
                         </strong>
-                        <?php echo elgg_view('output/friendlytime', array('time' => $storyboard->time_created));?>
+                        <?php echo elgg_view('output/friendlytime', array('time' => $file->time_created));?>
                     </small>
                 </div>
             </div>

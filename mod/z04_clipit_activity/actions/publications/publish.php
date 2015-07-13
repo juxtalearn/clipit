@@ -38,11 +38,6 @@ switch($parent_entity_class){
         $parent_id = ClipitGroup::get_activity($parent_id);
         $scope_entity = 'ClipitTask';
         $group_id = $entity_class::get_group($entity_id);
-        /* get tags from group */
-        $group_tags = ClipitGroup::get_tags($group_id);
-        if($group_tags){
-            $tags = array_merge($tags, $group_tags);
-        }
         $href = "clipit_activity/{$parent_id}/tasks/view/{$task_id}";
         if(ClipitTask::get_completed_status($task_id, $group_id)){
             forward("clipit_activity/{$parent_id}/tasks/view/{$task_id}");
@@ -67,13 +62,9 @@ if(count($entity)==0 || trim($title) == "" || trim($description) == ""){
     // Labels
     $total_labels = array();
     foreach($labels as $label){
-        if($label_exist = array_pop(ClipitLabel::get_from_search($label, true, true))){
-            $total_labels[] = $label_exist->id;
-        } else {
-            $total_labels[] = ClipitLabel::create(array(
-                'name'    => $label,
-            ));
-        }
+        $total_labels[] = ClipitLabel::create(array(
+            'name'    => $label,
+        ));
     }
     $entity_class::set_labels($new_entity_id, $total_labels);
     // Tags

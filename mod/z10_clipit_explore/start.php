@@ -85,7 +85,7 @@ function explore_page_handler($page) {
                     elgg_push_breadcrumb(elgg_echo('tag'));
                     elgg_push_breadcrumb($tag->name);
                     $videos = ClipitVideo::get_by_tags(array($tag->id));
-                    $storyboards = ClipitStoryboard::get_by_tags(array($tag->id));
+                    $files = ClipitFile::get_by_tags(array($tag->id));
                     break;
                 case 'label':
                     $label = array_pop(ClipitLabel::get_by_id(array($id)));
@@ -93,7 +93,7 @@ function explore_page_handler($page) {
                     elgg_push_breadcrumb(elgg_echo('label'));
                     elgg_push_breadcrumb($label->name);
                     $videos = ClipitVideo::get_by_labels(array($label->id));
-                    $storyboards = ClipitStoryboard::get_by_labels(array($label->id));
+                    $files = ClipitFile::get_by_labels(array($label->id));
                     break;
                 case 'performance_item':
                     $performance_item = array_pop(ClipitPerformanceItem::get_by_id(array($id)));
@@ -101,8 +101,7 @@ function explore_page_handler($page) {
                     elgg_push_breadcrumb(elgg_echo('performance_item'));
                     elgg_push_breadcrumb($performance_item->name);
                     $videos = ClipitVideo::get_by_performance_items(array($performance_item->id));
-                    $storyboards = ClipitStoryboard::get_by_performance_items(array($performance_item->id));
-                    //$files = ClipitFile::get_by_performance_items(array($performance_item->id));
+                    $files = ClipitFile::get_by_performance_items(array($performance_item->id));
                     $files = array();
                     break;
                 case 'all':
@@ -110,15 +109,14 @@ function explore_page_handler($page) {
                         forward("explore");
                     }
                     $title = elgg_echo('search:results_for') . ' <span style="opacity: .7">'.$text.'</span>';
+                    $videos = ClipitVideo::get_from_search($text);
+                    $files = ClipitFile::get_from_search($text);
                     $content = get_explore(array(
                         'public_content' => $public_content,
-                        'videos' => ClipitVideo::get_from_search($text),
-                        'storyboards' => ClipitStoryboard::get_from_search($text),
+                        'videos' => $videos,
+                        'files' => $files,
                         'title' => true
                     ));
-                    $videos = ClipitVideo::get_from_search($text);
-                    $storyboards = ClipitStoryboard::get_from_search($text);
-                    $files = ClipitFile::get_from_search($text);
                     break;
             }
             break;
@@ -133,29 +131,29 @@ function explore_page_handler($page) {
     }
     // Get publications items
     $searched_videos = $videos;
-    $searched_storyboards= $storyboards;
+    $searched_files = $files;
     if($activity_id){
         $public_content = false;
         $title = $activity_object['name'];
         if($by){
             $visible_videos = get_visible_items_by_activity($activity_id, $videos, 'videos');
-            $visible_storyboards = get_visible_items_by_activity($activity_id, $storyboards, 'storyboards');
+            $visible_files = get_visible_items_by_activity($activity_id, $files, 'files');
         } else {
             $visible_videos = ClipitActivity::get_published_videos($activity_id);
-            $visible_storyboards = ClipitActivity::get_published_storyboards($activity_id);
+            $visible_files = ClipitActivity::get_published_files($activity_id);
         }
         // Videos
         $videos = ClipitVideo::get_by_id($visible_videos);
-        // Storyboards
-        $storyboards = ClipitStoryboard::get_by_id($visible_storyboards);
+        // Files
+        $files = ClipitFile::get_by_id($visible_files);
 
         $href = "clipit_activity/{$activity_id}/publications";
     } elseif($by){
         $visible_videos = get_visible_items_by_site($videos, 'videos');
         // Videos
         $videos = ClipitVideo::get_by_id($visible_videos);
-        // Storyboards
-        $storyboards = array();
+        // Files
+        $files = array();
 
         $href = "explore";
     }
@@ -174,22 +172,22 @@ function explore_page_handler($page) {
                 $content = elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
             }
             break;
-        case 'storyboards':
-            elgg_push_breadcrumb(elgg_echo("storyboards"));
-            $params_sb_list = array(
-                'storyboards' => $storyboards,
+        case 'files':
+            elgg_push_breadcrumb(elgg_echo("files"));
+            $params_files_list = array(
+                'files' => $files,
                 'href' => $href
             );
-            $content = elgg_view("explore/storyboard/list", $params_sb_list);
-            if(!$storyboards){
-                $content = elgg_view('output/empty', array('value' => elgg_echo('storyboards:none')));
+            $content = elgg_view("explore/file/list", $params_files_list);
+            if(!$files){
+                $content = elgg_view('output/empty', array('value' => elgg_echo('files:none')));
             }
             break;
         default:
             $content = get_explore(array(
                 'public_content' => $public_content,
                 'videos' => array('limit' => 3, 'entities' => $videos, 'href' => $href),
-                'storyboards' => array('limit' => 4, 'entities' => $storyboards, 'href' => $href),
+                'files' => array('limit' => 4, 'entities' => $files, 'href' => $href),
                 'title' => true
             ));
             if(!$content){
@@ -213,9 +211,9 @@ function explore_page_handler($page) {
                     include "$file_dir/video.php";
                     return true;
                     break;
-                case 'ClipitStoryboard':
+                case 'ClipitFile':
                     set_input('entity_id', $entity_id);
-                    include "$file_dir/storyboard.php";
+                    include "$file_dir/file.php";
                     return true;
                     break;
                 default:
@@ -232,7 +230,7 @@ function explore_page_handler($page) {
         array(
             'entities' => $my_activities,
             'videos' => $searched_videos,
-            'storyboards' => $searched_storyboards
+            'files' => $searched_files
         ));
     $sidebar = elgg_view_module('aside', elgg_echo('explore:scope'), $menu_filter);
     // Tags
@@ -242,7 +240,7 @@ function explore_page_handler($page) {
     /**
      * Filter
      */
-    $counts = array('videos' => count($videos), 'storyboards' => count($storyboards), 'files' => count($files));
+    $counts = array('videos' => count($videos), 'files' => count($files));
     if(!$public_content) {
         $filter = elgg_view('explore/filter', array('selected' => $selected_tab, 'counts' => $counts));
     } else {
@@ -272,7 +270,7 @@ function explore_page_handler($page) {
 
 }
 /**
- * content: activities, videos, storyboards, files
+ * content: activities, videos, files
  * @param $id
  */
 function get_explore($params = array()){
@@ -299,25 +297,25 @@ function get_explore($params = array()){
             $content .= elgg_view("explore/view_all", array('filter' => 'videos'));
         }
     }
-    // Storyboards
-    if(($storyboards = $params['storyboards']) && $entities = $storyboards['entities']){
+    // Files
+    if(($files = $params['files']) && ($entities = $files['entities'])){
         if($title){
             $content .= elgg_view("page/components/title_block", array(
-                'title' => elgg_echo("storyboards"),
+                'title' => elgg_echo("files"),
             ));
         }
         $limit = count($entities);
-        if(isset($storyboards['limit'])){
-            $limit = $storyboards['limit'];
+        if(isset($files['limit'])){
+            $limit = $files['limit'];
             $entities = array_slice($entities, 0, $limit);
         }
-        $params_sb_list = array(
-            'storyboards' => $entities,
-            'href' => $storyboards['href']
+        $params_files_list = array(
+            'files' => $entities,
+            'href' => $files['href']
         );
-        $content .= elgg_view("explore/storyboard/list", $params_sb_list);
-        if(count($storyboards['entities']) > $limit && !$params['public_content']){
-            $content .= elgg_view("explore/view_all", array('filter' => 'storyboards'));
+        $content .= elgg_view("explore/file/list", $params_files_list);
+        if(count($files['entities']) > $limit && !$params['public_content']){
+            $content .= elgg_view("explore/view_all", array('filter' => 'files'));
         }
     }
 

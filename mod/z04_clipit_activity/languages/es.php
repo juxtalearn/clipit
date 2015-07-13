@@ -189,6 +189,7 @@ $spanish = array(
     'file:edited' => 'Archivo editado',
     'file:added' => 'Archivo añadido',
     'file:none' => "No hay archivos",
+    'files:none' => "No hay archivos",
     /* File types */
     'file:general' => 'Archivo',
     'file:document' => 'Documento',
@@ -324,7 +325,7 @@ $spanish = array(
     'task:file_feedback' => 'Feedback sobre archivos',
     'task:other' => 'Otro',
     'task:videos:none' => 'Añade un video para poder seleccionar',
-    'task:files:none' => 'Sube un archivos para poder seleccionar',
+    'task:files:none' => 'Sube un archivo para poder seleccionar',
     'repository:group' => 'materiales del grupo',
     'task:create' => 'Crear nueva tarea',
     'task:edit' => 'Editar tarea',

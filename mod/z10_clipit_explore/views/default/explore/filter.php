@@ -12,8 +12,7 @@
  */
 $href = elgg_extract('href', $vars);
 $counts = elgg_extract('counts', $vars);
-$video_count = isset($counts['videos']) ? " (".$counts['videos'].")" : "";
-$sb_count = isset($counts['storyboards']) ? " (".$counts['storyboards'].")" : "";
+$videos_count = isset($counts['videos']) ? " (".$counts['videos'].")" : "";
 $files_count = isset($counts['files']) ? " (".$counts['files'].")" : "";
 
 $href = http_build_query(array(
@@ -34,20 +33,15 @@ $tabs = array(
         'priority' => 100,
     ),
     'videos' => array(
-        'text' => elgg_echo('videos') ."{$video_count}",
+        'text' => elgg_echo('videos') ."{$videos_count}",
         'href' => "explore{$href}filter=videos{$href_activity}",
         'priority' => 200,
     ),
-    'storyboards' => array(
-        'text' => elgg_echo('storyboards') ."{$sb_count}",
-        'href' => "explore{$href}filter=storyboards{$href_activity}",
-        'priority' => 300,
-    ),
-    /*'files' => array(
+    'files' => array(
         'text' => elgg_echo('files') ."{$files_count}",
         'href' => "explore{$href}filter=files{$href_activity}",
-        'priority' => 400,
-    ),*/
+        'priority' => 300,
+    ),
 );
 foreach ($tabs as $name => $tab) {
     $tab['name'] = $name;
