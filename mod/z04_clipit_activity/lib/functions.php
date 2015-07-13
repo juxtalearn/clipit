@@ -381,15 +381,15 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
             }
             break;
         case ClipitTask::TYPE_FILE_UPLOAD:
-            foreach($task->file_array as $storyboard_id){
-                $group_file = ClipitFile::get_group($storyboard_id);
+            foreach($task->file_array as $file_id){
+                $group_file = ClipitFile::get_group($file_id);
                 if($group_id == $group_file){
                     $status = array(
                         'icon' => '<i class="fa fa-check green"></i>',
                         'text' => elgg_echo('task:completed'),
                         'color' => 'green',
                         'status' => ClipitTask::get_completed_status($task->id, $group_id),
-                        'result' => $storyboard_id
+                        'result' => $file_id
                     );
                 }
             }

@@ -21,17 +21,11 @@ foreach($groups as $group):
 ?>
 <li class="list-item-5">
     <?php
-    if($storyboard_id = $status['result']):
-        $storyboard = array_pop(ClipitStoryboard::get_by_id(array($storyboard_id)));
+    if($file_id = $status['result']):
+        $file = array_pop(ClipitFile::get_by_id(array($file_id)));
     ?>
         <small class="pull-right">
-            <?php echo elgg_view('output/friendlytime', array('time' => $storyboard->time_created));?>
-<!--                --><?php //echo elgg_view('output/url', array(
-//                    'href'  => "clipit_activity/{$activity_id}/publications/view/{$storyboard->id}",
-//                    'title' => elgg_echo('view:storyboard'),
-//                    'text'  => elgg_echo('view'),
-//                ));
-//                ?>
+            <?php echo elgg_view('output/friendlytime', array('time' => $file->time_created));?>
         </small>
     <?php endif;?>
     <div class="text-truncate">
@@ -43,11 +37,11 @@ foreach($groups as $group):
         ));
         ?>
     </div>
-    <?php if($storyboard_id):?>
+    <?php if($file_id):?>
         <small>
             <i class="fa fa-level-up blue-lighter fa-rotate-90 margin-left-20 margin-right-5" style="font-size: 21px;"></i>
             <?php echo elgg_view('output/url', array(
-                'href'  => 'file/download/'.$storyboard->file,
+                'href'  => 'file/download/'.$file->id,
                 'title' => elgg_echo('download'),
                 'class' => 'btn btn-primary btn-xs pull-right',
                 'text'  => '<i class="fa fa-download"></i>',
@@ -55,9 +49,8 @@ foreach($groups as $group):
             ?>
             <strong>
             <?php echo elgg_view('output/url', array(
-                'href'  => "clipit_activity/{$task->activity}/publications/view/{$storyboard->id}",
-                'title' => elgg_echo('view:storyboard'),
-                'text'  => $storyboard->name,
+                'href'  => "clipit_activity/{$task->activity}/publications/view/{$file->id}",
+                'text'  => $file->name,
             ));
             ?>
             </strong>

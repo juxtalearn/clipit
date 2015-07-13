@@ -14,11 +14,16 @@ $files = elgg_extract("entities", $vars);
 $files = ClipitFile::get_by_id($files);
 
 $entity = elgg_extract('entity', $vars);
+$rating = elgg_extract('rating', $vars);
 $href = elgg_extract("href", $vars);
 $task_id = elgg_extract("task_id", $vars);
+$unlink = elgg_extract("unlink", $vars);
 
 $user_id = elgg_get_logged_in_user_guid();
 $user = array_pop(ClipitUser::get_by_id(array($user_id)));
+if($unlink){
+    $user_groups = ClipitUser::get_groups($user_id);
+}
 $list_options = array();
 // File options
 if(!empty($files)) {
@@ -70,29 +75,12 @@ if(!empty($files)) {
 <ul class="elements-list margin-top-10">
     <?php foreach($files as $file):
         $file_url = "{$href}/view/{$file->id}". ($task_id ? "?task_id=".$task_id: "");
+        $unlinked = false;
+        if($unlink && in_array(ClipitFile::get_group($file->id), $user_groups)){
+            $unlinked = true;
+        }
     ?>
         <li class="list-item col-md-12">
-            <?php
-            // Owner options (edit/delete)
-            $owner_options = "";
-            if(($file->owner_id == $user_id || hasTeacherAccess($user->role)) && $vars['options'] !== false){
-                $options = array(
-                    'entity' => $file,
-                    'edit' => array(
-                        "data-target" => "#edit-file-{$file->id}",
-                        "href" => elgg_get_site_url()."ajax/view/modal/multimedia/file/edit?id={$file->id}",
-                        "data-toggle" => "modal"
-                    )
-                );
-
-                if($file->owner_id == $user_id){
-                    $options['remove'] = array("href" => "action/multimedia/files/remove?id={$file->id}");
-                }
-                $owner_options = elgg_view("page/components/options_list", $options);
-                // Remote modal, form content
-                echo elgg_view("page/components/modal_remote", array('id'=> "edit-file-{$file->id}" ));
-            }
-            ?>
             <div class="col-xs-9">
                 <div class="pull-left margin-right-10">
                     <?php if ($vars['options'] !== false && $vars['create']):?>
@@ -128,6 +116,16 @@ if(!empty($files)) {
                     ));
                     ?>
                 <?php else:?>
+                    <?php if($unlinked):?>
+                        <?php echo elgg_view('output/url', array(
+                            'href'  => 'action/multimedia/files/remove?id='.$file->id.'&unlink=true',
+                            'is_action' => true,
+                            'class'  => 'btn btn-xs btn-border-red btn-primary margin-bottom-10 remove-object',
+                            'title' => elgg_echo('task:remove_file'),
+                            'text'  => '<i class="fa fa-trash-o"></i> '.elgg_echo('task:remove_file')
+                        ));
+                        ?>
+                    <?php endif; ?>
                     <div style="width: 45px;display: inline-block;float: right;text-align: center;margin-left:10px;">
                         <?php echo elgg_view('output/url', array(
                             'href'  => "file/download/".$file->id. ($task_id ? "?task_id=".$task_id: ""),
@@ -139,6 +137,13 @@ if(!empty($files)) {
                             <?php echo formatFileSize($file->size);?>
                         </small>
                     </div>
+                    <?php if($rating):?>
+                        <?php echo elgg_view("performance_items/summary", array(
+                            'entity' => $file,
+                            'show_check' => true,
+                        ));
+                        ?>
+                    <?php endif; ?>
                 <?php endif;?>
                 <?php
                 if($task_id && $vars['task_type'] == ClipitTask::TYPE_RESOURCE_DOWNLOAD):

@@ -109,11 +109,6 @@ endif;
                     <?php echo elgg_echo('videos');?> (<?php echo count($multimedia['videos']);?>)
                 </a>
             </li>
-            <li role="presentation">
-                <a href="#storyboards" aria-controls="storyboards" role="tab" data-toggle="tab">
-                    <?php echo elgg_echo('storyboards');?> (<?php echo count($multimedia['storyboards']);?>)
-                </a>
-            </li>
         </ul>
         <style>
             .filter-by-tags > a{
@@ -128,7 +123,7 @@ endif;
                     <?php
                     $params = array(
                         'add_files' => false,
-                        'files' => $multimedia['files'],
+                        'entities' => $multimedia['files'],
                         'href' => $href,
                         'options' => false,
                     );
@@ -154,24 +149,6 @@ endif;
                         echo elgg_view('multimedia/video/list_summary', $params);
                     } else {
                         echo elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
-                    }
-                    ?>
-                </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="storyboards">
-                <div class="margin-top-20">
-                    <?php
-                    $params = array(
-                        'entities' => $multimedia['storyboards'],
-                        'preview' => true,
-                        'href' => $href,
-                        'view_comments' => false,
-                        'options' => false,
-                    );
-                    if($multimedia['storyboards']) {
-                        echo elgg_view('multimedia/storyboard/list_summary', $params);
-                    } else {
-                        echo elgg_view('output/empty', array('value' => elgg_echo('storyboards:none')));
                     }
                     ?>
                 </div>

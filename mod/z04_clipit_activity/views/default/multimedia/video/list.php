@@ -125,7 +125,7 @@ if($unlink){
                         <?php else:?>
                             <?php echo elgg_view('output/url', array(
                                 'href'  => "ajax/view/modal/publications/publish?id={$video->id}",
-                                'class' => 'btn btn-xs btn-primary',
+                                'class' => 'btn btn-sm btn-primary',
                                 'text'  => '<i class="fa fa-globe"></i> '.elgg_echo('send:to_site'),
                                 'data-toggle'   => 'modal',
                                 'data-target' => '#publish-'.$video->id,
@@ -138,7 +138,7 @@ if($unlink){
                         <?php echo elgg_view('output/url', array(
                             'href'  => 'action/multimedia/videos/remove?id='.$video->id.'&unlink=true',
                             'is_action' => true,
-                            'class'  => 'btn btn-xs btn-border-red btn-primary margin-bottom-10',
+                            'class'  => 'btn btn-xs btn-border-red btn-primary margin-bottom-10 remove-object',
                             'title' => elgg_echo('task:remove_video'),
                             'text'  => '<i class="fa fa-trash-o"></i> '.elgg_echo('task:remove_video')
                         ));

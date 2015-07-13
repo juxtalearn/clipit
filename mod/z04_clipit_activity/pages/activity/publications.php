@@ -84,7 +84,7 @@ if($page[2] == 'view' && $page[3]){
             ));
             $content = elgg_view('publications/view', array(
                 'entity' => $entity,
-                'type' => 'storyboard',
+                'type' => 'file',
                 'body' => $body,
                 'canEvaluate' => $canEvaluate,
                 'feedback_task' => $feedback_task,
@@ -106,7 +106,7 @@ if($page[2] == 'view' && $page[3]){
             $content = publications_get_page_content_list(ClipitTask::TYPE_VIDEO_UPLOAD, $tasks, $href);
             break;
         case 'files':
-            // Get last task [type: storyboard_upload]
+            // Get last task [type: file_upload]
             $content = publications_get_page_content_list(ClipitTask::TYPE_FILE_UPLOAD, $tasks, $href);
             break;
     }

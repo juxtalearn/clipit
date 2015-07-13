@@ -12,11 +12,11 @@
  */
 ?>
 //<script>
-var storyboards_task =
+var files_task =
 {
     'name': {
-        'es': 'Actividad con storyboards',
-        'en': 'Activity with storyboards'
+        'es': 'Actividad con archivos',
+        'en': 'Activity with files'
     },
     'description': {
         'es': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam semper accumsan sapien',
@@ -37,28 +37,28 @@ var storyboards_task =
         {
             'task_type': 'file_upload',
             'name': {
-                'es': 'Publicar storyboard',
-                'en': 'Publish storyboard'
+                'es': 'Publicar archivo',
+                'en': 'Publish file'
             },
             'description': {
-                'es': 'Cada grupo deberá subir y publicar un storyboard',
-                'en': 'Each group must upload and publish a storyboard'
+                'es': 'Cada grupo deberá subir y publicar un archivo',
+                'en': 'Each group must upload and publish a file'
             },
             'feedback':{
                 'task_type': 'file_feedback',
                 'name': {
-                    'es': 'Evaluar storyboards',
-                    'en': 'Evaluate storyboards'
+                    'es': 'Evaluar archivos',
+                    'en': 'Evaluate files'
                 },
                 'description': {
-                    'es': 'Los alumnos deberán ver y evaluar los storyboards de los demás grupos',
-                    'en': 'Students must review and evaluate the storyboards from other groups'
+                    'es': 'Los alumnos deberán ver y evaluar los archivos de los demás grupos',
+                    'en': 'Students must review and evaluate the files from other groups'
                 }
             }
         },
     ]
 };
-task_template['storyboards'] = storyboards_task;
+task_template['files'] = files_task;
 
 elgg.register_hook_handler('clipit:task:template', 'system', function(){
     return task_template;

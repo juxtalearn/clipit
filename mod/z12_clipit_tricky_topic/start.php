@@ -296,11 +296,9 @@ function tt_page_handler($page){
                             $multimedia = array(
                                 'videos' => array(),
                                 'files' => array(),
-                                'storyboards' => array(),
                             );
                             $multimedia['videos'] = array_merge($multimedia['videos'], $example->video_array);
                             $multimedia['files'] = array_merge($multimedia['files'], $example->file_array);
-                            $multimedia['storyboards'] = array_merge($multimedia['storyboards'], $example->storyboard_array);
                             $content = elgg_view('examples/view',
                                 array(
                                     'entity' => $example,

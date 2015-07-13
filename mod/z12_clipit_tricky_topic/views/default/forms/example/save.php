@@ -91,16 +91,7 @@ if($example) {
             ));
             ?>
             <div class="information_attach margin-top-10" style="display: <?php echo !empty($multimedia) ? 'block': 'none'?>;">
-<!--                <div class="form-group">-->
-<!--                    --><?php //echo elgg_view("input/text", array(
-//                        'name' => 'url[]',
-//                        'class' => 'form-control',
-//                        'placeholder' => elgg_echo('example:link_information'),
-//                    ));
-//                    ?>
-<!--                </div>-->
                 <div class="form-group">
-<!--                    <label>--><?php //echo elgg_echo('resources');?><!--</label>-->
                     <div role="tabpanel">
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
@@ -112,11 +103,6 @@ if($example) {
                             <li role="presentation">
                                 <a href="#videos" aria-controls="videos" role="tab" data-toggle="tab">
                                     <?php echo elgg_echo('videos');?> (<?php echo count($multimedia['videos']);?>)
-                                </a>
-                            </li>
-                            <li role="presentation">
-                                <a href="#storyboards" aria-controls="storyboards" role="tab" data-toggle="tab">
-                                    <?php echo elgg_echo('storyboards');?> (<?php echo count($multimedia['storyboards']);?>)
                                 </a>
                             </li>
                         </ul>
@@ -148,7 +134,7 @@ if($example) {
                                 <div class="margin-top-20">
                                     <?php
                                     $params = array(
-                                        'files' => $files,
+                                        'entities' => $files,
                                         'href' => $href,
                                         'view_comments' => false,
                                         'options' => true,
@@ -221,43 +207,6 @@ if($example) {
                                             'author_bottom' => true,
                                         );
                                         echo elgg_view('multimedia/video/list_summary', $params);
-                                        ?>
-                                    </div>
-                                <?php endif;?>
-                            </div>
-                            <div role="tabpanel" class="tab-pane form-group" id="storyboards" style="background: #fff;padding: 10px;">
-                                <div class="group-input margin-top-10">
-                                    <div class="margin-bottom-20 clone-input">
-                                        <a href="javascript:;" class="fa fa-trash-o red margin-right-10 remove-input"  style="visibility: hidden;"></a>
-                                        <?php echo elgg_view("input/file", array(
-                                            'name' => 'storyboard[]',
-                                            'style' => 'display: inline-block;'
-                                        ));
-                                        ?>
-                                        <i class="fa fa-check green correct" style="display: none;"></i>
-                                    </div>
-                                </div>
-                                <div class="margin-left-20">
-                                    <?php echo elgg_view('output/url', array(
-                                        'href'  => "javascript:;",
-                                        'class' => 'btn btn-sm btn-primary add-input',
-                                        'title' => elgg_echo('add'),
-                                        'text'  => '<i class="fa fa-plus"></i> ' . elgg_echo('add'),
-                                    ));
-                                    ?>
-                                </div>
-                                <?php if($storyboards = $multimedia['storyboards']): ?>
-                                    <hr>
-                                    <div class="margin-top-20">
-                                        <?php
-                                        $params = array(
-                                            'entities' => $storyboards,
-                                            'href' => $href,
-                                            'view_comments' => false,
-                                            'actions' => true,
-                                            'preview' => true
-                                        );
-                                        echo elgg_view('multimedia/storyboard/list_summary', $params);
                                         ?>
                                     </div>
                                 <?php endif;?>

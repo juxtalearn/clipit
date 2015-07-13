@@ -55,11 +55,10 @@ foreach($files as $file){
                     'class' => 'btn btn-default btn-icon margin-left-10 pull-right',
                     'text'  => '<i class="fa fa-download"></i>'
     ));
-    $author = elgg_view('output/url', array(
-        'href'  => "profile/{$owner->login}",
-        'title' => $owner->name,
-        'class' => 'show',
-        'text'  => '<i class="fa-user fa"></i> '.$owner->name,
+    $author = elgg_view("publications/owner_summary", array(
+        'entity' => $file,
+        'entity_class' => 'ClipitFile',
+        'msg' => elgg_echo('multimedia:uploaded_by')
     ));
     $file_link_text = '<strong>'.$file->name.'</strong>';
     $file_link = elgg_view('output/url', array(
@@ -106,7 +105,9 @@ foreach($files as $file){
         array(
             'content' => '<small>'.
                         $author.
-                        elgg_view('output/friendlytime', array('time' => $file->time_created))
+                        '<div class="margin-top-5">'
+                            .elgg_view('output/friendlytime', array('time' => $file->time_created)).
+                        '</div>'
                         .'</small>',
         ),
         array(

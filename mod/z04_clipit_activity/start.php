@@ -91,7 +91,7 @@ function clipit_activity_init() {
     // Load Task javascript templates
     elgg_extend_view('js/task_templates', 'js/task_templates/complete');
     elgg_extend_view('js/task_templates', 'js/task_templates/videos');
-    elgg_extend_view('js/task_templates', 'js/task_templates/storyboards');
+    elgg_extend_view('js/task_templates', 'js/task_templates/files');
 
     // Group
     elgg_register_action("group/join", "{$plugin_dir}/actions/group/join.php");
@@ -101,7 +101,6 @@ function clipit_activity_init() {
     elgg_register_ajax_view('modal/group/view');
 
     elgg_register_ajax_view('multimedia/attach/videos');
-    elgg_register_ajax_view('multimedia/attach/storyboards');
     elgg_register_ajax_view('multimedia/attach/files');
     // Assessment rubric
     elgg_register_ajax_view('modal/assessment_rubric/view');
@@ -135,13 +134,6 @@ function clipit_activity_init() {
     elgg_register_ajax_view('modal/multimedia/resource/edit');
     elgg_register_ajax_view('multimedia/viewer');
     elgg_register_ajax_view('multimedia/attach/list');
-
-    /* Storyboards */
-    elgg_register_action("storyboards/upload", "{$plugin_dir}/actions/storyboards/upload.php");
-    elgg_register_action("multimedia/storyboards/edit", "{$plugin_dir}/actions/multimedia/storyboards/edit.php");
-    elgg_register_action("multimedia/storyboards/set_options", "{$plugin_dir}/actions/multimedia/storyboards/set_options.php");
-    elgg_register_action("multimedia/storyboards/remove", "{$plugin_dir}/actions/multimedia/storyboards/remove.php");
-    elgg_register_ajax_view('modal/multimedia/storyboard/edit');
 
     // Publications
     elgg_register_action("publications/evaluate", "{$plugin_dir}/actions/publications/evaluate.php");

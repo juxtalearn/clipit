@@ -76,6 +76,7 @@ if(hasTeacherAccess($user->role)){
             $body .= elgg_view('multimedia/file/list', array(
                 'entities' => $file,
                 'unlink' => true,
+                'options' => false,
                 'href' => $href_publications,
                 'task_id' => $task->id,
             ));
@@ -91,7 +92,7 @@ if(hasTeacherAccess($user->role)){
                 'href' => "clipit_activity/{$activity->id}/group/{$group_id}/repository",
                 'task_id' => $task->id,
                 'rating' => false,
-                'actions' => false,
+                'options' => false,
                 'publish' => true,
                 'total_comments' => false,
             ));
