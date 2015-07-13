@@ -338,6 +338,7 @@ function get_default_group_name(){
 );
 ?>
 <hr>
+<a name="edit-groups"></a>
 <h3 class="title-block margin-top-0"><?php echo elgg_echo('activity:groups');?></h3>
 <?php echo elgg_view_form('activity/admin/groups_setup',
     array(

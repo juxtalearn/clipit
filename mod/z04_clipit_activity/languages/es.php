@@ -293,6 +293,7 @@ $spanish = array(
     'task:added' => 'Tarea añadida',
     'task:updated' => 'Tarea actualizada',
     'task:created' => 'Tarea creada',
+    'task:removed' => 'Tarea eliminada',
     'task:cantupdate' => 'No se ha podido actualizar la tarea',
     'task:cantcreate' => 'No se ha podido crear la tarea',
     'task:template:title' => 'Usar plantilla',

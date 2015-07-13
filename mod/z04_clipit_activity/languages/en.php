@@ -292,6 +292,7 @@ $english = array(
     'task:added' => 'Added task',
     'task:updated' => 'Updated task',
     'task:created' => 'Task created',
+    'task:removed' => 'Tarea removed',
     'task:cantupdate' => 'You can not update task',
     'task:cantcreate' => 'You can not create a task',
     'task:template:title' => 'Use template',

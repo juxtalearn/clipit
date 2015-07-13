@@ -88,6 +88,16 @@ foreach($activity->student_array as $student_id){
                     'class' => 'fa fa-angle-down pull-right fa-2x visible-xs',
                 ));
                 ?>
+                <?php if(hasTeacherAccess($user->role)):?>
+                    <?php echo elgg_view('output/url', array(
+                        'href' => "clipit_activity/$activity->id/admin?filter=groups#edit-groups",
+                        'title' => elgg_echo('edit'),
+                        'text' => elgg_echo('edit'),
+                        'class' => 'btn btn-xs btn-border-blue btn-default margin-right-10 pull-right',
+                        'target' => '_blank',
+                    ));
+                    ?>
+                <?php endif;?>
                 <h3 class="margin-bottom-5"><?php echo $group->name; ?></h3>
                 <div class="group-details">
                     <?php if($optGroup == 'join' && $rest > 0):?>
