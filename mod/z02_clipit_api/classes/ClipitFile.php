@@ -476,16 +476,23 @@ class ClipitFile extends UBFile {
     }
 
     /**
-     * Uploads to Google Drive a file from a local path in the server
+     * Uploads to Google Drive a ClipIt file
      *
-     * @param string $file_path Local file path
-     * @param string $title File title
-     * @param string $mime_type File MIME type
+     * @param int $id Clipit file id to upload to Google Drive
      *
      * @return string Google Drive File ID
      */
-    static function upload_to_gdrive($file_path, $title, $mime_type)
+    static function upload_to_gdrive($id)
     {
+        $clipit_file = ClipitFile::get_by_id(array($id));
+        if(!empty($clipit_file)){
+            $clipit_file = array_pop($clipit_file);
+            $file_path = $clipit_file->file_path;
+            $title = $clipit_file->name;
+            $mime_type = $clipit_file->mime_type[static::MIME_FULL];
+        } else{
+            return null;
+        }
         if (!get_config("google_refresh_token")) {
             return false;
         }
