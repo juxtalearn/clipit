@@ -38,6 +38,8 @@ class ClipitFile extends UBFile {
     public $overall_rating_average = 0.0;
     public $tag_rating_average = 0.0;
     public $rubric_rating_average = 0.0;
+    // GDrive ID
+    public $gdrive_id = "";
 
     /**
      * Loads object parameters stored in Elgg
@@ -53,6 +55,7 @@ class ClipitFile extends UBFile {
         $this->overall_rating_average = (float)$elgg_file->get("overall_rating_average");
         $this->tag_rating_average = (float)$elgg_file->get("tag_rating_average");
         $this->rubric_rating_average = (float)$elgg_file->get("rubric_rating_average");
+        $this->gdrive_id = (string)$elgg_file->get("gdrive_id");
     }
 
     /**
@@ -66,6 +69,7 @@ class ClipitFile extends UBFile {
         $elgg_file->set("overall_rating_average", (float)$this->overall_rating_average);
         $elgg_file->set("tag_rating_average", (float)$this->tag_rating_average);
         $elgg_file->set("rubric_rating_average", (float)$this->rubric_rating_average);
+        $elgg_file->set("gdrive_id", (string)$this->gdrive_id);
     }
 
     /**
@@ -549,7 +553,9 @@ class ClipitFile extends UBFile {
         $file_perms->setValue("");
         $file_perms->setWithLink(true);
         $drive_svc->permissions->insert($status->getId(), $file_perms);
-        return (string)$status->id;
+        $gdrive_id = (string)$status->id;
+        ClipitFile::set_properties($id, array("gdrive_id" => (string)$gdrive_id));
+        return $gdrive_id;
     }
 
 }
