@@ -488,15 +488,6 @@ class ClipitFile extends UBFile {
      */
     static function upload_to_gdrive($id)
     {
-        $clipit_file = ClipitFile::get_by_id(array($id));
-        if(!empty($clipit_file)){
-            $clipit_file = array_pop($clipit_file);
-            $file_path = $clipit_file->file_path;
-            $title = $clipit_file->name;
-            $mime_type = $clipit_file->mime_type[static::MIME_FULL];
-        } else{
-            return null;
-        }
         if (!get_config("google_refresh_token")) {
             return false;
         }
@@ -525,6 +516,18 @@ class ClipitFile extends UBFile {
         // Define an object that will be used to make all API requests.
         $drive_svc = new Google_Service_Drive($client);
 
+        // Load Clipit File
+        $clipit_file = ClipitFile::get_by_id(array($id));
+        if(!empty($clipit_file)){
+            $clipit_file = array_pop($clipit_file);
+            $file_path = $clipit_file->file_path;
+            $title = $clipit_file->name;
+            $mime_type = $clipit_file->mime_full;
+        } else{
+            return null;
+        }
+
+        // Create Google Drive File
         $drive_file = new Google_Service_Drive_DriveFile();
         $drive_file->setTitle($title);
         $chunkSizeBytes = 1 * 1024 * 1024;
@@ -554,6 +557,8 @@ class ClipitFile extends UBFile {
         $file_perms->setWithLink(true);
         $drive_svc->permissions->insert($status->getId(), $file_perms);
         $gdrive_id = (string)$status->id;
+
+        // Save Google Drive ID in Clipit File
         ClipitFile::set_properties($id, array("gdrive_id" => (string)$gdrive_id));
         return $gdrive_id;
     }

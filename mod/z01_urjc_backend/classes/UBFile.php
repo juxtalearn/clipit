@@ -28,9 +28,7 @@ class UBFile extends UBItem {
     const THUMB_SMALL = 64;
     const THUMB_MEDIUM = 128;
     const THUMB_LARGE = 256;
-    const MIME_FULL = 0;
-    const MIME_SHORT = 1;
-    const MIME_EXT = 2;
+
     /**
      * Class variables
      */
@@ -38,10 +36,12 @@ class UBFile extends UBItem {
     public $size = 0;
     public $file_path = "";
     public $temp_path = "";
-    public $thumb_small = array();
-    public $thumb_medium = array();
-    public $thumb_large = array();
-    public $mime_type = array();
+    public $thumb_small = "";
+    public $thumb_medium = "";
+    public $thumb_large = "";
+    public $mime_full = "";
+    public $mime_short = "";
+    public $mime_ext = "";
 
     /**
      * Constructor
@@ -78,6 +78,11 @@ class UBFile extends UBItem {
         $this->size = (int)$elgg_file->size();
         $this->file_path = (string)$elgg_file->getFilenameOnFilestore();
         $this->url = (string)elgg_get_site_url() . "file/download/" . $this->id;
+        $this->mime_full = (string)$elgg_file->get("mime_full");
+        $this->mime_short = (string)$elgg_file->get("mime_short");
+        $this->mime_ext = (string)$elgg_file->get("mime_ext");
+        $this->cloned_from = (int)static::get_cloned_from($this->id);
+        $this->clone_array = (array)static::get_clones($this->id);
         if (!empty($elgg_file->thumb_small)) {
             $this->thumb_small["path"] = (string)$elgg_file->get("thumb_small");
             $this->thumb_small["url"] = (string)elgg_get_site_url() . "file/thumbnail/small/" . $this->id;
@@ -86,13 +91,6 @@ class UBFile extends UBItem {
             $this->thumb_large["path"] = (string)$elgg_file->get("thumb_large");
             $this->thumb_large["url"] = (string)elgg_get_site_url() . "file/thumbnail/large/" . $this->id;
         }
-        if (!empty($elgg_file->mime_type)) {
-            $this->mime_type["full"] = $elgg_file->mime_type[static::MIME_FULL];
-            $this->mime_type["short"] = $elgg_file->mime_type[static::MIME_SHORT];
-            $this->mime_type["ext"] = $elgg_file->mime_type[static::MIME_EXT];
-        }
-        $this->cloned_from = (int)static::get_cloned_from($this->id);
-        $this->clone_array = (array)static::get_clones($this->id);
     }
 
     /**
@@ -109,6 +107,7 @@ class UBFile extends UBItem {
             $elgg_file->set("owner_guid", (int)$this->owner_id);
         }
         $elgg_file->access_id = ACCESS_PUBLIC;
+        // Save file data
         if (!empty($this->data)) { // new file or new data
             $elgg_file->open("write");
             $decoded_data = base64_decode($this->data, true);
@@ -118,30 +117,33 @@ class UBFile extends UBItem {
                 $elgg_file->write($this->data);
             }
             $elgg_file->close();
-            static::create_thumbnails($elgg_file);
         } elseif (!empty($this->temp_path)) { // File was uploaded into local temp dir
             $elgg_file->open("write"); // to ensure file is created in disk
             $elgg_file->close();
             move_uploaded_file($this->temp_path, $elgg_file->getFilenameOnFilestore());
-            static::create_thumbnails($elgg_file);
-        } elseif (!empty($this->thumb_small)) {
+        }
+        // if the mimetype is already set, use the whole $this->name as name
+        if(!empty($this->mime_full)){
+            $elgg_file->set("name", (string)$this->name);
+        }
+        // else separate name part and extension part from $this->name and find out mime_type
+        else{
+            $elgg_file->set("name", (string)pathinfo($this->name, PATHINFO_FILENAME));
+            $file_extension = (string)pathinfo($this->name, PATHINFO_EXTENSION);
+            $elgg_file->set("mime_ext", $file_extension);
+            $filestore_name = $elgg_file->getFilenameOnFilestore();
+            $mime_full = (string)static::get_mime_type($filestore_name, $file_extension);
+            $elgg_file->set("mime_full", $mime_full);
+            $elgg_file->set("mime_short", (string)static::get_simple_mime_type($mime_full));
+        }
+        // if thumbnails already exist
+        if (!empty($this->thumb_small)) {
             $elgg_file->set("thumb_small", (string)$this->thumb_small["path"]);
             $elgg_file->set("thumb_medium", (string)$this->thumb_medium["path"]);
             $elgg_file->set("thumb_large", (string)$this->thumb_large["path"]);
+        } else{
+            static::create_thumbnails($elgg_file);
         }
-        $filestore_name = $elgg_file->getFilenameOnFilestore();
-        $mime_type = (array)static::get_mime_type($filestore_name);
-        // if there is already an extension, keep it, and use $this->name as name
-        if(!empty($this->mime_type["ext"])){
-            $elgg_file->set("name", (string)$this->name);
-            $mime_type[static::MIME_EXT] = $this->mime_type["ext"];
-        }
-        // else get name part and extension part from $this->name
-        else{
-            $elgg_file->set("name", (string)pathinfo($this->name, PATHINFO_FILENAME));
-            $mime_type[static::MIME_EXT] = (string)pathinfo($this->name, PATHINFO_EXTENSION);
-        }
-        $elgg_file->set("mime_type", (array)$mime_type);
     }
 
 
@@ -210,26 +212,38 @@ class UBFile extends UBItem {
      * Get File MIME Type
      *
      * @param string $file Filename on Filestore
+     * @param string $ext File extension
      *
-     * @return array[string] Mime Type array
+     * @return string Full Mime Type of File
      */
-    private static function get_mime_type($file) {
-        $mime_type = array();
-        // for PHP5 folks.
-        if (function_exists('finfo_file') && defined('FILEINFO_MIME_TYPE')) {
-            $resource = finfo_open(FILEINFO_MIME_TYPE);
-            if ($resource) {
-                $mime_type[static::MIME_FULL] = finfo_file($resource, $file);
-            }
+    private static function get_mime_type($file, $ext) {
+        $full_mime_type = "";
+        switch($ext){
+            case "doc":
+                $full_mime_type = "application/msword";
+                break;
+            case "docx":
+                $full_mime_type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+                break;
+            case "xls":
+                $full_mime_type = "application/vnd.ms-excel";
+                break;
+            case "xlsx":
+                $full_mime_type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                break;
+            case "ppt":
+                $full_mime_type = "application/vnd.ms-powerpoint";
+                break;
+            case "pptx":
+                $full_mime_type = "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+                break;
+            default:
+                $resource = finfo_open(FILEINFO_MIME_TYPE);
+                if ($resource) {
+                    $full_mime_type = finfo_file($resource, $file);
+                }
         }
-        if ($mime_type[static::MIME_FULL] == "application/zip") { // Detect Office 2007+ mimetype
-            $new_mime = getMicrosoftOfficeMimeInfo($file);
-            if ($new_mime !== false) {
-                $mime_type[static::MIME_FULL] = (string)$new_mime["mime"];
-            }
-        }
-        $mime_type[static::MIME_SHORT] = (string)static::get_simple_mime_type($mime_type[static::MIME_FULL]);
-        return $mime_type;
+        return $full_mime_type;
     }
 
     /**
@@ -242,6 +256,8 @@ class UBFile extends UBItem {
     private static function get_simple_mime_type($mime_type) {
         switch ($mime_type) {
             case "application/msword":
+            case "application/vnd.ms-excel":
+            case "application/vnd.ms-powerpoint":
             case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
             case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
             case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
@@ -280,8 +296,7 @@ class UBFile extends UBItem {
     private static function create_thumbnails($elgg_file) {
         $file_name = $elgg_file->getFilename();
         $filestore_name = $elgg_file->getFilenameOnFilestore();
-        $mime_type = static::get_mime_type($filestore_name);
-        $simple_mime_type = static::get_simple_mime_type($mime_type[static::MIME_FULL]);
+        $simple_mime_type = $elgg_file->get("mime_short");
         // if image, we need to create thumbnails (this should be moved into a function)
         if ($simple_mime_type == "image") {
             $thumb = new ElggFile();
