@@ -58,7 +58,7 @@ switch($task->task_type):
             ));
         break;
     case ClipitTask::TYPE_FILE_FEEDBACK:
-        echo elgg_view('dashboard/modules/activity_admin/storyboard_feedback',
+        echo elgg_view('dashboard/modules/activity_admin/file_feedback',
             array(
                 'users' => $activity->student_array,
                 'task' => $task

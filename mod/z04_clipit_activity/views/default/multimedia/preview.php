@@ -19,10 +19,6 @@ $entity = array_pop($object['subtype']::get_by_id(array($entity_id)));
          case "ClipitFile":
             echo elgg_view("multimedia/file/preview", array('file' => $entity, 'size' => 'medium'));
          break;
-        case "ClipitStoryboard":
-            $entity = array_pop(ClipitFile::get_by_id(array($entity->file)));
-            echo elgg_view("multimedia/file/preview", array('file' => $entity, 'size' => 'medium'));
-        break;
         case "ClipitVideo":
             echo elgg_view("multimedia/video/preview", array('entity' => $entity));
             break;

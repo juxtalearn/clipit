@@ -124,6 +124,7 @@ $list_options = array();
 if($vars['create']){
     // Add files button
     echo elgg_view_form('multimedia/files/upload', array(
+        'action' => 'action/multimedia/files/save',
         'id' => 'fileupload',
         'enctype' => 'multipart/form-data',
         'data-validate' => 'true'

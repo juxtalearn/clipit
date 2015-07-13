@@ -26,12 +26,6 @@ foreach($groups as $group):
             ?>
             <small class="pull-right">
                 <?php echo elgg_view('output/friendlytime', array('time' => $video->time_created));?>
-                <!--                --><?php //echo elgg_view('output/url', array(
-                //                    'href'  => "clipit_activity/{$activity_id}/publications/view/{$video->id}",
-                //                    'title' => elgg_echo('view:storyboard'),
-                //                    'text'  => elgg_echo('view'),
-                //                ));
-                //                ?>
             </small>
         <?php endif;?>
         <div class="text-truncate">

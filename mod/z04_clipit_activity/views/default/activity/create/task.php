@@ -29,7 +29,7 @@ switch($task_type){
     case "feedback":
         $task_types = array(
             ClipitTask::TYPE_VIDEO_FEEDBACK => elgg_echo('task:video_feedback'),
-            ClipitTask::TYPE_FILE_FEEDBACK => elgg_echo('task:storyboard_feedback')
+            ClipitTask::TYPE_FILE_FEEDBACK => elgg_echo('task:file_feedback')
         );
         $input_array = "[{$id}][feedback-form]";
         $disabled = true;

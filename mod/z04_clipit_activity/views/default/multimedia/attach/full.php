@@ -25,9 +25,6 @@ $activity_id = ClipitGroup::get_activity($group->id);
             case "ClipitFile":
                 $file = $entity;
                 break;
-            case "ClipitStoryboard":
-                $file = array_pop(ClipitFile::get_by_id(array($entity->file)));
-                break;
         }
         ?>
         <?php echo elgg_view('multimedia/attach/view', array('entity' => $entity, 'href' => $href, 'file' => $file));?>

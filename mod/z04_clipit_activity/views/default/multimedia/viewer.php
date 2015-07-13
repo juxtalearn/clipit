@@ -13,14 +13,6 @@
 $id = elgg_extract('id', $vars);
 $object = ClipitSite::lookup($id);
 switch($object['subtype']){
-    case 'ClipitStoryboard':
-        $entity = array_pop(ClipitStoryboard::get_by_id(array((int)$id)));
-        $file = array_pop(ClipitFile::get_by_id(array($entity->file)));
-        $body = elgg_view("multimedia/file/body", array(
-            'entity'  => $file,
-            'size'  => 'original'
-        ));
-        break;
     case 'ClipitFile':
         $entity = array_pop(ClipitFile::get_by_id(array((int)$id)));
         $body = elgg_view("multimedia/file/body", array(

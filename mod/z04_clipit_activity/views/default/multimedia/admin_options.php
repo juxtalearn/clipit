@@ -22,7 +22,7 @@ if($scope == 'group'):
 <!-- Create or view discussion related -->
 <?php foreach(array_pop(ClipitPost::get_by_destination(array($group))) as $discussion):
     //$discussion = array_pop($discussion);
-    $items_array = array_merge($discussion->file_array, $discussion->video_array, $discussion->storyboard_array);
+    $items_array = array_merge($discussion->file_array, $discussion->video_array, $discussion->file_array);
     if(in_array($entity->id, $items_array)):
         $related_discussion = true;
         $activity_id = $entity_class::get_activity($entity->id);

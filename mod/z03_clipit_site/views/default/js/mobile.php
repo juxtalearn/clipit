@@ -78,32 +78,6 @@ function mobileLoad() {
         $('.elgg-sidebar #close-sidebar').click(function () {
             closeSidebar();
         });
-
-//        $('ul.elgg-menu-filter.nav-tabs li').each(function () {
-//            var icon;
-//            switch (true) {
-//                case $(this).hasClass('elgg-menu-item-files'):
-//                    icon = 'fa-file-text-o';
-//                    break;
-//                case $(this).hasClass('elgg-menu-item-videos'):
-//                    icon = 'fa-video-camera';
-//                    break;
-//                case $(this).hasClass('elgg-menu-item-storyboards'):
-//                    icon = 'fa-picture-o';
-//                    break;
-//                case $(this).hasClass('elgg-menu-item-enroll'):
-//                    icon = 'fa-clock-o';
-//                    break;
-//                case $(this).hasClass('elgg-menu-item-active'):
-//                    icon = 'fa-play';
-//                    break;
-//                case $(this).hasClass('elgg-menu-item-past'):
-//                    icon = 'fa-stop';
-//                    break;
-//            }
-//            if (icon)
-//                $(this).find('span').html($('<i/>').addClass(icon + ' fa margin-right-5'));
-//        });
         $('.tags').each(function () {
             $(this).find('a').css('maxWidth', '50%');
             $(this).find('a:gt(1)').hide();

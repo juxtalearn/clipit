@@ -12,10 +12,8 @@
  */
 $example = elgg_extract('entity', $vars);
 $multimedia = array_merge(
-    $example->resource_array,
     $example->video_array,
-    $example->file_array,
-    $example->storyboard_array
+    $example->file_array
 );
 ?>
 <div class="row">

@@ -28,8 +28,7 @@ if($from_view = elgg_extract('tricky_topic', $vars)){
 $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($tricky_topic_id)));
 $multimedia = array_merge(
     $tricky_topic->video_array,
-    $tricky_topic->file_array,
-    $tricky_topic->storyboard_array
+    $tricky_topic->file_array
 );
 $examples = ClipitExample::get_from_tricky_topic($tricky_topic->id);
 $quizzes = ClipitQuiz::get_from_tricky_topic($tricky_topic->id);

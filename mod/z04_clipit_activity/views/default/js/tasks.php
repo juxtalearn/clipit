@@ -17,7 +17,6 @@ elgg.provide('clipit.task.admin');
 clipit.task.init = function() {
     $(document).on("click", ".feedback-check", clipit.task.feedbackCheck);
     $(document).on("click", "#add_task", clipit.task.addTask);
-    $(document).on("change", ".task-types", clipit.task.types);
     // Task templates
     $(document).on("change", "#select-task-template", clipit.task.loadTemplate);
 
@@ -113,70 +112,6 @@ clipit.task.rubricUnselect = function(){
     clipit.task.rubricList($(this).closest('.task'));
 };
 
-clipit.task.types = function(){
-    var task_types = ['<?php echo ClipitTask::TYPE_VIDEO_UPLOAD;?>', '<?php echo ClipitTask::TYPE_FILE_UPLOAD;?>'];
-    var content = $(this).closest(".task");
-    var that = $(this);
-    content_feedback = content.find(".feedback-module");
-    var tricky_topic_val = '',
-        input_prefix_val = '';
-    if($("#tricky-topic").val()){
-        tricky_topic_val = $("#tricky-topic").val();
-    }
-    var input_prefix = content.find("input[name='input_prefix']");
-    if(input_prefix.length > 0){
-        input_prefix_val = input_prefix.val();
-    }
-    content.find(".task-type-container").html('').hide();
-    if($.inArray($(this).val(), task_types) != -1){
-        switch($(this).val()){
-            case "video_upload":
-                content.find('.feedback_form .task-types').val('video_feedback');
-                break;
-            case "storyboard_upload":
-                content.find('.feedback_form .task-types').val('storyboard_feedback');
-                break;
-        }
-        content_feedback.show();
-    } else {
-        content_feedback.hide();
-        content.find('.feedback_form').hide();
-        content_feedback.find("input[type=checkbox]").prop('checked', false);
-    }
-    var $attach_list =  that.closest(".task").find(".attach_list");
-    if($(this).val() == '<?php echo ClipitTask::TYPE_RESOURCE_DOWNLOAD;?>'){
-        var entity_id = tricky_topic_val;
-        if(that.closest("form").find("input[name='entity-id']").length > 0){
-            var entity_id = that.closest("form").find("input[name='entity-id']").val();
-//            input_prefix_val = '';
-        }
-        $attach_list.toggle();
-        $attach_list.attach_multimedia({
-            data: {
-                'entity_id': entity_id,
-                'input_prefix': input_prefix_val
-            }
-        }).loadBy("files");
-    } else {
-        $attach_list.hide();
-    }
-    content.find(".quiz-module").hide();
-    if($(this).val() == 'quiz_take'){
-        content.find(".quiz-module").show();
-        content.find(".task-type-container").fadeIn('fast').html('<i class="fa fa-spinner fa-spin fa-2x blue"></i>');
-        elgg.get('ajax/view/quiz/list', {
-            data: {
-                'activity_create': true,
-                'tricky_topic': tricky_topic_val,
-                'input_prefix': input_prefix_val
-            },
-            success: function (data) {
-                content.find(".task-type-container").html(data).show();
-            }
-        });
-    }
-
-};
 clipit.task.quizRefreshList = function(){
     clipit.task.refresh($(this).closest('.task'));
 //    $(this).closest('.task').find('.task-types').trigger('change');

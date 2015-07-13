@@ -284,8 +284,8 @@ function get_task_completed_count(ClipitTask $task){
             $count  = (count($task->video_array)/count($activity->group_array)) * 100;
             break;
         case ClipitTask::TYPE_FILE_UPLOAD:
-            $text = count($task->storyboard_array)."/".count($activity->group_array);
-            $count  = (count($task->storyboard_array)/count($activity->group_array)) * 100;
+            $text = count($task->file_array)."/".count($activity->group_array);
+            $count  = (count($task->file_array)/count($activity->group_array)) * 100;
             break;
         case ClipitTask::TYPE_VIDEO_FEEDBACK:
         case ClipitTask::TYPE_FILE_FEEDBACK:

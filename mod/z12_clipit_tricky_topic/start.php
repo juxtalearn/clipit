@@ -268,12 +268,10 @@ function tt_page_handler($page){
                     elgg_push_breadcrumb($title);
                     $multimedia = array(
                         'videos' => array(),
-                        'files' => array(),
-                        'storyboards' => array(),
+                        'files' => array()
                     );
                     $multimedia['videos'] = array_merge($multimedia['videos'], $example->video_array);
                     $multimedia['files'] = array_merge($multimedia['files'], $example->file_array);
-                    $multimedia['storyboards'] = array_merge($multimedia['storyboards'], $example->storyboard_array);
                     $content = elgg_view_form('example/save',
                         array(
                             'data-validate' => 'true',

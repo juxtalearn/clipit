@@ -76,10 +76,8 @@ if($page[2] == 'view' && $page[3]){
             if(!$entity || !in_array($entity_id, $files)){
                 return false;
             }
-            $file = array_pop(ClipitFile::get_by_id(array($entity->id)));
-            $body = elgg_view("multimedia/storyboard/body", array(
+            $body = elgg_view("multimedia/file/body", array(
                 'entity' => $entity,
-                'file'  => $file,
                 'preview' => true
             ));
             $content = elgg_view('publications/view', array(
