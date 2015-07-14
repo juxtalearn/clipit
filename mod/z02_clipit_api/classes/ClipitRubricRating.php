@@ -88,21 +88,12 @@ class ClipitRubricRating extends UBItem{
     {
         $rubric_rating_array = array();
         foreach ($item_array as $item_id) {
-            $elgg_objects = elgg_get_entities_from_metadata(
-                array(
-                    'type' => static::TYPE, 'subtype' => static::SUBTYPE, 'metadata_names' => array("rubric_item"),
-                    'metadata_values' => array($item_id), 'limit' => 0
-                )
-            );
-            if (!empty($elgg_objects)) {
-                $temp_array = array();
-                foreach ($elgg_objects as $elgg_object) {
-                    $temp_array[] = new static($elgg_object->guid, $elgg_object);
-                }
-                $rubric_rating_array[$item_id] = $temp_array;
-            } else {
-                $rubric_rating_array[$item_id] = null;
+            $rubric_item_id_array = UBCollection::get_items($item_id, static::REL_RUBRICRATING_RUBRICITEM, true);
+            $temp_array = array();
+            foreach ($rubric_item_id_array as $rubric_rating_id) {
+                $temp_array[] = new static($rubric_rating_id);
             }
+            $rubric_rating_array[$item_id] = $temp_array;
         }
         return $rubric_rating_array;
     }
