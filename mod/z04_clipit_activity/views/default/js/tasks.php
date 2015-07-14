@@ -363,7 +363,7 @@ clipit.task.loadTemplate = function(){
                 $main_task = $task.find('.main_task')
                 date = {};
             $main_task.find('.input-task-title').val(clipit.task.echoTemplate(data.name));
-            $main_task.find('.input-task-description').val(data.description.es);
+            $main_task.find('.input-task-description').val(clipit.task.echoTemplate(data.description));
             $main_task.find('[data-task-type="'+ data.task_type +'"]').trigger('click');
 
             date.start = task_start,
@@ -378,14 +378,13 @@ clipit.task.loadTemplate = function(){
                     .closest('.feedback-check').trigger('click');
                 var data_feedback = data.feedback,
                     $feedback_task = $task.find('.feedback_task');
-                $feedback_task.find('.input-task-title').val(data_feedback.name.es);
-                $feedback_task.find('.input-task-description').val(data_feedback.description.es);
+                $feedback_task.find('.input-task-title').val(clipit.task.echoTemplate(data_feedback.name));
+                $feedback_task.find('.input-task-description').val(clipit.task.echoTemplate(data_feedback.description));
                 $feedback_task.find('[data-task-type="'+ data_feedback.task_type +'"]').trigger('click');
                 date.start = task_start,
                 date.end = task_start + diff,
                 task_start = date.end;
                 clipit.task.setTemplateDates(date, $feedback_task.find('.input-task-start'), $feedback_task.find('.input-task-end'));
-//                $feedback_task.find('.task-types').trigger('change');
             }
 
         });
