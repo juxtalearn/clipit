@@ -85,10 +85,11 @@ class UBEvent {
      * @param array $object_array List of object IDs from which to obtain events
      * @param int $offset Skip the first $offset events
      * @param int $limit Return at most $limit events
+     * @param array $relationship_filter List of Relationship names to filter events with
      *
      * @return array Array of system events
      */
-    static function get_by_object($object_array, $offset = 0, $limit = 10) {
+    static function get_by_object($object_array, $offset = 0, $limit = 10, $relationship_filter = null) {
         if (empty($object_array)) {
             return array();
         }
@@ -106,7 +107,12 @@ class UBEvent {
         }
         if (!empty($relationship_array)) {
             foreach ($relationship_array as $relationship) {
-                $relationship_ids[] = $relationship->id;
+                if(empty($relationship_filter)){
+                    $relationship_ids[] = $relationship->id;
+                }
+                elseif(in_array($relationship->relationship, $relationship_filter)) {
+                    $relationship_ids[] = $relationship->id;
+                }
             }
             if (isset($relationship_ids) and !empty($relationship_ids)) {
                 $query .= " where object_id IN (";
