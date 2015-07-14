@@ -12,15 +12,16 @@
  */
 $tag = elgg_extract('tag', $vars);
 $tag_rating = elgg_extract('rating_tag', $vars);
-if($tag_rating <= 0.5){
+
+if($tag_rating < 0.3){
     $icon = 'fa-frown-o red';
 }
-if($tag_rating > 0.5){
+if($tag_rating >= 0.75){
     $icon = 'fa-smile-o green';
 }
 ?>
 <div style="border-bottom: 1px solid #bae6f6;padding-bottom: 5px;margin-bottom: 5px;">
-    <?php if(!empty($tag_rating)):?>
+    <?php if($tag_rating !== null && $icon):?>
         <i class="fa <?php echo $icon;?> pull-right" style="margin-top: 4px;"></i>
     <?php endif;?>
     <?php echo elgg_view('output/url', array(

@@ -81,7 +81,7 @@ function task_rubric_save($hook, $entity_type, $returnvalue, $params){
 
                     if ($rubric_item['id']) {
                         if ($rubric_item['remove'] == 1) {
-                            ClipitRubricItem::delete_by_id(array($rubric_item['id']));
+                            ClipitRubric::remove_rubric_items($rubric['id'], array($rubric_item['id']));
                         } else {
                             $rubric_item_array[] = $rubric_item['id'];
                             ClipitRubricItem::set_properties($rubric_item['id'], $data);
