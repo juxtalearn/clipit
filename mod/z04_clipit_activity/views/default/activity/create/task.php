@@ -267,7 +267,7 @@ if($task){
         <?php
             if(
                 !$feedback_id &&
-                ($task->task_type != ClipitTask::TYPE_VIDEO_UPLOAD || $task->task_type != ClipitTask::TYPE_FILE_UPLOAD)
+                ($task->task_type != ClipitTask::TYPE_VIDEO_UPLOAD && $task->task_type != ClipitTask::TYPE_FILE_UPLOAD)
             ):
         ?>
             <div class="task-type-container bg-white" style="display: <?php echo $task ? 'block':'none';?>">
