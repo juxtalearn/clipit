@@ -221,3 +221,26 @@ function view_recommended_event($event, $view_type = 'full'){
 
     }
 }
+
+/**
+ * Get all relationships available
+ *
+ * @return array
+ */
+function get_recommended_relationships(){
+    return array(
+        ClipitActivity::REL_ACTIVITY_VIDEO,
+        ClipitActivity::REL_ACTIVITY_FILE,
+        ClipitActivity::REL_ACTIVITY_STUDENT,
+        ClipitActivity::REL_ACTIVITY_GROUP,
+
+        ClipitGroup::REL_GROUP_VIDEO,
+        ClipitGroup::REL_GROUP_FILE,
+        ClipitGroup::REL_GROUP_USER,
+
+        ClipitPost::REL_MESSAGE_DESTINATION,
+
+        ClipitTask::REL_TASK_FILE,
+        ClipitTask::REL_TASK_VIDEO,
+    );
+}

@@ -21,7 +21,7 @@ switch($type){
         if($user->role == ClipitUser::ROLE_ADMIN){
             $recommended_events = ClipitEvent::get_all_events($offset, 5);
         } else {
-            $recommended_events = ClipitEvent::get_recommended_events($user_id, $offset, 5);
+            $recommended_events = ClipitEvent::get_recommended_events($user_id, $offset, 5, get_recommended_relationships());
         }
         break;
 }

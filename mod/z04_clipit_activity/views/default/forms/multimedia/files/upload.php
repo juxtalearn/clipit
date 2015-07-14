@@ -45,9 +45,7 @@ $footer = '
             <span>'.elgg_echo('multimedia:files:add').'...</span>
             <input type="file" name="files" multiple>
         </span>
-        <button type="submit" class="btn btn-primary start">
-            <span>'.elgg_echo("send").'</span>
-        </button>
+        <input type="submit" class="btn btn-primary start" value="'.elgg_echo("send").'">
     </div>
 </div>';
 echo elgg_view("page/components/modal",

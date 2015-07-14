@@ -297,7 +297,6 @@ foreach($questions as $question):
     </div>
 
 </div>
-<!--    <div class="clearfix"></div>-->
 <?php
 $num++;
 endforeach;
