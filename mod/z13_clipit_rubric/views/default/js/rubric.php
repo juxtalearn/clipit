@@ -56,7 +56,7 @@ clipit.rubric.remove = function(){
                 $list.fadeOut('fast', function(){ $(this).hide(); });
                 $list.find('.rubric-remove').val('1');
                 buttons.prop('disabled', false).removeClass('disabled');
-            }, 1500);
+            }, 3000);
             $list.prepend(
                 $('<a style="margin: 0 15px;display: none;" class="undo-item bg-info text-muted show" href="javascript:;"><strong class="blue"><i class="fa fa-undo"></i> Deshacer</strong> - Eliminado</a>')
                 .click({'hiddenElements': elements, 'timer': timer, 'buttons': buttons}, clipit.rubric.undo
