@@ -65,5 +65,6 @@ if(ClipitQuiz::has_finished_quiz($quiz_id, $user_id) || $task->end <= time()){
 
 if(get_input('finish')){
     ClipitQuiz::set_quiz_as_finished($quiz_id, $user_id);
+    forward("clipit_activity/" . $task->activity . "/tasks/view/". $task->id);
 }
 forward("clipit_activity/" . $task->activity . "/tasks");
