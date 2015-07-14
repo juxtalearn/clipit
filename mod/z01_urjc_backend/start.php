@@ -20,7 +20,6 @@ elgg_register_event_handler('init', 'system', 'urjc_backend_init');
  */
 function urjc_backend_init() {
     $lib_path = elgg_get_plugins_path() . "z01_urjc_backend/libraries/";
-    loadFiles($lib_path."/MIME_types");
     loadFiles($lib_path."/php_excel/Classes/");
     date_default_timezone_set(get_config("timezone"));
     register_pam_handler('check_http_auth_token');
