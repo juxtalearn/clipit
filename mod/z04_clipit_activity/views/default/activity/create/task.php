@@ -264,7 +264,12 @@ if($task){
         ));
         ?>
         <div class="clearfix"></div>
-        <?php if(!$feedback_id):?>
+        <?php
+            if(
+                !$feedback_id &&
+                ($task->task_type != ClipitTask::TYPE_VIDEO_UPLOAD || $task->task_type != ClipitTask::TYPE_FILE_UPLOAD)
+            ):
+        ?>
             <div class="task-type-container bg-white" style="display: <?php echo $task ? 'block':'none';?>">
                 <?php echo elgg_view('tasks/container', array(
                     'input_array' => $input_array,
