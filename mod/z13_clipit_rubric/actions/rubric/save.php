@@ -37,6 +37,6 @@ if($rubric_id = $rubric['id']){ // edit rubric data
 } else { // create a new rubric
     $rubric_id = ClipitRubric::create(array('name' => $rubric['name']));
 }
-ClipitRubric::set_rubric_items($rubric_id, $rubric_item_array);
+ClipitRubric::add_rubric_items($rubric_id, $rubric_item_array);
 
 forward('rubrics/view/'.$rubric_id);

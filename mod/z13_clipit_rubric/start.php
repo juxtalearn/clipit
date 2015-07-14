@@ -90,7 +90,7 @@ function task_rubric_save($hook, $entity_type, $returnvalue, $params){
                         $rubric_item_array[] = ClipitRubricItem::create($data);
                     }
                 }
-                ClipitRubric::set_rubric_items($rubric['id'], $rubric_item_array);
+                ClipitRubric::add_rubric_items($rubric['id'], $rubric_item_array);
                 ClipitRubric::set_properties($rubric['id'], array('name' => $rubric['name']));
             } else {
                 // New rubric selected

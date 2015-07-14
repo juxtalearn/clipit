@@ -53,7 +53,8 @@ clipit.rubric.remove = function(){
             $list.find('*:visible').not('.undo-item').hide();
             buttons.prop('disabled', true).addClass('disabled');
             var timer = setTimeout(function(){
-                $list.fadeOut('fast', function(){ $(this).remove(); })
+                $list.fadeOut('fast', function(){ $(this).hide(); });
+                $list.find('.rubric-remove').val('1');
                 buttons.prop('disabled', false).removeClass('disabled');
             }, 1500);
             $list.prepend(
