@@ -39,6 +39,43 @@ class ClipitRating extends UBItem {
      */
     public $rubric_rating_array = array();
 
+    /**
+     * Loads object parameters stored in Elgg
+     *
+     * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
+     */
+    protected function copy_from_elgg($elgg_entity)
+    {
+        parent::copy_from_elgg($elgg_entity);
+        $this->target = (int)$elgg_entity->get("target");
+        $this->overall = (bool)$elgg_entity->get("overall");
+        $this->tag_rating_array = (array)static::get_tag_ratings($this->id);
+        $this->rubric_rating_array = (array)static::get_rubric_ratings($this->id);
+    }
+
+    /**
+     * Copy $this object parameters into an Elgg entity.
+     *
+     * @param ElggEntity $elgg_entity Elgg object instance to save $this to
+     */
+    protected function copy_to_elgg($elgg_entity){
+        parent::copy_to_elgg($elgg_entity);
+        $elgg_entity->set("target", (int)$this->target);
+        $elgg_entity->set("overall", (bool)$this->overall);
+    }
+
+    /**
+     * Saves this instance to the system.
+     * @param  bool $double_save if $double_save is true, this object is saved twice to ensure that all properties are updated properly. E.g. the time created property can only beset on ElggObjects during an update. Defaults to false!
+     * @return bool|int Returns the Id of the saved instance, or false if error
+     */
+    protected function save($double_save = false){
+        parent::save($double_save);
+        static::set_tag_ratings($this->id, (array)$this->tag_rating_array);
+        static::set_rubric_ratings($this->id, (array)$this->rubric_rating_array);
+        return $this->id;
+    }
+
     static function get_target($id)
     {
         $prop_value_array = static::get_properties($id, array("target"));
@@ -128,83 +165,36 @@ class ClipitRating extends UBItem {
         return $rating_array;
     }
 
-    static function add_tag_ratings($id, $tag_rating_array)
-    {
+    static function add_tag_ratings($id, $tag_rating_array){
         return UBCollection::add_items($id, $tag_rating_array, static::REL_RATING_TAGRATING, true);
     }
 
-    static function remove_tag_ratings($id, $tag_rating_array)
-    {
+    static function remove_tag_ratings($id, $tag_rating_array){
         return UBCollection::remove_items($id, $tag_rating_array, static::REL_RATING_TAGRATING);
     }
 
-    static function add_rubric_ratings($id, $rubric_rating_array)
-    {
+    static function add_rubric_ratings($id, $rubric_rating_array){
         return UBCollection::add_items($id, $rubric_rating_array, static::REL_RATING_RUBRICRATING, true);
     }
 
-    static function remove_rubric_ratings($id, $rubric_rating_array)
-    {
-
+    static function remove_rubric_ratings($id, $rubric_rating_array){
         return UBCollection::remove_items($id, $rubric_rating_array, static::REL_RATING_RUBRICRATING);
     }
 
-    /**
-     * Loads object parameters stored in Elgg
-     *
-     * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
-     */
-    protected function copy_from_elgg($elgg_entity)
-    {
-        parent::copy_from_elgg($elgg_entity);
-        $this->target = (int)$elgg_entity->get("target");
-        $this->overall = (bool)$elgg_entity->get("overall");
-        $this->tag_rating_array = (array)static::get_tag_ratings($this->id);
-        $this->rubric_rating_array = (array)static::get_rubric_ratings($this->id);
+    static function set_tag_ratings($id, $tag_rating_array){
+        return UBCollection::set_items($id, $tag_rating_array, static::REL_RATING_TAGRATING);
+    }
+
+    static function set_rubric_ratings($id, $rubric_rating_array){
+        return UBCollection::set_items($id, $rubric_rating_array, static::REL_RATING_RUBRICRATING);
     }
 
     static function get_tag_ratings($id) {
         return UBCollection::get_items($id, static::REL_RATING_TAGRATING);
     }
 
-    static function get_rubric_ratings($id)
-    {
+    static function get_rubric_ratings($id){
         return UBCollection::get_items($id, static::REL_RATING_RUBRICRATING);
-    }
-
-    /**
-     * Copy $this object parameters into an Elgg entity.
-     *
-     * @param ElggEntity $elgg_entity Elgg object instance to save $this to
-     */
-    protected function copy_to_elgg($elgg_entity)
-    {
-        parent::copy_to_elgg($elgg_entity);
-        $elgg_entity->set("target", (int)$this->target);
-        $elgg_entity->set("overall", (bool)$this->overall);
-    }
-
-    /**
-     * Saves this instance to the system.
-     * @param  bool $double_save if $double_save is true, this object is saved twice to ensure that all properties are updated properly. E.g. the time created property can only beset on ElggObjects during an update. Defaults to false!
-     * @return bool|int Returns the Id of the saved instance, or false if error
-     */
-    protected function save($double_save = false)
-    {
-        parent::save($double_save);
-        static::set_tag_ratings($this->id, (array)$this->tag_rating_array);
-        static::set_rubric_ratings($this->id, (array)$this->rubric_rating_array);
-        return $this->id;
-    }
-
-    static function set_tag_ratings($id, $tag_rating_array)
-    {
-        return UBCollection::set_items($id, $tag_rating_array, static::REL_RATING_TAGRATING);
-    }
-
-    static function set_rubric_ratings($id, $rubric_rating_array)
-    {
-        return UBCollection::set_items($id, $rubric_rating_array, static::REL_RATING_RUBRICRATING);
     }
 }
 
