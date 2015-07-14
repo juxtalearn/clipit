@@ -36,4 +36,10 @@ function expose_rubric_rating_functions()
         "target_id" => array("type" => "int", "required" => true)
     ), "Get the average rubric rating from a user for a target", 'GET', false, true
     );
+    expose_function(
+        $api_suffix . "get_by_item", $class_suffix . "get_by_item",
+        array(
+            "item_array" => array("type" => "array", "required" => true)
+        ), "Get Rubric Ratings by Rubric Items", "GET", false, true
+    );
 }
