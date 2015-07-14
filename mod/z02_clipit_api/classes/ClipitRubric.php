@@ -89,6 +89,16 @@ class ClipitRubric extends UBItem{
     }
 
     static function remove_rubric_items($id, $rubric_item_array){
+        // Un-link from ratings the rubric ratings which point to the removed rubric items
+        $rubric_rating_array = ClipitRubricRating::get_by_item($rubric_item_array);
+        foreach($rubric_rating_array as $rubric_rating_id){
+            $rating_array = UBCollection::get_items($rubric_rating_id, ClipitRating::REL_RATING_RUBRICRATING, true);
+            if(empty($rating_array)){
+                continue;
+            }
+            $rating_id = array_pop($rating_array);
+            ClipitRating::remove_rubric_ratings($rating_id, array($rubric_rating_id));
+        }
         return UBCollection::remove_items($id, $rubric_item_array, static::REL_RUBRIC_RUBRICITEM);
     }
 

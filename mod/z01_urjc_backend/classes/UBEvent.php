@@ -80,7 +80,7 @@ class UBEvent {
     }
 
     /**
-     * Get events related to certain objects. The events include relationship events which concern each object.
+     * Get relationship events which concern the specified objects, optionally filtered by relationship names.
      *
      * @param array $object_array List of object IDs from which to obtain events
      * @param int $offset Skip the first $offset events
@@ -94,11 +94,7 @@ class UBEvent {
             return array();
         }
         global $CONFIG;
-        $query = "SELECT * FROM {$CONFIG->dbprefix}system_log where ";
-        $query .= "object_id IN (" . implode(",", $object_array) . ")";
-        $query .= " AND object_type != \"relationship\" AND object_type != \"metadata\"";
-        $query .= " UNION";
-        $query .= " SELECT * FROM {$CONFIG->dbprefix}system_log";
+        $query = "SELECT * FROM {$CONFIG->dbprefix}system_log";
         $relationship_array = array();
         foreach ($object_array as $object_id) {
             $relationship_array = array_merge($relationship_array,
