@@ -26,7 +26,9 @@ echo "<p><strong>*** WARNING *** </strong> These options can break ClipIt, be ca
 
 // Table structure
 echo "<table>";
-// Main options form
+
+
+// General Options
 echo "<form action='".elgg_get_site_url()."action/clipit_options/apply' method='post'>";
 echo elgg_view('input/securitytoken');
 echo "<tr height='40'>";
@@ -36,21 +38,17 @@ echo "</td>";
 echo "</tr>";
 
 echo "<tr height='40'>";
-echo "<td width='300'>";
-echo "<strong>ClipIt Tag Branch:</strong>";
+echo "<td>";
+echo "<strong>Allow students to register in ClipIt?</strong> ";
 echo "</td>";
 echo "<td>";
-echo "<input name='clipit_tag_branch' value='$clipit_tag_branch' type='text' size='40'/>";
-echo "</td>";
-echo "</tr>";
-
-echo "<tr height='40'>";
-echo "<td width='300'>";
-echo "<strong>Site time zone:</strong>";
-echo "<br>(see <u><a href='http://www.php.net/manual/en/timezones.php' target='_blank'>PHP Time Zones</a></u>)";
-echo "</td>";
-echo "<td>";
-echo "<input name='timezone' value='$timezone' type='text' size='40'/>";
+if($allow_registration){
+    echo "<input name='allow_registration' value='0' type='radio'> NO ";
+    echo "<input name='allow_registration' value='1' type='radio' checked> YES ";
+} else{
+    echo "<input name='allow_registration' value='0' type='radio' checked> NO ";
+    echo "<input name='allow_registration' value='1' type='radio'> YES ";
+}
 echo "</td>";
 echo "</tr>";
 
@@ -80,11 +78,30 @@ echo "</td>";
 echo "</tr>";
 
 echo "<tr height='40'>";
+echo "<td width='300'>";
+echo "<strong>ClipIt Tag Branch:</strong>";
+echo "</td>";
+echo "<td>";
+echo "<input name='clipit_tag_branch' value='$clipit_tag_branch' type='text' size='40'/>";
+echo "</td>";
+echo "</tr>";
+
+echo "<tr height='60'>";
+echo "<td width='300'>";
+echo "<strong>Site time zone:</strong>";
+echo "<br>(see <u><a href='http://www.php.net/manual/en/timezones.php' target='_blank'>PHP Time Zones</a></u>)";
+echo "</td>";
+echo "<td>";
+echo "<input name='timezone' value='$timezone' type='text' size='40'/>";
+echo "</td>";
+echo "</tr>";
+
+// Global Site
+echo "<tr height='40'>";
 echo "<td>";
 echo "<h3>Global site setup</h3>";
 echo "</td>";
 echo "</tr>";
-
 
 echo "<tr height='40'>";
 echo "<td>";
@@ -123,62 +140,10 @@ echo "<input name='clipit_global_published' value='0' type='radio'> YES ";
 echo "</td>";
 echo "</tr>";
 
+// Maintenance Options
 echo "<tr height='40'>";
 echo "<td>";
-echo "<h3>Authoring Tool Options</h3><br>";
-echo "</td>";
-echo "</tr>";
-
-echo "<tr height='40'>";
-echo "<td>";
-echo "<strong>Reload problem example types palette?</strong> ";
-echo "</td>";
-echo "<td>";
-echo "<input name='example_types' value='1' type='radio' checked> NO ";
-echo "<input name='example_types' value='0' type='radio'> YES ";
-echo "</td>";
-echo "</tr>";
-
-echo "<tr height='40'>";
-echo "<td>";
-echo "<h3>Activity Options</h3><br>";
-echo "</td>";
-echo "</tr>";
-
-echo "<tr height='40'>";
-echo "<td>";
-echo "<strong>Allow students to register in ClipIt?</strong> ";
-echo "</td>";
-echo "<td>";
-if($allow_registration){
-    echo "<input name='allow_registration' value='0' type='radio'> NO ";
-    echo "<input name='allow_registration' value='1' type='radio' checked> YES ";
-} else{
-    echo "<input name='allow_registration' value='0' type='radio' checked> NO ";
-    echo "<input name='allow_registration' value='1' type='radio'> YES ";
-}
-echo "</td>";
-echo "</tr>";
-
-echo "<tr height='40'>";
-echo "<td>";
-echo "<strong>Wait until end of quiz tasks to show results?</strong> ";
-echo "<br>(else show results to each student as they finish)";
-echo "</td>";
-echo "<td>";
-if($quiz_results_after_task_end){
-    echo "<input name='quiz_results_after_task_end' value='0' type='radio'> NO ";
-    echo "<input name='quiz_results_after_task_end' value='1' type='radio' checked> YES ";
-} else{
-    echo "<input name='quiz_results_after_task_end' value='0' type='radio' checked> NO ";
-    echo "<input name='quiz_results_after_task_end' value='1' type='radio'> YES ";
-}
-echo "</td>";
-echo "</tr>";
-
-echo "<tr height='40'>";
-echo "<td>";
-echo "<h3>Other Options</h3><br>";
+echo "<h3>Maintenance Options</h3><br>";
 echo "</td>";
 echo "</tr>";
 
@@ -190,6 +155,16 @@ echo "</td>";
 echo "<td>";
 echo "<input name='clean_accounts' type='radio' value='no' checked> NO ";
 echo "<input name='clean_accounts' type='radio' value='yes'> YES ";
+echo "</td>";
+echo "</tr>";
+
+echo "<tr height='40'>";
+echo "<td>";
+echo "<strong>Reload problem example types palette?</strong> ";
+echo "</td>";
+echo "<td>";
+echo "<input name='example_types' value='1' type='radio' checked> NO ";
+echo "<input name='example_types' value='0' type='radio'> YES ";
 echo "</td>";
 echo "</tr>";
 
