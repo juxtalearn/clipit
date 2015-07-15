@@ -16,12 +16,13 @@ $new_file_id = array();
 
 for($i = 0;$i < count($file['name']);$i++){
     if($file['name'][$i]){
-        $new_file_id[] = ClipitFile::create(array(
+        $file_id = ClipitFile::create(array(
             'name' => $file['name'][$i],
             'temp_path'  => $file['tmp_name'][$i]
         ));
+        $new_file_id[] = $file_id;
         // Upload to GDrive
-        ClipitFile::upload_to_gdrive($new_file_id);
+        ClipitFile::upload_to_gdrive($file_id);
     }
 }
 ClipitTrickyTopic::add_files($entity_id, $new_file_id);
