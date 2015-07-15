@@ -55,7 +55,7 @@ class ClipitActivity extends UBItem {
     public $student_array = array();
     public $group_array = array();
     public $task_array = array();
-    // Activity Teacher Resources (cloned from TT Teacher Resources)
+    // Activity Teacher Resources
     public $video_array = array();
     public $file_array = array();
 
