@@ -473,7 +473,7 @@ function get_task_status(ClipitTask $task, $group_id = 0, $user_id = null){
                     'color' => 'yellow',
                     'status' => false
                 );
-                if($task->results_after_finished && ClipitQuiz::has_finished_quiz($quiz_id, $user_id)){
+                if(!$task->results_after_finished && ClipitQuiz::has_finished_quiz($quiz_id, $user_id)){
                     $status = array(
                         'icon' => '<i class="fa fa-check green"></i>',
                         'text' => elgg_echo('task:completed'),

@@ -33,7 +33,7 @@ if(hasTeacherAccess($user->role)){
     if (ClipitQuiz::has_finished_quiz($quiz_id, $user_id) || $finished_task) {
         $finished = true;
     }
-    if ($task->results_after_finished && $finished) {
+    if (!$task->results_after_finished && $finished) {
         $finished_task = true;
     }
     $quiz = array_pop(ClipitQuiz::get_by_id(array($quiz_id)));

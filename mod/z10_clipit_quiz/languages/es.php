@@ -36,9 +36,9 @@ $spanish = array(
     'quiz:target' => 'Este Test será utilizado en',
     'quiz:target:clipit' => 'Actividades de ClipIt',
     'quiz:target:large_display' => 'Large Displays',
-    'quiz:options:random' => 'Preguntas aleatorias',
+    'quiz:options:random' => 'Preguntas en orden aleatorio',
     'quiz:options:results_after_finished' => 'Esperar hasta el final de la tarea para mostrar los resultados',
-    'quiz:options:results_after_finished:info' => 'Mostrar los resultados a cada estudiante cuando vayan terminando',
+    'quiz:options:results_after_finished:info' => 'En caso contrario mostrará los resultados a cada estudiante cuando vayan terminando',
 );
 
 add_translation('es', $spanish);
