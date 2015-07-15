@@ -49,6 +49,7 @@ class ClipitTask extends UBItem {
     public $activity = 0;
     public $quiz = 0;
     public $rubric = 0;
+    public $results_after_finished = false;
     // Linked materials
     public $video_array = array();
     public $file_array = array();
@@ -80,6 +81,7 @@ class ClipitTask extends UBItem {
         $this->video_array = static::get_videos($this->id);
         $this->file_array = static::get_files($this->id);
         $this->rubric = (int)static::get_rubric($this->id);
+        $this->results_after_finished = (bool)$elgg_entity->get("results_after_finished");
     }
 
     /**
@@ -94,6 +96,7 @@ class ClipitTask extends UBItem {
         $elgg_entity->set("start", (int)$this->start);
         $elgg_entity->set("end", (int)$this->end);
         $elgg_entity->set("task_count", (int)$this->task_count);
+        $elgg_entity->set("results_after_finished", (bool)$this->results_after_finished);
     }
 
     /**

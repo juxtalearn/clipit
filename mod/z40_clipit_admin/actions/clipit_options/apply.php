@@ -22,7 +22,6 @@ set_config("clipit_global_login", (string)get_input("clipit_global_login"));
 set_config("clipit_global_password", (string)get_input("clipit_global_password"));
 set_config("clipit_global_published", (bool)get_input("clipit_global_published"));
 set_config("example_types", (bool)get_input("example_types"));
-set_config("quiz_results_after_task_end", (bool)get_input("quiz_results_after_task_end"));
 if((bool)get_input("clean_accounts")){
     // clean users with incorrect role
     $users = ClipitUser::get_all();
