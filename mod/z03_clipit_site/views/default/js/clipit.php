@@ -694,7 +694,8 @@ $(function(){
     /**
      * Popover set default settings
      */
-    $('[data-toggle="popover"][data-trigger="hover"]').popover({trigger: 'click'});
+    $('[data-toggle="popover"][data-trigger="hover"]').popover({trigger: 'hover'});
+    $('[data-toggle="popover"][data-trigger="click"]').popover({trigger: 'click'});
     $('body').on('click', function (e) {
         //did not click a popover toggle or popover
         if ($(e.target).data('toggle') !== 'popover'
