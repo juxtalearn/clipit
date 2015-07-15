@@ -11,6 +11,8 @@
  * @package         ClipIt
  */
 $spanish = array(
+    'optional' => 'Opcional',
+    'options:advanced' => 'Opciones avanzadas',
     'refresh' => 'Actualizar',
     'ok' => 'Ok',
     'done' => 'Hecho',
@@ -369,6 +371,7 @@ $spanish = array(
     'activity:admin:task_setup' => 'Tareas',
     'activity:admin:groups' => 'Estudiantes',
     'activity:admin:setup' => 'Configuración',
+    'activity:admin:options' => 'Opciones',
     'activity:admin:videos' => 'Videos',
     'groups:select:move' => 'mover al grupo...',
     'clipit:or' => 'o',

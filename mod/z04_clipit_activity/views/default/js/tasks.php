@@ -29,8 +29,7 @@ clipit.task.init = function() {
     $(document).on("click", ".quiz-select", clipit.task.quizSelect);
     $(document).on("click", ".quiz-unselect", clipit.task.quizUnselect);
 
-
-    $(document).on("click", ".btns-task-select .thumbnail", clipit.task.onSelect);
+    $(document).on("click", ".btns-task-select .thumbnail:not(.active)", clipit.task.onSelect);
 };
 elgg.register_hook_handler('init', 'system', clipit.task.init);
 clipit.task.admin.init = function() {
@@ -305,7 +304,16 @@ clipit.task.onSelect = function(e){
     $(this).closest('.btns-task-select').find('.thumbnail.active').removeClass('active');
     $(this).addClass('active');
     $container.fadeIn('fast').html('<i class="fa fa-spinner fa-spin fa-2x blue"></i>');
-
+    // Advanced options
+    var $options_container = $task.find('.task-advanced-options'),
+        $options = $options_container.filter('[data-options="'+ task_type +'"]');
+    $options_container.find('.task-advanced-options-collapse').addClass('collapse').removeClass('in');
+    $options_container.hide().find('.select-options').hide();
+    if($options.length > 0){
+        $options_container.fadeIn('slow');
+        $options.show();
+    }
+    // Trigger task type event
     elgg.trigger_hook('clipit:task:type', 'system', params, "");
 };
 clipit.task.refresh = function($task){

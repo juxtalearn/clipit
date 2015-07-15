@@ -10,7 +10,7 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-if($user->role == 'student' || $access != 'ACCESS_TEACHER'){
+if($user->role == 'student'){
     return false;
 }
 $title = elgg_echo('activity:admin');
@@ -28,6 +28,9 @@ switch($selected_tab){
         break;
     case 'groups':
         $content = elgg_view('activity/admin/groups/view', array('entity' => $activity));
+        break;
+    case 'options':
+        $content = elgg_view_form('activity/admin/options', array('data-validate' => 'true'));
         break;
 }
 

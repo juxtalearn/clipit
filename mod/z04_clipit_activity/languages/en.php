@@ -11,6 +11,8 @@
  * @package         ClipIt
  */
 $english = array(
+    'optional' => 'Optional',
+    'options:advanced' => 'Advanced options',
     'refresh' => 'Refresh',
     'ok' => 'Ok',
     'change' => 'Change',
@@ -367,7 +369,8 @@ $english = array(
     'activity:admin:info' => 'Information',
     'activity:admin:task_setup' => 'Tasks',
     'activity:admin:groups' => 'Students',
-    'activity:admin:setup' => 'Tetup',
+    'activity:admin:setup' => 'Setup',
+    'activity:admin:options' => 'Options',
     'activity:admin:videos' => 'Student videos',
     'groups:select:move' => 'move to group...',
     'clipit:or' => 'or',

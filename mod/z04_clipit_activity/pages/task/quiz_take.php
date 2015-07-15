@@ -10,7 +10,7 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$quiz = $task->quiz;
+$quiz_id = $task->quiz;
 
 // Teacher view
 if(hasTeacherAccess($user->role)){
@@ -19,7 +19,7 @@ if(hasTeacherAccess($user->role)){
         $body = elgg_view('tasks/admin/quiz_take', array(
             'activity' => $activity,
             'entities'    => $users,
-            'quiz' => array_pop(ClipitQuiz::get_by_id(array($quiz))),
+            'quiz' => array_pop(ClipitQuiz::get_by_id(array($quiz_id))),
             'task' => $task,
         ));
     } else {
@@ -30,18 +30,25 @@ if(hasTeacherAccess($user->role)){
 
     $finished_task = $task->end <= time() ? true : false;
     $finished = false;
-    if (ClipitQuiz::has_finished_quiz($quiz, $user_id) || $finished_task) {
+    if (ClipitQuiz::has_finished_quiz($quiz_id, $user_id) || $finished_task) {
         $finished = true;
     }
-    if (!get_config('quiz_results_after_task_end') && $finished) {
+    if ($task->results_after_finished && $finished) {
         $finished_task = true;
+    }
+    $quiz = array_pop(ClipitQuiz::get_by_id(array($quiz_id)));
+    $questions = ClipitQuizQuestion::get_by_id($quiz->quiz_question_array, 0, 0, 'order');
+    if($task->quiz_random_order){
+        // Random questions
+        shuffle($questions);
     }
     $body = elgg_view_form('quiz/take',
         array('body' =>
             elgg_view('quizzes/list', array(
                 'quiz' => $quiz,
+                'questions' => $questions,
                 'href' => $href,
-                'task_id' => $task->id,
+                'task' => $task,
                 'user_id' => elgg_get_logged_in_user_guid(),
                 'finished_task' => $finished_task,
                 'finished' => $finished

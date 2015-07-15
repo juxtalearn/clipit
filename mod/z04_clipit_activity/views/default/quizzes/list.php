@@ -11,15 +11,13 @@
  * @package         ClipIt
  */
 elgg_load_js('fullcalendar:moment');
-$quiz_id = elgg_extract("quiz", $vars);
-$task_id = elgg_extract("task_id", $vars);
+$quiz = elgg_extract("quiz", $vars);
+$questions = elgg_extract("questions", $vars);
+$task = elgg_extract("task", $vars);
 $user_id = elgg_extract("user_id" ,$vars);
 $finished = elgg_extract("finished" ,$vars);
 $finished_task = elgg_extract("finished_task" ,$vars);
 
-$task = array_pop(ClipitTask::get_by_id(array($task_id)));
-$quiz = array_pop(ClipitQuiz::get_by_id(array($quiz_id)));
-$questions = ClipitQuizQuestion::get_by_id($quiz->quiz_question_array, 0, 0, 'order');
 // if teacher set random questions
 // shuffle($questions);
 $quiz_start = ClipitQuiz::get_quiz_start($quiz->id, $user_id);
@@ -28,7 +26,7 @@ if(!$quiz_start && !$finished_task){
     $quiz_start = ClipitQuiz::get_quiz_start($quiz->id, elgg_get_logged_in_user_guid());
 }
 $date = date("H:s, d/m/Y", $quiz_start + $quiz->max_time);
-$count_answer = ClipitQuiz::questions_answered_by_user($quiz_id, $user_id);
+$count_answer = ClipitQuiz::questions_answered_by_user($quiz->id, $user_id);
 ?>
 <style>
     .quiz-answer .fa-times, .quiz-answer .fa-check{
@@ -156,7 +154,7 @@ $(function(){
     <?php if($finished_task && $finished):?>
         <span>
         <?php
-            $correct = count(array_filter(ClipitQuiz::get_user_results_by_question($quiz_id, $user_id)));
+            $correct = count(array_filter(ClipitQuiz::get_user_results_by_question($quiz->id, $user_id)));
             $total_correct = ($correct/count($questions))*100;
             echo round($total_correct)."%";
         ?>
@@ -308,7 +306,7 @@ endforeach;
     echo elgg_view('input/hidden', array(
         'name' => 'task-id',
         'id' => 'task-id',
-        'value' => $task_id
+        'value' => $task->id
     ));
 ?>
     <?php if($quiz->view_mode == ClipitQuiz::VIEW_MODE_PAGED && count($questions)>1):?>
@@ -357,16 +355,18 @@ endforeach;
     <?php
     if($finished_task && $finished):
         // Show radar chart
-        $data = ClipitQuiz::get_user_results_by_tag($quiz_id, $user_id);
+        $data = ClipitQuiz::get_user_results_by_tag($quiz->id, $user_id);
         $labels = array();
         foreach($data as $tag_id => $value){
             $tag = ClipitSite::lookup($tag_id);
             $labels[] = $tag['name'];
         }
     ?>
+        <?php if(count($labels) > 0):?>
         <div>
             <h4><?php echo elgg_echo('quiz:results:stumbling_block');?></h4>
             <?php echo elgg_view('quizzes/chart/radar', array('data' => $data, 'labels' => $labels, 'id' => $user_id));?>
         </div>
+        <?php endif;?>
     <?php endif;?>
 </div>

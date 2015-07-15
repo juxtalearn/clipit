@@ -32,6 +32,7 @@ function clipit_quiz_init() {
     // Task extends type Quiz
     elgg_extend_view('tasks/menu', 'tasks/menu/quiz_take', 40);
     elgg_extend_view('tasks/container', 'tasks/container/quiz_take');
+    elgg_extend_view('tasks/options', 'tasks/options/quiz');
 
     // hook: action save. Quiz task type
     elgg_register_plugin_hook_handler("task:save", "task", "task_quiz_save");
@@ -47,6 +48,8 @@ function task_quiz_save($hook, $entity_type, $returnvalue, $params){
         $task_properties = array_merge(get_task_properties_action($task), array(
             'quiz' => $quiz_id,
             'task_type' => $task['type'],
+            'results_after_finished' => $task['results_after_finished'],
+            'quiz_random_order' => $task['quiz_random_order'],
         ));
         $task_id = ClipitTask::create($task_properties);
         // Add to activity
@@ -66,7 +69,11 @@ function task_quiz_save($hook, $entity_type, $returnvalue, $params){
             array_pop($_FILES['task']['name'])
         );
         // Save task
-        ClipitTask::set_properties($task_id, get_task_properties_action($task));
+        $task_properties = array_merge(get_task_properties_action($task), array(
+            'results_after_finished' => $task['results_after_finished'],
+            'quiz_random_order' => $task['quiz_random_order'],
+        ));
+        ClipitTask::set_properties($task_id, $task_properties);
     }
 }
 

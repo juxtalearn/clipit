@@ -214,19 +214,21 @@ if($task){
                 ?>
             </div>
         </div>
-
         <?php if(!$disabled):?>
             <?php echo elgg_view("input/hidden", array(
                 'name' => 'input_prefix',
                 'value' => "task{$input_array}",
             ));
             ?>
-            <div class="col-md-4 feedback-module" style="<?php echo $vars['feedback_check'] != false ? '' : 'display: none;'; ?>padding: 10px;background: #fafafa;">
-                <label for="activity-title"><?php echo elgg_echo("task:feedback");?></label>
-                <div class="checkbox feedback-check">
-                    <label>
-                        <input type="checkbox" value="1" name="<?php echo "task{$input_array}[feedback]";?>"> <?php echo elgg_echo("task:feedback:check");?>
-                    </label>
+            <div class="col-md-4">
+                <?php echo elgg_view('tasks/options', array('id' => $id, 'entity' => $task, 'input_prefix' => $input_array));?>
+                <div class="feedback-module" style="<?php echo $vars['feedback_check'] != false ? '' : 'display: none;'; ?>padding: 10px;background: #fafafa;">
+                    <label for="activity-title"><?php echo elgg_echo("task:feedback");?></label>
+                    <div class="checkbox feedback-check">
+                        <label>
+                            <input type="checkbox" value="1" name="<?php echo "task{$input_array}[feedback]";?>"> <?php echo elgg_echo("task:feedback:check");?>
+                        </label>
+                    </div>
                 </div>
             </div>
         <?php endif;?>

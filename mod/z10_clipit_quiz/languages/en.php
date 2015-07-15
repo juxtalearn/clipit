@@ -37,6 +37,9 @@ $english = array(
     'quiz:target' => 'This Quiz is to be used in',
     'quiz:target:clipit' => 'ClipIt Activities',
     'quiz:target:large_display' => 'Large Displays',
+    'quiz:options:random' => 'Random questions',
+    'quiz:options:results_after_finished' => 'Wait until end of quiz tasks to show results?',
+    'quiz:options:results_after_finished:info' => 'else show results to each student as they finish',
 );
 
 add_translation('en', $english);

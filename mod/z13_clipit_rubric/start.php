@@ -74,11 +74,12 @@ function task_rubric_save($hook, $entity_type, $returnvalue, $params){
                 $rubric_items = $rubric['item'];
                 $rubric_item_array = array();
                 foreach ($rubric_items as $rubric_item) {
+                    // Default data properties
                     $data = array(
                         'name' => $rubric_item['name'],
                         'level_array' => $rubric_item['level']
                     );
-
+                    // check if rubric item exists
                     if ($rubric_item['id']) {
                         if ($rubric_item['remove'] == 1) {
                             ClipitRubric::remove_rubric_items($rubric['id'], array($rubric_item['id']));

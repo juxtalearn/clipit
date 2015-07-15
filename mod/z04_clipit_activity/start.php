@@ -209,6 +209,7 @@ function clipit_activity_init() {
     elgg_extend_view('tasks/menu', 'tasks/menu/file_upload', 2);
     elgg_extend_view('tasks/menu', 'tasks/menu/resource_download', 50);
     elgg_extend_view('tasks/menu', 'tasks/menu/other', 100);
+
     elgg_extend_view('tasks/container', 'tasks/container/resource_download');
 }
 
