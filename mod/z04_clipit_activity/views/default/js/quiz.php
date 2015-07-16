@@ -29,18 +29,19 @@ clipit.quiz.saveQuestion = function(e){
     if($element.attr("type") == 'checkbox'){
         var $element = $(".quiz input[type=checkbox]");
     }
-    var form = $element.closest("form");
-    var form_data = form.find($element.add("input:hidden")).serialize();
-    var $container = $element.closest(".question");
+    var form = $element.closest("form"),
+        form_data = form.find($element.add("input:hidden")).serialize(),
+        $container = $element.closest(".question")
+        answers = $container.find('.question-answer');
     $container.find(".loading-question").show();
     $container.find(".num-question").hide();
     form.find('.finish-quiz').prop('disabled', true);
-    $element.prop('disabled', true);
+    answers.find(':input, textarea').prop('disabled', true);
     elgg.action('quiz/take',{
         data: form_data,
         success: function(json) {
             form.find('.finish-quiz').prop('disabled', false);
-            $element.prop('disabled', false);
+            answers.find(':input, textarea').prop('disabled', false);
             $container.find(".loading-question").hide();
             $container.find(".num-question").show();
             $("#count-result").text(json.output);
