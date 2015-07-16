@@ -11,6 +11,9 @@
  * @package         ClipIt
  */
 $spanish = array(
+    'download:excel' => 'Descargar Excel',
+    'print:charts' => 'Imprimir graficas',
+    'print:results' => 'Imprimir resultados',
     'clone' => 'Copia',
     'btn:remove' => 'Quitar',
     'quizzes' => 'Tests',
@@ -39,6 +42,9 @@ $spanish = array(
     'quiz:options:random' => 'Preguntas en orden aleatorio',
     'quiz:options:results_after_finished' => 'Esperar hasta el final de la tarea para mostrar los resultados',
     'quiz:options:results_after_finished:info' => 'En caso contrario mostrará los resultados a cada estudiante cuando vayan terminando',
+    'quiz:print:alert' => 'Espere mientras se carga los resultados',
+    'quiz:result:send' => 'Las respuestas del test quedarán guardadas. Mientras que estés dentro del tiempo para hacer el examen puedes modificar tus respuestas.',
+    'quiz:result:finish' => 'Al pulsar Terminar ya no podrías cambiar tus respuestas, y podrás ver tus resultados.',
 );
 
 add_translation('es', $spanish);

@@ -11,6 +11,9 @@
  * @package         ClipIt
  */
 $english = array(
+    'download:excel' => 'Descargar Excel',
+    'print:charts' => 'Print charts',
+    'print:results' => 'Print results',
     'clone' => 'Clone',
     'btn:remove' => 'Remove',
     'quizzes' => 'Quizzes',
@@ -40,6 +43,9 @@ $english = array(
     'quiz:options:random' => 'Random questions',
     'quiz:options:results_after_finished' => 'Wait until end of quiz tasks to show results?',
     'quiz:options:results_after_finished:info' => 'else show results to each student as they finish',
+    'quiz:print:alert' => 'Loading results, please wait...',
+    'quiz:result:send' => 'Your answers have been saved. While there is time left to do the quiz, you can review and change your answers if you want to.',
+    'quiz:result:finish' => 'If you click on Finish, you will no longer be able to change your answers, and you will see you\'re results.',
 );
 
 add_translation('en', $english);
