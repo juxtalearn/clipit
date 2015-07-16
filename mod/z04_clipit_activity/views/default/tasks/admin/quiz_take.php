@@ -13,7 +13,6 @@
 $activity = elgg_extract('activity', $vars);
 $task = elgg_extract('task', $vars);
 $quiz = elgg_extract('quiz', $vars);
-$entities_ids = array_keys($entities);
 $users = elgg_extract('entities', $vars);
 $users = ClipitUser::get_by_id($users);
 $groups = ClipitActivity::get_groups($activity->id);
@@ -21,14 +20,6 @@ elgg_load_js('jquery:chartjs');
 ?>
 <script>
     $(function(){
-        $(".show-chart").click(
-            {quiz: <?php echo $quiz->id;?>},
-            clipit.task.admin.quiz.showChart
-        );
-        $(".show-data").click(
-            {quiz: <?php echo $quiz->id;?>},
-            clipit.task.admin.quiz.showData
-        );
         $('a[data-toggle="tab"]').on('shown.bs.tab',
             {quiz: <?php echo $quiz->id;?>},
             clipit.task.admin.quiz.onShowTab
@@ -37,21 +28,42 @@ elgg_load_js('jquery:chartjs');
         $('a[data-toggle="tab"]:first').tab('show');
     });
 </script>
+<style>
+@media print {
+    .list-item[data-entity]{
+        page-break-before: always;
+    }
+}
+</style>
 <div>
     <small><?php echo elgg_echo('quiz:name');?></small>
     <h4 style="margin-top: 0;"><?php echo $quiz->name;?></h4>
 </div>
 <hr>
-<div class="text-right">
-    <?php echo elgg_view('output/url', array(
-        'class' => 'btn btn-xs btn-primary btn-border-blue',
-        'href'  => 'file/download/export?entity_id='.$quiz->id,
-        'target' => '_blank',
-        'text'  => '<i class="fa fa-file-excel-o"></i> '.elgg_echo('export'),
-    ));
-    ?>
-</div>
-<div role="tabpanel">
+<div role="tabpanel" id="quiz-admin" data-quiz="<?php echo $quiz->id;?>">
+    <div class="text-right">
+        <?php echo elgg_view('output/url', array(
+            'class' => 'btn btn-xs btn-primary btn-border-blue margin-right-5',
+            'href'  => 'file/download/export?entity_id='.$quiz->id,
+            'target' => '_blank',
+            'text'  => '<i class="fa fa-file-excel-o"></i> '.elgg_echo('download:excel'),
+        ));
+        ?>
+        <?php echo elgg_view('output/url', array(
+            'class' => 'print-data btn btn-xs btn-primary btn-border-blue margin-right-5',
+            'data-elements' => '.chart',
+            'id' => 'print-charts',
+            'text'  => '<i class="fa fa-bar-chart-o"></i> '.elgg_echo('print:charts'),
+        ));
+        ?>
+        <?php echo elgg_view('output/url', array(
+            'class' => 'print-data btn btn-xs btn-primary btn-border-blue',
+            'data-elements' => '.questions',
+            'id' => 'print-results',
+            'text'  => '<i class="fa fa-list"></i> '.elgg_echo('print:results'),
+        ));
+        ?>
+    </div>
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
         <li role="presentation">
@@ -66,7 +78,6 @@ elgg_load_js('jquery:chartjs');
             <a href="#activity" aria-controls="activity" role="tab" data-toggle="tab"><?php echo elgg_echo('activity');?></a>
         </li>
     </ul>
-
     <!-- Tab panes -->
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane margin-top-10 active" id="students" style="padding: 10px;">
