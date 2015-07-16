@@ -518,7 +518,6 @@ class ClipitQuiz extends UBItem {
         $sheet_0->getStyle($row_0)->getFont()->setBold(true);
         $sheet_0->setCellValueByColumnAndRow($col_0++, $row_0, "QUIZ NAME");
         $sheet_0->setCellValueByColumnAndRow($col_0++, $row_0, "TRICKY TOPIC");
-        $sheet_0->getColumnDimension("C")->setWidth(10);
         $sheet_0->setCellValueByColumnAndRow($col_0++, $row_0, "MAX TIME (mins)");
 
         // Quiz info
