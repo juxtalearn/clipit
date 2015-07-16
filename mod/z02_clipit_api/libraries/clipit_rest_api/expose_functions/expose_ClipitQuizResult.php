@@ -34,4 +34,11 @@ function expose_quiz_result_functions() {
         array("id" => array("type" => "int", "required" => true)),
         "Evaluate a Quiz Result, and update the 'correct' property", 'POST', false, true
     );
+    expose_function(
+        $api_suffix . "get_from_question_user", $class_suffix . "get_from_question_user",
+        array(
+            "quiz_question_id" => array("type" => "int", "required" => true),
+            "user_id" => array("type" => "int", "required" => true)),
+        "Get Quiz Result for a Question by a user", "GET", false, true
+    );
 }
