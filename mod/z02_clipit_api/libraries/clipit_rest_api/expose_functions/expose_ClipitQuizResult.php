@@ -39,6 +39,6 @@ function expose_quiz_result_functions() {
         array(
             "quiz_question_id" => array("type" => "int", "required" => true),
             "user_id" => array("type" => "int", "required" => true)),
-        "Get Quiz Result for a Question by a user", false, true
+        "Get Quiz Result for a Question by a user", "GET", false, true
     );
 }
