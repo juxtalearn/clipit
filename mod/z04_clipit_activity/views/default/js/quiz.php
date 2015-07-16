@@ -16,6 +16,8 @@ elgg.provide('clipit.quiz');
 
 clipit.quiz.init = function() {
     $(".finish-quiz").click(clipit.quiz.finishConfirmation);
+    $('.chart, .questions').on('show.bs.collapse', clipit.task.admin.quiz.showData);
+    $('.print-data').click(clipit.task.admin.quiz.printData);
 };
 elgg.register_hook_handler('init', 'system', clipit.quiz.init);
 clipit.quiz.translated = function(){
@@ -418,24 +420,66 @@ clipit.task.admin.quiz.showChart = function(e){
 };
 clipit.task.admin.quiz.showData = function(e){
     var that = $(this),
-        id = that.attr('href'),
-        entity_id = that.closest('li').data('entity'),
-        content = $(id);
-    if(content.is(':empty')) {
-        content.html('<i class="fa fa-spinner fa-spin fa-2x blue"></i>');
+        $item = $('a[href="#'+ that.attr('id') +'"]')
+        quiz_id = $item.closest('#quiz-admin').data('quiz'),
+        id = $item.attr('href'),
+        entity_id = $item.closest('li').data('entity');
+    if(that.is(':empty')) {
+        that.html('<i class="fa fa-spinner fa-spin fa-2x blue"></i>');
         elgg.get("ajax/view/quizzes/admin/results", {
             data: {
-                quiz: e.data.quiz,
-                type: 'result_'+ that.data('entity-type'),
+                quiz: quiz_id,
+                type: 'result_'+ $item.data('entity-type'),
                 entity: entity_id,
-                entity_type: that.data('type')
+                entity_type: $item.data('type')
             },
             success: function (data) {
-                content.html(data);
+                var result = that.html(data);
+                // Print mode
+                if(e.data != undefined) {
+                    if($item.data('entity-type') == 'questions') {
+                        // Show all results of each question
+                        result.find('.question-result').collapse('show');
+                    }
+                    if ((e.data.count == e.data.total)) {
+                        $('.bootbox').modal('hide');
+                        window.print();
+                    }
+                }
             }
         });
     }
 };
+clipit.task.admin.quiz.printData = function (){
+    var alertOptions = {
+        title: elgg.echo(elgg.echo('loading')+"..."),
+        buttons: {
+            ok: {
+                className: "hide"
+            }
+        },
+        message: elgg.echo('quiz:print:alert')
+    };
+    bootbox.alert(alertOptions);
+    var i = 0,
+        $elements = $('#quiz-admin .tab-pane.active').find( $(this).data('elements') ),
+        total = $elements.length;
+    $elements.each(function(){
+        i++;
+        if($(this).hasClass('collapse')) {
+            $(this).on('show.bs.collapse',
+                {'print': true, 'count': i, 'total': total},
+                clipit.task.admin.quiz.showData
+            ).collapse('show');
+        } else {
+            if(i == total ){
+                $('.bootbox').modal('hide');
+                window.print();
+            }
+        }
+    });
+};
+
 clipit.task.admin.quiz.onShowTab = function(e){
     var id = $(this).attr('href'),
         container = $(id).find('li');
