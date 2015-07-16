@@ -496,11 +496,22 @@ class ClipitQuiz extends UBItem {
         $php_excel->getProperties()->setCreator("ClipIt")
             ->setTitle("ClipIt export of Quiz " . $quiz->name)
             ->setKeywords("clipit export quiz");
-        // Add table title and columns
+        // Set first sheet properties
         $active_sheet = $php_excel->setActiveSheetIndex(0);
         $active_sheet->getDefaultColumnDimension()->setWidth(30);
         $align_right = array("alignment" => array("horizontal" => PHPExcel_Style_Alignment::HORIZONTAL_RIGHT));
         $active_sheet->getDefaultStyle()->applyFromArray($align_right);
+
+        // Set second sheet properties
+        $second_sheet = $php_excel->createSheet();
+        $php_excel->addSheet($second_sheet);
+        $active_sheet = $php_excel->setActiveSheetIndex(1);
+        $active_sheet->getDefaultColumnDimension()->setWidth(30);
+        $align_right = array("alignment" => array("horizontal" => PHPExcel_Style_Alignment::HORIZONTAL_RIGHT));
+        $active_sheet->getDefaultStyle()->applyFromArray($align_right);
+
+        // return to first sheet
+        $active_sheet = $php_excel->setActiveSheetIndex(0);
 
         // Quiz title row
         $row = 1;
