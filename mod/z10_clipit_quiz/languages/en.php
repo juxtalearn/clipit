@@ -11,7 +11,7 @@
  * @package         ClipIt
  */
 $english = array(
-    'download:excel' => 'Descargar Excel',
+    'download:excel' => 'Download Excel',
     'print:charts' => 'Print charts',
     'print:results' => 'Print results',
     'clone' => 'Clone',
