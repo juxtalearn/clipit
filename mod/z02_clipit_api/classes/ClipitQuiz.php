@@ -490,82 +490,203 @@ class ClipitQuiz extends UBItem {
             return null;
         }
         $quiz = array_pop($quiz);
+        $task_id = ClipitQuiz::get_task($id);
+        $activity_id = ClipitTask::get_activity($task_id);
+        $user_ids = ClipitActivity::get_students($activity_id);
+        $quiz_question_array = ClipitQuizQuestion::get_by_id(ClipitQuiz::get_quiz_questions($id));
+
         // New Excel object
         $php_excel = new PHPExcel();
+
         // Set document properties
         $php_excel->getProperties()->setCreator("ClipIt")
             ->setTitle("ClipIt export of Quiz " . $quiz->name)
             ->setKeywords("clipit export quiz");
-        // Set first sheet properties
-        $active_sheet = $php_excel->setActiveSheetIndex(0);
-        $active_sheet->getDefaultColumnDimension()->setWidth(30);
-        $align_right = array("alignment" => array("horizontal" => PHPExcel_Style_Alignment::HORIZONTAL_RIGHT));
-        $active_sheet->getDefaultStyle()->applyFromArray($align_right);
 
-        // Set second sheet properties
-        $second_sheet = $php_excel->createSheet();
-        $php_excel->addSheet($second_sheet);
-        $active_sheet = $php_excel->setActiveSheetIndex(1);
-        $active_sheet->getDefaultColumnDimension()->setWidth(30);
-        $align_right = array("alignment" => array("horizontal" => PHPExcel_Style_Alignment::HORIZONTAL_RIGHT));
-        $active_sheet->getDefaultStyle()->applyFromArray($align_right);
+        // Set Scores sheet properties
+        $sheet_0 = $php_excel->getSheet(0);
+        $sheet_0->setTitle("Scores");
+        $sheet_0->getDefaultStyle()->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+        $sheet_0->getDefaultStyle()->getAlignment()->setWrapText(true);
+        $sheet_0->getDefaultRowDimension()->setRowHeight(-1);
+        $sheet_0->getDefaultColumnDimension()->setWidth(30);
 
-        // return to first sheet
-        $active_sheet = $php_excel->setActiveSheetIndex(0);
 
-        // Quiz title row
-        $row = 1;
-        $col = 0;
-        $active_sheet->getStyle($row)->getFont()->setBold(true);
-        $active_sheet->setCellValueByColumnAndRow($col++, $row, "ID");
-        $active_sheet->setCellValueByColumnAndRow($col++, $row, "QUIZ NAME");
-        $active_sheet->setCellValueByColumnAndRow($col++, $row, "TRICKY TOPIC");
-        $active_sheet->setCellValueByColumnAndRow($col++, $row, "MAX TIME (mins)");
-        $row++;$col=0;
 
-        // Quiz info row
-        $active_sheet->setCellValueByColumnAndRow($col++, $row, $quiz->id);
-        $active_sheet->setCellValueByColumnAndRow($col++, $row, $quiz->name);
+        // Quiz info title row
+        $col_0 = 0; $row_0 = 1;
+        $sheet_0->getStyle($row_0)->getFont()->setBold(true);
+        $sheet_0->setCellValueByColumnAndRow($col_0++, $row_0, "QUIZ NAME");
+        $sheet_0->setCellValueByColumnAndRow($col_0++, $row_0, "TRICKY TOPIC");
+        $sheet_0->getColumnDimension("C")->setWidth(10);
+        $sheet_0->setCellValueByColumnAndRow($col_0++, $row_0, "MAX TIME (mins)");
+
+        // Quiz info
+        $col_0=0; $row_0++;
+        $sheet_0->setCellValueByColumnAndRow($col_0++, $row_0, $quiz->name);
         $tricky_topic = ClipitTrickyTopic::get_by_id(array($quiz->tricky_topic));
         if(!empty($tricky_topic)) {
             $tricky_topic = array_pop($tricky_topic);
-            $active_sheet->setCellValueByColumnAndRow($col++, $row, $tricky_topic->name);
+            $sheet_0->setCellValueByColumnAndRow($col_0++, $row_0, $tricky_topic->name);
         } else{
-            $col++;
+            $col_0++;
         }
-        $active_sheet->setCellValueByColumnAndRow($col++, $row, ((int)$quiz->max_time)/60);
-        $row++; $row++; $col=0;
+        $sheet_0->setCellValueByColumnAndRow($col_0++, $row_0, ((int)$quiz->max_time)/60);
 
-        // Quiz Student Results title row
-        $active_sheet->getStyle($row)->getFont()->setBold(true);
-        $active_sheet->setCellValueByColumnAndRow($col++, $row, "ID");
-        $active_sheet->setCellValueByColumnAndRow($col++, $row, "STUDENT NAME");
-//        foreach($quiz->quiz_question_array as $quiz_question_id) {
-//            $active_sheet->setCellValueByColumnAndRow($col++, $row, "QUESTION $quiz_question_id");
-//        }
-        $active_sheet->setCellValueByColumnAndRow($col++, $row, "CORRECT ANSWERS");
-        $active_sheet->setCellValueByColumnAndRow($col++, $row, "SCORE");
-        $row++; $col=0;
+        // Student Scores title row
+        $col_0 = 0; $row_0 += 2;
+        $sheet_0->getStyle($row_0)->getFont()->setBold(true);
+        $sheet_0->setCellValueByColumnAndRow($col_0++, $row_0, "STUDENT NAME");
+        $sheet_0->setCellValueByColumnAndRow($col_0++, $row_0, "CORRECT ANSWERS");
+        $sheet_0->setCellValueByColumnAndRow($col_0++, $row_0, "SCORE");
 
-        // Quiz Student Results row
-        $task_id = ClipitQuiz::get_task($id);
-        $activity_id = ClipitTask::get_activity($task_id);
-        $student_ids = ClipitActivity::get_students($activity_id);
-        foreach($student_ids as $student_id){
-            $active_sheet->setCellValueByColumnAndRow($col++, $row, $student_id);
-            $pv_array = ClipitUser::get_properties($student_id, array("name"));
-            $active_sheet->setCellValueByColumnAndRow($col++, $row, $pv_array["name"]);
-            $results_by_question = ClipitQuiz::get_user_results_by_question($id, $student_id);
+        // Student Scores
+        $col_0 = 0; $row_0++;
+        foreach($user_ids as $user_id){
+            $pv_array = ClipitUser::get_properties($user_id, array("name"));
+            $user_names[$user_id] = $pv_array["name"];
+            $sheet_0->setCellValueByColumnAndRow($col_0++, $row_0, $pv_array["name"]);
+            $results_by_question = ClipitQuiz::get_user_results_by_question($id, $user_id);
             $total_correct = 0;
-            foreach($results_by_question as $result){
+            foreach($results_by_question as $question_id => $result){
                 $total_correct += (int)$result;
             }
-            $active_sheet->setCellValueByColumnAndRow($col++, $row, $total_correct." out of ".count($quiz->quiz_question_array));
-            $active_sheet->setCellValueByColumnAndRow($col++, $row, (float)($total_correct / count($quiz->quiz_question_array) * 100.0)."%");
-            $row++; $col=0;
+            $sheet_0->setCellValueByColumnAndRow($col_0++, $row_0, $total_correct." out of ".count($quiz->quiz_question_array));
+            $percentage = (float)($total_correct / count($quiz->quiz_question_array) * 100.0);
+            $percentage = round($percentage, 2);
+            $sheet_0->setCellValueByColumnAndRow($col_0++, $row_0, $percentage."%");
+            $col_0 = 0; $row_0++;
+        }
+
+        // Set Answers sheet properties
+        $sheet_1 = $php_excel->createSheet(1);
+        $sheet_1->setTitle("Answers");
+        $sheet_1->getDefaultStyle()->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+        $sheet_1->getDefaultStyle()->getAlignment()->setWrapText(true);
+        $sheet_1->getDefaultRowDimension()->setRowHeight(-1);
+        $sheet_1->getDefaultColumnDimension()->setWidth(30);
+
+        // Quiz Questions header
+        $col_1 = 0; $row_1 = 1;
+        $sheet_1->getColumnDimension('A')->setWidth(30);
+        $sheet_1->getStyleByColumnAndRow($col_1, $row_1)->getFont()->setBold(true);
+        $sheet_1->setCellValueByColumnAndRow($col_1, $row_1++, "QUESTION NUMBER");
+        $sheet_1->getStyleByColumnAndRow($col_1, $row_1)->getFont()->setBold(true);
+        $sheet_1->setCellValueByColumnAndRow($col_1, $row_1++, "QUESTION TITLE");
+        $sheet_1->getStyleByColumnAndRow($col_1, $row_1)->getFont()->setBold(true);
+        $sheet_1->setCellValueByColumnAndRow($col_1, $row_1++, "CORRECT ANSWER(S)");
+        $sheet_1->getStyleByColumnAndRow($col_1, $row_1)->getFont()->setBold(true);
+        $sheet_1->setCellValueByColumnAndRow($col_1, $row_1++, "STUDENT NAME");
+
+        /// Quiz Questions
+        $col_1 = 1; $row_1 = 1;
+        foreach($quiz_question_array as $quiz_question){
+            $sheet_1->setCellValueByColumnAndRow($col_1, $row_1++, (int)$quiz_question->order);
+            $sheet_1->setCellValueByColumnAndRow($col_1, $row_1++, (string)$quiz_question->name);
+            $correct_answer = "";
+            switch($quiz_question->option_type){
+                case ClipitQuizQuestion::TYPE_SELECT_MULTI:
+                case ClipitQuizQuestion::TYPE_SELECT_ONE:
+                    $i = 0;
+                    $multi = false;
+                    $num_options = count($quiz_question->option_array);
+                    while($i < $num_options){
+                        if($quiz_question->validation_array[$i]){
+                            if($multi) {
+                                $correct_answer = $correct_answer."\n ";
+                            } else{
+                                $multi = true;
+                            }
+                            $correct_answer = $correct_answer.$quiz_question->option_array[$i];
+                        }
+                        $i++;
+                    }
+                    break;
+                case ClipitQuizQuestion::TYPE_TRUE_FALSE:
+                    if($quiz_question->validation_array[0]){
+                        $correct_answer = "TRUE";
+                    } elseif($quiz_question->validation_array[1]){
+                        $correct_answer = "FALSE";
+                    }
+                    break;
+                case ClipitQuizQuestion::TYPE_NUMBER:
+                    $correct_answer = $quiz_question->validation_array[0];
+                    break;
+                default:
+                    $correct_answer = ("<ERROR>");
+            }
+            $fill_color = new PHPExcel_Style_Color(PHPExcel_Style_Color::COLOR_GREEN);
+            $sheet_1->getStyleByColumnAndRow($col_1, $row_1)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID);
+            $sheet_1->getStyleByColumnAndRow($col_1, $row_1)->getFill()->setStartColor($fill_color);
+            $sheet_1->setCellValueByColumnAndRow($col_1, $row_1++, (string)$correct_answer);
+            $sheet_1->setCellValueByColumnAndRow($col_1, $row_1, "STUDENT ANSWER");
+            $sheet_1->getStyleByColumnAndRow($col_1, $row_1)->getFont()->setBold(true);
+            $col_1++; $row_1 = 1;
+        }
+
+        // Student Names
+        $col_1 = 0; $row_1 = 5;
+        foreach($user_ids as $user_id){
+            $sheet_1->setCellValueByColumnAndRow($col_1, $row_1++, $user_names[$user_id]);
+        }
+
+        // Student Answers
+        $col_1 = 1; $row_1 = 5;
+        foreach($user_ids as $user_id){
+            foreach($quiz_question_array as $quiz_question){
+                $quiz_result = ClipitQuizResult::get_from_question_user($quiz_question->id, $user_id);
+                if(empty($quiz_result)){
+                    $sheet_1->setCellValueByColumnAndRow($col_1, $row_1, "<not answered>");
+                    $col_1++;
+                    continue;
+                }
+                $answer = "";
+                switch($quiz_question->option_type){
+                    case ClipitQuizQuestion::TYPE_SELECT_MULTI:
+                    case ClipitQuizQuestion::TYPE_SELECT_ONE:
+                        $i = 0;
+                        $multi = false;
+                        $num_options = count($quiz_question->option_array);
+                        while($i < $num_options){
+                            if($quiz_result->answer[$i]){
+                                if($multi) {
+                                    $answer = $answer."\n ";
+                                } else{
+                                    $multi = true;
+                                }
+                                $answer = $answer.$quiz_question->option_array[$i];
+                            }
+                            $i++;
+                        }
+                        break;
+                    case ClipitQuizQuestion::TYPE_TRUE_FALSE:
+                        if($quiz_result->answer[0]){
+                            $answer = "TRUE";
+                        } elseif($quiz_result->answer[1]){
+                            $answer = "FALSE";
+                        }
+                        break;
+                    case ClipitQuizQuestion::TYPE_NUMBER:
+                        $answer = $quiz_result->answer;
+                        break;
+                    default:
+                        $answer = ("<ERROR>");
+                }
+                $sheet_1->setCellValueByColumnAndRow($col_1, $row_1, (string)$answer);
+                if($quiz_result->correct){
+                    $fill_color = new PHPExcel_Style_Color(PHPExcel_Style_Color::COLOR_GREEN);
+                } else{
+                    $fill_color = new PHPExcel_Style_Color(PHPExcel_Style_Color::COLOR_RED);
+                }
+                $sheet_1->getStyleByColumnAndRow($col_1, $row_1)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID);
+                $sheet_1->getStyleByColumnAndRow($col_1, $row_1)->getFill()->setStartColor($fill_color);
+                $col_1++;
+            }
+            $col_1 = 1; $row_1++;
         }
 
         // Write to file
+        $php_excel->setActiveSheetIndex(0);
         $date_obj = new DateTime();
         $timestamp = $date_obj->getTimestamp();
         $objWriter = PHPExcel_IOFactory::createWriter($php_excel, 'Excel2007');
