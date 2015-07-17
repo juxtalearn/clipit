@@ -445,7 +445,7 @@ clipit.task.admin.quiz.showData = function(e){
                         setTimeout(function(){
                             $('.bootbox').modal('hide');
                             window.print();
-                        }, 500);
+                        }, 1000);
                     }
                 }
             }
