@@ -115,6 +115,17 @@ class ClipitQuizQuestion extends UBItem {
     }
 
     /**
+     * Get all Questions from a Quiz ID
+     *
+     * @param int $quiz_id Quiz ID
+     * @return static[] Quiz question array
+     */
+    static function get_from_quiz($quiz_id){
+        $quiz_question_ids = ClipitQuiz::get_quiz_questions($quiz_id);
+        return static::get_by_id($quiz_question_ids);
+    }
+
+    /**
      * Get the image ID (ClipitFile) linked to a Quiz Question
      *
      * @param int $id ID of the ClipitQuizQuestion
@@ -137,6 +148,26 @@ class ClipitQuizQuestion extends UBItem {
      */
     static function set_image($id, $image_id){
         return UBCollection::set_items($id, array($image_id), static::REL_QUIZQUESTION_IMAGE);
+    }
+
+    /**
+     * Get Quiz Questions linked to a Video URL
+     *
+     * @param $video_url URL of video
+     * @return static[] Array of Quiz Questions
+     */
+    static function get_from_video($video_url){
+        $return_quiz_question_array = array();
+        $quiz_array = ClipitQuiz::get_all_parents("", true, true);
+        foreach($quiz_array as $quiz_id){
+            $quiz_question_array = static::get_from_quiz($quiz_id);
+            foreach($quiz_question_array as $quiz_question){
+                if(strcmp($video_url, $quiz_question->video) === 0){
+                    $return_quiz_question_array[] = $quiz_question;
+                }
+            }
+        }
+        return $return_quiz_question_array;
     }
 
     /**
