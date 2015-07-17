@@ -467,9 +467,8 @@ clipit.task.admin.quiz.printData = function (){
     bootbox.alert(alertOptions);
     var i = 0,
         tab = $('#quiz-admin .tab-pane.active'),
-        $elements = tab.find( $(this).data('elements') ),
+        $elements = tab.find('.results'),
         total = $elements.length;
-    tab.find('.in:not("'+$(this).data('elements')+'")').collapse('hide');
     $elements.each(function(){
         i++;
         if($(this).hasClass('collapse')) {
@@ -499,6 +498,7 @@ clipit.task.admin.quiz.onShowTab = function(e){
             },
             success: function (output) {
                 $.each(output, function (i, data) {
+                    container.eq(i).find('.loading').remove();
                     if(data.not_finished) {
                         container.eq(i).find(".msg-not-finished").text(data.not_finished);
                     } else {
