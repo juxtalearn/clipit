@@ -49,7 +49,10 @@ switch($type = get_input('type')){
             $total = $correct+$error+$pending;
             $output[] = array(
                 'correct' => round(($correct*100)/$total)."%",
-                'answered' => $answered." ".elgg_echo('quiz:out_of')." ".count($questions)*count($group->user_array)
+                'answered' => elgg_echo('quiz:out_of:answered', array(
+                                $answered,
+                                count($questions)*count($group->user_array)
+                            ))
             );
         }
         echo json_encode($output);
@@ -80,11 +83,17 @@ switch($type = get_input('type')){
                 $total = $correct+$error+$pending;
                 $output[] = array(
                     'correct' => round(($correct*100)/$total)."%",
-                    'answered' => $answered." ".elgg_echo('quiz:out_of')." ".count($questions)
+                    'answered' => elgg_echo('quiz:out_of:answered', array(
+                                    $answered,
+                                    count($questions)
+                                ))
                 );
             } else {
                 $output[] = array(
-                    'not_finished' => $answered." ".elgg_echo('quiz:out_of')." ".count($questions)." - ".elgg_echo('quiz:not_finished')
+                    'not_finished' => elgg_echo('quiz:out_of:answered', array(
+                                        $answered,
+                                        count($questions)
+                                    )) . " - ". elgg_echo('quiz:not_finished')
                 );
             }
         }
@@ -146,7 +155,13 @@ switch($type = get_input('type')){
                         endif;
                         ?>
                         <?php if($total_answered):?>
-                            <small><?php echo count(array_filter($total_results))." ".elgg_echo('quiz:out_of')." ".count($users)*count($questions);?></small>
+                            <small>
+                                <?php echo elgg_echo('quiz:out_of:answered', array(
+                                        count(array_filter($total_results)),
+                                        count($users)*count($questions)
+                                    ));
+                                ?>
+                            </small>
                         <?php endif;?>
                         <i class="btn fa fa-angle-down blue btn-icon"
                            data-target="#question-result-<?php echo $question->id;?>-<?php echo $entity_id;?>"
@@ -234,14 +249,4 @@ switch($type = get_input('type')){
 
         break;
 }
-//die;
-//echo elgg_view('quizzes/list', array(
-//    'quiz' => $quiz,
-//    'task_id' => $task->id,
-//    'user_id' => $user_id,
-//    'finished_task' => ClipitQuiz::has_finished_quiz($quiz, $user_id),
-//    'finished' => true,
-//    'admin' => true
-//))
-
 ?>
