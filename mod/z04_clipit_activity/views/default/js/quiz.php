@@ -436,14 +436,16 @@ clipit.task.admin.quiz.showData = function(e){
             success: function (data) {
                 var result = that.html(data);
                 // Print mode
-                if(e.data != undefined) {
-                    if($item.data('entity-type') == 'questions') {
+                if (e.data != undefined) {
+                    if ($item.data('entity-type') == 'questions') {
                         // Show all results of each question
                         result.find('.question-result').collapse('show');
                     }
                     if ((e.data.count == e.data.total)) {
-                        $('.bootbox').modal('hide');
-                        window.print();
+                        setTimeout(function(){
+                            $('.bootbox').modal('hide');
+                            window.print();
+                        }, 500);
                     }
                 }
             }
