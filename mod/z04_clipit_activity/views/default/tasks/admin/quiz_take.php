@@ -59,17 +59,9 @@ elgg_load_js('jquery:chartjs');
         ));
         ?>
         <?php echo elgg_view('output/url', array(
-            'class' => 'print-data btn btn-xs btn-primary btn-border-blue margin-right-5',
-            'data-elements' => '.chart',
-            'id' => 'print-charts',
-            'text'  => '<i class="fa fa-bar-chart-o"></i> '.elgg_echo('print:charts'),
-        ));
-        ?>
-        <?php echo elgg_view('output/url', array(
             'class' => 'print-data btn btn-xs btn-primary btn-border-blue',
-            'data-elements' => '.questions',
             'id' => 'print-results',
-            'text'  => '<i class="fa fa-list"></i> '.elgg_echo('print:results'),
+            'text'  => '<i class="fa fa-print"></i> '.elgg_echo('print:results'),
         ));
         ?>
     </div>
@@ -135,8 +127,8 @@ elgg_load_js('jquery:chartjs');
                     <?php echo elgg_view("page/elements/user_block", array("entity" => $student)); ?>
                     <div class="clearfix"></div>
                     <div>
-                        <div class="collapse margin-top-10 chart" style="margin-left: 35px;" id="chart-<?php echo $student->id;?>"></div>
-                        <div class="collapse margin-top-10 questions" id="questions-<?php echo $student->id;?>"></div>
+                        <div class="collapse margin-top-10 chart results" style="margin-left: 35px;" id="chart-<?php echo $student->id;?>"></div>
+                        <div class="collapse margin-top-10 questions results" id="questions-<?php echo $student->id;?>"></div>
                     </div>
                 </li>
             <?php endforeach;?>
@@ -201,8 +193,8 @@ elgg_load_js('jquery:chartjs');
                     </small>
                     <div class="clearfix"></div>
                     <div>
-                        <div class="collapse margin-top-10 chart" style="margin-left: 35px;" id="chart-<?php echo $group->id;?>"></div>
-                        <div class="collapse margin-top-10 questions" id="questions-<?php echo $group->id;?>"></div>
+                        <div class="collapse margin-top-10 chart results" style="margin-left: 35px;" id="chart-<?php echo $group->id;?>"></div>
+                        <div class="collapse margin-top-10 questions results" id="questions-<?php echo $group->id;?>"></div>
                     </div>
                 </li>
                 <?php endforeach;?>
@@ -236,8 +228,8 @@ elgg_load_js('jquery:chartjs');
                    data-entity-type="chart"
                    aria-expanded="false"><i class="fa-bar-chart-o fa"></i> <?php echo elgg_echo('stats');?></a>
                 <div>
-                    <div class="collapse margin-top-10 chart" style="margin-left: 35px;" id="chart-<?php echo $activity->id;?>"></div>
-                    <div class="collapse margin-top-10 questions" id="questions-<?php echo $activity->id;?>"></div>
+                    <div class="collapse margin-top-10 chart results" style="margin-left: 35px;" id="chart-<?php echo $activity->id;?>"></div>
+                    <div class="collapse margin-top-10 questions results" id="questions-<?php echo $activity->id;?>"></div>
                 </div>
                 </li>
             </ul>

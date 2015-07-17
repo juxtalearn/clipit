@@ -46,6 +46,7 @@ $english = array(
     'quiz:print:alert' => 'Loading results, please wait...',
     'quiz:result:send' => 'Your answers have been saved. While there is time left to do the quiz, you can review and change your answers if you want to.',
     'quiz:result:finish' => 'If you click on Finish, you will no longer be able to change your answers, and you will see you\'re results.',
+    'quiz:out_of:answered' => '%s out of %s answered',
 );
 
 add_translation('en', $english);

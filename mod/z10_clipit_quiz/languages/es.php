@@ -45,6 +45,7 @@ $spanish = array(
     'quiz:print:alert' => 'Espere mientras se carga los resultados',
     'quiz:result:send' => 'Las respuestas del test quedarán guardadas. Mientras que estés dentro del tiempo para hacer el examen puedes modificar tus respuestas.',
     'quiz:result:finish' => 'Al pulsar Terminar ya no podrías cambiar tus respuestas, y podrás ver tus resultados.',
+    'quiz:out_of:answered' => '%s de %s contestadas',
 );
 
 add_translation('es', $spanish);
