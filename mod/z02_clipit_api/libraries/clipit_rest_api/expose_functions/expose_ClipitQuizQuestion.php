@@ -20,6 +20,18 @@ function expose_quiz_question_functions() {
     $class_suffix = "ClipitQuizQuestion::";
     expose_common_functions($api_suffix, $class_suffix);
     expose_function(
+        $api_suffix . "get_from_quiz", $class_suffix . "get_from_quiz",
+        array(
+            "quiz_id" => array("type" => "int", "required" => true)),
+        "Get all Questions from a Quiz ID", 'GET', false, true
+    );
+    expose_function(
+        $api_suffix . "get_from_video", $class_suffix . "get_from_video",
+        array(
+            "video_url" => array("type" => "string", "required" => true)),
+        "Get Quiz Questions linked to a Video URL", 'GET', false, true
+    );
+    expose_function(
         $api_suffix . "add_quiz_results", $class_suffix . "add_quiz_results", array(
             "id" => array("type" => "int", "required" => true),
             "quiz_result_array" => array("type" => "array", "required" => true)
