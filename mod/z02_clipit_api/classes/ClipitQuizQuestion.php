@@ -154,12 +154,18 @@ class ClipitQuizQuestion extends UBItem {
     /**
      * Get Quiz Questions linked to a Video URL
      *
-     * @param $video_url URL of video
+     * @param $video_url URL of video (optionally in Base64)
      * @return static[] Array of Quiz Questions
      */
     static function get_from_video($video_url){
-        $video_url = base64_decode($video_url);
+        $base64_decode = base64_decode($video_url, true);
+        if($base64_decode != false){
+            $video_url = $base64_decode;
+        }
         $video_metadata = ClipitVideo::video_url_parser($video_url);
+        if($video_metadata == false){
+            return array();
+        }
         $video_url = $video_metadata["url"];
         $return_quiz_question_array = array();
         $quiz_array = ClipitQuiz::get_all(0, 0, "", true, true);
