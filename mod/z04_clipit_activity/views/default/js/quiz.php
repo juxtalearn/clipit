@@ -454,6 +454,8 @@ clipit.task.admin.quiz.showData = function(e){
 };
 clipit.task.admin.quiz.printData = function (){
     var alertOptions = {
+        backdrop: 'static',
+        keyboard: true,
         title: elgg.echo(elgg.echo('loading')+"..."),
         buttons: {
             ok: {
@@ -464,8 +466,10 @@ clipit.task.admin.quiz.printData = function (){
     };
     bootbox.alert(alertOptions);
     var i = 0,
-        $elements = $('#quiz-admin .tab-pane.active').find( $(this).data('elements') ),
+        tab = $('#quiz-admin .tab-pane.active'),
+        $elements = tab.find( $(this).data('elements') ),
         total = $elements.length;
+    tab.find('.in:not("'+$(this).data('elements')+'")').collapse('hide');
     $elements.each(function(){
         i++;
         if($(this).hasClass('collapse')) {
