@@ -33,6 +33,15 @@ elgg_load_js('jquery:chartjs');
     .list-item[data-entity]{
         page-break-before: always;
     }
+    .yellow {
+        color: #d8ba05 !important;
+    }
+    .red {
+        color: #ff4343 !important;
+    }
+    .green {
+        color: #99cb00 !important;
+    }
 }
 </style>
 <div>
