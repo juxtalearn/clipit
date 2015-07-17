@@ -95,7 +95,8 @@ class ClipitQuizQuestion extends UBItem {
         $elgg_entity->set("option_array", (array)$this->option_array);
         $elgg_entity->set("validation_array", (array)$this->validation_array);
         $elgg_entity->set("option_type", (string)$this->option_type);
-        $elgg_entity->set("video", (string)$this->video);
+        $video_metadata = ClipitVideo::video_url_parser($this->video);
+        $elgg_entity->set("video", (string)$video_metadata["url"]);
         $elgg_entity->set("difficulty", (int)$this->difficulty);
         $elgg_entity->set("order", (int)$this->order);
     }
@@ -157,8 +158,11 @@ class ClipitQuizQuestion extends UBItem {
      * @return static[] Array of Quiz Questions
      */
     static function get_from_video($video_url){
+        $video_url = base64_decode($video_url);
+        $video_metadata = ClipitVideo::video_url_parser($video_url);
+        $video_url = $video_metadata["url"];
         $return_quiz_question_array = array();
-        $quiz_array = ClipitQuiz::get_all_parents("", true, true);
+        $quiz_array = ClipitQuiz::get_all(0, 0, "", true, true);
         foreach($quiz_array as $quiz_id){
             $quiz_question_array = static::get_from_quiz($quiz_id);
             foreach($quiz_question_array as $quiz_question){
