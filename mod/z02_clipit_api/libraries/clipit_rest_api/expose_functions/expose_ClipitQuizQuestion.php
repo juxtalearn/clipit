@@ -29,7 +29,7 @@ function expose_quiz_question_functions() {
         $api_suffix . "get_from_video", $class_suffix . "get_from_video",
         array(
             "video_url" => array("type" => "string", "required" => true)),
-        "Get Quiz Questions linked to a Video URL", 'GET', false, true
+        "Get Quiz Questions linked to a Video URL (opt. encoded in Base64)", 'GET', false, true
     );
     expose_function(
         $api_suffix . "add_quiz_results", $class_suffix . "add_quiz_results", array(
