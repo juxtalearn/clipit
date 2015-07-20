@@ -58,27 +58,21 @@ abstract class UBCollection {
      * @return bool Returns true if success, false if error
      */
     static function set_items($id, $item_array, $rel_name, $exclusive = false) {
-        if(empty($id)){
-            return false;
-        }
-        static::remove_all_items($id, $rel_name);
-        if(empty($item_array)){
-            return true;
-        }
-        foreach ($item_array as $item_id) {
-            if(empty($item_id)){
-                continue;
+        $to_be_removed = static::get_items($id, $rel_name);
+        $to_be_added = array();
+        foreach($item_array as $item_id){
+            $pos = array_search($item_id, $to_be_removed);
+            // if new item does not currently exist, add to to_be_added array
+            if($pos === false){
+                $to_be_added[] = $item_id;
             }
-            if ($exclusive) {
-                $rel_array = get_entity_relationships($item_id, true);
-                foreach ($rel_array as $rel) {
-                    if ($rel->relationship == $rel_name) {
-                        delete_relationship($rel->id);
-                    }
-                }
+            // else (if exists) remove from to_be_removed array
+            else{
+                unset($to_be_removed[$pos]);
             }
-            add_entity_relationship($id, $rel_name, $item_id);
         }
+        static::add_items($id, $to_be_added, $rel_name, $exclusive);
+        static::remove_items($id, $to_be_removed, $rel_name);
         return true;
     }
 
