@@ -53,6 +53,7 @@ class ClipitActivity extends UBItem {
     public $max_group_size = 0;
     public $max_students = 0;
     public $is_open = false; // whether any site user can enroll
+    // Users contained
     public $teacher_array = array();
     public $student_array = array();
     public $group_array = array();
