@@ -178,10 +178,31 @@ class ClipitActivity extends UBItem {
      * @return string Status
      * @throws InvalidParameterException
      */
-    public function get_status($id){
+    static function get_status($id){
         $prop_value_array = static::get_properties($id, array("status"));
         return $prop_value_array["status"];
     }
+
+    static function get_all_open($limit = 0, $offset = 0){
+        $elgg_objects = elgg_get_entities_from_metadata(
+            array(
+                'type' => static::TYPE,
+                'subtype' => static::SUBTYPE,
+                'metadata_names' => array("is_open"),
+                'metadata_values' => array(true),
+                'limit' => $limit,
+                'offset' => $offset
+            )
+        );
+        $activity_array = array();
+        if(!empty($elgg_objects)) {
+            foreach($elgg_objects as $elgg_object) {
+                $activity_array[] = new static($elgg_object->guid);
+            }
+        }
+        return $activity_array;
+    }
+
     /**
      * Returns the Activities where a User has been called in, or has joined.
      *
