@@ -35,6 +35,13 @@ function expose_activity_functions() {
         array("id" => array("type" => "int", "required" => true)), "Get Activity Status", "GET", false, true
     );
     expose_function(
+        $api_suffix . "get_all_open", $class_suffix . "get_all_open",
+        array(
+            "limit" => array("type" => "int", "required" => true),
+            "offset" => array("type" => "int", "required" => true)),
+        "Get all open activities", "GET", false, true
+    );
+    expose_function(
         $api_suffix . "add_teachers", $class_suffix . "add_teachers", array(
             "id" => array("type" => "int", "required" => true),
             "teacher_array" => array("type" => "array", "required" => true)
