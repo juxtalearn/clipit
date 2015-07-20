@@ -63,6 +63,7 @@ function clipit_activity_init() {
     // Admin activity
     elgg_register_action("activity/admin/users", "{$plugin_dir}/actions/activity/admin/users.php");
     elgg_register_action("activity/admin/setup", "{$plugin_dir}/actions/activity/admin/setup.php");
+    elgg_register_action("activity/admin/options", "{$plugin_dir}/actions/activity/admin/options.php");
     elgg_register_action("activity/admin/teachers", "{$plugin_dir}/actions/activity/admin/teachers.php");
     elgg_register_action("activity/admin/groups_setup", "{$plugin_dir}/actions/activity/admin/groups_setup.php");
     elgg_register_action("activity/admin/groups_create", "{$plugin_dir}/actions/activity/admin/groups_create.php");
@@ -441,6 +442,9 @@ function activity_page_handler($page) {
     $user = array_pop(ClipitUser::get_by_id(array($user_id)));
     $called_users = ClipitActivity::get_students($activity->id);
     $isCalled = in_array($user_id, $called_users);
+    if($activity->is_open){
+        $isCalled = true;
+    }
     // Default status
     $activity_status = $activity->status;
     // Check if activity exists
@@ -454,14 +458,16 @@ function activity_page_handler($page) {
      */
     $cache = elgg_get_metadata_cache();
     $hasGroup = ClipitGroup::get_from_user_activity($user_id, $activity->id);
-    if($hasGroup || in_array($user_id, $activity->student_array)){
+    if($hasGroup || in_array($user_id, $called_users)){
         $access = 'ACCESS_MEMBER';
-    }
-    elseif(in_array($user_id, $activity->teacher_array) || $cache->load(elgg_get_logged_in_user_guid(), 'role') == ClipitUser::ROLE_ADMIN){
+    } elseif(in_array($user_id, $activity->teacher_array) || $cache->load(elgg_get_logged_in_user_guid(), 'role') == ClipitUser::ROLE_ADMIN) {
         $access = 'ACCESS_TEACHER';
+    } elseif($activity->is_open){
+        $access = 'ACCESS_MEMBER';
     } else{
         $access = 'ACCESS_PUBLIC';
     }
+
     // Activity profile
     if(!isset($page[1])){
         $content = elgg_view('activity/profile/layout', array('entity' => $activity, 'access' => $access));
@@ -523,7 +529,7 @@ function activity_page_handler($page) {
         $activity_menu_sidebar = elgg_view_module('aside', elgg_echo('activity'), $activity_menu);
     }
     // Group sidebar components (group block info + group tools)
-    if($isCalled && ($activity_status == 'active' || $activity_status == 'closed')){
+    if($isCalled && ($activity_status == ClipitActivity::STATUS_ACTIVE || $activity_status == ClipitActivity::STATUS_CLOSED)){
         $pending_tasks = elgg_view("page/components/pending_tasks", array('entity' => $activity));
         $pending_tasks_sidebar = elgg_view_module('aside', elgg_echo('activity:pending_tasks'), $pending_tasks, array('class' => 'aside-block'));
         if($hasGroup) {
@@ -531,7 +537,7 @@ function activity_page_handler($page) {
             $group_menu_sidebar = elgg_view('group/sidebar/group_menu', array('entity' => $activity));
         }
     }
-    if($activity_status == 'enroll' && $hasGroup){
+    if($activity_status == ClipitActivity::STATUS_ENROLL && $hasGroup){
         elgg_extend_view("page/elements/owner_block", "page/elements/group_block");
     }
     if(!$hasGroup && $isCalled && $activity->group_mode == ClipitActivity::GROUP_MODE_STUDENT && $activity_status != ClipitActivity::STATUS_CLOSED) {

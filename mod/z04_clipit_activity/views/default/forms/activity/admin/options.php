@@ -10,22 +10,39 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
+$entity = elgg_extract('entity', $vars);
+echo elgg_view('input/hidden' ,array(
+    'name' => 'activity[id]',
+    'value' => $entity->id
+));
 ?>
 <div class="row margin-bottom-10">
     <div class="col-xs-5">
         <label>Visibilidad de la actividad</label>
-        <small>(else show results to each student as they finish)</small>
+        <small>(Cualquier estudiante del sitio puede entrar a la actividad sólo si se encuentra en modo inscripción)</small>
     </div>
     <div class="col-xs-7">
-        <i class="fa fa-locked text-muted"></i>
+        <label class="inline-block margin-right-20">
+            <input type="radio"
+                   name="activity[is_open]"
+                <?php echo $entity->is_open ? 'checked':'';?>
+                   value="1">
+            <i class="fa fa-unlock text-muted"></i> Abierto
+        </label>
+        <label class="inline-block">
+            <input type="radio"
+                   name="activity[is_open]"
+                <?php echo $entity->is_open ? '':'checked';?>
+                   value="0">
+            <i class="fa fa-lock text-muted"></i> Cerrado
+        </label>
     </div>
 </div>
-<div class="row margin-bottom-10">
-    <div class="col-xs-5">
-        <label>Wait until end of quiz tasks to show results?</label>
-        <small>(else show results to each student as they finish)</small>
-    </div>
-    <div class="col-xs-7">
-        bla
-    </div>
+<div class="text-right">
+    <?php
+    echo elgg_view('input/submit', array(
+        'value' => elgg_echo('save'),
+        'class' => "btn btn-primary",
+    ));
+    ?>
 </div>

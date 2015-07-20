@@ -117,7 +117,7 @@ if(!empty($activities) || !empty($quizzes) ){
 </div>
 <a name="resources"></a>
 <div>
-    <?php echo elgg_view('page/components/title_block', array('title' => elgg_echo('activity:stas')));?>
+    <?php echo elgg_view('page/components/title_block', array('title' => elgg_echo('tricky_topic:resources')));?>
     <div role="tabpanel">
 
         <!-- Nav tabs -->

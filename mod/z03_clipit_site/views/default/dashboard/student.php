@@ -67,6 +67,31 @@ elgg_load_css("nvd3:css");
             ?>
         </div>
         <div class="col-md-6" style="background: #EBEBEB;">
+            <?php
+            $open_activities = ClipitActivity::get_all_open();
+            $activities = array();
+            foreach($open_activities as $activity){
+                $index = 0;
+                switch($activity->status){
+                    case ClipitActivity::STATUS_ENROLL: $index = 0; break;
+                    case ClipitActivity::STATUS_ACTIVE: $index = 1; break;
+                    case ClipitActivity::STATUS_CLOSED: $index = 2; break;
+                }
+                $activities[$index][$activity->id] = $activity;
+            }
+            ksort($activities, SORT_REGULAR );
+            $activities = array_flatten($activities);
+
+            if($activities) {
+                echo elgg_view('dashboard/module', array(
+                    'name' => 'open_activities',
+                    'title' => elgg_echo('activities:open'),
+                    'content' => elgg_view('dashboard/modules/open_activities', array(
+                        'entities' => $activities
+                    )),
+                ));
+            }
+            ?>
             <?php echo elgg_view('dashboard/module', array(
                 'name'      => 'recommended_videos',
                 'title'     => elgg_echo('videos:recommended'),

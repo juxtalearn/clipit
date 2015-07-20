@@ -24,10 +24,10 @@ $tabs = array(
         'text' => elgg_view('output/filter_responsive', array('text' => elgg_echo('activity:admin:groups'), 'icon' => 'fa-users')),
         'href' => "{$href}?filter=groups",
     ),
-//    'options' => array(
-//        'text' => elgg_view('output/filter_responsive', array('text' => elgg_echo('activity:admin:options'), 'icon' => 'fa-users')),
-//        'href' => "{$href}?filter=options",
-//    ),
+    'options' => array(
+        'text' => elgg_view('output/filter_responsive', array('text' => elgg_echo('activity:admin:options'), 'icon' => 'fa-users')),
+        'href' => "{$href}?filter=options",
+    ),
 );
 foreach ($tabs as $name => $tab) {
     $tab['name'] = $name;

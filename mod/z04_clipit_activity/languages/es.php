@@ -69,6 +69,7 @@ $spanish = array(
     'my_activities:active' => 'Mis actividades en curso',
     'my_activities:none' => 'Actualmente no hay actividades en curso',
     'activities' => 'Actividades',
+    'activities:open' => 'Actividades públicas',
     'activities:none' => 'No se han encontrado actividades',
     'explore' => 'Explorar',
     'activity:delete' => 'Eliminar actividad',
@@ -396,8 +397,6 @@ $spanish = array(
 
     // Quiz
     'quiz:teacher_annotation' => 'Comentario del profesor',
-    'quiz:result:send' => 'Las respuestas del test quedarán guardadas. Mientras que estés dentro del tiempo para hacer el examen puedes modificar tus respuestas.',
-    'quiz:result:finish' => 'Al seleccionar terminar ya no podrás realizar cambios en el test. Una vez terminado el test podrás ver los resultados.',
     'quiz:data:none' => 'No hay datos',
     'quiz:not_finished' => 'Sin terminar',
     'quiz:tricky_topic:danger' => 'Si cambia de Tema Clave se borrarán las preguntas creadas',

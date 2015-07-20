@@ -26,12 +26,13 @@ if($file_id = get_input("id")) {
     $file_path = $file->file_path;
 } elseif($entity_id = get_input('entity_id')){
     $object = ClipitSite::lookup($entity_id);
-    switch($object['subtype']){
-        case 'ClipitQuiz':
-            $file_path = ClipitQuiz::export_to_excel($entity_id);
-            $file_name = end(explode("/", $file_path));
-            break;
-    }
+    // Trigger hook
+    $file_download = elgg_trigger_plugin_hook('file:download', 'file', array(
+        'entity_id' => $entity_id,
+        'entity_class' => $object['subtype']
+    ), null);
+    $file_path = $file_download['path'];
+    $file_name = $file_download['name'];
 }
 
 if($file_path) {

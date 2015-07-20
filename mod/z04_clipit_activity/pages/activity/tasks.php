@@ -108,7 +108,7 @@ if($page[2] == 'view' && $page[3]){
                     ));
                     break;
             }
-            $content .= elgg_view('tasks/list', array('tasks' => $task_filtered, 'href' => $href));
+            $content .= elgg_view('tasks/list', array('tasks' => $task_filtered, 'href' => $href, 'activity' => $activity));
         }
     } else { // Role {Teacher, Admin}
         $tasks = ClipitTask::get_by_id($activity->task_array, 0, 0, 'start', true);

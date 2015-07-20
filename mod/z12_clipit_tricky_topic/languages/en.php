@@ -45,6 +45,7 @@ $english = array(
     'tag:cantremove' => 'Can not remove Tag',
     'tag:removed' => 'Tag removed',
 
+    'tricky_topic:resources' => 'Attached resources',
     'tricky_topics:none' => 'No Tricky Topics',
     'tricky_topic:duplicate_from' => 'Tricky Topic duplicated from',
     'tricky_topic:subject' => 'Subject',

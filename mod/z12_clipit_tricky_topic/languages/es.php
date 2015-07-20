@@ -44,6 +44,7 @@ $spanish = array(
     'tag:cantremove' => 'No se ha podido eliminar el Concepto',
     'tag:removed' => 'Concepto eliminado',
 
+    'tricky_topic:resources' => 'Materiales adjuntos',
     'tricky_topic:duplicate_from' => 'Tema clave duplicado de',
     'tricky_topic:subject' => 'Asignatura',
     'tricky_topic:cantremove' => 'No se ha podido borrar el tema clave',

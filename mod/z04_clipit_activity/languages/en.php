@@ -68,6 +68,7 @@ $english = array(
     'my_activities:active' => 'Ongoing activities',
     'my_activities:none' => 'No ongoing activities',
     'activities' => 'Activities',
+    'activities:open' => 'Public activities',
     'activities:none' => 'There are no activities...',
     'explore' => 'Explore',
     'activity:delete' => 'Remove activity',
@@ -379,7 +380,6 @@ $english = array(
 
     // Quiz
     'quiz:teacher_annotation' => 'Teacher\'s feedback',
-    'quiz:result:send' => 'Your answers have been saved. While there is time left to do the quiz, you can review and change your answers if you want to.',
     'quiz:data:none' => 'No data',
     'quiz:tricky_topic:danger' => 'If you change Tricky Topic questions will be deleted',
     'quiz:not_finished' => 'Not finished',

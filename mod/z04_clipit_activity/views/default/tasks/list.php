@@ -10,6 +10,7 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
+$activity = elgg_extract('activity', $vars);
 $tasks = elgg_extract('tasks', $vars);
 $href = elgg_extract('href', $vars);
 if(!$tasks){
@@ -31,6 +32,10 @@ $individual_tasks = array(
         $access = true;
         if( time() < $task->start && $user->role == ClipitUser::ROLE_STUDENT ) {
             $access = false;
+        } elseif(isset($activity)) {
+            if ($activity->is_open && !in_array($user_id, $activity->student_array)) {
+                $access = false;
+            }
         }
     ?>
     <li class="overflow-hidden list-item <?php echo $access ? "" : "soon"; ?>">
@@ -73,9 +78,11 @@ $individual_tasks = array(
                 <span><?php echo $task->name; ?></span>
             <?php endif; ?>
             </strong>
+            <?php if($access): ?>
             <small class="show <?php echo $status['color']; ?>">
                 <?php echo $status['text']; ?>
             </small>
+            <?php endif; ?>
         </div>
     </li>
     <?php endforeach; ?>

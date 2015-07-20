@@ -34,8 +34,11 @@ function clipit_quiz_init() {
     elgg_extend_view('tasks/container', 'tasks/container/quiz_take');
     elgg_extend_view('tasks/options', 'tasks/options/quiz');
 
-    // hook: action save. Quiz task type
+    // Hooks
+    // action save. Quiz task type
     elgg_register_plugin_hook_handler("task:save", "task", "task_quiz_save");
+    // File Download: export Quiz data
+    elgg_register_plugin_hook_handler("file:download", "file", "file_quiz_download");
 }
 
 function task_quiz_save($hook, $entity_type, $returnvalue, $params){
@@ -74,6 +77,15 @@ function task_quiz_save($hook, $entity_type, $returnvalue, $params){
             'quiz_random_order' => $task['quiz_random_order'],
         ));
         ClipitTask::set_properties($task_id, $task_properties);
+    }
+}
+function file_quiz_download($hook, $entity_type, $returnvalue, $params){
+    $entity_class = $params['entity_class'];
+    $entity_id = $params['entity_id'];
+    if($entity_class == 'ClipitQuiz') {
+        $file['path'] = ClipitQuiz::export_to_excel($entity_id);
+        $file['name'] = end(explode("/", $file['path']));
+        return $file;
     }
 }
 

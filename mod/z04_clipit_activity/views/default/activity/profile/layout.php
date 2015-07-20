@@ -37,6 +37,7 @@ if($access == 'ACCESS_TEACHER'){
         <?php echo elgg_view("tasks/list", array(
             'tasks' => $tasks,
             'href' => "clipit_activity/{$activity->id}/tasks",
+            'activity' => $activity
         ));
         ?>
         <?php if($tasks): ?>

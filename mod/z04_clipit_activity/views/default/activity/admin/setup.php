@@ -161,7 +161,6 @@ elgg_load_js("jquery:quicksearch");
         </div>
     </div>
     <div class="col-md-12">
-<!--        --><?php //echo elgg_view('performance_items/add');?>
         <hr>
         <?php echo elgg_view('output/url', array(
             'title' => elgg_echo('activity:delete'),
