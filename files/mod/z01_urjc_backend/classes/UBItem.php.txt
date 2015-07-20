@@ -130,6 +130,8 @@ class UBItem {
     }
 
     /**
+     * Get all parent "master" items (which are not cloned)
+     *
      * @param string $order_by forwarded to get_all (see get_all)
      * @param bool $ascending forwarded to get_all (see get_all)
      * @param bool|false $id_only Whether to return only IDs
