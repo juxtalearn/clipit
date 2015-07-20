@@ -459,37 +459,6 @@ class UBItem {
         foreach ($elgg_entity_array as $elgg_entity) {
             $return_array[(int)$elgg_entity->guid] = new static((int)$elgg_entity->guid, $elgg_entity);
         }
-//        if (!empty($order_by)) {
-//            $args = array("order_by" => $order_by, "ascending" => $ascending);
-//            uasort($return_array,
-//                function ($i1, $i2) use ($args) {
-//                    if (!$i1 && !$i2) {
-//                        return 0;
-//                    }
-//                    if ($i1->$args["order_by"] == $i2->$args["order_by"]) {
-//                        return 0;
-//                    }
-//                    if ((bool)$args["ascending"]) {
-//                        if (!$i1) {
-//                            return 1;
-//                        }
-//                        if (!$i2) {
-//                            return -1;
-//                        }
-//                        return (strtolower($i1->$args["order_by"]) < strtolower($i2->$args["order_by"]) ? -1 : 1);
-//                        //return strcmp($i1->$args["order_by"], $i2->$args["order_by"]);
-//                    } else {
-//                        if (!$i1) {
-//                            return -1;
-//                        }
-//                        if (!$i2) {
-//                            return 1;
-//                        }
-//                        return (strtolower($i2->$args["order_by"]) < strtolower($i1->$args["order_by"]) ? -1 : 1);
-//                        //return strcmp($i2->$args["order_by"], $i1->$args["order_by"]);
-//                    }
-//                });
-//        }
         return $return_array;
     }
 
