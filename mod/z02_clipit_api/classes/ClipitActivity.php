@@ -51,6 +51,7 @@ class ClipitActivity extends UBItem {
     public $end = 0;
     public $group_mode = "";
     public $max_group_size = 0;
+    public $is_open = false; // whether any site user can enroll
     public $teacher_array = array();
     public $student_array = array();
     public $group_array = array();
@@ -72,6 +73,7 @@ class ClipitActivity extends UBItem {
         $this->end = (int)$elgg_entity->get("end");
         $this->group_mode = (string)$elgg_entity->get("group_mode");
         $this->max_group_size = (int)$elgg_entity->get("max_group_size");
+        $this->is_open = (bool)$elgg_entity->get("is_open");
         $this->status = (string)static::calc_status($this->start, $this->end);
         $this->teacher_array = static::get_teachers($this->id);
         $this->student_array = static::get_students($this->id);
@@ -117,6 +119,7 @@ class ClipitActivity extends UBItem {
         $elgg_entity->set("end", (int)$this->end);
         $elgg_entity->set("group_mode", (string)$this->group_mode);
         $elgg_entity->set("max_group_size", (int)$this->max_group_size);
+        $elgg_entity->set("is_open", (bool)$this->is_open);
     }
 
     /**
