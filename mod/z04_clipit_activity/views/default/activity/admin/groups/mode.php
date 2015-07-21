@@ -11,6 +11,10 @@
  * @package         ClipIt
  */
 $activity = elgg_extract('activity', $vars);
+$disabled = false;
+if($activity->is_open){
+    $disabled = true;
+}
 ?>
 <script>
 $(function(){
@@ -33,24 +37,25 @@ $(function(){
         <div class="col-xs-9">
             <div class="pull-right max-users"
                  style="display: <?php echo $activity->group_mode != ClipitActivity::GROUP_MODE_TEACHER ? 'block':'none';?>;">
-                <small class="show"><?php echo elgg_echo('group:max_size');?></small>
+                <label class="show"><?php echo elgg_echo('group:max_size');?></label>
                 <?php
                     echo elgg_view("input/text", array(
                         'name' => 'max-users',
                         'value' => $activity->max_group_size,
                         'class' => 'form-control',
-                        'style' => 'width: 50%;'
+                        'style' => 'width: 50%;',
                     ));
                 ?>
             </div>
             <div class="pull-left">
-                <h3 class="panel-title blue margin-bottom-10"><?php echo elgg_echo('activity:grouping_mode');?></h3>
+                <label><?php echo elgg_echo('activity:grouping_mode');?></label>
                 <?php
                     echo elgg_view('input/dropdown', array(
                         'name' => 'group-mode',
                         'class' => 'form-control',
                         'style' => 'width: auto;padding: 2px;',
                         'value' => $activity->group_mode,
+                        'disabled' => $disabled,
                         'options_values' => array(
                             ClipitActivity::GROUP_MODE_TEACHER => elgg_echo('activity:grouping_mode:teacher'),
                             ClipitActivity::GROUP_MODE_STUDENT => elgg_echo('activity:grouping_mode:student'),
@@ -58,8 +63,16 @@ $(function(){
                         )
                     ));
                 ?>
+                <?php if($disabled):?>
+                    <label class="margin-top-5"><?php echo elgg_echo('activity:register:title');?></label>
+                    <?php echo elgg_view('output/url', array(
+                        'href'  => "clipit_activity/{$activity->id}/admin?filter=options",
+                        'title' => elgg_echo('activity:register:open'),
+                        'text'  => '<i class="fa fa-unlock"></i> '. elgg_echo('activity:register:open')
+                    ));
+                    ?>
+                <?php endif;?>
             </div>
-
         </div>
         <div class="col-xs-3 text-right">
             <?php echo elgg_view('input/submit',

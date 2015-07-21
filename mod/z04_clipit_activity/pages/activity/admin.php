@@ -30,7 +30,10 @@ switch($selected_tab){
         $content = elgg_view('activity/admin/groups/view', array('entity' => $activity));
         break;
     case 'options':
-        $content = elgg_view_form('activity/admin/options',  array('data-validate' => 'true'), array('entity' => $activity));
+        $content = elgg_view_form('activity/admin/options',
+            array('data-validate' => 'true'),
+            array('entity' => $activity, 'submit' => true)
+        );
         break;
 }
 

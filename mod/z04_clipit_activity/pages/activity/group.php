@@ -63,7 +63,7 @@ switch ($page[3]) {
 $params['sub-title'] = $group->name;
 $params['title_style'] = "background: #". $activity->color;
 
-if($activity_status == 'enroll'){
+if($activity_status == ClipitActivity::STATUS_ENROLL){
     $params['special_header_content'] = elgg_view_form("group/leave",
         array('class' => 'pull-right'),
         array('entity' => $group, 'text' => elgg_echo("group:leave:me")));

@@ -17,15 +17,30 @@ $activity_description = get_input('activity-description');
 $activity_start = get_input('activity-start');
 $activity_end = get_input('activity-end');
 $activity_tt = get_input('tricky-topic');
+$advanced_options = get_input('activity');
+// Grouping mode
+$groups_creation = get_input('groups_creation');
+$max_users = get_input('max-users');
 
-
-$activity_id = ClipitActivity::create(array(
+$activity_data = array(
     'name' => $activity_name,
     'description' => $activity_description,
     'start' => get_timestamp_from_string($activity_start)+(60*1),
     'end' => get_timestamp_from_string($activity_end)+(60*60*24)-(60*1),
     'tricky_topic' => $activity_tt
-));
+);
+if($advanced_options['is_open']){
+    $groups_creation = 2; // Students make groups
+    $max_users[2] = $advanced_options['max_group_size'];
+    $activity_data = array_merge($activity_data, array(
+        'is_open' => $advanced_options['is_open'],
+        'group_mode' => ClipitActivity::GROUP_MODE_STUDENT,
+        'max_group_size' => $advanced_options['max_group_size'],
+        'max_students' => $advanced_options['max_students'],
+    ));
+}
+
+$activity_id = ClipitActivity::create($activity_data);
 // Tasks
 $tasks = get_input('task');
 foreach($tasks as $task){
@@ -45,8 +60,6 @@ ClipitActivity::add_students($activity_id, $called_users);
  * Groups creation
  */
 $filter = false;
-$groups_creation = get_input('groups_creation');
-$max_users = get_input('max-users');
 
 $groups = array();
 $group_array = json_decode(get_input('groups_default'));
@@ -79,7 +92,7 @@ switch($groups_creation){
 
         $filter = "?filter=groups";
         break;
-    // Student makes groups
+    // Students make groups
     case 2:
         $group_mode = ClipitActivity::GROUP_MODE_STUDENT;
         shuffle($called_users);

@@ -33,11 +33,13 @@ $my_activities = ClipitUser::get_activities(elgg_get_logged_in_user_guid());
                 <div class="text-truncate">
                     <div class="pull-right">
                     <?php if(in_array($activity->id, $my_activities)):?>
-                        <strong class="blue-lighter">Entrado</strong>
+                        <strong class="blue-lighter"><?php echo elgg_echo('activity:joined');?></strong>
                         <?php elseif($activity->status != ClipitActivity::STATUS_ENROLL): ?>
                             <small class="activity-status status-<?php echo $activity->status;?>">
                                 <strong><?php echo elgg_echo("status:".$activity->status);?></strong>
                             </small>
+                        <?php elseif(count($activity->student_array) >= $activity->max_students && $activity->max_students > 0):?>
+                        <strong class="blue-lighter"><?php echo elgg_echo('group:full');?></strong>
                         <?php
                         else:
                             $to_join = true;
@@ -46,7 +48,7 @@ $my_activities = ClipitUser::get_activities(elgg_get_logged_in_user_guid());
                             'href'  => "clipit_activity/{$activity->id}",
                             'class'  => 'btn btn-xs btn-border-blue btn-primary',
                             'title' => $activity->name,
-                            'text'  => '<i class="fa fa-plus"></i> Entrar',
+                            'text'  => '<i class="fa fa-plus"></i> '. elgg_echo('activity:join'),
                         ));
                         ?>
                     <?php endif;?>
@@ -64,7 +66,8 @@ $my_activities = ClipitUser::get_activities(elgg_get_logged_in_user_guid());
                         <?php echo elgg_view('output/friendlytime', array('time' => $activity->start));?>
                     </div>
                     <?php endif;?>
-                    <?php echo count($activity->student_array);?> <?php echo elgg_echo('students');?>
+                    <?php echo count($activity->student_array);?><?php echo $activity->max_students ? '/'.$activity->max_students:'';?>
+                    <?php echo elgg_echo('students');?>
                 </small>
             </div>
         </li>

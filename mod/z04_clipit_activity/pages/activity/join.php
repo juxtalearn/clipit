@@ -10,9 +10,6 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-if($activity_status == ClipitActivity::STATUS_CLOSED || !$isCalled || $activity->group_mode != ClipitActivity::GROUP_MODE_STUDENT){
-    return false;
-}
 $title = elgg_echo("activity:group:join");
 elgg_push_breadcrumb($title);
 $params = array(

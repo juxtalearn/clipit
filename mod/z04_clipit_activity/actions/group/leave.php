@@ -19,7 +19,10 @@ if(in_array($group_id, $user_groups) || $hasGroup){
     if(count(ClipitGroup::get_users($group_id)) == 0){
         ClipitGroup::delete_by_id(array($group_id));
     }
-
+    $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
+    if($activity->is_open){
+        ClipitActivity::remove_students($activity_id, array($user_id));
+    }
 } else{
     register_error(elgg_echo("group:cantleave"));
 }

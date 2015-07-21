@@ -29,7 +29,7 @@ clipit.task.init = function() {
     $(document).on("click", ".quiz-select", clipit.task.quizSelect);
     $(document).on("click", ".quiz-unselect", clipit.task.quizUnselect);
 
-    $(document).on("click", ".btns-task-select .thumbnail:not(.active)", clipit.task.onSelect);
+    $(document).on("click", ".btns-task-select .thumbnail:not(.selected)", clipit.task.onSelect);
 };
 elgg.register_hook_handler('init', 'system', clipit.task.init);
 clipit.task.admin.init = function() {
@@ -113,7 +113,6 @@ clipit.task.rubricUnselect = function(){
 
 clipit.task.quizRefreshList = function(){
     clipit.task.refresh($(this).closest('.task'));
-//    $(this).closest('.task').find('.task-types').trigger('change');
 };
 
 clipit.task.quizSelect = function(){
@@ -127,8 +126,7 @@ clipit.task.quizSelect = function(){
         .text(elgg.echo('btn:remove'));
 };
 clipit.task.quizUnselect = function(){
-    var task_container = $(this).closest('.task-type-container');
-    task_container.closest('.task').find('.task-types').trigger('change');
+    clipit.task.refresh($(this).closest('.task'));
 };
 clipit.task.addTask = function(){
     var content = $(".task-list"),

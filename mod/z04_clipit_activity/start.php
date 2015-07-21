@@ -442,9 +442,7 @@ function activity_page_handler($page) {
     $user = array_pop(ClipitUser::get_by_id(array($user_id)));
     $called_users = ClipitActivity::get_students($activity->id);
     $isCalled = in_array($user_id, $called_users);
-    if($activity->is_open){
-        $isCalled = true;
-    }
+    $isOpen = $activity->is_open;
     // Default status
     $activity_status = $activity->status;
     // Check if activity exists
@@ -491,7 +489,30 @@ function activity_page_handler($page) {
                     include("{$activity_dir}/admin.php");
                     break;
                 case 'join':
-                    include("{$activity_dir}/join.php");
+                    if($activity->is_open && ($activity->max_students > count($activity->student_array)) || $activity->max_students == 0) {
+                        $groups = ClipitGroup::get_by_id($activity->group_array);
+                        natural_sort_properties($groups, 'name');
+                        $user_joined = false;
+                        ClipitActivity::add_students($activity->id, array($user_id));
+                        foreach($groups as $group){
+                            if(!$user_joined){
+                                if(count($group->user_array) < $activity->max_group_size) {
+                                    ClipitActivity::add_students($activity->id, array($user_id));
+                                    ClipitGroup::add_users($group->id, array($user_id));
+                                    $user_joined = true;
+                                }
+                            }
+                        }
+                        if(!$user_joined) {
+                            $group_id = ClipitGroup::create(array(
+                                'name' => elgg_echo('group') . ' ' . (count($groups) + 1),
+                                'user_array' => array($user_id)
+                            ));
+                            ClipitActivity::add_groups($activity->id, array($group_id));
+                        }
+//                        include("{$activity_dir}/join.php");
+                        forward('clipit_activity/'.$activity->id);
+                    }
                     break;
                 case 'discussion':
                     include("{$activity_dir}/discussion.php");
@@ -524,7 +545,7 @@ function activity_page_handler($page) {
     $pending_tasks_sidebar = "";
     $activity_menu_sidebar = "";
 
-    if($hasGroup || $isCalled || $access == 'ACCESS_TEACHER'){
+    if($hasGroup || $isCalled || $isOpen || $access == 'ACCESS_TEACHER'){
         $activity_menu = elgg_view("activity/sidebar/activity_menu", array('entity' => $activity));
         $activity_menu_sidebar = elgg_view_module('aside', elgg_echo('activity'), $activity_menu);
     }
@@ -540,9 +561,17 @@ function activity_page_handler($page) {
     if($activity_status == ClipitActivity::STATUS_ENROLL && $hasGroup){
         elgg_extend_view("page/elements/owner_block", "page/elements/group_block");
     }
-    if(!$hasGroup && $isCalled && $activity->group_mode == ClipitActivity::GROUP_MODE_STUDENT && $activity_status != ClipitActivity::STATUS_CLOSED) {
-        // Join to activity button
-        elgg_extend_view("page/elements/owner_block", "page/components/button_join_group");
+    if(!$hasGroup && $activity->group_mode == ClipitActivity::GROUP_MODE_STUDENT &&
+        $activity_status == ClipitActivity::STATUS_ENROLL &&
+        $user->role == ClipitUser::ROLE_STUDENT
+    ) {
+        if($isCalled) {
+            // Join to group button
+            elgg_extend_view("page/elements/owner_block", "page/components/button_join_group");
+        }elseif($isOpen){
+            // Join to activity button
+            elgg_extend_view("page/elements/owner_block", "page/components/button_join_activity");
+        }
     }
     $teachers = ClipitActivity::get_teachers($activity->id);
     $teacher_sidebar = "";

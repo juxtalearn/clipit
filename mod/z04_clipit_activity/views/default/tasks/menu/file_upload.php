@@ -17,7 +17,7 @@ $task_type = ClipitTask::TYPE_FILE_UPLOAD;
 ?>
 <?php if($entity->task_type == $task_type || !$entity):?>
 <div class="col-md-3 margin-bottom-10">
-    <div class="thumbnail cursor-pointer <?php echo $entity->task_type == $task_type?'active':'';?>" data-task-type="<?php echo $task_type;?>">
+    <div class="thumbnail cursor-pointer <?php echo $entity->task_type == $task_type?'active selected':'';?>" data-task-type="<?php echo $task_type;?>">
         <span class="task-icon blue-lighter fa-stack fa-lg">
             <i class="fa fa-circle fa-stack-2x"></i>
             <i class="fa fa-files-o fa-stack-1x fa-inverse"></i>

@@ -60,6 +60,13 @@ $(function(){
             form.find("#save-tricky-topic").click();
         }
     });
+    // Advanced options
+    $('#input-activity-open').click(function(){
+        $('.grouping-mode').hide();
+    });
+    $('#input-activity-closed').click(function(){
+        $('.grouping-mode').show();
+    });
 });
 </script>
 <style>
@@ -203,6 +210,14 @@ $(function(){
                 'rows'  => 6,
                 ));
             ?>
+        </div>
+        <div>
+            <a data-toggle="collapse" href="#activity-advanced-options">
+                <strong><i class="fa fa-cog"></i> <?php echo elgg_echo('options:advanced');?></strong>
+            </a>
+            <div class="collapse margin-top-10" id="activity-advanced-options">
+                <?php echo elgg_view('forms/activity/admin/options');?>
+            </div>
         </div>
     </div>
 

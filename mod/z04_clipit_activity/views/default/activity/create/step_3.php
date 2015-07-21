@@ -285,7 +285,7 @@ $(function () {
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 grouping-mode">
         <?php echo elgg_view('activity/create/groups/grouping_mode');?>
     </div>
     <div class="col-md-12 text-right margin-top-20">
