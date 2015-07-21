@@ -1485,7 +1485,7 @@ class ElggInstaller {
         $versions_json = file_get_contents(elgg_get_plugins_path()."z40_clipit_admin/updates/versions.json");
         $versions_obj = json_decode($versions_json);
         $clipit_tag_branch = (string)$versions_obj->clipit_tag_branch;
-        $clipit_version = (string)$versions_json->clipit_version;
+        $clipit_version = (string)$versions_obj->clipit_version;
         //$clipit_version = exec("git name-rev --tags --name-only $(git rev-parse HEAD)");
         set_config("clipit_tag_branch", (string)$clipit_tag_branch, $guid);
         set_config("clipit_version", (string)$clipit_version, $guid);
