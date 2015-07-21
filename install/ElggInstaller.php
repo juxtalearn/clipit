@@ -621,6 +621,7 @@ class ElggInstaller {
      * Check the different install steps for completion
      *
      * @return void
+     * @throws InstallationException
      */
     protected function setInstallStatus() {
         global $CONFIG;
@@ -1480,8 +1481,13 @@ class ElggInstaller {
         set_config('la_metrics_class', $submissionVars['la_metrics_class'], $guid);
         set_config('recommendations_class', $submissionVars['recommendations_class'], $guid);
         set_config('clipit_site_type', strtolower($submissionVars['clipit_site_type']), $guid);
-        // Set current ClipIt version
-        $clipit_version = exec("git name-rev --tags --name-only $(git rev-parse HEAD)");
+        // Set current ClipIt version and tag branch
+        $versions_json = file_get_contents(elgg_get_plugins_path()."z40_clipit_admin/updates/versions.json");
+        $versions_obj = json_decode($versions_json);
+        $clipit_tag_branch = (string)$versions_obj->clipit_tag_branch;
+        $clipit_version = (string)$versions_json->clipit_version;
+        //$clipit_version = exec("git name-rev --tags --name-only $(git rev-parse HEAD)");
+        set_config("clipit_tag_branch", (string)$clipit_tag_branch, $guid);
         set_config("clipit_version", (string)$clipit_version, $guid);
         $this->enablePlugins();
         return TRUE;
