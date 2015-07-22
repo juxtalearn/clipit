@@ -45,13 +45,13 @@ class ClipitTask extends UBItem {
     public $status = "";
     public $child_task = 0;
     public $parent_task = 0;
-    public $task_count = 0;
     public $activity = 0;
-    public $quiz = 0;
-    public $rubric = 0;
     // Task options
-    public $results_after_finished = false;
-    public $quiz_random_order = false;
+    public $quiz = 0; // linked Quiz (only Quiz tasks)
+    public $rubric = 0; // linked Rubric (only feedback tasks)
+    public $results_after_finished = false; // show quiz results immediately after finishing (or wait for task end)
+    public $quiz_random_order = false; // use a random order for displaying quiz questions
+    public $num_ratings = 0; // number of ratings each student must submit (only feedback tasks)
     // Linked materials
     public $video_array = array();
     public $file_array = array();
@@ -68,7 +68,6 @@ class ClipitTask extends UBItem {
         $this->start = (int)$elgg_entity->get("start");
         $this->end = (int)$elgg_entity->get("end");
         $this->status = (string)static::calc_status($this->start, $this->end);
-        $this->task_count = (int)$elgg_entity->get("task_count");
         if ($this->end == 0) {
             $activity_id = static::get_activity($this->id);
             if (!empty($activity_id)) {
@@ -85,6 +84,7 @@ class ClipitTask extends UBItem {
         $this->rubric = (int)static::get_rubric($this->id);
         $this->results_after_finished = (bool)$elgg_entity->get("results_after_finished");
         $this->quiz_random_order = (bool)$elgg_entity->get("quiz_random_order");
+        $this->num_ratings = (int)$elgg_entity->get("num_ratings");
     }
 
     /**
@@ -98,9 +98,9 @@ class ClipitTask extends UBItem {
         $elgg_entity->set("task_type", (string)$this->task_type);
         $elgg_entity->set("start", (int)$this->start);
         $elgg_entity->set("end", (int)$this->end);
-        $elgg_entity->set("task_count", (int)$this->task_count);
         $elgg_entity->set("results_after_finished", (bool)$this->results_after_finished);
         $elgg_entity->set("quiz_random_order", (bool)$this->quiz_random_order);
+        $elgg_entity->set("num_ratings", (int)$this->num_ratings);
     }
 
     /**
