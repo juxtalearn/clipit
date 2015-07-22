@@ -7,5 +7,6 @@ engine/handlers/php_errors.log
 php_errorlog
 mod_unused
 .project
+.buildpath
+.settings
 error_log
-mod/z30*
