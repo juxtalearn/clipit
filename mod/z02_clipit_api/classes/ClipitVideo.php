@@ -83,7 +83,6 @@ class ClipitVideo extends UBItem {
         if(!empty($this->url)){
             $video_metadata = static::video_url_parser($this->url);
             if(!empty($video_metadata)){
-                var_dump($video_metadata);
                 $this->url = (string)$video_metadata["url"];
                 $this->preview = (string)$video_metadata["preview"];
             }
