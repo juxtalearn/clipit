@@ -80,11 +80,15 @@ class ClipitVideo extends UBItem {
         $elgg_entity->set("overall_rating_average", (float)$this->overall_rating_average);
         $elgg_entity->set("tag_rating_average", (float)$this->tag_rating_average);
         $elgg_entity->set("rubric_rating_average", (float)$this->rubric_rating_average);
-        $video_metadata = static::video_url_parser($this->url);
-        $elgg_entity->set("url", (string)$video_metadata["url"]);
-        if (empty($this->preview)) {
-            $this->preview = (string)$video_metadata["preview"];
+        if(!empty($this->url)){
+            $video_metadata = static::video_url_parser($this->url);
+            if(!empty($video_metadata)){
+                var_dump($video_metadata);
+                $this->url = (string)$video_metadata["url"];
+                $this->preview = (string)$video_metadata["preview"];
+            }
         }
+        $elgg_entity->set("url", (string)$this->url);
         $elgg_entity->set("preview", (string)$this->preview);
         $elgg_entity->set("duration", (int)$this->duration);
         $elgg_entity->set("overlay_metadata", (string)$this->overlay_metadata);
