@@ -51,7 +51,7 @@ class ClipitTask extends UBItem {
     public $rubric = 0; // linked Rubric (only feedback tasks)
     public $results_after_finished = false; // show quiz results immediately after finishing (or wait for task end)
     public $quiz_random_order = false; // use a random order for displaying quiz questions
-    public $num_ratings = 0; // number of ratings each student must submit (only feedback tasks)
+    public $num_ratings = 0; // number of ratings each student must submit, 0 = rate all (only feedback tasks)
     // Linked materials
     public $video_array = array();
     public $file_array = array();
