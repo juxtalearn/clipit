@@ -505,7 +505,7 @@ class ClipitVideo extends UBItem {
      *
      * @return string YouTube video URL
      */
-    static function upload_to_youtube($local_video_path, $title)
+    static function upload_to_youtube($local_video_path, $title = "")
     {
         if (!get_config("google_refresh_token")) {
             return false;
