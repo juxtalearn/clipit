@@ -15,6 +15,7 @@ $portuguese = array(
     'education_level:primary' => 'Primeiro ciclo',
     'education_level:gcse' => 'Segundo e terceiros ciclos',
     'education_level:alevel' => 'Secundário',
+    'education_level:vocational' => 'Formação Profissional',
     'education_level:university' => 'Ensino Superior',
 
     'tricky_topic:subject' => 'Assunto',
