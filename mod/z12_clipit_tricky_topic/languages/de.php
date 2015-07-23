@@ -14,6 +14,7 @@ $german = array(
     'education_level:primary' => 'Primarstufe',
     'education_level:gcse' => 'Sekundarstufe I',
     'education_level:alevel' => 'Sekundarstufe II',
+    'education_level:vocational' => 'Berufsschule',
     'education_level:university' => 'Hochschule',
 );
 

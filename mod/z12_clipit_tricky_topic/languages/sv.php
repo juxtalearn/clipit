@@ -32,10 +32,11 @@ $swedish = array(
     'example:create' => 'Skapa exempel',
     
 	'education_level' => 'Utbildningsnivå',
-    'education_level:1' => 'Grundskola',
-    'education_level:2' => 'GCSE',
-    'education_level:3' => 'Avancerad nivå (a-level)',
-    'education_level:4' => 'Universitet',
+    'education_level:primary' => 'Grundskola',
+    'education_level:gcse' => 'GCSE',
+    'education_level:alevel' => 'Avancerad nivå (A-level)',
+    'education_level:vocational' => 'Arbetsträning',
+    'education_level:university' => 'Universitet',
     'example:create' => 'Skapa exempel',
 	
 	'example:created' => 'Exempel skapat',

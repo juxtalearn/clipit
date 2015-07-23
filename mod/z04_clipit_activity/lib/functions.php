@@ -642,6 +642,7 @@ function get_education_levels($level = ''){
         ClipitTrickyTopic::EDUCATION_LEVEL_PRIMARY,
         ClipitTrickyTopic::EDUCATION_LEVEL_GCSE,
         ClipitTrickyTopic::EDUCATION_LEVEL_ALEVEL,
+        ClipitTrickyTopic::EDUCATION_LEVEL_VOCATIONAL,
         ClipitTrickyTopic::EDUCATION_LEVEL_UNIVERSITY,
     );
     $ed_levels = array('' => '');

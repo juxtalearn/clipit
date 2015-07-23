@@ -32,6 +32,7 @@ $english = array(
     'education_level:primary' => 'Primary',
     'education_level:gcse' => 'GCSE',
     'education_level:alevel' => 'A-Level',
+    'education_level:vocational' => 'Vocational',
     'education_level:university' => 'University',
     'example:create' => 'Create example',
     'example:created' => 'Example created',
