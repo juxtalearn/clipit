@@ -25,7 +25,7 @@ $individual_tasks = array(
     ClipitTask::TYPE_QUIZ_TAKE
 );
 ?>
-<ul class="deadline-list">
+<ul class="deadline-list" <?php echo $vars['style'] ? 'style="'.$vars['style'].'"':''?>>
     <?php
     foreach($tasks as $task):
         $status = get_task_status($task);

@@ -12,11 +12,13 @@ $user_id = elgg_get_logged_in_user_guid();
 $user_inActivity = ClipitGroup::get_from_user_activity($user_id, $activity->id);
 $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($activity->tricky_topic)));
 $tags = $tricky_topic->tag_array;
-$tasks = ClipitTask::get_by_id($activity->task_array, 4, 0, 'start', true);
 
 if($access == 'ACCESS_TEACHER'){
+    $tasks = ClipitTask::get_by_id($activity->task_array, 0, 0, 'start', true);
     $groups = ClipitGroup::get_by_id($activity->group_array, 0, 0, 'name');
     natural_sort_properties($groups, 'name');
+} else {
+    $tasks = ClipitTask::get_by_id($activity->task_array, 4, 0, 'start', true);
 }
 ?>
 <div class="row">
@@ -37,7 +39,8 @@ if($access == 'ACCESS_TEACHER'){
         <?php echo elgg_view("tasks/list", array(
             'tasks' => $tasks,
             'href' => "clipit_activity/{$activity->id}/tasks",
-            'activity' => $activity
+            'activity' => $activity,
+            'style' => $access == 'ACCESS_TEACHER' ? 'max-height: 200px;overflow: auto;' : ''
         ));
         ?>
         <?php if($tasks): ?>
