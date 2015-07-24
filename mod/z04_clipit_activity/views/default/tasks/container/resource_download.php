@@ -14,7 +14,7 @@ $attach = elgg_extract('params', $vars);
 $attach['id'] = elgg_extract('id', $vars);
 $entity = elgg_extract('entity', $vars);
 $input_array = elgg_extract('input_array', $vars);
-
+echo elgg_view("multimedia/file/templates/attach", array('input_prefix' => $input_array));
 ?>
 <?php if($entity->task_type == ClipitTask::TYPE_RESOURCE_DOWNLOAD):?>
     <script>

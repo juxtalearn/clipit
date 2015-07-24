@@ -88,7 +88,7 @@ if(!empty($files)) {
                         <input type="checkbox"
                                name="check-file[]"
                                value="<?php echo $file->id;?>"
-                               <?php echo ($file->owner_id == $user_id || $user->role == ClipitUser::ROLE_TEACHER)?'':'disabled';?>
+                               <?php echo ($file->owner_id == $user_id || hasTeacherAccess($user->role))?'':'disabled';?>
                                class="select-simple">
                     </span>
                     <?php endif;?>

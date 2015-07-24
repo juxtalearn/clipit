@@ -26,6 +26,8 @@ if($page[2] == 'view' && $page[3]){
         elgg_push_breadcrumb($task->name);
         $filter = "";
         $title = elgg_echo('activity:task');
+        $title = elgg_echo('task:title:page', array(elgg_echo('task:'.$task->task_type)));
+
         $status = get_task_status($task);
         switch($task->task_type){
             case ClipitTask::TYPE_VIDEO_UPLOAD:

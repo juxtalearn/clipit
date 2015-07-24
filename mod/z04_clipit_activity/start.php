@@ -249,8 +249,8 @@ function task_resources_save($hook, $entity_type, $returnvalue, $params){
     } elseif(get_input('task-id') && $task['entity_type'] == ClipitTask::TYPE_RESOURCE_DOWNLOAD){
         $task_id = get_input('task-id');
         // Set resources
-        ClipitTask::set_files($task_id, array_filter($files));
-        ClipitTask::set_videos($task_id, array_filter($videos));
+        ClipitTask::set_files($task_id, $files);
+        ClipitTask::set_videos($task_id, $videos);
         // Save task
         ClipitTask::set_properties($task_id, get_task_properties_action($task));
     }
@@ -460,7 +460,7 @@ function activity_page_handler($page) {
         $access = 'ACCESS_MEMBER';
     } elseif(in_array($user_id, $activity->teacher_array) || $cache->load(elgg_get_logged_in_user_guid(), 'role') == ClipitUser::ROLE_ADMIN) {
         $access = 'ACCESS_TEACHER';
-    } elseif($activity->is_open){
+    } elseif($activity->is_open && $user->role == ClipitUser::ROLE_STUDENT){
         $access = 'ACCESS_MEMBER';
     } else{
         $access = 'ACCESS_PUBLIC';

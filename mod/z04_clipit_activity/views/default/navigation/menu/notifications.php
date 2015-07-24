@@ -11,8 +11,8 @@
  * @package         ClipIt
  */
 $user_id = elgg_get_logged_in_user_guid();
-function notification_view($notification_id){
-    $notification = array_pop(ClipitNotification::get_by_id(array($notification_id)));
+function notification_view($notification){
+//    $notification = array_pop(ClipitNotification::get_by_id(array($notification_id)));
     if($notification->destination) {
         $object = ClipitSite::lookup($notification->destination);
         $entity = array_pop($object['subtype']::get_by_id(array($notification->destination)));
@@ -41,7 +41,7 @@ function notification_view($notification_id){
     }
     $output = '
     <!--<div class="clearfix"></div>-->
-    <li style="border-bottom: 1px solid #bae6f6;">
+    <li style="border-bottom: 1px solid #bae6f6;width: 350px;">
         <a>
         '.$params['owner_info'].'
         <div class="content-block">
@@ -60,18 +60,36 @@ function notification_view($notification_id){
     ';
     return $output;
 }
+function notification_get_by_target($user_id = null){
+    if(!$user_id){
+        $user_id = elgg_get_logged_in_user_guid();
+    }
+    $item = array();
+    foreach(ClipitNotification::get_all() as $notification){
+        if(in_array($user_id, $notification->target_array)){
+            $item[] = $notification;
+        }
+    }
+    return $item;
+}
+
+$notifications = notification_get_by_target();
+$notifications_count = count($notifications);
 ?>
 <li <?php echo elgg_in_context('notifications') ? 'class="active"': '';?>>
     <a id="notifications" class="inbox-summary" role="button" data-toggle="dropdown" href="javascript:;" title="<?php echo elgg_echo('messages:inbox');?>">
-        <?php if($unread_count > 0): ?>
-            <span class="badge"><?php echo $unread_count; ?></span>
+        <?php if($notifications_count > 0): ?>
+            <span class="badge"><?php echo $notifications_count; ?></span>
         <?php endif; ?>
         <i class="fa fa-exclamation-triangle"></i>
     </a>
     <ul id="menu_notifications" class="dropdown-menu" role="menu" aria-labelledby="notifications">
-        <?php echo notification_view(14829);?>
-        <?php echo notification_view(14829);?>
-        <?php echo notification_view(14829);?>
+        <?php
+        foreach($notifications as $notification) {
+            echo notification_view($notification);
+        }
+        ?>
+<!--        --><?php //echo notification_view(14829);?>
     </ul>
 </li>
 <li class="separator">|</li>

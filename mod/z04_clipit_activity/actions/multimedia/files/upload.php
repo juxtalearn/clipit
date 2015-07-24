@@ -34,11 +34,6 @@ if(count($entity)==0){
         'temp_path'  => $files['tmp_name']
     ));
     if($new_file_id){
-        if($entity_class == 'ClipitActivity') {
-            // add file into Tricky Topic
-            ClipitTrickyTopic::add_files($entity_id, array($new_file_id));
-            $new_file_id = ClipitFile::create_clone($new_file_id);
-        }
         $entity_class::add_files($entity_id, array($new_file_id));
         ClipitFile::add_tags($new_file_id, $tags);
     } else {

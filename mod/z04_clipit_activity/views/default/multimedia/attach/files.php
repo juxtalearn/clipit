@@ -20,8 +20,46 @@ if($input_prefix) {
 }
 $object = ClipitSite::lookup($entity_id);
 $files = $object['subtype']::get_files($entity_id);
+$id = uniqid('attach_files_');
 ?>
-<div data-list="files">
+<script>
+    var $container = $('#<?php echo $id;?>'),
+        input_file = $container.find('input[type="file"]'),
+        $items = $container.find('.items-list');
+    input_file.fileupload({
+        maxFileSize: 500000000, // 500 MB
+        url: elgg.config.wwwroot + 'ajax/view/multimedia/file/attach_action?prefix=<?php echo json_encode($input_prefix);?>',
+        autoUpload: true,
+        previewMaxWidth: 60,
+//        acceptFileTypes: /(^(?!video).*)/g,
+        acceptFileTypes: /^(?!video\/)(\w+)/g,
+        //acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+        downloadTemplateId: 'template-modal-download',
+        uploadTemplateId: 'template-modal-upload',
+        filesContainer: $items,
+        prependFiles: true,
+        previewMaxHeight: 60,
+        disableImageResize: /Android(?!.*Chrome)|Opera/
+            .test(window.navigator.userAgent),
+        previewCrop: true
+    }).on('fileuploadfinished', function(){
+        var empty_content = $container.find('.empty');
+        if(empty_content.length > 0){
+            empty_content.remove();
+        }
+    });
+</script>
+<div data-list="files" id="<?php echo $id;?>">
+    <div class="upload-files margin-bottom-10">
+        <a style="position: relative;overflow: hidden;" href="javascript:;">
+            <strong>
+                <i class="fa fa-paperclip"></i> <?php echo elgg_echo('multimedia:attach_files');?>
+                <input type="file" multiple name="files">
+            </strong>
+        </a>
+        <hr class="margin-bottom-10 margin-top-10">
+    </div>
+    <div class="items-list">
 <?php
 foreach($files as $file_id):
     $file = array_pop(ClipitFile::get_by_id(array($file_id)));
@@ -53,6 +91,7 @@ foreach($files as $file_id):
         </div>
     </div>
 <?php endforeach;?>
+    </div>
 <?php if(!$files):?>
     <?php echo elgg_view('output/empty', array('value' => elgg_echo('file:none')));?>
 <?php endif;?>

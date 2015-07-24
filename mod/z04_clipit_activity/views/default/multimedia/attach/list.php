@@ -51,6 +51,22 @@ if(!$id){
         padding: 5px;
     }
 </style>
+<script>
+$(function(){
+    $.blueimp.fileupload.prototype._renderPreviews = function (data) {
+        data.context.find('.preview').each(function (index, elm) {
+            var preview = data.files[index].preview;
+            if (preview) {
+                $(elm).append(preview);
+            } else {
+                var $icon = $('<i class="icon fa" style="font-size: 50px;"/>');
+                $icon = clipit.file.getIcon(data.files[index].type, $icon);
+                $(elm).append($icon);
+            }
+        });
+    };
+});
+</script>
 <div data-attach="<?php echo $id;?>" id="attach_list" class="row attach_list <?php echo $class;?>" style="padding: 10px 0;display: none">
     <ul class="col-md-2 margin-top-10 menu-list">
         <li class="selected" data-menu="files">
@@ -60,7 +76,7 @@ if(!$id){
                 'title' => elgg_echo('files'),
                 'class' => 'element_attach_menu show child-decoration-none',
                 'data-menu' => 'files',
-                'text'  => elgg_echo('files')
+                'text'  => '<i class="fa fa-files-o"></i> '.elgg_echo('files')
             ));
             ?>
         </li>
@@ -71,7 +87,7 @@ if(!$id){
                 'title' => elgg_echo('videos'),
                 'class' => 'element_attach_menu show child-decoration-none',
                 'data-menu' => 'videos',
-                'text'  => elgg_echo('videos')
+                'text'  => '<i class="fa fa-video-camera"></i> '.elgg_echo('videos')
             ));
             ?>
         </li>

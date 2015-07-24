@@ -133,7 +133,7 @@ $(function(){
         var step = $(this).data("step");
         var current_step = parseInt($(".step:visible").attr("id").replace("step_", ""));
         // is validated
-        if($(this).attr("id") == 'next_step' || step > current_step){
+        if(($(this).attr("id") == 'next_step' || $(this).attr("id") == 'back_step')  || step > current_step){
             if(!$("#activity-create").valid()){
                 return false;
             }

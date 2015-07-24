@@ -30,8 +30,8 @@ $activity_data = array(
     'tricky_topic' => $activity_tt
 );
 if($advanced_options['is_open']){
-    $groups_creation = 2; // Students make groups
-    $max_users[2] = $advanced_options['max_group_size'];
+    $groups_creation = 3; // Random groups
+    $max_users[3] = $advanced_options['max_group_size'];
     $activity_data = array_merge($activity_data, array(
         'is_open' => $advanced_options['is_open'],
         'group_mode' => ClipitActivity::GROUP_MODE_STUDENT,

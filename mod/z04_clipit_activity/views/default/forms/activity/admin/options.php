@@ -21,7 +21,7 @@ if($entity) {
 <div class="row margin-bottom-10">
     <div class="col-xs-5">
         <label><?php echo elgg_echo('activity:register:title');?></label>
-        <small>Cualquier estudiante del sitio puede entrar a la actividad sólo si se encuentra en modo inscripción</small>
+        <small><?php echo elgg_echo('activity:register:info');?></small>
     </div>
     <div class="col-xs-7">
         <label id="input-activity-open" class="inline-block margin-right-20" onclick="javascript:$('#open_activity').collapse('show');">
@@ -41,7 +41,7 @@ if($entity) {
         <div class="<?php echo !$entity->is_open ? 'collapse':'in';?> col-md-12" id="open_activity" style="background-color: #f4f4f4;padding-top: 10px;padding-bottom: 10px;">
             <div class="row form-group">
                 <div class="col-md-8">
-                    <label for="activity[max_group_size]">Máximo de estudiantes por grupo</label>
+                    <label for="activity[max_group_size]"><?php echo elgg_echo('activity:register:students_per_group');?></label>
                 </div>
                 <div class="col-md-4">
                     <?php echo elgg_view("input/text", array(
@@ -57,8 +57,8 @@ if($entity) {
             </div>
             <div class="row form-group">
                 <div class="col-md-8">
-                    <label for="activity[max_students]">Máximo de estudiantes en la actividad</label>
-                    <small>0 = Sin límite de estudiantes</small>
+                    <label for="activity[max_students]"><?php echo elgg_echo('activity:register:max_students');?></label>
+                    <small><?php echo elgg_echo('activity:register:max_students:info');?></small>
                 </div>
                 <div class="col-md-4">
                     <?php echo elgg_view("input/text", array(

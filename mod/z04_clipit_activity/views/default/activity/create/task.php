@@ -48,6 +48,10 @@ if($vars['required'] !== false){
 }
 if($task){
     echo elgg_view("input/hidden", array(
+        'name' => 'entity-id',
+        'value' => $task->activity,
+    ));
+    echo elgg_view("input/hidden", array(
         'name' => "task{$input_array}[entity_type]",
         'value' => $task->task_type,
     ));

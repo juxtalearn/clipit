@@ -8000,7 +8000,7 @@ li.list-item:last-child {
   margin: 0;
   padding: 0 10px;
 }
-#attach_list .multimedia-list {
+#attach_list .multimedia-list .items-list {
   overflow: auto;
   max-height: 340px;
 }
