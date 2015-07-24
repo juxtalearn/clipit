@@ -135,7 +135,7 @@ class UBItem {
      * @param string $order_by forwarded to get_all (see get_all)
      * @param bool $ascending forwarded to get_all (see get_all)
      * @param bool|false $id_only Whether to return only IDs
-     * @return array[static]|array[int] Array of parent objects from class
+     * @return static[]|int[] Array of parent objects from class
      */
     static function get_all_parents($order_by = "", $ascending = true, $id_only = false){
         $all_items = static::get_all(0, 0, $order_by, $ascending, $id_only);
@@ -452,7 +452,7 @@ class UBItem {
         }
         if ($id_only) {
             foreach ($elgg_entity_array as $elgg_entity) {
-                $return_array[] = $elgg_entity->guid;
+                $return_array[] = (int)$elgg_entity->guid;
             }
             return $return_array;
         }

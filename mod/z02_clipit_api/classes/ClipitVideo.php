@@ -353,7 +353,7 @@ class ClipitVideo extends UBItem {
         $return_array = array();
         $all_items = static::get_all(0, 0, "", true, true); // Get all item ids, not objects
         foreach ($all_items as $item_id) {
-            $item_labels = (array)static::get_label((int)$item_id);
+            $item_labels = (array)static::get_labels((int)$item_id);
             foreach ($label_array as $search_tag) {
                 if (array_search($search_tag, $item_labels) !== false) {
                     $return_array[(int)$item_id] = new static((int)$item_id);
