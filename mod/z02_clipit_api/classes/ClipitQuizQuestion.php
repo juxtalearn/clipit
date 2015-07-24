@@ -154,7 +154,7 @@ class ClipitQuizQuestion extends UBItem {
     /**
      * Get Quiz Questions linked to a Video URL
      *
-     * @param $video_url URL of video (optionally in Base64)
+     * @param string $video_url URL of video (optionally in Base64)
      * @return static[] Array of Quiz Questions
      */
     static function get_from_video($video_url){
@@ -170,7 +170,7 @@ class ClipitQuizQuestion extends UBItem {
         $return_quiz_question_array = array();
         $quiz_array = ClipitQuiz::get_all(0, 0, "", true, true);
         foreach($quiz_array as $quiz_id){
-            $quiz_question_array = static::get_from_quiz($quiz_id);
+            $quiz_question_array = static::get_from_quiz((int)$quiz_id);
             foreach($quiz_question_array as $quiz_question){
                 if(strcmp($video_url, $quiz_question->video) === 0){
                     $return_quiz_question_array[] = $quiz_question;
