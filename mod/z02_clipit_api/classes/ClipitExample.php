@@ -70,7 +70,7 @@ class ClipitExample extends UBItem {
         return $this->id;
     }
 
-    static function get_by_tags($tag_array){
+    static function get_by_tag($tag_array){
         $return_examples = array();
         $example_array = static::get_all(0);
         if(empty($example_array) || empty($tag_array)){

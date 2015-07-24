@@ -251,18 +251,27 @@ class ClipitFile extends UBFile {
         return UBCollection::set_items($id, $tag_array, static::REL_FILE_TAG);
     }
 
-    static function get_by_tags($tag_array)
+    static function get_by_tag($tag_array)
     {
         $return_array = array();
         $all_items = static::get_all(0, 0, "", true, true); // Get all item ids, not objects
         foreach ($all_items as $item_id) {
-            $item_tags = static::get_tags((int)$item_id);
+            $item_tags = static::get_tag((int)$item_id);
             foreach ($tag_array as $search_tag) {
                 if (array_search($search_tag, $item_tags) !== false) {
                     $return_array[(int)$item_id] = new static((int)$item_id);
                     break;
                 }
             }
+        }
+        return $return_array;
+    }
+
+    static function get_by_trickytopic($tt_array){
+        $return_array = array();
+        foreach($tt_array as $tt_id){
+            $tt_tags = ClipitTrickyTopic::get_tag($tt_id);
+            $return_array[$tt_id] = static::get_by_tag($tt_tags);
         }
         return $return_array;
     }
@@ -320,12 +329,12 @@ class ClipitFile extends UBFile {
         return UBCollection::set_items($id, $label_array, static::REL_FILE_LABEL);
     }
 
-    static function get_by_labels($label_array)
+    static function get_by_label($label_array)
     {
         $return_array = array();
         $all_items = static::get_all(0, 0, "", true, true); // Get all item ids, not objects
         foreach ($all_items as $item_id) {
-            $item_labels = (array)static::get_labels((int)$item_id);
+            $item_labels = (array)static::get_label((int)$item_id);
             foreach ($label_array as $search_tag) {
                 if (array_search($search_tag, $item_labels) !== false) {
                     $return_array[(int)$item_id] = new static((int)$item_id);
@@ -356,12 +365,12 @@ class ClipitFile extends UBFile {
         return UBCollection::set_items($id, $rubric_item_array, static::REL_FILE_RUBRIC);
     }
 
-    static function get_by_rubric_items($rubric_item_array)
+    static function get_by_rubric_item($rubric_item_array)
     {
         $return_array = array();
         $all_items = static::get_all(0, 0, "", true, true); // Get all item ids, not objects
         foreach ($all_items as $item_id) {
-            $item_rubric_items = static::get_rubric_items((int)$item_id);
+            $item_rubric_items = static::get_rubric_item((int)$item_id);
             foreach ($rubric_item_array as $search_tag) {
                 if (array_search($search_tag, $item_rubric_items) !== false) {
                     $return_array[(int)$item_id] = new static((int)$item_id);

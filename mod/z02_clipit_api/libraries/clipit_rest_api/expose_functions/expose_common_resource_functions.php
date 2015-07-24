@@ -27,12 +27,12 @@ function expose_common_resource_functions($api_suffix, $class_suffix) {
         "Update all the average ratings for this resource", 'POST', false, true
     );
     expose_function(
-        $api_suffix . "get_by_labels", $class_suffix . "get_by_labels",
+        $api_suffix . "get_by_label", $class_suffix . "get_by_label",
         array("label_array" => array("type" => "array", "required" => true)),
         "Get the Resources containing at least one of the specified labels", 'GET', false, true
     );
     expose_function(
-        $api_suffix . "get_by_tags", $class_suffix . "get_by_tags",
+        $api_suffix . "get_by_tag", $class_suffix . "get_by_tag",
         array("tag_array" => array("type" => "array", "required" => true)),
         "Get the Resources containing at least one of the specified tags", 'GET', false, true
     );
