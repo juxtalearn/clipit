@@ -277,7 +277,7 @@ class ClipitVideo extends UBItem {
         $return_array = array();
         $all_items = static::get_all(0, 0, "", true, true); // Get only item ids, not objects
         foreach ($all_items as $item_id) {
-            $item_tags = (array)static::get_tag((int)$item_id);
+            $item_tags = (array)static::get_tags((int)$item_id);
             foreach ($tag_array as $search_tag) {
                 if (array_search($search_tag, $item_tags) !== false) {
                     $return_array[(int)$item_id] = new static((int)$item_id);
@@ -291,7 +291,7 @@ class ClipitVideo extends UBItem {
     static function get_by_trickytopic($tt_array){
         $return_array = array();
         foreach($tt_array as $tt_id){
-            $tt_tags = ClipitTrickyTopic::get_tag($tt_id);
+            $tt_tags = ClipitTrickyTopic::get_tags($tt_id);
             $return_array[$tt_id] = static::get_by_tag($tt_tags);
         }
         return $return_array;
