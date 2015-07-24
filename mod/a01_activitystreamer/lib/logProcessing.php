@@ -139,7 +139,7 @@ function convertLogTransactionToActivityStream($transaction)
         case "Unidentified":
             $verb = "Unidentified";
             break;
-        case "Discussion":
+        case "Discussion": //Posts and comments
             $object['objectTitle'] = $transaction[0]['ObjectTitle'];
             $l = findValue($transaction, "create", ClipitPost::SUBTYPE, "ObjectId", TRUE);
             if ($l > 0) {
@@ -193,6 +193,13 @@ function convertLogTransactionToActivityStream($transaction)
             } else {
                 $activity_id = determineActivityId($target_id);
             }
+
+            $type = determineObjectType($target_id);
+            $object['targetId'] = $target_id;
+            $object['targetType'] = $type[0];
+            $object['targetSubtype'] = $type[1];
+            $object['targetTitle'] = getObjectTitle($target_id);
+
             if ($activity_id > 0 && $group_id == 0) {
                 $group_id = determineGroupId($transaction[0]['UserId'], $activity_id);
             } else {
@@ -203,13 +210,18 @@ function convertLogTransactionToActivityStream($transaction)
                 $group = get_entity($group_id);
                 if ($group instanceof ElggEntity && $group->getSubtype() == ClipitGroup::SUBTYPE) {
                     $activity_id = getActivityIdFromGroupId($group_id);
+                } else {
+                    //if target is a video it we have to determine the task where it was posted and determine the activitiy_id from that one
+                    if ($type[1] == ClipitVideo::SUBTYPE) {
+
+                        $task_id = determineTaskId($target_id);
+                        $activity_id = determineActivityId($task_id);
+                    }
                 }
+
+
             }
-            $type = determineObjectType($target_id);
-            $object['targetId'] = $target_id;
-            $object['targetType'] = $type[0];
-            $object['targetSubtype'] = $type[1];
-            $object['targetTitle'] = getObjectTitle($target_id);
+
 
 
             /*
@@ -256,6 +268,10 @@ function convertLogTransactionToActivityStream($transaction)
                 $group = get_entity($group_id);
                 if ($group instanceof ElggEntity && $group->getSubtype() == ClipitGroup::SUBTYPE) {
                     $activity_id = getActivityIdFromGroupId($group_id);
+                } else {
+                    //perhaps it was assigned to a task
+                    $task_id = determineTaskId($video_id);
+                    $activity_id = determineActivityId($task_id);
                 }
             }
             $type = determineObjectType($activity_id);
@@ -268,6 +284,55 @@ function convertLogTransactionToActivityStream($transaction)
             $object['activityId'] = $activity_id;
             foreach ($transaction as $key => $line) {
                 if ($line['Event'] == 'create' && $line['ObjectType'] == 'relationship') {
+                    $temptrans[0] = $line;
+                    $activity = convertLogTransactionToActivityStream($temptrans);
+                    storeJSON($activity);
+                }
+            }
+
+            break;
+        case "CreateQuiz":
+            $verb = "create";
+            $l = findValue($transaction, "create", ClipitQuiz::SUBTYPE, "ObjectId", TRUE);
+
+            $object['objectTitle'] = $transaction[$l]['Content'];
+            $object['objectId'] = $transaction[$l]['ObjectId'];
+            $object['objectType'] = $transaction[$l]['ObjectType'];
+            $object['objectSubtype'] = $transaction[$l]['ObjectSubtype'];
+            $object['objectClass'] = $transaction[$l]['ObjectClass'];
+            $object['ownerGUID'] = $transaction[$l]['OwnerGUID'];
+            $object['content'] = $transaction[$l]['Content'];
+            $published = $transaction[$l]['Timestamp'];
+
+//            ob_start();
+//            var_dump($transaction);
+//            $outputasdf = ob_get_contents();
+//            ob_end_clean();
+//            error_log('testtestestetst '. $outputasdf);
+
+            $quiz_id = $transaction[$l]['ObjectId'];
+            $task_id = determineTaskId($quiz_id);
+            $activity_id = determineActivityId($task_id);
+//            if ($activity_id > 0) {
+//                $group_id = determineGroupId($transaction[0]['UserId'], $activity_id);
+//            } else {
+//                //If activityId couldn't be determined it might be due to object beeing posted to a group instead of an activity
+//                $group_id = getGroupIdFromObjectId($video_id);
+//                $group = get_entity($group_id);
+//                if ($group instanceof ElggEntity && $group->getSubtype() == ClipitGroup::SUBTYPE) {
+//                    $activity_id = getActivityIdFromGroupId($group_id);
+//                }
+//            }
+            $type = determineObjectType($activity_id);
+            $object['targetId'] = $activity_id;
+            $object['targetType'] = $type[0];
+            $object['targetSubtype'] = $type[1];
+
+            $object['groupId'] = $group_id;
+            $object['courseId'] = $course_id;
+            $object['activityId'] = $activity_id;
+            foreach ($transaction as $key => $line) {
+                if ($line['Event'] == 'create' && $line['ObjectType'] == 'relationship' && $line['Content'] != NULL) {
                     $temptrans[0] = $line;
                     $activity = convertLogTransactionToActivityStream($temptrans);
                     storeJSON($activity);
@@ -403,6 +468,8 @@ function convertLogTransactionToActivityStream($transaction)
             $object['targetId'] = $ids[0];
             $object['targetType'] = 'ElggEntity';
             $object['targetSubtype'] = $types[0];
+            $object['activityId'] = determineActivityId($object['targetId']);
+            $object['groupId'] = determineGroupId($actor['actorId'], $object['activityId']);
 
             if ($object['targetSubtype'] == "ClipitTag") {
                 $object['targetTitle'] = urlencode(getTagContent($ids[0]));
@@ -528,6 +595,20 @@ function convertLogTransactionToActivityStream($transaction)
             $object['groupId'] = $group_id;
             $object['courseId'] = 0;
             $object['activityId'] = $activity_id;
+
+            // relation to activity
+            $l = findValue($transaction, "create", ClipitActivity::REL_ACTIVITY_GROUP, "ObjectId", TRUE);
+            $temptrans[0] = $transaction[$l];
+            $activity = convertLogTransactionToActivityStream($temptrans);
+            storeJSON($activity);
+
+            //DEBUG
+//            ob_start();
+//            var_dump($object);
+//            $outputasdf = ob_get_contents();
+//            ob_end_clean();
+//            error_log('testtestestetst '. $outputasdf);
+
             break;
         case "DeleteGroup":
             $verb = "remove";
@@ -779,6 +860,34 @@ function findValue($transaction, $event, $subtype, $field, $line)
     return $value;
 }
 
+function determineTaskId($object_id)
+{
+    $task_id = 0;
+    $object = get_entity($object_id);
+    if ($object instanceof ElggEntity) {
+        $subtype = $object->getSubtype();
+        if ($subtype == ClipitVideo::SUBTYPE) {
+            $temp_array = get_entity_relationships($object_id, true);
+
+            foreach ($temp_array as $rel) {
+                if ($rel->relationship == ClipitTask::SUBTYPE . "-" . ClipitVideo::SUBTYPE) {
+                    $task_id = $rel->guid_one;
+                }
+            }
+        } elseif ($subtype == ClipitQuiz::SUBTYPE) {
+            $temp_array = get_entity_relationships($object_id, true);
+
+            foreach ($temp_array as $rel) {
+                if ($rel->relationship == ClipitTask::SUBTYPE . "-" . ClipitQuiz::SUBTYPE) {
+                    $task_id = $rel->guid_one;
+                }
+            }
+        }
+    }
+    return $task_id;
+}
+
+
 function determineActivityId($object_id)
 {
     $activity_id = 0;
@@ -802,7 +911,8 @@ function determineActivityId($object_id)
         $target = get_entity($target_id);
         if ($target->getSubtype() == ClipitActivity::SUBTYPE) {
             $activity_id = $target_id;
-        } else if ($target->getSubtype() == ClipitGroup::SUBTYPE || $target->getSubtype() == ClipitFile::SUBTYPE || $target->getSubtype() == ClipitStoryboard::SUBTYPE || $target->getSubtype() == ClipitVideo::SUBTYPE) {
+        } else if ($target->getSubtype() == ClipitGroup::SUBTYPE || $target->getSubtype() == ClipitFile::SUBTYPE || $target->getSubtype() == ClipitStoryboard::SUBTYPE || $target->getSubtype() == ClipitVideo::SUBTYPE ||$target->getSubtype() == ClipitTask::SUBTYPE) {
+
             $temp_array = get_entity_relationships($target_id, true);
             $activity_id = 0;
             foreach ($temp_array as $rel) {
@@ -885,7 +995,11 @@ function determineActivityType($transaction)
                 } elseif (findValue($transaction, "create", ClipitGroup::SUBTYPE, "ObjectId", FALSE) > 0) {
                     $type = "GroupCreation";
                 } elseif (findValue($transaction, "create", ClipitTask::SUBTYPE, "ObjectId", FALSE) > 0) {
-                    $type = "CreateTask";
+                    if (findValue($transaction, "create", ClipitQuiz::SUBTYPE, "ObjectId", FALSE) > 0) {
+                        $type = "CreateQuiz";
+                    } else {
+                        $type = "CreateTask";
+                    }
                 } elseif (findValue($transaction, "create", ClipitActivity::SUBTYPE, "ObjectId", FALSE) > 0) {
                     $type = "CreateActivity";
                 } elseif (findValue($transaction, "create", ClipitTrickyTopic::SUBTYPE, "ObjectId", FALSE) > 0) {
