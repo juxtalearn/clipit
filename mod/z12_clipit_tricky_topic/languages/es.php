@@ -32,6 +32,7 @@ $spanish = array(
     'education_level:primary' => 'Primaria',
     'education_level:gcse' => 'Secundaria',
     'education_level:alevel' => 'Bachillerato',
+    'education_level:vocational' => 'Formación Profesional',
     'education_level:university' => 'Universidad',
     'example:created' => 'Ejemplo creado',
     'example:edit' => 'Editar ejemplo',
