@@ -53,7 +53,7 @@ $count = elgg_extract('count', $vars);
     </thead>
     <?php foreach($tags as $tag):
         $user = array_pop(ClipitUser::get_by_id(array($tag->owner_id)));
-        $examples = ClipitExample::get_by_tags(array($tag->id));
+        $examples = ClipitExample::get_by_tag(array($tag->id));
         ?>
         <tr class="list-item">
             <td>

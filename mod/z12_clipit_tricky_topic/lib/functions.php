@@ -230,7 +230,7 @@ function example_filter_search($query){
                 foreach ($value as $tag_name) {
                     $tags = ClipitTag::get_from_search($tag_name);
                     foreach ($tags as $tag) {
-                        foreach(ClipitExample::get_by_tags(array($tag->id)) as $example){
+                        foreach(ClipitExample::get_by_tag(array($tag->id)) as $example){
                             $item_search[] = $example->id;
                         }
                     }

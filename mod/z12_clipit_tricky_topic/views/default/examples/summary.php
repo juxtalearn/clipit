@@ -13,7 +13,7 @@
 $examples = elgg_extract('entities', $vars);
 if(!$examples){
     $stumbling_block = get_input('stumbling_block');
-    $examples = ClipitExample::get_by_tags(array($stumbling_block));
+    $examples = ClipitExample::get_by_tag(array($stumbling_block));
 }
 ?>
 <?php if($examples):?>

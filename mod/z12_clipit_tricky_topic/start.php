@@ -163,7 +163,7 @@ function tt_page_handler($page){
                             $title = $tag->name;
                             elgg_push_breadcrumb($title);
                             $entities = $tag;
-                            $examples = ClipitExample::get_by_tags(array($tag->id));
+                            $examples = ClipitExample::get_by_tag(array($tag->id));
                             $tricky_topics = ClipitTrickyTopic::get_by_id(ClipitTag::get_tricky_topics($tag->id));
                             $content = elgg_view('stumbling_blocks/view',
                                 array(

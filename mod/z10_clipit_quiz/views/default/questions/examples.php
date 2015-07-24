@@ -11,7 +11,7 @@
  * @package         ClipIt
  */
 $stumbling_block = get_input('stumbling_block');
-$examples = ClipitExample::get_by_tags(array($stumbling_block));
+$examples = ClipitExample::get_by_tag(array($stumbling_block));
 $output = array();
 foreach($examples as $example){
     $output[] = array(

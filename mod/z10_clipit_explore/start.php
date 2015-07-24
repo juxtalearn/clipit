@@ -40,9 +40,8 @@ function explore_page_handler($page) {
     $activity_id = get_input('activity');
     $vars = array();
     $vars['page'] = $page[0];
-//    if($page[0]){
-        elgg_push_breadcrumb(elgg_echo('explore'), 'explore');
-//    }
+    elgg_push_breadcrumb(elgg_echo('explore'), 'explore');
+
     $selected_tab = get_input('filter', 'all');
     $searching = true;
     $href_breadcrumb = false;
@@ -84,16 +83,16 @@ function explore_page_handler($page) {
                     $title = $tag->name;
                     elgg_push_breadcrumb(elgg_echo('tag'));
                     elgg_push_breadcrumb($tag->name);
-                    $videos = ClipitVideo::get_by_tags(array($tag->id));
-                    $files = ClipitFile::get_by_tags(array($tag->id));
+                    $videos = ClipitVideo::get_by_tag(array($tag->id));
+                    $files = ClipitFile::get_by_tag(array($tag->id));
                     break;
                 case 'label':
                     $label = array_pop(ClipitLabel::get_by_id(array($id)));
                     $title = $label->name;
                     elgg_push_breadcrumb(elgg_echo('label'));
                     elgg_push_breadcrumb($label->name);
-                    $videos = ClipitVideo::get_by_labels(array($label->id));
-                    $files = ClipitFile::get_by_labels(array($label->id));
+                    $videos = ClipitVideo::get_by_label(array($label->id));
+                    $files = ClipitFile::get_by_label(array($label->id));
                     break;
                 case 'performance_item':
                     $performance_item = array_pop(ClipitPerformanceItem::get_by_id(array($id)));
@@ -102,7 +101,6 @@ function explore_page_handler($page) {
                     elgg_push_breadcrumb($performance_item->name);
                     $videos = ClipitVideo::get_by_performance_items(array($performance_item->id));
                     $files = ClipitFile::get_by_performance_items(array($performance_item->id));
-                    $files = array();
                     break;
                 case 'all':
                     if(!$text){
@@ -126,6 +124,7 @@ function explore_page_handler($page) {
             $searching = false;
             $video_ids = ClipitSite::get_videos();
             $videos = ClipitVideo::get_by_id($video_ids);
+            $files = array();
             $href = "explore";
             break;
     }
