@@ -267,7 +267,7 @@ class ClipitFile extends UBFile {
         return $return_array;
     }
 
-    static function get_by_trickytopic($tt_array){
+    static function get_by_tricky_topic($tt_array){
         $return_array = array();
         foreach($tt_array as $tt_id){
             $tt_tags = ClipitTrickyTopic::get_tags($tt_id);
