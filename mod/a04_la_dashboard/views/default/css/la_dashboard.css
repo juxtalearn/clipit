@@ -16,6 +16,7 @@
 .learning_analytics_dashboard .elgg-widgets {
     float: right;
     min-height: 30px;
+
 }
 .learning_analytics_dashboard .elgg-widget-add-control {
     text-align: right;
@@ -100,10 +101,20 @@
     text-decoration: none;
 }
 .learning_analytics_dashboard a.elgg-widget-collapse-button:before {
-    content: "\25BC";
+    content: "\f068";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    color:#32b4e5;
 }
 .learning_analytics_dashboard a.elgg-widget-collapsed:before {
-    content: "\25BA";
+    content: "\f067";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    color:#32b4e5;
 }
 .learning_analytics_dashboard .elgg-module-widget > .elgg-body {
     border-top: 1px solid #dedede;
@@ -118,22 +129,33 @@
     border-bottom: 1px solid #dedede;
 }
 .learning_analytics_dashboard a.elgg-widget-edit-button:before {
-    content:"E";
+    content:"\f040";
     box-sizing:content-box;
     position:relative;
     top:-20px;
-    right:25px;
+    right:3em;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
 }
 
 .learning_analytics_dashboard a.elgg-widget-delete-button:before {
-    content:"X";
+    content:"\f014";
     box-sizing:content-box;
     position:relative;
     top:-40px;
-    right:10px;
+    right:1.5em;
+    font-weight: bold;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
 }
 
 .learning_analytics_dashboard .elgg-widget-content {
+    max-height: 500px;
+    overflow-y: auto;
     padding: 10px;
 }
 .learning_analytics_dashboard .elgg-widget-placeholder {

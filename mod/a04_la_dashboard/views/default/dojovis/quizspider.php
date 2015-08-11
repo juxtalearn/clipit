@@ -19,7 +19,7 @@ if ( (!isset($axis) || is_null($axis)) && isset($min_values) && is_not_null($min
 ?>
 
 <div id="<?php echo $chart_identifier ?>"
-     style="width: 320px; height: 320px; margin: 0px auto 0px auto;"></div>
+     style="width: 100%;  margin: 0px auto 0px auto;"></div>
     <div id="legendNode-<?php echo $chart_identifier ?>"></div>
         <script>
 
@@ -45,19 +45,30 @@ require(["dojox/charting/Chart2D", "dojox/charting/themes/MiamiNice", "dojox/cha
                             spiderType: "polygon"
                         });
                         <?php
+                        $i=0;
+                        $e = count($results)-1;
                         foreach ($results as $number=>$series) {
-                            if ($number == 0) {
+//                            $series['data'] = str_replace('\/','/', $series['data']);
+//                            $series['data'] = str_replace(' ','', $series['data']);
+//                             $series['data'] = str_replace('.','', $series['data']);
+                            if ($i == 0) {
                                 echo("var data = [".$series['data'].",\n");
+                                  if ($e === 0) {
+                                    echo "];\n";
+                                }
                             }
-                            elseif ($number == count($results)-1) {
-                                echo("\t\t\t\t\t\t\t\t".$series['data']."];\n");
+                            elseif ($i == $e) {
+                                  echo($series['data']."];\n");
                             }
                             else {
-                                echo("\t\t\t\t\t\t\t\t".$series['data'].",\n");
+                                echo($series['data'].",");
                             }
+                            $i++;
                         }
+                        $i=0;
                         foreach ($results as $number=>$series) {
-                            echo("\t\t\t\t\tchart.addSeries(\"".$series['name']."\", {data: data[$number]}, {fill: \"".$series['color']."\"});\n");
+                            echo("\t\t\t\t\tchart.addSeries(\"".$series['name']."\", {data: data[$i]}, {fill: \"".$series['color']."\"});\n");
+                            $i+=1;
 
                         }
                         foreach ($axis as $label) {
@@ -66,7 +77,7 @@ require(["dojox/charting/Chart2D", "dojox/charting/themes/MiamiNice", "dojox/cha
                         ?>
 chart.render();
 
-var legend =  new SelectableLegend({chart: chart,horizontal:false,style:"width: 300px; height: 100px; margin: 0px auto 0px auto; overflow:scroll;"}, 'legendNode-<?php echo $chart_identifier?>');
+var legend =  new SelectableLegend({chart: chart,horizontal:false,style:"width: 100%; height: 100px; margin: 0px auto 0px auto; overflow:scroll;"}, 'legendNode-<?php echo $chart_identifier?>');
 // new Tooltip({chart:chart}, 'default');
 });
 }

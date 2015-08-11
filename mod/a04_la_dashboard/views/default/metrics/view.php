@@ -22,7 +22,7 @@ $params = array(
 //'content' => "",#$orig_urjc_content,
 'title' => $title,
 'filter' => '',
-'num_columns' => 3,
+'num_columns' =>2,
 );
 echo elgg_view_layout('la_widgets', $params);
 ?>
