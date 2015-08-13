@@ -30,7 +30,6 @@ $params = array(
 
 $task_dropdown1 = elgg_view('input/dropdown', $params);
 
-
 $params = array(
     'name' => 'params[task_id2]',
     'value' => $vars['entity']->task_id2,
@@ -55,7 +54,7 @@ $scale_dropdown = elgg_view('input/dropdown', $params);
 
 
 if (isset($vars['entity']->scale) && $vars['entity']->scale == ClipitGroup::SUBTYPE) {
-    $target_options = LADashboardHelper::getGroupBundlePHP($vars['entity']->activity_id);
+    $target_options = LADashboardHelper::getGroupBundlePHP($vars['entity']->activity_id, false);
     $target_disabled = false;
 
 } else if (isset($vars['entity']->scale) && $vars['entity']->scale == ClipitUser::SUBTYPE) {
@@ -166,7 +165,8 @@ $target_dropdown = elgg_view('input/dropdown', $params);
             elgg.get('ajax/view/metrics/get_targets', {
                 data: {
                     id: activityId,
-                    type: typeId
+                    type: typeId,
+                    addAll:0
                 },
                 success: function (data) {
                     var quiz_array = JSON.parse(data);

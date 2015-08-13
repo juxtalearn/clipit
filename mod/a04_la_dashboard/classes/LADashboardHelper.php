@@ -18,9 +18,14 @@ class LADashboardHelper
         return $result_array;
     }
 
-    public static function getGroupBundle($activityId = null)
+    public static function getGroupBundle($activityId = null, $addAll = true)
     {
-        $returnValue = array(array('id' => 0, 'name' => elgg_echo("la_dashboard:widget:quizresult:selectgroup")),array('id'=> 'all','name'=>elgg_echo("all")));
+        if ($addAll) {
+            $returnValue = array(array('id' => 0, 'name' => elgg_echo("la_dashboard:widget:quizresult:selectgroup")), array('id' => 'all', 'name' => elgg_echo("all")));
+
+        } else {
+            $returnValue = array(array('id' => 0, 'name' => elgg_echo("la_dashboard:widget:quizresult:selectgroup")));
+        }
         if (isset($activityId)) {
             $group_ids = ClipitActivity::get_groups($activityId);
             $groups = ClipitGroup::get_by_id($group_ids);
@@ -33,9 +38,9 @@ class LADashboardHelper
     }
 
 
-    public static function getGroupBundlePHP($activityId = null)
+    public static function getGroupBundlePHP($activityId = null, $addAll=true)
     {
-        $bundle = LADashboardHelper::getGroupBundle($activityId);
+        $bundle = LADashboardHelper::getGroupBundle($activityId, $addAll);
         $returnValue = array();
         foreach ($bundle as $item) {
             $returnValue[$item['id']] = $item['name'];

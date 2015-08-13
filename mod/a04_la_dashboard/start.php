@@ -22,10 +22,12 @@ function learning_analytics_dashboard_init()
     elgg_register_ajax_view('metrics/get_groups');
     elgg_register_ajax_view('metrics/get_targets');
     elgg_register_ajax_view('metrics/get_progress');
-    elgg_register_ajax_view('dojovis/progresscomparison_ajax'); //NEW
-    elgg_register_ajax_view('widgets/quizresult/quizresult_ajax'); //NEW
+    elgg_register_ajax_view('dojovis/progresscomparison_ajax');
+    elgg_register_ajax_view('widgets/quizresult/quizresult_ajax');
+    elgg_register_ajax_view('widgets/quizresultcompare/quizresultcompare_ajax'); //NEW
     elgg_register_page_handler('metric', 'getmetric_clipit_page_handler');
     elgg_register_ajax_view('metrics/metric');
+
     elgg_register_widget_type('metric', elgg_echo('la_dashboard:la_metrics:title'), elgg_echo('la_dashboard:widget:la_metrics:description'), 'la_metrics', true);
     elgg_register_widget_type('quizresult', elgg_echo('la_dashboard:quizresult:title'), elgg_echo('la_dashboard:widget:quizresult:description'), 'la_metrics,quizstudents,quizgroups,quizactivity', true);
     elgg_register_widget_type('quizresultcompare', elgg_echo('la_dashboard:quizresultscompare:title'), elgg_echo('la_dashboard:widget:quizresultcompare:description'), 'la_metrics', true);
@@ -43,7 +45,7 @@ function learning_analytics_dashboard_init()
     elgg_register_css('dashboardcss', "{$plugin_url}/views/default/css/la_dashboard.css", 1000);
     elgg_load_css("dashboardcss");
     elgg_register_plugin_hook_handler('action','widgets/save','save_action_hook');
-
+   // elgg_register_menu_item('widget',array('name'=>"Resize",'text'=>"Resize this widget",'href'=>'http://www.google.de','rel'=>'toogle',"class"=>"la-widget-resize-button"));//NEW
 }
 
 /**

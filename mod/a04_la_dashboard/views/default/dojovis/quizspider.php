@@ -4,12 +4,8 @@
 /*
 Helper view for showing a dojo spiderweb
 */
+extract($vars);
 
-$widget_id = $vars['widget_id'];
-$min_values = $vars['min_values'];
-$max_values = $vars['max_values'];
-$axis = $vars['axis'];
-$results = $vars['results'];
 $chart_identifier = "quiz-widget-$widget_id";
 
 if ( (!isset($axis) || is_null($axis)) && isset($min_values) && is_not_null($min_values)) {
@@ -23,16 +19,12 @@ if ( (!isset($axis) || is_null($axis)) && isset($min_values) && is_not_null($min
     <div id="legendNode-<?php echo $chart_identifier ?>"></div>
         <script>
 
-require(["dojox/charting/Chart2D", "dojox/charting/themes/MiamiNice", "dojox/charting/axis2d/Default",
-    "dojox/charting/plot2d/Default", "dojox/charting/plot2d/Spider",
+require(["dojox/charting/Chart2D", "dojox/charting/themes/Claro",
+     "dojox/charting/plot2d/Spider",
     "dojox/charting/axis2d/Base", "dojox/charting/widget/SelectableLegend",
-    "dojox/charting/action2d/Tooltip", "dojo/ready"],
-                function (Chart, Theme, Default, Default, Spider, Base, SelectableLegend, Tooltip, ready) {
+    "dojox/charting/action2d/Tooltip", "dojo/ready", "dojox/charting/axis2d/Default","dojox/charting/plot2d/Default",],
+                function (Chart, Theme, Spider, Base, SelectableLegend, Tooltip, ready) {
                     ready(function () {
-//                        if (legend_<?php //echo $chart_identifier?>// != undefined) {
-//                            legend_<?php //echo $chart_identifier?>//.destroyRecursive(true);
-//                        }
-
                         var chart = new dojox.charting.Chart("<?php echo $chart_identifier?>");
 
                         chart.setTheme(Theme);
@@ -48,9 +40,6 @@ require(["dojox/charting/Chart2D", "dojox/charting/themes/MiamiNice", "dojox/cha
                         $i=0;
                         $e = count($results)-1;
                         foreach ($results as $number=>$series) {
-//                            $series['data'] = str_replace('\/','/', $series['data']);
-//                            $series['data'] = str_replace(' ','', $series['data']);
-//                             $series['data'] = str_replace('.','', $series['data']);
                             if ($i == 0) {
                                 echo("var data = [".$series['data'].",\n");
                                   if ($e === 0) {
@@ -67,12 +56,12 @@ require(["dojox/charting/Chart2D", "dojox/charting/themes/MiamiNice", "dojox/cha
                         }
                         $i=0;
                         foreach ($results as $number=>$series) {
-                            echo("\t\t\t\t\tchart.addSeries(\"".$series['name']."\", {data: data[$i]}, {fill: \"".$series['color']."\"});\n");
+                            echo("chart.addSeries(\"".$series['name']."\", {data: data[$i]}, {fill: \"".$series['color']."\"});");
                             $i+=1;
 
                         }
                         foreach ($axis as $label) {
-                            echo("\t\t\t\t\tchart.addAxis(\"".$label."\", {type: \"Base\", min: 0, max: 100 });\n");
+                            echo("chart.addAxis(\"".$label."\", {type: \"Base\", min: 0, max: 100 });");
                         }
                         ?>
 chart.render();
