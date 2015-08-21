@@ -263,7 +263,7 @@ function convertLogTransactionToActivityStream($transaction)
             if ($activity_id > 0) {
                 $group_id = determineGroupId($transaction[0]['UserId'], $activity_id);
             } else {
-                //If activityId couldn't be determined it might be due to object beeing posted to a group instead of an activity
+                //If activityId couldn't be determined it might be due to object being posted to a group instead of an activity
                 $group_id = getGroupIdFromObjectId($video_id);
                 $group = get_entity($group_id);
                 if ($group instanceof ElggEntity && $group->getSubtype() == ClipitGroup::SUBTYPE) {
@@ -468,8 +468,18 @@ function convertLogTransactionToActivityStream($transaction)
             $object['targetId'] = $ids[0];
             $object['targetType'] = 'ElggEntity';
             $object['targetSubtype'] = $types[0];
-            $object['activityId'] = determineActivityId($object['targetId']);
-            $object['groupId'] = determineGroupId($actor['actorId'], $object['activityId']);
+//            $object['activityId'] = determineActivityId($object['targetId']);
+            $activity_id = determineActivityId($object['targetId']);
+            $group_id = determineGroupId($actor['actorId'], $object['activityId']);
+            if ($activity_id == 0){
+                // parent - clone relationship
+                $group_id = getGroupIdFromObjectId($ids[0]);
+                $activity_id = getActivityIdFromGroupId($group_id);
+                $object['objectSubtype'] = determineObjectType($ids[1])[1];
+                $object['targetSubtype'] = determineObjectType($ids[0])[1];
+            }
+            $object['groupId'] = $group_id;
+            $object['activityId'] = $activity_id;
 
             if ($object['targetSubtype'] == "ClipitTag") {
                 $object['targetTitle'] = urlencode(getTagContent($ids[0]));
@@ -597,10 +607,18 @@ function convertLogTransactionToActivityStream($transaction)
             $object['activityId'] = $activity_id;
 
             // relation to activity
-            $l = findValue($transaction, "create", ClipitActivity::REL_ACTIVITY_GROUP, "ObjectId", TRUE);
-            $temptrans[0] = $transaction[$l];
-            $activity = convertLogTransactionToActivityStream($temptrans);
-            storeJSON($activity);
+//            $l = findValue($transaction, "create", ClipitActivity::REL_ACTIVITY_GROUP, "ObjectId", TRUE);
+//            $temptrans[0] = $transaction[$l];
+//            $activity = convertLogTransactionToActivityStream($temptrans);
+//            storeJSON($activity);
+
+            foreach ($transaction as $key => $line) {
+                if ($line['Event'] == 'create' && $line['ObjectType'] == 'relationship') {
+                    $temptrans[0] = $line;
+                    $activity = convertLogTransactionToActivityStream($temptrans);
+                    storeJSON($activity);
+                }
+            }
 
             //DEBUG
 //            ob_start();
@@ -920,6 +938,14 @@ function determineActivityId($object_id)
                     $activity_id = $rel->guid_one;
                 }
             }
+        } else if ($target->getSubtype() == ClipitQuiz::SUBTYPE){
+            $temp_array = get_entity_relationships($target_id, true);
+            foreach ($temp_array as $rel){
+                if ($rel->relationship == ClipitTask::SUBTYPE . "-" . ClipitQuiz::SUBTYPE){
+                    $activity_id = determineActivityId($rel->guid_one);
+                    break;
+                }
+            }
         }
     }
     return $activity_id;
@@ -1008,11 +1034,24 @@ function determineActivityType($transaction)
                     $type = "CreateTag";
                 }
             } elseif ($transaction[0]['ObjectType'] == 'relationship') {
-                if (isset($transaction[1]['ObjectType']) && $transaction[1]['ObjectType'] == 'relationship' && $transaction[1]['Event'] == 'create') {
-                    $type = "AssignMultipleRelationships";
-                } else {
+                $counter = 0;
+                foreach ($transaction as $line) {
+                    if ($line['ObjectType'] == 'relationship' && $line['Event'] == 'create'){
+                        $counter++;
+                    }
+                    if ($counter >1){
+                        $type = "AssignMultipleRelationships";
+                        break;
+                    }
+                }
+                if ($counter == 1) {
                     $type = "AssignRelationShip";
                 }
+//                if (isset($transaction[1]['ObjectType']) && $transaction[1]['ObjectType'] == 'relationship' && $transaction[1]['Event'] == 'create') {
+//                    $type = "AssignMultipleRelationships";
+//                } else {
+//                    $type = "AssignRelationShip";
+//                }
             }
         } elseif ($transaction[0]['Event'] == 'update') {
             if (!empty($transaction[1])) {

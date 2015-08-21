@@ -3,10 +3,10 @@
 class ActivityStreamer
 {
 
+
+
     static function get_metric($metric_id, $context)
     {
-        global $con;
-        global $CONFIG;
 
         if (empty($metric_id) && ActivityStreamer::valid_metric_id($metric_id)) {
             error_log("ActivityStreamer couldn't handle the get_metric request due to a missing or invalid metric_id!");
@@ -37,92 +37,10 @@ class ActivityStreamer
             //$return_url = "http://176.28.14.94/~workbench/jxlDefinitions/clipItDriver.php";
 
 
-            //Assemble the sql request based on the given context
-            $sql = "SELECT json FROM " . $CONFIG->dbprefix . "activitystreams";
-            $filter = "";
-            $parameter_string = "";
-            //If $context is not an array, we will simply initialize an empty array
-            if (!is_array($context)) {
-                $context = array();
+            if (! ($json =  elgg_trigger_plugin_hook('activitystreamer',$metric_id, array('metric_id'=>$metric_id,'context' => $context), false))) {
+              //Default behaviour
+                $json = self::assemble_data($context);
             }
-            if (isset($context['actor_id']) && ($context['actor_id'] != 0)) {
-                $filter = $filter . "(`actor_id` = ?)";
-            } else {
-                $filter = $filter . "(`actor_id` = ? OR TRUE)";
-                $context['actor_id'] = 0;
-            }
-            if (isset($context['object_id']) && ($context['object_id'] != 0)) {
-                $filter = $filter . " AND (`object_id` = ?)";
-            } else {
-                $filter = $filter . " AND (`object_id` = ? OR TRUE)";
-                $context['object_id'] = 0;
-            }
-            if (isset($context['group_id']) && ($context['group_id'] != 0)) {
-                $filter = $filter . " AND (`group_id` = ?)";
-            } else {
-                $filter = $filter . " AND (`group_id` = ? OR TRUE)";
-                $context['group_id'] = 0;
-            }
-            if (isset($context['activity_id']) && ($context['activity_id'] != 0)) {
-                $filter = $filter . " AND (`activity_id` = ?)";
-            } else {
-                $filter = $filter . " AND (`activity_id` = ? OR TRUE)";
-                $context['activity_id'] = 0;
-            }
-            if (isset($context['verb']) && ($context['verb'] != "")) {
-                $filter = $filter . " AND (`verb` = ?)";
-            } else {
-                $filter = $filter . " AND (`verb` = ? OR TRUE) AND (`verb` <> 'login') AND (`verb` <> 'logout')";
-                $context['verb'] = "";
-            }
-            if (isset($context['role']) && ($context['role'] != "")) {
-                $filter = $filter . " AND (`role` = ?)";
-            } else {
-                $filter = $filter . " AND (`role` = ? OR TRUE)";
-                $context['role'] = "";
-            }
-            if (isset($context['lowerbound']) && ($context['lowerbound'] != 0)) {
-                $filter = $filter . " AND (`timestamp` >= ?)";
-            } else {
-                $filter = $filter . " AND (`timestamp` >= ? OR TRUE)";
-                $context['lowerbound'] = 0;
-            }
-            if (isset($context['upperbound']) && ($context['upperbound'] != 0)) {
-                $filter = $filter . " AND (`timestamp` <= ?)";
-            } else {
-                $filter = $filter . " AND (`timestamp` <= ? OR TRUE)";
-                $context['upperbound'] = 0;
-            }
-            if ($filter != "") {
-                $sql = $sql . " WHERE " . $filter;
-            }
-
-            if (isset($context['debug']) && ($context['debug'] == true)) {
-                $sql = $sql . " ORDER BY `stream_id` DESC LIMIT 100;";
-            } else {
-                $sql = $sql . " ORDER BY `stream_id`;";
-            }
-
-            //error_log($sql);
-            $statement = $con->stmt_init();
-            $statement->prepare($sql);
-            $statement->bind_param("iiiissii",
-                $context['actor_id'], $context['object_id'], $context['group_id'], $context['activity_id'],
-                $context['verb'], $context['role'], $context['lowerbound'], $context['upperbound']);
-            $statement->execute();
-            $statement->store_result();
-            $statement->bind_result($json_entry);
-            $activities = "";
-            while ($statement->fetch()) {
-/*                $json_array = json_decode($json_entry);
-                if (strlen($json_array['object']['content']) > 20) {
-                    $json_array['object']['content'] = substr($json_array['object']['content'], 0, 19);
-                }*/
-                $activities[] = $json_entry;
-            }
-            $statement->close();
-            $json = json_encode($activities);
-
             $hashed_data = md5($json);
             $existing_id = check_for_existing_results($metric_id, $hashed_data);
             //TODO Check for missing return data
@@ -133,7 +51,7 @@ class ActivityStreamer
                 //else we will create a new object, store this request in our database and return the id of the new object
                 $return_id = ClipitLA::create(array());
 //                $prop_value_array["return_id"] = (int)$return_id;
-                $prop_value_array["metric_id"] = (int)$metric_id;
+                $prop_value_array["metric_id"] = $metric_id;
                 $prop_value_array["context"] = $context;
                 $prop_value_array["metric_received"] = false;
                 ClipitLA::set_properties($return_id, $prop_value_array);
@@ -236,6 +154,106 @@ class ActivityStreamer
         }
         return $metrics;
     }
+
+    /**
+     * //Assemble the sql request based on the given context
+     * @param $context
+     * @param $CONFIG
+     * @param $con
+     * @param $json_entry
+     * @return array
+     */
+    protected static function assemble_data($context, $CONFIG, $con, $json_entry)
+    {
+        global $con;
+        global $CONFIG;
+
+        $sql = "SELECT json FROM " . $CONFIG->dbprefix . "activitystreams";
+        $filter = "";
+        $parameter_string = "";
+        //If $context is not an array, we will simply initialize an empty array
+        if (!is_array($context)) {
+            $context = array();
+        }
+        if (isset($context['actor_id']) && ($context['actor_id'] != 0)) {
+            $filter = $filter . "(`actor_id` = ?)";
+        } else {
+            $filter = $filter . "(`actor_id` = ? OR TRUE)";
+            $context['actor_id'] = 0;
+        }
+        if (isset($context['object_id']) && ($context['object_id'] != 0)) {
+            $filter = $filter . " AND (`object_id` = ?)";
+        } else {
+            $filter = $filter . " AND (`object_id` = ? OR TRUE)";
+            $context['object_id'] = 0;
+        }
+        if (isset($context['group_id']) && ($context['group_id'] != 0)) {
+            $filter = $filter . " AND (`group_id` = ?)";
+        } else {
+            $filter = $filter . " AND (`group_id` = ? OR TRUE)";
+            $context['group_id'] = 0;
+        }
+        if (isset($context['activity_id']) && ($context['activity_id'] != 0)) {
+            $filter = $filter . " AND (`activity_id` = ?)";
+        } else {
+            $filter = $filter . " AND (`activity_id` = ? OR TRUE)";
+            $context['activity_id'] = 0;
+        }
+        if (isset($context['verb']) && ($context['verb'] != "")) {
+            $filter = $filter . " AND (`verb` = ?)";
+        } else {
+            $filter = $filter . " AND (`verb` = ? OR TRUE) AND (`verb` <> 'login') AND (`verb` <> 'logout')";
+            $context['verb'] = "";
+        }
+        if (isset($context['role']) && ($context['role'] != "")) {
+            $filter = $filter . " AND (`role` = ?)";
+        } else {
+            $filter = $filter . " AND (`role` = ? OR TRUE)";
+            $context['role'] = "";
+        }
+        if (isset($context['lowerbound']) && ($context['lowerbound'] != 0)) {
+            $filter = $filter . " AND (`timestamp` >= ?)";
+        } else {
+            $filter = $filter . " AND (`timestamp` >= ? OR TRUE)";
+            $context['lowerbound'] = 0;
+        }
+        if (isset($context['upperbound']) && ($context['upperbound'] != 0)) {
+            $filter = $filter . " AND (`timestamp` <= ?)";
+        } else {
+            $filter = $filter . " AND (`timestamp` <= ? OR TRUE)";
+            $context['upperbound'] = 0;
+        }
+        if ($filter != "") {
+            $sql = $sql . " WHERE " . $filter;
+        }
+
+        if (isset($context['debug']) && ($context['debug'] == true)) {
+            $sql = $sql . " ORDER BY `stream_id` DESC LIMIT 100;";
+        } else {
+            $sql = $sql . " ORDER BY `stream_id`;";
+        }
+
+        //error_log($sql);
+        $statement = $con->stmt_init();
+        $statement->prepare($sql);
+        $statement->bind_param("iiiissii",
+            $context['actor_id'], $context['object_id'], $context['group_id'], $context['activity_id'],
+            $context['verb'], $context['role'], $context['lowerbound'], $context['upperbound']);
+        $statement->execute();
+        $statement->store_result();
+        $statement->bind_result($json_entry);
+        $activities = "";
+        while ($statement->fetch()) {
+            /*                $json_array = json_decode($json_entry);
+                            if (strlen($json_array['object']['content']) > 20) {
+                                $json_array['object']['content'] = substr($json_array['object']['content'], 0, 19);
+                            }*/
+            $activities[] = $json_entry;
+        }
+        $statement->close();
+        $json = json_encode($activities);
+        return $json;
+    }
 }
 
 function store_analysis_request($return_id, $metric_id, $hashed_data, $timestamp)
@@ -243,7 +261,7 @@ function store_analysis_request($return_id, $metric_id, $hashed_data, $timestamp
     global $con;
     global $store_analysis_statement;
     if ($store_analysis_statement instanceof mysqli_stmt) {
-        $store_analysis_statement->bind_param('iisi', $return_id, $metric_id, $hashed_data, $timestamp);
+        $store_analysis_statement->bind_param('issi', $return_id, $metric_id, $hashed_data, $timestamp);
         $store_analysis_statement->execute();
     } else {
         error_log(mysqli_error($con));
@@ -259,7 +277,7 @@ function check_for_existing_results($metric_id, $hashed_data)
     $existing_id = 0;
     //Check whether there is an existing result matching the request
     if ($get_analysis_statement instanceof mysqli_stmt) {
-        $get_analysis_statement->bind_param('is', $metric_id, $hashed_data);
+        $get_analysis_statement->bind_param('ss', $metric_id, $hashed_data);
         $get_analysis_statement->execute();
         $get_analysis_statement->store_result();
         $get_analysis_statement->bind_result($id_entry);
