@@ -107,6 +107,9 @@
     font-weight: normal;
     line-height: 1;
     color:#32b4e5;
+    /*position:absolute;*/
+    /*top:1.3ex;*/
+    /*right:0.5em;*/
 }
 .learning_analytics_dashboard a.elgg-widget-collapsed:before {
     content: "\f067";
@@ -128,12 +131,18 @@
     padding: 2%;
     border-bottom: 1px solid #dedede;
 }
+
+.learning_analytics_dashboard ul.elgg-menu-widget li {
+    display:inline-block;
+    margin-left: 10px;
+}
+
 .learning_analytics_dashboard a.elgg-widget-edit-button:before {
     content:"\f040";
     box-sizing:content-box;
-    position:relative;
-    top:-20px;
-    right:3em;
+    /*position:absolute;*/
+    /*top:1.3ex;*/
+    /*right:3.5em;*/
     font-family: FontAwesome;
     font-style: normal;
     font-weight: normal;
@@ -143,9 +152,22 @@
 .learning_analytics_dashboard a.elgg-widget-delete-button:before {
     content:"\f014";
     box-sizing:content-box;
-    position:relative;
-    top:-40px;
-    right:1.5em;
+    /*position:absolute;*/
+    /*top:1.3ex;*/
+    /*right:2.0em;*/
+    font-weight: bold;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+}
+
+.learning_analytics_dashboard a.elgg-widget-resize-button:before {
+    content:"\f08e";/*"\f065";*/
+    box-sizing:content-box;
+    /*position:absolute;*/
+    /*top:1.3ex;*/
+    /*right:5em;*/
     font-weight: bold;
     font-family: FontAwesome;
     font-style: normal;

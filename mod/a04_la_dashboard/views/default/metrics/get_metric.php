@@ -10,8 +10,8 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$metric_id = get_input("metric");
-$metric = array_pop(ClipitLA::get_by_id(array($metric_id)));
+$return_id = get_input("return_id");
+$metric = array_pop(ClipitLA::get_by_id(array($return_id)));
 if($metric->metric_received){
     echo elgg_view('output/iframe', array(
         'value'  => elgg_normalize_url(elgg_format_url("metric/{$metric->file_id}")),

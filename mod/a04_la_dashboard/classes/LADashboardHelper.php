@@ -2,7 +2,8 @@
 
 class LADashboardHelper
 {
-    public static function getStumblingBlocksFromQuiz($quiz_id) {
+    public static function getStumblingBlocksFromQuiz($quiz_id)
+    {
         $stumbling_blocks = array();
         $questions = ClipitQuiz::get_quiz_questions($quiz_id);
         foreach ($questions as $question_id) {
@@ -38,7 +39,7 @@ class LADashboardHelper
     }
 
 
-    public static function getGroupBundlePHP($activityId = null, $addAll=true)
+    public static function getGroupBundlePHP($activityId = null, $addAll = true)
     {
         $bundle = LADashboardHelper::getGroupBundle($activityId, $addAll);
         $returnValue = array();
@@ -54,7 +55,7 @@ class LADashboardHelper
         $returnValue = array(array('id' => 0, 'name' => elgg_echo("la_dashboard:widget:quizresult:selectuser")));
         if (isset($activityId)) {
             $user_ids = ClipitActivity::get_students($activityId);
-             $users = ClipitUser::get_by_id($user_ids);
+            $users = ClipitUser::get_by_id($user_ids);
             foreach ($users as $user) {
                 $bundle = array('id' => $user->id, 'name' => $user->name);
                 $returnValue[] = $bundle;
@@ -73,7 +74,6 @@ class LADashboardHelper
         }
         return $returnValue;
     }
-
 
 
     public static function getQuizTasks($activityId = null)
@@ -108,38 +108,74 @@ class LADashboardHelper
     }
 
 
-    public static function getProgressBundle($activityId,$group_id) {
+    public static function getProgressBundle($activityId, $group_id)
+    {
         $task_ids = ClipitActivity::get_tasks($activityId);
         $act_start = new DateTime();
         $activity_start = array_pop(ClipitActivity::get_by_id(array($activityId)))->start;
         $act_start->setTimestamp($activity_start);
         $tasks = ClipitTask::get_by_id($task_ids);
         $data = array();
-        foreach ($tasks as $task){
+        foreach ($tasks as $task) {
 
-            $object=array();
-            $object['label']=$task->name;
+            $object = array();
+            $object['label'] = $task->name;
             $dateObject = new DateTime();
-            $task_start=$dateObject->setTimestamp($task->start);
+            $task_start = $dateObject->setTimestamp($task->start);
             $dateObject = new DateTime();
-            $task_end=$dateObject->setTimestamp($task->end);
+            $task_end = $dateObject->setTimestamp($task->end);
 
-            $object['plannedStart']['day']=date_diff($task_start,$act_start)->days;
-            $object['plannedStart']['date']=$task->start;
-            $object['plannedEnd']['day']= date_diff($task_end,$act_start)->days;
-            $object['plannedEnd']['date']= $task->end;
-            $object['realStart']['day']= date_diff($task_start,$act_start)->days+1;
-            $object['realStart']['date']= $task->start + 3000*60*60*24;
-            $object['realEnd']['day']= date_diff($task_end,$act_start)->days-1;
-            $object['realEnd']['date']=$task->end - 3000*60*60*24;
+            $object['plannedStart']['day'] = date_diff($task_start, $act_start)->days;
+            $object['plannedStart']['date'] = $task->start;
+            $object['plannedEnd']['day'] = date_diff($task_end, $act_start)->days;
+            $object['plannedEnd']['date'] = $task->end;
+            $object['realStart']['day'] = date_diff($task_start, $act_start)->days + 1;
+            $object['realStart']['date'] = $task->start + 3 * 60 * 60 * 24;
+            $object['realEnd']['day'] = date_diff($task_end, $act_start)->days - 1;
+            $object['realEnd']['date'] = $task->end - 3 * 60 * 60 * 24;
             $label = $task->name;
-            $completed = ClipitTask::get_completed_status($task->id,$group_id);
+            $completed = ClipitTask::get_completed_status($task->id, $group_id);
 
-            if  ( $completed ) {
+            if ($completed) {
                 error_log($completed);
             }
-            $data[]=$object;
+            $data[] = $object;
         }
-        return array('data' =>$data);
+        return array('data' => $data);
+    }
+
+    public static function assembleUserData($user_id, $user_name)
+    {
+        global $CONFIG;
+        global $con;
+        $query = "SELECT * FROM ".$CONFIG->dbprefix."entity_relationships WHERE guid_two = " . $user_id . " AND relationship LIKE 'ClipitActivity-%';";
+        $relationships = mysqli_query($con, $query);
+        $result_data = new stdClass();
+        $result_data->user_name = $user_name;
+        $result_data->user_id = $user_id;
+        $streams = array();
+        if ($relationships) {
+            foreach ($relationships as $rel) {
+                $activity_id = $rel['guid_one'];
+                $activity_stream = array();
+                $activity_stream_result = mysqli_query($con, "SELECT * FROM ".$CONFIG->dbprefix."activitystreams WHERE activity_id = " . $activity_id . " ORDER BY timestamp DESC;");
+                while ($row = mysqli_fetch_array($activity_stream_result, MYSQLI_ASSOC)) {
+                    $activity_stream[] = $row['json'];
+                }
+                $name_id_result = mysqli_query($con, "SELECT * FROM ".$CONFIG->dbprefix."metadata WHERE entity_guid = " . $activity_id . " AND name_id = 10;");
+                $name_id = mysqli_fetch_array($name_id_result, MYSQLI_ASSOC)['value_id'];
+                $name_result = mysqli_query($con, "SELECT * FROM ".$CONFIG->dbprefix."metastrings WHERE id = " . $name_id . ";");
+                $name = mysqli_fetch_array($name_result, MYSQLI_ASSOC)['string'];
+                $activity = new stdClass();
+                $activity->aid = $activity_id;
+                $activity->name = $name;
+                $activity->stream = $activity_stream;
+                $streams[] = $activity;
+            }
+        } else
+            die("no mysql results found");
+        $result_data->activities = $streams;
+        $json = json_encode(array($result_data));
+        return $json;
     }
 }

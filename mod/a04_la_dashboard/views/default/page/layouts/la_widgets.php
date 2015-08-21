@@ -63,3 +63,4 @@ echo '</div>';
 elgg_pop_context();
 
 echo elgg_view('graphics/ajax_loader', array('id' => 'elgg-widget-loader'));
+elgg_load_js('la.widgets');

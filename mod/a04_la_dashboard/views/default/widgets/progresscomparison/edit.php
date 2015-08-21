@@ -10,6 +10,8 @@ foreach ($activities as $activity) {
 }
 
 $params = array(
+    'class' => "form-control available-metrics-$widget_id",
+    'style' => 'padding-top: 5px;padding-bottom: 5px;',
     'name' => 'params[activity_id]',
     'value' => $vars['entity']->activity_id,
     'options_values' => $activity_options,
@@ -29,6 +31,8 @@ if (is_null($activity_id)||empty($activity_id)){
 }
 
 $params = array(
+    'class' => "form-control available-metrics-$widget_id",
+    'style' => 'padding-top: 5px;padding-bottom: 5px;',
     'name' => 'params[group_id]',
     'value' => $vars['entity']->group_id,
     'options_values' => $group_options,

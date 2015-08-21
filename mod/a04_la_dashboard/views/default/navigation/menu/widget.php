@@ -13,6 +13,7 @@ if (isset($vars['class'])) {
     $class .= " {$vars['class']}";
 }
 
+
 foreach ($vars['menu'] as $section => $menu_items) {
     echo elgg_view('navigation/menu/elements/section', array(
         'items' => $menu_items,
@@ -23,6 +24,9 @@ foreach ($vars['menu'] as $section => $menu_items) {
         'item_class' => $item_class,
     ));
 }
+elgg_load_js("lightbox");
+elgg_load_css("lightbox");
+elgg_load_js('la.widgets');
 
 ?>
 

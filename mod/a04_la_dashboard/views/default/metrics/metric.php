@@ -15,17 +15,17 @@ $metrics = get_input('metrics');
 ?>
 <?php
     $id = $metrics['target'];
-    $metric_la = ClipitLA::get_metric((int)$metrics['metric_id'], array('activity_id' => $metrics['context']));
+    $metric_la = ClipitLA::get_metric($metrics['metric_id'], $metrics['context']);
 ?>
 <script>
 $(function(){
     var $content = $("#metric-data-<?php echo $id;?>"),
-        metric_id = $content.data("metric");
+        return_id = $content.data("metric");
     timeout = 3000;
     var get_metric = function () {
         elgg.get('ajax/view/metrics/get_metric', {
             data: {
-                metric: metric_id
+                return_id: return_id
             },
             success: function (data) {
                 if (data) {
@@ -34,7 +34,7 @@ $(function(){
                 }
             }
         });
-    }
+    };
     get_metric();
     var refreshAjaxCall = setInterval(get_metric, timeout);
 });

@@ -10,6 +10,8 @@ foreach ($activities as $activity) {
 }
 
 $params = array(
+    'class' => "form-control available-metrics-$widget_id",
+    'style' => 'padding-top: 5px;padding-bottom: 5px;',
     'name' => 'params[activity_id]',
     'value' => $vars['entity']->activity_id,
     'options_values' => $activity_options,
@@ -20,6 +22,8 @@ $activity_dropdown = elgg_view('input/dropdown', $params);
 
 $task_options = LADashboardHelper::getQuizTasksPHP($vars['entity']->activity_id);
 $params = array(
+    'class' => "form-control available-metrics-$widget_id",
+    'style' => 'padding-top: 5px;padding-bottom: 5px;',
     'name' => 'params[task_id1]',
     'value' => $vars['entity']->task_id1,
     'options_values' => $task_options,
@@ -31,6 +35,8 @@ $params = array(
 $task_dropdown1 = elgg_view('input/dropdown', $params);
 
 $params = array(
+    'class' => "form-control available-metrics-$widget_id",
+    'style' => 'padding-top: 5px;padding-bottom: 5px;',
     'name' => 'params[task_id2]',
     'value' => $vars['entity']->task_id2,
     'options_values' => $task_options,
@@ -43,6 +49,8 @@ $task_dropdown2 = elgg_view('input/dropdown', $params);
 
 
 $params = array(
+    'class' => "form-control available-metrics-$widget_id",
+    'style' => 'padding-top: 5px;padding-bottom: 5px;',
     'name' => 'params[scale]',
     'value' => $vars['entity']->scale,
     'options_values' => array(ClipitActivity::SUBTYPE => elgg_echo('activity'), ClipitGroup::SUBTYPE => elgg_echo('group'), ClipitUser::SUBTYPE => elgg_echo('student')),
@@ -65,6 +73,8 @@ if (isset($vars['entity']->scale) && $vars['entity']->scale == ClipitGroup::SUBT
     $target_options = LADashboardHelper::getUserBundlePHP(null);
 }
 $params = array(
+    'class' => "form-control available-metrics-$widget_id",
+    'style' => 'padding-top: 5px;padding-bottom: 5px;',
     'name' => 'params[target_id]',
     'value' => $vars['entity']->target_id,
     'options_values' => $target_options,

@@ -14,5 +14,6 @@ $german = array(
     "la_dashboard:widget:la_metrics:description" => "Dieses Widget zeigt Graphen und Statistiken aus einem Pool von Metriken der Analysis Workbench an.",
     "la_dashboard:widget:quizresult:description" => "Visualisiert die Quizergebnisse bezogen auf die Stolpersteine.",
     "la_dashboard:widget:quizresultcompare:description" => "Erlaubt den Vergleich zweier Quizergebnisse",
+    "la_dashboard:widget:resize" => "resize widget",
 );
 add_translation('de', $german);

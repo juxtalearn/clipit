@@ -10,6 +10,8 @@ foreach ($activities as $activity) {
 }
 
 $params = array(
+    'class' => "form-control available-metrics-$widget_id",
+    'style' => 'padding-top: 5px;padding-bottom: 5px;',
     'name' => 'params[activity_id]',
     'value' => $vars['entity']->activity_id,
     'options_values' => $activity_options,
@@ -20,6 +22,8 @@ $activity_dropdown = elgg_view('input/dropdown', $params);
 
 $quiz_options = LADashboardHelper::getQuizTasksPHP($vars['entity']->activity_id);
 $params = array(
+    'class' => "form-control available-metrics-$widget_id",
+    'style' => 'padding-top: 5px;padding-bottom: 5px;',
     'name' => 'params[quiz_id]',
     'value' => $vars['entity']->quiz_id,
     'options_values' => $quiz_options,
@@ -31,6 +35,8 @@ $params = array(
 $task_dropdown = elgg_view('input/dropdown', $params);
 
 $params = array(
+    'class' => "form-control available-metrics-$widget_id",
+    'style' => 'padding-top: 5px;padding-bottom: 5px;',
     'name' => 'params[scale]',
     'value' => $vars['entity']->scale,
     'options_values' => array(ClipitActivity::SUBTYPE => elgg_echo('activity'),ClipitGroup::SUBTYPE => elgg_echo('group')),
@@ -49,6 +55,8 @@ if ( $vars['entity']->scale == ClipitGroup::SUBTYPE) {
 }
 
 $params = array(
+    'class' => "form-control available-metrics-$widget_id",
+    'style' => 'padding-top: 5px;padding-bottom: 5px;',
     'name' => 'params[group_id]',
     'value' => $vars['entity']->group_id,
     'options_values' => $group_options,
@@ -63,6 +71,8 @@ if ( isset($vars['entity']->question_or_stumblingblock) && empty($vars['entity']
     $vars['entity']->question_or_stumblingblock = ClipitTag::SUBTYPE;
 }
 $params = array(
+    'class' => "form-control available-metrics-$widget_id",
+    'style' => 'padding-top: 5px;padding-bottom: 5px;',
     'name' => 'params[question_or_stumblingblock]',
     'value' => $vars['entity']->question_or_stumblingblock,
     'options_values' => array(ClipitTag::SUBTYPE => elgg_echo('stumblingblock'),ClipitQuizQuestion::SUBTYPE => elgg_echo('question')),

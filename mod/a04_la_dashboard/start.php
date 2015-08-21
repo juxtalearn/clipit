@@ -44,8 +44,11 @@ function learning_analytics_dashboard_init()
     elgg_register_css("dojotoolkitcss","{$plugin_url}/vendor/dojo/resources/dojo.css");
     elgg_register_css('dashboardcss', "{$plugin_url}/views/default/css/la_dashboard.css", 1000);
     elgg_load_css("dashboardcss");
+
+    elgg_register_js('la.widgets', 'js/a04_la_dashboard/la_widgets.php', 'footer');
     elgg_register_plugin_hook_handler('action','widgets/save','save_action_hook');
-   // elgg_register_menu_item('widget',array('name'=>"Resize",'text'=>"Resize this widget",'href'=>'http://www.google.de','rel'=>'toogle',"class"=>"la-widget-resize-button"));//NEW
+    elgg_register_plugin_hook_handler('register', 'menu:widget', 'widgetmenu_hook');
+
 }
 
 /**
@@ -64,6 +67,23 @@ function save_action_hook($hook,$type,$returnvalue,$params) {
         }
     }
     set_input('params',$input);
+}
+
+function widgetmenu_hook($hook, $type, $return, $params)
+{
+    $widget = $params['entity'];
+//    elgg_register_menu_item('widget', array('name' => "Resize", 'text' => "", 'href' => '#', 'rel' => 'toogle', "class" => "elgg-widget-resize-button"));//NEW
+    $resize = array(
+        'name' => 'resize',
+        'text' => "",
+        'title' => elgg_echo('la_dashboard:widget:resize'),
+        'href' => "#widget-resize-$widget->guid",
+        'class' => "elgg-widget-resize-button elgg-lightbox",
+        'rel' => 'toggle',
+        'priority' => 700,
+    );
+    $return[] = ElggMenuItem::factory($resize);
+    return $return;
 }
 
 function userstats_clipit_page_handler($page)

@@ -15,6 +15,7 @@ $english = array(
     "la_dashboard:widget:quizresult:description" => "Visualizes quiz results with respect to stumbling blocks.",
     "la_dashboard:widget:quizresultcompare:description" => "Allows for comparing the results of two quizzes",
     "la_dashboard:progresscomparison" => "Progress",
-    "la_dashboard:progresscomparison:description" => "Allows to compare the actual time needed for a task with the initial schedule"
+    "la_dashboard:progresscomparison:description" => "Allows to compare the actual time needed for a task with the initial schedule",
+    "la_dashboard:widget:resize" => "resize widget",
 );
 add_translation('en', $english);
