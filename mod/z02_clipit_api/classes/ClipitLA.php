@@ -55,11 +55,13 @@ class ClipitLA extends UBItem {
 
     static function get_metric($metric_id, $context) {
         if(!$la_metrics_class = (string)elgg_get_config("la_metrics_class")){
+            error_log("No metrics class!");
             return null;
         }
 
         $la_id = (int)$la_metrics_class::get_metric($metric_id, $context);
         if(empty($la_id)){
+            error_log("No la_id");
             return null;
         }
         return new static($la_id);
