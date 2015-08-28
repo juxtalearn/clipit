@@ -1,6 +1,4 @@
 <?php
-elgg_load_js("dojotoolkit");
-
 
 $widget = $vars['entity'];
 $widget_id = $widget->guid;

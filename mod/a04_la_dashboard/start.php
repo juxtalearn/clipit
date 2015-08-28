@@ -12,10 +12,12 @@
 elgg_register_event_handler('init', 'system', 'learning_analytics_dashboard_init');
 elgg_register_plugin_hook_handler('permissions_check', 'all', 'la_widget_permissions_hook');
 elgg_register_plugin_hook_handler('permissions_check', 'all', 'la_widget_layout_permissions_hook');
+elgg_register_plugin_hook_handler('la_dashboard', 'show_edit', 'la_widget_show_edit_hook');
 
 
 function learning_analytics_dashboard_init()
 {
+    //AJAX
     elgg_register_page_handler('stats', 'userstats_clipit_page_handler');
     elgg_register_ajax_view('metrics/get_metric');
     elgg_register_ajax_view('metrics/get_quiztasks');
@@ -27,13 +29,19 @@ function learning_analytics_dashboard_init()
     elgg_register_ajax_view('widgets/quizresultcompare/quizresultcompare_ajax'); //NEW
     elgg_register_page_handler('metric', 'getmetric_clipit_page_handler');
     elgg_register_ajax_view('metrics/metric');
-
+    elgg_register_ajax_view('widgets/stumblingblockcoverage/stumblingblockcoverage_ajax');
+    //WIDGETS
     elgg_register_widget_type('metric', elgg_echo('la_dashboard:la_metrics:title'), elgg_echo('la_dashboard:widget:la_metrics:description'), 'la_metrics', true);
     elgg_register_widget_type('quizresult', elgg_echo('la_dashboard:quizresult:title'), elgg_echo('la_dashboard:widget:quizresult:description'), 'la_metrics,quizstudents,quizgroups,quizactivity', true);
     elgg_register_widget_type('quizresultcompare', elgg_echo('la_dashboard:quizresultscompare:title'), elgg_echo('la_dashboard:widget:quizresultcompare:description'), 'la_metrics', true);
     elgg_register_widget_type('timeline', elgg_echo('event:timeline'), elgg_echo('la_dashboard:widget:timeline:description'), 'la_metrics', false);
     elgg_register_widget_type('activityprogress', elgg_echo('activity:status'), elgg_echo('la_dashboard:widget:activityprogress:description'), 'la_metrics', true);
     elgg_register_widget_type('progresscomparison', elgg_echo('la_dashboard:progresscomparison'), elgg_echo('la_dashboard:progressc'), 'la_metrics', true);
+    elgg_register_widget_type('stumblingblockcoverage', elgg_echo('la_dashboard:stumblingblockcoverage'), elgg_echo('la_dashboard:stumblingblockcoverage'), 'la_metrics', true);
+
+    elgg_unregister_action('widgets/add');
+    elgg_register_action('widgets/add',dirname(__FILE__).'/actions/widgets/add.php');
+
    // Register library
     elgg_extend_view("navigation/menu/top", "navigation/menu/la", 25);
     elgg_register_plugin_hook_handler('get_list', 'default_widgets', 'ladashboard_default_widgets');
@@ -148,9 +156,8 @@ function la_widget_permissions_hook($hook, $type, $returnvalue, $params)
         }
         $clipit_user = array_pop(ClipitUser::get_by_id(array($user->guid)));
         if ($clipit_user->role == ClipitUser::ROLE_STUDENT) {
-            return false;
+            return true;
         }
-
     }
 }
 
@@ -167,9 +174,27 @@ function la_widget_layout_permissions_hook($hook, $type, $returnvalue, $params)
                 $user = $params['user'];
                 $clipit_user = array_pop(ClipitUser::get_by_id(array($user->guid)));
                 if ($clipit_user->role == ClipitUser::ROLE_STUDENT) {
-                    return false;
-                }
+                    if  ($params['page_owner']->guid === $params['user']->guid) {
+                        return true;
+                    }
+                } else return true;
         }
     }
+}
+
+function la_widget_show_edit_hook($hook, $type, $returnvalue, $params)
+{
+    $show_edit = false;
+    if ( isset($params['user_id'] ) ) {
+        $clipit_user = array_pop(ClipitUser::get_by_id(array($params['user_id'])));
+        if ($clipit_user && $clipit_user->role == ClipitUser::ROLE_STUDENT) {
+            $show_edit = false;
+        } else {
+            $show_edit = true;
+        }
+    } else {
+        error_log("no user_id set");
+    }
+    return $show_edit;
 }
 

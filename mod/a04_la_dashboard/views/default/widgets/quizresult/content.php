@@ -1,12 +1,12 @@
 <?php
-elgg_load_js("dojotoolkit");
 $widget = $vars['entity'];
 $widget_id = $widget->guid;
 $chart_identifier = "quiz-widget-$widget_id";
 //First we need to verify the settings for this widget
 $to_be_configured = false;
 if (isset($widget->activity_id) && is_not_null($widget->activity_id)) {
-    $activity_id = $widget->activity_id;//array_pop(ClipitActivity::get_by_id(array($widget->activity_id)));
+    //array_pop(ClipitActivity::get_by_id(array($widget->activity_id)));
+    $activity_id = $widget->activity_id;
 } else {
     $to_be_configured = true;
 }

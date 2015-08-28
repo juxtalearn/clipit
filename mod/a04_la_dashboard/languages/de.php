@@ -15,5 +15,9 @@ $german = array(
     "la_dashboard:widget:quizresult:description" => "Visualisiert die Quizergebnisse bezogen auf die Stolpersteine.",
     "la_dashboard:widget:quizresultcompare:description" => "Erlaubt den Vergleich zweier Quizergebnisse",
     "la_dashboard:widget:resize" => "resize widget",
+    "la_dashboard:stumblingblockcoverage" => "Stolpersteine",
+    "la_dashboard:widget:selectuser" => "Bitte einen Benutzer wählen",
+    "la_dashboard:widget:selectgroup" => "Bitte eine Gruppe wählen",
+    "la_dashboard:widget:quizresult:selectquiz" => "Bitte ein Quiz wählen"
 );
 add_translation('de', $german);

@@ -15,6 +15,10 @@ $show_add_widgets = elgg_extract('show_add_widgets', $vars, true);
 $exact_match = elgg_extract('exact_match', $vars, false);
 $show_access = elgg_extract('show_access', $vars, false);
 
+if (!elgg_is_admin_logged_in()){
+    $show_access = false;
+}
+
 $owner = elgg_get_page_owner_entity();
 
 $widget_types = elgg_get_widget_types();
@@ -50,9 +54,12 @@ for ($column_index = 1; $column_index <= $num_columns; $column_index++) {
 
     echo "<div class=\"$widget_class elgg-widgets col-xs-$single_column col-sm-$single_column col-md-$single_column\" id=\"elgg-widget-col-$column_index\">";
     if (sizeof($column_widgets) > 0) {
+        $user_guid = elgg_get_logged_in_user_guid();
+        $show_edit = elgg_trigger_plugin_hook('la_dashboard','show_edit',array('user_id'=>$user_guid, 'context' => $context),true);
+
         foreach ($column_widgets as $widget) {
             if (array_key_exists($widget->handler, $widget_types)) {
-                echo elgg_view_entity($widget, array('show_access' => $show_access));
+                echo elgg_view_entity($widget, array('show_access' => $show_access, 'show_edit' => $show_edit));
             }
         }
     }

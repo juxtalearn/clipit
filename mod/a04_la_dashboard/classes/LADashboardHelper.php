@@ -19,13 +19,40 @@ class LADashboardHelper
         return $result_array;
     }
 
+    public static function getStumblingBlocksFromActivity($activity_id)
+    {
+        $tt_id = ClipitActivity::get_tricky_topic($activity_id);
+        $stumbling_block_ids = ClipitTrickyTopic::get_tags($tt_id);
+        $result_array = ClipitTag::get_by_id($stumbling_block_ids);
+        return $result_array;
+    }
+
+
+
+    public static function getStumblingBlocksUsage($activity_id, $group_id)
+    {
+        $user_ids = ClipitGroup::get_users($group_id);
+        $tag_array = LADashboardHelper::getStumblingBlocksFromActivity($activity_id);
+        $stumbling_block_array = array();
+        foreach ($tag_array as $block) {
+            $tag_id = $block->id;
+            $sum = 0;
+            $sum += UBCollection::count_items($block->id,ClipitTag::SUBTYPE.'-'.ClipitFile::SUBTYPE,true,false);
+            $sum += UBCollection::count_items($block->id,ClipitTag::SUBTYPE.'-'.ClipitStoryboard::SUBTYPE,true,false);
+            $sum += UBCollection::count_items($block->id,ClipitTag::SUBTYPE.'-'.ClipitVideo::SUBTYPE,true,false);
+            $sum += UBCollection::count_items($block->id,ClipitTag::SUBTYPE.'-'.ClipitComment::SUBTYPE,true,false);
+            $stumbling_block_array[$block->name]=$sum;
+        }
+        return $stumbling_block_array;
+    }
+
     public static function getGroupBundle($activityId = null, $addAll = true)
     {
         if ($addAll) {
-            $returnValue = array(array('id' => 0, 'name' => elgg_echo("la_dashboard:widget:quizresult:selectgroup")), array('id' => 'all', 'name' => elgg_echo("all")));
+            $returnValue = array(array('id' => 0, 'name' => elgg_echo("la_dashboard:widget:selectgroup")), array('id' => 'all', 'name' => elgg_echo("all")));
 
         } else {
-            $returnValue = array(array('id' => 0, 'name' => elgg_echo("la_dashboard:widget:quizresult:selectgroup")));
+            $returnValue = array(array('id' => 0, 'name' => elgg_echo("la_dashboard:widget:selectgroup")));
         }
         if (isset($activityId)) {
             $group_ids = ClipitActivity::get_groups($activityId);
@@ -52,7 +79,7 @@ class LADashboardHelper
 
     public static function getUserBundle($activityId = null)
     {
-        $returnValue = array(array('id' => 0, 'name' => elgg_echo("la_dashboard:widget:quizresult:selectuser")));
+        $returnValue = array(array('id' => 0, 'name' => elgg_echo("la_dashboard:widget:selectuser")));
         if (isset($activityId)) {
             $user_ids = ClipitActivity::get_students($activityId);
             $users = ClipitUser::get_by_id($user_ids);
@@ -79,7 +106,7 @@ class LADashboardHelper
     public static function getQuizTasks($activityId = null)
     {
         $task_ids = ClipitActivity::get_tasks($activityId);
-        $returnValue = array(array('id' => 0, 'name' => elgg_echo("la_dashboard:widget:quizresult:selectTask")));
+        $returnValue = array(array('id' => 0, 'name' => elgg_echo("la_dashboard:widget:quizresult:selectquiz")));
         if (isset($activityId)) {
             $tasks = ClipitTask::get_by_id($task_ids);
             foreach ($tasks as $task) {

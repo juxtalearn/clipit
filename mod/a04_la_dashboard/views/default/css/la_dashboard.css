@@ -1,4 +1,10 @@
 
+.label.label-primary.la_stumblingblock {
+    display: inline-block;
+    font-size:large;
+    margin: 0.1em;
+    cursor:pointer;
+}
 
 .learning_analytics_dashboard .elgg-widgets-add-panel {
     background: none repeat scroll 0 0 #ddd;

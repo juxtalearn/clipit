@@ -3,7 +3,7 @@
 $widget = elgg_extract('entity', $vars);
 $widget_id = $widget->guid;
 
-$activities = ClipitActivity::get_all();
+//$activities = ClipitActivity::get_all();
 $activity_options = array(0 => elgg_echo('la_dashboard:widget:quizresult:selectactivity'));
 foreach ($activities as $activity) {
     $activity_options[$activity->id] = $activity->name;

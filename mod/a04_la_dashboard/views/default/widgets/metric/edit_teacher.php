@@ -1,46 +1,42 @@
-
 <?php
 
 $widget = elgg_extract('entity', $vars);
 $widget_id = $widget->guid;
 $metrics = elgg_extract('metrics', $vars);
+$logged_in_user = elgg_get_logged_in_user_entity();
 
 $available_metrics = array('' => elgg_echo('la_dashboard:select_metric'));
-foreach(ActivityStreamer::get_available_metrics() as $metric){
+foreach (ActivityStreamer::get_available_metrics() as $metric) {
     $available_metrics[$metric['TemplateId']] = $metric['Name'];
 }
 
-if ( elgg_is_admin_logged_in() ) {
-    $activities = ClipitActivity::get_all();
-} else {
-    $activities = ClipitActivity::get_from_user(elgg_get_logged_in_user_guid(),false);
-}
-
+$activities = ClipitActivity::get_by_id(ClipitUser::get_activities($logged_in_user->id));
 
 $activity_options = array(0 => elgg_echo('la_dashboard:widget:quizresult:selectactivity'));
 foreach ($activities as $activity) {
     $activity_options[$activity->id] = $activity->name;
 }
 if (!isset($widget->metric_id)) {
-    $widget->metric_id=reset($available_metrics);
+    $widget->metric_id = reset($available_metrics);
     $configured = false;
 }
 if (!isset($widget->activity_id)) {
-    $widget->activity_id=reset($activities);
+    $widget->activity_id = reset($activities);
 }
 
-if ( elgg_is_admin_logged_in() ) {
-    $all_users = ClipitUser::get_all();
-} else {
-    $all_users = array(elgg_get_logged_in_user_entity());
+$all_user_ids = array();
+foreach ($activities as $activity) {
+    $all_user_ids = array_merge($all_user_ids, ClipitActivity::get_students($activity->id));
 }
-$user_options = array();
-foreach ($all_users as $user){
+$all_users = ClipitUser::get_by_id($all_user_ids);
+
+$user_options = array(0 => elgg_echo('la_dashboard:widget:selectuser'));
+foreach ($all_users as $user) {
     $user_options[$user->id] = $user->name;
 }
 
 if (!isset($widget->user_id)) {
-    $widget->activity_id=reset($all_users);
+    $widget->activity_id = reset($all_users);
 }
 
 
@@ -82,7 +78,7 @@ if (!isset($widget->user_id)) {
                 'class' => "form-control available-metrics-$widget_id",
                 'style' => 'padding-top: 5px;padding-bottom: 5px;',
                 'required' => true,
-                'value' =>  $widget->metric_id,
+                'value' => $widget->metric_id,
                 'options_values' => $available_metrics
             ));
             ?>

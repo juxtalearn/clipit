@@ -31,7 +31,6 @@ class ActivityStreamer
                 $workbenchurl = $entity->workbenchurl;
             }
 
-
             $workbenchurl = $workbenchurl . "/requestAnalysis";
             $return_url = elgg_get_site_url() . "services/api/rest/xml/?method=clipit.la.save_metric";
             //$return_url = "http://176.28.14.94/~workbench/jxlDefinitions/clipItDriver.php";

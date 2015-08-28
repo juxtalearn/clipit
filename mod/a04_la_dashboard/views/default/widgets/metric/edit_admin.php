@@ -10,8 +10,7 @@ foreach (ActivityStreamer::get_available_metrics() as $metric) {
     $available_metrics[$metric['TemplateId']] = $metric['Name'];
 }
 
-$activities = ClipitActivity::get_by_id(ClipitUser::get_activities($logged_in_user->id));
-
+$activities = ClipitActivity::get_all();
 $activity_options = array(0 => elgg_echo('la_dashboard:widget:quizresult:selectactivity'));
 foreach ($activities as $activity) {
     $activity_options[$activity->id] = $activity->name;
@@ -24,13 +23,8 @@ if (!isset($widget->activity_id)) {
     $widget->activity_id = reset($activities);
 }
 
-$all_user_ids = array();
-foreach ($activities as $activity) {
-    $all_user_ids = array_merge($all_user_ids, ClipitActivity::get_students($activity->id));
-}
-$all_users = ClipitUser::get_by_id($all_user_ids);
-
-$user_options = array();
+$all_users = ClipitUser::get_all();
+$user_options = array(0 => elgg_echo('la_dashboard:widget:selectuser'));
 foreach ($all_users as $user) {
     $user_options[$user->id] = $user->name;
 }

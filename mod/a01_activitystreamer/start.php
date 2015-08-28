@@ -29,7 +29,7 @@ function activitystreamer_init()
         "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
     include_once(elgg_get_plugins_path() . "a01_activitystreamer/lib/ActivityStreamer.php");
     elgg_register_admin_menu_item('configure', 'activitystreamer', 'settings');
-    elgg_register_plugin_hook_handler('activitystreamer','user_activities','assemble_user_activity_data_hook');
+    elgg_register_plugin_hook_handler('activitystreamer','user-activities','assemble_user_activity_data_hook');
 }
 
 

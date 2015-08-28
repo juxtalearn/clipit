@@ -3,7 +3,11 @@
 $widget = elgg_extract('entity', $vars);
 $widget_id = $widget->guid;
 
-$activities = ClipitActivity::get_all();
+if (elgg_get_logged_in_user_entity()->role == ClipitUser::ROLE_ADMIN){
+    $activities = ClipitActivity::get_all();
+} else {
+    $activities = ClipitActivity::get_from_user(elgg_get_logged_in_user_guid());
+}
 $activity_options = array(0 => elgg_echo('la_dashboard:widget:quizresult:selectactivity'));
 foreach ($activities as $activity) {
     $activity_options[$activity->id] = $activity->name;

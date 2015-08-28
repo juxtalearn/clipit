@@ -17,5 +17,9 @@ $english = array(
     "la_dashboard:progresscomparison" => "Progress",
     "la_dashboard:progresscomparison:description" => "Allows to compare the actual time needed for a task with the initial schedule",
     "la_dashboard:widget:resize" => "resize widget",
+    "la_dashboard:stumblingblockcoverage" => "Stumbling Blocks",
+    "la_dashboard:widget:selectgroup" => "Please select a group",
+    "la_dashboard:widget:quizresult:selectquiz" => "Please select a quiz",
+    "la_dashboard:widget:selectuser" => "Please select a user"
 );
 add_translation('en', $english);
