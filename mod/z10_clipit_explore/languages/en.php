@@ -16,8 +16,11 @@ $english = array(
     'search:reset' => 'Reset search',
     'explore:menu' => 'Publications',
     'explore:scope' => 'Explore scope',
+    'explore:by_tricky_topic' => 'Explore by tricky topics',
+    'explore:by_activity' => 'Explore by activity',
     'explore:tags' => 'Explore by Stumbling Block',
     'explore:public' => 'Public',
+    'explore:tags:related_tricky_topic' => 'Related tags for tricky topic',
 );
 
 add_translation('en', $english);

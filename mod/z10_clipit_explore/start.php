@@ -45,14 +45,20 @@ function explore_page_handler($page) {
     $selected_tab = get_input('filter', 'all');
     $searching = true;
     $href_breadcrumb = false;
-    if($activity_id){
+    if($activity_id) {
         $activity_object = ClipitSite::lookup($activity_id);
-        $href_breadcrumb = get_input('by') ? "/search" :  false;
-        elgg_push_breadcrumb($activity_object['name'], "explore" .$href_breadcrumb. "?activity={$activity_id}");
+        $href_breadcrumb = get_input('by') ? "/search" : false;
+        elgg_push_breadcrumb($activity_object['name'], "explore" . $href_breadcrumb . "?activity={$activity_id}");
+    } elseif($tricky_topic_id = get_input('tricky_topic')){
+        $tricky_topic_object = ClipitSite::lookup($tricky_topic_id);
+        $href_breadcrumb = get_input('by') ? "/search" : false;
+        elgg_push_breadcrumb(elgg_echo('tricky_topic'), '');
+        elgg_push_breadcrumb($tricky_topic_object['name'], '');
     } else {
         $href_breadcrumb = get_input('by') ? "/search" :  false;
         elgg_push_breadcrumb(elgg_echo('explore:public'), "explore" .$href_breadcrumb. "?site=true");
     }
+
     switch($page[0]){
         case 'search':
             $public_content = true;
@@ -70,9 +76,11 @@ function explore_page_handler($page) {
                         'title' => elgg_echo("tags"),
                     ));
                     $tags = ClipitTag::get_by_id($tricky_topic->tag_array);
+                    $videos = array_pop(ClipitVideo::get_by_tricky_topic(array($tricky_topic->id)));
+                    $files = array_pop(ClipitFile::get_by_tricky_topic(array($tricky_topic->id)));
+
                     $tag_cloud = elgg_view("tricky_topic/tags/tag_cloud", array('tags' => $tags));
                     $content .= elgg_view_module('default', '', $tag_cloud, array('class' => 'module-tags'));
-                    $activities = ClipitActivity::get_from_tricky_topic($tricky_topic->id);
 
                     if(!$tricky_topic){
                         $content = elgg_view('output/empty', array('value' => elgg_echo('tricky_topics:none')));
@@ -147,6 +155,13 @@ function explore_page_handler($page) {
         $files = ClipitFile::get_by_id($visible_files);
 
         $href = "clipit_activity/{$activity_id}/publications";
+    } elseif($tricky_topic_id){
+        // Videos
+        $visible_videos = array_pop(ClipitVideo::get_by_tricky_topic(array($tricky_topic_id)));
+        $visible_videos = get_visible_items_by_site($visible_videos, 'videos');
+        $videos = ClipitVideo::get_by_id($visible_videos);
+        // Files
+        $files = array();
     } elseif($by){
         $visible_videos = get_visible_items_by_site($videos, 'videos');
         // Videos
@@ -154,10 +169,16 @@ function explore_page_handler($page) {
         // Files
         $files = array();
 
+        $site = true;
         $href = "explore";
     }
     if($page[0]){
         $selected_tab = false;
+    }
+    if($tricky_topic_id){
+        $content = elgg_view('explore/list/tricky_topic', array('entity_id' => $tricky_topic_id));
+    } else {
+        $content = '';
     }
     switch($selected_tab){
         case 'videos':
@@ -166,9 +187,9 @@ function explore_page_handler($page) {
                 'videos' => $videos,
                 'href' => $href
             );
-            $content = elgg_view("explore/video/list", $params_video_list);
+            $content .= elgg_view("explore/video/list", $params_video_list);
             if(!$videos){
-                $content = elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
+                $content .= elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
             }
             break;
         case 'files':
@@ -177,24 +198,24 @@ function explore_page_handler($page) {
                 'files' => $files,
                 'href' => $href
             );
-            $content = elgg_view("explore/file/list", $params_files_list);
+            $content .= elgg_view("explore/file/list", $params_files_list);
             if(!$files){
-                $content = elgg_view('output/empty', array('value' => elgg_echo('files:none')));
+                $content .= elgg_view('output/empty', array('value' => elgg_echo('files:none')));
             }
             break;
         default:
-            $content = get_explore(array(
+            $explore_content = get_explore(array(
                 'public_content' => $public_content,
                 'videos' => array('limit' => 3, 'entities' => $videos, 'href' => $href),
                 'files' => array('limit' => 4, 'entities' => $files, 'href' => $href),
                 'title' => true
             ));
-            if(!$content){
-                $content = elgg_view('output/empty', array('value' => elgg_echo('search:not_found')));
+            $content .= $explore_content;
+            if(!$explore_content){
+                $content .= elgg_view('output/empty', array('value' => elgg_echo('search:not_found')));
             }
             break;
     }
-
     switch($page[0]){
         case 'view':
             if(!$entity_id = (int)$page[1]){
@@ -223,19 +244,34 @@ function explore_page_handler($page) {
      * Sidebar
      */
     // Filter
+    $href_filter = http_build_query(array(
+        'by' => get_input('by'),
+        'id' => get_input('id'),
+        'text' => get_input('text'),
+        'filter' => get_input('filter'),
+    ));
+    if(get_input('by')){
+        $href_filter = "/search?{$href}";
+    }
+    $href_filter = (get_input('by') || get_input('text')) ? $href_filter.'&' : '?';
+
     $my_activities_ids = ClipitUser::get_activities($user_id);
     $my_activities = ClipitActivity::get_by_id($my_activities_ids);
-    $menu_filter = elgg_view("explore/sidebar/menu",
+    $menu_scope = elgg_view("explore/sidebar/scope", array('site' => $site, 'href' => $href_filter));
+    $sidebar = elgg_view_module('aside', elgg_echo('explore:scope'), $menu_scope);
+//    // Explore by activity
+    $menu_filter = elgg_view("explore/sidebar/activities",
         array(
             'entities' => $my_activities,
             'videos' => $searched_videos,
-            'files' => $searched_files
+            'files' => $searched_files,
+            'href' => $href_filter
         ));
-    $sidebar = elgg_view_module('aside', elgg_echo('explore:scope'), $menu_filter);
-    // Tags
-    $tags = ClipitTag::get_all(10);
-    $tag_cloud = elgg_view("tricky_topic/tags/tag_cloud", array('tags' => $tags));
-    $sidebar .= elgg_view_module('aside', elgg_echo('explore:tags'), $tag_cloud, array('class' => 'module-tags'));
+    $sidebar .= elgg_view_module('aside', elgg_echo('explore:by_activity'), $menu_filter);
+    // Explore by tricky topics
+    $tricky_topics = ClipitTrickyTopic::get_all();
+    $menu_tt = elgg_view("explore/sidebar/tricky_topics", array('entities' => $tricky_topics, 'href' => $href_filter));
+    $sidebar .= elgg_view_module('aside', elgg_echo('explore:by_tricky_topic'), $menu_tt);
     /**
      * Filter
      */

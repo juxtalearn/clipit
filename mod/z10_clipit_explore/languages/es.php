@@ -16,8 +16,11 @@ $spanish = array(
     'search:reset' => 'Restablecer busqueda',
     'explore:menu' => 'Publicaciones',
     'explore:scope' => 'Explorar por ámbito',
+    'explore:by_activity' => 'Explorar por actividad',
+    'explore:by_tricky_topic' => 'Explorar por temas clave',
     'explore:tags' => 'Explorar por Concepto',
     'explore:public' => 'Público',
+    'explore:tags:related_tricky_topic' => 'Conceptos asociados al tema clave',
 );
 
 add_translation('es', $spanish);

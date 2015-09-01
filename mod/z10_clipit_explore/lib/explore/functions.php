@@ -36,7 +36,6 @@ function get_visible_items_by_activity(int $activity_id, $entities, $type){
     return $entities;
 }
 function get_visible_items_by_site($entities, $type){
-    $user_id = elgg_get_logged_in_user_guid();
     $get_type = "get_{$type}";
     $published_items = ClipitSite::$get_type();
     $entities = array_intersect($published_items, array_keys($entities));
