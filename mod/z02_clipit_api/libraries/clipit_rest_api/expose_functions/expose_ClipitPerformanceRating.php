@@ -20,6 +20,11 @@ function expose_performance_rating_functions() {
     $class_suffix = "ClipitPerformanceRating::";
     expose_common_functions($api_suffix, $class_suffix);
     expose_function(
+        $api_suffix . "get_by_item", $class_suffix . "get_by_item",
+        array("id" => array("type" => "int", "required" => true)),
+        "Get all Performance Ratings for a target", "GET", false, true
+    );
+    expose_function(
         $api_suffix . "get_average_rating_for_target", $class_suffix . "get_average_rating_for_target",
         array("target_id" => array("type" => "int", "required" => true)),
         "Get the average performance rating for a target", 'GET', false, true
@@ -35,4 +40,5 @@ function expose_performance_rating_functions() {
             "target_id" => array("type" => "int", "required" => true)
         ), "Get the average performance rating from a user for a target", 'GET', false, true
     );
+
 }
