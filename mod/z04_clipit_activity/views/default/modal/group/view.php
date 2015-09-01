@@ -13,11 +13,11 @@
 $id = (int)get_input("id");
 if($group = array_pop(ClipitGroup::get_by_id(array($id)))){
     $users_id = ClipitGroup::get_users($id);
-    $body = '<ul style="font-size: 14px;list-style: none;padding: 0;">';
+    $body = '<ul class="row" style="font-size: 14px;list-style: none;padding: 0;">';
     foreach($users_id as $user_id){
         $user = array_pop(ClipitUser::get_by_id(array($user_id)));
         $body .= '
-        <li class="list-item">
+        <li class="list-item col-md-6">
             '.elgg_view("page/elements/user_block", array("entity" => $user, 'mail' => false)).'
         </li>';
     }
