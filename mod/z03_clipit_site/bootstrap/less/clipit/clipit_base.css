@@ -8473,6 +8473,13 @@ li.list-item:last-child {
 .navbar-blue .pull-right {
   padding: 0;
 }
+.navbar-blue .site-title {
+  font-size: 13px;
+  font-family: FuturaBoldRegular, Impact, 'Impact Bold', Helvetica, Arial, sans, sans-serif;
+  margin: 0;
+  padding: 10px 0;
+  letter-spacing: 0.5px;
+}
 .navbar-blue .navbar-form {
   padding: 0;
   margin: 5px 15px 5px 15px;
@@ -11239,6 +11246,18 @@ h4.empty {
 }
 .margin-left-20_important {
   margin-left: 20px !important;
+}
+.scroll-list-200 {
+  max-height: 200px;
+  overflow-y: auto;
+}
+.scroll-list-300 {
+  max-height: 300px;
+  overflow-y: auto;
+}
+.scroll-list-400 {
+  max-height: 400px;
+  overflow-y: auto;
 }
 .progress-bar {
   background: #32b4e5;

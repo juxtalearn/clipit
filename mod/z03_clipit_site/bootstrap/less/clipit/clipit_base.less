@@ -255,6 +255,17 @@ h4.empty{
 .margin-left-20_important{
   margin-left: 20px !important;
 }
+// Scrolling list
+// --------------------------------------------------
+.scroll-list(@size) {
+  .scroll-list-@{size}{
+    max-height: @size*1px;
+    overflow-y: auto;
+  }
+}
+.scroll-list(200);
+.scroll-list(300);
+.scroll-list(400);
 // Progress bar
 // --------------------------------------------------
 .progress-bar{
