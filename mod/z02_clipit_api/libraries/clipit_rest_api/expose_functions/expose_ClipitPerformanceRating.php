@@ -21,8 +21,8 @@ function expose_performance_rating_functions() {
     expose_common_functions($api_suffix, $class_suffix);
     expose_function(
         $api_suffix . "get_by_item", $class_suffix . "get_by_item",
-        array("id" => array("type" => "int", "required" => true)),
-        "Get all Performance Ratings for a target", "GET", false, true
+        array("item_array" => array("type" => "array", "required" => true)),
+        "Get Performance Ratings by target resource item", "GET", false, true
     );
     expose_function(
         $api_suffix . "get_average_rating_for_target", $class_suffix . "get_average_rating_for_target",
