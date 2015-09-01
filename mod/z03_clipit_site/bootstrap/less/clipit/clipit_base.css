@@ -8615,6 +8615,17 @@ ul.top-account > li ul.caret-menu .divider {
   display: block;
   margin: 0;
 }
+ul.top-account > li #menu_settings li {
+  width: 250px;
+}
+ul.top-account > li #menu_settings li .logout:hover {
+  background: #ff4343;
+  opacity: 1;
+}
+ul.top-account > li #menu_settings li .logout:hover,
+ul.top-account > li #menu_settings li .logout:hover .fa {
+  color: white !important;
+}
 ul.top-account > li ul#menu_activities li.divider {
   margin: 0;
 }

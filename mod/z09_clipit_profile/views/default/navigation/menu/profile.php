@@ -14,12 +14,15 @@ $user_id = elgg_get_logged_in_user_guid();
 $user = array_pop(ClipitUser::get_by_id(array($user_id)));
 ?>
 <li class="separator">|</li>
-<li class="margin-left-10 margin-right-10 user-profile">
+<li class="margin-left-10 user-profile">
     <?php echo elgg_view('output/url', array(
         'title' => $user->name,
-        'href'  => "profile/{$user->login}",
+        'href'  => "#",
+        'data-toggle' => 'dropdown',
+        'id' => 'settings',
         'class' => 'avatar-user text-truncate',
-        'text'  => elgg_view('output/img', array(
+        'text'  => '<i class="fa fa-caret-down pull-right hidden-xs hidden-sm margin-top-10" style="float: right !important;"></i>'.
+            elgg_view('output/img', array(
                 'src' => get_avatar($user, 'small'),
                 'alt' => $user->name,
                 'title' => elgg_echo('profile'),
@@ -27,16 +30,17 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
             ))."<span class='hidden-xs hidden-sm'> ".$user->name."</span>"
     ));
     ?>
-    <?php echo elgg_view('output/url', array(
-        'href'  => "#",
-        'data-toggle' => 'dropdown',
-        'class' => 'caret-down hidden-xs hidden-sm',
-        'id' => 'settings',
-        'text'  => '<i class="fa fa-caret-down"></i>'
-    ));
-    ?>
     <!-- Profile menu -->
     <ul id="menu_settings" class="dropdown-menu caret-menu" role="menu" aria-labelledby="settings">
+        <li role="presentation">
+            <?php echo elgg_view('output/url', array(
+                'href'  => "profile/".$user->login,
+                'title' => elgg_echo('profile:view'),
+                'text'  => '<i class="fa fa-user"></i> '.elgg_echo('profile:view'),
+            ));
+            ?>
+        </li>
+        <li role="presentation" class="divider"></li>
         <li role="presentation">
             <?php echo elgg_view('output/url', array(
                 'href'  => "settings/user",
@@ -54,6 +58,16 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
             ));
             ?>
         </li>
+        <li role="presentation" class="divider"></li>
+        <li>
+            <?php echo elgg_view('output/url', array(
+                'href'  => "action/logout",
+                'class' => 'logout',
+                'title' => elgg_echo('user:logout'),
+                'text'  => '<i class="fa fa-sign-out"></i> '. elgg_echo('user:logout')
+            ));
+            ?>
+        </li>
         <!--  Currently off      -->
         <?php //if($user->role == ClipitUser::ROLE_TEACHER):?>
 <!--            <li role="presentation" class="divider"></li>-->
@@ -67,13 +81,4 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
 <!--            </li>-->
 <!--        --><?php //endif;?>
     </ul>
-</li>
-<li>
-    <?php echo elgg_view('output/url', array(
-        'href'  => "action/logout",
-        'class' => 'hidden-xs hidden-sm',
-        'title' => elgg_echo('user:logout'),
-        'text'  => '<i style="color: #ff4343;" class="fa fa-sign-out"></i>'
-    ));
-    ?>
 </li>

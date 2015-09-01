@@ -211,8 +211,8 @@ $english = array(
     // Videos
     'videos' => 'Videos',
     'video' => 'Video',
-    'videos:recommended' => 'Recommended videos',
-    'videos:recommended:none' => 'There are no recommended videos',
+    'videos:recommended' => 'Featured videos',
+    'videos:recommended:none' => 'There are no featured videos',
     'videos:related' => 'Related videos',
     'videos:none' => 'No videos',
     'video:url:error' => 'Incorrect url or video not found',

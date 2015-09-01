@@ -24,6 +24,7 @@ $spanish = array(
     'timeline:none' => 'No se ha encontrado',
     'timeline:public' => 'Cronología pública',
     // Settings
+    'profile:view' => 'Ver perfil',
     'profile:edit' => 'Ver perfil',
     'profile:settings:password' => 'Cambiar contraseña',
     'profile:settings:change' => 'Editar configuración',

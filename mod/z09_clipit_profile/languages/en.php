@@ -23,6 +23,7 @@ $english = array(
     'timeline:none' => 'Not found',
     'timeline:public' => 'Public timeline',
     // Settings
+    'profile:view' => 'View profile',
     'profile:edit' => 'View profile',
     'profile:settings:password' => 'Change password',
     'profile:settings:change' => 'Change your settings',
