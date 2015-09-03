@@ -16,6 +16,14 @@ class ClipitRemoteSite extends UBItem{
     public $video_array = array();
     public $storyboard_array = array();
 
+    static function create($prop_value_array){
+        // Base64 decode some properties which can contain special characters
+        $prop_value_array["name"] = base64_decode($prop_value_array["name"]);
+        $prop_value_array["description"] = base64_decode($prop_value_array["description"]);
+        $prop_value_array["url"] = base64_decode($prop_value_array["url"]);
+        return parent::create($prop_value_array);
+    }
+
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
         $this->timezone = (string)$elgg_entity->get("timezone");

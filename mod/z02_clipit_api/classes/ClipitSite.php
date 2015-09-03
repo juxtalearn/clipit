@@ -296,9 +296,9 @@ class ClipitSite extends UBSite {
     static function publish_to_global(){
         $site = new static();
         $data = array("method" => "clipit.remote_site.create");
-        $data += array("prop_value_array[name]" => $site->name);
-        $data += array("prop_value_array[description]" => $site->description);
-        $data += array("prop_value_array[url]" => $site->url);
+        $data += array("prop_value_array[name]" => base64_encode($site->name));
+        $data += array("prop_value_array[description]" => base64_encode($site->description));
+        $data += array("prop_value_array[url]" => base64_encode($site->url));
         $data += array("prop_value_array[timezone]" => (string)get_config("timezone"));
         if(static::global_site_call($data, "POST") == null){
             return null;
@@ -345,12 +345,12 @@ class ClipitSite extends UBSite {
                 $tag_name_array[] = $tag->name;
             }
             $data = array("method" => "clipit.remote_resource.create");
-            $data += array("prop_value_array[remote_site]" => elgg_get_site_url());
+            $data += array("prop_value_array[remote_site]" => base64_encode(elgg_get_site_url()));
             $data += array("prop_value_array[remote_id]" => $object->id);
             $data += array("prop_value_array[remote_type]" => $object::SUBTYPE);
-            $data += array("prop_value_array[name]" => $object->name);
-            $data += array("prop_value_array[description]" => $object->description);
-            $data += array("prop_value_array[url]" => $object->url);
+            $data += array("prop_value_array[name]" => base64_encode($object->name));
+            $data += array("prop_value_array[description]" => base64_encode($object->description));
+            $data += array("prop_value_array[url]" => base64_encode($object->url));
             $data += array("prop_value_array[tag_array]" => base64_encode(json_encode($tag_name_array)));
             static::global_site_call($data, "POST");
         }
