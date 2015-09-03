@@ -16,7 +16,7 @@ var quizzes_task =
 {
     'name': {
         'es': 'Actividad de test',
-        'en': 'bla bla bla'
+        'en': 'Quiz activity'
     },
     'description': {
         'es': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam semper accumsan sapien',

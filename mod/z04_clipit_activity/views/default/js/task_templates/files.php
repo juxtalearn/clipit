@@ -16,7 +16,7 @@ var files_task =
 {
     'name': {
         'es': 'Actividad con archivos',
-        'en': 'Activity with files'
+        'en': 'File activity'
     },
     'description': {
         'es': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam semper accumsan sapien',

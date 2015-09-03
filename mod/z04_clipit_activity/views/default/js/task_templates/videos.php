@@ -16,7 +16,7 @@ var videos_task =
 {
     'name': {
         'es': 'Actividad con videos',
-        'en': 'Activity with videos'
+        'en': 'Video activity'
     },
     'description': {
         'es': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam semper accumsan sapien',
