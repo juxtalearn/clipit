@@ -88,6 +88,7 @@ function clipit_global_init(){
         $return_value[] = 'video/.*';
         $return_value[] = 'test';
         $return_value[] = 'sites';
+        $return_value[] = 'public_activities';
         return $return_value;
     }
 
@@ -100,6 +101,8 @@ function clipit_global_init(){
     elgg_register_page_handler('video', 'video_view');
     elgg_register_page_handler('sites', 'connect_section');
     elgg_register_page_handler('login', 'login_user_account_page_handler');
+
+    elgg_register_page_handler('public_activities', 'public_activities_page_handler');
 
     $plugin_url = elgg_get_site_url() . "mod/z03_clipit_global";
     if (elgg_get_context() === "admin") {
@@ -277,6 +280,16 @@ function login_user_account_page_handler($page_elements, $handler)
             return false;
     }
     return true;
+}
+
+function public_activities_page_handler($page_elements, $handler){
+    $params = array(
+        'content' => elgg_view('activities/public/list', array('entities' => $videos)),
+        'filter' => '',
+        'sidebar' => $sidebar,
+    );
+    $body = elgg_view_layout('content', $params);
+    echo elgg_view_page('', $body);
 }
 
 function setup_footer_menus()
