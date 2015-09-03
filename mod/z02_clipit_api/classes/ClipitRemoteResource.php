@@ -51,8 +51,13 @@ class ClipitRemoteResource extends UBItem {
 
     static function create($prop_value_array){
         // convert "remote_site" from string to local ID
-        $remote_site = ClipitRemoteSite::get_from_url($prop_value_array["remote_site"]);
+        $remote_site_url = base64_decode($prop_value_array["remote_site"]);
+        $remote_site = ClipitRemoteSite::get_from_url($remote_site_url);
         $prop_value_array["remote_site"] = (int)$remote_site->id;
+        // Base64 decode some properties which can contain special characters
+        $prop_value_array["name"] = base64_decode($prop_value_array["name"]);
+        $prop_value_array["description"] = base64_decode($prop_value_array["description"]);
+        $prop_value_array["url"] = base64_decode($prop_value_array["url"]);
         // convert tag_array from array of names to array of local IDs
         $tag_name_array = json_decode(base64_decode($prop_value_array["tag_array"]));
         $tag_array = array();
