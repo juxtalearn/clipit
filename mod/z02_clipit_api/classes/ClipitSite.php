@@ -307,67 +307,226 @@ class ClipitSite extends UBSite {
     }
 
     static function update_global_resources(){
-        // Get current remote resources for this site and current local public resources
-        $data = array("method" => "clipit.remote_resource.get_from_site");
-        $data += array("remote_site" => elgg_get_site_url());
+        // GET current remote resources for this site on global site
+        $data = array("method" => "");
+        $data += array("remote_site" => base64_encode(elgg_get_site_url()));
         $data += array("remote_ids_only" => true);
-        $remote_resources = static::global_site_call($data, "GET");
+        // REMOTE TRICKY TOPICS
+        $data["method"] = "clipit.remote_tricky_topic.get_from_site";
+        $remote_tricky_topics = static::global_site_call($data, "GET");
+//        // REMOTE ACTIVITIES
+//        $data["method"] = "clipit.remote_activity.get_from_site";
+//        $remote_activities = static::global_site_call($data, "GET");
+        // REMOTE VIDEOS
+        $data["method"] = "clipit.remote_video.get_from_site";
+        $remote_videos = static::global_site_call($data, "GET");
+//        // REMOTE FILES
+//        $data["method"] = "clipit.remote_file.get_from_site";
+//        $remote_files = static::global_site_call($data, "GET");
+        // LOCAL public resources
         $pub_tricky_topics = static::get_pub_tricky_topics();
+//        $pub_activities = static::get_pub_activities();
         $pub_videos = static::get_pub_videos();
-//        $pub_storyboards = static::get_pub_storyboards();
 //        $pub_files = static::get_pub_files();
-        // Figure out what to add
-        $add_array = array();
+
+        // ADD new content to Global
+        // NEW TRICKY TOPICS
         foreach($pub_tricky_topics as $pub_tricky_topic_id){
-            if(array_search($pub_tricky_topic_id, $remote_resources) === false){
-                $add_array = array_merge($add_array, ClipitTrickyTopic::get_by_id(array($pub_tricky_topic_id)));
+            if(array_search($pub_tricky_topic_id, $remote_tricky_topics) === false){
+                $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($pub_tricky_topic_id)));
+                $tag_name_array = array();
+                $tag_array = ClipitTag::get_by_id($tricky_topic->tag_array);
+                foreach($tag_array as $tag){
+                    $tag_name_array[] = $tag->name;
+                }
+                $data = array("method" => "clipit.remote_tricky_topic.create");
+                $data += array("prop_value_array[remote_site]" => base64_encode(elgg_get_site_url()));
+                $data += array("prop_value_array[remote_id]" => $tricky_topic->id);
+                $data += array("prop_value_array[name]" => base64_encode($tricky_topic->name));
+                $data += array("prop_value_array[description]" => base64_encode($tricky_topic->description));
+                $data += array("prop_value_array[tag_array]" => base64_encode(json_encode($tag_name_array)));
+                static::global_site_call($data, "POST");
             }
         }
+//        // NEW ACTIVITIES
+//        foreach($pub_activities as $pub_activity_id){
+//            if(array_search($pub_activity_id, $remote_activities) === false){
+//                $activity = array_pop(ClipitActivity::get_by_id(array($pub_activity_id)));
+//                $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($activity->tricky_topic)));
+//                $data = array("method" => "clipit.remote_activity.create");
+//                $data += array("prop_value_array[remote_site]" => base64_encode(elgg_get_site_url()));
+//                $data += array("prop_value_array[remote_id]" => $activity->id);
+//                $data += array("prop_value_array[name]" => base64_encode($activity->name));
+//                $data += array("prop_value_array[description]" => base64_encode($activity->description));
+//                $data += array("prop_value_array[tricky_topic]" => base64_encode($tricky_topic->name));
+//                static::global_site_call($data, "POST");
+//            }
+//        }
+        // NEW VIDEOS
         foreach($pub_videos as $pub_video_id){
-            if(array_search($pub_video_id, $remote_resources) === false){
-                $add_array = array_merge($add_array, ClipitVideo::get_by_id(array($pub_video_id)));
+            if(array_search($pub_video_id, $remote_videos) === false){
+                $video = array_pop(ClipitVideo::get_by_id(array($pub_video_id)));
+                $tag_name_array = array();
+                $tag_array = ClipitTag::get_by_id($video->tag_array);
+                foreach($tag_array as $tag){
+                    $tag_name_array[] = $tag->name;
+                }
+                $data = array("method" => "clipit.remote_video.create");
+                $data += array("prop_value_array[remote_site]" => base64_encode(elgg_get_site_url()));
+                $data += array("prop_value_array[remote_id]" => $video->id);
+                $data += array("prop_value_array[name]" => base64_encode($video->name));
+                $data += array("prop_value_array[description]" => base64_encode($video->description));
+                $data += array("prop_value_array[url]" => base64_encode($video->url));
+                $data += array("prop_value_array[tag_array]" => base64_encode(json_encode($tag_name_array)));
+                static::global_site_call($data, "POST");
             }
         }
-//        foreach($pub_storyboards as $pub_storyboard_id){
-//            if(array_search($pub_storyboard_id, $remote_resources) === false){
-//                $add_array = array_merge($add_array, ClipitStoryboard::get_by_id(array($pub_storyboard_id)));
-//            }
-//        }
+//        // NEW FILES
 //        foreach($pub_files as $pub_file_id){
-//            if(array_search($pub_file_id, $remote_resources) === false){
-//                $add_array = array_merge($add_array, ClipitFile::get_by_id(array($pub_file_id)));
+//            if(array_search($pub_file_id, $remote_files) === false){
+//                $file = array_pop(ClipitFile::get_by_id(array($pub_file_id)));
+//                $tag_name_array = array();
+//                $tag_array = ClipitTag::get_by_id($file->tag_array);
+//                foreach($tag_array as $tag){
+//                    $tag_name_array[] = $tag->name;
+//                }
+//                $data = array("method" => "clipit.remote_file.create");
+//                $data += array("prop_value_array[remote_site]" => base64_encode(elgg_get_site_url()));
+//                $data += array("prop_value_array[remote_id]" => $file->id);
+//                $data += array("prop_value_array[name]" => base64_encode($file->name));
+//                $data += array("prop_value_array[description]" => base64_encode($file->description));
+//                $data += array("prop_value_array[url]" => base64_encode($file->url));
+//                $data += array("prop_value_array[tag_array]" => base64_encode(json_encode($tag_name_array)));
+//                $data += array("prop_value_array[gdrive_id]" => base64_encode($file->gdrive_id));
+//                static::global_site_call($data, "POST");
 //            }
 //        }
-        foreach($add_array as $object) {
-            $tag_name_array = array();
-            $tag_array = ClipitTag::get_by_id($object->tag_array);
-            foreach($tag_array as $tag){
-                $tag_name_array[] = $tag->name;
+        // REMOVE content no longer public on local site
+        // OLD TRICKY TOPICS
+        $remove_array = array();
+        foreach($remote_tricky_topics as $remote_tricky_topic_id){
+            if(array_search($remote_tricky_topic_id, $pub_tricky_topics) === false){
+                $remove_array[] = $remote_tricky_topic_id;
             }
-            $data = array("method" => "clipit.remote_resource.create");
-            $data += array("prop_value_array[remote_site]" => base64_encode(elgg_get_site_url()));
-            $data += array("prop_value_array[remote_id]" => $object->id);
-            $data += array("prop_value_array[remote_type]" => $object::SUBTYPE);
-            $data += array("prop_value_array[name]" => base64_encode($object->name));
-            $data += array("prop_value_array[description]" => base64_encode($object->description));
-            $data += array("prop_value_array[url]" => base64_encode($object->url));
-            $data += array("prop_value_array[tag_array]" => base64_encode(json_encode($tag_name_array)));
+        }
+        if(!empty($remove_array)) {
+            $data = array("method" => "clipit.remote_tricky_topic.delete_by_remote_id");
+            $data += array("remote_site" => base64_encode(elgg_get_site_url()));
+            foreach ($remove_array as $remove_id) {
+                $data += array("remote_id_array[]" => $remove_id);
+            }
             static::global_site_call($data, "POST");
         }
-        // Figure out what to remove
+//        //OLD ACTIVITIES
+//        $remove_array = array();
+//        foreach($remote_activities as $remote_activity_id){
+//            if(array_search($remote_activity_id, $pub_activities) === false){
+//                $remove_array[] = $remote_activity_id;
+//            }
+//        }
+//        if(!empty($remove_array)) {
+//            $data = array("method" => "clipit.remote_activity.delete_by_remote_id");
+//            $data += array("remote_site" => base64_encode(elgg_get_site_url()));
+//            foreach ($remove_array as $remove_id) {
+//                $data += array("remote_id_array[]" => $remove_id);
+//            }
+//            static::global_site_call($data, "POST");
+//        }
+        // OLD VIDEOS
         $remove_array = array();
-        $all_pub_resources = array_merge($pub_tricky_topics, $pub_videos); //$pub_storyboards, $pub_files);
-        foreach($remote_resources as $remote_resource_id){
-            if(array_search($remote_resource_id, $all_pub_resources) === false){
-                $remove_array[] = $remote_resource_id;
+        foreach($remote_videos as $remote_video_id){
+            if(array_search($remote_video_id, $pub_videos) === false){
+                $remove_array[] = $remote_video_id;
             }
         }
-        $data = array("method" => "clipit.remote_resource.delete_by_remote_id");
-        $data += array("remote_site" => elgg_get_site_url());
-        foreach($remove_array as $remove_id){
-            $data += array("remote_id_array[$remove_id]" => $remove_id);
+        if(!empty($remove_array)) {
+            $data = array("method" => "clipit.remote_video.delete_by_remote_id");
+            $data += array("remote_site" => base64_encode(elgg_get_site_url()));
+            foreach ($remove_array as $remove_id) {
+                $data += array("remote_id_array[]" => $remove_id);
+            }
+            static::global_site_call($data, "POST");
         }
-        static::global_site_call($data, "POST");
+//        // OLD FILES
+//        $remove_array = array();
+//        foreach($remote_files as $remote_file_id){
+//            if(array_search($remote_file_id, $pub_files) === false){
+//                $remove_array[] = $remote_file_id;
+//            }
+//        }
+//        if(!empty($remove_array)) {
+//            $data = array("method" => "clipit.remote_video.delete_by_remote_id");
+//            $data += array("remote_site" => base64_encode(elgg_get_site_url()));
+//            foreach ($remove_array as $remove_id) {
+//                $data += array("remote_id_array[]" => $remove_id);
+//            }
+//            static::global_site_call($data, "POST");
+//        }
         return true;
     }
+
+//    static function update_global_resources(){
+//        // Get current remote resources for this site and current local public resources
+//        $data = array("method" => "clipit.remote_resource.get_from_site");
+//        $data += array("remote_site" => elgg_get_site_url());
+//        $data += array("remote_ids_only" => true);
+//        $remote_resources = static::global_site_call($data, "GET");
+//        $pub_tricky_topics = static::get_pub_tricky_topics();
+//        $pub_videos = static::get_pub_videos();
+////        $pub_storyboards = static::get_pub_storyboards();
+////        $pub_files = static::get_pub_files();
+//        // Figure out what to add
+//        $add_array = array();
+//        foreach($pub_tricky_topics as $pub_tricky_topic_id){
+//            if(array_search($pub_tricky_topic_id, $remote_resources) === false){
+//                $add_array = array_merge($add_array, ClipitTrickyTopic::get_by_id(array($pub_tricky_topic_id)));
+//            }
+//        }
+//        foreach($pub_videos as $pub_video_id){
+//            if(array_search($pub_video_id, $remote_resources) === false){
+//                $add_array = array_merge($add_array, ClipitVideo::get_by_id(array($pub_video_id)));
+//            }
+//        }
+////        foreach($pub_storyboards as $pub_storyboard_id){
+////            if(array_search($pub_storyboard_id, $remote_resources) === false){
+////                $add_array = array_merge($add_array, ClipitStoryboard::get_by_id(array($pub_storyboard_id)));
+////            }
+////        }
+////        foreach($pub_files as $pub_file_id){
+////            if(array_search($pub_file_id, $remote_resources) === false){
+////                $add_array = array_merge($add_array, ClipitFile::get_by_id(array($pub_file_id)));
+////            }
+////        }
+//        foreach($add_array as $object) {
+//            $tag_name_array = array();
+//            $tag_array = ClipitTag::get_by_id($object->tag_array);
+//            foreach($tag_array as $tag){
+//                $tag_name_array[] = $tag->name;
+//            }
+//            $data = array("method" => "clipit.remote_resource.create");
+//            $data += array("prop_value_array[remote_site]" => base64_encode(elgg_get_site_url()));
+//            $data += array("prop_value_array[remote_id]" => $object->id);
+//            $data += array("prop_value_array[remote_type]" => $object::SUBTYPE);
+//            $data += array("prop_value_array[name]" => base64_encode($object->name));
+//            $data += array("prop_value_array[description]" => base64_encode($object->description));
+//            $data += array("prop_value_array[url]" => base64_encode($object->url));
+//            $data += array("prop_value_array[tag_array]" => base64_encode(json_encode($tag_name_array)));
+//            static::global_site_call($data, "POST");
+//        }
+//        // Figure out what to remove
+//        $remove_array = array();
+//        $all_pub_resources = array_merge($pub_tricky_topics, $pub_videos); //$pub_storyboards, $pub_files);
+//        foreach($remote_resources as $remote_resource_id){
+//            if(array_search($remote_resource_id, $all_pub_resources) === false){
+//                $remove_array[] = $remote_resource_id;
+//            }
+//        }
+//        $data = array("method" => "clipit.remote_resource.delete_by_remote_id");
+//        $data += array("remote_site" => elgg_get_site_url());
+//        foreach($remove_array as $remove_id){
+//            $data += array("remote_id_array[$remove_id]" => $remove_id);
+//        }
+//        static::global_site_call($data, "POST");
+//        return true;
+//    }
 }
