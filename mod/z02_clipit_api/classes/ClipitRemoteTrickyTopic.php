@@ -67,79 +67,6 @@ class ClipitRemoteTrickyTopic extends UBItem {
         return $id;
     }
 
-    // FOR REST API CALLS (remote_site comes as an URL)
-
-    /**
-     * @param string $remote_site
-     * @param int[] $remote_id_array
-     * @return array
-     */
-    static function get_by_remote_id($remote_site, $remote_id_array){
-        $remote_site_id = ClipitRemoteSite::get_from_url($remote_site, true);
-        $tricky_topic_array = static::get_all();
-        $return_array = array();
-        foreach($tricky_topic_array as $tricky_topic){
-            if($tricky_topic->remote_site == $remote_site_id
-                && array_search($tricky_topic->remote_id,  $remote_id_array) !== false){
-                $return_array[] = $tricky_topic;
-            }
-        }
-        return $return_array;
-    }
-
-    /**
-     * @param string $remote_site
-     * @param int[] $remote_id_array
-     * @return bool
-     */
-    static function delete_by_remote_id($remote_site, $remote_id_array){
-        $remote_site_id = ClipitRemoteSite::get_from_url($remote_site, true);
-        $tricky_topic_array = static::get_by_remote_id($remote_site_id, $remote_id_array);
-        $delete_array = array();
-        foreach($tricky_topic_array as $tricky_topic){
-            $delete_array[] = $tricky_topic->id;
-        }
-        static::delete_by_id($delete_array);
-        return true;
-    }
-
-    /**
-     * @param string $remote_site
-     * @param bool $remote_ids_only Only return remote IDs
-     * @return array
-     */
-    static function get_from_site($remote_site, $remote_ids_only = false){
-        $remote_site_id = ClipitRemoteSite::get_from_url($remote_site, true);
-        $tricky_topic_array = static::get_all();
-        $return_array = array();
-        foreach($tricky_topic_array as $tricky_topic){
-            if((int)$tricky_topic->remote_site == $remote_site_id) {
-                if($remote_ids_only) {
-                    $return_array[] = $tricky_topic->remote_id;
-                } else{
-                    $return_array[] = $tricky_topic;
-                }
-            }
-        }
-        return $return_array;
-    }
-
-    /**
-     * @param string $remote_site
-     * @return bool
-     */
-    static function delete_all_from_site($remote_site){
-        $remote_site_id = ClipitRemoteSite::get_from_url($remote_site, true);
-        $tricky_topic_array = static::get_from_site($remote_site_id);
-        $delete_array = array();
-        foreach($tricky_topic_array as $tricky_topic){
-            if((int)$tricky_topic->remote_site == $remote_site_id){
-                $delete_array[] = $tricky_topic->id;
-            }
-        }
-        return static::delete_by_id($delete_array);
-    }
-
     /**
      * Adds Tags to a Tricky Topic, referenced by Id.
      *
@@ -186,4 +113,79 @@ class ClipitRemoteTrickyTopic extends UBItem {
     static function get_tags($id) {
         return UBCollection::get_items($id, static::REL_REMOTETRICKYTOPIC_TAG);
     }
+
+    // FOR REST API CALLS (remote_site comes as an URL)
+
+    /**
+     * @param string $remote_site
+     * @param int[] $remote_id_array
+     * @return array
+     */
+    static function get_by_remote_id($remote_site, $remote_id_array){
+        $remote_site_id = ClipitRemoteSite::get_from_url(base64_decode($remote_site), true);
+        $tricky_topic_array = static::get_all();
+        $return_array = array();
+        foreach($tricky_topic_array as $tricky_topic){
+            if($tricky_topic->remote_site == $remote_site_id
+                && array_search($tricky_topic->remote_id,  $remote_id_array) !== false){
+                $return_array[] = $tricky_topic;
+            }
+        }
+        return $return_array;
+    }
+
+    /**
+     * @param string $remote_site
+     * @param int[] $remote_id_array
+     * @return bool
+     */
+    static function delete_by_remote_id($remote_site, $remote_id_array){
+        $remote_site_id = ClipitRemoteSite::get_from_url(base64_decode($remote_site), true);
+        $tricky_topic_array = static::get_by_remote_id($remote_site_id, $remote_id_array);
+        $delete_array = array();
+        foreach($tricky_topic_array as $tricky_topic){
+            $delete_array[] = $tricky_topic->id;
+        }
+        static::delete_by_id($delete_array);
+        return true;
+    }
+
+    /**
+     * @param string $remote_site
+     * @param bool $remote_ids_only Only return remote IDs
+     * @return array
+     */
+    static function get_from_site($remote_site, $remote_ids_only = false){
+        $remote_site_id = ClipitRemoteSite::get_from_url(base64_decode($remote_site), true);
+        $tricky_topic_array = static::get_all();
+        $return_array = array();
+        foreach($tricky_topic_array as $tricky_topic){
+            if((int)$tricky_topic->remote_site == $remote_site_id) {
+                if($remote_ids_only) {
+                    $return_array[] = $tricky_topic->remote_id;
+                } else{
+                    $return_array[] = $tricky_topic;
+                }
+            }
+        }
+        return $return_array;
+    }
+
+    /**
+     * @param string $remote_site
+     * @return bool
+     */
+    static function delete_all_from_site($remote_site){
+        $remote_site_id = ClipitRemoteSite::get_from_url(base64_decode($remote_site), true);
+        $tricky_topic_array = static::get_from_site($remote_site_id);
+        $delete_array = array();
+        foreach($tricky_topic_array as $tricky_topic){
+            if((int)$tricky_topic->remote_site == $remote_site_id){
+                $delete_array[] = $tricky_topic->id;
+            }
+        }
+        return static::delete_by_id($delete_array);
+    }
+
+
 }
