@@ -51,13 +51,14 @@ class UBSite {
     }
 
     /**
-     * Saves Site parameters into Elgg
-     * @return int Site ID
+     * Saves the Site to the system.
+     * @param  bool $double_save if $double_save is true, this object is saved twice to ensure that all properties are updated properly. E.g. the time created property can only beset on ElggObjects during an update. Defaults to false!
+     * @return bool|int Returns the Id of the saved instance, or false if error
      */
-    protected function save() {
+    protected function save($double_save = false) {
         $elgg_entity = elgg_get_site_entity();
         $this->copy_to_elgg($elgg_entity);
-        $elgg_entity->save();
+        $elgg_entity->save($double_save);
         return $this->id = $elgg_entity->get("guid");
     }
 

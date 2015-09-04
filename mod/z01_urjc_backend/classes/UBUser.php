@@ -80,9 +80,10 @@ class UBUser extends UBItem {
 
     /**
      * Saves this instance to the system.
-     * @return bool|int Returns id of saved instance, or false if error.
+     * @param  bool $double_save if $double_save is true, this object is saved twice to ensure that all properties are updated properly. E.g. the time created property can only beset on ElggObjects during an update. Defaults to false!
+     * @return bool|int Returns the Id of the saved instance, or false if error
      */
-    protected function save() {
+    protected function save($double_save = false) {
         if (empty($this->id)) {
             $elgg_user = new ElggUser();
             $elgg_user->subtype = (string)static::SUBTYPE;
@@ -90,7 +91,7 @@ class UBUser extends UBItem {
             return false;
         }
         $this->copy_to_elgg($elgg_user);
-        $elgg_user->save();
+        $elgg_user->save($double_save);
         return $this->id = $elgg_user->guid;
     }
 

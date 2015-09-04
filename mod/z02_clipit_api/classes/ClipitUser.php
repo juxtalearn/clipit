@@ -38,15 +38,16 @@ class ClipitUser extends UBUser {
     const COOKIE_TOKEN_DURATION = 60;
 
     /**
-     * Saves this instance into the system.
-     * @return bool|int Returns id of saved instance, or false if error.
+     * Saves this instance to the system.
+     * @param  bool $double_save if $double_save is true, this object is saved twice to ensure that all properties are updated properly. E.g. the time created property can only beset on ElggObjects during an update. Defaults to false!
+     * @return bool|int Returns the Id of the saved instance, or false if error
      */
-    protected function save() {
+    protected function save($double_save = false) {
         // If no role set, use "student" as default
         if(array_search($this->role, array(static::ROLE_STUDENT, static::ROLE_TEACHER, static::ROLE_ADMIN)) === false){
             $this->role = static::ROLE_STUDENT;
         }
-        $id = parent::save();
+        $id = parent::save($double_save);
         switch(strtolower($this->role)) {
             case static::ROLE_STUDENT:
                 remove_user_admin($this->id);

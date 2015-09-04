@@ -21,6 +21,10 @@ class ClipitRemoteSite extends UBItem{
     public $file_array = array();
     public $video_array = array();
 
+    /**
+     * @param array $prop_value_array
+     * @return bool|int
+     */
     static function create($prop_value_array){
         // Base64 decode some properties which can contain special characters
         $prop_value_array["name"] = base64_decode($prop_value_array["name"]);
@@ -49,11 +53,13 @@ class ClipitRemoteSite extends UBItem{
     }
 
     /**
-     * Saves Site parameters into Elgg
-     * @return int Site ID
+     * Saves the site to the system.
+     * @param bool $double_save if double_save is true, this object is saved twice to ensure that all properties are
+     * updated properly. E.g. the time_created property can only beset on ElggObjects during an update. Defaults to false!
+     * @return bool|int Returns id of saved instance, or false if error.
      */
-    protected function save() {
-        parent::save();
+    protected function save($double_save = false) {
+        parent::save($double_save);
         static::set_tricky_topics($this->id, $this->tricky_topic_array);
         static::set_activities($this->id, $this->activity_array);
         static::set_files($this->id, $this->file_array);

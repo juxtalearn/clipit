@@ -57,11 +57,12 @@ class ClipitSite extends UBSite {
     }
 
     /**
-     * Saves Site parameters into Elgg
-     * @return int Site ID
+     * Saves the Site to the system.
+     * @param  bool $double_save if $double_save is true, this object is saved twice to ensure that all properties are updated properly. E.g. the time created property can only beset on ElggObjects during an update. Defaults to false!
+     * @return bool|int Returns the Id of the saved instance, or false if error
      */
-    protected function save() {
-        $site_id = parent::save();
+    protected function save($double_save = false) {
+        $site_id = parent::save($double_save);
         static::set_tricky_topics($this->tricky_topic_array);
         static::set_videos($this->video_array);
         static::set_files($this->file_array);
