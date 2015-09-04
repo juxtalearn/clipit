@@ -103,7 +103,8 @@ function clipit_global_init(){
     elgg_register_page_handler('sites', 'connect_section');
     if(get_config('clipit_site_type') == ClipitSite::TYPE_GLOBAL) {
         elgg_register_page_handler('trickytopics', 'tricky_topics_global_section');
-        elgg_register_page_handler('public_activities', 'public_activities_global_section');
+//        Debugging
+//        elgg_register_page_handler('public_activities', 'public_activities_global_section');
     }
     elgg_register_page_handler('login', 'login_user_account_page_handler');
 
@@ -285,13 +286,25 @@ function login_user_account_page_handler($page_elements, $handler)
     return true;
 }
 function tricky_topics_global_section($page_elements, $handler){
+    $href_filter = 'trickytopics';
+    $href_filter .= http_build_query(array(
+        'by' => get_input('by'),
+        'id' => get_input('id'),
+        'text' => get_input('text'),
+        'filter' => get_input('filter'),
+    ));
+    $href_filter = (get_input('by') || get_input('text')) ? $href_filter.'&' : '?';
     $sites = ClipitRemoteSite::get_all();
     $sidebar = elgg_view_module('aside',
         elgg_echo('educational:centers'),
         elgg_view("global/activities/sidebar/sites", array('entities' => $sites, 'href' => $href_filter))
     );
-
-    $tricky_topics = ClipitTrickyTopic::get_by_id(ClipitSite::get_pub_tricky_topics());
+    if($site_id = get_input('site')){
+        $remote_site = array_pop(ClipitRemoteSite::get_by_id(array($site_id)));
+        $tricky_topics = ClipitRemoteTrickyTopic::get_from_site($remote_site->name);
+    } else {
+        $tricky_topics = ClipitRemoteTrickyTopic::get_all();
+    }
     $params = array(
         'title' => elgg_echo('tricky_topics'),
         'content' => elgg_view('global/tricky_topics/list', array('entities' => $tricky_topics)),
@@ -313,12 +326,6 @@ function public_activities_global_section($page_elements, $handler){
         $href_filter = "/search?{$href_filter}";
     }
     $href_filter = (get_input('by') || get_input('text')) ? $href_filter.'&' : '?';
-//    ClipitSite::publish_to_global();
-//    ClipitRemoteSite::create(array(
-//        'name' => 'Colegio Nuestra Señora del Amanecer',
-//        'url' => 'http://clipit.es/no/',
-//    ));
-//    print_r(ClipitRemoteSite::get_all());
     $sites = ClipitRemoteSite::get_all();
     $sidebar = elgg_view_module('aside',
         elgg_echo('educational:centers'),

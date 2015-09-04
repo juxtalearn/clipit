@@ -112,7 +112,7 @@ $videos = elgg_extract('entities', $vars);
     $restart_count = false;
     foreach($videos as $video):
         $video_url = "video/".elgg_get_friendly_title($video->name)."/".$video->id;
-        $remote_site = ClipitRemoteSite::get_by_id(array($video->remote_site));
+        $remote_site = array_pop(ClipitRemoteSite::get_by_id(array($video->remote_site)));
         $date = date("M d, Y H:i", $video->time_created);
         $class = "element-item height2";
         $text_color = "";
@@ -204,8 +204,8 @@ $videos = elgg_extract('entities', $vars);
                         echo elgg_view('output/url', array(
                             'href' => "videos/".elgg_get_friendly_title($remote_site->name)."/".$remote_site->id,
                             'class' => 'text-truncate site-name',
-                            'text'  => $edu->name,
-                            'title' => $edu->name,
+                            'text'  => $remote_site->name,
+                            'title' => $remote_site->name,
                         ));
                         ?>
                     </div>

@@ -18,7 +18,7 @@ foreach($entities as $entity){
         'text' => $icon.$entity->name,
         'title' => $entity->name,
         'class' => 'text-truncate',
-        'href' => "public_activities{$href}site={$entity->id}",
+        'href' => "{$href}site={$entity->id}",
         'selected' => get_input('site') == $entity->id ? true : false,
     ));
 }
