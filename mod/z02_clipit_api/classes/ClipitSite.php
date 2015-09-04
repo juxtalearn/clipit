@@ -342,7 +342,8 @@ class ClipitSite extends UBSite {
         // NEW VIDEOS
         foreach($pub_videos as $pub_video_id){
             if(array_search($pub_video_id, $remote_videos) === false){
-                $video = array_pop(ClipitVideo::get_by_id(array($pub_video_id)));
+                $video_array = ClipitVideo::get_by_id(array($pub_video_id));
+                $video = array_pop($video_array);
                 $tag_name_array = array();
                 $tag_array = ClipitTag::get_by_id($video->tag_array);
                 foreach($tag_array as $tag){
