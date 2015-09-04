@@ -38,7 +38,7 @@ if (!isset($widget->user_id)) {
 <div class="select-metrics">
     <div style="padding: 10px;background: #fafafa;">
         <div class="form-group">
-            <label><?php echo elgg_echo("activity:select"); ?></label>
+            <label><?php echo elgg_echo("la_dashboard:widget:availableactivities"); ?></label>
             <?php
             $params = array('class' => "form-control available-metrics-$widget_id",
                 'style' => 'padding-top: 5px;padding-bottom: 5px;',
@@ -52,7 +52,7 @@ if (!isset($widget->user_id)) {
             ?>
         </div>
         <div class="form-group">
-            <label><?php echo elgg_echo("user:select"); ?></label>
+            <label><?php echo elgg_echo("la_dashboard:widget:availableusers"); ?></label>
             <?php
             $params = array('class' => "form-control available-metrics-$widget_id",
                 'style' => 'padding-top: 5px;padding-bottom: 5px;',

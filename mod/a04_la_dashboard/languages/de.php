@@ -18,6 +18,8 @@ $german = array(
     "la_dashboard:stumblingblockcoverage" => "Stolpersteine",
     "la_dashboard:widget:selectuser" => "Bitte einen Benutzer wählen",
     "la_dashboard:widget:selectgroup" => "Bitte eine Gruppe wählen",
-    "la_dashboard:widget:quizresult:selectquiz" => "Bitte ein Quiz wählen"
+    "la_dashboard:widget:quizresult:selectquiz" => "Bitte ein Quiz wählen",
+    "la_dashboard:widget:availableactivities" => "Verfügbare Aktivitäten",
+    "la_dashboard:widget:availableusers" => "Verfügbare Benutzer"
 );
 add_translation('de', $german);

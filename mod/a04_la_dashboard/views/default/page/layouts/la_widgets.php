@@ -55,7 +55,7 @@ for ($column_index = 1; $column_index <= $num_columns; $column_index++) {
     echo "<div class=\"$widget_class elgg-widgets col-xs-$single_column col-sm-$single_column col-md-$single_column\" id=\"elgg-widget-col-$column_index\">";
     if (sizeof($column_widgets) > 0) {
         $user_guid = elgg_get_logged_in_user_guid();
-        $show_edit = elgg_trigger_plugin_hook('la_dashboard','show_edit',array('user_id'=>$user_guid, 'context' => $context),true);
+        $show_edit = elgg_trigger_plugin_hook('la_dashboard','show_edit',array('user_id'=>$user_guid, 'context' => $context, 'page_owner' => $owner),true);
 
         foreach ($column_widgets as $widget) {
             if (array_key_exists($widget->handler, $widget_types)) {

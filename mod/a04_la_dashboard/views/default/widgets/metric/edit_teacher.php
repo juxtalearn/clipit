@@ -9,9 +9,7 @@ $available_metrics = array('' => elgg_echo('la_dashboard:select_metric'));
 foreach (ActivityStreamer::get_available_metrics() as $metric) {
     $available_metrics[$metric['TemplateId']] = $metric['Name'];
 }
-
-$activities = ClipitActivity::get_by_id(ClipitUser::get_activities($logged_in_user->id));
-
+$activities = ClipitActivity::get_by_id(ClipitUser::get_activities($logged_in_user->guid));
 $activity_options = array(0 => elgg_echo('la_dashboard:widget:quizresult:selectactivity'));
 foreach ($activities as $activity) {
     $activity_options[$activity->id] = $activity->name;
@@ -44,7 +42,7 @@ if (!isset($widget->user_id)) {
 <div class="select-metrics">
     <div style="padding: 10px;background: #fafafa;">
         <div class="form-group">
-            <label><?php echo elgg_echo("activity:select"); ?></label>
+            <label><?php echo elgg_echo("la_dashboard:widget:availableactivities"); ?></label>
             <?php
             $params = array('class' => "form-control available-metrics-$widget_id",
                 'style' => 'padding-top: 5px;padding-bottom: 5px;',
@@ -58,7 +56,7 @@ if (!isset($widget->user_id)) {
             ?>
         </div>
         <div class="form-group">
-            <label><?php echo elgg_echo("user:select"); ?></label>
+            <label><?php echo elgg_echo("la_dashboard:widget:availableusers"); ?></label>
             <?php
             $params = array('class' => "form-control available-metrics-$widget_id",
                 'style' => 'padding-top: 5px;padding-bottom: 5px;',
