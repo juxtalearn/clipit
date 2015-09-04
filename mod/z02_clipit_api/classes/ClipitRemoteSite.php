@@ -80,12 +80,13 @@ class ClipitRemoteSite extends UBItem{
         $item = null;
         // If no ID specified, try loading remote site from URL
         if(empty($id) && array_key_exists("url", $prop_value_array)){
-            $item = static::get_from_url($prop_value_array["url"]);
+            $item = static::get_from_url($prop_value_array["url"], true);
             error_log("URL:");
             error_log($prop_value_array["url"]);
             error_log("ITEM:");
             error_log($item);
         }
+        die;
         if(empty($item)){
             if (!$item = new static($id)) {
                 return false;
@@ -111,9 +112,6 @@ class ClipitRemoteSite extends UBItem{
      * @return static|null
      */
     static function get_from_url($url, $id_only = false){
-        if($decoded_url = base64_decode($url)){
-            $url = $decoded_url;
-        }
         $remote_site_array = static::get_all();
         foreach($remote_site_array as $remote_site){
             if((string)$remote_site->url == $url){
