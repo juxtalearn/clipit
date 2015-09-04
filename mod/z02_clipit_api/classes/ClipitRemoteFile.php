@@ -22,6 +22,7 @@ class ClipitRemoteFile extends UBItem {
     public $remote_type = "";
     public $remote_site = 0;
     public $tag_array = array();
+    public $gdrive_id = "";
 
     /**
      * Loads object parameters stored in Elgg
@@ -34,6 +35,7 @@ class ClipitRemoteFile extends UBItem {
         $this->remote_type = (string)$elgg_entity->get("remote_type");
         $this->remote_site = (int)$elgg_entity->get("remote_site");
         $this->tag_array = (array)$elgg_entity->get("tag_array");
+        $this->gdrive_id = (string)$elgg_entity->get("gdrive_id");
     }
 
     /**
@@ -47,6 +49,7 @@ class ClipitRemoteFile extends UBItem {
         $elgg_entity->set("remote_type", (string)$this->remote_type);
         $elgg_entity->set("remote_site", (int)$this->remote_site);
         $elgg_entity->set("tag_array", (array)$this->tag_array);
+        $elgg_entity->set("gdrive_id", (array)$this->gdrive_id);
     }
 
     static function create($prop_value_array){
@@ -65,6 +68,7 @@ class ClipitRemoteFile extends UBItem {
             $tag_array[] = (int)ClipitTag::create(array("name" => $tag_name));
         }
         $prop_value_array["tag_array"] = (array)$tag_array;
+        $prop_value_array["gdrive_id"] = base64_decode($prop_value_array["gdrive_id"]);
         $id = parent::create($prop_value_array);
         ClipitRemoteSite::add_files($remote_site_id, array($id));
         return $id;

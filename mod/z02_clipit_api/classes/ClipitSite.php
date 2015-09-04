@@ -334,7 +334,8 @@ class ClipitSite extends UBSite {
                 $data += array("prop_value_array[name]" => base64_encode($activity->name));
                 $data += array("prop_value_array[description]" => base64_encode($activity->description));
                 $data += array("prop_value_array[tricky_topic]" => base64_encode($tricky_topic->name));
-                static::global_site_call($data, "POST");            }
+                static::global_site_call($data, "POST");
+            }
         }
         // NEW VIDEOS
         foreach($pub_videos as $pub_video_id){
@@ -352,7 +353,8 @@ class ClipitSite extends UBSite {
                 $data += array("prop_value_array[description]" => base64_encode($video->description));
                 $data += array("prop_value_array[url]" => base64_encode($video->url));
                 $data += array("prop_value_array[tag_array]" => base64_encode(json_encode($tag_name_array)));
-                static::global_site_call($data, "POST");            }
+                static::global_site_call($data, "POST");
+            }
         }
         // NEW FILES
         foreach($pub_files as $pub_file_id){
@@ -370,7 +372,9 @@ class ClipitSite extends UBSite {
                 $data += array("prop_value_array[description]" => base64_encode($file->description));
                 $data += array("prop_value_array[url]" => base64_encode($file->url));
                 $data += array("prop_value_array[tag_array]" => base64_encode(json_encode($tag_name_array)));
-                static::global_site_call($data, "POST");                   }
+                $data += array("prop_value_array[gdrive_id]" => base64_encode($file->gdrive_id));
+                static::global_site_call($data, "POST");
+            }
         }
 
         // REMOVE content no longer public on local site
