@@ -305,9 +305,13 @@ function tricky_topics_global_section($page_elements, $handler){
     } else {
         $tricky_topics = ClipitRemoteTrickyTopic::get_all();
     }
+    $content = elgg_view('output/empty', array('value' => 'No se han encontrado temas clave')); // Hardcoded
+    if($tricky_topics){
+        $content = elgg_view('global/tricky_topics/list', array('entities' => $tricky_topics));
+    }
     $params = array(
         'title' => elgg_echo('tricky_topics'),
-        'content' => elgg_view('global/tricky_topics/list', array('entities' => $tricky_topics)),
+        'content' => $content,
         'filter' => '',
         'sidebar' => $sidebar,
     );
