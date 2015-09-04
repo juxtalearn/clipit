@@ -6,6 +6,36 @@
     cursor:pointer;
 }
 
+
+.label.label-primary.la_stumblingblock.green {
+    border-color: green;
+    color: green;
+}
+.label.label-primary.la_stumblingblock.green:hover {
+    border-color: green;
+    background-color: green !important;
+    color:white;
+}
+.label.label-primary.la_stumblingblock.yellow {
+    border-color: #E4CF50;
+    color: #E4CF50;
+}
+
+.label.label-primary.la_stumblingblock.yellow:hover {
+    border-color: #E4CF50;
+    background-color: #E4CF50 !important;
+    color:white;
+}
+.label.label-primary.la_stumblingblock.red {
+    border-color: #FF704D;
+    color: #FF704D;
+}
+.label.label-primary.la_stumblingblock.red:hover {
+    border-color:  #FF704D;;
+    background-color:  #FF704D !important;
+    color:white;
+}
+
 .learning_analytics_dashboard .elgg-widgets-add-panel {
     background: none repeat scroll 0 0 #ddd;
     border: 2px solid #ccc;
