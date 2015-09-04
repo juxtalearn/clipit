@@ -30,10 +30,6 @@ class ClipitRemoteSite extends UBItem{
         $prop_value_array["name"] = base64_decode($prop_value_array["name"]);
         $prop_value_array["description"] = base64_decode($prop_value_array["description"]);
         $prop_value_array["url"] = base64_decode($prop_value_array["url"]);
-        $existing_site = static::get_from_url($prop_value_array["url"]);
-        if(!empty($existing_site)){
-            return $existing_site->id;
-        }
         return parent::create($prop_value_array);
     }
 
