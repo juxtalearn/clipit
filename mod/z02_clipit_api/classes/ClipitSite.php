@@ -295,7 +295,8 @@ class ClipitSite extends UBSite {
         $remote_activities = static::global_site_call($data, "GET");
         // REMOTE VIDEOS
         $data["method"] = "clipit.remote_video.get_from_site";
-        var_dump($remote_videos = static::global_site_call($data, "GET"));
+        $remote_videos = static::global_site_call($data, "GET");
+        var_dump($data); die;
         // REMOTE FILES
         $data["method"] = "clipit.remote_file.get_from_site";
         $remote_files = static::global_site_call($data, "GET");
