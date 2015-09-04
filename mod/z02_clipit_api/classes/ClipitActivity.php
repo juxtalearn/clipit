@@ -52,7 +52,7 @@ class ClipitActivity extends UBItem {
     public $group_mode = "";
     public $max_group_size = 0;
     public $max_students = 0;
-    public $is_open = false; // whether any site user can enroll
+    public $public = false; // whether any site user can enroll
     // Users contained
     public $teacher_array = array();
     public $student_array = array();
@@ -76,7 +76,7 @@ class ClipitActivity extends UBItem {
         $this->group_mode = (string)$elgg_entity->get("group_mode");
         $this->max_group_size = (int)$elgg_entity->get("max_group_size");
         $this->max_students = (int)$elgg_entity->get("max_students");
-        $this->is_open = (bool)$elgg_entity->get("is_open");
+        $this->public = (bool)static::is_public($this->id);
         $this->status = (string)static::calc_status($this->start, $this->end);
         $this->teacher_array = static::get_teachers($this->id);
         $this->student_array = static::get_students($this->id);
@@ -123,7 +123,6 @@ class ClipitActivity extends UBItem {
         $elgg_entity->set("group_mode", (string)$this->group_mode);
         $elgg_entity->set("max_group_size", (int)$this->max_group_size);
         $elgg_entity->set("max_students", (int)$this->max_students);
-        $elgg_entity->set("is_open", (bool)$this->is_open);
     }
 
     /**
@@ -133,7 +132,8 @@ class ClipitActivity extends UBItem {
      */
     protected function save($double_save=false) {
         parent::save($double_save);
-        static::set_tricky_topic($this->id, (int)$this->tricky_topic);
+        static::set_public($this->id, $this->public);
+        static::set_tricky_topic($this->id, $this->tricky_topic);
         static::set_teachers($this->id, $this->teacher_array);
         static::set_students($this->id, $this->student_array);
         static::set_groups($this->id, $this->group_array);
@@ -141,6 +141,19 @@ class ClipitActivity extends UBItem {
         static::set_videos($this->id, $this->video_array);
         static::set_files($this->id, $this->file_array);
         return $this->id;
+    }
+
+    static function is_public($id){
+        $public_activities = ClipitSite::get_pub_activities();
+        return in_array($id, $public_activities) ? true : false;
+    }
+
+    static function set_public($id, $value = true){
+        if($value){
+            return ClipitSite::add_pub_activities(array($id));
+        } else{
+            return ClipitSite::remove_pub_activities(array($id));
+        }
     }
 
     static function get_tricky_topic($id) {
@@ -187,23 +200,13 @@ class ClipitActivity extends UBItem {
         return $prop_value_array["status"];
     }
 
-    static function get_all_open($limit = 0, $offset = 0){
-        $elgg_objects = elgg_get_entities_from_metadata(
-            array(
-                'type' => static::TYPE,
-                'subtype' => static::SUBTYPE,
-                'metadata_names' => array("is_open"),
-                'metadata_values' => array(true),
-                'limit' => $limit,
-                'offset' => $offset
-            )
-        );
+    static function get_all_public(){
+        $activity_ids = ClipitSite::get_pub_activities();
         $activity_array = array();
-        if(!empty($elgg_objects)) {
-            foreach($elgg_objects as $elgg_object) {
-                $activity_array[] = new static($elgg_object->guid);
-            }
+        foreach($activity_ids as $activity_id) {
+            $activity_array[] = new static($activity_id);
         }
+
         return $activity_array;
     }
 

@@ -7,10 +7,17 @@
  */
 
 class ClipitRemoteSite extends UBItem{
+
+    const SUBTYPE = "ClipitRemoteSite";
+
     // REMOTE SCOPE
-    const REL_REMOTESITE_FILE = "ClipitRemoteSite-ClipitFile";
-    const REL_REMOTESITE_VIDEO = "ClipitRemoteSite-ClipitVideo";
+    const REL_REMOTESITE_REMOTETRICKYTOPIC = "ClipitRemoteSite-ClipitRemoteTrickyTopic";
+    const REL_REMOTESITE_REMOTEFILE = "ClipitRemoteSite-ClipitRemoteFile";
+    const REL_REMOTESITE_REMOTEVIDEO = "ClipitRemoteSite-ClipitRemoteVideo";
+    const REL_REMOTESITE_REMOTEACTIVITY = "ClipitRemoteSite-ClipitRemoteActivity";
     public $timezone = "";
+    public $tricky_topic_array = array();
+    public $activity_array = array();
     public $file_array = array();
     public $video_array = array();
 
@@ -25,6 +32,8 @@ class ClipitRemoteSite extends UBItem{
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
         $this->timezone = (string)$elgg_entity->get("timezone");
+        $this->tricky_topic_array = (array)static::get_tricky_topics($this->id);
+        $this->activity_array = (array)static::get_activities($this->id);
         $this->file_array = (array)static::get_files($this->id);
         $this->video_array = (array)static::get_videos($this->id);
     }
@@ -45,6 +54,8 @@ class ClipitRemoteSite extends UBItem{
      */
     protected function save() {
         parent::save();
+        static::set_tricky_topics($this->id, $this->tricky_topic_array);
+        static::set_activities($this->id, $this->activity_array);
         static::set_files($this->id, $this->file_array);
         static::set_videos($this->id, $this->video_array);
         return $this->id;
@@ -85,43 +96,76 @@ class ClipitRemoteSite extends UBItem{
     }
 
     /**
-     * @param $url
+     * @param string $url
+     * @param bool $id_only
      * @return static|null
      */
-    static function get_from_url($url){
+    static function get_from_url($url, $id_only = false){
+        if($decoded_url = base64_decode($url)){
+            $url = $decoded_url;
+        }
         $remote_site_array = static::get_all();
         foreach($remote_site_array as $remote_site){
-            if((string)$remote_site->url == (string)$url){
-                return $remote_site;
+            if((string)$remote_site->url == $url){
+                return $id_only ? (int)$remote_site->id : $remote_site;
             }
         }
         return null;
     }
 
+    // REMOTE TRICKY TOPICS
+    static function add_tricky_topics($id, $tricky_topic_array) {
+        return UBCollection::add_items($id, $tricky_topic_array, static::REL_REMOTESITE_REMOTETRICKYTOPIC);
+    }
+    static function set_tricky_topics($id, $tricky_topic_array) {
+        return UBCollection::set_items($id, $tricky_topic_array, static::REL_REMOTESITE_REMOTETRICKYTOPIC);
+    }
+    static function remove_tricky_topics($id, $tricky_topic_array) {
+        return UBCollection::remove_items($id, $tricky_topic_array, static::REL_REMOTESITE_REMOTETRICKYTOPIC);
+    }
+    static function get_tricky_topics($id) {
+        return UBCollection::get_items($id, static::REL_REMOTESITE_REMOTETRICKYTOPIC);
+    }
+
+    // REMOTE ACTIVITIES
+    static function add_activities($id, $activity_array) {
+        return UBCollection::add_items($id, $activity_array, static::REL_REMOTESITE_REMOTEACTIVITY);
+    }
+    static function set_activities($id, $activity_array) {
+        return UBCollection::set_items($id, $activity_array, static::REL_REMOTESITE_REMOTEACTIVITY);
+    }
+    static function remove_activities($id, $activity_array) {
+        return UBCollection::remove_items($id, $activity_array, static::REL_REMOTESITE_REMOTEACTIVITY);
+    }
+    static function get_activities($id) {
+        return UBCollection::get_items($id, static::REL_REMOTESITE_REMOTEACTIVITY);
+    }
+
     // REMOTE FILES
     static function add_files($id, $file_array) {
-        return UBCollection::add_items($id, $file_array, static::REL_REMOTESITE_FILE);
+        return UBCollection::add_items($id, $file_array, static::REL_REMOTESITE_REMOTEFILE);
     }
     static function set_files($id, $file_array) {
-        return UBCollection::set_items($id, $file_array, static::REL_REMOTESITE_FILE);
+        return UBCollection::set_items($id, $file_array, static::REL_REMOTESITE_REMOTEFILE);
     }
     static function remove_files($id, $file_array) {
-        return UBCollection::remove_items($id, $file_array, static::REL_REMOTESITE_FILE);
+        return UBCollection::remove_items($id, $file_array, static::REL_REMOTESITE_REMOTEFILE);
     }
     static function get_files($id) {
-        return UBCollection::get_items($id, static::REL_REMOTESITE_FILE);
+        return UBCollection::get_items($id, static::REL_REMOTESITE_REMOTEFILE);
     }
+
     // REMOTE VIDEOS
     static function add_videos($id, $video_array) {
-        return UBCollection::add_items($id, $video_array, static::REL_REMOTESITE_VIDEO);
+        return UBCollection::add_items($id, $video_array, static::REL_REMOTESITE_REMOTEVIDEO);
     }
     static function set_videos($id, $video_array) {
-        return UBCollection::set_items($id, $video_array, static::REL_REMOTESITE_VIDEO);
+        return UBCollection::set_items($id, $video_array, static::REL_REMOTESITE_REMOTEVIDEO);
     }
     static function remove_videos($id, $video_array) {
-        return UBCollection::remove_items($id, $video_array, static::REL_REMOTESITE_VIDEO);
+        return UBCollection::remove_items($id, $video_array, static::REL_REMOTESITE_REMOTEVIDEO);
     }
     static function get_videos($id) {
-        return UBCollection::get_items($id, static::REL_REMOTESITE_VIDEO);
+        return UBCollection::get_items($id, static::REL_REMOTESITE_REMOTEVIDEO);
     }
 } 

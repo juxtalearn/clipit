@@ -13,11 +13,11 @@
  */
 
 /**
- * An class which holds properties for Remote Resource objects.
+ * An class which holds properties for Remote Video objects.
  */
-class ClipitRemoteResource extends UBItem {
+class ClipitRemoteVideo extends UBItem {
 
-    const SUBTYPE = "ClipitRemoteResource";
+    const SUBTYPE = "ClipitRemoteVideo";
     public $remote_id;
     public $remote_type = "";
     public $remote_site = 0;
@@ -52,8 +52,8 @@ class ClipitRemoteResource extends UBItem {
     static function create($prop_value_array){
         // convert "remote_site" from string to local ID
         $remote_site_url = base64_decode($prop_value_array["remote_site"]);
-        $remote_site = ClipitRemoteSite::get_from_url($remote_site_url);
-        $prop_value_array["remote_site"] = (int)$remote_site->id;
+        $remote_site_id = ClipitRemoteSite::get_from_url($remote_site_url, true);
+        $prop_value_array["remote_site"] = $remote_site_id;
         // Base64 decode some properties which can contain special characters
         $prop_value_array["name"] = base64_decode($prop_value_array["name"]);
         $prop_value_array["description"] = base64_decode($prop_value_array["description"]);
@@ -66,60 +66,66 @@ class ClipitRemoteResource extends UBItem {
         }
         $prop_value_array["tag_array"] = (array)$tag_array;
         $id = parent::create($prop_value_array);
-        switch($prop_value_array["remote_type"]){
-            case ClipitFile::SUBTYPE:
-                ClipitRemoteSite::add_files($remote_site->id, array($id));
-                break;
-            case ClipitVideo::SUBTYPE:
-                ClipitRemoteSite::add_videos($remote_site->id, array($id));
-                break;
-        }
+        ClipitRemoteSite::add_videos($remote_site_id, array($id));
         return $id;
     }
 
     static function get_from_remote_type($remote_type){
-        $remote_resource_array = static::get_all();
+        $remote_video_array = static::get_all();
         $return_array = array();
-        foreach($remote_resource_array as $remote_resource){
-            if($remote_resource->remote_type == $remote_type){
-                $return_array[] = $remote_resource;
+        foreach($remote_video_array as $remote_video){
+            if($remote_video->remote_type == $remote_type){
+                $return_array[] = $remote_video;
             }
         }
         return $return_array;
     }
 
-    static function get_by_remote_id($remote_site_id, $remote_id_array){
-        $remote_resources = ClipitRemoteResource::get_all();
-        $remote_resource_array = array();
-        foreach($remote_resources as $remote_resource){
-            if($remote_resource->remote_site == $remote_site_id && array_search($remote_resource->remote_id,  $remote_id_array) !== false){
-                $remote_resource_array[] = $remote_resource;
+    static function get_by_tags($tag_array){
+        $video_array = static::get_all();
+        $return_array = array();
+        foreach($video_array as $video){
+            if(!empty(array_intersect($video->tag_array, $tag_array))){
+                $return_array[] = $video;
             }
         }
-        return $remote_resource_array;
+        return $return_array;
+    }
+
+    // FOR REST API CALLS (remote_site comes as an URL)
+
+    static function get_by_remote_id($remote_site_id, $remote_id_array){
+        $remote_videos = ClipitRemoteVideo::get_all();
+        $remote_video_array = array();
+        foreach($remote_videos as $remote_video){
+            if($remote_video->remote_site == $remote_site_id && array_search($remote_video->remote_id,  $remote_id_array) !== false){
+                $remote_video_array[] = $remote_video;
+            }
+        }
+        return $remote_video_array;
     }
 
     static function delete_by_remote_id($remote_site, $remote_id_array){
-        $remote_site = ClipitRemoteSite::get_from_url($remote_site);
-        $remote_resource_array = static::get_by_remote_id($remote_site->id, $remote_id_array);
-        $remote_resource_id_array = array();
-        foreach($remote_resource_array as $resource){
-            $remote_resource_id_array[] = $resource->id;
+        $remote_site_id = ClipitRemoteSite::get_from_url($remote_site, true);
+        $remote_video_array = static::get_by_remote_id($remote_site_id, $remote_id_array);
+        $remote_video_id_array = array();
+        foreach($remote_video_array as $video){
+            $remote_video_id_array[] = $video->id;
         }
-        static::delete_by_id($remote_resource_id_array);
+        static::delete_by_id($remote_video_id_array);
         return true;
     }
 
     static function get_from_site($remote_site, $remote_ids_only = false){
-        $remote_site = ClipitRemoteSite::get_from_url($remote_site);
-        $resource_array = static::get_all();
+        $remote_site_id = ClipitRemoteSite::get_from_url($remote_site, true);
+        $video_array = static::get_all();
         $return_array = array();
-        foreach($resource_array as $resource){
-            if((int)$resource->remote_site == (int)$remote_site->id) {
+        foreach($video_array as $video){
+            if((int)$video->remote_site == $remote_site_id) {
                 if($remote_ids_only) {
-                    $return_array[] = $resource->remote_id;
+                    $return_array[] = $video->remote_id;
                 } else{
-                    $return_array[] = $resource;
+                    $return_array[] = $video;
                 }
             }
         }
@@ -127,12 +133,12 @@ class ClipitRemoteResource extends UBItem {
     }
 
     static function delete_from_site($remote_site){
-        $remote_site = ClipitRemoteSite::get_from_url($remote_site);
-        $resource_array = static::get_all();
+        $remote_site_id = ClipitRemoteSite::get_from_url($remote_site, true);
+        $video_array = static::get_all();
         $delete_array = array();
-        foreach($resource_array as $resource){
-            if((int)$resource->remote_site == (int)$remote_site->id){
-                $delete_array[] = $resource->id;
+        foreach($video_array as $video){
+            if((int)$video->remote_site == $remote_site_id){
+                $delete_array[] = $video->id;
             }
         }
         return static::delete_by_id($delete_array);

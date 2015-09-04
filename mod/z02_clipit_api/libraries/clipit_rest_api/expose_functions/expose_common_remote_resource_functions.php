@@ -14,11 +14,20 @@
 
 /**
  * Expose class functions for the ClipIt REST API
+ *
+ * @param string $api_suffix The API suffix for a certain class
+ * @param string $class_suffix The PHP suffix for a certain class
  */
-function expose_remote_resource_functions() {
-    $api_suffix = "clipit.remote_resource.";
-    $class_suffix = "ClipitRemoteResource::";
+function expose_common_remote_resource_functions($api_suffix, $class_suffix) {
     expose_common_functions($api_suffix, $class_suffix);
+    expose_function(
+        $api_suffix . "get_by_remote_id", $class_suffix . "get_by_remote_id",
+        array(
+            "remote_site" => array("type" => "string", "required" => true),
+            "remote_id_array" => array("type" => "array", "required" => true)),
+        "Get Remote Resources from a Remote Site by remote ID", "POST",
+        false, true
+    );
     expose_function(
         $api_suffix . "delete_by_remote_id", $class_suffix . "delete_by_remote_id",
         array(
