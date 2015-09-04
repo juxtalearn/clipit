@@ -10,7 +10,6 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-//$videos = ClipitRemoteResource::get_from_remote_type(ClipitVideo::SUBTYPE);
 $videos = ClipitRemoteVideo::get_all();
 $recommended_main = reset($videos);
 $site = array_pop(ClipitRemoteSite::get_by_id(array($recommended_main->remote_site)));

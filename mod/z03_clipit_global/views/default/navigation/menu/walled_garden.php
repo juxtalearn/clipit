@@ -35,6 +35,14 @@
 <li class="separator">|</li>
 <li>
     <?php echo elgg_view('output/url', array(
+        'href'  => 'public_activities',
+        'text'  => elgg_echo('activities')
+    ));
+    ?>
+</li>
+<li class="separator">|</li>
+<li>
+    <?php echo elgg_view('output/url', array(
         'href'  => "http://clipit.es/demo",
         'text'  => elgg_echo('try_out')
     ));

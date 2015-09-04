@@ -219,13 +219,13 @@ function connect_section($page)
 
 function video_view($page){
     if ($id = $page[1]) {
-        $video = array_pop(ClipitRemoteResource::get_by_id(array((int)$id)));
+        $video = array_pop(ClipitRemoteVideo::get_by_id(array((int)$id)));
         $site = array_pop(ClipitRemoteSite::get_by_id(array($video->remote_site)));
         elgg_push_breadcrumb(elgg_echo('videos'), "videos");
         elgg_push_breadcrumb($site->name, "videos/".elgg_get_friendly_title($site->name)."/".$site->id);
         elgg_push_breadcrumb($video->name);
 
-        $videos = ClipitRemoteResource::get_all(5);
+        $videos = ClipitRemoteVideo::get_all(5);
         $sidebar = elgg_view_module('aside', false, elgg_view('walled_garden/sidebar/videos', array('videos' => $videos)));
 
         $params = array(
@@ -246,14 +246,14 @@ function videos_section($page){
     $edu = (int)$page[1];
     if ($edu) {
         if ($entity = array_pop(ClipitRemoteSite::get_by_id(array($edu))) ) {
-            $videos = ClipitRemoteResource::get_by_id($entity->video_array);
+            $videos = ClipitRemoteVideo::get_by_id($entity->video_array);
             $sidebar = elgg_view_module('aside', false, elgg_view('walled_garden/sidebar/edu_block', array('entity' => $entity)));
 
         }
     } elseif($page[0] == 'search') {
-        $videos = ClipitRemoteResource::get_all();
+        $videos = ClipitRemoteVideo::get_all();
     } else {
-        $videos = ClipitRemoteResource::get_all();
+        $videos = ClipitRemoteVideo::get_all();
     }
     $sidebar .= elgg_view_module('aside',
         false,
