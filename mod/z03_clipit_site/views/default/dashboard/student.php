@@ -68,7 +68,7 @@ elgg_load_css("nvd3:css");
         </div>
         <div class="col-md-6" style="background: #EBEBEB;">
             <?php
-            $open_activities = ClipitActivity::get_all_open();
+            $open_activities = ClipitActivity::get_all_public();
             $activities = array();
             foreach($open_activities as $activity){
                 $index = 0;

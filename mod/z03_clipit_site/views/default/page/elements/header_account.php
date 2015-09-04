@@ -16,7 +16,6 @@ $context = elgg_get_context();
             ));
             ?>
         </div>
-        <?php if (elgg_is_logged_in()) { ?>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="navbar-collapse">
             <div class="pull-right">
@@ -27,25 +26,12 @@ $context = elgg_get_context();
                     <span class="icon-bar"></span>
                 </button>
             </div>
-            <?php echo elgg_view_menu('top_account', array('sort_by' => 'priority', 'class' => 'nav navbar-nav navbar-right top-account')); ?>
+            <?php if (elgg_is_logged_in()): ?>
+                <?php echo elgg_view_menu('top_account', array('sort_by' => 'priority', 'class' => 'nav navbar-nav navbar-right top-account')); ?>
+            <?php else: ?>
+                <?php echo elgg_view_menu('top_walled_garden', array('sort_by' => 'priority', 'class' => 'nav navbar-nav navbar-right top-account')); ?>
+            <?php endif;?>
             <?php echo elgg_view_menu('top_menu', array('sort_by' => 'priority', 'class' => 'top-menu')); ?>
-            <!--
-            <ul class="nav navbar-nav navbar-right" style="margin-right: 0px;">
-                <li><a href="<?php echo $url; ?>explore"><?php echo elgg_echo("explore");?></a></li>
-                <?php if (elgg_is_admin_logged_in()) { ?>
-                    <li><a href="<?php echo $CONFIG->url; ?>admin"><?php echo elgg_echo("admin");?></a></li>
-                <?php } ?>
-            </ul>
-             -->
         </div><!-- /.navbar-collapse -->
-        <?php } else { ?>
-            <!--
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Menu</a></li>
-                <li class="active"><a href="#">Menu</a></li>
-                <li><a href="#">Menu</a></li>
-                <li><a href="#">Menu</a></li>
-            </ul>-->
-        <?php } ?>
     </div>
 </nav>

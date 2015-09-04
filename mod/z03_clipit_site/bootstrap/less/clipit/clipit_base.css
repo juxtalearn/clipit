@@ -9116,6 +9116,37 @@ ul.deadline-list > li .fa-user {
 .ms-container .ms-optgroup-container {
   width: 100%;
 }
+.public-activity-list .public-activity .activity-point {
+  width: 15px;
+  height: 15px;
+}
+.public-activity-list .public-activity .content-block {
+  position: relative;
+}
+.public-activity-list .public-activity .content-block .details {
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  cursor: default;
+  height: 60px;
+}
+.public-activity-list .public-activity .content-block .details.description {
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  opacity: 0;
+}
+.public-activity-list .public-activity .content-block .details.default-info {
+  opacity: 1;
+}
+.public-activity-list .public-activity:hover .details.description,
+.public-activity-list .public-activity:focus .details.description {
+  opacity: 1;
+}
+.public-activity-list .public-activity:hover .details.default-info,
+.public-activity-list .public-activity:focus .details.default-info {
+  opacity: 0;
+}
 .comment-button {
   border: 1px solid #32b4e5;
   color: #32b4e5;

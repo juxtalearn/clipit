@@ -400,3 +400,43 @@ ul.deadline-list{
     width: 100%;
   }
 }
+//
+// Public activities
+// --------------------------------------------------
+.public-activity-list{
+  .public-activity {
+    .activity-point {
+      width: 15px;
+      height: 15px;
+    }
+    .content-block {
+      position: relative;
+      .details {
+        .transition(all 0.3s);
+        cursor: default;
+        height: 60px;
+        &.description {
+          overflow: hidden;
+          position: absolute;
+          width: 100%;
+          z-index: 1;
+          opacity: 0;
+        }
+        &.default-info {
+          opacity: 1;
+        }
+      }
+    }
+    &:hover,
+    &:focus{
+      .details {
+        &.description {
+          opacity: 1;
+        }
+        &.default-info {
+          opacity: 0;
+        }
+      }
+    }
+  }
+}

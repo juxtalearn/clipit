@@ -10,6 +10,7 @@
 <div>
     <label><?php echo elgg_echo('loginusername'); ?></label>
     <?php echo elgg_view('input/text', array(
+        'autofocus' => true,
         'name' => 'username',
         'class' => 'form-control input-lg',
     ));

@@ -3,7 +3,7 @@ $site = elgg_get_site_entity();
 ?>
 <nav class="navbar navbar-default navbar-static-top navbar-blue" role="navigation">
     <div class="container">
-        <h2 class="white pull-left site-title hidden-xs hidden-sm"><?php echo $site->name;?></h2>
+        <h2 class="white pull-left site-title"><?php echo $site->name;?></h2>
         <?php echo elgg_view('output/url', array(
             'href' => "/",
             'class' => 'navbar-brand visible-xs visible-sm',
