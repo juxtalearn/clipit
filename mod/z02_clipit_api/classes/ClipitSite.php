@@ -302,7 +302,7 @@ class ClipitSite extends UBSite {
         // LOCAL public resources
         $pub_tricky_topics = static::get_pub_tricky_topics();
         $pub_activities = static::get_pub_activities();
-        var_dump($pub_videos = static::get_pub_videos());
+        $pub_videos = static::get_pub_videos();
         $pub_files = static::get_pub_files();
 
         // ADD new content to Global
