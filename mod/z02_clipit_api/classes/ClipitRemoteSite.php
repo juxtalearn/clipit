@@ -81,6 +81,10 @@ class ClipitRemoteSite extends UBItem{
         // If no ID specified, try loading remote site from URL
         if(empty($id) && array_key_exists("url", $prop_value_array)){
             $item = static::get_from_url($prop_value_array["url"]);
+            error_log("URL:");
+            error_log($prop_value_array["url"]);
+            error_log("ITEM:");
+            error_log($item);
         }
         if(empty($item)){
             if (!$item = new static($id)) {
