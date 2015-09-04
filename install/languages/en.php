@@ -110,8 +110,8 @@ If you are ready to proceed, click the Next button.",
     'install:settings:help:clipit_global_password' => "Password to access ClipIt Global Site",
 
     'install:settings:help:jxl_secret' => 'The JuxtaLearn secret key for interoperability between components.',
-    'install:settings:help:la_metrics_class' => 'Name of the Learning Analytics metrics class',
-    'install:settings:help:recommendations_class' => 'Name of the Recommendations class',
+    'install:settings:help:la_metrics_class' => 'Name of the Learning Analytics metrics class (default: ActivityStreamer)',
+    'install:settings:help:recommendations_class' => 'Name of the Recommendations class (default: RecommendationEngine)',
     'install:settings:help:clipit_site_type' => "Define whether this will be a normal site, a demo site, or a global site",
 
 	'install:admin:instructions' => "It is now time to create an administrator's account.",
