@@ -309,7 +309,8 @@ class ClipitSite extends UBSite {
         // NEW TRICKY TOPICS
         foreach($pub_tricky_topics as $pub_tricky_topic_id){
             if(array_search($pub_tricky_topic_id, $remote_tricky_topics) === false){
-                $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($pub_tricky_topic_id)));
+                $tricky_topic_array = ClipitTrickyTopic::get_by_id(array($pub_tricky_topic_id));
+                $tricky_topic = array_pop($tricky_topic_array);
                 $tag_name_array = array();
                 $tag_array = ClipitTag::get_by_id($tricky_topic->tag_array);
                 foreach($tag_array as $tag){
