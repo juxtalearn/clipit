@@ -88,6 +88,7 @@ function clipit_global_init(){
         $return_value[] = 'video/.*';
         $return_value[] = 'test';
         $return_value[] = 'sites';
+        $return_value[] = 'trickytopics';
         $return_value[] = 'public_activities';
         return $return_value;
     }
@@ -96,13 +97,16 @@ function clipit_global_init(){
     elgg_register_page_handler('clipit', 'clipit_footer_page');
     elgg_register_page_handler('help', 'help_footer_page');
     elgg_register_page_handler('legal', 'legal_footer_page');
-
+    // Public pages
     elgg_register_page_handler('videos', 'videos_section');
     elgg_register_page_handler('video', 'video_view');
     elgg_register_page_handler('sites', 'connect_section');
+    if(get_config('clipit_site_type') == ClipitSite::TYPE_GLOBAL) {
+        elgg_register_page_handler('trickytopics', 'tricky_topics_global_section');
+        elgg_register_page_handler('public_activities', 'public_activities_global_section');
+    }
     elgg_register_page_handler('login', 'login_user_account_page_handler');
 
-    elgg_register_page_handler('public_activities', 'public_activities_page_handler');
 
     $plugin_url = elgg_get_site_url() . "mod/z03_clipit_global";
     if (elgg_get_context() === "admin") {
@@ -215,7 +219,6 @@ function connect_section($page)
 
 function video_view($page){
     if ($id = $page[1]) {
-//        $video = array_pop(ClipitVideo::get_by_id(array((int)$id)));
         $video = array_pop(ClipitRemoteResource::get_by_id(array((int)$id)));
         $site = array_pop(ClipitRemoteSite::get_by_id(array($video->remote_site)));
         elgg_push_breadcrumb(elgg_echo('videos'), "videos");
@@ -281,11 +284,56 @@ function login_user_account_page_handler($page_elements, $handler)
     }
     return true;
 }
+function tricky_topics_global_section($page_elements, $handler){
+    $sites = ClipitRemoteSite::get_all();
+    $sidebar = elgg_view_module('aside',
+        elgg_echo('educational:centers'),
+        elgg_view("global/activities/sidebar/sites", array('entities' => $sites, 'href' => $href_filter))
+    );
 
-function public_activities_page_handler($page_elements, $handler){
+    $tricky_topics = ClipitTrickyTopic::get_by_id(ClipitSite::get_pub_tricky_topics());
     $params = array(
-        'content' => elgg_view('activities/public/list', array('entities' => $videos)),
+        'title' => elgg_echo('tricky_topics'),
+        'content' => elgg_view('global/tricky_topics/list', array('entities' => $tricky_topics)),
         'filter' => '',
+        'sidebar' => $sidebar,
+    );
+    $body = elgg_view_layout('content', $params);
+    echo elgg_view_page('', $body);
+}
+
+function public_activities_global_section($page_elements, $handler){
+    $href_filter = http_build_query(array(
+        'by' => get_input('by'),
+        'id' => get_input('id'),
+        'text' => get_input('text'),
+        'filter' => get_input('filter'),
+    ));
+    if(get_input('by')){
+        $href_filter = "/search?{$href_filter}";
+    }
+    $href_filter = (get_input('by') || get_input('text')) ? $href_filter.'&' : '?';
+//    ClipitSite::publish_to_global();
+//    ClipitRemoteSite::create(array(
+//        'name' => 'Colegio Nuestra Señora del Amanecer',
+//        'url' => 'http://clipit.es/no/',
+//    ));
+//    print_r(ClipitRemoteSite::get_all());
+    $sites = ClipitRemoteSite::get_all();
+    $sidebar = elgg_view_module('aside',
+        elgg_echo('educational:centers'),
+        elgg_view("global/activities/sidebar/sites", array('entities' => $sites, 'href' => $href_filter))
+    );
+    $tricky_topics = ClipitTrickyTopic::get_by_id(ClipitSite::get_pub_tricky_topics());
+    $sidebar .= elgg_view_module('aside',
+        elgg_echo('tricky_topic'),
+        elgg_view("global/activities/sidebar/tricky_topics", array('entities' => $tricky_topics, 'href' => $href_filter))
+    );
+    $selected_tab = get_input('filter', 'all');
+    $params = array(
+        'title' => elgg_echo('activities'),
+        'content' => elgg_view('global/activities/list', array('entities' => $videos)),
+        'filter' => elgg_view('global/activities/filter', array('selected' => $selected_tab, 'entity' => $activity)),
         'sidebar' => $sidebar,
     );
     $body = elgg_view_layout('content', $params);

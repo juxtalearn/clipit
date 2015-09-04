@@ -13,12 +13,19 @@
 ?>
 <li class="btn-landing">
     <?php echo elgg_view('output/url', array(
-        'href'  => "http://clipit.es/demo",
-        'text'  => elgg_echo('try_out')
+        'href'  => '/videos',
+        'text'  => elgg_echo('videos')
     ));
     ?>
 </li>
 <li class="btn-landing">
+    <?php echo elgg_view('output/url', array(
+        'href'  => 'trickytopics',
+        'text'  => elgg_echo('tricky_topics')
+    ));
+    ?>
+</li>
+<li class="margin-left-15">
     <?php echo elgg_view('output/url', array(
         'href'  => "sites",
         'text'  => elgg_echo('sites')
@@ -28,8 +35,8 @@
 <li class="separator">|</li>
 <li>
     <?php echo elgg_view('output/url', array(
-        'href'  => "videos",
-        'text'  => elgg_echo('videos')
+        'href'  => "http://clipit.es/demo",
+        'text'  => elgg_echo('try_out')
     ));
     ?>
 </li>

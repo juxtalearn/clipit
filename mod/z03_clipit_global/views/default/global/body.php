@@ -13,6 +13,74 @@
 $images_dir = elgg_extract('images_dir', $vars);
 $account = elgg_extract('accounts', $vars);
 ?>
+<style>
+    @-webkit-keyframes typing {
+        from { width: 0; }
+        to { width:14.5em }
+
+    }
+
+    /*@-moz-keyframes typing {*/
+        /*from { width: 0 }*/
+        /*to { width:16.3em }*/
+    /*}*/
+    @-webkit-keyframes blink-caret {
+        from, to { border-color: transparent }
+        50% { border-color: white }
+    }
+
+    @-moz-keyframes blink-caret {
+        from, to { border-color: transparent }
+        50% { border-color: white }
+    }
+    .jumbotron.clipit-landing .clipit-message h1{
+        /*width:14.5em;*/
+        /*white-space:nowrap;*/
+        /*overflow:hidden;*/
+        /*border-right: .1em solid white;*/
+        /*-webkit-animation: typing 3s steps(24, end), blink-caret 1s step-end infinite;*/
+        /*-moz-animation: typing 17s steps(24, end), *//* # of steps = # of characters *//* blink-caret 1s step-end infinite;*/
+    }
+    #cursor{
+        margin-left: -5px;
+    }
+    @-webkit-keyframes line-horizontal {
+        from{
+            width: 60%;
+        }
+        to{
+            width: 0%;
+        }
+    }
+    #test{
+        /*-webkit-animation: line-horizontal 3s infinite;*/
+    }
+</style>
+<script>
+    setInterval ('cursorAnimation()', 1000);
+    function cursorAnimation() {
+        $('#cursor').animate({
+            opacity: 0
+        }, 'fast', 'swing').animate({
+            opacity: 1
+        }, 'fast', 'swing');
+    }
+    //define text
+    var text = '<?php echo elgg_echo('clipit:slogan');?>';
+
+    //text is split up to letters
+    $.each(text.split(''), function(i, letter){
+
+        //we add 100*i ms delay to each letter
+        setTimeout(function(){
+
+            //we add the letter to the container
+            $('.clipit-message h1 #caption').text($('.clipit-message h1 #caption').text() + letter);
+
+        }, 100*i);
+    });
+
+</script>
 <!-- Jumbotron -->
 <div class="jumbotron clipit-landing">
     <div class="container">
@@ -25,20 +93,19 @@ $account = elgg_extract('accounts', $vars);
             ?>
         </div>
         <div class="clipit-message">
-            <h1><?php echo elgg_echo('clipit:slogan');?></h1>
+            <h1><span id="caption"></span><span id="cursor">|</span></h1>
             <h4><?php echo elgg_echo('clipit:slogan:description');?></h4>
             <div class="btns">
                 <?php echo elgg_view('output/url', array(
-                    'href'  => "http://clipit.es/demo",
+                    'href'  => "videos",
                     'class' => 'btn clipit-btn',
-                    'target' => '_blank',
-                    'text'  => elgg_echo('try_out'),
+                    'text'  => elgg_echo('videos'),
                 ));
                 ?>
                 <?php echo elgg_view('output/url', array(
-                    'href'  => "sites",
+                    'href'  => "tricky_topics",
                     'class' => 'btn clipit-btn',
-                    'text'  => elgg_echo('sites'),
+                    'text'  => elgg_echo('tricky_topics'),
                 ));
                 ?>
             </div>
@@ -48,7 +115,7 @@ $account = elgg_extract('accounts', $vars);
 
 <div class="slogan">
     <div class="container">
-        <div class="row">
+        <div class="row" style="position: relative">
             <div class="col-md-4 text-center">
                 <div class="clipit-slogan-icon animate fadeIn" data-delay="100" data-icon="1">
                     <div class="bar bar-right" style="background: #FF2D00;"></div>
@@ -171,9 +238,6 @@ $account = elgg_extract('accounts', $vars);
         <?php echo elgg_view('videos/recommended_videos');?>
     </div>
 </div>
-<!--Recommended videos-->
-
-<!--Recommended videos end-->
 
 <!--Social -->
 <div class="follow-us">

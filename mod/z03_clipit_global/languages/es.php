@@ -46,7 +46,7 @@ $spanish = array(
         donde fueron creados. Además, los estudiantes
         pueden navegar a través de las etiquetas asignadas a los videos, o siguiendo las
         recomendaciones personalizadas.',
-    'clipit:global:recommended' => 'Vídeos <span>recomendados</span>',
+    'clipit:global:recommended' => 'Vídeos <span>destacados</span>',
     'clipit:view:more_videos' => 'Ver más vídeos',
 
     // ERROR

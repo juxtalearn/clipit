@@ -19,6 +19,9 @@ $edu = elgg_extract('site', $vars);
         background: transparent !important;
         padding: 0 !important;
     }
+    .tags{
+        display: block;
+    }
 </style>
 <div class="multimedia-pub">
     <div class="frame-container">
@@ -38,8 +41,8 @@ $edu = elgg_extract('site', $vars);
                     </p>
                 <?php endif;?>
                 <?php if(!empty($video->tag_array)):?>
-                <h4><?php echo elgg_echo('tags');?></h4>
-                    <?php echo elgg_view("tricky_topic/tags/view", array('tags' => $video->tag_array)); ?>
+                    <h4><?php echo elgg_echo('tags');?></h4>
+                    <?php echo elgg_view("global/tags/view", array('tags' => $video->tag_array)); ?>
                 <?php endif;?>
             </div>
             <div class="col-md-5">
