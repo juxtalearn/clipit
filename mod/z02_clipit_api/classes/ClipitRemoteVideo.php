@@ -81,7 +81,8 @@ class ClipitRemoteVideo extends UBItem {
 
     // FOR REST API CALLS (remote_site comes as an URL)
 
-    static function get_by_remote_id($remote_site_id, $remote_id_array){
+    static function get_by_remote_id($remote_site, $remote_id_array){
+        $remote_site_id = ClipitRemoteSite::get_from_url(base64_decode($remote_site), true);
         $remote_videos = ClipitRemoteVideo::get_all();
         $remote_video_array = array();
         foreach($remote_videos as $remote_video){
@@ -93,7 +94,7 @@ class ClipitRemoteVideo extends UBItem {
     }
 
     static function delete_by_remote_id($remote_site, $remote_id_array){
-        $remote_site_id = ClipitRemoteSite::get_from_url($remote_site, true);
+        $remote_site_id = ClipitRemoteSite::get_from_url(base64_decode($remote_site), true);
         $remote_video_array = static::get_by_remote_id($remote_site_id, $remote_id_array);
         $remote_video_id_array = array();
         foreach($remote_video_array as $video){
@@ -104,7 +105,7 @@ class ClipitRemoteVideo extends UBItem {
     }
 
     static function get_from_site($remote_site, $remote_ids_only = false){
-        $remote_site_id = ClipitRemoteSite::get_from_url($remote_site, true);
+        $remote_site_id = ClipitRemoteSite::get_from_url(base64_decode($remote_site), true);
         $video_array = static::get_all();
         $return_array = array();
         foreach($video_array as $video){
@@ -120,7 +121,7 @@ class ClipitRemoteVideo extends UBItem {
     }
 
     static function delete_from_site($remote_site){
-        $remote_site_id = ClipitRemoteSite::get_from_url($remote_site, true);
+        $remote_site_id = ClipitRemoteSite::get_from_url(base64_decode($remote_site), true);
         $video_array = static::get_all();
         $delete_array = array();
         foreach($video_array as $video){

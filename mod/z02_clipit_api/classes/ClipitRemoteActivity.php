@@ -70,7 +70,7 @@ class ClipitRemoteActivity extends UBItem {
      * @return array
      */
     static function get_by_remote_id($remote_site, $remote_id_array){
-        $remote_site_id = ClipitRemoteSite::get_from_url($remote_site, true);
+        $remote_site_id = ClipitRemoteSite::get_from_url(base64_decode($remote_site), true);
         $activity_array = static::get_all();
         $return_array = array();
         foreach($activity_array as $activity){
@@ -88,7 +88,7 @@ class ClipitRemoteActivity extends UBItem {
      * @return bool
      */
     static function delete_by_remote_id($remote_site, $remote_id_array){
-        $remote_site_id = ClipitRemoteSite::get_from_url($remote_site, true);
+        $remote_site_id = ClipitRemoteSite::get_from_url(base64_decode($remote_site), true);
         $activity_array = static::get_by_remote_id($remote_site_id, $remote_id_array);
         $delete_array = array();
         foreach($activity_array as $activity){
@@ -104,7 +104,7 @@ class ClipitRemoteActivity extends UBItem {
      * @return array
      */
     static function get_from_site($remote_site, $remote_ids_only = false){
-        $remote_site_id = ClipitRemoteSite::get_from_url($remote_site, true);
+        $remote_site_id = ClipitRemoteSite::get_from_url(base64_decode($remote_site), true);
         $activity_array = static::get_all();
         $return_array = array();
         foreach($activity_array as $activity){
@@ -124,7 +124,7 @@ class ClipitRemoteActivity extends UBItem {
      * @return bool
      */
     static function delete_all_from_site($remote_site){
-        $remote_site_id = ClipitRemoteSite::get_from_url($remote_site, true);
+        $remote_site_id = ClipitRemoteSite::get_from_url(base64_decode($remote_site), true);
         $activity_array = static::get_from_site($remote_site_id);
         $delete_array = array();
         foreach($activity_array as $activity){
