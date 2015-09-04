@@ -386,12 +386,14 @@ class ClipitSite extends UBSite {
                 $remove_array[] = $remote_tricky_topic_id;
             }
         }
-        $data = array("method" => "clipit.remote_tricky_topic.delete_by_remote_id");
-        $data += array("remote_site" => base64_encode(elgg_get_site_url()));
-        foreach($remove_array as $remove_id){
-            $data += array("remote_id_array[$remove_id]" => $remove_id);
+        if(!empty($remove_array)) {
+            $data = array("method" => "clipit.remote_tricky_topic.delete_by_remote_id");
+            $data += array("remote_site" => base64_encode(elgg_get_site_url()));
+            foreach ($remove_array as $remove_id) {
+                $data += array("remote_id_array[]" => $remove_id);
+            }
+            static::global_site_call($data, "POST");
         }
-        static::global_site_call($data, "POST");
         //OLD ACTIVITIES
         $remove_array = array();
         foreach($remote_activities as $remote_activity_id){
@@ -399,12 +401,14 @@ class ClipitSite extends UBSite {
                 $remove_array[] = $remote_activity_id;
             }
         }
-        $data = array("method" => "clipit.remote_activity.delete_by_remote_id");
-        $data += array("remote_site" => base64_encode(elgg_get_site_url()));
-        foreach($remove_array as $remove_id){
-            $data += array("remote_id_array[$remove_id]" => $remove_id);
+        if(!empty($remove_array)) {
+            $data = array("method" => "clipit.remote_activity.delete_by_remote_id");
+            $data += array("remote_site" => base64_encode(elgg_get_site_url()));
+            foreach ($remove_array as $remove_id) {
+                $data += array("remote_id_array[]" => $remove_id);
+            }
+            static::global_site_call($data, "POST");
         }
-        static::global_site_call($data, "POST");
         // OLD VIDEOS
         $remove_array = array();
         foreach($remote_videos as $remote_video_id){
@@ -412,12 +416,14 @@ class ClipitSite extends UBSite {
                 $remove_array[] = $remote_video_id;
             }
         }
-        $data = array("method" => "clipit.remote_video.delete_by_remote_id");
-        $data += array("remote_site" => base64_encode(elgg_get_site_url()));
-        foreach($remove_array as $remove_id){
-            $data += array("remote_id_array[$remove_id]" => $remove_id);
+        if(!empty($remove_array)) {
+            $data = array("method" => "clipit.remote_video.delete_by_remote_id");
+            $data += array("remote_site" => base64_encode(elgg_get_site_url()));
+            foreach ($remove_array as $remove_id) {
+                $data += array("remote_id_array[]" => $remove_id);
+            }
+            static::global_site_call($data, "POST");
         }
-        static::global_site_call($data, "POST");
         // OLD FILES
         $remove_array = array();
         foreach($remote_files as $remote_file_id){
@@ -425,13 +431,14 @@ class ClipitSite extends UBSite {
                 $remove_array[] = $remote_file_id;
             }
         }
-        $data = array("method" => "clipit.remote_video.delete_by_remote_id");
-        $data += array("remote_site" => base64_encode(elgg_get_site_url()));
-        foreach($remove_array as $remove_id){
-            $data += array("remote_id_array[$remove_id]" => $remove_id);
+        if(!empty($remove_array)) {
+            $data = array("method" => "clipit.remote_video.delete_by_remote_id");
+            $data += array("remote_site" => base64_encode(elgg_get_site_url()));
+            foreach ($remove_array as $remove_id) {
+                $data += array("remote_id_array[]" => $remove_id);
+            }
+            static::global_site_call($data, "POST");
         }
-        static::global_site_call($data, "POST");
-
         return true;
     }
 }
