@@ -89,7 +89,8 @@ class ClipitRemoteFile extends UBItem {
         $file_array = static::get_all();
         $return_array = array();
         foreach($file_array as $file){
-            if(!empty(array_intersect($file->tag_array, $tag_array))){
+            $intersection = array_intersect($file->tag_array, $tag_array);
+            if(!empty($intersection)){
                 $return_array[] = $file;
             }
         }

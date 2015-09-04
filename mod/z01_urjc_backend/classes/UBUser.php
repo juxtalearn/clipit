@@ -91,7 +91,7 @@ class UBUser extends UBItem {
             return false;
         }
         $this->copy_to_elgg($elgg_user);
-        $elgg_user->save($double_save);
+        $elgg_user->save();
         return $this->id = $elgg_user->guid;
     }
 

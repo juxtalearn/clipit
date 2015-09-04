@@ -58,7 +58,7 @@ class UBSite {
     protected function save($double_save = false) {
         $elgg_entity = elgg_get_site_entity();
         $this->copy_to_elgg($elgg_entity);
-        $elgg_entity->save($double_save);
+        $elgg_entity->save();
         return $this->id = $elgg_entity->get("guid");
     }
 

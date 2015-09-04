@@ -85,7 +85,8 @@ class ClipitRemoteVideo extends UBItem {
         $video_array = static::get_all();
         $return_array = array();
         foreach($video_array as $video){
-            if(!empty(array_intersect($video->tag_array, $tag_array))){
+            $intersection = array_intersect($video->tag_array, $tag_array);
+            if(!empty($intersection)){
                 $return_array[] = $video;
             }
         }
