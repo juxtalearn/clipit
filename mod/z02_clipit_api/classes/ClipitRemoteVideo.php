@@ -19,7 +19,6 @@ class ClipitRemoteVideo extends UBItem {
 
     const SUBTYPE = "ClipitRemoteVideo";
     public $remote_id;
-    public $remote_type = "";
     public $remote_site = 0;
     public $tag_array = array();
 
@@ -31,7 +30,6 @@ class ClipitRemoteVideo extends UBItem {
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
         $this->remote_id = (int)$elgg_entity->get("remote_id");
-        $this->remote_type = (string)$elgg_entity->get("remote_type");
         $this->remote_site = (int)$elgg_entity->get("remote_site");
         $this->tag_array = (array)$elgg_entity->get("tag_array");
     }
@@ -44,7 +42,6 @@ class ClipitRemoteVideo extends UBItem {
     protected function copy_to_elgg($elgg_entity) {
         parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("remote_id", (int)$this->remote_id);
-        $elgg_entity->set("remote_type", (string)$this->remote_type);
         $elgg_entity->set("remote_site", (int)$this->remote_site);
         $elgg_entity->set("tag_array", (array)$this->tag_array);
     }
@@ -68,17 +65,6 @@ class ClipitRemoteVideo extends UBItem {
         $id = parent::create($prop_value_array);
         ClipitRemoteSite::add_videos($remote_site_id, array($id));
         return $id;
-    }
-
-    static function get_from_remote_type($remote_type){
-        $remote_video_array = static::get_all();
-        $return_array = array();
-        foreach($remote_video_array as $remote_video){
-            if($remote_video->remote_type == $remote_type){
-                $return_array[] = $remote_video;
-            }
-        }
-        return $return_array;
     }
 
     static function get_by_tags($tag_array){
