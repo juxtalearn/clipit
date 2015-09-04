@@ -295,14 +295,14 @@ class ClipitSite extends UBSite {
         $remote_activities = static::global_site_call($data, "GET");
         // REMOTE VIDEOS
         $data["method"] = "clipit.remote_video.get_from_site";
-        $remote_videos = static::global_site_call($data, "GET");
+        error_log($remote_videos = static::global_site_call($data, "GET"));
         // REMOTE FILES
         $data["method"] = "clipit.remote_file.get_from_site";
         $remote_files = static::global_site_call($data, "GET");
         // LOCAL public resources
         $pub_tricky_topics = static::get_pub_tricky_topics();
         $pub_activities = static::get_pub_activities();
-        $pub_videos = static::get_pub_videos();
+        error_log($pub_videos = static::get_pub_videos());
         $pub_files = static::get_pub_files();
 
         // ADD new content to Global
