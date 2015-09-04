@@ -1,3 +1,5 @@
+data
+/data/**
 .idea
 .DS_Store
 php_errors.log

@@ -37,10 +37,10 @@ class LADashboardHelper
         foreach ($tag_array as $block) {
             $tag_id = $block->id;
             $sum = 0;
-            $sum += UBCollection::count_items($block->id,ClipitTag::SUBTYPE.'-'.ClipitFile::SUBTYPE,true,false);
-            $sum += UBCollection::count_items($block->id,ClipitTag::SUBTYPE.'-'.ClipitStoryboard::SUBTYPE,true,false);
-            $sum += UBCollection::count_items($block->id,ClipitTag::SUBTYPE.'-'.ClipitVideo::SUBTYPE,true,false);
-            $sum += UBCollection::count_items($block->id,ClipitTag::SUBTYPE.'-'.ClipitComment::SUBTYPE,true,false);
+            $sum += UBCollection::count_items($block->id,ClipitFile::SUBTYPE.'-'.ClipitTag::SUBTYPE,true,false);
+            $sum += UBCollection::count_items($block->id,ClipitStoryboard::SUBTYPE.'-'.ClipitTag::SUBTYPE,true,false);
+            $sum += UBCollection::count_items($block->id,ClipitVideo::SUBTYPE.'-'.ClipitTag::SUBTYPE,true,false);
+            $sum += UBCollection::count_items($block->id,ClipitComment::SUBTYPE.'-'.ClipitTag::SUBTYPE,true,false);
             $stumbling_block_array[$block->name]=$sum;
         }
         return $stumbling_block_array;
@@ -175,6 +175,7 @@ class LADashboardHelper
     {
         global $CONFIG;
         global $con;
+        $con->set_charset("utf8");
         $query = "SELECT * FROM ".$CONFIG->dbprefix."entity_relationships WHERE guid_two = " . $user_id . " AND relationship LIKE 'ClipitActivity-%';";
         $relationships = mysqli_query($con, $query);
         $result_data = new stdClass();
@@ -200,7 +201,7 @@ class LADashboardHelper
                 $streams[] = $activity;
             }
         } else
-            die("no mysql results found");
+            die("no mysql results found for user $user_name($user_id)");
         $result_data->activities = $streams;
         $json = json_encode(array($result_data));
         return $json;

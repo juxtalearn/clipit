@@ -20,6 +20,8 @@ $english = array(
     "la_dashboard:stumblingblockcoverage" => "Stumbling Blocks",
     "la_dashboard:widget:selectgroup" => "Please select a group",
     "la_dashboard:widget:quizresult:selectquiz" => "Please select a quiz",
-    "la_dashboard:widget:selectuser" => "Please select a user"
+    "la_dashboard:widget:selectuser" => "Please select a user",
+    "la_dashboard:widget:availableactivities" => "Available Activities",
+    "la_dashboard:widget:availableusers" => "Available Users"
 );
 add_translation('en', $english);

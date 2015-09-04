@@ -185,10 +185,11 @@ function la_widget_layout_permissions_hook($hook, $type, $returnvalue, $params)
 function la_widget_show_edit_hook($hook, $type, $returnvalue, $params)
 {
     $show_edit = false;
-    if ( isset($params['user_id'] ) ) {
+    if ( isset($params['user_id'] )) {
         $clipit_user = array_pop(ClipitUser::get_by_id(array($params['user_id'])));
-        if ($clipit_user && $clipit_user->role == ClipitUser::ROLE_STUDENT) {
-            $show_edit = false;
+        if ($clipit_user && $clipit_user->role == ClipitUser::ROLE_STUDENT && isset($params['page_owner'])) {
+            $show_edit = ($params['page_owner']->guid === $params['user_id']);
+//            $show_edit = false;
         } else {
             $show_edit = true;
         }

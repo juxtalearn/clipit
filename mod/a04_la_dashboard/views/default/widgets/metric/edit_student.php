@@ -27,7 +27,7 @@ if (!isset($widget->activity_id)) {
 $all_users = array(elgg_get_logged_in_user_entity());
 $user_options = array();
 foreach ($all_users as $user) {
-    $user_options[$user->id] = $user->name;
+    $user_options[$user->guid] = $user->name;
 }
 
 if (!isset($widget->user_id)) {
@@ -39,7 +39,7 @@ if (!isset($widget->user_id)) {
 <div class="select-metrics">
     <div style="padding: 10px;background: #fafafa;">
         <div class="form-group">
-            <label><?php echo elgg_echo("activity:select"); ?></label>
+            <label><?php echo elgg_echo("la_dashboard:widget:availableactivities"); ?></label>
             <?php
             $params = array('class' => "form-control available-metrics-$widget_id",
                 'style' => 'padding-top: 5px;padding-bottom: 5px;',
@@ -53,7 +53,7 @@ if (!isset($widget->user_id)) {
             ?>
         </div>
         <div class="form-group">
-            <label><?php echo elgg_echo("user:select"); ?></label>
+            <label><?php echo elgg_echo("la_dashboard:widget:availableusers"); ?></label>
             <?php
             $params = array('class' => "form-control available-metrics-$widget_id",
                 'style' => 'padding-top: 5px;padding-bottom: 5px;',
