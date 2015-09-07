@@ -5,16 +5,6 @@
             <div class="col-sm-3 col-md-3 pull-right">
                 <?php echo elgg_view('search/search_box', array('class' => 'navbar-form navbar-right search-form')); ?>
             </div>
-        <?php elseif(!$vars['walled_garden']): ?>
-            <p class="navbar-text navbar-left lang">
-                <?php echo elgg_view('output/url', array(
-                    'href'  => "/",
-                    'title' => elgg_echo('back'),
-                    'text'  => '<i class="fa fa-chevron-left"></i> '. elgg_echo('back'),
-                    'class' => 'active back-top',
-                ));
-                ?>
-            </p>
         <?php endif; ?>
         <?php
         $installed_langs = array(
