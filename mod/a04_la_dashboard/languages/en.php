@@ -4,6 +4,10 @@
 
  */
 $english = array(
+    "admin:clipit:la_thresholds" => "Learning Analytics Thresholds",
+    "la:admin:lowerthreshold" => "Lower limit for stumbling block coverage (red below) &le;",
+    "la:admin:upperthreshold" => "Upper limit for stumbling block coverage (green above) &ge;",
+    "la:dashboard:stumblingblocks:notify_admin" => "Please ask your administrator to set up ClipIt stumbling block thresholds correctly",
     "la_dashboard:select_metric" => "Choose metric",
     "la_dashboard:la_metrics:title" => "Metric",
     "la_dashboard:quizresult:title" => "Quiz result",
@@ -20,8 +24,9 @@ $english = array(
     "la_dashboard:stumblingblockcoverage" => "Stumbling Blocks",
     "la_dashboard:widget:selectgroup" => "Please select a group",
     "la_dashboard:widget:quizresult:selectquiz" => "Please select a quiz",
-    "la_dashboard:widget:selectuser" => "Please select a user",
+    "la_dashboard:widget:selectuser" => "Please select an user",
     "la_dashboard:widget:availableactivities" => "Available Activities",
-    "la_dashboard:widget:availableusers" => "Available Users"
+    "la_dashboard:widget:availableusers" => "Available Users",
+    "la_dashboard:widget:scope" => "Frame",
 );
 add_translation('en', $english);

@@ -42,6 +42,9 @@ function learning_analytics_dashboard_init()
     elgg_unregister_action('widgets/add');
     elgg_register_action('widgets/add',dirname(__FILE__).'/actions/widgets/add.php');
 
+
+    elgg_register_action('la_dashboard/thresholds',dirname(__FILE__).'/actions/la_dashboard/thresholds.php','admin');
+
    // Register library
     elgg_extend_view("navigation/menu/top", "navigation/menu/la", 25);
     elgg_register_plugin_hook_handler('get_list', 'default_widgets', 'ladashboard_default_widgets');
@@ -56,6 +59,9 @@ function learning_analytics_dashboard_init()
     elgg_register_js('la.widgets', 'js/a04_la_dashboard/la_widgets.php', 'footer');
     elgg_register_plugin_hook_handler('action','widgets/save','save_action_hook');
     elgg_register_plugin_hook_handler('register', 'menu:widget', 'widgetmenu_hook');
+
+    elgg_register_admin_menu_item("configure",'la_thresholds','clipit');
+
 
 }
 

@@ -76,7 +76,7 @@ $group_dropdown = elgg_view('input/dropdown', $params);
 
 
 <p>
-    <?php echo elgg_echo('scope'); ?>:
+    <?php echo elgg_echo('la_dashboard:widget:scope'); ?>:
     <?php echo $scale_dropdown ?>
 </p>
 

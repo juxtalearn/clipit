@@ -7,33 +7,42 @@
 }
 
 
-.label.label-primary.la_stumblingblock.green {
+.label.label-primary.la_stumblingblock.green, .label.label-primary.la_stumblingblock.green a {
     border-color: green;
     color: green;
+    text-decoration: none;
 }
-.label.label-primary.la_stumblingblock.green:hover {
+.label.label-primary.la_stumblingblock.green:hover,.label.label-primary.la_stumblingblock.green a:hover {
     border-color: green;
     background-color: green !important;
     color:white;
+    opacity: 1;
+    text-decoration: none;
 }
-.label.label-primary.la_stumblingblock.yellow {
+.label.label-primary.la_stumblingblock.yellow, .label.label-primary.la_stumblingblock.yellow a {
     border-color: #E4CF50;
     color: #E4CF50;
+    text-decoration: none;
 }
 
-.label.label-primary.la_stumblingblock.yellow:hover {
+.label.label-primary.la_stumblingblock.yellow:hover, .label.label-primary.la_stumblingblock.yellow a:hover {
     border-color: #E4CF50;
     background-color: #E4CF50 !important;
     color:white;
+    opacity:1.0;
+    text-decoration: none;
 }
-.label.label-primary.la_stumblingblock.red {
+.label.label-primary.la_stumblingblock.red, .label.label-primary.la_stumblingblock.red a {
     border-color: #FF704D;
     color: #FF704D;
+    text-decoration: none;
 }
-.label.label-primary.la_stumblingblock.red:hover {
+.label.label-primary.la_stumblingblock.red:hover,.label.label-primary.la_stumblingblock.red a:hover  {
     border-color:  #FF704D;;
     background-color:  #FF704D !important;
     color:white;
+    opacity:1.0;
+    text-decoration: none;
 }
 
 .learning_analytics_dashboard .elgg-widgets-add-panel {

@@ -28,20 +28,83 @@ class LADashboardHelper
     }
 
 
+    private static function belongs_to_group($item_id,$group_id,$subtype) {
 
-    public static function getStumblingBlocksUsage($activity_id, $group_id)
+        $item  =  array_pop(call_user_func(array($subtype,'get_by_id'),array($item_id)));
+        $owner_id = $item->owner_id;
+
+        if ( $owner_id === $group_id) { //owner is the group itself
+            return true;
+        } else { //owner is a user assigned to this group
+            foreach (ClipitGroup::get_users($group_id) as $user_id) {
+                error_log("$group_id:$user_id===$owner_id" );
+                if ($owner_id === $user_id) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static function count_tag_group_relations($tag_id, $subtype, $group_id) {
+        $sum = 0;
+        foreach ( UBCollection::get_items($tag_id,$subtype.'-'.ClipitTag::SUBTYPE,true,false) as $item ) {
+            if ( static::belongs_to_group($item,$group_id,$subtype ) ) {
+                $sum++;
+            }
+        }
+        return $sum;
+    }
+
+    private static function belongs_to_activity($item_id,$activity_id,$subtype) {
+
+        $item  =  array_pop(call_user_func(array($subtype,'get_by_id'),array($item_id)));
+        $owner_id = $item->owner_id;
+
+        if ( $owner_id === $activity_id) { //owner is the group itself
+            return true;
+        } else { //owner is a user assigned to this group
+            foreach (ClipitActivity::get_students($activity_id) as $user_id) {
+                error_log("$activity_id:$user_id===$owner_id" );
+                if ($owner_id === $user_id) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static function count_tag_activity_relations($tag_id, $subtype, $activity_id) {
+        $sum = 0;
+        foreach ( UBCollection::get_items($tag_id,$subtype.'-'.ClipitTag::SUBTYPE,true,false) as $item ) {
+            if ( static::belongs_to_activity($item,$activity_id,$subtype ) ) {
+                $sum++;
+            }
+        }
+        return $sum;
+    }
+    public static function getStumblingBlocksUsage($activity_id, $group_id = null)
     {
-        $user_ids = ClipitGroup::get_users($group_id);
         $tag_array = LADashboardHelper::getStumblingBlocksFromActivity($activity_id);
         $stumbling_block_array = array();
-        foreach ($tag_array as $block) {
-            $tag_id = $block->id;
-            $sum = 0;
-            $sum += UBCollection::count_items($block->id,ClipitFile::SUBTYPE.'-'.ClipitTag::SUBTYPE,true,false);
-            $sum += UBCollection::count_items($block->id,ClipitStoryboard::SUBTYPE.'-'.ClipitTag::SUBTYPE,true,false);
-            $sum += UBCollection::count_items($block->id,ClipitVideo::SUBTYPE.'-'.ClipitTag::SUBTYPE,true,false);
-            $sum += UBCollection::count_items($block->id,ClipitComment::SUBTYPE.'-'.ClipitTag::SUBTYPE,true,false);
-            $stumbling_block_array[$block->name]=$sum;
+        if (is_null($group_id)) {
+            foreach ($tag_array as $block) {
+                $sum = 0;
+                $sum += static::count_tag_activity_relations($block->id, ClipitFile::SUBTYPE, $activity_id);
+                $sum += static::count_tag_activity_relations($block->id, ClipitStoryboard::SUBTYPE, $activity_id);
+                $sum += static::count_tag_activity_relations($block->id, ClipitVideo::SUBTYPE, $activity_id);
+                $sum += static::count_tag_activity_relations($block->id, ClipitComment::SUBTYPE, $activity_id);
+                $stumbling_block_array[$block->name] = array('sum' => $sum, 'id' =>$block->id);
+            }
+        } else {
+            foreach ($tag_array as $block) {
+                $sum = 0;
+                $sum += static::count_tag_group_relations($block->id, ClipitFile::SUBTYPE, $group_id);
+                $sum += static::count_tag_group_relations($block->id, ClipitStoryboard::SUBTYPE, $group_id);
+                $sum += static::count_tag_group_relations($block->id, ClipitVideo::SUBTYPE, $group_id);
+                $sum += static::count_tag_group_relations($block->id, ClipitComment::SUBTYPE, $group_id);
+                $stumbling_block_array[$block->name] = array('sum' => $sum, 'id' =>$block->id);
+            }
         }
         return $stumbling_block_array;
     }
