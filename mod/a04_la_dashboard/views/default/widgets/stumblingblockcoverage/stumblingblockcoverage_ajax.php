@@ -34,7 +34,7 @@ if ($stumblingblock_lowerthreshold <= $stumblingblock_upperthreshold) {
         $blockcount = $blockstats['sum'];
         $blockid = $blockstats['id'];
 
-        $link = elgg_view("output/url", array('href'=> elgg_get_site_url().'explore/search'. http_build_query(array('bytag','id'=>$blockid)),
+        $link = elgg_view("output/url", array('href'=> elgg_get_site_url().'explore/search?bytag&id='.$blockid,
                                             'class'=>null,
                                             'text'=>$blockname,
                                             'target'=>'_parent'));
