@@ -25,7 +25,7 @@ if($width){
         $tag = array_pop(ClipitTag::get_by_id(array($tag_id)));
     ?>
         <?php echo elgg_view('output/url', array(
-            'href' => "videos/search/search?by=tag&id={$tag->id}",
+            'href' => "videos/search?by=tag&id={$tag->id}",
             'text' => $tag->name,
             'class' => 'label label-primary',
             'style' => $width,

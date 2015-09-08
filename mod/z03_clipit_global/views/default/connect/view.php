@@ -32,14 +32,9 @@ $entities = elgg_extract('entities', $vars);
                 ?>
             </div>
             <strong>
-                <?php echo elgg_view('output/url', array(
-                    'href' => $edu->url,
-                    'text'  => $edu->name,
-                    'title' => $edu->name
-                ));
-                ?>
+                <?php echo $edu->name;?>
             </strong>
-            <div>
+            <div class="margin-top-5">
                 <?php echo elgg_view('output/url', array(
                     'href' => "videos/".elgg_get_friendly_title($edu->name)."/".$edu->id,
                     'text'  => '<i class="fa fa-youtube-play"></i> '.elgg_echo('videos:view_all'),

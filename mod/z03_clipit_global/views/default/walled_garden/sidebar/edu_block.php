@@ -17,7 +17,7 @@ $entity = elgg_extract('entity', $vars);
         <h3 class="margin-0">
             <?php
             echo elgg_view('output/url', array(
-                'href' => "videos/". $entity->description,
+                'href' => "videos/".elgg_get_friendly_title($entity->name)."/".$entity->id,
                 'text'  => $entity->name,
                 'title' => $entity->name,
             ));

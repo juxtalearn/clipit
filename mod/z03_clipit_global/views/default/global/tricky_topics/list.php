@@ -27,9 +27,16 @@ foreach($entities as $entity):
 ?>
     <li class="row list-item list-even">
         <div class="col-md-8">
-            <h4 class="margin-0 margin-bottom-15"><?php echo $entity->name;?></h4>
+            <h4 class="margin-0 margin-bottom-15">
+                <?php echo elgg_view('output/url', array(
+                    'href' => "videos/search?by=trickytopic&id=".$entity->id,
+                    'title' => $entity->name,
+                    'text'  => $entity->name
+                ));
+                ?>
+            </h4>
             <div class="margin-top-10">
-                <?php echo elgg_view("global/tags/view", array('tags' => $entity->tag_array)); ?>
+                <?php echo elgg_view("global/tags/view", array('tags' => $entity->tag_array, 'limit' => 5)); ?>
             </div>
         </div>
         <div class="col-md-4">
@@ -46,9 +53,9 @@ foreach($entities as $entity):
             <div>
                 <strong>
                     <?php echo elgg_view('output/url', array(
-                        'href' => "videos/".elgg_get_friendly_title($remote_site->name)."/".$remote_site->id,
+                        'href' => "videos/search?by=trickytopic&id=".$entity->id,
                         'title' => 'Ver videos',
-                        'text'  => '<i class="fa fa-youtube-play"></i> '.'Ver videos'
+                        'text'  => '<i class="fa fa-youtube-play"></i> '.'Videos relacionados'
                     ));
                     ?>
 <!--                    --><?php //echo elgg_view('output/url', array(

@@ -86,7 +86,6 @@ function clipit_global_init(){
         $return_value[] = 'videos/.*';
         $return_value[] = 'video';
         $return_value[] = 'video/.*';
-        $return_value[] = 'test';
         $return_value[] = 'sites';
         $return_value[] = 'trickytopics';
         $return_value[] = 'public_activities';
@@ -187,25 +186,6 @@ function clipit_global_init(){
         elgg_load_js("clipit_theme_bootstrap");
     }
 }
-
-function test(){
-    $sidebar = elgg_view_module('aside', elgg_echo('educational:centers'), elgg_view('walled_garden/sidebar/edu_list'));
-    $videos = ClipitRemoteResource::get_all();
-    // $videos = ClipitRemoteResource::get_from_remote_type(ClipitVideo::SUBTYPE);
-    $sidebar .= elgg_view_module('aside',
-        false,
-        elgg_view('walled_garden/sidebar/videos',
-            array('videos' => array_slice($videos, 0, 5))
-        )
-    );
-    $params = array(
-        'content' => elgg_view('videos/test', array('entities' => $videos)),
-        'filter' => '',
-        'sidebar' => $sidebar,
-    );
-    $body = elgg_view_layout('content', $params);
-    echo elgg_view_page('', $body);
-}
 function connect_section($page)
 {
     $edu_centers = ClipitRemoteSite::get_all();
@@ -244,16 +224,43 @@ function video_view($page){
 
 function videos_section($page){
     $sidebar = elgg_view_module('aside', elgg_echo('educational:centers'), elgg_view('walled_garden/sidebar/edu_list'));
-    $edu = (int)$page[1];
-    if ($edu) {
-        if ($entity = array_pop(ClipitRemoteSite::get_by_id(array($edu))) ) {
+    $title = '';
+    if(isset($page[0])) {
+        elgg_push_breadcrumb(elgg_echo('videos'), "videos");
+//         /videos/{0}
+        if ($page[0] == 'search') {
+            $by = get_input('by');
+            $entity_id = get_input('id');
+//         /videos/{0}?search
+            switch ($by) {
+                case 'tag':
+                    $entity = array_pop(ClipitTag::get_by_id(array($entity_id)));
+                    elgg_push_breadcrumb(elgg_echo('tags'));
+                    elgg_push_breadcrumb($entity->name);
+                    $videos = ClipitRemoteVideo::get_by_tags(array($entity_id));
+                    break;
+                case 'trickytopic':
+                    $entity = array_pop(ClipitRemoteTrickyTopic::get_by_id(array($entity_id)));
+                    elgg_push_breadcrumb(elgg_echo('tricky_topics'), 'trickytopics');
+                    elgg_push_breadcrumb($entity->name);
+                    $videos = ClipitRemoteVideo::get_by_tags($entity->tag_array);
+                    break;
+                default:
+                    $videos = array();
+                    break;
+            }
+        }
+//         /videos/{0}/{1}
+        if (isset($page[1])) {
+            $entity_id = $page[1];
+            $entity = array_pop(ClipitRemoteSite::get_by_id(array($entity_id)));
+            elgg_push_breadcrumb(elgg_echo('sites'), 'sites');
+            elgg_push_breadcrumb($entity->name);
             $videos = ClipitRemoteVideo::get_by_id($entity->video_array);
             $sidebar = elgg_view_module('aside', false, elgg_view('walled_garden/sidebar/edu_block', array('entity' => $entity)));
-
         }
-    } elseif($page[0] == 'search') {
-        $videos = ClipitRemoteVideo::get_all();
     } else {
+        // Get all videos
         $videos = ClipitRemoteVideo::get_all();
     }
     $sidebar .= elgg_view_module('aside',
@@ -262,10 +269,14 @@ function videos_section($page){
             array('videos' => array_slice($videos, 0, 5))
         )
     );
-
+    $content = elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
+    if($videos){
+       $content = elgg_view('videos/list', array('entities' => $videos));
+    }
     $params = array(
-        'content' => elgg_view('videos/list', array('entities' => $videos)),
+        'content' => $content,
         'filter' => '',
+        'title' => $title,
         'sidebar' => $sidebar,
     );
     $body = elgg_view_layout('content', $params);
@@ -301,11 +312,11 @@ function tricky_topics_global_section($page_elements, $handler){
     );
     if($site_id = get_input('site')){
         $remote_site = array_pop(ClipitRemoteSite::get_by_id(array($site_id)));
-        $tricky_topics = ClipitRemoteTrickyTopic::get_from_site($remote_site->name);
+        $tricky_topics = ClipitRemoteTrickyTopic::get_from_site(base64_encode($remote_site->url));
     } else {
         $tricky_topics = ClipitRemoteTrickyTopic::get_all();
     }
-    $content = elgg_view('output/empty', array('value' => 'No se han encontrado temas clave')); // Hardcoded
+    $content = elgg_view('output/empty', array('value' => elgg_echo('tricky_topics:none'))); // Hardcoded
     if($tricky_topics){
         $content = elgg_view('global/tricky_topics/list', array('entities' => $tricky_topics));
     }
