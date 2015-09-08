@@ -34,7 +34,7 @@ foreach($entities as $entity):
         </div>
         <div class="col-md-4">
             <div class="margin-bottom-10">
-                <small class="show">Centro educativo</small>
+                <small class="show"><?php echo elgg_echo('educational:center');?></small>
                 <?php echo elgg_view('output/url', array(
                     'href' => "videos/".elgg_get_friendly_title($remote_site->name)."/".$remote_site->id,
                     'class' => 'text-truncate',

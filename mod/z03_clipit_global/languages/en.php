@@ -134,6 +134,7 @@ $english = array(
     'latest:videos' => 'Latest videos',
     'published:on' => 'Published on',
     'videos:view_all' => 'View all videos',
+    'educational:center' => 'Educational center',
     'educational:centers' => 'Educational centers',
     'instalations' => 'Trials',
 

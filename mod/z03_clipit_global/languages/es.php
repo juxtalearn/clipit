@@ -140,6 +140,7 @@ $spanish = array(
     'latest:videos' => 'Últimos vídeos',
     'published:on' => 'Publicado el',
     'videos:view_all' => 'Ver todos los vídeos',
+    'educational:center' => 'Centro educativo',
     'educational:centers' => 'Centros educativos',
     'instalations' => 'Trials',
 

@@ -20,7 +20,7 @@ if(in_array($group_id, $user_groups) || $hasGroup){
         ClipitGroup::delete_by_id(array($group_id));
     }
     $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
-    if($activity->is_open){
+    if($activity->is_public){
         ClipitActivity::remove_students($activity_id, array($user_id));
     }
 } else{

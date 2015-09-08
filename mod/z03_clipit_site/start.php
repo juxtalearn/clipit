@@ -54,11 +54,6 @@ function clipit_final_init(){
     // Register ajax view for activity group status
     elgg_register_ajax_view('dashboard/modules/activity_groups_status');
 
-
-    if ($user->role == ClipitUser::ROLE_ADMIN) {
-        elgg_extend_view("navigation/menu/top", "navigation/menu/admin", 100);
-    }
-
     elgg_register_page_handler('activity', 'user_landing_page');
     // Footer links
     elgg_register_page_handler('forgotpassword', 'home_user_account_page_handler');

@@ -251,7 +251,7 @@ function explore_page_handler($page) {
         'filter' => get_input('filter'),
     ));
     if(get_input('by')){
-        $href_filter = "/search?{$href}";
+        $href_filter = "/search?{$href_filter}";
     }
     $href_filter = (get_input('by') || get_input('text')) ? $href_filter.'&' : '?';
 
@@ -259,7 +259,7 @@ function explore_page_handler($page) {
     $my_activities = ClipitActivity::get_by_id($my_activities_ids);
     $menu_scope = elgg_view("explore/sidebar/scope", array('site' => $site, 'href' => $href_filter));
     $sidebar = elgg_view_module('aside', elgg_echo('explore:scope'), $menu_scope);
-//    // Explore by activity
+    // Explore by activity
     $menu_filter = elgg_view("explore/sidebar/activities",
         array(
             'entities' => $my_activities,

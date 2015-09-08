@@ -49,7 +49,7 @@ elseif($entity_id):
         <?php endif;?>
         <h4><?php echo elgg_echo('group:members');?></h4>
         <hr class="margin-0 margin-bottom-10">
-        <ul>
+        <ul class="scroll-list-400">
         <?php
         foreach($users = ClipitGroup::get_users($group->id) as $user_id):
             $user = array_pop(ClipitUser::get_by_id(array($user_id)));
@@ -61,15 +61,6 @@ elseif($entity_id):
             ));
             ?>
             <div class="content-block">
-                <!--
-                <?php echo elgg_view('output/url', array(
-                    'text' => '<i class="fa fa-info blue"></i>',
-                    'href' => "profile/{$user->login}?view_as=teacher&group_id={$group_id}",
-                    'target' => '_blank',
-                    'style' => 'padding-left: 10px;padding-right: 10px;',
-                    'class' => "pull-right btn btn-xs btn-primary btn-blue-lighter",
-                ));
-                ?>-->
                 <?php echo elgg_view("messages/compose_icon", array('entity' => $user));?>
                 <?php echo elgg_view('output/url', array(
                     'title' => $user->name,

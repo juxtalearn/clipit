@@ -28,7 +28,7 @@ function get_visible_items($entities, $type){
     return $result;
 }
 
-function get_visible_items_by_activity(int $activity_id, $entities, $type){
+function get_visible_items_by_activity($activity_id, $entities, $type){
     $user_id = elgg_get_logged_in_user_guid();
     $get_published_type = "get_published_{$type}";
     $published_items = ClipitActivity::$get_published_type($activity_id);

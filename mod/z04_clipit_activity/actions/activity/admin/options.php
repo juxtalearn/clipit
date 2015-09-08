@@ -12,9 +12,9 @@
  */
 $activity = get_input('activity');
 $data = array(
-    'is_open' => $activity['is_open'],
+    'is_public' => $activity['is_public'],
 );
-if($activity['is_open']){
+if($activity['is_public']){
     $data = array_merge($data, array(
         'group_mode' => ClipitActivity::GROUP_MODE_STUDENT,
         'max_group_size' => $activity['max_group_size'],

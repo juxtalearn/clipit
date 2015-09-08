@@ -26,19 +26,19 @@ if($entity) {
     <div class="col-xs-7">
         <label id="input-activity-open" class="inline-block margin-right-20" onclick="javascript:$('#open_activity').collapse('show');">
             <input type="radio"
-                   name="activity[is_open]"
-                <?php echo $entity->is_open ? 'checked':'';?>
+                   name="activity[is_public]"
+                <?php echo $entity->is_public ? 'checked':'';?>
                    value="1">
             <i class="fa fa-unlock text-muted"></i> <?php echo elgg_echo('activity:register:open');?>
         </label>
         <label id="input-activity-closed" class="inline-block" onclick="javascript:$('#open_activity').collapse('hide');">
             <input type="radio"
-                   name="activity[is_open]"
-                <?php echo $entity->is_open ? '':'checked';?>
+                   name="activity[is_public]"
+                <?php echo $entity->is_public ? '':'checked';?>
                    value="0">
             <i class="fa fa-lock text-muted"></i> <?php echo elgg_echo('activity:register:closed');?>
         </label>
-        <div class="<?php echo !$entity->is_open ? 'collapse':'in';?> col-md-12" id="open_activity" style="background-color: #f4f4f4;padding-top: 10px;padding-bottom: 10px;">
+        <div class="<?php echo !$entity->is_public ? 'collapse':'in';?> col-md-12" id="open_activity" style="background-color: #f4f4f4;padding-top: 10px;padding-bottom: 10px;">
             <div class="row form-group">
                 <div class="col-md-8">
                     <label for="activity[max_group_size]"><?php echo elgg_echo('activity:register:students_per_group');?></label>
