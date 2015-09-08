@@ -15,6 +15,7 @@
  * Register the init method
  */
 elgg_register_event_handler('init', 'system', 'urjc_backend_init');
+
 /**
  * Initialization method which loads libraries and configures some options and handlers.
  */
