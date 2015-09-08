@@ -21,7 +21,7 @@ class ClipitRemoteTrickyTopic extends UBItem {
     const REL_REMOTETRICKYTOPIC_TAG = "ClipitRemoteTrickyTopic-ClipitTag";
     public $remote_id;
     public $remote_site = 0;
-    public $tag_array = "";
+    public $tag_array = array();
 
     /**
      * Loads object parameters stored in Elgg
@@ -44,7 +44,18 @@ class ClipitRemoteTrickyTopic extends UBItem {
         parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("remote_id", (int)$this->remote_id);
         $elgg_entity->set("remote_site", (int)$this->remote_site);
-        static::set_tags((int)$this->id, (array)$this->tag_array);
+    }
+
+    /**
+     * Saves this instance to the system.
+     * @param  bool $double_save if $double_save is true, this object is saved twice to ensure that all properties are updated properly. E.g. the time created property can only beset on ElggObjects during an update. Defaults to false!
+     * @return bool|int Returns the Id of the saved instance, or false if error
+     */
+    protected function save($double_save = false)
+    {
+        parent::save($double_save);
+        static::set_tags($this->id, (array)$this->tag_array);
+        return $this->id;
     }
 
     static function create($prop_value_array){
