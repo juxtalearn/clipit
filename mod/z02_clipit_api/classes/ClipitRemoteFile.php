@@ -18,10 +18,12 @@
 class ClipitRemoteFile extends UBItem {
 
     const SUBTYPE = "ClipitRemoteFile";
+    const REL_REMOTEFILE_TAG = "ClipitRemoteFile-ClipitTag";
     public $remote_id;
     public $remote_site = 0;
-    public $tag_array = array();
     public $gdrive_id = "";
+    public $tag_array = array();
+
 
     /**
      * Loads object parameters stored in Elgg
@@ -32,8 +34,8 @@ class ClipitRemoteFile extends UBItem {
         parent::copy_from_elgg($elgg_entity);
         $this->remote_id = (int)$elgg_entity->get("remote_id");
         $this->remote_site = (int)$elgg_entity->get("remote_site");
-        $this->tag_array = (array)$elgg_entity->get("tag_array");
         $this->gdrive_id = (string)$elgg_entity->get("gdrive_id");
+        $this->tag_array = (array)static::get_tags($this->id);
     }
 
     /**
@@ -45,8 +47,19 @@ class ClipitRemoteFile extends UBItem {
         parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("remote_id", (int)$this->remote_id);
         $elgg_entity->set("remote_site", (int)$this->remote_site);
-        $elgg_entity->set("tag_array", (array)$this->tag_array);
-        $elgg_entity->set("gdrive_id", (array)$this->gdrive_id);
+        $elgg_entity->set("gdrive_id", (string)$this->gdrive_id);
+    }
+
+    /**
+     * Saves this instance to the system.
+     * @param  bool $double_save if $double_save is true, this object is saved twice to ensure that all properties are updated properly. E.g. the time created property can only beset on ElggObjects during an update. Defaults to false!
+     * @return bool|int Returns the Id of the saved instance, or false if error
+     */
+    protected function save($double_save = false)
+    {
+        parent::save($double_save);
+        static::set_tags($this->id, (array)$this->tag_array);
+        return $this->id;
     }
 
     static function create($prop_value_array){
@@ -70,6 +83,54 @@ class ClipitRemoteFile extends UBItem {
         ClipitRemoteSite::add_files($remote_site_id, array($id));
         return $id;
     }
+
+    /**
+     * Adds Tags to a File, referenced by Id.
+     *
+     * @param int   $id        Id from the File to add Tags to
+     * @param array $tag_array Array of Tag Ids to be added to the File
+     *
+     * @return bool Returns true if success, false if error
+     */
+    static function add_tags($id, $tag_array) {
+        return UBCollection::add_items($id, $tag_array, static::REL_REMOTEFILE_TAG);
+    }
+
+    /**
+     * Sets Tags to a File, referenced by Id.
+     *
+     * @param int   $id        Id from the File to set Tags to
+     * @param array $tag_array Array of Tag Ids to be set to the File
+     *
+     * @return bool Returns true if success, false if error
+     */
+    static function set_tags($id, $tag_array) {
+        return UBCollection::set_items($id, $tag_array, static::REL_REMOTEFILE_TAG);
+    }
+
+    /**
+     * Remove Tags from a File.
+     *
+     * @param int   $id        Id from File to remove Tags from
+     * @param array $tag_array Array of Tag Ids to remove from File
+     *
+     * @return bool Returns true if success, false if error
+     */
+    static function remove_tags($id, $tag_array) {
+        return UBCollection::remove_items($id, $tag_array, static::REL_REMOTEFILE_TAG);
+    }
+
+    /**
+     * Get all Tags from a File
+     *
+     * @param int $id Id of the File to get Tags from
+     *
+     * @return array|bool Returns an array of Tag IDs, or false if error
+     */
+    static function get_tags($id) {
+        return UBCollection::get_items($id, static::REL_REMOTEFILE_TAG);
+    }
+
 
     static function get_by_tags($tag_array){
         $file_array = static::get_all();

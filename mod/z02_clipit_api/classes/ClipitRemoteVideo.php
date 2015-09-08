@@ -18,6 +18,7 @@
 class ClipitRemoteVideo extends UBItem {
 
     const SUBTYPE = "ClipitRemoteVideo";
+    const REL_REMOTEVIDEO_TAG = "ClipitRemoteVideo-ClipitTag";
     public $remote_id;
     public $remote_site = 0;
     public $tag_array = array();
@@ -31,7 +32,7 @@ class ClipitRemoteVideo extends UBItem {
         parent::copy_from_elgg($elgg_entity);
         $this->remote_id = (int)$elgg_entity->get("remote_id");
         $this->remote_site = (int)$elgg_entity->get("remote_site");
-        $this->tag_array = (array)$elgg_entity->get("tag_array");
+        $this->tag_array = (array)static::get_tags($this->id);
     }
 
     /**
@@ -43,7 +44,18 @@ class ClipitRemoteVideo extends UBItem {
         parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("remote_id", (int)$this->remote_id);
         $elgg_entity->set("remote_site", (int)$this->remote_site);
-        $elgg_entity->set("tag_array", (array)$this->tag_array);
+    }
+
+    /**
+     * Saves this instance to the system.
+     * @param  bool $double_save if $double_save is true, this object is saved twice to ensure that all properties are updated properly. E.g. the time created property can only beset on ElggObjects during an update. Defaults to false!
+     * @return bool|int Returns the Id of the saved instance, or false if error
+     */
+    protected function save($double_save = false)
+    {
+        parent::save($double_save);
+        static::set_tags($this->id, (array)$this->tag_array);
+        return $this->id;
     }
 
     static function create($prop_value_array){
@@ -65,6 +77,53 @@ class ClipitRemoteVideo extends UBItem {
         $id = parent::create($prop_value_array);
         ClipitRemoteSite::add_videos($remote_site_id, array($id));
         return $id;
+    }
+
+    /**
+     * Adds Tags to a Video, referenced by Id.
+     *
+     * @param int   $id        Id from the Video to add Tags to
+     * @param array $tag_array Array of Tag Ids to be added to the Video
+     *
+     * @return bool Returns true if success, false if error
+     */
+    static function add_tags($id, $tag_array) {
+        return UBCollection::add_items($id, $tag_array, static::REL_REMOTEVIDEO_TAG);
+    }
+
+    /**
+     * Sets Tags to a Video, referenced by Id.
+     *
+     * @param int   $id        Id from the Video to set Tags to
+     * @param array $tag_array Array of Tag Ids to be set to the Video
+     *
+     * @return bool Returns true if success, false if error
+     */
+    static function set_tags($id, $tag_array) {
+        return UBCollection::set_items($id, $tag_array, static::REL_REMOTEVIDEO_TAG);
+    }
+
+    /**
+     * Remove Tags from a Video.
+     *
+     * @param int   $id        Id from Video to remove Tags from
+     * @param array $tag_array Array of Tag Ids to remove from Video
+     *
+     * @return bool Returns true if success, false if error
+     */
+    static function remove_tags($id, $tag_array) {
+        return UBCollection::remove_items($id, $tag_array, static::REL_REMOTEVIDEO_TAG);
+    }
+
+    /**
+     * Get all Tags from a Video
+     *
+     * @param int $id Id of the Video to get Tags from
+     *
+     * @return array|bool Returns an array of Tag IDs, or false if error
+     */
+    static function get_tags($id) {
+        return UBCollection::get_items($id, static::REL_REMOTEVIDEO_TAG);
     }
 
     static function get_by_tags($tag_array){
