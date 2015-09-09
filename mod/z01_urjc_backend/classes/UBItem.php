@@ -375,7 +375,7 @@ class UBItem {
             $all_items = array_reverse(static::get_all(0, 0, "", true, false));
             $clone_tree = array();
             foreach($all_items as $item_id){
-                if(array_search($item_id, array_flatten($clone_tree)) === false){
+                if(!in_array($item_id, array_flatten($clone_tree))){
                     $clone_tree[] = static::get_clone_tree($item_id);
                 }
             }

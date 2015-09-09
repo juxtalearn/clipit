@@ -243,4 +243,32 @@ function expose_site_functions() {
         "GET",
         false,
         true);
+    expose_function($api_suffix . "add_pub_activities",
+        $class_suffix . "add_pub_activities",
+        array("activity_array" => array("type" => "array", "required" => true)),
+        "Add Files by Id to the Public Scope",
+        "POST",
+        false,
+        true);
+    expose_function($api_suffix . "set_pub_activities",
+        $class_suffix . "set_pub_activities",
+        array("activity_array" => array("type" => "array", "required" => true)),
+        "Set Files by Id to the Public Scope",
+        "POST",
+        false,
+        true);
+    expose_function($api_suffix . "remove_pub_activities",
+        $class_suffix . "remove_pub_activities",
+        array("activity_array" => array("type" => "array", "required" => true)),
+        "Removes Files by Id from the Public Scope",
+        "POST",
+        false,
+        true);
+    expose_function($api_suffix . "get_pub_activities",
+        $class_suffix . "get_pub_activities",
+        null,
+        "Gets Files from the Public Scope",
+        "GET",
+        false,
+        true);
 }

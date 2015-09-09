@@ -314,7 +314,7 @@ class ClipitSite extends UBSite {
         // ADD new content to Global
         // NEW TRICKY TOPICS
         foreach($pub_tricky_topics as $pub_tricky_topic_id){
-            if(in_array($pub_tricky_topic_id, $remote_tricky_topics)){
+            if(!in_array($pub_tricky_topic_id, $remote_tricky_topics)){
                 $tricky_topic_array = ClipitTrickyTopic::get_by_id(array($pub_tricky_topic_id));
                 $tricky_topic = array_pop($tricky_topic_array);
                 $tag_name_array = array();
@@ -333,7 +333,7 @@ class ClipitSite extends UBSite {
         }
         // NEW ACTIVITIES
         foreach($pub_activities as $pub_activity_id){
-            if(in_array($pub_activity_id, $remote_activities)){
+            if(!in_array($pub_activity_id, $remote_activities)){
                 $activity = array_pop(ClipitActivity::get_by_id(array($pub_activity_id)));
                 $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($activity->tricky_topic)));
                 $data = array("method" => "clipit.remote_activity.create");
@@ -348,7 +348,7 @@ class ClipitSite extends UBSite {
         }
         // NEW VIDEOS
         foreach($pub_videos as $pub_video_id){
-            if(in_array($pub_video_id, $remote_videos)){
+            if(!in_array($pub_video_id, $remote_videos)){
                 $video_array = ClipitVideo::get_by_id(array($pub_video_id));
                 $video = array_pop($video_array);
                 $tag_name_array = array();
@@ -368,7 +368,7 @@ class ClipitSite extends UBSite {
         }
         // NEW FILES
         foreach($pub_files as $pub_file_id){
-            if(in_array($pub_file_id, $remote_files)){
+            if(!in_array($pub_file_id, $remote_files)){
                 $file = array_pop(ClipitFile::get_by_id(array($pub_file_id)));
                 $tag_name_array = array();
                 $tag_array = ClipitTag::get_by_id($file->tag_array);

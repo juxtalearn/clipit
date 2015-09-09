@@ -138,7 +138,7 @@ class ClipitRemoteTrickyTopic extends UBItem {
         $return_array = array();
         foreach($tricky_topic_array as $tricky_topic){
             if($tricky_topic->remote_site == $remote_site_id
-                && array_search($tricky_topic->remote_id,  $remote_id_array) !== false){
+                && in_array($tricky_topic->remote_id,  $remote_id_array)){
                 $return_array[] = $tricky_topic;
             }
         }

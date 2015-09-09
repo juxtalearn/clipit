@@ -56,7 +56,7 @@ class ClipitChat extends UBMessage {
                 $archived_status = static::get_archived_status($message->id, array($user_id));
                 $archived_status = (bool)array_pop($archived_status);
                 if($archived_status === false) {
-                    if(array_search($message->owner_id, $sender_array) === false) {
+                    if(!in_array($message->owner_id, $sender_array)) {
                         $sender_array[] = $message->owner_id;
                         $inbox_array[$message->owner_id] = array($message);
                     } else {

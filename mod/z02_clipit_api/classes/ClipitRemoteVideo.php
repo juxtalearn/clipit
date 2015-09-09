@@ -145,7 +145,8 @@ class ClipitRemoteVideo extends UBItem {
         $remote_videos = ClipitRemoteVideo::get_all();
         $remote_video_array = array();
         foreach($remote_videos as $remote_video){
-            if($remote_video->remote_site == $remote_site_id && array_search($remote_video->remote_id,  $remote_id_array) !== false){
+            if($remote_video->remote_site == $remote_site_id
+                && in_array($remote_video->remote_id,  $remote_id_array)){
                 $remote_video_array[] = $remote_video;
             }
         }

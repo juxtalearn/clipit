@@ -151,7 +151,7 @@ class ClipitRemoteFile extends UBItem {
         $remote_files = ClipitRemoteFile::get_all();
         $remote_file_array = array();
         foreach($remote_files as $remote_file){
-            if($remote_file->remote_site == $remote_site_id && array_search($remote_file->remote_id,  $remote_id_array) !== false){
+            if($remote_file->remote_site == $remote_site_id && in_array($remote_file->remote_id,  $remote_id_array)){
                 $remote_file_array[] = $remote_file;
             }
         }

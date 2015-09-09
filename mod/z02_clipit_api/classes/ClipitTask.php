@@ -250,13 +250,13 @@ class ClipitTask extends UBItem {
                     if ($file_group === $user_group) {
                         return false;
                     }
-                    if (array_search((int)$file_id, $rating_targets) === false) {
+                    if (!in_array((int)$file_id, $rating_targets)) {
                         return false;
                     }
                     return true;
                 }
                 foreach ($parent_task->file_array as $file_id) {
-                    if (array_search((int)$file_id, $rating_targets) === false) {
+                    if (!in_array((int)$file_id, $rating_targets)) {
                         $file_group = (int)ClipitFile::get_group((int)$file_id);
                         $user_group = (int)ClipitGroup::get_from_user_activity($entity_id, $task->activity);
                         if ($file_group !== $user_group) {
@@ -294,13 +294,13 @@ class ClipitTask extends UBItem {
                     if ($video_group === $user_group) {
                         return false;
                     }
-                    if (array_search((int)$video_id, $rating_targets) === false) {
+                    if (!in_array((int)$video_id, $rating_targets)) {
                         return false;
                     }
                     return true;
                 }
                 foreach ($parent_task->video_array as $video_id) {
-                    if (array_search((int)$video_id, $rating_targets) === false) {
+                    if (!in_array((int)$video_id, $rating_targets)) {
                         $video_group = (int)ClipitVideo::get_group((int)$video_id);
                         $user_group = (int)ClipitGroup::get_from_user_activity($entity_id, $task->activity);
                         if ($video_group !== $user_group) {

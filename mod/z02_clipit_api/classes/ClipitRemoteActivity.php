@@ -76,7 +76,7 @@ class ClipitRemoteActivity extends UBItem {
         $return_array = array();
         foreach($activity_array as $activity){
             if($activity->remote_site == $remote_site_id
-                && array_search($activity->remote_id,  $remote_id_array) !== false){
+                && in_array($activity->remote_id,  $remote_id_array)){
                 $return_array[] = $activity;
             }
         }

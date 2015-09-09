@@ -279,7 +279,7 @@ class ClipitVideo extends UBItem {
         foreach ($all_items as $item_id) {
             $item_tags = (array)static::get_tags((int)$item_id);
             foreach ($tag_array as $search_tag) {
-                if (array_search($search_tag, $item_tags) !== false) {
+                if (in_array($search_tag, $item_tags)) {
                     $return_array[(int)$item_id] = new static((int)$item_id);
                     break;
                 }
@@ -355,7 +355,7 @@ class ClipitVideo extends UBItem {
         foreach ($all_items as $item_id) {
             $item_labels = (array)static::get_labels((int)$item_id);
             foreach ($label_array as $search_tag) {
-                if (array_search($search_tag, $item_labels) !== false) {
+                if (in_array($search_tag, $item_labels)) {
                     $return_array[(int)$item_id] = new static((int)$item_id);
                     break;
                 }
@@ -391,7 +391,7 @@ class ClipitVideo extends UBItem {
         foreach ($all_items as $item_id) {
             $item_rubric_items = static::get_rubric_items((int)$item_id);
             foreach ($rubric_item_array as $search_tag) {
-                if (array_search($search_tag, $item_rubric_items) !== false) {
+                if (in_array($search_tag, $item_rubric_items)) {
                     $return_array[(int)$item_id] = new static((int)$item_id);
                     break;
                 }
