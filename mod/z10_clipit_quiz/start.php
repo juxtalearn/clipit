@@ -80,7 +80,7 @@ function quiz_page_handler($page){
             $filter = '';
             elgg_push_breadcrumb(elgg_echo('quizzes'), "quizzes");
             elgg_push_breadcrumb($quiz->name, "quizzes/view/{$quiz->id}");
-            $title = elgg_echo('edit');
+            $title = elgg_echo('quiz:edit');
             elgg_push_breadcrumb($title);
             $content = elgg_view_form('quiz/save',
                 array('data-validate' => 'true', 'enctype' => 'multipart/form-data'),
