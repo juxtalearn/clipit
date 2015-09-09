@@ -21,6 +21,7 @@ class ClipitRemoteActivity extends UBItem {
     public $remote_id;
     public $remote_site = 0;
     public $tricky_topic = "";
+    public $color = "";
 
     /**
      * Loads object parameters stored in Elgg
@@ -32,6 +33,7 @@ class ClipitRemoteActivity extends UBItem {
         $this->remote_id = (int)$elgg_entity->get("remote_id");
         $this->remote_site = (int)$elgg_entity->get("remote_site");
         $this->tricky_topic = (string)$elgg_entity->get("tricky_topic");
+        $this->color = (string)$elgg_entity->get("color");
     }
 
     /**
@@ -44,6 +46,7 @@ class ClipitRemoteActivity extends UBItem {
         $elgg_entity->set("remote_id", (int)$this->remote_id);
         $elgg_entity->set("remote_site", (int)$this->remote_site);
         $elgg_entity->set("tricky_topic", (string)$this->tricky_topic);
+        $elgg_entity->set("color", (string)$this->color);
     }
 
     static function create($prop_value_array){

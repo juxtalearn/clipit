@@ -336,6 +336,7 @@ class ClipitSite extends UBSite {
                 $data += array("prop_value_array[name]" => base64_encode($activity->name));
                 $data += array("prop_value_array[description]" => base64_encode($activity->description));
                 $data += array("prop_value_array[tricky_topic]" => base64_encode($tricky_topic->name));
+                $data += array("prop_value_array[color]" => $activity->color);
                 static::global_site_call($data, "POST");
             }
         }
