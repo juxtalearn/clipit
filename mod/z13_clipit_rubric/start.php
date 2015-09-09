@@ -151,7 +151,7 @@ function rubric_page_handler($page){
             break;
         case 'edit':
             // Edit Rubric
-            $title = elgg_echo('edit');
+            $title = elgg_echo('rubric:edit');
             $entity_id = $page[1];
             elgg_push_breadcrumb(elgg_echo('rubrics'), "rubrics");
             elgg_push_breadcrumb($title);

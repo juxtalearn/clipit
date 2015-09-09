@@ -15,6 +15,7 @@ $english = array(
     'rubric' => 'Rubric',
     'rubric:name' => 'Rubric name',
     'rubric:select' => 'Select rubric',
+    'rubric:edit' => 'Edit rubric',
     'rubric:removed' => 'Rubric removed',
     'rubric:item:name' => 'Criteria name',
     'rubric:item:remove' => 'Remove criteria',

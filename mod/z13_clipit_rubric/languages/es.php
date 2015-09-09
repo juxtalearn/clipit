@@ -15,6 +15,7 @@ $spanish = array(
     'rubric' => 'Rúbrica',
     'rubric:name' => 'Nombre de la rúbrica',
     'rubric:select' => 'Seleccionar rúbrica',
+    'rubric:edit' => 'Editar rúbrica',
     'rubric:removed' => 'Rúbrica eliminada',
     'rubric:score' => 'Puntuación',
     'rubric:item:name' => 'Nombre del criterio',
