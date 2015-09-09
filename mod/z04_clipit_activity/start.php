@@ -442,7 +442,7 @@ function activity_page_handler($page) {
     $user = array_pop(ClipitUser::get_by_id(array($user_id)));
     $called_users = ClipitActivity::get_students($activity->id);
     $isCalled = in_array($user_id, $called_users);
-    $isOpen = $activity->is_public;
+    $isOpen = $activity->public;
     // Default status
     $activity_status = $activity->status;
     // Check if activity exists
@@ -460,7 +460,7 @@ function activity_page_handler($page) {
         $access = 'ACCESS_MEMBER';
     } elseif(in_array($user_id, $activity->teacher_array) || $cache->load(elgg_get_logged_in_user_guid(), 'role') == ClipitUser::ROLE_ADMIN) {
         $access = 'ACCESS_TEACHER';
-    } elseif($activity->is_public && $user->role == ClipitUser::ROLE_STUDENT){
+    } elseif($activity->public && $user->role == ClipitUser::ROLE_STUDENT){
         $access = 'ACCESS_MEMBER';
     } else{
         $access = 'ACCESS_PUBLIC';
@@ -489,7 +489,7 @@ function activity_page_handler($page) {
                     include("{$activity_dir}/admin.php");
                     break;
                 case 'join':
-                    if($activity->is_public && ($activity->max_students > count($activity->student_array)) || $activity->max_students == 0) {
+                    if($activity->public && ($activity->max_students > count($activity->student_array)) || $activity->max_students == 0) {
                         $groups = ClipitGroup::get_by_id($activity->group_array);
                         natural_sort_properties($groups, 'name');
                         $user_joined = false;

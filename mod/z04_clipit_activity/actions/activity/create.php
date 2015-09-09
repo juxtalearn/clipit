@@ -29,11 +29,11 @@ $activity_data = array(
     'end' => get_timestamp_from_string($activity_end)+(60*60*24)-(60*1),
     'tricky_topic' => $activity_tt
 );
-if($advanced_options['is_public']){
+if($advanced_options['public']){
     $groups_creation = 3; // Random groups
     $max_users[3] = $advanced_options['max_group_size'];
     $activity_data = array_merge($activity_data, array(
-        'is_open' => $advanced_options['is_public'],
+        'public' => $advanced_options['public'],
         'group_mode' => ClipitActivity::GROUP_MODE_STUDENT,
         'max_group_size' => $advanced_options['max_group_size'],
         'max_students' => $advanced_options['max_students'],

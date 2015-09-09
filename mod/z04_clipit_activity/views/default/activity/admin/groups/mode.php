@@ -12,7 +12,7 @@
  */
 $activity = elgg_extract('activity', $vars);
 $disabled = false;
-if($activity->is_open){
+if($activity->public){
     $disabled = true;
 }
 ?>
