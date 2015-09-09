@@ -264,7 +264,7 @@ function tt_page_handler($page){
                     $filter = '';
                     elgg_push_breadcrumb(elgg_echo('examples'), "tricky_topics/examples");
                     elgg_push_breadcrumb($example->name, "tricky_topics/examples/view/{$example->id}");
-                    $title = elgg_echo('edit');
+                    $title = elgg_echo('example:edit');
                     elgg_push_breadcrumb($title);
                     $multimedia = array(
                         'videos' => array(),
@@ -347,7 +347,7 @@ function tt_page_handler($page){
             $filter = '';
             elgg_push_breadcrumb(elgg_echo('tricky_topics'), "tricky_topics");
             elgg_push_breadcrumb($tricky_topic->name, "tricky_topics/view/{$tricky_topic->id}");
-            $title = elgg_echo('edit');
+            $title = elgg_echo('tricky_topic:edit');
             elgg_push_breadcrumb($title);
             $content = elgg_view_form('tricky_topic/save',
                 array('data-validate' => 'true'),
