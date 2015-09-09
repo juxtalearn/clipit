@@ -301,7 +301,13 @@ class ClipitSite extends UBSite {
         $remote_files = static::global_site_call($data, "GET");
         // LOCAL public resources
         $pub_tricky_topics = static::get_pub_tricky_topics();
-        $pub_activities = static::get_pub_activities();
+        // public activities are only sent to global if the site allows registration
+        $allow_registration = (bool)get_config("allow_registration");
+        if($allow_registration){
+            $pub_activities = static::get_pub_activities();
+        } else{
+            $pub_activities = array();
+        }
         $pub_videos = static::get_pub_videos();
         $pub_files = static::get_pub_files();
 
