@@ -21,7 +21,7 @@ $english = array(
         progress by creating their own videos, and evaluating other\'s. The best videos are selected as part of the
         public educational resources.',
     'clipit:carrousel:define' => 'Define',
-    'clipit:carrousel:define_rest' => 'Teachers define the Tricky Topic and Stumbling Blocks to work on.
+    'clipit:carrousel:define_rest' => 'Teachers define the tricky topic and Stumbling Blocks to work on.
         They can also share help material with students for refference and guidance.',
     'clipit:carrousel:collaborate' => 'Collaborate',
     'clipit:carrousel:collaborate_rest' => 'Students organize in groups to create educational videos which they

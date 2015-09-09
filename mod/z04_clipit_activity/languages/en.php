@@ -83,11 +83,11 @@ $english = array(
     'activity:delete' => 'Remove activity',
     'activity:create' => 'Create activity',
     'activity:create:info:title' => 'To create an activity you will need to specify',
-    'activity:create:info:step:1' => '<b>Tricky Topic</b>: one per activity',
+    'activity:create:info:step:1' => '<b>Tricky topic</b>: one per activity',
     'activity:create:info:step:2' => '<b>Activity information</b>: name, description and dates',
     'activity:create:info:step:3' => '<b>Tasks</b> contained: description, type and dates',
     'activity:create:info:step:3:details' => '
-        <p>Some tasks require previously authored resources using the "Authoring tools", e.g.: "quiz" tasks need to be linked to a quiz, and "view teacher materials" tasks need the activity Tricky Topic to contain teaching materials.</p>
+        <p>Some tasks require previously authored resources using the "Authoring tools", e.g.: "quiz" tasks need to be linked to a quiz, and "view teacher materials" tasks need the activity tricky topic to contain teaching materials.</p>
         <p>Please open the "Authoring tools" to make sure you have authored all necessary teacher resources before creating these tasks.</p>
         <p>You can also create an activity without some tasks, and add them later on, when the necessary resources have been created using the "Authoring tools".</p>
     ',
@@ -233,10 +233,10 @@ $english = array(
     'video:tags' => 'Video Stumbling Blocks',
     'video:description' => 'Video description',
     // Tricky Topic
-    'tricky_topic' => 'Tricky Topic',
-    'tricky_topic:none' => 'Not tricky Topic',
-    'tricky_topic:tool' => 'Tricky Topic tool',
-    'tricky_topic:select' => 'Select Tricky Topic',
+    'tricky_topic' => 'Tricky topic',
+    'tricky_topic:none' => 'Not Tricky topic',
+    'tricky_topic:tool' => 'Tricky topic tool',
+    'tricky_topic:select' => 'Select tricky topic',
     'tricky_topic:created_by_me' => 'Created by me',
     'tricky_topic:created_by_others' => 'Others',
     // Publications
@@ -255,7 +255,7 @@ $english = array(
     'publications:rated' => 'Successfully evaluated',
     'publications:my_rating' => 'My rating',
     'publications:evaluate' => 'Evaluate',
-    'publications:question:tricky_topic' => 'Does this publication help you understand the %s Tricky Topic?',
+    'publications:question:tricky_topic' => 'Does this publication help you understand the %s tricky topic?',
     'publications:question:sb' => 'Why is/isn\'t this Stumbling Block correctly covered?',
     'publications:question:if_covered' => 'Check if each Stumbling Block was correcty covered in this publication, and explain why:',
     'publications:view_scope' => 'View scope',
@@ -333,7 +333,7 @@ $english = array(
     'task:file_upload' => 'Add file',
     'task:file_uploaded' => 'Dateien uploaded',
     'task:quiz_answer' => 'Take quiz',
-    'task:quiz_take:select' => 'You must select a Quiz. <br>(If there are no Quizzes for the Tricky Topic, you must add one first)',
+    'task:quiz_take:select' => 'You must select a Quiz. <br>(If there are no Quizzes for the tricky topic, you must add one first)',
     'quiz:result:finish' => '',
     'task:video_feedback' => 'Video feedback',
     'task:file_feedback' => 'File feedback',
@@ -392,7 +392,7 @@ $english = array(
     // Quiz
     'quiz:teacher_annotation' => 'Teacher\'s feedback',
     'quiz:data:none' => 'No data',
-    'quiz:tricky_topic:danger' => 'If you change Tricky Topic questions will be deleted',
+    'quiz:tricky_topic:danger' => 'If you change tricky topic questions will be deleted',
     'quiz:not_finished' => 'Not finished',
     'difficulty' => 'Difficulty',
     'quiz:select:from_tag' => 'Add existing questions',
