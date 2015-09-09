@@ -103,7 +103,7 @@ function clipit_global_init(){
     if(get_config('clipit_site_type') == ClipitSite::TYPE_GLOBAL) {
         elgg_register_page_handler('trickytopics', 'tricky_topics_global_section');
 //        Debugging
-//        elgg_register_page_handler('public_activities', 'public_activities_global_section');
+        elgg_register_page_handler('public_activities', 'public_activities_global_section');
     }
     elgg_register_page_handler('login', 'login_user_account_page_handler');
 
@@ -355,11 +355,17 @@ function public_activities_global_section($page_elements, $handler){
         elgg_view("global/activities/sidebar/tricky_topics", array('entities' => $tricky_topics, 'href' => $href_filter))
     );
     $selected_tab = get_input('filter', 'all');
+    $activities = ClipitRemoteActivity::get_all();
 
+    $content = elgg_view('output/empty', array('value' => elgg_echo('activities:none')));
+    if($activities){
+        $content = elgg_view('global/activities/list', array('entities' => $activities));
+    }
     $params = array(
         'title' => $title,
-        'content' => elgg_view('global/activities/list', array('entities' => $videos)),
-        'filter' => elgg_view('global/activities/filter', array('selected' => $selected_tab, 'entity' => $activity)),
+        'content' => $content,
+//        'filter' => elgg_view('global/activities/filter', array('selected' => $selected_tab, 'entity' => $activity)),
+        'filter' => '',
         'sidebar' => $sidebar,
     );
     $body = elgg_view_layout('content', $params);
