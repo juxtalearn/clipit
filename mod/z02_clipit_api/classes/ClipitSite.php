@@ -406,7 +406,7 @@ class ClipitSite extends UBSite {
         //OLD ACTIVITIES
         $remove_array = array();
         foreach($remote_activities as $remote_activity_id){
-            if(in_array($remote_activity_id, $pub_activities)){
+            if(!in_array($remote_activity_id, $pub_activities)){
                 $remove_array[] = $remote_activity_id;
             }
         }
@@ -421,7 +421,7 @@ class ClipitSite extends UBSite {
         // OLD VIDEOS
         $remove_array = array();
         foreach($remote_videos as $remote_video_id){
-            if(in_array($remote_video_id, $pub_videos)){
+            if(!in_array($remote_video_id, $pub_videos)){
                 $remove_array[] = $remote_video_id;
             }
         }
@@ -436,7 +436,7 @@ class ClipitSite extends UBSite {
         // OLD FILES
         $remove_array = array();
         foreach($remote_files as $remote_file_id){
-            if(in_array($remote_file_id, $pub_files)){
+            if(!in_array($remote_file_id, $pub_files)){
                 $remove_array[] = $remote_file_id;
             }
         }

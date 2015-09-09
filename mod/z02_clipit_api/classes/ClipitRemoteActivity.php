@@ -89,14 +89,12 @@ class ClipitRemoteActivity extends UBItem {
      * @return bool
      */
     static function delete_by_remote_id($remote_site, $remote_id_array){
-        $remote_site_id = ClipitRemoteSite::get_from_url(base64_decode($remote_site), true);
-        $activity_array = static::get_by_remote_id($remote_site_id, $remote_id_array);
+        $activity_array = static::get_by_remote_id($remote_site, $remote_id_array);
         $delete_array = array();
         foreach($activity_array as $activity){
             $delete_array[] = $activity->id;
         }
-        static::delete_by_id($delete_array);
-        return true;
+        return static::delete_by_id($delete_array);
     }
 
     /**

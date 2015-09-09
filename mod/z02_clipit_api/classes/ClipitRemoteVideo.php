@@ -153,14 +153,12 @@ class ClipitRemoteVideo extends UBItem {
     }
 
     static function delete_by_remote_id($remote_site, $remote_id_array){
-        $remote_site_id = ClipitRemoteSite::get_from_url(base64_decode($remote_site), true);
-        $remote_video_array = static::get_by_remote_id($remote_site_id, $remote_id_array);
+        $remote_video_array = static::get_by_remote_id($remote_site, $remote_id_array);
         $remote_video_id_array = array();
         foreach($remote_video_array as $video){
             $remote_video_id_array[] = $video->id;
         }
-        static::delete_by_id($remote_video_id_array);
-        return true;
+        return static::delete_by_id($remote_video_id_array);
     }
 
     static function get_from_site($remote_site, $remote_ids_only = false){
