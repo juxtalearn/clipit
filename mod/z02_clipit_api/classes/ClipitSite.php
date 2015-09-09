@@ -301,14 +301,20 @@ class ClipitSite extends UBSite {
         $remote_files = static::global_site_call($data, "GET");
         // LOCAL public resources
         $pub_tricky_topics = static::get_pub_tricky_topics();
-        $pub_activities = static::get_pub_activities();
+        // public activities are only sent to global if the site allows registration
+        $allow_registration = (bool)get_config("allow_registration");
+        if($allow_registration){
+            $pub_activities = static::get_pub_activities();
+        } else{
+            $pub_activities = array();
+        }
         $pub_videos = static::get_pub_videos();
         $pub_files = static::get_pub_files();
 
         // ADD new content to Global
         // NEW TRICKY TOPICS
         foreach($pub_tricky_topics as $pub_tricky_topic_id){
-            if(array_search($pub_tricky_topic_id, $remote_tricky_topics) === false){
+            if(!in_array($pub_tricky_topic_id, $remote_tricky_topics)){
                 $tricky_topic_array = ClipitTrickyTopic::get_by_id(array($pub_tricky_topic_id));
                 $tricky_topic = array_pop($tricky_topic_array);
                 $tag_name_array = array();
@@ -327,7 +333,7 @@ class ClipitSite extends UBSite {
         }
         // NEW ACTIVITIES
         foreach($pub_activities as $pub_activity_id){
-            if(array_search($pub_activity_id, $remote_activities) === false){
+            if(!in_array($pub_activity_id, $remote_activities)){
                 $activity = array_pop(ClipitActivity::get_by_id(array($pub_activity_id)));
                 $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($activity->tricky_topic)));
                 $data = array("method" => "clipit.remote_activity.create");
@@ -335,13 +341,14 @@ class ClipitSite extends UBSite {
                 $data += array("prop_value_array[remote_id]" => $activity->id);
                 $data += array("prop_value_array[name]" => base64_encode($activity->name));
                 $data += array("prop_value_array[description]" => base64_encode($activity->description));
-                $data += array("prop_value_array[tricky_topic]" => base64_encode($tricky_topic->name));
+                $data += array("prop_value_array[remote_tricky_topic]" => $tricky_topic->id);
+                $data += array("prop_value_array[color]" => $activity->color);
                 static::global_site_call($data, "POST");
             }
         }
         // NEW VIDEOS
         foreach($pub_videos as $pub_video_id){
-            if(array_search($pub_video_id, $remote_videos) === false){
+            if(!in_array($pub_video_id, $remote_videos)){
                 $video_array = ClipitVideo::get_by_id(array($pub_video_id));
                 $video = array_pop($video_array);
                 $tag_name_array = array();
@@ -361,7 +368,7 @@ class ClipitSite extends UBSite {
         }
         // NEW FILES
         foreach($pub_files as $pub_file_id){
-            if(array_search($pub_file_id, $remote_files) === false){
+            if(!in_array($pub_file_id, $remote_files)){
                 $file = array_pop(ClipitFile::get_by_id(array($pub_file_id)));
                 $tag_name_array = array();
                 $tag_array = ClipitTag::get_by_id($file->tag_array);
@@ -384,7 +391,7 @@ class ClipitSite extends UBSite {
         // OLD TRICKY TOPICS
         $remove_array = array();
         foreach($remote_tricky_topics as $remote_tricky_topic_id){
-            if(array_search($remote_tricky_topic_id, $pub_tricky_topics) === false){
+            if(in_array($remote_tricky_topic_id, $pub_tricky_topics)){
                 $remove_array[] = $remote_tricky_topic_id;
             }
         }
@@ -399,7 +406,7 @@ class ClipitSite extends UBSite {
         //OLD ACTIVITIES
         $remove_array = array();
         foreach($remote_activities as $remote_activity_id){
-            if(array_search($remote_activity_id, $pub_activities) === false){
+            if(!in_array($remote_activity_id, $pub_activities)){
                 $remove_array[] = $remote_activity_id;
             }
         }
@@ -414,7 +421,7 @@ class ClipitSite extends UBSite {
         // OLD VIDEOS
         $remove_array = array();
         foreach($remote_videos as $remote_video_id){
-            if(array_search($remote_video_id, $pub_videos) === false){
+            if(!in_array($remote_video_id, $pub_videos)){
                 $remove_array[] = $remote_video_id;
             }
         }
@@ -429,7 +436,7 @@ class ClipitSite extends UBSite {
         // OLD FILES
         $remove_array = array();
         foreach($remote_files as $remote_file_id){
-            if(array_search($remote_file_id, $pub_files) === false){
+            if(!in_array($remote_file_id, $pub_files)){
                 $remove_array[] = $remote_file_id;
             }
         }

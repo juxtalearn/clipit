@@ -375,7 +375,7 @@ class UBMessage extends UBItem {
             }
             $count = 0;
             foreach ($message_array as $message) {
-                if (array_search((int)$user_id, $message->read_array) === false) {
+                if (!in_array((int)$user_id, $message->read_array)) {
                     $count++;
                 }
                 if ($recursive) {
@@ -396,7 +396,7 @@ class UBMessage extends UBItem {
             if (!empty($sender_messages[$sender_id])) {
                 $message_array = $sender_messages[$sender_id];
                 foreach ($message_array as $message) {
-                    if (array_search((int)$user_id, $message->read_array) === false) {
+                    if (!in_array((int)$user_id, $message->read_array)) {
                         $count++;
                     }
                 }

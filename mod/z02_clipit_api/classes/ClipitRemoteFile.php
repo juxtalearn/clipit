@@ -151,7 +151,7 @@ class ClipitRemoteFile extends UBItem {
         $remote_files = ClipitRemoteFile::get_all();
         $remote_file_array = array();
         foreach($remote_files as $remote_file){
-            if($remote_file->remote_site == $remote_site_id && array_search($remote_file->remote_id,  $remote_id_array) !== false){
+            if($remote_file->remote_site == $remote_site_id && in_array($remote_file->remote_id,  $remote_id_array)){
                 $remote_file_array[] = $remote_file;
             }
         }
@@ -159,14 +159,12 @@ class ClipitRemoteFile extends UBItem {
     }
 
     static function delete_by_remote_id($remote_site, $remote_id_array){
-        $remote_site_id = ClipitRemoteSite::get_from_url(base64_decode($remote_site), true);
-        $remote_file_array = static::get_by_remote_id($remote_site_id, $remote_id_array);
+        $remote_file_array = static::get_by_remote_id($remote_site, $remote_id_array);
         $remote_file_id_array = array();
         foreach($remote_file_array as $file){
             $remote_file_id_array[] = $file->id;
         }
-        static::delete_by_id($remote_file_id_array);
-        return true;
+        return static::delete_by_id($remote_file_id_array);
     }
 
     static function get_from_site($remote_site, $remote_ids_only = false){

@@ -248,7 +248,7 @@ class ClipitQuiz extends UBItem {
             return $answered_questions;
         }
         foreach($user_results as $result){
-            if(array_search($result->quiz_question, $quiz->quiz_question_array) !== false){
+            if(in_array($result->quiz_question, $quiz->quiz_question_array)){
                 $answered_questions++;
             }
         }

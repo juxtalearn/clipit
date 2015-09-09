@@ -44,7 +44,7 @@ class ClipitUser extends UBUser {
      */
     protected function save($double_save = false) {
         // If no role set, use "student" as default
-        if(array_search($this->role, array(static::ROLE_STUDENT, static::ROLE_TEACHER, static::ROLE_ADMIN)) === false){
+        if(!in_array($this->role, array(static::ROLE_STUDENT, static::ROLE_TEACHER, static::ROLE_ADMIN))){
             $this->role = static::ROLE_STUDENT;
         }
         $id = parent::save($double_save);

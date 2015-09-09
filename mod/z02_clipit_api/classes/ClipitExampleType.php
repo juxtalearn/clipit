@@ -83,10 +83,7 @@ class ClipitExampleType extends UBItem{
                 continue; // cannot set an item's ID or language.
             }
             // Check for multilanguage properties
-            if(array_search(
-                    $prop,
-                    array("item_name", "item_description", "category", "category_description"))
-                !== false){
+            if(in_array($prop, array("item_name", "item_description", "category", "category_description"))){
                 $prop_array = (array)$item->$prop;
                 $prop_array[$lang_index] = $value;
                 $item->$prop = (array)$prop_array;

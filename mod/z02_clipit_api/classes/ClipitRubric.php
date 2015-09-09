@@ -97,7 +97,6 @@ class ClipitRubric extends UBItem{
                 continue;
             }
             $rating_id = array_pop($rating_array);
-            var_dump($rating_id);
             ClipitRating::remove_rubric_ratings($rating_id, array($rubric_rating->id));
         }
         return UBCollection::remove_items($id, $rubric_item_array, static::REL_RUBRIC_RUBRICITEM);

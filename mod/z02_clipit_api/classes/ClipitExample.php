@@ -78,7 +78,7 @@ class ClipitExample extends UBItem {
         }
         foreach($example_array as $example){
             foreach($example->tag_array as $tag){
-                if(array_search($tag, $tag_array) !== false){
+                if(in_array($tag, $tag_array)){
                     $return_examples[] = $example;
                     break;
                 }
