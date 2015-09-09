@@ -13,49 +13,6 @@
 $images_dir = elgg_extract('images_dir', $vars);
 $account = elgg_extract('accounts', $vars);
 ?>
-<style>
-    @-webkit-keyframes typing {
-        from { width: 0; }
-        to { width:14.5em }
-
-    }
-
-    /*@-moz-keyframes typing {*/
-        /*from { width: 0 }*/
-        /*to { width:16.3em }*/
-    /*}*/
-    @-webkit-keyframes blink-caret {
-        from, to { border-color: transparent }
-        50% { border-color: white }
-    }
-
-    @-moz-keyframes blink-caret {
-        from, to { border-color: transparent }
-        50% { border-color: white }
-    }
-    .jumbotron.clipit-landing .clipit-message h1{
-        /*width:14.5em;*/
-        /*white-space:nowrap;*/
-        /*overflow:hidden;*/
-        /*border-right: .1em solid white;*/
-        /*-webkit-animation: typing 3s steps(24, end), blink-caret 1s step-end infinite;*/
-        /*-moz-animation: typing 17s steps(24, end), *//* # of steps = # of characters *//* blink-caret 1s step-end infinite;*/
-    }
-    #cursor{
-        margin-left: -5px;
-    }
-    @-webkit-keyframes line-horizontal {
-        from{
-            width: 60%;
-        }
-        to{
-            width: 0%;
-        }
-    }
-    #test{
-        /*-webkit-animation: line-horizontal 3s infinite;*/
-    }
-</style>
 <script>
     setInterval ('cursorAnimation()', 1000);
     function cursorAnimation() {
@@ -155,6 +112,7 @@ $account = elgg_extract('accounts', $vars);
              data-cycle-pager="#per-slide-template"
              data-cycle-speed="200"
              data-cycle-timeout=0
+             data-cycle-log="false"
              style="height: 400px;"
             >
             <!-- prev/next links -->
