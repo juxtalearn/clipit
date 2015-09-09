@@ -195,16 +195,17 @@ function connect_section($page)
         'sidebar' => '',
     );
     $body = elgg_view_layout('one_column', $params);
-    echo elgg_view_page('', $body);
+    echo elgg_view_page(elgg_echo('sites'), $body);
 }
 
 function video_view($page){
     if ($id = $page[1]) {
         $video = array_pop(ClipitRemoteVideo::get_by_id(array((int)$id)));
         $site = array_pop(ClipitRemoteSite::get_by_id(array($video->remote_site)));
+        $title = $video->name;
         elgg_push_breadcrumb(elgg_echo('videos'), "videos");
         elgg_push_breadcrumb($site->name, "videos/".elgg_get_friendly_title($site->name)."/".$site->id);
-        elgg_push_breadcrumb($video->name);
+        elgg_push_breadcrumb($title);
 
         $videos = ClipitRemoteVideo::get_all(5);
         $sidebar = elgg_view_module('aside', false, elgg_view('walled_garden/sidebar/videos', array('videos' => $videos)));
@@ -213,10 +214,10 @@ function video_view($page){
             'content' => elgg_view('videos/view', array('entity' => $video, 'site' => $site)),
             'filter' => '',
             'sidebar' => $sidebar,
-            'title' => $video->name
+            'title' => $title
         );
         $body = elgg_view_layout('content', $params);
-        echo elgg_view_page('', $body);
+        echo elgg_view_page($title, $body);
         return true;
     }
     return false;
@@ -280,7 +281,7 @@ function videos_section($page){
         'sidebar' => $sidebar,
     );
     $body = elgg_view_layout('content', $params);
-    echo elgg_view_page('', $body);
+    echo elgg_view_page(elgg_echo('videos'), $body);
 }
 
 function login_user_account_page_handler($page_elements, $handler)
@@ -297,6 +298,7 @@ function login_user_account_page_handler($page_elements, $handler)
     return true;
 }
 function tricky_topics_global_section($page_elements, $handler){
+    $title = elgg_echo('tricky_topics');
     $href_filter = 'trickytopics';
     $href_filter .= http_build_query(array(
         'by' => get_input('by'),
@@ -321,16 +323,17 @@ function tricky_topics_global_section($page_elements, $handler){
         $content = elgg_view('global/tricky_topics/list', array('entities' => $tricky_topics));
     }
     $params = array(
-        'title' => elgg_echo('tricky_topics'),
+        'title' => $title,
         'content' => $content,
         'filter' => '',
         'sidebar' => $sidebar,
     );
     $body = elgg_view_layout('content', $params);
-    echo elgg_view_page('', $body);
+    echo elgg_view_page($title, $body);
 }
 
 function public_activities_global_section($page_elements, $handler){
+    $title = elgg_echo('activities');
     $href_filter = http_build_query(array(
         'by' => get_input('by'),
         'id' => get_input('id'),
@@ -352,14 +355,15 @@ function public_activities_global_section($page_elements, $handler){
         elgg_view("global/activities/sidebar/tricky_topics", array('entities' => $tricky_topics, 'href' => $href_filter))
     );
     $selected_tab = get_input('filter', 'all');
+
     $params = array(
-        'title' => elgg_echo('activities'),
+        'title' => $title,
         'content' => elgg_view('global/activities/list', array('entities' => $videos)),
         'filter' => elgg_view('global/activities/filter', array('selected' => $selected_tab, 'entity' => $activity)),
         'sidebar' => $sidebar,
     );
     $body = elgg_view_layout('content', $params);
-    echo elgg_view_page('', $body);
+    echo elgg_view_page($title, $body);
 }
 
 function setup_footer_menus()

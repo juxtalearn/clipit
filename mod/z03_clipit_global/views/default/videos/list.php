@@ -12,44 +12,6 @@
  */
 $videos = elgg_extract('entities', $vars);
 ?>
-<div class="row" style="display: none;">
-    <div class="col-md-8">
-        <div class="row hm">
-            <?php for($i=0; $i<15; $i++):?>
-                <div class="col-md-12 margin-bottom-10 xs">
-                    <div style="background: #ccc;height: 390px;"></div>
-                </div>
-                <div class="col-md-6">
-                    <div style="background: #ccc;height: 325px;"></div>
-                </div>
-                <div class="col-md-6">
-                    <div style="background: #ccc;height: 325px;"></div>
-                </div>
-                <div class="col-md-12 margin-top-10">
-                    <div style="background: #ccc;height: 139px;"></div>
-                </div>
-            <?php endfor;?>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="row sec">
-            <?php for($i=0; $i<15; $i++):?>
-                <div class="col-md-12 margin-bottom-10">
-                    <div style="background: #ccc;height: 257px;"></div>
-                </div>
-                <div class="col-md-12 margin-bottom-10">
-                    <div style="background: #ccc;height: 257px;"></div>
-                </div>
-                <div class="col-md-12 margin-bottom-10">
-                    <div style="background: #ccc;height: 257px;"></div>
-                </div>
-                <div class="col-md-12 margin-bottom-10">
-                    <div style="background: #ccc;height: 257px;"></div>
-                </div>
-            <?php endfor;?>
-        </div>
-    </div>
-</div>
 <script>
     $(function(){
         $('.structure').each(function(){

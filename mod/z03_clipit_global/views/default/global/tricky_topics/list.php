@@ -27,7 +27,7 @@ foreach($entities as $entity):
 ?>
     <li class="row list-item list-even">
         <div class="col-md-8">
-            <h4 class="margin-0 margin-bottom-15">
+            <h4 class="margin-0 margin-bottom-15 text-truncate">
                 <?php echo elgg_view('output/url', array(
                     'href' => "videos/search?by=trickytopic&id=".$entity->id,
                     'title' => $entity->name,
