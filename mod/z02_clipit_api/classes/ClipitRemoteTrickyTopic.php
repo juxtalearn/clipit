@@ -74,7 +74,7 @@ class ClipitRemoteTrickyTopic extends UBItem {
         }
         $prop_value_array["tag_array"] = (array)$tag_array;
         $id = parent::create($prop_value_array);
-        ClipitRemoteSite::add_tricky_topics($remote_site_url, array($id));
+        ClipitRemoteSite::add_tricky_topics($remote_site_id, array($id));
         return $id;
     }
 

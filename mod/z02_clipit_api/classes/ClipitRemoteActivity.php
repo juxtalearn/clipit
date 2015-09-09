@@ -18,9 +18,10 @@
 class ClipitRemoteActivity extends UBItem {
 
     const SUBTYPE = "ClipitRemoteActivity";
+    const REL_REMOTEACTIVITY_REMOTETRICKYTOPIC = "ClipitRemoteActivity-ClipitRemoteTrickyTopic";
     public $remote_id;
     public $remote_site = 0;
-    public $tricky_topic = "";
+    public $remote_tricky_topic = "";
     public $color = "";
 
     /**
@@ -32,7 +33,7 @@ class ClipitRemoteActivity extends UBItem {
         parent::copy_from_elgg($elgg_entity);
         $this->remote_id = (int)$elgg_entity->get("remote_id");
         $this->remote_site = (int)$elgg_entity->get("remote_site");
-        $this->tricky_topic = (string)$elgg_entity->get("tricky_topic");
+        $this->remote_tricky_topic = (string)$elgg_entity->get("remote_tricky_topic");
         $this->color = (string)$elgg_entity->get("color");
     }
 
@@ -45,7 +46,7 @@ class ClipitRemoteActivity extends UBItem {
         parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("remote_id", (int)$this->remote_id);
         $elgg_entity->set("remote_site", (int)$this->remote_site);
-        $elgg_entity->set("tricky_topic", (string)$this->tricky_topic);
+        $elgg_entity->set("remote_tricky_topic", (string)$this->remote_tricky_topic);
         $elgg_entity->set("color", (string)$this->color);
     }
 
@@ -57,9 +58,6 @@ class ClipitRemoteActivity extends UBItem {
         // Base64 decode some properties which can contain special characters
         $prop_value_array["name"] = base64_decode($prop_value_array["name"]);
         $prop_value_array["description"] = base64_decode($prop_value_array["description"]);
-        $tricky_topic_name = base64_decode($prop_value_array["tricky_topic"]);
-        $tricky_topic = ClipitTrickyTopic::create(array("name" => $tricky_topic_name));
-        $prop_value_array["tricky_topic"] = (int)$tricky_topic;
         $id = parent::create($prop_value_array);
         ClipitRemoteSite::add_activities($remote_site_id, array($id));
         return $id;

@@ -150,6 +150,9 @@ class ClipitActivity extends UBItem {
 
     static function set_public($id, $value = true){
         if($value){
+            // Public activity tricky topics must also be public
+            $tricky_topic = static::get_tricky_topic($id);
+            Clipitsite::add_pub_tricky_topics(array($tricky_topic));
             return ClipitSite::add_pub_activities(array($id));
         } else{
             return ClipitSite::remove_pub_activities(array($id));
