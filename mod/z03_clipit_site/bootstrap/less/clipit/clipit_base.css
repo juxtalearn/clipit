@@ -7659,13 +7659,15 @@ form .elgg-module h3 {
   text-align: right;
   border-top: 0px;
   margin-top: 0px;
-  padding-left: 65px;
   padding-top: 0px;
 }
 .modal-footer p {
   color: #bae6f6;
   margin-top: 15px;
   margin-bottom: 0px;
+}
+.modal-footer .btn + .btn {
+  margin-left: 15px;
 }
 .elgg-list h3 {
   margin-bottom: 0;

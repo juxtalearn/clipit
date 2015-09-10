@@ -61,9 +61,9 @@ if($tricky_topic){
         </div>
     </div>
     <div class="col-md-5">
-        <div class="form-group">
+        <div class="form-add-tags form-group prototype-container" data-prototype="<?php echo htmlentities(elgg_view("tricky_topics/tags/add"));?>">
             <label for="tag[]"><?php echo elgg_echo('tags');?></label>
-            <div class="form-add-tags form-group margin-top-10">
+            <div class="prototype-content form-group margin-top-10">
                 <?php if($tags):?>
                     <?php foreach($tags as $tag):?>
                         <?php echo elgg_view("tricky_topics/tags/add", array('value' => $tag->name));?>
@@ -74,9 +74,9 @@ if($tricky_topic){
             </div>
             <?php echo elgg_view('output/url', array(
                 'href'  => "javascript:;",
-                'class' => 'btn btn-xs btn-primary',
+                'class' => 'btn btn-xs btn-primary prototype-add',
                 'title' => elgg_echo('add'),
-                'text'  => '<i class="fa fa-plus"></i>' . elgg_echo('add'),
+                'text'  => '<i class="fa fa-plus"></i> ' . elgg_echo('add'),
                 'id'    => 'add-tag',
             ));
             ?>

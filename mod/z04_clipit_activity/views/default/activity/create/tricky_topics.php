@@ -80,18 +80,20 @@ $tt = array_diff($tt, $owner_tt);
         ));
         ?>
         <hr class="margin-0 margin-top-10 margin-bottom-10">
-        <label class="margin-top-5 margin-bottom-10"><?php echo elgg_echo("tags");?></label>
-        <div class="form-add-tags">
-            <?php echo elgg_view("tricky_topics/tags/add");?>
+        <div class="form-add-tags prototype-container" data-prototype="<?php echo htmlentities(elgg_view("tricky_topics/tags/add"));?>">
+            <label class="margin-top-5 margin-bottom-10"><?php echo elgg_echo("tags");?></label>
+            <div class="prototype-content">
+                <?php echo elgg_view("tricky_topics/tags/add");?>
+            </div>
+            <?php echo elgg_view('output/url', array(
+                'href'  => "javascript:;",
+                'class' => 'btn btn-xs btn-primary prototype-add',
+                'title' => elgg_echo('add'),
+                'text'  => '<i class="fa fa-plus"></i>' . elgg_echo('add'),
+                'id'    => 'add-tag'
+            ));
+            ?>
         </div>
-        <?php echo elgg_view('output/url', array(
-            'href'  => "javascript:;",
-            'class' => 'btn btn-xs btn-primary',
-            'title' => elgg_echo('add'),
-            'text'  => '<i class="fa fa-plus"></i>' . elgg_echo('add'),
-            'id'    => 'add-tag'
-        ));
-        ?>
         <div class="clearfix"></div>
         <div class="form-group row margin-top-10">
             <div class="col-md-6">

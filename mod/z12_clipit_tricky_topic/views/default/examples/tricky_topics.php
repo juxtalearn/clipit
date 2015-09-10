@@ -95,11 +95,11 @@ $(function(){
             ?>
         <?php endif;?>
     </div>
-    <div class="form-group margin-top-10 add-more-tags" style="display: <?php echo $selected ? 'block' : 'none'?>;">
+    <div class="form-add-tags form-group margin-top-10 add-more-tags prototype-container" data-prototype="<?php echo htmlentities(elgg_view("tricky_topics/tags/add"));?>" style="display: <?php echo $selected ? 'block' : 'none'?>;">
         <small class="show">
             <?php echo elgg_echo('add:more');?>
         </small>
-        <div class="form-add-tags form-group margin-top-10">
+        <div class="prototype-content form-group margin-top-10">
             <?php if($tags_diff):?>
                 <?php foreach(ClipitTag::get_by_id($tags_diff) as $tag):?>
                     <?php echo elgg_view("tricky_topics/tags/add", array('value' => $tag->name));?>
@@ -110,7 +110,7 @@ $(function(){
         </div>
         <?php echo elgg_view('output/url', array(
             'href'  => "javascript:;",
-            'class' => 'btn btn-xs btn-primary',
+            'class' => 'btn btn-xs btn-primary prototype-add',
             'title' => elgg_echo('add'),
             'text'  => '<i class="fa fa-plus"></i> ' . elgg_echo('add'),
             'id'    => 'add-tag',

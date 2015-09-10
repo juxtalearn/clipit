@@ -17,6 +17,7 @@ elgg.provide('clipit.tricky_topic');
 clipit.tricky_topic.init = function() {
     $(".input-tag").autocomplete(clipit.tricky_topic.tagsAutocomplete());
     $(document).on("click", "#add-tag", clipit.tricky_topic.addTag);
+
     $(document).on("keypress", ".form-add-tags input[type=text]", clipit.tricky_topic.onKeypressTag);
     $(document).on(clipit.tricky_topic.onReflectionItemShow(), ".reflection-item label");
     $(document).on("click", ".add-input", clipit.tricky_topic.addInput);
@@ -67,8 +68,7 @@ clipit.tricky_topic.link = function(e) {
     });
 };
 clipit.tricky_topic.addTag = function(){
-    var container = $(".form-add-tags");
-    container.append(<?php echo json_encode(elgg_view("tricky_topics/tags/add"));?>);
+    var container = $(this).closest('.prototype-container');
     container.find(".input-tag:last").focus().autocomplete(clipit.tricky_topic.tagsAutocomplete());
 };
 clipit.tricky_topic.onKeypressTag = function(e){

@@ -63,6 +63,14 @@ clipit.init = function() {
     $(document).on('shown.bs.modal', function (e) {
         $('[autofocus]', e.target).focus();
     });
+    // Clone elements
+    /**
+     * HTML code:
+     * <element class="prototype-container" data-prototype="htmlentities(ELEMENT-TO-CLONE)?>>
+     *     <element class="prototype-content">  </element>
+     * </element>
+    */
+     $(document).on("click", ".prototype-add", clipit.prototype_clone);
 };
 elgg.register_hook_handler('init', 'system', clipit.init);
 /**
@@ -574,6 +582,11 @@ clipit.shorten = function(element, height, message_more, message_less){
             }
         });
     });
+};
+clipit.prototype_clone = function(){
+    var container = $(this).closest('.prototype-container'),
+        content = container.find('.prototype-content');
+    content.append( container.data('prototype') );
 };
 
 $(function(){
