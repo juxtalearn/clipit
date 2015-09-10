@@ -84,6 +84,19 @@ if (is_array($items) && count($items) > 0):
                                     <?php echo elgg_view('tricky_topic/preview', array('activity' => $item));?>
                                 </div>
                                 <?php endif; ?>
+                                <?php if($item->public && !$isCalled && !$group_id):?>
+                                    <div class="margin-bottom-10">
+                                        <?php echo elgg_view('output/url', array(
+                                            'href'  => "clipit_activity/{$item->id}",
+                                            'class'  => 'btn btn-xs btn-border-blue btn-primary pull-right',
+                                            'title' => $item->name,
+                                            'text'  => elgg_echo('activity:join'),
+                                        ));
+                                        ?>
+                                        <small class="show"><?php echo elgg_echo('students');?></small>
+                                        <?php echo count($item->student_array);?><?php echo $item->max_students ? '/'.$item->max_students:'';?>
+                                    </div>
+                                <?php endif;?>
                                 <?php if($item->status == 'enroll' && $item->group_mode == ClipitActivity::GROUP_MODE_STUDENT && $isCalled): ?>
                                     <?php echo elgg_view('output/url', array(
                                         'href'  => "clipit_activity/{$item->id}/join",

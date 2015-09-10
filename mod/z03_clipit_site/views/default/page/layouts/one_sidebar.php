@@ -32,18 +32,6 @@ if($vars['sub-title']){
     $subtitle = "<h4>".$vars['sub-title']."</h4>";
 }
 ?>
-<!--<style>-->
-<!--    .elgg-layout-one-sidebar h2{-->
-<!--        margin-top: 0;-->
-<!--        margin-bottom: 25px;-->
-<!--    }-->
-<!--    .elgg-sidebar{-->
-<!--        margin-top: 0;-->
-<!--    }-->
-<!--    .elgg-sidebar .elgg-module-aside:nth-child(2) h4{-->
-<!--        margin-top: 0;-->
-<!--    }-->
-<!--</style>-->
 <div class="<?php echo $class; ?>">
     <?php if (isset($vars['title']) && !$vars['type']):?>
         <div class="clearfix main-title">
