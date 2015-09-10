@@ -45,6 +45,7 @@ if($tricky_topic){
                 'class' => 'form-control',
                 'name' => 'title',
                 'value' => $tricky_topic->name,
+                'autofocus' => true,
                 'required' => true
             ));
             ?>

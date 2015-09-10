@@ -59,7 +59,10 @@ clipit.init = function() {
     $('ul#tags').each(clipit.tagList);
     // Labels from list
     $('ul#labels').each(clipit.labelList);
-
+    // HTML5 autofocus inside a modal
+    $(document).on('shown.bs.modal', function (e) {
+        $('[autofocus]', e.target).focus();
+    });
 };
 elgg.register_hook_handler('init', 'system', clipit.init);
 /**

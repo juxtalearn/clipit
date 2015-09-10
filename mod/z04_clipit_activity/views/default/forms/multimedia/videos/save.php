@@ -172,7 +172,8 @@ echo elgg_view("input/hidden", array(
             'name' => 'title',
             'value' => $entity->name,
             'class' => 'form-control',
-            'required' => true
+            'autofocus' => true,
+            'required' => true,
         ));?>
     </div>
     <div class="form-group">

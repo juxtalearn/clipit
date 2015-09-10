@@ -38,6 +38,7 @@ if($example) {
             <?php echo elgg_view("input/text", array(
                 'name' => 'title',
                 'class' => 'form-control',
+                'autofocus' => true,
                 'required' => true,
                 'value' => $example->name,
                 'placeholder' => elgg_echo('title')

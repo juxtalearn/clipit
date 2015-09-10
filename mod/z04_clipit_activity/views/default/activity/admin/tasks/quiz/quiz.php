@@ -98,6 +98,7 @@ $(function(){
                 'name' => "{$input_prefix}[title]",
                 'class' => 'form-control',
                 'value' => $entity->name,
+                'autofocus' => true,
                 'required' => true,
             ));
             ?>

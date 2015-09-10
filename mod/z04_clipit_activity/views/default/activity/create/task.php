@@ -158,6 +158,7 @@ if($task){
                     'name' => "task{$input_array}[title]",
                     'class' => 'form-control input-task-title',
                     'value' => $task->name,
+                    'autofocus' => !$disabled?true:false,
                     'required' => $required
                 ));
                 ?>

@@ -105,6 +105,7 @@ $(function(){
             'name' => $input_prefix.'[name]',
             'maxlength' => 100,
             'value' => $rubric->name,
+            'autofocus' => true,
             'required' => true
         ));
         ?>

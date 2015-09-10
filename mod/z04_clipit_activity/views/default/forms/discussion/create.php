@@ -18,6 +18,7 @@ $body .='<div class="form-group">
     '.elgg_view("input/text", array(
         'name' => 'discussion-title',
         'class' => 'form-control',
+        'autofocus' => true,
         'required' => true
     )).'
 </div>

@@ -173,6 +173,7 @@ $(function(){
             <?php echo elgg_view("input/text", array(
                 'name' => 'activity-title',
                 'class' => 'form-control',
+                'autofocus' => true,
                 'required' => true
                 ));
             ?>
