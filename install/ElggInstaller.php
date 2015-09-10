@@ -409,6 +409,11 @@ class ElggInstaller {
                 'value' => 'Europe/Madrid',
                 'required' => TRUE,
             ),
+            'clipit_site_type' => array(
+                'type' => 'text',
+                'value' => 'site',
+                'required' => TRUE
+            ),
             "clipit_global_url" => array(
                 "type" => "text",
                 "value" => "http://clipit.es/landing/services/api/rest/json/",
@@ -429,21 +434,17 @@ class ElggInstaller {
 //                'value' => '0123456789abcdef0123456789abcdef',
 //                'required' => TRUE,
 //            ),
-            'la_metrics_class' => array(
-                'type' => 'text',
-                'value' => 'ActivityStreamer',
-                'required' => TRUE,
-            ),
-            'recommendations_class' => array(
-                'type' => 'text',
-                'value' => 'RecommendationEngine',
-                'required' => TRUE,
-            ),
-            'clipit_site_type' => array(
-                'type' => 'text',
-                'value' => 'site',
-                'required' => TRUE
-            )
+//            'la_metrics_class' => array(
+//                'type' => 'text',
+//                'value' => 'ActivityStreamer',
+//                'required' => TRUE,
+//            ),
+//            'recommendations_class' => array(
+//                'type' => 'text',
+//                'value' => 'RecommendationEngine',
+//                'required' => TRUE,
+//            ),
+
         );
 
         // if Apache, we give user option of having Elgg create data directory
@@ -1478,8 +1479,8 @@ class ElggInstaller {
         set_config('clipit_global_login', $submissionVars['clipit_global_login'], $guid);
         set_config('clipit_global_password', $submissionVars['clipit_global_password'], $guid);
 //      set_config('jxl_secret', $submissionVars['jxl_secret'], $guid);
-        set_config('la_metrics_class', $submissionVars['la_metrics_class'], $guid);
-        set_config('recommendations_class', $submissionVars['recommendations_class'], $guid);
+//        set_config('la_metrics_class', $submissionVars['la_metrics_class'], $guid);
+//        set_config('recommendations_class', $submissionVars['recommendations_class'], $guid);
         set_config('clipit_site_type', strtolower($submissionVars['clipit_site_type']), $guid);
         // Set current ClipIt version and tag branch
         $versions_json = file_get_contents(elgg_get_plugins_path()."z40_clipit_admin/updates/versions.json");
