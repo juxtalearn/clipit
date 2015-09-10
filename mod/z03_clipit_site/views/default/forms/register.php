@@ -25,7 +25,8 @@ if (elgg_is_sticky_form('register')) {
             'value' => $name,
             'class' => 'form-control input-lg',
             'placeholder' => 'Juan García',
-            'data-rule-required' => 'true',
+            'autofocus' => true,
+            'required' => true,
             'data-rule-minlength' => '6'
         ));
         ?>
@@ -39,7 +40,7 @@ if (elgg_is_sticky_form('register')) {
             'class' => 'form-control input-lg',
             'placeholder' => 'hello@email.com',
             'data-rule-email' => 'true',
-            'data-rule-required' => 'true'
+            'required' => true,
         ));
         ?>
     </div>
@@ -63,7 +64,7 @@ if (elgg_is_sticky_form('register')) {
             'value' => $password,
             'class' => 'form-control input-lg',
             'id' => 'password',
-            'data-rule-required' => 'true'
+            'required' => true,
         ));
         ?>
     </div>
@@ -79,7 +80,7 @@ if (elgg_is_sticky_form('register')) {
             'ondrag' => 'return false',
             'ondrop' => 'return false',
             'onpaste' => 'return false',
-            'data-rule-required' => 'true',
+            'required' => true,
             'data-rule-equalto' => '#password',
             'class' => 'form-control input-lg',
         ));
