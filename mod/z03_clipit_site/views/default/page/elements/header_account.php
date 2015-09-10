@@ -28,8 +28,8 @@ $context = elgg_get_context();
             </div>
             <?php if (elgg_is_logged_in()): ?>
                 <?php echo elgg_view_menu('top_account', array('sort_by' => 'priority', 'class' => 'nav navbar-nav navbar-right top-account')); ?>
-            <?php else: ?>
-                <?php echo elgg_view_menu('top_walled_garden', array('sort_by' => 'priority', 'class' => 'nav navbar-nav navbar-right top-account')); ?>
+<!--            --><?php //else: ?>
+<!--                --><?php //echo elgg_view_menu('top_walled_garden', array('sort_by' => 'priority', 'class' => 'nav navbar-nav navbar-right top-account')); ?>
             <?php endif;?>
             <?php echo elgg_view_menu('top_menu', array('sort_by' => 'priority', 'class' => 'top-menu')); ?>
         </div><!-- /.navbar-collapse -->
