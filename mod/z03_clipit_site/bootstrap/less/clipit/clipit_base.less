@@ -561,12 +561,15 @@ h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
       font-size: 15px;
       letter-spacing: 1px;
       color: @grey_text;
-      background-color: #f7f7f7;
+//      background-color: #f7f7f7;
+      background-color: fade(#fff, 35%);
+      .transition(all 0.3s);
       margin-right: 4px;
       &:hover,
       &:focus{
         color: darken(@grey_text, 12%);
         border-bottom: 1px solid #FFF;
+        background-color: #fff;
       }
       > .badge{
         display: inline-block;

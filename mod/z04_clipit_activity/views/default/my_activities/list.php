@@ -46,23 +46,33 @@ if (is_array($items) && count($items) > 0):
                                 <strong><?php echo elgg_echo("status:".$item->status);?></strong>
                             </small>
                         </div>
-                        <h4 style='margin-top: 0'>
-                            <?php echo elgg_view('output/url', array(
-                                    'href' => "clipit_activity/{$item->id}",
-                                    'text' => $item->name,
-                                    'is_trusted' => true,
-                                    'style' => 'color: #'.$item->color
-                                ));
-                            ?>
-                        </h4>
-                        <div style='color: #999;text-transform: uppercase;'>
-                            <i class='fa fa-calendar'></i>
-                            <?php echo date("d M Y", $item->start);?>
-                            -
-                            <?php echo date("d M Y", $item->end);?>
-                        </div>
-                        <div class="hidden-xs hidden-sm" style='max-height: 40px; overflow: hidden; color: #666666;margin-top: 5px; '>
-                            <?php echo $description; ?>
+                        <?php echo elgg_view('output/url', array(
+                            'href' => "clipit_activity/{$item->id}",
+                            'class' => 'activity-point margin-right-10 pull-left',
+                            'style' => 'width: 15px; height: 15px; background: #'.$item->color,
+                            'text' => '',
+                            'title' => $item->name,
+                            'is_trusted' => true,
+                        ));
+                        ?>
+                        <div class="content-block">
+                            <h4 style='margin-top: 0'>
+                                <?php echo elgg_view('output/url', array(
+                                        'href' => "clipit_activity/{$item->id}",
+                                        'text' => $item->name,
+                                        'is_trusted' => true,
+                                    ));
+                                ?>
+                            </h4>
+                            <div style='color: #999;text-transform: uppercase;'>
+                                <i class='fa fa-calendar'></i>
+                                <?php echo date("d M Y", $item->start);?>
+                                -
+                                <?php echo date("d M Y", $item->end);?>
+                            </div>
+                            <div class="hidden-xs hidden-sm" style='max-height: 40px; overflow: hidden; color: #666666;margin-top: 5px; '>
+                                <?php echo $description; ?>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">

@@ -35,17 +35,13 @@ function clipit_activity_init() {
     if($user->role == ClipitUser::ROLE_STUDENT) {
         // My activities list (top header)
         elgg_extend_view("navigation/menu/top", "navigation/menu/my_activities", 100);
-    }
-
-    // Register "/my_activities" page handler
-    elgg_register_page_handler('my_activities', 'my_activities_page_handler');
-    if($user->role == ClipitUser::ROLE_TEACHER || $user->role == ClipitUser::ROLE_ADMIN) {
+    }elseif(hasTeacherAccess($user->role)) {
         // Register "/create_activity" page handler
         elgg_register_page_handler('create_activity', 'create_activity_page_handler');
-        // Register "/activities" page handler
-        elgg_register_page_handler('activities', 'activities_page_handler');
         elgg_extend_view("navigation/menu/top", "navigation/menu/activities", 200);
     }
+    // Register "/activities" page handler
+    elgg_register_page_handler('activities', 'activities_page_handler');
     // Register "/file" page handler
     elgg_register_page_handler('file', 'file_page_handler');
     // Register "/clipit_activity" page handler
@@ -632,115 +628,18 @@ function file_page_handler($page){
 }
 
 /**
- * My activities page handler, student view
- *
- * @param array $page Array of URL components for routing
- * @return bool
- */
-function my_activities_page_handler($page) {
-    $current_user = elgg_get_logged_in_user_entity();
-
-    if (!$current_user) {
-        register_error(elgg_echo('noaccess'));
-        $_SESSION['last_forward_from'] = current_page_url();
-        forward('');
-    }
-
-    $base_dir = elgg_get_plugins_path() . 'z04_clipit_activity/pages/activity';
-    $vars = array();
-	$vars['page'] = $page[0];
-
-    require_once "$base_dir/my_activities.php";
-
-    return true;
-
-}
-/**
- * Activities page handler, only for teacher and admin
+ * Activities page handler
  *
  * @param array $page Array of URL components for routing
  * @return bool
  */
 function activities_page_handler($page) {
-    $title = elgg_echo('activities');
-    $order_by = get_input('order_by');
-    $sort = get_input('sort');
-    $selected_tab = get_input('filter', 'all');
-    $filter = elgg_view('navigation/tabs', array('selected' => $selected_tab, 'href' => $page[0]));
-    $sidebar = elgg_view_module('aside', elgg_echo('filter'),
-        elgg_view_form(
-            'filter_search',
-            array(
-                'id' => 'add_labels',
-                'style' => 'background: #fff;padding: 15px;',
-                'body' => elgg_view('activities/sidebar/filter')
-            )
-        ));
-    // Filter search
-    if($search = get_input('s')) {
-        $all_entities = activity_filter_search($search);
-        if($order_by){
-            $all_entities = get_entities_order(
-                'ClipitActivity',
-                $all_entities,
-                clipit_get_limit(10),
-                clipit_get_offset(),
-                $order_by,
-                $sort
-            );
-        } else {
-            $all_entities = ClipitActivity::get_by_id($all_entities);
-        }
-        $count = count($all_entities);
-        $entities = array_slice($all_entities, clipit_get_offset(), clipit_get_limit(10));
-    } else {
-        switch($selected_tab){
-            case 'mine':
-                $all_entities = ClipitActivity::get_by_id(ClipitUser::get_activities(elgg_get_logged_in_user_guid()));
-                break;
-            default:
-                $all_entities = ClipitActivity::get_all(0, 0, '', true, true);
-                if($order_by) {
-                    $all_entities = get_entities_order(
-                        'ClipitActivity',
-                        $all_entities,
-                        clipit_get_limit(10),
-                        clipit_get_offset(),
-                        $order_by,
-                        $sort
-                    );
-                } else {
-                    $all_entities = ClipitActivity::get_by_id($all_entities);
-                }
 
-                break;
-        }
-        $count = count($all_entities);
-        $entities = array_slice($all_entities, clipit_get_offset(), clipit_get_limit(10));
-    }
-    $to_order = array(
-        'name' => elgg_echo('activity:title'),
-        'tricky_topic' => elgg_echo('tricky_topic'),
-        'status' => elgg_echo('status'),
-    );
-    $table_orders = table_order($to_order, $order_by, $sort);
-    $content = elgg_view('activities/list', array(
-        'entities' => $entities,
-        'count' => $count,
-        'table_orders' => $table_orders
-    ));
-    $params = array(
-        'content' => $content,
-        'title' => $title,
-        'filter' => $filter,
-        'sidebar' => $sidebar,
-    );
-    $body = elgg_view_layout('one_sidebar', $params);
+    $base_dir = elgg_get_plugins_path() . 'z04_clipit_activity/pages/activity';
 
-    echo elgg_view_page($title, $body);
+    require_once "$base_dir/activities.php";
 
     return true;
-
 }
 
 /**

@@ -24,6 +24,11 @@ $status_array = array(
     ClipitActivity::STATUS_ENROLL => elgg_echo('status:enroll'),
     ClipitActivity::STATUS_CLOSED => elgg_echo('status:closed'),
 );
+$activity_type_array = array(
+    '' => elgg_echo('all'),
+    '1' => elgg_echo('activity:register:open'),
+    '-1' => elgg_echo('activity:register:closed'),
+);
 echo elgg_view("input/hidden", array(
     'name' => 'page',
     'value' => 'activities'
@@ -77,6 +82,17 @@ echo elgg_view("input/hidden", array(
         'value' => get_search_input('status'),
         'class' => 'form-control',
         'options_values' => $status_array,
+    ));
+    ?>
+</div>
+<div class="form-group">
+    <label class="text-muted"><?php echo elgg_echo('activity:register:title');?></label>
+    <?php echo elgg_view("input/dropdown", array(
+        'name' => 'search[public]',
+        'style' => 'padding: 0;height: 25px;',
+        'value' => get_search_input('public'),
+        'class' => 'form-control',
+        'options_values' => $activity_type_array,
     ));
     ?>
 </div>

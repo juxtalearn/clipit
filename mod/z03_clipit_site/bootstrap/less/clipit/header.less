@@ -70,12 +70,22 @@
     vertical-align: middle;
   }
 }
-
+// navbar-sticky
+#navbar-sticky{
+  border-top: 0;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  .navbar-collapse{
+    border: 0;
+  }
+}
 // navbar background blue
 .navbar-blue{
   background: @blue_clipit;
   margin-bottom: 0px;
   min-height: @navbar-blue-height;
+  .box-shadow(none);
+  border: 0;
   .pull-right{
     padding: 0;
   }

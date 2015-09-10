@@ -78,6 +78,24 @@ function activity_filter_search($query){
                     $item_ids = array_intersect($item_ids, $item_search);
                 }
                 break;
+            case 'public':
+                $item_search = array();
+                if($query_ar->public == -1){
+                    $activities = ClipitActivity::get_all();
+                    foreach($activities as $activity){
+                        if($activity->public === false){
+                            $item_search[] = $activity->id;
+                        }
+                    }
+                } else {
+                    $item_search = ClipitSite::get_pub_activities();
+                }
+                if(empty($item_ids)) {
+                    $item_ids = array_merge($item_ids, $item_search);
+                } else {
+                    $item_ids = array_intersect($item_ids, $item_search);
+                }
+                break;
         }
     }
     return $item_ids;

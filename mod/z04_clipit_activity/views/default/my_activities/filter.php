@@ -15,22 +15,27 @@ $activity = elgg_extract('entity', $vars);
 $tabs = array(
     'all' => array(
         'text' => '<span>'.elgg_echo('all').'<span>',
-        'href' => "my_activities",
+        'href' => "activities",
         'priority' => 200,
+    ),
+    'public' => array(
+        'text' => elgg_view('output/filter_responsive', array('text' => elgg_echo('activities:open'), 'icon' => 'fa-unlock-alt')),
+        'href' => "activities?filter=public",
+        'priority' => 300,
     ),
     'enroll' => array(
         'text' => elgg_view('output/filter_responsive', array('text' => elgg_echo('status:enroll'), 'icon' => 'fa-clock-o')),
-        'href' => "my_activities?filter=enroll",
+        'href' => "activities?filter=enroll",
         'priority' => 300,
     ),
     'active' => array(
         'text' => elgg_view('output/filter_responsive', array('text' => elgg_echo('status:active'), 'icon' => 'fa-play')),
-        'href' => "my_activities?filter=active",
+        'href' => "activities?filter=active",
         'priority' => 400,
     ),
     'past' => array(
         'text' => elgg_view('output/filter_responsive', array('text' => elgg_echo('status:closed'), 'icon' => 'fa-stop')),
-        'href' => "my_activities?filter=closed",
+        'href' => "activities?filter=closed",
         'priority' => 500,
     ),
 );

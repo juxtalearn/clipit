@@ -52,7 +52,7 @@ function mobileLoad() {
 
         $('.nav a#explore').attr({'href': elgg.config.wwwroot + 'explore'})
         $('.nav a#activities').attr({'href': elgg.config.wwwroot + 'activities'}).removeAttr('data-toggle');
-        $('.nav a#my_activities').attr({'href': elgg.config.wwwroot + 'my_activities'}).removeAttr('data-toggle');
+        $('.nav a#my_activities').attr({'href': elgg.config.wwwroot + 'activities'}).removeAttr('data-toggle');
         $('.nav a#authoring').attr({'href': elgg.config.wwwroot + 'tricky_topics'}).removeAttr('data-toggle');
         $('.nav a.inbox-summary').attr({'href': elgg.config.wwwroot + 'messages/inbox'}).removeAttr('data-toggle');
 

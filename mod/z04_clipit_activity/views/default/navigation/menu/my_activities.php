@@ -12,15 +12,15 @@
  */
 $user_id = elgg_get_logged_in_user_guid();
 ?>
-<li <?php echo elgg_in_context('my_activities') ? 'class="active"': '';?>>
+<li <?php echo elgg_in_context('activities') ? 'class="active"': '';?>>
     <?php echo elgg_view('output/url', array(
         'href'  => "#",
         'data-toggle' => 'dropdown',
         'id' => 'my_activities',
-        'title' => elgg_echo('my_activities'),
+        'title' => elgg_echo('activities'),
         'text'  => '<i class="fa fa-list-alt visible-xs visible-sm"></i>
                     <i class="fa fa-caret-down pull-right hidden-xs hidden-sm" style="float: right !important;"></i>
-                    <span class="hidden-xs hidden-sm">'.elgg_echo('my_activities'). '</span>'
+                    <span class="hidden-xs hidden-sm">'.elgg_echo('activities'). '</span>'
     ));
     ?>
     <!-- My activities dropdown menu -->
@@ -28,7 +28,7 @@ $user_id = elgg_get_logged_in_user_guid();
         <li style="border-bottom: 1px solid #EFEFEF;padding: 5px 10px;">
             <small>
                 <?php echo elgg_view('output/url', array(
-                    'href'  => "my_activities",
+                    'href'  => "activities",
                     'class'  => 'pull-right',
                     'title' => elgg_echo('view_all'),
                     'text'  => elgg_echo('view_all'),

@@ -6047,6 +6047,7 @@ td.visible-print {
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.43);
   text-transform: uppercase;
   margin: 10px;
+  opacity: 1 !important;
 }
 .elgg-page-walledgarden .jumbotron .btn-primary:nth-child(2) {
   margin-left: 50px;
@@ -6649,7 +6650,9 @@ fieldset[disabled] .elgg-layout-one-column .elgg-main .content .elgg-head ul.elg
   font-size: 15px;
   letter-spacing: 1px;
   color: #9c9e9f;
-  background-color: #f7f7f7;
+  background-color: rgba(255, 255, 255, 0.35);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
   margin-right: 4px;
 }
 .elgg-layout-one-sidebar .elgg-main .elgg-htabs > li > a:hover,
@@ -6658,6 +6661,7 @@ fieldset[disabled] .elgg-layout-one-column .elgg-main .content .elgg-head ul.elg
 .elgg-layout-one-column .elgg-main .elgg-htabs > li > a:focus {
   color: #7d8081;
   border-bottom: 1px solid #FFF;
+  background-color: #fff;
 }
 .elgg-layout-one-sidebar .elgg-main .elgg-htabs > li > a > .badge,
 .elgg-layout-one-column .elgg-main .elgg-htabs > li > a > .badge {
@@ -7655,6 +7659,22 @@ form .elgg-module h3 {
 .modal-body {
   padding: 20px;
 }
+.modal-body:before,
+.modal-body:after {
+  content: " ";
+  display: table;
+}
+.modal-body:after {
+  clear: both;
+}
+.modal-body:before,
+.modal-body:after {
+  content: " ";
+  display: table;
+}
+.modal-body:after {
+  clear: both;
+}
 .modal-footer {
   text-align: right;
   border-top: 0px;
@@ -8467,10 +8487,21 @@ li.list-item:last-child {
   max-height: 35px;
   vertical-align: middle;
 }
+#navbar-sticky {
+  border-top: 0;
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+#navbar-sticky .navbar-collapse {
+  border: 0;
+}
 .navbar-blue {
   background: #32b4e5;
   margin-bottom: 0px;
   min-height: 33px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: 0;
 }
 .navbar-blue .pull-right {
   padding: 0;
@@ -11546,13 +11577,16 @@ h6,
   font-size: 15px;
   letter-spacing: 1px;
   color: #9c9e9f;
-  background-color: #f7f7f7;
+  background-color: rgba(255, 255, 255, 0.35);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
   margin-right: 4px;
 }
 .nav-tabs > li > a:hover,
 .nav-tabs > li > a:focus {
   color: #7d8081;
   border-bottom: 1px solid #FFF;
+  background-color: #fff;
 }
 .nav-tabs > li > a > .badge {
   display: inline-block;
