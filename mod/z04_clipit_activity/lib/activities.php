@@ -91,6 +91,7 @@ function activity_handle_profile_page($guid) {
     $params = array(
         'content'   => $content,
         'sidebar' => $sidebar,
+        'type'     => 'activity',
         'title'     => $activity->name,
         'title_style' => "background: #". $activity->color,
         'filter'    => '',
@@ -119,6 +120,7 @@ function activity_handle_groups_page($guid){
     $params = array(
         'content'   => $content,
         'filter'    => '',
+        'type'     => 'activity',
         'title'     => $title,
         'sub-title' => $activity->name,
         'title_style' => "background: #". $activity->color,

@@ -14,7 +14,10 @@
 
 $class = 'elgg-layout elgg-layout-one-sidebar clearfix';
 if (isset($vars['class'])) {
-	$class = "$class {$vars['class']}";
+	$class .= " {$vars['class']}";
+}
+if(!$vars['type']){
+    $class .= ' one-sidebar-default';
 }
 $title_style = "";
 if(isset($vars['title_style'])){
@@ -29,8 +32,30 @@ if($vars['sub-title']){
     $subtitle = "<h4>".$vars['sub-title']."</h4>";
 }
 ?>
-
+<!--<style>-->
+<!--    .elgg-layout-one-sidebar h2{-->
+<!--        margin-top: 0;-->
+<!--        margin-bottom: 25px;-->
+<!--    }-->
+<!--    .elgg-sidebar{-->
+<!--        margin-top: 0;-->
+<!--    }-->
+<!--    .elgg-sidebar .elgg-module-aside:nth-child(2) h4{-->
+<!--        margin-top: 0;-->
+<!--    }-->
+<!--</style>-->
 <div class="<?php echo $class; ?>">
+    <?php if (isset($vars['title']) && !$vars['type']):?>
+        <div class="clearfix main-title">
+            <div class="elgg-head-layout col-md-9" <?php echo $title_style;?>>
+                <?php echo $nav;?>
+                <?php echo $vars['special_header_content'];?>
+                <?php echo $subtitle;?>
+                <?php echo elgg_view_title($vars['title'], array('class' => 'text-truncate', 'title' => $vars['title']));?>
+           </div>
+            <div class="col-md-3"></div>
+        </div>
+    <?php endif;?>
 	<div class="elgg-sidebar col-md-push-9">
         <div class="visible-xs visible-sm text-right">
             <i class="fa fa-times btn text-muted" id="close-sidebar"></i>
@@ -42,7 +67,8 @@ if($vars['sub-title']){
 	</div>
 
 	<div class="elgg-main elgg-body col-md-pull-3 col-md-9">
-        <?php
+        <?php if($vars['type'] == 'activity'):?>
+            <?php
             if (isset($vars['title'])) {
                 echo "<div class='elgg-head-layout' {$title_style}>
                         {$nav}
@@ -51,7 +77,8 @@ if($vars['sub-title']){
                         ".elgg_view_title($vars['title'], array('class' => 'text-truncate', 'title' => $vars['title']))."
                        </div>";
             }
-        ?>
+            ?>
+        <?php endif;?>
         <?php echo $filter; ?>
         <div class="content">
 		<?php

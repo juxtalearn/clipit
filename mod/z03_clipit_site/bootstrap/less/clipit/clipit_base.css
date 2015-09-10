@@ -6276,6 +6276,19 @@ td.visible-print {
 .elgg-layout-one-column:after {
   clear: both;
 }
+.elgg-layout-one-sidebar.one-sidebar-default .main-title h2,
+.elgg-layout-one-column.one-sidebar-default .main-title h2 {
+  margin-top: 0;
+  margin-bottom: 25px;
+}
+.elgg-layout-one-sidebar.one-sidebar-default .elgg-sidebar,
+.elgg-layout-one-column.one-sidebar-default .elgg-sidebar {
+  margin-top: 0;
+}
+.elgg-layout-one-sidebar.one-sidebar-default .elgg-sidebar .elgg-module-aside:nth-child(2) h4,
+.elgg-layout-one-column.one-sidebar-default .elgg-sidebar .elgg-module-aside:nth-child(2) h4 {
+  margin-top: 0;
+}
 .elgg-layout-one-sidebar .elgg-main h2,
 .elgg-layout-one-column .elgg-main h2 {
   margin-top: 0;

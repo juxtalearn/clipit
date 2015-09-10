@@ -40,6 +40,7 @@ switch($selected_tab){
 $params = array(
     'content'   => $content,
     'filter'    => $filter,
+    'type' => 'activity',
     'class' => "activity-section activity-layout activity-admin-section",
     'title'     => $title,
     'sub-title' => $activity->name,

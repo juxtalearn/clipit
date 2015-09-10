@@ -468,6 +468,7 @@ function activity_page_handler($page) {
         $params = array(
             'content'   => $content,
             'title'     => $activity->name,
+            'type'     => 'activity',
             'title_style' => "background: #". $activity->color,
             'filter'    => '',
             'class'     => 'activity-profile activity-layout'
@@ -590,6 +591,7 @@ function activity_page_handler($page) {
     if(!$params['class']){
         $params['class'] = "activity-section activity-layout";
     }
+    $params['type'] = 'activity';
     if($activity_status != 'enrol'){
     $params['special_header_content'] = elgg_view('activity/status', array('entity' => $activity));
     }
