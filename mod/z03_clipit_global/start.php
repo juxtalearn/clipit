@@ -105,8 +105,6 @@ function clipit_global_init(){
 //        Debugging
         elgg_register_page_handler('public_activities', 'public_activities_global_section');
     }
-    elgg_register_page_handler('login', 'login_user_account_page_handler');
-
 
     $plugin_url = elgg_get_site_url() . "mod/z03_clipit_global";
     if (elgg_get_context() === "admin") {

@@ -11,6 +11,7 @@
     <label><?php echo elgg_echo('loginusername'); ?></label>
     <?php echo elgg_view('input/text', array(
         'autofocus' => true,
+        'required' => true,
         'name' => 'username',
         'class' => 'form-control input-lg',
     ));
@@ -21,7 +22,8 @@
     <?php echo elgg_view('input/password',
         array(
             'name' => 'password',
-            'class' => 'form-control input-lg'
+            'class' => 'form-control input-lg',
+            'required' => true,
         ));
     ?>
 </div>

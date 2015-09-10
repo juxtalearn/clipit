@@ -59,6 +59,7 @@ function clipit_final_init(){
     elgg_register_page_handler('forgotpassword', 'home_user_account_page_handler');
     elgg_register_page_handler('resetpassword', 'home_user_account_page_handler');
     elgg_register_page_handler('register', 'home_user_account_page_handler');
+    elgg_register_page_handler('login', 'home_user_account_page_handler');
 
     $plugin_url = elgg_get_site_url() . "mod/z03_clipit_site";
 
@@ -149,6 +150,9 @@ function home_user_account_page_handler($page_elements, $handler){
             break;
         case 'register':
             require_once("$base_dir/register.php");
+            break;
+        case 'login':
+            require_once("$base_dir/login.php");
             break;
         default:
             return false;
