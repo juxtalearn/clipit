@@ -24,6 +24,7 @@ if(count($video)==0){
 } elseif($unlink) {
     ClipitVideo::unlink_from_parent($id);
     ClipitTask::remove_videos(ClipitVideo::get_task($id), array($id));
+    ClipitVideo::delete_by_id(array($id));
     system_message(elgg_echo('video:deleted'));
 }
 
