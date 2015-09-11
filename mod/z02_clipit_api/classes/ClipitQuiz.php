@@ -205,6 +205,10 @@ class ClipitQuiz extends UBItem {
         return UBCollection::get_timestamp($id, $user_id, static::REL_QUIZ_USER);
     }
 
+    static function get_started_users($id){
+        return UBCollection::get_items($id, static::REL_QUIZ_USER);
+    }
+
     /**
      * Returns whether a user has finished a Quiz
      *
