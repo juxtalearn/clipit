@@ -130,7 +130,7 @@ if($owner_options){
     $remove_icon = 'trash-o';
     $remove_class = 'remove remove-object';
     if($locked) {
-        $remove_icon = 'lock';
+        $remove_icon = 'ban';
         $remove_class = false;
         $item_class = 'disabled';
     }
