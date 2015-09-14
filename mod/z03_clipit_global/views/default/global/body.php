@@ -60,7 +60,7 @@ $account = elgg_extract('accounts', $vars);
                 ));
                 ?>
                 <?php echo elgg_view('output/url', array(
-                    'href'  => "tricky_topics",
+                    'href'  => "trickytopics",
                     'class' => 'btn clipit-btn',
                     'text'  => elgg_echo('tricky_topics'),
                 ));
