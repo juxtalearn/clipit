@@ -162,7 +162,7 @@ class UBSite {
                 $object['subtype'] = (string)get_subtype_from_id($elgg_user->subtype);
                 return $object;
             } catch (Exception $e) {
-                throw new APIException("ERROR: Unidentified ID provided.");
+                return null;
             }
         }
     }
