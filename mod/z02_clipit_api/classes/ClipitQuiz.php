@@ -698,3 +698,4 @@ class ClipitQuiz extends UBItem {
         return $filename;
     }
 }
+
