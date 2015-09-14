@@ -1,0 +1,2081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>API Documentation</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">API Documentation</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">818</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">30</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">25</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-578350894"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-578350894" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/Exportable.html">Exportable</a></li>
+                                                    <li class="interface"><a href="../classes/Friendable.html">Friendable</a></li>
+                                                    <li class="interface"><a href="../classes/Importable.html">Importable</a></li>
+                                                    <li class="interface"><a href="../classes/Locatable.html">Locatable</a></li>
+                                                    <li class="interface"><a href="../classes/Loggable.html">Loggable</a></li>
+                                                    <li class="interface"><a href="../classes/Notable.html">Notable</a></li>
+                                                                                                    <li class="class"><a href="../classes/APIException.html">APIException</a></li>
+                                                    <li class="class"><a href="../classes/CallException.html">CallException</a></li>
+                                                    <li class="class"><a href="../classes/ClassException.html">ClassException</a></li>
+                                                    <li class="class"><a href="../classes/ClassNotFoundException.html">ClassNotFoundException</a></li>
+                                                    <li class="class"><a href="../classes/ClipitActivity.html">ClipitActivity</a></li>
+                                                    <li class="class"><a href="../classes/ClipitChat.html">ClipitChat</a></li>
+                                                    <li class="class"><a href="../classes/ClipitComment.html">ClipitComment</a></li>
+                                                    <li class="class"><a href="../classes/ClipitEvent.html">ClipitEvent</a></li>
+                                                    <li class="class"><a href="../classes/ClipitExample.html">ClipitExample</a></li>
+                                                    <li class="class"><a href="../classes/ClipitExampleType.html">ClipitExampleType</a></li>
+                                                    <li class="class"><a href="../classes/ClipitFile.html">ClipitFile</a></li>
+                                                    <li class="class"><a href="../classes/ClipitGroup.html">ClipitGroup</a></li>
+                                                    <li class="class"><a href="../classes/ClipitLA.html">ClipitLA</a></li>
+                                                    <li class="class"><a href="../classes/ClipitLabel.html">ClipitLabel</a></li>
+                                                    <li class="class"><a href="../classes/ClipitPerformanceItem.html">ClipitPerformanceItem</a></li>
+                                                    <li class="class"><a href="../classes/ClipitPerformanceRating.html">ClipitPerformanceRating</a></li>
+                                                    <li class="class"><a href="../classes/ClipitPost.html">ClipitPost</a></li>
+                                                    <li class="class"><a href="../classes/ClipitQuiz.html">ClipitQuiz</a></li>
+                                                    <li class="class"><a href="../classes/ClipitQuizQuestion.html">ClipitQuizQuestion</a></li>
+                                                    <li class="class"><a href="../classes/ClipitQuizResult.html">ClipitQuizResult</a></li>
+                                                    <li class="class"><a href="../classes/ClipitRating.html">ClipitRating</a></li>
+                                                    <li class="class"><a href="../classes/ClipitRemoteSite.html">ClipitRemoteSite</a></li>
+                                                    <li class="class"><a href="../classes/ClipitRemoteTrickyTopic.html">ClipitRemoteTrickyTopic</a></li>
+                                                    <li class="class"><a href="../classes/ClipitRemoteVideo.html">ClipitRemoteVideo</a></li>
+                                                    <li class="class"><a href="../classes/ClipitResource.html">ClipitResource</a></li>
+                                                    <li class="class"><a href="../classes/ClipitSite.html">ClipitSite</a></li>
+                                                    <li class="class"><a href="../classes/ClipitStoryboard.html">ClipitStoryboard</a></li>
+                                                    <li class="class"><a href="../classes/ClipitTag.html">ClipitTag</a></li>
+                                                    <li class="class"><a href="../classes/ClipitTagRating.html">ClipitTagRating</a></li>
+                                                    <li class="class"><a href="../classes/ClipitTask.html">ClipitTask</a></li>
+                                                    <li class="class"><a href="../classes/ClipitTrickyTopic.html">ClipitTrickyTopic</a></li>
+                                                    <li class="class"><a href="../classes/ClipitUser.html">ClipitUser</a></li>
+                                                    <li class="class"><a href="../classes/ClipitVideo.html">ClipitVideo</a></li>
+                                                    <li class="class"><a href="../classes/ConfigurationException.html">ConfigurationException</a></li>
+                                                    <li class="class"><a href="../classes/CronException.html">CronException</a></li>
+                                                    <li class="class"><a href="../classes/DatabaseException.html">DatabaseException</a></li>
+                                                    <li class="class"><a href="../classes/DataFormatException.html">DataFormatException</a></li>
+                                                    <li class="class"><a href="../classes/ElggAccess.html">ElggAccess</a></li>
+                                                    <li class="class"><a href="../classes/ElggAnnotation.html">ElggAnnotation</a></li>
+                                                    <li class="class"><a href="../classes/ElggAttributeLoader.html">ElggAttributeLoader</a></li>
+                                                    <li class="class"><a href="../classes/ElggAutoP.html">ElggAutoP</a></li>
+                                                    <li class="class"><a href="../classes/ElggBatch.html">ElggBatch</a></li>
+                                                    <li class="class"><a href="../classes/ElggCache.html">ElggCache</a></li>
+                                                    <li class="class"><a href="../classes/ElggData.html">ElggData</a></li>
+                                                    <li class="class"><a href="../classes/ElggDiskFilestore.html">ElggDiskFilestore</a></li>
+                                                    <li class="class"><a href="../classes/ElggEntity.html">ElggEntity</a></li>
+                                                    <li class="class"><a href="../classes/ElggExtender.html">ElggExtender</a></li>
+                                                    <li class="class"><a href="../classes/ElggFile.html">ElggFile</a></li>
+                                                    <li class="class"><a href="../classes/ElggFileCache.html">ElggFileCache</a></li>
+                                                    <li class="class"><a href="../classes/ElggFilestore.html">ElggFilestore</a></li>
+                                                    <li class="class"><a href="../classes/ElggGroup.html">ElggGroup</a></li>
+                                                    <li class="class"><a href="../classes/ElggGroupItemVisibility.html">ElggGroupItemVisibility</a></li>
+                                                    <li class="class"><a href="../classes/ElggHMACCache.html">ElggHMACCache</a></li>
+                                                    <li class="class"><a href="../classes/ElggLRUCache.html">ElggLRUCache</a></li>
+                                                    <li class="class"><a href="../classes/ElggMemcache.html">ElggMemcache</a></li>
+                                                    <li class="class"><a href="../classes/ElggMenuBuilder.html">ElggMenuBuilder</a></li>
+                                                    <li class="class"><a href="../classes/ElggMenuItem.html">ElggMenuItem</a></li>
+                                                    <li class="class"><a href="../classes/ElggMetadata.html">ElggMetadata</a></li>
+                                                    <li class="class"><a href="../classes/ElggObject.html">ElggObject</a></li>
+                                                    <li class="class"><a href="../classes/ElggPAM.html">ElggPAM</a></li>
+                                                    <li class="class"><a href="../classes/ElggPlugin.html">ElggPlugin</a></li>
+                                                    <li class="class"><a href="../classes/ElggPluginManifest.html">ElggPluginManifest</a></li>
+                                                    <li class="class"><a href="../classes/ElggPluginManifestParser.html">ElggPluginManifestParser</a></li>
+                                                    <li class="class"><a href="../classes/ElggPluginManifestParser17.html">ElggPluginManifestParser17</a></li>
+                                                    <li class="class"><a href="../classes/ElggPluginManifestParser18.html">ElggPluginManifestParser18</a></li>
+                                                    <li class="class"><a href="../classes/ElggPluginPackage.html">ElggPluginPackage</a></li>
+                                                    <li class="class"><a href="../classes/ElggPriorityList.html">ElggPriorityList</a></li>
+                                                    <li class="class"><a href="../classes/ElggRelationship.html">ElggRelationship</a></li>
+                                                    <li class="class"><a href="../classes/ElggRiverItem.html">ElggRiverItem</a></li>
+                                                    <li class="class"><a href="../classes/ElggSession.html">ElggSession</a></li>
+                                                    <li class="class"><a href="../classes/ElggSharedMemoryCache.html">ElggSharedMemoryCache</a></li>
+                                                    <li class="class"><a href="../classes/ElggSite.html">ElggSite</a></li>
+                                                    <li class="class"><a href="../classes/ElggStaticVariableCache.html">ElggStaticVariableCache</a></li>
+                                                    <li class="class"><a href="../classes/ElggTranslit.html">ElggTranslit</a></li>
+                                                    <li class="class"><a href="../classes/ElggUser.html">ElggUser</a></li>
+                                                    <li class="class"><a href="../classes/ElggVolatileMetadataCache.html">ElggVolatileMetadataCache</a></li>
+                                                    <li class="class"><a href="../classes/ElggWidget.html">ElggWidget</a></li>
+                                                    <li class="class"><a href="../classes/ElggXMLElement.html">ElggXMLElement</a></li>
+                                                    <li class="class"><a href="../classes/ErrorResult.html">ErrorResult</a></li>
+                                                    <li class="class"><a href="../classes/ExportException.html">ExportException</a></li>
+                                                    <li class="class"><a href="../classes/GenericResult.html">GenericResult</a></li>
+                                                    <li class="class"><a href="../classes/ImportException.html">ImportException</a></li>
+                                                    <li class="class"><a href="../classes/IncompleteEntityException.html">IncompleteEntityException</a></li>
+                                                    <li class="class"><a href="../classes/InstallationException.html">InstallationException</a></li>
+                                                    <li class="class"><a href="../classes/InvalidClassException.html">InvalidClassException</a></li>
+                                                    <li class="class"><a href="../classes/InvalidParameterException.html">InvalidParameterException</a></li>
+                                                    <li class="class"><a href="../classes/IOException.html">IOException</a></li>
+                                                    <li class="class"><a href="../classes/LoginException.html">LoginException</a></li>
+                                                    <li class="class"><a href="../classes/NotificationException.html">NotificationException</a></li>
+                                                    <li class="class"><a href="../classes/NotImplementedException.html">NotImplementedException</a></li>
+                                                    <li class="class"><a href="../classes/ODD.html">ODD</a></li>
+                                                    <li class="class"><a href="../classes/ODDDocument.html">ODDDocument</a></li>
+                                                    <li class="class"><a href="../classes/ODDEntity.html">ODDEntity</a></li>
+                                                    <li class="class"><a href="../classes/ODDMetaData.html">ODDMetaData</a></li>
+                                                    <li class="class"><a href="../classes/ODDRelationship.html">ODDRelationship</a></li>
+                                                    <li class="class"><a href="../classes/PluginException.html">PluginException</a></li>
+                                                    <li class="class"><a href="../classes/RegistrationException.html">RegistrationException</a></li>
+                                                    <li class="class"><a href="../classes/SecurityException.html">SecurityException</a></li>
+                                                    <li class="class"><a href="../classes/SuccessResult.html">SuccessResult</a></li>
+                                                    <li class="class"><a href="../classes/UBCollection.html">UBCollection</a></li>
+                                                    <li class="class"><a href="../classes/UBEvent.html">UBEvent</a></li>
+                                                    <li class="class"><a href="../classes/UBFile.html">UBFile</a></li>
+                                                    <li class="class"><a href="../classes/UBItem.html">UBItem</a></li>
+                                                    <li class="class"><a href="../classes/UBMessage.html">UBMessage</a></li>
+                                                    <li class="class"><a href="../classes/UBSite.html">UBSite</a></li>
+                                                    <li class="class"><a href="../classes/UBUser.html">UBUser</a></li>
+                                                    <li class="class"><a href="../classes/XmlElement.html">XmlElement</a></li>
+                                                    <li class="class"><a href="../classes/XMLRPCArrayParameter.html">XMLRPCArrayParameter</a></li>
+                                                    <li class="class"><a href="../classes/XMLRPCBase64Parameter.html">XMLRPCBase64Parameter</a></li>
+                                                    <li class="class"><a href="../classes/XMLRPCBoolParameter.html">XMLRPCBoolParameter</a></li>
+                                                    <li class="class"><a href="../classes/XMLRPCCall.html">XMLRPCCall</a></li>
+                                                    <li class="class"><a href="../classes/XMLRPCDateParameter.html">XMLRPCDateParameter</a></li>
+                                                    <li class="class"><a href="../classes/XMLRPCDoubleParameter.html">XMLRPCDoubleParameter</a></li>
+                                                    <li class="class"><a href="../classes/XMLRPCErrorResponse.html">XMLRPCErrorResponse</a></li>
+                                                    <li class="class"><a href="../classes/XMLRPCIntParameter.html">XMLRPCIntParameter</a></li>
+                                                    <li class="class"><a href="../classes/XMLRPCParameter.html">XMLRPCParameter</a></li>
+                                                    <li class="class"><a href="../classes/XMLRPCResponse.html">XMLRPCResponse</a></li>
+                                                    <li class="class"><a href="../classes/XMLRPCStringParameter.html">XMLRPCStringParameter</a></li>
+                                                    <li class="class"><a href="../classes/XMLRPCStructParameter.html">XMLRPCStructParameter</a></li>
+                                                    <li class="class"><a href="../classes/XMLRPCSuccessResponse.html">XMLRPCSuccessResponse</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/default.html">\</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\</small>ElggAnnotation</h1>
+                    <p><em>Elgg Annotations</em></p>
+                    <p>Annotations allow you to attach bits of information to entities.
+They are essentially the same as metadata, but with additional
+helper functions.</p>
+                    
+                                        
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/ElggExtender.html#method_getOwnerGUID" class="">getOwnerGUID()</a><br />
+                                                                    <a href="../classes/ElggExtender.html#method_getOwner" class="deprecated">getOwner()</a><br />
+                                                                    <a href="../classes/ElggExtender.html#method_getOwnerEntity" class="">getOwnerEntity()</a><br />
+                                                                    <a href="../classes/ElggExtender.html#method_getEntity" class="">getEntity()</a><br />
+                                                                    <a href="../classes/ElggExtender.html#method_canEdit" class="">canEdit()</a><br />
+                                                                    <a href="../classes/ElggExtender.html#method_getExportableValues" class="">getExportableValues()</a><br />
+                                                                    <a href="../classes/ElggExtender.html#method_export" class="">export()</a><br />
+                                                                    <a href="../classes/ElggExtender.html#method_getSystemLogID" class="">getSystemLogID()</a><br />
+                                                                    <a href="../classes/ElggExtender.html#method_getType" class="">getType()</a><br />
+                                                                    <a href="../classes/ElggExtender.html#method_getSubtype" class="">getSubtype()</a><br />
+                                                                    <a href="../classes/ElggData.html#method___get" class="">__get()</a><br />
+                                                                    <a href="../classes/ElggData.html#method___set" class="">__set()</a><br />
+                                                                    <a href="../classes/ElggData.html#method___isset" class="">__isset()</a><br />
+                                                                    <a href="../classes/ElggAnnotation.html#method_getURL" class="">getURL()</a><br />
+                                                                    <a href="../classes/ElggAnnotation.html#method_save" class="">save()</a><br />
+                                                                    <a href="../classes/ElggAnnotation.html#method_delete" class="">delete()</a><br />
+                                                                    <a href="../classes/ElggData.html#method_getTimeCreated" class="">getTimeCreated()</a><br />
+                                                                    <a href="../classes/ElggData.html#method_getClassName" class="">getClassName()</a><br />
+                                                                    <a href="../classes/ElggData.html#method_getObjectOwnerGUID" class="deprecated">getObjectOwnerGUID()</a><br />
+                                                                    <a href="../classes/ElggData.html#method_rewind" class="">rewind()</a><br />
+                                                                    <a href="../classes/ElggData.html#method_current" class="">current()</a><br />
+                                                                    <a href="../classes/ElggData.html#method_key" class="">key()</a><br />
+                                                                    <a href="../classes/ElggData.html#method_next" class="">next()</a><br />
+                                                                    <a href="../classes/ElggData.html#method_valid" class="">valid()</a><br />
+                                                                    <a href="../classes/ElggData.html#method_offsetSet" class="">offsetSet()</a><br />
+                                                                    <a href="../classes/ElggData.html#method_offsetGet" class="">offsetGet()</a><br />
+                                                                    <a href="../classes/ElggData.html#method_offsetUnset" class="">offsetUnset()</a><br />
+                                                                    <a href="../classes/ElggData.html#method_offsetExists" class="">offsetExists()</a><br />
+                                                                    <a href="../classes/ElggAnnotation.html#method___construct" class="">__construct()</a><br />
+                                                                    <a href="../classes/ElggAnnotation.html#method_disable" class="">disable()</a><br />
+                                                                    <a href="../classes/ElggAnnotation.html#method_enable" class="">enable()</a><br />
+                                                                    <a href="../classes/ElggAnnotation.html#method_getObjectFromID" class="">getObjectFromID()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/ElggAnnotation.html#property_value_type" class="">$value_type</a><br />
+                                                                    <a href="../classes/ElggAnnotation.html#property_enabled" class="">$enabled</a><br />
+                                                                    <a href="../classes/ElggExtender.html#property_type" class="">$type</a><br />
+                                                                    <a href="../classes/ElggExtender.html#property_id" class="">$id</a><br />
+                                                                    <a href="../classes/ElggExtender.html#property_entity_guid" class="">$entity_guid</a><br />
+                                                                    <a href="../classes/ElggExtender.html#property_access_id" class="">$access_id</a><br />
+                                                                    <a href="../classes/ElggExtender.html#property_name" class="">$name</a><br />
+                                                                    <a href="../classes/ElggExtender.html#property_value" class="">$value</a><br />
+                                                                    <a href="../classes/ElggExtender.html#property_time_created" class="">$time_created</a><br />
+                                                                    <a href="../classes/ElggData.html#property_owner_guid" class="">$owner_guid</a><br />
+                                                                    <a href="../classes/ElggData.html#property_time_created" class="">$time_created</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No constants found</em>
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <a href="../classes/ElggAnnotation.html#method_initializeAttributes" class="">initializeAttributes()</a><br />
+                                                                    <a href="../classes/ElggData.html#method_get" class="">get()</a><br />
+                                                                    <a href="../classes/ElggData.html#method_set" class="">set()</a><br />
+                                                                    <a href="../classes/ElggData.html#method_initialise_attributes" class="deprecated">initialise_attributes()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/ElggData.html#property_attributes" class="">$attributes</a><br />
+                                                                    <a href="../classes/ElggData.html#property_valid" class="">$valid</a><br />
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <em>No private methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No private properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/engine.classes.ElggAnnotation.html"><div class="path-wrapper">engine/classes/ElggAnnotation.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">Elgg.Core\DataModel.Annotations</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                        <div class="namespace-wrapper"><a href="../classes/ElggData.html">\ElggData</a></div>
+                                                                    
+                                        <div class="namespace-wrapper"><a href="../classes/ElggExtender.html">\ElggExtender</a></div>
+                                                                                                    <div class="namespace-wrapper">\ElggAnnotation</div>
+                            </dd>
+
+                        
+                        
+                        
+                                                                            <dt>See also</dt>
+                                                                                    <dd><a href="http://docs.elgg.org/DataModel/Annotations"><div class="namespace-wrapper">http://docs.elgg.org/DataModel/Annotations</div></a></dd>
+                                                    
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr>
+                            <th>
+                                internal
+                            </th>
+                            <td>
+                                                                    <p>Annotations are stored in the annotations table.</p>
+                                                            </td>
+                        </tr>
+                                        </table>
+                </aside>
+            </div>
+
+                        
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_value_type" name="property_value_type" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$value_type</h3>
+                <pre class="signature">$value_type : string</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_enabled" name="property_enabled" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$enabled</h3>
+                <pre class="signature">$enabled : string</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_type" name="property_type" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$type</h3>
+                <pre class="signature">$type : string</pre>
+                <p><em></em></p>
+                <p>annotation or metadata (read-only after save)</p>
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggExtender.html"><div class="path-wrapper">\ElggExtender</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_id" name="property_id" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$id</h3>
+                <pre class="signature">$id : integer</pre>
+                <p><em></em></p>
+                <p>The unique identifier (read-only)</p>
+
+                                <h4>Type</h4>
+                integer
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggExtender.html"><div class="path-wrapper">\ElggExtender</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_entity_guid" name="property_entity_guid" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$entity_guid</h3>
+                <pre class="signature">$entity_guid : integer</pre>
+                <p><em></em></p>
+                <p>The GUID of the entity that this extender describes</p>
+
+                                <h4>Type</h4>
+                integer
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggExtender.html"><div class="path-wrapper">\ElggExtender</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_access_id" name="property_access_id" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$access_id</h3>
+                <pre class="signature">$access_id : integer</pre>
+                <p><em></em></p>
+                <p>Specifies the visibility level of this extender</p>
+
+                                <h4>Type</h4>
+                integer
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggExtender.html"><div class="path-wrapper">\ElggExtender</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_name" name="property_name" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$name</h3>
+                <pre class="signature">$name : string</pre>
+                <p><em></em></p>
+                <p>The name of this extender</p>
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggExtender.html"><div class="path-wrapper">\ElggExtender</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_value" name="property_value" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$value</h3>
+                <pre class="signature">$value : mixed</pre>
+                <p><em></em></p>
+                <p>The value of the extender (int or string)</p>
+
+                                <h4>Type</h4>
+                mixed
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggExtender.html"><div class="path-wrapper">\ElggExtender</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_time_created" name="property_time_created" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$time_created</h3>
+                <pre class="signature">$time_created : integer</pre>
+                <p><em></em></p>
+                <p>A UNIX timestamp of when the extender was created (read-only, set on first save)</p>
+
+                                <h4>Type</h4>
+                integer
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggExtender.html"><div class="path-wrapper">\ElggExtender</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_owner_guid" name="property_owner_guid" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$owner_guid</h3>
+                <pre class="signature">$owner_guid : integer</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                integer
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggData.html"><div class="path-wrapper">\ElggData</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_time_created" name="property_time_created" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$time_created</h3>
+                <pre class="signature">$time_created : integer</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                integer
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggData.html"><div class="path-wrapper">\ElggData</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_attributes" name="property_attributes" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$attributes</h3>
+                <pre class="signature">$attributes : </pre>
+                <p><em>The main attributes of an entity.</em></p>
+                <p>Holds attributes to save to database
+This contains the site's main properties (id, etc)
+Blank entries for all database fields should be created by the constructor.
+Subclasses should add to this in their constructors.
+Any field not appearing in this will be viewed as a</p>
+
+                                <h4>Type</h4>
+                
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggData.html"><div class="path-wrapper">\ElggData</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_valid" name="property_valid" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$valid</h3>
+                <pre class="signature">$valid : </pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggData.html"><div class="path-wrapper">\ElggData</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getOwnerGUID" name="method_getOwnerGUID" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getOwnerGUID()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getOwnerGUID() : integer</pre>
+                <p><em>Get the GUID of the extender&#039;s owner entity.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    integer
+                                            &mdash; <p>The owner GUID</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggExtender.html"><div class="path-wrapper">\ElggExtender</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getOwner" name="method_getOwner" class="anchor"></a>
+            <article class="method">
+                <h3 class="public deprecated">getOwner()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getOwner() : integer</pre>
+                <p><em>Return the guid of the entity&#039;s owner.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    integer
+                                            &mdash; <p>The owner GUID</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                                <aside class="alert alert-block alert-error">
+                    <h4>Deprecated since 1.8</h4>
+                    Use getOwnerGUID
+                </aside>
+                        <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggExtender.html"><div class="path-wrapper">\ElggExtender</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getOwnerEntity" name="method_getOwnerEntity" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getOwnerEntity()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getOwnerEntity() : \ElggEntity</pre>
+                <p><em>Get the entity that owns this extender</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/ElggEntity.html">\ElggEntity</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggExtender.html"><div class="path-wrapper">\ElggExtender</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getEntity" name="method_getEntity" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getEntity()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getEntity() : \ElggEntity</pre>
+                <p><em>Get the entity this describes.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/ElggEntity.html">\ElggEntity</a>
+                                            &mdash; <p>The entity</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggExtender.html"><div class="path-wrapper">\ElggExtender</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_canEdit" name="method_canEdit" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">canEdit()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">canEdit(integer  <span class="argument">$user_guid</span>) : boolean</pre>
+                <p><em>Returns if a user can edit this extended data.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$user_guid </td>
+                                <td><p>The GUID of the user (defaults to currently logged in user)</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggExtender.html"><div class="path-wrapper">\ElggExtender</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getExportableValues" name="method_getExportableValues" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getExportableValues()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getExportableValues() : array</pre>
+                <p><em>Return an array of fields which can be exported.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggExtender.html"><div class="path-wrapper">\ElggExtender</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_export" name="method_export" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">export()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">export() : array</pre>
+                <p><em>Export this object</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggExtender.html"><div class="path-wrapper">\ElggExtender</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getSystemLogID" name="method_getSystemLogID" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getSystemLogID()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getSystemLogID() : integer</pre>
+                <p><em>Return an identification for the object for storage in the system log.</em></p>
+                <p>This id must be an integer.</p>
+
+                
+                
+                                    <h4>Returns</h4>
+                    integer
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggExtender.html"><div class="path-wrapper">\ElggExtender</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getType" name="method_getType" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getType()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getType() : string</pre>
+                <p><em>Return a type of extension.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggExtender.html"><div class="path-wrapper">\ElggExtender</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getSubtype" name="method_getSubtype" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getSubtype()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getSubtype() : string</pre>
+                <p><em>Return a subtype. For metadata &amp; annotations this is the &#039;name&#039; and
+for relationship this is the relationship type.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggExtender.html"><div class="path-wrapper">\ElggExtender</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___get" name="method___get" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">__get()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__get(string  <span class="argument">$name</span>) : mixed</pre>
+                <p><em>Return an attribute or a piece of metadata.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$name </td>
+                                <td><p>Name</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    mixed
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggData.html"><div class="path-wrapper">\ElggData</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___set" name="method___set" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">__set()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__set(string  <span class="argument">$name</span>, mixed  <span class="argument">$value</span>) : mixed</pre>
+                <p><em>Set an attribute or a piece of metadata.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$name </td>
+                                <td><p>Name</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$value </td>
+                                <td><p>Value</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    mixed
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggData.html"><div class="path-wrapper">\ElggData</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___isset" name="method___isset" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">__isset()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__isset(string  <span class="argument">$name</span>) : boolean</pre>
+                <p><em>Test if property is set either as an attribute or metadata.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$name </td>
+                                <td><p>The name of the attribute or metadata.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggData.html"><div class="path-wrapper">\ElggData</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            tip
+                        </th>
+                        <td>
+                                                                                            <p>Use isset($entity-&gt;property)</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getURL" name="method_getURL" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getURL()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getURL() : string</pre>
+                <p><em>Get a url for this annotation.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_save" name="method_save" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">save()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">save() : integer</pre>
+                <p><em>Save this instance</em></p>
+                
+
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\IOException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    integer
+                                            &mdash; <p>an object id</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_delete" name="method_delete" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">delete()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">delete() : boolean</pre>
+                <p><em>Delete the annotation.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getTimeCreated" name="method_getTimeCreated" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getTimeCreated()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getTimeCreated() : integer</pre>
+                <p><em>Returns the UNIX epoch time that this entity was created</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    integer
+                                            &mdash; <p>UNIX epoch time</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggData.html"><div class="path-wrapper">\ElggData</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getClassName" name="method_getClassName" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getClassName()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getClassName() : string</pre>
+                <p><em>Return the class name of the object.</em></p>
+                <p>Added as a function because get_class causes errors for some reason.</p>
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggData.html"><div class="path-wrapper">\ElggData</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getObjectOwnerGUID" name="method_getObjectOwnerGUID" class="anchor"></a>
+            <article class="method">
+                <h3 class="public deprecated">getObjectOwnerGUID()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getObjectOwnerGUID() : integer</pre>
+                <p><em>Return the GUID of the owner of this object.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    integer
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                                <aside class="alert alert-block alert-error">
+                    <h4>Deprecated since 1.8</h4>
+                    Use getOwnerGUID() instead
+                </aside>
+                        <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggData.html"><div class="path-wrapper">\ElggData</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_rewind" name="method_rewind" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">rewind()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">rewind() : void</pre>
+                <p><em>Iterator interface</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggData.html"><div class="path-wrapper">\ElggData</div></a></dd>
+                                                                            <dt>See also</dt>
+                                                                <dd><a href=""><span class="namespace-wrapper"></span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_current" name="method_current" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">current()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">current() : mixed</pre>
+                <p><em>Iterator interface</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    mixed
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggData.html"><div class="path-wrapper">\ElggData</div></a></dd>
+                                                                            <dt>See also</dt>
+                                                                <dd><a href=""><span class="namespace-wrapper"></span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_key" name="method_key" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">key()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">key() : string</pre>
+                <p><em>Iterator interface</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggData.html"><div class="path-wrapper">\ElggData</div></a></dd>
+                                                                            <dt>See also</dt>
+                                                                <dd><a href=""><span class="namespace-wrapper"></span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_next" name="method_next" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">next()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">next() : void</pre>
+                <p><em>Iterator interface</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggData.html"><div class="path-wrapper">\ElggData</div></a></dd>
+                                                                            <dt>See also</dt>
+                                                                <dd><a href=""><span class="namespace-wrapper"></span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_valid" name="method_valid" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">valid()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">valid() : boolean</pre>
+                <p><em>Iterator interface</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggData.html"><div class="path-wrapper">\ElggData</div></a></dd>
+                                                                            <dt>See also</dt>
+                                                                <dd><a href=""><span class="namespace-wrapper"></span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_offsetSet" name="method_offsetSet" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">offsetSet()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">offsetSet(mixed  <span class="argument">$key</span>, mixed  <span class="argument">$value</span>) : void</pre>
+                <p><em>Array access interface</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$key </td>
+                                <td><p>Name</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$value </td>
+                                <td><p>Value</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggData.html"><div class="path-wrapper">\ElggData</div></a></dd>
+                                                                            <dt>See also</dt>
+                                                                <dd><a href=""><span class="namespace-wrapper"></span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_offsetGet" name="method_offsetGet" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">offsetGet()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">offsetGet(mixed  <span class="argument">$key</span>) : mixed</pre>
+                <p><em>Array access interface</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$key </td>
+                                <td><p>Name</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    mixed
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggData.html"><div class="path-wrapper">\ElggData</div></a></dd>
+                                                                            <dt>See also</dt>
+                                                                <dd><a href=""><span class="namespace-wrapper"></span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_offsetUnset" name="method_offsetUnset" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">offsetUnset()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">offsetUnset(mixed  <span class="argument">$key</span>) : void</pre>
+                <p><em>Array access interface</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$key </td>
+                                <td><p>Name</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggData.html"><div class="path-wrapper">\ElggData</div></a></dd>
+                                                                            <dt>See also</dt>
+                                                                <dd><a href=""><span class="namespace-wrapper"></span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_offsetExists" name="method_offsetExists" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">offsetExists()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">offsetExists(integer  <span class="argument">$offset</span>) : integer</pre>
+                <p><em>Array access interface</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$offset </td>
+                                <td><p>Offset</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    integer
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggData.html"><div class="path-wrapper">\ElggData</div></a></dd>
+                                                                            <dt>See also</dt>
+                                                                <dd><a href=""><span class="namespace-wrapper"></span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___construct" name="method___construct" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">__construct()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__construct(mixed  <span class="argument">$id = null</span>) </pre>
+                <p><em>Construct a new annotation object</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$id </td>
+                                <td><p>The annotation ID or a database row as stdClass object</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_disable" name="method_disable" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">disable()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">disable() : boolean</pre>
+                <p><em>Disable the annotation.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            1.8                                
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_enable" name="method_enable" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">enable()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">enable() : boolean</pre>
+                <p><em>Enable the annotation.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            since
+                        </th>
+                        <td>
+                                                            1.8                                
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getObjectFromID" name="method_getObjectFromID" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getObjectFromID()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getObjectFromID(integer  <span class="argument">$id</span>) : \ElggAnnotation</pre>
+                <p><em>For a given ID, return the object associated with it.</em></p>
+                <p>This is used by the river functionality primarily.
+This is useful for checking access permissions etc on objects.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$id </td>
+                                <td><p>An annotation ID.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/ElggAnnotation.html">\ElggAnnotation</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_initializeAttributes" name="method_initializeAttributes" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">initializeAttributes()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">initializeAttributes() : void</pre>
+                <p><em>(non-PHPdoc)</em></p>
+                <p>This is vital to distinguish between metadata and base parameters.</p>
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href="../classes/ElggData.html#method_initializeAttributes"><span class="namespace-wrapper"></span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_get" name="method_get" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">get()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">get(string  <span class="argument">$name</span>) : mixed</pre>
+                <p><em>Fetch the specified attribute</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$name </td>
+                                <td><p>The attribute to fetch</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    mixed
+                                            &mdash; <p>The attribute, if it exists.  Otherwise, null.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                        <span class="label label-info">abstract</span>
+                                                <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggData.html"><div class="path-wrapper">\ElggData</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_set" name="method_set" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">set()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">set(string  <span class="argument">$name</span>, mixed  <span class="argument">$value</span>) : boolean</pre>
+                <p><em>Set the specified attribute</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$name </td>
+                                <td><p>The attribute to set</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$value </td>
+                                <td><p>The value to set it to</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>The success of your set function?</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                        <span class="label label-info">abstract</span>
+                                                <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggData.html"><div class="path-wrapper">\ElggData</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_initialise_attributes" name="method_initialise_attributes" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected deprecated">initialise_attributes()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">initialise_attributes(boolean  <span class="argument">$pre18_api = true</span>) : void</pre>
+                <p><em>Initialise the attributes array.</em></p>
+                <p>This is vital to distinguish between metadata and base parameters.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>boolean</td>
+                                <td>$pre18_api </td>
+                                <td><p>Compatibility for subclassing in 1.7 -&gt; 1.8 change.
+Passing true (default) emits a deprecation notice.
+Passing false returns false.  Core constructors always pass false.
+Does nothing either way since attributes are initialized by the time
+this is called.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                                <aside class="alert alert-block alert-error">
+                    <h4>Deprecated since 1.8</h4>
+                    Use initializeAttributes()
+                </aside>
+                        <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/ElggData.html"><div class="path-wrapper">\ElggData</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">ElggAnnotation.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/engine/classes/ElggAnnotation.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on September 14th, 2015 at 01:01.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>
