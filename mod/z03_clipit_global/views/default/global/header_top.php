@@ -2,7 +2,7 @@
     <div class="container">
         <?php
         if (elgg_is_logged_in()): ?>
-            <div class="col-sm-3 col-md-3 pull-right">
+            <div class="col-sm-2 col-md-2 pull-right">
                 <?php echo elgg_view('search/search_box', array('class' => 'navbar-form navbar-right search-form')); ?>
             </div>
         <?php endif; ?>

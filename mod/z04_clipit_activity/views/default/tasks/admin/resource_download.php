@@ -17,7 +17,7 @@ $task = elgg_extract('task', $vars);
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active">
-            <a href="#students" aria-controls="students" role="tab" data-toggle="tab"><?php echo elgg_echo('students');?></a>
+            <a href="#students" aria-controls="students" role="tab" data-toggle="tab"><?php echo elgg_echo('students');?> (<?php echo count($students);?>)</a>
         </li>
         <li role="presentation">
             <a href="#resources" role="tab" data-toggle="tab"><?php echo elgg_echo('group:files');?></a>

@@ -66,7 +66,7 @@ $activities = ClipitActivity::get_by_id($activities);
         <?php endif;?>
         <div class="row">
             <?php foreach($activities as $activity):?>
-                <div class="col-md-6 margin-top-15">
+                <div class="col-md-12 margin-top-15">
                     <div class="pull-right">
                         <small class="activity-status status-<?php echo $activity->status;?>">
                             <strong><?php echo elgg_echo("status:".$activity->status);?></strong>

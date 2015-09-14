@@ -25,12 +25,18 @@ switch($type = get_input('type')){
         $questions = $quiz->quiz_question_array;
         $groups = ClipitGroup::get_by_id($groups);
         natural_sort_properties($groups, 'name');
+        $users_started = ClipitQuiz::get_started_users($quiz_id);
         foreach($groups as $group){
             $answered = 0;
             $correct = 0;
             $error = 0;
             $pending = 0;
+            $started = 0;
+
             foreach($group->user_array as $user_id) {
+                if(in_array($user_id, $users_started)){
+                    $started++;
+                }
                 foreach ($questions as $question_id) {
                     $result = ClipitQuizResult::get_from_question_user($question_id, $user_id);
                     if($result){
@@ -47,12 +53,26 @@ switch($type = get_input('type')){
             }
 
             $total = $correct+$error+$pending;
+            $total_started_users = $started.'/'.count($group->user_array);
+            $completed =  (round( ( (($answered) / ($total_started_users)) / count($questions) ), 2 ))*100;
+            $rating = (round((($correct)/$answered), 2))*100;
+            $success_class_started = $total_started_users >= 100 ? 'green' : '';
+            $success_class_completed = $completed >= 100 ? 'green' : '';
+            $success_class_rating = $rating >= 100 ? 'green' : '';
             $output[] = array(
-                'correct' => round(($correct*100)/$total)."%",
-                'answered' => elgg_echo('quiz:out_of:answered', array(
-                                $answered,
-                                count($questions)*count($group->user_array)
-                            ))
+                'answered' =>
+                    '<div>
+                        <strong class="pull-right '.$success_class_started.'">'.$total_started_users.'</strong>
+                        <span class="text-truncate" style="width: 100px;">'.elgg_echo('quiz:participants').'</span>
+                    </div>'.
+                    '<div>
+                        <strong class="pull-right '.$success_class_completed.'">'.$completed.'%</strong>
+                        <span class="text-truncate" style="width: 100px;">'.elgg_echo('quiz:progress').'</span>
+                    </div>'.
+                    '<div>
+                        <strong class="pull-right '.$success_class_rating.'">'.$rating.'%</strong>
+                        <span class="text-truncate" style="width: 100px;">'.elgg_echo('quiz:score').'</span>
+                    </div>'
             );
         }
         echo json_encode($output);

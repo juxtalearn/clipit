@@ -13,7 +13,7 @@
 ?>
 <div style="height: <?php echo $vars['height'];?>" class="wrapper separator loading-block">
     <div>
-        <i class="fa fa-spinner fa-spin blue-lighter" ></i>
+        <i class="fa fa-spinner fa-spin blue-lighter fa-3x" ></i>
         <h3 class="blue-lighter"><?php echo $vars['text'];?>...</h3>
     </div>
 </div>

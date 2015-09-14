@@ -24,8 +24,9 @@ if($input_prefix) {
 }
 
 $questions = array(1);
+
 if($entity = elgg_extract('entity', $vars)){
-    $tricky_topic = $entity->tricky_topic;
+    $tricky_topic = elgg_extract('tricky_topic', $vars);
     $questions = ClipitQuiz::get_quiz_questions($entity->id);
     echo elgg_view("input/hidden", array(
         'name' => $input_prefix.'[id]',
@@ -230,11 +231,79 @@ $(function(){
     ));
     ?>
 <!--    --><?php //if($tricky_topic):?>
-    <?php echo elgg_echo('or');?>
-    <a class="btn btn-border-blue btn-primary from-tags btn-xs"><?php echo elgg_echo('quiz:select:from_tag');?></a>
+    <a class="btn btn-border-blue btn-primary from-tags btn-sm margin-left-10">
+        <?php echo elgg_echo('quiz:select:from_tag');?>
+    </a>
     <div class="dynamic-table margin-top-20" style="display: none;">
         <i class="fa fa-spinner fa-spin blue fa-lg"></i>
     </div>
 <!--    --><?php //endif;?>
 </div>
 </div>
+<style>
+    input[type=radio]{
+    position:relative;
+    }
+    input[type=radio]:after{
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        width: 13px;
+        height: 13px;
+        border: 4px solid transparent;
+        transition: all 0.2s;
+        -webkit-transition: all 0.2s;
+        z-index: 4;
+        border: 1px solid #cfd9db;
+        background: #ffffff;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.08);
+    }
+    input[type=radio]:checked:after {
+        opacity: 1;
+        border-color: #32b4e5;
+        border-width: 4px;
+        background-color: #fff;
+    }
+    input[type=radio][disabled]:checked:after{
+        border-color: #cfd9db;
+    }
+
+    input[type=checkbox]{
+        position:relative;
+        outline: 0 !important;
+    }
+
+    input[type=checkbox]:after{
+        content: "";
+        font-family: FontAwesome;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 12px;
+        font-size: 10px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+
+        position: absolute;
+        border-radius: 3px;
+        width: 13px;
+        height: 13px;
+        border: 4px solid transparent;
+        transition: all 0.2s;
+        z-index: 4;
+        border: 1px solid #cfd9db;
+        color: #fff;
+        background: #fff;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.08);
+    }
+    input[type=checkbox]:checked:after {
+        content: "\f00c";
+        opacity: 1;
+
+        padding-left: 0.5px;
+
+        box-shadow: none;
+        border-color: #32b4e5;
+        border-width: 1px;
+        background-color: #32b4e5;
+    }
+</style>

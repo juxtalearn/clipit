@@ -27,6 +27,7 @@ $tt = array_diff($tt, $owner_tt);
 
 <?php echo elgg_view('activity/admin/tasks/quiz/quiz', array(
     'entity' => $quiz,
+    'tricky_topic' => $quiz->tricky_topic,
     'select_tricky_topic' => array('owner' => $owner_tt, 'others' => $tt)
 ));?>
 <div class="text-right margin-top-20">

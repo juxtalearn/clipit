@@ -49,7 +49,7 @@ natural_sort_properties($groups, 'name');
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active">
-            <a href="#groups" aria-controls="groups" role="tab" data-toggle="tab"><?php echo elgg_echo('groups');?></a>
+            <a href="#groups" aria-controls="groups" role="tab" data-toggle="tab"><?php echo elgg_echo('groups');?> (<?php echo count($groups);?>)</a>
         </li>
         <li role="presentation">
             <a href="#items" role="tab" data-toggle="tab">

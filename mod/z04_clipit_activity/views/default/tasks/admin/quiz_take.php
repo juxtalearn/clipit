@@ -68,11 +68,11 @@ elgg_load_js('jquery:chartjs');
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
         <li role="presentation">
-            <a href="#students" aria-controls="profile" role="tab" data-toggle="tab"><?php echo elgg_echo('students');?></a>
+            <a href="#students" aria-controls="profile" role="tab" data-toggle="tab"><?php echo elgg_echo('students');?> (<?php echo count($users);?>)</a>
         </li>
         <?php if($groups):?>
         <li role="presentation">
-            <a href="#groups" aria-controls="groups" role="tab" data-toggle="tab"><?php echo elgg_echo('groups');?></a>
+            <a href="#groups" aria-controls="groups" role="tab" data-toggle="tab"><?php echo elgg_echo('groups');?> (<?php echo count($groups);?>)</a>
         </li>
         <?php endif;?>
         <li role="presentation">
@@ -156,11 +156,10 @@ elgg_load_js('jquery:chartjs');
                 <li class="list-item" data-entity="<?php echo $group->id;?>">
                     <div class="pull-right">
                         <i class="fa fa-spinner fa-spin blue loading"></i>
-                        <div class="margin-right-10 inline-block status text-muted">
+                        <div class="margin-right-20 inline-block status text-muted">
                             <small class="msg-not-finished hidden-xs"></small>
-                            <div class="counts " style="display: none;">
-                                <span class="answered"></span> -
-                                <i class="fa fa-check green"></i> <strong class="a-correct">-</strong>
+                            <div class="counts" style="display: none;width: 150px;">
+                                <small class="answered"></small>
                             </div>
                         </div>
                         <span class="pull-right">

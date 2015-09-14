@@ -94,7 +94,7 @@ $(function(){
     </ul>
     <div class="col-md-10" style="border-left: 1px solid #bae6f6;padding: 0px 10px;">
         <div class="multimedia-list">
-            <p id="attach-loading"><span><i class="fa fa-spinner fa-spin"></i></span></p>
+            <p id="attach-loading"><span><i class="fa fa-spinner fa-spin fa-3x blue-lighter"></i></span></p>
         </div>
     </div>
 </div>

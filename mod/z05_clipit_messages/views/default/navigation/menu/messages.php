@@ -22,7 +22,7 @@ $unread_count = ClipitChat::get_inbox_unread($user_id);
     </a>
     <ul id="menu_messages" class="dropdown-menu" role="menu" aria-labelledby="messages">
         <li class="loading">
-            <a><i class="fa fa-spinner fa-spin"></i> <?php echo elgg_echo('loading');?></a>
+            <a><i class="fa fa-spinner fa-spin margin-right-5"></i> <?php echo elgg_echo('loading');?></a>
         </li>
     </ul>
 </li>

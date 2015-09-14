@@ -94,8 +94,15 @@ clipit.tinymce.init = function(id){
                 $(".mce-i-italic").addClass("fa-italic");
                 $(".mce-i-bold").addClass("fa-bold");
             });
+
             ed.on('change', function(e) {
                 tinyMCE.triggerSave();
+            });
+            ed.on('focus', function(e) {
+                $(ed.editorContainer).addClass('focused');
+            });
+            ed.on('blur', function(e) {
+                $(ed.editorContainer).removeClass('focused');
             });
         },
         convert_urls: true,

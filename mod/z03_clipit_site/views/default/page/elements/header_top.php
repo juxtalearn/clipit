@@ -3,7 +3,7 @@ $site = elgg_get_site_entity();
 ?>
 <nav class="navbar navbar-default navbar-static-top navbar-blue" role="navigation">
     <div class="container">
-        <h2 class="white pull-left site-title hidden-xs"><?php echo $site->name;?></h2>
+        <h2 class="white pull-left site-title hidden-xs hidden-sm"><?php echo $site->name;?></h2>
         <?php echo elgg_view('output/url', array(
             'href' => "/",
             'class' => 'navbar-brand visible-xs visible-sm',
@@ -17,20 +17,12 @@ $site = elgg_get_site_entity();
         ?>
         <?php
         if (elgg_is_logged_in()): ?>
-        <div class="col-md-3 pull-right">
+        <div class="col-md-2 pull-right">
             <?php echo elgg_view('search/search_box', array('class' => 'navbar-form navbar-right search-form')); ?>
         </div>
         <?php elseif(!$vars['walled_garden']): ?>
         <div class="navbar-text navbar-left lang">
-            <div class="lang-horizontal">
-            <?php echo elgg_view('output/url', array(
-                'href'  => "/",
-                'title' => elgg_echo('back'),
-                'text'  => '<i class="fa fa-chevron-left"></i> '. elgg_echo('back'),
-                'class' => 'active back-top',
-            ));
-            ?>
-            </div>
+            <div class="lang-horizontal"></div>
         </div>
         <?php endif; ?>
         <?php
@@ -63,9 +55,6 @@ $site = elgg_get_site_entity();
                                 'text'  => $language,
                             ));
                             echo '</li>';
-//                            if(end($installed_langs) != $language){
-//                                echo '<span class="divider">|</span>';
-//                            }
                         endforeach;
                         ?>
                     </ul>
@@ -81,7 +70,7 @@ $site = elgg_get_site_entity();
                     ?>
                 <?php endif;?>
             </div>
-            <div class="hidden-xs hidden-sm lang-horizontal">
+            <div class="hidden-xs hidden-sm lang-horizontal margin-right-15">
             <?php
 //            $installed_langs = get_installed_translations();
             $installed_langs = array(

@@ -505,7 +505,7 @@ clipit.task.admin.quiz.onShowTab = function(e){
                     } else {
                         container.eq(i).find(".counts").show();
                         container.eq(i).find(".a-correct").text(data.correct);
-                        container.eq(i).find(".answered").text(data.answered);
+                        container.eq(i).find(".answered").html(data.answered);
                     }
                 });
             }

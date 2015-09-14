@@ -19,6 +19,7 @@ $input_array = elgg_extract('input_array', $vars);
     echo elgg_view('activity/admin/tasks/quiz/quiz', array(
         'entity' => array_pop(ClipitQuiz::get_by_id(array($entity->quiz))),
         'activity_id' => $entity->activity,
+        'tricky_topic' => ClipitActivity::get_tricky_topic($entity->activity),
         'input_prefix' => "task{$input_array}"
     ));
     ?>

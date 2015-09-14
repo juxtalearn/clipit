@@ -100,17 +100,25 @@
   // Top navbar form button
   .navbar-form{
     padding: 0;
-    margin: 5px 15px 5px 15px;
     border-top: 0;
     border-bottom: 0;
     border-bottom: 0;
-
+    margin: 5px 0;
+    .input-group{
+      border: 1px solid transparent;
+      background: #fff;
+      border-radius: 2px;
+    }
     .form-control{
       height: 23px;
       border-radius: 0px;
       .box-shadow(none);
       padding-top: 0;
       padding-bottom: 0;
+      border: 0;
+      &:focus{
+        border: 0 !important;
+      }
     }
     .input-group-btn button[type=submit]{
       background: #fff;
