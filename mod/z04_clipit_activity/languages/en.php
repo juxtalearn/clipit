@@ -333,6 +333,7 @@ $english = array(
     'task:file_upload' => 'Add file',
     'task:file_uploaded' => 'Dateien uploaded',
     'task:quiz_answer' => 'Take quiz',
+    'task:quiz_take' => 'Take quiz',
     'task:quiz_take:select' => 'You must select a Quiz. <br>(If there are no Quizzes for the tricky topic, you must add one first)',
     'quiz:result:finish' => '',
     'task:video_feedback' => 'Video feedback',
