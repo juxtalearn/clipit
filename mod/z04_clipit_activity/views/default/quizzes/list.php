@@ -18,8 +18,6 @@ $user_id = elgg_extract("user_id" ,$vars);
 $finished = elgg_extract("finished" ,$vars);
 $finished_task = elgg_extract("finished_task" ,$vars);
 
-// if teacher set random questions
-// shuffle($questions);
 $quiz_start = ClipitQuiz::get_quiz_start($quiz->id, $user_id);
 if(!$quiz_start && !$finished_task){
     ClipitQuiz::set_quiz_start($quiz->id, elgg_get_logged_in_user_guid());
@@ -50,7 +48,7 @@ $count_answer = ClipitQuiz::questions_answered_by_user($quiz->id, $user_id);
 </style>
 
 <script>
-<?php if(!$finished && $quiz->max_time > 0):?>
+<?php if(!$finished && $quiz->max_time > 0): ?>
 
     var eventTime= <?php echo $quiz_start + $quiz->max_time?>, // Timestamp - Sun, 21 Apr 2013 13:00:00 GMT
         currentTime = <?php echo time()?>, // Time()
@@ -60,6 +58,7 @@ $count_answer = ClipitQuiz::questions_answered_by_user($quiz->id, $user_id);
         days = '',
         hours = '',
         d;
+
     countdown = setInterval(function(){
         duration = moment.duration(duration - interval, 'milliseconds');
         if(duration - interval <= 0){
@@ -69,12 +68,13 @@ $count_answer = ClipitQuiz::questions_answered_by_user($quiz->id, $user_id);
             return false;
         }
         d = new Date(duration-interval);
-        if(duration.days()){
-            days = moment(d).format('DD') + "d ";
-        } else if(duration.hours()){
-            hours = moment.utc(d).format('HH') + "h ";
+        if(duration.days()) {
+            days = (duration.days() < 9 ? '0'+duration.days() : duration.days()) + "d ";
         }
-        $('.countdown').text(days + hours + moment.utc(d).format('mm') + "m " + moment.utc(d).format('ss') + "s");
+        if(duration.hours()){
+            hours = moment.utc(duration.asMilliseconds()).format('HH') + "h ";
+        }
+        $('.countdown').text(days + hours + moment.utc(duration.asMilliseconds()).format('mm') + "m " + moment.utc(duration.asMilliseconds()).format('ss') + "s");
     }, interval);
 
 <?php endif;?>
