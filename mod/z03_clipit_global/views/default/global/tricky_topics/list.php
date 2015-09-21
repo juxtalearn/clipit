@@ -55,7 +55,7 @@ foreach($entities as $entity):
                     <?php echo elgg_view('output/url', array(
                         'href' => "videos/search?by=trickytopic&id=".$entity->id,
                         'title' => 'Ver videos',
-                        'text'  => '<i class="fa fa-youtube-play"></i> '.'Videos relacionados'
+                        'text'  => '<i class="fa fa-youtube-play"></i> '.elgg_echo('videos:related')
                     ));
                     ?>
 <!--                    --><?php //echo elgg_view('output/url', array(
