@@ -126,6 +126,21 @@ class ClipitQuizQuestion extends UBItem {
         return static::get_by_id($quiz_question_ids);
     }
 
+    static function get_by_tag($tag_array){
+        $return_array = array();
+        $all_items = static::get_all(0, 0, "", true, true); // Get only item ids, not objects
+        foreach ($all_items as $item_id) {
+            $item_tags = (array)static::get_tags((int)$item_id);
+            foreach ($tag_array as $search_tag) {
+                if (in_array($search_tag, $item_tags)) {
+                    $return_array[(int)$item_id] = new static((int)$item_id);
+                    break;
+                }
+            }
+        }
+        return $return_array;
+    }
+
     /**
      * Get the image ID (ClipitFile) linked to a Quiz Question
      *
