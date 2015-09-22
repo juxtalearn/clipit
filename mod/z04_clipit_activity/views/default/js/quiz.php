@@ -487,7 +487,8 @@ clipit.task.admin.quiz.printData = function (){
 
 clipit.task.admin.quiz.onShowTab = function(e){
     var id = $(this).attr('href'),
-        container = $(id).find('li');
+        //container = $(id).find('li');
+        container = $(id).find('li.list-item');
     if(container.find('.status').is(':hidden')) {
         elgg.get("ajax/view/quizzes/admin/results", {
             dataType: "json",
