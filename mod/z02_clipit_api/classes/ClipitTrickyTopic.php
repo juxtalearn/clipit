@@ -27,9 +27,10 @@ class ClipitTrickyTopic extends UBItem {
     const EDUCATION_LEVEL_PRIMARY = "primary";
     const EDUCATION_LEVEL_GCSE = "gcse";
     const EDUCATION_LEVEL_ALEVEL = "alevel";
-    const EDUCATION_LEVEL_VOCATIONAL = "vocational";
     const EDUCATION_LEVEL_UNIVERSITY = "university";
     const EDUCATION_LEVEL_SPECIAL = "special";
+    const EDUCATION_LEVEL_VOCATIONAL = "vocational";
+
     public $tag_array = array();
     public $subject = "";
     public $education_level = ""; // one of the EDUCATION_LEVEL_* constants
