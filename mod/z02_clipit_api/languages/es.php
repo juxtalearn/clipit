@@ -4,8 +4,8 @@
 
  */
 $spanish = array(
-    "student_option" => "¿Hacer estudiante a este usuario?",
-    "teacher_option" => "¿Hacer profesor a este usuario?",
+    "student_option" => "Usuario de tipo ESTUDIANTE",
+    "teacher_option" => "Usuario de tipo PROFESOR",
     // LA metrics names
     "metric:1" => "Métrica de Prueba",
 );
