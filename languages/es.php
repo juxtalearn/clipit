@@ -258,7 +258,7 @@ $spanish = array(
 	'loginusername' => "Usuario",
 	'password' => "Contraseña",
 	'passwordagain' => "Contraseña (nuevamente, para verificación)",
-	'admin_option' => "¿Hacer administrador a este usuario?",
+	'admin_option' => "Crear un usuario ADMINISTRADOR",
  
  /**
   * Access
