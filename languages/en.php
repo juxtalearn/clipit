@@ -258,7 +258,7 @@ $english = array(
 	'loginusername' => "Username or email",
 	'password' => "Password",
 	'passwordagain' => "Password (again for verification)",
-	'admin_option' => "Make this user an admin?",
+	'admin_option' => "Make this user an ADMIN",
 
 /**
  * Access
