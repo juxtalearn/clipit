@@ -478,8 +478,10 @@ clipit.task.admin.quiz.printData = function (){
             ).collapse('show');
         } else {
             if(i == total ){
+             setTimeout(function(){
                 $('.bootbox').modal('hide');
                 window.print();
+             }, 1000);
             }
         }
     });
