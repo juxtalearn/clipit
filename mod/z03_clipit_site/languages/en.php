@@ -6,7 +6,7 @@
 
 $english = array(
     'locale' => 'en_GB',
-
+    'profile:avatar:from' => '%s\'s avatar',
     'link:view:less' => 'View less',
     'read_more' => 'Read more',
     'read_less' => 'Less',

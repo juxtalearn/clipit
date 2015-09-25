@@ -24,7 +24,7 @@ if($vars['footer'] || $cancel_button || $ok_button){
     <div class="modal-dialog <?php echo $vars['dialog_class']; ?>">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="<?php echo elgg_echo('close');?>" aria-hidden="true">&times;</button>
                 <h3 class="modal-title"><?php echo $title; ?></h3>
             </div>
             <div class="modal-body"><?php echo $body; ?></div>

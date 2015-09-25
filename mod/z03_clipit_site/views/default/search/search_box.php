@@ -34,7 +34,7 @@ $display_query = htmlspecialchars($display_query, ENT_QUOTES, 'UTF-8', false);
 
 <form class="<?php echo $class; ?>" action="<?php echo elgg_get_site_url();?>explore/search" method="GET">
     <div class="input-group">
-        <input type="text" class="form-control" size="21" name="text" value="<?php echo $display_query; ?>" placeholder="<?php echo elgg_echo('search');?>" />
+        <input type="text" aria-label="<?php echo elgg_echo('search:btn');?>" class="form-control" size="21" name="text" value="<?php echo $display_query; ?>" placeholder="<?php echo elgg_echo('search');?>" />
         <input type="hidden" name="by" value="all" />
         <div class="input-group-btn">
             <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>

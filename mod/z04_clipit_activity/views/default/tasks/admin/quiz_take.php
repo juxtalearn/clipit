@@ -58,12 +58,6 @@ elgg_load_js('jquery:chartjs');
             'text'  => '<i class="fa fa-file-excel-o"></i> '.elgg_echo('download:excel'),
         ));
         ?>
-        <?php echo elgg_view('output/url', array(
-            'class' => 'print-data btn btn-xs btn-primary btn-border-blue',
-            'id' => 'print-results',
-            'text'  => '<i class="fa fa-print"></i> '.elgg_echo('print:results'),
-        ));
-        ?>
     </div>
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
@@ -82,17 +76,22 @@ elgg_load_js('jquery:chartjs');
     <!-- Tab panes -->
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane margin-top-10 active" id="students" style="padding: 10px;">
-          <?php
-              elgg_push_context('quizstudents');
-                $params = array(
-                'filter' => '',
-                'num_columns' => 1,
-                );
-                echo "<div class=\"learning_analytics_dashboard\">";
-                echo elgg_view_layout('la_widgets_quizresults', $params);
-                echo "</div>";
-                elgg_pop_context();
-            ?>
+            <div class="margin-bottom-20">
+                <?php echo elgg_view('output/url', array(
+                    'class' => 'print-data btn btn-xs btn-primary btn-border-blue pull-right',
+                    'id' => 'print-results',
+                    'text'  => '<i class="fa fa-print"></i> '.elgg_echo('print:results'),
+                ));
+                ?>
+                <?php echo elgg_view('output/url', array(
+                    'class' => 'btn btn-xs btn-primary btn-border-blue',
+                    'href' => '#compare-results-students',
+                    'data-toggle' => 'collapse',
+                    'text'  => '<i class="fa fa-bar-chart-o"></i> '.elgg_echo('quiz:result:compare'),
+                ));
+                ?>
+                <div class="collapse compare-results" id="compare-results-students" data-entity-type="students" style="padding: 10px 0;"></div>
+            </div>
             <ul>
             <?php
                 $students = ClipitUser::get_by_id($activity->student_array);
@@ -136,17 +135,22 @@ elgg_load_js('jquery:chartjs');
         </div>
         <?php if($groups):?>
         <div role="tabpanel" class="tab-pane margin-top-10" id="groups" style="padding: 10px;">
-            <?php
-            elgg_push_context('quizgroups');
-            $params = array(
-                'filter' => '',
-                'num_columns' => 1,
-            );
-            echo "<div class=\"learning_analytics_dashboard\">";
-            echo elgg_view_layout('la_widgets_quizresults', $params);
-            echo "</div>";
-            elgg_pop_context();
-            ?>
+            <div class="margin-bottom-20">
+                <?php echo elgg_view('output/url', array(
+                    'class' => 'print-data btn btn-xs btn-primary btn-border-blue pull-right',
+                    'id' => 'print-results',
+                    'text'  => '<i class="fa fa-print"></i> '.elgg_echo('print:results'),
+                ));
+                ?>
+                <?php echo elgg_view('output/url', array(
+                    'class' => 'btn btn-xs btn-primary btn-border-blue',
+                    'href' => '#compare-results-groups',
+                    'data-toggle' => 'collapse',
+                    'text'  => '<i class="fa fa-bar-chart-o"></i> '.elgg_echo('quiz:result:compare'),
+                ));
+                ?>
+                <div class="collapse compare-results" id="compare-results-groups" data-entity-type="groups" style="padding: 10px 0;"></div>
+            </div>
             <ul>
                 <?php
                 $groups = ClipitGroup::get_by_id($groups);
@@ -201,6 +205,14 @@ elgg_load_js('jquery:chartjs');
         </div>
         <?php endif;?>
         <div role="tabpanel" class="tab-pane margin-top-10" id="activity" style="padding: 10px;">
+            <div class="margin-bottom-20">
+                <?php echo elgg_view('output/url', array(
+                    'class' => 'print-data btn btn-xs btn-primary btn-border-blue pull-right',
+                    'id' => 'print-results',
+                    'text'  => '<i class="fa fa-print"></i> '.elgg_echo('print:results'),
+                ));
+                ?>
+            </div>
             <?php
             elgg_push_context('quizactivity');
             $params = array(

@@ -34,6 +34,7 @@ $english = array(
     'education_level:alevel' => 'A-Level',
     'education_level:vocational' => 'Vocational',
     'education_level:university' => 'University',
+    'education_level:special' => 'Special education',
     'example:create' => 'Create problem example',
     'example:created' => 'Problem example created',
     'example:edit' => 'Edit problem example',

@@ -26,6 +26,7 @@ $english = array(
     'quiz:view_page:list' => 'One page',
     'quiz:view_page:paged' => 'Paginated',
     'quiz:questions:none' => 'No questions',
+    'quiz:question:versions' => 'versions',
     'quiz:question:answers:select' => 'Check correct answers',
     'quiz:question:answer:select' => 'Check correct answer',
     'quiz:question:answer:write' => 'Write the correct answer',
@@ -47,6 +48,7 @@ $english = array(
     'quiz:print:alert' => 'Loading results, please wait...',
     'quiz:result:send' => 'Your answers have been saved. While there is time left to do the quiz, you can review and change your answers if you want to.',
     'quiz:result:finish' => 'If you click on Finish, you will no longer be able to change your answers, and you will see you\'re results.',
+    'quiz:result:compare' => 'Compare results',
     'quiz:out_of:answered' => '%s out of %s answered',
 );
 

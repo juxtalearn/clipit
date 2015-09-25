@@ -28,7 +28,7 @@ if($user_to){
 }
 $body .='
 <div class="form-group">
-    <label for="message-to">'.elgg_echo("message:to").'</label>
+    <label for="'.$input_id.'">'.elgg_echo("message:to").'</label>
     <div>
     '.elgg_view("input/text", array(
         'name' => 'message-to',

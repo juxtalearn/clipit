@@ -26,14 +26,13 @@ $input_prefix = elgg_extract('input_prefix', $vars);
     </label>
     <?php echo elgg_view('output/url', array(
         'href'  => "javascript:;",
-        'class' => 'fa fa-times red pull-right margin-top-10',
+        'class' => 'remove-answer fa fa-times red pull-right margin-top-10',
         'text'  => '',
-        'onclick' => '$(this).parent().remove();',
     ));
     ?>
     <?php echo elgg_view("input/text", array(
         'name' => $input_prefix.'[question]['.$id.'][select_one]['.$id_input.'][value]',
-        'class' => 'form-control inline-block',
+        'class' => 'form-control inline-block answer-result',
         'style' => 'width: 85%',
         'placeholder' => elgg_echo('quiz:question:answer').' '.$num,
         'value' => $vars['value'],

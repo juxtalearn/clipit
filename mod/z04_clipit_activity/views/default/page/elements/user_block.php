@@ -14,6 +14,7 @@ $user = elgg_extract("entity", $vars);
 ?>
 <?php echo elgg_view('output/img', array(
     'src' => get_avatar($user, 'small'),
+    'alt' => elgg_echo('profile:avatar:from', array($user->name)),
     'class' => 'pull-left margin-right-10 avatar-tiny'
 ));?>
 <div class="text-truncate">

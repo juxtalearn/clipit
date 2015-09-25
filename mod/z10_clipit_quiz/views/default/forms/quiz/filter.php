@@ -16,18 +16,20 @@ echo elgg_view("input/hidden", array(
 ));
 ?>
 <div class="form-group">
-    <label class="text-muted"><?php echo elgg_echo('quiz:name');?></label>
+    <label class="text-muted" for="search[name]"><?php echo elgg_echo('quiz:name');?></label>
     <?php echo elgg_view("input/text", array(
         'name' => 'search[name]',
+        'id' => 'search[name]',
         'class' => 'form-control',
         'value' => get_search_input('name')
     ));
     ?>
 </div>
 <div class="form-group">
-    <label class="text-muted"><?php echo elgg_echo('tricky_topic');?></label>
+    <label class="text-muted" for="search[tricky_topic]"><?php echo elgg_echo('tricky_topic');?></label>
     <?php echo elgg_view("input/text", array(
         'name' => 'search[tricky_topic]',
+        'id' => 'search[tricky_topic]',
         'class' => 'form-control',
         'value' => get_search_input('tricky_topic')
     ));
