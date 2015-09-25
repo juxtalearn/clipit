@@ -34,6 +34,7 @@ $spanish = array(
     'education_level:alevel' => 'Bachillerato',
     'education_level:vocational' => 'Formación Profesional',
     'education_level:university' => 'Universidad',
+    'education_level:special' => 'Educación especial',
     'example:created' => 'Ejemplo creado',
     'example:edit' => 'Editar ejemplo',
     'example:cantremove' => 'No se ha podido borrar el ejemplo',

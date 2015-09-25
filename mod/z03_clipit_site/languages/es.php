@@ -6,7 +6,7 @@
 
 $spanish = array(
     'locale' => 'es_ES',
-
+    'profile:avatar:from' => 'Imagen de perfil de %s',
     'link:view:less' => 'Ver menos',
     'read_more' => 'Leer más',
     'read_less' => 'Menos',

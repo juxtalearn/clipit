@@ -202,6 +202,8 @@ function clipit_activity_init() {
     elgg_register_plugin_hook_handler("task:save", "task", "task_resources_save");
     elgg_register_plugin_hook_handler("task:save", "task", "task_other_save");
     // Task extends type Quiz
+    elgg_register_ajax_view('tasks/admin/quiz_take_ajax');
+
     elgg_extend_view('tasks/menu', 'tasks/menu/video_upload', 1);
     elgg_extend_view('tasks/menu', 'tasks/menu/file_upload', 2);
     elgg_extend_view('tasks/menu', 'tasks/menu/resource_download', 50);

@@ -215,13 +215,9 @@ echo elgg_view("input/hidden", array(
         </div>
     </div>
 <?php if($vars['publish']):?>
-    <div class="margin-bottom-10 margin-top-5">
-        <label><?php echo elgg_echo('send:to_global');?></label>
-        <label style="font-weight: normal;" class="inline-block margin-right-10">
-            <input name="remote" value="1" type="radio" checked> <?php echo elgg_echo('option:yes');?>
-        </label>
-        <label style="font-weight: normal;" class="inline-block">
-            <input name="remote" value="0" type="radio"> <?php echo elgg_echo('option:no');?>
-        </label>
-    </div>
+    <?php echo elgg_view("input/hidden", array(
+            'name' => 'remote',
+            'value' => '1'
+        ));
+    ?>
 <?php endif;?>

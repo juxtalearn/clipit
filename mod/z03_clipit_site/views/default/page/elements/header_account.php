@@ -8,10 +8,11 @@ $context = elgg_get_context();
             <?php echo elgg_view('output/url', array(
                 'href' => "/",
                 'class' => 'navbar-brand hidden-xs hidden-sm',
-                'title' => 'ClipIt'. elgg_echo("home"),
+                'title' => 'Clipit '. elgg_echo("home"),
                 'text'  =>
                     elgg_view('output/img', array(
                         'src' => "mod/z03_clipit_site/graphics/icons/clipit_logo.png",
+                        'alt' => "Clipit logo",
                     ))
             ));
             ?>

@@ -18,6 +18,7 @@ clipit.quiz.init = function() {
     $(".finish-quiz").click(clipit.quiz.finishConfirmation);
     $('.chart, .questions').on('show.bs.collapse', clipit.task.admin.quiz.showData);
     $('.print-data').click(clipit.task.admin.quiz.printData);
+    $('.compare-results').on('show.bs.collapse', clipit.task.admin.quiz.compareResults);
 };
 elgg.register_hook_handler('init', 'system', clipit.quiz.init);
 clipit.quiz.translated = function(){
@@ -81,7 +82,7 @@ clipit.quiz.create = function(options){
 
     function Question(object){
         var self = this;
-        this.question;
+        this.question = object;
         this.question_type_selected;
         this._init = function(){
             // Reorder questions
@@ -89,6 +90,13 @@ clipit.quiz.create = function(options){
             // Trigger events
             self.question.find(".remove-question").on("click", function(){
                 return self.delete();
+            });
+            self.question.find(".clone-question").on("click", function(){
+                return self.toClone();
+            });
+            $(self.question).on("click", ".results .remove-answer", function(e){
+                var $answer = $(this).closest('.result');
+                return self.answerRemove($answer);
             });
             self.question.find(".add-result").on("click", function(){
                 self.question_type_selected = $(this).closest(".show-question");
@@ -217,18 +225,56 @@ clipit.quiz.create = function(options){
                         $quiz.find(".questions").html($content);
                     }
 
-                    self.question = $content;
+//                    self.question = $content; // debug
+                    // Set question object
+//                    self.question = $quiz.find(".questions .question:last");
+                    var q = new Question($quiz.find(".questions .question:last"));
+                    q.question.find('input[type=text]:first').focus();
                     if(from_tag){
                         var question_type = self.question.find(".select-question-type").val();
-                        self.question.find("[data-question='" + question_type + "']").show();
-                        self.question.find("textarea").click();
+                        q.question.find("[data-question='" + question_type + "']").show();
+                        q.question.find("textarea").click();
                         $quiz.find('.questions-select')
                             .val('')
                             .trigger('chosen:updated');
                     }
-                    return self._init();
+                    return q._init();
                 }
             });
+        };
+        this.toClone = function(){
+            var question_clone = self.question.clone(),
+                old_id  = question_clone.find('.input-uniqid').val(),
+                new_id = old_id + Math.floor(Math.random(0,120)*100);
+
+            question_clone.find('.input-id, .input-id-parent').remove();
+
+            question_clone.find('[name*="'+old_id+'"], [id*="'+old_id+'"]').each(function() {
+
+                if($(this).attr('name')){
+                    $(this).attr('name', $(this).attr('name').replace(old_id, new_id));
+                }
+                if($(this).is('select')){
+                    $(this).val( self.question.find('.select-question-type').val() ); // change to original value
+                }
+                if($(this).hasClass('mceEditor')) {
+                    var old_textarea_id = $(this).attr('id'),
+                        new_textarea_id = old_textarea_id.replace(old_id, new_id);
+
+                    question_clone.find('.mce-container').remove();
+                    $(this).show().val('');
+                    $(this).attr('id', new_textarea_id);
+                    clipit.tinymce(new_textarea_id);
+                }
+                if($(this).hasClass('show-question')){
+                    $(this).attr('id', $(this).attr('id').replace(old_id, new_id));
+                }
+
+            });
+            self.question.after(question_clone);
+            question_clone.find('input[type=text]:first').focus();
+            var q = new Question( question_clone );
+            return q._init();
         };
         this.delete = function(){
             self.question.remove();
@@ -241,7 +287,36 @@ clipit.quiz.create = function(options){
                 $(this).find(".input-order").val(i+1);
             });
         };
+        this.answersCount = function($answer){
+            return $answer.closest('.results').find('.answer-result').length;
+        };
+        this.answerType = function(){
+            return self.question.find('select.select-question-type').val();
+        };
+        this.answerRemove = function($answer){
+            var error_msg = false;
+            switch (self.answerType()){
+                case '<?php echo ClipitQuizQuestion::TYPE_SELECT_ONE;?>':
+                    if(self.answersCount($answer) > 2)
+                        $answer.remove();
+                    else
+                        error_msg = true;
+                    break;
+                case '<?php echo ClipitQuizQuestion::TYPE_SELECT_MULTI;?>':
+                    if(self.answersCount($answer) > 1)
+                        $answer.remove();
+                    else
+                        error_msg = true;
+                    break;
+            }
+            if(error_msg) {
+                elgg.register_error(elgg.echo('quiz:question:answer:cantremove'))
+            }
+
+            return false;
+        };
         this.addResult = function(){
+            self.question_type_selected.find('.loading').show();
             return elgg.get('ajax/view/activity/admin/tasks/quiz/add_type',{
                 data: {
                     type:   self.question_type_selected.data("question"),
@@ -250,6 +325,7 @@ clipit.quiz.create = function(options){
                     input_prefix: opt.input_prefix
                 },
                 success: function(content){
+                    self.question_type_selected.find('.loading').hide();
                     self.question_type_selected
                         .find(".results")
                         .append(content)
@@ -478,13 +554,37 @@ clipit.task.admin.quiz.printData = function (){
             ).collapse('show');
         } else {
             if(i == total ){
-                $('.bootbox').modal('hide');
-                window.print();
+                setTimeout(function(){
+                    $('.bootbox').modal('hide');
+                    window.print();
+                }, 3000);
             }
         }
     });
 };
-
+clipit.task.admin.quiz.compareResults = function (){
+    var that = $(this),
+        quiz_id = that.closest('#quiz-admin').data('quiz');
+    if(that.is(':empty')) {
+        that.html('<i class="fa fa-spinner fa-spin fa-2x blue"></i>');
+        var url = elgg.config.wwwroot + '/ajax/view/quizzes/admin/results?quiz='+quiz_id+'&type=compare_results&entity_type='+ that.data('entity-type');
+        var iframe = $('<iframe />');
+        iframe
+            .attr('src', url)
+            .attr('frameborder', 0)
+            .css({
+                'width': '100%'
+            })
+            .load( function () {
+                var c = (this.contentWindow || this.contentDocument);
+                if (c.document) d = c.document;
+                $(this).css({
+                    height: $(d).outerHeight(),
+                }).fadeIn('slow');
+            });
+        that.html(iframe);
+    }
+};
 clipit.task.admin.quiz.onShowTab = function(e){
     var id = $(this).attr('href'),
         container = $(id).find('li');

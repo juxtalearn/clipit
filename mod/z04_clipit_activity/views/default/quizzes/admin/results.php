@@ -10,6 +10,7 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
+
 $quiz_id = get_input('quiz');
 $question_id = get_input('question');
 $task_id = get_input('task');
@@ -17,6 +18,93 @@ $users = get_input('users');
 
 $default = "";
 switch($type = get_input('type')){
+    case 'compare_results':
+        $spider_colors = array(
+            "E7DF1A", "98BF0E", "ED1E79", "4174B5", "EC7227", "019B67", "E4391B",
+            "14B8DD", "795548", "3f51b5", "e91e63","FF0000", "00FF00", "0000FF",
+            "FFFF00", "FF00FF", "00FFFF", "000000", "800000", "008000", "000080",
+            "808000", "800080", "008080", "808080", "C00000", "00C000", "0000C0",
+            "C0C000", "C000C0", "00C0C0", "C0C0C0", "400000", "004000", "000040",
+            "404000", "400040", "004040", "404040", "200000", "002000", "000020",
+            "202000", "200020", "002020", "202020", "600000", "006000", "000060",
+            "606000", "600060", "006060", "606060", "A00000", "00A000", "0000A0",
+            "A0A000", "A000A0", "00A0A0", "A0A0A0", "E00000", "00E000", "0000E0",
+            "E0E000", "E000E0", "00E0E0", "E0E0E0"
+        );
+
+        function get_random_colors($count){
+            $colors = array();
+            for ($i = 0; $i < $count; $i++) {
+                $colors[] =  '#'.str_pad( dechex( mt_rand( 0, 255 ) ), 2, '0', STR_PAD_LEFT) .
+                    str_pad( dechex( mt_rand( 0, 255 ) ), 2, '0', STR_PAD_LEFT) .
+                    str_pad( dechex( mt_rand( 0, 255 ) ), 2, '0', STR_PAD_LEFT);
+            }
+
+            return $colors;
+        }
+
+        $task_id = ClipitQuiz::get_task($quiz_id);
+        $stumbling_blocks = array();
+        $tricky_topic_id = ClipitQuiz::get_tricky_topic($quiz_id);
+        $tricky_topic_id = 2856;
+        $stumbling_blocks = ClipitTrickyTopic::get_tags($tricky_topic_id);
+        $stumbling_blocks = ClipitTag::get_by_id(array_values($stumbling_blocks));
+        switch(get_input('entity_type')){
+            case 'students':
+                $users = ClipitActivity::get_students(ClipitTask::get_activity($task_id));
+                $spider_colors  = get_random_colors(count($users)+1);
+                natsort($users);
+                $i=0;
+
+                foreach ($users as $number => $user_id) {
+                    $quiz_results = ClipitQuiz::get_user_results_by_tag($quiz_id, $user_id);
+                    $user = get_entity($user_id);
+
+                    $data = array();
+                    foreach($stumbling_blocks as $stumbling_block){
+                        $data[strval($stumbling_block->name)] = 0;
+                    }
+                    if (is_not_null($quiz_results) && !empty($quiz_results)) {
+                        foreach ($quiz_results as $sb_id => $value) {
+                            $sb = ClipitSite::lookup($sb_id);
+                            $data[strval($sb['name'])] = floatval($value) * 100;
+                        }
+                    }
+                    $data = json_encode($data);
+                    $results[$i] = array("name" => $user->name, "data" => strval($data), "color" => $spider_colors[$i]);
+                    $i+=1;
+                }
+                break;
+            case 'groups':
+                $groups = ClipitActivity::get_groups(ClipitTask::get_activity($task_id));
+                $spider_colors  = get_random_colors(count($groups)+1);
+                natsort($groups);
+                $i=0;
+                foreach ($groups as $number => $group_id) {
+                    $quiz_results = ClipitQuiz::get_group_results_by_tag($quiz_id, $group_id);
+                    $group = get_entity($group_id);
+
+                    $data = array();
+                    foreach($stumbling_blocks as $stumbling_block){
+                        $data[strval($stumbling_block->name)] = 0;
+                    }
+                    if (is_not_null($quiz_results) && !empty($quiz_results)) {
+                        foreach ($quiz_results as $sb_id => $value) {
+                            $sb = ClipitSite::lookup($sb_id);
+                            $data[strval($sb['name'])] = floatval($value)*100;
+                        }
+                    }
+                    $data = json_encode($data);
+                    $results[$i] = array("name" => $group->name, "data" => strval($data), "color" => $spider_colors[$i]);
+                    $i+=1;
+                }
+                break;
+        }
+        echo elgg_view('quizzes/admin/compare_results', array(
+            'stumbling_blocks' => $stumbling_blocks,
+            'results' => $results,
+        ));
+        break;
     case 'groups':
         $quiz = array_pop(ClipitQuiz::get_by_id(array($quiz_id)));
         $task = array_pop(ClipitTask::get_by_id(array(ClipitQuiz::get_task($quiz->id))));

@@ -99,6 +99,9 @@ function clipit_final_init(){
         elgg_register_js("nvd3:d3_v2", "{$plugin_url}/vendors/nvd3/d3.v2.js", "footer");
         elgg_register_js("nvd3", "{$plugin_url}/vendors/nvd3/nv.d3.js", "footer");
         elgg_register_css("nvd3:css", "{$plugin_url}/vendors/nvd3/nv.d3.css");
+        // Media element plugin
+        elgg_register_js("mediaelement", "{$plugin_url}/vendors/mediaelement.min.js", "footer");
+
         // ClipIt
         $clipit_css = elgg_get_simplecache_url('css', 'clipit');
         elgg_register_simplecache_view('css/clipit');

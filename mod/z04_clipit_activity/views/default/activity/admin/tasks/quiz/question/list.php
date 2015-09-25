@@ -36,7 +36,7 @@ $tt_tags = ClipitTrickyTopic::get_tags($tricky_topic);
                     'href'  => "javascript:;",
                     'class' => 'btn btn-primary btn-xs margin-left-10',
                     'text'  => elgg_echo('edit'),
-                    'onclick' =>'$(this).closest(\'.questions\').find(\'#question_'.$question->id.'\').toggle();',
+                    'onclick' =>'$(this).closest(\'.question\').find(\'.question-edit\').toggle();',
                 ));
                 ?>
                 <?php echo elgg_view('output/url', array(
@@ -46,10 +46,11 @@ $tt_tags = ClipitTrickyTopic::get_tags($tricky_topic);
                     'onclick' => '$(this).closest(\'.question\').remove();',
                 ));
                 ?>
-                <i class="fa fa-arrows-v text-muted margin-left-20 reorder-question"></i>
+                <i title="<?php echo elgg_echo('duplicate');?>" class="fa fa-files-o text-muted margin-left-20 cursor-pointer clone-question"></i>
+                <i class="fa fa-arrows-v text-muted margin-left-10 reorder-question"></i>
             </div>
             <span><strong><?php echo $question->name;?></strong></span>
-            <div id="question_<?php echo $question->id;?>" style="display: none">
+            <div id="question_<?php echo $question->id;?>" class="question-edit" style="display: none">
                 <?php echo elgg_view('activity/admin/tasks/quiz/question', array(
                     'num' => false,
                     'tricky-topic' => $tricky_topic,

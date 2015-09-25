@@ -38,8 +38,18 @@ switch($file->mime_short){
                 'title' => $file->name,));
             $file_view .= '</div>';
         }
+        break;
+    case "audio":
+        $file_view = elgg_view('output/audio', array(
+                'src'  => $file->url,
+                'type'  => $file->mime_full,
+                'title' => $file->name,
+            ));
+        break;
 }
+
 if($file_view){
     $output = '<div class="margin-top-10">'.$file_view.'</div>';
 }
 echo $output;
+?>

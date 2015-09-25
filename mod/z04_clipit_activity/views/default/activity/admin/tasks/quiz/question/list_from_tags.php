@@ -11,17 +11,6 @@
  * @package         ClipIt
  */
 $tricky_topic = get_input('tricky_topic');
-function get_questions_from_tag($tag){
-    $return_array = array();
-    $all_items = ClipitQuizQuestion::get_all(0, 0, "", true, true); // Get all item ids, not objects
-    foreach($all_items as $item_id) {
-        $item_tags = (array)ClipitQuizQuestion::get_tags((int)$item_id);
-        if(array_search($tag, $item_tags) !== false) {
-            $return_array[] = $item_id;
-        }
-    }
-    return $return_array;
-}
 ?>
 <div>
     <div class="pull-right">
@@ -50,10 +39,8 @@ function get_questions_from_tag($tag){
         <tbody>
         <?php
         $tags = ClipitTrickyTopic::get_tags($tricky_topic);
-        foreach($tags as $tag_id):
-            $tag = array_pop(ClipitTag::get_by_id(array($tag_id)));
-            $questions_tag = ClipitQuizQuestion::get_by_id(get_questions_from_tag($tag->id));
-            foreach($questions_tag as $question_tag):
+        $related_tags = array_keys(ClipitQuizQuestion::get_by_tag($tags));
+        foreach(ClipitQuizQuestion::get_by_id($related_tags) as $question_tag):
                 $clones = false;
                 if(!$question_tag->cloned_from):
                     ?>
@@ -68,19 +55,19 @@ function get_questions_from_tag($tag){
                             <?php if($clones = ClipitQuizQuestion::get_clones($question_tag->id, true)): ?>
                                 <small class="show margin-top-5">
                                     <a class="get-clones" href="javascript:;" id="<?php echo $question_tag->id;?>">
-                                        <i class="fa fa-clock-o"></i> <?php echo count($clones);?> revisions
+                                        <i class="fa fa-clock-o"></i> <?php echo count($clones);?>
+                                        <?php echo elgg_echo('quiz:question:versions')?>
                                     </a>
                                 </small>
                             <?php endif;?>
                         </td>
                         <td>
-                            <?php echo elgg_view('tricky_topic/tags/view', array('limit' => 2, 'tags' => array($tag_id))); ?>
+                            <?php echo elgg_view('tricky_topic/tags/view', array('limit' => 2, 'tags' => $tags)); ?>
                         </td>
                         <td><?php echo difficulty_bar($question_tag->difficulty);?></td>
                         <td style="display: none;"><?php echo $question_tag->difficulty;?></td>
                     </tr>
                 <?php endif;?>
-            <?php endforeach;?>
         <?php endforeach;?>
         </tbody>
     </table>
