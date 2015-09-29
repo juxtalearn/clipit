@@ -16,18 +16,16 @@ elgg_load_js('mediaelement');
 ?>
 <script>
     $(document).ready(function() {
-        if(!(/firefox/i.test(navigator.userAgent))) {
-            $('audio').mediaelementplayer({
-                alwaysShowControls: true,
-                iPadUseNativeControls: false,
-                // force iPhone's native controls
-                iPhoneUseNativeControls: false,
-                // force Android's native controls
-                AndroidUseNativeControls: false,
-                features: ['playpause','volume','progress','duration', 'current'],
-                audioVolume: 'vertical'
-            });
-        }
+        $('audio').mediaelementplayer({
+            alwaysShowControls: true,
+            iPadUseNativeControls: false,
+            // force iPhone's native controls
+            iPhoneUseNativeControls: false,
+            // force Android's native controls
+            AndroidUseNativeControls: false,
+            features: ['playpause','volume','progress','duration', 'current'],
+            audioVolume: 'vertical'
+        });
     });
 </script>
 <div style="margin: 10px;position: relative;background: #fff;">
