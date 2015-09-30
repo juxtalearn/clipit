@@ -15,18 +15,26 @@ $total_results = elgg_extract('total_results', $vars);
 $finished = elgg_extract('finished', $vars);
 $finished_task = elgg_extract('finished_task', $vars);
 $question = elgg_extract('question', $vars);
+$options = $question->option_array;
 
-$i = 1;
-foreach($question->option_array as $option):
+$random = elgg_extract('random', $vars);
+// Random answers
+if($random) {
+    uksort($options, function () {
+        return rand() > rand();
+    });
+}
+
+foreach($options as $key => $option):
     $checked = '';
-    if ($result->answer[$i - 1]) {
+    if ($result->answer[$key - 1]) {
         $checked = 'checked';
     }
     $total_results_text = '';
     $total_results_count = 0;
     if($total_results){
         foreach($total_results as $total_result){
-            if($total_result->answer[$i-1]) {
+            if($total_result->answer[$key-1]) {
                 $total_results_count++;
             }
         }
@@ -38,17 +46,16 @@ foreach($question->option_array as $option):
 <label style="font-weight: normal">
     <?php if($finished):?>
         <input type="checkbox" disabled <?php echo $checked;?>/>
-        <?php if($question->validation_array[$i-1] && $finished_task):?>
+        <?php if($question->validation_array[$key-1] && $finished_task):?>
             <strong><?php echo $option;?></strong>
         <?php else:?>
             <?php echo $option;?>
         <?php endif;?>
         <?php echo $total_results_text;?>
     <?php else:?>
-        <input type="checkbox" value="<?php echo $i;?>" <?php echo $checked;?> name="question[<?php echo $question->id;?>][]" />
+        <input type="checkbox" value="<?php echo $key;?>" <?php echo $checked;?> name="question[<?php echo $question->id;?>][]" />
         <?php echo $option;?>
     <?php endif;?>
 </label>
 <?php
-$i++;
 endforeach;

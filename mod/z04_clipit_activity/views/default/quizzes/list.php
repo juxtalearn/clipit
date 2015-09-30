@@ -191,6 +191,7 @@ foreach($questions as $question):
         'finished' => $finished,
         'question' => $question,
         'result' => $result,
+        'random' => $task->quiz_random_order
     );
 ?>
 <div class="question form-group border-bottom-blue-lighter" data-question="<?php echo $num;?>">
