@@ -35,8 +35,9 @@ class ClipitDataExport{
         $file_array[] = static::export_class_to_excel("ClipitQuizQuestion");
         $file_array[] = static::export_class_to_excel("ClipitQuizResult");
         $file_array[] = static::export_class_to_excel("ClipitRating");
-        $file_array[] = static::export_class_to_excel("ClipitRemoteResource");
         $file_array[] = static::export_class_to_excel("ClipitRemoteSite");
+        $file_array[] = static::export_class_to_excel("ClipitRemoteTrickyTopic");
+        $file_array[] = static::export_class_to_excel("ClipitRemoteVideo");
         $file_array[] = static::export_class_to_excel("ClipitSite");
         $file_array[] = static::export_class_to_excel("ClipitStoryboard");
         $file_array[] = static::export_class_to_excel("ClipitTag");
