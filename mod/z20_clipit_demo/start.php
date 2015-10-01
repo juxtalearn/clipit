@@ -36,7 +36,7 @@ function demo_walled_garden(){
 }
 function demo_login_admin_page_handler(){
     $title = elgg_echo("login");
-    $content = '<div class="col-md-6 col-md-offset-3">';
+    $content = '<div class="col-md-9 col-md-offset-3">';
     $content .= elgg_view_title($title);
 
     $content .= elgg_view_form('login', array(
